@@ -1,0 +1,69 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=26.5mm,includefoot]{geometry}
+\usepackage{graphicx,amsmath,booktabs,xurl,textcomp}
+\usepackage{fontspec}
+\usepackage[mathrm=sym]{unicode-math}
+\setmainfont{NotoSans-Regular.ttf}[Path=../fonts/,BoldFont=NotoSans-Bold.ttf,ItalicFont=NotoSans-Italic.ttf,BoldItalicFont=NotoSans-BoldItalic.ttf]
+\setsansfont{NotoSans-Regular.ttf}[Path=../fonts/,BoldFont=NotoSans-Bold.ttf,ItalicFont=NotoSans-Italic.ttf,BoldItalicFont=NotoSans-BoldItalic.ttf]
+\setmonofont{NotoSansMono-Regular.ttf}[Path=../fonts/,BoldFont=NotoSansMono-Bold.ttf]
+\setmathfont{FiraMath-Regular.otf}[Path=../fonts/]
+\usepackage[numbers,sort&compress]{natbib}
+\setlength{\bibsep}{7pt}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\emergencystretch=3em
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+\setcounter{tocdepth}{1}
+\hypersetup{pdftitle={NeuroTranslation: A New Paradigm In Brain-Body Mapping.},pdfauthor={@eliminatenoise},pdfsubject={Unpublished Working Draft; source and rendered-document review pending}}
+% Original sans-serif master retained; new isolated source additions are unrendered.
+\usepackage{ragged2e}
+\usepackage[justification=raggedright,singlelinecheck=false]{caption}
+\AtBeginDocument{\RaggedRight}
+% Match the already qualified reader paragraph-flow controls without changing type size.
+\makeatletter
+\AtBeginDocument{\clubpenalty=10000\@clubpenalty=10000\widowpenalty=10000\displaywidowpenalty=10000}
+\makeatother
+\renewcommand{\bibfont}{\RaggedRight}
+\AddToHook{cmd/LARGE/after}{\hyphenpenalty=10000\exhyphenpenalty=10000}
+\begin{document}
+\title{NeuroTranslation: A New Paradigm In Brain-Body Mapping.\\[.4em]\large Technical Working Manuscript}
+\author{@eliminatenoise}
+\date{Unpublished Working Draft\\Original manuscript date: October 13, 2026\\Source assembly: November 5, 2026\\Typeset \today}
+\maketitle
+
+\begin{abstract}
+Both history-reading candidates lowered average error. Neither passed. In the one-macaque LINK comparison, a better average could not satisfy the original conjunction: no evaluated output may be harmed, and neural information must be positive. All five separate benefit claims fail too. LINK compares two normalized finger-group positions across four training and two development-validation sessions, using weighted-sum and history-reading controls and three fixed random starting conditions. Its 18 runs and 720 saved epochs admit neither model. These development results do not independently verify the shared optimizer or establish performance on the reserved confirmation recordings.
+
+That failure gives NeuroTranslation's question a concrete test: can a model predict a specified body target from identified neural observations, and what would that prediction establish? NeuroTranslator addresses it with bounded, recording-specific models, replay and body interfaces. The broader NeuroTranslation Network remains proposed. LINK and the earlier reaching, sensory, attempted-finger and simulated-hand studies address different links between a recording and an outcome; each link needs its own test.
+
+A simulated hand may execute an issued command even when the neural decision behind it is wrong. A goal-driven hand may complete a phrase without recorded brain activity driving that policy. The proposed paired experiment would compare brain and muscle observations with independently measured movement, after resolving physical calibration, clocks, contact identities and participant registration. Anatomical and functional comparisons, final-checkpoint and update verification, and complete GUI and offline checks remain unfinished. Predicting movement, delivering assistance and retaining a biological skill require different evidence. Biological teaching and universal skill transfer remain unestablished.
+\end{abstract}
+\tableofcontents\clearpage
+\input{technical-body.tex}
+\def\RSevenSixFourTechnicalPackagingRecord{}
+\input{../assembled-source-context.tex}
+\input{../evidence-and-edition-status.tex}
+\clearpage
+\input{link-frozen-methods-technical.tex}
+\par
+\clearpage
+\input{../current-definitions-neurotranslation-technical.tex}
+% Source-key boundary measured separately in the retained technical and explained tails.
+% Preserve natbib/hyperref item handling, order, font, and positive 7pt bibsep.
+\begingroup
+\let\NTlayoutOriginalBibitem\bibitem
+\def\NTlayoutBalanceKey{}
+\renewcommand{\bibitem}[2][]{%
+  \clubpenalty=10000\widowpenalty=10000\displaywidowpenalty=10000
+  \def\NTlayoutCurrentKey{#2}%
+  \ifx\NTlayoutCurrentKey\NTlayoutBalanceKey
+    \par\newpage
+  \fi
+  \NTlayoutOriginalBibitem[#1]{#2}%
+}
+\bibliographystyle{unsrtnat}\bibliography{references,myohand-numerical-citations-common}
+\endgroup
+\clearpage
+\appendix
+\input{../reference-comparison-protocol.tex}
+\end{document}

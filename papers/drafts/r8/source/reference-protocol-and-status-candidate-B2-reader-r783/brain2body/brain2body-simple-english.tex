@@ -1,0 +1,89 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage[mathrm=sym]{unicode-math}
+\setmainfont{NotoSans-Regular.ttf}[Path=../fonts/,BoldFont=NotoSans-Bold.ttf,ItalicFont=NotoSans-Italic.ttf,BoldItalicFont=NotoSans-BoldItalic.ttf]
+\setsansfont{NotoSans-Regular.ttf}[Path=../fonts/,BoldFont=NotoSans-Bold.ttf,ItalicFont=NotoSans-Italic.ttf,BoldItalicFont=NotoSans-BoldItalic.ttf]
+\setmonofont{NotoSansMono-Regular.ttf}[Path=../fonts/,BoldFont=NotoSansMono-Bold.ttf]
+\setmathfont{FiraMath-Regular.otf}[Path=../fonts/]
+\usepackage[margin=26.5mm,includefoot]{geometry}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{xurl}
+\usepackage[numbers,sort&compress]{natbib}
+\setlength{\bibsep}{6.5pt}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\emergencystretch=3em
+\hypersetup{pdftitle={Brain2Body: The Next Generation In Body-Brain Interfacing.},pdfauthor={@eliminatenoise},pdfsubject={Unpublished conceptual source draft; biological teaching untested; current model gates fail}}
+% Original sans-serif master retained; new isolated source additions are unrendered.
+\usepackage{ragged2e}
+\usepackage[justification=raggedright,singlelinecheck=false]{caption}
+\AtBeginDocument{\RaggedRight}
+% Keep paragraph starts/ends together; no font, content or scientific change.
+\makeatletter
+\AtBeginDocument{\clubpenalty=10000\@clubpenalty=10000\widowpenalty=10000\displaywidowpenalty=10000}
+\makeatother
+\renewcommand{\bibfont}{\RaggedRight}
+\AddToHook{cmd/LARGE/after}{\hyphenpenalty=10000\exhyphenpenalty=10000}
+\begin{document}
+{\sffamily\LARGE\bfseries Brain2Body: The Next Generation In Body-Brain Interfacing.\par}\vspace{8pt}
+{\sffamily\large Simple English Edition\par}\vspace{8pt}
+{\sffamily @eliminatenoise\par}\vspace{8pt}
+{\sffamily Unpublished Working Draft\par}\vspace{8pt}
+
+
+\begin{abstract}
+A hand can play the right notes because a computer guides it. The important
+question comes when that guidance stops: has the nervous system learned anything
+it can still do? Brain2Body proposes tests that keep help, simulated control,
+lasting learning and biological repair separate. A camera, a muscle recording
+and a brain recording observe different parts of the problem. The next proposed
+experiment would align those observations with a measured movement and a computer
+body, then test each direction against observations the model did not receive.
+That experiment has not been carried out here. The current companion LINK study
+saved 18 runs and 720 epochs; both candidate models fail their admission rules,
+and all five added benefit claims fail. Those results do not show biological
+teaching. This longer explanation sets out the question, the evidence, the
+controls and the limits. Predicting a recorded brain feature does not deliver a
+sensation, and a guided movement does not by itself demonstrate a learned skill.
+\end{abstract}
+\input{brain2body-simple-english-body.tex}
+\clearpage
+\section*{Historical Conceptual Framework Illustration}
+\begin{figure}[htbp]
+\centering
+\makebox[\linewidth][c]{\includegraphics[width=160mm]{figures/historical-brain2body-framework.pdf}}
+\caption{The hand can execute a command correctly even when that command selects the wrong finger. In the earlier human finger-attempt study shown by the solid computational route, 41/60 intended contacts and 54/54 issued-command executions answer those different questions. The biological branch remains proposed. This unchanged historical schematic supplies no current anatomical, functional, lifelike-3D or biological validation. The separate macaque development study saved 18 runs and 720 epochs; both model gates and all five benefit claims fail. Neither study establishes biological teaching, full-body mapping or retained mastery.}
+\end{figure}
+\clearpage
+\input{../assembled-source-context.tex}
+\input{../evidence-and-edition-status.tex}
+\par
+\clearpage
+\input{../current-definitions-brain2body-simple-english.tex}
+\begingroup
+\let\BTwoOriginalBibitem\bibitem
+\def\BTwoBreakA{opensim2018}
+\def\BTwoBreakB{lorach2023}
+\def\BTwoBreakC{revah2026correction}
+\def\BTwoBreakD{wangchen2024}
+\renewcommand{\bibitem}[2][]{%
+  \clubpenalty=10000\widowpenalty=10000\displaywidowpenalty=10000
+  \def\BTwoCurrentKey{#2}%
+  \ifx\BTwoCurrentKey\BTwoBreakB\par\newpage\fi
+  \ifx\BTwoCurrentKey\BTwoBreakC\par\newpage\fi
+  \ifx\BTwoCurrentKey\BTwoBreakD\par\newpage\fi
+  \if\relax\detokenize{#1}\relax
+    \BTwoOriginalBibitem{#2}%
+  \else
+    \BTwoOriginalBibitem[#1]{#2}%
+  \fi
+}
+\nocite{*}\bibliographystyle{unsrtnat}\bibliography{references,myohand-numerical-citations-common,myohand-numerical-citations-brain2body-only}
+\endgroup
+\clearpage
+\appendix
+\input{../reference-comparison-protocol.tex}
+\end{document}
