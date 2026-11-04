@@ -1,0 +1,560 @@
+{
+  "version": "R9",
+  "status": "production-intended working draft; not final readiness",
+  "glossary": {
+    "revision": 34,
+    "sha256": "3fffa79bc9f404caa7d4910e9e37de5a97371fdc1ad11bc54155d309ec5f5394"
+  },
+  "source_output_pairs": [
+    {
+      "edition": "neurotranslation-technical",
+      "source_entrypoint": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/neurotranslation-technical.tex",
+      "source_sha256": "5a12f1dc0f4c38b1ef8edcfec05d55ecb3ccb44b59e441609bf9f83c2ec6235a",
+      "pdf": "papers/drafts/r9/pdf/neurotranslation-technical.pdf",
+      "pdf_sha256": "5bea1bc6cbb2136e824d63958fa9816c82a177a7cc64910237c713f3691b5926",
+      "pages": 126
+    },
+    {
+      "edition": "neurotranslation-explained",
+      "source_entrypoint": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/neurotranslation-explained.tex",
+      "source_sha256": "20dd9158fc001b0d3522d9483054208e90b8616d027a7d00bdee26c9606af06c",
+      "pdf": "papers/drafts/r9/pdf/neurotranslation-explained.pdf",
+      "pdf_sha256": "29335d854c11ef4e1cdd269d00d418c97d72d66709e37cec7b00fb5c38f4da94",
+      "pages": 159
+    },
+    {
+      "edition": "brain2body-article",
+      "source_entrypoint": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/brain2body-article.tex",
+      "source_sha256": "de4c8d38b5c3626338e57d6328f89125179c95cbc4d1139e70f0698a7a41c0d8",
+      "pdf": "papers/drafts/r9/pdf/brain2body-article.pdf",
+      "pdf_sha256": "8bc05563252713efa6bce6e8b15d4d634d6c553db92a9502ad3d00299528affe",
+      "pages": 112
+    },
+    {
+      "edition": "brain2body-simple-english",
+      "source_entrypoint": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/brain2body-simple-english.tex",
+      "source_sha256": "ecd75bd27131405a6123629b96e8606ed733b8af30809108bbef540eb3f44762",
+      "pdf": "papers/drafts/r9/pdf/brain2body-simple-english.pdf",
+      "pdf_sha256": "25c5dcdc882bfbb4db12a473b166e0e7980be25bbfec17416a1afe874d9347b1",
+      "pages": 123
+    }
+  ],
+  "files": [
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/assembled-source-context.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "087060619a796daf851cd5db0ceedd0c6d92dbc16a4e1964b6f0045067467e40",
+      "packaged_sha256": "087060619a796daf851cd5db0ceedd0c6d92dbc16a4e1964b6f0045067467e40",
+      "bytes": 1184,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/assembled-source-context.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/brain2body-simple-english-body.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "e8c3034bcc946482c0151d9ce54605990dd0366201c3cae59e4567f8d7bfa541",
+      "packaged_sha256": "e8c3034bcc946482c0151d9ce54605990dd0366201c3cae59e4567f8d7bfa541",
+      "bytes": 74433,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/brain2body-simple-english-body.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/brain2body-simple-english.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "ecd75bd27131405a6123629b96e8606ed733b8af30809108bbef540eb3f44762",
+      "packaged_sha256": "ecd75bd27131405a6123629b96e8606ed733b8af30809108bbef540eb3f44762",
+      "bytes": 4376,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/brain2body-simple-english.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/expanded-programme-accessible.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "ad87c8ca6e9f9b85eb07de37ba45149f6760a69561d2ad2d7ebb3211ac5c2ccc",
+      "packaged_sha256": "ad87c8ca6e9f9b85eb07de37ba45149f6760a69561d2ad2d7ebb3211ac5c2ccc",
+      "bytes": 25283,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/expanded-programme-accessible.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/first-prototype.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "6a03b40218f29560b6a190094c35a5e0bd74bc3f21458057b7e136b9bd27ac43",
+      "packaged_sha256": "6a03b40218f29560b6a190094c35a5e0bd74bc3f21458057b7e136b9bd27ac43",
+      "bytes": 9684,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/first-prototype.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/grounded-loop-reader.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "6937b649c8d171d942ed57065f75036796865b10a3bd2a086d13df1b6c93931d",
+      "packaged_sha256": "6937b649c8d171d942ed57065f75036796865b10a3bd2a086d13df1b6c93931d",
+      "bytes": 42168,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/grounded-loop-reader.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/myohand-numerical-citations-brain2body-only.bib",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "008b17f24a8065664b4d4120f730a3ed98d152e08807c095a6126bf70fa5e486",
+      "packaged_sha256": "008b17f24a8065664b4d4120f730a3ed98d152e08807c095a6126bf70fa5e486",
+      "bytes": 494,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/myohand-numerical-citations-brain2body-only.bib"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/myohand-numerical-citations-common.bib",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "66c32e96474fc3d0d30731d4cb337c3ed565f357b5d796609cf1ee6b3d94c32c",
+      "packaged_sha256": "66c32e96474fc3d0d30731d4cb337c3ed565f357b5d796609cf1ee6b3d94c32c",
+      "bytes": 1719,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/myohand-numerical-citations-common.bib"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/myohand-numerical-result-table.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "22c9bcd85ec3b12dabfb3ba34728d2a1cfc5404b7062e773ff1974d0d619300d",
+      "packaged_sha256": "22c9bcd85ec3b12dabfb3ba34728d2a1cfc5404b7062e773ff1974d0d619300d",
+      "bytes": 1247,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/myohand-numerical-result-table.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/references.bib",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "8f3a338537143dc277b8b1f9763c32476229559ccce92556dc7478b8baf61fce",
+      "packaged_sha256": "8f3a338537143dc277b8b1f9763c32476229559ccce92556dc7478b8baf61fce",
+      "bytes": 18323,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/references.bib"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/task-sequence-reader.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "15701abab3941e87c37503b0744cfb2553fbca79822f1f1a07b8df2cf1066313",
+      "packaged_sha256": "15701abab3941e87c37503b0744cfb2553fbca79822f1f1a07b8df2cf1066313",
+      "bytes": 6661,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/brain2body/task-sequence-reader.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/current-definitions-brain2body-simple-english.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "44b5c8a012ea6274ef1292512483925af9053039eef843da44054056c300ee35",
+      "packaged_sha256": "44b5c8a012ea6274ef1292512483925af9053039eef843da44054056c300ee35",
+      "bytes": 173386,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/current-definitions-brain2body-simple-english.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/evidence-and-edition-status.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "77b3c7eddedd9c9c89f67cd22227cc649af8b29190f4a91dc76a2073acdcabb7",
+      "packaged_sha256": "77b3c7eddedd9c9c89f67cd22227cc649af8b29190f4a91dc76a2073acdcabb7",
+      "bytes": 1905,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/evidence-and-edition-status.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-reader-r783/reference-comparison-protocol.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "56ebafb28a6b3f54528f430d2d26a90466cbb37c02f7063f92d1e2ae22687cc7",
+      "packaged_sha256": "56ebafb28a6b3f54528f430d2d26a90466cbb37c02f7063f92d1e2ae22687cc7",
+      "bytes": 6929,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-reader-r783/reference-comparison-protocol.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/assembled-source-context.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "087060619a796daf851cd5db0ceedd0c6d92dbc16a4e1964b6f0045067467e40",
+      "packaged_sha256": "087060619a796daf851cd5db0ceedd0c6d92dbc16a4e1964b6f0045067467e40",
+      "bytes": 1184,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/assembled-source-context.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/brain2body-article-body.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "3d4e455cb10953f183ca3e96496cd773810b7d0d4ef370ba7ea9521ef7c1a6f3",
+      "packaged_sha256": "3d4e455cb10953f183ca3e96496cd773810b7d0d4ef370ba7ea9521ef7c1a6f3",
+      "bytes": 43209,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/brain2body-article-body.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/brain2body-article.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "de4c8d38b5c3626338e57d6328f89125179c95cbc4d1139e70f0698a7a41c0d8",
+      "packaged_sha256": "de4c8d38b5c3626338e57d6328f89125179c95cbc4d1139e70f0698a7a41c0d8",
+      "bytes": 4486,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/brain2body-article.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/expanded-programme-technical.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "50b28d26d162e0d2d25dde61770501c749683ae13e801199b4d2e354133b936d",
+      "packaged_sha256": "50b28d26d162e0d2d25dde61770501c749683ae13e801199b4d2e354133b936d",
+      "bytes": 19478,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/expanded-programme-technical.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/first-prototype.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "10600ab0abe03a8655cf422874dccc0f5c63deb5554685f0313f8dfdb50007fe",
+      "packaged_sha256": "10600ab0abe03a8655cf422874dccc0f5c63deb5554685f0313f8dfdb50007fe",
+      "bytes": 8228,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/first-prototype.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/grounded-loop-technical.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "f2a25b3d760e09330d354d122014863cee7f4812c5ca01e5b79db1f3cf05088f",
+      "packaged_sha256": "f2a25b3d760e09330d354d122014863cee7f4812c5ca01e5b79db1f3cf05088f",
+      "bytes": 38309,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/grounded-loop-technical.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/myohand-numerical-citations-brain2body-only.bib",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "008b17f24a8065664b4d4120f730a3ed98d152e08807c095a6126bf70fa5e486",
+      "packaged_sha256": "008b17f24a8065664b4d4120f730a3ed98d152e08807c095a6126bf70fa5e486",
+      "bytes": 494,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/myohand-numerical-citations-brain2body-only.bib"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/myohand-numerical-citations-common.bib",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "587555393d0506a1868cf0c95dde1f24d34cf7d31d580c1586ee21c50fd0f625",
+      "packaged_sha256": "587555393d0506a1868cf0c95dde1f24d34cf7d31d580c1586ee21c50fd0f625",
+      "bytes": 1683,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/myohand-numerical-citations-common.bib"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/myohand-numerical-result-table.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "22c9bcd85ec3b12dabfb3ba34728d2a1cfc5404b7062e773ff1974d0d619300d",
+      "packaged_sha256": "22c9bcd85ec3b12dabfb3ba34728d2a1cfc5404b7062e773ff1974d0d619300d",
+      "bytes": 1247,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/myohand-numerical-result-table.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/references.bib",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "8f3a338537143dc277b8b1f9763c32476229559ccce92556dc7478b8baf61fce",
+      "packaged_sha256": "8f3a338537143dc277b8b1f9763c32476229559ccce92556dc7478b8baf61fce",
+      "bytes": 18323,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/references.bib"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/task-sequence-technical.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "f1b2dcd1391745355f95c9910f53274042c29034bbe62495e79260c7af735000",
+      "packaged_sha256": "f1b2dcd1391745355f95c9910f53274042c29034bbe62495e79260c7af735000",
+      "bytes": 6729,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/brain2body/task-sequence-technical.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/current-definitions-brain2body-article.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "a22aafa7f84e3266d83f06f02775510ee05790a7f07534e144e0b140ee864f8d",
+      "packaged_sha256": "a22aafa7f84e3266d83f06f02775510ee05790a7f07534e144e0b140ee864f8d",
+      "bytes": 173243,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/current-definitions-brain2body-article.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/evidence-and-edition-status.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "77b3c7eddedd9c9c89f67cd22227cc649af8b29190f4a91dc76a2073acdcabb7",
+      "packaged_sha256": "77b3c7eddedd9c9c89f67cd22227cc649af8b29190f4a91dc76a2073acdcabb7",
+      "bytes": 1905,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/evidence-and-edition-status.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-B2-scientific-r783/reference-comparison-protocol.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "56ebafb28a6b3f54528f430d2d26a90466cbb37c02f7063f92d1e2ae22687cc7",
+      "packaged_sha256": "56ebafb28a6b3f54528f430d2d26a90466cbb37c02f7063f92d1e2ae22687cc7",
+      "bytes": 6929,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-B2-scientific-r783/reference-comparison-protocol.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/assembled-source-context.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "087060619a796daf851cd5db0ceedd0c6d92dbc16a4e1964b6f0045067467e40",
+      "packaged_sha256": "087060619a796daf851cd5db0ceedd0c6d92dbc16a4e1964b6f0045067467e40",
+      "bytes": 1184,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/assembled-source-context.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/current-definitions-neurotranslation-explained.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "1055f7a27b0bc7fcca4af44af03a9d6cd71a4c9dfcb40dd8bf04cef83ee47313",
+      "packaged_sha256": "1055f7a27b0bc7fcca4af44af03a9d6cd71a4c9dfcb40dd8bf04cef83ee47313",
+      "bytes": 173366,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/current-definitions-neurotranslation-explained.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/current-definitions-neurotranslation-technical.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "77f77bafb88c0630b5198770a5e218586d7e2a22c20de3b2d4ccf0e81544a361",
+      "packaged_sha256": "77f77bafb88c0630b5198770a5e218586d7e2a22c20de3b2d4ccf0e81544a361",
+      "bytes": 173398,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/current-definitions-neurotranslation-technical.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/evidence-and-edition-status.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "c30ca12d3c7be1a574748c5cde8b9bc0b16dc1502059b15da27260fc7b6f1126",
+      "packaged_sha256": "c30ca12d3c7be1a574748c5cde8b9bc0b16dc1502059b15da27260fc7b6f1126",
+      "bytes": 3669,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/evidence-and-edition-status.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/expanded-programme-accessible.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "c181ab499ddd31a3a66079986aa082fbb2f737d9b896d67aabbd9423635da0ba",
+      "packaged_sha256": "c181ab499ddd31a3a66079986aa082fbb2f737d9b896d67aabbd9423635da0ba",
+      "bytes": 29714,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/expanded-programme-accessible.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/expanded-programme-technical.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "b588c536d5cd11c48876be081deef80d58d65a7d218db19025f638d952b28421",
+      "packaged_sha256": "b588c536d5cd11c48876be081deef80d58d65a7d218db19025f638d952b28421",
+      "bytes": 23749,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/expanded-programme-technical.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/generated/transfer_table.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "b76d9165581eb9817c9d3cfd94b6e90f0a0483ba7eb09eda95fcb4fea66778c3",
+      "packaged_sha256": "b76d9165581eb9817c9d3cfd94b6e90f0a0483ba7eb09eda95fcb4fea66778c3",
+      "bytes": 533,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/generated/transfer_table.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/grounded-loop-reader.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "ab8196f893e64cb48d9c28b84c94c1cd4f07f157ebf8d0bea87fed367bbe7f74",
+      "packaged_sha256": "ab8196f893e64cb48d9c28b84c94c1cd4f07f157ebf8d0bea87fed367bbe7f74",
+      "bytes": 43028,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/grounded-loop-reader.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/grounded-loop-technical.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "64b153a3f23e074c166fc6c96951df27347955f0fdbd090193e0a4bccbd0ed82",
+      "packaged_sha256": "64b153a3f23e074c166fc6c96951df27347955f0fdbd090193e0a4bccbd0ed82",
+      "bytes": 38711,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/grounded-loop-technical.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/link-frozen-methods-reader.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "4e577d84ce2d4d63935d4d95626192f34029dd3afe966701d37e60d867872b00",
+      "packaged_sha256": "4e577d84ce2d4d63935d4d95626192f34029dd3afe966701d37e60d867872b00",
+      "bytes": 12391,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/link-frozen-methods-reader.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/link-frozen-methods-technical.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "014b69bb5f4e1c73f759a3fd2df5a22e980b3e00977b746643ab5128d8433307",
+      "packaged_sha256": "014b69bb5f4e1c73f759a3fd2df5a22e980b3e00977b746643ab5128d8433307",
+      "bytes": 16092,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/link-frozen-methods-technical.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/myohand-numerical-citations-common.bib",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "66c32e96474fc3d0d30731d4cb337c3ed565f357b5d796609cf1ee6b3d94c32c",
+      "packaged_sha256": "66c32e96474fc3d0d30731d4cb337c3ed565f357b5d796609cf1ee6b3d94c32c",
+      "bytes": 1719,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/myohand-numerical-citations-common.bib"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/myohand-numerical-result-table.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "22c9bcd85ec3b12dabfb3ba34728d2a1cfc5404b7062e773ff1974d0d619300d",
+      "packaged_sha256": "22c9bcd85ec3b12dabfb3ba34728d2a1cfc5404b7062e773ff1974d0d619300d",
+      "bytes": 1247,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/myohand-numerical-result-table.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/neurotranslation-explained.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "20dd9158fc001b0d3522d9483054208e90b8616d027a7d00bdee26c9606af06c",
+      "packaged_sha256": "20dd9158fc001b0d3522d9483054208e90b8616d027a7d00bdee26c9606af06c",
+      "bytes": 6044,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/neurotranslation-explained.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/neurotranslation-technical.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "5a12f1dc0f4c38b1ef8edcfec05d55ecb3ccb44b59e441609bf9f83c2ec6235a",
+      "packaged_sha256": "5a12f1dc0f4c38b1ef8edcfec05d55ecb3ccb44b59e441609bf9f83c2ec6235a",
+      "bytes": 4826,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/neurotranslation-technical.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/paired-study-protocol.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "613b2e5520162fb9737b11463e5c9088ce1a62d6d39314fecb2b7b08e5107382",
+      "packaged_sha256": "613b2e5520162fb9737b11463e5c9088ce1a62d6d39314fecb2b7b08e5107382",
+      "bytes": 11554,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/paired-study-protocol.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/references.bib",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "9dfc94eb76187125fe21247a204c65085fd77784f9854f0fd82c3f30bcfa03ac",
+      "packaged_sha256": "9dfc94eb76187125fe21247a204c65085fd77784f9854f0fd82c3f30bcfa03ac",
+      "bytes": 22737,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/references.bib"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/simple-english-body.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "468b32c1d503f62b28c1405a6db2c873d356ddbf87cd0da53b4906e74ff4347f",
+      "packaged_sha256": "468b32c1d503f62b28c1405a6db2c873d356ddbf87cd0da53b4906e74ff4347f",
+      "bytes": 175583,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/simple-english-body.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/task-sequence-reader.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "9a86f3865a02b92583f9e90b4b6f290eac2f13059ddea1064b7f6751990f7f57",
+      "packaged_sha256": "9a86f3865a02b92583f9e90b4b6f290eac2f13059ddea1064b7f6751990f7f57",
+      "bytes": 6985,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/task-sequence-reader.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/task-sequence-technical.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "bcc069e9b0e14e1405a1854832273e51bdd3b624ca1b67195843aef4c58c843b",
+      "packaged_sha256": "bcc069e9b0e14e1405a1854832273e51bdd3b624ca1b67195843aef4c58c843b",
+      "bytes": 7587,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/task-sequence-technical.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/neurotranslation/technical-body.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "104af80e020ed78a3f2f3c89b0d5ddf295b4869adaf6d87990f626dafea9b7ba",
+      "packaged_sha256": "104af80e020ed78a3f2f3c89b0d5ddf295b4869adaf6d87990f626dafea9b7ba",
+      "bytes": 67756,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/neurotranslation/technical-body.tex"
+    },
+    {
+      "path": "papers/drafts/r9/source/reference-protocol-and-status-candidate-NT-r783/reference-comparison-protocol.tex",
+      "role": "exact_manuscript_source",
+      "original_source_sha256": "d03be4896876e7998e741a6f8b5fb5f565c914f26f1f3af247e8abffebb5f785",
+      "packaged_sha256": "d03be4896876e7998e741a6f8b5fb5f565c914f26f1f3af247e8abffebb5f785",
+      "bytes": 6965,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "cohort/reference-protocol-and-status-candidate-NT-r783/reference-comparison-protocol.tex"
+    },
+    {
+      "path": "papers/drafts/r9/pdf/neurotranslation-technical.pdf",
+      "role": "matching_rendered_PDF",
+      "original_source_sha256": "5bea1bc6cbb2136e824d63958fa9816c82a177a7cc64910237c713f3691b5926",
+      "packaged_sha256": "5bea1bc6cbb2136e824d63958fa9816c82a177a7cc64910237c713f3691b5926",
+      "bytes": 1697021,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "output/pdf/neurotranslation-technical/neurotranslation-technical.pdf"
+    },
+    {
+      "path": "papers/drafts/r9/pdf/neurotranslation-explained.pdf",
+      "role": "matching_rendered_PDF",
+      "original_source_sha256": "29335d854c11ef4e1cdd269d00d418c97d72d66709e37cec7b00fb5c38f4da94",
+      "packaged_sha256": "29335d854c11ef4e1cdd269d00d418c97d72d66709e37cec7b00fb5c38f4da94",
+      "bytes": 1794318,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "output/pdf/neurotranslation-explained/neurotranslation-explained.pdf"
+    },
+    {
+      "path": "papers/drafts/r9/pdf/brain2body-article.pdf",
+      "role": "matching_rendered_PDF",
+      "original_source_sha256": "8bc05563252713efa6bce6e8b15d4d634d6c553db92a9502ad3d00299528affe",
+      "packaged_sha256": "8bc05563252713efa6bce6e8b15d4d634d6c553db92a9502ad3d00299528affe",
+      "bytes": 347408,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "output/pdf/brain2body-article/brain2body-article.pdf"
+    },
+    {
+      "path": "papers/drafts/r9/pdf/brain2body-simple-english.pdf",
+      "role": "matching_rendered_PDF",
+      "original_source_sha256": "25c5dcdc882bfbb4db12a473b166e0e7980be25bbfec17416a1afe874d9347b1",
+      "packaged_sha256": "25c5dcdc882bfbb4db12a473b166e0e7980be25bbfec17416a1afe874d9347b1",
+      "bytes": 389100,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "output/pdf/brain2body-simple-english/brain2body-simple-english.pdf"
+    },
+    {
+      "path": "papers/drafts/r9/third-party-notices/FiraMath-LICENSE.txt",
+      "role": "third_party_font_notice",
+      "original_source_sha256": "573c14d3ddf557b59bf1fb5537a116a85f264654cdb9ba194ac305acd8ce5dc6",
+      "packaged_sha256": "573c14d3ddf557b59bf1fb5537a116a85f264654cdb9ba194ac305acd8ce5dc6",
+      "bytes": 4367,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "external font notice dependency"
+    },
+    {
+      "path": "papers/drafts/r9/third-party-notices/Noto-OFL.txt",
+      "role": "third_party_font_notice",
+      "original_source_sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "packaged_sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396,
+      "transform": "Path relocation only; bytes unchanged",
+      "original_relative_path": "external font notice dependency"
+    }
+  ],
+  "packaging": "Selected manuscript .tex/.bib files, four matching PDFs and two available font notices. Bytes unchanged; path relocation only. No symlink targets or private canonical JSON copied.",
+  "standalone_build": false,
+  "omitted_external_dependencies": "Figures, font binaries, historical links and toolchain/cache; existing external dependencies remain required.",
+  "review_scope": "Affected formatting and matching draft only; whole-paper visual/style/science/citation/rights/reference/held-out/model/native-export/portability acceptance remains open.",
+  "visual_review": {
+    "rendered_pages": 520,
+    "render_dpi": 160,
+    "author_viewed_pages": 72,
+    "reviewer_viewed_pages": 72,
+    "combined_unique_viewed_pages": 72,
+    "unviewed_pages": 448
+  }
+}

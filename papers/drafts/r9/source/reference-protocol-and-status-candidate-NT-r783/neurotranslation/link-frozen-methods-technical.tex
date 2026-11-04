@@ -1,0 +1,263 @@
+% Proposed manuscript fragment. Retains the host edition's sans-serif text/math setup.
+% Registry revision 20; SHA-256 cc9676276550560eddc941ee08874019d7566486be709a439c732b0996a1c1e8.
+% Source-line provenance and outstanding documentary limits are in SOURCE-LEDGER.json.
+\section{Frozen LINK Development Methods}
+
+A predictor can lower its average error while making one finger group worse on
+one recording date. The LINK comparison therefore keeps each date and output
+visible, then asks which comparisons survive all their stated conditions.
+The prospective protocol states the intended comparison. The retained
+implementation specifies the operations; the completed-study report describes
+the execution and its outcomes. Agreement among these records remains to be verified.
+
+\subsection{Observations and Common Support}
+
+The development design uses one macaque's four training dates, January 27 and 30
+and February 4 and 5, 2020, and two validation dates, February 6 and 11, 2020.
+The two measured targets are index-finger and combined middle/ring/small-finger
+normalized positions. They have source-normalized position units, without a
+conversion to radians, force or 23 separate joint angles. The input comprises
+96 nonnegative threshold-crossing counts transformed by $\log(1+x)$ and 96
+archived spiking-band-power features. Physical electrode contacts identify
+columns; matching a contact across recordings does not identify a persistent
+single neuron. These data do not supply simultaneous peripheral-nerve, spinal
+or EMG recordings.
+
+For a scored endpoint $t$, the input contains source frames $t-10,\ldots,t$ and
+the auxiliary target contains the neural features at $t+1$. The position target
+is at $t$. All twelve frames must belong to one source trial, and each adjacent
+source-clock interval must lie in $[0.0185,0.0215]$ seconds. The nominal bin
+interval is 20 milliseconds; original timestamp jitter is retained. No window
+crosses a trial boundary, no interpolation fills a gap, and recurrent state
+does not continue between windows. Every candidate, including the constant
+and both ridge baselines, uses this same endpoint support and requires the
+following neural frame. A position-only model consequently receives no extra
+trial-end examples unavailable to the auxiliary model.
+
+The first training date defines the canonical order of 96 physical contacts.
+Both feature blocks are reordered together. Feature means and population
+standard deviations are fitted in float64 on each unique trial-owned frame
+once across the four training dates, rather than counting a frame again for
+every overlapping window. Exactly zero standard deviations become one; there
+is no other floor, clipping or validation-derived normalization. The transform
+is calculated in float64 and cast to float32. The constant baseline is the
+mean of unique trial-owned training positions. Position targets remain source
+float32 values. Nonfinite measurements, unknown contacts or incompatible
+schemas cause a failure rather than silent row removal or imputation.
+
+The archived threshold-crossing unit attribute says volts despite count-valued
+semantics; the comparison makes no voltage conversion. Archived power values
+are retained without the author loader's unexplained factor of four. The
+documented 32-millisecond interval also differs from the retained nominal
+20-millisecond clock. Full author trial counts must agree with the trial stop
+timestamps; uniform one-short time-series references are identified separately.
+These distinctions matter because changing units or trial support would change
+the experiment.
+
+\subsection{Candidates, Initialization and Training Order}
+
+The two recurrent candidates have 192 inputs, one gated recurrent-unit layer
+with 128 hidden values, and two position outputs. The position head combines
+the final hidden values with the mean neural feature vector over the eleven
+input bins. A separate linear head predicts the 192 next-neural features.
+Both candidates contain 169,090 parameters. The position-only objective uses
+144,322; the 24,768-parameter neural head receives zero objective weight in that
+candidate. The historical software name of the position head does not change
+its target into velocity.
+
+For position target $y$, position prediction $\widehat y$, next-neural target
+$z$ and prediction $\widehat z$, training minimizes
+\[
+ L=\operatorname{mean}\bigl((\widehat y-y)^2\bigr)
+   +\lambda\operatorname{mean}\bigl((\widehat z-z)^2\bigr),
+ \qquad \lambda\in\{0,0.1\}.
+\]
+Each residual is squared before the mean is taken over the corresponding
+minibatch and output elements. Otherwise, residuals of opposite signs could
+cancel before the square and conceal prediction error. Training
+uses Adam with learning rate $0.001$, averaging constants $(0.9,0.999)$,
+stabilizer $10^{-8}$, zero weight decay, and disabled fused and foreach routes.
+There is no dropout, autocast, TF32, gradient clipping or target clipping.
+Minibatches contain 256 windows, including the final partial minibatch.
+Nonfinite losses, gradients, updated parameters, optimizer states or predictions
+fail the run. The reported study route uses four CPU mathematical threads and
+one framework interoperation thread; that historical configuration is separate
+from manuscript preparation and does not establish a speed improvement.
+
+The fixed seeds are 20261007, 20261008 and 20261009. Each run resets Torch's
+seed, constructs the same architecture, checks its initialized float32 tensors
+against the seed's frozen initialization, and loads that initialization. The
+intended pairing therefore includes both recurrent candidates and all three
+input conditions for a given seed. A separate NumPy PCG64 generator starts
+once per run from that seed. Training dates are concatenated in the declared
+order above, with ascending scored source endpoints within each date. One
+permutation of all concatenated training rows is drawn per epoch; every row
+appears once. The implementation obtains matching schedules by resetting this
+generator identically in each paired run. It saves each epoch's order hash and
+generator state, rather than reading a shared bank of saved order arrays.
+
+The run order is measured inputs, association control, then order control;
+within a condition it is position-only, then position plus next-neural; within
+a candidate it is the three seeds in their declared order. Each run retains
+all 40 epochs. Restoring a completed epoch restores model, Adam, NumPy and Torch
+state; an unacknowledged partial epoch is not permission to repeat updates.
+The source specifies these safeguards. This documentary account does not
+independently verify their use throughout the completed execution.
+
+\subsection{What Each Control Changes}
+
+The association control breaks the training alignment between neural evidence
+and position. For each seed, the implementation creates one PCG64 generator
+from \texttt{seed+1000000}, then advances that same stream across the four
+training dates. It draws one permutation separately within each date. The
+shuffle unit is an eligible whole-window row: its complete $11\times192$
+neural window and associated 192-element next-neural target move together.
+Position targets and the destination rows' date, trial, source-endpoint and
+scoring identities stay fixed. This is neither a channel shuffle nor a
+within-window bin shuffle, and it does not move whole trials as blocks.
+The permutation is fixed for the run, shared by the two candidate types for
+that seed, and is not redrawn each epoch. Its hash and accidental fixed-point
+fraction are recorded.
+
+Association-control models are fitted on these transformed training rows and
+selected on unchanged measured validation windows and positions. Their final
+comparison also uses unchanged validation support. Training losses refer to
+the transformed training pairing; the main candidate and control scores refer
+to the two validation dates. The control retains within-window history,
+within-date distributions and possible common task structure. Fixed points
+can retain some original pairings. It does not create a causal null.
+
+The temporal-order control applies the same fixed permutation to the bins of
+every training and validation window. In zero-based bin indices it reads
+\[
+ (9,8,7,6,5,4,3,2,1,0,10)
+ \quad\hbox{in place of}\quad (0,1,2,3,4,5,6,7,8,9,10).
+\]
+Thus the ten earlier bins reverse and the current bin stays last. Position,
+next-neural targets, feature identities and scoring rows remain unchanged.
+The transformation uses no random draw. Each order-control run retains the
+same seed initialization, epoch-order rule, optimizer and selection policy as
+its measured-input counterpart. Reversal preserves the window's multiset of
+values and is invertible; a recurrent model can adapt to it. The comparison
+tests benefit from this declared order, not an assurance that all temporal
+information has been removed. Both control conditions are excluded from the
+best-model competition.
+
+\subsection{Selection and Uncertainty}
+
+Let $E_{dg}(A)$ be model $A$'s frame-mean squared position error for validation
+date $d$ and finger group $g$. The primary score is
+\[
+ \overline E(A)=\frac14\sum_{d=1}^{2}\sum_{g=1}^{2}E_{dg}(A).
+\]
+Frames are weighted equally within a cell; the four date/group cells then have
+equal weight. Each seed retains the epoch with the lowest primary score;
+an exact tie takes the earliest epoch. Predictions from all three selected
+seeds are averaged arithmetically with equal weights. Seed performance is
+also retained separately, including its mean, sample standard deviation with
+one degree-of-freedom correction, minimum and maximum. No favourable seed
+replaces the ensemble.
+
+The current-bin ridge uses only the final 192 features; history ridge flattens
+all eleven bins oldest to newest in row-major order. Both fit float64 ridge
+regression with unpenalized intercept and objective
+$\sum_i\lVert y_i-X_iW-b\rVert^2+\alpha\lVert W\rVert_F^2$.
+The frozen penalties are $0.01,0.1,1,10,100$. The lowest validation primary
+score selects the penalty, with the smallest penalty winning an exact tie.
+An exact tie between ridge types selects current-bin ridge. An exact tie
+between measured recurrent ensembles selects position-only. Control models
+do not enter either candidate-selection contest.
+
+For every comparison, candidate-minus-reference squared errors are paired on
+the same validation endpoints. The bootstrap initializes PCG64 with 20261007,
+uses validation dates in declared order and sorted unique source trial IDs,
+and draws 1,000 samples. Within each date, each sample draws the original
+number of eligible trials with replacement. Every supported frame of a drawn
+trial contributes with its multiplicity; variable trial lengths retain their
+frame weighting. The same trial draws serve both models and both groups.
+The generator advances from the first validation date to the second, and each
+comparison restarts the same seed. The primary difference averages the four
+cell differences. The 95-percent interval uses the 0.025 and 0.975 quantiles
+with linear interpolation. Fewer than two supported trials per date prevents
+this uncertainty calculation. The intervals are descriptive and conditional
+on these dates and validation-selected models.
+
+Ordinary $R^2$ uses the evaluation cell's observed mean:
+\[
+ R^2_{dg}(A)=1-
+ \frac{\sum_i(\widehat y_{i,g}-y_{i,g})^2}
+ {\sum_i(y_{i,g}-\overline y_{d,g})^2}.
+\]
+The separately labelled training-mean skill score substitutes the frozen
+training mean in the denominator. A zero denominator produces an undefined
+score, without an added epsilon, and cannot pass a rule requiring defined
+$R^2$.
+
+\subsection{Model Admission and the Five Benefit Comparisons}
+
+Define the comparison conjunction
+\[
+ C(A,B)=
+ [\overline E(A)<\overline E(B)]\ \land\
+ [E_{dg}(A)\leq E_{dg}(B)\ \hbox{for every }d,g]\ \land\
+ [U_{.95}(A-B)<0],
+\]
+where $U_{.95}$ is the upper endpoint of the paired two-sided 95-percent
+interval just defined. Equality passes the per-cell no-harm condition, but
+does not pass either strict improvement condition. Let $P$ and $N$ denote
+the measured position-only and auxiliary ensembles, $R_c$ current-bin ridge,
+$R_*$ selected best ridge, and $P_o,N_o$ their matched order controls.
+The retained independent postfit checker evaluates these five comparisons separately:
+\begin{enumerate}
+ \item Position-only history benefit: $C(P,R_c)$.
+ \item Position-only order-use benefit: $C(P,P_o)$.
+ \item Auxiliary-model history benefit: $C(N,R_c)$.
+ \item Auxiliary-model order-use benefit: $C(N,N_o)$.
+ \item Auxiliary-objective benefit: $C(N,P)$.
+\end{enumerate}
+Each displayed conjunction includes its own lower primary error, no worse
+date/group and negative paired upper bound. The history comparison asks
+whether the recurrent candidate improves on the specified current-bin linear
+reference. It does not isolate recurrent ordering from the mean-history input
+or every other architectural difference. An order-use claim additionally
+needs its matched reversal comparison; a history comparison alone does not
+establish that claim.
+
+The distinct implemented model-admission gate requires $C(A,R_*)$ and, in every
+cell, defined ordinary $R^2(A)>0$ and $R^2(A)>R^2(A_s)$, where $A_s$ is the
+matched association-control ensemble. A missing or nonfinite cell cannot pass.
+This model gate must not be substituted for the five comparison rules.
+
+The retained independent postfit checker implements the three-part conjunction
+separately for every comparison above and records each Boolean condition. All
+five decisions fail. Each has a lower average error, but each fails its
+per-date/group no-harm condition; three have a paired upper bound below zero.
+The separately recorded model-admission decisions also fail. This account
+reuses those existing decisions without recomputing an interval or prediction.
+
+That support is limited to the correctly negative report. The retained
+order-control ledgers have empty control-provenance fields: source identity and
+earlier accepted control evidence do not supply a new dynamic reversal check.
+Nor does postfit agreement independently certify the shared optimizer, every
+new checkpoint forward calculation, restored random state or complete update
+trajectory. Those requirements remain open. A favourable average cannot
+replace a failed condition.
+
+\subsection{Completion and Causal Limits}
+
+The inventory records completion of 18 runs with 40 saved epochs each, for 720 saved epochs. That completion and the later postfit checks support the unchanged negative report; they do not verify every optimizer calculation, checkpoint or update, or establish whole-study scientific acceptance. The prospective protocol's \texttt{execution\_started=false} records its state when frozen, before the later study ran. Completion admits neither a model nor reserved confirmation.
+
+The saved inventory records that the service was terminal and inactive, with exit status zero and no automatic restart. That record establishes custody of the files; it does not, by itself, bind them to the complete execution command, loaded modules and later decision records. Those missing links limit what can be reconstructed about execution. They do not explain away the failed development comparisons.
+
+February 22 and 24, 2020, remain closed later-day dates; June 21 and 22, 2023,
+remain closed drift dates. The later task difference also limits a pure drift
+interpretation. No reserved result is inferred from development validation.
+
+The history is causal only with respect to the supplied source indices:
+position prediction uses indices no later than $t$, while next-neural learning
+uses $t+1$ as a training target. Full archive extraction and filtering support
+has not established causal online acquisition or physiological delay. The
+study concerns predictive associations between recorded features and two
+position coordinates. It does not demonstrate nerve transmission, spinal
+externalization, sensory delivery, biological teaching, retained skill or
+full-body neural translation.

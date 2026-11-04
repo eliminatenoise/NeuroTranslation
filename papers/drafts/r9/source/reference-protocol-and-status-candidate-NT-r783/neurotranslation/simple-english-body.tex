@@ -1,0 +1,1628 @@
+\section{Neural Signals and Physical Skills}
+
+A file can store a model. What would make it store a skill? Knowing what a hand
+should do, predicting its movement and making it move are already different
+problems. A machine might put the hand on the right path while doing the decisive
+work itself. A file offered as another person's skill therefore owes us an
+explanation: what does it contain, what would give those contents meaning in a
+different body, and what can the trainee still do when the help ends?
+
+Those questions motivate NeuroTranslation. The proposed field maps nerve signals
+and patterns that describe them between clearly stated situations: a particular
+recording, a particular body and a particular task. The implemented software,
+NeuroTranslator, joins selected recordings, fitted prediction models, playback
+and computer-body checks. The NeuroTranslation Network is a proposed plan for
+joining more components while keeping the origin and meaning of each value
+clear. Brain2Body, with the numeral meaning ``to'', names the larger programme.
+A field, a piece of working software and a proposed design are three different
+things. Their names do not turn the current work into a universal decoder.
+
+The ambition is faster physical learning that remains after teaching stops.
+The current work is smaller and more testable. It connects real recorded neural
+activity to specific targets, exposes errors and tries bounded commands in
+body simulations. Its latest central neural comparison has a negative outcome.
+Two models lowered average error on development recordings, but both failed
+the original requirements. The average improved while declared parts of the
+prediction got worse. That failure tells us where the next explanation has to
+begin; the older results cannot answer for it.
+
+The first question is concrete: can specified neural observations predict an
+independently measured body target? The title does not mean that an established
+scientific paradigm has been replaced or that we invented the familiar models
+and simulators used here. Every claimed link must answer
+to a measurement: identify what was recorded, what was calculated, which body
+it refers to and what happened, then state which comparison could defeat the
+claim. These conditions make the link testable.
+
+This Simple English Edition explains the concepts from the beginning and
+stands on its own. The companion Brain2Body article separately introduces the
+larger biological-interface proposal; neither manuscript treats a presentation
+or demonstration as scientific authority.\cite{brain2bodyworking} Both remain
+working manuscripts awaiting peer review. The historical figures retain their original
+evidence scopes: relabelling a figure cannot turn it into a new experiment.
+
+The \hyperref[programme-definitions]{definition supplement} gives this edition's
+shared registry version and fingerprint; older studies retain the versions they
+used. The manuscript's scientific and publication limits are stated in its edition note;
+none of the results reported here establishes retained biological learning.
+
+\section{Brain Structure and Brain Activity}
+
+A road map tells you where roads connect. It does not tell you which roads are
+busy right now, which driver will turn, how fast a car can stop or whether a
+bridge is closed. A neural connection map has a similar limit. It records
+structure through a particular measurement and reconstruction method. Structure
+constrains what can happen, but does not by itself determine all the activity,
+chemical influences, changing cell states or learning processes that produce
+behaviour.
+
+FlyWire is a major anatomical reconstruction of an adult female fly brain.
+Its measured connections are useful evidence, with acknowledged reconstruction
+and coverage limits. The mapped brain does not include the complete ventral
+nerve cord, the fly's major lower nerve structure. The dataset is not itself a
+behaving fly simulator.\cite{flywire2024} A developer can use it to constrain
+software, but still has to choose or measure other ingredients. If those
+choices include a body controller, the controller's contribution must be
+visible. It cannot be credited to the wiring diagram alone.
+
+This distinction also applies to our own software. A human-arm simulation is
+not made into the recorded macaque by placing a brain beside it. A model can
+predict a measured finger-group position without recovering every muscle and
+nerve that produced that position. A shared display is useful for comparison,
+but does not establish a shared biological cause.
+
+An electrode measures activity under particular acquisition conditions.
+A contact can combine contributions from more than one cell, and its identifier
+belongs to that recorded inventory. Contact 12 on one date does not establish
+that the same cells supplied contact 12 on another date. Our current 192 input
+features come from two measurements at 96 physical contacts. Calling them 192
+neurons would change the claim without adding evidence. The recording gives us
+an observation of the system, with limits set by how it was acquired.
+
+Other instruments observe other quantities. EEG means electrical activity
+recorded from the scalp. ESG means electrical activity recorded at the spinal
+surface. ENG concerns nerve electrical activity. EMG concerns muscle electrical
+activity. These labels help distinguish the observations. EMG is not a direct
+peripheral nerve recording. Even when a signal helps predict movement, the
+recording method still limits what has been observed.
+
+Functional magnetic-resonance imaging, usually shortened to fMRI, measures an
+indirect signal associated with blood oxygen. It does not photograph thought.
+A classic study recording electrical activity and this imaging signal together
+found important dependencies on the observed electrical quantity, animal and
+site.\cite{logothetis2001} A colourful brain image needs an explanation of what
+the colours represent, the time support and the measurement limits before it
+can support a functional claim.
+
+Four meanings of ``large'' or ``small'' must remain separate. Physical scale
+means measured distances or sizes, with units. Organizational level means a
+whole body, organ, local circuit or cell. Computational detail means what one
+software calculation represents. Statistical averaging means how we combine
+numbers. Averaging two finger groups does not measure a larger piece of brain.
+A small software model does not mean that it observes individual cells. More
+features do not automatically mean more physical sites.
+
+The useful question is therefore specific: given this recorded quantity from
+this subject, task and interval, can this method predict this target under
+these checks? That question can produce evidence. Asking whether a colourful
+model ``understands the brain'' without naming a target makes both success
+and failure much harder to judge.
+
+\section{Measure Movement}
+
+A person experiences a sensation. Another observer can ask about it, but a
+report remains a report given by that person in a particular context. The
+body's position, path, timing, contact and force can be checked with independent
+instruments. Those measurements have uncertainty too, but they supply observable
+targets against which a model can be wrong.
+
+The sensory-action relationship gives this programme a practical starting
+point. Sensory input informs action. Action changes the body and its environment.
+The resulting feedback informs the next action. A useful test can compare what
+was intended or predicted with what was measured, then ask whether a correction
+improves the next result. Established feedback-control work describes how
+movement can be adjusted relative to task goals under uncertainty.\cite{todorov2002}
+Our programme uses that rationale; it has not thereby demonstrated every
+biological loop it proposes.
+
+Consider reaching for a cup. A target position, measured hand path and contact
+outcome could make the task checkable. A decoder might predict the path while a
+controller changes the muscle commands. The path could improve because the
+controller is better, because the decoder is better, because an easier target
+was selected or because an answer was accidentally fed into the controller.
+A fair comparison keeps those explanations separate. Independent measurements,
+matched targets and explicit information access make the interpretation possible.
+
+A saved recording is not live feedback. It can show what happened in an earlier
+experiment, and an offline model can predict part of it. A computer body can
+provide simulated feedback. A living body can provide measured feedback only
+through an actual synchronized acquisition. Playing all three on one screen
+does not give them one clock or one nervous system.
+
+Language offers a useful analogy. The meaning of a statement can depend on
+who said it, the setting and what happened before it. Likewise, a neural pattern
+needs its measurement and task context. Published semantic reconstruction from
+brain measurements depended on the participant and cooperation; it did not
+establish unique access to any person's private experience.\cite{tang2023}
+This does not prove that useful shared representations are impossible. It
+means their preserved information and ambiguity need to be tested rather than
+assumed away.
+
+Quantum measurement offers a much narrower analogy: observation involves an
+interaction and its conditions matter. That analogy is not a mechanism for
+ordinary brain measurements. Quantum backaction means that a measurement changes the state of the quantum system being measured; macroscopic neural recordings, which combine signals over much larger physical
+scales, have different explanations. We do not
+claim that quarks (subatomic particles), or quantum disturbance, explain our decoding limits.\cite{quantum2012}
+An analogy should help pose a question, not smuggle in a scientific explanation
+that the experiment never tested.
+
+The programme borrows a discipline from code and mathematics too: state the
+question, specify what would meet it and check the answer. Biology remains an
+empirical subject. A test cannot replace a measurement, and a measurement does
+not become error-free because a program accepts it. A one-to-one decoding of
+private subjective experience is not a result here.
+
+\section{Test Predictions Against Measurements}
+
+Suppose a model predicts the right endpoint once. That is a useful observation,
+but it leaves several questions open. Did it use the relevant input? Would it
+work on another trial? Was the endpoint easy to guess? Does it describe the
+mechanism, or only one consequence? Is the error acceptable in the task's units?
+A single agreement cannot answer all of those questions.
+
+Accuracy means agreement with an independent reference under stated conditions.
+Precision means agreement across repeated measurements under stated conditions.
+A model that repeatedly places a hand too far left can be repeatable and still
+wrong. Printing more decimal places does not correct it. Neither does displaying
+a finer mesh or shortening the simulator's numerical step.\cite{nist1297}
+
+Ground truth here means an independently acquired empirical reference with
+its source, calibration, sampling limits and uncertainty exposed. It is not
+claimed to be a perfect view of biology. A finger sensor, a camera-derived
+joint estimate and a force transducer have different meanings and limits.
+When a target comes from a body-analysis model, it must be labelled as derived
+rather than a directly measured living muscle quantity.
+
+A disclosed approximation is a hypothesis that can be useful if it passes the
+right tests. Biological virtualization would mean a digital model independently
+shown to reproduce specified aspects of a living system's behaviour and causal
+dynamics within stated error bounds. That is a demanding evidence claim.
+A convincing animation does not earn it. Invented biological content presented
+as faithful reproduction is what this programme calls hallucination.
+
+The dice analogy concerns unknown reliability. If a biological claim lacks the
+necessary tests, a matching answer leaves us unsure whether the model is reliable
+or merely agreeable in that case. This does not say every prediction is random,
+that all answers have equal odds or that all approximations are false. Learned
+patterns can be informative. Independent error measurement, failure reporting,
+held-out tests and assessed uncertainty tell us how much reliance is justified.
+
+Generated examples can help fit a model or test an implementation. They cannot
+create independent empirical validation for an absent biological measurement.
+If a simulator generates the targets and the model matches them, that tests the
+model relative to the simulator. The next biological claim still needs a real
+reference. A larger pile of generated agreement cannot supply the missing
+measurement by counting the same assumptions many times.
+
+
+\section{Earlier Results}
+
+The earlier studies answer different questions. Their recordings, targets and tests
+stay separate; these accounts add no new confirmation. The current LINK cohort
+and its completed negative comparison follow.
+
+The prototype executes a declared chain: recorded signals enter models matched to each recording, and their outputs pass through explicit body and replay interfaces. That is the idea tested at this bounded scale. The inputs come from named public experiments; saved model states and reported outputs identify what a reproduction should check. The body simulations use named numerical models. These are computer experiments, with failures preserved in the evidence record, rather than physical experiments on an organism.
+
+Consider the simplest chain. A public experiment recorded electrical events in a macaque's brain while it reached. We count events in completed short time intervals, called bins, preserve the original recording-channel order, and give a short history to a trained model. Such a model is sometimes called a decoder because it turns a recorded signal into a prediction about another quantity. This model returns two fingertip velocity components, meaning signed rates of movement along the two recorded coordinate directions, in meters per second. The replay view places those predictions beside the appropriate reference quantities. A separate translation rule turns velocity into a deliberately limited shoulder-and-elbow command for a human arm model. That last translation is an engineering choice. It is not a discovery that the macaque's recorded neurons correspond to particular human muscles. The reaching archive supplies the recorded neural-behavior relationship; the body experiment supplies a numerical test after a stated conversion between bodies.\cite{odoherty2020,nlb2021,myosuite2022,myosim2026}
+
+Other chains answer different questions. One model predicts processed summaries of muscle electrical activity from a separate brain recording. Another identifies which finger movement a human participant was cued to attempt. A model using a touch-related brain recording reconstructs earlier movement and handle-force quantities from that same experiment. In the opposite mathematical direction, another model predicts expected neural counts from mechanics matched to its source. That opposite-direction model is sometimes called an encoder. These are useful connections, but their outputs are different kinds of things. A finger-class score is not a finger's path through space. An expected count is not a newly measured neural event.
+
+The earlier application snapshot put these chains beside one another without claiming that their recordings are simultaneous. They belong to different subjects, sessions and tasks. They can run concurrently as software, just as several independent videos can play on one screen. Their coexistence does not turn them into one observed nervous system. NeuroTranslator's shared execution protocol is a way to keep their differences explicit while making them usable through the same application.
+
+The proof also includes negative results. A shared model was tested against retained specialists and rejected. Transfer with a fixed model core from one recording from brain tissue to another failed its admission rule against stronger controls. Native macaque muscle controllers failed reserved source cases. These outcomes matter because they constrain the proposed architecture. A system that quietly substituted a successful-looking replay for a failed controller would offer a weaker proof of concept, even if its screen were more impressive.
+
+The proposed connecting diagram can be read as three panels. The first contains an actual recording and a model matched to that recording. The second contains a bounded conversion to a declared computational body. The third contains a separate future biological teaching and retention experiment. An explicit evidence boundary belongs before the third panel. Measured body feedback should return to a recording-based model only where an actual synchronized signal supports that connection. Drawing an arrow cannot supply that missing evidence.
+
+We use three evidence levels throughout. An observation is something present in the acquired recording, within the limits of its measurement method. A model-derived quantity is computed from observations and assumptions, such as joint angles estimated through tracking and muscle-and-skeleton analysis. A simulation is produced by an explicitly chosen numerical body and controller. A prediction can concern any of these levels, but its label must tell the reader which one. The original touch-related source study itself distinguishes recorded neural signals and body-model calculations supported by movement tracking.\cite{chowdhury2020}
+
+That historical prototype established executable connections and several local numerical results. It does not establish the missing causal chain from a teaching signal to changes in a living nervous system to independent retained performance. Those learning-related biological changes are often called plasticity. That chain is the purpose of the proposed research program. Keeping it separate lets the current software be useful without asking it to certify an experiment that never happened.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\makebox[\textwidth][c]{\includegraphics[width=160mm]{figures/architecture.pdf}}
+\captionof{figure}{The working chain connects recording-matched predictions to declared body representations. Biological teaching and retained learning belong to a separate future experiment. The boundary between them is an evidence boundary.}
+\end{minipage}
+\end{center}
+
+\section{Recording Access, Context and Stable Signals}
+
+Three practical questions organize the proposed work: can we observe useful signals, connect them to a measured body task, and keep the connection useful when conditions change? Each question identifies a different way an interface might fail. Each needs a different measurement. They are research questions, not outcomes already achieved by this project.
+
+``Access it'' asks whether useful signals can be observed without overwhelming the system being studied. More channels are not automatically better. A recording can be rich in numbers yet miss the task variable that matters. A proposed interface can promise access while imposing a burden that changes movement, development or tissue condition. The current software begins with already published recordings, so it does not demonstrate a new implant, a lower-burden sensor, or safe lifelong access. Its contribution is to preserve what those recordings actually contain and to refuse to invent the channels they lack.
+
+``Ground it'' asks whether the signals can be connected to a measured task and a particular body. A count from a brain recording channel only becomes useful for this application when we know the source, timing, target definition and evaluation. A predicted joint angle only becomes useful for a body test when we know the coordinate convention and mechanical assumptions. This is where the interactive prototype does most of its work: source checks, explicit quantity labels, time windows, prediction comparisons, anatomy models and numerical tests of movement control.
+
+``Keep it'' asks whether the relationship remains useful as recording conditions, bodies and tasks change. In this prototype, the separate-day motor experiment and the failed external finger pilot illustrate the difficulty. A model that performs well within a session is not automatically stable across days. A model matched to one recording may remain useful after calibration, while transfer with a fixed model core fails to beat fresh training. Longer biological stability, device durability and retained learning are future experiments, not consequences of these local comparisons.
+
+A future experiment should begin with ordinary behavior and clearly defined measurements. If it studies a human-related biological feature, it should say exactly which feature was introduced. If it studies a tissue connection, it should compare the contribution of that connection. An experienced partner and a computer-based trainer are different possible sources of assistance. Disease-specific questions need their own appropriate comparisons. None of those biological experiments was performed by this computational work.
+
+A proposed task sequence should keep ordinary intact behavior visible before studying a defined interruption and replay condition. Simple routes with right-angle turns should be compared separately from routes with varied headings and continuous changes in direction. An animation can test assumptions in its numerical model. It cannot by itself validate a biological injury model, a tissue connection or a disease treatment.
+
+The central learning distinction is equally explicit. Assistance changes performance while help is supplied. Retained learning changes what the trainee can do after trainer commands are removed. Regeneration concerns restoration of tissue or pathways. These can coexist in a future experiment, but none can stand in for another. If an interrupted pathway still requires a compensatory bridge, the bridge must remain available when trainer commands are withdrawn. Otherwise the experiment removes the trainee's means of expressing movement and mistakes that loss for a test of learning.
+
+The roles of the software and a future biological experiment remain separate. The software builds and checks parts of a measurement and execution chain. The biological experiment would ask what an organism can still do after help stops. A reader should always be able to tell whether a result is an actual recorded observation, a trained prediction, a numerical simulation or an untested proposal.
+
+\section{Brain, Spinal Cord and Peripheral Nerves}
+
+It is tempting to imagine a skill as a command that leaves the brain, travels down one cable, and arrives at the muscles. That picture is useful only as a starting question. The recordings in this project observe different parts of movement-related and sensory activity through different instruments. They do not reveal every relevant signal or turn the rest into a known blank.
+
+The movement sources include recordings from the brain's outer tissue and observations of behavior. The human finger source includes movement-related and posterior-parietal brain recordings associated with attempted movement; ``posterior parietal'' identifies the source region toward the back of the relevant brain tissue. The touch-related source observes a region named Area~2 during reaching and externally disturbed movement. A separate human source records surface electrical signals at several levels during stimulation. Each experiment provides a particular window on the system. Its observation method and task determine which conclusions are justified.\cite{odoherty2020,human_fingers2023,chowdhury2020,spinal_dataset2023}
+
+The movement brain area is formally called primary motor cortex. The touch brain area is formally called primary somatosensory cortex, with Area~2 being the specific source region used here. These names help locate recordings. They do not make a movement-area channel a pure motor instruction or a touch-area channel a complete sensory description. In the implemented models, the practical question concerns prediction: given the recorded history from this source, how accurately can the specified target be predicted on the stated evaluation samples?
+
+The proposed body-wide instrument also needs to preserve direction. Signals travelling from the body toward the brain and spinal cord are called afferent signals; signals travelling from those central structures toward the body are called efferent signals. In plain terms, these are body-to-center and center-to-body directions. The spinal cord and peripheral nerve networks can also process information locally. A diagram with an arrow from brain to muscle should not be read as proof that every step is a passive wire or that the current files measure all of that processing.
+
+Proprioception means sensing body position and movement. Interoception means sensing conditions inside the body. They are related, but they do not name the same information. The numerical controller receives simulated position and movement feedback. It does not thereby observe all internal sensations or reconstruct a complete subjective bodily experience. Each proposed body-wide measurement needs an explicit target and reference.
+
+The spinal cord and peripheral nerves are important to the larger proposal, but their motor activity was not recorded alongside the macaque motor sessions used by the decoders. The registry therefore marks those observations unavailable. It does not insert zeros and call them quiet neurons. Zero would be an actual numerical assertion about activity. Unavailable means the experiment provides no observation of that quantity.
+
+The separate human multilevel preview is valuable because its recording types share one experiment. It contains electrical recordings from the scalp, spinal surface, peripheral nerves and muscles. These combine activity from multiple contributors rather than identifying individual spinal and peripheral neurons. In the acquired preview, electrical stimulation causes the responses being studied. That supports an observation view and source inspection. It does not train the current application to reconstruct voluntary walking or voluntary brain-to-muscle control.\cite{spinal_dataset2023,spinal_companion2023}
+
+The difference between anatomy and activity matters too. A structural map can describe possible connections, while a time series describes what an instrument observed over time. Even a very detailed connectome cannot supply the missing event sequence for a particular movement. A future architecture could use anatomical information as a stated prior, meaning a constraint or starting assumption. It would still need evidence for its time-dependent predictions and would still label unobserved channels as unobserved.
+
+A body-wide model is a measurement challenge. More levels could help prediction or control if their information is relevant and aligned. They could also add noise, delay, burden or repeated information. A fair comparison must allow a smaller brain-only or behavior-only model to win. Otherwise, the larger diagram becomes an idea that its own experiment cannot reject.
+
+NeuroTranslator makes the absence manageable. It can keep recorded brain electrical events, surface signals combining multiple contributors, processed muscle electrical signals, mechanical variables and simulations in separate views with explicit quantity labels. That is a useful foundation for adding matched recordings later. It is not a substitute for obtaining those recordings, and it does not establish that everything important about a skill is electrical or already represented in the current files.
+
+\section{Neural Event Counts}
+
+The models using brain recordings often receive spike counts. In ordinary terms, the input asks how many detected events occurred on each declared recording channel during each short time interval. The original event times are grouped into bins, and the bins are supplied in their original channel order. A model sees a history of these counts rather than a single instantaneous value.
+
+``Unit'' is the source's identifier for a recorded neural feature. Depending on the dataset's processing, that feature comes from sorting electrical events measured outside cells or from a specified recorded-feature inventory. Sorting groups detected events according to the source's rules. The identifier belongs to that source. Unit 12 on one day is not proved to be the same cell as unit 12 on another day. Even equal channel counts do not create identity. The reaching and benchmark sources give NeuroTranslator useful activity from groups of neurons, while their definitions matched to each recording limit interpretation across recordings.\cite{odoherty2020,nlb2021,falcon2024}
+
+Counts are integers because an observed number of events in a completed bin cannot be half an event. This sounds obvious, but a numerical interface can lose the distinction. A model can predict an expected count of 2.4 events. That is a statement about a conditional mean, not a claim that 2.4 events were physically observed. If expected values were silently fed into a port that promises recorded integer counts, the next stage would inherit a false description of its input.
+
+The request validator checks the original numeric values before converting them to the model's lower-precision floating-point representation. The order is necessary because a large fractional number can round to an integer during conversion. The portable tests include that case. A request with 16,777,216.25 in a recorded-count field is rejected as fractional even though a lower-precision representation can conceal the fraction. This guard concerns the signal contract, not whether such a count would be physiologically plausible in the source window.
+
+Electrical muscle targets need a different explanation. The brain-to-muscle-signal model predicts 16 source-processed electrical summaries. An envelope summarizes aspects of the recorded electrical signal after the source's filtering and numerical rescaling. In this release, the targets are rescaled values with no remaining physical amplitude unit. A stale millivolt attribute in the source file does not convert them back into electrical amplitude verified in a physical unit. The model's output is therefore neither force in newtons nor a verified muscle excitation command. The source preprocessing, rather than a convenient file label, determines the quantity.\cite{falcon2024}
+
+The human finger classifier answers a still different question: which of ten attempted-finger classes is most consistent with the recorded window? Its class probabilities are classifier scores without established probability calibration. The task cue provides the class label. It does not supply an executed trajectory, joint torque, grip force or object manipulation sequence. A correct answer to ``which finger was attempted?'' is useful evidence for that classifier. It does not prove that the model can make the finger move.\cite{human_fingers2023}
+
+The sensory encoder moves from mechanics to positive predicted average counts. These means can be scored against recorded counts using a probability-based test of how well a proposed average explains the observed counts. They do not constitute a validated generator of complete biological spike trains. Limits on how quickly a neuron can produce consecutive events, coordinated timing across neurons and a complete account of biological count variability would require additional models and tests. NeuroTranslator keeps the mean-count prediction useful while labeling it as inferred activity rather than measurement or stimulation.
+
+Reversing the prediction does not reverse time or recover a unique cause. Several
+neural patterns can accompany a similar movement, and a similar recorded pattern
+can occur in different task conditions. A mechanics-to-neural model asks what
+recorded activity is expected given the supplied mechanics and context. That is
+a conditional estimate: its answer depends on what it was given. It cannot
+identify the one true intention merely because the forward model predicts the
+movement well. Each direction needs its own withheld reference, uncertainty
+and simpler comparisons. A predicted pattern also ends at a computer output;
+delivering a sensation would require a separately qualified physical writer.
+The current spinal scope remains observation only.
+
+Understanding these distinctions makes the screen readable. Similar-looking traces can represent events, rescaled electrical summaries, classifier scores, measured mechanics or predicted expectations. Their labels carry the scientific meaning. The plot's visual smoothness does not establish that two quantities are interchangeable.
+
+\section{The Two-Finger Recording Study}
+
+The current LINK comparison uses six sessions from one rhesus macaque performing
+a centre-out finger task. A centre-out task asks movement away from a central
+position toward a target. The pinned public source is DANDI 001201, version
+0.251023.2336, Monkey N.\cite{linkarchive} One animal across six sessions does
+not mean six animals or a population test.
+
+Four sessions are training: January 27 and 30, February 4 and 5, 2020. Training
+changes the model's fitted numbers. Two later sessions, February 6 and 11,
+are development validation: they help choose a model and describe its behaviour
+during development. Two further February sessions and two June 2023 recordings
+remain reserved and closed. Those untouched recordings would answer a later
+question under an independently accepted plan. They supply no result in this
+paper, and the paper does not imply permission to open them.
+
+Each development session contains 375 trials. Ninety-six physical contacts in
+hand primary motor cortex provide two feature types. Threshold-crossing counts
+summarize detected electrical events crossing a selected threshold. Spiking-band
+power summarizes power in the source's selected high-frequency band. That makes
+96 features of each type, or 192 features together. It does not identify 192
+cells, two separate electrode arrays or a complete measurement of motor cortex.
+The contact order and source identity remain part of every example.
+
+The count features undergo the numerical transformation log of one plus the
+count. This retains zero and compresses large values. The power features retain
+their archived scale. Both are then scaled using means and spread calculated
+only from training data. The spread is the population standard deviation: take
+each fitting value's distance from its mean, square those distances, average
+them over all the fitting values and take the square root. The saved conversion
+subtracts the training mean and divides by that training spread. This conversion
+is the scaler. It puts features on a declared numerical scale without claiming
+that the contacts measure the same biological quantity.
+
+If the scaler used validation values, the checking recording would already
+have helped set the model's input scale. That is information leaking from the
+check into the procedure being checked. In the accepted preparation, validation
+supplies no scaler statistics.
+
+The scaler uses 107,605 unique training frames owned by their source trials.
+Unique means a frame is counted once for those statistics even if several
+prediction windows contain it. Overlapping windows can otherwise repeat the
+same recorded sample many times. Fitting a scaler to all window entries would
+weight samples differently; the declared unique-frame rule is part of the
+study, not a cosmetic implementation choice.
+
+The two output targets are normalized sensor positions. One concerns the index
+finger. The other concerns the middle, ring and small fingers as a combined
+group. Their archive names do not give three individual finger trajectories.
+``Normalized'' means the source expresses them on a rescaled sensor scale.
+A value on that scale is not an angle in radians, a length in meters or force
+in newtons. The study has no simultaneous muscle electrical, peripheral nerve
+or spinal recordings. It also lacks the individually measured joint positions
+and forces needed to turn two numbers into a fully calibrated body state.
+
+A prediction endpoint needs eleven neural samples inside one source trial and
+a following neural frame for the extra learning target where used. The movement
+label sits at the last input timestamp. A history that crosses into another
+trial is not accepted. The eleven timestamps span about 199 to 201 milliseconds,
+roughly one fifth of a second. The prepared support contains 91,105 training
+endpoints and 45,757 development endpoints.
+
+Those counts tell us how many usable recorded endpoints exist, not how many
+independent experiments occurred. Adjacent windows share samples. The trials
+belong to the same animal and dates. Statistical claims must reflect that
+structure. In each session, 4,125 frames are not prediction endpoints; some
+still provide declared history, the extra neural label or training-scaler support.
+Excluding an endpoint does not mean every sample around it disappears.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering\small
+\begin{tabular}{lrrrr}
+\toprule Date & Role & Trials & Source frames & Usable endpoints\\\midrule
+2020-01-27 & Train &375&27,649&23,524\\
+2020-01-30 & Train &375&26,944&22,819\\
+2020-02-04 & Train &375&26,441&22,316\\
+2020-02-05 & Train &375&26,571&22,446\\
+2020-02-06 & Development &375&26,957&22,832\\
+2020-02-11 & Development &375&27,050&22,925\\\bottomrule
+\end{tabular}
+\captionof{table}{Six recording sessions from one animal. Each usable endpoint obeys
+the same history and trial rules. These are exact support counts, not a number
+of independent people or a claim about confidence. The reserved later and
+drift recordings are excluded.}
+\end{minipage}
+\end{center}
+
+An independent source audit reproduced the declared prepared values. Its saved
+scaler comparison differed by at most $4.54\times10^{-13}$ under the fixed
+criterion. That is a narrow check of preparation arithmetic. It does not say
+the model predicts movement well or that a live controller has that accuracy.
+The manuscript reuses the report; no preparation or calculation was repeated
+for this source edition.
+
+Time has a further limit. All the series in each file share the recorded clock,
+but archive bin anchoring and filtering remain uncertain. The displayed span
+is not verified physiological input support or measured online delay. The
+archive also contains a voltage label that conflicts with the publisher's
+threshold-count description. Count interpretation remains count interpretation;
+absolute power calibration remains unverified. These missing facts must be
+settled before a stronger physical or online claim.
+
+The separate human EEG/ESG/ENG/EMG preview remains another experiment, involving
+evoked responses to stimulation and its own clock. It does not drive the LINK
+models or the older macaque-to-human-arm simulation. Matching picture colours,
+starting videos together or placing plots in the same dashboard cannot establish
+a simultaneously measured voluntary brain--spine--nerve--muscle chain.
+
+
+\section{The earlier recording families and their distinct targets}
+
+The earlier models use five recording families. These are a selected working set rather than a survey of all neuroscience data. The reviewed source catalog contains 37 resource records, including data, anatomy and simulation resources, but a catalog record does not mean that its files were acquired or used to train a model. Some entries remain metadata-only. The distinction prevents a broad inventory from being mistaken for broad experimental coverage.\footnote{Local evidence: \texttt{paper/evidence\_matrix.json}, claim \texttt{catalog\_scope}; source inventory \texttt{\mbox{research}/\allowbreak{}\mbox{dataset}\_\allowbreak{}\mbox{catalog}.\allowbreak{}\mbox{json}}.}
+
+The original movement-velocity specialist uses an Indy recording from February 2 with 130 sorted units. Its input bins last 20 milliseconds, and its history covers 20 bins, or 400 milliseconds. Its targets are the supplied two-component fingertip velocity labels. This is a particular reaching experiment and a particular preprocessing path. The public reaching archive and the NLB-related release identify the source; the project uses its own local split and does not claim an official benchmark score.\cite{odoherty2020,nlb2021}
+
+The model for normalized muscle electrical signals uses a separate macaque source from the Few-shot Algorithms for Consistent Neural Decoding benchmark, called FALCON, a comparison framework for neural predictors. Its movement-area brain recording has 64 spike features and 16 muscle electrical channels. Its bins and context have the same stated durations as the velocity specialist, but its recording identity, channel meanings and target preprocessing are different. Matching the input's shape or bin duration would not authorize swapping the sources. The source task concerns reach-to-grasp; that does not turn the current software into an object-contact manipulation learner.\cite{falcon2024}
+
+The human attempted-finger model uses 298 recorded units across the supplied movement-related and posterior-parietal source configuration. It receives 18 bins of 50 milliseconds each, a 900-millisecond window, and classifies ten cued attempted-finger labels. Its selected method calculates class scores directly from a summarized window, rather than using a changing internal memory through the window. The task labels are meaningful exactly as attempted-intent labels, including the limits of the experimental context. They should not be relabeled as actual finger motion or general dexterity.\cite{human_fingers2023}
+
+The Area~2 source supplies 65 units and paired movement and handle-force quantities. The decoder outputs 17 quantities spanning hand and handle variables and tracking/model-derived joint angles. Seven angles and 39 modeled muscle-tendon lengths also support the native-body analysis. The upstream study explains how whole-arm movement and biomechanical analysis produce those quantities; they are not direct observations of isolated muscle fibers or peripheral motor firing.\cite{chowdhury2020}
+
+The historical separately calibrated velocity model uses a genuinely different Indy date, January 31, from the original MATLAB numerical-data archive. It contains 171 nonempty sorted features. Residual or hash cells, source entries outside the sorted-unit inventory used here, are excluded. The file was selected by a fixed eligibility rule before inspecting its raw signals or model outcomes. Its velocity labels are derived from recorded fingertip positions by taking differences between successive available positions and dividing each difference by the elapsed time between those samples, without reading future positions. The new target recording occurred before the pretrained source recording, so the comparison looks backward across archived dates even though file choice was fixed before outcome inspection.\cite{odoherty2020}
+
+The separate human multilevel preview supplies surface recordings during stimulation. Its main acquired view includes scalp, spinal, nerve and muscle electrical signals; the companion file has its own channel inventory and omits muscle electrical signals. A broader repository description cannot override that file-level fact. Neither preview was used to train a voluntary whole-body movement predictor.\cite{spinal_dataset2023,spinal_companion2023}
+
+Licenses travel with these sources. The used brain-recording resources in the public DANDI repository are listed with the Creative Commons Attribution 4.0 license, whose identifying code in the catalog is CC-BY-4.0. The human surface sources have public-domain dedication entries identified as CC0-1.0. These are exact source-license labels; their source records remain the place to inspect the terms. Body software and other catalog items have separate terms. Open access to an upstream file does not automatically license every new combined artifact, and this local project has not verified a public software deposition or settled its own release license. Keeping source versions and attribution visible is part of reproduction, not an optional decorative appendix.
+
+\section{Physical Units and Time Alignment}
+
+A number without a quantity is incomplete. The value 0.2 could mean meters per second, an angle in radians, a rescaled muscle electrical summary or an expected event count. A radian is an angle unit; it is not a distance or a speed. A movement pipeline can run successfully while confusing these meanings. NeuroTranslator therefore asks for the units and conventions matched to the source that make the number usable.
+
+The Area~2 handle variables provide a concrete example. Six columns combine pushes and pulls with twisting effects, formally called forces and moments. Forces use newtons, while moments use newton-meters. The combined six-column quantity is formally called a wrench. An incomplete single unit label on the group does not give every column the same unit. The acquisition and group description determine the six quantities. Similarly, source joint angles supplied in degrees are explicitly converted to radians before being used by the appropriate model. A request to the joint port must provide the recorded names, order, radian units and source coordinate frame.\cite{chowdhury2020}
+
+A coordinate frame tells the system what the axes and angles refer to. The same seven numeric angles could describe different joint conventions in different models. A human simulator cannot declare itself interchangeable with the macaque source by using seven numbers. A verified frame or calibration adapter would be required. The current request guard rejects a different frame rather than silently reinterpreting the values.
+
+Time is just as specific. An input window ends at the last complete bin. If a 20-bin history uses 20-millisecond bins, its entries must follow that cadence when timestamps are declared. Missing bins or an inconsistent endpoint are rejected. If the caller omits timestamps, the response says that expected time spacing was assumed. That is weaker evidence than checking the actual supplied times, and the response preserves the difference.
+
+For the sensory decoder, the selected model reconstructs mechanics 40 milliseconds earlier than the neural input endpoint. This follows a comparison of specified alignments on the same set of samples and validation selection. It does not show that sensory activity is a future motor command. It also does not measure a biological conduction delay in isolation, because upstream processing and tracking delays are not fully identified. In the encoding direction, the source mechanics history is associated with expected activity at the corresponding later model time.\footnote{Local evidence: \texttt{artifacts/sensory\_metrics.json}; evidence-matrix claims \texttt{sensory\_decoder} and \texttt{sensory\_expected\_activity}.}
+
+The January 31 velocity target illustrates a different offset. Fingertip positions are recorded at 250 samples per second. For each 20-millisecond neural bin, the processing selects the last available position sample, then takes the position difference between successive selected samples and divides by their elapsed time to obtain velocity. The actual position-sample coverage ends four milliseconds before the neural-bin endpoint. The velocity port therefore reports that earlier output time. Four milliseconds here describes sample timing; it is not an estimated neural transmission time.
+
+Fingertip and cursor positions are also kept separate. In the audited new source, their discrepancy reaches 11.9 millimeters. A cursor may be the displayed task variable, but substituting it for the recorded fingertip would change the target. The project verifies the source transform from centimeters to meters and keeps the quantity explicit. A small coordinate or timing substitution can change a scientific interpretation even when the picture still looks plausible.
+
+These rules define computational sample coverage. They say which recorded samples a calculation may use and where its output belongs on that source clock. They do not remove any filtering that already used later samples in the source, certify the delay in a living nervous system, or authenticate a caller's declared measurement. NeuroTranslator can check the packet's consistency; it cannot prove that arbitrary supplied values came from a real electrode. Its response states that limitation.
+
+For an online prediction, the decisive time is when information becomes
+available. A sample with an early timestamp could still arrive late, or have
+been filtered using a later observation. Calling an input causal means that
+the issued prediction uses only information actually available by its declared
+deadline. It does not mean the prediction has proved a biological cause. Future
+neural samples can serve as training targets for the extra learning task;
+they must not become inputs to a prediction issued before they are available.
+
+\section{Earlier Implementation Defects}
+
+One of the most useful findings in this project was a data-processing failure. Earlier muscle-signal and shared-model results looked encouraging, and software tests had passed. An independent check against the raw source then showed that the event streams were not all globally ordered in time. The binning method had relied on that ordering.
+
+The mistake is easy to understand without knowing the code. Suppose we want to count arrivals between two times and use a fast search that assumes an arrival list is sorted. If later arrivals sometimes appear before earlier ones in the list, the search boundaries no longer identify the right interval. The counting routine can return numbers of the expected shape, and the rest of the model can train on them. Successful execution does not make those counts faithful to the recording.
+
+The audit found out-of-time-order streams in 33 of the 64 neural features in the muscle-signal experiment. Applying the ordering-dependent method before sorting had corrupted 866,594 unit-bin cells. Those are counts for particular channels in particular time bins, so the defect altered the actual numbers supplied to the models rather than a cosmetic display. Earlier affected muscle-signal, shared and uncertainty results were withdrawn.\footnote{Local evidence: \texttt{artifacts/source\_audit.json}; evidence-matrix claim \texttt{spike\_\allowbreak{}order\_\allowbreak{}withdrawal\_\allowbreak{}counts}.}
+
+The correction sorts the event times under the documented binning rule and compares derived counts with independent whole-source histograms. Models were rebuilt using unchanged random starting values, data divisions and selection rules. Keeping those choices fixed matters: otherwise a repair could quietly become an opportunity to search for better-looking outcomes. The new results are the corrected results. The earlier positive numbers remain in a withdrawal record and must not be combined with the corrected evidence.
+
+This failure also explains why independence between checks matters. A test that repeats the same faulty search can agree perfectly with its implementation. A check based on the raw event arrays and an independently constructed histogram asks a different question: do the resulting bins match the actual source events? Agreement between distinct routes is stronger evidence than repeated execution of one route.
+
+The project found other numerical defects in native-body handling. Borrowed rotation storage could change after export rather than preserving the intended rigid transform. Named control functions obtained before model initialization could become stale references. Those problems required their own corrected exports and bindings. A finite array, a well-formed JSON file or a green test result can conceal the wrong relationship to a native object.
+
+A later result stands on the check appropriate to its own failure mode. Event order needs source-level verification; coordinate transforms need geometric verification; a controller needs a physical tracking comparison. Biological learning would need a biological retention comparison. That gives each result a reason to be trusted or questioned, instead of treating successful software execution as an answer to all of them.
+
+The withdrawal record shows how the prototype's scientific claims changed when an independent audit found a concrete defect. A future release should preserve that history so readers can distinguish valid and superseded results and see why the change was made. Keeping the corrections inspectable is part of the proof of concept and of a trustworthy demonstration.
+
+\section{Simple-Model Baselines}
+
+The comparison begins with the training-target mean: a model that always returns
+the same two numbers calculated from training targets. That simple reference
+asks how much is gained by looking at neural input at all. A second model takes
+a fitted weighted sum of the last neural sample. A third takes a fitted weighted
+sum of the whole eleven-sample history. A weight is an adjustable number: multiply
+an input by its weight, add those contributions, then add a constant offset.
+Fitting chooses the weights and offset from training examples so that the
+predictions approach the targets. A weight's sign sets the direction of its
+contribution; its magnitude sets how strongly the input affects the sum. This
+does not establish a stronger biological connection. Their formal fitting method
+is ridge regression, which discourages
+excessively large weights through a numerical penalty. That penalty makes large
+weights costly even when they reduce error on the examples used for fitting.
+
+The penalty choices were fixed in advance: 0.01, 0.1, 1, 10 and 100. Both linear
+models select 100 on the development dates. The constant term is not penalized.
+This is a controlled small search, not a promise that ridge is the best model
+for every neural task. It supplies a genuine alternative that the more complex
+candidate must beat under the same examples and scoring rule.
+
+The two larger candidates use an established gated recurrent unit. That long
+name describes a software memory updated as it reads a sequence. At each sample,
+the model combines the new input with a numerical summary of what it has read
+so far. Fitted calculations called gates control how much of that summary is
+retained and how much is changed. The next sample is read using the updated
+summary, so the same current input can produce a different estimate after a
+different history. Whether that capacity helps is still an experimental question.
+It is not a recreated nervous system and its numerical memory is not a measured
+biological memory. The same architecture receives 192 features at each sample,
+has one layer of 128 internal values and returns two position estimates.
+
+Two kinds of change must stay separate. The summary changes while a fitted model
+reads an input window. The weights specify how it changes and stay fixed during
+that prediction. Training adjusts the weights using examples. A changing trace
+on a replay therefore does not show that the model is retraining, still less
+that an animal is learning.
+
+Both candidates keep the same total 169,090 adjustable numbers. The position-only
+version actively uses 144,322 of them in its objective. The extra output for
+predicting the following neural frame remains present so the total parameter
+count is disclosed fairly. The second candidate trains that extra output too.
+Its loss is position mean squared error plus 0.1 times next-neural mean squared
+error. A loss is a numerical measure the fitting procedure tries to reduce.
+The extra task is called auxiliary because it is intended to support the main
+position task; whether it actually helps is a question for the comparison.
+Both error terms square each individual prediction difference before averaging.
+The added term gives fitting another reason to retain information in the shared
+numerical summary. It does not provide a measured new pathway, and success at
+predicting the next neural frame cannot replace success at predicting position.
+
+An epoch is one pass through all eligible training windows. Each run saves 40
+epochs. Batches contain 256 windows, and the final smaller batch is retained.
+A batch is the subset used for one fitting update; an epoch therefore contains
+many updates. The model predicts the batch targets, the objective measures its
+errors, and a gradient describes how changes in the adjustable numbers would
+change that objective. Backpropagation calculates those changes through the
+successive model operations. It is a software calculation, distinct from sensory
+feedback travelling through a living body.
+
+The software uses the established Adam update rule with learning rate 0.001,
+internal averaging values 0.9 and 0.999 and numerical stabilizer $10^{-8}$.
+Adam keeps running summaries of the gradients and their squared sizes, then
+uses them to scale the change to each adjustable number. The learning rate
+sets the scale of those changes; the stabilizer helps the division remain
+numerically defined. These settings describe the fitting procedure, not a
+biological learning rate or a promise that each update improves validation.
+Weight decay would add a penalty that pulls model weights toward zero. Dropout would randomly leave out internal model units while training. Gradient clipping would limit the size of the calculated update-direction vector. Target clipping would replace target values outside chosen bounds with those bounds. None of these four controls is used here.
+Together, these choices specify the saved computation. Altering them would
+change the comparison.
+
+The reported configuration uses four mathematical worker threads and one
+framework scheduling thread. A thread is a stream of processor work; these
+settings describe the saved calculation.
+
+Three fixed seeds, 20261007, 20261008 and 20261009, identify the random starting
+conditions. The two candidates receive matched starting values and training
+orders. Keeping a seed means keeping its outcome even if another seed performs
+better. Each seed chooses its lowest development-error epoch; an exact tie
+chooses the first. The final prediction is the equally weighted average of
+all three selected models. That average is called an ensemble. Selecting only
+the best-looking seed would be a different experiment.
+
+The measured condition uses the declared source relationship. An association
+control challenges the pairing that should carry useful neural information.
+During control fitting, a neural history and its next-neural target move together
+to another training example within the same recording day, while the position
+answer stays in place. The validation observations stay unchanged. This asks
+how much the result depends on learning the intended training association.
+It does not remove every possible association: task structure and the held
+validation context still exist. The frozen methods below give the exact rule.
+A temporal-order control changes the order of the supplied history while keeping
+the current bin at the end. It challenges the particular declared ordering;
+it does not prove that all time information has disappeared. A history might
+be useful because it averages noise without making use of sequence order;
+those are different claims. Both controls have their own matched
+runs, and neither enters the competition for the best model. Two candidates,
+three seeds and three conditions produce 18 runs, each with 40 epochs, for 720
+saved epochs altogether.
+
+The primary score is mean squared error. Subtract the measured target from each
+prediction, square the difference and average those squares. The result is in
+squared source-normalized position units. Larger mistakes contribute more heavily. The study first forms
+one score for each finger group on each validation day, then averages those
+four scores equally. A day with more usable frames does not take more weight
+in the final four-cell average merely because it has more frames.
+
+A date/group cell is one of those four score entries. Requiring no harmed cell
+makes an important choice explicit: improvement should not come by sacrificing
+one of the declared outputs or days. An average can improve while a real part
+of the support gets worse. The study's acceptance rule does not allow that
+tradeoff. Changing it after seeing the result would make a different claim.
+
+The uncertainty comparison resamples whole trials within each date. A bootstrap
+is a repeated calculation in which samples are drawn again from the observed
+support to examine variation in a statistic. Here each draw keeps every supported
+frame of a trial together. The same trial draws are used for both compared models
+and both output groups, so their difference is paired. There are 1,000 saved
+repetitions, and the interval uses the appropriate percentiles of their scores. Percentiles are cut points below which specified fractions of the scores lie.
+
+This does not make the selected validation data into untouched confirmation.
+The models were chosen using those dates. The 95-percent interval describes
+variation conditional on the selected models and those two dates from one
+animal. It is not a population guarantee, a test on another species or a
+prediction about every future day. Treating each overlapping frame as an
+independent animal would make the uncertainty claim much too strong.
+
+The complete development requirement has four parts. The candidate must have
+lower average error than the selected ridge. It must have no higher error in
+any date/group. The upper end of the paired candidate-minus-ridge interval must
+be below zero. Finally, every cell must have a defined positive ordinary
+$R^2$ that exceeds the corresponding association control. To obtain that score,
+compare the model's summed squared errors with the summed squared errors of
+always predicting this evaluation cell's observed mean, then subtract their
+ratio from one. That observed mean is a scoring reference, not an answer supplied
+to the deployed predictor. If the mean-reference error is zero, the ordinary score is
+undefined and cannot satisfy the requirement. A positive value means beating
+that mean reference; beating the association control is an additional check.
+Neither comparison alone establishes a biological causal mechanism. All four
+must pass.
+Separate history, order-use and extra-task benefit claims keep their own
+comparisons. A falling training loss does not replace any of these conditions.
+
+
+\section{How the earlier small models read recent history}
+
+The earlier NeuroTranslator implementation used small established models that read recent signal history. One such model reads a sequence while maintaining an internal numerical summary that changes with each entry. Learned controls regulate how much of the previous summary is retained and how much is updated. In this application, the sequence consists of completed neural or mechanical bins. The model's final summary and simple recent averages feed an output calculation for the specified target. The formal name of this model type is a gated recurrent unit: ``gated'' refers to those controls, and ``recurrent'' means that the updated summary returns for the next entry. It is a mathematical tool for predicting from history, not a model of every biological process involved in learning.
+
+In those earlier models, before the history-reading model sees spike counts, the pipeline applies a square-root transformation and numerical scaling calculated from training samples. The transformation and numerical scaling are parts of the saved model contract. They must be reproduced during execution, which means using the trained model to predict from a new valid input. Recomputing that scaling from the evaluation recording would change that contract and risk using information outside the declared training samples.
+
+The training sequence includes initial training to predict neural counts in the next bin for the relevant history-reading models. Initial training asks the model to learn patterns in the available training neural history before adjusting it on paired outputs. That adjustment then fits the model for a particular target such as velocity or processed muscle electrical signals. Neither step teaches a biological nervous system. Both change numbers in a software model. When this document says the model learned, it means that numerical optimization changed its fitted numbers.
+
+The output calculation matters as much as the history-reading core. One simple competitor combines recent time-scale summaries through fitted weights, with a penalty discouraging weights from becoming too large; its formal name is ridge regression. Another calculates fitted class scores and turns them into positive values that sum to one; its formal name is logistic classification, and it supplies the selected human finger-intent method. These simpler methods are genuine competitors. The project does not require a complicated model to win merely because the subject matter is neural recording.
+
+The original velocity history model has 232,388 fitted numbers, and the muscle-signal history model has 195,216. The sensory decoder and full-mechanics encoder have 38,802 and 21,266, respectively. The joint-only encoder has 18,696. The new-day velocity model trained without borrowing another model core has 256,045. These counts describe particular saved models. They do not establish that this size is optimal, that larger models cannot help, or that every task can be solved with the same architecture.\footnote{Local evidence: \texttt{paper/evidence\_matrix.json}, claim \texttt{compact\_architecture\_counts}, with paths to the corresponding metric artifacts.}
+
+A saved checkpoint contains the fitted state and associated processing information. Loading it later should reproduce the selected model's behavior. The package also exports plain numerical arrays and architecture descriptions for execution through NumPy, a numerical-array library. That makes the learned state inspectable without relying only on a training framework. It does not make weights automatically executable inside every chat service, and it does not make their predictions independent of the source and preprocessing that gave them meaning.
+
+The portable runtime mirrors the accepted prediction calculations and uses the same request validation as the existing protocol. Checks of numerical agreement compare its values with both saved examples and native execution. The value of those checks is practical: another compatible program can execute the same mathematical mapping. Agreement between runtimes is evidence about implementation fidelity. It does not create a new evaluation dataset or strengthen the model's biological claims.
+
+\section{Why the earlier implementation began with specialists}
+
+There is already substantial research on predicting from groups of neural signals and learning useful numerical descriptions. The Neural Latents Benchmark supplies common tasks for evaluating models using groups of recorded neurons, and FALCON emphasizes robustness when recording conditions change and recalibration is limited. Those efforts provide useful evaluation ideas and existing baselines. The present local results are not official scores on their entire benchmark protocols.\cite{nlb2021,falcon2024}
+
+Earlier published neural-data models study training across multiple recording contexts and handling populations with different recorded channels. One learns from activity recorded within brain tissue across contexts; another represents neural events and uses a selective information-combining stage to accept differing populations. These are relevant precedents for a broader shared representation. They do not imply that every mixture of recordings will improve every task, and they do not remove the need to identify whose channels are being used.\cite{ndt2_2023,poyo2023}
+
+Other model families observe different processes. BrainLM is a published model for activity represented in functional magnetic-resonance brain scans. Neuro-GPT is a published model that combines scalp electrical-signal processing with history modeling and evaluates classification during imagined movement. Those recording types have different instruments, sampling characteristics and interpretive limits from sorted electrical events recorded within brain tissue. Their use of learned representations is a reason to study methods suited to each observation type, rather than to treat all recordings as interchangeable text for one language model.\cite{brainlm2023,neurogpt2024}
+
+The earlier implementation therefore began with explicit specialists. The current LINK study tests a further narrowly defined comparison and keeps its failed improvement requirements visible. A model matched to one recording has a narrow source and target: this recording's recent events to this recording's defined velocity, or this source's mechanics to its expected sensory counts. Its limited scope makes failures easier to locate. If a shared model later improves meaningful comparisons on samples kept outside fitting, it can be admitted with its own evidence. The first shared two-task candidate did not meet that requirement and was rejected against the retained specialists.
+
+Local hardware also makes a bounded first implementation useful. The detected system has an AMD Ryzen AI Max+395 processor and about 125 gibibytes of memory, where the unit uses binary-sized rather than decimal-sized gigabytes. Those historical training runs used four processor threads, meaning four streams of processor work under the chosen setting. Those recorded PyTorch numerical-learning runs used the central processor; graphics acceleration was not verified for their workloads. The current LINK protocol also uses its specified CPU route. A separately reported tiny prefix took 4.565 seconds end to end on GPU versus 2.427 seconds on CPU and remained unpromoted. GPU means graphics processor. The prefix does not qualify full training, energy savings or subscription-cost savings. A large memory capacity is helpful for holding arrays and running local tools, but it is not evidence that this machine trained a large general model or accelerated work through unverified graphics hardware.\footnote{Local environment receipt: \texttt{paper/evidence\_matrix.json}, field \texttt{observed\_local\_environment}.}
+
+This hardware choice makes the prototype reproducible within a clearly described environment. It also limits what can be inferred about cost and performance elsewhere. A different processor, numerical library or thread configuration may produce different timings. The package's physics and native-model components have separate runtime requirements. A useful handoff tells the recipient which parts are lightweight model execution, which parts are cached replay, and which parts need a larger or different environment.
+
+Model size remains a choice to test. The broader design may need a larger shared core if it improves adaptation, robustness or estimates for recording types that are missing. It may instead hide a simple source mismatch or perform worse than a model matched to one recording. Complexity has to earn its place in that comparison, which must allow either outcome. NeuroTranslation is not defined by keeping every model small or by making every model larger.
+
+\section{How the earlier studies separated fitting and evaluation}
+
+When a model is fitted to examples, its predictions on those same examples do not by themselves show that it will work elsewhere. The project separates data used to fit its numbers, data used to select a model, and data used to describe its performance after selection. These sets are conventionally called training, validation and test samples. Their meanings depend on the actual data-division rules, not just the names printed in a file.
+
+The history-reading prediction procedures divide samples in time order, with roughly 70 percent for training and 15 percent each for validation and local testing, using trial rules matched to each source. A one-second gap at the boundaries prevents an input history or its next prediction target from casually crossing the edge between sets. Whole trials are retained where the source and analysis require it. Area~2 splits retain whole successful trials, and the sensory timing comparison uses a common set of times before validation chooses among the specified offsets.
+
+The boundary gap matters because adjacent windows overlap and because a model history can include samples from before its endpoint. A test endpoint just after a training boundary could otherwise contain much of the same input history. The gap and sample-coverage rules address that particular leakage of fitting information into evaluation. They do not remove every possible dependence in the underlying experiment or every source-side filtering choice.
+
+Validation has a legitimate but limited job. It can choose among predefined candidate decoders, stopping points or alignments. Once choices are made, test results describe the chosen procedure on the declared test samples. Repeatedly looking at test outcomes and redesigning the procedure turns that support into development evidence. A later independent evaluation needs fresh support appropriate to the new claim.
+
+Several results in this project have that development status. The human finger evaluation was inspected during an earlier pilot. Earlier test outcomes had also been inspected before the later shared-model comparison. Both transfer conditions and all four methods use the same local motor test windows. These facts do not make the computations useless. They change how strongly the results can support claims about new recordings and reliably measured performance differences.
+
+The models use numerical rescaling fitted only on training samples in the audited project calculations. However, earlier source processing can still include filtering, estimating between observations or rescaling done before the files reached this project. Those source operations can use samples beyond a live prediction's endpoint. A completed-window rule in the project cannot undo that earlier use of later samples. For that reason, the paper separates the samples used by its own calculations from timing in a living nervous system. A model can use only its declared recent bins while its target still carries processing from a broader source interval.
+
+Shuffled-input controls ask whether the association being used depends on the relevant alignment rather than a simpler artifact. Linear comparisons ask whether a complicated temporal model contributes beyond a simpler alternative. They answer different questions, so neither substitutes for the other. A future biological learning experiment would need additional controls on practice, assistance, task exposure and retention that these software splits do not supply.
+
+Samples kept out of fitting within one session still evaluate that session. Once a sample has been inspected, changing its filename cannot make it a fresh test. A fixed file-selection rule documents how an archived recording was chosen; it does not turn that recording into a test of future biological deployment. Report that history with the result so the reader can judge its scope without guessing how often it was revisited.
+
+\section{Results: Average Gains Failed the Required Tests}
+
+The study completed every planned run and saved all 720 epochs. The result is
+not missing because fitting stopped early. It is negative because the completed
+candidates did not meet their declared requirements. An independent audit supports
+the reported negative calculations after fitting; that is the meaning of
+``postfit''. It checks the report without establishing that the candidate models
+are scientifically effective.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering\small
+\begin{tabular}{p{.47\textwidth}rl}
+\toprule Model & Average squared error & Result\\\midrule
+Constant training-target mean &0.0317577871&Reference\\
+Linear, last sample &0.0314982382&Selected reference\\
+Linear, eleven samples &0.0383765124&History did not help\\
+Position history model, three-model average &0.0312304247&FAIL\\
+Position plus next-neural task, three-model average &0.0299609175&FAIL\\\bottomrule
+\end{tabular}
+\captionof{table}{Saved development summaries from one macaque and two dates. Lower
+average error is one requirement among several. Both history-reading models
+fail the full requirement. No values were recomputed for this manuscript.}
+\end{minipage}
+\end{center}
+
+The longer linear history performs worse than the last-sample linear model.
+That is a result for these fitted linear references; it is not proof that
+neural history contains no useful information. The two recurrent candidates
+produce lower average error than the selected last-sample ridge. That tells
+us one favourable fact about their aggregate score, but does not close the
+comparison.
+
+For the position-only candidate, the candidate-minus-reference average error
+is $-0.0002678134$. Its conditional 95-percent interval runs from
+$-0.0014148839$ to $0.0009468841$. Negative means lower candidate error; positive
+means higher candidate error. This interval crosses zero, so it does not satisfy
+the requirement that its upper end be negative.
+
+For the candidate with the additional neural-prediction task, the average
+difference is $-0.0015373207$ and the interval runs from $-0.0027586737$ to
+$-0.0003470099$. That interval does stay below zero. It is a genuine favourable
+aggregate description under the declared development scope. It still cannot
+override the other required checks.
+
+On February 11, the position-only model is worse than ridge for both measured
+groups: its squared-error excess is 0.0052471986 for index and 0.0061405635 for
+the combined group. The extra-task model is worse than ridge for index by
+0.0043574767. These are differences on the source-normalized sensor scale.
+They are not radians of joint error or newtons of force, and a conversion to
+those quantities is not silently supplied.
+
+Ordinary $R^2$ asks how squared prediction error compares with always predicting
+the evaluation cell's observed mean. One is exact agreement under that score.
+Zero matches that mean reference. A negative value is worse than the reference.
+The position-only model's second-day values are about $-0.099742$ and
+$-0.353799$. The extra-task model's values are about $-0.071162$ and $-0.116390$.
+Those negative values fail the requirement for positive information in each
+cell. A model can do better than a weak shuffled comparison and still fail
+that positive requirement.
+
+The training-mean skill score is separately labelled because it uses a different
+constant reference. It is not another spelling of ordinary $R^2$. Likewise,
+an error score is not a fraction of a skill learned. Keeping these definitions
+plain prevents a favourable-looking number from changing meaning as it moves
+from a report to a figure caption.
+
+All five further benefit claims fail their complete requirements: history for
+the position-only model; sequence-order use for that model; history for the
+extra-task model; sequence-order use for it; and benefit of the extra task over
+the position-only model. Some subchecks pass. The complete claims do not. Those
+outcomes remain recorded with the failures rather than being replaced by a
+single success label.
+
+The negative result can be checked without certifying the entire learning
+calculation. Both learning routes share Torch's automatic differentiation and
+Adam: the former calculates how the objective changes with the fitted numbers;
+the latter uses those changes to update the state. If both routes inherit a
+mistake there, they could agree for the same wrong reason. Their agreement
+cannot independently verify that shared machinery.
+
+A separate numerical route has to check more than a final score. The forward
+calculation makes a prediction. Derivatives describe how that calculation changes
+with its adjustable numbers. The update rule uses those derivatives and saved
+running summaries to choose the next numbers. A checkpoint saves fitted state
+at an epoch; the random-generator state also determines subsequent random
+choices. Restoring only part of that state could reproduce a prediction while
+failing to reproduce the next update. Complete independent numerical values,
+random-state continuity, reload behaviour, final-checkpoint predictions,
+derivatives, update state and the whole learning trajectory remain unverified.
+Checking them would establish the specified computation, not make an ineffective
+model effective or turn its software memory into biological memory.
+
+Those missing checks prevent a verified continuation. The final-checkpoint and
+update requirements remain unmet, no new fit is currently admitted, all reserved
+dates stay closed, and neither a decoder nor a GPU route has been promoted.
+The report supports these negative computational findings, not biological
+teaching, a universal neural language or completion of the programme.
+
+\begingroup
+\looseness=1
+The later day's index output poses a specific next question: why did it get
+worse? Keeping that failure visible makes the comparison useful even when its
+average improves. A further study would have to explain the failure under an
+independently admitted plan, without feeding the checking answers back into
+the predictor.
+\par
+\endgroup
+
+\section{Failure Cases}
+
+The saved diagnosis asks what shape the later-day index failure has. The model
+with the extra neural task predicts, on average, 0.058645 below the measured
+target in the source-normalized sensor units. About 78 percent of its excess
+mean squared error relative to ridge is the difference in squared mean error;
+about 22 percent is the difference in the spread of errors around their mean.
+Those are descriptive components of an already observed failure.
+
+A mean offset is not a cause. Different trial composition, a changing recorded
+relationship and a calibration change could all affect such a summary. The
+analysis leaves those explanations competing. It does not show which one
+occurred, fit a correction or give permission to add the validation answers
+to a prediction. Moving the predictions until their validation mean matches
+the target would use the checking data to adjust the model.
+
+A separate analysis looks only at the four training dates. It defines context
+as the average of the ten preceding neural bins in each existing eleven-bin
+window. That context is not an observed biological state; it is a specified
+summary of recorded features. The existing recurrent model already sees those
+bins. Showing that the summary varies cannot prove that a new branch will
+extract useful information from it.
+
+The training support contains 1,500 trials and 91,105 endpoints. The saved
+analysis divides summed feature variance into variation within a trial,
+variation between trials on the same day and variation between days. Variance
+summarizes squared deviations from a stated mean. For threshold-count features,
+the three shares are 71.56, 18.85 and 9.59 percent. For archived power features,
+they are 51.28, 13.55 and 35.17 percent. These shares give greater weight to
+features with greater variance. They are not percentages of the brain doing
+different jobs.
+
+An alternative calculation gives equal weight to dates, trials and frames
+within trials and produces similar fractions. That is another view of the
+same training support, not another cohort. These summaries have no population
+confidence interval and do not establish neural drift, a particular cell state
+or a benefit for decoding. The typical within-trial feature-to-target
+associations are weak. A proposed interpretation should remain proportional
+to those observations.
+
+The analysis also checks whether prior sensor labels are actually supported.
+Exact joins of source index, time, trial and ownership retain 89,605 endpoints
+with one supported prior sensor sample and 88,105 with two. When a beginning
+of a trial lacks a label, it stays missing. No value is interpolated and no
+sample is borrowed from a neighbouring trial. Sixteen combinations of the two
+prior-position quartiles have support on every training date. A quartile is
+one of four divisions of an ordered distribution; combining two four-way
+divisions gives sixteen cells.
+
+That support is useful for descriptive checks. It is not permission to feed
+body-position labels to a predictor meant to use neural input only. Nor are
+the correlated frame counts independent observations. The question for a new
+neural branch remains whether its available neural information improves the
+specified prediction under all the original controls.
+
+Even descriptive arithmetic can fail. The first analysis version missed the
+fixed tolerance for two skewness values, which measure distribution asymmetry.
+The absolute and relative tolerances stayed at $10^{-12}$. A corrected version
+changed only how the per-date skewness was accumulated. Its 768 checked values
+passed the named independent comparisons while all 119,848 other numerical
+leaves remained unchanged. The rejected report was retained. This accepts a
+limited calculation, not a model or a new fitting procedure.
+
+The proposed next branch would let past neural context modify the existing
+output. It would add 780 parameters and compress that context into four learned
+summaries that modulate the prediction. This is the proposed rank-four branch:
+rank restricts the numerical representation; it does not name four measured
+brain regions or an anatomical scale. The comparison would have to test constant
+context, broken association and altered order. Choosing a model strictly within
+training also requires a smaller fitting-and-checking division inside that
+training support. Whole trials must stay together in those inner divisions,
+and the divisions must be independently verified. Each inner fitting set must
+supply its own scale, counting its unique samples once. Scaling the already
+rounded, globally training-normalized packet again cannot establish that
+isolation: the inner checking samples may already have contributed to the
+earlier scale. Another scaling step cannot prove that their influence was absent.
+
+The proposal remains unexecuted and unadmitted for current fitting. It adds no
+body labels, date identities or validation offset corrections to the neural-only
+predictor. A new fitting stage would have to pass its source, interface, random
+state (the exact state of its random generators), derivative, update, selection and uncertainty requirements before any
+new result could be claimed. The four reserved dates remain closed. Proposed
+body feedback, reward-driven refinement and broader extensions also remain
+proposed; the description is not an execution report.
+
+
+\section{Earlier Model Results}
+
+The velocity model reports a prediction score of about 0.729 on the local samples kept out of fitting, compared with about 0.559 for the simple weighted-sum competitor. The score's formal name is $R^2$. It compares squared prediction error with the variation left by a prediction that always uses that output's mean reference value in the evaluation set, under the stated scoring definition. A value closer to one indicates a closer fit on those samples. It is not a percentage of biological understanding, and 0.729 does not mean that 72.9 percent of a skill has been decoded.\footnote{Local evidence: \texttt{artifacts/metrics.json}; evidence-matrix claim \texttt{mc\_rtt\_velocity}.}
+
+The corrected model for normalized muscle electrical signals reports about 0.704 versus 0.595 for the simple weighted-sum method. This average value hides considerable variation across channels. The weakest channel is about 0.088, while other channels are much stronger. A reader considering a particular muscle-related output must inspect its own performance. The average cannot certify every channel equally. These are local comparisons on the processed targets, not an official FALCON result or an identified force-control model.\footnote{Local evidence: \texttt{artifacts/emg\_metrics.json}; evidence-matrix claims \texttt{falcon\_emg} and \texttt{emg\_channel\_heterogeneity}.}
+
+The sensory decoder reports a prediction score averaged over physical output groups of about 0.710. The scoring averages five groups of physical outputs with equal group weight, rather than allowing a group with many columns to dominate simply because it has more columns. The distinction matters when comparing this value with a mean taken over individual outputs. Its meaning is reconstruction of the stated earlier source mechanics from this source's touch-area history.\footnote{Local evidence: \texttt{artifacts/sensory\_metrics.json}; evidence-matrix claim \texttt{sensory\_decoder}.}
+
+The full-mechanics sensory encoder gains about 0.177 bits per recorded spike over a constant count calculated from training samples. The joint-only encoder gains about 0.119. In plain terms, their predicted count means explain the recorded counts better under the chosen count-probability test than a constant training-derived mean does. The bits-per-spike unit expresses the difference between count-probability scores on a base-two information scale, divided by observed spike count. It is not the number of bits required to upload a movement or evidence that generated spikes would behave biologically.\footnote{Local evidence: \texttt{artifacts/sensory\_metrics.json} and \texttt{artifacts/\allowbreak{}sensory\_\allowbreak{}joint\_\allowbreak{}metrics.json}; evidence-matrix claims \texttt{sensory\_expected\_activity} and \texttt{joint\_only\_activity}.}
+
+The selected human finger classifier correctly classifies 45 of 50 evaluation trials, or 90 percent, compared with 68 percent for its recent-history model alternative. The evaluation is within-session development evidence because the run had been inspected earlier. A separate uncalibrated external-day pilot achieves 10 percent, matching the ten-class chance level. The favorable within-session result and unfavorable external result belong together: classification matched to one recording worked in one setting, while the broader uncalibrated claim did not.\footnote{Local evidence: \texttt{artifacts/finger\_specialist\_metrics.json} and \texttt{\mbox{artifacts}/\allowbreak{}\mbox{finger}\_\allowbreak{}\mbox{metrics}.\allowbreak{}\mbox{json}}; evidence-matrix claims \texttt{human\_finger\_intent} and \texttt{\mbox{human}\_\allowbreak{}\mbox{finger}\_\allowbreak{}\mbox{external}\_\allowbreak{}\mbox{failure}}.}
+
+These scores answer several useful questions without answering the final learning question. They show that specified quantities can be predicted from particular recordings, sometimes better than simpler alternatives. They expose differences in performance between channels and cross-day failure. They do not show how a new person would perform, whether a different task would work, or whether the predictions can teach a living trainee. Keeping each score attached to its target, baseline and support is how the proof stays proportionate to the evidence.
+
+\section{Fixed-Model Transfer Tests}
+
+Transfer learning asks whether a model's earlier training helps with a different setting. For a neural interface, the appealing hope is that a useful representation from one recording can reduce the work needed for another. The separate Indy day provides a real opportunity to test part of that hope. It changes the recording and target processing, and the experiment does not assume that individual cells can be matched across days.
+
+The original January 31 MATLAB file is 208,792,806 bytes. The publisher's file fingerprint and a locally computed fingerprint identify the acquired bytes. The source's residual/hash entries are excluded from the sorted-feature inventory, and the file does not supply a per-unit record of when each unit was observable. These details matter because a transfer result depends on the actual target source, not merely a date label or an array of convenient width.\footnote{Local source and experiment evidence: \texttt{artifacts/motor\_transfer\_metrics.json}; evidence-matrix claims \texttt{motor\_transfer\_controls} and \texttt{motor\_transfer\_budget}.}
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\makebox[\textwidth][c]{\includegraphics[width=160mm]{figures/recorded_replay.pdf}}
+\captionof{figure}{Recorded events from the separate Indy day alongside fingertip-velocity predictions from the freshly trained recording-matched model. Reference velocity is calculated from recorded fingertip positions. The channels identify this source's sorted features, without matching cells across days.}
+\end{minipage}
+\end{center}
+
+Four methods are compared. The transferred model learns a translation layer into a previously trained model core and output calculation whose existing fitted numbers remain fixed. A control uses a translation layer of the same size and a fixed core started with random numbers. A fresh model is trained for the new source without borrowing the previously trained core. The simple weighted-sum method supplies the fourth comparison. The random-core method is particularly useful because it asks whether the transferred core's prior learning adds anything beyond using a fixed structure whose output is more than a weighted sum of its inputs.
+
+Two label conditions were fixed before inspecting outcomes: the first five percent of eligible new training labels, and the full eligible training set. The small condition supplies 1,425 adaptation labels, corresponding to 28.5 seconds at the stated bin duration. It also uses 6,000 validation labels, or 120 seconds, and has 570.14 seconds of neural samples available for training. The previously trained source model previously used 22,598 training and 4,723 validation label windows. These additional sources of information must stay visible when discussing efficiency.
+
+``Five percent'' therefore refers to one adaptation-label budget. It does not mean five percent of all supervision used by the entire procedure. ``28.5 seconds'' does not mean that a person learned the skill in that time, that the method ran online for that duration, or that no other data was required. It is the duration represented by a particular set of paired adaptation windows. A fair future learning-speed claim must account for validation, prior training, training samples of neural signals without paired movement labels and actual deployment time.
+
+In the small condition, transfer using the fixed core has validation prediction score 0.393 and local test prediction score 0.425. The control with a randomly initialized fixed core has 0.312 and 0.331. The freshly trained model has 0.533 and 0.520. The simple weighted-sum method has 0.276 and 0.220. The previously trained core thus improves over the random-core comparison, but fresh training performs better. The result supports the narrow statement that prior core training carries useful information relative to this random control. It does not support admission over the strongest competing method.
+
+In the full condition, the transferred method has validation prediction score 0.683 and local test prediction score 0.704. The control with a randomly initialized fixed core has 0.631 and 0.646. The freshly trained model has 0.724 and 0.747. The simple weighted-sum method has 0.550 and 0.548. Again, fresh training wins. These eight method-condition rows use one fixed configuration and the same 6,050 local test windows; they are single reported values without uncertainty intervals from repeated runs with different random starting values.
+
+The admission rule required transferred validation performance to exceed every control by at least 0.01. Neither transferred condition qualifies. The freshly trained model using the full label set becomes the usable new model matched to this recording, while transfer with a fixed core remains rejected. The 0.747 local result cannot be read as a direct improvement over the original source's 0.729 because the recordings, labels and processing differ. What worked was local calibration on a distinct recording; transfer without new calibration and verified cross-day cell correspondence were not established.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\input{generated/transfer_table.tex}
+\captionof{table}{All eight fixed method-and-label conditions. Scores compare prediction error with a mean-reference prediction; closer to one means a closer fit on these samples. Adaptation labels exclude additional validation and prior-source supervision. All rows reuse the same local test windows.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\makebox[\textwidth][c]{\includegraphics[width=160mm]{figures/transfer_comparison.pdf}}
+\captionof{figure}{The previously trained fixed core helps relative to the random-core control, but fresh training performs better in both label conditions. Neither transferred model passes admission. The bars are single-run results, without repeated-run uncertainty intervals.}
+\end{minipage}
+\end{center}
+
+The separately trained shared two-task model was also rejected on validation. Together, these outcomes make the broader-design proposal more precise. A broader shared representation remains an idea to test. It is not already NeuroTranslator's successful universal core, and it has to beat appropriate specialists before replacing them.
+
+\section{Prediction Uncertainty}
+
+A prediction can be accompanied by a band that looks reassuringly scientific. The question is what the band was constructed to mean. NeuroTranslator uses limits calculated from validation prediction errors to supply constant-width bands for each output. An error here is the difference between a prediction and its reference. The chosen limit summarizes the size of those observed validation errors for that output. It is a practical diagnostic, not a complete theory of uncertainty.
+
+The nominal level is 90 percent per output. That statement concerns individual channels, not all channels at once. In the reported velocity case, mean test coverage per output is about 90.6 percent while simultaneous two-output coverage is about 84.8 percent. For the muscle electrical signals, the mean is about 90.1 percent but simultaneous coverage across all 16 outputs is about 43.5 percent. The sensory case likewise reports about 90.9 percent mean individual coverage and about 49.5 percent simultaneous coverage. These descriptive values show why a per-channel label cannot be promoted to whole-body confidence.\footnote{Local evidence: \texttt{artifacts/uncertainty\_metrics.json} and\linebreak[4]
+\texttt{artifacts/sensory\_metrics.json}; evidence-matrix claim \texttt{empirical\_bands}.}
+
+The windows overlap, and errors through time are correlated. The bands therefore do not receive a mathematical guarantee of future coverage merely because their limits were chosen from earlier errors. They do not separately identify sensor noise, imperfect labels, model uncertainty, source drift or absent observations. A broad band around a measured target is also not a way to create a missing spinal label.
+
+Classifier scores have a related limitation. A finger output of 0.8 is a normalized classifier score. Without calibration evidence, it should not be read as an established 80 percent frequency of correctness for all cases assigned that score. A model can rank classes usefully while expressing unreliable numerical confidence. The present interface calls the scores uncalibrated rather than encouraging a stronger interpretation.
+
+The joint encoder uses an explicit check against training ranges. It compares every angle in the input history with the training minimum and maximum for that coordinate, including a declared small margin for rounding and numerical error. An input outside those bounds is rejected unless the caller explicitly requests extrapolation. This is a useful guard against one obvious source of misuse.
+
+Range membership has a much narrower meaning than complete familiarity. Seven individually familiar angles can occur together in a configuration the model never saw. Familiar angles can also be traversed at unfamiliar velocities or accompanied by different loads and contacts. The training-range report therefore states that coordinate-range membership does not prove joint-configuration coverage and does not validate neural generation. Allowing extrapolation leaves those limits explicit; it does not clip the input into support and pretend the request became observed training-like data.
+
+A future system should distinguish several questions: what was measured with uncertainty, what a fitted model is unsure about, where the source has changed, which variable is missing, and whether the task permits the proposed action. Those questions may need different measurements and methods. The current prototype makes a useful start by keeping signal type, source identity, observed bands and support warnings separate. It does not claim a single confidence score that resolves all of them.
+
+\section{Earlier Software Tests}
+
+The historical NeuroTranslator snapshot exposed seven named operations through one request protocol. Each operation, called a port, declares its input and output. The protocol gives callers one way to request them while preserving those different meanings. Selecting the right port is part of the scientific contract: one operation must not silently take the place of another.
+
+The ports are original motor velocity, normalized muscle electrical signals, human finger intent, sensory mechanics reconstruction, full-mechanics expected sensory activity, joint-only expected sensory activity, and calibrated-day motor velocity. Their names describe the actual operations. They do not imply seven simultaneously observed pathways or a complete map of the nervous system. Two sensory directions share a source model family, and the other operations retain their own source identities.
+
+A request supplies the translator identifier, recording identifier, input kind and complete window. Spike requests must also supply the original ordered unit inventory. Mechanics requests must supply the recorded channel names, physical units and source frame. Timestamps can be declared for checks of time spacing, and an input-origin field distinguishes a caller's claim of recorded, source-derived, mixed, decoded or simulated input. That origin label remains a declaration rather than independent measurement authentication.
+
+The response identifies the output's source and checkpoint, names and units, time and reference kind. It states that predictions are not observed data. Expected sensory activity remains ``model-expected activity.'' The response says that it is not a neural stimulation command and is not an inference of missing spinal activity. The joint operation also returns its training-range report. These fields matter because downstream software may otherwise treat a plausible number as permission to make a stronger claim.
+
+The portable adapter runs an exported model for a caller. It reads the exported
+catalog---the saved list of model descriptions---rather than rebuilding that
+list from saved training states. It loads the plain numerical model exports
+and checks that their declared training-state fingerprint matches the catalog.
+A fingerprint is a computed identifier for file contents; this check compares
+the declared identities. The adapter then applies the same request-checking
+rules as the existing execution interface, preserving the source, unit, frame,
+time-spacing and integer checks. The model can therefore run without loading
+the training software. The recipient still needs a compatible execution
+environment and the supplied numerical software.
+
+The executable examples use actual included source-replay windows. Each example gives a request and an expected response. The historical live check compared all seven operations within the declared numerical tolerance of 0.000002 and required the other response metadata to match exactly. That tolerance concerns agreement between implementations, not error against a new biological recording. A wrong recording, reordered units, wrong mechanics units or frame, broken time spacing, fractional recorded count or stale model identity is a reason to reject the request. Rejection is part of the interface's functionality, because accepting the wrong contract would create misleading outputs.
+
+Concurrent execution does not merge clocks. If the application runs motor and sensory examples together, each result stays on its own recording's clock with its own offset. The display can coordinate playback as a user-interface choice, but that coordination is not a measured physiological synchronization. A future matched multilevel recording would need its own verified common time base before NeuroTranslator could claim a joined chain.
+
+Another AI or programmer can inspect the schemas, sources, example requests and model arrays, then execute the defined operations in a compatible environment. That is the handoff's practical portability: the same accepted computation can run with the same declared meaning. The archive should not be assumed to supply arbitrary biological skill programs.
+
+\section{Separate attempted-finger and simulated-keyboard tests}
+
+These October 4 studies have their own participants, sources, decisions and bodies. They are not the LINK comparison or replications of its improvement claim.
+
+\subsection{Recorded Finger Intent}
+
+The public recording came from one participant with tetraplegia, a condition
+that affects movement in all four limbs. The experiment cued the participant to
+attempt a finger movement. Its labels name those attempts. They do not supply a
+measured path of the finger through space, a measured muscle command or a
+recording of the participant playing an instrument.
+
+The three recording dates used for the later test were May 16, May 20 and May
+23, 2016. They are three dates from one person. The 150 later examples are not
+150 people. These dates contain posterior parietal cortex recordings, from a
+named region of the brain. They do not contain the matching motor-cortex,
+spinal, peripheral-nerve or muscle recordings needed to observe the whole route
+from brain to hand.
+
+The software counted recorded events in eighteen completed time bins. Each bin
+was 50 milliseconds long. Together, the bins covered the interval from 0.1 to
+1.0 seconds after the experiment's Go signal. The decision was released only
+when that window had finished. The earliest release was therefore one second
+after Go, not an instantaneous response.
+
+A new recording date also needed examples. Fifty early examples with known
+attempted-finger labels were used to adjust the model to that date. This is
+local calibration: using examples from where a model will be used. The later
+50 examples from the same date supplied its test. Changing from twenty to fifty
+early examples changes both the amount of data and how recently those examples
+were recorded; it does not isolate the effect of example count alone.
+
+The study kept each recording's unit identities separate. A unit number on one
+date was not assumed to name the same cell on another date. When an observation
+was missing, the software kept it unavailable. An unavailable channel did not
+become a measured channel with zero events.
+
+\subsection{Finger-Intent Model Comparison}
+
+The study compared seventeen fixed candidates. Earlier validation dates were
+used to select the model before the new test examples were opened. The selected
+model was a simple classifier: software that chooses one category from ten
+attempted-finger categories. It correctly chose 116 of the 150 later labels.
+The three date scores were 35, 44 and 37 correct choices out of 50. A population
+model given no early local examples made 11 correct choices out of 150.
+
+This result supports a specific calibrated mapping. It does not show that the
+same cells were identified across dates, that an unfamiliar person needs no
+examples, or that one model works for every organism. It also does not show that
+a large model would be a better use of this machine or dataset. The competitors,
+including the less successful models, remain in the evidence record.
+
+The recording contains cued attempts. The effect of seeing the cue has not been
+separated from the effect of attempting the movement. A correct category choice
+therefore cannot establish that the software read a general physical skill or
+that it reconstructed every biological command needed to carry it out.
+
+\subsection{Command Selection and Muscle Control}
+
+The body controller received the actual predicted category. A wrong prediction
+stayed wrong. The software did not look at the source answer and swap in the
+correct finger. Four right fingers could command four keys. Left fingers and
+the right thumb were retained in the record but could not command that body.
+
+The body was an openly available, generic human-hand simulation with 39 muscles.
+A previously trained policy supplied muscle excitation commands, numbers that
+control the simulated muscles. The wrist, thumb and movements that spread the
+fingers were held by braces. The requested motion used fixed fingertip targets
+and a half-second press-and-release pulse. These targets were engineering
+choices, not measurements of what the participant's muscles did.
+
+The body was initialized once for each whole recording. After that, positions
+and velocities advanced through the simulator. The controller did not overwrite
+the hand's pose to make a press look successful. Key contact, travel and release
+were checked in the physical model.
+
+The body carried out all 54 supported commands it received. That sounds perfect
+until we ask a different question: did those commands match the source attempt?
+Only 41 of the 60 supported right-finger attempts led to the correct contact.
+There were 13 unintended presses. The body could follow a wrong instruction
+accurately. That is why 54/54 command execution and 41/60 source-intention
+success must stay separate.
+
+Three controls make the distinction clearer. With every muscle command set to
+zero, no supported source attempt produced the right contact: 0/60. A reference
+control was given the true source labels and reached 60/60. That control measures
+what this body and controller can do when given the answer; it is not neural
+decoding. A third control deliberately assigned neural decisions to different
+trials. It reached only 4/60 source-intention contacts even though the body still
+carried out all 54 supported commands. The deliberate reassignment is an offline
+comparison, not a new recording of a nervous system.
+
+All source trials stayed in these comparisons, including unsupported attempts
+and mistakes. The recorded decisions were computed offline, then released on the
+original source clock after their windows had completed. Watching the replay
+at a normal pace does not make it live brain acquisition.
+
+\subsection{Simulated Musical Phrases}
+
+The muscle policy had already been trained in a separate phrase-and-chord task
+before the recorded-neural connection was tested. That study asked whether a
+simulated hand could carry out a requested sequence of notes through muscle
+commands. The policy received note goals, timing and fixed smooth fingertip
+paths. Recorded neural clips did not drive the original phrases, and during
+the later held test it received no teacher actions.
+
+The 32 episodes combine eight phrase orders, two tempos and two starting poses;
+they are not 32 people or animals. The generic four-key simulated hand keeps
+its wrist, thumb and finger spreading braced and uses scripted smooth fingertip
+targets. These episodes test the goal-driven policy; the recorded-neural
+classifier above answers the separate attempted-finger question.
+
+The held cases used phrase orders, irregular rhythms, chords, tempos and starting
+poses reserved before tuning. The selected corrected policy completed all 32
+phrases. It produced 704 intended strikes and 192 chords, released the keys on
+time and made no extra presses. The starting policy completed no whole phrases.
+The first new fit completed 20. The named reference controller completed 24.
+Zero muscle excitation completed none. Independent numerical replay checked the
+saved trajectories and scores.
+
+The original evaluator ended with exit code 143. That means it was terminated; why it stopped is unknown. It had already saved the complete closed results and final output. A separate full replay checker exited 0, meaning that checker finished successfully. These two facts must both be reported. The virtual spring-key limits are soft constraints, not rigid stops. Key travel can therefore exceed the nominal 6 millimetres. The saved poses and travel were not clamped, meaning forced into an allowed range, or invented to make the display look better. This remains a computer simulation.
+
+Local training of that muscle-policy study took about 2 minutes 36 seconds.
+The later neural-candidate training and validation took about 24.7 seconds.
+Those are saved software runtimes. Recording acquisition, labeled calibration,
+physical checks and independent verification require additional time. Neither
+runtime says how long a living trainee would need to learn.
+
+These are useful results in a constrained numerical body. They do not show that
+the participant played those phrases, that a pianist's neural skill was uploaded,
+or that a living hand learned music. They show that a saved learned policy can
+carry out specified goals through simulated muscles, and that a separate
+recorded-neural classifier can supply a narrower set of finger goals.
+
+
+
+\section{Human Arm Simulation}
+
+A predicted movement quantity can be statistically accurate yet lead to an unsuitable physical command. Muscle-and-skeleton simulation provides a separate check on that gap. The human-model branch uses an open MyoArm asset from the MyoSim/MyoSuite ecosystem and runs its dynamics through MuJoCo. These are existing community tools, not anatomy or physics invented by this project.\cite{myosim2026,myosuite2022,mujoco2012}
+
+The model has 63 numerical muscles that produce forces, with internal responses that change over time. The experiment explicitly converts two velocity components into shoulder-and-elbow angle goals, while other independent joints are braced. This reduction is a choice about a bounded engineering test. It does not reconstruct a whole posture from two numbers or identify a macaque-to-human neural correspondence. The target velocity and human body remain distinguishable parts of the chain.
+
+The controller applies muscle excitation commands that stay within declared nonnegative limits. Excitation is the requested drive supplied to the numerical muscle. Activation is the muscle model's changing internal response to that drive; the two are not the same value, and activation does not change instantly. The controller accounts for the linked shoulder-girdle loads through a calculation that relates the modeled forces and motions to the controlled joint angles. The simulation updates 500 times per second. It does not obtain success by overwriting joint angles with the desired pose, and it does not use recorded movement as feedback. Extra artificial joint-turning forces do not replace the muscle drive. Recorded position-derived motion is reserved for evaluating the resulting path.
+
+The correction branch uses feedback about the simulated body's position and movement, plus speed and acceleration limits. These can change the command target itself. That creates two legitimate but different scoring questions: how closely does each branch follow its own command, and how closely does each follow a common scoring reference derived from recorded movement? Reporting only the first could exaggerate the correction's apparent value by ignoring the altered target.
+
+In the bounded 500-bin replay on the new recording, the typical corrected tracking error relative to its own command is 0.0374 radians, compared with 1.5803 for the raw command sent without feedback correction. Against the common recorded-motion reference after conversion to this body, corrected error is 0.26302 radians and raw error is 1.49325. Here ``typical error'' uses a root-mean-square calculation: errors are squared, averaged and square-rooted, so larger deviations contribute more heavily. A radian is an angle unit, with a full turn equal to about 6.28 radians. The common-reference comparison makes the target difference visible.\footnote{Local evidence: \texttt{artifacts/motor\_transfer\_physics\_metrics.json}; evidence-matrix claim \texttt{new\_day\_muscle\_retargeting}.}
+
+The corrected maximum anatomical-limit penetration is about 0.000406 radians, below the declared 0.001-radian numerical tolerance. The raw replay violates that tolerance in 75 of 500 frames. These are model-coordinate checks under the numerical setup. They do not prove that a real subject's tissues experience the same loads or that a decoded command is biologically correct. A simulator's constraint is only as relevant as the model and task that define it.
+
+The improvement belongs to the bounded controller after movement has been converted between bodies under the explicit rules. It remains a genuinely muscle-driven trajectory, and the scoring reference was not secretly supplied as feedback. This separates decoding quality from physical correction: the changed stage explains the improved trajectory without claiming recovery of hidden spinal signals or learning in the nervous system.
+
+The human branch remains a reduced adapter. Its success cannot erase the failures in the native macaque branch, and it cannot justify sewing or fingertip manipulation in a model whose tested control concerns two larger arm coordinates. Physical grounding starts with a named task and a named body, then expands only when the additional coordinates, contacts and evidence are actually present.
+
+\section{Macaque Arm Geometry and Remaining Errors}
+
+The separate macaque body comes from the model family used for the source's arm analysis. It is closer to the relevant anatomy than a human arm with two controlled angles. It has seven source coordinates and 39 muscle-tendon paths. A coordinate is an independently named angle or motion setting in the model. A muscle-tendon path is the modeled route from one attachment to another, including how the route passes around nearby structures. The model's hand is rigid: it has no separate finger motions.\cite{chowdhury2020,limblabmodel2026}
+
+The retrieved revision postdates the source paper. Source-family membership is useful, but it does not prove that this revision is the exact model used for the original subject analysis. Matching joint names and units is not enough to certify matching specimen geometry. The project preserves that uncertainty. A later improvement in numerical agreement should not retroactively be described as recovery of the original subject's true anatomy.
+
+The retrieved original model also contains zero-valued rate properties in its older muscle formulation. With those settings, it cannot calculate the required force-driven motion while keeping its numerical states finite. A separately named numerical fork restores 117 properties to defaults provided by the modeling software. A fork is a distinct saved version, not a silent edit of the original. The original geometry and the assumed default-rate version remain separately identified.\cite{opensim2018}
+
+Using software defaults makes a numerical experiment possible, but does not measure the subject's physiology. The assumed rates are not recovered activation times, tendon properties or force capacity. This distinction is especially important when a controller fails. The failure may reveal a limitation of the numerical assumptions or control design, but it cannot be assigned to a particular biological mechanism without further evidence.
+
+Three native-body controller candidates are retained as rejected experiments. The first concerns an earlier source case with a different way of combining errors across joints. The actual-tendon-force feedback candidate measures modeled tendon forces and uses them in correction, yet still fails its reserved source comparison of tracking across all seven joint angles. This case had already been inspected before the initial-speed protocol was corrected, so the corrected rerun is development evidence rather than a fresh uninspected test. On its reserved source trial, its typical error is about 0.05505 radians, compared with about 0.04512 for the tonic baseline, a simpler controller that maintains its defined steady muscle drive. This error calculation squares all angle errors, averages the squared values across coordinates and time, then takes the square root. It does not average seven separately calculated typical errors. The more elaborate feedback is worse on that comparison.\footnote{Local evidence: \texttt{artifacts/native\_force\_metrics.json}; evidence-matrix claim \texttt{\mbox{native}\_\allowbreak{}\mbox{tendon}\_\allowbreak{}\mbox{feedback}\_\allowbreak{}\mbox{rejection}}.}
+
+The short-horizon candidate tries possible commands in a copied model state before choosing what to do. It improves a synthetic validation comparison, from about 0.01989 radians for the tonic baseline to about 0.01270. On the reserved recorded-source case, however, it produces about 0.05971 radians versus about 0.03263 for tonic. It is rejected. Better performance on the synthetic validation case does not permit substitution for the failed source case.\footnote{Local evidence: \texttt{artifacts/native\_horizon\_metrics.json}; evidence-matrix claim \texttt{\mbox{native}\_\allowbreak{}\mbox{horizon}\_\allowbreak{}\mbox{rejection}}.}
+
+The copied-state planner also takes about 4.52 seconds to plan each 20-millisecond source interval. That is an offline experiment. Showing the resulting cached trajectory at normal playback speed does not turn its planning into real-time control. The checks that isolate copied state and restore model-owned control functions are useful implementation evidence, but the latency and tracking failure remain part of the result.
+
+These failures give the architecture a concrete next problem: establish a stable, applicable numerical muscle-driven body and controller before asking it to evaluate learning rewards. The successful human-model movement-conversion branch does not answer that problem, because it uses different anatomy and a reduced task. A source-looking body is a better starting point for a source task, but its numerical behavior still has to earn its place through measurement, calibration and appropriate controls.
+
+\section{Muscle Paths and Physiological Validation}
+
+The native geometry audit reproduced an invalid muscle detour around a wrapping surface associated with the ulna, one of the forearm bones. A wrapping surface is a modeled obstacle that keeps a muscle path from passing straight through a bone or another structure. Here, a doughnut-shaped surface, formally called a torus, produced the detour in both the original geometry and the default-rate version. Making the muscle rates finite had therefore left the route problem unresolved.
+
+The correction uses a rule derived from attachment topology. Topology here means which attachments and path segments are connected, rather than how an anomalous frame happens to look. The rule restricts three named wraps to the unique original segment from the humerus, the upper-arm bone, to the ulna in the forearm, using the software's numbering convention that starts at one and includes both ends of the selected range. No muscle, bone, attachment point or wrap shape is deleted to make the image nicer. The saved version names the three changed ranges and preserves the original model separately.\cite{limblabmodel2026,opensim2018}
+
+Across seven inspected anomalous frames, the correction removes 14 contacts outside that wrapping surface while retaining all seven coordinates and 39 muscles. It is tested on training samples, on already inspected diagnostic frames, and on a newly reserved same-session geometry window. Those supports have different evidential status and are reported separately. The checks also inspect the saved rotations and positions of rigid body parts and changes in path length as the joint angles change. They establish specified numerical behavior, not an independent anatomical measurement.\footnote{Local evidence: \texttt{artifacts/monkey\_wrap\_candidate\_metrics.json}; evidence-matrix claim \texttt{\mbox{topology}\_\allowbreak{}\mbox{range}\_\allowbreak{}\mbox{candidate}}.}
+
+A later comparison finds a broad length mismatch between this model family and the source-model-derived reference lengths. The project fits one common length factor using 128 training poses and all 39 ordered references. A pose is a set of model coordinates at a stated instant. To choose the common factor, multiply each model length by its matching reference length and add those products, then divide by the sum of the squared model lengths. That calculation chooses the single multiplier with the smallest summed squared length error on the training poses. It does not fit a separate shape to every pose or every muscle. The factor is 1.2413815, so the numerical scaling is about a 24 percent increase. It is estimated from training poses only and then kept fixed for separate validation and test poses.
+
+On those separate poses, the typical length discrepancy falls from about 27.75 millimeters to about 0.552 millimeters. This is substantial agreement with a specific reference. The reference is itself produced by tracking and muscle-and-skeleton analysis; it is not a collection of directly measured fiber lengths. Consequently, the fit demonstrates improved agreement between modeled quantities under the stated source conventions. It does not identify individual bone dimensions, tissue mass, strength or activation rates.\footnote{Local evidence: \texttt{artifacts/source\_scale\_frozen.json} and \texttt{artifacts/\allowbreak{}source\_\allowbreak{}scale\_\allowbreak{}metrics.json}; evidence-matrix claim \texttt{source\_scale\_fit}.}
+
+A separate saved version applies the frozen factor through the official OpenSim scaling tools. This is stronger numerical evidence than multiplying exported lengths after the fact: the model itself is scaled and its computed lengths are compared with the prediction from the single factor. Their maximum disagreement is about 6.13 micrometers. A consistency check on the modeled moment arms, the leverage distances relating joint rotation to muscle-path length, is within about 0.181 millimeters. These remain checks of the numerical model.\cite{opensim2018}
+
+The scaled version retains the assumed original masses and applies the corresponding geometric updates to rotational resistance and muscle-length parameters. No mass, inertia or physiology was measured for the subject through this operation. Dynamics and control are blocked for this scaled geometry-only version. Its 400 displayed observed and decoded poses reuse diagnostic frames and are not a fresh evaluation of decoded-pose accuracy. The number counts displayed model states; it does not add independently recorded subjects or a new test.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\makebox[\textwidth][c]{\includegraphics[width=160mm]{figures/length_fit.pdf}}
+\captionof{figure}{One common length factor, fitted on training poses, reduces mismatch on separate validation and test poses. The reference lengths come from source tracking and body-model analysis. Agreement with those lengths does not establish physiological calibration.}
+\end{minipage}
+\end{center}
+
+The order of events also matters for explanation. The known observed wrap anomaly occurs later than the evaluated window of the failed lookahead controller. The later geometry correction therefore does not establish that wrapping caused the earlier controller rejection. A useful repair can coexist with an unresolved failure. Treating every newly found defect as the explanation for every old result would replace testing with a convenient story.
+
+\section{Template Anatomy and Participant Anatomy}
+
+A template brain is a useful reference shape. It is not automatically the brain
+of the person or animal whose electrical activity was recorded. Registration
+means establishing the spatial relationship to that actual subject with
+appropriate independent evidence. A template can illustrate where hand motor
+cortex generally lies while leaving exact electrode and neuron positions
+unresolved.
+
+The current source reconstruction reproduces 122,284 template points, 244,760
+triangles and 81,924 atlas values. The points are vertices: locations joined by
+triangles to make a surface. An atlas supplies region labels within that
+template. Three source MRI planes also match the named source. Those are useful
+checks of source correspondence, rather than proof that every biological
+interpretation of the image is true.
+
+The mesh checks ask a narrow question: are these surfaces joined in the
+specified way? The two mid-cortical surfaces pass the specified closed-surface
+connectivity checks. Their Euler characteristic is $+2$: count the vertices,
+subtract the edges and add the triangular faces. That number summarizes mesh
+connectivity; it does not measure how closely the shape matches the recorded
+subject. The optional region boundary still contains 432 open edges, 838
+inconsistent triangle directions and six invalid point neighbourhoods. Those
+defects remain even though the other surfaces passed their own checks. A
+second reader using the established nibabel imaging library was unavailable.
+
+What can this template tell us about the recorded subject? The source checks
+do not register that subject, identify individual neurons, establish a region's
+function or supply an absent peripheral nerve measurement. A colour needs a
+declared value, source and time; brightness cannot improve the recording's
+spatial evidence.
+
+A lifelike, tangible three-dimensional model would make the anatomical
+comparison inspectable. To judge it, we need a series of identifiable real-world
+references covering the relevant structures, views, poses, conditions and scales.
+One convenient picture cannot cover them all. Each reference must identify its
+original source, organism, body part, task, measurement method, units or scale
+and the exact feature it supports. Derived geometry and synthetic images retain
+their labels; neither supplies independent ground truth.
+
+The comparison has to follow a part into the assembly. A plausible forearm
+could still meet a floating muscle, an implausible interface or an impossible
+joint pose. Comparable pose, projection and scale let reference and model views
+test those relationships. Close-ups, tilted orthogonal views along perpendicular
+axes, biological identification colours, transparency and cutaways can reveal
+them; the reveal still needs measured agreement.
+
+Function adds another comparison. A displayed signal must keep its site, source
+clock, measured quantity and availability, with recorded channels, predictions
+and simulated muscle activation separately labelled. Body claims need held-out
+movement, joint and force comparisons wherever those quantities are claimed.
+Those physical measurements, full lifelike-anatomy review and independent
+part-plus-assembly reference acceptance remain missing.
+
+The four historical figures here are diagrams and numerical plots with their
+original evidence scopes. They explain relationships; they supply neither
+newly validated lifelike 3D biological models nor the missing anatomical and
+reference-series comparisons.
+
+\section{Application Performance}
+
+The graphical user interface, usually called a GUI, should help a reader follow
+the evidence chain. Choosing another source must change the source label and
+clock rather than leaving a convincing stale value on screen. A gap in recorded
+support must remain a gap. A camera reset must not change the scientific meaning
+of a pose. Playback should show which values were measured, predicted or
+simulated, and whether they are current for the selected source interval.
+
+The bounded original-control checks contain evidence for source switching,
+source gaps, replay and camera/restoration behaviour. Their acceptance is scoped.
+It is not whole-GUI acceptance or a measurement of better performance. Full
+source-clock, geometry, material, renderer-lifetime, functional-map, device,
+anatomical-reference and offline criteria remain binding.
+
+The separately checked hand replay is deliberately a saved-data component.
+It automatically loads only an explicitly identified current cached replay.
+The demonstrated cache has 336 frames with a 20-millisecond source interval.
+Play, pause, seek, single-frame stepping and restoration have component-level
+evidence. If no cache exists for a selection, the component does not quietly
+request a new run. Missing values appear as dashes. An unavailable or failed
+source clears the prior replay and geometry instead of presenting it under a
+new identity.
+
+Its saved development example shows 22 of 22 correct strikes, 6 of 6 chords,
+22 of 22 timely releases, 34-millisecond worst timing error and no extra strike.
+A chord means more than one requested key at a time. Those values describe
+one constrained simulation example. They are not a replacement for the separate
+32-phrase evaluation or the recorded-intention-to-contact study. Separate human
+neural clips do not drive the goal-driven hand policy.
+
+Opening the online candidate requires its whole directory. HTML is the entry
+file a browser reads to assemble the page. Moving opaque resources out of it
+reduces that file from 113,298,857 to 34,295,597 bytes, while the complete
+candidate directory remains 93,831,812 bytes. The resources have moved within
+what must be delivered; the smaller entry file does not contain the application
+on its own.
+
+The separate static offline export preserves the original source and occupies
+113,581,899 bytes. Its supported static content can be accessed without the
+running online service, but research views that require the application service
+interface, or API, remain unavailable. Testing that original-source export and
+testing the whole-directory online candidate are different tasks.
+
+File sizes establish a static packaging result. They supply no measured change
+in page-loading time, interaction speed, memory, crashes or graphics-processor
+performance. The candidate's browser route was unavailable, so the candidate
+remains unpromoted; an asset archive and a source check cannot fill that missing
+interaction test.
+
+The practical consequence is also scientific. An old trace under a new source
+label suggests a relationship that was never observed. A zero in place of a
+missing measurement asserts activity the recording cannot support. A saved
+replay presented as a fresh model run hides its development status. Delivery
+and playback have to preserve those distinctions before the reader can judge
+the displayed result.
+
+The human EEG/ESG/ENG/EMG preview has its own evoked-stimulation context and clock.
+The macaque-derived human-arm branch has its own prediction and simulation
+chain. The GUI must not combine their appearance into a claim of simultaneous
+voluntary cortical, spinal, peripheral and muscle control. A hypothetical
+biological teaching view must likewise stay hypothetical. The screen can
+explain a missing link; it cannot measure it by drawing an arrow.
+
+
+\section{Earlier Viewer}
+
+The application is intended to let a reader follow the chain rather than accept a still image. Source controls select a recording or an observation view. Replay shows recorded inputs and appropriate references. Model outputs identify what was predicted. Body views distinguish reference geometry, decoded geometry and numerical muscle-driven motion. Their coexistence makes comparison easier, but their labels remain necessary.
+
+A moving skeleton can come from several routes. It may show joints obtained from upstream tracking and analysis. It may show joints predicted by a neural model. It may show the outcome of a numerical controller that acts through muscles. In the first two routes, the displayed pose can be set directly from coordinates for inspection. In the third, the motion follows the simulated forces and dynamics. Only that third route tests whether the chosen controller can move the numerical plant under its rules.
+
+Playback has another distinction. A cached trajectory has already been computed and can be displayed smoothly. Paced playback controls how quickly the user sees stored frames. It does not report the time originally needed to compute them. The native lookahead result is the clear example: a normal-speed replay can show an offline plan that required seconds for each short interval. A real-time claim would need actual end-to-end timing under the deployment conditions.
+
+The natural-language interface translates supported user requests into structured task descriptions. A person can ask to practise a slow precision reach or replay a supported recorded task. The compiler identifies a task, parameters and whether the available implementation can train or only display it. The structured description is written as JSON, a common text format with named fields and explicit values. This makes the request inspectable before execution.
+
+The language interface turns a supported request into a specification the application can execute. That is its demonstrated role. Arbitrary prose does not become a verified neural program through the same step. A sewing request still needs sewing observations; a puzzle-manipulation request still needs tested object contacts and individual fingers. A fluent response cannot supply capabilities absent from the files and body model.
+
+Sewing, Rubik's Cube solving and breakdancing remain future composite tasks. Sewing would need tested needle, fabric and fine-finger interactions; puzzle manipulation would need object contacts and controlled fingers; breakdancing would need whole-body balance and changing contacts. Each would also need recordings and outcomes appropriate to its learning claim. A reach primitive can be a useful component without becoming evidence that the complete task has been learned.
+
+The skill-practice branch adapts two simulated controller gains. A gain is a number that determines how strongly the controller responds under its chosen rule. The learner compares outcomes using verified tracking error, effort and joint feasibility, and records reward/error curves and body replay. Its competitor is the existing controller, which is itself a candidate. Improved gain values can demonstrate a better numerical parameter choice for this setup; they do not demonstrate biological plasticity, retained human skill or a general reinforcement-learning trainer.
+
+An interface can name a supported practice task, show its numerical history and body model, and expose where the controller failed. Showing the assumptions alongside those outcomes helps the reader judge the software. Whether a living trainee retained a skill after assistance stopped requires a different test.
+
+The application also preserves missing observations. A source view that lacks motor spinal channels should say so. A human surface preview should remain an evoked experiment on its own clock. A hypothetical organism render should remain a concept. This is not merely cautious captioning: these labels determine whether a downstream user interprets the system as replay, prediction, control or teaching. A truthful live demonstration can be ambitious while keeping those operations visibly different.
+
+\section{Digital-Fly Validation}
+
+A detailed neural map can support a useful prediction and still leave important
+predictions wrong. Shiu and colleagues tested a fly connectome-derived model
+with real perturbations and behavioural outcomes. Their tested successes
+coexist with missed effects involving Phantom and Usnea and wrong predictions
+for G2N-1 and Usnea in water-related silencing comparisons. Those are named
+circuit examples, not proof that the whole fly is wrong in every setting.
+Missing baseline activity and chemical mechanisms are among the discussed
+limits, including neuropeptides: small chains of amino acids used as signals.
+Those possible limitations are not uniquely established causes for each error.\cite{shiu2024}
+
+This is the positive standard too: a useful approximation earns its credibility
+through a test tied to a specified prediction. It does not need a claim of
+complete biological identity. A model can help science by showing where a
+structural explanation succeeds and where an additional measurement or mechanism
+is required. Retaining failures makes the next question more specific.
+
+The official Eon technical account from March 2026 describes a different
+engineered integration. It combines a fly-derived brain model with body
+controllers and hand-chosen interfaces. It acknowledges largely missing state
+and plasticity and internal dynamics that were not yet validated against
+relevant known patterns.\cite{eon2026} That account supplies dated developer
+disclosures, not an independent full-animal reproduction test. A sparse motor
+interface can produce an impressive body demonstration while leaving the
+biological mechanism unproved.
+
+Two other source examples show why added software must remain visible. The
+pinned fly-chess code includes symbolic board inputs, a reduced mathematical
+network, a trained readout and external legal-move logic and lookahead. The
+pinned DoomFly code uses a different male nervous-system map, adds enemy
+geometry obtained from the game engine and trains an action readout. Its
+authors describe the failure of the originally intended looming-vision route.
+These are inspected software sources and author reports, not measured evidence
+that a living fly learned chess or Doom. Their playing strength was not
+independently reproduced here.\cite{flychess,doomfly}
+
+There is no verified primary evidence here that a FlyWire-derived brain
+performed something no fly could ever do in a lifetime. The source-supported
+criticism concerns the engineered inputs, controllers, mappings and training
+that supply the software's capabilities. Their biological interpretation
+remains unvalidated; a more dramatic impossibility claim would add no evidence.
+
+Body simulation has its own failure modes. NeuroMechFly v2 reports that simulated
+leg tips can sit slightly below the ground because of numerical errors or
+instabilities. Its authors use a 0.05-millimetre margin to avoid a false detection
+of excessive stretching.\cite{neuromechfly2024} That is a documented contact
+artifact. It is not proof of gross tunnelling, perpetual motion or a FlyWire
+brain's impossible ability. A small explicit error is more scientifically
+useful than a larger invented one.
+
+Published first-hand accounts of other simulations describe creatures exploiting
+numerical integration or contact errors that supply artificial energy. A model
+can then appear to move well for a reason that real physics would not permit.
+The error needs a physical repair and a new check; an improved optimizer would
+otherwise learn the error more effectively.\cite{surprises2018}
+
+An objective can fail even when the physics is not the problem. In the reported
+CoastRunners example, the agent kept circling reward targets rather than finishing
+the race. Its score improved while the intended outcome did not.\cite{specgaming2020}
+This is why a reward curve needs independent task outcomes. The number optimized
+must be checked against what the experiment was supposed to accomplish.
+
+The protein example has a similar lesson about scope. The original AlphaFold3
+paper reports 62.9 percent success on its specified structural-interface benchmark,
+with a 95-percent interval of 51.4 to 73.5 percent. That result averages over
+65 interface clusters from 71 complexes and uses a structural agreement threshold
+and confidence-ranked samples: 1,000 seeds times five generated samples per
+target. The model generates these candidate structures by refining noise in
+stages, a method called diffusion sampling. DockQ is the structural-interface agreement score, and success means
+it exceeds 0.23. These generated samples are not independent biological
+experiments. Its 37.1 percent complement is the complement
+for that benchmark, not the percentage of every protein that fails to function
+in real life. Structure and biological function are different endpoints.\cite{alphafold32024}
+
+Crystallization is a real obstacle for some measurements, but it is not the
+only route to a structure. Cryo-electron microscopy uses electron images of rapidly frozen samples. Nuclear magnetic resonance measures how atomic nuclei respond under controlled magnetic conditions. These provide other methods, each with limits. We do not infer that most
+unknown proteins are unknown because they fail to crystallize.\cite{pdbmethods}
+Missing measurements are an important problem without inventing a universal
+failure percentage to describe them.
+Training can also draw on generated examples without every example containing neural signals, muscle activity and movement measured together. A simulation can supply an example; a model can supply a predicted training target, called a pseudo-label. Those values remain generated or derived. Agreement with the model or musculoskeletal simulation that produced them is not an independent measurement of living biology. Generated test examples can check a specified calculation, but they cannot fill a missing measurement. Biological claims still need comparison with independent measurements in the stated domain.
+
+There are stronger positive examples for brain--body interfaces. Lorach and
+colleagues linked measured cortical signals to spinal stimulation and evaluated
+actual standing and walking in one participant with chronic tetraplegia. The
+movement happened in the person rather than only on a display.\cite{lorach2023}
+The interventional outcome supports the stated single-participant interface;
+it does not establish every possible decoder, biological skill transfer or
+complete nervous-system virtualization.
+
+Our own claim should follow the same discipline. Ask which quantity was observed,
+which mechanism was assumed, which outcome was independently measured and which
+comparison failed. Then state the tested domain. A realistic animation, a
+correct guess and a validated biological model remain different things even
+when all three look persuasive at first glance.
+
+
+\section{Prediction and Reward-Based Training}
+
+For a particular neural-to-body prediction, measured paired examples tell us which observations belong together. A supervised model receives an input and its corresponding desired output during fitting, then faces examples withheld under the stated rules. This gives the signal-to-target claim a reference before a controller changes actions to earn a reward. A movement component can also learn first from qualified movement-only data. That complementary route can supply a useful starting representation without supplying neural labels that were never recorded; its transfer still has to be tested.
+
+The information supplied at prediction time defines the claim. An EEG-only
+predictor may use scalp observations and declared available context; it cannot
+secretly receive the muscle or movement target it is supposed to predict.
+EMG-only, movement-only and explicitly combined predictors answer other useful
+questions and need their own labels and matched comparisons. Muscle or body
+measurements may help teach a model during an explicitly declared training
+procedure without remaining available to the deployed EEG-only route. Such
+training information is called privileged because the deployed predictor does
+not have it. Independent evaluation must verify that the privilege ends where
+the claim says it ends.
+
+Physical correction comes next, with the decoder held fixed. The controller can ask whether the decoded quantity leads to a feasible bounded movement in the numerical body. Holding the decoder fixed makes the comparison easier to interpret. If corrected motion improves, the improvement belongs to the control stage rather than being confused with a newly trained neural representation. The current human-model branch supplies a limited example of that separation.
+
+Only after the relevant body and controller are stable does a reward-driven correction rule become a candidate worth testing. Such a rule would add a bounded correction to the existing command. Reinforcement learning is the general approach of changing action choices according to evaluated outcomes. In this project, any future such refinement must start with outcomes that the simulator can actually verify and with a fixed comparison against the supervised decoder and baseline controller.
+
+Possible rewards include tracking a specified target, respecting joint and contact constraints, controlling effort, limiting abrupt changes in muscle-drive commands and completing a defined task. These are numerical criteria. Their meanings depend on the body model, sensors and task. A tracking reward can verify movement toward the simulator's target; it cannot independently verify the unobserved spinal command that supposedly produced that movement.
+
+A controller can appear excellent when its answer is hidden inside its input. Feeding the recorded reference into action calculation changes the question being tested. Keep hidden test targets out of deployment. In the present bounded muscle replay, recorded position-derived motion is reserved for scoring and is not supplied as feedback. Future training and evaluation must disclose the information the agent receives.
+
+Robustness also needs more than one successful trajectory. Future tests should hold out recordings and relevant body/task conditions, and should compare changes in morphology, friction, delay and measurement quality where those variables apply. A learned correction that exploits one plant's convenient numerical quirk may fail under another plausible setting. The test should be selected for the claim being made rather than expanded merely to accumulate impressive-looking cases.
+
+This development order allows physics to reject impossible or unsuitable commands without pretending that physics identifies the true neural interpretation. It also prevents a reward curve from being presented as proof of biological learning. The current two-gain practice learner is a working software lesson interface. A general adaptive controller and a biological trainer remain separate future achievements, each with its own controls and failure criteria.
+
+\section{Matching future organisms to actual tasks}
+
+The broader architecture needs body models that fit the recordings and tasks. An organism-specific adapter preserves actual anatomy rather than blending convenient features from several species. Shared functional labels such as limb role, task direction, contact, effort or sensory quantity can help organize comparisons. They do not establish identical muscles, neurons or learning mechanisms across animals.
+
+The virtual-rodent work is a relevant precedent because it combines animal behavior, embodied modeling and analysis of recorded groups of neurons. It supports the idea that an appropriately grounded body model can help ask questions about recorded activity. It does not imply that a human arm, macaque arm, rodent body and fly body can exchange neural commands without evidence.\cite{virtualrodent2024}
+
+Choosing a body begins with actual anatomy, available recordings and a task the model can represent. A hypothetical animal drawing is not a validated body model or a recording. A transparent render cannot supply hidden nerve measurements or show that an animal can tolerate a proposed interface.
+
+Species selection remains a future decision. Care, development, available tools, ordinary behavior and interface burden all bear on it. A specified human biological feature or a tissue connection needs a comparison with direct measurements; the current companion supplies no biological outcome or repair result for those branches. A computational bridge must begin with the anatomy and data actually available.
+
+A future rodent branch would require a supported rodent body and a task represented in matched recordings. A fly branch would need its own appropriate movement and neural sources and a body whose force-producing components have the correct declared interpretation. A human whole-body branch would require relevant contacts, muscles and task evidence beyond the current reduced arm. The source catalog can help locate candidates, but a candidate's presence in the list is not completion of these requirements.
+
+Shared movement can provide a useful starting point before every source has
+paired neural recordings. Homologous structures share an evolutionary anatomical
+origin. Mechanically analogous structures can perform a comparable job without
+that shared origin. Either can motivate transfer when the actual similarities
+are stated: the joints and their movement directions, limb proportions, contact,
+loads and time scales. Similar-looking limbs need not have the same force
+capacity or move on the same time scale. A source-specific adapter must preserve
+those differences rather than quietly treating them as equal.
+
+A movement representation could first learn from qualified motion capture,
+then be adapted using actual paired neural and body observations. Motion can
+also be retargeted to a declared body under anatomical and physical constraints.
+Here retargeting means calculating a corresponding movement for the new body;
+the calculated movement remains derived, not a newly measured neural pairing.
+Scans could constrain a specific anatomical gap after the selected model's own
+provenance has been checked. A scan from another person remains an external
+reference; it does not register the recorded participant or validate simulated
+forces.
+
+A separate current hand/arm proposal would test movement pretraining across
+two people, with separately calibrated sensor-based movement descriptions. It
+would compare target-only training, the proposed anatomical mapping and a
+deliberately wrong mapping under matched resources. Its source and target
+archives, sensor conventions and numerical implementation still require
+admission; no new fit or successful transfer is reported here. Broader motion
+collections would need their own rights, task coverage and original-recording
+overlap checks before entering that route. Repeated copies of one source in
+different collections cannot become independent training and evaluation data.
+
+Comparisons across organisms should include behavior-only and within-organism controls. If a shared representation appears helpful, sessions kept outside fitting, animals and eventually species should test where its help persists. Anatomical similarity can motivate the comparison without supplying cell identity. Missing channels should remain unavailable or explicitly inferred with a stated uncertainty method, rather than being reconstructed into the observed-data column. Useful mechanical transfer would earn a claim about that tested mapping; neural equivalence, causal physiology, sensation delivery and biological teaching still need their own evidence.
+
+The proposed middle ground is therefore functional coordination with preserved anatomy. A task may ask different bodies to move toward a target or control effort, while each body uses its own joints, muscles and sensor models. That makes the research question concrete: which representation helps under these adapters and controls? It avoids claiming a universal nervous-system language before the experiments show one.
+
+\section{Next Experiments}
+
+The next computational question comes from the failed comparison. Both
+recurrent candidates miss the original no-harm and positive-neural-information
+requirements, and all five added benefit claims fail. Lower average error
+admits neither predictor. NeuroTranslation remains a proposed field;
+NeuroTranslator remains recording-specific software.
+
+A further proposal would have to connect supported observations to decoded
+estimates, pass them through a declared body adapter and identify the feedback
+returned. Simple baselines need the same tests. Illustrative motor replay or a
+deliberately goal-driven simulation can examine that bounded computation if its
+goals, assistance and simulator information are disclosed. A positive
+neural-control claim still requires a predictor that passes the unchanged
+criteria; the current candidates do not.
+
+That leaves two questions for the sections that follow. \emph{Tests of Retained
+Learning} asks what remains when teaching help stops. \emph{From a reach to a
+testable prediction} develops the paired mechanism, and \emph{Measure both ends.
+Test the translation.} specifies its observations and comparisons. Reward,
+simulation and independently measured task outcomes need separate checks.
+Physical calibration, synchronized recording chains, participant-specific
+registration and generalization remain unverified. Better simulated control
+would support that tested computation; biological teaching, retention and
+repair still need their own evidence. Their absence leaves room for a clearly
+bounded computational proposal, not a biological result.
+
+\section{Tests of Retained Learning}
+
+The biological learning ambition needs a different kind of evidence from model prediction. A trainer could provide commands, feedback or task information that improves a trainee's performance while connected. That is assistance. To claim learning, the experiment must show a change in the trainee's later independent performance under an appropriate test. To claim faster learning, it must compare the relevant practice, information and time budgets.
+
+Biological and computer-based trainers need separate tests. A biological trainer would be an experienced partner under a specified linking condition. A computer-based trainer would supply assistance under a defined rule. Either could help a trainee while connected without producing learning that lasts. Compare their effects through the same measured task and matched conditions, rather than assuming that the identity of the trainer explains the result.
+
+Experience itself needs a control. An experienced-to-novice pair should be compared with a novice-to-novice pair and with individual practice. A matched no-link condition keeps the relevant experience, exposure and setting while removing the proposed live signal connection. A trainee that practises alone supplies a training control; it is not the same thing as a previously guided trainee being tested alone after training. Groups need comparable task exposure before retention is assessed. Otherwise a benefit could come from extra practice, observation or assistance time rather than the proposed transfer route.
+
+Time-shuffled or yoked comparisons can help identify whether the proposed signal alignment contributes. A yoked condition receives a matched amount of assistance according to another trial or rule, rather than assistance appropriately contingent on its own current state. The exact design belongs to the future experiment, but the principle is to make information timing and assistance budget separable. A simple controller and a behavior-only predictor are also important competitors. More neural measurements should have to show an additional relevant benefit.
+
+Retention should be measured after trainer commands stop and again after an appropriate later interval. Transfer should ask whether improvement helps on a task condition, maze or body condition withheld from practice. Accuracy, consistency and independent control need explicit definitions. A new-looking maze image is not automatically a new scientific test. An equal target score does not prove equal difficulty across route designs or bodies. Those difficulty comparisons need their own measurements and rules. A well-executed rehearsed route can coexist with poor adaptation to a new route, and a one-time success during guidance can coexist with no later benefit.
+
+Replay comparisons also need to identify what is being replayed. A proposed test can compare activity from the same trainee and matched session with stale or unmatched activity and with an inactive or sham comparison. A sham is a control that resembles the relevant procedure without supplying its proposed active contribution. These are conceptual study-design distinctions, not current animal results. They help test whether the matched signal matters beyond the existence of a device, a replay label or an extra source of help.
+
+The persistent-interruption branch requires particular care. Suppose the trainee needs a standardized compensatory interface to express any movement through the interrupted route. Switching off that entire interface prevents motor expression whether or not the trainee learned. The retention comparison should remove trainer commands while retaining the necessary bridge and measurement conditions. A comparison in an intact group, or another independently justified test, may be needed to answer different learning questions. Bridge-off failure alone cannot establish absence of learning.
+
+The corresponding positive claim also needs discipline. Success with the bridge present could still depend on active compensatory computation. The experiment should identify what remains constant, what the trainer previously supplied and what the trainee now controls. A result can demonstrate independent control through a necessary bridge without demonstrating that the interrupted tissue regenerated. Learning, assistance and regeneration are different outcomes even when they concern the same movement.
+
+Humanized and graft comparisons add their own mechanism questions. A changed cell population or host--graft connection would need a specific definition and a justified measurement. It cannot be described as making the animal a miniature human or as supplying an unspecified universal repair. Disease-specific branches need disease-specific outcomes. These are proposed research comparisons, and the current application supplies none of their biological results.
+
+The computational prototype contributes an instrument-building discipline to these future stages. It can specify tasks, record where sources and commands came from, preserve timing, compare predictors and expose physical failures. It cannot replace experimental responsibility for a living trainee or infer plasticity from a software reward. The claim worth pursuing is measurable improvement that remains when the trainer's contribution is removed under the right conditions. That is a harder and more useful claim than an impressive assisted performance.
+
+\section{Tests That Could Reject the Proposal}
+
+A proposal becomes scientifically useful when it says what would count against it. The broader NeuroTranslation idea should lose a comparison if it does not help. A simpler instrument may capture enough information. A behavior-only predictor may outperform added neural channels. A model matched to one recording may beat a shared model. Ordinary practice may produce the same retention as a proposed neural trainer under matched exposure.
+
+Several current results already have this structure. The transferred fixed core had to beat every predefined control and did not. The shared candidate had to improve validation evidence against retained specialists and did not. Native force feedback and copied-state planning had to pass their reserved source comparisons and did not. These failures are not proof that all future variants will fail. They are evidence that these particular variants have not earned the broader claim.
+
+For the next body experiment, a useful milestone is a stable numerical body appropriate to the source whose control comparisons survive appropriate cases kept outside fitting. If geometry, force behavior or timing cannot be calibrated sufficiently for the task, the project should report that limit rather than use a prettier animation. For the next recording experiment, a useful milestone is matched voluntary measurements with explicit time and quantity support. If the added levels do not improve a relevant comparison, their cost and burden need to be reconsidered.
+
+For a future trainer, the decisive milestone is independent retention under matched conditions. If a trainee improves only during guidance, the result supports assistance. If retained improvement is no better than ordinary matched practice, the proposed teaching mechanism has not shown an advantage. If improvement stays on one practiced route but does not transfer, the claim should remain task-specific. Each outcome can still be useful when it is named accurately.
+
+There is also a practical distinction between new information and more computation. A model cannot recover a verified label for an unmeasured quantity simply by becoming larger. It can make an inference, but the inference needs its own uncertainty and evaluation. If the missing variable is contact, specimen geometry, channel correspondence or upstream timing, a targeted measurement may resolve the problem more directly than further optimization on the same incomplete data.
+
+We want the instrument to expose these limits early. That is a design judgment, supported here by the source-processing failure found in the audit and the failed native-body comparisons, rather than a measured biological result. Preserving the failures and each quantity's origin makes the next question easier to choose. Hiding them carries the same assumptions into a larger system that is harder to check.
+
+The proposed new approach is therefore an evidence sequence: identify observations, preserve their meaning, fit a bounded model, check its predictions, test applicable mechanics, and only then test a specified teaching claim. The sequence is not guaranteed to culminate in instant skill acquisition. It is designed to reveal where the ambition fails and where an additional measurement or simpler solution actually helps.
+
+
+
+\section{Terminology and Measurement Plan}
+
+The shared names identify what is being tested. Interoceptomics combines
+interoception and connectomics: how sensing conditions inside the body relates
+to nerve-cell connections. NeuroTranslation names the proposed mapping between
+defined neural situations; NeuroTranslator names the implemented software;
+NeuroTranslation Network names the larger proposed design. Their roles were
+introduced in \emph{Neural Signals and Physical Skills} and remain distinct.
+These are working project names, not externally established standards or
+evidence of a universal decoder or biological teaching. The definition
+supplement retains the explanations and older technical aliases.
+
+Four other meanings must stay separate. Physical scale concerns sizes and distances. Organizational level concerns whether we study a whole body, an organ, a circuit or cells. Computational detail concerns how much information one software calculation represents. Statistical averaging concerns how we combine scores or observations. An average across several output groups is not a measurement of a larger piece of anatomy. A small model is not evidence that it measures individual nerve cells. Calling a result macro or micro without saying which of these meanings is intended would hide the very distinction the programme needs to preserve.
+
+Future body observation would synchronize the left and right tripod views of the hands and arms. A separate perpendicular depth-sensing view could be compared for what it reveals or misses. This software did not acquire or calibrate either arrangement. A transparent body model, cutaway or colored nerve layer explains selected relationships; it does not turn hidden structures into measured signals. Proposed tissue and interface comparisons need their own measurements over time. An unchanged replay file does not demonstrate an unchanged living connection.
+
+\section{Reproducing the Studies}
+
+Reproduction begins with source identity. A dataset name is useful for orientation, but exact files, versions and checksums identify the bytes that were processed. A checksum is a compact computed fingerprint of file contents. It helps a recipient detect a different or corrupted file. It does not certify that the experiment's labels are correct, that a source license permits every reuse, or that the model trained on those bytes is biologically valid.
+
+The package should preserve original source links, acquisition receipts and the scope of each check. The full human recording-header files, whose filenames end in SET, were verified, but the acquired previews of the large signal files, whose filenames end in FDT, cover selected byte ranges rather than the complete large data files. Their locally hashed ranges must remain described as partial support. A whole-file claim would require a whole-file check. Derived replay arrays also need their own hashes and documented extraction rules.\cite{spinal_dataset2023,spinal_companion2023}
+
+The computational recipe includes event sorting, half-open time bins, channel masks, unit conversions, coordinate transforms, numerical scaling calculated from training samples, random starting values, exact data divisions, boundary gaps, model selection and the saved model state kept fixed for evaluation. A half-open bin includes its starting boundary and excludes its ending boundary, so events on boundaries are handled consistently rather than counted twice. These details are part of the result because changing them can change the inputs and scores.
+
+The body recipe includes the original asset, named forks, software revision, modeled constraints, controller settings and evaluation conventions. MuJoCo and OpenSim have separate environments in this project. A portable neural decoder does not require native OpenSim execution, while reproducing the native controller experiment does. The reader must not assume that one dependency list or a working dashboard recreates every mechanical result.\cite{mujoco2012,opensim2018,myosim2026,limblabmodel2026}
+
+The evidence matrix maps the numerical claims in this document to inspectable project artifacts. Its claim groups retain the exact metric fields and interpretation limits. The long reader version explains those values; it does not generate a second experiment or alter the frozen scientific record. The source package also includes schemas and executable translation examples so that numerical predictions and their response metadata can be checked independently of the visual interface.
+
+Previously invalid results remain withdrawn. The unsorted-event muscle-signal results, borrowed-rotation exports, stale control-function bindings and corrected initial-velocity protocol are not positive evidence to be revived by a later summary. A reproducible release needs the current valid states and the reasons earlier states were superseded. Software tests and archive checks then establish specified numerical integrity rather than a general certificate of scientific truth.
+
+The preceding paper draft and its manuscript sources are publicly available; the edition note identifies that snapshot. This paper release does not establish a release of validated model or GUI code, whose selection and release remain pending. Responsible authorship, affiliations, an explicit code license, upstream attribution and an honest declaration of AI assistance remain release responsibilities. Public draft availability implies no submission to arXiv, journal acceptance or independent validation of the software.
+
+\input{grounded-loop-reader.tex}
+\input{expanded-programme-accessible.tex}
+\input{task-sequence-reader.tex}
+\input{paired-study-protocol.tex}
+
+\section{Demonstrated Results and Open Questions}
+
+The current LINK comparison completed and failed its original improvement
+requirements. Earlier results support certain recording-specific predictions
+and reject fixed-core transfer in favour of a locally calibrated specialist
+on a separate old-day recording. The muscle-driven tests distinguish successful
+reduced human-arm correction from rejected native macaque controllers. Source
+and geometry defects keep their withdrawal and repair records. These are
+bounded results that a reader can inspect, each with its own tested scope.
+
+The three later hand-related results must stay separate. The neural classifier
+correctly identified 116 of 150 later attempted-finger labels in one locally
+calibrated participant. In the linked simulation, 41 of 60 supported source
+intentions became correct contacts while all 54 issued supported commands were
+executed and 13 unintended presses remained. The separate goal-driven hand
+policy completed 32 of 32 constrained simulated phrases. Those fractions have
+different denominators because they answer different questions.
+
+A simulated hand can execute its command accurately even when the neural
+decision chose the wrong finger. A hand policy can learn a requested key
+sequence without recorded brain activity driving it. A simulation can be
+mechanically checked without proving that a person learned the same action.
+None of these results establishes biological teaching, a neural policy for the
+phrases, simultaneous voluntary brain--spine--nerve--muscle control, universal
+mastery or a unique translation of private experience.
+
+The next comparison depends on measurements and checks still missing. The
+proposed neural-context branch has not run, and current fitting is not admitted;
+reserved recordings stay closed. Complete independent checkpoint/update,
+random-state, reload and trajectory evidence is absent. Real-world joint and
+force measurements would test the mechanics, while subject registration and
+resolved units and clocks would establish which body and interval the values
+describe. Source-aware functional maps, lifelike 3D reference series, whole-GUI
+acceptance and the limits of disconnected service each need their own review.
+Another report check cannot answer those questions.
+
+Can measured neural and bodily relationships make physical learning more
+effective and leave a trainee more capable after assistance stops? That remains
+the question to test. The present software helps formulate it and exposes where
+its assumptions fail; it supplies no skill file to accept on faith. Progress
+requires experiments specific enough to show a benefit, or show where the
+proposed route fails.
+
