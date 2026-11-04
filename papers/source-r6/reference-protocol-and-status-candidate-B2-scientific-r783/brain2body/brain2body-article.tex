@@ -1,0 +1,72 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage[mathrm=sym]{unicode-math}
+\setmainfont{NotoSans-Regular.ttf}[Path=../fonts/,BoldFont=NotoSans-Bold.ttf,ItalicFont=NotoSans-Italic.ttf,BoldItalicFont=NotoSans-BoldItalic.ttf]
+\setsansfont{NotoSans-Regular.ttf}[Path=../fonts/,BoldFont=NotoSans-Bold.ttf,ItalicFont=NotoSans-Italic.ttf,BoldItalicFont=NotoSans-BoldItalic.ttf]
+\setmonofont{NotoSansMono-Regular.ttf}[Path=../fonts/,BoldFont=NotoSansMono-Bold.ttf]
+\setmathfont{FiraMath-Regular.otf}[Path=../fonts/]
+\usepackage[margin=26.5mm,includefoot]{geometry}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{xurl}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\emergencystretch=3em
+\hypersetup{pdftitle={Brain2Body: The Next Generation In Body-Brain Interfacing.},pdfauthor={@eliminatenoise},pdfsubject={Unpublished conceptual source draft; biological teaching untested; current model gates fail}}
+% Original sans-serif master retained; new isolated source additions are unrendered.
+\usepackage{ragged2e}
+\usepackage[justification=raggedright,singlelinecheck=false]{caption}
+\setlength{\RaggedRightRightskip}{0pt plus 1fil}
+\AtBeginDocument{\RaggedRight}
+% Match the already qualified reader paragraph-flow controls without changing type size.
+\makeatletter
+\AtBeginDocument{\clubpenalty=10000\@clubpenalty=10000\widowpenalty=10000\displaywidowpenalty=10000}
+\makeatother
+\renewcommand{\bibfont}{\RaggedRight}
+\AddToHook{cmd/LARGE/after}{\hyphenpenalty=10000\exhyphenpenalty=10000}
+\begin{document}
+{\sffamily\LARGE\bfseries Brain2Body: The Next Generation In Body-Brain Interfacing.\par}\vspace{8pt}
+{\sffamily @eliminatenoise\par}\vspace{8pt}
+{\sffamily Unpublished Working Draft\par}\vspace{8pt}
+
+
+\begin{abstract}
+An assisted hand can perform a movement without its nervous system having
+learned to perform it. Brain2Body asks what remains when teaching commands end,
+with any compensatory movement bridge held constant. The proposal connects stated nervous-system and body
+observations to independently measured outcomes, then separates assistance,
+simulated control, retained learning and biological repair. Published
+motor-control research motivates the experiments; the companion computational
+studies provide bounded comparisons rather than biological teaching evidence.
+In the current LINK study, 18 runs and 720 saved epochs fail both model-admission
+gates and all five benefit claims. The proposed next experiment pairs EEG, EMG
+and calibrated movement with a musculoskeletal physics engine and a learning
+model. Forward movement prediction and reverse recorded-feature reconstruction
+are separate tests; neither identifies a unique brain state. Sensory delivery
+requires a separately qualified writer. The comparison must separate what the
+model predicts, what the controller executes and what the trainee retains.
+This article develops the rationale, controls and limitations of that test.
+It reports no new biological
+experiment or retained skill acquisition.
+\end{abstract}
+\input{brain2body-article-body.tex}
+\begin{figure}[htbp]
+\section*{Historical Conceptual Framework Illustration}
+\centering
+\makebox[\linewidth][c]{\includegraphics[width=160mm]{figures/historical-brain2body-framework.pdf}}
+\caption{The solid route follows the earlier recorded human finger-attempt computation: 41/60 intended contacts and 54/54 executions of issued commands. Predicting the intended contact and executing an issued command answer different questions. The biological branch remains proposed. This historical schematic supplies no current evidence of anatomical or functional correspondence, lifelike-3D fidelity or biological validity. The separate macaque development study saved 18 runs and 720 epochs; both model gates and all five benefit claims fail. Neither study establishes biological teaching, full-body mapping or retained mastery.}
+\end{figure}
+\clearpage
+\input{../assembled-source-context.tex}
+\input{../evidence-and-edition-status.tex}
+\clearpage
+\phantomsection\label{programme-definitions}
+\input{../current-definitions-brain2body-article.tex}
+\nocite{*}\bibliographystyle{unsrtnat}\bibliography{references,myohand-numerical-citations-common,myohand-numerical-citations-brain2body-only}
+\clearpage
+\appendix
+\input{../reference-comparison-protocol.tex}
+\end{document}
