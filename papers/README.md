@@ -19,4 +19,4 @@ The source snapshot includes manuscript text and bibliography. External figures,
 
 The [R8 draft](drafts/r8/), [G29 PDFs](latest-rendered-g29/) and [R6 sources](source-r6/) are historical. They do not match the current R9 edition. Earlier commits remain in Git history.
 
-Some R9 links open older reading-aid metadata that does not describe the compiled public R9 edition. See the [reading-aid metadata erratum](errata/r9-reading-aid-metadata.txt). The existing draft review, scientific, rights and output limits remain.
+Some R9 links name an older JSON reading aid that is absent from this public snapshot. See the [metadata and packaging erratum](errata/r9-reading-aid-metadata.txt). The existing draft review, scientific, rights and output limits remain.

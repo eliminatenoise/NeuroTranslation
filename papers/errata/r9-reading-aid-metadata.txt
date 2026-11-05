@@ -1,15 +1,20 @@
-R9 reading-aid metadata correction
+R9 reading-aid metadata and packaging correction
 
 R9 is the public working draft published at commit
 a86bf81a308a71ccfa98bf2e0d5ec7ac329e9ba7. Its four manuscripts have matching
 PDFs, and its terminology projection uses registry revision 34.
 
-Some links in R9 open research-evidence.json, an older reading aid. That file
-still names registry revision 10 and describes the papers as unpublished and
-awaiting compilation. Those fields do not describe the compiled public R9
-edition. Use papers/current.json and the R9 manifest to identify the selected
-artifacts. The older reading aid is retained as historical evidence; its
-computations have not been rerun or relabelled as new results.
+Some links in R9 name research-evidence.json from an older source workspace.
+That JSON reading aid is absent from this public snapshot. The package still
+has missing external dependencies and is not a standalone build. The older
+local reading aid names registry revision 10 and describes the papers as
+unpublished and awaiting compilation. Those fields do not describe the
+compiled public R9 edition.
+
+Use papers/current.json and the R9 manifest to identify the selected artifacts.
+The older aid and its computations remain historical source evidence; they
+have not been rerun or relabelled as new results. The previous version of this
+note did not make the missing public file clear.
 
 The complete source editorial audit requires a further revision. Public draft
 availability establishes neither peer review nor completed scientific, rights,
