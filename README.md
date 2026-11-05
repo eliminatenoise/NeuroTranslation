@@ -7,3 +7,5 @@ Read the [current R9 paper drafts](papers/): technical and accessible editions o
 ## Reuse
 
 The project’s original contributions are dedicated to the public domain under [CC0 1.0](LICENSE), to the extent the project holds the rights. Third-party material, including fonts, cited works and incorporated figures, may have separate rights. See the [notices](papers/drafts/r9/NOTICE.md).
+
+Some R9 links open older reading-aid metadata that does not describe the compiled public R9 edition. See the [reading-aid metadata erratum](papers/errata/r9-reading-aid-metadata.txt). The existing draft review, scientific, rights and output limits remain.
