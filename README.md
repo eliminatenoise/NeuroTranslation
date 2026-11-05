@@ -33,7 +33,9 @@ We keep negative results. A lower average error does not establish that neural i
 
 Read the [current R9 paper drafts](papers/): technical and accessible editions of **NeuroTranslation: A New Paradigm In Brain-Body Mapping.** and **Brain2Body: The Next Generation In Body-Brain Interfacing.**, with their matching manuscript source.
 
-These papers develop the scientific and engineering argument. The accessible editions explain the same difficult concepts in plain language; they are not a substitute for methods, evidence or limitations. The project is also developing models, data interfaces and interactive demonstrations. **No validated downloadable Large Movement Model or finished GUI is available yet.**
+These papers develop the scientific and engineering argument. The accessible editions explain the same difficult concepts in plain language; they are not a substitute for methods, evidence or limitations. The project is also developing models, data interfaces and interactive demonstrations. **No validated downloadable Large Movement Model or finalized-model GUI is available yet.**
+
+The [data companion](demo/README.md) imports JSON and CSV, checks their structure, displays the original samples and aligns declared paired recordings. It does not execute a trained translation model. Its example contains invented values.
 
 Some R9 links name an older JSON reading aid that is absent from this public snapshot. See the [metadata and packaging erratum](papers/errata/r9-reading-aid-metadata.txt). The existing draft review, scientific, rights and output limits remain.
 
