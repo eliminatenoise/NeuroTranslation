@@ -24,6 +24,14 @@ Choose a sampling step, a maximum permitted gap and nearest-sample or linear int
 
 File and combined-packet limits are 5 MiB, with at most 64 selected streams, 50,000 input samples, 5,000 aligned time points and 500,000 aligned values. These bounds protect browser responsiveness; they do not define a scientific sampling requirement. Metadata warnings remain visible when source rights, partitions or coordinate frames are unknown.
 
+## Metadata checks
+
+Open **Metadata checks** beside the signal explorer to inspect each stream's declared measurement, units, clock, identity and provenance. Missing or conflicting details remain visible. The generic invented example deliberately lacks measurement and generator details; plotting its numbers does not make those declarations complete.
+
+The report keeps exact source IDs beside their encoded internal IDs, plus the origin of each mapped field. A generic EMG label never becomes a surface or intramuscular recording by guesswork. A licence string grants no permission, and matching subjects or clock names creates no biological pairing. Alignment continues to follow the separately declared common clock; it does not establish acquisition synchronization.
+
+Export the metadata report independently, or retain it with an aligned-data export. Both include the original packets, mapping diagnostics and declaration checks. Metadata fingerprints identify the supplied declarations; they do not authenticate a recording or certify its sample values. No recording contents leave the browser through this feature. [Metadata format and API](docs/METADATA.md) describes optional richer declarations.
+
 ## What remains
 
 The whole-body ambition includes brain, spinal, peripheral and relevant autonomic or visceral activity. The catalogue currently establishes separate, limited source examples. It does not establish one dataset covering all those regions, paired with all muscle, movement and mechanics observations.

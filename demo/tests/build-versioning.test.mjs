@@ -4,19 +4,31 @@ import {createHash} from 'node:crypto';
 import {lstat, mkdir, mkdtemp, readFile, readdir, realpath, rm, symlink, writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {basename, join} from 'node:path';
+import {pathToFileURL} from 'node:url';
 import {build, SOURCE_FILES} from '../build.mjs';
 
 const ownedScratch = await mkdtemp(join(tmpdir(), 'neurotranslate-build-versioning-'));
 after(() => rm(ownedScratch, {recursive: true, force: true}));
 const scratch = await realpath(ownedScratch);
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+const expectedSources = [
+  'app.mjs', 'core.mjs', 'datasets.json', 'index.html', 'plot.mjs', 'style.css',
+  'packet-policy-bridge.mjs', 'policy-report-view.mjs', 'compat-policy.mjs',
+  'hash.mjs', 'reasons.mjs', 'vocabulary.mjs'
+];
 const fixtures = {
   'index.html': `<!doctype html>\n<link rel="stylesheet" href="style.css">\n<script type="module" src='./app.mjs'></script>\n<a href="./datasets.json?download=1#catalogue">Data</a>\n<link rel="preload" href=/core.mjs>\n<script type="module">import './core.mjs';</script>\n<link rel="icon" href="data:image/svg+xml,%3Csvg%3Eapp.mjs%3C/svg%3E">\n<script src="https://example.test/app.mjs"></script>\n<a href="//example.test/style.css">External</a>\n<div data-note='href="app.mjs"'>app.mjs</div>\n<!-- <script src="./app.mjs"></script> -->\n`,
-  'app.mjs': `import {value} from './core.mjs';\nimport './plot.mjs';\nexport {value as other} from './core.mjs?rev=1#entry';\nconst lazy = () => import('./plot.mjs');\nconst data = () => fetch('./datasets.json');\nconst bareData = () => fetch('datasets.json?mode=1#data');\nconst resource = new URL('./datasets.json', import.meta.url);\nconst external = () => fetch('https://example.test/datasets.json');\nconst bareModule = () => import('core.mjs');\nconst words = "fetch('./datasets.json')";\nconst template = \`fetch('./datasets.json')\`;\nconst regex = /fetch\\('datasets.json'\\)/;\nconst embedded = \`value \${JSON.stringify({x: fetch('./datasets.json')})}\`;\nconst nested = \`value \${\`inner \${fetch("./datasets.json")}\`}\`;\n// fetch('./datasets.json')\n/* import './core.mjs'; */\n`,
+  'app.mjs': `import {value} from './core.mjs';\nimport './plot.mjs';\nimport {project} from './packet-policy-bridge.mjs';\nimport {renderReport} from './policy-report-view.mjs';\nexport {value as other} from './core.mjs?rev=1#entry';\nconst lazy = () => import('./plot.mjs');\nconst data = () => fetch('./datasets.json');\nconst bareData = () => fetch('datasets.json?mode=1#data');\nconst resource = new URL('./datasets.json', import.meta.url);\nconst external = () => fetch('https://example.test/datasets.json');\nconst bareModule = () => import('core.mjs');\nconst words = "fetch('./datasets.json')";\nconst template = \`fetch('./datasets.json')\`;\nconst regex = /fetch\\('datasets.json'\\)/;\nconst embedded = \`value \${JSON.stringify({x: fetch('./datasets.json')})}\`;\nconst nested = \`value \${\`inner \${fetch("./datasets.json")}\`}\`;\n// fetch('./datasets.json')\n/* import './core.mjs'; */\n`,
   'core.mjs': `export {normalize} from "./plot.mjs";\nexport const value = 'é';\n`,
   'plot.mjs': 'export const normalize = value => value;\n',
   'style.css': '/* app.mjs is ordinary text here. */\nbody { font-family: Arial, sans-serif; }\n',
-  'datasets.json': '{"datasets":[],"note":"app.mjs is ordinary JSON text"}\n'
+  'datasets.json': '{"datasets":[],"note":"app.mjs is ordinary JSON text"}\n',
+  'packet-policy-bridge.mjs': `import {evaluate} from './compat-policy.mjs';\nimport {digest} from './hash.mjs';\nexport {REASON_CODES} from './reasons.mjs';\nexport const project = input => ({...evaluate(input), bridgeDigest: digest(input)});\n`,
+  'policy-report-view.mjs': `import {project} from './packet-policy-bridge.mjs';\nexport {describeReason} from './compat-policy.mjs';\nexport {vocabulary} from './compat-policy.mjs';\nexport const renderReport = input => project(input);\n`,
+  'compat-policy.mjs': `import {digest} from './hash.mjs';\nimport {REASON_CODES} from './reasons.mjs';\nimport {VOCABULARY} from './vocabulary.mjs';\nexport {describeReason} from './reasons.mjs';\nexport {VOCABULARY} from './vocabulary.mjs';\nexport * as vocabulary from './vocabulary.mjs';\nexport const evaluate = input => ({digest: digest(input), reason: REASON_CODES[0], vocabulary: VOCABULARY[0]});\n`,
+  'hash.mjs': `import {VOCABULARY} from './vocabulary.mjs';\nexport const digest = value => VOCABULARY[0] + ':' + JSON.stringify(value);\n`,
+  'reasons.mjs': `export {VOCABULARY} from './vocabulary.mjs';\nexport const REASON_CODES = Object.freeze(['DECLARATION_ONLY']);\nexport const describeReason = code => String(code);\n`,
+  'vocabulary.mjs': `export const VOCABULARY = Object.freeze(['metadata']);\n`
 };
 
 async function fixture(label) {
@@ -36,11 +48,13 @@ function outputFor(manifest, source) {
 
 async function checkManifest(paths, manifest) {
   assert.match(manifest.buildId, /^[a-f0-9]{64}$/);
+  assert.equal(manifest.selection, 'data-companion-policy-v2');
+  assert.deepEqual(manifest.files.map(file => file.source), expectedSources);
   assert.equal(outputFor(manifest, 'index.html'), 'index.html');
   assert.deepEqual((await readdir(paths.outputDir)).sort(), [...manifest.files.map(file => file.output), 'build-manifest.json'].sort());
   const saved = await readFile(join(paths.outputDir, 'build-manifest.json'), 'utf8');
   assert.deepEqual(JSON.parse(saved), manifest);
-  assert.ok(saved.length < 3500, 'manifest is compact');
+  assert.ok(saved.length < 7000, 'manifest is compact');
   assert.ok(!saved.includes(scratch) && !saved.includes(paths.root) && !saved.includes('/home/'), 'no local absolute paths');
   for (const file of manifest.files) {
     assert.equal(file.source, basename(file.source));
@@ -69,6 +83,17 @@ async function checkFixtureReferences(paths, manifest) {
   const data = outputFor(manifest, 'datasets.json');
   const coreName = outputFor(manifest, 'core.mjs');
   const style = outputFor(manifest, 'style.css');
+  const bridgeName = outputFor(manifest, 'packet-policy-bridge.mjs');
+  const viewName = outputFor(manifest, 'policy-report-view.mjs');
+  const policyName = outputFor(manifest, 'compat-policy.mjs');
+  const hashName = outputFor(manifest, 'hash.mjs');
+  const reasonsName = outputFor(manifest, 'reasons.mjs');
+  const vocabularyName = outputFor(manifest, 'vocabulary.mjs');
+  const bridge = await readFile(join(paths.outputDir, bridgeName), 'utf8');
+  const view = await readFile(join(paths.outputDir, viewName), 'utf8');
+  const policy = await readFile(join(paths.outputDir, policyName), 'utf8');
+  const hashModule = await readFile(join(paths.outputDir, hashName), 'utf8');
+  const reasons = await readFile(join(paths.outputDir, reasonsName), 'utf8');
   const expected = [
     [html, `href="${style}"`, style], [html, `src='./${app}'`, app],
     [html, `href="./${data}?download=1#catalogue"`, `${data}?download=1#catalogue`],
@@ -78,7 +103,19 @@ async function checkFixtureReferences(paths, manifest) {
     [module, `import('./${plot}')`, plot], [module, `fetch('./${data}')`, data],
     [module, `fetch('${data}?mode=1#data')`, `${data}?mode=1#data`],
     [module, `new URL('./${data}',`, data], [module, `fetch("./${data}")`, data],
-    [core, `from "./${plot}"`, plot]
+    [core, `from "./${plot}"`, plot],
+    [module, `from './${bridgeName}'`, bridgeName], [module, `from './${viewName}'`, viewName],
+    [bridge, `from './${policyName}'`, policyName], [bridge, `from './${hashName}'`, hashName],
+    [bridge, `export {REASON_CODES} from './${reasonsName}'`, reasonsName],
+    [view, `from './${bridgeName}'`, bridgeName], [view, `export {describeReason} from './${policyName}'`, policyName],
+    [view, `export {vocabulary} from './${policyName}'`, policyName],
+    [policy, `from './${hashName}'`, hashName], [policy, `from './${reasonsName}'`, reasonsName],
+    [policy, `from './${vocabularyName}'`, vocabularyName],
+    [policy, `export {describeReason} from './${reasonsName}'`, reasonsName],
+    [policy, `export {VOCABULARY} from './${vocabularyName}'`, vocabularyName],
+    [policy, `export * as vocabulary from './${vocabularyName}'`, vocabularyName],
+    [hashModule, `from './${vocabularyName}'`, vocabularyName],
+    [reasons, `export {VOCABULARY} from './${vocabularyName}'`, vocabularyName]
   ];
   for (const [text, reference, url] of expected) {
     assert.ok(text.includes(reference), `rewritten reference ${reference}`);
@@ -100,6 +137,7 @@ async function checkFixtureReferences(paths, manifest) {
 }
 
 test('identical source builds deterministically with current imports and catalogue URLs', {timeout: 10000}, async () => {
+  assert.deepEqual([...SOURCE_FILES], expectedSources, 'only the reviewed twelve flat inputs are selected');
   const paths = await fixture('same-source');
   const first = await build(paths);
   const firstManifest = await readFile(join(paths.outputDir, 'build-manifest.json'));
@@ -115,14 +153,18 @@ test('identical source builds deterministically with current imports and catalog
   await checkFixtureReferences(paths, second);
 });
 
-test('dependency-only change refreshes every URL, resolves the graph and replaces old generated assets', {timeout: 10000}, async () => {
+test('policy leaf change refreshes every URL, loads the new graph and replaces old generated assets', {timeout: 10000}, async () => {
   const paths = await fixture('version-change');
   const first = await build(paths);
   await checkFixtureReferences(paths, first);
+  const firstView = await import(pathToFileURL(join(paths.outputDir, outputFor(first, 'policy-report-view.mjs'))).href);
+  assert.deepEqual(firstView.renderReport({declared: true}), {digest: 'metadata:{"declared":true}', reason: 'DECLARATION_ONLY', vocabulary: 'metadata', bridgeDigest: 'metadata:{"declared":true}'});
+  assert.equal(firstView.describeReason('DECLARATION_ONLY'), 'DECLARATION_ONLY', 'reexports resolve through the generated graph');
+  assert.deepEqual(firstView.vocabulary.VOCABULARY, ['metadata']);
   await writeFile(join(paths.outputDir, 'obsolete.mjs'), 'obsolete');
   await mkdir(join(paths.outputDir, 'obsolete-directory'));
   await writeFile(join(paths.outputDir, 'obsolete-directory', 'old.json'), '{}');
-  await writeFile(join(paths.sourceDir, 'core.mjs'), fixtures['core.mjs'] + 'export const revision = 2;\n');
+  await writeFile(join(paths.sourceDir, 'vocabulary.mjs'), fixtures['vocabulary.mjs'].replace("['metadata']", "['metadata-r2']"));
   const second = await build(paths);
   assert.notEqual(first.buildId, second.buildId);
   for (const old of first.files.filter(file => file.source !== 'index.html')) {
@@ -130,6 +172,10 @@ test('dependency-only change refreshes every URL, resolves the graph and replace
     await assert.rejects(lstat(join(paths.outputDir, old.output)), {code: 'ENOENT'});
   }
   assert.equal(first.files.find(file => file.source === 'app.mjs').sourceSha256, second.files.find(file => file.source === 'app.mjs').sourceSha256, 'app source did not change');
+  const secondView = await import(pathToFileURL(join(paths.outputDir, outputFor(second, 'policy-report-view.mjs'))).href);
+  assert.deepEqual(secondView.renderReport({declared: true}), {digest: 'metadata-r2:{"declared":true}', reason: 'DECLARATION_ONLY', vocabulary: 'metadata-r2', bridgeDigest: 'metadata-r2:{"declared":true}'});
+  assert.deepEqual(secondView.vocabulary.VOCABULARY, ['metadata-r2'], 'namespace reexports follow the new policy leaf');
+  assert.equal(firstView.renderReport(null).vocabulary, 'metadata', 'distinct content URLs do not reuse the old dependency cache');
   await checkManifest(paths, second);
   await checkFixtureReferences(paths, second);
 });
@@ -151,8 +197,8 @@ test('unselected flat files, directories, siblings and symlinks never enter outp
   const first = await build(paths);
   const sentinel = join(paths.root, 'private-sentinel.txt');
   await writeFile(sentinel, 'private sentinel');
-  for (const name of ['.env', '.hidden.json', 'raw.json', 'quarantine.json', 'protected.json', 'experiment.mjs', 'notes.txt']) await writeFile(join(paths.sourceDir, name), 'NEVER COPY');
-  for (const name of ['claude-returns', 'tests', 'raw', 'quarantine', 'protected']) {
+  for (const name of ['.env', '.hidden.json', 'raw.json', 'quarantine.json', 'protected.json', 'experiment.mjs', 'notes.txt', 'neurosurge-control-trace.mjs']) await writeFile(join(paths.sourceDir, name), 'NEVER COPY');
+  for (const name of ['claude-returns', 'tests', 'raw', 'quarantine', 'protected', '.openai', 'custody', 'fixtures', 'artifacts']) {
     await mkdir(join(paths.sourceDir, name));
     await writeFile(join(paths.sourceDir, name, 'app.mjs'), 'NEVER COPY');
     await mkdir(join(paths.root, name));
@@ -181,9 +227,13 @@ test('unsafe overlaps, symlink paths and selected symlink files fail without cha
   const sourceLink = join(paths.root, 'source-link');
   await symlink(paths.sourceDir, sourceLink);
   await assert.rejects(build({...paths, sourceDir: sourceLink}), /symlink/);
-  await rm(join(paths.sourceDir, 'core.mjs'));
-  await symlink(join(outside, 'sentinel'), join(paths.sourceDir, 'core.mjs'));
+  await rm(join(paths.sourceDir, 'compat-policy.mjs'));
+  await symlink(join(outside, 'sentinel'), join(paths.sourceDir, 'compat-policy.mjs'));
   await assert.rejects(build(paths), /regular file/);
+  await rm(join(paths.sourceDir, 'compat-policy.mjs'));
+  await writeFile(join(paths.sourceDir, 'compat-policy.mjs'), fixtures['compat-policy.mjs']);
+  await rm(join(paths.sourceDir, 'vocabulary.mjs'));
+  await assert.rejects(build(paths), {code: 'ENOENT'}, 'missing policy dependency cannot fall back to the former six-file build');
   assert.deepEqual(await readFile(join(paths.outputDir, 'build-manifest.json')), before);
   assert.deepEqual(await readdir(outside), ['sentinel']);
   assert.equal(await readFile(join(outside, 'sentinel'), 'utf8'), 'keep');

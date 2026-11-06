@@ -1,9 +1,12 @@
 import {parsePacket,parseCsv,validatePacket,combinePackets,summarizePackets,assessCompatibility,alignPackets,examplePacket} from './core.mjs';
 import {normalizeFinite,buildPlotSegments} from './plot.mjs';
+import {toPolicyEnvelope} from './packet-policy-bridge.mjs';
+import {evaluate as evaluateMetadata} from './compat-policy.mjs';
+import {renderMetadataReport} from './policy-report-view.mjs';
 
 const $=id=>document.getElementById(id);
 const colors={neural:'#7757d8',muscle:'#cd6446',displacement:'#287dba',mechanics:'#278476'};
-const state={packets:[],aligned:null,cursor:0,playing:false,previousFrame:0,traces:[]};
+const state={packets:[],aligned:null,cursor:0,playing:false,previousFrame:0,traces:[],metadata:null,metadataPackets:null};
 const isExample=()=>state.packets.length>0&&state.packets.every(p=>p.dataset.origin==='constructed_example');
 const streams=()=>state.packets.flatMap(p=>p.streams.map(s=>({...s,dataset:p.dataset})));
 function element(tag,className,text){const e=document.createElement(tag);if(className)e.className=className;if(text!==undefined)e.textContent=text;return e;}
@@ -12,6 +15,20 @@ function download(name,value){const blob=new Blob([JSON.stringify(value,null,2)]
 function stop(){state.playing=false;$('play').textContent='▶';$('play').setAttribute('aria-label','Play aligned signals');}
 function clearAlignment(){stop();state.aligned=null;state.cursor=0;$('cursor').value=0;}
 function getAlignedStreams(){return state.aligned?.streams||[];}
+function renderMetadata(){
+  if(state.metadataPackets!==state.packets){
+    state.metadataPackets=state.packets;state.metadata=null;
+    if(state.packets.length){
+      try{const mapping=toPolicyEnvelope(state.packets);state.metadata={mapping,report:mapping.policyInput?evaluateMetadata(mapping.policyInput):null};}
+      catch{state.metadata={mapping:{status:'blocked',diagnostics:[{message:'The metadata check could not finish. Your original samples are unchanged.'}]},report:null};}
+    }
+  }
+  renderMetadataReport($('metadata-report'),state.metadata||{});
+  const pending=state.metadata?.report?.descriptors?.filter(d=>d.status==='invalid'||d.reasons?.some(r=>r.severity!=='info')).length||0;
+  const blocked=state.metadata&&(state.metadata.mapping.status!=='mapped'||state.metadata.report?.status!=='evaluated');
+  $('metadata-summary').textContent=!state.packets.length?'Metadata checks · no recordings':blocked?'Metadata checks · needs attention':pending?`Metadata checks · ${pending} ${pending===1?'stream needs':'streams need'} more detail`:'Metadata checks · inspect the declarations';
+  $('export-metadata').disabled=!state.metadata;
+}
 function render(){
   const all=streams();$('packet-count').textContent=`${state.packets.length} loaded`;
   $('example-notice').hidden=!isExample();
@@ -26,7 +43,7 @@ function render(){
     card.append(element('p','',p.dataset.origin==='constructed_example'?'Constructed software example':`${p.dataset.organism||'Unknown organism'} · subject: ${p.dataset.subjectId||'unknown'}`));
     card.append(element('p','',`Clock: ${p.dataset.timebase||'unknown'}`));
     const dots=element('div','type-dots');for(const modality of [...new Set(p.streams.map(s=>s.modality))]){const dot=element('span');dot.style.background=colors[modality];dot.title=modality;dots.append(dot);}card.append(dots);
-    card.append(element('p','',`${p.streams.length} streams · ${p.streams.reduce((n,s)=>n+s.t.length,0).toLocaleString()} samples`));
+    card.append(element('p','',`${p.streams.length} ${p.streams.length===1?'stream':'streams'} · ${p.streams.reduce((n,s)=>n+s.t.length,0).toLocaleString()} samples`));
     card.append(element('p','',`Partition: ${p.dataset.split||'unspecified'} · ${p.dataset.license||'permission unspecified'}`));
     $('recording-list').append(card);
   }
@@ -45,7 +62,7 @@ function render(){
   const aligned=Boolean(state.aligned);$('mode-badge').textContent=aligned?'Aligned samples':'Original samples';
   $('alignment-caption').textContent=aligned?`${isExample()?'Example clock':'Declared common clock'} · ${state.aligned.t.length.toLocaleString()} points · ${$('method').selectedOptions[0].textContent}`:'Each trace uses its own declared clock. Cross-dataset synchronization has not been established.';
   $('play').disabled=!aligned;$('cursor').disabled=!aligned;$('export').disabled=!aligned;$('align').disabled=!all.length;
-  renderTraces();
+  renderMetadata();renderTraces();
 }
 function renderTraces(){
   $('traces').replaceChildren();state.traces=[];
@@ -122,7 +139,8 @@ for(const id of ['step','max-gap','method'])$(id).addEventListener('change',()=>
 $('cursor').addEventListener('input',()=>{state.cursor=Number($('cursor').value)/1000;draw();});
 $('play').addEventListener('click',()=>{state.playing=!state.playing;$('play').textContent=state.playing?'Ⅱ':'▶';$('play').setAttribute('aria-label',state.playing?'Pause aligned signals':'Play aligned signals');state.previousFrame=performance.now();if(state.playing)requestAnimationFrame(tick);});
 function tick(now){if(!state.playing||!state.aligned)return;const elapsed=now-state.previousFrame;if(elapsed>=32){state.cursor=(state.cursor+elapsed/10000)%1;$('cursor').value=Math.round(state.cursor*1000);state.previousFrame=now;draw();}requestAnimationFrame(tick);}
-$('export').addEventListener('click',()=>{if(state.aligned)download('neurotranslate-0.0-aligned.json',{application:'NeuroTranslate 0.0',operation:'declared-clock alignment, not learned translation',example:isExample(),sourcePackets:state.packets,alignment:state.aligned});});
+$('export').addEventListener('click',()=>{if(state.aligned)download('neurotranslate-0.0-aligned.json',{application:'NeuroTranslate 0.0',operation:'declared-clock alignment, not learned translation',example:isExample(),sourcePackets:state.packets,alignment:state.aligned,metadataCheck:state.metadata});});
+$('export-metadata').addEventListener('click',()=>{if(state.metadata)download('neurotranslate-0.0-metadata.json',{application:'NeuroTranslate 0.0',operation:'file declarations only; no pairing or learned translation',example:isExample(),sourcePackets:state.packets,metadataCheck:state.metadata});});
 $('download-template').addEventListener('click',()=>download('neurotranslate-0.0-example.json',examplePacket()));
 window.addEventListener('resize',draw);
 async function catalogue(){

@@ -7,8 +7,11 @@ import {pathToFileURL} from 'node:url';
 // This is the reviewed selection for the existing data companion, not the game.
 // New production inputs require an explicitly reviewed extension of this list.
 export const SOURCE_FILES = Object.freeze([
-  'app.mjs', 'core.mjs', 'datasets.json', 'index.html', 'plot.mjs', 'style.css'
+  'app.mjs', 'core.mjs', 'datasets.json', 'index.html', 'plot.mjs', 'style.css',
+  'packet-policy-bridge.mjs', 'policy-report-view.mjs', 'compat-policy.mjs',
+  'hash.mjs', 'reasons.mjs', 'vocabulary.mjs'
 ]);
+const SELECTION = 'data-companion-policy-v2';
 const sha256 = value => createHash('sha256').update(value).digest('hex');
 
 function containsPath(parent, child) {
@@ -53,7 +56,7 @@ async function readSources(sourceDir) {
 }
 
 function identity(files) {
-  return sha256(JSON.stringify({selection: 'data-companion-v1', files: files.map(file => [file.source, file.bytes.length, file.sourceSha256])}));
+  return sha256(JSON.stringify({selection: SELECTION, files: files.map(file => [file.source, file.bytes.length, file.sourceSha256])}));
 }
 
 function rewriteURL(value, mapping, allowBare) {
@@ -174,7 +177,7 @@ export async function build({sourceDir = 'src', outputDir = 'dist'} = {}) {
     }
     return {...file, output: mapping.get(file.source), outputBytes: bytes};
   });
-  const manifest = {schemaVersion: 1, selection: 'data-companion-v1', hashAlgorithm: 'sha256', buildId, files: outputs.map(file => ({source: file.source, sourceBytes: file.bytes.length, sourceSha256: file.sourceSha256, output: file.output, outputBytes: file.outputBytes.length, outputSha256: sha256(file.outputBytes)}))};
+  const manifest = {schemaVersion: 1, selection: SELECTION, hashAlgorithm: 'sha256', buildId, files: outputs.map(file => ({source: file.source, sourceBytes: file.bytes.length, sourceSha256: file.sourceSha256, output: file.output, outputBytes: file.outputBytes.length, outputSha256: sha256(file.outputBytes)}))};
   let stage = await mkdtemp(join(dirname(outputDir), `.${basename(outputDir)}-build-`));
   let backup;
   let installed = false;
