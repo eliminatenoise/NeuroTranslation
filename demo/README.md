@@ -30,7 +30,7 @@ Open **Metadata checks** beside the signal explorer to inspect each stream's dec
 
 The report keeps exact source IDs beside their encoded internal IDs, plus the origin of each mapped field. A generic EMG label never becomes a surface or intramuscular recording by guesswork. A licence string grants no permission, and matching subjects or clock names creates no biological pairing. Alignment continues to follow the separately declared common clock; it does not establish acquisition synchronization.
 
-Export the metadata report independently, or retain it with an aligned-data export. Both include the original packets, mapping diagnostics and declaration checks. Metadata fingerprints identify the supplied declarations; they do not authenticate a recording or certify its sample values. No recording contents leave the browser through this feature. [Metadata format and API](docs/METADATA.md) describes optional richer declarations.
+Use **Export samples + checks** to save `neurotranslate-0.0-inspection.json` independently, or retain the report with an aligned-data export. Both include the original packets, mapping diagnostics and declaration checks. Metadata fingerprints identify the supplied declarations; they do not authenticate a recording or certify its sample values. Your browser saves the export as a local file. [Metadata format and API](docs/METADATA.md) describes optional richer declarations.
 
 ## What remains
 

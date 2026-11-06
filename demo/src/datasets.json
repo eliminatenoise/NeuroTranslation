@@ -127,6 +127,22 @@
       ],
       "metadataStatus": "reviewed_starting_catalogue_2026-10-03; not_current_file_access_or_scientific_acceptance",
       "recordingsIncluded": false
+    },
+    {
+      "id": "emg2pose-nemar-nm000281",
+      "name": "emg2pose / NEMAR nm000281 — left-hand metadata",
+      "url": "https://doi.org/10.48550/arXiv.2412.02725",
+      "modalities": [
+        "Surface EMG (declared)",
+        "Offline-derived finger angles (declared)"
+      ],
+      "description": "Surface EMG records muscle electrical activity at the wrist. The selected left-hand metadata declares 16 EMG channels and 20 finger-angle MISC channels. The emg2pose paper reports physical left-hand collection. The angles are fitted offline to 60 Hz markers with a personalized hand model (inverse kinematics), filtered at 15 Hz and interpolated to 2 kHz. That interpolation fills a denser time grid; it does not add independent motion measurements. Metadata only: the recording body has not been acquired or imported. Salter, Warren, Schlager et al., emg2pose, NeurIPS 2024.",
+      "limit": "EMG channels are labelled in volts, while the reported normalization sets the noise-floor standard deviation to 1, leaving physical scaling unresolved. Radian labels leave joint order, axes, signs, coordinate frame and calibration unverified. Offline fits can fail: the paper reports inverse-kinematics failures and fist occlusion, and the selected metadata declares edge padding and BAD_IK intervals that have not been checked against recording samples. The selected scans table lists this recording as training data, so it cannot serve as a fresh held-out test. We have not verified the original participant/session, the split against the original metadata, or any model's prior exposure to this recording. Time origins and clock drift, electrode positions and polarity, the exact converter lineage, and whether preprocessing is causal and how much delay it adds also remain unverified. These muscle observations do not establish nerve or cortical recordings, force or contact measurements, whole-body mapping, a fresh held-out result or automatic cross-dataset pairing. CC-BY-NC-SA-4.0 is declared; the paper intended-use scope, the scope of participant consent and conversion-specific rights still need separate review. Public raw-recording, model, derivative and figure reuse has not been cleared.",
+      "license": [
+        "CC-BY-NC-SA-4.0"
+      ],
+      "metadataStatus": "independently_accepted_bounded_literature_and_selected_sidecar_metadata_only; recording_unacquired",
+      "recordingsIncluded": false
     }
   ]
 }

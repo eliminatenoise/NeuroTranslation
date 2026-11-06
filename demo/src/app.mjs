@@ -140,7 +140,7 @@ $('cursor').addEventListener('input',()=>{state.cursor=Number($('cursor').value)
 $('play').addEventListener('click',()=>{state.playing=!state.playing;$('play').textContent=state.playing?'Ⅱ':'▶';$('play').setAttribute('aria-label',state.playing?'Pause aligned signals':'Play aligned signals');state.previousFrame=performance.now();if(state.playing)requestAnimationFrame(tick);});
 function tick(now){if(!state.playing||!state.aligned)return;const elapsed=now-state.previousFrame;if(elapsed>=32){state.cursor=(state.cursor+elapsed/10000)%1;$('cursor').value=Math.round(state.cursor*1000);state.previousFrame=now;draw();}requestAnimationFrame(tick);}
 $('export').addEventListener('click',()=>{if(state.aligned)download('neurotranslate-0.0-aligned.json',{application:'NeuroTranslate 0.0',operation:'declared-clock alignment, not learned translation',example:isExample(),sourcePackets:state.packets,alignment:state.aligned,metadataCheck:state.metadata});});
-$('export-metadata').addEventListener('click',()=>{if(state.metadata)download('neurotranslate-0.0-metadata.json',{application:'NeuroTranslate 0.0',operation:'file declarations only; no pairing or learned translation',example:isExample(),sourcePackets:state.packets,metadataCheck:state.metadata});});
+$('export-metadata').addEventListener('click',()=>{if(state.metadata)download('neurotranslate-0.0-inspection.json',{application:'NeuroTranslate 0.0',operation:'Original source samples and metadata checks; no pairing or learned translation',example:isExample(),sourcePackets:state.packets,metadataCheck:state.metadata});});
 $('download-template').addEventListener('click',()=>download('neurotranslate-0.0-example.json',examplePacket()));
 window.addEventListener('resize',draw);
 async function catalogue(){
