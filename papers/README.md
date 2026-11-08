@@ -1,5 +1,7 @@
 # Paper drafts
 
+Work on these papers is paused while development focuses on NeuroSurge.
+
 ## Current edition: R9
 
 - [NeuroTranslation: technical](drafts/r9/pdf/neurotranslation-technical.pdf) — 126 pages
@@ -17,6 +19,6 @@ The source snapshot includes manuscript text and bibliography. External figures,
 
 ## Earlier editions
 
-The [R8 draft](drafts/r8/), [G29 PDFs](latest-rendered-g29/) and [R6 sources](source-r6/) are historical. They do not match the current R9 edition. Earlier commits remain in Git history.
+The current branch contains R9. Superseded R8, G29 and R6 copies have been removed from the current tree and remain available in Git history.
 
 Some R9 links name an older JSON reading aid that is absent from this public snapshot. See the [metadata and packaging erratum](errata/r9-reading-aid-metadata.txt). The existing draft review, scientific, rights and output limits remain.

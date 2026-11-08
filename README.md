@@ -1,5 +1,7 @@
 # NeuroTranslation
 
+Development is paused while work focuses on [NeuroSurge](https://github.com/eliminatenoise/NeuroSurge). The selected drafts below remain available; work on this project resumes only after further notice.
+
 How does a pattern of neural activity become a movement we can measure? NeuroTranslation is a research programme for learning and testing the links between nervous-system activity, muscle activity, body mechanics and movement. It is also our name for a proposed field: mapping neural signals and representations between explicitly defined sources and targets, with the context and limits kept attached.
 
 Consider a hand reaching for a cup. A neural recording captures one observation. EMG captures electrical activity in muscles. Motion capture estimates where the hand goes. A mechanical model describes quantities such as joint motion, forces and muscle–tendon behaviour. Bringing these together gives us a testable question: can the permitted observations predict a specified outcome, and how closely does that prediction match an independent measurement?
