@@ -1,6 +1,15 @@
 # NeuroTranslation
 
-Development is paused while work focuses on [NeuroSurge](https://github.com/eliminatenoise/NeuroSurge). The selected drafts below remain available; work on this project resumes only after further notice.
+Development remains paused while work focuses on [NeuroSurge](https://github.com/eliminatenoise/NeuroSurge). Existing experimental previews are published for inspection; this does not resume training, scientific development or feature work.
+
+## Open the current previews
+
+- [Browser data companion](https://eliminatenoise.github.io/NeuroTranslation/preview.html): import and inspect JSON/CSV, check declared metadata and align compatible recordings. Its example uses invented signals; no trained model is connected. [Source and usage](demo/README.md).
+- [Rendered R9 papers](papers/): both papers in technical and accessible editions, with matching historical manuscript source and the reading-aid erratum.
+- [Experimental R11 manuscript source](papers/experimental/r11-source/): the newer unbuilt source snapshot. It has no matching R11 PDFs and omits external figure/font dependencies. Proposed G35 terminology in that snapshot remains unadopted.
+- [Portable interface source](interfaces/experimental/portable/): a recording-specific Python/HTML interface proposal. No weights, model payloads or runnable model download are included.
+
+Each preview names what you can inspect and what remains untested. An experimental upload makes the work available; it does not establish a completed Large Movement Model, biological translation or clinical use.
 
 How does a pattern of neural activity become a movement we can measure? NeuroTranslation is a research programme for learning and testing the links between nervous-system activity, muscle activity, body mechanics and movement. It is also our name for a proposed field: mapping neural signals and representations between explicitly defined sources and targets, with the context and limits kept attached.
 

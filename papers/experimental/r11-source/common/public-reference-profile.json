@@ -1,0 +1,153 @@
+{
+  "schema": "common-public-reference-export-profile-v1",
+  "status": "PROPOSED_UNADOPTED",
+  "base_G34_sha256": "3fffa79bc9f404caa7d4910e9e37de5a97371fdc1ad11bc54155d309ec5f5394",
+  "original_G35_proposal_sha256": "9e21a655aca86821e2f4ae39289620c4c859aa5511cc240d5790173a108d865c",
+  "scope": "Shared public citation/display metadata only; all 200 original term records and 9 proposals remain exact. No scientific definition, naming, permission or capability change.",
+  "term_references": {
+    "other-published-models-of-neural-recordings": {
+      "citation_keys": [
+        "ndt2_2023",
+        "poyo2023"
+      ]
+    },
+    "published-models-for-brain-scans-and-scalp-recordings": {
+      "citation_keys": [
+        "brainlm2023",
+        "neurogpt2024"
+      ],
+      "qualification": "BrainLM version 1 is supported here at the abstract-level model and modality description. Neuro-GPT uses author version 4 for the cited EEG mechanism; exact equivalence to the IEEE final publication remains unverified. No performance result is transferred."
+    },
+    "published-neural-model-comparison-tasks": {
+      "citation_keys": [
+        "nlb2021"
+      ]
+    }
+  },
+  "references": {
+    "ndt2_2023": {
+      "identity": "Ye,Collinger,Wehbe,Gaunt(2023),Neural Data Transformer2;NeurIPS36:80352–80374",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2023/file/fe51de4e7baf52e743b679e3bdba7905-Paper-Conference.pdf",
+      "locator": "Figure1;§3.1–3.2 pp2–3;§4 methods p4",
+      "supported_scope": "Multi-context pretraining on intracortical spiking activity; binned neural patches and session/subject/task embeddings. Inputs include monkey/human M1 motor tasks.",
+      "limits": "These are modality-specific prediction methods. No universal gain from arbitrary pooled datasets or proof of whole-body neural translation is supplied.",
+      "access": "relevant primary full text read",
+      "verdict": "SUPPORTED"
+    },
+    "poyo2023": {
+      "identity": "Azabou et al.(2023),A Unified,Scalable Framework for Neural Population Decoding;NeurIPS36:44937–44956",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2023/file/8ca113d122584f12a6727341aaf58887-Paper-Conference.pdf",
+      "locator": "§2.1–2.5 pp1–4;§3.1 datasets",
+      "supported_scope": "Unit embeddings and event timestamps tokenize spikes; cross-attention compresses variable populations into latent tokens. New-session embeddings can be learned without asserting matched cells.",
+      "limits": "Overall curated inventory and particular pretrained subsets have different denominators. Mechanism precedent does not prove NeuroTranslation performance, biological causality or universal transfer.",
+      "access": "relevant primary full text read",
+      "verdict": "SUPPORTED"
+    },
+    "brainlm2023": {
+      "identity": "Ortega Caro et al.(2023),BrainLM:A foundation model for brain activity recordings;bioRxiv2023.09.12.557460v1",
+      "url": "https://www.biorxiv.org/content/10.1101/2023.09.12.557460v1",
+      "locator": "Version1 abstract;DOI10.1101/2023.09.12.557460",
+      "supported_scope": "The cited preprint describes fMRI-based representation learning, distinct from intracortical spikes or scalp EEG.",
+      "limits": "Only modality/model role is supported here; detailed version1 methods were blocked. The v2 text returned in search was not substituted for version1. Preserve preprint status.",
+      "access": "Version1 primary abstract indexed;fulltext/PDF403",
+      "verdict": "LIMITED"
+    },
+    "neurogpt2024": {
+      "identity": "Cui et al.(2024),Neuro-GPT:Towards A Foundation Model for EEG;ISBI DOI10.1109/ISBI56570.2024.10635453",
+      "url": "https://arxiv.org/html/2311.03764v4",
+      "locator": "Author version4,§§2.1–2.3;Fig1–2;Table1",
+      "supported_scope": "An EEG encoder and GPT predict masked embedded EEG chunks; downstream motor-imagery classification uses BCIIV2a nine subjects.",
+      "limits": "This supports the manuscript’s mechanism/modality claim. Exact equivalence of authorv4 to IEEE final remains unverified; no performance number is imported and full GPT did not improve every condition.",
+      "access": "Relevant authorv4 methods/results read;final-publication exact equivalence not checked",
+      "verdict": "LIMITED"
+    },
+    "nlb2021": {
+      "identity": "Pei et al.(2021),Neural Latents Benchmark21;NeurIPS Datasets&Benchmarks1",
+      "url": "https://datasets-benchmarks-proceedings.neurips.cc/paper_files/paper/2021/file/979d472a84804b9f647bc185a877a8b5-Paper-round2.pdf",
+      "locator": "Primary benchmark paper17pages;dataset/evaluation sections",
+      "supported_scope": "Common neural-population modeling tasks and distinct source datasets support the bounded benchmark description.",
+      "limits": "A project-specific split,130-unit source subset and local score are not independently authenticated by the benchmark citation alone. No official benchmark ranking follows.",
+      "access": "Primary PDF obtained;role reviewed,not complete benchmark re-execution",
+      "verdict": "LIMITED"
+    },
+    "reachGraspV1": {
+      "identity": "Reach&Grasp: a multimodal dataset of the whole upper-limb during simple and complex movements (version 1.0, 2025)",
+      "url": "https://doi.org/10.48557/L6OWMM",
+      "scope": "Selected pair attribution only; recorded prior MD5 verification, not fresh payload or scientific validation."
+    },
+    "doomflyMethodsPinned": {
+      "identity": "DoomFly methods and limitations, commit 5f6c2881be5f5f40b0592a75e6ee231b50333b40",
+      "url": "https://github.com/shreyash-sharma/doomFly/blob/5f6c2881be5f5f40b0592a75e6ee231b50333b40/docs/how-it-works.md",
+      "scope": "Source injects observer-state threat geometry; authors identify MaleCNS, a failed looming test and a separately trained readout. The pinned release explicitly excludes the named v5 checkpoint. These facts do not establish natural vision, reproduction of gameplay or biological learning."
+    }
+  },
+  "bibliography_entries": {
+    "ndt2_2023": "@inproceedings{ndt2_2023,\n  author = {Ye, Joel and Collinger, Jennifer and Wehbe, Leila and Gaunt, Robert},\n  title = {{Neural Data Transformer 2: Multi-context Pretraining for Neural Spiking Activity}},\n  booktitle = {Advances in Neural Information Processing Systems},\n  volume = {36},\n  pages = {80352--80374},\n  year = {2023},\n  doi = {10.52202/075280-3523},\n  url = {https://proceedings.neurips.cc/paper_files/paper/2023/hash/fe51de4e7baf52e743b679e3bdba7905-Abstract-Conference.html}\n}",
+    "poyo2023": "@inproceedings{poyo2023,\n  author = {Azabou, Mehdi and Arora, Vinam and Ganesh, Venkataramana and Mao, Ximeng and Nachimuthu, Santosh and Mendelson, Michael J. and Richards, Blake and Perich, Matthew G. and Lajoie, Guillaume and Dyer, Eva L.},\n  title = {{A Unified, Scalable Framework for Neural Population Decoding}},\n  booktitle = {Advances in Neural Information Processing Systems},\n  volume = {36},\n  pages = {44937--44956},\n  year = {2023},\n  doi = {10.52202/075280-1948},\n  url = {https://proceedings.neurips.cc/paper_files/paper/2023/hash/8ca113d122584f12a6727341aaf58887-Abstract-Conference.html}\n}",
+    "brainlm2023": "@article{brainlm2023,\n  author = {Ortega Caro, Josue and Fonseca, Antonio H. de O. and Averill, Christopher and Rizvi, Syed A. and Rosati, Matteo and Cross, James L. and Mittal, Prateek and Zappala, Emanuele and Levine, Daniel and Dhodapkar, Rahul M. and Abdallah, Chadi G. and van Dijk, David},\n  title = {{{BrainLM}: A foundation model for brain activity recordings}},\n  journal = {bioRxiv},\n  year = {2023},\n  doi = {10.1101/2023.09.12.557460},\n  url = {https://www.biorxiv.org/content/10.1101/2023.09.12.557460v1},\n  note = {Preprint, version 1. Here only the indexed abstract supports the fMRI model role; detailed version-1 methods were inaccessible}\n}",
+    "neurogpt2024": "@inproceedings{neurogpt2024,\n  author = {Cui, Wenhui and Jeong, Woojae and Th{\\\"o}lke, Philipp and Medani, Takfarinas and Jerbi, Karim and Joshi, Anand A. and Leahy, Richard M.},\n  title = {{{Neuro-GPT}: Towards A Foundation Model For {EEG}}},\n  booktitle = {2024 IEEE International Symposium on Biomedical Imaging (ISBI)},\n  pages = {1--5},\n  publisher = {IEEE},\n  year = {2024},\n  doi = {10.1109/ISBI56570.2024.10635453},\n  url = {https://arxiv.org/html/2311.03764v4},\n  note = {Author version 4 supplies the cited EEG mechanism. Exact equivalence to the IEEE final publication is unverified; no benchmark score is transferred}\n}",
+    "nlb2021": "@inproceedings{nlb2021,\n  author = {Pei, Felix and Ye, Joel and Zoltowski, David and Wu, Anqi and Chowdhury, Raeed H. and Sohn, Hansem and O'Doherty, Joseph E. and Shenoy, Krishna V. and Kaufman, Matthew T. and Churchland, Mark and Jazayeri, Mehrdad and Miller, Lee E. and Pillow, Jonathan and Park, Il Memming and Dyer, Eva L. and Pandarinath, Chethan},\n  title = {{{Neural Latents Benchmark '21}: Evaluating latent variable models of neural population activity}},\n  booktitle = {Proceedings of the Neural Information Processing Systems Track on Datasets and Benchmarks},\n  volume = {1},\n  year = {2021},\n  url = {https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/hash/979d472a84804b9f647bc185a877a8b5-Abstract-round2.html}\n}",
+    "doomflyMethodsPinned": "@misc{doomflyMethodsPinned,\n  author = {{shreyash-sharma}},\n  title = {{DoomFly: pinned methods and limitations}},\n  howpublished = {Commit 5f6c2881be5f5f40b0592a75e6ee231b50333b40},\n  url = {https://github.com/shreyash-sharma/doomFly/blob/5f6c2881be5f5f40b0592a75e6ee231b50333b40/docs/how-it-works.md},\n  note = {Static source and author report; gameplay is not reproduced here and the named released checkpoint is absent.}\n}",
+    "reachGraspV1": "@misc{reachGraspV1,\n  title = {{Reach\\&Grasp: a multimodal dataset of the whole upper-limb during simple and complex movements}},\n  year = {2025},\n  howpublished = {IIT Dataverse, version 1.0},\n  doi = {10.48557/L6OWMM},\n  url = {https://doi.org/10.48557/L6OWMM},\n  note = {Dataset metadata declares CC BY 4.0. Only sub-03/Cyl is studied here; attribution does not establish physical calibration, synchronization or rights for every combined use.}\n}"
+  },
+  "dataset_attribution": {
+    "title": "Reach&Grasp: a multimodal dataset of the whole upper-limb during simple and complex movements",
+    "doi": "10.48557/L6OWMM",
+    "url": "https://doi.org/10.48557/L6OWMM",
+    "publisher": "IIT Dataverse",
+    "version": "1.0",
+    "released": "2025-01-22T10:15:09Z",
+    "declared_license": "CC BY 4.0",
+    "license_url": "http://creativecommons.org/licenses/by/4.0",
+    "selected_acquisition": "sub-03/Cyl",
+    "selected_files": [
+      {
+        "filename": "sub-03_task-Cyl_acq-cyberglove_motion.csv",
+        "file_id": 14486,
+        "bytes": 999735,
+        "recorded_acquisition_sha256": "174eeb0b8149614bf35e90e09b0074b6cbd8a228952ac9d3c49f48032204e101",
+        "provider_MD5": "558ac8342c9ae05505bf78ba45d731a8",
+        "recorded_provider_MD5_verified": true
+      },
+      {
+        "filename": "sub-03_task-Cyl_acq-sessantaquattro_emg.csv",
+        "file_id": 14393,
+        "bytes": 77809601,
+        "recorded_acquisition_sha256": "7c460d761aa78b1a315db7fba749da6b4bfef7c9316f471b0ac9e1cf99a32037",
+        "provider_MD5": "e270f1a8e54673e43a0f00dc28aa2fc0",
+        "recorded_provider_MD5_verified": true
+      }
+    ],
+    "changes": "Recorded processing excludes four invalid rows and derives trailing 40 ms surface-EMG RMS and normalized forecasting features; no processing or checksum is repeated by this Source update.",
+    "limits": "Metadata attribution only. One studied acquisition; no new raw/cache read, fresh checksum, physical calibration, synchronization, heldout/generalization or combined-use rights clearance."
+  },
+  "template_contract": {
+    "term_records_sha256": "52abbdba3892d2b4de5a839baefe620d9a0926a8a0c9d7073d6b049c3dc2a72f",
+    "proposal_records_sha256": "f31c6790fdfd0a0f62171eef49a7bebb024182011e4ad933d12036e8d017bdd5",
+    "templates": {
+      "neurotranslation-technical": {
+        "path": "templates/current-definitions-neurotranslation-technical.tex",
+        "sha256": "f6c90ae9fd60a6e390f93395df0ac0269d5d14b9885ddece9cca0bbd0ef2292a"
+      },
+      "neurotranslation-explained": {
+        "path": "templates/current-definitions-neurotranslation-explained.tex",
+        "sha256": "2d0bbbbcb5404ddd525baf02915812a108a66aeb4591b23ac6556648058d3a83"
+      },
+      "brain2body-article": {
+        "path": "templates/current-definitions-brain2body-article.tex",
+        "sha256": "21a4b7476b6af344953272d193e35e50f17f42a955a98327f86995a641a81b64"
+      },
+      "brain2body-simple-english": {
+        "path": "templates/current-definitions-brain2body-simple-english.tex",
+        "sha256": "69cdb49515f06108bb15077773615257eaae21c2010bcbfa9497e235bd75d3cb"
+      }
+    },
+    "rule": "Frozen editorial templates may be rebound only while full term/proposal content digests match; changed definitions fail closed for new review."
+  },
+  "provenance": {
+    "kind": "Derived editorial/reference proposal from integrated primary-source audits and current writing instructions.",
+    "task_sha256": "e2f371b3aa55c74a32cfa9ecdfb5cf0973b18c15522c799cab79e1bdbedcf652",
+    "primary_claim_integration_sha256": "fc4e94eb98e929d8e38dcc4f1cdf10585078bdb51cdd7afd2f7f85350a1a8d3f",
+    "no_new_genuine_user_definition_authority": true
+  }
+}

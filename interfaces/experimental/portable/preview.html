@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>NeuroTranslator · Recent Fingertip Velocity</title>
+<style nonce="__CSP_NONCE__">
+:root{font-family:Arial,Helvetica,sans-serif;color:#181818;background:#fafafa;line-height:1.55;color-scheme:light}
+*{box-sizing:border-box}body{margin:0}main{max-width:1120px;margin:auto;padding:2rem 1.2rem 4rem}h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.08;max-width:20ch;margin:.6rem 0 1.4rem}h2{font-size:1.45rem;margin:0 0 1rem}h3{font-size:1.1rem;margin:1.3rem 0 .5rem}p{max-width:78ch}header{margin-bottom:2rem}.eyebrow{font-weight:700;letter-spacing:.04em}.note{border-left:3px solid #555;padding:.4rem 1rem}.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2rem}.panel{border:1px solid #aaa;border-radius:.6rem;padding:1.3rem;background:white}fieldset{border:0;padding:0;margin:0;min-width:0}legend{font-weight:700;padding:0;margin:.8rem 0}label{display:block;font-weight:700;margin:1rem 0 .35rem}.inline{display:flex;align-items:center;gap:.6rem;font-weight:400}input,select,textarea,button,output,pre,code,svg text{font-family:Arial,Helvetica,sans-serif;font-size:1rem}input[type=text],textarea,select{width:100%;border:1px solid #666;border-radius:.25rem;background:#fff;color:#181818;padding:.65rem}textarea{resize:vertical;min-height:7rem;line-height:1.45;overflow-wrap:anywhere}button{padding:.7rem 1rem;min-height:44px;border:1px solid #222;border-radius:.3rem;background:#202020;color:white;cursor:pointer;margin:.8rem .3rem .3rem 0}button.secondary{background:white;color:#181818}button:disabled{cursor:default;opacity:.55}input[type=checkbox]{width:1.2rem;height:1.2rem}a{color:inherit}summary{cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:700}details{margin-top:1rem}pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:22rem;overflow:auto;border:1px solid #bbb;padding:.8rem;background:#f6f6f6}small,.small{font-size:.92rem}output{display:block;font-size:1.4rem;font-variant-numeric:tabular-nums}.components{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.components dt{font-weight:700}.components dd{margin:.3rem 0}.status{padding:.75rem;border:1px solid #777;min-height:4.5rem;overflow-wrap:anywhere}.figure{width:100%;height:auto;max-height:380px;display:block}svg text{font-size:13px;fill:#181818}.axis{stroke:#777;stroke-width:1}.estimate{stroke:#141414;stroke-width:3}.hidden{display:none}:focus-visible{outline:3px solid #1262bb;outline-offset:3px}footer{margin-top:2rem;border-top:1px solid #aaa;padding-top:1rem}noscript p{border:2px solid #222;padding:1rem}
+@media(max-width:760px){.layout{grid-template-columns:1fr}main{padding:1.2rem .9rem 3rem}.panel{padding:1rem}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<p class="eyebrow">NeuroTranslator</p>
+<h1>Put a number on the movement.</h1>
+<p>A fingertip changes position. This decoder reads the preceding 400 ms of recorded cortical counts and estimates its recent XY velocity. The arrow gives those two signed components a direction; it does not move a body or reconstruct a path.</p>
+<p class="note">This is an unexecuted source candidate. Model files, a qualified running package, a download and images from that package have not been produced here.</p>
+</header>
+<noscript><p>JavaScript is needed to submit a count window and draw its estimate. After separate runtime qualification, open the local address printed by the server; opening this HTML file directly cannot load a model.</p></noscript>
+<div class="layout">
+<section class="panel" aria-labelledby="input-title">
+<h2 id="input-title">Give the counts their context</h2>
+<p>The source is <strong>Loco, a nonhuman-primate reaching recording</strong>, session loco_20170215_02. Its 344 sorted recording features comprise 163 from primary motor cortex (M1) and 181 from primary somatosensory cortex (S1). Another recording with 344 columns is still another recording.</p>
+<form id="decode-form">
+<fieldset id="inputs" disabled>
+<label for="model">Training budget</label>
+<select id="model" name="model"><option value="first60seconds">First 60 seconds — direct model</option><option value="full_training_partition">Full training partition — adapted model</option></select>
+<p id="model-note">The direct model needs both recorded regions. Neither budget established source-transfer benefit in the saved study.</p>
+<fieldset id="regions" aria-describedby="region-note">
+<legend>Recorded regions</legend>
+<label class="inline" for="explicit-mask"><input type="checkbox" id="explicit-mask">Send an explicit region mask</label>
+<label class="inline" for="m1"><input type="checkbox" id="m1" checked disabled>M1 present · 163 features</label>
+<label class="inline" for="s1"><input type="checkbox" id="s1" checked disabled>S1 present · 181 features</label>
+<p id="region-note" class="small">Leaving the mask off means both regions are present. The adapted model can omit a supported region branch, including its bias. It cannot observe the missing cells; all regions missing is unsupported. Keep the full 20 × 344 layout in every case.</p>
+</fieldset>
+<label for="origin">Where did you get these values?</label>
+<select id="origin" required><option value="">Choose an origin</option><option value="entered">Entered values</option><option value="simulated">Simulated values</option><option value="caller_declared_measured">Caller-declared measured values</option></select>
+<p class="small" id="origin-note">That label is your declaration. A matching source hash and feature list cannot authenticate a sensor or turn entered values into measurements.</p>
+<label for="source-sha">Caller source SHA-256</label>
+<input id="source-sha" type="text" required maxlength="64" pattern="[0-9a-f]{64}" spellcheck="false" autocomplete="off" autocapitalize="none" aria-describedby="origin-note">
+<label for="unit-ids">Caller ordered source-local feature IDs · JSON array</label>
+<textarea id="unit-ids" rows="5" required spellcheck="false" autocomplete="off" aria-describedby="id-note"></textarea>
+<p id="id-note" class="small">Supply all 344 IDs, in the original channel and sorted-slot order. These are recording-feature identities, with no persistent cell match across recordings.</p>
+<button type="button" class="secondary" id="copy-identity">Copy expected identity into the inputs</button>
+<p class="small">This button fills the declared source hash and ID list only. Use them only with the correct count-column layout. It does not verify where your counts came from.</p>
+<label for="counts">Completed-bin counts · 20 rows × 344 columns · JSON array</label>
+<textarea id="counts" rows="9" required spellcheck="false" autocomplete="off" aria-describedby="counts-note"></textarea>
+<p id="counts-note" class="small">Rows run from oldest to newest. Each bin lasts 20 ms; all twenty cover 400 ms. The server checks the original JSON decimal values: present-region counts must be nonnegative integers preserved exactly in float32. Every column still needs a finite JSON number. Before array conversion, the interface replaces masked-region values with zero placeholders; the decoder then omits that region’s whole branch, including its bias. No example window is preloaded.</p>
+<button id="estimate" type="submit">Estimate recent velocity</button>
+</fieldset>
+</form>
+<details><summary>Inspect this model’s expected input and identity</summary><p>The metadata below identifies the loaded selected export, expected source and ordered features. It supplies no raw recording, replay, protected reference, weights or file-serving link.</p><pre id="model-identity" tabindex="0">No model metadata has been loaded.</pre></details>
+</section>
+<section class="panel" aria-labelledby="output-title">
+<h2 id="output-title">Read the estimate</h2>
+<p id="status" class="status" role="status" aria-live="polite" aria-atomic="true">Waiting to load the model descriptions from the local server.</p>
+<div id="result" hidden>
+<p id="result-context"></p>
+<dl class="components"><div><dt>X · m/s</dt><dd><output id="vx"></output></dd></div><div><dt>Y · m/s</dt><dd><output id="vy"></output></dd></div></dl>
+<svg class="figure" viewBox="0 0 360 360" role="img" aria-labelledby="vector-title vector-description">
+<title id="vector-title">Signed XY model-estimated velocity</title>
+<desc id="vector-description">No estimate yet.</desc>
+<defs><marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#141414"/></marker></defs>
+<line class="axis" x1="35" y1="180" x2="325" y2="180"/><line class="axis" x1="180" y1="35" x2="180" y2="325"/>
+<text x="310" y="170">+X</text><text x="23" y="170">−X</text><text x="190" y="30">+Y</text><text x="190" y="340">−Y</text><text x="163" y="198">0</text>
+<line id="vector" class="estimate" x1="180" y1="180" x2="180" y2="180" marker-end="url(#arrowhead)"/>
+<circle id="tip" cx="180" cy="180" r="3" fill="#141414"/>
+</svg>
+<p id="scale" class="small"></p>
+<p>These numbers are <strong>model estimates</strong>. No calibrated uncertainty interval is supplied. Their numerical precision does not establish biological accuracy, and no independent reference velocity is measured by this page.</p>
+<details><summary>Inspect this response</summary><pre id="response" tabindex="0"></pre></details>
+</div>
+<p>The target velocity was derived from successive selected fingertip positions divided by the actual elapsed time. Source XY positions use −0.01 × rawfinger columns 1:3, retaining the original (z, −x, −y) centimetre convention. The plotted signs follow that transformed source frame; they do not designate an anatomical forward or left direction.</p>
+<p>The nominal last position support ends 4 ms before the count-bin end. Physical acquisition and physiological latency remain unknown. Recent recorded-task velocity gives this display its scope; future motor commands, unique intent and human EEG equivalence remain unestablished.</p>
+</section>
+</div>
+<section aria-labelledby="mechanism-title">
+<h2 id="mechanism-title">From a count window to two components</h2>
+<p>A large count can swamp a small one. The decoder first takes the square root of the counts and standardizes them using saved training values. The short-budget model reads the 344 recorded features directly. The full-budget model transforms each available region through its learned matrix and bias, then adds the branches into 171 computational coordinates. Those coordinates belong to an adapter’s input basis; they are not 171 measured cells.</p>
+<p>The next stage has to carry information across twenty bins. A gated recurrent unit (GRU) does this with a running state: reset and update gates control what it retains. Its final state and the window-mean input feed the velocity head, and saved scalers return the estimate in metres per second. Changing a count changes the input to that saved computation. It does not train the model or teach a nervous system.</p>
+<p>Both exports were selected on validation data, with that choice unchanged after the protected test. The saved study did not confirm source-transfer benefit for either budget. A model can execute the saved calculation correctly and still fail a broader scientific claim.</p>
+<details><summary>What the existing software comparison checked</summary><p>The historical independent release comparison covered 8,330 windows per budget, two components each: 33,320 scalar outputs in total. Saved PyTorch replay was bit-exact to its reference. NumPy maximum differences were 1.4901161193847656e-08 m/s for the short-budget model and 3.725290298461914e-08 m/s for the full-budget model, against absolute tolerance 2e-6 m/s and relative tolerance 1e-5. Missing-region checks covered 100 sampled full-budget windows per condition. This was an implementation comparison, with PyTorch imports blocked for portable inference. It supplies no new movement accuracy, biological learning or current interface timing result.</p></details>
+<p>A full body view would need its own anatomy, physics and a series of real-world reference checks. The required full lifelike 3D body, functional GUI, broader source-specific models and independent scientific tests remain unfinished. This component display does not replace them. It performs no stimulation, actuation or spinal writing; unmeasured peripheral and spinal activity remains unmeasured.</p>
+</section>
+<footer>
+<p class="small">NeuroTranslation names the proposed field; NeuroTranslator names the software; NeuroTranslate names a proposed mapping operation. Current companion terms: glossary revision 28, SHA-256 c253cdfa96c3ca68877ae2f5af05322d9876952bef8bed5eb646928d3ec90041. Serialized model metadata remains at revision 5, SHA-256 17fadf58b0e550b1fc95732234dceb168dc0f399f08afcdd204e5e466898d235, including its historical spelling.</p>
+<p class="small">Source attribution: Loco recording loco_20170215_02, Zenodo record 3854034. The acquisition receipt reports CC BY 4.0; model, code, dependency and redistribution rights still need their own checks. Nothing here publishes or distributes the model.</p>
+</footer>
+</main>
+<script nonce="__CSP_NONCE__">
+"use strict";
+const byId = id => document.getElementById(id);
+const status = byId("status"), inputs = byId("inputs"), result = byId("result");
+let catalog = [], token = "", pending = false, uncertain = false, generation = 0;
+const LIMIT = 1500000, TIMEOUT_MS = 45000;
+function say(text) { status.textContent = text; }
+function clearResult() {
+  result.hidden = true;
+  byId("vx").textContent = ""; byId("vy").textContent = "";
+  byId("response").textContent = ""; byId("result-context").textContent = "";
+  byId("vector").setAttribute("x2", "180"); byId("vector").setAttribute("y2", "180");
+  byId("tip").setAttribute("cx", "180"); byId("tip").setAttribute("cy", "180");
+  byId("vector-description").textContent = "No current estimate.";
+}
+function chosen() { return catalog.find(item => item.id === byId("model").value); }
+function maskControls() {
+  const model = chosen(), adapted = Boolean(model && model.supports_region_mask);
+  const explicit = byId("explicit-mask").checked;
+  byId("m1").disabled = !explicit || !adapted;
+  byId("s1").disabled = !explicit || !adapted;
+  if (!adapted) { byId("m1").checked = true; byId("s1").checked = true; }
+}
+function modelChanged() {
+  const model = chosen();
+  byId("explicit-mask").checked = false;
+  byId("m1").checked = true; byId("s1").checked = true;
+  maskControls();
+  byId("model-note").textContent = model && model.supports_region_mask
+    ? "The adapted model uses the same 344 recorded features and a 171-coordinate computational basis. It supports explicit region gating. Neither budget established source-transfer benefit."
+    : "The direct model needs both recorded regions and all 344 features. Neither budget established source-transfer benefit.";
+  byId("model-identity").textContent = model ? JSON.stringify(model, null, 2) : "No model metadata is available.";
+  // Identity and counts are never silently filled or replaced on model selection.
+}
+function changed() {
+  generation += 1; clearResult();
+  if (!pending && !uncertain) say("Input changed. No estimate is shown for these values yet.");
+}
+// Native JSON.parse retains only the last duplicate. Reject duplicate keys first,
+// including escaped-equivalent names, without evaluating or repairing the text.
+function parseEnteredJSON(text, label) {
+  let pos = 0;
+  function ws() { while (/\s/.test(text[pos] || "") && pos < text.length) pos++; }
+  function string() {
+    const start = pos++;
+    while (pos < text.length) {
+      const ch = text[pos++];
+      if (ch === "\\") { pos++; continue; }
+      if (ch === '"') return JSON.parse(text.slice(start, pos));
+    }
+    throw new Error(label + ": an unterminated JSON string was found.");
+  }
+  function value(depth) {
+    if (depth > 30) throw new Error(label + ": JSON nesting is too deep.");
+    ws(); const ch = text[pos];
+    if (ch === '"') { string(); return; }
+    if (ch === "{" || ch === "[") {
+      const object = ch === "{", closing = object ? "}" : "]", keys = new Set(); pos++; ws();
+      if (text[pos] === closing) { pos++; return; }
+      while (pos < text.length) {
+        if (object) {
+          ws(); if (text[pos] !== '"') throw new Error(label + ": JSON object keys must be strings.");
+          const key = string();
+          if (keys.has(key)) throw new Error(label + ": duplicate JSON keys are unsupported.");
+          keys.add(key); ws(); if (text[pos++] !== ":") throw new Error(label + ": expected a colon.");
+        }
+        value(depth + 1); ws();
+        const separator = text[pos++];
+        if (separator === closing) return;
+        if (separator !== ",") throw new Error(label + ": expected a comma or closing bracket.");
+      }
+      throw new Error(label + ": incomplete JSON.");
+    }
+    const start = pos;
+    while (pos < text.length && !/[\s,\]}]/.test(text[pos])) pos++;
+    if (start === pos) throw new Error(label + ": a JSON value is missing.");
+    JSON.parse(text.slice(start, pos));
+  }
+  value(0); ws();
+  if (pos !== text.length) throw new Error(label + ": unexpected text after JSON.");
+  const parsed = JSON.parse(text);
+  function finite(item) {
+    if (typeof item === "number" && !Number.isFinite(item)) throw new Error(label + ": numbers must be finite.");
+    if (item && typeof item === "object") Object.values(item).forEach(finite);
+  }
+  finite(parsed); return parsed;
+}
+async function request(path, options = {}) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  try {
+    const response = await fetch(path, {...options, signal: controller.signal, cache: "no-store", credentials: "omit", redirect: "error"});
+    const contentType = response.headers.get("content-type") || "";
+    if (!contentType.toLowerCase().startsWith("application/json")) throw new Error("The local server returned an unexpected response type.");
+    const body = await response.text();
+    if (new TextEncoder().encode(body).length > LIMIT) throw new Error("The local response exceeds 1500 kB.");
+    const data = JSON.parse(body);
+    if (!response.ok) {
+      const error = new Error(typeof data.error === "string" ? data.error : "The local request was refused.");
+      error.definiteResponse = true; throw error;
+    }
+    return data;
+  } finally { clearTimeout(timer); }
+}
+function signed(value) { return (value >= 0 ? "+" : "") + value.toPrecision(7); }
+function show(data, payload) {
+  if (data.request_id !== payload.request_id || data.model !== payload.model ||
+      data.source_sha256 !== payload.source_sha256 || data.velocity_unit !== "m/s" ||
+      data.input_origin !== payload.input_origin || data.validation_selected_run !== chosen().validation_selected_run ||
+      JSON.stringify(data.region_mask) !== JSON.stringify(payload.region_mask || null) || data.observed !== false ||
+      data.output_kind !== "model_estimate" || data.origin_authenticated !== false ||
+      data.context_bins !== 20 || data.bin_seconds !== 0.02 || data.history_seconds !== 0.4 ||
+      !Array.isArray(data.velocity_xy) || data.velocity_xy.length !== 2 ||
+      !data.velocity_xy.every(x => typeof x === "number" && Number.isFinite(x))) {
+    throw new Error("The response does not match this input and its velocity contract.");
+  }
+  const [x, y] = data.velocity_xy, extent = Math.max(Math.abs(x), Math.abs(y), 0.1);
+  const endX = 180 + x / extent * 130, endY = 180 - y / extent * 130;
+  byId("vx").textContent = signed(x); byId("vy").textContent = signed(y);
+  byId("vector").setAttribute("visibility", x === 0 && y === 0 ? "hidden" : "visible");
+  byId("vector").setAttribute("x2", String(endX)); byId("vector").setAttribute("y2", String(endY));
+  byId("tip").setAttribute("cx", String(endX)); byId("tip").setAttribute("cy", String(endY));
+  const mask = payload.region_mask || {M1:true, S1:true};
+  byId("result-context").textContent = chosen().label + ". Input: " + payload.input_origin +
+    " (unauthenticated declaration). M1 " + (mask.M1 ? "present" : "masked") +
+    "; S1 " + (mask.S1 ? "present" : "masked") + ". Output: model estimate, not an observation.";
+  byId("scale").textContent = "Axis extent: −" + extent.toPrecision(7) + " to +" + extent.toPrecision(7) +
+    " m/s on each axis; the scale adjusts for each estimate. Equal axis scales preserve direction. No position or trajectory is calculated.";
+  byId("vector-description").textContent = "Model estimate: X " + signed(x) + " metres per second, Y " + signed(y) +
+    " metres per second. Equal signed axes; extent " + extent.toPrecision(7) + " metres per second.";
+  byId("response").textContent = JSON.stringify(data, null, 2); result.hidden = false;
+}
+byId("model").addEventListener("change", modelChanged);
+byId("explicit-mask").addEventListener("change", maskControls);
+inputs.addEventListener("input", changed);
+inputs.addEventListener("change", changed);
+byId("copy-identity").addEventListener("click", () => {
+  const model = chosen(); if (!model || pending || uncertain) return;
+  byId("source-sha").value = model.source_sha256;
+  byId("unit-ids").value = JSON.stringify(model.unit_ids);
+  changed(); say("Expected identity copied as a declaration. Check that your counts use this exact source and order.");
+});
+byId("decode-form").addEventListener("submit", async event => {
+  event.preventDefault(); if (pending || uncertain || !chosen()) return;
+  clearResult();
+  let payload, body;
+  try {
+    const counts = parseEnteredJSON(byId("counts").value, "Counts");
+    const ids = parseEnteredJSON(byId("unit-ids").value, "Feature IDs");
+    if (!Array.isArray(counts) || counts.length !== 20 || counts.some(row => !Array.isArray(row) || row.length !== 344 || row.some(x => typeof x !== "number" || !Number.isFinite(x)))) throw new Error("Supply 20 rows of 344 finite numeric counts.");
+    if (!Array.isArray(ids) || ids.length !== 344 || ids.some(x => typeof x !== "string")) throw new Error("Supply the ordered JSON array of 344 feature ID strings.");
+    if (!byId("origin").value) throw new Error("Choose where these values came from.");
+    payload = {request_id: crypto.randomUUID(), model: byId("model").value, counts,
+      source_sha256: byId("source-sha").value, unit_ids: ids, input_origin: byId("origin").value,
+      count_unit:"counts/bin", velocity_unit:"m/s", bin_seconds:0.02};
+    if (byId("explicit-mask").checked) payload.region_mask = {M1:byId("m1").checked, S1:byId("s1").checked};
+    // Preserve the entered numeric literals: browser Number parsing must not
+    // round a large integer before the Python/decoder checks can reject it.
+    const envelope = {...payload}; delete envelope.counts;
+    body = JSON.stringify(envelope).slice(0, -1) + ",\"counts\":" + byId("counts").value + "}";
+    if (new TextEncoder().encode(body).length > LIMIT) throw new Error("The complete request exceeds 1500 kB (1,500,000 bytes).");
+  } catch (error) { say("Input needs attention: " + error.message + " No request was sent."); return; }
+  pending = true; inputs.disabled = true;
+  const current = ++generation;
+  say("Pending: the selected saved model is reading this window. No previous estimate is shown.");
+  try {
+    const data = await request("/api/decode", {method:"POST", headers:{"Content-Type":"application/json", "X-Preview-Token":token}, body});
+    if (current !== generation) throw new Error("The inputs changed before the response completed.");
+    show(data, payload); say("Complete: a model-estimated recent velocity is shown for this exact submitted window.");
+  } catch (error) {
+    clearResult();
+    if (error.definiteResponse) say("Failed: " + error.message + " No estimate is shown. Nothing was retried.");
+    else {
+      uncertain = true;
+      say("Failed or timed out: " + (error.name === "AbortError" ? "the 45-second browser deadline expired." : error.message) +
+        " The server outcome may be unknown. No retry was made; further submissions on this page are disabled. Closing the page does not cancel server inference. Resolve the outcome before any new attempt.");
+    }
+  } finally { pending = false; inputs.disabled = uncertain; maskControls(); }
+});
+async function initialize() {
+  if (location.protocol !== "http:" || location.hostname !== "127.0.0.1") {
+    say("Open the exact http://127.0.0.1 address printed by the separately qualified local server. Direct file opening cannot load a model."); return;
+  }
+  try {
+    const data = await request("/api/models");
+    if (!Array.isArray(data.models) || data.models.length !== 2 || typeof data.request_token !== "string" ||
+        data.models[0].id !== "first60seconds" || data.models[1].id !== "full_training_partition" ||
+        data.models.some(m => !Array.isArray(m.unit_ids) || m.unit_ids.length !== 344 || m.velocity_unit !== "m/s" || !Array.isArray(m.input_shape) || m.input_shape[0] !== 20 || m.input_shape[1] !== 344)) throw new Error("The local model descriptions do not match this interface.");
+    catalog = data.models; token = data.request_token; inputs.disabled = false; modelChanged();
+    say("Ready for a complete entered count window. No prediction has been made.");
+  } catch (error) { say("Model descriptions could not be loaded. No retry was made. Check the qualified local bundle before reopening this page."); }
+}
+initialize();
+</script>
+</body>
+</html>

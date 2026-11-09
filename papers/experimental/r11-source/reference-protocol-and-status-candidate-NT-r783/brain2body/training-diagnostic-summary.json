@@ -1,0 +1,345 @@
+{
+  "schema": "paper-scientific-summary-allowlist-v1",
+  "status": "PUBLIC_CANDIDATE_NOT_SELECTED_OR_PUBLISHED",
+  "title": "One acquisition, two self-forecast tasks:40-update pilot and990-update continuation",
+  "study_scope": {
+    "partition": "original TRAIN only",
+    "acquisition": "sub-03/Cyl",
+    "independent_acquisitions": 1,
+    "source_rows": 3127,
+    "excluded_invalid_rows": 4,
+    "retained_rows": 3123,
+    "support_segment_half_open": [
+      0,
+      3123
+    ],
+    "derived_surface_EMG_RMS_channels": 64,
+    "RMS_trailing_window_ms": 40,
+    "RMS_source_declared_unit": "mV-derived RMS",
+    "glove_angle_channels": 18,
+    "glove_source_declared_unit": "degree",
+    "context_rows": 64,
+    "positive_row_offsets": [
+      1,
+      10
+    ],
+    "time_limit": "Recorded row order; physical synchronization, feature availability and online latency unqualified. Row offsets are not independently verified physiological delays."
+  },
+  "model": {
+    "architecture": "separate modality adapters and prediction heads around one GRU core",
+    "tasks": "each stream predicts its own later recorded features from its own history",
+    "not_demonstrated": [
+      "cross-modal prediction",
+      "neural-to-body translation",
+      "force or afferent mapping",
+      "four-source Large Movement Model",
+      "biological learning"
+    ]
+  },
+  "optimization": {
+    "parent_joint_updates": 40,
+    "parent_batch_windows_per_task": 4,
+    "parent_exposures_per_task": 160,
+    "additional_joint_updates": 950,
+    "continued_batch_windows_per_task": 32,
+    "full_batches": 949,
+    "last_batch_windows_per_task": 17,
+    "cumulative_joint_updates": 990,
+    "additional_exposures_per_task": 30385,
+    "cumulative_exposures_per_task": 30545,
+    "catalog_windows_per_task": 6109,
+    "catalog_offset1_windows": 3059,
+    "catalog_offset10_windows": 3050,
+    "cumulative_catalog_passes": 5,
+    "normalizers": "Fit once on original TRAIN frames; saved scalers reused, zero refits in continuation/evaluation.",
+    "restore": "Parent40 weights, AdamW moments/step40 and saved Torch RNG; Torch RNG restored last after constructors and optimizer load.",
+    "confounding": "Batch4→32, greater update budget and wider repeated catalog exposure change together. Not a coverage-only causal test or more independent data."
+  },
+  "evaluation_protocol": {
+    "conditions": [
+      "sealed_initial0",
+      "frozen_parent40",
+      "continued_final990",
+      "past_featurewise_persistence"
+    ],
+    "first_scope_batch_size": 4,
+    "full_scope_batch_size": 32,
+    "hash_limit": "condition-specific hash domains; differences alone do not demonstrate different predictions or better quality",
+    "kind": "new_four_condition_matched_TRAIN_diagnostic",
+    "mask": "same observed target support for every condition; persistence must support every targetfeature",
+    "metric": "float32 prediction/residual coordinates, float64SSE/exact observedfeaturecount",
+    "models": "initial0,parent40 baseline states frozen before training; final990 aftertraining eval/inference_mode",
+    "normalization": "same saved TRAIN scalers",
+    "offsets": [
+      1,
+      10
+    ],
+    "promotion": "UNPROMOTED_TRAIN_DIAGNOSTIC regardless of TRAIN success; all independent heldout/science gates remain",
+    "report": "per-source/per-scope/per-offset1/10/all normalizedMSE,SSE,feature/windowcounts,window/mask/target/predictionaggregateIDs",
+    "scopes": [
+      "exact_original_first4_selected_windows",
+      "all_selected_original_TRAIN_windows"
+    ]
+  },
+  "metrics": {
+    "emg_rms": {
+      "all_selected_original_TRAIN_windows": {
+        "1": {
+          "windows": 3059,
+          "observed_target_features": 195776,
+          "SSE": {
+            "continued_final990": 80766.14645249287,
+            "frozen_parent40": 191612.28820297052,
+            "past_featurewise_persistence": 28320.90216334019,
+            "sealed_initial0": 199767.5057451305
+          },
+          "normalized_MSE": {
+            "continued_final990": 0.41254365424001344,
+            "frozen_parent40": 0.978732266482973,
+            "past_featurewise_persistence": 0.14465972419162815,
+            "sealed_initial0": 1.020388125945624
+          }
+        },
+        "10": {
+          "windows": 3050,
+          "observed_target_features": 195200,
+          "SSE": {
+            "continued_final990": 108354.7659345867,
+            "frozen_parent40": 225052.05388908437,
+            "past_featurewise_persistence": 143370.17652468465,
+            "sealed_initial0": 198837.51229853716
+          },
+          "normalized_MSE": {
+            "continued_final990": 0.5550961369599728,
+            "frozen_parent40": 1.1529306039399814,
+            "past_featurewise_persistence": 0.7344783633436713,
+            "sealed_initial0": 1.0186347966113585
+          }
+        },
+        "all": {
+          "windows": 6109,
+          "observed_target_features": 390976,
+          "SSE": {
+            "continued_final990": 189120.91238707962,
+            "frozen_parent40": 416664.342092055,
+            "past_featurewise_persistence": 171691.07868802472,
+            "sealed_initial0": 398605.0180436678
+          },
+          "normalized_MSE": {
+            "continued_final990": 0.48371488886038944,
+            "frozen_parent40": 1.065703117562344,
+            "past_featurewise_persistence": 0.4391345726797162,
+            "sealed_initial0": 1.0195127528126222
+          }
+        }
+      },
+      "exact_original_first4_selected_windows": {
+        "1": {
+          "windows": 2,
+          "observed_target_features": 128,
+          "SSE": {
+            "continued_final990": 22.043402925656334,
+            "frozen_parent40": 27.061275854495648,
+            "past_featurewise_persistence": 12.961580934688437,
+            "sealed_initial0": 121.51387155950582
+          },
+          "normalized_MSE": {
+            "continued_final990": 0.1722140853566901,
+            "frozen_parent40": 0.21141621761324725,
+            "past_featurewise_persistence": 0.10126235105225341,
+            "sealed_initial0": 0.9493271215586392
+          }
+        },
+        "10": {
+          "windows": 2,
+          "observed_target_features": 128,
+          "SSE": {
+            "continued_final990": 10.873300205301394,
+            "frozen_parent40": 8.583498403579856,
+            "past_featurewise_persistence": 40.37860743477884,
+            "sealed_initial0": 63.36027873450734
+          },
+          "normalized_MSE": {
+            "continued_final990": 0.08494765785391714,
+            "frozen_parent40": 0.06705858127796763,
+            "past_featurewise_persistence": 0.3154578705842097,
+            "sealed_initial0": 0.4950021776133386
+          }
+        },
+        "all": {
+          "windows": 4,
+          "observed_target_features": 256,
+          "SSE": {
+            "continued_final990": 32.91670313095773,
+            "frozen_parent40": 35.6447742580755,
+            "past_featurewise_persistence": 53.340188369467285,
+            "sealed_initial0": 184.87415029401313
+          },
+          "normalized_MSE": {
+            "continued_final990": 0.12858087160530363,
+            "frozen_parent40": 0.13923739944560742,
+            "past_featurewise_persistence": 0.20836011081823158,
+            "sealed_initial0": 0.7221646495859888
+          }
+        }
+      }
+    },
+    "glove_angles": {
+      "all_selected_original_TRAIN_windows": {
+        "1": {
+          "windows": 3059,
+          "observed_target_features": 55062,
+          "SSE": {
+            "continued_final990": 19238.071196943147,
+            "frozen_parent40": 63131.93454421503,
+            "past_featurewise_persistence": 27.0270017911129,
+            "sealed_initial0": 48254.97625176832
+          },
+          "normalized_MSE": {
+            "continued_final990": 0.34938925569254925,
+            "frozen_parent40": 1.1465608685520874,
+            "past_featurewise_persistence": 0.0004908467144512168,
+            "sealed_initial0": 0.8763752906136414
+          }
+        },
+        "10": {
+          "windows": 3050,
+          "observed_target_features": 54900,
+          "SSE": {
+            "continued_final990": 21689.15995869177,
+            "frozen_parent40": 68736.3802506318,
+            "past_featurewise_persistence": 2671.6405503669525,
+            "sealed_initial0": 47966.52130632012
+          },
+          "normalized_MSE": {
+            "continued_final990": 0.3950666659142399,
+            "frozen_parent40": 1.2520287841645137,
+            "past_featurewise_persistence": 0.048663762301765986,
+            "sealed_initial0": 0.8737071276196744
+          }
+        },
+        "all": {
+          "windows": 6109,
+          "observed_target_features": 109962,
+          "SSE": {
+            "continued_final990": 40927.23115563494,
+            "frozen_parent40": 131868.31479484678,
+            "past_featurewise_persistence": 2698.6675521580646,
+            "sealed_initial0": 96221.4975580885
+          },
+          "normalized_MSE": {
+            "continued_final990": 0.37219431399606173,
+            "frozen_parent40": 1.1992171367822229,
+            "past_featurewise_persistence": 0.024541819466343505,
+            "sealed_initial0": 0.8750431745338253
+          }
+        }
+      },
+      "exact_original_first4_selected_windows": {
+        "1": {
+          "windows": 2,
+          "observed_target_features": 36,
+          "SSE": {
+            "continued_final990": 56.15984263325623,
+            "frozen_parent40": 28.19820646251983,
+            "past_featurewise_persistence": 0.0002555314201471495,
+            "sealed_initial0": 54.504452648796835
+          },
+          "normalized_MSE": {
+            "continued_final990": 1.559995628701562,
+            "frozen_parent40": 0.7832835128477731,
+            "past_featurewise_persistence": 7.098095004087487e-06,
+            "sealed_initial0": 1.51401257357769
+          }
+        },
+        "10": {
+          "windows": 2,
+          "observed_target_features": 36,
+          "SSE": {
+            "continued_final990": 57.76301586907957,
+            "frozen_parent40": 28.082886676269005,
+            "past_featurewise_persistence": 0.03260768911146206,
+            "sealed_initial0": 53.03655937938525
+          },
+          "normalized_MSE": {
+            "continued_final990": 1.6045282185855436,
+            "frozen_parent40": 0.7800801854519168,
+            "past_featurewise_persistence": 0.0009057691419850571,
+            "sealed_initial0": 1.4732377605384792
+          }
+        },
+        "all": {
+          "windows": 4,
+          "observed_target_features": 72,
+          "SSE": {
+            "continued_final990": 113.9228585023358,
+            "frozen_parent40": 56.28109313878883,
+            "past_featurewise_persistence": 0.03286322053160921,
+            "sealed_initial0": 107.54101202818208
+          },
+          "normalized_MSE": {
+            "continued_final990": 1.5822619236435527,
+            "frozen_parent40": 0.781681849149845,
+            "past_featurewise_persistence": 0.0004564336184945723,
+            "sealed_initial0": 1.4936251670580845
+          }
+        }
+      }
+    }
+  },
+  "quality_decision": "Final990 improves both pooled fullTRAIN streams over initial0 and parent40, but FAILS persistence in both; private checkpoint UNPROMOTED.",
+  "heterogeneity": "EMG offset10 beats persistence; offset1 fails. Glove fails both offsets. First4 glove worsens versus initial0 and parent40; first4 is a correlated subset of fullTRAIN.",
+  "uncertainty": "One acquisition; overlapping repeated windows. No independent participant/acquisition uncertainty estimate, statistical p-value or DEV/TEST generalization result supplied.",
+  "recorded_software": {
+    "NumPy": "2.5.3",
+    "Torch": "2.14.1+cpu",
+    "threadpoolctl": "3.7.0",
+    "numerical_route": "CPU float32 predictions/residual coordinates, float64 SSE and exact observed-feature counts; no new execution for this summary.",
+    "continuation_engine_sha256": "1d6a717d7ccf09d171b23550ae5038fc032f2808bbdb6d55f99f257798ab4dfb",
+    "continuation_protocol_identity": "1c286cf5a8f9bab8219969cf9ffd9eb3efddcd81206d8cbd763cc3e0e3019d52",
+    "four_condition_protocol_identity": "86ca7cc11a037472b2ead12c26a89a564879d5a43219d8070b6f80be2c89899b",
+    "implementation_source_hashes": {
+      "offline_forecast.py": "117e5f7cb3554132a864e8410146140f05cd7bffda48f887edc729b5291f0145",
+      "source_contract.py": "e823252a57016b7a4b39b64b1052cc43f5edc169eee9d131846683bcaf784dc4",
+      "training_runner.py": "1fd47422c85c1da18a81b8582627d4c87b3f25ceb457d34a42551a47801e189b"
+    }
+  },
+  "recorded_evidence_sha256": {
+    "outcome": "27a33189be8dccb3960f4341da1aa70e1bd437622a87fc9ec9d2aed853d2e8f4",
+    "independent_recorded_review": "7b83d47a2b8af502043e20d0a7de5ce0f4db478dffd4ce389dd0743b4385c043",
+    "Root_runtime_quality_integration": "7832fb6640cc0813fa1fce5238ff17a5959d1b8943cdc961c7eae90e5edfb06c"
+  },
+  "rights_and_release": "Candidate summary of owned contributions; no new source-data rights clearance, raw data/weights/checkpoint release, model/GUI release, peer review or biological validation. Publication requires separate Main selection and publisher verification.",
+  "preserved_other_studies": "LINK18fits/720epochs/BOTH_FAIL/ALL_FIVE_FAIL and reserved dates remain distinct; MyoHand is a two-trajectory software diagnostic, not training corpus or biology.",
+  "dataset_attribution": {
+    "title": "Reach&Grasp: a multimodal dataset of the whole upper-limb during simple and complex movements",
+    "doi": "10.48557/L6OWMM",
+    "url": "https://doi.org/10.48557/L6OWMM",
+    "publisher": "IIT Dataverse",
+    "version": "1.0",
+    "released": "2025-01-22T10:15:09Z",
+    "declared_license": "CC BY 4.0",
+    "license_url": "http://creativecommons.org/licenses/by/4.0",
+    "selected_acquisition": "sub-03/Cyl",
+    "selected_files": [
+      {
+        "filename": "sub-03_task-Cyl_acq-cyberglove_motion.csv",
+        "file_id": 14486,
+        "bytes": 999735,
+        "recorded_acquisition_sha256": "174eeb0b8149614bf35e90e09b0074b6cbd8a228952ac9d3c49f48032204e101",
+        "provider_MD5": "558ac8342c9ae05505bf78ba45d731a8",
+        "recorded_provider_MD5_verified": true
+      },
+      {
+        "filename": "sub-03_task-Cyl_acq-sessantaquattro_emg.csv",
+        "file_id": 14393,
+        "bytes": 77809601,
+        "recorded_acquisition_sha256": "7c460d761aa78b1a315db7fba749da6b4bfef7c9316f471b0ac9e1cf99a32037",
+        "provider_MD5": "e270f1a8e54673e43a0f00dc28aa2fc0",
+        "recorded_provider_MD5_verified": true
+      }
+    ],
+    "changes": "Recorded processing excludes four invalid rows and derives trailing 40 ms surface-EMG RMS and normalized forecasting features; no processing or checksum is repeated by this Source update.",
+    "limits": "Metadata attribution only. One studied acquisition; no new raw/cache read, fresh checksum, physical calibration, synchronization, heldout/generalization or combined-use rights clearance."
+  }
+}

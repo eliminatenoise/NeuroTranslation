@@ -1,0 +1,148 @@
+{
+  "asOf": "2026-11-05",
+  "status": "Metadata references only; no included recordings or inferred cross-dataset pairing.",
+  "datasets": [
+    {
+      "id": "dandi-000941",
+      "name": "FALCON M1-A",
+      "url": "https://doi.org/10.48324/dandi.000941/0.241029.1405",
+      "modalities": [
+        "Neural",
+        "Muscle"
+      ],
+      "description": "One rhesus macaque; M1 multiunit spike times with simultaneous preprocessed intramuscular EMG from 16 right upper-extremity muscles/groups; reach/grasp/manipulation task.",
+      "limit": "No released synchronized continuous mocap/3D pose established; trial events and object/location labels are not pose.",
+      "license": [
+        "spdx:CC-BY-4.0"
+      ],
+      "metadataStatus": "independently_accepted_bounded_primary_source_metadata_only",
+      "recordingsIncluded": false
+    },
+    {
+      "id": "dandi-000055",
+      "name": "AJILE12",
+      "url": "https://doi.org/10.48324/dandi.000055/0.220127.0436",
+      "modalities": [
+        "Neural",
+        "Video-estimated pose"
+      ],
+      "description": "12 clinical epilepsy participants, 55 recording days; intracranial ECoG (coverage varies; some depth groups) released at500Hz, with30Hz nine-keypoint video-estimated 2D upper-body pose in pixels.",
+      "limit": "No synchronized EMG, instrumented3D mocap, whole-brain/spinal/PNS coverage established.",
+      "license": [
+        "spdx:CC-BY-4.0"
+      ],
+      "metadataStatus": "independently_accepted_bounded_paper_and_DANDI_metadata_only",
+      "recordingsIncluded": false
+    },
+    {
+      "id": "ds004388",
+      "name": "Human EEG, spinal ESG, ENG & EMG",
+      "url": "https://openneuro.org/datasets/ds004388/versions/1.0.0",
+      "modalities": [
+        "Neural",
+        "Muscle"
+      ],
+      "description": "Human stimulation-evoked cortical EEG, surface spinal ESG, peripheral ENG and Thumb/Toe EMG;40 participants. ECG/respiration are physiological context, not direct autonomic/visceral nerve recordings.",
+      "limit": "Synchronized stimulation/evoked recordings do not establish voluntary locomotion or body-wide single-neuron activity.",
+      "license": [
+        "CC0-1.0"
+      ],
+      "metadataStatus": "reviewed_starting_catalogue_2026-10-03; not_current_file_access_or_scientific_acceptance",
+      "recordingsIncluded": false
+    },
+    {
+      "id": "dandi-000226",
+      "name": "Whisker afferents & touch",
+      "url": "https://dandiarchive.org/dandiset/000226",
+      "modalities": [
+        "Neural",
+        "Touch mechanics"
+      ],
+      "description": "Mouse peripheral whisker Merkel/slowly-adapting mechanoreceptor afferent spikes, whisker self-motion and active-touch mechanics.",
+      "limit": "Whisker tactile pathway is not limb motor nerve activity, limb proprioception or a cortex-spinal locomotion bridge.",
+      "license": [
+        "spdx:CC-BY-4.0"
+      ],
+      "metadataStatus": "reviewed_starting_catalogue_2026-10-03; not_current_file_access_or_scientific_acceptance",
+      "recordingsIncluded": false
+    },
+    {
+      "id": "dandi-000245",
+      "name": "Mouse spinal neurons",
+      "url": "https://dandiarchive.org/dandiset/000245",
+      "modalities": [
+        "Spinal neural"
+      ],
+      "description": "Ex-vivo adult mouse spinal neurons, whole-cell current-clamp responses to injected-current protocols with cell identity.",
+      "limit": "Single-cell intrinsic excitability is not in-vivo spinal population activity during movement.",
+      "license": [
+        "spdx:CC-BY-4.0"
+      ],
+      "metadataStatus": "reviewed_starting_catalogue_2026-10-03; not_current_file_access_or_scientific_acceptance",
+      "recordingsIncluded": false
+    },
+    {
+      "id": "flybody",
+      "name": "FlyBody",
+      "url": "https://janelia.figshare.com/articles/dataset/MuJoCo_fruit_fly_body_model_datasets_supporting_Whole-body_simulation_of_realistic_fruit_fly_locomotion_with_deep_reinforcement_learning_/25309105",
+      "modalities": [
+        "Motion",
+        "Simulation"
+      ],
+      "description": "Drosophila body/leg/wing model, anatomical scans, walking/flight/grooming motion-imitation trajectories and simulation/controller assets.",
+      "limit": "Simulation/model/motion assets supply no experimental body-wide neural activity or paired neural-myo-mechanics recording.",
+      "license": [
+        "GPL 3.0+"
+      ],
+      "metadataStatus": "reviewed_starting_catalogue_2026-10-03; not_current_file_access_or_scientific_acceptance",
+      "recordingsIncluded": false
+    },
+    {
+      "id": "limblab-monkey-arm",
+      "name": "Macaque arm model",
+      "url": "https://github.com/limblab/monkeyArmModel",
+      "modalities": [
+        "Musculoskeletal geometry"
+      ],
+      "description": "Macaque OpenSim arm/support geometry:7 coordinates,39 muscle-tendon paths/moment-arm definitions, rigid hand without individual finger coordinates.",
+      "limit": "No neural recording and not scaled/calibrated to the recorded macaque. A paired_dataset_ids catalogue relation is not synchronized acquisition.",
+      "license": [
+        "MIT"
+      ],
+      "metadataStatus": "reviewed_starting_catalogue_2026-10-03; not_current_file_access_or_scientific_acceptance",
+      "recordingsIncluded": false
+    },
+    {
+      "id": "harvard-deepmind-virtual-rodent-2024",
+      "name": "Virtual rodent study",
+      "url": "https://doi.org/10.7910/DVN/FB0MZT",
+      "modalities": [
+        "Neural",
+        "3D pose estimates"
+      ],
+      "description": "Freely moving Long Evans rats with simultaneous video-derived23-keypoint whole-body3Dpose estimates, skeletal registration and binned putative single units in motor cortex OR dorsolateral striatum in different animals.",
+      "limit": "No paired spinal/peripheral/EMG measurements.",
+      "license": [
+        "ODC-By-1.0"
+      ],
+      "metadataStatus": "reviewed_starting_catalogue_2026-10-03; not_current_file_access_or_scientific_acceptance",
+      "recordingsIncluded": false
+    },
+    {
+      "id": "emg2pose-nemar-nm000281",
+      "name": "emg2pose / NEMAR nm000281 — left-hand metadata",
+      "url": "https://doi.org/10.48550/arXiv.2412.02725",
+      "modalities": [
+        "Surface EMG (declared)",
+        "Offline-derived finger angles (declared)"
+      ],
+      "description": "Surface EMG records muscle electrical activity at the wrist. The selected left-hand metadata declares 16 EMG channels and 20 finger-angle MISC channels. The emg2pose paper reports physical left-hand collection. The angles are fitted offline to 60 Hz markers with a personalized hand model (inverse kinematics), filtered at 15 Hz and interpolated to 2 kHz. That interpolation fills a denser time grid; it does not add independent motion measurements. Metadata only: the recording body has not been acquired or imported. Salter, Warren, Schlager et al., emg2pose, NeurIPS 2024.",
+      "limit": "EMG channels are labelled in volts, while the reported normalization sets the noise-floor standard deviation to 1, leaving physical scaling unresolved. Radian labels leave joint order, axes, signs, coordinate frame and calibration unverified. Offline fits can fail: the paper reports inverse-kinematics failures and fist occlusion, and the selected metadata declares edge padding and BAD_IK intervals that have not been checked against recording samples. The selected scans table lists this recording as training data, so it cannot serve as a fresh held-out test. We have not verified the original participant/session, the split against the original metadata, or any model's prior exposure to this recording. Time origins and clock drift, electrode positions and polarity, the exact converter lineage, and whether preprocessing is causal and how much delay it adds also remain unverified. These muscle observations do not establish nerve or cortical recordings, force or contact measurements, whole-body mapping, a fresh held-out result or automatic cross-dataset pairing. CC-BY-NC-SA-4.0 is declared; the paper intended-use scope, the scope of participant consent and conversion-specific rights still need separate review. Public raw-recording, model, derivative and figure reuse has not been cleared.",
+      "license": [
+        "CC-BY-NC-SA-4.0"
+      ],
+      "metadataStatus": "independently_accepted_bounded_literature_and_selected_sidecar_metadata_only; recording_unacquired",
+      "recordingsIncluded": false
+    }
+  ]
+}

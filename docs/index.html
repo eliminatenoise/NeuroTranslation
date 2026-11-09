@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NeuroTranslate 0.0</title>
+  <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brandmark" aria-hidden="true">N↔</span>NeuroTranslate <span class="version">0.0</span></a>
+    <div class="topmeta"><span class="statusdot"></span>Browser-local processing <a href="#how-it-works">How it works ↗</a></div>
+  </header>
+  <main>
+    <section class="intro">
+      <div><p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Keep what was measured, what was inferred and what was simulated in view.</p></div>
+      <div class="introactions"><button class="button secondary" id="load-example">Load example</button><button class="button primary" id="import-open">＋ Import recordings</button></div>
+    </section>
+    <div class="notice" id="example-notice"><span class="notice-icon">i</span><p><strong>Constructed example.</strong> These invented signals test the software. They are not biological recordings or model predictions.</p><button id="clear-all" class="textbutton">Clear example</button></div>
+    <section class="modality-grid" aria-label="Loaded signal types">
+      <article class="modality neural"><span class="modality-number">01</span><div class="mini-signal">∿</div><h2>Neural</h2><p>Brain, spine &amp; peripheral activity</p><div class="modality-bottom"><span id="count-neural">0 streams</span><span class="smalltag" id="origin-neural">No data</span></div></article>
+      <article class="modality muscle"><span class="modality-number">02</span><div class="mini-signal">⌁</div><h2>Muscle</h2><p>Myography &amp; muscle activity</p><div class="modality-bottom"><span id="count-muscle">0 streams</span><span class="smalltag" id="origin-muscle">No data</span></div></article>
+      <article class="modality displacement"><span class="modality-number">03</span><div class="mini-signal">↗</div><h2>Displacement</h2><p>Position &amp; measured movement</p><div class="modality-bottom"><span id="count-displacement">0 streams</span><span class="smalltag" id="origin-displacement">No data</span></div></article>
+      <article class="modality mechanics"><span class="modality-number">04</span><div class="mini-signal">⇌</div><h2>Mechanics</h2><p>Force, torque &amp; body dynamics</p><div class="modality-bottom"><span id="count-mechanics">0 streams</span><span class="smalltag" id="origin-mechanics">No data</span></div></article>
+    </section>
+    <section class="workspace">
+      <aside class="sources-pane">
+        <div class="panel-heading"><h2>Recordings</h2><span id="packet-count" class="quiet">0 loaded</span></div>
+        <div id="recording-list"></div>
+        <button class="addsource" id="add-source">＋ Add recording</button>
+        <div class="coverage"><p class="eyebrow">NEURAL COVERAGE</p><div id="neural-coverage"></div><p class="quiet coverage-note">Coverage comes from declared streams. A brain recording does not establish activity elsewhere in the body.</p></div>
+      </aside>
+      <div class="signal-pane">
+        <div class="signal-heading"><div><h2>Signal explorer</h2><p id="alignment-caption">Inspect each recording on its own clock.</p></div><span class="mode-badge" id="mode-badge">Original samples</span></div>
+        <div class="alignment-controls">
+          <label>Method<select id="method"><option value="linear">Linear interpolation</option><option value="nearest">Nearest sample</option></select></label>
+          <label>Step <span class="quiet">s</span><input id="step" type="number" value="0.02" min="0.001" step="0.01"></label>
+          <label>Max gap <span class="quiet">s</span><input id="max-gap" type="number" value="1" min="0.001" step="0.01"></label>
+          <button class="button primary" id="align">Align recordings</button>
+        </div>
+        <div id="message" class="message" role="status" aria-live="polite"></div>
+        <div id="alignment-warnings" class="alignment-warnings" role="note" hidden></div>
+        <details class="metadata-checks"><summary id="metadata-summary">Metadata checks</summary><div id="metadata-report" class="metadata-report"></div><button id="export-metadata" class="button small secondary" disabled>Export samples + checks ↓</button></details>
+        <div id="traces" class="traces"><p class="empty">Import a recording or load the constructed example.</p></div>
+        <div class="playback"><button id="play" class="playbutton" disabled aria-label="Play aligned signals">▶</button><input type="range" id="cursor" aria-label="Aligned time cursor" min="0" max="1000" value="0" disabled><span id="cursor-time">— s</span><button id="export" class="button small secondary" disabled>Export aligned data ↗</button></div>
+        <div class="model-status"><span class="model-icon">↔</span><div><strong>Learned translation</strong><p>No validated model is connected. This version aligns recordings; it does not predict missing neural, muscle or movement signals.</p></div><span class="smalltag">Not connected</span></div>
+      </div>
+    </section>
+    <section class="lower-grid" id="how-it-works">
+      <article class="explanation"><p class="eyebrow">ONE CLOCK. DISTINCT OBSERVATIONS.</p><h2>A shared timeline has to be earned.</h2><p>Two files can describe the same movement without describing the same event. Alignment requires a declared shared subject, recording and clock. Unpaired datasets stay separate.</p><p>Each trace keeps its units and origin. Interpolation fills only the permitted gaps between samples. It does not turn a simulation into a measurement, or muscle electrical activity into a nerve recording.</p><button class="textbutton" id="download-template">Download the JSON example ↓</button></article>
+      <article class="format-card"><div class="panel-heading"><h2>Bring your own data</h2><span class="smalltag">JSON / CSV</span></div><p>Files are processed in this browser. The application does not upload recording contents to a server.</p><dl><div><dt>JSON</dt><dd>One dataset with named streams, timestamps in seconds, units and provenance.</dd></div><div><dt>CSV</dt><dd><code>time,value</code> columns; time is in seconds. Declare the organism, recording, signal type, units and origin at import.</dd></div><div><dt>Limits</dt><dd>5 MiB per file and combined packets. Up to 64 selected streams, 50,000 input samples, 5,000 aligned time points and 500,000 aligned values.</dd></div></dl><p class="quiet">Use only data you have permission to process. Import checks validate structure; they do not verify your source or licence.</p></article>
+    </section>
+    <section class="catalogue" hidden id="catalogue-section"><div class="catalogue-title"><div><p class="eyebrow">DATASET REFERENCES</p><h2>Different pieces of the same problem.</h2></div><p>Reference entries do not load recordings or establish compatibility.</p></div><div class="catalogue-grid" id="catalogue-list"></div></section>
+  </main>
+  <footer><span>NeuroTranslate 0.0 · NeuroTranslation / Brain2Body</span><span>Experimental data interface · no clinical or biological validation implied</span></footer>
+  <dialog id="import-dialog">
+    <form id="import-form"><div class="dialog-heading"><div><p class="eyebrow">LOCAL FILE IMPORT</p><h2>Add a recording</h2></div><button type="button" id="import-close" class="closebutton" aria-label="Close import">×</button></div>
+      <p class="quiet">JSON carries its metadata. For CSV, fill in the fields below. Leave unknown identity fields empty; those files cannot be synchronized across datasets.</p>
+      <label class="filedrop">Choose JSON or CSV<input id="file" type="file" accept=".json,.csv,application/json,text/csv" required></label>
+      <div id="csv-fields" class="form-grid" hidden>
+        <label>Dataset ID<input name="datasetId" placeholder="recording-01"></label><label>Name<input name="name" placeholder="Hand reach"></label>
+        <label>Signal type<select name="modality" required><option value="" disabled selected>Choose signal type</option><option value="neural">Neural</option><option value="muscle">Muscle</option><option value="displacement">Displacement</option><option value="mechanics">Mechanics</option></select></label><label>Neural region<select name="region"><option value="">Unspecified</option><option value="brain">Brain</option><option value="spinal">Spinal</option><option value="peripheral">Peripheral</option><option value="autonomic">Autonomic</option><option value="visceral">Visceral</option></select></label>
+        <label>Signal label<input name="label" placeholder="Channel 1"></label><label>Unit<input name="unit" placeholder="mV, mm, N…"></label>
+        <label>Organism<input name="organism" placeholder="Human, macaque, mouse…"></label><label>Subject ID<input name="subjectId" placeholder="Unknown if empty"></label><label>Recording ID<input name="recordingId" placeholder="Unknown if empty"></label>
+        <label>Timebase<input name="timebase" placeholder="shared-acquisition-clock"></label><label>Origin<select name="origin" required><option value="" disabled selected>Choose origin</option><option value="measured">Measured</option><option value="inferred">Inferred</option><option value="simulated">Simulated</option></select></label>
+        <label>Task<input name="task" placeholder="Reach"></label><label>Coordinate frame<input name="frame" placeholder="laboratory, anatomical…"></label>
+        <label>Source URL<input name="sourceUrl" type="url" placeholder="https://…"></label><label>Licence / permission<input name="license" placeholder="Exact licence or permission"></label>
+        <label>Partition<select name="split"><option value="unspecified">Unspecified</option><option value="train">Train</option><option value="validation">Validation</option><option value="test">Test</option></select></label>
+      </div>
+      <p id="import-error" class="form-error" role="alert"></p><div class="dialog-footer"><span class="quiet">File contents stay in your browser.</span><button class="button primary" type="submit">Import recording</button></div>
+    </form>
+  </dialog>
+  <script type="module" src="app.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs"></script>
+</body>
+</html>

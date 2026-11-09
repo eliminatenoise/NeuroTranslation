@@ -1,0 +1,33 @@
+\section{More optimization still lost to persistence}
+\label{sec:self-forecast}
+
+A model can improve on its earlier weights and still lose to carrying the last observation forward. A separate development diagnostic tested that possibility on one original TRAIN acquisition, sub-03/Cyl. It concerns self-forecasting of muscle and glove features, not the LINK neural decoder or the simulated hand. Its completed continuation supplies a new negative comparison rather than a successful four-source movement model.\cite{movementTrain990Recorded2026}
+
+\subsection{Two tasks around one recurrent core}
+The source is Reach\&Grasp version 1.0, released through IIT Dataverse with a declared CC BY 4.0 licence.\cite{reachGraspV1} The selected sub-03/Cyl pair is the cyberglove-motion file, provider ID 14486 (999,735 bytes), and the sessantaquattro-EMG file, ID 14393 (77,809,601 bytes). The retained acquisition record reports provider-MD5 verification for both. This attribution joins existing metadata; it supplies no fresh payload checksum, calibration or synchronization test, and does not settle every participant or combined-use right. The numerical result still concerns one acquisition.
+
+The acquisition retained 3,123 rows from 3,127 source rows after excluding four invalid rows. It supplies 64 derived surface-EMG root-mean-square features with trailing 40 ms support and 18 glove-angle coordinates. The source declares millivolt-derived RMS and degree angles; physical calibration, synchronization, feature-availability times and online latency remain unqualified. A trailing feature summarizes an interval, so its row label alone cannot establish when all of its underlying samples would have been available.
+
+Separate modality adapters and prediction heads surround one gated recurrent unit (GRU) core. Each task receives 64 rows of its own stream and forecasts its own later recorded features at positive row offsets 1 and 10. Sharing a core does not create a cross-modal target: no EMG-to-glove, glove-to-neural, force or afferent mapping is demonstrated. Recorded order is the temporal support being tested; no physiological delay or causal online acquisition is inferred from a row offset.
+
+The first pilot made 40 joint optimizer updates with four ordered windows per task per update, exposing the first 160 windows of each task. Its normalized full-TRAIN errors exceeded both initialization and persistence. The once-completed continuation restored those parent 40 weights, AdamW moments and step 40, then the saved Torch random-generator state last, after model construction and optimizer loading. It made 950 additional joint updates: 949 batches of 32 windows per task and a final batch of 17. Thus 990 cumulative updates correspond to 30,545 window exposures per task, or five passes through the 6,109-window catalog. The catalog contains 3,059 offset 1 and 3,050 offset 10 windows per task. Repeated exposure changes optimization; it adds no independent acquisition or person.
+
+\subsection{A matched TRAIN comparison}
+Initial (0 updates), frozen parent 40, continued 990 and past-featurewise persistence were compared on the same catalog, targets, masks and saved original-TRAIN scalers. The scalers were fitted once on original TRAIN frames; continuation and evaluation fitted none. Persistence carries forward each feature's last supported past value. Evaluation took no optimizer step and kept the initial and parent comparison states frozen. The full catalog and the original first 4-window subset were reported separately; the subset is contained in the catalog, not an independent test.
+
+Let $z$ denote a target on its saved normalized scale, $\widehat z$ a prediction and $m$ the observed-target mask. The reported score is
+\[
+ \operatorname{MSE}_{\rm norm}=\frac{\sum m(\widehat z-z)^2}{\sum m}.
+\]
+Predictions and residual coordinates use the recorded float32 route; squared-error sums accumulate in float64 and divide by the exact observed-feature count. Pooling sums errors and counts, rather than averaging offset scores without regard to support. The full pooled counts are 390,976 RMS features and 109,962 glove features; offset-specific counts and all literal sums are retained in the accompanying scientific summary. Normalized error is dimensionless, not squared millivolts or degrees, and its decimal places do not establish biological accuracy. No independent-acquisition uncertainty interval or statistical $p$-value is supplied by these correlated windows.
+
+\input{../../common/training-result-tables.tex}
+
+\subsection{Improvement is not the comparator}
+Final 990 lowers full-TRAIN RMS error from 1.0195127528126222 at initialization and 1.065703117562344 at 40 updates to 0.48371488886038944; persistence remains lower at 0.4391345726797162. Glove error falls from 0.8750431745338253 and 1.1992171367822229 to 0.37219431399606173, while persistence is 0.024541819466343505. Both streams therefore fail the retained persistence comparison. The earlier 40-update failure remains visible rather than being replaced by the later improvement.
+
+The pooled result has structure. RMS at offset 10 beats persistence, while offset 1 does not; glove loses at both offsets. In the original first 4 windows, RMS improves, but glove worsens relative to both initialization and parent 40. The prefix cannot be chosen to rescue the complete result. Software/runtime and recorded arithmetic checks support the specified calculation; they do not promote the private checkpoint or demonstrate model quality on new data.
+
+Batch size changed from 4 to 32 while the update budget and repeated catalog exposure increased. Those changes form one combined engineering intervention. They do not isolate coverage as the cause of improvement, test added dataset diversity or establish a quantity/diversity power law. This remains one TRAIN acquisition, with no DEV or TEST generalization result. Nor is there a neural observation, cross-modal translation, simulated force target, biological feedback or retained-skill outcome in this diagnostic.
+
+That leaves a concrete requirement for the broader proposal: a representation must beat the appropriate simple predictor on its stated source before shared weights can support a larger translation claim. Broad neural observations, myography, measured movement and physics-generated examples remain four distinct proposed training groups. Their source rights, physical reference series, timing, calibration, sensory context and independent held-out tests remain necessary; a shared GRU and repeated training on one acquisition cannot supply them. Brain2Body's further question still begins when trainer commands stop: what does the trainee retain under matched controls?

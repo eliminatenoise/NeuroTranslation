@@ -35,8 +35,28 @@
     ]
   },
   "scope_note": "Names and definitions identify the programme and development scope. They do not establish a completed game, validated model, biological or clinical capability.",
-  "release_policy": "Selected reviewed production-grade drafts and items intended for production deployment; current selected files replace previous live versions. Git history and original local evidence remain.",
+  "release_policy": "Existing experimental previews may be published with their actual version, source and limitations. Production-grade acceptance is not a prerequisite for preview upload; privacy, redistribution rights, security and truthful scientific scope remain required. Current public pointers distinguish the latest rendered papers from newer unbuilt source. Git history and original local evidence remain.",
   "license_note": "Project-owned contributions CC0-1.0; third-party materials retain their own rights and notices.",
-  "development_status": "paused until further user notice; existing selected drafts remain available",
-  "programme_focus": "NeuroSurge is the sole active project. All other projects are paused following the current-version GitHub sync."
+  "development_status": "paused until further user notice; publication of existing experimental outputs continues",
+  "programme_focus": "NeuroSurge is the sole active project. All other projects are paused following the current-version GitHub sync.",
+  "experimental_previews": {
+    "data_companion": {
+      "version": "R5",
+      "entry": "docs/preview.html",
+      "runtime_manifest": "docs/build-manifest.json",
+      "buildId": "bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6",
+      "meaning": "Browser data inspection/alignment with invented examples; no trained NeuroTranslate model or recording-upload endpoint",
+      "hosting": "Prepared static main/docs payload; actual Pages deployment/readback is verified separately"
+    },
+    "papers": {
+      "latest_rendered": "papers/drafts/r9",
+      "erratum": "papers/errata/r9-reading-aid-metadata.txt",
+      "newer_source": "papers/experimental/r11-source",
+      "source_status": "R11 unbuilt/nonstandalone; historical G35 proposal unadopted, no matching PDFs"
+    },
+    "portable_interface": {
+      "source": "interfaces/experimental/portable",
+      "status": "Source only; no model payload, download, runtime or finished GUI claim"
+    }
+  }
 }

@@ -1,0 +1,86 @@
+{
+  "schema": "current-paper-reading-aid-v2",
+  "document_status": "Reading aid for the unbuilt R11 SOURCE candidate. No R11 PDFs are built, selected or uploaded.",
+  "preceding_public_compiled_draft": {
+    "revision": "R9",
+    "git_commit": "b9e8e7bd0bac7b8b0539467c2f300b5ad510c8ec",
+    "paper_PDFs": 4,
+    "status": "Root-selected public R9 plus erratum R2; working draft, not peer-reviewed or final acceptance. No fresh remote readback in R11.",
+    "reading_aid_availability": "The original R9 allowlist omitted research-evidence.json; the selected erratum discloses that omission. Local R11 staging does not repair or verify a remote link. Full source portability remains incomplete.",
+    "original_snapshot_git_commit": "a86bf81a308a71ccfa98bf2e0d5ec7ac329e9ba7"
+  },
+  "current_registry": {
+    "canonical_revision": 34,
+    "canonical_sha256": "3fffa79bc9f404caa7d4910e9e37de5a97371fdc1ad11bc54155d309ec5f5394",
+    "proposed_editorial_revision": 35,
+    "proposed_registry_sha256": "fb80b84f00beeaeb11e69f13be30c8d7b33db8923f105e4d3d2408c503087b7f",
+    "proposal_status": "AMENDED_G35_UNADOPTED; live G34 remains unchanged. All 200 original terms, 9 proposals, aliases and history retained.",
+    "original_editorial_proposal_sha256": "9e21a655aca86821e2f4ae39289620c4c859aa5511cc240d5790173a108d865c"
+  },
+  "current_roles": "trainer–trainee; ML learner refers separately to a computer model. Historical tutor/pupil labels remain historical.",
+  "availability_and_rights": "Selected owned paper/manuscript-source contributions are CC0 with third-party notices retained. Upstream and combined-use rights require their own qualification. This is not a validated model/GUI code release or new rights clearance.",
+  "studies": {
+    "LINK": "The completed LINK comparison retains 18 fits and 720 saved epochs: BOTH_FAIL and ALL_FIVE_FAIL. Its four reserved dates and protected tests remain closed. Complete independent checkpoint/update-trajectory verification remains unfinished.",
+    "same_stream_forecast": {
+      "summary": "training-diagnostic-summary.json",
+      "decision": "Final990 improves both pooled fullTRAIN streams over initial0 and parent40, but FAILS persistence in both; private checkpoint UNPROMOTED.",
+      "scope": {
+        "partition": "original TRAIN only",
+        "acquisition": "sub-03/Cyl",
+        "independent_acquisitions": 1,
+        "source_rows": 3127,
+        "excluded_invalid_rows": 4,
+        "retained_rows": 3123,
+        "support_segment_half_open": [
+          0,
+          3123
+        ],
+        "derived_surface_EMG_RMS_channels": 64,
+        "RMS_trailing_window_ms": 40,
+        "RMS_source_declared_unit": "mV-derived RMS",
+        "glove_angle_channels": 18,
+        "glove_source_declared_unit": "degree",
+        "context_rows": 64,
+        "positive_row_offsets": [
+          1,
+          10
+        ],
+        "time_limit": "Recorded row order; physical synchronization, feature availability and online latency unqualified. Row offsets are not independently verified physiological delays."
+      },
+      "meaning": "One acquisition, separate same-stream tasks around one GRU core; no new neural input, cross-modal mapping, generalization or biological teaching.",
+      "summary_sha256": "8bf7215067a61f7ad3c4b43384f632d28b9c91d571cebf925f8d2f940ea96e64",
+      "dataset_attribution": "Reach&Grasp v1.0, DOI 10.48557/L6OWMM; selected sub-03/Cyl pair, provider file IDs 14486 and 14393; declared CC BY 4.0. Full recorded attribution/limits are in the relative scientific summary."
+    },
+    "MyoHand": "Two simulated trajectories and 200 dependent integration steps establish a recorded input-to-state software response. They supply no trained controller, training corpus or biological ground truth.",
+    "historical_other_studies": "Retain each earlier study, its denominator, source and withdrawal/repair record; no numerical outcome is recomputed by this reading aid."
+  },
+  "proposal": "Four training groups remain broad neural (brain/spinal/peripheral/relevant visceral), myography, measured motion and physics-generated examples. Myoception includes task-relevant tactile/proprioceptive sensory context; EMG is not an afferent recording. Quantity/diversity scaling remains a testable hypothesis.",
+  "historical_aid": {
+    "sha256": "44e5827338736e78a0247389eefe13a2b200d85370a58b0428908a93c1c2fa07",
+    "scope": "Entire original G10 reading aid remains a local historical Source record. Its old unpublished/uncompiled status and tutor/pupil language are not current metadata.",
+    "availability": "Historical preimage retained locally; not a promised public dependency or selected public delivery."
+  },
+  "limits": "Whole scientific/editorial/citation/rights/reference-series/physical/held-out/native/font/layout/export and finalized-model/GUI assessment remain open. Public availability establishes no peer review or biology.",
+  "source_only": true,
+  "selected_or_published": false,
+  "R9_omission_evidence": {
+    "kind": "Root independent full public-tree readback",
+    "sha256": "77a3133d56b7cbdc6342b7d5f8b0ed68af8430146f1dc91aba9e231dfb94bc6f",
+    "tree_entries": 213,
+    "verified_absence": "research-evidence.json",
+    "claim_limit": "No remote repair or public availability follows from a local edit."
+  },
+  "current_reading_aid_delivery": {
+    "status": "LOCALLY_STAGED_PUBLIC_CANDIDATE_ONLY",
+    "relative_filename": "research-evidence.json",
+    "publication": "Not uploaded or verified public by this Source task. Main selection and existing publisher verification remain necessary.",
+    "relative_scientific_summary": "training-diagnostic-summary.json",
+    "privacy": "Summary/provenance metadata only; no raw data, arrays, weights, checkpoints, credentials, auth/RC/session/goal/outbox or absolute private control paths.",
+    "rights": "CC0 applies only to owned contributions. Third-party notices/source rights and independent claims assessment remain distinct."
+  },
+  "preceding_source_candidate": {
+    "revision": "R10",
+    "summary_sha256": "c2d860120fd57c545d0d119e35590f74bb51b5913a721196b74652124574d653",
+    "status": "Earlier Source-only candidate retained as immutable history."
+  }
+}

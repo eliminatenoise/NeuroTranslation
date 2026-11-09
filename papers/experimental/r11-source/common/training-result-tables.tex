@@ -1,0 +1,45 @@
+% Literal recorded metrics; no recalculation or numerical/model execution.
+\begin{table}[htbp]
+\centering
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{.29\linewidth}p{.32\linewidth}p{.32\linewidth}}
+Condition & Surface EMG RMS & Glove angles\\\hline
+Initial (0 updates) & 1.0195127528126222 & 0.8750431745338253\\
+Frozen (40 updates) & 1.065703117562344 & 1.1992171367822229\\
+Continued (990 updates) & 0.48371488886038944 & 0.37219431399606173\\
+Persistence & 0.4391345726797162 & 0.024541819466343505\\
+\hline
+\end{tabular}
+\caption{Pooled normalized mean squared error on all 6,109 original TRAIN windows per stream, across positive row offsets 1 and 10. Each condition uses the same targets, observed-feature masks and saved scalers. Scores are dimensionless and lower is better. The pooled counts are 390,976 observed RMS target features and 109,962 glove target features. Initial (0 updates) and frozen 40 are fixed comparison states. Continued (990 updates) improves on both but exceeds persistence in both streams; it remains unpromoted. These are correlated within-acquisition development observations.\cite{movementTrain990Recorded2026}}
+\label{tab:self-forecast-pooled}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{.29\linewidth}p{.32\linewidth}p{.32\linewidth}}
+Stream and row offset & Continued (990 updates) & Persistence\\\hline
+RMS, offset 1 & 0.41254365424001344 & 0.14465972419162815\\
+RMS, offset 10 & 0.5550961369599728 & 0.7344783633436713\\
+Glove, offset 1 & 0.34938925569254925 & 0.0004908467144512168\\
+Glove, offset 10 & 0.3950666659142399 & 0.048663762301765986\\
+\hline
+\end{tabular}
+\caption{The same full-TRAIN comparison separated by row offset. Offset 1 has 3,059 windows and offset 10 has 3,050 per stream. Only RMS at offset 10 beats persistence; a favourable offset does not replace the pooled failure or the other offset's result. A row offset alone establishes no physical forecasting delay.\cite{movementTrain990Recorded2026}}
+\label{tab:self-forecast-offsets}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{.29\linewidth}p{.32\linewidth}p{.32\linewidth}}
+Condition & Surface EMG RMS & Glove angles\\\hline
+Initial (0 updates) & 0.7221646495859888 & 1.4936251670580845\\
+Frozen (40 updates) & 0.13923739944560742 & 0.781681849149845\\
+Continued (990 updates) & 0.12858087160530363 & 1.5822619236435527\\
+Persistence & 0.20836011081823158 & 0.0004564336184945723\\
+\hline
+\end{tabular}
+\caption{The originally selected first 4 windows per stream, two at each offset: 256 observed RMS target features and 72 glove target features. This subset is included in the full TRAIN catalog and in the initial optimization prefix. Its RMS improvement cannot establish independent generalization; its glove score worsens after continuation. No subset is substituted for the full-catalog comparison.\cite{movementTrain990Recorded2026}}
+\label{tab:self-forecast-prefix}
+\end{table}
