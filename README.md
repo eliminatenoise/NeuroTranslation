@@ -4,7 +4,9 @@ Development remains paused while work focuses on [NeuroSurge](https://github.com
 
 ## Open the current previews
 
-- [Browser data companion](https://eliminatenoise.github.io/NeuroTranslation/preview.html): import and inspect JSON/CSV, check declared metadata and align compatible recordings. Its example uses invented signals; no trained model is connected. [Source and usage](demo/README.md).
+[Download a Windows, macOS or Linux launcher](https://eliminatenoise.github.io/NeuroTranslation/START.html). The data-companion launcher opens the application directly.
+
+- [Browser data companion](https://eliminatenoise.github.io/NeuroTranslation/index.html): import and inspect JSON/CSV, check declared metadata and align compatible recordings. Its example uses invented signals; no trained model is connected. [Source and usage](demo/README.md).
 - [Rendered R9 papers](papers/): both papers in technical and accessible editions, with matching historical manuscript source and the reading-aid erratum.
 - [Experimental R11 manuscript source](papers/experimental/r11-source/): the newer unbuilt source snapshot. It has no matching R11 PDFs and omits external figure/font dependencies. Proposed G35 terminology in that snapshot remains unadopted.
 - [Portable interface source](interfaces/experimental/portable/): a recording-specific Python/HTML interface proposal. No weights, model payloads or runnable model download are included.

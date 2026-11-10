@@ -12,14 +12,24 @@
   "scope": "Existing R5 browser data companion; unbuilt/nonstandalone R11 manuscripts and portable interface source without model payloads. This file identifies bytes, not scientific/rights/runtime acceptance or actual Pages deployment.",
   "files": [
     {
+      "path": ".gitattributes",
+      "bytes": 122,
+      "sha256": "9e3c9525a4666dd2656dc8ed8e22dd17aef68294fcafad7be4ed7f82856d47ed"
+    },
+    {
+      "path": "LAUNCHERS.md",
+      "bytes": 1826,
+      "sha256": "58413e89664e69084a420f453749ebfb0579d164bdb42bd8dfa6b8fc3aabd0b5"
+    },
+    {
       "path": "PROJECT-CONTEXT.json",
       "bytes": 2990,
       "sha256": "71daec1e50e9121b1b2b9ac0e63c586b2cad0650cb5bfc48f48584a23b5aec71"
     },
     {
       "path": "README.md",
-      "bytes": 7342,
-      "sha256": "ae7ef48600039ed9e6f57db0bc835897b1254a625aac5b1315546caa70887348"
+      "bytes": 7510,
+      "sha256": "75f2717d50872fb7a9c2e8b712beb92333c05cb61f65d7d801da73e99fe1ad67"
     },
     {
       "path": "docs/.nojekyll",
@@ -40,6 +50,11 @@
       "path": "docs/RIGHTS.md",
       "bytes": 311,
       "sha256": "7a91a31f044a4d591e367ec4a803e1936ba07239b5a3b41c30d4fb2df0d62147"
+    },
+    {
+      "path": "docs/START.html",
+      "bytes": 3564,
+      "sha256": "c730860df523584268aa7a8400f083d59916853dd98930bc1c2568a0cb4560cf"
     },
     {
       "path": "docs/app.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
@@ -77,6 +92,46 @@
       "sha256": "19f922f7ac1c6ca6487d44c3d044c43d5a43835f05e8556e2cf38ba5e8d224db"
     },
     {
+      "path": "docs/launchers/Install-NeuroTranslation-Linux.sh",
+      "bytes": 2633,
+      "sha256": "9cfb18078585ad657f3a9dccdf059354478a070542f6457fd85fabd7b138b94e"
+    },
+    {
+      "path": "docs/launchers/MANIFEST.json",
+      "bytes": 1670,
+      "sha256": "066d119a7bf6a49e64f6d279fd3ac0707f20f69555e2cbf6527f110a24e196f6"
+    },
+    {
+      "path": "docs/launchers/NeuroTranslation-Launchers.zip",
+      "bytes": 3984,
+      "sha256": "8856eb0d9463a61d66aed4860066c9f3b5b77a242e54e7a657515666ee9e1b8f"
+    },
+    {
+      "path": "docs/launchers/NeuroTranslation-Linux.desktop",
+      "bytes": 372,
+      "sha256": "803708a27a1bee65a5e5f4ef47d0cb8e118c5b6c9bb6bf188392316b020fbc43"
+    },
+    {
+      "path": "docs/launchers/NeuroTranslation-Windows.url",
+      "bytes": 86,
+      "sha256": "68664e1df882fbcafbf7093b92706527937248c70477a079fffb05c4ff0b230d"
+    },
+    {
+      "path": "docs/launchers/NeuroTranslation-macOS.webloc",
+      "bytes": 283,
+      "sha256": "16fe76ee350a09a529ec1c4876a85ce94243dc509edc9b20193290fc7b5e337c"
+    },
+    {
+      "path": "docs/launchers/README.txt",
+      "bytes": 2448,
+      "sha256": "b9939aadfcd9014722f0e64dfb2fe6a14242784461742d06a634d696a2b97b27"
+    },
+    {
+      "path": "docs/launchers/SHA256SUMS",
+      "bytes": 465,
+      "sha256": "0b3df028a095041a57bb873dff53fd0c70825b91bc0d0e150b43e6c7dac5254c"
+    },
+    {
       "path": "docs/packet-policy-bridge.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
       "bytes": 19899,
       "sha256": "3b37cdb3f5905b350a2a6c25b7b7ce0b49502c298bc01c4228cb970c91d48976"
@@ -93,8 +148,8 @@
     },
     {
       "path": "docs/preview.html",
-      "bytes": 2198,
-      "sha256": "522df04f3afcfa8f6348dd217f5368593e2af48a940ab86fe4880cb6db21a847"
+      "bytes": 2244,
+      "sha256": "c216ae241e71400905f9bc24ee83c051ddce78396991a2c6fc1cd71b20a240e8"
     },
     {
       "path": "docs/reasons.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
@@ -496,5 +551,8 @@
       "bytes": 7136,
       "sha256": "39e9c07f1a05d5c2e798e7dd84ea2467059e7cc1427149bf27bbf36944c0b7ef"
     }
-  ]
+  ],
+  "desktop_launchers": "docs/START.html",
+  "previous_public_commit": "351140afde34d73d46aadda91c985ed2eada21e2",
+  "launcher_update": "Existing runtime and manuscript/interface sources unchanged; dedicated OS launchers and navigation added."
 }
