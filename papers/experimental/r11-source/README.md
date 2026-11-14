@@ -10,4 +10,4 @@ The files also preserve their historical terminology context. Their proposed G35
 
 The [manifest](MANIFEST.json) identifies the 71 unchanged manuscript, citation and explicitly selected public-aid files. Internal registries and histories, private custody records, model weights, checkpoints and recordings are excluded. No assembler, compiler, model or manuscript generation was run for this preview.
 
-Project-owned contributions use the repository's [CC0 dedication](../../../LICENSE). Cited works and third-party assets keep their own rights. The existing [paper notices](../../drafts/r9/NOTICE.md) identify earlier font and asset conditions; they do not grant permission for unbundled material. Development remains paused except for publishing these existing outputs.
+Project-owned contributions use the repository's [CC0 dedication](../../../LICENSE). Cited works and third-party assets keep their own rights. The existing [paper notices](../../drafts/r9/NOTICE.md) identify earlier font and asset conditions; they do not grant permission for unbundled material. Work on the project has resumed; this source snapshot and its unfinished review status are unchanged.

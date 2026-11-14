@@ -1,6 +1,6 @@
 # Paper drafts
 
-Work on these papers is paused while development focuses on NeuroSurge.
+Work on both papers has resumed. The draft, review and build limits below still apply.
 
 ## Current edition: R9
 

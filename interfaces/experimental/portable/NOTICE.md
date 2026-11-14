@@ -8,4 +8,4 @@ The included [README.txt](README.txt) preserves its original source-candidate hi
 
 The [browser data companion](https://eliminatenoise.github.io/NeuroTranslation/preview.html) is a separate working static data inspector with invented examples and no trained model. The [papers](../../../papers/README.md) describe the broader research programme. Neither substitutes for this interface's missing model package.
 
-Project-owned source is covered by the repository's [CC0 dedication](../../../LICENSE). Data, model, dependency and other third-party redistribution permissions remain separate. No data or model permission is inferred from publishing this code. The project remains paused except for this publication of existing source.
+Project-owned source is covered by the repository's [CC0 dedication](../../../LICENSE). Data, model, dependency and other third-party redistribution permissions remain separate. No data or model permission is inferred from publishing this code. Work on the project has resumed. The missing-model and runtime limits above still apply.

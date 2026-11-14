@@ -1,6 +1,6 @@
 # NeuroTranslation
 
-Development remains paused while work focuses on [NeuroSurge](https://github.com/eliminatenoise/NeuroSurge). Existing experimental previews are published for inspection; this does not resume training, scientific development or feature work.
+NeuroTranslation is active again, alongside [NeuroSurge](https://github.com/eliminatenoise/NeuroSurge) and [Interoceptomics](https://github.com/eliminatenoise/Interoceptomics). These previews remain experimental; no validated downloadable model or finalized-model GUI is available yet.
 
 ## Open the current previews
 
