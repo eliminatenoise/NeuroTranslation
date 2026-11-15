@@ -1,24 +1,24 @@
 # Paper drafts
 
-Work on both papers has resumed. The draft, review and build limits below still apply.
+## Selected edition: scientific/layout, 15 November 2026
 
-## Current edition: R9
+- [NeuroTranslation: technical](experimental/scientific-layout-2026-11-15/neurotranslation-technical.pdf) — 133 pages, retained R2 PDF
+- [NeuroTranslation: explained](experimental/scientific-layout-2026-11-15/neurotranslation-explained.pdf) — 165 pages, R3 build
+- [Brain2Body: technical](experimental/scientific-layout-2026-11-15/brain2body-article.pdf) — 117 pages, retained R2 PDF
+- [Brain2Body: explained](experimental/scientific-layout-2026-11-15/brain2body-simple-english.pdf) — 131 pages, R3 build
 
-- [NeuroTranslation: technical](drafts/r9/pdf/neurotranslation-technical.pdf) — 126 pages
-- [NeuroTranslation: explained](drafts/r9/pdf/neurotranslation-explained.pdf) — 159 pages
-- [Brain2Body: technical](drafts/r9/pdf/brain2body-article.pdf) — 112 pages
-- [Brain2Body: explained](drafts/r9/pdf/brain2body-simple-english.pdf) — 123 pages
+The [content manifest](experimental/scientific-layout-2026-11-15/manifest.json) identifies the exact four PDFs and their selection time. The [reading aid](experimental/scientific-layout-2026-11-15/research-evidence-reading-aid.md) explains the studies; both JSON companions sit beside the PDFs. The terminology source is canonical glossary revision 36, identified by its hash in the manifest. No raw registry snapshot is supplied.
 
-These PDFs match the [R9 manuscript sources](drafts/r9/source/). The [version and hash manifest](drafts/r9/manifest.json) identifies each source entrypoint and its PDF, using glossary revision 34. The copied manuscript and PDF bytes are unchanged.
+These are experimental working drafts. The recorded reviews cover selected issues on 26 of 546 pages; 520 are outside visual acceptance. The selected NeuroTranslation explained comparison paragraph is intact on page 34. This scope does not certify every page, font, equation, figure, reference, scientific claim or reader platform. Publication and remote byte verification are separate from content selection.
 
-These are working drafts intended for the finished project. R9 updates working-draft status and repairs bibliography, table, heading and alias presentation. Review accepted the affected formatting and source-to-PDF pairing. Of 520 pages rendered at 160 dpi, the author and reviewer inspected the same 72 current pages; 448 remain unviewed. Their combined coverage is 72 pages. Earlier R8 reviews do not establish coverage of these R9 PDFs.
+The completed LINK comparison retains its negative results: 18 fits and 720 saved epochs, with both model-admission rules and all five benefit claims failing. MyoHand remains a simulated software diagnostic. The papers do not establish a validated model, finalized-model GUI, generalization or biological teaching result. The full forecasting summary preserves its negative comparisons and uncertainty.
 
-Whole-paper prose, scientific claims, citation meaning, rights and reference review remain unfinished. Native export, accessibility and use on another machine also need review. The papers do not establish a validated model, GUI or generalization result. MyoHand contributes a simulated software diagnostic only. The completed LINK comparison retains its negative results: 18 fits and 720 saved epochs, with both model-admission rules and all five benefit claims failing.
+## Sources and history
 
-The source snapshot includes manuscript text and bibliography. External figures, fonts and other linked build dependencies are not bundled, so this is not a standalone reproducible build. See the [third-party notices](drafts/r9/NOTICE.md).
+The current PDFs retain their own R2/R3 build provenance. The preserved public R9 and R11 snapshots are not matching build-source bundles for these PDFs, and this package does not establish a standalone reproducible build.
 
-## Earlier editions
+The [R9 source](drafts/r9/source/), [historical R9 manifest](drafts/r9/manifest.json), [historical notices](drafts/r9/NOTICE.md) and [R9 reading-aid erratum](errata/r9-reading-aid-metadata.txt) remain historical records. Use the selected links above for this edition. The R9 manifest describes an earlier edition rather than supplying current PDF or companion availability.
 
-The current branch contains R9. Superseded R8, G29 and R6 copies have been removed from the current tree and remain available in Git history.
+The [R11 source preview](experimental/r11-source/) remains historical, unbuilt and nonstandalone, with its proposed G35 terminology unadopted. Earlier editions and changes remain in Git history. These remain working drafts; their scientific, privacy, security, redistribution and finished-paper requirements remain open at the stated scope.
 
-Some R9 links name an older JSON reading aid that is absent from this public snapshot. See the [metadata and packaging erratum](errata/r9-reading-aid-metadata.txt). The existing draft review, scientific, rights and output limits remain.
+[Download all four PDFs and their companions](downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip) · [Archive checksum](downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip.sha256). Extract the ZIP and keep its files together so the relative JSON companions remain beside the PDFs. See the [current notices](experimental/scientific-layout-2026-11-15/NOTICE.md) for font licenses and reuse limits.

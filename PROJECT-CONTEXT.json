@@ -35,7 +35,7 @@
     ]
   },
   "scope_note": "Names and definitions identify the programme and development scope. They do not establish a completed game, validated model, biological or clinical capability.",
-  "release_policy": "Existing experimental previews may be published with their actual version, source and limitations. Production-grade acceptance is not a prerequisite for preview upload; privacy, redistribution rights, security and truthful scientific scope remain required. Current public pointers distinguish the latest rendered papers from newer unbuilt source. Git history and original local evidence remain.",
+  "release_policy": "Existing experimental previews may be published with their actual version, source and limitations. Production-grade acceptance is not a prerequisite for preview upload; privacy, redistribution rights, security and truthful scientific scope remain required. Paper content pointers distinguish selected compiled PDFs from preserved historical source snapshots; content identity does not establish remote publication verification. Git history and original local evidence remain.",
   "license_note": "Project-owned contributions CC0-1.0; third-party materials retain their own rights and notices.",
   "development_status": "active; work has resumed alongside NeuroSurge and Interoceptomics",
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
@@ -49,10 +49,23 @@
       "hosting": "Prepared static main/docs payload; actual Pages deployment/readback is verified separately"
     },
     "papers": {
-      "latest_rendered": "papers/drafts/r9",
-      "erratum": "papers/errata/r9-reading-aid-metadata.txt",
-      "newer_source": "papers/experimental/r11-source",
-      "source_status": "R11 unbuilt/nonstandalone; historical G35 proposal unadopted, no matching PDFs"
+      "latest_rendered": "papers/experimental/scientific-layout-2026-11-15",
+      "manifest": "papers/experimental/scientific-layout-2026-11-15/manifest.json",
+      "manifest_sha256": "a524e17ae958ae14ffc7ece9e311ea4810094256dff502c1863cfa3408768184",
+      "scope": "Four experimental working drafts, 546 pages; recorded targeted visual evidence covers 26 pages, with 520 outside visual acceptance; no whole-paper or biological acceptance.",
+      "build_provenance": "R2 technical PDFs retained; accessible editions have actual R3 builds. The R3 Brain2Body Simple English PDF equals its preceding R2 bytes.",
+      "historical_erratum": "papers/errata/r9-reading-aid-metadata.txt",
+      "historical_source": "papers/experimental/r11-source",
+      "source_status": "Preserved R9/R11 sources are historical, not matching build-source bundles for the current PDFs. R11 remains unbuilt/nonstandalone, with its G35 proposal unadopted.",
+      "publication_scope": "This metadata identifies selected content; actual publication and remote readback require a separate receipt.",
+      "download_bundle": {
+        "path": "papers/downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip",
+        "bytes": 3083960,
+        "sha256": "519a88c6881852b66d5db8efd74e351a661a6acfeb643ee79cc68f489a69bf9b",
+        "members": 14,
+        "extraction_folder": "NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15",
+        "scope": "Four exact selected PDFs, three companions, README, content manifest and five notice files. No standalone font, source, model or private evidence files. Native extraction/PDF-link behavior across operating systems remains unverified."
+      }
     },
     "portable_interface": {
       "source": "interfaces/experimental/portable",

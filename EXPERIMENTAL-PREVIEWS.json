@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "kind": "NeuroTranslation experimental preview payload",
+  "kind": "NeuroTranslation experimental preview subset manifest",
   "hash_algorithm": "sha256",
   "self_excluded": true,
   "base_public_commit": "77eac13a8907588a5a04ae7f7df5e9f29c4973f0",
@@ -9,7 +9,7 @@
     "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
   },
   "historical_sources": "R11 and portable source retain their own historical terminology and unadopted proposals. No canonical glossary adoption, model or backend execution follows.",
-  "scope": "Existing R5 browser data companion; unbuilt/nonstandalone R11 manuscripts and portable interface source without model payloads. This file identifies bytes, not scientific/rights/runtime acceptance or actual Pages deployment.",
+  "scope": "A 108-file subset of the R5 browser data companion, historical unbuilt/nonstandalone R11 manuscripts, portable interface source and launcher/navigation files. Five related navigation/context rows are refreshed for the selected paper content; the paper bundle has its own manifest. This is not a whole-repository byte seal, scientific/rights/runtime acceptance or proof of Pages deployment.",
   "files": [
     {
       "path": ".gitattributes",
@@ -23,13 +23,13 @@
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "bytes": 2990,
-      "sha256": "71daec1e50e9121b1b2b9ac0e63c586b2cad0650cb5bfc48f48584a23b5aec71"
+      "bytes": 4420,
+      "sha256": "0ea8460873560b9d713fa48a4ae3293e5d3f3e8be943faf81cd1efb8fa903a6e"
     },
     {
       "path": "README.md",
-      "bytes": 7510,
-      "sha256": "75f2717d50872fb7a9c2e8b712beb92333c05cb61f65d7d801da73e99fe1ad67"
+      "bytes": 7948,
+      "sha256": "5c91c0447670fc6583669a99400699c006769b215f0c1fcde4cdb2efeaeefb21"
     },
     {
       "path": "docs/.nojekyll",
@@ -43,8 +43,8 @@
     },
     {
       "path": "docs/README.md",
-      "bytes": 1637,
-      "sha256": "ce62f09e93d2bdd6219f08c03255c6b2ba3dd87fd3c571b27973c8d40376f17d"
+      "bytes": 1739,
+      "sha256": "8b31a088673fa630e56c348d8f15f1272f52b8a688f2966d4086dedf5d4ef68b"
     },
     {
       "path": "docs/RIGHTS.md",
@@ -53,8 +53,8 @@
     },
     {
       "path": "docs/START.html",
-      "bytes": 3564,
-      "sha256": "c730860df523584268aa7a8400f083d59916853dd98930bc1c2568a0cb4560cf"
+      "bytes": 3879,
+      "sha256": "358afd0903819cf7633a08fcca056d5ba39534a7fd806fcfaca9bf91617ec34c"
     },
     {
       "path": "docs/app.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
@@ -148,8 +148,8 @@
     },
     {
       "path": "docs/preview.html",
-      "bytes": 2244,
-      "sha256": "c216ae241e71400905f9bc24ee83c051ddce78396991a2c6fc1cd71b20a240e8"
+      "bytes": 2478,
+      "sha256": "c65dd7d4710edba863a955a95d6da7b3eb3a0bb4a6cff5502ae4317f04b58c87"
     },
     {
       "path": "docs/reasons.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
@@ -554,5 +554,35 @@
   ],
   "desktop_launchers": "docs/START.html",
   "previous_public_commit": "351140afde34d73d46aadda91c985ed2eada21e2",
-  "launcher_update": "Existing runtime and manuscript/interface sources unchanged; dedicated OS launchers and navigation added."
+  "launcher_update": "Existing R5 runtime, historical sources and generic launcher bytes are unchanged. Related paper/navigation wording is updated; launcher targets remain the stable data-companion URL.",
+  "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
+  "file_row_scope": {
+    "refreshed_context_paths": [
+      "PROJECT-CONTEXT.json",
+      "README.md",
+      "docs/README.md",
+      "docs/START.html",
+      "docs/preview.html"
+    ],
+    "preserved_rows": "The other 103 rows retain their historical subset fingerprints; they are not fresh whole-repository byte verification."
+  },
+  "paper_content": {
+    "path": "papers/experimental/scientific-layout-2026-11-15",
+    "manifest": "papers/experimental/scientific-layout-2026-11-15/manifest.json",
+    "manifest_sha256": "a524e17ae958ae14ffc7ece9e311ea4810094256dff502c1863cfa3408768184",
+    "scope": "Selected experimental paper content, kept outside these 108 subset rows; actual publication/readback is recorded separately.",
+    "download_bundle": {
+      "path": "papers/downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip",
+      "bytes": 3083960,
+      "sha256": "519a88c6881852b66d5db8efd74e351a661a6acfeb643ee79cc68f489a69bf9b",
+      "members": 14,
+      "extraction_folder": "NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15",
+      "scope": "Four exact selected PDFs, three companions, README, content manifest and five notice files. No standalone font, source, model or private evidence files. Native extraction/PDF-link behavior across operating systems remains unverified."
+    }
+  },
+  "context_overlay_basis": {
+    "observed_commit": "f700fc1dd0ccc2adfa1cf9f91e767790957bde76",
+    "observed_tree": "a611d1828ede8f20293edb6d463fbfc740a82184",
+    "meaning": "Frozen input inventory only; no new commit or upload is asserted by this file."
+  }
 }

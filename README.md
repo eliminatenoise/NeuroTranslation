@@ -7,8 +7,8 @@ NeuroTranslation is active again, alongside [NeuroSurge](https://github.com/elim
 [Download a Windows, macOS or Linux launcher](https://eliminatenoise.github.io/NeuroTranslation/START.html). The data-companion launcher opens the application directly.
 
 - [Browser data companion](https://eliminatenoise.github.io/NeuroTranslation/index.html): import and inspect JSON/CSV, check declared metadata and align compatible recordings. Its example uses invented signals; no trained model is connected. [Source and usage](demo/README.md).
-- [Rendered R9 papers](papers/): both papers in technical and accessible editions, with matching historical manuscript source and the reading-aid erratum.
-- [Experimental R11 manuscript source](papers/experimental/r11-source/): the newer unbuilt source snapshot. It has no matching R11 PDFs and omits external figure/font dependencies. Proposed G35 terminology in that snapshot remains unadopted.
+- [Selected experimental papers](papers/): four technical/accessible PDFs, with a content manifest, reading aid and full scientific summary. The recorded review covers 26 of 546 pages; 520 are outside visual acceptance.
+- [Historical R11 manuscript source](papers/experimental/r11-source/): the preserved unbuilt source snapshot. It has no matching R11 PDFs and omits external figure/font dependencies. Proposed G35 terminology in that snapshot remains unadopted.
 - [Portable interface source](interfaces/experimental/portable/): a recording-specific Python/HTML interface proposal. No weights, model payloads or runnable model download are included.
 
 Each preview names what you can inspect and what remains untested. An experimental upload makes the work available; it does not establish a completed Large Movement Model, biological translation or clinical use.
@@ -44,13 +44,13 @@ We keep negative results. A lower average error does not establish that neural i
 
 ## What is available here
 
-Read the [current R9 paper drafts](papers/): technical and accessible editions of **NeuroTranslation: A New Paradigm In Brain-Body Mapping.** and **Brain2Body: The Next Generation In Body-Brain Interfacing.**, with their matching manuscript source.
+Read the [selected experimental paper drafts](papers/): technical and accessible editions of **NeuroTranslation: A New Paradigm In Brain-Body Mapping.** and **Brain2Body: The Next Generation In Body-Brain Interfacing.** The selected PDFs have their own R2/R3 build provenance; the preserved R9/R11 source snapshots are historical, not matching current build sources.
 
-These papers develop the scientific and engineering argument. The accessible editions explain the same difficult concepts in plain language; they are not a substitute for methods, evidence or limitations. The project is also developing models, data interfaces and interactive demonstrations. **No validated downloadable Large Movement Model or finalized-model GUI is available yet.**
+These papers develop the scientific and engineering argument. The accessible editions are intended to explain the same difficult concepts in plain language; they are not a substitute for methods, evidence or limitations. The project is also developing models, data interfaces and interactive demonstrations. **No validated downloadable Large Movement Model or finalized-model GUI is available yet.**
 
 The [data companion](demo/README.md) imports JSON and CSV, checks their structure, displays the original samples and aligns declared paired recordings. It does not execute a trained translation model. Its example contains invented values.
 
-Some R9 links name an older JSON reading aid that is absent from this public snapshot. See the [metadata and packaging erratum](papers/errata/r9-reading-aid-metadata.txt). The existing draft review, scientific, rights and output limits remain.
+The selected paper folder includes its relative JSON companions and [research reading aid](papers/experimental/scientific-layout-2026-11-15/research-evidence-reading-aid.md). The [R9 metadata erratum](papers/errata/r9-reading-aid-metadata.txt) records a historical omission; it is not the availability record for this edition. Existing scientific, rights and output limits remain.
 
 ## How the projects fit together
 
@@ -62,6 +62,6 @@ They share a programme, terminology and scientific standards. A compelling demon
 
 ## Reuse
 
-The project’s original contributions are dedicated to the public domain under [CC0 1.0](LICENSE), to the extent the project holds the rights. Third-party material, including fonts, cited works and incorporated figures, may have separate rights. See the [notices](papers/drafts/r9/NOTICE.md).
+The project’s original contributions are dedicated to the public domain under [CC0 1.0](LICENSE), to the extent the project holds the rights. Third-party material, including fonts, cited works and incorporated figures, may have separate rights. See the [current paper and font notices](papers/experimental/scientific-layout-2026-11-15/NOTICE.md).
 
 [Terminology and project scope](PROJECT-CONTEXT.json).
