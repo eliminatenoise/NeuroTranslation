@@ -2,11 +2,11 @@
 Version=1.0
 Type=Application
 Name=NeuroTranslation Data Companion
-Comment=Open the experimental data inspector; no trained model
-Exec=xdg-open https://eliminatenoise.github.io/NeuroTranslation/index.html
+Comment=Open the browser companion at the palm-position replay
+Exec=xdg-open "https://eliminatenoise.github.io/NeuroTranslation/index.html#palm-replay"
 TryExec=xdg-open
 Icon=web-browser
 Terminal=false
 Categories=Education;Science;
 StartupNotify=true
-X-Brain2Body-Launcher=neurotranslation-web-preview-v1
+X-Brain2Body-Launcher=neurotranslation-web-preview-v2

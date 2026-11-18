@@ -1,37 +1,50 @@
-NEUROTRANSLATION: OPEN THE CURRENT PREVIEW
+NEUROTRANSLATION
+Open Palm replay
 
-Open the data companion to load the invented example or inspect compatible JSON and CSV recordings. File processing stays in your browser.
+In the browser, import a prepared IACKD right-hand trial and choose Compare
+estimates. Two fitted regressions estimate horizontal palm position. The
+chart puts these estimates beside the tracked movement. The companion also
+inspects compatible JSON and CSV recordings. File processing stays in your
+browser.
 
-Windows: download NeuroTranslation-Windows.url and double-click it.
-macOS: download NeuroTranslation-macOS.webloc and double-click it.
-Linux: open NeuroTranslation-Linux.desktop with your desktop's normal launcher handling.
-Keep each filename's extension. If the browser displays the file as text,
-download the ZIP, extract it, and open the launcher for your system.
-Follow normal OS opening/trust prompts. Native Windows/macOS operation has
-not been tested by this package's Linux-only format checks.
+Windows — Download and open NeuroTranslation-Windows.url.
+macOS — Download and open NeuroTranslation-macOS.webloc.
+Linux — Open NeuroTranslation-Linux.desktop using your desktop's usual
+launcher handling. If you see text instead, extract the launchers ZIP and
+open the file for your system. Keep its extension and follow normal
+operating-system trust prompts.
 
-For a Linux application-menu entry, extract the ZIP, open a terminal in that
-folder and run:
+To add a Linux application-menu entry, extract the ZIP, open a terminal in
+that folder and run:
+
   sh Install-NeuroTranslation-Linux.sh
-The installer opens no browser. It writes one per-user application entry in
-${XDG_DATA_HOME:-$HOME/.local/share}/applications. It prefers the installed
-Omarchy web-app opener, otherwise xdg-open. It needs normal Linux shell/core
-utilities and a configured browser; it installs no software or background job.
-An identical managed entry is left intact. Any different file or symlink
-using the destination name is preserved. The URL stays current when the
-published preview changes, so a new build does not require reinstallation.
-To remove the menu entry later, delete brain2body-neurotranslation.desktop from the
-location printed by the installer. Downloaded bookmarks can be deleted normally.
 
-Direct preview: https://eliminatenoise.github.io/NeuroTranslation/index.html
-Project and source: https://github.com/eliminatenoise/NeuroTranslation
-Source ZIP: https://github.com/eliminatenoise/NeuroTranslation/archive/refs/heads/main.zip
+Look for NeuroTranslation Data Companion in your applications. The installer
+creates one entry for your user in
+${XDG_DATA_HOME:-$HOME/.local/share}/applications. It uses the installed
+Omarchy web-app opener when available and otherwise uses xdg-open. It opens
+no browser or background service during installation. If you already have
+an entry from the previous installer, use it and choose Palm replay in the
+preview's navigation. The installer preserves existing files and symlinks,
+including any customizations. To remove an installed entry, delete
+brain2body-neurotranslation.desktop from the location printed by the
+installer.
 
-This is a data inspector and alignment tool. No trained NeuroTranslate model or model backend is connected. R11 manuscripts and the portable interface are source-only previews; no weights or runnable model download are included.
+Palm replay
+https://eliminatenoise.github.io/NeuroTranslation/index.html#palm-replay
 
-These are online URL launchers, not offline model/app bundles. Opening the
-public preview needs a network connection and browser. No Node/Python install
-is needed to open it. Document viewing may use your normal PDF/DOCX application.
-The launchers contain no weights, recordings, credentials or private paths.
-SHA256SUMS identifies the five launcher/instruction files in this package;
-it does not establish OS trust, scientific validation or source authentication.
+Study and trial preparation
+https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history/
+
+Project source and licences
+https://github.com/eliminatenoise/NeuroTranslation
+
+The shortcuts need a browser and a network connection. They carry only the
+URL. The browser loads the fitted research parameters from the preview, and
+you supply the trial file. The replay covers retrospective estimation on a
+stored recording clock. Live decoding and a general model remain outside the
+preview.
+
+SHA256SUMS covers the five launcher and instruction files. Windows and macOS
+shortcut formats were checked, and isolated installation was tested on Linux.
+Native shortcut opening on Windows and macOS remains unchecked.

@@ -2,9 +2,15 @@
 
 Put compatible neural, muscle, displacement and mechanics recordings on a shared timeline. Each stream keeps its units, origin and source. Files stay in the browser; this application has no recording-upload endpoint.
 
-This companion imports JSON and CSV, checks their structure, displays the original samples, and aligns declared paired recordings. It does not execute a trained translation model. The bundled example contains invented numbers, clearly labelled throughout the interface. It demonstrates the software rather than a biological relationship. [NeuroSurge](https://github.com/eliminatenoise/NeuroSurge), the separate arm-and-brain game, is still being developed.
+This companion imports JSON and CSV, checks their structure, displays original samples and aligns recordings on their declared clocks. The palm-position replay runs two fitted reference regressions on compatible IACKD trials in your browser. The bundled example contains invented numbers, clearly labelled throughout the interface. It demonstrates the software rather than a biological relationship. [NeuroSurge](https://github.com/eliminatenoise/NeuroSurge), the separate arm-and-brain game, is still being developed.
 
 Run `npm test` for the constructed-data and build checks, then `npm run build`. The build creates a stable `index.html`, versioned dependencies and a manifest in `dist`, replacing the previous output. Serve that directory over HTTP. No application dependencies or numerical frameworks are required.
+
+## Replay a palm-position estimate
+
+Import a trial JSON prepared from the IACKD right-hand movement study, choose its recording under **Replay a palm-position estimate**, and select **Compare estimates**. The chart plots tracked horizontal palm position and two estimates in the same device frame. Both models use time and earlier hand motion. The second also uses scalp EEG from C3, Cz and C4. The table lists the value at each requested source time and explains gaps. Use **Download trial results** to keep the model identity, sample times, estimates and matched errors.
+
+The two regressions were fitted on three participants and evaluated on three others using retrospectively processed recordings. The public result gives equal weight to each development participant. The number shown for an imported recording describes the matched samples in that recording. [Study, fitted parameters and trial converter](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history)
 
 ## Import
 

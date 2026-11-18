@@ -4,7 +4,9 @@ To read a trace on its own clock, open **Inspect original samples** below it. Us
 
 Open the [experimental data companion](https://eliminatenoise.github.io/NeuroTranslation/preview.html) to import JSON or CSV, inspect samples and their declared metadata, and align recordings that declare compatible subjects, recordings and clocks. The built-in example contains invented signals so you can try the controls without supplying a recording.
 
-The companion does not run a trained NeuroTranslate model or predict missing signals. It keeps file processing in your browser and has no endpoint for uploading recording contents. A matching label or clock name cannot establish that two observations were acquired together; import checks cannot authenticate data or grant permission to use them.
+The palm-position replay runs two fitted reference regressions on compatible IACKD trials. Import a trial JSON and choose **Compare estimates** to see tracked and estimated palm position in millimetres. You can inspect each requested time and download the trial results. File processing stays in your browser. [Prepare a trial and read the benchmark](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history)
+
+Matching labels and clock names describe how the files relate. Establishing that two recordings were acquired together takes evidence from their original source.
 
 Filtered or transformed recordings can declare `derived` as their origin. An input file can identify the original stream in its provenance. The metadata report flags a missing source declaration.
 
@@ -12,4 +14,4 @@ Move the **Aligned time** slider to put every trace at the same point on the dec
 
 The [build manifest](build-manifest.json) identifies the current browser build. See the [application source and usage](https://github.com/eliminatenoise/NeuroTranslation/tree/main/demo), [selected experimental papers](https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers) and [historical unbuilt R11 manuscript source](https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers/experimental/r11-source) for the wider research programme.
 
-Project-owned code uses [CC0 1.0](LICENSE). Recordings, references and separately supplied assets keep their own rights; see [RIGHTS.md](RIGHTS.md). Work on NeuroTranslation has resumed alongside NeuroSurge and Interoceptomics. The data companion retains its stated experimental limits; preview availability does not establish a trained model or completed biological interface.
+Project-owned code uses CC0. Recordings, references and separately supplied assets retain their own licences. [Code licence](LICENSE) · [Recording and asset rights](RIGHTS.md)

@@ -10,7 +10,7 @@
 <body>
   <header class="topbar">
     <a class="brand" href="#"><span class="brandmark" aria-hidden="true">N↔</span>NeuroTranslate <span class="version">0.0</span></a>
-    <div class="topmeta"><span class="statusdot"></span>Browser-local processing <a href="#how-it-works">How it works ↗</a></div>
+    <div class="topmeta"><span class="statusdot"></span>Browser-local processing <a href="#palm-replay">Palm replay</a><a href="#how-it-works">How it works ↗</a></div>
   </header>
   <main>
     <section class="intro">
@@ -52,7 +52,40 @@
           <button id="export" class="button small secondary" disabled>Export aligned data</button>
         </div>
         <div id="traces" class="traces"><p class="empty">Import a recording or load the constructed example.</p></div>
-        <div class="model-status"><span class="model-icon" aria-hidden="true">↔</span><div><strong>Learned translation</strong><p>This preview aligns recordings and leaves gaps visible. A trained NeuroTranslate model and its weights are unavailable here.</p></div></div>
+      </div>
+    </section>
+    <section class="palm-replay" id="palm-replay" aria-labelledby="replay-title">
+      <div class="replay-intro">
+        <div><h2 id="replay-title">Replay a palm-position estimate</h2>
+          <p>How much do three scalp electrodes add once you know where the hand was? Compare two fitted models on a recorded IACKD right-hand trial. Both use timing and earlier palm motion. One also uses EEG.</p>
+          <p>Across three development participants, adding EEG raised root mean squared error from 1.09 to 1.22 mm. Each participant had equal weight.</p>
+        </div>
+        <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history">Data, model and trial preparation ↗</a>
+      </div>
+      <div class="replay-controls">
+        <label for="replay-recording">Recording<select id="replay-recording"></select></label>
+        <button class="button secondary" id="replay-import" type="button">Import a trial</button>
+        <button class="button primary" id="replay-run" type="button" disabled>Compare estimates</button>
+      </div>
+      <p class="replay-status" id="replay-status" role="status" aria-live="polite"></p>
+      <div id="replay-result" hidden>
+        <h3 id="replay-name"></h3>
+        <p id="replay-scope"></p>
+        <figure class="replay-figure">
+          <figcaption>Horizontal palm position <span>(mm)</span></figcaption>
+          <ul class="replay-legend" aria-label="Chart legend"><li class="observed">Tracked palm</li><li class="history">Timing + hand</li><li class="augmented">Timing + hand + EEG</li></ul>
+          <canvas id="replay-plot" role="img" aria-label="Tracked and estimated palm positions. Numerical values are available in the sample table below."></canvas>
+        </figure>
+        <p id="replay-errors"></p>
+        <p class="replay-clock-note">The latest inputs precede the target by 100 ms on the stored clock. The source authors aligned and filtered these recordings after the task.</p>
+        <details class="replay-samples" id="replay-samples"><summary>Read sample values</summary>
+          <table><caption>Position in millimetres at each time offset from the first finite palm sample at or after the task cue.</caption>
+            <thead><tr><th scope="col">Offset (ms)</th><th scope="col">Tracked palm</th><th scope="col">Timing + hand</th><th scope="col">With EEG</th></tr></thead>
+            <tbody id="replay-rows"></tbody>
+          </table>
+          <p id="replay-missing"></p>
+        </details>
+        <button class="button secondary" id="replay-export" type="button">Download trial results</button>
       </div>
     </section>
     <section class="lower-grid" id="how-it-works">

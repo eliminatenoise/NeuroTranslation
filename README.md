@@ -2,13 +2,19 @@
 
 Reach for a cup. A neural recording captures activity at the recording site. An electrode over a muscle picks up electrical activity as the arm moves. Calibrated cameras estimate where the hand went. NeuroTranslation asks how well one of these observations can predict another. The hand’s measured path gives us something to check the prediction against.
 
-[Open the browser data companion](https://eliminatenoise.github.io/NeuroTranslation/index.html). Choose **Load example**, then open **Metadata checks** to see the units, clock and source declared for each invented signal. You can also inspect your own JSON or CSV files locally and align streams when the files declare the same organism, subject, recording and clock and their partitions are compatible. The companion runs without installation. [Import and alignment guide](demo/README.md) · [Desktop launchers for Windows, macOS and Linux](https://eliminatenoise.github.io/NeuroTranslation/START.html)
+[Open Palm replay](https://eliminatenoise.github.io/NeuroTranslation/index.html#palm-replay). Import a prepared IACKD right-hand trial and choose **Compare estimates**. You can put the two fitted estimates beside the tracked palm position, inspect individual samples and download the comparison. Prepare the trial from the archived recordings using the study instructions. [Study and trial preparation](benchmarks/scalp-eeg-palm-history/)
+
+The companion also inspects your own JSON or CSV locally. It can align streams when they declare the same organism, subject, recording and clock and their partitions are compatible. Choose **Load example**, then **Metadata checks**, to see how the invented example records those fields. The companion runs without installation. [Import and alignment guide](demo/README.md) · [Desktop launchers for Windows, macOS and Linux](https://eliminatenoise.github.io/NeuroTranslation/START.html)
 
 ## Predicting measured movement
 
+How much do three scalp EEG channels add once you know where the hand was? In the palm replay study, both fits had elapsed time and earlier palm position and velocity. One fit also had EEG. We trained on three people and evaluated on three others. Across 173 development trials, the person-weighted root mean squared error rose from 1.093 to 1.223 mm when EEG was added, and it rose for each development participant. The latest inputs preceded the target by 100 ms on the stored clock. The recordings were processed after collection, so live decoding latency remains untested.
+
+The first analysis started its clock at the task cue and found no eligible trials because required palm observations were missing. The replay follows the alternate analysis, which starts at the first available palm sample at or after that cue. [Six-person study, fitted parameters and reproduction](benchmarks/scalp-eeg-palm-history/)
+
 In a hand-to-mouth task, did muscle activity predict elbow angle better than knowing when the movement began? A ridge regression trained on one participant had 62.4° root mean squared error on a second participant. A trajectory based on movement onset had 30.8°. Each participant contributed five repetitions, and their dominant arms differed. The benchmark includes the code, data sources and errors for each repetition. [Read and reproduce the experiment](benchmarks/surface-emg-elbow/README.md)
 
-In a separate right-hand task, three scalp EEG channels were used to estimate the horizontal position of the palm. On 59 trials from the development participant, the ridge model had 7.51 mm root mean squared error. A template using only time within the trial had 7.38 mm. The comparison used stored, processed recordings from one participant for training and another for development. [Read and reproduce the scalp EEG experiment](benchmarks/scalp-eeg-hand/README.md)
+In the earlier IACKD palm pilot, a ridge model using three EEG channels had 7.51 mm root mean squared error on 59 development trials. A template using only time within the trial had 7.38 mm. The pilot used stored recordings from one participant for training and another for development. [Read and reproduce the two-person pilot](benchmarks/scalp-eeg-hand/README.md)
 
 ## Read the papers
 
@@ -36,7 +42,9 @@ Suppose the motion trace belongs to a different reach. It might help a model lea
 
 ## What has been tested?
 
-The public companion imports, plots and aligns samples. The example is synthetic, and the companion has no trained translation model attached. The developmental learner passed 29 synthetic software checks across its four input families. Those checks exercised timing and mask handling, training-only normalization and the transition between pretraining, training and fine-tuning. All three parameter updates used mock data. This version of the learner has completed zero real-data fits. A validated model download and a GUI for that model are still pending.
+The public companion imports, plots and aligns samples. Its invented example exercises those tools. Palm replay instead runs the fitted regressions for the specified IACKD study on an imported trial. The published development result and the error for the imported trial have different denominators.
+
+The separate general learner passed 29 synthetic software checks across its four input families. Those checks exercised timing and mask handling, training-only normalization and the transition between pretraining, training and fine-tuning. All three recorded parameter updates used mock data. The study regressions have a narrow input and task contract. A validated general-model download and a GUI for that model are still pending.
 
 For a biological result, specify which inputs were available at prediction time, the organism, task, target and units. Keep evaluation subjects or sessions outside training and model selection. A hand tends to keep moving in its current direction, so a predictor can obtain a low error using only recent motion. Compare against that baseline and test what changes when the neural input is withheld.
 

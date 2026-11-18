@@ -41,12 +41,14 @@
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
   "experimental_previews": {
     "data_companion": {
-      "version": "2026-11-19 individual recording clocks",
+      "version": "2026-11-19 palm-position replay",
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
-      "buildId": "943f9fc85ca522beb3a7359c424a2f92a182ec20e5d9c836a04b6f02870791ca",
-      "meaning": "Inspect local JSON or CSV, align samples on a declared common clock, and inspect each value with its unit and sampling status. The bundled example uses invented signals.",
-      "hosting": "Prepared static main/docs payload; actual Pages deployment/readback is verified separately"
+      "buildId": "99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b",
+      "meaning": "Inspect local recordings, align declared clocks and replay fitted palm-position estimates on compatible IACKD trials. The included example uses invented signals. The benchmark compares retrospective scalp EEG and hand history on three training and three development participants.",
+      "hosting": "Prepared static main/docs payload; actual Pages deployment/readback is verified separately",
+      "study": "benchmarks/scalp-eeg-palm-history",
+      "model_sha256": "c9c9e6a5c357274103e339f69517ae6a11f1d90c39f1d172585ad81a38ee8337"
     },
     "papers": {
       "latest_rendered": "papers/experimental/scientific-layout-2026-11-15",

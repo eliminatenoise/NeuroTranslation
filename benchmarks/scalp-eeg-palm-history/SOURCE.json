@@ -1,0 +1,374 @@
+{
+  "author_method": {
+    "binding_limit": "Each exact right R1 BrainVision header and channel table agree. Author export preserves the order of retained EEG and each MAT has expected width. The derived columns carry no embedded labels and exact per-record processing choices remain incompletely logged.",
+    "code": "https://github.com/Boketto1/IACKD/tree/c0b595de7571c7e04abae7477c61d0b92b5702cd",
+    "evidence_files": {
+      "align_eeg_leap.m": "26fe4094c3e788d3441f117c5d1fd79fcb39da7d310885945498a3f5348f03a5",
+      "calibrate_pairs_with_events.m": "069d8a87737c25c0971a1846bf448ebb545d3d28a98de12f2d0c911c40033e0b",
+      "export_eeg_leap_aligned.m": "b7b7a0e9bd3c5a529ea441630608772497c8d7a99d1045a16d1949a171eed6dc",
+      "preprocess_eeg_pipeline.m": "a8bbba927b35f35e14b003bb6a528b3035b312f5575c81df85d06bf397fecb7c",
+      "process_leap_dual_csv.m": "289f2b93dd2b5fd99afc7aae4a55fc3cee4dc9acdd9821c55e37b7948544fc8a"
+    },
+    "pipeline_commit": "c0b595de7571c7e04abae7477c61d0b92b5702cd",
+    "review": "https://github.com/eliminatenoise/NeuroTranslation/tree/9d9c591481318da24b763a35d31dc3d0cfa5e0c0/benchmarks/scalp-eeg-hand"
+  },
+  "dataset": {
+    "authors": [
+      "Mengpu Cai",
+      "Rongrong Fu",
+      "Yaodong Wang",
+      "Bin Lu",
+      "Saiwei Guo",
+      "Fangyao Xu"
+    ],
+    "context": "Cai et al. describe consenting anonymized healthy adult volunteers, optical Leap Motion palm centre and noninvasive scalp EEG in a constrained visual-feedback unimanual task. Scope is research reuse of selected public de-identified derivatives and aggregate reporting.",
+    "descriptor": "https://doi.org/10.1038/s41597-026-07146-x",
+    "doi": "https://doi.org/10.18112/openneuro.ds006840.v1.0.0",
+    "license": "CC0 1.0",
+    "license_authority": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/dataset_description.json",
+    "name": "IACKD: Intention Action Conflict EEG-Hand Kinematics Dataset",
+    "url": "https://openneuro.org/datasets/ds006840/versions/1.0.0",
+    "version": "1.0.0"
+  },
+  "intake_prescore_freeze_sha256": "e057a5f7a3891a00aa64a72595964269873e34d588e5e6fbba500f8a0e1588ed",
+  "release_commit": "0c701aadfa562b8662e76ca0dd6831788e02e8b6",
+  "roles": {
+    "DEV": [
+      "sub-10",
+      "sub-11",
+      "sub-12"
+    ],
+    "TRAIN": [
+      "sub-07",
+      "sub-08",
+      "sub-09"
+    ]
+  },
+  "runs": {
+    "sub-07": {
+      "annex_pointer": {
+        "bytes": 210,
+        "sha256": "8c0a06bb31e29a5b5f05130b3798d20b102dc22a4bdcc90ad353b724ab08328a",
+        "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/derivatives/movement-execution/sub-07/ihc/sub-07_task-ihc_run-01_eeg_leap_R1.mat"
+      },
+      "asset_bytes": 2872449,
+      "asset_sha256": "ece91629e980e7900fe85bdee64b7b7f4dd5098a59284c0c8606eae2fb2ed7e6",
+      "basename": "sub-07_task-ihc_run-01_eeg_leap_R1.mat",
+      "channels": [
+        {
+          "index_zero_based": 11,
+          "name": "C3",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 12,
+          "name": "Cz",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 13,
+          "name": "C4",
+          "type": "EEG"
+        }
+      ],
+      "n_channels": 26,
+      "release_path": "derivatives/movement-execution/sub-07/ihc/sub-07_task-ihc_run-01_eeg_leap_R1.mat",
+      "s3_version_id": "S4iFrld0TAIbJCXNE5B50Ukq.poC.pnc",
+      "same_run_metadata": {
+        "brainvision": {
+          "bytes": 1256,
+          "sha256": "3876698f0c6567c453f9c5c010f542e754a407e64603853ce8cb608bcc061e35",
+          "url": "https://s3.amazonaws.com/openneuro.org/ds006840/sub-07/eeg/sub-07_task-ihc_acq-right_run-01_eeg.vhdr?versionId=v7C6NpkanCRAofXRIXmlp7uRLP1FYF.p"
+        },
+        "channels": {
+          "bytes": 1752,
+          "sha256": "0128fa51d79ab087acf02419a581a4ccecb56113b7c97426f0df8c29added408",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-07/eeg/sub-07_task-ihc_acq-right_run-01_channels.tsv"
+        },
+        "derivative_fields": {
+          "bytes": 674,
+          "sha256": "f1fdbef3b4b9fbd25a96ad46b9d04b92331e52d2576d8d074ffa5dcaa591b63e",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/derivatives/movement-execution/sub-07/ihc/fields.json"
+        },
+        "eeg_sidecar": {
+          "bytes": 1354,
+          "sha256": "86d2e7ffd46cbad7aabaf5e665680ab28c008d31bf47119c4b95cf6104669d24",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-07/eeg/sub-07_task-ihc_acq-right_run-01_eeg.json"
+        }
+      },
+      "versioned_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-07/ihc/sub-07_task-ihc_run-01_eeg_leap_R1.mat?versionId=S4iFrld0TAIbJCXNE5B50Ukq.poC.pnc"
+    },
+    "sub-08": {
+      "annex_pointer": {
+        "bytes": 210,
+        "sha256": "ae904cfd2fedffe0d0f6a451e81b50f784bb30bddc6916020c19cc369d67a08a",
+        "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/derivatives/movement-execution/sub-08/ihc/sub-08_task-ihc_run-01_eeg_leap_R1.mat"
+      },
+      "asset_bytes": 2904010,
+      "asset_sha256": "7d4be190ed8a3f39f7f555acff3b129e837b9328ab920598adcb514410596178",
+      "basename": "sub-08_task-ihc_run-01_eeg_leap_R1.mat",
+      "channels": [
+        {
+          "index_zero_based": 11,
+          "name": "C3",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 12,
+          "name": "Cz",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 13,
+          "name": "C4",
+          "type": "EEG"
+        }
+      ],
+      "n_channels": 26,
+      "release_path": "derivatives/movement-execution/sub-08/ihc/sub-08_task-ihc_run-01_eeg_leap_R1.mat",
+      "s3_version_id": "w9x1PYp.R447UnggyMrVkT9ERrgxv39N",
+      "same_run_metadata": {
+        "brainvision": {
+          "bytes": 1256,
+          "sha256": "e30a6d7f4dfab6516ad4f6bc647a886f9865df4a22675872647f71954f9d6d4f",
+          "url": "https://s3.amazonaws.com/openneuro.org/ds006840/sub-08/eeg/sub-08_task-ihc_acq-right_run-01_eeg.vhdr?versionId=hnDIVti3DoYEmp1TFDVp9dlsgWknzsQ1"
+        },
+        "channels": {
+          "bytes": 1752,
+          "sha256": "0128fa51d79ab087acf02419a581a4ccecb56113b7c97426f0df8c29added408",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-08/eeg/sub-08_task-ihc_acq-right_run-01_channels.tsv"
+        },
+        "derivative_fields": {
+          "bytes": 674,
+          "sha256": "f1fdbef3b4b9fbd25a96ad46b9d04b92331e52d2576d8d074ffa5dcaa591b63e",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/derivatives/movement-execution/sub-08/ihc/fields.json"
+        },
+        "eeg_sidecar": {
+          "bytes": 1354,
+          "sha256": "e1cc568fbc63a29a5b0d85f21101ed951f3036b14a7e72b6db100f14da8c5fc0",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-08/eeg/sub-08_task-ihc_acq-right_run-01_eeg.json"
+        }
+      },
+      "versioned_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-08/ihc/sub-08_task-ihc_run-01_eeg_leap_R1.mat?versionId=w9x1PYp.R447UnggyMrVkT9ERrgxv39N"
+    },
+    "sub-09": {
+      "annex_pointer": {
+        "bytes": 210,
+        "sha256": "88cfa71d23bafaec9770366757f0134740e13e24970e93d5d08b4a0c3fecdea3",
+        "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/derivatives/movement-execution/sub-09/ihc/sub-09_task-ihc_run-01_eeg_leap_R1.mat"
+      },
+      "asset_bytes": 2185792,
+      "asset_sha256": "361351fe377b3ba440024c19229f4019e4b44a7eb77a823c252812b526bb2e0d",
+      "basename": "sub-09_task-ihc_run-01_eeg_leap_R1.mat",
+      "channels": [
+        {
+          "index_zero_based": 11,
+          "name": "C3",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 12,
+          "name": "Cz",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 13,
+          "name": "C4",
+          "type": "EEG"
+        }
+      ],
+      "n_channels": 26,
+      "release_path": "derivatives/movement-execution/sub-09/ihc/sub-09_task-ihc_run-01_eeg_leap_R1.mat",
+      "s3_version_id": "4ZrMuj1Ir4rjGpm_5iEB5g1Jl32a.wKc",
+      "same_run_metadata": {
+        "brainvision": {
+          "bytes": 1256,
+          "sha256": "941dfd3acf3811917d7f567e2c1c6491c949a23c6e46cf7c98e39fee4ade5872",
+          "url": "https://s3.amazonaws.com/openneuro.org/ds006840/sub-09/eeg/sub-09_task-ihc_acq-right_run-01_eeg.vhdr?versionId=vdnoKLEbo6OW1_cxUpG9ZWKVmQKGYZk3"
+        },
+        "channels": {
+          "bytes": 1752,
+          "sha256": "0128fa51d79ab087acf02419a581a4ccecb56113b7c97426f0df8c29added408",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-09/eeg/sub-09_task-ihc_acq-right_run-01_channels.tsv"
+        },
+        "derivative_fields": {
+          "bytes": 674,
+          "sha256": "f1fdbef3b4b9fbd25a96ad46b9d04b92331e52d2576d8d074ffa5dcaa591b63e",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/derivatives/movement-execution/sub-09/ihc/fields.json"
+        },
+        "eeg_sidecar": {
+          "bytes": 1354,
+          "sha256": "881685ad9b6a374bf3d2a14b14e1dd59a48dc6a16a2b8300ca217873abba8875",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-09/eeg/sub-09_task-ihc_acq-right_run-01_eeg.json"
+        }
+      },
+      "versioned_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-09/ihc/sub-09_task-ihc_run-01_eeg_leap_R1.mat?versionId=4ZrMuj1Ir4rjGpm_5iEB5g1Jl32a.wKc"
+    },
+    "sub-10": {
+      "annex_pointer": {
+        "bytes": 210,
+        "sha256": "d69421af1e38f83aa44e5401dcadc89f1883ffe0bd9ffdaa13081a16e2e3345f",
+        "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/derivatives/movement-execution/sub-10/ihc/sub-10_task-ihc_run-01_eeg_leap_R1.mat"
+      },
+      "asset_bytes": 2155900,
+      "asset_sha256": "e850e38fcc789de01db0700393fb873b504e1e4384e659d23a1628159767f8f9",
+      "basename": "sub-10_task-ihc_run-01_eeg_leap_R1.mat",
+      "channels": [
+        {
+          "index_zero_based": 11,
+          "name": "C3",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 12,
+          "name": "Cz",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 13,
+          "name": "C4",
+          "type": "EEG"
+        }
+      ],
+      "n_channels": 26,
+      "release_path": "derivatives/movement-execution/sub-10/ihc/sub-10_task-ihc_run-01_eeg_leap_R1.mat",
+      "s3_version_id": "bNysLQzzusjGYq3SJNtcC9OtMRyHFMS5",
+      "same_run_metadata": {
+        "brainvision": {
+          "bytes": 1256,
+          "sha256": "822a5dfd7a6a27e27a9b63fb624783674830d17d3d8e9dadcbd9424166a32aac",
+          "url": "https://s3.amazonaws.com/openneuro.org/ds006840/sub-10/eeg/sub-10_task-ihc_acq-right_run-01_eeg.vhdr?versionId=oJWcIAqur3vPscOV2QeeuO6M1.NguxOP"
+        },
+        "channels": {
+          "bytes": 1752,
+          "sha256": "0128fa51d79ab087acf02419a581a4ccecb56113b7c97426f0df8c29added408",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-10/eeg/sub-10_task-ihc_acq-right_run-01_channels.tsv"
+        },
+        "derivative_fields": {
+          "bytes": 674,
+          "sha256": "f1fdbef3b4b9fbd25a96ad46b9d04b92331e52d2576d8d074ffa5dcaa591b63e",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/derivatives/movement-execution/sub-10/ihc/fields.json"
+        },
+        "eeg_sidecar": {
+          "bytes": 1354,
+          "sha256": "b057fb388dcff0a107babd0ba2245f2cfb908c0144dec93840acc1e321d8a70d",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-10/eeg/sub-10_task-ihc_acq-right_run-01_eeg.json"
+        }
+      },
+      "versioned_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-10/ihc/sub-10_task-ihc_run-01_eeg_leap_R1.mat?versionId=bNysLQzzusjGYq3SJNtcC9OtMRyHFMS5"
+    },
+    "sub-11": {
+      "annex_pointer": {
+        "bytes": 210,
+        "sha256": "a5f701965688d2b889d61bb86688eb8b0b11181785a47a66d658a047792bfa3b",
+        "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/derivatives/movement-execution/sub-11/ihc/sub-11_task-ihc_run-01_eeg_leap_R1.mat"
+      },
+      "asset_bytes": 2209229,
+      "asset_sha256": "27a3a1ac9cfdbf3380f86a27b0c010074378136792c18b1d2f3bcf37aa6ea86b",
+      "basename": "sub-11_task-ihc_run-01_eeg_leap_R1.mat",
+      "channels": [
+        {
+          "index_zero_based": 11,
+          "name": "C3",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 12,
+          "name": "Cz",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 13,
+          "name": "C4",
+          "type": "EEG"
+        }
+      ],
+      "n_channels": 26,
+      "release_path": "derivatives/movement-execution/sub-11/ihc/sub-11_task-ihc_run-01_eeg_leap_R1.mat",
+      "s3_version_id": "_7YwCB2aekuoXCCSrZyJmTuWhVA4fyyF",
+      "same_run_metadata": {
+        "brainvision": {
+          "bytes": 1256,
+          "sha256": "144f119f50c082f8cbb0662ff4375858f66d07c53a51d1484256eaf84f23ab42",
+          "url": "https://s3.amazonaws.com/openneuro.org/ds006840/sub-11/eeg/sub-11_task-ihc_acq-right_run-01_eeg.vhdr?versionId=cGMAf_ZGe90L9eWyDsUiGhjLUTnHP8rD"
+        },
+        "channels": {
+          "bytes": 1752,
+          "sha256": "0128fa51d79ab087acf02419a581a4ccecb56113b7c97426f0df8c29added408",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-11/eeg/sub-11_task-ihc_acq-right_run-01_channels.tsv"
+        },
+        "derivative_fields": {
+          "bytes": 674,
+          "sha256": "f1fdbef3b4b9fbd25a96ad46b9d04b92331e52d2576d8d074ffa5dcaa591b63e",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/derivatives/movement-execution/sub-11/ihc/fields.json"
+        },
+        "eeg_sidecar": {
+          "bytes": 1354,
+          "sha256": "db161fb268097df7dc2238bbfa347465b2ef4c2ab6dea216e18df82c012d3765",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-11/eeg/sub-11_task-ihc_acq-right_run-01_eeg.json"
+        }
+      },
+      "versioned_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-11/ihc/sub-11_task-ihc_run-01_eeg_leap_R1.mat?versionId=_7YwCB2aekuoXCCSrZyJmTuWhVA4fyyF"
+    },
+    "sub-12": {
+      "annex_pointer": {
+        "bytes": 210,
+        "sha256": "a9e3fb77bc8e271081de26170cc697677f29a61b7384cd0bcc267f7892b3ff9f",
+        "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/derivatives/movement-execution/sub-12/ihc/sub-12_task-ihc_run-01_eeg_leap_R1.mat"
+      },
+      "asset_bytes": 2266164,
+      "asset_sha256": "92c9c9c26d9b194e3b5f2ec9cbdf10c6b063ff9f422e190b735910412039a65d",
+      "basename": "sub-12_task-ihc_run-01_eeg_leap_R1.mat",
+      "channels": [
+        {
+          "index_zero_based": 11,
+          "name": "C3",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 12,
+          "name": "Cz",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 13,
+          "name": "C4",
+          "type": "EEG"
+        }
+      ],
+      "n_channels": 26,
+      "release_path": "derivatives/movement-execution/sub-12/ihc/sub-12_task-ihc_run-01_eeg_leap_R1.mat",
+      "s3_version_id": "2KQ6muhT_Kb9T8HIujYXlHWCz5PLRkwD",
+      "same_run_metadata": {
+        "brainvision": {
+          "bytes": 1256,
+          "sha256": "f2209904a8fa9059088d04cf1e0eb3cae9b4c6a9879f7fd74856135c2a16acb9",
+          "url": "https://s3.amazonaws.com/openneuro.org/ds006840/sub-12/eeg/sub-12_task-ihc_acq-right_run-01_eeg.vhdr?versionId=CdvOAhcw0VNITXW8T8ZX45WCj4v5BwT2"
+        },
+        "channels": {
+          "bytes": 1752,
+          "sha256": "0128fa51d79ab087acf02419a581a4ccecb56113b7c97426f0df8c29added408",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-12/eeg/sub-12_task-ihc_acq-right_run-01_channels.tsv"
+        },
+        "derivative_fields": {
+          "bytes": 674,
+          "sha256": "f1fdbef3b4b9fbd25a96ad46b9d04b92331e52d2576d8d074ffa5dcaa591b63e",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/derivatives/movement-execution/sub-12/ihc/fields.json"
+        },
+        "eeg_sidecar": {
+          "bytes": 1354,
+          "sha256": "395a61ee206e07829c9b08bb1b217665b2ab3eb02afcada45233ab3ff1eed2e0",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-12/eeg/sub-12_task-ihc_acq-right_run-01_eeg.json"
+        }
+      },
+      "versioned_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-12/ihc/sub-12_task-ihc_run-01_eeg_leap_R1.mat?versionId=2KQ6muhT_Kb9T8HIujYXlHWCz5PLRkwD"
+    }
+  },
+  "status": "supported_for_named_central_rows",
+  "target_and_channel_qualification_sha256": "98b6b2d7dfe88e2921e4f4c0dc16d73bffb1d5682be9a38abac4a4ae8aa52361",
+  "terminology_registry": {
+    "name": "Brain2Body shared glossary",
+    "revision": 36,
+    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+  }
+}

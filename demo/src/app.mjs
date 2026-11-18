@@ -3,6 +3,7 @@ import {normalizeFinite,buildPlotSegments} from './plot.mjs';
 import {toPolicyEnvelope} from './packet-policy-bridge.mjs';
 import {evaluate as evaluateMetadata} from './compat-policy.mjs';
 import {renderMetadataReport} from './policy-report-view.mjs';
+import {createPalmReplay} from './replay-view.mjs';
 
 const $=id=>document.getElementById(id);
 const colors={neural:'#7757d8',muscle:'#cd6446',displacement:'#287dba',mechanics:'#278476'};
@@ -21,6 +22,7 @@ const streams=()=>state.packets.flatMap(p=>p.streams.map(s=>({...s,dataset:p.dat
 function element(tag,className,text){const e=document.createElement(tag);if(className)e.className=className;if(text!==undefined)e.textContent=text;return e;}
 function message(text,error=false){$('message').textContent=text;$('message').classList.toggle('error',error);}
 function download(name,value){const blob=new Blob([stringifyRecording(value,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+const setReplayPackets = createPalmReplay({openImport, download});
 const exactNumber = value => Object.is(value, -0) ? '-0' : String(value);
 function stop(){
   if(state.animationFrame!==null)cancelAnimationFrame(state.animationFrame);
@@ -84,7 +86,7 @@ function render(){
   $('cursor').max=Math.max(0,sampleCount-1);
   $('export').disabled=!aligned;
   $('align').disabled=!all.length;
-  renderMetadata();renderTraces();
+  renderMetadata();renderTraces();setReplayPackets(state.packets);
 }
 function appendOriginalInspector(trace, plot, stream, name) {
   const original = stream.originalStream;

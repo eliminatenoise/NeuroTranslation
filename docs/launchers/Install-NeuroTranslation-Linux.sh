@@ -9,7 +9,8 @@ app_data_dir=${XDG_DATA_HOME:-${HOME:?HOME is required when XDG_DATA_HOME is uns
 case "$app_data_dir" in /*) ;; *) printf '%s\n' 'XDG_DATA_HOME must be an absolute path.' >&2; exit 1 ;; esac
 applications_dir=$app_data_dir/applications
 destination=$applications_dir/brain2body-neurotranslation.desktop
-marker='X-Brain2Body-Launcher=neurotranslation-web-preview-v1'
+target='https://eliminatenoise.github.io/NeuroTranslation/index.html#palm-replay'
+marker='X-Brain2Body-Launcher=neurotranslation-web-preview-v2'
 if command -v omarchy >/dev/null 2>&1 && command -v omarchy-launch-webapp >/dev/null 2>&1; then
   launcher_exec='omarchy launch webapp'
   launcher_tryexec='omarchy'
@@ -17,7 +18,7 @@ elif command -v xdg-open >/dev/null 2>&1; then
   launcher_exec='xdg-open'
   launcher_tryexec='xdg-open'
 else
-  printf '%s\n' 'No desktop URL opener was found. Open https://eliminatenoise.github.io/NeuroTranslation/index.html in your browser.' >&2
+  printf 'No desktop URL opener was found. Open %s in your browser.\n' "$target" >&2
   exit 1
 fi
 if [ -L "$applications_dir" ] || { [ -e "$applications_dir" ] && [ ! -d "$applications_dir" ]; }; then
@@ -32,8 +33,8 @@ cat > "$temporary" <<_BRAIN2BODY_DESKTOP_
 Version=1.0
 Type=Application
 Name=NeuroTranslation Data Companion
-Comment=Open the experimental data inspector; no trained model
-Exec=$launcher_exec https://eliminatenoise.github.io/NeuroTranslation/index.html
+Comment=Open the browser companion at the palm-position replay
+Exec=$launcher_exec "$target"
 TryExec=$launcher_tryexec
 Icon=web-browser
 Terminal=false
@@ -43,9 +44,20 @@ $marker
 _BRAIN2BODY_DESKTOP_
 chmod 0644 "$temporary"
 if [ -e "$destination" ] || [ -L "$destination" ]; then
-  if [ ! -L "$destination" ] && [ -f "$destination" ] && grep -Fxq "$marker" "$destination" && cmp -s "$temporary" "$destination"; then
-    printf 'Already installed: %s\n' "$destination"
-    exit 0
+  if [ ! -L "$destination" ] && [ -f "$destination" ]; then
+    if cmp -s "$temporary" "$destination"; then
+      printf 'Already installed: %s\n' "$destination"
+      exit 0
+    fi
+    # Exact outputs of the previous installer, using xdg-open or Omarchy.
+    # Their stable preview URL still leads to Palm replay through the page navigation.
+    if previous_entry=$(sha256sum < "$destination"); then
+      case "${previous_entry%% *}" in
+        803708a27a1bee65a5e5f4ef47d0cb8e118c5b6c9bb6bf188392316b020fbc43|a254e05887f1c2c361db2c4b557c50f63100b0874175acf764aeba922a1c92e2)
+          printf 'Already installed: %s\nOpen it and choose Palm replay in the browser.\n' "$destination"
+          exit 0 ;;
+      esac
+    fi
   fi
   printf 'Existing file preserved: %s\n' "$destination" >&2
   printf '%s\n' 'A different file already uses this name. Nothing was replaced.' >&2

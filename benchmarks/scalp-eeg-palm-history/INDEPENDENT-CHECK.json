@@ -1,0 +1,30 @@
+{
+  "method": "Independent HDF5 row selection, matching and weighted augmented least squares. Verified per-participant, per-offset and cohort metrics, paired comparisons and exported coefficients.",
+  "record_sha256": {
+    "availability_window": "5a4624aea029bf71401e399946e92e2ffacc046b35ad6daaffd669befd438e1e",
+    "cue_window": "9fd8f3532b82d8fb4472e6f1b587a5a1541be82174deaab35cdfe6435f3052fb"
+  },
+  "records": {
+    "availability_window": {
+      "author_result_sha256": "998a62808653cf27b9edd6ae6d5513fcda4db0334bed0c64f57eb3621a2f42e9",
+      "checks": 2454,
+      "fit_count": 3,
+      "independent_result_sha256": "5bf79a5eb2f91e4d3574a70847e85e15282f5b072a6127dd1edfd1c1d441f6d1",
+      "max_abs_delta": 1.1368683772161603e-12,
+      "model_state_sha256": "c9c9e6a5c357274103e339f69517ae6a11f1d90c39f1d172585ad81a38ee8337",
+      "participant_count": 6,
+      "status": "archival_development_scored"
+    },
+    "cue_window": {
+      "author_result_sha256": "e0e92867774164c9cb06fdf3ef822fc2b04a10d20a854dd8513bee2837cee7fc",
+      "checks": 0,
+      "exact_eligibility_and_reason_parity": true,
+      "fit_count": 0,
+      "independent_result_sha256": "12b11abaccd70ef20b3d753ae9cdec3f58f8d3fb2d0316d1caea93c9268a183d",
+      "max_abs_delta": 0.0,
+      "participant_count": 6,
+      "status": "insufficient_eligible_trials"
+    }
+  },
+  "scope": "Independent source and numerical reproduction of the original no-fit and alternate exploratory development comparison."
+}
