@@ -5,7 +5,7 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.css">
+  <link rel="stylesheet" href="style.c9f73676003f8d0894305c2f9462804282365c565f98fd4ba96a0738251517e6.css">
 </head>
 <body>
   <header class="topbar">
@@ -26,10 +26,10 @@
     </section>
     <div class="notice" id="example-notice"><span class="notice-icon">i</span><p><strong>Constructed example.</strong> These invented signals test the software. They are not biological recordings or model predictions.</p><button id="clear-all" class="textbutton">Clear example</button></div>
     <section class="modality-grid" aria-label="Loaded signal types">
-      <article class="modality neural"><span class="modality-number">01</span><div class="mini-signal">∿</div><h2>Neural</h2><p>Brain, spine &amp; peripheral activity</p><div class="modality-bottom"><span id="count-neural">0 streams</span><span class="smalltag" id="origin-neural">No data</span></div></article>
-      <article class="modality muscle"><span class="modality-number">02</span><div class="mini-signal">⌁</div><h2>Muscle</h2><p>Myography &amp; muscle activity</p><div class="modality-bottom"><span id="count-muscle">0 streams</span><span class="smalltag" id="origin-muscle">No data</span></div></article>
-      <article class="modality displacement"><span class="modality-number">03</span><div class="mini-signal">↗</div><h2>Displacement</h2><p>Position &amp; measured movement</p><div class="modality-bottom"><span id="count-displacement">0 streams</span><span class="smalltag" id="origin-displacement">No data</span></div></article>
-      <article class="modality mechanics"><span class="modality-number">04</span><div class="mini-signal">⇌</div><h2>Mechanics</h2><p>Force, torque &amp; body dynamics</p><div class="modality-bottom"><span id="count-mechanics">0 streams</span><span class="smalltag" id="origin-mechanics">No data</span></div></article>
+      <article class="modality neural"><div class="mini-signal">∿</div><h2>Neural</h2><p>Brain, spine &amp; peripheral activity</p><div class="modality-bottom"><span id="count-neural">0 streams</span><span class="smalltag" id="origin-neural">No data</span></div></article>
+      <article class="modality muscle"><div class="mini-signal">⌁</div><h2>Muscle</h2><p>Myography &amp; muscle activity</p><div class="modality-bottom"><span id="count-muscle">0 streams</span><span class="smalltag" id="origin-muscle">No data</span></div></article>
+      <article class="modality displacement"><div class="mini-signal">↗</div><h2>Displacement</h2><p>Position &amp; measured movement</p><div class="modality-bottom"><span id="count-displacement">0 streams</span><span class="smalltag" id="origin-displacement">No data</span></div></article>
+      <article class="modality mechanics"><div class="mini-signal">⇌</div><h2>Mechanics</h2><p>Force, torque &amp; body dynamics</p><div class="modality-bottom"><span id="count-mechanics">0 streams</span><span class="smalltag" id="origin-mechanics">No data</span></div></article>
     </section>
     <section class="workspace">
       <aside class="sources-pane">
@@ -64,13 +64,16 @@
     <section class="palm-replay" id="palm-replay" aria-labelledby="replay-title" tabindex="-1">
       <div class="replay-intro">
         <div><h2 id="replay-title">Replay a palm-position estimate</h2>
-          <p>How much do three scalp electrodes add once you know where the hand was? Compare two fitted models on a recorded IACKD right-hand trial. Both use timing and earlier palm motion. One also uses EEG.</p>
-          <p>Across three development participants, adding EEG raised root mean squared error from 1.09 to 1.22 mm. Each participant had equal weight.</p>
+          <p>Import a right-hand trial to compare the tracked palm with fitted estimates. A first recording (R1) lets you see what EEG adds to hand history. A second recording (R2) lets you compare the same model before and after calibration on that person's R1.</p>
         </div>
-        <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history">Data, model and trial preparation ↗</a>
+        <nav class="replay-study-links" aria-label="Prepare a trial">
+          <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history#replay-a-recorded-trial">Prepare an R1 trial</a>
+          <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-personal-calibration#replay-a-second-recording">Prepare an R2 trial</a>
+        </nav>
       </div>
+      <p class="replay-clock-note" id="replay-group-note">Across three R1 development participants, adding EEG raised root mean squared error from 1.09 to 1.22 mm.</p>
       <div class="replay-controls">
-        <label for="replay-recording">Recording<select id="replay-recording"></select></label>
+        <div class="replay-picker"><label for="replay-recording">Recording</label><select id="replay-recording"></select></div>
         <button class="button secondary" id="replay-import" type="button">Import a trial</button>
         <button class="button primary" id="replay-run" type="button" disabled>Compare estimates</button>
       </div>
@@ -78,16 +81,28 @@
       <div id="replay-result" hidden>
         <h3 id="replay-name"></h3>
         <p id="replay-scope"></p>
-        <figure class="replay-figure">
+        <div class="replay-input-picker" id="replay-input-picker" hidden>
+          <label for="replay-inputs">Model inputs for the chart and sample table</label>
+          <select id="replay-inputs"><option value="hand">Timing and hand history</option><option value="eeg" selected>Timing, hand history and EEG</option></select>
+        </div>
+        <figure class="replay-figure" id="replay-figure">
           <figcaption>Horizontal palm position <span>(mm)</span></figcaption>
-          <ul class="replay-legend" aria-label="Chart legend"><li class="observed">Tracked palm</li><li class="history">Timing + hand</li><li class="augmented">Timing + hand + EEG</li></ul>
+          <ul class="replay-legend" aria-label="Chart legend"><li class="observed">Tracked palm</li><li class="history" id="replay-legend-baseline">Timing + hand</li><li class="augmented" id="replay-legend-estimate">Timing + hand + EEG</li></ul>
           <canvas id="replay-plot" role="img" aria-label="Tracked and estimated palm positions. Numerical values are available in the sample table below."></canvas>
         </figure>
         <p id="replay-errors"></p>
+        <table class="calibration-table" id="replay-r2-errors" hidden>
+          <caption>Root mean squared error on this trial (mm)</caption>
+          <thead><tr><th scope="col">Inputs</th><th scope="col">Fixed model</th><th scope="col">After R1 calibration</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Timing + hand</th><td data-method="fixedHand"></td><td data-method="calibratedHand"></td></tr>
+            <tr><th scope="row">Timing + hand + EEG</th><td data-method="fixedEegHand"></td><td data-method="calibratedEegHand"></td></tr>
+          </tbody>
+        </table>
         <p class="replay-clock-note">The latest inputs precede the target by 100 ms on the stored clock. The source authors aligned and filtered these recordings after the task.</p>
         <details class="replay-samples" id="replay-samples"><summary>Read sample values</summary>
           <table><caption>Position in millimetres at each time offset from the first finite palm sample at or after the task cue.</caption>
-            <thead><tr><th scope="col">Offset (ms)</th><th scope="col">Tracked palm</th><th scope="col">Timing + hand</th><th scope="col">With EEG</th></tr></thead>
+            <thead><tr><th scope="col">Offset (ms)</th><th scope="col">Tracked palm</th><th scope="col" id="replay-head-baseline">Timing + hand</th><th scope="col" id="replay-head-estimate">With EEG</th></tr></thead>
             <tbody id="replay-rows"></tbody>
           </table>
           <p id="replay-missing"></p>
@@ -154,6 +169,6 @@
       <p id="import-error" class="form-error" role="alert"></p><div class="dialog-footer"><span class="quiet">File contents stay in your browser.</span><button class="button primary" type="submit">Import recording</button></div>
     </form>
   </dialog>
-  <script type="module" src="app.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.mjs"></script>
+  <script type="module" src="app.c9f73676003f8d0894305c2f9462804282365c565f98fd4ba96a0738251517e6.mjs"></script>
 </body>
 </html>

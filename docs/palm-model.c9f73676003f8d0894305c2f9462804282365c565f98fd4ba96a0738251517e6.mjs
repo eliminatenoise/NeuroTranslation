@@ -10,7 +10,7 @@ const FRAME = 'Leap Motion device frame, right positive';
 const CHANNELS = ['C3', 'Cz', 'C4'];
 const RELEASE_CHANNEL_COLUMNS = [11, 12, 13];
 const PALM_ANCHOR = 'first_finite_palm_at_or_after_native_cue';
-const OFFSETS = [200, 250, 300, 350, 400, 450, 500, 550, 600];
+const OFFSETS = Object.freeze([200, 250, 300, 350, 400, 450, 500, 550, 600]);
 const STEP_MS = 10;
 const TOLERANCE_MS = 0.01;
 const NOMINAL_LEAD_MS = 100;
@@ -89,7 +89,7 @@ export function validateEegReplayModel(state) {
   return state;
 }
 
-function readTrialIdentity(packet) {
+function readTrialIdentity(packet, archiveRun = '01') {
   requireInput(packet?.schemaVersion === 1 && isObject(packet.dataset)
     && Array.isArray(packet.streams),
   'packet_format', 'Open a recording in the companion’s packet format.');
@@ -97,13 +97,13 @@ function readTrialIdentity(packet) {
   const { provenance, subjectId, recordingId } = dataset;
   requireInput(typeof subjectId === 'string' && /^sub-[0-9]{2}$/u.test(subjectId),
     'subject_identity', 'The recording needs its ds006840 participant ID.');
-  const parentId = `${subjectId}_task-ihc_acq-right_run-01`;
-  const sourcePath = `derivatives/movement-execution/${subjectId}/ihc/${subjectId}_task-ihc_run-01_eeg_leap_R1.mat`;
+  const parentId = `${subjectId}_task-ihc_acq-right_run-${archiveRun}`;
+  const sourcePath = `derivatives/movement-execution/${subjectId}/ihc/${subjectId}_task-ihc_run-${archiveRun}_eeg_leap_R${Number(archiveRun)}.mat`;
   requireInput(dataset.sourceUrl === SOURCE_URL && dataset.organism === 'Homo sapiens'
     && dataset.origin === 'derived' && provenance?.datasetVersion === '1.0.0'
     && provenance.releaseCommit === RELEASE_COMMIT && provenance.derivativePath === sourcePath
     && isSha256(provenance.derivativeSha256) && provenance.archiveHand === 'right'
-    && provenance.archiveRun === '01' && provenance.parentRecordingId === parentId,
+    && provenance.archiveRun === archiveRun && provenance.parentRecordingId === parentId,
   'release_identity', 'Use the released ds006840 v1.0.0 right-hand movement-execution derivative for this run.');
   const trial = provenance.trial;
   requireInput(nonnegativeInteger(trial?.outIndexZeroBased) && trial.outIndexZeroBased < Number.MAX_SAFE_INTEGER
@@ -119,14 +119,14 @@ function readTrialIdentity(packet) {
   } };
 }
 
-function readSourceStreams(streams) {
+function readSourceStreams(streams, {columns = RELEASE_CHANNEL_COLUMNS, requireNamedChannel = false} = {}) {
   const eeg = CHANNELS.map((channel, index) => {
     const id = `eeg-${channel.toLowerCase()}`;
     const bindings = streams.filter(stream => stream?.id === id || stream?.provenance?.channel === channel);
     const stream = bindings[0];
     requireInput(bindings.length === 1 && stream?.provenance?.sourceField === 'OUT.EEG'
-      && (stream.provenance.channel === undefined || stream.provenance.channel === channel)
-      && stream.provenance.sourceColumnZeroBased === RELEASE_CHANNEL_COLUMNS[index]
+      && (stream.provenance.channel === channel || (!requireNamedChannel && stream.provenance.channel === undefined))
+      && stream.provenance.sourceColumnZeroBased === columns[index]
       && stream.modality === 'neural' && stream.region === 'brain' && stream.signalType === 'EEG'
       && stream.origin === 'derived' && stream.unit === 'µV' && stream.rateHz === 100,
     'eeg_mapping', `${channel} needs its named 100 Hz OUT.EEG scalp channel in µV.`);
@@ -142,7 +142,7 @@ function readSourceStreams(streams) {
   return { eeg, palm };
 }
 
-function readSourceClock(provenance, streams) {
+function readSourceSamples(provenance, streams) {
   const { clock, selection } = provenance;
   const times = clock?.timestampMilliseconds;
   requireInput(clock?.sourceField === 'OUT.t_ms' && clock.sourceUnit === 'ms'
@@ -163,6 +163,13 @@ function readSourceClock(provenance, streams) {
     'stream_clock', 'Every EEG and palm stream needs the same original sample times, with missing values marked null.');
   }
   const coverage = start === 0 && end === sourceCount ? 'full_source_trial' : 'source_window';
+  return { times, start, coverage };
+}
+
+function readSourceClock(provenance, streams) {
+  const source = readSourceSamples(provenance, streams);
+  const { times, start, coverage } = source;
+  const { clock } = provenance;
   requireInput(times.every((time, index) => index === 0 || (time > times[index - 1]
     && Math.abs(time - times[index - 1] - STEP_MS) <= 2 * TOLERANCE_MS + 1e-10)),
   'off_lattice', 'The original sample timestamps must advance by one native step per row.');
@@ -214,17 +221,20 @@ function sampleAt(stream, signal, clock, offsetMs, missingReasons) {
   return value;
 }
 
+function standardisedFeature(model, value, index) {
+  return (value - model.center[index]) / model.scale[index];
+}
+
 function fitPrediction(model, features, offsetIndex) {
   let predicted = model.intercepts_mm[offsetIndex];
   for (const [index, featureIndex] of model.feature_indices.entries()) {
-    const standardised = (features[featureIndex] - model.center[index]) / model.scale[index];
+    const standardised = standardisedFeature(model, features[featureIndex], index);
     predicted += model.coefficients[index] * standardised;
   }
   return predicted;
 }
 
-function scoreRow(state, clock, eeg, palm, offsetIndex) {
-  const offsetMs = state.clock.score_offsets_ms[offsetIndex];
+function extractReplayRow(clock, eeg, palm, offsetMs) {
   const row = emptyRow(offsetMs, clock.referenceMs + offsetMs, []);
   const targetIndex = clock.referenceIndex + offsetMs / STEP_MS;
   if (targetIndex < clock.times.length) {
@@ -246,19 +256,25 @@ function scoreRow(state, clock, eeg, palm, offsetIndex) {
     }
   }
   row.missingReasons.push(...inputIssues);
-  if (inputIssues.length > 0) return row;
+  if (inputIssues.length > 0) return { row, features: null };
   row.inputThroughMs = clock.times[clock.referenceIndex + (offsetMs - NOMINAL_LEAD_MS) / STEP_MS];
   if (row.timeMs !== null) row.sampleLeadMs = row.timeMs - row.inputThroughMs;
 
   const velocity = (position - olderPosition) / 0.05;
-  const features = [position, velocity, ...eegMeans];
+  return { row, features: [position, velocity, ...eegMeans] };
+}
+
+function scoreRow(state, clock, eeg, palm, offsetIndex) {
+  const { row, features } = extractReplayRow(clock, eeg, palm, state.clock.score_offsets_ms[offsetIndex]);
+  if (features === null) return row;
+  const [position, velocity] = features;
   const predictions = Object.fromEntries(Object.keys(MODEL_FEATURES).map(name =>
     [name, fitPrediction(state.models[name], features, offsetIndex)]));
   predictions.global_mean = state.global_mean_mm;
   predictions.persistence = position;
   predictions.velocity_extrapolation = position + velocity * 0.1;
   if (!Object.values(predictions).every(Number.isFinite)) {
-    row.missingReasons.push(missing('nonfinite_estimate', 'Regression', offsetMs,
+    row.missingReasons.push(missing('nonfinite_estimate', 'Regression', row.offsetMs,
       'These source values exceed the numeric range of the regression.'));
     return row;
   }
@@ -272,7 +288,7 @@ function scoreRow(state, clock, eeg, palm, offsetIndex) {
       row.errorMm = error;
       row.baselineErrorMm = baselineError;
     } else {
-      row.missingReasons.push(missing('nonfinite_error', 'Regression', offsetMs,
+      row.missingReasons.push(missing('nonfinite_error', 'Regression', row.offsetMs,
         'The estimated and recorded positions exceed the numeric range of the error calculation.'));
     }
   }
@@ -331,6 +347,13 @@ function localErrors(errors) {
     maeMm: errors.reduce((sum, value) => sum + Math.abs(value) / count, 0),
     meanSignedErrorMm: errors.reduce((sum, value) => sum + value / count, 0) };
 }
+
+// Shared math and packet checks. Run-specific eligibility stays in each scorer.
+export const eegReplaySupport = Object.freeze({
+  OFFSETS, STEP_MS, TOLERANCE_MS, NOMINAL_LEAD_MS, FRAME, ReplayInputError, requireInput,
+  sameArray, finiteArray, readTrialIdentity, readSourceStreams, readSourceSamples,
+  useReplayReference, extractReplayRow, fitPrediction, standardisedFeature, localErrors,
+});
 
 /**
  * Pass one packet or a list of separate trial packets from the companion's parsePacket.

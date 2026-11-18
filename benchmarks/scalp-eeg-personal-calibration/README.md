@@ -34,6 +34,12 @@ These are measured movements in a screen-feedback experiment, with both congruen
 
 The original cue grid remains a separate result. Its earliest targets needed optical history before the released palm track provided it, and the analysis stopped without a fit. This experiment keeps the independently checked post-observation grid and its saved model. The original training, development and reserved recordings never enter these two commands. [Six-person cue grid and retained no-fit](frozen_cohort/ORIGINAL-CUE-RESULT.json)
 
+## Replay a second recording
+
+Open a trial to see what calibration changed at nine specific positions. The converter ZIP includes a small Python program, source metadata, and Windows, macOS and Linux launchers. Extract it, then open its README for the three pinned R2 recording downloads and the setup command for your system. The first trial from sub-13 is one complete example. [Download the R2 converter](NeuroTranslation-IACKD-R2-Converter.zip) · [Open the browser replay](https://eliminatenoise.github.io/NeuroTranslation/index.html#palm-replay)
+
+In the browser choose **Import a trial**, select your local JSON, then **Compare estimates**. Select hand history alone or hand history plus EEG to see tracked position alongside the fixed and personally calibrated estimates. The table of errors uses the same positions for all four models. The full-trial check matches the archived clock and four source signals. A clipped window can describe the rows you supplied. Only a complete, eligible trial has the support used in the published study.
+
 ## Run it
 
 Use Python 3.13 and install the pinned requirements in a virtual environment. The launchers forward the same arguments as `python run.py`. Open a terminal in this folder. On Linux use `./Run-Linux.sh`, on macOS use `./Run-macOS.command`, or on Windows use `Run-Windows.cmd` from Command Prompt. With no arguments, each launcher opens the command help. Set `PYTHON` to the virtual environment's Python path if it is outside your shell's active environment.

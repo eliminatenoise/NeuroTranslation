@@ -41,16 +41,17 @@
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
   "experimental_previews": {
     "data_companion": {
-      "version": "2026-11-19 palm replay and personal calibration results",
+      "version": "2026-11-19 individual R2 trial replay",
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
-      "buildId": "1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d",
-      "meaning": "Inspect local recordings, align declared clocks and replay fitted palm-position estimates on compatible IACKD trials. The included example uses invented signals. The benchmark compares retrospective scalp EEG and hand history on three training and three development participants.",
+      "buildId": "c9f73676003f8d0894305c2f9462804282365c565f98fd4ba96a0738251517e6",
+      "meaning": "Import and inspect recordings locally. Replay the R1 cohort fit, or compare the fixed and personally calibrated models on an imported R2 trial. Full R2 trials are checked against their archived sample clock and four selected input streams. Aggregate evidence is shown separately.",
       "hosting": "Prepared static main/docs payload; actual Pages deployment/readback is verified separately",
       "study": "benchmarks/scalp-eeg-palm-history",
       "model_sha256": "c9c9e6a5c357274103e339f69517ae6a11f1d90c39f1d172585ad81a38ee8337",
       "personal_calibration_study": "benchmarks/scalp-eeg-personal-calibration",
-      "personal_calibration_entry": "docs/index.html#personal-calibration"
+      "personal_calibration_entry": "docs/index.html#personal-calibration",
+      "personal_calibration_trial_replay": "docs/index.html#palm-replay"
     },
     "papers": {
       "latest_rendered": "papers/experimental/scientific-layout-2026-11-15",

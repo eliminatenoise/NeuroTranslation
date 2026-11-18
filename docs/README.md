@@ -4,7 +4,7 @@ To read a trace on its own clock, open **Inspect original samples** below it. Us
 
 Open the [experimental data companion](https://eliminatenoise.github.io/NeuroTranslation/preview.html) to import JSON or CSV, inspect samples and their declared metadata, and align recordings that declare compatible subjects, recordings and clocks. The built-in example contains invented signals so you can try the controls without supplying a recording.
 
-The palm-position replay runs two fitted reference regressions on compatible IACKD trials. Import a trial JSON and choose **Compare estimates** to see tracked and estimated palm position in millimetres. You can inspect each requested time and download the trial results. File processing stays in your browser. [Prepare a trial and read the benchmark](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history)
+In **Palm replay**, import a trial JSON and choose **Compare estimates**. For an R1 trial, compare palm estimates with and without EEG. For an R2 trial, choose the inputs and compare the original model with the one calibrated on that person's R1. The sample table uses the same positions as the chart. You can download the full numerical results. [Prepare R1](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history#replay-a-recorded-trial) · [Prepare R2](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-personal-calibration#replay-a-second-recording)
 
 Matching labels and clock names describe how the files relate. Establishing that two recordings were acquired together takes evidence from their original source.
 

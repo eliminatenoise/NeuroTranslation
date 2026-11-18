@@ -2,7 +2,7 @@
 
 [Open Palm replay](https://eliminatenoise.github.io/NeuroTranslation/index.html#palm-replay) or [download a launcher for Windows, macOS or Linux](https://eliminatenoise.github.io/NeuroTranslation/START.html). These shortcuts lead to the same current replay as the browser link.
 
-Import a prepared IACKD right-hand trial and choose **Compare estimates**. The browser runs two fitted regressions and plots their estimates beside the tracked palm position. It also lets you inspect and align compatible JSON and CSV recordings. Your files stay in the browser. [Study and trial preparation](benchmarks/scalp-eeg-palm-history/) · [Import and alignment guide](demo/README.md)
+Import a prepared IACKD right-hand trial and choose **Compare estimates**. For an R1 trial, compare the fixed hand and EEG models. For R2, compare the original estimates with the estimates calibrated on the person's first recording. Files stay in your browser. [Prepare R1](benchmarks/scalp-eeg-palm-history/#replay-a-recorded-trial) · [Prepare R2](benchmarks/scalp-eeg-personal-calibration/#replay-a-second-recording) · [Import and alignment](demo/README.md)
 
 - **Windows** — Download and open `NeuroTranslation-Windows.url`.
 - **macOS** — Download and open `NeuroTranslation-macOS.webloc`.
