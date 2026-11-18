@@ -9,7 +9,7 @@
     "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
   },
   "historical_sources": "R11 and portable source retain their own historical terminology and unadopted proposals. No canonical glossary adoption, model or backend execution follows.",
-  "scope": "A 108-file subset of the R5 browser data companion, historical unbuilt/nonstandalone R11 manuscripts, portable interface source and launcher/navigation files. Five related navigation/context rows are refreshed for the selected paper content; the paper bundle has its own manifest. This is not a whole-repository byte seal, scientific/rights/runtime acceptance or proof of Pages deployment.",
+  "scope": "This 108-file inventory covers the browser data companion, desktop launchers, navigation and historical source previews. The selected papers have their own content manifest.",
   "files": [
     {
       "path": ".gitattributes",
@@ -23,13 +23,13 @@
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "bytes": 4420,
-      "sha256": "0ea8460873560b9d713fa48a4ae3293e5d3f3e8be943faf81cd1efb8fa903a6e"
+      "bytes": 4494,
+      "sha256": "d75038e9fe29673da40fdf71944ea5480359669a881344e2dfe4d6bc4abdbcbd"
     },
     {
       "path": "README.md",
-      "bytes": 7948,
-      "sha256": "5c91c0447670fc6583669a99400699c006769b215f0c1fcde4cdb2efeaeefb21"
+      "bytes": 6671,
+      "sha256": "7cb5835f946cf5259d9306d0e56089847acafea9e65bfcb59240164698ab5f63"
     },
     {
       "path": "docs/.nojekyll",
@@ -43,8 +43,8 @@
     },
     {
       "path": "docs/README.md",
-      "bytes": 1739,
-      "sha256": "8b31a088673fa630e56c348d8f15f1272f52b8a688f2966d4086dedf5d4ef68b"
+      "bytes": 1874,
+      "sha256": "303c8a0733b948ae49b47f423ef8e953b1dc56b544b535954953a97721a9fc7f"
     },
     {
       "path": "docs/RIGHTS.md",
@@ -57,39 +57,39 @@
       "sha256": "358afd0903819cf7633a08fcca056d5ba39534a7fd806fcfaca9bf91617ec34c"
     },
     {
-      "path": "docs/app.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
-      "bytes": 15954,
-      "sha256": "3a592de927081f567ae5642f206da981f1b2de849474462f5c1d8e1710173f46"
+      "path": "docs/app.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
+      "bytes": 17443,
+      "sha256": "bbeab6372f33eff85e9849f08c012b8a7f89d9b95d0bd791d6a45492b85749a0"
     },
     {
       "path": "docs/build-manifest.json",
       "bytes": 3942,
-      "sha256": "38d25b8a2e1c090521e1d9deb103b6601d2e402a1b50ce7050b1d1ecb8232bc2"
+      "sha256": "22b7f55f59127b40c9a0e46992b71f77eb2477e3252694a8824bd1fc5f08ec12"
     },
     {
-      "path": "docs/compat-policy.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
+      "path": "docs/compat-policy.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
       "bytes": 116582,
-      "sha256": "f860b0214624fdcf150fb8c9dc681164d22d9505872b27a8e66646e55aeff1d3"
+      "sha256": "047735c71bf1e3821cdf3c814a6783b67f9d641bc0e4fa20b635af1b1ac3b276"
     },
     {
-      "path": "docs/core.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
+      "path": "docs/core.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
       "bytes": 25828,
       "sha256": "ca64790e6534051e9efc0fae2115ffb54b4518561e138a5744ceb63219fbf5e6"
     },
     {
-      "path": "docs/datasets.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.json",
+      "path": "docs/datasets.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.json",
       "bytes": 8441,
       "sha256": "946af84785a10e2454adda11d720ca6e0c2bda36b810ce86de00883937eb3c63"
     },
     {
-      "path": "docs/hash.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
+      "path": "docs/hash.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
       "bytes": 5130,
       "sha256": "50f6794017f4d73af8775d83a22332d40e29da5511702187a4d5804995697317"
     },
     {
       "path": "docs/index.html",
-      "bytes": 10987,
-      "sha256": "19f922f7ac1c6ca6487d44c3d044c43d5a43835f05e8556e2cf38ba5e8d224db"
+      "bytes": 11159,
+      "sha256": "357779e980cba1ecf6bb2960fb959d9d0daacc0db4aa9d9c7cc930272ffca73e"
     },
     {
       "path": "docs/launchers/Install-NeuroTranslation-Linux.sh",
@@ -132,17 +132,17 @@
       "sha256": "0b3df028a095041a57bb873dff53fd0c70825b91bc0d0e150b43e6c7dac5254c"
     },
     {
-      "path": "docs/packet-policy-bridge.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
+      "path": "docs/packet-policy-bridge.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
       "bytes": 19899,
-      "sha256": "3b37cdb3f5905b350a2a6c25b7b7ce0b49502c298bc01c4228cb970c91d48976"
+      "sha256": "0416d797c81d2f4ad42eee387dc327cf97a069cb0bab74957a1c2cc5cf302822"
     },
     {
-      "path": "docs/plot.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
+      "path": "docs/plot.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
       "bytes": 1477,
       "sha256": "4b709d968335fde4f3fee531a7937873b14c802c04b880c75d596f9c518c95f1"
     },
     {
-      "path": "docs/policy-report-view.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
+      "path": "docs/policy-report-view.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
       "bytes": 5545,
       "sha256": "c2bcb980f583edfe49e4fc23cb2bfda096a0238d98dae088f414f5a3720a9888"
     },
@@ -152,17 +152,17 @@
       "sha256": "c65dd7d4710edba863a955a95d6da7b3eb3a0bb4a6cff5502ae4317f04b58c87"
     },
     {
-      "path": "docs/reasons.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
+      "path": "docs/reasons.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
       "bytes": 29360,
       "sha256": "fbc93b07cf1a1e398972aa824ab0513124cf10193bb8dc71bcfcb78a964fa762"
     },
     {
-      "path": "docs/style.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.css",
-      "bytes": 13902,
-      "sha256": "3204898af949470ac40151d3934619e5e0197a439d4d843f73da4abc237a27cc"
+      "path": "docs/style.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.css",
+      "bytes": 15451,
+      "sha256": "6610ab46d540fb875888954d56ec85c581ddd203d154ff2e0e6334bb25721c4b"
     },
     {
-      "path": "docs/vocabulary.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs",
+      "path": "docs/vocabulary.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
       "bytes": 16853,
       "sha256": "536396e7b0ee37b5846d84e2ad7e3a329a29c2711b80b08b0887973acf6e090a"
     },
@@ -553,18 +553,29 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "351140afde34d73d46aadda91c985ed2eada21e2",
-  "launcher_update": "Existing R5 runtime, historical sources and generic launcher bytes are unchanged. Related paper/navigation wording is updated; launcher targets remain the stable data-companion URL.",
+  "previous_public_commit": "48ccfe6048fb9a7b3f1554117ce41f1b9128e113",
+  "launcher_update": "The desktop launchers open the companion at its stable address. The current build adds keyboard and pointer inspection of aligned samples.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
-    "refreshed_context_paths": [
+    "refreshed_paths": [
       "PROJECT-CONTEXT.json",
       "README.md",
       "docs/README.md",
-      "docs/START.html",
-      "docs/preview.html"
+      "docs/app.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
+      "docs/build-manifest.json",
+      "docs/compat-policy.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
+      "docs/core.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
+      "docs/datasets.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.json",
+      "docs/hash.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
+      "docs/index.html",
+      "docs/packet-policy-bridge.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
+      "docs/plot.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
+      "docs/policy-report-view.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
+      "docs/reasons.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs",
+      "docs/style.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.css",
+      "docs/vocabulary.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs"
     ],
-    "preserved_rows": "The other 103 rows retain their historical subset fingerprints; they are not fresh whole-repository byte verification."
+    "preserved_rows": 92
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",
