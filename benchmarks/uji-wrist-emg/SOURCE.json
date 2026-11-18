@@ -1,0 +1,44 @@
+{
+  "deposit": "KIN-MUS UJI v1.0",
+  "doi": "10.5281/zenodo.3469380",
+  "url": "https://zenodo.org/records/3469380",
+  "data_descriptor": "https://doi.org/10.1038/s41597-019-0285-1",
+  "licence": "CC BY 4.0",
+  "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+  "creators": [
+    "Néstor J. Jarque-Bou",
+    "Margarita Vergara",
+    "Joaquín L. Sancho-Bru",
+    "Verónica Gracia-Ibáñez",
+    "Alba Roda-Sales"
+  ],
+  "source_files": {
+    "KIN_MUS_UJI.mat": {
+      "bytes": 86661263,
+      "md5": "4fc49241d6a887f6f1e9dbbcfc6aef12",
+      "sha256": "530a9e51b19574b0f5dee0c9263b1a50eafc7204b14cae67b6b1bb854671c722"
+    },
+    "RAW_EMG.mat": {
+      "bytes": 127723110,
+      "md5": "c0045aac1480480c265501a7c6f3192c",
+      "sha256": "09186895a756e7d99529559957942ce6016c9b926d514f07a8f07b609f6bfb6d"
+    }
+  },
+  "scope": "Offline healthy-volunteer daily activities. Participant-specific reference posture, retrospectively filtered wrist-angle targets. Observations from the four final test volunteers were not evaluated.",
+  "modification": "Selected historical raw forearm EMG, derived sixteen RMS bins per channel, fitted task-and-time and paired task/time-plus-EMG predictors, and computed participant-balanced aggregate differences.",
+  "packages": {
+    "inference": {
+      "path": "benchmarks/uji-wrist-emg/UJI-Wrist-Supported-Forearm-Model.zip",
+      "bytes": 30690,
+      "sha256": "83535af6aa44220781fd5ec515eb082b9e3dd2551ca80c15afc2956c1c288d46"
+    },
+    "method": {
+      "path": "benchmarks/uji-wrist-emg/UJI-Wrist-Study-Source.zip",
+      "bytes": 28586,
+      "sha256": "a2a913804b7438aafcd9af3419340bffc0b6acacbd085b40e2414ed0018fa85f"
+    }
+  },
+  "figure": "uji-forearm-effect.png",
+  "reproduce_figure": "python plot_forearm_effect.py DEVELOPMENT-AGGREGATE.json uji-forearm-effect.png",
+  "primary_and_public_models": "Primary scientific comparison uses private full fitted heads. The separate support-limited pair includes only features supported by at least seven TRAIN people and is included for public inference."
+}

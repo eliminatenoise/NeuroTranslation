@@ -177,6 +177,35 @@
           "sha256": "8b866e86163aa832d9e4468aa6deeec75e5a869adbf2f68477348b12a17186c0"
         }
       }
+    },
+    "uji_forearm_emg": {
+      "study": "benchmarks/uji-wrist-emg",
+      "source_doi": "10.5281/zenodo.3469380",
+      "portable_estimator": {
+        "path": "benchmarks/uji-wrist-emg/UJI-Wrist-Supported-Forearm-Model.zip",
+        "bytes": 30690,
+        "sha256": "83535af6aa44220781fd5ec515eb082b9e3dd2551ca80c15afc2956c1c288d46"
+      },
+      "study_method": {
+        "path": "benchmarks/uji-wrist-emg/UJI-Wrist-Study-Source.zip",
+        "bytes": 28586,
+        "sha256": "a2a913804b7438aafcd9af3419340bffc0b6acacbd085b40e2414ed0018fa85f"
+      },
+      "train_people": 14,
+      "dev_people": 4,
+      "test_people_reserved": 4,
+      "training_rows": 65821,
+      "development_rows": 20073,
+      "primary_development_rmse_deg": {
+        "task_time": 36.186718127566486,
+        "task_time_emg": 34.71833853300261,
+        "shifted_emg": 35.385378931686574
+      },
+      "public_model_development_rmse_deg": {
+        "task_time": 36.16465828788339,
+        "task_time_emg": 34.69984899659588
+      },
+      "scope": "Offline healthy-volunteer daily activities. Participant-specific reference posture, retrospectively filtered wrist-angle targets. Observations from the four final test volunteers were not evaluated."
     }
   }
 }

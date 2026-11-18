@@ -18,18 +18,18 @@
     },
     {
       "path": "LAUNCHERS.md",
-      "bytes": 3663,
-      "sha256": "1ddbec92b7ebd550016f9271ac525b8285f5d28c7561a8174f694dc970c30396"
+      "bytes": 4059,
+      "sha256": "08fd7a2d7f6e899d93bbe7d16abae24d37763400861ce25ad14dae08d8ad2564"
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "bytes": 10903,
-      "sha256": "f079eba930df5b3946f68743516edfa22556e2087ccaa1bc31fc1f9ea5a03931"
+      "bytes": 12141,
+      "sha256": "c6bd933107c137c0f68ade0ce2a4de1552c14efd3b69f795c02caa6ebbbe790b"
     },
     {
       "path": "README.md",
-      "bytes": 12626,
-      "sha256": "ff941fd5295c84167bb625ee4127279e8bb328aab8b15a1af6c80754e9597f5e"
+      "bytes": 13200,
+      "sha256": "43876ba67e8dc63bbfc7f1c90d7a3a81786ee1b813572d815632fbbc766a6d69"
     },
     {
       "path": "benchmarks/scalp-eeg-hand/.gitignore",
@@ -362,14 +362,54 @@
       "sha256": "76cd3bb6d0bdf0073a41cfea3b38306125127de518005f24d7b994a74c347e2b"
     },
     {
+      "path": "benchmarks/uji-wrist-emg/DEVELOPMENT-AGGREGATE.json",
+      "bytes": 33921,
+      "sha256": "e93e7a2d1125356eb5249b5f7733a8038c2fd157071f44dc6d82f95c209ac7a5"
+    },
+    {
+      "path": "benchmarks/uji-wrist-emg/METHOD.md",
+      "bytes": 3729,
+      "sha256": "f996d0dfe5cf1bb5e82b04d0c643702b37348a2a7ac93be2cccda310ff7d0efd"
+    },
+    {
+      "path": "benchmarks/uji-wrist-emg/README.md",
+      "bytes": 4196,
+      "sha256": "13b3251d8499ab37709bb867a8b9514e5ad7965a83f325f625ade810c483f9a6"
+    },
+    {
+      "path": "benchmarks/uji-wrist-emg/SOURCE.json",
+      "bytes": 2066,
+      "sha256": "d35cedcac0b472ced2b1ae479fba13bac0d93b0f201a640cbcff812c9e712b79"
+    },
+    {
+      "path": "benchmarks/uji-wrist-emg/UJI-Wrist-Study-Source.zip",
+      "bytes": 28586,
+      "sha256": "a2a913804b7438aafcd9af3419340bffc0b6acacbd085b40e2414ed0018fa85f"
+    },
+    {
+      "path": "benchmarks/uji-wrist-emg/UJI-Wrist-Supported-Forearm-Model.zip",
+      "bytes": 30690,
+      "sha256": "83535af6aa44220781fd5ec515eb082b9e3dd2551ca80c15afc2956c1c288d46"
+    },
+    {
+      "path": "benchmarks/uji-wrist-emg/plot_forearm_effect.py",
+      "bytes": 2757,
+      "sha256": "1425eb03764aaf78df928f51b96d72d4ddd18542e0a07accfb6fe2f97fed5de2"
+    },
+    {
+      "path": "benchmarks/uji-wrist-emg/uji-forearm-effect.png",
+      "bytes": 87225,
+      "sha256": "4e47430f31eaab3dc18b2d516b4a59c03b93e790d687b334bcc81fec1c749777"
+    },
+    {
       "path": "benchmarks/wrist-forearm-transfer/DEVELOPMENT-AGGREGATE.json",
       "bytes": 8345,
       "sha256": "8dd5aa9c75e1e19f9ccd2238ea194b42e49ef37502a4f11d455277828eadea72"
     },
     {
       "path": "benchmarks/wrist-forearm-transfer/README.md",
-      "bytes": 4741,
-      "sha256": "f632164c2b5dbf8e2aa13e64f689bdb9105a5abe0fdb151df8220b59ae35fc05"
+      "bytes": 5037,
+      "sha256": "281570510b816575e84a40369954ff774924525262bac0a8345228669c976c2a"
     },
     {
       "path": "benchmarks/wrist-forearm-transfer/SOURCE.json",
@@ -543,8 +583,8 @@
     },
     {
       "path": "docs/START.html",
-      "bytes": 5301,
-      "sha256": "8152494ec75ce818d45a427fa73eff86e5f0901811462a7923d3e46fbb482ee2"
+      "bytes": 5494,
+      "sha256": "2facb8a4a945c92031b2a2144d9a08555ec87e55da41c92bcb32b4e5b4a9a0dd"
     },
     {
       "path": "docs/app.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -778,8 +818,8 @@
     },
     {
       "path": "docs/preview.html",
-      "bytes": 3952,
-      "sha256": "22a2451c98fd0ec1586f682d0be767e86c61df0c5611607cebf5de8661a2819f"
+      "bytes": 4225,
+      "sha256": "657652d012c2cc04a11c873b1befdbab94b1781f6e6465214387b056c4432089"
     },
     {
       "path": "docs/r2-calibration-state.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.json",
@@ -1463,7 +1503,7 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "51cb7a250c029af86c154b5c233c87fc69d1bc90",
+  "previous_public_commit": "819a11c7094e04f3c4f34dfdb86f1bd37085ce7f",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
@@ -1471,48 +1511,19 @@
       "LAUNCHERS.md",
       "PROJECT-CONTEXT.json",
       "README.md",
+      "benchmarks/uji-wrist-emg/DEVELOPMENT-AGGREGATE.json",
+      "benchmarks/uji-wrist-emg/METHOD.md",
+      "benchmarks/uji-wrist-emg/README.md",
+      "benchmarks/uji-wrist-emg/SOURCE.json",
+      "benchmarks/uji-wrist-emg/UJI-Wrist-Study-Source.zip",
+      "benchmarks/uji-wrist-emg/UJI-Wrist-Supported-Forearm-Model.zip",
+      "benchmarks/uji-wrist-emg/plot_forearm_effect.py",
+      "benchmarks/uji-wrist-emg/uji-forearm-effect.png",
       "benchmarks/wrist-forearm-transfer/README.md",
-      "benchmarks/wrist-forearm-transfer/SOURCE.json",
-      "benchmarks/wrist-forearm-transfer/WristMotion-Forearm-Browser.zip",
-      "benchmarks/wrist-forearm-transfer/browser-source/archive-core.js",
-      "benchmarks/wrist-forearm-transfer/browser-source/build_archive.py",
-      "benchmarks/wrist-forearm-transfer/browser-source/build_browser.py",
-      "benchmarks/wrist-forearm-transfer/browser-source/build_model.py",
-      "benchmarks/wrist-forearm-transfer/browser-source/model-runtime.js.in",
-      "benchmarks/wrist-forearm-transfer/browser-source/worker-entry.js",
-      "demo/src/index.html",
-      "docs/README.md",
       "docs/START.html",
-      "docs/app.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.mjs",
-      "docs/build-manifest.json",
-      "docs/calibration-summary.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.json",
-      "docs/calibration-view.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.mjs",
-      "docs/compat-policy.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.mjs",
-      "docs/core.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.mjs",
-      "docs/datasets.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.json",
-      "docs/hash.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.mjs",
-      "docs/index.html",
-      "docs/packet-policy-bridge.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.mjs",
-      "docs/palm-model.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.json",
-      "docs/palm-model.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.mjs",
-      "docs/plot.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.mjs",
-      "docs/policy-report-view.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.mjs",
-      "docs/preview.html",
-      "docs/r2-calibration-state.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.json",
-      "docs/r2-replay.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.mjs",
-      "docs/r2-source.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.json",
-      "docs/r2-trial-index.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.json",
-      "docs/reasons.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.mjs",
-      "docs/replay-view.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.mjs",
-      "docs/style.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.css",
-      "docs/vocabulary.90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf.mjs",
-      "docs/wrist-forearm/archive-worker.js",
-      "docs/wrist-forearm/forearm-model.js",
-      "docs/wrist-forearm/forearm.css",
-      "docs/wrist-forearm/forearm.js",
-      "docs/wrist-forearm/index.html"
+      "docs/preview.html"
     ],
-    "preserved_rows": 247
+    "preserved_rows": 284
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",

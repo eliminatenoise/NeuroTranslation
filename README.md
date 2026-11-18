@@ -18,6 +18,10 @@ Surface muscle signals gave a different result in a linear model on the same tri
 
 We also tested the forearm signal against the stronger temporal motion model. Once the motion features were used to correct its forecast, error was **3.957°**. The same correction with paired forearm EMG scored **3.853°**. Substituting EMG from the next trial gave **4.140°**. This exploratory comparison reused the three development participants. [Open a recording directly in the browser](https://eliminatenoise.github.io/NeuroTranslation/wrist-forearm/) · [Study and desktop runner](benchmarks/wrist-forearm-transfer/)
 
+### Everyday wrist movements
+
+A distinct Spanish study asked what seven forearm electrodes add once a model knows the activity and time within it. On four new development participants, earlier muscle activity lowered two-axis error from **36.187° to 34.718°**. Error fell for flexion and extension but rose for radial and ulnar deviation. The glove targets were filtered in both time directions, so neither model received earlier glove angles. These are separately fitted models on daily activities. [Study, figure and downloadable estimators](benchmarks/uji-wrist-emg/)
+
 ### Palm and elbow measurements
 
 How much do three scalp EEG channels add once you know where the hand was? In the palm replay study, both fits had elapsed time and earlier palm position and velocity. One fit also had EEG. We trained on three people and evaluated on three others. Across 173 development trials, the person-weighted root mean squared error rose from 1.093 to 1.223 mm when EEG was added, and it rose for each development participant. The latest inputs preceded the target by 100 ms on the stored clock. The recordings were processed after collection, so live decoding latency remains untested.
