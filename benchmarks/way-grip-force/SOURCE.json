@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "study": "WAY-EEG-GAL offline pinch-lift grip-force forecasting",
+  "data": {
+    "collection_doi": "10.6084/m9.figshare.c.988376.v2",
+    "descriptor_doi": "10.1038/sdata.2014.47",
+    "creators": [
+      "Matthew D. Luciw",
+      "Ewa Jarocka",
+      "Benoni B. Edin"
+    ],
+    "licence_notices": {
+      "figshare_v1_article_records": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "scientific_data_descriptor_attribution": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "transformations": "Reversed the stored mean grip force sign to make compression positive. Used paired past force, motion, scalp EEG and surface EMG windows from the stored clocks. Fit person-weighted ridge heads on six training people and scored fixed parameters on a separate three-person development group."
+  },
+  "validation": {
+    "scope": "One recorded right-hand voluntary pinch-lift task in healthy adults.",
+    "horizon_on_stored_clock_ms": 120,
+    "development_people": 3,
+    "development_trials": 882,
+    "development_windows": 25578,
+    "phase_matched_windows": 25578,
+    "active_target_force_threshold_n": 0.5,
+    "active_target_windows": 5140,
+    "final_test_people_reserved": 3,
+    "aligned_eeg_beats_phase_matched_eeg": false,
+    "limits": "Unverified device and filter latency. Task context and histories require acquisition-time support for a live deployment. Public aggregate summaries and portable fitted inference cover the benchmark domain."
+  },
+  "glossary": {
+    "revision": 36,
+    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+  },
+  "files": [
+    {
+      "path": "DEVELOPMENT-AGGREGATE.json",
+      "bytes": 16981,
+      "sha256": "1f831ffa7cfe943b100487e7fdddeb980628d9827b5d4c05fbf54dc2931e7021"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3959,
+      "sha256": "c83881b58c4d08468aa8c28a9da06063e6a50ebd8e647e85c684247d7f84e34d"
+    },
+    {
+      "path": "WAY-EEG-GAL-grip-force-experimental-preview.zip",
+      "bytes": 42471,
+      "sha256": "d0d04f87bcbfedb487e68e36d558c021e91af96bce8d5e35434908caa37d913b"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 1532,
+      "sha256": "2fdfe99295246f2225a4f0916e419c2e11b1158f6d1cdcec862eee5197005774"
+    }
+  ],
+  "package": {
+    "path": "WAY-EEG-GAL-grip-force-experimental-preview.zip",
+    "members": [
+      {
+        "path": "WAY-EEG-GAL-grip-force/INFERENCE.md",
+        "bytes": 4981,
+        "sha256": "546c3917ada9a417206b8d8c6493bf1d793ac8e278d904bc1e62bbfa6bd5a8b2"
+      },
+      {
+        "path": "WAY-EEG-GAL-grip-force/MANIFEST.json",
+        "bytes": 2783,
+        "sha256": "bbf8a313a5c9bc47b8eba02b31e5dca76d63b9d1a325cdaffc660a31423423dd"
+      },
+      {
+        "path": "WAY-EEG-GAL-grip-force/METHOD.md",
+        "bytes": 2480,
+        "sha256": "9d9054a2832f2aae95d2b64261f12c7b5d5d3abb76c9cfb2fe806540f6cc9311"
+      },
+      {
+        "path": "WAY-EEG-GAL-grip-force/Run-Linux.sh",
+        "bytes": 172,
+        "sha256": "3e1e9b2140eb7cb27b46f8bb618e97425ce63c2af1171e7a6337cbaa1deb7353"
+      },
+      {
+        "path": "WAY-EEG-GAL-grip-force/Run-Windows.cmd",
+        "bytes": 316,
+        "sha256": "4e2dcbe8f4371373e30b4f3facf7ca1a3e2d980a8214c3e4ecddf692c3f72acb"
+      },
+      {
+        "path": "WAY-EEG-GAL-grip-force/Run-macOS.command",
+        "bytes": 172,
+        "sha256": "3e1e9b2140eb7cb27b46f8bb618e97425ce63c2af1171e7a6337cbaa1deb7353"
+      },
+      {
+        "path": "WAY-EEG-GAL-grip-force/SOURCE-DATA.md",
+        "bytes": 1530,
+        "sha256": "3b9e5af9f2805195376f2be55f868d9fc3360b55bde50d04b5ea904c6449a33b"
+      },
+      {
+        "path": "WAY-EEG-GAL-grip-force/aggregate-dev-summary.json",
+        "bytes": 16981,
+        "sha256": "1f831ffa7cfe943b100487e7fdddeb980628d9827b5d4c05fbf54dc2931e7021"
+      },
+      {
+        "path": "WAY-EEG-GAL-grip-force/aggregate-train-summary.json",
+        "bytes": 4945,
+        "sha256": "c87491e7959405f7738cf1babc4ca721a2f9031adf18d030611693b04a5546fe"
+      },
+      {
+        "path": "WAY-EEG-GAL-grip-force/channel-order.json",
+        "bytes": 787,
+        "sha256": "9c6703205c9f9e0b58fd7bd820808cc08af507ae3d7d6d5c96ae05b39a124e4b"
+      },
+      {
+        "path": "WAY-EEG-GAL-grip-force/models.json",
+        "bytes": 113713,
+        "sha256": "6fb95883e35ad0e9da56a9d52961a4f21e86463b8b2930bb30848c52fb07de0f"
+      },
+      {
+        "path": "WAY-EEG-GAL-grip-force/run_forecast.py",
+        "bytes": 3407,
+        "sha256": "e4bc0c72bb853cb4910692e588a44b995508e261f53feb218aab83bb6b17ff0e"
+      },
+      {
+        "path": "WAY-EEG-GAL-grip-force/way_model.py",
+        "bytes": 18010,
+        "sha256": "78a28cba8ffe0859f7dc2079b2993cadc317df8efe54f21b29503863a023a483"
+      }
+    ],
+    "native_launch_checks": {
+      "linux": "passed",
+      "windows": "untested",
+      "macos": "untested"
+    }
+  }
+}

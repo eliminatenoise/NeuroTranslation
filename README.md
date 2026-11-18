@@ -22,6 +22,10 @@ We also tested the forearm signal against the stronger temporal motion model. On
 
 A distinct Spanish study asked what seven forearm electrodes add once a model knows the activity and time within it. On four new development participants, earlier muscle activity lowered two-axis error from **36.187° to 34.718°**. Error fell for flexion and extension but rose for radial and ulnar deviation. The glove targets were filtered in both time directions, so neither model received earlier glove angles. These are separately fitted models on daily activities. [Try the daily-activity estimator](https://eliminatenoise.github.io/NeuroTranslation/daily-wrist/) · [Study, figure and downloadable estimators](benchmarks/uji-wrist-emg/)
 
+### Grip force during a lift
+
+How hard will the thumb and forefinger squeeze 120 ms from now? In stored WAY-EEG-GAL recordings from three development participants, force and motion history gave **0.44418 N** mean participant RMSE. Aligned scalp EEG lowered it to **0.44018 N**, but EEG from a phase-matched trial scored **0.43880 N**. Aligned EEG also slightly increased error when the measured target exceeded 0.5 N. [Grip-force study, controls and desktop forecast](benchmarks/way-grip-force/)
+
 ### Palm and elbow measurements
 
 How much do three scalp EEG channels add once you know where the hand was? In the palm replay study, both fits had elapsed time and earlier palm position and velocity. One fit also had EEG. We trained on three people and evaluated on three others. Across 173 development trials, the person-weighted root mean squared error rose from 1.093 to 1.223 mm when EEG was added, and it rose for each development participant. The latest inputs preceded the target by 100 ms on the stored clock. The recordings were processed after collection, so live decoding latency remains untested.

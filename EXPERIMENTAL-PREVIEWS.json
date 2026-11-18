@@ -18,18 +18,18 @@
     },
     {
       "path": "LAUNCHERS.md",
-      "bytes": 4442,
-      "sha256": "c5b61dbd352de4e983a46deda1bb0545e669aea5714f3b1066ddbc240aecc754"
+      "bytes": 4876,
+      "sha256": "28cc3c2d41b36dd63367b905848786d6e25046d19098c0e7b11f8026005c05b9"
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "bytes": 13500,
-      "sha256": "98680b701140ad706f73e236961ccfdbf75563d0270e1932807d5f399e14a967"
+      "bytes": 14480,
+      "sha256": "43746e177490c698997d95444e4ac964295e56750aa082a302d3382321792cd3"
     },
     {
       "path": "README.md",
-      "bytes": 13298,
-      "sha256": "734cc4bfb50e9e204a68dd3667752b3d61944f2d651a974b868f4a04a58598f5"
+      "bytes": 13795,
+      "sha256": "6cc6525c491a8bd04f84668837a552df1d702f76c180d7d8d962059c67741dc5"
     },
     {
       "path": "benchmarks/scalp-eeg-hand/.gitignore",
@@ -437,6 +437,31 @@
       "sha256": "4e47430f31eaab3dc18b2d516b4a59c03b93e790d687b334bcc81fec1c749777"
     },
     {
+      "path": "benchmarks/way-grip-force/DEVELOPMENT-AGGREGATE.json",
+      "bytes": 16981,
+      "sha256": "1f831ffa7cfe943b100487e7fdddeb980628d9827b5d4c05fbf54dc2931e7021"
+    },
+    {
+      "path": "benchmarks/way-grip-force/README.md",
+      "bytes": 3959,
+      "sha256": "c83881b58c4d08468aa8c28a9da06063e6a50ebd8e647e85c684247d7f84e34d"
+    },
+    {
+      "path": "benchmarks/way-grip-force/SOURCE.json",
+      "bytes": 4888,
+      "sha256": "ab88904455dfd53bb79745e1728ba38c8e4ba3da614e9862a8d23a403b35ba94"
+    },
+    {
+      "path": "benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-experimental-preview.zip",
+      "bytes": 42471,
+      "sha256": "d0d04f87bcbfedb487e68e36d558c021e91af96bce8d5e35434908caa37d913b"
+    },
+    {
+      "path": "benchmarks/way-grip-force/verify.py",
+      "bytes": 1532,
+      "sha256": "2fdfe99295246f2225a4f0916e419c2e11b1158f6d1cdcec862eee5197005774"
+    },
+    {
       "path": "benchmarks/wrist-forearm-transfer/DEVELOPMENT-AGGREGATE.json",
       "bytes": 8345,
       "sha256": "8dd5aa9c75e1e19f9ccd2238ea194b42e49ef37502a4f11d455277828eadea72"
@@ -608,8 +633,8 @@
     },
     {
       "path": "docs/README.md",
-      "bytes": 4135,
-      "sha256": "a9228b890f5ce0003bf24b8f44b975ed85a4aad6044ab4b399406026f6c0f6dd"
+      "bytes": 4444,
+      "sha256": "cbf07a0fc004a9ed05ddf3deaad8b52a1ac7e172e002b5ca976d0408eef5d65d"
     },
     {
       "path": "docs/RIGHTS.md",
@@ -618,8 +643,8 @@
     },
     {
       "path": "docs/START.html",
-      "bytes": 5581,
-      "sha256": "102b0f555a773434d05cc21133c7d73271b13076f6290d44dcfb67983c059a63"
+      "bytes": 5756,
+      "sha256": "79753ac2311eb4de90ddacb26afb39fa6a70cf2d7d03c6002d21e0e03e8e3782"
     },
     {
       "path": "docs/app.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -1753,7 +1778,7 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "fcbec1025c8225dd77dad33d161d3f4d20b26c49",
+  "previous_public_commit": "badfd8926877f896e02d7b6967ea2325d4bfe1f6",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
@@ -1761,51 +1786,15 @@
       "LAUNCHERS.md",
       "PROJECT-CONTEXT.json",
       "README.md",
-      "benchmarks/uji-wrist-emg/AXIS-BLEND-RESULTS.json",
-      "benchmarks/uji-wrist-emg/README.md",
-      "benchmarks/uji-wrist-emg/SOURCE.json",
-      "benchmarks/uji-wrist-emg/UJI-Daily-Wrist-Browser.zip",
-      "benchmarks/uji-wrist-emg/UJI-Wrist-Axis-Blend-Preview.zip",
-      "benchmarks/uji-wrist-emg/browser-source/build_axis_blend.py",
-      "benchmarks/uji-wrist-emg/browser-source/build_engine.py",
-      "benchmarks/uji-wrist-emg/browser-source/uji-axis-blend-source.js",
-      "benchmarks/uji-wrist-emg/browser-source/uji-engine-source.js",
-      "demo/src/index.html",
+      "benchmarks/way-grip-force/DEVELOPMENT-AGGREGATE.json",
+      "benchmarks/way-grip-force/README.md",
+      "benchmarks/way-grip-force/SOURCE.json",
+      "benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-experimental-preview.zip",
+      "benchmarks/way-grip-force/verify.py",
       "docs/README.md",
-      "docs/START.html",
-      "docs/app.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.mjs",
-      "docs/build-manifest.json",
-      "docs/calibration-summary.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.json",
-      "docs/calibration-view.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.mjs",
-      "docs/compat-policy.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.mjs",
-      "docs/core.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.mjs",
-      "docs/daily-wrist/axis-blend.js",
-      "docs/daily-wrist/daily.css",
-      "docs/daily-wrist/daily.js",
-      "docs/daily-wrist/example-window.json",
-      "docs/daily-wrist/index.html",
-      "docs/daily-wrist/uji-engine.js",
-      "docs/datasets.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.json",
-      "docs/hash.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.mjs",
-      "docs/index.html",
-      "docs/packet-policy-bridge.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.mjs",
-      "docs/palm-model.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.json",
-      "docs/palm-model.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.mjs",
-      "docs/plot.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.mjs",
-      "docs/policy-report-view.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.mjs",
-      "docs/preview.html",
-      "docs/r2-calibration-state.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.json",
-      "docs/r2-replay.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.mjs",
-      "docs/r2-source.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.json",
-      "docs/r2-trial-index.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.json",
-      "docs/reasons.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.mjs",
-      "docs/replay-view.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.mjs",
-      "docs/style.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.css",
-      "docs/vocabulary.8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313.mjs",
-      "interfaces/experimental/portable/NOTICE.md",
-      "papers/experimental/r11-source/README.md"
+      "docs/START.html"
     ],
-    "preserved_rows": 302
+    "preserved_rows": 343
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",

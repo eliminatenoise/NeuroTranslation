@@ -228,6 +228,26 @@
         },
         "scope": "Estimates of retrospectively filtered glove angles in offline daily-activity trials. The interface runs two fixed estimators and a weighted combination on invented or compatible local inputs. The weights were selected within training. The four development participants had been studied before, and final test participants remain reserved."
       }
+    },
+    "way_grip_force": {
+      "study": "benchmarks/way-grip-force",
+      "source_doi": "10.6084/m9.figshare.c.988376.v2",
+      "portable_forecast": {
+        "path": "benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-experimental-preview.zip",
+        "bytes": 42471,
+        "sha256": "d0d04f87bcbfedb487e68e36d558c021e91af96bce8d5e35434908caa37d913b"
+      },
+      "development_aggregate": {
+        "path": "benchmarks/way-grip-force/DEVELOPMENT-AGGREGATE.json",
+        "bytes": 16981,
+        "sha256": "1f831ffa7cfe943b100487e7fdddeb980628d9827b5d4c05fbf54dc2931e7021"
+      },
+      "recorded_horizon_ms": 120,
+      "development_people": 3,
+      "development_trials": 882,
+      "development_windows": 25578,
+      "final_test_people_reserved": 3,
+      "scope": "Offline voluntary pinch-lift force forecasting. Aligned scalp EEG slightly reduced equal-person development RMSE versus mechanical history. The phase-matched EEG model did better than aligned EEG."
     }
   }
 }

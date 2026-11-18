@@ -25,3 +25,5 @@ Project-owned code uses CC0. Recordings, references and separately supplied asse
 [Forecast a wrist turn with forearm EMG](wrist-forearm/). Open an original development ZIP, select a block and trial, and compare measured wrist angles with three forecasts. You can explore invented inputs without a file.
 
 [Daily-activity wrist estimates](daily-wrist/) compare task and elapsed time with seven forearm channels. Invented examples can be adjusted; a compatible supplied JSON window is evaluated locally.
+
+In a separate pinch-lift experiment, phase-matched EEG from another trial did slightly better than the correctly paired EEG at forecasting grip force. [Read the WAY-EEG-GAL comparison and download the desktop forecast](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/way-grip-force/)

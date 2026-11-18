@@ -27,3 +27,7 @@ The [forearm browser ZIP](benchmarks/wrist-forearm-transfer/WristMotion-Forearm-
 The [UJI forearm estimator](benchmarks/uji-wrist-emg/UJI-Wrist-Supported-Forearm-Model.zip) has its own desktop launchers. Extract the full ZIP, open the launcher for your operating system, and follow its README to run the two trained models on a compatible input. The [study and replication code](benchmarks/uji-wrist-emg/) describe the required seven channels and the offline time convention.
 
 The daily-activity wrist browser runs the UJI models on a compatible seven-channel window. For offline use, extract the whole archive, then open the launcher for your desktop or open `index.html`. [Open the browser preview](https://eliminatenoise.github.io/NeuroTranslation/daily-wrist/) · [Download the browser and launchers](benchmarks/uji-wrist-emg/UJI-Daily-Wrist-Browser.zip)
+
+## Open the grip-force forecast
+
+Extract the grip-force ZIP and open the launcher for your system. It runs an invented window through the fitted models with Python and NumPy. The Linux launcher ran from an extracted copy. Native launches on Windows and macOS remain unchecked. [Download the ZIP](benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-experimental-preview.zip) · [Study and input instructions](benchmarks/way-grip-force/)
