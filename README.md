@@ -36,7 +36,7 @@ In the earlier IACKD palm pilot, a ridge model using three EEG channels had 7.51
 
 ## Read the papers
 
-The four latest drafts ask what scalp EEG and forearm muscle recordings add to a forecast of wrist motion. NeuroTranslation compares two model classes. Brain2Body asks what else would have to be measured before using a forecast for feedback. [Read the technical and plain-English drafts](papers/experimental/wrist-forecast-2026-11-19/README.md) · [Download all four PDFs and the reading aid](papers/downloads/NeuroTranslation-Brain2Body-Wrist-Forecast-2026-11-19.zip)
+The four latest drafts follow forearm activity across two tasks. In wrist pointing, it improved a correction to an earlier motion forecast. In the UJI daily activities, it helped the flexion–extension estimate and worsened the side-to-side estimate. [Read both studies in the four papers](papers/experimental/distinct-cohort-2026-11-19/README.md) · [Download the PDFs and reading aid](papers/downloads/NeuroTranslation-Brain2Body-Distinct-Cohort-2026-11-19.zip)
 
 The previously selected scientific-layout edition is listed below.
 

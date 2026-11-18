@@ -1,6 +1,17 @@
 # Paper drafts
 
-## Wrist forecasting · 19 November 2026
+## Forearm activity in two wrist studies · 19 November 2026
+
+The wrist-pointing models know the wrist’s recent path. The daily-activity models know the task and elapsed time. These four drafts explain what forearm activity added to each comparison and how the instruments limit the conclusion.
+
+- NeuroTranslation technical · [Wrist pointing, p. 23](experimental/distinct-cohort-2026-11-19/neurotranslation-technical.pdf#page=23) · [Daily activities, p. 24](experimental/distinct-cohort-2026-11-19/neurotranslation-technical.pdf#page=24)
+- NeuroTranslation explained · [Wrist pointing, p. 42](experimental/distinct-cohort-2026-11-19/neurotranslation-explained.pdf#page=42) · [Daily activities, p. 42](experimental/distinct-cohort-2026-11-19/neurotranslation-explained.pdf#page=42)
+- Brain2Body article · [Wrist pointing, p. 4](experimental/distinct-cohort-2026-11-19/brain2body-article.pdf#page=4) · [Daily activities, p. 4](experimental/distinct-cohort-2026-11-19/brain2body-article.pdf#page=4)
+- Brain2Body Simple English · [Wrist pointing, p. 12](experimental/distinct-cohort-2026-11-19/brain2body-simple-english.pdf#page=12) · [Daily activities, p. 13](experimental/distinct-cohort-2026-11-19/brain2body-simple-english.pdf#page=13)
+
+[Download all four drafts and companions](downloads/NeuroTranslation-Brain2Body-Distinct-Cohort-2026-11-19.zip) · [Reading aid](experimental/distinct-cohort-2026-11-19/research-evidence-reading-aid.md)
+
+## Earlier wrist-forecasting drafts · 19 November 2026
 
 Six people supplied the training movements. Three other people supplied the wrist angles used to check the forecasts. The two papers trace what changed when the models received scalp or forearm signals.
 
