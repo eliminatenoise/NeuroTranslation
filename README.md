@@ -30,7 +30,7 @@ In the earlier IACKD palm pilot, a ridge model using three EEG channels had 7.51
 
 ## Read the papers
 
-The latest experimental drafts cover the scalp EEG and palm comparison in NeuroTranslation and the evidence for early developmental access in Brain2Body. [Four revised drafts and reading aid](papers/experimental/movement-and-development-2026-11-19/README.md) · [Download all four PDFs](papers/downloads/NeuroTranslation-Brain2Body-Movement-and-Development-2026-11-19.zip)
+The four latest drafts ask what scalp EEG and forearm muscle recordings add to a forecast of wrist motion. NeuroTranslation compares two model classes. Brain2Body asks what else would have to be measured before using a forecast for feedback. [Read the technical and plain-English drafts](papers/experimental/wrist-forecast-2026-11-19/README.md) · [Download all four PDFs and the reading aid](papers/downloads/NeuroTranslation-Brain2Body-Wrist-Forecast-2026-11-19.zip)
 
 The previously selected scientific-layout edition is listed below.
 

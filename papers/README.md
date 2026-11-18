@@ -1,13 +1,24 @@
 # Paper drafts
 
-## Movement and developmental access · 19 November 2026
+## Wrist forecasting · 19 November 2026
+
+Six people supplied the training movements. Three other people supplied the wrist angles used to check the forecasts. The two papers trace what changed when the models received scalp or forearm signals.
+
+- [NeuroTranslation technical, p. 22](experimental/wrist-forecast-2026-11-19/neurotranslation-technical.pdf#page=22)
+- [NeuroTranslation explained, p. 40](experimental/wrist-forecast-2026-11-19/neurotranslation-explained.pdf#page=40)
+- [Brain2Body article, p. 3](experimental/wrist-forecast-2026-11-19/brain2body-article.pdf#page=3)
+- [Brain2Body Simple English, p. 11](experimental/wrist-forecast-2026-11-19/brain2body-simple-english.pdf#page=11)
+
+[Download the four drafts and companions](downloads/NeuroTranslation-Brain2Body-Wrist-Forecast-2026-11-19.zip) · [Reading aid](experimental/wrist-forecast-2026-11-19/research-evidence-reading-aid.md)
+
+## Previous movement and developmental access drafts · 19 November 2026
 
 Both NeuroTranslation editions now report the three-person development comparison of timing, hand history and scalp EEG. Both Brain2Body editions explain why the programme proposes Antechinus and identify the species behind the bone, healing and milk evidence.
 
 - NeuroTranslation · [Technical, p. 21](experimental/movement-and-development-2026-11-19/neurotranslation-technical.pdf#page=21) · [Explained, p. 39](experimental/movement-and-development-2026-11-19/neurotranslation-explained.pdf#page=39)
 - Brain2Body · [Research article, p. 13](experimental/movement-and-development-2026-11-19/brain2body-article.pdf#page=13) · [Simple English, p. 23](experimental/movement-and-development-2026-11-19/brain2body-simple-english.pdf#page=23)
 
-[Download all four current drafts and companions](downloads/NeuroTranslation-Brain2Body-Movement-and-Development-2026-11-19.zip) · [Archive checksum](downloads/NeuroTranslation-Brain2Body-Movement-and-Development-2026-11-19.zip.sha256) · [Reading aid](experimental/movement-and-development-2026-11-19/research-evidence-reading-aid.md)
+[Download the movement and developmental access drafts](downloads/NeuroTranslation-Brain2Body-Movement-and-Development-2026-11-19.zip) · [Archive checksum](downloads/NeuroTranslation-Brain2Body-Movement-and-Development-2026-11-19.zip.sha256) · [Reading aid](experimental/movement-and-development-2026-11-19/research-evidence-reading-aid.md)
 
 ## Previous movement-measurement candidate · 19 November 2026
 
