@@ -22,6 +22,8 @@ Recordings must declare the same organism, subject, recording and clock. Differe
 
 Choose a sampling step, a maximum permitted gap and nearest-sample or linear interpolation. The result covers only the common time interval. Missing samples and gaps beyond the selected limit stay missing; values are not extrapolated. Units and coordinate frames are retained without conversion. Chart bins retain extrema and break at missing data; exports contain the aligned values and original packets.
 
+Move **Aligned time** or focus the slider and use the arrow keys to step through the grid. All traces show the value and unit at that time, alongside how the value was selected or why it is missing. In the invented example, try 1.5 seconds with the default settings. The force is missing in the source, while the displacement is interpolated between the surrounding points. The JSON export retains the full numeric precision.
+
 File and combined-packet limits are 5 MiB, with at most 64 selected streams, 50,000 input samples, 5,000 aligned time points and 500,000 aligned values. These bounds protect browser responsiveness; they do not define a scientific sampling requirement. Metadata warnings remain visible when source rights, partitions or coordinate frames are unknown.
 
 ## Metadata checks

@@ -1,4 +1,4 @@
-import {parsePacket,parseCsv,validatePacket,combinePackets,summarizePackets,assessCompatibility,alignPackets,examplePacket} from './core.mjs';
+import {parsePacket,parseCsv,validatePacket,combinePackets,summarizePackets,alignPackets,examplePacket} from './core.mjs';
 import {normalizeFinite,buildPlotSegments} from './plot.mjs';
 import {toPolicyEnvelope} from './packet-policy-bridge.mjs';
 import {evaluate as evaluateMetadata} from './compat-policy.mjs';
@@ -6,14 +6,27 @@ import {renderMetadataReport} from './policy-report-view.mjs';
 
 const $=id=>document.getElementById(id);
 const colors={neural:'#7757d8',muscle:'#cd6446',displacement:'#287dba',mechanics:'#278476'};
-const state={packets:[],aligned:null,cursor:0,playing:false,previousFrame:0,traces:[],metadata:null,metadataPackets:null};
+const sampleLabels={
+  original:'Original sample',
+  nearest:'Nearest sample',
+  linear:'Linear interpolation',
+  missing_input:'Missing in source',
+  long_gap:'Gap exceeds limit',
+  outside_range:'Outside recording range'
+};
+const state={packets:[],aligned:null,cursor:0,animationFrame:null,traces:[],metadata:null,metadataPackets:null};
 const isExample=()=>state.packets.length>0&&state.packets.every(p=>p.dataset.origin==='constructed_example');
 const streams=()=>state.packets.flatMap(p=>p.streams.map(s=>({...s,dataset:p.dataset})));
 function element(tag,className,text){const e=document.createElement(tag);if(className)e.className=className;if(text!==undefined)e.textContent=text;return e;}
 function message(text,error=false){$('message').textContent=text;$('message').classList.toggle('error',error);}
 function download(name,value){const blob=new Blob([JSON.stringify(value,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
-function stop(){state.playing=false;$('play').textContent='▶';$('play').setAttribute('aria-label','Play aligned signals');}
-function clearAlignment(){stop();state.aligned=null;state.cursor=0;$('cursor').value=0;}
+function stop(){
+  if(state.animationFrame!==null)cancelAnimationFrame(state.animationFrame);
+  state.animationFrame=null;
+  $('play').textContent='▶';
+  $('play').setAttribute('aria-label','Play aligned signals');
+}
+function clearAlignment(){stop();state.aligned=null;state.cursor=0;}
 function getAlignedStreams(){return state.aligned?.streams||[];}
 function renderMetadata(){
   if(state.metadataPackets!==state.packets){
@@ -61,31 +74,54 @@ function render(){
   if(warnings.length){$('alignment-warnings').append(element('strong','','Check the recording metadata'));const list=element('ul');for(const warning of warnings)list.append(element('li','',warning));$('alignment-warnings').append(list);}
   const aligned=Boolean(state.aligned);$('mode-badge').textContent=aligned?'Aligned samples':'Original samples';
   $('alignment-caption').textContent=aligned?`${isExample()?'Example clock':'Declared common clock'} · ${state.aligned.t.length.toLocaleString()} points · ${$('method').selectedOptions[0].textContent}`:'Each trace uses its own declared clock. Cross-dataset synchronization has not been established.';
-  $('play').disabled=!aligned;$('cursor').disabled=!aligned;$('export').disabled=!aligned;$('align').disabled=!all.length;
+  const sampleCount=state.aligned?.t.length??0;
+  $('playback').hidden=!aligned;
+  $('play').disabled=sampleCount<2;
+  $('cursor').disabled=sampleCount<2;
+  $('cursor').max=Math.max(0,sampleCount-1);
+  $('export').disabled=!aligned;
+  $('align').disabled=!all.length;
   renderMetadata();renderTraces();
 }
 function renderTraces(){
   $('traces').replaceChildren();state.traces=[];
   const ss=state.aligned?getAlignedStreams():streams();
-  if(!ss.length){$('traces').append(element('p','empty','Import a recording or load the constructed example.'));$('cursor-time').textContent='— s';return;}
+  if(!ss.length){$('traces').append(element('p','empty','Import a recording or load the constructed example.'));return;}
   for(const s of ss){
     const trace=element('article','trace'),head=element('div','trace-head'),label=element('div');
     label.append(element('strong','',s.label||s.id),element('span','unit',s.unit));label.style.color=colors[s.modality];
     head.append(label,element('span','trace-origin',`${s.modality} · ${isExample()?'constructed example':s.origin}`));trace.append(head);
-    const canvas=element('canvas');canvas.setAttribute('role','img');canvas.setAttribute('aria-label',`${s.label||s.id}, ${s.unit}, ${s.origin} ${s.modality} signal`);trace.append(canvas);
+    const plot=element('div','trace-plot');
+    const canvas=element('canvas');
+    canvas.setAttribute('role','img');
+    canvas.setAttribute('aria-label',`${s.label||s.id}, ${s.unit}, ${isExample()?'constructed example':s.origin} ${s.modality} signal`);
+    plot.append(canvas);
+    let marker,value,source;
+    if(state.aligned){
+      marker=element('span','sample-marker');
+      marker.setAttribute('aria-hidden','true');
+      plot.append(marker);
+      const reading=element('p','sample-reading');
+      value=element('strong','sample-value');
+      source=element('span','sample-source');
+      reading.append(value,source);
+      head.append(reading);
+    }
+    trace.append(plot);
     const time=state.aligned?state.aligned.t:s.t;const clock=s.dataset?.timebase||'declared packet clock';
     trace.append(element('p','trace-clock',`${time[0].toFixed(3)}–${time.at(-1).toFixed(3)} s · ${clock}${s.frame?` · frame: ${s.frame}`:''}`));
-    $('traces').append(trace);state.traces.push({canvas,stream:s,time});
+    $('traces').append(trace);state.traces.push({canvas,marker,value,source,stream:s,time});
   }
-  draw();
+  drawTraces();
+  if(state.aligned)renderCursor();
 }
-function draw(){
+function drawTraces(){
   for(const {canvas,stream,time} of state.traces){
     const width=Math.max(100,canvas.clientWidth),height=68,dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=width*dpr;canvas.height=height*dpr;
     const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,width,height);ctx.strokeStyle='#edf1f6';ctx.lineWidth=1;
     for(const fraction of [.25,.5,.75]){ctx.beginPath();ctx.moveTo(0,height*fraction);ctx.lineTo(width,height*fraction);ctx.stroke();}
     const values=stream.values;let low=Infinity,high=-Infinity;for(const v of values){if(v!==null&&Number.isFinite(v)){low=Math.min(low,v);high=Math.max(high,v);}}
-    if(low===Infinity){ctx.fillStyle='#9aa7b7';ctx.font='10px Arial, sans-serif';ctx.fillText('No samples within the allowed gap',10,36);continue;}
+    if(low===Infinity){ctx.fillStyle='#627181';ctx.font='10px Arial, sans-serif';ctx.fillText('No values to plot',10,36);continue;}
     const y=v=>height-8-normalizeFinite(v,low,high)*(height-16),x=i=>normalizeFinite(time[i],time[0],time.at(-1))*(width-1);
     ctx.strokeStyle=colors[stream.modality]||'#315ae6';ctx.lineWidth=1.35;
     // Bins retain extrema and break at missing samples; original/aligned values remain in export.
@@ -95,15 +131,37 @@ function draw(){
       if(points.length===1){ctx.fillStyle=colors[stream.modality]||'#315ae6';ctx.beginPath();ctx.arc(x(points[0]),y(values[points[0]]),1.4,0,Math.PI*2);ctx.fill();}
     }
     ctx.fillStyle='#9aa7b7';ctx.font='8px Arial, sans-serif';ctx.fillText(high.toPrecision(3),3,9);ctx.fillText(low.toPrecision(3),3,height-1);
-    if(state.aligned){const px=state.cursor*(width-1);ctx.strokeStyle='#8798af';ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(px,0);ctx.lineTo(px,height);ctx.stroke();ctx.setLineDash([]);}
   }
-  if(state.aligned){const t=state.aligned.t;$('cursor-time').textContent=`${(t[0]*(1-state.cursor)+t.at(-1)*state.cursor).toFixed(2)} s`;}else $('cursor-time').textContent='— s';
+}
+function renderCursor(){
+  const grid=state.aligned.t;
+  const index=state.cursor;
+  const selectedTime=grid[index];
+  const displayTime=Number(selectedTime.toPrecision(12));
+  const position=normalizeFinite(selectedTime,grid[0],grid.at(-1))*100;
+  $('cursor').value=index;
+  $('cursor').setAttribute('aria-valuetext',`${displayTime} seconds, point ${index+1} of ${grid.length}`);
+  $('cursor-time').textContent=`${displayTime} s`;
+  $('cursor-time').title=`${selectedTime} s`;
+  $('cursor-step').textContent=`${index+1} of ${grid.length}`;
+  for(const {marker,value,source,stream} of state.traces){
+    const sample=stream.values[index];
+    marker.style.setProperty('--sample-position',`${position}%`);
+    value.textContent=sample===null?'Missing':`${Number(sample.toPrecision(8))} ${stream.unit}`;
+    value.title=sample===null?'':`${sample} ${stream.unit}`;
+    source.textContent=sampleLabels[stream.status[index]];
+  }
+}
+function selectSample(index){
+  if(index===state.cursor)return;
+  state.cursor=index;
+  renderCursor();
 }
 function align(){
   try{
-    stop();const compatibility=assessCompatibility(state.packets);
+    stop();
     state.aligned=alignPackets(state.packets,{stepSeconds:Number($('step').value),maxGapSeconds:Number($('max-gap').value),method:$('method').value});
-    state.cursor=0;$('cursor').value=0;render();
+    state.cursor=0;render();
     const missing=getAlignedStreams().reduce((n,s)=>n+s.values.filter(v=>v===null).length,0);
     message(`${isExample()?'Constructed example aligned':'Aligned using your declared subject, recording and clock'}. ${missing.toLocaleString()} missing values retained. No samples extrapolated.`);
   }catch(error){clearAlignment();render();message(error.message||String(error),true);}
@@ -136,13 +194,25 @@ $('import-form').addEventListener('submit',async event=>{
 });
 $('align').addEventListener('click',align);
 for(const id of ['step','max-gap','method'])$(id).addEventListener('change',()=>{clearAlignment();render();message('Settings changed. Align again to apply them.');});
-$('cursor').addEventListener('input',()=>{state.cursor=Number($('cursor').value)/1000;draw();});
-$('play').addEventListener('click',()=>{state.playing=!state.playing;$('play').textContent=state.playing?'Ⅱ':'▶';$('play').setAttribute('aria-label',state.playing?'Pause aligned signals':'Play aligned signals');state.previousFrame=performance.now();if(state.playing)requestAnimationFrame(tick);});
-function tick(now){if(!state.playing||!state.aligned)return;const elapsed=now-state.previousFrame;if(elapsed>=32){state.cursor=(state.cursor+elapsed/10000)%1;$('cursor').value=Math.round(state.cursor*1000);state.previousFrame=now;draw();}requestAnimationFrame(tick);}
+$('cursor').addEventListener('input',()=>{stop();selectSample($('cursor').valueAsNumber);});
+$('play').addEventListener('click',()=>{
+  if(state.animationFrame!==null){stop();return;}
+  const startedAt=performance.now();
+  const startIndex=state.cursor;
+  const count=state.aligned.t.length;
+  $('play').textContent='Ⅱ';
+  $('play').setAttribute('aria-label','Pause aligned signals');
+  function tick(now){
+    const steps=Math.floor(Math.max(0,now-startedAt)*count/10000);
+    selectSample((startIndex+steps)%count);
+    state.animationFrame=requestAnimationFrame(tick);
+  }
+  state.animationFrame=requestAnimationFrame(tick);
+});
 $('export').addEventListener('click',()=>{if(state.aligned)download('neurotranslate-0.0-aligned.json',{application:'NeuroTranslate 0.0',operation:'declared-clock alignment, not learned translation',example:isExample(),sourcePackets:state.packets,alignment:state.aligned,metadataCheck:state.metadata});});
 $('export-metadata').addEventListener('click',()=>{if(state.metadata)download('neurotranslate-0.0-inspection.json',{application:'NeuroTranslate 0.0',operation:'Original source samples and metadata checks; no pairing or learned translation',example:isExample(),sourcePackets:state.packets,metadataCheck:state.metadata});});
 $('download-template').addEventListener('click',()=>download('neurotranslate-0.0-example.json',examplePacket()));
-window.addEventListener('resize',draw);
+window.addEventListener('resize',drawTraces);
 async function catalogue(){
   try{const response=await fetch('datasets.json');if(!response.ok)return;const data=await response.json();for(const d of data.datasets||data){const card=element('article','dataset-card');card.append(element('h3','',d.name),element('p','',d.modalities?.join(' · ')||d.modality||''),element('p','',d.description||d.coverage||''),element('p','catalogue-limit',d.limit||d.pairingLimit||''));card.append(element('p','',`Reference metadata · ${(d.license||[]).join(', ')} · recordings not included`));if(d.url&&/^https:\/\//i.test(d.url)){const link=element('a','',`Source ↗`);link.href=d.url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);}$('catalogue-list').append(card);}$('catalogue-section').hidden=!$('catalogue-list').children.length;}catch{/* Optional catalogue is independent of data import and alignment. */}
 }
