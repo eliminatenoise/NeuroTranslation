@@ -37,3 +37,6 @@ test('empty missing signals and invalid bin requests are explicit',()=>{
   assert.throws(()=>buildPlotSegments([1],0));
   assert.throws(()=>buildPlotSegments([NaN],1));
 });
+test('a large clock origin preserves the spacing within a short interval', () => {
+  assert.equal(normalizeFinite(1e16 + 2, 1e16, 1e16 + 6), 1 / 3);
+});

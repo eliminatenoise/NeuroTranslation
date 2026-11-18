@@ -2,6 +2,10 @@
 export function normalizeFinite(value,low,high){
   if(![value,low,high].every(Number.isFinite)||high<low)throw new Error('Plot coordinates require a finite ordered range.');
   if(low===high)return .5;
+  if(value<=low)return 0;
+  if(value>=high)return 1;
+  const span=high-low;
+  if(Number.isFinite(span))return (value-low)/span;
   const scale=Math.max(Math.abs(low),Math.abs(high),Number.MIN_VALUE);
   return Math.max(0,Math.min(1,(value/scale-low/scale)/(high/scale-low/scale)));
 }

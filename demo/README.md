@@ -20,7 +20,7 @@ Project-owned code is released under [CC0-1.0](LICENSE). Dataset and anatomical 
 
 ## Inspecting original samples
 
-Open **Inspect original samples** below a trace. The slider steps through that stream one stored sample at a time. The marker follows its timestamp, so uneven intervals appear at their actual spacing. Each trace has its own cursor. A missing source value stays visible as **Missing in source**. When the file supplies a measurement description or a unit label that differs from the plotted unit, the inspector shows it beside the reading.
+Open **Inspect original samples** below a trace. If the recordings are aligned, choose **Show original samples** first. The slider steps through one stream at a time. The marker follows the stored timestamp, so uneven intervals appear at their actual spacing. Each trace keeps its own cursor. A missing value reads **Missing in source**. A file can also supply a measurement description and a unit label that differs from the plotted unit.
 
 ## Alignment
 

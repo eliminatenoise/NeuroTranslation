@@ -17,7 +17,22 @@ const has = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
 const present = value => typeof value === 'string' && value.trim().length > 0;
 const known = value => present(value) && !['unknown', 'unspecified', 'unassigned', 'n/a', 'na', '?'].includes(value.trim().toLowerCase());
 const fail = message => { throw new Error(message); };
-const clone = value => JSON.parse(JSON.stringify(value));
+/** Keep the sign of stored zero samples when a packet is cloned or downloaded. */
+export function stringifyRecording(value, space) {
+  let hasSignedZero = false;
+  const text = JSON.stringify(value, (_key, item) => {
+    if (Object.is(item, -0)) hasSignedZero = true;
+    return item;
+  }, space);
+  if (!hasSignedZero) return text;
+  // Use a token absent from the complete encoded input, including keys. This
+  // also works in browsers that do not support JSON.rawJSON().
+  let token = '@negative-zero@';
+  while (text.includes(token)) token += token;
+  const marked = JSON.stringify(value, (_key, item) => Object.is(item, -0) ? token : item, space);
+  return marked.replaceAll(JSON.stringify(token), '-0');
+}
+const clone = value => JSON.parse(stringifyRecording(value));
 
 function textField(value, path, { optional = false, max = 2000 } = {}) {
   if (optional && (value === undefined || value === null || value === '')) return;

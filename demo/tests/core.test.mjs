@@ -1,7 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { LIMITS, validatePacket, parsePacket, parseCsv, combinePackets, summarizePackets,
-  assessCompatibility, alignPackets, examplePacket } from '../src/core.mjs';
+  assessCompatibility, alignPackets, examplePacket, stringifyRecording } from '../src/core.mjs';
+
+test('numeric downloads preserve signed zeros alongside arbitrary user labels', () => {
+  const source = { '@negative-zero@': 'literal', value: [-0, 0, null], label: '@negative-zero@@negative-zero@' };
+  assert.deepEqual(JSON.parse(stringifyRecording(source, 2)), source);
+  const packet = examplePacket();
+  packet.streams[0].values[0] = -0;
+  assert.ok(Object.is(combinePackets([packet]).streams[0].values[0], -0));
+});
 
 const copy = value => structuredClone(value);
 function stream(overrides = {}) {
