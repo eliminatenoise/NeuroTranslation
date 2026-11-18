@@ -1,67 +1,45 @@
 # NeuroTranslation
 
-NeuroTranslation is active again, alongside [NeuroSurge](https://github.com/eliminatenoise/NeuroSurge) and [Interoceptomics](https://github.com/eliminatenoise/Interoceptomics). These previews remain experimental; no validated downloadable model or finalized-model GUI is available yet.
+Reach for a cup. A neural recording captures activity at the recording site. An electrode over a muscle picks up electrical activity as the arm moves. Calibrated cameras estimate where the hand went. NeuroTranslation asks how well one of these observations can predict another. The hand’s measured path gives us something to check the prediction against.
 
-## Open the current previews
+[Open the browser data companion](https://eliminatenoise.github.io/NeuroTranslation/index.html). Choose **Load example**, then open **Metadata checks** to see the units, clock and source declared for each invented signal. You can also inspect your own JSON or CSV files locally and align streams when the files declare the same organism, subject, recording and clock and their partitions are compatible. The companion runs without installation. [Import and alignment guide](demo/README.md) · [Desktop launchers for Windows, macOS and Linux](https://eliminatenoise.github.io/NeuroTranslation/START.html)
 
-[Download a Windows, macOS or Linux launcher](https://eliminatenoise.github.io/NeuroTranslation/START.html). The data-companion launcher opens the application directly.
+## Read the papers
 
-- [Browser data companion](https://eliminatenoise.github.io/NeuroTranslation/index.html): import and inspect JSON/CSV, check declared metadata and align compatible recordings. Its example uses invented signals; no trained model is connected. [Source and usage](demo/README.md).
-- [Selected experimental papers](papers/): four technical/accessible PDFs, with a content manifest, reading aid and full scientific summary. The recorded review covers 26 of 546 pages; 520 are outside visual acceptance.
-- [Historical R11 manuscript source](papers/experimental/r11-source/): the preserved unbuilt source snapshot. It has no matching R11 PDFs and omits external figure/font dependencies. Proposed G35 terminology in that snapshot remains unadopted.
-- [Portable interface source](interfaces/experimental/portable/): a recording-specific Python/HTML interface proposal. No weights, model payloads or runnable model download are included.
-
-Each preview names what you can inspect and what remains untested. An experimental upload makes the work available; it does not establish a completed Large Movement Model, biological translation or clinical use.
-
-How does a pattern of neural activity become a movement we can measure? NeuroTranslation is a research programme for learning and testing the links between nervous-system activity, muscle activity, body mechanics and movement. It is also our name for a proposed field: mapping neural signals and representations between explicitly defined sources and targets, with the context and limits kept attached.
-
-Consider a hand reaching for a cup. A neural recording captures one observation. EMG captures electrical activity in muscles. Motion capture estimates where the hand goes. A mechanical model describes quantities such as joint motion, forces and muscle–tendon behaviour. Bringing these together gives us a testable question: can the permitted observations predict a specified outcome, and how closely does that prediction match an independent measurement?
-
-## What we are building
-
-The model under development is **NeuroTranslate 0.0**. Its broader direction is a **Large Movement Model**: a learned model connecting neural observations with musculoskeletal structure, mechanics and measured movement. The name describes an ambition, not an accepted large model or a demonstrated universal decoder.
-
-The training programme distinguishes four source groups:
-
-| Source | What it contributes | What must remain clear |
+| Paper | Technical edition | Plain-English edition |
 | --- | --- | --- |
-| Neural data | Specified brain, spinal or peripheral neural observations; relevant autonomic and visceral pathways where actually recorded | No single recording is assumed to cover the whole nervous system. Recording modality, location and task matter. |
-| Muscle data | Myography, including EMG from named muscles | Muscle electrical activity is not direct nerve activity, muscle force or a simulator’s activation command. |
-| Displacement data | Observed or tracking-derived position, pose and movement | Coordinates need units, calibration, timing and a declared physical frame. Estimated pose is not automatically measured force. |
-| Mechanics data | Measured mechanical quantities and explicitly identified physics-generated examples | A simulated body can support learning and controlled tests; it cannot supply independent biological ground truth for itself. |
+| *NeuroTranslation: A New Paradigm In Brain-Body Mapping.* | [NeuroTranslation technical edition](papers/experimental/scientific-layout-2026-11-15/neurotranslation-technical.pdf) | [Read NeuroTranslation explained](papers/experimental/scientific-layout-2026-11-15/neurotranslation-explained.pdf) |
+| *Brain2Body: The Next Generation In Body-Brain Interfacing.* | [Brain2Body technical edition](papers/experimental/scientific-layout-2026-11-15/brain2body-article.pdf) | [Read Brain2Body explained](papers/experimental/scientific-layout-2026-11-15/brain2body-simple-english.pdf) |
 
-The neural scope is deliberately broader than the brain alone. Brain, spinal and peripheral activity belong in the programme, with task-relevant autonomic or visceral observations where available. Current source coverage is incomplete. The main focus is the motor–sensory system: movement and the feedback associated with it.
+Both editions develop the methods and their limits. The plain-English editions give more space to the steps between them. [Download all four papers with their companions](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/papers/downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip), or use the [reading aid](papers/experimental/scientific-layout-2026-11-15/research-evidence-reading-aid.md) to trace the studies behind the argument. Extract the ZIP with its folder structure intact so links between files work.
 
-Some datasets contain simultaneous observations from the same subject and event. Others can contribute through unpaired representation learning, movement pretraining or transfer between anatomically or mechanically comparable features. Those are different uses. We do not manufacture a shared subject or clock to make unrelated files look synchronized.
+These are experimental drafts. The recorded visual reviews cover selected issues on 26 of 546 pages. The [paper index](papers/) identifies the selected builds, the 520 pages outside that review and the historical source editions.
 
-More data and more varied data may help a model generalize. That is a hypothesis to test with controlled comparisons, rather than a guarantee attached to dataset size.
+## What goes into a translation?
 
-## How a result earns its claim
+**NeuroTranslate 0.0** is the model under development. Its longer-term aim is a **Large Movement Model** connecting neural observations with muscle activity, body mechanics and measured movement. Recording site and task matter. A model trained on cortical activity during a reach has yet to earn a claim about spinal, peripheral, autonomic or visceral signals in another task.
 
-A prediction must name its input, target, organism, task, units and validation domain. Preprocessing and model selection must respect the training and evaluation partitions. Comparisons need relevant baselines, including persistence or nuisance information where those could explain an apparent gain.
+| Source | What it contributes to the reach |
+| --- | --- |
+| Neural recordings | Activity from the brain, spinal cord or peripheral nerves, at the sites actually recorded. Autonomic and visceral pathways enter the analysis where relevant recordings exist. |
+| Muscle recordings | Electromyography (EMG) measures electrical activity in named muscles. A direct nerve recording measures activity at a different site. Estimating force from EMG requires additional measurements or a mechanical model. |
+| Displacement recordings | A tracker estimates hand position or joint angle. The coordinate frame, calibration, units and timestamps give those numbers meaning. |
+| Mechanics data | Instruments can measure force. A physics simulation can generate a force estimate under stated assumptions. An independent force measurement from the same task, in the same units, gives that estimate a test. |
 
-We keep negative results. A lower average error does not establish that neural information helped, that a model generalizes to another person, or that it reproduces the underlying biology. Error, uncertainty, failures and the conditions of the test belong beside the result. Recorded-feature reconstruction does not demonstrate sensory delivery, and software prediction does not demonstrate skill transfer.
+Suppose the motion trace belongs to a different reach. It might help a model learn common movement patterns. It cannot tell us where *this* hand was when *this* neural sample was recorded. A supervised prediction needs evidence linking the subject, event and time across the recordings. Even two files with the same clock label can carry an offset.
 
-## What is available here
+## What has been tested?
 
-Read the [selected experimental paper drafts](papers/): technical and accessible editions of **NeuroTranslation: A New Paradigm In Brain-Body Mapping.** and **Brain2Body: The Next Generation In Body-Brain Interfacing.** The selected PDFs have their own R2/R3 build provenance; the preserved R9/R11 source snapshots are historical, not matching current build sources.
+The public companion imports, plots and aligns samples. The example is synthetic, and the companion has no trained translation model attached. The developmental learner passed 29 synthetic software checks across its four input families. Those checks exercised timing and mask handling, training-only normalization and the transition between pretraining, training and fine-tuning. All three parameter updates used mock data. This version of the learner has completed zero real-data fits. A validated model download and a GUI for that model are still pending.
 
-These papers develop the scientific and engineering argument. The accessible editions are intended to explain the same difficult concepts in plain language; they are not a substitute for methods, evidence or limitations. The project is also developing models, data interfaces and interactive demonstrations. **No validated downloadable Large Movement Model or finalized-model GUI is available yet.**
+For a biological result, specify which inputs were available at prediction time, the organism, task, target and units. Keep evaluation subjects or sessions outside training and model selection. A hand tends to keep moving in its current direction, so a predictor can obtain a low error using only recent motion. Compare against that baseline and test what changes when the neural input is withheld.
 
-The [data companion](demo/README.md) imports JSON and CSV, checks their structure, displays the original samples and aligns declared paired recordings. It does not execute a trained translation model. Its example contains invented values.
+The papers retain a negative result from a separate forecasting comparison. Across 18 fits and 720 saved epochs, neither model-admission rule passed and none of the five benefit claims held. Reconstructing recorded features leaves sensory delivery and skill transfer as separate experimental questions. [Read the forecasting results](papers/experimental/scientific-layout-2026-11-15/research-evidence-reading-aid.md)
 
-The selected paper folder includes its relative JSON companions and [research reading aid](papers/experimental/scientific-layout-2026-11-15/research-evidence-reading-aid.md). The [R9 metadata erratum](papers/errata/r9-reading-aid-metadata.txt) records a historical omission; it is not the availability record for this edition. Existing scientific, rights and output limits remain.
+## Code, related projects and reuse
 
-## How the projects fit together
+- [Portable interface source](interfaces/experimental/portable/) contains the Python and HTML proposal for a recording-specific interface. The package contains no weights.
+- [Historical R11 manuscript source](papers/experimental/r11-source/) preserves an unbuilt snapshot. Its external figures and fonts are incomplete, its proposed terminology was never adopted, and the selected PDFs have separate build provenance. [R9 metadata erratum](papers/errata/r9-reading-aid-metadata.txt)
+- [Interoceptomics](https://github.com/eliminatenoise/Interoceptomics) explores internal-body sensing and neural connectivity through anatomical models. [NeuroSurge](https://github.com/eliminatenoise/NeuroSurge) uses a virtual cortex and limb to explore left-hand and arm control in a first-person game. [Shared terminology and project scope](PROJECT-CONTEXT.json)
 
-- [Interoceptomics](https://github.com/eliminatenoise/Interoceptomics) develops the presentation and explanatory work around internal-body sensing and neural connectivity.
-- **NeuroTranslation** develops the mapping methods, models, data relationships and both papers.
-- [NeuroSurge](https://github.com/eliminatenoise/NeuroSurge) is the first-person game demo under development, making left-hand and arm motor control visible through a virtual cortex and anatomical limb.
-
-They share a programme, terminology and scientific standards. A compelling demonstration in one project does not validate every claim in the others.
-
-## Reuse
-
-The project’s original contributions are dedicated to the public domain under [CC0 1.0](LICENSE), to the extent the project holds the rights. Third-party material, including fonts, cited works and incorporated figures, may have separate rights. See the [current paper and font notices](papers/experimental/scientific-layout-2026-11-15/NOTICE.md).
-
-[Terminology and project scope](PROJECT-CONTEXT.json).
+Original project contributions are dedicated to the public domain under [CC0 1.0](LICENSE) to the extent the project holds the rights. Fonts, cited works and incorporated figures may carry separate terms. [Paper and font notices](papers/experimental/scientific-layout-2026-11-15/NOTICE.md)

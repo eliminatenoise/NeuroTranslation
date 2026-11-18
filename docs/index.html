@@ -5,7 +5,7 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.css">
+  <link rel="stylesheet" href="style.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.css">
 </head>
 <body>
   <header class="topbar">
@@ -42,9 +42,16 @@
         <div id="message" class="message" role="status" aria-live="polite"></div>
         <div id="alignment-warnings" class="alignment-warnings" role="note" hidden></div>
         <details class="metadata-checks"><summary id="metadata-summary">Metadata checks</summary><div id="metadata-report" class="metadata-report"></div><button id="export-metadata" class="button small secondary" disabled>Export samples + checks ↓</button></details>
+        <div class="playback" id="playback" hidden>
+          <button id="play" class="playbutton" disabled aria-label="Play aligned signals">▶</button>
+          <div class="sample-timeline">
+            <div class="sample-time"><label for="cursor">Aligned time</label><span id="cursor-time"></span><span id="cursor-step"></span></div>
+            <input type="range" id="cursor" min="0" max="0" step="1" value="0" disabled>
+          </div>
+          <button id="export" class="button small secondary" disabled>Export aligned data</button>
+        </div>
         <div id="traces" class="traces"><p class="empty">Import a recording or load the constructed example.</p></div>
-        <div class="playback"><button id="play" class="playbutton" disabled aria-label="Play aligned signals">▶</button><input type="range" id="cursor" aria-label="Aligned time cursor" min="0" max="1000" value="0" disabled><span id="cursor-time">— s</span><button id="export" class="button small secondary" disabled>Export aligned data ↗</button></div>
-        <div class="model-status"><span class="model-icon">↔</span><div><strong>Learned translation</strong><p>No validated model is connected. This version aligns recordings; it does not predict missing neural, muscle or movement signals.</p></div><span class="smalltag">Not connected</span></div>
+        <div class="model-status"><span class="model-icon" aria-hidden="true">↔</span><div><strong>Learned translation</strong><p>This preview aligns recordings and leaves gaps visible. A trained NeuroTranslate model and its weights are unavailable here.</p></div></div>
       </div>
     </section>
     <section class="lower-grid" id="how-it-works">
@@ -71,6 +78,6 @@
       <p id="import-error" class="form-error" role="alert"></p><div class="dialog-footer"><span class="quiet">File contents stay in your browser.</span><button class="button primary" type="submit">Import recording</button></div>
     </form>
   </dialog>
-  <script type="module" src="app.bfb329084bc4b52676a62ad5aadb7272cc0246362c38151558e0787bc59bfbc6.mjs"></script>
+  <script type="module" src="app.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs"></script>
 </body>
 </html>
