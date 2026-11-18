@@ -61,8 +61,8 @@
     <section class="catalogue" hidden id="catalogue-section"><div class="catalogue-title"><div><p class="eyebrow">DATASET REFERENCES</p><h2>Different pieces of the same problem.</h2></div><p>Reference entries do not load recordings or establish compatibility.</p></div><div class="catalogue-grid" id="catalogue-list"></div></section>
   </main>
   <footer><span>NeuroTranslate 0.0 · NeuroTranslation / Brain2Body</span><span>Experimental data interface · no clinical or biological validation implied</span></footer>
-  <dialog id="import-dialog">
-    <form id="import-form"><div class="dialog-heading"><div><p class="eyebrow">LOCAL FILE IMPORT</p><h2>Add a recording</h2></div><button type="button" id="import-close" class="closebutton" aria-label="Close import">×</button></div>
+  <dialog id="import-dialog" aria-labelledby="import-dialog-title">
+    <form id="import-form"><div class="dialog-heading"><div><p class="eyebrow">LOCAL FILE IMPORT</p><h2 id="import-dialog-title">Add a recording</h2></div><button type="button" id="import-close" class="closebutton" aria-label="Close import">×</button></div>
       <p class="quiet">JSON carries its metadata. For CSV, fill in the fields below. Leave unknown identity fields empty; those files cannot be synchronized across datasets.</p>
       <label class="filedrop">Choose JSON or CSV<input id="file" type="file" accept=".json,.csv,application/json,text/csv" required></label>
       <div id="csv-fields" class="form-grid" hidden>
