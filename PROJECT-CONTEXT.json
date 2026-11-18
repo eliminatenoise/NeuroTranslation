@@ -123,7 +123,26 @@
         "bytes": 43124,
         "sha256": "fb84b3cb0d767abbba3aa3700bfa684c3e50a34742379b1ce598d4112c577ae7"
       },
-      "comparison_scope": "Six training participants with 1,879 eligible recorded trials; three different development participants supplied 960 complete trials. 250 ms forecast horizon on the archive clock. The reserved test recordings remain unopened."
+      "comparison_scope": "Six training participants with 1,879 eligible recorded trials; three different development participants supplied 960 complete trials. 250 ms forecast horizon on the archive clock. The reserved test recordings remain unopened.",
+      "recorded_trial_replay": {
+        "browser": "docs/wrist-replay/index.html",
+        "offline_browser": {
+          "path": "benchmarks/wrist-pointing-temporal/WristMotion-Recorded-Replay.zip",
+          "bytes": 240571,
+          "sha256": "f9cae2b47218f1798fd2d15878c3034a8842a29df14535d08119b39d347f299f"
+        },
+        "convert_public_recording": {
+          "path": "benchmarks/wrist-pointing-temporal/WristMotion-Recorded-Trial-Converter.zip",
+          "bytes": 61377,
+          "sha256": "bf8b00a520abf9df3bf7dc23dc30cec1a9e382ad1b7954566e154630606cc8e6"
+        },
+        "source_only_runtime_build": "benchmarks/wrist-pointing-temporal/browser-source/build_runtime.py",
+        "verification_scope": "Fingerprints cover all six input windows, measured two-axis targets, archive and clock metadata for all 960 original development trials. Six trained temporal checkpoints execute in the browser. Cohort errors and individual recorded trials have separate views. The 250 ms lead refers to stored rows; device delays are unverified.",
+        "dataset_doi": "10.6084/m9.figshare.29666735.v3",
+        "data_license": "CC BY 4.0",
+        "public_contents": "Public artifact contains aggregate scores, fitted models, code and checksums; the reader supplies a trial locally.",
+        "limits": "Verified on Linux Chromium with hosted, offline and emulated narrow-screen cases. No TEST records included or examined."
+      }
     }
   }
 }

@@ -29,3 +29,27 @@ The default view prints the measured development summary offline. Adding `--synt
 ## Data credit
 
 Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz deposited *EEG-EMG-WristMotion Dataset*, version 3, under CC BY 4.0. NeuroTranslation used selected pointing trials, decoded the encoder angles with extension and radial deviation positive, and binned the earlier recordings to fit the forecasts. The project authored the analysis code, experimental checkpoint and figure. [Version 3 deposit](https://doi.org/10.6084/m9.figshare.29666735.v3) · [Primary study](https://doi.org/10.1038/s41597-026-07287-z) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+## Replay a recorded trial
+
+[Open wrist replay](https://eliminatenoise.github.io/NeuroTranslation/wrist-replay/) or [download the browser and its three desktop launchers](WristMotion-Recorded-Replay.zip) for offline use. The initial view shows the development errors at each of the six target times. Changing the model fit lets you compare each training seed with the mean of the three forecasts. The mean is taken before the error is calculated.
+
+To see where the wrist went on one trial, [download the source converter](WristMotion-Recorded-Trial-Converter.zip), extract it and follow its README to prepare a JSON file from the original development recordings. The converter checks the source before it writes the six input windows and measured angles. On the replay page, select the file under **Open a recorded trial**. The browser checks the whole trial against the 960 fingerprints derived from the development source, then runs the six trained models on the earlier inputs. The measured target angles are held apart for comparison. Each point shows a sampled target on the stored clock. The data stay in the browser tab and **Clear recording** restores the study view.
+
+For a first run, save [the example development archive from Figshare v3](https://ndownloader.figshare.com/files/62570998) as `recording.zip`. Keep it zipped. From the extracted converter directory, use Python 3.11 or newer with NumPy 2 installed:
+
+```sh
+python convert.py make-archive --archive "/path/to/recording.zip" --block 1 --trial 1 --output local-trial.json
+```
+
+Open `local-trial.json` in the browser. The original download belongs to the [EEG-EMG-WristMotion v3 deposit](https://doi.org/10.6084/m9.figshare.29666735.v3). The converter also runs offline after the download.
+
+### Rebuild the browser model
+
+The [browser source](browser-source/) converts the six released checkpoints and training normalization values into a script that runs without a server. Extract the converter ZIP beside the temporal study ZIP. With Python 3.11 or newer and NumPy 2, run this command from the study directory:
+
+```sh
+python browser-source/build_runtime.py --public-release wrist-temporal-forecast-r1-preview.zip --catalogue wrist-recorded-trial-converter-v1/wrist-recorded-development-sha256.txt --catalogue-sha256 2f6422705881398013b3245fb0d5fb4b0c5bb0528160c2325be8bdbc0286ff30
+```
+
+The script prints each output hash. The released `wrist-recorded.js` has SHA-256 `8d5d08586ee2979138c5b86ad504725bf73422baf3228fc26631958bb8c46aff`.

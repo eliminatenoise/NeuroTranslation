@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; form-action 'none'; object-src 'none'; base-uri 'none'">
+  <title>Replay a wrist movement · NeuroTranslation</title>
+  <link rel="stylesheet" href="replay.css">
+  <script src="study.js" defer></script>
+  <script src="wrist-recorded.js" defer></script>
+  <script src="replay.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <nav aria-label="Breadcrumb"><a href="https://eliminatenoise.github.io/NeuroTranslation/START.html">NeuroTranslation</a><span aria-hidden="true"> / </span> Wrist studies</nav>
+      <h1>Replay a wrist movement</h1>
+      <p>A person sees a target and turns their wrist. Given half a second of movement, where will their wrist be a quarter of a second later? Compare the forecast from wrist motion alone with one that also uses electrical activity measured at eight scalp electrodes (EEG).</p>
+      <a href="#load-title">Open a trial from the study</a>
+    </header>
+
+    <section class="figure" aria-labelledby="chart-title">
+      <div class="section-heading">
+        <h2 id="chart-title" tabindex="-1">Forecast error during the turn</h2>
+        <p id="figure-note">Three development participants made 960 pointing movements. Each person contributes equally to the plotted root mean square error. Smaller values mean a closer forecast.</p>
+      </div>
+      <div class="controls" id="figure-controls" hidden>
+        <label>View<select id="view"><option value="study">Development results</option><option value="trial" disabled>Loaded recording</option></select></label>
+        <label>Wrist axis<select id="axis"><option value="extension">Flexion and extension</option><option value="radial_deviation">Radial and ulnar deviation</option></select></label>
+        <label>Model fit<select id="seed"><option value="mean">Three-model mean</option><option value="17">Training seed 17</option><option value="29">Training seed 29</option><option value="43">Training seed 43</option></select></label>
+      </div>
+      <div id="chart" hidden>
+        <ul class="legend" aria-label="Plot legend">
+          <li><span class="mark circle"></span>Motion only</li>
+          <li><span class="mark square"></span>Motion + EEG</li>
+          <li><span class="mark diamond"></span><span id="reference-label">Last angle held</span></li>
+        </ul>
+        <canvas id="plot" role="img" aria-label="Six time points, with exact values in the table below."></canvas>
+      </div>
+      <details id="data-table">
+        <summary>Exact values for this view</summary>
+        <table>
+          <caption id="table-caption">Development error for flexion and extension, in degrees. Predictions are averaged across three fitted models before scoring.</caption>
+          <thead><tr><th scope="col">After cue</th><th scope="col">Motion only</th><th scope="col">Motion + EEG</th><th scope="col" id="reference-head">Last angle held</th></tr></thead>
+          <tbody id="values">
+<tr><th scope="row">0.75 s</th><td>9.971°</td><td>11.423°</td><td>18.424°</td></tr>
+<tr><th scope="row">1.00 s</th><td>5.355°</td><td>5.877°</td><td>14.244°</td></tr>
+<tr><th scope="row">1.25 s</th><td>3.616°</td><td>3.938°</td><td>7.129°</td></tr>
+<tr><th scope="row">1.50 s</th><td>2.585°</td><td>2.607°</td><td>3.665°</td></tr>
+<tr><th scope="row">1.75 s</th><td>2.574°</td><td>2.529°</td><td>2.699°</td></tr>
+<tr><th scope="row">2.00 s</th><td>1.197°</td><td>1.163°</td><td>1.316°</td></tr>
+</tbody>
+        </table>
+      </details>
+      <p id="axis-note">Positive angles indicate extension on the first axis and movement towards the thumb on the second. All forecasts end 250 ms after the last input on the stored recording clock. Physical device delays were not measured.</p>
+    </section>
+
+    <section class="load" aria-labelledby="load-title">
+      <div>
+        <h2 id="load-title">Open a recorded trial</h2>
+        <p>Use the converter to prepare one of the study’s 960 development trials. Open its JSON file here to compare six measured angles on each axis with forecasts from the released models. The file stays in this tab.</p>
+        <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-temporal#replay-a-recorded-trial">Get the trial converter and instructions</a>
+      </div>
+      <div class="file-controls">
+        <label for="packet">Wrist trial JSON</label>
+        <input id="packet" type="file" accept=".json,application/json" disabled aria-describedby="file-status">
+        <p id="file-status" role="status">Loading the local replay tools…</p>
+        <div class="loaded-actions" id="loaded-actions" hidden><a href="#chart-title">View this recording</a><button id="clear" type="button">Clear recording</button></div>
+        <noscript>Enable JavaScript for recorded-trial replay. The study’s initial values are in the table above.</noscript>
+      </div>
+    </section>
+    <footer>
+      <p>Six people supplied the training movements. The three people in the development comparison were new to the models. These results describe the recorded pointing task.</p>
+      <p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-temporal">Temporal forecasting study</a> · <a href="https://doi.org/10.6084/m9.figshare.29666735.v3">EEG-EMG-WristMotion v3, Perez Blanco and Anteliz Ortiz</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+    </footer>
+  </main>
+</body>
+</html>

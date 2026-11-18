@@ -12,6 +12,8 @@ The companion also inspects your own JSON or CSV locally. It can align streams w
 
 How far will the wrist turn in the next quarter second? In a separate pointing experiment, six people supplied the training recordings and three other people supplied 960 development trials. A temporal convolutional model using recent wrist angles and cue timing had a two-axis error of **4.053°**. Repeating the last measured angle gave **7.925°**. Adding eight scalp EEG channels to the temporal model raised error to **4.523°**. These are root mean squared errors on a 250 ms horizon in the stored recordings. [Model, results and runnable preview](benchmarks/wrist-pointing-temporal/)
 
+You can now replay any of the 960 development trials with the same six fitted temporal models. Compare the measured and forecast wrist angles at six times after the cue, or explore the published errors by axis without a file. [Open the recorded wrist replay](https://eliminatenoise.github.io/NeuroTranslation/wrist-replay/) · [Prepare a trial from the original deposit](benchmarks/wrist-pointing-temporal/#replay-a-recorded-trial)
+
 Surface muscle signals gave a different result in a linear model on the same trials. Adding four forearm EMG pairs to wrist history reduced error from **6.530° to 6.174°**. Adding EEG after EMG gave **6.127°** across both axes, with a small increase in error on the radial–ulnar axis. Both studies preserve a separate test cohort. [Run the fitted wrist models in your browser](https://eliminatenoise.github.io/NeuroTranslation/wrist-pointing/) · [Muscle comparison and controls](benchmarks/wrist-pointing-muscle/)
 
 ### Palm and elbow measurements

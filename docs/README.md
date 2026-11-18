@@ -10,6 +10,8 @@ Matching labels and clock names describe how the files relate. Establishing that
 
 The personal calibration comparison gives the errors on the second of two archived recordings after the first was used to adjust the model. Choose a participant to inspect their trial counts and compare hand history with and without EEG. [Explore the calibration results](https://eliminatenoise.github.io/NeuroTranslation/index.html#personal-calibration)
 
+[Replay a wrist movement](wrist-replay/). Choose a wrist axis to compare measured study errors at six times after a target appeared. Open a locally converted development trial to see what each of the six fitted temporal models predicted.
+
 Two downloadable experiments work with a different task. A wrist exoskeleton recorded two angles while participants moved a cursor. One study tests a temporal model with and without scalp EEG. The other asks what surface EMG adds to a linear forecast of the same movement. [Wrist forecasting model](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-temporal) · [Surface EMG study](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-muscle)
 
 Filtered or transformed recordings can declare `derived` as their origin. An input file can identify the original stream in its provenance. The metadata report flags a missing source declaration.

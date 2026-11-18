@@ -18,18 +18,18 @@
     },
     {
       "path": "LAUNCHERS.md",
-      "bytes": 2412,
-      "sha256": "105afbafa5afe7a513ac68fc7c6ec34079bcf712d1f2ee8c702b2c35f05b5994"
+      "bytes": 2908,
+      "sha256": "175fac15a5d015fcbc090232bd8227ab9e610046b1126a2fd0a23ef034a893c2"
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "bytes": 7948,
-      "sha256": "cf2c65bdb716b3c558adcaff4a9a40744ea09765e91394ad3e2d1a7d9a05d8cf"
+      "bytes": 9391,
+      "sha256": "d99b5d439c9f4241d1c113050c1d35e851939dbc8c5d159a4a076b99103b8281"
     },
     {
       "path": "README.md",
-      "bytes": 11570,
-      "sha256": "1177de36de60f017b82c6a35221e6125ee48280a74c314738772e5cea80a1f71"
+      "bytes": 12003,
+      "sha256": "0320534b98729ee55dfc4eecdcdd382afd2b8c9d10c2f18a1b193630c880af69"
     },
     {
       "path": "benchmarks/scalp-eeg-hand/.gitignore",
@@ -388,13 +388,33 @@
     },
     {
       "path": "benchmarks/wrist-pointing-temporal/README.md",
-      "bytes": 3728,
-      "sha256": "2037a7f6093b789579c098878ee1c7df1f69d9928ddc8bccd5733304027ee314"
+      "bytes": 6236,
+      "sha256": "df3432edf08bf086e7a38916ec0b32f23573d59f0e9f5bce7f4350ee81a1f94a"
     },
     {
       "path": "benchmarks/wrist-pointing-temporal/SOURCE.json",
       "bytes": 1757,
       "sha256": "d8c1dadfcc86f41d2a74560507bfbc6a61bf62df7cfa4724641ab688eaa28c73"
+    },
+    {
+      "path": "benchmarks/wrist-pointing-temporal/WristMotion-Recorded-Replay.zip",
+      "bytes": 240571,
+      "sha256": "f9cae2b47218f1798fd2d15878c3034a8842a29df14535d08119b39d347f299f"
+    },
+    {
+      "path": "benchmarks/wrist-pointing-temporal/WristMotion-Recorded-Trial-Converter.zip",
+      "bytes": 61377,
+      "sha256": "bf8b00a520abf9df3bf7dc23dc30cec1a9e382ad1b7954566e154630606cc8e6"
+    },
+    {
+      "path": "benchmarks/wrist-pointing-temporal/browser-source/build_runtime.py",
+      "bytes": 6497,
+      "sha256": "b306f2275cd6c5b1c57f25d558b5111d94219a84235430efb7b08b78d3d2fcf7"
+    },
+    {
+      "path": "benchmarks/wrist-pointing-temporal/browser-source/temporal-inference.mjs",
+      "bytes": 12955,
+      "sha256": "2016012d4e3fb3b767b6c9b3d30d99ff4e6608e3e90f8f7585e9bf6ddd6eb5ee"
     },
     {
       "path": "benchmarks/wrist-pointing-temporal/plot_forecast.py",
@@ -423,8 +443,8 @@
     },
     {
       "path": "docs/README.md",
-      "bytes": 3475,
-      "sha256": "a5dc991fe80af0c928e9cc4ff48d2479031570bf0de3382108cc6b6f0c115168"
+      "bytes": 3714,
+      "sha256": "588b44b109647cfb5fb43256152c7b0de60f16732e731b3c57889fc807649774"
     },
     {
       "path": "docs/RIGHTS.md",
@@ -433,8 +453,8 @@
     },
     {
       "path": "docs/START.html",
-      "bytes": 4902,
-      "sha256": "8ae30e03e02bb75fb0b1167955edd9c0af60b7dc8d6d51833d328758206f51f1"
+      "bytes": 5012,
+      "sha256": "eaf46c5b114f8bc52e80a9a46aa953186b0ea50ba4bca00846ffd314908b5df7"
     },
     {
       "path": "docs/app.c9f73676003f8d0894305c2f9462804282365c565f98fd4ba96a0738251517e6.mjs",
@@ -548,8 +568,8 @@
     },
     {
       "path": "docs/preview.html",
-      "bytes": 3262,
-      "sha256": "0f595686b037dc929269d62ab056badbde7e8567999cea5afdb2eec0adf7d99e"
+      "bytes": 3501,
+      "sha256": "6b851efd50304e82b60a94fd29b5b7da2df5c9f56edeb0f45d2e48432e327c40"
     },
     {
       "path": "docs/r2-calibration-state.c9f73676003f8d0894305c2f9462804282365c565f98fd4ba96a0738251517e6.json",
@@ -625,6 +645,31 @@
       "path": "docs/wrist-pointing/wrist.css",
       "bytes": 3772,
       "sha256": "1182d99f78489fba4263e60f2f5555b370fc7b14a44955fc39add09cb9f99325"
+    },
+    {
+      "path": "docs/wrist-replay/index.html",
+      "bytes": 5708,
+      "sha256": "9814476c20b3d741400201de80e5e9952e6b695b66034be15ca214fdf176916d"
+    },
+    {
+      "path": "docs/wrist-replay/replay.css",
+      "bytes": 3950,
+      "sha256": "f433b7eab70aee60ad6e5ccdfd82439e1e13e750a260087a9a3335dec0e8070b"
+    },
+    {
+      "path": "docs/wrist-replay/replay.js",
+      "bytes": 9218,
+      "sha256": "187720c31d48979144415ae5cd1dc9c7a3625d6bb6458c225e279288dff2ff99"
+    },
+    {
+      "path": "docs/wrist-replay/study.js",
+      "bytes": 3879,
+      "sha256": "385762aaf013817de17d6e8e90428e802fd454ac341d11d6bcb5a4c4bd15f04f"
+    },
+    {
+      "path": "docs/wrist-replay/wrist-recorded.js",
+      "bytes": 327074,
+      "sha256": "8d5d08586ee2979138c5b86ad504725bf73422baf3228fc26631958bb8c46aff"
     },
     {
       "path": "interfaces/experimental/portable/NOTICE.md",
@@ -1013,7 +1058,7 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "91edd1e8e57f08ac94b89cf83b7b0f8df1d76f95",
+  "previous_public_commit": "a95ae62ddcd51e87a3e97d4348a732ecb11dd052",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
@@ -1021,28 +1066,21 @@
       "LAUNCHERS.md",
       "PROJECT-CONTEXT.json",
       "README.md",
-      "benchmarks/wrist-pointing-muscle/README.md",
-      "benchmarks/wrist-pointing-muscle/RESULTS.json",
-      "benchmarks/wrist-pointing-muscle/SOURCE.json",
-      "benchmarks/wrist-pointing-muscle/wrist-pointing-muscle-r1-preview.zip",
-      "benchmarks/wrist-pointing-temporal/DEVELOPMENT-AGGREGATE.json",
       "benchmarks/wrist-pointing-temporal/README.md",
-      "benchmarks/wrist-pointing-temporal/SOURCE.json",
-      "benchmarks/wrist-pointing-temporal/plot_forecast.py",
-      "benchmarks/wrist-pointing-temporal/wrist-forecast-public.png",
-      "benchmarks/wrist-pointing-temporal/wrist-temporal-forecast-r1-preview.zip",
+      "benchmarks/wrist-pointing-temporal/WristMotion-Recorded-Replay.zip",
+      "benchmarks/wrist-pointing-temporal/WristMotion-Recorded-Trial-Converter.zip",
+      "benchmarks/wrist-pointing-temporal/browser-source/build_runtime.py",
+      "benchmarks/wrist-pointing-temporal/browser-source/temporal-inference.mjs",
       "docs/README.md",
       "docs/START.html",
       "docs/preview.html",
-      "docs/wrist-pointing/MODEL-STATE.json",
-      "docs/wrist-pointing/SYNTHETIC-CASES.json",
-      "docs/wrist-pointing/app.js",
-      "docs/wrist-pointing/index.html",
-      "docs/wrist-pointing/model.js",
-      "docs/wrist-pointing/offline-assets.js",
-      "docs/wrist-pointing/wrist.css"
+      "docs/wrist-replay/index.html",
+      "docs/wrist-replay/replay.css",
+      "docs/wrist-replay/replay.js",
+      "docs/wrist-replay/study.js",
+      "docs/wrist-replay/wrist-recorded.js"
     ],
-    "preserved_rows": 177
+    "preserved_rows": 193
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",
