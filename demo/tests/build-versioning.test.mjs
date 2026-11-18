@@ -201,6 +201,26 @@ test('policy leaf change refreshes every URL, loads the new graph and replaces o
   await checkFixtureReferences(paths, second);
 });
 
+test('only the Pages build uses sibling preview links, with a separate build identity', {timeout: 10000}, async () => {
+  const paths = await fixture('pages-navigation');
+  const unrelatedAttribute = `title='data-pages-href="./unrelated/index.html"'`;
+  const publishedHref = 'https://example.test/wrist-replay/';
+  const siblingHref = './wrist-replay/index.html';
+  await writeFile(join(paths.sourceDir, 'index.html'), `${fixtures['index.html']}\n`
+    + `<a ${unrelatedAttribute} href="${publishedHref}" data-pages-href="${siblingHref}">Replay</a>`);
+
+  const standalone = await build(paths);
+  const standaloneHtml = await readFile(join(paths.outputDir, 'index.html'), 'utf8');
+  assert.ok(standaloneHtml.includes(`${unrelatedAttribute} href="${publishedHref}"`));
+
+  const pages = await build({...paths, pages: true});
+  const pagesHtml = await readFile(join(paths.outputDir, 'index.html'), 'utf8');
+  assert.ok(pagesHtml.includes(`${unrelatedAttribute} href="${siblingHref}"`));
+  assert.notEqual(pages.buildId, standalone.buildId);
+  assert.equal((await build({...paths, pages: true})).buildId, pages.buildId);
+  await checkFixtureReferences(paths, pages);
+});
+
 test('each selected input, including stable HTML, changes the whole-source identity', {timeout: 10000}, async () => {
   const paths = await fixture('each-input');
   const baseline = await build(paths);

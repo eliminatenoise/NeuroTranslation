@@ -1,0 +1,34 @@
+{
+  "dataset": "EEG-EMG-WristMotion Dataset, version 3",
+  "deposit_doi": "10.6084/m9.figshare.29666735.v3",
+  "descriptor_doi": "10.1038/s41597-026-07287-z",
+  "creators": [
+    "Jorge German Perez Blanco",
+    "Javier Mauricio Anteliz Ortiz"
+  ],
+  "data_license": "CC BY 4.0",
+  "data_license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "frozen_parent_motion_study": "../wrist-pointing-temporal/",
+  "forearm_signal_study": "../wrist-pointing-muscle/",
+  "design_sha256": "5c1e109fac72426b5a5eef052c6b08ff6429b0def78ec8f1f840aa19bd1e0b96",
+  "transfer_train_seal_sha256": "e6d092876fac273bef2edbe1b8214baaaac66669a4e3331de0bd373d790c9c5a",
+  "slices": "Six training participants, three previously evaluated development participants, six reserved test participants not examined.",
+  "figure_source": "DEVELOPMENT-AGGREGATE.json",
+  "figure_command": "python plot_wrist_transfer.py DEVELOPMENT-AGGREGATE.json wrist-forearm-correction.png",
+  "aggregate": {
+    "path": "benchmarks/wrist-forearm-transfer/DEVELOPMENT-AGGREGATE.json",
+    "bytes": 8345,
+    "sha256": "8dd5aa9c75e1e19f9ccd2238ea194b42e49ef37502a4f11d455277828eadea72"
+  },
+  "synthetic_model_runner": {
+    "path": "benchmarks/wrist-forearm-transfer/WristMotion-Forearm-Correction.zip",
+    "bytes": 128193,
+    "sha256": "29c2ec08aac01d07f58d7a1cecd37a0868004e4d48b89d173e87e757b5cb3234"
+  },
+  "recorded_trial_runner": {
+    "path": "benchmarks/wrist-forearm-transfer/WristMotion-Forearm-Recorded-Trial.zip",
+    "bytes": 195275,
+    "sha256": "f752a2bb44dad136281d19cc0bcef37e9dd8422bb568b722e40e86823d1092a6"
+  },
+  "modifications": "NeuroTranslation computed four bipolar EMG amplitudes and motion features, fitted two output corrections to frozen motion encoders, evaluated development errors and authored the figure and runners."
+}

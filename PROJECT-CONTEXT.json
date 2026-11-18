@@ -41,17 +41,22 @@
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
   "experimental_previews": {
     "data_companion": {
-      "version": "2026-11-19 individual R2 trial replay",
+      "version": "2026-11-19 palm and wrist companion",
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
-      "buildId": "c9f73676003f8d0894305c2f9462804282365c565f98fd4ba96a0738251517e6",
+      "buildId": "7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb",
       "meaning": "Import and inspect recordings locally. Replay the R1 cohort fit, or compare the fixed and personally calibrated models on an imported R2 trial. Full R2 trials are checked against their archived sample clock and four selected input streams. Aggregate evidence is shown separately.",
       "hosting": "Prepared static main/docs payload; actual Pages deployment/readback is verified separately",
       "study": "benchmarks/scalp-eeg-palm-history",
       "model_sha256": "c9c9e6a5c357274103e339f69517ae6a11f1d90c39f1d172585ad81a38ee8337",
       "personal_calibration_study": "benchmarks/scalp-eeg-personal-calibration",
       "personal_calibration_entry": "docs/index.html#personal-calibration",
-      "personal_calibration_trial_replay": "docs/index.html#palm-replay"
+      "personal_calibration_trial_replay": "docs/index.html#palm-replay",
+      "wrist_navigation": {
+        "recorded_trial": "docs/wrist-replay/index.html",
+        "invented_forearm_inputs": "docs/wrist-pointing/index.html"
+      },
+      "previous_cached_build": "c9f73676003f8d0894305c2f9462804282365c565f98fd4ba96a0738251517e6"
     },
     "papers": {
       "latest_rendered": "papers/experimental/scientific-layout-2026-11-15",
@@ -143,6 +148,26 @@
         "public_contents": "Public artifact contains aggregate scores, fitted models, code and checksums; the reader supplies a trial locally.",
         "limits": "Verified on Linux Chromium with hosted, offline and emulated narrow-screen cases. No TEST records included or examined."
       }
+    },
+    "wrist_forearm_transfer": {
+      "study": "benchmarks/wrist-forearm-transfer",
+      "model_runner": {
+        "path": "benchmarks/wrist-forearm-transfer/WristMotion-Forearm-Correction.zip",
+        "bytes": 128193,
+        "sha256": "29c2ec08aac01d07f58d7a1cecd37a0868004e4d48b89d173e87e757b5cb3234"
+      },
+      "real_trial_runner": {
+        "path": "benchmarks/wrist-forearm-transfer/WristMotion-Forearm-Recorded-Trial.zip",
+        "bytes": 195275,
+        "sha256": "f752a2bb44dad136281d19cc0bcef37e9dd8422bb568b722e40e86823d1092a6"
+      },
+      "matched_rmse_deg": {
+        "frozen_motion": 4.0533382497,
+        "motion_correction": 3.9568641354,
+        "same_trial_emg": 3.8530124811,
+        "next_trial_emg": 4.1402901072
+      },
+      "scope": "Six training participants, three previously evaluated development participants, six reserved test participants not examined."
     }
   }
 }

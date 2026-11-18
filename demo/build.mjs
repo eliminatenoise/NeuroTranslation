@@ -58,8 +58,8 @@ async function readSources(sourceDir) {
   return files;
 }
 
-function identity(files) {
-  return sha256(JSON.stringify({selection: SELECTION, files: files.map(file => [file.source, file.bytes.length, file.sourceSha256])}));
+function identity(files, selection) {
+  return sha256(JSON.stringify({selection, files: files.map(file => [file.source, file.bytes.length, file.sourceSha256])}));
 }
 
 function rewriteURL(value, mapping, allowBare) {
@@ -142,14 +142,20 @@ function rewriteModule(text, mapping) {
   return text;
 }
 
-function rewriteHTML(text, mapping) {
+function rewriteHTML(text, mapping, pages) {
   return text.replace(/<!--[\s\S]*?-->|<script\b(?:[^"'<>]|"[^"]*"|'[^']*')*>[\s\S]*?<\/script\s*>|<(?:[^"'<>]|"[^"]*"|'[^']*')*>/gi, tag => {
     if (tag.startsWith('<!--')) return tag;
     const end = /^<(?:[^"'<>]|"[^"]*"|'[^']*')*>/.exec(tag)?.[0].length || tag.length;
-    const opening = tag.slice(0, end).replace(/(\s+)([^\s"'<>/=]+)(\s*=\s*)(?:(["'])([\s\S]*?)\4|([^\s"'=<>`]+))/g, (whole, space, name, equals, quote, quoted, bare) => {
+    const original = tag.slice(0, end);
+    const attributes = /(\s+)([^\s"'<>/=]+)(\s*=\s*)(?:(["'])([\s\S]*?)\4|([^\s"'=<>`]+))/g;
+    const pagesLink = pages && /^<a\s/i.test(original)
+      ? [...original.matchAll(attributes)].find(match => /^data-pages-href$/i.test(match[2]))
+      : undefined;
+    const pagesHref = pagesLink?.[5] ?? pagesLink?.[6];
+    const opening = original.replace(attributes, (whole, space, name, equals, quote, quoted, bare) => {
       if (!/^(src|href)$/i.test(name)) return whole;
       const value = quoted ?? bare;
-      const next = rewriteURL(value, mapping, true);
+      const next = name.toLowerCase() === 'href' && pagesHref ? pagesHref : rewriteURL(value, mapping, true);
       return next === value ? whole : `${space}${name}${equals}${quote || ''}${next}${quote || ''}`;
     });
     const body = tag.slice(end);
@@ -161,33 +167,34 @@ function rewriteHTML(text, mapping) {
   });
 }
 
-/** Replace one explicitly owned output directory; never scan/copy its siblings. */
-export async function build({sourceDir = 'src', outputDir = 'dist'} = {}) {
+/** Replace one owned output directory. Enable pages links when publishing alongside the wrist previews. */
+export async function build({sourceDir = 'src', outputDir = 'dist', pages = false} = {}) {
   sourceDir = resolve(sourceDir); outputDir = resolve(outputDir);
   if (containsPath(sourceDir, outputDir) || containsPath(outputDir, sourceDir)) throw new Error('Source and output directories must not overlap.');
   await plainDirectory(sourceDir);
   await plainDirectory(dirname(outputDir));
   await outputExists(outputDir);
   const files = await readSources(sourceDir);
-  const buildId = identity(files);
+  const selection = pages ? `${SELECTION}-pages` : SELECTION;
+  const buildId = identity(files, selection);
   const mapping = new Map(files.map(({source}) => [source, extname(source) === '.html' ? source : `${basename(source, extname(source))}.${buildId}${extname(source)}`]));
   const outputs = files.map(file => {
     let bytes = file.bytes;
     if (/\.(html|mjs)$/.test(file.source)) {
       const text = bytes.toString('utf8');
       if (!Buffer.from(text).equals(bytes)) throw new Error(`Selected text must be valid UTF-8: ${file.source}`);
-      bytes = Buffer.from(extname(file.source) === '.html' ? rewriteHTML(text, mapping) : rewriteModule(text, mapping));
+      bytes = Buffer.from(extname(file.source) === '.html' ? rewriteHTML(text, mapping, pages) : rewriteModule(text, mapping));
     }
     return {...file, output: mapping.get(file.source), outputBytes: bytes};
   });
-  const manifest = {schemaVersion: 1, selection: SELECTION, hashAlgorithm: 'sha256', buildId, files: outputs.map(file => ({source: file.source, sourceBytes: file.bytes.length, sourceSha256: file.sourceSha256, output: file.output, outputBytes: file.outputBytes.length, outputSha256: sha256(file.outputBytes)}))};
+  const manifest = {schemaVersion: 1, selection, hashAlgorithm: 'sha256', buildId, files: outputs.map(file => ({source: file.source, sourceBytes: file.bytes.length, sourceSha256: file.sourceSha256, output: file.output, outputBytes: file.outputBytes.length, outputSha256: sha256(file.outputBytes)}))};
   let stage = await mkdtemp(join(dirname(outputDir), `.${basename(outputDir)}-build-`));
   let backup;
   let installed = false;
   try {
     for (const file of outputs) await writeFile(join(stage, file.output), file.outputBytes, {flag: 'wx'});
     await writeFile(join(stage, 'build-manifest.json'), `${JSON.stringify(manifest)}\n`, {flag: 'wx'});
-    if (identity(await readSources(sourceDir)) !== buildId) throw new Error('Selected source changed during build; output was not replaced.');
+    if (identity(await readSources(sourceDir), selection) !== buildId) throw new Error('Selected source changed during build; output was not replaced.');
     if (await outputExists(outputDir)) {
       backup = `${stage}-previous`;
       await rename(outputDir, backup);
@@ -209,6 +216,6 @@ export async function build({sourceDir = 'src', outputDir = 'dist'} = {}) {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const manifest = await build();
+  const manifest = await build({pages: process.argv.includes('--pages', 2)});
   console.log(`Built browser-local data companion ${manifest.buildId} (${manifest.files.length} selected files).`);
 }

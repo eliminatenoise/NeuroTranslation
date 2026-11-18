@@ -27,3 +27,5 @@ Choose an axis to see where error changed, or open **All scores** to see the bas
 ## Data credit
 
 Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz deposited *EEG-EMG-WristMotion Dataset*, version 3, under CC BY 4.0. NeuroTranslation selected eligible pointing trials and derived features from the earlier encoder angles, scalp EEG and software differences between forearm electrodes. The project authored the analysis code, fitted ridge heads and interactive comparison. [Version 3 deposit](https://doi.org/10.6084/m9.figshare.29666735.v3) · [Primary study](https://doi.org/10.1038/s41597-026-07287-z) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+A later comparison asked whether surface EMG could still help after a temporal model had learned the wrist’s recent motion. Adding EMG to its motion correction reduced development error from 3.957° to 3.853°. The same three development participants supplied these trials. [Forearm correction study and recorded-trial runner](../wrist-forearm-transfer/)

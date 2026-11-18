@@ -121,6 +121,8 @@
   outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
+.wrist-links { margin-top: 6px; gap: 0 16px; font-size: 14px; }
+.wrist-links a { padding-inline: 0; }
 @media (max-width: 840px) {
   .local-status { display: none; }
 }

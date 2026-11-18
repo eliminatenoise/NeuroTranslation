@@ -1,0 +1,291 @@
+{
+  "study": "WristMotion v3 forearm EMG residual transfer",
+  "source": "10.6084/m9.figshare.29666735.v3",
+  "source_license": "CC BY 4.0",
+  "glossary_revision": 36,
+  "glossary_sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406",
+  "claim_scope": "Exploratory reuse of three previously scored DEV participants distinct from training. No sealed test estimates.",
+  "design_sha256": "5c1e109fac72426b5a5eef052c6b08ff6429b0def78ec8f1f840aa19bd1e0b96",
+  "transfer_train_seal_sha256": "e6d092876fac273bef2edbe1b8214baaaac66669a4e3331de0bd373d790c9c5a",
+  "nominal_archive_forecast_horizon_ms": 250,
+  "train_support": {
+    "role": "train",
+    "participants": 6,
+    "planned_task_blocks": 48,
+    "planned_trials": 1920,
+    "recorded_trials": 1880,
+    "parent_eligible_trials": 1879,
+    "emg_eligible_trials": 1879,
+    "common_trials": 1879,
+    "common_rows": 11274,
+    "source_emg_support": {
+      "participants": 6,
+      "planned_task_blocks": 48,
+      "present_task_blocks": 47,
+      "absent_task_blocks": 1,
+      "planned_trials_from_full_design": 1920,
+      "recorded_trials": 1880,
+      "eligible_trials": 1879,
+      "outside_window": 0,
+      "invalid_encoder": 1,
+      "nonfinite_eeg": 0,
+      "nonfinite_emg": 0,
+      "invalid_on_bounded_joint_support": 1,
+      "emg_unique_feature_ticks": 1683584,
+      "emg_rail_ticks_by_channel": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "development_support": {
+    "role": "development",
+    "participants": 3,
+    "planned_task_blocks": 24,
+    "planned_trials": 960,
+    "recorded_trials": 960,
+    "parent_eligible_trials": 960,
+    "emg_eligible_trials": 960,
+    "common_trials": 960,
+    "common_rows": 5760,
+    "source_emg_support": {
+      "participants": 3,
+      "planned_task_blocks": 24,
+      "present_task_blocks": 24,
+      "absent_task_blocks": 0,
+      "planned_trials_from_full_design": 960,
+      "recorded_trials": 960,
+      "eligible_trials": 960,
+      "outside_window": 0,
+      "invalid_encoder": 0,
+      "nonfinite_eeg": 0,
+      "nonfinite_emg": 0,
+      "invalid_on_bounded_joint_support": 0,
+      "emg_unique_feature_ticks": 860160,
+      "emg_rail_ticks_by_channel": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "frozen_direct_forward_max_deg_difference": 0.0,
+  "frozen_R75_parity": {
+    "checked": true,
+    "new_minus_original_rmse_deg": {
+      "overall": 0.0,
+      "extension": 0.0,
+      "radial_deviation": 0.0
+    },
+    "original_sha256": "00f6a25364c04504a473b105513aae3299c92f6d7633bbcdc0816fb37238fa8f"
+  },
+  "rotation_singleton_blocks": 0,
+  "participant_balanced": {
+    "frozen_motion": {
+      "rmse_deg": 4.053338249664612,
+      "axes": {
+        "extension": {
+          "mse_deg2": 25.985269173609794,
+          "rmse_deg": 5.097574832565952,
+          "mean_prediction_minus_target_deg": -0.08743525201341099
+        },
+        "radial_deviation": {
+          "mse_deg2": 6.873832758778563,
+          "rmse_deg": 2.6217995268095087,
+          "mean_prediction_minus_target_deg": 0.04329797812693481
+        }
+      }
+    },
+    "motion_correction": {
+      "rmse_deg": 3.956864135438357,
+      "axes": {
+        "extension": {
+          "mse_deg2": 24.47596237884679,
+          "rmse_deg": 4.947318706011044,
+          "mean_prediction_minus_target_deg": 0.009084480576389865
+        },
+        "radial_deviation": {
+          "mse_deg2": 6.837585193789883,
+          "rmse_deg": 2.6148776632549913,
+          "mean_prediction_minus_target_deg": -0.015947349051152446
+        }
+      }
+    },
+    "motion_emg_correction": {
+      "rmse_deg": 3.8530124810950075,
+      "axes": {
+        "extension": {
+          "mse_deg2": 23.09778459646715,
+          "rmse_deg": 4.806015459449454,
+          "mean_prediction_minus_target_deg": 0.11534198776218126
+        },
+        "radial_deviation": {
+          "mse_deg2": 6.593625762480659,
+          "rmse_deg": 2.567805631756551,
+          "mean_prediction_minus_target_deg": -0.05319839313801533
+        }
+      }
+    },
+    "rotated_emg_correction": {
+      "rmse_deg": 4.140290107155568,
+      "axes": {
+        "extension": {
+          "mse_deg2": 27.304252051398542,
+          "rmse_deg": 5.225347074730878,
+          "mean_prediction_minus_target_deg": 0.11534198776218096
+        },
+        "radial_deviation": {
+          "mse_deg2": 6.979752291421987,
+          "rmse_deg": 2.6419220827689047,
+          "mean_prediction_minus_target_deg": -0.05319839313801529
+        }
+      }
+    }
+  },
+  "pooled_sensitivity": {
+    "frozen_motion": {
+      "rmse_deg": 4.053338249664607,
+      "axes": {
+        "extension": {
+          "mse_deg2": 25.985269173609712,
+          "rmse_deg": 5.097574832565944,
+          "mean_prediction_minus_target_deg": -0.087435252013411
+        },
+        "radial_deviation": {
+          "mse_deg2": 6.87383275877857,
+          "rmse_deg": 2.62179952680951,
+          "mean_prediction_minus_target_deg": 0.04329797812693456
+        }
+      }
+    },
+    "motion_correction": {
+      "rmse_deg": 3.9568641354383525,
+      "axes": {
+        "extension": {
+          "mse_deg2": 24.47596237884674,
+          "rmse_deg": 4.947318706011039,
+          "mean_prediction_minus_target_deg": 0.009084480576389815
+        },
+        "radial_deviation": {
+          "mse_deg2": 6.837585193789859,
+          "rmse_deg": 2.6148776632549864,
+          "mean_prediction_minus_target_deg": -0.01594734905115242
+        }
+      }
+    },
+    "motion_emg_correction": {
+      "rmse_deg": 3.853012481095011,
+      "axes": {
+        "extension": {
+          "mse_deg2": 23.097784596467218,
+          "rmse_deg": 4.806015459449461,
+          "mean_prediction_minus_target_deg": 0.11534198776218055
+        },
+        "radial_deviation": {
+          "mse_deg2": 6.59362576248065,
+          "rmse_deg": 2.567805631756549,
+          "mean_prediction_minus_target_deg": -0.053198393138015374
+        }
+      }
+    },
+    "rotated_emg_correction": {
+      "rmse_deg": 4.140290107155564,
+      "axes": {
+        "extension": {
+          "mse_deg2": 27.304252051398493,
+          "rmse_deg": 5.225347074730873,
+          "mean_prediction_minus_target_deg": 0.11534198776218108
+        },
+        "radial_deviation": {
+          "mse_deg2": 6.979752291421971,
+          "rmse_deg": 2.6419220827689016,
+          "mean_prediction_minus_target_deg": -0.053198393138015325
+        }
+      }
+    }
+  },
+  "signed_contrasts": {
+    "emg_minus_motion_correction": {
+      "rmse_deg": -0.10385165434334942,
+      "axes_rmse_deg": {
+        "extension": -0.14130324656159043,
+        "radial_deviation": -0.0470720314984403
+      }
+    },
+    "motion_correction_minus_frozen": {
+      "rmse_deg": -0.09647411422625485,
+      "axes_rmse_deg": {
+        "extension": -0.1502561265549076,
+        "radial_deviation": -0.0069218635545174045
+      }
+    },
+    "emg_correction_minus_frozen": {
+      "rmse_deg": -0.20032576856960427,
+      "axes_rmse_deg": {
+        "extension": -0.29155937311649804,
+        "radial_deviation": -0.05399389505295771
+      }
+    },
+    "aligned_minus_rotated_emg": {
+      "rmse_deg": -0.28727762606056073,
+      "axes_rmse_deg": {
+        "extension": -0.4193316152814237,
+        "radial_deviation": -0.07411645101235376
+      }
+    },
+    "rotated_emg_minus_motion_correction": {
+      "rmse_deg": 0.1834259717172113,
+      "axes_rmse_deg": {
+        "extension": 0.2780283687198333,
+        "radial_deviation": 0.027044419513913454
+      }
+    }
+  },
+  "primary_contrast_sensitivity": {
+    "column_order": [
+      "two_axis_rmse",
+      "extension",
+      "radial_deviation"
+    ],
+    "ordered_participant_resamples": 27,
+    "descriptive_2_5_to_97_5_percentile_deg": [
+      [
+        -0.14208935684615343,
+        -0.057077068814033335
+      ],
+      [
+        -0.19411700347498698,
+        -0.07509156328041038
+      ],
+      [
+        -0.06118279661675576,
+        -0.031720991092472804
+      ]
+    ],
+    "leave_one_participant_out_min_max_deg": [
+      [
+        -0.12477311888690945,
+        -0.07244389916652416
+      ],
+      [
+        -0.1701741830766217,
+        -0.09714741501696977
+      ],
+      [
+        -0.05457365127007252,
+        -0.03616032863887364
+      ]
+    ]
+  }
+}

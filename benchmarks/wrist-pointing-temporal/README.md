@@ -53,3 +53,5 @@ python browser-source/build_runtime.py --public-release wrist-temporal-forecast-
 ```
 
 The script prints each output hash. The released `wrist-recorded.js` has SHA-256 `8d5d08586ee2979138c5b86ad504725bf73422baf3228fc26631958bb8c46aff`.
+
+A later comparison kept the three motion models fixed and fitted two output corrections. Adding paired forearm EMG reduced development error from 3.957° to 3.853°. [Forearm correction study and recorded-trial runner](../wrist-forearm-transfer/)

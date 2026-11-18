@@ -5,7 +5,7 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.c9f73676003f8d0894305c2f9462804282365c565f98fd4ba96a0738251517e6.css">
+  <link rel="stylesheet" href="style.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.css">
 </head>
 <body>
   <header class="topbar">
@@ -21,7 +21,13 @@
   </header>
   <main>
     <section class="intro">
-      <div><p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p></div>
+      <div>
+        <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p>
+        <nav class="section-links wrist-links" aria-label="Wrist studies">
+          <a href="./wrist-replay/index.html" data-pages-href="./wrist-replay/index.html">Replay a recorded wrist trial</a>
+          <a href="./wrist-pointing/index.html" data-pages-href="./wrist-pointing/index.html">Try a wrist forecast with invented EMG</a>
+        </nav>
+      </div>
       <div class="introactions"><button class="button secondary" id="load-example">Load example</button><button class="button primary" id="import-open">＋ Import recordings</button></div>
     </section>
     <div class="notice" id="example-notice"><span class="notice-icon">i</span><p><strong>Constructed example.</strong> These invented signals test the software. They are not biological recordings or model predictions.</p><button id="clear-all" class="textbutton">Clear example</button></div>
@@ -169,6 +175,6 @@
       <p id="import-error" class="form-error" role="alert"></p><div class="dialog-footer"><span class="quiet">File contents stay in your browser.</span><button class="button primary" type="submit">Import recording</button></div>
     </form>
   </dialog>
-  <script type="module" src="app.c9f73676003f8d0894305c2f9462804282365c565f98fd4ba96a0738251517e6.mjs"></script>
+  <script type="module" src="app.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs"></script>
 </body>
 </html>
