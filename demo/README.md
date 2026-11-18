@@ -10,7 +10,7 @@ Run `npm test` for the constructed-data and build checks, then `npm run build`. 
 
 Download the JSON example from the application for a complete packet. It contains `schemaVersion: 1`, one `dataset` object and a `streams` array. Dataset metadata includes ID, name, organism, subject, recording, task, clock (`timebase`), source URL, licence and partition (`split`). Each stream declares its ID, modality, label, unit, origin, timestamps in seconds and values. Values may be `null` where observations are missing.
 
-For a stream computed from recorded data, such as filtered EMG, use `derived` as its origin. If the source stream is known, include its ID in `policyMetadata.provenance.derivedFrom` so the metadata report can trace it. Use `inferred` for model output and `simulated` for a simulator’s output. The aligned export keeps the stream origin alongside each sample’s resampling status.
+For a stream computed from recorded data, such as filtered EMG, use `derived` as its origin. To link a processed stream to its parent, use the parent’s policy stream ID from the metadata report’s identity map in `policyMetadata.provenance.derivedFrom`. The map lists that ID beside the name supplied in the file. [Metadata format](docs/METADATA.md) Use `inferred` for model output and `simulated` for a simulator’s output. The aligned export keeps the stream origin alongside each sample’s resampling status.
 
 The four modality values are `neural`, `muscle`, `displacement` and `mechanics`. Neural streams can declare `brain`, `spinal`, `peripheral`, `autonomic` or `visceral` as their region. A region label describes the supplied stream; it does not establish coverage elsewhere. EMG belongs to the muscle category.
 
