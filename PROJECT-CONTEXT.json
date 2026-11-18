@@ -41,10 +41,10 @@
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
   "experimental_previews": {
     "data_companion": {
-      "version": "2026-11-19 original forearm archive browser",
+      "version": "2026-11-19 daily-activity wrist browser",
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
-      "buildId": "90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf",
+      "buildId": "8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313",
       "meaning": "Import and inspect recordings locally. Replay the R1 cohort fit, or compare the fixed and personally calibrated models on an imported R2 trial. Full R2 trials are checked against their archived sample clock and four selected input streams. Aggregate evidence is shown separately.",
       "hosting": "Prepared static main/docs payload; actual Pages deployment/readback is verified separately",
       "study": "benchmarks/scalp-eeg-palm-history",
@@ -55,9 +55,10 @@
       "wrist_navigation": {
         "recorded_trial": "docs/wrist-replay/index.html",
         "invented_forearm_inputs": "docs/wrist-pointing/index.html",
-        "original_archive_and_emg": "docs/wrist-forearm/index.html"
+        "original_archive_and_emg": "docs/wrist-forearm/index.html",
+        "daily_activity_wrist_angles": "docs/daily-wrist/index.html"
       },
-      "previous_cached_build": "7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb"
+      "previous_cached_build": "90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf"
     },
     "papers": {
       "latest_rendered": "papers/experimental/scientific-layout-2026-11-15",
@@ -205,7 +206,28 @@
         "task_time": 36.16465828788339,
         "task_time_emg": 34.69984899659588
       },
-      "scope": "Offline healthy-volunteer daily activities. Participant-specific reference posture, retrospectively filtered wrist-angle targets. Observations from the four final test volunteers were not evaluated."
+      "scope": "Offline healthy-volunteer daily activities. Participant-specific reference posture, retrospectively filtered wrist-angle targets. Observations from the four final test volunteers were not evaluated.",
+      "daily_wrist_browser": {
+        "web": "docs/daily-wrist/index.html",
+        "public_url": "https://eliminatenoise.github.io/NeuroTranslation/daily-wrist/",
+        "invented_window": "https://eliminatenoise.github.io/NeuroTranslation/daily-wrist/example-window.json",
+        "offline_browser": {
+          "path": "benchmarks/uji-wrist-emg/UJI-Daily-Wrist-Browser.zip",
+          "bytes": 37933,
+          "sha256": "64259d916fe08b32530c08fc85a576a6831213cd1ed8b72d83b2ca4b06c5ff8b"
+        },
+        "portable_axis_blend": {
+          "path": "benchmarks/uji-wrist-emg/UJI-Wrist-Axis-Blend-Preview.zip",
+          "bytes": 42894,
+          "sha256": "9044a31214ff01e1540d6807eaf3915f44c4514b44e2c8dd9fae88a546def4df"
+        },
+        "axis_blend_aggregate": {
+          "path": "benchmarks/uji-wrist-emg/AXIS-BLEND-RESULTS.json",
+          "bytes": 96254,
+          "sha256": "9c9d992c0f58a7fc0ff9cf0f64ea99d88ca4e8ad12c7535615505b3bc1fc4c1f"
+        },
+        "scope": "Estimates of retrospectively filtered glove angles in offline daily-activity trials. The interface runs two fixed estimators and a weighted combination on invented or compatible local inputs. The weights were selected within training. The four development participants had been studied before, and final test participants remain reserved."
+      }
     }
   }
 }

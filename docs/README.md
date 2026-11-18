@@ -23,3 +23,5 @@ The [build manifest](build-manifest.json) identifies the current browser build. 
 Project-owned code uses CC0. Recordings, references and separately supplied assets retain their own licences. [Code licence](LICENSE) · [Recording and asset rights](RIGHTS.md)
 
 [Forecast a wrist turn with forearm EMG](wrist-forearm/). Open an original development ZIP, select a block and trial, and compare measured wrist angles with three forecasts. You can explore invented inputs without a file.
+
+[Daily-activity wrist estimates](daily-wrist/) compare task and elapsed time with seven forearm channels. Invented examples can be adjusted; a compatible supplied JSON window is evaluated locally.

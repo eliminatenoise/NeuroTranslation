@@ -40,5 +40,81 @@
   },
   "figure": "uji-forearm-effect.png",
   "reproduce_figure": "python plot_forearm_effect.py DEVELOPMENT-AGGREGATE.json uji-forearm-effect.png",
-  "primary_and_public_models": "Primary scientific comparison uses private full fitted heads. The separate support-limited pair includes only features supported by at least seven TRAIN people and is included for public inference."
+  "primary_and_public_models": "Primary scientific comparison uses private full fitted heads. The separate support-limited pair includes only features supported by at least seven TRAIN people and is included for public inference.",
+  "daily_wrist_browser": {
+    "web": "docs/daily-wrist/index.html",
+    "public_url": "https://eliminatenoise.github.io/NeuroTranslation/daily-wrist/",
+    "invented_window": "https://eliminatenoise.github.io/NeuroTranslation/daily-wrist/example-window.json",
+    "offline_browser": {
+      "path": "benchmarks/uji-wrist-emg/UJI-Daily-Wrist-Browser.zip",
+      "bytes": 37933,
+      "sha256": "64259d916fe08b32530c08fc85a576a6831213cd1ed8b72d83b2ca4b06c5ff8b"
+    },
+    "portable_axis_blend": {
+      "path": "benchmarks/uji-wrist-emg/UJI-Wrist-Axis-Blend-Preview.zip",
+      "bytes": 42894,
+      "sha256": "9044a31214ff01e1540d6807eaf3915f44c4514b44e2c8dd9fae88a546def4df"
+    },
+    "axis_blend_aggregate": {
+      "path": "benchmarks/uji-wrist-emg/AXIS-BLEND-RESULTS.json",
+      "bytes": 96254,
+      "sha256": "9c9d992c0f58a7fc0ff9cf0f64ea99d88ca4e8ad12c7535615505b3bc1fc4c1f"
+    },
+    "web_files": [
+      {
+        "path": "docs/daily-wrist/axis-blend.js",
+        "bytes": 4012,
+        "sha256": "2dba61da33e778c7b873093cd4d42b17ddbcc97854c5012cba1f5d5ef70ba178"
+      },
+      {
+        "path": "docs/daily-wrist/daily.css",
+        "bytes": 3258,
+        "sha256": "3e43add2b69c1f99a18ecbeb4dfaee2849d6617d2a3f1f797c5f2567704d0a80"
+      },
+      {
+        "path": "docs/daily-wrist/daily.js",
+        "bytes": 9547,
+        "sha256": "e8ffe1da173cf2479fe0c547af0f6a1c5927de38cdbc8720960a4b06701e5ad1"
+      },
+      {
+        "path": "docs/daily-wrist/example-window.json",
+        "bytes": 1097,
+        "sha256": "3ac01e983a55c8f2e8406ea97f36f2d33db1fe0849f5e5c19d4c6010f3fdab92"
+      },
+      {
+        "path": "docs/daily-wrist/index.html",
+        "bytes": 6466,
+        "sha256": "91a5ae380bc97140fed9dd7bc6163c89f5d67fd1b564bdf8e049ed5bfd15f92f"
+      },
+      {
+        "path": "docs/daily-wrist/uji-engine.js",
+        "bytes": 98348,
+        "sha256": "ea76f12f7bd456967043e2f3e1879664dd619cc0eb4878dd82e827c2df66f9ec"
+      }
+    ],
+    "build_source_files": [
+      {
+        "path": "benchmarks/uji-wrist-emg/browser-source/build_axis_blend.py",
+        "bytes": 3480,
+        "sha256": "07c195f7a47d0f174f5b509a77b317767777eea2f6042f7caa781a8d13279723"
+      },
+      {
+        "path": "benchmarks/uji-wrist-emg/browser-source/build_engine.py",
+        "bytes": 5068,
+        "sha256": "9aa9ed47a0afd210d8b473f78b3793d29b220d4ea66e00e2d86606860f97f174"
+      },
+      {
+        "path": "benchmarks/uji-wrist-emg/browser-source/uji-axis-blend-source.js",
+        "bytes": 3011,
+        "sha256": "951e2dde019733193c534bbbc9b00cbb5971a712dd45d7c1dfe94eb90fc01348"
+      },
+      {
+        "path": "benchmarks/uji-wrist-emg/browser-source/uji-engine-source.js",
+        "bytes": 9423,
+        "sha256": "2f5a7d4a28c9a93a69005dd38f323df70e94dfd2b995978c71280e98883fa327"
+      }
+    ],
+    "scope": "Estimates of retrospectively filtered glove angles in offline daily-activity trials. The interface runs two fixed estimators and a weighted combination on invented or compatible local inputs. The weights were selected within training. The four development participants had been studied before, and final test participants remain reserved.",
+    "platform_coverage": "Linux Chromium served and file routes, plus the extracted Linux launcher through Chromium. The Windows and macOS launchers received source checks."
+  }
 }

@@ -20,7 +20,7 @@ We also tested the forearm signal against the stronger temporal motion model. On
 
 ### Everyday wrist movements
 
-A distinct Spanish study asked what seven forearm electrodes add once a model knows the activity and time within it. On four new development participants, earlier muscle activity lowered two-axis error from **36.187° to 34.718°**. Error fell for flexion and extension but rose for radial and ulnar deviation. The glove targets were filtered in both time directions, so neither model received earlier glove angles. These are separately fitted models on daily activities. [Study, figure and downloadable estimators](benchmarks/uji-wrist-emg/)
+A distinct Spanish study asked what seven forearm electrodes add once a model knows the activity and time within it. On four new development participants, earlier muscle activity lowered two-axis error from **36.187° to 34.718°**. Error fell for flexion and extension but rose for radial and ulnar deviation. The glove targets were filtered in both time directions, so neither model received earlier glove angles. These are separately fitted models on daily activities. [Try the daily-activity estimator](https://eliminatenoise.github.io/NeuroTranslation/daily-wrist/) · [Study, figure and downloadable estimators](benchmarks/uji-wrist-emg/)
 
 ### Palm and elbow measurements
 

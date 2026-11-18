@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; object-src 'none'; form-action 'none'; base-uri 'none'">
+  <title>Wrist angles during daily activities · NeuroTranslation</title>
+  <link rel="stylesheet" href="daily.css">
+  <script defer src="uji-engine.js"></script>
+  <script defer src="axis-blend.js"></script>
+  <script defer src="daily.js"></script>
+</head>
+<body>
+<main>
+  <header>
+    <nav aria-label="Breadcrumb"><a href="https://eliminatenoise.github.io/NeuroTranslation/">NeuroTranslation</a> / Daily activities</nav>
+    <h1>What does the forearm add?</h1>
+    <p>Turning a key and folding a sheet of paper put different demands on the wrist. One model knows the activity and the time within it. The other also receives half a second of surface electromyography (EMG) from seven forearm electrodes. Both estimate the wrist angle a quarter of a second later on the recording clock.</p>
+  </header>
+  <div class="workbench">
+    <section class="inputs" aria-labelledby="inputs-title">
+      <h2 id="inputs-title">Input window</h2>
+      <fieldset id="synthetic-controls" disabled>
+        <legend>Invented inputs</legend>
+        <label for="example">Muscle activity</label>
+        <select id="example"><option value="patterned">Patterned signal</option><option value="zero">Zero signal</option></select>
+        <label for="task">Recorded task label</label><select id="task"></select>
+        <label for="elapsed">Seconds from stored segment start to last input</label>
+        <input type="number" id="elapsed" value="1.1" min="0.5" max="30" step="0.1">
+        <label for="gain">Scale the invented signal <output id="gain-readout" for="gain">100%</output></label>
+        <input id="gain" type="range" min="0" max="200" step="5" value="100">
+      </fieldset>
+      <div class="file">
+        <label for="window-file">Open a compatible window</label>
+        <p>Use the UJI JSON format with 16 sets of seven muscle amplitudes, or the original seven-channel samples from a half-second window. The model expects the UJI source scale and spot order. Your file stays in this tab.</p>
+        <input id="window-file" type="file" accept=".json,application/json" disabled aria-describedby="file-status">
+        <p id="file-status" role="status" data-state="loading">Loading the fitted models…</p>
+        <button type="button" id="clear" hidden>Return to invented inputs</button>
+        <a href="example-window.json" download="uji-invented-window.json">Download an example input</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/uji-wrist-emg#run-the-released-estimator">Input format</a>
+      </div>
+    </section>
+    <section class="estimates" aria-labelledby="result-title">
+      <h2 id="result-title">Wrist-angle estimates</h2>
+      <p id="result-note">Choose an input to compare the two models.</p>
+      <div id="results" hidden>
+        <table id="predictions">
+          <caption>Estimated angles, 250 ms after the last permitted muscle input</caption>
+          <thead><tr><th scope="col">Model input</th><th scope="col">Flexion / extension</th><th scope="col">Radial / ulnar deviation</th></tr></thead>
+          <tbody><tr><th scope="row">Task and time</th><td></td><td></td></tr><tr><th scope="row">Task, time and EMG</th><td></td><td></td></tr><tr class="difference"><th scope="row">Change with EMG</th><td></td><td></td></tr><tr class="blend" hidden><th scope="row">Weighted combination</th><td></td><td></td></tr></tbody>
+        </table>
+        <p class="units" id="blend-note" hidden></p>
+        <p class="units">Positive angles point towards extension or the thumb. Negative angles point towards flexion or the little finger. These are estimated angles from the fitted models.</p>
+        <div class="signal">
+          <h3>The half-second the model receives</h3>
+          <p id="signal-note">Each row is an electrode, each column a 31.25 ms interval. Darker cells indicate greater root mean square amplitude on the source’s numerical scale.</p>
+          <canvas id="activity" role="img" aria-label="Seven electrodes by sixteen time bins. Exact amplitudes are available below."></canvas>
+          <details><summary>Inspect the numerical input</summary>
+            <label for="spot">Electrode</label>
+            <select id="spot"></select>
+            <table class="readings"><caption id="input-caption">Input amplitude by interval</caption><thead><tr><th scope="col">Interval before cutoff (ms)</th><th scope="col">RMS amplitude</th></tr></thead><tbody id="amplitudes"></tbody></table>
+          </details>
+        </div>
+      </div>
+      <noscript>Enable JavaScript for the interactive models. The study results are available below.</noscript>
+    </section>
+  </div>
+  <section class="evidence" aria-labelledby="evidence-title">
+    <h2 id="evidence-title">How close were the estimates?</h2>
+    <p>Fourteen people supplied training movements in the KIN-MUS UJI study. Across 104 trials of 26 activities from four different people, these released models had a two-axis error of <strong>36.165°</strong> from task and time alone and <strong>34.700°</strong> with forearm EMG. Flexion–extension error fell, while side-to-side error rose. Four final test participants remain unevaluated.</p>
+    <p>The weighted combination was then learned using only the 14 training people. On the same four development participants, it scored <strong>34.971°</strong>. Relative to using the full EMG adjustment, side-to-side error fell by 0.312° and flexion–extension error rose by 0.512°.</p>
+    <p>The glove angles used for scoring were filtered forwards and backwards before release. Both models therefore exclude earlier glove angles from their inputs. The 250 ms interval refers to stored timestamps.</p>
+    <p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/uji-wrist-emg">Study and comparison with time-shifted EMG</a> · <a href="https://doi.org/10.5281/zenodo.3469380">KIN-MUS UJI recordings, Jarque-Bou and colleagues</a> · <a href="https://doi.org/10.1038/s41597-019-0285-1">Activity labels and source methods</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+  </section>
+</main>
+</body>
+</html>

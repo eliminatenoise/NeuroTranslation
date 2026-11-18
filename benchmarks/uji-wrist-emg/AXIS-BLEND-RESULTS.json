@@ -1,0 +1,2759 @@
+{
+  "alpha": [
+    0.7373445643448758,
+    0.7375704486112084
+  ],
+  "axes": [
+    "extension_deg",
+    "radial_deviation_deg"
+  ],
+  "development_cohort_previously_scored": true,
+  "development_people": 4,
+  "development_reused_exploratory": {
+    "glove_warning_drop_adl_7_11": {
+      "axis_blend_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -1.8865701710490796,
+          "radial_deviation_deg": 0.3740088530616017
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -3.2462821502957695,
+            -0.5096915352515268
+          ],
+          "radial_deviation_deg": [
+            -0.0664446064055273,
+            0.7631875681491955
+          ],
+          "two_axis": [
+            -2.1711542010024516,
+            -0.1961396992224813
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -0.9964046224318324,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.67848416086765,
+              "radial_deviation_deg": 16.038735487450385
+            },
+            "mean_of_person_roots_deg": 32.78987715645198,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 46.274871382353766,
+              "radial_deviation_deg": 16.510885681179886
+            },
+            "pooled_two_axis_rmse_deg": 34.74171172690242,
+            "rows": 18438,
+            "two_axis_rmse_deg": 34.900730075406535
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 48.56505433191673,
+              "radial_deviation_deg": 15.664726634388783
+            },
+            "mean_of_person_roots_deg": 33.78628177888381,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 48.08815595830324,
+              "radial_deviation_deg": 16.124146281656074
+            },
+            "pooled_two_axis_rmse_deg": 35.86404074265994,
+            "rows": 18438,
+            "two_axis_rmse_deg": 36.08287795334619
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.17764450649018,
+              "radial_deviation_deg": 16.342147741441817
+            },
+            "mean_of_person_roots_deg": 32.61295187598632,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 45.80260182902039,
+              "radial_deviation_deg": 16.813411257262313
+            },
+            "pooled_two_axis_rmse_deg": 34.500500955881975,
+            "rows": 18438,
+            "two_axis_rmse_deg": 34.636979118933674
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": -1.122329015757515,
+        "right": "task_time",
+        "rows": 18438,
+        "two_axis_difference_deg": -1.1821478779396557
+      },
+      "axis_blend_minus_task_time_emg": {
+        "axis_difference_deg": {
+          "extension_deg": 0.5008396543774651,
+          "radial_deviation_deg": -0.3034122539914321
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -0.049490339098497316,
+            1.0212788551728522
+          ],
+          "radial_deviation_deg": [
+            -0.45959556958294634,
+            -0.18938423884529954
+          ],
+          "two_axis": [
+            -0.12811544690543997,
+            0.6457029562987628
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": 0.17692528046566025,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.67848416086765,
+              "radial_deviation_deg": 16.038735487450385
+            },
+            "mean_of_person_roots_deg": 32.78987715645198,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 46.274871382353766,
+              "radial_deviation_deg": 16.510885681179886
+            },
+            "pooled_two_axis_rmse_deg": 34.74171172690242,
+            "rows": 18438,
+            "two_axis_rmse_deg": 34.900730075406535
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 48.56505433191673,
+              "radial_deviation_deg": 15.664726634388783
+            },
+            "mean_of_person_roots_deg": 33.78628177888381,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 48.08815595830324,
+              "radial_deviation_deg": 16.124146281656074
+            },
+            "pooled_two_axis_rmse_deg": 35.86404074265994,
+            "rows": 18438,
+            "two_axis_rmse_deg": 36.08287795334619
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.17764450649018,
+              "radial_deviation_deg": 16.342147741441817
+            },
+            "mean_of_person_roots_deg": 32.61295187598632,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 45.80260182902039,
+              "radial_deviation_deg": 16.813411257262313
+            },
+            "pooled_two_axis_rmse_deg": 34.500500955881975,
+            "rows": 18438,
+            "two_axis_rmse_deg": 34.636979118933674
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": 0.24121077102044808,
+        "right": "task_time_emg",
+        "rows": 18438,
+        "two_axis_difference_deg": 0.26375095647286173
+      },
+      "task_time_emg_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -2.387409825426545,
+          "radial_deviation_deg": 0.6774211070530338
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -4.263527428994706,
+            -0.46020119615302946
+          ],
+          "radial_deviation_deg": [
+            0.18731515551536937,
+            1.1624438731097442
+          ],
+          "two_axis": [
+            -2.8168571573012144,
+            -0.06802425231704134
+          ]
+        },
+        "left": "task_time_emg",
+        "mean_of_person_roots_difference_deg": -1.1733299028974926,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.67848416086765,
+              "radial_deviation_deg": 16.038735487450385
+            },
+            "mean_of_person_roots_deg": 32.78987715645198,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 46.274871382353766,
+              "radial_deviation_deg": 16.510885681179886
+            },
+            "pooled_two_axis_rmse_deg": 34.74171172690242,
+            "rows": 18438,
+            "two_axis_rmse_deg": 34.900730075406535
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 48.56505433191673,
+              "radial_deviation_deg": 15.664726634388783
+            },
+            "mean_of_person_roots_deg": 33.78628177888381,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 48.08815595830324,
+              "radial_deviation_deg": 16.124146281656074
+            },
+            "pooled_two_axis_rmse_deg": 35.86404074265994,
+            "rows": 18438,
+            "two_axis_rmse_deg": 36.08287795334619
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.17764450649018,
+              "radial_deviation_deg": 16.342147741441817
+            },
+            "mean_of_person_roots_deg": 32.61295187598632,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 45.80260182902039,
+              "radial_deviation_deg": 16.813411257262313
+            },
+            "pooled_two_axis_rmse_deg": 34.500500955881975,
+            "rows": 18438,
+            "two_axis_rmse_deg": 34.636979118933674
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": -1.363539786777963,
+        "right": "task_time",
+        "rows": 18438,
+        "two_axis_difference_deg": -1.4458988344125174
+      }
+    },
+    "phase_manipulation": {
+      "axis_blend_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -1.7795694462720064,
+          "radial_deviation_deg": 0.49473071438215754
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -3.1849194553230262,
+            -0.34158743435933303
+          ],
+          "radial_deviation_deg": [
+            0.08903645922869785,
+            0.8272636165072598
+          ],
+          "two_axis": [
+            -2.1234997142508263,
+            -0.0649889872461813
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -0.9078348275027466,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 48.359616073126844,
+              "radial_deviation_deg": 16.61938020132143
+            },
+            "mean_of_person_roots_deg": 34.144706135779195,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 47.90114078684092,
+              "radial_deviation_deg": 17.283800455133555
+            },
+            "pooled_two_axis_rmse_deg": 36.00867289177448,
+            "rows": 16145,
+            "two_axis_rmse_deg": 36.158375689570896
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 50.13918551939885,
+              "radial_deviation_deg": 16.124649486939273
+            },
+            "mean_of_person_roots_deg": 35.05254096328194,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 49.59786479396848,
+              "radial_deviation_deg": 16.77630068860564
+            },
+            "pooled_two_axis_rmse_deg": 37.022914910331515,
+            "rows": 16145,
+            "two_axis_rmse_deg": 37.242061205210874
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 47.90550009322401,
+              "radial_deviation_deg": 16.97625429458682
+            },
+            "mean_of_person_roots_deg": 34.007129818124405,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 47.478424194134206,
+              "radial_deviation_deg": 17.637474895670906
+            },
+            "pooled_two_axis_rmse_deg": 35.81397272471724,
+            "rows": 16145,
+            "two_axis_rmse_deg": 35.93835102683736
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": -1.0142420185570344,
+        "right": "task_time",
+        "rows": 16145,
+        "two_axis_difference_deg": -1.0836855156399778
+      },
+      "axis_blend_minus_task_time_emg": {
+        "axis_difference_deg": {
+          "extension_deg": 0.4541159799028307,
+          "radial_deviation_deg": -0.35687409326538955
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -0.11481516810841441,
+            1.0008176428630833
+          ],
+          "radial_deviation_deg": [
+            -0.5000835033602087,
+            -0.28349426012603374
+          ],
+          "two_axis": [
+            -0.18308775792518617,
+            0.6229400839001826
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": 0.13757631765479061,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 48.359616073126844,
+              "radial_deviation_deg": 16.61938020132143
+            },
+            "mean_of_person_roots_deg": 34.144706135779195,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 47.90114078684092,
+              "radial_deviation_deg": 17.283800455133555
+            },
+            "pooled_two_axis_rmse_deg": 36.00867289177448,
+            "rows": 16145,
+            "two_axis_rmse_deg": 36.158375689570896
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 50.13918551939885,
+              "radial_deviation_deg": 16.124649486939273
+            },
+            "mean_of_person_roots_deg": 35.05254096328194,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 49.59786479396848,
+              "radial_deviation_deg": 16.77630068860564
+            },
+            "pooled_two_axis_rmse_deg": 37.022914910331515,
+            "rows": 16145,
+            "two_axis_rmse_deg": 37.242061205210874
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 47.90550009322401,
+              "radial_deviation_deg": 16.97625429458682
+            },
+            "mean_of_person_roots_deg": 34.007129818124405,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 47.478424194134206,
+              "radial_deviation_deg": 17.637474895670906
+            },
+            "pooled_two_axis_rmse_deg": 35.81397272471724,
+            "rows": 16145,
+            "two_axis_rmse_deg": 35.93835102683736
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": 0.1947001670572419,
+        "right": "task_time_emg",
+        "rows": 16145,
+        "two_axis_difference_deg": 0.22002466273353605
+      },
+      "task_time_emg_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -2.233685426174837,
+          "radial_deviation_deg": 0.8516048076475471
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -4.185031712728048,
+            -0.22677226625092572
+          ],
+          "radial_deviation_deg": [
+            0.42908320678034784,
+            1.2552126590263217
+          ],
+          "two_axis": [
+            -2.746439798151009,
+            0.11809877067900487
+          ]
+        },
+        "left": "task_time_emg",
+        "mean_of_person_roots_difference_deg": -1.0454111451575372,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 48.359616073126844,
+              "radial_deviation_deg": 16.61938020132143
+            },
+            "mean_of_person_roots_deg": 34.144706135779195,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 47.90114078684092,
+              "radial_deviation_deg": 17.283800455133555
+            },
+            "pooled_two_axis_rmse_deg": 36.00867289177448,
+            "rows": 16145,
+            "two_axis_rmse_deg": 36.158375689570896
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 50.13918551939885,
+              "radial_deviation_deg": 16.124649486939273
+            },
+            "mean_of_person_roots_deg": 35.05254096328194,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 49.59786479396848,
+              "radial_deviation_deg": 16.77630068860564
+            },
+            "pooled_two_axis_rmse_deg": 37.022914910331515,
+            "rows": 16145,
+            "two_axis_rmse_deg": 37.242061205210874
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 47.90550009322401,
+              "radial_deviation_deg": 16.97625429458682
+            },
+            "mean_of_person_roots_deg": 34.007129818124405,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 47.478424194134206,
+              "radial_deviation_deg": 17.637474895670906
+            },
+            "pooled_two_axis_rmse_deg": 35.81397272471724,
+            "rows": 16145,
+            "two_axis_rmse_deg": 35.93835102683736
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": -1.2089421856142764,
+        "right": "task_time",
+        "rows": 16145,
+        "two_axis_difference_deg": -1.3037101783735139
+      }
+    },
+    "phase_reaching": {
+      "axis_blend_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -3.70880256528271,
+          "radial_deviation_deg": -0.8369990676685308
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -6.076302579046839,
+            -1.1582404488343663
+          ],
+          "radial_deviation_deg": [
+            -2.140178392649281,
+            0.04871777844555325
+          ],
+          "two_axis": [
+            -4.265095022475343,
+            -1.013523840341815
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -2.21161553457711,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 37.14057269795818,
+              "radial_deviation_deg": 13.083003640505629
+            },
+            "mean_of_person_roots_deg": 25.104265188293912,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 36.42511643948763,
+              "radial_deviation_deg": 12.867168835505467
+            },
+            "pooled_two_axis_rmse_deg": 27.3162327332269,
+            "rows": 619,
+            "two_axis_rmse_deg": 27.84409384941266
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 40.84937526324089,
+              "radial_deviation_deg": 13.92000270817416
+            },
+            "mean_of_person_roots_deg": 27.31588072287102,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 40.05964593355709,
+              "radial_deviation_deg": 13.754256950660547
+            },
+            "pooled_two_axis_rmse_deg": 29.94958110380472,
+            "rows": 619,
+            "two_axis_rmse_deg": 30.51588057710815
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 36.17617063406097,
+              "radial_deviation_deg": 13.080119653523193
+            },
+            "mean_of_person_roots_deg": 24.703362220727954,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 35.50170938340653,
+              "radial_deviation_deg": 12.85918786391417
+            },
+            "pooled_two_axis_rmse_deg": 26.699532595752423,
+            "rows": 619,
+            "two_axis_rmse_deg": 27.20114751159571
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": -2.6333483705778207,
+        "right": "task_time",
+        "rows": 619,
+        "two_axis_difference_deg": -2.6717867276954905
+      },
+      "axis_blend_minus_task_time_emg": {
+        "axis_difference_deg": {
+          "extension_deg": 0.9644020638972037,
+          "radial_deviation_deg": 0.002883986982435971
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -0.29322058677426455,
+            1.938354574494241
+          ],
+          "radial_deviation_deg": [
+            -0.26687088447973295,
+            0.4402361260060079
+          ],
+          "two_axis": [
+            -0.08547321358850368,
+            1.3047504532057843
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": 0.40090296756595833,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 37.14057269795818,
+              "radial_deviation_deg": 13.083003640505629
+            },
+            "mean_of_person_roots_deg": 25.104265188293912,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 36.42511643948763,
+              "radial_deviation_deg": 12.867168835505467
+            },
+            "pooled_two_axis_rmse_deg": 27.3162327332269,
+            "rows": 619,
+            "two_axis_rmse_deg": 27.84409384941266
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 40.84937526324089,
+              "radial_deviation_deg": 13.92000270817416
+            },
+            "mean_of_person_roots_deg": 27.31588072287102,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 40.05964593355709,
+              "radial_deviation_deg": 13.754256950660547
+            },
+            "pooled_two_axis_rmse_deg": 29.94958110380472,
+            "rows": 619,
+            "two_axis_rmse_deg": 30.51588057710815
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 36.17617063406097,
+              "radial_deviation_deg": 13.080119653523193
+            },
+            "mean_of_person_roots_deg": 24.703362220727954,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 35.50170938340653,
+              "radial_deviation_deg": 12.85918786391417
+            },
+            "pooled_two_axis_rmse_deg": 26.699532595752423,
+            "rows": 619,
+            "two_axis_rmse_deg": 27.20114751159571
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": 0.6167001374744778,
+        "right": "task_time_emg",
+        "rows": 619,
+        "two_axis_difference_deg": 0.642946337816948
+      },
+      "task_time_emg_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -4.673204629179914,
+          "radial_deviation_deg": -0.8398830546509668
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -7.991111757157306,
+            -0.8650198620601017
+          ],
+          "radial_deviation_deg": [
+            -2.555686478105198,
+            0.3155886629252862
+          ],
+          "two_axis": [
+            -5.585479395096648,
+            -0.9048509709519692
+          ]
+        },
+        "left": "task_time_emg",
+        "mean_of_person_roots_difference_deg": -2.612518502143068,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 37.14057269795818,
+              "radial_deviation_deg": 13.083003640505629
+            },
+            "mean_of_person_roots_deg": 25.104265188293912,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 36.42511643948763,
+              "radial_deviation_deg": 12.867168835505467
+            },
+            "pooled_two_axis_rmse_deg": 27.3162327332269,
+            "rows": 619,
+            "two_axis_rmse_deg": 27.84409384941266
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 40.84937526324089,
+              "radial_deviation_deg": 13.92000270817416
+            },
+            "mean_of_person_roots_deg": 27.31588072287102,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 40.05964593355709,
+              "radial_deviation_deg": 13.754256950660547
+            },
+            "pooled_two_axis_rmse_deg": 29.94958110380472,
+            "rows": 619,
+            "two_axis_rmse_deg": 30.51588057710815
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 36.17617063406097,
+              "radial_deviation_deg": 13.080119653523193
+            },
+            "mean_of_person_roots_deg": 24.703362220727954,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 35.50170938340653,
+              "radial_deviation_deg": 12.85918786391417
+            },
+            "pooled_two_axis_rmse_deg": 26.699532595752423,
+            "rows": 619,
+            "two_axis_rmse_deg": 27.20114751159571
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": -3.2500485080522985,
+        "right": "task_time",
+        "rows": 619,
+        "two_axis_difference_deg": -3.3147330655124385
+      }
+    },
+    "phase_release": {
+      "axis_blend_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -2.258450918936127,
+          "radial_deviation_deg": -0.09797125410637086
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -3.6344650728346153,
+            -0.7823313062781914
+          ],
+          "radial_deviation_deg": [
+            -1.2738417837910045,
+            0.6891295086986968
+          ],
+          "two_axis": [
+            -2.5592737355528783,
+            -0.3041047030531736
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -1.2588877156038336,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 41.00800336768565,
+              "radial_deviation_deg": 11.466221835895157
+            },
+            "mean_of_person_roots_deg": 26.35462802164405,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 40.18710660431467,
+              "radial_deviation_deg": 11.449934716474198
+            },
+            "pooled_two_axis_rmse_deg": 29.547457946818938,
+            "rows": 3309,
+            "two_axis_rmse_deg": 30.10922270164141
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 43.26645428662178,
+              "radial_deviation_deg": 11.564193090001528
+            },
+            "mean_of_person_roots_deg": 27.613515737247884,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 42.39880603048113,
+              "radial_deviation_deg": 11.42557203479824
+            },
+            "pooled_two_axis_rmse_deg": 31.049979461609357,
+            "rows": 3309,
+            "two_axis_rmse_deg": 31.66793826853251
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 40.259494140135985,
+              "radial_deviation_deg": 11.540332524507685
+            },
+            "mean_of_person_roots_deg": 25.97433760365488,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 39.454966228445265,
+              "radial_deviation_deg": 11.563469183406928
+            },
+            "pooled_two_axis_rmse_deg": 29.072393947208372,
+            "rows": 3309,
+            "two_axis_rmse_deg": 29.614237650122394
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": -1.5025215147904198,
+        "right": "task_time",
+        "rows": 3309,
+        "two_axis_difference_deg": -1.5587155668910988
+      },
+      "axis_blend_minus_task_time_emg": {
+        "axis_difference_deg": {
+          "extension_deg": 0.7485092275496683,
+          "radial_deviation_deg": -0.07411068861252801
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            0.20835268229622272,
+            1.2335999705685055
+          ],
+          "radial_deviation_deg": [
+            -0.2945316321226068,
+            0.3559089914749656
+          ],
+          "two_axis": [
+            0.04588988931574889,
+            0.8502486744215858
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": 0.38029041798916907,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 41.00800336768565,
+              "radial_deviation_deg": 11.466221835895157
+            },
+            "mean_of_person_roots_deg": 26.35462802164405,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 40.18710660431467,
+              "radial_deviation_deg": 11.449934716474198
+            },
+            "pooled_two_axis_rmse_deg": 29.547457946818938,
+            "rows": 3309,
+            "two_axis_rmse_deg": 30.10922270164141
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 43.26645428662178,
+              "radial_deviation_deg": 11.564193090001528
+            },
+            "mean_of_person_roots_deg": 27.613515737247884,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 42.39880603048113,
+              "radial_deviation_deg": 11.42557203479824
+            },
+            "pooled_two_axis_rmse_deg": 31.049979461609357,
+            "rows": 3309,
+            "two_axis_rmse_deg": 31.66793826853251
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 40.259494140135985,
+              "radial_deviation_deg": 11.540332524507685
+            },
+            "mean_of_person_roots_deg": 25.97433760365488,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 39.454966228445265,
+              "radial_deviation_deg": 11.563469183406928
+            },
+            "pooled_two_axis_rmse_deg": 29.072393947208372,
+            "rows": 3309,
+            "two_axis_rmse_deg": 29.614237650122394
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": 0.47506399961056545,
+        "right": "task_time_emg",
+        "rows": 3309,
+        "two_axis_difference_deg": 0.4949850515190164
+      },
+      "task_time_emg_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -3.0069601464857953,
+          "radial_deviation_deg": -0.023860565493842856
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -4.868065043403121,
+            -0.9906839885744141
+          ],
+          "radial_deviation_deg": [
+            -1.6297507752659701,
+            0.9890459218110035
+          ],
+          "two_axis": [
+            -3.409522409974464,
+            -0.3499945923689225
+          ]
+        },
+        "left": "task_time_emg",
+        "mean_of_person_roots_difference_deg": -1.6391781335930027,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 41.00800336768565,
+              "radial_deviation_deg": 11.466221835895157
+            },
+            "mean_of_person_roots_deg": 26.35462802164405,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 40.18710660431467,
+              "radial_deviation_deg": 11.449934716474198
+            },
+            "pooled_two_axis_rmse_deg": 29.547457946818938,
+            "rows": 3309,
+            "two_axis_rmse_deg": 30.10922270164141
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 43.26645428662178,
+              "radial_deviation_deg": 11.564193090001528
+            },
+            "mean_of_person_roots_deg": 27.613515737247884,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 42.39880603048113,
+              "radial_deviation_deg": 11.42557203479824
+            },
+            "pooled_two_axis_rmse_deg": 31.049979461609357,
+            "rows": 3309,
+            "two_axis_rmse_deg": 31.66793826853251
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 40.259494140135985,
+              "radial_deviation_deg": 11.540332524507685
+            },
+            "mean_of_person_roots_deg": 25.97433760365488,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 39.454966228445265,
+              "radial_deviation_deg": 11.563469183406928
+            },
+            "pooled_two_axis_rmse_deg": 29.072393947208372,
+            "rows": 3309,
+            "two_axis_rmse_deg": 29.614237650122394
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": -1.9775855144009853,
+        "right": "task_time",
+        "rows": 3309,
+        "two_axis_difference_deg": -2.053700618410115
+      }
+    },
+    "primary": {
+      "axis_blend_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -1.9041010455862306,
+          "radial_deviation_deg": 0.39043891766940675
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -3.3484388958316487,
+            -0.4557181241268111
+          ],
+          "radial_deviation_deg": [
+            -0.09704535135992032,
+            0.7107352717416049
+          ],
+          "two_axis": [
+            -2.2568366305027396,
+            -0.14678156191353509
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -0.988859294827563,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.858250688641625,
+              "radial_deviation_deg": 15.817625035240933
+            },
+            "mean_of_person_roots_deg": 32.809352203511736,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 46.39676653715425,
+              "radial_deviation_deg": 16.33982717431506
+            },
+            "pooled_two_axis_rmse_deg": 34.782537983805064,
+            "rows": 20073,
+            "two_axis_rmse_deg": 34.970651404821325
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 48.762351734227856,
+              "radial_deviation_deg": 15.427186117571527
+            },
+            "mean_of_person_roots_deg": 33.7982114983393,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 48.21202706598154,
+              "radial_deviation_deg": 15.92869596666423
+            },
+            "pooled_two_axis_rmse_deg": 35.90350198106974,
+            "rows": 20073,
+            "two_axis_rmse_deg": 36.16465828788339
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.34635726966877,
+              "radial_deviation_deg": 16.12991657155526
+            },
+            "mean_of_person_roots_deg": 32.632139342775076,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 45.91917746238535,
+              "radial_deviation_deg": 16.653775334119285
+            },
+            "pooled_two_axis_rmse_deg": 34.539246457481994,
+            "rows": 20073,
+            "two_axis_rmse_deg": 34.69984899659588
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": -1.120963997264674,
+        "right": "task_time",
+        "rows": 20073,
+        "two_axis_difference_deg": -1.194006883062066
+      },
+      "axis_blend_minus_task_time_emg": {
+        "axis_difference_deg": {
+          "extension_deg": 0.5118934189728535,
+          "radial_deviation_deg": -0.3122915363143264
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -0.060317032752799093,
+            1.0608252801013265
+          ],
+          "radial_deviation_deg": [
+            -0.43915087833604893,
+            -0.2023385315755064
+          ],
+          "two_axis": [
+            -0.1415340682027768,
+            0.6793331203727107
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": 0.17721286073665965,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.858250688641625,
+              "radial_deviation_deg": 15.817625035240933
+            },
+            "mean_of_person_roots_deg": 32.809352203511736,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 46.39676653715425,
+              "radial_deviation_deg": 16.33982717431506
+            },
+            "pooled_two_axis_rmse_deg": 34.782537983805064,
+            "rows": 20073,
+            "two_axis_rmse_deg": 34.970651404821325
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 48.762351734227856,
+              "radial_deviation_deg": 15.427186117571527
+            },
+            "mean_of_person_roots_deg": 33.7982114983393,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 48.21202706598154,
+              "radial_deviation_deg": 15.92869596666423
+            },
+            "pooled_two_axis_rmse_deg": 35.90350198106974,
+            "rows": 20073,
+            "two_axis_rmse_deg": 36.16465828788339
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.34635726966877,
+              "radial_deviation_deg": 16.12991657155526
+            },
+            "mean_of_person_roots_deg": 32.632139342775076,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 45.91917746238535,
+              "radial_deviation_deg": 16.653775334119285
+            },
+            "pooled_two_axis_rmse_deg": 34.539246457481994,
+            "rows": 20073,
+            "two_axis_rmse_deg": 34.69984899659588
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": 0.24329152632306972,
+        "right": "task_time_emg",
+        "rows": 20073,
+        "two_axis_difference_deg": 0.27080240822544255
+      },
+      "task_time_emg_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -2.415994464559084,
+          "radial_deviation_deg": 0.7027304539837331
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -4.4062688318779095,
+            -0.395401091374012
+          ],
+          "radial_deviation_deg": [
+            0.14749877137242073,
+            1.1552148681054266
+          ],
+          "two_axis": [
+            -2.9361697508754503,
+            -0.0052474937107582775
+          ]
+        },
+        "left": "task_time_emg",
+        "mean_of_person_roots_difference_deg": -1.1660721555642226,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.858250688641625,
+              "radial_deviation_deg": 15.817625035240933
+            },
+            "mean_of_person_roots_deg": 32.809352203511736,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 46.39676653715425,
+              "radial_deviation_deg": 16.33982717431506
+            },
+            "pooled_two_axis_rmse_deg": 34.782537983805064,
+            "rows": 20073,
+            "two_axis_rmse_deg": 34.970651404821325
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 48.762351734227856,
+              "radial_deviation_deg": 15.427186117571527
+            },
+            "mean_of_person_roots_deg": 33.7982114983393,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 48.21202706598154,
+              "radial_deviation_deg": 15.92869596666423
+            },
+            "pooled_two_axis_rmse_deg": 35.90350198106974,
+            "rows": 20073,
+            "two_axis_rmse_deg": 36.16465828788339
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.34635726966877,
+              "radial_deviation_deg": 16.12991657155526
+            },
+            "mean_of_person_roots_deg": 32.632139342775076,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 45.91917746238535,
+              "radial_deviation_deg": 16.653775334119285
+            },
+            "pooled_two_axis_rmse_deg": 34.539246457481994,
+            "rows": 20073,
+            "two_axis_rmse_deg": 34.69984899659588
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": -1.3642555235877438,
+        "right": "task_time",
+        "rows": 20073,
+        "two_axis_difference_deg": -1.4648092912875086
+      }
+    },
+    "rotation": {
+      "axis_blend_minus_rotated_axis_blend": {
+        "axis_difference_deg": {
+          "extension_deg": -0.43486133219644785,
+          "radial_deviation_deg": -0.7581408339677402
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -0.861971384997041,
+            -0.23199825668405083
+          ],
+          "radial_deviation_deg": [
+            -1.09724961038029,
+            -0.577469572097943
+          ],
+          "two_axis": [
+            -0.7647230261279852,
+            -0.2765886864606699
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -0.5611235758254267,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.858250688641625,
+              "radial_deviation_deg": 15.817625035240933
+            },
+            "mean_of_person_roots_deg": 32.809352203511736,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 46.39676653715425,
+              "radial_deviation_deg": 16.33982717431506
+            },
+            "pooled_two_axis_rmse_deg": 34.782537983805064,
+            "rows": 20073,
+            "two_axis_rmse_deg": 34.970651404821325
+          },
+          "rotated_axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 47.29311202083807,
+              "radial_deviation_deg": 16.575765869208674
+            },
+            "mean_of_person_roots_deg": 33.37047577933716,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 46.84164084271231,
+              "radial_deviation_deg": 17.07841845384275
+            },
+            "pooled_two_axis_rmse_deg": 35.25486983185586,
+            "rows": 20073,
+            "two_axis_rmse_deg": 35.43581845228329
+          },
+          "rotated_task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.97588767860934,
+              "radial_deviation_deg": 17.218652176839832
+            },
+            "mean_of_person_roots_deg": 33.4459469898379,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 46.5628034323277,
+              "radial_deviation_deg": 17.714250170315623
+            },
+            "pooled_two_axis_rmse_deg": 35.22704445858402,
+            "rows": 20073,
+            "two_axis_rmse_deg": 35.378072347008334
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 48.762351734227856,
+              "radial_deviation_deg": 15.427186117571527
+            },
+            "mean_of_person_roots_deg": 33.7982114983393,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 48.21202706598154,
+              "radial_deviation_deg": 15.92869596666423
+            },
+            "pooled_two_axis_rmse_deg": 35.90350198106974,
+            "rows": 20073,
+            "two_axis_rmse_deg": 36.16465828788339
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.34635726966877,
+              "radial_deviation_deg": 16.12991657155526
+            },
+            "mean_of_person_roots_deg": 32.632139342775076,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 45.91917746238535,
+              "radial_deviation_deg": 16.653775334119285
+            },
+            "pooled_two_axis_rmse_deg": 34.539246457481994,
+            "rows": 20073,
+            "two_axis_rmse_deg": 34.69984899659588
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": -0.47233184805079986,
+        "right": "rotated_axis_blend",
+        "rows": 20073,
+        "two_axis_difference_deg": -0.4651670474619678
+      },
+      "included_shift_range_unwrapped_ms": [
+        1200.0,
+        13501.0
+      ],
+      "included_shift_range_wrapped_ms": [
+        -13501.0,
+        -1250.0
+      ],
+      "task_time_emg_minus_rotated_task_time_emg": {
+        "axis_difference_deg": {
+          "extension_deg": -0.6295304089405676,
+          "radial_deviation_deg": -1.0887356052845725
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -1.218985307031744,
+            -0.34138329951192503
+          ],
+          "radial_deviation_deg": [
+            -1.5719672325971263,
+            -0.8252576166891679
+          ],
+          "two_axis": [
+            -1.1021900187939728,
+            -0.4039749324463102
+          ]
+        },
+        "left": "task_time_emg",
+        "mean_of_person_roots_difference_deg": -0.8138076470628235,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.858250688641625,
+              "radial_deviation_deg": 15.817625035240933
+            },
+            "mean_of_person_roots_deg": 32.809352203511736,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 46.39676653715425,
+              "radial_deviation_deg": 16.33982717431506
+            },
+            "pooled_two_axis_rmse_deg": 34.782537983805064,
+            "rows": 20073,
+            "two_axis_rmse_deg": 34.970651404821325
+          },
+          "rotated_axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 47.29311202083807,
+              "radial_deviation_deg": 16.575765869208674
+            },
+            "mean_of_person_roots_deg": 33.37047577933716,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 46.84164084271231,
+              "radial_deviation_deg": 17.07841845384275
+            },
+            "pooled_two_axis_rmse_deg": 35.25486983185586,
+            "rows": 20073,
+            "two_axis_rmse_deg": 35.43581845228329
+          },
+          "rotated_task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.97588767860934,
+              "radial_deviation_deg": 17.218652176839832
+            },
+            "mean_of_person_roots_deg": 33.4459469898379,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 46.5628034323277,
+              "radial_deviation_deg": 17.714250170315623
+            },
+            "pooled_two_axis_rmse_deg": 35.22704445858402,
+            "rows": 20073,
+            "two_axis_rmse_deg": 35.378072347008334
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 48.762351734227856,
+              "radial_deviation_deg": 15.427186117571527
+            },
+            "mean_of_person_roots_deg": 33.7982114983393,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 48.21202706598154,
+              "radial_deviation_deg": 15.92869596666423
+            },
+            "pooled_two_axis_rmse_deg": 35.90350198106974,
+            "rows": 20073,
+            "two_axis_rmse_deg": 36.16465828788339
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 46.34635726966877,
+              "radial_deviation_deg": 16.12991657155526
+            },
+            "mean_of_person_roots_deg": 32.632139342775076,
+            "people": 4,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 45.91917746238535,
+              "radial_deviation_deg": 16.653775334119285
+            },
+            "pooled_two_axis_rmse_deg": 34.539246457481994,
+            "rows": 20073,
+            "two_axis_rmse_deg": 34.69984899659588
+          }
+        },
+        "people": 4,
+        "pooled_difference_deg": -0.6877980011020242,
+        "right": "rotated_task_time_emg",
+        "rows": 20073,
+        "two_axis_difference_deg": -0.678223350412452
+      },
+      "whole_trials_included": 104,
+      "whole_trials_original": 104,
+      "whole_trials_shift_too_short": 0,
+      "whole_trials_without_eligible_rows": 0
+    }
+  },
+  "development_rows_mix_differs_from_both": [
+    20073,
+    20073
+  ],
+  "development_trials": 104,
+  "final_uji_test_people": 4,
+  "final_uji_test_used": false,
+  "glossary_revision": 36,
+  "glossary_sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406",
+  "source": "https://doi.org/10.5281/zenodo.3469380",
+  "train_mixture_behavior": {
+    "actual_rows_mix_differs_from_both": [
+      65821,
+      65821
+    ],
+    "actual_rows_mix_equals_task_time": [
+      0,
+      0
+    ],
+    "actual_rows_mix_equals_task_time_emg": [
+      0,
+      0
+    ],
+    "alpha_max": [
+      0.7682316617091598,
+      0.7786383340442646
+    ],
+    "alpha_median": [
+      0.7275827067115138,
+      0.7301258559478083
+    ],
+    "alpha_min": [
+      0.626025630248441,
+      0.6294670202160402
+    ],
+    "axes": [
+      "extension_deg",
+      "radial_deviation_deg"
+    ],
+    "outer_coefficients_interior": [
+      14,
+      14
+    ],
+    "outer_coefficients_one": [
+      0,
+      0
+    ],
+    "outer_coefficients_zero": [
+      0,
+      0
+    ],
+    "outer_exact_zero_endpoint_spread": [
+      0,
+      0
+    ]
+  },
+  "train_nested_lopo": {
+    "glove_warning_drop_adl_7_11": {
+      "axis_blend_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -0.6945868938879727,
+          "radial_deviation_deg": -0.4965754934543405
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -1.065064624966494,
+            -0.3290074149812193
+          ],
+          "radial_deviation_deg": [
+            -0.8849365720376159,
+            -0.09826527430483423
+          ],
+          "two_axis": [
+            -0.9135933958543947,
+            -0.28556173579413213
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -0.5974449515976303,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.444236567182088,
+              "radial_deviation_deg": 13.559595154175
+            },
+            "mean_of_person_roots_deg": 20.136079416201863,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.417190018871906,
+              "radial_deviation_deg": 13.483765964821421
+            },
+            "pooled_two_axis_rmse_deg": 20.345091460220953,
+            "rows": 60432,
+            "two_axis_rmse_deg": 20.387150306404425
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.13882346107006,
+              "radial_deviation_deg": 14.05617064762934
+            },
+            "mean_of_person_roots_deg": 20.733524367799493,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.073100789559636,
+              "radial_deviation_deg": 13.952617825087323
+            },
+            "pooled_two_axis_rmse_deg": 20.91031000434334,
+            "rows": 60432,
+            "two_axis_rmse_deg": 20.98587650307062
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.524064341190623,
+              "radial_deviation_deg": 13.627434629118017
+            },
+            "mean_of_person_roots_deg": 20.20974117723562,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.5112590026891,
+              "radial_deviation_deg": 13.559877918278774
+            },
+            "pooled_two_axis_rmse_deg": 20.429080070586974,
+            "rows": 60432,
+            "two_axis_rmse_deg": 20.45953121486565
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -0.5652185441223878,
+        "right": "task_time",
+        "rows": 60432,
+        "two_axis_difference_deg": -0.5987261966661954
+      },
+      "axis_blend_minus_task_time_emg": {
+        "axis_difference_deg": {
+          "extension_deg": -0.07982777400853536,
+          "radial_deviation_deg": -0.06783947494301756
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -0.35640633741762234,
+            0.16296225100346645
+          ],
+          "radial_deviation_deg": [
+            -0.29587300070266787,
+            0.11982271465877113
+          ],
+          "two_axis": [
+            -0.3028514305152826,
+            0.12649633351096087
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -0.07366176103375821,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.444236567182088,
+              "radial_deviation_deg": 13.559595154175
+            },
+            "mean_of_person_roots_deg": 20.136079416201863,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.417190018871906,
+              "radial_deviation_deg": 13.483765964821421
+            },
+            "pooled_two_axis_rmse_deg": 20.345091460220953,
+            "rows": 60432,
+            "two_axis_rmse_deg": 20.387150306404425
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.13882346107006,
+              "radial_deviation_deg": 14.05617064762934
+            },
+            "mean_of_person_roots_deg": 20.733524367799493,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.073100789559636,
+              "radial_deviation_deg": 13.952617825087323
+            },
+            "pooled_two_axis_rmse_deg": 20.91031000434334,
+            "rows": 60432,
+            "two_axis_rmse_deg": 20.98587650307062
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.524064341190623,
+              "radial_deviation_deg": 13.627434629118017
+            },
+            "mean_of_person_roots_deg": 20.20974117723562,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.5112590026891,
+              "radial_deviation_deg": 13.559877918278774
+            },
+            "pooled_two_axis_rmse_deg": 20.429080070586974,
+            "rows": 60432,
+            "two_axis_rmse_deg": 20.45953121486565
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -0.08398861036602057,
+        "right": "task_time_emg",
+        "rows": 60432,
+        "two_axis_difference_deg": -0.07238090846122347
+      },
+      "task_time_emg_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -0.6147591198794373,
+          "radial_deviation_deg": -0.4287360185113229
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -1.2011244015768867,
+            -0.03183699252057461
+          ],
+          "radial_deviation_deg": [
+            -0.9958269816831231,
+            0.18674194953850914
+          ],
+          "two_axis": [
+            -1.019399870487238,
+            -0.027434287549380435
+          ]
+        },
+        "left": "task_time_emg",
+        "mean_of_person_roots_difference_deg": -0.5237831905638721,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.444236567182088,
+              "radial_deviation_deg": 13.559595154175
+            },
+            "mean_of_person_roots_deg": 20.136079416201863,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.417190018871906,
+              "radial_deviation_deg": 13.483765964821421
+            },
+            "pooled_two_axis_rmse_deg": 20.345091460220953,
+            "rows": 60432,
+            "two_axis_rmse_deg": 20.387150306404425
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.13882346107006,
+              "radial_deviation_deg": 14.05617064762934
+            },
+            "mean_of_person_roots_deg": 20.733524367799493,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.073100789559636,
+              "radial_deviation_deg": 13.952617825087323
+            },
+            "pooled_two_axis_rmse_deg": 20.91031000434334,
+            "rows": 60432,
+            "two_axis_rmse_deg": 20.98587650307062
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.524064341190623,
+              "radial_deviation_deg": 13.627434629118017
+            },
+            "mean_of_person_roots_deg": 20.20974117723562,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.5112590026891,
+              "radial_deviation_deg": 13.559877918278774
+            },
+            "pooled_two_axis_rmse_deg": 20.429080070586974,
+            "rows": 60432,
+            "two_axis_rmse_deg": 20.45953121486565
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -0.48122993375636725,
+        "right": "task_time",
+        "rows": 60432,
+        "two_axis_difference_deg": -0.526345288204972
+      }
+    },
+    "phase_manipulation": {
+      "axis_blend_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -0.5719846797609556,
+          "radial_deviation_deg": -0.4204888909553244
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -1.0316984343467663,
+            -0.12211027025046665
+          ],
+          "radial_deviation_deg": [
+            -0.8317941976191815,
+            -0.02617932591424599
+          ],
+          "two_axis": [
+            -0.8663444127237304,
+            -0.13448357664116772
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -0.49398659614080387,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.88992052378869,
+              "radial_deviation_deg": 13.834900863480188
+            },
+            "mean_of_person_roots_deg": 20.571417792988512,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.921664844833817,
+              "radial_deviation_deg": 13.759624554561592
+            },
+            "pooled_two_axis_rmse_deg": 20.751626155682143,
+            "rows": 52105,
+            "two_axis_rmse_deg": 20.756835821367613
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.461905203549644,
+              "radial_deviation_deg": 14.255389754435512
+            },
+            "mean_of_person_roots_deg": 21.065404389129316,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.450995263181568,
+              "radial_deviation_deg": 14.152594111874922
+            },
+            "pooled_two_axis_rmse_deg": 21.212626788169498,
+            "rows": 52105,
+            "two_axis_rmse_deg": 21.25380629502058
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.073728816290362,
+              "radial_deviation_deg": 13.968954975143419
+            },
+            "mean_of_person_roots_deg": 20.726981794216282,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.11704331395669,
+              "radial_deviation_deg": 13.89864921016428
+            },
+            "pooled_two_axis_rmse_deg": 20.919756228626294,
+            "rows": 52105,
+            "two_axis_rmse_deg": 20.916154492198544
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -0.46100063248735523,
+        "right": "task_time",
+        "rows": 52105,
+        "two_axis_difference_deg": -0.49697047365296854
+      },
+      "axis_blend_minus_task_time_emg": {
+        "axis_difference_deg": {
+          "extension_deg": -0.18380829250167352,
+          "radial_deviation_deg": -0.13405411166323056
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -0.5685433777490411,
+            0.13998068966178578
+          ],
+          "radial_deviation_deg": [
+            -0.375068490673027,
+            0.0770463117869295
+          ],
+          "two_axis": [
+            -0.4599997103653094,
+            0.09278784425853945
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -0.15556400122776992,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.88992052378869,
+              "radial_deviation_deg": 13.834900863480188
+            },
+            "mean_of_person_roots_deg": 20.571417792988512,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.921664844833817,
+              "radial_deviation_deg": 13.759624554561592
+            },
+            "pooled_two_axis_rmse_deg": 20.751626155682143,
+            "rows": 52105,
+            "two_axis_rmse_deg": 20.756835821367613
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.461905203549644,
+              "radial_deviation_deg": 14.255389754435512
+            },
+            "mean_of_person_roots_deg": 21.065404389129316,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.450995263181568,
+              "radial_deviation_deg": 14.152594111874922
+            },
+            "pooled_two_axis_rmse_deg": 21.212626788169498,
+            "rows": 52105,
+            "two_axis_rmse_deg": 21.25380629502058
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.073728816290362,
+              "radial_deviation_deg": 13.968954975143419
+            },
+            "mean_of_person_roots_deg": 20.726981794216282,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.11704331395669,
+              "radial_deviation_deg": 13.89864921016428
+            },
+            "pooled_two_axis_rmse_deg": 20.919756228626294,
+            "rows": 52105,
+            "two_axis_rmse_deg": 20.916154492198544
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -0.16813007294415172,
+        "right": "task_time_emg",
+        "rows": 52105,
+        "two_axis_difference_deg": -0.1593186708309311
+      },
+      "task_time_emg_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -0.38817638725928205,
+          "radial_deviation_deg": -0.2864347792920938
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -1.1464009996772813,
+            0.3910164010931069
+          ],
+          "radial_deviation_deg": [
+            -0.8931180652032297,
+            0.32597313116406745
+          ],
+          "two_axis": [
+            -0.9367874591978846,
+            0.2857226007106258
+          ]
+        },
+        "left": "task_time_emg",
+        "mean_of_person_roots_difference_deg": -0.33842259491303395,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.88992052378869,
+              "radial_deviation_deg": 13.834900863480188
+            },
+            "mean_of_person_roots_deg": 20.571417792988512,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.921664844833817,
+              "radial_deviation_deg": 13.759624554561592
+            },
+            "pooled_two_axis_rmse_deg": 20.751626155682143,
+            "rows": 52105,
+            "two_axis_rmse_deg": 20.756835821367613
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.461905203549644,
+              "radial_deviation_deg": 14.255389754435512
+            },
+            "mean_of_person_roots_deg": 21.065404389129316,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.450995263181568,
+              "radial_deviation_deg": 14.152594111874922
+            },
+            "pooled_two_axis_rmse_deg": 21.212626788169498,
+            "rows": 52105,
+            "two_axis_rmse_deg": 21.25380629502058
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.073728816290362,
+              "radial_deviation_deg": 13.968954975143419
+            },
+            "mean_of_person_roots_deg": 20.726981794216282,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.11704331395669,
+              "radial_deviation_deg": 13.89864921016428
+            },
+            "pooled_two_axis_rmse_deg": 20.919756228626294,
+            "rows": 52105,
+            "two_axis_rmse_deg": 20.916154492198544
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -0.2928705595432035,
+        "right": "task_time",
+        "rows": 52105,
+        "two_axis_difference_deg": -0.33765180282203744
+      }
+    },
+    "phase_reaching": {
+      "axis_blend_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -0.1615279731541719,
+          "radial_deviation_deg": -1.3262556090302642
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -1.285105664167826,
+            1.3487572408122468
+          ],
+          "radial_deviation_deg": [
+            -2.3457318049552187,
+            -0.245866652221112
+          ],
+          "two_axis": [
+            -1.5669623014888912,
+            0.703298090112894
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -0.6355985357169374,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.30351653873092,
+              "radial_deviation_deg": 13.316686719527715
+            },
+            "mean_of_person_roots_deg": 19.175025201288143,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 23.683646238182913,
+              "radial_deviation_deg": 12.830778880337444
+            },
+            "pooled_two_axis_rmse_deg": 19.046574308934254,
+            "rows": 2007,
+            "two_axis_rmse_deg": 19.595854935858416
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.465044511885093,
+              "radial_deviation_deg": 14.642942328557979
+            },
+            "mean_of_person_roots_deg": 19.81062373700508,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 23.85833274514299,
+              "radial_deviation_deg": 14.223138636671868
+            },
+            "pooled_two_axis_rmse_deg": 19.640744818564695,
+            "rows": 2007,
+            "two_axis_rmse_deg": 20.1612767825601
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.773760206296966,
+              "radial_deviation_deg": 13.310879658557747
+            },
+            "mean_of_person_roots_deg": 19.366814499012882,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 24.20881892606238,
+              "radial_deviation_deg": 12.820098606772273
+            },
+            "pooled_two_axis_rmse_deg": 19.37036192333845,
+            "rows": 2007,
+            "two_axis_rmse_deg": 19.886159911402068
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -0.594170509630441,
+        "right": "task_time",
+        "rows": 2007,
+        "two_axis_difference_deg": -0.5654218467016854
+      },
+      "axis_blend_minus_task_time_emg": {
+        "axis_difference_deg": {
+          "extension_deg": -0.4702436675660451,
+          "radial_deviation_deg": 0.005807060969967637
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -1.35778579794372,
+            0.13099880067381642
+          ],
+          "radial_deviation_deg": [
+            -0.530282052485075,
+            0.4675537393473396
+          ],
+          "two_axis": [
+            -1.015371644217054,
+            0.21969639911037964
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -0.19178929772473907,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.30351653873092,
+              "radial_deviation_deg": 13.316686719527715
+            },
+            "mean_of_person_roots_deg": 19.175025201288143,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 23.683646238182913,
+              "radial_deviation_deg": 12.830778880337444
+            },
+            "pooled_two_axis_rmse_deg": 19.046574308934254,
+            "rows": 2007,
+            "two_axis_rmse_deg": 19.595854935858416
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.465044511885093,
+              "radial_deviation_deg": 14.642942328557979
+            },
+            "mean_of_person_roots_deg": 19.81062373700508,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 23.85833274514299,
+              "radial_deviation_deg": 14.223138636671868
+            },
+            "pooled_two_axis_rmse_deg": 19.640744818564695,
+            "rows": 2007,
+            "two_axis_rmse_deg": 20.1612767825601
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.773760206296966,
+              "radial_deviation_deg": 13.310879658557747
+            },
+            "mean_of_person_roots_deg": 19.366814499012882,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 24.20881892606238,
+              "radial_deviation_deg": 12.820098606772273
+            },
+            "pooled_two_axis_rmse_deg": 19.37036192333845,
+            "rows": 2007,
+            "two_axis_rmse_deg": 19.886159911402068
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -0.32378761440419623,
+        "right": "task_time_emg",
+        "rows": 2007,
+        "two_axis_difference_deg": -0.290304975543652
+      },
+      "task_time_emg_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": 0.3087156944118732,
+          "radial_deviation_deg": -1.3320626700002318
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -1.409533868178775,
+            2.7038692419385115
+          ],
+          "radial_deviation_deg": [
+            -2.7745743042863387,
+            0.24367585364976657
+          ],
+          "two_axis": [
+            -1.7773729247882737,
+            1.720979363639204
+          ]
+        },
+        "left": "task_time_emg",
+        "mean_of_person_roots_difference_deg": -0.4438092379921983,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.30351653873092,
+              "radial_deviation_deg": 13.316686719527715
+            },
+            "mean_of_person_roots_deg": 19.175025201288143,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 23.683646238182913,
+              "radial_deviation_deg": 12.830778880337444
+            },
+            "pooled_two_axis_rmse_deg": 19.046574308934254,
+            "rows": 2007,
+            "two_axis_rmse_deg": 19.595854935858416
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.465044511885093,
+              "radial_deviation_deg": 14.642942328557979
+            },
+            "mean_of_person_roots_deg": 19.81062373700508,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 23.85833274514299,
+              "radial_deviation_deg": 14.223138636671868
+            },
+            "pooled_two_axis_rmse_deg": 19.640744818564695,
+            "rows": 2007,
+            "two_axis_rmse_deg": 20.1612767825601
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.773760206296966,
+              "radial_deviation_deg": 13.310879658557747
+            },
+            "mean_of_person_roots_deg": 19.366814499012882,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 24.20881892606238,
+              "radial_deviation_deg": 12.820098606772273
+            },
+            "pooled_two_axis_rmse_deg": 19.37036192333845,
+            "rows": 2007,
+            "two_axis_rmse_deg": 19.886159911402068
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -0.2703828952262448,
+        "right": "task_time",
+        "rows": 2007,
+        "two_axis_difference_deg": -0.2751168711580334
+      }
+    },
+    "phase_release": {
+      "axis_blend_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -1.4359490726417548,
+          "radial_deviation_deg": -1.0128061500273677
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -2.152577929852273,
+            -0.7205826321340372
+          ],
+          "radial_deviation_deg": [
+            -1.3868373227667752,
+            -0.6099214611321974
+          ],
+          "two_axis": [
+            -1.7599166428667161,
+            -0.6709284515456665
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -1.161423742719343,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.47322748187938,
+              "radial_deviation_deg": 11.459336090655295
+            },
+            "mean_of_person_roots_deg": 18.309632427354234,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 24.525522777942847,
+              "radial_deviation_deg": 11.581145115672403
+            },
+            "pooled_two_axis_rmse_deg": 19.178427851646962,
+            "rows": 11709,
+            "two_axis_rmse_deg": 19.108312942518122
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.909176554521135,
+              "radial_deviation_deg": 12.472142240682663
+            },
+            "mean_of_person_roots_deg": 19.471056170073577,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.98395805423202,
+              "radial_deviation_deg": 12.583935346890815
+            },
+            "pooled_two_axis_rmse_deg": 20.414719015685964,
+            "rows": 11709,
+            "two_axis_rmse_deg": 20.33272930284039
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.05723697772297,
+              "radial_deviation_deg": 11.17639505447212
+            },
+            "mean_of_person_roots_deg": 18.009357526550907,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 24.102864587851617,
+              "radial_deviation_deg": 11.297585820349045
+            },
+            "pooled_two_axis_rmse_deg": 18.82263964895016,
+            "rows": 11709,
+            "two_axis_rmse_deg": 18.75716472998985
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -1.2362911640390024,
+        "right": "task_time",
+        "rows": 11709,
+        "two_axis_difference_deg": -1.2244163603222695
+      },
+      "axis_blend_minus_task_time_emg": {
+        "axis_difference_deg": {
+          "extension_deg": 0.4159905041564116,
+          "radial_deviation_deg": 0.2829410361831748
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            0.08466164331434749,
+            0.7507986653470572
+          ],
+          "radial_deviation_deg": [
+            0.09416021348152621,
+            0.45863170765642186
+          ],
+          "two_axis": [
+            0.08901362984430712,
+            0.6121905864060647
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": 0.30027490080332697,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.47322748187938,
+              "radial_deviation_deg": 11.459336090655295
+            },
+            "mean_of_person_roots_deg": 18.309632427354234,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 24.525522777942847,
+              "radial_deviation_deg": 11.581145115672403
+            },
+            "pooled_two_axis_rmse_deg": 19.178427851646962,
+            "rows": 11709,
+            "two_axis_rmse_deg": 19.108312942518122
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.909176554521135,
+              "radial_deviation_deg": 12.472142240682663
+            },
+            "mean_of_person_roots_deg": 19.471056170073577,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.98395805423202,
+              "radial_deviation_deg": 12.583935346890815
+            },
+            "pooled_two_axis_rmse_deg": 20.414719015685964,
+            "rows": 11709,
+            "two_axis_rmse_deg": 20.33272930284039
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.05723697772297,
+              "radial_deviation_deg": 11.17639505447212
+            },
+            "mean_of_person_roots_deg": 18.009357526550907,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 24.102864587851617,
+              "radial_deviation_deg": 11.297585820349045
+            },
+            "pooled_two_axis_rmse_deg": 18.82263964895016,
+            "rows": 11709,
+            "two_axis_rmse_deg": 18.75716472998985
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": 0.3557882026968002,
+        "right": "task_time_emg",
+        "rows": 11709,
+        "two_axis_difference_deg": 0.35114821252827255
+      },
+      "task_time_emg_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -1.8519395767981663,
+          "radial_deviation_deg": -1.2957471862105425
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -2.8802128862932808,
+            -0.8184139103708787
+          ],
+          "radial_deviation_deg": [
+            -1.8261271427504122,
+            -0.7104109685008885
+          ],
+          "two_axis": [
+            -2.3591843983316703,
+            -0.7802605063809424
+          ]
+        },
+        "left": "task_time_emg",
+        "mean_of_person_roots_difference_deg": -1.46169864352267,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.47322748187938,
+              "radial_deviation_deg": 11.459336090655295
+            },
+            "mean_of_person_roots_deg": 18.309632427354234,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 24.525522777942847,
+              "radial_deviation_deg": 11.581145115672403
+            },
+            "pooled_two_axis_rmse_deg": 19.178427851646962,
+            "rows": 11709,
+            "two_axis_rmse_deg": 19.108312942518122
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.909176554521135,
+              "radial_deviation_deg": 12.472142240682663
+            },
+            "mean_of_person_roots_deg": 19.471056170073577,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.98395805423202,
+              "radial_deviation_deg": 12.583935346890815
+            },
+            "pooled_two_axis_rmse_deg": 20.414719015685964,
+            "rows": 11709,
+            "two_axis_rmse_deg": 20.33272930284039
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 24.05723697772297,
+              "radial_deviation_deg": 11.17639505447212
+            },
+            "mean_of_person_roots_deg": 18.009357526550907,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 24.102864587851617,
+              "radial_deviation_deg": 11.297585820349045
+            },
+            "pooled_two_axis_rmse_deg": 18.82263964895016,
+            "rows": 11709,
+            "two_axis_rmse_deg": 18.75716472998985
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -1.5920793667358026,
+        "right": "task_time",
+        "rows": 11709,
+        "two_axis_difference_deg": -1.575564572850542
+      }
+    },
+    "primary": {
+      "axis_blend_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -0.7305779283371692,
+          "radial_deviation_deg": -0.5490125309297174
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -1.1099727232770609,
+            -0.3349100485250215
+          ],
+          "radial_deviation_deg": [
+            -0.9200863387154516,
+            -0.18733745333946897
+          ],
+          "two_axis": [
+            -0.9558780921534105,
+            -0.30312298253489517
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -0.6281275339270316,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.641294868987178,
+              "radial_deviation_deg": 13.432860309239906
+            },
+            "mean_of_person_roots_deg": 20.243373925277645,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.61285662333142,
+              "radial_deviation_deg": 13.369883440311588
+            },
+            "pooled_two_axis_rmse_deg": 20.430029461736495,
+            "rows": 65821,
+            "two_axis_rmse_deg": 20.46848478326988
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.371872797324347,
+              "radial_deviation_deg": 13.981872840169624
+            },
+            "mean_of_person_roots_deg": 20.871501459204676,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.292994336772967,
+              "radial_deviation_deg": 13.888703968573433
+            },
+            "pooled_two_axis_rmse_deg": 21.02638401057407,
+            "rows": 65821,
+            "two_axis_rmse_deg": 21.106497138996428
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.720520106363278,
+              "radial_deviation_deg": 13.493840970539798
+            },
+            "mean_of_person_roots_deg": 20.31659563917412,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.713375293844017,
+              "radial_deviation_deg": 13.440062220836039
+            },
+            "pooled_two_axis_rmse_deg": 20.516005233743805,
+            "rows": 65821,
+            "two_axis_rmse_deg": 20.53812185522396
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -0.5963545488375743,
+        "right": "task_time",
+        "rows": 65821,
+        "two_axis_difference_deg": -0.6380123557265485
+      },
+      "axis_blend_minus_task_time_emg": {
+        "axis_difference_deg": {
+          "extension_deg": -0.07922523737610021,
+          "radial_deviation_deg": -0.06098066129989199
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -0.4283954153772962,
+            0.19409385467879367
+          ],
+          "radial_deviation_deg": [
+            -0.2822809917476572,
+            0.1225602877310246
+          ],
+          "two_axis": [
+            -0.3498744807236271,
+            0.1434131799314704
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -0.07322171389647636,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.641294868987178,
+              "radial_deviation_deg": 13.432860309239906
+            },
+            "mean_of_person_roots_deg": 20.243373925277645,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.61285662333142,
+              "radial_deviation_deg": 13.369883440311588
+            },
+            "pooled_two_axis_rmse_deg": 20.430029461736495,
+            "rows": 65821,
+            "two_axis_rmse_deg": 20.46848478326988
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.371872797324347,
+              "radial_deviation_deg": 13.981872840169624
+            },
+            "mean_of_person_roots_deg": 20.871501459204676,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.292994336772967,
+              "radial_deviation_deg": 13.888703968573433
+            },
+            "pooled_two_axis_rmse_deg": 21.02638401057407,
+            "rows": 65821,
+            "two_axis_rmse_deg": 21.106497138996428
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.720520106363278,
+              "radial_deviation_deg": 13.493840970539798
+            },
+            "mean_of_person_roots_deg": 20.31659563917412,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.713375293844017,
+              "radial_deviation_deg": 13.440062220836039
+            },
+            "pooled_two_axis_rmse_deg": 20.516005233743805,
+            "rows": 65821,
+            "two_axis_rmse_deg": 20.53812185522396
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -0.0859757720073091,
+        "right": "task_time_emg",
+        "rows": 65821,
+        "two_axis_difference_deg": -0.0696370719540802
+      },
+      "task_time_emg_minus_task_time": {
+        "axis_difference_deg": {
+          "extension_deg": -0.651352690961069,
+          "radial_deviation_deg": -0.48803186962982537
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -1.2841410072057036,
+            0.05126730641535421
+          ],
+          "radial_deviation_deg": [
+            -1.0281974156322253,
+            0.07387638969563588
+          ],
+          "two_axis": [
+            -1.07894764707563,
+            0.014766550431928736
+          ]
+        },
+        "left": "task_time_emg",
+        "mean_of_person_roots_difference_deg": -0.5549058200305552,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.641294868987178,
+              "radial_deviation_deg": 13.432860309239906
+            },
+            "mean_of_person_roots_deg": 20.243373925277645,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.61285662333142,
+              "radial_deviation_deg": 13.369883440311588
+            },
+            "pooled_two_axis_rmse_deg": 20.430029461736495,
+            "rows": 65821,
+            "two_axis_rmse_deg": 20.46848478326988
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.371872797324347,
+              "radial_deviation_deg": 13.981872840169624
+            },
+            "mean_of_person_roots_deg": 20.871501459204676,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.292994336772967,
+              "radial_deviation_deg": 13.888703968573433
+            },
+            "pooled_two_axis_rmse_deg": 21.02638401057407,
+            "rows": 65821,
+            "two_axis_rmse_deg": 21.106497138996428
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.720520106363278,
+              "radial_deviation_deg": 13.493840970539798
+            },
+            "mean_of_person_roots_deg": 20.31659563917412,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.713375293844017,
+              "radial_deviation_deg": 13.440062220836039
+            },
+            "pooled_two_axis_rmse_deg": 20.516005233743805,
+            "rows": 65821,
+            "two_axis_rmse_deg": 20.53812185522396
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -0.5103787768302652,
+        "right": "task_time",
+        "rows": 65821,
+        "two_axis_difference_deg": -0.5683752837724683
+      }
+    },
+    "rotation": {
+      "axis_blend_minus_rotated_axis_blend": {
+        "axis_difference_deg": {
+          "extension_deg": -1.0429521583334314,
+          "radial_deviation_deg": -1.3247914061076909
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -1.4849334425009508,
+            -0.6285353900749918
+          ],
+          "radial_deviation_deg": [
+            -1.730644398967783,
+            -0.9655664045325311
+          ],
+          "two_axis": [
+            -1.468777467517032,
+            -0.7419426385480322
+          ]
+        },
+        "left": "axis_blend",
+        "mean_of_person_roots_difference_deg": -1.0928777872197522,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.641294868987178,
+              "radial_deviation_deg": 13.432860309239906
+            },
+            "mean_of_person_roots_deg": 20.243373925277645,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.61285662333142,
+              "radial_deviation_deg": 13.369883440311588
+            },
+            "pooled_two_axis_rmse_deg": 20.430029461736495,
+            "rows": 65821,
+            "two_axis_rmse_deg": 20.46848478326988
+          },
+          "rotated_axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.68424702732061,
+              "radial_deviation_deg": 14.757651715347597
+            },
+            "mean_of_person_roots_deg": 21.336251712497397,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.61270848296934,
+              "radial_deviation_deg": 14.66887142866385
+            },
+            "pooled_two_axis_rmse_deg": 21.487345599098273,
+            "rows": 65821,
+            "two_axis_rmse_deg": 21.561972585625956
+          },
+          "rotated_task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 27.270214664532894,
+              "radial_deviation_deg": 15.441666491011368
+            },
+            "mean_of_person_roots_deg": 21.9199144675672,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 27.194601786391896,
+              "radial_deviation_deg": 15.347219813362415
+            },
+            "pooled_two_axis_rmse_deg": 22.080347849616075,
+            "rows": 65821,
+            "two_axis_rmse_deg": 22.159757127158773
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.371872797324347,
+              "radial_deviation_deg": 13.981872840169624
+            },
+            "mean_of_person_roots_deg": 20.871501459204676,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.292994336772967,
+              "radial_deviation_deg": 13.888703968573433
+            },
+            "pooled_two_axis_rmse_deg": 21.02638401057407,
+            "rows": 65821,
+            "two_axis_rmse_deg": 21.106497138996428
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.720520106363278,
+              "radial_deviation_deg": 13.493840970539798
+            },
+            "mean_of_person_roots_deg": 20.31659563917412,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.713375293844017,
+              "radial_deviation_deg": 13.440062220836039
+            },
+            "pooled_two_axis_rmse_deg": 20.516005233743805,
+            "rows": 65821,
+            "two_axis_rmse_deg": 20.53812185522396
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -1.0573161373617772,
+        "right": "rotated_axis_blend",
+        "rows": 65821,
+        "two_axis_difference_deg": -1.0934878023560763
+      },
+      "included_shift_range_unwrapped_ms": [
+        1050.0,
+        15951.0
+      ],
+      "included_shift_range_wrapped_ms": [
+        -15951.0,
+        -1100.0
+      ],
+      "task_time_emg_minus_rotated_task_time_emg": {
+        "axis_difference_deg": {
+          "extension_deg": -1.549694558169616,
+          "radial_deviation_deg": -1.9478255204715698
+        },
+        "exploratory_bootstrap_95_percent_deg": {
+          "extension_deg": [
+            -2.214012392743957,
+            -0.9254948152640529
+          ],
+          "radial_deviation_deg": [
+            -2.536666859857707,
+            -1.4355834521703357
+          ],
+          "two_axis": [
+            -2.1753800156719234,
+            -1.0973057602633562
+          ]
+        },
+        "left": "task_time_emg",
+        "mean_of_person_roots_difference_deg": -1.6033188283930784,
+        "models": {
+          "axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.641294868987178,
+              "radial_deviation_deg": 13.432860309239906
+            },
+            "mean_of_person_roots_deg": 20.243373925277645,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.61285662333142,
+              "radial_deviation_deg": 13.369883440311588
+            },
+            "pooled_two_axis_rmse_deg": 20.430029461736495,
+            "rows": 65821,
+            "two_axis_rmse_deg": 20.46848478326988
+          },
+          "rotated_axis_blend": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.68424702732061,
+              "radial_deviation_deg": 14.757651715347597
+            },
+            "mean_of_person_roots_deg": 21.336251712497397,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.61270848296934,
+              "radial_deviation_deg": 14.66887142866385
+            },
+            "pooled_two_axis_rmse_deg": 21.487345599098273,
+            "rows": 65821,
+            "two_axis_rmse_deg": 21.561972585625956
+          },
+          "rotated_task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 27.270214664532894,
+              "radial_deviation_deg": 15.441666491011368
+            },
+            "mean_of_person_roots_deg": 21.9199144675672,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 27.194601786391896,
+              "radial_deviation_deg": 15.347219813362415
+            },
+            "pooled_two_axis_rmse_deg": 22.080347849616075,
+            "rows": 65821,
+            "two_axis_rmse_deg": 22.159757127158773
+          },
+          "task_time": {
+            "axis_rmse_deg": {
+              "extension_deg": 26.371872797324347,
+              "radial_deviation_deg": 13.981872840169624
+            },
+            "mean_of_person_roots_deg": 20.871501459204676,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 26.292994336772967,
+              "radial_deviation_deg": 13.888703968573433
+            },
+            "pooled_two_axis_rmse_deg": 21.02638401057407,
+            "rows": 65821,
+            "two_axis_rmse_deg": 21.106497138996428
+          },
+          "task_time_emg": {
+            "axis_rmse_deg": {
+              "extension_deg": 25.720520106363278,
+              "radial_deviation_deg": 13.493840970539798
+            },
+            "mean_of_person_roots_deg": 20.31659563917412,
+            "people": 14,
+            "pooled_axis_rmse_deg": {
+              "extension_deg": 25.713375293844017,
+              "radial_deviation_deg": 13.440062220836039
+            },
+            "pooled_two_axis_rmse_deg": 20.516005233743805,
+            "rows": 65821,
+            "two_axis_rmse_deg": 20.53812185522396
+          }
+        },
+        "people": 14,
+        "pooled_difference_deg": -1.5643426158722704,
+        "right": "rotated_task_time_emg",
+        "rows": 65821,
+        "two_axis_difference_deg": -1.6216352719348137
+      },
+      "whole_trials_included": 359,
+      "whole_trials_original": 359,
+      "whole_trials_shift_too_short": 0,
+      "whole_trials_without_eligible_rows": 0
+    }
+  },
+  "train_people": 14,
+  "train_trials": 359,
+  "units": "degrees"
+}
