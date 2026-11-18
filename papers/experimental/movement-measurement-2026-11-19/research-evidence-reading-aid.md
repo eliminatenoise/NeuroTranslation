@@ -2,7 +2,7 @@
 
 The 990-update forecasting study reduced error relative to its initial and 40-update states, yet both pooled streams still lost to persistence: carrying each feature’s last supported past value forward. The complete numerical record is in [training-diagnostic-summary.json](training-diagnostic-summary.json); [research-evidence.json](research-evidence.json) preserves the wider study distinctions and terminology record.
 
-The 19 November 2026 candidate contains four newly built experimental PDFs. The camera example in each edition asks what can go wrong when two views record different moments. The technical NeuroTranslation paper also clarifies what its temporal-order comparison can establish. The studies and their limitations below are the same evidence.
+The 19 November 2026 candidate contains four newly built experimental PDFs. The camera example in each edition asks what can go wrong when two views record different moments. The technical NeuroTranslation paper also clarifies what its temporal-order comparison can establish. The two NeuroTranslation papers now also report a separate comparison on archived hand-to-mouth movements. A model fitted to one person’s surface EMG and elbow angles gave 62.36° root-mean-square error on the other person. The training-angle mean gave 34.95°, and a template given the recorded onset gave 30.77°. Both controls beat the fitted model in all five held-out repetitions. Person and arm side changed together. This is an offline comparison on two healthy volunteers. [Code and aggregate results](https://github.com/eliminatenoise/NeuroTranslation/tree/402e14d14de99e1126bfe5ad64b62f60d7342a78/benchmarks/surface-emg-elbow)
 
 ## One acquisition, two forecasting tasks
 

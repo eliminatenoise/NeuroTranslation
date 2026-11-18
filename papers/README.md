@@ -2,7 +2,7 @@
 
 ## Proposed revision for review · 19 November 2026
 
-The four PDFs now work through one question. If two cameras see the same hand at different moments, what can the joined image tell us about the movement? NeuroTranslation technical also clarifies the test of temporal order in the completed LINK comparison. These edits add no experimental results.
+The four PDFs now work through one question. If two cameras see the same hand at different moments, what can the joined image tell us about the movement? NeuroTranslation technical also clarifies the test of temporal order in the completed LINK comparison. Both NeuroTranslation editions also report a separate test on archived hand-to-mouth movements. The surface EMG model missed the held-out person’s elbow angle by more than either simpler comparison.
 
 - NeuroTranslation — [Technical](experimental/movement-measurement-2026-11-19/neurotranslation-technical.pdf#page=32) · [Explained](experimental/movement-measurement-2026-11-19/neurotranslation-explained.pdf#page=65)
 - Brain2Body — [Research article](experimental/movement-measurement-2026-11-19/brain2body-article.pdf#page=20) · [Simple English](experimental/movement-measurement-2026-11-19/brain2body-simple-english.pdf#page=31)

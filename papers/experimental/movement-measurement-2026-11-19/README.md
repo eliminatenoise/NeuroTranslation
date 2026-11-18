@@ -4,7 +4,7 @@
 
 Open [the paper index](index.html) to read the four PDFs or jump to their revised passages. Keep these files together when you extract them so the PDFs can find their evidence companions.
 
-Two cameras can give us a grip the person never made. The four editions now use that example to explain why a proposed movement comparison needs a common clock, a common physical frame and independent checks of the joined view. NeuroTranslation technical also clarifies what its completed temporal-order comparison can establish. The experiment results are the same.
+Two cameras can give us a grip the person never made. The four editions now use that example to explain why a proposed movement comparison needs a common clock, a common physical frame and independent checks of the joined view. NeuroTranslation technical also clarifies what its completed temporal-order comparison can establish. Both NeuroTranslation editions also give the result of an offline comparison on two healthy participants. A single training-average angle and a template given the recorded movement start both beat the surface EMG model on the held-out person.
 
 | Paper | Technical edition | Accessible edition |
 | --- | --- | --- |
