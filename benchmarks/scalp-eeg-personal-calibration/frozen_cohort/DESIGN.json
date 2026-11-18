@@ -1,0 +1,111 @@
+{
+  "anchor": {
+    "id": "first_finite_palm_at_or_after_native_cue",
+    "required_record": "Record cue-native phase, first-finite-palm delay relative to event zero and to the native cue row, eligible and released counts, actual event-relative target range and actual input-to-target lead ranges. Improvements apply only to the post-observation interval. This alignment depends on archival palm sample availability shared by every model method.",
+    "rule": "Validate the initial native cue anchor exactly as in the original protocol: first stored t_ms at or after event zero with a preceding negative sample, cue lag in [0,10) ms, and a strictly increasing continuous 10 ms source lattice within 0.01 ms of each ideal timestamp. Then choose the first finite stored x_mm at or after that native cue index. This second anchor is a clock and missingness choice: magnitudes, directions and outcomes cannot select it. No finite post-cue x means ineligible. Score exactly nine rows +200,+250,…,+600 ms from this first available palm sample. Use source rows directly and keep both input histories unchanged. The earliest required EEG and palm rows occur +10 ms and +50 ms after this anchor. The latest inputs remain 100 ms before each target.",
+    "score_offsets_ms": [
+      200,
+      250,
+      300,
+      350,
+      400,
+      450,
+      500,
+      550,
+      600
+    ],
+    "source_event": "EEG event 14, disappearance of the preparation cue and access to movement. It is a task-clock marker.",
+    "step_ms": 10,
+    "tolerance_ms": 0.01
+  },
+  "controls": {
+    "rotated_eeg": "For each participant, sort eligible trials by lm_trial ascending. In each matched row keep its own target, timing and palm history, replace only EEG with the next trial's EEG at the same native target offsets, wrapping the last to the first. Use the unchanged fit, for time_eeg and time_palm_eeg. This breaks original trial pairing while preserving task timing, but can also change task-condition pairing. The control is descriptive.",
+    "synthetic": "Test clock boundaries, exact feature lags and joint missingness, input hash and role enforcement, train-only fitting, matched method rows and rotation that leaves palm history untouched. Demonstrate algebra against a separate formulation and a synthetic signal that adds information."
+  },
+  "dataset": {
+    "accession": "OpenNeuro ds006840 v1.0.0",
+    "doi": "10.18112/openneuro.ds006840.v1.0.0",
+    "release_commit": "0c701aadfa562b8662e76ca0dd6831788e02e8b6",
+    "role_rule": "First six admitted run identities in ascending public identifier order after sub-06. First three TRAIN, next three DEV. No substitution, exclusions by individual performance, role swap or DEV retuning. Sub-01 through sub-06 are barred from the new analysis.",
+    "roles": {
+      "DEV": [
+        "sub-10",
+        "sub-11",
+        "sub-12"
+      ],
+      "TRAIN": [
+        "sub-07",
+        "sub-08",
+        "sub-09"
+      ]
+    },
+    "source_gate": "Release-tagged SHA-256-bound MAT inputs. Verify exact raw channel identities and source-supported relation to per-run retained EEG columns for C3, Cz and C4 using source tables, headers, author processing/export and derivative geometry. Unresolved binding stops without a fit.",
+    "subset": "Right hand, R1, task-ihc run-01 movement-execution EEG/Leap derivative. Each entire participant appears in exactly one role."
+  },
+  "eligibility": {
+    "identity": "Require well-formed release HDF5 schema, numeric data, unique lm_trial (nonnegative) and eeg_seg_idx (positive) within each run, and channel/asset geometry in agreement with source evidence. Schema, custody or identity errors stop before fitting.",
+    "minimum_eligible_trials_per_participant": 4,
+    "rule": "All author-released epochs are candidates. Each included trial has all nine targets and every required EEG and palm history row on the same native grid, with finite required values. Exclude the entire trial from all methods for missing, gapped, off-lattice, non-monotone or nonfinite numerical support, and count the first recorded reason per trial. Never bridge trials, impute, substitute, or screen amplitudes."
+  },
+  "features": {
+    "channels": [
+      "C3",
+      "Cz",
+      "C4"
+    ],
+    "eeg": "Mean derivative EEG amplitude in microvolts for each of C3, Cz and C4 in each five-sample bin, bin-major order. The bins are start-inclusive and stop-exclusive offsets relative to the target. Latest nominal scalp sample is 100 ms before target. No new filtering, baseline correction, interpolation, or feature selection.",
+    "eeg_bins_ms": [
+      [
+        -190,
+        -140
+      ],
+      [
+        -140,
+        -90
+      ]
+    ],
+    "forbidden": "Target, current/future palm, other signals, trial condition, cue/direction, duration, anchor lag, absolute time, alignment parameters, trial index, participant index or fit to DEV. IDs are for custody, grouping and deterministic control only.",
+    "palm_lags_ms": [
+      100,
+      150
+    ],
+    "past_palm": "Two features from this same trial. Absolute x_mm from target minus 100 ms, plus (x_mm at target minus 100 ms minus x_mm at target minus 150 ms) divided by nominal 0.05 s. Latest nominal past-palm sample is 100 ms before target. Palm history may include pre-anchor rows.",
+    "timing": "Nine categorical target offsets from the first available palm sample (unpenalized, one mean/intercept per offset). The TRAIN-only timing template has access to the same retrospective availability anchor as every other method."
+  },
+  "freeze_stage": "Separately authorized single alternate after the original joint-support no-fit was observed and before any EEG-to-palm model fit, relationship, or score on these six participants. Fixed after review of availability and clock geometry only.",
+  "metrics": {
+    "interpretation": "Treat the result as a six-participant exploratory development experiment with the primary comparison fixed in advance. Mixed signs and proximity to the rotated control are material. Do not select from secondary results, claim statistical power or declare any model deployable.",
+    "primary": "DEV participant-balanced RMSE(time_palm_eeg) minus RMSE(time_palm), in mm. RMSE is square root of the mean across participant MSEs, each equally weighting its eligible trials and all nine frames per trial. Negative favors adding EEG. Report both errors and paired delta, participant signs and leave-one-DEV-participant-out range. No inferential test or population interval.",
+    "secondary": "Same participant-balanced DEV delta for time_eeg vs time, and original-paired vs rotated-EEG models. TRAIN results are in-sample descriptions. Each subject and role: RMSE, MAE and mean signed error for every method, trial-MSE difference quantiles and trial win/tie/loss counts for the paired comparisons, and each of the nine frame offsets aggregated over trials. Also report pooled frame-weighted metrics as a descriptive summary with unequal trial counts."
+  },
+  "models": {
+    "fit": "Ridge in float64. Minimize weighted mean squared error in mm^2 + lambda times sum of squared slopes on standardized continuous features. Nine independent unpenalized timing intercepts. TRAIN weights per frame are 1/(TRAIN subject count * that participant's eligible trial count * nine). Mean and population standard deviation for continuous features use these TRAIN weights; exact constants get scale 1. At each time bin subtract TRAIN weighted column means and target mean to fit the ridge slopes, then restore the bin-specific intercept at prediction. No random fit, DEV calibration, feature/penalty search or participant-specific fit.",
+    "global_mean": "Naive constant, TRAIN-only weighted target mean.",
+    "lambda": 0.01,
+    "persistence": "Naive past palm at target minus 100 ms, without fitting.",
+    "time": "TRAIN time template. An equal-participant-weighted mean x_mm for each target offset.",
+    "time_eeg": "Same categorical timing plus fixed EEG features.",
+    "time_palm": "Same categorical timing plus fixed past-palm features.",
+    "time_palm_eeg": "Same categorical timing and past-palm features plus the fixed EEG features.",
+    "velocity_extrapolation": "Naive past palm at target minus 100 ms plus its 50 ms backward velocity estimate times nominal 0.1 s, without fitting."
+  },
+  "original_cue_window_sha256": {
+    "DESIGN.json": "a230ad20ece1c05b52cdceea00b8b55a51a27af8e038a2abda9c550b6eaf722c",
+    "PRESCORE-LOCK.json": "278d633c6656efc2631e7b4684231a1e53c6b24aa27aac4e1f1b0b6965b349f0",
+    "RESULT.json": "e0e92867774164c9cb06fdf3ef822fc2b04a10d20a854dd8513bee2837cee7fc",
+    "run.py": "33beb952dfca79d3048f27b522b17f1347a4d64b19328b822e506d9a47c62c4e"
+  },
+  "prescore_frozen_at_utc": "2026-11-18T20:05:31.415785+00:00",
+  "preserved_from_original": "All roles, named channels, task/run, source bytes, target, lags, EEG bins, minimum complete trials, no imputation, fixed penalty, TRAIN weighting, matching, controls, metrics and interpretation gates are retained.",
+  "question": "After the first available archived palm observation, does earlier scalp EEG improve out-of-participant horizontal palm-position accuracy at a nominal 100 ms horizon on top of the same elapsed-time and past-palm model?",
+  "scope_limits": [
+    "The released derivative uses retrospective EEG filtering (including zero-phase), decomposition/re-referencing and alignment, and trajectory filtering/interpolation. A 100 ms gap on the released arrays does not establish 100 ms physical or causal signal availability.",
+    "All methods receive the same trial anchors and retrospective eligibility. Cue, mixed conditions, eye and muscle activity and task/recording effects can contribute to a scalp association.",
+    "The tracking target is a processed estimate of actual movement. This fixed comparison evaluates archived error only. Neither a positive nor a negative result identifies a neural mechanism or certifies prospective decoding, generalization beyond this development split or biological control.",
+    "The earlier two-person exact event-grid stopped before fitting; its separately frozen native-grid result lost to the timing template. Those files, subjects and results are historical and do not enter this fit.",
+    "The alternate answers a narrower question after acquisition of optical tracking. The first finite stored position marks the derivative's available tracking interval. It does not identify actual movement onset, a real-time acquisition trigger, or biological signal availability.",
+    "The six-participant original cue-anchored design had 0 matched eligible trials out of 337 because its earliest target needed missing past-palm input. It produced no coefficient, score or candidate ranking. This is the sole prescore alternate and uses the same six participant roles."
+  ],
+  "study": "NeuroTranslation offline scalp EEG conditional palm-position study after the first available palm sample",
+  "target": "Absolute x_mm, horizontal device-coordinate palm-center position estimated by physical Leap Motion tracking and processed by the dataset authors. Positive right. No centering against the trial or participant trajectory."
+}

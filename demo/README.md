@@ -12,6 +12,8 @@ Import a trial JSON prepared from the IACKD right-hand movement study, choose it
 
 The two regressions were fitted on three participants and evaluated on three others using retrospectively processed recordings. The public result gives equal weight to each development participant. The number shown for an imported recording describes the matched samples in that recording. [Study, fitted parameters and trial converter](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history)
 
+A separate comparison tests what one person's first recording adds when predicting their second. The data companion lets you inspect the errors for each of the three people and for the equal-weight group. [Personal calibration method, results and code](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-personal-calibration)
+
 ## Import
 
 Download the JSON example from the application for a complete packet. It contains `schemaVersion: 1`, one `dataset` object and a `streams` array. Dataset metadata includes ID, name, organism, subject, recording, task, clock (`timebase`), source URL, licence and partition (`split`). Each stream declares its ID, modality, label, unit, origin, timestamps in seconds and values. Values may be `null` where observations are missing.

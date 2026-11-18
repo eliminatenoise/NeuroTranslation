@@ -15,14 +15,17 @@ const expectedSources = [
   'app.mjs', 'core.mjs', 'datasets.json', 'index.html', 'plot.mjs', 'style.css',
   'packet-policy-bridge.mjs', 'policy-report-view.mjs', 'compat-policy.mjs',
   'hash.mjs', 'reasons.mjs', 'vocabulary.mjs',
-  'palm-model.json', 'palm-model.mjs', 'replay-view.mjs'
+  'palm-model.json', 'palm-model.mjs', 'replay-view.mjs',
+  'calibration-summary.json', 'calibration-view.mjs'
 ];
 const fixtures = {
+  'calibration-summary.json': '{"kind":"build-test-only"}\n',
+  'calibration-view.mjs': "export const load = () => fetch('./calibration-summary.json');\n",
   'palm-model.json': '{"kind":"build-test-only"}\n',
   'palm-model.mjs': 'export const fixtureOnly = true;\n',
   'replay-view.mjs': "import './palm-model.mjs';\nexport const load = () => fetch('./palm-model.json');\n",
   'index.html': `<!doctype html>\n<link rel="stylesheet" href="style.css">\n<script type="module" src='./app.mjs'></script>\n<a href="./datasets.json?download=1#catalogue">Data</a>\n<link rel="preload" href=/core.mjs>\n<script type="module">import './core.mjs';</script>\n<link rel="icon" href="data:image/svg+xml,%3Csvg%3Eapp.mjs%3C/svg%3E">\n<script src="https://example.test/app.mjs"></script>\n<a href="//example.test/style.css">External</a>\n<div data-note='href="app.mjs"'>app.mjs</div>\n<!-- <script src="./app.mjs"></script> -->\n`,
-  'app.mjs': `import {value} from './core.mjs';\nimport './plot.mjs';\nimport {project} from './packet-policy-bridge.mjs';\nimport {renderReport} from './policy-report-view.mjs';\nexport {value as other} from './core.mjs?rev=1#entry';\nconst lazy = () => import('./plot.mjs');\nconst data = () => fetch('./datasets.json');\nconst bareData = () => fetch('datasets.json?mode=1#data');\nconst resource = new URL('./datasets.json', import.meta.url);\nconst external = () => fetch('https://example.test/datasets.json');\nconst bareModule = () => import('core.mjs');\nconst words = "fetch('./datasets.json')";\nconst template = \`fetch('./datasets.json')\`;\nconst regex = /fetch\\('datasets.json'\\)/;\nconst embedded = \`value \${JSON.stringify({x: fetch('./datasets.json')})}\`;\nconst nested = \`value \${\`inner \${fetch("./datasets.json")}\`}\`;\n// fetch('./datasets.json')\n/* import './core.mjs'; */\n`,
+  'app.mjs': `import './calibration-view.mjs';\nimport {value} from './core.mjs';\nimport './plot.mjs';\nimport {project} from './packet-policy-bridge.mjs';\nimport {renderReport} from './policy-report-view.mjs';\nexport {value as other} from './core.mjs?rev=1#entry';\nconst lazy = () => import('./plot.mjs');\nconst data = () => fetch('./datasets.json');\nconst bareData = () => fetch('datasets.json?mode=1#data');\nconst resource = new URL('./datasets.json', import.meta.url);\nconst external = () => fetch('https://example.test/datasets.json');\nconst bareModule = () => import('core.mjs');\nconst words = "fetch('./datasets.json')";\nconst template = \`fetch('./datasets.json')\`;\nconst regex = /fetch\\('datasets.json'\\)/;\nconst embedded = \`value \${JSON.stringify({x: fetch('./datasets.json')})}\`;\nconst nested = \`value \${\`inner \${fetch("./datasets.json")}\`}\`;\n// fetch('./datasets.json')\n/* import './core.mjs'; */\n`,
   'core.mjs': `export {normalize} from "./plot.mjs";\nexport const value = 'é';\n`,
   'plot.mjs': 'export const normalize = value => value;\n',
   'style.css': '/* app.mjs is ordinary text here. */\nbody { font-family: Arial, sans-serif; }\n',
@@ -52,7 +55,7 @@ function outputFor(manifest, source) {
 
 async function checkManifest(paths, manifest) {
   assert.match(manifest.buildId, /^[a-f0-9]{64}$/);
-  assert.equal(manifest.selection, 'data-companion-palm-replay-v1');
+  assert.equal(manifest.selection, 'data-companion-palm-calibration-v1');
   assert.deepEqual(manifest.files.map(file => file.source), expectedSources);
   assert.equal(outputFor(manifest, 'index.html'), 'index.html');
   assert.deepEqual((await readdir(paths.outputDir)).sort(), [...manifest.files.map(file => file.output), 'build-manifest.json'].sort());
@@ -82,7 +85,10 @@ async function checkFixtureReferences(paths, manifest) {
   const replay = await readFile(join(paths.outputDir, outputFor(manifest, 'replay-view.mjs')), 'utf8');
   assert.ok(replay.includes(outputFor(manifest, 'palm-model.mjs')));
   assert.ok(replay.includes(outputFor(manifest, 'palm-model.json')));
+  const calibration = await readFile(join(paths.outputDir, outputFor(manifest, 'calibration-view.mjs')), 'utf8');
+  assert.ok(calibration.includes(outputFor(manifest, 'calibration-summary.json')));
   const module = await readFile(join(paths.outputDir, outputFor(manifest, 'app.mjs')), 'utf8');
+  assert.ok(module.includes(outputFor(manifest, 'calibration-view.mjs')));
   const html = await readFile(join(paths.outputDir, 'index.html'), 'utf8');
   const core = await readFile(join(paths.outputDir, outputFor(manifest, 'core.mjs')), 'utf8');
   const app = outputFor(manifest, 'app.mjs');

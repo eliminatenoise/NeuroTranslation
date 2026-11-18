@@ -10,9 +10,10 @@ export const SOURCE_FILES = Object.freeze([
   'app.mjs', 'core.mjs', 'datasets.json', 'index.html', 'plot.mjs', 'style.css',
   'packet-policy-bridge.mjs', 'policy-report-view.mjs', 'compat-policy.mjs',
   'hash.mjs', 'reasons.mjs', 'vocabulary.mjs',
-  'palm-model.json', 'palm-model.mjs', 'replay-view.mjs'
+  'palm-model.json', 'palm-model.mjs', 'replay-view.mjs',
+  'calibration-summary.json', 'calibration-view.mjs'
 ]);
-const SELECTION = 'data-companion-palm-replay-v1';
+const SELECTION = 'data-companion-palm-calibration-v1';
 const sha256 = value => createHash('sha256').update(value).digest('hex');
 
 function containsPath(parent, child) {

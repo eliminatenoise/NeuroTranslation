@@ -1,0 +1,104 @@
+{
+  "design_sha256": "a230ad20ece1c05b52cdceea00b8b55a51a27af8e038a2abda9c550b6eaf722c",
+  "participants": {
+    "sub-07": {
+      "anchor_lag_counts_ms": {},
+      "eligible_trials": 0,
+      "exclusions": {
+        "nonfinite_past_palm": 51
+      },
+      "released_trials": 51,
+      "source_clock_ranges": {
+        "latest_eeg_lead_ms": null,
+        "latest_palm_lead_ms": null,
+        "target_event_time_ms": null
+      }
+    },
+    "sub-08": {
+      "anchor_lag_counts_ms": {},
+      "eligible_trials": 0,
+      "exclusions": {
+        "nonfinite_past_palm": 54
+      },
+      "released_trials": 54,
+      "source_clock_ranges": {
+        "latest_eeg_lead_ms": null,
+        "latest_palm_lead_ms": null,
+        "target_event_time_ms": null
+      }
+    },
+    "sub-09": {
+      "anchor_lag_counts_ms": {},
+      "eligible_trials": 0,
+      "exclusions": {
+        "nonfinite_past_palm": 59
+      },
+      "released_trials": 59,
+      "source_clock_ranges": {
+        "latest_eeg_lead_ms": null,
+        "latest_palm_lead_ms": null,
+        "target_event_time_ms": null
+      }
+    },
+    "sub-10": {
+      "anchor_lag_counts_ms": {},
+      "eligible_trials": 0,
+      "exclusions": {
+        "nonfinite_past_palm": 58
+      },
+      "released_trials": 58,
+      "source_clock_ranges": {
+        "latest_eeg_lead_ms": null,
+        "latest_palm_lead_ms": null,
+        "target_event_time_ms": null
+      }
+    },
+    "sub-11": {
+      "anchor_lag_counts_ms": {},
+      "eligible_trials": 0,
+      "exclusions": {
+        "nonfinite_past_palm": 60
+      },
+      "released_trials": 60,
+      "source_clock_ranges": {
+        "latest_eeg_lead_ms": null,
+        "latest_palm_lead_ms": null,
+        "target_event_time_ms": null
+      }
+    },
+    "sub-12": {
+      "anchor_lag_counts_ms": {},
+      "eligible_trials": 0,
+      "exclusions": {
+        "nonfinite_past_palm": 55
+      },
+      "released_trials": 55,
+      "source_clock_ranges": {
+        "latest_eeg_lead_ms": null,
+        "latest_palm_lead_ms": null,
+        "target_event_time_ms": null
+      }
+    }
+  },
+  "reason": "Fewer than four matched trials in at least one participant. No model fit or scores.",
+  "roles": {
+    "DEV": [
+      "sub-10",
+      "sub-11",
+      "sub-12"
+    ],
+    "TRAIN": [
+      "sub-07",
+      "sub-08",
+      "sub-09"
+    ]
+  },
+  "runner_sha256": "33beb952dfca79d3048f27b522b17f1347a4d64b19328b822e506d9a47c62c4e",
+  "source_sha256": "84e765038838e9870cd4e5cae3735ee5f1a763d3567ed1d3c253518097affa7b",
+  "status": "insufficient_eligible_trials",
+  "terminology_registry": {
+    "name": "Brain2Body shared glossary",
+    "revision": 36,
+    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+  }
+}

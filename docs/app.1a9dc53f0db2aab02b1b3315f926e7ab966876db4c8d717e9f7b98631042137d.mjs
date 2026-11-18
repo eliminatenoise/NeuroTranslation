@@ -1,9 +1,10 @@
-import {parsePacket,parseCsv,validatePacket,combinePackets,summarizePackets,alignPackets,examplePacket,stringifyRecording} from './core.99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b.mjs';
-import {normalizeFinite,buildPlotSegments} from './plot.99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b.mjs';
-import {toPolicyEnvelope} from './packet-policy-bridge.99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b.mjs';
-import {evaluate as evaluateMetadata} from './compat-policy.99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b.mjs';
-import {renderMetadataReport} from './policy-report-view.99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b.mjs';
-import {createPalmReplay} from './replay-view.99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b.mjs';
+import {parsePacket,parseCsv,validatePacket,combinePackets,summarizePackets,alignPackets,examplePacket,stringifyRecording} from './core.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.mjs';
+import {normalizeFinite,buildPlotSegments} from './plot.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.mjs';
+import {toPolicyEnvelope} from './packet-policy-bridge.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.mjs';
+import {evaluate as evaluateMetadata} from './compat-policy.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.mjs';
+import {renderMetadataReport} from './policy-report-view.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.mjs';
+import {createPalmReplay} from './replay-view.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.mjs';
+import {showCalibrationStudy} from './calibration-view.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.mjs';
 
 const $=id=>document.getElementById(id);
 const colors={neural:'#7757d8',muscle:'#cd6446',displacement:'#287dba',mechanics:'#278476'};
@@ -288,6 +289,6 @@ $('export-metadata').addEventListener('click',()=>{if(state.metadata)download('n
 $('download-template').addEventListener('click',()=>download('neurotranslate-0.0-example.json',examplePacket()));
 window.addEventListener('resize',drawTraces);
 async function catalogue(){
-  try{const response=await fetch('datasets.99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b.json');if(!response.ok)return;const data=await response.json();for(const d of data.datasets||data){const card=element('article','dataset-card');card.append(element('h3','',d.name),element('p','',d.modalities?.join(' · ')||d.modality||''),element('p','',d.description||d.coverage||''),element('p','catalogue-limit',d.limit||d.pairingLimit||''));card.append(element('p','',`Reference metadata · ${(d.license||[]).join(', ')} · recordings not included`));if(d.url&&/^https:\/\//i.test(d.url)){const link=element('a','',`Source ↗`);link.href=d.url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);}$('catalogue-list').append(card);}$('catalogue-section').hidden=!$('catalogue-list').children.length;}catch{/* Optional catalogue is independent of data import and alignment. */}
+  try{const response=await fetch('datasets.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.json');if(!response.ok)return;const data=await response.json();for(const d of data.datasets||data){const card=element('article','dataset-card');card.append(element('h3','',d.name),element('p','',d.modalities?.join(' · ')||d.modality||''),element('p','',d.description||d.coverage||''),element('p','catalogue-limit',d.limit||d.pairingLimit||''));card.append(element('p','',`Reference metadata · ${(d.license||[]).join(', ')} · recordings not included`));if(d.url&&/^https:\/\//i.test(d.url)){const link=element('a','',`Source ↗`);link.href=d.url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);}$('catalogue-list').append(card);}$('catalogue-section').hidden=!$('catalogue-list').children.length;}catch{/* Optional catalogue is independent of data import and alignment. */}
 }
-loadExample();catalogue();
+loadExample();catalogue();showCalibrationStudy();

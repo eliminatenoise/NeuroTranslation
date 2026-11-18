@@ -4,6 +4,7 @@ import {toPolicyEnvelope} from './packet-policy-bridge.mjs';
 import {evaluate as evaluateMetadata} from './compat-policy.mjs';
 import {renderMetadataReport} from './policy-report-view.mjs';
 import {createPalmReplay} from './replay-view.mjs';
+import {showCalibrationStudy} from './calibration-view.mjs';
 
 const $=id=>document.getElementById(id);
 const colors={neural:'#7757d8',muscle:'#cd6446',displacement:'#287dba',mechanics:'#278476'};
@@ -290,4 +291,4 @@ window.addEventListener('resize',drawTraces);
 async function catalogue(){
   try{const response=await fetch('datasets.json');if(!response.ok)return;const data=await response.json();for(const d of data.datasets||data){const card=element('article','dataset-card');card.append(element('h3','',d.name),element('p','',d.modalities?.join(' · ')||d.modality||''),element('p','',d.description||d.coverage||''),element('p','catalogue-limit',d.limit||d.pairingLimit||''));card.append(element('p','',`Reference metadata · ${(d.license||[]).join(', ')} · recordings not included`));if(d.url&&/^https:\/\//i.test(d.url)){const link=element('a','',`Source ↗`);link.href=d.url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);}$('catalogue-list').append(card);}$('catalogue-section').hidden=!$('catalogue-list').children.length;}catch{/* Optional catalogue is independent of data import and alignment. */}
 }
-loadExample();catalogue();
+loadExample();catalogue();showCalibrationStudy();

@@ -1,6 +1,6 @@
-import {normalizeFinite} from './plot.99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b.mjs';
-import {sha256Hex} from './hash.99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b.mjs';
-import {scoreEegReplay, validateEegReplayModel} from './palm-model.99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b.mjs';
+import {normalizeFinite} from './plot.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.mjs';
+import {sha256Hex} from './hash.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.mjs';
+import {scoreEegReplay, validateEegReplayModel} from './palm-model.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.mjs';
 
 const expectedModelSha256 = 'c9c9e6a5c357274103e339f69517ae6a11f1d90c39f1d172585ad81a38ee8337';
 const byId = id => document.getElementById(id);
@@ -165,7 +165,7 @@ export function createPalmReplay({openImport, download}) {
   } else window.addEventListener('resize', () => { if (!output.hidden) drawReplay(canvas, rows); });
 
   // Fetch only the static fitted parameters. Imported recordings stay in memory.
-  fetch('./palm-model.99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b.json').then(response => {
+  fetch('./palm-model.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.json').then(response => {
     if (!response.ok) throw new Error('Fitted parameters unavailable');
     return response.arrayBuffer();
   }).then(buffer => {

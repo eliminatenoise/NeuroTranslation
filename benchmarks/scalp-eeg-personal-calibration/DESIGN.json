@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "study": "IACKD right-hand palm-position calibration across recordings",
+  "frozen_at_utc": "2026-11-18T20:14:48.858322285Z",
+  "freeze_stage": "Frozen without reading the six new derivative payloads, extracting features or labels from them, fitting them, or seeing their errors. The predecessor's separate no-fit and development findings are known.",
+  "question": "Does fitting the last linear head on a person's earlier R1 recording reduce error on that person's later R2 recording, and does scalp EEG reduce error when both versions receive the same adaptation?",
+  "dataset": {
+    "accession": "OpenNeuro ds006840 v1.0.0",
+    "doi": "10.18112/openneuro.ds006840.v1.0.0",
+    "descriptor_doi": "10.1038/s41597-026-07146-x",
+    "release_commit": "0c701aadfa562b8662e76ca0dd6831788e02e8b6",
+    "participants": ["sub-13", "sub-14", "sub-15"],
+    "roles": {"CALIBRATION": "01", "EVALUATION": "02"},
+    "roles_rule": "Fixed same-person pairs, right-hand task-ihc only. CALIBRATION is the R1 file and EVALUATION the distinct R2 file. Require tagged identity, hash, geometry and exact per-run C3/Cz/C4 mapping through independently sourced records. Raw events and source method qualify recording context, but raw-to-derivative trial equality is not assumed. No participant or run substitution, no use of sub-06, no replay of the earlier no-fit."
+  },
+  "baseline": {
+    "model_id": "iackd-r1-conditional-palm-availability-grid-v1",
+    "model_sha256": "c9c9e6a5c357274103e339f69517ae6a11f1d90c39f1d172585ad81a38ee8337",
+    "runner_sha256": "5047958fb5f7bb95ae628203250300f8434d8d9d3fe96cdd5deacbb5864c2497",
+    "design_sha256": "ccaff2ccda3a32ba182c78c0a111fd36295f5bb8b2b400acc46faa1436433fc9",
+    "train": ["sub-07", "sub-08", "sub-09"],
+    "prior_dev": ["sub-10", "sub-11", "sub-12"],
+    "historical_cue_no_fit_sha256": "e0e92867774164c9cb06fdf3ef822fc2b04a10d20a854dd8513bee2837cee7fc",
+    "methods": ["time_palm", "time_palm_eeg"]
+  },
+  "support": {
+    "rule": "Reuse the exact accepted post-observation extractor and design. The first finite archival x_mm at or after the validated native cue row anchors nine offsets +200 to +600 ms in 50 ms increments. Use the same native 10 ms lattice and tolerance, backwards palm lags 100 and 150 ms, and named six EEG bin means of released features. No new filtering, processing, centering, scaling, temporal interpolation or imputation. Every method and every fit uses this same whole-trial joint support within each run. Minimum four eligible trials per subject per role; preserve rejected trial counts and reasons. All released trials enter eligibility and fixed fitting, with no calibration subsets.",
+    "target": "Absolute horizontal physical Leap Motion estimate of palm centre (x_mm, positive right) after the dataset authors' processing.",
+    "source_filter_limit": "The published derivative applies retrospective filtering, alignment, re-referencing and decomposition, and joint quality checks. Whole-trial eligibility and this grid use retrospective archival sample support. A nominal 100 ms input gap does not qualify online availability, raw causality, clinical transfer or a neural mechanism."
+  },
+  "methods": {
+    "frozen": "Predict from the untouched TRAIN model.",
+    "bias": "Add a single mean R1 residual across all eligible rows to the frozen prediction. Supplemental control.",
+    "timing": "Add a separate mean R1 residual at each offset to the frozen prediction. These are the same unpenalized timing degrees of freedom available to ridge.",
+    "ridge": "For each participant and each modality separately, hold the frozen model and its TRAIN normalization fixed. Let r = true R1 x_mm minus the frozen prediction, and z = R1 input using the original feature order and original TRAIN scaling for this modality. Fit the additive correction a_t + z·d by minimizing mean over all N×9 eligible R1 rows of (r-a_t-z·d)^2 + 0.01×||d||². N counts that participant's eligible R1 trials. All nine timing intercept corrections a_t are unpenalized, and the two or eight slope corrections d are penalized equally in standardized-feature units. Float64, closed-form within-offset-centred solution with the same fixed penalty for both modalities. No pooled re-estimation, randomization, hyperparameter selection, early stopping, R2-based features for fitting, transform estimates from R2, or refit of the global weight arrays.",
+    "ridge_eeg_rotated": "Descriptive negative control. Apply the unchanged R1-based combined ridge to R2 with original-trial time and palm and EEG from the next eligible R2 trial in ascending lm_trial order, wrapping the final trial. Maintains the same support but rotation can also change task-condition pairing."
+  },
+  "ridge_lambda": 0.01,
+  "comparisons": {
+    "primary_adaptation": ["time_palm_eeg_ridge", "time_palm_eeg_frozen"],
+    "primary_eeg": ["time_palm_eeg_ridge", "time_palm_ridge"],
+    "slope_value_eeg": ["time_palm_eeg_ridge", "time_palm_eeg_timing"],
+    "palm_adaptation": ["time_palm_ridge", "time_palm_frozen"],
+    "palm_slope_value": ["time_palm_ridge", "time_palm_timing"],
+    "timing_only_eeg": ["time_palm_eeg_timing", "time_palm_eeg_frozen"],
+    "global_bias_eeg": ["time_palm_eeg_bias", "time_palm_eeg_frozen"],
+    "timing_only_palm": ["time_palm_timing", "time_palm_frozen"],
+    "global_bias_palm": ["time_palm_bias", "time_palm_frozen"],
+    "paired_vs_rotated_eeg": ["time_palm_eeg_ridge", "time_palm_eeg_ridge_rotated"]
+  },
+  "metrics": {
+    "primary": "R2 participant-balanced RMSE, sqrt(mean of three participant MSEs), and signed paired candidate-minus-reference deltas on the identical support. Strictly lower means delta < -1e-12 mm, strictly higher means > 1e-12 mm, and the remaining range is a tie. State a cohort direction only on this fixed split and report each participant's direction including any discordance. No significance test, pass threshold, winner selection or population interval.",
+    "secondary": "Per-person and pooled R2 RMSE, MAE and mean signed error including per-offset summaries. Report candidate-minus-reference RMSE per person, pooled, and leave-one-person-out with the full range. Also give trial mean-squared-error difference quantiles and lower/tie/higher counts at a 1e-12 mm² tie tolerance. Count released trials, eligible trials and eligible rows separately for R1 and R2. One archived pair per person makes effects of practice, recording drift, source preprocessing and task mix inseparable."
+  },
+  "terminology_registry": {
+    "name": "Brain2Body shared glossary",
+    "revision": 36,
+    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+  }
+}

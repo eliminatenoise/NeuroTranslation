@@ -8,6 +8,8 @@ The palm-position replay runs two fitted reference regressions on compatible IAC
 
 Matching labels and clock names describe how the files relate. Establishing that two recordings were acquired together takes evidence from their original source.
 
+The personal calibration comparison gives the errors on the second of two archived recordings after the first was used to adjust the model. Choose a participant to inspect their trial counts and compare hand history with and without EEG. [Explore the calibration results](https://eliminatenoise.github.io/NeuroTranslation/index.html#personal-calibration)
+
 Filtered or transformed recordings can declare `derived` as their origin. An input file can identify the original stream in its provenance. The metadata report flags a missing source declaration.
 
 Move the **Aligned time** slider to put every trace at the same point on the declared clock. Each readout keeps the stream's unit, identifies original and resampled values and explains any gaps. Try 1.5 seconds in the example to see an interpolated displacement beside a missing force value.

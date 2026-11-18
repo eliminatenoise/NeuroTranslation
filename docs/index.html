@@ -5,12 +5,19 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b.css">
+  <link rel="stylesheet" href="style.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.css">
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="#"><span class="brandmark" aria-hidden="true">N↔</span>NeuroTranslate <span class="version">0.0</span></a>
-    <div class="topmeta"><span class="statusdot"></span>Browser-local processing <a href="#palm-replay">Palm replay</a><a href="#how-it-works">How it works ↗</a></div>
+    <div class="topmeta">
+      <span class="local-status"><span class="statusdot" aria-hidden="true"></span>Browser-local processing</span>
+      <nav class="section-links" aria-label="On this page">
+        <a href="#palm-replay">Palm replay</a>
+        <a href="#personal-calibration">Calibration</a>
+        <a href="#how-it-works">How it works</a>
+      </nav>
+    </div>
   </header>
   <main>
     <section class="intro">
@@ -54,7 +61,7 @@
         <div id="traces" class="traces"><p class="empty">Import a recording or load the constructed example.</p></div>
       </div>
     </section>
-    <section class="palm-replay" id="palm-replay" aria-labelledby="replay-title">
+    <section class="palm-replay" id="palm-replay" aria-labelledby="replay-title" tabindex="-1">
       <div class="replay-intro">
         <div><h2 id="replay-title">Replay a palm-position estimate</h2>
           <p>How much do three scalp electrodes add once you know where the hand was? Compare two fitted models on a recorded IACKD right-hand trial. Both use timing and earlier palm motion. One also uses EEG.</p>
@@ -88,7 +95,42 @@
         <button class="button secondary" id="replay-export" type="button">Download trial results</button>
       </div>
     </section>
-    <section class="lower-grid" id="how-it-works">
+    <section class="personal-calibration" id="personal-calibration" aria-labelledby="calibration-title" tabindex="-1">
+      <div class="replay-intro">
+        <div>
+          <h2 id="calibration-title">Can the palm model learn from one recording?</h2>
+          <p>Start with a model trained on three other people. Adjust its slopes and time-offset intercepts on each new person's first recording (R1), then measure the error on their second (R2).</p>
+        </div>
+        <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-personal-calibration/">Study, results and code ↗</a>
+      </div>
+      <p id="calibration-status" class="replay-status" role="status">Loading archived calibration results…</p>
+      <div id="calibration-results" hidden>
+        <div class="calibration-toolbar">
+          <div class="calibration-picker">
+            <label for="calibration-participant">Participant</label>
+            <select id="calibration-participant"></select>
+          </div>
+          <p id="calibration-weighting">Each person's mean squared error gets equal weight before taking the square root.</p>
+        </div>
+        <dl class="calibration-counts">
+          <div><dt>R1 calibration</dt><dd id="calibration-r1"></dd></div>
+          <div><dt>R2 evaluation</dt><dd id="calibration-r2"></dd></div>
+        </dl>
+        <p id="calibration-exclusion" hidden></p>
+        <table class="calibration-table">
+          <caption>Horizontal palm position error on R2 (RMSE in mm)</caption>
+          <thead><tr><th scope="col">Inputs</th><th scope="col">Fixed model</th><th scope="col">Adapted on R1</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Timing + hand</th><td id="calibration-palm-fixed"></td><td id="calibration-palm-adapted"></td></tr>
+            <tr><th scope="row">Timing + hand + EEG</th><td id="calibration-eeg-fixed"></td><td id="calibration-eeg-adapted"></td></tr>
+          </tbody>
+        </table>
+        <p id="calibration-outcome"></p>
+      </div>
+      <p class="calibration-scope">Three people from the IACKD right-hand experiment, one pair of archived recordings each. Both models use timing and earlier palm motion. EEG adds features from C3, Cz and C4. The archive was processed after recording. Live prediction timing remains untested.</p>
+      <noscript><p>JavaScript is needed to compare the archived results here. The linked study includes the results table.</p></noscript>
+    </section>
+    <section class="lower-grid" id="how-it-works" tabindex="-1">
       <article class="explanation"><p class="eyebrow">ONE CLOCK. DISTINCT OBSERVATIONS.</p><h2>A shared timeline has to be earned.</h2><p>Two files can describe the same movement without describing the same event. Alignment requires a declared shared subject, recording and clock. Unpaired datasets stay separate.</p><p>Each trace keeps its units and origin. Interpolation fills only the permitted gaps between samples. It does not turn a simulation into a measurement, or muscle electrical activity into a nerve recording.</p><button class="textbutton" id="download-template">Download the JSON example ↓</button></article>
       <article class="format-card"><div class="panel-heading"><h2>Bring your own data</h2><span class="smalltag">JSON / CSV</span></div><p>Files are processed in this browser. The application does not upload recording contents to a server.</p><dl><div><dt>JSON</dt><dd>One dataset with named streams, timestamps in seconds, units and provenance.</dd></div><div><dt>CSV</dt><dd><code>time,value</code> columns; time is in seconds. Declare the organism, recording, signal type, units and origin at import.</dd></div><div><dt>Limits</dt><dd>5 MiB per file and combined packets. Up to 64 selected streams, 50,000 input samples, 5,000 aligned time points and 500,000 aligned values.</dd></div></dl><p class="quiet">Use only data you have permission to process. Import checks validate structure; they do not verify your source or licence.</p></article>
     </section>
@@ -112,6 +154,6 @@
       <p id="import-error" class="form-error" role="alert"></p><div class="dialog-footer"><span class="quiet">File contents stay in your browser.</span><button class="button primary" type="submit">Import recording</button></div>
     </form>
   </dialog>
-  <script type="module" src="app.99e71ad18d2e558068d4302873d4467d1efcc3dca8e3598b299b3ef0e958d91b.mjs"></script>
+  <script type="module" src="app.1a9dc53f0db2aab02b1b3315f926e7ab966876db4c8d717e9f7b98631042137d.mjs"></script>
 </body>
 </html>
