@@ -1,0 +1,36 @@
+{
+  "source_article": "https://doi.org/10.1038/s41597-025-06174-3",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source_snapshot": "Lucchetti et al. Figshare individual participant v1 records",
+  "source_field_audit_sha256": "913f97de8928f63966aae53e873bb5f5201da10988910bb66852060b0299676c",
+  "selection": "The source byte identities bind MATLAB s.DataULdom[3] to HM and Angles[6] to ElbowFlx (zero-based positions). Stored EMG row order is bound to the channel name array in the run output.",
+  "subjects": {
+    "HS01": {
+      "doi": "10.6084/m9.figshare.28596026.v1",
+      "repository_file_id": 56891417,
+      "dominant_arm": "left",
+      "role": "training and in-sample reference",
+      "bytes": 21351660,
+      "md5": "e140178192dd4ef5408e2bcea79718ac",
+      "sha256": "78219857d3bb10b5c6ba1263ee91c22d67d142f576d565cbd0d34b529035dc53",
+      "angle_shape": [19, 5389],
+      "emg_shape": [12, 43140],
+      "starts": [588, 1546, 2558, 3508, 4592],
+      "stops": [1051, 2092, 3099, 4052, 5144]
+    },
+    "HS02": {
+      "doi": "10.6084/m9.figshare.28596038.v1",
+      "repository_file_id": 56891492,
+      "dominant_arm": "right",
+      "role": "held-out development",
+      "bytes": 17734689,
+      "md5": "934818ade5499703f411fe78aa71e858",
+      "sha256": "b906287c0293bd3d1c9ada8fd5abc44094307dc65f719d26128476ebc218287c",
+      "angle_shape": [19, 3134],
+      "emg_shape": [12, 25003],
+      "starts": [342, 957, 1527, 2047, 2621],
+      "stops": [823, 1388, 1882, 2482, 2954]
+    }
+  }
+}

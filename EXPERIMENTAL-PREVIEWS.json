@@ -9,7 +9,7 @@
     "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
   },
   "historical_sources": "R11 and portable source retain their own historical terminology and unadopted proposals. No canonical glossary adoption, model or backend execution follows.",
-  "scope": "This 108-file inventory covers the browser data companion, desktop launchers, navigation and historical source previews. The selected papers have their own content manifest.",
+  "scope": "The inventory covers the browser data companion, desktop launchers, reference benchmark, navigation and historical source previews. The paper collections also carry their own content manifests.",
   "files": [
     {
       "path": ".gitattributes",
@@ -28,8 +28,63 @@
     },
     {
       "path": "README.md",
-      "bytes": 6671,
-      "sha256": "7cb5835f946cf5259d9306d0e56089847acafea9e65bfcb59240164698ab5f63"
+      "bytes": 7220,
+      "sha256": "7c1b576bb3e4e8be7559cf30f5cdd929ab79a8c219381f821f2bc85688575a58"
+    },
+    {
+      "path": "benchmarks/surface-emg-elbow/.gitignore",
+      "bytes": 48,
+      "sha256": "d720aba3a0ac7b2cd3bdff6552a8e2b0b03ac906715df4c6c55ef34d54e95bf8"
+    },
+    {
+      "path": "benchmarks/surface-emg-elbow/ASSETS.json",
+      "bytes": 1559,
+      "sha256": "acf2bafb86cf8c781866598889f3f89b9b534c1c4726e0c5c218f94f80edc2eb"
+    },
+    {
+      "path": "benchmarks/surface-emg-elbow/DESIGN.json",
+      "bytes": 3648,
+      "sha256": "eb4c6d0a35b3eb4f13e3e2b55d265a387c9ebc1aa0356760250e7ba5fdc1d4dc"
+    },
+    {
+      "path": "benchmarks/surface-emg-elbow/README.md",
+      "bytes": 6187,
+      "sha256": "4d92726bf45e82b533dedd04f2cf810efe40881e02d9bb46bd225b192a06135f"
+    },
+    {
+      "path": "benchmarks/surface-emg-elbow/RESULT.json",
+      "bytes": 19042,
+      "sha256": "33c3d09cf64840e4590bf92da9477686f989deee180355abc8cdf71a2e5197ab"
+    },
+    {
+      "path": "benchmarks/surface-emg-elbow/baseline.py",
+      "bytes": 13949,
+      "sha256": "730d79a5899cc8cf69d18ad61536f295eac842878817cb132b5a05e7fb47a5f9"
+    },
+    {
+      "path": "benchmarks/surface-emg-elbow/elbow-angle-error.png",
+      "bytes": 92285,
+      "sha256": "a3f7649e8b9ff0f4f5f23f86286faa24692010874fd1836ba5691946dec241cf"
+    },
+    {
+      "path": "benchmarks/surface-emg-elbow/plot_baseline.py",
+      "bytes": 2705,
+      "sha256": "e3fcb414daa4d6ec2aaccce27dfedda6c6637755e245f280dcd13c550022cbbf"
+    },
+    {
+      "path": "benchmarks/surface-emg-elbow/requirements.txt",
+      "bytes": 48,
+      "sha256": "dbf9f3d66294980199c78058168f1182e765a662e790fa35d441132779b0816a"
+    },
+    {
+      "path": "benchmarks/surface-emg-elbow/run.py",
+      "bytes": 7194,
+      "sha256": "f09d380a405e72f666d8f081bbfbf903657515be1832241da032faa5c99506c9"
+    },
+    {
+      "path": "benchmarks/surface-emg-elbow/test_baseline.py",
+      "bytes": 3349,
+      "sha256": "76cd3bb6d0bdf0073a41cfea3b38306125127de518005f24d7b994a74c347e2b"
     },
     {
       "path": "docs/.nojekyll",
@@ -553,28 +608,25 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "14e1d780ee3669213bb789098c8d14269b329905",
+  "previous_public_commit": "9d54e7bf4fb97a255f229cdbaf6d5cf91649606e",
   "launcher_update": "The stable launchers open the sample inspector, including support for derived signals and source-lineage metadata.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
-      "PROJECT-CONTEXT.json",
-      "docs/README.md",
-      "docs/app.943f9fc85ca522beb3a7359c424a2f92a182ec20e5d9c836a04b6f02870791ca.mjs",
-      "docs/build-manifest.json",
-      "docs/compat-policy.943f9fc85ca522beb3a7359c424a2f92a182ec20e5d9c836a04b6f02870791ca.mjs",
-      "docs/core.943f9fc85ca522beb3a7359c424a2f92a182ec20e5d9c836a04b6f02870791ca.mjs",
-      "docs/datasets.943f9fc85ca522beb3a7359c424a2f92a182ec20e5d9c836a04b6f02870791ca.json",
-      "docs/hash.943f9fc85ca522beb3a7359c424a2f92a182ec20e5d9c836a04b6f02870791ca.mjs",
-      "docs/index.html",
-      "docs/packet-policy-bridge.943f9fc85ca522beb3a7359c424a2f92a182ec20e5d9c836a04b6f02870791ca.mjs",
-      "docs/plot.943f9fc85ca522beb3a7359c424a2f92a182ec20e5d9c836a04b6f02870791ca.mjs",
-      "docs/policy-report-view.943f9fc85ca522beb3a7359c424a2f92a182ec20e5d9c836a04b6f02870791ca.mjs",
-      "docs/reasons.943f9fc85ca522beb3a7359c424a2f92a182ec20e5d9c836a04b6f02870791ca.mjs",
-      "docs/style.943f9fc85ca522beb3a7359c424a2f92a182ec20e5d9c836a04b6f02870791ca.css",
-      "docs/vocabulary.943f9fc85ca522beb3a7359c424a2f92a182ec20e5d9c836a04b6f02870791ca.mjs"
+      "README.md",
+      "benchmarks/surface-emg-elbow/.gitignore",
+      "benchmarks/surface-emg-elbow/ASSETS.json",
+      "benchmarks/surface-emg-elbow/DESIGN.json",
+      "benchmarks/surface-emg-elbow/README.md",
+      "benchmarks/surface-emg-elbow/RESULT.json",
+      "benchmarks/surface-emg-elbow/baseline.py",
+      "benchmarks/surface-emg-elbow/elbow-angle-error.png",
+      "benchmarks/surface-emg-elbow/plot_baseline.py",
+      "benchmarks/surface-emg-elbow/requirements.txt",
+      "benchmarks/surface-emg-elbow/run.py",
+      "benchmarks/surface-emg-elbow/test_baseline.py"
     ],
-    "preserved_rows": 93
+    "preserved_rows": 107
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",

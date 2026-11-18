@@ -4,6 +4,10 @@ Reach for a cup. A neural recording captures activity at the recording site. An 
 
 [Open the browser data companion](https://eliminatenoise.github.io/NeuroTranslation/index.html). Choose **Load example**, then open **Metadata checks** to see the units, clock and source declared for each invented signal. You can also inspect your own JSON or CSV files locally and align streams when the files declare the same organism, subject, recording and clock and their partitions are compatible. The companion runs without installation. [Import and alignment guide](demo/README.md) · [Desktop launchers for Windows, macOS and Linux](https://eliminatenoise.github.io/NeuroTranslation/START.html)
 
+## Predicting elbow angle from muscle activity
+
+In a hand-to-mouth task, did muscle activity predict elbow angle better than knowing when the movement began? A ridge regression trained on one participant had 62.4° root mean squared error on a second participant. A trajectory based on movement onset had 30.8°. Each participant contributed five repetitions, and their dominant arms differed. The benchmark includes the code, data sources and errors for each repetition. [Read and reproduce the experiment](benchmarks/surface-emg-elbow/README.md)
+
 ## Read the papers
 
 | Paper | Technical edition | Plain-English edition |

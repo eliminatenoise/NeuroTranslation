@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "analysis": "offline within-source surface EMG reference baseline",
+  "source_article": "https://doi.org/10.1038/s41597-025-06174-3",
+  "task": "HM dominant-arm hand-to-mouth",
+  "repetitions": "all five annotated source movements per subject; no task selection from model errors",
+  "split": {
+    "train_reference": ["HS01"],
+    "development": ["HS02"],
+    "reserved_metadata_only": ["HS03"]
+  },
+  "predictor": {
+    "measurement": "all twelve stored raw surface EMG channels in source channel identity order",
+    "unit": "mV",
+    "nominal_rate_hz": 1000,
+    "feature": "one RMS per channel from the inclusive trailing window per target frame",
+    "outside_repetition": "no EMG rows before annotated onset or after annotated end are available for features",
+    "causal_scope": "strictly historical in the nominal stored coordinate; wireless and optical acquisition lag, jitter and drift have not been quantified here"
+  },
+  "target": {
+    "field": "ElbowFlx",
+    "unit": "degree",
+    "nominal_rate_hz": 125,
+    "reference": "stored elbow flexion coordinate derived from independently captured optical markers, using the authors' joint coordinate system; preserve as recorded without sign or offset adjustment",
+    "availability": "offline archive reference. The source reports 10 Hz fifth-order zero-phase filtering and spline filling of short marker losses before angle derivation",
+    "grid": "nominal stored task-relative sample times k/125 and j/1000 with first-row equality assumed; nominal target k coincides with EMG j=8k, neither reconstructed from an archived timestamp vector nor verified physical timing",
+    "event_rows": "inclusive one-based Start/End kinematic frame indices converted once to zero-based original task indices; no event duration or motion measurements used by ridge"
+  },
+  "design": {
+    "window_seconds": 0.05,
+    "lead_seconds": 0.04,
+    "maximum_gap_seconds": 0.0015,
+    "minimum_emg_samples": 49,
+    "ridge_penalty": 0.01
+  },
+  "missing_and_excluded": "NaN in target skips that row, before counting unavailable EMG history. Infinity, nonfinite EMG, unsupported chronology, missing or extra repetitions and an entirely unscorable repetition fail the fixed run. No target rows outside the inclusive events are candidates. No target or EMG imputation by this baseline.",
+  "fit": "float64 fixed ridge penalty on mean squared angle error after HS01-only mean and population-standard-deviation EMG feature scaling; unpenalized intercept; constant training features contribute zero. No selection or calibration on HS02 or HS03.",
+  "comparisons": {
+    "training_mean": "mean HS01 target across the same eligible training rows, constant for every test frame",
+    "onset_only": "mean of matching eligible HS01 target rows at each fixed sample elapsed from annotated movement onset; interpolate with TRAIN only across internal missing positions and clamp to the nearest endpoint outside observed TRAIN support; uses the source-provided onset as privileged timing but no DEV duration, future end or labels"
+  },
+  "metrics": "MAE and RMSE in degrees for all three methods on identical rows. Report per trial and per subject, pooled across rows and macro over trials and subjects, plus denominators and extrapolation count. HS01 scores are in-sample. HS02 is one held-out development subject. Repeated frames/trials do not establish population uncertainty.",
+  "acceptance_scope": "retains negative outcomes. No empirical pass threshold, generalization, real-time prediction, neural decoding, joint control, patient or far-transfer claim is tested by this two-subject pilot."
+}
