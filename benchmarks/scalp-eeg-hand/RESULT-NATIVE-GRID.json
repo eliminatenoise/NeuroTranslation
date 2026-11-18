@@ -1,0 +1,197 @@
+{
+  "HDF5_schema": {
+    "DEV": {
+      "embedded_out_fields": [
+        "EEG",
+        "a",
+        "b",
+        "ball_color",
+        "ball_x_pix",
+        "cov",
+        "eeg_seg_idx",
+        "lm_trial",
+        "move_direct",
+        "start_res_ms",
+        "t_ms",
+        "x_mm",
+        "y_mm",
+        "z_mm"
+      ],
+      "n_channels": 26,
+      "released_trials": 59,
+      "storage": "HDF5 EEG samples \u00d7 channels; t_ms row; x_mm column",
+      "top_level_groups": [
+        "#refs#",
+        "OUT"
+      ]
+    },
+    "TRAIN": {
+      "embedded_out_fields": [
+        "EEG",
+        "a",
+        "b",
+        "ball_color",
+        "ball_x_pix",
+        "cov",
+        "eeg_seg_idx",
+        "lm_trial",
+        "move_direct",
+        "start_res_ms",
+        "t_ms",
+        "x_mm",
+        "y_mm",
+        "z_mm"
+      ],
+      "n_channels": 28,
+      "released_trials": 46,
+      "storage": "HDF5 EEG samples \u00d7 channels; t_ms row; x_mm column",
+      "top_level_groups": [
+        "#refs#",
+        "OUT"
+      ]
+    }
+  },
+  "analysis": "native_grid",
+  "assets": {
+    "DEV": {
+      "basename": "sub-03_task-ihc_run-01_eeg_leap_R1.mat",
+      "participant": "sub-03",
+      "sha256": "dc7b9dabcf4b7cbeff413a0c6935ae8128cca4ee0c06610f233bd784b1b07655"
+    },
+    "TRAIN": {
+      "basename": "sub-02_task-ihc_run-01_eeg_leap_R1.mat",
+      "participant": "sub-02",
+      "sha256": "7f76f663549780e435663c28d590f086a31ec227a8199c2a5b33a31d7423a103"
+    }
+  },
+  "channel_evidence_sha256": "6a867167815524f764a5693c9604c67f8c542d45f05a5f0cb05efa35b7721a6b",
+  "design_sha256": "f6ec056e747fb3045ca5ed5a380fd31d2ce818ed6529a1fb2e3cfe0f69fd164e",
+  "limitations": "The public release uses run-level author EEG processing, baseline correction, ICA and artifact rejection, and retrospectively aligned and zero-phase-smoothed target labels. Time indices alone do not establish strictly causal raw signal processing and source alignment uses later hit information. Source or residual ocular, muscle, movement, apparatus, cue and session effects are plausible. Sub-03 is a single development participant, never a confirmatory holdout or a deployment test. This study establishes no neural mechanism, intent, closed-loop control, clinical benefit, or performance in other tasks or people.",
+  "native_grid_design_sha256": "5da46fcf84ca15172ff921bac7d71da825533ca0d286c6abeac5e86f160b77ee",
+  "results": {
+    "DEV": {
+      "eligible_anchor_lag_from_event_ms_counts": {
+        "0.0": 2,
+        "1.0": 2,
+        "2.0": 8,
+        "3.0": 15,
+        "4.0": 3,
+        "5.0": 7,
+        "6.0": 4,
+        "7.0": 4,
+        "8.0": 6,
+        "9.0": 8
+      },
+      "eligible_target_times_relative_to_event_ms_range": [
+        100.0,
+        509.0
+      ],
+      "eligible_trials": 59,
+      "excluded_trials": {},
+      "metrics": {
+        "ridge": {
+          "rmse_mm": 7.513727045389471,
+          "signed_error_mm": 0.5696901042815855
+        },
+        "ridge_shifted_dev_trials": {
+          "rmse_mm": 7.419956130784161,
+          "signed_error_mm": 0.5696901042815856
+        },
+        "train_mean": {
+          "rmse_mm": 7.410846756159515,
+          "signed_error_mm": 0.7018111277768246
+        },
+        "train_time_template": {
+          "rmse_mm": 7.382598154952484,
+          "signed_error_mm": 0.7018111277768241
+        }
+      },
+      "released_trials": 59,
+      "scored_samples": 531
+    },
+    "TRAIN": {
+      "eligible_anchor_lag_from_event_ms_counts": {
+        "0.0": 9,
+        "1.0": 5,
+        "2.0": 6,
+        "3.0": 3,
+        "4.0": 1,
+        "5.0": 4,
+        "6.0": 8,
+        "7.0": 2,
+        "8.0": 6,
+        "9.0": 2
+      },
+      "eligible_target_times_relative_to_event_ms_range": [
+        100.0,
+        509.0
+      ],
+      "eligible_trials": 46,
+      "excluded_trials": {},
+      "metrics": {
+        "ridge": {
+          "rmse_mm": 10.739271039972323,
+          "signed_error_mm": 8.238176646493915e-16
+        },
+        "train_mean": {
+          "rmse_mm": 10.853857478483947,
+          "signed_error_mm": 5.492117764329277e-16
+        },
+        "train_time_template": {
+          "rmse_mm": 10.830675091959735,
+          "signed_error_mm": -2.7460588821646383e-16
+        }
+      },
+      "released_trials": 46,
+      "scored_samples": 414
+    },
+    "dev_primary": {
+      "comparisons": {
+        "train_mean": {
+          "dev_trials_with_lower_ridge_mse": 20,
+          "leave_one_dev_trial_out_delta_range_mm": [
+            0.08504724764536142,
+            0.1128283432210937
+          ],
+          "ridge_minus_baseline_rmse_mm": 0.10288028922995629
+        },
+        "train_time_template": {
+          "dev_trials_with_lower_ridge_mse": 29,
+          "leave_one_dev_trial_out_delta_range_mm": [
+            0.09290759344543797,
+            0.14809044504390378
+          ],
+          "ridge_minus_baseline_rmse_mm": 0.13112889043698672
+        }
+      },
+      "ridge_beat_both": false
+    }
+  },
+  "runtime": {
+    "cpu_affinity": [
+      29
+    ],
+    "h5py": "3.16.0",
+    "numeric_pools": [
+      {
+        "architecture": "SkylakeX",
+        "internal_api": "openblas",
+        "library": "libscipy_openblas64_-4b78795a.so",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.34.237.2"
+      }
+    ],
+    "numpy": "2.5.5",
+    "python": "3.13.15",
+    "seconds_after_import": {
+      "custody_and_schema": 0.020795709977392107,
+      "fit_and_score": 0.0010651899501681328,
+      "total": 0.07250661397119984,
+      "window_loading_after_gate": 0.05054723803186789
+    }
+  },
+  "status": "offline_dev_scored"
+}

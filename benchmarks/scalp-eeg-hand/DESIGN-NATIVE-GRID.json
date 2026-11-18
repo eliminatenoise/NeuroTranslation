@@ -1,0 +1,12 @@
+{
+  "kind": "prescore alternate analysis for the native sample grid",
+  "parent_design_sha256": "f6ec056e747fb3045ca5ed5a380fd31d2ce818ed6529a1fb2e3cfe0f69fd164e",
+  "metadata_only_trigger": "Stored epochs keep 10 ms spacing but the first nonnegative row need not coincide with zero relative to event 14. The source intake found only 9 of 46 TRAIN and 2 of 59 DEV arrays with a sample exactly at zero. The original design is kept separately with its prespecified minimum four eligible trials; its exact event-relative analysis cannot yield scores.",
+  "source_geometry_sha256": "e72a4ec7b146d6e4a4e718eb7b7f2336af98c942ff5af10f6ccd8bd5e28570e5",
+  "anchor": "Choose the first native recorded t_ms row at or after event time zero using timestamps alone. Require a preceding negative row and a native anchor lag in [0,10) ms. Record the anchor lag in event-relative units.",
+  "support": "Apply the identical 0.01 ms tolerance around the exact 10 ms lattice relative to that native anchor. Reject off-lattice, missing, gapped, duplicate, or nonfinite relevant support per the original trial rules. Keep four eligible trials as the minimum per role. Only source geometry selects the anchor; participant samples, outcomes and performance cannot select it.",
+  "target": "Source x_mm at native-anchor offsets 100, 150, 200, 250, 300, 350, 400, 450 and 500 ms. This equals the declared offset plus the actual anchor lag relative to task event 14. Report eligible trial lag counts and actual event-relative earliest and latest targets for each role.",
+  "features_and_baselines": "Bins are indexed relative to the actual stored target and the latest EEG sample remains nominally 10 ms earlier. The TRAIN template is indexed to the exact same set of native-anchor offsets. Method, feature names, TRAIN-only transforms, split, metrics, trial control and thresholds remain as registered.",
+  "source_identity": "lm_trial can be zero in the exact release; eeg_seg_idx is positive. Trial and segment identity must remain unique within a role. They do not enter model features.",
+  "freeze": "2026-11-19, after inspecting source clock geometry and before any participant-level model fit, performance, or EEG/target relationship. Root explicitly scoped this alternate design and the independent reviewer checked the interpretation before scoring."
+}

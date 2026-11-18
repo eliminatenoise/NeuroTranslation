@@ -1,0 +1,42 @@
+{
+  "dataset": {
+    "name": "IACKD: Intention Action Conflict EEG-Hand Kinematics Dataset",
+    "release": "OpenNeuro ds006840 version 1.0.0",
+    "doi": "https://doi.org/10.18112/openneuro.ds006840.v1.0.0",
+    "release_url": "https://openneuro.org/datasets/ds006840/versions/1.0.0",
+    "release_commit": "0c701aadfa562b8662e76ca0dd6831788e02e8b6",
+    "authors": ["Mengpu Cai", "Rongrong Fu", "Yaodong Wang", "Bin Lu", "Saiwei Guo", "Fangyao Xu"],
+    "license": "CC0 1.0",
+    "license_authority": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/dataset_description.json",
+    "descriptor": "https://doi.org/10.1038/s41597-026-07146-x",
+    "methods": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13287794/",
+    "authors_code_commit": "https://github.com/Boketto1/IACKD/tree/c0b595de7571c7e04abae7477c61d0b92b5702cd",
+    "release_claim": "The descriptor reports anonymized recordings and consent to public data sharing. This companion uses two version-pinned derivatives, cites the release and descriptor, and redistributes aggregate summaries only."
+  },
+  "assets": {
+    "TRAIN": {
+      "role": "sole fitting participant; same right-hand run type as DEV",
+      "exact_raw_run_metadata": "https://github.com/OpenNeuroDatasets/ds006840/tree/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-02/eeg",
+      "release_path": "derivatives/movement-execution/sub-02/ihc/sub-02_task-ihc_run-01_eeg_leap_R1.mat",
+      "s3_version": "NvfOJ7qC.nps5p0epkDlJwCdofpnsEAA",
+      "s3_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-02/ihc/sub-02_task-ihc_run-01_eeg_leap_R1.mat?versionId=NvfOJ7qC.nps5p0epkDlJwCdofpnsEAA",
+      "bytes": 3436384,
+      "sha256": "7f76f663549780e435663c28d590f086a31ec227a8199c2a5b33a31d7423a103"
+    },
+    "DEV": {
+      "role": "single separate development participant, analysed here",
+      "exact_raw_run_metadata": "https://github.com/OpenNeuroDatasets/ds006840/tree/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-03/eeg",
+      "release_path": "derivatives/movement-execution/sub-03/ihc/sub-03_task-ihc_run-01_eeg_leap_R1.mat",
+      "s3_version": "78rZ0hRjITFljhBuCkcYX6Cwov148POd",
+      "s3_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-03/ihc/sub-03_task-ihc_run-01_eeg_leap_R1.mat?versionId=78rZ0hRjITFljhBuCkcYX6Cwov148POd",
+      "bytes": 2291642,
+      "sha256": "dc7b9dabcf4b7cbeff413a0c6935ae8128cca4ee0c06610f233bd784b1b07655"
+    },
+    "reserve": "sub-06 identified in public metadata only. A confirmatory participant result is absent."
+  },
+  "terminology_registry": {
+    "name": "Brain2Body shared glossary",
+    "revision": 36,
+    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+  }
+}

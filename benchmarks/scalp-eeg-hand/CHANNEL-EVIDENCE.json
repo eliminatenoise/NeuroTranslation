@@ -1,0 +1,47 @@
+{
+  "status": "supported_for_named_central_rows",
+  "decision": "Restrict the pilot to C3, Cz, and C4. The exact tagged BrainVision headers and channels metadata agree on their positions and type. The author-described order-preserving export and corroborating same-participant left-hand analysis support this central prefix. The derivative omits names, so this is source-supported inference rather than direct derivative label readback.",
+  "design_sha256": "f6ec056e747fb3045ca5ed5a380fd31d2ce818ed6529a1fb2e3cfe0f69fd164e",
+  "openneuro": {
+    "release": "https://doi.org/10.18112/openneuro.ds006840.v1.0.0",
+    "commit": "0c701aadfa562b8662e76ca0dd6831788e02e8b6",
+    "license": "CC0 1.0"
+  },
+  "roles": {
+    "TRAIN": {
+      "asset_sha256": "7f76f663549780e435663c28d590f086a31ec227a8199c2a5b33a31d7423a103",
+      "n_channels": 28,
+      "raw_channel_inventory": "28 EEG including M1/M2 at Ch19/Ch20, followed by VEOG, HEOG, Trigger recorded as MISC. All 46 derived EEG arrays have 28 channel columns.",
+      "channels_tsv_sha256": "00dabfdae483fd93ab68d908706b0f058a9562491f586d712853a3087df710bf",
+      "eeg_json_sha256": "3a0837924f4a3ae29709501fd39af947c5132e0a26766ee5ea1c1ebb5ac71819",
+      "brainvision_header_sha256": "b81838f33d13a37bee1ee88687c020518720aca11982512d991b9874b65027e5",
+      "rows": [
+        {"index_zero_based": 11, "name": "C3", "type": "EEG"},
+        {"index_zero_based": 12, "name": "Cz", "type": "EEG"},
+        {"index_zero_based": 13, "name": "C4", "type": "EEG"}
+      ]
+    },
+    "DEV": {
+      "asset_sha256": "dc7b9dabcf4b7cbeff413a0c6935ae8128cca4ee0c06610f233bd784b1b07655",
+      "n_channels": 26,
+      "raw_channel_inventory": "26 EEG. M1/M2 absent already at acquisition metadata, where P7 is Ch19. The same VEOG, HEOG, Trigger suffix is MISC. All 59 derived EEG arrays have 26 channel columns.",
+      "channels_tsv_sha256": "0128fa51d79ab087acf02419a581a4ccecb56113b7c97426f0df8c29added408",
+      "eeg_json_sha256": "2cb3d4eb316c87958be8a293dfdec5093da6f80a3844ab775c4f763b538aa6a6",
+      "brainvision_header_sha256": "4f2a3572d37764850c1078151bdc1ec23d69cd19d81d4cd5326b9ba6d27ab303",
+      "rows": [
+        {"index_zero_based": 11, "name": "C3", "type": "EEG"},
+        {"index_zero_based": 12, "name": "Cz", "type": "EEG"},
+        {"index_zero_based": 13, "name": "C4", "type": "EEG"}
+      ]
+    }
+  },
+  "author_source": {
+    "commit": "c0b595de7571c7e04abae7477c61d0b92b5702cd",
+    "preprocessing_sha256": "a8bbba927b35f35e14b003bb6a528b3035b312f5575c81df85d06bf397fecb7c",
+    "alignment_sha256": "26fe4094c3e788d3441f117c5d1fd79fcb39da7d310885945498a3f5348f03a5",
+    "export_sha256": "b7b7a0e9bd3c5a529ea441630608772497c8d7a99d1045a16d1949a171eed6dc",
+    "analysis_sha256": "b913d20a46da5412de41958c19f79decdd874075a490439760067f2df1b9f649",
+    "basis": "Preprocessing deletes listed non-EEG suffix rows by name and retains channel order through resampling, filtering, ICA reconstruction, average referencing, epoch slicing, and baseline subtraction. Alignment passes segs_blc to eeg_data unchanged, and the exporter assigns Pairs(k).eeg_data directly into OUT.EEG. The author independently uses zero-based index 13 as C4 for sub-03 left-hand exports.",
+    "precision_limit": "The public movement execution code names TRIGGER in uppercase while the tagged raw BrainVision header displays Trigger; the derivative width matches removal of all three suffix channels. Exact per-run preprocessing logs and derived channel labels are absent. No conclusion is drawn from the raw versus derivative counts alone or about the entire montage identity. Rereferencing combines signals and this pilot cannot identify the origin of measured associations."
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "HDF5_schema": {
+    "DEV": {
+      "embedded_out_fields": [
+        "EEG",
+        "a",
+        "b",
+        "ball_color",
+        "ball_x_pix",
+        "cov",
+        "eeg_seg_idx",
+        "lm_trial",
+        "move_direct",
+        "start_res_ms",
+        "t_ms",
+        "x_mm",
+        "y_mm",
+        "z_mm"
+      ],
+      "n_channels": 26,
+      "released_trials": 59,
+      "storage": "HDF5 EEG samples \u00d7 channels; t_ms row; x_mm column",
+      "top_level_groups": [
+        "#refs#",
+        "OUT"
+      ]
+    },
+    "TRAIN": {
+      "embedded_out_fields": [
+        "EEG",
+        "a",
+        "b",
+        "ball_color",
+        "ball_x_pix",
+        "cov",
+        "eeg_seg_idx",
+        "lm_trial",
+        "move_direct",
+        "start_res_ms",
+        "t_ms",
+        "x_mm",
+        "y_mm",
+        "z_mm"
+      ],
+      "n_channels": 28,
+      "released_trials": 46,
+      "storage": "HDF5 EEG samples \u00d7 channels; t_ms row; x_mm column",
+      "top_level_groups": [
+        "#refs#",
+        "OUT"
+      ]
+    }
+  },
+  "analysis": "exact_event_grid",
+  "channel_evidence_sha256": "6a867167815524f764a5693c9604c67f8c542d45f05a5f0cb05efa35b7721a6b",
+  "counts": {
+    "DEV": {
+      "eligible_anchor_lag_from_event_ms_counts": {
+        "0.0": 2
+      },
+      "eligible_target_times_relative_to_event_ms_range": [
+        100.0,
+        500.0
+      ],
+      "eligible_trials": 2,
+      "excluded_trials": {
+        "clock_not_continuous_on_selected_grid": 57
+      },
+      "released_trials": 59
+    },
+    "TRAIN": {
+      "eligible_anchor_lag_from_event_ms_counts": {
+        "0.0": 9
+      },
+      "eligible_target_times_relative_to_event_ms_range": [
+        100.0,
+        500.0
+      ],
+      "eligible_trials": 9,
+      "excluded_trials": {
+        "clock_not_continuous_on_selected_grid": 37
+      },
+      "released_trials": 46
+    }
+  },
+  "decision": "Fewer than four eligible trials in at least one role. No fit or scores computed.",
+  "design_sha256": "f6ec056e747fb3045ca5ed5a380fd31d2ce818ed6529a1fb2e3cfe0f69fd164e",
+  "status": "insufficient_eligible_trials"
+}

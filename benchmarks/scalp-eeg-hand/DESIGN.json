@@ -1,0 +1,51 @@
+{
+  "kind": "prospective offline development protocol",
+  "study": "IACKD d006840 v1.0.0, one paired right-hand acquisition per role",
+  "hypothesis": "A ridge model of prior nominal EEG amplitudes at C3, Cz and C4 reduces DEV trial-balanced RMSE for measured horizontal palm-center position compared with both a TRAIN grand mean and a time-from-trial-anchor TRAIN template.",
+  "roles": {
+    "TRAIN": {
+      "participant": "sub-02",
+      "basename": "sub-02_task-ihc_run-01_eeg_leap_R1.mat",
+      "sha256": "7f76f663549780e435663c28d590f086a31ec227a8199c2a5b33a31d7423a103"
+    },
+    "DEV": {
+      "participant": "sub-03",
+      "basename": "sub-03_task-ihc_run-01_eeg_leap_R1.mat",
+      "sha256": "dc7b9dabcf4b7cbeff413a0c6935ae8128cca4ee0c06610f233bd784b1b07655"
+    }
+  },
+  "reserve": "sub-06, metadata only; no other participant payload or subset admitted",
+  "task": "Right-hand execution, with all available released trials across the four instructed combinations pooled. No condition, direction, ball, cue text, trajectory history, trial ID, duration, alignment parameters, or participant ID enter the model. Trial identifiers enter only schema/custody checks and control ordering.",
+  "required_source_gate": "Verify exact release version, role hashes and source binding, and names and EEG types of the actual derived rows C3, Cz, C4 in both runs. Row count or typical montage order is insufficient. Reject if unresolved rather than assuming channel order or migrating to unnamed inputs.",
+  "target": "Absolute x_mm at each declared time, in millimetres, device right positive. The tracked palm center is a physical kinematic estimate. No per-trial centering against measured motion, direction normalization, sign flip, phase selection, or alignment refit.",
+  "anchor": "Nominal t_ms relative to EEG event 14, the appearance of movement access when the Pre Move cue disappears. A task event anchor, not a measured palm onset. The TRAIN time template receives this same nominal anchor. There is no persistence reference.",
+  "sampling": {
+    "sample_step_ms": 10,
+    "grid_error_tolerance_ms": 0.01,
+    "score_times_ms": [100, 150, 200, 250, 300, 350, 400, 450, 500],
+    "feature_bins_ms_relative_to_target": [[-100, -50], [-50, 0]],
+    "bin_rule": "Start inclusive and stop exclusive. Compute mean EEG in each 50 ms bin from its five existing 10 ms samples, ordered by bin then C3,Cz,C4. The latest nominal input precedes target by 10 ms. Never bridge trial boundaries.",
+    "channels": ["C3", "Cz", "C4"]
+  },
+  "eligibility": "Use each released epoch as one candidate; no further amplitude filter. Require a continuous source nominal 10 ms grid, and all declared EEG history and x_mm sample positions to exist and be finite. Exclude the entire trial for unavailable support or nonfinite relevant data; count by reason and role. Invalid types/shapes, missing identity or duplicate trial/segment IDs fail closed. Minimum four eligible trials per role for the trial-rotation control. Released author artifact and alignment selection precede this pilot. Complete-window eligibility may favour trials with sufficient end-to-end support.",
+  "model": {
+    "family": "ridge regression, one unpenalized intercept",
+    "objective": "sum of squared errors in mm² plus 10 times the squared norm of standardized-feature coefficients",
+    "alpha": 10,
+    "transform": "Population mean and standard deviation fitted jointly over TRAIN rows only. Zero standard deviations map to unit scale. Only the TRAIN target mean is subtracted to solve and then restored. No tuning, randomized initializer, DEV calibration, condition matching, phase compensation, or model selection."
+  },
+  "controls": {
+    "train_mean": "One constant, the mean of the TRAIN target samples on this exact grid.",
+    "train_time_template": "Average TRAIN x_mm at each of the nine declared nominal times. This estimates predictable task time structure using the event anchor.",
+    "dev_shifted_trials": "Keep the fitted ridge and the nominal time grid; pair each eligible DEV trial's target with the next eligible trial's EEG in ascending im_trial order, wrapping the last to the first. This breaks trial correspondence and retains time-from-anchor; it may break task-condition correspondence too. Descriptive negative control only."
+  },
+  "scoring": "Report trial-balanced RMSE in mm and mean signed error for each method on both roles where applicable. Because each included trial has the same nine times, trial-balanced RMSE equals pooled sample RMSE here. Primary comparisons are ridge minus TRAIN mean and ridge minus time template on DEV; improvement requires both differences to be strictly negative. Report paired number of trials with lower MSE than each baseline and leave-one-DEV-trial-out ranges of the primary RMSE differences as sensitivity summaries. No p-value, confidence interval or population inference.",
+  "offline_limit": "The public release uses run-level author EEG processing, baseline correction, ICA and artifact rejection, and retrospectively aligned and zero-phase-smoothed target labels. Time indices alone do not establish strictly causal raw signal processing and source alignment uses later hit information. Source or residual ocular, muscle, movement, apparatus, cue and session effects are plausible. Sub-03 is a single development participant, never a confirmatory holdout or a deployment test. This study establishes no neural mechanism, intent, closed-loop control, clinical benefit, or performance in other tasks or people.",
+  "references": [
+    "https://doi.org/10.18112/openneuro.ds006840.v1.0.0",
+    "https://openneuro.org/datasets/ds006840/versions/1.0.0",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC13287794/",
+    "https://github.com/Boketto1/IACKD"
+  ],
+  "timing_of_declaration": "Written before employee or participant EEG/kinematics observations, performance results, source-dependent exclusions, or model fits. Public paper, role hashes and source documentation were known."
+}
