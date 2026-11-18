@@ -19,6 +19,8 @@ Six people supplied 1,879 eligible training trials. The corrections were fitted 
 
 ## Run a forecast
 
+[Open the forearm forecast in your browser](https://eliminatenoise.github.io/NeuroTranslation/wrist-forearm/) or [download the offline browser and launchers](WristMotion-Forearm-Browser.zip). Choose an invented example to see the three forecasts, or open an original unmodified development ZIP from [the deposit](https://doi.org/10.6084/m9.figshare.29666735.v3) and select its block and trial. For a real recording, **Forecast error** shows the predicted angle minus the measured angle at each target time. Files are read locally in a background worker.
+
 - [Download the recorded-trial runner](WristMotion-Forearm-Recorded-Trial.zip). Extract the whole folder and follow its README to forecast one movement from an original development ZIP. Each printed row pairs the measured angle with the frozen forecast and the two learned corrections.
 - [Download the fitted models and synthetic examples](WristMotion-Forearm-Correction.zip). The twelve invented windows run with Python’s standard library. The archive also contains both learned matrices, the three frozen motion models, the fitting code and the study design.
 - [Read the aggregate scores](DEVELOPMENT-AGGREGATE.json) or [reproduce the figure](plot_wrist_transfer.py). The [earlier wrist replay](https://eliminatenoise.github.io/NeuroTranslation/wrist-replay/) lets you explore the original temporal forecasts in your browser.
@@ -26,3 +28,5 @@ Six people supplied 1,879 eligible training trials. The corrections were fitted 
 ## Source
 
 Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz deposited *EEG-EMG-WristMotion Dataset*, version 3, under CC BY 4.0. NeuroTranslation derived the earlier wrist and differential forearm features, fitted the corrections and produced the figure from aggregate errors. [Dataset](https://doi.org/10.6084/m9.figshare.29666735.v3) · [Study descriptor](https://doi.org/10.1038/s41597-026-07287-z) · [Licence](https://creativecommons.org/licenses/by/4.0/)
+
+The browser model and archive checker can be rebuilt from the two published ZIPs with the Python standard library. From this study directory, run `python browser-source/build_browser.py rebuilt` and compare the hashes it prints with [the recorded source and asset hashes](SOURCE.json). The study software reads the original ZIP locally, verifies its fingerprint, then reads the selected block and trial. The released recording is separate from the browser download.

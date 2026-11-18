@@ -41,10 +41,10 @@
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
   "experimental_previews": {
     "data_companion": {
-      "version": "2026-11-19 palm and wrist companion",
+      "version": "2026-11-19 original forearm archive browser",
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
-      "buildId": "7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb",
+      "buildId": "90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf",
       "meaning": "Import and inspect recordings locally. Replay the R1 cohort fit, or compare the fixed and personally calibrated models on an imported R2 trial. Full R2 trials are checked against their archived sample clock and four selected input streams. Aggregate evidence is shown separately.",
       "hosting": "Prepared static main/docs payload; actual Pages deployment/readback is verified separately",
       "study": "benchmarks/scalp-eeg-palm-history",
@@ -54,9 +54,10 @@
       "personal_calibration_trial_replay": "docs/index.html#palm-replay",
       "wrist_navigation": {
         "recorded_trial": "docs/wrist-replay/index.html",
-        "invented_forearm_inputs": "docs/wrist-pointing/index.html"
+        "invented_forearm_inputs": "docs/wrist-pointing/index.html",
+        "original_archive_and_emg": "docs/wrist-forearm/index.html"
       },
-      "previous_cached_build": "c9f73676003f8d0894305c2f9462804282365c565f98fd4ba96a0738251517e6"
+      "previous_cached_build": "7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb"
     },
     "papers": {
       "latest_rendered": "papers/experimental/scientific-layout-2026-11-15",
@@ -167,7 +168,15 @@
         "same_trial_emg": 3.8530124811,
         "next_trial_emg": 4.1402901072
       },
-      "scope": "Six training participants, three previously evaluated development participants, six reserved test participants not examined."
+      "scope": "Six training participants, three previously evaluated development participants, six reserved test participants not examined.",
+      "original_archive_browser": {
+        "hosted": "docs/wrist-forearm/index.html",
+        "offline_download": {
+          "path": "benchmarks/wrist-forearm-transfer/WristMotion-Forearm-Browser.zip",
+          "bytes": 181706,
+          "sha256": "8b866e86163aa832d9e4468aa6deeec75e5a869adbf2f68477348b12a17186c0"
+        }
+      }
     }
   }
 }

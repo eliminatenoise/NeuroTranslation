@@ -30,5 +30,75 @@
     "bytes": 195275,
     "sha256": "f752a2bb44dad136281d19cc0bcef37e9dd8422bb568b722e40e86823d1092a6"
   },
-  "modifications": "NeuroTranslation computed four bipolar EMG amplitudes and motion features, fitted two output corrections to frozen motion encoders, evaluated development errors and authored the figure and runners."
+  "modifications": "NeuroTranslation computed four bipolar EMG amplitudes and motion features, fitted two output corrections to frozen motion encoders, evaluated development errors and authored the figure and runners.",
+  "original_archive_browser": {
+    "web": "docs/wrist-forearm/index.html",
+    "download": {
+      "path": "benchmarks/wrist-forearm-transfer/WristMotion-Forearm-Browser.zip",
+      "bytes": 181706,
+      "sha256": "8b866e86163aa832d9e4468aa6deeec75e5a869adbf2f68477348b12a17186c0"
+    },
+    "web_files": [
+      {
+        "path": "docs/wrist-forearm/archive-worker.js",
+        "bytes": 94569,
+        "sha256": "b5cd38540c58f6c2bcef3f513b4ee3d9a15f07703505d8084ff169cd6414deff"
+      },
+      {
+        "path": "docs/wrist-forearm/forearm-model.js",
+        "bytes": 221195,
+        "sha256": "2bf01483a3d300e47524e14703c4408a625e021652287af469677d4cda2e2c4b"
+      },
+      {
+        "path": "docs/wrist-forearm/forearm.css",
+        "bytes": 3581,
+        "sha256": "f8adaa9a438db4569397cae367a9d13fdae0fff3b9da241f95cadaf967b3803b"
+      },
+      {
+        "path": "docs/wrist-forearm/forearm.js",
+        "bytes": 11127,
+        "sha256": "e7783ed28ed0394e1a0c62aab2ee416d9a4221efbd17d274696ccb32cd47ee49"
+      },
+      {
+        "path": "docs/wrist-forearm/index.html",
+        "bytes": 5229,
+        "sha256": "3ef5565a0cd14289219f4440ff812df48570e9589e822768ad56a5499697b09d"
+      }
+    ],
+    "build_source_files": [
+      {
+        "path": "benchmarks/wrist-forearm-transfer/browser-source/archive-core.js",
+        "bytes": 17751,
+        "sha256": "6695624ddec19332aef742b5c166f92040ad6175cd01b924fd9c68cc015e26ee"
+      },
+      {
+        "path": "benchmarks/wrist-forearm-transfer/browser-source/build_archive.py",
+        "bytes": 1748,
+        "sha256": "cf145d7df63b2f7250bf508485b8dae49b1df1f91c43638ab1065f899f98b59d"
+      },
+      {
+        "path": "benchmarks/wrist-forearm-transfer/browser-source/build_browser.py",
+        "bytes": 1928,
+        "sha256": "da9b00844da1600b66cd5bf131e4fdebeff78b3ca64d87faa08abf111396cbe3"
+      },
+      {
+        "path": "benchmarks/wrist-forearm-transfer/browser-source/build_model.py",
+        "bytes": 4601,
+        "sha256": "3536dd27e5b2493c785ec577a67afe2c7890678d0df40591dd43f89c2bf68092"
+      },
+      {
+        "path": "benchmarks/wrist-forearm-transfer/browser-source/model-runtime.js.in",
+        "bytes": 10223,
+        "sha256": "80ba39d7277d43ff944487fe85ca6dc4a93ab47f9a3b6fd09eedce84ece123c0"
+      },
+      {
+        "path": "benchmarks/wrist-forearm-transfer/browser-source/worker-entry.js",
+        "bytes": 923,
+        "sha256": "690adf1cf6da88bfd1cf2cc463880310d4ba29a2f06d66d4527bfd6fa95eb9ea"
+      }
+    ],
+    "model_parameters_from": "WristMotion-Forearm-Correction.zip",
+    "verified_source_contract_from": "WristMotion-Forearm-Recorded-Trial.zip",
+    "scope": "All 960 measured development trials compared across six target times using the original verified ZIPs. The only included example data are invented. Linux Chromium and the Linux offline launcher were exercised. Windows and macOS launchers received source checks."
+  }
 }

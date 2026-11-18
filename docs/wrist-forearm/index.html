@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; worker-src blob:; connect-src 'none'; object-src 'none'; form-action 'none'; base-uri 'none'">
+  <title>Forecast a wrist turn · NeuroTranslation</title>
+  <link rel="stylesheet" href="forearm.css">
+  <script defer src="forearm-model.js"></script>
+  <script defer src="archive-worker.js"></script>
+  <script defer src="forearm.js"></script>
+</head>
+<body>
+<main>
+  <header>
+    <nav aria-label="Breadcrumb"><a href="https://eliminatenoise.github.io/NeuroTranslation/">NeuroTranslation</a> / Wrist studies</nav>
+    <h1>Forecast a wrist turn</h1>
+    <p>How much does the forearm tell us once we know where the wrist has been? Compare three fitted models at six times during a pointing movement. Each model gets the same earlier wrist angles. The last also gets electrical activity from the forearm muscles.</p>
+  </header>
+  <div class="workspace">
+    <section class="source" aria-labelledby="source-title">
+      <h2 id="source-title">Choose an input</h2>
+      <div class="input-group">
+        <label for="example">Invented examples</label>
+        <select id="example" disabled><option value="none" disabled>Choose an example</option><option value="0" selected>Window set 1</option><option value="1">Window set 2</option></select>
+      </div>
+      <div class="input-group archive">
+        <label for="archive">Original study ZIP</label>
+        <p>Open a development recording directly from your device. Keep the downloaded file zipped.</p>
+        <input type="file" id="archive" accept=".zip,application/zip" disabled aria-describedby="source-status">
+        <a href="https://ndownloader.figshare.com/files/62570998">Get an original ZIP from Figshare (38 MB)</a>
+      </div>
+      <div class="selectors" id="trial-controls" hidden>
+        <label>Block<select id="block" disabled></select></label>
+        <label>Trial<select id="trial" disabled></select></label>
+      </div>
+      <p id="source-status" role="status" data-state="starting">Loading the local models…</p>
+      <button type="button" id="clear" hidden>Clear recording</button>
+      <a href="#figure-title" id="jump" hidden>View these forecasts</a>
+      <noscript>Enable JavaScript to run a forecast, or use the downloadable recorded-trial runner below.</noscript>
+    </section>
+    <section class="figure" aria-labelledby="figure-title">
+      <h2 id="figure-title" tabindex="-1">Forecasts</h2>
+      <p id="figure-note">Choose an example or open a recording to compare the three models.</p>
+      <div class="selectors" id="plot-controls" hidden>
+        <label>Wrist axis<select id="axis"><option value="extension">Flexion / extension</option><option value="radial_deviation">Radial / ulnar deviation</option></select></label>
+        <label>Show<select id="quantity"><option value="angle">Wrist angle</option><option value="error" disabled>Forecast error</option></select></label>
+      </div>
+      <div id="results" hidden>
+        <ul class="legend" aria-label="Chart legend">
+          <li><i class="original"></i>Frozen motion</li><li><i class="motion"></i>Motion correction</li><li><i class="emg"></i>Motion + EMG</li><li id="measured-key"><i class="measured"></i><span>Measured</span></li>
+        </ul>
+        <canvas id="plot" role="img" aria-label="Wrist angles at six target times. Exact values appear in the table below."></canvas>
+        <details id="details"><summary>Read the six values for each series</summary>
+          <table><caption id="caption">Angles in degrees</caption><thead><tr>
+            <th scope="col">After cue</th><th scope="col">Frozen motion</th><th scope="col">Motion correction</th><th scope="col">Motion + EMG</th><th scope="col" id="measured-head">Measured</th>
+          </tr></thead><tbody id="values"></tbody></table>
+        </details>
+      </div>
+    </section>
+  </div>
+  <section class="study" aria-labelledby="study-title">
+    <h2 id="study-title">What changed across the study?</h2>
+    <p>The frozen motion models had a two-axis error of <strong>4.053°</strong>. Correcting their forecasts using earlier wrist motion brought the error to <strong>3.957°</strong>. Adding the paired forearm signal brought it to <strong>3.853°</strong>. Giving the same correction forearm activity from the next trial instead raised it to <strong>4.140°</strong>.</p>
+    <p>Six people supplied the training movements. Three previously evaluated development participants supplied 960 trials. Each person contributes equally to these root mean square errors. The forecasts look 250 ms ahead on the stored clock. The instruments’ physical delay remains unmeasured.</p>
+    <p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-forearm-transfer">Study, trained models and desktop runner</a> · <a href="https://doi.org/10.6084/m9.figshare.29666735.v3">EEG-EMG-WristMotion v3, Perez Blanco and Anteliz Ortiz</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+  </section>
+</main>
+</body>
+</html>

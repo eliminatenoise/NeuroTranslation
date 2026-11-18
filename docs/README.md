@@ -21,3 +21,5 @@ Move the **Aligned time** slider to put every trace at the same point on the dec
 The [build manifest](build-manifest.json) identifies the current browser build. See the [application source and usage](https://github.com/eliminatenoise/NeuroTranslation/tree/main/demo), [selected experimental papers](https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers) and [historical unbuilt R11 manuscript source](https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers/experimental/r11-source) for the wider research programme.
 
 Project-owned code uses CC0. Recordings, references and separately supplied assets retain their own licences. [Code licence](LICENSE) · [Recording and asset rights](RIGHTS.md)
+
+[Forecast a wrist turn with forearm EMG](wrist-forearm/). Open an original development ZIP, select a block and trial, and compare measured wrist angles with three forecasts. You can explore invented inputs without a file.
