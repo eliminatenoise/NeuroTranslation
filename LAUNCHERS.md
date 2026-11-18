@@ -30,4 +30,6 @@ The daily-activity wrist browser runs the UJI models on a compatible seven-chann
 
 ## Open the grip-force forecast
 
-Extract the grip-force ZIP and open the launcher for your system. It runs an invented window through the fitted models with Python and NumPy. The Linux launcher ran from an extracted copy. Native launches on Windows and macOS remain unchecked. [Download the ZIP](benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-experimental-preview.zip) · [Study and input instructions](benchmarks/way-grip-force/)
+The grip-force browser shows the past sensor window alongside four fitted forecasts. Open it online, or extract the browser ZIP and open its Windows, macOS or Linux launcher. You can also open `index.html` directly. [Open the browser forecast](https://eliminatenoise.github.io/NeuroTranslation/grip-force/) · [Download the offline browser](benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-browser.zip)
+
+The separate Python runner can forecast batches of compatible windows. Extract its ZIP and open the launcher for your system to try an invented window with Python and NumPy. This launcher ran on Linux. Native Windows and macOS launches remain unchecked. [Download the Python runner](benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-experimental-preview.zip) · [Study and input instructions](benchmarks/way-grip-force/)

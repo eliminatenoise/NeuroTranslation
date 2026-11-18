@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' file:; style-src 'self' file:; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Grip-force forecast · NeuroTranslation</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="study.js"></script>
+  <script defer src="forecast.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap masthead-inner">
+      <span class="brand">NeuroTranslation</span>
+      <span class="study-label">WAY-EEG-GAL <span class="separator">/</span> Experimental preview</span>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title">How hard will the<br class="desktop-break"> fingers squeeze?</h1>
+      <p>Take the last 400 ms of a pinch lift. Forecast the force 120 ms ahead, then see how the forecast changes when you add scalp or muscle signals.</p>
+    </section>
+
+    <section class="workspace" aria-label="Grip-force forecaster">
+      <div class="input-bar">
+        <div class="input-description">
+          <strong id="source-label">Synthetic input</strong>
+          <span id="source-description">Invented signals. No file is sent to a server.</span>
+        </div>
+        <div class="input-actions">
+          <button type="button" id="open-file">Open local JSON</button>
+          <input id="local-file" type="file" accept=".json,application/json" hidden>
+          <button type="button" class="quiet" id="reset" hidden>Use synthetic input</button>
+        </div>
+      </div>
+      <p id="error" class="error" role="alert" hidden></p>
+      <noscript><p class="error">JavaScript is needed to calculate the forecasts in this browser.</p></noscript>
+
+      <div class="experiment">
+        <section class="history-pane" aria-labelledby="history-title">
+          <div class="pane-heading">
+            <div>
+              <h2 id="history-title">Grip force across the cutoff</h2>
+              <p class="subheading">Average compression at the thumb and index finger, in newtons (N)</p>
+            </div>
+          </div>
+          <div class="plot-key" aria-hidden="true"><span class="key-input">Past grip force</span><span class="key-prediction">Forecasts at +120 ms</span></div>
+          <canvas id="grip-plot" role="img" aria-describedby="grip-plot-description">Grip force history and four forecasts.</canvas>
+          <p id="grip-plot-description" class="visually-hidden"></p>
+          <div class="cutoff-control">
+            <label for="cutoff">Cutoff after go cue <output id="cutoff-value" for="cutoff">840 ms</output></label>
+            <input type="range" id="cutoff" min="240" max="1360" step="40" value="840">
+            <div class="range-ends" aria-hidden="true"><span>240 ms</span><span>1,360 ms</span></div>
+          </div>
+        </section>
+
+        <section class="forecast-pane" aria-labelledby="forecast-title">
+          <h2 id="forecast-title">At +120 ms</h2>
+          <p class="subheading">Forecasts on the recording clock</p>
+          <dl id="results" class="results">
+            <div><dt>Force + motion</dt><dd id="p-strong">—</dd></div>
+            <div><dt>+ Scalp EEG</dt><dd id="p-eeg">—</dd></div>
+            <div><dt>+ Surface EMG</dt><dd id="p-emg">—</dd></div>
+            <div><dt>+ EEG and EMG</dt><dd id="p-emg_eeg">—</dd></div>
+          </dl>
+          <p class="current-force">Grip at cutoff <strong id="present-force">—</strong></p>
+          <p class="forecast-note">The example ends at cutoff. It has no later measurement for scoring these forecasts.</p>
+          <p class="visually-hidden" id="state" role="status"></p>
+        </section>
+      </div>
+    </section>
+
+    <section class="inputs" aria-labelledby="detail-title">
+      <div class="detail-heading">
+        <h2 id="detail-title">What the forecasters see</h2>
+        <label for="signal">Signal
+          <select id="signal">
+            <option value="load">Load force</option>
+            <option value="motion">Motion</option>
+            <option value="eeg">Scalp EEG</option>
+            <option value="emg">Surface EMG</option>
+          </select>
+        </label>
+        <label id="channel-label" for="channel" hidden>Channel <select id="channel"></select></label>
+      </div>
+      <div class="detail-plot">
+        <p id="signal-source">500 Hz · Signed lift-axis force (N)</p>
+        <canvas id="signal-plot" role="img" aria-describedby="signal-description">Past sensor samples up to the cutoff.</canvas>
+        <p id="signal-description" class="visually-hidden"></p>
+      </div>
+      <p class="input-foot">All four models use the cue, trial schedule, grip and load forces, and motion. The other inputs are scalp electrical activity (EEG) and surface muscle electrical activity (EMG).</p>
+    </section>
+
+    <section class="evidence" aria-labelledby="evidence-title">
+      <div>
+        <h2 id="evidence-title">Did scalp EEG help?</h2>
+        <p id="dev-verdict" class="verdict"></p>
+        <p id="dev-explanation"></p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption>Development error on 25,578 predictions from three people</caption>
+          <thead><tr><th scope="col">Inputs</th><th scope="col">Mean RMSE (N)</th></tr></thead>
+          <tbody id="dev-rows"></tbody>
+        </table>
+        <p id="high-force" class="table-note"></p>
+      </div>
+    </section>
+    <details class="instructions">
+      <summary>Prepare a compatible window</summary>
+      <p>Download the current synthetic window to see the exact JSON fields and channel layout. Each file holds one issue time. Supply synchronized histories from your own compatible recording in the original source scales.</p>
+      <p><a class="download" download="way-grip-synthetic-window.json" id="example" href="#">Download synthetic window (JSON)</a></p>
+      <ul>
+        <li><code>grip_n</code> and <code>load_n</code> each hold 200 samples at 500 Hz. Grip is the average normal force across the two plates, positive under compression. Load is the signed lift-axis force.</li>
+        <li><code>position</code> holds 200 sets of coordinates for the object, index finger, thumb and wrist, in that order. Keep XYZ in the source scale.</li>
+        <li><code>eeg</code> holds 200 rows of 32 channels. <code>emg</code> holds 1,600 rows of five channels at 4 kHz. Use the released voltage scales and channel order shown below.</li>
+        <li><code>time_from_cutoff_s</code> holds the two clocks in seconds relative to cutoff. Keep samples oldest first. End the 500 Hz clock at zero and end EMG at its latest sample at or before zero.</li>
+        <li><code>issue_offset</code> counts 500 Hz samples after the go cue and takes values 120, 140, …, 680. Use the observed <code>trial_number</code> within the <code>series_type</code> of <code>weight</code>, <code>friction</code> or <code>mixed</code>. The source schedule has 34 trials per weight or friction series and 28 per mixed series.</li>
+      </ul>
+      <p id="channel-order"></p>
+      <p>New devices, tasks and cohorts need their own validation. The browser checks the supplied shape and clocks. The file preparer supplies sensor order, scaling and real synchronization.</p>
+    </details>
+    <footer>
+      <p>The original study recorded instrumented pinch lifts by healthy volunteers. Filter delay and clock drift limit what 120 ms on the recording clock says about live timing. The three final-test participants remain reserved.</p>
+      <p>Recordings by Matthew D. Luciw, Ewa Jarocka and Benoni B. Edin. This page includes aggregate model parameters and generates its example signals locally. <a href="https://doi.org/10.1038/sdata.2014.47">Study methods</a> · <a href="https://doi.org/10.6084/m9.figshare.c.988376.v2">Dataset and attribution</a></p>
+    </footer>
+  </main>
+</body>
+</html>

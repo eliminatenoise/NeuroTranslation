@@ -41,10 +41,10 @@
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
   "experimental_previews": {
     "data_companion": {
-      "version": "2026-11-19 daily-activity wrist browser",
+      "version": "2026-11-19 grip-force browser navigation",
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
-      "buildId": "8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313",
+      "buildId": "d4915a6997132b045e9706ddf362c5bde1d1aa0c3d3ff82bdb2aaeb4f2f43d9b",
       "meaning": "Import and inspect recordings locally. Replay the R1 cohort fit, or compare the fixed and personally calibrated models on an imported R2 trial. Full R2 trials are checked against their archived sample clock and four selected input streams. Aggregate evidence is shown separately.",
       "hosting": "Prepared static main/docs payload; actual Pages deployment/readback is verified separately",
       "study": "benchmarks/scalp-eeg-palm-history",
@@ -58,7 +58,10 @@
         "original_archive_and_emg": "docs/wrist-forearm/index.html",
         "daily_activity_wrist_angles": "docs/daily-wrist/index.html"
       },
-      "previous_cached_build": "90df10ca96dafc7797de825c51ee9e3130107f4b631534bc900580636cbf5fcf"
+      "previous_cached_build": "8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313",
+      "force_navigation": {
+        "grip_force": "docs/grip-force/index.html"
+      }
     },
     "papers": {
       "latest_rendered": "papers/experimental/scientific-layout-2026-11-15",
@@ -247,7 +250,17 @@
       "development_trials": 882,
       "development_windows": 25578,
       "final_test_people_reserved": 3,
-      "scope": "Offline voluntary pinch-lift force forecasting. Aligned scalp EEG slightly reduced equal-person development RMSE versus mechanical history. The phase-matched EEG model did better than aligned EEG."
+      "scope": "Offline voluntary pinch-lift force forecasting. Aligned scalp EEG slightly reduced equal-person development RMSE versus mechanical history. The phase-matched EEG model did better than aligned EEG.",
+      "browser": {
+        "hosted": "docs/grip-force/index.html",
+        "url": "https://eliminatenoise.github.io/NeuroTranslation/grip-force/",
+        "offline_zip": {
+          "path": "benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-browser.zip",
+          "bytes": 167240,
+          "sha256": "409c13bd046cb1a16f56827d2ecdbc3c8162f1d8e7970049e5d08ed48e6b1014"
+        },
+        "input_scope": "Locally generated synthetic example and compatible local JSON windows. Four trained branches. No raw measurements included."
+      }
     }
   }
 }

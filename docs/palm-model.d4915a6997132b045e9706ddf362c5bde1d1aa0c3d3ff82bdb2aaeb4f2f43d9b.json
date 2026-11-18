@@ -1,0 +1,258 @@
+{
+  "analysis": "iackd_r1_conditional_palm_availability_grid",
+  "clock": {
+    "anchor": "first_finite_palm_at_or_after_native_cue",
+    "score_offsets_ms": [
+      200,
+      250,
+      300,
+      350,
+      400,
+      450,
+      500,
+      550,
+      600
+    ],
+    "step_ms": 10,
+    "tolerance_ms": 0.01
+  },
+  "design_sha256": "ccaff2ccda3a32ba182c78c0a111fd36295f5bb8b2b400acc46faa1436433fc9",
+  "dev_asset_sha256": {
+    "sub-10": "e850e38fcc789de01db0700393fb873b504e1e4384e659d23a1628159767f8f9",
+    "sub-11": "27a3a1ac9cfdbf3380f86a27b0c010074378136792c18b1d2f3bcf37aa6ea86b",
+    "sub-12": "92c9c9c26d9b194e3b5f2ec9cbdf10c6b063ff9f422e190b735910412039a65d"
+  },
+  "features": {
+    "channels": [
+      "C3",
+      "Cz",
+      "C4"
+    ],
+    "eeg_bins_ms": [
+      [
+        -190,
+        -140
+      ],
+      [
+        -140,
+        -90
+      ]
+    ],
+    "order": [
+      "palm_position_mm",
+      "palm_velocity_mm_s",
+      "eeg_older_C3_uv",
+      "eeg_older_Cz_uv",
+      "eeg_older_C4_uv",
+      "eeg_newer_C3_uv",
+      "eeg_newer_Cz_uv",
+      "eeg_newer_C4_uv"
+    ],
+    "palm_lags_ms": [
+      100,
+      150
+    ],
+    "units": [
+      "mm",
+      "mm/s",
+      "uV",
+      "uV",
+      "uV",
+      "uV",
+      "uV",
+      "uV"
+    ]
+  },
+  "global_mean_mm": 1.6399306075338744,
+  "kind": "offline_scalp_eeg_palm_ridge",
+  "limits": [
+    "The released derivative uses retrospective EEG filtering (including zero-phase), decomposition/re-referencing and alignment, and trajectory filtering/interpolation. A 100 ms gap on the released arrays does not establish 100 ms physical or causal signal availability.",
+    "All methods receive the same trial anchors and retrospective eligibility. Cue, mixed conditions, eye and muscle activity and task/recording effects can contribute to a scalp association.",
+    "The tracking target is a processed estimate of actual movement. This fixed comparison evaluates archived error only. Neither a positive nor a negative result identifies a neural mechanism or certifies prospective decoding, generalization beyond this development split or biological control.",
+    "The alternate answers a narrower question after acquisition of optical tracking. The first finite stored position marks the derivative's available tracking interval. It does not identify actual movement onset, a real-time acquisition trigger, or biological signal availability."
+  ],
+  "model_id": "iackd-r1-conditional-palm-availability-grid-v1",
+  "models": {
+    "time": {
+      "center": [],
+      "coefficients": [],
+      "feature_indices": [],
+      "intercepts_mm": [
+        1.9126160920265245,
+        1.9085397223787253,
+        1.858056410862542,
+        1.780447417835308,
+        1.6910070894398557,
+        1.597114023329058,
+        1.492778434164053,
+        1.3557359433176108,
+        1.163080334451192
+      ],
+      "scale": []
+    },
+    "time_eeg": {
+      "center": [
+        -0.4458799692049468,
+        -0.14659669946464188,
+        0.027512969356515884,
+        -0.5995753803520186,
+        -0.2288528930491416,
+        0.03386706234660323
+      ],
+      "coefficients": [
+        0.8895801710058514,
+        0.5000034820168575,
+        0.18846772785464408,
+        -0.4815154701513573,
+        0.6009775167846819,
+        -0.2090567408797448
+      ],
+      "feature_indices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "intercepts_mm": [
+        1.7979990606997425,
+        1.702081008444413,
+        1.8336002461889598,
+        1.700282609331042,
+        1.6115075266041115,
+        1.4352956369821028,
+        1.6158893366758118,
+        1.5692027112910758,
+        1.4935173315876091
+      ],
+      "scale": [
+        3.7505289113001496,
+        3.480074917059955,
+        4.034909741631478,
+        4.030045341463745,
+        3.6776342156990713,
+        4.31588242437197
+      ]
+    },
+    "time_palm": {
+      "center": [
+        1.766376298155149,
+        -0.5244233527345681
+      ],
+      "coefficients": [
+        12.070580390781442,
+        6.413125566626231
+      ],
+      "feature_indices": [
+        0,
+        1
+      ],
+      "intercepts_mm": [
+        1.658449272789855,
+        1.5554855871676203,
+        1.5288543747116703,
+        1.5881041977994237,
+        1.6667667673735473,
+        1.7168108462210958,
+        1.7280459775143404,
+        1.691697171591195,
+        1.625161272636104
+      ],
+      "scale": [
+        12.710757145607422,
+        49.53531209835053
+      ]
+    },
+    "time_palm_eeg": {
+      "center": [
+        1.766376298155149,
+        -0.5244233527345681,
+        -0.4458799692049468,
+        -0.14659669946464188,
+        0.027512969356515884,
+        -0.5995753803520186,
+        -0.2288528930491416,
+        0.03386706234660323
+      ],
+      "coefficients": [
+        12.047041095416912,
+        6.431686516621986,
+        0.12908892888063034,
+        0.006470876204164004,
+        0.07205107601906786,
+        0.0648300635677835,
+        -0.022635255578189094,
+        0.008442053096811506
+      ],
+      "feature_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "intercepts_mm": [
+        1.6318413875641524,
+        1.5323400715328357,
+        1.5225532306654719,
+        1.5760117904513162,
+        1.6566601005230477,
+        1.7083039800827613,
+        1.7555475078504896,
+        1.7167949576637347,
+        1.6593224414710417
+      ],
+      "scale": [
+        12.710757145607422,
+        49.53531209835053,
+        3.7505289113001496,
+        3.480074917059955,
+        4.034909741631478,
+        4.030045341463745,
+        3.6776342156990713,
+        4.31588242437197
+      ]
+    }
+  },
+  "release_commit": "0c701aadfa562b8662e76ca0dd6831788e02e8b6",
+  "ridge_lambda": 0.01,
+  "roles": {
+    "DEV": [
+      "sub-10",
+      "sub-11",
+      "sub-12"
+    ],
+    "TRAIN": [
+      "sub-07",
+      "sub-08",
+      "sub-09"
+    ]
+  },
+  "runner_sha256": "5047958fb5f7bb95ae628203250300f8434d8d9d3fe96cdd5deacbb5864c2497",
+  "schema_version": 1,
+  "source_sha256": "84e765038838e9870cd4e5cae3735ee5f1a763d3567ed1d3c253518097affa7b",
+  "target": {
+    "axis": "device_horizontal_positive_right",
+    "field": "x_mm",
+    "units": "mm"
+  },
+  "terminology_registry": {
+    "name": "Brain2Body shared glossary",
+    "revision": 36,
+    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+  },
+  "train_asset_sha256": {
+    "sub-07": "ece91629e980e7900fe85bdee64b7b7f4dd5098a59284c0c8606eae2fb2ed7e6",
+    "sub-08": "7d4be190ed8a3f39f7f555acff3b129e837b9328ab920598adcb514410596178",
+    "sub-09": "361351fe377b3ba440024c19229f4019e4b44a7eb77a823c252812b526bb2e0d"
+  },
+  "train_participants": [
+    "sub-07",
+    "sub-08",
+    "sub-09"
+  ]
+}
