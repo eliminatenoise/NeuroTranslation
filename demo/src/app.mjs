@@ -15,8 +15,9 @@ const sampleLabels={
   outside_range:'Outside recording range'
 };
 const state={packets:[],aligned:null,cursor:0,animationFrame:null,traces:[],metadata:null,metadataPackets:null};
+const originalSelections = new WeakMap();
 const isExample=()=>state.packets.length>0&&state.packets.every(p=>p.dataset.origin==='constructed_example');
-const streams=()=>state.packets.flatMap(p=>p.streams.map(s=>({...s,dataset:p.dataset})));
+const streams=()=>state.packets.flatMap(p=>p.streams.map(s=>({...s,dataset:p.dataset,originalStream:s})));
 function element(tag,className,text){const e=document.createElement(tag);if(className)e.className=className;if(text!==undefined)e.textContent=text;return e;}
 function message(text,error=false){$('message').textContent=text;$('message').classList.toggle('error',error);}
 function download(name,value){const blob=new Blob([JSON.stringify(value,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
@@ -83,6 +84,63 @@ function render(){
   $('align').disabled=!all.length;
   renderMetadata();renderTraces();
 }
+function appendOriginalInspector(trace, plot, stream) {
+  const original = stream.originalStream;
+  const selection = originalSelections.get(original) ?? { index: 0, open: false };
+  originalSelections.set(original, selection);
+  const name = `${stream.label} in ${stream.dataset.name}`;
+  const count = stream.t.length;
+  const details = element('details', 'original-inspector');
+  const summary = element('summary', '', 'Inspect original samples');
+  summary.setAttribute('aria-label', `Inspect original samples for ${name}`);
+  details.append(summary);
+
+  const readout = element('p', 'original-reading');
+  const position = element('span');
+  const amplitude = element('strong');
+  readout.append(position, amplitude);
+  details.append(readout);
+  const slider = element('input');
+  slider.type = 'range';
+  slider.min = '0';
+  slider.max = String(count - 1);
+  slider.step = '1';
+  slider.value = String(selection.index);
+  slider.disabled = count === 1;
+  slider.setAttribute('aria-label', `Original sample for ${name}`);
+  details.append(slider);
+  const description = [];
+  if (stream.measurement) description.push(stream.measurement);
+  if (typeof stream.sourceUnit === 'string' && stream.sourceUnit.trim() && stream.sourceUnit !== stream.unit) {
+    description.push(`The source file labels the unit “${stream.sourceUnit}”.`);
+  }
+  if (description.length) details.append(element('p', 'original-measurement', description.join(' · ')));
+
+  const marker = element('span', 'sample-marker');
+  marker.setAttribute('aria-hidden', 'true');
+  plot.append(marker);
+  function showSample() {
+    const index = selection.index;
+    const time = stream.t[index];
+    const value = stream.values[index];
+    position.textContent = `Sample ${index + 1} of ${count} · ${time} s`;
+    amplitude.textContent = value === null ? 'Missing in source' : `${value} ${stream.unit}`;
+    slider.setAttribute('aria-valuetext', `${position.textContent}, ${amplitude.textContent}`);
+    marker.style.setProperty('--sample-position', `${100 * normalizeFinite(time, stream.t[0], stream.t.at(-1))}%`);
+    marker.hidden = !details.open;
+  }
+  details.open = selection.open;
+  slider.addEventListener('input', () => {
+    selection.index = slider.valueAsNumber;
+    showSample();
+  });
+  details.addEventListener('toggle', () => {
+    selection.open = details.open;
+    marker.hidden = !details.open;
+  });
+  showSample();
+  trace.append(details);
+}
 function renderTraces(){
   $('traces').replaceChildren();state.traces=[];
   const ss=state.aligned?getAlignedStreams():streams();
@@ -110,6 +168,7 @@ function renderTraces(){
     trace.append(plot);
     const time=state.aligned?state.aligned.t:s.t;const clock=s.dataset?.timebase||'declared packet clock';
     trace.append(element('p','trace-clock',`${time[0].toFixed(3)}–${time.at(-1).toFixed(3)} s · ${clock}${s.frame?` · frame: ${s.frame}`:''}`));
+    if(!state.aligned) appendOriginalInspector(trace,plot,s);
     $('traces').append(trace);state.traces.push({canvas,marker,value,source,stream:s,time});
   }
   drawTraces();

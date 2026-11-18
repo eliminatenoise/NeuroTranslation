@@ -1,5 +1,7 @@
 # Inspect recordings in the browser
 
+To read a trace on its own clock, open **Inspect original samples** below it. Use the slider or arrow keys to see each stored timestamp and value. You can inspect recordings with different clocks this way.
+
 Open the [experimental data companion](https://eliminatenoise.github.io/NeuroTranslation/preview.html) to import JSON or CSV, inspect samples and their declared metadata, and align recordings that declare compatible subjects, recordings and clocks. The built-in example contains invented signals so you can try the controls without supplying a recording.
 
 The companion does not run a trained NeuroTranslate model or predict missing signals. It keeps file processing in your browser and has no endpoint for uploading recording contents. A matching label or clock name cannot establish that two observations were acquired together; import checks cannot authenticate data or grant permission to use them.

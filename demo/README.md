@@ -18,6 +18,10 @@ A CSV file uses `time,value` columns. Enter its metadata in the import form and 
 
 Project-owned code is released under [CC0-1.0](LICENSE). Dataset and anatomical assets retain their own rights; see [RIGHTS.md](RIGHTS.md).
 
+## Inspecting original samples
+
+Open **Inspect original samples** below a trace. The slider steps through that stream one stored sample at a time. The marker follows its timestamp, so uneven intervals appear at their actual spacing. Each trace has its own cursor. A missing source value stays visible as **Missing in source**. When the file supplies a measurement description or a unit label that differs from the plotted unit, the inspector shows it beside the reading.
+
 ## Alignment
 
 Recordings must declare the same organism, subject, recording and clock. Different data partitions remain separate. An unknown partition is not proof of an independent test set. Neural, muscle and movement signals from unrelated subjects are not synchronized merely because their tasks resemble one another.

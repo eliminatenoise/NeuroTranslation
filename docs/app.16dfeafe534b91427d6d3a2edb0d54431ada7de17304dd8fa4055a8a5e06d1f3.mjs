@@ -1,8 +1,8 @@
-import {parsePacket,parseCsv,validatePacket,combinePackets,summarizePackets,alignPackets,examplePacket} from './core.9089f922a31974ebf22d08596f61e54ae92e299d99f19e964a9d4e574909ebce.mjs';
-import {normalizeFinite,buildPlotSegments} from './plot.9089f922a31974ebf22d08596f61e54ae92e299d99f19e964a9d4e574909ebce.mjs';
-import {toPolicyEnvelope} from './packet-policy-bridge.9089f922a31974ebf22d08596f61e54ae92e299d99f19e964a9d4e574909ebce.mjs';
-import {evaluate as evaluateMetadata} from './compat-policy.9089f922a31974ebf22d08596f61e54ae92e299d99f19e964a9d4e574909ebce.mjs';
-import {renderMetadataReport} from './policy-report-view.9089f922a31974ebf22d08596f61e54ae92e299d99f19e964a9d4e574909ebce.mjs';
+import {parsePacket,parseCsv,validatePacket,combinePackets,summarizePackets,alignPackets,examplePacket} from './core.16dfeafe534b91427d6d3a2edb0d54431ada7de17304dd8fa4055a8a5e06d1f3.mjs';
+import {normalizeFinite,buildPlotSegments} from './plot.16dfeafe534b91427d6d3a2edb0d54431ada7de17304dd8fa4055a8a5e06d1f3.mjs';
+import {toPolicyEnvelope} from './packet-policy-bridge.16dfeafe534b91427d6d3a2edb0d54431ada7de17304dd8fa4055a8a5e06d1f3.mjs';
+import {evaluate as evaluateMetadata} from './compat-policy.16dfeafe534b91427d6d3a2edb0d54431ada7de17304dd8fa4055a8a5e06d1f3.mjs';
+import {renderMetadataReport} from './policy-report-view.16dfeafe534b91427d6d3a2edb0d54431ada7de17304dd8fa4055a8a5e06d1f3.mjs';
 
 const $=id=>document.getElementById(id);
 const colors={neural:'#7757d8',muscle:'#cd6446',displacement:'#287dba',mechanics:'#278476'};
@@ -15,8 +15,9 @@ const sampleLabels={
   outside_range:'Outside recording range'
 };
 const state={packets:[],aligned:null,cursor:0,animationFrame:null,traces:[],metadata:null,metadataPackets:null};
+const originalSelections = new WeakMap();
 const isExample=()=>state.packets.length>0&&state.packets.every(p=>p.dataset.origin==='constructed_example');
-const streams=()=>state.packets.flatMap(p=>p.streams.map(s=>({...s,dataset:p.dataset})));
+const streams=()=>state.packets.flatMap(p=>p.streams.map(s=>({...s,dataset:p.dataset,originalStream:s})));
 function element(tag,className,text){const e=document.createElement(tag);if(className)e.className=className;if(text!==undefined)e.textContent=text;return e;}
 function message(text,error=false){$('message').textContent=text;$('message').classList.toggle('error',error);}
 function download(name,value){const blob=new Blob([JSON.stringify(value,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
@@ -83,6 +84,63 @@ function render(){
   $('align').disabled=!all.length;
   renderMetadata();renderTraces();
 }
+function appendOriginalInspector(trace, plot, stream) {
+  const original = stream.originalStream;
+  const selection = originalSelections.get(original) ?? { index: 0, open: false };
+  originalSelections.set(original, selection);
+  const name = `${stream.label} in ${stream.dataset.name}`;
+  const count = stream.t.length;
+  const details = element('details', 'original-inspector');
+  const summary = element('summary', '', 'Inspect original samples');
+  summary.setAttribute('aria-label', `Inspect original samples for ${name}`);
+  details.append(summary);
+
+  const readout = element('p', 'original-reading');
+  const position = element('span');
+  const amplitude = element('strong');
+  readout.append(position, amplitude);
+  details.append(readout);
+  const slider = element('input');
+  slider.type = 'range';
+  slider.min = '0';
+  slider.max = String(count - 1);
+  slider.step = '1';
+  slider.value = String(selection.index);
+  slider.disabled = count === 1;
+  slider.setAttribute('aria-label', `Original sample for ${name}`);
+  details.append(slider);
+  const description = [];
+  if (stream.measurement) description.push(stream.measurement);
+  if (typeof stream.sourceUnit === 'string' && stream.sourceUnit.trim() && stream.sourceUnit !== stream.unit) {
+    description.push(`The source file labels the unit “${stream.sourceUnit}”.`);
+  }
+  if (description.length) details.append(element('p', 'original-measurement', description.join(' · ')));
+
+  const marker = element('span', 'sample-marker');
+  marker.setAttribute('aria-hidden', 'true');
+  plot.append(marker);
+  function showSample() {
+    const index = selection.index;
+    const time = stream.t[index];
+    const value = stream.values[index];
+    position.textContent = `Sample ${index + 1} of ${count} · ${time} s`;
+    amplitude.textContent = value === null ? 'Missing in source' : `${value} ${stream.unit}`;
+    slider.setAttribute('aria-valuetext', `${position.textContent}, ${amplitude.textContent}`);
+    marker.style.setProperty('--sample-position', `${100 * normalizeFinite(time, stream.t[0], stream.t.at(-1))}%`);
+    marker.hidden = !details.open;
+  }
+  details.open = selection.open;
+  slider.addEventListener('input', () => {
+    selection.index = slider.valueAsNumber;
+    showSample();
+  });
+  details.addEventListener('toggle', () => {
+    selection.open = details.open;
+    marker.hidden = !details.open;
+  });
+  showSample();
+  trace.append(details);
+}
 function renderTraces(){
   $('traces').replaceChildren();state.traces=[];
   const ss=state.aligned?getAlignedStreams():streams();
@@ -110,6 +168,7 @@ function renderTraces(){
     trace.append(plot);
     const time=state.aligned?state.aligned.t:s.t;const clock=s.dataset?.timebase||'declared packet clock';
     trace.append(element('p','trace-clock',`${time[0].toFixed(3)}–${time.at(-1).toFixed(3)} s · ${clock}${s.frame?` · frame: ${s.frame}`:''}`));
+    if(!state.aligned) appendOriginalInspector(trace,plot,s);
     $('traces').append(trace);state.traces.push({canvas,marker,value,source,stream:s,time});
   }
   drawTraces();
@@ -214,6 +273,6 @@ $('export-metadata').addEventListener('click',()=>{if(state.metadata)download('n
 $('download-template').addEventListener('click',()=>download('neurotranslate-0.0-example.json',examplePacket()));
 window.addEventListener('resize',drawTraces);
 async function catalogue(){
-  try{const response=await fetch('datasets.9089f922a31974ebf22d08596f61e54ae92e299d99f19e964a9d4e574909ebce.json');if(!response.ok)return;const data=await response.json();for(const d of data.datasets||data){const card=element('article','dataset-card');card.append(element('h3','',d.name),element('p','',d.modalities?.join(' · ')||d.modality||''),element('p','',d.description||d.coverage||''),element('p','catalogue-limit',d.limit||d.pairingLimit||''));card.append(element('p','',`Reference metadata · ${(d.license||[]).join(', ')} · recordings not included`));if(d.url&&/^https:\/\//i.test(d.url)){const link=element('a','',`Source ↗`);link.href=d.url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);}$('catalogue-list').append(card);}$('catalogue-section').hidden=!$('catalogue-list').children.length;}catch{/* Optional catalogue is independent of data import and alignment. */}
+  try{const response=await fetch('datasets.16dfeafe534b91427d6d3a2edb0d54431ada7de17304dd8fa4055a8a5e06d1f3.json');if(!response.ok)return;const data=await response.json();for(const d of data.datasets||data){const card=element('article','dataset-card');card.append(element('h3','',d.name),element('p','',d.modalities?.join(' · ')||d.modality||''),element('p','',d.description||d.coverage||''),element('p','catalogue-limit',d.limit||d.pairingLimit||''));card.append(element('p','',`Reference metadata · ${(d.license||[]).join(', ')} · recordings not included`));if(d.url&&/^https:\/\//i.test(d.url)){const link=element('a','',`Source ↗`);link.href=d.url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);}$('catalogue-list').append(card);}$('catalogue-section').hidden=!$('catalogue-list').children.length;}catch{/* Optional catalogue is independent of data import and alignment. */}
 }
 loadExample();catalogue();
