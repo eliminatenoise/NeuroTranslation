@@ -5,7 +5,7 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.css">
+  <link rel="stylesheet" href="style.debbda3ff60bf04df41d5da383f6b06e9258677089c8714cacfba24be380fa43.css">
 </head>
 <body>
   <header class="topbar">
@@ -14,7 +14,7 @@
   </header>
   <main>
     <section class="intro">
-      <div><p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Keep what was measured, what was inferred and what was simulated in view.</p></div>
+      <div><p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p></div>
       <div class="introactions"><button class="button secondary" id="load-example">Load example</button><button class="button primary" id="import-open">＋ Import recordings</button></div>
     </section>
     <div class="notice" id="example-notice"><span class="notice-icon">i</span><p><strong>Constructed example.</strong> These invented signals test the software. They are not biological recordings or model predictions.</p><button id="clear-all" class="textbutton">Clear example</button></div>
@@ -70,7 +70,7 @@
         <label>Signal type<select name="modality" required><option value="" disabled selected>Choose signal type</option><option value="neural">Neural</option><option value="muscle">Muscle</option><option value="displacement">Displacement</option><option value="mechanics">Mechanics</option></select></label><label>Neural region<select name="region"><option value="">Unspecified</option><option value="brain">Brain</option><option value="spinal">Spinal</option><option value="peripheral">Peripheral</option><option value="autonomic">Autonomic</option><option value="visceral">Visceral</option></select></label>
         <label>Signal label<input name="label" placeholder="Channel 1"></label><label>Unit<input name="unit" placeholder="mV, mm, N…"></label>
         <label>Organism<input name="organism" placeholder="Human, macaque, mouse…"></label><label>Subject ID<input name="subjectId" placeholder="Unknown if empty"></label><label>Recording ID<input name="recordingId" placeholder="Unknown if empty"></label>
-        <label>Timebase<input name="timebase" placeholder="shared-acquisition-clock"></label><label>Origin<select name="origin" required><option value="" disabled selected>Choose origin</option><option value="measured">Measured</option><option value="inferred">Inferred</option><option value="simulated">Simulated</option></select></label>
+        <label>Timebase<input name="timebase" placeholder="shared-acquisition-clock"></label><label>Origin<select name="origin" required><option value="" disabled selected>Choose origin</option><option value="measured">Measured</option><option value="derived">Derived from recorded data</option><option value="inferred">Inferred</option><option value="simulated">Simulated</option></select></label>
         <label>Task<input name="task" placeholder="Reach"></label><label>Coordinate frame<input name="frame" placeholder="laboratory, anatomical…"></label>
         <label>Source URL<input name="sourceUrl" type="url" placeholder="https://…"></label><label>Licence / permission<input name="license" placeholder="Exact licence or permission"></label>
         <label>Partition<select name="split"><option value="unspecified">Unspecified</option><option value="train">Train</option><option value="validation">Validation</option><option value="test">Test</option></select></label>
@@ -78,6 +78,6 @@
       <p id="import-error" class="form-error" role="alert"></p><div class="dialog-footer"><span class="quiet">File contents stay in your browser.</span><button class="button primary" type="submit">Import recording</button></div>
     </form>
   </dialog>
-  <script type="module" src="app.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs"></script>
+  <script type="module" src="app.debbda3ff60bf04df41d5da383f6b06e9258677089c8714cacfba24be380fa43.mjs"></script>
 </body>
 </html>

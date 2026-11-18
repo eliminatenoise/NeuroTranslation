@@ -14,7 +14,7 @@
   </header>
   <main>
     <section class="intro">
-      <div><p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Keep what was measured, what was inferred and what was simulated in view.</p></div>
+      <div><p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p></div>
       <div class="introactions"><button class="button secondary" id="load-example">Load example</button><button class="button primary" id="import-open">＋ Import recordings</button></div>
     </section>
     <div class="notice" id="example-notice"><span class="notice-icon">i</span><p><strong>Constructed example.</strong> These invented signals test the software. They are not biological recordings or model predictions.</p><button id="clear-all" class="textbutton">Clear example</button></div>
@@ -70,7 +70,7 @@
         <label>Signal type<select name="modality" required><option value="" disabled selected>Choose signal type</option><option value="neural">Neural</option><option value="muscle">Muscle</option><option value="displacement">Displacement</option><option value="mechanics">Mechanics</option></select></label><label>Neural region<select name="region"><option value="">Unspecified</option><option value="brain">Brain</option><option value="spinal">Spinal</option><option value="peripheral">Peripheral</option><option value="autonomic">Autonomic</option><option value="visceral">Visceral</option></select></label>
         <label>Signal label<input name="label" placeholder="Channel 1"></label><label>Unit<input name="unit" placeholder="mV, mm, N…"></label>
         <label>Organism<input name="organism" placeholder="Human, macaque, mouse…"></label><label>Subject ID<input name="subjectId" placeholder="Unknown if empty"></label><label>Recording ID<input name="recordingId" placeholder="Unknown if empty"></label>
-        <label>Timebase<input name="timebase" placeholder="shared-acquisition-clock"></label><label>Origin<select name="origin" required><option value="" disabled selected>Choose origin</option><option value="measured">Measured</option><option value="inferred">Inferred</option><option value="simulated">Simulated</option></select></label>
+        <label>Timebase<input name="timebase" placeholder="shared-acquisition-clock"></label><label>Origin<select name="origin" required><option value="" disabled selected>Choose origin</option><option value="measured">Measured</option><option value="derived">Derived from recorded data</option><option value="inferred">Inferred</option><option value="simulated">Simulated</option></select></label>
         <label>Task<input name="task" placeholder="Reach"></label><label>Coordinate frame<input name="frame" placeholder="laboratory, anatomical…"></label>
         <label>Source URL<input name="sourceUrl" type="url" placeholder="https://…"></label><label>Licence / permission<input name="license" placeholder="Exact licence or permission"></label>
         <label>Partition<select name="split"><option value="unspecified">Unspecified</option><option value="train">Train</option><option value="validation">Validation</option><option value="test">Test</option></select></label>

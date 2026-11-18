@@ -103,8 +103,8 @@ test('duplicate source identity or conflicting dataset declarations block the wh
   assert.ok(codes(conflict).includes('DATASET_ID_CONFLICT'));
 });
 
-test('measured, inferred and simulated origins and held-out roles survive projection', () => {
-  for (const origin of ['measured', 'inferred', 'simulated']) for (const [from, to] of [['train', 'train'], ['validation', 'validation'], ['test', 'test'], ['held_out', 'heldout'], ['heldout', 'heldout'], ['unspecified', 'unknown']]) {
+test('stream origins and held-out roles survive projection', () => {
+  for (const origin of ['measured', 'derived', 'inferred', 'simulated']) for (const [from, to] of [['train', 'train'], ['validation', 'validation'], ['test', 'test'], ['held_out', 'heldout'], ['heldout', 'heldout'], ['unspecified', 'unknown']]) {
     const r = toPolicyDescriptor(stream({ origin }), dataset({ split: from, origin: 'constructed_example' }));
     assert.equal(r.descriptor.origin, origin);
     assert.equal(r.descriptor.role.split, to);

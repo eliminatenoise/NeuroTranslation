@@ -9,7 +9,7 @@ export const LIMITS = Object.freeze({ maxBytes: 5 * 1024 * 1024, maxRows: 50000,
   maxGridSamples: 5000, maxAlignedValues: 500000 });
 export const MODALITIES = Object.freeze(['neural', 'muscle', 'displacement', 'mechanics']);
 export const NEURAL_REGIONS = Object.freeze(['brain', 'spinal', 'peripheral', 'autonomic', 'visceral']);
-export const ORIGINS = Object.freeze(['measured', 'inferred', 'simulated']);
+export const ORIGINS = Object.freeze(['measured', 'derived', 'inferred', 'simulated']);
 const SPLITS = ['train', 'validation', 'test', 'held_out', 'heldout', 'unassigned', 'unknown', 'unspecified', 'fixture'];
 const encoder = new TextEncoder();
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -87,7 +87,7 @@ export function validatePacket(packet) {
     if (ids.has(s.id)) fail(`Stream id "${s.id}" is repeated in dataset "${d.id}".`);
     ids.add(s.id);
     if (!MODALITIES.includes(s.modality)) fail(`${path}.modality must be neural, muscle, displacement or mechanics.`);
-    if (!ORIGINS.includes(s.origin)) fail(`${path}.origin must be measured, inferred or simulated.`);
+    if (!ORIGINS.includes(s.origin)) fail(`${path}.origin must be measured, derived, inferred or simulated.`);
     if (s.region !== undefined && s.region !== null && !NEURAL_REGIONS.includes(s.region)) fail(`${path}.region must be brain, spinal, peripheral, autonomic or visceral.`);
     if (s.modality !== 'neural' && s.region != null) fail(`${path}.region is reserved for neural streams; use anatomy for other locations.`);
     for (const field of ['frame', 'measurement', 'signalType', 'anatomy']) textField(s[field], `${path}.${field}`, { optional: true });
@@ -288,7 +288,8 @@ export function assessCompatibility(packets) {
       organism: compatible ? datasets[0].organism : null,
       subjectId: compatible ? datasets[0].subjectId : null, recordingId: compatible ? datasets[0].recordingId : null,
       timebase: compatible ? datasets[0].timebase : null, hardwareSynchronizationVerified: false,
-      biologicalValidationEstablished: false, containsInferredValues: streams.some(s => s.origin === 'inferred') },
+      biologicalValidationEstablished: false, containsDerivedValues: streams.some(s => s.origin === 'derived'),
+      containsInferredValues: streams.some(s => s.origin === 'inferred') },
     warnings: summarizePackets(packets).warnings,
     limitation: constructed ? 'All values are invented for a software test. No biological measurements or predictions are shown.' : 'Alignment follows supplied clock metadata. It does not verify acquisition synchronization, train a model or establish biological correspondence.' };
 }

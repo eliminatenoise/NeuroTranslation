@@ -202,7 +202,7 @@ export function toPolicyDescriptor(stream, dataset, options = {}) {
     const gaps = ['dataset.sourceId', 'clock.domain', 'clock.offsetUncertaintyS', 'clock.driftPpm', 'clock.syncTime', 'interval.uncertaintyS', 'subject.namespace', 'session.namespace', 'subject.taxonId', 'rights.status', 'rights.redistribution'];
     if (['motion', 'mechanics'].includes(descriptor.modality)) gaps.push('frame.kind', 'frame.handedness');
     if (descriptor.origin === 'simulated') gaps.push('provenance.generator');
-    if (descriptor.origin === 'inferred') gaps.push('provenance.derivedFrom');
+    if (['derived', 'inferred'].includes(descriptor.origin)) gaps.push('provenance.derivedFrom');
     for (const path of gaps) {
       const value = path.split('.').reduce((o, k) => plain(o) ? o[k] : undefined, descriptor);
       if (absent(value) || placeholder(value)) diagnostic(diagnostics, 'DECLARATION_ABSENT', 'info', path, 'This declaration is unknown; the bridge supplies no default.');

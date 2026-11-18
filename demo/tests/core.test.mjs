@@ -128,6 +128,19 @@ test('simulated streams cannot be smuggled into biological pairs or fixtures', (
   assert.equal(assessCompatibility([undeclared]).compatible, false);
 });
 
+test('filtered recordings retain their declared origin independently of resampling', () => {
+  const filtered = stream({ id: 'envelope', modality: 'muscle', region: undefined,
+    label: 'Filtered EMG', origin: 'derived', t: [0, 1, 2], values: [1, 3, 5] });
+  const input = parsePacket(JSON.stringify(packet({ origin: 'derived' }, [filtered])));
+  const aligned = alignPackets([input], { stepSeconds: 0.5, maxGapSeconds: 1, method: 'linear' });
+  assert.equal(aligned.streams[0].origin, 'derived');
+  assert.deepEqual(aligned.streams[0].values.slice(0, 2), [1, 2]);
+  assert.deepEqual(aligned.streams[0].status.slice(0, 2), ['original', 'linear']);
+  assert.equal(aligned.pairing.containsDerivedValues, true);
+  assert.equal(aligned.pairing.containsInferredValues, false);
+  assert.equal(aligned.pairing.biologicalValidationEstablished, false);
+});
+
 test('inferred imported values remain labelled and never become measured predictions', () => {
   const input = packet({}, [stream({ origin: 'inferred' })]);
   const result = alignPackets([input], options);

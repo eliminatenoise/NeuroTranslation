@@ -1,7 +1,7 @@
 /** Packet v1 -> policy descriptor v1. No pairing, conversion or model execution. */
-import { summarizeObservations, toPlainSnapshot, validateDescriptor } from './compat-policy.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs';
-import { canonicalJson, fingerprint } from './hash.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs';
-import { MEASUREMENTS } from './vocabulary.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs';
+import { summarizeObservations, toPlainSnapshot, validateDescriptor } from './compat-policy.debbda3ff60bf04df41d5da383f6b06e9258677089c8714cacfba24be380fa43.mjs';
+import { canonicalJson, fingerprint } from './hash.debbda3ff60bf04df41d5da383f6b06e9258677089c8714cacfba24be380fa43.mjs';
+import { MEASUREMENTS } from './vocabulary.debbda3ff60bf04df41d5da383f6b06e9258677089c8714cacfba24be380fa43.mjs';
 
 export const BRIDGE = Object.freeze({ version: '0.1.0-candidate', packetVersion: 1, descriptorVersion: 1 });
 export const LIMITS = Object.freeze({ maxIdentityChars: 2000, maxStreams: 64, maxSamples: 50000 });
@@ -202,7 +202,7 @@ export function toPolicyDescriptor(stream, dataset, options = {}) {
     const gaps = ['dataset.sourceId', 'clock.domain', 'clock.offsetUncertaintyS', 'clock.driftPpm', 'clock.syncTime', 'interval.uncertaintyS', 'subject.namespace', 'session.namespace', 'subject.taxonId', 'rights.status', 'rights.redistribution'];
     if (['motion', 'mechanics'].includes(descriptor.modality)) gaps.push('frame.kind', 'frame.handedness');
     if (descriptor.origin === 'simulated') gaps.push('provenance.generator');
-    if (descriptor.origin === 'inferred') gaps.push('provenance.derivedFrom');
+    if (['derived', 'inferred'].includes(descriptor.origin)) gaps.push('provenance.derivedFrom');
     for (const path of gaps) {
       const value = path.split('.').reduce((o, k) => plain(o) ? o[k] : undefined, descriptor);
       if (absent(value) || placeholder(value)) diagnostic(diagnostics, 'DECLARATION_ABSENT', 'info', path, 'This declaration is unknown; the bridge supplies no default.');

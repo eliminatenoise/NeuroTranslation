@@ -18,18 +18,18 @@
  * Every external value is copied once into a plain snapshot (no getter is ever invoked);
  * all later logic reads only the snapshot.
  */
-import { canonicalJson, sha256Hex } from './hash.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs';
+import { canonicalJson, sha256Hex } from './hash.debbda3ff60bf04df41d5da383f6b06e9258677089c8714cacfba24be380fa43.mjs';
 import {
   MODALITIES, ORIGINS, NEURAL_DIVISIONS, NEURAL_DIRECTIONS, FRAME_KINDS, SPLITS, NEGATIVE_CONTROL_KINDS,
   RIGHTS_STATUSES, REDISTRIBUTION, MISSING_ENCODINGS, PURPOSES, RESAMPLE_METHODS, NON_CAUSAL_METHODS,
   ADMISSIBLE_EVIDENCE, INADMISSIBLE_EVIDENCE, REGISTRY_CLAIMS, MEASUREMENTS, UNITS, DIMENSIONS,
   AMBIGUOUS_UNITS, TIME_UNIT_DIVISORS, UNKNOWN_WORDS, PAIRING_FIELD_NAMES, ADJACENT_KINDS,
   SIMULATION_ACTUATIONS, JOINT_LEVEL_ACTUATIONS, namesSoftwareLicence, isLicencePlaceholder, SIDES, TRANSFORM_TYPES, HANDEDNESS_CHANGING_TRANSFORMS,
-} from './vocabulary.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs';
-import { REASONS, SEVERITY_RANK, DECISION_BY_RANK } from './reasons.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs';
+} from './vocabulary.debbda3ff60bf04df41d5da383f6b06e9258677089c8714cacfba24be380fa43.mjs';
+import { REASONS, SEVERITY_RANK, DECISION_BY_RANK } from './reasons.debbda3ff60bf04df41d5da383f6b06e9258677089c8714cacfba24be380fa43.mjs';
 
-export { REASONS, OWNERS } from './reasons.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs';
-export * as vocabulary from './vocabulary.35fd7fe691cc442a64a5ad41fcb0e13e062ee7f33b73aa57749988bbe393b413.mjs';
+export { REASONS, OWNERS } from './reasons.debbda3ff60bf04df41d5da383f6b06e9258677089c8714cacfba24be380fa43.mjs';
+export * as vocabulary from './vocabulary.debbda3ff60bf04df41d5da383f6b06e9258677089c8714cacfba24be380fa43.mjs';
 
 export const POLICY = Object.freeze({ id: 'neurotranslate-0.0-compatibility-policy', release: 'r1', version: '1.3.0', descriptorVersion: 1 });
 export const DECISIONS = Object.freeze(['compatible', 'unverified', 'unsupported', 'rejected']);
