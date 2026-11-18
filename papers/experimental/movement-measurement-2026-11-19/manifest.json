@@ -2,7 +2,7 @@
   "schema": "paper-candidate-content-manifest-v1",
   "version": "movement-measurement-2026-11-19",
   "status": "EXPERIMENTAL_CANDIDATE_FOR_REVIEW",
-  "packaged_at_utc": "2026-11-18T17:52:18+00:00",
+  "packaged_at_utc": "2026-11-18T17:55:10+00:00",
   "selected_at_utc": null,
   "baseline_public_commit": "48ccfe6048fb9a7b3f1554117ce41f1b9128e113",
   "source_manifest_sha256": "2af40a6601c725475dd0c472de391eb82d41c10a29d5d091c45640170795804c",
@@ -10,7 +10,8 @@
     "revision": 36,
     "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
   },
-  "build": "Four fresh builds using the same offline Tectonic route. Matching public source bundle unavailable.",
+  "build": "Four fresh builds using the same offline Tectonic route. The fixed PDF CreationDate reflects the retained source epoch. Matching public source bundle unavailable.",
+  "PDF_metadata_source_date_epoch": 1794664896,
   "changes": "One parallel-edition movement-measurement passage and the earlier accepted NeuroTranslation technical LINK sentence.",
   "PDFs": [
     {
@@ -142,7 +143,7 @@
     {
       "path": "README.md",
       "bytes": 1596,
-      "sha256": "5c323db6df387037cbdb4ba7b68ef0553f383abe53eadcd5f01ff7da143be3fd"
+      "sha256": "38e4b9f9f1ffa4762dba710cac2392a7c1ac103e9b7e572f02b8243a02612528"
     },
     {
       "path": "brain2body-article.pdf",
@@ -161,8 +162,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 2962,
-      "sha256": "4e26828b7e7d67da6a7df6d3fe093535536046e346ea24d04b0aefe54972be8c"
+      "bytes": 2957,
+      "sha256": "f203ca4deebe6ac9b438aa9f4178f22fb734a115b155a1b857340abb3aebe8b5"
     },
     {
       "path": "neurotranslation-explained.pdf",
@@ -181,8 +182,8 @@
     },
     {
       "path": "research-evidence.json",
-      "bytes": 8630,
-      "sha256": "f2a0839ad2a6005796b15d0f613795ece7ee8437aa438ffe346bdb85688ee273"
+      "bytes": 8839,
+      "sha256": "d6767e79a4df0ce568e861c6a99063350f547ca0126b2f1f56db669b13257f34"
     },
     {
       "path": "third-party-notices/DejaVu-LICENSE.txt",
