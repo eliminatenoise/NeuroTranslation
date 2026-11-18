@@ -20,6 +20,10 @@ In the earlier IACKD palm pilot, a ridge model using three EEG channels had 7.51
 
 ## Read the papers
 
+The latest experimental drafts cover the scalp EEG and palm comparison in NeuroTranslation and the evidence for early developmental access in Brain2Body. [Four revised drafts and reading aid](papers/experimental/movement-and-development-2026-11-19/README.md) · [Download all four PDFs](papers/downloads/NeuroTranslation-Brain2Body-Movement-and-Development-2026-11-19.zip)
+
+The previously selected scientific-layout edition is listed below.
+
 | Paper | Technical edition | Plain-English edition |
 | --- | --- | --- |
 | *NeuroTranslation: A New Paradigm In Brain-Body Mapping.* | [NeuroTranslation technical edition](papers/experimental/scientific-layout-2026-11-15/neurotranslation-technical.pdf) | [Read NeuroTranslation explained](papers/experimental/scientific-layout-2026-11-15/neurotranslation-explained.pdf) |

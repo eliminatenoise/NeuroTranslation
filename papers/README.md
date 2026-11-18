@@ -1,6 +1,15 @@
 # Paper drafts
 
-## Proposed revision for review · 19 November 2026
+## Movement and developmental access · 19 November 2026
+
+Both NeuroTranslation editions now report the three-person development comparison of timing, hand history and scalp EEG. Both Brain2Body editions explain why the programme proposes Antechinus and identify the species behind the bone, healing and milk evidence.
+
+- NeuroTranslation · [Technical, p. 21](experimental/movement-and-development-2026-11-19/neurotranslation-technical.pdf#page=21) · [Explained, p. 39](experimental/movement-and-development-2026-11-19/neurotranslation-explained.pdf#page=39)
+- Brain2Body · [Research article, p. 13](experimental/movement-and-development-2026-11-19/brain2body-article.pdf#page=13) · [Simple English, p. 23](experimental/movement-and-development-2026-11-19/brain2body-simple-english.pdf#page=23)
+
+[Download all four current drafts and companions](downloads/NeuroTranslation-Brain2Body-Movement-and-Development-2026-11-19.zip) · [Archive checksum](downloads/NeuroTranslation-Brain2Body-Movement-and-Development-2026-11-19.zip.sha256) · [Reading aid](experimental/movement-and-development-2026-11-19/research-evidence-reading-aid.md)
+
+## Previous movement-measurement candidate · 19 November 2026
 
 The four PDFs now work through one question. If two cameras see the same hand at different moments, what can the joined image tell us about the movement? NeuroTranslation technical also clarifies the test of temporal order in the completed LINK comparison. Both NeuroTranslation editions also report a separate test on archived hand-to-mouth movements. The surface EMG model missed the held-out person’s elbow angle by more than either simpler comparison.
 
