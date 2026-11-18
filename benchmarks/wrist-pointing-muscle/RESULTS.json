@@ -1,0 +1,142 @@
+{
+  "study": "WristMotion v3 conditional surface EMG forecast",
+  "design_sha256": "8549f19e5446a3dd44a12c16eae5a3df0795e2cbd5166d6ae188ea9d1f709fe7",
+  "glossary_revision": 36,
+  "glossary_sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406",
+  "dataset": "10.6084/m9.figshare.29666735.v3",
+  "status": "exploratory participant-disjoint DEV only",
+  "train_support": {
+    "participants": 6,
+    "planned_task_blocks": 48,
+    "present_task_blocks": 47,
+    "absent_task_blocks": 1,
+    "planned_trials_from_full_design": 1920,
+    "recorded_trials": 1880,
+    "eligible_trials": 1879,
+    "outside_window": 0,
+    "invalid_encoder": 1,
+    "nonfinite_eeg": 0,
+    "nonfinite_emg": 0,
+    "invalid_on_bounded_joint_support": 1,
+    "emg_unique_feature_ticks": 1683584,
+    "emg_rail_ticks_by_channel": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "dev_support": {
+    "participants": 3,
+    "planned_task_blocks": 24,
+    "present_task_blocks": 24,
+    "absent_task_blocks": 0,
+    "planned_trials_from_full_design": 960,
+    "recorded_trials": 960,
+    "eligible_trials": 960,
+    "outside_window": 0,
+    "invalid_encoder": 0,
+    "nonfinite_eeg": 0,
+    "nonfinite_emg": 0,
+    "invalid_on_bounded_joint_support": 0,
+    "emg_unique_feature_ticks": 860160,
+    "emg_rail_ticks_by_channel": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "out_of_schedule_unpaired_dev_members": 1,
+  "pending_held_out_test": true,
+  "model_rmse": {
+    "persistence": {
+      "equal_person_two_axis_rmse_deg": 7.924707546271799,
+      "equal_person_axis_rmse_deg": {
+        "extension": 10.129098154197605,
+        "radial_deviation": 4.796180769164677
+      },
+      "pooled_two_axis_rmse_deg": 7.924707546271785
+    },
+    "linear_velocity": {
+      "equal_person_two_axis_rmse_deg": 8.578409938891403,
+      "equal_person_axis_rmse_deg": {
+        "extension": 10.779622191242208,
+        "radial_deviation": 5.56578651885069
+      },
+      "pooled_two_axis_rmse_deg": 8.5784099388914
+    },
+    "training_timing": {
+      "equal_person_two_axis_rmse_deg": 24.8881826905252,
+      "equal_person_axis_rmse_deg": {
+        "extension": 32.329266415252725,
+        "radial_deviation": 13.916242608029224
+      },
+      "pooled_two_axis_rmse_deg": 24.888182690525213
+    },
+    "motion_ridge": {
+      "equal_person_two_axis_rmse_deg": 6.529715445405786,
+      "equal_person_axis_rmse_deg": {
+        "extension": 8.286540448093717,
+        "radial_deviation": 4.075244164224832
+      },
+      "pooled_two_axis_rmse_deg": 6.529715445405786
+    },
+    "motion_emg_ridge": {
+      "equal_person_two_axis_rmse_deg": 6.174289273075186,
+      "equal_person_axis_rmse_deg": {
+        "extension": 7.768218354168525,
+        "radial_deviation": 3.9872897633833793
+      },
+      "pooled_two_axis_rmse_deg": 6.174289273075184
+    },
+    "motion_emg_eeg_ridge": {
+      "equal_person_two_axis_rmse_deg": 6.126738571855855,
+      "equal_person_axis_rmse_deg": {
+        "extension": 7.686995090546224,
+        "radial_deviation": 3.9979941887965387
+      },
+      "pooled_two_axis_rmse_deg": 6.126738571855855
+    },
+    "rotate_emg": {
+      "equal_person_two_axis_rmse_deg": 6.940570378476386,
+      "equal_person_axis_rmse_deg": {
+        "extension": 8.860948754259327,
+        "radial_deviation": 4.22215839726055
+      },
+      "pooled_two_axis_rmse_deg": 6.940570378476383
+    },
+    "rotate_eeg": {
+      "equal_person_two_axis_rmse_deg": 6.378892167497884,
+      "equal_person_axis_rmse_deg": {
+        "extension": 8.065243885490514,
+        "radial_deviation": 4.041332903472513
+      },
+      "pooled_two_axis_rmse_deg": 6.378892167497885
+    }
+  },
+  "paired_rmse_differences_deg": {
+    "add_surface_emg": -0.35542617233060003,
+    "add_scalp_eeg_after_emg": -0.04755070121933169,
+    "aligned_vs_rotated_emg": -0.7662811054012,
+    "aligned_vs_rotated_eeg": -0.2521535956420289
+  },
+  "primary_descriptive_resample_percentiles_deg": [
+    -0.518916653694033,
+    -0.1354387835038518
+  ],
+  "primary_leave_one_person_out_range_deg": [
+    -0.46887226599441156,
+    -0.2320962629076222
+  ],
+  "resample_count": 27,
+  "singleton_rotation_blocks": 0
+}

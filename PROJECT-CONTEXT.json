@@ -87,6 +87,43 @@
     "portable_interface": {
       "source": "interfaces/experimental/portable",
       "status": "Source only; no model payload, download, runtime or finished GUI claim"
+    },
+    "wrist_pointing": {
+      "source_doi": "https://doi.org/10.6084/m9.figshare.29666735.v3",
+      "source_rights": "CC BY 4.0, attribution included in each benchmark.",
+      "temporal_study": "benchmarks/wrist-pointing-temporal",
+      "surface_muscle_study": "benchmarks/wrist-pointing-muscle",
+      "browser_example": "docs/wrist-pointing/index.html",
+      "cohort_scope": "Six training, three development participants; 1,879 eligible training trials and 960 eligible development trials, with six reserved participants.",
+      "temporal_rmse_degrees": {
+        "motion": 4.0533382497,
+        "motion_plus_EEG": 4.5225094386
+      },
+      "muscle_ridge_rmse_degrees": {
+        "motion": 6.529715,
+        "motion_plus_EMG": 6.174289,
+        "motion_plus_EMG_and_EEG": 6.126739
+      },
+      "scope_note": "The interactive controls change explicitly invented features. Reported errors describe separate, frozen analyses of the measured pointing task at a nominal 250 ms forecast horizon; physical latency is unmeasured."
+    },
+    "wrist_pointing_forecasts": {
+      "dataset": "EEG-EMG-WristMotion v3",
+      "dataset_doi": "https://doi.org/10.6084/m9.figshare.29666735.v3",
+      "data_license": "CC BY 4.0",
+      "temporal_study": "benchmarks/wrist-pointing-temporal",
+      "muscle_study": "benchmarks/wrist-pointing-muscle",
+      "muscle_model_example": "docs/wrist-pointing/index.html",
+      "temporal_package": {
+        "path": "benchmarks/wrist-pointing-temporal/wrist-temporal-forecast-r1-preview.zip",
+        "bytes": 240332,
+        "sha256": "6ff18be033fb566606c22455746702b28a776a9f9e935cac9200072f57efd312"
+      },
+      "muscle_package": {
+        "path": "benchmarks/wrist-pointing-muscle/wrist-pointing-muscle-r1-preview.zip",
+        "bytes": 43124,
+        "sha256": "fb84b3cb0d767abbba3aa3700bfa684c3e50a34742379b1ce598d4112c577ae7"
+      },
+      "comparison_scope": "Six training participants with 1,879 eligible recorded trials; three different development participants supplied 960 complete trials. 250 ms forecast horizon on the archive clock. The reserved test recordings remain unopened."
     }
   }
 }

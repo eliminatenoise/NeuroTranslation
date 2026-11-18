@@ -8,6 +8,14 @@ The companion also inspects your own JSON or CSV locally. It can align streams w
 
 ## Predicting measured movement
 
+### Wrist pointing
+
+How far will the wrist turn in the next quarter second? In a separate pointing experiment, six people supplied the training recordings and three other people supplied 960 development trials. A temporal convolutional model using recent wrist angles and cue timing had a two-axis error of **4.053°**. Repeating the last measured angle gave **7.925°**. Adding eight scalp EEG channels to the temporal model raised error to **4.523°**. These are root mean squared errors on a 250 ms horizon in the stored recordings. [Model, results and runnable preview](benchmarks/wrist-pointing-temporal/)
+
+Surface muscle signals gave a different result in a linear model on the same trials. Adding four forearm EMG pairs to wrist history reduced error from **6.530° to 6.174°**. Adding EEG after EMG gave **6.127°** across both axes, with a small increase in error on the radial–ulnar axis. Both studies preserve a separate test cohort. [Run the fitted wrist models in your browser](https://eliminatenoise.github.io/NeuroTranslation/wrist-pointing/) · [Muscle comparison and controls](benchmarks/wrist-pointing-muscle/)
+
+### Palm and elbow measurements
+
 How much do three scalp EEG channels add once you know where the hand was? In the palm replay study, both fits had elapsed time and earlier palm position and velocity. One fit also had EEG. We trained on three people and evaluated on three others. Across 173 development trials, the person-weighted root mean squared error rose from 1.093 to 1.223 mm when EEG was added, and it rose for each development participant. The latest inputs preceded the target by 100 ms on the stored clock. The recordings were processed after collection, so live decoding latency remains untested.
 
 The first analysis started its clock at the task cue and found no eligible trials because required palm observations were missing. The replay follows the alternate analysis, which starts at the first available palm sample at or after that cue. [Six-person study, fitted parameters and reproduction](benchmarks/scalp-eeg-palm-history/)

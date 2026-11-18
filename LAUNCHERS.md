@@ -13,3 +13,7 @@ The installer writes one per-user menu entry. It prefers the installed Omarchy o
 Keep the filename extensions and follow your operating system’s normal trust prompts. Opening the preview requires a network connection and browser. The shortcuts carry the URL only. The study parameters are served to the browser, and you provide the trial file. A general NeuroTranslate model and live decoding remain outside the preview.
 
 Windows and macOS shortcut formats were checked. Isolated installation was tested on Linux. Native shortcut opening on Windows and macOS remains unchecked.
+
+## Open the wrist models
+
+The wrist studies have their own downloads and launchers. Open a study, download its ZIP and extract the folder before running the launcher for your system. The temporal model includes a three-seed convolutional ensemble. The muscle study compares fitted linear models using wrist history, surface EMG and scalp EEG. [Temporal forecast](benchmarks/wrist-pointing-temporal/) · [Surface EMG forecast](benchmarks/wrist-pointing-muscle/)

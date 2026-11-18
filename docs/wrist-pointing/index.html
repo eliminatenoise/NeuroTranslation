@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What does a wrist’s muscle signal add? · NeuroTranslation</title>
+  <link rel="stylesheet" href="wrist.css">
+  <script defer src="model.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="context">NeuroTranslation · WristMotion v3 experimental preview</p>
+      <h1>What does a wrist’s muscle signal add?</h1>
+      <p class="intro">The wrist has already moved by the time we make a forecast. The encoder tells us where it has been. What changes when we give the forecast electrical activity from the forearm as well?</p>
+    </header>
+
+    <section class="panel demo" aria-labelledby="demo-title">
+      <h2 id="demo-title">Try the three fitted models</h2>
+      <p>Change an invented forearm or scalp feature and see which forecasts move. The examples use made-up feature values for a voluntary right-wrist pointing task.</p>
+      <p id="model-status" role="status">The forecast controls require JavaScript and model verification. You can read the archived scores below.</p>
+      <div id="model-controls" hidden>
+        <div class="controls">
+          <div>
+            <label for="example">Invented feature example</label>
+            <select id="example" aria-describedby="example-note">
+              <option value="artificial_start">Starting wrist history</option>
+              <option value="artificial_emg_change">Higher M1 and M4 RMS</option>
+              <option value="artificial_scalp_change">Higher EMG + changed EEG</option>
+            </select>
+            <p id="example-note" class="small">Compare examples with the offset set to zero to change only the features named here.</p>
+          </div>
+          <div>
+            <div class="range-label">
+              <label for="emg-offset">Add to forearm pair M1 RMS</label>
+              <output id="emg-offset-value" for="emg-offset">+0 µV</output>
+            </div>
+            <input id="emg-offset" type="range" min="0" max="30" step="1" value="0" aria-describedby="emg-offset-note">
+            <p id="emg-offset-note" class="small">Add 0–30 nominal archive µV to each of the 16 M1 bins. M1 is the electrode pair over extensor carpi radialis longus.</p>
+          </div>
+        </div>
+
+        <p id="input-summary" class="input-summary"></p>
+        <table id="predictions">
+          <caption>Predicted wrist angles in degrees</caption>
+          <thead><tr><th scope="col">Fitted model</th><th scope="col">Flexion–extension</th><th scope="col">Radial–ulnar deviation</th></tr></thead>
+          <tbody>
+            <tr data-head="motion_ridge"><th scope="row">Wrist history + cue time</th><td><output data-axis="extension" aria-live="off"></output></td><td><output data-axis="radial-deviation" aria-live="off"></output></td></tr>
+            <tr data-head="motion_emg_ridge"><th scope="row">Add surface EMG</th><td><output data-axis="extension" aria-live="off"></output></td><td><output data-axis="radial-deviation" aria-live="off"></output></td></tr>
+            <tr data-head="motion_emg_eeg_ridge"><th scope="row">Add scalp EEG after EMG</th><td><output data-axis="extension" aria-live="off"></output></td><td><output data-axis="radial-deviation" aria-live="off"></output></td></tr>
+          </tbody>
+        </table>
+        <p class="small">Positive angles point toward extension and toward the thumb (radial deviation). Negative angles point toward flexion and toward the little finger (ulnar deviation).</p>
+      </div>
+      <p id="model-recovery"><a href="https://eliminatenoise.github.io/NeuroTranslation/wrist-pointing/">Open the hosted browser companion</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-muscle/">Download the study and Python demo</a></p>
+      <details>
+        <summary>What goes into a forecast?</summary>
+        <dl>
+          <dt>Stored clock</dt>
+          <dd>Each case has a target time after the cue and a last-known angle on each axis. The last-known angles are 128 stored ticks (nominally 250 ms at 512 Hz) before the target. The 256 stored samples through that last-known instant form 16 bins of 31.25 ms each. The wrist encoders refreshed at a reported nominal 100 Hz. Physical delays remain unmeasured here.</dd>
+          <dt>Feature values before normalization</dt>
+          <dd>Each bin has two mean wrist angles relative to the last-known angles, in degrees. The four forearm values are root-mean-square (RMS) amplitudes of software differences between two surface electromyography (EMG) channels per pair, in nominal archive µV. The eight scalp electroencephalography (EEG) means follow C3, C1, Cz, C2, C4, CP3, CPz and CP4 in archive scaling. Surface EMG can include neighboring muscle activity and effects of electrode contact or motion.</dd>
+          <dt>Values the fitted models use</dt>
+          <dd>Each model subtracts the training mean and divides by the training standard deviation for each bin feature and each last-known angle. These standardized inputs are unitless. One of six timing indicators is set to 1 for the target cue offset. The models predict a standardized change on each axis, then undo the target scaling and add the last-known angles to get absolute degrees.</dd>
+        </dl>
+        <p>The browser uses the <a href="MODEL-STATE.json">released ridge weights and training scales</a> and the <a href="SYNTHETIC-CASES.json">invented feature cases</a>. It accepts only those cases and the M1 adjustment.</p>
+      </details>
+    </section>
+
+    <section class="panel" aria-labelledby="results-title">
+      <h2 id="results-title">What happened on recorded trials?</h2>
+      <p class="finding">6.530° → 6.174°</p>
+      <p>Adding surface EMG lowered the two-axis forecast error by 0.355° using the full-precision scores. Giving that same model EMG from the next eligible trial raised the error to 6.941°. That swap kept the participant, recording block and cue offset fixed. Adding scalp EEG after EMG lowered the overall error by a further 0.048° and raised the radial–ulnar error by 0.011°.</p>
+      <p>Six participants supplied the fits. Three different participants supplied 960 development trials. The six reserved test participants remain sealed. Changing an invented example above leaves these archived scores fixed.</p>
+      <table id="archive-scores">
+        <caption>Archived development root-mean-square error (RMSE) in degrees</caption>
+        <thead><tr>
+          <th scope="col">Predictor</th><th scope="col">Both axes</th>
+          <th scope="col" aria-label="Flexion–extension"><span class="full-axis">Flexion–extension</span><span class="short-axis" aria-hidden="true">Flex. / ext.</span></th>
+          <th scope="col" aria-label="Radial–ulnar deviation"><span class="full-axis">Radial–ulnar deviation</span><span class="short-axis" aria-hidden="true">Rad. / uln.</span></th>
+        </tr></thead>
+        <tbody>
+          <tr><th scope="row">TRAIN mean at each cue offset</th><td>24.888</td><td>32.329</td><td>13.916</td></tr>
+          <tr><th scope="row">Repeat last angle</th><td>7.925</td><td>10.129</td><td>4.796</td></tr>
+          <tr><th scope="row">Extrapolate recent angle change</th><td>8.578</td><td>10.780</td><td>5.566</td></tr>
+          <tr><th scope="row">Wrist history + cue time</th><td>6.530</td><td>8.287</td><td>4.075</td></tr>
+          <tr><th scope="row">Add surface EMG</th><td>6.174</td><td>7.768</td><td>3.987</td></tr>
+          <tr><th scope="row">Add scalp EEG after EMG</th><td>6.127</td><td>7.687</td><td>3.998</td></tr>
+          <tr><th scope="row">Use the next trial’s EMG</th><td>6.941</td><td>8.861</td><td>4.222</td></tr>
+          <tr><th scope="row">Use the next trial’s EEG</th><td>6.379</td><td>8.065</td><td>4.041</td></tr>
+        </tbody>
+      </table>
+      <p class="small">First average the squared errors within each participant, then average those values equally across people and take the square root. For the two-axis score, the first average includes both axes. These offline estimates concern these recordings and this task. Physiological timing, real-time performance and generalization remain untested here.</p>
+      <p class="small">Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz deposited the EEG-EMG-WristMotion Dataset, version 3, under CC BY 4.0. NeuroTranslation used the archive to fit and evaluate these wrist forecasts.</p>
+      <ul class="links">
+        <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-muscle/">Surface EMG benchmark</a></li>
+        <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-temporal/">Companion temporal benchmark</a></li>
+        <li><a href="https://doi.org/10.1038/s41597-026-07287-z">WristMotion study</a></li>
+        <li><a href="https://doi.org/10.6084/m9.figshare.29666735.v3">WristMotion v3 data DOI</a></li>
+        <li><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 data license</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

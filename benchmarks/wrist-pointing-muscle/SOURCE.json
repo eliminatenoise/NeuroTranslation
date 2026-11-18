@@ -1,0 +1,26 @@
+{
+  "study": "WristMotion cue-locked surface EMG ridge comparison R1",
+  "publication_stage": "Experimental offline development preview",
+  "dataset": {
+    "title": "EEG-EMG-WristMotion Dataset",
+    "version": 3,
+    "doi": "10.6084/m9.figshare.29666735.v3",
+    "url": "https://figshare.com/articles/dataset/EEG-EMG-WristMotion_Dataset/29666735/3",
+    "creators": [
+      "Jorge German Perez Blanco",
+      "Javier Mauricio Anteliz Ortiz"
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "descriptor_doi": "10.1038/s41597-026-07287-z"
+  },
+  "adaptation": "NeuroTranslation selected eligible right-wrist pointing trials, decoded encoder angles, derived four surface EMG amplitudes from software bipolar differences, and binned the earlier wrist, EMG and EEG samples for the ridge comparisons.",
+  "project_credit": "NeuroTranslation authored the analysis code, derived fitted regression, summary and interactive view. The dataset license here identifies the license of the Figshare deposit.",
+  "included": {
+    "wrist-pointing-muscle-r1-preview.zip": "fb84b3cb0d767abbba3aa3700bfa684c3e50a34742379b1ce598d4112c577ae7",
+    "RESULTS.json": "bfc7a9799f16df133f5e1ca924919ac2a369ed73d5fef308d1084b58fb9240f5"
+  },
+  "archive_model_state_sha256": "507249ad6fd25c87cc55100175cc2e750d03f89fc25e92542a9dc8ab3844bf0e",
+  "glossary_revision": 36,
+  "glossary_sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+}

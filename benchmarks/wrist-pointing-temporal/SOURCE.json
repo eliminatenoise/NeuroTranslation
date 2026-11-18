@@ -1,0 +1,30 @@
+{
+  "study": "WristMotion cue-locked temporal forecast R1",
+  "publication_stage": "Experimental offline development preview",
+  "dataset": {
+    "title": "EEG-EMG-WristMotion Dataset",
+    "version": 3,
+    "doi": "10.6084/m9.figshare.29666735.v3",
+    "url": "https://figshare.com/articles/dataset/EEG-EMG-WristMotion_Dataset/29666735/3",
+    "creators": [
+      "Jorge German Perez Blanco",
+      "Javier Mauricio Anteliz Ortiz"
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "descriptor_doi": "10.1038/s41597-026-07287-z"
+  },
+  "adaptation": "NeuroTranslation selected eligible right-wrist pointing trials, decoded unsigned encoder readings, expressed angles as positive extension and radial deviation, and binned the earlier stored samples to fit and score angle forecasts.",
+  "project_credit": "NeuroTranslation authored the analysis code, derived checkpoint, summary and figure. The dataset license here identifies the license of the Figshare deposit.",
+  "included": {
+    "wrist-temporal-forecast-r1-preview.zip": "6ff18be033fb566606c22455746702b28a776a9f9e935cac9200072f57efd312",
+    "DEVELOPMENT-AGGREGATE.json": "bd22e46a6654685eaabd9cab93e713cd36b29c69a4adb138d3ca02881a084bb1",
+    "plot_forecast.py": "e7a76292753bd5f8858874d1f458737b1d076b72f0fd2363bfb4f75c5ab3aaf8",
+    "wrist-forecast-public.png": "5699cbd20bca811490dad01d706981c259443a2777197022c50d4527edce4c4d"
+  },
+  "figure_input": "DEVELOPMENT-AGGREGATE.json",
+  "figure_command": "python plot_forecast.py DEVELOPMENT-AGGREGATE.json wrist-forecast-public.png",
+  "figure_matplotlib_version": "3.11.2",
+  "glossary_revision": 36,
+  "glossary_sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+}
