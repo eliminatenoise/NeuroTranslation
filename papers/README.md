@@ -4,7 +4,7 @@
 
 The four PDFs now work through one question. If two cameras see the same hand at different moments, what can the joined image tell us about the movement? NeuroTranslation technical also clarifies the test of temporal order in the completed LINK comparison. These edits add no experimental results.
 
-- NeuroTranslation — [Technical](experimental/movement-measurement-2026-11-19/neurotranslation-technical.pdf#page=31) · [Explained](experimental/movement-measurement-2026-11-19/neurotranslation-explained.pdf#page=65)
+- NeuroTranslation — [Technical](experimental/movement-measurement-2026-11-19/neurotranslation-technical.pdf#page=32) · [Explained](experimental/movement-measurement-2026-11-19/neurotranslation-explained.pdf#page=65)
 - Brain2Body — [Research article](experimental/movement-measurement-2026-11-19/brain2body-article.pdf#page=20) · [Simple English](experimental/movement-measurement-2026-11-19/brain2body-simple-english.pdf#page=31)
 
 [Download the proposed PDFs and companions](downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-19.zip) · [Archive checksum](downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-19.zip.sha256) · [Candidate manifest](experimental/movement-measurement-2026-11-19/manifest.json)

@@ -2,40 +2,83 @@
   "schema": "paper-candidate-content-manifest-v1",
   "version": "movement-measurement-2026-11-19",
   "status": "EXPERIMENTAL_CANDIDATE_FOR_REVIEW",
-  "packaged_at_utc": "2026-11-18T17:55:10+00:00",
+  "packaged_at_utc": "2026-11-18T18:39:08+00:00",
   "selected_at_utc": null,
   "baseline_public_commit": "48ccfe6048fb9a7b3f1554117ce41f1b9128e113",
-  "source_manifest_sha256": "2af40a6601c725475dd0c472de391eb82d41c10a29d5d091c45640170795804c",
+  "source_manifest_sha256": "0ffd0e56b24179a10ff536eac38d6cabac5c6e08dc9305e60066ce438e14cbd7",
   "glossary": {
     "revision": 36,
     "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
   },
-  "build": "Four fresh builds using the same offline Tectonic route. The fixed PDF CreationDate reflects the retained source epoch. Matching public source bundle unavailable.",
+  "build": "Two NeuroTranslation PDFs rebuilt for the EMG revision using the retained offline Tectonic route. The two Brain2Body PDFs are retained from the movement-measurement draft. The PDF CreationDate reflects the retained source epoch. Matching public source bundle unavailable.",
   "PDF_metadata_source_date_epoch": 1794664896,
-  "changes": "One parallel-edition movement-measurement passage and the earlier accepted NeuroTranslation technical LINK sentence.",
+  "changes": "One parallel-edition movement-measurement passage and the earlier accepted NeuroTranslation technical LINK sentence. Both NeuroTranslation editions distinguish recorded EMG, relative targets and physical voltage.",
   "PDFs": [
     {
       "filename": "neurotranslation-technical.pdf",
-      "sha256": "8055ddf25569b442b5a0b2057b8bddd52694f4e4779967689c40cda6e3570eab",
+      "sha256": "a3820121e63968ef1e7b6874e29fe9f51f442fa10c313726cf8e3ba66cdcfe4f",
       "baseline_sha256": "dfd182682c7c0870c53a30a1bf214905a444e65b7ae34cd0e59a8793eff2eda1",
       "pages": 133,
       "movement_passage_pages": [
-        31,
         32
       ],
       "methods_carryover_page": 58,
       "layout_reflow_pages": [
+        2,
+        3,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
         31,
         32,
         33,
         34,
         35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
         58
       ]
     },
     {
       "filename": "neurotranslation-explained.pdf",
-      "sha256": "c4f695523f1b449d4796989d7c77fc447a1541110375083bc831a798002bfaba",
+      "sha256": "e845b35857d99d5fc08546ba75d4c5e50ca218963fd39357945b2e4eb5426716",
       "baseline_sha256": "9483a26aa1e910e16bcab21cc52fc36c63a863a05c5cda7efedaf842d08c8143",
       "pages": 165,
       "movement_passage_pages": [
@@ -43,6 +86,31 @@
       ],
       "methods_carryover_page": null,
       "layout_reflow_pages": [
+        2,
+        3,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        34,
+        35,
+        36,
+        37,
         65
       ]
     },
@@ -116,8 +184,8 @@
   ],
   "checks": {
     "total_pages": 546,
-    "changed_rasters_screened_for_layout": 50,
-    "identical_420px_rasters": 496,
+    "changed_rasters_screened_for_layout": 119,
+    "identical_420px_rasters": 427,
     "direct_passage_readback": true,
     "font_rows_match_previous_edition_excluding_subset_tags": true,
     "relative_PDF_annotation_targets": {
@@ -158,22 +226,22 @@
     {
       "path": "font-provenance.json",
       "bytes": 3977,
-      "sha256": "45a74d95f23f9ec55651f8c460b6cda7f46967bce8591af295457695a80c5a08"
+      "sha256": "70538e03f25d154f6e30862a36652270c508041c34ed3d4d5c9b31d7149168ac"
     },
     {
       "path": "index.html",
-      "bytes": 2957,
-      "sha256": "f203ca4deebe6ac9b438aa9f4178f22fb734a115b155a1b857340abb3aebe8b5"
+      "bytes": 3120,
+      "sha256": "152fb2039e9d1da486710846186bc465723704d79ab2f2ff5cc1db9109daf077"
     },
     {
       "path": "neurotranslation-explained.pdf",
-      "bytes": 1820376,
-      "sha256": "c4f695523f1b449d4796989d7c77fc447a1541110375083bc831a798002bfaba"
+      "bytes": 1820821,
+      "sha256": "e845b35857d99d5fc08546ba75d4c5e50ca218963fd39357945b2e4eb5426716"
     },
     {
       "path": "neurotranslation-technical.pdf",
-      "bytes": 1719932,
-      "sha256": "8055ddf25569b442b5a0b2057b8bddd52694f4e4779967689c40cda6e3570eab"
+      "bytes": 1720709,
+      "sha256": "a3820121e63968ef1e7b6874e29fe9f51f442fa10c313726cf8e3ba66cdcfe4f"
     },
     {
       "path": "research-evidence-reading-aid.md",
@@ -182,8 +250,8 @@
     },
     {
       "path": "research-evidence.json",
-      "bytes": 8839,
-      "sha256": "d6767e79a4df0ce568e861c6a99063350f547ca0126b2f1f56db669b13257f34"
+      "bytes": 9116,
+      "sha256": "9f568eb38f8674652bb5e1ac5f4e7782c5bc4d9e05579dca759cd03f0f4da5d1"
     },
     {
       "path": "third-party-notices/DejaVu-LICENSE.txt",
@@ -205,5 +273,105 @@
       "bytes": 15004,
       "sha256": "8bf7215067a61f7ad3c4b43384f632d28b9c91d571cebf925f8d2f940ea96e64"
     }
-  ]
+  ],
+  "neurotranslation_emg_revision": {
+    "prior_candidate_git_commit": "b13525443630b0a7bb0cd2b6508650a9ed9bdef8",
+    "prior_candidate_manifest_sha256": "f29951690ff681d85a99b61d2406797ccb98b4dac1df99d5351b7c24cdfa2006",
+    "PDFs": [
+      {
+        "filename": "neurotranslation-technical.pdf",
+        "prior_candidate_sha256": "8055ddf25569b442b5a0b2057b8bddd52694f4e4779967689c40cda6e3570eab",
+        "measurement_passage_pages": [
+          9
+        ],
+        "results_page": 18,
+        "layout_reflow_pages_since_prior_candidate": [
+          2,
+          3,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55
+        ]
+      },
+      {
+        "filename": "neurotranslation-explained.pdf",
+        "prior_candidate_sha256": "c4f695523f1b449d4796989d7c77fc447a1541110375083bc831a798002bfaba",
+        "measurement_passage_pages": [
+          14
+        ],
+        "results_page": 34,
+        "layout_reflow_pages_since_prior_candidate": [
+          2,
+          3,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          34,
+          35,
+          36,
+          37
+        ]
+      }
+    ]
+  }
 }
