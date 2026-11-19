@@ -23,8 +23,8 @@
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "bytes": 24928,
-      "sha256": "24a3f6c203b1c2f0b668cbc53b24dcb6bca0326ac4e9c9616c248dc76614bb90"
+      "sha256": "add5e512dc145238d8c07013d79339fbb9cb8bcd4d32844230ac8b2221e9428f",
+      "bytes": 25272
     },
     {
       "path": "README.md",
@@ -110,6 +110,16 @@
       "path": "benchmarks/hygrip-force/trial-replay/HYGRIP-trial-replay.zip",
       "bytes": 26130,
       "sha256": "41788a110e361da9272c4c1d83c342f6031d7b4328fec072af2dc5938acfd570"
+    },
+    {
+      "path": "benchmarks/hyser-index/PROTOCOL.md",
+      "sha256": "958f022f7aeb31872aa89cf43f4bd2ee96937c608ab9f0c84e1c3d5216ce4fda",
+      "bytes": 8763
+    },
+    {
+      "path": "benchmarks/hyser-index/README.md",
+      "sha256": "ac44b3daa535e11d78f138be8748adc91b8a0248cee9d9c5c184281cbcd57344",
+      "bytes": 616
     },
     {
       "path": "benchmarks/scalp-eeg-hand/.gitignore",
@@ -2378,43 +2388,16 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "dfedef3edb7fb22b8f81aaf917ce93eb89780e55",
+  "previous_public_commit": "48872ad3b28827c73449573647afc7ef255a4b7e",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
       "PROJECT-CONTEXT.json",
-      "README.md",
-      "benchmarks/hygrip-force/README.md",
-      "benchmarks/hygrip-force/cue-phase/DEV.json",
-      "benchmarks/hygrip-force/cue-phase/HYGRIP-Cue-Phase-Aggregates.zip",
-      "benchmarks/hygrip-force/cue-phase/README.md",
-      "benchmarks/hygrip-force/cue-phase/TRAIN.json",
-      "docs/START.html",
-      "docs/preview.html",
-      "papers/README.md",
-      "papers/current.json",
-      "papers/downloads/NeuroTranslation-Brain2Body-Grip-Evidence-2026-11-19.zip",
-      "papers/downloads/NeuroTranslation-Brain2Body-Grip-Evidence-2026-11-19.zip.sha256",
-      "papers/downloads/NeuroTranslation-Brain2Body-Selected-Grip-Evidence-Source-2026-11-19.zip",
-      "papers/downloads/NeuroTranslation-Brain2Body-Selected-Grip-Evidence-Source-2026-11-19.zip.sha256",
-      "papers/experimental/grip-evidence-2026-11-19/NOTICE.md",
-      "papers/experimental/grip-evidence-2026-11-19/README.md",
-      "papers/experimental/grip-evidence-2026-11-19/brain2body-article.pdf",
-      "papers/experimental/grip-evidence-2026-11-19/brain2body-simple-english.pdf",
-      "papers/experimental/grip-evidence-2026-11-19/font-provenance.json",
-      "papers/experimental/grip-evidence-2026-11-19/index.html",
-      "papers/experimental/grip-evidence-2026-11-19/manifest.json",
-      "papers/experimental/grip-evidence-2026-11-19/neurotranslation-explained.pdf",
-      "papers/experimental/grip-evidence-2026-11-19/neurotranslation-technical.pdf",
-      "papers/experimental/grip-evidence-2026-11-19/research-evidence-reading-aid.md",
-      "papers/experimental/grip-evidence-2026-11-19/research-evidence.json",
-      "papers/experimental/grip-evidence-2026-11-19/third-party-notices/DejaVu-LICENSE.txt",
-      "papers/experimental/grip-evidence-2026-11-19/third-party-notices/FiraMath-LICENSE.txt",
-      "papers/experimental/grip-evidence-2026-11-19/third-party-notices/Noto-OFL.txt",
-      "papers/experimental/grip-evidence-2026-11-19/training-diagnostic-summary.json"
+      "benchmarks/hyser-index/PROTOCOL.md",
+      "benchmarks/hyser-index/README.md"
     ],
-    "preserved_rows": 443
+    "preserved_rows": 472
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",
