@@ -1,0 +1,381 @@
+{
+  "scope": "Font notices and Poppler readback for the four candidate experimental paper PDFs.",
+  "PDFs": [
+    {
+      "filename": "neurotranslation-technical.pdf",
+      "edition": "neurotranslation-technical",
+      "sha256": "d968efce058d86f02ef1364e4104ddbe1e227a569cce50f8ca8ddacf93e95fdd"
+    },
+    {
+      "filename": "neurotranslation-explained.pdf",
+      "edition": "neurotranslation-explained",
+      "sha256": "ae6cdb67002ba70c0a1946164d7ecb303fc109620b77f3b0878d5cae4290382f"
+    },
+    {
+      "filename": "brain2body-article.pdf",
+      "edition": "brain2body-article",
+      "sha256": "21e4608dab90f1fa85085737693a5bd8ad762d20201364499d66116320ac21b7"
+    },
+    {
+      "filename": "brain2body-simple-english.pdf",
+      "edition": "brain2body-simple-english",
+      "sha256": "67b0c374f7f0eadc6d45fa09ad75b364638ccaaff29cb078dd9a9ce571afbdce"
+    }
+  ],
+  "font_families": [
+    "Noto Sans",
+    "Noto Sans Mono",
+    "Fira Math",
+    "DejaVu Sans"
+  ],
+  "notices": [
+    {
+      "path": "third-party-notices/Noto-OFL.txt",
+      "bytes": 4396,
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "unmodified_from_retained_source": true
+    },
+    {
+      "path": "third-party-notices/FiraMath-LICENSE.txt",
+      "bytes": 4367,
+      "sha256": "573c14d3ddf557b59bf1fb5537a116a85f264654cdb9ba194ac305acd8ce5dc6",
+      "unmodified_from_retained_source": true
+    },
+    {
+      "path": "third-party-notices/DejaVu-LICENSE.txt",
+      "bytes": 4816,
+      "sha256": "d75938dec098f06f0ac3c00853065d94f020be1c3c62ef1dc2975ba15b4d9b0e",
+      "unmodified_from_retained_source": true
+    }
+  ],
+  "primary_sources": [
+    {
+      "family": "Noto",
+      "repository": "https://github.com/notofonts/latin-greek-cyrillic",
+      "ref": "heads/main",
+      "commit": "ffaec0a756877220dbf718ce08b8479a0be82479",
+      "license_URL": "https://github.com/notofonts/latin-greek-cyrillic/blob/ffaec0a756877220dbf718ce08b8479a0be82479/OFL.txt"
+    },
+    {
+      "family": "FiraMath",
+      "repository": "https://github.com/firamath/firamath",
+      "ref": "tags/v0.3",
+      "commit": "8f1423fbfcc659c44772d2523be82073eb26ad3a",
+      "license_URL": "https://github.com/firamath/firamath/blob/8f1423fbfcc659c44772d2523be82073eb26ad3a/LICENSE"
+    },
+    {
+      "family": "DejaVu",
+      "repository": "https://github.com/dejavu-fonts/dejavu-fonts",
+      "ref": "tags/version_2_37",
+      "commit": "0eda8a319c08835009849583cd090bb5b141ce25",
+      "license_URL": "https://github.com/dejavu-fonts/dejavu-fonts/blob/0eda8a319c08835009849583cd090bb5b141ce25/LICENSE"
+    }
+  ],
+  "limits": [
+    "Exact font binary versions have not been independently recovered. Noto/Fira source hashes remain in private build-custody evidence. The selected PDFs contain embedded fonts; no standalone font files are included.",
+    "The retained Fira copyright is 2018--2020. Primary v0.3 says 2018 and current main says 2018--2023; the remaining license text is byte-identical. The selected-source notice is preserved unchanged.",
+    "The retained DejaVu notice matches the installed Matplotlib notice exactly. Its Bitstream/Arev text matches primary DejaVu 2.37 after whitespace normalization; that upstream package also includes a TeX Gyre Math section. No TeX Gyre Math font appears in the selected cached font tables.",
+    "Font-family names alone do not establish exact binary provenance for historical figure dependencies.",
+    "These notices do not settle all figure, dataset, privacy, participant, trademark or combined-use rights, or certify scientific validity or finished-product acceptance."
+  ],
+  "standalone_font_files_included": false,
+  "selected_PDFs_contain_embedded_font_programs": true,
+  "recorded_PDF_font_table_rows": {
+    "neurotranslation-technical.pdf": [
+      {
+        "name": "NotoSans-Regular",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Bold",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Italic",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans-Bold",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "FiraMath-Regular-Identity-H",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Regular",
+        "embedded": "yes",
+        "subsetted": "no",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Regular",
+        "embedded": "yes",
+        "subsetted": "no",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSansMono-Regular",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      }
+    ],
+    "neurotranslation-explained.pdf": [
+      {
+        "name": "NotoSans-Regular",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Bold",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "FiraMath-Regular-Identity-H",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans-Bold",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSansMono-Regular",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Regular",
+        "embedded": "yes",
+        "subsetted": "no",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Italic",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Regular",
+        "embedded": "yes",
+        "subsetted": "no",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      }
+    ],
+    "brain2body-article.pdf": [
+      {
+        "name": "NotoSans-Bold",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Regular",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "FiraMath-Regular-Identity-H",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Italic",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSansMono-Regular",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans-Bold",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      }
+    ],
+    "brain2body-simple-english.pdf": [
+      {
+        "name": "NotoSans-Bold",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Regular",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Italic",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "FiraMath-Regular-Identity-H",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSansMono-Regular",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans-Bold",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "DejaVuSans",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      }
+    ]
+  }
+}
