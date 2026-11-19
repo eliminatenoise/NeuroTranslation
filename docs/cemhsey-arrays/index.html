@@ -6,11 +6,13 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <link rel="stylesheet" href="screen.css">
   <script defer src="channel-map.js"></script><script defer src="weights.js"></script>
-  <script defer src="array-math.js"></script><script defer src="reader.js"></script>
+  <script defer src="array-math.js"></script><script defer src="interval-math.js"></script>
+  <script defer src="interval-profile.js"></script><script defer src="forecast-plot.js"></script>
+  <script defer src="interval-ui.js"></script><script defer src="reader.js"></script>
 </head>
 <body><main>
   <header><p class="brand">NeuroTranslation</p><h1>Inside a forearm recording</h1>
-    <p>Five grids record muscle electrical activity at the skin. Explore two short windows from a pinch and compare forecasts of the later force between thumb and index finger.</p>
+    <p>Five grids record muscle electrical activity at the skin. Move the cutoff to see what two short windows tell us about the force between thumb and index finger 120 nominal milliseconds later.</p>
   </header>
   <noscript><p>This offline reader needs JavaScript to open trials and calculate forecasts.</p></noscript>
   <section aria-labelledby="open-title"><h2 id="open-title">Open a trial</h2>
@@ -23,12 +25,69 @@
     <details id="model-controls"><summary>Choose forecast weights</summary><p id="fit-status" role="status"></p>
       <div class="actions"><label>Local fitted model <input id="model-file" type="file" accept=".json,application/json" disabled></label>
       <button id="reset-model" class="secondary" disabled>Use bundled weights</button></div></details>
+    <details id="profile-controls"><summary>Choose or make calibration bands</summary>
+      <p>A calibration file holds band widths and the fingerprint of the exact weights that produced them.</p>
+      <div class="actions"><label>Local calibration profile <input id="profile-file" type="file" accept=".json,application/json" disabled></label>
+      <button id="reset-profile" class="secondary" disabled>Use bundled profile</button></div>
+      <p id="profile-status" class="hint" role="status"></p>
+      <details><summary>Calibrate on your own converted packets</summary>
+        <p>Choose complete trial packets that you are authorized to use. Keep them separate from the recordings used to fit your model and from the trial you want to assess. A saved profile keeps packet fingerprints so the reader can flag a reused calibration packet after reopening. Keep the profile private and choose independent trials.</p>
+        <label>Calibration packets <input id="calibration-files" type="file" accept=".json,application/json" multiple disabled></label>
+        <label class="check"><input id="calibration-confirm" type="checkbox"> These trials are separate from my training and assessment trials</label>
+        <div class="actions"><button id="calibrate" class="secondary" disabled>Calculate local bands</button>
+          <button id="save-profile" class="secondary" disabled>Save local profile</button></div>
+        <p id="calibration-status" class="hint" role="status"></p>
+      </details>
+    </details>
   </section>
   <div id="trial" hidden>
     <section aria-labelledby="time-title"><div class="section-head"><h2 id="time-title">Recording cutoff</h2><output id="time" for="cutoff"></output></div>
       <label for="cutoff">Time from the nominal start of the trial</label>
       <input id="cutoff" type="range" min="0" max="591" step="1" value="160">
       <p id="phase" class="hint"></p></section>
+    <section aria-labelledby="forecast-title">
+      <h2 id="forecast-title">How far could the force move?</h2>
+      <p id="origin" class="hint"></p>
+      <div class="forecast-controls">
+        <label>Forecast <select id="band-model">
+          <option value="persistence">Last force reading</option>
+          <option value="history_phase">Force history and cue</option>
+          <option value="history_phase_paired_grid" selected>Add five grid contrasts</option>
+        </select></label>
+        <label>Band widths from <select id="band-scheme">
+          <option value="pooled">All calibration cutoffs</option>
+          <option value="by_issue_phase">Matching cue phase</option>
+        </select></label>
+      </div>
+      <p id="band-status" class="hint" role="status"></p>
+      <figure class="forecast-figure">
+        <canvas id="forecast-plot" role="img" aria-label="Pinch force forecasts at their target times"
+          aria-describedby="band-caption selected-values later">Use the cutoff slider and the forecast tables for the numerical values.</canvas>
+        <ul class="plot-key" aria-hidden="true">
+          <li><span class="key-line"></span> Forecast</li><li id="band-key" hidden><span class="key-band"></span> 90% calibration band</li>
+          <li><span class="key-cutoff"></span> Cutoff</li><li id="observed-key" hidden><span class="key-observed"></span> Force readings</li>
+        </ul>
+        <figcaption id="band-caption">Each forecast uses data through its cutoff. The 90% target comes from separate calibration trials and applies to individual readings. Coverage can change on another trial. The band gives no guarantee for the whole curve.</figcaption>
+      </figure>
+      <table class="band-values"><caption>At the selected cutoff</caption><thead><tr><th scope="col">Value</th><th scope="col">Force (fraction of MVC)</th></tr></thead><tbody id="selected-values"></tbody></table>
+      <label class="check"><input id="reveal" type="checkbox"> Reveal force readings through the selected target</label><p id="later" hidden></p>
+      <details id="forecast-points"><summary>All five forecasts at this cutoff</summary>
+        <table><caption>Predicted normalized pinch force</caption><thead><tr><th scope="col">Forecast</th><th scope="col">Force</th></tr></thead><tbody id="predictions"></tbody></table>
+      </details>
+      <details class="scores"><summary>Score all 592 cutoffs</summary>
+        <p>Score the later reading at every cutoff in this trial. The overlapping windows give a descriptive check for this trial.</p>
+        <button id="score">Score this trial</button><p id="score-status" role="status"></p>
+        <div id="interval-scores" hidden>
+          <p>For each miss, add 20 times the distance to the closest edge. The mean interval score adds that penalty to the mean width. Read the score alongside the width and the fraction covered. Width, penalty and interval score all use fractions of MVC.</p>
+          <div class="wide-table" role="region" aria-label="Interval scores" tabindex="0">
+            <table id="band-score-table"><caption>90% bands · this trial</caption>
+              <thead><tr><th scope="col">Forecast</th><th scope="col">Width estimated from</th><th scope="col">Covered</th><th scope="col">Below / above</th><th scope="col">Mean width</th><th scope="col">Mean penalty</th><th scope="col">Mean score</th></tr></thead><tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <table id="score-table" hidden><caption>Point forecast errors (fraction of MVC)</caption><thead><tr><th scope="col">Forecast</th><th scope="col"><abbr title="Mean absolute error">MAE</abbr></th><th scope="col"><abbr title="Root mean squared error">RMSE</abbr></th></tr></thead><tbody></tbody></table>
+      </details>
+    </section>
     <section aria-labelledby="array-title">
       <div class="section-head"><h2 id="array-title">Electrode activity</h2><label>Electrode grid <select id="grid"></select></label></div>
       <p id="orientation"></p>
@@ -39,23 +98,14 @@
       <p class="hint">Colour shows RMS amplitude in mV, on one scale across both windows and all five grids. Select a cell or use the arrow keys to inspect an electrode.</p>
       <p id="selection" role="status"></p>
       <details id="values"><summary>Read all 64 electrode values for this grid</summary>
-        <table><caption>RMS amplitude in millivolts</caption><thead><tr><th>Stored channel</th><th>Earlier</th><th>Later</th><th>Change</th></tr></thead><tbody id="electrode-values"></tbody></table></details>
+        <div class="electrode-table-scroll" tabindex="0" role="region" aria-label="Electrode readings, scroll horizontally if needed"><table><caption>RMS amplitude in millivolts</caption><thead><tr><th>Stored channel</th><th>Earlier</th><th>Later</th><th>Change</th></tr></thead><tbody id="electrode-values"></tbody></table></div></details>
     </section>
     <section aria-labelledby="pattern-title"><h2 id="pattern-title">What the model sees</h2>
       <p>Take the median channel amplitude in each grid, transform it with log(1 + RMS in mV), and subtract the mean of the five transformed medians. A positive contrast places the grid above that window’s mean.</p>
       <table><caption>Grid contrast in log amplitude</caption><thead><tr><th>Grid</th><th>Earlier</th><th>Later</th></tr></thead><tbody id="grid-contrasts"></tbody></table>
       <p id="rank"></p></section>
-    <section aria-labelledby="forecast-title"><div class="section-head"><h2 id="forecast-title">Forecast at +24 force ticks</h2></div>
-      <p id="origin" class="hint"></p>
-      <table><caption>Predicted normalized pinch force</caption><thead><tr><th>Forecast</th><th>Force</th></tr></thead><tbody id="predictions"></tbody></table>
-      <label class="check"><input id="reveal" type="checkbox"> Reveal the later force reading</label><p id="later" hidden></p>
-      <div class="scores"><h3>Across this trial</h3>
-      <p>Compare mean absolute error (MAE) and root mean squared error (RMSE) on the same 592 cutoffs.</p>
-      <button id="score">Score this trial</button><p id="score-status" role="status"></p>
-      <table id="score-table" hidden><caption>Errors in normalized force units</caption><thead><tr><th>Forecast</th><th>MAE</th><th>RMSE</th></tr></thead><tbody></tbody></table></div>
-    </section>
   </div>
   <footer><h2>Source and timing</h2><p>Cell positions follow the numbering on each acquisition grid. The maps show electrode positions within each grid. Identifying an individual muscle or nerve requires separate evidence.</p>
-  <p>The force channel is one dynamometer reading in fractions of that day’s maximum voluntary contraction for this grasp. Twenty-four force ticks span a nominal 120 ms. The timing between the force and EMG acquisition clocks was unverified.</p>
-  <p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cemhsey-arrays">Study and local tools</a> · <a href="https://doi.org/10.1038/s41597-025-05733-y">Acquisition study</a> · <a href="https://doi.org/10.5281/zenodo.15070187">Source data and device code</a></p></footer>
+  <p>The force channel is one dynamometer reading in fractions of that day’s maximum voluntary contraction (MVC) for this grasp. Twenty-four force ticks span a nominal 120 ms. The timing between the force and EMG acquisition clocks was unverified. Band widths describe errors in offline forecasts of the gauge reading.</p>
+  <p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cemhsey-arrays">Study and local tools</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/cemhsey-intervals/">Interval study and results</a> · <a href="https://doi.org/10.1038/s41597-025-05733-y">Acquisition study</a> · <a href="https://doi.org/10.5281/zenodo.15070187">Source data and device code</a></p></footer>
 </main></body></html>

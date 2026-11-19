@@ -1,10 +1,12 @@
 # Forearm array reader
 
-Open an invented pinch, move the cutoff, and compare the two EMG windows. Select one of the five grids, then use the mouse, touch, or arrow keys to inspect an electrode. Lock the scale to compare different cutoffs without changing the colour range. The forecast table shows what each offline fit would predict at the same later force index. You can reveal that packet’s later value or score all 592 cutoffs.
+Move the cutoff in an invented pinch. The chart shows the forecast from each cutoff through the one you select. A band sets out a range for one later force reading. Switch from the pooled band to the matching cue phase to see what happens when widths come from a more specific set of calibration errors.
+
+Select one of the five electrode grids to compare the two earlier EMG windows. Use the mouse, touch or arrow keys to inspect a cell. Lock the colour scale to compare cutoffs. The tables give the forecast and band edges at the selected cutoff and let you read all five point forecasts. The force reading stays hidden until you reveal it. Use **Score this trial** to compare the bands and forecast errors across all 592 cutoffs.
 
 ## Open the reader offline
 
-Extract the complete archive. Open the launcher for your operating system. You can also open `index.html` in a current browser. The reader needs no server and sends no packet readings or weights over the network.
+Extract the complete archive. Open the launcher for your operating system or open `index.html` in a current browser. The forecasts, calibration and trial scoring run on your computer.
 
 | System | Launcher |
 | --- | --- |
@@ -12,6 +14,8 @@ Extract the complete archive. Open the launcher for your operating system. You c
 | macOS | `Open Array Reader on macOS.command` |
 | Windows | `Open Array Reader on Windows.cmd` |
 
-The public bundle uses invented signals and invented weights. The separate private study bundle labels its fitted TRAIN weights. Its demonstration pinch still uses invented signals. A model selected through the file picker displays the origin declared in that file. The browser cannot verify how a locally selected file was produced.
+The public bundle uses invented training signals, invented calibration trials and an invented example pinch. The example helps you see how the bands work. Scores on it describe the example. Any recorded-trial scores must come from separately authorized input and evidence. [Study and results](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-intervals/)
 
-To convert original trials or fit the reader on your own selected set, use the included Python tools. Keep genuine original data, packets, and fitted weights private. The clinical, anatomical and physical-latency limits of this task are described in the protocol. [Local Python tools](./LOCAL-USE.md) · [Study protocol](./PROTOCOL.md)
+To convert a local recording, fit the reader on your own selected trials or import or make local bands, see the local instructions. Keep original recordings, converted packets, fitted weights and derived calibration files in your private workspace. [Local tools](./LOCAL-USE.md) · [Five-grid study protocol](./PROTOCOL.md)
+
+The glossary for this reader is revision 36, SHA-256 `40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406`.

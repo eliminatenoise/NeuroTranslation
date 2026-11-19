@@ -56,7 +56,7 @@ On four new participants, five recorded electrode grids beat five interleaved gr
 
 [The five-grid pinch protocol](benchmarks/cemhsey-arrays/PROTOCOL.md) compares documented electrode groups with interleaved channels from the same recordings. Explore the two measurement windows electrode by electrode in the array reader, or open a compatible recording on your own computer. [Open the reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/) · [Download the offline tools](benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip)
 
-The next comparison keeps these point forecasts fixed and asks how wide a band is needed around them. [Read the prospective interval study](benchmarks/cemhsey-intervals/README.md)
+Fixed-width bands around the five-grid forecast covered 94.5% of later readings on two new people. Changing width by cue phase covered 95.1%. [Compare the measured bands](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-intervals/) · [Methods and full results](benchmarks/cemhsey-intervals/README.md)
 
 ## Read the papers
 

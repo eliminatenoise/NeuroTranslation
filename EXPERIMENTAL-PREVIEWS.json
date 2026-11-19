@@ -23,13 +23,13 @@
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "bytes": 39856,
-      "sha256": "ba6a224758d234f382707060abdc35d948729ddd74de20796c32c2d1aabeb9b3"
+      "bytes": 41988,
+      "sha256": "5408c5d8b69f0aa409d770619c280447588cf4c86f458488c435479d6db0ceed"
     },
     {
       "path": "README.md",
-      "sha256": "f00d17534f7180ca7cfc29a3af12c78f7ee5f6210cbf29358290b35dc3f7b139",
-      "bytes": 19257
+      "bytes": 19388,
+      "sha256": "0f72fc5d349d61e7f86bdb761d8a5e5ebe81f90e4254897dc39224653b43ad3f"
     },
     {
       "path": "benchmarks/cemhsey-arrays/DESIGN.json",
@@ -58,8 +58,8 @@
     },
     {
       "path": "benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip",
-      "bytes": 54996,
-      "sha256": "80e1a8135aae7264f1cf0c3f864f348234ffcbdf79d2a5aa95a9244d192eb86e"
+      "bytes": 68671,
+      "sha256": "94476fd5bff48085150abd7b422010526ff0bf4de92aa6f305cac65d5de45ad0"
     },
     {
       "path": "benchmarks/cemhsey-arrays/python/PROTOCOL.md",
@@ -98,18 +98,23 @@
     },
     {
       "path": "benchmarks/cemhsey-intervals/DESIGN.json",
-      "sha256": "20784db8a62434247bef939593787156b6c2518dec5f3bb0e33b75126934acdb",
-      "bytes": 1103
+      "bytes": 1103,
+      "sha256": "20784db8a62434247bef939593787156b6c2518dec5f3bb0e33b75126934acdb"
     },
     {
       "path": "benchmarks/cemhsey-intervals/PROTOCOL.md",
-      "sha256": "86f40fafafb22ccddc1ad11a10ebf589da47e6abd8797cb022acbeaa110145d1",
-      "bytes": 5584
+      "bytes": 5584,
+      "sha256": "86f40fafafb22ccddc1ad11a10ebf589da47e6abd8797cb022acbeaa110145d1"
     },
     {
       "path": "benchmarks/cemhsey-intervals/README.md",
-      "sha256": "e69a1006c5668f126773362fc389c2cfcd778bb9b2fe03f061007678d302d4ad",
-      "bytes": 1024
+      "bytes": 3207,
+      "sha256": "43f6f04f80a159942cae678a23fb60468c44eaedaa0332e26cd199340728a4f6"
+    },
+    {
+      "path": "benchmarks/cemhsey-intervals/RESULTS.json",
+      "bytes": 16485,
+      "sha256": "f88ebcea3f61adb10506c9428b8aaff8fbc0c9eaa6cfa21506d0bd60fe0bac06"
     },
     {
       "path": "benchmarks/cemhsey-pinch/BUNDLED-FIT.json",
@@ -1078,8 +1083,8 @@
     },
     {
       "path": "docs/START.html",
-      "bytes": 15528,
-      "sha256": "4a5d9207c2721f8f1aa032e04a96c1ac9e80f1bb9834dd0d4542fcee5cea58d6"
+      "bytes": 15682,
+      "sha256": "3a54a01f85723cb833739a16cbd6dc76fa26ad49a6e3f524a1dcf0fdac37e92c"
     },
     {
       "path": "docs/app.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -1163,8 +1168,8 @@
     },
     {
       "path": "docs/cemhsey-arrays/LOCAL-USE.md",
-      "bytes": 2928,
-      "sha256": "bc9397263e8b5a9fea7b0a1355709b279d11ced0ece5523bc2d9416b37216300"
+      "bytes": 5559,
+      "sha256": "e22cd0b5ce4b893f07f8ccbc3df0720506f93949b52b7ed2bd916ac77bf3c1d0"
     },
     {
       "path": "docs/cemhsey-arrays/Open Array Reader on Linux.sh",
@@ -1188,8 +1193,8 @@
     },
     {
       "path": "docs/cemhsey-arrays/README.md",
-      "bytes": 1527,
-      "sha256": "792087b6863cd3dde4d636b0e279725d8208046bc44752fd1c8d23ceb341c5c4"
+      "bytes": 1959,
+      "sha256": "8bff563fc75cbb903e577b5bf455506c7deb253d2f47daa7fbe8b60372c38199"
     },
     {
       "path": "docs/cemhsey-arrays/array-math.js",
@@ -1207,24 +1212,64 @@
       "sha256": "f98fa83e691ef55edb64cfe306b884b94f537df9397f4a64e2a9228e36e36ce4"
     },
     {
+      "path": "docs/cemhsey-arrays/forecast-plot.js",
+      "bytes": 5426,
+      "sha256": "fccdd9362e39b1768c41ee7a3d0cea294c0300526e78f4e2a445bddd44222e84"
+    },
+    {
       "path": "docs/cemhsey-arrays/index.html",
-      "bytes": 6025,
-      "sha256": "2383c91e0e7ba8d669f1176cf2ee59c360f367198ed9c96b8be9af414a7531ec"
+      "bytes": 10968,
+      "sha256": "b155d8ad4e168c75f7adeaa2dff7c8026c8055a6a24c84e2fdaae51b7eced687"
+    },
+    {
+      "path": "docs/cemhsey-arrays/interval-math.js",
+      "bytes": 9460,
+      "sha256": "5dd26a30a01910ba9d81774eee66633cefbc96431f8e1f2bafaec83b383a8743"
+    },
+    {
+      "path": "docs/cemhsey-arrays/interval-profile.js",
+      "bytes": 1569,
+      "sha256": "9f2baccf99d167afcfacd1e4a770a06a75b6dd34e89dee45498f06243df9db37"
+    },
+    {
+      "path": "docs/cemhsey-arrays/interval-ui.js",
+      "bytes": 13578,
+      "sha256": "2379076c414bb2e61383af01e82ba9899d8d881ce626b4d92de9196147dd93e6"
     },
     {
       "path": "docs/cemhsey-arrays/reader.js",
-      "bytes": 12198,
-      "sha256": "9fc263f8899c220223e5e7e565483163a50c19a2c788d38d28cde0b06dbb398a"
+      "bytes": 13390,
+      "sha256": "4912eff31473b628280c72000ababd70409b9e02631402807258eab1d10ce466"
     },
     {
       "path": "docs/cemhsey-arrays/screen.css",
-      "bytes": 3269,
-      "sha256": "20b48be8f6711c8b934dc4742814481e9909f715b5707c3def1a683373d482e8"
+      "bytes": 4463,
+      "sha256": "228c7e233a050e62e67e9473ed447a758a5845c6cfec9bd2a330f99451af75ec"
     },
     {
       "path": "docs/cemhsey-arrays/weights.js",
-      "bytes": 9099,
-      "sha256": "49905d922b1adeb966f1ccf57eeac50edff40b5d57badc5ceaf45f49fa8c6ced"
+      "bytes": 9245,
+      "sha256": "2326653f176d2534d4af83b9c5934f75dcb592f00875e032b1fb565046f3b916"
+    },
+    {
+      "path": "docs/cemhsey-intervals/index.html",
+      "bytes": 3821,
+      "sha256": "1d0d44719f827e82aef8681b9ddf97f254e28a455c6397cf3cc7dea43498d841"
+    },
+    {
+      "path": "docs/cemhsey-intervals/results.js",
+      "bytes": 9866,
+      "sha256": "331bb2160d5363245491d9c412541c6341738b464661589ea2b49378d06035f5"
+    },
+    {
+      "path": "docs/cemhsey-intervals/study.css",
+      "bytes": 3777,
+      "sha256": "99b884c5c64178fc5ebc13393c9e5c03b9759caf705a7ea0fa0c92f4ba9bcd64"
+    },
+    {
+      "path": "docs/cemhsey-intervals/study.js",
+      "bytes": 7859,
+      "sha256": "8725282093e08cd0c0a4d215e726b1b74fe9e7be19992cf0a3e6ac6418e719c7"
     },
     {
       "path": "docs/cemhsey-pinch/Open Pinch on Linux.sh",
@@ -1833,8 +1878,8 @@
     },
     {
       "path": "docs/preview.html",
-      "bytes": 5121,
-      "sha256": "b66ea74ec6500fbc6beb00a5ff2a202e1651eb338d4e0aa5f5a419cad8a02ba4"
+      "bytes": 5275,
+      "sha256": "047eb40c1aa2ec93218e3e6a8d426f65ca048054ea6fe5fff67a5d5f473e8518"
     },
     {
       "path": "docs/r2-calibration-state.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.json",
@@ -3448,16 +3493,43 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "ddbfa8516aad6a61d992aba3becaef36ed8b84e2",
+  "previous_public_commit": "5e7fb244b3e657805125d389067ccdc2e5f251d4",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
+      "PROJECT-CONTEXT.json",
+      "README.md",
+      "benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip",
+      "benchmarks/cemhsey-intervals/DESIGN.json",
       "benchmarks/cemhsey-intervals/PROTOCOL.md",
       "benchmarks/cemhsey-intervals/README.md",
-      "benchmarks/cemhsey-intervals/DESIGN.json",
-      "README.md"
-    ]
+      "benchmarks/cemhsey-intervals/RESULTS.json",
+      "docs/START.html",
+      "docs/cemhsey-arrays/LOCAL-USE.md",
+      "docs/cemhsey-arrays/Open Array Reader on Linux.sh",
+      "docs/cemhsey-arrays/Open Array Reader on Windows.cmd",
+      "docs/cemhsey-arrays/Open Array Reader on macOS.command",
+      "docs/cemhsey-arrays/PROTOCOL.md",
+      "docs/cemhsey-arrays/README.md",
+      "docs/cemhsey-arrays/array-math.js",
+      "docs/cemhsey-arrays/channel-map.js",
+      "docs/cemhsey-arrays/channel-map.json",
+      "docs/cemhsey-arrays/forecast-plot.js",
+      "docs/cemhsey-arrays/index.html",
+      "docs/cemhsey-arrays/interval-math.js",
+      "docs/cemhsey-arrays/interval-profile.js",
+      "docs/cemhsey-arrays/interval-ui.js",
+      "docs/cemhsey-arrays/reader.js",
+      "docs/cemhsey-arrays/screen.css",
+      "docs/cemhsey-arrays/weights.js",
+      "docs/cemhsey-intervals/index.html",
+      "docs/cemhsey-intervals/results.js",
+      "docs/cemhsey-intervals/study.css",
+      "docs/cemhsey-intervals/study.js",
+      "docs/preview.html"
+    ],
+    "preserved_other_rows": true
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",
@@ -3888,8 +3960,8 @@
     "url": "https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/",
     "offline": {
       "path": "benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip",
-      "bytes": 54996,
-      "sha256": "80e1a8135aae7264f1cf0c3f864f348234ffcbdf79d2a5aa95a9244d192eb86e"
+      "bytes": 68671,
+      "sha256": "94476fd5bff48085150abd7b422010526ff0bf4de92aa6f305cac65d5de45ad0"
     },
     "protocol": {
       "path": "benchmarks/cemhsey-arrays/PROTOCOL.md",
@@ -3908,7 +3980,9 @@
       "path": "benchmarks/cemhsey-arrays/RESULTS.json",
       "sha256": "fca4e1bb4b2d5e58a1dc21154646ca18cf0a2cd2145def37880485d41081eb8a",
       "bytes": 24090
-    }
+    },
+    "local_band_profile": "Import a calibration profile bound to these weights or fit one from separate local packets.",
+    "public_calibration_origin": "invented_signals"
   },
   "cemhsey_interval_design": {
     "protocol": {
@@ -3921,6 +3995,17 @@
       "sha256": "20784db8a62434247bef939593787156b6c2518dec5f3bb0e33b75126934acdb",
       "bytes": 1103
     },
-    "status": "Prospective calibration and evaluation plan"
+    "status": "Measured held comparison of pooled and cue-phase widths; public single-trial example uses invented values.",
+    "results": {
+      "path": "benchmarks/cemhsey-intervals/RESULTS.json",
+      "bytes": 16485,
+      "sha256": "f88ebcea3f61adb10506c9428b8aaff8fbc0c9eaa6cfa21506d0bd60fe0bac06"
+    },
+    "cohort_reader": "https://eliminatenoise.github.io/NeuroTranslation/cemhsey-intervals/",
+    "single_trial_reader": "https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/",
+    "calibration_participants": 4,
+    "evaluation_participants": 2,
+    "cutoffs_per_method": 4736,
+    "arms": 6
   }
 }

@@ -21,3 +21,23 @@ table{border-collapse:collapse;width:100%;margin:.7rem 0;font-variant-numeric:ta
 th,td{padding:.38rem .35rem;border-bottom:1px solid #c9d6ce;text-align:right}th:first-child,td:first-child{text-align:left}
 #selection{font-weight:600;min-height:1.5rem}.scores{margin-top:1rem}footer{font-size:.93rem}[hidden]{display:none!important}
 @media(max-width:650px){.maps{grid-template-columns:1fr}.section-head{align-items:flex-start}.maps [role=grid]{max-width:25rem}main{padding-top:1rem}}
+
+.forecast-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem 1rem;margin:1rem 0}
+.forecast-controls label{font-weight:650}
+.forecast-controls select{display:block;width:100%;margin-top:.3rem}
+.forecast-figure{margin:1rem 0}
+#forecast-plot{display:block;width:100%;height:clamp(13.5rem,40vw,21.5rem);border:1px solid #b9cbc3;border-radius:.4rem}
+.plot-key{display:flex;flex-wrap:wrap;gap:.3rem 1rem;padding:0;margin:.65rem 0;list-style:none;font-size:.9rem}
+.plot-key li{display:flex;gap:.45rem;align-items:center}
+.plot-key span{display:inline-block;width:1.3rem;border-top:2px solid #1b6258}
+.plot-key .key-band{height:.7rem;background:#c7e4d9;border:1px solid #658d7e}
+.plot-key .key-cutoff{border-top:2px dashed #566c65}
+.plot-key .key-observed{border-top:2px dashed #9d3e0e}
+.band-values{max-width:34rem}.band-values th,.band-values td{overflow-wrap:anywhere}
+.wide-table{max-width:100%;overflow-x:auto}
+.wide-table table{min-width:42rem}
+#calibration-confirm{flex-shrink:0}
+#calibration-status:empty,#band-status:empty{display:none}
+@media(max-width:520px){.forecast-controls{grid-template-columns:1fr}}
+
+.electrode-table-scroll{max-width:100%;overflow-x:auto}

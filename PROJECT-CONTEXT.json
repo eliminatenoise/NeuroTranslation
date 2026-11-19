@@ -568,6 +568,30 @@
         "sha256": "96a0e3dba860743c6675635433fe06bee46ee2697aff1dbea3dfaa73e78744c7"
       },
       "scope": "Offline normalized scalar P200 pinch-force recording. Three fit participants over two days, four different evaluation participants on different indexed days. The public reader includes an invented model and supports local fit import; the study fit stays private. No cross-device physical availability or individual finger force inference."
+    },
+    "cemhsey_intervals": {
+      "protocol": {
+        "path": "benchmarks/cemhsey-intervals/PROTOCOL.md",
+        "sha256": "86f40fafafb22ccddc1ad11a10ebf589da47e6abd8797cb022acbeaa110145d1",
+        "bytes": 5584
+      },
+      "design": {
+        "path": "benchmarks/cemhsey-intervals/DESIGN.json",
+        "sha256": "20784db8a62434247bef939593787156b6c2518dec5f3bb0e33b75126934acdb",
+        "bytes": 1103
+      },
+      "status": "Measured held comparison of pooled and cue-phase widths; public single-trial example uses invented values.",
+      "results": {
+        "path": "benchmarks/cemhsey-intervals/RESULTS.json",
+        "bytes": 16485,
+        "sha256": "f88ebcea3f61adb10506c9428b8aaff8fbc0c9eaa6cfa21506d0bd60fe0bac06"
+      },
+      "cohort_reader": "https://eliminatenoise.github.io/NeuroTranslation/cemhsey-intervals/",
+      "single_trial_reader": "https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/",
+      "calibration_participants": 4,
+      "evaluation_participants": 2,
+      "cutoffs_per_method": 4736,
+      "arms": 6
     }
   },
   "prospective_studies": {
@@ -742,6 +766,30 @@
         "sha256": "96a0e3dba860743c6675635433fe06bee46ee2697aff1dbea3dfaa73e78744c7"
       },
       "scope": "Offline normalized scalar P200 pinch-force recording. Three fit participants over two days, four different evaluation participants on different indexed days. The public reader includes an invented model and supports local fit import; the study fit stays private. No cross-device physical availability or individual finger force inference."
+    },
+    "cemhsey_intervals": {
+      "protocol": {
+        "path": "benchmarks/cemhsey-intervals/PROTOCOL.md",
+        "sha256": "86f40fafafb22ccddc1ad11a10ebf589da47e6abd8797cb022acbeaa110145d1",
+        "bytes": 5584
+      },
+      "design": {
+        "path": "benchmarks/cemhsey-intervals/DESIGN.json",
+        "sha256": "20784db8a62434247bef939593787156b6c2518dec5f3bb0e33b75126934acdb",
+        "bytes": 1103
+      },
+      "status": "Measured held comparison of pooled and cue-phase widths; public single-trial example uses invented values.",
+      "results": {
+        "path": "benchmarks/cemhsey-intervals/RESULTS.json",
+        "bytes": 16485,
+        "sha256": "f88ebcea3f61adb10506c9428b8aaff8fbc0c9eaa6cfa21506d0bd60fe0bac06"
+      },
+      "cohort_reader": "https://eliminatenoise.github.io/NeuroTranslation/cemhsey-intervals/",
+      "single_trial_reader": "https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/",
+      "calibration_participants": 4,
+      "evaluation_participants": 2,
+      "cutoffs_per_method": 4736,
+      "arms": 6
     }
   }
 }

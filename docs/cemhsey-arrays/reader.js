@@ -14,6 +14,7 @@
   let trialToken=0, modelToken=0, scoreToken=0, scoring=false;
   const gridSelect=el("grid"),cutoff=el("cutoff"),reveal=el("reveal"),lock=el("lock");
   const scoreButton=el("score");
+  const bands = globalThis.PinchIntervalUI.setup(rows, clearScore);
   const instances=[];
   const amplitude=v=>Number(v.toPrecision(5)).toString();
   const prediction=v=>v.toFixed(7);
@@ -36,6 +37,8 @@
     scoreButton.textContent="Score this trial";
     el("score-table").hidden=true;
     el("score-table").tBodies[0].replaceChildren();
+    el("interval-scores").hidden = true;
+    el("band-score-table").tBodies[0].replaceChildren();
     el("score-status").textContent="";
   }
   function createGrids(){
@@ -104,12 +107,15 @@
     }catch(error){
       el("predictions").replaceChildren();
       el("later").hidden=true;
+      el("later").textContent="";
       el("status").textContent=error.message;
+    } finally {
+      bands.render(Number(cutoff.value), reveal.checked);
     }
   }
   function show(record,name){
     api.forecast(fit,api.features(record,160));
-    trial=record;source=name;cutoff.value="160";lockedScale=null;lock.checked=false;reveal.checked=false;gridIndex=0;selected=0;gridSelect.value="0";createGrids();clearScore();
+    trial=record;source=name;cutoff.value="160";bands.setTrial(record,name==="Invented pinch");lockedScale=null;lock.checked=false;reveal.checked=false;gridIndex=0;selected=0;gridSelect.value="0";createGrids();clearScore();
     el("trial").hidden=false;el("values").open=false;el("status").textContent=name+" · 320 electrode channels · 592 cutoffs.";render();
   }
   gridSelect.addEventListener("change",()=>{gridIndex=Number(gridSelect.value);createGrids();renderCells();});
@@ -137,9 +143,9 @@
       el("status").textContent=message+(trial?" Still showing the previous trial.":"");
     }}
   });
-  function useFit(next,label) {
+  function useFit(next,label,exactBytes) {
     if (trial) api.forecast(next,api.features(trial,Number(cutoff.value)));
-    fit=next;modelLabel=label;el("fit-status").textContent=label+".";el("reset-model").disabled=fit===bundled;
+    fit=next;modelLabel=label;bands.setFit(next,exactBytes);el("fit-status").textContent=label+".";el("reset-model").disabled=fit===bundled;
     reveal.checked=false;clearScore();if(trial){el("status").textContent=source+" · 320 electrode channels · 592 cutoffs.";render();}
     else el("status").textContent="Choose a local packet or try an invented pinch.";
   }
@@ -149,13 +155,14 @@
     el("fit-status").textContent="Checking the local model…";
     try{
       if(file.size>128*1024)throw Error("Choose a model under 128 KiB.");
-      const item=JSON.parse(await file.text());
+      const exactBytes = await file.arrayBuffer();
+      const item = JSON.parse(new TextDecoder("utf-8", {fatal: true}).decode(exactBytes));
       if(token!==modelToken)return;
       const loaded=api.checkFit(item,bundled.protocol_sha256);
       for (const key of ["population_sha256", "baseline_sha256", "baseline_protocol_sha256"]) {
         if (loaded[key]!==bundled[key]) throw Error("Choose weights built with this version of the reader tools.");
       }
-      useFit(loaded,"Local model · "+modelOrigins[loaded.fit_origin]+" (from the file label)");
+      useFit(loaded,"Local model · "+modelOrigins[loaded.fit_origin]+" (from the file label)",exactBytes);
     }catch(error){if(token===modelToken){
       input.value="";
       el("fit-status").textContent="Could not load model. Active model: "+modelLabel+". "+error.message;
@@ -165,7 +172,7 @@
   el("reset-model").addEventListener("click",()=>{
     modelToken++;
     el("model-file").value="";
-    try { useFit(bundled,bundledLabel); }
+    try { useFit(bundled,bundledLabel,bands.bundledFitBytes(bundled)); }
     catch (error) { el("fit-status").textContent=error.message; }
   });
   scoreButton.addEventListener("click",async()=>{
@@ -176,15 +183,27 @@
     scoring=true;
     scoreButton.textContent="Cancel scoring";
     el("score-status").textContent="Scoring 592 matched cutoffs…";
-    try{const result=await api.score(fit,trial,()=>token===scoreToken);
-      if(!result||token!==scoreToken)return;rows(el("score-table").tBodies[0],Object.entries(result).map(([k,v])=>[api.labels[k],prediction(v.mae),prediction(v.rmse)]));el("score-table").hidden=false;
-      el("score-status").textContent=source+" · 592 matched cutoffs.";
+    try {
+      const result = await bands.score(() => token === scoreToken);
+      if (!result || token !== scoreToken) return;
+      rows(el("score-table").tBodies[0], result.predictions.map(([key, mae, rmse]) =>
+        [api.labels[key], prediction(mae), prediction(rmse)]));
+      el("score-table").hidden = false;
+      const total = globalThis.PinchIntervals.nIssues;
+      rows(el("band-score-table").tBodies[0], result.bands.map(item => [
+        api.labels[item.model], bands.schemeLabel[item.scheme],
+        (100 * item.covered / total).toFixed(1) + "% (" + item.covered + "/" + total + ")",
+        item.below + " / " + item.above, prediction(item.width), prediction(item.penalty), prediction(item.score)
+      ]));
+      el("interval-scores").hidden = result.bands.length === 0;
+      el("score-status").textContent = source + " · " + total + " matched cutoffs." +
+        (result.bandError ? " " + result.bandError : result.bands.length ? "" : " Point forecasts only.");
     }catch(error){if(token===scoreToken)el("score-status").textContent=error.message;}
     finally{if(token===scoreToken){scoring=false;scoreButton.textContent="Score this trial";}}
   });
   try{
     api.channelLocations(maps);
-    api.checkFit(bundled);for(const [i,g] of maps.entries()){const option=document.createElement("option");option.value=String(i);option.textContent="Grid "+g.grid_id+" · "+g.site_right_forearm;gridSelect.append(option);}
+    api.checkFit(bundled);bands.setFit(bundled,bands.bundledFitBytes(bundled));for(const [i,g] of maps.entries()){const option=document.createElement("option");option.value=String(i);option.textContent="Grid "+g.grid_id+" · "+g.site_right_forearm;gridSelect.append(option);}
     el("example").disabled=false;el("file").disabled=false;el("model-file").disabled=false;el("fit-status").textContent=bundledLabel+".";
     el("status").textContent="Choose a local packet or try an invented pinch.";
   }catch(error){el("status").textContent="The reader could not open its bundled fits and electrode map. Extract the complete download.";}

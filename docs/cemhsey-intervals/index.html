@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>How wide is a pinch forecast? · NeuroTranslation</title>
+<link rel="stylesheet" href="study.css"><script src="results.js" defer></script><script src="study.js" defer></script></head>
+<body><main>
+<header><a class="brand" href="../START.html">NeuroTranslation</a>
+<h1>How wide is a pinch forecast?</h1>
+<p>One band keeps the same width through a pinch. The other changes width as the cue moves from rest to ramp, hold and release. Both were calibrated to cover 90% of later gauge readings. Here’s how often they did on two other people.</p>
+<p id="release-note"></p>
+</header>
+<section aria-labelledby="compare"><h2 id="compare">Compare the bands</h2>
+<div class="controls"><label>Point forecast<select id="model"><option value="history_phase_paired_grid">Force, cue and five EMG grids</option><option value="history_phase">Force history and cue</option><option value="persistence">Current force carried forward</option></select></label>
+<label>Measure<select id="measure"><option value="coverage">Coverage</option><option value="mean_width">Mean band width</option><option value="mean_interval_score">Mean interval score</option></select></label>
+<label>Breakdown<select id="breakdown"><option value="phase">Cue phase</option><option value="day">Recording day</option></select></label></div>
+<p id="definition"></p><div class="legend" aria-hidden="true"><span><i class="key fixed"></i>One width</span><span><i class="key phased"></i>Width by cue phase</span><span id="target-key">Dashed line · 90% target</span></div>
+<div id="chart" aria-label="Band comparison"></div><p id="decision" aria-live="polite"></p></section>
+<section aria-labelledby="counts"><h2 id="counts">Where did the gauge land?</h2>
+<label class="slice">Recording window<select id="slice"></select></label>
+<p id="support"></p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Measured coverage, width and interval score, scroll horizontally if needed"><table>
+<thead><tr><th scope="col">Band</th><th scope="col">Below</th><th scope="col">Inside</th><th scope="col">Above</th><th scope="col">Coverage</th><th scope="col">Mean width</th><th scope="col">Mean score</th></tr></thead><tbody id="counts-body"></tbody></table></div>
+<p class="unit">Width and score are in fractions of maximum voluntary contraction (MVC). The interval score adds 20 times the distance of a miss to the band width. Lower scores are better.</p></section>
+<section aria-labelledby="read"><h2 id="read">What counts as one forecast?</h2>
+<p>The force recorder supplies one later reading per forecast. Each of eight evaluation trials contributes 592 cutoffs, 50 milliseconds apart. The target lies 24 force samples ahead, or 120 milliseconds on the released recording index. Adjacent forecasts overlap. The 4,736 cutoffs come from two people and do not act as 4,736 independent replications.</p>
+<p>Eight other recordings from four people set the widths. Each interval refers to one later reading. A whole trial can leave its band even when most of its individual readings fall inside.</p></section>
+<footer><a href="../cemhsey-arrays/">Open the single-trial reader</a><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cemhsey-intervals">Methods and aggregate data</a><a href="https://doi.org/10.1038/s41597-025-05733-y">Original recording study</a></footer>
+<noscript><p>To read the numerical results without JavaScript, open the methods and aggregate data link above.</p></noscript>
+</main></body></html>
