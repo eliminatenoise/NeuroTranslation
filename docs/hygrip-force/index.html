@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>HYGRIP voltage forecast · NeuroTranslation</title>
+  <link rel="stylesheet" href="screen.css">
+  <script defer src="train-coefficients.js"></script>
+  <script defer src="forecast-browser.js"></script>
+  <script defer src="preview.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="scope">NeuroTranslation · HYGRIP</p>
+      <h1>What will the grip sensor read 120 ms from now?</h1>
+      <p>Give the model 20 voltage readings from a cued right-hand grip. It forecasts the sensor’s reading six ticks later. Add a window of scalp EEG to see how the second forecast changes.</p>
+    </header>
+    <section class="analysis" aria-labelledby="predictions-title">
+      <div class="section-head">
+        <div>
+          <h2 id="predictions-title">Voltage forecasts</h2>
+          <p id="input-description">Invented right-hand example</p>
+        </div>
+        <button type="button" id="example" disabled>Run example</button>
+      </div>
+      <dl class="readings" id="readings" aria-live="polite"></dl>
+      <p id="detail">Starting forecast…</p>
+      <div class="inputs">
+        <label for="input-window">Open a window JSON file</label>
+        <input id="input-window" type="file" accept="application/json,.json" disabled>
+        <button type="button" id="download" disabled>Save example JSON</button>
+      </div>
+      <p id="error" role="alert"></p>
+    </section>
+    <section class="evidence" aria-labelledby="result-title">
+      <h2 id="result-title">Force history forecast better in first DEV</h2>
+      <p>On 19 November 2026, the unchanged force-history model averaged 0.000360 V error across three DEV participants. Aligned EEG raised it to 0.000461 V and increased error for all three. The comparison is small, its descriptive interval includes zero, and FINAL remains reserved.</p>
+      <p>The seven TRAIN folds used to select penalties also favoured force history on average. The browser runs those frozen TRAIN fits. Its invented example demonstrates the input format.</p>
+      <p>The forecast uses recorded transducer voltage on the released timeline. The study archive supplies no verified calibration in newtons or physical synchronization for live use.</p>
+    </section>
+    <footer>
+      <p>Source cohort by Pablo Ortega, Tong Zhao and A. Aldo Faisal. <a href="https://doi.org/10.3389/fnins.2020.00919">Study</a> · <a href="https://doi.org/10.6084/m9.figshare.12383639.v1">Data deposit</a></p>
+    </footer>
+  </main>
+</body>
+</html>

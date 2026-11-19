@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "edition": "2026-11-19-first-development",
+  "study": "hygrip-right-hand-voltage-forecast",
+  "glossary": {
+    "revision": 36,
+    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+  },
+  "protocol_commit": "dd3526d4e5d67986febe01983dbdf875504d6643",
+  "pre_dev_public_evidence": {
+    "workflow_created_at_utc": "2026-11-19T00:53:52Z",
+    "workflow_url": "https://github.com/eliminatenoise/NeuroTranslation/actions/runs/44432686103"
+  },
+  "protocol_sha256": "7e36a71dc2bc6fb1602eaaaa9df39935d4d6c92950bd36af9608ca82851b0402",
+  "source_identity": {
+    "cohort": "HYGRIP",
+    "descriptor_doi": "10.3389/fnins.2020.00919",
+    "deposit_doi": "10.6084/m9.figshare.12383639.v1",
+    "figshare_version": 1,
+    "figshare_public_metadata": "https://api.figshare.com/v2/articles/12383639/versions/1",
+    "dataset_license": "MIT",
+    "source_object": {
+      "name": "hygrip.h5",
+      "figshare_file_id": 22837760,
+      "bytes": 4636166744,
+      "publisher_md5": "094365a7c9ada8eeb00a6f8206d181c5",
+      "verified_archive_sha256": "6819a18b13599c13a75ca5d36e65d7b6859534f548dbb2e626d31649cd990e88"
+    }
+  },
+  "root_mean_squared_error_unit": "V",
+  "display_scale_mv_per_v": 1000,
+  "metric": "Compute RMSE within each person, giving trials equal weight and issues equal weight within trial. Average person RMSEs equally.",
+  "difference_definition": "Aligned EEG participant RMSE minus comparator RMSE. A negative difference is lower aligned EEG error.",
+  "uncertainty": "Descriptive 95% paired Student t interval and exact two-sided sign test, excluding exact ties.",
+  "training": {
+    "assigned_people": 8,
+    "eligible_people": 7,
+    "clock_held_runs": 1,
+    "clock_held_scheduled": {
+      "right_trials": 13,
+      "issues": 2665
+    },
+    "coverage": {
+      "right_trials": 79,
+      "planned": 16195,
+      "scored": 16195,
+      "censored": 0,
+      "unscorable": 0,
+      "zero_scored_trials": 0
+    },
+    "participant_mean_rmse_v": {
+      "timing": 0.0008541524935685711,
+      "persistence": 0.0005318511065395782,
+      "backward_slope": 0.0005584233241801184,
+      "force_history": 0.00039376341186941806,
+      "aligned": 0.00041795500383259713,
+      "rotated": 0.00040296975984659725,
+      "earlier": 0.0004153670027856964
+    },
+    "paired_contrasts": {
+      "aligned_minus_force_history": {
+        "mean_delta_v": 2.419159196317901e-05,
+        "descriptive_t95_v": [
+          -1.050433798200302e-05,
+          5.888752190836104e-05
+        ],
+        "negative": 1,
+        "positive": 6,
+        "ties": 0,
+        "sign_test_p": 0.125
+      },
+      "aligned_minus_rotated": {
+        "mean_delta_v": 1.4985243985999827e-05,
+        "descriptive_t95_v": [
+          -8.229466734958027e-07,
+          3.079343464549546e-05
+        ],
+        "negative": 1,
+        "positive": 6,
+        "ties": 0,
+        "sign_test_p": 0.125
+      },
+      "aligned_minus_earlier": {
+        "mean_delta_v": 2.5880010469006673e-06,
+        "descriptive_t95_v": [
+          -8.83254646011211e-07,
+          6.059256739812546e-06
+        ],
+        "negative": 2,
+        "positive": 5,
+        "ties": 0,
+        "sign_test_p": 0.453125
+      }
+    },
+    "directional_screen_passed": false,
+    "scope": "Leave one eligible TRAIN person out per fold. The same seven folds selected ridge penalties, so the scores carry selection optimism."
+  },
+  "first_development": {
+    "assigned_people": 3,
+    "eligible_people": 3,
+    "scored_people": 3,
+    "clock_held_runs": 0,
+    "source_unscorable_people": 0,
+    "eligible_zero_scored_people": 0,
+    "coverage": {
+      "right_trials": 39,
+      "planned": 7995,
+      "scored": 7995,
+      "censored": 0,
+      "unscorable": 0,
+      "zero_scored_trials": 0
+    },
+    "participant_mean_rmse_v": {
+      "timing": 0.0008898685457036114,
+      "persistence": 0.0005168495639571738,
+      "backward_slope": 0.0004966223590425902,
+      "force_history": 0.00036008311529824207,
+      "aligned": 0.00046133125081110235,
+      "rotated": 0.0004227554174689495,
+      "earlier": 0.00038498620613587375
+    },
+    "paired_contrasts": {
+      "aligned_minus_force_history": {
+        "mean_delta_v": 0.0001012481355128603,
+        "descriptive_t95_v": [
+          -0.0002766438901199934,
+          0.000479140161145714
+        ],
+        "negative": 0,
+        "positive": 3,
+        "ties": 0,
+        "sign_test_p": 0.25
+      },
+      "aligned_minus_rotated": {
+        "mean_delta_v": 3.857583334215281e-05,
+        "descriptive_t95_v": [
+          -3.9376824460982575e-05,
+          0.0001165284911452882
+        ],
+        "negative": 0,
+        "positive": 3,
+        "ties": 0,
+        "sign_test_p": 0.25
+      },
+      "aligned_minus_earlier": {
+        "mean_delta_v": 7.634504467522859e-05,
+        "descriptive_t95_v": [
+          -0.00029554436920388086,
+          0.00044823445855433805
+        ],
+        "negative": 2,
+        "positive": 1,
+        "ties": 0,
+        "sign_test_p": 1.0
+      }
+    },
+    "phase_summaries": {
+      "00": {
+        "participants": 3,
+        "trials": 39,
+        "issues": 1560,
+        "participant_mean_rmse_v": {
+          "timing": 0.0008888381834520419,
+          "persistence": 0.0006630764702218306,
+          "backward_slope": 0.0007042359170613145,
+          "force_history": 0.00043460462900036064,
+          "aligned": 0.0005084735082456561,
+          "rotated": 0.0004822149326795891,
+          "earlier": 0.0004437554620088328
+        }
+      },
+      "01": {
+        "participants": 3,
+        "trials": 39,
+        "issues": 540,
+        "participant_mean_rmse_v": {
+          "timing": 0.0011158253013469558,
+          "persistence": 0.00046671080273124097,
+          "backward_slope": 0.0004197169621547843,
+          "force_history": 0.0004027546870799511,
+          "aligned": 0.00044723146828614963,
+          "rotated": 0.0003974615260982605,
+          "earlier": 0.0004273465956747017
+        }
+      },
+      "10": {
+        "participants": 3,
+        "trials": 39,
+        "issues": 390,
+        "participant_mean_rmse_v": {
+          "timing": 0.0010608826547670823,
+          "persistence": 0.0006674999160902511,
+          "backward_slope": 0.0005973954936202053,
+          "force_history": 0.0004728834552992452,
+          "aligned": 0.0005650228490117088,
+          "rotated": 0.0005249871392718137,
+          "earlier": 0.0005216166075704661
+        }
+      },
+      "11": {
+        "participants": 3,
+        "trials": 39,
+        "issues": 5505,
+        "participant_mean_rmse_v": {
+          "timing": 0.0008453518543701401,
+          "persistence": 0.0004554028589064205,
+          "backward_slope": 0.00041537562702594365,
+          "force_history": 0.0003182976156856071,
+          "aligned": 0.0004338667829778872,
+          "rotated": 0.0003929535336949343,
+          "earlier": 0.00034670534796825864
+        }
+      }
+    },
+    "directional_screen_passed": false,
+    "scope": "First scoring of three original DEV participants, opened after public protocol posting. Apply frozen full eligible-TRAIN fits without adjustment or refit."
+  },
+  "final_test": {
+    "assigned_people": 3,
+    "access": "reserved and unopened"
+  },
+  "source_result_digests": {
+    "training_aggregate": "4546fe4bf5532b2a07147cc6df1f5600d2a055798412d8af3d14d9dd71ccb176",
+    "first_development_aggregate": "e10acc1f04167716d92b76709787e513eeb73b10084c9c01826a0048e0d0b6d9"
+  },
+  "browser_package": {
+    "filename": "HYGRIP-voltage-forecast-20261119-r2.zip",
+    "sha256": "4892c87661f890c68b0b18d02acaef9d214ddc89b1a7bcb9e5bb2a27d1301333"
+  },
+  "independent_review_digests": {
+    "development": "45deef4ec815ff64a658e81653905322bc953e706d6cc92d56b6d8b6ca2208f2",
+    "portable_package": "1fbd543ccb55defe2b52630e76f65f1c3133451404934bc7d6393a28a0900179",
+    "portable_browser": "aaecddefdc42e2a25e661376a6501b53bc3e8cd2409573cf0cec448a4d4b8d7c"
+  }
+}

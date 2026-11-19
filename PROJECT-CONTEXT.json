@@ -335,6 +335,39 @@
         "build_instructions": "benchmarks/way-contact-force/browser-release/README.md",
         "scope": "Frozen ridge and causal CNN weights run on the same prior window. An invented example or compatible local JSON supplies inputs. A future target sample can be shown only when supplied. Rotation is an aggregate control. The 120 ms horizon is on the recording clock."
       }
+    },
+    "hygrip_force": {
+      "edition": "2026-11-19-first-development",
+      "protocol_commit": "dd3526d4e5d67986febe01983dbdf875504d6643",
+      "protocol": {
+        "path": "benchmarks/hygrip-force/DESIGN.json",
+        "bytes": 9297,
+        "sha256": "7e36a71dc2bc6fb1602eaaaa9df39935d4d6c92950bd36af9608ca82851b0402"
+      },
+      "results": "benchmarks/hygrip-force/results-2026-11-19/README.md",
+      "aggregate": {
+        "path": "benchmarks/hygrip-force/results-2026-11-19/AGGREGATES.json",
+        "bytes": 7951,
+        "sha256": "87102908b01f86f0df639b46fa6bfe47001840ad3c54c14a5caad76065073751"
+      },
+      "browser": {
+        "entry": "docs/hygrip-force/index.html",
+        "url": "https://eliminatenoise.github.io/NeuroTranslation/hygrip-force/",
+        "offline_archive": {
+          "path": "benchmarks/hygrip-force/results-2026-11-19/HYGRIP-voltage-forecast-20261119-r2.zip",
+          "bytes": 15609,
+          "sha256": "4892c87661f890c68b0b18d02acaef9d214ddc89b1a7bcb9e5bb2a27d1301333"
+        }
+      },
+      "outcome": {
+        "unit": "V",
+        "training_eligible_people": 7,
+        "development_people": 3,
+        "development_right_hand_trials": 39,
+        "development_common_scored_issues": 7995,
+        "development_directional_screen_passed": false
+      },
+      "scope": "First scoring of three original HYGRIP development participants after public protocol posting. The browser uses fixed TRAIN fits and invented example inputs by default. FINAL remains reserved."
     }
   },
   "prospective_studies": {

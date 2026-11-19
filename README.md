@@ -34,6 +34,8 @@ Compare the ridge and temporal CNN forecasts at all five issue times. Start with
 
 A separate HYGRIP experiment asks the same EEG question during visually paced power grip. The design and source coverage are available before development scoring. [Read the HYGRIP protocol](benchmarks/hygrip-force/)
 
+In the first three-person HYGRIP development check, force history and timing averaged **0.360083 mV** of error. Adding aligned scalp EEG raised it to **0.461331 mV**. The models were frozen before this check. [Read the first HYGRIP results](benchmarks/hygrip-force/results-2026-11-19/) · [Try the voltage forecast](https://eliminatenoise.github.io/NeuroTranslation/hygrip-force/)
+
 ### Palm and elbow measurements
 
 How much do three scalp EEG channels add once you know where the hand was? In the palm replay study, both fits had elapsed time and earlier palm position and velocity. One fit also had EEG. We trained on three people and evaluated on three others. Across 173 development trials, the person-weighted root mean squared error rose from 1.093 to 1.223 mm when EEG was added, and it rose for each development participant. The latest inputs preceded the target by 100 ms on the stored clock. The recordings were processed after collection, so live decoding latency remains untested.
