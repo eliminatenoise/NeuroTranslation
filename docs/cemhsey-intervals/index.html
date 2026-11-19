@@ -19,11 +19,11 @@
 <label class="slice">Recording window<select id="slice"></select></label>
 <p id="support"></p>
 <div class="table-wrap" tabindex="0" role="region" aria-label="Measured coverage, width and interval score, scroll horizontally if needed"><table>
-<thead><tr><th scope="col">Band</th><th scope="col">Below</th><th scope="col">Inside</th><th scope="col">Above</th><th scope="col">Coverage</th><th scope="col">Mean width</th><th scope="col">Mean score</th></tr></thead><tbody id="counts-body"></tbody></table></div>
+<thead><tr><th scope="col">Band</th><th scope="col">Below (n, %)</th><th scope="col">Inside</th><th scope="col">Above (n, %)</th><th scope="col">Coverage</th><th scope="col">Mean width</th><th scope="col">Mean score</th></tr></thead><tbody id="counts-body"></tbody></table></div>
 <p class="unit">Width and score are in fractions of maximum voluntary contraction (MVC). The interval score adds 20 times the distance of a miss to the band width. Lower scores are better.</p></section>
 <section aria-labelledby="read"><h2 id="read">What counts as one forecast?</h2>
 <p>The force recorder supplies one later reading per forecast. Each of eight evaluation trials contributes 592 cutoffs, 50 milliseconds apart. The target lies 24 force samples ahead, or 120 milliseconds on the released recording index. Adjacent forecasts overlap. The 4,736 cutoffs come from two people and do not act as 4,736 independent replications.</p>
 <p>Eight other recordings from four people set the widths. Each interval refers to one later reading. A whole trial can leave its band even when most of its individual readings fall inside.</p></section>
-<footer><a href="../cemhsey-arrays/">Open the single-trial reader</a><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cemhsey-intervals">Methods and aggregate data</a><a href="https://doi.org/10.1038/s41597-025-05733-y">Original recording study</a></footer>
+<footer><a href="metrics.csv" download>Download all 48 comparisons (CSV)</a><a href="../cemhsey-arrays/">Open the single-trial reader</a><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cemhsey-intervals">Methods and aggregate data</a><a href="https://doi.org/10.1038/s41597-025-05733-y">Original recording study</a></footer>
 <noscript><p>To read the numerical results without JavaScript, open the methods and aggregate data link above.</p></noscript>
 </main></body></html>

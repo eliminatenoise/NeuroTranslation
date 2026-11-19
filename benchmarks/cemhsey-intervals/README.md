@@ -22,3 +22,5 @@ Release was the difficult part of the cue. Every band fell below its 90% target 
 Width and interval score are in fractions of maximum voluntary contraction. Both include the same forecast cutoffs. A smaller score reflects the combined cost of width and misses. The target coverage was 90%. Rounding the widths for display can hide small differences. The comparison uses the unrounded means. [Full numerical results](RESULTS.json) · [Explore by cue phase or recording day](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-intervals/)
 
 Each trial spans the same 30-second cue. A band can miss at many adjacent cutoffs during one excursion of the gauge. Four calibration participants and two evaluation participants do not establish population coverage, online timing, or simultaneous coverage of an entire trace. [Original recording study](https://doi.org/10.1038/s41597-025-05733-y) · [Interval score, equation 43](https://sites.stat.washington.edu/raftery/Research/PDF/Gneiting2007jasa.pdf)
+
+[Download the 48 pooled and phase-based comparisons, including the fraction below and above each band](../../docs/cemhsey-intervals/metrics.csv).

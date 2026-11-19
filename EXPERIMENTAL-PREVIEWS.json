@@ -108,8 +108,8 @@
     },
     {
       "path": "benchmarks/cemhsey-intervals/README.md",
-      "bytes": 3207,
-      "sha256": "43f6f04f80a159942cae678a23fb60468c44eaedaa0332e26cd199340728a4f6"
+      "sha256": "3b0151ad178fda06633c2d4f4e83411e3eb1feabf356c8411c5542016d5c7e01",
+      "bytes": 3354
     },
     {
       "path": "benchmarks/cemhsey-intervals/RESULTS.json",
@@ -1253,8 +1253,13 @@
     },
     {
       "path": "docs/cemhsey-intervals/index.html",
-      "bytes": 3821,
-      "sha256": "1d0d44719f827e82aef8681b9ddf97f254e28a455c6397cf3cc7dea43498d841"
+      "sha256": "60df85634d6b2ba4bc6d7185034cf4a97319c41d3aa55a8a497f8d3b9226e6e1",
+      "bytes": 3903
+    },
+    {
+      "path": "docs/cemhsey-intervals/metrics.csv",
+      "sha256": "23e76f3b0c8462e1598050d9551fc18286259b16f1003d5110b6cf47a827cd3c",
+      "bytes": 5778
     },
     {
       "path": "docs/cemhsey-intervals/results.js",
@@ -1268,8 +1273,8 @@
     },
     {
       "path": "docs/cemhsey-intervals/study.js",
-      "bytes": 7859,
-      "sha256": "8725282093e08cd0c0a4d215e726b1b74fe9e7be19992cf0a3e6ac6418e719c7"
+      "sha256": "269e1a5ce36ef4b183c664dd3dd9f81e9ff87f471bbfe49be0dca55a2f7ebebb",
+      "bytes": 7979
     },
     {
       "path": "docs/cemhsey-pinch/Open Pinch on Linux.sh",
@@ -3493,7 +3498,7 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "5e7fb244b3e657805125d389067ccdc2e5f251d4",
+  "previous_public_commit": "af55e603d36951d4126eeee1555d80cedc2aed6c",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
@@ -4006,6 +4011,11 @@
     "calibration_participants": 4,
     "evaluation_participants": 2,
     "cutoffs_per_method": 4736,
-    "arms": 6
+    "arms": 6,
+    "public_metrics_csv": {
+      "path": "docs/cemhsey-intervals/metrics.csv",
+      "sha256": "23e76f3b0c8462e1598050d9551fc18286259b16f1003d5110b6cf47a827cd3c",
+      "bytes": 5778
+    }
   }
 }
