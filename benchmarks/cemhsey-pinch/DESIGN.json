@@ -15,15 +15,20 @@
       "people": 3,
       "person_days": 6,
       "trials": 12,
-      "member_metadata_sha256": "756fda407af41209839e7a43dd75505dda9ee714112175d6168d3c2d8596f5c1"
+      "initial_metadata_snapshot_sha256": "756fda407af41209839e7a43dd75505dda9ee714112175d6168d3c2d8596f5c1",
+      "initial_local_headers_resolved": 6,
+      "intended_member_paths_sha256": "e88bd48da1b8ef420a983618084f9ff56b87f70515ec00cf72a14568c102636b"
     },
     "development": {
       "people": 4,
       "person_days": 8,
       "trials": 16,
-      "member_metadata_sha256": "2e5589a463c66a9ed9c34e5606999034af6a68538519c43f9ca84e27f061600c"
+      "initial_metadata_snapshot_sha256": "2e5589a463c66a9ed9c34e5606999034af6a68538519c43f9ca84e27f061600c",
+      "initial_local_headers_resolved": 0,
+      "intended_member_paths_sha256": "0569c64e7745751e61bd79b562db2f3984229a4ffe83a79b32da8cd617df5185"
     }
   },
   "fit_candidate_code_sha256": "292ec7a480ba7170ff6d09abc5b44a2f6cbc7e39f7ff3620f3e52af18d11ea80",
-  "scope": "The release-index grid is an offline convention. Physical alignment and availability of the signals require independent evidence. The membership was fixed before fitting; source-eligibility checks may stop either phase."
+  "scope": "The release-index grid is an offline convention. Physical alignment and availability of the signals require independent evidence. The membership was fixed before fitting; source-eligibility checks may stop either phase.",
+  "roster_encoding": "Sorted exact public archive member paths in ASCII, one per line with a final LF, then SHA-256. The roster is separate from the reliability of the first attempt to resolve ZIP64 local headers. No trial was added or replaced after that attempt."
 }
