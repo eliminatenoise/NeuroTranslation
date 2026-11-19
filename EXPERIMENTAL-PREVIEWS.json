@@ -23,8 +23,8 @@
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "sha256": "3bcc5e564e828ed5ba218e900549ac6e4197ae8e1ce73b1de84302c37ddd9206",
-      "bytes": 22467
+      "bytes": 22824,
+      "sha256": "24e4908fad4cb7f037598a4cc0be9e67c71df0020806145714c11ac47e4688ae"
     },
     {
       "path": "README.md",
@@ -38,8 +38,13 @@
     },
     {
       "path": "benchmarks/hygrip-force/README.md",
-      "bytes": 5584,
-      "sha256": "1e34f6c7c0d86b8a47ec8c860cbfaddd805fe29adbe09b961cf0a91494919559"
+      "bytes": 6039,
+      "sha256": "2f4afa42da6b57eaa5fcdf90e3b9904c78d0d8abec9c2b8ac2199ce773f96bfa"
+    },
+    {
+      "path": "benchmarks/hygrip-force/cue-phase/PROTOCOL.md",
+      "bytes": 9060,
+      "sha256": "8b84c26db90a9019a12a0a78706b0ab5dae072217b73257914bd3802b8f9cb38"
     },
     {
       "path": "benchmarks/hygrip-force/forearm-results/DEV.json",
@@ -2253,35 +2258,16 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "ba1171845af2245cd041188507c7c85cc0faed02",
+  "previous_public_commit": "6fcd4d79894f7844ece20108cdd3bc728f193f74",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
-      "LAUNCHERS.md",
       "PROJECT-CONTEXT.json",
-      "README.md",
-      "benchmarks/hygrip-force/forearm-results/DEV.json",
-      "benchmarks/hygrip-force/forearm-results/HYGRIP-Muscle-Train-and-Dev-Aggregates.zip",
-      "benchmarks/hygrip-force/forearm-results/README.md",
-      "benchmarks/hygrip-force/forearm-results/TRAIN.json",
-      "benchmarks/hygrip-force/trial-replay/HYGRIP-trial-replay.zip",
-      "docs/START.html",
-      "docs/hygrip-force/Open HYGRIP on Linux.sh",
-      "docs/hygrip-force/Open HYGRIP on Windows.cmd",
-      "docs/hygrip-force/Open HYGRIP on macOS.command",
-      "docs/hygrip-force/README.md",
-      "docs/hygrip-force/SHA256SUMS",
-      "docs/hygrip-force/forecast-browser.js",
-      "docs/hygrip-force/index.html",
-      "docs/hygrip-force/prepare_trial.py",
-      "docs/hygrip-force/preview.js",
-      "docs/hygrip-force/screen.css",
-      "docs/hygrip-force/train-coefficients.js",
-      "docs/hygrip-force/trial-view.js",
-      "docs/hygrip-force/trial.js"
+      "benchmarks/hygrip-force/README.md",
+      "benchmarks/hygrip-force/cue-phase/PROTOCOL.md"
     ],
-    "preserved_rows": 426
+    "preserved_rows": 446
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",
