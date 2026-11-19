@@ -157,9 +157,14 @@
       "sha256": "e8d7cd2cb14e5546d42a07ea38aed134b456ab75a284e7e12bd3b5a09dbf8640"
     },
     {
+      "path": "benchmarks/cemhsey-phase/PUBLIC-REPORTING.md",
+      "sha256": "bdd81c63eb0516e481d9a6b1a9e5a09cb583e89590a2c239a40f5bde3be765bf",
+      "bytes": 1246
+    },
+    {
       "path": "benchmarks/cemhsey-phase/README.md",
-      "bytes": 920,
-      "sha256": "8e702d33ba96bd3731a88ff7f493d95290ef5a96c852ffce0548d14d1a887681"
+      "sha256": "cc53026ec81aab9fa9f9a32b116a58363a4c071e276dfabe63c0f07ad1edd114",
+      "bytes": 1043
     },
     {
       "path": "benchmarks/cemhsey-pinch/BUNDLED-FIT.json",
@@ -4228,14 +4233,12 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "41d573cd908561a893d73c961d8a38a7e5e7cdac",
+  "previous_public_commit": "d51c7f2189c10f5e0dc12774e24a305f627443e3",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
-      "README.md",
-      "benchmarks/cemhsey-phase/DESIGN.json",
-      "benchmarks/cemhsey-phase/PROTOCOL.md",
+      "benchmarks/cemhsey-phase/PUBLIC-REPORTING.md",
       "benchmarks/cemhsey-phase/README.md"
     ],
     "preserved_other_rows": true
@@ -4850,6 +4853,11 @@
       "bytes": 1166,
       "sha256": "4ca8e9bb9666ff921bfad49ceb6b56cbbebdec3599b4685e7ae7bfda338fa635"
     },
-    "status": "Design fixed before reading either new block of measurements."
+    "status": "Design fixed before reading either new block of measurements.",
+    "public_reporting": {
+      "path": "benchmarks/cemhsey-phase/PUBLIC-REPORTING.md",
+      "sha256": "bdd81c63eb0516e481d9a6b1a9e5a09cb583e89590a2c239a40f5bde3be765bf",
+      "bytes": 1246
+    }
   }
 }
