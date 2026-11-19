@@ -50,7 +50,7 @@ In the earlier IACKD palm pilot, a ridge model using three EEG channels had 7.51
 
 Hyser shifts the question to one finger. On a separate two-day task, recent sensor voltage gave 14.35 mV mean absolute error across four development participants. Adding aligned forearm activity gave 14.46 mV. [Open the index-finger reader](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) · [Read the comparison](benchmarks/hyser-index/RESULTS.md) · [Compare Day 1 calibration on Day 2](benchmarks/hyser-index/crossday/README.md) · [Does adding the other four fingers help?](benchmarks/hyser-index/whole-hand/README.md) · [Test the same models on prescribed presses](benchmarks/hyser-index/prescribed/README.md). To try a personal correction in the reader, choose **Personalize across two days**.
 
-The [CEMHSEY pinch protocol](benchmarks/cemhsey-pinch/PROTOCOL.md) asks what forearm muscle recordings add to a forecast of a single dynamometer reading during a cued pinch. Its participants, instrument and force scale come from a separate acquisition.
+The CEMHSEY pinch reader compares recent force, cue phase and compact forearm EMG features in a separate acquisition. Its target is the normalized force between two fingers. The public reader opens with an invented model and can also load locally fitted weights and original trial packets. [Open the reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-pinch/) · [Read the held-out comparison](benchmarks/cemhsey-pinch/README.md) · [Download for Windows, macOS or Linux](benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip).
 
 ## Read the papers
 

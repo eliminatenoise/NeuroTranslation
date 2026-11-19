@@ -1,0 +1,212 @@
+:root {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: #172628;
+  background: #f7f8f5;
+  line-height: 1.55;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+main {
+  width: min(56rem, 100%);
+  margin: auto;
+  padding: 2.5rem clamp(1rem, 4vw, 3rem) 3rem;
+}
+header {
+  border-top: 5px solid #174e48;
+  padding: 1.5rem 0;
+}
+.brand {
+  margin: 0;
+  color: #255c55;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+}
+h1 {
+  font-size: clamp(2.45rem, 7vw, 4.4rem);
+  letter-spacing: -0.045em;
+  margin: 0.4rem 0 0.7rem;
+}
+h2 {
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  letter-spacing: -0.025em;
+  margin: 0 0 0.85rem;
+}
+h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+p {
+  margin: 0.55rem 0 0.9rem;
+  max-width: 75ch;
+}
+section,
+footer {
+  border-top: 1px solid #b6c8c2;
+  padding: 1.3rem 0;
+}
+a {
+  color: #17564d;
+  text-underline-offset: 0.18em;
+}
+button {
+  border: 1px solid #164f47;
+  border-radius: 0.4rem;
+  background: #205f54;
+  color: white;
+  padding: 0.65rem 1rem;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+button:hover:not(:disabled) {
+  background: #16473f;
+}
+:focus-visible {
+  outline: 3px solid #ae560e;
+  outline-offset: 3px;
+}
+.actions,
+.heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem 1.75rem;
+}
+.actions label {
+  font-weight: 600;
+}
+input[type="file"] {
+  display: block;
+  font: inherit;
+  max-width: 100%;
+  width: 20rem;
+}
+input[type="range"] {
+  width: 100%;
+  height: 2rem;
+  accent-color: #205f54;
+}
+.heading {
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+.heading h2 {
+  margin: 0;
+}
+output {
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+.hint,
+figcaption,
+.score p,
+#status {
+  color: #475c57;
+}
+figure {
+  margin: 1rem 0;
+}
+canvas {
+  display: block;
+  width: 100%;
+  height: clamp(13rem, 32vw, 18rem);
+  background: white;
+  border: 1px solid #ccd8d3;
+  border-radius: 0.45rem;
+}
+figcaption {
+  font-size: 0.88rem;
+  margin-top: 0.4rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  margin: 0.75rem 0;
+}
+caption {
+  text-align: left;
+  font-weight: 650;
+}
+th,
+td {
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid #ccd8d3;
+  text-align: right;
+}
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+thead th {
+  white-space: normal;
+  color: #405c54;
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-weight: 650;
+}
+.check input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: #205f54;
+}
+details {
+  margin: 1rem 0;
+}
+summary {
+  cursor: pointer;
+}
+.score {
+  border-top: 1px solid #ccd8d3;
+  padding-top: 1rem;
+  margin-top: 1.3rem;
+}
+footer {
+  font-size: 0.94rem;
+}
+[hidden] {
+  display: none !important;
+}
+@media (max-width: 420px) {
+  main {
+    padding-top: 1rem;
+  }
+  .actions {
+    align-items: stretch;
+  }
+  th,
+  td {
+    padding-inline: 0.25rem;
+  }
+  input[type="file"] {
+    width: 100%;
+  }
+}
+
+pre {
+  max-width: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding: 0.75rem;
+  background: #eef2ed;
+}
+code {
+  overflow-wrap: anywhere;
+}

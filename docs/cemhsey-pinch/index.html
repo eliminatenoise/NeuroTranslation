@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Pinch force · NeuroTranslation</title>
+    <link rel="stylesheet" href="screen.css" />
+    <script defer src="weights.js"></script>
+    <script defer src="predict.js"></script>
+    <script defer src="reader.js"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="brand">NeuroTranslation</p>
+        <h1>Forecast a pinch.</h1>
+        <p>
+          Two fingers press one dynamometer. See what the recent force, the task schedule and four
+          amplitude features from two short windows of forearm surface electromyography (EMG) can tell
+          you about the reading 24 ticks later. Force is expressed relative to the participant’s maximum
+          voluntary contraction for that day and grasp.
+        </p>
+      </header>
+      <section aria-labelledby="model-title">
+        <h2 id="model-title">Choose a model</h2>
+        <p id="model-status" role="status">Opening the bundled model…</p>
+        <details>
+          <summary>Fit a model from your own recordings</summary>
+          <p>
+            In the offline reader’s <code>python</code> folder, list local MAT paths in a text file, one
+            per line. Include both repetitions for each person and selected day. Fit the model locally,
+            then choose the resulting JSON below.
+          </p>
+          <pre><code>python fit_local.py --trial-list trials.txt --timing-mode nominal_release_index --output "my-fit.json"</code></pre>
+        </details>
+        <div class="actions">
+          <label for="model-file"
+            >Load a fitted model from this computer
+            <input id="model-file" type="file" accept=".json,application/json" disabled />
+          </label>
+          <button id="reset-model" disabled>Use bundled model</button>
+        </div>
+      </section>
+      <section aria-labelledby="input-title">
+        <h2 id="input-title">Open a trial</h2>
+        <div class="actions">
+          <button id="example" disabled>Try an invented pinch</button
+          ><label for="file"
+            >Or choose a local trial packet
+            <input id="file" type="file" accept=".json,application/json" disabled
+          /></label>
+        </div>
+        <p>
+          Use the local converter on one original CEMHSEY P200 two-finger trial from the 30% target
+          condition. Files stay in this browser.
+        </p>
+        <details id="converter">
+          <summary>How to convert one original trial</summary>
+          <p>
+            Extract the
+            <a
+              href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip"
+              >offline reader ZIP</a
+            >. Open a terminal in its <code>python</code> folder. With Python and the listed dependencies
+            installed, run these commands with your own file paths.
+          </p>
+          <pre><code>python -m pip install -r requirements.txt
+python trial_io.py --input "trial.mat" --output "private-trial.json" --timing-mode nominal_release_index</code></pre>
+          <p>
+            Choose the new JSON file above. It contains sampled force readings and four forearm
+            summaries, and stays on your computer. Without
+            <code>--timing-mode nominal_release_index</code>, the converter makes a force-only packet.
+            Use a new file name for each output.
+          </p>
+          <p>
+            For a terminal forecast from the packet, use
+            <code>python score_packet.py private-trial.json --issue 1660</code>. Replace
+            <code>--issue 1660</code> with <code>--score</code> to see MAE and RMSE across all 592
+            cutoffs.
+          </p>
+        </details>
+        <p id="status" role="status" aria-live="polite">Loading the shared fits…</p>
+      </section>
+      <section id="viewer" aria-labelledby="forecast-title" hidden>
+        <div class="heading">
+          <h2 id="forecast-title">At the cutoff</h2>
+          <output id="time" for="cutoff"></output>
+        </div>
+        <label for="cutoff">Time from the nominal start of the trial</label>
+        <input id="cutoff" type="range" min="0" max="591" step="1" value="160" />
+        <p id="phase" class="hint"></p>
+        <figure>
+          <canvas id="trace" role="img" aria-label="Recent measured force and the forecasts"></canvas>
+          <figcaption>
+            Earlier force readings are 50 ms apart on this plot. The green line and dot show force
+            through the cutoff. The orange dot is the model forecast; the outlined square appears when
+            you reveal the later reading. Values are in normalized force units.
+          </figcaption>
+        </figure>
+        <p id="model-in-use" class="hint"></p>
+        <table class="predictions">
+          <caption>
+            Forecasts at this cutoff
+          </caption>
+          <thead>
+            <tr>
+              <th>Input</th>
+              <th>Predicted force</th>
+            </tr>
+          </thead>
+          <tbody id="estimates"></tbody>
+        </table>
+        <label class="check"><input id="reveal" type="checkbox" /> Reveal the later reading</label>
+        <p id="answer" hidden></p>
+        <details id="inputs">
+          <summary>Inspect the input readings</summary>
+          <div id="input-values"></div>
+        </details>
+        <div class="score">
+          <h3>How large were the errors?</h3>
+          <p id="score-help">
+            Scoring reveals aggregate errors against all 592 later readings in this trial. Smaller errors
+            are better. Moving the cutoff hides these scores again.
+          </p>
+          <button id="score">Score this trial</button>
+          <p role="status" id="score-status"></p>
+          <table id="scores" hidden>
+            <caption>
+              Errors in normalized force units
+            </caption>
+            <thead>
+              <tr>
+                <th>Forecast</th>
+                <th>MAE</th>
+                <th>RMSE</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+      <footer>
+        <h2>What the clock means</h2>
+        <p>
+          The force sensor sampled at 200 Hz. Twenty-four force ticks span a nominal 120 ms. Surface EMG
+          used a separate 2,048 Hz sampling grid. The comparison uses the recorded sample indices. The
+          offset between devices and the live availability of each signal remain unverified.
+        </p>
+        <p>
+          <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cemhsey-pinch"
+            >Study methods and results</a
+          >
+          · <a href="https://doi.org/10.1038/s41597-025-05733-y">Original acquisition study</a> ·
+          <a href="https://doi.org/10.5281/zenodo.15077957">CEMHSEY GRASP I</a> ·
+          <a href="https://doi.org/10.5281/zenodo.15070187">GRASP II</a> ·
+          <a href="https://creativecommons.org/licenses/by/4.0/">Data license</a>
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

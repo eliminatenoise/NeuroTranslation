@@ -51,3 +51,7 @@ The [Python session scorer](benchmarks/hyser-index/downloads/Hyser-Crossday-Pyth
 In the Hyser reader, choose **Finger sensor context** to inspect the other four fingers on a Random or prescribed N-DoF trial. Choose one original session folder or matching force files. In N-DoF, pick a combination and repetition. Click **Score trial** to compare the fixed forecasts at all 450 cutoffs of the selected trial. N-DoF also scores the last index reading as a benchmark. [Random-task results](benchmarks/hyser-index/whole-hand/README.md) · [Prescribed-task study](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hyser-index/prescribed).
 
 For a prescribed combination in Python, use `score_prescribed.py` from the scoring ZIP. [Command and recording names](benchmarks/hyser-index/SCORE-SESSION.md).
+
+## CEMHSEY two-finger pinch
+
+Extract the [pinch reader and Python tools](benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip). Open the launcher for your computer or open `index.html`. Choose **Try an invented pinch** or use the converter in the `python` folder to open a private trial. The force cutoff, later-reading reveal and full-trial scoring each have separate controls. [Browser reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-pinch/) · [Study and source](benchmarks/cemhsey-pinch/README.md).

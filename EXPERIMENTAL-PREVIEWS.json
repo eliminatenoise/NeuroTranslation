@@ -18,23 +18,38 @@
     },
     {
       "path": "LAUNCHERS.md",
-      "bytes": 8628,
-      "sha256": "9ce2ffd18dd321f7b24bc946473693349054b4cf637e92eff9ddfc42617c096f"
+      "bytes": 9157,
+      "sha256": "706b8f580096e9ac9187040d3637e1468147738095bc7ef4cf559bae16d9350b"
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "sha256": "76f3d9f95d20fc7396fea5132ba2a721892d0343fe5b56f274cc2f67a4acdc5f",
-      "bytes": 36194
+      "bytes": 39970,
+      "sha256": "3ee80af0c19a85415242bd49d889911faab5ddaa5c427ae8cf7429f5635c44aa"
     },
     {
       "path": "README.md",
-      "sha256": "6c28ad8a5e26d412840920de073a86881696138655abc3a4f010ed38ed901b4f",
-      "bytes": 17357
+      "bytes": 17652,
+      "sha256": "aa29834e56c4a8051e9edc961db6d818dd886023a4e996cfe5e2333382258c9d"
+    },
+    {
+      "path": "benchmarks/cemhsey-pinch/BUNDLED-FIT.json",
+      "bytes": 4581,
+      "sha256": "326058fefce3b45debbaef492754bd3faa7e048db3dfbb3dee01e9c960b9a1c1"
+    },
+    {
+      "path": "benchmarks/cemhsey-pinch/BUNDLED-MODEL-INFO.json",
+      "bytes": 183,
+      "sha256": "decccdeeae16db042436eabc0f3469319e97eab801f7ca21116c5ffc564defa8"
     },
     {
       "path": "benchmarks/cemhsey-pinch/DESIGN.json",
       "bytes": 1747,
       "sha256": "32384905f6fe63973a0dcc5a7e0e9f7479bd88afee7e59a81291488f7e0e859f"
+    },
+    {
+      "path": "benchmarks/cemhsey-pinch/LOCAL-CONVERTER.md",
+      "bytes": 3753,
+      "sha256": "66d037d525ce678fc1ba5727f0f2c2976d59595303bafd7453c618c84dc507e9"
     },
     {
       "path": "benchmarks/cemhsey-pinch/PROTOCOL.md",
@@ -43,13 +58,48 @@
     },
     {
       "path": "benchmarks/cemhsey-pinch/README.md",
-      "bytes": 645,
-      "sha256": "fcd078c113199d966ea78dcfad88794d1304cdba4d9959989d7c5be1314e7bf0"
+      "bytes": 8025,
+      "sha256": "686db830e0b0e1c6539cddf66ee78278d13cc33f928c9107fff2be0802955ea5"
+    },
+    {
+      "path": "benchmarks/cemhsey-pinch/RESULTS.json",
+      "bytes": 5651,
+      "sha256": "e4a8e5a2a901f45d9ee58099d1f1d0c00fea106161759252df59d8fdb3cecd10"
     },
     {
       "path": "benchmarks/cemhsey-pinch/SOURCE-COMPATIBILITY.md",
       "bytes": 1379,
       "sha256": "da8dab278cae7d71a1290fc75644be3d6477f75e23bb9ad2d2fbbe4bf30acc14"
+    },
+    {
+      "path": "benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip",
+      "bytes": 34641,
+      "sha256": "96a0e3dba860743c6675635433fe06bee46ee2697aff1dbea3dfaa73e78744c7"
+    },
+    {
+      "path": "benchmarks/cemhsey-pinch/fit_local.py",
+      "bytes": 3406,
+      "sha256": "889c5e3bec015676936522ac9ee3ae863597f1a08eaefba93086f3a8c2657d23"
+    },
+    {
+      "path": "benchmarks/cemhsey-pinch/pinch.py",
+      "bytes": 14413,
+      "sha256": "292ec7a480ba7170ff6d09abc5b44a2f6cbc7e39f7ff3620f3e52af18d11ea80"
+    },
+    {
+      "path": "benchmarks/cemhsey-pinch/requirements.txt",
+      "bytes": 27,
+      "sha256": "c7e98da9145087a94ca85cb4a71c152a22170009342f4c91aa13490568d329b7"
+    },
+    {
+      "path": "benchmarks/cemhsey-pinch/score_packet.py",
+      "bytes": 5760,
+      "sha256": "082288c5352397fea97707c51fa7098892824388cdcb95ec2b1a7f282ddf96d2"
+    },
+    {
+      "path": "benchmarks/cemhsey-pinch/trial_io.py",
+      "bytes": 3327,
+      "sha256": "b283362bb6d1e698ce1ba48ddb1b36c88721e6b677cbfedfab5e824b165c3955"
     },
     {
       "path": "benchmarks/hygrip-force/DESIGN.json",
@@ -948,8 +998,8 @@
     },
     {
       "path": "docs/START.html",
-      "sha256": "904925f92dc021d6b6261366071cc3b96520f0a48dbaef99786f2976580109c6",
-      "bytes": 14701
+      "bytes": 15360,
+      "sha256": "0524c7c27401f3e5ea9eaa73b6e8ef3dd9306d58a3ab03e5782f07191fa2cc5c"
     },
     {
       "path": "docs/app.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -1030,6 +1080,56 @@
       "path": "docs/calibration-view.d4915a6997132b045e9706ddf362c5bde1d1aa0c3d3ff82bdb2aaeb4f2f43d9b.mjs",
       "bytes": 4560,
       "sha256": "5dd52c3d2c43cac2c875f04e65792347ba0ea4005744f49ebac794828ae1e16b"
+    },
+    {
+      "path": "docs/cemhsey-pinch/Open Pinch on Linux.sh",
+      "bytes": 107,
+      "sha256": "0682da46271570edf3f5f4119c93e2ff1914a4ea0558ea653b7d090a705fee67"
+    },
+    {
+      "path": "docs/cemhsey-pinch/Open Pinch on Windows.cmd",
+      "bytes": 39,
+      "sha256": "0edbd8f5b22789c3f11971244871f1b36e23f9e710fdc8b25ca6429165ec81be"
+    },
+    {
+      "path": "docs/cemhsey-pinch/Open Pinch on macOS.command",
+      "bytes": 112,
+      "sha256": "1a00e230edaae367113dc258120391cafc3526d982cf58021c14539d06d8e63c"
+    },
+    {
+      "path": "docs/cemhsey-pinch/README.md",
+      "bytes": 4442,
+      "sha256": "2c2026959f5f11525088d4eecc02599c8f8efa17fdfe27ff1ee95eec16f9bcb8"
+    },
+    {
+      "path": "docs/cemhsey-pinch/SHA256SUMS",
+      "bytes": 735,
+      "sha256": "fc297e0adeaf4fe90cd884bf43642c81233a4d3fe0bf3ec3f531139f9e09982a"
+    },
+    {
+      "path": "docs/cemhsey-pinch/index.html",
+      "bytes": 7262,
+      "sha256": "4d626a7d62649a001e9491c1ccdc94c16cce41bd7d3b2f8e05a7ad802129ddae"
+    },
+    {
+      "path": "docs/cemhsey-pinch/predict.js",
+      "bytes": 6619,
+      "sha256": "55387dbb83a34711f171dbaf27224e3a3743730016e57fcd2e822791561eec0e"
+    },
+    {
+      "path": "docs/cemhsey-pinch/reader.js",
+      "bytes": 13535,
+      "sha256": "c8dac4f8fec7d2be5b2fba44e21295b9aeffb148801e5e7456573c065272e763"
+    },
+    {
+      "path": "docs/cemhsey-pinch/screen.css",
+      "bytes": 3187,
+      "sha256": "77b5c33b5d19329f7766d1fec194a05958b0e819cd4b4e718340cd21043536b5"
+    },
+    {
+      "path": "docs/cemhsey-pinch/weights.js",
+      "bytes": 4818,
+      "sha256": "eb55e9cd986f9361257fd5a46e0430ad440dfd918fddbf77e6620537ce675676"
     },
     {
       "path": "docs/compat-policy.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -1588,8 +1688,8 @@
     },
     {
       "path": "docs/preview.html",
-      "bytes": 4853,
-      "sha256": "1633d6073dbbbf59e42d83c1db694b6b4fb09d98904c8103c1b1f8f5fbd6243a"
+      "bytes": 4999,
+      "sha256": "812d10ea8ac6c8d31529e7a06d9df47d345231aa40e3a499889f6a5735d74eba"
     },
     {
       "path": "docs/r2-calibration-state.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.json",
@@ -3013,24 +3113,42 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "56eaa4bd858541fa1f8cfdb2d01975aee1566b76",
+  "previous_public_commit": "d408829ec2186d63fcfa0571ea150d1b026197c6",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
+      "LAUNCHERS.md",
       "PROJECT-CONTEXT.json",
       "README.md",
-      "docs/README.md",
+      "benchmarks/cemhsey-pinch/BUNDLED-FIT.json",
+      "benchmarks/cemhsey-pinch/BUNDLED-MODEL-INFO.json",
+      "benchmarks/cemhsey-pinch/DESIGN.json",
+      "benchmarks/cemhsey-pinch/LOCAL-CONVERTER.md",
+      "benchmarks/cemhsey-pinch/PROTOCOL.md",
+      "benchmarks/cemhsey-pinch/README.md",
+      "benchmarks/cemhsey-pinch/RESULTS.json",
+      "benchmarks/cemhsey-pinch/SOURCE-COMPATIBILITY.md",
+      "benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip",
+      "benchmarks/cemhsey-pinch/fit_local.py",
+      "benchmarks/cemhsey-pinch/pinch.py",
+      "benchmarks/cemhsey-pinch/requirements.txt",
+      "benchmarks/cemhsey-pinch/score_packet.py",
+      "benchmarks/cemhsey-pinch/trial_io.py",
       "docs/START.html",
-      "docs/papers/current/brain2body-article.pdf",
-      "docs/papers/current/brain2body-simple-english.pdf",
-      "docs/papers/current/index.html",
-      "docs/papers/current/manifest.json",
-      "docs/papers/current/neurotranslation-explained.pdf",
-      "docs/papers/current/neurotranslation-technical.pdf",
-      "papers/README.md"
+      "docs/cemhsey-pinch/Open Pinch on Linux.sh",
+      "docs/cemhsey-pinch/Open Pinch on Windows.cmd",
+      "docs/cemhsey-pinch/Open Pinch on macOS.command",
+      "docs/cemhsey-pinch/README.md",
+      "docs/cemhsey-pinch/SHA256SUMS",
+      "docs/cemhsey-pinch/index.html",
+      "docs/cemhsey-pinch/predict.js",
+      "docs/cemhsey-pinch/reader.js",
+      "docs/cemhsey-pinch/screen.css",
+      "docs/cemhsey-pinch/weights.js",
+      "docs/preview.html"
     ],
-    "preserved_rows": 589
+    "preserved_rows": 591
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",
@@ -3417,5 +3535,44 @@
     },
     "scope": "Unchanged Random-task weights scored on 360 prescribed N-DoF trials in 12 original fit participants and 120 in four previously evaluated development participants. Across all combinations, persistence gave lowest MAE and five histories lowest RMSE in each group. No refits. Original final participants remain excluded."
   },
-  "latest_paper_browser": "https://eliminatenoise.github.io/NeuroTranslation/papers/current/"
+  "latest_paper_browser": "https://eliminatenoise.github.io/NeuroTranslation/papers/current/",
+  "cemhsey_pinch": {
+    "protocol": {
+      "path": "benchmarks/cemhsey-pinch/PROTOCOL.md",
+      "bytes": 9551,
+      "sha256": "7f790773248996b7893ba99168331419ddc3041406d55c13e928d09f8fe69b1a"
+    },
+    "design": {
+      "path": "benchmarks/cemhsey-pinch/DESIGN.json",
+      "bytes": 1747,
+      "sha256": "32384905f6fe63973a0dcc5a7e0e9f7479bd88afee7e59a81291488f7e0e859f"
+    },
+    "source_compatibility": {
+      "path": "benchmarks/cemhsey-pinch/SOURCE-COMPATIBILITY.md",
+      "bytes": 1379,
+      "sha256": "da8dab278cae7d71a1290fc75644be3d6477f75e23bb9ad2d2fbbe4bf30acc14"
+    },
+    "aggregate": {
+      "path": "benchmarks/cemhsey-pinch/RESULTS.json",
+      "bytes": 5651,
+      "sha256": "e4a8e5a2a901f45d9ee58099d1f1d0c00fea106161759252df59d8fdb3cecd10"
+    },
+    "results_guide": {
+      "path": "benchmarks/cemhsey-pinch/README.md",
+      "bytes": 8025,
+      "sha256": "686db830e0b0e1c6539cddf66ee78278d13cc33f928c9107fff2be0802955ea5"
+    },
+    "public_invented_fit": {
+      "path": "benchmarks/cemhsey-pinch/BUNDLED-FIT.json",
+      "bytes": 4581,
+      "sha256": "326058fefce3b45debbaef492754bd3faa7e048db3dfbb3dee01e9c960b9a1c1"
+    },
+    "reader": "https://eliminatenoise.github.io/NeuroTranslation/cemhsey-pinch/",
+    "download": {
+      "path": "benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip",
+      "bytes": 34641,
+      "sha256": "96a0e3dba860743c6675635433fe06bee46ee2697aff1dbea3dfaa73e78744c7"
+    },
+    "scope": "Offline normalized scalar P200 pinch-force recording. Three fit participants over two days, four different evaluation participants on different indexed days. The public reader includes an invented model and supports local fit import; the study fit stays private. No cross-device physical availability or individual finger force inference."
+  }
 }

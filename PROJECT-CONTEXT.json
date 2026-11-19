@@ -529,6 +529,45 @@
         },
         "scope": "Unchanged Random-task weights scored on 360 prescribed N-DoF trials in 12 original fit participants and 120 in four previously evaluated development participants. Across all combinations, persistence gave lowest MAE and five histories lowest RMSE in each group. No refits. Original final participants remain excluded."
       }
+    },
+    "cemhsey_pinch": {
+      "protocol": {
+        "path": "benchmarks/cemhsey-pinch/PROTOCOL.md",
+        "bytes": 9551,
+        "sha256": "7f790773248996b7893ba99168331419ddc3041406d55c13e928d09f8fe69b1a"
+      },
+      "design": {
+        "path": "benchmarks/cemhsey-pinch/DESIGN.json",
+        "bytes": 1747,
+        "sha256": "32384905f6fe63973a0dcc5a7e0e9f7479bd88afee7e59a81291488f7e0e859f"
+      },
+      "source_compatibility": {
+        "path": "benchmarks/cemhsey-pinch/SOURCE-COMPATIBILITY.md",
+        "bytes": 1379,
+        "sha256": "da8dab278cae7d71a1290fc75644be3d6477f75e23bb9ad2d2fbbe4bf30acc14"
+      },
+      "aggregate": {
+        "path": "benchmarks/cemhsey-pinch/RESULTS.json",
+        "bytes": 5651,
+        "sha256": "e4a8e5a2a901f45d9ee58099d1f1d0c00fea106161759252df59d8fdb3cecd10"
+      },
+      "results_guide": {
+        "path": "benchmarks/cemhsey-pinch/README.md",
+        "bytes": 8025,
+        "sha256": "686db830e0b0e1c6539cddf66ee78278d13cc33f928c9107fff2be0802955ea5"
+      },
+      "public_invented_fit": {
+        "path": "benchmarks/cemhsey-pinch/BUNDLED-FIT.json",
+        "bytes": 4581,
+        "sha256": "326058fefce3b45debbaef492754bd3faa7e048db3dfbb3dee01e9c960b9a1c1"
+      },
+      "reader": "https://eliminatenoise.github.io/NeuroTranslation/cemhsey-pinch/",
+      "download": {
+        "path": "benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip",
+        "bytes": 34641,
+        "sha256": "96a0e3dba860743c6675635433fe06bee46ee2697aff1dbea3dfaa73e78744c7"
+      },
+      "scope": "Offline normalized scalar P200 pinch-force recording. Three fit participants over two days, four different evaluation participants on different indexed days. The public reader includes an invented model and supports local fit import; the study fit stays private. No cross-device physical availability or individual finger force inference."
     }
   },
   "prospective_studies": {
@@ -664,6 +703,45 @@
         "sha256": "c237d6b59268c22d9e2844d32fe4ffd36dccf0584a8ad99b3465cc94cd2254d2"
       },
       "scope": "Unchanged Random-task weights scored on 360 prescribed N-DoF trials in 12 original fit participants and 120 in four previously evaluated development participants. Across all combinations, persistence gave lowest MAE and five histories lowest RMSE in each group. No refits. Original final participants remain excluded."
+    },
+    "cemhsey_pinch": {
+      "protocol": {
+        "path": "benchmarks/cemhsey-pinch/PROTOCOL.md",
+        "bytes": 9551,
+        "sha256": "7f790773248996b7893ba99168331419ddc3041406d55c13e928d09f8fe69b1a"
+      },
+      "design": {
+        "path": "benchmarks/cemhsey-pinch/DESIGN.json",
+        "bytes": 1747,
+        "sha256": "32384905f6fe63973a0dcc5a7e0e9f7479bd88afee7e59a81291488f7e0e859f"
+      },
+      "source_compatibility": {
+        "path": "benchmarks/cemhsey-pinch/SOURCE-COMPATIBILITY.md",
+        "bytes": 1379,
+        "sha256": "da8dab278cae7d71a1290fc75644be3d6477f75e23bb9ad2d2fbbe4bf30acc14"
+      },
+      "aggregate": {
+        "path": "benchmarks/cemhsey-pinch/RESULTS.json",
+        "bytes": 5651,
+        "sha256": "e4a8e5a2a901f45d9ee58099d1f1d0c00fea106161759252df59d8fdb3cecd10"
+      },
+      "results_guide": {
+        "path": "benchmarks/cemhsey-pinch/README.md",
+        "bytes": 8025,
+        "sha256": "686db830e0b0e1c6539cddf66ee78278d13cc33f928c9107fff2be0802955ea5"
+      },
+      "public_invented_fit": {
+        "path": "benchmarks/cemhsey-pinch/BUNDLED-FIT.json",
+        "bytes": 4581,
+        "sha256": "326058fefce3b45debbaef492754bd3faa7e048db3dfbb3dee01e9c960b9a1c1"
+      },
+      "reader": "https://eliminatenoise.github.io/NeuroTranslation/cemhsey-pinch/",
+      "download": {
+        "path": "benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip",
+        "bytes": 34641,
+        "sha256": "96a0e3dba860743c6675635433fe06bee46ee2697aff1dbea3dfaa73e78744c7"
+      },
+      "scope": "Offline normalized scalar P200 pinch-force recording. Three fit participants over two days, four different evaluation participants on different indexed days. The public reader includes an invented model and supports local fit import; the study fit stays private. No cross-device physical availability or individual finger force inference."
     }
   }
 }
