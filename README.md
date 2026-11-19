@@ -52,7 +52,7 @@ Hyser shifts the question to one finger. On a separate two-day task, recent sens
 
 ## Read the papers
 
-A hand can close by the same amount and squeeze harder. The four papers follow that distinction from wrist angle to the force on a lifted object, then to the voltage recorded during a paced grip. In the paced task, adding scalp EEG increased forecast error for all three development participants. The forearm comparison asks whether matching muscle activity to the right moment matters. [Read the four papers](papers/experimental/grip-evidence-2026-11-19/README.md) · [Download the PDFs and reading aid](papers/downloads/NeuroTranslation-Brain2Body-Grip-Evidence-2026-11-19.zip) · [Download the selected manuscript sources](papers/downloads/NeuroTranslation-Brain2Body-Selected-Grip-Evidence-Source-2026-11-19.zip)
+A hand can close by the same amount and squeeze harder. The four papers follow that distinction from wrist angle to a lifted object, a paced grip and a single finger pressing on a fixed sensor. In the two-day Hyser experiment, recent index-sensor voltage gave a lower average error than the fit with forearm EMG on the four development participants. [Read the four paper editions](papers/experimental/hyser-index-evidence-2026-11-19/README.md) · [Download the PDFs and reading aid](papers/downloads/NeuroTranslation-Brain2Body-Hyser-Index-Evidence-2026-11-19.zip) · [Download the selected manuscript sources](papers/downloads/NeuroTranslation-Brain2Body-Selected-Hyser-Index-Source-2026-11-19.zip)
 
 The previously selected scientific-layout edition is listed below.
 
