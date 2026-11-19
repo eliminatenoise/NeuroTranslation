@@ -28,8 +28,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 19076,
-      "sha256": "85c81556416113cc677d411e07610b4b5335182bba34021e0754444465417a1f"
+      "sha256": "f00d17534f7180ca7cfc29a3af12c78f7ee5f6210cbf29358290b35dc3f7b139",
+      "bytes": 19257
     },
     {
       "path": "benchmarks/cemhsey-arrays/DESIGN.json",
@@ -95,6 +95,21 @@
       "path": "benchmarks/cemhsey-arrays/python/trial_packet.py",
       "bytes": 5596,
       "sha256": "96da6e09cc5c7c2c7c69fd8af5ff6c8ed4508fd16ff6151ae7ef0775af70a3b1"
+    },
+    {
+      "path": "benchmarks/cemhsey-intervals/DESIGN.json",
+      "sha256": "20784db8a62434247bef939593787156b6c2518dec5f3bb0e33b75126934acdb",
+      "bytes": 1103
+    },
+    {
+      "path": "benchmarks/cemhsey-intervals/PROTOCOL.md",
+      "sha256": "86f40fafafb22ccddc1ad11a10ebf589da47e6abd8797cb022acbeaa110145d1",
+      "bytes": 5584
+    },
+    {
+      "path": "benchmarks/cemhsey-intervals/README.md",
+      "sha256": "e69a1006c5668f126773362fc389c2cfcd778bb9b2fe03f061007678d302d4ad",
+      "bytes": 1024
     },
     {
       "path": "benchmarks/cemhsey-pinch/BUNDLED-FIT.json",
@@ -3433,45 +3448,16 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "645d36ae928e3a3263179b6e25205bdf14ef58ed",
+  "previous_public_commit": "ddbfa8516aad6a61d992aba3becaef36ed8b84e2",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
-      "PROJECT-CONTEXT.json",
-      "README.md",
-      "benchmarks/cemhsey-arrays/README.md",
-      "docs/START.html",
-      "docs/papers/current/brain2body-article.pdf",
-      "docs/papers/current/brain2body-simple-english.pdf",
-      "docs/papers/current/index.html",
-      "docs/papers/current/manifest.json",
-      "docs/papers/current/neurotranslation-explained.pdf",
-      "docs/papers/current/neurotranslation-technical.pdf",
-      "docs/preview.html",
-      "papers/README.md",
-      "papers/current.json",
-      "papers/downloads/NeuroTranslation-Brain2Body-CEMHSEY-Five-Grid-Evidence-2026-11-19.zip",
-      "papers/downloads/NeuroTranslation-Brain2Body-CEMHSEY-Five-Grid-Evidence-2026-11-19.zip.sha256",
-      "papers/downloads/NeuroTranslation-Brain2Body-Selected-CEMHSEY-Five-Grid-Source-2026-11-19.zip",
-      "papers/downloads/NeuroTranslation-Brain2Body-Selected-CEMHSEY-Five-Grid-Source-2026-11-19.zip.sha256",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/NOTICE.md",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/README.md",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/brain2body-article.pdf",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/brain2body-simple-english.pdf",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/font-provenance.json",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/index.html",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/manifest.json",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/neurotranslation-explained.pdf",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/neurotranslation-technical.pdf",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/research-evidence-reading-aid.md",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/research-evidence.json",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/third-party-notices/DejaVu-LICENSE.txt",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/third-party-notices/FiraMath-LICENSE.txt",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/third-party-notices/Noto-OFL.txt",
-      "papers/experimental/cemhsey-five-grid-pinch-2026-11-19/training-diagnostic-summary.json"
-    ],
-    "preserved_rows": 652
+      "benchmarks/cemhsey-intervals/PROTOCOL.md",
+      "benchmarks/cemhsey-intervals/README.md",
+      "benchmarks/cemhsey-intervals/DESIGN.json",
+      "README.md"
+    ]
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",
@@ -3923,5 +3909,18 @@
       "sha256": "fca4e1bb4b2d5e58a1dc21154646ca18cf0a2cd2145def37880485d41081eb8a",
       "bytes": 24090
     }
+  },
+  "cemhsey_interval_design": {
+    "protocol": {
+      "path": "benchmarks/cemhsey-intervals/PROTOCOL.md",
+      "sha256": "86f40fafafb22ccddc1ad11a10ebf589da47e6abd8797cb022acbeaa110145d1",
+      "bytes": 5584
+    },
+    "design": {
+      "path": "benchmarks/cemhsey-intervals/DESIGN.json",
+      "sha256": "20784db8a62434247bef939593787156b6c2518dec5f3bb0e33b75126934acdb",
+      "bytes": 1103
+    },
+    "status": "Prospective calibration and evaluation plan"
   }
 }

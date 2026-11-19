@@ -1,0 +1,5 @@
+# How wide should the pinch forecast be?
+
+A point forecast gives you one force reading to expect. How often does the gauge land close to that number? We test two bands around the same forecast. One uses errors from across the pinch. The other uses errors from the same part of the cue, such as the ramp or the steady hold. Both aim to include 90% of later readings.
+
+The point models were already fitted. Eight recordings from four people set the band widths. Eight different recordings from two other people test how much they cover and how wide they have to be. The interval score charges for both width and misses, so drawing a very wide band carries a cost. Each 30-second trial contributes 592 overlapping forecasts. We report how the bands behave on these two people. [Study design](PROTOCOL.md) · [Input commitments](DESIGN.json) · [Original acquisition study](https://doi.org/10.1038/s41597-025-05733-y) · [Interval score, equation 43](https://sites.stat.washington.edu/raftery/Research/PDF/Gneiting2007jasa.pdf)
