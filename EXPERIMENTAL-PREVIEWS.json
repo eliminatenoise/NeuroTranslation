@@ -23,13 +23,23 @@
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "bytes": 19089,
-      "sha256": "c58c06214cde6832351ae5b2b060269f3d6153638f87ce34a6b2fd2261bdf6f2"
+      "bytes": 19736,
+      "sha256": "7be56d9ae233555f4472fda173cba0e61bb8d9cc0a4d2c31a67568265dc77cba"
     },
     {
       "path": "README.md",
-      "bytes": 15330,
-      "sha256": "3147577007d5775575fee7a732b1de154d21c8d6324de082150a87ec34c009d3"
+      "bytes": 15547,
+      "sha256": "17e99fde8e6286116304cbc6d6cd3c9c069261cf5200854b1fce3bceb645656e"
+    },
+    {
+      "path": "benchmarks/hygrip-force/DESIGN.json",
+      "bytes": 9297,
+      "sha256": "7e36a71dc2bc6fb1602eaaaa9df39935d4d6c92950bd36af9608ca82851b0402"
+    },
+    {
+      "path": "benchmarks/hygrip-force/README.md",
+      "bytes": 5584,
+      "sha256": "1e34f6c7c0d86b8a47ec8c860cbfaddd805fe29adbe09b961cf0a91494919559"
     },
     {
       "path": "benchmarks/scalp-eeg-hand/.gitignore",
@@ -448,8 +458,8 @@
     },
     {
       "path": "benchmarks/way-contact-force/README.md",
-      "bytes": 8867,
-      "sha256": "14c8fa219726f8ffd5f3d7b2059be1d7197f681b405aac13f78ce19e6e718e36"
+      "bytes": 9037,
+      "sha256": "f46bee1253c70d81aa051449a21ddb71a47e67f089b02279630c61c7dfcc3b82"
     },
     {
       "path": "benchmarks/way-contact-force/RESULTS.json",
@@ -713,8 +723,8 @@
     },
     {
       "path": "docs/START.html",
-      "bytes": 6121,
-      "sha256": "7f938334236c1f18d94abf6f8923125817f36724eed150f175c2de3c5fda5b91"
+      "bytes": 6273,
+      "sha256": "40d35e025fd4016d4da821849d7ae2d8e55bc173ef0fb47bcfe8822a630670a1"
     },
     {
       "path": "docs/app.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -2133,39 +2143,19 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "b395eac6b919d98c5a6e9cf427cb68397bd85c92",
+  "previous_public_commit": "3adb5e26cbee10cfa646010c60b43882d086c01c",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
-      ".gitattributes",
-      "LAUNCHERS.md",
       "PROJECT-CONTEXT.json",
       "README.md",
-      "benchmarks/way-contact-force/NeuroTranslation-Grip-After-Contact-Comparison.zip",
+      "benchmarks/hygrip-force/DESIGN.json",
+      "benchmarks/hygrip-force/README.md",
       "benchmarks/way-contact-force/README.md",
-      "benchmarks/way-contact-force/SHA256SUMS",
-      "benchmarks/way-contact-force/browser-release/README.md",
-      "benchmarks/way-contact-force/browser-release/build.py",
-      "demo/src/index.html",
-      "docs/README.md",
-      "docs/RIGHTS.md",
-      "docs/START.html",
-      "docs/build-manifest.json",
-      "docs/contact-force/MANIFEST.json",
-      "docs/contact-force/README.md",
-      "docs/contact-force/Run-Linux.sh",
-      "docs/contact-force/Run-Windows.cmd",
-      "docs/contact-force/Run-macOS.command",
-      "docs/contact-force/app.js",
-      "docs/contact-force/forecast.js",
-      "docs/contact-force/index.html",
-      "docs/contact-force/model-data.js",
-      "docs/contact-force/style.css",
-      "docs/index.html",
-      "docs/preview.html"
+      "docs/START.html"
     ],
-    "preserved_rows": 398
+    "preserved_rows": 420
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",
@@ -2246,6 +2236,21 @@
       },
       "build_instructions": "benchmarks/way-contact-force/browser-release/README.md",
       "scope": "Frozen ridge and causal CNN weights run on the same prior window. An invented example or compatible local JSON supplies inputs. A future target sample can be shown only when supplied. Rotation is an aggregate control. The 120 ms horizon is on the recording clock."
+    }
+  },
+  "prospective_studies": {
+    "hygrip_force": {
+      "entry": "benchmarks/hygrip-force/README.md",
+      "design": {
+        "path": "benchmarks/hygrip-force/DESIGN.json",
+        "bytes": 9297,
+        "sha256": "7e36a71dc2bc6fb1602eaaaa9df39935d4d6c92950bd36af9608ca82851b0402"
+      },
+      "edition": "2026-11-19-pre-dev",
+      "status": "Protocol and source coverage after TRAIN work began and before DEV or FINAL access.",
+      "scope": "Cued right-hand power grip in a separate dataset. Target is a transducer-voltage reading 120 ms ahead on the released clock.",
+      "runnable_model": false,
+      "model_results": false
     }
   }
 }

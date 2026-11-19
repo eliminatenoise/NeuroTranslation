@@ -32,6 +32,8 @@ What changes if we start the clock when the plates confirm a squeeze? On 882 lif
 
 Compare the ridge and temporal CNN forecasts at all five issue times. Start with an invented squeeze or open a compatible local JSON capture, then reveal the target row when the capture contains it. [Compare forecasts in your browser](https://eliminatenoise.github.io/NeuroTranslation/contact-force/) · [Download the offline browser and launchers](benchmarks/way-contact-force/NeuroTranslation-Grip-After-Contact-Comparison.zip)
 
+A separate HYGRIP experiment asks the same EEG question during visually paced power grip. The design and source coverage are available before development scoring. [Read the HYGRIP protocol](benchmarks/hygrip-force/)
+
 ### Palm and elbow measurements
 
 How much do three scalp EEG channels add once you know where the hand was? In the palm replay study, both fits had elapsed time and earlier palm position and velocity. One fit also had EEG. We trained on three people and evaluated on three others. Across 173 development trials, the person-weighted root mean squared error rose from 1.093 to 1.223 mm when EEG was added, and it rose for each development participant. The latest inputs preceded the target by 100 ms on the stored clock. The recordings were processed after collection, so live decoding latency remains untested.

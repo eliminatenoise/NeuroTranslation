@@ -58,6 +58,8 @@ The registered criterion required aligned EEG to beat both mechanics and rotated
 
 The [aggregate results](RESULTS.json) give unrounded comparisons and data provenance. The archives include the input recipes, code, fitted parameters, training diagnostics and aggregate results. Their offline examples accept locally prepared inputs. The original recordings, participant-level results and final test set are outside this release. [SHA-256 checksums](SHA256SUMS)
 
+A separate HYGRIP study asks what scalp EEG adds to a forecast during paced power grip against a hand-held transducer. [Read its prospective protocol](../hygrip-force/)
+
 ## Source recordings
 
 Matthew D. Luciw, Ewa Jarocka and Benoni B. Edin recorded healthy adults pinching and lifting an object while its weight and surface varied. They measured fingertip force, hand and object position, scalp potentials and surface muscle activity. The European Commission supported the original recordings through the WAY project (FP7-ICT-288551). The descriptor and data deposit document the original measurements, clocks and reuse terms. [Scientific Data descriptor](https://doi.org/10.1038/sdata.2014.47) · [WAY-EEG-GAL Figshare collection, version 2](https://doi.org/10.6084/m9.figshare.988376)

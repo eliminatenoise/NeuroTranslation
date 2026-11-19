@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "study_id": "hygrip-right-hand-voltage-forecast",
+  "record_edition": "2026-11-19-pre-dev",
+  "release_stage": "protocol_and_source_coverage",
+  "source": {
+    "cohort": "HYGRIP",
+    "descriptor_doi": "10.3389/fnins.2020.00919",
+    "deposit_doi": "10.6084/m9.figshare.12383639.v1",
+    "figshare_version": 1,
+    "figshare_public_metadata": "https://api.figshare.com/v2/articles/12383639/versions/1",
+    "dataset_license": "MIT",
+    "source_object": {
+      "name": "hygrip.h5",
+      "figshare_file_id": 22837760,
+      "bytes": 4636166744,
+      "publisher_md5": "094365a7c9ada8eeb00a6f8206d181c5",
+      "verified_archive_sha256": "6819a18b13599c13a75ca5d36e65d7b6859534f548dbb2e626d31649cd990e88"
+    }
+  },
+  "glossary": {
+    "revision": 36,
+    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+  },
+  "provenance": {
+    "local_sequence": [
+      "Freeze participant assignment and original protocol before waveform access.",
+      "Specify numerical model choices before model access to numerical human data.",
+      "Screen TRAIN clock metadata and record amendment before fitting.",
+      "Admit the seven eligible TRAIN runs and start TRAIN work.",
+      "Prepare the first public protocol edition before any DEV or FINAL access."
+    ],
+    "public_timestamp_source": "Separate externally observed GitHub publication receipt for this exact edition.",
+    "public_commitments_sha256": {
+      "original_prospective_design": "5a4d86b8b68694aef53f5097f3006c09f6bcdfcd6056227462130dedb29e5125",
+      "revised_prospective_design_before_waveform_access": "c24dcccd925d0900e6d44ca4d0584a9d30b2692347977d6b1418c2dada3de812",
+      "frozen_participant_assignment_record": "0f9957f5fd093e24a87c90023c34fcab9da515bf6e82525462ccc948675d1e68",
+      "initial_numeric_model_design": "71386f58a8678fb2f69d8e91df64227ea76df8c373a713dca9e52b2557eeacdf",
+      "pre_fit_train_screen_amendment": "a59cf22e3a5d4bc4444da6938bfd9e69e97a81999e81d90bffd5a8601410044b",
+      "source_coverage_qualification_manifest": "ac228bd6520083f413e385eeda0a46a23dc9ecd75df843fefddf053cf479790c",
+      "independent_clock_screen_receipt": "e228998a9eac2d266b51be228c670adc5775acd4b2f693150df44ee249acf35c"
+    },
+    "commitment_scope": "Digests bind the preserved records. Participant assignments and internal source records are private. The first external timestamp applies to this public edition."
+  },
+  "cohort_and_screen": {
+    "reported_source_participants": 14,
+    "primary_task": "One-hand visually paced power grip; right-hand trials only.",
+    "assigned_people": {
+      "training": 8,
+      "development": 3,
+      "final": 3
+    },
+    "eligible_training_people": 7,
+    "clock_held_training_runs": 1,
+    "clock_gate_ms_strictly_greater_than": 40,
+    "observed_held_run_adjacent_force_eeg_inter_go_disagreement_ms": 249.5,
+    "largest_eligible_adjacent_force_eeg_inter_go_disagreement_ms": 2.25,
+    "eligible_training_right_hand_trials": 79,
+    "source_eligible_scheduled_training_issue_rows": 16195,
+    "coverage_scope": "Source-screened scheduled issues with matching source coverage, prior to model scoring. All model scores and analysis denominators belong to a later record.",
+    "development_access_at_this_cut": "closed",
+    "final_access_at_this_cut": "closed"
+  },
+  "timing_and_measurement": {
+    "force_rate_hz": 50,
+    "eeg_rate_hz": 1000,
+    "eeg_channels": 24,
+    "force_target_unit": "V",
+    "target_signal": "Released signed transducer voltage.",
+    "newton_conversion_status": "Usable conversion factor absent from this release.",
+    "eeg_input_units": "Released scalp amplitudes. The source unit label is milivolts. Features retain the numerical release scale.",
+    "pairing": "Match strictly increasing Go sequences across clock sources by chronological ordinal and hand. Original participant roles and clock record are retained.",
+    "go_force_index": "floor(50 * force_go_s + 1/2)",
+    "issue_sample_offsets_from_go_index": {
+      "first": 20,
+      "step": 5,
+      "last": 1040,
+      "count": 205
+    },
+    "target_samples_after_issue": 6,
+    "target_nominal_ms_after_issue": 120,
+    "force_history_samples_through_issue": 20,
+    "signal_processing_limit": "Use no target imputation, future-sample interpolation, trial-wise normalization or additional retrospective filtering.",
+    "force_slopes_ms": [80, 200],
+    "go_relative_issue_seconds": "issue_index / 50 - force_go_s",
+    "eeg_margin_ms_before_mapped_issue": 20,
+    "eeg_history_samples_through_cutoff": 400,
+    "aligned_eeg_end_index": "floor(1000 * (eeg_go_s + go_relative_issue_s - 0.020))",
+    "rotated_eeg_end_index": "floor(1000 * (donor_eeg_go_s + go_relative_issue_s - 0.020))",
+    "earlier_eeg_shift_samples": 400,
+    "native_index_arithmetic": "Treat stored marker numbers as exact IEEE values. Use rational sample periods. Source boundaries are half-open with sample limits from ceil(rate * start) through ceil(rate * stop) - 1.",
+    "cue": {
+      "cycles": 10,
+      "on_ms": 1550,
+      "off_ms": 550,
+      "origin": "Go, the nominal first contraction instruction.",
+      "covariates": ["Go-relative elapsed seconds", "zero-based cycle index", "within-cycle time", "scheduled cue state at issue", "scheduled cue state 120 ms later"],
+      "measurement_scope": "Scheduled task reference. Displayed waveform, feedback delivery, actual contraction transitions and display timing were unverified."
+    },
+    "unmeasured": [
+      "intra-trial physical alignment and device jitter",
+      "release-filter phase and true sensing delay",
+      "delay from acquisition to an available forecast",
+      "absolute calibrated force"
+    ]
+  },
+  "frozen_analysis": {
+    "primary_family": "ridge",
+    "predictors": {
+      "persistence": "Voltage at issue.",
+      "backward_slope": "Current voltage plus 1.5 times the difference from the fourth preceding force sample.",
+      "timing": "Five nominal timing features.",
+      "force_history": "Timing, last 20 voltages through issue and 80 ms and 200 ms slopes in volts per second.",
+      "aligned_eeg": "Force history plus 24 ordered, common-average referenced EEG channel descriptor sets.",
+      "rotated_eeg": "Same force features with scalp descriptors from the next trial in the same person, hand and protocol, wrapping chronologically. The donor map uses Go metadata before filtering issues.",
+      "earlier_eeg": "Same force features with same-trial EEG ending 400 EEG samples earlier. The windows are disjoint."
+    },
+    "eeg_feature_order_per_channel": ["mean", "centered population RMS", "8-13 Hz power", "13-30 Hz power"],
+    "eeg_power": {
+      "preprocessing": "Concurrent channel mean reference, per-channel centering before power, symmetric length-400 Hann taper; no two-sided time filter or future sample use.",
+      "spectrum": "Unpadded real DFT. Bin mass is c[k] * abs(X[k])^2 / (400 * sum(w^2)), with c=1 at DC and Nyquist and c=2 elsewhere.",
+      "included_bin_centers_hz": [[10, 12.5], [15, 17.5, 20, 22.5, 25, 27.5, 30]]
+    },
+    "matched_row_policy": "Training and evaluation each use their shared complete-case intersection across all primary branches. Report target censoring, unscorable features and phase coverage. A target at or beyond the earliest trial/session bound or nominal 21 s end is censored.",
+    "fit": {
+      "training_population": "Seven source-eligible TRAIN people, unless a zero-row person forces review.",
+      "internal_validation": "Seven leave-one-eligible-person-out folds, each fit on six people.",
+      "penalty_grid": [0.01, 0.1, 1, 10, 100],
+      "selection": "Choose the smallest participant-balanced validation RMSE per branch; exact ties take the larger penalty. Refit with all eligible training participants.",
+      "objective": "Weighted mean squared error plus alpha times squared standardized coefficients. Fit the intercept without penalty. Keep the target in V.",
+      "preprocessing": "Estimate weighted means and population scales inside each training fold; replace zero scales with one and count them.",
+      "row_weight": "1 / (training participant count * trials for participant * scored issues in trial)"
+    },
+    "metric": "For each participant take the square root of mean trial MSE, with equal weighting of scored issues within a trial. Average those participant RMSEs in V with equal weight.",
+    "contrasts": ["aligned_eeg - force_history", "aligned_eeg - rotated_eeg", "aligned_eeg - earlier_eeg"],
+    "uncertainty": "Use paired participant RMSE changes, 95% descriptive Student t intervals and a two-sided exact sign test excluding ties. Report 00, 01, 10, and 11 phase strata and support.",
+    "directional_screen": "Require the mean of each predeclared paired contrast to be below zero, subject to adequate integrity and coverage. A passing screen by itself cannot identify EEG source or demonstrate a transferable effect.",
+    "secondary_modalities": "Optional EMG and left-hand analyses require a separate scoped protocol. They are outside this primary fit."
+  },
+  "distribution": {
+    "contains_model_weights": false,
+    "contains_individual_assignments_or_scores": false,
+    "contains_original_recordings": false,
+    "contains_forecast_results": false
+  }
+}

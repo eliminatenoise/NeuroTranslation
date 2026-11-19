@@ -336,5 +336,20 @@
         "scope": "Frozen ridge and causal CNN weights run on the same prior window. An invented example or compatible local JSON supplies inputs. A future target sample can be shown only when supplied. Rotation is an aggregate control. The 120 ms horizon is on the recording clock."
       }
     }
+  },
+  "prospective_studies": {
+    "hygrip_force": {
+      "entry": "benchmarks/hygrip-force/README.md",
+      "design": {
+        "path": "benchmarks/hygrip-force/DESIGN.json",
+        "bytes": 9297,
+        "sha256": "7e36a71dc2bc6fb1602eaaaa9df39935d4d6c92950bd36af9608ca82851b0402"
+      },
+      "edition": "2026-11-19-pre-dev",
+      "status": "Protocol and source coverage after TRAIN work began and before DEV or FINAL access.",
+      "scope": "Cued right-hand power grip in a separate dataset. Target is a transducer-voltage reading 120 ms ahead on the released clock.",
+      "runnable_model": false,
+      "model_results": false
+    }
   }
 }
