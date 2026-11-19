@@ -28,8 +28,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 21047,
-      "sha256": "a316351f14de5a89c7921aa394d6c193b9a29ed08012f04bb84ff81555df73ce"
+      "bytes": 21225,
+      "sha256": "01c957fc0a93eedefa114792ecf632b7bf91ec716baa1e9c1d06feb292406500"
     },
     {
       "path": "benchmarks/cemhsey-arrays/BROWSER-FITTING.md",
@@ -105,6 +105,21 @@
       "path": "benchmarks/cemhsey-arrays/python/trial_packet.py",
       "bytes": 5596,
       "sha256": "96da6e09cc5c7c2c7c69fd8af5ff6c8ed4508fd16ff6151ae7ef0775af70a3b1"
+    },
+    {
+      "path": "benchmarks/cemhsey-carry/DESIGN.json",
+      "bytes": 1016,
+      "sha256": "02af0de3738d3cb7fa9923b6fc9277902b3639370b98cb53e22b6b4b63747451"
+    },
+    {
+      "path": "benchmarks/cemhsey-carry/PROTOCOL.md",
+      "bytes": 6671,
+      "sha256": "38c0551d464f5bbc3d2c4e8a712dfb47fe2f212f7527428c3ec829ad772eac71"
+    },
+    {
+      "path": "benchmarks/cemhsey-carry/README.md",
+      "bytes": 817,
+      "sha256": "6a971debc843af113cce7e6aa6994ab884a701c555dce834d1c699dff9cc3d80"
     },
     {
       "path": "benchmarks/cemhsey-intervals/DESIGN.json",
@@ -3963,44 +3978,17 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "99be0f25e41bfa1609e8349b938dc5e7419b1c35",
+  "previous_public_commit": "ab12fccc18709c3d56227984a410809957959228",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
-      "PROJECT-CONTEXT.json",
       "README.md",
-      "docs/START.html",
-      "docs/papers/current/brain2body-article.pdf",
-      "docs/papers/current/brain2body-simple-english.pdf",
-      "docs/papers/current/index.html",
-      "docs/papers/current/manifest.json",
-      "docs/papers/current/neurotranslation-explained.pdf",
-      "docs/papers/current/neurotranslation-technical.pdf",
-      "docs/preview.html",
-      "papers/README.md",
-      "papers/current.json",
-      "papers/downloads/NeuroTranslation-Brain2Body-CEMHSEY-Pinch-Transfer-2026-11-19.zip",
-      "papers/downloads/NeuroTranslation-Brain2Body-CEMHSEY-Pinch-Transfer-2026-11-19.zip.sha256",
-      "papers/downloads/NeuroTranslation-Brain2Body-Selected-CEMHSEY-Pinch-Transfer-Source-2026-11-19.zip",
-      "papers/downloads/NeuroTranslation-Brain2Body-Selected-CEMHSEY-Pinch-Transfer-Source-2026-11-19.zip.sha256",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/NOTICE.md",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/README.md",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/brain2body-article.pdf",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/brain2body-simple-english.pdf",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/font-provenance.json",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/index.html",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/manifest.json",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/neurotranslation-explained.pdf",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/neurotranslation-technical.pdf",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/research-evidence-reading-aid.md",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/research-evidence.json",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/third-party-notices/DejaVu-LICENSE.txt",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/third-party-notices/FiraMath-LICENSE.txt",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/third-party-notices/Noto-OFL.txt",
-      "papers/experimental/cemhsey-pinch-transfer-2026-11-19/training-diagnostic-summary.json"
+      "benchmarks/cemhsey-carry/DESIGN.json",
+      "benchmarks/cemhsey-carry/PROTOCOL.md",
+      "benchmarks/cemhsey-carry/README.md"
     ],
-    "preserved_rows": 759
+    "preserved_other_rows": true
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",
@@ -4546,5 +4534,18 @@
       "participants": 4
     },
     "limitations": "Four previously studied adults, one indexed day, fixed repeat order and nominal timing; public examples and bundled weights are invented."
+  },
+  "cemhsey_day_transfer": {
+    "protocol": {
+      "path": "benchmarks/cemhsey-carry/PROTOCOL.md",
+      "bytes": 6671,
+      "sha256": "38c0551d464f5bbc3d2c4e8a712dfb47fe2f212f7527428c3ec829ad772eac71"
+    },
+    "design": {
+      "path": "benchmarks/cemhsey-carry/DESIGN.json",
+      "bytes": 1016,
+      "sha256": "02af0de3738d3cb7fa9923b6fc9277902b3639370b98cb53e22b6b4b63747451"
+    },
+    "status": "Protocol and ordered roster fixed before any new measurement values were opened."
   }
 }
