@@ -1,6 +1,6 @@
 # Fit the four pinch forecasts in a browser
 
-Open one original recording to inspect a pinch. To fit new weights, open **Fit a local model** in the same reader and choose 12 original MATLAB files from Session 5, Task 2. This is the two-finger pad-to-pad pinch at a 30% target in CEMHSEY GRASP. Supply both repeats on recording days 1 and 2 for three people. Confirm the task against the source archive. A MATLAB array shape alone cannot identify the grasp or authenticate a renamed file. [Open the fitting panel](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/#fit-local) · [Original recording study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12354741/)
+Open one original recording to inspect a pinch. To fit new weights, open **Fit a local model** in the same reader and choose 12 original MATLAB files from Session 5, Task 2. This is the two-finger pad-to-pad pinch at a 30% target in CEMHSEY GRASP. Supply both repeats on recording days 1 and 2 for three people. Confirm the task against the source archive. A MATLAB array shape alone cannot identify the grasp or authenticate a renamed file. A local replacement participant label can be used across fitting and reading when you confirm the task. The reader marks a label outside the 13-person source roster as local. Conflicting recording days, session, task or repeat still prevent import. [Open the fitting panel](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/#fit-local) · [Original recording study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12354741/)
 
 ## What goes into the fit?
 

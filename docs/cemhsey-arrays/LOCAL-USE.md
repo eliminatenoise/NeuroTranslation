@@ -4,7 +4,9 @@ Open an original recording and you can follow one pinch from the electrode grids
 
 ## Open an original trial
 
-Choose the adult CEMHSEY GRASP two-finger pinch at a 30% target, Session 5, Task 2, repeat 1 or 2. Check the source archive before you confirm the task in the reader and choose the original `.mat`. An archive filename can help identify the task. The arrays describe the readings, so a renamed file needs the task confirmed from its source. The browser reads the file on your device and keeps it out of network requests. To reuse its force and electrode summaries for calibration, choose **Save a local array packet**. Keep that JSON private. It contains derived readings and normalized force, with no participant field or original filename. To reopen any compatible array packet, choose **Open an array packet (.json)**.
+Choose the adult CEMHSEY GRASP two-finger pinch at a 30% target, Session 5, Task 2, repeat 1 or 2. Check the source before you confirm the task and choose the original `.mat`. The archive uses participant numbers 1 to 13 and days 1 to 11. If you use an archive-style filename with a higher positive participant number, the reader marks it as a local label outside the archive roster and uses your task confirmation. A renamed file still needs its task checked against the source.
+
+The browser reads the file on your device. To reuse its force and electrode summaries for calibration, choose **Save a local array packet**. Keep that JSON private. It contains derived readings and normalized force. To reopen any compatible array packet, choose **Open an array packet (.json)**.
 
 The import accepts a MATLAB Level 5 file with a `data_force` double row, a 320 × 61,500 `data_sEMG` double matrix and a positive `MVC` scalar. It keeps the first 6,000 normalized force samples and 594 × 320 guarded 100 ms channel RMS values in mV. The force is already expressed as a fraction of MVC. The saved JSON encodes both arrays as little-endian float64 data in base64. Try the Python converter if your browser cannot open the original.
 

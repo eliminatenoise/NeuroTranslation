@@ -142,18 +142,31 @@
   function reportImport(message){
     status.textContent=message+(trial?" Still showing the previous trial.":"");
   }
-  function matchesArchiveName(name){
-    const official=/^s(\d+)_day(\d+)_session(\d+)_task(\d+)_trial(\d+)\.mat$/i.exec(name);
-    if(official){
-      const [, participant, day, session, task, repeat]=official.map(Number);
-      if(participant>=1 && participant<=13 && day>=1 && day<=11 && session===5 && task===2 && (repeat===1 || repeat===2))return true;
-      throw Error("The archive name is outside Session 5, Task 2, repeats 1 or 2. Check the source and choose a compatible trial.");
+  function trialSource(name){
+    const archiveStyle=/^s(.*?)_day([^_]*)_session([^_]*)_task([^_]*)_trial([^_]*)\.mat$/i.exec(name);
+    if(archiveStyle){
+      const fields=archiveStyle.slice(1);
+      const decimal=fields.map(label=>label.replace(/^0+/,""));
+      if(decimal.some(label=>!/^[1-9]\d*$/.test(label))){
+        throw Error("Archive-style names need positive whole numbers for participant, day, session, task and repeat.");
+      }
+      const participant=decimal[0];
+      const [day,session,task,repeat]=decimal.slice(1).map(Number);
+      if(day>11 || session!==5 || task!==2 || (repeat!==1 && repeat!==2)){
+        throw Error("The archive-style name is outside Session 5, Task 2, days 1 to 11 and repeats 1 or 2. Check the source and choose a compatible trial.");
+      }
+      if(participant.length>2 || Number(participant)>13){
+        return "Local MATLAB trial · participant label is outside the archive roster · task confirmed by you";
+      }
+      if(fields.every((label,index)=>label===decimal[index])){
+        return "Local MATLAB trial · archive name matches Session 5, Task 2";
+      }
     }
     const namedTask=/(?:^|[_-])session(\d+)[_-]task(\d+)(?=[_.-]|$)/i.exec(name);
     if(namedTask && (Number(namedTask[1])!==5 || Number(namedTask[2])!==2)){
       throw Error("The filename names a different session or task. Check the source and choose a Session 5, Task 2 trial.");
     }
-    return false;
+    return "Local MATLAB trial · source task confirmed by you";
   }
   gridSelect.addEventListener("change",()=>{gridIndex=Number(gridSelect.value);createGrids();renderCells();});
   lock.addEventListener("change",()=>{if(!row)return;lockedScale=lock.checked?Math.max(row.older.max,row.recent.max):null;renderCells();});
@@ -195,7 +208,7 @@
     let phase;
     try{
       if(!/\.mat$/i.test(file.name))throw Error("Choose an original MATLAB file ending in .mat.");
-      const archiveName=matchesArchiveName(file.name);
+      const sourceName=trialSource(file.name);
       importProgress.hidden=false;
       status.textContent="Reading the original MATLAB file…";
       matImport=mat.start(file,{onProgress:({phase:next,fraction})=>{
@@ -211,7 +224,7 @@
       }});
       const record=await matImport.promise;
       if(token!==trialToken)return;
-      show(record,archiveName?"Local MATLAB trial · archive name matches Session 5, Task 2":"Local MATLAB trial · source task confirmed by you",true);
+      show(record,sourceName,true);
     }catch(error){
       if(token===trialToken)reportImport(error.message);
     }finally{
