@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Does a practice pinch carry over? · NeuroTranslation</title>
+  <link rel="stylesheet" href="study.css">
+  <script defer src="data.js"></script>
+  <script defer src="study.js"></script>
+</head>
+<body><main>
+<header>
+  <a class="brand" href="../START.html">NeuroTranslation</a>
+  <h1>Does a practice pinch carry over?</h1>
+  <p>Four adults followed the same pinch-force cue on two recording days. For each target, we kept the correction from the earlier day and fitted another from the new day’s first pinch. All eleven forecasts faced the same second pinch.</p>
+</header>
+<section aria-labelledby="compare-heading">
+  <h2 id="compare-heading">Which forecast came closer to the gauge?</h2>
+  <div class="choices">
+    <label>Target force<select id="target" disabled><option value="10">10% of maximum</option><option value="30">30% of maximum</option><option selected value="50">50% of maximum</option></select></label>
+    <label>Compare forecasts<select id="comparison" disabled></select></label>
+  </div>
+  <p id="units">Gain is the comparison forecast’s mean absolute error minus the selected forecast’s error, in percentage points of maximum voluntary contraction (MVC). Positive values favour the selected forecast.</p>
+  <p>The dot marks the four-person mean. The line spans the smallest to the largest individual gain. All rows share one scale. Choose a row to see its scores.</p>
+  <div id="chart" aria-label="Error gain by phase"></div>
+  <p id="range" role="status" aria-live="polite">Loading results…</p>
+</section>
+<section aria-labelledby="scores-heading">
+  <h2 id="scores-heading">What did the eleven forecasts miss?</h2>
+  <div class="choices">
+    <label>Phase at forecast time<select id="phase" disabled></select></label>
+    <label>Order forecasts by<select id="order" disabled><option value="mae">Lowest mean absolute error</option><option value="protocol">Model and correction</option></select></label>
+  </div>
+  <p id="support"></p>
+  <div class="scroll" role="region" aria-label="Forecast errors, scroll sideways on narrow screens" tabindex="0">
+    <table><thead><tr><th scope="col">Forecast</th><th scope="col">Mean absolute error<br>(% MVC)</th><th scope="col">Root mean square error<br>(% MVC)</th><th scope="col">Mean signed error<br>(% MVC)</th><th scope="col">Absolute error<br>(% of target)</th></tr></thead><tbody id="scores"></tbody></table>
+  </div>
+</section>
+<section aria-labelledby="interpret"><h2 id="interpret">Reading the comparison</h2>
+  <p>The force gauge measured the squeeze between two digits. The forecast uses force history and the scheduled cue. The five-grid version also uses forearm surface EMG. Each correction changes the forecast when the cue changes over the next 24 force samples, a nominal 120 milliseconds.</p>
+  <p>Each person contributes equally. Trials share a fixed order, and nearby cutoffs overlap. The gain range describes the four people who took part. The gauge readings use each day’s own maximum, so equal percentages on different days may stand for different absolute forces.</p>
+  <p>Signed error is forecast minus gauge. A positive value means the model predicted too much force on average. Target-relative error uses the prescribed target as its denominator.</p>
+</section>
+<footer>
+  <a href="../cemhsey-transfer/">Compare your own two recording days</a>
+  <a href="../cemhsey-transfer/results/">Read the preceding same-day study</a>
+  <a href="metrics.csv" download>All error scores (CSV)</a>
+  <a href="contrasts.csv" download>All paired gains (CSV)</a>
+  <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cemhsey-carry">Study report and protocol</a>
+  <a href="https://doi.org/10.1038/s41597-025-05733-y">Original recording study</a>
+</footer>
+<noscript><p>The study report and CSV downloads contain the complete measurements.</p></noscript>
+</main></body></html>

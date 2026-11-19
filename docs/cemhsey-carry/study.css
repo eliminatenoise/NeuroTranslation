@@ -1,0 +1,13 @@
+:root{font:100%/1.5 "Inter","Segoe UI",Arial,sans-serif;font-variant-numeric:tabular-nums;color:#182a33;background:#f7f8f5}
+*{box-sizing:border-box}body{margin:0}main{max-width:68rem;margin:0 auto;padding:1.2rem clamp(1rem,5vw,3.5rem) 3rem}
+header{border-top:5px solid #176b68;padding:1.1rem 0 1.6rem}.brand{font-weight:700;text-decoration:none}
+h1,h2{letter-spacing:-.035em;line-height:1.09}h1{font-size:clamp(2.4rem,6vw,4.6rem);max-width:17ch;margin:1rem 0}h2{font-size:clamp(1.5rem,3.6vw,2.2rem);margin:0 0 1rem}
+p{max-width:75ch}header p{font-size:1.14rem;max-width:65ch;margin:0}a{color:#10585d;text-underline-offset:.18em}a:hover{text-decoration-thickness:2px}
+section{padding:1.55rem 0;border-top:1px solid #b5c7c7}.choices{display:flex;align-items:flex-end;flex-wrap:wrap;gap:.7rem 1.35rem}.choices label{display:grid;grid-template-columns:minmax(0,1fr);min-width:0;gap:.25rem;font-weight:650;max-width:100%}select,button{font:inherit;color:inherit}
+select{min-width:0;background:white;border:1px solid #819b9d;max-width:100%;min-height:44px;padding:.35rem .5rem;border-radius:.3rem}
+:focus-visible{outline:3px solid #b35a19;outline-offset:2px}#chart{margin:1rem 0;max-width:52rem}
+.axis,.plot-row{display:grid;grid-template-columns:7.5rem minmax(4rem,1fr) 6.7rem;align-items:center;gap:.8rem;padding:.3rem .65rem}.axis{font-size:.82rem;font-weight:650;color:#385358}.scale{display:flex;justify-content:space-between}.mean{text-align:right}
+.plot-row{border:1px solid transparent;border-bottom:1px solid #cbd4d0;background:transparent;width:100%;min-height:45px;cursor:pointer;text-align:left}.plot-row[aria-pressed=true]{background:#e4f0eb;border:2px solid #236c61}.plot-row:hover{background:#e9edeb}.plot-row svg{display:block;overflow:visible;width:100%;height:36px}#range{border-left:4px solid #29736b;padding-left:.8rem}
+.scroll{overflow-x:auto;max-width:100%;border:1px solid #bfccc8;background:white}table{border-collapse:collapse;width:100%;min-width:42rem}th,td{padding:.5rem .7rem;text-align:right;border-bottom:1px solid #d9e1dd}tr>:first-child{text-align:left}thead{background:#e7eeeb;font-size:.88rem}tbody th{font-weight:550}
+footer{border-top:1px solid #abbfb9;padding:1.4rem 0;display:flex;flex-wrap:wrap;gap:.65rem 1.5rem}
+@media(max-width:36rem){.axis,.plot-row{grid-template-columns:4.5rem minmax(3.2rem,1fr) 4.6rem;gap:.3rem;padding:.35rem .2rem}.axis{font-size:.75rem}.plot-row{font-size:.87rem}.choices label{width:100%}.axis .extent{display:none}.axis .scale{justify-content:center}}

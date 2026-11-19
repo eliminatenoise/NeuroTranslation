@@ -10,6 +10,14 @@
     "Force history and cue · frozen", "Force history and cue · adjusted", "Force history and cue · adapted",
     "Five-grid model · frozen", "Five-grid model · adjusted", "Five-grid model · adapted"
   ][i]]));
+  const carryArms = [...controls, ...parents.flatMap(parent =>
+    ["frozen", "adjusted", "carried", "adapted"].map(mode => parent + "_" + mode))];
+  labels.history_phase_carried = "Force history and cue · day 9 practice";
+  labels.history_phase_paired_grid_carried = "Five-grid model · day 9 practice";
+  function label(arm, withCarry) {
+    if (withCarry && arm.endsWith("_adapted")) return labels[arm].replace("adapted", "day 10 practice");
+    return labels[arm];
+  }
   const {horizon, nIssues, cache} = globalThis.PinchIntervals;
 
   function cueLevel(tick) {
@@ -19,7 +27,7 @@
     return (5000 - tick) / 1000;
   }
 
-  function estimates(frozen, tick, q, coefficients = null) {
+  function estimates(frozen, tick, q, coefficients = null, prior = null) {
     if (![.1, .3, .5].includes(q)) throw Error("Choose a prescribed target of 10%, 30% or 50%.");
     const future = cueLevel(tick + horizon);
     const u = future - cueLevel(tick);
@@ -31,6 +39,7 @@
     for (const parent of parents) {
       point[parent + "_frozen"] = frozen[parent];
       point[parent + "_adjusted"] = frozen[parent] + (q - .3) * u;
+      if (prior) point[parent + "_carried"] = point[parent + "_adjusted"] + prior[parent] * u;
       if (coefficients) point[parent + "_adapted"] = point[parent + "_adjusted"] + coefficients[parent] * u;
     }
     if (!Object.values(point).every(Number.isFinite)) throw Error("Forecasts exceed the numerical range.");
@@ -55,8 +64,8 @@
     return coefficients;
   }
 
-  function newScores() {
-    return Object.fromEntries(arms.map(key => [key, {n: 0, abs: 0, square: 0, signed: 0}]));
+  function newScores(withCarry = false) {
+    return Object.fromEntries((withCarry ? carryArms : arms).map(key => [key, {n: 0, abs: 0, square: 0, signed: 0}]));
   }
 
   function addScore(scores, predictions, actual) {
@@ -79,22 +88,22 @@
     }));
   }
 
-  function fromExample(base, q, repeat) {
+  function fromExample(base, q, repeat, day = 10) {
     const force = base.force.map((value, tick) => {
-      const delay = repeat === 1 ? 12 : 17;
+      const delay = (repeat === 1 ? 12 : 17) + (day === 9 ? 6 : 0);
       const t = tick / 200;
-      return value - .29 * cueLevel(tick) + q * .96 * cueLevel(tick - delay) +
+      return value - .29 * cueLevel(tick) + q * (day === 9 ? .91 : .96) * cueLevel(tick - delay) +
         (repeat === 1 ? .009 : .013) * Math.sin(t * 3.2 + repeat) * cueLevel(tick);
     });
     const rms = base.rms.map((value, offset) => {
       const g = cueLevel((Math.floor(offset / 320) + 1) * 10);
-      return value * (1 + (q - .3) * g) * (1 + (repeat - 1) * .025 * g);
+      return value * (1 + (q - .3) * g) * (1 + ((repeat - 1) * .025 + (day === 9 ? .04 : 0)) * g);
     });
     return {force, rms};
   }
 
   globalThis.PinchTransfer = Object.freeze({
-    parents, arms, labels, horizon, nIssues, cache, cueLevel, estimates,
+    parents, arms, carryArms, labels, label, horizon, nIssues, cache, cueLevel, estimates,
     newAdapter, addAdapterSample, finishAdapter, newScores, addScore, finishScores, fromExample
   });
 })();

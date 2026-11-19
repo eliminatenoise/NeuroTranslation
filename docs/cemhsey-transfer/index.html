@@ -15,6 +15,7 @@
   <script defer src="forecast-plot.js"></script>
   <script defer src="mat-import.js"></script>
   <script defer src="transfer-math.js"></script>
+  <script defer src="carry-profile.js"></script>
   <script defer src="sources.js"></script>
   <script defer src="reader.js"></script>
 </head>
@@ -23,8 +24,9 @@
   <header>
     <p class="brand">NeuroTranslation</p>
     <h1>Practice a different pinch</h1>
-    <p>Give a model that learned a 30% pinch a lighter or harder target. Move the cutoff to see what it predicts 120 nominal milliseconds later. Then give it one practice repeat and see what changes on the second.</p>
-    <nav aria-label="Related resources"><a href="https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/results/">Study results and protocol</a>
+    <p>Give a model that learned a 30% pinch a lighter or harder target. Move the cutoff to see what it predicts 120 nominal milliseconds later. Can one practice pinch help on the next repeat? Try it again with the correction the model learned on day 9.</p>
+    <nav aria-label="Related resources"><a href="https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/results/">Single-day study</a>
+      <a href="https://eliminatenoise.github.io/NeuroTranslation/cemhsey-carry/">Two-day measured study</a>
       <a href="https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip" download>Download offline reader</a></nav>
   </header>
   <noscript><p>Enable JavaScript to open a recording and calculate forecasts.</p></noscript>
@@ -42,6 +44,9 @@
         </select>
       </label>
     </div>
+    <label id="example-day-label">Invented recording day
+      <select id="example-day"><option value="10">Day 10 · comparison</option><option value="9">Day 9 · earlier practice</option></select>
+    </label>
     <p id="source-note" class="hint"></p>
     <div id="mat-controls" hidden>
       <p id="mat-help">Use original CEMHSEY GRASP Session 5 MAT files. Check the archive for each repeat and the chosen target. A matching archive name describes the expected source. The MAT contents do not establish participant, day, target or repeat.</p>
@@ -52,7 +57,12 @@
           <p class="hint" id="repeat2-status"></p><button id="drop-repeat2" class="secondary" type="button">Remove repeat 2</button></div>
       </div>
       <p id="pair-status" role="status"></p>
-      <label id="confirm-label" class="check" hidden><input id="confirm-pair" type="checkbox"> I checked both originals. The files match the same participant, day and selected Session 5 target. Repeat 1 is the practice file and repeat 2 is the comparison file.</label>
+      <label id="confirm-label" class="check" hidden><input id="confirm-pair" type="checkbox"> <span id="confirm-copy">I checked the repeat roles, participant, day and selected Session 5 target against the originals.</span></label>
+      <div id="source-identity" hidden>
+        <p>For a two-day comparison with renamed files, look up their participant number and indexed day in your source archive. These fields stay in this tab.</p>
+        <div class="forecast-controls"><label>Archive participant number <input id="archive-person" type="number" min="1" max="13" step="1" autocomplete="off"></label>
+        <label>Indexed recording day <select id="archive-day"><option value="">Choose a day</option><option value="9">Day 9</option><option value="10">Day 10</option></select></label></div>
+      </div>
     </div>
     <details>
       <summary>Choose a local forecast fit</summary>
@@ -66,6 +76,22 @@
       <button id="clear-adapter" class="secondary" type="button" hidden>Clear practice fit</button>
     </div>
     <p id="adapter-status" class="hint"></p>
+    <details id="carry-controls">
+      <summary>Compare day 9 practice with day 10 practice</summary>
+      <p>Start on day 9 and fit repeat 1. Keep its two corrections here, then switch to day 10 and fit its first repeat. Both sets of corrections get the same test on repeat 2. With local recordings, the archive must identify the same participant, grasp and target on both days.</p>
+      <label id="training-check-label" class="check" hidden><input id="training-check" type="checkbox"> I checked the original parent training sources. They exclude this participant and these recordings.</label>
+      <div class="actions"><button id="keep-prior" class="secondary" type="button" disabled>Keep day 9 fit in this tab</button>
+        <button id="save-prior" class="secondary" type="button" disabled>Save private fit to file</button></div>
+      <details id="file-options"><summary>Reopen a saved fit or view its private key</summary>
+        <p>To reopen a saved fit after closing the tab, keep its private key separately. The file contains two fitted coefficients and keyed checks for the participant and recording. Treat it as private.</p>
+        <label>Day 9 practice fit (.json) <input id="profile-file" type="file" accept=".json,application/json" disabled></label>
+        <label>Private key <input id="profile-key" type="password" maxlength="32" autocomplete="off" spellcheck="false"></label>
+        <label class="check"><input id="show-key" type="checkbox"> Show private key</label>
+      </details>
+      <div class="actions"><button id="apply-prior" type="button" disabled>Compare both practice days</button>
+        <button id="clear-prior" class="secondary" type="button" hidden>Forget earlier fit and key</button></div>
+      <p id="carry-status" role="status"></p>
+    </details>
     <div id="progress-controls" class="actions" hidden>
       <progress id="progress" max="1" aria-label="Work progress"></progress>
       <button id="cancel" class="secondary" type="button">Cancel</button>
@@ -112,11 +138,11 @@
   </section>
   <section aria-labelledby="method-title">
     <h2 id="method-title">What practice can change</h2>
-    <p>The frozen models keep their 30% weights. The adjusted forecasts add the difference in target strength times the cue’s change over the next 120 nominal milliseconds. That adjustment is zero at 30%. The practice repeat gives each model one more coefficient on the same cue change. The comparison repeat supplies no fitted values.</p>
+    <p>The frozen models keep their 30% weights. The adjusted forecasts add the difference in target strength times the cue’s change over the next 120 nominal milliseconds. That adjustment is zero at 30%. The practice repeat gives each model one more coefficient on the same cue change. Fit each coefficient against all 592 cutoffs on the first repeat. You can keep the two day 9 coefficients and apply them unchanged to the day 10 comparison repeat. Each day’s gauge uses its own maximum force as the reference. The same fraction can represent a different physical force on the two days.</p>
     <p>Each score describes this repeat alone. The study reports separate results across its evaluation panel. The gauge gives one normalized pinch force. The grids sample muscle electrical activity through the skin. Neither yields separate force for each digit. The 120 ms lead uses nominal release indices.</p>
     <p><a href="https://doi.org/10.1038/s41597-025-05733-y">CEMHSEY GRASP recording study and data access</a></p>
   </section>
-  <footer><p>Local readings and practice fits live in this tab. Reload or close it to clear them.</p></footer>
+  <footer><p>Readings and fits stay in this tab unless you choose to save a private fit. Closing the tab clears its memory. Any files you saved stay on your device.</p></footer>
 </main>
 </body>
 </html>

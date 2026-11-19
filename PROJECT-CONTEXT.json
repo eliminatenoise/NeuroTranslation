@@ -41,10 +41,10 @@
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
   "experimental_previews": {
     "data_companion": {
-      "version": "2026-11-19 source-specific recording readers and local MAT fitting",
+      "version": "2026-11-19 recording readers with saved cross-day practice",
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
-      "buildId": "dbbd5e7a04c656bc0fa672b13ce3a873b1c82ac9fda371deab877ba1344133fa",
+      "buildId": "d1b832d89ff0f82c4523a04abaf0d0b421dcec179a2fcb6268c62e14cde63b83",
       "meaning": "Import and inspect recordings locally. Replay the R1 cohort fit, or compare the fixed and personally calibrated models on an imported R2 trial. Full R2 trials are checked against their archived sample clock and four selected input streams. Aggregate evidence is shown separately.",
       "hosting": "Prepared static main/docs payload; actual Pages deployment/readback is verified separately",
       "study": "benchmarks/scalp-eeg-palm-history",
@@ -58,7 +58,7 @@
         "original_archive_and_emg": "docs/wrist-forearm/index.html",
         "daily_activity_wrist_angles": "docs/daily-wrist/index.html"
       },
-      "previous_cached_build": "d4915a6997132b045e9706ddf362c5bde1d1aa0c3d3ff82bdb2aaeb4f2f43d9b",
+      "previous_cached_build": "dbbd5e7a04c656bc0fa672b13ce3a873b1c82ac9fda371deab877ba1344133fa",
       "force_navigation": {
         "grip_force": "docs/grip-force/index.html",
         "contact_force": "docs/contact-force/index.html"
@@ -66,9 +66,13 @@
       "navigation_overlay": {
         "entry_source": "demo/src/index.html",
         "scope": "The source chooser is part of the rebuilt, content-addressed Pages companion. The ordinary generic CSV/JSON inspector remains available.",
-        "recording_sources": 6,
+        "recording_sources": 7,
         "entry": "docs/index.html#study-readers",
-        "fit": "docs/cemhsey-arrays/index.html#fit-local"
+        "fit": "docs/cemhsey-arrays/index.html#fit-local",
+        "listed_reader_workflows": 7,
+        "source_count_scope": "Seven recording-reader choices in the app. Two use the CEMHSEY pinch recordings for different studies.",
+        "cross_day_reader": "docs/cemhsey-transfer/index.html",
+        "cross_day_results": "docs/cemhsey-carry/index.html"
       }
     },
     "papers": {
@@ -648,13 +652,13 @@
       },
       "reader": {
         "path": "docs/cemhsey-transfer/index.html",
-        "bytes": 8665,
-        "sha256": "d7353545a152b32099b79331d14f68fff15e8fb265f434ecca89c7b019176da9"
+        "bytes": 11718,
+        "sha256": "e504a54d0179865dc37d6c878a7096844d8e2a544b2546abbed7dfcdc291089e"
       },
       "offline": {
         "path": "docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip",
-        "bytes": 38012,
-        "sha256": "373b78222d25ee0be516f0be600294e84629fe75f4dc962a560c6c51a985faee"
+        "bytes": 44908,
+        "sha256": "04008a2400cc7f47bead8c72370380216cf3199363490fad3b4806ed58c21d3a"
       },
       "interactive_results": {
         "path": "docs/cemhsey-transfer/results/index.html",
@@ -679,6 +683,60 @@
         "participants": 4
       },
       "limitations": "Four previously studied adults, one indexed day, fixed repeat order and nominal timing; public examples and bundled weights are invented."
+    },
+    "cemhsey_day_transfer": {
+      "protocol": {
+        "path": "benchmarks/cemhsey-carry/PROTOCOL.md",
+        "bytes": 6671,
+        "sha256": "38c0551d464f5bbc3d2c4e8a712dfb47fe2f212f7527428c3ec829ad772eac71"
+      },
+      "design": {
+        "path": "benchmarks/cemhsey-carry/DESIGN.json",
+        "bytes": 1016,
+        "sha256": "02af0de3738d3cb7fa9923b6fc9277902b3639370b98cb53e22b6b4b63747451"
+      },
+      "status": "Second repeats on the next indexed day independently scored, source-scope checked.",
+      "aggregate": {
+        "path": "benchmarks/cemhsey-carry/RESULTS.json",
+        "bytes": 87536,
+        "sha256": "fe604e85acab796f6a496f93efe498dbb14ecc2685349ac0f9067df137817ede"
+      },
+      "explorer": {
+        "path": "docs/cemhsey-carry/index.html",
+        "bytes": 4224,
+        "sha256": "8c220ff049eec5108836bb3bec7465c9bc42bf4d7009807bd18e376394ff3298"
+      },
+      "reader": {
+        "path": "docs/cemhsey-transfer/index.html",
+        "bytes": 11718,
+        "sha256": "e504a54d0179865dc37d6c878a7096844d8e2a544b2546abbed7dfcdc291089e"
+      },
+      "zip": {
+        "path": "docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip",
+        "bytes": 44908,
+        "sha256": "04008a2400cc7f47bead8c72370380216cf3199363490fad3b4806ed58c21d3a"
+      },
+      "metrics": {
+        "path": "docs/cemhsey-carry/metrics.csv",
+        "bytes": 28005,
+        "sha256": "bd3d9c38ebeb7db32e4680d71bee5be67fb3d110133f36dd4fcd5e5eae2f50c8"
+      },
+      "contrasts": {
+        "path": "docs/cemhsey-carry/contrasts.csv",
+        "bytes": 40671,
+        "sha256": "cd255d7f5e01a195b2b00f19b8ae767f6f9fbe2e677869aed832852f8691ad1c"
+      },
+      "support": {
+        "eval_issues": 7104,
+        "eval_trials": 12,
+        "indexed_days": 2,
+        "participants": 4,
+        "practice_trials": 12,
+        "prior_profile_coefficients": 24
+      },
+      "compared_arms": 11,
+      "paired_comparisons_per_group": 17,
+      "limitations": "One pair of indexed days, four previously studied participants, one prescribed task and nominal 120 ms timing. Public reader uses invented signals and weights by default."
     }
   },
   "prospective_studies": {
@@ -897,13 +955,13 @@
       },
       "reader": {
         "path": "docs/cemhsey-transfer/index.html",
-        "bytes": 8665,
-        "sha256": "d7353545a152b32099b79331d14f68fff15e8fb265f434ecca89c7b019176da9"
+        "bytes": 11718,
+        "sha256": "e504a54d0179865dc37d6c878a7096844d8e2a544b2546abbed7dfcdc291089e"
       },
       "offline": {
         "path": "docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip",
-        "bytes": 38012,
-        "sha256": "373b78222d25ee0be516f0be600294e84629fe75f4dc962a560c6c51a985faee"
+        "bytes": 44908,
+        "sha256": "04008a2400cc7f47bead8c72370380216cf3199363490fad3b4806ed58c21d3a"
       },
       "interactive_results": {
         "path": "docs/cemhsey-transfer/results/index.html",
@@ -928,6 +986,60 @@
         "participants": 4
       },
       "limitations": "Four previously studied adults, one indexed day, fixed repeat order and nominal timing; public examples and bundled weights are invented."
+    },
+    "cemhsey_day_transfer": {
+      "protocol": {
+        "path": "benchmarks/cemhsey-carry/PROTOCOL.md",
+        "bytes": 6671,
+        "sha256": "38c0551d464f5bbc3d2c4e8a712dfb47fe2f212f7527428c3ec829ad772eac71"
+      },
+      "design": {
+        "path": "benchmarks/cemhsey-carry/DESIGN.json",
+        "bytes": 1016,
+        "sha256": "02af0de3738d3cb7fa9923b6fc9277902b3639370b98cb53e22b6b4b63747451"
+      },
+      "status": "Second repeats on the next indexed day independently scored, source-scope checked.",
+      "aggregate": {
+        "path": "benchmarks/cemhsey-carry/RESULTS.json",
+        "bytes": 87536,
+        "sha256": "fe604e85acab796f6a496f93efe498dbb14ecc2685349ac0f9067df137817ede"
+      },
+      "explorer": {
+        "path": "docs/cemhsey-carry/index.html",
+        "bytes": 4224,
+        "sha256": "8c220ff049eec5108836bb3bec7465c9bc42bf4d7009807bd18e376394ff3298"
+      },
+      "reader": {
+        "path": "docs/cemhsey-transfer/index.html",
+        "bytes": 11718,
+        "sha256": "e504a54d0179865dc37d6c878a7096844d8e2a544b2546abbed7dfcdc291089e"
+      },
+      "zip": {
+        "path": "docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip",
+        "bytes": 44908,
+        "sha256": "04008a2400cc7f47bead8c72370380216cf3199363490fad3b4806ed58c21d3a"
+      },
+      "metrics": {
+        "path": "docs/cemhsey-carry/metrics.csv",
+        "bytes": 28005,
+        "sha256": "bd3d9c38ebeb7db32e4680d71bee5be67fb3d110133f36dd4fcd5e5eae2f50c8"
+      },
+      "contrasts": {
+        "path": "docs/cemhsey-carry/contrasts.csv",
+        "bytes": 40671,
+        "sha256": "cd255d7f5e01a195b2b00f19b8ae767f6f9fbe2e677869aed832852f8691ad1c"
+      },
+      "support": {
+        "eval_issues": 7104,
+        "eval_trials": 12,
+        "indexed_days": 2,
+        "participants": 4,
+        "practice_trials": 12,
+        "prior_profile_coefficients": 24
+      },
+      "compared_arms": 11,
+      "paired_comparisons_per_group": 17,
+      "limitations": "One pair of indexed days, four previously studied participants, one prescribed task and nominal 120 ms timing. Public reader uses invented signals and weights by default."
     }
   }
 }

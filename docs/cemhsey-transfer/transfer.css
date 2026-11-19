@@ -13,3 +13,12 @@ header nav {display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin:1rem 0 .15rem}
 #comparison-values td {overflow-wrap:anywhere}
 #cutoff-time {font-size:.94rem}
 @media(max-width:520px){.file-pair{grid-template-columns:1fr}}
+
+#example-day-label, #file-options label, #carry-controls label {display:block;margin:.6rem 0}
+#carry-controls .check {display:flex}
+#carry-controls {padding:.8rem 1rem;border:1px solid #b7c9c2;border-radius:.4rem}
+#carry-controls>summary {font-weight:650}
+#carry-controls .actions {margin:.75rem 0}
+#profile-key,#archive-person {max-width:100%;border:1px solid #97afa6;border-radius:.35rem;padding:.35rem}
+#profile-key {width:23rem}
+#carry-status {font-size:.94rem}

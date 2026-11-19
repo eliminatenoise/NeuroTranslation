@@ -64,7 +64,7 @@ Fixed-width bands around the five-grid forecast covered 94.5% of later readings 
 
 At the 50% pinch target, current force plus the scheduled change beat the fitted models for all four participants. One practice attempt helped the five-grid model during the rise and hurt it during release. [Explore all three targets](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/results/) · [Compare two recordings](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/) · [Study and protocol](benchmarks/cemhsey-transfer/README.md)
 
-Can the same correction work on a different day? Four participants return to the same three pinch targets. [Read the cross-day study design](benchmarks/cemhsey-carry/README.md)
+What does one practice attempt buy on the next recording day? The two-day study compares an earlier fit with a fresh fit on exactly the same pinch. [Compare next-day forecasts](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-carry/) · [Save and reuse a practice fit locally](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/) · [Results and protocol](benchmarks/cemhsey-carry/README.md)
 
 ## Read the papers
 

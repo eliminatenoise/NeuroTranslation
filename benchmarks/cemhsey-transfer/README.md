@@ -23,3 +23,5 @@ At 10%, current force plus the scheduled change also beat the adjusted and pract
 The protocol uses the phrase “absolute mean error” once. The intended metric, the implemented metric and the metric independently reproduced were all mean absolute error, the average absolute difference between forecast and gauge.
 
 [Explore the measured results](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/results/) · [Compare two local recordings](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/) · [Download the offline reader](../../docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip) · [Complete aggregate](RESULTS.json)
+
+The next study tests the same saved corrections on a new recording day. [Cross-day measurements](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-carry/)

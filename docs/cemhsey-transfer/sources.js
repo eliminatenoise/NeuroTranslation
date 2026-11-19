@@ -14,18 +14,17 @@
     if (!full) {
       // An incomplete name can disprove a role. It cannot establish a pair.
       const field = label => new RegExp("(?:^|[_-])" + label + "([0-9]+)(?=[_.-]|$)", "gi");
-      const subject = /^s([0-9]+)(?=[_-])/i.exec(file.name);
-      const normalize = digits => digits.replace(/^0+/, "");
+      const people = Array.from(file.name.matchAll(field("s")), match => match[1].replace(/^0+/, ""));
       const days = Array.from(file.name.matchAll(field("day")), match => Number(match[1]));
       const sessions = Array.from(file.name.matchAll(field("session")), match => Number(match[1]));
       const tasks = Array.from(file.name.matchAll(field("task")), match => Number(match[1]));
       const repeats = Array.from(file.name.matchAll(field("trial")), match => Number(match[1]));
       if (sessions.some(session => session !== 5) || tasks.some(task => targetForTask[task] !== target) ||
           repeats.some(repeat => repeat !== role) || days.some(day => day < 1 || day > 11) ||
-          new Set(days).size > 1 || (subject && !normalize(subject[1]))) {
+          new Set(days).size > 1 || new Set(people).size > 1 || people.some(id => !id || Number(id) > 13)) {
         throw Error("The name conflicts with the selected Session 5 target, day range or repeat.");
       }
-      return {person: subject ? normalize(subject[1]) : null, day: days[0] ?? null, originalName: false};
+      return {person: people[0] ?? null, day: days[0] ?? null, originalName: false};
     }
     const fields = full.slice(1).map(field => field.replace(/^0+/, ""));
     if (fields.some(field => !/^[1-9]\d*$/.test(field))) {
