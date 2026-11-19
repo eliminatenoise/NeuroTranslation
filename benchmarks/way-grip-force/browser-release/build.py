@@ -21,7 +21,7 @@ MEMBERS = {
     "aggregate-dev-summary.json": "1f831ffa7cfe943b100487e7fdddeb980628d9827b5d4c05fbf54dc2931e7021",
 }
 BRANCHES = ("strong", "eeg", "emg", "emg_eeg")
-BROWSER_FILES = ("app.js", "forecast.js", "index.html", "study.js", "style.css")
+BROWSER_FILES = ("app.js", "forecast.js", "replay.js", "index.html", "study.js", "style.css", "convert_lift.py")
 LAUNCHERS = ("Run-Linux.sh", "Run-Windows.cmd", "Run-macOS.command")
 
 

@@ -40,8 +40,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4516,
-      "sha256": "56f11e4b67d5c938597da00b4f6b7772465c4a35e8e2cb49f5e2c9da71d1c668"
+      "bytes": 5296,
+      "sha256": "9b4de643d2343aff6752160d443ce8e36345e4d1e36f1828a39a1290e7eb760f"
     },
     {
       "path": "WAY-EEG-GAL-grip-force-experimental-preview.zip",
@@ -134,8 +134,8 @@
     "url": "https://eliminatenoise.github.io/NeuroTranslation/grip-force/",
     "offline_zip": {
       "path": "benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-browser.zip",
-      "bytes": 167240,
-      "sha256": "409c13bd046cb1a16f56827d2ecdbc3c8162f1d8e7970049e5d08ed48e6b1014"
+      "bytes": 184592,
+      "sha256": "103b3823c1b19665ed512b5da76a00977bb13714966056f5e46a82ee508d3c41"
     },
     "offline_members": [
       "WAY-EEG-GAL-grip-force-browser/LICENSE",
@@ -144,16 +144,23 @@
       "WAY-EEG-GAL-grip-force-browser/Run-Windows.cmd",
       "WAY-EEG-GAL-grip-force-browser/Run-macOS.command",
       "WAY-EEG-GAL-grip-force-browser/app.js",
+      "WAY-EEG-GAL-grip-force-browser/convert_lift.py",
       "WAY-EEG-GAL-grip-force-browser/forecast.js",
       "WAY-EEG-GAL-grip-force-browser/index.html",
+      "WAY-EEG-GAL-grip-force-browser/replay.js",
       "WAY-EEG-GAL-grip-force-browser/study.js",
       "WAY-EEG-GAL-grip-force-browser/style.css"
     ],
     "web_files": [
       {
         "path": "docs/grip-force/app.js",
-        "bytes": 12783,
-        "sha256": "ac436f00b57d14cf6adc2187c296f14eec3c42a3ee94bf0368cf098f500782e0"
+        "bytes": 16414,
+        "sha256": "1385a5e72d046b0e0910c5e523ec0aeb517409088099ce4bd35ce62d2af15b63"
+      },
+      {
+        "path": "docs/grip-force/convert_lift.py",
+        "bytes": 6042,
+        "sha256": "beae45550d444ca0380e451fc3d26e4a9ab8f47ed5fd56ee886b2ae73b9759a6"
       },
       {
         "path": "docs/grip-force/forecast.js",
@@ -162,8 +169,13 @@
       },
       {
         "path": "docs/grip-force/index.html",
-        "bytes": 8134,
-        "sha256": "30f10be49c6001953ade02ee04918b972789d6df69318cfbc91fdaeb7aa4e249"
+        "bytes": 9952,
+        "sha256": "279f21a2c41cc8abb3db23a48862c588b987e8db99dd6fed842588e5a0158d17"
+      },
+      {
+        "path": "docs/grip-force/replay.js",
+        "bytes": 4351,
+        "sha256": "d252b1090a2eeadbcd9e8b3bd8f3eda0d7a37384ad92ed6a4c4bceb556b98c8b"
       },
       {
         "path": "docs/grip-force/study.js",
@@ -172,17 +184,22 @@
       },
       {
         "path": "docs/grip-force/style.css",
-        "bytes": 7735,
-        "sha256": "1cc43ea2142780b013505e960447099c9a6a001833e058fdc7e487041b8d4eec"
+        "bytes": 8239,
+        "sha256": "0d7509c63749cc9734730826de73e706570e66fd770ff5e1065131ce080ef7b1"
       }
     ],
     "build_source": {
       "path": "benchmarks/way-grip-force/browser-release/build.py",
-      "bytes": 4598,
-      "sha256": "064e49dd0c82bc77a77cf3d3d66f7d764ed2d8920f6fcd9be48439d86b6f7a60"
+      "bytes": 4630,
+      "sha256": "8805efea5282d4f89607d3c5564ec6bc501722adbc468a60d249f23dfd9cb5f6"
     },
     "source": "Derives frozen model parameters and aggregate comparison rows from the hash-bound desktop ZIP.",
     "platform_scope": "Linux browser launcher executed from an extracted ZIP. Windows and macOS launchers received static checks.",
-    "input_scope": "Locally generated synthetic example and compatible local JSON windows. Four trained branches. No raw measurements included."
+    "input_scope": "Original single windows, invented trial replay, and compatible locally converted WAY-EEG-GAL WS trials. Four displayed predictors use preceding sensor samples. Twenty-nine separately stored later grip forces can be revealed to score each forecast. The browser ZIP contains no participant samples.",
+    "trial_converter": {
+      "path": "docs/grip-force/convert_lift.py",
+      "bytes": 6042,
+      "sha256": "beae45550d444ca0380e451fc3d26e4a9ab8f47ed5fd56ee886b2ae73b9759a6"
+    }
   }
 }

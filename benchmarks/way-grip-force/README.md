@@ -24,6 +24,12 @@ The small gain also disappeared in the 5,140 windows from all three people where
 
 Move the cutoff on the invented pinch lift to see what the models predict 120 ms later. Inspect the past force, motion, scalp EEG and surface EMG that change those predictions. Open a compatible local JSON window to run the same calculation in your browser. [Open the forecast](https://eliminatenoise.github.io/NeuroTranslation/grip-force/) · [Download the offline browser](WAY-EEG-GAL-grip-force-browser.zip)
 
+### Replay one recorded lift
+
+Open a local trial and move the slider through 29 cutoffs. At each point you can reveal the plate reading recorded 120 ms later. The signed error is positive when the forecast overshoots. **Replay an invented lift** demonstrates the same controls with artificial signals.
+
+To use an original recording, save the [trial converter](../../docs/grip-force/convert_lift.py) and extract a windowed-series MATLAB file from the data deposit. With Python, NumPy and SciPy installed, run `python convert_lift.py WS_file.mat --trial 1 --out lift.json`, substituting your file name and trial number. Open that JSON in the browser. The file contains sensor samples for your selected lift. The cohort errors above come from the full participant-level comparison.
+
 ## Run the desktop forecast
 
 [Download the desktop ZIP](WAY-EEG-GAL-grip-force-experimental-preview.zip) and extract the entire folder. Open `Run-Windows.cmd`, `Run-macOS.command` or `Run-Linux.sh` for your system. You need Python 3.10 or later and NumPy. The Linux demo ran in an extracted copy. Native Windows and macOS launches remain unchecked.

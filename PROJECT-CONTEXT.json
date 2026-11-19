@@ -256,10 +256,15 @@
         "url": "https://eliminatenoise.github.io/NeuroTranslation/grip-force/",
         "offline_zip": {
           "path": "benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-browser.zip",
-          "bytes": 167240,
-          "sha256": "409c13bd046cb1a16f56827d2ecdbc3c8162f1d8e7970049e5d08ed48e6b1014"
+          "bytes": 184592,
+          "sha256": "103b3823c1b19665ed512b5da76a00977bb13714966056f5e46a82ee508d3c41"
         },
-        "input_scope": "Locally generated synthetic example and compatible local JSON windows. Four trained branches. No raw measurements included."
+        "input_scope": "Original single windows, invented trial replay, and compatible locally converted WAY-EEG-GAL WS trials. Four displayed predictors use preceding sensor samples. Twenty-nine separately stored later grip forces can be revealed to score each forecast. The browser ZIP contains no participant samples.",
+        "trial_converter": {
+          "path": "docs/grip-force/convert_lift.py",
+          "bytes": 6042,
+          "sha256": "beae45550d444ca0380e451fc3d26e4a9ab8f47ed5fd56ee886b2ae73b9759a6"
+        }
       }
     }
   }

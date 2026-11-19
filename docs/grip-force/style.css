@@ -107,3 +107,13 @@ footer { border-top: 1px solid var(--border); margin-top: 25px; padding: 12px 0 
   canvas { height: 213px; }
   .study-label { font-size: .75rem; }
 }
+
+.input-actions { flex-wrap: wrap; }
+.outcome { margin-top: 12px; }
+.outcome p { margin: 10px 0; }
+.outcome .reading { font-size: .79rem; color: var(--muted); }
+.outcome table { width: 100%; font-variant-numeric: tabular-nums; }
+.outcome td, .outcome th { font-size: .84rem; padding: 5px 0; }
+.outcome td { text-align: right; }
+.outcome caption { text-align: left; }
+.plot-key .key-outcome::before { width: 7px; height: 7px; border: 2px solid currentColor; border-radius: 50%; background: transparent; }

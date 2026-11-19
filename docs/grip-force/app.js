@@ -13,6 +13,7 @@
   const sourceLabel = $("source-label"), sourceDescription = $("source-description");
   const profile = $("signal"), channel = $("channel"), channelLabel = $("channel-label");
   let predict, windowData, scores, isSynthetic = true, request = 0, downloadUrl;
+  let replay = null, replayExample = false, showOutcome = false;
   let frame = 0;
   const hz500 = "500 Hz";
   const historyColor = "#cbeee0";
@@ -33,6 +34,14 @@
   }
 
   function glyph(ctx, type, x, y, color) {
+    if (type === "outcome") {
+      ctx.beginPath();
+      ctx.arc(x, y, 9, 0, 2 * Math.PI);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      return;
+    }
     ctx.beginPath();
     if (type === "circle") ctx.arc(x, y, 5, 0, 2 * Math.PI);
     if (type === "square") ctx.rect(x - 4, y - 4, 8, 8);
@@ -159,6 +168,7 @@
     frame = requestAnimationFrame(() => {
       if (!windowData) return;
       const points = branches.map(branch => ({ ...branch, value: scores[branch.key] }));
+      if (replay && showOutcome) points.push({shape: "outcome", color: "#ffffff", value: replay.outcome(windowData.issue_offset)});
       draw(plot, windowData.time_from_cutoff_s.main, windowData.grip_n, "Grip force (N)", points);
       const signal = signalWindow();
       draw(details, signal.clock, signal.samples, signal.unit);
@@ -174,6 +184,33 @@
     renderPlots();
   }
 
+  function updateOutcome() {
+    $("outcome-panel").hidden = !replay;
+    $("outcome-data").hidden = !replay || !showOutcome;
+    $("outcome-key").hidden = !replay || !showOutcome;
+    const label = replayExample ? "invented" : "recorded";
+    $("reveal").textContent = (showOutcome ? "Hide " : "Reveal ") + label + " grip at +120 ms";
+    $("reveal").setAttribute("aria-expanded", String(showOutcome));
+    $("error-rows").replaceChildren();
+    $("observed-force").textContent = "";
+    if (replay && showOutcome) {
+      const observed = replay.outcome(windowData.issue_offset);
+      $("outcome-label").textContent = replayExample ? "Invented later grip" : "Grip in your recording";
+      $("outcome-key").textContent = replayExample ? "Invented later grip" : "Recorded later grip";
+      $("observed-force").textContent = force(observed);
+      $("error-rows").replaceChildren(...branches.map(({key, label}) => {
+        const row = document.createElement("tr");
+        const heading = document.createElement("th");
+        heading.scope = "row";
+        heading.textContent = label;
+        row.append(heading);
+        const error = scores[key] - observed;
+        row.insertCell().textContent = (error > 0 ? "+" : "") + value(error);
+        return row;
+      }));
+    }
+  }
+
   function applyWindow(input, predictions, synthetic) {
     windowData = input;
     scores = predictions;
@@ -184,8 +221,16 @@
     document.querySelector(".forecast-note").textContent = synthetic
       ? "The example ends at cutoff. It has no later measurement for scoring these forecasts."
       : "This input ends at cutoff. Scoring needs a separate grip measurement 120 ms later.";
-    $("reset").hidden = synthetic;
-    slider.disabled = !synthetic;
+    if (replay) {
+      sourceLabel.textContent = replayExample ? "Invented trial replay" : "Local trial replay";
+      sourceDescription.textContent = replayExample ? "All signals and later forces are invented." : "Sensor windows and plate readings stay in this tab.";
+      document.querySelector(".forecast-note").textContent = "Move the cutoff through the lift. Reveal the later grip to compare it with these forecasts.";
+    }
+    $("reset").hidden = synthetic && !replay;
+    $("demo-replay").hidden = replayExample;
+    updateOutcome();
+    slider.value = input.issue_offset * 2;
+    slider.disabled = !synthetic && !replay;
     $("cutoff-value").textContent = `${(input.issue_offset * 2).toLocaleString("en-AU")} ms`;
     slider.setAttribute("aria-valuetext", `${input.issue_offset * 2} milliseconds after go cue`);
     $("present-force").textContent = force(scores.persistence);
@@ -202,8 +247,21 @@
   }
 
   function setSynthetic() {
+    replay = null;
+    replayExample = false;
+    showOutcome = false;
     const input = GripForecast.synthetic(Number(slider.value) / 2);
     applyWindow(input, predict(input), true);
+  }
+
+  function selectReplay(trial, example) {
+    const issue = Number(slider.value) / 2;
+    const input = trial.windowAt(issue);
+    const predictions = trial.scoresAt(issue);
+    replay = trial;
+    replayExample = example;
+    showOutcome = false;
+    applyWindow(input, predictions, false);
   }
 
   function renderEvidence() {
@@ -242,6 +300,7 @@
     showError(error.message);
     $("open-file").disabled = true;
     slider.disabled = true;
+    $("demo-replay").disabled = true;
     return;
   }
 
@@ -253,7 +312,23 @@
   });
   channel.addEventListener("change", renderSignal);
   slider.addEventListener("input", () => {
-    if (isSynthetic) setSynthetic();
+    if (replay) {
+      const input = replay.windowAt(Number(slider.value) / 2);
+      applyWindow(input, replay.scoresAt(input.issue_offset), false);
+    } else if (isSynthetic) setSynthetic();
+  });
+  $("demo-replay").disabled = typeof GripReplay === "undefined";
+  $("demo-replay").addEventListener("click", () => {
+    request++;
+    selectReplay(GripReplay.invented(predict), true);
+    slider.focus();
+  });
+  $("reveal").addEventListener("click", () => {
+    if (!replay) return;
+    showOutcome = !showOutcome;
+    updateOutcome();
+    renderPlots();
+    $("state").textContent = showOutcome ? $("outcome-label").textContent + ": " + $("observed-force").textContent : "Later grip hidden.";
   });
   $("open-file").addEventListener("click", () => fileInput.click());
   $("reset").addEventListener("click", () => {
@@ -267,7 +342,7 @@
     if (!file) return;
     const current = ++request;
     try {
-      if (file.size > 1_000_000) throw new Error("Choose one window in a JSON file under 1 MB.");
+      if (file.size > 3_000_000) throw new Error("Choose a window or a trial in a JSON file under 3 MB.");
       let input;
       try {
         input = JSON.parse(await file.text());
@@ -275,7 +350,15 @@
         throw new Error("This file could not be read as JSON.");
       }
       if (current !== request) return;
+      if (input?.format === "way-grip-trial-v1") {
+        if (typeof GripReplay === "undefined") throw new Error("The trial replay module could not load.");
+        selectReplay(GripReplay.read(input, predict), false);
+        return;
+      }
       const predictions = predict(input);
+      replay = null;
+      replayExample = false;
+      showOutcome = false;
       applyWindow(input, predictions, false);
     } catch (error) {
       if (current === request) showError(`${error.message} The displayed forecast is unchanged.`);
