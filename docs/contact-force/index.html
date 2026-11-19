@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="color-scheme" content="light">
+  <title>Grip after contact · NeuroTranslation</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="model-data.js"></script>
+  <script defer src="forecast.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main>
+    <header class="brand">
+      <span>NeuroTranslation</span>
+      <span class="edition">Experimental preview</span>
+    </header>
+    <section class="intro" aria-labelledby="title">
+      <div>
+        <h1 id="title">Grip after contact.</h1>
+        <p>Ten force readings confirm the squeeze. Two fitted models look back at the same moment and predict how hard the hand will squeeze 120 ms later.</p>
+      </div>
+      <div class="source-controls">
+        <label for="example">Invented pinch lift</label>
+        <div class="actions">
+          <select id="example" disabled>
+            <option value="pinch">Pinch and lift</option>
+            <option value="slow">Slower lift</option>
+            <option value="brief">Brief false start</option>
+          </select>
+          <button id="import-button" type="button" disabled>Open local JSON</button>
+          <input id="file-input" type="file" accept=".json,application/json" hidden disabled>
+        </div>
+        <a href="#input-guide">Input format</a>
+      </div>
+      <p class="import-status" id="startup-status" role="status">The forecast needs its model files. If the viewer stays closed, extract the whole ZIP to one folder and reopen index.html.</p>
+      <p class="import-status" id="import-status" role="status" hidden></p>
+    </section>
+    <section class="workbench" id="workbench" aria-label="Offline forecast workbench" hidden>
+      <div class="run-controls">
+        <div class="source-label"><span id="source-indicator" class="source-dot"></span><span id="origin">Synthetic signals</span></div>
+        <fieldset>
+          <legend>Issue after confirmation</legend>
+          <div class="segmented" id="offsets">
+            <label><input type="radio" name="offset" value="0"><span>0 ms</span></label>
+            <label><input type="radio" name="offset" value="100" checked><span>100 ms</span></label>
+            <label><input type="radio" name="offset" value="200"><span>200 ms</span></label>
+            <label><input type="radio" name="offset" value="300"><span>300 ms</span></label>
+            <label><input type="radio" name="offset" value="400"><span>400 ms</span></label>
+          </div>
+        </fieldset>
+        <div class="run-controls-context">
+          <span id="event-caption"></span>
+          <span id="issue-caption"></span>
+        </div>
+      </div>
+      <div class="workspace-grid">
+        <section class="signal-panel" aria-labelledby="signal-heading">
+          <div class="panel-head">
+            <div>
+              <h2 id="signal-heading">At the cutoff</h2>
+              <p>Time relative to force confirmation</p>
+            </div>
+            <label class="select-compact" for="signal">Trace
+              <select id="signal">
+                <option value="force">Grip and load</option>
+                <option value="position">Position</option>
+                <option value="eeg">Scalp EEG</option>
+                <option value="emg">Surface EMG</option>
+              </select>
+            </label>
+          </div>
+          <div class="channel-row">
+            <label id="channel-label" for="channel" hidden>Channel <select id="channel"></select></label>
+            <label id="target-label" for="show-target"><input id="show-target" type="checkbox"> Reveal target sample</label>
+          </div>
+          <div id="chart-wrap" class="chart-wrap">
+            <canvas id="chart" role="img" aria-label="Sensor history ending at issue"></canvas>
+          </div>
+          <div id="legend" class="plot-legend" aria-label="Chart legend"></div>
+          <div class="trace-reader" id="trace-reader">
+            <label for="scrub" id="scrub-label">Read a history sample</label>
+            <input id="scrub" type="range" min="0" max="199" value="199">
+            <output id="sample" for="scrub"></output>
+          </div>
+        </section>
+        <section class="prediction-panel" aria-labelledby="prediction-heading">
+          <div class="panel-head">
+            <div>
+              <h2 id="prediction-heading">120 ms ahead</h2>
+              <p>Mean normal grip force</p>
+            </div>
+          </div>
+          <label for="variant" class="variant-label">Model inputs</label>
+          <select id="variant">
+            <option value="mechanics">Force and motion</option>
+            <option value="eeg">Force, motion and scalp EEG</option>
+            <option value="time">Time only</option>
+            <option value="emg">Force, motion and surface EMG</option>
+            <option value="emg_eeg">Force, motion, surface EMG and EEG</option>
+          </select>
+          <div id="prediction-status" class="prediction-status" role="status" hidden></div>
+          <div id="prediction-results" aria-live="polite">
+            <div class="model-value ridge-block">
+              <div><span class="plot-key ridge"></span><h3>Ridge</h3><p>Features from the past samples</p></div>
+              <output id="ridge-value" for="variant">—</output>
+            </div>
+            <div class="model-value cnn-block">
+              <div><span class="plot-key cnn"></span><h3>Causal CNN</h3><p>Convolution over 50 time bins</p></div>
+              <output id="cnn-value" for="variant">—</output>
+            </div>
+            <dl class="reference-values">
+              <div><dt>Grip at issue</dt><dd id="grip-value">—</dd></div>
+              <div><dt>80 ms slope carried forward</dt><dd id="slope-value">—</dd></div>
+              <div id="target-row" hidden><dt id="target-term">Target grip</dt><dd id="target-value">—</dd></div>
+            </dl>
+          </div>
+        </section>
+      </div>
+    </section>
+    <section class="study" aria-labelledby="study-heading">
+      <div>
+        <h2 id="study-heading">Force and motion gave the better answer.</h2>
+        <p>Ridge with force and motion had the lowest error on the same 4,410 forecasts from 882 lifts by three previously explored healthy volunteers. Adding aligned scalp EEG raised average error for both families.</p>
+        <p>These are development results. Each person counts equally. Lifts count equally within each person, and issue times count equally within each lift. The final test remains reserved.</p>
+      </div>
+      <div id="study-table" hidden>
+        <table>
+          <caption>Mean participant RMSE in newtons · lower is better</caption>
+          <thead><tr><th scope="col">Inputs</th><th scope="col">Ridge</th><th scope="col">Causal CNN</th></tr></thead>
+          <tbody id="study-values"></tbody>
+        </table>
+        <p id="uncertainty" class="uncertainty"></p>
+      </div>
+    </section>
+    <section class="notes">
+      <details>
+        <summary>What the clock measures</summary>
+        <p>From the LED go cue, the first force sample must be below 0.5 N. Confirmation is the tenth consecutive reading at or above 0.5 N. It comes 18 ms after the first reading in that qualifying run. Shorter excursions reset when force falls below threshold. This is a force proxy for contact. First anatomical touch and live sensing delay were outside the experiment.</p>
+        <p>Each forecast uses the latest 200 rows through issue on the 500 Hz clock, a span of 398 ms from first to last row. Its target is the compression force 60 rows later. The cue sets the trial clock. An earlier NeuroTranslation study used a separate cue-aligned forecast.</p>
+      </details>
+      <details id="input-guide">
+        <summary>Open your own signals</summary>
+        <p>Use the aligned sensor arrays described in <a href="README.md">the input guide</a>. A clocked capture needs LED onset, grip and load in N, and the four XYZ trackers in the released source scale. Supply synchronized scalp EEG or surface EMG to inspect those branches. A prepared 200-row window supplies its own confirmation offset and time since the go cue. The file stays in this browser tab. Loading another input or closing the tab clears it from the viewer.</p>
+      </details>
+      <details>
+        <summary>Study, weights and limits</summary>
+        <p>WAY-EEG-GAL recorded a pinch lift with two force plates, four position trackers, scalp EEG and surface EMG. The browser replays the frozen ridge and causal CNN weights fitted on six separate training volunteers. Source and package checksums are recorded in the <a href="README.md">guide</a>.</p>
+        <p>Matthew D. Luciw, Ewa Jarocka and Benoni B. Edin recorded the study, supported primarily by the European Commission’s WAY project (FP7-ICT-288551).</p>
+        <p>The synthetic examples illustrate the calculation. The development table uses measurements from the study. The CNN and ridge differ in how they represent history and how they were tuned. Neither the comparison nor scalp EEG establishes a cortical mechanism. Surface EMG records muscle activity through skin electrodes.</p>
+      </details>
+    </section>
+    <footer>NeuroTranslation · Grip-force forecast · 19 November 2026</footer>
+  </main>
+</body>
+</html>

@@ -29,3 +29,5 @@ Project-owned code uses CC0. Recordings, references and separately supplied asse
 In a separate pinch-lift experiment, phase-matched EEG from another trial did slightly better than the correctly paired EEG at forecasting grip force. [Read the WAY-EEG-GAL comparison and download the desktop forecast](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/way-grip-force/)
 
 [Open the grip-force forecast](grip-force/) to change the cutoff on an invented grip or import a compatible local JSON window. The four models forecast the same measured quantity 120 ms beyond the cutoff on the recording clock.
+
+[Compare the contact-triggered ridge and temporal CNN](contact-force/) on the same history. The browser uses five issue times from force confirmation and can work with invented signals or a compatible local file.

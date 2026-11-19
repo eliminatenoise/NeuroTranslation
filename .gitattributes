@@ -4,3 +4,6 @@ docs/START.html -text
 # Keep the grip-force browser source and offline package inputs byte-for-byte.
 docs/grip-force/** -text
 benchmarks/way-grip-force/browser-release/** -text
+# Preserve the contact-force preview bytes for checksum verification and rebuilding.
+docs/contact-force/** -text
+benchmarks/way-contact-force/browser-release/** -text

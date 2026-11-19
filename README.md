@@ -30,6 +30,8 @@ Move the cutoff on an invented grip and see what four fitted models predict from
 
 What changes if we start the clock when the plates confirm a squeeze? On 882 lifts from the same three previously explored development participants, force and motion alone scored **0.676974 N** in the contact-triggered ridge forecast. Adding aligned EEG raised error to **0.695471 N**. The temporal model also had higher average error with aligned EEG. The European Commission supported the original recordings through WAY (FP7-ICT-288551). [Contact-triggered study and both desktop forecasts](benchmarks/way-contact-force/) · [Original study acknowledgments](https://pmc.ncbi.nlm.nih.gov/articles/PMC4365902/#ack1)
 
+Compare the ridge and temporal CNN forecasts at all five issue times. Start with an invented squeeze or open a compatible local JSON capture, then reveal the target row when the capture contains it. [Compare forecasts in your browser](https://eliminatenoise.github.io/NeuroTranslation/contact-force/) · [Download the offline browser and launchers](benchmarks/way-contact-force/NeuroTranslation-Grip-After-Contact-Comparison.zip)
+
 ### Palm and elbow measurements
 
 How much do three scalp EEG channels add once you know where the hand was? In the palm replay study, both fits had elapsed time and earlier palm position and velocity. One fit also had EEG. We trained on three people and evaluated on three others. Across 173 development trials, the person-weighted root mean squared error rose from 1.093 to 1.223 mm when EEG was added, and it rose for each development participant. The latest inputs preceded the target by 100 ms on the stored clock. The recordings were processed after collection, so live decoding latency remains untested.

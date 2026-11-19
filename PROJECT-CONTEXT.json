@@ -60,7 +60,13 @@
       },
       "previous_cached_build": "8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313",
       "force_navigation": {
-        "grip_force": "docs/grip-force/index.html"
+        "grip_force": "docs/grip-force/index.html",
+        "contact_force": "docs/contact-force/index.html"
+      },
+      "navigation_overlay": {
+        "version": "2026-11-19 contact-triggered comparison link",
+        "entry_source": "demo/src/index.html",
+        "scope": "Navigation update. The cached runtime asset names, bytes and buildId retain their previous identity."
       }
     },
     "papers": {
@@ -307,7 +313,28 @@
         400
       ],
       "recording_clock_horizon_ms": 120,
-      "scope": "Two offline grip-force forecasts compared after the tenth consecutive sample at or above 0.5 N on the 500 Hz recording clock. Adding aligned scalp EEG increased average error in both families on the same explored development cohort. Final test reserved. The launchers use invented input by default."
+      "scope": "Two offline grip-force forecasts compared after the tenth consecutive sample at or above 0.5 N on the 500 Hz recording clock. Adding aligned scalp EEG increased average error in both families on the same explored development cohort. Final test reserved. The launchers use invented input by default.",
+      "browser": {
+        "entry": "docs/contact-force/index.html",
+        "url": "https://eliminatenoise.github.io/NeuroTranslation/contact-force/",
+        "archive": {
+          "path": "benchmarks/way-contact-force/NeuroTranslation-Grip-After-Contact-Comparison.zip",
+          "bytes": 128047,
+          "sha256": "1671044c72f241a0c575208ee72cc3f5881a19a37f4013c5f1e46bfe2897de65"
+        },
+        "package_manifest": {
+          "path": "docs/contact-force/MANIFEST.json",
+          "bytes": 2066,
+          "sha256": "8139ef8370db8a6fea7ec7c3625b6e132f679cde5b241a6cdfb0b70bad6b8240"
+        },
+        "build_source": {
+          "path": "benchmarks/way-contact-force/browser-release/build.py",
+          "bytes": 6604,
+          "sha256": "932e26938b53ffc44fbe402679410eb2554445fc0c47e8fb952d34439150bb44"
+        },
+        "build_instructions": "benchmarks/way-contact-force/browser-release/README.md",
+        "scope": "Frozen ridge and causal CNN weights run on the same prior window. An invented example or compatible local JSON supplies inputs. A future target sample can be shown only when supplied. Rotation is an aggregate control. The 120 ms horizon is on the recording clock."
+      }
     }
   }
 }

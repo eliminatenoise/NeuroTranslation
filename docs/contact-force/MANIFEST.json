@@ -1,0 +1,43 @@
+{
+  "model_edition": "2026-11-19 experimental preview",
+  "study": "WAY-EEG-GAL force-confirmation grip forecast",
+  "glossary": {
+    "revision": 36,
+    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+  },
+  "sources": {
+    "ridge": {
+      "archive": "NeuroTranslation-Grip-After-Contact-Experimental-Preview.zip",
+      "sha256": "f4efbe7ca9c3c37ecb782b29846129e363e1910d104ae504262bb0b4f2e2d2d8",
+      "members": {
+        "AGGREGATE-RESULTS.json": "ff2ef32b203fb7167156e5f0def402d3cde4fe69fde1e2372e0834331406c36b",
+        "channel-order.json": "556e4b475cb4b2f8d5d73925ce0270975b63cf0eb5af9875b55052d8231905aa",
+        "parameters.json": "fbd843f553966d66c855ed8cc81bc8c0425464e42d82231e8dd2731ce8f6955b"
+      }
+    },
+    "cnn": {
+      "archive": "grip-contact-temporal-preview.zip",
+      "sha256": "7aacd9a4cafbec773aebb0e663ce4c4f3139ab087427f60786e416ed0afd977b",
+      "members": {
+        "MODEL.json": "3687ec9942aba7295f73f5a79ad33c994d9fa609382da73efc3a9b60635e0291",
+        "DEVELOPMENT.json": "7d63272dff7eca856ce60b8ab38a787b6a84e12d30937fa00808913df1c4687a"
+      }
+    }
+  },
+  "contains": [
+    "derived fitted parameters",
+    "aggregate development scores",
+    "invented sensor generator"
+  ],
+  "file_sha256": {
+    "index.html": "45c4765fe1317167a4b6ccbc3e2efb65bad1dc0e3912753573be8c77a0d6d0f1",
+    "style.css": "7e887398e80adabf05994169039925003a465315c6192ba66a68c824e8109001",
+    "forecast.js": "c5020f255d662f5b41033f5b00653ca2357de32b076cba77394dbd6ec6848b63",
+    "app.js": "68ca1f56032f9716e63fa0544cf01f6549e28549db4969298f2080480981fa92",
+    "README.md": "07c4150cf197f49f3cb47a271608860af0698cf2636f062f2d6b57daab47464c",
+    "Run-Linux.sh": "2c8500db72f91d51b75e01c8683ef910174bd8d88a4511bd34c0b8ef3a1d8b3a",
+    "Run-macOS.command": "e7a7431dabba714878794db166c758c54e10bbbb1d4a8c84d98c92206367a73c",
+    "Run-Windows.cmd": "3e586f8d881173d7b42384c0e70f337051dd4bda382485d6129f6c33c992a384",
+    "model-data.js": "c3e32c6ffce0c79808a4878e86e264770ddc1d67318ce7f373171563d7c8104c"
+  }
+}

@@ -4,6 +4,10 @@ The force plates register a squeeze. How hard will the fingers be pressing in 12
 
 ## Run the forecasts
 
+Put ridge and the temporal CNN side by side on the same past readings. Move the issue time, change the inputs, or reveal the recorded target when your capture supplies it. The browser opens with an invented squeeze and can read a compatible capture without uploading it. [Open the browser comparison](https://eliminatenoise.github.io/NeuroTranslation/contact-force/) · [Download the offline comparison and launchers](NeuroTranslation-Grip-After-Contact-Comparison.zip) · [Rebuild from the fitted model ZIPs](browser-release/)
+
+The command-line runners are also available.
+
 | Download | What runs | Requirements |
 | --- | --- | --- |
 | [Grip after contact · ridge regression ZIP](NeuroTranslation-Grip-After-Contact-Experimental-Preview.zip) | Five fitted predictors and two force formulas. The runner can detect force confirmation in a compatible local capture. | Python 3.10+ and NumPy |
