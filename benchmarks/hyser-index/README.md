@@ -19,3 +19,7 @@ A separate experiment compares the shared forecast with two adjustments, one fit
 ## Do the other fingers help?
 
 In four previously studied participants, adding the other four finger sensors lowered the average index forecast error from 14.355 to 14.161 mV. In the 12-person training comparison, the same change raised it from 16.854 to 16.915 mV. The four-person estimate spans both improvement and worsening. Choose **Finger sensor context** in the reader to see the other digits up to the cutoff and compare three forecasts on one original force file pair. [Study results and timing control](whole-hand/README.md) · [Model inputs and pooled weights](whole-hand/PREDICTOR.md) · [Python session scorer](SCORE-SESSION.md).
+
+## A different finger task
+
+The original models saw people choose their own finger combinations. The next comparison asks how those same fixed forecasts fare when the task prescribes which fingers to use. [Read the N-DoF protocol](prescribed/PROTOCOL.md).
