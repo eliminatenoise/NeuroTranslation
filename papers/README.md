@@ -1,6 +1,24 @@
 # Paper drafts
 
-## Forearm activity in two wrist studies · 19 November 2026
+## Measured grip and development · 19 November 2026
+
+A hand can close by the same amount and squeeze harder. To measure the difference you need the force at the object. These four drafts follow forearm activity through two wrist-angle studies, then ask what scalp EEG adds to a forecast of the squeeze. The model using EEG from the next lift scored better than the one using the correctly paired trace.
+
+The two Brain2Body editions also follow early anatomy, skin repair and milk
+across distinct marsupial species. The skeletal timing in dunnarts does not
+fix the timing in Antechinus. Skin scarring and changes in wallaby milk leave
+body-wide repair and precise neural or immune programming open.
+
+- [NeuroTranslation technical](experimental/measured-grip-development-2026-11-19/neurotranslation-technical.pdf) · [Forearm correction, p. 23](experimental/measured-grip-development-2026-11-19/neurotranslation-technical.pdf#page=23) · [Daily activities, p. 24](experimental/measured-grip-development-2026-11-19/neurotranslation-technical.pdf#page=24) · [Grip force, p. 25](experimental/measured-grip-development-2026-11-19/neurotranslation-technical.pdf#page=25)
+- [NeuroTranslation explained](experimental/measured-grip-development-2026-11-19/neurotranslation-explained.pdf) · [Forearm correction, p. 42](experimental/measured-grip-development-2026-11-19/neurotranslation-explained.pdf#page=42) · [Daily activities, p. 42](experimental/measured-grip-development-2026-11-19/neurotranslation-explained.pdf#page=42) · [Grip force, p. 44](experimental/measured-grip-development-2026-11-19/neurotranslation-explained.pdf#page=44)
+- [Brain2Body research article](experimental/measured-grip-development-2026-11-19/brain2body-article.pdf) · [Forearm correction, p. 4](experimental/measured-grip-development-2026-11-19/brain2body-article.pdf#page=4) · [Daily activities, p. 4](experimental/measured-grip-development-2026-11-19/brain2body-article.pdf#page=4) · [Grip force, p. 6](experimental/measured-grip-development-2026-11-19/brain2body-article.pdf#page=6) · [Development and repair, p. 18](experimental/measured-grip-development-2026-11-19/brain2body-article.pdf#page=18)
+- [Brain2Body Simple English](experimental/measured-grip-development-2026-11-19/brain2body-simple-english.pdf) · [Forearm correction, p. 12](experimental/measured-grip-development-2026-11-19/brain2body-simple-english.pdf#page=12) · [Daily activities, p. 13](experimental/measured-grip-development-2026-11-19/brain2body-simple-english.pdf#page=13) · [Grip force, p. 14](experimental/measured-grip-development-2026-11-19/brain2body-simple-english.pdf#page=14) · [Development and repair, p. 29](experimental/measured-grip-development-2026-11-19/brain2body-simple-english.pdf#page=29)
+
+[Download all four drafts and companions](downloads/NeuroTranslation-Brain2Body-Measured-Grip-and-Development-2026-11-19.zip) · [Reading aid](experimental/measured-grip-development-2026-11-19/research-evidence-reading-aid.md)
+
+[Download the selected manuscript sources](downloads/NeuroTranslation-Brain2Body-Selected-Manuscript-Source-2026-11-19.zip). The ZIP contains TeX and bibliography text for all four editions. Its inventory identifies the figures, fonts and other dependencies that are omitted.
+
+## Earlier distinct-cohort drafts · 19 November 2026
 
 The wrist-pointing models know the wrist’s recent path. The daily-activity models know the task and elapsed time. These four drafts explain what forearm activity added to each comparison and how the instruments limit the conclusion.
 

@@ -1,18 +1,23 @@
 {
-  "version": "scientific-layout-2026-11-15",
-  "status": "experimental working drafts; recorded targeted acceptance only",
-  "manifest": "experimental/scientific-layout-2026-11-15/manifest.json",
-  "manifest_sha256": "a524e17ae958ae14ffc7ece9e311ea4810094256dff502c1863cfa3408768184",
+  "version": "measured-grip-development-2026-11-19",
+  "status": "Experimental working drafts",
+  "manifest": "experimental/measured-grip-development-2026-11-19/manifest.json",
+  "manifest_sha256": "89b5a36cedc6beb63c0516693f887b0542a5cc07eea49d3d53c8c17dd4a333a6",
   "matching_public_source_bundle_provided": false,
-  "source_scope": "The preserved R9/R11 public snapshots are historical, not matching build sources for these PDFs. The PDFs retain their separate R2/R3 build provenance.",
-  "publication_scope": "This pointer identifies content. It does not itself verify upload, hosting or remote downloads.",
+  "source_scope": "The selected-source ZIP contains cleared manuscript and bibliography files. Its manifest identifies each PDF and the omitted dependencies. The complete native manuscript and asset closure is retained by the maintainer.",
   "download_bundle": {
-    "path": "downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip",
-    "bytes": 3083960,
-    "sha256": "519a88c6881852b66d5db8efd74e351a661a6acfeb643ee79cc68f489a69bf9b",
-    "members": 14,
-    "extraction_folder": "NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15",
-    "scope": "Four exact selected PDFs, three companions, README, content manifest and five notice files. No standalone font, source, model or private evidence files. Native extraction/PDF-link behavior across operating systems remains unverified.",
-    "checksum": "downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip.sha256"
+    "path": "downloads/NeuroTranslation-Brain2Body-Measured-Grip-and-Development-2026-11-19.zip",
+    "bytes": 3200159,
+    "sha256": "c002ac8bcead0abbb6f9fe14f5ce3678491783cedfa25aa30d5460d423a08c7e",
+    "members": 15,
+    "extraction_folder": "NeuroTranslation-Brain2Body-Measured-Grip-and-Development-2026-11-19",
+    "checksum": "downloads/NeuroTranslation-Brain2Body-Measured-Grip-and-Development-2026-11-19.zip.sha256"
+  },
+  "selected_manuscript_source": {
+    "path": "downloads/NeuroTranslation-Brain2Body-Selected-Manuscript-Source-2026-11-19.zip",
+    "sha256": "b7fbb30a8f5270d5523d20c185cd0f51f2c42ce5e710cae0632e00ab0046d210",
+    "bytes": 587267,
+    "members": 76,
+    "scope": "73 selected manuscript and bibliography files bound to the four rendered PDFs. Omitted dependencies are listed inside. The complete native build stays with the maintainer."
   }
 }

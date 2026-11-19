@@ -44,7 +44,7 @@ In the earlier IACKD palm pilot, a ridge model using three EEG channels had 7.51
 
 ## Read the papers
 
-The four latest drafts follow forearm activity across two tasks. In wrist pointing, it improved a correction to an earlier motion forecast. In the UJI daily activities, it helped the flexion–extension estimate and worsened the side-to-side estimate. [Read both studies in the four papers](papers/experimental/distinct-cohort-2026-11-19/README.md) · [Download the PDFs and reading aid](papers/downloads/NeuroTranslation-Brain2Body-Distinct-Cohort-2026-11-19.zip)
+A hand can close by the same amount and squeeze harder. To measure the difference you need the force at the object. These four drafts follow forearm activity through two wrist-angle studies, then ask what scalp EEG adds to a forecast of the squeeze. The model using EEG from the next lift scored better than the one using the correctly paired trace. [Read the four papers](papers/experimental/measured-grip-development-2026-11-19/README.md) · [Download the PDFs and reading aid](papers/downloads/NeuroTranslation-Brain2Body-Measured-Grip-and-Development-2026-11-19.zip)
 
 The previously selected scientific-layout edition is listed below.
 
