@@ -23,8 +23,8 @@
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "bytes": 22824,
-      "sha256": "24e4908fad4cb7f037598a4cc0be9e67c71df0020806145714c11ac47e4688ae"
+      "bytes": 22966,
+      "sha256": "2a8442cd0ae3c283916fd55ca026baadb7175cc966099f635d4f7b2a8e0a672c"
     },
     {
       "path": "README.md",
@@ -88,8 +88,8 @@
     },
     {
       "path": "benchmarks/hygrip-force/trial-replay/HYGRIP-trial-replay.zip",
-      "bytes": 22498,
-      "sha256": "2f24c3e38fb1f841cf54eb4c5d253d220a8be5b6000939be0b69ab2f73a1d9b0"
+      "bytes": 26130,
+      "sha256": "41788a110e361da9272c4c1d83c342f6031d7b4328fec072af2dc5938acfd570"
     },
     {
       "path": "benchmarks/scalp-eeg-hand/.gitignore",
@@ -1088,13 +1088,13 @@
     },
     {
       "path": "docs/hygrip-force/README.md",
-      "bytes": 6346,
-      "sha256": "97a860f35d0eae796b4cdaee208e34c869579cccd4845f7504c09120342e09aa"
+      "bytes": 6614,
+      "sha256": "f6ebfe06eb3a4bf5e914727f11f1d3d8d2e4ade43fd3badcb40f8f64344806a7"
     },
     {
       "path": "docs/hygrip-force/SHA256SUMS",
-      "bytes": 997,
-      "sha256": "3a0b29bf0c551fca1a93fc898d4dc354dd8c41ba4a5af693ad0083c7f13c3a7d"
+      "bytes": 1079,
+      "sha256": "b550a8852dd67377e65339176f31e1283fb231f87c1feeef581c70b5b85ee588"
     },
     {
       "path": "docs/hygrip-force/forecast-browser.js",
@@ -1103,8 +1103,8 @@
     },
     {
       "path": "docs/hygrip-force/index.html",
-      "bytes": 4129,
-      "sha256": "87f5857b194995b099d8334b2827819469cd89b0aaf699dbfb5ed2e6ed61a9cb"
+      "bytes": 5478,
+      "sha256": "8f63ad6d6ad1feede7f78db6f2adfc1e68e518da9a56c6ad85587db29ed7e51c"
     },
     {
       "path": "docs/hygrip-force/prepare_trial.py",
@@ -1113,13 +1113,13 @@
     },
     {
       "path": "docs/hygrip-force/preview.js",
-      "bytes": 4067,
-      "sha256": "b5d724c8d073a511473d176fe37fb3a9f04af9b3b8b6fe3879db68ef1b4693a2"
+      "bytes": 4248,
+      "sha256": "ed823ecd0bac9d69c421c5327467b800e6357cacbd0d9725f225df071960660e"
     },
     {
       "path": "docs/hygrip-force/screen.css",
-      "bytes": 2155,
-      "sha256": "97f039762038e69b2cbb220c321c2e64e75a05a29800212bc378bbfc87038319"
+      "bytes": 3635,
+      "sha256": "66f3a768433a22135e1aec6960d9c65d003266f4ff6e768672491c6dbd765fdd"
     },
     {
       "path": "docs/hygrip-force/train-coefficients.js",
@@ -1128,13 +1128,18 @@
     },
     {
       "path": "docs/hygrip-force/trial-view.js",
-      "bytes": 3309,
-      "sha256": "29172845ce2d17697cf2839263e852aceed63ea7ace4e544b71aabad93c4d5a5"
+      "bytes": 3512,
+      "sha256": "5cdce8048ac59f8ee5b073f428f5591ea6c87868249bfe9e2037851cf62a4aef"
     },
     {
       "path": "docs/hygrip-force/trial.js",
-      "bytes": 3393,
-      "sha256": "bf43dfab9fc816a42b7cd6ed91d26761fe23bc28c79a215b9624dd7c722a0fe3"
+      "bytes": 3416,
+      "sha256": "fff5a20c939563b915e23fe19e463aab40857ac61fd74aba1d6d1ec8177097df"
+    },
+    {
+      "path": "docs/hygrip-force/voltage-plot.js",
+      "bytes": 6534,
+      "sha256": "108a38aba88c1cab9389d9d6acdee7acc6a3a3397ad982ee0d4dc4c0e614dcd8"
     },
     {
       "path": "docs/index.html",
@@ -2258,16 +2263,29 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "6fcd4d79894f7844ece20108cdd3bc728f193f74",
+  "previous_public_commit": "71c196dd10aabdc1b0fe2750b87a1df3f2edb96e",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
       "PROJECT-CONTEXT.json",
-      "benchmarks/hygrip-force/README.md",
-      "benchmarks/hygrip-force/cue-phase/PROTOCOL.md"
+      "benchmarks/hygrip-force/trial-replay/HYGRIP-trial-replay.zip",
+      "docs/hygrip-force/Open HYGRIP on Linux.sh",
+      "docs/hygrip-force/Open HYGRIP on Windows.cmd",
+      "docs/hygrip-force/Open HYGRIP on macOS.command",
+      "docs/hygrip-force/README.md",
+      "docs/hygrip-force/SHA256SUMS",
+      "docs/hygrip-force/forecast-browser.js",
+      "docs/hygrip-force/index.html",
+      "docs/hygrip-force/prepare_trial.py",
+      "docs/hygrip-force/preview.js",
+      "docs/hygrip-force/screen.css",
+      "docs/hygrip-force/train-coefficients.js",
+      "docs/hygrip-force/trial-view.js",
+      "docs/hygrip-force/trial.js",
+      "docs/hygrip-force/voltage-plot.js"
     ],
-    "preserved_rows": 446
+    "preserved_rows": 434
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",
@@ -2384,10 +2402,11 @@
       "url": "https://eliminatenoise.github.io/NeuroTranslation/hygrip-force/",
       "offline_archive": {
         "path": "benchmarks/hygrip-force/trial-replay/HYGRIP-trial-replay.zip",
-        "bytes": 22498,
-        "sha256": "2f24c3e38fb1f841cf54eb4c5d253d220a8be5b6000939be0b69ab2f73a1d9b0"
+        "bytes": 26130,
+        "sha256": "41788a110e361da9272c4c1d83c342f6031d7b4328fec072af2dc5938acfd570"
       },
-      "trial_replay": "One right-hand trial per local file; 205 scheduled cutoffs, conditional on complete input and target support. The example is invented."
+      "trial_replay": "One right-hand trial per local file; 205 scheduled cutoffs, conditional on complete input and target support. The example is invented.",
+      "signal_plot": "Twenty 50 Hz transducer readings and a selectable forecast at +120 ms. Trial outcomes are shown only when revealed."
     },
     "outcome": {
       "unit": "V",

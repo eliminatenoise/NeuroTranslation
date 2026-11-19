@@ -53,6 +53,8 @@ Study by Pablo Ortega, Tong Zhao and A. Aldo Faisal. The preview contains fitted
 
 ## Replay one recorded grip
 
+The plot draws the 20 input readings through cutoff. Choose a forecast to place its diamond six ticks ahead. In a trial, revealing the later reading adds an open circle at the same time. Open **Read the 20 sensor values** for exact time offsets and voltage readings.
+
 The trial slider follows one cued right-hand grip at 100 ms steps. At each cutoff, the frozen model sees the last 20 force readings and, when supplied, 400 past samples from each of 24 scalp channels. **Reveal the later reading** shows the voltage six force ticks later and each fitted forecast's signed error in volts. The invented trial demonstrates the controls with force alone. Both the file and its predictions stay on your device.
 
 To read a recording from [the HYGRIP release](https://doi.org/10.6084/m9.figshare.12383639.v1), download the original `hygrip.h5` and the converter beside this page. Install Python 3 with `h5py` and `numpy`. Substitute your archive's group letter and the right-hand trial number, counted from one.

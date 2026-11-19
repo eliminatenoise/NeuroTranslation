@@ -61,7 +61,7 @@
         mV: eeg.mV.map(channel => channel.slice(end - 399, end + 1))};
     }
     const predictions = model.predict(input, weights);
-    return {issue, seconds: issue / 50 - trial.forceGoSeconds, predictions,
+    return {issue, seconds: issue / 50 - trial.forceGoSeconds, predictions, history: input.forceV,
       observed: trial.forceV[last + 6]};
   }
 

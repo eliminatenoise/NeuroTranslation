@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="screen.css">
   <script defer src="train-coefficients.js"></script>
   <script defer src="forecast-browser.js"></script>
+  <script defer src="voltage-plot.js"></script>
   <script defer src="preview.js"></script>
   <script defer src="trial.js"></script>
   <script defer src="trial-view.js"></script>
@@ -29,6 +30,7 @@
       </div>
       <dl class="readings" id="readings" aria-live="polite"></dl>
       <p id="detail">Starting forecast…</p>
+      <div id="window-plot" hidden></div>
       <div class="inputs">
         <label for="input-window">Open a window JSON file</label>
         <input id="input-window" type="file" accept="application/json,.json" disabled>
@@ -54,17 +56,39 @@
         <dl class="readings" id="trial-readings"></dl>
         <label><input id="reveal-target" type="checkbox"> Reveal the later reading and forecast errors</label>
         <p id="trial-outcome" aria-live="polite"></p>
+        <div id="trial-plot" hidden></div>
       </div>
     </section>
     <section class="evidence" aria-labelledby="result-title">
-      <h2 id="result-title">Force history forecast better in first DEV</h2>
-      <p>On 19 November 2026, the unchanged force-history model averaged 0.000360 V error across three DEV participants. Aligned EEG raised it to 0.000461 V and increased error for all three. The comparison is small, its descriptive interval includes zero, and FINAL remains reserved.</p>
-      <p>The seven TRAIN folds used to select penalties also favoured force history on average. The browser runs those frozen TRAIN fits. Its invented example demonstrates the input format.</p>
+      <h2 id="result-title">Recent voltage gave the smaller error</h2>
+      <p>Across three development participants, recent voltage and cue timing gave a mean error of 0.360 mV. Adding aligned scalp EEG raised it to 0.461 mV. Error increased for each participant. With three people, the descriptive interval for that change includes zero. The final cohort remains reserved.</p>
+      <p>The browser runs the models fitted on seven training participants. Force history also gave the lower average error when each training participant took a turn as the test case.</p>
+      <p>A secondary analysis added forearm EMG for those same three development participants. The mean error fell, but shifting the muscle signal in time gave a smaller error still. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/6fcd4d79894f7844ece20108cdd3bc728f193f74/benchmarks/hygrip-force/forearm-results">Read the timing controls and results</a>.</p>
       <p>The forecast uses recorded transducer voltage on the released timeline. The study archive supplies no verified calibration in newtons or physical synchronization for live use.</p>
     </section>
     <footer>
       <p>Source cohort by Pablo Ortega, Tong Zhao and A. Aldo Faisal. <a href="https://doi.org/10.3389/fnins.2020.00919">Study</a> · <a href="https://doi.org/10.6084/m9.figshare.12383639.v1">Data deposit</a></p>
     </footer>
   </main>
+  <template id="voltage-plot">
+    <figure class="voltage-plot">
+      <figcaption><strong>Sensor history and forecast</strong></figcaption>
+      <label class="plot-selector">Plot a forecast <select></select></label>
+      <canvas role="img"></canvas>
+      <div class="plot-key">
+        <span class="key-history">Sensor history</span>
+        <span class="key-forecast">Forecast</span>
+        <span class="key-observed" hidden>Later reading</span>
+      </div>
+      <p class="plot-summary"></p>
+      <details>
+        <summary>Read the 20 sensor values</summary>
+        <table><caption>Input history at 50 Hz</caption>
+          <thead><tr><th scope="col">Time from cutoff (ms)</th><th scope="col">Sensor voltage (V)</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </details>
+    </figure>
+  </template>
 </body>
 </html>

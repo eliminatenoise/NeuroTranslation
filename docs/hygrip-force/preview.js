@@ -10,6 +10,7 @@
   const fileInput = document.getElementById("input-window");
   const exampleButton = document.getElementById("example");
   const downloadButton = document.getElementById("download");
+  const plot = globalThis.HygripVoltagePlot?.mount(document.getElementById("window-plot"));
   let importGeneration = 0;
   const labels = {
     timing: "Cue timing",
@@ -20,6 +21,7 @@
   };
 
   function showError(message, name, instructions) {
+    plot?.clear();
     values.replaceChildren();
     description.textContent = name;
     detail.textContent = instructions;
@@ -45,6 +47,7 @@
       detail.textContent = "Target is force sample " + (input.issueForceIndex + 6) + "."
         + (input.eeg ? " EEG window ends at device sample " + input.eeg.endIndex + "." : "");
       error.textContent = "";
+      plot?.show(input.forceV, predictions, name);
       return true;
     } catch (problem) {
       showError(problem.message, name, "Choose a valid window to get a forecast.");
@@ -87,6 +90,7 @@
       showError("Supply one JSON window no larger than 1 MiB.", name, instructions);
       return;
     }
+    plot?.clear();
     values.replaceChildren();
     description.textContent = name;
     detail.textContent = "Reading the window…";

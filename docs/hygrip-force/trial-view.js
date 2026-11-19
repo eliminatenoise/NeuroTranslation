@@ -9,6 +9,7 @@
   const labels = {force_history: "Force history", aligned: "Force history + EEG", timing: "Cue timing",
     persistence: "Last reading", backward_slope: "Recent slope"};
   const units = value => value.toFixed(6) + " V";
+  const plot = globalThis.HygripVoltagePlot?.mount(get("trial-plot"));
   let current, source, request = 0;
 
   function render() {
@@ -26,6 +27,7 @@
     }
     const errors = ["force_history","aligned","timing"].filter(id => id in row.predictions)
       .map(id => labels[id] + " minus later reading " + units(row.predictions[id] - row.observed));
+    plot?.show(row.history, row.predictions, status.textContent, reveal.checked ? row.observed : undefined);
     get("trial-outcome").textContent = reveal.checked
       ? source + " at +120 ms: " + units(row.observed) + ". " + errors.join(". ") + "." : "";
   }
@@ -34,10 +36,12 @@
     current = api.prepare(trial, weights); source = kind;
     slider.max = String(current.issues.length - 1); slider.value = "0"; reveal.checked = false;
     status.textContent = name + " · " + (trial.eeg ? "Force and scalp EEG" : "Force only");
-    render(); inspect.hidden = false;
+    inspect.hidden = false;
+    render();
   }
 
   function fail(message) {
+    plot?.clear();
     current = null; inspect.hidden = true; get("trial-outcome").textContent = ""; status.textContent = message;
   }
 

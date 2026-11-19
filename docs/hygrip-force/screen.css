@@ -35,3 +35,26 @@ footer { margin-top: 1.6rem; border-top: 1px solid #c7d4ce; padding-top: .85rem;
 #trial-inspect { margin-top: 1rem; }
 #cutoff { display: block; width: 100%; accent-color: #14574a; min-height: 2rem; }
 #cutoff-value, #trial-outcome { font-variant-numeric: tabular-nums; }
+
+.voltage-plot {
+  margin: 1.15rem 0 .35rem;
+  padding-top: 1rem;
+  border-top: 1px solid #c7d4ce;
+}
+.voltage-plot figcaption { font-size: 1.1rem; }
+.plot-selector { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .55rem; margin: .55rem 0; }
+.plot-selector select { max-width: 100%; padding: .3rem .45rem; font: inherit; }
+.voltage-plot canvas { display: block; width: 100%; height: 12.5rem; background: #f6f9f7; border-radius: .35rem; }
+.plot-key { display: flex; flex-wrap: wrap; gap: .35rem 1.1rem; margin: .55rem 0; font-size: .9rem; }
+.plot-key span { display: inline-flex; align-items: center; gap: .4rem; }
+.plot-key [hidden], .voltage-plot [hidden] { display: none; }
+.plot-key span::before { content: ""; display: inline-block; }
+.key-history::before { width: 1rem; border-top: 3px solid #15594e; }
+.key-forecast::before { width: .53rem; height: .53rem; background: #31549b; transform: rotate(45deg); }
+.key-observed::before { width: .65rem; height: .65rem; border-radius: 50%; border: 2px solid #8d3919; }
+.plot-summary { font-size: .95rem; }
+.voltage-plot details { margin-top: .55rem; }
+.voltage-plot summary { width: fit-content; color: #14574a; cursor: pointer; }
+.voltage-plot table { border-collapse: collapse; margin-top: .55rem; font-variant-numeric: tabular-nums; }
+.voltage-plot caption { text-align: left; font-weight: 650; }
+.voltage-plot th, .voltage-plot td { text-align: right; padding: .24rem .65rem; border-bottom: 1px solid #dce4df; }
