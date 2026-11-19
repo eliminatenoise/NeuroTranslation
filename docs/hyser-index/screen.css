@@ -21,6 +21,8 @@ button:disabled { opacity: .55; }
 .hint,.interpret,footer { color: #3c5650; }
 .record-row { margin-top: .7rem; align-items: center; }
 #record-status { font-weight: 620; }
+#trial-label { min-width: 0; max-width: 100%; }
+#trial { display: block; max-width: 100%; min-height: 2.75rem; }
 .calibration { margin: 1.15rem 0; padding: .1rem .85rem .65rem; background: #edf4ee; border-left: 3px solid #37665b; border-radius: .3rem; }
 .calibration label { font-weight: 650; }
 .calibration input { display: block; max-width: 100%; margin-top: .25rem; }
@@ -63,3 +65,15 @@ footer { border-top:1px solid #c7d4cd; padding-top:.7rem; font-size:.94rem; }
 #score { border-top: 1px solid #c5d3ca; margin-top: 1rem; }
 #score th[scope="row"] { text-align: left; min-width: 7rem; }
 #score-changes { margin: .5rem 0; padding-left: 1.3rem; }
+#finger-score { border-bottom: 1px solid #c5d3ca; padding-bottom: .85rem; margin-bottom: 1rem; }
+#finger-score-status:empty { margin: 0; }
+#finger-score th:first-child { text-align: left; }
+#finger-score td { white-space: nowrap; }
+#finger-score-action { min-height: 2.75rem; }
+#finger-score-action[aria-disabled="true"] { opacity: .55; cursor: default; }
+@media (max-width: 34rem) {
+  #finger-score table { width: 100%; font-size: .9rem; }
+  #finger-score th, #finger-score td { padding-inline: .2rem; }
+  #finger-score th:first-child { padding-inline-start: 0; }
+  #finger-score th:last-child, #finger-score td:last-child { padding-inline-end: 0; }
+}

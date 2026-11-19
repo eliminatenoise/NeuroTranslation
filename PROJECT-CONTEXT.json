@@ -427,8 +427,8 @@
       "entry": "docs/hyser-index/index.html",
       "offline_download": {
         "path": "benchmarks/hyser-index/downloads/Hyser-Index-Voltage-Reader.zip",
-        "bytes": 39862,
-        "sha256": "2b16456bc93e734b54b752cb9e41b9fd3cad1c95ac69816541e81c9389337616"
+        "bytes": 43655,
+        "sha256": "fe607a9472618871d585128a9e0699b1e62b2d8a569b007b6449297f16bec4b6"
       },
       "shared_train_predictors": {
         "path": "benchmarks/hyser-index/predictors.json",
@@ -455,8 +455,8 @@
         },
         "python_download": {
           "path": "benchmarks/hyser-index/downloads/Hyser-Crossday-Python.zip",
-          "bytes": 25008,
-          "sha256": "51a4ee5c00e62c2968dfc6bfdb28a1e43197c20fd208f2dc5259e9da5ede632b"
+          "bytes": 28238,
+          "sha256": "f83ac1b6e7d2d077859519be3267f568011ec4b86ca288cddd3e41062791eaca"
         },
         "calibration": {
           "path": "benchmarks/hyser-index/calibration.py",
@@ -467,8 +467,8 @@
       "personal_reader": "Two original same-person session folders, five labeled first-day trials, fixed second-day inference. Population mode remains available.",
       "python_scorer": {
         "path": "benchmarks/hyser-index/downloads/Hyser-Crossday-Python.zip",
-        "bytes": 25008,
-        "sha256": "51a4ee5c00e62c2968dfc6bfdb28a1e43197c20fd208f2dc5259e9da5ede632b"
+        "bytes": 28238,
+        "sha256": "f83ac1b6e7d2d077859519be3267f568011ec4b86ca288cddd3e41062791eaca"
       },
       "whole_hand": {
         "guide": {
@@ -498,6 +498,35 @@
           "sha256": "c237d6b59268c22d9e2844d32fe4ffd36dccf0584a8ad99b3465cc94cd2254d2"
         },
         "scope": "Five force sensors, four prespecified fits including one other-trial control, and three same-trial predictors. MAE favored different models in the 12-person training comparison and four previously studied development participants. Reserved final participants remain unopened."
+      },
+      "prescribed_task": {
+        "protocol": {
+          "path": "benchmarks/hyser-index/prescribed/PROTOCOL.md",
+          "bytes": 6180,
+          "sha256": "13905911b7b19048609429a16491d64ec3f6c7e624e95afd82c58542260fabc9"
+        },
+        "prospective_commit": "45c1547a8b77a7f38394ff2d2a27735cfec8d75d",
+        "results": {
+          "path": "benchmarks/hyser-index/prescribed/RESULTS.json",
+          "bytes": 65505,
+          "sha256": "c42dfd57783408ec1acb50703cea63f3061a589b8878c583d23d9191f11d5f40"
+        },
+        "guide": {
+          "path": "benchmarks/hyser-index/prescribed/README.md",
+          "bytes": 6035,
+          "sha256": "03df0eadbfcb5d4a62219bbf2d1262c9321fca2413d10bc1bdfa56a1276e77d3"
+        },
+        "scorer": {
+          "path": "benchmarks/hyser-index/score_prescribed.py",
+          "bytes": 6489,
+          "sha256": "ac120da8baa4cefe4da1276a25065c6ad1102f13a09332614984a8686d4e81f3"
+        },
+        "weights": {
+          "path": "benchmarks/hyser-index/whole-hand/WEIGHTS.json",
+          "bytes": 28906,
+          "sha256": "c237d6b59268c22d9e2844d32fe4ffd36dccf0584a8ad99b3465cc94cd2254d2"
+        },
+        "scope": "Unchanged Random-task weights scored on 360 prescribed N-DoF trials in 12 original fit participants and 120 in four previously evaluated development participants. Across all combinations, persistence gave lowest MAE and five histories lowest RMSE in each group. No refits. Original final participants remain excluded."
       }
     }
   },
@@ -568,8 +597,8 @@
       },
       "python_download": {
         "path": "benchmarks/hyser-index/downloads/Hyser-Crossday-Python.zip",
-        "bytes": 25008,
-        "sha256": "51a4ee5c00e62c2968dfc6bfdb28a1e43197c20fd208f2dc5259e9da5ede632b"
+        "bytes": 28238,
+        "sha256": "f83ac1b6e7d2d077859519be3267f568011ec4b86ca288cddd3e41062791eaca"
       },
       "calibration": {
         "path": "benchmarks/hyser-index/calibration.py",
@@ -605,6 +634,35 @@
         "sha256": "c237d6b59268c22d9e2844d32fe4ffd36dccf0584a8ad99b3465cc94cd2254d2"
       },
       "scope": "Five force sensors, four prespecified fits including one other-trial control, and three same-trial predictors. MAE favored different models in the 12-person training comparison and four previously studied development participants. Reserved final participants remain unopened."
+    },
+    "hyser_prescribed": {
+      "protocol": {
+        "path": "benchmarks/hyser-index/prescribed/PROTOCOL.md",
+        "bytes": 6180,
+        "sha256": "13905911b7b19048609429a16491d64ec3f6c7e624e95afd82c58542260fabc9"
+      },
+      "prospective_commit": "45c1547a8b77a7f38394ff2d2a27735cfec8d75d",
+      "results": {
+        "path": "benchmarks/hyser-index/prescribed/RESULTS.json",
+        "bytes": 65505,
+        "sha256": "c42dfd57783408ec1acb50703cea63f3061a589b8878c583d23d9191f11d5f40"
+      },
+      "guide": {
+        "path": "benchmarks/hyser-index/prescribed/README.md",
+        "bytes": 6035,
+        "sha256": "03df0eadbfcb5d4a62219bbf2d1262c9321fca2413d10bc1bdfa56a1276e77d3"
+      },
+      "scorer": {
+        "path": "benchmarks/hyser-index/score_prescribed.py",
+        "bytes": 6489,
+        "sha256": "ac120da8baa4cefe4da1276a25065c6ad1102f13a09332614984a8686d4e81f3"
+      },
+      "weights": {
+        "path": "benchmarks/hyser-index/whole-hand/WEIGHTS.json",
+        "bytes": 28906,
+        "sha256": "c237d6b59268c22d9e2844d32fe4ffd36dccf0584a8ad99b3465cc94cd2254d2"
+      },
+      "scope": "Unchanged Random-task weights scored on 360 prescribed N-DoF trials in 12 original fit participants and 120 in four previously evaluated development participants. Across all combinations, persistence gave lowest MAE and five histories lowest RMSE in each group. No refits. Original final participants remain excluded."
     }
   }
 }

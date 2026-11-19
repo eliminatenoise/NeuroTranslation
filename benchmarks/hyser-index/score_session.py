@@ -16,12 +16,17 @@ GRIDS = ("ED", "EP", "FD", "FP")
 SAMPLES = {"force": (100, 2500, 5), "raw": (2048, 51200, 256)}
 
 
-def read_signal(session, kind, trial, *, all_digits=False):
+def read_signal(session, kind, trial, *, all_digits=False, combination=None):
     """Validate an original multiplexed format-16 record before scaling its counts."""
     import wfdb
 
     rate, frames, channels = SAMPLES[kind]
-    stem = session / f"random_{kind}_sample{trial}"
+    if combination is None:
+        stem = session / f"random_{kind}_sample{trial}"
+    else:
+        if kind != "force" or combination not in range(1, 16) or trial not in (1, 2):
+            raise ValueError("Choose a force record for one of 15 prescribed combinations and repetition 1 or 2.")
+        stem = session / f"ndof_force_combination{combination}_sample{trial}"
     header = wfdb.rdheader(str(stem))
     filename = stem.name + ".dat"
     if (header.record_name != stem.name or header.n_sig != channels

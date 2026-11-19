@@ -19,6 +19,7 @@
     fitStatus = el("fit-status");
   const slider = el("cutoff"),
     reveal = el("reveal"),
+    fingerScoreAction = el("finger-score-action"),
     plot = el("plot"),
     status = el("record-status");
   let generation = 0,
@@ -47,6 +48,7 @@
     ["aligned_five", "Five finger histories"],
     ["aligned_summary", "Index + two values per other finger"],
   ];
+  const prescribedModels = [["persistence", "Last index reading"], ...fingerModels];
   const digitNames = { thumb: "Thumb", middle: "Middle", ring: "Ring", little: "Little" };
   const digitPlots = (fingers?.extraDigits ?? []).map((digit) => {
     const figure = document.createElement("figure");
@@ -72,6 +74,11 @@
     el("score-rows").replaceChildren();
     el("score-changes").hidden = true;
     el("score-changes").replaceChildren();
+    fingerScoreAction.disabled = true;
+    fingerScoreAction.removeAttribute("aria-disabled");
+    el("finger-score-status").textContent = "";
+    el("finger-score-table").hidden = true;
+    el("finger-score-rows").replaceChildren();
   }
   function clearForecast(message) {
     clearScores();
@@ -368,7 +375,7 @@
               : crossDay() ? "Observed Day 2 reading " : "Supplied later reading ") +
           volts(row.observed) +
           " V. " +
-          [...models, ...fingerModels, ["forceOwn", "Personalized force"], ["alignedOwn", "Personalized with EMG"]]
+          [...models, ...(record.prescribed ? prescribedModels : fingerModels), ["forceOwn", "Personalized force"], ["alignedOwn", "Personalized with EMG"]]
             .filter(([key]) => predictions[key] !== undefined)
             .map(([key, label]) => label + " error " + volts(predictions[key] - row.observed) + " V.")
             .join(" ");
@@ -377,8 +384,9 @@
   }
   const millivolts = (v) => (v * 1000).toFixed(3);
   async function evaluateTrial() {
+    if (!crossDay()) return;
     clearScores();
-    if (!crossDay() || !reveal.checked || !calibration || !record) return;
+    if (!reveal.checked || !calibration || !record) return;
     const token = scoreGeneration;
     const valid = () => token === scoreGeneration;
     el("score").hidden = false;
@@ -421,6 +429,54 @@
       if (valid()) el("score-status").textContent = error.message;
     }
   }
+  async function evaluateFingerTrial() {
+    if (!handContext() || !hasFingerWeights || !record || fingerScoreAction.disabled ||
+        fingerScoreAction.getAttribute("aria-disabled") === "true") return;
+    const token = ++scoreGeneration;
+    const valid = () => token === scoreGeneration;
+    const scoreStatus = el("finger-score-status");
+    const table = el("finger-score-table");
+    const rows = el("finger-score-rows");
+    const source = inputName;
+    fingerScoreAction.setAttribute("aria-disabled", "true");
+    table.hidden = true;
+    rows.replaceChildren();
+    scoreStatus.textContent = "Scoring the trial…";
+    try {
+      const prescribed = Boolean(record.prescribed);
+      const score = await fingers.scoreTrial(record.force, fingerWeights, valid, { includePersistence: prescribed });
+      if (!valid()) return;
+      const counts = score.count + " / " + score.scheduled;
+      if (!score.models) {
+        scoreStatus.textContent = counts + " cutoffs have all five histories and a later index reading. " +
+          "Missing history at " + score.missingHistories + " of " + score.scheduled + " cutoffs. " +
+          "Missing later reading at " + score.missingTargets + " of " + score.scheduled + " cutoffs. " +
+          "Scoring requires every scheduled cutoff.";
+        return;
+      }
+      const baseline = score.models.index_only.maeV;
+      for (const [arm, label] of prescribed ? prescribedModels : fingerModels) {
+        const tr = rows.insertRow();
+        const th = document.createElement("th");
+        th.scope = "row";
+        th.textContent = label;
+        tr.append(th);
+        const { maeV, rmseV } = score.models[arm];
+        tr.insertCell().textContent = millivolts(maeV);
+        tr.insertCell().textContent = millivolts(rmseV);
+        const gain = baseline - maeV;
+        const magnitude = millivolts(Math.abs(gain));
+        tr.insertCell().textContent = arm === "index_only" ? "Baseline" :
+          magnitude === "0.000" ? magnitude : (gain < 0 ? "−" : "+") + magnitude;
+      }
+      scoreStatus.textContent = source + " · " + counts + " matched cutoffs.";
+      table.hidden = false;
+    } catch (error) {
+      if (valid()) scoreStatus.textContent = error.message;
+    } finally {
+      if (valid()) fingerScoreAction.removeAttribute("aria-disabled");
+    }
+  }
   function render() {
     if (!record) return;
     const issue = Number(slider.value);
@@ -452,7 +508,7 @@
         ["aligned", crossDay() ? "Population · force history + EMG" : "Force history + EMG"],
         ["alignedOwn", "Personalized · force history + EMG"],
         ...fingerModels,
-        ["persistence", "Last voltage"],
+        ["persistence", record.prescribed ? "Last index reading" : "Last voltage"],
       ]) {
         if (!(id in predictions)) continue;
         const card = document.createElement("div"),
@@ -502,12 +558,20 @@
     }
   }
   function show(rec, name) {
+    clearScores();
     record = rec;
     inputName = name;
     slider.value = String(model.first);
     reveal.checked = false;
     reveal.disabled = crossDay() && !calibration;
     el("controls").hidden = false;
+    el("finger-score-help").textContent = rec.prescribed
+      ? "Compare the three forecasts and the last index reading with the later index voltage at all 450 cutoffs."
+      : "Compare the three forecasts with the later index reading at all 450 cutoffs in this trial.";
+    fingerScoreAction.disabled = !handContext() || !hasFingerWeights;
+    if (handContext() && !hasFingerWeights) {
+      el("finger-score-status").textContent = "Fitted finger-context models are unavailable in this copy.";
+    }
     status.textContent =
       name + (rec.raw ? " · force and raw forearm EMG" : " · force only");
     render();
@@ -515,10 +579,15 @@
   async function loadTrialFiles(entry, valid, readRaw = true) {
     const force = await wfdb.loadPair(entry, "force", valid);
     if (!valid()) return null;
-    const raw = readRaw && entry.files["raw.hea"]
+    const raw = readRaw && !entry.prescribedStem && entry.files["raw.hea"]
       ? await wfdb.loadPair(entry, "raw", valid)
       : null;
-    return valid() ? { force, raw } : null;
+    return valid() ? { force, raw, prescribed: Boolean(entry.prescribedStem) } : null;
+  }
+  function trialLabel(entry) {
+    if (!entry.prescribedStem) return "Trial " + entry.trial;
+    return "Combination " + entry.combination + " · repetition " + entry.repetition + " · " +
+      (entry.indexCued ? "index cued" : "index uncued");
   }
   async function openTrial() {
     const token = ++generation,
@@ -526,10 +595,13 @@
     if (!entry) return;
     const valid = () => token === generation;
     clearForecast("Checking the original WFDB files on this device…");
+    const trial = trialLabel(entry);
     const label = crossDay()
       ? "Day 2 · " + dayTwo.folder + " · trial " + entry.trial
-      : "Trial " + entry.trial + " from your files";
-    status.textContent = crossDay() ? "Opening " + label + "…" : "Opening trial " + entry.trial + "…";
+      : entry.prescribedStem
+        ? "Prescribed N-DoF · " + trial + " · " + (entry.folder.split("/").at(-1) || "session unknown")
+        : trial + " from your files";
+    status.textContent = "Opening " + label + "…";
     try {
       const rec = await loadTrialFiles(entry, valid, !handContext());
       if (valid()) show(rec, label);
@@ -560,7 +632,7 @@
       return;
     }
     try {
-      choices = wfdb.catalogue([...input.files], { includeRaw: !handContext() });
+      choices = wfdb.catalogue([...input.files], { includeRaw: !handContext(), includePrescribed: handContext() });
       if (crossDay()) {
         const session = personal.identifySession(choices);
         if (session?.day !== 2) {
@@ -569,7 +641,8 @@
         dayTwo = session;
       }
       for (const [i, ent] of choices.entries())
-        selector.add(new Option("Trial " + ent.trial, String(i)));
+        selector.add(new Option(trialLabel(ent), String(i)));
+      el("trial-caption").textContent = choices[0].prescribedStem ? "Combination and repetition" : "Trial";
       el("trial-label").hidden = choices.length < 2;
       selector.value = "0";
       openTrial();
@@ -585,8 +658,8 @@
     files.value = "";
     folder.value = "";
     clearChoices();
-    const demo = model.invented();
-    show(handContext() ? { force: demo.force } : demo, "Invented trial");
+    const demo = handContext() ? { force: fingers.inventedForce() } : model.invented();
+    show(demo, "Invented trial");
   }
   function discardCalibration() {
     fitGeneration++;
@@ -682,7 +755,7 @@
     workedExample = false;
     inputName = "";
     clearChoices();
-    clearForecast("Choose a Day 2 folder to open a forecast.");
+    clearForecast(crossDay() ? "Choose a Day 2 folder to open a forecast." : "Choose a folder, matching files or the invented trial.");
     discardCalibration();
     for (const input of [files, folder, dayOnePicker]) input.value = "";
     slider.value = String(model.first);
@@ -699,16 +772,17 @@
     mode.value = next;
     resetRecordings("");
     const isCrossDay = crossDay();
-    for (const id of ["day-one-panel", "day-two-heading", "day-two-hint", "fit", "fit-status", "clear-recordings"]) {
+    for (const id of ["day-one-panel", "day-two-heading", "day-two-hint", "fit", "fit-status"]) {
       el(id).hidden = !isCrossDay;
     }
+    clearRecordings.hidden = !isCrossDay && !handContext();
     for (const id of ["loose-pairs", "example", "population-hint"]) {
       el(id).hidden = isCrossDay;
     }
     el("folder-caption").textContent = isCrossDay ? "Original Day 2 session folder" : "Original session folder";
     el("reveal-caption").textContent = isCrossDay ? "Reveal Day 2 reading and trial errors" : "Reveal the later sensor reading";
     el("population-hint").hidden = isCrossDay || handContext();
-    for (const id of ["finger-context", "finger-hint", "finger-evidence"]) el(id).hidden = !handContext();
+    for (const id of ["finger-context", "finger-hint", "finger-evidence", "finger-score", "prescribed-evidence"]) el(id).hidden = !handContext();
     el("finger-fit-evidence").hidden = !handContext() || !hasFingerWeights;
     if (!isCrossDay) invented();
   }
@@ -737,11 +811,12 @@
   selector.addEventListener("change", openTrial);
   example.addEventListener("click", invented);
   crossExample.addEventListener("click", inventedDays);
-  clearRecordings.addEventListener("click", () => resetRecordings("Recordings and Day 1 fit cleared."));
+  clearRecordings.addEventListener("click", () => resetRecordings(crossDay() ? "Recordings and Day 1 fit cleared." : "Recordings cleared."));
   mode.addEventListener("change", () => setMode(mode.value));
   dayOnePicker.addEventListener("change", chooseDayOne);
   fitButton.addEventListener("click", fitSelected);
   slider.addEventListener("input", render);
+  fingerScoreAction.addEventListener("click", evaluateFingerTrial);
   reveal.addEventListener("change", () => {
     showOutcome();
     evaluateTrial();

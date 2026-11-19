@@ -39,4 +39,17 @@ python score_session.py random_dataset/subjectNN_session2 --whole-hand
 
 The five channels share one force record per trial. This comparison uses that record alone, with each channel converted to volts using its own header calibration. The JSON reports MAE and RMSE for each model and the change in MAE when all five histories are available. A positive change means that adding the other fingers lowered the error on the supplied recording. Run the EMG and personal-calibration comparisons separately.
 
+## Score a prescribed finger combination
+
+During the N-DoF task the participant follows a prescribed combination. In the Random task the participant chooses the fingers. The same three frozen models accept either task's five force-sensor voltages. The inferred quantity is still the later reading of the index transducer.
+
+Open the extracted Python scorer directory. Give this command one original `ndof_dataset/subjectNN_sessionD` folder. With no further options it reads the first repetition of all 15 combinations. The result includes separate errors for the eight combinations that cue the index finger and the seven that leave it uncued. Both groups contain measured index-sensor voltage.
+
+```sh
+python score_prescribed.py ndof_dataset/subjectNN_session1
+python score_prescribed.py ndof_dataset/subjectNN_session1 --combination 3 --repetition 1
+```
+
+For the second command, the two required files are `ndof_force_combination3_sample1.hea` and `ndof_force_combination3_sample1.dat`. The reader checks their recorded layout, calibration and WFDB checksums. For provenance, compare the original files with the SHA-256 index supplied by PhysioNet. The command prints MAE and RMSE in volts for the last reading, index history, five histories, and the compact five-sensor forecast. Errors from one session cannot establish a population effect. [Dataset and terms](https://physionet.org/content/hd-semg/2.0.0/)
+
 Contains information from Jiang, Dai, Liu and Fan’s Hyser 2.0.0 database, made available under the Open Data Commons Attribution License 1.0. [Dataset and citation](https://doi.org/10.13026/hxan-pe94) · [License](https://physionet.org/content/hd-semg/view-license/2.0.0/) · [Acquisition study](https://doi.org/10.1109/TNSRE.2021.3082551)

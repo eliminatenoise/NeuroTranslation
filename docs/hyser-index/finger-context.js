@@ -63,5 +63,67 @@
     return predictions;
   }
 
-  globalThis.HyserFingerContext = { extraDigits, extraHistory, predict, validWeights };
+  function inventedForce() {
+    // Match score_session.py --example --whole-hand --trial 1 (Day 2).
+    const sensors = [
+      (t) => 0.06 + 0.025 * Math.sin(t * 1.2 + 1),
+      (t) => 0.08 + 0.04 * Math.sin(t * (1.05 + 2 / 20) + 0.25) + 0.02 * Math.cos(t * 2.1),
+      (t) => 0.07 + 0.031 * Math.sin(t * 1.08 + 0.4),
+      (t) => 0.09 + 0.015 * Math.cos(t * 1.4 + 0.2),
+      (t) => 0.04 + 0.018 * Math.cos(t * 0.91 + 0.7),
+    ];
+    return {
+      voltage(tick, channel) {
+        return sensors[channel](tick / 100);
+      },
+    };
+  }
+
+  async function scoreTrial(force, weights, isCurrent = () => true, { includePersistence = false } = {}) {
+    if (!validWeights(weights)) throw new Error("Fitted finger-context models are unavailable.");
+    const { first, last, step, windowAt, observationAt, yieldFrame } = globalThis.HyserForecast;
+    const scheduled = (last - first) / step + 1;
+    const record = { force };
+    const arms = includePersistence ? ["persistence", ...Object.keys(widths)] : Object.keys(widths);
+    const totals = Object.fromEntries(arms.map((arm) => [arm, { absolute: 0, squared: 0 }]));
+    let count = 0;
+    let missingHistories = 0;
+    let missingTargets = 0;
+    for (let i = 0; i < scheduled; i++) {
+      if (i % 75 === 0) {
+        await yieldFrame();
+        if (!isCurrent()) return null;
+      }
+      const issue = first + i * step;
+      const index = windowAt(record, issue, { observe: false, skipMissing: true });
+      const others = extraHistory(force, issue);
+      const hasHistory = index && others.every((digit) => digit.every(Number.isFinite));
+      const target = observationAt(record, issue);
+      if (!hasHistory) missingHistories++;
+      if (target === null) missingTargets++;
+      if (!hasHistory || target === null) continue;
+      const forecasts = predict(index.force, others, weights);
+      if (includePersistence) forecasts.persistence = index.force.at(-1);
+      for (const arm of arms) {
+        const error = forecasts[arm] - target;
+        totals[arm].absolute += Math.abs(error);
+        totals[arm].squared += error ** 2;
+      }
+      count++;
+    }
+    // The Python scorer rejects incomplete trials. Never compare a partial trial.
+    let models = null;
+    if (count === scheduled) {
+      models = Object.fromEntries(arms.map((arm) => [arm, {
+        maeV: totals[arm].absolute / count,
+        rmseV: Math.sqrt(totals[arm].squared / count),
+      }]));
+      if (Object.values(models).some(({ maeV, rmseV }) => !Number.isFinite(maeV) || !Number.isFinite(rmseV))) {
+        throw new Error("The trial has a nonfinite forecast error.");
+      }
+    }
+    return { count, scheduled, missingHistories, missingTargets, models };
+  }
+
+  globalThis.HyserFingerContext = { extraDigits, extraHistory, predict, validWeights, inventedForce, scoreTrial };
 })();

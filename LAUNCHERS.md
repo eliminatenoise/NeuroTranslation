@@ -42,10 +42,12 @@ The HYGRIP preview forecasts grip transducer voltage. It accepts a local forecas
 
 ## Hyser index-finger trial reader
 
-Open the reader for an invented example or an original Hyser Random-task WFDB recording. The ZIP includes local Windows, macOS and Linux launchers and the two pooled training fits. [Browser reader](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) · [Offline ZIP](benchmarks/hyser-index/downloads/Hyser-Index-Voltage-Reader.zip) · [Study](benchmarks/hyser-index/).
+Open the reader for an invented example or an original Hyser WFDB recording. Extract the ZIP and run your Windows, macOS or Linux launcher, or open `index.html` directly. The models run locally and your recordings stay in the browser. [Browser reader](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) · [Offline ZIP](benchmarks/hyser-index/downloads/Hyser-Index-Voltage-Reader.zip) · [Study](benchmarks/hyser-index/).
 
 In the browser or offline reader, choose **Personalize across two days**. Fit an adjustment from the original five first-day trials, then open a second-day trial from the same participant. **Try two invented days** runs the workflow without a recording.
 
 The [Python session scorer](benchmarks/hyser-index/downloads/Hyser-Crossday-Python.zip) reads original WFDB session folders, fits on Day 1 and compares shared and personal errors on Day 2. The example runs with invented data. [Read the command-line instructions](benchmarks/hyser-index/SCORE-SESSION.md).
 
-In the Hyser reader, choose **Finger sensor context** to inspect the other four fingers and compare the three fixed forecasts on one force file pair. In the Python scorer, use `--whole-hand` on an original session folder or on the invented example. [Five-sensor results](benchmarks/hyser-index/whole-hand/README.md).
+In the Hyser reader, choose **Finger sensor context** to inspect the other four fingers on a Random or prescribed N-DoF trial. Choose one original session folder or matching force files. In N-DoF, pick a combination and repetition. Click **Score trial** to compare the fixed forecasts at all 450 cutoffs of the selected trial. N-DoF also scores the last index reading as a benchmark. [Random-task results](benchmarks/hyser-index/whole-hand/README.md) · [Prescribed-task study](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hyser-index/prescribed).
+
+For a prescribed combination in Python, use `score_prescribed.py` from the scoring ZIP. [Command and recording names](benchmarks/hyser-index/SCORE-SESSION.md).
