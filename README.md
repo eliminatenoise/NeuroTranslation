@@ -50,7 +50,7 @@ In the earlier IACKD palm pilot, a ridge model using three EEG channels had 7.51
 
 ## Read the papers
 
-A hand can close by the same amount and squeeze harder. To measure the difference you need the force at the object. These four drafts follow forearm activity through two wrist-angle studies, then ask what scalp EEG adds to a forecast of the squeeze. The model using EEG from the next lift scored better than the one using the correctly paired trace. [Read the four papers](papers/experimental/measured-grip-development-2026-11-19/README.md) · [Download the PDFs and reading aid](papers/downloads/NeuroTranslation-Brain2Body-Measured-Grip-and-Development-2026-11-19.zip)
+A hand can close by the same amount and squeeze harder. The four papers follow that distinction from wrist angle to the force on a lifted object, then to the voltage recorded during a paced grip. In the paced task, adding scalp EEG increased forecast error for all three development participants. The forearm comparison asks whether matching muscle activity to the right moment matters. [Read the four papers](papers/experimental/grip-evidence-2026-11-19/README.md) · [Download the PDFs and reading aid](papers/downloads/NeuroTranslation-Brain2Body-Grip-Evidence-2026-11-19.zip) · [Download the selected manuscript sources](papers/downloads/NeuroTranslation-Brain2Body-Selected-Grip-Evidence-Source-2026-11-19.zip)
 
 The previously selected scientific-layout edition is listed below.
 

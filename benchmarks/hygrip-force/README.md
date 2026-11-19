@@ -29,4 +29,4 @@ The version-1 data DOI identifies the deposit. [DESIGN.json](DESIGN.json) record
 
 ### Does the cue change what a rising grip signal predicts?
 
-The next comparison fits three voltage models on the same 20 recent readings and known cue schedule. One lets the relation between recent voltage and its forecast vary across the scheduled contraction and relaxation phases. The prespecified comparison uses the original training split and the three previously studied development participants. [Read the frozen design](cue-phase/PROTOCOL.md).
+The next comparison fits three voltage models on the same 20 recent readings and known cue schedule. One lets the relation between recent voltage and its forecast vary across the scheduled contraction and relaxation phases. The prespecified comparison uses the original training split and the three previously studied development participants. [Read the frozen design](cue-phase/PROTOCOL.md). In development, the full history model retained the lowest mean error. [See the cue-phase comparison](cue-phase/README.md).

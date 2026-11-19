@@ -70,41 +70,57 @@
       }
     },
     "papers": {
-      "latest_rendered": "papers/experimental/scientific-layout-2026-11-15",
-      "manifest": "papers/experimental/scientific-layout-2026-11-15/manifest.json",
-      "manifest_sha256": "a524e17ae958ae14ffc7ece9e311ea4810094256dff502c1863cfa3408768184",
-      "scope": "Four experimental working drafts, 546 pages; recorded targeted visual evidence covers 26 pages, with 520 outside visual acceptance; no whole-paper or biological acceptance.",
-      "build_provenance": "R2 technical PDFs retained; accessible editions have actual R3 builds. The R3 Brain2Body Simple English PDF equals its preceding R2 bytes.",
+      "latest_rendered": "papers/experimental/grip-evidence-2026-11-19",
+      "manifest": "papers/experimental/grip-evidence-2026-11-19/manifest.json",
+      "manifest_sha256": "f68c1c96bc0cf5fd515a98263edc7fb8f3e5dfb7286c025283888bdb9ae6e0f5",
+      "scope": "Four rebuilt formal and accessible paper editions on wrist angle, measured grip force and recorded grip transducer voltage. HYGRIP primary scalp EEG and secondary forearm results use the same three development participants.",
+      "build_provenance": "Four rebuilt and verified PDFs in the previously qualified offline Tectonic workflow.",
       "historical_erratum": "papers/errata/r9-reading-aid-metadata.txt",
       "historical_source": "papers/experimental/r11-source",
-      "source_status": "Preserved R9/R11 sources are historical, not matching build-source bundles for the current PDFs. R11 remains unbuilt/nonstandalone, with its G35 proposal unadopted.",
+      "source_status": "The selected-source ZIP contains 75 cleared manuscript and bibliography files bound to all four PDFs. The manifest lists omitted figures, fonts and dependencies; the complete native build remains with the maintainer.",
       "publication_scope": "This metadata identifies selected content; actual publication and remote readback require a separate receipt.",
       "download_bundle": {
-        "path": "papers/downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip",
-        "bytes": 3083960,
-        "sha256": "519a88c6881852b66d5db8efd74e351a661a6acfeb643ee79cc68f489a69bf9b",
-        "members": 14,
-        "extraction_folder": "NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15",
-        "scope": "Four exact selected PDFs, three companions, README, content manifest and five notice files. No standalone font, source, model or private evidence files. Native extraction/PDF-link behavior across operating systems remains unverified."
+        "path": "papers/downloads/NeuroTranslation-Brain2Body-Grip-Evidence-2026-11-19.zip",
+        "bytes": 3230002,
+        "sha256": "0ca636e28f2012f9af6489e79cda44a87f6f3b03fd7532b702616f24d8795c3b",
+        "members": 15,
+        "extraction_folder": "NeuroTranslation-Brain2Body-Grip-Evidence-2026-11-19",
+        "checksum": "downloads/NeuroTranslation-Brain2Body-Grip-Evidence-2026-11-19.zip.sha256"
       },
       "latest_experimental_candidate": {
-        "version": "measured-grip-development-2026-11-19",
-        "directory": "papers/experimental/measured-grip-development-2026-11-19",
+        "version": "grip-evidence-2026-11-19",
+        "directory": "papers/experimental/grip-evidence-2026-11-19",
         "archive": {
-          "path": "papers/downloads/NeuroTranslation-Brain2Body-Measured-Grip-and-Development-2026-11-19.zip",
-          "bytes": 3200159,
-          "sha256": "c002ac8bcead0abbb6f9fe14f5ce3678491783cedfa25aa30d5460d423a08c7e"
+          "path": "papers/downloads/NeuroTranslation-Brain2Body-Grip-Evidence-2026-11-19.zip",
+          "bytes": 3230002,
+          "sha256": "0ca636e28f2012f9af6489e79cda44a87f6f3b03fd7532b702616f24d8795c3b"
         },
-        "reading_aid": "papers/experimental/measured-grip-development-2026-11-19/research-evidence-reading-aid.md",
-        "pages_total": 574,
-        "scope": "Four experimental paper drafts with separate wrist-angle and grip-force results. The matched EEG criterion failed for three grip-force development participants. The Brain2Body variants document the evidence and limits for the proposed marsupial model.",
+        "reading_aid": "papers/experimental/grip-evidence-2026-11-19/research-evidence-reading-aid.md",
+        "pages_total": 582,
+        "scope": "Four rebuilt formal and accessible paper editions on wrist angle, measured grip force and recorded grip transducer voltage. HYGRIP primary scalp EEG and secondary forearm results use the same three development participants.",
         "selected_manuscript_source": {
-          "path": "papers/downloads/NeuroTranslation-Brain2Body-Selected-Manuscript-Source-2026-11-19.zip",
-          "sha256": "b7fbb30a8f5270d5523d20c185cd0f51f2c42ce5e710cae0632e00ab0046d210",
-          "bytes": 587267,
-          "members": 76,
-          "scope": "73 selected manuscript and bibliography files bound to the four rendered PDFs. Omitted dependencies are listed inside. The complete native build stays with the maintainer."
+          "path": "papers/downloads/NeuroTranslation-Brain2Body-Selected-Grip-Evidence-Source-2026-11-19.zip",
+          "bytes": 594993,
+          "sha256": "f34cd1fd550bd72877954ed6837f0d4b232fdf7c201acee0c0d4ec9029cb73c9",
+          "members": 78,
+          "scope": "The selected-source ZIP contains 75 cleared manuscript and bibliography files bound to all four PDFs. The manifest lists omitted figures, fonts and dependencies; the complete native build remains with the maintainer."
         }
+      },
+      "historical_scientific_layout": {
+        "latest_rendered": "papers/experimental/scientific-layout-2026-11-15",
+        "manifest": "papers/experimental/scientific-layout-2026-11-15/manifest.json",
+        "manifest_sha256": "a524e17ae958ae14ffc7ece9e311ea4810094256dff502c1863cfa3408768184",
+        "scope": "Four experimental working drafts, 546 pages; recorded targeted visual evidence covers 26 pages, with 520 outside visual acceptance; no whole-paper or biological acceptance.",
+        "build_provenance": "R2 technical PDFs retained; accessible editions have actual R3 builds. The R3 Brain2Body Simple English PDF equals its preceding R2 bytes.",
+        "download_bundle": {
+          "path": "papers/downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip",
+          "bytes": 3083960,
+          "sha256": "519a88c6881852b66d5db8efd74e351a661a6acfeb643ee79cc68f489a69bf9b",
+          "members": 14,
+          "extraction_folder": "NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15",
+          "scope": "Four exact selected PDFs, three companions, README, content manifest and five notice files. No standalone font, source, model or private evidence files. Native extraction/PDF-link behavior across operating systems remains unverified."
+        },
+        "source_status": "Preserved R9/R11 sources are historical, not matching build-source bundles for the current PDFs. R11 remains unbuilt/nonstandalone, with its G35 proposal unadopted."
       }
     },
     "portable_interface": {
@@ -412,7 +428,18 @@
         "bytes": 9060,
         "sha256": "8b84c26db90a9019a12a0a78706b0ab5dae072217b73257914bd3802b8f9cb38"
       },
-      "scope": "Comparison of cue-conditioned and shared voltage dynamics on the previously studied healthy HYGRIP cohort."
+      "scope": "Comparison of cue-conditioned and shared voltage dynamics on the previously studied healthy HYGRIP cohort.",
+      "outcome": "The phase-conditioned residual did not beat the original full-history benchmark on either split. Previously studied development cohort. The full-history ridge remains selected.",
+      "results": {
+        "path": "benchmarks/hygrip-force/cue-phase/README.md",
+        "bytes": 4413,
+        "sha256": "2fa37ea227a5859f53da3a6fa1f142f3b49e9bf3b2ea9a2953746baf74d59f32"
+      },
+      "aggregate_bundle": {
+        "path": "benchmarks/hygrip-force/cue-phase/HYGRIP-Cue-Phase-Aggregates.zip",
+        "bytes": 10155,
+        "sha256": "b575e5ffcbae78a89ca094665412c8e574da6c3d66385988f1dd4e4473ad9b72"
+      }
     }
   }
 }

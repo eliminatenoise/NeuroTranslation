@@ -1,6 +1,22 @@
 # Paper drafts
 
-## Measured grip and development · 19 November 2026
+## Grip evidence · 19 November 2026
+
+A hand can close by the same amount and squeeze harder. In WAY, the plates on a lifted object measured that squeeze in newtons. In HYGRIP, a hand squeezed a sensor to a cue. In the development group, its voltage forecast got worse with aligned scalp EEG. Aligned forearm EMG lowered mean error, with a drop for one of those three people. An offline shift that can use later samples gave lower error than aligned EMG for all three. The paired results leave the value of precise timing uncertain.
+
+The two Brain2Body editions also follow early anatomy, skin repair and milk across distinct marsupial species. Skeletal timing in dunnarts leaves the timing in Antechinus open. Skin scarring and changes in wallaby milk leave body-wide repair and precision developmental control open.
+
+- [NeuroTranslation technical](experimental/grip-evidence-2026-11-19/neurotranslation-technical.pdf) · [Forearm correction, p. 23](experimental/grip-evidence-2026-11-19/neurotranslation-technical.pdf#page=23) · [Daily activities, p. 24](experimental/grip-evidence-2026-11-19/neurotranslation-technical.pdf#page=24) · [WAY grip force, p. 25](experimental/grip-evidence-2026-11-19/neurotranslation-technical.pdf#page=25) · [HYGRIP scalp EEG, p. 27](experimental/grip-evidence-2026-11-19/neurotranslation-technical.pdf#page=27) · [HYGRIP forearm EMG, p. 28](experimental/grip-evidence-2026-11-19/neurotranslation-technical.pdf#page=28)
+- [NeuroTranslation explained](experimental/grip-evidence-2026-11-19/neurotranslation-explained.pdf) · [Forearm correction, p. 42](experimental/grip-evidence-2026-11-19/neurotranslation-explained.pdf#page=42) · [Daily activities, p. 42](experimental/grip-evidence-2026-11-19/neurotranslation-explained.pdf#page=42) · [WAY grip force, p. 44](experimental/grip-evidence-2026-11-19/neurotranslation-explained.pdf#page=44) · [HYGRIP scalp EEG, p. 46](experimental/grip-evidence-2026-11-19/neurotranslation-explained.pdf#page=46) · [HYGRIP forearm EMG, p. 47](experimental/grip-evidence-2026-11-19/neurotranslation-explained.pdf#page=47)
+- [Brain2Body research article](experimental/grip-evidence-2026-11-19/brain2body-article.pdf) · [Forearm correction, p. 4](experimental/grip-evidence-2026-11-19/brain2body-article.pdf#page=4) · [Daily activities, p. 4](experimental/grip-evidence-2026-11-19/brain2body-article.pdf#page=4) · [WAY grip force, p. 6](experimental/grip-evidence-2026-11-19/brain2body-article.pdf#page=6) · [HYGRIP scalp EEG, p. 7](experimental/grip-evidence-2026-11-19/brain2body-article.pdf#page=7) · [HYGRIP forearm EMG, p. 8](experimental/grip-evidence-2026-11-19/brain2body-article.pdf#page=8) · [Development and repair, p. 20](experimental/grip-evidence-2026-11-19/brain2body-article.pdf#page=20)
+- [Brain2Body Simple English](experimental/grip-evidence-2026-11-19/brain2body-simple-english.pdf) · [Forearm correction, p. 12](experimental/grip-evidence-2026-11-19/brain2body-simple-english.pdf#page=12) · [Daily activities, p. 13](experimental/grip-evidence-2026-11-19/brain2body-simple-english.pdf#page=13) · [WAY grip force, p. 14](experimental/grip-evidence-2026-11-19/brain2body-simple-english.pdf#page=14) · [HYGRIP scalp EEG, p. 16](experimental/grip-evidence-2026-11-19/brain2body-simple-english.pdf#page=16) · [HYGRIP forearm EMG, p. 17](experimental/grip-evidence-2026-11-19/brain2body-simple-english.pdf#page=17) · [Development and repair, p. 31](experimental/grip-evidence-2026-11-19/brain2body-simple-english.pdf#page=31)
+
+[Download all four drafts and companions](downloads/NeuroTranslation-Brain2Body-Grip-Evidence-2026-11-19.zip) ·
+[Reading aid](experimental/grip-evidence-2026-11-19/research-evidence-reading-aid.md) ·
+[Download the selected manuscript sources](downloads/NeuroTranslation-Brain2Body-Selected-Grip-Evidence-Source-2026-11-19.zip).
+The source archive inventories manuscript text and lists the additional dependencies needed for a rebuild.
+
+## Earlier measured grip and development · 19 November 2026
 
 A hand can close by the same amount and squeeze harder. To measure the difference you need the force at the object. These four drafts follow forearm activity through two wrist-angle studies, then ask what scalp EEG adds to a forecast of the squeeze. The model using EEG from the next lift scored better than the one using the correctly paired trace.
 

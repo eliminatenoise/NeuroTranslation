@@ -1,0 +1,198 @@
+{
+  "assigned_people": 8,
+  "baseline_reproduction": {
+    "max_abs_difference_v_by_arm": {
+      "backward_slope": 0.0,
+      "force_history": 0.0,
+      "persistence": 0.0
+    },
+    "selected_force_history_alpha": 0.01
+  },
+  "censored": 0,
+  "clock_held_people": 1,
+  "clock_held_planned_issues": 2665,
+  "fit_grid": {
+    "compact_residual": {
+      "fold_constant_feature_count_range": [
+        0,
+        0
+      ],
+      "grid_mean_participant_rmse_v": {
+        "0.01": 0.0004105205552321674,
+        "0.1": 0.0004107484082547172,
+        "1.0": 0.0004427926207698313,
+        "10.0": 0.0005081861831475181,
+        "100.0": 0.0005289035355731509
+      },
+      "refit_constant_features": 0,
+      "selected_alpha": 0.01
+    },
+    "force_history": {
+      "fold_constant_feature_count_range": [
+        0,
+        0
+      ],
+      "grid_mean_participant_rmse_v": {
+        "0.01": 0.00039376341186941806,
+        "0.1": 0.00041156881508770074,
+        "1.0": 0.0004624218784550485,
+        "10.0": 0.0007081160234073812,
+        "100.0": 0.000936233642194715
+      },
+      "refit_constant_features": 0,
+      "selected_alpha": 0.01
+    },
+    "phase_conditioned": {
+      "fold_constant_feature_count_range": [
+        0,
+        0
+      ],
+      "grid_mean_participant_rmse_v": {
+        "0.01": 0.0004038642001546183,
+        "0.1": 0.00040276881915607437,
+        "1.0": 0.0004307658320121033,
+        "10.0": 0.0005036087471621788,
+        "100.0": 0.0005282796809261108
+      },
+      "refit_constant_features": 0,
+      "selected_alpha": 0.1
+    }
+  },
+  "forecast_horizon_ms": 120,
+  "issues": 16195,
+  "participant_mean_rmse_v": {
+    "backward_slope": 0.0005584233241801184,
+    "compact_residual": 0.0004105205552321674,
+    "force_history": 0.00039376341186941806,
+    "persistence": 0.0005318511065395782,
+    "phase_conditioned": 0.00040276881915607437
+  },
+  "people": 7,
+  "phase_conditioned_minus": {
+    "backward_slope": {
+      "descriptive_t95_v": [
+        -0.00023017885457576786,
+        -8.113015547232016e-05
+      ],
+      "mean_delta_v": -0.000155654505024044,
+      "negative": 7,
+      "positive": 0,
+      "ties": 0,
+      "two_sided_exact_sign_p": 0.015625
+    },
+    "compact_residual": {
+      "descriptive_t95_v": [
+        -1.7523162947893024e-05,
+        2.0196907957066907e-06
+      ],
+      "mean_delta_v": -7.751736076093167e-06,
+      "negative": 6,
+      "positive": 1,
+      "ties": 0,
+      "two_sided_exact_sign_p": 0.125
+    },
+    "force_history": {
+      "descriptive_t95_v": [
+        -2.842537343291525e-06,
+        2.085335191660401e-05
+      ],
+      "mean_delta_v": 9.005407286656242e-06,
+      "negative": 2,
+      "positive": 5,
+      "ties": 0,
+      "two_sided_exact_sign_p": 0.453125
+    },
+    "persistence": {
+      "descriptive_t95_v": [
+        -0.00015897212745170978,
+        -9.919244731529788e-05
+      ],
+      "mean_delta_v": -0.00012908228738350383,
+      "negative": 7,
+      "positive": 0,
+      "ties": 0,
+      "two_sided_exact_sign_p": 0.015625
+    }
+  },
+  "phase_strata": {
+    "00": {
+      "issues": 3160,
+      "participant_mean_rmse_v": {
+        "backward_slope": 0.0007297398922901402,
+        "compact_residual": 0.0005130070183830823,
+        "force_history": 0.0004888681579742922,
+        "persistence": 0.0006937409683245965,
+        "phase_conditioned": 0.0004918546333600425
+      },
+      "people": 7,
+      "phase_conditioned_minus_v": {
+        "backward_slope": -0.00023788525893009773,
+        "compact_residual": -2.115238502303985e-05,
+        "force_history": 2.9864753857502413e-06,
+        "persistence": -0.00020188633496455406
+      },
+      "trials": 79
+    },
+    "01": {
+      "issues": 1089,
+      "participant_mean_rmse_v": {
+        "backward_slope": 0.0005619593213396846,
+        "compact_residual": 0.00047580694005123326,
+        "force_history": 0.0004440850932678704,
+        "persistence": 0.0005378699456670611,
+        "phase_conditioned": 0.0004580252188264934
+      },
+      "people": 7,
+      "phase_conditioned_minus_v": {
+        "backward_slope": -0.0001039341025131912,
+        "compact_residual": -1.778172122473981e-05,
+        "force_history": 1.394012555862306e-05,
+        "persistence": -7.984472684056761e-05
+      },
+      "trials": 79
+    },
+    "10": {
+      "issues": 790,
+      "participant_mean_rmse_v": {
+        "backward_slope": 0.0005277260664062841,
+        "compact_residual": 0.00043729859888577986,
+        "force_history": 0.0004246993249132919,
+        "persistence": 0.0005761116656407038,
+        "phase_conditioned": 0.0004372150493104328
+      },
+      "people": 7,
+      "phase_conditioned_minus_v": {
+        "backward_slope": -9.051101709585121e-05,
+        "compact_residual": -8.35495753470809e-08,
+        "force_history": 1.2515724397140888e-05,
+        "persistence": -0.00013889661633027098
+      },
+      "trials": 79
+    },
+    "11": {
+      "issues": 11156,
+      "participant_mean_rmse_v": {
+        "backward_slope": 0.0004756330288919387,
+        "compact_residual": 0.0003550490739973276,
+        "force_history": 0.00034427277626530986,
+        "persistence": 0.0004543898202492419,
+        "phase_conditioned": 0.00035300756262675304
+      },
+      "people": 7,
+      "phase_conditioned_minus_v": {
+        "backward_slope": -0.00012262546626518565,
+        "compact_residual": -2.041511370574622e-06,
+        "force_history": 8.734786361443195e-06,
+        "persistence": -0.00010138225762248888
+      },
+      "trials": 79
+    }
+  },
+  "planned": 16195,
+  "schema_version": 1,
+  "split": "TRAIN",
+  "split_directional_screen": false,
+  "target_units": "V",
+  "trials": 79,
+  "unscorable": 0
+}
