@@ -1,0 +1,26 @@
+{
+  "study": "Population pinch-force correction for a rising and falling cue",
+  "protocol_sha256": "e8d7cd2cb14e5546d42a07ea38aed134b456ab75a284e7e12bd3b5a09dbf8640",
+  "ordered_roster_commitment_sha256": "fdc8fbbc9f14ca518aa5bfdfa671bac39ccd043e7505112d59a34ff380cee678",
+  "acquisition_study": "https://doi.org/10.1038/s41597-025-05733-y",
+  "source_archive_by_role": {
+    "FIT": "https://doi.org/10.5281/zenodo.15077957",
+    "EVAL": "https://doi.org/10.5281/zenodo.15070187"
+  },
+  "previous_result": "https://github.com/eliminatenoise/NeuroTranslation/tree/32d2c4ed6dfd8b38f05c2f7a3f506dd7b947a153/benchmarks/cemhsey-carry",
+  "cohort": {
+    "fit_people": 3,
+    "evaluation_people": 3,
+    "repeats_per_person": 2,
+    "indexed_days": 1,
+    "target_percent_mvc": 50,
+    "fit_records": 6,
+    "evaluation_records": 6
+  },
+  "learned_parameters": 9,
+  "cutoffs_per_trial": 592,
+  "nominal_horizon_ticks": 24,
+  "arm_count": 11,
+  "paired_comparisons_per_phase": 13,
+  "fit_scope": "Population corrections learned without the evaluation participants. Other records from these people previously contributed to separate programme development or evaluation."
+}

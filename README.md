@@ -66,6 +66,8 @@ At the 50% pinch target, current force plus the scheduled change beat the fitted
 
 What does one practice attempt buy on the next recording day? The two-day study compares an earlier fit with a fresh fit on exactly the same pinch. [Compare next-day forecasts](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-carry/) · [Save and reuse a practice fit locally](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/) · [Results and protocol](benchmarks/cemhsey-carry/README.md)
 
+Can the rising and falling portions of a pinch use different corrections learned from other people? [Read the prespecified comparison](benchmarks/cemhsey-phase/README.md)
+
 ## Read the papers
 
 A hand can close by the same amount and squeeze harder. The four papers follow that distinction from wrist angle to a lifted object, a paced grip and a single finger pressing on a sensor. A personal adjustment fitted on the first day raised average absolute error on the second day. When the task changed from freely chosen to prescribed presses, five fingers gave a better forecast than the index alone, but repeating the latest index reading had the smallest average absolute miss. The five-history forecast gave the lowest root mean squared error in both cohorts.
