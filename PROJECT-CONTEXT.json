@@ -266,6 +266,41 @@
           "sha256": "beae45550d444ca0380e451fc3d26e4a9ab8f47ed5fd56ee886b2ae73b9759a6"
         }
       }
+    },
+    "way_contact_force": {
+      "version": "2026-11-19",
+      "study": "benchmarks/way-contact-force",
+      "results": {
+        "path": "benchmarks/way-contact-force/RESULTS.json",
+        "bytes": 8805,
+        "sha256": "f43b9bb181b258a30fef713b7a78e1b7087627a939a6ce3330408c2d78fc026a"
+      },
+      "ridge": {
+        "path": "benchmarks/way-contact-force/NeuroTranslation-Grip-After-Contact-Experimental-Preview.zip",
+        "bytes": 46323,
+        "sha256": "f4efbe7ca9c3c37ecb782b29846129e363e1910d104ae504262bb0b4f2e2d2d8"
+      },
+      "temporal_cnn": {
+        "path": "benchmarks/way-contact-force/grip-contact-temporal-preview.zip",
+        "bytes": 108270,
+        "sha256": "7aacd9a4cafbec773aebb0e663ce4c4f3139ab087427f60786e416ed0afd977b"
+      },
+      "development": {
+        "people": 3,
+        "confirmed_lifts": 882,
+        "matched_scored_windows": 4410,
+        "scored_windows_at_each_offset": 882,
+        "new_fits": 0
+      },
+      "offsets_ms": [
+        0,
+        100,
+        200,
+        300,
+        400
+      ],
+      "recording_clock_horizon_ms": 120,
+      "scope": "Two offline grip-force forecasts compared after the tenth consecutive sample at or above 0.5 N on the 500 Hz recording clock. Adding aligned scalp EEG increased average error in both families on the same explored development cohort. Final test reserved. The launchers use invented input by default."
     }
   }
 }

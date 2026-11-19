@@ -18,18 +18,18 @@
     },
     {
       "path": "LAUNCHERS.md",
-      "bytes": 5300,
-      "sha256": "d3dfe22b225e06342f4d3d7b46e50bd2cfed7cd929b379ebed0e4143f61b7a7c"
+      "bytes": 5841,
+      "sha256": "46e2ef2de3875f9b3456bc0ac1a77a11578e7424b048ef78f9181256465b4d0e"
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "bytes": 15484,
-      "sha256": "4e3f478b1b956bc82e0ee24179f4181fc60bbc36fe03c656e9f902405253a9ee"
+      "bytes": 16905,
+      "sha256": "00dc22f917c8ae6fcc378da120e67425d3cdca8b18910f3b7798d57e35302b00"
     },
     {
       "path": "README.md",
-      "bytes": 14175,
-      "sha256": "222a364b424d6ba58f9a7e21a3567efc1c3962a9acbd734141f2d738c2327dfe"
+      "bytes": 14793,
+      "sha256": "7d4fdfb886a01d73463f85971ae3a21789b57691e65cebae9d3c5faa631c94f1"
     },
     {
       "path": "benchmarks/scalp-eeg-hand/.gitignore",
@@ -437,6 +437,31 @@
       "sha256": "4e47430f31eaab3dc18b2d516b4a59c03b93e790d687b334bcc81fec1c749777"
     },
     {
+      "path": "benchmarks/way-contact-force/NeuroTranslation-Grip-After-Contact-Experimental-Preview.zip",
+      "bytes": 46323,
+      "sha256": "f4efbe7ca9c3c37ecb782b29846129e363e1910d104ae504262bb0b4f2e2d2d8"
+    },
+    {
+      "path": "benchmarks/way-contact-force/README.md",
+      "bytes": 8292,
+      "sha256": "7a25ffe02f296fcdde10677a20a1fcfb80541a6366ca0cc75a46397bf600ca5b"
+    },
+    {
+      "path": "benchmarks/way-contact-force/RESULTS.json",
+      "bytes": 8805,
+      "sha256": "f43b9bb181b258a30fef713b7a78e1b7087627a939a6ce3330408c2d78fc026a"
+    },
+    {
+      "path": "benchmarks/way-contact-force/SHA256SUMS",
+      "bytes": 227,
+      "sha256": "51ffa3fadd4e72adf3e9f7e1b3b6c8e88c2f6cca945d964eca0e23be9fa49d16"
+    },
+    {
+      "path": "benchmarks/way-contact-force/grip-contact-temporal-preview.zip",
+      "bytes": 108270,
+      "sha256": "7aacd9a4cafbec773aebb0e663ce4c4f3139ab087427f60786e416ed0afd977b"
+    },
+    {
       "path": "benchmarks/way-grip-force/DEVELOPMENT-AGGREGATE.json",
       "bytes": 16981,
       "sha256": "1f831ffa7cfe943b100487e7fdddeb980628d9827b5d4c05fbf54dc2931e7021"
@@ -673,8 +698,8 @@
     },
     {
       "path": "docs/START.html",
-      "bytes": 5831,
-      "sha256": "1959a00272c9b1c0f321518651416871543a110ad2e83ce93b56394bce13f8d3"
+      "bytes": 6012,
+      "sha256": "af00732a7c1a327d1611d9f0d25106efac9f5303f99d0f9b069b4f6416f61d52"
     },
     {
       "path": "docs/app.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -1093,8 +1118,8 @@
     },
     {
       "path": "docs/preview.html",
-      "bytes": 4526,
-      "sha256": "e51c571d4d5ed6e198dfbe541b3a8f0d80e77d325b0bf2f3e1615f06653efeab"
+      "bytes": 4781,
+      "sha256": "703d5a64a7a5c38df503f282c50be82878cd18c31f2aeadc0388817a748e22a9"
     },
     {
       "path": "docs/r2-calibration-state.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.json",
@@ -1943,20 +1968,23 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "c69b7387f17e1b96512e7df21ebfa8ae2f459f84",
+  "previous_public_commit": "382913b0fa1bb93c989ab59c4444de0f2f53f354",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
+      "LAUNCHERS.md",
       "PROJECT-CONTEXT.json",
-      "benchmarks/way-grip-force/README.md",
-      "benchmarks/way-grip-force/SOURCE.json",
-      "benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-browser.zip",
-      "benchmarks/way-grip-force/browser-release/README.md",
-      "docs/grip-force/app.js",
-      "docs/grip-force/index.html"
+      "README.md",
+      "benchmarks/way-contact-force/NeuroTranslation-Grip-After-Contact-Experimental-Preview.zip",
+      "benchmarks/way-contact-force/README.md",
+      "benchmarks/way-contact-force/RESULTS.json",
+      "benchmarks/way-contact-force/SHA256SUMS",
+      "benchmarks/way-contact-force/grip-contact-temporal-preview.zip",
+      "docs/START.html",
+      "docs/preview.html"
     ],
-    "preserved_rows": 379
+    "preserved_rows": 381
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",
@@ -1982,5 +2010,40 @@
     "sha256": "3078328226be6b5c6930d33f32e5dd4ac8715a4747f50ffe9a58a0d029afaff3",
     "zip": "papers/downloads/NeuroTranslation-Brain2Body-Distinct-Cohort-2026-11-19.zip",
     "zip_sha256": "331a8df054b383be049bc86645ff4e1bf9c00b23c9dfb668bbc3d0d5402951f6"
+  },
+  "latest_contact_force_preview": {
+    "version": "2026-11-19",
+    "study": "benchmarks/way-contact-force",
+    "results": {
+      "path": "benchmarks/way-contact-force/RESULTS.json",
+      "bytes": 8805,
+      "sha256": "f43b9bb181b258a30fef713b7a78e1b7087627a939a6ce3330408c2d78fc026a"
+    },
+    "ridge": {
+      "path": "benchmarks/way-contact-force/NeuroTranslation-Grip-After-Contact-Experimental-Preview.zip",
+      "bytes": 46323,
+      "sha256": "f4efbe7ca9c3c37ecb782b29846129e363e1910d104ae504262bb0b4f2e2d2d8"
+    },
+    "temporal_cnn": {
+      "path": "benchmarks/way-contact-force/grip-contact-temporal-preview.zip",
+      "bytes": 108270,
+      "sha256": "7aacd9a4cafbec773aebb0e663ce4c4f3139ab087427f60786e416ed0afd977b"
+    },
+    "development": {
+      "people": 3,
+      "confirmed_lifts": 882,
+      "matched_scored_windows": 4410,
+      "scored_windows_at_each_offset": 882,
+      "new_fits": 0
+    },
+    "offsets_ms": [
+      0,
+      100,
+      200,
+      300,
+      400
+    ],
+    "recording_clock_horizon_ms": 120,
+    "scope": "Two offline grip-force forecasts compared after the tenth consecutive sample at or above 0.5 N on the 500 Hz recording clock. Adding aligned scalp EEG increased average error in both families on the same explored development cohort. Final test reserved. The launchers use invented input by default."
   }
 }

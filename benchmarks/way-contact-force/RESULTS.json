@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "study": "WAY-EEG-GAL grip after force confirmation",
+  "version": "2026-11-19",
+  "status": "experimental development preview",
+  "glossary": {
+    "revision": 36,
+    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+  },
+  "sources": {
+    "descriptor": "https://doi.org/10.1038/sdata.2014.47",
+    "deposit": "https://doi.org/10.6084/m9.figshare.c.988376.v2",
+    "original_recording_funding": "European Commission WAY project (FP7-ICT-288551)"
+  },
+  "schedule": {
+    "sample_rate_hz": 500,
+    "threshold_n": 0.5,
+    "threshold_consecutive_samples": 10,
+    "confirmation_sample_ordinal": 10,
+    "requires_finite_below_threshold_first_sample_at_or_after_go_cue": true,
+    "offsets_after_confirmation_ms": [
+      0,
+      100,
+      200,
+      300,
+      400
+    ],
+    "history_samples_through_issue": 200,
+    "history_span_ms": 398,
+    "target_ahead_samples": 60,
+    "target_ahead_ms": 120,
+    "target": "Measured mean normal force at the two fingertip plates, compression positive, in N.",
+    "timing_scope": "Offline recording clock and force confirmation proxy. Initial anatomical touch, source event equivalence and live system delay are outside this measurement."
+  },
+  "cohorts": {
+    "training": {
+      "people": 6,
+      "confirmed_lifts": 1763,
+      "common_scored_windows": 8815
+    },
+    "previously_explored_development": {
+      "people": 3,
+      "confirmed_lifts": 882,
+      "matched_scored_windows": 4410,
+      "scored_windows_at_each_offset": 882,
+      "new_fits": 0
+    },
+    "final_test": {
+      "people": 3,
+      "status": "reserved and unopened"
+    }
+  },
+  "metric": {
+    "rmse_n": "Compute the square root of mean squared forecast error within each person, weighting lifts equally and scored offsets equally within each lift. Average person RMSEs with equal weights.",
+    "mean_delta_rmse_n": "For each person subtract the reference (second) model RMSE from the first, then average those differences. Positive means larger error in the first branch.",
+    "interval": "Descriptive 95% paired Student t interval across three person-level changes, to indicate size and uncertainty in this explored set.",
+    "sign_p": "Two-sided exact sign calculation on directions of the person-level differences, omitting ties."
+  },
+  "ridge": {
+    "development_rmse_n": {
+      "aligned_eeg": 0.6954709958642035,
+      "backward_slope": 1.3477348632878714,
+      "emg": 0.7168423104107932,
+      "emg_aligned_eeg": 0.7220450571451883,
+      "emg_rotated_eeg": 0.7188306615526935,
+      "mechanics": 0.6769740871473727,
+      "persistence": 1.7173161911864112,
+      "rotated_eeg": 0.6918610511964486,
+      "time_only": 2.416380402149656
+    },
+    "matched_contrasts": {
+      "aligned_eeg_vs_backward_slope": {
+        "mean_delta_rmse_n": -0.6522638674236677,
+        "descriptive_t95_interval_n": [
+          -1.5741420855509367,
+          0.2696143507036014
+        ],
+        "lower_rmse_first": 3,
+        "lower_rmse_second": 0,
+        "ties": 0,
+        "two_sided_exact_sign_p": 0.25
+      },
+      "aligned_eeg_vs_mechanics": {
+        "mean_delta_rmse_n": 0.01849690871683089,
+        "descriptive_t95_interval_n": [
+          -0.0034304106681573923,
+          0.04042422810181917
+        ],
+        "lower_rmse_first": 0,
+        "lower_rmse_second": 3,
+        "ties": 0,
+        "two_sided_exact_sign_p": 0.25
+      },
+      "aligned_eeg_vs_persistence": {
+        "mean_delta_rmse_n": -1.0218451953222079,
+        "descriptive_t95_interval_n": [
+          -1.2917071543968648,
+          -0.7519832362475509
+        ],
+        "lower_rmse_first": 3,
+        "lower_rmse_second": 0,
+        "ties": 0,
+        "two_sided_exact_sign_p": 0.25
+      },
+      "aligned_eeg_vs_rotated_eeg": {
+        "mean_delta_rmse_n": 0.00360994466775492,
+        "descriptive_t95_interval_n": [
+          -0.02200236319487327,
+          0.029222252530383113
+        ],
+        "lower_rmse_first": 2,
+        "lower_rmse_second": 1,
+        "ties": 0,
+        "two_sided_exact_sign_p": 1.0
+      },
+      "emg_aligned_eeg_vs_aligned_eeg": {
+        "mean_delta_rmse_n": 0.02657406128098479,
+        "descriptive_t95_interval_n": [
+          -0.055259576118940945,
+          0.10840769868091052
+        ],
+        "lower_rmse_first": 0,
+        "lower_rmse_second": 3,
+        "ties": 0,
+        "two_sided_exact_sign_p": 0.25
+      },
+      "emg_aligned_eeg_vs_emg": {
+        "mean_delta_rmse_n": 0.005202746734395173,
+        "descriptive_t95_interval_n": [
+          -0.022540736049377,
+          0.03294622951816735
+        ],
+        "lower_rmse_first": 1,
+        "lower_rmse_second": 2,
+        "ties": 0,
+        "two_sided_exact_sign_p": 1.0
+      },
+      "emg_aligned_eeg_vs_emg_rotated_eeg": {
+        "mean_delta_rmse_n": 0.003214395592495034,
+        "descriptive_t95_interval_n": [
+          -0.010436305360358033,
+          0.016865096545348103
+        ],
+        "lower_rmse_first": 1,
+        "lower_rmse_second": 2,
+        "ties": 0,
+        "two_sided_exact_sign_p": 1.0
+      },
+      "emg_vs_mechanics": {
+        "mean_delta_rmse_n": 0.03986822326342051,
+        "descriptive_t95_interval_n": [
+          -0.008441275300712738,
+          0.08817772182755376
+        ],
+        "lower_rmse_first": 0,
+        "lower_rmse_second": 3,
+        "ties": 0,
+        "two_sided_exact_sign_p": 0.25
+      }
+    },
+    "registered_criterion": "Aligned EEG required lower mean error than both mechanics and rotated EEG.",
+    "registered_criterion_met": false,
+    "portable_models": [
+      "persistence",
+      "backward_slope",
+      "time_only",
+      "mechanics",
+      "aligned_eeg",
+      "emg",
+      "emg_aligned_eeg"
+    ]
+  },
+  "temporal_cnn": {
+    "development_rmse_n": {
+      "phase": 2.39991182845891,
+      "mechanics": 0.9779528107175319,
+      "aligned": 0.9935686535006768,
+      "rotated": 0.9872705465042589,
+      "lagged": 0.9833293331915695
+    },
+    "matched_contrasts": {
+      "aligned_minus_mechanics": {
+        "mean_delta_rmse_n": 0.01561584278314491,
+        "descriptive_t95_interval_n": [
+          -0.1360120766409987,
+          0.1672437622072885
+        ],
+        "lower_rmse_first": 1,
+        "lower_rmse_second": 2,
+        "ties": 0,
+        "two_sided_exact_sign_p": 1.0
+      },
+      "aligned_minus_rotated": {
+        "mean_delta_rmse_n": 0.006298106996417863,
+        "descriptive_t95_interval_n": [
+          -0.04594137564733391,
+          0.058537589640169634
+        ],
+        "lower_rmse_first": 2,
+        "lower_rmse_second": 1,
+        "ties": 0,
+        "two_sided_exact_sign_p": 1.0
+      },
+      "rotated_minus_mechanics": {
+        "mean_delta_rmse_n": 0.009317735786727047,
+        "descriptive_t95_interval_n": [
+          -0.11494674412797809,
+          0.1335822157014322
+        ],
+        "lower_rmse_first": 1,
+        "lower_rmse_second": 2,
+        "ties": 0,
+        "two_sided_exact_sign_p": 1.0
+      },
+      "aligned_minus_lagged": {
+        "mean_delta_rmse_n": 0.010239320309107236,
+        "descriptive_t95_interval_n": [
+          -0.11930216037625838,
+          0.13978080099447285
+        ],
+        "lower_rmse_first": 1,
+        "lower_rmse_second": 2,
+        "ties": 0,
+        "two_sided_exact_sign_p": 1.0
+      },
+      "lagged_minus_mechanics": {
+        "mean_delta_rmse_n": 0.0053765224740376745,
+        "descriptive_t95_interval_n": [
+          -0.044547154451101516,
+          0.05530019939917686
+        ],
+        "lower_rmse_first": 2,
+        "lower_rmse_second": 1,
+        "ties": 0,
+        "two_sided_exact_sign_p": 1.0
+      }
+    },
+    "portable_models": [
+      "phase",
+      "mechanics",
+      "aligned"
+    ]
+  },
+  "archive_files": {
+    "ridge": {
+      "path": "benchmarks/way-contact-force/NeuroTranslation-Grip-After-Contact-Experimental-Preview.zip",
+      "bytes": 46323,
+      "sha256": "f4efbe7ca9c3c37ecb782b29846129e363e1910d104ae504262bb0b4f2e2d2d8"
+    },
+    "temporal_cnn": {
+      "path": "benchmarks/way-contact-force/grip-contact-temporal-preview.zip",
+      "bytes": 108270,
+      "sha256": "7aacd9a4cafbec773aebb0e663ce4c4f3139ab087427f60786e416ed0afd977b"
+    }
+  },
+  "numerical_review": {
+    "ridge": {
+      "independent_scope": "The frozen scores on matched development rows were independently recomputed, with the largest checked metric difference below 9e-16 N.",
+      "receipt_sha256": "3296f7df5075d29790647f7cdb821f4412d1c7b35da34f6ba22a18db8dbd5769"
+    },
+    "temporal_cnn": {
+      "independent_scope": "Five frozen model scores on the same development rows were independently recomputed, with a largest checked metric difference below 1.3e-7 N.",
+      "receipt_sha256": "dca8bcf4b7eb867cc067d938396193cf665b3da021fbf812018e1f78143b8c91"
+    }
+  }
+}
