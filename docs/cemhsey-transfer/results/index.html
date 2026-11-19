@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Changing the pinch target · NeuroTranslation</title><link rel="stylesheet" href="study.css"><script defer src="results.js"></script><script defer src="study.js"></script></head>
+<body><main>
+<header><a class="brand" href="../../index.html#study-readers">NeuroTranslation</a>
+<h1>Changing the pinch target</h1>
+<p>A model trained at 30% of maximum voluntary contraction faced three targets. We asked whether the scheduled cue helped, and whether one practice pinch helped again. Four people each performed both repeats at every target on the same indexed recording day.</p></header>
+<section aria-labelledby="who"><h2 id="who">Which forecast missed by less?</h2>
+<p>The first repeat supplied the practice measurements. This comparison uses only the second repeat. Each dot gives the average change in mean absolute error across the four people. The line joins the smallest and largest of their four changes. A positive value favors the candidate.</p>
+<div class="controls"><label>Candidate and comparator<select id="comparison"></select></label><label>Phase at cutoff<select id="phase"></select></label></div>
+<p id="measure" class="units">Error difference in fractions of maximum voluntary contraction (MVC).</p>
+<div id="plot" class="plot" aria-label="Paired changes in error for three prescribed force targets"></div>
+<div id="witness" role="status" aria-live="polite"></div></section>
+<section aria-labelledby="all"><h2 id="all">The nine forecasts</h2><div class="controls"><label>Prescribed target<select id="target"><option value="10">10% MVC</option><option value="30">30% MVC</option><option value="50" selected>50% MVC</option></select></label></div>
+<p id="support"></p>
+<div class="scroll" tabindex="0" role="region" aria-label="Errors for all nine forecasts, scroll horizontally if needed"><table><thead><tr><th scope="col">Forecast</th><th scope="col"><abbr title="Mean absolute error">MAE</abbr></th><th scope="col"><abbr title="Root mean squared error">RMSE</abbr></th><th scope="col">Signed error</th><th scope="col">MAE / target</th></tr></thead><tbody id="rows"></tbody></table></div>
+<p class="units">MAE, RMSE and signed error are in MVC fraction. Positive signed error means the forecast was above the gauge. The last column divides MAE by the prescribed peak, so errors at a light pinch can also be read relative to that smaller target.</p></section>
+<section><h2>What does practice change?</h2><p>The scheduled cue rises, holds, then falls. Its upcoming change is known before the later force reading. The target adjustment changes the 30% forecast according to what the cue will do over the next 24 force samples. The practice version learns one additional multiplier from that person’s first repeat at that target.</p>
+<p>The nominal forecast horizon is 120 milliseconds on the released force clock. These are overlapping cutoffs from four people on one day. The source cannot separate a target effect from all effects of trial order, and the four observed differences give no confidence interval for a wider population.</p></section>
+<footer><a href="../">Compare two local trials</a><a href="metrics.csv" download>Download all error scores (CSV)</a><a href="contrasts.csv" download>Download the paired changes (CSV)</a><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cemhsey-transfer">Protocol and data</a><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12354741/">Original recording study</a></footer>
+<noscript><p>The CSV tables and the study report contain the measurements in text form.</p></noscript>
+</main></body></html>

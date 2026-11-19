@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; worker-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Practice a different pinch · NeuroTranslation</title>
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="transfer.css">
+  <script defer src="channel-map.js"></script>
+  <script defer src="weights.js"></script>
+  <script defer src="array-math.js"></script>
+  <script defer src="interval-math.js"></script>
+  <script defer src="forecast-plot.js"></script>
+  <script defer src="mat-import.js"></script>
+  <script defer src="transfer-math.js"></script>
+  <script defer src="sources.js"></script>
+  <script defer src="reader.js"></script>
+</head>
+<body>
+<main>
+  <header>
+    <p class="brand">NeuroTranslation</p>
+    <h1>Practice a different pinch</h1>
+    <p>Give a model that learned a 30% pinch a lighter or harder target. Move the cutoff to see what it predicts 120 nominal milliseconds later. Then give it one practice repeat and see what changes on the second.</p>
+    <nav aria-label="Related resources"><a href="https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/results/">Study results and protocol</a>
+      <a href="https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip" download>Download offline reader</a></nav>
+  </header>
+  <noscript><p>Enable JavaScript to open a recording and calculate forecasts.</p></noscript>
+  <section aria-labelledby="open-title">
+    <h2 id="open-title">Choose the pinch</h2>
+    <div class="forecast-controls">
+      <label>Trial source
+        <select id="source" disabled><option value="invented">Invented example</option><option value="mat">Local CEMHSEY recordings</option></select>
+      </label>
+      <label>Prescribed target
+        <select id="target" disabled>
+          <option value="0.1">10% of maximum force · Task 1</option>
+          <option value="0.3">30% of maximum force · Task 2</option>
+          <option value="0.5" selected>50% of maximum force · Task 3</option>
+        </select>
+      </label>
+    </div>
+    <p id="source-note" class="hint"></p>
+    <div id="mat-controls" hidden>
+      <p id="mat-help">Use original CEMHSEY GRASP Session 5 MAT files. Check the archive for each repeat and the chosen target. A matching archive name describes the expected source. The MAT contents do not establish participant, day, target or repeat.</p>
+      <div class="file-pair">
+        <div><label for="repeat1">Repeat 1 (.mat) · practice</label><input id="repeat1" type="file" accept=".mat" aria-describedby="mat-help repeat1-status" disabled>
+          <p class="hint" id="repeat1-status"></p><button id="drop-repeat1" class="secondary" type="button">Remove repeat 1</button></div>
+        <div><label for="repeat2">Repeat 2 (.mat) · comparison</label><input id="repeat2" type="file" accept=".mat" aria-describedby="mat-help repeat2-status" disabled>
+          <p class="hint" id="repeat2-status"></p><button id="drop-repeat2" class="secondary" type="button">Remove repeat 2</button></div>
+      </div>
+      <p id="pair-status" role="status"></p>
+      <label id="confirm-label" class="check" hidden><input id="confirm-pair" type="checkbox"> I checked both originals. The files match the same participant, day and selected Session 5 target. Repeat 1 is the practice file and repeat 2 is the comparison file.</label>
+    </div>
+    <details>
+      <summary>Choose a local forecast fit</summary>
+      <p>Open a compatible four-model JSON fit from the <a href="https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/fit/">30% array reader</a>. This reader uses its force-history and five-grid models. The selected file and fitted values stay on this device.</p>
+      <div class="actions"><label>Array reader fit (.json) <input id="model-file" type="file" accept=".json,application/json" disabled></label>
+        <button id="reset-model" class="secondary" type="button" disabled>Use bundled weights</button></div>
+    </details>
+    <p id="model-status" class="hint"></p>
+    <div class="actions">
+      <button id="adapt" type="button" disabled>Fit on repeat 1</button>
+      <button id="clear-adapter" class="secondary" type="button" hidden>Clear practice fit</button>
+    </div>
+    <p id="adapter-status" class="hint"></p>
+    <div id="progress-controls" class="actions" hidden>
+      <progress id="progress" max="1" aria-label="Work progress"></progress>
+      <button id="cancel" class="secondary" type="button">Cancel</button>
+    </div>
+    <p id="status" role="status"></p>
+  </section>
+
+  <section id="comparison" aria-labelledby="comparison-title" hidden>
+    <div class="section-head"><h2 id="comparison-title">Repeat 2</h2><output id="cutoff-time" for="cutoff"></output></div>
+    <p id="overlap" class="hint"></p>
+    <label for="cutoff">Forecast cutoff within the trial</label>
+    <input id="cutoff" type="range" min="0" max="591" step="1" value="117">
+    <p id="phase" class="hint"></p>
+    <div class="forecast-controls"><label>Forecast to plot <select id="plot-arm"></select></label></div>
+    <figure class="forecast-figure">
+      <canvas id="forecast-plot" role="img" aria-label="Pinch force forecasts at their target times" aria-describedby="plot-caption comparison-values">The forecast and force readings are also available in the tables below.</canvas>
+      <ul class="plot-key" aria-hidden="true">
+        <li><span class="key-line"></span> Forecast</li>
+        <li><span class="key-cutoff"></span> Cutoff</li>
+        <li id="observed-key" hidden><span class="key-observed"></span> Force readings</li>
+      </ul>
+      <figcaption id="plot-caption">Each point uses readings available at its cutoff. The horizontal axis shows when its forecast is due. Use the reveal control to see the gauge through the selected target time.</figcaption>
+    </figure>
+    <label class="check"><input id="reveal" type="checkbox"> Reveal force readings through the selected target</label>
+    <p id="observation" hidden></p>
+    <table id="comparison-values"><caption>At the selected cutoff · force as a fraction of MVC</caption>
+      <thead><tr><th scope="col">Forecast</th><th scope="col">Force</th></tr></thead><tbody id="points"></tbody>
+    </table>
+    <details class="scores">
+      <summary>Errors over the whole comparison trial</summary>
+      <p>Select Score repeat 2 to compare with all 592 later readings. MAE is mean absolute error. RMSE is root mean squared error. Bias is forecast minus actual, averaged over the trial. Relative MAE divides MAE by the prescribed target. MVC is maximum voluntary contraction.</p>
+      <div class="actions"><button id="score" type="button">Score repeat 2</button>
+        <button id="cancel-score" class="secondary" type="button" hidden>Cancel scoring</button></div>
+      <p id="score-wait" role="status"></p>
+      <div id="scores" hidden>
+        <p id="score-source" class="hint"></p>
+        <div class="wide-table" role="region" aria-label="Score table, scroll horizontally" tabindex="0">
+          <table><caption>Whole-trial errors · MAE, RMSE and bias in fractions of MVC</caption>
+            <thead><tr><th scope="col">Forecast</th><th scope="col">MAE</th><th scope="col">RMSE</th><th scope="col">Bias</th><th scope="col">Relative MAE</th></tr></thead>
+            <tbody id="score-rows"></tbody></table>
+        </div>
+      </div>
+    </details>
+  </section>
+  <section aria-labelledby="method-title">
+    <h2 id="method-title">What practice can change</h2>
+    <p>The frozen models keep their 30% weights. The adjusted forecasts add the difference in target strength times the cue’s change over the next 120 nominal milliseconds. That adjustment is zero at 30%. The practice repeat gives each model one more coefficient on the same cue change. The comparison repeat supplies no fitted values.</p>
+    <p>Each score describes this repeat alone. The study reports separate results across its evaluation panel. The gauge gives one normalized pinch force. The grids sample muscle electrical activity through the skin. Neither yields separate force for each digit. The 120 ms lead uses nominal release indices.</p>
+    <p><a href="https://doi.org/10.1038/s41597-025-05733-y">CEMHSEY GRASP recording study and data access</a></p>
+  </section>
+  <footer><p>Local readings and practice fits live in this tab. Reload or close it to clear them.</p></footer>
+</main>
+</body>
+</html>

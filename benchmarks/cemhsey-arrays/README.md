@@ -26,3 +26,5 @@ Each trial contributed 592 forecasts at a nominal horizon of 24 force samples (1
 Open the original Session 5, Task 2 MATLAB trial in the browser to inspect the two guarded measurement windows. The earlier Python converter and compatible array packets remain supported. To train the four reader forecasts on your own study set, open the local fitting panel. It accepts days 1 and 2 and both repeats for three people. Use different recordings to assess a fit. [Open the array reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/) · [Fit from original recordings](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/#fit-local) · [Original acquisition and task conventions](https://pmc.ncbi.nlm.nih.gov/articles/PMC12354741/)
 
 [Browser fitting method and numerical agreement](BROWSER-FITTING.md)
+
+The same model also faced three prescribed pinch targets. One practice repeat at each target supplied a personal adjustment. [Compare the three targets](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/results/) · [Try two recordings locally](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/)

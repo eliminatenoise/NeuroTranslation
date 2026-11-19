@@ -62,7 +62,7 @@ On four new participants, five recorded electrode grids beat five interleaved gr
 
 Fixed-width bands around the five-grid forecast covered 94.5% of later readings on two new people. Changing width by cue phase covered 95.1%. [Compare the measured bands](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-intervals/) · [Methods and full results](benchmarks/cemhsey-intervals/README.md)
 
-What happens when the pinch target changes? The next test holds the 30% fits fixed and compares the same four people at 10%, 30% and 50%. [Read the prospective force-target study](benchmarks/cemhsey-transfer/README.md)
+At the 50% pinch target, current force plus the scheduled change beat the fitted models for all four participants. One practice attempt helped the five-grid model during the rise and hurt it during release. [Explore all three targets](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/results/) · [Compare two recordings](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/) · [Study and protocol](benchmarks/cemhsey-transfer/README.md)
 
 ## Read the papers
 

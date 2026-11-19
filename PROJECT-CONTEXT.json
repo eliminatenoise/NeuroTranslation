@@ -628,6 +628,57 @@
       },
       "point_forecasts": 4,
       "support": "CEMHSEY GRASP Session 5 Task 2 duplicates detected from canonical local packet contents. Training, interval calibration and evaluation are distinct."
+    },
+    "cemhsey_force_transfer": {
+      "protocol": {
+        "path": "benchmarks/cemhsey-transfer/PROTOCOL.md",
+        "bytes": 6373,
+        "sha256": "60388f4aab4daa9591904aef311e0b1f7955e4cb875adb8b8fdde05a5f0f4132"
+      },
+      "design": {
+        "path": "benchmarks/cemhsey-transfer/DESIGN.json",
+        "bytes": 990,
+        "sha256": "9a2bec2d8ac25d5f2d1a92ba2cc2d5f75e4fa2b7489029e084f10776a8f92df4"
+      },
+      "status": "Second-repeat evaluation independently reproduced across three targets.",
+      "aggregate": {
+        "path": "benchmarks/cemhsey-transfer/RESULTS.json",
+        "bytes": 58106,
+        "sha256": "9f9b3f9dfd1727cd562aa3f2f661e53a69ae07dcf837c8740a785964d1fdb394"
+      },
+      "reader": {
+        "path": "docs/cemhsey-transfer/index.html",
+        "bytes": 8665,
+        "sha256": "d7353545a152b32099b79331d14f68fff15e8fb265f434ecca89c7b019176da9"
+      },
+      "offline": {
+        "path": "docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip",
+        "bytes": 38012,
+        "sha256": "373b78222d25ee0be516f0be600294e84629fe75f4dc962a560c6c51a985faee"
+      },
+      "interactive_results": {
+        "path": "docs/cemhsey-transfer/results/index.html",
+        "bytes": 3917,
+        "sha256": "bbd3992cd054501690da12eba36dc8eedb11404b89efd91d99234cdebda23547"
+      },
+      "metrics": {
+        "path": "docs/cemhsey-transfer/results/metrics.csv",
+        "bytes": 17916,
+        "sha256": "861b6d08baebddc220ea64f801d3fc0b20ad6345d7b9db6c64f71a6f93f4f6c9"
+      },
+      "contrasts": {
+        "path": "docs/cemhsey-transfer/results/contrasts.csv",
+        "bytes": 23938,
+        "sha256": "bd5482b4a0a85664d1e2d95d2382aec6842eaf5e9aea0f25c6c4ef6a6a2d469a"
+      },
+      "support": {
+        "adapt_trials": 12,
+        "eval_issues": 7104,
+        "eval_trials": 12,
+        "indexed_days": 1,
+        "participants": 4
+      },
+      "limitations": "Four previously studied adults, one indexed day, fixed repeat order and nominal timing; public examples and bundled weights are invented."
     }
   },
   "prospective_studies": {
@@ -826,6 +877,57 @@
       "evaluation_participants": 2,
       "cutoffs_per_method": 4736,
       "arms": 6
+    },
+    "cemhsey_force_transfer": {
+      "protocol": {
+        "path": "benchmarks/cemhsey-transfer/PROTOCOL.md",
+        "bytes": 6373,
+        "sha256": "60388f4aab4daa9591904aef311e0b1f7955e4cb875adb8b8fdde05a5f0f4132"
+      },
+      "design": {
+        "path": "benchmarks/cemhsey-transfer/DESIGN.json",
+        "bytes": 990,
+        "sha256": "9a2bec2d8ac25d5f2d1a92ba2cc2d5f75e4fa2b7489029e084f10776a8f92df4"
+      },
+      "status": "Second-repeat evaluation independently reproduced across three targets.",
+      "aggregate": {
+        "path": "benchmarks/cemhsey-transfer/RESULTS.json",
+        "bytes": 58106,
+        "sha256": "9f9b3f9dfd1727cd562aa3f2f661e53a69ae07dcf837c8740a785964d1fdb394"
+      },
+      "reader": {
+        "path": "docs/cemhsey-transfer/index.html",
+        "bytes": 8665,
+        "sha256": "d7353545a152b32099b79331d14f68fff15e8fb265f434ecca89c7b019176da9"
+      },
+      "offline": {
+        "path": "docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip",
+        "bytes": 38012,
+        "sha256": "373b78222d25ee0be516f0be600294e84629fe75f4dc962a560c6c51a985faee"
+      },
+      "interactive_results": {
+        "path": "docs/cemhsey-transfer/results/index.html",
+        "bytes": 3917,
+        "sha256": "bbd3992cd054501690da12eba36dc8eedb11404b89efd91d99234cdebda23547"
+      },
+      "metrics": {
+        "path": "docs/cemhsey-transfer/results/metrics.csv",
+        "bytes": 17916,
+        "sha256": "861b6d08baebddc220ea64f801d3fc0b20ad6345d7b9db6c64f71a6f93f4f6c9"
+      },
+      "contrasts": {
+        "path": "docs/cemhsey-transfer/results/contrasts.csv",
+        "bytes": 23938,
+        "sha256": "bd5482b4a0a85664d1e2d95d2382aec6842eaf5e9aea0f25c6c4ef6a6a2d469a"
+      },
+      "support": {
+        "adapt_trials": 12,
+        "eval_issues": 7104,
+        "eval_trials": 12,
+        "indexed_days": 1,
+        "participants": 4
+      },
+      "limitations": "Four previously studied adults, one indexed day, fixed repeat order and nominal timing; public examples and bundled weights are invented."
     }
   }
 }

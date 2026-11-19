@@ -1,0 +1,15 @@
+header nav {display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin:1rem 0 .15rem}
+.file-pair {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.file-pair label {display:block;font-weight:650;margin-bottom:.3rem}
+.file-pair input {width:100%}
+.file-pair .hint {margin:.35rem 0 .55rem}
+#source-note, #pair-status, #adapter-status {margin-bottom:.6rem}
+#progress-controls {margin-top:.8rem}
+#progress {width:min(14rem,100%);accent-color:#17695e}
+#status:empty,#score-wait:empty,#overlap:empty,#adapter-status:empty {display:none}
+#confirm-label {align-items:flex-start;margin:.8rem 0}
+.check input {flex:none}
+#comparison-values {max-width:37rem}
+#comparison-values td {overflow-wrap:anywhere}
+#cutoff-time {font-size:.94rem}
+@media(max-width:520px){.file-pair{grid-template-columns:1fr}}
