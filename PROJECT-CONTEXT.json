@@ -406,6 +406,36 @@
         "tested_endpoint": "forecast of released sensor voltage 120 ms after issue",
         "scope": "Secondary right-hand analysis on the same three previously studied development people. Timing-specific forearm EMG and scalp EEG directional screens failed on TRAIN and DEV."
       }
+    },
+    "hyser_index": {
+      "study": {
+        "design": {
+          "path": "benchmarks/hyser-index/PROTOCOL.md",
+          "sha256": "958f022f7aeb31872aa89cf43f4bd2ee96937c608ab9f0c84e1c3d5216ce4fda",
+          "bytes": 8763
+        },
+        "scope": "Index-finger sensor voltage on a distinct two-day isometric task. Physical real-time lead remains unverified.",
+        "results": {
+          "path": "benchmarks/hyser-index/RESULTS.json",
+          "bytes": 53858,
+          "sha256": "17e7fa782aeb4fd3ca994d7a141cec750e7d3835e70857b0edc28f43858c6a25"
+        },
+        "decision": "No average primary incremental gain from aligned EMG in this experiment; held-participant and day-specific results reported.",
+        "development_people": 4
+      },
+      "url": "https://eliminatenoise.github.io/NeuroTranslation/hyser-index/",
+      "entry": "docs/hyser-index/index.html",
+      "offline_download": {
+        "path": "benchmarks/hyser-index/downloads/Hyser-Index-Voltage-Reader.zip",
+        "bytes": 19037,
+        "sha256": "5806e6de338f7269e4b3a058e953c7f49d10a46c354cebffee6d7a2d07253ede"
+      },
+      "shared_train_predictors": {
+        "path": "benchmarks/hyser-index/predictors.json",
+        "bytes": 11843,
+        "sha256": "c983c42da47feed5d1b2af2ea490bd55324e65b168c3414e6f4266390b3b8cd7"
+      },
+      "scope": "Released index transducer voltage 120 ms ahead on the nominal stream. Four final participants reserved. No online or clinical claim."
     }
   },
   "prospective_studies": {
@@ -447,7 +477,14 @@
         "sha256": "958f022f7aeb31872aa89cf43f4bd2ee96937c608ab9f0c84e1c3d5216ce4fda",
         "bytes": 8763
       },
-      "scope": "Index-finger sensor voltage on a distinct two-day isometric task. Physical real-time lead remains unverified."
+      "scope": "Index-finger sensor voltage on a distinct two-day isometric task. Physical real-time lead remains unverified.",
+      "results": {
+        "path": "benchmarks/hyser-index/RESULTS.json",
+        "bytes": 53858,
+        "sha256": "17e7fa782aeb4fd3ca994d7a141cec750e7d3835e70857b0edc28f43858c6a25"
+      },
+      "decision": "No average primary incremental gain from aligned EMG in this experiment; held-participant and day-specific results reported.",
+      "development_people": 4
     }
   }
 }

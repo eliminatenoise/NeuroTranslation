@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Index-finger forecast · NeuroTranslation</title>
+  <link rel="stylesheet" href="screen.css">
+  <script defer src="weights.js"></script>
+  <script defer src="wfdb.js"></script>
+  <script defer src="forecast.js"></script>
+  <script defer src="reader.js"></script>
+</head>
+<body>
+<main>
+  <header>
+    <p class="scope">NeuroTranslation · Hyser</p>
+    <h1>What will the index finger’s sensor read next?</h1>
+    <p>Select a moment in a 25-second trial. The first model sees 400 ms of recent voltage and forecasts the sensor reading 120 ms later. The second also sees four 100 ms windows of forearm muscle activity. The last window ends 20 ms before the cutoff.</p>
+  </header>
+  <section aria-labelledby="record-title" class="record">
+    <h2 id="record-title">Choose a trial</h2>
+    <div class="file-row">
+      <label>Original session folder <input type="file" id="folder" webkitdirectory multiple disabled></label>
+      <label>Or select matching files <input type="file" id="files" accept=".hea,.dat" multiple disabled></label>
+    </div>
+    <p class="hint">Use the Random task’s force .hea and .dat files. Include the corresponding raw EMG pair to compare both forecasts. Choose all files from one session. The headers identify the trial number only.</p>
+    <div class="record-row">
+      <button type="button" id="example" disabled>Load invented trial</button>
+      <label id="trial-label" hidden>Trial <select id="trial"></select></label>
+    </div>
+    <p id="record-status" role="status">Opening the local models…</p>
+  </section>
+  <section aria-labelledby="forecast-title" class="forecast">
+    <h2 id="forecast-title">Voltage at +120 ms</h2>
+    <p id="unavailable">Loading forecast…</p>
+    <div id="controls" hidden>
+      <label for="cutoff">Cutoff from the start of the trial</label>
+      <input id="cutoff" type="range" min="140" max="2385" step="5" value="140">
+      <output id="moment" for="cutoff"></output>
+      <div id="window" hidden>
+        <dl id="predictions" class="readings"></dl>
+        <label class="reveal"><input type="checkbox" id="reveal"> Reveal the later sensor reading</label>
+        <p id="outcome" aria-live="polite"></p>
+        <figure>
+          <figcaption><strong>Index sensor voltage</strong></figcaption>
+          <canvas id="plot" role="img"></canvas>
+          <div class="legend">
+            <span><i class="line"></i>Sensor history</span>
+            <span><i class="diamond"></i>Force history forecast</span>
+            <span id="emg-key"><i class="square"></i>With forearm EMG</span>
+            <span id="target-key" hidden><i class="circle"></i>Later reading</span>
+          </div>
+        </figure>
+        <details id="history"><summary>Read the 41 voltage samples</summary>
+          <table><caption>Index-finger voltage at 100 Hz</caption><thead><tr><th>Time from cutoff (ms)</th><th>Voltage (V)</th></tr></thead><tbody></tbody></table>
+        </details>
+        <details id="muscle"><summary>Inspect forearm activity</summary>
+          <p>Each value is the root mean square over one 100 ms bin and one 64-channel grid, in millivolts. The last bin ends 20 ms before the cutoff.</p>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Forearm activity table"><table><caption>Forearm surface EMG (mV RMS)</caption><thead><tr><th>Start (ms)</th><th>ED</th><th>EP</th><th>FD</th><th>FP</th></tr></thead><tbody></tbody></table></div>
+        </details>
+      </div>
+    </div>
+  </section>
+  <section class="interpret" aria-labelledby="evidence">
+    <h2 id="evidence">What the forecast measures</h2>
+    <p>Hyser recorded five finger-force sensors as adults pressed in self-chosen combinations on two separate days. This forecast uses the index sensor’s voltage. The two recording systems shared a start trigger. Their drift and the processing delay in the released force trace have not been established.</p>
+    <p>On four development participants, the force-history model averaged 14.35 mV of absolute error. Adding aligned forearm EMG gave 14.46 mV. Two people improved and two did worse. Both models scored the same 18,000 cutoffs across the two days.</p>
+    <p><a id="study-link" href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hyser-index">Read the study and timing controls</a> · <a href="README.md">Offline reader instructions</a></p>
+  </section>
+  <footer>
+    <p>Contains information from Xinyu Jiang, Chenyun Dai, Xiangyu Liu and Jiahao Fan’s Hyser database, made available under the Open Data Commons Attribution License. <a href="https://doi.org/10.13026/hxan-pe94">PhysioNet, version 2.0.0</a> · <a href="https://physionet.org/content/hd-semg/view-license/2.0.0/">ODC-By 1.0</a> · <a href="https://doi.org/10.1109/TNSRE.2021.3082551">Source study</a></p>
+  </footer>
+</main>
+</body>
+</html>

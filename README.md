@@ -48,6 +48,8 @@ In a hand-to-mouth task, did muscle activity predict elbow angle better than kno
 
 In the earlier IACKD palm pilot, a ridge model using three EEG channels had 7.51 mm root mean squared error on 59 development trials. A template using only time within the trial had 7.38 mm. The pilot used stored recordings from one participant for training and another for development. [Read and reproduce the two-person pilot](benchmarks/scalp-eeg-hand/README.md)
 
+Hyser shifts the question to one finger. On a separate two-day task, recent sensor voltage gave 14.35 mV mean absolute error across four development participants. Adding aligned forearm activity gave 14.46 mV. [Open the index-finger reader](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) · [Read the comparison](benchmarks/hyser-index/RESULTS.md)
+
 ## Read the papers
 
 A hand can close by the same amount and squeeze harder. The four papers follow that distinction from wrist angle to the force on a lifted object, then to the voltage recorded during a paced grip. In the paced task, adding scalp EEG increased forecast error for all three development participants. The forearm comparison asks whether matching muscle activity to the right moment matters. [Read the four papers](papers/experimental/grip-evidence-2026-11-19/README.md) · [Download the PDFs and reading aid](papers/downloads/NeuroTranslation-Brain2Body-Grip-Evidence-2026-11-19.zip) · [Download the selected manuscript sources](papers/downloads/NeuroTranslation-Brain2Body-Selected-Grip-Evidence-Source-2026-11-19.zip)

@@ -5,58 +5,245 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Open NeuroTranslation</title>
   <style>
-    :root { font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif; color-scheme: light dark; }
-    body { max-width: 46rem; margin: 3rem auto; padding: 0 1.25rem; line-height: 1.65; }
-    h1, h2 { line-height: 1.2; }
-    li { margin: .5em 0; }
-    a { text-underline-offset: .2em; }
-    .open { display: inline-block; padding: .6em 1em; border: 1px solid currentColor; border-radius: .3em; }
+    :root {
+      font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      color-scheme: light dark;
+      --page: #f6f8fc;
+      --panel: #fff;
+      --ink: #182237;
+      --muted: #4a5870;
+      --line: #c9d3e2;
+      --link: #2445b3;
+      --accent: #eaf0ff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page: #111824;
+        --panel: #182237;
+        --ink: #f2f5fc;
+        --muted: #bdc8dc;
+        --line: #495872;
+        --link: #b1c7ff;
+        --accent: #25365b;
+      }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--page); line-height: 1.55; }
+    main { width: min(68rem, 100% - 2.5rem); margin: clamp(2rem, 5vw, 4rem) auto; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { line-height: 1.18; }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.035em; }
+    h2 { font-size: clamp(1.45rem, 3vw, 2rem); letter-spacing: -.02em; }
+    h3 { font-size: 1.15rem; }
+    p { max-width: 70ch; }
+    a { color: var(--link); text-underline-offset: .19em; }
+    a:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
     code { font-family: "Noto Sans Mono", "DejaVu Sans Mono", Consolas, Menlo, sans-serif; }
+    header > p, section > p { margin-top: .65rem; }
+    section { margin-top: 2.35rem; }
+    section:target h2 { color: var(--link); }
+    .jump, .links, .tiles { list-style: none; margin: 0; padding: 0; }
+    .jump, .links { display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
+    .jump { margin-top: 1.05rem; }
+    .jump a, .links a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+    .tiles { display: grid; gap: .75rem; margin-top: 1rem; }
+    .examples { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .examples a {
+      display: block;
+      height: 100%;
+      padding: .9rem;
+      background: var(--accent);
+      border-radius: .45rem;
+      font-weight: 650;
+    }
+    .recordings { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .recordings article {
+      height: 100%;
+      padding: 1rem 1rem .6rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: .45rem;
+    }
+    .recordings h3 { margin: .3rem 0 .45rem; }
+    .recordings p:not(.source) { color: var(--muted); }
+    .source { color: var(--muted); font-size: .875rem; font-weight: 650; }
+    .recordings .links { margin-top: .3rem; gap: 0 .9rem; }
+    .primary { font-weight: 650; }
+    .support { border-top: 1px solid var(--line); padding-top: 1.15rem; }
+    @media (max-width: 50rem) {
+      .examples { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 38rem) {
+      main { width: calc(100% - 2rem); }
+      .recordings { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 <main>
-  <h1>Open NeuroTranslation</h1>
-  <p>How much does scalp EEG add once you know where a hand was? Import a prepared IACKD right-hand trial and choose <strong>Compare estimates</strong>. For an R1 trial the graph compares estimates with and without EEG. For R2 it shows how calibration on the first recording changes the estimate on the second.</p>
-  <p>The same browser companion inspects and aligns compatible JSON and CSV recordings. Your files stay in your browser.</p>
-  <p><a class="open" href="./index.html#palm-replay">Open Palm replay</a></p>
+  <header>
+    <h1>Open NeuroTranslation</h1>
+    <p>Forecast a squeeze, compare wrist angles or line up sensor traces. Try an invented example or open a recording from the matching study.</p>
+    <nav aria-label="On this page">
+      <ul class="jump">
+        <li><a href="#examples">Invented examples</a></li>
+        <li><a href="#recordings">Recording formats</a></li>
+        <li><a href="#launchers">Desktop launchers</a></li>
+        <li><a href="#papers">Papers and source</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <h2>Keep a launcher on your computer</h2>
-  <p>Download and open the file for your system. If it appears as text, download and extract the ZIP first. Keep the filename extension and follow your operating system’s normal opening prompts.</p>
-  <ul>
-    <li><a download="NeuroTranslation-Windows.url" href="launchers/NeuroTranslation-Windows.url">Windows launcher</a></li>
-    <li><a download="NeuroTranslation-macOS.webloc" href="launchers/NeuroTranslation-macOS.webloc">macOS launcher</a></li>
-    <li><a download="NeuroTranslation-Linux.desktop" href="launchers/NeuroTranslation-Linux.desktop">Linux launcher</a></li>
-    <li><a download="Install-NeuroTranslation-Linux.sh" href="launchers/Install-NeuroTranslation-Linux.sh">Linux menu installer</a></li>
-    <li><a download="NeuroTranslation-Launchers.zip" href="launchers/NeuroTranslation-Launchers.zip">All launchers ZIP</a></li>
-  </ul>
-  <p>For a Linux application-menu entry, extract the ZIP and run <code>sh Install-NeuroTranslation-Linux.sh</code> in that folder. Installation opens no browser. An earlier entry still opens the preview, where you can choose <strong>Palm replay</strong>. The installer preserves existing entries and customizations.</p>
-  <p>The shortcuts need a network connection and browser. Windows and macOS shortcut formats and isolated Linux installation were checked. Native shortcut opening on Windows and macOS remains unchecked. <a href="launchers/README.txt">Launcher instructions</a> · <a href="launchers/SHA256SUMS">Checksums</a> · <a href="launchers/MANIFEST.json">Package details</a></p>
+  <section id="examples" aria-labelledby="examples-title">
+    <h2 id="examples-title">Try an invented example</h2>
+    <ul class="tiles examples">
+      <li><a href="./index.html">Line up sensor traces</a></li>
+      <li><a href="grip-force/">Forecast a pinch lift</a></li>
+      <li><a href="contact-force/">Compare two grip models</a></li>
+      <li><a href="wrist-pointing/">Change a wrist model’s inputs</a></li>
+    </ul>
+    <p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-muscle">Study behind the wrist example</a></p>
+  </section>
 
-  <h2>Study, papers and source</h2>
-  <p>The palm replay uses retrospectively processed recordings. Prepare a trial from the original archive using the study instructions. The model comparisons use the stored recording clock. Live decoding and a validated general model remain outside this preview.</p>
-  <ul>
-    <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history/">Six-person palm study and R1 trial preparation</a></li>
-    <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-personal-calibration#replay-a-second-recording">Personal calibration and R2 trial preparation</a></li>
-    <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-temporal">Wrist-angle forecasting model and desktop launchers</a></li>
-    <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-forearm-transfer">Forecast one recorded wrist trial with forearm EMG</a></li>
-    <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/uji-wrist-emg">Estimate wrist angles during daily activities with task context and forearm EMG</a></li>
-    <li><a href="daily-wrist/">Run the daily-activity models in your browser</a></li>
-    <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/way-grip-force/">Read the grip-force study and download the desktop forecast</a></li>
-    <li><a href="grip-force/">Forecast grip force in your browser</a></li>
-    <li><a href="contact-force/">Compare ridge and CNN grip forecasts in your browser</a></li>
-    <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hygrip-force/">Read the HYGRIP grip-forecast protocol</a></li>
-    <li><a href="hygrip-force/">Replay a HYGRIP grip trial in your browser</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hygrip-force/results-2026-11-19/">Read the first HYGRIP development results</a></li>
-    <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/way-contact-force/">Compare two grip-force forecasts timed from force confirmation</a></li>
-    <li><a href="wrist-forearm/">Open an original wrist recording and compare three forearm forecasts in the browser</a></li>
-    <li><a href="wrist-replay/">Replay a recorded wrist movement with the six fitted temporal models</a></li>
-    <li><a href="wrist-pointing/">Run a fitted wrist-angle example in the browser</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-muscle">Forearm muscle study and results</a></li>
-    <li><a href="preview.html">Preview guide</a></li>
-    <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers">Selected experimental papers</a> · <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/papers/downloads/NeuroTranslation-Brain2Body-Grip-Evidence-2026-11-19.zip">Latest four drafts (ZIP)</a></li>
-    <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers/experimental/r11-source">Historical unbuilt R11 manuscript source</a></li>
-    <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/interfaces/experimental/portable">Portable interface source without model weights</a></li>
-    <li><a href="https://github.com/eliminatenoise/NeuroTranslation">Project source and licences</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/archive/refs/heads/main.zip">Repository ZIP</a></li>
-  </ul>
+  <section id="recordings" aria-labelledby="recordings-title">
+    <h2 id="recordings-title">Find your recording</h2>
+    <p>Match the study and file type. The tools read your files in your browser. Times refer to the stored recording clocks.</p>
+    <ul class="tiles recordings">
+      <li>
+        <article aria-labelledby="way-title">
+          <p class="source">WAY-EEG-GAL · Windowed-series <code>.mat</code></p>
+          <h3 id="way-title">Grip force during a lift</h3>
+          <p>Use the local converter on the replay page to save a lift as JSON. Move the cutoff and compare forecasts with the measured squeeze 120 ms later, in newtons.</p>
+          <ul class="links">
+            <li><a class="primary" href="grip-force/">Replay a WAY lift</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/way-grip-force/">Grip study and desktop forecast</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="contact-title">
+          <p class="source">WAY-compatible · Prepared JSON</p>
+          <h3 id="contact-title">Grip after the squeeze registers</h3>
+          <p>Open a synchronized capture or a prepared 200-row window. Compare ridge and convolutional forecasts 120 ms ahead, timed from force confirmation.</p>
+          <ul class="links">
+            <li><a class="primary" href="contact-force/">Open the contact-force comparison</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/way-contact-force/">Input guide and contact study</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="hygrip-title">
+          <p class="source">HYGRIP · Original <code>hygrip.h5</code></p>
+          <h3 id="hygrip-title">Grip sensor voltage</h3>
+          <p>Convert a cued right-hand trial from HDF5 to JSON with the local converter. Compare forecasts with and without scalp EEG against the sensor voltage 120 ms later.</p>
+          <ul class="links">
+            <li><a class="primary" href="hygrip-force/">Replay a HYGRIP trial</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hygrip-force/">HYGRIP protocol</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hygrip-force/results-2026-11-19/">Development results</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="hyser-title">
+          <p class="source">Hyser 2.0.0 Random task · WFDB <code>.hea</code> and <code>.dat</code></p>
+          <h3 id="hyser-title">Index-finger sensor voltage</h3>
+          <p>Open the force pair from one session. Add the matching raw forearm EMG pair to compare both forecasts of the index sensor’s voltage 120 ms ahead, in volts. You can also load an invented trial.</p>
+          <ul class="links">
+            <li><a class="primary" href="hyser-index/">Open the Hyser forecaster</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hyser-index">Hyser study and timing controls</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="daily-title">
+          <p class="source">KIN-MUS UJI · Seven-electrode window in JSON</p>
+          <h3 id="daily-title">Wrist angles during daily tasks</h3>
+          <p>Supply the task, its timing and half a second of forearm activity. Compare the angles estimated 250 ms later with and without the muscle signal.</p>
+          <ul class="links">
+            <li><a class="primary" href="daily-wrist/">Open the daily wrist estimator</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/uji-wrist-emg">UJI study and input format</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="forearm-title">
+          <p class="source">EEG-EMG-WristMotion · Original study ZIP</p>
+          <h3 id="forearm-title">What does the forearm add to a wrist forecast?</h3>
+          <p>Open a compatible development ZIP directly. Compare three forecasts against measured angles at six times during a pointing movement.</p>
+          <ul class="links">
+            <li><a class="primary" href="wrist-forearm/">Open a wrist recording ZIP</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-forearm-transfer">Forearm study and desktop replay</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="temporal-title">
+          <p class="source">EEG-EMG-WristMotion · Prepared trial JSON</p>
+          <h3 id="temporal-title">Does scalp EEG help forecast a wrist turn?</h3>
+          <p>Prepare one development trial with the study converter. Compare motion-only and motion-plus-EEG forecasts with the measured angles. The study’s error plots open without a file.</p>
+          <ul class="links">
+            <li><a class="primary" href="wrist-replay/">Replay a wrist turn</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-temporal">Wrist study, converter and desktop launchers</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="palm-title">
+          <p class="source">IACKD · Prepared right-hand trial JSON</p>
+          <h3 id="palm-title">Track a palm through a reach</h3>
+          <p>Use the study converters. Import a first recording (R1) to compare position estimates with and without scalp EEG. A second recording (R2) shows what changes after calibration on that person’s first recording.</p>
+          <ul class="links">
+            <li><a class="primary" href="./index.html#palm-replay">Open Palm replay</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history/">R1 study and trial preparation</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-personal-calibration#replay-a-second-recording">R2 calibration and trial preparation</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="signal-title">
+          <p class="source">Your own signals · Compatible JSON or CSV</p>
+          <h3 id="signal-title">Put traces on the same clock</h3>
+          <p>Inspect each trace on its original timeline. Align traces when their metadata identify the same subject, recording and clock. CSV uses <code>time,value</code> with time in seconds.</p>
+          <ul class="links">
+            <li><a class="primary" href="./index.html">Open the signal inspector</a></li>
+            <li><a href="preview.html">Preview guide</a></li>
+          </ul>
+        </article>
+      </li>
+    </ul>
+  </section>
+
+  <section class="support" id="launchers" aria-labelledby="launchers-title">
+    <h2 id="launchers-title">Keep a launcher on your computer</h2>
+    <p>These shortcuts open Palm replay in your browser and need a network connection. If a shortcut opens as text, extract the ZIP first. Keep the filename extension and follow your system’s normal opening prompts.</p>
+    <ul class="links">
+      <li><a download="NeuroTranslation-Windows.url" href="launchers/NeuroTranslation-Windows.url">Windows launcher</a></li>
+      <li><a download="NeuroTranslation-macOS.webloc" href="launchers/NeuroTranslation-macOS.webloc">macOS launcher</a></li>
+      <li><a download="NeuroTranslation-Linux.desktop" href="launchers/NeuroTranslation-Linux.desktop">Linux launcher</a></li>
+      <li><a download="Install-NeuroTranslation-Linux.sh" href="launchers/Install-NeuroTranslation-Linux.sh">Linux menu installer</a></li>
+      <li><a download="NeuroTranslation-Launchers.zip" href="launchers/NeuroTranslation-Launchers.zip">All launchers ZIP</a></li>
+    </ul>
+    <p>For a Linux application-menu entry, extract the ZIP and run <code>sh Install-NeuroTranslation-Linux.sh</code> in that folder. An existing entry may open the preview. Choose <strong>Palm replay</strong> there. The installer preserves existing entries and customizations and opens no browser.</p>
+    <p>Windows and macOS shortcut formats and isolated Linux installation were checked. Native shortcut opening on Windows and macOS remains unchecked.</p>
+    <ul class="links">
+      <li><a href="launchers/README.txt">Launcher instructions</a></li>
+      <li><a href="launchers/SHA256SUMS">Checksums</a></li>
+      <li><a href="launchers/MANIFEST.json">Package details</a></li>
+    </ul>
+  </section>
+
+  <section class="support" id="papers" aria-labelledby="papers-title">
+    <h2 id="papers-title">Papers and source</h2>
+    <p>These are experimental previews. Model comparisons use stored recordings. Live decoding and a validated general model remain outside this preview.</p>
+    <ul class="links">
+      <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers">Selected experimental papers</a></li>
+      <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/papers/downloads/NeuroTranslation-Brain2Body-Grip-Evidence-2026-11-19.zip">Latest four drafts (ZIP)</a></li>
+      <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers/experimental/r11-source">Historical unbuilt R11 manuscript source</a></li>
+      <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/interfaces/experimental/portable">Portable interface source without model weights</a></li>
+      <li><a href="https://github.com/eliminatenoise/NeuroTranslation">Project source and licences</a></li>
+      <li><a href="https://github.com/eliminatenoise/NeuroTranslation/archive/refs/heads/main.zip">Repository ZIP</a></li>
+    </ul>
+  </section>
 </main>
 </body>
 </html>
