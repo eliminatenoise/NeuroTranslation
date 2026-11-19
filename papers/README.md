@@ -1,6 +1,8 @@
 # Paper drafts
 
-## Hyser prescribed-task comparison
+## Current edition · Hyser prescribed-task comparison
+
+[Edition manifest](experimental/hyser-prescribed-task-2026-11-19/manifest.json)
 
 Hyser’s prescribed finger combinations put the same forecasts to a different task. Five sensor histories lowered average absolute error against index history alone in all 16 people across the two groups. Repeating the last index reading still gave the smallest average absolute error. The five histories led on the score that gives large misses more weight.
 
@@ -126,9 +128,9 @@ The four PDFs now work through one question. If two cameras see the same hand at
 
 [Download the proposed PDFs and companions](downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-19.zip) · [Archive checksum](downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-19.zip.sha256) · [Candidate manifest](experimental/movement-measurement-2026-11-19/manifest.json)
 
-The candidate remains under review. The selected edition is listed below.
+This candidate was under review when the 15 November edition below was selected.
 
-## Selected edition: scientific/layout, 15 November 2026
+## Earlier scientific and layout edition · 15 November 2026
 
 - [NeuroTranslation: technical](experimental/scientific-layout-2026-11-15/neurotranslation-technical.pdf) — 133 pages, retained R2 PDF
 - [NeuroTranslation: explained](experimental/scientific-layout-2026-11-15/neurotranslation-explained.pdf) — 165 pages, R3 build
@@ -143,10 +145,10 @@ The completed LINK comparison retains its negative results: 18 fits and 720 save
 
 ## Sources and history
 
-The current PDFs retain their own R2/R3 build provenance. The preserved public R9 and R11 snapshots are not matching build-source bundles for these PDFs, and this package does not establish a standalone reproducible build.
+The 15 November PDFs retain their own R2/R3 build provenance. The preserved public R9 and R11 snapshots are not matching build-source bundles for these PDFs, and this package does not establish a standalone reproducible build.
 
-The [R9 source](drafts/r9/source/), [historical R9 manifest](drafts/r9/manifest.json), [historical notices](drafts/r9/NOTICE.md) and [R9 reading-aid erratum](errata/r9-reading-aid-metadata.txt) remain historical records. Use the selected links above for this edition. The R9 manifest describes an earlier edition rather than supplying current PDF or companion availability.
+The [R9 source](drafts/r9/source/), [historical R9 manifest](drafts/r9/manifest.json), [historical notices](drafts/r9/NOTICE.md) and [R9 reading-aid erratum](errata/r9-reading-aid-metadata.txt) remain historical records. Use the 15 November links above for that edition. The R9 manifest describes an earlier edition rather than supplying current PDF or companion availability.
 
 The [R11 source preview](experimental/r11-source/) remains historical, unbuilt and nonstandalone, with its proposed G35 terminology unadopted. Earlier editions and changes remain in Git history. These remain working drafts; their scientific, privacy, security, redistribution and finished-paper requirements remain open at the stated scope.
 
-[Download all four PDFs and their companions](downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip) · [Archive checksum](downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip.sha256). Extract the ZIP and keep its files together so the relative JSON companions remain beside the PDFs. See the [current notices](experimental/scientific-layout-2026-11-15/NOTICE.md) for font licenses and reuse limits.
+[Download all four PDFs and their companions](downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip) · [Archive checksum](downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip.sha256). Extract the ZIP and keep its files together so the relative JSON companions remain beside the PDFs. See the [15 November notices](experimental/scientific-layout-2026-11-15/NOTICE.md) for font licenses and reuse limits.
