@@ -1,0 +1,29 @@
+{
+  "study": "Retrospective CEMHSEY GRASP pinch forecasting on normalized scalar dynamometer readings",
+  "version": 1,
+  "source_records": [
+    "10.5281/zenodo.15077957",
+    "10.5281/zenodo.15070187"
+  ],
+  "protocol_sha256": "7f790773248996b7893ba99168331419ddc3041406d55c13e928d09f8fe69b1a",
+  "native_force_tick_horizon": 24,
+  "native_force_rate_hz": 200,
+  "native_emg_rate_hz": 2048,
+  "issue_rows_per_trial": 592,
+  "cohort_commitments": {
+    "train": {
+      "people": 3,
+      "person_days": 6,
+      "trials": 12,
+      "member_metadata_sha256": "756fda407af41209839e7a43dd75505dda9ee714112175d6168d3c2d8596f5c1"
+    },
+    "development": {
+      "people": 4,
+      "person_days": 8,
+      "trials": 16,
+      "member_metadata_sha256": "2e5589a463c66a9ed9c34e5606999034af6a68538519c43f9ca84e27f061600c"
+    }
+  },
+  "fit_candidate_code_sha256": "292ec7a480ba7170ff6d09abc5b44a2f6cbc7e39f7ff3620f3e52af18d11ea80",
+  "scope": "The release-index grid is an offline convention. Physical alignment and availability of the signals require independent evidence. The membership was fixed before fitting; source-eligibility checks may stop either phase."
+}
