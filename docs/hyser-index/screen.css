@@ -7,6 +7,7 @@ p { margin: .6rem 0; }
 .scope { font-weight: 700; color: #37665b; }
 h1 { font-size: clamp(2.1rem,5.6vw,4.3rem); line-height: 1.03; letter-spacing: -.045em; margin: .55rem 0 .9rem; }
 h2 { font-size: 1.42rem; line-height: 1.2; margin: 0 0 .8rem; }
+h3 { font-size: 1.12rem; line-height: 1.25; margin: 1rem 0 .45rem; }
 .record,.forecast { background: white; border: 1px solid #c5d3ca; border-radius: .75rem; padding: clamp(.85rem,2.7vw,1.5rem); margin: 1.05rem 0; }
 .file-row,.record-row { display: flex; flex-wrap: wrap; gap: .7rem 1.4rem; align-items: end; }
 .file-row label { min-width: 0; flex: 1 1 16rem; font-weight: 650; }
@@ -14,11 +15,17 @@ h2 { font-size: 1.42rem; line-height: 1.2; margin: 0 0 .8rem; }
 input,button,select { font: inherit; }
 button,select { padding: .45rem .75rem; border-radius: .35rem; border: 1px solid #34675b; }
 button { color: #fff; background: #17594a; cursor: pointer; }
+button.secondary { color: #17594a; background: #fff; }
 button:disabled { opacity: .55; }
 :focus-visible { outline: 2px solid #156caf; outline-offset: 3px; }
 .hint,.interpret,footer { color: #3c5650; }
 .record-row { margin-top: .7rem; align-items: center; }
 #record-status { font-weight: 620; }
+.calibration { margin: 1.15rem 0; padding: .1rem .85rem .65rem; background: #edf4ee; border-left: 3px solid #37665b; border-radius: .3rem; }
+.calibration label { font-weight: 650; }
+.calibration input { display: block; max-width: 100%; margin-top: .25rem; }
+#fit-status, #day-one-source { margin-bottom: 0; }
+code { font-family: "Segoe UI", Arial, sans-serif; font-weight: 650; }
 #cutoff { width: 100%; display: block; min-height: 2rem; accent-color: #15594a; }
 output,.readings dd,table,#outcome { font-variant-numeric: tabular-nums; }
 .readings { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(11rem,100%),1fr)); gap: .6rem; margin: 1rem 0; }
@@ -31,6 +38,8 @@ figcaption { margin: .6rem 0 .4rem; }
 .legend i { display:inline-block; height:.55rem; width:.55rem; }
 .legend .line { height:0; width:1rem; border-top:3px solid #15594e; }
 .diamond { background:#31549b; transform:rotate(45deg); } .square { background:#8f4811; }
+.legend .personal-mark { width: .72rem; height: .72rem; border: 2px solid #31549b; background: transparent; }
+.legend .square.personal-mark { border-color: #8f4811; }
 .legend .circle { width:.7rem; height:.7rem; border:2px solid #46374f; border-radius:50%; }
 [hidden] { display:none !important; }
 details { margin-top:.6rem; } summary { cursor:pointer; width:fit-content; color:#14574a; }
@@ -41,3 +50,6 @@ caption { text-align:left; font-weight:650; }
 footer { border-top:1px solid #c7d4cd; padding-top:.7rem; font-size:.94rem; }
 
 .table-scroll { max-width: 100%; overflow-x: auto; }
+#score { border-top: 1px solid #c5d3ca; margin-top: 1rem; }
+#score th[scope="row"] { text-align: left; min-width: 7rem; }
+#score-changes { margin: .5rem 0; padding-left: 1.3rem; }

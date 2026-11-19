@@ -4,7 +4,18 @@
     last = 2385,
     step = 5;
   const ceiling = (forceTick) => Math.ceil((forceTick * 512) / 25);
-  function windowAt(record, issue) {
+  const yieldFrame = () => new Promise((resolve) => setTimeout(resolve, 0));
+  function observationAt(record, issue) {
+    const value = record.force.voltage(issue + 12, 1);
+    return Number.isFinite(value) ? value : null;
+  }
+  function logRms(sum, frames) {
+    const n = frames * 64;
+    return [...sum, sum.reduce((a, b) => a + b) / 4].map((power) =>
+      Math.log(Math.max(1e-12, Math.sqrt(power / n))),
+    );
+  }
+  function windowAt(record, issue, { observe = true, emgAt, skipMissing = false } = {}) {
     if (
       !Number.isInteger(issue) ||
       issue < first ||
@@ -17,11 +28,14 @@
     const force = Array.from({ length: 41 }, (_, i) =>
       record.force.voltage(issue - 40 + i, 1),
     );
-    const observed = record.force.voltage(issue + 12, 1);
-    if (!force.every(Number.isFinite))
+    if (!force.every(Number.isFinite)) {
+      if (skipMissing) return null;
       throw new Error("The force history has missing samples at this cutoff.");
+    }
     let emg = null;
-    if (record.raw) {
+    if (emgAt) {
+      emg = emgAt(issue);
+    } else if (record.raw) {
       const features = [];
       for (let bin = 0; bin < 4; bin++) {
         const begin = ceiling(issue - 42 + 10 * bin),
@@ -33,9 +47,7 @@
             sum[Math.floor(c / 64)] += v * v;
           }
         }
-        const n = (end - begin) * 64;
-        for (const s of [...sum, sum.reduce((a, b) => a + b) / 4])
-          features.push(Math.log(Math.max(1e-12, Math.sqrt(s / n))));
+        features.push(...logRms(sum, end - begin));
       }
       if (features.every(Number.isFinite)) emg = features;
     }
@@ -43,7 +55,43 @@
       issue,
       force,
       emg,
-      observed: Number.isFinite(observed) ? observed : null,
+      observed: observe ? observationAt(record, issue) : null,
+    };
+  }
+  // Reuse 10 ms power blocks for a sweep of overlapping 100 ms EMG bins.
+  // Each block uses the same half-open frame bounds as a single forecast.
+  async function batchedEmg(raw, isCurrent) {
+    if (!raw) return undefined;
+    const start = first - 42;
+    const end = last - 2;
+    const powers = new Float64Array((end - start) * 4);
+    for (let tick = start; tick < end; tick++) {
+      const begin = ceiling(tick);
+      const stop = ceiling(tick + 1);
+      const offset = (tick - start) * 4;
+      for (let frame = begin; frame < stop; frame++) {
+        for (let c = 0; c < 256; c++) {
+          const voltage = raw.voltage(frame, c);
+          powers[offset + (c >> 6)] += voltage * voltage;
+        }
+      }
+      if ((tick - start + 1) % 96 === 0) {
+        await yieldFrame();
+        if (!isCurrent()) return undefined;
+      }
+    }
+    return (issue) => {
+      const features = [];
+      for (let bin = 0; bin < 4; bin++) {
+        const begin = issue - 42 + 10 * bin;
+        const sum = [0, 0, 0, 0];
+        for (let tick = begin; tick < begin + 10; tick++) {
+          const offset = (tick - start) * 4;
+          for (let grid = 0; grid < 4; grid++) sum[grid] += powers[offset + grid];
+        }
+        features.push(...logRms(sum, ceiling(begin + 10) - ceiling(begin)));
+      }
+      return features.every(Number.isFinite) ? features : null;
     };
   }
   function validFit(weights) {
@@ -116,15 +164,15 @@
       );
     return result;
   }
-  function invented() {
+  function invented(variant = 0) {
     return {
       force: {
         voltage(i) {
           return (
             0.11 +
-            0.035 * Math.sin(i / 56) +
-            0.026 * Math.sin(i / 21.3) +
-            0.012 * Math.cos(i / 9.8)
+            (0.035 + 0.0018 * variant) * Math.sin(i / 56 + 0.17 * variant) +
+            0.026 * Math.sin(i / 21.3 + 0.3 * variant) +
+            0.012 * Math.cos(i / 9.8 + 0.1 * variant)
           );
         },
       },
@@ -145,6 +193,9 @@
     last,
     step,
     windowAt,
+    observationAt,
+    batchedEmg,
+    yieldFrame,
     predict,
     invented,
     linear,

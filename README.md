@@ -48,7 +48,7 @@ In a hand-to-mouth task, did muscle activity predict elbow angle better than kno
 
 In the earlier IACKD palm pilot, a ridge model using three EEG channels had 7.51 mm root mean squared error on 59 development trials. A template using only time within the trial had 7.38 mm. The pilot used stored recordings from one participant for training and another for development. [Read and reproduce the two-person pilot](benchmarks/scalp-eeg-hand/README.md)
 
-Hyser shifts the question to one finger. On a separate two-day task, recent sensor voltage gave 14.35 mV mean absolute error across four development participants. Adding aligned forearm activity gave 14.46 mV. [Open the index-finger reader](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) · [Read the comparison](benchmarks/hyser-index/RESULTS.md) · [Compare Day 1 calibration on Day 2](benchmarks/hyser-index/crossday/README.md)
+Hyser shifts the question to one finger. On a separate two-day task, recent sensor voltage gave 14.35 mV mean absolute error across four development participants. Adding aligned forearm activity gave 14.46 mV. [Open the index-finger reader](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) · [Read the comparison](benchmarks/hyser-index/RESULTS.md) · [Compare Day 1 calibration on Day 2](benchmarks/hyser-index/crossday/README.md). To try a personal correction in the reader, choose **Personalize across two days**.
 
 ## Read the papers
 

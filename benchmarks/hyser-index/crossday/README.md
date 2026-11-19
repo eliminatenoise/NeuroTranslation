@@ -37,3 +37,5 @@ The target is released voltage from the index force transducer during Hyser’s 
 Contains aggregate results derived from Hyser 2.0.0, published by Xinyu Jiang, Chenyun Dai, Xiangyu Liu and Jiahao Fan and made available by PhysioNet under ODC-By 1.0. [Dataset](https://doi.org/10.13026/hxan-pe94) · [Protocol paper](https://doi.org/10.1109/TNSRE.2021.3082551) · [Dataset license](https://physionet.org/content/hd-semg/view-license/2.0.0/)
 
 [Score your own original session folders](../SCORE-SESSION.md) · [Download the local Python scorer](../downloads/Hyser-Crossday-Python.zip) · [Reference scoring implementation](../crossday_study.py).
+
+[Open the interactive Hyser reader](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) and choose **Personalize across two days**. Pick first-day and second-day folders, or try the two invented days. [Download the offline reader](../downloads/Hyser-Index-Voltage-Reader.zip).

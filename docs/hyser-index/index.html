@@ -9,6 +9,7 @@
   <script defer src="weights.js"></script>
   <script defer src="wfdb.js"></script>
   <script defer src="forecast.js"></script>
+  <script defer src="personalize.js"></script>
   <script defer src="reader.js"></script>
 </head>
 <body>
@@ -19,17 +20,39 @@
     <p>Select a moment in a 25-second trial. The first model sees 400 ms of recent voltage and forecasts the sensor reading 120 ms later. The second also sees four 100 ms windows of forearm muscle activity. The last window ends 20 ms before the cutoff.</p>
   </header>
   <section aria-labelledby="record-title" class="record">
-    <h2 id="record-title">Choose a trial</h2>
-    <div class="file-row">
-      <label>Original session folder <input type="file" id="folder" webkitdirectory multiple disabled></label>
-      <label>Or select matching files <input type="file" id="files" accept=".hea,.dat" multiple disabled></label>
+    <h2 id="record-title">Choose recordings</h2>
+    <div class="record-row">
+      <label>Forecast mode
+        <select id="mode" disabled>
+          <option value="population">Population models</option>
+          <option value="crossday">Personalize across two days</option>
+        </select>
+      </label>
+      <button type="button" class="secondary" id="cross-example" disabled>Try two invented days</button>
+      <button type="button" class="secondary" id="clear-recordings" hidden disabled>Clear recordings</button>
     </div>
-    <p class="hint">Use the Random task’s force .hea and .dat files. Include the corresponding raw EMG pair to compare both forecasts. Choose all files from one session. The headers identify the trial number only.</p>
+    <p id="population-hint" class="hint">Use one original Random-task folder or a force .hea and .dat pair. Add the matching raw surface EMG pair to try both forecasts. Loose files carry a trial number. Keep both pairs from the same session.</p>
+    <div id="day-one-panel" class="calibration" hidden>
+      <h3>Day 1 · Fit an adjustment</h3>
+      <p>Day 1 gives the model five trials with answers. Day 2 tests what that small adjustment is worth.</p>
+      <label for="day-one">Original Day 1 session folder</label>
+      <input type="file" id="day-one" webkitdirectory multiple disabled aria-describedby="day-one-hint">
+      <p class="hint" id="day-one-hint">Choose a <code>subjectNN_session1</code> folder with all five force pairs. Include all five raw EMG pairs to personalize that forecast too.</p>
+      <p id="day-one-source" role="status"></p>
+    </div>
+    <h3 id="day-two-heading" hidden>Day 2 · Test the forecast</h3>
+    <div class="file-row">
+      <label><span id="folder-caption">Original session folder</span> <input type="file" id="folder" webkitdirectory multiple disabled></label>
+      <label id="loose-pairs">Or select matching files <input type="file" id="files" accept=".hea,.dat" multiple disabled></label>
+    </div>
+    <p id="day-two-hint" class="hint" hidden>Choose the same participant’s <code>subjectNN_session2</code> folder. Original folder names identify the intended participant and day. The browser checks those names and the files’ WFDB integrity. It cannot authenticate where renamed files came from.</p>
     <div class="record-row">
       <button type="button" id="example" disabled>Load invented trial</button>
       <label id="trial-label" hidden>Trial <select id="trial"></select></label>
+      <button type="button" id="fit" hidden disabled>Fit from Day 1</button>
     </div>
     <p id="record-status" role="status">Opening the local models…</p>
+    <p id="fit-status" role="status" hidden></p>
   </section>
   <section aria-labelledby="forecast-title" class="forecast">
     <h2 id="forecast-title">Voltage at +120 ms</h2>
@@ -40,7 +63,7 @@
       <output id="moment" for="cutoff"></output>
       <div id="window" hidden>
         <dl id="predictions" class="readings"></dl>
-        <label class="reveal"><input type="checkbox" id="reveal"> Reveal the later sensor reading</label>
+        <label class="reveal"><input type="checkbox" id="reveal"> <span id="reveal-caption">Reveal the later sensor reading</span></label>
         <p id="outcome" aria-live="polite"></p>
         <figure>
           <figcaption><strong>Index sensor voltage</strong></figcaption>
@@ -49,6 +72,8 @@
             <span><i class="line"></i>Sensor history</span>
             <span><i class="diamond"></i>Force history forecast</span>
             <span id="emg-key"><i class="square"></i>With forearm EMG</span>
+            <span id="personal-force-key" hidden><i class="diamond personal-mark"></i>Personalized force history</span>
+            <span id="personal-emg-key" hidden><i class="square personal-mark"></i>Personalized with EMG</span>
             <span id="target-key" hidden><i class="circle"></i>Later reading</span>
           </div>
         </figure>
@@ -61,11 +86,26 @@
         </details>
       </div>
     </div>
+    <section id="score" aria-labelledby="score-title" hidden>
+      <h3 id="score-title">Day 2 trial errors</h3>
+      <p id="score-status" role="status"></p>
+      <div id="score-table" class="table-scroll" tabindex="0" role="region" aria-label="Comparison of Day 2 trial errors" hidden>
+        <table>
+          <caption>Mean absolute error and root mean squared error in mV. Smaller is better.</caption>
+          <thead><tr><th scope="col">Forecast</th><th scope="col">Cutoffs</th><th scope="col">Population MAE</th><th scope="col">Personalized MAE</th><th scope="col">Population RMSE</th><th scope="col">Personalized RMSE</th></tr></thead>
+          <tbody id="score-rows"></tbody>
+        </table>
+      </div>
+      <ul id="score-changes" hidden></ul>
+    </section>
   </section>
   <section class="interpret" aria-labelledby="evidence">
     <h2 id="evidence">What the forecast measures</h2>
     <p>Hyser recorded five finger-force sensors as adults pressed in self-chosen combinations on two separate days. This forecast uses the index sensor’s voltage. The two recording systems shared a start trigger. Their drift and the processing delay in the released force trace have not been established.</p>
     <p>On four development participants, the force-history model averaged 14.35 mV of absolute error. Adding aligned forearm EMG gave 14.46 mV. Two people improved and two did worse. Both models scored the same 18,000 cutoffs across the two days.</p>
+    <p>Across two days, each population forecast keeps its shared weights. Day 1 fits just an offset and a change in gain. Day 2 can show a lower error, a higher error or no change. The shared fit may already include the selected participant, so a local comparison alone does not tell you how the method fares on new people.</p>
+    <p>In the cross-day study, the population force model averaged 14.912 mV of absolute error on Day 2. Fitting on the same person’s Day 1 raised the error to 15.091 mV. Fitting on another person’s Day 1 raised it to 15.401 mV. With surface EMG, the corresponding errors were 14.903, 15.122 and 15.496 mV. The same four development participants had already been scored in the original study. They formed two donor pairs. The four reserved participants remain unopened. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hyser-index/crossday">Read the cross-day study</a></p>
+    <p>The forecast uses the released force samples at 100 Hz. Optional surface EMG runs at 2,048 Hz on its own clock. The reader subtracts each channel’s recorded baseline, then divides by its gain to give volts. It keeps the opened files and Day 1 coefficients in browser memory for this page.</p>
     <p><a id="study-link" href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hyser-index">Read the study and timing controls</a> · <a href="README.md">Offline reader instructions</a></p>
   </section>
   <footer>
