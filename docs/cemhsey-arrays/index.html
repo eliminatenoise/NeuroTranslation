@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light"><title>Forearm electrode grids · NeuroTranslation</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="stylesheet" href="screen.css">
+  <script defer src="channel-map.js"></script><script defer src="weights.js"></script>
+  <script defer src="array-math.js"></script><script defer src="reader.js"></script>
+</head>
+<body><main>
+  <header><p class="brand">NeuroTranslation</p><h1>Inside a forearm recording</h1>
+    <p>Five grids record muscle electrical activity at the skin. Explore two short windows from a pinch and compare forecasts of the later force between thumb and index finger.</p>
+  </header>
+  <noscript><p>This offline reader needs JavaScript to open trials and calculate forecasts.</p></noscript>
+  <section aria-labelledby="open-title"><h2 id="open-title">Open a trial</h2>
+    <div class="actions"><button id="example" disabled>Try an invented pinch</button>
+      <label>Choose a local array packet <input id="file" type="file" accept=".json,application/json" disabled></label></div>
+    <p id="status" role="status">Opening the reader…</p>
+    <details id="instructions"><summary>Use an original MATLAB recording</summary>
+      <p>The <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip">offline reader ZIP</a> includes a Python converter for the CEMHSEY GRASP two-finger pinch at a 30% target. Open the converted JSON here. Your packet and forecast weights stay in this browser.</p>
+    </details>
+    <details id="model-controls"><summary>Choose forecast weights</summary><p id="fit-status" role="status"></p>
+      <div class="actions"><label>Local fitted model <input id="model-file" type="file" accept=".json,application/json" disabled></label>
+      <button id="reset-model" class="secondary" disabled>Use bundled weights</button></div></details>
+  </section>
+  <div id="trial" hidden>
+    <section aria-labelledby="time-title"><div class="section-head"><h2 id="time-title">Recording cutoff</h2><output id="time" for="cutoff"></output></div>
+      <label for="cutoff">Time from the nominal start of the trial</label>
+      <input id="cutoff" type="range" min="0" max="591" step="1" value="160">
+      <p id="phase" class="hint"></p></section>
+    <section aria-labelledby="array-title">
+      <div class="section-head"><h2 id="array-title">Electrode activity</h2><label>Electrode grid <select id="grid"></select></label></div>
+      <p id="orientation"></p>
+      <div class="maps"><div><h3>Earlier window</h3><p class="window">300 to 200 ms before cutoff</p><div id="older-map" role="grid"></div></div>
+      <div><h3>Later window</h3><p class="window">200 to 100 ms before cutoff</p><div id="recent-map" role="grid"></div></div></div>
+      <div class="scale"><div><div class="ramp" aria-hidden="true"></div><span id="scale-text"></span></div>
+        <label class="check"><input id="lock" type="checkbox"> Lock the colour scale</label></div>
+      <p class="hint">Colour shows RMS amplitude in mV, on one scale across both windows and all five grids. Select a cell or use the arrow keys to inspect an electrode.</p>
+      <p id="selection" role="status"></p>
+      <details id="values"><summary>Read all 64 electrode values for this grid</summary>
+        <table><caption>RMS amplitude in millivolts</caption><thead><tr><th>Stored channel</th><th>Earlier</th><th>Later</th><th>Change</th></tr></thead><tbody id="electrode-values"></tbody></table></details>
+    </section>
+    <section aria-labelledby="pattern-title"><h2 id="pattern-title">What the model sees</h2>
+      <p>Take the median channel amplitude in each grid, transform it with log(1 + RMS in mV), and subtract the mean of the five transformed medians. A positive contrast places the grid above that window’s mean.</p>
+      <table><caption>Grid contrast in log amplitude</caption><thead><tr><th>Grid</th><th>Earlier</th><th>Later</th></tr></thead><tbody id="grid-contrasts"></tbody></table>
+      <p id="rank"></p></section>
+    <section aria-labelledby="forecast-title"><div class="section-head"><h2 id="forecast-title">Forecast at +24 force ticks</h2></div>
+      <p id="origin" class="hint"></p>
+      <table><caption>Predicted normalized pinch force</caption><thead><tr><th>Forecast</th><th>Force</th></tr></thead><tbody id="predictions"></tbody></table>
+      <label class="check"><input id="reveal" type="checkbox"> Reveal the later force reading</label><p id="later" hidden></p>
+      <div class="scores"><h3>Across this trial</h3>
+      <p>Compare mean absolute error (MAE) and root mean squared error (RMSE) on the same 592 cutoffs.</p>
+      <button id="score">Score this trial</button><p id="score-status" role="status"></p>
+      <table id="score-table" hidden><caption>Errors in normalized force units</caption><thead><tr><th>Forecast</th><th>MAE</th><th>RMSE</th></tr></thead><tbody></tbody></table></div>
+    </section>
+  </div>
+  <footer><h2>Source and timing</h2><p>Cell positions follow the numbering on each acquisition grid. The maps show electrode positions within each grid. Identifying an individual muscle or nerve requires separate evidence.</p>
+  <p>The force channel is one dynamometer reading in fractions of that day’s maximum voluntary contraction for this grasp. Twenty-four force ticks span a nominal 120 ms. The timing between the force and EMG acquisition clocks was unverified.</p>
+  <p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cemhsey-arrays">Study and local tools</a> · <a href="https://doi.org/10.1038/s41597-025-05733-y">Acquisition study</a> · <a href="https://doi.org/10.5281/zenodo.15070187">Source data and device code</a></p></footer>
+</main></body></html>

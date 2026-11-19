@@ -43,13 +43,58 @@
     },
     {
       "path": "benchmarks/cemhsey-arrays/README.md",
-      "bytes": 581,
-      "sha256": "e9ab6b1aa7bf0f6ea6118799e63c0bc908c50fccc7504764d48dfc0f1ff72068"
+      "sha256": "001fc6c06424636031a9b5c662d44fc4ed06a4f692493b5df88b99ceaef14db6",
+      "bytes": 3318
+    },
+    {
+      "path": "benchmarks/cemhsey-arrays/RESULTS.json",
+      "sha256": "fca4e1bb4b2d5e58a1dc21154646ca18cf0a2cd2145def37880485d41081eb8a",
+      "bytes": 24090
     },
     {
       "path": "benchmarks/cemhsey-arrays/channel-map.json",
       "bytes": 9000,
       "sha256": "f98fa83e691ef55edb64cfe306b884b94f537df9397f4a64e2a9228e36e36ce4"
+    },
+    {
+      "path": "benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip",
+      "bytes": 54996,
+      "sha256": "80e1a8135aae7264f1cf0c3f864f348234ffcbdf79d2a5aa95a9244d192eb86e"
+    },
+    {
+      "path": "benchmarks/cemhsey-arrays/python/PROTOCOL.md",
+      "bytes": 10661,
+      "sha256": "1ddf690efdba4c91082999cae140f87ae6d567f3422afe68e4977cb4ca6a7781"
+    },
+    {
+      "path": "benchmarks/cemhsey-arrays/python/baseline/PROTOCOL.md",
+      "bytes": 9551,
+      "sha256": "7f790773248996b7893ba99168331419ddc3041406d55c13e928d09f8fe69b1a"
+    },
+    {
+      "path": "benchmarks/cemhsey-arrays/python/baseline/pinch.py",
+      "bytes": 14413,
+      "sha256": "292ec7a480ba7170ff6d09abc5b44a2f6cbc7e39f7ff3620f3e52af18d11ea80"
+    },
+    {
+      "path": "benchmarks/cemhsey-arrays/python/fit_local.py",
+      "bytes": 3231,
+      "sha256": "43a80da1ece4bc0704e1ae192cd0d622a8cd893b4686825fdbafb4ebd721a709"
+    },
+    {
+      "path": "benchmarks/cemhsey-arrays/python/population.py",
+      "bytes": 17668,
+      "sha256": "5b92a5de3d7939c53ffd8be1ababacc1b522b3a611f20855ab0746665b163bc4"
+    },
+    {
+      "path": "benchmarks/cemhsey-arrays/python/requirements.txt",
+      "bytes": 27,
+      "sha256": "c7e98da9145087a94ca85cb4a71c152a22170009342f4c91aa13490568d329b7"
+    },
+    {
+      "path": "benchmarks/cemhsey-arrays/python/trial_packet.py",
+      "bytes": 5596,
+      "sha256": "96da6e09cc5c7c2c7c69fd8af5ff6c8ed4508fd16ff6151ae7ef0775af70a3b1"
     },
     {
       "path": "benchmarks/cemhsey-pinch/BUNDLED-FIT.json",
@@ -1100,6 +1145,71 @@
       "path": "docs/calibration-view.d4915a6997132b045e9706ddf362c5bde1d1aa0c3d3ff82bdb2aaeb4f2f43d9b.mjs",
       "bytes": 4560,
       "sha256": "5dd52c3d2c43cac2c875f04e65792347ba0ea4005744f49ebac794828ae1e16b"
+    },
+    {
+      "path": "docs/cemhsey-arrays/LOCAL-USE.md",
+      "bytes": 2928,
+      "sha256": "bc9397263e8b5a9fea7b0a1355709b279d11ced0ece5523bc2d9416b37216300"
+    },
+    {
+      "path": "docs/cemhsey-arrays/Open Array Reader on Linux.sh",
+      "bytes": 107,
+      "sha256": "0682da46271570edf3f5f4119c93e2ff1914a4ea0558ea653b7d090a705fee67"
+    },
+    {
+      "path": "docs/cemhsey-arrays/Open Array Reader on Windows.cmd",
+      "bytes": 39,
+      "sha256": "0edbd8f5b22789c3f11971244871f1b36e23f9e710fdc8b25ca6429165ec81be"
+    },
+    {
+      "path": "docs/cemhsey-arrays/Open Array Reader on macOS.command",
+      "bytes": 112,
+      "sha256": "1a00e230edaae367113dc258120391cafc3526d982cf58021c14539d06d8e63c"
+    },
+    {
+      "path": "docs/cemhsey-arrays/PROTOCOL.md",
+      "bytes": 10661,
+      "sha256": "1ddf690efdba4c91082999cae140f87ae6d567f3422afe68e4977cb4ca6a7781"
+    },
+    {
+      "path": "docs/cemhsey-arrays/README.md",
+      "bytes": 1527,
+      "sha256": "792087b6863cd3dde4d636b0e279725d8208046bc44752fd1c8d23ceb341c5c4"
+    },
+    {
+      "path": "docs/cemhsey-arrays/array-math.js",
+      "bytes": 9435,
+      "sha256": "c11a6c213a144bed51db3d2fcea73862ea9bb108c0f99a388e1cdee0a33a6206"
+    },
+    {
+      "path": "docs/cemhsey-arrays/channel-map.js",
+      "bytes": 6937,
+      "sha256": "015fd8d0228e4c8ebe74ee414efbc0de2fbf3e6b0fcee01863620a5140075e6a"
+    },
+    {
+      "path": "docs/cemhsey-arrays/channel-map.json",
+      "bytes": 9000,
+      "sha256": "f98fa83e691ef55edb64cfe306b884b94f537df9397f4a64e2a9228e36e36ce4"
+    },
+    {
+      "path": "docs/cemhsey-arrays/index.html",
+      "bytes": 6025,
+      "sha256": "2383c91e0e7ba8d669f1176cf2ee59c360f367198ed9c96b8be9af414a7531ec"
+    },
+    {
+      "path": "docs/cemhsey-arrays/reader.js",
+      "bytes": 12198,
+      "sha256": "9fc263f8899c220223e5e7e565483163a50c19a2c788d38d28cde0b06dbb398a"
+    },
+    {
+      "path": "docs/cemhsey-arrays/screen.css",
+      "bytes": 3269,
+      "sha256": "20b48be8f6711c8b934dc4742814481e9909f715b5707c3def1a683373d482e8"
+    },
+    {
+      "path": "docs/cemhsey-arrays/weights.js",
+      "bytes": 9099,
+      "sha256": "49905d922b1adeb966f1ccf57eeac50edff40b5d57badc5ceaf45f49fa8c6ced"
     },
     {
       "path": "docs/cemhsey-pinch/Open Pinch on Linux.sh",
@@ -3692,5 +3802,31 @@
       "sha256": "96a0e3dba860743c6675635433fe06bee46ee2697aff1dbea3dfaa73e78744c7"
     },
     "scope": "Offline normalized scalar P200 pinch-force recording. Three fit participants over two days, four different evaluation participants on different indexed days. The public reader includes an invented model and supports local fit import; the study fit stays private. No cross-device physical availability or individual finger force inference."
+  },
+  "cemhsey_array_reader": {
+    "url": "https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/",
+    "offline": {
+      "path": "benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip",
+      "bytes": 54996,
+      "sha256": "80e1a8135aae7264f1cf0c3f864f348234ffcbdf79d2a5aa95a9244d192eb86e"
+    },
+    "protocol": {
+      "path": "benchmarks/cemhsey-arrays/PROTOCOL.md",
+      "bytes": 10661,
+      "sha256": "1ddf690efdba4c91082999cae140f87ae6d567f3422afe68e4977cb4ca6a7781"
+    },
+    "channel_map": {
+      "path": "benchmarks/cemhsey-arrays/channel-map.json",
+      "bytes": 9000,
+      "sha256": "f98fa83e691ef55edb64cfe306b884b94f537df9397f4a64e2a9228e36e36ce4"
+    },
+    "bundled_fit_origin": "invented_signals",
+    "native_channel_count": 320,
+    "publication_scope": "The public example includes invented signals and fitted example weights. A compatible locally supplied recording and locally supplied weights can be loaded in the browser.",
+    "held_results": {
+      "path": "benchmarks/cemhsey-arrays/RESULTS.json",
+      "sha256": "fca4e1bb4b2d5e58a1dc21154646ca18cf0a2cd2145def37880485d41081eb8a",
+      "bytes": 24090
+    }
   }
 }

@@ -52,7 +52,9 @@ Hyser shifts the question to one finger. On a separate two-day task, recent sens
 
 The CEMHSEY pinch reader compares recent force, cue phase and compact forearm EMG features in a separate acquisition. Its target is the normalized force between two fingers. The public reader opens with an invented model and can also load locally fitted weights and original trial packets. [Open the reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-pinch/) · [Read the held-out comparison](benchmarks/cemhsey-pinch/README.md) · [Download for Windows, macOS or Linux](benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip).
 
-[The five-grid pinch protocol](benchmarks/cemhsey-arrays/PROTOCOL.md) compares documented electrode groups with interleaved channels from the same recordings.
+On four new participants, five recorded electrode grids beat five interleaved groups on both recording days. Their mean advantage over overall EMG amplitude was only 0.00000042 of maximum voluntary contraction and reversed sign by day. Channel-rank persistence failed its declared comparison. [Measured five-grid results](benchmarks/cemhsey-arrays/README.md)
+
+[The five-grid pinch protocol](benchmarks/cemhsey-arrays/PROTOCOL.md) compares documented electrode groups with interleaved channels from the same recordings. Explore the two measurement windows electrode by electrode in the array reader, or open a compatible recording on your own computer. [Open the reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/) · [Download the offline tools](benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip)
 
 ## Read the papers
 
