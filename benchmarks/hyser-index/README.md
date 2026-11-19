@@ -15,3 +15,7 @@ Contains information from Jiang, Dai, Liu and Fan’s Hyser 2.0.0 database, made
 ## Can yesterday’s recording help today?
 
 A separate experiment compares the shared forecast with two adjustments, one fitted on the same person’s first day and one fitted on a different person’s first day. Both are evaluated on the same second-day voltages. The four development participants had already been scored in the original Hyser study. Across four previously studied development participants, the shared models gave the lowest mean absolute error in both input conditions. The same person’s first day gave a smaller error than the paired donor’s first day. [Read the calibration results](crossday/README.md) · [Score original session folders with Python](SCORE-SESSION.md).
+
+## Do the other fingers help?
+
+The force file contains separate voltages for all five fingers. A new comparison keeps the target and the people fixed and changes which finger histories the model sees. The protocol specifies the same-trial and other-trial comparisons before fitting. [Read the whole-hand protocol](whole-hand/PROTOCOL.md).
