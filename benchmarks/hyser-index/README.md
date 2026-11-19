@@ -14,4 +14,4 @@ Contains information from Jiang, Dai, Liu and Fan’s Hyser 2.0.0 database, made
 
 ## Can yesterday’s recording help today?
 
-A separate experiment compares the shared forecast with two adjustments, one fitted on the same person’s first day and one fitted on a different person’s first day. Both are evaluated on the same second-day voltages. The four development participants had already been scored in the original Hyser study. [Read the prospective calibration protocol](crossday/PROTOCOL.md).
+A separate experiment compares the shared forecast with two adjustments, one fitted on the same person’s first day and one fitted on a different person’s first day. Both are evaluated on the same second-day voltages. The four development participants had already been scored in the original Hyser study. Across four previously studied development participants, the shared models gave the lowest mean absolute error in both input conditions. The same person’s first day gave a smaller error than the paired donor’s first day. [Read the calibration results](crossday/README.md) · [Score original session folders with Python](SCORE-SESSION.md).

@@ -43,3 +43,5 @@ The HYGRIP preview forecasts grip transducer voltage. It accepts a local forecas
 ## Hyser index-finger trial reader
 
 Open the reader for an invented example or an original Hyser Random-task WFDB recording. The ZIP includes local Windows, macOS and Linux launchers and the two pooled training fits. [Browser reader](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) · [Offline ZIP](benchmarks/hyser-index/downloads/Hyser-Index-Voltage-Reader.zip) · [Study](benchmarks/hyser-index/).
+
+The [Python session scorer](benchmarks/hyser-index/downloads/Hyser-Crossday-Python.zip) reads original WFDB session folders, fits on Day 1 and compares shared and personal errors on Day 2. The example runs with invented data. [Read the command-line instructions](benchmarks/hyser-index/SCORE-SESSION.md).

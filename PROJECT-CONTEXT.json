@@ -492,7 +492,27 @@
         "bytes": 7004,
         "sha256": "8b57ab57f7b72829ce09bb22c022c15f87a381ba0d2b2308e096a8eeb4811f5d"
       },
-      "scope": "Study-defined cross-day personalization in Hyser 2.0.0, original participant roles and previously studied DEV preserved."
+      "scope": "Matched Day 1 supervised calibration on an output offset and gain, followed by fixed Day 2 scoring. Shared model had the lowest mean Day 2 MAE on the four previously studied DEV participants. Paired-donor control and pair-level descriptive uncertainty are reported.",
+      "results": {
+        "path": "benchmarks/hyser-index/crossday/RESULTS.json",
+        "bytes": 18360,
+        "sha256": "b2cc3cf56b5be83f2e92572eb3eafacbcafcfac514c625732d9d91071c59b648"
+      },
+      "guide": {
+        "path": "benchmarks/hyser-index/crossday/README.md",
+        "bytes": 5251,
+        "sha256": "c81b41351ef706ec4b3ea1383f44149ac2f563d72a8081e1096e831f01ad27b6"
+      },
+      "python_download": {
+        "path": "benchmarks/hyser-index/downloads/Hyser-Crossday-Python.zip",
+        "bytes": 13574,
+        "sha256": "72023b74a686686dc332c8df0e0b24cbde2e3000dadbd4b59d9468874ade7dbc"
+      },
+      "calibration": {
+        "path": "benchmarks/hyser-index/calibration.py",
+        "bytes": 1637,
+        "sha256": "a04bfc6def66a73d152587eb6136ffc2442f55783c114598a12ad10933a386f7"
+      }
     }
   }
 }

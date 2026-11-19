@@ -1,0 +1,500 @@
+{
+  "attribution": {
+    "dataset": "Jiang, X., Dai, C., Liu, X., & Fan, J. (2023). Open Access Dataset and Toolbox of High-Density Surface Electromyogram Recordings (version 2.0.0). PhysioNet.",
+    "dataset_doi": "10.13026/hxan-pe94",
+    "dataset_license": "Open Data Commons Attribution License 1.0 (ODC-By 1.0)",
+    "dataset_url": "https://physionet.org/content/hd-semg/2.0.0/",
+    "license_url": "https://physionet.org/content/hd-semg/view-license/2.0.0/",
+    "produced_work": "Contains aggregate results derived from Hyser 2.0.0, made available by PhysioNet under ODC-By 1.0.",
+    "source_paper_doi": "10.1109/TNSRE.2021.3082551"
+  },
+  "dev_reuse": {
+    "calibration": {
+      "calibration_day": 1,
+      "calibration_rule": "fixed L2 0.1 for offset and effect of normalized pooled voltage change",
+      "donor": "reciprocal adjacent pairing within frozen role order",
+      "resample_count": 4,
+      "score_day": 2,
+      "scoring_anchors_100hz": {
+        "first": 140,
+        "last": 2385,
+        "step": 5
+      },
+      "trials_per_person_per_day": 5,
+      "uncertainty": "descriptive reciprocal-pair cluster resampling and delete-one-pair sensitivity"
+    },
+    "comparison_scope": "DEV retrospective reuse of four participants and already scored Day 2 records. Same public locked R106 base trained on both days of twelve TRAIN people.",
+    "independent_reproduction": {
+      "acceptance_receipt_sha256": "4482ba63fdb36feb6e1c96a0e567e561d4a897d30c3d8df049498ca908518566",
+      "maximum_matched_aggregate_delta_v": 7.892991815694472e-17,
+      "maximum_r106_day2_replay_delta_v": 1.5612511283791264e-17,
+      "verified_candidate_aggregate_sha256": "eae9a881a9421d2f3be4392820d4c12bba60e8a6d07198803fddc2ffb813afb7"
+    },
+    "limitations": [
+      "Descriptive retrospective voltage prediction during the Hyser Random isometric task.",
+      "Surface EMG measures muscle electrical activity. The recorded signal is a force transducer voltage.",
+      "Common nominal trigger grids. Upstream force filtering and causal availability are unverified.",
+      "Instrument drift, physiological timing and live control were not measured.",
+      "Only four reused DEV participants and two reciprocal pairs. DEV is not a fresh validation.",
+      "Four FINAL participants remain unopened."
+    ],
+    "metrics": {
+      "arms": {
+        "aligned": {
+          "base": {
+            "macro_mae_v": 0.014902947286519789,
+            "macro_rmse_v": 0.02321583677569631
+          },
+          "own_day1": {
+            "macro_mae_v": 0.015121791064249362,
+            "macro_rmse_v": 0.02324911062178124
+          },
+          "wrong_day1": {
+            "macro_mae_v": 0.015496324703379478,
+            "macro_rmse_v": 0.023564263072797346
+          }
+        },
+        "force": {
+          "base": {
+            "macro_mae_v": 0.014911771825397536,
+            "macro_rmse_v": 0.023286911514636487
+          },
+          "own_day1": {
+            "macro_mae_v": 0.015091410532592263,
+            "macro_rmse_v": 0.023279567922193788
+          },
+          "wrong_day1": {
+            "macro_mae_v": 0.015401325768212175,
+            "macro_rmse_v": 0.02343030066184823
+          }
+        }
+      },
+      "comparisons": {
+        "aligned": {
+          "own_vs_base": {
+            "mae": {
+              "leave_one_pair_out_mean_range_v": [
+                -0.0002607519066541277,
+                -0.00017693564880501972
+              ],
+              "mean_gain_v": -0.0002188437777295737,
+              "observed_pair_resampling_95_percentile_v": [
+                -0.00025760879698478615,
+                -0.00018007875847436127
+              ],
+              "persons_with_positive_gain": 2,
+              "persons_with_zero_gain": 0
+            },
+            "rmse": {
+              "leave_one_pair_out_mean_range_v": [
+                -0.00019016639697347175,
+                0.00012361870480361373
+              ],
+              "mean_gain_v": -3.327384608492901e-05,
+              "observed_pair_resampling_95_percentile_v": [
+                -0.00017839945565683104,
+                0.000111851763486973
+              ],
+              "persons_with_positive_gain": 1,
+              "persons_with_zero_gain": 0
+            }
+          },
+          "own_vs_wrong": {
+            "mae": {
+              "leave_one_pair_out_mean_range_v": [
+                0.00014940421886562322,
+                0.0005996630593946093
+              ],
+              "mean_gain_v": 0.00037453363913011626,
+              "observed_pair_resampling_95_percentile_v": [
+                0.0001662889253854602,
+                0.0005827783528747723
+              ],
+              "persons_with_positive_gain": 3,
+              "persons_with_zero_gain": 0
+            },
+            "rmse": {
+              "leave_one_pair_out_mean_range_v": [
+                4.690284018362724e-05,
+                0.0005834020618485838
+              ],
+              "mean_gain_v": 0.0003151524510161055,
+              "observed_pair_resampling_95_percentile_v": [
+                6.702156099606312e-05,
+                0.0005632833410361478
+              ],
+              "persons_with_positive_gain": 2,
+              "persons_with_zero_gain": 0
+            }
+          }
+        },
+        "aligned_own_vs_force_own": {
+          "mae": {
+            "leave_one_pair_out_mean_range_v": [
+              -6.020756933191804e-05,
+              -5.534939822790519e-07
+            ],
+            "mean_gain_v": -3.0380531657098545e-05,
+            "observed_pair_resampling_95_percentile_v": [
+              -5.7970541506306574e-05,
+              -2.790521807890519e-06
+            ],
+            "persons_with_positive_gain": 2,
+            "persons_with_zero_gain": 0
+          },
+          "rmse": {
+            "leave_one_pair_out_mean_range_v": [
+              -3.129022299259987e-05,
+              9.220482381769833e-05
+            ],
+            "mean_gain_v": 3.045730041254923e-05,
+            "observed_pair_resampling_95_percentile_v": [
+              -2.6659158737213685e-05,
+              8.757375956231213e-05
+            ],
+            "persons_with_positive_gain": 2,
+            "persons_with_zero_gain": 0
+          }
+        },
+        "force": {
+          "own_vs_base": {
+            "mae": {
+              "leave_one_pair_out_mean_range_v": [
+                -0.00018865699796754686,
+                -0.00017062041642190977
+              ],
+              "mean_gain_v": -0.00017963870719472832,
+              "observed_pair_resampling_95_percentile_v": [
+                -0.00018798062615958547,
+                -0.00017129678822987117
+              ],
+              "persons_with_positive_gain": 1,
+              "persons_with_zero_gain": 0
+            },
+            "rmse": {
+              "leave_one_pair_out_mean_range_v": [
+                -0.00016244072692265035,
+                0.00017712791180805008
+              ],
+              "mean_gain_v": 7.343592442699866e-06,
+              "observed_pair_resampling_95_percentile_v": [
+                -0.00014970690297024908,
+                0.00016439408785564878
+              ],
+              "persons_with_positive_gain": 1,
+              "persons_with_zero_gain": 0
+            }
+          },
+          "own_vs_wrong": {
+            "mae": {
+              "leave_one_pair_out_mean_range_v": [
+                8.50018112301008e-05,
+                0.0005348286600097181
+              ],
+              "mean_gain_v": 0.00030991523561990945,
+              "observed_pair_resampling_95_percentile_v": [
+                0.00010187031805933646,
+                0.0005179601531804824
+              ],
+              "persons_with_positive_gain": 3,
+              "persons_with_zero_gain": 0
+            },
+            "rmse": {
+              "leave_one_pair_out_mean_range_v": [
+                -1.8563816234587818e-05,
+                0.0003200292955434711
+              ],
+              "mean_gain_v": 0.00015073273965444164,
+              "observed_pair_resampling_95_percentile_v": [
+                -5.866574542910607e-06,
+                0.00030733205385179385
+              ],
+              "persons_with_positive_gain": 2,
+              "persons_with_zero_gain": 0
+            }
+          }
+        }
+      },
+      "counts": {
+        "day1_calibration_trials": 20,
+        "day1_calibration_windows": 9000,
+        "day2_scored_trials": 20,
+        "day2_scored_windows": 9000,
+        "pairs": 2,
+        "people": 4
+      }
+    },
+    "phase": "DEV",
+    "r106_published_day2_reference": {
+      "arms": {
+        "aligned": {
+          "macro_mae_v": 0.014902947286519789,
+          "macro_rmse_v": 0.02321583677569631
+        },
+        "force": {
+          "macro_mae_v": 0.014911771825397536,
+          "macro_rmse_v": 0.023286911514636487
+        }
+      },
+      "base_design": "locked full TRAIN",
+      "matches_current_base_definition": true,
+      "people": 4,
+      "trials": 20,
+      "windows_per_arm": 9000
+    }
+  },
+  "experiment": "hyser-index-crossday-20261119-v1",
+  "freeze_sha256": "d273189bcc67299eab317c9e72e7891bc565392b49762b7a1d0ca71452f598cc",
+  "glossary": {
+    "revision": 36,
+    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+  },
+  "horizon_ms_nominal": 120,
+  "horizon_ticks": 12,
+  "provenance": {
+    "r106_frozen_design_sha256": "2ca06445ca44286bac9617f4661b14053c5cdb27262c05442a5fc6cc773d0d9a",
+    "r106_published_predictors_sha256": "c983c42da47feed5d1b2af2ea490bd55324e65b168c3414e6f4266390b3b8cd7",
+    "r106_published_study_sha256": "17e7fa782aeb4fd3ca994d7a141cec750e7d3835e70857b0edc28f43858c6a25",
+    "source_manifest_sha256": "8c8fdf5629291ca1dbeb9e088200aeff7ed2dfae4bdb3efcf869e95cca9a02c9"
+  },
+  "schema": "hyser-index-crossday-pair-aggregate-v1",
+  "schema_version": 1,
+  "scientific_scope": "Experimental offline index transducer voltage forecast. Prior-development cohort reuse. Reserved FINAL unopened.",
+  "source_id": "Hyser 2.0.0 Random",
+  "target": "released Hyser 2.0.0 index force transducer voltage",
+  "train": {
+    "calibration": {
+      "calibration_day": 1,
+      "calibration_rule": "fixed L2 0.1 for offset and effect of normalized pooled voltage change",
+      "donor": "reciprocal adjacent pairing within frozen role order",
+      "resample_count": 10000,
+      "score_day": 2,
+      "scoring_anchors_100hz": {
+        "first": 140,
+        "last": 2385,
+        "step": 5
+      },
+      "trials_per_person_per_day": 5,
+      "uncertainty": "descriptive reciprocal-pair cluster resampling and delete-one-pair sensitivity"
+    },
+    "comparison_scope": "TRAIN matched two-person-excluded base. Both days of target and donor stay outside the fit and ridge-penalty selection. Each shared base sees 10 other TRAIN people.",
+    "independent_reproduction": {
+      "acceptance_receipt_sha256": "f8c61cb722529142736a0917563ef9e7618437045ceb4102c8b96aa2f9492864",
+      "maximum_matched_aggregate_delta_v": 1.727811687127212e-16,
+      "verified_candidate_aggregate_sha256": "730827b94bfcdf9682a63effb66bf91c6fe949a23d4f015a8a19329e57515cad"
+    },
+    "limitations": [
+      "Descriptive retrospective voltage prediction during the Hyser Random isometric task.",
+      "Surface EMG measures muscle electrical activity. The recorded signal is a force transducer voltage.",
+      "Common nominal trigger grids. Upstream force filtering and causal availability are unverified.",
+      "Instrument drift, physiological timing and live control were not measured.",
+      "TRAIN group folds share base-fit participants.",
+      "Four FINAL participants remain unopened."
+    ],
+    "metrics": {
+      "arms": {
+        "aligned": {
+          "base": {
+            "macro_mae_v": 0.017870780920004357,
+            "macro_rmse_v": 0.027303521142426745
+          },
+          "own_day1": {
+            "macro_mae_v": 0.017794402342726823,
+            "macro_rmse_v": 0.02703084153653332
+          },
+          "wrong_day1": {
+            "macro_mae_v": 0.017913035469896,
+            "macro_rmse_v": 0.02731268319221387
+          }
+        },
+        "force": {
+          "base": {
+            "macro_mae_v": 0.017609707920127966,
+            "macro_rmse_v": 0.027119683361934974
+          },
+          "own_day1": {
+            "macro_mae_v": 0.01758853922632582,
+            "macro_rmse_v": 0.02688357708270213
+          },
+          "wrong_day1": {
+            "macro_mae_v": 0.017726333410204173,
+            "macro_rmse_v": 0.02713414645369132
+          }
+        }
+      },
+      "comparisons": {
+        "aligned": {
+          "own_vs_base": {
+            "mae": {
+              "leave_one_pair_out_mean_range_v": [
+                -0.00010891963896347296,
+                0.00018022022808774664
+              ],
+              "mean_gain_v": 7.63785772775327e-05,
+              "observed_pair_resampling_95_percentile_v": [
+                -0.0002786247904684299,
+                0.0004948604589355694
+              ],
+              "persons_with_positive_gain": 5,
+              "persons_with_zero_gain": 0
+            },
+            "rmse": {
+              "leave_one_pair_out_mean_range_v": [
+                1.8767825769311178e-05,
+                0.0004005483213032216
+              ],
+              "mean_gain_v": 0.0002726796058934236,
+              "observed_pair_resampling_95_percentile_v": [
+                -0.0001129691938248878,
+                0.0008086504100849012
+              ],
+              "persons_with_positive_gain": 5,
+              "persons_with_zero_gain": 0
+            }
+          },
+          "own_vs_wrong": {
+            "mae": {
+              "leave_one_pair_out_mean_range_v": [
+                1.9915551545458995e-05,
+                0.00014799176786977255
+              ],
+              "mean_gain_v": 0.0001186331271691779,
+              "observed_pair_resampling_95_percentile_v": [
+                -6.049777948187076e-06,
+                0.00032577715720388204
+              ],
+              "persons_with_positive_gain": 7,
+              "persons_with_zero_gain": 0
+            },
+            "rmse": {
+              "leave_one_pair_out_mean_range_v": [
+                0.00017745866282936306,
+                0.00034493695756913825
+              ],
+              "mean_gain_v": 0.00028184165568054904,
+              "observed_pair_resampling_95_percentile_v": [
+                5.891471140160911e-05,
+                0.000532480460449066
+              ],
+              "persons_with_positive_gain": 9,
+              "persons_with_zero_gain": 0
+            }
+          }
+        },
+        "aligned_own_vs_force_own": {
+          "mae": {
+            "leave_one_pair_out_mean_range_v": [
+              -0.000253037799509777,
+              -0.00013277580465795102
+            ],
+            "mean_gain_v": -0.00020586311640100638,
+            "observed_pair_resampling_95_percentile_v": [
+              -0.000399574960552416,
+              -2.5767583376010872e-05
+            ],
+            "persons_with_positive_gain": 5,
+            "persons_with_zero_gain": 0
+          },
+          "rmse": {
+            "leave_one_pair_out_mean_range_v": [
+              -0.00018393685503767694,
+              -9.918386045802471e-05
+            ],
+            "mean_gain_v": -0.00014726445383119163,
+            "observed_pair_resampling_95_percentile_v": [
+              -0.00028556000038070195,
+              -1.4367471915470182e-05
+            ],
+            "persons_with_positive_gain": 5,
+            "persons_with_zero_gain": 0
+          }
+        },
+        "force": {
+          "own_vs_base": {
+            "mae": {
+              "leave_one_pair_out_mean_range_v": [
+                -0.00018545070326564758,
+                9.86740960570929e-05
+              ],
+              "mean_gain_v": 2.1168693802145087e-05,
+              "observed_pair_resampling_95_percentile_v": [
+                -0.0002763166628285943,
+                0.00045463681188728024
+              ],
+              "persons_with_positive_gain": 4,
+              "persons_with_zero_gain": 0
+            },
+            "rmse": {
+              "leave_one_pair_out_mean_range_v": [
+                -1.6693523372660925e-05,
+                0.00036122762373333033
+              ],
+              "mean_gain_v": 0.00023610627923284616,
+              "observed_pair_resampling_95_percentile_v": [
+                -0.00015741780221605715,
+                0.0007809662774829225
+              ],
+              "persons_with_positive_gain": 7,
+              "persons_with_zero_gain": 0
+            }
+          },
+          "own_vs_wrong": {
+            "mae": {
+              "leave_one_pair_out_mean_range_v": [
+                9.892913481796056e-05,
+                0.00016829331300929713
+              ],
+              "mean_gain_v": 0.00013779418387835268,
+              "observed_pair_resampling_95_percentile_v": [
+                4.3284472477993566e-05,
+                0.00023752965375885803
+              ],
+              "persons_with_positive_gain": 7,
+              "persons_with_zero_gain": 0
+            },
+            "rmse": {
+              "leave_one_pair_out_mean_range_v": [
+                0.000173481708170211,
+                0.0003031504717653739
+              ],
+              "mean_gain_v": 0.00025056937098919566,
+              "observed_pair_resampling_95_percentile_v": [
+                6.472500905350374e-05,
+                0.0004490091794260174
+              ],
+              "persons_with_positive_gain": 8,
+              "persons_with_zero_gain": 0
+            }
+          }
+        }
+      },
+      "counts": {
+        "day1_calibration_trials": 60,
+        "day1_calibration_windows": 27000,
+        "day2_scored_trials": 60,
+        "day2_scored_windows": 27000,
+        "pairs": 6,
+        "people": 12
+      }
+    },
+    "phase": "TRAIN",
+    "r106_published_day2_reference": {
+      "arms": {
+        "aligned": {
+          "macro_mae_v": 0.017926519903082274,
+          "macro_rmse_v": 0.027337200463454458
+        },
+        "force": {
+          "macro_mae_v": 0.017549761352194475,
+          "macro_rmse_v": 0.027038732125574862
+        }
+      },
+      "base_design": "nested one-person-excluded TRAIN",
+      "matches_current_base_definition": false,
+      "people": 12,
+      "trials": 60,
+      "windows_per_arm": 27000
+    }
+  },
+  "unit": "V"
+}
