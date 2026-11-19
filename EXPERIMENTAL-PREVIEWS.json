@@ -18,18 +18,18 @@
     },
     {
       "path": "LAUNCHERS.md",
-      "bytes": 6691,
-      "sha256": "b848f8f494b82a14d63fa90dc0169d0e4c8905a4285ded4f83acc3bd61d6fc65"
+      "bytes": 6858,
+      "sha256": "b4e5d1bf0747bf2b10113295e49638d34fbc162238c176ba1b9709294e34ec77"
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "bytes": 21260,
-      "sha256": "80d2ed4121633cb1ce2f1f60142961d6ceb1a6f2459c01174ac03f76fcf29d72"
+      "sha256": "3bcc5e564e828ed5ba218e900549ac6e4197ae8e1ce73b1de84302c37ddd9206",
+      "bytes": 22467
     },
     {
       "path": "README.md",
-      "bytes": 15929,
-      "sha256": "0397631a79c826a69b2f56ce42c8fee4b3b6a9223338c82ce617e7c7e9ef1065"
+      "sha256": "4580dc90d8650019a30fe9e0b668e4ebef452913d82d05d1c0879e083d67e8c5",
+      "bytes": 16015
     },
     {
       "path": "benchmarks/hygrip-force/DESIGN.json",
@@ -40,6 +40,26 @@
       "path": "benchmarks/hygrip-force/README.md",
       "bytes": 5584,
       "sha256": "1e34f6c7c0d86b8a47ec8c860cbfaddd805fe29adbe09b961cf0a91494919559"
+    },
+    {
+      "path": "benchmarks/hygrip-force/forearm-results/DEV.json",
+      "sha256": "6818e80f4136f186f3a9f9a31685b666b2e8dd056a7fc53e75bde86c18725719",
+      "bytes": 13076
+    },
+    {
+      "path": "benchmarks/hygrip-force/forearm-results/HYGRIP-Muscle-Train-and-Dev-Aggregates.zip",
+      "sha256": "c1cb0cf460cc6352adfe14a8864034baf67ccd50650298a87fb0d2faef48381c",
+      "bytes": 39241
+    },
+    {
+      "path": "benchmarks/hygrip-force/forearm-results/README.md",
+      "sha256": "4822cfbc86535b6a0aae1f54eef339f3e108704b42d39d2fa350ea8742a9b9ca",
+      "bytes": 2135
+    },
+    {
+      "path": "benchmarks/hygrip-force/forearm-results/TRAIN.json",
+      "sha256": "01943b20c61780db9bc2232c8e6645f292eeb9b514ca3658cb6d1c142f71e3f7",
+      "bytes": 18306
     },
     {
       "path": "benchmarks/hygrip-force/results-2026-11-19/AGGREGATES.json",
@@ -60,6 +80,11 @@
       "path": "benchmarks/hygrip-force/results-2026-11-19/SHA256SUMS",
       "bytes": 188,
       "sha256": "351361391a87e0a8863b1c65c6863b442de0dcdd858db32095d2dee68fc9aaaa"
+    },
+    {
+      "path": "benchmarks/hygrip-force/trial-replay/HYGRIP-trial-replay.zip",
+      "bytes": 22498,
+      "sha256": "2f24c3e38fb1f841cf54eb4c5d253d220a8be5b6000939be0b69ab2f73a1d9b0"
     },
     {
       "path": "benchmarks/scalp-eeg-hand/.gitignore",
@@ -743,8 +768,8 @@
     },
     {
       "path": "docs/START.html",
-      "bytes": 6529,
-      "sha256": "fc086dc8e505d6b04f985096fad2cd35b5e2a8f43e7f4f23cf0c70c72bb192b3"
+      "bytes": 6521,
+      "sha256": "6e4b2bef6b90e2cf062ab61a0ea15710bb165b68165edb4c84d81d06b20bb3cf"
     },
     {
       "path": "docs/app.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -1058,23 +1083,28 @@
     },
     {
       "path": "docs/hygrip-force/README.md",
-      "bytes": 5100,
-      "sha256": "52ac7293c9311042e41380501fe7754c7ef77e2d65a236c66c7352096f5642df"
+      "bytes": 6346,
+      "sha256": "97a860f35d0eae796b4cdaee208e34c869579cccd4845f7504c09120342e09aa"
     },
     {
       "path": "docs/hygrip-force/SHA256SUMS",
-      "bytes": 759,
-      "sha256": "56fd9c4535e1bed870fb7217ea142709f819a722d8cc5bf006f64b162da31cbd"
+      "bytes": 997,
+      "sha256": "3a0b29bf0c551fca1a93fc898d4dc354dd8c41ba4a5af693ad0083c7f13c3a7d"
     },
     {
       "path": "docs/hygrip-force/forecast-browser.js",
-      "bytes": 6601,
-      "sha256": "1af39a33c2f3fcd78999f9231e8078c5daae95117f154861ecfec114dac34fc8"
+      "bytes": 6793,
+      "sha256": "f32bd319cac40b5042359cd81ab8edd5288299628898877ed083b3804993561f"
     },
     {
       "path": "docs/hygrip-force/index.html",
-      "bytes": 2795,
-      "sha256": "92fbc11a8ff0882fba21fa26170cc989fc3a18e44224bf52f8ba8556e5d4669a"
+      "bytes": 4129,
+      "sha256": "87f5857b194995b099d8334b2827819469cd89b0aaf699dbfb5ed2e6ed61a9cb"
+    },
+    {
+      "path": "docs/hygrip-force/prepare_trial.py",
+      "bytes": 6387,
+      "sha256": "d1e42d47844dbd779b0ac121be62efd396a4c24ba3e1f0e2c0297c29127c1863"
     },
     {
       "path": "docs/hygrip-force/preview.js",
@@ -1083,13 +1113,23 @@
     },
     {
       "path": "docs/hygrip-force/screen.css",
-      "bytes": 1933,
-      "sha256": "66329a2ffec9322b6f545e7849f4289bf9906ad76a23757c5aa8c7f3a8a2d1c3"
+      "bytes": 2155,
+      "sha256": "97f039762038e69b2cbb220c321c2e64e75a05a29800212bc378bbfc87038319"
     },
     {
       "path": "docs/hygrip-force/train-coefficients.js",
       "bytes": 14553,
       "sha256": "0bd4d81cb9349d62fffbafd48b18310026fc7a39d24023b9348cfcb0856c8e41"
+    },
+    {
+      "path": "docs/hygrip-force/trial-view.js",
+      "bytes": 3309,
+      "sha256": "29172845ce2d17697cf2839263e852aceed63ea7ace4e544b71aabad93c4d5a5"
+    },
+    {
+      "path": "docs/hygrip-force/trial.js",
+      "bytes": 3393,
+      "sha256": "bf43dfab9fc816a42b7cd6ed91d26761fe23bc28c79a215b9624dd7c722a0fe3"
     },
     {
       "path": "docs/index.html",
@@ -2213,19 +2253,19 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "dd3526d4e5d67986febe01983dbdf875504d6643",
+  "previous_public_commit": "ba1171845af2245cd041188507c7c85cc0faed02",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
-      ".gitattributes",
       "LAUNCHERS.md",
       "PROJECT-CONTEXT.json",
       "README.md",
-      "benchmarks/hygrip-force/results-2026-11-19/AGGREGATES.json",
-      "benchmarks/hygrip-force/results-2026-11-19/HYGRIP-voltage-forecast-20261119-r2.zip",
-      "benchmarks/hygrip-force/results-2026-11-19/README.md",
-      "benchmarks/hygrip-force/results-2026-11-19/SHA256SUMS",
+      "benchmarks/hygrip-force/forearm-results/DEV.json",
+      "benchmarks/hygrip-force/forearm-results/HYGRIP-Muscle-Train-and-Dev-Aggregates.zip",
+      "benchmarks/hygrip-force/forearm-results/README.md",
+      "benchmarks/hygrip-force/forearm-results/TRAIN.json",
+      "benchmarks/hygrip-force/trial-replay/HYGRIP-trial-replay.zip",
       "docs/START.html",
       "docs/hygrip-force/Open HYGRIP on Linux.sh",
       "docs/hygrip-force/Open HYGRIP on Windows.cmd",
@@ -2234,11 +2274,14 @@
       "docs/hygrip-force/SHA256SUMS",
       "docs/hygrip-force/forecast-browser.js",
       "docs/hygrip-force/index.html",
+      "docs/hygrip-force/prepare_trial.py",
       "docs/hygrip-force/preview.js",
       "docs/hygrip-force/screen.css",
-      "docs/hygrip-force/train-coefficients.js"
+      "docs/hygrip-force/train-coefficients.js",
+      "docs/hygrip-force/trial-view.js",
+      "docs/hygrip-force/trial.js"
     ],
-    "preserved_rows": 421
+    "preserved_rows": 426
   },
   "paper_content": {
     "path": "papers/experimental/scientific-layout-2026-11-15",
@@ -2354,10 +2397,11 @@
       "entry": "docs/hygrip-force/index.html",
       "url": "https://eliminatenoise.github.io/NeuroTranslation/hygrip-force/",
       "offline_archive": {
-        "path": "benchmarks/hygrip-force/results-2026-11-19/HYGRIP-voltage-forecast-20261119-r2.zip",
-        "bytes": 15609,
-        "sha256": "4892c87661f890c68b0b18d02acaef9d214ddc89b1a7bcb9e5bb2a27d1301333"
-      }
+        "path": "benchmarks/hygrip-force/trial-replay/HYGRIP-trial-replay.zip",
+        "bytes": 22498,
+        "sha256": "2f24c3e38fb1f841cf54eb4c5d253d220a8be5b6000939be0b69ab2f73a1d9b0"
+      },
+      "trial_replay": "One right-hand trial per local file; 205 scheduled cutoffs, conditional on complete input and target support. The example is invented."
     },
     "outcome": {
       "unit": "V",
@@ -2367,6 +2411,26 @@
       "development_common_scored_issues": 7995,
       "development_directional_screen_passed": false
     },
-    "scope": "First scoring of three original HYGRIP development participants after public protocol posting. The browser uses fixed TRAIN fits and invented example inputs by default. FINAL remains reserved."
+    "scope": "First scoring of three original HYGRIP development participants after public protocol posting. The browser uses fixed TRAIN fits and invented example inputs by default. FINAL remains reserved.",
+    "secondary_emg": {
+      "path": "benchmarks/hygrip-force/forearm-results/README.md",
+      "training": {
+        "path": "benchmarks/hygrip-force/forearm-results/TRAIN.json",
+        "sha256": "01943b20c61780db9bc2232c8e6645f292eeb9b514ca3658cb6d1c142f71e3f7",
+        "bytes": 18306
+      },
+      "development": {
+        "path": "benchmarks/hygrip-force/forearm-results/DEV.json",
+        "sha256": "6818e80f4136f186f3a9f9a31685b666b2e8dd056a7fc53e75bde86c18725719",
+        "bytes": 13076
+      },
+      "package": {
+        "path": "benchmarks/hygrip-force/forearm-results/HYGRIP-Muscle-Train-and-Dev-Aggregates.zip",
+        "sha256": "c1cb0cf460cc6352adfe14a8864034baf67ccd50650298a87fb0d2faef48381c",
+        "bytes": 39241
+      },
+      "tested_endpoint": "forecast of released sensor voltage 120 ms after issue",
+      "scope": "Secondary right-hand analysis on the same three previously studied development people. Timing-specific forearm EMG and scalp EEG directional screens failed on TRAIN and DEV."
+    }
   }
 }

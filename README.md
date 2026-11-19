@@ -32,9 +32,9 @@ What changes if we start the clock when the plates confirm a squeeze? On 882 lif
 
 Compare the ridge and temporal CNN forecasts at all five issue times. Start with an invented squeeze or open a compatible local JSON capture, then reveal the target row when the capture contains it. [Compare forecasts in your browser](https://eliminatenoise.github.io/NeuroTranslation/contact-force/) · [Download the offline browser and launchers](benchmarks/way-contact-force/NeuroTranslation-Grip-After-Contact-Comparison.zip)
 
-A separate HYGRIP experiment asks the same EEG question during visually paced power grip. The design and source coverage are available before development scoring. [Read the HYGRIP protocol](benchmarks/hygrip-force/)
+A separate HYGRIP experiment asks the same EEG question during visually paced power grip. The protocol and source checks were recorded before development scoring. [Read the HYGRIP protocol](benchmarks/hygrip-force/)
 
-In the first three-person HYGRIP development check, force history and timing averaged **0.360083 mV** of error. Adding aligned scalp EEG raised it to **0.461331 mV**. The models were frozen before this check. [Read the first HYGRIP results](benchmarks/hygrip-force/results-2026-11-19/) · [Try the voltage forecast](https://eliminatenoise.github.io/NeuroTranslation/hygrip-force/)
+In the first three-person HYGRIP development check, force history and timing averaged **0.360083 mV** of error. Adding aligned scalp EEG raised it to **0.461331 mV**. The models were frozen before this check. [Read the first HYGRIP results](benchmarks/hygrip-force/results-2026-11-19/) · [Replay a grip trial](https://eliminatenoise.github.io/NeuroTranslation/hygrip-force/) · [What changed when the model saw forearm EMG](benchmarks/hygrip-force/forearm-results/)
 
 ### Palm and elbow measurements
 

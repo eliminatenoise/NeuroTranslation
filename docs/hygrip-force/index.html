@@ -9,6 +9,8 @@
   <script defer src="train-coefficients.js"></script>
   <script defer src="forecast-browser.js"></script>
   <script defer src="preview.js"></script>
+  <script defer src="trial.js"></script>
+  <script defer src="trial-view.js"></script>
 </head>
 <body>
   <main>
@@ -33,6 +35,26 @@
         <button type="button" id="download" disabled>Save example JSON</button>
       </div>
       <p id="error" role="alert"></p>
+    </section>
+    <section class="analysis replay" aria-labelledby="trial-title">
+      <div class="section-head">
+        <h2 id="trial-title">Replay a grip trial</h2>
+        <button type="button" id="trial-demo" disabled>Load invented trial</button>
+      </div>
+      <p>Choose a moment in a right-hand grip. Compare the forecast at that moment with the voltage the sensor records 120 ms later.</p>
+      <div class="inputs"><label for="trial-file">Open a trial JSON file</label>
+        <input id="trial-file" type="file" accept=".json,application/json" disabled>
+      </div>
+      <p><a href="prepare_trial.py" download>Download the local HYGRIP converter</a> · <a href="README.md">Instructions</a></p>
+      <p id="trial-status" role="status">Loading the trial controls…</p>
+      <div id="trial-inspect" hidden>
+        <label for="cutoff">Forecast time after the cue</label>
+        <input id="cutoff" type="range" min="0" step="1" value="0">
+        <output for="cutoff" id="cutoff-value"></output>
+        <dl class="readings" id="trial-readings"></dl>
+        <label><input id="reveal-target" type="checkbox"> Reveal the later reading and forecast errors</label>
+        <p id="trial-outcome" aria-live="polite"></p>
+      </div>
     </section>
     <section class="evidence" aria-labelledby="result-title">
       <h2 id="result-title">Force history forecast better in first DEV</h2>

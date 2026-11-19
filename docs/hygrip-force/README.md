@@ -50,3 +50,15 @@ The browser runs the versions fit on all seven eligible TRAIN runs. The earlier 
 ## Attribution and custody
 
 Study by Pablo Ortega, Tong Zhao and A. Aldo Faisal. The preview contains fitted aggregate parameters, original inference code and an invented example. It contains no participant samples, identifiers, role arrays, archive bytes, author code or author illustrations. The article is CC BY and the original Figshare v1 dataset declares MIT. [Peer-reviewed article](https://doi.org/10.3389/fnins.2020.00919), [original data deposit](https://doi.org/10.6084/m9.figshare.12383639.v1).
+
+## Replay one recorded grip
+
+The trial slider follows one cued right-hand grip at 100 ms steps. At each cutoff, the frozen model sees the last 20 force readings and, when supplied, 400 past samples from each of 24 scalp channels. **Reveal the later reading** shows the voltage six force ticks later and each fitted forecast's signed error in volts. The invented trial demonstrates the controls with force alone. Both the file and its predictions stay on your device.
+
+To read a recording from [the HYGRIP release](https://doi.org/10.6084/m9.figshare.12383639.v1), download the original `hygrip.h5` and the converter beside this page. Install Python 3 with `h5py` and `numpy`. Substitute your archive's group letter and the right-hand trial number, counted from one.
+
+```sh
+python prepare_trial.py hygrip.h5 --participant GROUP_LETTER --right-trial 1 --output private-trial.json
+```
+
+Open the JSON in **Replay a grip trial**. The converter verifies the complete original file, checks both device clocks and reads a single trial. Keep its JSON private. The released voltage has no verified calibration in newtons. A recording can come from someone who contributed to the fit. Replaying it supplies no new estimate of performance on unseen people.

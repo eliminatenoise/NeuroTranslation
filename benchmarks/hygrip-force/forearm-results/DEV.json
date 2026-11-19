@@ -1,0 +1,371 @@
+{
+  "aggregate_coverage": {
+    "censored": 0,
+    "planned": 7995,
+    "right_trials": 39,
+    "scored": 7995,
+    "unscorable": 0,
+    "zero_scored_trials": 0
+  },
+  "arm_condition": "not_admitted",
+  "binding": {
+    "adapter_sha256": "534bd8d13ea1fdd88e550a394ff31f1bbbc04d54f33abb8e534f96d4e44a8a6d",
+    "archive_sha256": "6819a18b13599c13a75ca5d36e65d7b6859534f548dbb2e626d31649cd990e88",
+    "frozen_secondary_design_sha256": "f24e23d03695eab2bb1026ebf279d3567c2e2f240add985564cb5fd4ecbdf394",
+    "glossary_revision_36_sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406",
+    "grant_sha256": "a9902e69c664c015f9a48a5b7d45165aa02a6cb17e64f108b1f888b30b83fdb6",
+    "independent_prefit_sha256": "998d1e922cf318be7dcff6fdaedddbba7e140ae6e783145d945daf67460408b1",
+    "independent_train_sha256": "1172875a98f506a8d0fa0500fe0ce9b7cc9671c2fb31237861dd8a82cc243dff",
+    "locked_train_refit_sha256": "fe4b1d9a067b9fa319e0fa674ecbf64ff912661b963b7c6091705bccb60ccade",
+    "locked_train_report_sha256": "a0bcb6e88256d9cc37b793c899ccf4fe9c00baf3a4d8e0425734e21eccf663b5",
+    "primary_forecast_sha256": "05f9bb88fe5897cb8816df73b88bb32388d28fda398072a52c012eb20ba3767d",
+    "prospective_design_sha256": "c24dcccd925d0900e6d44ca4d0584a9d30b2692347977d6b1418c2dada3de812",
+    "right_go_scope_sha256": "0cd429fb1bb77e99ad4e3e6f2a6ebe5fea14dfc9d3cf7a853430cf85e8beedfd",
+    "secondary_model_sha256": "287cc69e9d96a8d5b4fc2df0bb811a262a25b39b25b59d5a0f71a0eda7cc3c71",
+    "secondary_runner_sha256": "e9dba40d7eecfd12990b67cea8d07bd08bf7bec6273c194f9dc3b58677eddd09",
+    "source_audit_sha256": "0717fb7ac82af1867a735085a192584f682d040ef29352f6473325764243c70a",
+    "source_manifest_sha256": "ac228bd6520083f413e385eeda0a46a23dc9ecd75df843fefddf053cf479790c",
+    "train_freeze_sha256": "b475af176604db41c29e0dd5081cb969d51fe1af349e656632ca00c5a618e44e",
+    "train_refit_sha256": "fe4b1d9a067b9fa319e0fa674ecbf64ff912661b963b7c6091705bccb60ccade"
+  },
+  "comparison_families": {
+    "eeg_after_emg": {
+      "comparisons": [
+        {
+          "candidate": "force_emg_eeg_aligned",
+          "comparator": "force_emg_aligned",
+          "descriptive_t95_v": [
+            -0.00022909217341173053,
+            0.0004859899663715356
+          ],
+          "mean_delta_v": 0.00012844889647990255,
+          "negative": 0,
+          "positive": 3,
+          "sign_test_holm_within_family_p": 0.75,
+          "sign_test_n": 3,
+          "sign_test_p": 0.25,
+          "ties": 0
+        },
+        {
+          "candidate": "force_emg_eeg_aligned",
+          "comparator": "force_emg_eeg_rotated",
+          "descriptive_t95_v": [
+            -2.350907389584141e-05,
+            8.086067873151818e-05
+          ],
+          "mean_delta_v": 2.8675802417838388e-05,
+          "negative": 0,
+          "positive": 3,
+          "sign_test_holm_within_family_p": 0.75,
+          "sign_test_n": 3,
+          "sign_test_p": 0.25,
+          "ties": 0
+        },
+        {
+          "candidate": "force_emg_eeg_aligned",
+          "comparator": "force_emg_eeg_earlier",
+          "descriptive_t95_v": [
+            -0.00033982857372172624,
+            0.000506138298703561
+          ],
+          "mean_delta_v": 8.315486249091739e-05,
+          "negative": 2,
+          "positive": 1,
+          "sign_test_holm_within_family_p": 1.0,
+          "sign_test_n": 3,
+          "sign_test_p": 1.0,
+          "ties": 0
+        }
+      ],
+      "directional_screen_cleared": false
+    },
+    "emg_increment": {
+      "comparisons": [
+        {
+          "candidate": "force_emg_aligned",
+          "comparator": "force_history",
+          "descriptive_t95_v": [
+            -0.00012033722676631873,
+            9.115987134176437e-05
+          ],
+          "mean_delta_v": -1.4588677712277178e-05,
+          "negative": 1,
+          "positive": 2,
+          "sign_test_holm_within_family_p": 1.0,
+          "sign_test_n": 3,
+          "sign_test_p": 1.0,
+          "ties": 0
+        },
+        {
+          "candidate": "force_emg_aligned",
+          "comparator": "force_emg_rotated",
+          "descriptive_t95_v": [
+            -4.6538413941853395e-06,
+            4.500905134597714e-06
+          ],
+          "mean_delta_v": -7.646812979381267e-08,
+          "negative": 2,
+          "positive": 1,
+          "sign_test_holm_within_family_p": 1.0,
+          "sign_test_n": 3,
+          "sign_test_p": 1.0,
+          "ties": 0
+        },
+        {
+          "candidate": "force_emg_aligned",
+          "comparator": "force_emg_phase_rotated",
+          "descriptive_t95_v": [
+            -1.9443570102760528e-06,
+            7.540783752858622e-06
+          ],
+          "mean_delta_v": 2.798213371291285e-06,
+          "negative": 0,
+          "positive": 3,
+          "sign_test_holm_within_family_p": 1.0,
+          "sign_test_n": 3,
+          "sign_test_p": 0.25,
+          "ties": 0
+        },
+        {
+          "candidate": "force_emg_aligned",
+          "comparator": "force_emg_earlier",
+          "descriptive_t95_v": [
+            -3.4715906181413435e-06,
+            1.860055450527493e-06
+          ],
+          "mean_delta_v": -8.057675838069254e-07,
+          "negative": 2,
+          "positive": 1,
+          "sign_test_holm_within_family_p": 1.0,
+          "sign_test_n": 3,
+          "sign_test_p": 1.0,
+          "ties": 0
+        }
+      ],
+      "directional_screen_cleared": false
+    },
+    "exploratory": {
+      "comparisons": [
+        {
+          "candidate": "force_eeg_aligned",
+          "comparator": "force_history",
+          "descriptive_t95_v": [
+            -0.0002766438901199934,
+            0.000479140161145714
+          ],
+          "mean_delta_v": 0.0001012481355128603,
+          "negative": 0,
+          "positive": 3,
+          "sign_test_holm_within_family_p": 1.0,
+          "sign_test_n": 3,
+          "sign_test_p": 0.25,
+          "ties": 0
+        },
+        {
+          "candidate": "force_eeg_aligned",
+          "comparator": "force_eeg_rotated",
+          "descriptive_t95_v": [
+            -3.9376824460982575e-05,
+            0.0001165284911452882
+          ],
+          "mean_delta_v": 3.857583334215281e-05,
+          "negative": 0,
+          "positive": 3,
+          "sign_test_holm_within_family_p": 1.0,
+          "sign_test_n": 3,
+          "sign_test_p": 0.25,
+          "ties": 0
+        },
+        {
+          "candidate": "force_eeg_aligned",
+          "comparator": "force_eeg_earlier",
+          "descriptive_t95_v": [
+            -0.00029554436920388086,
+            0.00044823445855433805
+          ],
+          "mean_delta_v": 7.634504467522859e-05,
+          "negative": 2,
+          "positive": 1,
+          "sign_test_holm_within_family_p": 1.0,
+          "sign_test_n": 3,
+          "sign_test_p": 1.0,
+          "ties": 0
+        },
+        {
+          "candidate": "force_emg_aligned",
+          "comparator": "force_emg_whole",
+          "descriptive_t95_v": [
+            -1.1319715025988653e-06,
+            9.391705571747083e-07
+          ],
+          "mean_delta_v": -9.640047271207849e-08,
+          "negative": 1,
+          "positive": 2,
+          "sign_test_holm_within_family_p": 1.0,
+          "sign_test_n": 3,
+          "sign_test_p": 1.0,
+          "ties": 0
+        }
+      ]
+    }
+  },
+  "forecast_horizon_ms": 120,
+  "input_failure_reason_counts": {},
+  "interpretation": "The primary EEG study previously scored these same three DEV participants.",
+  "participant_count": 3,
+  "participant_mean_rmse_v": {
+    "backward_slope": 0.0004966223590425902,
+    "force_eeg_aligned": 0.00046133125081110235,
+    "force_eeg_earlier": 0.00038498620613587375,
+    "force_eeg_rotated": 0.0004227554174689495,
+    "force_emg_aligned": 0.00034549443758596487,
+    "force_emg_earlier": 0.00034630020516977187,
+    "force_emg_eeg_aligned": 0.00047394333406586747,
+    "force_emg_eeg_earlier": 0.0003907884715749501,
+    "force_emg_eeg_rotated": 0.00044526753164802904,
+    "force_emg_phase_rotated": 0.00034269622421467355,
+    "force_emg_rotated": 0.00034557090571575875,
+    "force_emg_whole": 0.000345590838058677,
+    "force_history": 0.00036008311529824207,
+    "persistence": 0.0005168495639571738,
+    "timing": 0.0008898685457036114
+  },
+  "phase_coverage": {
+    "00": {
+      "censored": 0,
+      "planned": 1560,
+      "scored": 1560,
+      "unscorable": 0
+    },
+    "01": {
+      "censored": 0,
+      "planned": 540,
+      "scored": 540,
+      "unscorable": 0
+    },
+    "10": {
+      "censored": 0,
+      "planned": 390,
+      "scored": 390,
+      "unscorable": 0
+    },
+    "11": {
+      "censored": 0,
+      "planned": 5505,
+      "scored": 5505,
+      "unscorable": 0
+    }
+  },
+  "phase_error": {
+    "00": {
+      "issues": 1560,
+      "participant_mean_rmse_v": {
+        "backward_slope": 0.0007042359170613145,
+        "force_eeg_aligned": 0.0005084735082456561,
+        "force_eeg_earlier": 0.0004437554620088328,
+        "force_eeg_rotated": 0.0004822149326795891,
+        "force_emg_aligned": 0.00040768076903674715,
+        "force_emg_earlier": 0.00040781123180326284,
+        "force_emg_eeg_aligned": 0.0005200432150167588,
+        "force_emg_eeg_earlier": 0.0004502826337961499,
+        "force_emg_eeg_rotated": 0.0005016990885071414,
+        "force_emg_phase_rotated": 0.0004071360008584622,
+        "force_emg_rotated": 0.0004088818663761452,
+        "force_emg_whole": 0.0004075282213118325,
+        "force_history": 0.00043460462900036064,
+        "persistence": 0.0006630764702218306,
+        "timing": 0.0008888381834520419
+      },
+      "participants": 3,
+      "trials": 39
+    },
+    "01": {
+      "issues": 540,
+      "participant_mean_rmse_v": {
+        "backward_slope": 0.0004197169621547843,
+        "force_eeg_aligned": 0.00044723146828614963,
+        "force_eeg_earlier": 0.0004273465956747017,
+        "force_eeg_rotated": 0.0003974615260982605,
+        "force_emg_aligned": 0.0003514047207425314,
+        "force_emg_earlier": 0.0003524363510426826,
+        "force_emg_eeg_aligned": 0.00045893003252242396,
+        "force_emg_eeg_earlier": 0.0004422204414248631,
+        "force_emg_eeg_rotated": 0.00042358962782913486,
+        "force_emg_phase_rotated": 0.00035327031538999904,
+        "force_emg_rotated": 0.00034914009294945733,
+        "force_emg_whole": 0.00035199152051434616,
+        "force_history": 0.0004027546870799511,
+        "persistence": 0.00046671080273124097,
+        "timing": 0.0011158253013469558
+      },
+      "participants": 3,
+      "trials": 39
+    },
+    "10": {
+      "issues": 390,
+      "participant_mean_rmse_v": {
+        "backward_slope": 0.0005973954936202053,
+        "force_eeg_aligned": 0.0005650228490117088,
+        "force_eeg_earlier": 0.0005216166075704661,
+        "force_eeg_rotated": 0.0005249871392718137,
+        "force_emg_aligned": 0.00046174663375347035,
+        "force_emg_earlier": 0.00046140219116226253,
+        "force_emg_eeg_aligned": 0.0005764975866365732,
+        "force_emg_eeg_earlier": 0.000529516309661034,
+        "force_emg_eeg_rotated": 0.0005471308215191825,
+        "force_emg_phase_rotated": 0.0004595704013909409,
+        "force_emg_rotated": 0.00046173324021047643,
+        "force_emg_whole": 0.0004618524897828343,
+        "force_history": 0.0004728834552992452,
+        "persistence": 0.0006674999160902511,
+        "timing": 0.0010608826547670823
+      },
+      "participants": 3,
+      "trials": 39
+    },
+    "11": {
+      "issues": 5505,
+      "participant_mean_rmse_v": {
+        "backward_slope": 0.00041537562702594365,
+        "force_eeg_aligned": 0.0004338667829778872,
+        "force_eeg_earlier": 0.00034670534796825864,
+        "force_eeg_rotated": 0.0003929535336949343,
+        "force_emg_aligned": 0.00031258283323768013,
+        "force_emg_earlier": 0.00031359586332875604,
+        "force_emg_eeg_aligned": 0.00044709512792007357,
+        "force_emg_eeg_earlier": 0.0003513126691210707,
+        "force_emg_eeg_rotated": 0.0004159028227900834,
+        "force_emg_phase_rotated": 0.0003082584816698004,
+        "force_emg_rotated": 0.00031272584680318657,
+        "force_emg_whole": 0.0003126853549120445,
+        "force_history": 0.0003182976156856071,
+        "persistence": 0.0004554028589064205,
+        "timing": 0.0008453518543701401
+      },
+      "participants": 3,
+      "trials": 39
+    }
+  },
+  "runtime": {
+    "before_aggregate_write_seconds": 2.2842486730078235,
+    "fit_or_score_seconds": 0.01796227495651692,
+    "h5py": "3.16.0",
+    "hdf5": "2.0.0",
+    "numpy": "2.5.5",
+    "peak_rss_kib": 213292,
+    "process_threads": 1,
+    "python": "3.13.15",
+    "source_and_features_seconds": 2.1860119880293496
+  },
+  "scope": {
+    "arm_condition": "mapped_arm_comparisons_excluded",
+    "assigned_train_participants": 8,
+    "clock_held_train_participants": 1,
+    "final": "reserved",
+    "included_train_participants": 7,
+    "source_samples": "right Go and its verified earlier context only"
+  },
+  "sealed_internal_aggregate_sha256": "1b90df3b7711308f2203fcd4d3662675fa28adcf4c955b8d692ec6920fffa2a3",
+  "split": "DEV",
+  "target_units": "V"
+}

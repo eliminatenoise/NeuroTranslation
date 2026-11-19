@@ -33,10 +33,18 @@
     return Array.isArray(values) && values.length === length && values.every(Number.isFinite);
   }
 
+  function nearestForceTick(clockGo) {
+    return (100n * clockGo + binaryScale) / (2n * binaryScale);
+  }
+
+  function firstIssue(go) {
+    return Number(nearestForceTick(clock(go, "Force Go"))) + 20;
+  }
+
   function timing(go, index) {
     const clockGo = clock(go, "Force Go");
     insist(Number.isSafeInteger(index) && index >= 0, "Force issue index must be a nonnegative integer.");
-    const anchor = (100n * clockGo + binaryScale) / (2n * binaryScale);
+    const anchor = nearestForceTick(clockGo);
     const offset = BigInt(index) - anchor;
     insist(offset >= 20n && offset <= 1040n && (offset - 20n) % 5n === 0n,
       "Choose one of the scheduled force issues, from Go + 20 to Go + 1040 ticks in steps of 5.");
@@ -148,7 +156,7 @@
     };
   }
 
-  const api = {eegEndpoint, eegFeatures, invented, predict, timing};
+  const api = {eegEndpoint, eegFeatures, firstIssue, invented, predict, timing};
   globalThis.HygripForecast = api;
   if (typeof module !== "undefined") module.exports = api;
 })();

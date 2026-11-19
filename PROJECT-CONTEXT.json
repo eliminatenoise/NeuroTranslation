@@ -354,10 +354,11 @@
         "entry": "docs/hygrip-force/index.html",
         "url": "https://eliminatenoise.github.io/NeuroTranslation/hygrip-force/",
         "offline_archive": {
-          "path": "benchmarks/hygrip-force/results-2026-11-19/HYGRIP-voltage-forecast-20261119-r2.zip",
-          "bytes": 15609,
-          "sha256": "4892c87661f890c68b0b18d02acaef9d214ddc89b1a7bcb9e5bb2a27d1301333"
-        }
+          "path": "benchmarks/hygrip-force/trial-replay/HYGRIP-trial-replay.zip",
+          "bytes": 22498,
+          "sha256": "2f24c3e38fb1f841cf54eb4c5d253d220a8be5b6000939be0b69ab2f73a1d9b0"
+        },
+        "trial_replay": "One right-hand trial per local file; 205 scheduled cutoffs, conditional on complete input and target support. The example is invented."
       },
       "outcome": {
         "unit": "V",
@@ -367,7 +368,27 @@
         "development_common_scored_issues": 7995,
         "development_directional_screen_passed": false
       },
-      "scope": "First scoring of three original HYGRIP development participants after public protocol posting. The browser uses fixed TRAIN fits and invented example inputs by default. FINAL remains reserved."
+      "scope": "First scoring of three original HYGRIP development participants after public protocol posting. The browser uses fixed TRAIN fits and invented example inputs by default. FINAL remains reserved.",
+      "secondary_emg": {
+        "path": "benchmarks/hygrip-force/forearm-results/README.md",
+        "training": {
+          "path": "benchmarks/hygrip-force/forearm-results/TRAIN.json",
+          "sha256": "01943b20c61780db9bc2232c8e6645f292eeb9b514ca3658cb6d1c142f71e3f7",
+          "bytes": 18306
+        },
+        "development": {
+          "path": "benchmarks/hygrip-force/forearm-results/DEV.json",
+          "sha256": "6818e80f4136f186f3a9f9a31685b666b2e8dd056a7fc53e75bde86c18725719",
+          "bytes": 13076
+        },
+        "package": {
+          "path": "benchmarks/hygrip-force/forearm-results/HYGRIP-Muscle-Train-and-Dev-Aggregates.zip",
+          "sha256": "c1cb0cf460cc6352adfe14a8864034baf67ccd50650298a87fb0d2faef48381c",
+          "bytes": 39241
+        },
+        "tested_endpoint": "forecast of released sensor voltage 120 ms after issue",
+        "scope": "Secondary right-hand analysis on the same three previously studied development people. Timing-specific forearm EMG and scalp EEG directional screens failed on TRAIN and DEV."
+      }
     }
   },
   "prospective_studies": {
