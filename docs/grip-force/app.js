@@ -1,7 +1,7 @@
 "use strict";
 (() => {
   const $ = id => document.getElementById(id);
-  const HORIZON = GripForecast.HORIZON_MS;
+  let HORIZON;
   const branches = [
     { key: "strong", label: "Force + motion", color: "#9ef0c5", shape: "circle" },
     { key: "eeg", label: "+ Scalp EEG", color: "#dfc7ff", shape: "diamond" },
@@ -292,6 +292,13 @@
   }
 
   try {
+    if (typeof GripForecast === "undefined" || typeof GripForecast.fromBundle !== "function") {
+      throw new Error("The forecast code could not load. Reload the page or extract the complete offline folder.");
+    }
+    if (typeof WayStudy === "undefined" || !WayStudy.models || !WayStudy.metadata) {
+      throw new Error("The fitted models could not load. Reload the page or extract the complete offline folder.");
+    }
+    HORIZON = GripForecast.HORIZON_MS;
     predict = GripForecast.fromBundle(WayStudy.models);
     updateChannelOptions();
     renderEvidence();
@@ -301,6 +308,10 @@
     $("open-file").disabled = true;
     slider.disabled = true;
     $("demo-replay").disabled = true;
+    profile.disabled = true;
+    channel.disabled = true;
+    $("example").removeAttribute("href");
+    $("example").setAttribute("aria-disabled", "true");
     return;
   }
 
