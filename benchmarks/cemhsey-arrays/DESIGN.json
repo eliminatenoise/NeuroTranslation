@@ -1,0 +1,22 @@
+{
+  "study": "Offline CEMHSEY GRASP five-grid comparison",
+  "protocol_sha256": "1ddf690efdba4c91082999cae140f87ae6d567f3422afe68e4977cb4ca6a7781",
+  "channel_map_sha256": "f98fa83e691ef55edb64cfe306b884b94f537df9397f4a64e2a9228e36e36ce4",
+  "fit_cohort": {
+    "people": 3,
+    "days_per_person": 2,
+    "repeats_per_day": 2,
+    "trials": 12,
+    "member_roster_sha256": "e88bd48da1b8ef420a983618084f9ff56b87f70515ec00cf72a14568c102636b"
+  },
+  "evaluation_cohort": {
+    "people": 4,
+    "days_per_person": 2,
+    "repeats_per_day": 2,
+    "trials": 16,
+    "member_roster_sha256": "43437b1e402e46fa26867e73dd9658668ee97337c6f6bbee9985b9a8d9677186",
+    "source_metadata_sha256": "878a7de96932a3d16bcf372b92632eb8097aea674a4ef13eeb7aca6fe3c5e5be"
+  },
+  "roster_encoding": "ASCII source member paths, sorted, one per line with a final LF. No signal values are included in these commitments.",
+  "scope": "Persons and indexed days change together. The acquisition identifies recorded array channels. The inter-device clock offset, individual skin registration and muscle identities remain unverified."
+}
