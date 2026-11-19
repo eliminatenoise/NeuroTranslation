@@ -6,6 +6,10 @@ Reach for a cup. A neural recording captures activity at the recording site. An 
 
 The companion also inspects your own JSON or CSV locally. It can align streams when they declare the same organism, subject, recording and clock and their partitions are compatible. Choose **Load example**, then **Metadata checks**, to see how the invented example records those fields. The companion runs without installation. [Import and alignment guide](demo/README.md) · [Desktop launchers for Windows, macOS and Linux](https://eliminatenoise.github.io/NeuroTranslation/START.html)
 
+## Open an original pinch recording
+
+Use the recording source selector in NeuroTranslate to open an original CEMHSEY GRASP Session 5, Task 2 MATLAB file. The browser reads the normalized force and the five forearm surface-electrode grids on your computer. You can inspect one trial immediately, or fit local weights from 12 compatible recordings. The public example uses invented weights. A new local fit still needs separate evaluation data. [Choose a study reader](https://eliminatenoise.github.io/NeuroTranslation/index.html#study-readers) · [Open the pinch reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/) · [Fit local weights](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/#fit-local)
+
 ## Predicting measured movement
 
 ### Wrist pointing

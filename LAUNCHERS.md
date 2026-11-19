@@ -55,3 +55,5 @@ For a prescribed combination in Python, use `score_prescribed.py` from the scori
 ## CEMHSEY two-finger pinch
 
 Extract the [pinch reader and Python tools](benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip). Open the launcher for your computer or open `index.html`. Choose **Try an invented pinch** or use the converter in the `python` folder to open a private trial. The force cutoff, later-reading reveal and full-trial scoring each have separate controls. [Browser reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-pinch/) · [Study and source](benchmarks/cemhsey-pinch/README.md).
+
+The pinch-force reader and its fitting tool open directly from the same extracted folder. Use the launcher for your operating system, then open an original Session 5, Task 2 MATLAB file, a converted array packet, or the local fitting tool. [Download the CEMHSEY array reader](benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip) · [Open the web reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/)

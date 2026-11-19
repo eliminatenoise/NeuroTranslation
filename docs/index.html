@@ -5,7 +5,7 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.d4915a6997132b045e9706ddf362c5bde1d1aa0c3d3ff82bdb2aaeb4f2f43d9b.css">
+  <link rel="stylesheet" href="style.dbbd5e7a04c656bc0fa672b13ce3a873b1c82ac9fda371deab877ba1344133fa.css">
 </head>
 <body>
   <header class="topbar">
@@ -23,18 +23,67 @@
     <section class="intro">
       <div>
         <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p>
-        <nav class="section-links wrist-links" aria-label="Movement and force studies">
-          <a href="./wrist-replay/index.html" data-pages-href="./wrist-replay/index.html">Replay a recorded wrist trial</a>
-          <a href="./wrist-forearm/index.html" data-pages-href="./wrist-forearm/index.html">Forecast with recorded forearm EMG</a>
-          <a href="./daily-wrist/index.html" data-pages-href="./daily-wrist/index.html">Estimate wrist angles during daily activities</a>
-          <a href="./wrist-pointing/index.html" data-pages-href="./wrist-pointing/index.html">Try a wrist forecast with invented EMG</a>
-          <a href="./grip-force/index.html" data-pages-href="./grip-force/index.html">Forecast grip force during a lift</a>
-          <a href="./contact-force/index.html" data-pages-href="./contact-force/index.html">Compare forecasts after grip contact</a>
+        <nav class="section-links wrist-links" aria-label="Study recordings">
+          <a href="#study-readers">Choose a study reader</a>
         </nav>
       </div>
       <div class="introactions"><button class="button secondary" id="load-example">Load example</button><button class="button primary" id="import-open">＋ Import recordings</button></div>
     </section>
     <div class="notice" id="example-notice"><span class="notice-icon">i</span><p><strong>Constructed example.</strong> These invented signals test the software. They are not biological recordings or model predictions.</p><button id="clear-all" class="textbutton">Clear example</button></div>
+    <section class="study-readers" id="study-readers" aria-labelledby="study-readers-title">
+      <div class="study-choice-head"><h2 id="study-readers-title">Open a study recording</h2>
+        <label for="study-choice" id="study-choice-label" hidden>Recording source
+          <select id="study-choice"></select>
+        </label>
+      </div>
+      <article class="study-choice-card" data-study-key="pinch" aria-labelledby="reader-pinch">
+        <h3 id="reader-pinch">Two-finger pinch · CEMHSEY</h3>
+        <p>Open an original Session 5, Task 2 MATLAB recording, or a converted array packet. Inspect the two forearm EMG windows and forecast normalized gauge force 24 samples ahead. Force is a fraction of same-day maximum voluntary contraction.</p>
+        <nav class="section-links" aria-label="Two-finger pinch · CEMHSEY actions">
+          <a href="./cemhsey-arrays/index.html" data-pages-href="./cemhsey-arrays/index.html">Open a pinch recording</a>
+          <a href="./cemhsey-arrays/index.html#fit-local" data-pages-href="./cemhsey-arrays/index.html#fit-local">Fit a local model from 12 recordings</a>
+          <a href="./cemhsey-intervals/index.html" data-pages-href="./cemhsey-intervals/index.html">See coverage on eight evaluation trials</a>
+        </nav>
+      </article>
+      <article class="study-choice-card" data-study-key="wrist-pointing" aria-labelledby="reader-wrist-pointing">
+        <h3 id="reader-wrist-pointing">Wrist pointing · two wrist angles</h3>
+        <p>The forearm reader opens selected development ZIPs from the wrist-pointing study on Figshare. It compares forecasts in degrees from earlier wrist motion, with and without forearm EMG. The replay reader opens prepared trial files for the motion and scalp-EEG models.</p>
+        <nav class="section-links" aria-label="Wrist pointing · two wrist angles actions">
+          <a href="./wrist-forearm/index.html" data-pages-href="./wrist-forearm/index.html">Forecast with recorded forearm EMG</a>
+          <a href="./wrist-replay/index.html" data-pages-href="./wrist-replay/index.html">Replay a recorded wrist trial</a>
+          <a href="./wrist-pointing/index.html" data-pages-href="./wrist-pointing/index.html">Try a wrist forecast with invented EMG</a>
+        </nav>
+      </article>
+      <article class="study-choice-card" data-study-key="daily-wrist" aria-labelledby="reader-daily-wrist">
+        <h3 id="reader-daily-wrist">Everyday wrist movements · UJI</h3>
+        <p>Choose a compatible seven-channel forearm window in JSON. The model estimates wrist flexion–extension and radial–ulnar angles in degrees.</p>
+        <nav class="section-links" aria-label="Everyday wrist movements · UJI actions">
+          <a href="./daily-wrist/index.html" data-pages-href="./daily-wrist/index.html">Estimate wrist angles during daily activities</a>
+        </nav>
+      </article>
+      <article class="study-choice-card" data-study-key="lift" aria-labelledby="reader-lift">
+        <h3 id="reader-lift">Grip during a lift · WAY-EEG-GAL</h3>
+        <p>Open a compatible lift or window in JSON. The grip reader forecasts force in newtons. The contact comparison asks what changes once a squeeze registers.</p>
+        <nav class="section-links" aria-label="Grip during a lift · WAY-EEG-GAL actions">
+          <a href="./grip-force/index.html" data-pages-href="./grip-force/index.html">Forecast grip force during a lift</a>
+          <a href="./contact-force/index.html" data-pages-href="./contact-force/index.html">Compare forecasts after grip contact</a>
+        </nav>
+      </article>
+      <article class="study-choice-card" data-study-key="grip-voltage" aria-labelledby="reader-grip-voltage">
+        <h3 id="reader-grip-voltage">Cued grip · HYGRIP</h3>
+        <p>Open a prepared HYGRIP window or trial in JSON. Recent grip-sensor voltage and cue time give one forecast. Adding scalp EEG gives another. Readings are in volts and the study reports forecast error in millivolts.</p>
+        <nav class="section-links" aria-label="Cued grip · HYGRIP actions">
+          <a href="./hygrip-force/index.html" data-pages-href="./hygrip-force/index.html">Open the grip-voltage reader</a>
+        </nav>
+      </article>
+      <article class="study-choice-card" data-study-key="finger-voltage" aria-labelledby="reader-finger-voltage">
+        <h3 id="reader-finger-voltage">Five finger sensors · Hyser</h3>
+        <p>Open a Random-task recording to forecast index-finger sensor voltage. A matching surface EMG file is optional for the population comparison. The five-finger mode reads force-sensor voltages from a Random or supported N-DoF session folder, or matching WFDB header and data files.</p>
+        <nav class="section-links" aria-label="Five finger sensors · Hyser actions">
+          <a href="./hyser-index/index.html" data-pages-href="./hyser-index/index.html">Open the finger-sensor reader</a>
+        </nav>
+      </article>
+    </section>
     <section class="modality-grid" aria-label="Loaded signal types">
       <article class="modality neural"><div class="mini-signal">∿</div><h2>Neural</h2><p>Brain, spine &amp; peripheral activity</p><div class="modality-bottom"><span id="count-neural">0 streams</span><span class="smalltag" id="origin-neural">No data</span></div></article>
       <article class="modality muscle"><div class="mini-signal">⌁</div><h2>Muscle</h2><p>Myography &amp; muscle activity</p><div class="modality-bottom"><span id="count-muscle">0 streams</span><span class="smalltag" id="origin-muscle">No data</span></div></article>
@@ -165,6 +214,7 @@
   <dialog id="import-dialog" aria-labelledby="import-dialog-title">
     <form id="import-form"><div class="dialog-heading"><div><p class="eyebrow">LOCAL FILE IMPORT</p><h2 id="import-dialog-title">Add a recording</h2></div><button type="button" id="import-close" class="closebutton" aria-label="Close import">×</button></div>
       <p class="quiet">JSON carries its metadata. For CSV, fill in the fields below. Leave unknown identity fields empty; those files cannot be synchronized across datasets.</p>
+      <p class="study-import-hint">Working with an original CEMHSEY two-finger pinch <code>.mat</code>? <a href="./cemhsey-arrays/index.html" data-pages-href="./cemhsey-arrays/index.html">Open it in the pinch reader</a>.</p>
       <label class="filedrop">Choose JSON or CSV<input id="file" type="file" accept=".json,.csv,application/json,text/csv" required></label>
       <div id="csv-fields" class="form-grid" hidden>
         <label>Dataset ID<input name="datasetId" placeholder="recording-01"></label><label>Name<input name="name" placeholder="Hand reach"></label>
@@ -179,6 +229,48 @@
       <p id="import-error" class="form-error" role="alert"></p><div class="dialog-footer"><span class="quiet">File contents stay in your browser.</span><button class="button primary" type="submit">Import recording</button></div>
     </form>
   </dialog>
-  <script type="module" src="app.d4915a6997132b045e9706ddf362c5bde1d1aa0c3d3ff82bdb2aaeb4f2f43d9b.mjs"></script>
+  <script type="module">
+    const choice = document.getElementById("study-choice");
+    const cards = Array.from(document.querySelectorAll("#study-readers [data-study-key]"));
+    function showStudy() {
+      for (const card of cards) card.hidden = card.dataset.studyKey !== choice.value;
+    }
+    for (const card of cards) {
+      const name = card.querySelector("h3").textContent;
+      choice.add(new Option(name, card.dataset.studyKey));
+    }
+    choice.addEventListener("change", showStudy);
+    const readerSection = document.getElementById("study-readers");
+    const returnKey = "neuroTranslationReaderReturn";
+    readerSection.addEventListener("click", event => {
+      const link = event.target.closest("a");
+      if (!link || event.defaultPrevented || event.button !== 0 || event.altKey ||
+          event.metaKey || event.ctrlKey || event.shiftKey) return;
+      const card = link.closest("[data-study-key]");
+      if (!card) return;
+      const position = Array.from(card.querySelectorAll("a")).indexOf(link);
+      try {
+        history.replaceState({...history.state, [returnKey]: {key: card.dataset.studyKey, position}}, "");
+      } catch { /* Navigation still works if browser history state is unavailable. */ }
+    });
+    window.addEventListener("pageshow", event => {
+      const saved = history.state?.[returnKey];
+      const fromHistory = event.persisted ||
+        performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+      const card = fromHistory && saved && cards.find(item => item.dataset.studyKey === saved.key);
+      if (card) choice.value = card.dataset.studyKey;
+      showStudy();
+      if (!card) return;
+      const link = card.querySelectorAll("a")[saved.position] || choice;
+      requestAnimationFrame(() => {
+        if (document.activeElement === document.body || document.activeElement === document.documentElement) {
+          link.focus({preventScroll: true});
+        }
+      });
+    });
+    document.getElementById("study-choice-label").hidden = false;
+    showStudy();
+  </script>
+  <script type="module" src="app.dbbd5e7a04c656bc0fa672b13ce3a873b1c82ac9fda371deab877ba1344133fa.mjs"></script>
 </body>
 </html>

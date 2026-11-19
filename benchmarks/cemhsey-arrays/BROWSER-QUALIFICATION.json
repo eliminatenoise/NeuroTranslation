@@ -1,0 +1,73 @@
+{
+  "qualification": "Numerical equivalence of browser-local original-file reading and fitting on an established training roster",
+  "source_study": "https://doi.org/10.1038/s41597-025-05733-y",
+  "recording_source": "https://doi.org/10.5281/zenodo.15077957",
+  "protocol": {
+    "path": "benchmarks/cemhsey-arrays/PROTOCOL.md",
+    "bytes": 10661,
+    "sha256": "1ddf690efdba4c91082999cae140f87ae6d567f3422afe68e4977cb4ca6a7781"
+  },
+  "glossary": {
+    "revision": 36,
+    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+  },
+  "source_modules": [
+    {
+      "path": "docs/cemhsey-arrays/mat-import.js",
+      "bytes": 19157,
+      "sha256": "f0a5a08c71ea31cdd36f841ad0749d246da1d49fa8aa731ee5a846a792ced0b2"
+    },
+    {
+      "path": "docs/cemhsey-arrays/array-math.js",
+      "bytes": 9435,
+      "sha256": "c11a6c213a144bed51db3d2fcea73862ea9bb108c0f99a388e1cdee0a33a6206"
+    },
+    {
+      "path": "docs/cemhsey-arrays/interval-math.js",
+      "bytes": 9460,
+      "sha256": "5dd26a30a01910ba9d81774eee66633cefbc96431f8e1f2bafaec83b383a8743"
+    },
+    {
+      "path": "docs/cemhsey-arrays/fit/fit.js",
+      "bytes": 16222,
+      "sha256": "8a2d8715916aaaada8f710277fc2c44f0b58adc1559047a8d39392b65d9b750a"
+    },
+    {
+      "path": "docs/cemhsey-arrays/fit/ridge.js",
+      "bytes": 5115,
+      "sha256": "e822d79cb5cdff5ac835ce649489d7b20116290796fefc518070e76aa195e0b4"
+    }
+  ],
+  "typed_arrays": {
+    "originals_checked": 1,
+    "force_samples": 6000,
+    "rms_time_windows": 594,
+    "source_channels": 320,
+    "rms_values": 190080,
+    "exact_byte_equality_with_reference_packet": true,
+    "predictions_checked": 2960,
+    "intervals_checked": 3552,
+    "max_point_difference_mvc_fraction": 5.551115123125783e-17
+  },
+  "model_fit": {
+    "source_role": "previously frozen training recordings",
+    "people": 3,
+    "source_trials": 12,
+    "repeats_on_each_of_two_days": 2,
+    "issue_rows": 7104,
+    "reader_arms": 4,
+    "python_refits_in_check": 0,
+    "independent_numerical_comparison": "Previously sealed Python reader parameters vs newly computed browser reader parameters",
+    "separate_prediction_input": "Two invented trials, 1184 cutoffs per model",
+    "tolerances": {
+      "coefficient_abs": 2e-09,
+      "coefficient_rel": 2e-08,
+      "invented_outcome_absolute": 2e-09
+    },
+    "max_abs_parameter_delta": 2.4892848199398188e-14,
+    "max_parameter_tolerance_fraction": 1.2042846870666205e-05,
+    "max_abs_invented_prediction_delta": 1.3655743202889425e-14
+  },
+  "environment": "Linux Chromium 155.0.8059.84, offline browser. The converter and fitter use workers on the CPU.",
+  "release_scope": "Software reproduction on a specified training set. Held-subject efficacy and interval coverage are reported in the separate published evaluations. Other browsers and native Windows/macOS execution remain unverified."
+}

@@ -12,6 +12,11 @@
     "Demonstration model · "+modelOrigins.invented_signals;
   let fit=bundled, modelLabel=bundledLabel, trial=null, source="", row=null, lockedScale=null, selected=0,gridIndex=0;
   let trialToken=0, modelToken=0, scoreToken=0, scoring=false;
+  let matImport=null;
+  const mat=globalThis.CemhseyMat;
+  const example=el("example"), packetFile=el("file"), matFile=el("mat-file"), matConfirm=el("mat-confirm");
+  const importProgress=el("import-progress"), progressBar=el("mat-progress"), cancelImport=el("cancel-trial");
+  const saveTrial=el("save-trial"), status=el("status");
   const gridSelect=el("grid"),cutoff=el("cutoff"),reveal=el("reveal"),lock=el("lock");
   const scoreButton=el("score");
   const bands = globalThis.PinchIntervalUI.setup(rows, clearScore);
@@ -102,7 +107,7 @@
       el("origin").textContent=modelLabel+" · "+source;
       rows(el("predictions"),Object.entries(estimates).map(([k,v])=>[api.labels[k],prediction(v)]));
       el("later").hidden=!reveal.checked;
-      el("later").textContent=reveal.checked?(source==="Invented pinch"?"Later invented force ":"Later normalized force in this packet ")+prediction(trial.force[row.tick+24]):"";
+      el("later").textContent=reveal.checked?(source==="Invented pinch"?"Later invented force ":"Later normalized force in this trial ")+prediction(trial.force[row.tick+24]):"";
       renderCells();
     }catch(error){
       el("predictions").replaceChildren();
@@ -113,41 +118,147 @@
       bands.render(Number(cutoff.value), reveal.checked);
     }
   }
-  function show(record,name){
+  function show(record,name,fromMat=false){
     api.forecast(fit,api.features(record,160));
     trial=record;source=name;cutoff.value="160";bands.setTrial(record,name==="Invented pinch");lockedScale=null;lock.checked=false;reveal.checked=false;gridIndex=0;selected=0;gridSelect.value="0";createGrids();clearScore();
+    saveTrial.hidden=!fromMat;
     el("trial").hidden=false;el("values").open=false;el("status").textContent=name+" · 320 electrode channels · 592 cutoffs.";render();
+  }
+  function dismissImport(restoreFocus=false){
+    const hadFocus=document.activeElement===cancelImport;
+    importProgress.hidden=true;
+    progressBar.removeAttribute("value");
+    if(restoreFocus && hadFocus)matFile.focus();
+  }
+  function supersedeImport(){
+    trialToken++;
+    if(matImport){
+      matImport.cancel();
+      matImport=null;
+    }
+    dismissImport();
+    return trialToken;
+  }
+  function reportImport(message){
+    status.textContent=message+(trial?" Still showing the previous trial.":"");
+  }
+  function matchesArchiveName(name){
+    const official=/^s(\d+)_day(\d+)_session(\d+)_task(\d+)_trial(\d+)\.mat$/i.exec(name);
+    if(official){
+      const [, participant, day, session, task, repeat]=official.map(Number);
+      if(participant>=1 && participant<=13 && day>=1 && day<=11 && session===5 && task===2 && (repeat===1 || repeat===2))return true;
+      throw Error("The archive name is outside Session 5, Task 2, repeats 1 or 2. Check the source and choose a compatible trial.");
+    }
+    const namedTask=/(?:^|[_-])session(\d+)[_-]task(\d+)(?=[_.-]|$)/i.exec(name);
+    if(namedTask && (Number(namedTask[1])!==5 || Number(namedTask[2])!==2)){
+      throw Error("The filename names a different session or task. Check the source and choose a Session 5, Task 2 trial.");
+    }
+    return false;
   }
   gridSelect.addEventListener("change",()=>{gridIndex=Number(gridSelect.value);createGrids();renderCells();});
   lock.addEventListener("change",()=>{if(!row)return;lockedScale=lock.checked?Math.max(row.older.max,row.recent.max):null;renderCells();});
   el("values").addEventListener("toggle",renderCells);
   cutoff.addEventListener("input",()=>{reveal.checked=false;clearScore();render();});
   reveal.addEventListener("change",render);
-  el("example").addEventListener("click",()=>{
-    trialToken++;
-    el("file").value="";
+  example.addEventListener("click",()=>{
+    supersedeImport();
+    packetFile.value="";
     try { show(api.example(maps),"Invented pinch"); }
     catch (error) { el("status").textContent=error.message; }
   });
-  el("file").addEventListener("change",async e=>{
+  packetFile.addEventListener("change",async e=>{
     const input=e.currentTarget,file=input.files[0];
     if(!file)return;
-    const token=++trialToken;
-    el("status").textContent="Reading a private array packet…";
+    const token=supersedeImport();
+    status.textContent="Reading a private array packet…";
     try{if(file.size>3*1024*1024)throw Error("Choose a compact JSON array packet smaller than 3 MiB.");
       const encoded=JSON.parse(await file.text());if(token!==trialToken)return;
       show(api.packet(encoded,bundled.protocol_sha256),"Local trial packet");
     }catch(error){if(token===trialToken){
       input.value="";
       const message=error instanceof SyntaxError?"The selected packet is not valid JSON.":error.message;
-      el("status").textContent=message+(trial?" Still showing the previous trial.":"");
+      reportImport(message);
     }}
   });
+  matConfirm.addEventListener("change",()=>{
+    matFile.disabled=!matConfirm.checked;
+    if(!matConfirm.checked && matImport){
+      supersedeImport();
+      reportImport("MATLAB import cancelled.");
+    }
+  });
+  matFile.addEventListener("change",async()=>{
+    const file=matFile.files[0];
+    matFile.value="";
+    if(!file || !matConfirm.checked)return;
+    const token=supersedeImport();
+    let phase;
+    try{
+      if(!/\.mat$/i.test(file.name))throw Error("Choose an original MATLAB file ending in .mat.");
+      const archiveName=matchesArchiveName(file.name);
+      importProgress.hidden=false;
+      status.textContent="Reading the original MATLAB file…";
+      matImport=mat.start(file,{onProgress:({phase:next,fraction})=>{
+        if(token!==trialToken)return;
+        if(next!==phase){
+          phase=next;
+          status.textContent=next==="reading"?"Reading the original MATLAB file…":"Calculating electrode summaries…";
+        }
+        if(Number.isFinite(fraction)){
+          progressBar.max=1;
+          progressBar.value=Math.max(0,Math.min(1,fraction));
+        }else progressBar.removeAttribute("value");
+      }});
+      const record=await matImport.promise;
+      if(token!==trialToken)return;
+      show(record,archiveName?"Local MATLAB trial · archive name matches Session 5, Task 2":"Local MATLAB trial · source task confirmed by you",true);
+    }catch(error){
+      if(token===trialToken)reportImport(error.message);
+    }finally{
+      if(token===trialToken){
+        matImport=null;
+        dismissImport(true);
+      }
+    }
+  });
+  cancelImport.addEventListener("click",()=>{
+    supersedeImport();
+    matFile.focus();
+    reportImport("MATLAB import cancelled.");
+  });
+  window.addEventListener("pagehide",()=>{
+    if(!matImport)return;
+    supersedeImport();
+    reportImport("MATLAB import cancelled.");
+  });
+  saveTrial.addEventListener("click",()=>{
+    try{
+      const file=new Blob([JSON.stringify(mat.packet(trial))+"\n"],{type:"application/json"});
+      const url=URL.createObjectURL(file);
+      const link=document.createElement("a");
+      link.href=url;
+      link.download="cemhsey-array-trial.json";
+      document.body.append(link);
+      try{link.click();}
+      finally{link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+    }catch{
+      status.textContent="The browser could not save this array packet.";
+    }
+  });
   function useFit(next,label,exactBytes) {
+    bands.validateTraining(next);
     if (trial) api.forecast(next,api.features(trial,Number(cutoff.value)));
     fit=next;modelLabel=label;bands.setFit(next,exactBytes);el("fit-status").textContent=label+".";el("reset-model").disabled=fit===bundled;
-    reveal.checked=false;clearScore();if(trial){el("status").textContent=source+" · 320 electrode channels · 592 cutoffs.";render();}
-    else el("status").textContent="Choose a local packet or try an invented pinch.";
+    reveal.checked=false;clearScore();if(trial)render();
+  }
+  function useLocalFit(exactBytes) {
+    if(exactBytes.byteLength>128*1024)throw Error("Choose a model under 128 KiB.");
+    const item=JSON.parse(new TextDecoder("utf-8",{fatal:true}).decode(exactBytes));
+    const loaded=api.checkFit(item,bundled.protocol_sha256);
+    for(const key of ["population_sha256","baseline_sha256","baseline_protocol_sha256"]){
+      if(loaded[key]!==bundled[key])throw Error("Choose weights built with this version of the reader tools.");
+    }
+    useFit(loaded,"Local model · "+modelOrigins[loaded.fit_origin]+" (from the model record)",exactBytes);
   }
   el("model-file").addEventListener("change",async e=>{
     const input=e.currentTarget,file=input.files[0];if(!file)return;const token=++modelToken;
@@ -156,13 +267,8 @@
     try{
       if(file.size>128*1024)throw Error("Choose a model under 128 KiB.");
       const exactBytes = await file.arrayBuffer();
-      const item = JSON.parse(new TextDecoder("utf-8", {fatal: true}).decode(exactBytes));
       if(token!==modelToken)return;
-      const loaded=api.checkFit(item,bundled.protocol_sha256);
-      for (const key of ["population_sha256", "baseline_sha256", "baseline_protocol_sha256"]) {
-        if (loaded[key]!==bundled[key]) throw Error("Choose weights built with this version of the reader tools.");
-      }
-      useFit(loaded,"Local model · "+modelOrigins[loaded.fit_origin]+" (from the file label)",exactBytes);
+      useLocalFit(exactBytes);
     }catch(error){if(token===modelToken){
       input.value="";
       el("fit-status").textContent="Could not load model. Active model: "+modelLabel+". "+error.message;
@@ -175,9 +281,33 @@
     try { useFit(bundled,bundledLabel,bands.bundledFitBytes(bundled)); }
     catch (error) { el("fit-status").textContent=error.message; }
   });
+  function setupFitter() {
+    const fitter=globalThis.CemhseyBrowserFit;
+    if(typeof fitter?.mount!=="function")return;
+    const disclosure=el("fit-local");
+    const openFromLink=()=>{if(location.hash==="#fit-local")disclosure.open=true;};
+    const mount=()=>{
+      if(!disclosure.open)return;
+      disclosure.removeEventListener("toggle",mount);
+      fitter.mount(el("embedded-fit"),{onApply:exactBytes=>{
+        useLocalFit(exactBytes);
+        modelToken++;
+        el("model-file").value="";
+      }});
+    };
+    disclosure.addEventListener("toggle",mount);
+    window.addEventListener("hashchange",openFromLink);
+    openFromLink();
+    mount();
+  }
   scoreButton.addEventListener("click",async()=>{
     if(!trial)return;
     if(scoring){clearScore();el("score-status").textContent="Scoring cancelled.";return;}
+    const overlap=bands.trainingOverlap();
+    if(overlap==="checking"){
+      el("score-status").textContent="Wait for the fitting packet check, then score this trial.";
+      return;
+    }
     clearScore();
     const token=++scoreToken;
     scoring=true;
@@ -196,7 +326,9 @@
         item.below + " / " + item.above, prediction(item.width), prediction(item.penalty), prediction(item.score)
       ]));
       el("interval-scores").hidden = result.bands.length === 0;
-      el("score-status").textContent = source + " · " + total + " matched cutoffs." +
+      const fitScope=overlap==="matched"?" Fitting recording (in-sample).":
+        overlap==="unknown"||overlap==="unavailable"?" Training overlap is unknown.":"";
+      el("score-status").textContent = source + " · " + total + " matched cutoffs." + fitScope +
         (result.bandError ? " " + result.bandError : result.bands.length ? "" : " Point forecasts only.");
     }catch(error){if(token===scoreToken)el("score-status").textContent=error.message;}
     finally{if(token===scoreToken){scoring=false;scoreButton.textContent="Score this trial";}}
@@ -204,7 +336,10 @@
   try{
     api.channelLocations(maps);
     api.checkFit(bundled);bands.setFit(bundled,bands.bundledFitBytes(bundled));for(const [i,g] of maps.entries()){const option=document.createElement("option");option.value=String(i);option.textContent="Grid "+g.grid_id+" · "+g.site_right_forearm;gridSelect.append(option);}
-    el("example").disabled=false;el("file").disabled=false;el("model-file").disabled=false;el("fit-status").textContent=bundledLabel+".";
-    el("status").textContent="Choose a local packet or try an invented pinch.";
+    example.disabled=false;packetFile.disabled=false;el("model-file").disabled=false;el("fit-status").textContent=bundledLabel+".";
+    matConfirm.disabled=!mat;
+    matFile.disabled=!mat || !matConfirm.checked;
+    status.textContent=mat?"Choose a local trial or try an invented pinch.":"To read MATLAB files, reopen the complete reader. JSON packets and the invented pinch are available.";
   }catch(error){el("status").textContent="The reader could not open its bundled fits and electrode map. Extract the complete download.";}
+  setupFitter();
 })();

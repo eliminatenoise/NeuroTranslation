@@ -1,0 +1,17 @@
+# Fit the four pinch forecasts in a browser
+
+Open one original recording to inspect a pinch. To fit new weights, open **Fit a local model** in the same reader and choose 12 original MATLAB files from Session 5, Task 2. This is the two-finger pad-to-pad pinch at a 30% target in CEMHSEY GRASP. Supply both repeats on recording days 1 and 2 for three people. Confirm the task against the source archive. A MATLAB array shape alone cannot identify the grasp or authenticate a renamed file. [Open the fitting panel](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/#fit-local) · [Original recording study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12354741/)
+
+## What goes into the fit?
+
+The browser reads each trial on your device. It takes the first 6,000 normalized force readings and calculates root mean squared amplitude for each of 320 surface electrodes in 594 guarded measurement windows. The scalar MVC field in the release identifies the recorded maximum voluntary contraction. The gauge series already contains normalized force, so the reader uses those values directly. Older and newer windows are paired at 592 cutoffs per trial. Each forecast targets the reading 24 force samples later, or 120 milliseconds on the nominal force clock. The source files alone do not settle the physical offset between sensors.
+
+The four fitted models share the same 7,104 training cutoffs. One uses recent force and the cue phase. The others add whole-forearm amplitude, the five electrode-grid profiles, and channel-rank persistence in that order. Each fit standardizes its feature columns using the training rows. A constant column gets a scale of one. The regression predicts the change from the last force value, using a ridge penalty of 0.01 on the mean squared loss. The saved weights can also be loaded by the existing single-trial reader. [Feature definitions and study controls](PROTOCOL.md) · [Python fitting implementation](python/fit_local.py)
+
+Choose **Use this fit in the reader** to apply the exact weights you can download. The fit records a fingerprint of each of its 12 training packets. That lets the reader recognize the same numerical input after renaming or conversion. It labels scores on those inputs as in-sample and keeps them out of local interval calibration. Use separate recordings to calibrate the widths, then different recordings again to evaluate them. The fingerprints cannot establish whether two distinct files came from different people. Keep the saved fit and its fingerprints private. Previously saved fits without training fingerprints can still produce point forecasts.
+
+## How closely did the two implementations agree?
+
+For one archived training trial, the browser matched the Python converter byte for byte on all 6,000 force values and all 190,080 electrode summaries. On a separate check of the fitting software, the browser used the same 12 training recordings as the previously frozen Python reference. Across all four models, the largest absolute difference in fitted parameters was 2.49 × 10⁻¹⁴. On two separately constructed numerical trials, the largest forecast difference was 1.37 × 10⁻¹⁴ MVC fraction. The browser fit ran offline. No participant record or study-fitted weight file accompanies the public download.
+
+These checks answer whether the browser reproduces the computation. For measured forecast error on other people, see the [five-grid evaluation](README.md). For measured coverage of bands around those forecasts, see the [interval study](../cemhsey-intervals/README.md).

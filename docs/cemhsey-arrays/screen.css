@@ -36,8 +36,12 @@ th,td{padding:.38rem .35rem;border-bottom:1px solid #c9d6ce;text-align:right}th:
 .band-values{max-width:34rem}.band-values th,.band-values td{overflow-wrap:anywhere}
 .wide-table{max-width:100%;overflow-x:auto}
 .wide-table table{min-width:42rem}
-#calibration-confirm{flex-shrink:0}
-#calibration-status:empty,#band-status:empty{display:none}
+#calibration-confirm,#mat-confirm{flex-shrink:0}
+#mat-file{margin:.25rem 0 1rem}
+.archive-confirm{margin:.65rem 0 .8rem}
+#mat-progress{width:min(14rem,100%);height:1rem;accent-color:#17695e}
+#import-progress{margin:.65rem 0}
+#calibration-status:empty,#band-status:empty,#training-status:empty{display:none}
 @media(max-width:520px){.forecast-controls{grid-template-columns:1fr}}
 
 .electrode-table-scroll{max-width:100%;overflow-x:auto}

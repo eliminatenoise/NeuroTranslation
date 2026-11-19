@@ -17,6 +17,23 @@
   const save = el("save-profile");
   const canvas = el("forecast-plot");
   const schemeLabel = {pooled: "All cutoffs", by_issue_phase: "Matching cue phase"};
+  const trainingPackets = fit => fit?.fit_origin === "user_supplied_local" ? fit.training?.packet_sha256 : undefined;
+  const trainingText = {
+    checking: "Checking this trial against the fitting packets…",
+    matched: "Fitting recording (in-sample). Point errors describe data used to fit these weights.",
+    distinct: "The packet differs from the exact fitting packets. Check whether its person or source recording overlaps.",
+    unknown: "Training overlap is unknown. These weights have no saved fitting packet fingerprints.",
+    unavailable: "Training overlap could not be checked in this browser."
+  };
+
+  function validateTraining(fit) {
+    const list = trainingPackets(fit);
+    if (list === undefined) return;
+    if (!Array.isArray(list) || list.length !== 12 || new Set(list).size !== 12 ||
+        !list.every(id => typeof id === "string" && /^[a-f0-9]{64}$/.test(id))) {
+      throw Error("The fitted model needs 12 distinct fitting packet fingerprints.");
+    }
+  }
 
   function setup(writeRows, onProfileChange) {
     let bundled = null;
@@ -43,13 +60,32 @@
     let reveal = false;
     let lastPlot = [];
 
+    function trainingOverlap() {
+      if (!trial || invented || fit?.fit_origin !== "user_supplied_local") return null;
+      const members = trainingPackets(fit);
+      if (!members) return "unknown";
+      if (checkingTrial) return "checking";
+      if (!trialIdentity) return "unavailable";
+      return members.includes(trialIdentity) ? "matched" : "distinct";
+    }
+
+    function profileUsesTraining(profile) {
+      const members = trainingPackets(fit);
+      return members && profile.calibration_packet_sha256?.some(id => members.includes(id));
+    }
+
     function availability() {
       if (!fit || checkingFit) return {note: "Verifying which calibration belongs to these weights…"};
       if (!fitHash) return {note: "Bands need a verifiable copy of the active fit. Point forecasts are available."};
+      const overlap = trainingOverlap();
+      if (overlap === "matched" || overlap === "checking" || overlap === "unavailable") {
+        return {note: overlap === "matched" ? "Calibration bands are withheld for the fitting recording." : trainingText[overlap]};
+      }
       if (!selected) return {note: "Choose a profile for these weights to see bands."};
       if (!math.matches(selected, fit, fitHash)) {
         return {note: "This calibration belongs to a different fit. Point forecasts are available."};
       }
+      if (profileUsesTraining(selected)) return {note: "This calibration includes a fitting packet. Choose separate calibration trials."};
       if (trial && !math.compatibleTrial(selected, invented)) {
         return {note: invented ? "Bands for local recordings are hidden on the invented pinch." :
           "The invented profile applies only to the invented pinch. Load or make a calibration profile for local packets."};
@@ -88,6 +124,8 @@
     function render() {
       updateControls();
       const {profile, note} = availability();
+      const trainingStatus = trainingText[trainingOverlap()] ?? "";
+      if (el("training-status").textContent !== trainingStatus) el("training-status").textContent = trainingStatus;
       const origin = profile ? math.origins[profile.profile_origin] : null;
       const phase = math.phaseAt(60 + 10 * index);
       const count = profile ? schemeChoice.value === "pooled" ? profile.pooled_count : profile.phase_counts[phase] : 0;
@@ -187,7 +225,7 @@
       }).catch(() => {}).finally(() => {
         if (request !== trialToken) return;
         checkingTrial = false;
-        if (selected?.profile_origin === "user_supplied_local") onProfileChange();
+        if (selected?.profile_origin === "user_supplied_local" || trainingPackets(fit)) onProfileChange();
         refresh();
       });
     }
@@ -211,6 +249,7 @@
         const profile = math.validate(JSON.parse(await file.text()));
         if (request !== profileToken) return;
         if (!math.matches(profile, fit, fitHash)) throw Error("This calibration does not match the exact active fit.");
+        if (profileUsesTraining(profile)) throw Error("This calibration includes a fitting packet. Choose separate calibration trials.");
         changeProfile(profile);
         el("calibration-status").textContent = "";
       } catch (error) {
@@ -269,6 +308,7 @@
             const record = api.packet(JSON.parse(await file.text()), activeFit.protocol_sha256);
             const id = await math.packetIdentity(record);
             if (!isCurrent()) return;
+            if (trainingPackets(activeFit)?.includes(id)) throw Error("A calibration packet was used to fit these weights.");
             if (id === assessmentIdentity) throw Error("The active assessment packet is in the calibration set.");
             if (identities.has(id)) throw Error("The calibration set contains a repeated packet.");
             identities.add(id);
@@ -312,7 +352,7 @@
     else globalThis.addEventListener("resize", draw);
 
     return {
-      setFit, setTrial, schemeLabel,
+      setFit, setTrial, schemeLabel, validateTraining, trainingOverlap,
       render(nextIndex, showReadings) {
         index = nextIndex;
         reveal = showReadings;

@@ -1,0 +1,23 @@
+main.standalone-fit { max-width: 54rem; }
+
+.fit-files {
+  margin: .45rem 0 1.15rem;
+  width: 100%;
+  max-width: 25rem;
+}
+
+.fit-actions { gap: .7rem; }
+
+.fit-progress {
+  display: block;
+  margin-top: .95rem;
+  width: min(100%, 28rem);
+  height: 1rem;
+  accent-color: #17645d;
+}
+
+.fit-status { min-height: 1.5rem; }
+
+@media (max-width: 36rem) {
+  .fit-actions button { min-height: 2.6rem; }
+}

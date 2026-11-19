@@ -2,7 +2,7 @@
 
 The earlier pinch study reduced 320 channels of forearm muscle activity to four amplitude features. This experiment keeps the five grid identities and asks whether their relative activity improves a forecast of the same later dynamometer reading. The comparison uses new evaluation participants and new recording-day indices. [Prespecified protocol](PROTOCOL.md) · [Channel numbering and grid coordinates](channel-map.json) · [Acquisition study](https://doi.org/10.1038/s41597-025-05733-y) · [Earlier whole-forearm study](../cemhsey-pinch/README.md)
 
-Choose an electrode to compare its earlier and later activity, then reveal the force reading for that cutoff. The example uses invented signals and weights. To inspect your own recording, open the downloaded reader and choose a converted local trial. [Open the array reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/) · [Download the offline reader and local fitting tools](downloads/CEMHSEY-Array-Reader.zip)
+Choose an electrode to compare its earlier and later activity, then reveal the force reading for that cutoff. The example uses invented signals and weights. To inspect your own recording, open the reader and select the original Session 5, Task 2 MATLAB file or a converted array packet. [Open the array reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/) · [Download the offline reader and local fitting tools](downloads/CEMHSEY-Array-Reader.zip)
 
 ## What did the five grids add?
 
@@ -20,3 +20,9 @@ The native-grid model averaged 0.00516591 MVC fraction in absolute error. Interl
 Each trial contributed 592 forecasts at a nominal horizon of 24 force samples (120 ms). The held panel covers 16 trials from four people on two indexed days, for 9,472 forecasts per method. A person contributes repeated observations. The ranges come from resampling the four people while keeping both days together. Changing both people and days at evaluation leaves their separate effects unresolved. The released array map locates each electrode on its own sheet. A physiological timing claim would require an independent measurement of the offset between devices.
 
 [Full aggregate, including phase scores and fixed-fit controls](RESULTS.json) · [Prespecified comparison](PROTOCOL.md) · [Original acquisition study](https://doi.org/10.1038/s41597-025-05733-y)
+
+## Work with the original recordings
+
+Open the original Session 5, Task 2 MATLAB trial in the browser to inspect the two guarded measurement windows. The earlier Python converter and compatible array packets remain supported. To train the four reader forecasts on your own study set, open the local fitting panel. It accepts days 1 and 2 and both repeats for three people. Use different recordings to assess a fit. [Open the array reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/) · [Fit from original recordings](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/#fit-local) · [Original acquisition and task conventions](https://pmc.ncbi.nlm.nih.gov/articles/PMC12354741/)
+
+[Browser fitting method and numerical agreement](BROWSER-FITTING.md)

@@ -41,10 +41,10 @@
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
   "experimental_previews": {
     "data_companion": {
-      "version": "2026-11-19 grip-force browser navigation",
+      "version": "2026-11-19 source-specific recording readers and local MAT fitting",
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
-      "buildId": "d4915a6997132b045e9706ddf362c5bde1d1aa0c3d3ff82bdb2aaeb4f2f43d9b",
+      "buildId": "dbbd5e7a04c656bc0fa672b13ce3a873b1c82ac9fda371deab877ba1344133fa",
       "meaning": "Import and inspect recordings locally. Replay the R1 cohort fit, or compare the fixed and personally calibrated models on an imported R2 trial. Full R2 trials are checked against their archived sample clock and four selected input streams. Aggregate evidence is shown separately.",
       "hosting": "Prepared static main/docs payload; actual Pages deployment/readback is verified separately",
       "study": "benchmarks/scalp-eeg-palm-history",
@@ -58,15 +58,17 @@
         "original_archive_and_emg": "docs/wrist-forearm/index.html",
         "daily_activity_wrist_angles": "docs/daily-wrist/index.html"
       },
-      "previous_cached_build": "8eef5a65623f2c11e99c1aae3374a033f1c34fda9414a03d13c8071b0ae5b313",
+      "previous_cached_build": "d4915a6997132b045e9706ddf362c5bde1d1aa0c3d3ff82bdb2aaeb4f2f43d9b",
       "force_navigation": {
         "grip_force": "docs/grip-force/index.html",
         "contact_force": "docs/contact-force/index.html"
       },
       "navigation_overlay": {
-        "version": "2026-11-19 contact-triggered comparison link",
         "entry_source": "demo/src/index.html",
-        "scope": "Navigation update. The cached runtime asset names, bytes and buildId retain their previous identity."
+        "scope": "The source chooser is part of the rebuilt, content-addressed Pages companion. The ordinary generic CSV/JSON inspector remains available.",
+        "recording_sources": 6,
+        "entry": "docs/index.html#study-readers",
+        "fit": "docs/cemhsey-arrays/index.html#fit-local"
       }
     },
     "papers": {
@@ -592,6 +594,40 @@
       "evaluation_participants": 2,
       "cutoffs_per_method": 4736,
       "arms": 6
+    },
+    "cemhsey_original_browser": {
+      "reader": {
+        "path": "docs/cemhsey-arrays/index.html",
+        "bytes": 12336,
+        "sha256": "b7a5f0c15d5d178210440686e4eae7f0238cd1d8da10961603572d782fbfd1d9"
+      },
+      "single_trial": {
+        "path": "docs/cemhsey-arrays/mat-import.js",
+        "bytes": 19157,
+        "sha256": "f0a5a08c71ea31cdd36f841ad0749d246da1d49fa8aa731ee5a846a792ced0b2"
+      },
+      "local_fit": {
+        "path": "docs/cemhsey-arrays/fit/fit.js",
+        "bytes": 16222,
+        "sha256": "8a2d8715916aaaada8f710277fc2c44f0b58adc1559047a8d39392b65d9b750a"
+      },
+      "offline": {
+        "path": "benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip",
+        "bytes": 86365,
+        "sha256": "f24eda17e4916199e117bdeec92633c08ffef2f4e9b9b228d85a4650ed32fb22"
+      },
+      "method": {
+        "path": "benchmarks/cemhsey-arrays/BROWSER-FITTING.md",
+        "bytes": 3562,
+        "sha256": "b995080a4ee3a9003f0d78edc288657212f969c90f109e6525a1258a4e0c4f5e"
+      },
+      "check": {
+        "path": "benchmarks/cemhsey-arrays/BROWSER-QUALIFICATION.json",
+        "bytes": 2890,
+        "sha256": "dd55a1a94172e3d5de2f0a95f0e416a57b352ff976715590121ebabafffc91ab"
+      },
+      "point_forecasts": 4,
+      "support": "CEMHSEY GRASP Session 5 Task 2 duplicates detected from canonical local packet contents. Training, interval calibration and evaluation are distinct."
     }
   },
   "prospective_studies": {

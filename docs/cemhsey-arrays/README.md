@@ -14,8 +14,8 @@ Extract the complete archive. Open the launcher for your operating system or ope
 | macOS | `Open Array Reader on macOS.command` |
 | Windows | `Open Array Reader on Windows.cmd` |
 
-The public bundle uses invented training signals, invented calibration trials and an invented example pinch. The example helps you see how the bands work. Scores on it describe the example. Any recorded-trial scores must come from separately authorized input and evidence. [Study and results](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-intervals/)
+The public bundle uses invented training signals, invented calibration trials and an invented example pinch. Scores on it describe the example. Recorded-trial scores come from separately authorized input and evidence. [Study and results](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-intervals/)
 
-To convert a local recording, fit the reader on your own selected trials or import or make local bands, see the local instructions. Keep original recordings, converted packets, fitted weights and derived calibration files in your private workspace. [Local tools](./LOCAL-USE.md) · [Five-grid study protocol](./PROTOCOL.md)
+Choose a compatible original MATLAB recording to read it directly. Existing array packets still open as JSON. Keep original recordings, saved packets, fitted weights and calibration files in your private workspace. [Local tools](./LOCAL-USE.md) · [Five-grid study protocol](./PROTOCOL.md)
 
 The glossary for this reader is revision 36, SHA-256 `40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406`.

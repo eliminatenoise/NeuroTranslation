@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; worker-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Fit your own model · NeuroTranslation</title>
+  <link rel="stylesheet" href="../screen.css">
+  <link rel="stylesheet" href="fit.css">
+  <script defer src="../weights.js"></script>
+  <script defer src="../array-math.js"></script>
+  <script defer src="../interval-math.js"></script>
+  <script defer src="../mat-import.js"></script>
+  <script defer src="ridge.js"></script>
+  <script defer src="fit.js"></script>
+</head>
+<body>
+<main class="standalone-fit">
+  <header>
+    <a class="brand" href="../index.html">← NeuroTranslation array reader</a>
+    <h1>Fit your own model</h1>
+    <p>Use your CEMHSEY pinch recordings to fit four forecasts of the change in force over 120 nominal milliseconds. Then open the new weights in the array reader.</p>
+  </header>
+  <noscript><p>Open this page with JavaScript enabled to fit models on this device.</p></noscript>
+  <div id="standalone-fit"><p role="status">Opening the fitter…</p></div>
+</main>
+</body>
+</html>

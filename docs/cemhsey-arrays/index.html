@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light"><title>Forearm electrode grids · NeuroTranslation</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
-  <link rel="stylesheet" href="screen.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; worker-src blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="stylesheet" href="screen.css"><link rel="stylesheet" href="fit/fit.css">
   <script defer src="channel-map.js"></script><script defer src="weights.js"></script>
   <script defer src="array-math.js"></script><script defer src="interval-math.js"></script>
   <script defer src="interval-profile.js"></script><script defer src="forecast-plot.js"></script>
-  <script defer src="interval-ui.js"></script><script defer src="reader.js"></script>
+  <script defer src="interval-ui.js"></script><script defer src="mat-import.js"></script>
+  <script defer src="fit/ridge.js"></script><script defer src="fit/fit.js"></script>
+  <script defer src="reader.js"></script>
 </head>
 <body><main>
   <header><p class="brand">NeuroTranslation</p><h1>Inside a forearm recording</h1>
@@ -16,22 +18,36 @@
   </header>
   <noscript><p>This offline reader needs JavaScript to open trials and calculate forecasts.</p></noscript>
   <section aria-labelledby="open-title"><h2 id="open-title">Open a trial</h2>
+    <h3>Original CEMHSEY recording</h3>
+    <p id="mat-help">Choose the adult CEMHSEY GRASP two-finger pinch at a 30% target. Check for Session 5, Task 2 and repeat 1 or 2 in the source archive. The file is read on your device.</p>
+    <label class="check archive-confirm"><input id="mat-confirm" type="checkbox" disabled> I checked that this is the Session 5, Task 2 recording</label>
+    <label for="mat-file">Choose the original MATLAB file (.mat)</label>
+    <input id="mat-file" type="file" accept=".mat" aria-describedby="mat-help" disabled>
     <div class="actions"><button id="example" disabled>Try an invented pinch</button>
-      <label>Choose a local array packet <input id="file" type="file" accept=".json,application/json" disabled></label></div>
+      <label>Open an array packet (.json) <input id="file" type="file" accept=".json,application/json" disabled></label></div>
     <p id="status" role="status">Opening the reader…</p>
-    <details id="instructions"><summary>Use an original MATLAB recording</summary>
-      <p>The <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip">offline reader ZIP</a> includes a Python converter for the CEMHSEY GRASP two-finger pinch at a 30% target. Open the converted JSON here. Your packet and forecast weights stay in this browser.</p>
+    <div id="import-progress" class="actions" hidden>
+      <progress id="mat-progress" aria-label="Import progress"></progress>
+      <button id="cancel-trial" type="button" class="secondary">Cancel import</button>
+    </div>
+    <button id="save-trial" type="button" class="secondary" hidden>Save a local array packet</button>
+    <details id="instructions"><summary>Offline reader and Python tools</summary>
+      <p>Extract the <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip">offline reader ZIP</a> and open the launcher for your computer. It includes the browser reader, local instructions and a Python converter. Saved packets contain force and electrode summaries. Keep them with your private files.</p>
     </details>
     <details id="model-controls"><summary>Choose forecast weights</summary><p id="fit-status" role="status"></p>
       <div class="actions"><label>Local fitted model <input id="model-file" type="file" accept=".json,application/json" disabled></label>
       <button id="reset-model" class="secondary" disabled>Use bundled weights</button></div></details>
+    <details id="fit-local"><summary>Fit your own model</summary>
+      <div id="embedded-fit"></div>
+      <p><a href="fit/index.html">Open the separate fit page</a></p>
+    </details>
     <details id="profile-controls"><summary>Choose or make calibration bands</summary>
       <p>A calibration file holds band widths and the fingerprint of the exact weights that produced them.</p>
       <div class="actions"><label>Local calibration profile <input id="profile-file" type="file" accept=".json,application/json" disabled></label>
       <button id="reset-profile" class="secondary" disabled>Use bundled profile</button></div>
       <p id="profile-status" class="hint" role="status"></p>
       <details><summary>Calibrate on your own converted packets</summary>
-        <p>Choose complete trial packets that you are authorized to use. Keep them separate from the recordings used to fit your model and from the trial you want to assess. A saved profile keeps packet fingerprints so the reader can flag a reused calibration packet after reopening. Keep the profile private and choose independent trials.</p>
+        <p>Choose complete array packets you are authorized to use. You can save a packet after opening a MATLAB trial. Keep calibration trials separate from the recordings you used to fit the model and from the trial you want to assess. The profile stores packet fingerprints so the reader can flag reuse after reopening. Keep the profile private.</p>
         <label>Calibration packets <input id="calibration-files" type="file" accept=".json,application/json" multiple disabled></label>
         <label class="check"><input id="calibration-confirm" type="checkbox"> These trials are separate from my training and assessment trials</label>
         <div class="actions"><button id="calibrate" class="secondary" disabled>Calculate local bands</button>
@@ -48,6 +64,7 @@
     <section aria-labelledby="forecast-title">
       <h2 id="forecast-title">How far could the force move?</h2>
       <p id="origin" class="hint"></p>
+      <p id="training-status" class="hint" role="status"></p>
       <div class="forecast-controls">
         <label>Forecast <select id="band-model">
           <option value="persistence">Last force reading</option>
