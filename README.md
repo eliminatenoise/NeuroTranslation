@@ -66,7 +66,7 @@ At the 50% pinch target, current force plus the scheduled change beat the fitted
 
 What does one practice attempt buy on the next recording day? The two-day study compares an earlier fit with a fresh fit on exactly the same pinch. [Compare next-day forecasts](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-carry/) · [Save and reuse a practice fit locally](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/) · [Results and protocol](benchmarks/cemhsey-carry/README.md)
 
-Can the rising and falling portions of a pinch use different corrections learned from other people? [Read the prespecified comparison](benchmarks/cemhsey-phase/README.md)
+Six pinches fitted a group correction and six from other participants tested it. The study compares one correction with separate ones for rising and falling force cues. [Explore the results](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-phase/) · [Fit the model locally](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-phase/reader/) · [Methods and scores](benchmarks/cemhsey-phase/README.md)
 
 ## Read the papers
 

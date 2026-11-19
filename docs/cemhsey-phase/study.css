@@ -1,0 +1,12 @@
+:root{color-scheme:light;font:100%/1.52 Inter,"Segoe UI",Arial,sans-serif;font-variant-numeric:tabular-nums;color:#20312e;background:#f8f9f6}
+*{box-sizing:border-box}body{margin:0}main{max-width:68rem;margin:auto;padding:1.5rem clamp(1rem,5vw,3rem) 3rem}header{border-top:.33rem solid #23685c;padding:1.1rem 0 1.65rem}
+a{color:#155c59;text-underline-offset:.2em}.brand{font-weight:750;text-decoration:none}h1,h2,h3{line-height:1.12;letter-spacing:-.025em}h1{font-size:clamp(2.3rem,6vw,4.65rem);max-width:18ch;margin:.85rem 0}h2{font-size:clamp(1.55rem,3.4vw,2.1rem);margin:0 0 .7rem}h3{font-size:1.08rem;margin:0}
+p{max-width:74ch}header p{font-size:1.12rem;max-width:68ch;margin:0}section{border-top:1px solid #bac9c4;padding:1.45rem 0}.controls{display:flex;flex-wrap:wrap;gap:.75rem 1.2rem}
+label{display:inline-grid;grid-template-columns:minmax(0,1fr);max-width:100%;min-width:0;gap:.2rem;font-weight:650}select,button{font:inherit;color:inherit}select{min-width:0;max-width:100%;min-height:44px;background:#fff;border:1px solid #839f94;border-radius:.35rem;padding:.35rem .6rem}
+:focus-visible{outline:3px solid #b45419;outline-offset:2px}.explain{color:#42554c}
+.group{padding:.8rem 0 1rem;border-top:1px solid #ccd8d0}.bars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:.55rem}
+.bar{min-width:0;display:grid;gap:.2rem}.bar-label{font-size:.9rem}.bar-value{font-weight:720}.track{height:.65rem;background:#e1e6e0;border-radius:.18rem;overflow:hidden}.track svg{display:block;width:100%;height:100%}
+#summary{border-left:4px solid #357264;padding:.3rem 0 .3rem .85rem}.scroll{max-width:100%;overflow:auto;border:1px solid #bfcdc5;background:#fff}table{border-collapse:collapse;min-width:39rem;width:100%;font-size:.94rem}th,td{text-align:right;padding:.48rem .65rem;border-bottom:1px solid #d9e2db}thead{background:#e8efea}tr>:first-child{text-align:left}tbody th{font-weight:560}td small{white-space:nowrap}tbody tr[data-phase].selected{background:#e5f1e9}
+.phase-button{min-height:36px;background:transparent;border:1px solid transparent;text-decoration:underline;text-underline-offset:.2rem;color:#125959;cursor:pointer;padding:.12rem .2rem}.phase-button[aria-pressed=true]{font-weight:750}
+footer{display:flex;flex-wrap:wrap;gap:.7rem 1.5rem;padding:1.25rem 0;border-top:1px solid #bac9c4}
+@media(max-width:37rem){.bars{gap:.55rem}.bar-label{min-height:2.65em;font-size:.86rem}.controls{display:grid}.controls label{display:grid}.bar-value{font-size:.91rem}.scroll{font-size:.86rem}}

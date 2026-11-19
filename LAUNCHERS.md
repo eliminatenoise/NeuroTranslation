@@ -63,3 +63,9 @@ The pinch-force reader and its fitting tool open directly from the same extracte
 [Download the pinch practice reader](docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip) and extract the whole folder. Open **Open Pinch Transfer on Windows**, **Open Pinch Transfer on macOS** or **Open Pinch Transfer on Linux**. You can also open `index.html` directly. The built-in example uses invented recordings and weights.
 
 To compare your own recording days, choose the same point-model file and force target on both days. Fit the correction from the earlier first repeat, save the practice file and keep its separate key. Reopen the file and key alongside the later recordings to compare the earlier correction with a fresh one. The reader processes them locally. [Online reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/) · [Measured two-day study](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-carry/)
+
+## Fit separate squeeze and release corrections
+
+[Download the population pinch reader](docs/cemhsey-phase/reader/CEMHSEY-Population-Forecasts.zip) and extract the entire folder. Choose **Open Pinch Forecasts on Windows**, **Open Pinch Forecasts on macOS** or **Open Pinch Forecasts on Linux**. Opening `index.html` directly also starts the reader. The built-in example runs offline with invented recordings and weights.
+
+Use both repeat files from each of three fitting participants to learn the corrections. Then open a repeat from a different participant to see how the eleven forecasts compare. You can keep the correction file and its key for later sessions. The reader processes the selected files locally. [Online tool](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-phase/reader/) · [Measured group comparison](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-phase/)

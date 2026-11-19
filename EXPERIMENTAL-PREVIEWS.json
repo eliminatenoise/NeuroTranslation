@@ -18,18 +18,18 @@
     },
     {
       "path": "LAUNCHERS.md",
-      "bytes": 10473,
-      "sha256": "a1f55d47d67ce1ea7e3a700f37f99e417f5607d5d7f85a882e148a14ab201a17"
+      "bytes": 11371,
+      "sha256": "a14dc5ce5710d592b56aa1959610e2a767f7cd8a18a72b81be1a79f3f3c42bc6"
     },
     {
       "path": "PROJECT-CONTEXT.json",
-      "bytes": 52472,
-      "sha256": "3f1a79febf5f554a483f15414badc02047b050687b77b2305d8607a7946b0bab"
+      "bytes": 57510,
+      "sha256": "16b207f0a476ef58709f2c85439a04c8a2f7e0dfce8af8a6d0a79db37442bc96"
     },
     {
       "path": "README.md",
-      "bytes": 21865,
-      "sha256": "da0c7743a0b0a0d909b6f198e5d4ef20b47d012b1489217ef86aadbdb49dba30"
+      "bytes": 22111,
+      "sha256": "d654c1ba0ef2fee6dad0d20fc7423a62bdf0d0de9a283b7a5f43df5d9eb88496"
     },
     {
       "path": "benchmarks/cemhsey-arrays/BROWSER-FITTING.md",
@@ -158,13 +158,18 @@
     },
     {
       "path": "benchmarks/cemhsey-phase/PUBLIC-REPORTING.md",
-      "sha256": "bdd81c63eb0516e481d9a6b1a9e5a09cb583e89590a2c239a40f5bde3be765bf",
-      "bytes": 1246
+      "bytes": 1246,
+      "sha256": "bdd81c63eb0516e481d9a6b1a9e5a09cb583e89590a2c239a40f5bde3be765bf"
     },
     {
       "path": "benchmarks/cemhsey-phase/README.md",
-      "sha256": "cc53026ec81aab9fa9f9a32b116a58363a4c071e276dfabe63c0f07ad1edd114",
-      "bytes": 1043
+      "bytes": 4083,
+      "sha256": "3cd2462fdd7c878e0912a089b55f089c92ff70e57d34cf32eb61212ab0f9142b"
+    },
+    {
+      "path": "benchmarks/cemhsey-phase/RESULTS.json",
+      "bytes": 25933,
+      "sha256": "9edc43b1ec96e9dbfb87833d4b1d90f704d5b3860425c3595436f15a5f66a3e7"
     },
     {
       "path": "benchmarks/cemhsey-pinch/BUNDLED-FIT.json",
@@ -1118,8 +1123,8 @@
     },
     {
       "path": "demo/src/index.html",
-      "bytes": 26549,
-      "sha256": "d217f0c7003519035aedd68e0e28c78218eac2000effbd31291e051a7b9e1844"
+      "bytes": 27184,
+      "sha256": "448dfb460a375668e3be53870b12e764422a65040025c17f76a72cca0d342bbf"
     },
     {
       "path": "demo/src/style.css",
@@ -1153,8 +1158,13 @@
     },
     {
       "path": "docs/START.html",
-      "bytes": 15989,
-      "sha256": "9f5156c354017399c2d2874df403aa47d260348fdc6f683c34cb987b679567fd"
+      "bytes": 16176,
+      "sha256": "2039fa9663e2b27594d89ae53e817ea491140d17c9d046d2a6f50051ff6da6b2"
+    },
+    {
+      "path": "docs/app.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "bytes": 21316,
+      "sha256": "9d551ca328ed2d9b479c9d8cb1f39b828af38cbc45f822772cb3a752fac9a8f3"
     },
     {
       "path": "docs/app.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -1194,7 +1204,12 @@
     {
       "path": "docs/build-manifest.json",
       "bytes": 6930,
-      "sha256": "f92f51cdf0f698e01dd4bcf6d48dcc20db85297df2e95e790114913d3b6bf1c6"
+      "sha256": "5bdfbbeca96bf8a0251dcda6b59c7fd049994c0d4d1475692f6395cde1455bec"
+    },
+    {
+      "path": "docs/calibration-summary.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.json",
+      "bytes": 2664,
+      "sha256": "c9d73ef23493f894eb7fba96460b7fcbcddbd74d604f6d2a75fab976f4a20210"
     },
     {
       "path": "docs/calibration-summary.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.json",
@@ -1230,6 +1245,11 @@
       "path": "docs/calibration-summary.dbbd5e7a04c656bc0fa672b13ce3a873b1c82ac9fda371deab877ba1344133fa.json",
       "bytes": 2664,
       "sha256": "c9d73ef23493f894eb7fba96460b7fcbcddbd74d604f6d2a75fab976f4a20210"
+    },
+    {
+      "path": "docs/calibration-view.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "bytes": 4560,
+      "sha256": "aa9fc18d0747b9f3946d03acafc9fa15833ebaa53cc5d1baa106b3c9c9e33c17"
     },
     {
       "path": "docs/calibration-view.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -1432,6 +1452,131 @@
       "bytes": 7979
     },
     {
+      "path": "docs/cemhsey-phase/contrasts.csv",
+      "bytes": 10077,
+      "sha256": "8ef1b4754ad3aa7b8c34411ef8cca4ccd4b46df872c0268e387c5cf2f28b5edf"
+    },
+    {
+      "path": "docs/cemhsey-phase/data.js",
+      "bytes": 25963,
+      "sha256": "efed96c6117011890153f503b15900acc573799b5a4f490124f798ee081ee166"
+    },
+    {
+      "path": "docs/cemhsey-phase/index.html",
+      "bytes": 4930,
+      "sha256": "11f0d24642534ecf6770e69ce4d0ab2426f8044113e2efcef59d24ace9472cd8"
+    },
+    {
+      "path": "docs/cemhsey-phase/metrics.csv",
+      "bytes": 9546,
+      "sha256": "9f1efa9a8327c7332f522a68983f7060afab2fe11f424fe1099c6074b2962fa6"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/CEMHSEY-Population-Forecasts.zip",
+      "bytes": 44361,
+      "sha256": "ec43ac040b38d1fb8322a9bea1a8226ca4262bce95128107fc98b4edd398408d"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/LICENSE",
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/Open Pinch Forecasts on Linux.sh",
+      "bytes": 107,
+      "sha256": "0682da46271570edf3f5f4119c93e2ff1914a4ea0558ea653b7d090a705fee67"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/Open Pinch Forecasts on Windows.cmd",
+      "bytes": 39,
+      "sha256": "0edbd8f5b22789c3f11971244871f1b36e23f9e710fdc8b25ca6429165ec81be"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/Open Pinch Forecasts on macOS.command",
+      "bytes": 112,
+      "sha256": "1a00e230edaae367113dc258120391cafc3526d982cf58021c14539d06d8e63c"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/README.md",
+      "bytes": 6243,
+      "sha256": "76091cfda2317b7603f01cff9c772a6a2d17d4425d313b2f47bfe1d0468fe4bf"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/array-math.js",
+      "bytes": 9435,
+      "sha256": "c11a6c213a144bed51db3d2fcea73862ea9bb108c0f99a388e1cdee0a33a6206"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/channel-map.js",
+      "bytes": 6937,
+      "sha256": "015fd8d0228e4c8ebe74ee414efbc0de2fbf3e6b0fcee01863620a5140075e6a"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/forecast-plot.js",
+      "bytes": 5426,
+      "sha256": "fccdd9362e39b1768c41ee7a3d0cea294c0300526e78f4e2a445bddd44222e84"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/index.html",
+      "bytes": 7069,
+      "sha256": "3c8550fec6cad512d9becdcb241d4f66bfe06726a133d5232164a639ec986fcd"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/interval-math.js",
+      "bytes": 9460,
+      "sha256": "5dd26a30a01910ba9d81774eee66633cefbc96431f8e1f2bafaec83b383a8743"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/mat-import.js",
+      "bytes": 19157,
+      "sha256": "f0a5a08c71ea31cdd36f841ad0749d246da1d49fa8aa731ee5a846a792ced0b2"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/phase.js",
+      "bytes": 5345,
+      "sha256": "e9fdd59cd4da195a9d1352fc3cb9e382f6a2bde35ab199337fe1a329b5cfc1fd"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/population.js",
+      "bytes": 6481,
+      "sha256": "33c74049b8bfdcddb85a088b86b6b255cb49e9e95ab360a5b59a10daac0c24e5"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/reader.css",
+      "bytes": 3401,
+      "sha256": "cd765078f6a77980af8ff1abf8e1cce5c502b50559da6f7fb42b5b726604df6a"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/reader.js",
+      "bytes": 14685,
+      "sha256": "7ccf2c8d8baa8562b5d786de9d44f30d24ea115bdbf078f91711085f7bba1c47"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/sources.js",
+      "bytes": 3978,
+      "sha256": "5a9c3ab1defe026338803307afbaa62420bc4c94b07ef3e0d6e5850dbce20220"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/transfer-math.js",
+      "bytes": 5032,
+      "sha256": "b983b11e5df33a7943daabb12c4987d9cc70d8451161ecaa72e24d56ef6804b9"
+    },
+    {
+      "path": "docs/cemhsey-phase/reader/weights.js",
+      "bytes": 9245,
+      "sha256": "2326653f176d2534d4af83b9c5934f75dcb592f00875e032b1fb565046f3b916"
+    },
+    {
+      "path": "docs/cemhsey-phase/study.css",
+      "bytes": 2526,
+      "sha256": "388fc3e5a1264eb5140b80e4f9b8ca9c4c9604ca961934a123f112f6a59989d7"
+    },
+    {
+      "path": "docs/cemhsey-phase/study.js",
+      "bytes": 6684,
+      "sha256": "6eb0cbb8e64c2c0b50ca7087c10948d16eccf643f10b6c8713f40105e24fc262"
+    },
+    {
       "path": "docs/cemhsey-pinch/Open Pinch on Linux.sh",
       "bytes": 107,
       "sha256": "0682da46271570edf3f5f4119c93e2ff1914a4ea0558ea653b7d090a705fee67"
@@ -1607,6 +1752,11 @@
       "sha256": "2326653f176d2534d4af83b9c5934f75dcb592f00875e032b1fb565046f3b916"
     },
     {
+      "path": "docs/compat-policy.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "bytes": 116582,
+      "sha256": "c4b86ccf4452c745e595baaeb45900f85279ba5eff6aac84a1d5fc87e298bf6c"
+    },
+    {
       "path": "docs/compat-policy.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
       "bytes": 116582,
       "sha256": "f843f7fc6391da48945525b5eebf91afe1d919c784e4840081afadeab3e23c22"
@@ -1692,6 +1842,11 @@
       "sha256": "7e887398e80adabf05994169039925003a465315c6192ba66a68c824e8109001"
     },
     {
+      "path": "docs/core.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "bytes": 26638,
+      "sha256": "1845dce4d77e66ee039c167fd232553bb6f3a8f6e1e820430583696721b3f30c"
+    },
+    {
       "path": "docs/core.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
       "bytes": 26638,
       "sha256": "1845dce4d77e66ee039c167fd232553bb6f3a8f6e1e820430583696721b3f30c"
@@ -1755,6 +1910,11 @@
       "path": "docs/daily-wrist/uji-engine.js",
       "bytes": 98348,
       "sha256": "ea76f12f7bd456967043e2f3e1879664dd619cc0eb4878dd82e827c2df66f9ec"
+    },
+    {
+      "path": "docs/datasets.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.json",
+      "bytes": 8441,
+      "sha256": "946af84785a10e2454adda11d720ca6e0c2bda36b810ce86de00883937eb3c63"
     },
     {
       "path": "docs/datasets.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.json",
@@ -1825,6 +1985,11 @@
       "path": "docs/grip-force/style.css",
       "bytes": 8239,
       "sha256": "0d7509c63749cc9734730826de73e706570e66fd770ff5e1065131ce080ef7b1"
+    },
+    {
+      "path": "docs/hash.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "bytes": 5130,
+      "sha256": "50f6794017f4d73af8775d83a22332d40e29da5511702187a4d5804995697317"
     },
     {
       "path": "docs/hash.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -2003,8 +2168,8 @@
     },
     {
       "path": "docs/index.html",
-      "bytes": 26109,
-      "sha256": "edeb2dec03f094c882751401cb61350bb358af2f8f6a8373df9d06dc291f1251"
+      "bytes": 26668,
+      "sha256": "0b353829b0306a3dd9f9859a3660a8b1eda760add6c1656e21c59831bdd31fd9"
     },
     {
       "path": "docs/launchers/Install-NeuroTranslation-Linux.sh",
@@ -2047,6 +2212,11 @@
       "sha256": "e4b4de97583c5b3c70516056cf98a99f3af49ad1853c3ad592bbeb336e9f64cc"
     },
     {
+      "path": "docs/packet-policy-bridge.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "bytes": 19918,
+      "sha256": "e7e8117e44d21c807a21cf1831cf69b19a3c2ec4b6d7da9bfb05279535c68b87"
+    },
+    {
       "path": "docs/packet-policy-bridge.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
       "bytes": 19918,
       "sha256": "1c51dec365b0e62de4581788293a09a69f2cc186d6dd27ac70bfc39614071da0"
@@ -2080,6 +2250,16 @@
       "path": "docs/packet-policy-bridge.dbbd5e7a04c656bc0fa672b13ce3a873b1c82ac9fda371deab877ba1344133fa.mjs",
       "bytes": 19918,
       "sha256": "90a20bef524da36960e34b1b82794a82285ab14a96670d9be2c14d045be97384"
+    },
+    {
+      "path": "docs/palm-model.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.json",
+      "bytes": 6775,
+      "sha256": "c9c9e6a5c357274103e339f69517ae6a11f1d90c39f1d172585ad81a38ee8337"
+    },
+    {
+      "path": "docs/palm-model.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "bytes": 22945,
+      "sha256": "ed3354ee1c78abcfb24b2f2669cac687bb6d0ed819650019006f1d49699c71ac"
     },
     {
       "path": "docs/palm-model.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.json",
@@ -2182,6 +2362,11 @@
       "sha256": "f92b251fb380f51e8ae6182bf7a2c5ab48abe52c9b419075fbc17884ef286309"
     },
     {
+      "path": "docs/plot.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "bytes": 1605,
+      "sha256": "282de0be6ac0f919902a198e9bc549a4a8c3004143062f137051a54db189cacb"
+    },
+    {
       "path": "docs/plot.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
       "bytes": 1605,
       "sha256": "282de0be6ac0f919902a198e9bc549a4a8c3004143062f137051a54db189cacb"
@@ -2215,6 +2400,11 @@
       "path": "docs/plot.dbbd5e7a04c656bc0fa672b13ce3a873b1c82ac9fda371deab877ba1344133fa.mjs",
       "bytes": 1605,
       "sha256": "282de0be6ac0f919902a198e9bc549a4a8c3004143062f137051a54db189cacb"
+    },
+    {
+      "path": "docs/policy-report-view.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "bytes": 5545,
+      "sha256": "c2bcb980f583edfe49e4fc23cb2bfda096a0238d98dae088f414f5a3720a9888"
     },
     {
       "path": "docs/policy-report-view.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -2253,8 +2443,13 @@
     },
     {
       "path": "docs/preview.html",
-      "bytes": 5764,
-      "sha256": "4cd09251880a14a496dc62cba5ce5489bbc0fcf26995bbc4373956bacfecb1e3"
+      "bytes": 5955,
+      "sha256": "c172ea66414ade65e8429c6f04360400128f9420ab985e7cf8c1fad2aaa01466"
+    },
+    {
+      "path": "docs/r2-calibration-state.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.json",
+      "bytes": 10839,
+      "sha256": "14ab9c33101f7f8eb379b646a61b391557096151d2f75ea235965281e3dd5818"
     },
     {
       "path": "docs/r2-calibration-state.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.json",
@@ -2292,6 +2487,11 @@
       "sha256": "14ab9c33101f7f8eb379b646a61b391557096151d2f75ea235965281e3dd5818"
     },
     {
+      "path": "docs/r2-replay.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "bytes": 18641,
+      "sha256": "18008a7bb9f88ec84e476e3e0d7433a82dafdd111d9b2f341f1e008462bf47ed"
+    },
+    {
       "path": "docs/r2-replay.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
       "bytes": 18641,
       "sha256": "9b01c52a736e94f6ec7dab2344c0e7eb4f3d1c7aa88746f1013832d68759f4c0"
@@ -2325,6 +2525,11 @@
       "path": "docs/r2-replay.dbbd5e7a04c656bc0fa672b13ce3a873b1c82ac9fda371deab877ba1344133fa.mjs",
       "bytes": 18641,
       "sha256": "76e2c0bbe0f8f858776a24d47c1d5792f5986261bc6e5b249400910dc231b9aa"
+    },
+    {
+      "path": "docs/r2-source.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.json",
+      "bytes": 17870,
+      "sha256": "a8068a70b4ae0fe11184d5d49741b38d49cd3f368faff9b96799dc09d0ec719c"
     },
     {
       "path": "docs/r2-source.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.json",
@@ -2362,6 +2567,11 @@
       "sha256": "a8068a70b4ae0fe11184d5d49741b38d49cd3f368faff9b96799dc09d0ec719c"
     },
     {
+      "path": "docs/r2-trial-index.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.json",
+      "bytes": 46993,
+      "sha256": "729f006faa0880031127777a95369f95a3034fc72c5e4b42e81181c93d511b48"
+    },
+    {
       "path": "docs/r2-trial-index.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.json",
       "bytes": 46993,
       "sha256": "729f006faa0880031127777a95369f95a3034fc72c5e4b42e81181c93d511b48"
@@ -2395,6 +2605,11 @@
       "path": "docs/r2-trial-index.dbbd5e7a04c656bc0fa672b13ce3a873b1c82ac9fda371deab877ba1344133fa.json",
       "bytes": 46993,
       "sha256": "729f006faa0880031127777a95369f95a3034fc72c5e4b42e81181c93d511b48"
+    },
+    {
+      "path": "docs/reasons.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "bytes": 29360,
+      "sha256": "fbc93b07cf1a1e398972aa824ab0513124cf10193bb8dc71bcfcb78a964fa762"
     },
     {
       "path": "docs/reasons.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -2432,6 +2647,11 @@
       "sha256": "fbc93b07cf1a1e398972aa824ab0513124cf10193bb8dc71bcfcb78a964fa762"
     },
     {
+      "path": "docs/replay-view.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "bytes": 15339,
+      "sha256": "04696186e78b70afdadc578c1dcc4a5550aafee2c3ffc31013d31547bc034eb5"
+    },
+    {
       "path": "docs/replay-view.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
       "bytes": 15339,
       "sha256": "e36354187313e284aa84e19f26556756bce7cdc3d511848a81c1b79a3ee1edce"
@@ -2467,6 +2687,11 @@
       "sha256": "191a115875404ddaf60ea0b5bc908181e45d556b27fe6cab0ba64fe99f2a4e03"
     },
     {
+      "path": "docs/style.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.css",
+      "bytes": 23643,
+      "sha256": "a4dbb542003cdb04d9b83cee30d87b09affed31ea26fdd4edd1533fb6b59e839"
+    },
+    {
       "path": "docs/style.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.css",
       "bytes": 22127,
       "sha256": "8675f968237d1ffe215fcd9be8348aaf8ebfdc98544174fe9e3793c3a2e4d77b"
@@ -2500,6 +2725,11 @@
       "path": "docs/style.dbbd5e7a04c656bc0fa672b13ce3a873b1c82ac9fda371deab877ba1344133fa.css",
       "bytes": 23643,
       "sha256": "a4dbb542003cdb04d9b83cee30d87b09affed31ea26fdd4edd1533fb6b59e839"
+    },
+    {
+      "path": "docs/vocabulary.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "bytes": 16853,
+      "sha256": "536396e7b0ee37b5846d84e2ad7e3a329a29c2711b80b08b0887973acf6e090a"
     },
     {
       "path": "docs/vocabulary.7a64258d835287076677f59a9445dd2fa0beb37ec82f4d607599bd67124a21fb.mjs",
@@ -4233,13 +4463,69 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "d51c7f2189c10f5e0dc12774e24a305f627443e3",
+  "previous_public_commit": "168833b6c3d3e0056cb2df0aeb9138de76e9ab84",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
+      "LAUNCHERS.md",
+      "PROJECT-CONTEXT.json",
+      "README.md",
+      "benchmarks/cemhsey-phase/DESIGN.json",
+      "benchmarks/cemhsey-phase/PROTOCOL.md",
       "benchmarks/cemhsey-phase/PUBLIC-REPORTING.md",
-      "benchmarks/cemhsey-phase/README.md"
+      "benchmarks/cemhsey-phase/README.md",
+      "benchmarks/cemhsey-phase/RESULTS.json",
+      "demo/src/index.html",
+      "docs/START.html",
+      "docs/app.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "docs/build-manifest.json",
+      "docs/calibration-summary.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.json",
+      "docs/calibration-view.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "docs/cemhsey-phase/contrasts.csv",
+      "docs/cemhsey-phase/data.js",
+      "docs/cemhsey-phase/index.html",
+      "docs/cemhsey-phase/metrics.csv",
+      "docs/cemhsey-phase/reader/CEMHSEY-Population-Forecasts.zip",
+      "docs/cemhsey-phase/reader/LICENSE",
+      "docs/cemhsey-phase/reader/Open Pinch Forecasts on Linux.sh",
+      "docs/cemhsey-phase/reader/Open Pinch Forecasts on Windows.cmd",
+      "docs/cemhsey-phase/reader/Open Pinch Forecasts on macOS.command",
+      "docs/cemhsey-phase/reader/README.md",
+      "docs/cemhsey-phase/reader/array-math.js",
+      "docs/cemhsey-phase/reader/channel-map.js",
+      "docs/cemhsey-phase/reader/forecast-plot.js",
+      "docs/cemhsey-phase/reader/index.html",
+      "docs/cemhsey-phase/reader/interval-math.js",
+      "docs/cemhsey-phase/reader/mat-import.js",
+      "docs/cemhsey-phase/reader/phase.js",
+      "docs/cemhsey-phase/reader/population.js",
+      "docs/cemhsey-phase/reader/reader.css",
+      "docs/cemhsey-phase/reader/reader.js",
+      "docs/cemhsey-phase/reader/sources.js",
+      "docs/cemhsey-phase/reader/transfer-math.js",
+      "docs/cemhsey-phase/reader/weights.js",
+      "docs/cemhsey-phase/study.css",
+      "docs/cemhsey-phase/study.js",
+      "docs/compat-policy.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "docs/core.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "docs/datasets.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.json",
+      "docs/hash.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "docs/index.html",
+      "docs/packet-policy-bridge.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "docs/palm-model.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.json",
+      "docs/palm-model.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "docs/plot.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "docs/policy-report-view.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "docs/preview.html",
+      "docs/r2-calibration-state.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.json",
+      "docs/r2-replay.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "docs/r2-source.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.json",
+      "docs/r2-trial-index.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.json",
+      "docs/reasons.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "docs/replay-view.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs",
+      "docs/style.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.css",
+      "docs/vocabulary.766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a.mjs"
     ],
     "preserved_other_rows": true
   },
@@ -4853,11 +5139,52 @@
       "bytes": 1166,
       "sha256": "4ca8e9bb9666ff921bfad49ceb6b56cbbebdec3599b4685e7ae7bfda338fa635"
     },
-    "status": "Design fixed before reading either new block of measurements.",
+    "status": "Six test records scored on an independent group, then independently reproduced. Public ranges rounded outward under the pre-outcome reporting rule.",
     "public_reporting": {
       "path": "benchmarks/cemhsey-phase/PUBLIC-REPORTING.md",
       "sha256": "bdd81c63eb0516e481d9a6b1a9e5a09cb583e89590a2c239a40f5bde3be765bf",
       "bytes": 1246
-    }
+    },
+    "aggregate": {
+      "path": "benchmarks/cemhsey-phase/RESULTS.json",
+      "bytes": 25933,
+      "sha256": "9edc43b1ec96e9dbfb87833d4b1d90f704d5b3860425c3595436f15a5f66a3e7"
+    },
+    "reader": {
+      "path": "docs/cemhsey-phase/reader/index.html",
+      "bytes": 7069,
+      "sha256": "3c8550fec6cad512d9becdcb241d4f66bfe06726a133d5232164a639ec986fcd"
+    },
+    "offline": {
+      "path": "docs/cemhsey-phase/reader/CEMHSEY-Population-Forecasts.zip",
+      "bytes": 44361,
+      "sha256": "ec43ac040b38d1fb8322a9bea1a8226ca4262bce95128107fc98b4edd398408d"
+    },
+    "explorer": {
+      "path": "docs/cemhsey-phase/index.html",
+      "bytes": 4930,
+      "sha256": "11f0d24642534ecf6770e69ce4d0ab2426f8044113e2efcef59d24ace9472cd8"
+    },
+    "metrics": {
+      "path": "docs/cemhsey-phase/metrics.csv",
+      "bytes": 9546,
+      "sha256": "9f1efa9a8327c7332f522a68983f7060afab2fe11f424fe1099c6074b2962fa6"
+    },
+    "contrasts": {
+      "path": "docs/cemhsey-phase/contrasts.csv",
+      "bytes": 10077,
+      "sha256": "8ef1b4754ad3aa7b8c34411ef8cca4ccd4b46df872c0268e387c5cf2f28b5edf"
+    },
+    "support": {
+      "eval_issues": 3552,
+      "eval_participants": 3,
+      "eval_trials": 6,
+      "fit_issues": 3552,
+      "fit_participants": 3,
+      "fit_trials": 6,
+      "indexed_days": 1,
+      "population_coefficients": 9
+    },
+    "limitations": "Three fitting and three separate evaluation participants; one target on one indexed day. Other records from these people were known in prior studies. Forecast horizon uses nominal indices."
   }
 }

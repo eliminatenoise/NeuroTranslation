@@ -41,10 +41,10 @@
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
   "experimental_previews": {
     "data_companion": {
-      "version": "2026-11-19 recording readers with saved cross-day practice",
+      "version": "2026-11-19 recording readers with population rise and fall corrections",
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
-      "buildId": "d1b832d89ff0f82c4523a04abaf0d0b421dcec179a2fcb6268c62e14cde63b83",
+      "buildId": "766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a",
       "meaning": "Import and inspect recordings locally. Replay the R1 cohort fit, or compare the fixed and personally calibrated models on an imported R2 trial. Full R2 trials are checked against their archived sample clock and four selected input streams. Aggregate evidence is shown separately.",
       "hosting": "Prepared static main/docs payload; actual Pages deployment/readback is verified separately",
       "study": "benchmarks/scalp-eeg-palm-history",
@@ -58,7 +58,7 @@
         "original_archive_and_emg": "docs/wrist-forearm/index.html",
         "daily_activity_wrist_angles": "docs/daily-wrist/index.html"
       },
-      "previous_cached_build": "dbbd5e7a04c656bc0fa672b13ce3a873b1c82ac9fda371deab877ba1344133fa",
+      "previous_cached_build": "d1b832d89ff0f82c4523a04abaf0d0b421dcec179a2fcb6268c62e14cde63b83",
       "force_navigation": {
         "grip_force": "docs/grip-force/index.html",
         "contact_force": "docs/contact-force/index.html"
@@ -72,7 +72,9 @@
         "listed_reader_workflows": 7,
         "source_count_scope": "Seven recording-reader choices in the app. Two use the CEMHSEY pinch recordings for different studies.",
         "cross_day_reader": "docs/cemhsey-transfer/index.html",
-        "cross_day_results": "docs/cemhsey-carry/index.html"
+        "cross_day_results": "docs/cemhsey-carry/index.html",
+        "population_phase_reader": "docs/cemhsey-phase/reader/index.html",
+        "population_phase_results": "docs/cemhsey-phase/index.html"
       }
     },
     "papers": {
@@ -737,6 +739,65 @@
       "compared_arms": 11,
       "paired_comparisons_per_group": 17,
       "limitations": "One pair of indexed days, four previously studied participants, one prescribed task and nominal 120 ms timing. Public reader uses invented signals and weights by default."
+    },
+    "cemhsey_population_phase": {
+      "protocol": {
+        "path": "benchmarks/cemhsey-phase/PROTOCOL.md",
+        "bytes": 7023,
+        "sha256": "e8d7cd2cb14e5546d42a07ea38aed134b456ab75a284e7e12bd3b5a09dbf8640"
+      },
+      "design": {
+        "path": "benchmarks/cemhsey-phase/DESIGN.json",
+        "bytes": 1166,
+        "sha256": "4ca8e9bb9666ff921bfad49ceb6b56cbbebdec3599b4685e7ae7bfda338fa635"
+      },
+      "status": "Six test records scored on an independent group, then independently reproduced. Public ranges rounded outward under the pre-outcome reporting rule.",
+      "public_reporting": {
+        "path": "benchmarks/cemhsey-phase/PUBLIC-REPORTING.md",
+        "sha256": "bdd81c63eb0516e481d9a6b1a9e5a09cb583e89590a2c239a40f5bde3be765bf",
+        "bytes": 1246
+      },
+      "aggregate": {
+        "path": "benchmarks/cemhsey-phase/RESULTS.json",
+        "bytes": 25933,
+        "sha256": "9edc43b1ec96e9dbfb87833d4b1d90f704d5b3860425c3595436f15a5f66a3e7"
+      },
+      "reader": {
+        "path": "docs/cemhsey-phase/reader/index.html",
+        "bytes": 7069,
+        "sha256": "3c8550fec6cad512d9becdcb241d4f66bfe06726a133d5232164a639ec986fcd"
+      },
+      "offline": {
+        "path": "docs/cemhsey-phase/reader/CEMHSEY-Population-Forecasts.zip",
+        "bytes": 44361,
+        "sha256": "ec43ac040b38d1fb8322a9bea1a8226ca4262bce95128107fc98b4edd398408d"
+      },
+      "explorer": {
+        "path": "docs/cemhsey-phase/index.html",
+        "bytes": 4930,
+        "sha256": "11f0d24642534ecf6770e69ce4d0ab2426f8044113e2efcef59d24ace9472cd8"
+      },
+      "metrics": {
+        "path": "docs/cemhsey-phase/metrics.csv",
+        "bytes": 9546,
+        "sha256": "9f1efa9a8327c7332f522a68983f7060afab2fe11f424fe1099c6074b2962fa6"
+      },
+      "contrasts": {
+        "path": "docs/cemhsey-phase/contrasts.csv",
+        "bytes": 10077,
+        "sha256": "8ef1b4754ad3aa7b8c34411ef8cca4ccd4b46df872c0268e387c5cf2f28b5edf"
+      },
+      "support": {
+        "eval_issues": 3552,
+        "eval_participants": 3,
+        "eval_trials": 6,
+        "fit_issues": 3552,
+        "fit_participants": 3,
+        "fit_trials": 6,
+        "indexed_days": 1,
+        "population_coefficients": 9
+      },
+      "limitations": "Three fitting and three separate evaluation participants; one target on one indexed day. Other records from these people were known in prior studies. Forecast horizon uses nominal indices."
     }
   },
   "prospective_studies": {
@@ -1040,6 +1101,65 @@
       "compared_arms": 11,
       "paired_comparisons_per_group": 17,
       "limitations": "One pair of indexed days, four previously studied participants, one prescribed task and nominal 120 ms timing. Public reader uses invented signals and weights by default."
+    },
+    "cemhsey_population_phase": {
+      "protocol": {
+        "path": "benchmarks/cemhsey-phase/PROTOCOL.md",
+        "bytes": 7023,
+        "sha256": "e8d7cd2cb14e5546d42a07ea38aed134b456ab75a284e7e12bd3b5a09dbf8640"
+      },
+      "design": {
+        "path": "benchmarks/cemhsey-phase/DESIGN.json",
+        "bytes": 1166,
+        "sha256": "4ca8e9bb9666ff921bfad49ceb6b56cbbebdec3599b4685e7ae7bfda338fa635"
+      },
+      "status": "Six test records scored on an independent group, then independently reproduced. Public ranges rounded outward under the pre-outcome reporting rule.",
+      "public_reporting": {
+        "path": "benchmarks/cemhsey-phase/PUBLIC-REPORTING.md",
+        "sha256": "bdd81c63eb0516e481d9a6b1a9e5a09cb583e89590a2c239a40f5bde3be765bf",
+        "bytes": 1246
+      },
+      "aggregate": {
+        "path": "benchmarks/cemhsey-phase/RESULTS.json",
+        "bytes": 25933,
+        "sha256": "9edc43b1ec96e9dbfb87833d4b1d90f704d5b3860425c3595436f15a5f66a3e7"
+      },
+      "reader": {
+        "path": "docs/cemhsey-phase/reader/index.html",
+        "bytes": 7069,
+        "sha256": "3c8550fec6cad512d9becdcb241d4f66bfe06726a133d5232164a639ec986fcd"
+      },
+      "offline": {
+        "path": "docs/cemhsey-phase/reader/CEMHSEY-Population-Forecasts.zip",
+        "bytes": 44361,
+        "sha256": "ec43ac040b38d1fb8322a9bea1a8226ca4262bce95128107fc98b4edd398408d"
+      },
+      "explorer": {
+        "path": "docs/cemhsey-phase/index.html",
+        "bytes": 4930,
+        "sha256": "11f0d24642534ecf6770e69ce4d0ab2426f8044113e2efcef59d24ace9472cd8"
+      },
+      "metrics": {
+        "path": "docs/cemhsey-phase/metrics.csv",
+        "bytes": 9546,
+        "sha256": "9f1efa9a8327c7332f522a68983f7060afab2fe11f424fe1099c6074b2962fa6"
+      },
+      "contrasts": {
+        "path": "docs/cemhsey-phase/contrasts.csv",
+        "bytes": 10077,
+        "sha256": "8ef1b4754ad3aa7b8c34411ef8cca4ccd4b46df872c0268e387c5cf2f28b5edf"
+      },
+      "support": {
+        "eval_issues": 3552,
+        "eval_participants": 3,
+        "eval_trials": 6,
+        "fit_issues": 3552,
+        "fit_participants": 3,
+        "fit_trials": 6,
+        "indexed_days": 1,
+        "population_coefficients": 9
+      },
+      "limitations": "Three fitting and three separate evaluation participants; one target on one indexed day. Other records from these people were known in prior studies. Forecast horizon uses nominal indices."
     }
   }
 }

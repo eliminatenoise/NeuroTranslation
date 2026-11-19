@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Learning the squeeze and the release · NeuroTranslation</title>
+<link rel="stylesheet" href="study.css"><script defer src="data.js"></script><script defer src="study.js"></script>
+</head><body><main>
+<header><a class="brand" href="../index.html#study-readers">NeuroTranslation</a>
+<h1>Learning the squeeze and the release</h1>
+<p>On the screen, the target rose and fell at the same speed. We used six pinches from three adults to learn how force followed that cue. Then three different adults supplied six test pinches. The forecasts used the learned corrections without fitting to those six test recordings.</p></header>
+<section aria-labelledby="families"><h2 id="families">What does a second coefficient buy?</h2>
+<p>Each set of three bars starts from the same forecast. Read across to see how its error changes with one correction or with separate corrections for rising and falling force cues. Shorter bars mean smaller average error.</p>
+<div class="controls"><label>Phase when forecast issued<select id="phase" disabled></select></label><label>Error measure<select id="metric" disabled><option value="mae">Mean absolute error</option><option value="rmse">Root mean square error</option><option value="target_relative_mae">Mean absolute error relative to target</option></select></label></div>
+<p id="scale" class="explain"></p><div id="groups" aria-label="Error scores for three forecast families"></div>
+<p id="support"></p>
+</section>
+<section aria-labelledby="pairs"><h2 id="pairs">Who gained from the change?</h2>
+<p>A smaller average error can coexist with a worse forecast for one or two people. Compare two forecasts made on the same test readings. A positive gain means the selected forecast had a lower mean absolute error.</p>
+<label>Forecast comparison<select id="pair" disabled></select></label>
+<p id="summary" role="status" aria-live="polite">The study report and the CSV downloads below contain the complete results.</p>
+<div class="scroll" role="region" aria-label="Paired gain by phase" tabindex="0"><table>
+<thead><tr><th scope="col">Phase</th><th scope="col">Mean gain</th><th scope="col">Enclosing range</th><th scope="col">Lower</th><th scope="col">Equal</th><th scope="col">Higher</th></tr></thead>
+<tbody id="gains"></tbody></table></div>
+<p>Mean gains are in percentage points of same-day maximum voluntary contraction (MVC). The displayed range encloses all three gains, with its ends rounded outward to 0.05 percentage points. If all three people tied exactly, both ends are zero. Lower, equal and higher count people. Select a phase in the table to inspect the corresponding forecasts.</p>
+</section>
+<section aria-labelledby="all"><h2 id="all">All eleven forecasts</h2>
+<p id="table-phase"></p>
+<div class="scroll" role="region" aria-label="Error scores, scroll sideways on a narrow display" tabindex="0"><table>
+<thead><tr><th scope="col">Forecast</th><th scope="col">Mean absolute error<br>(% MVC)</th><th scope="col">Root mean square error<br>(% MVC)</th><th scope="col">Mean signed error<br>(% MVC)</th><th scope="col">Absolute error<br>(% of target)</th></tr></thead>
+<tbody id="scores"></tbody></table></div></section>
+<section aria-labelledby="read"><h2 id="read">What the gauge measured</h2>
+<p>The gauge measured force between the pads of two digits. The target was 50% of each person’s maximum for that grasp on the same day. The simple forecast carries the latest gauge reading forward and adds the scheduled change over the next 24 force samples. The history model uses recent force and cue phase. The five-grid model also uses forearm surface EMG.</p>
+<p>Each learned correction multiplies the coming change in the cue. The split model uses a different multiplier according to the direction of that change. With a flat cue, both corrections leave the parent forecast untouched.</p>
+<p>Errors are calculated for each person using both test repeats together, then averaged across the three people. Signed error is forecast minus gauge. The 24-sample lead is 120 milliseconds on the nominal recording clock. The study spans one target, one indexed day and one grasp.</p></section>
+<footer><a href="reader/">Fit the correction from local recordings</a><a href="metrics.csv" download>All error scores (CSV)</a><a href="contrasts.csv" download>All paired gains (CSV)</a><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cemhsey-phase">Study report and protocol</a><a href="../cemhsey-carry/">Earlier next-day study</a><a href="https://doi.org/10.1038/s41597-025-05733-y">Acquisition study</a></footer>
+
+</main></body></html>

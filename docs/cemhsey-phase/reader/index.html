@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; worker-src blob:; connect-src 'none'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<title>Pinch force forecasts · NeuroTranslation</title>
+<link rel="stylesheet" href="reader.css">
+<script defer src="channel-map.js"></script><script defer src="array-math.js"></script>
+<script defer src="weights.js"></script><script defer src="interval-math.js"></script>
+<script defer src="transfer-math.js"></script><script defer src="mat-import.js"></script><script defer src="sources.js"></script>
+<script defer src="forecast-plot.js"></script><script defer src="phase.js"></script><script defer src="population.js"></script><script defer src="reader.js"></script>
+</head>
+<body>
+<header><div class="bar"><span>NeuroTranslation</span><a href="CEMHSEY-Population-Forecasts.zip" download id="zip">Download offline reader</a></div></header>
+<main>
+<div class="intro">
+<div><h1>Squeeze. Hold. Release.</h1><p>Can three people’s pinches help forecast a fourth person’s grip? Fit a correction as the target rises and falls, then try it on a hand that supplied no practice recording.</p></div>
+<svg class="schedule" viewBox="0 0 262 98" role="img" aria-label="Scheduled target rises to 50 percent of maximum, holds, then falls to zero over 30 nominal seconds.">
+<path d="M15 71H247M15 25H247" stroke="#b1c5b9" stroke-dasharray="3 5" fill="none"/><path d="M15 71H54L93 25H170L209 71H247" fill="none" stroke="#226456" stroke-width="4" stroke-linejoin="round"/><text x="14" y="15">50% MVC target</text><text x="14" y="91">0 s</text><text x="214" y="91">30 s</text>
+</svg>
+</div>
+<section class="setup"><h2>Choose the recordings</h2>
+<div class="switch" role="group" aria-label="Trial source"><button type="button" id="invented-mode" aria-pressed="true">Invented example</button><button type="button" id="archive-mode" aria-pressed="false">Local archive files</button></div>
+<div id="demo"><p>The force, electrode signals and parent weights are invented. Six calibration trials fit the gains. A seventh trial belongs to a different invented person.</p>
+<button id="run" class="primary">Run invented example</button></div>
+<div id="archive" hidden>
+<p>Use day 1, session 5, task 3 (50% of maximum voluntary contraction, MVC). Select the original archive filenames. All file reading and computation happen in this browser.</p>
+<label>30% array-reader parent model <input id="model" type="file" accept=".json"></label>
+<p id="model-label">Choose a compatible local parent fit.</p>
+<label>Parent-training participant numbers <input id="training" type="text" autocomplete="off" placeholder="Three numbers, separated by commas"></label>
+<label class="check"><input id="confirmed" type="checkbox"> I checked these three training identities and the selected files’ participant and repeat labels against the original sources.</label>
+<label>Six calibration recordings <input id="cal-files" type="file" accept=".mat" multiple></label>
+<button id="fit" class="primary">Fit six calibration trials</button>
+<label>One test recording from a different participant <input id="test-file" type="file" accept=".mat"></label>
+<button id="apply">Forecast the test trial</button>
+</div>
+<details id="saved"><summary>Save or reopen a private correction</summary>
+<p>Save the correction and keep its key separately. In a fresh tab, choose the same source and parent model before reopening it. The file contains nine gains and keyed checks for the source records.</p>
+<div class="actions"><button id="save-profile">Save correction</button><button id="show-key" aria-pressed="false">Show key</button></div>
+<label>Private key <input id="key" type="password" autocomplete="off" spellcheck="false" maxlength="32"></label>
+<label>Saved correction <input id="profile-file" type="file" accept=".json"></label>
+<button id="open-profile">Reopen correction</button>
+</details>
+<p id="status" role="status" aria-live="polite">Choose a source to begin.</p><button id="cancel" hidden>Cancel operation</button>
+</section>
+<section id="inspect" hidden>
+<h2>Forecast the next 120 nominal milliseconds</h2>
+<p id="test-origin"></p>
+<div class="chart-controls">
+<label>Forecast to plot <select id="arm"></select></label>
+<label>Issue time <output id="time" for="cutoff"></output><input id="cutoff" type="range" min="0" max="591" step="1" value="140"></label>
+</div>
+<canvas id="plot" role="img" aria-label="Selected forecast up to the current issue. The table gives the exact value for every forecast."></canvas>
+<p id="estimate"></p><p id="cutoff-note"></p>
+<div class="actions"><button id="reveal" aria-pressed="false">Reveal gauge reading</button><button id="score">Score this repeat</button></div>
+<p id="actual" hidden></p>
+<details><summary>Compare all 11 forecasts at this cutoff</summary>
+<div class="table-wrap"><table><thead><tr><th>Forecast</th><th>Fraction of MVC</th></tr></thead><tbody id="points"></tbody></table></div></details>
+</section>
+<section id="scored" hidden><h2>Errors on this repeat</h2>
+<p>Mean absolute error (MAE), root mean squared error (RMSE) and signed error use fractions of MVC. A positive signed error means too much force. Target-relative MAE divides MAE by 0.50.</p>
+<label>Issue phase <select id="group"><option value="overall">Whole repeat</option><option value="initial_rest">Initial rest</option><option value="ramp_up">Rising target</option><option value="hold">Target hold</option><option value="release">Falling target</option><option value="final_rest">Final rest</option></select></label>
+<p id="score-n"></p><div class="table-wrap" tabindex="0" role="region" aria-label="Eleven forecast errors, scroll horizontally if needed"><table><thead><tr><th>Forecast</th><th>MAE</th><th>RMSE</th><th>Signed error</th><th>Target-relative MAE</th></tr></thead><tbody id="score-rows"></tbody></table></div>
+</section>
+<details id="coeffs" hidden><summary>Inspect the fitted gains</summary>
+<p>Each number multiplies the change in the scheduled cue over the next 24 nominal force ticks. At a flat cue the correction is zero. The force gauge can still move.</p>
+<div class="table-wrap"><table><thead><tr><th>Parent</th><th>One gain</th><th>Rising cue</th><th>Falling cue</th></tr></thead><tbody id="gain-rows"></tbody></table></div></details>
+<footer><p>Adult pad-to-pad pinch · CEMHSEY GRASP. Force is the gauge reading between the digits. Forearm surface EMG records muscle electrical activity. The release indices give nominal timing. These offline comparisons measure error on the selected repeat.</p>
+<a href="README.md">Instructions and methods</a> · <a href="https://doi.org/10.1038/s41597-025-05733-y" rel="noreferrer">Recording study</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/cemhsey-phase/" rel="noreferrer">Measured study</a></footer>
+</main></body></html>
