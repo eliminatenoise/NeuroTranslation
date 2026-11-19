@@ -4,7 +4,9 @@
   const model = globalThis.HyserForecast,
     wfdb = globalThis.HyserWFDB,
     personal = globalThis.HyserPersonalize,
-    weights = globalThis.HYSER_WEIGHTS;
+    weights = globalThis.HYSER_WEIGHTS,
+    fingers = globalThis.HyserFingerContext,
+    fingerWeights = globalThis.HYSER_FINGER_CONTEXT_WEIGHTS;
   const files = el("files"),
     folder = el("folder"),
     example = el("example"),
@@ -26,6 +28,7 @@
     record = null,
     row = null,
     predictions = null,
+    fingerHistory = null,
     inputName = "",
     dayOne = null,
     dayTwo = null,
@@ -33,10 +36,30 @@
     fitting = false,
     workedExample = false;
   const crossDay = () => mode.value === "crossday";
+  const handContext = () => mode.value === "finger-context";
+  const hasFingerWeights = fingers?.validWeights(fingerWeights);
   const models = [
     ["force", "Force history"],
     ["aligned", "Force history + EMG"],
   ];
+  const fingerModels = [
+    ["index_only", "Index history"],
+    ["aligned_five", "Five finger histories"],
+    ["aligned_summary", "Index + two values per other finger"],
+  ];
+  const digitNames = { thumb: "Thumb", middle: "Middle", ring: "Ring", little: "Little" };
+  const digitPlots = (fingers?.extraDigits ?? []).map((digit) => {
+    const figure = document.createElement("figure");
+    const caption = document.createElement("figcaption");
+    const canvas = document.createElement("canvas");
+    const latest = document.createElement("div");
+    caption.textContent = digitNames[digit];
+    canvas.setAttribute("role", "img");
+    latest.className = "digit-latest";
+    figure.append(caption, canvas, latest);
+    el("digit-traces").append(figure);
+    return { name: caption.textContent, canvas, latest };
+  });
   const volts = (v) =>
     Math.abs(v) >= 1e5 || (v !== 0 && Math.abs(v) < 1e-6)
       ? v.toExponential(5)
@@ -55,6 +78,7 @@
     record = null;
     row = null;
     predictions = null;
+    clearFingerHistory();
     el("controls").hidden = true;
     el("window").hidden = true;
     el("unavailable").hidden = false;
@@ -65,6 +89,16 @@
     plot.width = plot.width;
     el("history").querySelector("tbody").replaceChildren();
     el("muscle").querySelector("tbody").replaceChildren();
+  }
+  function clearFingerHistory() {
+    fingerHistory = null;
+    el("finger-status").textContent = "";
+    el("finger-samples").querySelector("tbody").replaceChildren();
+    for (const { canvas, latest } of digitPlots) {
+      canvas.removeAttribute("aria-label");
+      canvas.width = canvas.width;
+      latest.textContent = "";
+    }
   }
   function tables() {
     for (const name of ["history", "muscle"]) {
@@ -86,15 +120,92 @@
         for (const value of values) tr.insertCell().textContent = String(value);
       }
     }
+    const fingerSamples = el("finger-samples");
+    const body = fingerSamples.querySelector("tbody");
+    body.replaceChildren();
+    if (!fingerSamples.open || !fingerHistory) return;
+    for (let i = 0; i < 41; i++) {
+      const tr = body.insertRow();
+      const time = document.createElement("th");
+      time.scope = "row";
+      time.textContent = (i - 40) * 10;
+      tr.append(time);
+      for (const digit of fingerHistory) {
+        tr.insertCell().textContent = Number.isFinite(digit[i]) ? volts(digit[i]) : "Missing";
+      }
+    }
+  }
+  function renderFingerPlots() {
+    if (!fingerHistory) return;
+    const values = fingerHistory.flat().filter(Number.isFinite);
+    const amplitude = Math.max(...values.map(Math.abs)) || 1;
+    const normalized = values.map((v) => v / amplitude);
+    const min = Math.min(0, ...normalized), max = Math.max(0, ...normalized);
+    const lower = min === max ? -0.02 : min, upper = min === max ? 0.02 : max;
+    const ticks = [upper, (upper + lower) / 2, lower];
+    const labels = ticks.map((n) => volts(n * amplitude) + " V");
+    for (const [index, { name, canvas, latest }] of digitPlots.entries()) {
+      const history = fingerHistory[index];
+      const samples = history.filter(Number.isFinite).length;
+      const last = history.at(-1);
+      latest.textContent = "At cutoff · " + (Number.isFinite(last) ? volts(last) + " V" : "Missing");
+      canvas.setAttribute("aria-label", name + " sensor history from −400 ms through cutoff. " +
+        samples + " of 41 voltage samples. " + latest.textContent + ".");
+      const width = canvas.clientWidth, height = canvas.clientHeight;
+      const ctx = canvas.getContext("2d");
+      if (!width || !height || !ctx) continue;
+      const ratio = Math.min(window.devicePixelRatio || 1, 3);
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      ctx.scale(canvas.width / width, canvas.height / height);
+      ctx.font = "11px " + getComputedStyle(canvas).fontFamily;
+      ctx.textBaseline = "middle";
+      ctx.fillStyle = "#263f38";
+      const left = 11 + Math.max(...labels.map((s) => ctx.measureText(s).width));
+      const right = width - 12, top = 12, bottom = height - 26;
+      if (right <= left) continue;
+      const x = (i) => left + i * (right - left) / 40;
+      const y = (n) => bottom - (n - lower) * (bottom - top) / (upper - lower);
+      ctx.strokeStyle = "#c6d4ca";
+      ctx.beginPath();
+      for (const [i, tick] of ticks.entries()) {
+        ctx.fillText(labels[i], 5, y(tick));
+        ctx.moveTo(left, y(tick));
+        ctx.lineTo(right, y(tick));
+      }
+      ctx.stroke();
+      ctx.fillText("−400 ms", left, bottom + 16);
+      ctx.textAlign = "right";
+      ctx.fillText("Cutoff", right, bottom + 16);
+      ctx.strokeStyle = "#15594e";
+      ctx.lineWidth = 2;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      let connected = false;
+      for (const [i, value] of history.entries()) {
+        if (!Number.isFinite(value)) {
+          connected = false;
+          continue;
+        }
+        const h = y(value / amplitude);
+        if (!connected) ctx.moveTo(x(i), h);
+        ctx.lineTo(x(i), h);
+        connected = true;
+      }
+      ctx.stroke();
+    }
   }
   function renderPlot() {
     if (!row || !predictions) return;
     const target = row.observed;
+    const fittedIndex = predictions.index_only !== undefined;
+    const indexForecast = fittedIndex ? predictions.index_only : predictions.force;
     plot.setAttribute(
       "aria-label",
       inputName +
-        ". History runs from 400 ms before cutoff to cutoff. Force-history forecast at +120 ms is " +
-        volts(predictions.force) +
+        ". History runs from 400 ms before cutoff to cutoff. " +
+        (fittedIndex ? "Index-history" : "Force-history") + " forecast at +120 ms is " +
+        volts(indexForecast) +
         " V." +
         (predictions.aligned === undefined
           ? ""
@@ -105,6 +216,9 @@
         (predictions.alignedOwn === undefined
           ? ""
           : " Personalized with EMG " + volts(predictions.alignedOwn) + " V.") +
+        fingerModels.slice(1).filter(([key]) => predictions[key] !== undefined)
+          .map(([key, label]) => " " + label + " forecast " + volts(predictions[key]) + " V.")
+          .join("") +
         (target === null
           ? ""
           : " Later sensor reading " + volts(target) + " V."),
@@ -122,8 +236,8 @@
     plot.height = Math.round(height * dpr);
     ctx.scale(plot.width / width, plot.height / height);
     ctx.font = "12px " + getComputedStyle(plot).fontFamily;
-    const all = [...row.force, predictions.force];
-    for (const key of ["aligned", "forceOwn", "alignedOwn"]) {
+    const all = [...row.force, indexForecast];
+    for (const key of ["aligned", "forceOwn", "alignedOwn", "aligned_five", "aligned_summary"]) {
       if (predictions[key] !== undefined) all.push(predictions[key]);
     }
     if (target !== null) all.push(target);
@@ -186,7 +300,7 @@
     ctx.strokeStyle = "#15594e";
     ctx.stroke();
     const fx = x(120),
-      fy = y(predictions.force / amplitude);
+      fy = y(indexForecast / amplitude);
     ctx.fillStyle = "#31549b";
     ctx.beginPath();
     ctx.moveTo(fx, fy - 6);
@@ -216,6 +330,22 @@
       ctx.lineWidth = 2;
       ctx.strokeRect(fx - 5, y(predictions.alignedOwn / amplitude) - 5, 10, 10);
     }
+    if (predictions.aligned_five !== undefined) {
+      const py = y(predictions.aligned_five / amplitude);
+      ctx.beginPath();
+      ctx.moveTo(fx, py - 6);
+      ctx.lineTo(fx + 6, py + 5);
+      ctx.lineTo(fx - 6, py + 5);
+      ctx.fillStyle = "#1d6353";
+      ctx.fill();
+    }
+    if (predictions.aligned_summary !== undefined) {
+      ctx.beginPath();
+      ctx.arc(fx, y(predictions.aligned_summary / amplitude), 4, 0, Math.PI * 2);
+      ctx.strokeStyle = "#a75212";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
     if (target !== null) {
       ctx.beginPath();
       ctx.arc(fx, y(target / amplitude), 8, 0, Math.PI * 2);
@@ -238,7 +368,7 @@
               : crossDay() ? "Observed Day 2 reading " : "Supplied later reading ") +
           volts(row.observed) +
           " V. " +
-          [...models, ["forceOwn", "Personalized force"], ["alignedOwn", "Personalized with EMG"]]
+          [...models, ...fingerModels, ["forceOwn", "Personalized force"], ["alignedOwn", "Personalized with EMG"]]
             .filter(([key]) => predictions[key] !== undefined)
             .map(([key, label]) => label + " error " + volts(predictions[key] - row.observed) + " V.")
             .join(" ");
@@ -303,7 +433,10 @@
     slider.setAttribute("aria-valuetext", t);
     try {
       row = model.windowAt(record, issue, { observe: false });
-      predictions = model.predict(row, weights);
+      fingerHistory = handContext() ? fingers.extraHistory(record.force, issue) : null;
+      predictions = handContext() && hasFingerWeights
+        ? { ...fingers.predict(row.force, fingerHistory, fingerWeights), persistence: row.force.at(-1) }
+        : model.predict(row, weights);
       if (calibration) {
         for (const [key] of models) {
           if (key in predictions && calibration.fits[key]) {
@@ -318,6 +451,7 @@
         ["forceOwn", "Personalized · force history"],
         ["aligned", crossDay() ? "Population · force history + EMG" : "Force history + EMG"],
         ["alignedOwn", "Personalized · force history + EMG"],
+        ...fingerModels,
         ["persistence", "Last voltage"],
       ]) {
         if (!(id in predictions)) continue;
@@ -332,7 +466,17 @@
       el("emg-key").hidden = !row.emg;
       el("personal-force-key").hidden = predictions.forceOwn === undefined;
       el("personal-emg-key").hidden = predictions.alignedOwn === undefined;
+      el("force-key-label").textContent = predictions.index_only === undefined ? "Force history forecast" : "Index history forecast";
+      el("five-key").hidden = predictions.aligned_five === undefined;
+      el("summary-key").hidden = predictions.aligned_summary === undefined;
       el("muscle").hidden = !row.emg;
+      if (handContext()) {
+        el("finger-status").textContent = !hasFingerWeights
+          ? "This copy includes the earlier force-history model. Fitted finger-context models are unavailable."
+          : predictions.aligned_five === undefined
+            ? "The five-finger forecasts need all 41 readings from each sensor. The index-history forecast is available."
+            : "";
+      }
       const msg =
         record.raw && !row.emg
           ? "The muscle window contains missing samples. The force forecast is available."
@@ -342,9 +486,11 @@
       el("window").hidden = false;
       showOutcome();
       tables();
+      renderFingerPlots();
     } catch (e) {
       row = null;
       predictions = null;
+      clearFingerHistory();
       el("window").hidden = true;
       el("unavailable").hidden = false;
       el("unavailable").textContent = e.message;
@@ -385,7 +531,7 @@
       : "Trial " + entry.trial + " from your files";
     status.textContent = crossDay() ? "Opening " + label + "…" : "Opening trial " + entry.trial + "…";
     try {
-      const rec = await loadTrialFiles(entry, valid);
+      const rec = await loadTrialFiles(entry, valid, !handContext());
       if (valid()) show(rec, label);
     } catch (e) {
       if (valid()) {
@@ -414,7 +560,7 @@
       return;
     }
     try {
-      choices = wfdb.catalogue([...input.files]);
+      choices = wfdb.catalogue([...input.files], { includeRaw: !handContext() });
       if (crossDay()) {
         const session = personal.identifySession(choices);
         if (session?.day !== 2) {
@@ -439,7 +585,8 @@
     files.value = "";
     folder.value = "";
     clearChoices();
-    show(model.invented(), "Invented trial");
+    const demo = model.invented();
+    show(handContext() ? { force: demo.force } : demo, "Invented trial");
   }
   function discardCalibration() {
     fitGeneration++;
@@ -543,6 +690,7 @@
     el("moment").textContent = "";
     el("history").open = false;
     el("muscle").open = false;
+    el("finger-samples").open = false;
     el("day-one-source").textContent = "";
     status.textContent = message;
     if (crossDay()) refreshFit();
@@ -559,6 +707,9 @@
     }
     el("folder-caption").textContent = isCrossDay ? "Original Day 2 session folder" : "Original session folder";
     el("reveal-caption").textContent = isCrossDay ? "Reveal Day 2 reading and trial errors" : "Reveal the later sensor reading";
+    el("population-hint").hidden = isCrossDay || handContext();
+    for (const id of ["finger-context", "finger-hint", "finger-evidence"]) el(id).hidden = !handContext();
+    el("finger-fit-evidence").hidden = !handContext() || !hasFingerWeights;
     if (!isCrossDay) invented();
   }
   function inventedDays() {
@@ -595,11 +746,21 @@
     showOutcome();
     evaluateTrial();
   });
-  for (const name of ["muscle", "history"])
+  for (const name of ["muscle", "history", "finger-samples"])
     el(name).addEventListener("toggle", tables);
-  if (typeof ResizeObserver === "function")
-    new ResizeObserver(renderPlot).observe(plot);
-  else window.addEventListener("resize", renderPlot);
+  if (typeof ResizeObserver === "function") {
+    const resize = new ResizeObserver((entries) => {
+      if (entries.some(({ target }) => target === plot)) renderPlot();
+      if (entries.some(({ target }) => target !== plot)) renderFingerPlots();
+    });
+    for (const canvas of [plot, ...digitPlots.map(({ canvas }) => canvas)]) resize.observe(canvas);
+  } else {
+    window.addEventListener("resize", () => {
+      renderPlot();
+      renderFingerPlots();
+    });
+  }
+  mode.querySelector('option[value="finger-context"]').disabled = !fingers;
   for (const control of [files, folder, example, mode, dayOnePicker, crossExample, clearRecordings]) control.disabled = false;
   setMode("population");
 })();

@@ -1,0 +1,1180 @@
+{
+  "arm_feature_counts": {
+    "aligned_five": 205,
+    "aligned_summary": 49,
+    "index_only": 41,
+    "other_trial": 205
+  },
+  "attribution": {
+    "dataset": "Jiang, X., Dai, C., Liu, X., & Fan, J. (2023). Open Access Dataset and Toolbox of High-Density Surface Electromyogram Recordings (2.0.0). PhysioNet.",
+    "dataset_doi": "10.13026/hxan-pe94",
+    "dataset_url": "https://physionet.org/content/hd-semg/2.0.0/",
+    "license": "Open Data Commons Attribution License 1.0",
+    "license_url": "https://physionet.org/content/hd-semg/view-license/2.0.0/",
+    "paper_doi": "10.1109/TNSRE.2021.3082551",
+    "produced_work": "Contains pooled models and aggregate measures derived from the Hyser 2.0.0 Random dataset, made available by PhysioNet under ODC-By 1.0."
+  },
+  "evaluations": {
+    "DEV": {
+      "aggregate_input_sha256": "9552f9f97ea20d83680a28f2ec9d58b83f5e262bad5d963978fd435b67e04e61",
+      "dev_status": "previously_scored_retrospective_not_fresh",
+      "evaluation": "Previously scored development participants, locked full-TRAIN fit",
+      "force_only": {
+        "nonfinite_anywhere": 0,
+        "original_values_checked": 500000,
+        "pairs": 40,
+        "scored_windows_with_nonfinite_values": 0
+      },
+      "r106_index_parity": {
+        "absolute_max_delta_v": 0.0,
+        "new_minus_prior_v": {
+          "both_days": {
+            "macro_mae_v": 0.0,
+            "macro_rmse_v": 0.0
+          },
+          "day1": {
+            "macro_mae_v": 0.0,
+            "macro_rmse_v": 0.0
+          },
+          "day2": {
+            "macro_mae_v": 0.0,
+            "macro_rmse_v": 0.0
+          }
+        },
+        "reference_sha256": "17e7fa782aeb4fd3ca994d7a141cec750e7d3835e70857b0edc28f43858c6a25",
+        "tolerance_v": 1e-10
+      },
+      "scores": {
+        "both_days": {
+          "arms": {
+            "aligned_five": {
+              "macro_mae_v": 0.01416118680446468,
+              "macro_rmse_v": 0.0216744318117255
+            },
+            "aligned_summary": {
+              "macro_mae_v": 0.014188892195963008,
+              "macro_rmse_v": 0.02182102159479142
+            },
+            "index_only": {
+              "macro_mae_v": 0.01435458822520435,
+              "macro_rmse_v": 0.022248280849783312
+            },
+            "other_trial": {
+              "macro_mae_v": 0.014411920324057578,
+              "macro_rmse_v": 0.022275761495783752
+            }
+          },
+          "paired": {
+            "aligned_five_vs_aligned_summary": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -1.0149601993530641e-05,
+                  8.430915733442963e-05
+                ],
+                "mean_gain_v": 2.770539149832621e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -8.043652458753587e-05,
+                  0.00012292099582685272
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  0.00010045420906880838,
+                  0.00020189765817684238
+                ],
+                "mean_gain_v": 0.00014658978306591672,
+                "observed_person_resampling_95_percentile_v": [
+                  1.5974131033439504e-05,
+                  0.00027720543509839393
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_five_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  1.0906004747836725e-05,
+                  0.000375110302710874
+                ],
+                "mean_gain_v": 0.0001934014207396694,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.0001866262358069257,
+                  0.0005734290772862645
+                ],
+                "persons_with_positive_gain": 2,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  0.0004002897938055287,
+                  0.0007908827569036945
+                ],
+                "mean_gain_v": 0.0005738490380578099,
+                "observed_person_resampling_95_percentile_v": [
+                  7.027463203613041e-05,
+                  0.0010774234440794894
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_five_vs_other_trial": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  7.860032718154444e-05,
+                  0.0004247689757871422
+                ],
+                "mean_gain_v": 0.00025073351959289687,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00012271393594721208,
+                  0.0006241809751330058
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  0.00043073108324345397,
+                  0.0008063159057880772
+                ],
+                "mean_gain_v": 0.0006013296840582478,
+                "observed_person_resampling_95_percentile_v": [
+                  0.00010405214317645885,
+                  0.0010986072249400368
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_summary_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  8.822689310004675e-06,
+                  0.00029080114537644437
+                ],
+                "mean_gain_v": 0.0001656960292413432,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.0001191160229767254,
+                  0.0004700838550791464
+                ],
+                "persons_with_positive_gain": 2,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  0.0002998355847367203,
+                  0.0005889850987268521
+                ],
+                "mean_gain_v": 0.0004272592549918932,
+                "observed_person_resampling_95_percentile_v": [
+                  5.4300501002690904e-05,
+                  0.0008002180089810955
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "other_trial_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -6.769432243370771e-05,
+                  -4.965867307626821e-05
+                ],
+                "mean_gain_v": -5.733209885322747e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -7.780537188290058e-05,
+                  -3.685882582355436e-05
+                ],
+                "persons_with_positive_gain": 0,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  -3.533023302323274e-05,
+                  -1.5433148884382714e-05
+                ],
+                "mean_gain_v": -2.7480646000437904e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -5.236703193344655e-05,
+                  -8.891125207319793e-06
+                ],
+                "persons_with_positive_gain": 0,
+                "persons_with_zero_gain": 0
+              }
+            }
+          },
+          "people": 4,
+          "trials": 40,
+          "windows_per_arm": 18000
+        },
+        "day1": {
+          "arms": {
+            "aligned_five": {
+              "macro_mae_v": 0.013477406712560591,
+              "macro_rmse_v": 0.020628851127620577
+            },
+            "aligned_summary": {
+              "macro_mae_v": 0.0134807836027606,
+              "macro_rmse_v": 0.02076441045941829
+            },
+            "index_only": {
+              "macro_mae_v": 0.013797404625011165,
+              "macro_rmse_v": 0.021209650184930137
+            },
+            "other_trial": {
+              "macro_mae_v": 0.013873631671955237,
+              "macro_rmse_v": 0.02125553735611814
+            }
+          },
+          "paired": {
+            "aligned_five_vs_aligned_summary": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -7.622255241478484e-05,
+                  9.86882065308643e-05
+                ],
+                "mean_gain_v": 3.3768902000072716e-06,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00019514190215134692,
+                  0.0001783278719772641
+                ],
+                "persons_with_positive_gain": 2,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  5.2793556920198666e-05,
+                  0.00021659450797451943
+                ],
+                "mean_gain_v": 0.0001355593317977112,
+                "observed_person_resampling_95_percentile_v": [
+                  -3.0027742788645007e-05,
+                  0.0003011464063840674
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_five_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  0.00012815827369814606,
+                  0.000559090938802346
+                ],
+                "mean_gain_v": 0.00031999791245057325,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00021376032286485325,
+                  0.0008537561477659997
+                ],
+                "persons_with_positive_gain": 2,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  0.000385310928206094,
+                  0.0008198994373163395
+                ],
+                "mean_gain_v": 0.000580799057309558,
+                "observed_person_resampling_95_percentile_v": [
+                  7.662993879345263e-05,
+                  0.0010849681758256634
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_five_vs_other_trial": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  0.0002193133221445355,
+                  0.000620969071374528
+                ],
+                "mean_gain_v": 0.0003962249593946459,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.000133593601665794,
+                  0.0009260435204550858
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  0.00043389840954123626,
+                  0.0008543001019464454
+                ],
+                "mean_gain_v": 0.0006266862284975598,
+                "observed_person_resampling_95_percentile_v": [
+                  0.00011795560808034074,
+                  0.001135416848914779
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_summary_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  0.00014602360935557097,
+                  0.0004604027322714817
+                ],
+                "mean_gain_v": 0.000316621022250566,
+                "observed_person_resampling_95_percentile_v": [
+                  -6.587471035652409e-05,
+                  0.000699116754857656
+                ],
+                "persons_with_positive_gain": 2,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  0.00027737720458844106,
+                  0.00060330492934182
+                ],
+                "mean_gain_v": 0.00044523972551184683,
+                "observed_person_resampling_95_percentile_v": [
+                  0.00010665768158209764,
+                  0.000783821769441596
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "other_trial_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -9.115504844638943e-05,
+                  -6.187813257218198e-05
+                ],
+                "mean_gain_v": -7.622704694407265e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00011620274650039723,
+                  -3.625134738774807e-05
+                ],
+                "persons_with_positive_gain": 0,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  -6.0414679013306764e-05,
+                  -3.4400664630105986e-05
+                ],
+                "mean_gain_v": -4.5887171188001806e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -7.172889814666995e-05,
+                  -1.750626214197786e-05
+                ],
+                "persons_with_positive_gain": 0,
+                "persons_with_zero_gain": 0
+              }
+            }
+          },
+          "people": 4,
+          "trials": 20,
+          "windows_per_arm": 9000
+        },
+        "day2": {
+          "arms": {
+            "aligned_five": {
+              "macro_mae_v": 0.014844966896368772,
+              "macro_rmse_v": 0.022720012495830427
+            },
+            "aligned_summary": {
+              "macro_mae_v": 0.014897000789165418,
+              "macro_rmse_v": 0.022877632730164552
+            },
+            "index_only": {
+              "macro_mae_v": 0.014911771825397536,
+              "macro_rmse_v": 0.023286911514636487
+            },
+            "other_trial": {
+              "macro_mae_v": 0.014950208976159918,
+              "macro_rmse_v": 0.023295985635449365
+            }
+          },
+          "paired": {
+            "aligned_five_vs_aligned_summary": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  2.2031966533090155e-05,
+                  6.993010813799554e-05
+                ],
+                "mean_gain_v": 5.2033892796646015e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  8.850316555300986e-06,
+                  0.00011337603542130054
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  0.00010336278779842754,
+                  0.00019180247994148025
+                ],
+                "mean_gain_v": 0.00015762023433412396,
+                "observed_person_resampling_95_percentile_v": [
+                  6.197600485552401e-05,
+                  0.00025751405850565814
+                ],
+                "persons_with_positive_gain": 4,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_five_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -0.00010634626420247435,
+                  0.0001911296666193997
+                ],
+                "mean_gain_v": 6.680492902876424e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00022964058658471237,
+                  0.0004364901281031456
+                ],
+                "persons_with_positive_gain": 1,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  0.0003604051468754377,
+                  0.0007618660764910518
+                ],
+                "mean_gain_v": 0.0005668990188060627,
+                "observed_person_resampling_95_percentile_v": [
+                  6.391932527880645e-05,
+                  0.0010698787123333189
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_five_vs_other_trial": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -6.211266778144663e-05,
+                  0.00022856888019975644
+                ],
+                "mean_gain_v": 0.00010524207979114783,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.0001882862958316545,
+                  0.00046481237615992894
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  0.0003811418659778407,
+                  0.0007583317096297124
+                ],
+                "mean_gain_v": 0.0005759731396189393,
+                "observed_person_resampling_95_percentile_v": [
+                  9.014867827258043e-05,
+                  0.001061797600965298
+                ],
+                "persons_with_positive_gain": 4,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_summary_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -0.0001283782307355645,
+                  0.00012119955848140414
+                ],
+                "mean_gain_v": 1.4771036232118229e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.0002384359330563344,
+                  0.0003230591225981661
+                ],
+                "persons_with_positive_gain": 1,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  0.0002122902856580173,
+                  0.0005746652681118842
+                ],
+                "mean_gain_v": 0.0004092787844719387,
+                "observed_person_resampling_95_percentile_v": [
+                  1.9433204232824353e-06,
+                  0.000816614248520595
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "other_trial_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -4.4233596421027733e-05,
+                  -3.328793610575358e-05
+                ],
+                "mean_gain_v": -3.8437150762383587e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -4.975985410479158e-05,
+                  -2.614360091695439e-05
+                ],
+                "persons_with_positive_gain": 0,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  -2.073671910240299e-05,
+                  3.5343668613393997e-06
+                ],
+                "mean_gain_v": -9.074120812876604e-06,
+                "observed_person_resampling_95_percentile_v": [
+                  -3.65644684146493e-05,
+                  1.699739271186166e-05
+                ],
+                "persons_with_positive_gain": 1,
+                "persons_with_zero_gain": 0
+              }
+            }
+          },
+          "people": 4,
+          "trials": 20,
+          "windows_per_arm": 9000
+        }
+      }
+    },
+    "TRAIN": {
+      "aggregate_input_sha256": "715f38a63439dfc9535812c499513bf1c5c42665eca7e00af8495411a4e14f10",
+      "dev_status": null,
+      "evaluation": "Nested leave-one-person-out",
+      "force_only": {
+        "nonfinite_anywhere": 0,
+        "original_values_checked": 1500000,
+        "pairs": 120,
+        "scored_windows_with_nonfinite_values": 0
+      },
+      "r106_index_parity": {
+        "absolute_max_delta_v": 0.0,
+        "new_minus_prior_v": {
+          "both_days": {
+            "macro_mae_v": 0.0,
+            "macro_rmse_v": 0.0
+          },
+          "day1": {
+            "macro_mae_v": 0.0,
+            "macro_rmse_v": 0.0
+          },
+          "day2": {
+            "macro_mae_v": 0.0,
+            "macro_rmse_v": 0.0
+          }
+        },
+        "reference_sha256": "17e7fa782aeb4fd3ca994d7a141cec750e7d3835e70857b0edc28f43858c6a25",
+        "tolerance_v": 1e-10
+      },
+      "scores": {
+        "both_days": {
+          "arms": {
+            "aligned_five": {
+              "macro_mae_v": 0.016915362336085725,
+              "macro_rmse_v": 0.02586404270178518
+            },
+            "aligned_summary": {
+              "macro_mae_v": 0.016955484708407555,
+              "macro_rmse_v": 0.025898273883491557
+            },
+            "index_only": {
+              "macro_mae_v": 0.01685373305576211,
+              "macro_rmse_v": 0.025922949279874503
+            },
+            "other_trial": {
+              "macro_mae_v": 0.01690775081153583,
+              "macro_rmse_v": 0.02594100405970359
+            }
+          },
+          "paired": {
+            "aligned_five_vs_aligned_summary": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  1.8413771782005364e-05,
+                  9.038579230180146e-05
+                ],
+                "mean_gain_v": 4.0122372321829115e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -8.720061668456079e-05,
+                  0.000145088727487618
+                ],
+                "persons_with_positive_gain": 9,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  -6.1678818866714324e-06,
+                  0.00010841640314973305
+                ],
+                "mean_gain_v": 3.423118170637566e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00018336607924293022,
+                  0.00022962742920470562
+                ],
+                "persons_with_positive_gain": 9,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_five_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -0.00012993614113814616,
+                  3.514482531334644e-05
+                ],
+                "mean_gain_v": -6.162928032361484e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00034418166681820535,
+                  0.00020443351227350032
+                ],
+                "persons_with_positive_gain": 6,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  -7.559705971210096e-06,
+                  0.00016484206593630262
+                ],
+                "mean_gain_v": 5.8906578089323727e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.0002828854435152417,
+                  0.00036706283543976525
+                ],
+                "persons_with_positive_gain": 7,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_five_vs_other_trial": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -8.235583783919656e-05,
+                  0.00010247878380195886
+                ],
+                "mean_gain_v": -7.6115245498933545e-06,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00031976100182875736,
+                  0.00027766091066639445
+                ],
+                "persons_with_positive_gain": 7,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  1.514083801214056e-05,
+                  0.00018258985980623116
+                ],
+                "mean_gain_v": 7.696135791840522e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.0002785668602178787,
+                  0.0003909685239280731
+                ],
+                "persons_with_positive_gain": 7,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_summary_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -0.00022032193343994762,
+                  -1.587046069245662e-06
+                ],
+                "mean_gain_v": -0.00010175165264544395,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00041261437238777334,
+                  0.0002279404531772564
+                ],
+                "persons_with_positive_gain": 6,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  -5.4651336139137455e-05,
+                  0.00011566090820558829
+                ],
+                "mean_gain_v": 2.4675396382948064e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00023496821311128413,
+                  0.0002744372741070114
+                ],
+                "persons_with_positive_gain": 7,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "other_trial_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -6.733395848861241e-05,
+                  -4.75803032989496e-05
+                ],
+                "mean_gain_v": -5.401775577372148e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -8.359763636729194e-05,
+                  -1.8879361749306596e-05
+                ],
+                "persons_with_positive_gain": 2,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  -2.9807052182883395e-05,
+                  -8.200322605821034e-06
+                ],
+                "mean_gain_v": -1.8054779829081505e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -5.208103225988578e-05,
+                  1.8393792062667893e-05
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              }
+            }
+          },
+          "people": 12,
+          "trials": 120,
+          "windows_per_arm": 54000
+        },
+        "day1": {
+          "arms": {
+            "aligned_five": {
+              "macro_mae_v": 0.016246457140004413,
+              "macro_rmse_v": 0.02470824805278721
+            },
+            "aligned_summary": {
+              "macro_mae_v": 0.0163373905812426,
+              "macro_rmse_v": 0.024869331475110276
+            },
+            "index_only": {
+              "macro_mae_v": 0.016157704759329747,
+              "macro_rmse_v": 0.024807166434174147
+            },
+            "other_trial": {
+              "macro_mae_v": 0.016185558899360537,
+              "macro_rmse_v": 0.024807759752475178
+            }
+          },
+          "paired": {
+            "aligned_five_vs_aligned_summary": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  6.649866928186807e-05,
+                  0.00016116346441767438
+                ],
+                "mean_gain_v": 9.093344123818777e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -7.423132715205303e-05,
+                  0.00021140812609811478
+                ],
+                "persons_with_positive_gain": 10,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  0.00012974520188311478,
+                  0.00023682105589935135
+                ],
+                "mean_gain_v": 0.00016108342232306404,
+                "observed_person_resampling_95_percentile_v": [
+                  -2.6095383680532952e-05,
+                  0.0003135026770198738
+                ],
+                "persons_with_positive_gain": 10,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_five_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -0.00014939873805588322,
+                  2.874722629364013e-05
+                ],
+                "mean_gain_v": -8.875238067466782e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.0003974741675880263,
+                  0.0001783833944363061
+                ],
+                "persons_with_positive_gain": 6,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  2.31353990041265e-05,
+                  0.00022902093571336356
+                ],
+                "mean_gain_v": 9.891838138693368e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.000232837911038374,
+                  0.00039333281187400914
+                ],
+                "persons_with_positive_gain": 7,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_five_vs_other_trial": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -0.00012758560098716042,
+                  7.384960601807588e-05
+                ],
+                "mean_gain_v": -6.089824064387511e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00040584316181682873,
+                  0.00023380420884390747
+                ],
+                "persons_with_positive_gain": 6,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  2.4227456870106387e-05,
+                  0.0002488078697015018
+                ],
+                "mean_gain_v": 9.951169968796603e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.0002669826523776011,
+                  0.0004069119230390183
+                ],
+                "persons_with_positive_gain": 7,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_summary_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -0.0002756905881369131,
+                  -5.819938955408125e-05
+                ],
+                "mean_gain_v": -0.00017968582191285558,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.0005227385443153349,
+                  0.00013773099827133723
+                ],
+                "persons_with_positive_gain": 6,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  -0.00012014140160859493,
+                  6.211276567833282e-05
+                ],
+                "mean_gain_v": -6.216504093613038e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00037501946087514575,
+                  0.00019780437768318236
+                ],
+                "persons_with_positive_gain": 5,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "other_trial_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -4.5102379724435756e-05,
+                  -1.9822027799883124e-05
+                ],
+                "mean_gain_v": -2.7854140030792705e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -6.89408346669752e-05,
+                  1.805915892478737e-05
+                ],
+                "persons_with_positive_gain": 4,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  -1.9786933988138264e-05,
+                  1.6019280568953968e-05
+                ],
+                "mean_gain_v": -5.933183010323542e-07,
+                "observed_person_resampling_95_percentile_v": [
+                  -5.273205146719351e-05,
+                  5.306847162720649e-05
+                ],
+                "persons_with_positive_gain": 6,
+                "persons_with_zero_gain": 0
+              }
+            }
+          },
+          "people": 12,
+          "trials": 60,
+          "windows_per_arm": 27000
+        },
+        "day2": {
+          "arms": {
+            "aligned_five": {
+              "macro_mae_v": 0.017584267532167037,
+              "macro_rmse_v": 0.027019837350783147
+            },
+            "aligned_summary": {
+              "macro_mae_v": 0.01757357883557251,
+              "macro_rmse_v": 0.026927216291872835
+            },
+            "index_only": {
+              "macro_mae_v": 0.017549761352194475,
+              "macro_rmse_v": 0.027038732125574862
+            },
+            "other_trial": {
+              "macro_mae_v": 0.017629942723711125,
+              "macro_rmse_v": 0.02707424836693199
+            }
+          },
+          "paired": {
+            "aligned_five_vs_aligned_summary": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -3.691642450807863e-05,
+                  2.9804105650167503e-05
+                ],
+                "mean_gain_v": -1.0688696594529616e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00013765461053400144,
+                  0.000103864847418199
+                ],
+                "persons_with_positive_gain": 9,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  -0.00014578248012936864,
+                  6.837691922422077e-05
+                ],
+                "mean_gain_v": -9.262105891031287e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.0004751550125266523,
+                  0.00020134515397604767
+                ],
+                "persons_with_positive_gain": 9,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_five_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -0.00014534515855705408,
+                  6.726919401669626e-05
+                ],
+                "mean_gain_v": -3.4506179972562655e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00036881105094133733,
+                  0.0002991241720462551
+                ],
+                "persons_with_positive_gain": 5,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  -6.555203976464215e-05,
+                  0.00024321042503785926
+                ],
+                "mean_gain_v": 1.8894774791712615e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.0005286448618246652,
+                  0.00044375794955208667
+                ],
+                "persons_with_positive_gain": 7,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_five_vs_other_trial": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -7.000657975903755e-05,
+                  0.000147407526885402
+                ],
+                "mean_gain_v": 4.567519154408833e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00030212121597896906,
+                  0.00039219936433114054
+                ],
+                "persons_with_positive_gain": 7,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  -2.97592711319161e-05,
+                  0.00027631644655881025
+                ],
+                "mean_gain_v": 5.441101614884472e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.0004887371143182242,
+                  0.0004730941959585119
+                ],
+                "persons_with_positive_gain": 7,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "aligned_summary_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -0.0001649532787429829,
+                  5.5025297415589446e-05
+                ],
+                "mean_gain_v": -2.3817483378033038e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.0003328716278131714,
+                  0.00033965852904700917
+                ],
+                "persons_with_positive_gain": 5,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  1.0838729330319222e-05,
+                  0.00017483350581363848
+                ],
+                "mean_gain_v": 0.0001115158337020255,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00014097313593564476,
+                  0.0003863942072524194
+                ],
+                "persons_with_positive_gain": 8,
+                "persons_with_zero_gain": 0
+              }
+            },
+            "other_trial_vs_index_only": {
+              "mae": {
+                "leave_one_person_out_mean_range_v": [
+                  -8.956553725278955e-05,
+                  -7.153435518925821e-05
+                ],
+                "mean_gain_v": -8.018137151665098e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -0.00011021475342205199,
+                  -4.857875806856121e-05
+                ],
+                "persons_with_positive_gain": 1,
+                "persons_with_zero_gain": 0
+              },
+              "rmse": {
+                "leave_one_person_out_mean_range_v": [
+                  -4.415770290874495e-05,
+                  -2.9013411125402427e-05
+                ],
+                "mean_gain_v": -3.55162413571321e-05,
+                "observed_person_resampling_95_percentile_v": [
+                  -6.308908192194245e-05,
+                  -5.4936077106465636e-06
+                ],
+                "persons_with_positive_gain": 3,
+                "persons_with_zero_gain": 0
+              }
+            }
+          },
+          "people": 12,
+          "trials": 60,
+          "windows_per_arm": 27000
+        }
+      }
+    }
+  },
+  "experiment": "hyser-random-finger-context-20261119-v1",
+  "freeze_sha256": "6ebe611d72d56db9ff529bdbc74636bd085434c75f3b422ade6d762cde9b6889",
+  "full_train_penalties": {
+    "aligned_five": 0.001,
+    "aligned_summary": 0.001,
+    "index_only": 0.001,
+    "other_trial": 0.001
+  },
+  "glossary": {
+    "revision": 36,
+    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+  },
+  "limits": {
+    "cohorts": "Distinct TRAIN and DEV people. DEV was previously scored. FINAL remained unopened.",
+    "inference": "Offline prediction of sensor voltage. No causal evidence of coupling, neural decoding, clinical performance or live control.",
+    "other_trial": "Same person and day, identical nominal phase, four non-index inputs from the next trial cyclically. Retrospective control with no exported model.",
+    "task": "Hyser Random isometric contractions by adults with intact fingers. Sensor volts are not calibrated newtons or percent MVC.",
+    "timing": "Released-trace lookahead on the native 100 Hz grid. Upstream filtering and causal availability unverified. No measured device or physiological latency."
+  },
+  "metric_unit": "V",
+  "nominal_horizon_ms": 120,
+  "paired_gain": "comparator minus focus, positive values favor the focus",
+  "participants_are_resampling_units": true,
+  "predictor_features": {
+    "feature_channel_order": [
+      "index",
+      "thumb",
+      "middle",
+      "ring",
+      "little"
+    ],
+    "history_lags_ticks": [
+      -40,
+      -39,
+      -38,
+      -37,
+      -36,
+      -35,
+      -34,
+      -33,
+      -32,
+      -31,
+      -30,
+      -29,
+      -28,
+      -27,
+      -26,
+      -25,
+      -24,
+      -23,
+      -22,
+      -21,
+      -20,
+      -19,
+      -18,
+      -17,
+      -16,
+      -15,
+      -14,
+      -13,
+      -12,
+      -11,
+      -10,
+      -9,
+      -8,
+      -7,
+      -6,
+      -5,
+      -4,
+      -3,
+      -2,
+      -1,
+      0
+    ],
+    "horizon_ticks": 12,
+    "input_channel_order": [
+      "thumb",
+      "index",
+      "middle",
+      "ring",
+      "little"
+    ],
+    "input_unit": "V",
+    "rate_hz": 100,
+    "summary_per_nonindex_channel": [
+      "latest_v",
+      "ols_slope_v_per_tick"
+    ],
+    "target_channel": "index",
+    "target_unit": "V"
+  },
+  "predictor_sha256": "b91ad83b8bdac1b667b21654813075acbbba64c20c82d2475c4a443f0c975db1",
+  "prospective_protocol": {
+    "commit": "25a35fc72621337c7281093eab9bd2520837d85a",
+    "path": "PROTOCOL.md",
+    "sha256": "49dd60ec6290b1343a8793963cd1d12dd13044a33619642b83a07189bceeeff7"
+  },
+  "publisher_manifest_sha256": "8c8fdf5629291ca1dbeb9e088200aeff7ed2dfae4bdb3efcf869e95cca9a02c9",
+  "schema": "hyser-finger-context-aggregate-v1",
+  "score_anchor_ticks": {
+    "first": 140,
+    "last": 2385,
+    "per_trial": 450,
+    "stride": 5
+  },
+  "target": "Released Hyser Random index transducer voltage",
+  "weights_sha256": "c237d6b59268c22d9e2844d32fe4ffd36dccf0584a8ad99b3465cc94cd2254d2"
+}

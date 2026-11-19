@@ -16,7 +16,7 @@ GRIDS = ("ED", "EP", "FD", "FP")
 SAMPLES = {"force": (100, 2500, 5), "raw": (2048, 51200, 256)}
 
 
-def read_signal(session, kind, trial):
+def read_signal(session, kind, trial, *, all_digits=False):
     """Validate an original multiplexed format-16 record before scaling its counts."""
     import wfdb
 
@@ -51,7 +51,7 @@ def read_signal(session, kind, trial):
             or not np.array_equal(counts.sum(axis=0, dtype=np.int64) % 65536,
                                   np.asarray(header.checksum) % 65536)):
         raise ValueError(f"Initial sample or checksum mismatch for {filename}.")
-    if kind == "force":
+    if kind == "force" and not all_digits:
         channel = header.sig_name.index("index")
         counts, gain, baseline = counts[:, channel], gain[channel], baseline[channel]
     voltage = (counts.astype(np.float64) - baseline) / gain
@@ -119,6 +119,46 @@ def scores(forecast, truth):
     return {"mae_v": float(np.mean(np.abs(diff))), "rmse_v": float(np.sqrt(np.mean(diff*diff)))}
 
 
+def score_whole_hand(session, day, trials):
+    """Compare three fixed models at identical cutoffs in the same local trial."""
+    from importlib import import_module
+
+    predictor = import_module("whole-hand.finger_context")
+
+    weights = json.loads((BASE / "whole-hand" / "WEIGHTS.json").read_text(encoding="utf-8"))
+    errors = {arm: [] for arm in predictor.WIDTHS}
+    for trial in trials:
+        if session is None:
+            index, _ = invented_trial(day, trial, False)
+            time = np.arange(len(index)) / 100
+            frames = np.column_stack([
+                .06 + .025 * np.sin(time * 1.2 + trial), index,
+                .07 + .031 * np.sin(time * 1.08 + .4),
+                .09 + .015 * np.cos(time * 1.4 + trial / 5),
+                .04 + .018 * np.cos(time * .91 + .7),
+            ])
+        else:
+            frames = read_signal(session, "force", trial, all_digits=True)
+        target = frames[TICKS + 12, DIGITS.index("index")]
+        if not np.isfinite(target).all():
+            raise ValueError(f"Trial {trial} has missing index-sensor targets.")
+        for arm in errors:
+            forecast = predictor.predict(frames, TICKS, weights, arm)
+            errors[arm].append(forecast - target)
+    metrics = {}
+    for arm, parts in errors.items():
+        diff = np.concatenate(parts)
+        metrics[arm] = {"mae_v": float(np.abs(diff).mean()),
+                        "rmse_v": float(np.sqrt(np.mean(diff**2)))}
+    return {
+        "input": "invented example" if session is None else "original local recording",
+        "scoring_day": day, "trials": len(trials), "cutoffs": len(trials) * len(TICKS),
+        "target": "index sensor voltage at +120 ms",
+        "models": metrics,
+        "aligned_five_mae_reduction_v": metrics["index_only"]["mae_v"] - metrics["aligned_five"]["mae_v"],
+    }
+
+
 def run(args):
     weights = json.loads((BASE / "predictors.json").read_text(encoding="utf-8"))
     eval_day = 2
@@ -133,11 +173,15 @@ def run(args):
             first_person, first_day = session_name(args.calibrate_from)
             if person != first_person or first_day != 1 or eval_day != 2:
                 raise ValueError("Calibration requires the same person's original session1 and session2 folders.")
+    trials = [args.trial] if args.trial is not None else range(1, 6)
+    if args.whole_hand:
+        if args.with_emg or args.calibrate_from:
+            raise ValueError("--whole-hand scores fixed force-sensor models. Run EMG or Day 1 calibration separately.")
+        return score_whole_hand(args.session, eval_day, trials)
     adapters = {}
     if args.example or args.calibrate_from:
         current, target, pooled = collect(args.calibrate_from, 1, range(1, 6), args.with_emg, weights)
         adapters = {key: calibrate(current, values, target) for key, values in pooled.items()}
-    trials = [args.trial] if args.trial is not None else range(1, 6)
     current, target, pooled = collect(args.session, eval_day, trials, args.with_emg, weights)
     results = {}
     for key, values in pooled.items():
@@ -157,6 +201,8 @@ def main():
     parser.add_argument("session", nargs="?", type=Path, help="Original evaluation session folder.")
     parser.add_argument("--calibrate-from", type=Path, metavar="SESSION1", help="First-day folder for the same person.")
     parser.add_argument("--with-emg", action="store_true", help="Also load raw forearm records and score the aligned model.")
+    parser.add_argument("--whole-hand", action="store_true",
+                        help="Compare index history with all five force sensors at the same cutoffs.")
     parser.add_argument("--trial", type=int, choices=range(1, 6), help="Score one evaluation trial. Calibration always uses five.")
     parser.add_argument("--example", action="store_true", help="Run two invented sessions without opening a recording.")
     args=parser.parse_args()

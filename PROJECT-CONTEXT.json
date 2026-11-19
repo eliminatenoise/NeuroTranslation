@@ -427,8 +427,8 @@
       "entry": "docs/hyser-index/index.html",
       "offline_download": {
         "path": "benchmarks/hyser-index/downloads/Hyser-Index-Voltage-Reader.zip",
-        "bytes": 27115,
-        "sha256": "1bc17a2f7ff1b175c42f354106b9bc37c7300c8ac2b1f26f0c9bc373fdf2b4e2"
+        "bytes": 39862,
+        "sha256": "2b16456bc93e734b54b752cb9e41b9fd3cad1c95ac69816541e81c9389337616"
       },
       "shared_train_predictors": {
         "path": "benchmarks/hyser-index/predictors.json",
@@ -455,8 +455,8 @@
         },
         "python_download": {
           "path": "benchmarks/hyser-index/downloads/Hyser-Crossday-Python.zip",
-          "bytes": 13574,
-          "sha256": "72023b74a686686dc332c8df0e0b24cbde2e3000dadbd4b59d9468874ade7dbc"
+          "bytes": 25008,
+          "sha256": "51a4ee5c00e62c2968dfc6bfdb28a1e43197c20fd208f2dc5259e9da5ede632b"
         },
         "calibration": {
           "path": "benchmarks/hyser-index/calibration.py",
@@ -467,8 +467,37 @@
       "personal_reader": "Two original same-person session folders, five labeled first-day trials, fixed second-day inference. Population mode remains available.",
       "python_scorer": {
         "path": "benchmarks/hyser-index/downloads/Hyser-Crossday-Python.zip",
-        "bytes": 13574,
-        "sha256": "72023b74a686686dc332c8df0e0b24cbde2e3000dadbd4b59d9468874ade7dbc"
+        "bytes": 25008,
+        "sha256": "51a4ee5c00e62c2968dfc6bfdb28a1e43197c20fd208f2dc5259e9da5ede632b"
+      },
+      "whole_hand": {
+        "guide": {
+          "path": "benchmarks/hyser-index/whole-hand/README.md",
+          "bytes": 5932,
+          "sha256": "79799d0f0ac3e1733baa41d68b4d3c4067c592d9bcb3c09a2bff50f6a7742682"
+        },
+        "results": {
+          "path": "benchmarks/hyser-index/whole-hand/RESULTS.json",
+          "bytes": 42699,
+          "sha256": "9f61f086ad1cadeedd3052bb3bf1136ee233466841b601ba346d49a1cf5cd6e3"
+        },
+        "protocol": {
+          "path": "benchmarks/hyser-index/whole-hand/PROTOCOL.md",
+          "bytes": 8256,
+          "sha256": "49dd60ec6290b1343a8793963cd1d12dd13044a33619642b83a07189bceeeff7"
+        },
+        "prospective_commit": "25a35fc72621337c7281093eab9bd2520837d85a",
+        "predictor": {
+          "path": "benchmarks/hyser-index/whole-hand/finger_context.py",
+          "bytes": 4365,
+          "sha256": "b91ad83b8bdac1b667b21654813075acbbba64c20c82d2475c4a443f0c975db1"
+        },
+        "pooled_weights": {
+          "path": "benchmarks/hyser-index/whole-hand/WEIGHTS.json",
+          "bytes": 28906,
+          "sha256": "c237d6b59268c22d9e2844d32fe4ffd36dccf0584a8ad99b3465cc94cd2254d2"
+        },
+        "scope": "Five force sensors, four prespecified fits including one other-trial control, and three same-trial predictors. MAE favored different models in the 12-person training comparison and four previously studied development participants. Reserved final participants remain unopened."
       }
     }
   },
@@ -539,14 +568,43 @@
       },
       "python_download": {
         "path": "benchmarks/hyser-index/downloads/Hyser-Crossday-Python.zip",
-        "bytes": 13574,
-        "sha256": "72023b74a686686dc332c8df0e0b24cbde2e3000dadbd4b59d9468874ade7dbc"
+        "bytes": 25008,
+        "sha256": "51a4ee5c00e62c2968dfc6bfdb28a1e43197c20fd208f2dc5259e9da5ede632b"
       },
       "calibration": {
         "path": "benchmarks/hyser-index/calibration.py",
         "bytes": 1637,
         "sha256": "a04bfc6def66a73d152587eb6136ffc2442f55783c114598a12ad10933a386f7"
       }
+    },
+    "hyser_whole_hand": {
+      "guide": {
+        "path": "benchmarks/hyser-index/whole-hand/README.md",
+        "bytes": 5932,
+        "sha256": "79799d0f0ac3e1733baa41d68b4d3c4067c592d9bcb3c09a2bff50f6a7742682"
+      },
+      "results": {
+        "path": "benchmarks/hyser-index/whole-hand/RESULTS.json",
+        "bytes": 42699,
+        "sha256": "9f61f086ad1cadeedd3052bb3bf1136ee233466841b601ba346d49a1cf5cd6e3"
+      },
+      "protocol": {
+        "path": "benchmarks/hyser-index/whole-hand/PROTOCOL.md",
+        "bytes": 8256,
+        "sha256": "49dd60ec6290b1343a8793963cd1d12dd13044a33619642b83a07189bceeeff7"
+      },
+      "prospective_commit": "25a35fc72621337c7281093eab9bd2520837d85a",
+      "predictor": {
+        "path": "benchmarks/hyser-index/whole-hand/finger_context.py",
+        "bytes": 4365,
+        "sha256": "b91ad83b8bdac1b667b21654813075acbbba64c20c82d2475c4a443f0c975db1"
+      },
+      "pooled_weights": {
+        "path": "benchmarks/hyser-index/whole-hand/WEIGHTS.json",
+        "bytes": 28906,
+        "sha256": "c237d6b59268c22d9e2844d32fe4ffd36dccf0584a8ad99b3465cc94cd2254d2"
+      },
+      "scope": "Five force sensors, four prespecified fits including one other-trial control, and three same-trial predictors. MAE favored different models in the 12-person training comparison and four previously studied development participants. Reserved final participants remain unopened."
     }
   }
 }

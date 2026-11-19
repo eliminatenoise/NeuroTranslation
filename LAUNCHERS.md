@@ -47,3 +47,5 @@ Open the reader for an invented example or an original Hyser Random-task WFDB re
 In the browser or offline reader, choose **Personalize across two days**. Fit an adjustment from the original five first-day trials, then open a second-day trial from the same participant. **Try two invented days** runs the workflow without a recording.
 
 The [Python session scorer](benchmarks/hyser-index/downloads/Hyser-Crossday-Python.zip) reads original WFDB session folders, fits on Day 1 and compares shared and personal errors on Day 2. The example runs with invented data. [Read the command-line instructions](benchmarks/hyser-index/SCORE-SESSION.md).
+
+In the Hyser reader, choose **Finger sensor context** to inspect the other four fingers and compare the three fixed forecasts on one force file pair. In the Python scorer, use `--whole-hand` on an original session folder or on the invented example. [Five-sensor results](benchmarks/hyser-index/whole-hand/README.md).

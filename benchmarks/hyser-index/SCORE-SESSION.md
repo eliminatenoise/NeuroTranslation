@@ -28,4 +28,15 @@ The scorer writes JSON to the terminal. MAE and RMSE are in sensor volts. `mae_g
 
 Folder names identify the participant and day. Use the names and grouping supplied with the original recordings. The program checks each record’s channel names, sample layout, declared units, lengths, initial values and WFDB checksums, then converts the ADC values to volts using its own channel gains and baselines. To check provenance, compare the original files with the checksum manifest from PhysioNet. The code operates locally and reads one trial at a time.
 
+## Compare all five finger sensors
+
+How much does the index finger tell us on its own? Add `--whole-hand` to compare three fixed models on exactly the same index readings. One sees 41 index readings, spanning 400 ms. A second sees the same history from each of the five fingers. A third keeps the full index history and uses just the latest reading and the slope for each of the other four fingers. All three predict the index sensor voltage 120 ms later.
+
+```sh
+python score_session.py --example --whole-hand --trial 1
+python score_session.py random_dataset/subjectNN_session2 --whole-hand
+```
+
+The five channels share one force record per trial. This comparison uses that record alone, with each channel converted to volts using its own header calibration. The JSON reports MAE and RMSE for each model and the change in MAE when all five histories are available. A positive change means that adding the other fingers lowered the error on the supplied recording. Run the EMG and personal-calibration comparisons separately.
+
 Contains information from Jiang, Dai, Liu and Fan’s Hyser 2.0.0 database, made available under the Open Data Commons Attribution License 1.0. [Dataset and citation](https://doi.org/10.13026/hxan-pe94) · [License](https://physionet.org/content/hd-semg/view-license/2.0.0/) · [Acquisition study](https://doi.org/10.1109/TNSRE.2021.3082551)

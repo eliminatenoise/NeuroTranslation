@@ -18,4 +18,4 @@ A separate experiment compares the shared forecast with two adjustments, one fit
 
 ## Do the other fingers help?
 
-The force file contains separate voltages for all five fingers. A new comparison keeps the target and the people fixed and changes which finger histories the model sees. The protocol specifies the same-trial and other-trial comparisons before fitting. [Read the whole-hand protocol](whole-hand/PROTOCOL.md).
+In four previously studied participants, adding the other four finger sensors lowered the average index forecast error from 14.355 to 14.161 mV. In the 12-person training comparison, the same change raised it from 16.854 to 16.915 mV. The four-person estimate spans both improvement and worsening. Choose **Finger sensor context** in the reader to see the other digits up to the cutoff and compare three forecasts on one original force file pair. [Study results and timing control](whole-hand/README.md) · [Model inputs and pooled weights](whole-hand/PREDICTOR.md) · [Python session scorer](SCORE-SESSION.md).

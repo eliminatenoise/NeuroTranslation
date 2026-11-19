@@ -1,6 +1,6 @@
 # Index-finger voltage forecast
 
-Extract the ZIP, then use **Open Hyser on Windows**, **Open Hyser on macOS** or **Open Hyser on Linux**. You can open `index.html` directly in a browser. The reader starts with an invented trial. Both population models run on your device.
+Extract the ZIP, then use **Open Hyser on Windows**, **Open Hyser on macOS** or **Open Hyser on Linux**. You can open `index.html` directly in a browser. The reader starts with an invented trial and runs on your device.
 
 ## Try a recording
 
@@ -11,6 +11,12 @@ Extract the ZIP, then use **Open Hyser on Windows**, **Open Hyser on macOS** or 
 The line traces the index sensor's recent voltage. A filled diamond marks the force-history forecast. A filled square marks the forecast that also uses forearm activity. The outlined diamond and square show the corresponding personalized forecasts. Reveal the later reading to add its circle. The tables show the individual voltage samples and the RMS from each 64-electrode grid. ED and EP are the distal and proximal extensor grids. FD and FP are the distal and proximal flexor grids. Each grid samples a region of the forearm.
 
 The reader checks record names, sampling rates, channel order, lengths, initial samples and WFDB checksums. It subtracts the channel baseline from each signed 16-bit count, then divides by the channel gain to give volts. Files and fitted coefficients stay in memory on this page. The package contains the population weights and invented examples. To check your copy of the data against the publisher’s cryptographic record, use the checksum list distributed by PhysioNet.
+
+## See what the other fingers were doing
+
+Choose **Finger sensor context** and open a Random-task force pair, a session folder or the invented trial. Move the cutoff. The four smaller plots show the thumb, middle, ring and little finger sensor readings from 400 ms before cutoff through the cutoff itself, in volts on a shared scale. The table gives each sample and marks gaps.
+
+If this copy includes the pooled finger-context models, the diamond compares an index-only forecast with the triangle's forecast from all five histories. The outlined amber circle uses the index history plus each other finger’s voltage at cutoff and a straight-line slope fitted over that finger’s last 41 readings. All three forecast the index sensor 120 ms after cutoff. A gap in another finger’s history leaves the index-only forecast available. A copy without those fitted weights displays the earlier force-history forecast and still shows all available sensor traces. This mode uses the force pair alone. The two-day fit remains in its own mode.
 
 ## Fit on one day and test on the other
 

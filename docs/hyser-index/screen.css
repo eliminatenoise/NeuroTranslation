@@ -41,6 +41,8 @@ figcaption { margin: .6rem 0 .4rem; }
 .legend .personal-mark { width: .72rem; height: .72rem; border: 2px solid #31549b; background: transparent; }
 .legend .square.personal-mark { border-color: #8f4811; }
 .legend .circle { width:.7rem; height:.7rem; border:2px solid #46374f; border-radius:50%; }
+.legend .triangle { width:0; height:0; border-left:.34rem solid transparent; border-right:.34rem solid transparent; border-bottom:.58rem solid #1d6353; }
+.legend .ring { width:.56rem; height:.56rem; border:2px solid #a75212; border-radius:50%; }
 [hidden] { display:none !important; }
 details { margin-top:.6rem; } summary { cursor:pointer; width:fit-content; color:#14574a; }
 table { border-collapse:collapse; max-width:100%; font-size:.94rem; margin:.5rem 0; }
@@ -50,6 +52,14 @@ caption { text-align:left; font-weight:650; }
 footer { border-top:1px solid #c7d4cd; padding-top:.7rem; font-size:.94rem; }
 
 .table-scroll { max-width: 100%; overflow-x: auto; }
+#finger-context { border-top: 1px solid #c5d3ca; margin-top: 1rem; }
+#finger-status:empty { display: none; }
+.digit-traces { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .7rem; }
+.digit-traces figure { margin: 0; min-width: 0; }
+.digit-traces figcaption { font-weight: 650; }
+.digit-traces canvas { height: 6.75rem; }
+.digit-traces .digit-latest { font-size: .88rem; font-variant-numeric: tabular-nums; }
+@media (max-width: 40rem) { .digit-traces { grid-template-columns: 1fr; } }
 #score { border-top: 1px solid #c5d3ca; margin-top: 1rem; }
 #score th[scope="row"] { text-align: left; min-width: 7rem; }
 #score-changes { margin: .5rem 0; padding-left: 1.3rem; }

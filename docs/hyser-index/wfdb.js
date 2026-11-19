@@ -58,12 +58,13 @@
     return { channels, rate, samples, record };
   }
 
-  function catalogue(files) {
+  function catalogue(files, { includeRaw = true } = {}) {
     const trials = new Map(),
       parents = new Set();
     for (const file of files) {
       const m = /^random_(force|raw)_sample([1-5])\.(hea|dat)$/.exec(file.name);
       if (!m) continue;
+      if (!includeRaw && m[1] === "raw") continue;
       const trial = Number(m[2]);
       const folder = (file.webkitRelativePath || "")
         .split("/")

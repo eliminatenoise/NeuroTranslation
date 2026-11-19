@@ -167,7 +167,15 @@
   function invented(variant = 0) {
     return {
       force: {
-        voltage(i) {
+        voltage(i, channel = 1) {
+          if (channel !== 1) {
+            return (
+              0.08 +
+              0.012 * channel +
+              0.026 * Math.sin(i / (42 + 7 * channel) + 0.6 * channel + variant) +
+              0.013 * Math.cos(i / (13 + 3 * channel) + 0.2 * variant)
+            );
+          }
           return (
             0.11 +
             (0.035 + 0.0018 * variant) * Math.sin(i / 56 + 0.17 * variant) +
