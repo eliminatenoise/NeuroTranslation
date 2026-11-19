@@ -1,0 +1,20 @@
+{
+  "study": "Pinch-force transfer across prescribed intensities",
+  "protocol_sha256": "60388f4aab4daa9591904aef311e0b1f7955e4cb875adb8b8fdde05a5f0f4132",
+  "source_membership_commitment": "a4bbfd14736b08f1decdbcd64fc3110489b93a8fb413c580f7fc0a49d9ea4ea2",
+  "source_archive": "https://doi.org/10.5281/zenodo.15077957",
+  "frozen_point_reference": "https://github.com/eliminatenoise/NeuroTranslation/tree/d66fc10251fb3e04e6dcd8a9d2cda8c927ade408/benchmarks/cemhsey-arrays",
+  "participants": 4,
+  "indexed_days_per_person": 1,
+  "targets_percent_mvc": [
+    10,
+    30,
+    50
+  ],
+  "first_repeats_for_adaptation": 12,
+  "second_repeats_for_evaluation": 12,
+  "adaptation_coefficients": 24,
+  "window_count_per_trial": 592,
+  "subject_scope": "Distinct from the point-model training group. Earlier studies used other days from the same four people. Each person contributes both repeats at every target.",
+  "controls": "A scheduled cue can be read ahead. Future measured force cannot."
+}

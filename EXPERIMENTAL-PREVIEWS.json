@@ -28,8 +28,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 20424,
-      "sha256": "dfc88a6553562bfeed2e48727dc96281ea2db2c1572a9d9113cd6c95cb2b1695"
+      "bytes": 20644,
+      "sha256": "17da8962a3cf7f0cde657e57a44fb38e6fb3160119cf9b663f2f75128c757fd1"
     },
     {
       "path": "benchmarks/cemhsey-arrays/BROWSER-FITTING.md",
@@ -195,6 +195,21 @@
       "path": "benchmarks/cemhsey-pinch/trial_io.py",
       "bytes": 3327,
       "sha256": "b283362bb6d1e698ce1ba48ddb1b36c88721e6b677cbfedfab5e824b165c3955"
+    },
+    {
+      "path": "benchmarks/cemhsey-transfer/DESIGN.json",
+      "bytes": 990,
+      "sha256": "9a2bec2d8ac25d5f2d1a92ba2cc2d5f75e4fa2b7489029e084f10776a8f92df4"
+    },
+    {
+      "path": "benchmarks/cemhsey-transfer/PROTOCOL.md",
+      "bytes": 6373,
+      "sha256": "60388f4aab4daa9591904aef311e0b1f7955e4cb875adb8b8fdde05a5f0f4132"
+    },
+    {
+      "path": "benchmarks/cemhsey-transfer/README.md",
+      "bytes": 903,
+      "sha256": "23b7d3a95ce5f39e80c8849b45d3b24d85fdcc38336788df83d5d7194bc4290d"
     },
     {
       "path": "benchmarks/hygrip-force/DESIGN.json",
@@ -3728,17 +3743,15 @@
     }
   ],
   "desktop_launchers": "docs/START.html",
-  "previous_public_commit": "9156bf5e221e738e3339d6d2beb5bc9a65b7463b",
+  "previous_public_commit": "d66fc10251fb3e04e6dcd8a9d2cda8c927ade408",
   "launcher_update": "The desktop shortcuts open the palm replay. The companion also includes sample inspection and alignment.",
   "base_public_commit_scope": "Historical original payload base; not the head or whole-tree seal for later context changes.",
   "file_row_scope": {
     "refreshed_paths": [
-      "PROJECT-CONTEXT.json",
-      "benchmarks/cemhsey-arrays/BROWSER-FITTING.md",
-      "benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip",
-      "docs/cemhsey-arrays/LOCAL-USE.md",
-      "docs/cemhsey-arrays/index.html",
-      "docs/cemhsey-arrays/reader.js"
+      "README.md",
+      "benchmarks/cemhsey-transfer/DESIGN.json",
+      "benchmarks/cemhsey-transfer/PROTOCOL.md",
+      "benchmarks/cemhsey-transfer/README.md"
     ],
     "preserved_other_rows": true
   },
@@ -4235,5 +4248,18 @@
       "sha256": "23e76f3b0c8462e1598050d9551fc18286259b16f1003d5110b6cf47a827cd3c",
       "bytes": 5778
     }
+  },
+  "cemhsey_force_transfer": {
+    "protocol": {
+      "path": "benchmarks/cemhsey-transfer/PROTOCOL.md",
+      "bytes": 6373,
+      "sha256": "60388f4aab4daa9591904aef311e0b1f7955e4cb875adb8b8fdde05a5f0f4132"
+    },
+    "design": {
+      "path": "benchmarks/cemhsey-transfer/DESIGN.json",
+      "bytes": 990,
+      "sha256": "9a2bec2d8ac25d5f2d1a92ba2cc2d5f75e4fa2b7489029e084f10776a8f92df4"
+    },
+    "status": "Prospective design fixed before adaptation or evaluation outcome reads."
   }
 }
