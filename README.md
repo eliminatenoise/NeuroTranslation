@@ -21,7 +21,7 @@ Every page in this table runs on your own computer: a recording you open is read
 
 In each row a model learned from some recordings (it was *fitted* to them) and was scored on others, unless the row says otherwise. The first row is the project's own model. The last three rows are for programmers: a building block other pages load, and two small Python programs.
 
-[The start page](https://eliminatenoise.github.io/NeuroTranslation/START.html) links to every one of the project's browser pages, among them the readers that open files from the datasets of the 25 small studies, and to [the app](https://eliminatenoise.github.io/NeuroTranslation/index.html) that lines up your own recordings on one clock.
+[The start page](https://eliminatenoise.github.io/NeuroTranslation/START.html) links to every one of the project's browser pages, among them the readers that open files from the datasets of the 25 small studies, and to [NeuroTranslator](https://eliminatenoise.github.io/NeuroTranslation/index.html), the app that lines up your own recordings on one clock.
 
 | What it asks | What you do, and what was found |
 | --- | --- |
@@ -156,7 +156,7 @@ On 20 November it had its first five fits to real recordings, all of them in the
   - Then a fourteenth task, in another laboratory's recordings: how far a marker on the head and one on the sacrum, the bone at the base of the spine, will move in the next eighth of a second after the view in a headset rotates, as people walk a narrow beam, from 0.625 seconds of both markers, the rotation's direction and, if they are given, voltages from the scalp, beside the eyes and over muscles of the neck and legs ([`models/neurotranslate-0.0/visual_balance/`](models/neurotranslate-0.0/visual_balance/)). The shared part was left as it was, and a new final step was fitted on 17 people. On 880 rotations by six others, opened only after the models and the scoring were sealed, it missed the sacrum by 8.579 mm and the head by 7.738 mm on average with all the voltages, and by 8.108 and 7.429 mm without the scalp's. A straight-line fit given only the markers' recent movement and the rotation's direction did better than every other method (7.368 and 6.617 mm), the small transformer trained for the task included. [Try the balance task](https://eliminatenoise.github.io/NeuroTranslation/visual-balance-controls/) · [Methods and results](models/neurotranslate-0.0/visual_balance/) · [The transformer study](models/visual-balance/)
   - The shared model can also accept recorded brain-cell firing alongside a rat's recent camera track. Correctly timed firing lowered its average distance error from **2.805 to 2.778 cm**, but beat both movement alone and an earlier-trip firing control in only one of the three animals. This reanalysis used previously examined test recordings. [Run the fitted model and inspect its controls](models/neurotranslate-0.0/population/)
 
-What does not exist yet: a fit of the general model in which a brain, nerve or muscle signal helps it beat simpler forecasts on people nobody had looked at before; its one win, on the pedal, came from the pedal's own readings, and the muscle signal made it worse. So nothing here yet translates between nerve, muscle and movement. Nor is the model inside the browser app titled NeuroTranslate 0.0, the one that lines up your own recordings on one clock. Two of its fits run in a browser elsewhere, both in the table of things to try above: the shared fit, with eight of the tasks listed above on a page of its own and the back-sensor, shin-muscle, pedal, heel-and-force, walking-instruction and visual-balance tasks on six others, and study 28's three wrist fits as a piece of code for programmers.
+What does not exist yet: a fit of the general model in which a brain, nerve or muscle signal helps it beat simpler forecasts on people nobody had looked at before; its one win, on the pedal, came from the pedal's own readings, and the muscle signal made it worse. So nothing here yet translates between nerve, muscle and movement. Nor is the model inside NeuroTranslator, the browser app that lines up your own recordings on one clock. Two of its fits run in a browser elsewhere, both in the table of things to try above: the shared fit, with eight of the tasks listed above on a page of its own and the back-sensor, shin-muscle, pedal, heel-and-force, walking-instruction and visual-balance tasks on six others, and study 28's three wrist fits as a piece of code for programmers.
 
 ### A translation needs both texts from the same moment
 
@@ -240,7 +240,7 @@ python -m unittest -v
 python run.py --input ../iackd-data --output ../availability-run
 ```
 
-To build the app from source: `cd demo`, then `npm test` and `npm run build`. [demo/README.md](demo/README.md) says what the app does with a file you give it.
+To build NeuroTranslator, the browser app, from source: `cd demo`, then `npm test` and `npm run build`. [demo/README.md](demo/README.md) says what the app does with a file you give it.
 
 ## None of the recordings is ours
 

@@ -1,12 +1,12 @@
-# The app
+# NeuroTranslator, the browser app
 
-This folder is the source of the browser app at [eliminatenoise.github.io/NeuroTranslation/index.html](https://eliminatenoise.github.io/NeuroTranslation/index.html).
+This folder is the source of NeuroTranslator, the project's browser app, at [eliminatenoise.github.io/NeuroTranslation/index.html](https://eliminatenoise.github.io/NeuroTranslation/index.html).
 
 The app does three things with the recordings you give it. It shows each one on its own clock. It lines several up on a shared clock. And it replays a palm trial against the fitted models of the two palm studies.
 
 Your files stay in the browser. The app has nowhere to send them.
 
-The page is titled NeuroTranslate 0.0, which is the name of the model this project is building. The model is not in the app.
+NeuroTranslator is the software. NeuroTranslate 0.0, the general model this project is building, is not in it; the model has [a folder of its own](../models/neurotranslate-0.0/).
 
 ## Build and test
 
@@ -51,7 +51,7 @@ The limits keep the browser responsive: 5 MiB per file and in total, 64 streams,
 
 A licence written in a file is a claim, not a permission. Matching subject names or clock names show how two files say they are related. They do not show that the recordings were made together.
 
-**Export samples + checks** saves `neurotranslate-0.0-inspection.json`: the files as you gave them, with the report.
+**Export samples + checks** saves `neurotranslator-inspection.json`: the files as you gave them, with the report. Files saved before the app took its name are called `neurotranslate-0.0-inspection.json` and say "NeuroTranslate 0.0" inside; the renaming changed nothing else in the format.
 
 ## Replay a palm trial
 

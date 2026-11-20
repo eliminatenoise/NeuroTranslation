@@ -2,7 +2,7 @@
 
 Almost everything here runs in a browser. A launcher is a shortcut that opens the right page. An offline copy is a ZIP that holds the page itself, so it works with no network. The general model’s five-sensor walking page and the study 28 wrist command need Python. The two newer stride and rat viewers open without it.
 
-## A shortcut to the app
+## A shortcut to NeuroTranslator, the app
 
 The shortcut opens the app in your browser, at the part that replays a recorded palm movement. It needs a network connection.
 

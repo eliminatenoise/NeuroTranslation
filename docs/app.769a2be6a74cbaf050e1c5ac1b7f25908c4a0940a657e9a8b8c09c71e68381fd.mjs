@@ -1,10 +1,10 @@
-import {parsePacket,parseCsv,validatePacket,combinePackets,summarizePackets,alignPackets,examplePacket,stringifyRecording} from './core.2bd83ab9185cb8a5bd93d258409767e4c9a13f90eaed7b0ce486c7c28f4ccf73.mjs';
-import {normalizeFinite,buildPlotSegments} from './plot.2bd83ab9185cb8a5bd93d258409767e4c9a13f90eaed7b0ce486c7c28f4ccf73.mjs';
-import {toPolicyEnvelope} from './packet-policy-bridge.2bd83ab9185cb8a5bd93d258409767e4c9a13f90eaed7b0ce486c7c28f4ccf73.mjs';
-import {evaluate as evaluateMetadata} from './compat-policy.2bd83ab9185cb8a5bd93d258409767e4c9a13f90eaed7b0ce486c7c28f4ccf73.mjs';
-import {renderMetadataReport} from './policy-report-view.2bd83ab9185cb8a5bd93d258409767e4c9a13f90eaed7b0ce486c7c28f4ccf73.mjs';
-import {createPalmReplay} from './replay-view.2bd83ab9185cb8a5bd93d258409767e4c9a13f90eaed7b0ce486c7c28f4ccf73.mjs';
-import {showCalibrationStudy} from './calibration-view.2bd83ab9185cb8a5bd93d258409767e4c9a13f90eaed7b0ce486c7c28f4ccf73.mjs';
+import {parsePacket,parseCsv,validatePacket,combinePackets,summarizePackets,alignPackets,examplePacket,stringifyRecording} from './core.769a2be6a74cbaf050e1c5ac1b7f25908c4a0940a657e9a8b8c09c71e68381fd.mjs';
+import {normalizeFinite,buildPlotSegments} from './plot.769a2be6a74cbaf050e1c5ac1b7f25908c4a0940a657e9a8b8c09c71e68381fd.mjs';
+import {toPolicyEnvelope} from './packet-policy-bridge.769a2be6a74cbaf050e1c5ac1b7f25908c4a0940a657e9a8b8c09c71e68381fd.mjs';
+import {evaluate as evaluateMetadata} from './compat-policy.769a2be6a74cbaf050e1c5ac1b7f25908c4a0940a657e9a8b8c09c71e68381fd.mjs';
+import {renderMetadataReport} from './policy-report-view.769a2be6a74cbaf050e1c5ac1b7f25908c4a0940a657e9a8b8c09c71e68381fd.mjs';
+import {createPalmReplay} from './replay-view.769a2be6a74cbaf050e1c5ac1b7f25908c4a0940a657e9a8b8c09c71e68381fd.mjs';
+import {showCalibrationStudy} from './calibration-view.769a2be6a74cbaf050e1c5ac1b7f25908c4a0940a657e9a8b8c09c71e68381fd.mjs';
 
 const $=id=>document.getElementById(id);
 const colors={neural:'#7757d8',muscle:'#cd6446',displacement:'#287dba',mechanics:'#278476'};
@@ -284,11 +284,11 @@ $('play').addEventListener('click',()=>{
   }
   state.animationFrame=requestAnimationFrame(tick);
 });
-$('export').addEventListener('click',()=>{if(state.aligned)download('neurotranslate-0.0-aligned.json',{application:'NeuroTranslate 0.0',operation:'declared-clock alignment, not learned translation',example:isExample(),sourcePackets:state.packets,alignment:state.aligned,metadataCheck:state.metadata});});
-$('export-metadata').addEventListener('click',()=>{if(state.metadata)download('neurotranslate-0.0-inspection.json',{application:'NeuroTranslate 0.0',operation:'Original source samples and metadata checks; no pairing or learned translation',example:isExample(),sourcePackets:state.packets,metadataCheck:state.metadata});});
-$('download-template').addEventListener('click',()=>download('neurotranslate-0.0-example.json',examplePacket()));
+$('export').addEventListener('click',()=>{if(state.aligned)download('neurotranslator-aligned.json',{application:'NeuroTranslator',operation:'declared-clock alignment, not learned translation',example:isExample(),sourcePackets:state.packets,alignment:state.aligned,metadataCheck:state.metadata});});
+$('export-metadata').addEventListener('click',()=>{if(state.metadata)download('neurotranslator-inspection.json',{application:'NeuroTranslator',operation:'Original source samples and metadata checks; no pairing or learned translation',example:isExample(),sourcePackets:state.packets,metadataCheck:state.metadata});});
+$('download-template').addEventListener('click',()=>download('neurotranslator-example.json',examplePacket()));
 window.addEventListener('resize',drawTraces);
 async function catalogue(){
-  try{const response=await fetch('datasets.2bd83ab9185cb8a5bd93d258409767e4c9a13f90eaed7b0ce486c7c28f4ccf73.json');if(!response.ok)return;const data=await response.json();for(const d of data.datasets||data){const card=element('article','dataset-card');card.append(element('h3','',d.name),element('p','',d.modalities?.join(' · ')||d.modality||''),element('p','',d.description||d.coverage||''),element('p','catalogue-limit',d.limit||d.pairingLimit||''));card.append(element('p','',`Reference metadata · ${(d.license||[]).join(', ')} · recordings not included`));if(d.url&&/^https:\/\//i.test(d.url)){const link=element('a','',`Source ↗`);link.href=d.url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);}$('catalogue-list').append(card);}$('catalogue-section').hidden=!$('catalogue-list').children.length;}catch{/* Optional catalogue is independent of data import and alignment. */}
+  try{const response=await fetch('datasets.769a2be6a74cbaf050e1c5ac1b7f25908c4a0940a657e9a8b8c09c71e68381fd.json');if(!response.ok)return;const data=await response.json();for(const d of data.datasets||data){const card=element('article','dataset-card');card.append(element('h3','',d.name),element('p','',d.modalities?.join(' · ')||d.modality||''),element('p','',d.description||d.coverage||''),element('p','catalogue-limit',d.limit||d.pairingLimit||''));card.append(element('p','',`Reference metadata · ${(d.license||[]).join(', ')} · recordings not included`));if(d.url&&/^https:\/\//i.test(d.url)){const link=element('a','',`Source ↗`);link.href=d.url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);}$('catalogue-list').append(card);}$('catalogue-section').hidden=!$('catalogue-list').children.length;}catch{/* Optional catalogue is independent of data import and alignment. */}
 }
 loadExample();catalogue();showCalibrationStudy();
