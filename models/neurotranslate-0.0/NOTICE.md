@@ -43,3 +43,5 @@ The cervical voltage preview uses the CC0 dataset published by Nierula and colle
 The back-rotation study uses the CC BY 4.0 recordings from Gracia Laso, Iáñez, Ortiz and Azorín. [Original dataset](https://doi.org/10.5281/zenodo.19065545) · [Licence text](back_rotation/CC-BY-4.0.txt). Model inputs are derived from device orientation and two surface electrode arrays.
 
 The muscle-tracking study uses AnkleImage from Zhang and colleagues under CC BY 4.0. [Dataset](https://doi.org/10.6019/S-BIAD1482) · [Licence](muscle_tracking/CC-BY-4.0.txt).
+
+The Task 1 fixed-pedal recordings are part of AnkleImage, Zhang and colleagues, CC BY 4.0. [Source dataset](https://doi.org/10.6019/S-BIAD1482) · [Licence](pedal_load/CC-BY-4.0.txt).

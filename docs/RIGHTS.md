@@ -212,3 +212,7 @@ Desirée Irene Gracia Laso, Eduardo Iáñez, Mario Ortiz and José M. Azorín re
 ### Ultrasound tracking of the tibialis anterior
 
 Qiang Zhang, Noor Hakam, Oluwasegun Akinniyi, Ashwin Iyer, Xuefeng Bao and Nitin Sharma released the AnkleImage data under Creative Commons Attribution 4.0. These models use derived length and angle estimates from Task 3. Downloads contain original code, trained coefficients, aggregate errors and invented inputs. The source program retrieves the selected recordings from the authors’ deposit. The article has a separate licence. [Dataset](https://doi.org/10.6019/S-BIAD1482) · [Methods article](https://doi.org/10.1038/s41597-024-04285-x) · [Dataset licence](https://creativecommons.org/licenses/by/4.0/)
+
+### Skin electrode and pedal recordings
+
+Qiang Zhang, Noor Hakam, Oluwasegun Akinniyi, Ashwin Iyer, Xuefeng Bao and Nitin Sharma released the AnkleImage recordings under CC BY 4.0. This study selects two Task 1 settings, fits forecasts to earlier signals and reports aggregate errors. The reader uses invented example inputs. The illustrations were drawn for this study. The original methods article carries a separate licence. [AnkleImage dataset](https://doi.org/10.6019/S-BIAD1482) · [Original methods](https://doi.org/10.1038/s41597-024-04285-x) · [Data licence](https://creativecommons.org/licenses/by/4.0/)

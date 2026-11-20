@@ -121,3 +121,16 @@ docs/muscle-tracking/*.cmd whitespace=cr-at-eol
 docs/muscle-tracking/CC-BY-4.0.txt whitespace=-blank-at-eof
 models/muscle-tracking/CC-BY-4.0.txt whitespace=-blank-at-eof
 models/neurotranslate-0.0/muscle_tracking/CC-BY-4.0.txt whitespace=-blank-at-eof
+
+docs/pedal-load/** -text
+models/pedal-load/** -text
+models/neurotranslate-0.0/pedal_load/** -text
+docs/shared-pedal-load/** -text
+docs/papers/pedal-load/** -text
+models/pedal-load/*.cmd whitespace=cr-at-eol
+docs/pedal-load/*.cmd whitespace=cr-at-eol
+
+# Keep original licence files byte-for-byte.
+docs/pedal-load/CC-BY-4.0.txt whitespace=-blank-at-eof
+models/pedal-load/CC-BY-4.0.txt whitespace=-blank-at-eof
+models/neurotranslate-0.0/pedal_load/CC-BY-4.0.txt whitespace=-blank-at-eof

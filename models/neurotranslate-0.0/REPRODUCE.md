@@ -1,5 +1,7 @@
 # Predict and reproduce
 
+For a fixed-pedal load example, use `python predict.py pedal_load/example.json`. [Fit and assess the pedal model](pedal_load/README.md).
+
 For the ultrasound fascicle forecast, run `python predict.py muscle_tracking/example.json`. [Study, source and independent evaluation](muscle_tracking/README.md).
 
 For the back-rotation study, run `python predict.py back_rotation/example.json`. [Reproduce its original fits and assessment](back_rotation/README.md).

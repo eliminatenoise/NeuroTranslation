@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0 movement forecasts
 
+Does shin muscle voltage improve a forecast from a fixed pedal? Test invented signals and compare the three supported groups of original recordings. The planned two-person test remains incomplete. [Try the model](pedal_load/index.html) · [Measurements and source](pedal_load/README.md)
+
 Forecast the change in a muscle bundle’s tracked length over ten tracking steps. In 4 new people, adding the bundle’s angle changed mean absolute error from 0.226 mm to 0.219 mm. [Try the ultrasound model](muscle_tracking/index.html) · [Read the methods and original sources](muscle_tracking/README.md)
 
 How far will a sensor strapped to the back turn in the next tenth of a second? In the three new people with four documented orientation components, the shared encoder’s mean absolute error was 0.376° using motion and 0.385° after adding both back electrode arrays. [Try the model](back_rotation/index.html) · [Study and source](back_rotation/README.md)

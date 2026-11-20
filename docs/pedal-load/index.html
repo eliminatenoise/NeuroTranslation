@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#142d32" />
+    <title>Pedal load · NeuroTranslation</title>
+    <link rel="stylesheet" href="reader.css" />
+    <noscript
+      ><style>
+        .workgrid {
+          display: none;
+        }
+      </style></noscript
+    >
+    <script defer src="weights.js"></script>
+    <script defer src="inference.js"></script>
+    <script defer src="example.js"></script>
+    <script defer src="reader.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="topbar">
+      <div class="shell top-inner">
+        <a class="wordmark" href="https://eliminatenoise.github.io/NeuroTranslation/"
+          >NeuroTranslation</a
+        >
+        <nav aria-label="On this page">
+          <a href="#experiment">Model</a><a href="#study">Results</a><a href="#files">Files</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="shell">
+      <header class="hero">
+        <h1>What will the pedal read 100 samples later?</h1>
+        <p>
+          A seated volunteer tries to lift their forefoot against a fixed pedal. One sensor reads the load. Electrodes pick up
+          electrical activity from the shin muscle. Can that muscle signal tell us more than the
+          pedal’s recent history already does?
+        </p>
+      </header>
+      <section class="bench" aria-labelledby="experiment">
+        <div class="benchhead">
+          <h2 id="experiment">Try an invented pedal trace</h2>
+          <p>
+            The line stops at the last input. The model places a dot 100 samples later, nominally
+            100 milliseconds. Change the inputs to move the dot. These examples have no measured
+            future.
+          </p>
+        </div>
+        <noscript
+          ><p>
+            Enable JavaScript to run the browser model. The recording results appear below.
+          </p></noscript
+        >
+        <div class="workgrid">
+          <section id="controls" class="controls" aria-label="Forecast controls">
+            <div class="field">
+              <label for="preset">Invented load and muscle signals</label
+              ><select id="preset">
+                <option value="rise">Load rising</option>
+                <option value="level">Load holding steady</option>
+                <option value="fall">Load falling</option>
+                <option value="custom" hidden>Edited readings</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="angle">Fixed pedal setting</label
+              ><select id="angle">
+                <option value="0">Neutral (0°)</option>
+                <option value="1">Other setting (angle5)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="method">Forecast method</label
+              ><select id="method">
+                <optgroup label="Transformer forecasts"><option value="full" data-long="Transformer · load, setting and muscle">Load, setting and muscle</option><option value="load_condition" data-long="Transformer · load and setting">Load and setting</option><option value="load" data-long="Transformer · load alone">Load alone</option><option value="emg_condition" data-long="Transformer · muscle and setting">Muscle and setting</option><option value="wrong" data-long="Full Transformer · alternate muscle trace">Swap muscle traces</option></optgroup><optgroup label="Comparison methods"><option value="ridge_load" data-long="Linear model · load">Linear model · load</option><option value="ridge_condition" data-long="Linear model · load and setting">Linear model · load and setting</option><option value="zero" data-long="Hold the last reading">Hold the last reading</option><option value="continue" data-long="Repeat the recent change">Repeat the recent change</option><option value="typical" data-long="Typical training change">Typical training change</option><option value="typical_condition" data-long="Typical change for this setting">Typical change for this setting</option></optgroup>
+              </select>
+              <p class="hint" id="method-note"></p>
+            </div>
+            <div class="field">
+              <label for="gain">Multiply the original muscle signal</label
+              ><input
+                id="gain"
+                type="number"
+                min="0"
+                max="10"
+                step="any"
+                value="1"
+                inputmode="decimal"
+              />
+              <p class="hint">
+                1 keeps its amplitude. 0 flattens it. The alternate muscle trace stays as entered.
+              </p>
+            </div>
+            <details id="editor">
+              <summary>Edit individual readings</summary>
+              <p>
+                Each trace has 201 values, nominally one per millisecond from sample −200 through
+                sample 0 on the nominal clock. Enter the oldest first, separated by commas or
+                spaces.
+              </p>
+              <div class="field">
+                <label for="load">Pedal load</label
+                ><textarea id="load" rows="3" spellcheck="false"></textarea>
+              </div>
+              <div class="field">
+                <label for="emg">Original muscle signal before multiplier</label
+                ><textarea id="emg" rows="3" spellcheck="false"></textarea>
+              </div>
+              <div class="field">
+                <label for="donor">Alternate muscle signal</label
+                ><textarea id="donor" rows="3" spellcheck="false"></textarea>
+              </div>
+              <div class="button-row">
+                <button type="button" id="apply">Apply readings</button
+                ><button type="button" id="restore" class="secondary">Restore example</button>
+              </div>
+            </details>
+            <p id="error" class="error" role="alert"></p>
+            <a class="mobile-jump" href="#forecast">View forecast ↑</a>
+          </section>
+          <section id="forecast" class="readout" aria-label="Forecast and inputs">
+            <a class="mobile-jump" href="#controls">Change inputs ↓</a>
+            <div class="forecast-line" aria-live="polite">
+              <div>
+                <span class="field-label">Predicted load change</span
+                ><output class="forecast-value" id="change">—</output>
+                <div class="unit">native recording units</div>
+              </div>
+              <div class="secondary-value">
+                <span class="field-label">Predicted reading at sample +100</span
+                ><output id="endpoint">—</output>
+                <div class="unit">native units</div>
+              </div>
+            </div>
+            <figure>
+              <div class="plot-head">
+                <strong>Pedal load</strong><span class="plot-note">native recording units</span>
+              </div>
+              <svg
+                id="load-plot"
+                role="img"
+                aria-label="Invented load history, cutoff at zero and forecast at sample plus 100"
+              ></svg>
+              <figcaption class="legend">
+                <span><i></i>Invented load history</span
+                ><span><i class="dot"></i>Predicted reading</span>
+              </figcaption>
+            </figure>
+            <figure>
+              <div class="plot-head">
+                <strong id="signal-title">Muscle signal</strong
+                ><span class="plot-note">native recording units</span>
+              </div>
+              <svg
+                id="signal-plot"
+                role="img"
+                aria-label="Invented muscle electrical signal up to the forecast cutoff"
+              ></svg>
+              <figcaption class="muted" id="signal-note"></figcaption>
+            </figure>
+            <details class="fold" id="compare">
+              <summary>Compare all forecasts on these inputs</summary>
+              <table>
+                <caption>
+                  Predicted change at sample +100, in native units
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Method</th>
+                    <th scope="col">Change</th>
+                  </tr>
+                </thead>
+                <tbody id="predictions"></tbody>
+              </table>
+            </details>
+          </section>
+        </div>
+      </section>
+      <section class="below" aria-labelledby="study">
+        <h2 id="study">What happened on the recordings?</h2>
+        <p>
+          Each forecast had an answer on the lab recording. We subtracted the pedal reading at the
+          cutoff from the reading 100 samples later. An error of zero means the forecast got that
+          signed change exactly right.
+        </p>
+        <section id="assessment"><h3>Two people were reserved. Only one had a complete set of usable trials.</h3><div class="resultbox"><p><strong>The planned two-person test of the muscle signal could not be scored.</strong></p><p>One neutral trial stored two columns for the right load. The record did not establish which column to use or provide a verified common 1 kHz grid. This left the other neutral trial without its paired muscle trace.</p></div><p>The following comparisons keep each person and setting on its own available support. Seven usable trials supplied 446 forecast windows. A matched other-trial signal existed for 388. A lower mean absolute error means a closer forecast.</p><details class="fold held-group" open><summary>Complete held person · both settings</summary><div class="study"><div><p>Four trials at the two pedal settings. The mean gives the settings equal weight, with equal weight for each trial within a setting. This group supplies 272 forecast windows.</p><p>Mean absolute error was <strong>0.0545</strong> with load, setting and muscle, and <strong>0.0626</strong> with load and setting. The same model scored 0.0625 after the muscle traces were swapped between trials.</p></div><div><table id="table-complete"><caption>Complete held person · both settings. Mean absolute error, in native units.</caption><thead><tr><th scope="col">Method</th><th scope="col">Error</th></tr></thead><tbody><tr><th scope="row">Transformer · load, setting and muscle</th><td>0.0545</td></tr><tr><th scope="row">Transformer · load and setting</th><td>0.0626</td></tr><tr><th scope="row">Transformer · load alone</th><td>0.0575</td></tr><tr><th scope="row">Transformer · muscle and setting</th><td>0.0745</td></tr><tr><th scope="row">Full Transformer · alternate muscle trace</th><td>0.0625</td></tr><tr><th scope="row">Linear model · load</th><td>0.0612</td></tr><tr><th scope="row">Linear model · load and setting</th><td>0.0610</td></tr><tr><th scope="row">Hold the last reading</th><td>0.0912</td></tr><tr><th scope="row">Repeat the recent change</th><td>0.0563</td></tr><tr><th scope="row">Typical training change</th><td>0.0912</td></tr><tr><th scope="row">Typical change for this setting</th><td>0.0912</td></tr></tbody></table></div></div></details><details class="fold held-group"><summary>Other held person · angle5</summary><div class="study"><div><p>Two equally weighted trials at this single setting. Each could borrow muscle input from the other. This group supplies 116 forecast windows.</p><p>Mean absolute error was <strong>0.1670</strong> with load, setting and muscle, and <strong>0.1201</strong> with load and setting. The same model scored 0.1736 after the muscle traces were swapped between trials.</p></div><div><table id="table-other_angle5"><caption>Other held person · angle5. Mean absolute error, in native units.</caption><thead><tr><th scope="col">Method</th><th scope="col">Error</th></tr></thead><tbody><tr><th scope="row">Transformer · load, setting and muscle</th><td>0.1670</td></tr><tr><th scope="row">Transformer · load and setting</th><td>0.1201</td></tr><tr><th scope="row">Transformer · load alone</th><td>0.1191</td></tr><tr><th scope="row">Transformer · muscle and setting</th><td>0.1822</td></tr><tr><th scope="row">Full Transformer · alternate muscle trace</th><td>0.1736</td></tr><tr><th scope="row">Linear model · load</th><td>0.1239</td></tr><tr><th scope="row">Linear model · load and setting</th><td>0.1244</td></tr><tr><th scope="row">Hold the last reading</th><td>0.1822</td></tr><tr><th scope="row">Repeat the recent change</th><td>0.1793</td></tr><tr><th scope="row">Typical training change</th><td>0.1823</td></tr><tr><th scope="row">Typical change for this setting</th><td>0.1822</td></tr></tbody></table></div></div></details><details class="fold held-group"><summary>Other held person · neutral</summary><div class="study"><div><p>One trial has usable load and muscle readings. Its paired trial has unresolved load-channel and clock identity, so the cross-trial comparison is unavailable here. This group supplies 58 forecast windows.</p><p>Mean absolute error was <strong>0.1511</strong> with load, setting and muscle, and <strong>0.1119</strong> with load and setting. The other-trial muscle control has no score on this trial.</p></div><div><table id="table-other_angle0"><caption>Other held person · neutral. Mean absolute error, in native units.</caption><thead><tr><th scope="col">Method</th><th scope="col">Error</th></tr></thead><tbody><tr><th scope="row">Transformer · load, setting and muscle</th><td>0.1511</td></tr><tr><th scope="row">Transformer · load and setting</th><td>0.1119</td></tr><tr><th scope="row">Transformer · load alone</th><td>0.1095</td></tr><tr><th scope="row">Transformer · muscle and setting</th><td>0.1856</td></tr><tr><th scope="row">Full Transformer · alternate muscle trace</th><td>Unavailable</td></tr><tr><th scope="row">Linear model · load</th><td>0.1106</td></tr><tr><th scope="row">Linear model · load and setting</th><td>0.1109</td></tr><tr><th scope="row">Hold the last reading</th><td>0.1706</td></tr><tr><th scope="row">Repeat the recent change</th><td>0.1472</td></tr><tr><th scope="row">Typical training change</th><td>0.1706</td></tr><tr><th scope="row">Typical change for this setting</th><td>0.1706</td></tr></tbody></table></div></div></details></section><details class="fold"><summary>Development comparison</summary><section class="study" id="development"><div><h3>Two people used in development</h3><p>Each development volunteer was forecast by models fitted on the other volunteer. The final browser models were then fitted on both. The comparison used 624 windows from eight trials, two pedal settings per person. Each person and setting carried equal weight.</p><div class="resultbox"><p><strong>The matching muscle signal fell short of the planned test for an improvement in these two people.</strong></p><p>Mean absolute error was <strong>0.0749</strong> with load, setting and muscle, <strong>0.0840</strong> with load and setting, and <strong>0.0804</strong> when the muscle trace came from the other trial. The best comparison without muscle input was “Repeat the recent change” at 0.0615.</p></div><details class="fold"><summary>How the improvement test worked</summary><ul><li>At least 5% lower error than the best comparison without muscle input. <strong>Missed.</strong></li><li>At least 2% lower error than the swapped muscle trace. <strong>Passed.</strong></li><li>Lower error than load with setting and the swapped trace for each person. <strong>Missed.</strong></li><li>No higher error than either of those two methods at either setting, averaging across people. <strong>Passed.</strong></li></ul><p>Adjacent histories can share readings. The test counts two participants, regardless of how many windows they supplied. These are descriptive thresholds for this task.</p></details></div><div><table id="table-development"><caption>Mean absolute error in native recording units. Lower is closer.</caption><thead><tr><th scope="col">Method</th><th scope="col">Error</th></tr></thead><tbody><tr><th scope="row">Transformer · load, setting and muscle</th><td>0.0749</td></tr><tr><th scope="row">Transformer · load and setting</th><td>0.0840</td></tr><tr><th scope="row">Transformer · load alone</th><td>0.0773</td></tr><tr><th scope="row">Transformer · muscle and setting</th><td>0.1010</td></tr><tr><th scope="row">Full Transformer · alternate muscle trace</th><td>0.0804</td></tr><tr><th scope="row">Linear model · load</th><td>0.0849</td></tr><tr><th scope="row">Linear model · load and setting</th><td>0.0849</td></tr><tr><th scope="row">Hold the last reading</th><td>0.1084</td></tr><tr><th scope="row">Repeat the recent change</th><td>0.0615</td></tr><tr><th scope="row">Typical training change</th><td>0.1084</td></tr><tr><th scope="row">Typical change for this setting</th><td>0.1084</td></tr></tbody></table></div></section></details>
+      </section>
+      <section class="below method">
+        <h2>What the model sees</h2>
+        <div class="twocol">
+          <div>
+            <h3>Two histories on one clock</h3>
+            <p>
+              The model uses a nominal grid of 1,000 sample positions per second. Some recordings
+              have a stored time vector. Others use the reported rate to label successive rows.
+              Three usable trials from one held volunteer include the authors’ 1 kHz export, which
+              matches every tenth reading of the 10 kHz source. The clocks cannot verify the
+              physical interval between every pair of readings. The model divides the last 200
+              sample intervals into ten intervals. From each it takes the ending load, how far load
+              has moved, the muscle signal’s average and spread, and how quickly that signal
+              changes. The full model also combines muscle-signal spread with the recent change in
+              load.
+            </p>
+            <p>
+              The second pedal setting is the archive category “angle5.” Its toe-up or toe-down
+              direction remains unverified. The setting is fixed for each trial. A small Transformer
+              learns which intervals to give more weight. Its output is the signed change in the
+              sensor channel labelled “right.” A positive change means the recorded number rose.
+              Anatomical side and the direction of physical force do not follow from that label or
+              sign.
+            </p>
+          </div>
+          <div>
+            <h3>Does the muscle signal have to match?</h3>
+            <p>
+              In a retrospective control, we keep the original pedal history and setting and
+              substitute the muscle signal from the same person’s other trial at that setting, at
+              the same sample index. The recorded trial pair is available after collection. The
+              browser lets you make that swap with two invented signals.
+            </p>
+            <p>
+              The electrodes record skin-level muscle activity (surface EMG). Neither nerve activity
+              nor the force of an individual muscle was measured here. The measured gain needed to
+              convert this load channel into force or joint torque was unavailable. These forecasts
+              describe a seated ankle task. They establish no clinical effect or causal response to
+              changing muscle activity.
+            </p>
+          </div>
+        </div>
+      </section>
+      <footer id="files">
+        <div class="twocol">
+          <div>
+            <h3>Explore the experiment</h3>
+            <ul>
+              <li>
+                <a href="https://eliminatenoise.github.io/NeuroTranslation/shared-pedal-load/"
+                  >Try the shared movement model</a
+                >
+              </li>
+              <li>
+                <a href="https://eliminatenoise.github.io/NeuroTranslation/papers/pedal-load/"
+                  >Read the pedal-load paper</a
+                >
+              </li>
+              <li>
+                <a href="https://eliminatenoise.github.io/Interoceptomics/pedal-load/"
+                  >Explore the recording apparatus</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Files and sources</h3>
+            <ul>
+              <li id="download" hidden>
+                <a download href="../pedal-load-offline.zip"
+                  >Download the offline reader for Windows, macOS or Linux</a
+                >
+              </li>
+              <li><a href="results.json">Aggregate recording results (JSON)</a></li>
+              <li><a href="NOTICE.md">Credits and licences</a></li>
+              <li>
+                <a href="https://doi.org/10.6019/S-BIAD1482">Original AnkleImage data</a> ·
+                <a href="https://doi.org/10.1038/s41597-024-04285-x">Study methods</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="credits">
+          Qiang Zhang, Noor Hakam, Oluwasegun Akinniyi, Ashwin Iyer, Xuefeng Bao and Nitin Sharma
+          released the AnkleImage recordings under CC BY 4.0. NeuroTranslation used Task 1 to fit
+          and test the models. Its separate ultrasound study uses different recordings and a
+          different clock.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
