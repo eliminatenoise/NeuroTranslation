@@ -2,7 +2,7 @@
 
 ## Predict without fitting
 
-Python and NumPy run the two examples. Use the included `movement-weights.npz` (SHA-256 `8636991f783c781142ab811096b0f1769db0a6bcf9386810a3ad7b25fae4e2a6`). The stored configuration identifies the two spatial endpoints, the wrist-angle inputs and the two angular targets. Every mode uses the same temporal attention, position embedding, feed-forward layer and normalization, amounting to 5,016 frozen values. Each angular route adds 1,610 trainable projection and readout values. [Weights](movement-weights.npz) · [Source and rights](NOTICE.md)
+Python and NumPy run the two examples. Use the included `movement-weights.npz` (SHA-256 `da243393b7a6f72558365a30f7361e45ef7af680538a7fb5a927e930d91b3458`). It includes both forearm correction heads and every numerical array from the first three-domain checkpoint. The base fit below reproduces that earlier checkpoint (SHA-256 `8636991f783c781142ab811096b0f1769db0a6bcf9386810a3ad7b25fae4e2a6`). Add the nested corrections with the second study’s fit command. [Forearm correction and reproduction](forearm/README.md) The stored configuration identifies the two spatial endpoints, the wrist-angle inputs and the two angular targets. Every mode uses the same temporal attention, position embedding, feed-forward layer and normalization, amounting to 5,016 frozen values. Each angular route adds 1,610 trainable projection and readout values. [Weights](movement-weights.npz) · [Source and rights](NOTICE.md)
 
 ```sh
 python -m pip install numpy

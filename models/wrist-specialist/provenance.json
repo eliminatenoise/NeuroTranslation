@@ -1,0 +1,115 @@
+{
+  "format": 1,
+  "estimator": "seed-17 dedicated motion CNN plus optional motion-and-forearm ridge head",
+  "dataset": {
+    "title": "EEG-EMG-WristMotion Dataset",
+    "version": 3,
+    "doi": "10.6084/m9.figshare.29666735.v3",
+    "role": "six designated TRAIN people",
+    "people": 6,
+    "runs": 47,
+    "trials": 1879,
+    "windows": 11274,
+    "source_train_manifest_sha256": "c828efcd6293268a31f19761c9f13796b574bb7444ac260fbe532c724aaa14f2",
+    "aligned_table_sha256": "2a1cc921ab9110bd4a34d1fce5f54458903671466de26aaf8ae6a48b32ce7d7b"
+  },
+  "frozen_motion": {
+    "fit_seal_sha256": "e888a96ddfa14e5ee3ec8788bdedede89da3b9646ca201ea9e99e21542788e8a",
+    "public_checkpoint_archive": "https://github.com/eliminatenoise/NeuroTranslation/blob/c60c12e3355b5d2ba3a50364a7f6d294ec59f48e/benchmarks/wrist-pointing-temporal/wrist-temporal-forecast-r1-preview.zip",
+    "member": "checkpoint/motion-17.npz",
+    "sha256": "d67bdaaf2ed3a7ceb0aad1b8f1704aa57a6e2dd0d2a159c0ad4bd5870325e672",
+    "source_scalers_member": "checkpoint/fit-arrays.npz",
+    "source_scalers_sha256": "3eefc8ee33d729feaf74a5a5b36de773366dccfc1154b3490d655183f53590b0",
+    "seed": 17,
+    "architecture": "2 channels, valid convolution width 3 to 16 outputs twice, ReLU after each, flatten in filter-major order; two standardized anchors and 6 phase flags; dense ReLU 32 to 2. Standardized change restored to degrees and added to anchor."
+  },
+  "correction": {
+    "features": [
+      "32 anchor-relative motion bins (time then axis)",
+      "2 absolute anchor angles",
+      "64 bipolar EMG RMS bins (time then forearm pair)"
+    ],
+    "continuous_columns": 98,
+    "per_phase_intercepts": 6,
+    "target": "two measured absolute angles minus the held-person motion CNN absolute forecast in degrees",
+    "scaling": "Each continuous position has the unweighted six-person row mean and population SD, with exact zero SD replaced by one. Response and six slot flags are in native scale.",
+    "weights": "Each row of person p has weight 1/(6 * row_count[p]); continuous slopes receive penalty 0.01 in the weighted normal equations, phase intercepts unpenalized.",
+    "head_coef_shape": [
+      104,
+      2
+    ],
+    "source_fit_code_sha256": "e8d76f075a81b3508b0b5d357a60097503ae5505e6446869e7d62df47d8efe7f",
+    "out_of_person_base_sha256_C_float64_le": "c5cdee26582866d3606abf5fe9fea5895f0020ba4a30e2ed30ef312aec11d1ab",
+    "target_minus_out_of_person_base_sha256_C_float64_le": "23f1aee0072de23fb1b487093d137666761cb994ca8906e8d4183424d02d6c9b",
+    "new_cnn_fits": 0,
+    "new_ridge_fits": 1,
+    "new_head_and_motion_scales_sha256": "b1eec74f31773aa7beab16d0f5638771fd7ca5965459bc3a0dcfd3ee9f09c504"
+  },
+  "window": {
+    "stored_hz": 512,
+    "history_first_and_last_tick_relative_to_target": [
+      -383,
+      -128
+    ],
+    "offset_ticks_after_cue": [
+      384,
+      512,
+      640,
+      768,
+      896,
+      1024
+    ],
+    "nominal_encoder_refresh_hz": 100,
+    "axes_degrees": [
+      "positive wrist extension",
+      "positive radial deviation"
+    ],
+    "emg_unit": "bipolar surface EMG RMS microvolts",
+    "movement": "visually cued supported right wrist pointing",
+    "eligibility": "Original analysis required all six future target readings for each retained trial. Each forecast uses measurements up to its own cutoff."
+  },
+  "historical_six_fold_errors": {
+    "scope": "Five-person fits evaluated on the remaining person within six previously used TRAIN people. The five-person correction targets came from four-person base fits. The separately trained all-six deployment has no unseen-person evaluation.",
+    "metric": "Equal-person equal-axis root mean squared error in degrees",
+    "comparison": {
+      "base": {
+        "rmse_deg": 3.618353202348676,
+        "axis_rmse_deg": [
+          4.473285408695914,
+          2.4848898257753924
+        ]
+      },
+      "corrected_motion": {
+        "rmse_deg": 3.6652341095527166,
+        "axis_rmse_deg": [
+          4.551620958239776,
+          2.4800461302503645
+        ]
+      },
+      "corrected_emg": {
+        "rmse_deg": 3.549125052033554,
+        "axis_rmse_deg": [
+          4.371646308785363,
+          2.46602632200625
+        ]
+      },
+      "corrected_donor": {
+        "rmse_deg": 3.8280861167924565,
+        "axis_rmse_deg": [
+          4.781897167614243,
+          2.538098917205785
+        ]
+      },
+      "corrected_reverse": {
+        "rmse_deg": 3.7202171753420727,
+        "axis_rmse_deg": [
+          4.617856154204835,
+          2.52099904849106
+        ]
+      }
+    },
+    "score_seal_sha256": "5c65cdcdf451c2d266fe9dca255dbe5e954a743ee5144e9bcd11d4f074c3a7e6",
+    "fit_inventory_sha256": "3eec2d874ba897a2449ae48ee651be08f59f1bd03e2c1fa8d12bc2e342ca231d"
+  },
+  "distribution": "One all-six CNN state, its motion scales and one all-six ridge state. Participant samples, trial identifiers, fold states and individual predictions remain with the source studies."
+}
