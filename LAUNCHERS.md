@@ -178,3 +178,7 @@ To follow a stretch and inspect its predicted sensory firing, extract the [muscl
 ## Follow a robot’s push and a macaque’s reach
 
 For the paired recorded perturbation and cued reach, extract the [offline cortical reach reader](docs/cortical-reach-offline.zip) and use its operating-system launcher. [Training code and weights](models/cortical-reach.zip)
+
+## Forecast the next day’s electrode counts
+
+To forecast next-day sensory-cortex counts, extract the [offline reader](docs/contact-forecast-offline.zip) or the [complete fitted model package](models/contact-forecast.zip), then use the launcher for your system.
