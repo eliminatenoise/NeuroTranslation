@@ -2,7 +2,7 @@
 
 **What a hand has just done still beats a brain signal read at the scalp.**
 
-That is where [23 small studies](benchmarks/README.md) stand. Each takes open recordings of people, measured and shared by others, and forecasts what a hand or an arm does a fraction of a second later: the angle of a wrist, the position of a palm, the force of a grip. A hand tends to keep moving the way it was moving, so its own recent past is a hard forecast to beat. A brain or muscle signal earns its place only by beating it.
+That was the finding across the [original 23 movement-forecast studies](benchmarks/README.md). Each takes open recordings of people, measured and shared by others, and forecasts what a hand or an arm does a fraction of a second later: the angle of a wrist, the position of a palm, the force of a grip. A hand tends to keep moving the way it was moving, so its own recent past is a hard forecast to beat. A brain or muscle signal earns its place only by beating it.
 
 - Adding a brain recording taken at the scalp (EEG) to a forecast that already had the hand's history made it worse in **8 of 12** comparisons. At the wrist, a quarter of a second ahead, the error grew from 4.05° to 4.52°. EEG met none of the 4 pass rules set for it before any scoring.
 - Adding a muscle recording from the forearm (EMG) lowered the error in **10 of 17**. Only at the wrist was the gain clear of the spread between people.
@@ -11,14 +11,16 @@ That is where [23 small studies](benchmarks/README.md) stand. Each takes open re
 
 NeuroTranslation is the larger attempt those studies belong to. Reach for a cup: your brain gives the order, the muscles of your forearm pull, and the hand moves. One act, written down three times, in nerve, in muscle and in motion. To translate is to take one of those records, predict another, and check the prediction against what the body did. It is one part of **Brain2Body**, the name of the whole programme and of its second paper, which asks what a person keeps once a machine stops guiding their hand.
 
-What exists today is the studies, 14 [pages that run them in a browser](https://eliminatenoise.github.io/NeuroTranslation/START.html), two draft papers and a sister game, NeuroSurge. What does not exist is a general model. **NeuroTranslate 0.0** is the name of the one being built. It has not been fitted to a real recording, and it is not inside the browser app that carries its name.
+The project includes the studies, [recordings and models you can open in a browser](https://eliminatenoise.github.io/NeuroTranslation/START.html), two draft papers and a sister game, NeuroSurge. What does not exist is a general model. **NeuroTranslate 0.0** is the name of the one being built. It has not been fitted to a real recording, and it is not inside the browser app that carries its name.
+
+**Which recording do the words describe?** Given a volunteer’s description and 38 recordings, a small attention model ranked the matching clip first 5.6% of the time. A simpler word-count model reached 6.6%. You can also follow 41 body markers through a scoop, a jump and a hop in a separate set of recordings. [Language study](benchmarks/text-motion-retrieval/) · [Turn and replay the three movements](https://eliminatenoise.github.io/NeuroTranslation/whole-body/)
 
 **Try a wrist forecast.** Three models predict where a recorded wrist will be a quarter-second later. Run them on your own computer and compare what changes when they receive electrical readings from the forearm and scalp. [Browser model and example](interfaces/paired-wrist-browser/) · [Recorded movement in the NeuroSurge game preview](https://github.com/eliminatenoise/NeuroSurge/pull/2) A separate experiment tested whether muscle recordings can correct the early part of a wrist forecast. [Six-person correction study](benchmarks/wrist-forearm-correction/)
 
 ## Where to click
 
 - **[Start page](https://eliminatenoise.github.io/NeuroTranslation/START.html).** Runs in a browser, nothing to install. Try an invented example, or pick the kind of recording you have and open the page that reads it. Behind it are the study readers, and an app that lines up your own recordings on one clock.
-- **[The studies](benchmarks/README.md).** All 23, each with its plan and its results file, and the counts above worked out row by row.
+- **[The studies](benchmarks/README.md).** The original comparison explains the counts above row by row. The newer wrist-correction and language studies link to their own methods and results.
 - **[The papers](papers/README.md).** Two working drafts, each in a Technical and a Simple English edition.
 - **[Launchers and offline copies](LAUNCHERS.md)** for Windows, macOS and Linux.
 - **[NeuroSurge](https://github.com/eliminatenoise/NeuroSurge)**, the sister game.
@@ -40,7 +42,7 @@ Suppose the motion recording belongs to a different reach. It can still teach a 
 
 The project's working presumption is that more data, and more varied data, makes a model that carries further. It is untested: no study here varies how much data a model sees, or how varied it is.
 
-## History did the work: every study in one table
+## How the original movement forecasts compared
 
 Each row sets a reference forecast against a challenger that was given something extra. Some rows forecast a movement, some the force at a gauge, some the voltage of a force sensor.
 
@@ -149,4 +151,4 @@ What the project itself wrote, text and code, is dedicated to the public domain 
 
 **[NeuroSurge](https://github.com/eliminatenoise/NeuroSurge)** is a game for learning which part of the brain moves which part of the body. Its numbers are made up by the rules of the game. They are not forecasts from the studies here.
 
-**[Interoceptomics](https://github.com/eliminatenoise/Interoceptomics)** is a proposed field of science: how the body senses its own interior, joined to the mapping of nerve connections. Today it is a 3D atlas of the human brain that you can turn, cut and measure.
+**Interoceptomics (Interotomics for short)** is a proposed field that studies how the body senses its own interior and how the nerve connections involved are arranged. [Project and proposed experiments](https://github.com/eliminatenoise/Interoceptomics) Today it is a 3D atlas of the human brain that you can turn, cut and measure.

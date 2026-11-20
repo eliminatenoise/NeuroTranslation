@@ -4,13 +4,15 @@ Every study in this repository asks one question of one open dataset. Most ask t
 
 Mostly it does not. A model fitted to the target's own recent history beat "repeat the last value" every time it was tried on the task it was fitted for. A brain signal from the scalp, added on top, usually made the forecast worse. A muscle signal helped at the wrist, and nowhere else beyond the noise. And when the task or the target moved, a one-line rule beat every fitted model.
 
-This page holds the numbers: 23 studies in the 18 folders here (two folders hold more than one), and two more that are reported only in the papers. [The README](../README.md) has the short version.
+The numbered comparison below covers the original 23 repository studies and two studies reported in the papers. The wrist correction and language studies have their own results and score definitions. [The README](../README.md) has the short version.
 
 **Can muscle recordings correct a wrist forecast?** In 1,879 pointing trials from six people already used for training, adding the forearm signal reduced error from 3.665° to 3.549° against a correction that used wrist motion alone. All six people improved on that comparison. Only three improved over the original uncorrected model. The gains were concentrated early in the movement. [Study, results and reproduction instructions](wrist-forearm-correction/)
 
+**Which movement do the words describe?** Two models rank recordings against descriptions written by people who saw them. The simpler calculation had the higher first-place score. [Language and motion study](text-motion-retrieval/)
+
 ## How to read the numbers
 
-Every score is an error: how far the forecasts fell from what was measured. Lower is better. Studies 1 to 13 use the measure that punishes large misses (root mean squared error), studies 14 to 23 the plain average miss (mean absolute error), and studies 24 and 25 a squared error in units scaled to the data. Study 20 scores bands, not forecasts, and has a note of its own below.
+For the numbered movement forecasts, error measures how far a forecast fell from the recorded value. Lower is better. In the language study, we first calculate how often the matching movement comes first for each recording’s descriptions. We average those 38 scores so that every recording counts equally. Higher is better. Studies 1 to 13 use the measure that punishes large misses (root mean squared error), studies 14 to 23 the plain average miss (mean absolute error), and studies 24 and 25 a squared error in units scaled to the data. Study 20 scores bands, not forecasts, and has a note of its own below.
 
 "Tested on" names people whose test recordings were never used to fit the model. A forecast that "repeats the last value" does nothing clever: it says the next reading will equal the latest one. Where a cell says "not given", the study's results file does not hold that count.
 

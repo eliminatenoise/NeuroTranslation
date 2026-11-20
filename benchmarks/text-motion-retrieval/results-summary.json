@@ -1,0 +1,935 @@
+{
+  "ambiguity": {
+    "assessment_queries": 90,
+    "assessment_queries_matching_descriptions_of_multiple_assessment_clips": 6,
+    "assessment_recordings_with_same_action_peer": 34,
+    "queries_verbatim_after_tokenization_seen_in_training": 12,
+    "semantic_equivalence_annotation": "unknown except where source action classes are supplied"
+  },
+  "archive_sha256": "ba51bb70e3b7aa9c3b5539d543336b4cdca5a7ee5ad730b82f1449a2ebed4b43",
+  "assessment_cue_recording_counts": {
+    "kick": 1,
+    "run": 3,
+    "tagset-4d60862e032293f4": 1,
+    "tagset-b7332a32a6ab41c7": 1,
+    "tagset-ce4d756faf62ce7c": 1,
+    "walk": 31
+  },
+  "assessment_cues_unseen_in_train": [
+    "tagset-4d60862e032293f4",
+    "tagset-b7332a32a6ab41c7",
+    "tagset-ce4d756faf62ce7c"
+  ],
+  "assessment_queries": {
+    "queries": 90,
+    "tokens": 707,
+    "unknown": 24
+  },
+  "attention_minus_comparator": {
+    "caption_to_action": {
+      "mrr": {
+        "motion_macro_difference": 0.017077286340188597,
+        "per_subject_id": {
+          "KIT12": 0.17903524235971577,
+          "KIT200": -0.17921687869561065,
+          "KIT348": -0.04352713849384468,
+          "KIT359": 0.04273368698777438,
+          "KIT6": 0.05698199267059653,
+          "KIT7": 0.009426288123455778
+        },
+        "range_across_subject_ids": [
+          -0.17921687869561065,
+          0.17903524235971577
+        ],
+        "subject_id_macro_difference": 0.010905532158681189
+      },
+      "recall1": {
+        "motion_macro_difference": -0.02147707979626485,
+        "per_subject_id": {
+          "KIT12": 0.06496415770609318,
+          "KIT200": -0.25,
+          "KIT348": -0.04062126642771803,
+          "KIT359": -0.0012096774193548349,
+          "KIT6": 0.07096774193548389,
+          "KIT7": -0.030913978494623656
+        },
+        "range_across_subject_ids": [
+          -0.25,
+          0.07096774193548389
+        ],
+        "subject_id_macro_difference": -0.031135503783353242
+      }
+    },
+    "chance": {
+      "mrr": {
+        "motion_macro_difference": 0.08623246386175543,
+        "per_subject_id": {
+          "KIT12": 0.1976857983991317,
+          "KIT200": -0.020197309423234472,
+          "KIT348": 0.07823895154285093,
+          "KIT359": 0.11802140020398749,
+          "KIT6": 0.07250754871001243,
+          "KIT7": 0.02677476082953835
+        },
+        "range_across_subject_ids": [
+          -0.020197309423234472,
+          0.1976857983991317
+        ],
+        "subject_id_macro_difference": 0.0788385250437144
+      },
+      "recall1": {
+        "motion_macro_difference": 0.02938596491228072,
+        "per_subject_id": {
+          "KIT12": 0.070906432748538,
+          "KIT200": -0.02631578947368421,
+          "KIT348": 0.029239766081871343,
+          "KIT359": 0.04035087719298246,
+          "KIT6": 0.0736842105263158,
+          "KIT7": -0.02631578947368421
+        },
+        "range_across_subject_ids": [
+          -0.02631578947368421,
+          0.0736842105263158
+        ],
+        "subject_id_macro_difference": 0.02692495126705653
+      }
+    },
+    "ridge": {
+      "mrr": {
+        "motion_macro_difference": -0.002890970570485013,
+        "per_subject_id": {
+          "KIT12": -0.0899533337033337,
+          "KIT200": -0.09728738456603565,
+          "KIT348": -0.001520225034731315,
+          "KIT359": 0.09092841921849373,
+          "KIT6": 0.11383795107708147,
+          "KIT7": -0.07732040416917724
+        },
+        "range_across_subject_ids": [
+          -0.09728738456603565,
+          0.11383795107708147
+        ],
+        "subject_id_macro_difference": -0.01021916286295045
+      },
+      "recall1": {
+        "motion_macro_difference": -0.01008771929824561,
+        "per_subject_id": {
+          "KIT12": -0.09722222222222221,
+          "KIT200": -0.08333333333333333,
+          "KIT348": 0.018518518518518517,
+          "KIT359": 0.025,
+          "KIT6": 0.1,
+          "KIT7": -0.05555555555555555
+        },
+        "range_across_subject_ids": [
+          -0.09722222222222221,
+          0.1
+        ],
+        "subject_id_macro_difference": -0.015432098765432094
+      }
+    },
+    "wrong_pair": {
+      "mrr": {
+        "motion_macro_difference": 0.11565657386614729,
+        "per_subject_id": {
+          "KIT12": 0.2662837529778215,
+          "KIT200": 0.05463167353384174,
+          "KIT348": 0.14240793779953892,
+          "KIT359": 0.023149131494627717,
+          "KIT6": 0.13766972421806528,
+          "KIT7": 0.07058458027801699
+        },
+        "range_across_subject_ids": [
+          0.023149131494627717,
+          0.2662837529778215
+        ],
+        "subject_id_macro_difference": 0.11578780005031869
+      },
+      "recall1": {
+        "motion_macro_difference": 0.026754385964912277,
+        "per_subject_id": {
+          "KIT12": 0.09722222222222221,
+          "KIT200": 0.0,
+          "KIT348": 0.05555555555555555,
+          "KIT359": -0.07083333333333335,
+          "KIT6": 0.1,
+          "KIT7": 0.0
+        },
+        "range_across_subject_ids": [
+          -0.07083333333333335,
+          0.1
+        ],
+        "subject_id_macro_difference": 0.03032407407407407
+      }
+    }
+  },
+  "by_catalogue_action": {
+    "kick": {
+      "captions": 3,
+      "catalogue_subject_ids": 1,
+      "methods": {
+        "attention": {
+          "exact_in_full_gallery": {
+            "mrr": 0.0792483660130719,
+            "recall1": 0.0,
+            "recall5": 0.0
+          },
+          "exact_within_action": null
+        },
+        "caption_to_action": {
+          "exact_in_full_gallery": {
+            "mrr": 1.0,
+            "recall1": 1.0,
+            "recall5": 1.0
+          },
+          "exact_within_action": null
+        },
+        "chance": {
+          "exact_in_full_gallery": {
+            "mrr": 0.11126057929724605,
+            "recall1": 0.02631578947368421,
+            "recall5": 0.13157894736842105
+          },
+          "exact_within_action": null
+        },
+        "oracle_action": {
+          "exact_in_full_gallery": {
+            "mrr": 1.0,
+            "recall1": 1.0,
+            "recall5": 1.0
+          },
+          "exact_within_action": null
+        },
+        "ridge": {
+          "exact_in_full_gallery": {
+            "mrr": 0.49999999999999994,
+            "recall1": 0.3333333333333333,
+            "recall5": 0.6666666666666666
+          },
+          "exact_within_action": null
+        },
+        "wrong_pair": {
+          "exact_in_full_gallery": {
+            "mrr": 0.027554998607630072,
+            "recall1": 0.0,
+            "recall5": 0.0
+          },
+          "exact_within_action": null
+        }
+      },
+      "recordings": 1
+    },
+    "run": {
+      "captions": 8,
+      "catalogue_subject_ids": 2,
+      "methods": {
+        "attention": {
+          "exact_in_full_gallery": {
+            "mrr": 0.5309941520467837,
+            "recall1": 0.2333333333333333,
+            "recall5": 0.8333333333333334
+          },
+          "exact_within_action": {
+            "mrr": 0.6444444444444444,
+            "recall1": 0.3666666666666667,
+            "recall5": 1.0
+          }
+        },
+        "caption_to_action": {
+          "exact_in_full_gallery": {
+            "mrr": 0.611111111111111,
+            "recall1": 0.3333333333333333,
+            "recall5": 1.0
+          },
+          "exact_within_action": {
+            "mrr": 0.611111111111111,
+            "recall1": 0.3333333333333333,
+            "recall5": 1.0
+          }
+        },
+        "chance": {
+          "exact_in_full_gallery": {
+            "mrr": 0.11126057929724605,
+            "recall1": 0.02631578947368421,
+            "recall5": 0.13157894736842105
+          },
+          "exact_within_action": {
+            "mrr": 0.611111111111111,
+            "recall1": 0.3333333333333333,
+            "recall5": 1.0
+          }
+        },
+        "oracle_action": {
+          "exact_in_full_gallery": {
+            "mrr": 0.611111111111111,
+            "recall1": 0.3333333333333333,
+            "recall5": 1.0
+          },
+          "exact_within_action": {
+            "mrr": 0.611111111111111,
+            "recall1": 0.3333333333333333,
+            "recall5": 1.0
+          }
+        },
+        "ridge": {
+          "exact_in_full_gallery": {
+            "mrr": 0.09142437446359002,
+            "recall1": 0.0,
+            "recall5": 0.16666666666666666
+          },
+          "exact_within_action": {
+            "mrr": 0.6333333333333333,
+            "recall1": 0.3333333333333333,
+            "recall5": 1.0
+          }
+        },
+        "wrong_pair": {
+          "exact_in_full_gallery": {
+            "mrr": 0.23512767298686846,
+            "recall1": 0.19999999999999998,
+            "recall5": 0.19999999999999998
+          },
+          "exact_within_action": {
+            "mrr": 0.5777777777777777,
+            "recall1": 0.3666666666666667,
+            "recall5": 1.0
+          }
+        }
+      },
+      "recordings": 3
+    },
+    "tagset-4d60862e032293f4": {
+      "captions": 5,
+      "catalogue_subject_ids": 1,
+      "methods": {
+        "attention": {
+          "exact_in_full_gallery": {
+            "mrr": 0.03900349248175337,
+            "recall1": 0.0,
+            "recall5": 0.0
+          },
+          "exact_within_action": null
+        },
+        "caption_to_action": {
+          "exact_in_full_gallery": {
+            "mrr": 0.027040198092829648,
+            "recall1": 0.0,
+            "recall5": 0.0
+          },
+          "exact_within_action": null
+        },
+        "chance": {
+          "exact_in_full_gallery": {
+            "mrr": 0.11126057929724605,
+            "recall1": 0.02631578947368421,
+            "recall5": 0.13157894736842105
+          },
+          "exact_within_action": null
+        },
+        "oracle_action": {
+          "exact_in_full_gallery": {
+            "mrr": 1.0,
+            "recall1": 1.0,
+            "recall5": 1.0
+          },
+          "exact_within_action": null
+        },
+        "ridge": {
+          "exact_in_full_gallery": {
+            "mrr": 0.19586231884057975,
+            "recall1": 0.0,
+            "recall5": 0.4
+          },
+          "exact_within_action": null
+        },
+        "wrong_pair": {
+          "exact_in_full_gallery": {
+            "mrr": 0.03609670263905969,
+            "recall1": 0.0,
+            "recall5": 0.0
+          },
+          "exact_within_action": null
+        }
+      },
+      "recordings": 1
+    },
+    "tagset-b7332a32a6ab41c7": {
+      "captions": 2,
+      "catalogue_subject_ids": 1,
+      "methods": {
+        "attention": {
+          "exact_in_full_gallery": {
+            "mrr": 0.052350427350427386,
+            "recall1": 0.0,
+            "recall5": 0.0
+          },
+          "exact_within_action": null
+        },
+        "caption_to_action": {
+          "exact_in_full_gallery": {
+            "mrr": 0.027040198092829648,
+            "recall1": 0.0,
+            "recall5": 0.0
+          },
+          "exact_within_action": null
+        },
+        "chance": {
+          "exact_in_full_gallery": {
+            "mrr": 0.11126057929724605,
+            "recall1": 0.02631578947368421,
+            "recall5": 0.13157894736842105
+          },
+          "exact_within_action": null
+        },
+        "oracle_action": {
+          "exact_in_full_gallery": {
+            "mrr": 1.0,
+            "recall1": 1.0,
+            "recall5": 1.0
+          },
+          "exact_within_action": null
+        },
+        "ridge": {
+          "exact_in_full_gallery": {
+            "mrr": 0.02777777777777768,
+            "recall1": 0.0,
+            "recall5": 0.0
+          },
+          "exact_within_action": null
+        },
+        "wrong_pair": {
+          "exact_in_full_gallery": {
+            "mrr": 0.03489702517162474,
+            "recall1": 0.0,
+            "recall5": 0.0
+          },
+          "exact_within_action": null
+        }
+      },
+      "recordings": 1
+    },
+    "tagset-ce4d756faf62ce7c": {
+      "captions": 3,
+      "catalogue_subject_ids": 1,
+      "methods": {
+        "attention": {
+          "exact_in_full_gallery": {
+            "mrr": 0.19365079365079363,
+            "recall1": 0.0,
+            "recall5": 0.6666666666666666
+          },
+          "exact_within_action": null
+        },
+        "caption_to_action": {
+          "exact_in_full_gallery": {
+            "mrr": 0.027040198092829648,
+            "recall1": 0.0,
+            "recall5": 0.0
+          },
+          "exact_within_action": null
+        },
+        "chance": {
+          "exact_in_full_gallery": {
+            "mrr": 0.11126057929724605,
+            "recall1": 0.02631578947368421,
+            "recall5": 0.13157894736842105
+          },
+          "exact_within_action": null
+        },
+        "oracle_action": {
+          "exact_in_full_gallery": {
+            "mrr": 1.0,
+            "recall1": 1.0,
+            "recall5": 1.0
+          },
+          "exact_within_action": null
+        },
+        "ridge": {
+          "exact_in_full_gallery": {
+            "mrr": 0.02976252114183146,
+            "recall1": 0.0,
+            "recall5": 0.0
+          },
+          "exact_within_action": null
+        },
+        "wrong_pair": {
+          "exact_in_full_gallery": {
+            "mrr": 0.04717765894236484,
+            "recall1": 0.0,
+            "recall5": 0.0
+          },
+          "exact_within_action": null
+        }
+      },
+      "recordings": 1
+    },
+    "walk": {
+      "captions": 69,
+      "catalogue_subject_ids": 5,
+      "methods": {
+        "attention": {
+          "exact_in_full_gallery": {
+            "mrr": 0.17895161627115022,
+            "recall1": 0.04569892473118279,
+            "recall5": 0.2903225806451613
+          },
+          "exact_within_action": {
+            "mrr": 0.19625441308906344,
+            "recall1": 0.061827956989247305,
+            "recall5": 0.3172043010752688
+          }
+        },
+        "caption_to_action": {
+          "exact_in_full_gallery": {
+            "mrr": 0.1271401558549376,
+            "recall1": 0.03009018383628163,
+            "recall5": 0.1573881373569198
+          },
+          "exact_within_action": {
+            "mrr": 0.12991113533666188,
+            "recall1": 0.03225806451612901,
+            "recall5": 0.1612903225806451
+          }
+        },
+        "chance": {
+          "exact_in_full_gallery": {
+            "mrr": 0.11126057929724598,
+            "recall1": 0.02631578947368419,
+            "recall5": 0.13157894736842113
+          },
+          "exact_within_action": {
+            "mrr": 0.12991113533666188,
+            "recall1": 0.03225806451612901,
+            "recall5": 0.1612903225806451
+          }
+        },
+        "oracle_action": {
+          "exact_in_full_gallery": {
+            "mrr": 0.12991113533666188,
+            "recall1": 0.03225806451612901,
+            "recall5": 0.1612903225806451
+          },
+          "exact_within_action": {
+            "mrr": 0.12991113533666188,
+            "recall1": 0.03225806451612901,
+            "recall5": 0.1612903225806451
+          }
+        },
+        "ridge": {
+          "exact_in_full_gallery": {
+            "mrr": 0.21248118646998468,
+            "recall1": 0.06989247311827956,
+            "recall5": 0.35215053763440857
+          },
+          "exact_within_action": {
+            "mrr": 0.21400983581769575,
+            "recall1": 0.06989247311827956,
+            "recall5": 0.35215053763440857
+          }
+        },
+        "wrong_pair": {
+          "exact_in_full_gallery": {
+            "mrr": 0.07286052996152168,
+            "recall1": 0.016129032258064516,
+            "recall5": 0.04838709677419355
+          },
+          "exact_within_action": {
+            "mrr": 0.0813448530707267,
+            "recall1": 0.016129032258064516,
+            "recall5": 0.04838709677419355
+          }
+        }
+      },
+      "recordings": 31
+    }
+  },
+  "distribution": "Aggregate scores and study source only. Raw representations, descriptions, training vocabulary, score vectors and weights remain local.",
+  "identity": {
+    "manifest": "8ef99a78b1b030a39cc5e5aeb0c34145d011b01f1c81792634155149119071cb",
+    "policy": "87ec9802b2a229c222419544de63409fc66ef2d73a621962c422829b61a790f4",
+    "preprocessing": "edffb50eb40144afdb4380833e573ed320a3df5aa8509679ac3b9aa71ff33146",
+    "retrieval.py": "3df4cf67b564af1087213f5452ae86f4f44e094b0f98d63344da46053a304658",
+    "study.py": "8cd83ee979bd95751abad1456b68763e07dbb74f8bb56c6e2a50385790ec325e"
+  },
+  "metrics": {
+    "attention": {
+      "by_group": {
+        "KIT12": {
+          "mrr": 0.3089463776963777,
+          "recall1": 0.09722222222222221,
+          "recall5": 0.4861111111111111
+        },
+        "KIT200": {
+          "mrr": 0.09106326987401157,
+          "recall1": 0.0,
+          "recall5": 0.16666666666666666
+        },
+        "KIT348": {
+          "mrr": 0.189499530840097,
+          "recall1": 0.05555555555555555,
+          "recall5": 0.2777777777777778
+        },
+        "KIT359": {
+          "mrr": 0.22928197950123355,
+          "recall1": 0.06666666666666667,
+          "recall5": 0.35416666666666663
+        },
+        "KIT6": {
+          "mrr": 0.18376812800725847,
+          "recall1": 0.1,
+          "recall5": 0.2
+        },
+        "KIT7": {
+          "mrr": 0.1380353401267844,
+          "recall1": 0.0,
+          "recall5": 0.375
+        }
+      },
+      "group_macro": {
+        "mrr": 0.19009910434096045,
+        "recall1": 0.053240740740740734,
+        "recall5": 0.30995370370370373
+      },
+      "identical_description_any_recording": {
+        "mrr": 0.20209102890014324,
+        "recall1": 0.05570175438596491,
+        "recall5": 0.32894736842105265
+      },
+      "motion_macro": {
+        "mrr": 0.1974930431590014,
+        "recall1": 0.05570175438596491,
+        "recall5": 0.3201754385964913
+      },
+      "motion_to_any_of_its_captions": {
+        "mrr": 0.1902290080855777,
+        "recall1": 0.07894736842105263,
+        "recall5": 0.2894736842105263
+      },
+      "same_action_top1_motion_macro": 0.7109649122807018,
+      "within_action_exact": {
+        "mrr": 0.23580059232630302,
+        "recall1": 0.08872549019607844,
+        "recall5": 0.37745098039215685
+      }
+    },
+    "caption_to_action": {
+      "by_group": {
+        "KIT12": {
+          "mrr": 0.12991113533666196,
+          "recall1": 0.03225806451612903,
+          "recall5": 0.16129032258064516
+        },
+        "KIT200": {
+          "mrr": 0.27028014856962224,
+          "recall1": 0.25,
+          "recall5": 0.25
+        },
+        "KIT348": {
+          "mrr": 0.23302666933394167,
+          "recall1": 0.09617682198327358,
+          "recall5": 0.3422939068100359
+        },
+        "KIT359": {
+          "mrr": 0.18654829251345917,
+          "recall1": 0.0678763440860215,
+          "recall5": 0.2600806451612903
+        },
+        "KIT6": {
+          "mrr": 0.12678613533666194,
+          "recall1": 0.029032258064516127,
+          "recall5": 0.15806451612903222
+        },
+        "KIT7": {
+          "mrr": 0.12860905200332862,
+          "recall1": 0.030913978494623656,
+          "recall5": 0.15994623655913975
+        }
+      },
+      "group_macro": {
+        "mrr": 0.17919357218227927,
+        "recall1": 0.08437624452409398,
+        "recall5": 0.22194593787335723
+      },
+      "identical_description_any_recording": {
+        "mrr": 0.18414522475499234,
+        "recall1": 0.07845217883418222,
+        "recall5": 0.24146859083191846
+      },
+      "motion_macro": {
+        "mrr": 0.1804157568188128,
+        "recall1": 0.07717883418222976,
+        "recall5": 0.23365874363327674
+      },
+      "motion_to_any_of_its_captions": {
+        "mrr": 0.17059019521716154,
+        "recall1": 0.08187134502923976,
+        "recall5": 0.22425067945446364
+      },
+      "same_action_top1_motion_macro": 0.8662280701754386,
+      "within_action_exact": {
+        "mrr": 0.172369956728525,
+        "recall1": 0.05882352941176468,
+        "recall5": 0.23529411764705876
+      }
+    },
+    "chance": {
+      "by_group": {
+        "KIT12": {
+          "mrr": 0.11126057929724605,
+          "recall1": 0.02631578947368421,
+          "recall5": 0.13157894736842105
+        },
+        "KIT200": {
+          "mrr": 0.11126057929724605,
+          "recall1": 0.02631578947368421,
+          "recall5": 0.13157894736842105
+        },
+        "KIT348": {
+          "mrr": 0.11126057929724606,
+          "recall1": 0.02631578947368421,
+          "recall5": 0.13157894736842105
+        },
+        "KIT359": {
+          "mrr": 0.11126057929724606,
+          "recall1": 0.02631578947368421,
+          "recall5": 0.13157894736842105
+        },
+        "KIT6": {
+          "mrr": 0.11126057929724605,
+          "recall1": 0.02631578947368421,
+          "recall5": 0.13157894736842105
+        },
+        "KIT7": {
+          "mrr": 0.11126057929724605,
+          "recall1": 0.02631578947368421,
+          "recall5": 0.13157894736842105
+        }
+      },
+      "group_macro": {
+        "mrr": 0.11126057929724607,
+        "recall1": 0.02631578947368421,
+        "recall5": 0.13157894736842105
+      },
+      "identical_description_any_recording": {
+        "mrr": 0.11500390492550586,
+        "recall1": 0.027873961218836552,
+        "recall5": 0.13852755109680326
+      },
+      "motion_macro": {
+        "mrr": 0.11126057929724598,
+        "recall1": 0.02631578947368419,
+        "recall5": 0.13157894736842116
+      },
+      "motion_to_any_of_its_captions": {
+        "mrr": 0.10113286089870446,
+        "recall1": 0.026315789473684223,
+        "recall5": 0.1261573721294911
+      },
+      "same_action_top1_motion_macro": 0.6745152354570635,
+      "within_action_exact": {
+        "mrr": 0.172369956728525,
+        "recall1": 0.05882352941176468,
+        "recall5": 0.23529411764705876
+      }
+    },
+    "oracle_action": {
+      "by_group": {
+        "KIT12": {
+          "mrr": 0.12991113533666196,
+          "recall1": 0.03225806451612903,
+          "recall5": 0.16129032258064516
+        },
+        "KIT200": {
+          "mrr": 1.0,
+          "recall1": 1.0,
+          "recall5": 1.0
+        },
+        "KIT348": {
+          "mrr": 0.23684446328653955,
+          "recall1": 0.09916367980884108,
+          "recall5": 0.3476702508960574
+        },
+        "KIT359": {
+          "mrr": 0.1900611323084681,
+          "recall1": 0.06989247311827956,
+          "recall5": 0.2661290322580645
+        },
+        "KIT6": {
+          "mrr": 0.12991113533666193,
+          "recall1": 0.03225806451612903,
+          "recall5": 0.16129032258064516
+        },
+        "KIT7": {
+          "mrr": 0.12991113533666196,
+          "recall1": 0.03225806451612903,
+          "recall5": 0.16129032258064516
+        }
+      },
+      "group_macro": {
+        "mrr": 0.3027731669341656,
+        "recall1": 0.2109717244125846,
+        "recall5": 0.34961170848267625
+      },
+      "identical_description_any_recording": {
+        "mrr": 0.2637464540415222,
+        "recall1": 0.15980475382003392,
+        "recall5": 0.32406621392190166
+      },
+      "motion_macro": {
+        "mrr": 0.2594889086518382,
+        "recall1": 0.15789473684210523,
+        "recall5": 0.31578947368421073
+      },
+      "motion_to_any_of_its_captions": {
+        "mrr": 0.24474016996302012,
+        "recall1": 0.1578947368421053,
+        "recall5": 0.29692970486525083
+      },
+      "same_action_top1_motion_macro": 1.0,
+      "within_action_exact": {
+        "mrr": 0.172369956728525,
+        "recall1": 0.05882352941176468,
+        "recall5": 0.23529411764705876
+      }
+    },
+    "ridge": {
+      "by_group": {
+        "KIT12": {
+          "mrr": 0.3988997113997114,
+          "recall1": 0.19444444444444442,
+          "recall5": 0.6666666666666666
+        },
+        "KIT200": {
+          "mrr": 0.18835065444004723,
+          "recall1": 0.08333333333333333,
+          "recall5": 0.26666666666666666
+        },
+        "KIT348": {
+          "mrr": 0.1910197558748283,
+          "recall1": 0.037037037037037035,
+          "recall5": 0.3888888888888889
+        },
+        "KIT359": {
+          "mrr": 0.13835356028273982,
+          "recall1": 0.041666666666666664,
+          "recall5": 0.20833333333333331
+        },
+        "KIT6": {
+          "mrr": 0.069930176930177,
+          "recall1": 0.0,
+          "recall5": 0.0
+        },
+        "KIT7": {
+          "mrr": 0.21535574429596163,
+          "recall1": 0.05555555555555555,
+          "recall5": 0.375
+        }
+      },
+      "group_macro": {
+        "mrr": 0.2003182672039109,
+        "recall1": 0.06867283950617283,
+        "recall5": 0.3175925925925926
+      },
+      "identical_description_any_recording": {
+        "mrr": 0.20782021787621688,
+        "recall1": 0.07456140350877194,
+        "recall5": 0.35043859649122805
+      },
+      "motion_macro": {
+        "mrr": 0.20038401372948642,
+        "recall1": 0.06578947368421052,
+        "recall5": 0.32850877192982453
+      },
+      "motion_to_any_of_its_captions": {
+        "mrr": 0.20296318350666015,
+        "recall1": 0.02631578947368421,
+        "recall5": 0.42105263157894735
+      },
+      "same_action_top1_motion_macro": 0.8245614035087719,
+      "within_action_exact": {
+        "mrr": 0.25100896795142846,
+        "recall1": 0.09313725490196079,
+        "recall5": 0.40931372549019607
+      }
+    },
+    "wrong_pair": {
+      "by_group": {
+        "KIT12": {
+          "mrr": 0.042662624718556245,
+          "recall1": 0.0,
+          "recall5": 0.0
+        },
+        "KIT200": {
+          "mrr": 0.03643159634016983,
+          "recall1": 0.0,
+          "recall5": 0.0
+        },
+        "KIT348": {
+          "mrr": 0.04709159304055807,
+          "recall1": 0.0,
+          "recall5": 0.0
+        },
+        "KIT359": {
+          "mrr": 0.20613284800660583,
+          "recall1": 0.1375,
+          "recall5": 0.2625
+        },
+        "KIT6": {
+          "mrr": 0.04609840378919321,
+          "recall1": 0.0,
+          "recall5": 0.0
+        },
+        "KIT7": {
+          "mrr": 0.0674507598487674,
+          "recall1": 0.0,
+          "recall5": 0.0
+        }
+      },
+      "group_macro": {
+        "mrr": 0.07431130429064177,
+        "recall1": 0.02291666666666667,
+        "recall5": 0.043750000000000004
+      },
+      "identical_description_any_recording": {
+        "mrr": 0.08414856638049299,
+        "recall1": 0.028947368421052635,
+        "recall5": 0.06403508771929824
+      },
+      "motion_macro": {
+        "mrr": 0.08183646929285411,
+        "recall1": 0.028947368421052635,
+        "recall5": 0.05526315789473685
+      },
+      "motion_to_any_of_its_captions": {
+        "mrr": 0.05584221884897544,
+        "recall1": 0.0,
+        "recall5": 0.07894736842105263
+      },
+      "same_action_top1_motion_macro": 0.5486842105263158,
+      "within_action_exact": {
+        "mrr": 0.1251477581919371,
+        "recall1": 0.047058823529411764,
+        "recall5": 0.1323529411764706
+      }
+    }
+  },
+  "prespecified_descriptive_comparison_passed": false,
+  "split": {
+    "assessment": {
+      "caption_count_from_metadata": 90,
+      "recordings": 38,
+      "subject_ids": 6
+    },
+    "reserve": {
+      "caption_count_from_metadata": 80,
+      "recordings": 31,
+      "subject_ids": 4
+    },
+    "train": {
+      "caption_count_from_metadata": 387,
+      "recordings": 149,
+      "subject_ids": 16
+    }
+  },
+  "task": "Local text-to-motion retrieval on recorded KIT subjects"
+}
