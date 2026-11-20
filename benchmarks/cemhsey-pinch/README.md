@@ -1,68 +1,70 @@
-# What did forearm EMG add to the pinch-force forecast?
+[The studies](../README.md) › Study 18 · Pinch: muscle signal
 
-**Force history and task phase carried most of the predictive gain.** Adding four amplitude features from the same trial's forearm surface EMG reduced mean absolute error from 0.004634370 to 0.004631948, about 0.052% relative to force history and phase alone. The same-trial features also beat the matched other-trial comparison by 0.000007766. Both margins were small, and both participant-resampling ranges crossed zero. The incremental benefit remains unresolved on this panel. [Aggregate results](RESULTS.json)
+# Forearm EMG made no measurable difference to the pinch-force forecast
 
-A dynamometer already tells us how hard someone is pinching. We asked whether surface EMG helps forecast its later reading once the model knows the current force, its recent history and where the person is in the prescribed task. CEMHSEY GRASP recorded a right-hand thumb–index pad-to-pad pinch with a P200 dynamometer at a prescribed 30% of maximum voluntary contraction (MVC). The measured target is the released scalar force normalized to the participant's MVC for that recording session and grasp. Its units are dimensionless. The displayed cue supplies context. The dynamometer supplies the outcome. [Study methods](https://doi.org/10.1038/s41597-025-05733-y) · [Prespecified protocol](PROTOCOL.md)
+A gauge between thumb and forefinger already says how hard someone is pinching. For four test people holding a pinch at 30% of their hardest squeeze, a straight-line fit on the recent force and the stage of the on-screen cue forecast the gauge 120 ms ahead with an average miss of **0.4634%**. With four amplitude features from the same trial's forearm EMG added, it missed by **0.4632%**: a fall of 0.00024%, about 0.052% of the error itself, better for three of the four people, with a range that crosses zero. Force history and the cue did the work: repeating the current reading missed by 0.5464%.
 
-## Four new people, two new recording-day indices
+Every error here is in % of the person's hardest squeeze that day (their maximum voluntary contraction, MVC). The main measure is the plain average miss (mean absolute error); the measure that punishes large misses (root mean squared error) comes second. EMG is electrical activity of muscle, picked up on the skin: a recording of muscle, not of nerve. A *straight-line fit* is a weighted sum of its inputs, here a ridge regression.
 
-The fit used three people on recording-day indices 1 and 2, with two repeats per person per day and 12 trials. Evaluation used four people unseen during fitting on the separate recording-day indices 3 and 4. Both repeats gave 16 trials, with 592 issue times per trial and 9,472 forecasts per method. People, days, repeats and issue times contribute equal weight on this balanced panel. The 9,472 windows share trial histories. The four participants are the resampling units. Person and day changed together in this comparison. [Prespecified protocol](PROTOCOL.md)
+The same-trial EMG also beat EMG taken from the person's other repeat, by 0.0007766%, and that range crosses zero too. The rule set before scoring counted a lower average in both comparisons as an observed advantage on this group, to be reported with its size and uncertainty. Both averages were lower, by margins too small to tell from zero. [Results file](RESULTS.json)
+
+CEMHSEY GRASP recorded a right-hand pinch, thumb pad to index pad, on a P200 dynamometer at a prescribed 30% of the hardest squeeze. The target is the released force reading, divided by the person's hardest squeeze for that session and grasp. The cue on the screen supplies context; the dynamometer supplies the outcome. [Study methods](https://doi.org/10.1038/s41597-025-05733-y) · [The plan, fixed before scoring](PROTOCOL.md)
+
+## Four new people on two new recording days
+
+The fit used three people on recording-day indices 1 and 2, with two repeats per person per day: 12 trials. The test used four people the fit had never seen, on the separate day indices 3 and 4. Both repeats gave 16 trials, with 592 forecast moments per trial and 9,472 forecasts per method. People, days, repeats and moments count equally in this balanced group. The 9,472 forecasts share trial histories, so the four people are the units that are resampled. Person and day changed together, so the two effects cannot be told apart. The plan says there is no further group set aside.
 
 ## What the models could see
 
-At each issue the models forecast the dynamometer reading 24 stored force intervals later, a nominal 120 ms on the 200 Hz force grid. Persistence returns the current reading. The force models use the current reading and four differences from recent force. The phase model sees the current phase of the fixed schedule and how much of that phase has elapsed. The EMG arms add the median and 90th percentile of per-channel RMS amplitudes from each of two earlier 100 ms windows, after the prespecified log transformation. The nominal EMG windows end 100 ms before the issue index. The other-repeat control transfers those four EMG features from the same person, day, grasp and load at the same issue index. We fitted that control separately, then also tested what happened when the same-trial fit received other-trial EMG during scoring. [Prespecified protocol](PROTOCOL.md) · [Source compatibility](SOURCE-COMPATIBILITY.md)
+At each moment the models forecast the dynamometer reading 24 stored force samples later, a nominal 120 ms on the 200 Hz force grid. "Repeat the current reading" returns the current reading. The force models use the current reading and four differences of recent force. The cue model sees the current stage of the fixed schedule and how much of that stage has passed. The EMG versions add the median and the 90th percentile of each channel's amplitude (root mean square) in each of two earlier 100 ms windows, after the log transform fixed in the plan. The EMG windows end, nominally, 100 ms before the moment of the forecast. The other-repeat control takes those four EMG features from the same person, day, grasp and load at the same moment of the other repeat. That control was fitted separately; the same-trial fit was also scored with the other repeat's EMG swapped in. [The plan](PROTOCOL.md) · [A longer force record in one file, and why it changed nothing](SOURCE-COMPATIBILITY.md)
 
-## Errors on the fixed evaluation panel
-
-Lower is better. Mean absolute error (MAE) was the primary metric and root mean squared error (RMSE) was secondary. All values use the release's normalized-force scale.
-
-| Model | MAE | RMSE |
+| Model, on the four test people | Average miss | Large misses |
 | --- | ---: | ---: |
-| Persistence | 0.005464 | 0.007365 |
-| Task phase only | 0.015789 | 0.023175 |
-| Force history only | 0.005287 | 0.007220 |
-| Force history + phase | 0.004634 | 0.006290 |
-| Force history + phase + same-trial EMG | 0.004632 | 0.006281 |
-| Force history + phase + other-trial EMG | 0.004640 | 0.006294 |
-| Same-trial fit, other-trial EMG at scoring | 0.004641 | 0.006299 |
+| Repeat the current reading | 0.5464% | 0.7365% |
+| Cue stage only | 1.5789% | 2.3175% |
+| Force history only | 0.5287% | 0.7220% |
+| Force history and cue stage | 0.4634% | 0.6290% |
+| Force history, cue stage and same-trial EMG | 0.4632% | 0.6281% |
+| Force history, cue stage and other-repeat EMG | 0.4640% | 0.6294% |
+| The same-trial fit, given the other repeat's EMG at scoring | 0.4641% | 0.6299% |
 
-Adding force history and task phase lowered MAE by 15.18% relative to persistence. The incremental same-trial EMG improvement was much smaller. The same-trial fit also had the lowest overall RMSE of the seven comparisons on this panel.
+Adding force history and the cue stage cut the average miss by 15.18% of what repeating the current reading missed. The same-trial EMG's step beyond that was far smaller. The same-trial fit also had the fewest large misses of the seven.
 
-### Did same-trial EMG help more than the alternatives?
+### Same-trial EMG against the alternatives
 
-Signed MAE differences below are baseline minus same-trial EMG. A positive value favors the same-trial fit. The ranges are the 2.5th and 97.5th percentiles of all 256 draws that resample the four participants with replacement. They describe sensitivity to the people sampled, conditional on the two evaluated day indices. Four people give limited evidence about the effect in a new cohort.
+Each difference below is the comparison's average miss minus that of the same-trial EMG fit, so a positive value favours same-trial EMG. The ranges are the 2.5th and 97.5th percentiles of all 256 ways of resampling the four people with replacement. They describe how much the result depends on which people were sampled, for these two day indices; four people say little about a new group.
 
-| Comparison | Overall MAE difference | Person-resampling range | People favoring paired EMG | Day 3 | Day 4 |
+| Comparison | Difference | Range when people are resampled | People favouring same-trial EMG | Day 3 | Day 4 |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Force history + phase minus same-trial EMG | +0.000002 | -0.000005 to +0.000007 | 3/4 | +0.000002 | +0.000003 |
-| Other-trial EMG minus same-trial EMG | +0.000008 | -0.000004 to +0.000020 | 3/4 | +0.000012 | +0.000004 |
+| Force history and cue stage, minus same-trial EMG | +0.0002% | −0.0005% to +0.0007% | 3/4 | +0.0002% | +0.0003% |
+| Other-repeat EMG, minus same-trial EMG | +0.0008% | −0.0004% to +0.0020% | 3/4 | +0.0012% | +0.0004% |
 
-Both indexed days had a positive average difference for each comparison. Three of the four people favored the same-trial fit in each comparison, with small pooled differences.
+Both day indices favoured same-trial EMG on average in each comparison, and three of the four people favoured it each time, by small pooled differences.
 
-### The resting phases told a different story
+### The resting stages told a different story
 
-Phase refers to the issue time. The paired model had the lowest MAE during ramp-up, hold and release. The force-history-and-phase model had the lowest MAE in both rest phases. The largest paired gain over force history and phase was during release, 0.000009103. The largest loss was during initial rest, 0.000007060. The full phase table for all seven models, including their RMSE, is in the aggregate file.
+The stage is the stage of the cue at the moment of the forecast. The same-trial EMG fit had the smallest average miss during the rise, the hold and the release; the fit on force history and cue stage had the smallest in both resting stages. The largest gain from EMG over force history and cue stage was during the release, 0.0009103%; the largest loss was during the first rest, 0.0007060%. The results file has the full table by stage for all seven models, with their large misses.
 
-| Issue phase | Issues per trial | Persistence MAE | Force history + phase MAE | Same-trial EMG MAE | Other-trial EMG MAE |
+| Stage of the cue | Forecasts per trial | Repeat the current reading | Force history and cue stage | Same-trial EMG | Other-repeat EMG |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Initial rest | 94 | 0.003171 | 0.002637 | 0.002644 | 0.002647 |
-| Ramp up | 100 | 0.007774 | 0.005953 | 0.005948 | 0.005955 |
-| Hold | 200 | 0.005315 | 0.005136 | 0.005130 | 0.005146 |
-| Release | 100 | 0.007835 | 0.006056 | 0.006047 | 0.006052 |
-| Final rest | 98 | 0.003189 | 0.002728 | 0.002735 | 0.002735 |
+| First rest | 94 | 0.3171% | 0.2637% | 0.2644% | 0.2647% |
+| Rise | 100 | 0.7774% | 0.5953% | 0.5948% | 0.5955% |
+| Hold | 200 | 0.5315% | 0.5136% | 0.5130% | 0.5146% |
+| Release | 100 | 0.7835% | 0.6056% | 0.6047% | 0.6052% |
+| Final rest | 98 | 0.3189% | 0.2728% | 0.2735% | 0.2735% |
 
-## What this forecast measures
+## What it does not show
 
-The measured output is one normalized pinch force in one condition. These results describe an offline comparison over native sample indices. The public data establish nominal rates and within-trial pairing. The common physical sample origin, drift and delivery latency remain unmeasured, so the EMG guard is a release-index convention. The dynamometer measures the force between opposing digits as one reading. Separate digit forces, an effect in other tasks, online timing and clinical performance require their own evidence. This separately acquired dataset tests a complementary task to Hyser's five-sensor Random experiment. [Study methods](https://doi.org/10.1038/s41597-025-05733-y) · [Source compatibility](SOURCE-COMPATIBILITY.md) · [Hyser record](https://physionet.org/content/hd-semg/2.0.0/)
+The output is one normalised pinch force, in one condition, compared after the fact on the stored sample counts. The public data give the nominal sampling rates and the pairing within a trial; the common physical starting point of the two devices, their drift and their delivery delay were never measured, so the gap before the EMG window is a convention on the release's sample counts. The dynamometer reads the force between the two fingers as one number. Separate finger forces, other tasks, live timing and clinical use each need evidence of their own. This dataset was recorded separately from Hyser and tests a different task from [the finger studies](../hyser-index/README.md). [Study methods](https://doi.org/10.1038/s41597-025-05733-y) · [Hyser record](https://physionet.org/content/hd-semg/2.0.0/)
 
 ## Try the reader
 
-The public example uses invented readings and invented weights. Load your own local fit and a trial converted from its original MATLAB file to explore that trial. The converter and owner-training commands run locally. Reveal the later reading at one cutoff, or score all 592 cutoffs to see aggregate trial errors. [Offline reader](../../docs/cemhsey-pinch/README.md) · [Local commands](LOCAL-CONVERTER.md) · [Invented fit](BUNDLED-FIT.json)
+The public example uses invented readings and invented weights. Load your own fit and a trial converted from its original MATLAB file to explore that trial; the converter and the commands that fit on your own recordings run on your computer. Reveal the later reading at one cutoff, or score all 592 cutoffs for the trial's errors. [Offline reader](../../docs/cemhsey-pinch/README.md) · [Commands to run on your computer](LOCAL-CONVERTER.md) · [Invented fit](BUNDLED-FIT.json)
 
-## Data credit
+[Try the pinch reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-pinch/) · [Download the offline reader and Python converter](downloads/CEMHSEY-Pinch-Reader.zip) · [Model code](pinch.py) · [Invented demonstration weights](BUNDLED-FIT.json) · [Fit on your own recordings](fit_local.py)
 
-The CEMHSEY deposits are by Shutian Yang, Dongxuan Li, Chen Chen and Xiangyang Zhu. This analysis uses the v2 GRASP recordings, selects one pinch condition, derives four surface EMG amplitude summaries per issue, fits the prespecified comparisons and reports aggregate errors. The datasets are licensed CC BY 4.0. [CEMHSEY Part I v2](https://doi.org/10.5281/zenodo.15077957) · [CEMHSEY Part II v2](https://doi.org/10.5281/zenodo.15070187) · [Data license](https://creativecommons.org/licenses/by/4.0/)
+## Whose recordings
 
-The acquisition is described by Shutian Yang, Chen Chen, Dongxuan Li and Xiangyang Zhu in Scientific Data 12, article 1420 (2025). [Acquisition paper](https://doi.org/10.1038/s41597-025-05733-y)
+The CEMHSEY deposits are by Shutian Yang, Dongxuan Li, Chen Chen and Xiangyang Zhu. This study uses the version 2 GRASP recordings, takes one pinch condition, works out four EMG amplitude summaries for each forecast moment, fits the comparisons fixed in the plan and reports summary errors. The datasets are licensed CC BY 4.0. [CEMHSEY Part I v2](https://doi.org/10.5281/zenodo.15077957) · [CEMHSEY Part II v2](https://doi.org/10.5281/zenodo.15070187) · [Data licence](https://creativecommons.org/licenses/by/4.0/)
 
-[Try the pinch reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-pinch/) · [Download the offline reader and Python converter](downloads/CEMHSEY-Pinch-Reader.zip) · [Model code](pinch.py) · [Public demonstration weights](BUNDLED-FIT.json) · [Fit on local recordings](fit_local.py) · [Source compatibility](SOURCE-COMPATIBILITY.md)
+The recording is described by Shutian Yang, Chen Chen, Dongxuan Li and Xiangyang Zhu in Scientific Data 12, article 1420 (2025). [Acquisition paper](https://doi.org/10.1038/s41597-025-05733-y)
