@@ -1,6 +1,6 @@
 # Launchers and offline copies
 
-Almost everything here runs in a browser. A launcher is a shortcut that opens the right page. An offline copy is a ZIP that holds the page itself, so it works with no network. The last section is one command for Python.
+Almost everything here runs in a browser. A launcher is a shortcut that opens the right page. An offline copy is a ZIP that holds the page itself, so it works with no network. Two things on this page need Python: the walking page of the general model, and the command at the end that runs study 28's wrist models.
 
 ## A shortcut to the app
 
@@ -58,4 +58,4 @@ Two folders under `benchmarks/` hold a page of their results and a launcher for 
 | [Study 28](benchmarks/paired-wrist-forecast/README.md) | The general model's three wrist fits, with and without forearm EMG and scalp EEG, against the earlier forecasts | [Open on Windows.cmd](<benchmarks/paired-wrist-forecast/Open on Windows.cmd>) | [Open on macOS.command](<benchmarks/paired-wrist-forecast/Open on macOS.command>) | [Open on Linux.sh](<benchmarks/paired-wrist-forecast/Open on Linux.sh>) |
 | [Row 29](benchmarks/wrist-forearm-correction/README.md) | A correction from forearm EMG, scored on the people the wrist models were fitted on (not a test) | [Open on Windows.cmd](<benchmarks/wrist-forearm-correction/Open on Windows.cmd>) | [Open on macOS.command](<benchmarks/wrist-forearm-correction/Open on macOS.command>) | [Open on Linux.sh](<benchmarks/wrist-forearm-correction/Open on Linux.sh>) |
 
-Study 28's folder also runs its three fitted models. With Python, NumPy and PyTorch installed, run `python -B predict.py --input example.json --mode all` in [the folder](benchmarks/paired-wrist-forecast/README.md): it prints each model's forecast of the two wrist angles, in degrees, and the variance the model expects around each, in degrees squared. The input, `example.json`, is a made-up history of the wrist, the forearm and the scalp, so the output says nothing about accuracy; `example-predictions.json` holds what the command should print.
+In study 28's folder, one command also runs its three fitted models. With Python, NumPy and PyTorch installed, run `python -B predict.py --input example.json --mode all` in [the folder](benchmarks/paired-wrist-forecast/README.md): it prints each model's forecast of the two wrist angles, in degrees, and the variance the model expects around each, in degrees squared. The input, `example.json`, is a made-up history of the wrist, the forearm and the scalp, so the output says nothing about accuracy; `example-predictions.json` holds what the command should print.
