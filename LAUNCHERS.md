@@ -38,3 +38,13 @@ Each ZIP holds one reader and its own launchers for Windows, macOS and Linux. Un
 Most readers open with an invented example, so you can try one before you have a file. The pinch readers also ship with invented weights, and say so on the page: the weights fitted in the pinch studies are not published.
 
 Several studies have a Python runner as well, for scoring many recordings at once. Each study's own page says how: [the studies](benchmarks/README.md).
+
+## A page that runs from your own computer
+
+The general model's first fit has a page of its own that is not on the site: a small Python program on your computer serves it to your browser. Install Python 3.13 and the two libraries in the folder's [`requirements.txt`](benchmarks/daily-sports-limbs/requirements.txt), then open the launcher for your system, or run `python serve.py` in [the folder](benchmarks/daily-sports-limbs/README.md). Pick a sensor on the torso, an arm or a leg to see its last 16 readings, the model's forecast and what the sensor recorded next. The walks it shows are ones the model was fitted on, so it shows the model working, not how good it is.
+
+| Your computer | Launcher |
+| --- | --- |
+| Windows | [Open on Windows.cmd](<benchmarks/daily-sports-limbs/Open on Windows.cmd>) |
+| macOS | [Open on macOS.command](<benchmarks/daily-sports-limbs/Open on macOS.command>) |
+| Linux | [Open on Linux.sh](<benchmarks/daily-sports-limbs/Open on Linux.sh>) |
