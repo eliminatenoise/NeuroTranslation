@@ -12,6 +12,10 @@ The movement viewer compares right-wrist angles with different combinations of m
 
 On the same 549 forecast instants compared in the linear benchmark, the shared movement model had an average error of **2.805 cm** with movement alone and **2.778 cm** with correctly timed CA1 and prefrontal firing. Substituting firing from an earlier trip gave **2.804 cm**. Only one of three rats improved over both controls. A comparison with scrambled movement-encoder weights scored **2.763 cm** with firing. These results establish that the fitted readout uses the firing signal. They give no evidence here that pretraining improved this forecast. A lower average error can hide a worse result in an individual animal. [Study and per-animal results](neurotranslate-0.0/population/)
 
+## Force underfoot
+
+Two plates in a walkway measure the load where a foot lands on them. Six fitted models use recent marker positions, right-leg muscle activity, or both to estimate their combined reading 100 ms later on the recording clock. Across eight test walkers, adding muscle activity to the marker Transformer raised the average absolute error from 65.19 to 70.20 N. A separate task fits the shared model to the reading on the plate assigned to the right foot after heel strike. [Compare the six models](https://eliminatenoise.github.io/NeuroTranslation/walking-force/) · [Two-plate model and results](walking-force/) · [Shared right-foot model](neurotranslate-0.0/right-plate/) · [Read the paper](https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-and-floor/)
+
 ## Predicting finger movement in a different person
 
 The five people had different recording layouts. We grouped contacts by the brain area named in the source, recorded which areas were missing, then trained on four people at a time. A model based on the cue and its timing still had the smallest average error in the fifth person. [Test the model](https://eliminatenoise.github.io/NeuroTranslation/finger-transfer/) · [Calibrations, fitted weights and results](finger-transfer/)

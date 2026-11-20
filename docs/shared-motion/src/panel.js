@@ -125,6 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function clearResults(message) {
     revision++;
+    byId("plate-results").hidden = true;
+    byId("plate-force").textContent = "";
     byId("moment-results").hidden = true;
     for (const id of ["moment-name", "moment-right", "moment-left", "moment-timing"]) byId(id).textContent = "";
     byId("knee-results").hidden = true;
@@ -257,6 +259,35 @@ document.addEventListener("DOMContentLoaded", () => {
     byId("status").textContent = "";
   }
 
+  function inventedPlate() {
+    const record = structuredClone(data.plateExample);
+    record.mode = byId("plate-mode").value;
+    if (record.mode.includes("combined")) {
+      const scale = Number(byId("plate-scale").value);
+      record.emg_uV = record.emg_uV.map(row => row.map(value => value * scale));
+    } else {
+      delete record.emg_uV;
+      delete record.emg_valid;
+    }
+    return record;
+  }
+
+  async function showPlate(record, token) {
+    if (record?.domain !== "right_plate_force") throw new Error("Supply one right_plate_force input.");
+    const result = await SharedMotion.forecastMovement(record);
+    if (token !== revision) return;
+    const force = result.right_vertical_plate_force_N;
+    byId("plate-force").textContent = format(force, 2);
+    byId("plate-timing").textContent = "Frame " + (result.offset_frames + result.lead_frames) +
+      " after right-foot strike. The history ends at frame " + result.offset_frames +
+      ", 0.10 s before the target on the stored 100 Hz clock.";
+    byId("plate-negative").hidden = force >= 0;
+    byId("plate-results").hidden = false;
+    byId("status").textContent = isCustom()
+      ? "Custom input. Check the recorded strike time, plate assignment, geometry and channels at the source."
+      : "Forecast from invented inputs. There is no measured plate load for this example.";
+  }
+
   async function showMoment(record, token) {
     if (record?.domain !== "knee_moment" || !Array.isArray(record.frames) || Array.isArray(record.frames[0])) {
       throw new Error("Supply one knee_moment walking history for this view.");
@@ -278,6 +309,13 @@ document.addEventListener("DOMContentLoaded", () => {
     clearResults("");
     const token = revision;
     try {
+      if (currentDomain() === "right_plate_force") {
+        let record;
+        try { record = JSON.parse(byId("plate-input").value); }
+        catch { throw new Error("Paste the complete right-plate input or choose Show invented input."); }
+        await showPlate(record, token);
+        return;
+      }
       if (currentDomain() === "knee_moment") {
         let record;
         try { record = JSON.parse(byId("moment-input").value); }
@@ -324,6 +362,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const custom = isCustom();
     const angular = domain === "wrist_angle";
     const knee = domain === "knee_angle";
+    const plate = domain === "right_plate_force";
+    byId("plate-controls").hidden = !plate;
+    byId("plate-custom").hidden = !custom;
+    byId("plate-example-controls").hidden = custom;
+    byId("plate-scale-control").hidden = !byId("plate-mode").value.includes("combined");
+    byId("plate-study").hidden = !plate;
     const moment = domain === "knee_moment";
     const recorded = source.value === "recorded";
     const forearm = source.value === "forearm";
@@ -335,15 +379,16 @@ document.addEventListener("DOMContentLoaded", () => {
     byId("knee-custom").hidden = !custom;
     byId("knee-example-method").hidden = custom;
     byId("knee-study").hidden = !knee;
-    byId("custom").hidden = moment || knee || angular || !custom;
+    byId("custom").hidden = plate || moment || knee || angular || !custom;
     byId("angular-custom").hidden = !angular || !custom;
     byId("angle-study").hidden = !angular;
-    byId("distance-study").hidden = moment || angular || knee;
+    byId("distance-study").hidden = plate || moment || angular || knee;
     byId("source-line").textContent = custom
       ? "Enter a history from one trial or recording that you have permission to use. The source clock and units must match this task."
       : recorded
         ? "Recorded camera positions from rat JS14. This is the first eligible training window, two seconds into W-track trip 55."
         : forearm ? "An invented half-second from the forearm correction example. It contains wrist angles and four forearm channels. No person supplied these measurements."
+        : plate ? "Four invented heel and forefoot positions use the centre of one force plate as their origin. The eight muscle channels are invented too."
         : moment ? "Four seconds of invented leg angles. This walking example has no measured future moment."
         : knee ? "Two invented mathematical waves show the input format. They do not come from a person. The example has no measured future angle."
         : angular ? "Invented wrist angles, forearm muscle activity and scalp voltages. All five forecasts use the same half-second."
@@ -351,7 +396,8 @@ document.addEventListener("DOMContentLoaded", () => {
             : "Invented right-wrist movement in three dimensions. There is no measured future endpoint.";
     if (!custom) {
       try {
-        if (moment) await showMoment({...data.momentExample, mode:byId("moment-mode").value}, token);
+        if (plate) await showPlate(inventedPlate(), token);
+        else if (moment) await showMoment({...data.momentExample, mode:byId("moment-mode").value}, token);
         else if (knee) await showKnees({...data.kneeExample, mode:byId("knee-mode").value}, token);
         else if (angular) await compareAngles(forearm ? data.forearmExample : data.angleExample,token);
         else {
@@ -359,6 +405,10 @@ document.addEventListener("DOMContentLoaded", () => {
           await showForecast(domain,intervals,recorded,token);
         }
       } catch (e) { if (token === revision) clearResults(e.message); }
+      return;
+    }
+    if (plate) {
+      clearResults("Supply one marker history from an assigned right-foot plate.");
       return;
     }
     if (moment || knee) {
@@ -403,6 +453,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   picker.addEventListener("change",selectDomain);
   source.addEventListener("change",selectInput);
+  byId("plate-mode").addEventListener("change", selectInput);
+  byId("plate-scale").addEventListener("change", selectInput);
+  byId("plate-run").addEventListener("click", runCustom);
+  byId("plate-input").addEventListener("input", () => clearResults("Inputs changed. Run the forecast for this history."));
+  byId("plate-fill").addEventListener("click", () => {
+    byId("plate-input").value = JSON.stringify(inventedPlate(), null, 2);
+    clearResults("Run the forecast for this invented history, or enter your own measurements.");
+  });
   byId("moment-mode").addEventListener("change", selectInput);
   byId("moment-run").addEventListener("click", runCustom);
   byId("moment-input").addEventListener("input", () => clearResults("Inputs changed. Run the forecast to use these angles."));
@@ -447,11 +505,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (model.checkpointSha256 !== "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179") {
         throw new Error("The checkpoint differs from the one used for these comparisons.");
       }
-      if (model.movementCheckpointSha256 !== "7a0c17c66049fba7812d0acf1392af21829c3c6528ace3667202c8091f97f8b4") {
+      if (model.movementCheckpointSha256 !== "a52af3c0875a43d3ce8ae70ae7eaa8cf83a9bcd4f75422f1cc84bea6fd8379ee") {
         throw new Error("The movement checkpoint differs from the studied model.");
       }
       studyTable();
       picker.disabled = source.disabled = false;
+      if (location.hash === "#right-plate") picker.value = "right_plate_force";
       selectDomain();
     } catch(e) {
       clearResults("The model could not load. " + e.message + " Reopen a complete saved copy or retry.");

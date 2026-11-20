@@ -1,6 +1,10 @@
-# A quarter second ahead
+# What can past movement predict?
 
 Open **index.html** or the launcher for your operating system. The first example predicts the distance between a wrist’s last tracked position and its position about a quarter second later. Choose **Right-wrist angles (°)** to ask how far back the wrist will bend and how far it will tilt towards the thumb. **Rat displacement (cm)** predicts an endpoint distance on a maze. **Right and left knee angles (°)** forecasts both knees from 240 consecutive pairs of angles. Choose **Knee moments (N·m/kg)** to estimate the net turning moment at each knee. Each task starts with an invented example. [Open the viewer](index.html)
+
+## Forecast the load on one plate
+
+Choose **Right-foot plate load (N)**. The example tracks the heel and forefoot relative to one plate. Set the forecast method, then halve or double the invented muscle amplitudes to see how a combined method responds with the foot positions held fixed. **Enter my own measurements** accepts a single JSON history with its recorded heel-strike offset. The reference is the upward load on the assigned plate ten stored frames later (0.10 s). A change to an invented input shows how an equation responds. The source recordings were filtered across time, so they establish no live lead time. [Version 8 walking recordings](https://doi.org/10.6084/m9.figshare.7734767.v8)
 
 ## Estimate the turning moment at each knee
 

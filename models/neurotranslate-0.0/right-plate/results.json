@@ -1,0 +1,323 @@
+{
+  "method_sha256": "ae34d05c9d01dd005dc24d85465c682b9992cc79e1edf2cc93f24dadb3ffc82e",
+  "checkpoint_sha256": "a52af3c0875a43d3ce8ae70ae7eaa8cf83a9bcd4f75422f1cc84bea6fd8379ee",
+  "test_coverage": {
+    "selected_people": 10,
+    "selected_trials": 30,
+    "people": 8,
+    "trials": 16,
+    "windows": 53,
+    "offset_windows": [
+      5,
+      16,
+      16,
+      16
+    ],
+    "excluded": {
+      "window_outside_record": 11,
+      "trial_without_two_source_assigned_distinct_plates": 13,
+      "right_strike1_marker_pair_not_inside_assigned_plate": 1
+    }
+  },
+  "full": {
+    "people": 8,
+    "trials": 16,
+    "windows": 53,
+    "mean_absolute_error_N": {
+      "phase": 93.07583352304526,
+      "marker_ridge": 93.40307171753766,
+      "combined_ridge": 82.04248578590568,
+      "marker_shared": 93.9280250959083,
+      "combined_shared": 85.17863075888158,
+      "scrambled_combined": 86.62866076624691
+    },
+    "per_person": {
+      "assessment-01": {
+        "phase": 89.72325964239843,
+        "marker_ridge": 84.1164004638634,
+        "combined_ridge": 51.346272414480275,
+        "marker_shared": 100.03047982536089,
+        "combined_shared": 59.11481893280222,
+        "scrambled_combined": 72.79712062548212
+      },
+      "assessment-02": {
+        "phase": 34.671582352990875,
+        "marker_ridge": 21.982244807896016,
+        "combined_ridge": 28.540415915494492,
+        "marker_shared": 34.18751005642057,
+        "combined_shared": 48.903100796595766,
+        "scrambled_combined": 24.384227381802305
+      },
+      "assessment-03": {
+        "phase": 137.4291303676586,
+        "marker_ridge": 80.9010922435939,
+        "combined_ridge": 57.73068145375081,
+        "marker_shared": 68.21544939026826,
+        "combined_shared": 59.44824038686151,
+        "scrambled_combined": 51.19030667697268
+      },
+      "assessment-04": {
+        "phase": 82.39327135130227,
+        "marker_ridge": 92.08816510959379,
+        "combined_ridge": 117.62398632029715,
+        "marker_shared": 79.27454594097613,
+        "combined_shared": 107.16295396550416,
+        "scrambled_combined": 100.16198378049705
+      },
+      "assessment-06": {
+        "phase": 133.74012049798077,
+        "marker_ridge": 184.61997873558852,
+        "combined_ridge": 124.59322413789937,
+        "marker_shared": 187.30234506232637,
+        "combined_shared": 126.19030068342047,
+        "scrambled_combined": 126.42056427367035
+      },
+      "assessment-07": {
+        "phase": 18.807703657282687,
+        "marker_ridge": 45.00656429072048,
+        "combined_ridge": 56.336086918714095,
+        "marker_shared": 46.7364395317528,
+        "combined_shared": 58.57462718816868,
+        "scrambled_combined": 63.75465229963223
+      },
+      "assessment-08": {
+        "phase": 41.24125941704837,
+        "marker_ridge": 77.89913669774958,
+        "combined_ridge": 77.58056443330008,
+        "marker_shared": 82.82189021784905,
+        "combined_shared": 79.97500085077105,
+        "scrambled_combined": 65.18687225330609
+      },
+      "assessment-10": {
+        "phase": 206.6003408977001,
+        "marker_ridge": 160.61099139129556,
+        "combined_ridge": 142.5886546933092,
+        "marker_shared": 152.85554074231231,
+        "combined_shared": 142.0600032669288,
+        "scrambled_combined": 189.13355883861243
+      }
+    }
+  },
+  "paired_wrong_repeat": {
+    "people": 6,
+    "trials": 14,
+    "windows": 44,
+    "mean_absolute_error_N": {
+      "phase": 78.10394207257092,
+      "marker_ridge": 79.87298172952347,
+      "combined_ridge": 77.13575337997105,
+      "marker_shared": 84.45583595443757,
+      "combined_shared": 83.26222102069032,
+      "scrambled_combined": 84.3708461541212,
+      "wrong_repeat": 85.02451389743511
+    },
+    "per_person": {
+      "assessment-01": {
+        "phase": 96.2812641009138,
+        "marker_ridge": 89.40183056202217,
+        "combined_ridge": 50.29818536728538,
+        "marker_shared": 103.92492399998919,
+        "combined_shared": 55.5847438730109,
+        "scrambled_combined": 69.79429323265933,
+        "wrong_repeat": 55.5847438730109
+      },
+      "assessment-02": {
+        "phase": 23.29981301117825,
+        "marker_ridge": 14.231202325759284,
+        "combined_ridge": 18.387042546920423,
+        "marker_shared": 41.121675293745966,
+        "combined_shared": 56.21599697975837,
+        "scrambled_combined": 18.193716520020114,
+        "wrong_repeat": 56.21599697975838
+      },
+      "assessment-04": {
+        "phase": 82.39327135130227,
+        "marker_ridge": 92.08816510959379,
+        "combined_ridge": 117.62398632029715,
+        "marker_shared": 79.27454594097613,
+        "combined_shared": 107.16295396550416,
+        "scrambled_combined": 100.16198378049705,
+        "wrong_repeat": 107.16295396550414
+      },
+      "assessment-07": {
+        "phase": 18.807703657282687,
+        "marker_ridge": 45.00656429072048,
+        "combined_ridge": 56.336086918714095,
+        "marker_shared": 46.7364395317528,
+        "combined_shared": 58.57462718816868,
+        "scrambled_combined": 63.75465229963223,
+        "wrong_repeat": 69.14838444863737
+      },
+      "assessment-08": {
+        "phase": 41.24125941704837,
+        "marker_ridge": 77.89913669774958,
+        "combined_ridge": 77.58056443330008,
+        "marker_shared": 82.82189021784905,
+        "combined_shared": 79.97500085077105,
+        "scrambled_combined": 65.18687225330609,
+        "wrong_repeat": 79.97500085077107
+      },
+      "assessment-10": {
+        "phase": 206.6003408977001,
+        "marker_ridge": 160.61099139129556,
+        "combined_ridge": 142.5886546933092,
+        "marker_shared": 152.85554074231231,
+        "combined_shared": 142.0600032669288,
+        "scrambled_combined": 189.13355883861243,
+        "wrong_repeat": 142.0600032669288
+      }
+    }
+  },
+  "privileged_past_force": {
+    "people": 8,
+    "trials": 16,
+    "windows": 53,
+    "mean_absolute_error_N": {
+      "phase": 93.07583352304526,
+      "marker_ridge": 93.40307171753766,
+      "combined_ridge": 82.04248578590568,
+      "marker_shared": 93.9280250959083,
+      "combined_shared": 85.17863075888158,
+      "scrambled_combined": 86.62866076624691,
+      "current_plate": 76.45443278640785
+    },
+    "per_person": {
+      "assessment-01": {
+        "phase": 89.72325964239843,
+        "marker_ridge": 84.1164004638634,
+        "combined_ridge": 51.346272414480275,
+        "marker_shared": 100.03047982536089,
+        "combined_shared": 59.11481893280222,
+        "scrambled_combined": 72.79712062548212,
+        "current_plate": 50.5061777584531
+      },
+      "assessment-02": {
+        "phase": 34.671582352990875,
+        "marker_ridge": 21.982244807896016,
+        "combined_ridge": 28.540415915494492,
+        "marker_shared": 34.18751005642057,
+        "combined_shared": 48.903100796595766,
+        "scrambled_combined": 24.384227381802305,
+        "current_plate": 40.43325069877838
+      },
+      "assessment-03": {
+        "phase": 137.4291303676586,
+        "marker_ridge": 80.9010922435939,
+        "combined_ridge": 57.73068145375081,
+        "marker_shared": 68.21544939026826,
+        "combined_shared": 59.44824038686151,
+        "scrambled_combined": 51.19030667697268,
+        "current_plate": 102.30205953121185
+      },
+      "assessment-04": {
+        "phase": 82.39327135130227,
+        "marker_ridge": 92.08816510959379,
+        "combined_ridge": 117.62398632029715,
+        "marker_shared": 79.27454594097613,
+        "combined_shared": 107.16295396550416,
+        "scrambled_combined": 100.16198378049705,
+        "current_plate": 43.266889949639655
+      },
+      "assessment-06": {
+        "phase": 133.74012049798077,
+        "marker_ridge": 184.61997873558852,
+        "combined_ridge": 124.59322413789937,
+        "marker_shared": 187.30234506232637,
+        "combined_shared": 126.19030068342047,
+        "scrambled_combined": 126.42056427367035,
+        "current_plate": 108.83262467881042
+      },
+      "assessment-07": {
+        "phase": 18.807703657282687,
+        "marker_ridge": 45.00656429072048,
+        "combined_ridge": 56.336086918714095,
+        "marker_shared": 46.7364395317528,
+        "combined_shared": 58.57462718816868,
+        "scrambled_combined": 63.75465229963223,
+        "current_plate": 75.98435128176652
+      },
+      "assessment-08": {
+        "phase": 41.24125941704837,
+        "marker_ridge": 77.89913669774958,
+        "combined_ridge": 77.58056443330008,
+        "marker_shared": 82.82189021784905,
+        "combined_shared": 79.97500085077105,
+        "scrambled_combined": 65.18687225330609,
+        "current_plate": 73.33480434285269
+      },
+      "assessment-10": {
+        "phase": 206.6003408977001,
+        "marker_ridge": 160.61099139129556,
+        "combined_ridge": 142.5886546933092,
+        "marker_shared": 152.85554074231231,
+        "combined_shared": 142.0600032669288,
+        "scrambled_combined": 189.13355883861243,
+        "current_plate": 116.97530404975018
+      }
+    }
+  },
+  "paired_contrasts_N": [
+    {
+      "other": "phase",
+      "shared_combined_minus_other_mean_N": -7.897202764163682,
+      "wins": 4,
+      "within_1e_minus_10_N": 0,
+      "wins_beyond_1e_minus_10_N": 4,
+      "people": 8,
+      "paired_person_bootstrap_95_N": [
+        -37.776759383548836,
+        20.39809571365835
+      ]
+    },
+    {
+      "other": "marker_shared",
+      "shared_combined_minus_other_mean_N": -8.749394337026715,
+      "wins": 5,
+      "within_1e_minus_10_N": 0,
+      "wins_beyond_1e_minus_10_N": 5,
+      "people": 8,
+      "paired_person_bootstrap_95_N": [
+        -28.993229891871174,
+        9.03440187362881
+      ]
+    },
+    {
+      "other": "combined_ridge",
+      "shared_combined_minus_other_mean_N": 3.136144972975897,
+      "wins": 2,
+      "within_1e_minus_10_N": 0,
+      "wins_beyond_1e_minus_10_N": 2,
+      "people": 8,
+      "paired_person_bootstrap_95_N": [
+        -2.0429769831074935,
+        9.139897421476086
+      ]
+    },
+    {
+      "other": "scrambled_combined",
+      "shared_combined_minus_other_mean_N": -1.450030007365327,
+      "wins": 4,
+      "within_1e_minus_10_N": 0,
+      "wins_beyond_1e_minus_10_N": 4,
+      "people": 8,
+      "paired_person_bootstrap_95_N": [
+        -16.959034281341598,
+        10.948416455845718
+      ]
+    },
+    {
+      "other": "wrong_repeat",
+      "shared_combined_minus_other_mean_N": -1.7622928767447839,
+      "wins": 3,
+      "within_1e_minus_10_N": 5,
+      "wins_beyond_1e_minus_10_N": 1,
+      "people": 6,
+      "paired_person_bootstrap_95_N": [
+        -5.286878630234351,
+        4.736951571734001e-15
+      ]
+    }
+  ],
+  "incremental_emg_gate": false,
+  "frozen_representation_gate": false
+}

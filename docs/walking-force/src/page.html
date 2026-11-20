@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light"><title>Walking force · NeuroTranslation</title>
+<style>%%CSS%%</style>
+</head><body>
+<header><div class="mast"><span class="brand">NeuroTranslation</span><nav aria-label="Sections"><a href="#experiment">Experiment</a><a href="#measured">Results</a><a href="#sources">Sources</a></nav></div></header>
+<main>
+<section class="intro"><p class="overline">Walking force</p><h1>What will the floor feel?</h1>
+<p>Two plates in a walkway measure how hard a walker presses down on them. Can a model predict their combined reading a tenth of a second ahead from the motion of the feet and pelvis, and the electrical activity of eight right-leg muscles?</p></section>
+<section id="experiment" aria-labelledby="experiment-title">
+<div class="section-head"><div><p class="overline">Invented walk</p><h2 id="experiment-title">Change the muscle signal</h2></div><button id="reset" type="button">Reset inputs</button></div>
+<p class="section-copy">The two predictions use identical marker paths. Change the muscle signal for one prediction and watch the gap. These inputs come from equations. There is no measured force for this walk.</p>
+<div class="workbench">
+<div class="plot-panel">
+<div class="chart-head"><h3>Predicted platform load</h3><span>Newtons (N)</span></div>
+<div id="plot"></div>
+<div class="legend"><span><i class="line orange"></i>Edited signal</span><span><i class="line blue"></i>Reference signal</span></div>
+<div class="scrub"><label for="anchor">Read the prediction at <output id="anchor-out" for="anchor"></output></label><input id="anchor" type="range" min="0" max="48" value="24" step="1"></div>
+<div class="readouts" aria-live="off"><div><small>Edited signal</small><strong id="edited"></strong></div><div><small>Reference signal</small><strong id="reference"></strong></div><div><small>Difference</small><strong id="difference"></strong></div></div>
+</div>
+<div class="board">
+<label for="method">Prediction model</label><select id="method"><option value="transformer">Temporal Transformer</option><option value="ridge">Linear ridge</option></select>
+<label for="modality">Signals given to the model</label><select id="modality"><option value="combined">Movement and muscle</option><option value="markers">Movement only</option><option value="emg">Muscle only</option></select>
+<div class="board-div"></div>
+<label for="channel">Edit muscle signals</label><select id="channel"><option value="all">All eight right-leg muscles</option></select>
+<div class="range"><label for="gain">Signal strength <output id="gain-out" for="gain"></output></label><input id="gain" type="range" min="0" max="3" step="0.05" value="1.6"></div>
+<div class="range"><label for="shift">Signal timing <output id="shift-out" for="shift"></output></label><input id="shift" type="range" min="-240" max="240" step="10" value="0"></div>
+<details><summary>Change both marker paths</summary><div class="range"><label for="speed">Forward speed <output id="speed-out" for="speed"></output></label><input id="speed" type="range" min="0.4" max="0.8" step="0.02" value="0.6"></div><div class="range"><label for="offset">Position along walkway <output id="offset-out" for="offset"></output></label><input id="offset" type="range" min="-40" max="40" step="1" value="0"></div></details>
+</div></div>
+<div class="export"><button id="save-input">Save this input and prediction</button><button id="save-plot">Save force plot</button><button id="save-csv">Save curve data</button><span id="feedback" role="status"></span></div>
+<details class="text-details"><summary>What goes into each prediction?</summary>
+<p>Each point uses eight consecutive 30 ms bins. At the end of each bin the model can see six marker positions, three coordinates each, and eight right-leg muscle signals, each recorded by a pair of skin electrodes. The electrical input is the root mean square voltage over that bin, in microvolts (µV). A larger voltage can have many causes. Changing it here tests how a fitted equation responds to an invented input.</p>
+<p>The reference always uses the original muscle pattern. A timing shift moves the edited pattern in milliseconds. A strength of 1× and a shift of 0 ms make the signals identical. Changing position or speed moves the markers in both versions together. The Transformer learns which earlier bins to weight for this task. Ridge fits a weighted sum of the same inputs. Each choice of signals has its own fitted model.</p>
+<p>The horizontal axis is time in the invented example. This graph links separate predictions, one every 30 ms. Each prediction is plotted at its target time, 100 ms after the centre of the last recorded input block. The study files already included smoothing in both time directions, marker-gap reconstruction and whole-trial electrical processing. Timing and accuracy in a live system are unknown.</p>
+<details><summary>See the current eight inputs</summary><p>Choose a column to inspect the history behind the selected prediction. The two versions share all six marker paths.</p><label for="inspect">Input to inspect</label> <select id="inspect"></select><div id="inputs"></div></details>
+</details></section>
+<section id="measured" aria-labelledby="measured-title"><p class="overline">Recorded walks</p><h2 id="measured-title">How close to the plates?</h2>
+<p id="result-intro" class="section-copy"></p>
+<div class="evidence"><div><h3>Average absolute error</h3><p>Smaller means closer to the measured load. Each walker counts equally.</p><div id="bars"></div><button id="save-scores">Save error plot</button></div>
+<div class="result-copy"><h3>What did the muscle signals add?</h3><p id="result-summary"></p><p id="strong-control"></p><p>One comparison starts with an advantage. It can read the two plates at the earlier time and carry that load forward. The movement and muscle models never receive a plate reading.</p></div></div>
+<details class="text-details"><summary>Read the errors, controls and uncertainty</summary><div id="stats"></div></details>
+</section>
+<section class="source" id="sources"><p class="overline">Sources and scope</p><h2>Two plates in one walkway</h2><p>The plates measure the combined vertical load where feet touch their surfaces. A foot can also land on the surrounding floor. A zero plate reading can occur while the floor still supports the walker. The experiment does not assign force to a particular leg. The electrodes recorded the right leg only.</p>
+<p>Florent Moissenet and Céline Schreiber collected the original walking data. The models, predictions and figures here were made from their published data. Only averages from the measured assessment appear in the viewer. Every editable walk is invented.</p>
+<p><a href="https://doi.org/10.6084/m9.figshare.7734767.v8">Walking dataset, version 8 (2020)</a> · <a href="https://doi.org/10.1038/s41597-019-0124-4">Schreiber &amp; Moissenet, <em>Scientific Data</em> 6, 111 (2019)</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Original data, CC BY 4.0</a> · <a download="DATA-LICENCE.txt" href="data:text/plain;charset=utf-8;base64,%%LICENCE%%">Download the dataset authors’ licence</a> · <a href="https://creativecommons.org/publicdomain/zero/1.0/">Project contributions, CC0 1.0</a></p>
+</section></main><noscript>Enable JavaScript in this file to run the models and display the assessment.</noscript>
+<script type="application/json" id="bundle">%%DATA%%</script><script>%%JS%%</script>
+</body></html>

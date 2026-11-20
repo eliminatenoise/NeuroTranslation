@@ -1,6 +1,6 @@
 # Forecast movement from one recording
 
-How far will a tracked point move? Where will a wrist point? Give the model one movement history and it returns a distance, an angle or an estimate of the turning moment at each knee.
+How far will a tracked point move? Where will a wrist point? Give the model one movement history and it returns a distance, an angle, a turning moment at each knee or a vertical plate load.
 
 | `domain` | Recording and task | Forecast |
 | --- | --- | --- |
@@ -9,9 +9,20 @@ How far will a tracked point move? Where will a wrist point? Give the model one 
 | `wrist_angle` | WristMotion v3, a person pointing with a supported right wrist | Absolute wrist extension and radial deviation in degrees, 128 stored ticks after the last observed angle |
 | `knee_angle` | Reconstructed right and left knee angles during treadmill walking at 0.5 m/s | Both flexion/extension angles in degrees, 15 stored frames later |
 | `knee_moment` | Six optical knee, hip and ankle angles during treadmill walking at a nominal 0.8 m/s | Signed right and left internal knee moments in N·m/kg, 25 stored frames later |
+| `right_plate_force` | Right heel and forefoot markers after a recorded strike on an assigned plate, optionally with eight surface muscle signals | Upward load on that plate in N, ten stored frames after the cutoff |
 | `rat_population` | Five W-track camera positions, optionally with spikes from dorsal CA1 and prefrontal cortex | Straight-line displacement in 2D, one distance in centimetres |
 
 The trained shared model uses the same four-token temporal encoder across the movement tasks. The task-trained moment correction has its own copy of that encoder. Each recording has its own input and output. Each call uses the clock of its own recording. The rat population study paired camera and firing histories from that one clock. Use one history per call for the older tasks. The knee moment reader also accepts batches. [Spatial recording and clock rules](SPATIAL-API.md) · [Source credits](NOTICE.md)
+
+## Forecast load on the plate under the right foot
+
+Run `node predict.mjs right-plate-example.json`, or pass the same invented record to `forecastMovement(record)`. The output `right_vertical_plate_force_N` predicts the mean of 15 force samples ten stored point frames after the cutoff, in newtons with upward load positive. The fitted equations can return a negative estimate. The target is the assigned plate, restricted to walks with verified strike location and two distinct plate assignments.
+
+Use `domain: "right_plate_force"` and an `offset_frames` of 14, 24, 34 or 44 after the recorded right-foot strike at 100 Hz. The four rows of `markers_m` each hold heel XYZ followed by second-metatarsal XYZ in metres relative to the assigned plate centre. Take the last optical frame of each successive six-frame bin, ending at the cutoff. Plate assignment, original strike and source geometry must be checked before making a biological comparison.
+
+Select `phase` for the training average at that offset, `marker_ridge` for a linear marker fit, or `marker_shared` to add features from the frozen movement encoder. Those methods take the marker rows and omit electrical fields. The three combined methods also require `emg_uV` and `emg_valid`. The four amplitude rows each hold eight RMS microvolt values over the matching 90 analog samples. The channel order is right tibialis anterior, soleus, medial gastrocnemius, vastus medialis, rectus femoris, semitendinosus, gluteus maximus and gluteus medius. Supply a matching 0/1 or Boolean flag. An unavailable channel has a zero flag and a zero amplitude.
+
+Choose `combined_ridge`, `combined_shared` or `scrambled_combined` to compare a linear fit, the frozen shared encoder and a control with shuffled encoder weights. The encoder sees just the four marker positions. The combined readout also receives elapsed time, logged muscle amplitudes and availability flags. Signals were filtered in both directions before release. Accuracy and lead time in live use remain unknown. [Invented input](right-plate-example.json) · [Source and terms](NOTICE.md)
 
 ## Forecast the turning moment at both knees
 

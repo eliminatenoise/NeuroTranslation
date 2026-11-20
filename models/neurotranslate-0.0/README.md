@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0 movement forecasts
 
+When the right heel lands on a force plate, how much load will that plate record ten camera frames later? On 16 test walks from eight people, adding leg-electrode readings to the shared movement model reduced its average error from 93.93 to 85.18 newtons. The uncertainty includes no improvement. A simple linear model using the same measurements reached 82.04 newtons. All test targets came from loaded plates. [Try the right-foot forecast](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#right-plate) · [Run it locally and inspect the results](right-plate/README.md)
+
 The same checkpoint now forecasts the turning moment about both knees from four seconds of joint angles. A new task-trained calculation improved average error, though the advantage varied across three test walkers. [Try the knee-moment reader](https://eliminatenoise.github.io/NeuroTranslation/knee-moment/) · [Model, units and results](load/README.md)
 
 Give the model four seconds of knee angles from one walker, a short wrist history or a movement record from a rat. Choose the input to match the measurement you have. The same checkpoint supplies all three tasks. For the knees, reusing the trained encoder gave 3.465° of error. Training a separate Transformer to correct stride replay gave 2.679° on the same previously studied walkers. [Compare both knee forecasts](https://eliminatenoise.github.io/NeuroTranslation/knee-stride/) · [Run the knee model](knee/README.md)

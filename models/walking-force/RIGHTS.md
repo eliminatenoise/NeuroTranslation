@@ -1,0 +1,7 @@
+# Sources and rights
+
+Céline Schreiber and Florent Moissenet recorded the overground walks at the Laboratoire d’Analyse du Mouvement et de la Posture, Centre National de Rééducation Fonctionnelle et de Réadaptation – Rehazenter, Luxembourg. Their version 8 dataset is licensed under Creative Commons Attribution 4.0 International. This study selects three C2 repeats per person, applies the published contact-quality annotations, calculates marker and muscle histories, fits new weights, and reports errors in newtons. Obtain the original recordings directly from the authors. [Dataset, version 8](https://doi.org/10.6084/m9.figshare.7734767.v8) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+The publication describes acquisition, anatomical marker placement, electrodes, force-plate availability and original processing. Supplementary Table 2 gives the right- and left-foot plate codes for individual trials. The MATLAB exporter explains the two-way filters and the executable 50 N threshold. [Data descriptor](https://doi.org/10.1038/s41597-019-0124-4) · [Author processing code](https://github.com/fmoissenet/CGA_Rehazenter_Toolbox/tree/e35dc90c1acd24da134897fd1b4241152cff6005)
+
+The project dedicates its original code, prose, model contributions and invented example to the public domain under CC0, to the extent of its rights. Source-derived material retains its applicable attribution terms. [CC0 dedication](LICENSE)

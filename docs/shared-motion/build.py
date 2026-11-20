@@ -1,5 +1,6 @@
 """Rebuild the self-contained movement viewer using the Python standard library."""
 import argparse
+import base64
 import hashlib
 import html
 import json
@@ -34,6 +35,7 @@ def main():
     spatial = json.loads(verified(args.runtime, "examples.json"))
     rat = spatial["domain"].index("rat")
     data["inventedRat"] = spatial["x"][rat]
+    data["plateExample"] = json.loads(verified(args.runtime, "right-plate-example.json"))
     data["momentExample"] = json.loads(verified(args.runtime, "knee-moment-example.json"))
     data["kneeExample"] = json.loads(verified(args.runtime, "knee-example.json"))
     data["angleExample"] = json.loads(verified(args.runtime, "angular-example.json"))["input"]
@@ -45,6 +47,7 @@ def main():
         raise ValueError("Missing or repeated data digest")
     app = app.replace("__DATA_DIGEST__", digest(payload.encode("utf-8")))
     replacements = {
+        "@@PLATE_LICENCE@@": base64.b64encode(verified(args.runtime, "RIGHT-PLATE-DATA-LICENCE.txt").encode("utf-8")).decode("ascii"),
         "@@STYLE@@": (src / "panel.css").read_text(encoding="utf-8"),
         "@@APP@@": app,
         "@@RUNTIME@@": runtime,

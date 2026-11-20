@@ -19,3 +19,7 @@ The four-second knee corrections and aggregate results derive from the PhysioNet
 ## Knee turning moments during walking
 
 Emma Reznick, Kyle R. Embry, Ross Neuman, Edgar Bolívar, Nicholas P. Fey and Robert D. Gregg released the optical walking recordings and inverse-dynamics estimates under CC0. The new knee-moment readouts use these recordings. The original shared checkpoint retains its earlier source conditions. [Original dataset](https://doi.org/10.6084/m9.figshare.14558181.v1) · [Methods and credit](load/SOURCE.md)
+
+## Right foot on a force plate
+
+Céline Schreiber and Florent Moissenet released the motion, muscle and platform recordings from the Rehazenter study under CC BY 4.0. This edition selects barefoot walking trials, fits new model readouts and reports errors on other walkers. The right-platform readouts and results use those data. Keep the authors’ credit and licence with the derived material and identify further changes. [Original data release](https://doi.org/10.6084/m9.figshare.7734767.v8) · [Authors’ licence and citation](right-plate/DATA-LICENCE.txt) · [Processing and results](right-plate/README.md)
