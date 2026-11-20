@@ -1,4 +1,4 @@
-"""CPU/NumPy reader for spatial distance and two-axis angular wrist forecasts."""
+"""CPU/NumPy reader for movement distance, wrist angles and paired rat population histories."""
 import argparse
 import json
 from pathlib import Path
@@ -73,7 +73,7 @@ def norm(w, name, x):
     return (x - mean) / np.sqrt(var + 1e-5) * w[name + ".weight"] + w[name + ".bias"]
 
 
-def encode(config, w, projected):
+def encode(config, w, projected, *, all_tokens=False):
     """Both distance and angle heads execute this same temporal encoder."""
     z = projected + w["position"]
     n, tokens, width = z.shape
@@ -89,7 +89,7 @@ def encode(config, w, projected):
         z = z + linear(w, key + "attention_out", mix)
         hidden = np.maximum(linear(w, key + "ff_in", norm(w, key + "ff_norm", z)), 0)
         z = z + linear(w, key + "ff_out", hidden)
-    return norm(w, "last_norm", z[:, -1])
+    return norm(w, "last_norm", z if all_tokens else z[:, -1])
 
 
 def forecast(raw, domains, checkpoint=DEFAULT_CHECKPOINT):
@@ -135,6 +135,31 @@ def forecast_angles(bins, anchor_deg, slot, mode, checkpoint=DEFAULT_CHECKPOINT,
     return y * stats["residual_scale"] + stats["residual_center"] + np.asarray(anchor_deg, dtype=np.float64)
 
 
+def population_states(config, w, cutoff_s, prior_time_s, prior_xy_cm):
+    from population.adapter import camera_tokens
+    tokens, scaled_speed = camera_tokens(cutoff_s, prior_time_s, prior_xy_cm)
+    states = encode(config, w, linear(w, "project", tokens), all_tokens=True)
+    rat_correction = linear(w, "readout", states)[:, :, DOMAINS.index("rat")]
+    return scaled_speed, states, rat_correction
+
+
+def forecast_population(cutoff_s, prior_time_s, prior_xy_cm, mode, checkpoint=DEFAULT_CHECKPOINT,
+                        *, regional_counts=None, unit_counts=None):
+    """Predict straight-line displacement in cm. Accept one history or a batch and return a 1D array."""
+    from population.adapter import rates_for_bins, readout_features, ridge_prediction
+    if mode not in ("motion", "combined"):
+        raise ValueError("Select motion or combined rat_population mode")
+    config, w = read_checkpoint(checkpoint)
+    if config.get("rat_population", {}).get("format") != 1:
+        raise ValueError("This checkpoint has no rat_population head")
+    camera = population_states(config, w, cutoff_s, prior_time_s, prior_xy_cm)
+    rates = rates_for_bins(regional_counts, unit_counts, len(camera[0])) if mode == "combined" else None
+    features = readout_features(*camera, rates)
+    prefix = "population." + mode + "."
+    state = {key: w[prefix + key] for key in ("mean", "scale", "coef", "intercept")}
+    return ridge_prediction(features, state)
+
+
 def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
     if record.get("domain") == "wrist_angle":
         y = forecast_angles(record["bins"], record["anchor_deg"], record["slot"], record["mode"], checkpoint,
@@ -142,12 +167,17 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
         return {"axes": AXES, "angle_deg": y.tolist(), "horizon_stored_ticks": 128, "stored_hz": 512}
     if record.get("forearm_residual") is not None:
         raise ValueError("Forearm corrections apply only to wrist_angle inputs")
+    if record.get("domain") == "rat_population":
+        distance = forecast_population(record["cutoff_s"], record["prior_time_s"], record["prior_xy_cm"],
+                                       record["mode"], checkpoint, regional_counts=record.get("regional_counts"),
+                                       unit_counts=record.get("unit_counts"))
+        return {"distance_cm": distance.tolist()}
     return {"distance_cm": forecast(record["x"], record["domain"], checkpoint).tolist()}
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path, help="JSON angular or spatial input")
+    parser.add_argument("input", type=Path, help="JSON wrist-angle, spatial or rat population input")
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
     args = parser.parse_args()
     try:

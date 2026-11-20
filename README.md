@@ -28,6 +28,8 @@ What is still being built is the general model, **NeuroTranslate 0.0**: one mode
 
 What does not exist yet: a test of the general model on people nobody has looked at before. So nothing here yet translates between nerve, muscle and movement. Nor is the model inside the browser app titled NeuroTranslate 0.0, the one that lines up your own recordings on one clock. Two of its fits run in a browser elsewhere, both listed below: the shared fit, with all three of its tasks, on a page of its own, and study 28's three wrist fits as a piece of code for programmers.
 
+The shared model can also accept recorded brain-cell firing alongside a rat’s recent camera track. Correctly timed firing lowered its average distance error from **2.805 to 2.778 cm**, but beat both movement alone and an earlier-trip firing control in only one of the three animals. This reanalysis used previously examined test recordings. [Run the fitted model and inspect its controls](models/neurotranslate-0.0/population/)
+
 ## Try a model
 
 The first eight examples open in a browser with nothing to install. The last two use JavaScript or Python.
