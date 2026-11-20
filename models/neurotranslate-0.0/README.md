@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0 movement forecasts
 
+Where will the heel go, and what will the floor plate read? Try a 100 ms walking forecast, then see what happened when four outputs had to share two learned numbers. [Open the offline model](heel_force/index.html) · [Methods and measurements](heel_force/README.md)
+
 Does shin muscle voltage improve a forecast from a fixed pedal? Test invented signals and compare the three supported groups of original recordings. The planned two-person test remains incomplete. [Try the model](pedal_load/index.html) · [Measurements and source](pedal_load/README.md)
 
 Forecast the change in a muscle bundle’s tracked length over ten tracking steps. In 4 new people, adding the bundle’s angle changed mean absolute error from 0.226 mm to 0.219 mm. [Try the ultrasound model](muscle_tracking/index.html) · [Read the methods and original sources](muscle_tracking/README.md)

@@ -1,0 +1,1424 @@
+{
+  "units": {
+    "heel_mm": "Mean Euclidean 3D endpoint error (mm)",
+    "force_N": "Mean absolute upward plate error (N)"
+  },
+  "weighting": "Equal people; within each person equal repeats; within each repeat equal accepted cutoffs.",
+  "uncertainty": "95% intervals from 5,000 person-level bootstrap samples. No multiplicity correction.",
+  "assessment_history": "The assessment roster of 10 was used in previous studies. The separate reserve of 10 remains unopened.",
+  "cohorts": {
+    "development": {
+      "donor_support": {
+        "rows": 189,
+        "all_rows": 203,
+        "people": 22,
+        "all_people": 25,
+        "repeats": 58,
+        "all_repeats": 61
+      },
+      "joint_over_specialists": false,
+      "EMG_increment": {
+        "heel_mm": false,
+        "force_N": false
+      },
+      "motion_and_force_beat_every_simple_mean": {
+        "heel_mm": false,
+        "force_N": false
+      },
+      "errors": {
+        "stationary": {
+          "heel_mm": {
+            "mean": 1.4565601219409674,
+            "participant_bootstrap_95": [
+              1.2380407024684985,
+              1.7269738553512934
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          },
+          "force_N": null
+        },
+        "velocity": {
+          "heel_mm": {
+            "mean": 1.7524146470360369,
+            "participant_bootstrap_95": [
+              1.4962840664774453,
+              2.0411479970188444
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          },
+          "force_N": null
+        },
+        "repeat_motion": {
+          "heel_mm": {
+            "mean": 1.869501763766129,
+            "participant_bootstrap_95": [
+              1.6044648997296578,
+              2.160416846830694
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          },
+          "force_N": null
+        },
+        "phase": {
+          "heel_mm": null,
+          "force_N": {
+            "mean": 93.75867045214335,
+            "participant_bootstrap_95": [
+              74.02201468659143,
+              114.99813759419105
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          }
+        },
+        "marker_knn": {
+          "heel_mm": {
+            "mean": 1.1889618185477293,
+            "participant_bootstrap_95": [
+              0.9991265987738915,
+              1.410933364863129
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          },
+          "force_N": {
+            "mean": 88.6532794729243,
+            "participant_bootstrap_95": [
+              70.44898797866003,
+              108.90626045740727
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          }
+        },
+        "privileged_hold": {
+          "heel_mm": null,
+          "force_N": {
+            "mean": 78.48034374788402,
+            "participant_bootstrap_95": [
+              63.801684912437295,
+              93.46005238749741
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          }
+        },
+        "privileged_trend": {
+          "heel_mm": null,
+          "force_N": {
+            "mean": 118.66191014985519,
+            "participant_bootstrap_95": [
+              106.36699886759052,
+              131.56634922276282
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          }
+        },
+        "ridge_full": {
+          "heel_mm": {
+            "mean": 1.3112133886322688,
+            "participant_bootstrap_95": [
+              1.133226851735149,
+              1.527943801558201
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          },
+          "force_N": {
+            "mean": 118.00174077924318,
+            "participant_bootstrap_95": [
+              95.63423443277846,
+              141.4257067199542
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          }
+        },
+        "ridge_marker": {
+          "heel_mm": {
+            "mean": 1.2556056506744482,
+            "participant_bootstrap_95": [
+              1.0686438058706142,
+              1.4889361080256893
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          },
+          "force_N": {
+            "mean": 83.31191827240814,
+            "participant_bootstrap_95": [
+              65.14931644584156,
+              104.2212562916099
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          }
+        },
+        "ridge_frozen": {
+          "heel_mm": {
+            "mean": 1.3178350954359923,
+            "participant_bootstrap_95": [
+              1.1326089557417067,
+              1.541697595574608
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          },
+          "force_N": {
+            "mean": 93.66344077792056,
+            "participant_bootstrap_95": [
+              74.03443437003551,
+              114.75326583852159
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          }
+        },
+        "joint": {
+          "heel_mm": {
+            "mean": 1.3653696384563885,
+            "participant_bootstrap_95": [
+              1.1833822551564415,
+              1.5914430797030155
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          },
+          "force_N": {
+            "mean": 100.03034023407709,
+            "participant_bootstrap_95": [
+              80.02123186900836,
+              121.05894064042825
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          }
+        },
+        "heel": {
+          "heel_mm": {
+            "mean": 1.3637853006203247,
+            "participant_bootstrap_95": [
+              1.1818244198351813,
+              1.5894629522595518
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          },
+          "force_N": null
+        },
+        "force": {
+          "heel_mm": null,
+          "force_N": {
+            "mean": 99.45147093407351,
+            "participant_bootstrap_95": [
+              79.7770683759283,
+              120.32877027221753
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          }
+        },
+        "marker": {
+          "heel_mm": {
+            "mean": 1.2512509124318867,
+            "participant_bootstrap_95": [
+              1.0710631142643467,
+              1.4740906512641287
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          },
+          "force_N": {
+            "mean": 89.87484787569714,
+            "participant_bootstrap_95": [
+              71.62798753440791,
+              109.85020579386085
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 203
+          }
+        },
+        "wrong_emg": {
+          "heel_mm": {
+            "mean": 1.33862814630939,
+            "participant_bootstrap_95": [
+              1.1649830747512533,
+              1.5606283576714337
+            ],
+            "people": 22,
+            "repeats": 58,
+            "rows": 189
+          },
+          "force_N": {
+            "mean": 97.76746438110926,
+            "participant_bootstrap_95": [
+              74.33211557186912,
+              121.95534127972594
+            ],
+            "people": 22,
+            "repeats": 58,
+            "rows": 189
+          }
+        }
+      },
+      "paired_joint_minus_specialist": {
+        "heel_mm": {
+          "mean": 0.0015843378360633983,
+          "participant_bootstrap_95": [
+            -0.05533605138268047,
+            0.06121545830146186
+          ],
+          "people": 25,
+          "repeats": 61,
+          "rows": 203
+        },
+        "force_N": {
+          "mean": 0.5788693000035686,
+          "participant_bootstrap_95": [
+            -1.1931671425014323,
+            2.430878102906493
+          ],
+          "people": 25,
+          "repeats": 61,
+          "rows": 203
+        }
+      },
+      "paired_full_minus_wrong_EMG": {
+        "heel_mm": {
+          "mean": -0.03169122421340342,
+          "participant_bootstrap_95": [
+            -0.050810977940887576,
+            -0.013087489500840023
+          ],
+          "people": 22,
+          "repeats": 58,
+          "rows": 189
+        },
+        "force_N": {
+          "mean": -0.04434625268473156,
+          "participant_bootstrap_95": [
+            -0.6955203187873474,
+            0.5637323851050989
+          ],
+          "people": 22,
+          "repeats": 58,
+          "rows": 189
+        }
+      },
+      "paired_full_minus_marker": {
+        "heel_mm": {
+          "mean": 0.11411872602450153,
+          "participant_bootstrap_95": [
+            0.024273750471767892,
+            0.19893455885654412
+          ],
+          "people": 25,
+          "repeats": 61,
+          "rows": 203
+        },
+        "force_N": {
+          "mean": 10.15549235837993,
+          "participant_bootstrap_95": [
+            -7.167204561785011,
+            27.354742445025494
+          ],
+          "people": 25,
+          "repeats": 61,
+          "rows": 203
+        }
+      },
+      "paired_full_minus_marker_on_matched": {
+        "heel_mm": {
+          "mean": 0.09740880358551376,
+          "participant_bootstrap_95": [
+            0.001429566241084058,
+            0.18678859572391765
+          ],
+          "people": 22,
+          "repeats": 58,
+          "rows": 189
+        },
+        "force_N": {
+          "mean": 12.120935034414606,
+          "participant_bootstrap_95": [
+            -4.812237540383294,
+            30.004481636779587
+          ],
+          "people": 22,
+          "repeats": 58,
+          "rows": 189
+        }
+      },
+      "donor_matched_means": {
+        "matching": {
+          "heel_mm": 1.3069369220959866,
+          "force_N": 97.72311812842455
+        },
+        "swapped": {
+          "heel_mm": 1.33862814630939,
+          "force_N": 97.76746438110926
+        },
+        "marker": {
+          "heel_mm": 1.209528118510473,
+          "force_N": 85.60218309400992
+        }
+      },
+      "error_by_strike_offset": {
+        "14": {
+          "heel_mm": {
+            "mean": 1.3344479397285285,
+            "participant_bootstrap_95": [
+              1.062175728103167,
+              1.6441470690223223
+            ],
+            "people": 12,
+            "repeats": 20,
+            "rows": 20
+          },
+          "force_N": {
+            "mean": 122.75029425977611,
+            "participant_bootstrap_95": [
+              75.34149453879161,
+              175.70567529837447
+            ],
+            "people": 12,
+            "repeats": 20,
+            "rows": 20
+          }
+        },
+        "24": {
+          "heel_mm": {
+            "mean": 1.1431271100412013,
+            "participant_bootstrap_95": [
+              0.9618217979724497,
+              1.347943922816157
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 61
+          },
+          "force_N": {
+            "mean": 112.62747963249012,
+            "participant_bootstrap_95": [
+              86.06607809757726,
+              143.25205070967755
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 61
+          }
+        },
+        "34": {
+          "heel_mm": {
+            "mean": 1.2481997012977035,
+            "participant_bootstrap_95": [
+              0.9795282708189774,
+              1.5617061388992914
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 61
+          },
+          "force_N": {
+            "mean": 93.70334631447997,
+            "participant_bootstrap_95": [
+              72.57996175202696,
+              116.7572984527152
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 61
+          }
+        },
+        "44": {
+          "heel_mm": {
+            "mean": 1.7600231800271147,
+            "participant_bootstrap_95": [
+              1.4155398949078328,
+              2.18443105488651
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 61
+          },
+          "force_N": {
+            "mean": 92.72350205691555,
+            "participant_bootstrap_95": [
+              72.24777603829796,
+              114.87823519904474
+            ],
+            "people": 25,
+            "repeats": 61,
+            "rows": 61
+          }
+        }
+      }
+    },
+    "assessment": {
+      "donor_support": {
+        "rows": 44,
+        "all_rows": 53,
+        "people": 6,
+        "all_people": 8,
+        "repeats": 14,
+        "all_repeats": 16
+      },
+      "joint_over_specialists": false,
+      "EMG_increment": {
+        "heel_mm": false,
+        "force_N": false
+      },
+      "motion_and_force_beat_every_simple_mean": {
+        "heel_mm": false,
+        "force_N": false
+      },
+      "errors": {
+        "stationary": {
+          "heel_mm": {
+            "mean": 1.3551892626111604,
+            "participant_bootstrap_95": [
+              1.1431787531402036,
+              1.5906591112640227
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          },
+          "force_N": null
+        },
+        "velocity": {
+          "heel_mm": {
+            "mean": 1.915168114522956,
+            "participant_bootstrap_95": [
+              1.438278755813342,
+              2.431244146821059
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          },
+          "force_N": null
+        },
+        "repeat_motion": {
+          "heel_mm": {
+            "mean": 2.0605505196808513,
+            "participant_bootstrap_95": [
+              1.5368177779169492,
+              2.5634739020881825
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          },
+          "force_N": null
+        },
+        "phase": {
+          "heel_mm": null,
+          "force_N": {
+            "mean": 93.07583352304525,
+            "participant_bootstrap_95": [
+              55.21820430942043,
+              137.00463075787818
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          }
+        },
+        "marker_knn": {
+          "heel_mm": {
+            "mean": 1.113089533518818,
+            "participant_bootstrap_95": [
+              0.9871998356451208,
+              1.2322788888854068
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          },
+          "force_N": {
+            "mean": 101.51974935613478,
+            "participant_bootstrap_95": [
+              67.98680752749341,
+              138.8380533786897
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          }
+        },
+        "privileged_hold": {
+          "heel_mm": null,
+          "force_N": {
+            "mean": 80.73727576131071,
+            "participant_bootstrap_95": [
+              60.04640066478818,
+              102.24925608876488
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          }
+        },
+        "privileged_trend": {
+          "heel_mm": null,
+          "force_N": {
+            "mean": 101.16632825315551,
+            "participant_bootstrap_95": [
+              88.12322040028113,
+              114.39111001119103
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          }
+        },
+        "ridge_full": {
+          "heel_mm": {
+            "mean": 1.1149188959995002,
+            "participant_bootstrap_95": [
+              0.983295796358855,
+              1.224811714656101
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          },
+          "force_N": {
+            "mean": 96.04357502587014,
+            "participant_bootstrap_95": [
+              56.264797994050134,
+              141.6144772252578
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          }
+        },
+        "ridge_marker": {
+          "heel_mm": {
+            "mean": 1.1102015026971026,
+            "participant_bootstrap_95": [
+              0.9466112705979642,
+              1.2693170687672723
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          },
+          "force_N": {
+            "mean": 100.90878337549144,
+            "participant_bootstrap_95": [
+              66.0128427936899,
+              139.42039363434705
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          }
+        },
+        "ridge_frozen": {
+          "heel_mm": {
+            "mean": 1.1977213098352777,
+            "participant_bootstrap_95": [
+              1.0878788098248304,
+              1.2894992573349136
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          },
+          "force_N": {
+            "mean": 92.04956635881028,
+            "participant_bootstrap_95": [
+              53.676055062282074,
+              134.13470926768466
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          }
+        },
+        "joint": {
+          "heel_mm": {
+            "mean": 1.1564436332434456,
+            "participant_bootstrap_95": [
+              1.0240754318468517,
+              1.2751265146319712
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          },
+          "force_N": {
+            "mean": 92.36132099397517,
+            "participant_bootstrap_95": [
+              55.419543911108434,
+              133.64559731472733
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          }
+        },
+        "heel": {
+          "heel_mm": {
+            "mean": 1.182943266410236,
+            "participant_bootstrap_95": [
+              1.0954731077640198,
+              1.262047312613768
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          },
+          "force_N": null
+        },
+        "force": {
+          "heel_mm": null,
+          "force_N": {
+            "mean": 93.727169468682,
+            "participant_bootstrap_95": [
+              55.178689224400934,
+              137.4668056351383
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          }
+        },
+        "marker": {
+          "heel_mm": {
+            "mean": 1.0944325263610184,
+            "participant_bootstrap_95": [
+              0.9684735935093522,
+              1.2170986033871154
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          },
+          "force_N": {
+            "mean": 96.69227487409043,
+            "participant_bootstrap_95": [
+              63.786777144508235,
+              133.65976853657114
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 53
+          }
+        },
+        "wrong_emg": {
+          "heel_mm": {
+            "mean": 1.172976636594387,
+            "participant_bootstrap_95": [
+              0.9999738275955332,
+              1.3271958123786747
+            ],
+            "people": 6,
+            "repeats": 14,
+            "rows": 44
+          },
+          "force_N": {
+            "mean": 75.0260658147361,
+            "participant_bootstrap_95": [
+              39.892563418922045,
+              126.27539116384321
+            ],
+            "people": 6,
+            "repeats": 14,
+            "rows": 44
+          }
+        }
+      },
+      "paired_joint_minus_specialist": {
+        "heel_mm": {
+          "mean": -0.026499633166790423,
+          "participant_bootstrap_95": [
+            -0.10257054951517168,
+            0.040378181676922115
+          ],
+          "people": 8,
+          "repeats": 16,
+          "rows": 53
+        },
+        "force_N": {
+          "mean": -1.3658484747068371,
+          "participant_bootstrap_95": [
+            -6.077047055594702,
+            2.8954903025773264
+          ],
+          "people": 8,
+          "repeats": 16,
+          "rows": 53
+        }
+      },
+      "paired_full_minus_wrong_EMG": {
+        "heel_mm": {
+          "mean": -0.027635714060205967,
+          "participant_bootstrap_95": [
+            -0.06971621044607013,
+            0.012623393768365208
+          ],
+          "people": 6,
+          "repeats": 14,
+          "rows": 44
+        },
+        "force_N": {
+          "mean": -0.7638789465930519,
+          "participant_bootstrap_95": [
+            -2.7099048960291214,
+            0.4856665863961496
+          ],
+          "people": 6,
+          "repeats": 14,
+          "rows": 44
+        }
+      },
+      "paired_full_minus_marker": {
+        "heel_mm": {
+          "mean": 0.06201110688242706,
+          "participant_bootstrap_95": [
+            -0.008535722942047451,
+            0.1571883778310922
+          ],
+          "people": 8,
+          "repeats": 16,
+          "rows": 53
+        },
+        "force_N": {
+          "mean": -4.330953880115276,
+          "participant_bootstrap_95": [
+            -15.7566142773124,
+            7.619875330960983
+          ],
+          "people": 8,
+          "repeats": 16,
+          "rows": 53
+        }
+      },
+      "paired_full_minus_marker_on_matched": {
+        "heel_mm": {
+          "mean": 0.03754065610825636,
+          "participant_bootstrap_95": [
+            -0.012326331157368137,
+            0.09146348959594601
+          ],
+          "people": 6,
+          "repeats": 14,
+          "rows": 44
+        },
+        "force_N": {
+          "mean": -3.835192738284109,
+          "participant_bootstrap_95": [
+            -13.331394596981573,
+            5.479223192415904
+          ],
+          "people": 6,
+          "repeats": 14,
+          "rows": 44
+        }
+      },
+      "donor_matched_means": {
+        "matching": {
+          "heel_mm": 1.1453409225341813,
+          "force_N": 74.26218686814306
+        },
+        "swapped": {
+          "heel_mm": 1.172976636594387,
+          "force_N": 75.0260658147361
+        },
+        "marker": {
+          "heel_mm": 1.1078002664259248,
+          "force_N": 78.09737960642717
+        }
+      },
+      "error_by_strike_offset": {
+        "14": {
+          "heel_mm": {
+            "mean": 1.594813824877175,
+            "participant_bootstrap_95": [
+              1.041643838327371,
+              2.097841520450052
+            ],
+            "people": 4,
+            "repeats": 5,
+            "rows": 5
+          },
+          "force_N": {
+            "mean": 131.54561595351868,
+            "participant_bootstrap_95": [
+              66.13838159676737,
+              219.14256489444273
+            ],
+            "people": 4,
+            "repeats": 5,
+            "rows": 5
+          }
+        },
+        "24": {
+          "heel_mm": {
+            "mean": 0.9018110230190642,
+            "participant_bootstrap_95": [
+              0.6679041150941976,
+              1.169632868475763
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 16
+          },
+          "force_N": {
+            "mean": 85.67808539271412,
+            "participant_bootstrap_95": [
+              42.383828308810635,
+              138.73187801515144
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 16
+          }
+        },
+        "34": {
+          "heel_mm": {
+            "mean": 1.1625318199137296,
+            "participant_bootstrap_95": [
+              0.8391402275445962,
+              1.517230351447176
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 16
+          },
+          "force_N": {
+            "mean": 88.96474365107784,
+            "participant_bootstrap_95": [
+              55.71907316587637,
+              127.71202133190985
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 16
+          }
+        },
+        "44": {
+          "heel_mm": {
+            "mean": 1.35197017185848,
+            "participant_bootstrap_95": [
+              1.0348633654597843,
+              1.6761078460636551
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 16
+          },
+          "force_N": {
+            "mean": 95.15155571815383,
+            "participant_bootstrap_95": [
+              59.19724632297336,
+              139.24692786686546
+            ],
+            "people": 8,
+            "repeats": 16,
+            "rows": 16
+          }
+        }
+      }
+    },
+    "supplemental": {
+      "donor_support": {
+        "rows": 24,
+        "all_rows": 31,
+        "people": 4,
+        "all_people": 6,
+        "repeats": 8,
+        "all_repeats": 10
+      },
+      "joint_over_specialists": false,
+      "EMG_increment": {
+        "heel_mm": false,
+        "force_N": false
+      },
+      "motion_and_force_beat_every_simple_mean": {
+        "heel_mm": true,
+        "force_N": false
+      },
+      "errors": {
+        "stationary": {
+          "heel_mm": {
+            "mean": 1.3108188063743567,
+            "participant_bootstrap_95": [
+              0.9980885572379034,
+              1.675271138062098
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          },
+          "force_N": null
+        },
+        "velocity": {
+          "heel_mm": {
+            "mean": 1.5283570180584058,
+            "participant_bootstrap_95": [
+              1.3404948738828708,
+              1.7749342818976737
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          },
+          "force_N": null
+        },
+        "repeat_motion": {
+          "heel_mm": {
+            "mean": 1.5646123843761692,
+            "participant_bootstrap_95": [
+              1.3548395257874224,
+              1.7976839533164057
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          },
+          "force_N": null
+        },
+        "phase": {
+          "heel_mm": null,
+          "force_N": {
+            "mean": 90.9843113857816,
+            "participant_bootstrap_95": [
+              40.15198423943401,
+              141.98812962337036
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          }
+        },
+        "marker_knn": {
+          "heel_mm": {
+            "mean": 1.100810775994217,
+            "participant_bootstrap_95": [
+              0.8887506978254035,
+              1.3009020918893912
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          },
+          "force_N": {
+            "mean": 104.35932396830601,
+            "participant_bootstrap_95": [
+              61.057574007614164,
+              161.51207208541442
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          }
+        },
+        "privileged_hold": {
+          "heel_mm": null,
+          "force_N": {
+            "mean": 54.202531857623,
+            "participant_bootstrap_95": [
+              27.199298474523747,
+              84.25619068245094
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          }
+        },
+        "privileged_trend": {
+          "heel_mm": null,
+          "force_N": {
+            "mean": 111.86815110138718,
+            "participant_bootstrap_95": [
+              94.79212162119366,
+              128.81738954672107
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          }
+        },
+        "ridge_full": {
+          "heel_mm": {
+            "mean": 1.0277135740856735,
+            "participant_bootstrap_95": [
+              0.8044516628510502,
+              1.2479210127700604
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          },
+          "force_N": {
+            "mean": 99.2775178172737,
+            "participant_bootstrap_95": [
+              48.0837256063863,
+              152.94963823550702
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          }
+        },
+        "ridge_marker": {
+          "heel_mm": {
+            "mean": 1.07228896769196,
+            "participant_bootstrap_95": [
+              0.8583281786343401,
+              1.2952153894586405
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          },
+          "force_N": {
+            "mean": 98.52592427232325,
+            "participant_bootstrap_95": [
+              55.37648541812171,
+              145.6723867376026
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          }
+        },
+        "ridge_frozen": {
+          "heel_mm": {
+            "mean": 1.040078909569712,
+            "participant_bootstrap_95": [
+              0.8481996204458871,
+              1.2390936576656992
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          },
+          "force_N": {
+            "mean": 94.88024371107144,
+            "participant_bootstrap_95": [
+              46.44429442798924,
+              146.18710608940995
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          }
+        },
+        "joint": {
+          "heel_mm": {
+            "mean": 1.0236812778388387,
+            "participant_bootstrap_95": [
+              0.845148196809537,
+              1.1894642582248127
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          },
+          "force_N": {
+            "mean": 103.27799213149812,
+            "participant_bootstrap_95": [
+              50.86967901175211,
+              158.1117051993664
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          }
+        },
+        "heel": {
+          "heel_mm": {
+            "mean": 1.0258551239621208,
+            "participant_bootstrap_95": [
+              0.7753030776308387,
+              1.2546299642095993
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          },
+          "force_N": null
+        },
+        "force": {
+          "heel_mm": null,
+          "force_N": {
+            "mean": 103.89783654221634,
+            "participant_bootstrap_95": [
+              50.11299034567059,
+              160.94912885193185
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          }
+        },
+        "marker": {
+          "heel_mm": {
+            "mean": 1.023560242040176,
+            "participant_bootstrap_95": [
+              0.8390312052148718,
+              1.208960611075821
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          },
+          "force_N": {
+            "mean": 91.04336564469337,
+            "participant_bootstrap_95": [
+              47.65033137363023,
+              137.63150998851867
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 31
+          }
+        },
+        "wrong_emg": {
+          "heel_mm": {
+            "mean": 1.1068928738954513,
+            "participant_bootstrap_95": [
+              0.8821377199039169,
+              1.3316480278869856
+            ],
+            "people": 4,
+            "repeats": 8,
+            "rows": 24
+          },
+          "force_N": {
+            "mean": 112.488863110817,
+            "participant_bootstrap_95": [
+              44.87681675235431,
+              201.61625613971196
+            ],
+            "people": 4,
+            "repeats": 8,
+            "rows": 24
+          }
+        }
+      },
+      "paired_joint_minus_specialist": {
+        "heel_mm": {
+          "mean": -0.0021738461232821207,
+          "participant_bootstrap_95": [
+            -0.11740707914460023,
+            0.09193269914503062
+          ],
+          "people": 6,
+          "repeats": 10,
+          "rows": 31
+        },
+        "force_N": {
+          "mean": -0.6198444107182123,
+          "participant_bootstrap_95": [
+            -4.132022495857517,
+            3.180677214770165
+          ],
+          "people": 6,
+          "repeats": 10,
+          "rows": 31
+        }
+      },
+      "paired_full_minus_wrong_EMG": {
+        "heel_mm": {
+          "mean": -0.06708657134437444,
+          "participant_bootstrap_95": [
+            -0.12735951993000103,
+            -0.006813622758747841
+          ],
+          "people": 4,
+          "repeats": 8,
+          "rows": 24
+        },
+        "force_N": {
+          "mean": 0.17460118469477465,
+          "participant_bootstrap_95": [
+            -0.7500776579072266,
+            1.1638789611299953
+          ],
+          "people": 4,
+          "repeats": 8,
+          "rows": 24
+        }
+      },
+      "paired_full_minus_marker": {
+        "heel_mm": {
+          "mean": 0.00012103579866263078,
+          "participant_bootstrap_95": [
+            -0.07487016054391533,
+            0.08616409888843017
+          ],
+          "people": 6,
+          "repeats": 10,
+          "rows": 31
+        },
+        "force_N": {
+          "mean": 12.234626486804771,
+          "participant_bootstrap_95": [
+            -12.457734926135329,
+            41.57379497572189
+          ],
+          "people": 6,
+          "repeats": 10,
+          "rows": 31
+        }
+      },
+      "paired_full_minus_marker_on_matched": {
+        "heel_mm": {
+          "mean": 0.03555262897496771,
+          "participant_bootstrap_95": [
+            -0.050953129130282625,
+            0.12376245070938871
+          ],
+          "people": 4,
+          "repeats": 8,
+          "rows": 24
+        },
+        "force_N": {
+          "mean": -4.278242906815743,
+          "participant_bootstrap_95": [
+            -24.171673135101827,
+            21.496644491525522
+          ],
+          "people": 4,
+          "repeats": 8,
+          "rows": 24
+        }
+      },
+      "donor_matched_means": {
+        "matching": {
+          "heel_mm": 1.0398063025510769,
+          "force_N": 112.66346429551174
+        },
+        "swapped": {
+          "heel_mm": 1.1068928738954513,
+          "force_N": 112.488863110817
+        },
+        "marker": {
+          "heel_mm": 1.004253673576109,
+          "force_N": 116.9417072023275
+        }
+      },
+      "error_by_strike_offset": {
+        "14": {
+          "heel_mm": {
+            "mean": 0.9587857644285611,
+            "participant_bootstrap_95": [
+              0.9587857644285611,
+              0.9587857644285611
+            ],
+            "people": 1,
+            "repeats": 1,
+            "rows": 1
+          },
+          "force_N": {
+            "mean": 122.90083275554628,
+            "participant_bootstrap_95": [
+              122.90083275554628,
+              122.90083275554628
+            ],
+            "people": 1,
+            "repeats": 1,
+            "rows": 1
+          }
+        },
+        "24": {
+          "heel_mm": {
+            "mean": 0.7404145829666732,
+            "participant_bootstrap_95": [
+              0.5448910462075949,
+              0.9285384002246891
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 10
+          },
+          "force_N": {
+            "mean": 118.85573168969607,
+            "participant_bootstrap_95": [
+              59.09727120070972,
+              187.05161548095194
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 10
+          }
+        },
+        "34": {
+          "heel_mm": {
+            "mean": 1.0984382133642419,
+            "participant_bootstrap_95": [
+              0.7673754648654505,
+              1.4482865944235623
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 10
+          },
+          "force_N": {
+            "mean": 102.46638962154043,
+            "participant_bootstrap_95": [
+              46.43313506052629,
+              164.6618012048768
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 10
+          }
+        },
+        "44": {
+          "heel_mm": {
+            "mean": 1.2384057948695226,
+            "participant_bootstrap_95": [
+              1.0296512008660288,
+              1.4649556351394544
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 10
+          },
+          "force_N": {
+            "mean": 97.09062476536936,
+            "participant_bootstrap_95": [
+              44.70403612398826,
+              153.77298402984727
+            ],
+            "people": 6,
+            "repeats": 10,
+            "rows": 10
+          }
+        }
+      }
+    }
+  }
+}

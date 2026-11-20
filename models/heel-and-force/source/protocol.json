@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "dataset": "10.6084/m9.figshare.7734767.v8",
+  "article": "10.1038/s41597-019-0124-4",
+  "protocol": "Same future stored frame of one C2 barefoot overground walk in the Schreiber and Moissenet archive. Exactly the three smallest available numeric C2 repeats in each original source folder. Sort participant folders lexically. First 30 development, next 10 historic assessment (only after both fits are frozen), final 10 unopened reserve. No alternatives or missing-record substitutions.",
+  "split_three_sha256": "e0ccb1ae4a37c12d47c5e63ce3c9372efa212fa475275eef4dc40c2143aeda32",
+  "input_marker_order": ["R_FCC", "R_FM2"],
+  "lab_coordinates": ["X", "Y", "Z up"],
+  "input_muscle_order": ["R_tibialis_anterior", "R_soleus", "R_gastrocnemius_medialis", "R_vastus_medialis", "R_rectus_femoris", "R_semitendinosus", "R_gluteus_maximus", "R_gluteus_medius"],
+  "offsets_after_strike_frames": [14, 24, 34, 44],
+  "markers": "24 consecutive stored 100 Hz samples including cutoff t; R_FCC heel and R_FM2 forefoot; laboratory mm.",
+  "emg": "Four consecutive, non-overlapping 90-sample RMS windows of eight right surface EMGs in microvolts. Last sample is 15*t+7. Finite signed source channels in volts.",
+  "target": "u=t+10. Heel XYZ(u)-heel XYZ(t) in mm and mean calibrated upward load in N over samples [15*u,15*u+15), whose center aligns with u. No phase-duration feature, future event inputs or load-magnitude thresholds.",
+  "eligibility": "Only original Supplementary Table 2 exact codes 12 or 21; derive assigned plate from the first digit. Require a unique Right Foot Strike1 and following Right Foot Strike2 and exactly one intervening Right Foot Off; finite valid heel/forefoot marker projection within the assigned physical platform corners at first strike and target. Full future block must lie in [strike,off); complete valid marker history, all finite EMG bins, finite force target. Check each recording's identity, clock, units, platform geometry, channel map, sign and target-plate reconstruction. Retain source-coded zero force. No signal interpolation/imputation. Missing privileged past force is represented as NaN and reported, with no effect on primary eligibility.",
+  "privileged_history": "Two trailing 15-sample means, separately for t and t-10, each ending inclusively at its own analog center. Force hold uses column 0; trend uses 2*column0-column1. Kept separate from candidate inputs.",
+  "adjacent_repeats": "Every qualified repeated row retained. Enumerate same-person distinct-repeat and immediately adjacent numeric-repeat alternatives with exactly equal strike offset. Unsupported controls have explicit denominators.",
+  "prior_exposure": "One previously qualified training trial (the first selected training walk) already supplied three pairs. All historic assessment people are previously used in other studies. Historic assessment recordings and unused later repeats are distinct; no novel participant claim. Do not substitute later repeat numbers."
+}

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>One footstep, two forecasts</title><style>:root {font: 17px/1.49 "Liberation Sans",Arial,sans-serif; color:#23383b; background:#e8eeed; --teal:#12524c;--accent:#996036;--rule:#b7c9c6}
+* {box-sizing:border-box}
+body {margin:0}
+main {max-width:810px;margin:1.5rem auto}
+.page {background:#fff;margin:0 0 .8rem;padding:2.4rem 3.2rem 2.8rem}
+header {border-top:3px solid var(--teal);padding:.48rem 0;color:var(--teal);font-weight:700;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}
+header span:last-child {white-space:nowrap}
+h1,h2,h3 {color:#123d39;letter-spacing:-.035em;line-height:1.12}
+h1 {font-size:2.85rem;margin:.28rem 0 .5rem}
+h2 {font-size:2rem;margin:.18rem 0 .78rem}
+h3 {font-size:1.13rem;margin:1rem 0 .25rem;letter-spacing:-.015em}
+p {margin:.51rem 0}
+.lead {font-size:1.24rem;line-height:1.39}
+.meta,.caption,.references,nav {font-size:.85rem;line-height:1.41;color:#42595a}
+.meta {margin-bottom:1.0rem}
+a {color:#165b55;text-decoration-thickness:1px;text-underline-offset:.14em}
+figure {margin:1rem 0}
+figure svg {display:block;width:100%;height:auto}
+figcaption {font-size:.85rem;line-height:1.41;color:#42595a;margin:.5rem 0}
+.measure {background:#ecf4f2;border-left:3px solid #427d75;padding:.65rem .9rem}
+.measure p:first-child {margin-top:0}
+.measure p:last-child {margin-bottom:0}
+.scores {width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.92rem;line-height:1.27;margin:.55rem 0}
+.scores th,.scores td {text-align:right;padding:.32rem .28rem;vertical-align:middle}
+.scores thead th {font-weight:700;border-bottom:1px solid #547770;color:#224e48}
+.scores tbody th,.scores thead th:first-child {text-align:left}
+.scores tbody th {font-weight:400}
+.scores tbody th,.scores tbody td {border-bottom:1px solid #d6e2df}
+.scores tr.key th,.scores tr.key td {background:#eaf3f0;font-weight:700}
+.scores .unit {display:block;color:#4a6262;font-size:.84em;font-weight:400}
+.scores td {white-space:nowrap}
+.refs p {margin:.45rem 0}
+.screen a {margin-right:.7rem}
+@media(max-width:650px){
+  main{margin:0}.page{padding:1.2rem 1.1rem 1.5rem}h1{font-size:2.15rem}h2{font-size:1.7rem}
+  .scores{font-size:.8rem}.scores th,.scores td{padding:.34rem .17rem}
+}
+@media(max-width:500px){
+  .scores:not(.roster) thead {height:1px;position:absolute;overflow:hidden;clip-path:inset(50%)}
+  .scores:not(.roster),.scores:not(.roster) tbody,.scores:not(.roster) tr {display:block}
+  .scores:not(.roster) tbody tr {margin:.55rem 0;border:1px solid var(--rule);padding:.18rem .42rem}
+  .scores:not(.roster) tbody tr th {display:block;border-bottom:0;font-size:1rem}
+  .scores:not(.roster) tbody tr td {display:flex;align-items:baseline;justify-content:space-between;gap:.35rem;border-bottom:0;white-space:normal}
+  .scores:not(.roster) td::before {content:attr(data-label);text-align:left;color:#42595a;font-weight:400}
+  .scores:not(.roster) .key {background:#eaf3f0}
+}
+@page {size:A4;margin:15mm 18mm}
+@media print {
+ :root {font-size:11.4pt;line-height:1.41;background:white}
+ body,main {margin:0;max-width:none}
+ .page {margin:0;padding:0;break-after:page}.page:last-child{break-after:auto}
+ header{margin-bottom:.88rem}h1{font-size:2.7rem}h2{font-size:2rem}
+ .scores{font-size:.88rem}.scores th,.scores td{padding:.24rem .25rem}
+ h3{margin-top:.76rem}.screen{display:none}
+ figure,table {break-inside:avoid}
+ * {-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style></head>
+<body><main>
+<section class="page">
+<header><span>NeuroTranslation · Heel and force</span><span>1 / 6</span></header>
+<h1>One footstep, two forecasts</h1>
+<p class="lead">Can learning where the heel will move help a model predict how hard the floor will push back?</p>
+<p class="meta">NeuroTranslation · Experimental research paper · 21 November 2026</p>
+<nav class="screen" aria-label="Download this paper"><a href="heel-and-force.pdf" download>Download PDF</a> <a href="heel-and-force-source.zip" download>Download source and tables</a></nav>
+<h3>Abstract</h3>
+<p>A camera tracks a marker on a walker’s right heel. A force plate measures the upward push beneath that foot. Stop the recording during contact, then advance it by a tenth of a second. The marker and the plate answer two different questions about the same step. We asked whether a model could learn each answer more accurately by learning both together.</p>
+<p>We trained one sequence model, a Transformer, to read the preceding foot movement, the time since foot strike and surface muscle voltages. Two equally equipped specialist models learned one outcome apiece. A second experiment held an existing movement model fixed and varied how much information its two forecasts could share. We used 203 paired examples from 25 people for development, then scored both experiments on 53 examples from eight people and, separately, 31 from six of those same eight.</p>
+<p>In the original assessment the shared model missed the heel by 1.156 mm and the force by 92.36 N, against 1.183 mm and 93.73 N for the specialists. The later walks also favoured sharing on both averages. All four uncertainty intervals for those differences included zero. In the fixed-encoder experiment, compressing the correction increased heel error in both assessments. Neither experiment established an advantage for the matched muscle recordings under its prespecified test.</p>
+<div class="measure"><p><strong>What counts as an error?</strong> A heel forecast can miss by moving too far, too little or in the wrong direction. We measure the straight-line distance between its predicted and recorded endpoint in millimetres (mm). For the plate we measure the absolute difference between predicted and recorded upward force in newtons (N). Combining these numbers would hide which prediction improved.</p></div>
+<h3>Why follow the heel?</h3>
+<p>A walker can load a planted foot while the heel marker barely moves. Position and force can therefore share timing and still carry different information. The familiar act of stepping onto a plate gives that idea a measurable test. The study concerns barefoot, slow, level walking in recordings made by Céline Schreiber and Florent Moissenet. <a href="https://doi.org/10.1038/s41597-019-0124-4">Original walking study</a></p>
+</section>
+<section class="page">
+<header><span>NeuroTranslation · Heel and force</span><span>2 / 6</span></header>
+<h2>Putting the camera and plate on one clock</h2>
+<p>Cameras sampled two reflective markers 100 times a second, one at the back of the right heel and one over the second metatarsal near the ball of the foot. Electrodes on the skin sampled electrical activity from eight right-leg muscles 1,500 times a second. A force plate under the right foot sampled at that same higher rate. Recording muscle activity through skin electrodes is called surface electromyography (EMG). A newton measures force. The outcome here is the upward component in the laboratory coordinate system.</p>
+<figure><svg viewBox="0 0 650 135" role="img" aria-labelledby="timing-title timing-desc"><title id="timing-title">Measurement times relative to the prediction cutoff</title><desc id="timing-desc">Twenty-four marker frames end at zero. Four sixty-millisecond muscle bins end at zero. The last camera frame plus 100 milliseconds is the heel target. Fifteen plate samples are centred on that future frame.</desc>
+<rect x="0" y="0" width="650" height="135" fill="#edf4f2"/><g font-family="Liberation Sans,Arial,sans-serif" fill="#254f49" font-size="16"><text x="15" y="31">Foot markers</text><text x="15" y="64">Muscle voltage</text><text x="15" y="97">Readout time</text>
+<path d="M185 28 H442" stroke="#38766c" stroke-width="7"/><path d="M174 60 H442" stroke="#70a399" stroke-width="13"/><path d="M241 52 v16 m67 -16 v16 m67 -16 v16" stroke="#edf4f2" stroke-width="3"/>
+<path d="M174 92 H569" stroke="#416861" stroke-width="2"/><path d="M442 13 V98" stroke="#264944" stroke-width="2"/><path d="M555 81 V98" stroke="#975b35" stroke-width="7"/><circle cx="555" cy="28" r="5" fill="#975b35"/><text x="174" y="121">−240 ms</text><text x="416" y="121">cutoff</text><text x="521" y="121">+100 ms</text></g></svg>
+<figcaption>Figure 1. Time relative to the last observed camera frame (the cutoff). The muscle history covers 240 ms. The 24 camera frames run from −230 ms to the cutoff. At +100 ms the coloured dot marks the future heel sample and the band on the lower line marks the force average.</figcaption></figure>
+<p>We subtracted the cutoff heel position from its future position along each laboratory axis, with Z pointing up. For each muscle we squared the voltage samples in each of four 60 ms bins, averaged them and took the square root. This root-mean-square value describes the size of a varying voltage. The last bin ended at the midpoint of the cutoff camera frame’s 15 analog samples. The future plate average covered +95⅓ through +104⅔ ms.</p>
+<h3>Which recordings supplied both answers?</h3>
+<p>The source study designated 0.4–0.8 metres per second as its slow C2 walking condition. We chose cutoffs 140, 240, 340 and 440 ms after the first annotated right foot strike. The original contact codes had to assign separate plates to the feet. Both markers had to lie over the assigned plate at strike and at the target, with its full force block before foot-off. Future geometry and foot-off determined eligibility. They were withheld from the inputs.</p>
+<table class="scores roster"><thead><tr><th scope="col">Recordings</th><th scope="col">Selected people / walks</th><th scope="col">Eligible people / walks</th><th scope="col">Windows</th></tr></thead><tbody><tr><th scope="row">Development</th><td data-label="Selected people / walks">30 / 90</td><td data-label="Eligible people / walks">25 / 61</td><td data-label="Windows">203</td></tr><tr><th scope="row">Original walks</th><td data-label="Selected people / walks">10 / 30</td><td data-label="Eligible people / walks">8 / 16</td><td data-label="Windows">53</td></tr><tr><th scope="row">Later walks</th><td data-label="Selected people / walks">10 / 18</td><td data-label="Eligible people / walks">6 / 10</td><td data-label="Windows">31</td></tr></tbody></table>
+<p class="caption">Table 1. The first three available C2 walks per person formed the original selections. The additional walks came from the same ten-person historical roster. All six who qualified there also qualified in the original assessment. The final ten people in the source roster remained unopened.</p>
+</section>
+<section class="page">
+<header><span>NeuroTranslation · Heel and force</span><span>3 / 6</span></header>
+<h2>Two ways to share a prediction</h2>
+<h3>1. Learn both answers in the same network</h3>
+<p>We divided the 24 camera frames into four ordered groups of six. Each group describes where the heel ended relative to the start of the history, where the forefoot sat relative to the heel, how far both markers moved, the final heel height and time since strike. Eight muscle-voltage summaries complete the group. A Transformer learns how much weight to give each group when it combines them. Two separate output layers read its final representation, one for the three heel coordinates and one for upward force.</p>
+<p>Training gave equal weight to the two tasks after scaling the four target coordinates by their training variability. An error in either prediction could change the same 2,656 internal parameters. We checked this directly during fitting. The two outcomes produced nonzero gradients, the adjustments each error requested of the shared parameters, and the shared parameters actually changed. Each specialist had the same internal capacity, inputs, starting weights and training choices as the joint model. A pair of specialists needed two copies of its internal network.</p>
+<h3>2. Hold the movement model fixed and restrict the correction</h3>
+<p>Start with a simple guess. Let the heel repeat its last 100 ms of movement and let the plate show the typical training force at that time since strike. An existing movement encoder, a network that turns six marker changes per group into a 24-number summary of the history, stayed fixed. An output layer used that summary alongside the original marker and voltage features, strike timing and recent heel displacement to learn corrections to the guess.</p>
+<p>In the <strong>rank-two</strong> version, all four correction coordinates had to come from the same two learned combinations of inputs. In the <strong>unrestricted</strong> version, each coordinate could use its own combination. Both fits penalized large coefficients, a method called ridge regression. This checks how much the correction can be compressed. The two learned numbers have no assigned anatomical meaning.</p>
+<h3>How we kept a walker’s repeated steps together</h3>
+<p>All windows and repeats from a person stayed in one development fold, a group temporarily left out of a fit. The end-to-end experiment used three outer folds, with inner training splits to choose the training duration. The fixed-encoder experiment used five folds. For each reported mean, we averaged windows within a walk, walks within a person, then people equally. We froze the final models fitted on development data and scored each historical recording set separately. The source archive accompanying this paper gives additional fit settings.</p>
+</section>
+<section class="page">
+<header><span>NeuroTranslation · Heel and force</span><span>4 / 6</span></header>
+<h2>Did the two tasks help each other?</h2>
+<p>The shared Transformer could use information from either training target. We compared its heel forecast with the heel specialist’s forecast on exactly the same windows, and repeated that comparison for the force specialist. Smaller errors favour the forecast that made them.</p>
+<table class="scores "><thead><tr><th scope="col">Forecast</th><th scope="col">Development</th><th scope="col">Original walks</th><th scope="col">Later walks</th></tr></thead><tbody><tr class="key"><th scope="row">Shared Transformer</th><td data-label="Development">1.365 / 100.03</td><td data-label="Original walks">1.156 / 92.36</td><td data-label="Later walks">1.024 / 103.28</td></tr><tr><th scope="row">Separate specialists</th><td data-label="Development">1.364 / 99.45</td><td data-label="Original walks">1.183 / 93.73</td><td data-label="Later walks">1.026 / 103.90</td></tr><tr><th scope="row">Transformer without voltage</th><td data-label="Development">1.251 / 89.87</td><td data-label="Original walks">1.094 / 96.69</td><td data-label="Later walks">1.024 / 91.04</td></tr><tr><th scope="row">Three similar walks</th><td data-label="Development">1.189 / 88.65</td><td data-label="Original walks">1.113 / 101.52</td><td data-label="Later walks">1.101 / 104.36</td></tr><tr><th scope="row">Linear ridge, all inputs</th><td data-label="Development">1.311 / 118.00</td><td data-label="Original walks">1.115 / 96.04</td><td data-label="Later walks">1.028 / 99.28</td></tr><tr><th scope="row">Linear ridge without voltage</th><td data-label="Development">1.256 / 83.31</td><td data-label="Original walks">1.110 / 100.91</td><td data-label="Later walks">1.072 / 98.53</td></tr><tr><th scope="row">Stationary heel / typical force</th><td data-label="Development">1.457 / 93.76</td><td data-label="Original walks">1.355 / 93.08</td><td data-label="Later walks">1.311 / 90.98</td></tr><tr><th scope="row">Carry forward measured force</th><td data-label="Development">— / 78.48</td><td data-label="Original walks">— / 80.74</td><td data-label="Later walks">— / 54.20</td></tr></tbody></table>
+<p class="caption">Table 2. Each cell gives <strong>heel error in mm / upward-force error in N</strong>. The movement-matching rule averages the targets of three similar marker histories from different training people. The simple pair keeps the heel still and uses the mean training force at that time after strike. The last row uses extra information available only to the plate control. A dash means the rule supplies no heel forecast.</p>
+<h3>How much could the small advantage vary?</h3>
+<p>For each person, we took the shared model’s error minus the relevant specialist’s error. We then drew whole people with replacement 5,000 times, preserving each person’s repeated measurements. The middle 95% of the resulting means gives the paired bootstrap interval. A negative difference favours shared training.</p>
+<table class="scores "><thead><tr><th scope="col">Walks</th><th scope="col">Heel difference (mm)</th><th scope="col">Force difference (N)</th></tr></thead><tbody><tr><th scope="row">Development</th><td data-label="Heel difference (mm)">+0.002 [−0.055, +0.061]</td><td data-label="Force difference (N)">+0.58 [−1.19, +2.43]</td></tr><tr><th scope="row">Original walks</th><td data-label="Heel difference (mm)">−0.026 [−0.103, +0.040]</td><td data-label="Force difference (N)">−1.37 [−6.08, +2.90]</td></tr><tr><th scope="row">Later walks</th><td data-label="Heel difference (mm)">−0.002 [−0.117, +0.092]</td><td data-label="Force difference (N)">−0.62 [−4.13, +3.18]</td></tr></tbody></table>
+<p class="caption">Table 3. Mean paired difference [95% interval]. We specified in advance that the upper ends of <em>both</em> intervals must fall below zero. Every interval crossed zero. Development folds also reuse some training people across fits.</p>
+<p>Giving the models the true muscle history reduced mean force error relative to the marker-only Transformer on the original assessment walks. The order reversed on the later walks. Holding the most recent measured force was more accurate than the shared Transformer in both sets. On the later walks its mean error was 54.20 N, against 103.28 N for the shared model. The latter underestimated force by 40.77 N on average there. A signed average reveals this direction even when positive and negative errors partly cancel.</p>
+</section>
+<section class="page">
+<header><span>NeuroTranslation · Heel and force</span><span>5 / 6</span></header>
+<h2>What did compressing the correction cost?</h2>
+<p>Here the movement encoder kept its old weights. Restricting the output correction to two learned combinations raised heel error in all three comparisons. On the original assessment walks, force error fell slightly. On the later walks both errors rose.</p>
+<table class="scores "><thead><tr><th scope="col">Forecast</th><th scope="col">Development</th><th scope="col">Original walks</th><th scope="col">Later walks</th></tr></thead><tbody><tr class="key"><th scope="row">Rank-two correction</th><td data-label="Development">1.795 / 92.82</td><td data-label="Original walks">1.850 / 89.75</td><td data-label="Later walks">1.462 / 110.18</td></tr><tr><th scope="row">Unrestricted correction</th><td data-label="Development">1.308 / 93.76</td><td data-label="Original walks">1.232 / 91.78</td><td data-label="Later walks">1.120 / 106.94</td></tr><tr><th scope="row">Rank two without voltage</th><td data-label="Development">1.755 / 78.71</td><td data-label="Original walks">1.710 / 100.17</td><td data-label="Later walks">1.448 / 106.19</td></tr><tr><th scope="row">Full linear correction</th><td data-label="Development">1.331 / 90.39</td><td data-label="Original walks">1.221 / 88.41</td><td data-label="Later walks">1.136 / 99.16</td></tr><tr><th scope="row">Random encoder, rank two</th><td data-label="Development">1.809 / 89.32</td><td data-label="Original walks">1.816 / 89.72</td><td data-label="Later walks">1.424 / 106.64</td></tr><tr><th scope="row">Starting guess</th><td data-label="Development">1.870 / 87.43</td><td data-label="Original walks">2.061 / 90.62</td><td data-label="Later walks">1.565 / 94.06</td></tr></tbody></table>
+<p class="caption">Table 4. Each cell gives <strong>heel error in mm / upward-force error in N</strong>. The starting guess repeats the last 100 ms of heel travel and uses the median training force at that time after strike. The full linear correction uses the same original measurements without the encoder summary. The fixed random encoder supplies an untrained comparison of the same size.</p>
+<p>To count as adequate, the rank-two method had to come within 2% of the unrestricted error for each target, lower both errors relative to its starting guess, and beat each starting guess for a majority of people. For heel and force respectively, it beat the starting guess for 7 and 4 of the 8 people in the original assessment, then 5 and 2 of the 6 in the later recordings. It missed the joint criterion in both sets.</p>
+<h3>Could another walk’s muscle activity do just as well?</h3>
+<p>We exchanged the four muscle-voltage segments with those from a different repeat by the same walker at the same time after strike. The original marker history stayed in place. This required another qualifying repeat at that instant. The comparison covered 189 of 203 development windows (22 people), 44 of 53 original windows (6 people), and 24 of 31 later windows (4 people).</p>
+<table class="scores "><thead><tr><th scope="col">Forecast</th><th scope="col">Development</th><th scope="col">Original walks</th><th scope="col">Later walks</th></tr></thead><tbody><tr class="key"><th scope="row">Transformer, correct voltage</th><td data-label="Development">1.307 / 97.72</td><td data-label="Original walks">1.145 / 74.26</td><td data-label="Later walks">1.040 / 112.66</td></tr><tr><th scope="row">Transformer, other walk</th><td data-label="Development">1.339 / 97.77</td><td data-label="Original walks">1.173 / 75.03</td><td data-label="Later walks">1.107 / 112.49</td></tr><tr><th scope="row">Transformer, without voltage</th><td data-label="Development">1.210 / 85.60</td><td data-label="Original walks">1.108 / 78.10</td><td data-label="Later walks">1.004 / 116.94</td></tr><tr class="key"><th scope="row">Rank two, correct voltage</th><td data-label="Development">1.685 / 96.44</td><td data-label="Original walks">1.583 / 91.32</td><td data-label="Later walks">1.377 / 132.09</td></tr><tr><th scope="row">Rank two, other walk</th><td data-label="Development">1.710 / 95.49</td><td data-label="Original walks">1.566 / 91.48</td><td data-label="Later walks">1.462 / 129.24</td></tr><tr><th scope="row">Rank two, without voltage</th><td data-label="Development">1.636 / 81.06</td><td data-label="Original walks">1.486 / 91.35</td><td data-label="Later walks">1.366 / 124.63</td></tr></tbody></table>
+<p class="caption">Table 5. Mean error in <strong>mm / N</strong> for the matched-repeat subset only. “Without” means a model trained without muscle voltages. In each triplet, the other walk’s voltage enters the same fitted model as the correct voltage. </p>
+<p>The Transformer needed a reliable reduction in error against both the no-voltage and other-walk controls for an outcome. Rank two needed at least a 5% reduction against both controls on both outcomes and improvements for a majority of eligible people. Neither experiment met its muscle-signal criterion in either assessment.</p>
+</section>
+<section class="page">
+<header><span>NeuroTranslation · Heel and force</span><span>6 / 6</span></header>
+<h2>What the floor can settle</h2>
+<p>In the original assessment the average heel miss was about a millimetre whether the model learned one task or two. That apparent precision belongs to a skin marker. The skin can move relative to the heel bone, and the study gives no error bound for each tiny displacement. A small change in forecast error therefore says little about which model tracks the underlying bone more faithfully.</p>
+<p>The force plate does answer a different question about the same contact. Why might the muscle recordings add so little predictive information here? The marker and elapsed time already tell the model where the walker is in the step. Each skin electrode samples electrical activity in its vicinity. Its voltage alone cannot identify the force of an individual muscle or the pressure under a particular part of the sole. Swapping voltages tests their extra predictive information in this setup. A physiological test of how a particular muscle contributes to force would need a different measurement.</p>
+<p>The original recordings were gap-filled and filtered before release. The marker and force filters used samples in both time directions. Muscle voltage was centred across the trial and filtered. A segment ending at our cutoff can therefore contain information from later raw samples. The source methods describe a 5 N threshold for force, while the linked processing code uses 50 N. We retained stored zeros, which can also reflect missing force. A future test of live prediction would need prospective foot-strike detection, one-direction processing, a sensor delay budget and a new group of walkers.</p>
+<p>The same people supplied the two historical recording sets, and their roster had been used in earlier studies. Confining the test to steps that landed cleanly on one plate especially limits what we can conclude about different surfaces, speeds and unsuccessful contacts. Within this narrow task, two training targets did update one network. The original and later walks leave the size and even the direction of any accuracy advantage uncertain.</p>
+<h3>Data, methods and access</h3>
+<div class="refs references">
+<p>Céline Schreiber and Florent Moissenet (2019). <em>A multimodal dataset of human gait at different walking speeds established on injury-free adult participants.</em> Scientific Data 6, 111. <a href="https://doi.org/10.1038/s41597-019-0124-4">Study and supplementary contact table</a></p>
+<p>Florent Moissenet and Céline Schreiber. Figshare dataset, version 8. We derived marker displacements, average upward loads, voltage summaries and forecast errors from their open measurements. <a href="https://doi.org/10.6084/m9.figshare.7734767.v8">Source measurements</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> · <a href="https://github.com/fmoissenet/CGA_Rehazenter_Toolbox/tree/e35dc90c1acd24da134897fd1b4241152cff6005">Authors’ processing code</a></p>
+<p>The project dedicates its original text, code and timing figure to the public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>. The source archive includes aggregate tables, font and data notices and rebuild instructions. A copy is attached to the PDF. <a href="https://eliminatenoise.github.io/NeuroTranslation/papers/heel-and-force/">Paper and source</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/heel-and-force/">Shared Transformer</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/shared-heel-and-force/">Fixed movement encoder</a> · <a href="https://eliminatenoise.github.io/Interoceptomics/heel-and-force/">Interoceptomics measurement atlas</a></p>
+</div>
+</section></main></body></html>

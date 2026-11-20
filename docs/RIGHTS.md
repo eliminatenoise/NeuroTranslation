@@ -216,3 +216,7 @@ Qiang Zhang, Noor Hakam, Oluwasegun Akinniyi, Ashwin Iyer, Xuefeng Bao and Nitin
 ### Skin electrode and pedal recordings
 
 Qiang Zhang, Noor Hakam, Oluwasegun Akinniyi, Ashwin Iyer, Xuefeng Bao and Nitin Sharma released the AnkleImage recordings under CC BY 4.0. This study selects two Task 1 settings, fits forecasts to earlier signals and reports aggregate errors. The reader uses invented example inputs. The illustrations were drawn for this study. The original methods article carries a separate licence. [AnkleImage dataset](https://doi.org/10.6019/S-BIAD1482) · [Original methods](https://doi.org/10.1038/s41597-024-04285-x) · [Data licence](https://creativecommons.org/licenses/by/4.0/)
+
+### Heel movement and upward force during the same walk
+
+Florent Moissenet and Céline Schreiber released version 8 of their multimodal gait dataset under CC BY 4.0. This study derives marker histories, muscle-voltage summaries, heel displacements and plate-load means, fits predictive models and reports aggregate errors. The interactive models use invented walking histories. The Interoceptomics companion separately identifies its recorded example. [Original data](https://doi.org/10.6084/m9.figshare.7734767.v8) · [Methods and supplement](https://doi.org/10.1038/s41597-019-0124-4) · [Data licence](https://creativecommons.org/licenses/by/4.0/)

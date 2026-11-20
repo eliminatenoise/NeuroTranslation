@@ -1,0 +1,19 @@
+{
+  "frozen_at_utc": "2026-11-20T19:27:44.085644+00:00",
+  "original_joint_fit_manifest_sha256": "d68a244b62610647cc890ba57179fd69842c61c9080f27e414ec8769642257bf",
+  "task_trained_weights": {
+    "joint-model.json": "5c7052d187358abd8c24d081c23d2e72ef90cc0603fc8f981e2fd502c37107cb",
+    "heel-model.json": "4ac3c7e90b8b49717dda997adfbd19cbd84bca341273f2b9ae854cd16b94bd09",
+    "force-model.json": "36cbd0efe9272cac00bc17d502187f72f2ac59513dcf3cccacb165f07a1c7365",
+    "marker-model.json": "21b27370f7231594b4b47bfc60636e43aa17eea76a36b46f69c92e078e7f4358"
+  },
+  "neurotranslate_movement_readout_sha256": "3afb388127d316722e3da22d06c4cbf8d8e132e32c6ebbe7768d0f3860df66ea",
+  "qualified_assessment_npz_sha256": {
+    "historical-primary": "7b8657911e94dc2257d840cd56926006103015b8d07adc3fbffee1ca69f3fe42",
+    "historical-supplement": "cf46a1ccef1100c26db9f4093d48ce812a15e26f4c7d485aa28a6ff3afd41d30"
+  },
+  "development_roster_order_sha256": "473fb511de48099809ff0f22898983a57bb29700d718616bfb5aeb1026e19855",
+  "development_npz_sha256": "fb2ea815357a523192f08bd8d04c33ac3226c7bc9e746ecd3b034db6ffe78852",
+  "source_archive_sha256": "e11f0f85424e7630d32dbeb8b37bf78d470dcb34c0f461417671ce7d146eaec5",
+  "scope": "This public extract identifies both fitted model families. The original joint fit manifest was sealed before the separate assessments. The two assessment array fingerprints were added after extraction for exact reproduction."
+}

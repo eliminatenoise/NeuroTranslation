@@ -1,0 +1,192 @@
+{
+  "main": {
+    "people": 8,
+    "repeats": 16,
+    "windows": 53,
+    "methods": {
+      "hold_heel": {
+        "heel_error_mm": 1.3551892626111601,
+        "force_error_n": 90.6232700540891,
+        "xyz_bias_mm": [
+          0.12871180640326607,
+          0.12628049320644805,
+          -0.646916472249561
+        ],
+        "force_bias_n": -18.295085640124036,
+        "negative_load_forecasts": 0
+      },
+      "velocity_heel": {
+        "heel_error_mm": 1.9151681145229555,
+        "force_error_n": 90.6232700540891,
+        "xyz_bias_mm": [
+          -0.10630542260629161,
+          0.0773418567798756,
+          0.21313442510587205
+        ],
+        "force_bias_n": -18.295085640124036,
+        "negative_load_forecasts": 0
+      },
+      "recent_heel": {
+        "heel_error_mm": 2.0605505196808513,
+        "force_error_n": 90.6232700540891,
+        "xyz_bias_mm": [
+          -0.12790918350219727,
+          0.12027319272359212,
+          0.26466023259692717
+        ],
+        "force_bias_n": -18.295085640124036,
+        "negative_load_forecasts": 0
+      },
+      "force_hold": {
+        "heel_error_mm": 2.0605505196808513,
+        "force_error_n": 80.73727576131071,
+        "xyz_bias_mm": [
+          -0.12790918350219727,
+          0.12027319272359212,
+          0.26466023259692717
+        ],
+        "force_bias_n": -53.50626523571985,
+        "negative_load_forecasts": 0
+      },
+      "force_trend": {
+        "heel_error_mm": 2.0605505196808513,
+        "force_error_n": 101.1663282531555,
+        "xyz_bias_mm": [
+          -0.12790918350219727,
+          0.12027319272359212,
+          0.26466023259692717
+        ],
+        "force_bias_n": 66.71573346032311,
+        "negative_load_forecasts": 0
+      },
+      "linear_motion": {
+        "heel_error_mm": 1.107110168608835,
+        "force_error_n": 97.37780382566838,
+        "xyz_bias_mm": [
+          0.06150264348355988,
+          0.0771849312673401,
+          0.11120911144625047
+        ],
+        "force_bias_n": 30.949867491567495,
+        "negative_load_forecasts": 0
+      },
+      "linear_full": {
+        "heel_error_mm": 1.2205182722725896,
+        "force_error_n": 88.40958426399985,
+        "xyz_bias_mm": [
+          0.08576667177537889,
+          0.06445095514003156,
+          -0.044696692387026976
+        ],
+        "force_bias_n": 34.93153420885462,
+        "negative_load_forecasts": 0
+      },
+      "encoder_motion_rank2": {
+        "heel_error_mm": 1.7099837846275472,
+        "force_error_n": 100.16537199383646,
+        "xyz_bias_mm": [
+          -0.10323147436831098,
+          -0.09357222771717483,
+          0.1813764671609785
+        ],
+        "force_bias_n": 32.30509225848428,
+        "negative_load_forecasts": 0
+      },
+      "encoder_full_rank2": {
+        "heel_error_mm": 1.8502407998573955,
+        "force_error_n": 89.7512757200594,
+        "xyz_bias_mm": [
+          -0.0841803832163293,
+          -0.048263200908393214,
+          0.025837716141896616
+        ],
+        "force_bias_n": 37.35966090052227,
+        "negative_load_forecasts": 0
+      },
+      "encoder_full_unrestricted": {
+        "heel_error_mm": 1.2317256402032148,
+        "force_error_n": 91.78084471454275,
+        "xyz_bias_mm": [
+          0.08746181527092547,
+          0.047181564854084763,
+          -0.0049576326573343606
+        ],
+        "force_bias_n": 38.390313121041174,
+        "negative_load_forecasts": 0
+      },
+      "random_full_rank2": {
+        "heel_error_mm": 1.816063809492004,
+        "force_error_n": 89.72367322710517,
+        "xyz_bias_mm": [
+          -0.09009032936835211,
+          -0.0867189936692992,
+          -0.0006534446322211604
+        ],
+        "force_bias_n": 42.60513127458184,
+        "negative_load_forecasts": 0
+      }
+    }
+  },
+  "same_phase_donor_support": {
+    "people": 6,
+    "repeats": 14,
+    "windows": 44,
+    "methods": {
+      "encoder_full_rank2": {
+        "heel_error_mm": 1.5828446592570642,
+        "force_error_n": 91.32210045828808,
+        "xyz_bias_mm": [
+          -0.23074019946971105,
+          0.031637716013432356,
+          -0.020896449883813485
+        ],
+        "force_bias_n": 43.844392414745116,
+        "negative_load_forecasts": 0
+      },
+      "wrong_full": {
+        "heel_error_mm": 1.5663344544995823,
+        "force_error_n": 91.48287524110798,
+        "xyz_bias_mm": [
+          -0.23074019946971103,
+          0.03163771601343235,
+          -0.02089644988381354
+        ],
+        "force_bias_n": 43.84439241474513,
+        "negative_load_forecasts": 0
+      },
+      "encoder_motion_rank2": {
+        "heel_error_mm": 1.4859755891682183,
+        "force_error_n": 91.35224507069752,
+        "xyz_bias_mm": [
+          -0.24841557861528513,
+          -0.008894076383801667,
+          0.028492904419791583
+        ],
+        "force_bias_n": 30.873309490473446,
+        "negative_load_forecasts": 0
+      }
+    }
+  },
+  "rank_two_adequacy": {
+    "beats_baseline_people_xyz_force": [
+      7,
+      4
+    ],
+    "passes_by_heel_force": [
+      false,
+      false
+    ],
+    "both_pass": false
+  },
+  "emg_advantage": {
+    "beats_both_controls_people_xyz_force": [
+      1,
+      1
+    ],
+    "passes_by_heel_force": [
+      false,
+      false
+    ],
+    "both_pass": false
+  }
+}

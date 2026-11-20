@@ -1,5 +1,7 @@
 # Predict and reproduce
 
+For right heel travel and plate force, run `python predict.py heel_force/example.json`. [Reproduce training and both assessment sets](heel_force/README.md).
+
 For a fixed-pedal load example, use `python predict.py pedal_load/example.json`. [Fit and assess the pedal model](pedal_load/README.md).
 
 For the ultrasound fascicle forecast, run `python predict.py muscle_tracking/example.json`. [Study, source and independent evaluation](muscle_tracking/README.md).
