@@ -174,3 +174,7 @@ For the separate elbow experiment, [open the viewer](https://eliminatenoise.gith
 ## Follow a stretch and its sensory spikes
 
 To follow a stretch and inspect its predicted sensory firing, extract the [muscle spindle reader](docs/muscle-spindle-offline.zip) and choose **Open on Windows.cmd**, **Open on macOS.command** or **Open on Linux.sh**. [Model weights, source readers and training code](models/muscle-spindle.zip)
+
+## Follow a robot’s push and a macaque’s reach
+
+For the paired recorded perturbation and cued reach, extract the [offline cortical reach reader](docs/cortical-reach-offline.zip) and use its operating-system launcher. [Training code and weights](models/cortical-reach.zip)
