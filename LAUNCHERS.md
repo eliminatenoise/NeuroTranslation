@@ -1,7 +1,5 @@
 # Launchers and offline copies
 
-To follow a stretch and inspect its predicted sensory firing, extract the [muscle spindle reader](docs/muscle-spindle-offline.zip) and choose **Open on Windows.cmd**, **Open on macOS.command** or **Open on Linux.sh**. [Model weights, source readers and training code](models/muscle-spindle.zip)
-
 Almost everything here runs in a browser. A launcher is a shortcut that opens the right page. An offline copy is a ZIP that holds the page itself, so it works with no network. The general model’s five-sensor walking page and the study 28 wrist command need Python. The two newer stride and rat viewers open without it.
 
 ## A shortcut to the app
@@ -172,3 +170,7 @@ For the separate elbow experiment, [open the viewer](https://eliminatenoise.gith
 ## Follow the wrist or the sacrum
 
 [Open the forecast](https://eliminatenoise.github.io/NeuroTranslation/cross-limb-movement/) or [download the offline reader](docs/cross-limb-movement-offline.zip). Extract the whole folder and choose **Open on Windows.cmd**, **Open on macOS.command** or **Open on Linux.sh**. You can also open `index.html` directly. The [model package](models/cross-limb-movement-model.zip) includes Windows, macOS and Linux launchers, an offline forecast, the fitted weights and the code to prepare recordings, train the models and repeat the scoring. [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/cross-limb-movement/)
+
+## Follow a stretch and its sensory spikes
+
+To follow a stretch and inspect its predicted sensory firing, extract the [muscle spindle reader](docs/muscle-spindle-offline.zip) and choose **Open on Windows.cmd**, **Open on macOS.command** or **Open on Linux.sh**. [Model weights, source readers and training code](models/muscle-spindle.zip)
