@@ -39,7 +39,7 @@ The other eleven have no passage of their own in all four. The NeuroTranslation 
 
 The [study notes](current/research-evidence-reading-aid.md) retell each study outside the papers.
 
-## A separate supplement, and two newer studies
+## A four-page supplement and two newer studies are in neither draft
 
 *How precisely do words identify a recorded movement?* is a four-page supplement, written to go with the NeuroTranslation paper but not part of it: neither paper's current draft contains it. It reports two studies in which a person wrote a sentence after watching a movement, and a model had to find that movement among recordings, one of the whole body and one of the hand. It explains why the timing of an action can be easier to find than the shape of the hand, and which question about guiding a hand, the subject of the Brain2Body paper, the studies leave open. [Read it online](https://eliminatenoise.github.io/NeuroTranslation/papers/language-and-observed-movement/language-and-movement.html) · [Download the four-page PDF](../docs/papers/language-and-observed-movement/language-and-movement.pdf) · [Editable source and evidence](../docs/papers/language-and-observed-movement/)
 
