@@ -13,19 +13,19 @@ NeuroTranslation is the larger attempt those studies belong to. Reach for a cup:
 
 What exists today is the studies, 14 [pages that run them in a browser](https://eliminatenoise.github.io/NeuroTranslation/START.html), two draft papers and a sister game, NeuroSurge.
 
-What is still being built is the general model, **NeuroTranslate 0.0**: one model meant to learn from many kinds of body signal at once. On 20 November it had its first fits to real recordings, and they were small.
+What is still being built is the general model, **NeuroTranslate 0.0**: one model meant to learn from many kinds of body signal at once. On 20 November it had its first fits to real recordings.
 
-- Both used one kind of sensor, strapped to the body, that records how its speed changes as a person walks (an accelerometer), from one open dataset of people walking. The errors below are in the units the sensor stores.
-- One copy of the model forecast five such sensors (torso, both arms, both legs) 120 ms ahead and was scored only on the four people it was fitted on. It met the rule set before fitting, to beat every other forecast for every person, at one sensor of five: the left leg, where its average miss was 1.837 against 1.929 for a straight-line fit made for that sensor.
-- A copy fitted to the right arm alone was scored on the two people study 26 had already scored. A straight-line fit beat it for both: 0.869 against 0.781.
+- Two of them used one kind of sensor, strapped to the body, that records how its speed changes as a person walks (an accelerometer), from one open dataset of people walking. The errors below are in the units the sensor stores.
+- One fit of the model forecast five such sensors (torso, both arms, both legs) 120 ms ahead and was scored only on the four people it was fitted on. It met the rule set before fitting, to beat every other forecast for every person, at one sensor of five: the left leg, where its average miss was 1.837 against 1.929 for a straight-line fit made for that sensor.
+- An earlier version, fitted to the right arm alone, was scored on the two people study 26 had already scored. A straight-line fit beat it for both: 0.869 against 0.781.
 
-What does not exist yet: a test of the general model on people nobody has looked at before, and any fit of it to a brain or muscle signal. So nothing here yet translates between nerve, muscle and movement. Nor is the model inside the browser app that carries its name.
+What does not exist yet: a test of the general model on people nobody has looked at before. So nothing here yet translates between nerve, muscle and movement. Nor is the model inside the browser app that carries its name.
 
 ## Where to click
 
 - **[Start page](https://eliminatenoise.github.io/NeuroTranslation/START.html).** Runs in a browser, nothing to install. Try an invented example, or pick the kind of recording you have and open the page that reads it. Behind it are the study readers, and an app that lines up your own recordings on one clock.
 - **[The studies](benchmarks/README.md).** All 24, each with its plan and its results file, and the counts above worked out row by row.
-- **[The general model's first fit, on your own computer](benchmarks/daily-sports-limbs/README.md).** A page that opens in your browser once a small Python program is running (it needs Python and two libraries; there is a launcher for Windows, macOS and Linux). Pick a sensor on the torso, an arm or a leg: it shows the sensor's last 16 readings, NeuroTranslate 0.0's forecast and what the sensor recorded next. The walks it shows are ones the model was fitted on, so it shows the model working, not how good it is.
+- **[The general model's first fit, on your own computer](benchmarks/daily-sports-limbs/README.md).** A page that opens in your browser once a small Python program is running (it needs Python and two libraries; there is a launcher for Windows, macOS and Linux). Pick a sensor on the torso, an arm or a leg: it shows the sensor's last 16 readings, NeuroTranslate 0.0's forecast and what the sensor recorded 120 ms after the last of them. The walk it shows is one the model was fitted on, so it shows the model running, not how well it would forecast someone new.
 - **[The papers](papers/README.md).** Two working drafts, each in a Technical and a Simple English edition.
 - **[Launchers and offline copies](LAUNCHERS.md)** for Windows, macOS and Linux.
 - **[One wrist trial, every channel labelled](interfaces/wrist-language-motion/README.md).** Three seconds of one person turning the wrist toward a target, from an open dataset, with each channel marked by what recorded it (a scalp electrode, two forearm electrodes, two sensors of the wrist's angle, the cue on the screen) and the words a person wrote about it. A small Python program hands it to the general model's code. No model is fitted to it.
@@ -54,7 +54,7 @@ Each row sets a reference forecast against a challenger that was given something
 
 Every score is an error: how far the forecasts fell from what was measured. Lower is better. Rows 1 to 13 are scored by the measure that punishes large misses, rows 14 to 23, 26 and 27 by the plain average miss, and rows 24 and 25 by a squared error in units of their own. Row 20 is the odd one: it compares the width of bands, not errors. Units change from block to block, so compare along a row, never down a column.
 
-A *straight-line fit* is the plainest kind of model, a weighted sum of its inputs. A *learned forecast* is a small network that reads a stretch of recent history. A *transformer* is the kind of network behind today's large language models: study 26 tried a small one, and the general model is built round one too. The recordings a model is scored on were never used to fit it, except in rows 25 and 27.
+A *straight-line fit* is the plainest kind of model, a weighted sum of its inputs. A *learned forecast* is a small network that reads a stretch of recent history. A *transformer* is a kind of network that learns which of the earlier readings matter most to the forecast, the same kind that runs today's chatbots: study 26 tried a small one, and the general model is built round one too. The recordings a model is scored on were never used to fit it, except in rows 25 and 27.
 
 | Study | Tested on | Reference forecast | Challenger | Who won |
 | --- | --- | --- | --- | --- |
@@ -90,7 +90,7 @@ A *straight-line fit* is the plainest kind of model, a weighted sum of its input
 | **Arm acceleration while walking, 120 ms ahead** (in the units the sensor stores) | | | | |
 | 26 · [Walking: a small transformer on an arm sensor](benchmarks/daily-sports-arm/) | 2 people | Straight-line fit on the sensor's last 16 readings: 0.781 | A small transformer on the same 16 readings: 0.855 | **The straight-line fit**, by 0.074, for both people. Both beat repeating the last value (1.182), and the transformer failed the pass rule set for it. |
 | **The general model's first fit** (scored on the people it was fitted on: not a test) | | | | |
-| 27 · [Walking: the general model's first fit, five sensors](benchmarks/daily-sports-limbs/) | nobody new: the 4 people it was fitted on | Straight-line fit made for the left-leg sensor alone: 1.929 | NeuroTranslate 0.0, one copy for all five sensors: 1.837 at the left leg | **Not a test.** It beat repeating the last value at all five sensors and the straight-line fit at four. The rule set before fitting, better for every person, held only at the left leg. |
+| 27 · [Walking: the general model's first fit, five sensors](benchmarks/daily-sports-limbs/) | nobody new: the 4 people it was fitted on | Straight-line fit made for the left-leg sensor alone: 1.929 | NeuroTranslate 0.0, one fit for all five sensors: 1.837 at the left leg | **Not a test.** It beat repeating the last value at all five sensors and the straight-line fit at four. The rule set before fitting, better for every person, held only at the left leg. |
 | **Reported only in the papers** (units scaled to the data) | | | | |
 | 24 · [Macaque fingers from motor cortex (LINK)](papers/current/neurotranslation-technical.pdf#page=13) | 1 macaque | Straight-line fit on the latest brain sample: 0.03150 | The better of two networks that read recent brain history: 0.02996 | **Both failed their pass rule.** Lower on average, but worse for the index finger on the second test day. All five further claims failed too. |
 | 25 · [One network shared by two signals: first run](papers/current/research-evidence-reading-aid.md#one-acquisition-two-forecasting-tasks) | nobody held out | Repeat the last value: 0.0245 | One network shared by a muscle signal and a glove signal, after 990 training steps: 0.372 | **Repeating the last value**, on the network's own training recording. |
@@ -154,7 +154,7 @@ None of the recordings is ours. Eleven open datasets, measured by other people, 
 
 EEG-EMG-WristMotion · KIN-MUS UJI · the upper-limb dataset of Lucchetti and colleagues · IACKD · WAY-EEG-GAL · HYGRIP · Hyser · CEMHSEY GRASP · Daily and Sports Activities · LINK · Reach&Grasp
 
-Who made each one, its licence and the credit it is owed: [docs/RIGHTS.md](docs/RIGHTS.md). The licences are CC BY 4.0, CC0 1.0, ODC-By 1.0 and MIT. What is published here is mostly fitted models and summary results derived from the recordings. Two short excerpts of the recordings themselves are included, each under its dataset's terms: one three-second trial of the wrist-pointing recordings, and 16 readings, with the reading that came next, from each of the five walking sensors in one clip, which the five-sensor page replays.
+Who made each one, its licence and the credit it is owed: [docs/RIGHTS.md](docs/RIGHTS.md). The licences are CC BY 4.0, CC0 1.0, ODC-By 1.0 and MIT. What is published here is mostly fitted models and summary results derived from the recordings. Two short excerpts of the recordings themselves are included, each under its dataset's terms: one three-second trial of the wrist-pointing recordings, and 16 readings, with the reading recorded 120 ms after the last of them, from each of the five walking sensors in one clip, which the five-sensor page replays.
 
 What the project itself wrote, text and code, is dedicated to the public domain under [CC0 1.0](LICENSE). That covers none of the recordings, nor the fonts inside the PDFs.
 
