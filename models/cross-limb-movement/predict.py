@@ -9,4 +9,10 @@ if __name__=='__main__':
     p.add_argument('weights',type=Path)
     p.add_argument('input',type=Path)
     args=p.parse_args()
-    print(json.dumps(predict_event(args.weights,json.loads(args.input.read_text())),indent=2))
+    weights = json.loads(args.weights.read_text())
+    if weights['format'] == 'cross-limb-path-map-v1':
+        from decoder_model import predict_event as predict_path_map
+        result = predict_path_map(weights, json.loads(args.input.read_text()))
+    else:
+        result = predict_event(weights, json.loads(args.input.read_text()))
+    print(json.dumps(result, indent=2))

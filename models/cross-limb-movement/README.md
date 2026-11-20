@@ -19,6 +19,15 @@ The returned `path_mm` contains 32 ordered XYZ displacements. `rms` has thirteen
 
 For an application, import `predict(weights, event)` from `inference.mjs`. `encodeHistory` accepts signed native muscle samples and source-frame marker knots in millimetres on their own clocks. Pass their times in seconds relative to cutoff. Historical muscle input is in µV for balance and original exported amplitude units for WAY. The caller supplies channel-quality decisions. The source reader includes the offline future-quality gates used to define this experiment. Keeping the anatomy names with their columns permits reordering; a different muscle or segment requires a new measurement and validation study.
 
+## Try the two output maps
+
+An output map takes the network’s last internal reading and turns it into a movement along three axes. One fitted model picks a different map for the wrist and the pelvis. The other blends an early map and a late map as the forecast unfolds. They have the same total number of fitted values. Open **forecast.html**, choose the body part and change the output map. The training code and a model for each of three participant splits are included. The original joint model remains available in the same menu. [Read the comparison](https://eliminatenoise.github.io/NeuroTranslation/papers/cross-limb-movement/decoder-study/) · [Repeat the development experiment](path-maps.md)
+
+```sh
+node launch.mjs synthetic-upper-amplitude.json path-maps/s1641-f0-separate.json
+python predict.py path-maps/s1641-f0-matched.json synthetic-lower.json
+```
+
 ## Repeat the comparison
 
 Use Python with the versions in `requirements.txt` for training and the native CLI. The benchmark ran on Linux with Python 3.14, NumPy 2.5.3 and PyTorch 2.14.0. The PyTorch build there also supported ROCm. Installation packages differ by operating system and accelerator. Run the source-preparation commands in `source/README.md` first, with participant recordings and outputs kept in local private storage. The commands below assume those two prepared NPZs reside in `private/windows/` relative to this folder.

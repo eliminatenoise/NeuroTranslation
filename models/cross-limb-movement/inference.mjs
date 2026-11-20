@@ -37,7 +37,10 @@ function validInput(e) {
 }
 export function predict(weights,e) {
   validInput(e);
-  if (weights.format!=='cross-limb-temporal-v1'||JSON.stringify(weights.muscles)!==JSON.stringify(muscles))
+  const dual = weights.format === 'cross-limb-path-map-v1';
+  if ((!dual && weights.format !== 'cross-limb-temporal-v1') ||
+      (dual && !['separate', 'matched'].includes(weights.kind)) ||
+      JSON.stringify(weights.muscles) !== JSON.stringify(muscles))
     throw Error('Unknown checkpoint format or muscle vocabulary');
   const s=weights.state, d=e.domain, mask=e.muscle_mask;
   const rmsScale=weights.scales.amp[d], xyzScale=weights.scales.xyz[d];
@@ -67,8 +70,16 @@ export function predict(weights,e) {
   const hpath=linear(s,'path_state',h);
   const interval=1/32+e.age_s[18]-e.age_s[19];
   const velocity=pose[19].map((v,j)=>(v-pose[18][j])*(.125/interval));
-  const path_mm=vector(32,i=>add(velocity,linear(s,'path_out',relu(add(hpath,s['path_time.weight'][i]))))
-    .map(v=>v*((i+1)/32)*xyzScale));
+  const path_mm = vector(32, i => {
+    const features = relu(add(hpath, s['path_time.weight'][i]));
+    const byStudy = dual && weights.kind === 'separate';
+    let residual = linear(s, byStudy && d === 1 ? 'path_alt' : 'path_out', features);
+    if (dual && weights.kind === 'matched') {
+      const late = linear(s, 'path_alt', features);
+      residual = residual.map((early, axis) => early + (i / 31) * (late[axis] - early));
+    }
+    return add(velocity, residual).map(v => v * ((i + 1) / 32) * xyzScale);
+  });
   return {rms,path_mm};
 }
 
