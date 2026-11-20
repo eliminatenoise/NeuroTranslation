@@ -70,6 +70,8 @@
     .recordings .links { margin-top: .3rem; gap: 0 .9rem; }
     .primary { font-weight: 650; }
     .support { border-top: 1px solid var(--line); padding-top: 1.15rem; }
+    .projects { margin: .65rem 0 0; padding-left: 1.25rem; }
+    .projects li { max-width: 70ch; margin-top: .55rem; }
     @media (max-width: 50rem) {
       .examples { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
@@ -92,6 +94,7 @@
         <li><a href="#launchers">Launchers</a></li>
         <li><a href="#local">With Python</a></li>
         <li><a href="#papers">The papers</a></li>
+        <li><a href="#projects">Three projects, one question</a></li>
       </ul>
     </nav>
   </header>
@@ -531,6 +534,21 @@
       <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/interfaces/experimental/portable">Source of an interface that has never been run</a></li>
       <li><a href="https://github.com/eliminatenoise/NeuroTranslation">Project source and licences</a></li>
       <li><a href="https://github.com/eliminatenoise/NeuroTranslation/archive/refs/heads/main.zip">Repository ZIP</a></li>
+    </ul>
+  </section>
+
+  <section class="support" id="projects" aria-labelledby="projects-title">
+    <h2 id="projects-title">Three projects, one question</h2>
+    <p>NeuroTranslation is one of three projects that ask the same question: what passes between the brain and the body? The brain sends orders out to the muscles, and the body reports back what it is doing and feeling. Each project comes at that traffic from a different side.</p>
+    <ul class="projects">
+      <li><strong>NeuroTranslation</strong>, whose pages are gathered above, predicts one recording of a movement from another: brain, muscle, force or motion, recorded by scientists who share their data openly. Every prediction is checked against what the body actually did, and so far a hand’s own recent movement has been the forecast to beat. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/README.md">Every study and its result, on GitHub</a></li>
+      <li><strong><a href="https://github.com/eliminatenoise/NeuroSurge">NeuroSurge</a></strong> is a game for learning which part of the brain moves which part of the body. You look out from inside a body without skin. Turn your view to a coloured area of the brain in front of you, and the body part it controls moves; click a muscle and its area lights up. What the game’s brain does is made up by the game’s rules, not read from anyone’s brain. <a class="primary" href="https://eliminatenoise.github.io/NeuroSurge/">Play NeuroSurge in your browser</a></li>
+      <li><strong><a href="https://github.com/eliminatenoise/Interoceptomics">Interoceptomics</a></strong> (Interotomics for short) is a proposed field of science that would measure what the body senses of its own interior, a heartbeat or a breath, and then ask which nerve connections carry it. None of its experiments has been run yet. Start with two of its pages, both in your browser. <a class="primary" href="https://eliminatenoise.github.io/Interoceptomics/stages/">The experiment guide</a> walks through the proposed experiments one step at a time, each beside a 3D sketch you can turn. <a class="primary" href="https://eliminatenoise.github.io/Interoceptomics/viewer/">The atlas viewer</a> is a 3D model of the left half of a human brain, built from the Allen Institute’s published map of its regions, that you can turn, cut and measure: a map, not a measurement.</li>
+    </ul>
+    <p>They fit together like this.</p>
+    <ul class="projects">
+      <li>The game is meant to become the place where NeuroTranslation’s model is used. The plan: type or say an action, or move in front of your camera, and the body on screen does it, driven by NeuroTranslate 0.0, the one model NeuroTranslation is building to learn from many kinds of body signal at once. None of this is in the published game. A first draft is <a href="https://github.com/eliminatenoise/NeuroSurge/pull/2">a proposed change to the game</a>, still under review: commands you type or speak for a set of movements, an arm or knee that follows your camera, and a map that opens NeuroTranslation’s recordings and models inside the game.</li>
+      <li>The experiment guide lays out the steps, in two halves. Human movement (the “Small vision”) holds the movement tasks in people, where NeuroTranslation and the game meet; Animal learning (the “Big vision”) is Interoceptomics’ road map: six proposed stages of experiments in animals, in 22 numbered steps. Several of NeuroTranslation’s examples already sit inside the guide, among them a recorded wrist steering a cursor to a target, with forecasts from three of its models, and a forecast of where a rat on a W-shaped track will be a quarter of a second later.</li>
     </ul>
   </section>
 </main>
