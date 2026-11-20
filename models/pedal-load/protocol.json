@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "scope": "AnkleImage S-BIAD1482. Seated fixed-pedal Task 1. Earlier work on a different task used some of the same volunteers.",
+  "split": "Four volunteers, four files each. Develop on the eight trials for A01 and A02, hold each person out in turn, then fit both. A03 and A04 supplied the eight final assessment trials. Use the angle0 and angle5 filename categories and trials 1 and 2 for each setting. Preselect all participants and methods.",
+  "target": "Signed right recorded load-cell channel at i+100 minus the same channel at i. Keep native recording units, without anatomical, force, torque or causal interpretation. Surface tibialis anterior EMG is a muscle electrical measurement.",
+  "support": "Within each original file start i=200, then advance exactly 100 indices while i+100<n. Require finite timestamps over i-200..i+100, with all adjacent differences 0.001 s within absolute 1e-8 s, finite observed load and EMG over i-200..i, finite target load[i+100]. Require a same-index donor history from the other nominated trial within person and condition, finite donor EMG over i-200..i on a finite contiguous nominal 1 kHz donor clock. Keep the exact same intersected support for every method and count candidates/exclusions. Refuse a missing trial or an empty admitted trial. Scored target intervals share endpoints but no interiors; adjacent input histories overlap. Never read future EMG as a predictor. The other trial's observations are a deliberate offline control.",
+  "tokens": {
+    "shape": [
+      10,
+      8
+    ],
+    "order": [
+      "load_end",
+      "load_step",
+      "load_from_start",
+      "angle5",
+      "emg_mean",
+      "emg_sd",
+      "emg_diff_rms",
+      "emg_sd_times_load_step"
+    ],
+    "rule": "For token j=0..9 take local endpoints a=20*j, b=a+20 within the 201-sample history. Features are load[b], load[b]-load[a], load[b]-load[0], angle5 coded 0/1, arithmetic mean and population SD of all 21 raw EMG samples a..b, RMS of 20 successive EMG differences, and raw product sd*(load[b]-load[a]). No rectification before the mean, calibration or full-trial processing. Wrong EMG replaces the entire 201-sample E history before feature construction and recomputes the product with recipient load. Baseline last change is load[200]-load[100]."
+  },
+  "preprocess": "In each fitting fold weight each person equally and each condition equally within person, then each window equally inside a person/condition. Weighted training-window/bin mean and population SD per continuous column. Values with SD<1e-12 use scale 1. Keep condition as 0/1; no centering. Clip standardized continuous inputs to [-8,8]. Standardize signed target using weighted training population mean/SD with same guard. Undo this on output. No prediction clipping, residual skip or subject-specific calibration. No time index or trial identifiers supplied as inputs.",
+  "baselines": "zero=0; continue=load[200]-load[100]; typical=balanced training median signed change; typical_condition=corresponding condition-specific balanced training median; ridge_load and ridge_condition=weighted ridge fit to the standardized target, intercept unpenalized, penalty .01 on slopes for the mean squared objective, flatten the 10 x 3 standardized load columns row-major, append single angle5 for ridge_condition. Median uses smallest observed value whose cumulative weight reaches 0.5.",
+  "variants": {
+    "load": [
+      0,
+      1,
+      2
+    ],
+    "load_condition": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "emg_condition": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "full": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "wrong": "full fitted coefficients, mismatched raw donor EMG"
+  },
+  "transformer": {
+    "width": 12,
+    "heads": 2,
+    "feedforward": 24,
+    "layers": 1,
+    "tokens": 10,
+    "inputs": 8,
+    "eps": 1e-05,
+    "architecture": "Zero unavailable columns after standardization. Standard linear input projection plus learned position, multi-head scaled dot-product attention across the 10 historical tokens, linear projection and residual with layer normalization, ReLU feedforward and residual with layer normalization. Last token to one signed standardized target. No future token or external language model. All variants have identical shapes and initial weights.",
+    "updates": 96,
+    "optimizer": "Full batch, weighted SmoothL1 beta 1 in standardized target units, AdamW lr .002, weight_decay .01, betas .9,.999, eps 1e-8. Float32, fixed seed 6731, no dropout or early stopping. Exact tested CPU backend is the reproducibility baseline. Consider a faster matched backend only if the eight-update prediction max absolute difference is <=1e-4 standardized units and initialization/data/optimization match; per-kernel controls framework-owned."
+  },
+  "scoring": "MAE per person and condition combining the two trials within each cell. Mean of condition MAEs equally within person and both person MAEs equally overall. Report counts, per-trial scores, paired differences per person/condition. Two development and two reserved people, separately. No population confidence interval or inferential trial/window counts.",
+  "decision": "EMG increment requires in each stage: full MAE at least 5% below the best of zero, continue, typical, typical_condition, ridge_load, ridge_condition, load and load_condition; at least 2% below wrong; full strictly lower than both load_condition and wrong in EACH person; neither condition averaged over people worse than load_condition or wrong. Display every component. Evaluate development and reserve separately. These descriptive margins are engineering thresholds, not clinical or population thresholds. Even a pass is local offline forecasting on this protocol. Explicitly report mixed/negative outcomes. Context increment is descriptive load vs load_condition and ridge_load vs ridge_condition, not evidence of measured motion.",
+  "seal": "The fitted weights, data rules and scoring code were fingerprinted before the separate two-person assessment."
+}

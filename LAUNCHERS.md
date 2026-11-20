@@ -146,3 +146,7 @@ For the separate elbow experiment, [open the viewer](https://eliminatenoise.gith
 ## Follow a muscle bundle in ultrasound
 
 [Open the browser reader](https://eliminatenoise.github.io/NeuroTranslation/muscle-tracking/) or [download its offline folder](docs/muscle-tracking-offline.zip). Extract the folder and open the launcher for your operating system. The [Python model package](models/muscle-tracking-model.zip) includes fitted weights and an invented history you can change. The model launchers use Python 3 and NumPy. [Open the shared movement model](https://eliminatenoise.github.io/NeuroTranslation/shared-muscle-tracking/) · [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-tracking/)
+
+## Forecast a fixed pedal’s next reading
+
+[Open the interactive forecast](https://eliminatenoise.github.io/NeuroTranslation/pedal-load/) or [download the offline reader](docs/pedal-load-offline.zip). Extract the folder and use its Windows, macOS or Linux launcher. For command-line predictions, extract the [Python model](models/pedal-load-model.zip) and run the matching launcher inside. Python 3 and NumPy are required. Its default input is an invented example. [Try the shared movement model](https://eliminatenoise.github.io/NeuroTranslation/shared-pedal-load/) · [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/pedal-load/)

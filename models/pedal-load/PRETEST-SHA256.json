@@ -1,0 +1,27 @@
+{
+  "before_assessment_utc": "2026-11-20T18:58:13.855827+00:00",
+  "scope": "Two development people. After the weights and methods were frozen, the other two people supplied a separate assessment. All four contributed to Task 1.",
+  "unchanged_specialist_files": {
+    "model.json": "cbcda5f1c5a9841bde9012e3d42c96f280a513c92955098e00e2d8d07ec0f449",
+    "fixture.json": "1f7124391239101acb3ae71697e9c55405c51b5f16c352db5bc3e394daffb3d5",
+    "portable.py": "9ad83f634b7d21c063b90b4f7fa0eba85f7bbbbe00c482a7c40336f4d6414a48",
+    "score.py": "2b4a758ba6b251e1f53591746f548ba1a1529122fce80996bec7a02c5e0a7908",
+    "data.py": "763567458a5b3f277ed101d40ca0174993cd1a6148b7403a2d9518f57ff8c254",
+    "test_model.py": "79b0e2095881b9437834876c897c28ff6aa036b7cf5a2da05c29e96ea036a728",
+    "clock-addendum.json": "4bb07122c48cbe8a0d44efabd39c076a558796601dfb22558baee5a5f581eefb"
+  },
+  "original_preassessment_sha256": {
+    "protocol.json": "133d3c6b85560d6b889ac43d8979e5250d75077443a2c110be0cf42128d09946",
+    "fit.py": "bf106f181c97b10a20aa1a58c389dd87ceb32e5125c2ea95e182bcd76a73782e",
+    "assess.py": "2f58058b19d67faf0d84cc93ff2f2d05008f718efeb6fae7150e5c04059e72dc"
+  },
+  "public_adaptations": "The public protocol restates the same setting and split. fit.py checks that version, omits individual fold files and exports aggregate development errors. assess.py verifies the frozen scientific files and computes separate descriptive summaries for the qualified held trials. assess_strict.py retains the complete-roster requirement and cannot score this incomplete assessment. The fitted parameters, numerical inference, data transformation, scoring and artificial test fixture retain their original bytes.",
+  "public_source_documents": {
+    "development-manifest.json": "40625a6378fe6f76d3f26e98fb5a1477963ebe56feb57b634ea42dbee43b92a6",
+    "assessment-manifest.json": "614f22704c907a107c3f94d9a23c6585796433faf88d64accd327b284711a8e5",
+    "extract.py": "bf97cf285d0af68a5b2c155669c48324bd951be256fe2be37707f8e94bc4a831",
+    "extract_assessment.py": "345d0028207b442c01c51f04eb05f10e41ca2e4b1b59efcf9376a90f71847108",
+    "README.md": "8a05d9a7040f96e7d3e5517203eaa24de99df8b914c35f5e339076d0ab1b09b3",
+    "RIGHTS.md": "40937827a21cdce1492c82f42d9f1b1b2e93e25dfd8bdbb3ab2048538d8a0c45"
+  }
+}

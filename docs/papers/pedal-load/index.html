@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A four-person reanalysis of muscle electrical activity and load during seated, fixed-pedal ankle contractions.">
+<title>What can the shin tell us about the next pedal reading?</title>
+<style>:root {
+  color-scheme: light;
+  font: 16px/1.5 "Liberation Sans", Arial, sans-serif;
+  color: #202d31;
+  background: #eaf0ee;
+  --ink: #193e47;
+  --muted: #435b60;
+  --line: #b7c9c8;
+  --tint: #eff5f3;
+}
+* { box-sizing: border-box }
+body { margin: 0 }
+main { max-width: 810px; margin: 1.6rem auto }
+.page { padding: 2.2rem 3.1rem 2.55rem; background: white; margin: .9rem 0 }
+.folio { border-top: 2px solid var(--ink); padding-top: .52rem; display: flex; justify-content: space-between; gap: .7rem; color: var(--ink); font-weight: 700; font-size: .8rem; margin-bottom: 1.45rem }
+.folio span:last-child { white-space: nowrap }
+h1, h2, h3 { letter-spacing: -.024em; line-height: 1.1; color: var(--ink); margin: 0 }
+h1 { font-size: 2.9rem; max-width: 16em }
+h2 { font-size: 2.14rem; margin-bottom: .65rem }
+h3 { font-size: 1.24rem; margin: 1.1rem 0 .25rem }
+p { margin: .58rem 0 }
+figure { margin: 1.05rem 0 }
+figcaption, .small, .byline, nav { color: var(--muted); font-size: .87rem; line-height: 1.42 }
+.byline { margin: .7rem 0 1rem }
+.lead { font-size: 1.22rem; line-height: 1.39 }
+.figtitle { font-weight: bold; color: var(--ink); margin-bottom: .47rem }
+.geom { display: block; width: 100%; max-width: 425px; margin: .65rem auto }
+.chart { margin: .64rem 0 }
+.chartrow { display: grid; grid-template-columns: minmax(0,11rem) 1fr 3.5rem; gap: .7rem; align-items: center; min-height: 1.8rem; font-size: .93rem }
+.chartrow:nth-child(4) { margin-top: .42rem }
+.track { background: #f0f4f3; height: .7rem }
+.bar { height: 100% }
+.swapped { background: #859598 }
+.length { background: #297b83 }
+.matched { background: #193e47 }
+.value { text-align: right; font-variant-numeric: tabular-nums }
+.ticks { display: flex; justify-content: space-between; color: var(--muted); border-top: 1px solid var(--line); font-size: .75rem; padding-top: .11rem }
+.chartrow.scale { min-height: 1rem; color: var(--muted); font-size: .8rem }
+a { color: #125e6b; text-decoration-thickness: 1px; text-underline-offset: .13em }
+a:focus-visible { outline: 2px solid #197078 }
+nav { line-height: 1.8 }
+.scores { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: .94rem; line-height: 1.3; margin: .47rem 0 }
+.scores th, .scores td { text-align: right; padding: .34rem .34rem }
+.scores tbody th { font-weight: 400; text-align: left }
+.scores td, .scores tbody th { border-bottom: 1px solid #d2dedc }
+.scores thead th { font-weight: 700; color: var(--ink); vertical-align: bottom }
+.scores thead tr:first-child th:first-child { text-align: left }
+.scores thead .group { text-align: center; border-bottom: 1px solid var(--line) }
+.scores thead tr:last-child th, .scores thead th[rowspan] { border-bottom: 1px solid #819c9e }
+.scores .full { background: var(--tint) }
+.scores .full th, .scores .full td { font-weight: bold }
+.scores .gap { color: #677b7c }
+@media (max-width:650px) {
+  main { margin: 0 }
+  .page { margin: 0 0 .5rem; padding: 1.25rem 1.05rem 1.5rem }
+  h1 { font-size: 2.3rem }
+  h2 { font-size: 1.88rem }
+  .chartrow { grid-template-columns: minmax(0,8.6rem) 1fr 3rem; gap: .32rem; font-size: .85rem }
+  .folio { font-size: .75rem }
+  .scores { font-size: .83rem }
+  .scores th, .scores td { padding: .3rem .14rem }
+}
+@media (max-width:355px) {
+  h1 { font-size: 2.05rem }
+  .chartrow { grid-template-columns: minmax(0,7.6rem) 1fr 2.85rem }
+  .scores { font-size: .75rem }
+  .scores th, .scores td { padding: .3rem .1rem }
+}
+@page { size: A4; margin: 16mm 18mm }
+@media print {
+  :root { font-size: 11.8pt; line-height: 1.44; background: #fff }
+  body, main { margin: 0; max-width: none }
+  .page { padding: 0; margin: 0; break-after: page }
+  .page:last-child { break-after: auto }
+  .screen { display: none }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact }
+  .folio { margin-bottom: 1.1rem }
+  h1 { font-size: 2.70rem }
+  h2 { font-size: 2rem }
+  h3 { margin-top: .85rem }
+  .scores { font-size: .88rem }
+  .scores th, .scores td { padding: .31rem .29rem }
+  p { orphans: 2; widows: 2 }
+  figure, table { break-inside: avoid }
+  .geom { max-width: 395px }
+}
+:root { --ink: #213d4c; --muted: #455966; --line: #b6c3c7; --tint: #eaf2f2; background:#edf1f1 }
+.window { padding:.7rem 1rem; background:#eff4f4; border-left:3px solid #2d6272 }
+.window svg { display:block; width:100%; max-width:590px; margin:.7rem auto 0 }
+.window h3, figure h3 { margin:.15rem 0 .4rem }
+.bar.repeat { background:#434e55 }
+.bar.matched { background:#2d6272 }
+.bar.swapped { background:#ac4e2d }
+.bar.load { background:#8b9ea5 }
+.chartrow:nth-child(4) {margin-top:0}
+.chartrow:nth-child(2), .chartrow:nth-child(5) { margin-top:.52rem }
+.chartrow { grid-template-columns:minmax(0,14rem) 1fr 3.7rem }
+.chartrow.scale { margin-top:.12rem }
+.scores .full { background:#eaf2f2 }
+@media(max-width:650px) { .chartrow {grid-template-columns:minmax(0,9.2rem) 1fr 3.3rem} }
+@media print { :root {background:white;font-size:11.5pt;line-height:1.44} .folio {margin-bottom:1.05rem} .scores th,.scores td {padding:.23rem .3rem} }
+.count { display:block; font-size:.78em; font-weight:400; color:#455966 }
+.scores thead tr:first-child th:first-child { text-align:left }
+.scores thead th { border-bottom:1px solid #819c9e }
+</style></head><body><main>
+<section class="page" aria-labelledby="title"><header class="folio"><span>NeuroTranslation / Fixed-pedal load</span><span>1 / 6</span></header>
+<h1 id="title">What can the shin tell us about the next pedal reading?</h1>
+<p class="byline">NeuroTranslation research supplement · AnkleImage Task 1 · 21 November 2026</p>
+<p class="lead">Pull upward against a fixed pedal. The pedal stays put, but its load changes. How much can an electrode over the shin tell us about that change once we know what the pedal has just done?</p>
+<p>We tested two forecasting models on recordings of seated ankle contractions. Each predicted how far the load-cell reading would rise or fall over the next 100 positions on the trial’s nominal 1 kHz series. The simplest moving forecast takes the change over the last 100 positions and predicts that it will happen again.</p>
+<figure aria-labelledby="chart-title"><h3 id="chart-title">Error for the reserved participant with all four trials</h3>
+<div class="chart"><div class="chartrow"><span>Repeat recent change</span><div class="track" aria-hidden="true"><div class="bar repeat" style="width:70.43586058%"></div></div><span class="value">0.0563</span></div><div class="chartrow"><span>Specialist · load + setting</span><div class="track" aria-hidden="true"><div class="bar load" style="width:78.21446810%"></div></div><span class="value">0.0626</span></div><div class="chartrow"><span>Matched muscle history</span><div class="track" aria-hidden="true"><div class="bar matched" style="width:68.15193387%"></div></div><span class="value">0.0545</span></div><div class="chartrow"><span>Other trial’s muscle history</span><div class="track" aria-hidden="true"><div class="bar swapped" style="width:78.13248582%"></div></div><span class="value">0.0625</span></div><div class="chartrow"><span>Shared · load + setting</span><div class="track" aria-hidden="true"><div class="bar load" style="width:54.23036623%"></div></div><span class="value">0.0434</span></div><div class="chartrow"><span>Matched muscle history</span><div class="track" aria-hidden="true"><div class="bar matched" style="width:54.67536054%"></div></div><span class="value">0.0437</span></div><div class="chartrow"><span>Other trial’s muscle history</span><div class="track" aria-hidden="true"><div class="bar swapped" style="width:63.10352169%"></div></div><span class="value">0.0505</span></div><div class="chartrow scale"><span>Recorded units</span><div class="ticks"><span>0</span><span>0.04</span><span>0.08</span></div><span></span></div></div>
+<figcaption>Figure 1. Mean absolute forecast error in recorded load-channel units. Shorter bars indicate closer forecasts. All four trials from the same participant enter this figure. Pages 4–5 report the other participant’s two usable sets separately. “Other trial” means the model received a different muscle history from the same person at the same pedal setting.</figcaption></figure>
+<p>For the participant in Figure 1, matching the muscle signal reduced specialist error relative to both the load-and-setting model and the other-trial control. The shared encoder gave its lowest error among those three with load and setting alone. Only this one participant supplied both complete trial pairs. One unusable neutral trial from the second participant leaves the planned two-person comparison unanswered.</p>
+<nav class="screen" aria-label="Download the paper"><a href="pedal-load.pdf" download>Download the PDF</a> <span>·</span> <a href="pedal-load-source.zip" download>Download the paper’s source</a></nav>
+</section>
+<section class="page" aria-labelledby="measurement"><header class="folio"><span>NeuroTranslation / Fixed-pedal load</span><span>2 / 6</span></header>
+<h2 id="measurement">A reading now, a reading later</h2>
+<p>A seated volunteer tried to lift the forefoot against a secured pedal. Surface electrodes measured electrical activity over the tibialis anterior, the muscle along the front of the shin. This is surface electromyography (EMG). The load cell measured the mechanical response at the pedal. The two signals share a row in the recording. No brain signal, nerve recording or ultrasound image enters this forecast.</p>
+<figure class="window"><h3>One forecast window</h3>
+<svg viewBox="0 0 600 110" role="img" aria-labelledby="time-title time-desc"><title id="time-title">History and forecast on the original sample index</title><desc id="time-desc">A line spans minus 200 to plus 100 original sample positions. The inputs end at zero, the forecast cutoff, and the target is the difference in pedal readings between zero and plus 100.</desc>
+<g font-family="Liberation Sans, Arial, sans-serif" fill="#273948"><text x="28" y="24" font-size="16">Observed load and muscle signal</text><text x="400" y="24" font-size="16">Future load change</text>
+<path d="M28 50H386" stroke="#2d6272" stroke-width="8"/><path d="M386 50H565" stroke="#ac4e2d" stroke-width="5" stroke-dasharray="8 5"/>
+<g stroke="#273948" stroke-width="2"><path d="M28 40v22 M207 43v16 M386 38v25 M565 40v22"/></g>
+<g font-size="15"><text x="28" y="84">−200</text><text x="207" y="84" text-anchor="middle">−100</text><text x="386" y="84" text-anchor="middle">0 · cutoff</text><text x="565" y="84" text-anchor="end">+100</text></g></g></svg>
+<figcaption>Figure 2. Positions on the selected 1 kHz series are relative to the cutoff. Two hundred intervals contain 201 observed values when both ends count. The target uses the load reading 100 positions later minus the load reading at the cutoff.</figcaption></figure>
+<h3>What the clocks establish</h3>
+<p>Zhang and colleagues report sampling both channels simultaneously at 1,000 samples per second. That makes the forecast nominally 100 milliseconds. A01’s exports include regular elapsed-time labels. A02’s have no time vector. Counting rows retains their order but cannot establish the true duration of every interval or rule out a dropped sample. All four files from one reserved participant preserve regular time labels. In three files from the other, we verified the authors’ 1 kHz exports against every tenth observation on the stored 10 kHz grid. In these files our 100 positions refer to the authors’ 1 kHz series. The recordings do not establish the physical delay between electrical activity and pedal loading.</p>
+<h3>Who entered each test</h3>
+<p>After reviewing one neutral Task 1 recording for eligibility, we used A01 and A02 to develop the models. Each served once as the person withheld during development. We then fitted the models on both people and froze the weights before assessing the two reserved participants. The plan specified trials 1 and 2 for every person at the archive settings <b>angle0</b> and <b>angle5</b>. These codes describe the apparatus conditions. The second label alone does not establish a signed anatomical angle. The selected load channel is named “right” in the export. The measured limb’s side cannot be inferred from that channel name.</p>
+<p>The same four participant codes occur in an earlier Task 3 ultrasound analysis. Those were different contractions. No time point or image from Task 3 was paired with a Task 1 reading.</p>
+</section>
+<section class="page" aria-labelledby="methods"><header class="folio"><span>NeuroTranslation / Fixed-pedal load</span><span>3 / 6</span></header>
+<h2 id="methods">Three ways to forecast a change</h2>
+<h3>Let the load approach an equilibrium</h3>
+<p>Suppose a pedal reading tends towards a level set by the current contraction. Write <i>L</i> for the present reading and <i>E</i> for that estimated equilibrium. A first-order relaxation predicts a change of <b>(1 − exp(−100/150)) × (E − L)</b>, about 49% of the remaining difference. One fit estimated the equilibrium from pedal setting alone. A second also used two smoothed histories of the muscle signal’s magnitude and their recent changes. Their smoothing constants were 25 and 80 nominal sample intervals. We chose all three constants for the model. None measures a physiological time constant.</p>
+<h3>Reuse a movement model</h3>
+<p>The shared NeuroTranslate 0.0 encoder summarizes an input history using weights learned previously. We kept those weights fixed. Each of four 50-interval bins supplied three descriptions of the pedal trace and three of muscle activity. A fitted linear readout combined those values, recent load change, setting and the encoder’s final 24 numbers to correct the repeat-change forecast. Leaving out the encoder tested what a direct linear correction could do. A randomly initialized encoder tested how much the previously learned weights contributed.</p>
+<h3>Learn from the pedal trials</h3>
+<p>A specialist Transformer learned to compare ten consecutive 20-interval bins. Each bin summarized load level and change, setting, muscle-signal level and variation, and how that variation coincided with a change in load. Two attention heads weighted the ten bins. A linear output from the final bin produced the forecast. Training the 1,525-parameter model took 96 full-batch updates per fit. Input and output scales came from the training people alone.</p>
+<h3>Put the other contraction through the same fit</h3>
+<p>For each family, we kept the fitted model, pedal history, setting and target fixed, then swapped the complete EMG history with one from the person’s other trial at that setting. The specialist took the same cutoff index. The shared model took the corresponding fraction of the other trial, rounding down its cutoff rank. Both recalculated the features. The swap tests whether the model uses this particular pairing. It draws on a second completed trial, so it is an offline control.</p>
+</section>
+<section class="page" aria-labelledby="scores"><header class="folio"><span>NeuroTranslation / Fixed-pedal load</span><span>4 / 6</span></header>
+<h2 id="scores">The specialist’s forecasts</h2>
+<p>Mean absolute error (MAE) measures how far the predicted signed change fell from the observed change, regardless of the direction of the miss. All numbers here and on the next page use recorded load-channel units. Smaller is better.</p>
+<table class="scores"><thead><tr><th scope="col">Forecast</th><th scope="col">Dev.<span class="count">624 windows</span></th><th scope="col">Complete<br>four trials<span class="count">272 windows</span></th><th scope="col">Other person<br>angle5 pair<span class="count">116 windows</span></th><th scope="col">Other person<br>neutral single<span class="count">58 windows</span></th></tr></thead><tbody><tr><th scope="row">Assume zero change</th><td>0.1084</td><td>0.0912</td><td>0.1822</td><td>0.1706</td></tr><tr><th scope="row">Repeat recent change</th><td>0.0615</td><td>0.0563</td><td>0.1793</td><td>0.1472</td></tr><tr><th scope="row">Typical change in training</th><td>0.1084</td><td>0.0912</td><td>0.1823</td><td>0.1706</td></tr><tr><th scope="row">Typical change at setting</th><td>0.1084</td><td>0.0912</td><td>0.1822</td><td>0.1706</td></tr><tr><th scope="row">Linear ridge, load</th><td>0.0849</td><td>0.0612</td><td>0.1239</td><td>0.1106</td></tr><tr><th scope="row">Linear ridge, load + setting</th><td>0.0849</td><td>0.0610</td><td>0.1244</td><td>0.1109</td></tr><tr><th scope="row">Transformer, load</th><td>0.0773</td><td>0.0575</td><td>0.1191</td><td>0.1095</td></tr><tr><th scope="row">Transformer, load + setting</th><td>0.0840</td><td>0.0626</td><td>0.1201</td><td>0.1119</td></tr><tr><th scope="row">Transformer, EMG + setting</th><td>0.1010</td><td>0.0745</td><td>0.1822</td><td>0.1856</td></tr><tr class="full"><th scope="row">Transformer, all inputs</th><td>0.0749</td><td>0.0545</td><td>0.1670</td><td>0.1511</td></tr><tr><th scope="row">Same fit, other trial’s EMG</th><td>0.0804</td><td>0.0625</td><td>0.1736</td><td aria-label="Unavailable">—</td></tr></tbody></table>
+<p class="small">Table 1. Each development participant was held out in turn. The remaining columns describe distinct sets of reserved recordings. The four-trial column covers both settings for one person. The final two columns show the other person’s angle5 pair and single usable neutral trial. Development weighted people and settings equally, then pooled windows within each person and setting. The reserved summaries weighted available settings equally and trials equally within a setting. Both trials in each complete pair had equal window counts. A dash denotes an unavailable comparison.</p>
+<h3>Which records allow a comparison?</h3>
+<p>For the participant with incomplete data, the first neutral trial contains two columns under the right-load name. It lacks both a verified time vector and a single-channel 1 kHz author export. Neither column could supply the specified endpoint. We retained trial 2 as a single descriptive series. Its missing partner rules out the swapped-EMG control. This participant’s three usable series required the source-field check described on page 2 after the fits were frozen.</p>
+<p>In development, repeating recent change gave the lowest error (0.0615). The matched specialist scored 0.0749. Across the four-trial set, the specialist with matched EMG edged ahead of recent change (0.0545 versus 0.0563). On the other person’s angle5 pair, the matched trace helped relative to the swapped one, yet the model using load and setting alone was more accurate (0.1201 versus 0.1670). The load-and-setting fit also had lower error on the remaining neutral trial.</p>
+</section>
+<section class="page" aria-labelledby="shared-scores"><header class="folio"><span>NeuroTranslation / Fixed-pedal load</span><span>5 / 6</span></header>
+<h2 id="shared-scores">What the shared encoder contributes</h2>
+<p>The shared model can use the same pedal and muscle history as a direct linear model. Adding its previously learned representation has to earn its place. The randomly initialized version keeps the same architecture and gives the fitted readout an extra set of untrained features.</p>
+<table class="scores"><thead><tr><th scope="col">Forecast</th><th scope="col">Dev.<span class="count">624 windows</span></th><th scope="col">Complete<br>four trials<span class="count">272 windows</span></th><th scope="col">Other person<br>angle5 pair<span class="count">116 windows</span></th><th scope="col">Other person<br>neutral single<span class="count">58 windows</span></th></tr></thead><tbody><tr><th scope="row">Assume zero change</th><td>0.1084</td><td>0.0912</td><td>0.1822</td><td>0.1706</td></tr><tr><th scope="row">Repeat recent change</th><td>0.0615</td><td>0.0563</td><td>0.1793</td><td>0.1472</td></tr><tr><th scope="row">Typical change at setting</th><td>0.1084</td><td>0.0912</td><td>0.1822</td><td>0.1706</td></tr><tr><th scope="row">Relaxation, setting</th><td>0.4217</td><td>0.3444</td><td>0.6087</td><td>0.5674</td></tr><tr><th scope="row">Relaxation, EMG + setting</th><td>0.1434</td><td>0.1613</td><td>0.5464</td><td>0.5126</td></tr><tr><th scope="row">Direct linear, load + setting</th><td>0.0730</td><td>0.0476</td><td>0.1199</td><td>0.1148</td></tr><tr><th scope="row">Direct linear, all inputs</th><td>0.0647</td><td>0.0477</td><td>0.1403</td><td>0.1378</td></tr><tr><th scope="row">Shared encoder, load</th><td>0.0838</td><td>0.0435</td><td>0.1023</td><td>0.0969</td></tr><tr><th scope="row">Shared encoder, load + setting</th><td>0.0835</td><td>0.0434</td><td>0.1023</td><td>0.0969</td></tr><tr class="full"><th scope="row">Shared encoder, all inputs</th><td>0.0799</td><td>0.0437</td><td>0.1533</td><td>0.1506</td></tr><tr><th scope="row">Same fit, other trial’s EMG</th><td>0.0814</td><td>0.0505</td><td>0.1542</td><td aria-label="Unavailable">—</td></tr><tr><th scope="row">Random encoder, all inputs</th><td>0.0681</td><td>0.0474</td><td>0.1478</td><td>0.1446</td></tr></tbody></table>
+<p class="small">Table 2. The source records and forecast endpoint match Table 1. The shared analysis gives both trials equal weight within a person and setting and then weights windows equally within a trial. The final column contains one usable neutral trial. Its other-trial control is unavailable. There is no score combining the three descriptive assessment columns.</p>
+<p>Matching the muscle trace beat swapping it in each available comparison, but the shared model using load and setting alone had lower error on all three sets of reserved recordings. On the other person’s angle5 pair, the direct linear and random-encoder fits with all inputs both beat the pretrained all-input fit. Adding EMG to the relaxation model lowered its error in every column. Even with EMG, the relaxation forecast was further from the observed load change than repeating the recent change in every column.</p>
+</section>
+<section class="page" aria-labelledby="what"><header class="folio"><span>NeuroTranslation / Fixed-pedal load</span><span>6 / 6</span></header>
+<h2 id="what">What would the electrode have to add?</h2>
+<p>The specialist had to reduce mean error by at least 5% against the best prespecified forecast without EMG and 2% against the swapped trace. It also had to beat both its load-and-setting fit and the swapped trace for each person, with neither setting worse on average. The development specialist met the 2% swapped-trace and setting requirements. It missed the 5% comparison with repeating recent change and failed to improve on both controls in each individual.</p>
+<p>The shared model had to reduce mean error by at least 5% against each of its load-and-setting and swapped-EMG controls, with gains over both in each person. One of the two development participants improved over both controls. Neither family met its development criterion. The unusable neutral trial prevents both prespecified held assessments. No pooled two-person result can answer either test.</p>
+<p>There were 624 development windows. Of the 446 reserved windows, 272 came from the four-trial set. The other person supplied 116 at angle5 and 58 in the single neutral trial. The first two sets supplied all 388 windows with a matched other-trial control. Cutoffs advanced 100 positions on the selected series at a time. Two adjacent histories therefore shared 101 observations, and neighboring forecast intervals shared a boundary reading. Two people entered development and only one of the two reserved people contributed both complete trial pairs. Repeating windows gives a more detailed view of each individual. It cannot establish a population benefit or estimate its uncertainty reliably.</p>
+<h3>When could the pedal give a torque?</h3>
+<p>A calibrated force applied perpendicular to the apparatus arm would give a moment of <b>F × 0.1 m</b>. For example, a hypothetical 10 N perpendicular force would give 1 N·m. The authors describe calibration with known weights, but the selected exports and accompanying material do not supply a verified signed force gain and zero for this analysis. That example is arithmetic. The observed errors stay in native load-channel units. Even a calibrated net ankle moment would combine contributions from structures around the joint. Neither this forecast nor its timing identifies individual muscle force, neural commands or a therapeutic effect.</p>
+<h3>Sources and working models</h3>
+<p class="small">Qiang Zhang, Noor Hakam, Oluwasegun Akinniyi, Ashwin Iyer, Xuefeng Bao and Nitin Sharma (2024). <i>AnkleImage – An ultrafast ultrasound image dataset to understand the ankle joint muscle contractility.</i> Scientific Data 11, 1439. Article under CC BY-NC-ND 4.0. The diagrams and prose here are original. <a href="https://doi.org/10.1038/s41597-024-04285-x">Article and methods</a>.</p>
+<p class="small">The authors released the data under CC BY 4.0. We selected two Task 1 channels and calculated forecast errors. <a href="https://doi.org/10.6019/S-BIAD1482">BioImage Archive S-BIAD1482</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Data licence</a> · <a href="https://creativecommons.org/publicdomain/zero/1.0/">Project text, figures and code (CC0)</a>.</p>
+<nav aria-label="Working models"><a href="https://eliminatenoise.github.io/NeuroTranslation/pedal-load/">Pedal specialist</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/shared-pedal-load/">Shared model</a> · <a href="https://eliminatenoise.github.io/Interoceptomics/pedal-load/">Interoceptomics pedal atlas</a></nav>
+</section></main></body></html>

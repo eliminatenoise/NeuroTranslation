@@ -1300,5 +1300,24 @@
     "paper_source": "docs/papers/muscle-tracking/muscle-tracking-source.zip",
     "atlas": "https://eliminatenoise.github.io/Interoceptomics/muscle-tracking/",
     "domain": "Signed change in the image-tracked length of a tibialis anterior fascicle over ten original tracker steps during seated ankle dorsiflexion. The native tracking grids vary, and the elapsed time for ten steps is unverified. Both length and pennation are estimates from a two-dimensional image."
+  },
+  "pedal_load": {
+    "version": "2026-11-21 experimental preview",
+    "source_doi": "10.6019/S-BIAD1482",
+    "method_doi": "10.1038/s41597-024-04285-x",
+    "source_license": "CC BY 4.0",
+    "specialist": "models/pedal-load/README.md",
+    "specialist_zip": "models/pedal-load-model.zip",
+    "viewer": "docs/pedal-load/index.html",
+    "offline_viewer": "docs/pedal-load-offline.zip",
+    "shared_model": "models/neurotranslate-0.0/pedal_load/model.json",
+    "shared_viewer": "docs/shared-pedal-load/index.html",
+    "shared_assessment": "models/neurotranslate-0.0/pedal_load/assess-summary.json",
+    "shared_zip": "models/neurotranslate-0.0.zip",
+    "paper": "docs/papers/pedal-load/index.html",
+    "paper_pdf": "docs/papers/pedal-load/pedal-load.pdf",
+    "paper_source": "docs/papers/pedal-load/pedal-load-source.zip",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/pedal-load/",
+    "domain": "Seated isometric dorsiflexion with a fixed pedal. Signed change in the right load-cell channel over 100 acquisition rows, nominally 100 ms. Readings retain native conditioner units. The filename categories encode the instructed pedal setting. Individual joint angles and force calibration are unverified."
   }
 }

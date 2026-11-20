@@ -1,0 +1,56 @@
+{
+  "n_people": 2,
+  "n_windows": 624,
+  "balanced_mae": {
+    "zero": 0.10836442032726928,
+    "continue": 0.06153697294112582,
+    "typical": 0.10836890820640531,
+    "typical_condition": 0.10839897241714819,
+    "ridge_load": 0.08486509692553725,
+    "ridge_condition": 0.08487688766480675,
+    "load": 0.07727792515813468,
+    "load_condition": 0.08400540040354253,
+    "emg_condition": 0.1009998929784853,
+    "full": 0.07494516032471857,
+    "wrong": 0.08043240189890005
+  },
+  "per_condition_mae": {
+    "0": {
+      "zero": 0.10645214788514565,
+      "continue": 0.05948514060916584,
+      "typical": 0.10646561152255374,
+      "typical_condition": 0.10648580697866586,
+      "ridge_load": 0.09783615921417764,
+      "ridge_condition": 0.09794471008292537,
+      "load": 0.08278011387356604,
+      "load_condition": 0.09660704581944685,
+      "emg_condition": 0.11172265922262775,
+      "full": 0.08712523951578258,
+      "wrong": 0.09149969004577577
+    },
+    "5": {
+      "zero": 0.11027669276939292,
+      "continue": 0.0635888052730858,
+      "typical": 0.11027220489025688,
+      "typical_condition": 0.11031213785563053,
+      "ridge_load": 0.07189403463689686,
+      "ridge_condition": 0.07180906524668812,
+      "load": 0.07177573644270333,
+      "load_condition": 0.07140375498763821,
+      "emg_condition": 0.09027712673434288,
+      "full": 0.06276508113365456,
+      "wrong": 0.06936511375202434
+    }
+  },
+  "emg_increment": {
+    "best_non_emg": "continue",
+    "components": {
+      "practical_5pct_vs_best": false,
+      "practical_2pct_vs_wrong": true,
+      "improves_both_in_each_person": false,
+      "both_conditions_no_worse": true
+    },
+    "passes": false
+  },
+  "unit": "recorded right load channel change"
+}

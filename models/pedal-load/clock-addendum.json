@@ -1,0 +1,6 @@
+{
+  "parent_sha256": "133d3c6b85560d6b889ac43d8979e5250d75077443a2c110be0cf42128d09946",
+  "timing": "Before fitter opened any development signals or fit any coefficients. The independent extractor reported that A02 files omit time vectors. The original Task 1 acquisition describes simultaneous 1 kHz sampling and its software constructs elapsed time from sample rows.",
+  "rule": "Use the same grid checks with verified stored nominal elapsed vectors when present; otherwise a documented, provenance-labelled row/1000 nominal elapsed vector. A contiguous constructed grid confirms row support and catches extraction/truncation errors but cannot establish absence of dropped digitizer samples or verify actual physical elapsed time. All predictions concern a 100-row nominal 100 ms change. Actual physical timing is unresolved. Record the clock origin separately for every source; no missing case is silently marked measured. No window/algorithm/selection/metric or participant substitutions.",
+  "setting": "Angle0 and angle5 refer to source category codes. Describe direction only if independently demonstrated from the exact source."
+}

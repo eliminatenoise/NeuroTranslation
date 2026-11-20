@@ -1,0 +1,216 @@
+{
+  "target": "Signed change 100 samples later in the recorded right load-cell channel (nominal 100 ms).",
+  "units": "Native recording units, uncalibrated for force and torque.",
+  "attribution": "Zhang et al., AnkleImage Task 1, CC BY 4.0, DOI 10.6019/S-BIAD1482.",
+  "protocol_sha256": "133d3c6b85560d6b889ac43d8979e5250d75077443a2c110be0cf42128d09946",
+  "clock_addendum_sha256": "4bb07122c48cbe8a0d44efabd39c076a558796601dfb22558baee5a5f581eefb",
+  "model_sha256": "cbcda5f1c5a9841bde9012e3d42c96f280a513c92955098e00e2d8d07ec0f449",
+  "development_seal_sha256": "f57242a53be744dee1feac5388a89ccf42bdd6db32b7890bf05dbb3de7eb6d8b",
+  "assessment_result_sha256": "a976021c73db339421271f671507338ebaf1aa3c9e5a00b290dbb4b5f60883c3",
+  "assessment": {
+    "planned_two_person_result": null,
+    "planned_people": 2,
+    "qualified_trials": 7,
+    "qualified_windows": 446,
+    "wrong_comparable_windows": 388,
+    "groups": {
+      "complete": {
+        "people": 1,
+        "trials": 4,
+        "windows": 272,
+        "windows_by_setting": {
+          "angle0": 136,
+          "angle5": 136
+        },
+        "has_wrong_trial": true,
+        "mae": {
+          "full": 0.05452154709869746,
+          "load_condition": 0.06257157448206017,
+          "load": 0.05745725610718314,
+          "emg_condition": 0.07454774098373183,
+          "wrong": 0.06250598865828394,
+          "ridge_load": 0.061211817551839846,
+          "ridge_condition": 0.06104117187512678,
+          "zero": 0.09122063131893382,
+          "continue": 0.056348688462201285,
+          "typical": 0.09123409495634191,
+          "typical_condition": 0.09123409495634191
+        },
+        "mae_by_setting": {
+          "angle0": {
+            "zero": 0.08126427145565257,
+            "continue": 0.048554364372702205,
+            "typical": 0.08129119873046875,
+            "typical_condition": 0.08129119873046875,
+            "ridge_load": 0.06832857649244953,
+            "ridge_condition": 0.06780799697786166,
+            "load": 0.05451033846408619,
+            "load_condition": 0.059581218798416186,
+            "emg_condition": 0.07285947226149102,
+            "full": 0.053422598411696554,
+            "wrong": 0.05512697307266051
+          },
+          "angle5": {
+            "zero": 0.10117699118221507,
+            "continue": 0.06414301255170037,
+            "typical": 0.10117699118221507,
+            "typical_condition": 0.10117699118221507,
+            "ridge_load": 0.054095058611230165,
+            "ridge_condition": 0.054274346772391915,
+            "load": 0.06040417375028008,
+            "load_condition": 0.06556193016570416,
+            "emg_condition": 0.07623600970597265,
+            "full": 0.05562049578569837,
+            "wrong": 0.06988500424390737
+          }
+        }
+      },
+      "other_angle5": {
+        "people": 1,
+        "trials": 2,
+        "windows": 116,
+        "windows_by_setting": {
+          "angle5": 116
+        },
+        "has_wrong_trial": true,
+        "mae": {
+          "full": 0.16696230548222152,
+          "load_condition": 0.12012512729218831,
+          "load": 0.1191464296928087,
+          "emg_condition": 0.1822390463045829,
+          "wrong": 0.1736010508569352,
+          "ridge_load": 0.12394886206157701,
+          "ridge_condition": 0.12435143334064981,
+          "zero": 0.18224255792025862,
+          "continue": 0.17926709405307112,
+          "typical": 0.18230569773706898,
+          "typical_condition": 0.18224255792025862
+        },
+        "mae_by_setting": {
+          "angle5": {
+            "zero": 0.18224255792025862,
+            "continue": 0.17926709405307112,
+            "typical": 0.18230569773706898,
+            "typical_condition": 0.18224255792025862,
+            "ridge_load": 0.12394886206157701,
+            "ridge_condition": 0.12435143334064981,
+            "load": 0.1191464296928087,
+            "load_condition": 0.12012512729218831,
+            "emg_condition": 0.1822390463045829,
+            "full": 0.16696230548222152,
+            "wrong": 0.1736010508569352
+          }
+        }
+      },
+      "other_angle0": {
+        "people": 1,
+        "trials": 1,
+        "windows": 58,
+        "windows_by_setting": {
+          "angle0": 58
+        },
+        "has_wrong_trial": false,
+        "mae": {
+          "full": 0.15105642825232427,
+          "load_condition": 0.11189433058322587,
+          "load": 0.10952972547153966,
+          "emg_condition": 0.18564922356390107,
+          "wrong": null,
+          "ridge_load": 0.11063604059706017,
+          "ridge_condition": 0.11088670850836627,
+          "zero": 0.17055643015894398,
+          "continue": 0.14721048289331898,
+          "typical": 0.17059852337015086,
+          "typical_condition": 0.17059852337015086
+        },
+        "mae_by_setting": {
+          "angle0": {
+            "zero": 0.17055643015894398,
+            "continue": 0.14721048289331898,
+            "typical": 0.17059852337015086,
+            "typical_condition": 0.17059852337015086,
+            "ridge_load": 0.11063604059706017,
+            "ridge_condition": 0.11088670850836627,
+            "load": 0.10952972547153966,
+            "load_condition": 0.11189433058322587,
+            "emg_condition": 0.18564922356390107,
+            "full": 0.15105642825232427
+          }
+        }
+      }
+    }
+  },
+  "development": {
+    "people": 2,
+    "trials": 8,
+    "windows": 624,
+    "admission": {
+      "candidates": 624,
+      "admitted": 624,
+      "clock": 0,
+      "donor": 0,
+      "signal_or_target": 0
+    },
+    "balanced_mae": {
+      "zero": 0.10836442032726928,
+      "continue": 0.06153697294112582,
+      "typical": 0.10836890820640531,
+      "typical_condition": 0.10839897241714819,
+      "ridge_load": 0.08486509692553725,
+      "ridge_condition": 0.08487688766480675,
+      "load": 0.07727792515813468,
+      "load_condition": 0.08400540040354253,
+      "emg_condition": 0.1009998929784853,
+      "full": 0.07494516032471857,
+      "wrong": 0.08043240189890005
+    },
+    "per_condition_mae": {
+      "0": {
+        "zero": 0.10645214788514565,
+        "continue": 0.05948514060916584,
+        "typical": 0.10646561152255374,
+        "typical_condition": 0.10648580697866586,
+        "ridge_load": 0.09783615921417764,
+        "ridge_condition": 0.09794471008292537,
+        "load": 0.08278011387356604,
+        "load_condition": 0.09660704581944685,
+        "emg_condition": 0.11172265922262775,
+        "full": 0.08712523951578258,
+        "wrong": 0.09149969004577577
+      },
+      "5": {
+        "zero": 0.11027669276939292,
+        "continue": 0.0635888052730858,
+        "typical": 0.11027220489025688,
+        "typical_condition": 0.11031213785563053,
+        "ridge_load": 0.07189403463689686,
+        "ridge_condition": 0.07180906524668812,
+        "load": 0.07177573644270333,
+        "load_condition": 0.07140375498763821,
+        "emg_condition": 0.09027712673434288,
+        "full": 0.06276508113365456,
+        "wrong": 0.06936511375202434
+      }
+    },
+    "gain_over_full_per_person": {
+      "load_condition": [
+        -0.011479668303954832,
+        0.02960014846160275
+      ],
+      "wrong": [
+        0.0040561526535685954,
+        0.0069183304947943725
+      ]
+    },
+    "emg_increment": {
+      "best_non_emg": "continue",
+      "components": {
+        "practical_5pct_vs_best": false,
+        "practical_2pct_vs_wrong": true,
+        "improves_both_in_each_person": false,
+        "both_conditions_no_worse": true
+      },
+      "passes": false
+    }
+  }
+}
