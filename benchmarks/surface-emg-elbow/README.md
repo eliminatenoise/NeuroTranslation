@@ -1,32 +1,41 @@
-# Can surface EMG track an elbow angle across two people?
+[The studies](../README.md) › Study 5 · Hand to mouth: one person's muscle signal, another's elbow
 
-Bring your hand to your mouth five times. The elbow bends each time. Electrodes on the skin record the muscles’ electrical activity, while cameras follow markers on the arm. Could a model fitted on one person use the muscle recording to follow the other person’s elbow?
+# One person's muscle signal could not follow another person's elbow
 
-The fixed ridge model missed by **58.24° mean absolute error** on the held-out development recording. A single angle, the training-set mean, missed by **25.10°**. An average trajectory keyed to the recorded movement onset missed by **26.37°** and gave the lowest root-mean-square error. The ridge lost to both on every development repetition.
+Two people each brought a hand to the mouth five times while electrodes on the skin recorded the arm's muscles and cameras followed markers on the arm. A straight-line fit on the first person's EMG was asked to follow the second person's elbow angle 40 ms ahead. It missed by **62.36°**. The first person's average elbow path, started at the moment the second person's movement started, missed by **30.77°**. The EMG fit lost in all five repetitions.
 
-| Recording | Scored frames | Surface EMG ridge MAE / RMSE | Training mean MAE / RMSE | Onset template MAE / RMSE |
+Those two scores are the measure that punishes large misses (root mean squared error). On the plain average miss (mean absolute error) the result is the same: 58.24° for the EMG fit, 26.37° for the timed average path and 25.10° for a single fixed angle, the first person's average. EMG is electrical activity of muscle, picked up on the skin: a recording of muscle, not of nerve. A *straight-line fit* is a weighted sum of its inputs, here a ridge regression.
+
+| Recording | Frames scored | EMG fit: average miss / large misses | One fixed angle: average miss / large misses | Average path from the start of movement: average miss / large misses |
 | --- | ---: | ---: | ---: | ---: |
-| HS01. Left dominant arm, in sample | 2,591 | 21.41° / 26.24° | 34.72° / 36.82° | 4.51° / 7.96° |
-| HS02. Right dominant arm, held-out development | 1,980 | 58.24° / 62.36° | 25.10° / 34.95° | 26.37° / 30.77° |
+| HS01, left dominant arm: the person the fit was made on | 2,591 | 21.41° / 26.24° | 34.72° / 36.82° | 4.51° / 7.96° |
+| HS02, right dominant arm: the test person | 1,980 | 58.24° / 62.36° | 25.10° / 34.95° | 26.37° / 30.77° |
 
-Participant and arm side changed together, so this comparison cannot explain the error by either one. The two baselines also answer different questions. The training mean uses no information about the development recording. The template is given its movement onset and uses the elapsed time to look up an angle learned from HS01. There was no duration matching or trajectory adjustment on HS02.
-
+The person and the arm changed together, left arm to fit and right arm to test, so the study cannot say which of the two broke the fit. The two simple forecasts answer different questions. The fixed angle uses nothing from the test recording. The average path is told when the test movement starts and uses the time since then to look up an angle learned from HS01; it is not stretched or adjusted to fit HS02.
 
 ![Pooled elbow-angle root mean squared error in degrees. Training and development respectively: surface EMG ridge 26.2 and 62.4, training mean 36.8 and 35.0, onset trajectory 8.0 and 30.8.](elbow-angle-error.png)
 
-## What went into each prediction
+## What went into each forecast
 
-Both files come from Lucchetti and colleagues’ upper-limb dataset. We used all five marked hand-to-mouth movements in each file. The predictors are twelve channels of raw surface electromyography (EMG) in millivolts. The reference is the authors’ elbow flexion angle, stored as `ElbowFlx` in degrees with the source sign and joint coordinate system. To obtain this angle, the authors first processed the camera marker trajectories with a zero-phase 10 Hz low-pass filter and spline filling of short missing stretches. They then estimated the joint angle from the resulting coordinates. [Dataset paper and methods](https://doi.org/10.1038/s41597-025-06174-3)
+Both files come from the upper-limb dataset of Lucchetti and colleagues. All five marked hand-to-mouth movements in each file were used. The inputs are twelve channels of raw surface EMG in millivolts. The target is the authors' elbow flexion angle, stored as `ElbowFlx` in degrees with the source's sign and joint axes. The authors first smoothed the camera marker paths with a 10 Hz filter run in both directions and filled short gaps with splines, then worked out the joint angle from the result. [Dataset paper and methods](https://doi.org/10.1038/s41597-025-06174-3)
 
-For each angle frame at time *t*, compute the root-mean-square voltage per muscle channel over the inclusive interval from *t* − 90 ms to *t* − 40 ms. This turns a short stretch of alternating voltages into one amplitude per channel. The model learns how to weight those amplitudes using ridge regression with a fixed penalty of 0.01 on mean squared error. The scaling, coefficients and intercept all come from HS01. The onset template averages the eligible HS01 angles at each elapsed frame, interpolates internal gaps and holds the nearest endpoint outside its observed range. No HS02 row needed that endpoint rule.
+For each angle frame at time *t*, the root mean square voltage of each muscle channel is taken over *t* − 90 ms to *t* − 40 ms inclusive: a short stretch of alternating voltage turned into one amplitude per channel. The fit learns how to weight those amplitudes, with a fixed penalty of 0.01 on mean squared error that keeps the weights small. The scaling, weights and intercept all come from HS01. The average path averages the usable HS01 angles at each frame since the start of movement, fills gaps inside its range by interpolation and holds the nearest end value outside it; no HS02 frame needed that end rule.
 
-The paper describes synchronized acquisition at 1,000 Hz for EMG and 125 Hz for the optical system. The analysis assumes equal origins within each stored task and maps each angle frame to the corresponding nominal EMG position at the 8:1 ratio. The HS01 and HS02 task array lengths differ from an exact 8:1 ratio by +28 and −69 EMG samples, respectively. All selected event bounds fit in both arrays. The nominal 40 ms lead describes the stored index mapping. A physical offset, drift, recording delay or time when the processed angle would be available online was not measured here.
+The paper describes recording that was synchronised at 1,000 Hz for EMG and 125 Hz for the cameras. The analysis assumes that each stored task starts both clocks together and maps each angle frame to its EMG sample at the 8:1 ratio. The HS01 and HS02 arrays differ from an exact 8:1 ratio by +28 and −69 EMG samples. All the selected movements fit inside both arrays. So the 40 ms lead is a mapping between stored samples: the physical offset, drift and recording delay, and when the processed angle would be available live, were not measured.
 
-The archive’s optically derived movement events determine which frames enter the score. Ridge receives only EMG amplitudes for those frames. Of 2,651 candidate HS01 frames and 2,040 HS02 frames, 60 in each file lacked sufficient in-movement history. There were zero missing target values in the selected movements. The pooled scores above weight all scored frames equally. [RESULT.json](RESULT.json) includes counts, errors by repetition, and averages over repetitions. Five repetitions from one development participant cannot establish population performance. HS03 is reserved and its recording was never opened.
+The archive's camera-based movement events decide which frames are scored, and the fit receives only EMG amplitudes for those frames. Of 2,651 HS01 frames and 2,040 HS02 frames, 60 in each file lacked enough history within the movement. No target values were missing in the selected movements. The scores above weight every frame equally. [RESULT.json](RESULT.json) also gives the counts, the errors repetition by repetition and their averages.
 
-## Run the comparison
+## What it does not show
 
-Download the two original version-1 `.mat` files from Figshare and keep their filenames. They are distributed by the authors under CC BY 4.0. This companion uses them without modification and ships only code and aggregate results. [HS01](https://doi.org/10.6084/m9.figshare.28596026.v1) · [HS02](https://doi.org/10.6084/m9.figshare.28596038.v1) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+Five repetitions from one test person cannot speak for anyone else. A third person, HS03, was set aside and that recording was never opened.
+
+## The plan
+
+The plan, fixed before scoring, is [DESIGN.json](DESIGN.json); the recording IDs, who was used for what and the checksums are in [ASSETS.json](ASSETS.json). It tests no pass threshold: this two-person trial was a first look. The runner's output uses its own labels, **train reference** and **development**, for the fitting and test recordings, and reports CPU affinity on systems that expose it. The original run and the released runner do the same arithmetic.
+
+## Run it yourself
+
+Download the two original version-1 `.mat` files from Figshare and keep their file names. The authors share them under CC BY 4.0. This folder uses them unchanged and publishes only code and summary results. [HS01](https://doi.org/10.6084/m9.figshare.28596026.v1) · [HS02](https://doi.org/10.6084/m9.figshare.28596038.v1) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 From this folder, put `HS01.mat` and `HS02.mat` in a folder called `data`. Use Python 3.14, as in the recorded Linux run.
 
@@ -48,8 +57,8 @@ $env:OMP_NUM_THREADS = "1"
 .venv\Scripts\python.exe run.py --hs01 data/HS01.mat --hs02 data/HS02.mat --output reproduced.json
 ```
 
-The runner checks each file hash before reading the MATLAB structure. It writes JSON with the metrics and runtime details. Choose a new output filename to run it again. `python -m unittest -v test_baseline` in the environment runs the synthetic checks without the data files. Native execution was verified on Linux. The Windows and macOS commands use the same program and have not been run on those systems.
+The runner checks each file's hash before reading it and writes the scores and run details as JSON. Choose a new output file name for each run. `python -m unittest -v test_baseline` runs the checks on invented data, without the recordings. The run was checked on Linux; the Windows and macOS commands use the same program and have not been run on those systems.
 
-The fixed study plan is in [DESIGN.json](DESIGN.json) and the data IDs, role assignments and checksums are in [ASSETS.json](ASSETS.json). The released runner uses the terms **train reference** and **development** in its output and reports CPU affinity on systems that expose it. The original run and the released runner use the same numerical implementation.
+To redraw the figure from the summary results, install Matplotlib and run `python plot_baseline.py RESULT.json elbow-angle-error.png`.
 
-To redraw the figure from the supplied aggregate results, install Matplotlib and run `python plot_baseline.py RESULT.json elbow-angle-error.png`.
+Every author of the dataset and of the two records, with the credit owed: [docs/RIGHTS.md](../../docs/RIGHTS.md).
