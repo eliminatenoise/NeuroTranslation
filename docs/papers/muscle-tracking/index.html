@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Two forecasts of how a bundle of muscle fibres changes length during seated ankle lifts. Development and new-person results from AnkleImage ultrasound tracking.">
+<title>Does a muscle bundle’s angle help predict its next change in length?</title><style>:root {
+  color-scheme: light;
+  font: 16px/1.5 "Liberation Sans", Arial, sans-serif;
+  color: #202d31;
+  background: #eaf0ee;
+  --ink: #193e47;
+  --muted: #435b60;
+  --line: #b7c9c8;
+  --tint: #eff5f3;
+}
+* { box-sizing: border-box }
+body { margin: 0 }
+main { max-width: 810px; margin: 1.6rem auto }
+.page { padding: 2.2rem 3.1rem 2.55rem; background: white; margin: .9rem 0 }
+.folio { border-top: 2px solid var(--ink); padding-top: .52rem; display: flex; justify-content: space-between; gap: .7rem; color: var(--ink); font-weight: 700; font-size: .8rem; margin-bottom: 1.45rem }
+.folio span:last-child { white-space: nowrap }
+h1, h2, h3 { letter-spacing: -.024em; line-height: 1.1; color: var(--ink); margin: 0 }
+h1 { font-size: 2.9rem; max-width: 16em }
+h2 { font-size: 2.14rem; margin-bottom: .65rem }
+h3 { font-size: 1.24rem; margin: 1.1rem 0 .25rem }
+p { margin: .58rem 0 }
+figure { margin: 1.05rem 0 }
+figcaption, .small, .byline, nav { color: var(--muted); font-size: .87rem; line-height: 1.42 }
+.byline { margin: .7rem 0 1rem }
+.lead { font-size: 1.22rem; line-height: 1.39 }
+.figtitle { font-weight: bold; color: var(--ink); margin-bottom: .47rem }
+.geom { display: block; width: 100%; max-width: 425px; margin: .65rem auto }
+.chart { margin: .64rem 0 }
+.chartrow { display: grid; grid-template-columns: minmax(0,11rem) 1fr 3.5rem; gap: .7rem; align-items: center; min-height: 1.8rem; font-size: .93rem }
+.chartrow:nth-child(4) { margin-top: .42rem }
+.track { background: #f0f4f3; height: .7rem }
+.bar { height: 100% }
+.swapped { background: #859598 }
+.length { background: #297b83 }
+.matched { background: #193e47 }
+.value { text-align: right; font-variant-numeric: tabular-nums }
+.ticks { display: flex; justify-content: space-between; color: var(--muted); border-top: 1px solid var(--line); font-size: .75rem; padding-top: .11rem }
+.chartrow.scale { min-height: 1rem; color: var(--muted); font-size: .8rem }
+a { color: #125e6b; text-decoration-thickness: 1px; text-underline-offset: .13em }
+a:focus-visible { outline: 2px solid #197078 }
+nav { line-height: 1.8 }
+.scores { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: .94rem; line-height: 1.3; margin: .47rem 0 }
+.scores th, .scores td { text-align: right; padding: .34rem .34rem }
+.scores tbody th { font-weight: 400; text-align: left }
+.scores td, .scores tbody th { border-bottom: 1px solid #d2dedc }
+.scores thead th { font-weight: 700; color: var(--ink); vertical-align: bottom }
+.scores thead tr:first-child th:first-child { text-align: left }
+.scores thead .group { text-align: center; border-bottom: 1px solid var(--line) }
+.scores thead tr:last-child th, .scores thead th[rowspan] { border-bottom: 1px solid #819c9e }
+.scores .full { background: var(--tint) }
+.scores .full th, .scores .full td { font-weight: bold }
+.scores .gap { color: #677b7c }
+@media (max-width:650px) {
+  main { margin: 0 }
+  .page { margin: 0 0 .5rem; padding: 1.25rem 1.05rem 1.5rem }
+  h1 { font-size: 2.3rem }
+  h2 { font-size: 1.88rem }
+  .chartrow { grid-template-columns: minmax(0,8.6rem) 1fr 3rem; gap: .32rem; font-size: .85rem }
+  .folio { font-size: .75rem }
+  .scores { font-size: .83rem }
+  .scores th, .scores td { padding: .3rem .14rem }
+}
+@media (max-width:355px) {
+  h1 { font-size: 2.05rem }
+  .chartrow { grid-template-columns: minmax(0,7.6rem) 1fr 2.85rem }
+  .scores { font-size: .75rem }
+  .scores th, .scores td { padding: .3rem .1rem }
+}
+@page { size: A4; margin: 16mm 18mm }
+@media print {
+  :root { font-size: 11.8pt; line-height: 1.44; background: #fff }
+  body, main { margin: 0; max-width: none }
+  .page { padding: 0; margin: 0; break-after: page }
+  .page:last-child { break-after: auto }
+  .screen { display: none }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact }
+  .folio { margin-bottom: 1.1rem }
+  h1 { font-size: 2.70rem }
+  h2 { font-size: 2rem }
+  h3 { margin-top: .85rem }
+  .scores { font-size: .88rem }
+  .scores th, .scores td { padding: .31rem .29rem }
+  p { orphans: 2; widows: 2 }
+  figure, table { break-inside: avoid }
+  .geom { max-width: 395px }
+}
+</style></head>
+<body><main>
+<section class="page" aria-labelledby="title"><header class="folio"><span>NeuroTranslation / Muscle tracking</span><span>1 / 5</span></header>
+<h1 id="title">Does a muscle bundle’s angle help predict its next change in length?</h1>
+<p class="byline">NeuroTranslation · Experimental research supplement · 21 November 2026</p>
+<p class="lead">Lift the front of your foot. A muscle beside your shinbone pulls on a tendon to help raise it. An ultrasound probe can watch a bundle of fibres in that muscle change length and tilt. If we already know how long the bundle has been, what does its tilt tell us about what comes next?</p>
+<p>We trained two forecasting models on four volunteers from Zhang and colleagues’ AnkleImage study. Each forecast used the recent history of a bundle in an ultrasound image and predicted its change in length ten tracking steps later. We compared forecasts with the matching angle, with length alone and with the angle from a different trial by the same person. On four new people, both models made a smaller average error with the matching angle than with either alternative. Neither met its predetermined test for an angle benefit. A simple linear forecast using recent lengths came closer than the angle-aware transformer in each family.</p>
+<figure><p class="figtitle">Figure 1. How far did the forecasts miss on new people?</p><div class="chart"><div class="chartrow"><span>Specialist · length</span><div class="track" aria-hidden="true"><div class="bar length" style="width:78.8243842%"></div></div><span class="value">0.236</span></div><div class="chartrow"><span>With matched angle</span><div class="track" aria-hidden="true"><div class="bar matched" style="width:77.6625011%"></div></div><span class="value">0.233</span></div><div class="chartrow"><span>With swapped angle</span><div class="track" aria-hidden="true"><div class="bar swapped" style="width:90.1485668%"></div></div><span class="value">0.270</span></div><div class="chartrow"><span>Shared · length</span><div class="track" aria-hidden="true"><div class="bar length" style="width:75.2791821%"></div></div><span class="value">0.226</span></div><div class="chartrow"><span>With matched angle</span><div class="track" aria-hidden="true"><div class="bar matched" style="width:73.0680115%"></div></div><span class="value">0.219</span></div><div class="chartrow"><span>With swapped angle</span><div class="track" aria-hidden="true"><div class="bar swapped" style="width:80.4719409%"></div></div><span class="value">0.241</span></div><div class="chartrow scale" aria-hidden="true"><span></span><div class="ticks"><span>0</span><span>0.15</span><span>0.3</span></div><span>mm</span></div></div>
+<figcaption>Mean absolute error in millimetres of change in tracked length. Shorter bars indicate closer forecasts. Each person and each of their two trials has equal weight. Table 1 gives the scores for every method, including the linear comparisons.</figcaption></figure>
+<nav class="screen" aria-label="Downloads"><a href="muscle-tracking.pdf" download>Read the PDF</a> &nbsp;·&nbsp; <a href="muscle-tracking-source.zip" download>Download the paper source</a></nav>
+</section>
+<section class="page" aria-labelledby="measure"><header class="folio"><span>NeuroTranslation / Muscle tracking</span><span>2 / 5</span></header>
+<h2 id="measure">What the probe could see</h2>
+<p>Zhang and colleagues asked a seated volunteer to lift and lower the forefoot in four cycles with the foot suspended. The probe looked into the tibialis anterior, the muscle along the front of the shin. A line fitted to a visible bundle of muscle fibres, called a fascicle, supplied an estimate of its length in the image plane. The authors also reported its tilt, the pennation angle, conventionally measured relative to a sheet of connective tissue. The separate orientation of that sheet can only be checked in some exports.</p>
+<figure><p class="figtitle">Figure 2. The two spans of a tilted line</p>
+<svg class="geom" viewBox="0 0 380 152" role="img" aria-labelledby="geo-title geo-desc"><title id="geo-title">A fascicle represented by a straight line in the imaging plane</title><desc id="geo-desc">An oblique line labelled length L connects two endpoints. Its projection along a reference line is x. Its perpendicular span is h. Theta is the angle between the fascicle and the reference direction.</desc>
+<rect x="0" y="0" width="380" height="152" rx="4" fill="#edf5f3"/>
+<path d="M25 108 H348" fill="none" stroke="#698787" stroke-width="1.8"/><path d="M295 28 V108" fill="none" stroke="#26716f" stroke-width="2" stroke-dasharray="4 4"/><path d="M286 108 V99 H295" fill="none" stroke="#73918d" stroke-width="1"/><path d="M46 108 L295 28" stroke="#174b4f" stroke-width="4"/><circle cx="46" cy="108" r="3.4" fill="#174b4f"/><circle cx="295" cy="28" r="3.4" fill="#174b4f"/><path d="M106 108 Q106 98 103 90" fill="none" stroke="#246765" stroke-width="1.5"/>
+<g fill="#183b40" font-family="Liberation Sans,Arial,sans-serif" font-size="14"><text x="140" y="52">length L</text><text x="117" y="102">θ</text><text x="305" y="65">h</text><text x="80" y="132">x along reference direction</text></g></svg>
+<figcaption>Original schematic. A straight bundle of length L at angle θ has a longitudinal span x = L cos θ and a transverse span h = L sin θ. Both spans here are calculated. Measuring thickness, curvature or an out-of-plane movement requires additional observations.</figcaption></figure>
+<h3>More dots can mean the same evidence</h3>
+<p>In the first development recording, the 9,910 display values could be reconstructed from 992 tracking rows by drawing straight lines between successive estimates. We kept the original rows, called knots. The opposite shortcut would also fail. One volunteer (A02) really did have 9,920 knots in each trial. The other three development volunteers had 992. Ten steps in each file therefore names a place in a sequence. It does not specify a common elapsed time.</p>
+<p>We checked the released length and angle against the authors’ units, field labels and numerical exports in each trial. The angle came from a difference of two saved orientations in A01 and a sum in A02 and A04. All eight test recordings reproduced the reported angle by a sum. For A03, the released curves followed the first numbered fascicle. Its sheet orientation could not be recovered independently. Treating the next numbered fascicle as that sheet would change the biological meaning of the angle.</p>
+</section>
+<section class="page" aria-labelledby="forecast"><header class="folio"><span>NeuroTranslation / Muscle tracking</span><span>3 / 5</span></header>
+<h2 id="forecast">Hide ten steps. Predict the change.</h2>
+<p>At each eligible cutoff <em>i</em>, both models saw 21 original lengths ending at that row. The target was the tracked length at <em>i</em> + 10 minus the length at <em>i</em>, in millimetres. A negative change means shortening. Cutoffs began at row index 20 (counting from zero) and advanced ten steps. All 31 rows from the start of the history to the endpoint had to belong to one continuous, qualified segment. Adjacent forecasts shared history. Each ordinary forecast used measurements through its cutoff. The wrong-trial comparison selected a donor retrospectively by rank within two completed recordings.</p>
+<h3>Two ways to learn from the past</h3>
+<p>The <strong>specialist</strong> learned for this one task. It arranged the 20 intervals into five groups of four. Each group described length and its change, plus the mean and change in the four earlier angles. The last angle preceded the cutoff by one row. A small transformer learned how much weight to give different parts of this history, then predicted the signed change. The length-only twin used the same training recipe with both angle features withheld.</p>
+<p>The <strong>shared model</strong> reused a movement encoder from NeuroTranslate 0.0. Its weights stayed fixed. Four groups of five intervals described length, change, mean deviation from the straight-line trend, angle, angle change and change in the longitudinal span. The last angle came from the cutoff itself. A fitted linear readout corrected the previous ten-step change using these measurements and the encoder’s output. We also fitted a readout with the measurements alone and one with a fixed, randomly initialized encoder.</p>
+<p>Both families saw trials 1 and 2 from A01–A04. For the development results, we trained on three people and predicted the fourth in turn. We then fitted on all four and froze the models, scoring methods and source selection before opening any new participant. A09 remained in reserve.</p>
+<h3>Two geometric guesses</h3>
+<p>The specialist extended the last ten-step change in longitudinal span (<em>x</em>), ending at the last angle it could see. It divided by the cosine of that last angle to convert the span change into a length change. This assumes a fixed local direction for the conversion. The shared model used the cutoff angle, extended the last ten-step change in <em>x</em>, and held the transverse span (<em>h</em>) fixed. It found the new length as the hypotenuse of the resulting triangle. These assumptions can yield different answers from the very same history.</p>
+</section>
+<section class="page" aria-labelledby="result"><header class="folio"><span>NeuroTranslation / Muscle tracking</span><span>4 / 5</span></header>
+<h2 id="result">How the forecasts compared</h2>
+<p>For each forecast, we took the absolute difference between predicted and observed change. We averaged errors within a trial, averaged the two trials for each person and then averaged people. One development volunteer supplied 1,978 of the 2,560 eligible cutoffs but only one quarter of the weight. All scales and fitted parameters came from the training people for that stage.</p>
+<figure><p class="figtitle">Table 1. Mean absolute error in millimetres</p><table class="scores"><thead><tr><th rowspan="2" scope="col">Forecast</th><th colspan="2" scope="colgroup" class="group">Specialist</th><th colspan="2" scope="colgroup" class="group">Shared</th></tr><tr><th scope="col">Dev.</th><th scope="col">Test</th><th scope="col">Dev.</th><th scope="col">Test</th></tr></thead><tbody><tr><th scope="row">Assume zero change</th><td>0.3635</td><td>0.4007</td><td>0.3635</td><td>0.4007</td></tr><tr><th scope="row">Repeat the previous change</th><td>0.2203</td><td>0.2424</td><td>0.2203</td><td>0.2424</td></tr><tr><th scope="row">Typical training change</th><td>0.3636</td><td>0.4007</td><td>0.3636</td><td>0.4007</td></tr><tr><th scope="row">Geometric estimate</th><td>0.2564</td><td>0.2972</td><td>0.2222</td><td>0.2490</td></tr><tr><th scope="row">Linear, length only</th><td>0.1848</td><td>0.2226</td><td>0.1905</td><td>0.2167</td></tr><tr><th scope="row">Model, length only</th><td>0.1997</td><td>0.2365</td><td>0.2028</td><td>0.2258</td></tr><tr class="full"><th scope="row">Model, length and angle</th><td>0.2204</td><td>0.2330</td><td>0.2244</td><td>0.2192</td></tr><tr><th scope="row">Same fit, other trial’s angle</th><td>0.2806</td><td>0.2704</td><td>0.2638</td><td>0.2414</td></tr><tr><th scope="row">Linear, length and angle</th><td class="gap" aria-label="Not evaluated">—</td><td class="gap" aria-label="Not evaluated">—</td><td>0.2053</td><td>0.2152</td></tr><tr><th scope="row">Random encoder, length and angle</th><td class="gap" aria-label="Not evaluated">—</td><td class="gap" aria-label="Not evaluated">—</td><td>0.2078</td><td>0.2215</td></tr></tbody></table>
+<figcaption>Development predicts each person from models trained on the other three. Test uses frozen fits on new people. A dash marks a comparison absent from that family. Each family has its own linear fits, geometric assumptions and angle features. Values are rounded after averaging.</figcaption></figure>
+<p>On development folds, the length-only linear models had the lowest mean error in both families. Adding angle raised the specialist’s error in all four people, yet swapping in the angle from their other trial raised the average error still further. The same order held for the shared model’s averages. Neither development study supported an angle benefit. The pretrained shared angle model also lost to the linear angle model and the random encoder in all four folds.</p>
+<p>All eight new recordings qualified. Each supplied 992 original knots and 97 forecasts, for 776 forecasts per family. In the specialist, adding angle reduced error from 0.2365 to 0.2330 mm, while a linear forecast from lengths alone reached 0.2226 mm. In the shared model the corresponding errors were 0.2258, 0.2192 and 0.2167 mm. A linear forecast with both inputs had the lowest shared-family error (0.2152 mm). The pretrained full model beat the random encoder by 0.0023 mm on average, with two of four people improving.</p>
+</section>
+<section class="page" aria-labelledby="meaning"><header class="folio"><span>NeuroTranslation / Muscle tracking</span><span>5 / 5</span></header>
+<h2 id="meaning">What does the angle add?</h2>
+<p>Swapping the angle asks whether a model uses the pairing it received. We kept the weights, target and length history fixed and took angles from a corresponding point in the same person’s other trial. The specialist used the nearest proportional cutoff rank. The shared model rounded down its proportional rank and recalculated the longitudinal spans. Swapping can disrupt shared tracking errors as well as movement patterns.</p>
+<p>The specialist needed a lower mean error and gains in at least three people against every specified control. Matching angles beat swapped angles in all four and length alone in three. Length-only linear regression still beat the full specialist on average. For the length-only specialist itself, all four improved against zero and typical change, but only two improved against repeating the recent change and two against linear regression. Both prespecified pairs of length-only tests fell short.</p>
+<p>For the specialist, the person-level change from adding angle ranged from an extra 0.0063 mm of error to a reduction of 0.0188 mm. The shared model needed at least 5% lower mean error than both its length-only and wrong-angle controls, with gains against both in at least three people. Its reductions were 2.94% and 9.20%, respectively. One person improved against both. Even agreement in all four people would yield a two-sided sign-test probability of 0.125 under equally likely positive and negative changes. The thousands of cutoffs overlap and come from repeated ankle lifts. Wider claims about people or tasks would require additional independent participants, reliable source clocks and independent measurements of the tissue motion.</p>
+<p>Offline tracking may include smoothing or manual correction. The study reported synchronized acquisition, but the timing correspondence between individual exported image estimates, ankle measurements and electrical signals was unavailable here. These fits cannot establish a live response delay, muscle force, neural drive, clinical benefit or a unique three-dimensional trajectory.</p>
+<h3>Sources and working models</h3>
+<p class="small">Qiang Zhang, Noor Hakam, Oluwasegun Akinniyi, Ashwin Iyer, Xuefeng Bao and Nitin Sharma (2024). <em>AnkleImage – An ultrafast ultrasound image dataset to understand the ankle joint muscle contractility.</em> <em>Scientific Data</em> 11, 1439. The article uses CC BY-NC-ND 4.0. All prose and figures in this analysis are original. <a href="https://doi.org/10.1038/s41597-024-04285-x">Article and methods</a>.</p>
+<p class="small">The same authors deposited the Task 3 tracking data in the BioImage Archive, S-BIAD1482. We selected paired native rows and derived forecasts, geometric estimates and aggregate errors. The deposit retains its attribution licence. <a href="https://doi.org/10.6019/S-BIAD1482">Dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Data licence (CC BY 4.0)</a>.</p>
+<p class="small">Try the models on invented inputs. The source ZIP, also attached to the PDF, contains scores, methods and rebuilding instructions. <a href="https://eliminatenoise.github.io/NeuroTranslation/muscle-tracking/">Specialist model</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/shared-muscle-tracking/">Shared model</a> · <a href="https://eliminatenoise.github.io/Interoceptomics/muscle-tracking/">Interoceptomics 3D atlas</a> · <a href="https://creativecommons.org/publicdomain/zero/1.0/">Project text, figures and code (CC0)</a>.</p>
+</section></main></body></html>

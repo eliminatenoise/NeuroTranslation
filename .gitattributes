@@ -109,3 +109,15 @@ docs/back-rotation/CC-BY-4.0.txt whitespace=-blank-at-eof
 models/back-rotation/CC-BY-4.0.txt whitespace=-blank-at-eof
 models/neurotranslate-0.0/back_rotation/CC-BY-4.0.txt whitespace=-blank-at-eof
 models/neurotranslate-0.0/back_rotation/encoder.js whitespace=-blank-at-eof
+
+docs/muscle-tracking/** -text
+models/muscle-tracking/** -text
+models/neurotranslate-0.0/muscle_tracking/** -text
+docs/shared-muscle-tracking/** -text
+docs/papers/muscle-tracking/** -text
+models/muscle-tracking/*.cmd whitespace=cr-at-eol
+docs/muscle-tracking/*.cmd whitespace=cr-at-eol
+# Preserve the external CC BY licence text byte for byte.
+docs/muscle-tracking/CC-BY-4.0.txt whitespace=-blank-at-eof
+models/muscle-tracking/CC-BY-4.0.txt whitespace=-blank-at-eof
+models/neurotranslate-0.0/muscle_tracking/CC-BY-4.0.txt whitespace=-blank-at-eof

@@ -208,3 +208,7 @@ Nierula and colleagues released the simultaneous surface recordings in OpenNeuro
 ### Rotation of a back-mounted sensor during standing and walking
 
 Desirée Irene Gracia Laso, Eduardo Iáñez, Mario Ortiz and José M. Azorín released the source recordings under Creative Commons Attribution 4.0. The model downloads contain derived weights, aggregate scores, code and invented inputs. The acquisition program retrieves the original recordings separately from the authors’ archive. [Experiment 2, version 2](https://doi.org/10.5281/zenodo.19065545) · [Recording methods](https://doi.org/10.1038/s41597-026-07592-7) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+### Ultrasound tracking of the tibialis anterior
+
+Qiang Zhang, Noor Hakam, Oluwasegun Akinniyi, Ashwin Iyer, Xuefeng Bao and Nitin Sharma released the AnkleImage data under Creative Commons Attribution 4.0. These models use derived length and angle estimates from Task 3. Downloads contain original code, trained coefficients, aggregate errors and invented inputs. The source program retrieves the selected recordings from the authors’ deposit. The article has a separate licence. [Dataset](https://doi.org/10.6019/S-BIAD1482) · [Methods article](https://doi.org/10.1038/s41597-024-04285-x) · [Dataset licence](https://creativecommons.org/licenses/by/4.0/)

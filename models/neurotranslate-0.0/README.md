@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0 movement forecasts
 
+Forecast the change in a muscle bundle’s tracked length over ten tracking steps. In 4 new people, adding the bundle’s angle changed mean absolute error from 0.226 mm to 0.219 mm. [Try the ultrasound model](muscle_tracking/index.html) · [Read the methods and original sources](muscle_tracking/README.md)
+
 How far will a sensor strapped to the back turn in the next tenth of a second? In the three new people with four documented orientation components, the shared encoder’s mean absolute error was 0.376° using motion and 0.385° after adding both back electrode arrays. [Try the model](back_rotation/index.html) · [Study and source](back_rotation/README.md)
 
 Can a voltage at the axilla improve a forecast from a neck electrode? In six people outside training, the latest neck reading missed by 8.09 µV on average. A model using the neck, scalp, thumb and heart readings missed by 7.77 µV. Adding the axillary recording gave 9.65 µV. [Run the electrical forecast](cervical/index.html) · [Read the methods and results](cervical/README.md)

@@ -1,0 +1,260 @@
+{
+  "title": "AnkleImage Task 3, fascicle tracking source files",
+  "dataset": "https://doi.org/10.6019/S-BIAD1482",
+  "methods": "https://doi.org/10.1038/s41597-024-04285-x",
+  "data_licence": "https://creativecommons.org/licenses/by/4.0/",
+  "selected_trials": [
+    1,
+    2
+  ],
+  "development": [
+    "A01",
+    "A02",
+    "A03",
+    "A04"
+  ],
+  "assessment": [
+    "A05",
+    "A06",
+    "A07",
+    "A08"
+  ],
+  "manifest_coverage": "assessment",
+  "program_sha256": "9e3ee44d9ebe848ac40b9413adc72c08e389266a9ba9a53c6b101e9929c3d8df",
+  "units": {
+    "length_mm": "millimetres",
+    "angle_deg": "degrees",
+    "tracker_time": "timestamp as labelled by the tracking software. Physical acquisition time has not been established."
+  },
+  "members": [
+    {
+      "person": "A05",
+      "trial": 1,
+      "member": "Task 3/Sub_A05/A05_echo_emg_angle_PA_FL_trial1.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A05/A05_echo_emg_angle_PA_FL_trial1.mat",
+      "bytes": 4870436,
+      "sha256": "aeda4fe18a6e9ead50be716d7c103fa17ae48e579e21ba3d38f7d6392c7ee4bb",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "1e450e3bad19dda0e8c371da5a0ce65315422429d4b14c34b2f1b8224f9a4fc4",
+      "array_sha256": {
+        "length_mm": "97e672e49188374fff69fdef65ef7bb64d022dc1b6d3ff1161ee8803237d21b2",
+        "angle_deg": "c1e5d77cdbaf3640d5993eee7ed5bcae0af22b1be57894139a0943a112c098bf",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "10dce03255dd6496efb93b8386a80819321b57b552296f272b694164eb3843d7",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA1 = rad2deg(A.data(:,3) + B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 3.552713678800501e-15,
+          "minus": 19.357722883171945
+        },
+        "maximum_absolute_residual_deg": 3.552713678800501e-15
+      }
+    },
+    {
+      "person": "A05",
+      "trial": 2,
+      "member": "Task 3/Sub_A05/A05_echo_emg_angle_PA_FL_trial2.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A05/A05_echo_emg_angle_PA_FL_trial2.mat",
+      "bytes": 5057851,
+      "sha256": "663a86171d363596ee52bb89c6b31dd6687e10c56d5c71f35b5ab1b9b51d085f",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "6ab515e4503605ddb3aba12425fbd10f753060eb656da9b21134c545e87144f4",
+      "array_sha256": {
+        "length_mm": "c25d3a848f782017408b76ad9813894994897ce8fbfe580b086c74edb64816e6",
+        "angle_deg": "9fd64d51c3eb9f441a5bdb595a15026ff7a1755e5522756b270fcf012a8dfe15",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "10dce03255dd6496efb93b8386a80819321b57b552296f272b694164eb3843d7",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA1 = rad2deg(A.data(:,3) + B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 3.552713678800501e-15,
+          "minus": 20.697412799746836
+        },
+        "maximum_absolute_residual_deg": 3.552713678800501e-15
+      }
+    },
+    {
+      "person": "A06",
+      "trial": 1,
+      "member": "Task 3/Sub_A06/A06_echo_emg_angle_PA_FL_trial1.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A06/A06_echo_emg_angle_PA_FL_trial1.mat",
+      "bytes": 4838784,
+      "sha256": "374fea3c8d8d2082565b7496fee701b56468a5ede3c531dfed35818060fb3e86",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "05cd8bf9a721e676d8eb1d66c260345ce97a45fade04937e597c72f30eaa168f",
+      "array_sha256": {
+        "length_mm": "2109cc7c55b03cafc5535aa4e23eb330abef2448336c5c6c594784c50a0928a9",
+        "angle_deg": "992b62b1e7a14e9ea3d0f18ff08aacc95da5727e65bf07171b6d8a2c9e912a5f",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "10dce03255dd6496efb93b8386a80819321b57b552296f272b694164eb3843d7",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA1 = rad2deg(A.data(:,3) + B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 7.105427357601002e-15,
+          "minus": 11.716184769512147
+        },
+        "maximum_absolute_residual_deg": 7.105427357601002e-15
+      }
+    },
+    {
+      "person": "A06",
+      "trial": 2,
+      "member": "Task 3/Sub_A06/A06_echo_emg_angle_PA_FL_trial2.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A06/A06_echo_emg_angle_PA_FL_trial2.mat",
+      "bytes": 4974266,
+      "sha256": "fc19d054c3df6f24fcbaaad47a99f80c2fb8d8c03b8440fb8ede4f9332ceabcd",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "fc53de473f950b148805134cd18786eae4cd9196d2142b25ed521a26a7538907",
+      "array_sha256": {
+        "length_mm": "420e90795df9664de0854f2d3f98f92a930d91cb4d6e3efe9c3844c95ba67a60",
+        "angle_deg": "f1a1675d0874dc7b7fbe0a39899799bd9b8fa2020e1d247c5d34ef30677b4613",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "10dce03255dd6496efb93b8386a80819321b57b552296f272b694164eb3843d7",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA1 = rad2deg(A.data(:,3) + B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 7.105427357601002e-15,
+          "minus": 15.495987343990187
+        },
+        "maximum_absolute_residual_deg": 7.105427357601002e-15
+      }
+    },
+    {
+      "person": "A07",
+      "trial": 1,
+      "member": "Task 3/Sub_A07/A07_echo_emg_angle_PA_FL_trial1.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A07/A07_echo_emg_angle_PA_FL_trial1.mat",
+      "bytes": 4961442,
+      "sha256": "859408d298064351767ca181e9483378b74c082350478b95875401f359776f00",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "0757440dd913c885b762d26b0cf39ffd6cf911abdb678aff99563cdf3d372750",
+      "array_sha256": {
+        "length_mm": "3f3687ea5c160903abf8e1562059824cce586140321e81f42804cf0445b24732",
+        "angle_deg": "41f9f380c76b07129e170f9d51f852e2d157a3f53269fe4388eced3d6761e344",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "10dce03255dd6496efb93b8386a80819321b57b552296f272b694164eb3843d7",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA1 = rad2deg(A.data(:,3) + B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 3.552713678800501e-15,
+          "minus": 25.73130539620722
+        },
+        "maximum_absolute_residual_deg": 3.552713678800501e-15
+      }
+    },
+    {
+      "person": "A07",
+      "trial": 2,
+      "member": "Task 3/Sub_A07/A07_echo_emg_angle_PA_FL_trial2.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A07/A07_echo_emg_angle_PA_FL_trial2.mat",
+      "bytes": 4984805,
+      "sha256": "8d320ecbcdece4e040a54357e2a27e8706e16b4a0cbc221c7fb57d0ed6573d6a",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "a15f41f3b519f69fc7cdc282e96043cb21ddc6f567ca6131252848c9f23108e6",
+      "array_sha256": {
+        "length_mm": "fba055697288cbd10fe235a188530a81f91ca988c420c82c1bf1aabe4cc5ad74",
+        "angle_deg": "6cb476bafd5805f3c8e2754087b90c4e27c7e1da3292c9dbef194ad024f99808",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "10dce03255dd6496efb93b8386a80819321b57b552296f272b694164eb3843d7",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA1 = rad2deg(A.data(:,3) + B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 3.552713678800501e-15,
+          "minus": 18.69125837587577
+        },
+        "maximum_absolute_residual_deg": 3.552713678800501e-15
+      }
+    },
+    {
+      "person": "A08",
+      "trial": 1,
+      "member": "Task 3/Sub_A08/A08_echo_emg_angle_PA_FL_trial1.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A08/A08_echo_emg_angle_PA_FL_trial1.mat",
+      "bytes": 5330323,
+      "sha256": "c65a2d96f39e15eb186bde784eff26739170baa5d335060dbc6fcc98cf7e9f6e",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "72fc6bcb97d3be7bce138222bc1825cc49288412ac24a24e73e9c25559ba8e0d",
+      "array_sha256": {
+        "length_mm": "690116c5c32e4dd561e2c9db9e574f4b69382e8524f725e9debca5561a5ec3ff",
+        "angle_deg": "4c185a583c4381e130c85c3d8395504144dc7816910a6161d9a829f990522de0",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "10dce03255dd6496efb93b8386a80819321b57b552296f272b694164eb3843d7",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA1 = rad2deg(A.data(:,3) + B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 1.7763568394002505e-15,
+          "minus": 8.358079132250397
+        },
+        "maximum_absolute_residual_deg": 1.7763568394002505e-15
+      }
+    },
+    {
+      "person": "A08",
+      "trial": 2,
+      "member": "Task 3/Sub_A08/A08_echo_emg_angle_PA_FL_trial2.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A08/A08_echo_emg_angle_PA_FL_trial2.mat",
+      "bytes": 3514751,
+      "sha256": "0e46e18739eabf9db11a3869e833920fa42670d02301663b6ab26302c879090a",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "bb8d32c1c425aefd209b28b7c2c8d8fddeb21f43984e5f9c7ce648bd88f3a769",
+      "array_sha256": {
+        "length_mm": "f87487a632360c7a71afbc56ac9954f6528ac17b7b59bf15c25d6b38cc453b4c",
+        "angle_deg": "29d26a9e03061a4b226774b40668c6ff9dd3881dae7dcc2abf47141f3895b1a8",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "10dce03255dd6496efb93b8386a80819321b57b552296f272b694164eb3843d7",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA1 = rad2deg(A.data(:,3) + B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 1.7763568394002505e-15,
+          "minus": 9.420572067540997
+        },
+        "maximum_absolute_residual_deg": 1.7763568394002505e-15
+      }
+    }
+  ],
+  "additional_reader": {
+    "file": "acquire_assessment.py",
+    "sha256": "660bf7917040fe87409e6f894e0cff108a4b8cfefb0310548dc2d5262228bcb2",
+    "scope": "On SciPy versions unable to list the dimensions of opaque graphics metadata in A07 trial 1, read its four native geometry variables selectively. Scientific checks use the same acquire.py in both groups."
+  }
+}

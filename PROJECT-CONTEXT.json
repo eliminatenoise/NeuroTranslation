@@ -1281,5 +1281,24 @@
     "paper_source": "docs/papers/back-rotation/back-rotation-source.zip",
     "atlas": "https://eliminatenoise.github.io/Interoceptomics/back-rotation/",
     "domain": "Unsigned change in orientation of one back-mounted sensor over 100 milliseconds in standing and walking. Four people supplied fitting trials. Of four new people, three had verifiable orientation rows. Both planned four-person tests are incomplete. Two trials per person. The source of electrical activity at the skin is unresolved."
+  },
+  "muscle_tracking": {
+    "version": "2026-11-21 experimental preview",
+    "source_doi": "10.6019/S-BIAD1482",
+    "method_doi": "10.1038/s41597-024-04285-x",
+    "source_license": "CC BY 4.0",
+    "specialist": "models/muscle-tracking/README.md",
+    "specialist_zip": "models/muscle-tracking-model.zip",
+    "viewer": "docs/muscle-tracking/index.html",
+    "offline_viewer": "docs/muscle-tracking-offline.zip",
+    "shared_model": "models/neurotranslate-0.0/muscle_tracking/model.json",
+    "shared_viewer": "docs/shared-muscle-tracking/index.html",
+    "shared_assessment": "models/neurotranslate-0.0/muscle_tracking/assess-summary.json",
+    "shared_zip": "models/neurotranslate-0.0.zip",
+    "paper": "docs/papers/muscle-tracking/index.html",
+    "paper_pdf": "docs/papers/muscle-tracking/muscle-tracking.pdf",
+    "paper_source": "docs/papers/muscle-tracking/muscle-tracking-source.zip",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/muscle-tracking/",
+    "domain": "Signed change in the image-tracked length of a tibialis anterior fascicle over ten original tracker steps during seated ankle dorsiflexion. The native tracking grids vary, and the elapsed time for ten steps is unverified. Both length and pennation are estimates from a two-dimensional image."
   }
 }

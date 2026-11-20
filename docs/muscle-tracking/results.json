@@ -1,0 +1,284 @@
+{
+  "measurement": "Signed change in ultrasound-tracked muscle fascicle length over ten native tracking steps, in millimetres.",
+  "data_doi": "10.6019/S-BIAD1482",
+  "protocol_sha256": "f7ee4e500e860dff3ef8bdd04932b8dbd5019cf73020ef3386d634023980dfe4",
+  "model_sha256": "b16da2f9fd6facceb8316918e19a53d0ccc86a0fc8c9753439f04d39b313b34a",
+  "development": {
+    "people": 4,
+    "trials": 8,
+    "eligible_windows": 2560,
+    "candidate_windows": 2560,
+    "projection_windows": 2560,
+    "length_beats_zero_and_recent": true,
+    "length_beats_typical_and_ridge": false,
+    "pennation_increment_supported": false,
+    "mae_mm": {
+      "zero": 0.3634566787575704,
+      "recent": 0.22033391021207502,
+      "typical": 0.3635658849535612,
+      "ridge": 0.1847754411167275,
+      "length": 0.19973007284143135,
+      "full": 0.22039664098754896,
+      "wrong": 0.2805646396512278,
+      "projection": 0.25636095931346975
+    },
+    "comparisons": {
+      "length_vs_zero": {
+        "mean_gain_mm": 0.163726605916139,
+        "gain_range_mm": [
+          -0.09395181672968875,
+          0.29354098570827414
+        ],
+        "people_improved": 3,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.625,
+        "passes": true
+      },
+      "length_vs_recent": {
+        "mean_gain_mm": 0.02060383737064367,
+        "gain_range_mm": [
+          -0.10714605586012349,
+          0.08210971697378949
+        ],
+        "people_improved": 3,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.625,
+        "passes": true
+      },
+      "length_vs_typical": {
+        "mean_gain_mm": 0.1638358121121298,
+        "gain_range_mm": [
+          -0.09360171359520979,
+          0.29363047024435635
+        ],
+        "people_improved": 3,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.625,
+        "passes": true
+      },
+      "length_vs_ridge": {
+        "mean_gain_mm": -0.01495463172470387,
+        "gain_range_mm": [
+          -0.09655858588739072,
+          0.027271783389522686
+        ],
+        "people_improved": 2,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 1.0,
+        "passes": false
+      },
+      "full_vs_zero": {
+        "mean_gain_mm": 0.1430600377700214,
+        "gain_range_mm": [
+          -0.09681405303933607,
+          0.2838644585494272
+        ],
+        "people_improved": 3,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.625,
+        "passes": true
+      },
+      "full_vs_recent": {
+        "mean_gain_mm": -6.27307754739112e-05,
+        "gain_range_mm": [
+          -0.11000829216977082,
+          0.04973463896179847
+        ],
+        "people_improved": 3,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.625,
+        "passes": false
+      },
+      "full_vs_typical": {
+        "mean_gain_mm": 0.14316924396601222,
+        "gain_range_mm": [
+          -0.09646394990485711,
+          0.2839539430855094
+        ],
+        "people_improved": 3,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.625,
+        "passes": true
+      },
+      "full_vs_ridge": {
+        "mean_gain_mm": -0.03562119987082145,
+        "gain_range_mm": [
+          -0.09942082219703804,
+          0.01759525623067576
+        ],
+        "people_improved": 1,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.625,
+        "passes": false
+      },
+      "full_vs_length": {
+        "mean_gain_mm": -0.02066656814611758,
+        "gain_range_mm": [
+          -0.04544996532025955,
+          -0.0028622363096473258
+        ],
+        "people_improved": 0,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.125,
+        "passes": false
+      },
+      "full_vs_wrong": {
+        "mean_gain_mm": 0.06016799866367889,
+        "gain_range_mm": [
+          -0.0004898719308343569,
+          0.10205447254957195
+        ],
+        "people_improved": 3,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.625,
+        "passes": true
+      }
+    }
+  },
+  "assessment": {
+    "people": 4,
+    "trials": 8,
+    "eligible_windows": 776,
+    "candidate_windows": 776,
+    "projection_windows": 776,
+    "length_beats_zero_and_recent": false,
+    "length_beats_typical_and_ridge": false,
+    "pennation_increment_supported": false,
+    "mae_mm": {
+      "zero": 0.40073037499999997,
+      "recent": 0.2424413505154639,
+      "typical": 0.4006691713917525,
+      "ridge": 0.22258803917375833,
+      "length": 0.23647315255943593,
+      "full": 0.23298750316695988,
+      "wrong": 0.27044570051195505,
+      "projection": 0.29718414036639595
+    },
+    "comparisons": {
+      "length_vs_zero": {
+        "mean_gain_mm": 0.16425722244056404,
+        "gain_range_mm": [
+          0.001917141335867678,
+          0.2903903549536096
+        ],
+        "people_improved": 4,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.125,
+        "passes": true
+      },
+      "length_vs_recent": {
+        "mean_gain_mm": 0.005968197956027953,
+        "gain_range_mm": [
+          -0.058361234952792274,
+          0.07673238588144454
+        ],
+        "people_improved": 2,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 1.0,
+        "passes": false
+      },
+      "length_vs_typical": {
+        "mean_gain_mm": 0.16419601883231655,
+        "gain_range_mm": [
+          0.0018875330884449704,
+          0.29026066423196
+        ],
+        "people_improved": 4,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.125,
+        "passes": true
+      },
+      "length_vs_ridge": {
+        "mean_gain_mm": -0.013885113385677612,
+        "gain_range_mm": [
+          -0.06861884675186886,
+          0.01733120749807926
+        ],
+        "people_improved": 2,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 1.0,
+        "passes": false
+      },
+      "full_vs_zero": {
+        "mean_gain_mm": 0.1677428718330401,
+        "gain_range_mm": [
+          0.0023451089319015406,
+          0.2840941620172614
+        ],
+        "people_improved": 4,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.125,
+        "passes": true
+      },
+      "full_vs_recent": {
+        "mean_gain_mm": 0.009453847348504012,
+        "gain_range_mm": [
+          -0.05793326735675841,
+          0.07043619294509634
+        ],
+        "people_improved": 3,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.625,
+        "passes": true
+      },
+      "full_vs_typical": {
+        "mean_gain_mm": 0.16768166822479263,
+        "gain_range_mm": [
+          0.002315500684478833,
+          0.2839644712956118
+        ],
+        "people_improved": 4,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.125,
+        "passes": true
+      },
+      "full_vs_ridge": {
+        "mean_gain_mm": -0.010399463993201553,
+        "gain_range_mm": [
+          -0.068190879155835,
+          0.01103501456173106
+        ],
+        "people_improved": 3,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.625,
+        "passes": false
+      },
+      "full_vs_length": {
+        "mean_gain_mm": 0.003485649392476059,
+        "gain_range_mm": [
+          -0.006296192936348199,
+          0.01877631284220227
+        ],
+        "people_improved": 3,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.625,
+        "passes": true
+      },
+      "full_vs_wrong": {
+        "mean_gain_mm": 0.03745819734499516,
+        "gain_range_mm": [
+          0.009028869267163953,
+          0.11073077721140162
+        ],
+        "people_improved": 4,
+        "people_tied": 0,
+        "two_sided_exact_sign_p": 0.125,
+        "passes": true
+      }
+    }
+  },
+  "shared_assessment": {
+    "people": 4,
+    "windows": 776,
+    "mae_mm": {
+      "shared_length": 0.225837546245311,
+      "shared_both": 0.21920403439569625,
+      "wrong_both": 0.24141582280001422,
+      "linear_both": 0.21521999448196444,
+      "random_both": 0.22153197290470159,
+      "geometry": 0.2489723112290234
+    },
+    "paired_angle_criterion": false,
+    "summary_sha256": "a55d5ce6333e1d23dccfc9ba71ce87f75094e55b6fe6afd1230e23ad13b98ce1"
+  }
+}
