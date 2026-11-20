@@ -1,6 +1,12 @@
 # A quarter second ahead
 
-Open **index.html** or the launcher for your operating system. The first example predicts the distance between a wrist’s last tracked position and its position about a quarter second later. Choose **Right-wrist angles (°)** to ask how far back the wrist will bend and how far it will tilt towards the thumb. **Rat displacement (cm)** predicts an endpoint distance on a maze. Each task starts with invented measurements. [Open the viewer](index.html)
+Open **index.html** or the launcher for your operating system. The first example predicts the distance between a wrist’s last tracked position and its position about a quarter second later. Choose **Right-wrist angles (°)** to ask how far back the wrist will bend and how far it will tilt towards the thumb. **Rat displacement (cm)** predicts an endpoint distance on a maze. **Right and left knee angles (°)** forecasts both knees from 240 consecutive pairs of angles. Each task starts with an invented example. [Open the viewer](index.html)
+
+## Forecast a walking step
+
+Choose **Right and left knee angles (°)**. The earlier frames let the model look for the last second of the walk in a previous stride. Choose one of four methods to see where it places each knee a quarter second later. The built-in waves illustrate the format. For a recording, choose **Enter my own measurements**, supply 240 consecutive frames from one 60 Hz walk and put each right/left angle pair in degrees in `kneeDeg`. Your inputs stay in the tab.
+
+The fitted shared model averaged 3.465° absolute error on 12 previously studied people walking at 0.5 m/s. The earlier-angle fit scored 3.460°, the shuffled-weight comparison scored 3.422° and repeating the stride scored 3.535°. The trained features did not beat both fitted alternatives. [Source and requested citations](https://doi.org/10.13026/r0ea-7161)
 
 ## Compare the wrist-angle forecasts
 
@@ -43,6 +49,7 @@ To read the numbers directly, load the runtime once and call `await SharedMotion
 
 ## Credits and licences
 
+- Rateb Katmah, Aamna AlShehhi, Doua Kosaji, Nour Al-Rahmani, Muhammad Abdullah, Abdul Aziz Vaqar Hulleck and Kinda Khalaf (2026), *A multimodal gait dataset of brain activity, muscle activity, kinematics and ground forces in young adults*, version 1.0.0, PhysioNet. NeuroTranslation used the reconstructed right and left knee angles from the 0.5 m/s walk to fit three corrections to a prior-stride forecast. Retain the original credit and CC BY 4.0 terms for the source, derived model parameters and numerical results. The example contains invented waves. [Source and requested citations](https://doi.org/10.13026/r0ea-7161) · [PhysioNet platform paper](https://doi.org/10.1038/s44360-026-00096-z) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz published the EEG-EMG-WristMotion Dataset v3. We used two measured wrist axes and aligned scalp and forearm voltages to form sixteen-bin histories. Attribution and CC BY 4.0 accompany the data, derived scales, fitted weights and reported results. [Version 3 data](https://doi.org/10.6084/m9.figshare.29666735.v3) · [Study descriptor](https://doi.org/10.1038/s41597-026-07287-z) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - Justin Shin and Shantanu Jadhav published *Single Day W-Track Learning* (2024), version 0.240511.0307. The existing derived illustration uses JS14, session 01, epoch 5, trip 55. Camera measurements supply distances, timing, turn features and an endpoint comparison at the published cutoff. [DANDI dataset](https://doi.org/10.48324/dandi.000978/0.240511.0307) · [Original example](https://github.com/eliminatenoise/NeuroTranslation/blob/4d046b86bfa797e28f29cd4f6b8445a1f4b90487/benchmarks/wtrack-neural-motion/fitted/example.json) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - Xin Wang and colleagues published *HoloAssist* (ICCV 2023). The original spatial study converted tracked right-wrist positions into centimetres. The full author list and CDLA Permissive 2.0 agreement accompany the viewer. [HoloAssist](https://holoassist.github.io/)

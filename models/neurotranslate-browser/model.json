@@ -1,7 +1,7 @@
 {
   "checkpoints": {
     "spatial": "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179",
-    "movement": "08f4a025be7d3dfa6e3de5899fa445d019f8c70c82b1f5d6531bef1407e0616a"
+    "movement": "4541317c4e5d7f08f24d221278a0f3fec6f9f9acb9c7ea17669ef28511c187fe"
   },
   "config": {
     "format": 1,
@@ -52,6 +52,18 @@
       ],
       "protocol_sha256": "679c858206898bbb3d36d3f3ad79bf19d6452b56ed3a52f601dccfd459edae24",
       "original_checkpoint_sha256": "da243393b7a6f72558365a30f7361e45ef7af680538a7fb5a927e930d91b3458"
+    },
+    "knee_angle": {
+      "format": 1,
+      "input_frames": 240,
+      "horizon_stored_frames": 15,
+      "stored_hz": 60,
+      "modes": [
+        "stride",
+        "raw",
+        "shared",
+        "scrambled"
+      ]
     }
   },
   "groups": {
@@ -476,10 +488,249 @@
           "dtype": "<f8"
         }
       ]
+    },
+    "knee.readouts": {
+      "bytes": 9072,
+      "sha256": "41439463187c52749d50888bdc14646334ddc1127f2cba5cda3ff07b301da6d1",
+      "tensors": [
+        {
+          "name": "raw.center",
+          "shape": [
+            29
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "raw.coef",
+          "shape": [
+            29,
+            2
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "raw.intercept",
+          "shape": [
+            2
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "raw.scale",
+          "shape": [
+            29
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "scrambled.center",
+          "shape": [
+            125
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "scrambled.coef",
+          "shape": [
+            125,
+            2
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "scrambled.intercept",
+          "shape": [
+            2
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "scrambled.scale",
+          "shape": [
+            125
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "shared.center",
+          "shape": [
+            125
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "shared.coef",
+          "shape": [
+            125,
+            2
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "shared.intercept",
+          "shape": [
+            2
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "shared.scale",
+          "shape": [
+            125
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "token_center",
+          "shape": [
+            6
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "token_scale",
+          "shape": [
+            6
+          ],
+          "dtype": "<f8"
+        }
+      ]
+    },
+    "knee.scramble": {
+      "bytes": 20736,
+      "sha256": "492910f43d9e60eac512767bda1cbab01e936abf9edba77f1bf7d0ac92acce22",
+      "tensors": [
+        {
+          "name": "blocks.0.attention_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_out.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_out.weight",
+          "shape": [
+            24,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_in.bias",
+          "shape": [
+            48
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_in.weight",
+          "shape": [
+            48,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_out.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_out.weight",
+          "shape": [
+            24,
+            48
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.qkv.bias",
+          "shape": [
+            72
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.qkv.weight",
+          "shape": [
+            72,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "last_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "last_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "position",
+          "shape": [
+            4,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "project.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "project.weight",
+          "shape": [
+            24,
+            6
+          ],
+          "dtype": "<f4"
+        }
+      ]
     }
   },
-  "pythonPredictorSha256": "cb482e82552d033d42021ca7adebcc404548b3b3cff4c6066ca2d4d12e2bfd4a",
+  "pythonPredictorSha256": "b407e1dbff16476602cb891b90dda11574aaf1a90846e563aeee676abfec832f",
   "pythonCorrectionSha256": "753ce7469f3f9d956dd461763af4ff10415606b62cf3f451897a1c9eeb46031b",
   "pythonPopulationSha256": "a90b69e5346efe0fd91c1f89df16a570386c90a0b836062a309dfcb5679ae789",
+  "kneeExportSha256": "4ee73623e94404a5115b5743fdab94095cc03cee1d986201d0379c74d5730f45",
   "encoding": "Original little-endian IEEE 754 bytes, C order, sorted tensor names per group."
 }
