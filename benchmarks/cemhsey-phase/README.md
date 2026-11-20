@@ -14,17 +14,17 @@ Average miss over the whole trial, in % of the hardest squeeze:
 | Force history | 0.84317 | 0.84679 | 0.82834 |
 | Force history and five forearm grids | 0.83624 | 0.83945 | 0.82204 |
 
-Repeating the latest gauge reading on its own missed by 0.81104%, so the fitted five-grid model with its corrections lost even to that. Following the scheduled target on its own missed by 2.10117%.
+Repeating the last gauge reading on its own missed by 0.81104%, so the fitted five-grid model with its corrections lost even to that. Following the scheduled target on its own missed by 2.10117%.
 
 ## What was done
 
-Three adults supplied the recordings the corrections were fitted on, and three others the test recordings. Each person made two pinches at the 50% target. The simple forecast starts from the current gauge reading and adds the change scheduled on the screen; the two others use force history, one of them with forearm EMG as well. Each forecast could keep its original form, learn one correction across both directions, or learn separate corrections for the squeeze and the release. The test recordings were opened once, after the fit was fixed. [The plan](PROTOCOL.md) · [Design and data sources](DESIGN.json)
+Three adults supplied the recordings the corrections were fitted on, and three others the test recordings. Each person made two pinches at the 50% target. The simple forecast starts from the current gauge reading and adds the change scheduled on the screen; the two others use force history, one of them with forearm EMG as well. Each forecast could keep its original form, learn one correction across both directions, or learn separate corrections for the rise and the release. The test recordings were opened once, after the fit was fixed. [The plan](PROTOCOL.md) · [Design and data sources](DESIGN.json)
 
 ### Where splitting the simple correction helped
 
 The gain is the error with one correction minus the error with separate corrections: positive means the separate corrections missed by less. To keep the three people's individual results private, the bounds are rounded outwards, to steps of 0.05% of the hardest squeeze, so that they enclose all three gains. This reporting rule was fixed after the fitting and before any test recording was opened. [How the range is reported](PUBLIC-REPORTING.md)
 
-| Stage of the cue at the forecast | Cutoffs | Average gain (% of the hardest squeeze) | Bounds enclosing the three people | People lower / equal / higher |
+| Stage of the cue at the forecast | Forecasts | Average gain (% of the hardest squeeze) | Bounds enclosing the three people | People lower / equal / higher |
 |---|---:|---:|---:|---:|
 | Whole trial | 3552 | −0.00002 | −0.05 to 0.05 | 1 / 0 / 2 |
 | First rest | 564 | +0.00004 | 0.00 to 0.05 | 3 / 0 / 0 |
@@ -33,10 +33,12 @@ The gain is the error with one correction minus the error with separate correcti
 | Release | 600 | −0.00081 | −0.05 to −0.00 | 0 / 0 / 3 |
 | Final rest | 588 | 0.00000 | 0.00 to 0.00 | 0 / 3 / 0 |
 
-Split by direction, the correction helped all three people on the rise and hurt all three on the release, by less than 0.001% of the hardest squeeze either way. The same rounding gives the main result's range: from 0.05000% lower to no change.
+Split by direction, the correction helped all three people on the rise and hurt all three on the release, by 0.0007% and 0.0008% of the hardest squeeze on average. The same rounding gives the main result's range: from 0.05000% lower to no change.
 
 ## What it does not show
 
-The 3,552 test cutoffs overlap within six recordings. The three test people gave no recordings to the correction fit or to the original model's training, though other recordings of theirs had been seen in earlier pinch studies. The comparison covers a single target and one recording day, and its counts describe these three people. No group was set aside for this study.
+The 3,552 test forecasts overlap within six recordings. The three test people gave no recordings to the correction fit or to the original model's fit, though other recordings of theirs had been used earlier in the project, in building or testing other models. The comparison covers a single target and one recording day, and its counts describe these three people. No group was set aside for this study.
 
-[Explore forecast errors and paired gains](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-phase/) · [Fit a correction on your computer](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-phase/reader/) · [Offline reader with desktop launchers](../../docs/cemhsey-phase/reader/CEMHSEY-Population-Forecasts.zip) · [Results file](RESULTS.json)
+[Explore forecast errors and paired gains](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-phase/) · [Fit a correction on your computer](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-phase/reader/) · [Offline reader with desktop launchers](../../docs/cemhsey-phase/reader/CEMHSEY-Population-Forecasts.zip) · [Results file, in fractions of MVC (multiply by 100 for %)](RESULTS.json)
+
+The recordings are CEMHSEY GRASP, by Shutian Yang, Dongxuan Li, Chen Chen and Xiangyang Zhu, under CC BY 4.0. Full credit: [docs/RIGHTS.md](../../docs/RIGHTS.md).
