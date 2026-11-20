@@ -11,7 +11,7 @@ Each is written twice: a Technical edition, and a Simple English edition that ex
 | NeuroTranslation | [PDF, 53 pages](neurotranslation-technical.pdf) | [PDF, 63 pages](neurotranslation-explained.pdf) |
 | Brain2Body | [PDF, 29 pages](brain2body-article.pdf) | [PDF, 33 pages](brain2body-simple-english.pdf) |
 
-These are working drafts, built on 20 November 2026. Two checks were made inside the project, one of every number and statement against its source and one of the writing; nobody outside the project has reviewed them.
+These are working drafts, built on 20 November 2026. An earlier build had two checks inside the project, one of every number and statement against its source and one of the writing; this edition carries the fixes they asked for, and the fixed text has not been checked again. Nobody outside the project has reviewed them.
 
 ## Where each study is
 

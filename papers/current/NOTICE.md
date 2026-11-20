@@ -1,10 +1,12 @@
 # Credits, licences and notices for this edition of the papers
 
-This file is generated from the papers' own credits table (`shared/credits.tex`), so it says what the papers
-say. Each paper prints the rows it relies on; the letter after each heading says which: NeuroTranslation (N),
-Brain2Body (B), or both. Four links were added here from the notice of the previous edition, so that none is lost:
-the terms of the HYGRIP deposit, PhysioNet's own citation for Hyser, and the two font licences at the commits they
-were copied from.
+This file was generated from the papers' own credits table (`shared/credits.tex`), so it says what the papers
+say, and then added to by hand. Four links were added from the notice of the previous edition, so that none is
+lost: the terms of the HYGRIP deposit, PhysioNet's own citation for Hyser, and the two font licences at the commits
+they were copied from. A file name the table prints as TeX code (`hygrip.h5`) is printed plainly. The template
+brain of NeuroTranslation appendix B, which the papers name without a credit, has a section of its own below.
+And the last paragraph under the font table says why the previous edition's DejaVu notice is gone. Each paper prints the rows it relies
+on; the letter after each heading says which: NeuroTranslation (N), Brain2Body (B), or both.
 
 These papers contain no recordings. For each dataset below, this work selected trials, derived features from them and reports aggregate errors; that is what was changed. The recordings stay with the people who made them.
 
@@ -140,6 +142,15 @@ These papers contain no recordings. For each dataset below, this work selected t
 - Licence: OpenSim: licence to be confirmed at the source. Arm model: MIT, as stated in its reference entry.
 - Used for: The macaque arm geometry in the earlier simulated-arm study.
 
+## Brain template
+
+### NIMH Macaque Template, version 2.0, and its CHARM atlas (N)
+
+- Made by: B. Jung, P. A. Taylor, J. Seidlitz, C. Sponheim, P. Perkins, L. G. Ungerleider, D. Glen and A. Messinger; released by the US National Institute of Mental Health (NIMH) through AFNI
+- Version and where: NMT v2.0, symmetric, with the Cortical Hierarchy Atlas of the Rhesus Macaque (CHARM), as released by AFNI: <https://afni.nimh.nih.gov/pub/dist/atlases/macaque/nmt/>. Paper: <https://doi.org/10.1101/2020.08.05.237818>
+- Licence: No licence is stated in the release's README; to be confirmed at the source. The release asks that the paper above be cited. Nothing from the template is redistributed here.
+- Used for: The template brain of NeuroTranslation appendix B: three counts of faults in its CHARM region-boundary surface, published beside the papers as `results/template-mesh.json`. The template was made by averaging the scans of 31 adult rhesus macaques. The papers print no image of it.
+
 ## Typefaces
 
 ### Noto Sans and Noto Sans Mono (N, B)
@@ -147,14 +158,14 @@ These papers contain no recordings. For each dataset below, this work selected t
 - Made by: The Noto Project Authors
 - Version and where: <https://github.com/notofonts/latin-greek-cyrillic>
 - Licence: SIL Open Font License 1.1
-- Used for: The text of this paper.
+- Used for: The text of all four papers.
 
 ### Fira Math (N)
 
 - Made by: The Fira Math authors
 - Version and where: <https://github.com/firamath/firamath>
 - Licence: SIL Open Font License 1.1
-- Used for: The mathematics of this paper.
+- Used for: The mathematics of the two NeuroTranslation editions.
 
 ## Fonts embedded in the PDFs
 
@@ -170,4 +181,4 @@ history). The seven font files themselves are in the source download, beside the
 
 ## The papers' own text
 
-The text of this paper is dedicated to the public domain under CC0 1.0, to the extent the project holds the rights. Material made by others, which is everything listed above and every publication cited, keeps its own licence and its own requirement of credit.
+The text of these papers is dedicated to the public domain under CC0 1.0, to the extent the project holds the rights. Material made by others, which is everything listed above and every publication cited, keeps its own licence and its own requirement of credit.
