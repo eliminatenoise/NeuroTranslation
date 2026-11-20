@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Two tests of treadmill walking. What predicts the next knee angle, and what muscle recordings reveal about the rhythm of a trial.">
+<meta name="description" content="How a knee forecast travelled between two walking laboratories, and what leg-muscle recordings reveal about the rhythm of a walk.">
 <title>The next knee angle and the rhythm of a walk</title>
 <style>
 :root { color-scheme: light; --ink:#172721; --muted:#4e6058; --accent:#176451; --line:#bdcfc6; --tint:#edf4ef; }
@@ -73,7 +73,7 @@ dd { margin:0; }
 <section class="sheet" aria-labelledby="title">
 <p class="mast">NeuroTranslation / Interoceptomics <a class="download" href="gait-clocks.pdf">Download PDF</a></p>
 <h1 id="title">The next knee angle and the rhythm of a walk</h1>
-<p class="lead">Watch a few seconds of someone walking at a steady pace and you may already have seen the next bend of their knee. In one treadmill study, replaying an earlier stride beat a model that saw only 0.4 seconds of movement. Give a model four seconds and train it to correct the replay, and the result changes. The same recordings let us ask a different question. Can electrical signals from the legs tell us how often the knees bend?</p>
+<p class="lead">Watch a few seconds of someone walking at a steady pace and you may already have seen the next bend of their knee. In one treadmill study, replaying an earlier stride beat a model that saw only 0.4 seconds of movement. With four seconds, a model trained to correct the replay won in all 12 walkers. In a second laboratory it beat replay in six of ten. The original treadmill recordings also let us ask a different question. Can electrical signals from the legs tell us how often the knees bend?</p>
 <h3>Fifteen frames ahead</h3>
 <p>Katmah and colleagues recorded healthy young adults walking on a treadmill. At one belt speed, 0.5 metres per second, body-worn inertial sensors supplied estimates of how far each joint bent. We took five snapshots of both hips, knees and ankles across 0.4 seconds. A small Transformer, a model trained to combine information across those snapshots, estimated both knee angles 15 stored frames after the last snapshot. At 60 frames per second, that is a quarter of a second in the file.</p>
 <figure>
@@ -95,9 +95,9 @@ dd { margin:0; }
 <section class="sheet" aria-labelledby="same-history">
 <p class="mast">Matched walking histories</p>
 <h2 id="same-history">Give each forecast the same four seconds</h2>
-<p class="lead">The previous stride gives a starting answer for each knee. Can a model learn how far to move that answer? This time every method sees the same 240 stored frames through the same cutoff. Each must predict the same two angles 15 frames later.</p>
+<p class="lead">One stride supplies a starting answer for the next. How much should the model change it? Each method sees 240 frames from both knees and predicts the same two angles 15 frames later.</p>
 <h3>Learning a correction on 39 walkers</h3>
-<p>We first matched the final second of knee movement to an earlier part of the walk. One method simply replayed the match. Two others learned a correction from past angles and features of the matching stride. One used a weighted sum of those features. The other used a small Transformer trained for this task, which learns how much information to take from different past moments.</p>
+<p>We matched the last second of knee movement to an earlier stride. One method replayed the match. A linear model learned how strongly to weight features of the stride when correcting the angle. A small Transformer learned which past moments to weigh together.</p>
 <figure><figcaption>Table 2. Error on the same 40,201 forecasts in 12 previously studied walkers</figcaption>
 <table><thead><tr><th scope="col">Forecast from right and left knee angles</th><th scope="col">Mean error</th></tr></thead><tbody>
 <tr><th scope="row">Replay the matched stride</th><td>3.535°</td></tr>
@@ -105,8 +105,11 @@ dd { margin:0; }
 <tr><th scope="row">Replay with the task-trained Transformer</th><td><strong>2.679°</strong></td></tr>
 </tbody></table></figure>
 <p class="result"><strong>The task-trained model came closest for all 12 walkers.</strong> Its mean advantage over replay was 0.856° (95% interval 0.628° to 1.089°, resampling people). Against the linear correction it gained 0.731° (0.579° to 0.891°). These people had been kept out of training, but we knew their earlier forecast results when designing this comparison.</p>
-<h3>Did the earlier movement model carry anything over?</h3>
-<p>NeuroTranslate already had a component trained to recognise patterns in wrist and rat movement. We kept that component fixed and gave it four one-second summaries of the knees. A new calculation used the patterns, the summaries and the stride match to correct the forecast. It missed by 3.465° on average. The summaries and stride match alone gave 3.460°. We then scrambled the earlier component’s learned numbers once and fitted the correction again. It gave 3.422°. The success of the task-trained model therefore gives us no evidence here that earlier training on the other movements helped.</p>
+<h3>Ten new walkers in a second laboratory</h3>
+<p>Reznick and colleagues recorded a faster level walk (nominally 0.8 m/s) using optical markers. We ran the same three methods with their weights fixed. Across 4,828 forecasts, with each walker counted equally, mean errors were <strong>3.242° for the Transformer, 3.398° for replay and 3.602° for the linear correction.</strong></p>
+<p>The Transformer beat replay for six of ten walkers. Its average reduction was 0.156° (95% interval −0.069° to 0.447°). It beat the linear correction for nine, by 0.360° on average (0.199° to 0.511°). Only the second comparison cleared the requirement of eight wins and an interval above zero. People, speed and measurement system changed together. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-stride/external-optical">External test, methods and scores</a></p>
+<h3>Did earlier training on wrists and rats help?</h3>
+<p>On the original 12 walkers, a frozen NeuroTranslate component used four one-second summaries and the stride match. Its new knee readout missed by 3.465°. The same measurements without the component gave 3.460°. Scrambling its earlier weights and fitting the readout again gave 3.422°. Earlier training showed no advantage here.</p>
 <p class="footnote"><a href="https://eliminatenoise.github.io/NeuroTranslation/knee-stride/">Try the four-second forecast</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-stride">Task-trained model</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/knee">Shared-model comparison</a></p>
 </section>
 <section class="sheet" aria-labelledby="rhythm">
@@ -142,10 +145,11 @@ dd { margin:0; }
 </dl>
 <p>The recorded angles introduce a second timing question. The headers for six of the 51 angle files carried the Xsens “HD” label. This processing uses the whole recording and can refine an earlier angle using later information. The other 45 said “Live”. Neither label measures the delay from a person bending a knee to that angle becoming available to a predictor. <a href="https://www.xsens.com/hubfs/User_Manual_Xsens%202025.pdf">Xsens manual, §9.1</a></p>
 <h3>What would settle the timing?</h3>
-<p>Match identifiable events across the devices, measure clock drift from start to finish, and establish when each muscle average and joint estimate became available. A live forecast also needs a separate measurement of the physical knee against which to test its error. Here the target came from the same reconstruction as the inputs. Agreement on rhythm leaves contraction onset, neural intent and the direction of influence unresolved. Other speeds, patients and overground walking remain untested.</p>
+<p>Match identifiable events across the devices, measure clock drift from start to finish, and establish when each muscle average and joint estimate became available. A live forecast also needs a separate measurement of the physical knee against which to test its error. Here the target came from the same reconstruction as the inputs. Agreement on rhythm leaves contraction onset, neural intent and the direction of influence unresolved. The independent forecast at nominally 0.8 m/s changes speed and equipment together. Patients and overground walking remain untested here.</p>
 <footer class="sources">
 <h3>Source and reproducibility</h3>
 <p>Katmah R, AlShehhi A, Kosaji D, Al-Rahmani N, Abdullah M, Hulleck AAV and Khalaf K (2026). <i>A multimodal gait dataset of brain activity, muscle activity, kinematics and ground forces in young adults</i>, v1.0.0. PhysioNet. The tables report new aggregate analyses of the published recordings. <a href="https://doi.org/10.13026/r0ea-7161">Dataset and methods</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · <a href="https://doi.org/10.1038/s44360-026-00096-z">PhysioNet platform citation</a></p>
+<p>Reznick E, Embry K, Neuman R, Bolívar E, Fey N and Gregg R (2021). <i>Human lower-limb kinematics and kinetics during continuously varying locomotion.</i> We selected continuous level walking and scored the frozen model on the optical knee angles. <a href="https://doi.org/10.1038/s41597-021-01057-9">Acquisition</a> · <a href="https://doi.org/10.6084/m9.figshare.14558181.v1">Streaming dataset, CC0</a></p>
 <p>Try the <a href="https://eliminatenoise.github.io/NeuroTranslation/knee-motion/">knee forecast</a> or the <a href="https://eliminatenoise.github.io/NeuroTranslation/gait-rhythm/">rhythm comparison</a>. Source code and numerical results accompany the <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-motion">knee-angle study</a> and <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/gait-rhythm">gait-rhythm study</a>.</p>
 </footer>
 </section>

@@ -14,11 +14,13 @@ On the same 549 forecast instants compared in the linear benchmark, the shared m
 
 ## Predicting the five glove sensors
 
+How much will each finger move when the screen names one of them? In a single recording, the cue alone gave lower errors than a model that also received cortical activity. The target was the average size of the changes between four future glove readings. [Study and saved models](finger-motion/) · [Try the browser model](https://eliminatenoise.github.io/NeuroTranslation/finger-motion/) · [Complete offline download](finger-motion.zip)
+
 A glove recorded how far each finger bent in the device’s own units. Recent glove readings and the word on the screen forecast readings three glove samples ahead. Keeping the last reading gave the lowest average error. Adding a recording from the surface of the brain worsened both fitted forecasts in this one-person experiment. [Study, source and fitted models](cortical-glove/) · [Try the offline-capable reader](https://eliminatenoise.github.io/NeuroTranslation/finger-signals/)
 
 ## Compare the same four seconds of knee movement
 
-An earlier stride supplies the starting answer. A correction trained specifically for the knees averaged 2.679° of error, against 3.535° for stride replay. The new knee output on the shared movement model gave 3.465°. Both evaluations used the same 12 previously studied walkers. [Task-trained model](knee-stride/) · [Download the standalone predictor](knee-stride-model.zip) · [Offline reader](knee-stride.zip) · [Reader source](knee-stride-source.zip)
+An earlier stride supplies the starting answer. A correction trained specifically for the knees averaged 2.679° of error, against 3.535° for stride replay. The new knee output on the shared movement model gave 3.465°. Both evaluations used the same 12 previously studied walkers. In ten walkers measured with optical markers in a second laboratory, the unchanged task-trained model averaged 3.242°, replay 3.398° and the linear correction 3.602°. The advantage over replay was uncertain. [External test](knee-stride/external-optical/) [Task-trained model](knee-stride/) · [Download the standalone predictor](knee-stride-model.zip) · [Offline reader](knee-stride.zip) · [Reader source](knee-stride-source.zip)
 
 ## Do the muscles and knees repeat at the same rate?
 

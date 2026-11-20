@@ -1,0 +1,87 @@
+{
+  "version": "1.0-development",
+  "task": "Five-digit mean absolute change across the three nominal 40-ms steps from t+40 to t+160 ms on the archive row grid.",
+  "origin": {
+    "name": "Kai Joshua Miller, A library of human electrocorticographic data and analyses",
+    "repository": "https://purl.stanford.edu/zk881ps0522",
+    "release_version": 11,
+    "source_license": "CC-BY-SA-4.0",
+    "archive": "fingerflex.zip",
+    "mat_member": "fingerflex/data/bp/bp_fingerflex.mat",
+    "mat_member_sha256": "b8222d13c15c97ec8590ed4b9ea180c639cac0b7c3e04bce178bb349f92be03a",
+    "library_doi": "10.1038/s41562-019-0678-3",
+    "study_doi": "10.1371/journal.pcbi.1002655"
+  },
+  "preparation": {
+    "command": "python prepare_prefix.py ORIGINAL_MEMBER.mat PREPARED.npz",
+    "transformation": "Use the first 362000 source rows [0,362000), keeping original data and flex matrices, raveled electrode-region code and cue[:,0]. Write ecog, flex, region_code and cue in that order using NumPy savez_compressed. The source member must be obtained separately.",
+    "source_npz_sha256": "57ea209841127b6cc04f2c03f8f6146f01b3e0235d169365d009cf3f9c643e9c",
+    "ecog_shape": [
+      362000,
+      46
+    ],
+    "flex_shape": [
+      362000,
+      5
+    ],
+    "region_shape": [
+      46
+    ],
+    "cue_shape": [
+      362000
+    ]
+  },
+  "source_calibration": "0.0298 \u00b5V per amplifier count; 46 original channels. No glove-to-angle calibration.",
+  "fit_software": {
+    "python": "3.13.15",
+    "numpy": "2.4.6",
+    "torch": "2.14.1+cpu",
+    "device": "CPU",
+    "intra_op": 2,
+    "inter_op": 1,
+    "blas_threads": 2
+  },
+  "preparation_software_checked": {
+    "python": "3.13",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "scope": "Exact hash from re-packing the verified development arrays. Raw MAT preparation was not rerun for this experiment."
+  },
+  "analysis": {
+    "method_sha256": "3831e8a178b1bc70be38df94a218df1209ed1a18cad88aa9cdfbc085c0eb4dca",
+    "results_sha256": "7cbe92765225bd2f57df541e2da3052528f2aca4085ee0af1b052d592aa6d549",
+    "source_rows_half_open": [
+      0,
+      362000
+    ],
+    "fit_rows_half_open": [
+      0,
+      236000
+    ],
+    "evaluation_rows_half_open": [
+      244000,
+      362000
+    ],
+    "earlier_individuals_or_pretraining": "No pretrained weights or external people used. Single recording preallocated to development.",
+    "independent_reference": "Future recorded five-sensor glove changes; no physical joint-angle or fingertip-position calibration."
+  },
+  "rights": {
+    "original_python": "CC0-1.0",
+    "derived_weights_scales_outputs_and_scientific_account": "CC-BY-SA-4.0",
+    "notice": "RIGHTS.md",
+    "raw_measurements_included": false
+  },
+  "example": {
+    "invented_generator": "numpy.random.default_rng(1729), artificial sinusoids, noise and independent invented glove comparator",
+    "output_sha256": "285680d24410890f5c14502e75c57064198d3616d8d498b3a2b67f38b76545c0"
+  },
+  "weights": {
+    "ridge_aligned.npz": "8b1591f06ac2376642a6c38d225d627d8ccafce906259bd7250eccdaf4b41957",
+    "ridge_cortex.npz": "66ca153b7f6f663ae1546ff1527e8e1d977afa6d18c1037551d537e871517190",
+    "ridge_cue.npz": "683fa8f2187ada8c3e2b219006f9a37dcbfe10204237c4a3345fe6509b7c488c",
+    "ridge_history.npz": "3d145688b8afba121522064d4fadb1eb8dc77da7690b4bde0b8ed8503072b8ac",
+    "transformer_aligned.npz": "3c3e28245f56faa585ae04b88a6336bb3dd01723e0687bf5349f585f057ed1c2",
+    "transformer_cortex.npz": "22dc1eadfbbd01ae64bd60368cefb54869d4dfa0e686816f486a62c1e0859fba",
+    "transformer_cue.npz": "dd61a5d92c715ece8adab777515d62eec178f4a1a47b5c758518234f477d2c8b"
+  }
+}

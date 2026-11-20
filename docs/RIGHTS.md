@@ -157,3 +157,9 @@ The four PDFs embed Noto Sans, Noto Sans Mono, Fira Math and DejaVu Sans. Their 
 ## Stanford FingerFlex
 
 Kai Joshua Miller and colleagues recorded surface electrical activity and finger-glove readings. Stanford distributes the FingerFlex archive under CC BY-SA 4.0. Changes in this release include selecting an early recording segment, fitting forecasts and publishing derived weights and aggregate comparisons. The raw participant signals stay with Stanford. The source-derived weights, results and combined example retain the source share-alike terms. Original project code carries the CC0 dedication. [Original dataset](https://purl.stanford.edu/zk881ps0522) · [Complete terms, credit and required ethics statement](../models/cortical-glove/RIGHTS.md)
+
+The finger-motion experiment measures changes in the five glove readings across a future interval. Its trained readouts, aggregates and scientific account carry CC BY-SA 4.0. The invented signal and original code carry CC0. [Finger-motion study attribution, changes and original ethics](../models/finger-motion/RIGHTS.md) · [Browser adaptation](finger-motion/RIGHTS.md)
+
+## External optical walking data
+
+E. Reznick, K. Embry, R. Neuman, E. Bolívar, N. Fey and R. Gregg recorded continuous treadmill walking with optical markers. We selected nominal 0.8 m/s level walking and compared the stored knee angles with forecasts from the unchanged PhysioNet-trained model. The Figshare streaming data and dictionary carry CC0. The Scientific Data article carries CC BY 4.0. [Data and licence](https://doi.org/10.6084/m9.figshare.14558181.v1) · [Acquisition and reconstruction](https://doi.org/10.1038/s41597-021-01057-9) · [Evaluation, scores and original training attribution](../models/knee-stride/external-optical/)
