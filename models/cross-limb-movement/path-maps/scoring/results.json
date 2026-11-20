@@ -1,0 +1,5826 @@
+{
+  "version": 1,
+  "protocol_sha256": "43a0780e706beb30f93826ae55e8f65bfe156bd47fa5795eb13093427fef3911",
+  "development_sha256": "a11706a31bb049fcd84c81264cfbdc5497205602ceb67c0f7a69fbbf906f7590",
+  "seeds": [
+    1641,
+    2718,
+    3917
+  ],
+  "studies": {
+    "balance": {
+      "people": 18,
+      "events": 5179,
+      "folds": {
+        "0": {
+          "events": 1710,
+          "people": 6
+        },
+        "1": {
+          "events": 1744,
+          "people": 6
+        },
+        "2": {
+          "events": 1725,
+          "people": 6
+        }
+      },
+      "axis_labels": [
+        "ML",
+        "SI",
+        "AP"
+      ],
+      "muscle_units": "\u00b5V",
+      "channel_support": {
+        "left tibialis anterior": {
+          "events": 5179,
+          "people": 18
+        },
+        "left soleus": {
+          "events": 5179,
+          "people": 18
+        },
+        "left medial gastrocnemius": {
+          "events": 5179,
+          "people": 18
+        },
+        "left peroneus longus": {
+          "events": 5179,
+          "people": 18
+        },
+        "right tibialis anterior": {
+          "events": 5179,
+          "people": 18
+        },
+        "right soleus": {
+          "events": 5179,
+          "people": 18
+        },
+        "right medial gastrocnemius": {
+          "events": 5179,
+          "people": 18
+        },
+        "right peroneus longus": {
+          "events": 5179,
+          "people": 18
+        }
+      },
+      "marker_history_lag_ms": {
+        "1": [
+          31.25,
+          31.25
+        ],
+        "4": [
+          125.0,
+          125.0
+        ]
+      },
+      "methods": {
+        "stationary": {
+          "scores": {
+            "muscle_mae": 11.35536904466902,
+            "path_mean_distance_mm": 4.991928753056924,
+            "endpoint_distance_mm": 9.426279338091309,
+            "axis0_mae_mm": 2.536347809445908,
+            "axis1_mae_mm": 3.275367399081672,
+            "axis2_mae_mm": 1.4177854205186364,
+            "axis0_bias_mm": 0.02077806512692992,
+            "axis1_bias_mm": 0.0647464979059547,
+            "axis2_bias_mm": 0.020178097279741194,
+            "mae left tibialis anterior": 12.59585651157309,
+            "mae left soleus": 5.802906469334524,
+            "mae left medial gastrocnemius": 14.73614146785112,
+            "mae left peroneus longus": 14.047487990575043,
+            "mae right tibialis anterior": 12.317425169353099,
+            "mae right soleus": 4.953567967246729,
+            "mae right medial gastrocnemius": 11.101471612731908,
+            "mae right peroneus longus": 15.28809516868664,
+            "bias left tibialis anterior": -0.44170434787057505,
+            "bias left soleus": -0.21037853985119567,
+            "bias left medial gastrocnemius": -0.0701686069227598,
+            "bias left peroneus longus": -0.6345517181135164,
+            "bias right tibialis anterior": 0.24685117566136683,
+            "bias right soleus": -0.018467642556878126,
+            "bias right medial gastrocnemius": -0.07382631341014263,
+            "bias right peroneus longus": 0.04779914344896377
+          },
+          "people": 18
+        },
+        "velocity_exact_31_25ms": {
+          "scores": {
+            "muscle_mae": 11.35536904466902,
+            "path_mean_distance_mm": 2.582924807536606,
+            "endpoint_distance_mm": 5.726464568915303,
+            "axis0_mae_mm": 1.4397735705369172,
+            "axis1_mae_mm": 1.2433713496196797,
+            "axis2_mae_mm": 1.2193583769540437,
+            "axis0_bias_mm": -0.02239983904809984,
+            "axis1_bias_mm": 0.013112729820659717,
+            "axis2_bias_mm": -0.027686124661368418,
+            "mae left tibialis anterior": 12.59585651157309,
+            "mae left soleus": 5.802906469334524,
+            "mae left medial gastrocnemius": 14.73614146785112,
+            "mae left peroneus longus": 14.047487990575043,
+            "mae right tibialis anterior": 12.317425169353099,
+            "mae right soleus": 4.953567967246729,
+            "mae right medial gastrocnemius": 11.101471612731908,
+            "mae right peroneus longus": 15.28809516868664,
+            "bias left tibialis anterior": -0.44170434787057505,
+            "bias left soleus": -0.21037853985119567,
+            "bias left medial gastrocnemius": -0.0701686069227598,
+            "bias left peroneus longus": -0.6345517181135164,
+            "bias right tibialis anterior": 0.24685117566136683,
+            "bias right soleus": -0.018467642556878126,
+            "bias right medial gastrocnemius": -0.07382631341014263,
+            "bias right peroneus longus": 0.04779914344896377
+          },
+          "people": 18
+        },
+        "velocity_exact_125ms": {
+          "scores": {
+            "muscle_mae": 11.35536904466902,
+            "path_mean_distance_mm": 3.2574888119686767,
+            "endpoint_distance_mm": 6.815176905692387,
+            "axis0_mae_mm": 1.631062250654427,
+            "axis1_mae_mm": 1.7563325020196898,
+            "axis2_mae_mm": 1.4946525432446285,
+            "axis0_bias_mm": -0.010938834001456784,
+            "axis1_bias_mm": 0.015882206348531786,
+            "axis2_bias_mm": -0.0028570083820648215,
+            "mae left tibialis anterior": 12.59585651157309,
+            "mae left soleus": 5.802906469334524,
+            "mae left medial gastrocnemius": 14.73614146785112,
+            "mae left peroneus longus": 14.047487990575043,
+            "mae right tibialis anterior": 12.317425169353099,
+            "mae right soleus": 4.953567967246729,
+            "mae right medial gastrocnemius": 11.101471612731908,
+            "mae right peroneus longus": 15.28809516868664,
+            "bias left tibialis anterior": -0.44170434787057505,
+            "bias left soleus": -0.21037853985119567,
+            "bias left medial gastrocnemius": -0.0701686069227598,
+            "bias left peroneus longus": -0.6345517181135164,
+            "bias right tibialis anterior": 0.24685117566136683,
+            "bias right soleus": -0.018467642556878126,
+            "bias right medial gastrocnemius": -0.07382631341014263,
+            "bias right peroneus longus": 0.04779914344896377
+          },
+          "people": 18
+        },
+        "velocity_knot_31_25ms": {
+          "scores": {
+            "muscle_mae": 11.35536904466902,
+            "path_mean_distance_mm": 2.582924807536606,
+            "endpoint_distance_mm": 5.726464568915303,
+            "axis0_mae_mm": 1.4397735705369172,
+            "axis1_mae_mm": 1.2433713496196797,
+            "axis2_mae_mm": 1.2193583769540437,
+            "axis0_bias_mm": -0.02239983904809984,
+            "axis1_bias_mm": 0.013112729820659717,
+            "axis2_bias_mm": -0.027686124661368418,
+            "mae left tibialis anterior": 12.59585651157309,
+            "mae left soleus": 5.802906469334524,
+            "mae left medial gastrocnemius": 14.73614146785112,
+            "mae left peroneus longus": 14.047487990575043,
+            "mae right tibialis anterior": 12.317425169353099,
+            "mae right soleus": 4.953567967246729,
+            "mae right medial gastrocnemius": 11.101471612731908,
+            "mae right peroneus longus": 15.28809516868664,
+            "bias left tibialis anterior": -0.44170434787057505,
+            "bias left soleus": -0.21037853985119567,
+            "bias left medial gastrocnemius": -0.0701686069227598,
+            "bias left peroneus longus": -0.6345517181135164,
+            "bias right tibialis anterior": 0.24685117566136683,
+            "bias right soleus": -0.018467642556878126,
+            "bias right medial gastrocnemius": -0.07382631341014263,
+            "bias right peroneus longus": 0.04779914344896377
+          },
+          "people": 18
+        },
+        "velocity_knot_125ms": {
+          "scores": {
+            "muscle_mae": 11.35536904466902,
+            "path_mean_distance_mm": 3.2574888119686767,
+            "endpoint_distance_mm": 6.815176905692387,
+            "axis0_mae_mm": 1.631062250654427,
+            "axis1_mae_mm": 1.7563325020196898,
+            "axis2_mae_mm": 1.4946525432446285,
+            "axis0_bias_mm": -0.010938834001456784,
+            "axis1_bias_mm": 0.015882206348531786,
+            "axis2_bias_mm": -0.0028570083820648215,
+            "mae left tibialis anterior": 12.59585651157309,
+            "mae left soleus": 5.802906469334524,
+            "mae left medial gastrocnemius": 14.73614146785112,
+            "mae left peroneus longus": 14.047487990575043,
+            "mae right tibialis anterior": 12.317425169353099,
+            "mae right soleus": 4.953567967246729,
+            "mae right medial gastrocnemius": 11.101471612731908,
+            "mae right peroneus longus": 15.28809516868664,
+            "bias left tibialis anterior": -0.44170434787057505,
+            "bias left soleus": -0.21037853985119567,
+            "bias left medial gastrocnemius": -0.0701686069227598,
+            "bias left peroneus longus": -0.6345517181135164,
+            "bias right tibialis anterior": 0.24685117566136683,
+            "bias right soleus": -0.018467642556878126,
+            "bias right medial gastrocnemius": -0.07382631341014263,
+            "bias right peroneus longus": 0.04779914344896377
+          },
+          "people": 18
+        },
+        "separate": {
+          "scores": {
+            "muscle_mae": 11.36611107331657,
+            "path_mean_distance_mm": 2.582188397701514,
+            "endpoint_distance_mm": 5.6843352973361085,
+            "axis0_mae_mm": 1.4331357872733799,
+            "axis1_mae_mm": 1.2381258543324356,
+            "axis2_mae_mm": 1.2322731964696088,
+            "axis0_bias_mm": -0.04390193144161426,
+            "axis1_bias_mm": -0.03325682030613136,
+            "axis2_bias_mm": -0.012869246495629148,
+            "mae left tibialis anterior": 12.625063884674722,
+            "mae left soleus": 5.81465314371386,
+            "mae left medial gastrocnemius": 14.743760028940317,
+            "mae left peroneus longus": 14.059615490997551,
+            "mae right tibialis anterior": 12.318711136874136,
+            "mae right soleus": 4.953029491236528,
+            "mae right medial gastrocnemius": 11.109851561613361,
+            "mae right peroneus longus": 15.304203848482096,
+            "bias left tibialis anterior": -0.31015449244984705,
+            "bias left soleus": -0.13492681596602335,
+            "bias left medial gastrocnemius": -0.18526489109855104,
+            "bias left peroneus longus": -0.5780466547853673,
+            "bias right tibialis anterior": 0.13900386600429318,
+            "bias right soleus": 0.03398613537852462,
+            "bias right medial gastrocnemius": -0.0488673556363466,
+            "bias right peroneus longus": 0.21819062216912707
+          },
+          "people": 18
+        },
+        "matched": {
+          "scores": {
+            "muscle_mae": 11.373264556015066,
+            "path_mean_distance_mm": 2.6451109091218474,
+            "endpoint_distance_mm": 5.834772632247063,
+            "axis0_mae_mm": 1.4555815712076705,
+            "axis1_mae_mm": 1.2421602367591962,
+            "axis2_mae_mm": 1.2956783690742963,
+            "axis0_bias_mm": -0.0030990731318881314,
+            "axis1_bias_mm": 0.015894776655893332,
+            "axis2_bias_mm": -0.06628735464837084,
+            "mae left tibialis anterior": 12.642606764129878,
+            "mae left soleus": 5.812968336872753,
+            "mae left medial gastrocnemius": 14.743322606220143,
+            "mae left peroneus longus": 14.072330907209324,
+            "mae right tibialis anterior": 12.33338456240749,
+            "mae right soleus": 4.96142274090505,
+            "mae right medial gastrocnemius": 11.115275275958755,
+            "mae right peroneus longus": 15.304805254417127,
+            "bias left tibialis anterior": -0.0952084548169239,
+            "bias left soleus": -0.08385805665327345,
+            "bias left medial gastrocnemius": -0.029778529321575667,
+            "bias left peroneus longus": -0.43655036437957556,
+            "bias right tibialis anterior": 0.26594679664870274,
+            "bias right soleus": 0.13227455319332954,
+            "bias right medial gastrocnemius": 0.018575040199695518,
+            "bias right peroneus longus": 0.2790354085920477
+          },
+          "people": 18
+        },
+        "original": {
+          "scores": {
+            "muscle_mae": 11.37186372763439,
+            "path_mean_distance_mm": 2.6440290809758005,
+            "endpoint_distance_mm": 5.801363567588033,
+            "axis0_mae_mm": 1.4651498033459778,
+            "axis1_mae_mm": 1.2349413432160141,
+            "axis2_mae_mm": 1.291273836579264,
+            "axis0_bias_mm": 0.012134451058858076,
+            "axis1_bias_mm": 0.019302834958674697,
+            "axis2_bias_mm": -0.050929202044293624,
+            "mae left tibialis anterior": 12.640152099794383,
+            "mae left soleus": 5.809814199059979,
+            "mae left medial gastrocnemius": 14.737414405657894,
+            "mae left peroneus longus": 14.073093291969112,
+            "mae right tibialis anterior": 12.3243031868101,
+            "mae right soleus": 4.957953728081313,
+            "mae right medial gastrocnemius": 11.118312850636658,
+            "mae right peroneus longus": 15.31386605906569,
+            "bias left tibialis anterior": -0.14474782669919128,
+            "bias left soleus": -0.05572554558182325,
+            "bias left medial gastrocnemius": -0.0997419503790409,
+            "bias left peroneus longus": -0.4690993629243489,
+            "bias right tibialis anterior": 0.24442879280069457,
+            "bias right soleus": 0.10170796287103692,
+            "bias right medial gastrocnemius": -0.018505134219663513,
+            "bias right peroneus longus": 0.3421265236827428
+          },
+          "people": 18
+        },
+        "specialist_exposure": {
+          "scores": {
+            "muscle_mae": 11.358297116937855,
+            "path_mean_distance_mm": 2.4970901713999387,
+            "endpoint_distance_mm": 5.423988892327838,
+            "axis0_mae_mm": 1.392444203330142,
+            "axis1_mae_mm": 1.1852898189039858,
+            "axis2_mae_mm": 1.2007384075017233,
+            "axis0_bias_mm": -0.082316393884653,
+            "axis1_bias_mm": 0.04175613929937183,
+            "axis2_bias_mm": -0.030187465810321598,
+            "mae left tibialis anterior": 12.608713027889678,
+            "mae left soleus": 5.8028826792187695,
+            "mae left medial gastrocnemius": 14.743633287597005,
+            "mae left peroneus longus": 14.049405545249824,
+            "mae right tibialis anterior": 12.320075038241793,
+            "mae right soleus": 4.951078049614273,
+            "mae right medial gastrocnemius": 11.10504662057786,
+            "mae right peroneus longus": 15.285542687113658,
+            "bias left tibialis anterior": -0.3664021319686457,
+            "bias left soleus": -0.19597403482621745,
+            "bias left medial gastrocnemius": -0.1438474817224241,
+            "bias left peroneus longus": -0.6708415311152089,
+            "bias right tibialis anterior": 0.20675127917801703,
+            "bias right soleus": -0.002205407015878446,
+            "bias right medial gastrocnemius": -0.054174335609209444,
+            "bias right peroneus longus": 0.08366320303901853
+          },
+          "people": 18
+        },
+        "specialist_steps": {
+          "scores": {
+            "muscle_mae": 11.358243718857928,
+            "path_mean_distance_mm": 2.4811653697703395,
+            "endpoint_distance_mm": 5.372329079423364,
+            "axis0_mae_mm": 1.3923703376315584,
+            "axis1_mae_mm": 1.1878028477756948,
+            "axis2_mae_mm": 1.1721142764663666,
+            "axis0_bias_mm": 0.005654040607145216,
+            "axis1_bias_mm": -0.01338222143424239,
+            "axis2_bias_mm": 0.12397697949374918,
+            "mae left tibialis anterior": 12.634680767977635,
+            "mae left soleus": 5.8064650534783375,
+            "mae left medial gastrocnemius": 14.740352884377623,
+            "mae left peroneus longus": 14.03843291437473,
+            "mae right tibialis anterior": 12.312539115744945,
+            "mae right soleus": 4.951466559280258,
+            "mae right medial gastrocnemius": 11.112665309438533,
+            "mae right peroneus longus": 15.269347146191357,
+            "bias left tibialis anterior": -0.5442082097298967,
+            "bias left soleus": -0.29926522199186645,
+            "bias left medial gastrocnemius": -0.3494956366359527,
+            "bias left peroneus longus": -0.8768089261175456,
+            "bias right tibialis anterior": -0.08816544586382544,
+            "bias right soleus": -0.1310270278682423,
+            "bias right medial gastrocnemius": -0.14259608724530856,
+            "bias right peroneus longus": -0.22984685993672965
+          },
+          "people": 18
+        }
+      },
+      "primary": {
+        "muscle_mae": {
+          "mean": -0.007153482698493559,
+          "ci95": [
+            -0.01185279629537598,
+            -0.0027095245890805695
+          ],
+          "upper98_75": -0.002028332643946912,
+          "people_lower": 15,
+          "people": 18,
+          "seed_means": [
+            -0.004173796636166028,
+            -0.013235245415458952,
+            -0.004051406043855701
+          ],
+          "seed_sd": 0.005267316505904522,
+          "seed_range": [
+            -0.013235245415458952,
+            -0.004051406043855701
+          ],
+          "participant_iqr": [
+            -0.013229450446932875,
+            -0.001368733038449458
+          ],
+          "leave_one_out_range": [
+            -0.008234484442008172,
+            -0.005802498769267522
+          ]
+        },
+        "path_mean_distance_mm": {
+          "mean": -0.06292251142033392,
+          "ci95": [
+            -0.07171799315888781,
+            -0.05344747438115834
+          ],
+          "upper98_75": -0.05206576702721841,
+          "people_lower": 18,
+          "people": 18,
+          "seed_means": [
+            -0.10086330561875051,
+            -0.04876218721807065,
+            -0.03914204142418062
+          ],
+          "seed_sd": 0.03320790116190537,
+          "seed_range": [
+            -0.10086330561875051,
+            -0.03914204142418062
+          ],
+          "participant_iqr": [
+            -0.07675406125686528,
+            -0.05368064200023169
+          ],
+          "leave_one_out_range": [
+            -0.06547437417160457,
+            -0.061427921683438635
+          ]
+        }
+      },
+      "separate_minus": {
+        "matched": {
+          "muscle_mae": {
+            "mean": -0.007153482698493559,
+            "ci95": [
+              -0.01185279629537598,
+              -0.0027095245890805695
+            ],
+            "upper98_75": -0.002028332643946912,
+            "people_lower": 15,
+            "people": 18,
+            "seed_means": [
+              -0.004173796636166028,
+              -0.013235245415458952,
+              -0.004051406043855701
+            ],
+            "seed_sd": 0.005267316505904522,
+            "seed_range": [
+              -0.013235245415458952,
+              -0.004051406043855701
+            ],
+            "participant_iqr": [
+              -0.013229450446932875,
+              -0.001368733038449458
+            ],
+            "leave_one_out_range": [
+              -0.008234484442008172,
+              -0.005802498769267522
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -0.06292251142033392,
+            "ci95": [
+              -0.07171799315888781,
+              -0.05344747438115834
+            ],
+            "upper98_75": -0.05206576702721841,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -0.10086330561875051,
+              -0.04876218721807065,
+              -0.03914204142418062
+            ],
+            "seed_sd": 0.03320790116190537,
+            "seed_range": [
+              -0.10086330561875051,
+              -0.03914204142418062
+            ],
+            "participant_iqr": [
+              -0.07675406125686528,
+              -0.05368064200023169
+            ],
+            "leave_one_out_range": [
+              -0.06547437417160457,
+              -0.061427921683438635
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -0.1504373349109579,
+            "ci95": [
+              -0.17505288225877072,
+              -0.12333742981338318
+            ],
+            "upper98_75": -0.11853619207558343,
+            "people_lower": 17,
+            "people": 18,
+            "seed_means": [
+              -0.2542228200991384,
+              -0.09094865155694992,
+              -0.10614053307678535
+            ],
+            "seed_sd": 0.09020126671969582,
+            "seed_range": [
+              -0.2542228200991384,
+              -0.09094865155694992
+            ],
+            "participant_iqr": [
+              -0.19203813460694025,
+              -0.12538983792542943
+            ],
+            "leave_one_out_range": [
+              -0.15937646112008605,
+              -0.1460148891220433
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": -0.0224457839342911,
+            "ci95": [
+              -0.03483466356773968,
+              -0.010600987831949965
+            ],
+            "upper98_75": -0.008802649420246658,
+            "people_lower": 16,
+            "people": 18,
+            "seed_means": [
+              -0.014748727117137114,
+              -0.01979841091180113,
+              -0.03279021377393507
+            ],
+            "seed_sd": 0.009307537168177758,
+            "seed_range": [
+              -0.03279021377393507,
+              -0.014748727117137114
+            ],
+            "participant_iqr": [
+              -0.043883979792016005,
+              -0.007323609058100053
+            ],
+            "leave_one_out_range": [
+              -0.025278495504094913,
+              -0.01957755436291604
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": -0.0040343824267603315,
+            "ci95": [
+              -0.009787305066961047,
+              0.002331489387548273
+            ],
+            "upper98_75": 0.0033235029472506433,
+            "people_lower": 13,
+            "people": 18,
+            "seed_means": [
+              -0.006319089290723427,
+              0.001407714667086335,
+              -0.007191772656643903
+            ],
+            "seed_sd": 0.004733150076685645,
+            "seed_range": [
+              -0.007191772656643903,
+              0.001407714667086335
+            ],
+            "participant_iqr": [
+              -0.013396648961053248,
+              0.00024192504178222052
+            ],
+            "leave_one_out_range": [
+              -0.005998717183737908,
+              -0.0029402652998764627
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": -0.0634051726046878,
+            "ci95": [
+              -0.08049630434902869,
+              -0.04767123608914209
+            ],
+            "upper98_75": -0.04562477557274213,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -0.11701795709600013,
+              -0.05952031659814738,
+              -0.013677244119915881
+            ],
+            "seed_sd": 0.051779772298118705,
+            "seed_range": [
+              -0.11701795709600013,
+              -0.013677244119915881
+            ],
+            "participant_iqr": [
+              -0.08929513531068166,
+              -0.038332346115297226
+            ],
+            "leave_one_out_range": [
+              -0.06619174985731868,
+              -0.05978954336618356
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": -0.04080285830972611,
+            "ci95": [
+              -0.0577047575297256,
+              -0.022296483422236654
+            ],
+            "upper98_75": -0.01999328261388774,
+            "people_lower": 14,
+            "people": 18,
+            "seed_means": [
+              -0.06518339623384611,
+              0.10581254871033209,
+              -0.16303772740566427
+            ],
+            "seed_sd": 0.1360732365824153,
+            "seed_range": [
+              -0.16303772740566427,
+              0.10581254871033209
+            ],
+            "participant_iqr": [
+              -0.06731583597394586,
+              -0.014561567640262575
+            ],
+            "leave_one_out_range": [
+              -0.045644746369833886,
+              -0.03739771456984983
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -0.049151596962024695,
+            "ci95": [
+              -0.07273124763586719,
+              -0.027809349088966966
+            ],
+            "upper98_75": -0.025304366341385623,
+            "people_lower": 16,
+            "people": 18,
+            "seed_means": [
+              -0.14412806155740027,
+              -0.03994669628029182,
+              0.036619966951618003
+            ],
+            "seed_sd": 0.09072491443861849,
+            "seed_range": [
+              -0.14412806155740027,
+              0.036619966951618003
+            ],
+            "participant_iqr": [
+              -0.07415376908466438,
+              -0.012847091167566278
+            ],
+            "leave_one_out_range": [
+              -0.05310082867117563,
+              -0.04270286071425027
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 0.0534181081527417,
+            "ci95": [
+              -0.011198458667088683,
+              0.12192808105647145
+            ],
+            "upper98_75": 0.13112265374379012,
+            "people_lower": 10,
+            "people": 18,
+            "seed_means": [
+              0.10486318657770494,
+              -0.095569599140663,
+              0.15096073702118307
+            ],
+            "seed_sd": 0.1310696331444899,
+            "seed_range": [
+              -0.095569599140663,
+              0.15096073702118307
+            ],
+            "participant_iqr": [
+              -0.04884905369513781,
+              0.21803693439487654
+            ],
+            "leave_one_out_range": [
+              0.03991977650582884,
+              0.06207919437799731
+            ]
+          }
+        },
+        "original": {
+          "muscle_mae": {
+            "mean": -0.00575265431781914,
+            "ci95": [
+              -0.010284207330436706,
+              -0.0012247580400257345
+            ],
+            "upper98_75": -0.0007092700047248063,
+            "people_lower": 12,
+            "people": 18,
+            "seed_means": [
+              0.004598165467542486,
+              -0.02174676929970741,
+              -0.0001093591212924948
+            ],
+            "seed_sd": 0.014049874820759744,
+            "seed_range": [
+              -0.02174676929970741,
+              0.004598165467542486
+            ],
+            "participant_iqr": [
+              -0.011962594648359174,
+              0.00271337415810106
+            ],
+            "leave_one_out_range": [
+              -0.006751954426047227,
+              -0.0047986688069484125
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -0.0618406832742877,
+            "ci95": [
+              -0.07753341952579679,
+              -0.04741363418390421
+            ],
+            "upper98_75": -0.04595376053546284,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -0.053202640538571364,
+              -0.06067283123984467,
+              -0.07164657804444707
+            ],
+            "seed_sd": 0.009277263414441067,
+            "seed_range": [
+              -0.07164657804444707,
+              -0.053202640538571364
+            ],
+            "participant_iqr": [
+              -0.0898698229053978,
+              -0.03540775412709777
+            ],
+            "leave_one_out_range": [
+              -0.06409814436827624,
+              -0.05813646979855654
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -0.11702827025192544,
+            "ci95": [
+              -0.14874364890791175,
+              -0.08733952450780992
+            ],
+            "upper98_75": -0.0829402911783304,
+            "people_lower": 17,
+            "people": 18,
+            "seed_means": [
+              -0.09568877367542585,
+              -0.10806691273707601,
+              -0.14732912434327447
+            ],
+            "seed_sd": 0.026961285218926503,
+            "seed_range": [
+              -0.14732912434327447,
+              -0.09568877367542585
+            ],
+            "participant_iqr": [
+              -0.1761293170458369,
+              -0.06997995194344941
+            ],
+            "leave_one_out_range": [
+              -0.12515372554269819,
+              -0.1098618752406583
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": -0.0320140160725985,
+            "ci95": [
+              -0.04306407788652015,
+              -0.0207241041659683
+            ],
+            "upper98_75": -0.01931160627932549,
+            "people_lower": 16,
+            "people": 18,
+            "seed_means": [
+              -0.018542115003094488,
+              -0.05700191715066521,
+              -0.02049801606403581
+            ],
+            "seed_sd": 0.02166224336156076,
+            "seed_range": [
+              -0.05700191715066521,
+              -0.018542115003094488
+            ],
+            "participant_iqr": [
+              -0.05098094837147319,
+              -0.015215419489571076
+            ],
+            "leave_one_out_range": [
+              -0.03483643228270425,
+              -0.029514685356314393
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": 0.003184511116421597,
+            "ci95": [
+              -0.005768937364979567,
+              0.013334411924899415
+            ],
+            "upper98_75": 0.014744531968403517,
+            "people_lower": 11,
+            "people": 18,
+            "seed_means": [
+              0.039473463701794,
+              -0.018346859382652625,
+              -0.01157307096987658
+            ],
+            "seed_sd": 0.03160913020272496,
+            "seed_range": [
+              -0.018346859382652625,
+              0.039473463701794
+            ],
+            "participant_iqr": [
+              -0.01139941612149481,
+              0.017188346160193508
+            ],
+            "leave_one_out_range": [
+              6.130581656694239e-06,
+              0.0046653309031736276
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": -0.059000640109655195,
+            "ci95": [
+              -0.0823918563179789,
+              -0.038215057386993406
+            ],
+            "upper98_75": -0.03622209922652892,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -0.09005323818247864,
+              -0.020667406300982953,
+              -0.06628127584550399
+            ],
+            "seed_sd": 0.03526122741780814,
+            "seed_range": [
+              -0.09005323818247864,
+              -0.020667406300982953
+            ],
+            "participant_iqr": [
+              -0.09334527107065109,
+              -0.023446871550216276
+            ],
+            "leave_one_out_range": [
+              -0.06175435891185005,
+              -0.053242706057890825
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": -0.05603638250047232,
+            "ci95": [
+              -0.09113280249456164,
+              -0.020220726966853016
+            ],
+            "upper98_75": -0.01498652823868618,
+            "people_lower": 14,
+            "people": 18,
+            "seed_means": [
+              -0.07171577569150515,
+              0.15869797077638223,
+              -0.25509134258629407
+            ],
+            "seed_sd": 0.2073397730572165,
+            "seed_range": [
+              -0.25509134258629407,
+              0.15869797077638223
+            ],
+            "participant_iqr": [
+              -0.13090228072161877,
+              -0.011158930697968987
+            ],
+            "leave_one_out_range": [
+              -0.06381872117758274,
+              -0.05007868404932408
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -0.05255965526480605,
+            "ci95": [
+              -0.10244203484081121,
+              -0.0031247915643014077
+            ],
+            "upper98_75": 0.0033309896370411858,
+            "people_lower": 12,
+            "people": 18,
+            "seed_means": [
+              -0.09143894489217774,
+              -0.03539835831932398,
+              -0.03084166258291643
+            ],
+            "seed_sd": 0.033747447910254455,
+            "seed_range": [
+              -0.09143894489217774,
+              -0.03084166258291643
+            ],
+            "participant_iqr": [
+              -0.14652986088195805,
+              0.011850013414794405
+            ],
+            "leave_one_out_range": [
+              -0.06263497751410997,
+              -0.04065369077966351
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 0.038059955548664474,
+            "ci95": [
+              0.008317108161052243,
+              0.07209113585580794
+            ],
+            "upper98_75": 0.07727484624816444,
+            "people_lower": 6,
+            "people": 18,
+            "seed_means": [
+              -0.0114359822524038,
+              -0.054926312399121074,
+              0.18054216129751827
+            ],
+            "seed_sd": 0.12529459852827513,
+            "seed_range": [
+              -0.054926312399121074,
+              0.18054216129751827
+            ],
+            "participant_iqr": [
+              -0.012050228007842232,
+              0.061645710821079946
+            ],
+            "leave_one_out_range": [
+              0.027446984021491934,
+              0.04294438707078574
+            ]
+          }
+        },
+        "specialist_exposure": {
+          "muscle_mae": {
+            "mean": 0.007813956378713528,
+            "ci95": [
+              -0.0013869411832246243,
+              0.015546709672003218
+            ],
+            "upper98_75": 0.01627763147735088,
+            "people_lower": 6,
+            "people": 18,
+            "seed_means": [
+              0.023628629356855453,
+              0.0013026624436920623,
+              -0.0014894226644069303
+            ],
+            "seed_sd": 0.013766874949199485,
+            "seed_range": [
+              -0.0014894226644069303,
+              0.023628629356855453
+            ],
+            "participant_iqr": [
+              -0.0023700831257711386,
+              0.021310574003878074
+            ],
+            "leave_one_out_range": [
+              0.006395723290178364,
+              0.010919234760190561
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": 0.08509822630157471,
+            "ci95": [
+              0.06500016778431372,
+              0.104890164319084
+            ],
+            "upper98_75": 0.10679521178609838,
+            "people_lower": 0,
+            "people": 18,
+            "seed_means": [
+              0.10185169211300234,
+              0.06684811310836838,
+              0.08659487368335339
+            ],
+            "seed_sd": 0.01754971796988349,
+            "seed_range": [
+              0.06684811310836838,
+              0.10185169211300234
+            ],
+            "participant_iqr": [
+              0.05254096522021656,
+              0.1213298978230997
+            ],
+            "leave_one_out_range": [
+              0.08165048081096521,
+              0.09000827590440211
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": 0.26034640500826917,
+            "ci95": [
+              0.2166953642680778,
+              0.30387802267174996
+            ],
+            "upper98_75": 0.3099264685059285,
+            "people_lower": 0,
+            "people": 18,
+            "seed_means": [
+              0.2862795373062943,
+              0.23025758693072984,
+              0.2645020907877835
+            ],
+            "seed_sd": 0.02824122915515708,
+            "seed_range": [
+              0.23025758693072984,
+              0.2862795373062943
+            ],
+            "participant_iqr": [
+              0.18996968606773773,
+              0.3442422623040986
+            ],
+            "leave_one_out_range": [
+              0.2503018218517564,
+              0.2709917833077727
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": 0.040691583943237644,
+            "ci95": [
+              0.02713635835742423,
+              0.0546086973236891
+            ],
+            "upper98_75": 0.056587462526078075,
+            "people_lower": 1,
+            "people": 18,
+            "seed_means": [
+              0.03524682525542105,
+              0.038466881280888626,
+              0.048361045293403244
+            ],
+            "seed_sd": 0.0068343008605892186,
+            "seed_range": [
+              0.03524682525542105,
+              0.048361045293403244
+            ],
+            "participant_iqr": [
+              0.013236103840945904,
+              0.05914402431334409
+            ],
+            "leave_one_out_range": [
+              0.037585974624393705,
+              0.043529255877696064
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": 0.05283603542845014,
+            "ci95": [
+              0.03333982167972304,
+              0.07279862458160404
+            ],
+            "upper98_75": 0.07544277594265994,
+            "people_lower": 3,
+            "people": 18,
+            "seed_means": [
+              0.06714519889149351,
+              0.043746479485791134,
+              0.04761642790806578
+            ],
+            "seed_sd": 0.012542258347555992,
+            "seed_range": [
+              0.043746479485791134,
+              0.06714519889149351
+            ],
+            "participant_iqr": [
+              0.01783103655112021,
+              0.08460024707243219
+            ],
+            "leave_one_out_range": [
+              0.04744197887069605,
+              0.05703578603421431
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": 0.03153478896788558,
+            "ci95": [
+              0.02092883962379663,
+              0.04103292184194433
+            ],
+            "upper98_75": 0.042161117694498526,
+            "people_lower": 1,
+            "people": 18,
+            "seed_means": [
+              0.05180808758961694,
+              0.010239454688813586,
+              0.0325568246252262
+            ],
+            "seed_sd": 0.02080315427943788,
+            "seed_range": [
+              0.010239454688813586,
+              0.05180808758961694
+            ],
+            "participant_iqr": [
+              0.023450173074110976,
+              0.04373602306260667
+            ],
+            "leave_one_out_range": [
+              0.029677518775525706,
+              0.03506805457377531
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": 0.03841446244303875,
+            "ci95": [
+              0.014875976280797912,
+              0.06296928715916594
+            ],
+            "upper98_75": 0.06629053344326478,
+            "people_lower": 4,
+            "people": 18,
+            "seed_means": [
+              0.11302559085049607,
+              0.09422530451800507,
+              -0.09200750803938484
+            ],
+            "seed_sd": 0.11333922745428673,
+            "seed_range": [
+              -0.09200750803938484,
+              0.11302559085049607
+            ],
+            "participant_iqr": [
+              0.007968516524382033,
+              0.06160651215890062
+            ],
+            "leave_one_out_range": [
+              0.0325087068007255,
+              0.04320108111975697
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -0.0750129596055032,
+            "ci95": [
+              -0.10255368838798977,
+              -0.04938280820382142
+            ],
+            "upper98_75": -0.04531874927695464,
+            "people_lower": 17,
+            "people": 18,
+            "seed_means": [
+              -0.038929542916272306,
+              -0.10284437279436048,
+              -0.08326496310587678
+            ],
+            "seed_sd": 0.03274672565179413,
+            "seed_range": [
+              -0.10284437279436048,
+              -0.038929542916272306
+            ],
+            "participant_iqr": [
+              -0.09914946694259358,
+              -0.04285617301049094
+            ],
+            "leave_one_out_range": [
+              -0.08125409604225203,
+              -0.0657749603337227
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 0.01731821931469246,
+            "ci95": [
+              -0.017968605932886936,
+              0.054246928648436846
+            ],
+            "upper98_75": 0.060155903179811614,
+            "people_lower": 11,
+            "people": 18,
+            "seed_means": [
+              0.04275424108061797,
+              -0.046814057354709594,
+              0.05601447421816901
+            ],
+            "seed_sd": 0.05593451643498941,
+            "seed_range": [
+              -0.046814057354709594,
+              0.05601447421816901
+            ],
+            "participant_iqr": [
+              -0.036969327443657767,
+              0.08514903876496471
+            ],
+            "leave_one_out_range": [
+              0.009095186469631733,
+              0.023870971072711817
+            ]
+          }
+        },
+        "specialist_steps": {
+          "muscle_mae": {
+            "mean": 0.00786735445864361,
+            "ci95": [
+              -0.0038534714084060206,
+              0.018457057193270943
+            ],
+            "upper98_75": 0.019559146812738525,
+            "people_lower": 5,
+            "people": 18,
+            "seed_means": [
+              0.020683603198910678,
+              0.005075180485321666,
+              -0.002156720308301521
+            ],
+            "seed_sd": 0.011673357319190562,
+            "seed_range": [
+              -0.002156720308301521,
+              0.020683603198910678
+            ],
+            "participant_iqr": [
+              -0.00018241734873258864,
+              0.02411798959366296
+            ],
+            "leave_one_out_range": [
+              0.005375627051750196,
+              0.011968841483454095
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": 0.10102302793117388,
+            "ci95": [
+              0.07932593571617173,
+              0.12318003437499063
+            ],
+            "upper98_75": 0.12647747554817432,
+            "people_lower": 0,
+            "people": 18,
+            "seed_means": [
+              0.10686658804155436,
+              0.09875315162917381,
+              0.09744934412279346
+            ],
+            "seed_sd": 0.005102487097107242,
+            "seed_range": [
+              0.09744934412279346,
+              0.10686658804155436
+            ],
+            "participant_iqr": [
+              0.06466816918266076,
+              0.13409939839945778
+            ],
+            "leave_one_out_range": [
+              0.09477086688427132,
+              0.1055218738839534
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": 0.3120062179127434,
+            "ci95": [
+              0.26491474516200186,
+              0.3621074514554274
+            ],
+            "upper98_75": 0.3690268238940333,
+            "people_lower": 0,
+            "people": 18,
+            "seed_means": [
+              0.30803243540117675,
+              0.31706765507078777,
+              0.310918563266266
+            ],
+            "seed_sd": 0.00461476360088299,
+            "seed_range": [
+              0.30803243540117675,
+              0.31706765507078777
+            ],
+            "participant_iqr": [
+              0.22898060079989305,
+              0.3768006295647162
+            ],
+            "leave_one_out_range": [
+              0.29671806438133963,
+              0.321976376676584
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": 0.04076544964182108,
+            "ci95": [
+              0.023738214249396473,
+              0.05794558139703305
+            ],
+            "upper98_75": 0.06038532836177522,
+            "people_lower": 4,
+            "people": 18,
+            "seed_means": [
+              0.04936330090465453,
+              0.03649740104529338,
+              0.03643564697551534
+            ],
+            "seed_sd": 0.007446021632028649,
+            "seed_range": [
+              0.03643564697551534,
+              0.04936330090465453
+            ],
+            "participant_iqr": [
+              0.00587448386341131,
+              0.07459764856912227
+            ],
+            "leave_one_out_range": [
+              0.03725646478452089,
+              0.0438642714527726
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": 0.05032300655674121,
+            "ci95": [
+              0.030438911292434468,
+              0.07085408882528509
+            ],
+            "upper98_75": 0.07364939516077479,
+            "people_lower": 3,
+            "people": 18,
+            "seed_means": [
+              0.05599834007404298,
+              0.0575272599483195,
+              0.037443419647861166
+            ],
+            "seed_sd": 0.01118021548106454,
+            "seed_range": [
+              0.037443419647861166,
+              0.0575272599483195
+            ],
+            "participant_iqr": [
+              0.01632373181209428,
+              0.08916384589976085
+            ],
+            "leave_one_out_range": [
+              0.04620185074593336,
+              0.05457659693782241
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": 0.060158920003242064,
+            "ci95": [
+              0.035792218609397145,
+              0.08607130501850883
+            ],
+            "upper98_75": 0.09002535201690993,
+            "people_lower": 3,
+            "people": 18,
+            "seed_means": [
+              0.05733949536010393,
+              0.051748578404893615,
+              0.07138868624472867
+            ],
+            "seed_sd": 0.010119057539061562,
+            "seed_range": [
+              0.051748578404893615,
+              0.07138868624472867
+            ],
+            "participant_iqr": [
+              0.01324657637287698,
+              0.09218687021379672
+            ],
+            "leave_one_out_range": [
+              0.05278281584247905,
+              0.06468663404839646
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": -0.04955597204875946,
+            "ci95": [
+              -0.12823050501531552,
+              0.03519074556329986
+            ],
+            "upper98_75": 0.04849012066250655,
+            "people_lower": 12,
+            "people": 18,
+            "seed_means": [
+              -0.14180057473119542,
+              0.006757792573386323,
+              -0.013625133988469311
+            ],
+            "seed_sd": 0.08053363251981654,
+            "seed_range": [
+              -0.14180057473119542,
+              0.006757792573386323
+            ],
+            "participant_iqr": [
+              -0.19540294352408982,
+              0.1577491859573789
+            ],
+            "leave_one_out_range": [
+              -0.06645603104555946,
+              -0.036928566861264084
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -0.019874598871888964,
+            "ci95": [
+              -0.09053375322778917,
+              0.04647974585889025
+            ],
+            "upper98_75": 0.05770798208123788,
+            "people_lower": 10,
+            "people": 18,
+            "seed_means": [
+              -0.011068595505634698,
+              -0.009192535622430545,
+              -0.03936266548760167
+            ],
+            "seed_sd": 0.016903208437606863,
+            "seed_range": [
+              -0.03936266548760167,
+              -0.009192535622430545
+            ],
+            "participant_iqr": [
+              -0.14713184830684706,
+              0.12110906057378212
+            ],
+            "leave_one_out_range": [
+              -0.031876919709702065,
+              -0.003262580778238616
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": -0.13684622598937835,
+            "ci95": [
+              -0.17895131758970298,
+              -0.09109622159317582
+            ],
+            "upper98_75": -0.08223314781919466,
+            "people_lower": 15,
+            "people": 18,
+            "seed_means": [
+              -0.3704017873959045,
+              -0.12169703929620954,
+              0.08156014872397913
+            ],
+            "seed_sd": 0.22636148373432882,
+            "seed_range": [
+              -0.3704017873959045,
+              0.08156014872397913
+            ],
+            "participant_iqr": [
+              -0.21528261002227123,
+              -0.09343243769892295
+            ],
+            "leave_one_out_range": [
+              -0.14902287263156305,
+              -0.13061610368672386
+            ]
+          }
+        },
+        "stationary": {
+          "muscle_mae": {
+            "mean": 0.010742028647552394,
+            "ci95": [
+              0.001778548216465596,
+              0.019302134251627925
+            ],
+            "upper98_75": 0.02039922713358964,
+            "people_lower": 4,
+            "people": 18,
+            "seed_means": [
+              0.030190340587003404,
+              0.0013659585408667655,
+              0.0006697868147870088
+            ],
+            "seed_sd": 0.016846328731765055,
+            "seed_range": [
+              0.0006697868147870088,
+              0.030190340587003404
+            ],
+            "participant_iqr": [
+              0.0010153438380480218,
+              0.027338710696894458
+            ],
+            "leave_one_out_range": [
+              0.009026714688382032,
+              0.013269318207910816
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -2.4097403553554098,
+            "ci95": [
+              -2.626734772361586,
+              -2.1876617988144584
+            ],
+            "upper98_75": -2.1544254469968394,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -2.38824831608189,
+              -2.4209548067589037,
+              -2.420017943225437
+            ],
+            "seed_sd": 0.018618545658052578,
+            "seed_range": [
+              -2.4209548067589037,
+              -2.38824831608189
+            ],
+            "participant_iqr": [
+              -2.8089522431422873,
+              -2.1964163169962236
+            ],
+            "leave_one_out_range": [
+              -2.4668652157056066,
+              -2.3617711029360176
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -3.7419440407551994,
+            "ci95": [
+              -4.156103098841782,
+              -3.3330648604753628
+            ],
+            "upper98_75": -3.269211751079285,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -3.7190816442177015,
+              -3.756230555779846,
+              -3.7505199222680523
+            ],
+            "seed_sd": 0.020004242433915673,
+            "seed_range": [
+              -3.756230555779846,
+              -3.7190816442177015
+            ],
+            "participant_iqr": [
+              -4.405189938448653,
+              -3.263507063784513
+            ],
+            "leave_one_out_range": [
+              -3.838543012233464,
+              -3.65627309257546
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": -1.1032120221725288,
+            "ci95": [
+              -1.2685022517067979,
+              -0.9346252447853746
+            ],
+            "upper98_75": -0.9077024389597118,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -1.0956856904431738,
+              -1.1105498210497164,
+              -1.1034005550246957
+            ],
+            "seed_sd": 0.007433858563986095,
+            "seed_range": [
+              -1.1105498210497164,
+              -1.0956856904431738
+            ],
+            "participant_iqr": [
+              -1.2711280681797172,
+              -0.9252405516135758
+            ],
+            "leave_one_out_range": [
+              -1.149149389227099,
+              -1.0589981542176494
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": -2.037241544749236,
+            "ci95": [
+              -2.1983190194084297,
+              -1.877961075752321
+            ],
+            "upper98_75": -1.8543882986468172,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -2.021095551691702,
+              -2.0385295760155833,
+              -2.052099506540423
+            ],
+            "seed_sd": 0.015542058180070616,
+            "seed_range": [
+              -2.052099506540423,
+              -2.021095551691702
+            ],
+            "participant_iqr": [
+              -2.332236039766383,
+              -1.8680989329008835
+            ],
+            "leave_one_out_range": [
+              -2.0836398111698324,
+              -1.990891207827848
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": -0.18551222404902756,
+            "ci95": [
+              -0.26917292209765137,
+              -0.0967975722377461
+            ],
+            "upper98_75": -0.08601339193634705,
+            "people_lower": 14,
+            "people": 18,
+            "seed_means": [
+              -0.17486898747260887,
+              -0.19567585207918084,
+              -0.18599183259529298
+            ],
+            "seed_sd": 0.010411720412942926,
+            "seed_range": [
+              -0.19567585207918084,
+              -0.17486898747260887
+            ],
+            "participant_iqr": [
+              -0.34827910253789346,
+              -0.07621351399044748
+            ],
+            "leave_one_out_range": [
+              -0.2075904748572127,
+              -0.1697801735764021
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": -0.06467999656854416,
+            "ci95": [
+              -0.16206070615186777,
+              0.030387937004635938
+            ],
+            "upper98_75": 0.04104120036161345,
+            "people_lower": 12,
+            "people": 18,
+            "seed_means": [
+              -0.09836733720811859,
+              0.043164961716970804,
+              -0.13883761421448468
+            ],
+            "seed_sd": 0.09556339310084352,
+            "seed_range": [
+              -0.13883761421448468,
+              0.043164961716970804
+            ],
+            "participant_iqr": [
+              -0.1904046873488522,
+              0.05298464862651574
+            ],
+            "leave_one_out_range": [
+              -0.0866708562072117,
+              -0.04272612568086053
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -0.09800331821208604,
+            "ci95": [
+              -0.26288922159621325,
+              0.058386626917625174
+            ],
+            "upper98_75": 0.08024525036852555,
+            "people_lower": 10,
+            "people": 18,
+            "seed_means": [
+              -0.19074467089445016,
+              -0.04630778095076566,
+              -0.05695750279104238
+            ],
+            "seed_sd": 0.08049268921358509,
+            "seed_range": [
+              -0.19074467089445016,
+              -0.04630778095076566
+            ],
+            "participant_iqr": [
+              -0.3526829123292743,
+              0.18447553895655436
+            ],
+            "leave_one_out_range": [
+              -0.12946666407212787,
+              -0.05221580955597027
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": -0.033047343775370344,
+            "ci95": [
+              -0.11267753467633927,
+              0.04851728473346061
+            ],
+            "upper98_75": 0.05844828462617623,
+            "people_lower": 11,
+            "people": 18,
+            "seed_means": [
+              -0.18715420870568975,
+              -0.011579459759013179,
+              0.09959163713859184
+            ],
+            "seed_sd": 0.1445733293534563,
+            "seed_range": [
+              -0.18715420870568975,
+              0.09959163713859184
+            ],
+            "participant_iqr": [
+              -0.1309487491496756,
+              0.04556007057504443
+            ],
+            "leave_one_out_range": [
+              -0.050092107242716184,
+              -0.011928261458363476
+            ]
+          }
+        },
+        "velocity_exact_31_25ms": {
+          "muscle_mae": {
+            "mean": 0.010742028647552394,
+            "ci95": [
+              0.001778548216465596,
+              0.019302134251627925
+            ],
+            "upper98_75": 0.02039922713358964,
+            "people_lower": 4,
+            "people": 18,
+            "seed_means": [
+              0.030190340587003404,
+              0.0013659585408667655,
+              0.0006697868147870088
+            ],
+            "seed_sd": 0.016846328731765055,
+            "seed_range": [
+              0.0006697868147870088,
+              0.030190340587003404
+            ],
+            "participant_iqr": [
+              0.0010153438380480218,
+              0.027338710696894458
+            ],
+            "leave_one_out_range": [
+              0.009026714688382032,
+              0.013269318207910816
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -0.0007364098350926316,
+            "ci95": [
+              -0.0181820179361191,
+              0.015634341910092626
+            ],
+            "upper98_75": 0.01868012068566253,
+            "people_lower": 8,
+            "people": 18,
+            "seed_means": [
+              0.02075562943842789,
+              -0.011950861238586463,
+              -0.011013997705119325
+            ],
+            "seed_sd": 0.018618545658052793,
+            "seed_range": [
+              -0.011950861238586463,
+              0.02075562943842789
+            ],
+            "participant_iqr": [
+              -0.030412654609759317,
+              0.02723610201087919
+            ],
+            "leave_one_out_range": [
+              -0.004733702912896017,
+              0.003721586792068965
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -0.04212927157919605,
+            "ci95": [
+              -0.08018036447738859,
+              -0.0058551171898714605
+            ],
+            "upper98_75": 0.0014752313291988212,
+            "people_lower": 12,
+            "people": 18,
+            "seed_means": [
+              -0.019266875041697995,
+              -0.056415786603842534,
+              -0.05070515309204761
+            ],
+            "seed_sd": 0.020004242433915385,
+            "seed_range": [
+              -0.056415786603842534,
+              -0.019266875041697995
+            ],
+            "participant_iqr": [
+              -0.10980735634394789,
+              0.02456380360464938
+            ],
+            "leave_one_out_range": [
+              -0.05199442410205872,
+              -0.03155155026283915
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": -0.006637783263537692,
+            "ci95": [
+              -0.021546231940245766,
+              0.007780250669441593
+            ],
+            "upper98_75": 0.009573805272218863,
+            "people_lower": 8,
+            "people": 18,
+            "seed_means": [
+              0.0008885484658171393,
+              -0.013975582140725466,
+              -0.006826316115704747
+            ],
+            "seed_sd": 0.007433858563986057,
+            "seed_range": [
+              -0.013975582140725466,
+              0.0008885484658171393
+            ],
+            "participant_iqr": [
+              -0.032948259332455064,
+              0.014961927989008566
+            ],
+            "leave_one_out_range": [
+              -0.009834534000110152,
+              -0.003302864723530235
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": -0.005245495287243627,
+            "ci95": [
+              -0.023327813224316252,
+              0.01191227020114504
+            ],
+            "upper98_75": 0.014225591472021166,
+            "people_lower": 10,
+            "people": 18,
+            "seed_means": [
+              0.010900497770290526,
+              -0.006533526553590901,
+              -0.020103457078430507
+            ],
+            "seed_sd": 0.015542058180070593,
+            "seed_range": [
+              -0.020103457078430507,
+              0.010900497770290526
+            ],
+            "participant_iqr": [
+              -0.027290254976970223,
+              0.017957246032265745
+            ],
+            "leave_one_out_range": [
+              -0.008837735024138081,
+              -0.0007418832051870964
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": 0.012914819515565001,
+            "ci95": [
+              0.007296756673306443,
+              0.018029369042967203
+            ],
+            "upper98_75": 0.0188675310448092,
+            "people_lower": 1,
+            "people": 18,
+            "seed_means": [
+              0.0235580560919837,
+              0.0027511914854117404,
+              0.012435210969299566
+            ],
+            "seed_sd": 0.010411720412942924,
+            "seed_range": [
+              0.0027511914854117404,
+              0.0235580560919837
+            ],
+            "participant_iqr": [
+              0.0044447722894895665,
+              0.02220814699171273
+            ],
+            "leave_one_out_range": [
+              0.011870428996006741,
+              0.014738820379698044
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": -0.021502092393514406,
+            "ci95": [
+              -0.053084297453471124,
+              0.011835638433774453
+            ],
+            "upper98_75": 0.016746511183390204,
+            "people_lower": 12,
+            "people": 18,
+            "seed_means": [
+              -0.05518943303308884,
+              0.08634286589200056,
+              -0.09565971003945492
+            ],
+            "seed_sd": 0.09556339310084352,
+            "seed_range": [
+              -0.09565971003945492,
+              0.08634286589200056
+            ],
+            "participant_iqr": [
+              -0.08472302197616616,
+              0.040350091415909846
+            ],
+            "leave_one_out_range": [
+              -0.028845251063567782,
+              -0.015542233341032533
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -0.04636955012679107,
+            "ci95": [
+              -0.07940113764384514,
+              -0.01463866968401173
+            ],
+            "upper98_75": -0.010800635109522325,
+            "people_lower": 12,
+            "people": 18,
+            "seed_means": [
+              -0.13911090280915517,
+              0.00532598713452933,
+              -0.0053237347057473895
+            ],
+            "seed_sd": 0.08049268921358509,
+            "seed_range": [
+              -0.13911090280915517,
+              0.00532598713452933
+            ],
+            "participant_iqr": [
+              -0.0924862727535383,
+              0.006164041937005038
+            ],
+            "leave_one_out_range": [
+              -0.05402277274809303,
+              -0.03727964068073237
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 0.014816878165739273,
+            "ci95": [
+              -0.013554272266500187,
+              0.04310436940634635
+            ],
+            "upper98_75": 0.0472701342753994,
+            "people_lower": 8,
+            "people": 18,
+            "seed_means": [
+              -0.1392899867645801,
+              0.03628476218209644,
+              0.14745585907970146
+            ],
+            "seed_sd": 0.14457332935345626,
+            "seed_range": [
+              -0.1392899867645801,
+              0.14745585907970146
+            ],
+            "participant_iqr": [
+              -0.03808988991754509,
+              0.07895218070435497
+            ],
+            "leave_one_out_range": [
+              0.009635569013672289,
+              0.021146927275912608
+            ]
+          }
+        },
+        "velocity_exact_125ms": {
+          "muscle_mae": {
+            "mean": 0.010742028647552394,
+            "ci95": [
+              0.001778548216465596,
+              0.019302134251627925
+            ],
+            "upper98_75": 0.02039922713358964,
+            "people_lower": 4,
+            "people": 18,
+            "seed_means": [
+              0.030190340587003404,
+              0.0013659585408667655,
+              0.0006697868147870088
+            ],
+            "seed_sd": 0.016846328731765055,
+            "seed_range": [
+              0.0006697868147870088,
+              0.030190340587003404
+            ],
+            "participant_iqr": [
+              0.0010153438380480218,
+              0.027338710696894458
+            ],
+            "leave_one_out_range": [
+              0.009026714688382032,
+              0.013269318207910816
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -0.6753004142671638,
+            "ci95": [
+              -0.7969929320315348,
+              -0.5404826306605488
+            ],
+            "upper98_75": -0.5204933050627376,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -0.6538083749936433,
+              -0.6865148656706577,
+              -0.6855780021371906
+            ],
+            "seed_sd": 0.01861854565805281,
+            "seed_range": [
+              -0.6865148656706577,
+              -0.6538083749936433
+            ],
+            "participant_iqr": [
+              -0.8811942007672329,
+              -0.5464808327353312
+            ],
+            "leave_one_out_range": [
+              -0.7101174758593103,
+              -0.6565036583958276
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -1.13084160835628,
+            "ci95": [
+              -1.3551760455665898,
+              -0.8963873744747702
+            ],
+            "upper98_75": -0.8599713286765912,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -1.1079792118187821,
+              -1.1451281233809267,
+              -1.1394174898691318
+            ],
+            "seed_sd": 0.020004242433915433,
+            "seed_range": [
+              -1.1451281233809267,
+              -1.1079792118187821
+            ],
+            "participant_iqr": [
+              -1.59200932812602,
+              -0.8704809932529589
+            ],
+            "leave_one_out_range": [
+              -1.1842132684703965,
+              -1.0939089017861932
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": -0.19792646338104772,
+            "ci95": [
+              -0.29108602427624886,
+              -0.09211488073602028
+            ],
+            "upper98_75": -0.07785151122155923,
+            "people_lower": 15,
+            "people": 18,
+            "seed_means": [
+              -0.19040013165169287,
+              -0.20526426225823544,
+              -0.19811499623321474
+            ],
+            "seed_sd": 0.007433858563986039,
+            "seed_range": [
+              -0.20526426225823544,
+              -0.19040013165169287
+            ],
+            "participant_iqr": [
+              -0.3504181261459651,
+              -0.12241650185662607
+            ],
+            "leave_one_out_range": [
+              -0.22916215148556202,
+              -0.18025443846462189
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": -0.5182066476872537,
+            "ci95": [
+              -0.5748919167286318,
+              -0.4600218457959373
+            ],
+            "upper98_75": -0.4530820420357067,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -0.5020606546297194,
+              -0.519494678953601,
+              -0.5330646094784405
+            ],
+            "seed_sd": 0.01554205818007063,
+            "seed_range": [
+              -0.5330646094784405,
+              -0.5020606546297194
+            ],
+            "participant_iqr": [
+              -0.5972724703280554,
+              -0.4604709675208974
+            ],
+            "leave_one_out_range": [
+              -0.5331941290602361,
+              -0.5059037634758914
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": -0.2623793467750197,
+            "ci95": [
+              -0.3328505889632389,
+              -0.189517682381212
+            ],
+            "upper98_75": -0.18067485530396876,
+            "people_lower": 17,
+            "people": 18,
+            "seed_means": [
+              -0.2517361101986009,
+              -0.27254297480517287,
+              -0.26285895532128506
+            ],
+            "seed_sd": 0.010411720412942914,
+            "seed_range": [
+              -0.27254297480517287,
+              -0.2517361101986009
+            ],
+            "participant_iqr": [
+              -0.41361967665486254,
+              -0.14748775514108103
+            ],
+            "leave_one_out_range": [
+              -0.27797751679696736,
+              -0.24897552969681758
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": -0.03296309744015747,
+            "ci95": [
+              -0.09289627244992275,
+              0.0328310094599006
+            ],
+            "upper98_75": 0.040462263149815735,
+            "people_lower": 12,
+            "people": 18,
+            "seed_means": [
+              -0.0666504380797319,
+              0.07488186084535749,
+              -0.10712071508609801
+            ],
+            "seed_sd": 0.09556339310084352,
+            "seed_range": [
+              -0.10712071508609801,
+              0.07488186084535749
+            ],
+            "participant_iqr": [
+              -0.12416412343086244,
+              0.033380093229599186
+            ],
+            "leave_one_out_range": [
+              -0.05258290105413102,
+              -0.022627644089125907
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -0.04913902665466315,
+            "ci95": [
+              -0.09648962618708551,
+              -0.0016104365532267969
+            ],
+            "upper98_75": 0.0055113507292299255,
+            "people_lower": 11,
+            "people": 18,
+            "seed_means": [
+              -0.14188037933702724,
+              0.002556510606657264,
+              -0.008093211233619453
+            ],
+            "seed_sd": 0.0804926892135851,
+            "seed_range": [
+              -0.14188037933702724,
+              0.002556510606657264
+            ],
+            "participant_iqr": [
+              -0.12024913954385275,
+              0.03485038569647382
+            ],
+            "leave_one_out_range": [
+              -0.0588018659288625,
+              -0.03604217273056213
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": -0.01001223811356432,
+            "ci95": [
+              -0.06370609777777927,
+              0.04767286443785979
+            ],
+            "upper98_75": 0.056865653911539214,
+            "people_lower": 9,
+            "people": 18,
+            "seed_means": [
+              -0.1641191030438837,
+              0.011455645902792843,
+              0.12262674280039786
+            ],
+            "seed_sd": 0.14457332935345626,
+            "seed_range": [
+              -0.1641191030438837,
+              0.12262674280039786
+            ],
+            "participant_iqr": [
+              -0.10366240625658013,
+              0.07407707565989202
+            ],
+            "leave_one_out_range": [
+              -0.025715437905630675,
+              0.001704944100885407
+            ]
+          }
+        },
+        "velocity_knot_31_25ms": {
+          "muscle_mae": {
+            "mean": 0.010742028647552394,
+            "ci95": [
+              0.001778548216465596,
+              0.019302134251627925
+            ],
+            "upper98_75": 0.02039922713358964,
+            "people_lower": 4,
+            "people": 18,
+            "seed_means": [
+              0.030190340587003404,
+              0.0013659585408667655,
+              0.0006697868147870088
+            ],
+            "seed_sd": 0.016846328731765055,
+            "seed_range": [
+              0.0006697868147870088,
+              0.030190340587003404
+            ],
+            "participant_iqr": [
+              0.0010153438380480218,
+              0.027338710696894458
+            ],
+            "leave_one_out_range": [
+              0.009026714688382032,
+              0.013269318207910816
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -0.0007364098350926316,
+            "ci95": [
+              -0.0181820179361191,
+              0.015634341910092626
+            ],
+            "upper98_75": 0.01868012068566253,
+            "people_lower": 8,
+            "people": 18,
+            "seed_means": [
+              0.02075562943842789,
+              -0.011950861238586463,
+              -0.011013997705119325
+            ],
+            "seed_sd": 0.018618545658052793,
+            "seed_range": [
+              -0.011950861238586463,
+              0.02075562943842789
+            ],
+            "participant_iqr": [
+              -0.030412654609759317,
+              0.02723610201087919
+            ],
+            "leave_one_out_range": [
+              -0.004733702912896017,
+              0.003721586792068965
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -0.04212927157919605,
+            "ci95": [
+              -0.08018036447738859,
+              -0.0058551171898714605
+            ],
+            "upper98_75": 0.0014752313291988212,
+            "people_lower": 12,
+            "people": 18,
+            "seed_means": [
+              -0.019266875041697995,
+              -0.056415786603842534,
+              -0.05070515309204761
+            ],
+            "seed_sd": 0.020004242433915385,
+            "seed_range": [
+              -0.056415786603842534,
+              -0.019266875041697995
+            ],
+            "participant_iqr": [
+              -0.10980735634394789,
+              0.02456380360464938
+            ],
+            "leave_one_out_range": [
+              -0.05199442410205872,
+              -0.03155155026283915
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": -0.006637783263537692,
+            "ci95": [
+              -0.021546231940245766,
+              0.007780250669441593
+            ],
+            "upper98_75": 0.009573805272218863,
+            "people_lower": 8,
+            "people": 18,
+            "seed_means": [
+              0.0008885484658171393,
+              -0.013975582140725466,
+              -0.006826316115704747
+            ],
+            "seed_sd": 0.007433858563986057,
+            "seed_range": [
+              -0.013975582140725466,
+              0.0008885484658171393
+            ],
+            "participant_iqr": [
+              -0.032948259332455064,
+              0.014961927989008566
+            ],
+            "leave_one_out_range": [
+              -0.009834534000110152,
+              -0.003302864723530235
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": -0.005245495287243627,
+            "ci95": [
+              -0.023327813224316252,
+              0.01191227020114504
+            ],
+            "upper98_75": 0.014225591472021166,
+            "people_lower": 10,
+            "people": 18,
+            "seed_means": [
+              0.010900497770290526,
+              -0.006533526553590901,
+              -0.020103457078430507
+            ],
+            "seed_sd": 0.015542058180070593,
+            "seed_range": [
+              -0.020103457078430507,
+              0.010900497770290526
+            ],
+            "participant_iqr": [
+              -0.027290254976970223,
+              0.017957246032265745
+            ],
+            "leave_one_out_range": [
+              -0.008837735024138081,
+              -0.0007418832051870964
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": 0.012914819515565001,
+            "ci95": [
+              0.007296756673306443,
+              0.018029369042967203
+            ],
+            "upper98_75": 0.0188675310448092,
+            "people_lower": 1,
+            "people": 18,
+            "seed_means": [
+              0.0235580560919837,
+              0.0027511914854117404,
+              0.012435210969299566
+            ],
+            "seed_sd": 0.010411720412942924,
+            "seed_range": [
+              0.0027511914854117404,
+              0.0235580560919837
+            ],
+            "participant_iqr": [
+              0.0044447722894895665,
+              0.02220814699171273
+            ],
+            "leave_one_out_range": [
+              0.011870428996006741,
+              0.014738820379698044
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": -0.021502092393514406,
+            "ci95": [
+              -0.053084297453471124,
+              0.011835638433774453
+            ],
+            "upper98_75": 0.016746511183390204,
+            "people_lower": 12,
+            "people": 18,
+            "seed_means": [
+              -0.05518943303308884,
+              0.08634286589200056,
+              -0.09565971003945492
+            ],
+            "seed_sd": 0.09556339310084352,
+            "seed_range": [
+              -0.09565971003945492,
+              0.08634286589200056
+            ],
+            "participant_iqr": [
+              -0.08472302197616616,
+              0.040350091415909846
+            ],
+            "leave_one_out_range": [
+              -0.028845251063567782,
+              -0.015542233341032533
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -0.04636955012679107,
+            "ci95": [
+              -0.07940113764384514,
+              -0.01463866968401173
+            ],
+            "upper98_75": -0.010800635109522325,
+            "people_lower": 12,
+            "people": 18,
+            "seed_means": [
+              -0.13911090280915517,
+              0.00532598713452933,
+              -0.0053237347057473895
+            ],
+            "seed_sd": 0.08049268921358509,
+            "seed_range": [
+              -0.13911090280915517,
+              0.00532598713452933
+            ],
+            "participant_iqr": [
+              -0.0924862727535383,
+              0.006164041937005038
+            ],
+            "leave_one_out_range": [
+              -0.05402277274809303,
+              -0.03727964068073237
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 0.014816878165739273,
+            "ci95": [
+              -0.013554272266500187,
+              0.04310436940634635
+            ],
+            "upper98_75": 0.0472701342753994,
+            "people_lower": 8,
+            "people": 18,
+            "seed_means": [
+              -0.1392899867645801,
+              0.03628476218209644,
+              0.14745585907970146
+            ],
+            "seed_sd": 0.14457332935345626,
+            "seed_range": [
+              -0.1392899867645801,
+              0.14745585907970146
+            ],
+            "participant_iqr": [
+              -0.03808988991754509,
+              0.07895218070435497
+            ],
+            "leave_one_out_range": [
+              0.009635569013672289,
+              0.021146927275912608
+            ]
+          }
+        },
+        "velocity_knot_125ms": {
+          "muscle_mae": {
+            "mean": 0.010742028647552394,
+            "ci95": [
+              0.001778548216465596,
+              0.019302134251627925
+            ],
+            "upper98_75": 0.02039922713358964,
+            "people_lower": 4,
+            "people": 18,
+            "seed_means": [
+              0.030190340587003404,
+              0.0013659585408667655,
+              0.0006697868147870088
+            ],
+            "seed_sd": 0.016846328731765055,
+            "seed_range": [
+              0.0006697868147870088,
+              0.030190340587003404
+            ],
+            "participant_iqr": [
+              0.0010153438380480218,
+              0.027338710696894458
+            ],
+            "leave_one_out_range": [
+              0.009026714688382032,
+              0.013269318207910816
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -0.6753004142671638,
+            "ci95": [
+              -0.7969929320315348,
+              -0.5404826306605488
+            ],
+            "upper98_75": -0.5204933050627376,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -0.6538083749936433,
+              -0.6865148656706577,
+              -0.6855780021371906
+            ],
+            "seed_sd": 0.01861854565805281,
+            "seed_range": [
+              -0.6865148656706577,
+              -0.6538083749936433
+            ],
+            "participant_iqr": [
+              -0.8811942007672329,
+              -0.5464808327353312
+            ],
+            "leave_one_out_range": [
+              -0.7101174758593103,
+              -0.6565036583958276
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -1.13084160835628,
+            "ci95": [
+              -1.3551760455665898,
+              -0.8963873744747702
+            ],
+            "upper98_75": -0.8599713286765912,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -1.1079792118187821,
+              -1.1451281233809267,
+              -1.1394174898691318
+            ],
+            "seed_sd": 0.020004242433915433,
+            "seed_range": [
+              -1.1451281233809267,
+              -1.1079792118187821
+            ],
+            "participant_iqr": [
+              -1.59200932812602,
+              -0.8704809932529589
+            ],
+            "leave_one_out_range": [
+              -1.1842132684703965,
+              -1.0939089017861932
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": -0.19792646338104772,
+            "ci95": [
+              -0.29108602427624886,
+              -0.09211488073602028
+            ],
+            "upper98_75": -0.07785151122155923,
+            "people_lower": 15,
+            "people": 18,
+            "seed_means": [
+              -0.19040013165169287,
+              -0.20526426225823544,
+              -0.19811499623321474
+            ],
+            "seed_sd": 0.007433858563986039,
+            "seed_range": [
+              -0.20526426225823544,
+              -0.19040013165169287
+            ],
+            "participant_iqr": [
+              -0.3504181261459651,
+              -0.12241650185662607
+            ],
+            "leave_one_out_range": [
+              -0.22916215148556202,
+              -0.18025443846462189
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": -0.5182066476872537,
+            "ci95": [
+              -0.5748919167286318,
+              -0.4600218457959373
+            ],
+            "upper98_75": -0.4530820420357067,
+            "people_lower": 18,
+            "people": 18,
+            "seed_means": [
+              -0.5020606546297194,
+              -0.519494678953601,
+              -0.5330646094784405
+            ],
+            "seed_sd": 0.01554205818007063,
+            "seed_range": [
+              -0.5330646094784405,
+              -0.5020606546297194
+            ],
+            "participant_iqr": [
+              -0.5972724703280554,
+              -0.4604709675208974
+            ],
+            "leave_one_out_range": [
+              -0.5331941290602361,
+              -0.5059037634758914
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": -0.2623793467750197,
+            "ci95": [
+              -0.3328505889632389,
+              -0.189517682381212
+            ],
+            "upper98_75": -0.18067485530396876,
+            "people_lower": 17,
+            "people": 18,
+            "seed_means": [
+              -0.2517361101986009,
+              -0.27254297480517287,
+              -0.26285895532128506
+            ],
+            "seed_sd": 0.010411720412942914,
+            "seed_range": [
+              -0.27254297480517287,
+              -0.2517361101986009
+            ],
+            "participant_iqr": [
+              -0.41361967665486254,
+              -0.14748775514108103
+            ],
+            "leave_one_out_range": [
+              -0.27797751679696736,
+              -0.24897552969681758
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": -0.03296309744015747,
+            "ci95": [
+              -0.09289627244992275,
+              0.0328310094599006
+            ],
+            "upper98_75": 0.040462263149815735,
+            "people_lower": 12,
+            "people": 18,
+            "seed_means": [
+              -0.0666504380797319,
+              0.07488186084535749,
+              -0.10712071508609801
+            ],
+            "seed_sd": 0.09556339310084352,
+            "seed_range": [
+              -0.10712071508609801,
+              0.07488186084535749
+            ],
+            "participant_iqr": [
+              -0.12416412343086244,
+              0.033380093229599186
+            ],
+            "leave_one_out_range": [
+              -0.05258290105413102,
+              -0.022627644089125907
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -0.04913902665466315,
+            "ci95": [
+              -0.09648962618708551,
+              -0.0016104365532267969
+            ],
+            "upper98_75": 0.0055113507292299255,
+            "people_lower": 11,
+            "people": 18,
+            "seed_means": [
+              -0.14188037933702724,
+              0.002556510606657264,
+              -0.008093211233619453
+            ],
+            "seed_sd": 0.0804926892135851,
+            "seed_range": [
+              -0.14188037933702724,
+              0.002556510606657264
+            ],
+            "participant_iqr": [
+              -0.12024913954385275,
+              0.03485038569647382
+            ],
+            "leave_one_out_range": [
+              -0.0588018659288625,
+              -0.03604217273056213
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": -0.01001223811356432,
+            "ci95": [
+              -0.06370609777777927,
+              0.04767286443785979
+            ],
+            "upper98_75": 0.056865653911539214,
+            "people_lower": 9,
+            "people": 18,
+            "seed_means": [
+              -0.1641191030438837,
+              0.011455645902792843,
+              0.12262674280039786
+            ],
+            "seed_sd": 0.14457332935345626,
+            "seed_range": [
+              -0.1641191030438837,
+              0.12262674280039786
+            ],
+            "participant_iqr": [
+              -0.10366240625658013,
+              0.07407707565989202
+            ],
+            "leave_one_out_range": [
+              -0.025715437905630675,
+              0.001704944100885407
+            ]
+          }
+        }
+      },
+      "participant_tradeoffs": {
+        "both_lower": 15,
+        "only_muscle_lower": 0,
+        "only_path_lower": 3,
+        "neither_lower": 0
+      },
+      "subgroups": {
+        "standing": {
+          "people": 18,
+          "events": 2600,
+          "separate_minus_matched": {
+            "muscle_mae": -0.008498778933341155,
+            "path_mean_distance_mm": -0.0686004260036969,
+            "endpoint_distance_mm": -0.15020084830118416,
+            "axis0_mae_mm": 0.005093446972574566,
+            "axis1_mae_mm": 0.001545427994602697,
+            "axis2_mae_mm": -0.10101479929835838
+          },
+          "separate": {
+            "muscle_mae": 5.591304734265254,
+            "path_mean_distance_mm": 1.1298011131168018
+          },
+          "matched": {
+            "muscle_mae": 5.5998035131985935,
+            "path_mean_distance_mm": 1.198401539120499
+          }
+        },
+        "standing_counterclockwise": {
+          "people": 18,
+          "events": 1288,
+          "separate_minus_matched": {
+            "muscle_mae": -0.023957743573490245,
+            "path_mean_distance_mm": -0.051739735188742815,
+            "endpoint_distance_mm": -0.10394777695400394,
+            "axis0_mae_mm": 0.011738321140769404,
+            "axis1_mae_mm": 0.0069136085964231365,
+            "axis2_mae_mm": -0.08560260501801466
+          },
+          "separate": {
+            "muscle_mae": 5.725260961858164,
+            "path_mean_distance_mm": 1.1270910567665637
+          },
+          "matched": {
+            "muscle_mae": 5.7492187054316535,
+            "path_mean_distance_mm": 1.1788307919553063
+          }
+        },
+        "standing_clockwise": {
+          "people": 18,
+          "events": 1312,
+          "separate_minus_matched": {
+            "muscle_mae": 0.006960185706807614,
+            "path_mean_distance_mm": -0.08546111681865101,
+            "endpoint_distance_mm": -0.19645391964836448,
+            "axis0_mae_mm": -0.0015514271956203012,
+            "axis1_mae_mm": -0.0038227526072177422,
+            "axis2_mae_mm": -0.11642699357870209
+          },
+          "separate": {
+            "muscle_mae": 5.457348506672343,
+            "path_mean_distance_mm": 1.1325111694670407
+          },
+          "matched": {
+            "muscle_mae": 5.450388320965537,
+            "path_mean_distance_mm": 1.2179722862856914
+          }
+        },
+        "walking": {
+          "people": 18,
+          "events": 2579,
+          "separate_minus_matched": {
+            "muscle_mae": -0.0058081864636463365,
+            "path_mean_distance_mm": -0.057244596836971424,
+            "endpoint_distance_mm": -0.15067382152073172,
+            "axis0_mae_mm": -0.04998501484115678,
+            "axis1_mae_mm": -0.009614192848123346,
+            "axis2_mae_mm": -0.025795545911017206
+          },
+          "separate": {
+            "muscle_mae": 17.14091741236789,
+            "path_mean_distance_mm": 4.034575682286225
+          },
+          "matched": {
+            "muscle_mae": 17.146725598831534,
+            "path_mean_distance_mm": 4.091820279123196
+          }
+        },
+        "walking_counterclockwise": {
+          "people": 18,
+          "events": 1282,
+          "separate_minus_matched": {
+            "muscle_mae": -0.007659022485557622,
+            "path_mean_distance_mm": -0.05971674877714898,
+            "endpoint_distance_mm": -0.1375218650113198,
+            "axis0_mae_mm": -0.061463260030203415,
+            "axis1_mae_mm": 0.007567316287664248,
+            "axis2_mae_mm": -0.03401342318930664
+          },
+          "separate": {
+            "muscle_mae": 17.095444611892137,
+            "path_mean_distance_mm": 4.029844724971589
+          },
+          "matched": {
+            "muscle_mae": 17.10310363437769,
+            "path_mean_distance_mm": 4.089561473748738
+          }
+        },
+        "walking_clockwise": {
+          "people": 18,
+          "events": 1297,
+          "separate_minus_matched": {
+            "muscle_mae": -0.003957350441734262,
+            "path_mean_distance_mm": -0.054772444896793546,
+            "endpoint_distance_mm": -0.1638257780301436,
+            "axis0_mae_mm": -0.03850676965211013,
+            "axis1_mae_mm": -0.026795701983911062,
+            "axis2_mae_mm": -0.017577668632727732
+          },
+          "separate": {
+            "muscle_mae": 17.186390212843648,
+            "path_mean_distance_mm": 4.03930663960086
+          },
+          "matched": {
+            "muscle_mae": 17.190347563285382,
+            "path_mean_distance_mm": 4.094079084497655
+          }
+        }
+      }
+    },
+    "way": {
+      "people": 6,
+      "events": 1764,
+      "folds": {
+        "0": {
+          "events": 588,
+          "people": 2
+        },
+        "1": {
+          "events": 588,
+          "people": 2
+        },
+        "2": {
+          "events": 588,
+          "people": 2
+        }
+      },
+      "axis_labels": [
+        "X",
+        "Y",
+        "Z"
+      ],
+      "muscle_units": "WAY exported amplitude units",
+      "channel_support": {
+        "right anterior deltoid": {
+          "events": 1764,
+          "people": 6
+        },
+        "right brachioradialis": {
+          "events": 1764,
+          "people": 6
+        },
+        "right flexor digitorum": {
+          "events": 1470,
+          "people": 5
+        },
+        "right common extensor digitorum": {
+          "events": 1470,
+          "people": 5
+        },
+        "right first dorsal interosseous": {
+          "events": 1470,
+          "people": 5
+        }
+      },
+      "marker_history_lag_ms": {
+        "1": [
+          32.00000000000003,
+          32.00000000000003
+        ],
+        "4": [
+          125.99999999999989,
+          125.99999999999989
+        ]
+      },
+      "methods": {
+        "stationary": {
+          "scores": {
+            "muscle_mae": 0.009545574016070433,
+            "path_mean_distance_mm": 13.873504991215995,
+            "endpoint_distance_mm": 29.32121735739564,
+            "axis0_mae_mm": 4.671577616506654,
+            "axis1_mae_mm": 10.763116123782375,
+            "axis2_mae_mm": 6.610510873565988,
+            "axis0_bias_mm": -4.2317203259341785,
+            "axis1_bias_mm": 10.660817367691395,
+            "axis2_bias_mm": -6.456050256419825,
+            "mae right anterior deltoid": 0.021863434070904807,
+            "mae right brachioradialis": 0.007041741407158075,
+            "mae right flexor digitorum": 0.004275784352404855,
+            "mae right common extensor digitorum": 0.006976632068500746,
+            "mae right first dorsal interosseous": 0.005118307533279956,
+            "bias right anterior deltoid": -0.014980778825537175,
+            "bias right brachioradialis": 0.001792763496613417,
+            "bias right flexor digitorum": 0.001019239825381837,
+            "bias right common extensor digitorum": -0.004517603992646892,
+            "bias right first dorsal interosseous": -0.0002835645003578138
+          },
+          "people": 6
+        },
+        "velocity_exact_31_25ms": {
+          "scores": {
+            "muscle_mae": 0.009545574016070433,
+            "path_mean_distance_mm": 5.757355779252788,
+            "endpoint_distance_mm": 14.344476261540768,
+            "axis0_mae_mm": 2.0217652658936656,
+            "axis1_mae_mm": 4.1401205186935455,
+            "axis2_mae_mm": 2.748213685050832,
+            "axis0_bias_mm": -1.6966894516052784,
+            "axis1_bias_mm": 3.9894437062476418,
+            "axis2_bias_mm": -1.4957327413929713,
+            "mae right anterior deltoid": 0.021863434070904807,
+            "mae right brachioradialis": 0.007041741407158075,
+            "mae right flexor digitorum": 0.004275784352404855,
+            "mae right common extensor digitorum": 0.006976632068500746,
+            "mae right first dorsal interosseous": 0.005118307533279956,
+            "bias right anterior deltoid": -0.014980778825537175,
+            "bias right brachioradialis": 0.001792763496613417,
+            "bias right flexor digitorum": 0.001019239825381837,
+            "bias right common extensor digitorum": -0.004517603992646892,
+            "bias right first dorsal interosseous": -0.0002835645003578138
+          },
+          "people": 6
+        },
+        "velocity_exact_125ms": {
+          "scores": {
+            "muscle_mae": 0.009545574016070433,
+            "path_mean_distance_mm": 9.27358014736979,
+            "endpoint_distance_mm": 20.731000597036918,
+            "axis0_mae_mm": 3.097204787405395,
+            "axis1_mae_mm": 7.184975957505359,
+            "axis2_mae_mm": 4.201257160850434,
+            "axis0_bias_mm": -2.7262313334621884,
+            "axis1_bias_mm": 7.069372492866466,
+            "axis2_bias_mm": -3.657662067811046,
+            "mae right anterior deltoid": 0.021863434070904807,
+            "mae right brachioradialis": 0.007041741407158075,
+            "mae right flexor digitorum": 0.004275784352404855,
+            "mae right common extensor digitorum": 0.006976632068500746,
+            "mae right first dorsal interosseous": 0.005118307533279956,
+            "bias right anterior deltoid": -0.014980778825537175,
+            "bias right brachioradialis": 0.001792763496613417,
+            "bias right flexor digitorum": 0.001019239825381837,
+            "bias right common extensor digitorum": -0.004517603992646892,
+            "bias right first dorsal interosseous": -0.0002835645003578138
+          },
+          "people": 6
+        },
+        "velocity_knot_31_25ms": {
+          "scores": {
+            "muscle_mae": 0.009545574016070433,
+            "path_mean_distance_mm": 5.788203374838851,
+            "endpoint_distance_mm": 14.400147980022595,
+            "axis0_mae_mm": 2.0321702996926745,
+            "axis1_mae_mm": 4.165402917324671,
+            "axis2_mae_mm": 2.760681972153406,
+            "axis0_bias_mm": -1.7050479341584628,
+            "axis1_bias_mm": 4.015112230981771,
+            "axis2_bias_mm": -1.5127860956936896,
+            "mae right anterior deltoid": 0.021863434070904807,
+            "mae right brachioradialis": 0.007041741407158075,
+            "mae right flexor digitorum": 0.004275784352404855,
+            "mae right common extensor digitorum": 0.006976632068500746,
+            "mae right first dorsal interosseous": 0.005118307533279956,
+            "bias right anterior deltoid": -0.014980778825537175,
+            "bias right brachioradialis": 0.001792763496613417,
+            "bias right flexor digitorum": 0.001019239825381837,
+            "bias right common extensor digitorum": -0.004517603992646892,
+            "bias right first dorsal interosseous": -0.0002835645003578138
+          },
+          "people": 6
+        },
+        "velocity_knot_125ms": {
+          "scores": {
+            "muscle_mae": 0.009545574016070433,
+            "path_mean_distance_mm": 9.303618220148156,
+            "endpoint_distance_mm": 20.78582778965516,
+            "axis0_mae_mm": 3.1072315348906536,
+            "axis1_mae_mm": 7.2105273706523585,
+            "axis2_mae_mm": 4.213393722693294,
+            "axis0_bias_mm": -2.7357716498781066,
+            "axis1_bias_mm": 7.094854469945491,
+            "axis2_bias_mm": -3.676346650440393,
+            "mae right anterior deltoid": 0.021863434070904807,
+            "mae right brachioradialis": 0.007041741407158075,
+            "mae right flexor digitorum": 0.004275784352404855,
+            "mae right common extensor digitorum": 0.006976632068500746,
+            "mae right first dorsal interosseous": 0.005118307533279956,
+            "bias right anterior deltoid": -0.014980778825537175,
+            "bias right brachioradialis": 0.001792763496613417,
+            "bias right flexor digitorum": 0.001019239825381837,
+            "bias right common extensor digitorum": -0.004517603992646892,
+            "bias right first dorsal interosseous": -0.0002835645003578138
+          },
+          "people": 6
+        },
+        "separate": {
+          "scores": {
+            "muscle_mae": 0.010166099933315133,
+            "path_mean_distance_mm": 3.8779242192253935,
+            "endpoint_distance_mm": 9.519916108512012,
+            "axis0_mae_mm": 1.296230307059169,
+            "axis1_mae_mm": 2.160501304972813,
+            "axis2_mae_mm": 2.3405106309036134,
+            "axis0_bias_mm": -0.25590029996819247,
+            "axis1_bias_mm": 0.5642377156394638,
+            "axis2_bias_mm": -0.09782659930553217,
+            "mae right anterior deltoid": 0.023085080595898786,
+            "mae right brachioradialis": 0.006819662039892492,
+            "mae right flexor digitorum": 0.0050143745245103625,
+            "mae right common extensor digitorum": 0.007721974718415658,
+            "mae right first dorsal interosseous": 0.00620406868197667,
+            "bias right anterior deltoid": -0.001071302728566791,
+            "bias right brachioradialis": 0.0007486307884358919,
+            "bias right flexor digitorum": 0.0010689843135826384,
+            "bias right common extensor digitorum": 0.000520796009104586,
+            "bias right first dorsal interosseous": 0.0006022043079655104
+          },
+          "people": 6
+        },
+        "matched": {
+          "scores": {
+            "muscle_mae": 0.010233975516572522,
+            "path_mean_distance_mm": 3.877124923282931,
+            "endpoint_distance_mm": 9.466255399694962,
+            "axis0_mae_mm": 1.2589615954077582,
+            "axis1_mae_mm": 2.140752736731957,
+            "axis2_mae_mm": 2.3866217900054854,
+            "axis0_bias_mm": -0.30685812758192843,
+            "axis1_bias_mm": 0.759868210756932,
+            "axis2_bias_mm": -0.25221298387722063,
+            "mae right anterior deltoid": 0.023118608880743404,
+            "mae right brachioradialis": 0.006752637531616246,
+            "mae right flexor digitorum": 0.005152474631129298,
+            "mae right common extensor digitorum": 0.007801169724916962,
+            "mae right first dorsal interosseous": 0.006465580352637295,
+            "bias right anterior deltoid": -0.0014350742504342289,
+            "bias right brachioradialis": 0.0009112719179413591,
+            "bias right flexor digitorum": 0.0009917565913308,
+            "bias right common extensor digitorum": 0.0003811123525396072,
+            "bias right first dorsal interosseous": 0.0004841854023489211
+          },
+          "people": 6
+        },
+        "original": {
+          "scores": {
+            "muscle_mae": 0.010187832799375471,
+            "path_mean_distance_mm": 3.936054635833864,
+            "endpoint_distance_mm": 9.674739175731613,
+            "axis0_mae_mm": 1.2957961609628803,
+            "axis1_mae_mm": 2.182687400052967,
+            "axis2_mae_mm": 2.3938477716036957,
+            "axis0_bias_mm": -0.27141267126257823,
+            "axis1_bias_mm": 0.5997791932500887,
+            "axis2_bias_mm": -0.10153981123400535,
+            "mae right anterior deltoid": 0.02293803986089483,
+            "mae right brachioradialis": 0.00676117213850113,
+            "mae right flexor digitorum": 0.005163310543398872,
+            "mae right common extensor digitorum": 0.007786545087681794,
+            "mae right first dorsal interosseous": 0.0064277800593651735,
+            "bias right anterior deltoid": -0.0017359656817179216,
+            "bias right brachioradialis": 0.0006289186565934977,
+            "bias right flexor digitorum": 0.0007858357533802738,
+            "bias right common extensor digitorum": 0.00034720363737212256,
+            "bias right first dorsal interosseous": 0.00042411911594420474
+          },
+          "people": 6
+        },
+        "specialist_exposure": {
+          "scores": {
+            "muscle_mae": 0.009921798345765323,
+            "path_mean_distance_mm": 4.016674136178301,
+            "endpoint_distance_mm": 10.065500196337222,
+            "axis0_mae_mm": 1.357740112110271,
+            "axis1_mae_mm": 2.206229392754427,
+            "axis2_mae_mm": 2.4512053039944663,
+            "axis0_bias_mm": -0.3299061214861349,
+            "axis1_bias_mm": 0.7956711012834602,
+            "axis2_bias_mm": -0.18728128837982938,
+            "mae right anterior deltoid": 0.02249456919700084,
+            "mae right brachioradialis": 0.006807145125746505,
+            "mae right flexor digitorum": 0.005001301625847786,
+            "mae right common extensor digitorum": 0.007357270304226719,
+            "mae right first dorsal interosseous": 0.005966099566307147,
+            "bias right anterior deltoid": -0.004054684446624859,
+            "bias right brachioradialis": 0.0016376335331694716,
+            "bias right flexor digitorum": 0.0015088501372123406,
+            "bias right common extensor digitorum": -0.0005423519665906005,
+            "bias right first dorsal interosseous": 0.0005313161692923674
+          },
+          "people": 6
+        },
+        "specialist_steps": {
+          "scores": {
+            "muscle_mae": 0.010365505990611043,
+            "path_mean_distance_mm": 3.6863157593102174,
+            "endpoint_distance_mm": 8.959626047204926,
+            "axis0_mae_mm": 1.2548447680912698,
+            "axis1_mae_mm": 2.0317232021486094,
+            "axis2_mae_mm": 2.210386858471033,
+            "axis0_bias_mm": -0.3227953148607868,
+            "axis1_bias_mm": 0.5118975931829562,
+            "axis2_bias_mm": -0.10173454191126567,
+            "mae right anterior deltoid": 0.023820412647089815,
+            "mae right brachioradialis": 0.006764828586253294,
+            "mae right flexor digitorum": 0.005188682788070038,
+            "mae right common extensor digitorum": 0.008065150918403848,
+            "mae right first dorsal interosseous": 0.006060259643347838,
+            "bias right anterior deltoid": 0.001090503594743065,
+            "bias right brachioradialis": 0.001228407420148573,
+            "bias right flexor digitorum": 0.0016298585651643098,
+            "bias right common extensor digitorum": 0.0013923511813017822,
+            "bias right first dorsal interosseous": 0.0007001588367251413
+          },
+          "people": 6
+        }
+      },
+      "primary": {
+        "muscle_mae": {
+          "mean": -6.7875583257389e-05,
+          "ci95": [
+            -0.00013797270494186184,
+            6.039203583083046e-06
+          ],
+          "upper98_75": 2.2434158964000138e-05,
+          "people_lower": 4,
+          "people": 6,
+          "seed_means": [
+            -0.00010022033380125267,
+            8.780237481368714e-05,
+            -0.00019120879078460143
+          ],
+          "seed_sd": 0.00014229000245251765,
+          "seed_range": [
+            -0.00019120879078460143,
+            8.780237481368714e-05
+          ],
+          "participant_iqr": [
+            -0.00013429410513622432,
+            4.099328811198066e-06
+          ],
+          "leave_one_out_range": [
+            -9.737593920597758e-05,
+            -4.691203894611335e-05
+          ]
+        },
+        "path_mean_distance_mm": {
+          "mean": 0.0007992959424626828,
+          "ci95": [
+            -0.09899494835556925,
+            0.08420949509040948
+          ],
+          "upper98_75": 0.09112913621907552,
+          "people_lower": 2,
+          "people": 6,
+          "seed_means": [
+            0.1256317135886639,
+            -0.08759831152085622,
+            -0.03563551424041966
+          ],
+          "seed_sd": 0.1111862511592537,
+          "seed_range": [
+            -0.08759831152085622,
+            0.1256317135886639
+          ],
+          "participant_iqr": [
+            -0.003397116599591429,
+            0.03655362317148508
+          ],
+          "leave_one_out_range": [
+            -0.03055028716373211,
+            0.04464937649212718
+          ]
+        }
+      },
+      "separate_minus": {
+        "matched": {
+          "muscle_mae": {
+            "mean": -6.7875583257389e-05,
+            "ci95": [
+              -0.00013797270494186184,
+              6.039203583083046e-06
+            ],
+            "upper98_75": 2.2434158964000138e-05,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -0.00010022033380125267,
+              8.780237481368714e-05,
+              -0.00019120879078460143
+            ],
+            "seed_sd": 0.00014229000245251765,
+            "seed_range": [
+              -0.00019120879078460143,
+              8.780237481368714e-05
+            ],
+            "participant_iqr": [
+              -0.00013429410513622432,
+              4.099328811198066e-06
+            ],
+            "leave_one_out_range": [
+              -9.737593920597758e-05,
+              -4.691203894611335e-05
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": 0.0007992959424626828,
+            "ci95": [
+              -0.09899494835556925,
+              0.08420949509040948
+            ],
+            "upper98_75": 0.09112913621907552,
+            "people_lower": 2,
+            "people": 6,
+            "seed_means": [
+              0.1256317135886639,
+              -0.08759831152085622,
+              -0.03563551424041966
+            ],
+            "seed_sd": 0.1111862511592537,
+            "seed_range": [
+              -0.08759831152085622,
+              0.1256317135886639
+            ],
+            "participant_iqr": [
+              -0.003397116599591429,
+              0.03655362317148508
+            ],
+            "leave_one_out_range": [
+              -0.03055028716373211,
+              0.04464937649212718
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": 0.05366070881705126,
+            "ci95": [
+              -0.28170901114392594,
+              0.4056808167421462
+            ],
+            "upper98_75": 0.4599513606489287,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              0.32967327410283603,
+              -0.0566394156976416,
+              -0.11205173195404061
+            ],
+            "seed_sd": 0.2406342314487997,
+            "seed_range": [
+              -0.11205173195404061,
+              0.32967327410283603
+            ],
+            "participant_iqr": [
+              -0.11972523985955352,
+              0.4153124737793342
+            ],
+            "leave_one_out_range": [
+              -0.07306441353969317,
+              0.18842619836620456
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": 0.037268711651410824,
+            "ci95": [
+              0.020381310287225948,
+              0.05693574833446919
+            ],
+            "upper98_75": 0.059991037383103546,
+            "people_lower": 0,
+            "people": 6,
+            "seed_means": [
+              0.0940124147539127,
+              -0.029562311162650772,
+              0.04735603136297056
+            ],
+            "seed_sd": 0.06240187285299106,
+            "seed_range": [
+              -0.029562311162650772,
+              0.0940124147539127
+            ],
+            "participant_iqr": [
+              0.019647699365836782,
+              0.05162610371303842
+            ],
+            "leave_one_out_range": [
+              0.029137479494802443,
+              0.04114476181968564
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": 0.019748568240855274,
+            "ci95": [
+              -0.058292488755493505,
+              0.10080949247882433
+            ],
+            "upper98_75": 0.11123018278673849,
+            "people_lower": 2,
+            "people": 6,
+            "seed_means": [
+              0.07822563327893561,
+              0.004687642405827012,
+              -0.023667570962196793
+            ],
+            "seed_sd": 0.052589731724809616,
+            "seed_range": [
+              -0.023667570962196793,
+              0.07822563327893561
+            ],
+            "participant_iqr": [
+              -0.031051631674851636,
+              0.06561883791853691
+            ],
+            "leave_one_out_range": [
+              -0.013082065923731456,
+              0.05104124557270814
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": -0.04611115910187249,
+            "ci95": [
+              -0.11350039107158204,
+              -0.006830953735045306
+            ],
+            "upper98_75": -0.005072125492299369,
+            "people_lower": 5,
+            "people": 6,
+            "seed_means": [
+              0.02799797787005104,
+              -0.08609797825142636,
+              -0.08023347692424211
+            ],
+            "seed_sd": 0.06424734415519934,
+            "seed_range": [
+              -0.08609797825142636,
+              0.02799797787005104
+            ],
+            "participant_iqr": [
+              -0.02470702549715631,
+              -0.012734721241901947
+            ],
+            "leave_one_out_range": [
+              -0.05642226064418142,
+              -0.013385704236956559
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": 0.05095782761373613,
+            "ci95": [
+              0.007619220205629944,
+              0.10680960283257294
+            ],
+            "upper98_75": 0.11546631127750194,
+            "people_lower": 2,
+            "people": 6,
+            "seed_means": [
+              0.05473040221531192,
+              0.0862292922666968,
+              0.011913788359199658
+            ],
+            "seed_sd": 0.03730110949555853,
+            "seed_range": [
+              0.011913788359199658,
+              0.0862292922666968
+            ],
+            "participant_iqr": [
+              0.001090500401905968,
+              0.06637616962974903
+            ],
+            "leave_one_out_range": [
+              0.024634190717776044,
+              0.06160808627564883
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -0.19563049511746797,
+            "ci95": [
+              -0.32550309735388366,
+              -0.07142209993716886
+            ],
+            "upper98_75": -0.05838606709354589,
+            "people_lower": 6,
+            "people": 6,
+            "seed_means": [
+              -0.31228630603529867,
+              -0.02338464627080311,
+              -0.25122053304630204
+            ],
+            "seed_sd": 0.1522620487559753,
+            "seed_range": [
+              -0.31228630603529867,
+              -0.02338464627080311
+            ],
+            "participant_iqr": [
+              -0.34466365241332564,
+              -0.05961288314888227
+            ],
+            "leave_one_out_range": [
+              -0.22525202641624215,
+              -0.14626325818395344
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 0.1543863845716884,
+            "ci95": [
+              0.046914951484421624,
+              0.2848469619591409
+            ],
+            "upper98_75": 0.29300739487959965,
+            "people_lower": 0,
+            "people": 6,
+            "seed_means": [
+              0.20663386352751592,
+              -0.07849486484263156,
+              0.33502015503018084
+            ],
+            "seed_sd": 0.21165069621438254,
+            "seed_range": [
+              -0.07849486484263156,
+              0.33502015503018084
+            ],
+            "participant_iqr": [
+              0.010965773360736591,
+              0.24870091951191967
+            ],
+            "leave_one_out_range": [
+              0.10465308883005316,
+              0.18450839310969575
+            ]
+          }
+        },
+        "original": {
+          "muscle_mae": {
+            "mean": -2.173286606033822e-05,
+            "ci95": [
+              -0.0001238081861685593,
+              6.686371189165023e-05
+            ],
+            "upper98_75": 7.608950927205455e-05,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              -0.00015926486306290207,
+              0.00024210234623712676,
+              -0.00014803608135523935
+            ],
+            "seed_sd": 0.0002285569640608133,
+            "seed_range": [
+              -0.00015926486306290207,
+              0.00024210234623712676
+            ],
+            "participant_iqr": [
+              -7.392108279164211e-05,
+              8.029104621176141e-05
+            ],
+            "leave_one_out_range": [
+              -4.6437135193865105e-05,
+              2.2506631943419503e-05
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -0.05813041660847045,
+            "ci95": [
+              -0.13578165057852387,
+              0.018647676787586574
+            ],
+            "upper98_75": 0.026101590770169037,
+            "people_lower": 5,
+            "people": 6,
+            "seed_means": [
+              0.05429279528643475,
+              -0.1348685434792892,
+              -0.09381550163255692
+            ],
+            "seed_sd": 0.09950161803102728,
+            "seed_range": [
+              -0.1348685434792892,
+              0.05429279528643475
+            ],
+            "participant_iqr": [
+              -0.08446426118686441,
+              -0.025796908224067515
+            ],
+            "leave_one_out_range": [
+              -0.08939835268377765,
+              -0.02548342684868355
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -0.1548230672196004,
+            "ci95": [
+              -0.33182485478284435,
+              -0.0158262888769527
+            ],
+            "upper98_75": -0.0002739517109307717,
+            "people_lower": 5,
+            "people": 6,
+            "seed_means": [
+              0.06469446728641655,
+              -0.2590862874392978,
+              -0.2700773815059199
+            ],
+            "seed_sd": 0.1901871762340868,
+            "seed_range": [
+              -0.2700773815059199,
+              0.06469446728641655
+            ],
+            "participant_iqr": [
+              -0.18858063793994856,
+              -0.026326421355086966
+            ],
+            "leave_one_out_range": [
+              -0.20097704575802533,
+              -0.07190974006504244
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": 0.00043414609628891765,
+            "ci95": [
+              -0.017693915312764444,
+              0.018220885930679984
+            ],
+            "upper98_75": 0.0201180319204091,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              0.05213175774518256,
+              -0.06208477018487141,
+              0.011255450728555596
+            ],
+            "seed_sd": 0.05787209421264654,
+            "seed_range": [
+              -0.06208477018487141,
+              0.05213175774518256
+            ],
+            "participant_iqr": [
+              -0.0035513411306282994,
+              0.006220068829801561
+            ],
+            "leave_one_out_range": [
+              -0.0072727816735478745,
+              0.007819432741539812
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": -0.02218609508015386,
+            "ci95": [
+              -0.07505408153942042,
+              0.044450533559261096
+            ],
+            "upper98_75": 0.05282360742221425,
+            "people_lower": 5,
+            "people": 6,
+            "seed_means": [
+              0.02628532457721487,
+              -0.08238351356638428,
+              -0.010460096251292164
+            ],
+            "seed_sd": 0.055275251082838026,
+            "seed_range": [
+              -0.08238351356638428,
+              0.02628532457721487
+            ],
+            "participant_iqr": [
+              -0.05652634199773349,
+              -0.012225597731975466
+            ],
+            "leave_one_out_range": [
+              -0.05429644329684998,
+              -0.0036166884402928897
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": -0.053337140700082275,
+            "ci95": [
+              -0.1293068155128796,
+              0.015523820267630299
+            ],
+            "upper98_75": 0.021851852158426607,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              0.003224995517606725,
+              -0.03241740705523388,
+              -0.13081901056261966
+            ],
+            "seed_sd": 0.06942748255077015,
+            "seed_range": [
+              -0.13081901056261966,
+              0.003224995517606725
+            ],
+            "participant_iqr": [
+              -0.07346825506001729,
+              0.010834863317006671
+            ],
+            "leave_one_out_range": [
+              -0.07612390280894471,
+              -0.018395892324219613
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": 0.015512371294385806,
+            "ci95": [
+              -0.028424317962560064,
+              0.06974813522199112
+            ],
+            "upper98_75": 0.0739487071793641,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              0.0136220325011459,
+              0.04270816919531003,
+              -0.009793087813298502
+            ],
+            "seed_sd": 0.02630162604167112,
+            "seed_range": [
+              -0.009793087813298502,
+              0.04270816919531003
+            ],
+            "participant_iqr": [
+              -0.016633490900126186,
+              0.043608655458275865
+            ],
+            "leave_one_out_range": [
+              -0.007022048668130912,
+              0.029861359635926638
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -0.035541477610624865,
+            "ci95": [
+              -0.15316743412523612,
+              0.05737187858738773
+            ],
+            "upper98_75": 0.0632172716162017,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              -0.11967180436461577,
+              0.11028004998932693,
+              -0.09723267845658577
+            ],
+            "seed_sd": 0.12678255805341182,
+            "seed_range": [
+              -0.11967180436461577,
+              0.11028004998932693
+            ],
+            "participant_iqr": [
+              -0.052633046096278384,
+              0.05551217627907834
+            ],
+            "leave_one_out_range": [
+              -0.0621356712523496,
+              0.02150305237670786
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 0.0037132119284732,
+            "ci95": [
+              -0.10437684309078325,
+              0.1714406566023489
+            ],
+            "upper98_75": 0.18486716444786797,
+            "people_lower": 5,
+            "people": 6,
+            "seed_means": [
+              0.05347866774793917,
+              -0.23267382054437988,
+              0.19033478858186034
+            ],
+            "seed_sd": 0.21585069213096927,
+            "seed_range": [
+              -0.23267382054437988,
+              0.19033478858186034
+            ],
+            "participant_iqr": [
+              -0.09346542697405706,
+              -0.019945589523311845
+            ],
+            "leave_one_out_range": [
+              -0.07722645418788161,
+              0.03341586818589888
+            ]
+          }
+        },
+        "specialist_exposure": {
+          "muscle_mae": {
+            "mean": 0.00024430158754980866,
+            "ci95": [
+              -0.0001098663161450976,
+              0.0006193731711469462
+            ],
+            "upper98_75": 0.0006592189536602415,
+            "people_lower": 2,
+            "people": 6,
+            "seed_means": [
+              0.0002483250942173796,
+              0.00026999099018176607,
+              0.00021458867825028023
+            ],
+            "seed_sd": 2.7919446560890237e-05,
+            "seed_range": [
+              0.00021458867825028023,
+              0.00026999099018176607
+            ],
+            "participant_iqr": [
+              -6.821800195582637e-05,
+              0.0006476972902293224
+            ],
+            "leave_one_out_range": [
+              0.00012143128681780751,
+              0.0003756215534281877
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -0.13874991695290745,
+            "ci95": [
+              -0.41103547978576643,
+              0.13353564587995156
+            ],
+            "upper98_75": 0.16255133920157774,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -0.15040843551392905,
+              -0.20022989423620371,
+              -0.06561142110858949
+            ],
+            "seed_sd": 0.0680622811701225,
+            "seed_range": [
+              -0.20022989423620371,
+              -0.06561142110858949
+            ],
+            "participant_iqr": [
+              -0.4070978769875422,
+              0.17511668954623955
+            ],
+            "leave_one_out_range": [
+              -0.22206924725292815,
+              -0.03897751226718869
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -0.5455840878252092,
+            "ci95": [
+              -1.52177824672558,
+              0.36721259609408863
+            ],
+            "upper98_75": 0.4600866709058878,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              -0.7436700271248297,
+              -0.5333477502184931,
+              -0.3597344861323048
+            ],
+            "seed_sd": 0.19226003453090515,
+            "seed_range": [
+              -0.7436700271248297,
+              -0.3597344861323048
+            ],
+            "participant_iqr": [
+              -1.3501541967019484,
+              0.5431809905786631
+            ],
+            "leave_one_out_range": [
+              -0.8195823623702662,
+              -0.1610017442312059
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": -0.06150980505110201,
+            "ci95": [
+              -0.13335224641364551,
+              0.00867045213955365
+            ],
+            "upper98_75": 0.016237123657417103,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -0.06487340668336006,
+              -0.08099118609344454,
+              -0.038664822376501436
+            ],
+            "seed_sd": 0.02136271584630887,
+            "seed_range": [
+              -0.08099118609344454,
+              -0.038664822376501436
+            ],
+            "participant_iqr": [
+              -0.14789614769665954,
+              0.023812098469362684
+            ],
+            "leave_one_out_range": [
+              -0.08097888481521497,
+              -0.037738722393027876
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": -0.04572808778161458,
+            "ci95": [
+              -0.22922559291371716,
+              0.11710021481273762
+            ],
+            "upper98_75": 0.13115892190153175,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              -0.09255476465663047,
+              -0.07259689453637991,
+              0.027967395848166616
+            ],
+            "seed_sd": 0.06459758026044558,
+            "seed_range": [
+              -0.09255476465663047,
+              0.027967395848166616
+            ],
+            "participant_iqr": [
+              -0.13424145162899576,
+              0.13765723315693673
+            ],
+            "leave_one_out_range": [
+              -0.09451809702507874,
+              0.03333760485950525
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": -0.11069467309085318,
+            "ci95": [
+              -0.32983830015604704,
+              0.10090535120885881
+            ],
+            "upper98_75": 0.12088723740496018,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              -0.10255944855592242,
+              -0.15767945292915408,
+              -0.07184511778748305
+            ],
+            "seed_sd": 0.043491604718364676,
+            "seed_range": [
+              -0.15767945292915408,
+              -0.07184511778748305
+            ],
+            "participant_iqr": [
+              -0.3726506257102812,
+              0.14854819075284909
+            ],
+            "leave_one_out_range": [
+              -0.17094300852574654,
+              -0.034376449956833276
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": 0.07400582151794256,
+            "ci95": [
+              -0.0625037568352541,
+              0.17318248456417612
+            ],
+            "upper98_75": 0.18108119331758085,
+            "people_lower": 1,
+            "people": 6,
+            "seed_means": [
+              0.2770333131310118,
+              0.07396156506835583,
+              -0.12897741364553997
+            ],
+            "seed_sd": 0.2030053670063453,
+            "seed_range": [
+              -0.12897741364553997,
+              0.2770333131310118
+            ],
+            "participant_iqr": [
+              0.09313341288008181,
+              0.1367655452428688
+            ],
+            "leave_one_out_range": [
+              0.039071163212917974,
+              0.13654728242138378
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -0.2314333856439963,
+            "ci95": [
+              -0.37779738187622575,
+              -0.08423429254487806
+            ],
+            "upper98_75": -0.07507597403975315,
+            "people_lower": 5,
+            "people": 6,
+            "seed_means": [
+              -0.6034519709495934,
+              -0.14840932618676597,
+              0.057561140204370455
+            ],
+            "seed_sd": 0.33823709009499375,
+            "seed_range": [
+              -0.6034519709495934,
+              0.057561140204370455
+            ],
+            "participant_iqr": [
+              -0.39683427508522595,
+              -0.07402531443406504
+            ],
+            "leave_one_out_range": [
+              -0.27974340255262964,
+              -0.1876832871923786
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 0.08945468907429728,
+            "ci95": [
+              -0.23902128171355339,
+              0.37888487648804065
+            ],
+            "upper98_75": 0.41972496089647365,
+            "people_lower": 2,
+            "people": 6,
+            "seed_means": [
+              0.20553122885874134,
+              0.12207975267510966,
+              -0.05924691431095915
+            ],
+            "seed_sd": 0.1353704633822179,
+            "seed_range": [
+              -0.05924691431095915,
+              0.20553122885874134
+            ],
+            "participant_iqr": [
+              -0.17163893236012262,
+              0.29601762232633777
+            ],
+            "leave_one_out_range": [
+              -0.0024446463495761293,
+              0.2206722525616926
+            ]
+          }
+        },
+        "specialist_steps": {
+          "muscle_mae": {
+            "mean": -0.00019940605729591005,
+            "ci95": [
+              -0.0006362160046130694,
+              0.00019048606979031653
+            ],
+            "upper98_75": 0.0002346314951610607,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              -0.00015835817954573832,
+              -0.0003857149051668646,
+              -5.41450871751273e-05
+            ],
+            "seed_sd": 0.00016955333158511876,
+            "seed_range": [
+              -0.0003857149051668646,
+              -5.41450871751273e-05
+            ],
+            "participant_iqr": [
+              -0.0006398482589900493,
+              0.00018742077814114027
+            ],
+            "leave_one_out_range": [
+              -0.00031753589726929524,
+              -3.817720310451784e-05
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": 0.19160845991517525,
+            "ci95": [
+              0.05164485455071351,
+              0.33161520285572293
+            ],
+            "upper98_75": 0.3557812050801272,
+            "people_lower": 1,
+            "people": 6,
+            "seed_means": [
+              0.24033280073761817,
+              0.3960497357906905,
+              -0.06155715678278306
+            ],
+            "seed_sd": 0.23266190722618052,
+            "seed_range": [
+              -0.06155715678278306,
+              0.3960497357906905
+            ],
+            "participant_iqr": [
+              0.03906298682085748,
+              0.29677821760001205
+            ],
+            "leave_one_out_range": [
+              0.13508731591815812,
+              0.23877562540163697
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": 0.5602900613070869,
+            "ci95": [
+              0.23490665691584078,
+              0.9789596605446323
+            ],
+            "upper98_75": 1.0180246808816749,
+            "people_lower": 0,
+            "people": 6,
+            "seed_means": [
+              0.8458713294464789,
+              1.2107557843736245,
+              -0.37575692989884296
+            ],
+            "seed_sd": 0.8309170498137136,
+            "seed_range": [
+              -0.37575692989884296,
+              1.2107557843736245
+            ],
+            "participant_iqr": [
+              0.16574865286838403,
+              0.6826129422307151
+            ],
+            "leave_one_out_range": [
+              0.37747684885291755,
+              0.6528333513471358
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": 0.041385538967899316,
+            "ci95": [
+              -0.006909689830224841,
+              0.09708263997406648
+            ],
+            "upper98_75": 0.10351630586764979,
+            "people_lower": 1,
+            "people": 6,
+            "seed_means": [
+              0.08031595005388516,
+              0.07367746120476427,
+              -0.029836794354951457
+            ],
+            "seed_sd": 0.0617695957289136,
+            "seed_range": [
+              -0.029836794354951457,
+              0.08031595005388516
+            ],
+            "participant_iqr": [
+              0.005596344302014139,
+              0.07642010292496018
+            ],
+            "leave_one_out_range": [
+              0.01789601367984079,
+              0.05816663308658154
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": 0.1287781028242035,
+            "ci95": [
+              0.07571921726868412,
+              0.1885878388055899
+            ],
+            "upper98_75": 0.19767479451357578,
+            "people_lower": 0,
+            "people": 6,
+            "seed_means": [
+              0.2119454637321366,
+              0.2786977339867962,
+              -0.10430888924632233
+            ],
+            "seed_sd": 0.20459991642325226,
+            "seed_range": [
+              -0.10430888924632233,
+              0.2786977339867962
+            ],
+            "participant_iqr": [
+              0.08897407830061253,
+              0.17942626901169606
+            ],
+            "leave_one_out_range": [
+              0.1058636522954887,
+              0.1479163239281085
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": 0.1301237724325798,
+            "ci95": [
+              -0.017720716681906525,
+              0.2940971843432211
+            ],
+            "upper98_75": 0.31860700101170186,
+            "people_lower": 2,
+            "people": 6,
+            "seed_means": [
+              0.09127943672043043,
+              0.2610212246368323,
+              0.03807065594047676
+            ],
+            "seed_sd": 0.11644054634531613,
+            "seed_range": [
+              0.03807065594047676,
+              0.2610212246368323
+            ],
+            "participant_iqr": [
+              -0.035690510280489876,
+              0.20297406286956238
+            ],
+            "leave_one_out_range": [
+              0.0606975481074552,
+              0.17693481134844857
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": 0.06689501489259436,
+            "ci95": [
+              -0.0025323064113722767,
+              0.13431907690994507
+            ],
+            "upper98_75": 0.13978551775377668,
+            "people_lower": 2,
+            "people": 6,
+            "seed_means": [
+              0.05358383532507315,
+              -0.09708862370986561,
+              0.24418983306257555
+            ],
+            "seed_sd": 0.17102817572070939,
+            "seed_range": [
+              -0.09708862370986561,
+              0.24418983306257555
+            ],
+            "participant_iqr": [
+              -0.0031411949223415607,
+              0.1428923361095377
+            ],
+            "leave_one_out_range": [
+              0.049295247637709996,
+              0.09461169030556206
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": 0.052340122456507605,
+            "ci95": [
+              -0.2601516081606952,
+              0.3722294514418445
+            ],
+            "upper98_75": 0.42036359616661634,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              0.09510539693181276,
+              0.19980662325025925,
+              -0.13789165281254923
+            ],
+            "seed_sd": 0.17286319139614234,
+            "seed_range": [
+              -0.13789165281254923,
+              0.19980662325025925
+            ],
+            "participant_iqr": [
+              -0.31524052197416086,
+              0.3722711800604255
+            ],
+            "leave_one_out_range": [
+              -0.06870647677709524,
+              0.14443382193829205
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 0.003907942605733521,
+            "ci95": [
+              -0.3215242929001487,
+              0.3246472147922252
+            ],
+            "upper98_75": 0.33403314143100626,
+            "people_lower": 2,
+            "people": 6,
+            "seed_means": [
+              -0.12398134822201967,
+              0.1050415683014533,
+              0.030663607737766958
+            ],
+            "seed_sd": 0.11683224420391208,
+            "seed_range": [
+              -0.12398134822201967,
+              0.1050415683014533
+            ],
+            "participant_iqr": [
+              -0.34841857894784256,
+              0.3372687346548247
+            ],
+            "leave_one_out_range": [
+              -0.07845098504627021,
+              0.12944006503359523
+            ]
+          }
+        },
+        "stationary": {
+          "muscle_mae": {
+            "mean": 0.0006205259172447016,
+            "ci95": [
+              -0.0005302920321124206,
+              0.0019040926916564426
+            ],
+            "upper98_75": 0.0021176565892179274,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              0.0007922584800848978,
+              0.0004746466655539073,
+              0.0005946726060952994
+            ],
+            "seed_sd": 0.00016037646789806144,
+            "seed_range": [
+              0.0004746466655539073,
+              0.0007922584800848978
+            ],
+            "participant_iqr": [
+              -0.0006380323589911049,
+              0.001800682201474238
+            ],
+            "leave_one_out_range": [
+              0.0001388425173271211,
+              0.0009414082280309415
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -9.995580771990605,
+            "ci95": [
+              -19.223223678126047,
+              -0.9536796948569256
+            ],
+            "upper98_75": -0.5482760410915467,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -10.081006722485903,
+              -10.026539728876228,
+              -9.879195864609681
+            ],
+            "seed_sd": 0.1044066489634094,
+            "seed_range": [
+              -10.081006722485903,
+              -9.879195864609681
+            ],
+            "participant_iqr": [
+              -20.79215387410064,
+              -0.07373502262233078
+            ],
+            "leave_one_out_range": [
+              -12.112229682228257,
+              -6.5017513929421185
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -19.80130124888362,
+            "ci95": [
+              -37.50247262660026,
+              -2.146296047658492
+            ],
+            "upper98_75": -1.0346662395303212,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -20.141218540109758,
+              -19.66666619536968,
+              -19.59601901117143
+            ],
+            "seed_sd": 0.2964887515820303,
+            "seed_range": [
+              -20.141218540109758,
+              -19.59601901117143
+            ],
+            "participant_iqr": [
+              -41.75068167044864,
+              -0.2792324783340392
+            ],
+            "leave_one_out_range": [
+              -24.094603357221793,
+              -13.369284885158311
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": -3.3753473094474855,
+            "ci95": [
+              -6.740421084990427,
+              -0.2394507831737347
+            ],
+            "upper98_75": -0.011299657812203236,
+            "people_lower": 5,
+            "people": 6,
+            "seed_means": [
+              -3.3820395161117696,
+              -3.414588173182865,
+              -3.3294142390478214
+            ],
+            "seed_sd": 0.042979518221337804,
+            "seed_range": [
+              -3.414588173182865,
+              -3.3294142390478214
+            ],
+            "participant_iqr": [
+              -6.900346979054893,
+              -0.008729108389392476
+            ],
+            "leave_one_out_range": [
+              -4.0627054332198895,
+              -2.0361812272176265
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": -8.602614818809561,
+            "ci95": [
+              -16.495989106734882,
+              -0.8254556644834852
+            ],
+            "upper98_75": -0.5132505976186934,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -8.709210976823739,
+              -8.5820361269667,
+              -8.516597352638248
+            ],
+            "seed_sd": 0.09794189080235256,
+            "seed_range": [
+              -8.709210976823739,
+              -8.516597352638248
+            ],
+            "participant_iqr": [
+              -18.12923101306542,
+              -0.07462429744515153
+            ],
+            "leave_one_out_range": [
+              -10.422361078456074,
+              -5.615410622226743
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": -4.270000242662374,
+            "ci95": [
+              -8.319594334667658,
+              -0.4606889397669051
+            ],
+            "upper98_75": -0.26989725540241355,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -4.307110777670274,
+              -4.294954032427428,
+              -4.207935917889423
+            ],
+            "seed_sd": 0.05409188405728427,
+            "seed_range": [
+              -4.307110777670274,
+              -4.207935917889423
+            ],
+            "participant_iqr": [
+              -7.680397535694204,
+              -0.10625373315250741
+            ],
+            "leave_one_out_range": [
+              -5.202670066611947,
+              -2.5743733738368206
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": 3.975820025965986,
+            "ci95": [
+              0.5538170820380127,
+              7.525757882132182
+            ],
+            "upper98_75": 8.583859931785762,
+            "people_lower": 1,
+            "people": 6,
+            "seed_means": [
+              4.092951359020778,
+              3.9654350392528452,
+              3.869073679624336
+            ],
+            "seed_sd": 0.11229955384932777,
+            "seed_range": [
+              3.869073679624336,
+              4.092951359020778
+            ],
+            "participant_iqr": [
+              0.28400757179879765,
+              8.063864311987444
+            ],
+            "leave_one_out_range": [
+              2.630067966391533,
+              4.7833780203877865
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -10.09657965205193,
+            "ci95": [
+              -17.7725033319015,
+              -2.438956752896734
+            ],
+            "upper98_75": -2.0422155569477067,
+            "people_lower": 6,
+            "people": 6,
+            "seed_means": [
+              -10.302992744608483,
+              -10.108827208017372,
+              -9.877919003529943
+            ],
+            "seed_sd": 0.21280137055238005,
+            "seed_range": [
+              -10.302992744608483,
+              -9.877919003529943
+            ],
+            "participant_iqr": [
+              -19.374447987365652,
+              -1.8201722246340828
+            ],
+            "leave_one_out_range": [
+              -11.929009010590162,
+              -7.247664632063905
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 6.358223657114293,
+            "ci95": [
+              1.7288720181134707,
+              12.037430363198363
+            ],
+            "upper98_75": 13.190841894994106,
+            "people_lower": 0,
+            "people": 6,
+            "seed_means": [
+              6.325706518736857,
+              6.484213326283501,
+              6.264751126322519
+            ],
+            "seed_sd": 0.1132869697675839,
+            "seed_range": [
+              6.264751126322519,
+              6.484213326283501
+            ],
+            "participant_iqr": [
+              1.4723416379239258,
+              9.047629149152698
+            ],
+            "leave_one_out_range": [
+              3.8323370435132356,
+              7.504550728354498
+            ]
+          }
+        },
+        "velocity_exact_31_25ms": {
+          "muscle_mae": {
+            "mean": 0.0006205259172447016,
+            "ci95": [
+              -0.0005302920321124206,
+              0.0019040926916564426
+            ],
+            "upper98_75": 0.0021176565892179274,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              0.0007922584800848978,
+              0.0004746466655539073,
+              0.0005946726060952994
+            ],
+            "seed_sd": 0.00016037646789806144,
+            "seed_range": [
+              0.0004746466655539073,
+              0.0007922584800848978
+            ],
+            "participant_iqr": [
+              -0.0006380323589911049,
+              0.001800682201474238
+            ],
+            "leave_one_out_range": [
+              0.0001388425173271211,
+              0.0009414082280309415
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -1.8794315600273952,
+            "ci95": [
+              -3.726998652093837,
+              -0.05900412559623621
+            ],
+            "upper98_75": 0.10024438269025482,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -1.9648575105226929,
+              -1.9103905169130204,
+              -1.7630466526464728
+            ],
+            "seed_sd": 0.1044066489634088,
+            "seed_range": [
+              -1.9648575105226929,
+              -1.7630466526464728
+            ],
+            "participant_iqr": [
+              -4.128386766577238,
+              0.2665256341669869
+            ],
+            "leave_one_out_range": [
+              -2.3808232432239733,
+              -1.2210733761135424
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -4.824560153028754,
+            "ci95": [
+              -9.222243114674855,
+              -0.51173262569878
+            ],
+            "upper98_75": 0.0963324957928875,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -5.1644774442548895,
+              -4.68992509951481,
+              -4.619277915316563
+            ],
+            "seed_sd": 0.2964887515820291,
+            "seed_range": [
+              -5.1644774442548895,
+              -4.619277915316563
+            ],
+            "participant_iqr": [
+              -10.256656542303704,
+              0.2967008827514702
+            ],
+            "leave_one_out_range": [
+              -6.122053910781867,
+              -3.4380331267194206
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": -0.7255349588344968,
+            "ci95": [
+              -1.4748408934324304,
+              0.014589529236271256
+            ],
+            "upper98_75": 0.053946741848050296,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              -0.7322271654987812,
+              -0.7647758225698756,
+              -0.6796018884348328
+            ],
+            "seed_sd": 0.042979518221337415,
+            "seed_range": [
+              -0.7647758225698756,
+              -0.6796018884348328
+            ],
+            "participant_iqr": [
+              -1.6633567338797148,
+              0.05578801359296902
+            ],
+            "leave_one_out_range": [
+              -0.9048715402830882,
+              -0.4440231563447635
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": -1.979619213720732,
+            "ci95": [
+              -3.9961870439953557,
+              -0.1179743702412328
+            ],
+            "upper98_75": 0.016745298066914622,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -2.086215371734909,
+              -1.95904052187787,
+              -1.8936017475494182
+            ],
+            "seed_sd": 0.09794189080235263,
+            "seed_range": [
+              -2.086215371734909,
+              -1.8936017475494182
+            ],
+            "participant_iqr": [
+              -4.052157182638045,
+              0.19386903519063445
+            ],
+            "leave_one_out_range": [
+              -2.4744047506775564,
+              -1.229419472381386
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": -0.40770305414721847,
+            "ci95": [
+              -0.8359815865992126,
+              0.06071512337744648
+            ],
+            "upper98_75": 0.148724594179145,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -0.44481358915511704,
+              -0.4326568439122707,
+              -0.34563872937426776
+            ],
+            "seed_sd": 0.05409188405728346,
+            "seed_range": [
+              -0.44481358915511704,
+              -0.34563872937426776
+            ],
+            "participant_iqr": [
+              -0.8776279162025794,
+              0.0989908120193499
+            ],
+            "leave_one_out_range": [
+              -0.5710240053427545,
+              -0.28074360827870454
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": 1.4407891516370859,
+            "ci95": [
+              0.4615034769084654,
+              2.4284375695094043
+            ],
+            "upper98_75": 2.6087656642428576,
+            "people_lower": 0,
+            "people": 6,
+            "seed_means": [
+              1.557920484691877,
+              1.4304041649239443,
+              1.334042805295436
+            ],
+            "seed_sd": 0.11229955384932747,
+            "seed_range": [
+              1.334042805295436,
+              1.557920484691877
+            ],
+            "participant_iqr": [
+              0.3732233948467726,
+              2.340078307589674
+            ],
+            "leave_one_out_range": [
+              1.0518676483070333,
+              1.7161133801566908
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -3.425205990608178,
+            "ci95": [
+              -5.203845462503721,
+              -1.6764434858711745
+            ],
+            "upper98_75": -1.6008422419967252,
+            "people_lower": 6,
+            "people": 6,
+            "seed_means": [
+              -3.631619083164729,
+              -3.4374535465736167,
+              -3.206545342086189
+            ],
+            "seed_sd": 0.21280137055238002,
+            "seed_range": [
+              -3.631619083164729,
+              -3.206545342086189
+            ],
+            "participant_iqr": [
+              -5.280598238481702,
+              -1.4886979571927315
+            ],
+            "leave_one_out_range": [
+              -3.951498889354158,
+              -2.810015220736868
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 1.3979061420874392,
+            "ci95": [
+              0.9674026061484319,
+              1.9039784915889884
+            ],
+            "upper98_75": 1.9342152294701034,
+            "people_lower": 0,
+            "people": 6,
+            "seed_means": [
+              1.3653890037100036,
+              1.5238958112566483,
+              1.3044336112956658
+            ],
+            "seed_sd": 0.1132869697675842,
+            "seed_range": [
+              1.3044336112956658,
+              1.5238958112566483
+            ],
+            "participant_iqr": [
+              0.9205660598973918,
+              1.6467113815253542
+            ],
+            "leave_one_out_range": [
+              1.1872323078689724,
+              1.5274856679553261
+            ]
+          }
+        },
+        "velocity_exact_125ms": {
+          "muscle_mae": {
+            "mean": 0.0006205259172447016,
+            "ci95": [
+              -0.0005302920321124206,
+              0.0019040926916564426
+            ],
+            "upper98_75": 0.0021176565892179274,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              0.0007922584800848978,
+              0.0004746466655539073,
+              0.0005946726060952994
+            ],
+            "seed_sd": 0.00016037646789806144,
+            "seed_range": [
+              0.0004746466655539073,
+              0.0007922584800848978
+            ],
+            "participant_iqr": [
+              -0.0006380323589911049,
+              0.001800682201474238
+            ],
+            "leave_one_out_range": [
+              0.0001388425173271211,
+              0.0009414082280309415
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -5.3956559281443965,
+            "ci95": [
+              -10.348368852271113,
+              -0.5160913845138885
+            ],
+            "upper98_75": -0.23914449294641268,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -5.481081878639695,
+              -5.426614885030022,
+              -5.279271020763474
+            ],
+            "seed_sd": 0.10440664896340916,
+            "seed_range": [
+              -5.481081878639695,
+              -5.279271020763474
+            ],
+            "participant_iqr": [
+              -11.241547817626593,
+              0.10902316143027835
+            ],
+            "leave_one_out_range": [
+              -6.595879830315505,
+              -3.550959509928647
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -11.211084488524904,
+            "ci95": [
+              -21.128684238149,
+              -1.3478703668079113
+            ],
+            "upper98_75": -0.47309773470184086,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -11.55100177975104,
+              -11.076449435010963,
+              -11.005802250812712
+            ],
+            "seed_sd": 0.2964887515820293,
+            "seed_range": [
+              -11.55100177975104,
+              -11.005802250812712
+            ],
+            "participant_iqr": [
+              -23.54651282673617,
+              0.030807938236860455
+            ],
+            "leave_one_out_range": [
+              -13.7871575169976,
+              -7.775052308015293
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": -1.800974480346226,
+            "ci95": [
+              -3.5521990616975967,
+              -0.10649766703545893
+            ],
+            "upper98_75": 0.02307483700744611,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              -1.8076666870105107,
+              -1.8402153440816054,
+              -1.7550414099465625
+            ],
+            "seed_sd": 0.0429795182213374,
+            "seed_range": [
+              -1.8402153440816054,
+              -1.7550414099465625
+            ],
+            "participant_iqr": [
+              -3.8655104142206222,
+              0.05299911709256517
+            ],
+            "leave_one_out_range": [
+              -2.1777923481942105,
+              -1.1255484995171716
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": -5.0244746525325485,
+            "ci95": [
+              -9.77616101869838,
+              -0.5035833763212613
+            ],
+            "upper98_75": -0.2745013977054414,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -5.131070810546725,
+              -5.003895960689686,
+              -4.9384571863612345
+            ],
+            "seed_sd": 0.09794189080235265,
+            "seed_range": [
+              -5.131070810546725,
+              -4.9384571863612345
+            ],
+            "participant_iqr": [
+              -10.395267370072412,
+              0.05565810384544023
+            ],
+            "leave_one_out_range": [
+              -6.129862057298132,
+              -3.2624233640422204
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": -1.8607465299468202,
+            "ci95": [
+              -3.5149538928162123,
+              -0.21372345237897336
+            ],
+            "upper98_75": -0.09774178318748694,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -1.8978570649547188,
+              -1.885700319711873,
+              -1.7986822051738696
+            ],
+            "seed_sd": 0.05409188405728356,
+            "seed_range": [
+              -1.8978570649547188,
+              -1.7986822051738696
+            ],
+            "participant_iqr": [
+              -3.4624287765759707,
+              0.005317629693039394
+            ],
+            "leave_one_out_range": [
+              -2.3126336479628167,
+              -1.2089327827566385
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": 2.4703310334939963,
+            "ci95": [
+              0.5071853564311043,
+              4.44681739645879
+            ],
+            "upper98_75": 5.020294481498937,
+            "people_lower": 0,
+            "people": 6,
+            "seed_means": [
+              2.5874623665487877,
+              2.4599460467808547,
+              2.363584687152347
+            ],
+            "seed_sd": 0.11229955384932737,
+            "seed_range": [
+              2.363584687152347,
+              2.5874623665487877
+            ],
+            "participant_iqr": [
+              0.33167339594095685,
+              4.786039797654453
+            ],
+            "leave_one_out_range": [
+              1.7327478128728568,
+              2.9609734335530518
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -6.505134777227,
+            "ci95": [
+              -10.9395289559532,
+              -2.0945240071421822
+            ],
+            "upper98_75": -1.8412263201071373,
+            "people_lower": 6,
+            "people": 6,
+            "seed_means": [
+              -6.711547869783551,
+              -6.51738233319244,
+              -6.286474128705012
+            ],
+            "seed_sd": 0.2128013705523796,
+            "seed_range": [
+              -6.711547869783551,
+              -6.286474128705012
+            ],
+            "participant_iqr": [
+              -11.64272152334254,
+              -1.669494990849944
+            ],
+            "leave_one_out_range": [
+              -7.632381712796044,
+              -4.878830062298498
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 3.5598354685055136,
+            "ci95": [
+              1.4459606126658742,
+              6.1255140305610425
+            ],
+            "upper98_75": 6.5698768675176575,
+            "people_lower": 0,
+            "people": 6,
+            "seed_means": [
+              3.5273183301280784,
+              3.6858251376747226,
+              3.4663629377137397
+            ],
+            "seed_sd": 0.11328696976758433,
+            "seed_range": [
+              3.4663629377137397,
+              3.6858251376747226
+            ],
+            "participant_iqr": [
+              1.298358220338141,
+              4.554633700973424
+            ],
+            "leave_one_out_range": [
+              2.384162345509032,
+              4.129011665854495
+            ]
+          }
+        },
+        "velocity_knot_31_25ms": {
+          "muscle_mae": {
+            "mean": 0.0006205259172447016,
+            "ci95": [
+              -0.0005302920321124206,
+              0.0019040926916564426
+            ],
+            "upper98_75": 0.0021176565892179274,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              0.0007922584800848978,
+              0.0004746466655539073,
+              0.0005946726060952994
+            ],
+            "seed_sd": 0.00016037646789806144,
+            "seed_range": [
+              0.0004746466655539073,
+              0.0007922584800848978
+            ],
+            "participant_iqr": [
+              -0.0006380323589911049,
+              0.001800682201474238
+            ],
+            "leave_one_out_range": [
+              0.0001388425173271211,
+              0.0009414082280309415
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -1.9102791556134584,
+            "ci95": [
+              -3.7832225928691297,
+              -0.06443661267132776
+            ],
+            "upper98_75": 0.0961514603703909,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -1.9957051061087563,
+              -1.9412381124990834,
+              -1.7938942482325364
+            ],
+            "seed_sd": 0.10440664896340861,
+            "seed_range": [
+              -1.9957051061087563,
+              -1.7938942482325364
+            ],
+            "participant_iqr": [
+              -4.18260288917301,
+              0.2634848205210875
+            ],
+            "leave_one_out_range": [
+              -2.41759917763507,
+              -1.2403789469232769
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -4.88023187151058,
+            "ci95": [
+              -9.317861608897529,
+              -0.5213240678644934
+            ],
+            "upper98_75": 0.08908567698055496,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -5.220149162736717,
+              -4.7455968179966375,
+              -4.674949633798389
+            ],
+            "seed_sd": 0.2964887515820297,
+            "seed_range": [
+              -5.220149162736717,
+              -4.674949633798389
+            ],
+            "participant_iqr": [
+              -10.384139544695092,
+              0.29184208880760354
+            ],
+            "leave_one_out_range": [
+              -6.188528466977036,
+              -3.4805711845702163
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": -0.7359399926335054,
+            "ci95": [
+              -1.4937261616714135,
+              0.012358545629178269
+            ],
+            "upper98_75": 0.05200274149705731,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              -0.7426321992977899,
+              -0.7751808563688845,
+              -0.6900069222338417
+            ],
+            "seed_sd": 0.042979518221337346,
+            "seed_range": [
+              -0.7751808563688845,
+              -0.6900069222338417
+            ],
+            "participant_iqr": [
+              -1.6835308636614474,
+              0.05502784309003793
+            ],
+            "leave_one_out_range": [
+              -0.9167270113126547,
+              -0.4510610942819876
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": -2.004901612351857,
+            "ci95": [
+              -4.042633136270321,
+              -0.12261728089552015
+            ],
+            "upper98_75": 0.013740414584795172,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -2.1114977703660336,
+              -1.9843229205089943,
+              -1.9188841461805428
+            ],
+            "seed_sd": 0.09794189080235277,
+            "seed_range": [
+              -2.1114977703660336,
+              -1.9188841461805428
+            ],
+            "participant_iqr": [
+              -4.100014562070562,
+              0.19227794312636765
+            ],
+            "leave_one_out_range": [
+              -2.50467870791672,
+              -1.2456101516234694
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": -0.4201713412497928,
+            "ci95": [
+              -0.8564654051879249,
+              0.058293026927918795
+            ],
+            "upper98_75": 0.14500096942108362,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -0.4572818762576915,
+              -0.445125131014845,
+              -0.3581070164768421
+            ],
+            "seed_sd": 0.05409188405728349,
+            "seed_range": [
+              -0.4572818762576915,
+              -0.3581070164768421
+            ],
+            "participant_iqr": [
+              -0.909636487132779,
+              0.09676197099462153
+            ],
+            "leave_one_out_range": [
+              -0.5859253655491097,
+              -0.2916422227293665
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": 1.4491476341902703,
+            "ci95": [
+              0.46065512242995316,
+              2.4462443156209512
+            ],
+            "upper98_75": 2.6300696863399957,
+            "people_lower": 0,
+            "people": 6,
+            "seed_means": [
+              1.5662789672450617,
+              1.4387626474771291,
+              1.342401287848621
+            ],
+            "seed_sd": 0.11229955384932735,
+            "seed_range": [
+              1.342401287848621,
+              1.5662789672450617
+            ],
+            "participant_iqr": [
+              0.371974277035581,
+              2.3598667258866994
+            ],
+            "leave_one_out_range": [
+              1.0565698377765749,
+              1.726734830885429
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -3.450874515342307,
+            "ci95": [
+              -5.250558030343389,
+              -1.6811383972830054
+            ],
+            "upper98_75": -1.6035433229173754,
+            "people_lower": 6,
+            "people": 6,
+            "seed_means": [
+              -3.657287607898858,
+              -3.4631220713077444,
+              -3.232213866820318
+            ],
+            "seed_sd": 0.21280137055238,
+            "seed_range": [
+              -3.657287607898858,
+              -3.232213866820318
+            ],
+            "participant_iqr": [
+              -5.3286076358442,
+              -1.491225643560247
+            ],
+            "leave_one_out_range": [
+              -3.982068649973269,
+              -2.826691225611485
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 1.4149594963881575,
+            "ci95": [
+              0.9687219686118739,
+              1.9302634443741618
+            ],
+            "upper98_75": 1.9729156408022837,
+            "people_lower": 0,
+            "people": 6,
+            "seed_means": [
+              1.3824423580107217,
+              1.5409491655573664,
+              1.3214869655963837
+            ],
+            "seed_sd": 0.1132869697675843,
+            "seed_range": [
+              1.3214869655963837,
+              1.5409491655573664
+            ],
+            "participant_iqr": [
+              0.9281670320489539,
+              1.6543634975475519
+            ],
+            "leave_one_out_range": [
+              1.1962677964784862,
+              1.5480980300876959
+            ]
+          }
+        },
+        "velocity_knot_125ms": {
+          "muscle_mae": {
+            "mean": 0.0006205259172447016,
+            "ci95": [
+              -0.0005302920321124206,
+              0.0019040926916564426
+            ],
+            "upper98_75": 0.0021176565892179274,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              0.0007922584800848978,
+              0.0004746466655539073,
+              0.0005946726060952994
+            ],
+            "seed_sd": 0.00016037646789806144,
+            "seed_range": [
+              0.0004746466655539073,
+              0.0007922584800848978
+            ],
+            "participant_iqr": [
+              -0.0006380323589911049,
+              0.001800682201474238
+            ],
+            "leave_one_out_range": [
+              0.0001388425173271211,
+              0.0009414082280309415
+            ]
+          },
+          "path_mean_distance_mm": {
+            "mean": -5.425694000922763,
+            "ci95": [
+              -10.403693889891757,
+              -0.5190541383250297
+            ],
+            "upper98_75": -0.24127562029441849,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -5.511119951418061,
+              -5.456652957808387,
+              -5.309309093541841
+            ],
+            "seed_sd": 0.10440664896340854,
+            "seed_range": [
+              -5.511119951418061,
+              -5.309309093541841
+            ],
+            "participant_iqr": [
+              -11.306604112266278,
+              0.10792477829842761
+            ],
+            "leave_one_out_range": [
+              -6.63185900395204,
+              -3.5710527542409465
+            ]
+          },
+          "endpoint_distance_mm": {
+            "mean": -11.265911681143145,
+            "ci95": [
+              -21.232742950655688,
+              -1.3533464591839042
+            ],
+            "upper98_75": -0.47709504290185983,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -11.605828972369281,
+              -11.1312766276292,
+              -11.060629443430953
+            ],
+            "seed_sd": 0.2964887515820301,
+            "seed_range": [
+              -11.605828972369281,
+              -11.060629443430953
+            ],
+            "participant_iqr": [
+              -23.6688352330218,
+              0.028899000375328665
+            ],
+            "leave_one_out_range": [
+              -13.852868499395418,
+              -7.812712451964328
+            ]
+          },
+          "axis0_mae_mm": {
+            "mean": -1.8110012278314847,
+            "ci95": [
+              -3.572576240467445,
+              -0.10713957859126465
+            ],
+            "upper98_75": 0.023232117118746398,
+            "people_lower": 3,
+            "people": 6,
+            "seed_means": [
+              -1.8176934344957694,
+              -1.8502420915668634,
+              -1.765068157431821
+            ],
+            "seed_sd": 0.042979518221337214,
+            "seed_range": [
+              -1.8502420915668634,
+              -1.765068157431821
+            ],
+            "participant_iqr": [
+              -3.885482521444587,
+              0.05281849236148169
+            ],
+            "leave_one_out_range": [
+              -2.1898686784369548,
+              -1.1313574259523285
+            ]
+          },
+          "axis1_mae_mm": {
+            "mean": -5.050026065679547,
+            "ci95": [
+              -9.8238717862857,
+              -0.5061388607264241
+            ],
+            "upper98_75": -0.27663694587280796,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -5.156622223693723,
+              -5.0294473738366845,
+              -4.964008599508232
+            ],
+            "seed_sd": 0.09794189080235256,
+            "seed_range": [
+              -5.156622223693723,
+              -4.964008599508232
+            ],
+            "participant_iqr": [
+              -10.451535073994615,
+              0.05465058091801156
+            ],
+            "leave_one_out_range": [
+              -6.160390023396316,
+              -3.279702050581938
+            ]
+          },
+          "axis2_mae_mm": {
+            "mean": -1.8728830917896804,
+            "ci95": [
+              -3.5376247034326966,
+              -0.2152498800073164
+            ],
+            "upper98_75": -0.09880173123113305,
+            "people_lower": 4,
+            "people": 6,
+            "seed_means": [
+              -1.9099936267975786,
+              -1.8978368815547322,
+              -1.8108187670167293
+            ],
+            "seed_sd": 0.054091884057283456,
+            "seed_range": [
+              -1.9099936267975786,
+              -1.8108187670167293
+            ],
+            "participant_iqr": [
+              -3.4868570590561343,
+              0.004714318716232846
+            ],
+            "leave_one_out_range": [
+              -2.3271902162643268,
+              -1.2169774658859671
+            ]
+          },
+          "axis0_bias_mm": {
+            "mean": 2.479871349909915,
+            "ci95": [
+              0.5071992233783461,
+              4.466012658475633
+            ],
+            "upper98_75": 5.043147242394963,
+            "people_lower": 0,
+            "people": 6,
+            "seed_means": [
+              2.597002682964706,
+              2.4694863631967734,
+              2.3731250035682647
+            ],
+            "seed_sd": 0.11229955384932756,
+            "seed_range": [
+              2.3731250035682647,
+              2.597002682964706
+            ],
+            "participant_iqr": [
+              0.3310562849472538,
+              4.810330486152075
+            ],
+            "leave_one_out_range": [
+              1.7391358871998102,
+              2.9726452637434613
+            ]
+          },
+          "axis1_bias_mm": {
+            "mean": -6.530616754306025,
+            "ci95": [
+              -10.988022974364961,
+              -2.09686764222353
+            ],
+            "upper98_75": -1.8424419626141402,
+            "people_lower": 6,
+            "people": 6,
+            "seed_means": [
+              -6.737029846862576,
+              -6.542864310271464,
+              -6.311956105784037
+            ],
+            "seed_sd": 0.21280137055237958,
+            "seed_range": [
+              -6.737029846862576,
+              -6.311956105784037
+            ],
+            "participant_iqr": [
+              -11.6990700019701,
+              -1.6701593386203024
+            ],
+            "leave_one_out_range": [
+              -7.662854870982929,
+              -4.896036155152305
+            ]
+          },
+          "axis2_bias_mm": {
+            "mean": 3.578520051134861,
+            "ci95": [
+              1.4479101143994377,
+              6.164250395622109
+            ],
+            "upper98_75": 6.612219325044646,
+            "people_lower": 0,
+            "people": 6,
+            "seed_means": [
+              3.5460029127574244,
+              3.70450972030407,
+              3.485047520343086
+            ],
+            "seed_sd": 0.11328696976758487,
+            "seed_range": [
+              3.485047520343086,
+              3.70450972030407
+            ],
+            "participant_iqr": [
+              1.2995808289562407,
+              4.584493770218135
+            ],
+            "leave_one_out_range": [
+              2.3938721176123177,
+              4.151523362894421
+            ]
+          }
+        }
+      },
+      "participant_tradeoffs": {
+        "both_lower": 2,
+        "only_muscle_lower": 2,
+        "only_path_lower": 0,
+        "neither_lower": 2
+      },
+      "subgroups": {
+        "series_1": {
+          "people": 6,
+          "events": 198,
+          "separate_minus_matched": {
+            "muscle_mae": -0.0001450371068670338,
+            "path_mean_distance_mm": 0.0031583096895517935,
+            "endpoint_distance_mm": 0.15412431850357708,
+            "axis0_mae_mm": 0.050248408804479144,
+            "axis1_mae_mm": 0.0004549128003223842,
+            "axis2_mae_mm": -0.02891722628618315
+          },
+          "separate": {
+            "muscle_mae": 0.01067402970191459,
+            "path_mean_distance_mm": 3.358064524458708
+          },
+          "matched": {
+            "muscle_mae": 0.010819066808781625,
+            "path_mean_distance_mm": 3.3549062147691564
+          }
+        },
+        "series_2": {
+          "people": 6,
+          "events": 198,
+          "separate_minus_matched": {
+            "muscle_mae": -0.00011525246170982027,
+            "path_mean_distance_mm": -0.02395600260708571,
+            "endpoint_distance_mm": -0.11101808295650462,
+            "axis0_mae_mm": 0.04878402225186904,
+            "axis1_mae_mm": 0.015170292148912265,
+            "axis2_mae_mm": -0.061834020314977055
+          },
+          "separate": {
+            "muscle_mae": 0.00982092375925177,
+            "path_mean_distance_mm": 3.505115770073127
+          },
+          "matched": {
+            "muscle_mae": 0.00993617622096159,
+            "path_mean_distance_mm": 3.5290717726802128
+          }
+        },
+        "series_3": {
+          "people": 6,
+          "events": 180,
+          "separate_minus_matched": {
+            "muscle_mae": -3.95411635749386e-05,
+            "path_mean_distance_mm": -0.02566822021470309,
+            "endpoint_distance_mm": -0.021495392895666487,
+            "axis0_mae_mm": 0.04954091855455742,
+            "axis1_mae_mm": 0.037518037672217196,
+            "axis2_mae_mm": -0.09508646760312951
+          },
+          "separate": {
+            "muscle_mae": 0.010461081074023883,
+            "path_mean_distance_mm": 3.312347941344218
+          },
+          "matched": {
+            "muscle_mae": 0.010500622237598822,
+            "path_mean_distance_mm": 3.338016161558921
+          }
+        },
+        "series_4": {
+          "people": 6,
+          "events": 198,
+          "separate_minus_matched": {
+            "muscle_mae": -9.480406870070381e-05,
+            "path_mean_distance_mm": 0.003064852877176468,
+            "endpoint_distance_mm": 0.23481488259008657,
+            "axis0_mae_mm": 0.04646276276824072,
+            "axis1_mae_mm": -0.0022521027958286957,
+            "axis2_mae_mm": -0.021014200382084142
+          },
+          "separate": {
+            "muscle_mae": 0.010314684833939623,
+            "path_mean_distance_mm": 4.390413658721227
+          },
+          "matched": {
+            "muscle_mae": 0.010409488902640327,
+            "path_mean_distance_mm": 4.3873488058440495
+          }
+        },
+        "series_5": {
+          "people": 6,
+          "events": 180,
+          "separate_minus_matched": {
+            "muscle_mae": 6.043664449637895e-05,
+            "path_mean_distance_mm": -0.008959920454593892,
+            "endpoint_distance_mm": -0.15126524613151618,
+            "axis0_mae_mm": 0.02816437041630418,
+            "axis1_mae_mm": 0.01057554960774032,
+            "axis2_mae_mm": -0.049962943737157615
+          },
+          "separate": {
+            "muscle_mae": 0.008923285812388155,
+            "path_mean_distance_mm": 4.033102832500273
+          },
+          "matched": {
+            "muscle_mae": 0.008862849167891776,
+            "path_mean_distance_mm": 4.042062752954867
+          }
+        },
+        "series_6": {
+          "people": 6,
+          "events": 198,
+          "separate_minus_matched": {
+            "muscle_mae": -2.0927143907402065e-05,
+            "path_mean_distance_mm": 0.022603663963407183,
+            "endpoint_distance_mm": -0.03453173026510633,
+            "axis0_mae_mm": 0.02713898275227659,
+            "axis1_mae_mm": 0.014941399759612284,
+            "axis2_mae_mm": -0.012335192170385997
+          },
+          "separate": {
+            "muscle_mae": 0.008967566471490364,
+            "path_mean_distance_mm": 4.028148357058894
+          },
+          "matched": {
+            "muscle_mae": 0.008988493615397766,
+            "path_mean_distance_mm": 4.005544693095487
+          }
+        },
+        "series_7": {
+          "people": 6,
+          "events": 204,
+          "separate_minus_matched": {
+            "muscle_mae": -0.0001736962105586697,
+            "path_mean_distance_mm": 0.0013795744848558167,
+            "endpoint_distance_mm": 0.16771428761454713,
+            "axis0_mae_mm": 0.02270303997455625,
+            "axis1_mae_mm": 0.05703638800274935,
+            "axis2_mae_mm": -0.07198584914011502
+          },
+          "separate": {
+            "muscle_mae": 0.011102811551542293,
+            "path_mean_distance_mm": 4.056271801823271
+          },
+          "matched": {
+            "muscle_mae": 0.011276507762100964,
+            "path_mean_distance_mm": 4.0548922273384145
+          }
+        },
+        "series_8": {
+          "people": 6,
+          "events": 204,
+          "separate_minus_matched": {
+            "muscle_mae": -5.170234913961577e-05,
+            "path_mean_distance_mm": 9.511044040610983e-05,
+            "endpoint_distance_mm": 0.14404005374246479,
+            "axis0_mae_mm": 0.03396800702232578,
+            "axis1_mae_mm": 0.015133577158161141,
+            "axis2_mae_mm": -0.05568688133791524
+          },
+          "separate": {
+            "muscle_mae": 0.010604021976750888,
+            "path_mean_distance_mm": 4.204632121506942
+          },
+          "matched": {
+            "muscle_mae": 0.010655724325890502,
+            "path_mean_distance_mm": 4.204537011066537
+          }
+        },
+        "series_9": {
+          "people": 6,
+          "events": 204,
+          "separate_minus_matched": {
+            "muscle_mae": -3.0356389354693786e-05,
+            "path_mean_distance_mm": 0.03547629530315055,
+            "endpoint_distance_mm": 0.1005632891515839,
+            "axis0_mae_mm": 0.02840789231808838,
+            "axis1_mae_mm": 0.029159059813811134,
+            "axis2_mae_mm": -0.018177650944905272
+          },
+          "separate": {
+            "muscle_mae": 0.010626494218534642,
+            "path_mean_distance_mm": 4.013220965541881
+          },
+          "matched": {
+            "muscle_mae": 0.010656850607889333,
+            "path_mean_distance_mm": 3.977744670238731
+          }
+        },
+        "fully_observed": {
+          "people": 4,
+          "events": 1176,
+          "separate_minus_matched": {
+            "muscle_mae": -0.0001313652845208854,
+            "path_mean_distance_mm": -0.048662031343947754,
+            "endpoint_distance_mm": 0.25841429635122526,
+            "axis0_mae_mm": 0.030487349293630547,
+            "axis1_mae_mm": -0.03634492821000909,
+            "axis2_mae_mm": -0.06400763594320116
+          },
+          "separate": {
+            "muscle_mae": 0.010181815300678878,
+            "path_mean_distance_mm": 4.1033561166524395
+          },
+          "matched": {
+            "muscle_mae": 0.010313180585199762,
+            "path_mean_distance_mm": 4.152018147996388
+          }
+        },
+        "quality_masked": {
+          "people": 2,
+          "events": 588,
+          "separate_minus_matched": {
+            "muscle_mae": 5.910381926960313e-05,
+            "path_mean_distance_mm": 0.09972195051528465,
+            "endpoint_distance_mm": -0.3558464662512977,
+            "axis0_mae_mm": 0.050831436366971294,
+            "axis1_mae_mm": 0.13193556114258453,
+            "axis2_mae_mm": -0.01031820541921491
+          },
+          "separate": {
+            "muscle_mae": 0.010134669198587647,
+            "path_mean_distance_mm": 3.4270604243713017
+          },
+          "matched": {
+            "muscle_mae": 0.010075565379318044,
+            "path_mean_distance_mm": 3.3273384738560168
+          }
+        }
+      }
+    }
+  },
+  "all_four_pass": false,
+  "compute": {
+    "checkpoints": {
+      "separate": {
+        "fits": 9,
+        "parameters": 3975,
+        "updates_per_fit": 384,
+        "examples_per_fit": 18432,
+        "balance_examples_per_fit": 9216,
+        "way_examples_per_fit": 9216,
+        "fit_seconds_nine_fits": 7.316509392927401,
+        "active_loss_gradient_range": [
+          3975,
+          3975
+        ]
+      },
+      "matched": {
+        "fits": 9,
+        "parameters": 3975,
+        "updates_per_fit": 384,
+        "examples_per_fit": 18432,
+        "balance_examples_per_fit": 9216,
+        "way_examples_per_fit": 9216,
+        "fit_seconds_nine_fits": 7.120336204301566,
+        "active_loss_gradient_range": [
+          3975,
+          3975
+        ]
+      },
+      "original": {
+        "fits": 9,
+        "parameters": 3924,
+        "updates_per_fit": 384,
+        "examples_per_fit": 18432,
+        "balance_examples_per_fit": 9216,
+        "way_examples_per_fit": 9216,
+        "fit_seconds_nine_fits": 6.705723035149276,
+        "active_loss_gradient_range": [
+          3924,
+          3924
+        ]
+      },
+      "lower-exposure": {
+        "fits": 9,
+        "parameters": 3924,
+        "updates_per_fit": 192,
+        "examples_per_fit": 9216,
+        "balance_examples_per_fit": 9216,
+        "way_examples_per_fit": 0,
+        "fit_seconds_nine_fits": 3.3584584679920226,
+        "active_loss_gradient_range": [
+          3823,
+          3836
+        ]
+      },
+      "upper-exposure": {
+        "fits": 9,
+        "parameters": 3924,
+        "updates_per_fit": 192,
+        "examples_per_fit": 9216,
+        "balance_examples_per_fit": 0,
+        "way_examples_per_fit": 9216,
+        "fit_seconds_nine_fits": 3.341379461926408,
+        "active_loss_gradient_range": [
+          3781,
+          3812
+        ]
+      },
+      "lower-steps": {
+        "fits": 9,
+        "parameters": 3924,
+        "updates_per_fit": 384,
+        "examples_per_fit": 18432,
+        "balance_examples_per_fit": 18432,
+        "way_examples_per_fit": 0,
+        "fit_seconds_nine_fits": 6.70025841309689,
+        "active_loss_gradient_range": [
+          3823,
+          3836
+        ]
+      },
+      "upper-steps": {
+        "fits": 9,
+        "parameters": 3924,
+        "updates_per_fit": 384,
+        "examples_per_fit": 18432,
+        "balance_examples_per_fit": 0,
+        "way_examples_per_fit": 18432,
+        "fit_seconds_nine_fits": 6.68830450810492,
+        "active_loss_gradient_range": [
+          3781,
+          3812
+        ]
+      }
+    },
+    "unique_training_loop_seconds": 34.53113155358005,
+    "specialist_accounting": "Exposure is a checkpoint of steps; do not add both times."
+  }
+}

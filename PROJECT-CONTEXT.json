@@ -1432,5 +1432,32 @@
     "paper_source": "docs/papers/cross-limb-movement/cross-limb-movement-source.zip",
     "atlas": "https://eliminatenoise.github.io/Interoceptomics/cross-limb-movement/",
     "domain": "Across 882 lifts from three people, the shared model missed the wrist path by 4.870 mm. The arm specialist missed by 5.100 mm after the same number of arm updates and 4.394 mm when given the shared model’s full training budget. Across 1,759 visual rotations from six other people, the shared model missed the sacrum path by 2.169 mm and the exposure-matched balance specialist by 1.962 mm. The two studies measured different people performing different tasks. The arm electrical amplitude stays in its original exported units. No strict five-channel arm assessment was available."
+  },
+  "cross_limb_path_maps": {
+    "question": "Does assigning an output map to each study improve movement forecasts compared with blending two maps over time?",
+    "model": "models/cross-limb-movement/path-maps.md",
+    "source": "models/cross-limb-movement/fit.py",
+    "group_results": "models/cross-limb-movement/path-maps/scoring/results.json",
+    "viewer": "docs/cross-limb-movement/index.html#path-maps",
+    "supplement": "docs/papers/cross-limb-movement/decoder-study/index.html",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/cross-limb-movement/",
+    "development": {
+      "balance_people": 18,
+      "balance_events": 5179,
+      "wrist_people": 6,
+      "wrist_events": 1764,
+      "training_seeds": [
+        1641,
+        2718,
+        3917
+      ],
+      "folds": 3,
+      "four_outcome_gate": false,
+      "passed": [
+        "Balance muscle amplitude",
+        "Balance average path distance"
+      ]
+    },
+    "scope": "Three development seeds and person-held predictions from the same two studies. Separate and time-blended output maps have 3,975 parameters each. Three wrist and six balance reserve participants were outside the comparison."
   }
 }

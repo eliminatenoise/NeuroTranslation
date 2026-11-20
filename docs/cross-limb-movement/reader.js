@@ -43,9 +43,14 @@
   function compute() {
     const h = current();
     features = prepare(h);
-    joint = MovementPredict(MovementWeights.joint, features);
     const m = $('method').value;
-    if (m === 'matched' || m === 'equal') comparison = MovementPredict(MovementWeights[spec().key][m], features);
+    const maps = m === 'maps';
+    $('map-note').hidden = !maps;
+    $('first-legend').textContent = maps ? 'Body-part maps' : 'Shared';
+    $('second-legend').textContent = maps ? 'Early/late maps' : 'Comparison';
+    joint = MovementPredict(maps ? MovementMapWeights.separate : MovementWeights.joint, features);
+    if (maps) comparison = MovementPredict(MovementMapWeights.matched, features);
+    else if (m === 'matched' || m === 'equal') comparison = MovementPredict(MovementWeights[spec().key][m], features);
     else {
       const path_mm = features.repeat_path_mm.map((row, index) => {
         if (m === 'repeat') return row;
@@ -114,6 +119,7 @@
   function draw() {
     const s=spec(),h=current(),a=+$('axis').value,c=+$('channel').value,k=s.offset+c;
     const step=+$('step').value,t=1000*step/256, axis=s.axes[a], active=h.enabled[c];
+    const first = $('first-legend').textContent, second = $('second-legend').textContent;
     $('time').value='+'+fmt(t,4)+' ms';
     $('path-title').textContent=s.marker+' displacement · '+axis+' (mm)';
     $('voltage-title').textContent=s.names[c]+' · signed voltage';
@@ -130,13 +136,13 @@
     plot('voltage-chart',$('voltage-title').textContent,[{points:signed,color:'#47575f',width:1.0}],null,!active);
     $('voltage-caption').textContent= active ? 'The line shows signed invented readings at '+s.emgHz+' Hz. The model reads the root-mean-square amplitude in each of twenty 31.25 ms bins. It predicts one RMS amplitude for the next 125 ms.' : 'This acquired arm channel is masked. Its values are excluded from the calculation. The '+(domain?'eight lower-leg':'five arm')+' channels belong to the other study and were never acquired here.';
     $('position-heading').textContent=s.marker+' '+axis+' at +'+fmt(t,4)+' ms';
-    $('position-readout').textContent='Shared '+fmt(joint.path_mm[step-1][a])+' mm · Comparison '+fmt(comparison.path_mm[step-1][a])+' mm';
+    $('position-readout').textContent=first+' '+fmt(joint.path_mm[step-1][a])+' mm · '+second+' '+fmt(comparison.path_mm[step-1][a])+' mm';
     $('rms-heading').textContent=s.names[c]+' · 125 ms RMS';
-    $('rms-readout').textContent=active?'Shared '+fmt(joint.rms[k],domain?6:3)+' '+s.unit+' · Comparison '+fmt(comparison.rms[k],domain?6:3)+' '+s.unit:'Masked · no input or forecast';
+    $('rms-readout').textContent=active?first+' '+fmt(joint.rms[k],domain?6:3)+' '+s.unit+' · '+second+' '+fmt(comparison.rms[k],domain?6:3)+' '+s.unit:'Masked · no input or forecast';
     $('coordinates').replaceChildren(); $('amplitudes').replaceChildren();
-    table($('coordinates'),s.marker+' path in mm',['Time (ms)',...s.axes.map(k=>'Shared '+k),...s.axes.map(k=>'Comparison '+k)],
+    table($('coordinates'),s.marker+' path in mm',['Time (ms)',...s.axes.map(k=>first+' '+k),...s.axes.map(k=>second+' '+k)],
       joint.path_mm.map((row,i)=>[fmt((i+1)*1000/256,4),...row.map(x=>fmt(x,4)),...comparison.path_mm[i].map(x=>fmt(x,4))]));
-    table($('amplitudes'),'Muscle amplitude in '+s.unit,['Muscle','Prior 125 ms RMS','Shared forecast','Comparison forecast'],
+    table($('amplitudes'),'Muscle amplitude in '+s.unit,['Muscle','Prior 125 ms RMS',first+' forecast',second+' forecast'],
       s.names.map((n,i)=>[n,...(h.enabled[i]?[features.past_rms[i+s.offset],joint.rms[i+s.offset],comparison.rms[i+s.offset]].map(x=>fmt(x,domain?7:4)):['Masked','Masked','Masked'])]));
     const note=document.createElement('p');note.className='caption';note.textContent=domain?'The eight leg channels were never acquired in the wrist study. Source-native arm amplitudes have no verified conversion to microvolts.':'The five right arm channels were never acquired in the balance study. All eight leg channels must be present for this model.';$('amplitudes').append(note);
   }
@@ -187,6 +193,7 @@
   });
   $('reset').addEventListener('click',()=>{stories[domain]=example(domain);buildMenus();compute();$('editing').textContent='This task’s original example has been restored.';});
   if(location.protocol==='file:'){$('download').hidden=true;$('offline').hidden=false;}
+  if (location.hash === '#path-maps') $('method').value = 'maps';
   buildMenus();compute();evaluation();
   let observedWidth=0;
   new ResizeObserver(entries=>{const width=Math.round(entries[0].contentRect.width);if(width!==observedWidth){observedWidth=width;draw();}}).observe($('path-chart'));
