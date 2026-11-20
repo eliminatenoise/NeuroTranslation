@@ -7,3 +7,20 @@
 @media(max-width:505px){.intro{display:block}.horizon{display:none}nav{gap:10px}.wordmark{font-size:16px;gap:6px}.wordmark i{width:17px;height:16px}nav a{font-size:.76rem}nav a#download{border:0;padding:0}.input-intro{align-items:flex-start}.controls{column-gap:12px;row-gap:12px;grid-template-columns:minmax(0,.82fr) minmax(0,1.37fr)}.seg label{font-size:.72rem;padding:7px 3px}.slider-label{align-self:stretch}.slider-label>span{flex-wrap:wrap;gap:2px}.input-intro p{font-size:.82rem}.overline{font-size:.63rem}.section-head{gap:10px}.section-head .select-label{width:100%}.small-note{font-size:.81rem}.result-pair{grid-template-columns:1fr;gap:0}}
 @media(max-width:360px){.frame{padding-left:12px;padding-right:12px}.controls{grid-template-columns:1fr}.controls>.slider-label>span{flex-wrap:nowrap}.input-intro{gap:6px}.nav{gap:7px}.result-pair strong{font-size:1.3rem}.card #path-table{font-size:.72rem}.card #path-table td,.card #path-table th{padding:6px 3px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Keep every link reachable when the hosted download adds a third action. */
+@media (max-width: 420px) {
+  .nav {
+    flex-wrap: wrap;
+    row-gap: 4px;
+    padding-block: 8px;
+  }
+
+  .nav nav {
+    flex-wrap: wrap;
+  }
+
+  .nav nav a {
+    white-space: nowrap;
+  }
+}
