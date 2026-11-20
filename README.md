@@ -5,7 +5,7 @@
 That is where [25 small studies](benchmarks/README.md) stand. Each takes open recordings of people, measured and shared by others, and forecasts what a hand or an arm does a fraction of a second later: the angle of a wrist, the position of a palm, the force of a grip. A hand tends to keep moving the way it was moving, so its own recent past is a hard forecast to beat. A brain or muscle signal earns its place only by beating it.
 
 - Adding a brain recording taken at the scalp (EEG) to a forecast that already had the hand's history made it worse in **8 of 13** comparisons. At the wrist, a quarter of a second ahead, the error grew from 4.05° to 4.52°. EEG met none of the 4 pass rules set for it before any scoring.
-- Adding a muscle recording from the forearm (EMG) lowered the error in **10 of 18**. Only at the wrist was the gain clear of the spread between people, and in study 28, also at the wrist, EMG made the forecast worse.
+- Adding a muscle recording from the forearm (EMG) lowered the error in **10 of 18**. Only at the wrist was the gain clear of the spread between people. At the same wrist, the general model this project is building (more on it below) got worse when it was given EMG: its error rose from 5.43° to 5.87°, and stayed higher with any one of the three people left out (study 28).
 - On the task it was fitted for, a forecast fitted to the hand's or arm's own recent past beat simply repeating the last value in **9 of 9** studies: 4.05° against 7.92° at the wrist.
 - Change the task or the target, and a rule you could write in one line, such as "repeat the last value", beat the best fitted model in **6 of 6** settings.
 
@@ -20,10 +20,10 @@ What is still being built is the general model, **NeuroTranslate 0.0**: one mode
   - An earlier version, fitted to the right arm alone, was scored on the two people study 26 had already scored. A straight-line fit beat it for both: 0.869 against 0.781.
 - Three on people turning the wrist toward a target, from the recordings of studies 1 to 3, where electrodes on the scalp and the forearm and two angle sensors on the wrist recorded each movement together. They were scored on the three people those studies had already scored ([study 28](benchmarks/paired-wrist-forecast/)).
   - From the wrist's recent path alone, the forecast of the two wrist angles a quarter of a second ahead had an error of 5.432°.
-  - With forearm EMG added, the error grew to 5.866°. With scalp EEG added as well it was 5.822°, and 5.826° when that EEG came from another trial: the model barely used it.
+  - With forearm EMG added, the error grew to 5.866°. With scalp EEG added as well it was 5.822°, and 5.826° when the same model was given another trial's EEG, so most of that small gain did not depend on the EEG coming from the right trial.
   - Study 1's small network, which reads only the wrist, still did best: 4.053°.
 
-What does not exist yet: a test of the general model on people nobody has looked at before. So nothing here yet translates between nerve, muscle and movement. Nor is the model inside the browser app that carries its name; the browser copy of its wrist fits, listed below, is separate.
+What does not exist yet: a test of the general model on people nobody has looked at before. So nothing here yet translates between nerve, muscle and movement. Nor is the model inside the browser app titled NeuroTranslate 0.0, the one that lines up your own recordings on one clock. Its three wrist fits run in a browser only as a separate piece of code for programmers, listed below.
 
 ## Where to click
 
@@ -32,7 +32,7 @@ What does not exist yet: a test of the general model on people nobody has looked
 - **[The general model's five-sensor walking fit, on your own computer](benchmarks/daily-sports-limbs/README.md).** A page that opens in your browser once a small Python program is running (it needs Python and two libraries; there is a launcher for Windows, macOS and Linux). Pick a sensor on the torso, an arm or a leg: it shows the sensor's last 16 readings, NeuroTranslate 0.0's forecast and what the sensor recorded 120 ms after the last of them. The walk it shows is one the model was fitted on, so it shows the model running, not how well it would forecast someone new.
 - **[The papers](papers/README.md).** Two working drafts, each in a Technical and a Simple English edition.
 - **[Launchers and offline copies](LAUNCHERS.md)** for Windows, macOS and Linux.
-- **[The general model's three wrist fits, inside a browser](interfaces/paired-wrist-browser/README.md).** The fits of study 28 rewritten as code that runs inside a web browser on your own computer, for a web page to call: it is not a page of its own. A test runs it on 36 invented examples and checks each forecast against the original Python models. A draft version of the NeuroSurge game, [still under review in that game's repository](https://github.com/eliminatenoise/NeuroSurge/pull/2), shows a recorded trial beside these forecasts.
+- **[The general model's three wrist fits, as code for programmers](interfaces/paired-wrist-browser/README.md).** The fitted models of study 28, rewritten in JavaScript so that a web page can run them in your browser, on your own computer. There is no page to open: it is a building block that other pages load. A test feeds it 36 invented inputs and checks every forecast against the original Python models. A draft of the NeuroSurge game, [still under review in that game's repository](https://github.com/eliminatenoise/NeuroSurge/pull/2), uses it to show a recorded trial beside these forecasts.
 - **[One wrist trial, every channel labelled](interfaces/wrist-language-motion/README.md).** Three seconds of one person turning the wrist toward a target, from an open dataset, with each channel marked by what recorded it (a scalp electrode, two forearm electrodes, two sensors of the wrist's angle, the cue on the screen) and the words a person wrote about it. A small Python program hands it to the general model's code. No model is fitted to it.
 - **[NeuroSurge](https://github.com/eliminatenoise/NeuroSurge)**, the sister game.
 
@@ -59,7 +59,7 @@ Each row sets a reference forecast against a challenger that was given something
 
 Every score is an error: how far the forecasts fell from what was measured. Lower is better. Rows 1 to 13, 28 and 29 are scored by the measure that punishes large misses, rows 14 to 23, 26 and 27 by the plain average miss, and rows 24 and 25 by a squared error in units of their own. Row 20 is the odd one: it compares the width of bands, not errors. Units change from block to block, so compare along a row, never down a column.
 
-A *straight-line fit* is the plainest kind of model, a weighted sum of its inputs. A *learned forecast* is a small network that reads a stretch of recent history. A *transformer* is a kind of network that learns which of the earlier readings matter most to the forecast, the same kind that runs today's chatbots: study 26 tried a small one, and the general model of study 28 is built round one too. The recordings a model is scored on were never used to fit it, except in rows 25 and 27. Row 29 keeps each person out of the fit that scores them, but its six people are the ones studies 1 to 3 and 28 were fitted on, so it is not a test either.
+A *straight-line fit* is the plainest kind of model, a weighted sum of its inputs. A *learned forecast* is a small network that reads a stretch of recent history. A *transformer* is a kind of network that learns which of the earlier readings matter most to the forecast, the same kind that runs today's chatbots: study 26 tried a small one, and the general model is built round one too. The recordings a model is scored on were never used to fit it, except in rows 25 and 27. Row 29 keeps each person out of the fit that scores them, but its six people are the ones studies 1 to 3 and 28 were fitted on, so it is not a test either.
 
 | Study | Tested on | Reference forecast | Challenger | Who won |
 | --- | --- | --- | --- | --- |
@@ -67,7 +67,7 @@ A *straight-line fit* is the plainest kind of model, a weighted sum of its input
 | 1 · [Wrist pointing: brain signal on a learned forecast](benchmarks/wrist-pointing-temporal/) | 3 people | Learned forecast from wrist history: 4.05° | With scalp EEG added: 4.52° | **History.** EEG made the forecast 0.47° worse. |
 | 2 · [Wrist pointing: muscle signal on a straight-line fit](benchmarks/wrist-pointing-muscle/) | the same 3 | Straight-line fit on wrist history: 6.53° | With forearm EMG added: 6.17° | **EMG**, by 0.36°. EMG taken from the wrong trial did worse than none: 6.94°. |
 | 3 · [Wrist pointing: muscle signal on the learned forecast](benchmarks/wrist-forearm-transfer/) | the same 3 | Learned forecast, corrected from wrist motion: 3.96° | With EMG added: 3.85° | **EMG**, by 0.10°, for 3 of 3 people. |
-| 28 · [Wrist pointing: the general model with muscle and brain signals](benchmarks/paired-wrist-forecast/) | the same 3 | The general model on wrist history: 5.43° | Fitted with forearm EMG added: 5.87° | **History.** EMG made the forecast 0.43° worse. With scalp EEG as well: 5.82°, and 5.83° with another trial's EEG. Study 1's learned forecast on the same trials: 4.05°. |
+| 28 · [Wrist pointing: the general model with muscle and brain signals](benchmarks/paired-wrist-forecast/) | the same 3 | The general model on wrist history: 5.43° | Fitted with forearm EMG added: 5.87° | **History.** EMG made the forecast 0.43° worse. With scalp EEG as well: 5.82°, and only 0.0046° more with another trial's EEG. Study 1's learned forecast on the same trials: 4.05°. |
 | 29 · [Wrist pointing: a muscle correction, scored on the people used for fitting](benchmarks/wrist-forearm-correction/) | nobody new: the 6 people studies 1 to 3 and 28 were fitted on | Learned forecast, corrected from wrist motion: 3.67° | With EMG added: 3.55° | **Not a test.** EMG lowered it for 6 of 6 people, but beat the uncorrected forecast (3.62°) for only 3 of 6. |
 | 4 · [Everyday tasks: wrist angle from the muscle signal](benchmarks/uji-wrist-emg/) | 4 people | Which activity it is and how long it has run: 36.2° | With EMG added: 34.7° | **EMG**, by 1.5°, for 3 of 4 people. Bending up and down got 2.4° better; tilting side to side got 0.7° worse. |
 | **Elbow angle** (degrees) | | | | |
@@ -108,7 +108,7 @@ No test group is larger than 4 people, the 25 studies draw on 9 datasets, and se
 
 [The studies page](benchmarks/README.md) has every number with its range and its controls.
 
-## Twenty-four people have never been scored
+## Twenty-four people were set aside and never scored
 
 When each dataset was split, some people were set aside and their recordings left unopened: 24 people in 8 datasets, and four recordings of the macaque. Until one of those groups is opened, every number above comes from people the project has already looked at.
 
@@ -141,7 +141,7 @@ Both are working drafts, and nobody outside the project has reviewed them. They 
 
 In a browser: open the [start page](https://eliminatenoise.github.io/NeuroTranslation/START.html). A recording you open is read on your own computer and goes nowhere.
 
-Offline: most readers have a ZIP that runs without a network, with a launcher for Windows, macOS and Linux, and the general model's five-sensor walking fit has a page that runs from your own computer. The folders of study 28 and row 29 have launchers that open their results pages, and study 28's folder runs its three fitted wrist models on an invented example with one Python command. [LAUNCHERS.md](LAUNCHERS.md) lists them all.
+Offline: most readers have a ZIP that runs without a network, with a launcher for Windows, macOS and Linux, and the general model's five-sensor walking fit has a page that runs from your own computer. The folders of study 28 and row 29 have launchers that open their results pages, and in study 28's folder one Python command runs its three fitted wrist models on an invented example. [LAUNCHERS.md](LAUNCHERS.md) lists them all.
 
 To score a study again from the original recordings: each folder under [`benchmarks/`](benchmarks/README.md) holds the study's plan and its results file, and several also hold the code that does the scoring. You fetch the recordings yourself, from their own archive. The palm study, for example, with Python 3.13:
 
