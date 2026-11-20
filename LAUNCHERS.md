@@ -1,6 +1,6 @@
 # Launchers and offline copies
 
-Everything here runs in a browser. A launcher is a shortcut that opens the right page. An offline copy is a ZIP that holds the page itself, so it works with no network.
+Almost everything here runs in a browser. A launcher is a shortcut that opens the right page. An offline copy is a ZIP that holds the page itself, so it works with no network. The last section is one command for Python.
 
 ## A shortcut to the app
 
@@ -48,3 +48,14 @@ The general model's first fit has a page of its own that is not on the site: a s
 | Windows | [Open on Windows.cmd](<benchmarks/daily-sports-limbs/Open on Windows.cmd>) |
 | macOS | [Open on macOS.command](<benchmarks/daily-sports-limbs/Open on macOS.command>) |
 | Linux | [Open on Linux.sh](<benchmarks/daily-sports-limbs/Open on Linux.sh>) |
+
+## Two results pages, and the wrist models on an invented example
+
+Two folders under `benchmarks/` hold a page of their results and a launcher for each system that opens it in your browser. The page computes nothing and needs no network.
+
+| Folder | What the page shows | Windows | macOS | Linux |
+| --- | --- | --- | --- | --- |
+| [Study 28](benchmarks/paired-wrist-forecast/README.md) | The general model's three wrist fits, with and without forearm EMG and scalp EEG, against the earlier forecasts | [Open on Windows.cmd](<benchmarks/paired-wrist-forecast/Open on Windows.cmd>) | [Open on macOS.command](<benchmarks/paired-wrist-forecast/Open on macOS.command>) | [Open on Linux.sh](<benchmarks/paired-wrist-forecast/Open on Linux.sh>) |
+| [Row 29](benchmarks/wrist-forearm-correction/README.md) | A correction from forearm EMG, scored on the people the wrist models were fitted on (not a test) | [Open on Windows.cmd](<benchmarks/wrist-forearm-correction/Open on Windows.cmd>) | [Open on macOS.command](<benchmarks/wrist-forearm-correction/Open on macOS.command>) | [Open on Linux.sh](<benchmarks/wrist-forearm-correction/Open on Linux.sh>) |
+
+Study 28's folder also runs its three fitted models. With Python, NumPy and PyTorch installed, run `python -B predict.py --input example.json --mode all` in [the folder](benchmarks/paired-wrist-forecast/README.md): it prints each model's forecast of the two wrist angles, in degrees, and the variance the model expects around each, in degrees squared. The input, `example.json`, is a made-up history of the wrist, the forearm and the scalp, so the output says nothing about accuracy; `example-predictions.json` holds what the command should print.
