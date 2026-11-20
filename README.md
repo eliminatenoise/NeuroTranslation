@@ -11,9 +11,9 @@ That is where the [25 small studies of the numbered table](benchmarks/README.md)
 
 NeuroTranslation is the larger attempt those studies belong to. Reach for a cup: your brain gives the order, the muscles of your forearm pull, and the hand moves. One act, written down three times, in nerve, in muscle and in motion. To translate is to take one of those records, predict another, and check the prediction against what the body did. It is one part of **Brain2Body**, the name of the whole programme and of its second paper, which asks what a person keeps once a machine stops guiding their hand.
 
-What exists today is the studies, 16 [pages that run them or replay recordings in a browser](https://eliminatenoise.github.io/NeuroTranslation/START.html), two draft papers and a sister game, NeuroSurge.
+What exists today is the studies, 17 [pages that run them or replay recordings in a browser](https://eliminatenoise.github.io/NeuroTranslation/START.html), two draft papers and a sister game, NeuroSurge.
 
-What is still being built is the general model, **NeuroTranslate 0.0**: one model meant to learn from many kinds of body signal at once. On 20 November it had its first five fits to real recordings.
+What is still being built is the general model, **NeuroTranslate 0.0**: one model meant to learn from many kinds of body signal at once. On 20 November it had its first five fits to real recordings, all of them in the numbered table, and later that night a shared fit on two datasets at once.
 
 - Two on people walking, with one kind of sensor strapped to the body that records how its speed changes (an accelerometer), from one open dataset. The errors are in the units the sensor stores.
   - One fit forecast five such sensors (torso, both arms, both legs) 120 ms ahead and was scored only on the four people it was fitted on. It met the rule set before fitting, to beat every other forecast for every person, at one sensor of five: the left leg, where its average miss was 1.837 against 1.929 for a straight-line fit made for that sensor.
@@ -22,15 +22,17 @@ What is still being built is the general model, **NeuroTranslate 0.0**: one mode
   - From the wrist's recent path alone, the forecast of the two wrist angles a quarter of a second ahead had an error of 5.432°.
   - With forearm EMG added, the error grew to 5.866°. With scalp EEG added as well it was 5.822°, and 5.826° when the same model was given another trial's EEG, so most of that small gain did not depend on the EEG coming from the right trial.
   - Study 1's small network, which reads only the wrist, still did best: 4.053°.
+- The shared fit, published after the numbered table ([`models/`](models/)), learned two datasets at once: a headset's tracking of people's wrists, from the dataset behind the hand search, and a camera's tracking of a rat on the W-shaped track, from the dataset of the rat study. One set of weights, with a small final step for each dataset, forecast how far the tracked point would move in about a quarter of a second. Its average miss was 1.725 cm for the wrist and 1.310 cm for the rat. Fitted on one dataset alone, the same model did a little worse (1.782 and 1.342 cm), a difference within the noise, and a straight-line fit beat it on the rat (1.119 cm). Both test sets had been looked at before.
 
-What does not exist yet: a test of the general model on people nobody has looked at before. So nothing here yet translates between nerve, muscle and movement. Nor is the model inside the browser app titled NeuroTranslate 0.0, the one that lines up your own recordings on one clock. Its three wrist fits run in a browser only as a separate piece of code for programmers, listed below.
+What does not exist yet: a test of the general model on people nobody has looked at before. So nothing here yet translates between nerve, muscle and movement. Nor is the model inside the browser app titled NeuroTranslate 0.0, the one that lines up your own recordings on one clock. Two of its fits run in a browser elsewhere, both listed below: the shared fit on a page of its own, and the three wrist fits as a piece of code for programmers.
 
 ## Try a model
 
-Six things you can open and run. The first four open in a browser on your own computer, with nothing to install; the last two are for programmers and for people with Python.
+Seven things you can open and run. The first five open in a browser on your own computer, with nothing to install; the last two are for programmers and for people with Python.
 
 | What it asks | What you can do |
 | --- | --- |
+| Can one model forecast both a human wrist and a rat? | Switch between the wrist and the rat, or enter your own earlier tracking points: the general model's shared fit forecasts how far the point will move in about a quarter of a second. On the recordings it missed by 1.725 cm for the wrist and 1.310 cm for the rat; fitted on one dataset alone it did about as well, and a straight-line fit beat it on the rat. [Try the shared model](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/) · [The model, its comparison and a download](models/) · [Full source and fitted weights](models/shared-motion/) |
 | Can the firing of brain cells tell where a rat will be a quarter of a second later? | Look at four quarter-second counts of firing from 72 recorded cells, forecast the rat's next position from its positions alone or with the firing as well, then reveal where the camera saw it. In the study, the firing made the forecast worse: its average miss grew from 2.010 cm to 2.237 cm. [Open the track inspector](https://eliminatenoise.github.io/Interoceptomics/stages/#0.2) · [Study and fitted weights](benchmarks/wtrack-neural-motion/) |
 | Which hand movement fits a description? | Type "press the button" to rank five moments of a recording of someone setting up a printer, and replay what the headset tracked of their hand. In the study, the hand's shape picked the right moment first less often (23.89%) than its timing did (35.56%; a random order: 20.66%). [Search the recording](https://eliminatenoise.github.io/NeuroTranslation/hand-search/) · [Study and fitted weights](benchmarks/hand-language-retrieval/) · [Four-page supplement](https://eliminatenoise.github.io/NeuroTranslation/papers/language-and-observed-movement/language-and-movement.pdf) |
 | After an instructor finishes speaking, how far will the wrist move in the next second? | Enter four earlier positions of the wrist and compare forecasts with and without the instructor's words. In the recordings, repeating the wrist's movement over the previous second did best (7.38 cm), and the words raised the fitted model's miss from 9.79 to 10.04 cm. [Run the wrist forecast](https://eliminatenoise.github.io/NeuroTranslation/hand-search/forecast.html) · [Study and fitted weights](benchmarks/preceding-instructions/) |
@@ -146,7 +148,7 @@ The six pinch studies set nobody aside. Each fixed its test group in advance and
 
 The first paper asks what a recording of brain or muscle adds once a model already knows how the body has been moving. It carries the macaque study and most of the human studies above. The second asks what a person keeps when a machine guides their hand through a skill and then stops. It is a proposal: it reports no experiment of its own on that question.
 
-Both are working drafts, and nobody outside the project has reviewed them. They were last built on 19 November 2026 and do not yet contain studies 8, 10, 13, 23, 26 or 28, nor the general model's walking fits or row 29, nor the four studies published after the table. The two of those that search recordings with words are reported in a separate four-page supplement. [How to read the papers, and where each study sits in each one](papers/README.md).
+Both are working drafts, and nobody outside the project has reviewed them. They were last built on 19 November 2026 and do not yet contain studies 8, 10, 13, 23, 26 or 28, nor the general model's walking fits, its shared fit or row 29, nor the four studies published after the table. The two of those that search recordings with words are reported in a separate four-page supplement. [How to read the papers, and where each study sits in each one](papers/README.md).
 
 ## Run it yourself
 
@@ -172,13 +174,13 @@ None of the recordings is ours. Eleven open datasets, measured by other people, 
 
 EEG-EMG-WristMotion · KIN-MUS UJI · the upper-limb dataset of Lucchetti and colleagues · IACKD · WAY-EEG-GAL · HYGRIP · Hyser · CEMHSEY GRASP · Daily and Sports Activities · LINK · Reach&Grasp
 
-Four more carry the newer studies and the 3D recordings: HoloAssist (the hand search and the wrist forecast after an instruction), the KIT Motion–Language Dataset (the whole-body language study), Single Day W-Track Learning (the rat) and the CMU Graphics Lab Motion Capture Database (the 3D recordings).
+Four more carry the newer studies and the 3D recordings: HoloAssist (the hand search, the wrist forecast after an instruction and the shared fit), the KIT Motion–Language Dataset (the whole-body language study), Single Day W-Track Learning (the rat study and the shared fit) and the CMU Graphics Lab Motion Capture Database (the 3D recordings).
 
 Who made each one, its licence and the credit it is owed: [docs/RIGHTS.md](docs/RIGHTS.md). The numbered table's datasets are under CC BY 4.0, CC0 1.0, ODC-By 1.0 and MIT. Of the newer four, HoloAssist is under the Community Data License Agreement (Permissive 2.0), Single Day W-Track Learning under CC BY 4.0, and the CMU recordings under Carnegie Mellon's own terms, which allow reuse but not resale; no open licence to pass on the KIT recordings has been established, so the whole-body language study publishes only numbers and summaries derived from them.
 
 What is published here is mostly fitted models and summary results derived from the recordings. Two short excerpts of the numbered studies' recordings are included, each under its dataset's terms: one three-second trial of the wrist-pointing recordings, and 16 readings, with the reading recorded 120 ms after the last of them, from each of the five walking sensors in one clip, which the five-sensor page replays. The newer folders hold more, each under its own dataset's terms: the rat's positions and firing times on 34 trips round the track, five stretches of hand tracking with the sentences written about them, behind the hand search, and the three 3D recordings.
 
-What the project itself wrote, text and code, is dedicated to the public domain under [CC0 1.0](LICENSE). That covers none of the recordings, nor the fonts inside the PDFs.
+What the project itself wrote, text and code, is dedicated to the public domain under [CC0 1.0](LICENSE). That covers none of the recordings, nor the fonts inside the PDFs. The shared fit's weights are released under CC BY 4.0, with credit to both of its datasets.
 
 ## The other two projects
 
