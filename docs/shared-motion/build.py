@@ -35,6 +35,7 @@ def main():
     rat = spatial["domain"].index("rat")
     data["inventedRat"] = spatial["x"][rat]
     data["angleExample"] = json.loads(verified(args.runtime, "angular-example.json"))["input"]
+    data["forearmExample"] = json.loads(verified(args.runtime, "forearm-example.json"))
     data["angleScores"] = json.loads(verified(src, "angular-scores.json"))
     payload = json.dumps(data, separators=(",", ":"), allow_nan=False).replace("<", "\\u003c")
     app = (src / "panel.js").read_text(encoding="utf-8")
@@ -54,7 +55,8 @@ def main():
         if template.count(marker) != 1:
             raise ValueError("Missing or repeated template marker " + marker)
         template = template.replace(marker, value)
-    content = template.encode("utf-8")
+    # A newline after </html> becomes body content when a browser saves the offline copy.
+    content = template.rstrip("\n").encode("utf-8")
     args.out.write_bytes(content)
     print(args.out, len(content), digest(content))
 
