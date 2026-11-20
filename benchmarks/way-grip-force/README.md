@@ -1,45 +1,54 @@
-# How hard will the fingers squeeze?
+[The studies](../README.md) › Study 9 · Pinch and lift: grip force
 
-A thumb and forefinger squeeze a small object before lifting it. Force plates under the fingertips measure the squeeze. What does scalp EEG tell us about the force 120 ms later, once we know the cue, the recent force and how the hand and object are moving? We tested that question on stored voluntary pinch lifts from healthy adults in the WAY-EEG-GAL study. [Original experiment and measurements](https://doi.org/10.1038/sdata.2014.47)
+# EEG from the wrong lift did as well as EEG from the right one
 
-## EEG missed the control
+A thumb and forefinger squeeze a small object before lifting it, and plates under the fingertips measure the squeeze. A straight-line fit, made on six people from the cue, the recent force and the movement of hand and object, forecast the grip force 120 ms ahead for three other people with an error of **0.4442 N**. Given scalp EEG as well, it missed by **0.4402 N**: 0.0040 N better, for two of the three. But the same fit given EEG from a different lift did better still, **0.4388 N**. The pass rule set before scoring required the right EEG to beat that control, so EEG failed it.
 
-The fits were frozen before scoring three new people from the same study. The main comparison used 25,578 matched forecast windows from 882 trials. We calculate root mean squared error (RMSE) separately for each person and then average the three errors. Smaller is better.
+Every score here is the measure that punishes large misses (root mean squared error), worked out for each person and averaged over the three. EEG is electrical activity of the brain, picked up on the scalp; EMG is electrical activity of muscle, picked up on the skin. A *straight-line fit* is a weighted sum of its inputs, here a ridge regression. The recordings are stored voluntary pinch-lifts by healthy adults in the WAY-EEG-GAL study. [Original experiment and measurements](https://doi.org/10.1038/sdata.2014.47)
 
-| Forecast | Mean participant RMSE |
+| Forecast | Error, averaged over the three people |
 | --- | ---: |
-| Continue at the last measured grip force | 0.788 N |
-| Extend the recent change in grip force | 0.673 N |
-| Cue and trial context | 1.426 N |
-| Context, force and motion history | 0.44418 N |
-| Same inputs plus aligned scalp EEG | 0.44018 N |
-| Same inputs plus surface EMG | 0.45714 N |
-| Same inputs plus scalp EEG and surface EMG | 0.45463 N |
+| Repeat the last measured grip force | 0.7878 N |
+| Carry the recent change in grip force forward | 0.6730 N |
+| Cue and trial context only | 1.4258 N |
+| Context, force history and motion history | 0.4442 N |
+| The same, with scalp EEG | 0.4402 N |
+| The same, with surface EMG | 0.4571 N |
+| The same, with scalp EEG and surface EMG | 0.4546 N |
+| The EEG fit, given EEG from another lift at the same stage | 0.4388 N |
 
-The aligned EEG model gained 0.00400 N on the mechanical model. Would it still win if the EEG came from another lift? The control rotates whole EEG trials within the same person, series, weight and surface, with the same time relative to the cue. All three models in this comparison were fit and scored on matched support. On 25,578 windows, the rotated EEG model scored **0.43880 N**, below the aligned model’s **0.44018 N**. The planned test for incremental, trial-specific EEG value failed.
+The models were fixed before the three test people were scored. The main comparison used 25,578 matched forecasts from 882 lifts. The wrong-lift control swaps whole EEG trials within the same person, series, object weight and surface, at the same time after the cue, and all three models in that comparison were fitted and scored on the same matched forecasts.
 
-The small gain also disappeared in the 5,140 windows from all three people where the measured target exceeded 0.5 N. On that descriptive subset, the mechanical model scored **0.77496 N** and the aligned EEG model **0.77580 N**. The windows overlap, so the study has three development participants, even with thousands of forecasts. The final three-person test set remains reserved. [Development aggregates](DEVELOPMENT-AGGREGATE.json)
+The small gain also vanished whenever there was real force to forecast. In the 5,140 forecasts where the measured force was above 0.5 N, the fit without EEG scored 0.7750 N and the fit with EEG 0.7758 N. In the 20,438 where it was 0.5 N or less, repeating the last force beat every fitted model: 0.0606 N, against 0.2049 N for the EEG fit. EMG raised the error, from 0.4442 to 0.4571 N, though on the plain average miss (mean absolute error) it lowered it, from 0.2719 to 0.2646 N. [Results file](DEVELOPMENT-AGGREGATE.json)
+
+## What it does not show
+
+The forecasts overlap, so for all their number the study rests on three people. Three more were set aside when the people were split, and their recordings have not been opened. The 120 ms is a distance on the stored sample clock: the timing of the filters and the delay of a live system were never measured. A link between EEG and force would also leave muscle and movement artefacts as explanations. The study covers forecasts of the force at the plates, made after the fact, in this one recorded task.
+
+## The plan
+
+Three conditions for EEG were set before scoring: below the force-and-motion fit, below the best other fit, and below EEG taken from another lift. The first two held and the third did not. `METHOD.md` in the [desktop ZIP](WAY-EEG-GAL-grip-force-experimental-preview.zip) gives the fitting and comparison rules, and the results file records that no weights changed after the test people were scored.
 
 ## Try four forecasts
 
-Move the cutoff on the invented pinch lift to see what the models predict 120 ms later. Inspect the past force, motion, scalp EEG and surface EMG that change those predictions. Open a compatible local JSON window to run the same calculation in your browser. [Open the forecast](https://eliminatenoise.github.io/NeuroTranslation/grip-force/) · [Download the offline browser](WAY-EEG-GAL-grip-force-browser.zip)
+Move the cutoff on the invented pinch-lift to see what the models forecast 120 ms later, and look at the past force, motion, scalp EEG and surface EMG that move those forecasts. Open a compatible JSON window of your own to run the same calculation in your browser. [Open the forecast](https://eliminatenoise.github.io/NeuroTranslation/grip-force/) · [Download the offline page](WAY-EEG-GAL-grip-force-browser.zip)
 
 ### Replay one recorded lift
 
-Open a local trial and move the slider through 29 cutoffs. At each point you can reveal the plate reading recorded 120 ms later. The signed error is positive when the forecast overshoots. **Replay an invented lift** demonstrates the same controls with artificial signals.
+Open a lift from your own computer and move the slider through 29 cutoffs. At each one you can reveal the plate reading recorded 120 ms later. The signed error is positive when the forecast overshoots. **Replay an invented lift** shows the same controls with invented signals.
 
-To use an original recording, save the [trial converter](../../docs/grip-force/convert_lift.py) and extract a windowed-series MATLAB file from the data deposit. With Python, NumPy and SciPy installed, run `python convert_lift.py WS_file.mat --trial 1 --out lift.json`, substituting your file name and trial number. Open that JSON in the browser. The file contains sensor samples for your selected lift. The cohort errors above come from the full participant-level comparison.
+To use an original recording, save the [lift converter](../../docs/grip-force/convert_lift.py) and take a windowed-series MATLAB file from the data deposit. With Python, NumPy and SciPy installed, run `python convert_lift.py WS_file.mat --trial 1 --out lift.json`, with your file name and trial number, and open that JSON in the page. The file holds the sensor samples of the lift you chose; the errors above come from the full comparison over all three people.
 
 ## Run the desktop forecast
 
-[Download the desktop ZIP](WAY-EEG-GAL-grip-force-experimental-preview.zip) and extract the entire folder. Open `Run-Windows.cmd`, `Run-macOS.command` or `Run-Linux.sh` for your system. You need Python 3.10 or later and NumPy. The Linux demo ran in an extracted copy. Native Windows and macOS launches remain unchecked.
+[Download the desktop ZIP](WAY-EEG-GAL-grip-force-experimental-preview.zip) and extract the whole folder. Open `Run-Windows.cmd`, `Run-macOS.command` or `Run-Linux.sh` for your system. You need Python 3.10 or later and NumPy. The Linux demo ran in an extracted copy; the Windows and macOS launchers have not been run on those systems.
 
-The included example runs five fitted models and two formula baselines on an invented window. To forecast a compatible local recording, use the input contract and command in the ZIP’s `INFERENCE.md`. The runner expects aligned 400 ms histories, measured force and motion, and the known LED cue, series type and trial ordinal. The phase control is a study comparison that uses other trials. Actual object weight and surface enter only diagnostic comparisons and control pairing. Open `METHOD.md` in the ZIP for the fitting and comparison rules.
-
-The 120 ms horizon belongs to the stored sample clock. Filter timing and live acquisition latency remain unverified. An EEG association also leaves muscle and motion artefacts as possible explanations. The benchmark covers offline forecasts of force measured at the plates in this recorded task.
+The example runs five fitted models and two formula forecasts on an invented window. To forecast a compatible recording of your own, use the input format and command in the ZIP's `INFERENCE.md`. The runner expects aligned 400 ms histories, measured force and motion, and the known LED cue, series type and trial number. The wrong-lift control is a study comparison that needs other trials. The real object weight and surface enter only side comparisons and the pairing of the control.
 
 ## Check the files
 
-From this benchmark folder, run `python verify.py` to check the Python runner and all its ZIP members against the source manifest. Run `python browser-release/build.py` to regenerate the browser's study data and offline ZIP in memory and compare both with the checked-in files. Add `--write` to write the rebuilt copies. [Source and package manifest](SOURCE.json)
+From this folder, run `python verify.py` to check the Python runner and every member of its ZIP against the source manifest. Run `python browser-release/build.py` to rebuild the browser page's study data and offline ZIP in memory and compare both with the files here; add `--write` to write the rebuilt copies. [Source and package manifest](SOURCE.json)
 
-The archives carry frozen model parameters, aggregate summaries and the project’s inference code. The WAY project (FP7-ICT-288551) supported the original recordings. The original recordings and their licence notices are available from the data authors. [WAY-EEG-GAL collection v2](https://doi.org/10.6084/m9.figshare.c.988376.v2) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+The archives carry the fixed model weights, summary results and the project's forecasting code. The WAY project (FP7-ICT-288551) supported the original recordings. The recordings and their licence notices are available from the data authors. [WAY-EEG-GAL collection version 2](https://doi.org/10.6084/m9.figshare.c.988376.v2) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+The same question, timed from the moment the plates register the squeeze: [Study 10 · Pinch and lift: grip force, timed from the squeeze](../way-contact-force/).
