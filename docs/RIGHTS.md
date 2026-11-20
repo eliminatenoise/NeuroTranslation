@@ -94,7 +94,7 @@ Changed here: one recording was used; four invalid rows were left out, and the s
 
 Study 26 and the general model's first fit (row 27 of the studies page). Recorded and shared by Billur Barshan and Kerem Altun through the UCI Machine Learning Repository, under CC BY 4.0.
 
-Changed here: two walking activities were selected, and the accelerometer readings of the right-arm sensor (study 26) or of all five sensors (row 27) were cut into short histories, each with the reading that followed; forecasts were fitted and their errors computed. The five-sensor folder also holds an excerpt of the recordings themselves: 16 readings, and the reading that came next, from each of the five sensors in one clip of one person, under the same licence.
+Changed here: two walking activities were selected, and the accelerometer readings of the right-arm sensor (study 26) or of all five sensors (row 27) were cut into short histories of 16 readings, each with the reading recorded three readings (120 ms) after its last one; forecasts were fitted and their errors computed. The five-sensor folder also holds an excerpt of the recordings themselves: 16 readings, and the reading recorded 120 ms after the last of them, from each of the five sensors in one clip of one person, under the same licence.
 
 [Dataset](https://archive.ics.uci.edu/dataset/256/daily+and+sports+activities) · [DOI 10.24432/C5C59F](https://doi.org/10.24432/C5C59F) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
