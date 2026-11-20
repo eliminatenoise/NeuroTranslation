@@ -71,7 +71,7 @@ Where a paper and a result file disagree, the result file is right: [the studies
 
 ## The result files the papers name
 
-Most studies keep their result file in their own folder under [`benchmarks/`](../benchmarks/README.md). The studies without a folder publish theirs here, beside the papers. Each holds aggregate numbers only, each with the file and field it was read from.
+Most studies keep their result file in their own folder under [`benchmarks/`](../benchmarks/README.md). The studies without a folder publish theirs here, beside the papers. The seven under `current/results/` hold aggregate numbers only, each with the file and field it was read from; the long training run's file is the run's own summary.
 
 | File | What it holds | Where the papers use it |
 | --- | --- | --- |
