@@ -193,4 +193,4 @@ What the project itself wrote, text and code, is dedicated to the public domain 
 
 **[NeuroSurge](https://github.com/eliminatenoise/NeuroSurge)** is a game for learning which part of the brain moves which part of the body. Its numbers are made up by the rules of the game. They are not forecasts from the studies here.
 
-**[Interoceptomics](https://github.com/eliminatenoise/Interoceptomics)** (Interotomics for short) is a proposed field of science: how the body senses its own interior, and how the nerve connections involved are arranged. Today it is a 3D atlas of the human brain that you can turn, cut and measure, and an interactive guide to the experiments it proposes, none of which has been run yet.
+**[Interoceptomics](https://github.com/eliminatenoise/Interoceptomics)** is a proposed field of science: how the body senses its own interior, and how the nerve connections involved are arranged. Today it is a 3D atlas of the human brain that you can turn, cut and measure, and an interactive guide to the experiments it proposes, none of which has been run yet.
