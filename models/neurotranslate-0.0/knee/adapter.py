@@ -5,7 +5,17 @@ MODES = ('stride', 'raw', 'shared', 'scrambled')
 PERIODS = range(45, 181)
 
 
+def contains_boolean(value):
+    if isinstance(value, (list, tuple)):
+        return any(contains_boolean(child) for child in value)
+    if isinstance(value, np.ndarray):
+        return value.dtype.kind == 'b'
+    return isinstance(value, (bool, np.bool_))
+
+
 def validate_history(frames, knee_deg):
+    if contains_boolean(frames) or contains_boolean(knee_deg):
+        raise ValueError('Knee angles and frame numbers must be numeric, not boolean.')
     frame = np.asarray(frames)
     knee = np.asarray(knee_deg)
     if knee.ndim == 2 and frame.ndim == 1:

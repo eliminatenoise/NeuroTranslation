@@ -168,6 +168,9 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
     if record.get("forearm_residual") is not None:
         raise ValueError("Forearm corrections apply only to wrist_angle inputs")
     if record.get("domain") == "knee_angle":
+        allowed = {"domain", "mode", "frames", "knee_deg"}
+        if set(record) != allowed:
+            raise ValueError("A knee forecast requires exactly domain, mode, frames and knee_deg.")
         from knee.adapter import forecast as knee_forecast
         config, weights = read_checkpoint(checkpoint)
         angles, period = knee_forecast(record["frames"], record["knee_deg"], record["mode"],
