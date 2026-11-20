@@ -406,7 +406,46 @@
     return {domain:'rat_population', unit:'cm', distanceCm};
   }
 
+  __KNEE_CALCULATION__
+
+  async function forecastKnee(record) {
+    const {frames, mode} = record;
+    if (Object.hasOwn(record, 'kneeDeg') && Object.hasOwn(record, 'knee_deg')) {
+      throw new TypeError('Supply the knee angles only once.');
+    }
+    const kneeDeg = Object.hasOwn(record, 'kneeDeg') ? record.kneeDeg : record.knee_deg;
+    if (Object.keys(record).some(k => !['domain', 'mode', 'frames', 'kneeDeg', 'knee_deg'].includes(k)) ||
+        !['stride', 'raw', 'shared', 'scrambled'].includes(mode)) {
+      throw new TypeError('Supply domain knee_angle, mode (stride, raw, shared or scrambled), frames and kneeDeg.');
+    }
+    if (!Array.isArray(frames) || frames.length !== 240) {
+      throw new RangeError('Supply 240 consecutive frame numbers from one 60 Hz walk.');
+    }
+    for (let i = 0; i < frames.length; i++) {
+      if (!Number.isSafeInteger(frames[i]) || frames[i] < 0 || (i > 0 && frames[i] !== frames[i-1] + 1)) {
+        throw new RangeError('Frame numbers must be consecutive nonnegative safe integers.');
+      }
+    }
+    if (!Array.isArray(kneeDeg) || kneeDeg.length !== 240) {
+      throw new RangeError('Supply one finite [right, left] angle pair in degrees for each of the 240 frames.');
+    }
+    // Copy inputs before awaiting model verification, just as the wrist route does.
+    const history = Array.from(kneeDeg, row => {
+      if (!finiteRow(row, 2)) throw new RangeError('Each knee frame needs two finite angles in right, left order.');
+      return row.slice();
+    });
+    const cutoffFrame = frames[239];
+    const [encoder, shuffled, readouts] = await Promise.all([
+      loadGroup('spatial'), loadGroup('knee.scramble'), loadGroup('knee.readouts')
+    ]);
+    const result = sharedKneeForecast(history, {format:1, encoder, scrambled_encoder:shuffled, readouts});
+    return {domain:'knee_angle', mode, unit:'deg', angleDeg:result[mode],
+            axes:['right_knee_flexion_extension', 'left_knee_flexion_extension'],
+            cutoffFrame, periodFrames:result.period_frames, horizonStoredFrames:15, storedHz:60};
+  }
+
   async function forecastMovement(record) {
+    if (record?.domain === 'knee_angle') return forecastKnee(record);
     if (record?.domain === 'rat_population') return forecastPopulation(record);
     if (record?.domain === 'wrist_angle') {
       return {domain:'wrist_angle', unit:'deg', ...await forecastWristAngles(record)};

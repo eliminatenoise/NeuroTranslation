@@ -125,6 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function clearResults(message) {
     revision++;
+    byId("knee-results").hidden = true;
+    for (const id of ["knee-name", "knee-right", "knee-left", "knee-timing"]) byId(id).textContent = "";
     byId("angular-results").hidden = true;
     byId("angle-values").tBodies[0].replaceChildren();
     byId("correction-values").tBodies[0].replaceChildren();
@@ -239,10 +241,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  async function showKnees(record, token) {
+    if (record?.domain !== "knee_angle") throw new Error("Use a knee_angle input for this forecast.");
+    const result = await SharedMotion.forecastMovement(record);
+    if (token !== revision) return;
+    const options = Array.from(byId("knee-mode").options);
+    byId("knee-name").textContent = options.find(option => option.value === result.mode).text;
+    byId("knee-right").textContent = format(result.angleDeg[0], 3);
+    byId("knee-left").textContent = format(result.angleDeg[1], 3);
+    const target = BigInt(result.cutoffFrame) + BigInt(result.horizonStoredFrames);
+    byId("knee-timing").textContent = "Frame " + target + ", 15 frames after the last input (0.25 s at 60 Hz). The closest earlier stride was " + result.periodFrames + " frames back.";
+    byId("knee-results").hidden = false;
+    byId("status").textContent = "";
+  }
+
   async function runCustom() {
     clearResults("");
     const token = revision;
     try {
+      if (currentDomain() === "knee_angle") {
+        let record;
+        try { record = JSON.parse(byId("knee-input").value); }
+        catch { throw new Error("Paste the complete knee JSON object or choose Show invented input."); }
+        await showKnees(record, token);
+        return;
+      }
       if (currentDomain() === "wrist_angle") {
         const raw = byId("angle-input").value.trim();
         if (!raw) throw new Error("Enter your wrist measurements or fill in an invented input.");
@@ -274,28 +297,39 @@ document.addEventListener("DOMContentLoaded", () => {
     const domain = currentDomain();
     const custom = isCustom();
     const angular = domain === "wrist_angle";
+    const knee = domain === "knee_angle";
     const recorded = source.value === "recorded";
     const forearm = source.value === "forearm";
-    byId("custom").hidden = angular || !custom;
+    byId("knee-controls").hidden = !knee;
+    byId("knee-custom").hidden = !custom;
+    byId("knee-example-method").hidden = custom;
+    byId("knee-study").hidden = !knee;
+    byId("custom").hidden = knee || angular || !custom;
     byId("angular-custom").hidden = !angular || !custom;
     byId("angle-study").hidden = !angular;
-    byId("distance-study").hidden = angular;
+    byId("distance-study").hidden = angular || knee;
     byId("source-line").textContent = custom
       ? "Enter a history from one trial or recording that you have permission to use. The source clock and units must match this task."
       : recorded
         ? "Recorded camera positions from rat JS14. This is the first eligible training window, two seconds into W-track trip 55."
         : forearm ? "An invented half-second from the forearm correction example. It contains wrist angles and four forearm channels. No person supplied these measurements."
+        : knee ? "Two invented mathematical waves show the input format. They do not come from a person. The example has no measured future angle."
         : angular ? "Invented wrist angles, forearm muscle activity and scalp voltages. All five forecasts use the same half-second."
           : domain === "rat" ? "Invented positions on a two-dimensional maze. There is no measured future endpoint."
             : "Invented right-wrist movement in three dimensions. There is no measured future endpoint.";
     if (!custom) {
       try {
-        if (angular) await compareAngles(forearm ? data.forearmExample : data.angleExample,token);
+        if (knee) await showKnees({...data.kneeExample, mode:byId("knee-mode").value}, token);
+        else if (angular) await compareAngles(forearm ? data.forearmExample : data.angleExample,token);
         else {
           const intervals = domain === "rat" && !recorded ? data.inventedRat : data.examples[domain].intervals;
           await showForecast(domain,intervals,recorded,token);
         }
       } catch (e) { if (token === revision) clearResults(e.message); }
+      return;
+    }
+    if (knee) {
+      clearResults("Supply the earlier frame numbers and angles to forecast the next quarter second.");
       return;
     }
     if (angular) {
@@ -336,6 +370,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   picker.addEventListener("change",selectDomain);
   source.addEventListener("change",selectInput);
+  byId("knee-mode").addEventListener("change", selectInput);
+  byId("knee-run").addEventListener("click", runCustom);
+  byId("knee-input").addEventListener("input", () => clearResults("Inputs changed. Run the knee forecast to use these values."));
+  byId("knee-fill").addEventListener("click", () => {
+    byId("knee-input").value = JSON.stringify(data.kneeExample);
+    clearResults("These are invented waves. Run the forecast or replace them with your own angles.");
+  });
   byId("angle-run").addEventListener("click",runCustom);
   byId("angle-input").addEventListener("input", () => {
     anglePractice = false;
@@ -366,8 +407,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (model.checkpointSha256 !== "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179") {
         throw new Error("The checkpoint differs from the one used for these comparisons.");
       }
-      if (model.movementCheckpointSha256 !== "08f4a025be7d3dfa6e3de5899fa445d019f8c70c82b1f5d6531bef1407e0616a") {
-        throw new Error("The wrist-angle checkpoint differs from the studied model.");
+      if (model.movementCheckpointSha256 !== "4541317c4e5d7f08f24d221278a0f3fec6f9f9acb9c7ea17669ef28511c187fe") {
+        throw new Error("The movement checkpoint differs from the studied model.");
       }
       studyTable();
       picker.disabled = source.disabled = false;

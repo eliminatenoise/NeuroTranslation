@@ -7,9 +7,25 @@ How far will a tracked point move? Where will a wrist point? Give the model one 
 | `wrist` | HoloAssist right-wrist positions during device tasks | Straight-line displacement in 3D, one distance in centimetres |
 | `rat` | JS14 camera positions while one rat ran a W-track | Straight-line displacement in 2D, one distance in centimetres |
 | `wrist_angle` | WristMotion v3, a person pointing with a supported right wrist | Absolute wrist extension and radial deviation in degrees, 128 stored ticks after the last observed angle |
+| `knee_angle` | Reconstructed right and left knee angles during treadmill walking at 0.5 m/s | Both flexion/extension angles in degrees, 15 stored frames later |
 | `rat_population` | Five W-track camera positions, optionally with spikes from dorsal CA1 and prefrontal cortex | Straight-line displacement in 2D, one distance in centimetres |
 
-All four domains use the same four-token temporal encoder. Each recording has its own input and output. Each call uses the clock of its own recording. The rat population study paired camera and firing histories from that one clock. Supply one history per call. [Spatial recording and clock rules](SPATIAL-API.md) · [Source credits](NOTICE.md)
+The trained shared model uses the same four-token temporal encoder across five domains. Each recording has its own input and output. Each call uses the clock of its own recording. The rat population study paired camera and firing histories from that one clock. Supply one history per call. [Spatial recording and clock rules](SPATIAL-API.md) · [Source credits](NOTICE.md)
+
+## Forecast two knee angles
+
+Open **index.html** in the extracted download and choose **Right and left knee angles (°)**. To try the same invented pair of waves from the command line, run `node predict.mjs knee-example.json`. To make a forecast from a recording, supply a single JSON object with exactly four fields.
+
+| Input | What to supply |
+| --- | --- |
+| `domain` | `"knee_angle"` |
+| `mode` | `"stride"` repeats the closest past stride. `"raw"` fits a correction from the earlier angles. `"shared"` also uses the model trained on wrist and rat movement. `"scrambled"` fits the same kind of correction after shuffling the shared weights. |
+| `frames` | Exactly 240 consecutive nonnegative integer frame numbers, below 2⁵³, from one 60 Hz walk. The first and last samples are 239/60 seconds apart. |
+| `kneeDeg` | One pair of finite numbers per frame, in order from oldest to newest. The first angle is right knee flexion/extension and the second is left, both in degrees. |
+
+The JavaScript API and CLI return `angleDeg` in right/left order, `unit`, `axes`, `mode`, `cutoffFrame`, the estimated stride length `periodFrames`, `storedHz: 60` and `horizonStoredFrames: 15`. The target is a quarter second after the last frame. The caller must establish the recording rate, units, joint convention and common recording. Use `knee_deg` in place of `kneeDeg` to run the same JSON in both JavaScript and Python. Supply just one spelling. The Python reader returns a batch. [Complete invented input](knee-example.json)
+
+Across 40,201 forecasts for 12 previously studied people, the shared correction had a mean absolute error of 3.465°, compared with 3.460° from the earlier angles alone, 3.422° using shuffled weights and 3.535° repeating the previous stride. Each person and knee counts equally. The results show no advantage of the trained representation over the two fitted controls. How well these methods predict a new cohort or live movement remains unknown. [Source credits](NOTICE.md)
 
 ## Try an invented wrist movement
 

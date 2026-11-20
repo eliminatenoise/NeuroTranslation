@@ -6,13 +6,16 @@ from html import escape
 import json
 from pathlib import Path
 import zipfile
+import subprocess
+import sys
+import tempfile
 
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
 SRC = HERE / 'src'
 STATIC = ('CC0-1.0.txt', 'CDLA-Permissive-2.0.txt', 'DATA-CREDITS.md', 'NOTICE.md', 'README.md',
-          'SPATIAL-API.md', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
+          'SPATIAL-API.md', 'knee-example.json', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
 ARTIFACTS = (*STATIC, 'model.json', 'population-example.json', 'shared-motion.js')
 
 
@@ -41,9 +44,24 @@ def pack(archive, names):
     return dict(**info, layout=layout, encoded=base64.b64encode(payload).decode('ascii')), dict(**info, tensors=tensors)
 
 
+def export_knee(model, checkpoint):
+    manifest = read(SRC/'inputs.json')
+    calc = (SRC/'runtime/knee.js').read_bytes()
+    if sha(calc) != manifest['kneeCalculationSha256']:
+        raise ValueError('Knee calculation differs from the verified source.')
+    with tempfile.TemporaryDirectory() as directory:
+        path = Path(directory)/'knee.json'
+        subprocess.run([sys.executable, '-B', str(model/'knee/export_browser.py'),
+                        str(checkpoint), str(path)], check=True)
+        if sha(path.read_bytes()) != manifest['kneeExportSha256']:
+            raise ValueError('Knee export differs from the verified checkpoint conversion.')
+        return read(path), calc.decode()
+
+
 def build_runtime(model, out):
     original = read(SRC/'runtime/original-groups.json')
     checkpoint = model/'movement-weights.npz'
+    knee, calculation = export_knee(model, checkpoint)
     groups, descriptions = {}, {}
     with np.load(checkpoint, allow_pickle=False) as saved:
         config = json.loads(str(saved['configuration']))
@@ -62,11 +80,22 @@ def build_runtime(model, out):
             assert np.all(saved[names[1]] > 0)
             groups[key], descriptions[key] = pack(saved, names)
         names = [name for group in groups.values() for name, *_ in group['layout']]
-        assert len(names) == len(set(names)) == 51 and set(names) == set(saved.files) - {'configuration'}
+        knee_names = {n for n in saved.files if n.startswith('knee.')}
+        assert len(names) == len(set(names)) == 51
+        assert len(knee_names) == 14 and set(saved.files) == {'configuration', *names, *knee_names}
+        assert set(knee['readouts']) == {n.removeprefix('knee.') for n in knee_names}
+        readouts = {n.removeprefix('knee.'):saved[n] for n in knee_names}
+        groups['knee.readouts'], descriptions['knee.readouts'] = pack(readouts, readouts)
+        shuffled = {}
+        for name, flat in knee['scrambled_encoder'].items():
+            array = saved[name]
+            assert np.array_equal(array.ravel(), knee['encoder'][name])
+            shuffled[name] = np.asarray(flat, dtype=array.dtype).reshape(array.shape)
+        groups['knee.scramble'], descriptions['knee.scramble'] = pack(shuffled, shuffled)
 
     ids = dict(spatial=original['checkpoints']['spatial'], movement=sha(checkpoint.read_bytes()))
     template = (SRC/'runtime/runtime.js.in').read_text()
-    script = template.replace('__CHECKPOINT__', json.dumps(ids)).replace('__GROUPS__', json.dumps(groups, separators=(',', ':')))
+    script = template.replace('__KNEE_CALCULATION__', calculation).replace('__CHECKPOINT__', json.dumps(ids)).replace('__GROUPS__', json.dumps(groups, separators=(',', ':')))
     out.mkdir(parents=True, exist_ok=True)
     for name in STATIC:
         (out/name).write_bytes((SRC/'runtime'/name).read_bytes())
@@ -74,7 +103,8 @@ def build_runtime(model, out):
     write_json(out/'model.json', dict(checkpoints=ids, config=config, groups=descriptions,
                pythonPredictorSha256=sha((model/'predict.py').read_bytes()),
                pythonCorrectionSha256=sha((model/'forearm/residual.py').read_bytes()),
-               pythonPopulationSha256=sha((model/'population/adapter.py').read_bytes()), encoding=original['encoding']))
+               pythonPopulationSha256=sha((model/'population/adapter.py').read_bytes()),
+               kneeExportSha256=read(SRC/'inputs.json')['kneeExportSha256'], encoding=original['encoding']))
     example = read(model/'population/example.json')
     # Limit the worked record to the six measured inputs and the two API selectors.
     keys = {'domain':'domain', 'mode':'mode', 'cutoffS':'cutoff_s', 'priorTimeS':'prior_time_s',
@@ -84,11 +114,6 @@ def build_runtime(model, out):
     expected = set(ARTIFACTS) | {'SHA256SUMS'}
     if {f.name for f in out.iterdir()} != expected:
         raise ValueError('Build into a clean runtime directory with only the listed products.')
-    with zipfile.ZipFile(out.parent/'movement-browser.zip', 'w') as output:
-        for name in sorted(expected):
-            entry = zipfile.ZipInfo(name, date_time=(2026, 11, 20, 0, 0, 0))
-            entry.external_attr = 0o100644 << 16
-            output.writestr(entry, (out/name).read_bytes(), compress_type=zipfile.ZIP_DEFLATED, compresslevel=9)
 
 
 def viewer_data(direct, model):
@@ -137,18 +162,57 @@ def build_viewer(direct, model, runtime, out):
     (out/'index.html').write_text(page)
 
 
+GUI_SOURCES = ('build.py', 'README.md', 'Open on Linux.sh', 'Open on Windows.cmd', 'Open on macOS.command',
+               'src/panel.html', 'src/panel.js', 'src/panel.css', 'src/inputs.json',
+               'src/sources.json', 'src/derive.py', 'src/angular-scores.json')
+GEN_SOURCES = ('build.py', 'README.md', 'src/inputs.json',
+               *('src/runtime/' + n for n in (*STATIC, 'original-groups.json', 'knee.js', 'runtime.js.in')),
+               *('src/viewer/' + n for n in ('index.html', 'model.js', 'viewer.css', 'viewer.js')))
+
+
+def package(model, gui, out):
+    runtime = out/'runtime'
+    gui_page = out/'index.html'
+    subprocess.run([sys.executable, '-B', str(gui/'build.py'), '--runtime', str(runtime),
+                    '--out', str(gui_page)], check=True)
+    entries = {n:runtime/n for n in (*ARTIFACTS, 'SHA256SUMS')}
+    entries['index.html'] = gui_page
+    for n in ('Open on Linux.sh', 'Open on macOS.command', 'Open on Windows.cmd'):
+        entries[n] = gui/n
+    for n in GEN_SOURCES:
+        entries['source/models/browser-source/'+n] = HERE/n
+    for n in read(SRC/'inputs.json')['model']:
+        entries['source/models/neurotranslate-0.0/'+n] = model/n
+    for n in GUI_SOURCES:
+        entries['source/docs/shared-motion/'+n] = gui/n
+    checksums = out/'PACKAGE-SHA256SUMS'
+    checksums.write_text(''.join(f'{sha(path.read_bytes())}  {name}\n' for name, path in sorted(entries.items())))
+    entries[checksums.name] = checksums
+    with zipfile.ZipFile(out/'movement-browser.zip', 'w') as output:
+        for name, path in sorted(entries.items()):
+            entry = zipfile.ZipInfo(name, date_time=(2026, 11, 20, 0, 0, 0))
+            executable = name.endswith(('.sh', '.command'))
+            entry.external_attr = (0o100755 if executable else 0o100644) << 16
+            output.writestr(entry, path.read_bytes(), compress_type=zipfile.ZIP_DEFLATED, compresslevel=9)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--model', type=Path, required=True, help='Public model directory containing movement-weights.npz and population/')
-    parser.add_argument('--direct', type=Path, required=True, help='Direct population transfer directory containing trace.json and weights.json')
+    parser.add_argument('--gui', type=Path, default=HERE.parents[1]/'docs/shared-motion')
+    parser.add_argument('--direct', type=Path, help='Direct population transfer directory containing trace.json and weights.json')
     parser.add_argument('--out', type=Path, default=HERE/'public')
     args = parser.parse_args()
     for key, root in [('model', args.model), ('direct', args.direct)]:
+        if root is None:
+            continue
         for name, digest in read(SRC/'inputs.json')[key].items():
             if sha((root/name).read_bytes()) != digest:
                 raise ValueError(f'Frozen {key} input differs: {name}')
     build_runtime(args.model, args.out/'runtime')
-    build_viewer(args.direct, args.model, args.out/'runtime', args.out/'viewer')
+    package(args.model, args.gui, args.out)
+    if args.direct:
+        build_viewer(args.direct, args.model, args.out/'runtime', args.out/'viewer')
 
 
 if __name__ == '__main__':

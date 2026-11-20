@@ -109,8 +109,21 @@
 
   <section id="recordings" aria-labelledby="recordings-title">
     <h2 id="recordings-title">Find your recording</h2>
-    <p>The first ten pages need no file from you: open one and start. For the others, find the dataset your file came from. Every page runs on your own computer, and nothing you give it is sent anywhere. Every “ahead” is a distance along a stored recording: nothing here is live.</p>
+    <p>The first eleven pages need no file from you: open one and start. For the others, find the dataset your file came from. Every page runs on your own computer, and nothing you give it is sent anywhere. Every “ahead” is a distance along a stored recording: nothing here is live.</p>
     <ul class="tiles recordings">
+      <li>
+        <article aria-labelledby="knee-stride-title">
+          <p class="source">Katmah and colleagues · Treadmill joint angles</p>
+          <h3 id="knee-stride-title">Can four seconds of walking beat the last stride?</h3>
+          <p>Follow both knees through four seconds of a walk and forecast both angles a quarter of a second later. On 12 walkers, copying the matching moment of the previous stride missed by 3.535° on average; a small transformer trained to correct that copy missed by 2.679°, closer for every one of them. The general model, given the same four seconds, missed by 3.465°, and a copy of it with its shared part scrambled did better.</p>
+          <ul class="links">
+            <li><a class="primary" href="knee-stride/">Compare the knee forecasts</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-stride">Model and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/knee-stride.zip">Offline reader (ZIP)</a></li>
+            <li><a href="papers/walking-rhythm/">Read the four-page supplement</a></li>
+          </ul>
+        </article>
+      </li>
       <li>
         <article aria-labelledby="gait-rhythm-title">
           <p class="source">Katmah and colleagues · Treadmill muscle and knee recordings</p>
@@ -120,7 +133,7 @@
             <li><a class="primary" href="gait-rhythm/">Compare the rhythms</a></li>
             <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/gait-rhythm">Study and results</a></li>
             <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/gait-rhythm.zip">Offline reader and source (ZIP)</a></li>
-            <li><a href="papers/walking-rhythm/">Read the three-page supplement</a></li>
+            <li><a href="papers/walking-rhythm/">Read the four-page supplement</a></li>
           </ul>
         </article>
       </li>
@@ -174,9 +187,9 @@
       </li>
       <li>
         <article aria-labelledby="shared-movement-title">
-          <p class="source">One movement model · Three kinds of forecast</p>
-          <h3 id="shared-movement-title">Forecast movement distance or a wrist angle</h3>
-          <p>Forecast how far a tracked wrist or rat will move in about a quarter of a second, or the two angles of a wrist from its movement, forearm and scalp readings. See how much four forearm electrodes change the angle forecast from the same wrist movement. Start from an invented example (the rat also has one recorded trip), or enter your own measurements. All three share one core of the general model, each with its own first and last steps. On the recordings, its distance forecast missed by 1.725 cm for the wrist and 1.310 cm for the rat; for the wrist’s angles, an earlier model made for the wrist did better.</p>
+          <p class="source">One movement model · Four kinds of forecast</p>
+          <h3 id="shared-movement-title">Forecast movement distance, a wrist angle or both knees</h3>
+          <p>Forecast how far a tracked wrist or rat will move in about a quarter of a second, the two angles of a wrist from its movement, forearm and scalp readings, or both knees of a walker from four seconds of knee angles. See how much four forearm electrodes change the angle forecast from the same wrist movement. Start from an invented example (the rat also has one recorded trip), or enter your own measurements. All four share one core of the general model, each with its own first and last steps. On the recordings, its distance forecast missed by 1.725 cm for the wrist and 1.310 cm for the rat; for the wrist’s angles and for the knees, models made for each did better.</p>
           <ul class="links">
             <li><a class="primary" href="shared-motion/">Open the shared model</a></li>
             <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models">The model, its comparison and a download</a></li>
@@ -379,7 +392,7 @@
 
   <section class="support" id="papers" aria-labelledby="papers-title">
     <h2 id="papers-title">Two papers, each written twice</h2>
-    <p>Two working drafts, each in a Technical and a Simple English edition. Nobody outside the project has reviewed them. Every result in them comes from stored recordings, and nothing is live. They report every study of the numbered table, the general model’s first five fits among them. What came after them is not in them: the general model’s shared fit, the studies published after the numbered table, the walk/run generator, the knee forecast and rhythm comparison, and the separate supplements on them.</p>
+    <p>Two working drafts, each in a Technical and a Simple English edition. Nobody outside the project has reviewed them. Every result in them comes from stored recordings, and nothing is live. They report every study of the numbered table, the general model’s first five fits among them. What came after them is not in them: the general model’s shared fit, the studies published after the numbered table, the walk/run generator, the knee forecasts and the rhythm comparison, and the separate supplements on them.</p>
     <p><a href="papers/language-and-observed-movement/language-and-movement.html">How precisely do words identify a recorded movement?</a> A separate four-page supplement, not one of the two papers, on the two studies that search recordings of movement with words, one of the whole body and one of the hand. <a href="papers/language-and-observed-movement/language-and-movement.pdf">Open the PDF.</a></p>
     <ul class="links">
       <li><a href="papers/current/">Read the four current drafts, and find each study in them</a></li>

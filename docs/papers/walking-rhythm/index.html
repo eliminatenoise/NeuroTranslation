@@ -73,7 +73,7 @@ dd { margin:0; }
 <section class="sheet" aria-labelledby="title">
 <p class="mast">NeuroTranslation / Interoceptomics <a class="download" href="gait-clocks.pdf">Download PDF</a></p>
 <h1 id="title">The next knee angle and the rhythm of a walk</h1>
-<p class="lead">Watch a few seconds of someone walking at a steady pace and you may already have seen the next bend of their knee. In one treadmill study, replaying part of an earlier stride gave a closer forecast than a model trained on 39 walkers. The same recordings let us ask a different question. Can electrical signals from the legs tell us how often the knees bend?</p>
+<p class="lead">Watch a few seconds of someone walking at a steady pace and you may already have seen the next bend of their knee. In one treadmill study, replaying an earlier stride beat a model that saw only 0.4 seconds of movement. Give a model four seconds and train it to correct the replay, and the result changes. The same recordings let us ask a different question. Can electrical signals from the legs tell us how often the knees bend?</p>
 <h3>Fifteen frames ahead</h3>
 <p>Katmah and colleagues recorded healthy young adults walking on a treadmill. At one belt speed, 0.5 metres per second, body-worn inertial sensors supplied estimates of how far each joint bent. We took five snapshots of both hips, knees and ankles across 0.4 seconds. A small Transformer, a model trained to combine information across those snapshots, estimated both knee angles 15 stored frames after the last snapshot. At 60 frames per second, that is a quarter of a second in the file.</p>
 <figure>
@@ -92,6 +92,23 @@ dd { margin:0; }
 <p>A rule with four seconds of knee history searched for an earlier stride whose movement resembled the latest second. It copied the angles 15 frames beyond that earlier match. The rule needed no training. It needed more history, leaving 40,201 forecast points on which to compare the two methods directly.</p>
 <p class="result"><strong>The earlier stride won for 10 of 12 people.</strong> On those same points its mean error was 3.535°, compared with 4.465° for the Transformer. The average advantage was 0.93° (95% interval 0.36° to 1.57°, resampling whole people and preserving each person’s paired errors).</p>
 </section>
+<section class="sheet" aria-labelledby="same-history">
+<p class="mast">Matched walking histories</p>
+<h2 id="same-history">Give each forecast the same four seconds</h2>
+<p class="lead">The previous stride gives a starting answer for each knee. Can a model learn how far to move that answer? This time every method sees the same 240 stored frames through the same cutoff. Each must predict the same two angles 15 frames later.</p>
+<h3>Learning a correction on 39 walkers</h3>
+<p>We first matched the final second of knee movement to an earlier part of the walk. One method simply replayed the match. Two others learned a correction from past angles and features of the matching stride. One used a weighted sum of those features. The other used a small Transformer trained for this task, which learns how much information to take from different past moments.</p>
+<figure><figcaption>Table 2. Error on the same 40,201 forecasts in 12 previously studied walkers</figcaption>
+<table><thead><tr><th scope="col">Forecast from right and left knee angles</th><th scope="col">Mean error</th></tr></thead><tbody>
+<tr><th scope="row">Replay the matched stride</th><td>3.535°</td></tr>
+<tr><th scope="row">Replay with a linear correction</th><td>3.411°</td></tr>
+<tr><th scope="row">Replay with the task-trained Transformer</th><td><strong>2.679°</strong></td></tr>
+</tbody></table></figure>
+<p class="result"><strong>The task-trained model came closest for all 12 walkers.</strong> Its mean advantage over replay was 0.856° (95% interval 0.628° to 1.089°, resampling people). Against the linear correction it gained 0.731° (0.579° to 0.891°). These people had been kept out of training, but we knew their earlier forecast results when designing this comparison.</p>
+<h3>Did the earlier movement model carry anything over?</h3>
+<p>NeuroTranslate already had a component trained to recognise patterns in wrist and rat movement. We kept that component fixed and gave it four one-second summaries of the knees. A new calculation used the patterns, the summaries and the stride match to correct the forecast. It missed by 3.465° on average. The summaries and stride match alone gave 3.460°. We then scrambled the earlier component’s learned numbers once and fitted the correction again. It gave 3.422°. The success of the task-trained model therefore gives us no evidence here that earlier training on the other movements helped.</p>
+<p class="footnote"><a href="https://eliminatenoise.github.io/NeuroTranslation/knee-stride/">Try the four-second forecast</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-stride">Task-trained model</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/knee">Shared-model comparison</a></p>
+</section>
 <section class="sheet" aria-labelledby="rhythm">
 <p class="mast">Trial-level rhythm</p>
 <h2 id="rhythm">How often does the knee bend?</h2>
@@ -100,7 +117,7 @@ dd { margin:0; }
 <p>Skin electrodes on the legs measured electrical activity near the muscles. The surface electromyography (EMG) files contain a summary for each of 12 channels, the average size of the voltage regardless of its sign. The movement files contain a bend angle for each knee. A person and a treadmill speed identify the corresponding pair of files.</p>
 <p>In each file we used seconds 5 to 45 on its own clock. We asked how strongly each signal repeated at rates from 27 to 90 cycles per minute. For each channel we removed its average level, gave the middle of the interval more weight (a Hann taper), and calculated the power at each possible rate. We scaled those powers to add up to one so that louder channels had no extra say. Averaging across the 12 muscle channels gave one strongest rate. Averaging across the two knees gave another. Each is a repeating cycle rate. Neither instrument counted footfalls in this test.</p>
 <figure>
-<figcaption>Table 2. Which estimate came closest to the knee rhythm?</figcaption>
+<figcaption>Table 3. Which estimate came closest to the knee rhythm?</figcaption>
 <table><thead><tr><th scope="col">Estimate of knee rhythm</th><th scope="col">Mean error<br>(cycles/min)</th></tr></thead>
 <tbody>
 <tr><th scope="row">Muscle rhythm from the same walk</th><td>0.027</td></tr>

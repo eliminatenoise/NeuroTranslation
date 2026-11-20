@@ -1,0 +1,424 @@
+{
+  "format": "gait-knees-sources-1",
+  "archive_url": "https://physionet.org/files/multimodal-gait-dataset/1.0.0/Dataset/IMU_Data/IMU.tar.gz",
+  "archive_sha256": "70ebdfee244c78c5726ec99be7864b99629c0b1eb02a66a558a625fd095b06b2",
+  "columns": [
+    "Right Hip Flexion/Extension",
+    "Left Hip Flexion/Extension",
+    "Right Knee Flexion/Extension",
+    "Left Knee Flexion/Extension",
+    "Right Ankle Dorsiflexion/Plantarflexion",
+    "Left Ankle Dorsiflexion/Plantarflexion"
+  ],
+  "frame_column": "Frame",
+  "members": [
+    {
+      "path": "IMU_S1_0.5/Joint_Angles_ZXY.csv",
+      "subject": 1,
+      "split": "train",
+      "sha256": "bb95ba46283a82f465d84048147dabc05ae16d4fa29a874ee37cd82cc4e6325d",
+      "rows": 3620,
+      "eligible_windows": 3581
+    },
+    {
+      "path": "IMU_S2_0.5/Joint_Angles_ZXY.csv",
+      "subject": 2,
+      "split": "train",
+      "sha256": "daa4c1917affedb6e2be3b30a193062b6970fa742643dacf51de3b92fba0e34b",
+      "rows": 4267,
+      "eligible_windows": 4228
+    },
+    {
+      "path": "IMU_S3_0.5/Joint_Angles_ZXY.csv",
+      "subject": 3,
+      "split": "train",
+      "sha256": "4c03c1cb7007582df0574a70a8724a9393ce58be256f06b4b145c9f5e00490a5",
+      "rows": 4055,
+      "eligible_windows": 4016
+    },
+    {
+      "path": "IMU_S4_0.5/Joint_Angles_ZXY.csv",
+      "subject": 4,
+      "split": "train",
+      "sha256": "b75b7a173d0a7a7335319c58e11b5ebdd80358de514964bfae98fd0698b785a8",
+      "rows": 3605,
+      "eligible_windows": 3566
+    },
+    {
+      "path": "IMU_S5_0.5/Joint_Angles_ZXY.csv",
+      "subject": 5,
+      "split": "train",
+      "sha256": "243323298970450eceec25fa5e99e67cab8bbacd4f4c2ebcc8ddc446a8152c7f",
+      "rows": 3607,
+      "eligible_windows": 3568
+    },
+    {
+      "path": "IMU_S6_0.5/Joint_Angles_ZXY.csv",
+      "subject": 6,
+      "split": "train",
+      "sha256": "241503d49f43e9e3e4cd7b093ccda70d70cfa7c002a8d9e17083c222b2b9d998",
+      "rows": 3606,
+      "eligible_windows": 3567
+    },
+    {
+      "path": "IMU_S7_0.5/Joint_Angles_ZXY.csv",
+      "subject": 7,
+      "split": "train",
+      "sha256": "d0869bb9f5142ec83e5e69eb9a895191ed72ad9fab96f715abe97a1c5c074741",
+      "rows": 3607,
+      "eligible_windows": 3568
+    },
+    {
+      "path": "IMU_S8_0.5/Joint_Angles_ZXY.csv",
+      "subject": 8,
+      "split": "train",
+      "sha256": "9e35ad2e744d19519e4670b9007120c391b919124964247fede6b512441bec1f",
+      "rows": 3602,
+      "eligible_windows": 3563
+    },
+    {
+      "path": "IMU_S9_0.5/Joint_Angles_ZXY.csv",
+      "subject": 9,
+      "split": "train",
+      "sha256": "d252f9d88dc349cdafd086f0431732de69c242091586ce1608cf5939fa80e7d4",
+      "rows": 3605,
+      "eligible_windows": 3566
+    },
+    {
+      "path": "IMU_S10_0.5/Joint_Angles_ZXY.csv",
+      "subject": 10,
+      "split": "train",
+      "sha256": "69cb2c272ad7cec76d7028a6acf5b07bc6b7be0ac4b4e769dea7d265cf61c1c2",
+      "rows": 3603,
+      "eligible_windows": 3564
+    },
+    {
+      "path": "IMU_S11_0.5/Joint_Angles_ZXY.csv",
+      "subject": 11,
+      "split": "train",
+      "sha256": "08d30ab05502d37d34ab85b427aa00c0940931b6a2aec0b2b8558a05d771d851",
+      "rows": 3604,
+      "eligible_windows": 3565
+    },
+    {
+      "path": "IMU_S12_0.5/Joint_Angles_ZXY.csv",
+      "subject": 12,
+      "split": "train",
+      "sha256": "66eb4e5d0f218e1afa2a8515cf7bf4ab27836ac44e131b3e4043886f5b3e5e90",
+      "rows": 3606,
+      "eligible_windows": 3567
+    },
+    {
+      "path": "IMU_S13_0.5/Joint_Angles_ZXY.csv",
+      "subject": 13,
+      "split": "train",
+      "sha256": "1ed0d9b89051dd50dff7a56ba88d92176d1b4e78995e03531e5c2dab10e30f90",
+      "rows": 3607,
+      "eligible_windows": 3568
+    },
+    {
+      "path": "IMU_S14_0.5/Joint_Angles_ZXY.csv",
+      "subject": 14,
+      "split": "train",
+      "sha256": "75a272619965915c42c2feca27fa333b0e49e8f4edef014c853e78465bac73e0",
+      "rows": 3603,
+      "eligible_windows": 3564
+    },
+    {
+      "path": "IMU_S15_0.5/Joint_Angles_ZXY.csv",
+      "subject": 15,
+      "split": "train",
+      "sha256": "914b5505ac69f0637d87e435a055513c37646729c81471310817a2d11c4e3d34",
+      "rows": 3602,
+      "eligible_windows": 3563
+    },
+    {
+      "path": "IMU_S16_0.5/Joint_Angles_ZXY.csv",
+      "subject": 16,
+      "split": "train",
+      "sha256": "e56225abc6fa1ef55dd0b208032175785c3f86d27028e3afe389b82a927315c6",
+      "rows": 3606,
+      "eligible_windows": 3567
+    },
+    {
+      "path": "IMU_S17_0.5/Joint_Angles_ZXY.csv",
+      "subject": 17,
+      "split": "train",
+      "sha256": "533e6a2907eb09501a62776e616c88990923b852ebc9d579a91174c0de7bb7fc",
+      "rows": 3605,
+      "eligible_windows": 3566
+    },
+    {
+      "path": "IMU_S18_0.5/Joint_Angles_ZXY.csv",
+      "subject": 18,
+      "split": "train",
+      "sha256": "0d32e41266356703f3fcaacd0fd2ded63d6d9e321951d50e9affab80d3f40285",
+      "rows": 3602,
+      "eligible_windows": 3563
+    },
+    {
+      "path": "IMU_S19_0.5/Joint_Angles_ZXY.csv",
+      "subject": 19,
+      "split": "train",
+      "sha256": "f0a9704ef0fab8db8c5827ae034563197bb8ba1cb991a5859094f50eb31ce432",
+      "rows": 3603,
+      "eligible_windows": 3564
+    },
+    {
+      "path": "IMU_S20_0.5/Joint_Angles_ZXY.csv",
+      "subject": 20,
+      "split": "train",
+      "sha256": "16c0162855b8cef7fc9c70f1dd2b79f819fc33fa6042bc2a8999cf3efbd685a8",
+      "rows": 3603,
+      "eligible_windows": 3564
+    },
+    {
+      "path": "IMU_S21_0.5/Joint_Angles_ZXY.csv",
+      "subject": 21,
+      "split": "train",
+      "sha256": "4ff5c056cabd421d3de1e2221a05767387e10f32169a90e282a28757ab7e2ed5",
+      "rows": 3602,
+      "eligible_windows": 3563
+    },
+    {
+      "path": "IMU_S22_0.5/Joint_Angles_ZXY.csv",
+      "subject": 22,
+      "split": "train",
+      "sha256": "7393e42609557e5576028ac80b21529c828206a7166454ff23bb7e1587c92beb",
+      "rows": 3607,
+      "eligible_windows": 3568
+    },
+    {
+      "path": "IMU_S23_0.5/Joint_Angles_ZXY.csv",
+      "subject": 23,
+      "split": "train",
+      "sha256": "bb0443298db4c76e1f1b0bd9efbbcf074a9889fa2a75dc707d7cfeb0acaafd92",
+      "rows": 3606,
+      "eligible_windows": 3567
+    },
+    {
+      "path": "IMU_S25_0.5/Joint_Angles_ZXY.csv",
+      "subject": 25,
+      "split": "train",
+      "sha256": "e512efaeae8c4aa9fe5ab1eae9fdff24e9a5086c4610099b5a1aa58f039b96cc",
+      "rows": 3603,
+      "eligible_windows": 3564
+    },
+    {
+      "path": "IMU_S26_0.5/Joint_Angles_ZXY.csv",
+      "subject": 26,
+      "split": "train",
+      "sha256": "318f08a2ac84d61e2c1c9f012c7633e29285e8b0468a82f976f1f9b6aec38434",
+      "rows": 3607,
+      "eligible_windows": 3568
+    },
+    {
+      "path": "IMU_S27_0.5/Joint_Angles_ZXY.csv",
+      "subject": 27,
+      "split": "train",
+      "sha256": "a5f3dbd456b3e4790f559132e8b4f1025b61e42bd3da3c530836b15d3af4840e",
+      "rows": 3602,
+      "eligible_windows": 3563
+    },
+    {
+      "path": "IMU_S28_0.5/Joint_Angles_ZXY.csv",
+      "subject": 28,
+      "split": "train",
+      "sha256": "718d0d8ba5093055c44d723b36ae9b5be0dfb238e347bf2d358d1dfc5327e3dc",
+      "rows": 3604,
+      "eligible_windows": 3565
+    },
+    {
+      "path": "IMU_S29_0.5/Joint_Angles_ZXY.csv",
+      "subject": 29,
+      "split": "train",
+      "sha256": "1a15113039609397725e130bf0ad70667138f88fae97f4e32de40c89bd0c0108",
+      "rows": 3607,
+      "eligible_windows": 3568
+    },
+    {
+      "path": "IMU_S30_0.5/Joint_Angles_ZXY.csv",
+      "subject": 30,
+      "split": "train",
+      "sha256": "adc1f87c2eac0d1b5ba146e62b17ba8492efd7943c03c51e81b4916c2b9ac7fd",
+      "rows": 3607,
+      "eligible_windows": 3568
+    },
+    {
+      "path": "IMU_S31_0.5/Joint_Angles_ZXY.csv",
+      "subject": 31,
+      "split": "train",
+      "sha256": "9342b229b446955f743799143c380d6da17474164f36adcfb104f43173d18b1e",
+      "rows": 3602,
+      "eligible_windows": 3563
+    },
+    {
+      "path": "IMU_S32_0.5/Joint_Angles_ZXY.csv",
+      "subject": 32,
+      "split": "train",
+      "sha256": "2eb4b37d6f5913c694c6b292f6e36fc848f2886a460eac7522d2ece2cd92782b",
+      "rows": 3608,
+      "eligible_windows": 3569
+    },
+    {
+      "path": "IMU_S33_0.5/Joint_Angles_ZXY.csv",
+      "subject": 33,
+      "split": "train",
+      "sha256": "9699c2be2b1394b8e8f20a0d9f9823b9a22edb44b7ed695af6e896cafc65e1d4",
+      "rows": 3603,
+      "eligible_windows": 3564
+    },
+    {
+      "path": "IMU_S34_0.5/Joint_Angles_ZXY.csv",
+      "subject": 34,
+      "split": "train",
+      "sha256": "ac1aaedf8cc5c4d1dae73808c6894da1eae34f70494bb40f43a9715a74c2f21d",
+      "rows": 3602,
+      "eligible_windows": 3563
+    },
+    {
+      "path": "IMU_S35_0.5/Joint_Angles_ZXY.csv",
+      "subject": 35,
+      "split": "train",
+      "sha256": "ebebf082c848804469cc208359365079a8563526e168450ec1cc76e44990d6aa",
+      "rows": 3607,
+      "eligible_windows": 3568
+    },
+    {
+      "path": "IMU_S36_0.5/Joint_Angles_ZXY.csv",
+      "subject": 36,
+      "split": "train",
+      "sha256": "bba241b47f25de4821adbb2cf418c62f8f9fad1ca178bbb0848890f22cb450e6",
+      "rows": 3607,
+      "eligible_windows": 3568
+    },
+    {
+      "path": "IMU_S37_0.5/Joint_Angles_ZXY.csv",
+      "subject": 37,
+      "split": "train",
+      "sha256": "cb52b5f400bdff5e38b7b67e332a43ef0f8f5f4c56323df6e84ce134c8a3f61b",
+      "rows": 3605,
+      "eligible_windows": 3566
+    },
+    {
+      "path": "IMU_S38_0.5/Joint_Angles_ZXY.csv",
+      "subject": 38,
+      "split": "train",
+      "sha256": "1972f959300960faa50be8d8c02f7bae88fa3a7859b48e123058b8b4fe01b9f3",
+      "rows": 3605,
+      "eligible_windows": 3566
+    },
+    {
+      "path": "IMU_S39_0.5/Joint_Angles_ZXY.csv",
+      "subject": 39,
+      "split": "train",
+      "sha256": "8d8713de07bc1f79579d3968a28cc8ad22306f0af71514621e89f2d2431d9dc3",
+      "rows": 3601,
+      "eligible_windows": 3562
+    },
+    {
+      "path": "IMU_S40_0.5/Joint_Angles_ZXY.csv",
+      "subject": 40,
+      "split": "train",
+      "sha256": "beff1e72267861fbf1864074d273fc8222bfcdb1dbb8acbfff4eb434e770f838",
+      "rows": 3607,
+      "eligible_windows": 3568
+    },
+    {
+      "path": "IMU_S41_0.5/Joint_Angles_ZXY.csv",
+      "subject": 41,
+      "split": "test",
+      "sha256": "ae6b484863ff956b50542580644d7daa60bc4bd9b0b727e25a4ee20f37d1309f",
+      "rows": 3605,
+      "eligible_windows": 3566
+    },
+    {
+      "path": "IMU_S42_0.5/Joint_Angles_ZXY.csv",
+      "subject": 42,
+      "split": "test",
+      "sha256": "ecca40a8d82f97ee86cbfe4a68190c7b8ae31b8d0835754da7cfa90647de1fa2",
+      "rows": 3604,
+      "eligible_windows": 3565
+    },
+    {
+      "path": "IMU_S43_0.5/Joint_Angles_ZXY.csv",
+      "subject": 43,
+      "split": "test",
+      "sha256": "bf652f54b3c6c7dbf68ca6ef5c7323972e460708e732e3733c04697304864038",
+      "rows": 3607,
+      "eligible_windows": 3568
+    },
+    {
+      "path": "IMU_S44_0.5/Joint_Angles_ZXY.csv",
+      "subject": 44,
+      "split": "test",
+      "sha256": "247c0ac6759d6f5707305fd24441ff06addd4ec58f2ab4729cb290cbef3d0c52",
+      "rows": 3601,
+      "eligible_windows": 3562
+    },
+    {
+      "path": "IMU_S45_0.5/Joint_Angles_ZXY.csv",
+      "subject": 45,
+      "split": "test",
+      "sha256": "ebd8b9ab402ad0bc9e06e5e4b312450101d3fd37054a6a63ec91b6cf01ca81ce",
+      "rows": 3602,
+      "eligible_windows": 3563
+    },
+    {
+      "path": "IMU_S46_0.5/Joint_Angles_ZXY.csv",
+      "subject": 46,
+      "split": "test",
+      "sha256": "a7e27b8e658119241ad102962ec4cbb2dfa158c8d98c9633964aa8e026eed1a0",
+      "rows": 3607,
+      "eligible_windows": 3568
+    },
+    {
+      "path": "IMU_S47_0.5/Joint_Angles_ZXY.csv",
+      "subject": 47,
+      "split": "test",
+      "sha256": "9c1a16ef97266b46ee4b07d442406ef962690aae8820323e596b5eaa72a2a7f3",
+      "rows": 3603,
+      "eligible_windows": 3564
+    },
+    {
+      "path": "IMU_S48_0.5/Joint_Angles_ZXY.csv",
+      "subject": 48,
+      "split": "test",
+      "sha256": "4fae193f5086d76a9b9905a89761295bda59540f67c04a91b2ccc404b29146aa",
+      "rows": 3602,
+      "eligible_windows": 3563
+    },
+    {
+      "path": "IMU_S49_0.5/Joint_Angles_ZXY.csv",
+      "subject": 49,
+      "split": "test",
+      "sha256": "8702ff9fd4e3a832a17378bbd3ed81b8bcc8e5881351be852665b57ff3f34fb0",
+      "rows": 3602,
+      "eligible_windows": 3563
+    },
+    {
+      "path": "IMU_S50_0.5/Joint_Angles_ZXY.csv",
+      "subject": 50,
+      "split": "test",
+      "sha256": "3874e0e7b02eb1bed0c208f7b3dfa53d29ede0df5d947016277395390f986b15",
+      "rows": 3606,
+      "eligible_windows": 3567
+    },
+    {
+      "path": "IMU_S51_0.5/Joint_Angles_ZXY.csv",
+      "subject": 51,
+      "split": "test",
+      "sha256": "7c29c09c73fd54a584d7e31bdaff26c09a0649f344028485235a660ceb262f99",
+      "rows": 3602,
+      "eligible_windows": 3563
+    },
+    {
+      "path": "IMU_S52_0.5/Joint_Angles_ZXY.csv",
+      "subject": 52,
+      "split": "test",
+      "sha256": "1e1544fe36753e4d8f9aedfc6d6dad31a8516d3fdea6608736e74144c6813b7c",
+      "rows": 3608,
+      "eligible_windows": 3569
+    }
+  ]
+}

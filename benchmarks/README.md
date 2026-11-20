@@ -383,7 +383,11 @@ These were published after the table was made. Each has its own plan and results
 
 A four-page supplement reports the two searches with words together: [*How precisely do words identify a recorded movement?*](../docs/papers/language-and-observed-movement/README.md) It is separate from the two papers, and neither paper's current draft contains these studies.
 
-## Four more studies of recorded movement
+## Five more studies of recorded movement
+
+### Can four seconds of walking beat the last stride?
+
+Three forecasts were given the same 240 earlier readings of both knees, four seconds at 60 Hz, and asked for both angles 15 frames later: copying the matching moment of the previous stride, that copy with a straight-line correction, and that copy with a correction from a small transformer trained for the knees. The corrections were fitted on 39 walkers. On 40,201 forecasts from the 12 walkers of the 15-frame forecast below, they missed by 3.535°, 3.411° and 2.679° on average, and the transformer was closer than both for every one of the 12. Those walkers were kept out of fitting, but their earlier results were known when this comparison was designed. The general model, its shared part left as it was and a new final step fitted for the knees, missed by 3.465°: no better than the same final step without the shared part (3.460°), and a copy with its shared part scrambled did better (3.422°). [Fitted model, every comparison and source](../models/knee-stride/) · [The general model's knee task](../models/neurotranslate-0.0/knee/) · [Compare the forecasts](https://eliminatenoise.github.io/NeuroTranslation/knee-stride/)
 
 ### Do the muscles and knees repeat at the same rate?
 

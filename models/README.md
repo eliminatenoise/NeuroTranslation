@@ -1,6 +1,8 @@
 # NeuroTranslate 0.0
 
-One fitted checkpoint forecasts tracked movement distance in centimetres and two right-wrist angles in degrees. It now accepts a fourth input format for recordings from a rat on a W-shaped track. Give it five earlier tracking points and, optionally, a second of firing counts from two brain regions. The movement encoder first reads the changes in position. A separate fitted calculation pairs the firing in each interval with the movement state from that interval. [Download the CPU model](neurotranslate-0.0.zip) · [Input examples and methods](neurotranslate-0.0/)
+The current checkpoint also forecasts both knees 15 frames ahead from four seconds of walking. [Run the knee example](neurotranslate-0.0/knee/) · [Compare forecasts](https://eliminatenoise.github.io/NeuroTranslation/knee-stride/)
+
+The same checkpoint forecasts tracked movement distance in centimetres, two right-wrist angles in degrees and displacement on a rat’s W-shaped track. Give it five earlier tracking points and, optionally, a second of firing counts from two brain regions. The movement encoder first reads the changes in position. A separate fitted calculation pairs the firing in each interval with the movement state from that interval. [Download the CPU model](neurotranslate-0.0.zip) · [Input examples and methods](neurotranslate-0.0/)
 
 The movement viewer compares right-wrist angles with different combinations of movement, forearm and scalp input, and still runs the two original distance forecasts. The cross-animal track viewer lets you choose the direct linear benchmark or the shared movement encoder at the same forecast cutoff. [Wrist and distance viewer](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/) · [Track recording and both model families](https://eliminatenoise.github.io/NeuroTranslation/population-motion/)
 
@@ -9,6 +11,10 @@ The movement viewer compares right-wrist angles with different combinations of m
 ### What did firing add to the shared model?
 
 On the same 549 forecast instants compared in the linear benchmark, the shared movement model had an average error of **2.805 cm** with movement alone and **2.778 cm** with correctly timed CA1 and prefrontal firing. Substituting firing from an earlier trip gave **2.804 cm**. Only one of three rats improved over both controls. A comparison with scrambled movement-encoder weights scored **2.763 cm** with firing. These results establish that the fitted readout uses the firing signal. They give no evidence here that pretraining improved this forecast. A lower average error can hide a worse result in an individual animal. [Study and per-animal results](neurotranslate-0.0/population/)
+
+## Compare the same four seconds of knee movement
+
+An earlier stride supplies the starting answer. A correction trained specifically for the knees averaged 2.679° of error, against 3.535° for stride replay. The new knee output on the shared movement model gave 3.465°. Both evaluations used the same 12 previously studied walkers. [Task-trained model](knee-stride/) · [Download the standalone predictor](knee-stride-model.zip) · [Offline reader](knee-stride.zip) · [Reader source](knee-stride-source.zip)
 
 ## Do the muscles and knees repeat at the same rate?
 
