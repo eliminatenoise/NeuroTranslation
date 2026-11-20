@@ -10,7 +10,7 @@ The study numbers are those of [the studies page](../benchmarks/README.md).
 
 ### EEG-EMG-WristMotion Dataset, version 3
 
-Studies 1 to 3 and 28, row 29, the wrist trial example, and the browser copy of study 28's models. Recorded and shared by Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz, under CC BY 4.0.
+Studies 1 to 3 and 28, row 29, the wrist trial example, the browser copy of study 28's models, and the wrist-angle path of the general model's shared fit ([`models/neurotranslate-0.0/`](../models/neurotranslate-0.0/)). Recorded and shared by Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz, under CC BY 4.0.
 
 Changed here: pointing trials were selected, the encoder angles decoded, and motion, EEG and forearm EMG features derived for the models. Study 28 publishes its three fitted models, with the scales taken from the recordings, and [`interfaces/paired-wrist-browser/`](../interfaces/paired-wrist-browser/README.md) repacks the same fitted numbers for a web browser: all of them keep this credit and the dataset's CC BY 4.0 terms.
 
