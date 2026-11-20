@@ -102,9 +102,9 @@
     <ul class="tiles recordings">
       <li>
         <article aria-labelledby="shared-movement-title">
-          <p class="source">One movement model · Five kinds of forecast</p>
-          <h3 id="shared-movement-title">Forecast movement distance, a wrist angle, both knees or the turning at the knees</h3>
-          <p>Forecast how far a tracked wrist or rat will move in about a quarter of a second, the two angles of a wrist from its movement, forearm and scalp readings, both knees of a walker from four seconds of knee angles, or how hard the forces around each knee push it to bend or straighten (its turning moment) from four seconds of leg angles. See how much four forearm electrodes change the angle forecast from the same wrist movement. Start from an invented example (the rat also has one recorded trip), or enter your own measurements. All five tasks run on one shared model, with a small first and last step of their own; the knee-moment version trained for its task has its own copy of the shared model. On the recordings, its distance forecast missed by 1.725 cm for the wrist and 1.310 cm for the rat; for the wrist’s angles and for the knees’ angles, models made for each did better.</p>
+          <p class="source">One movement model · Eight kinds of forecast</p>
+          <h3 id="shared-movement-title">Forecast a wrist, a rat, both knees, the force under a foot, one marker on the skin or an arm after a cue</h3>
+          <p>Forecast how far a tracked wrist or rat will move in about a quarter of a second, the two angles of a wrist from its movement, forearm and scalp readings, both knees of a walker from four seconds of knee angles, how hard the forces around each knee push it to bend or straighten (its turning moment) from four seconds of leg angles, the force under a walker’s right foot, where one marker on a walking body will be 200 milliseconds later from nine earlier positions, or how three sensors on an arm will change after an instruction such as “bend my right elbow”. See how much four forearm electrodes change the angle forecast from the same wrist movement. Start from an invented example (the rat also has one recorded trip), or enter your own measurements. All eight tasks run on one shared model, each with its own input and output; the knee-moment version trained for its task has its own copy of the shared model. On the recordings, its distance forecast missed by 1.725 cm for the wrist and 1.310 cm for the rat; for the wrist’s angles and for the knees’ angles, models made for each did better, and for the force under the foot, the single marker and the arm, simpler forecasts did.</p>
           <ul class="links">
             <li><a class="primary" href="shared-motion/">Open the shared model</a></li>
             <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models">The model, its comparison and a download</a></li>
@@ -208,6 +208,20 @@
         </article>
       </li>
       <li>
+        <article aria-labelledby="cued-arm-title">
+          <p class="source">Ofner and colleagues · A right arm moving on cue, with scalp recordings</p>
+          <h3 id="cued-arm-title">What does the arm cue already tell us?</h3>
+          <p>One seated person saw a picture asking for one of six movements of the right arm and hand, or for rest. On the general model’s page, type an instruction such as “bend my right elbow” and see how it expects three sensors, at the elbow, the turn of the forearm and the index finger, to change; on a second page, ask whether a scalp electrode helps forecast the elbow. In the recorded trials, a model that knew only the cue beat the general model, and adding the scalp electrode made the elbow forecast worse.</p>
+          <ul class="links">
+            <li><a class="primary" href="shared-motion/index.html#cued-arm">Type an instruction and forecast three sensor readings</a></li>
+            <li><a href="elbow-cue/index.html">Compare the elbow forecast with and without scalp input</a></li>
+            <li><a href="elbow-cue-offline.zip" download>Download the elbow experiment</a></li>
+            <li><a href="papers/cued-arm/index.html">Read the study and see the recorded results</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/scalp-and-arm/">Find the sensors in the Interoceptomics atlas</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
         <article aria-labelledby="knee-stride-title">
           <p class="source">Katmah and colleagues · Treadmill joint angles</p>
           <h3 id="knee-stride-title">Can four seconds of walking beat the last stride?</h3>
@@ -254,6 +268,20 @@
             <li><a href="shared-motion/index.html#right-plate">Try the shared model on the plate under the right foot</a></li>
             <li><a href="papers/muscle-and-floor/">Read the walking-force study</a></li>
             <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/walking-force.zip">Download the two-plate viewer for offline use</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="walking-landmarks-title">
+          <p class="source">Schreiber and Moissenet · Skin markers in overground walking</p>
+          <h3 id="walking-landmarks-title">Where does a step carry the ankles, knees and wrists?</h3>
+          <p>Cameras tracked small markers on the skin of people walking slowly. One experiment forecast six marker positions together, at both ankles, knees and wrists: turn an invented walker in 3D and compare each forecast with where its marker goes. Another, a task of the general model, followed one point at a time, then tried the same rule at 46 new places on the body. Both looked a fifth of a second ahead on the processed recordings, and in both a simpler forecast did best: in the first, a straight-line fit given the markers alone; in the second, a look-up of similar paths among the training examples.</p>
+          <ul class="links">
+            <li><a class="primary" href="walking-landmarks/index.html">Try the six-point forecast on an invented walker</a></li>
+            <li><a href="shared-motion/index.html#point-motion">Give the shared model nine positions from one marker</a></li>
+            <li><a href="papers/walking-landmarks/index.html">Read the two walking-marker experiments</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/stride-signals/">Follow the measured travel of a marker in Interoceptomics</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/walking-landmarks.zip">Download the six-point viewer for offline use</a></li>
           </ul>
         </article>
       </li>
@@ -459,9 +487,11 @@
 
   <section class="support" id="papers" aria-labelledby="papers-title">
     <h2 id="papers-title">Two papers, each written twice</h2>
-    <p>Two working drafts, each in a Technical and a Simple English edition. Nobody outside the project has reviewed them. Every result in them comes from stored recordings, and nothing is live. They report every study of the numbered table, the general model’s first five fits among them. What came after them is not in them: the general model’s shared fit, the studies published after the numbered table, the walk/run generator, the knee forecasts, the rhythm comparison and the knee turning moments, the three finger studies, the walking-force study and the general model’s right-foot task, and the separate supplements on them.</p>
+    <p>Two working drafts, each in a Technical and a Simple English edition. Nobody outside the project has reviewed them. Every result in them comes from stored recordings, and nothing is live. They report every study of the numbered table, the general model’s first five fits among them. What came after them is not in them: the general model’s shared fit, the studies published after the numbered table, the walk/run generator, the knee forecasts, the rhythm comparison and the knee turning moments, the three finger studies, the walking-force, walking-marker and elbow studies, the general model’s right-foot, single-marker and cued-arm tasks, and the separate supplements on them.</p>
     <p><a href="papers/language-and-observed-movement/language-and-movement.html">How precisely do words identify a recorded movement?</a> A separate four-page supplement, not one of the two papers, on the two studies that search recordings of movement with words, one of the whole body and one of the hand. <a href="papers/language-and-observed-movement/language-and-movement.pdf">Open the PDF.</a></p>
     <ul class="links">
+      <li><a href="papers/cued-arm/index.html">What does the arm cue already tell us?</a>, a four-page supplement on the elbow study and the general model’s cued-arm task · <a href="papers/cued-arm/cued-arm.pdf">Download the PDF</a></li>
+      <li><a href="papers/walking-landmarks/index.html">Where will the wrist be in a fifth of a second?</a>, a four-page supplement on the walking-marker study and the general model’s single-marker task · <a href="papers/walking-landmarks/walking-landmarks.pdf">Download the PDF</a></li>
       <li><a href="papers/muscle-and-floor/">One stride, two force plates</a>, a four-page supplement on the walking-force study and the general model’s right-foot task · <a href="papers/muscle-and-floor/muscle-and-floor.pdf">Download the PDF</a></li>
       <li><a href="papers/current/">Read the four current drafts, and find each study in them</a></li>
       <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers">Paper files, notices and source</a></li>
