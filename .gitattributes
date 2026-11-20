@@ -74,3 +74,16 @@ models/arm-transfer/*.cmd whitespace=cr-at-eol
 docs/arm-transfer/CC-BY-4.0.txt whitespace=-blank-at-eof
 models/arm-transfer/CC-BY-4.0.txt whitespace=-blank-at-eof
 models/neurotranslate-0.0/arm-transfer/CC-BY-4.0.txt whitespace=-blank-at-eof
+
+docs/scalp-forecast/** -text
+models/scalp-forecast/** -text
+models/neurotranslate-0.0/scalp-residual/** -text
+docs/papers/scalp-forecast/** -text
+docs/scalp-forecast/*.cmd whitespace=cr-at-eol
+models/scalp-forecast/*.cmd whitespace=cr-at-eol
+
+# Preserve the trailing lines of the supplied study results and original licences.
+docs/scalp-forecast/CC-BY-4.0.txt whitespace=-blank-at-eof
+models/neurotranslate-0.0/scalp-residual/CC-BY-4.0.txt whitespace=-blank-at-eof
+models/scalp-forecast/CC-BY-4.0.txt whitespace=-blank-at-eof
+models/scalp-forecast/RESULTS.md whitespace=-blank-at-eof

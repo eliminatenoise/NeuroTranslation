@@ -29,3 +29,7 @@ Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz (2017) 
 ## Across-person right-arm forecasts
 
 The group-arm readouts, cue medians and scores derive from Ofner, Schwarz, Pereira and Müller-Putz’s 2017 recordings (Zenodo 834976, CC BY 4.0). We fitted on execution runs 1–3 from S1–S7 and tested on the same numbered runs from S8–S12. The last three people remained reserved. This edition adds a pooled fit, a test of sensor starting levels, and a method for personal corrections made with earlier recordings. [Original data](https://doi.org/10.5281/zenodo.834976) · [Methods and reuse](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/arm-transfer)
+
+## Early electrical recordings and arm readings
+
+Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz (2017) released *Upper limb movements can be decoded from the time-domain of low-frequency EEG* under CC BY 4.0. This analysis uses task categories, four bins of scalp and eye readings, and mechanical arm and hand readings. We fitted robust corrections in seven people and assessed them on five previously unopened fourth execution runs. Their fitted coefficients and numerical summaries retain the source attribution requirement. [Original data](https://doi.org/10.5281/zenodo.834976) · [Acquisition paper](https://doi.org/10.1371/journal.pone.0182578) · [Methods and licence](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/scalp-residual)

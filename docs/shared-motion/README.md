@@ -1,5 +1,7 @@
 # What can past movement predict?
 
+Choose **Cued right arm**, then **Early scalp and arm study**. Change the method or edit the early measurements. The chart compares each forecast against the typical response for the cue on the same sensor’s scale. The table compares errors on actual trials. [Protocol and outcomes](../../models/neurotranslate-0.0/scalp-residual/README.md)
+
 Choose **Cued right arm**, then **Training group · transfer study** to run the cross-person fit. The group cue median needs only the instruction. The optional first-run method reads a correction profile kept locally. [Make a profile and inspect the held-person results](../../models/neurotranslate-0.0/arm-transfer/README.md)
 
 Choose **Cued right arm**, enter one of the seven listed instructions and inspect the forecast differences in three sensors at three future times. Press F to focus the instruction box. On browsers with on-device English dictation, the microphone button fills in the words for review. Press Enter to run the forecast. The dropdown compares seven methods on invented or supplied sensor bins. [On-device speech specification](https://webaudio.github.io/web-speech-api/#dom-speechrecognition-processlocally) [Task vocabulary and evaluation](../../models/neurotranslate-0.0/cued-arm/README.md)

@@ -1,5 +1,7 @@
 # Forecast movement from one recording
 
+Run `node predict.mjs early-example.json` to forecast changes from early electrical and mechanical measurements. The new domain `early_signal_change` accepts eight methods. For an example with only arm and scalp measurements, set `mode` to `scalp` and omit the eye rows. [Input fields and comparisons](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/scalp-residual)
+
 Run `node predict.mjs group-arm-example.json` to try the shared group model with an invented first-run correction. Use `domain: "group_arm_change"` for the group methods. `cue_median` needs only a cue; `calibrated_shared` also needs a model-matched profile for that cue. [Full inputs and scores](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/arm-transfer)
 
 Run `node predict.mjs arm-example.json` to forecast three instrument readings after one of seven right-arm cues. The new record uses `domain: "cued_arm_change"`. Methods can take a cue, four bins of sensor readings, or both. [Input schema, source, units and results](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/cued-arm)

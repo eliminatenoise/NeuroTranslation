@@ -35,6 +35,8 @@ def main():
     spatial = json.loads(verified(args.runtime, "examples.json"))
     rat = spatial["domain"].index("rat")
     data["inventedRat"] = spatial["x"][rat]
+    data["earlyExample"] = json.loads(verified(args.runtime, "early-example.json"))
+    data["earlyScores"] = json.loads(verified(args.runtime, "early-scores.json"))
     data["groupArmExample"] = json.loads(verified(args.runtime, "group-arm-example.json"))
     data["groupArmScores"] = json.loads(verified(args.runtime, "group-arm-scores.json"))
     data["armExample"] = json.loads(verified(args.runtime, "arm-example.json"))

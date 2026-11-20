@@ -1228,5 +1228,24 @@
     "atlas": "https://eliminatenoise.github.io/Interoceptomics/scalp-and-arm/",
     "source_doi": "10.5281/zenodo.834976",
     "domain": "Supported right-arm movement after one of seven visual cues, first three execution runs from seven fitting and five assessment participants at one site. Targets are changes in three uncalibrated instrument readings."
+  },
+  "scalp_forecast": {
+    "version": "2026-11-21 experimental preview",
+    "source_doi": "10.5281/zenodo.834976",
+    "specialist": "models/scalp-forecast/README.md",
+    "specialist_scores": "models/scalp-forecast/assessment-summary.json",
+    "specialist_zip": "models/scalp-forecast-model.zip",
+    "viewer": "docs/scalp-forecast/index.html",
+    "offline_viewer": "docs/scalp-forecast-offline.zip",
+    "shared_model": "models/neurotranslate-0.0/scalp-residual/README.md",
+    "shared_scores": "models/neurotranslate-0.0/scalp-residual/results.json",
+    "shared_viewer": "docs/shared-motion/index.html#early-signals",
+    "shared_cpu": "models/neurotranslate-0.0.zip",
+    "shared_browser": "models/movement-browser.zip",
+    "paper": "docs/papers/scalp-forecast/index.html",
+    "paper_pdf": "docs/papers/scalp-forecast/scalp-forecast.pdf",
+    "paper_sources": "docs/papers/scalp-forecast/scalp-forecast-source.zip",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/scalp-and-arm/",
+    "domain": "Supported right-arm movement after a visual cue at one site. Three early movement channels, six scalp electrodes and three eye measurements. Seven people supplied three fitting runs each. Five other people supplied their fourth run for assessment. Outcomes are changes in three uncalibrated instrument readings."
   }
 }

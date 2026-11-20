@@ -61,7 +61,22 @@
 </div>
 <div id="arm-controls" hidden="">
 <label for="arm-fit">Whose recordings supplied the fit?</label><select id="arm-fit">
-<option value="single">One person · original study</option><option value="group">Training group · transfer study</option></select>
+<option value="single">One person · original study</option><option value="group">Training group · transfer study</option><option value="signals">Early scalp and arm study</option></select>
+<div id="early-controls" hidden>
+<label for="early-method">Which readings enter the forecast?</label>
+<select id="early-method"><option value="joint">Arm, eyes and scalp after eye adjustment</option>
+<option value="scalp">Arm and scalp</option><option value="eye">Arm and eyes</option><option value="residual_scalp">Arm and eye-adjusted scalp</option>
+<option value="mechanics">Arm only · fitted correction</option><option value="cue_median">Typical response to the cue</option>
+<option value="previous_shared">Earlier shared arm encoder</option><option value="still">No change</option></select>
+<div id="early-practice"><label for="early-gain">Size of the invented electrical changes</label>
+<select id="early-gain"><option value="1">As supplied</option><option value="0">Hold each channel at its early level</option><option value="2">Double each change</option></select></div>
+<div id="early-custom" hidden>
+<div id="early-scalp-field"><label for="early-scalp">Four scalp rows · FC3, FC4, C3, C4, CP3, CP4</label><textarea rows="3" spellcheck="false" id="early-scalp"></textarea></div>
+<div id="early-eye-field"><label for="early-eyes">Four eye rows · channels 62, 63, 64</label><textarea rows="3" spellcheck="false" id="early-eyes"></textarea></div>
+<button type="button" class="secondary" id="early-fill">Fill electrical rows with invented values</button></div>
+<p class="hint">Each electrical row is the mean over 125 ms. The last row ends a quarter second after the recorded cue. The eye-adjusted method subtracts the part of the scalp pattern that a fitted linear model predicts from the eye channels.</p>
+</div>
+
 <label for="arm-method">Forecast method</label><select id="arm-method">
 <option value="cue">Action cue alone</option><option value="shared_cue_motion">Action cue and sensors, shared encoder</option><option value="shared_motion">Sensors alone, shared encoder</option>
 <option value="cue_motion">Action cue and sensors, linear</option><option value="motion">Sensors alone, linear</option><option value="shuffled_cue_motion">Action cue and sensors, shuffled encoder</option><option value="still">No change</option><option value="cue_median" hidden>Typical movement for this cue (median)</option>
@@ -160,6 +175,9 @@
 </div>
 <div id="arm-results" hidden=""><h2>Predicted changes from the last reading</h2><p id="arm-result-label"></p>
 <div style="overflow-x:auto"><table id="arm-values"><thead><tr><th>Time ahead</th><th>Elbow</th><th>Forearm rotation</th><th>Index finger</th></tr></thead><tbody></tbody></table></div>
+<div id="early-chart-panel" hidden><label for="early-sensor">Compare forecasts for one instrument</label><select id="early-sensor"><option value="0">Elbow</option><option value="1">Forearm rotation</option><option value="2">Index finger</option></select>
+<canvas id="early-chart" role="img" aria-label="Forecast and typical change over three future times"></canvas>
+<p class="hint">Orange shows the selected forecast. The dashed line shows the typical change for the same cue. Each point is a separate prediction on the selected instrument’s scale.</p></div>
 <p class="hint">Each column uses that instrument’s native scale. Its sign gives the direction of change on the sensor. Physical angle calibration is unknown.</p></div>
 <div id="point-results" hidden=""><h2>Where the point moves over the next 200 milliseconds</h2>
 <p id="point-result" aria-live="polite"></p><canvas id="point-plot" role="img" aria-label="Top and side views of the supplied marker history and forecast"></canvas><p class="hint">Blue dots trace the nine input positions. The orange diamond marks the predicted endpoint. The dashed line joins it to the last input. Both views use the same scale.</p></div>
@@ -186,6 +204,10 @@
 </div>
 </section>
 
+<section id="early-study" class="study" hidden><h2>Does the scalp recording improve the arm forecast?</h2>
+<p id="early-coverage"></p><p>The starting forecast is the typical response to the cue. The models learn corrections using earlier instrument readings. A scalp electrode can pick up signals associated with eye activity, the timing of the cue, movement and other sources. Swapping the electrical input for another repeat of the same cue checks whether the pairing with this movement matters.</p>
+<div class="table"><table><thead><tr><th scope="col">Forecast method</th><th scope="col">Paired trials</th><th scope="col">After pre-cue screen</th></tr></thead><tbody id="early-scores"></tbody></table></div>
+<p id="early-screened"></p><p>In these 210 trials, adding scalp readings to the mechanical correction reduced average error by roughly 0.0015. Swapping the scalp readings for another repeat barely changed the result. The eye-adjusted model also missed its prespecified test. No consistent scalp benefit was established.</p><p>Errors are divided by the variation in the corresponding target in the fitting group, then averaged with each person weighted equally. Smaller numbers are closer to the mechanical readings. The screen flags unusually variable electrical signals before the cue. <a href="https://eliminatenoise.github.io/NeuroTranslation/scalp-forecast/">Compare the separately trained Transformer</a> · <a href="https://eliminatenoise.github.io/Interoceptomics/scalp-and-arm/">Locate the electrodes on the recording atlas</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/scalp-residual">Source, controls and all scores</a>.</p></section>
 <section id="group-arm-study" class="study" hidden><h2>Does an earlier run help with a new person?</h2>
 <p id="group-arm-coverage"></p><p>For each trial, the model estimated nine changes: three instruments, each at three future times. The table scales each error by the variation in that target in the fitting group. A smaller number means a closer forecast.</p>
 <div class="table"><table><thead><tr><th scope="col">Forecast</th><th scope="col">New people · all runs</th><th scope="col">Same people · later runs</th></tr></thead><tbody id="group-arm-table"></tbody></table></div>
@@ -251,7 +273,7 @@
 <h3>Knee angles · CC BY 4.0</h3>
 <p>Rateb Katmah, Aamna AlShehhi, Doua Kosaji, Nour Al-Rahmani, Muhammad Abdullah, Abdul Aziz Vaqar Hulleck and Kinda Khalaf (2026), <i>A multimodal gait dataset of brain activity, muscle activity, kinematics and ground forces in young adults</i>, v1.0.0, PhysioNet. NeuroTranslation selected the two reconstructed knee angles at 0.5 m/s, fitted three corrections to a stride forecast and compared their errors. The original data and derived model parameters and results retain CC BY 4.0 attribution. <a href="https://doi.org/10.13026/r0ea-7161">Versioned dataset</a> · <a href="https://doi.org/10.1038/s44360-026-00096-z">PhysioNet platform paper</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
 <h3>Wrist angles, forearm and scalp recordings · CC BY 4.0</h3>
-<p>Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz published the <i>EEG-EMG-WristMotion Dataset</i>, version 3. NeuroTranslation derived two anchor-relative wrist angles, four bipolar forearm amplitudes and eight mean scalp voltages per time bin. The new fits use those features to estimate two absolute angles. All built-in wrist-angle inputs are invented. Retain attribution for the data, derived weights, scales and results under CC BY 4.0. The combined checkpoint has SHA-256 <code>901922e1db489a06cc3252212232b7df65784128695f86f84a751726b9f0521c</code>. <a href="https://doi.org/10.6084/m9.figshare.29666735.v3" rel="noreferrer">Version 3 dataset</a> · <a href="https://doi.org/10.1038/s41597-026-07287-z" rel="noreferrer">Study descriptor</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0</a>.</p>
+<p>Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz published the <i>EEG-EMG-WristMotion Dataset</i>, version 3. NeuroTranslation derived two anchor-relative wrist angles, four bipolar forearm amplitudes and eight mean scalp voltages per time bin. The new fits use those features to estimate two absolute angles. All built-in wrist-angle inputs are invented. Retain attribution for the data, derived weights, scales and results under CC BY 4.0. The combined checkpoint has SHA-256 <code>6a05e06ecbf0eadb4524369d9089847813763d0d2a3c1a49bdd1e4bf295e4864</code>. <a href="https://doi.org/10.6084/m9.figshare.29666735.v3" rel="noreferrer">Version 3 dataset</a> · <a href="https://doi.org/10.1038/s41597-026-07287-z" rel="noreferrer">Study descriptor</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0</a>.</p>
 <h3>Rat position data · CC BY 4.0</h3>
 <p>Justin Shin and Shantanu Jadhav, <i>Single Day W-Track Learning</i> (2024), DANDI 000978, version 0.240511.0307. We selected five past camera positions and a later measured endpoint from session 01, animal JS14, running epoch 5, training trip 55. We derived centimetre distances, timing and turn features. The forecast and derived endpoint distance are new calculations at the previously published cutoff. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/4d046b86bfa797e28f29cd4f6b8445a1f4b90487/benchmarks/wtrack-neural-motion/fitted/example.json" rel="noreferrer">Original trip example</a> · <a href="https://doi.org/10.48324/dandi.000978/0.240511.0307" rel="noreferrer">Dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0 licence</a>.</p>
 <h3>Wrist training data · CDLA Permissive 2.0</h3>
