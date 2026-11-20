@@ -2,17 +2,19 @@
 
 **What the project wrote is yours to take.** Its text and code are dedicated to the public domain under [CC0 1.0](LICENSE), as far as the project holds the rights.
 
-**The recordings are not the project's to give.** Ten open datasets carry every study here. Each belongs to the people named below, under the licence named below. The repository holds fitted models and summary results derived from those recordings, not the recordings themselves, and the credit set out here travels with them. Fetch a recording from its own archive. A file you open in a browser page stays under the terms it came with.
+**The recordings are not the project's to give.** Eleven open datasets carry every study here. Each belongs to the people named below, under the licence named below. The repository holds fitted models and summary results derived from those recordings, and two short excerpts of the recordings themselves, named below under their datasets. The credit set out here travels with all of it. Fetch a recording from its own archive. A file you open in a browser page stays under the terms it came with.
 
-## The ten datasets
+## The eleven datasets
 
 The study numbers are those of [the studies page](../benchmarks/README.md).
 
 ### EEG-EMG-WristMotion Dataset, version 3
 
-Studies 1 to 3. Recorded and shared by Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz, under CC BY 4.0.
+Studies 1 to 3, and the wrist trial example. Recorded and shared by Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz, under CC BY 4.0.
 
 Changed here: pointing trials were selected, the encoder angles decoded, and motion, EEG and forearm EMG features derived for the models.
+
+The [wrist trial example](../interfaces/wrist-language-motion/README.md) holds one three-second trial of the recordings themselves (participant 41, run 03, block 1, trial 1), under the same licence. Changed there: the interval was selected and the two forearm channels were subtracted.
 
 [Deposit](https://doi.org/10.6084/m9.figshare.29666735.v3) · [Descriptor paper](https://doi.org/10.1038/s41597-026-07287-z) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
@@ -87,6 +89,14 @@ Study 25. Published by IIT Dataverse, which declares CC BY 4.0. The summary file
 Changed here: one recording was used; four invalid rows were left out, and the surface EMG was reduced to its amplitude over the trailing 40 ms.
 
 [Dataset](https://doi.org/10.48557/L6OWMM) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+### Daily and Sports Activities
+
+Study 26 and the general model's first fit (row 27 of the studies page). Recorded and shared by Billur Barshan and Kerem Altun through the UCI Machine Learning Repository, under CC BY 4.0.
+
+Changed here: two walking activities were selected, and the accelerometer readings of the right-arm sensor (study 26) or of all five sensors (row 27) were cut into short histories, each with the reading that followed; forecasts were fitted and their errors computed. The five-sensor folder also holds an excerpt of the recordings themselves: 16 readings, and the reading that came next, from each of the five sensors in one clip of one person, under the same licence.
+
+[Dataset](https://archive.ics.uci.edu/dataset/256/daily+and+sports+activities) · [DOI 10.24432/C5C59F](https://doi.org/10.24432/C5C59F) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 ## One more recording, behind the portable interface source
 
