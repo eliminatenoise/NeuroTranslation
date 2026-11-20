@@ -2,13 +2,16 @@
 
 ## Predict without fitting
 
-Python and NumPy run the two examples. Use the included `movement-weights.npz` (SHA-256 `da243393b7a6f72558365a30f7361e45ef7af680538a7fb5a927e930d91b3458`). It includes both forearm correction heads and every numerical array from the first three-domain checkpoint. The base fit below reproduces that earlier checkpoint (SHA-256 `8636991f783c781142ab811096b0f1769db0a6bcf9386810a3ad7b25fae4e2a6`). Add the nested corrections with the second study’s fit command. [Forearm correction and reproduction](forearm/README.md) The stored configuration identifies the two spatial endpoints, the wrist-angle inputs and the two angular targets. Every mode uses the same temporal attention, position embedding, feed-forward layer and normalization, amounting to 5,016 frozen values. Each angular route adds 1,610 trainable projection and readout values. [Weights](movement-weights.npz) · [Source and rights](NOTICE.md)
+Python and NumPy run all examples. Use the included `movement-weights.npz` (SHA-256 `08f4a025be7d3dfa6e3de5899fa445d019f8c70c82b1f5d6531bef1407e0616a`). It includes both forearm correction heads and every numerical array from the first three-domain checkpoint. The base fit below reproduces that earlier checkpoint (SHA-256 `8636991f783c781142ab811096b0f1769db0a6bcf9386810a3ad7b25fae4e2a6`). Add the nested corrections with the second study’s fit command. [Forearm correction and reproduction](forearm/README.md) The stored configuration identifies the two spatial endpoints, the wrist-angle inputs and the two angular targets. Every mode uses the same temporal attention, position embedding, feed-forward layer and normalization, amounting to 5,016 frozen values. Each angular route adds 1,610 trainable projection and readout values. [Weights](movement-weights.npz) · [Source and rights](NOTICE.md)
 
 ```sh
 python -m pip install numpy
 python predict.py angular-example.json
 python predict.py spatial-example.json
+python predict.py population/example.json
 ```
+
+For the rat population mode, five past camera positions and four paired CA1/PFC firing bins produce one forecast in centimetres. The measured JS21 example returns 6.998 cm. The two rat heads extend the prior forearm-equipped checkpoint. Obtain its exact weights and the six selected packets to reproduce these fits. [Input schema, selection, sources and reproduction commands](population/README.md)
 
 The angular JSON has `domain` set to `wrist_angle`. Supply a batch of `bins` with shape [N,16,C], an `anchor_deg` array [N,2], and one integer `slot` in 0–5 per example. Each row must come from one participant, run and trial. Supply all required channels through the cutoff. Use mode `motion` for two angle channels, `emg` for those two plus four forearm channels, and `full` for those six plus eight scalp channels. For a missing channel, select a supported mode that uses the measurements you have. The program rejects nonfinite inputs and negative RMS amplitudes. It accepts only the input dimensions required by that mode. Row identity, source clocks and alignment must be checked before passing bare arrays to the reader. [Extraction and channel names](wrist-source/README.md)
 

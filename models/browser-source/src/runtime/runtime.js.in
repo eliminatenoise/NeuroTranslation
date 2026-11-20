@@ -1,0 +1,469 @@
+// NeuroTranslate movement predictor. Each group carries its original tensor bytes.
+// One classic script works from local files. predictor.mjs provides the same API to ES modules.
+(() => {
+  'use strict';
+  const checkpoint = __CHECKPOINT__;
+  const groups = __GROUPS__;
+  const width = 24;
+  const heads = 4;
+  const headWidth = width / heads;
+  const taps = [-1, -.75, -.5, -.25, 0];
+  const clockEpsilon = 1e-10;
+  let modelPromise;
+  const states = new Map();
+
+  function domainIndex(domain) {
+    if (domain === 'wrist') return 0;
+    if (domain === 'rat') return 1;
+    throw new RangeError('Choose wrist or rat.');
+  }
+
+  function finiteRow(row, length) {
+    if (!Array.isArray(row) || row.length !== length) return false;
+    for (const value of row) if (!Number.isFinite(value)) return false;
+    return true;
+  }
+
+  // Raw tokens have the validation contract of the published NumPy predictor.
+  // Visibility, clock agreement and continuity can only be verified on source observations.
+  function checkIntervals(intervals) {
+    if (!Array.isArray(intervals) || intervals.length !== 4) {
+      throw new TypeError('Supply four chronological motion intervals.');
+    }
+    for (let i = 0; i < 4; i++) {
+      if (!finiteRow(intervals[i], 5)) throw new TypeError('Each interval needs five finite numbers.');
+      const [step, dt, age, twoStep, cosine] = intervals[i];
+      if (step < 0 || twoStep < 0 || dt < .2-1e-7 || dt > .3+1e-7 ||
+          age < -1e-7 || age > .05+1e-7 || Math.abs(cosine) > 1+1e-6 ||
+          (i === 0 && (Math.abs(twoStep) > 1e-7 || Math.abs(cosine) > 1e-7))) {
+        throw new RangeError('Interval falls outside the measured motion contract.');
+      }
+    }
+  }
+
+  function recent(intervals) {
+    const [step, dt, age] = intervals[3];
+    return step / dt * (.25 + age);
+  }
+
+  function recentDistance(intervals) {
+    checkIntervals(intervals);
+    const distance = recent(intervals);
+    if (!Number.isFinite(distance)) throw new RangeError('Distance exceeds the numerical range.');
+    return distance;
+  }
+
+  function difference(left, right) {
+    return left.map((value, i) => value - right[i]);
+  }
+
+  function historyFromGeometry({domain, cutoffS, samples}) {
+    const wrist = domainIndex(domain) === 0;
+    if (!Number.isFinite(cutoffS) || !Array.isArray(samples) || samples.length < 5) {
+      throw new TypeError('Supply the cutoff in seconds and a dense history from one recording.');
+    }
+    const observations = [];
+    let lastObserved = -Infinity, lastGrid = -Infinity;
+    for (const row of samples) {
+      if (!row || !Number.isFinite(row.timeS) || row.timeS > cutoffS) {
+        throw new RangeError('Each observation needs a finite native time at or before the cutoff.');
+      }
+      // The human export can repeat a native observation across multiple RGB frames.
+      const grid = wrist ? row.gridTimeS : (row.gridTimeS ?? row.timeS);
+      if (!Number.isFinite(grid) || grid <= lastGrid || row.timeS < lastObserved ||
+          (!wrist && grid !== row.timeS)) {
+        throw new RangeError('Check the source clock, frame order and grid times.');
+      }
+      const first = row.timeS !== lastObserved;
+      lastObserved = row.timeS;
+      lastGrid = grid;
+      if (wrist) {
+        if ([row.active, row.valid, row.tracked].some(v => typeof v !== 'boolean')) {
+          throw new TypeError('Wrist observations require boolean active, valid and tracked flags.');
+        }
+        if (!first || !(row.active && row.valid && row.tracked)) continue;
+      }
+      // Explicit null marks a missing coordinate. It contributes no observed position.
+      if (row.positionCm === null) continue;
+      if (!finiteRow(row.positionCm, wrist ? 3 : 2)) {
+        throw new TypeError('Supply finite positions in centimetres, or null for a missing observation.');
+      }
+      observations.push({time:row.timeS, grid, point:row.positionCm});
+    }
+
+    let index = -1;
+    const selected = [];
+    const ages = [];
+    for (const tap of taps) {
+      const requested = cutoffS + tap;
+      while (index + 1 < observations.length && observations[index + 1].time <= requested) index++;
+      if (index < 0 || requested - observations[index].time > .05 + clockEpsilon ||
+          index === selected[selected.length - 1]) {
+        throw new RangeError('Five distinct observations within 50 ms of their taps are required.');
+      }
+      selected.push(index);
+      ages.push(requested - observations[index].time);
+    }
+    for (let i = selected[0] + 1; i <= selected[4]; i++) {
+      if (observations[i].time - observations[i-1].time > .100 + clockEpsilon) {
+        throw new RangeError('The history contains a tracking gap longer than 100 ms.');
+      }
+    }
+    const points = selected.map(i => observations[i]);
+    const clockOffsets = points.map(row => row.grid - row.time);
+    if (Math.max(...clockOffsets) - Math.min(...clockOffsets) > .05 + clockEpsilon) {
+      throw new RangeError('Elapsed native and grid times differ by more than 50 ms.');
+    }
+    const intervals = [];
+    let previous;
+    for (let i = 1; i < points.length; i++) {
+      const step = difference(points[i].point, points[i-1].point);
+      const length = Math.hypot(...step);
+      let twoStep = 0, cosine = 0;
+      if (previous) {
+        twoStep = Math.hypot(...difference(points[i].point, points[i-2].point));
+        const prevLength = intervals[i-2][0];
+        if (prevLength && length) {
+          const dot = step.reduce((sum, value, j) => sum + (value / length) * (previous[j] / prevLength), 0);
+          cosine = Math.min(1, Math.max(-1, dot));
+        }
+      }
+      intervals.push([length, points[i].time - points[i-1].time, ages[i], twoStep, cosine]);
+      previous = step;
+    }
+    checkIntervals(intervals);
+    return intervals;
+  }
+
+  function linear(state, key, input) {
+    const weight = state[key+'.weight'], bias = state[key+'.bias'];
+    const output = new Float64Array(bias.length);
+    for (let row = 0; row < bias.length; row++) {
+      let sum = 0;
+      const offset = row * input.length;
+      for (let i = 0; i < input.length; i++) sum += weight[offset+i] * input[i];
+      output[row] = sum + bias[row];
+    }
+    return output;
+  }
+
+  function normalize(state, name, input) {
+    let mean = 0, variance = 0;
+    for (const value of input) mean += value;
+    mean /= width;
+    for (const value of input) variance += (value - mean) ** 2;
+    const sd = Math.sqrt(variance / width + 1e-5);
+    const weight = state[name+'.weight'], bias = state[name+'.bias'];
+    return input.map((v,i) => (v - mean) / sd * weight[i] + bias[i]);
+  }
+
+  function forecast(state, domain, intervals) {
+    const selected = domainIndex(domain);
+    checkIntervals(intervals);
+    const projected = intervals.map(([length,dt,age,chord,cosine]) => {
+      const physical = [Math.log1p(length), (dt-.25)/.05, age/.05, Math.log1p(chord), cosine,
+                        Math.log1p(.25 * length / dt)];
+      return linear(state, 'project', physical);
+    });
+    const correction = linear(state, 'readout', encode(state, projected))[selected];
+    const distance = Math.expm1(Math.max(0, Math.log1p(recent(intervals)) + correction));
+    if (!Number.isFinite(distance)) throw new RangeError('Distance exceeds the numerical range.');
+    return distance;
+  }
+
+  function encode(state, projected, allTokens = false) {
+    const tokens = projected.map((row, t) => row.map((v, i) => v + state.position[t*width+i]));
+    const block = 'blocks.0.';
+    const packed = tokens.map(z => linear(state, block+'qkv', normalize(state, block+'attention_norm', z)));
+    // Spatial and wrist-angle heads need only the last query. The population
+    // readout also uses each earlier query's state at its own firing interval.
+    function attentionRow(query) {
+      const mixed = new Float64Array(width);
+      for (let h = 0; h < heads; h++) {
+        const start = h * headWidth;
+        const scores = packed.map(row => {
+          let score = 0;
+          for (let i = start; i < start + headWidth; i++) score += packed[query][i] * row[width+i];
+          return score / Math.sqrt(headWidth);
+        });
+        const max = Math.max(...scores);
+        const exps = scores.map(score => Math.exp(score-max));
+        const total = exps.reduce((sum, v) => sum+v, 0);
+        for (let t = 0; t < 4; t++) {
+          const attention = exps[t]/total;
+          for (let i = start; i < start + headWidth; i++) mixed[i] += attention * packed[t][2*width+i];
+        }
+      }
+      const residual = linear(state, block+'attention_out', mixed).map((v,i) => v + tokens[query][i]);
+      const hidden = linear(state, block+'ff_in', normalize(state, block+'ff_norm', residual));
+      const update = linear(state, block+'ff_out', hidden.map(v => Math.max(0, v)));
+      return normalize(state, 'last_norm', update.map((v,i) => v + residual[i]));
+    }
+    return allTokens ? tokens.map((_, t) => attentionRow(t)) : attentionRow(3);
+  }
+
+  const channels = Object.freeze({motion: 2, emg: 6, full: 14});
+  const angularFields = new Set(['domain','mode','slot','cueTick','cutoffTick','binEndTicks','bins','anchorDeg',
+                                 'forearmResidual','forearm_residual']);
+
+  function readWristWindow(record) {
+    if (!record || record.domain !== 'wrist_angle' || typeof record.mode !== 'string' || !Object.hasOwn(channels, record.mode) ||
+        Object.keys(record).some(key => !angularFields.has(key))) {
+      throw new TypeError('Supply one WristMotion wrist_angle window in motion, emg or full mode.');
+    }
+    const {mode, slot, cueTick, cutoffTick, binEndTicks, anchorDeg, bins} = record;
+    const camel = Object.hasOwn(record, 'forearmResidual');
+    const snake = Object.hasOwn(record, 'forearm_residual');
+    if (camel && snake) throw new TypeError('Supply the forearm correction once.');
+    const correction = camel ? record.forearmResidual : snake ? record.forearm_residual : null;
+    if (correction !== null && (correction !== mode || (mode !== 'motion' && mode !== 'emg'))) {
+      throw new RangeError('Match the forearm correction and mode to motion or emg.');
+    }
+    if (!Number.isInteger(slot) || slot < 0 || slot > 5 || !Number.isSafeInteger(cueTick) ||
+        cueTick < 0 || !Number.isSafeInteger(cutoffTick) || !Number.isSafeInteger(cutoffTick + 128) ||
+        cutoffTick !== cueTick + 256 + 128*slot) {
+      throw new RangeError('The cutoff must be 128 stored ticks before the selected target.');
+    }
+    if (!finiteRow(binEndTicks, 16) ||
+        binEndTicks.some((end,i) => end !== cutoffTick - (15-i)*16)) {
+      throw new RangeError('Supply sixteen consecutive 16-tick bins ending at the cutoff.');
+    }
+    if (!finiteRow(anchorDeg, 2) || !Array.isArray(bins) || bins.length !== 16) {
+      throw new TypeError('Supply the two measured anchor angles and sixteen binned rows.');
+    }
+    if (anchorDeg.some(value => Math.abs(value) > 180)) {
+      throw new RangeError('The anchor exceeds the valid WristMotion encoder range.');
+    }
+    const rows = [];
+    for (const row of bins) {
+      if (!finiteRow(row, channels[mode])) {
+        throw new TypeError('Every bin needs all finite channels for the selected mode.');
+      }
+      if (Math.abs(row[0]+anchorDeg[0]) > 180+1e-10 || Math.abs(row[1]+anchorDeg[1]) > 180+1e-10) {
+        throw new RangeError('An absolute mean angle exceeds the valid WristMotion encoder range.');
+      }
+      if (mode !== 'motion' && row.slice(2,6).some(value => value < 0 || value > 65535)) {
+        throw new RangeError('Bipolar RMS exceeds the WristMotion differential range of 0–65535 µV.');
+      }
+      if (mode === 'full' && row.slice(6).some(value => value < -32768 || value > 32767)) {
+        throw new RangeError('A scalp mean exceeds the signed WristMotion acquisition range.');
+      }
+      rows.push(row.slice());
+    }
+    // Copy caller-owned arrays before asynchronous hashing to preserve the checked history.
+    return {mode, correction, slot, targetTick:cutoffTick+128, bins:rows, anchor:anchorDeg.slice()};
+  }
+
+  async function directAngles(mode, bins, anchor, slot) {
+    const [core, stats, adapter] = await Promise.all([loadGroup('spatial'), loadGroup('stats'), loadGroup(mode)]);
+    const prefix = 'angular.' + mode + '.';
+    const binCenter = stats['angular.stats.bins_center'], binScale = stats['angular.stats.bins_scale'];
+    const anchorCenter = stats['angular.stats.anchor_center'], anchorScale = stats['angular.stats.anchor_scale'];
+    const residualCenter = stats['angular.stats.residual_center'], residualScale = stats['angular.stats.residual_scale'];
+    const projected = [];
+    for (let t = 0; t < 4; t++) {
+      // Unobserved channels stay zero in standardized coordinates.
+      const features = new Float64Array(64);
+      for (let b = 0; b < 4; b++) {
+        const row = bins[4*t+b];
+        for (let c = 0; c < row.length; c++) {
+          features[14*b+c] = (row[c] - binCenter[c]) / binScale[c];
+        }
+      }
+      for (let a = 0; a < 2; a++) {
+        features[56+a] = (anchor[a] - anchorCenter[a]) / anchorScale[a];
+      }
+      features[58+slot] = 1;
+      projected.push(linear(adapter, prefix+'project', features));
+    }
+    const residual = linear(adapter, prefix+'readout', encode(core, projected));
+    return anchor.map((value,i) => residual[i]*residualScale[i] + residualCenter[i] + value);
+  }
+
+  async function correctedAngles(arm, bins, anchor, slot) {
+    const [base, state] = await Promise.all([
+      directAngles('motion', bins.map(row => row.slice(0, 2)), anchor, slot),
+      loadGroup('residual.' + arm)
+    ]);
+    // Match the order in the Python fit: 32 motion values, two anchor angles,
+    // two predicted changes, then (only for EMG) 64 bipolar RMS amplitudes.
+    const features = bins.flatMap(row => row.slice(0, 2));
+    features.push(...anchor, base[0] - anchor[0], base[1] - anchor[1]);
+    if (arm === 'emg') {
+      for (const row of bins) features.push(...row.slice(2));
+    }
+    const prefix = 'angular.residual.' + arm + '.';
+    const center = state[prefix + 'center'], scale = state[prefix + 'scale'];
+    const coef = state[prefix + 'coef'];
+    const delta = [0, 0];
+    for (let j = 0; j < features.length; j++) {
+      const value = (features[j] - center[j]) / scale[j];
+      delta[0] += value * coef[2*j];
+      delta[1] += value * coef[2*j+1];
+    }
+    // Six unscaled cue indicators follow the continuous features. Only one is active.
+    const cueOffset = 2 * (features.length + slot);
+    return base.map((angle, axis) => angle + (delta[axis] + coef[cueOffset + axis]));
+  }
+
+  async function forecastWristAngles(record) {
+    const {mode, correction, slot, targetTick, bins, anchor} = readWristWindow(record);
+    const angleDeg = correction === null ? await directAngles(mode, bins, anchor, slot)
+                                         : await correctedAngles(correction, bins, anchor, slot);
+    if (!angleDeg.every(Number.isFinite)) throw new RangeError('Angles exceed the numerical range.');
+    return {angleDeg, axes:['extension','radial_deviation'], horizonStoredTicks:128, storedHz:512, targetTick};
+  }
+
+  const populationKeys = {
+    cutoffS: 'cutoff_s', priorTimeS: 'prior_time_s', priorXyCm: 'prior_xy_cm',
+    regionalCounts: 'regional_counts', unitCounts: 'unit_counts'
+  };
+  const populationFields = new Set(['domain', 'mode', ...Object.keys(populationKeys), ...Object.values(populationKeys)]);
+
+  function readPopulation(record) {
+    if (Object.keys(record).some(key => !populationFields.has(key)) ||
+        (record.mode !== 'motion' && record.mode !== 'combined')) {
+      throw new TypeError('Supply one rat_population history in motion or combined mode.');
+    }
+    const values = {};
+    for (const [camel, snake] of Object.entries(populationKeys)) {
+      if (Object.hasOwn(record, camel) && Object.hasOwn(record, snake)) {
+        throw new TypeError('Supply ' + camel + ' only once.');
+      }
+      values[camel] = Object.hasOwn(record, camel) ? record[camel] : record[snake];
+    }
+    const {cutoffS, priorTimeS, priorXyCm, regionalCounts, unitCounts} = values;
+    if (!Number.isFinite(cutoffS) || !finiteRow(priorTimeS, 5) ||
+        !Array.isArray(priorXyCm) || priorXyCm.length !== 5 ||
+        !Array.from(priorXyCm).every(row => finiteRow(row, 2))) {
+      throw new TypeError('Supply a cutoff, five native camera times in seconds and five XY positions in centimetres.');
+    }
+    const ages = taps.map((tap, i) => cutoffS + tap - priorTimeS[i]);
+    if (ages.some(age => age < -1e-9 || age > .075000001) ||
+        priorTimeS.some((time, i) => i > 0 && time <= priorTimeS[i - 1])) {
+      throw new RangeError('Camera times must increase and lie within 75 ms before their quarter-second ticks.');
+    }
+
+    const tokens = [], speed = [];
+    let previousStep, previousLength;
+    // Repeat the native numerical geometry used for this population fit,
+    // including the zero turn after a stationary step.
+    const norm2 = ([x, y]) => Math.sqrt(x*x + y*y);
+    for (let i = 1; i <= 4; i++) {
+      const step = difference(priorXyCm[i], priorXyCm[i-1]);
+      const length = norm2(step), dt = priorTimeS[i] - priorTimeS[i-1];
+      const chord = i === 1 ? 0 : norm2(difference(priorXyCm[i], priorXyCm[i-2]));
+      const denominator = i === 1 ? 0 : length * previousLength;
+      const cosine = denominator > 0 ? (step[0]*previousStep[0] + step[1]*previousStep[1]) / denominator : 0;
+      const scaled = .25 * length / dt;
+      const token = [Math.log1p(length), (dt-.25)/.05, ages[i]/.05, Math.log1p(chord),
+                     Math.min(1, Math.max(-1, cosine)), Math.log1p(scaled)];
+      if (!token.every(Number.isFinite)) throw new RangeError('Camera geometry exceeds the numerical range.');
+      speed.push(scaled);
+      tokens.push(token);
+      previousStep = step;
+      previousLength = length;
+    }
+
+    const rates = [];
+    if (record.mode === 'combined') {
+      if (!finiteRow(unitCounts, 2) || !unitCounts.every(n => Number.isSafeInteger(n) && n > 0) ||
+          !Array.isArray(regionalCounts) || regionalCounts.length !== 4) {
+        throw new TypeError('Supply four count pairs and two positive whole recorded-unit counts, CA1 then PFC.');
+      }
+      for (const pair of regionalCounts) {
+        if (!finiteRow(pair, 2) || !pair.every(n => Number.isSafeInteger(n) && n >= 0)) {
+          throw new RangeError('Each chronological firing bin needs two nonnegative whole spike counts.');
+        }
+        rates.push(...pair.map((n, region) => Math.log1p(n / (.25 * unitCounts[region]))));
+      }
+    }
+    return {mode: record.mode, tokens, speed, rates};
+  }
+
+  async function forecastPopulation(record) {
+    // Finish validation and derive new arrays before the first asynchronous load.
+    const {mode, tokens, speed, rates} = readPopulation(record);
+    const [core, head] = await Promise.all([loadGroup('spatial'), loadGroup('population.' + mode)]);
+    const projected = tokens.map(token => linear(core, 'project', token));
+    const features = [...speed];
+    if (mode === 'combined') {
+      const states = encode(core, projected, true);
+      features.push(...states[3], ...rates);
+      for (let t = 0; t < states.length; t++) {
+        const correction = linear(core, 'readout', states[t])[1];
+        features.push(rates[2*t] * correction, rates[2*t+1] * correction);
+      }
+    } else {
+      features.push(...encode(core, projected));
+    }
+    const prefix = 'population.' + mode + '.';
+    const mean = head[prefix+'mean'], scale = head[prefix+'scale'], coef = head[prefix+'coef'];
+    let sum = 0;
+    for (let i = 0; i < features.length; i++) sum += ((features[i] - mean[i]) / scale[i]) * coef[i];
+    const distanceCm = Math.max(0, sum + head[prefix+'intercept'][0]);
+    if (!Number.isFinite(distanceCm)) throw new RangeError('Distance exceeds the numerical range.');
+    return {domain:'rat_population', unit:'cm', distanceCm};
+  }
+
+  async function forecastMovement(record) {
+    if (record?.domain === 'rat_population') return forecastPopulation(record);
+    if (record?.domain === 'wrist_angle') {
+      return {domain:'wrist_angle', unit:'deg', ...await forecastWristAngles(record)};
+    }
+    const domain = record?.domain;
+    domainIndex(domain);
+    let intervals;
+    if (Object.hasOwn(record, 'intervals')) {
+      if (Object.keys(record).some(key => key !== 'intervals' && key !== 'domain')) {
+        throw new TypeError('Supply prepared intervals from a single spatial recording.');
+      }
+      checkIntervals(record.intervals);
+      intervals = record.intervals.map(row => row.slice());
+    } else {
+      if (Object.keys(record).some(key => !['domain','cutoffS','samples'].includes(key))) {
+        throw new TypeError('Supply one spatial recording, its samples and cutoff.');
+      }
+      intervals = historyFromGeometry(record);
+    }
+    const model = await loadSharedMotion();
+    return {domain, unit:'cm', distanceCm:model.forecast(domain, intervals)};
+  }
+
+  async function unpack({layout, encoded, sha256, bytes:expectedBytes}) {
+    const bytes = Uint8Array.from(atob(encoded), char => char.charCodeAt(0));
+    if (!globalThis.crypto?.subtle) throw new Error('Open a local file, localhost or HTTPS for SHA-256 verification.');
+    const hash = new Uint8Array(await crypto.subtle.digest('SHA-256', bytes));
+    const hex = Array.from(hash, v => v.toString(16).padStart(2, '0')).join('');
+    if (hex !== sha256 || bytes.length !== expectedBytes) {
+      throw new Error('Shared checkpoint failed its SHA-256 or length check.');
+    }
+    const data = new DataView(bytes.buffer);
+    const state = Object.create(null);
+    let offset = 0;
+    for (const [name, count, size] of layout) {
+      const values = new Float64Array(count);
+      for (let i = 0; i < count; i++, offset += size) {
+        values[i] = size === 4 ? data.getFloat32(offset, true) : data.getFloat64(offset, true);
+      }
+      state[name] = values;
+    }
+    if (offset !== bytes.length) throw new Error('Shared checkpoint tensor sizes differ.');
+    return state;
+  }
+
+  function loadGroup(group) {
+    if (!states.has(group)) states.set(group, unpack(groups[group]));
+    return states.get(group);
+  }
+
+  function loadSharedMotion() {
+    modelPromise ??= loadGroup('spatial').then(state => Object.freeze({
+      forecast:(domain, intervals) => forecast(state, domain, intervals),
+      checkpointSha256:checkpoint.spatial, movementCheckpointSha256:checkpoint.movement, forecastWristAngles, forecastMovement
+    }));
+    return modelPromise;
+  }
+
+  globalThis.SharedMotion = Object.freeze({loadSharedMotion, historyFromGeometry, recentDistance, forecastWristAngles, forecastMovement});
+})();

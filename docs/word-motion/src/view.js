@@ -9,7 +9,7 @@
   const prompt=get('words'), slider=get('scrub'), play=get('play');
   const modes=[...document.querySelectorAll('input[name="layer"]')];
   const state={frame:0,mode:'generated',yaw:-31,pitch:10,selected:-1};
-  let scene, animation=0, drag;
+  let scene, animation=0, activeTick=null, drag;
   const bodyName = name => name.replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase().replace(/^./,c=>c.toUpperCase());
   const node = (type,text) => {
     const el=document.createElement(type);
@@ -35,6 +35,7 @@
     }
   }
   function halt() {
+    activeTick=null;
     window.cancelAnimationFrame(animation); animation=0;
     play.textContent=scene && state.frame===scene.gen.length-1 ? 'Replay':'Play';
   }
@@ -87,15 +88,19 @@
   slider.addEventListener('input',()=>{if(scene){state.frame=Number(slider.value);halt();render();}});
   play.addEventListener('click',()=>{
     if (!scene) return;
-    if(animation){halt();return;}
+    if(activeTick){halt();return;}
     const last=scene.gen.length-1;
     if(state.frame===last){state.frame=0;render();}
-    const start=performance.now(), from=state.frame;
+    const from=state.frame;
+    let start;
     function tick(now) {
+      if(activeTick!==tick)return;
+      start ??= now;
       const next=Math.min(last,from+Math.floor((now-start)*schema.rateHz/1000));
-      if(next!==state.frame){state.frame=next;render();}
+      if(next>state.frame){state.frame=next;render();}
       if(next===last){halt();}else{animation=requestAnimationFrame(tick);}
     }
+    activeTick=tick;
     play.textContent='Pause';animation=requestAnimationFrame(tick);
   });
   function turn(yaw,pitch) {

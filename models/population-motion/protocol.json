@@ -1,0 +1,63 @@
+{
+  "title": "Does recent firing in two brain regions improve a forecast for a different rat?",
+  "frozen_utc": "2026-11-20T12:27:17.467914+00:00",
+  "dataset": "DANDI 000978 / 0.240511.0307",
+  "doi": "10.48324/dandi.000978/0.240511.0307",
+  "metadata_only_before_freeze": true,
+  "train": [
+    "ER1",
+    "JS15",
+    "JS17"
+  ],
+  "test": [
+    "JS21",
+    "JS34",
+    "KL8"
+  ],
+  "untouched": [
+    "JS14",
+    "ZT2 (both assets)"
+  ],
+  "asset_mapping": {
+    "ER1": {
+      "path": "sub-JDS-SingleDay-ER1/sub-JDS-SingleDay-ER1_behavior+ecephys.nwb",
+      "asset_id": "b6425692-0f32-4087-8412-aebcfc37cd96",
+      "size": 30009167808
+    },
+    "JS21": {
+      "path": "sub-JDS-SingleDay-JS21/sub-JDS-SingleDay-JS21_behavior+ecephys.nwb",
+      "asset_id": "f3a457e9-fa5b-45b4-9778-9c0e69de91a9",
+      "size": 32484552528
+    },
+    "JS15": {
+      "path": "sub-JDS-SingleDay-JS15/sub-JDS-SingleDay-JS15_behavior+ecephys.nwb",
+      "asset_id": "8fae63eb-84c2-4f7c-8a13-acb0832178f9",
+      "size": 33642353128
+    },
+    "JS17": {
+      "path": "sub-JDS-SingleDay-JS17/sub-JDS-SingleDay-JS17_behavior+ecephys.nwb",
+      "asset_id": "f1f51660-4c23-4b61-a6bd-64d817d141e5",
+      "size": 35702063632
+    },
+    "KL8": {
+      "path": "sub-JDS-SingleDay-KL8/sub-JDS-SingleDay-KL8_behavior+ecephys.nwb",
+      "asset_id": "9fcb710b-00ea-435b-900c-454a5af46ab3",
+      "size": 32802639552
+    },
+    "JS34": {
+      "path": "sub-JDS-SingleDay-JS34/sub-JDS-SingleDay-JS34_behavior+ecephys.nwb",
+      "asset_id": "b79b4575-b3c9-4449-ac4b-7a11c17bdbf9",
+      "size": 40959559064
+    }
+  },
+  "selection": "First epoch in chronological order with >=16 complete nonoverlapping trips according to interval rows; take first 16 complete trips only. First trip supplies past-only donor activity; score/fit from trip two onward only when an earlier donor exists. No substitution of animals or epochs for poor scores; report source or integrity failures. Require at least one concordantly mapped recorded unit in each region for paired analysis.",
+  "schedule": "Original W-track anchor rule: every 2 s after trip start, nominal horizon 0.25 s, label tolerance 0.05 s, 0.25 s end guard. (start,stop) samples; input last recorded at/before each of five equally spaced 250-ms ticks, at most 75 ms stale. Label first at/after cutoff+0.25 s. No gap >0.100 s inside entire camera input-to-label interval; finite inputs and label. Do not interpolate.",
+  "target": "Straight-line distance in centimetres between the latest available tracking sample at cutoff and the measured target XY. Orientation and translation invariant.",
+  "motion": "Four last interval speeds, net displacements over 0.5 s and 1 s, cosines between successive velocity vectors (zero for a stationary interval), last four frame ages. No absolute position, run clock, animal ID, trip label, source smoothed speed or future reference times.",
+  "neural": "For each of four preceding nonoverlapping bins (left open, right closed), each region CA1 then PFC: count spikes across its concordantly mapped file-local sorted units / number of such units / 0.25 s, then log1p(rate in spikes/s/unit). Training-only weighted mean and variance standardization, no held-out calibration or labels; no cross-animal unit matching. Archive zero events does not establish silence.",
+  "model": "Fixed strength 0.03, mean-weighted squared error ridge and unpenalized intercept, features standardized using equal animal, equal included trip within animal, equal retained anchor within trip. Clip negative predicted distance to zero. Transparent comparison: previous last-interval speed x 0.25 s.",
+  "control": "With the same fitted combined weights, replace the entire two-region history with a donor from one earlier complete trip in that same animal and epoch. Match closest nominal elapsed anchor; tie prefer most recent earlier trip, then earlier anchor. Donor never uses position or target scores. Same window set for every method.",
+  "score": "Mean absolute error in cm, first across anchors within trip, then trips within animal, then equally across rats. Report every held animal; signed gain = motion MAE minus combined MAE, and wrong-history MAE minus aligned combined MAE. Claim a consistent measured contribution only if both differences positive on every held rat; small animal count precludes population significance. Fixed fit, no tuning on test.",
+  "example": "First eligible test rat in fixed order, first retained scored trip and its first eligible anchor; provide its past camera samples, binned real population rates, observed future position and distances, and both forecasts.",
+  "source_access": "Verified release membership and license, conditional S3 range GETs with ETag and exact byte range, 256 KiB blocks, hard cap 120 MiB per asset plus small metadata. Single serial reader per asset. No entire NWB file or continuous voltage requested."
+}

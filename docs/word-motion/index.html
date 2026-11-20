@@ -25,20 +25,20 @@
   <hr>
   <h2>Compare the motion</h2>
   <fieldset class="mode"><legend>Visible trajectories</legend>
-    <label><input type="radio" name="layer" value="generated" checked> Generated</label>
-    <label><input type="radio" name="layer" value="recorded"> Recorded example</label>
-    <label><input type="radio" name="layer" value="overlay"> Overlay both</label>
+    <label><input type="radio" name="layer" value="generated" checked autocomplete="off"> Generated</label>
+    <label><input type="radio" name="layer" value="recorded" autocomplete="off"> Recorded example</label>
+    <label><input type="radio" name="layer" value="overlay" autocomplete="off"> Overlay both</label>
   </fieldset>
   <p id="reference-caption"></p>
   <details id="point-details"><summary>Inspect a body point</summary>
-    <label for="point">Body point</label><select id="point"></select><p>The thin line traces this point over the full 0.60 seconds.</p><div id="readout"></div>
+    <label for="point">Body point</label><select id="point" autocomplete="off"></select><p>The thin line traces this point over the full 0.60 seconds.</p><div id="readout"></div>
   </details>
 </section>
 <section class="player" aria-label="3D movement viewer">
   <div class="stage-top"><strong id="motion-title">Movement</strong><span id="layer-caption"></span></div>
   <canvas id="stage" tabindex="0" aria-label="3D movement. Drag, or use arrow keys here to rotate.">Choose a body point to read its three coordinates.</canvas>
   <div class="stage-foot"><span>Drag or use arrow keys to rotate</span><button type="button" id="reset">Reset view</button></div>
-  <div class="transport"><button type="button" id="play">Play</button><label class="sr" for="scrub">Time in movement</label><input id="scrub" type="range" min="0" max="24" step="1" value="0"><output id="time" for="scrub">0.000 s</output></div>
+  <div class="transport"><button type="button" id="play">Play</button><label class="sr" for="scrub">Time in movement</label><input id="scrub" type="range" min="0" max="24" step="1" value="0" autocomplete="off"><output id="time" for="scrub">0.000 s</output></div>
   <p id="coordinate-note"></p>
 </section>
 </div>
@@ -204,7 +204,7 @@ function drawMovement(canvas, scene, state) {
   const prompt=get('words'), slider=get('scrub'), play=get('play');
   const modes=[...document.querySelectorAll('input[name="layer"]')];
   const state={frame:0,mode:'generated',yaw:-31,pitch:10,selected:-1};
-  let scene, animation=0, drag;
+  let scene, animation=0, activeTick=null, drag;
   const bodyName = name => name.replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase().replace(/^./,c=>c.toUpperCase());
   const node = (type,text) => {
     const el=document.createElement(type);
@@ -230,6 +230,7 @@ function drawMovement(canvas, scene, state) {
     }
   }
   function halt() {
+    activeTick=null;
     window.cancelAnimationFrame(animation); animation=0;
     play.textContent=scene && state.frame===scene.gen.length-1 ? 'Replay':'Play';
   }
@@ -282,15 +283,19 @@ function drawMovement(canvas, scene, state) {
   slider.addEventListener('input',()=>{if(scene){state.frame=Number(slider.value);halt();render();}});
   play.addEventListener('click',()=>{
     if (!scene) return;
-    if(animation){halt();return;}
+    if(activeTick){halt();return;}
     const last=scene.gen.length-1;
     if(state.frame===last){state.frame=0;render();}
-    const start=performance.now(), from=state.frame;
+    const from=state.frame;
+    let start;
     function tick(now) {
+      if(activeTick!==tick)return;
+      start ??= now;
       const next=Math.min(last,from+Math.floor((now-start)*schema.rateHz/1000));
-      if(next!==state.frame){state.frame=next;render();}
+      if(next>state.frame){state.frame=next;render();}
       if(next===last){halt();}else{animation=requestAnimationFrame(tick);}
     }
+    activeTick=tick;
     play.textContent='Pause';animation=requestAnimationFrame(tick);
   });
   function turn(yaw,pitch) {

@@ -1,8 +1,26 @@
 # NeuroTranslate 0.0
 
-**The current model has three measurement paths.** One checkpoint forecasts a short movement distance for a human wrist or a rat. An additional path estimates two angles of a human right wrist from its recent motion, with optional electrical measurements from the forearm and scalp. It reuses the trained temporal layers and adds a separately fitted angle readout. The two original distance predictions are preserved. [Download the three-domain package](neurotranslate-0.0.zip) · [Source, examples and results](neurotranslate-0.0/)
+One fitted checkpoint forecasts tracked movement distance in centimetres and two right-wrist angles in degrees. It now accepts a fourth input format for recordings from a rat on a W-shaped track. Give it five earlier tracking points and, optionally, a second of firing counts from two brain regions. The movement encoder first reads the changes in position. A separate fitted calculation pairs the firing in each interval with the movement state from that interval. [Download the CPU model](neurotranslate-0.0.zip) · [Input examples and methods](neurotranslate-0.0/)
 
-**[Try all three paths in the browser](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/).** Compare two wrist angles as movement, forearm and scalp inputs change. See how much a forearm-based correction adds to a motion forecast, or switch to a distance forecast for a wrist or rat. Each forecast shows its original units. [Unified browser API](neurotranslate-browser/) · [Download the JavaScript runtime](movement-browser.zip)
+The movement viewer compares right-wrist angles with different combinations of movement, forearm and scalp input, and still runs the two original distance forecasts. The cross-animal track viewer lets you choose the direct linear benchmark or the shared movement encoder at the same forecast cutoff. [Wrist and distance viewer](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/) · [Track recording and both model families](https://eliminatenoise.github.io/NeuroTranslation/population-motion/)
+
+[Download the browser predictor](movement-browser.zip) · [Rebuild the browser model and trace viewer](browser-source/)
+
+### What did firing add to the shared model?
+
+On the same 549 forecast instants compared in the linear benchmark, the shared movement model had an average error of **2.805 cm** with movement alone and **2.778 cm** with correctly timed CA1 and prefrontal firing. Substituting firing from an earlier trip gave **2.804 cm**. Only one of three rats improved over both controls. A comparison with scrambled movement-encoder weights scored **2.763 cm** with firing. These results establish that the fitted readout uses the firing signal. They give no evidence here that pretraining improved this forecast. A lower average error can hide a worse result in an individual animal. [Study and per-animal results](neurotranslate-0.0/population/)
+
+## Where will the next step land?
+
+Give the model half a second of a measured walk or run. It predicts the next 0.60 seconds at 18 points on the body. Turn the figure, follow one foot and reveal where its markers landed. The walk or run label reduced average error at points measured relative to the pelvis from 71.9 to 69.1 mm across six fresh recording groups. A linear forecast tracked the pelvis through the room more closely. Only one of the six groups ran.
+
+[Continue a measured stride](https://eliminatenoise.github.io/NeuroTranslation/stride/) · [Model and results](stride-continuation/) · [Offline viewer and model (ZIP)](stride-continuation.zip)
+
+## Can brain activity sharpen a rat’s movement forecast?
+
+Step through one recorded trip and compare how far a rat moved with forecasts that use its earlier movement alone or also use firing from two brain regions. Across three held-out rats the average miss fell from 2.898 to 2.870 cm when firing was added. Only one rat improved against both movement alone and firing from an earlier trip. For that rat, continuing at the last observed speed did better still.
+
+[Explore a recorded trip](https://eliminatenoise.github.io/NeuroTranslation/population-motion/) · [Model and results](population-motion/) · [Offline viewer and model (ZIP)](population-motion.zip)
 
 ## Generate a walk or a run
 

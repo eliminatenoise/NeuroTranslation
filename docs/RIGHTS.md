@@ -122,6 +122,8 @@ The newer study [on brain-cell firing and a rat's movement](../benchmarks/wtrack
 
 Changed here: one rat, one session and one running period were used. 34 whole trips were selected with their original positions and spike times and put in per-trip arrays, from which past-only inputs were built, forecasts fitted and their errors computed. The selected records, the fitted weights and the forecasts keep this credit and licence.
 
+The separate three-rat forecast used sixteen annotated trips from each of six rats. It groups spikes by brain region, pairs their timing with camera observations, and fits or tests models on different animals. Its data excerpts, results and fitted coefficients retain Shin and Jadhav’s CC BY 4.0 attribution, including the recorded trip in the browser and the offline ZIP. [Changes and source credit](../models/population-motion/NOTICE.md)
+
 The shared fit learned from both HoloAssist and this dataset. Its fitted weights are released under CC BY 4.0, with credit to the model and to both datasets; [its data credits](../models/shared-motion-browser/DATA-CREDITS.md) give the full author lists and what was changed. Its two browser copies, [`models/shared-motion-browser/`](../models/shared-motion-browser/) and [`models/neurotranslate-browser/`](../models/neurotranslate-browser/), hold its fitted numbers for a web browser and carry the same credits, with the agreement text of HoloAssist beside them.
 
 [Versioned dataset](https://doi.org/10.48324/dandi.000978/0.240511.0307) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
@@ -133,6 +135,8 @@ The [3D recordings](whole-body/README.md): trials 02_06, 13_11 and 132_23. The d
 Changed here: every fourth frame was kept, with 41 named markers, rounded to 0.1 mm for storage.
 
 The walk/run model was fitted to 31 CMU recordings. Its viewer includes two measured training excerpts, a walk from trial 07_01 and a run from 09_01. Each keeps every third frame from the selected interval and uses 18 surface landmarks. CMU’s terms apply to these excerpts, including copies inside the page and offline ZIP. [Model and data credits](../models/word-motion/RIGHTS.md)
+
+The stride continuation viewer also carries a short walk and run excerpt. It samples the source at 20 Hz and overlays measured and predicted marker positions. CMU’s terms, including the restriction on direct resale, cover the recorded portions in both the viewer and the standalone package. [Stride data credits](../models/stride-continuation/RIGHTS.md)
 
 [CMU terms](http://mocap.cs.cmu.edu/) · [CMU FAQ](http://mocap.cs.cmu.edu/faqs.php)
 
