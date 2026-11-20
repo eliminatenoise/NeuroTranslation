@@ -1,5 +1,7 @@
 # Launchers and offline copies
 
+Extract the [offline target-reach reader](docs/target-reach-offline.zip) or the [complete fitted-model package](models/target-reach.zip). Open the launcher named for your system to compare a recorded destination with a new one.
+
 To forecast next-day sensory-cortex counts, extract the [offline reader](docs/contact-forecast-offline.zip) or the [complete fitted model package](models/contact-forecast.zip), then use the launcher for your system.
 
 For the paired recorded perturbation and cued reach, extract the [offline cortical reach reader](docs/cortical-reach-offline.zip) and use its operating-system launcher. [Training code and weights](models/cortical-reach.zip)

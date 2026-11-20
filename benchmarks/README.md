@@ -1,5 +1,7 @@
 # The hand's own history is the forecast to beat
 
+[Destination and motion history](https://eliminatenoise.github.io/NeuroTranslation/papers/target-reach/) compares two recording clocks, nine target choices and seven held-out people. [Movement-aligned results](../models/target-reach/results/crossing/summary.json)
+
 [The next-day electrode test](https://eliminatenoise.github.io/NeuroTranslation/papers/contact-forecast/) compares 18 Transformer fits, six count regressions and two simple forecasts using the same measured trial windows. [All second-day scores](../models/contact-forecast/scoring/test/summary.json)
 
 The [cortical reach comparison](https://eliminatenoise.github.io/NeuroTranslation/papers/cortical-reach/) holds out later original trials and tests neural information against time- and task-matched controls. [Group results](../models/cortical-reach/score/test/scores.json)

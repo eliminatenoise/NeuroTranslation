@@ -1,10 +1,10 @@
-import {parsePacket,parseCsv,validatePacket,combinePackets,summarizePackets,alignPackets,examplePacket,stringifyRecording} from './core.75ba6cae584876bafce105ac88c8aa4f862fa945c85b082eb539c9089386e614.mjs';
-import {normalizeFinite,buildPlotSegments} from './plot.75ba6cae584876bafce105ac88c8aa4f862fa945c85b082eb539c9089386e614.mjs';
-import {toPolicyEnvelope} from './packet-policy-bridge.75ba6cae584876bafce105ac88c8aa4f862fa945c85b082eb539c9089386e614.mjs';
-import {evaluate as evaluateMetadata} from './compat-policy.75ba6cae584876bafce105ac88c8aa4f862fa945c85b082eb539c9089386e614.mjs';
-import {renderMetadataReport} from './policy-report-view.75ba6cae584876bafce105ac88c8aa4f862fa945c85b082eb539c9089386e614.mjs';
-import {createPalmReplay} from './replay-view.75ba6cae584876bafce105ac88c8aa4f862fa945c85b082eb539c9089386e614.mjs';
-import {showCalibrationStudy} from './calibration-view.75ba6cae584876bafce105ac88c8aa4f862fa945c85b082eb539c9089386e614.mjs';
+import {parsePacket,parseCsv,validatePacket,combinePackets,summarizePackets,alignPackets,examplePacket,stringifyRecording} from './core.0c0d6d8d27b5cb96a428e31bb3672ec830ebe5ea555463cacb0164a852fb2484.mjs';
+import {normalizeFinite,buildPlotSegments} from './plot.0c0d6d8d27b5cb96a428e31bb3672ec830ebe5ea555463cacb0164a852fb2484.mjs';
+import {toPolicyEnvelope} from './packet-policy-bridge.0c0d6d8d27b5cb96a428e31bb3672ec830ebe5ea555463cacb0164a852fb2484.mjs';
+import {evaluate as evaluateMetadata} from './compat-policy.0c0d6d8d27b5cb96a428e31bb3672ec830ebe5ea555463cacb0164a852fb2484.mjs';
+import {renderMetadataReport} from './policy-report-view.0c0d6d8d27b5cb96a428e31bb3672ec830ebe5ea555463cacb0164a852fb2484.mjs';
+import {createPalmReplay} from './replay-view.0c0d6d8d27b5cb96a428e31bb3672ec830ebe5ea555463cacb0164a852fb2484.mjs';
+import {showCalibrationStudy} from './calibration-view.0c0d6d8d27b5cb96a428e31bb3672ec830ebe5ea555463cacb0164a852fb2484.mjs';
 
 const $=id=>document.getElementById(id);
 const colors={neural:'#7757d8',muscle:'#cd6446',displacement:'#287dba',mechanics:'#278476'};
@@ -289,6 +289,6 @@ $('export-metadata').addEventListener('click',()=>{if(state.metadata)download('n
 $('download-template').addEventListener('click',()=>download('neurotranslate-0.0-example.json',examplePacket()));
 window.addEventListener('resize',drawTraces);
 async function catalogue(){
-  try{const response=await fetch('datasets.75ba6cae584876bafce105ac88c8aa4f862fa945c85b082eb539c9089386e614.json');if(!response.ok)return;const data=await response.json();for(const d of data.datasets||data){const card=element('article','dataset-card');card.append(element('h3','',d.name),element('p','',d.modalities?.join(' · ')||d.modality||''),element('p','',d.description||d.coverage||''),element('p','catalogue-limit',d.limit||d.pairingLimit||''));card.append(element('p','',`Reference metadata · ${(d.license||[]).join(', ')} · recordings not included`));if(d.url&&/^https:\/\//i.test(d.url)){const link=element('a','',`Source ↗`);link.href=d.url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);}$('catalogue-list').append(card);}$('catalogue-section').hidden=!$('catalogue-list').children.length;}catch{/* Optional catalogue is independent of data import and alignment. */}
+  try{const response=await fetch('datasets.0c0d6d8d27b5cb96a428e31bb3672ec830ebe5ea555463cacb0164a852fb2484.json');if(!response.ok)return;const data=await response.json();for(const d of data.datasets||data){const card=element('article','dataset-card');card.append(element('h3','',d.name),element('p','',d.modalities?.join(' · ')||d.modality||''),element('p','',d.description||d.coverage||''),element('p','catalogue-limit',d.limit||d.pairingLimit||''));card.append(element('p','',`Reference metadata · ${(d.license||[]).join(', ')} · recordings not included`));if(d.url&&/^https:\/\//i.test(d.url)){const link=element('a','',`Source ↗`);link.href=d.url;link.target='_blank';link.rel='noopener noreferrer';card.append(link);}$('catalogue-list').append(card);}$('catalogue-section').hidden=!$('catalogue-list').children.length;}catch{/* Optional catalogue is independent of data import and alignment. */}
 }
 loadExample();catalogue();showCalibrationStudy();
