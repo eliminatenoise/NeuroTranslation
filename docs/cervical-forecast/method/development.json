@@ -1,0 +1,123 @@
+{
+  "people": 4,
+  "events_per_person": 80,
+  "macro": {
+    "event_mean": {
+      "mae_uV": 19.230925181999144,
+      "rmse_uV": 46.03393428711271
+    },
+    "baseline_subtraction": {
+      "mae_uV": 19.999221726836808,
+      "rmse_uV": 34.695824114159635
+    },
+    "ridge_time": {
+      "mae_uV": 19.357718523031448,
+      "rmse_uV": 46.105397787712604
+    },
+    "ridge_pre": {
+      "mae_uV": 16.484744828741057,
+      "rmse_uV": 31.41865143829002
+    },
+    "ridge_noneng": {
+      "mae_uV": 8.755958642484654,
+      "rmse_uV": 15.7532297691283
+    },
+    "ridge_eng": {
+      "mae_uV": 8.979732701518182,
+      "rmse_uV": 15.863776917004854
+    },
+    "ridge_deranged": {
+      "mae_uV": 8.780965926688946,
+      "rmse_uV": 15.851749324801059
+    },
+    "transformer_noneng": {
+      "mae_uV": 19.696283634399798,
+      "rmse_uV": 35.14021196788768
+    },
+    "transformer_eng": {
+      "mae_uV": 18.20038709273999,
+      "rmse_uV": 39.34820192774677
+    },
+    "transformer_deranged": {
+      "mae_uV": 16.994089779825863,
+      "rmse_uV": 34.4088123574666
+    }
+  },
+  "primary_exact_two_sided_sign_p": 1.0,
+  "people_improved_on_both": 2,
+  "predeclared_development_criterion_met": false,
+  "paired_gain_comparator_minus_full": {
+    "event_mean": {
+      "mean_gain_uV": 1.030538089259152,
+      "range_uV": [
+        -4.772368196300182,
+        6.529657666452994
+      ],
+      "people_improved": 2
+    },
+    "baseline_subtraction": {
+      "mean_gain_uV": 1.798834634096817,
+      "range_uV": [
+        -6.210724627316242,
+        8.41108081059759
+      ],
+      "people_improved": 3
+    },
+    "ridge_time": {
+      "mean_gain_uV": 1.1573314302914577,
+      "range_uV": [
+        -4.565519508132283,
+        6.535534310663156
+      ],
+      "people_improved": 2
+    },
+    "ridge_pre": {
+      "mean_gain_uV": -1.715642263998936,
+      "range_uV": [
+        -6.621925207537656,
+        2.8404491952346085
+      ],
+      "people_improved": 2
+    },
+    "ridge_noneng": {
+      "mean_gain_uV": -9.444428450255337,
+      "range_uV": [
+        -11.969846378968953,
+        -7.76656538187103
+      ],
+      "people_improved": 0
+    },
+    "ridge_eng": {
+      "mean_gain_uV": -9.22065439122181,
+      "range_uV": [
+        -11.888757687390036,
+        -7.34225796163112
+      ],
+      "people_improved": 0
+    },
+    "ridge_deranged": {
+      "mean_gain_uV": -9.419421166051047,
+      "range_uV": [
+        -11.559997441340379,
+        -7.91026563809344
+      ],
+      "people_improved": 0
+    },
+    "transformer_noneng": {
+      "mean_gain_uV": 1.495896541659807,
+      "range_uV": [
+        -4.786440794365038,
+        12.960456437363558
+      ],
+      "people_improved": 2
+    },
+    "transformer_deranged": {
+      "mean_gain_uV": -1.2062973129141308,
+      "range_uV": [
+        -4.058856675749826,
+        1.8821079244846857
+      ],
+      "people_improved": 2
+    }
+  }
+}

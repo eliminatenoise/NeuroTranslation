@@ -200,3 +200,7 @@ Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz release
 ### Early scalp and eye readings in arm forecasts
 
 Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz released the 2017 upper-limb recordings under CC BY 4.0. The study aligns scalp, eye and movement measurements to the visual cue, fits models and compares their errors. The released weights and summaries derived from the recordings retain that credit. The example inputs are invented. [Original recordings](https://doi.org/10.5281/zenodo.834976) · [Acquisition paper](https://doi.org/10.1371/journal.pone.0182578) · [Reader credits](scalp-forecast/NOTICE.md) · [CC BY 4.0](scalp-forecast/CC-BY-4.0.txt)
+
+### Cervical surface voltage after a wrist stimulus
+
+Nierula and colleagues released the simultaneous surface recordings in OpenNeuro ds004388 version 1.0.0 under CC0. The two fitted models, synthetic examples, summary errors and electrode diagrams accompany a secondary analysis. [Dataset and creators](https://doi.org/10.18112/openneuro.ds004388.v1.0.0) · [Recording methods](https://doi.org/10.1371/journal.pbio.3002828) · [Reader credits](cervical-forecast/NOTICE.md)

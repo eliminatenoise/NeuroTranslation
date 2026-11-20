@@ -1247,5 +1247,21 @@
     "paper_sources": "docs/papers/scalp-forecast/scalp-forecast-source.zip",
     "atlas": "https://eliminatenoise.github.io/Interoceptomics/scalp-and-arm/",
     "domain": "Supported right-arm movement after a visual cue at one site. Three early movement channels, six scalp electrodes and three eye measurements. Seven people supplied three fitting runs each. Five other people supplied their fourth run for assessment. Outcomes are changes in three uncalibrated instrument readings."
+  },
+  "cervical_forecast": {
+    "version": "2026-11-21 experimental preview",
+    "source_doi": "10.18112/openneuro.ds004388.v1.0.0",
+    "specialist": "models/cervical-forecast/README.md",
+    "specialist_zip": "models/cervical-forecast-model.zip",
+    "assessment": "models/cervical-forecast/assessment.json",
+    "viewer": "docs/cervical-forecast/index.html",
+    "offline_viewer": "docs/cervical-forecast-offline.zip",
+    "second_model": "models/neurotranslate-0.0/cervical/model.json",
+    "second_viewer": "docs/neck-voltage/index.html",
+    "shared_cpu": "models/neurotranslate-0.0.zip",
+    "paper": "docs/papers/cervical-forecast/index.html",
+    "paper_pdf": "docs/papers/cervical-forecast/cervical-forecast.pdf",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/cervical-signals/",
+    "domain": "Offline forecast of SC6 surface voltage relative to TH6 after a left median-nerve stimulus. Four development people and six assessment people in one study. The recordings do not resolve biological origin or movement."
   }
 }

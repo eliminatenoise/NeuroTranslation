@@ -446,3 +446,7 @@ After its first five fits, all in the table, the general model learned two datas
 ## Whose recordings these are
 
 Every dataset, who made it, its licence and the credit it is owed: [docs/RIGHTS.md](../docs/RIGHTS.md). The newer studies' datasets are there too.
+
+## Neck-surface voltage after a wrist stimulus
+
+Four participants supplied 320 development events. Six others from the same recording study supplied 480 assessment events. Giving the Transformer the matching upper-arm trace yielded 23.28 µV mean absolute error. Withholding it yielded 24.67 µV, and giving the same fitted Transformer the wrong event’s trace yielded 22.36 µV. Only one of six people improved against both controls. The second model, a robust correction to the recent neck reading, had errors of 9.65, 7.77 and 10.05 µV on those same contrasts. Three of six people improved against both. Neither model met its criterion for added value of the matching arm signal. [Rules and paired gains](../models/cervical-forecast/ASSESSMENT.md) · [All assessment errors](../models/cervical-forecast/assessment.json) · [Illustrated study](https://eliminatenoise.github.io/NeuroTranslation/papers/cervical-forecast/)
