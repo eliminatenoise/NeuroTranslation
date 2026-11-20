@@ -88,6 +88,12 @@ Changed here: one recording was used; four invalid rows were left out, and the s
 
 [Dataset](https://doi.org/10.48557/L6OWMM) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
+## One more recording, behind the portable interface source
+
+The source in [`interfaces/experimental/portable/`](../interfaces/experimental/portable/NOTICE.md) was written for one macaque reaching recording: *Nonhuman Primate Reaching with Multichannel Sensorimotor Cortex Electrophysiology*, by Joseph E. O'Doherty, Mariana M. B. Cardoso, Joseph G. Makin and Philip N. Sabes (Zenodo, version 2, 2020), reported as CC BY 4.0 at its source. No study on the studies page uses it. Nothing from that recording, and no model fitted to it, is published here.
+
+[Zenodo record 3854034](https://zenodo.org/records/3854034) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
 ## Fonts in the papers
 
 The four PDFs embed Noto Sans, Noto Sans Mono, Fira Math and DejaVu Sans. Their licences travel with the papers: [fonts and paper notices](../papers/current/NOTICE.md).
