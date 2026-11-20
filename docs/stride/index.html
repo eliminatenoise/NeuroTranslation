@@ -16,28 +16,28 @@
 <div class="stage-head"><strong id="phase">Stride continuation</strong><span id="view-label">3D marker view</span></div>
 <canvas id="stage" tabindex="0" aria-label="3D marker view. Drag or use the arrow keys to rotate. Home restores the view.">Use the landmark readout for coordinates.</canvas>
 <div class="stage-foot"><span id="grid">Lab coordinates · +Z up</span><button id="reset">Reset view</button></div>
-<div class="transport"><button id="play">Play</button><div class="clock"><label class="sr" for="scrub">Time relative to the final observed frame</label><input type="range" id="scrub" min="0" max="22" value="16" step="1"><div class="clock-labels"><span>−0.50 s</span><span>Cutoff</span><span>+0.60 s</span></div></div><output id="time" for="scrub"></output></div>
+<div class="transport"><button id="play">Play</button><div class="clock"><label class="sr" for="scrub">Time relative to the final observed frame</label><input type="range" id="scrub" min="0" max="22" value="16" step="1" autocomplete="off"><div class="clock-labels"><span>−0.50 s</span><span>Cutoff</span><span>+0.60 s</span></div></div><output id="time" for="scrub"></output></div>
 <p class="hint">Drag or use the arrow keys on the figure to turn it. Step through time with the slider.</p>
 </section>
 <section class="controls" aria-label="Forecast controls">
 <h2>Start with a stride</h2>
-<label for="example">Observed movement</label><select id="example"></select>
+<label for="example">Observed movement</label><select id="example" autocomplete="off"></select>
 <div id="drop" hidden><label for="packet">Paste a pose window (JSON)</label><textarea id="packet" rows="4" autocomplete="off" spellcheck="false" maxlength="300000"></textarea>
-<label for="file">Choose or drop a JSON file</label><input id="file" type="file" accept=".json,application/json">
+<label for="file">Choose or drop a JSON file</label><input id="file" type="file" accept=".json,application/json" autocomplete="off">
 <button id="apply">Use these coordinates</button><p class="hint">Files stay in this page. Only the eleven observed frames go into the model.</p></div>
-<label for="action">Requested action</label><select id="action"><option value="walk">Walk</option><option value="run">Run</option></select>
+<label for="action">Requested action</label><select id="action" autocomplete="off"><option value="walk">Walk</option><option value="run">Run</option></select>
 <p id="status" role="status"></p>
 <fieldset><legend>Draw on the same axes</legend>
-<label class="key"><input id="last" type="checkbox" checked><i class="sw obs"></i> Last observed pose</label>
-<label class="key"><input id="model" type="checkbox" checked><i class="sw pred"></i> Action + movement forecast</label>
-<label class="key"><input id="alternative" type="checkbox"><i class="sw alt"></i> Comparison</label>
-<select id="method" aria-label="Comparison method"><option value="ridge">Linear model · movement only</option><option value="history">Transformer · movement only</option></select>
-<label class="key"><input id="reference" type="checkbox"><i class="sw ref"></i> Later recorded movement</label>
+<label class="key"><input id="last" type="checkbox" checked autocomplete="off"><i class="sw obs"></i> Last observed pose</label>
+<label class="key"><input id="model" type="checkbox" checked autocomplete="off"><i class="sw pred"></i> Action + movement forecast</label>
+<label class="key"><input id="alternative" type="checkbox" autocomplete="off"><i class="sw alt"></i> Comparison</label>
+<select id="method" aria-label="Comparison method" autocomplete="off"><option value="ridge">Linear model · movement only</option><option value="history">Transformer · movement only</option></select>
+<label class="key"><input id="reference" type="checkbox" autocomplete="off"><i class="sw ref"></i> Later recorded movement</label>
 </fieldset>
 <p id="comparison"></p>
 </section>
 </div>
-<details class="inspect"><summary>Inspect a landmark</summary><label for="point">Body site</label><select id="point"></select><div id="readout"></div></details>
+<details class="inspect"><summary>Inspect a landmark</summary><label for="point">Body site</label><select id="point" autocomplete="off"></select><div id="readout"></div></details>
 <div class="notes">
 <section><h2>What does the word add?</h2><p>The eleven observed poses give the model the stride already under way. The action label tells it which gait to continue. Keep the same movement and switch the label to see how far the forecast moves.</p><p>Each recording has one catalogue label. Switching a walk to “run” here gives a different prediction for the same history. The recording can only show the gait the person actually performed.</p>
 <p id="outcome"></p></section>
