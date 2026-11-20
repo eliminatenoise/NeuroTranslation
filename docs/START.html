@@ -102,9 +102,9 @@
     <ul class="tiles recordings">
       <li>
         <article aria-labelledby="shared-movement-title">
-          <p class="source">One movement model · Four kinds of forecast</p>
-          <h3 id="shared-movement-title">Forecast movement distance, a wrist angle or both knees</h3>
-          <p>Forecast how far a tracked wrist or rat will move in about a quarter of a second, the two angles of a wrist from its movement, forearm and scalp readings, or both knees of a walker from four seconds of knee angles. See how much four forearm electrodes change the angle forecast from the same wrist movement. Start from an invented example (the rat also has one recorded trip), or enter your own measurements. All four share one core of the general model, each with its own first and last steps. On the recordings, its distance forecast missed by 1.725 cm for the wrist and 1.310 cm for the rat; for the wrist’s angles and for the knees, models made for each did better.</p>
+          <p class="source">One movement model · Five kinds of forecast</p>
+          <h3 id="shared-movement-title">Forecast movement distance, a wrist angle, both knees or the turning at the knees</h3>
+          <p>Forecast how far a tracked wrist or rat will move in about a quarter of a second, the two angles of a wrist from its movement, forearm and scalp readings, both knees of a walker from four seconds of knee angles, or the turning moment at each knee from four seconds of leg angles. See how much four forearm electrodes change the angle forecast from the same wrist movement. Start from an invented example (the rat also has one recorded trip), or enter your own measurements. All of them share one core of the general model, each with its own first and last steps; the knee-moment version trained for its task has its own copy of that core. On the recordings, its distance forecast missed by 1.725 cm for the wrist and 1.310 cm for the rat; for the wrist’s angles and for the knees’ angles, models made for each did better.</p>
           <ul class="links">
             <li><a class="primary" href="shared-motion/">Open the shared model</a></li>
             <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models">The model, its comparison and a download</a></li>
@@ -195,6 +195,19 @@
         </article>
       </li>
       <li>
+        <article aria-labelledby="cohort-transfer-title">
+          <p class="source">Miller and colleagues · Five people’s brain-surface and glove recordings</p>
+          <h3 id="cohort-transfer-title">Which finger forecasts carry over to a new person?</h3>
+          <p>Five people saw finger cues and wore a glove. Change the finger on the screen, the time since it appeared, or an invented rhythm in one brain area, and compare what a model predicts from the cue with what it gets from the brain recording. Tested on each person in turn after learning from the other four, a table that knew only the cue and its timing did best on average.</p>
+          <ul class="links">
+            <li><a class="primary" href="finger-transfer/">Explore the five-person comparison</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/finger-transfer">Methods and results</a></li>
+            <li><a href="papers/finger-cues/">Read the finger-cue study</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/cortex-coverage/">Compare the five recording layouts</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
         <article aria-labelledby="knee-stride-title">
           <p class="source">Katmah and colleagues · Treadmill joint angles</p>
           <h3 id="knee-stride-title">Can four seconds of walking beat the last stride?</h3>
@@ -203,7 +216,7 @@
             <li><a class="primary" href="knee-stride/">Compare the knee forecasts</a></li>
             <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-stride">Model and results</a></li>
             <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/knee-stride.zip">Offline reader (ZIP)</a></li>
-            <li><a href="papers/walking-rhythm/">Read the four-page supplement</a></li>
+            <li><a href="papers/walking-rhythm/">Read the five-page supplement</a></li>
           </ul>
         </article>
       </li>
@@ -220,6 +233,18 @@
         </article>
       </li>
       <li>
+        <article aria-labelledby="knee-moment-title">
+          <p class="source">Reznick and colleagues · Optical treadmill walking and ground forces</p>
+          <h3 id="knee-moment-title">How much turning moment follows a step?</h3>
+          <p>A knee can bend while the estimated moment at the joint resists that bend. See what the last four seconds of joint motion predict about the net turning moment at the knee, on an invented walk. On three test walkers, the general model trained for this task had the lowest average error of the methods that saw only angles, and copying an earlier measured moment did better still.</p>
+          <ul class="links">
+            <li><a class="primary" href="knee-moment/">Explore the mechanical forecast</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/load">Source and results</a></li>
+            <li><a href="papers/walking-rhythm/">Read the walking study</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
         <article aria-labelledby="gait-rhythm-title">
           <p class="source">Katmah and colleagues · Treadmill muscle and knee recordings</p>
           <h3 id="gait-rhythm-title">Do the muscles and knees repeat at the same rate?</h3>
@@ -228,7 +253,7 @@
             <li><a class="primary" href="gait-rhythm/">Compare the rhythms</a></li>
             <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/gait-rhythm">Study and results</a></li>
             <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/gait-rhythm.zip">Offline reader and source (ZIP)</a></li>
-            <li><a href="papers/walking-rhythm/">Read the four-page supplement</a></li>
+            <li><a href="papers/walking-rhythm/">Read the five-page supplement</a></li>
           </ul>
         </article>
       </li>
@@ -421,7 +446,7 @@
 
   <section class="support" id="papers" aria-labelledby="papers-title">
     <h2 id="papers-title">Two papers, each written twice</h2>
-    <p>Two working drafts, each in a Technical and a Simple English edition. Nobody outside the project has reviewed them. Every result in them comes from stored recordings, and nothing is live. They report every study of the numbered table, the general model’s first five fits among them. What came after them is not in them: the general model’s shared fit, the studies published after the numbered table, the walk/run generator, the knee forecasts and the rhythm comparison, the two five-finger studies, and the separate supplements on them.</p>
+    <p>Two working drafts, each in a Technical and a Simple English edition. Nobody outside the project has reviewed them. Every result in them comes from stored recordings, and nothing is live. They report every study of the numbered table, the general model’s first five fits among them. What came after them is not in them: the general model’s shared fit, the studies published after the numbered table, the walk/run generator, the knee forecasts, the rhythm comparison and the knee turning moments, the three finger studies, and the separate supplements on them.</p>
     <p><a href="papers/language-and-observed-movement/language-and-movement.html">How precisely do words identify a recorded movement?</a> A separate four-page supplement, not one of the two papers, on the two studies that search recordings of movement with words, one of the whole body and one of the hand. <a href="papers/language-and-observed-movement/language-and-movement.pdf">Open the PDF.</a></p>
     <ul class="links">
       <li><a href="papers/current/">Read the four current drafts, and find each study in them</a></li>
