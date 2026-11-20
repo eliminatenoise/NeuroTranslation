@@ -1,11 +1,15 @@
-# Portable interface source preview
+# Portable interface: source only
 
-This package contains the existing Python loopback server, HTML page and detailed README for a recording-specific fingertip-velocity interface. Its intended model inputs and outputs are documented so the proposed interface can be inspected without pretending a complete model download exists.
+This folder holds the source of a small local interface written earlier in the project for one recorded task: given 400 ms of spike counts from a macaque's motor and sensory cortex, estimate how fast the fingertip was just moving. It is published so that the design can be read.
 
-Only these three source files are included. There are no weights, architecture payloads, raw recordings, private checkpoints or installed numerical dependencies. The interface has not been run or rendered for this publication. It is not a live backend and cannot estimate velocity from this package alone.
+It cannot run from here. The folder holds no model weights, no recordings and no installed dependencies, and the server and the page have never been started.
 
-The included [README.txt](README.txt) preserves its original source-candidate history and explains the prospective input contract, loopback restrictions, missing dependencies and scientific limits. Its references to a private source-authoring step describe that earlier work; making this source preview public does not claim those runtime or model checks have since passed.
+| File | What it is |
+| --- | --- |
+| [`preview_server.py`](preview_server.py) | A local server that would load a saved model and answer one request at a time. |
+| [`preview.html`](preview.html) | The page that would send it a window of counts and draw the estimate. |
+| [`README.txt`](README.txt) | What the interface expects, what it would return, and what that would not show. |
 
-The [browser data companion](https://eliminatenoise.github.io/NeuroTranslation/index.html) is a separate working static data inspector with invented examples and no trained model. The [papers](../../../papers/README.md) describe the broader research programme. Neither substitutes for this interface's missing model package.
+Nothing else in the repository depends on it. The [browser app and the study readers](https://eliminatenoise.github.io/NeuroTranslation/START.html) are separate, and they do run.
 
-Project-owned source is covered by the repository's [CC0 dedication](../../../LICENSE). Data, model, dependency and other third-party redistribution permissions remain separate. No data or model permission is inferred from publishing this code. Work on the project has resumed. The missing-model and runtime limits above still apply.
+The source is dedicated to the public domain with the rest of the project's code ([CC0 1.0](../../../LICENSE)). The recording it was written for has its own terms, and the models are not published.
