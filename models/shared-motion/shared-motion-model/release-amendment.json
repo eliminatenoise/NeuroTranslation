@@ -1,0 +1,6 @@
+{
+  "basis": "Model reviewer flagged the public hand-data restriction after model freeze, before fit or assessment. Root confirmed the excluded public R031 gallery recording.",
+  "original_protocol_sha256": "d426e4507d4b06b5279aceed9fca2614506daa495d570da95f9bd44225f97b63",
+  "data_contract_sha256": "48d3dc03e05fce2b1c95e10aeca45ef934e3cd0108b7a53036b1616b29fc40a2",
+  "scope": "Exclude R031 from training and assessment. Record two actual TRAIN reference predictions for local audit. Public release omits all recorded wrist windows and per-row wrist predictions; provide an explicitly synthetic wrist inference example and a licensed JS14 example. Publish aggregate scores and source-attributed checkpoint. This changes neither scientific decision, sampling opportunities, seed nor hyperparameters."
+}
