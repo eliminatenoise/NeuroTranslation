@@ -7,7 +7,7 @@ Each paper has a Technical edition, for readers who want the method, and a Simpl
 | *NeuroTranslation: A New Paradigm In Brain-Body Mapping.* | [PDF, 153 pages](current/neurotranslation-technical.pdf) | [PDF, 188 pages](current/neurotranslation-explained.pdf) |
 | *Brain2Body: The Next Generation In Body-Brain Interfacing.* | [PDF, 136 pages](current/brain2body-article.pdf) | [PDF, 152 pages](current/brain2body-simple-english.pdf) |
 
-**NeuroTranslation** asks what a recording adds once a model already knows the movement. It reports a macaque study in which two networks lowered the average error and still failed the pass rule set for them, and 19 of the 23 studies on people that are listed on [the studies page](../benchmarks/README.md). Then it proposes the larger model and the recording study that would test it.
+**NeuroTranslation** asks what a recording adds once a model already knows the movement. It reports a macaque study in which two networks lowered the average error and still failed the pass rule set for them, and 19 of the 24 studies on people that are listed on [the studies page](../benchmarks/README.md). Then it proposes the larger model and the recording study that would test it.
 
 **Brain2Body** starts somewhere else: let a computer guide a hand through a tune, then stop the guidance. What can the person play now? The paper is a proposal for telling help from learning. It reports no experiment on that question.
 
@@ -35,7 +35,7 @@ Fourteen of the studies have a passage of their own in every edition. The number
 | 22 · Pinch, next day | [p. 37](current/neurotranslation-technical.pdf#page=37) | [p. 58](current/neurotranslation-explained.pdf#page=58) | [p. 18](current/brain2body-article.pdf#page=18) | [p. 29](current/brain2body-simple-english.pdf#page=29) |
 | Brain2Body only: development and repair in marsupials |  |  | [p. 30](current/brain2body-article.pdf#page=30) | [p. 43](current/brain2body-simple-english.pdf#page=43) |
 
-The other nine have no passage of their own in all four. The NeuroTranslation paper tells five of them along the way: studies 1, 2, 5, 6 and 7. Four are not in the papers yet: 8, 10, 13 and the newest, 23. [The studies page](../benchmarks/README.md) is the complete list.
+The other ten have no passage of their own in all four. The NeuroTranslation paper tells five of them along the way: studies 1, 2, 5, 6 and 7. Five are not in the papers yet: 8, 10, 13, 23 and the newest, 26. Nor is the general model's first fit (row 27 of the studies page), made on 20 November, after the papers were built. [The studies page](../benchmarks/README.md) is the complete list.
 
 The [study notes](current/research-evidence-reading-aid.md) retell each study outside the papers.
 
