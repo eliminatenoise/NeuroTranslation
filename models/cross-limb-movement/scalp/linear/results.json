@@ -1,0 +1,163 @@
+{
+  "balance": {
+    "reference": {
+      "events": 5179,
+      "people": 18,
+      "metrics": {
+        "muscle_mae": {
+          "central": 11.364939316276407,
+          "comparison": 11.115232202561858,
+          "central_minus_comparison": 0.2497071137145484,
+          "people_lower": 3,
+          "ci95": [
+            0.06179259828865011,
+            0.5175159159383563
+          ],
+          "upper98_75": 0.5667382901838526
+        },
+        "path_mean_distance_mm": {
+          "central": 2.431138160929259,
+          "comparison": 2.3269200293062187,
+          "central_minus_comparison": 0.10421813162304072,
+          "people_lower": 2,
+          "ci95": [
+            0.03482449662088924,
+            0.19965175108777367
+          ],
+          "upper98_75": 0.2195080808819097
+        },
+        "endpoint_distance_mm": {
+          "central": 5.141361307601053,
+          "comparison": 4.938463274831883,
+          "central_minus_comparison": 0.2028980327691703,
+          "people_lower": 2,
+          "ci95": [
+            0.07327068538226454,
+            0.37277648267985536
+          ],
+          "upper98_75": 0.40386617814489467
+        }
+      }
+    },
+    "wrong_trial": {
+      "events": 4963,
+      "people": 18,
+      "metrics": {
+        "muscle_mae": {
+          "central": 11.36022591027809,
+          "comparison": 11.382829567063633,
+          "central_minus_comparison": -0.02260365678554457,
+          "people_lower": 13,
+          "ci95": [
+            -0.04647572662331445,
+            -0.0034329881309722076
+          ],
+          "upper98_75": -0.0008895761934962996
+        },
+        "path_mean_distance_mm": {
+          "central": 2.435585696607186,
+          "comparison": 2.4419530615797496,
+          "central_minus_comparison": -0.006367364972563923,
+          "people_lower": 11,
+          "ci95": [
+            -0.013856661578815797,
+            -0.00031201697900354775
+          ],
+          "upper98_75": 0.00047101966030026405
+        },
+        "endpoint_distance_mm": {
+          "central": 5.1514374058577515,
+          "comparison": 5.163747632999455,
+          "central_minus_comparison": -0.012310227141704131,
+          "people_lower": 11,
+          "ci95": [
+            -0.028829458906435287,
+            0.0026231901184279763
+          ],
+          "upper98_75": 0.004667023265108348
+        }
+      }
+    }
+  },
+  "way": {
+    "reference": {
+      "events": 1764,
+      "people": 6,
+      "metrics": {
+        "muscle_mae": {
+          "central": 0.014526061599144602,
+          "comparison": 0.014985558815212713,
+          "central_minus_comparison": -0.0004594972160681142,
+          "people_lower": 5,
+          "ci95": [
+            -0.00083112148305231,
+            -0.00012222568057773173
+          ],
+          "upper98_75": -7.06599457711415e-05
+        },
+        "path_mean_distance_mm": {
+          "central": 5.656689351484935,
+          "comparison": 5.446153007283271,
+          "central_minus_comparison": 0.21053634420166464,
+          "people_lower": 3,
+          "ci95": [
+            -0.061844110821913066,
+            0.6303103952324745
+          ],
+          "upper98_75": 0.6550340293399181
+        },
+        "endpoint_distance_mm": {
+          "central": 13.79204029043533,
+          "comparison": 13.209413830550345,
+          "central_minus_comparison": 0.5826264598849855,
+          "people_lower": 2,
+          "ci95": [
+            -0.1904333436371927,
+            1.7349835950712225
+          ],
+          "upper98_75": 1.7974371124205155
+        }
+      }
+    },
+    "wrong_trial": {
+      "events": 1602,
+      "people": 6,
+      "metrics": {
+        "muscle_mae": {
+          "central": 0.014525835340968017,
+          "comparison": 0.014520947862471168,
+          "central_minus_comparison": 4.887478496847762e-06,
+          "people_lower": 2,
+          "ci95": [
+            -2.7078685136843205e-05,
+            3.378152577628429e-05
+          ],
+          "upper98_75": 3.6223961493951164e-05
+        },
+        "path_mean_distance_mm": {
+          "central": 5.717765804069974,
+          "comparison": 5.700519717086685,
+          "central_minus_comparison": 0.017246086983289406,
+          "people_lower": 2,
+          "ci95": [
+            0.0032560093214957972,
+            0.03186447536764773
+          ],
+          "upper98_75": 0.03400259313876101
+        },
+        "endpoint_distance_mm": {
+          "central": 13.941706193943896,
+          "comparison": 13.90300584450376,
+          "central_minus_comparison": 0.03870034944013782,
+          "people_lower": 1,
+          "ci95": [
+            0.0014789745089591004,
+            0.07696871773286833
+          ],
+          "upper98_75": 0.08319221680196816
+        }
+      }
+    }
+  },
+  "all_four_reference_upper_negative": false
+}

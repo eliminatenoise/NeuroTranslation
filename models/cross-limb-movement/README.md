@@ -19,6 +19,19 @@ The returned `path_mm` contains 32 ordered XYZ displacements. `rms` has thirteen
 
 For an application, import `predict(weights, event)` from `inference.mjs`. `encodeHistory` accepts signed native muscle samples and source-frame marker knots in millimetres on their own clocks. Pass their times in seconds relative to cutoff. Historical muscle input is in µV for balance and original exported amplitude units for WAY. The caller supplies channel-quality decisions. The source reader includes the offline future-quality gates used to define this experiment. Keeping the anatomy names with their columns permits reordering; a different muscle or segment requires a new measurement and validation study.
 
+## Add scalp signals
+
+The scalp, muscle and marker histories came from the same trial. Do small changes in electrical activity at the scalp help forecast what the body does next? The comparison uses two separately trained models. One reads a voltage history from three sites. The other sees which sites the cap could record and uses its training averages for those sites. Both still get the movement history and the available muscle signals. The browser lets you change the voltage in an invented example. In the atlas you can inspect two real recordings. [Try the models](https://eliminatenoise.github.io/NeuroTranslation/cross-limb-movement/#scalp-input) · [Recorded scalp, muscle and movement](https://eliminatenoise.github.io/Interoceptomics/cross-limb-movement/) · [Study results](https://eliminatenoise.github.io/NeuroTranslation/papers/cross-limb-movement/scalp-study/)
+
+The download includes the original data readers, training code, five sets of fitted example weights and all 45 saved scalp-model checkpoints. The simpler linear predictor and its results are also included. Run one new forecast from this folder with Node.js or Python.
+
+```sh
+node launch.mjs scalp/synthetic-wrist-central.json scalp/model-central.json
+python predict.py scalp/model-reference.json scalp/synthetic-balance-central.json
+```
+
+[Reproduce the fitted models](scalp/README.md) · [Linear comparison](scalp/linear/README.md)
+
 ## Try the two output maps
 
 An output map takes the network’s last internal reading and turns it into a movement along three axes. One fitted model picks a different map for the wrist and the pelvis. The other blends an early map and a late map as the forecast unfolds. They have the same total number of fitted values. Open **forecast.html**, choose the body part and change the output map. The training code and a model for each of three participant splits are included. The original joint model remains available in the same menu. [Read the comparison](https://eliminatenoise.github.io/NeuroTranslation/papers/cross-limb-movement/decoder-study/) · [Repeat the development experiment](path-maps.md)
