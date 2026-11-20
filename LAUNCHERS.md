@@ -162,3 +162,7 @@ For the separate elbow experiment, [open the viewer](https://eliminatenoise.gith
 ## Forecast a walker’s balance
 
 [Open the reader](https://eliminatenoise.github.io/NeuroTranslation/visual-balance/) or [download it for offline use](docs/visual-balance-offline.zip). Extract the ZIP, open the folder and choose the launcher for Windows, macOS or Linux. You can also open `index.html` directly. The [trained model ZIP](models/visual-balance-model.zip) contains its own three launchers, a `forecast.html` that accepts a local event, fitted weights and the code to reconstruct and score the experiment. [Compare the shared model](https://eliminatenoise.github.io/NeuroTranslation/visual-balance-controls/) · [Read the paper](https://eliminatenoise.github.io/NeuroTranslation/papers/visual-balance/)
+
+## Forecast leg-muscle activity and pelvic movement
+
+[Open the forecast](https://eliminatenoise.github.io/NeuroTranslation/muscle-and-motion/) or [download the offline reader](docs/muscle-and-motion-offline.zip). Extract the ZIP, open its folder and choose the launcher for Windows, macOS or Linux. You can also open `index.html` directly. The [model package](models/muscle-and-motion-model.zip) includes three launchers, an offline forecast, fitted weights, the source-data reader, and code to reproduce training and assessment. [Compare the linear forecasts](https://eliminatenoise.github.io/NeuroTranslation/muscle-motion-controls/) · [Read the paper](https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-and-motion/)

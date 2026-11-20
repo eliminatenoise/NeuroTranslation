@@ -51,3 +51,5 @@ The heel and force study uses the walking recordings of Schreiber and Moissenet,
 The two walking instructions study uses Céline Schreiber and Florent Moissenet’s version 8 recordings of barefoot walking. [Original data](https://doi.org/10.6084/m9.figshare.7734767.v8) · [CC BY 4.0](walking_cues/CC-BY-4.0.txt).
 
 Peterson and Ferris released the visual balance recordings under CC0. [Original data](https://doi.org/10.18112/openneuro.ds003739.v1.0.3) · [Article](https://doi.org/10.1016/j.dib.2021.107635).
+
+The muscle and sacrum study uses CC0 measurements by Steven M. Peterson and Daniel P. Ferris. [Dataset version 1.0.3](https://doi.org/10.18112/openneuro.ds003739.v1.0.3) · [Original data publication](https://doi.org/10.1016/j.dib.2021.107635).

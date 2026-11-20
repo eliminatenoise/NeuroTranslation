@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>From walking to standing · NeuroTranslate</title>
+<style>
+*{box-sizing:border-box}html{font:17px/1.48 system-ui,sans-serif;color:#21352f;background:#f5f4ec}body{max-width:1140px;margin:auto;padding:clamp(15px,4vw,52px)}h1{font-size:clamp(2.45rem,6vw,4.65rem);letter-spacing:-.055em;line-height:1.05;margin:.32em 0}h2{font-size:1.4rem;line-height:1.2;margin:.15rem 0 .85rem}.intro{font-size:1.15rem}p{max-width:76ch}.study{display:grid;grid-template-columns:minmax(210px,.83fr) minmax(0,1.7fr);gap:15px;margin:1.5em 0}.box{background:white;border:1px solid #bdcbbd;border-radius:12px;padding:clamp(14px,2.6vw,28px)}label{display:block;font-weight:650;margin:.75em 0 .18em}select,input{width:100%;font:inherit;accent-color:#237e68}select{padding:.42em;border:1px solid #8d9b91;background:white;color:#21352f;border-radius:5px}a{color:#006254}.small{font-size:.91rem;color:#47604e}canvas{display:block;width:100%;height:196px}.answer{font-size:1.1rem;font-weight:bold;border-top:2px solid #247967;margin:.5em 0;padding:.45em 0;display:block}table{width:100%;border-collapse:collapse;font-size:.94rem}td,th{padding:.4em .2em;text-align:left;border-bottom:1px solid #d1dacf}td+td,th+th{text-align:right;font-variant-numeric:tabular-nums}output{font-variant-numeric:tabular-nums}footer{margin:1.5em 0}.muscles{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.muscles h3{margin:.2em 0;font-size:.98rem;color:#47604e}.muscles ul{list-style:none;padding:0;margin:.2em 0}.muscles li{display:flex;justify-content:space-between;padding:.16em 0;border-bottom:1px solid #d9e2d6}.muscles span:last-child{font-variant-numeric:tabular-nums}@media(max-width:720px){.study{grid-template-columns:1fr}.muscles{gap:.5rem}body{padding:14px}td,th{padding:.35em .1em}table{font-size:.85rem}canvas{height:170px}}@media(max-width:420px){.muscles{grid-template-columns:1fr}}
+</style></head><body><main>
+<header><p>NeuroTranslate 0.0 · Muscle and motion</p><h1>From walking to standing</h1><p class="intro">Two people in a laboratory can sway the same distance while using their leg muscles differently. Can a forecast learned from walking also predict a standing person’s next movement and muscle activity? Keep an invented history fixed and change which recordings taught the model.</p></header>
+<div class="study"><section class="box"><h2>Set up the comparison</h2><label for="method">Training recordings or simple rule</label><select id="method"></select>
+<label for="posture">Recorded posture supplied to model</label><select id="posture"><option value="0">Standing</option><option value="1">Walking</option></select>
+<label for="direction">Direction the visual scene turns</label><select id="direction"><option value="-1">Counterclockwise</option><option value="1">Clockwise</option></select>
+<label for="burst">Added burst in left shin <output id="burstV"></output></label><input id="burst" type="range" min="0" max="60" step="2" value="16">
+<label for="sway">Past side-to-side sway <output id="swayV"></output></label><input id="sway" type="range" min=".25" max="2" step=".05" value="1"><p id="context" class="small"></p></section>
+<section class="box"><h2>The next eighth of a second</h2><canvas id="chart" role="img" aria-label="Last 125 milliseconds of invented sacrum motion and all 32 forecast positions, shown on the side-to-side and up-down axes"></canvas><p class="small">The solid line is the last 125 ms of the invented movement. The dotted line follows the predicted path of a marker on the sacrum, a bone at the back of the pelvis.</p><output class="answer" id="xyz"></output><p class="small">Change at the final sample, in source side-to-side, up–down and front-to-back axes. The sign convention is the one in the recorded file.</p>
+<h2>Leg signal amplitude</h2><div id="muscles" class="muscles" aria-live="polite"></div><p class="small">Each number is the predicted root-mean-square voltage (µV) over the same future interval. Squaring each voltage before averaging keeps opposite signs from cancelling. This does not measure the muscle’s force.</p></section></div>
+<section class="box"><h2>Does a walking fit help on real standing records?</h2><label for="cohort">People scored</label><select id="cohort"><option value="historical">Historical assessment people</option><option value="development">Grouped development folds</option></select><label for="scope">Posture for scoring</label><select id="scope"><option value="standing">Standing</option><option value="walking">Walking</option></select><p id="support"></p><table><thead><tr><th>Forecast</th><th>Muscle error (µV)</th><th>Path error (mm)</th><th>End error (mm)</th></tr></thead><tbody id="scores"></tbody></table><p id="result"></p></section>
+<section><h2>What was transferred?</h2><p>One model learned a relationship between past readings and future changes using only walking recordings. A second started with that relationship and adjusted its coefficients using the first third of each development participant’s standing rotation log. A third learned from those same standing examples starting from zero. All three issue forecasts for a different person without seeing that person’s future.</p><p>Averaging the eight muscle errors gives a value in microvolts. The motion score averages the distance between predicted and observed markers at each of 32 future samples. Comparing only the final position could miss an earlier turn in the path. Neither these filtered recordings nor their forecasts establish the time required for a biological signal to travel.</p></section>
+<footer><a href="https://eliminatenoise.github.io/NeuroTranslation/muscle-and-motion/">Try the jointly trained Transformer</a> · <a href="https://eliminatenoise.github.io/Interoceptomics/muscle-and-motion/">Compare the real recordings</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-and-motion/">Read the paper</a> · <a href="https://doi.org/10.18112/openneuro.ds003739.v1.0.3">Original dataset</a></footer>
+</main><script id="data" type="application/json">@@DATA@@</script><script>
+'use strict';
+const pack=JSON.parse(document.getElementById('data').textContent),state=pack.state,$=id=>document.getElementById(id);
+const names={pooled:'Trained on both postures',walk_only:'Walking training only',stand_only:'All standing training records',stand_limited:'First third of standing, from scratch',adapted_walk:'Walking fit adjusted on first third of standing',persistence:'Repeat last path and muscle amplitude',hold_position:'Stay still and hold muscle amplitude',velocity16:'Continue the last 16-sample velocity',velocity32:'Continue the last 32-sample velocity',envelope_trend:'Continue the muscle-amplitude change',context_mean:'Training average by posture and cue'};
+for(const [k,n] of Object.entries(names))$('method').add(new Option(n,k));
+function avg(x){return x.reduce((a,b)=>a+b,0)/x.length;}
+function rms(h){return Array.from({length:8},(_,j)=>Math.sqrt(avg(h.map(v=>v[j]*v[j]))));}
+function estimate(mode,h,e,posture,direction){
+ const centered=h.map(p=>p.map((v,j)=>v-h[159][j])),old=rms(e.slice(96,128)),now=rms(e.slice(128));
+ const past=centered.slice(128).map(v=>v.map((a,j)=>a-centered[127][j])),reference=[...now,...past.flat()];
+ let y=[...reference];
+ if(mode==='context_mean')y=state.mean_target[posture+'/'+direction].slice();
+ else if(mode==='hold_position')y.fill(0,8);
+ else if(mode.startsWith('velocity')){
+   const k=Number(mode.slice(8));for(let t=0;t<32;t++)for(let j=0;j<3;j++)y[8+3*t+j]=(centered[159][j]-centered[159-k][j])*(1+t)/k;
+ }else if(mode==='envelope_trend'){for(let j=0;j<8;j++)y[j]=2*now[j]-old[j];}
+ else if(mode!=='persistence'){
+   const ends=[],changes=[],means=[],amps=[];for(let i=0;i<8;i++){const start=20*i,end=start+19,seg=e.slice(start,end+1);
+       ends.push(...centered[end]);changes.push(...centered[end].map((v,j)=>v-centered[start][j]));
+       means.push(...Array.from({length:8},(_,j)=>avg(seg.map(v=>v[j]))));amps.push(...rms(seg).map(Math.log1p));}
+   const x=[direction,...ends,...changes,...[8,16,32,64].flatMap(k=>centered[159].map((v,j)=>v-centered[159-k][j])),...means,...amps,...now.map(Math.log1p),...old.map(Math.log1p)];
+   const v=mode==='pooled'?[...x,2*posture-1,...x.map(z=>z*(2*posture-1))]:x;
+   const fit=state.fits[mode];for(let j=0;j<104;j++)y[j]+=fit.bias[j];
+   for(let i=0;i<v.length;i++){const z=(v[i]-fit.mean[i])/fit.sd[i];for(let j=0;j<104;j++)y[j]+=z*fit.coef[i][j];}
+ }
+ return {emg:y.slice(0,8).map(v=>Math.max(0,v)),path:Array.from({length:32},(_,i)=>y.slice(8+3*i,11+3*i))};
+}
+function illustration(){
+ const multiplier=+$('sway').value,burst=+$('burst').value,h=pack.example.sacrum_mm.map(row=>[row[0]*multiplier,row[1],row[2]]);
+ const e=pack.example.leg_uv.map((row,i)=>row.map((v,j)=>v+(j===0?burst*Math.exp(-.5*((i-139)/14)**2)*Math.sin(2*Math.PI*34*i/256):0)));
+ return {h,e};
+}
+function draw(h,path){
+ const cv=$('chart'),w=cv.clientWidth,height=cv.clientHeight,ratio=window.devicePixelRatio||1;cv.width=w*ratio;cv.height=height*ratio;const g=cv.getContext('2d');g.scale(ratio,ratio);
+ const last=h[159],prior=h.slice(127).map(v=>v.map((a,j)=>a-last[j])),future=[[0,0,0],...path],all=[...prior,...future],x=all.map(p=>p[0]),y=all.map(p=>p[1]);
+ const xmin=Math.min(...x),xmax=Math.max(...x),ymin=Math.min(...y),ymax=Math.max(...y),scale=Math.min((w-60)/Math.max(4,xmax-xmin),(height-55)/Math.max(4,ymax-ymin));
+ const point=p=>[w/2+(p[0]-(xmin+xmax)/2)*scale,height/2-(p[1]-(ymin+ymax)/2)*scale];
+ function line(seq,color,dash){g.strokeStyle=color;g.lineWidth=2.8;g.setLineDash(dash);g.beginPath();seq.forEach((p,i)=>i?g.lineTo(...point(p)):g.moveTo(...point(p)));g.stroke();}
+ line(prior,'#247967',[]);line(future,'#a7532d',[4,3]);g.fillStyle='#a7532d';g.beginPath();g.arc(...point(future.at(-1)),4,0,2*Math.PI);g.fill();g.fillStyle='#38594c';g.font='12px sans-serif';g.fillText('SI ↑   ML →',8,height-4);
+}
+function show(){
+ const r=illustration(),m=$('method').value,f=estimate(m,r.h,r.e,+$('posture').value,+$('direction').value);
+ $('burstV').textContent=$('burst').value+' µV';$('swayV').textContent=+$('sway').value+'×';draw(r.h,f.path);
+ $('xyz').textContent='Endpoint change: '+f.path.at(-1).map(v=>v.toFixed(2)).join(', ')+' mm';
+ $('muscles').replaceChildren(...['Left','Right'].map((side,i)=>{const group=document.createElement('div'),header=document.createElement('h3'),ul=document.createElement('ul');header.textContent=side+' leg';group.append(header,ul);
+ ['Front of shin','Soleus','Inner calf','Outer lower leg'].forEach((name,j)=>{const li=document.createElement('li'),a=document.createElement('span'),b=document.createElement('span');a.textContent=name;b.textContent=f.emg[4*i+j].toFixed(2)+' µV';li.append(a,b);ul.append(li);});return group;}));
+ $('context').textContent=(m==='pooled'||m==='context_mean')?'This method uses the supplied posture. You can switch it while leaving the invented history fixed.':'This method gives the same answer for either selected posture when the motion, voltage and visual cue stay fixed.';
+}
+function scores(){const sample=pack[$('cohort').value][$('scope').value],methods=['pooled','walk_only','adapted_walk','stand_limited','stand_only','velocity16','persistence'];$('support').textContent=sample.events+' events from '+sample.people+' people, both rotation directions. Each person receives equal weight.';
+ $('scores').replaceChildren(...methods.map(m=>{const r=sample.methods[m],tr=document.createElement('tr');for(const val of [names[m],r.emg_mae_uv.toFixed(2),r.path_error_mm.toFixed(2),r.endpoint_error_mm.toFixed(2)]){const td=document.createElement('td');td.textContent=val;tr.append(td);}return tr;}));
+ if($('scope').value==='walking')$('result').textContent='The standing-only and adjusted models are shown here on walking records. The prespecified transfer test concerns standing.';
+ else{$('result').textContent=sample.adapted_minus_comparator.stand_limited.both_primary_upper_negative?'Starting from walking weights met the paired improvement criterion for both standing outcomes.':'Starting from walking weights did not meet the requirement for an improvement on both standing outcomes.';}
+}
+['method','posture','direction','burst','sway'].forEach(k=>$(k).addEventListener('input',show));['scope','cohort'].forEach(k=>$(k).addEventListener('change',scores));window.addEventListener('resize',show);show();scores();
+</script></body></html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f7f0">
+<title>Muscle &amp; motion · NeuroTranslation</title>
+<link rel="stylesheet" href="reader.css">
+<script defer src="model.js"></script>
+<script defer src="weights.js"></script>
+<script defer src="study.js"></script>
+<script defer src="experiment.js"></script>
+<script defer src="plots.js"></script>
+<script defer src="reader.js"></script>
+<script defer src="evidence.js"></script>
+</head>
+<body>
+<a class="skip" href="#forecast">Skip to forecasts</a>
+<header><div class="frame nav"><a class="wordmark" href="https://eliminatenoise.github.io/NeuroTranslation/"><i aria-hidden="true"></i>NeuroTranslation</a><nav aria-label="On this page"><a href="#forecast">Forecast</a><a href="#evidence">Evidence</a><a id="download" hidden href="../muscle-and-motion-offline.zip" download>Download ZIP ↓</a></nav></div></header>
+<main class="frame">
+<section class="intro">
+<div><div class="overline">Movement study <span> / </span> Experimental preview</div><h1>Muscle <em>&amp;</em> motion</h1><p>Skin electrodes pick up a burst of electricity. A marker on the lower back traces a curve. Can one model predict what both will do over the next eighth of a second?</p></div>
+<div class="horizon"><strong>125<span> ms</span></strong><span>Forecast window</span><div class="ruler" aria-hidden="true"></div></div>
+</section>
+<section aria-labelledby="inputs-title" class="inputs">
+<div class="input-intro"><div><h2 id="inputs-title">Set the scene</h2><p>Change the invented history and the visual cue. Each history has 160 samples at 256 Hz.</p></div><button id="reset" type="button">Reset example</button></div>
+<div class="controls">
+<fieldset><legend>Posture</legend><div class="seg"><label><input type="radio" name="posture" value="0">Stand</label><label><input type="radio" name="posture" value="1">Walk</label></div></fieldset>
+<fieldset><legend>Visual scene rotation</legend><div class="seg"><label><input type="radio" name="direction" value="-1">Counterclockwise</label><label><input type="radio" name="direction" value="1">Clockwise</label></div></fieldset>
+<label class="slider-label" for="leg-scale"><span>Leg signal <output id="leg-factor" for="leg-scale">1.00×</output></span><input id="leg-scale" type="range" min="0" max="200" value="100" step="5" aria-label="Scale invented leg signal"></label>
+<label class="slider-label" for="path-scale"><span>Pelvis movement <output id="path-factor" for="path-scale">1.00×</output></span><input id="path-scale" type="range" min="0" max="200" value="100" step="5" aria-label="Scale invented pelvis movement"></label>
+</div>
+<details id="edit"><summary>Edit individual samples</summary><p>Enter invented values only. Each row gives a sample in time order. <b>leg_uv</b> holds signed voltages from the four left then four right muscles in the order below. <b>sacrum_mm</b> holds the marker’s ML, SI and AP coordinates in millimetres. Applying a history sets both scale controls to 1×. Edits stay in this browser tab.</p><label for="raw">History and context (JSON)</label><textarea id="raw" rows="6" spellcheck="false"></textarea><div class="action"><button id="apply" type="button">Apply edited input</button><span id="edit-report" role="status"></span></div></details>
+</section>
+<section id="forecast" aria-labelledby="forecast-title">
+<div class="section-head"><div><div class="overline">Invented input</div><h2 id="forecast-title">The next 125 ms</h2></div><label class="select-label" for="comparison">Compare the joint model with<select id="comparison"><option value="specialists">Two separate specialists</option><option value="repeat">Previous RMS + previous path</option><option value="stationary">Previous RMS + stationary marker</option><option value="velocity16">Previous RMS + 16-step velocity</option><option value="velocity32">Previous RMS + 32-step velocity</option></select></label></div>
+<noscript><style>.inputs,.forecast-grid,#message,.section-head .select-label,.small-note{display:none}</style><p>Running the example requires JavaScript. In the six-person assessment, the joint model had mean errors of 9.499 µV for muscle voltage and 1.965 mm for the pelvis path. The specialists scored 9.453 µV and 1.940 mm. <a href="results.json">Open the full numerical results</a>.</p></noscript>
+<p id="message" role="status">Loading the fitted models…</p>
+<div class="forecast-grid">
+<article class="card" aria-labelledby="leg-title"><div class="card-head"><div class="kicker">Surface electrodes</div><h3 id="leg-title">Eight muscle signals</h3><p>Each bar gives the root mean square (RMS) voltage for one muscle across the whole future window. A larger voltage can occur with muscle activity. Force requires a separate measurement.</p></div>
+<div class="legend"><span class="sym joint">Joint</span><span class="sym alt" data-compare>Specialists</span><span class="sym past">Previous RMS</span></div>
+<div id="bars" role="img" aria-label="Eight channel forecasts with previous RMS markers. Exact values appear in the table below."></div>
+<div class="scale"><span>0</span><span id="bar-max"></span></div>
+<details><summary>Eight voltages in µV</summary><div class="table-box"><table id="emg-table"><thead><tr><th scope="col">Muscle</th><th scope="col">Previous</th><th scope="col">Joint</th><th scope="col" data-compare>Specialists</th></tr></thead><tbody></tbody></table></div></details>
+<details><summary>Signed input before the forecast</summary><label for="channel">Leg electrode<select id="channel"></select></label><canvas id="signal-plot" aria-label="Signed invented voltage history. All values are available under Edit individual samples."></canvas><p>Time runs from the first invented sample to the forecast cutoff. RMS squares these signed voltages before averaging and taking the square root.</p></details></article>
+<article class="card" aria-labelledby="path-title"><div class="card-head"><div class="kicker">Optical marker</div><h3 id="path-title">The path of the pelvis</h3><p>The sacrum marker starts the forecast at zero. Follow the 32 positions from there. The model projects recent velocity and learns corrections at four points, joining them with straight lines. The faint line shows the last 32 steps of invented motion.</p></div>
+<div class="legend"><span class="sym joint">Joint</span><span class="sym alt" data-compare>Specialists</span><span class="sym history">History</span></div>
+<label class="view-label" for="view">View<select id="view"><option value="3d">3D projection</option><option value="01">ML × SI</option><option value="02">ML × AP</option><option value="12">SI × AP</option></select></label>
+<canvas id="path-plot" aria-label="Relative sacrum path in millimetres. Exact positions are in the table below."></canvas>
+<div class="scrub"><label for="sample">Inspect position <output id="sample-time" for="sample"></output></label><input id="sample" type="range" min="1" max="32" value="32"></div>
+<div class="coordinates" aria-live="off" id="coordinates"></div>
+<details><summary>All 32 positions in mm</summary><p>ML runs side to side, SI runs vertically and AP runs front to back. The anatomical direction of each positive axis remains unresolved.</p><div class="table-box"><table id="path-table"><thead><tr><th rowspan="2" scope="col">ms</th><th colspan="3" scope="colgroup">Joint</th><th colspan="3" scope="colgroup" data-compare>Specialists</th></tr><tr><th>ML</th><th>SI</th><th>AP</th><th>ML</th><th>SI</th><th>AP</th></tr></thead><tbody></tbody></table></div></details></article>
+</div><p class="small-note">These examples have no recorded future. The forecast differences above show what each method predicts from the same invented history. The study below checks the models against recordings.</p>
+</section>
+<section id="evidence" aria-labelledby="evidence-title"><div class="overline">Human recordings</div><h2 id="evidence-title">How close did the forecasts come?</h2><div id="study-results"></div>
+<p>Standing and walking were recorded in separate sessions. Standing came first for this type of visual perturbation. Offline filters and optical resampling used information beyond a single sample. The errors describe forecasts on qualifying recorded windows and leave live response timing open.</p></section>
+<section class="source"><div><h2>Follow the measurements</h2><p>Steven M. Peterson and Daniel P. Ferris recorded the original perturbed beam-standing and beam-walking sessions. The authors released the recordings under CC0. <a href="https://doi.org/10.18112/openneuro.ds003739.v1.0.3">OpenNeuro ds003739, v1.0.3</a> · <a href="https://doi.org/10.1016/j.dib.2021.107635">Acquisition and processing</a></p></div><div class="related"><a href="https://eliminatenoise.github.io/NeuroTranslation/muscle-motion-controls/">Forecast controls <span>↗</span></a><a href="https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-and-motion/">Read the paper <span>↗</span></a><a href="https://eliminatenoise.github.io/Interoceptomics/muscle-and-motion/">Open the recording atlas <span>↗</span></a></div></section>
+</main><footer><div class="frame"><span>NeuroTranslation</span><a href="NOTICE.md">Sources and reuse</a></div></footer>
+</body></html>

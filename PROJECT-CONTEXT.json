@@ -1382,5 +1382,29 @@
     "paper_source": "docs/papers/visual-balance/visual-balance-source.zip",
     "atlas": "https://eliminatenoise.github.io/Interoceptomics/visual-balance/",
     "domain": "Forecast head and sacrum displacement 125 ms ahead on stored, offline-processed visual-rotation walking trials. Development retained 2,430 rotations from 17 of 18 selected participants. Assessment retained 880 of 894 rotations from six people. Six reserve EEG SET/FDT recordings remained unopened. The Transformer and shared encoder each missed the adjusted scalp-benefit criterion at both markers."
+  },
+  "muscle_motion": {
+    "version": "2026-11-21 experimental preview",
+    "source_doi": "10.18112/openneuro.ds003739.v1.0.3",
+    "method_doi": "10.1016/j.dib.2021.107635",
+    "source_license": "CC0 1.0",
+    "model": "models/muscle-and-motion/README.md",
+    "model_zip": "models/muscle-and-motion-model.zip",
+    "weights": "models/muscle-and-motion/weights.json",
+    "transfer_weights": "models/muscle-and-motion/transfer-weights.json",
+    "source_reader": "models/muscle-and-motion/source/README.md",
+    "viewer": "docs/muscle-and-motion/index.html",
+    "offline_viewer": "docs/muscle-and-motion-offline.zip",
+    "aggregate": "models/muscle-and-motion/assessment-summary.json",
+    "linear_model": "models/neurotranslate-0.0/muscle_motion/model.json",
+    "linear_viewer": "docs/muscle-motion-controls/index.html",
+    "linear_assessment": "models/neurotranslate-0.0/muscle_motion/historical.json",
+    "cross_model": "models/neurotranslate-0.0/muscle_motion/historical-model-comparison.json",
+    "shared_zip": "models/neurotranslate-0.0.zip",
+    "paper": "docs/papers/muscle-and-motion/index.html",
+    "paper_pdf": "docs/papers/muscle-and-motion/muscle-and-motion.pdf",
+    "paper_source": "docs/papers/muscle-and-motion/muscle-and-motion-source.zip",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/muscle-and-motion/",
+    "domain": "From 625 ms of offline-processed leg voltages and sacrum motion, predict eight muscle RMS amplitudes and 32 XYZ path positions over the next 125 ms. Eighteen people provided 5,179 eligible development rotations. Six people outside training provided 879 standing and 880 walking assessment rotations. Their walking records appeared in earlier research. Six reserve participants’ recording payloads stayed unopened. The joint Transformer missed its two-outcome improvement criterion against separately trained specialists. Neither force nor neural conduction time was measured."
   }
 }
