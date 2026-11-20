@@ -1,25 +1,35 @@
-# Cue phase did not beat grip history
+[The studies](../../README.md) › Study 13 · Paced grip: a fit that changes with the cue
 
-Just before a relax cue, rising grip voltage could mean something different from a rise during a squeeze. We gave a forecast six extra coefficients to express that difference. They helped the compact model on the training folds. On the three previously studied development participants, that gain disappeared and the original ridge using the full voltage history again had the lowest mean error. [Protocol posted before fitting](https://github.com/eliminatenoise/NeuroTranslation/blob/71c196dd10aabdc1b0fe2750b87a1df3f2edb96e/benchmarks/hygrip-force/cue-phase/PROTOCOL.md).
+# Letting the forecast change with the cue made it worse for all three people
 
-The measurement was the released right-hand grip transducer voltage in the HYGRIP task, sampled at 50 Hz. Every forecast used the same issue grid and target six samples later, or 120 ms on the release clock. Each comparison uses the same 16,195 issues from 79 trials in seven eligible TRAIN participants and 7,995 issues from 39 trials in three previously studied DEV participants. One of the eight assigned TRAIN runs remained clock-held before waveform access (13 right-hand trials and 2,665 planned issues). All issues in the eligible runs were scored. The prior force-history ridge, persistence and backward-slope scores were reproduced exactly at the reported split and phase cells. [HYGRIP descriptor](https://doi.org/10.3389/fnins.2020.00919), [earlier benchmark](https://github.com/eliminatenoise/NeuroTranslation/tree/6fcd4d79894f7844ece20108cdd3bc728f193f74/benchmarks/hygrip-force).
+Just before the cue says relax, a rising grip voltage could mean something different from a rise in the middle of a squeeze. A forecast was given six extra weights to express that difference. For the three test people of [study 11](../results-2026-11-19/), the plain straight-line fit on the sensor's full recent history forecast the voltage 120 ms ahead with an error of **0.3601 mV**; the fit allowed to differ between squeeze and rest missed by **0.3741 mV**, worse for all three. The extra weights had helped a compact version of the fit among the fitting people, and that gain did not survive on the test people. It failed the rule set for it before fitting. [The plan, posted before fitting](https://github.com/eliminatenoise/NeuroTranslation/blob/71c196dd10aabdc1b0fe2750b87a1df3f2edb96e/benchmarks/hygrip-force/cue-phase/PROTOCOL.md)
 
-| Predictor | TRAIN mean RMSE (mV) | DEV mean RMSE (mV) |
+Every score here is the measure that punishes large misses (root mean squared error), worked out for each person and averaged, in millivolts of the sensor's output. A *straight-line fit* is a weighted sum of its inputs, here a ridge regression.
+
+| Forecast | Seven fitting people (mV) | Three test people (mV) |
 | --- | ---: | ---: |
-| Persistence | 0.531851 | 0.516850 |
-| Backward slope | 0.558423 | 0.496622 |
-| Original force-history ridge | **0.393763** | **0.360083** |
-| Compact residual ridge | 0.410521 | 0.373600 |
-| Phase-conditioned residual ridge | 0.402769 | 0.374083 |
+| Repeat the current voltage | 0.531851 | 0.516850 |
+| Carry the recent change forward | 0.558423 | 0.496622 |
+| The original fit on the sensor's history | **0.393763** | **0.360083** |
+| A compact fit on a few summaries of that history | 0.410521 | 0.373600 |
+| The compact fit, allowed to differ between squeeze and rest | 0.402769 | 0.374083 |
 
-Each participant contributed equally to the mean RMSE. Within a participant, each trial contributed equally and each issue within that trial contributed equally. The TRAIN folds selected the penalties (0.01 for the force-history and compact residual models, 0.1 for the phase-conditioned model), so TRAIN errors include selection optimism. DEV applied the locked refits once. Its participants had already been studied under the earlier comparison. The three FINAL participants stayed sealed.
+Each person counts equally, each trial equally within a person, and each forecast equally within its trial. The penalties were chosen on the fitting people (0.01 for the history fit and the compact fit, 0.1 for the fit that changes with the cue), so the fitting people's errors are flattered by that choice. The test people were then scored once with the fixed fits; they had already been scored in study 11. The three people set aside stayed unopened.
 
-Against the matched compact residual model, phase lowered mean TRAIN error by 0.007752 mV (6 of 7 participants improved, descriptive 95% interval −0.017523 to +0.002020 mV). On DEV, phase raised the mean by 0.000482 mV (1 of 3 improved, interval −0.011141 to +0.012105 mV). Against the original 27-feature ridge, phase raised mean error by 0.009005 mV on TRAIN and 0.014000 mV on DEV. None of the three DEV participants improved on that original ridge (interval −0.017095 to +0.045094 mV, exact two-sided sign-test p = 0.25). The prior ridge fits the upcoming voltage directly and gets all 20 history readings as separate inputs. Its advantage answers which forecast did better here. The matched compact comparison is the one that isolates the addition of phase interactions.
+Against its own compact version, the squeeze-and-rest terms lowered the fitting people's error by 0.007752 mV (6 of 7 better, descriptive 95% interval −0.017523 to +0.002020 mV) and raised the test people's by 0.000482 mV (1 of 3 better, interval −0.011141 to +0.012105 mV). Against the original 27-input fit they raised the error by 0.009005 mV among the fitting people and 0.014000 mV among the test people, where none of the three did better (interval −0.017095 to +0.045094 mV, exact two-sided sign test p = 0.25). The original fit forecasts the coming voltage directly and takes all 20 recent readings as separate inputs, so its lead says which forecast did better here; the comparison with the matched compact fit is the one that isolates the squeeze-and-rest terms.
 
-The two DEV transition strata favoured the phase-conditioned model over the full ridge on average. They had 540 and 390 issues, compared with 5,505 during the scheduled on-to-on phase and 1,560 during off-to-off. The transition differences are descriptive, and every stratum comes from the same three participants. A scheduled switch identifies the intended cue phase. It supplies no observation of the exact visual or physical switch. Voltage is the released signal unit, so there is no calibrated Newton error, physical timing claim, or basis for attributing these results to neural dynamics.
+In the test people, the two stretches where the cue switched favoured the new fit over the original on average. They held 540 and 390 forecasts, against 5,505 during scheduled squeezing and 1,560 during scheduled rest. Those differences are descriptive, and every stretch comes from the same three people.
 
-The prespecified screen required lower mean error than all four comparators on both splits and a majority of participants improving against both fitted comparators. The phase-conditioned model failed and stays an experimental comparison. The original 27-feature ridge remains the benchmark. The downloadable aggregate table includes each phase denominator, the paired contrasts against all four comparisons and the TRAIN grid.
+## What was measured
 
-[Prespecified protocol](PROTOCOL.md) · [Training aggregates](TRAIN.json) · [Development aggregates](DEV.json) · [Download the comparison](HYGRIP-Cue-Phase-Aggregates.zip)
+The target was the released voltage of the right-hand grip sensor in the HYGRIP task, sampled at 50 Hz. Every forecast used the same schedule of forecast moments and the target six samples later, 120 ms on the released clock. Every comparison uses the same 16,195 forecasts from 79 trials of the seven usable fitting people and the same 7,995 forecasts from 39 trials of the three test people. One of the eight assigned fitting runs had been held back by the clock check before any waveform was read (13 right-hand trials and 2,665 planned forecasts). Every forecast in the usable runs was scored. The earlier scores of the history fit, of repeating the voltage and of carrying the change forward were reproduced exactly, for each group and each stage of the cue. [HYGRIP descriptor](https://doi.org/10.3389/fnins.2020.00919) · [The earlier study, as it stood](https://github.com/eliminatenoise/NeuroTranslation/tree/6fcd4d79894f7844ece20108cdd3bc728f193f74/benchmarks/hygrip-force)
 
-Glossary revision 36, SHA-256 `40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406`.
+## What it does not show
+
+A scheduled switch marks the intended stage of the cue; it is not an observation of the moment the screen or the hand actually switched. The unit is the released voltage, so there is no error in newtons, no claim about physical timing and no ground for reading these results as brain dynamics.
+
+## The plan
+
+The rule fixed before fitting asked for a lower average error than all four comparison forecasts in both groups, and for most people to improve against both fitted comparisons. The new fit failed and stays an experiment; the original 27-input fit remains the forecast to beat. The downloadable table holds the forecast counts behind each stage of the cue, the paired comparisons against all four forecasts and the fitting people's grid of penalties.
+
+[The plan](PROTOCOL.md) · [Results of the fitting people](TRAIN.json) · [Results of the test people](DEV.json) · [Download the comparison](HYGRIP-Cue-Phase-Aggregates.zip)

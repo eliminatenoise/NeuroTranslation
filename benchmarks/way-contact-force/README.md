@@ -29,7 +29,7 @@ For each person the error counts every lift equally, and every scored moment equ
 | Learned forecast · EEG timed with the lift − EEG from another lift | +0.006298 | [−0.045941, +0.058538] | 2 of 3 | 1.00 |
 | Learned forecast · EEG timed with the lift − EEG from 300 ms earlier | +0.010239 | [−0.119302, +0.139781] | 1 of 3 | 1.00 |
 
-The intervals are descriptive, worked out from the three people's paired changes. The best result here was the straight-line fit on force and motion. It used different inputs and training choices from the learned forecast, so the gap between the two says nothing about which kind of model is better. [Results file, unrounded, with where the data came from](RESULTS.json)
+The intervals are descriptive paired t intervals, worked out from the three people's paired changes. The best result here was the straight-line fit on force and motion. It used different inputs and training choices from the learned forecast, so the gap between the two says nothing about which kind of model is better. [Results file, unrounded, with where the data came from](RESULTS.json)
 
 ## When the clock starts
 

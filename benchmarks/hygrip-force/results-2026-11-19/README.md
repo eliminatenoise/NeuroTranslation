@@ -1,41 +1,51 @@
-# HYGRIP’s first development result
+[The studies](../../README.md) › Study 11 · Paced grip: brain signal
 
-The hand has already started squeezing. Recent transducer readings and the cue schedule forecast its signed voltage with **0.360083 mV RMSE** on the first HYGRIP development check. Adding aligned scalp EEG raised that to **0.461331 mV**. All three development participants had higher error after EEG was added. The experiment compares forecasts of one measured signal in one paced right-hand grip task.
+# Scalp EEG raised the grip-sensor error for all three people
 
-[Open the voltage forecast](https://eliminatenoise.github.io/NeuroTranslation/hygrip-force/) · [Download the offline browser and launchers](HYGRIP-voltage-forecast-20261119-r2.zip) · [Read the protocol before DEV](https://github.com/eliminatenoise/NeuroTranslation/blob/dd3526d4e5d67986febe01983dbdf875504d6643/benchmarks/hygrip-force/DESIGN.json) · [Unrounded aggregate results](AGGREGATES.json)
+The hand has already started squeezing in time with the cue. For three test people, a straight-line fit on the sensor's recent readings and the cue schedule forecast its voltage 120 ms ahead with an error of **0.3601 mV**. Given scalp EEG as well, it missed by **0.4613 mV**, and all three people did worse. EEG from the next trial, 0.4228 mV, and EEG from 400 ms earlier, 0.3850 mV, both beat the correctly timed EEG. The study compares forecasts of one measured signal in one paced right-hand grip task.
 
-## The check
+Every score here is the measure that punishes large misses (root mean squared error), in millivolts of the sensor's output: volts multiplied by 1,000. The target and the fitted models work in volts, and the release has no conversion to newtons. EEG is electrical activity of the brain, picked up on the scalp. A *straight-line fit* is a weighted sum of its inputs, here a ridge regression.
 
-Seven of eight assigned TRAIN volunteers passed the clock screen. One entire run remained assigned to TRAIN and was withheld because its adjacent force-versus-EEG Go intervals differed by 249.5 ms, above the prespecified 40 ms limit. The seven eligible volunteers supplied **79 right-hand trials and 16,195 scored issues**. Their scores come from held-person folds that also chose the penalties. The models were fitted on all seven eligible TRAIN people and frozen before DEV scoring.
-
-All three original DEV volunteers passed the same eligibility screen. All **39 right-hand trials and 7,995 scheduled issues** were scored, with the same rows used by every branch. Scoring used their fixed coefficients and settings. The three people assigned to FINAL remain reserved. The protocol was posted before any DEV observations. The split and original design had been fixed locally before waveform access, followed by a TRAIN-only screen and its pre-fit amendment. [Original prospective record](../README.md) · [GitHub publication run](https://github.com/eliminatenoise/NeuroTranslation/actions/runs/44432686103)
-
-| Forecast | TRAIN RMSE (mV) | DEV RMSE (mV) | DEV RMSE (V) |
+| Forecast | Seven fitting people, each scored by a fit without them (mV) | Three test people (mV) | Three test people (V) |
 | --- | ---: | ---: | ---: |
-| Scheduled cue timing | 0.854152 | 0.889869 | 0.000889869 |
-| Keep the current voltage | 0.531851 | 0.516850 | 0.000516850 |
-| Extend the backward 80 ms slope | 0.558423 | 0.496622 | 0.000496622 |
-| Force history and timing | 0.393763 | 0.360083 | 0.000360083 |
-| Force history, timing and aligned scalp EEG | 0.417955 | 0.461331 | 0.000461331 |
-| Force history, timing and rotated EEG | 0.402970 | 0.422755 | 0.000422755 |
-| Force history, timing and earlier EEG | 0.415367 | 0.384986 | 0.000384986 |
+| Cue timing only | 0.854152 | 0.889869 | 0.000889869 |
+| Repeat the current voltage | 0.531851 | 0.516850 | 0.000516850 |
+| Carry the last 80 ms of change forward | 0.558423 | 0.496622 | 0.000496622 |
+| Sensor history and timing | 0.393763 | 0.360083 | 0.000360083 |
+| Sensor history, timing and scalp EEG timed to the forecast | 0.417955 | 0.461331 | 0.000461331 |
+| Sensor history, timing and EEG from the next trial | 0.402970 | 0.422755 | 0.000422755 |
+| Sensor history, timing and EEG from 400 ms earlier | 0.415367 | 0.384986 | 0.000384986 |
 
-Every person counts equally in the group estimate. Within a person, trials count equally, and each issue counts equally within its trial. For each person we take the square root of the weighted mean squared error, then average those roots. Millivolts are volts multiplied by 1,000. The measured target and the fitted models use volts.
+Every person counts equally in the group's score. Within a person, trials count equally, and each forecast counts equally within its trial: for each person, the square root of the weighted average squared error, then the average of those roots.
 
 ## The EEG controls
 
-The rotated control takes EEG from the next right-hand trial in the same person and protocol at the same time relative to Go. The earlier control uses the same trial's EEG ending 400 ms sooner, so its history does not overlap the aligned window. Both keep the force features and predicted target from the original trial. The planned test required aligned EEG to reduce mean error against force history and both controls.
+The next-trial control takes EEG from the next right-hand trial of the same person and protocol, at the same time after Go. The earlier control takes the same trial's EEG, ending 400 ms sooner, so its history does not overlap the timed window. Both keep the original trial's force inputs and target. The pass rule set before scoring required timed EEG to lower the average error against the history fit and against both controls.
 
-| DEV comparison, aligned minus comparator | Mean RMSE change (mV) | Descriptive paired 95% t interval (mV) | Lower / higher / ties | Exact two-sided sign p |
+| Test people: timed EEG minus | Average change (mV) | Descriptive paired 95% t interval (mV) | People lower / higher / tied | Exact two-sided sign test p |
 | --- | ---: | ---: | ---: | ---: |
-| Force history | +0.101248 | [−0.276644, +0.479140] | 0 / 3 / 0 | 0.25 |
-| Rotated EEG | +0.038576 | [−0.039377, +0.116528] | 0 / 3 / 0 | 0.25 |
-| Earlier EEG | +0.076345 | [−0.295544, +0.448234] | 2 / 1 / 0 | 1.00 |
+| The history fit | +0.101248 | [−0.276644, +0.479140] | 0 / 3 / 0 | 0.25 |
+| EEG from the next trial | +0.038576 | [−0.039377, +0.116528] | 0 / 3 / 0 | 0.25 |
+| EEG from 400 ms earlier | +0.076345 | [−0.295544, +0.448234] | 2 / 1 / 0 | 1.00 |
 
-The directional test failed in TRAIN and DEV. Aligned EEG raised mean error against all three comparisons in each. For the earlier control on DEV, two people had lower error with aligned EEG and one had higher error. The mean still favored the earlier control. All three DEV intervals span zero. Three people leave the size and direction of effects in other populations uncertain. The result does not identify the origin of the scalp signal or establish what EEG would add in a different task.
+The rule failed in both groups: timed EEG raised the average error against all three comparisons, among the fitting people and the test people alike. Against the earlier control, two test people did better with timed EEG and one worse, but the average still favoured the earlier control. All three intervals for the test people include zero.
+
+## Who was scored
+
+Seven of the eight people assigned to fitting passed the clock check. One whole run, still assigned to fitting, was withheld because the intervals between its paired Go markers on the force and EEG clocks differed by 249.5 ms, over the 40 ms limit set in advance. The seven usable fitting people supplied **79 right-hand trials and 16,195 scored forecasts**. Their scores come from folds that left each person out, the same folds that chose the penalties. The models were then fitted on all seven and fixed before the test people were scored.
+
+All three test people passed the same check. All **39 right-hand trials and 7,995 scheduled forecasts** were scored, with the same rows for every version, using the fixed weights and settings. The three people set aside were not opened. The plan was published before anything from the test people was seen; the split and the original design had been fixed before any waveform was read, followed by a check on the fitting recordings only and an amendment before fitting. [The plan, with this study's background](../README.md) · [GitHub publication run](https://github.com/eliminatenoise/NeuroTranslation/actions/runs/44432686103)
 
 ## What the forecast uses
 
-HYGRIP measured a transducer during visually paced power grip. The nominal cue schedule follows Go and supplies a timing input. The physical reference shown on the screen and its delivery time were unmeasured. The target is the released signed transducer voltage exactly six samples ahead on the 50 Hz force grid. EEG was released at 1 kHz. Its window ends at least 20 ms before the mapped issue time on the released clocks. That designed margin leaves physical synchronization, filter phase and live acquisition-to-output latency unmeasured. The release has no usable calibration for a result in newtons. [HYGRIP descriptor](https://doi.org/10.3389/fnins.2020.00919) · [Figshare v1 data and license](https://doi.org/10.6084/m9.figshare.12383639.v1)
+HYGRIP measured a hand-held sensor during power grip paced by a cue on a screen. The nominal cue schedule follows Go and is a timing input; the reference actually shown on the screen, and when it was shown, were not measured. The target is the released signed sensor voltage exactly six samples ahead on the 50 Hz force grid. The EEG was released at 1 kHz, and its window ends at least 20 ms before the forecast's time on the released clocks. That designed margin leaves the physical synchronisation, the phase of the filters and the delay of a live system unmeasured. [HYGRIP descriptor](https://doi.org/10.3389/fnins.2020.00919) · [Figshare version 1 data and licence](https://doi.org/10.6084/m9.figshare.12383639.v1)
 
-The browser starts with an invented example and runs three fixed TRAIN models for timing, force history and aligned EEG. Its synthetic numbers are forecasts of invented inputs. The tables above come from the measured HYGRIP study. The offline ZIP contains Windows, macOS and Linux launchers, input instructions and the same readable HTML and JavaScript used by the hosted page. Open a compatible JSON window locally or open the example. [SHA-256 checksums](SHA256SUMS)
+## What it does not show
+
+Three people leave the size and the direction of an effect in anyone else uncertain. The result does not say where the scalp signal came from, or what EEG would add in a different task.
+
+## Open it
+
+[Open the voltage forecast](https://eliminatenoise.github.io/NeuroTranslation/hygrip-force/) · [Download the offline page and launchers](HYGRIP-voltage-forecast-20261119-r2.zip) · [The plan as published before the test people were scored](https://github.com/eliminatenoise/NeuroTranslation/blob/dd3526d4e5d67986febe01983dbdf875504d6643/benchmarks/hygrip-force/DESIGN.json) · [Results file, unrounded](AGGREGATES.json)
+
+The page starts with an invented example and runs three fixed models fitted on the seven fitting people: timing, sensor history, and sensor history with timed EEG. Its numbers are forecasts of invented inputs; the tables above come from the measured HYGRIP study. The offline ZIP has launchers for Windows, macOS and Linux, input instructions and the same readable HTML and JavaScript as the hosted page. Open a compatible JSON window on your computer, or open the example. [SHA-256 checksums](SHA256SUMS)
