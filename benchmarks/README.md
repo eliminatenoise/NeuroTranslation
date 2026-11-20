@@ -8,6 +8,8 @@ The numbered comparison below covers the original 23 repository studies and two 
 
 **Can muscle recordings correct a wrist forecast?** In 1,879 pointing trials from six people already used for training, adding the forearm signal reduced error from 3.665° to 3.549° against a correction that used wrist motion alone. All six people improved on that comparison. Only three improved over the original uncorrected model. The gains were concentrated early in the movement. [Study, results and reproduction instructions](wrist-forearm-correction/)
 
+**Can the words pick the right hand movement within one task?** Across 60 assessment intervals, hand geometry reached 23.89% first-place retrieval with the simpler model. A comparison based on duration, timing and tracking coverage reached 35.56%. [Study and fitted models](hand-language-retrieval/) · [Inspect five recorded movements](https://eliminatenoise.github.io/NeuroTranslation/hand-search/)
+
 **Which movement do the words describe?** Two models rank recordings against descriptions written by people who saw them. The simpler calculation had the higher first-place score. [Language and motion study](text-motion-retrieval/)
 
 ## How to read the numbers

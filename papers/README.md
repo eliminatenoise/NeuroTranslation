@@ -2,6 +2,8 @@
 
 Each paper has a Technical edition, for readers who want the method, and a Simple English edition, which explains the same things in ordinary words and takes more pages to do it.
 
+**New research supplement.** *How precisely do words identify a recorded movement?* reports two experiments comparing descriptions with recorded movements. It explains why the timing of an action can be easier to identify than its hand shape, and which question about physical guidance remains open. [Read online](https://eliminatenoise.github.io/NeuroTranslation/papers/language-and-observed-movement/language-and-movement.html) · [Download the four-page PDF](../docs/papers/language-and-observed-movement/language-and-movement.pdf) · [Editable source and evidence](../docs/papers/language-and-observed-movement/)
+
 | | Technical | Simple English |
 | --- | --- | --- |
 | *NeuroTranslation: A New Paradigm In Brain-Body Mapping.* | [PDF, 153 pages](current/neurotranslation-technical.pdf) | [PDF, 188 pages](current/neurotranslation-explained.pdf) |

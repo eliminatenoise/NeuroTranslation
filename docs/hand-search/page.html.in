@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Search a recorded hand movement · NeuroTranslate</title>
+<style>
+/* GAME STYLES */
+html{background:#101922;color-scheme:dark}
+body{margin:0;color:#e5edf4;font:1rem/1.5 system-ui,sans-serif}
+main{box-sizing:border-box;margin:0 auto;max-width:50rem;padding:1.4rem clamp(.9rem,4vw,1.8rem) 3rem}
+main a{color:#b1e7d6} header a,footer{font-size:.87rem} footer{margin-top:1.3rem}
+.hand-search h1{font-size:clamp(1.85rem,5.5vw,3.1rem);line-height:1.09;margin:.95rem 0}
+.hand-search h3{line-height:1.2}
+</style>
+</head>
+<body><main><header><a href="https://github.com/eliminatenoise/NeuroTranslation">NeuroTranslate</a></header>
+<section id="hand-search" aria-label="Search recorded hand movements"></section>
+<noscript>Enable JavaScript to search and replay these hand movements. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hand-language-retrieval">Read the study results</a>.</noscript>
+<footer><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hand-language-retrieval">Study, weights and reproduction instructions</a> · <a href="https://holoassist.github.io/">HoloAssist data</a></footer>
+</main><script type="application/json" id="recorded-bytes">/* MODEL FILES */</script>
+<script type="module">/* REPLAY PROGRAM */</script></body></html>
