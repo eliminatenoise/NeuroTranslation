@@ -30,7 +30,7 @@ What does not exist yet: a test of the general model on people nobody has looked
 
 ## Try a model
 
-The first six examples open in a browser with nothing to install. The last two use JavaScript or Python.
+Eight things to try. The first six open in a browser on your own computer, with nothing to install; the seventh is code for programmers, and the eighth needs Python.
 
 | What it asks | What you can do |
 | --- | --- |
