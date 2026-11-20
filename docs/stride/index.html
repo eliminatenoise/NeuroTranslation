@@ -255,9 +255,11 @@ function renderScene(canvas,scene,state,schema) {
   function weights(id) {return parameters[id] ??= loadParameters(pack.models[id]);}
   const state={frame:16,point:15,yaw:-35,pitch:12,last:true,model:true,alternative:false,reference:false};
   let scene=null,clock=0,drag=null,revision=0,activeExample=null,playFromStart=true;
+  let activeTick=null;
   const layers=['last','model','alternative','reference'];
   const activity=word=>word[0].toUpperCase()+word.slice(1);
   function stop() {
+    activeTick=null;
     cancelAnimationFrame(clock);clock=0;
     el('play').textContent=state.frame===22?'Replay':'Play';
   }
@@ -389,15 +391,20 @@ function renderScene(canvas,scene,state,schema) {
   slider.addEventListener('input',()=>{state.frame=Number(slider.value);playFromStart=false;stop();draw();});
   el('play').addEventListener('click',()=>{
     if(!scene)return;
-    if(clock){stop();return;}
+    if(activeTick){stop();return;}
     if(playFromStart || state.frame===22){state.frame=0;draw();}
     playFromStart=false;
-    const start=performance.now(),from=state.frame;el('play').textContent='Pause';
+    const from=state.frame;
+    let start;
+    el('play').textContent='Pause';
     function tick(now) {
+      if(activeTick!==tick)return;
+      start ??= now;
       const frame=Math.min(22,from+Math.floor((now-start)/50));
-      if(frame!==state.frame){state.frame=frame;draw();}
+      if(frame>state.frame){state.frame=frame;draw();}
       if(frame===22)stop();else clock=requestAnimationFrame(tick);
     }
+    activeTick=tick;
     clock=requestAnimationFrame(tick);
   });
   const turn=(y,p)=>{state.yaw=((y%360)+360)%360;state.pitch=Math.max(-65,Math.min(65,p));draw();};
