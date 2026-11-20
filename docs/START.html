@@ -83,12 +83,12 @@
 <main>
   <header>
     <h1>The hand’s own history still beats the brain signal</h1>
-    <p>NeuroTranslation tries to predict one recording of a movement from another: brain, muscle, force and motion, all from open datasets. In 25 small studies so far, each a numbered row of one table on the studies page, what the hand had just done was the forecast to beat. Adding a brain recording taken at the scalp (EEG) made that forecast worse in 8 of 13 comparisons. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/README.md">Every study, with its numbers</a>.</p>
-    <p>The pages on this site run the studies’ forecasts in your browser. Try an invented example, or open a recording from the dataset a study used.</p>
+    <p>This page gathers every NeuroTranslation page that runs in a browser. Most of them forecast: from a short stretch of a recording, they predict what a hand, a knee or a rat will do a fraction of a second later. Everything runs on your own computer, and nothing you give a page is sent anywhere. Pick one below: most open with an example, so you can start straight away.</p>
+    <p>What the studies found: a hand tends to keep moving the way it was moving, so what it has just done is the forecast to beat. In 25 small studies so far, each a numbered row of one table on the studies page, adding a brain recording taken with electrodes on the scalp (EEG) made that forecast worse in 8 of 13 comparisons. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/README.md">Every study, with its numbers</a>.</p>
     <nav aria-label="On this page">
       <ul class="jump">
-        <li><a href="#examples">Try an example</a></li>
-        <li><a href="#recordings">Open a recording</a></li>
+        <li><a href="#examples">Start with an example</a></li>
+        <li><a href="#recordings">Open a recording from a study</a></li>
         <li><a href="#launchers">Launchers</a></li>
         <li><a href="#local">With Python</a></li>
         <li><a href="#papers">The papers</a></li>
@@ -97,119 +97,9 @@
   </header>
 
   <section id="examples" aria-labelledby="examples-title">
-    <h2 id="examples-title">Try an invented example</h2>
-    <ul class="tiles examples">
-      <li><a href="./index.html">Line up sensor traces</a></li>
-      <li><a href="grip-force/">Forecast a pinch lift</a></li>
-      <li><a href="contact-force/">Compare two grip models</a></li>
-      <li><a href="wrist-pointing/">Change a wrist model’s inputs</a></li>
-    </ul>
-    <p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-muscle">Study behind the wrist example</a></p>
-  </section>
-
-  <section id="recordings" aria-labelledby="recordings-title">
-    <h2 id="recordings-title">Find your recording</h2>
-    <p>Several pages open with an example, so you can start with nothing of your own. To explore a recording of your own, find the dataset it came from. Every page runs on your own computer, and nothing you give it is sent anywhere. Every “ahead” is a distance along a stored recording: nothing here is live.</p>
+    <h2 id="examples-title">Start with an example</h2>
+    <p>Several pages open with an example, so you can start with nothing of your own. Start at the top: the general model’s own page comes first. Every page runs on your own computer, and nothing you give it is sent anywhere. Every “ahead” is a distance along a stored recording: nothing here is live.</p>
     <ul class="tiles recordings">
-      <li>
-        <article aria-labelledby="finger-motion-title">
-          <p class="source">Miller and colleagues · Brain-surface and glove recordings</p>
-          <h3 id="finger-motion-title">How much will each finger move?</h3>
-          <p>A screen named one finger and a glove measured all five. Change the cue and an invented brain-surface rhythm and see how six fitted models forecast the movement of each finger. On 23 later trials from one person, adding the brain recording to the screen made both kinds of model worse.</p>
-          <ul class="links">
-            <li><a class="primary" href="finger-motion/">Try the six forecasts</a></li>
-            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/finger-motion">Study, weights and results</a></li>
-            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/finger-motion.zip">Offline reader (ZIP)</a></li>
-            <li><a href="https://eliminatenoise.github.io/Interoceptomics/recorded-cortex/">The recorded brain-surface activity, by finger</a></li>
-          </ul>
-        </article>
-      </li>
-      <li>
-        <article aria-labelledby="five-finger-title">
-          <p class="source">Miller and colleagues · Brain-surface and glove recordings</p>
-          <h3 id="five-finger-title">Can a recording from the surface of the brain beat the last glove reading?</h3>
-          <p>Give two fitted models of one person's glove the same invented finger movement, one of them with a signal from electrodes on the surface of the brain as well, and compare their forecasts of the five fingers. In the recorded trials, keeping the last glove reading did best, and adding the brain recording made the straight-line model worse on every finger.</p>
-          <ul class="links">
-            <li><a class="primary" href="finger-signals/">Explore the five finger forecasts</a></li>
-            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/cortical-glove">Study and fitted models</a></li>
-            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/finger-signals.zip">Offline reader (ZIP)</a></li>
-          </ul>
-        </article>
-      </li>
-      <li>
-        <article aria-labelledby="knee-stride-title">
-          <p class="source">Katmah and colleagues · Treadmill joint angles</p>
-          <h3 id="knee-stride-title">Can four seconds of walking beat the last stride?</h3>
-          <p>Follow both knees through four seconds of a walk and forecast both angles a quarter of a second later. On 12 walkers, copying the matching moment of the previous stride missed by 3.535° on average; a small transformer trained to correct that copy missed by 2.679°, closer for every one of them; with ten walkers in a second laboratory, it was closer for only six. The general model, given the same four seconds, missed by 3.465°, and a copy of it with its shared part scrambled did better.</p>
-          <ul class="links">
-            <li><a class="primary" href="knee-stride/">Compare the knee forecasts</a></li>
-            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-stride">Model and results</a></li>
-            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/knee-stride.zip">Offline reader (ZIP)</a></li>
-            <li><a href="papers/walking-rhythm/">Read the four-page supplement</a></li>
-          </ul>
-        </article>
-      </li>
-      <li>
-        <article aria-labelledby="gait-rhythm-title">
-          <p class="source">Katmah and colleagues · Treadmill muscle and knee recordings</p>
-          <h3 id="gait-rhythm-title">Do the muscles and knees repeat at the same rate?</h3>
-          <p>For 11 held-out walkers at 0.5 m/s, the strongest rhythms in the leg-muscle recordings and knee angles differed by 0.027 cycles per minute on average. Pairing each walk with another walker’s muscle recording raised the difference to 3.055. Each instrument supplied its own 40-second window. Agreement in rate leaves the timing of individual steps unresolved.</p>
-          <ul class="links">
-            <li><a class="primary" href="gait-rhythm/">Compare the rhythms</a></li>
-            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/gait-rhythm">Study and results</a></li>
-            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/gait-rhythm.zip">Offline reader and source (ZIP)</a></li>
-            <li><a href="papers/walking-rhythm/">Read the four-page supplement</a></li>
-          </ul>
-        </article>
-      </li>
-      <li>
-        <article aria-labelledby="knee-motion-title">
-          <p class="source">Katmah and colleagues · Treadmill joint angles</p>
-          <h3 id="knee-motion-title">Where will the knees be 15 stored frames later?</h3>
-          <p>Five snapshots of both hips, knees and ankles predict the two knee angles 15 frames later in a stored 60 Hz treadmill recording. On 40,201 forecasts from 12 held-out walkers, replaying a stride from four seconds of knee history gave 3.54° mean absolute error. The transformer, with 0.4 seconds of joint history, gave 4.46° on the same windows. Six of the 51 recordings used whole-file Xsens HD processing, including test recording S48. The other 45 carry the Live label. Physical prediction latency was never measured. Only reconstructed joint angles entered the forecast.</p>
-          <ul class="links">
-            <li><a class="primary" href="knee-motion/">Try the knee forecast</a></li>
-            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-motion">Model and results</a></li>
-            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/knee-motion.zip">Offline viewer and model (ZIP)</a></li>
-          </ul>
-        </article>
-      </li>
-      <li>
-        <article aria-labelledby="stride-title">
-          <p class="source">CMU Graphics Lab · Human motion capture</p>
-          <h3 id="stride-title">Where will the next step land?</h3>
-          <p>Give the model half a second of a measured walk or run. It predicts the next 0.60 seconds at 18 points on the body. Turn the figure, follow one foot and reveal where its markers landed. The walk or run label reduced average error at points measured relative to the pelvis from 71.9 to 69.1 mm across six fresh recording groups. A linear forecast tracked the pelvis through the room more closely. Only one of the six groups ran.</p>
-          <ul class="links">
-            <li><a class="primary" href="stride/">Continue a measured stride</a></li>
-            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/stride-continuation">Model and results</a></li>
-            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/stride-continuation.zip">Offline viewer and model (ZIP)</a></li>
-          </ul>
-        </article>
-      </li>
-      <li>
-        <article aria-labelledby="population-motion-title">
-          <p class="source">Shin &amp; Jadhav · W-track recordings</p>
-          <h3 id="population-motion-title">Can brain activity sharpen a rat’s movement forecast?</h3>
-          <p>Step through one recorded trip and compare how far a rat moved with forecasts that use its earlier movement alone or also use firing from two brain regions. Across three held-out rats the average miss fell from 2.898 to 2.870 cm when firing was added. Only one rat improved against both movement alone and firing from an earlier trip. For that rat, continuing at the last observed speed did better still.</p>
-          <ul class="links">
-            <li><a class="primary" href="population-motion/">Explore a recorded trip</a></li>
-            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/population-motion">Model and results</a></li>
-            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/population-motion.zip">Offline viewer and model (ZIP)</a></li>
-          </ul>
-        </article>
-      </li>
-      <li>
-        <article aria-labelledby="word-motion-title">
-          <p class="source">CMU Graphics Lab · Optical motion capture</p>
-          <h3 id="word-motion-title">Generate a walk or a run</h3>
-          <p>Enter either word to draw a 0.60-second stride at 18 points on the body. Overlay a recorded example from training, rotate the two bodies and inspect a point as it moves. On three held-out recordings the model nearly tied the average walk or run from training.</p>
-          <ul class="links">
-            <li><a class="primary" href="word-motion/">Try a walk or run</a></li>
-            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/word-motion">Weights, code and results</a></li>
-            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/word-motion.zip">Offline viewer and model (ZIP)</a></li>
-          </ul>
-        </article>
-      </li>
       <li>
         <article aria-labelledby="shared-movement-title">
           <p class="source">One movement model · Four kinds of forecast</p>
@@ -233,6 +123,42 @@
         </article>
       </li>
       <li>
+        <article aria-labelledby="population-motion-title">
+          <p class="source">Shin &amp; Jadhav · W-track recordings</p>
+          <h3 id="population-motion-title">Can brain activity sharpen a rat’s movement forecast?</h3>
+          <p>Step through one recorded trip and compare how far a rat moved with forecasts that use its earlier movement alone or also use firing from two brain regions. Across three rats kept out of fitting, the average miss fell from 2.898 to 2.870 cm when firing was added. Only one rat improved against both movement alone and firing from an earlier trip. For that rat, continuing at the last observed speed did better still.</p>
+          <ul class="links">
+            <li><a class="primary" href="population-motion/">Explore a recorded trip</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/population-motion">Model and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/population-motion.zip">Offline viewer and model (ZIP)</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="stride-title">
+          <p class="source">CMU Graphics Lab · Human motion capture</p>
+          <h3 id="stride-title">Where will the next step land?</h3>
+          <p>Give the model half a second of a measured walk or run. It predicts the next 0.60 seconds at 18 points on the body. Turn the figure, follow one foot and reveal where its markers landed. Telling the model whether the person walked or ran lowered its average error at points measured from the hips from 71.9 to 69.1 mm, across six groups of recordings it had not been fitted on. A straight-line forecast tracked the hips through the room more closely. Only one of the six groups ran.</p>
+          <ul class="links">
+            <li><a class="primary" href="stride/">Continue a measured stride</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/stride-continuation">Model and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/stride-continuation.zip">Offline viewer and model (ZIP)</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="word-motion-title">
+          <p class="source">CMU Graphics Lab · Optical motion capture</p>
+          <h3 id="word-motion-title">Generate a walk or a run</h3>
+          <p>Enter either word to draw a 0.60-second stride at 18 points on the body. Overlay a recorded example from training, rotate the two bodies and inspect a point as it moves. On three recordings kept out of fitting, the model nearly tied the average walk or run from training.</p>
+          <ul class="links">
+            <li><a class="primary" href="word-motion/">Try a walk or run</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/word-motion">Weights, code and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/word-motion.zip">Offline viewer and model (ZIP)</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
         <article aria-labelledby="hand-search-title">
           <p class="source">HoloAssist · Right-hand tracking and descriptions</p>
           <h3 id="hand-search-title">Which movement fits your words?</h3>
@@ -240,6 +166,69 @@
           <ul class="links">
             <li><a class="primary" href="hand-search/">Search the hand recording</a></li>
             <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hand-language-retrieval">The study and its fitted models</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="five-finger-title">
+          <p class="source">Miller and colleagues · Brain-surface and glove recordings</p>
+          <h3 id="five-finger-title">Can a recording from the surface of the brain beat the last glove reading?</h3>
+          <p>Give two fitted models of one person's glove the same invented finger movement, one of them with a signal from electrodes on the surface of the brain as well, and compare their forecasts of the five fingers. In the recorded trials, keeping the last glove reading did best, and adding the brain recording made the straight-line model worse on every finger.</p>
+          <ul class="links">
+            <li><a class="primary" href="finger-signals/">Explore the five finger forecasts</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/cortical-glove">Study and fitted models</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/finger-signals.zip">Offline reader (ZIP)</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="finger-motion-title">
+          <p class="source">Miller and colleagues · Brain-surface and glove recordings</p>
+          <h3 id="finger-motion-title">How much will each finger move?</h3>
+          <p>A screen named one finger and a glove measured all five. Change the finger named on the screen and an invented brain-surface rhythm, and see how six fitted models forecast the movement of each finger. On 23 later trials from one person, adding the brain recording to the screen made both kinds of model worse.</p>
+          <ul class="links">
+            <li><a class="primary" href="finger-motion/">Try the six forecasts</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/finger-motion">Study, weights and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/finger-motion.zip">Offline reader (ZIP)</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/recorded-cortex/">The recorded brain-surface activity, by finger</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="knee-stride-title">
+          <p class="source">Katmah and colleagues · Treadmill joint angles</p>
+          <h3 id="knee-stride-title">Can four seconds of walking beat the last stride?</h3>
+          <p>Follow both knees through four seconds of a walk and forecast both angles a quarter of a second later. On 12 walkers, copying the matching moment of the previous stride missed by 3.535° on average; a small transformer trained to correct that copy missed by 2.679°, closer for every one of them; with ten walkers in a second laboratory, it was closer for only six. The general model, given the same four seconds, missed by 3.465°, and a copy of it with its shared part scrambled did better.</p>
+          <ul class="links">
+            <li><a class="primary" href="knee-stride/">Compare the knee forecasts</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-stride">Model and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/knee-stride.zip">Offline reader (ZIP)</a></li>
+            <li><a href="papers/walking-rhythm/">Read the four-page supplement</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="knee-motion-title">
+          <p class="source">Katmah and colleagues · Treadmill joint angles</p>
+          <h3 id="knee-motion-title">Can a short look at the hips, knees and ankles beat replaying a stride?</h3>
+          <p>Five snapshots of both hips, knees and ankles, spanning 0.4 seconds, predict both knee angles about a quarter of a second later. Move the cutoff through an invented walk and reveal the later angles. On 40,201 forecasts from 12 walkers kept out of fitting, replaying a stride from four seconds of knee history missed by 3.54° on average, and the small transformer by 4.46°. The angles are the motion sensors’ own reconstructions, and nothing was forecast live.</p>
+          <ul class="links">
+            <li><a class="primary" href="knee-motion/">Try the knee forecast</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-motion">Model and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/knee-motion.zip">Offline viewer and model (ZIP)</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="gait-rhythm-title">
+          <p class="source">Katmah and colleagues · Treadmill muscle and knee recordings</p>
+          <h3 id="gait-rhythm-title">Do the muscles and knees repeat at the same rate?</h3>
+          <p>Choose one of 11 treadmill walks and compare how often the leg muscles’ activity repeats with how often the knees bend. For those 11 test walkers, at 0.5 m/s, the strongest rhythms in the leg-muscle recordings and knee angles differed by 0.027 cycles per minute on average. Pairing each walk with another walker’s muscle recording raised the difference to 3.055. Each instrument supplied its own 40-second window. Agreement in rate leaves the timing of individual steps unresolved.</p>
+          <ul class="links">
+            <li><a class="primary" href="gait-rhythm/">Compare the rhythms</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/gait-rhythm">Study and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/gait-rhythm.zip">Offline reader and source (ZIP)</a></li>
+            <li><a href="papers/walking-rhythm/">Read the four-page supplement</a></li>
           </ul>
         </article>
       </li>
@@ -265,6 +254,21 @@
           </ul>
         </article>
       </li>
+    </ul>
+    <p>Four readers of the numbered studies also open with an invented example:</p>
+    <ul class="tiles examples">
+      <li><a href="./index.html">Line up sensor traces</a></li>
+      <li><a href="grip-force/">Forecast a pinch lift</a></li>
+      <li><a href="contact-force/">Compare two grip models</a></li>
+      <li><a href="wrist-pointing/">Change a wrist model’s inputs</a></li>
+    </ul>
+    <p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-muscle">Study behind the wrist example</a></p>
+  </section>
+
+  <section id="recordings" aria-labelledby="recordings-title">
+    <h2 id="recordings-title">Open a recording from a study’s dataset</h2>
+    <p>Each reader below takes a file from the open dataset its study used, or one prepared from it with the study’s converter. Find the dataset your recording came from: each card’s top line names it.</p>
+    <ul class="tiles recordings">
       <li>
         <article aria-labelledby="way-title">
           <p class="source">WAY-EEG-GAL · Windowed-series <code>.mat</code></p>
@@ -401,7 +405,7 @@
       <li><a download="Install-NeuroTranslation-Linux.sh" href="launchers/Install-NeuroTranslation-Linux.sh">Linux menu installer</a></li>
       <li><a download="NeuroTranslation-Launchers.zip" href="launchers/NeuroTranslation-Launchers.zip">All launchers ZIP</a></li>
     </ul>
-    <p>For a Linux application-menu entry, extract the ZIP and run <code>sh Install-NeuroTranslation-Linux.sh</code> in that folder. An entry made by an earlier installer opens this page. Choose <strong>Open the palm replay</strong> under Find your recording. The installer leaves existing entries and your changes to them alone, and opens no browser.</p>
+    <p>For a Linux application-menu entry, extract the ZIP and run <code>sh Install-NeuroTranslation-Linux.sh</code> in that folder. An entry made by an earlier installer opens this page. Choose <strong>Open the palm replay</strong> under Open a recording from a study’s dataset. The installer leaves existing entries and your changes to them alone, and opens no browser.</p>
     <p>Checked: the format of the Windows and macOS shortcuts, and the Linux installer in an isolated folder. Not checked: opening the shortcuts on a real Windows or macOS machine.</p>
     <ul class="links">
       <li><a href="launchers/README.txt">Launcher instructions</a></li>
