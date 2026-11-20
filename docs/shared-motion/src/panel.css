@@ -90,3 +90,14 @@ main {width:calc(100% - 24px)}
 .controls article {border-left:2px solid var(--line); padding-left:.6rem}
 .selector,.experiment {padding:.8rem}
 }
+
+.selector select + label {margin-top:1rem}
+#angle-input {width:100%; margin:.5rem 0}
+#angular-results h2 {color:var(--blue)}
+#angle-timing {margin:.35rem 0 .6rem}
+#angle-values {table-layout:fixed}
+#angle-values th,#angle-values td {overflow-wrap:anywhere}
+#angle-values th:first-child {width:45%}
+#angle-bench th:first-child {width:77%}
+#angle-values tbody tr:last-child {background:var(--wash)}
+.study + .study {margin-top:.8rem}
