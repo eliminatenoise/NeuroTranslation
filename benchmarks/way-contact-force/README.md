@@ -58,7 +58,7 @@ The registered criterion required aligned EEG to beat both mechanics and rotated
 
 The [aggregate results](RESULTS.json) give unrounded comparisons and data provenance. The archives include the input recipes, code, fitted parameters, training diagnostics and aggregate results. Their offline examples accept locally prepared inputs. The original recordings, participant-level results and final test set are outside this release. [SHA-256 checksums](SHA256SUMS)
 
-A separate HYGRIP study asks what scalp EEG adds to a forecast during paced power grip against a hand-held transducer. [Read its prospective protocol](../hygrip-force/)
+A separate study, HYGRIP, asked what scalp EEG adds to a forecast during paced power grip against a hand-held transducer. There too EEG raised the error. [Read the HYGRIP study](../hygrip-force/)
 
 ## Source recordings
 

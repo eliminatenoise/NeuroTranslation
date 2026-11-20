@@ -2,7 +2,9 @@
 
 A person squeezes a hand-held transducer in time with a visual cue. The cue tells the model when the squeeze should rise. The transducer tells it what the hand has done so far. Can scalp EEG improve a forecast of the transducer reading 120 ms later?
 
-**Prospective development record · 19 November 2026.** This is the first public protocol edition. The participant split and original design were frozen locally before waveform access. A TRAIN-only clock screen led to a documented amendment before fitting. This GitHub record follows the start of TRAIN work and precedes any access to development or final-test records. Its publication time is separate from the earlier local freezes. The record contains protocol and source coverage. Forecast scores and runnable models are outside this edition. [Machine-readable protocol and SHA-256 commitments](DESIGN.json)
+**It did not.** On the three people set aside for the first test, a forecast from the cue timing and the recent voltage missed by 0.360 mV on average. Adding EEG raised that to 0.461 mV, and it was worse for all three. [The result](results-2026-11-19/README.md) · [The same forecast with forearm EMG added](forearm-results/README.md) · [With the fit allowed to change with the cue](cue-phase/README.md) · [Replay a trial in the browser](https://eliminatenoise.github.io/NeuroTranslation/hygrip-force/)
+
+The rest of this page is the plan, as it was published on 19 November 2026 before any test recording was opened. The split of people and the design were fixed before any waveform was read. A clock check on the fitting recordings led to a written amendment before fitting. [The plan in machine-readable form, with its checksums](DESIGN.json)
 
 ## A different grip task
 
