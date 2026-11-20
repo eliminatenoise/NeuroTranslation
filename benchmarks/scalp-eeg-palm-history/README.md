@@ -4,7 +4,7 @@
 
 Three people moved a hand in a screen task. A straight-line fit made on three other people, given the time in the task and where the palm had been and how fast it was moving, forecast the palm's sideways position 100 ms ahead with an error of **1.093 mm**. With EEG from three scalp channels added, it missed by **1.223 mm**: 0.131 mm worse, and worse for each of the three. EEG from the next trial did better than the right EEG, at 1.203 mm. Repeating the last position missed by 4.439 mm.
 
-Every score here is the measure that punishes large misses (root mean squared error), in millimetres, with each person counting equally: the square root of the average of the three people's mean squared errors. EEG is electrical activity of the brain, picked up on the scalp. A *straight-line fit* is a weighted sum of its inputs, here a ridge regression.
+Every score here is the measure that punishes large misses (root mean squared error), in millimetres, with each person counting equally: the square root of the average of the three people's mean squared errors. EEG is electrical activity of the brain, picked up on the scalp. A *straight-line fit* is a weighted sum of its inputs, with a penalty that keeps the weights small.
 
 | Forecast for the three test people | Error (mm) |
 | --- | ---: |
@@ -28,17 +28,17 @@ The elapsed-time model knows which of nine scheduled moments is being forecast. 
 
 The fits use the three fitting recordings, an intercept with no penalty at each of the nine moments, and a fixed penalty of 0.01 that keeps the weights on the scaled inputs small. No test target shaped any weight, scale or penalty. The released right-hand files carry no channel labels; the headers and channel tables of the same runs name C3, Cz and C4, and the documented export order and the constant width of the processed files support the match. Some released trial counts differ from the raw event tables; this study uses the authors' paired processed trials. [Input versions, metadata and channel evidence](SOURCE.json) · [Fitted model](MODEL-STATE.json)
 
-## Where the clock starts
+## The first plan lost every trial, so the clock starts at the first palm reading
 
-The first plan tied the forecasts to the moment the cue disappeared, event 14. To forecast its first target, 100 ms after the cue's row in the recording, the model needed palm readings at the cue's row and 50 ms before it. Every released trial lacked at least one of them. The rule that all inputs be present excluded all 337 trials, so there was no fit and no score. [The first plan](original-cue-window/DESIGN.json) · [Its recorded no-fit](original-cue-window/RESULT.json)
+The first plan tied the forecasts to the moment the cue disappeared, event 14. To forecast its first target, 100 ms after the cue's row in the recording, the model needed palm readings at the cue's row and 50 ms before it. Every released trial lacked at least one of them. The rule that all inputs be present excluded all 337 trials, so there was no fit and no score. [The first plan](original-cue-window/DESIGN.json) · [Its recorded result: no fit](original-cue-window/RESULT.json)
 
-The one alternative was written down before any fit from scalp to palm. It starts each trial at the first stored palm position at or after the cue's row. That first reading came 0–16 ms after the nominal cue across all six recordings, and 0–9 ms in the three test recordings. The nine targets run from +200 to +600 ms after it, in 50 ms steps. The oldest EEG and palm inputs for the first target come 10 and 50 ms after it. So the stored target times fall 200–616 ms after the cue across the six recordings. The written feature description carries over a sentence from the first plan that allows palm rows before the start; the alternative's own clock and lag rule gives the rows used here. [The alternative and its exact input rules](DESIGN.json)
+A second plan was written down before any fit from scalp to palm. It starts each trial at the first stored palm position at or after the cue's row. That first reading came 0–16 ms after the nominal cue across all six recordings, and 0–9 ms in the three test recordings. The nine targets run from +200 to +600 ms after it, in 50 ms steps. The oldest EEG and palm inputs for the first target come 10 and 50 ms after it. So the stored target times fall 200–616 ms after the cue across the six recordings. The plan's written feature description keeps one sentence from the first plan that allows palm readings from before the start; the rows used here follow the second plan's own clock. [The second plan and its exact input rules](DESIGN.json)
 
 The tracker estimates the centre of the real palm. The released archive aligns and smooths that trace, and its EEG processing can use later values. The first stored position is where the released palm trace becomes available to this analysis: the cue disappearing, the first available position and the start of the real movement are three different moments. The 100 ms is exact in the stored arrays; the physical or live delay was never measured. [IACKD data descriptor](https://doi.org/10.1038/s41597-026-07146-x) · [The authors' methods and code](https://github.com/Boketto1/IACKD/tree/c0b595de7571c7e04abae7477c61d0b92b5702cd)
 
 ## What it does not show
 
-These three recordings give no sign that these EEG features lower the error in this fixed comparison, made after the fact. The archive is a constrained task with feedback on a screen, and its signals can carry cue, motion, eye and muscle effects. The original dataset recruited 15 healthy right-handed university students aged 23–27, 11 of them men; this study uses one right-hand run from each of six of them. Other people, other tasks, other EEG features, brain mechanisms and live decoding remain open. No group was set aside for this study: sub-01 to sub-06 were barred from it, and the files name no reserve. [Participants and task](https://doi.org/10.1038/s41597-026-07146-x)
+Three test people, one screen task with feedback, scored after the fact; the signals can carry cue, motion, eye and muscle effects. The dataset recruited 15 healthy right-handed university students aged 23–27, 11 of them men; this study uses one right-hand run from each of six of them. No group was set aside for this study: sub-01 to sub-06 were barred from it, and the files name no reserve. [Participants and task](https://doi.org/10.1038/s41597-026-07146-x)
 
 ## The plan
 
@@ -70,6 +70,8 @@ python original-cue-window/run.py --input ../iackd-data --output ../original-cue
 ```
 
 Choose new output folder names each time. The cue-window run writes its no-fit result and exits with status 2. The main comparison writes `RESULT.json`, the fitted `MODEL-STATE.json` and the details of the run. A separately written analysis reached the same decision on which trials qualify and checked 2,454 numbers from the fits and results. This folder holds summary errors and model weights; the dataset stays with its original host. [Independent check](INDEPENDENT-CHECK.json) · [OpenNeuro ds006840 v1.0.0, CC0](https://doi.org/10.18112/openneuro.ds006840.v1.0.0)
+
+The recordings are the CC0 release of Mengpu Cai, Rongrong Fu, Yaodong Wang, Bin Lu, Saiwei Guo and Fangyao Xu. Full credit: [docs/RIGHTS.md](../../docs/RIGHTS.md).
 
 To redraw the figure from the same summary results, run the figure script from this folder:
 
