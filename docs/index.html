@@ -5,7 +5,7 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.b01d5fa89e84a7dde771df924520f3bc155254ae65c6e03ed3224378c4a8cf5b.css">
+  <link rel="stylesheet" href="style.75ba6cae584876bafce105ac88c8aa4f862fa945c85b082eb539c9089386e614.css">
 </head>
 <body>
   <header class="topbar">
@@ -24,6 +24,7 @@
       <div>
         <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p>
         <nav class="section-links wrist-links" aria-label="Study recordings">
+          <a href="./contact-forecast/index.html" data-pages-href="./contact-forecast/index.html">Forecast next-day brain activity</a>
           <a href="./cortical-reach/index.html" data-pages-href="./cortical-reach/index.html">Forecast a push and a reach</a>
           <a href="./muscle-spindle/index.html" data-pages-href="./muscle-spindle/index.html">Forecast sensory spikes during a stretch</a>
           <a href="./cross-limb-movement/index.html" data-pages-href="./cross-limb-movement/index.html">Forecast wrist and sacrum movement</a>
@@ -107,6 +108,15 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="finger-transfer" aria-labelledby="cohort-choice"><h3 id="cohort-choice">A different person’s finger movement</h3><p>Learn from four people, calibrate on a fifth, then compare the cue with the recorded brain signal.</p><a href="finger-transfer/index.html">Run the five-person comparison</a></article>
+      <article class="study-choice-card" data-study-key="contact-forecast" aria-labelledby="reader-next-day">
+        <h3 id="reader-next-day">The same electrodes, one day later</h3>
+        <p>What can a push on a macaque’s hand tell us about the brain activity that follows? Compare a model trained the previous day with the next 100 milliseconds of recorded activity.</p>
+        <nav class="section-links" aria-label="Next-day study">
+          <a href="./contact-forecast/index.html" data-pages-href="./contact-forecast/index.html">Compare the electrode counts</a>
+          <a href="./papers/contact-forecast/index.html" data-pages-href="./papers/contact-forecast/index.html">Read the paper</a>
+          <a href="https://eliminatenoise.github.io/Interoceptomics/contact-forecast/">Rotate the recorded arm</a>
+        </nav>
+      </article>
       <article class="study-choice-card" data-study-key="cortical-reach" aria-labelledby="reader-cortical-reach">
         <h3 id="reader-cortical-reach">When the arm is moved</h3>
         <p>A robot pushes a handle; later a macaque reaches for a visual target. Compare predictions of the next 100 ms with and without earlier spikes from the sensory cortex.</p>
@@ -469,6 +479,6 @@
     document.getElementById("study-choice-label").hidden = false;
     showStudy();
   </script>
-  <script type="module" src="app.b01d5fa89e84a7dde771df924520f3bc155254ae65c6e03ed3224378c4a8cf5b.mjs"></script>
+  <script type="module" src="app.75ba6cae584876bafce105ac88c8aa4f862fa945c85b082eb539c9089386e614.mjs"></script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 # The hand's own history is the forecast to beat
 
+[The next-day electrode test](https://eliminatenoise.github.io/NeuroTranslation/papers/contact-forecast/) compares 18 Transformer fits, six count regressions and two simple forecasts using the same measured trial windows. [All second-day scores](../models/contact-forecast/scoring/test/summary.json)
+
 The [cortical reach comparison](https://eliminatenoise.github.io/NeuroTranslation/papers/cortical-reach/) holds out later original trials and tests neural information against time- and task-matched controls. [Group results](../models/cortical-reach/score/test/scores.json)
 
 The [muscle spindle study](https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-spindle/) scores the next 20 ms of sensory firing on three held fibers. Compare the history-only and mechanically informed models against recent firing and a regularized count model. [Full scores](../models/muscle-spindle/score/strict-afferent/summary.json)

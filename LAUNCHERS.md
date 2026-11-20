@@ -1,5 +1,7 @@
 # Launchers and offline copies
 
+To forecast next-day sensory-cortex counts, extract the [offline reader](docs/contact-forecast-offline.zip) or the [complete fitted model package](models/contact-forecast.zip), then use the launcher for your system.
+
 For the paired recorded perturbation and cued reach, extract the [offline cortical reach reader](docs/cortical-reach-offline.zip) and use its operating-system launcher. [Training code and weights](models/cortical-reach.zip)
 
 To follow a stretch and inspect its predicted sensory firing, extract the [muscle spindle reader](docs/muscle-spindle-offline.zip) and choose **Open on Windows.cmd**, **Open on macOS.command** or **Open on Linux.sh**. [Model weights, source readers and training code](models/muscle-spindle.zip)
