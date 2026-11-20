@@ -22,7 +22,7 @@ The project is also building one general model, **NeuroTranslate 0.0**, meant to
 
 ## Most of the work runs in your browser, with nothing to install
 
-Every page below runs on your own computer: a recording you open is read there and goes nowhere. Most open with an example, invented or recorded, so you need nothing of your own. In each row a model learned from some recordings (it was *fitted* to them) and was scored on others, unless the row says otherwise. The first fifteen rows open in a browser. The last three are for programmers: a building block other pages load, and two small Python programs. [The start page](https://eliminatenoise.github.io/NeuroTranslation/START.html) has all 27 browser pages, among them the readers that open files from the numbered studies' own datasets.
+Every page below runs on your own computer: a recording you open is read there and goes nowhere. Most open with an example, invented or recorded, so you need nothing of your own. In each row a model learned from some recordings (it was *fitted* to them) and was scored on others, unless the row says otherwise. The first fifteen rows open in a browser. The last three are for programmers: a building block other pages load, and two small Python programs. [The start page](https://eliminatenoise.github.io/NeuroTranslation/START.html) has all 27 browser pages, among them the readers that open files from the datasets of the 25 small studies.
 
 | What it asks | What you do, and what was found |
 | --- | --- |
