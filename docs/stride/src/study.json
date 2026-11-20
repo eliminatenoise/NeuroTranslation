@@ -1,0 +1,31 @@
+{
+  "measure": "Distances in this table compare each of the 18 sites with its recorded position relative to the pelvis. We averaged over twelve future frames, then over windows, trials and catalogue groups. Each group carries equal weight.",
+  "outcome": "On the fresh recordings, adding the gait label reduced mean body-site error by 2.8 mm. The pelvis told a different story. The linear model missed its lab position by 59.0 mm, compared with 66.7 mm for the action-and-movement transformer.",
+  "counts": "351 overlapping windows in 12 recordings from 6 fresh CMU catalogue groups. Five groups walked. Only one ran, with 145.6 mm body error. CMU may assign one person more than one catalogue number.",
+  "rows": [
+    [
+      "Action + movement",
+      69.14152849072846
+    ],
+    [
+      "Movement-only transformer",
+      71.90724146483142
+    ],
+    [
+      "Nearest training strides",
+      76.87093701806188
+    ],
+    [
+      "Movement-only linear model",
+      85.6284871851201
+    ],
+    [
+      "Repeat last pose",
+      142.1318967666894
+    ],
+    [
+      "Continue last velocity",
+      250.51497243770686
+    ]
+  ]
+}

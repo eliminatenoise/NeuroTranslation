@@ -1,0 +1,7 @@
+# Source and reuse
+
+Justin Shin and Shantanu Jadhav (2024), *Single Day W-Track Learning*, version 0.240511.0307, DANDI Archive. The study recorded male Long–Evans rats learning a spatial alternation task. The authors released the dataset under Creative Commons Attribution 4.0 International. Credit the authors, cite this version, link the licence and identify further changes. The authors do not endorse this reanalysis. [Dataset and DOI](https://doi.org/10.48324/dandi.000978/0.240511.0307) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+This package extracts 16 annotated trips from each of six recordings, repacks camera samples and sorted event times, aggregates counts by recorded region, and fits and tests two movement forecasts. The data excerpts, derived traces, fitted coefficients and results carry the source attribution and CC BY 4.0 terms. Each asset’s archive path, ID, object ETag, archive-reported full-file SHA-256, and byte size are listed in the versioned source catalogue. The original authors made the data. The selection, analysis and interpretation in this package are a subsequent reanalysis. [Source catalogue](source/catalogue.json)
+
+The original W-track selection and alignment code for subject JS14 informed this new extraction and timing implementation. That code and the new source code and documentation are available under CC0 1.0. NumPy, h5py and Requests retain their own respective licences. [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)

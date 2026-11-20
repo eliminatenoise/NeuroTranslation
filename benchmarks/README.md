@@ -6,7 +6,7 @@ Mostly it does not. A model fitted to the target's own recent history beat "repe
 
 This page holds the numbered table and what it adds up to: 25 studies in 20 folders here (two folders hold more than one), two more studies that are reported only in the papers, and two rows that are not tests, each in a folder of its own: the general model's five-sensor walking fit (`daily-sports-limbs/`) and a correction scored on the people the wrist models were fitted on (`wrist-forearm-correction/`). Every count on this page is a count of those numbered rows.
 
-Four more studies were published after the table was made. Each has a folder of its own, and they are listed at the end of this page, outside every count. [The README](../README.md) has the short version.
+Later studies are listed at the end of this page, outside the numbered counts. [The README](../README.md) has the short version.
 
 ## How to read the numbers
 
@@ -382,6 +382,16 @@ These were published after the table was made. Each has its own plan and results
 - **[Which recording does the sentence describe?](text-motion-retrieval/)** (`text-motion-retrieval/`). The simpler model did better. Volunteers watched recorded whole-body movements, most of them walks, and described each one. Given a description, a model ranked 38 recordings of six performers, as the dataset's catalogue names them, all kept out of fitting, and the score is how often the right recording came first, averaged so that each of the 38 recordings counts equally: higher is better. A model built on attention put it first 5.6% of the time; a simpler one, built on word counts and plain summaries of the movement, 6.6%; a random order, 2.6%. Ranking the recordings by the action name the dataset's catalogue gives each one, matched to the sentence's words, with no movement at all, did better than both: 7.7%. The attention model failed the pass rule set for it in advance, which asked it to beat that ranking too. 31 of the 38 recordings are walks, so many descriptions fit several of them, and the folder says that repeated clips of the same people limit any claim about new people. Another 31 recordings, of four other performers, were set aside and never opened.
 
 A four-page supplement reports the two searches with words together: [*How precisely do words identify a recorded movement?*](../docs/papers/language-and-observed-movement/README.md) It is separate from the two papers, and neither paper's current draft contains these studies.
+
+## Two forecasts from recorded movement
+
+### Where will the next step land?
+
+Eleven observations at 20 Hz capture half a second of a walk or run. The source cameras recorded at 60 or 120 Hz, so the analysis keeps every third or sixth frame. Across 351 overlapping windows from twelve fresh recordings in six source groups, the model told the action missed the 18 body sites by 69.1 mm on average after removing pelvic translation. Movement alone scored 71.9 mm. In room coordinates the measured centre of the pelvis tells a different story. The linear model missed it by 59.0 mm, the action-labelled model by 66.7 mm. Five groups walked and only one ran. The group numbers need not identify distinct people. Repeating the training-stride retrieval comparison requires rebuilding the gallery from the cited CMU originals. [Method and reproduction](../models/stride-continuation/REPRODUCE.md) · [Results by source group](../models/stride-continuation/fresh-results.json) · [Continue a measured stride](https://eliminatenoise.github.io/NeuroTranslation/stride/)
+
+### How far will another rat move?
+
+Three rats supplied the training data. On three different rats, 549 forecasts estimated the straight-line distance between the last observed camera position and the first frame at least a quarter of a second after the cutoff. Each rat’s 15 scored trips received equal weight. Across rats the average error was 2.898 cm from movement alone, 2.870 cm with correctly timed brain-cell firing, and 2.887 cm with firing from an earlier trip. Only KL8 met both firing comparisons. Continuing at its last observed speed gave the lowest error for that rat. A distance forecast gives neither a direction of travel nor a limb position. [Methods and rat-by-rat results](../models/population-motion/) · [Explore a recorded trip](https://eliminatenoise.github.io/NeuroTranslation/population-motion/)
 
 ## Whose recordings these are
 

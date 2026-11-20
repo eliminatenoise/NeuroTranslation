@@ -109,8 +109,32 @@
 
   <section id="recordings" aria-labelledby="recordings-title">
     <h2 id="recordings-title">Find your recording</h2>
-    <p>The first six pages need no file from you: open one and start. For the others, find the dataset your file came from. Every page runs on your own computer, and nothing you give it is sent anywhere. Every “ahead” is a distance along a stored recording: nothing here is live.</p>
+    <p>The first eight pages need no file from you: open one and start. For the others, find the dataset your file came from. Every page runs on your own computer, and nothing you give it is sent anywhere. Every “ahead” is a distance along a stored recording: nothing here is live.</p>
     <ul class="tiles recordings">
+      <li>
+        <article aria-labelledby="stride-title">
+          <p class="source">CMU Graphics Lab · Human motion capture</p>
+          <h3 id="stride-title">Where will the next step land?</h3>
+          <p>Give the model half a second of a measured walk or run. It predicts the next 0.60 seconds at 18 points on the body. Turn the figure, follow one foot and reveal where its markers landed. The walk or run label reduced average error at points measured relative to the pelvis from 71.9 to 69.1 mm across six fresh recording groups. A linear forecast tracked the pelvis through the room more closely. Only one of the six groups ran.</p>
+          <ul class="links">
+            <li><a class="primary" href="stride/">Continue a measured stride</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/stride-continuation">Model and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/stride-continuation.zip">Offline viewer and model (ZIP)</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="population-motion-title">
+          <p class="source">Shin &amp; Jadhav · W-track recordings</p>
+          <h3 id="population-motion-title">Can brain activity sharpen a rat’s movement forecast?</h3>
+          <p>Step through one recorded trip and compare how far a rat moved with forecasts that use its earlier movement alone or also use firing from two brain regions. Across three held-out rats the average miss fell from 2.898 to 2.870 cm when firing was added. Only one rat improved against both movement alone and firing from an earlier trip. For that rat, continuing at the last observed speed did better still.</p>
+          <ul class="links">
+            <li><a class="primary" href="population-motion/">Explore a recorded trip</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/population-motion">Model and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/population-motion.zip">Offline viewer and model (ZIP)</a></li>
+          </ul>
+        </article>
+      </li>
       <li>
         <article aria-labelledby="word-motion-title">
           <p class="source">CMU Graphics Lab · Optical motion capture</p>

@@ -1,6 +1,6 @@
 # Launchers and offline copies
 
-Almost everything here runs in a browser. A launcher is a shortcut that opens the right page. An offline copy is a ZIP that holds the page itself, so it works with no network. Two things on this page need Python: the walking page of the general model, and the command at the end that runs study 28's wrist models.
+Almost everything here runs in a browser. A launcher is a shortcut that opens the right page. An offline copy is a ZIP that holds the page itself, so it works with no network. The general model’s five-sensor walking page and the study 28 wrist command need Python. The two newer stride and rat viewers open without it.
 
 ## A shortcut to the app
 
@@ -15,6 +15,17 @@ The shortcut opens the app in your browser, at the part that replays a recorded 
 Keep the file extensions, and follow your system's usual prompts about a downloaded file. If a shortcut opens as text, take it from the ZIP instead. The Linux installer writes one menu entry for your user, leaves existing entries alone and opens no browser.
 
 Checked: the format of the Windows and macOS shortcuts, and the Linux installer in an isolated folder. Not checked: opening the shortcuts on a real Windows or macOS machine. [Checksums](docs/launchers/SHA256SUMS)
+
+## Continue a measured stride or follow a rat’s trip
+
+Choose a download, extract it, and open the launcher for Windows, macOS or Linux at the top of the extracted folder. You can also open the indicated HTML file directly. Both viewers carry the recordings they show and work offline in a browser.
+
+| Download | Open this file | What you can see |
+| --- | --- | --- |
+| [Human stride forecast](models/stride-continuation.zip) | `docs/stride/index.html` | Give the model eleven measured poses and compare its next twelve with the recording. |
+| [Rat movement forecast](models/population-motion.zip) | `docs/population-motion/index.html` | Explore a rat’s filmed path, firing recorded in two brain regions, and competing distance forecasts. |
+
+The folder under `models/` in each ZIP has fitted weights, Python code and an example input. Python inference requires NumPy. Each model’s README gives the command, units and original study.
 
 ## Walk or run, online or offline
 

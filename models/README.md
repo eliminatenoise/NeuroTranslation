@@ -4,6 +4,18 @@
 
 **[Try all three paths in the browser](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/).** Compare two wrist angles as movement, forearm and scalp inputs change. See how much a forearm-based correction adds to a motion forecast, or switch to a distance forecast for a wrist or rat. Each forecast shows its original units. [Unified browser API](neurotranslate-browser/) · [Download the JavaScript runtime](movement-browser.zip)
 
+## Where will the next step land?
+
+Give the model half a second of a measured walk or run. It predicts the next 0.60 seconds at 18 points on the body. Turn the figure, follow one foot and reveal where its markers landed. The walk or run label reduced average error at points measured relative to the pelvis from 71.9 to 69.1 mm across six fresh recording groups. A linear forecast tracked the pelvis through the room more closely. Only one of the six groups ran.
+
+[Continue a measured stride](https://eliminatenoise.github.io/NeuroTranslation/stride/) · [Model and results](stride-continuation/) · [Offline viewer and model (ZIP)](stride-continuation.zip)
+
+## Can brain activity sharpen a rat’s movement forecast?
+
+Step through one recorded trip and compare how far a rat moved with forecasts that use its earlier movement alone or also use firing from two brain regions. Across three held-out rats the average miss fell from 2.898 to 2.870 cm when firing was added. Only one rat improved against both movement alone and firing from an earlier trip. For that rat, continuing at the last observed speed did better still.
+
+[Explore a recorded trip](https://eliminatenoise.github.io/NeuroTranslation/population-motion/) · [Model and results](population-motion/) · [Offline viewer and model (ZIP)](population-motion.zip)
+
 ## Generate a walk or a run
 
 Enter **walk** or **run**. A small network fitted to 31 motion-capture recordings generates the positions of 18 surface landmarks over 0.60 seconds. The viewer can overlay those points on a measured training example. Two walks and a run qualified for the held-out comparison. The model’s average error relative to the pelvis was 89.82 mm. Using the training average for each action gave 89.88 mm.

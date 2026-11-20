@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light"><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>The next stride · NeuroTranslation</title>
+<style>/* STYLE */</style></head><body>
+<header class="mast"><b>NeuroTranslation</b><a id="save" download="stride-continuation.html" href="index.html">Save offline copy</a></header>
+<main>
+<div class="intro"><div><h1>The next stride</h1></div><p>Watch half a second of a person in motion. Where will their heels land next? Give the model a walk or run label, then play its forecast beside the recording.</p></div>
+<div class="bench">
+<section class="player" aria-label="Movement player">
+<div class="stage-head"><strong id="phase">Stride continuation</strong><span id="view-label">3D marker view</span></div>
+<canvas id="stage" tabindex="0" aria-label="3D marker view. Drag or use the arrow keys to rotate. Home restores the view.">Use the landmark readout for coordinates.</canvas>
+<div class="stage-foot"><span id="grid">Lab coordinates · +Z up</span><button id="reset">Reset view</button></div>
+<div class="transport"><button id="play">Play</button><div class="clock"><label class="sr" for="scrub">Time relative to the final observed frame</label><input type="range" id="scrub" min="0" max="22" value="16" step="1"><div class="clock-labels"><span>−0.50 s</span><span>Cutoff</span><span>+0.60 s</span></div></div><output id="time" for="scrub"></output></div>
+<p class="hint">Drag or use the arrow keys on the figure to turn it. Step through time with the slider.</p>
+</section>
+<section class="controls" aria-label="Forecast controls">
+<h2>Start with a stride</h2>
+<label for="example">Observed movement</label><select id="example"></select>
+<div id="drop" hidden><label for="packet">Paste a pose window (JSON)</label><textarea id="packet" rows="4" autocomplete="off" spellcheck="false" maxlength="300000"></textarea>
+<label for="file">Choose or drop a JSON file</label><input id="file" type="file" accept=".json,application/json">
+<button id="apply">Use these coordinates</button><p class="hint">Files stay in this page. Only the eleven observed frames go into the model.</p></div>
+<label for="action">Requested action</label><select id="action"><option value="walk">Walk</option><option value="run">Run</option></select>
+<p id="status" role="status"></p>
+<fieldset><legend>Draw on the same axes</legend>
+<label class="key"><input id="last" type="checkbox" checked><i class="sw obs"></i> Last observed pose</label>
+<label class="key"><input id="model" type="checkbox" checked><i class="sw pred"></i> Action + movement forecast</label>
+<label class="key"><input id="alternative" type="checkbox"><i class="sw alt"></i> Comparison</label>
+<select id="method" aria-label="Comparison method"><option value="ridge">Linear model · movement only</option><option value="history">Transformer · movement only</option></select>
+<label class="key"><input id="reference" type="checkbox"><i class="sw ref"></i> Later recorded movement</label>
+</fieldset>
+<p id="comparison"></p>
+</section>
+</div>
+<details class="inspect"><summary>Inspect a landmark</summary><label for="point">Body site</label><select id="point"></select><div id="readout"></div></details>
+<div class="notes">
+<section><h2>What does the word add?</h2><p>The eleven observed poses give the model the stride already under way. The action label tells it which gait to continue. Keep the same movement and switch the label to see how far the forecast moves.</p><p>Each recording has one catalogue label. Switching a walk to “run” here gives a different prediction for the same history. The recording can only show the gait the person actually performed.</p>
+<p id="outcome"></p></section>
+<section><h2>How close did it get?</h2><p id="measure"></p><div id="scores"></div><p id="counts"></p></section>
+</div>
+<details><summary>Use your own measured coordinates</summary><p>Choose “My pose window” under Observed movement. Paste or drop a JSON object with <b>action</b> (“walk” or “run”), <b>timesS</b> (11 timestamps, 0.05 seconds apart) and <b>positionsMm</b> (11 frames × 18 sites × XYZ). Use the original right-handed lab frame, millimetres and +Z up. The last observed frame defines time zero on the player. The model accepts an arbitrary starting clock.</p>
+<p>Each left and right waist site averages that side’s front and back waist markers. The two waist sites must be at least 40 mm apart in the last frame’s horizontal plane. The full list below gives the sites in file order. Two names in parentheses mean take their average. A flat camera image cannot supply these coordinates.</p><ol id="site-order"></ol><p><button id="sample">Download an example input</button></p></details>
+<details class="sources"><summary>Recordings, model and rights</summary><p>These points follow named surface markers on people walking or running. Lines connect those markers. Internal joint centres, muscle activity and neural signals were outside the measurement.</p><p id="source-info"></p><p>The data used in this project was obtained from mocap.cs.cmu.edu. The database was created with funding from NSF EIA-0196217. CMU prohibits direct resale of the data, including conversions. Original viewer code and text use CC0 1.0. <a href="https://mocap.cs.cmu.edu/">CMU Motion Capture Database</a> · <a href="https://mocap.cs.cmu.edu/faqs.php">Data terms</a>.</p><p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/stride-continuation">Model, weights and full results</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/word-motion/">Earlier word-only movement study</a></p></details>
+<noscript>Enable JavaScript for local inference and 3D playback.</noscript>
+</main>
+<script type="application/json" id="data">/* DATA */</script>
+<script>/* NETWORK */</script>
+<script>/* SCENE */</script>
+<script>/* VIEW */</script>
+</body></html>
