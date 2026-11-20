@@ -1,0 +1,246 @@
+{
+  "study_date": "2026-11-20",
+  "assessment_people": 2,
+  "assessment_segments": 240,
+  "fit": {
+    "train_windows": 3360,
+    "train_members": 480,
+    "parameters": 17891,
+    "loss_per_epoch": [
+      0.3355108686855861,
+      0.2717532637573424,
+      0.23058209064460936,
+      0.20327589157081785,
+      0.19132245282332103,
+      0.17685909285431817,
+      0.16921752308096205,
+      0.16526261546782084,
+      0.1580227107519195,
+      0.15320071705750057,
+      0.15960850751116162,
+      0.14675537539379938
+    ],
+    "save_reload_max_abs_difference": 0.0,
+    "torch": "2.14.1+cpu",
+    "numpy": "2.5.3",
+    "cpu_threads": 2,
+    "interop_threads": 1,
+    "checkpoint_sha256": "96018afd0b6f5e38f6af721a540a1b6bca55b0f4c7c4a321c535b3d2722d873b",
+    "protocol_sha256": "3f538b53440c54fcc37b2f160be5e1ebfb5b62e97b896a95d0b231b5f8863014",
+    "code_sha256": "9315662e2231db487802834703f397d81dab88ca4e00c7c36006a5dadfdb69b8",
+    "archive_sha256": "f42ad7744ecf14151c9fa3a86dfb5b24de9d7cb7ffe956ef5de242983459c77e"
+  },
+  "primary_rule_passed": false,
+  "assessment_people_meeting_primary_rule": 0,
+  "metrics": {
+    "ordered": {
+      "all": {
+        "windows": 1680,
+        "persistence": {
+          "mae": 1.1824983505952373,
+          "mae_xyz": [
+            2.0611649732142836,
+            0.8836183226190483,
+            0.6027117559523804
+          ]
+        },
+        "ridge": {
+          "mae": 0.7812554512313783,
+          "mae_xyz": [
+            1.151710506756523,
+            0.6606417363414597,
+            0.5314141105961523
+          ]
+        },
+        "transformer": {
+          "mae": 0.8549608602243346,
+          "mae_xyz": [
+            1.3561292662896103,
+            0.6741266434697725,
+            0.5346266709136207
+          ]
+        },
+        "transformer_minus_baseline_mae": {
+          "persistence": -0.32753749037090235,
+          "ridge": 0.07370540899295744
+        }
+      },
+      "a09": {
+        "windows": 840,
+        "persistence": {
+          "mae": 1.2995601841269837,
+          "mae_xyz": [
+            2.383184999999999,
+            0.9135573142857142,
+            0.6019382380952378
+          ]
+        },
+        "ridge": {
+          "mae": 0.8300116579535021,
+          "mae_xyz": [
+            1.3172135148153992,
+            0.6216375833962201,
+            0.5511838756488868
+          ]
+        },
+        "transformer": {
+          "mae": 0.9071248595850626,
+          "mae_xyz": [
+            1.4775732777387032,
+            0.678363125948614,
+            0.5654381750678709
+          ]
+        },
+        "transformer_minus_baseline_mae": {
+          "persistence": -0.3924353245419207,
+          "ridge": 0.07711320163156225
+        }
+      },
+      "a10": {
+        "windows": 840,
+        "persistence": {
+          "mae": 1.0654365170634919,
+          "mae_xyz": [
+            1.7391449464285713,
+            0.8536793309523807,
+            0.6034852738095232
+          ]
+        },
+        "ridge": {
+          "mae": 0.7324992445092559,
+          "mae_xyz": [
+            0.9862074986976501,
+            0.6996458892867004,
+            0.5116443455434174
+          ]
+        },
+        "transformer": {
+          "mae": 0.8027968608636082,
+          "mae_xyz": [
+            1.2346852548405223,
+            0.6698901609909302,
+            0.5038151667593721
+          ]
+        },
+        "transformer_minus_baseline_mae": {
+          "persistence": -0.262639656199884,
+          "ridge": 0.07029761635435264
+        }
+      }
+    },
+    "shuffled": {
+      "all": {
+        "windows": 1680,
+        "persistence": {
+          "mae": 1.1824983505952373,
+          "mae_xyz": [
+            2.0611649732142836,
+            0.8836183226190483,
+            0.6027117559523804
+          ]
+        },
+        "ridge": {
+          "mae": 1.0556252667941106,
+          "mae_xyz": [
+            1.721270883287038,
+            0.7690445077930222,
+            0.6765604093022721
+          ]
+        },
+        "transformer": {
+          "mae": 0.9572264197741646,
+          "mae_xyz": [
+            1.6406439169199034,
+            0.687699955545694,
+            0.5433353868568963
+          ]
+        },
+        "transformer_minus_baseline_mae": {
+          "persistence": -0.22527193082107336,
+          "ridge": -0.09839884701994481
+        }
+      },
+      "a09": {
+        "windows": 840,
+        "persistence": {
+          "mae": 1.2995601841269837,
+          "mae_xyz": [
+            2.383184999999999,
+            0.9135573142857142,
+            0.6019382380952378
+          ]
+        },
+        "ridge": {
+          "mae": 1.1393977415963898,
+          "mae_xyz": [
+            1.9718640502044054,
+            0.7666403219033032,
+            0.6796888526814612
+          ]
+        },
+        "transformer": {
+          "mae": 1.0311390956092532,
+          "mae_xyz": [
+            1.8033442134838567,
+            0.7112629755528935,
+            0.5788100977910099
+          ]
+        },
+        "transformer_minus_baseline_mae": {
+          "persistence": -0.26842108851773017,
+          "ridge": -0.10825864598713414
+        }
+      },
+      "a10": {
+        "windows": 840,
+        "persistence": {
+          "mae": 1.0654365170634919,
+          "mae_xyz": [
+            1.7391449464285713,
+            0.8536793309523807,
+            0.6034852738095232
+          ]
+        },
+        "ridge": {
+          "mae": 0.97185279199183,
+          "mae_xyz": [
+            1.4706777163696658,
+            0.7714486936827419,
+            0.6734319659230821
+          ]
+        },
+        "transformer": {
+          "mae": 0.8833137439390754,
+          "mae_xyz": [
+            1.477943620355949,
+            0.6641369355384941,
+            0.5078606759227824
+          ]
+        },
+        "transformer_minus_baseline_mae": {
+          "persistence": -0.1821227731244166,
+          "ridge": -0.08853904805275548
+        }
+      }
+    }
+  },
+  "independent_verification": {
+    "matched_ordered_target_rows": 1680,
+    "verified_score_groups_per_condition": 9,
+    "checkpoint_checks": {
+      "ordered": {
+        "native_checkpoint_max_absolute_error": 0.0,
+        "explicit_attention_max_absolute_error": 1.4770351537407578e-06
+      },
+      "shuffled_": {
+        "native_checkpoint_max_absolute_error": 0.0,
+        "explicit_attention_max_absolute_error": 3.6925878887927865e-07
+      }
+    },
+    "refits": 0,
+    "reserve_members_opened": 0,
+    "primary_pass": false,
+    "assessment_report_sha256": "adf7fc2724ac17a62a5807fea939c93fd76fcba834ef0df371ddc6d1a60b3262",
+    "review_script_sha256": "9abdef04ae9470f382351fbb2779bb1b48a2ebafee535a4499d479514c6dd143"
+  }
+}
