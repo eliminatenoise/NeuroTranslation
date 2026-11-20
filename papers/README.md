@@ -39,11 +39,13 @@ The other eleven have no passage of their own in all four. The NeuroTranslation 
 
 The [study notes](current/research-evidence-reading-aid.md) retell each study outside the papers.
 
-## A four-page supplement and two newer studies are in neither draft
+## A four-page supplement, two newer studies and a wrist correction are in neither draft
 
 *How precisely do words identify a recorded movement?* is a four-page supplement, written to go with the NeuroTranslation paper but not part of it: neither paper's current draft contains it. It reports two studies in which a person wrote a sentence after watching a movement, and a model had to find that movement among recordings, one of the whole body and one of the hand. It explains why the timing of an action can be easier to find than the shape of the hand, and which question about guiding a hand, the subject of the Brain2Body paper, the studies leave open. [Read it online](https://eliminatenoise.github.io/NeuroTranslation/papers/language-and-observed-movement/language-and-movement.html) · [Download the four-page PDF](../docs/papers/language-and-observed-movement/language-and-movement.pdf) · [Editable source and evidence](../docs/papers/language-and-observed-movement/)
 
 Two newer forecasting studies are not in the drafts either. Each asks what a forecast gains from information available before the movement, against the body's own recent movement: [an instructor's finished words and the wrist one second later](../benchmarks/preceding-instructions/), and [earlier brain-cell firing and a rat's position a quarter of a second later](../benchmarks/wtrack-neural-motion/). In both, the extra information did not help. [The studies page](../benchmarks/README.md) lists all four studies published after its numbered table.
+
+Nor is the general model's newest wrist result. Its forecast of the two wrist angles was given a correction from four forearm signals, scored on six people the wrist studies had already used, each in turn by a version fitted on the other five: the error fell from 4.175° with a correction from the wrist's movement alone to 4.054° with the forearm signals, and an earlier model made for the wrist still did better (3.549°). A figure shows these errors with the controls, in which the forearm signals come from the wrong trial or run backwards. [Comparison figure (PDF)](../models/figures/wrist-correction.pdf) · [Methods, paired comparisons and source](../models/neurotranslate-0.0/forearm/)
 
 ## Nobody outside the project has reviewed them
 
