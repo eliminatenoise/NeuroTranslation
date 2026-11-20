@@ -1,4 +1,8 @@
-# Can a model that forecasts distance also forecast a wrist angle?
+# NeuroTranslate 0.0 movement forecasts
+
+Give the model four seconds of knee angles from one walker, a short wrist history or a movement record from a rat. Choose the input to match the measurement you have. The same checkpoint supplies all three tasks. For the knees, reusing the trained encoder gave 3.465° of error. Training a separate Transformer to correct stride replay gave 2.679° on the same previously studied walkers. [Compare both knee forecasts](https://eliminatenoise.github.io/NeuroTranslation/knee-stride/) · [Run the knee model](knee/README.md)
+
+## Can a model that forecasts distance also forecast a wrist angle?
 
 A person steers a cursor by bending their right wrist up or down and tilting it from side to side. Two encoders on the pointing device measure those angles. Given the last half-second of wrist motion, where will it be a quarter-second later? Do electrodes on the forearm or scalp help?
 

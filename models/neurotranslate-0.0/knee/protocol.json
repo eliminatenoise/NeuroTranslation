@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "question": "Can the frozen NeuroTranslate 0.0 temporal encoder learn a better correction to the previous stride than an equally fitted ridge using the same past measurements or a scrambled encoder?",
+  "source": {
+    "dataset": "PhysioNet Multimodal Gait Dataset v1.0.0, 0.5 m/s",
+    "doi": "10.13026/r0ea-7161",
+    "manifest_sha256": "695d0ff23daba2093e04467aeb3900de2a4735843baec54bf3ca4bab51e731c1",
+    "parent_weights_sha256": "08f4a025be7d3dfa6e3de5899fa445d019f8c70c82b1f5d6531bef1407e0616a",
+    "prior_rule_sha256": "0f349b53aade29db2ece6587352cffe40c12ef53df6b2a2b189213534757b2fa"
+  },
+  "split": "Train S1–40 except S24. Reused evaluation S41–52. S53–59 excluded from all file reads. Evaluate the previously published 40,201 eligible cutoffs; all original eligibility conditions and exact source hashes retained. No tuning on evaluation scores.",
+  "inputs": "Exactly 240 contiguous 60 Hz right/left knee flexion-extension rows ending at the cutoff. Future target is both reconstructed angles 15 stored frames later. All use the same prior-stride absolute estimate: minimize squared error between last 60 bilateral samples and their counterpart at delays 45–180 inclusive, choose shortest tie, read 15 frames beyond matched past anchor.",
+  "tokens": "Four chronological non-overlapping bins of 60 frames. Six features per bin: means [R,L], final angles [R,L], final minus fifth preceding frame [R,L]. Z-score each feature across all training tokens using equal-person/row weights, floor standard deviations below 1e-8 to 1. Pass six normalized features into the released spatial projection and same temporal block without changing its weights. No physical unit equivalence to older tasks is assumed.",
+  "readouts": "All learned arms get flattened 4x6 raw normalized tokens plus two replay angles, two most recent angles minus matched past angles at the estimated period, and the period in frames. Fit residual target = actual future minus replay. Compare raw-only ridge, same feature vector plus all four normalized 24-wide frozen hidden states, and otherwise identical ridge using one scrambled encoder. Shuffle each sorted position/project/block/last_norm tensor within itself with NumPy default_rng(1719). No readout applies physical clipping.",
+  "fit": "Within each training person retain every sixth eligible window starting with the first eligible. Give each person total weight 1/39, all retained windows within person equal. Standardize design columns using those weights (sd < 1e-8 becomes 1). Float64 closed form ridge normal equations with lambda 0.03 in the mean weighted squared error, intercept unpenalized. Fit once. Export parent untouched except for new knee arrays and configuration. Freeze full fitted checkpoint before opening evaluation files.",
+  "evaluation": "Score all eligible test cutoffs. Mean absolute error in degrees for both knees equally and all cutoffs within person equally; then each person equally. Compare all four arms and report per-person differences. 10,000 paired participant resamples with NumPy default_rng(9913). Claim descriptive shared feature advantage only if the shared head has lower mean absolute error than all three comparators with >=7 of 12 participant wins against each. Intervals descriptive on reused people. One permutation control. No physical deadline, causality, general human control or new confirmatory holdout claimed."
+}

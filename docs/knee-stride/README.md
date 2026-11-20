@@ -1,0 +1,17 @@
+# Can the last stride predict the next bend?
+
+Open **index.html**, or use the Windows, macOS or Linux launcher beside it. No installation or internet connection is needed. If your operating system restricts scripts, open **index.html** directly.
+
+Move **Last frame the forecasts can see** to stop the invented walk at a new point. Each plot shows 240 consecutive angle readings from one knee. The shaded bands show the latest second and its closest earlier match. The bracket gives the shift in frames. The green dot supplies the angle the stride rule copies. The diamond shows the selected method’s forecast 15 frames past the cutoff, a nominal quarter of a second. The two charts share a degree scale.
+
+Choose **Reveal invented angles** to see how the forecasts compare with the invented continuation. Choose **Open original CSV** to do the same with a recorded walk. Extract an original file such as `IMU_S41_0.5/Joint_Angles_ZXY.csv` from the study’s IMU archive (about 3.92 GB). All 12 held-out files from S41 through S52 at 0.5 m/s are accepted. The page verifies the original bytes before reading. A file stays in browser memory. **Save offline copy** always saves a clean reader that starts with the invented walk. [Study files](https://physionet.org/content/multimodal-gait-dataset/1.0.0/#files-panel)
+
+## Compare the models
+
+**Trained for knees** shows the earlier-stride estimate and two learned corrections. A linear correction weights changes in the knee angles. A dedicated Transformer weighs relationships among nine points in the matched motion. On recorded walks from the 12 previously examined test participants, average absolute errors were 3.535° for stride replay, 3.411° for the linear correction and 2.679° for the Transformer. The Transformer had the smaller errors in all 12 people against both alternatives.
+
+**Shared NeuroTranslate 0.0** asks whether a frozen motion encoder can help with these same knees. Its three learned readouts use four summaries of the walk, plus the copied angles and information about the stride match. Measurements alone gave 3.460° error, the frozen encoder 3.465°, and a copy with shuffled weights 3.422°. All four rows use the same cutoff and horizon. Select a knee in **Compare all 12 walkers** for the person-by-person results. The tests cover reconstructed angles at one speed. They leave open whether either set of findings will carry over to fresh people, other speeds or live use.
+
+## Source and rebuild
+
+The standalone **knee-stride-source.zip** includes the reader, both JavaScript predictors and their parameters, and the knee-trained model's public Python study files. Extract the archive. Run `python3 docs/knee-stride/build.py` at its root to rebuild the page from the hash-pinned inputs. The Python build uses the standard library. Participant recordings come directly from PhysioNet. Open the built page in a browser, including when offline. [Download source](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/knee-stride-source.zip) · [Shared encoder training and evaluation](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/knee) · [Source credits and licences](NOTICE.md)

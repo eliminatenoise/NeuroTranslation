@@ -1,0 +1,846 @@
+{
+  "format": "two-knee-stride-results-1",
+  "protocol_sha256": "a96040d1cfd327d1170bb836137aa8abf622bf1bebdc18288f30a76880ecb890",
+  "weights_sha256": "c866348ffd0b6e3fcefc5feb9ce6178d3c3e88c5f92d7a2474fa9176e379afbe",
+  "domain": "Stored Xsens knee flexion/extension at 0.5 m/s, single treadmill recording per person. Reused descriptive evaluation cohort.",
+  "people": 12,
+  "cutoffs": 40201,
+  "train_people": 39,
+  "train_cutoffs": 131804,
+  "mean_person_mae_deg": {
+    "prior_stride": {
+      "bilateral": 3.5352540464780127,
+      "right": 3.5656299952953976,
+      "left": 3.504878097660628
+    },
+    "ridge_residual": {
+      "bilateral": 3.4109503170209403,
+      "right": 3.4215069976487116,
+      "left": 3.4003936363931673
+    },
+    "transformer_residual": {
+      "bilateral": 2.679479769485225,
+      "right": 2.718582333427913,
+      "left": 2.640377205542536
+    }
+  },
+  "paired_person_differences_deg": {
+    "ridge_residual_minus_prior_stride": {
+      "mean": -0.12430372945707302,
+      "ci95": [
+        -0.2063329772039645,
+        -0.04122981970582823
+      ],
+      "wins": 8,
+      "ties": 0,
+      "losses": 4,
+      "passed_registered_criterion": true
+    },
+    "transformer_residual_minus_prior_stride": {
+      "mean": -0.8557742769927881,
+      "ci95": [
+        -1.0891289882662891,
+        -0.6276037964443727
+      ],
+      "wins": 12,
+      "ties": 0,
+      "losses": 0,
+      "passed_registered_criterion": true
+    },
+    "transformer_residual_minus_ridge_residual": {
+      "mean": -0.7314705475357152,
+      "ci95": [
+        -0.8909238538882035,
+        -0.5789519356331448
+      ],
+      "wins": 12,
+      "ties": 0,
+      "losses": 0,
+      "passed_registered_criterion": true
+    }
+  },
+  "participants": [
+    {
+      "participant": 41,
+      "split": "test",
+      "member": "IMU_S41_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "ae6b484863ff956b50542580644d7daa60bc4bd9b0b727e25a4ee20f37d1309f",
+      "source_rows": 3605,
+      "cutoffs": 3351,
+      "cutoff_frames_sha256_le_i8": "963c5a1a145bf7ea022094cb383bc5066a441855923547828ae65db21887a1e9",
+      "knee_series_sha256_le_f8": "02e62fdfc5b49b34f5885aff55e37d928f67a7bb2751b42cf6ec7813e49ce0b5",
+      "mae_deg": {
+        "prior_stride": {
+          "bilateral": 4.453726485949323,
+          "right": 4.075702623974991,
+          "left": 4.831750347923656
+        },
+        "ridge_residual": {
+          "bilateral": 4.117716720527827,
+          "right": 3.832296078168998,
+          "left": 4.403137362886656
+        },
+        "transformer_residual": {
+          "bilateral": 3.033929062167955,
+          "right": 2.863474488867448,
+          "left": 3.204383635468462
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": -0.33600976542149574,
+        "transformer_residual_minus_prior_stride": -1.4197974237813682,
+        "transformer_residual_minus_ridge_residual": -1.0837876583598725
+      }
+    },
+    {
+      "participant": 42,
+      "split": "test",
+      "member": "IMU_S42_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "ecca40a8d82f97ee86cbfe4a68190c7b8ae31b8d0835754da7cfa90647de1fa2",
+      "source_rows": 3604,
+      "cutoffs": 3350,
+      "cutoff_frames_sha256_le_i8": "4561beaf84527434621871fd5a37ca8d96c73aede8f4f4435bf90dffd29b9eb8",
+      "knee_series_sha256_le_f8": "5a33354ea6355fc910d8f7ef04ab5ef8c0d1700825a3ad5e3cf53690c358b626",
+      "mae_deg": {
+        "prior_stride": {
+          "bilateral": 4.580786001531656,
+          "right": 4.5698126475652385,
+          "left": 4.591759355498073
+        },
+        "ridge_residual": {
+          "bilateral": 4.263122220922664,
+          "right": 4.2019080854997055,
+          "left": 4.324336356345623
+        },
+        "transformer_residual": {
+          "bilateral": 3.0609199954752944,
+          "right": 3.1957793840039743,
+          "left": 2.926060606946614
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": -0.31766378060899214,
+        "transformer_residual_minus_prior_stride": -1.519866006056362,
+        "transformer_residual_minus_ridge_residual": -1.2022022254473699
+      }
+    },
+    {
+      "participant": 43,
+      "split": "test",
+      "member": "IMU_S43_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "bf652f54b3c6c7dbf68ca6ef5c7323972e460708e732e3733c04697304864038",
+      "source_rows": 3607,
+      "cutoffs": 3353,
+      "cutoff_frames_sha256_le_i8": "b4d2f00e40cae20935d0c08dfebd8fa6d9a8e5f611b2ea02907bf505001463e9",
+      "knee_series_sha256_le_f8": "5f1e8f526dc5f8ba953e12671cebf6e32afde6fd05372e09772e3bdb337e14c8",
+      "mae_deg": {
+        "prior_stride": {
+          "bilateral": 2.7146194974062388,
+          "right": 2.584643763344927,
+          "left": 2.8445952314675504
+        },
+        "ridge_residual": {
+          "bilateral": 2.7191550398362185,
+          "right": 2.6460821903887353,
+          "left": 2.7922278892837022
+        },
+        "transformer_residual": {
+          "bilateral": 2.214786585435837,
+          "right": 2.0839147733928094,
+          "left": 2.3456583974788643
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": 0.0045355424299797775,
+        "transformer_residual_minus_prior_stride": -0.4998329119704019,
+        "transformer_residual_minus_ridge_residual": -0.5043684544003817
+      }
+    },
+    {
+      "participant": 44,
+      "split": "test",
+      "member": "IMU_S44_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "247c0ac6759d6f5707305fd24441ff06addd4ec58f2ab4729cb290cbef3d0c52",
+      "source_rows": 3601,
+      "cutoffs": 3347,
+      "cutoff_frames_sha256_le_i8": "9ffd60ee20c030957b37e722a72f50a0539c8336c070085a9e9e517cbfe1ee23",
+      "knee_series_sha256_le_f8": "3c328e26a66029e84d3422dff42264b2ac22dc53c0f924d3b7e2412cef5f2d4e",
+      "mae_deg": {
+        "prior_stride": {
+          "bilateral": 2.62143117849394,
+          "right": 2.5424587205177316,
+          "left": 2.7004036364701482
+        },
+        "ridge_residual": {
+          "bilateral": 2.7321742083430394,
+          "right": 2.626388893392141,
+          "left": 2.8379595232939376
+        },
+        "transformer_residual": {
+          "bilateral": 2.0921569665283437,
+          "right": 2.0635688109956947,
+          "left": 2.1207451220609923
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": 0.11074302984909945,
+        "transformer_residual_minus_prior_stride": -0.5292742119655962,
+        "transformer_residual_minus_ridge_residual": -0.6400172418146957
+      }
+    },
+    {
+      "participant": 45,
+      "split": "test",
+      "member": "IMU_S45_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "ebd8b9ab402ad0bc9e06e5e4b312450101d3fd37054a6a63ec91b6cf01ca81ce",
+      "source_rows": 3602,
+      "cutoffs": 3348,
+      "cutoff_frames_sha256_le_i8": "1f09ac9ece724fd0e911ab8d7f929082500ffc41a4238838216968ef7af92269",
+      "knee_series_sha256_le_f8": "5c2e18df84d00d968caa993fa906eb558e3703c40d52ef601adeb49d00c5c59d",
+      "mae_deg": {
+        "prior_stride": {
+          "bilateral": 2.250839157795337,
+          "right": 2.1645715344728655,
+          "left": 2.3371067811178086
+        },
+        "ridge_residual": {
+          "bilateral": 2.3239661839123635,
+          "right": 2.2164524723645456,
+          "left": 2.4314798954601815
+        },
+        "transformer_residual": {
+          "bilateral": 2.0756709821417716,
+          "right": 2.2169094231152244,
+          "left": 1.9344325411683188
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": 0.0731270261170267,
+        "transformer_residual_minus_prior_stride": -0.17516817565356524,
+        "transformer_residual_minus_ridge_residual": -0.24829520177059194
+      }
+    },
+    {
+      "participant": 46,
+      "split": "test",
+      "member": "IMU_S46_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "a7e27b8e658119241ad102962ec4cbb2dfa158c8d98c9633964aa8e026eed1a0",
+      "source_rows": 3607,
+      "cutoffs": 3353,
+      "cutoff_frames_sha256_le_i8": "b4d2f00e40cae20935d0c08dfebd8fa6d9a8e5f611b2ea02907bf505001463e9",
+      "knee_series_sha256_le_f8": "d13e3572f3e3549eb180433fd123f4d14c3fc84c9055d037257e482588495236",
+      "mae_deg": {
+        "prior_stride": {
+          "bilateral": 2.8664399116596524,
+          "right": 2.906969056289141,
+          "left": 2.825910767030164
+        },
+        "ridge_residual": {
+          "bilateral": 2.7998681495753934,
+          "right": 2.8444261317449153,
+          "left": 2.7553101674058715
+        },
+        "transformer_residual": {
+          "bilateral": 2.1989444448306967,
+          "right": 2.2648540642969666,
+          "left": 2.133034825364427
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": -0.06657176208425897,
+        "transformer_residual_minus_prior_stride": -0.6674954668289557,
+        "transformer_residual_minus_ridge_residual": -0.6009237047446967
+      }
+    },
+    {
+      "participant": 47,
+      "split": "test",
+      "member": "IMU_S47_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "9c1a16ef97266b46ee4b07d442406ef962690aae8820323e596b5eaa72a2a7f3",
+      "source_rows": 3603,
+      "cutoffs": 3349,
+      "cutoff_frames_sha256_le_i8": "14eb22e7c92475f7f54520e21aaa5b1b820649c616aa4750c728d6789d73e3c2",
+      "knee_series_sha256_le_f8": "0b011e97d9cd73e0cef2f30e7ae4e94dded78a5633c00f3995bc51aa74544ee6",
+      "mae_deg": {
+        "prior_stride": {
+          "bilateral": 3.8621930857959668,
+          "right": 4.140523299894428,
+          "left": 3.583862871697505
+        },
+        "ridge_residual": {
+          "bilateral": 3.6880916101100274,
+          "right": 3.958575319466233,
+          "left": 3.4176079007538216
+        },
+        "transformer_residual": {
+          "bilateral": 3.005322061168022,
+          "right": 3.269070255388684,
+          "left": 2.7415738669473595
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": -0.17410147568593937,
+        "transformer_residual_minus_prior_stride": -0.856871024627945,
+        "transformer_residual_minus_ridge_residual": -0.6827695489420056
+      }
+    },
+    {
+      "participant": 48,
+      "split": "test",
+      "member": "IMU_S48_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "4fae193f5086d76a9b9905a89761295bda59540f67c04a91b2ccc404b29146aa",
+      "source_rows": 3602,
+      "cutoffs": 3348,
+      "cutoff_frames_sha256_le_i8": "1f09ac9ece724fd0e911ab8d7f929082500ffc41a4238838216968ef7af92269",
+      "knee_series_sha256_le_f8": "62703e1bd6522650d674c2b08e0babddfdd444fd20ffb085f16e1167c5c47616",
+      "mae_deg": {
+        "prior_stride": {
+          "bilateral": 5.081928627840097,
+          "right": 5.682414387765196,
+          "left": 4.481442867914998
+        },
+        "ridge_residual": {
+          "bilateral": 4.758402790826123,
+          "right": 5.073824908583417,
+          "left": 4.442980673068829
+        },
+        "transformer_residual": {
+          "bilateral": 3.547540610523238,
+          "right": 3.8357941340585424,
+          "left": 3.259287086987934
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": -0.32352583701397375,
+        "transformer_residual_minus_prior_stride": -1.534388017316859,
+        "transformer_residual_minus_ridge_residual": -1.2108621803028852
+      }
+    },
+    {
+      "participant": 49,
+      "split": "test",
+      "member": "IMU_S49_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "8702ff9fd4e3a832a17378bbd3ed81b8bcc8e5881351be852665b57ff3f34fb0",
+      "source_rows": 3602,
+      "cutoffs": 3348,
+      "cutoff_frames_sha256_le_i8": "1f09ac9ece724fd0e911ab8d7f929082500ffc41a4238838216968ef7af92269",
+      "knee_series_sha256_le_f8": "de00419a3ab4495000e734ff24a40b9f96816708528e7aecfb390b277bde0466",
+      "mae_deg": {
+        "prior_stride": {
+          "bilateral": 3.23221179059835,
+          "right": 2.911153108855534,
+          "left": 3.553270472341166
+        },
+        "ridge_residual": {
+          "bilateral": 3.253919979856107,
+          "right": 3.073151773051022,
+          "left": 3.4346881866611927
+        },
+        "transformer_residual": {
+          "bilateral": 2.704440444690973,
+          "right": 2.607021010734295,
+          "left": 2.8018598786476514
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": 0.021708189257757304,
+        "transformer_residual_minus_prior_stride": -0.527771345907377,
+        "transformer_residual_minus_ridge_residual": -0.5494795351651343
+      }
+    },
+    {
+      "participant": 50,
+      "split": "test",
+      "member": "IMU_S50_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "3874e0e7b02eb1bed0c208f7b3dfa53d29ede0df5d947016277395390f986b15",
+      "source_rows": 3606,
+      "cutoffs": 3352,
+      "cutoff_frames_sha256_le_i8": "48c96e10983a2f44f4d0c6526acd1299181af7017b92b0304cf6dfbd2cab6773",
+      "knee_series_sha256_le_f8": "d40b74774ce860d899c1257da2a4fffea062725fdf8c388f423d4da460731dbd",
+      "mae_deg": {
+        "prior_stride": {
+          "bilateral": 3.7379088660429574,
+          "right": 3.813520546644473,
+          "left": 3.662297185441442
+        },
+        "ridge_residual": {
+          "bilateral": 3.6254218644213747,
+          "right": 3.6341461172707974,
+          "left": 3.6166976115719516
+        },
+        "transformer_residual": {
+          "bilateral": 2.939823113291407,
+          "right": 2.867591706818887,
+          "left": 3.0120545197639275
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": -0.11248700162158265,
+        "transformer_residual_minus_prior_stride": -0.7980857527515504,
+        "transformer_residual_minus_ridge_residual": -0.6855987511299677
+      }
+    },
+    {
+      "participant": 51,
+      "split": "test",
+      "member": "IMU_S51_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "7c29c09c73fd54a584d7e31bdaff26c09a0649f344028485235a660ceb262f99",
+      "source_rows": 3602,
+      "cutoffs": 3348,
+      "cutoff_frames_sha256_le_i8": "1f09ac9ece724fd0e911ab8d7f929082500ffc41a4238838216968ef7af92269",
+      "knee_series_sha256_le_f8": "2bb77bb105862622706895a4d91ce587be24714003386254382fcf1e644bf1ea",
+      "mae_deg": {
+        "prior_stride": {
+          "bilateral": 3.5402046120917223,
+          "right": 3.8559773790696568,
+          "left": 3.2244318451137883
+        },
+        "ridge_residual": {
+          "bilateral": 3.3652950256767356,
+          "right": 3.5433461105389097,
+          "left": 3.1872439408145614
+        },
+        "transformer_residual": {
+          "bilateral": 2.554446044934323,
+          "right": 2.501041330007662,
+          "left": 2.607850759860984
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": -0.17490958641498677,
+        "transformer_residual_minus_prior_stride": -0.9857585671573994,
+        "transformer_residual_minus_ridge_residual": -0.8108489807424126
+      }
+    },
+    {
+      "participant": 52,
+      "split": "test",
+      "member": "IMU_S52_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "1e1544fe36753e4d8f9aedfc6d6dad31a8516d3fdea6608736e74144c6813b7c",
+      "source_rows": 3608,
+      "cutoffs": 3354,
+      "cutoff_frames_sha256_le_i8": "9922ba2999f2aff2900864518a9d15d4ca4c45880ebdb54593938648abefc30c",
+      "knee_series_sha256_le_f8": "662de5335eb181d9458bc4b44c337c5ad4162c131a7969eff9c7d66a9d583995",
+      "mae_deg": {
+        "prior_stride": {
+          "bilateral": 3.480759342530914,
+          "right": 3.539812875150586,
+          "left": 3.421705809911241
+        },
+        "ridge_residual": {
+          "bilateral": 3.2842700102434037,
+          "right": 3.407485891315122,
+          "left": 3.161054129171685
+        },
+        "transformer_residual": {
+          "bilateral": 2.725776922634836,
+          "right": 2.853968619454774,
+          "left": 2.597585225814897
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": -0.1964893322875101,
+        "transformer_residual_minus_prior_stride": -0.754982419896078,
+        "transformer_residual_minus_ridge_residual": -0.5584930876085679
+      }
+    }
+  ],
+  "controls": {
+    "future_target_shift_degrees": 123,
+    "tested_cutoffs": 36,
+    "future_change_max_prediction_difference_deg": 0,
+    "maximum_fast_vs_scalar_forecast_difference_deg": 0.0
+  },
+  "training_join": [
+    {
+      "participant": 1,
+      "split": "train",
+      "member": "IMU_S1_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "bb95ba46283a82f465d84048147dabc05ae16d4fa29a874ee37cd82cc4e6325d",
+      "source_rows": 3620,
+      "cutoffs": 3366,
+      "cutoff_frames_sha256_le_i8": "1776f4b9466f7f037924b082ed3e6b6446282c5ffb28e90250f319a3f00a4ba3",
+      "knee_series_sha256_le_f8": "9315d930debf015b3c12961cf4fd33927ac9f8a0c406675f0f5c8a65ee7fe1ed"
+    },
+    {
+      "participant": 2,
+      "split": "train",
+      "member": "IMU_S2_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "daa4c1917affedb6e2be3b30a193062b6970fa742643dacf51de3b92fba0e34b",
+      "source_rows": 4267,
+      "cutoffs": 4013,
+      "cutoff_frames_sha256_le_i8": "6ccd2ece249e89b806b8df8aa9377214b25af976c21ad3e2774c6f393d0f578b",
+      "knee_series_sha256_le_f8": "21d2acc4fec91ebec35167d4498769521be59a2336274d83598aea65a6c7ef4b"
+    },
+    {
+      "participant": 3,
+      "split": "train",
+      "member": "IMU_S3_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "4c03c1cb7007582df0574a70a8724a9393ce58be256f06b4b145c9f5e00490a5",
+      "source_rows": 4055,
+      "cutoffs": 3801,
+      "cutoff_frames_sha256_le_i8": "2db3508ef18cc0aacc4b775f2091e05c38c6f9a1fcd50e490986218799b67a07",
+      "knee_series_sha256_le_f8": "df37805645f35f86d292a945f01667b09b32a1a8d11884e3d1aba4cb85ce0db0"
+    },
+    {
+      "participant": 4,
+      "split": "train",
+      "member": "IMU_S4_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "b75b7a173d0a7a7335319c58e11b5ebdd80358de514964bfae98fd0698b785a8",
+      "source_rows": 3605,
+      "cutoffs": 3351,
+      "cutoff_frames_sha256_le_i8": "963c5a1a145bf7ea022094cb383bc5066a441855923547828ae65db21887a1e9",
+      "knee_series_sha256_le_f8": "830c24b740961365c64d80deaa07d2f5fe69f43aee65f8131ce5a5b0b8b16415"
+    },
+    {
+      "participant": 5,
+      "split": "train",
+      "member": "IMU_S5_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "243323298970450eceec25fa5e99e67cab8bbacd4f4c2ebcc8ddc446a8152c7f",
+      "source_rows": 3607,
+      "cutoffs": 3353,
+      "cutoff_frames_sha256_le_i8": "b4d2f00e40cae20935d0c08dfebd8fa6d9a8e5f611b2ea02907bf505001463e9",
+      "knee_series_sha256_le_f8": "9a2571f65ecf735923fc60f4118ba4514f9aafb3ea1a72158f3f292cdde30ce3"
+    },
+    {
+      "participant": 6,
+      "split": "train",
+      "member": "IMU_S6_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "241503d49f43e9e3e4cd7b093ccda70d70cfa7c002a8d9e17083c222b2b9d998",
+      "source_rows": 3606,
+      "cutoffs": 3352,
+      "cutoff_frames_sha256_le_i8": "48c96e10983a2f44f4d0c6526acd1299181af7017b92b0304cf6dfbd2cab6773",
+      "knee_series_sha256_le_f8": "2365333b34e9d1f9845ee41519c364c0fd518e128c3ff6f08078e4456632976b"
+    },
+    {
+      "participant": 7,
+      "split": "train",
+      "member": "IMU_S7_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "d0869bb9f5142ec83e5e69eb9a895191ed72ad9fab96f715abe97a1c5c074741",
+      "source_rows": 3607,
+      "cutoffs": 3353,
+      "cutoff_frames_sha256_le_i8": "b4d2f00e40cae20935d0c08dfebd8fa6d9a8e5f611b2ea02907bf505001463e9",
+      "knee_series_sha256_le_f8": "b5ce5ad71663cd0d00032126e176e0802f45c8a733ccfa426cf6bac30fa480b0"
+    },
+    {
+      "participant": 8,
+      "split": "train",
+      "member": "IMU_S8_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "9e35ad2e744d19519e4670b9007120c391b919124964247fede6b512441bec1f",
+      "source_rows": 3602,
+      "cutoffs": 3348,
+      "cutoff_frames_sha256_le_i8": "1f09ac9ece724fd0e911ab8d7f929082500ffc41a4238838216968ef7af92269",
+      "knee_series_sha256_le_f8": "e7cbb8d9928cbe0515f2d3b7fc3fa0b9c8ca4126e6dd407c2edae36bb8a0137b"
+    },
+    {
+      "participant": 9,
+      "split": "train",
+      "member": "IMU_S9_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "d252f9d88dc349cdafd086f0431732de69c242091586ce1608cf5939fa80e7d4",
+      "source_rows": 3605,
+      "cutoffs": 3351,
+      "cutoff_frames_sha256_le_i8": "963c5a1a145bf7ea022094cb383bc5066a441855923547828ae65db21887a1e9",
+      "knee_series_sha256_le_f8": "253afd5d0f70fbf994b87684edf3fc694558e51e0e4d26d53bb65fa12dbef801"
+    },
+    {
+      "participant": 10,
+      "split": "train",
+      "member": "IMU_S10_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "69cb2c272ad7cec76d7028a6acf5b07bc6b7be0ac4b4e769dea7d265cf61c1c2",
+      "source_rows": 3603,
+      "cutoffs": 3349,
+      "cutoff_frames_sha256_le_i8": "14eb22e7c92475f7f54520e21aaa5b1b820649c616aa4750c728d6789d73e3c2",
+      "knee_series_sha256_le_f8": "bc4390c7dea7a35e341e346703d22c98a513cdb8190e8171c966f33170134f7a"
+    },
+    {
+      "participant": 11,
+      "split": "train",
+      "member": "IMU_S11_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "08d30ab05502d37d34ab85b427aa00c0940931b6a2aec0b2b8558a05d771d851",
+      "source_rows": 3604,
+      "cutoffs": 3350,
+      "cutoff_frames_sha256_le_i8": "4561beaf84527434621871fd5a37ca8d96c73aede8f4f4435bf90dffd29b9eb8",
+      "knee_series_sha256_le_f8": "f9773000b6a6edeb4aa8a2c73b07067f01fe3ae0ef8621523ab7069b539c231d"
+    },
+    {
+      "participant": 12,
+      "split": "train",
+      "member": "IMU_S12_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "66eb4e5d0f218e1afa2a8515cf7bf4ab27836ac44e131b3e4043886f5b3e5e90",
+      "source_rows": 3606,
+      "cutoffs": 3352,
+      "cutoff_frames_sha256_le_i8": "48c96e10983a2f44f4d0c6526acd1299181af7017b92b0304cf6dfbd2cab6773",
+      "knee_series_sha256_le_f8": "c0633a3fed89188a77029ed15a5ba05e60b5bf3070b5a8430df4a5d8405c5bbf"
+    },
+    {
+      "participant": 13,
+      "split": "train",
+      "member": "IMU_S13_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "1ed0d9b89051dd50dff7a56ba88d92176d1b4e78995e03531e5c2dab10e30f90",
+      "source_rows": 3607,
+      "cutoffs": 3353,
+      "cutoff_frames_sha256_le_i8": "b4d2f00e40cae20935d0c08dfebd8fa6d9a8e5f611b2ea02907bf505001463e9",
+      "knee_series_sha256_le_f8": "acd57d35a5f8ceb2dbbda99ea4ed994cccd39b76aec7a0885fa86d442c4113dc"
+    },
+    {
+      "participant": 14,
+      "split": "train",
+      "member": "IMU_S14_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "75a272619965915c42c2feca27fa333b0e49e8f4edef014c853e78465bac73e0",
+      "source_rows": 3603,
+      "cutoffs": 3349,
+      "cutoff_frames_sha256_le_i8": "14eb22e7c92475f7f54520e21aaa5b1b820649c616aa4750c728d6789d73e3c2",
+      "knee_series_sha256_le_f8": "dfaef39fd75e1c55fc7af6ab1e568434fc12b9ae6b9fdc04285130abc7f38c8d"
+    },
+    {
+      "participant": 15,
+      "split": "train",
+      "member": "IMU_S15_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "914b5505ac69f0637d87e435a055513c37646729c81471310817a2d11c4e3d34",
+      "source_rows": 3602,
+      "cutoffs": 3348,
+      "cutoff_frames_sha256_le_i8": "1f09ac9ece724fd0e911ab8d7f929082500ffc41a4238838216968ef7af92269",
+      "knee_series_sha256_le_f8": "71ba736014574ca03f678a3722b51d5183fd8f544b5ed1e2237a770d1bc52573"
+    },
+    {
+      "participant": 16,
+      "split": "train",
+      "member": "IMU_S16_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "e56225abc6fa1ef55dd0b208032175785c3f86d27028e3afe389b82a927315c6",
+      "source_rows": 3606,
+      "cutoffs": 3352,
+      "cutoff_frames_sha256_le_i8": "48c96e10983a2f44f4d0c6526acd1299181af7017b92b0304cf6dfbd2cab6773",
+      "knee_series_sha256_le_f8": "d9eac2787222cedc46051d9abe6a98d8e9d804f63d537be432c7a1dc00e41bc4"
+    },
+    {
+      "participant": 17,
+      "split": "train",
+      "member": "IMU_S17_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "533e6a2907eb09501a62776e616c88990923b852ebc9d579a91174c0de7bb7fc",
+      "source_rows": 3605,
+      "cutoffs": 3351,
+      "cutoff_frames_sha256_le_i8": "963c5a1a145bf7ea022094cb383bc5066a441855923547828ae65db21887a1e9",
+      "knee_series_sha256_le_f8": "fcb2b2ade8c5dc9cbed5ed8682287de616081aee957f6ed189aa21f09197af2e"
+    },
+    {
+      "participant": 18,
+      "split": "train",
+      "member": "IMU_S18_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "0d32e41266356703f3fcaacd0fd2ded63d6d9e321951d50e9affab80d3f40285",
+      "source_rows": 3602,
+      "cutoffs": 3348,
+      "cutoff_frames_sha256_le_i8": "1f09ac9ece724fd0e911ab8d7f929082500ffc41a4238838216968ef7af92269",
+      "knee_series_sha256_le_f8": "5a0e46cece279411ec2f84b77f417b83668f666271789cc98e2719061427dcb8"
+    },
+    {
+      "participant": 19,
+      "split": "train",
+      "member": "IMU_S19_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "f0a9704ef0fab8db8c5827ae034563197bb8ba1cb991a5859094f50eb31ce432",
+      "source_rows": 3603,
+      "cutoffs": 3349,
+      "cutoff_frames_sha256_le_i8": "14eb22e7c92475f7f54520e21aaa5b1b820649c616aa4750c728d6789d73e3c2",
+      "knee_series_sha256_le_f8": "68a532c4868ee5e113da16987be535302e16f78335bfbf9668fadebfe0fbd53e"
+    },
+    {
+      "participant": 20,
+      "split": "train",
+      "member": "IMU_S20_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "16c0162855b8cef7fc9c70f1dd2b79f819fc33fa6042bc2a8999cf3efbd685a8",
+      "source_rows": 3603,
+      "cutoffs": 3349,
+      "cutoff_frames_sha256_le_i8": "14eb22e7c92475f7f54520e21aaa5b1b820649c616aa4750c728d6789d73e3c2",
+      "knee_series_sha256_le_f8": "8454dc63aed35f815215287d406cd259cfb2d514e36e6123c408a0d4032781bb"
+    },
+    {
+      "participant": 21,
+      "split": "train",
+      "member": "IMU_S21_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "4ff5c056cabd421d3de1e2221a05767387e10f32169a90e282a28757ab7e2ed5",
+      "source_rows": 3602,
+      "cutoffs": 3348,
+      "cutoff_frames_sha256_le_i8": "1f09ac9ece724fd0e911ab8d7f929082500ffc41a4238838216968ef7af92269",
+      "knee_series_sha256_le_f8": "bff113b963a9aafed30da63a170e3e3b84939d06799dc8727a917b644a8e9abb"
+    },
+    {
+      "participant": 22,
+      "split": "train",
+      "member": "IMU_S22_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "7393e42609557e5576028ac80b21529c828206a7166454ff23bb7e1587c92beb",
+      "source_rows": 3607,
+      "cutoffs": 3353,
+      "cutoff_frames_sha256_le_i8": "b4d2f00e40cae20935d0c08dfebd8fa6d9a8e5f611b2ea02907bf505001463e9",
+      "knee_series_sha256_le_f8": "a5aa0313eee6dba7687765847652d29c8dc45210540ba423cff91976e3048c53"
+    },
+    {
+      "participant": 23,
+      "split": "train",
+      "member": "IMU_S23_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "bb0443298db4c76e1f1b0bd9efbbcf074a9889fa2a75dc707d7cfeb0acaafd92",
+      "source_rows": 3606,
+      "cutoffs": 3352,
+      "cutoff_frames_sha256_le_i8": "48c96e10983a2f44f4d0c6526acd1299181af7017b92b0304cf6dfbd2cab6773",
+      "knee_series_sha256_le_f8": "418831fc887e53d898ed0f3dce287da18c02ad2fee224c9eb003caf13cdfe693"
+    },
+    {
+      "participant": 25,
+      "split": "train",
+      "member": "IMU_S25_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "e512efaeae8c4aa9fe5ab1eae9fdff24e9a5086c4610099b5a1aa58f039b96cc",
+      "source_rows": 3603,
+      "cutoffs": 3349,
+      "cutoff_frames_sha256_le_i8": "14eb22e7c92475f7f54520e21aaa5b1b820649c616aa4750c728d6789d73e3c2",
+      "knee_series_sha256_le_f8": "187a43d49d7be08dc4d201f7a86e58ecb2a66ae16d1e50813202436b0b2d0ede"
+    },
+    {
+      "participant": 26,
+      "split": "train",
+      "member": "IMU_S26_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "318f08a2ac84d61e2c1c9f012c7633e29285e8b0468a82f976f1f9b6aec38434",
+      "source_rows": 3607,
+      "cutoffs": 3353,
+      "cutoff_frames_sha256_le_i8": "b4d2f00e40cae20935d0c08dfebd8fa6d9a8e5f611b2ea02907bf505001463e9",
+      "knee_series_sha256_le_f8": "1579b55adc3f7af2952e48b912b34bd024545c3a5fee4ec4ca9e0c16a62b3d38"
+    },
+    {
+      "participant": 27,
+      "split": "train",
+      "member": "IMU_S27_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "a5f3dbd456b3e4790f559132e8b4f1025b61e42bd3da3c530836b15d3af4840e",
+      "source_rows": 3602,
+      "cutoffs": 3348,
+      "cutoff_frames_sha256_le_i8": "1f09ac9ece724fd0e911ab8d7f929082500ffc41a4238838216968ef7af92269",
+      "knee_series_sha256_le_f8": "3b8ec7fbcb7c549a9f608c126b43e21719b4d9d3263101873fcc7dc5fc12d347"
+    },
+    {
+      "participant": 28,
+      "split": "train",
+      "member": "IMU_S28_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "718d0d8ba5093055c44d723b36ae9b5be0dfb238e347bf2d358d1dfc5327e3dc",
+      "source_rows": 3604,
+      "cutoffs": 3350,
+      "cutoff_frames_sha256_le_i8": "4561beaf84527434621871fd5a37ca8d96c73aede8f4f4435bf90dffd29b9eb8",
+      "knee_series_sha256_le_f8": "cee9bd0b8755525e6b55e661994c4eecb6431885dcd06099c1acadb57538b21c"
+    },
+    {
+      "participant": 29,
+      "split": "train",
+      "member": "IMU_S29_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "1a15113039609397725e130bf0ad70667138f88fae97f4e32de40c89bd0c0108",
+      "source_rows": 3607,
+      "cutoffs": 3353,
+      "cutoff_frames_sha256_le_i8": "b4d2f00e40cae20935d0c08dfebd8fa6d9a8e5f611b2ea02907bf505001463e9",
+      "knee_series_sha256_le_f8": "87f94fc76290dc4eeeb37cc1968dda5f13fcd766c6ef0a33939adbcfa471f651"
+    },
+    {
+      "participant": 30,
+      "split": "train",
+      "member": "IMU_S30_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "adc1f87c2eac0d1b5ba146e62b17ba8492efd7943c03c51e81b4916c2b9ac7fd",
+      "source_rows": 3607,
+      "cutoffs": 3353,
+      "cutoff_frames_sha256_le_i8": "b4d2f00e40cae20935d0c08dfebd8fa6d9a8e5f611b2ea02907bf505001463e9",
+      "knee_series_sha256_le_f8": "038ee3d6627334fbc63365c4bc6d2e5d5cce449d331b98ab940dd11d96bc7106"
+    },
+    {
+      "participant": 31,
+      "split": "train",
+      "member": "IMU_S31_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "9342b229b446955f743799143c380d6da17474164f36adcfb104f43173d18b1e",
+      "source_rows": 3602,
+      "cutoffs": 3348,
+      "cutoff_frames_sha256_le_i8": "1f09ac9ece724fd0e911ab8d7f929082500ffc41a4238838216968ef7af92269",
+      "knee_series_sha256_le_f8": "100de1e1277fdc830f172e40d5a550d2dd785c161226c82067dae9184979555f"
+    },
+    {
+      "participant": 32,
+      "split": "train",
+      "member": "IMU_S32_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "2eb4b37d6f5913c694c6b292f6e36fc848f2886a460eac7522d2ece2cd92782b",
+      "source_rows": 3608,
+      "cutoffs": 3354,
+      "cutoff_frames_sha256_le_i8": "9922ba2999f2aff2900864518a9d15d4ca4c45880ebdb54593938648abefc30c",
+      "knee_series_sha256_le_f8": "7c27692598be1f7c4b12e6dff87d968d80b41bc59be1d29a17898affc9fdb826"
+    },
+    {
+      "participant": 33,
+      "split": "train",
+      "member": "IMU_S33_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "9699c2be2b1394b8e8f20a0d9f9823b9a22edb44b7ed695af6e896cafc65e1d4",
+      "source_rows": 3603,
+      "cutoffs": 3349,
+      "cutoff_frames_sha256_le_i8": "14eb22e7c92475f7f54520e21aaa5b1b820649c616aa4750c728d6789d73e3c2",
+      "knee_series_sha256_le_f8": "d027f6a12205cdbd41f2f8d652c6286e4f99b784379a2cdf59aa417b5d74e1c3"
+    },
+    {
+      "participant": 34,
+      "split": "train",
+      "member": "IMU_S34_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "ac1aaedf8cc5c4d1dae73808c6894da1eae34f70494bb40f43a9715a74c2f21d",
+      "source_rows": 3602,
+      "cutoffs": 3348,
+      "cutoff_frames_sha256_le_i8": "1f09ac9ece724fd0e911ab8d7f929082500ffc41a4238838216968ef7af92269",
+      "knee_series_sha256_le_f8": "f3b00640b8ba85875624d5ced3b84678df984a5717bca9b8f16fd205fc624b20"
+    },
+    {
+      "participant": 35,
+      "split": "train",
+      "member": "IMU_S35_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "ebebf082c848804469cc208359365079a8563526e168450ec1cc76e44990d6aa",
+      "source_rows": 3607,
+      "cutoffs": 3353,
+      "cutoff_frames_sha256_le_i8": "b4d2f00e40cae20935d0c08dfebd8fa6d9a8e5f611b2ea02907bf505001463e9",
+      "knee_series_sha256_le_f8": "6e12006700c86ea4e13bf7d42f2345c2ed7b368ea03d280bd71791ef5ee41b6d"
+    },
+    {
+      "participant": 36,
+      "split": "train",
+      "member": "IMU_S36_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "bba241b47f25de4821adbb2cf418c62f8f9fad1ca178bbb0848890f22cb450e6",
+      "source_rows": 3607,
+      "cutoffs": 3353,
+      "cutoff_frames_sha256_le_i8": "b4d2f00e40cae20935d0c08dfebd8fa6d9a8e5f611b2ea02907bf505001463e9",
+      "knee_series_sha256_le_f8": "3f341abef3e03279ab798c8a0a2545234dd115b9cb70bdcfe13162ac95b674f7"
+    },
+    {
+      "participant": 37,
+      "split": "train",
+      "member": "IMU_S37_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "cb52b5f400bdff5e38b7b67e332a43ef0f8f5f4c56323df6e84ce134c8a3f61b",
+      "source_rows": 3605,
+      "cutoffs": 3351,
+      "cutoff_frames_sha256_le_i8": "963c5a1a145bf7ea022094cb383bc5066a441855923547828ae65db21887a1e9",
+      "knee_series_sha256_le_f8": "470734fade00418724037f955a6d7ef8c5cffbcef5d32074c9fcf1bff7d4067a"
+    },
+    {
+      "participant": 38,
+      "split": "train",
+      "member": "IMU_S38_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "1972f959300960faa50be8d8c02f7bae88fa3a7859b48e123058b8b4fe01b9f3",
+      "source_rows": 3605,
+      "cutoffs": 3351,
+      "cutoff_frames_sha256_le_i8": "963c5a1a145bf7ea022094cb383bc5066a441855923547828ae65db21887a1e9",
+      "knee_series_sha256_le_f8": "ca54f7846b2f223625de07c08bd63c9c39ba96949bbe633ad5b27c1e54eb67c0"
+    },
+    {
+      "participant": 39,
+      "split": "train",
+      "member": "IMU_S39_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "8d8713de07bc1f79579d3968a28cc8ad22306f0af71514621e89f2d2431d9dc3",
+      "source_rows": 3601,
+      "cutoffs": 3347,
+      "cutoff_frames_sha256_le_i8": "9ffd60ee20c030957b37e722a72f50a0539c8336c070085a9e9e517cbfe1ee23",
+      "knee_series_sha256_le_f8": "097f5a65e57c1155f6a3fe74ef5493fdc649489ee6a8767aec112739623014dc"
+    },
+    {
+      "participant": 40,
+      "split": "train",
+      "member": "IMU_S40_0.5/Joint_Angles_ZXY.csv",
+      "member_sha256": "beff1e72267861fbf1864074d273fc8222bfcdb1dbb8acbfff4eb434e770f838",
+      "source_rows": 3607,
+      "cutoffs": 3353,
+      "cutoff_frames_sha256_le_i8": "b4d2f00e40cae20935d0c08dfebd8fa6d9a8e5f611b2ea02907bf505001463e9",
+      "knee_series_sha256_le_f8": "ff035cd4b8b1de5fb59f0941dd92b3fd5f127b1708e769fc6145ac559b72314f"
+    }
+  ]
+}

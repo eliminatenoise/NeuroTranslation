@@ -84,3 +84,7 @@ Two folders under `benchmarks/` hold a page of their results and a launcher for 
 | [Row 29](benchmarks/wrist-forearm-correction/README.md) | A correction from forearm EMG, scored on the people the wrist models were fitted on (not a test) | [Open on Windows.cmd](<benchmarks/wrist-forearm-correction/Open on Windows.cmd>) | [Open on macOS.command](<benchmarks/wrist-forearm-correction/Open on macOS.command>) | [Open on Linux.sh](<benchmarks/wrist-forearm-correction/Open on Linux.sh>) |
 
 In study 28's folder, one command also runs its three fitted models. With Python, NumPy and PyTorch installed, run `python -B predict.py --input example.json --mode all` in [the folder](benchmarks/paired-wrist-forecast/README.md): it prints each model's forecast of the two wrist angles, in degrees, and the variance the model expects around each, in degrees squared. The input, `example.json`, is a made-up history of the wrist, the forearm and the scalp, so the output says nothing about accuracy; `example-predictions.json` holds what the command should print.
+
+## Four seconds of walking
+
+[Download the offline knee reader](models/knee-stride.zip), extract all files, then open the launcher for your operating system. The reader compares the task-trained and shared model forecasts with the earlier stride. To run the fitted specialist with Python and NumPy, use the platform launcher in the [model download](models/knee-stride-model.zip). [Browser source and build instructions](models/knee-stride-source.zip)

@@ -1,4 +1,4 @@
-"""Print the editable HTML note as a linked, searchable three-page PDF."""
+"""Print the editable HTML note as a linked, searchable four-page PDF."""
 
 import argparse
 from pathlib import Path
@@ -30,8 +30,8 @@ def main():
         ], check=True, capture_output=True, timeout=90)
         with raw_pdf.open("rb") as source:
             reader = PdfReader(source)
-            if len(reader.pages) != 3:
-                raise ValueError(f"Expected three pages, rendered {len(reader.pages)}")
+            if len(reader.pages) != 4:
+                raise ValueError(f"Expected four pages, rendered {len(reader.pages)}")
             # Preserve tagged text, diagrams, external links and bookmarks while
             # dropping machine- and time-dependent print metadata.
             writer = PdfWriter(clone_from=reader)

@@ -162,5 +162,20 @@
       "results.json": "e17f74ee9dc2c09b0843111ecb8c5783920f6a5dfc4245ab5c1f978031ab0c21",
       "sources.json": "9aad04819541368a4c0edaac7d095c4a8911da28f96322becc8b88e262e70956"
     }
+  },
+  "four_second_forecast": {
+    "specialist_results_sha256": "b695de7f97aa7bc0d8d6d1c7546e040ac651fec46c312eea9499103ae5038770",
+    "shared_results_sha256": "f8d75c75453dd6b17b320ab5835197991bcbdbb7f519a567011ccfcb8bc4d565",
+    "people": 12,
+    "cutoffs": 40201,
+    "degrees": {
+      "prior_stride": 3.535254046478,
+      "linear_specialist": 3.410950317,
+      "transformer_specialist": 2.67947977,
+      "raw_shared_control": 3.459876414,
+      "frozen_shared": 3.464840598,
+      "scrambled_control": 3.422072648
+    },
+    "basis": "Retrospective evaluation of previously studied test people. One walker, one vote."
   }
 }

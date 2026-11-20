@@ -404,3 +404,7 @@ Three rats supplied the training data. On three different rats, 549 forecasts es
 ## Whose recordings these are
 
 Every dataset, who made it, its licence and the credit it is owed: [docs/RIGHTS.md](../docs/RIGHTS.md). The newer studies' datasets are there too.
+
+## Four-second bilateral knee forecast
+
+The same 240 earlier knee readings and 15-frame target were available to the task-trained Transformer, a linear fit and a stride-replay rule. On 40,201 cutoffs from 12 previously assessed walkers they averaged 2.679°, 3.411° and 3.535° error. The frozen shared model gave 3.465° on those cutoffs. [All specialist comparisons](../models/knee-stride/) · [Shared-model controls](../models/neurotranslate-0.0/knee/) · [Reader](https://eliminatenoise.github.io/NeuroTranslation/knee-stride/)

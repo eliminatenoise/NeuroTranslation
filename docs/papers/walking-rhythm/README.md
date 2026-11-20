@@ -1,10 +1,10 @@
 # The next knee angle and the rhythm of a walk
 
-This standalone research note accompanies the NeuroTranslation and Interoceptomics projects. It reports two secondary analyses of treadmill walking in healthy young adults at 0.5 m/s. Both analyses use the published Xsens knee angles as a reference. The note supplies the results and their timing limits in three pages. [Read the HTML](index.html) · [Download the PDF](gait-clocks.pdf)
+This standalone research note accompanies the NeuroTranslation and Interoceptomics projects. It reports secondary analyses of treadmill walking in healthy young adults at 0.5 m/s. Both analyses use the published Xsens knee angles as a reference. The note supplies the results and their timing limits in four pages. [Read the HTML](index.html) · [Download the PDF](gait-clocks.pdf)
 
 ## Reproduce the note
 
-Open `index.html` in a browser. The text, table values, bar lengths and styles are in this file, which also works offline. The [evidence file](evidence.json) contains the source fingerprints and aggregate values behind the two tables. The second table reports absolute differences between trial-level estimated rates. Each rate analysis uses 40 seconds on its own instrument’s clock.
+Open `index.html` in a browser. The text, table values, bar lengths and styles are in this file, which also works offline. The [evidence file](evidence.json) contains the source fingerprints and aggregate values behind the three tables. The third table reports absolute differences between trial-level estimated rates. Each rate analysis uses 40 seconds on its own instrument’s clock.
 
 To regenerate the PDF, place the HTML and [build script](build.py) in one folder. Install Python 3, the Python package `pypdf`, Chrome or Chromium, and the Liberation Sans font family. Run:
 
@@ -12,7 +12,7 @@ To regenerate the PDF, place the HTML and [build script](build.py) in one folder
 python build.py
 ```
 
-Use `--browser` to select a browser executable or `--output` to choose a destination. The verified export used Chromium 155, pypdf 6.21.2 and Liberation Sans on Linux. The [knee-angle study](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-motion) and [gait-rhythm study](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/gait-rhythm) provide the underlying analysis code and study results. The [knee forecast](https://eliminatenoise.github.io/NeuroTranslation/knee-motion/) and [rhythm comparison](https://eliminatenoise.github.io/NeuroTranslation/gait-rhythm/) open the two browser companions.
+Use `--browser` to select a browser executable or `--output` to choose a destination. The verified export used Chromium 155, pypdf 6.21.2 and Liberation Sans on Linux. The [matched four-second study](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-stride) tests a trained correction against replay. The [shared encoder](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/knee) tests transfer from earlier movement recordings. The [knee-angle study](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-motion) and [gait-rhythm study](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/gait-rhythm) provide the underlying analysis code and study results. The [four-second knee forecast](https://eliminatenoise.github.io/NeuroTranslation/knee-stride/), [short-history knee forecast](https://eliminatenoise.github.io/NeuroTranslation/knee-motion/) and [rhythm comparison](https://eliminatenoise.github.io/NeuroTranslation/gait-rhythm/) open the three browser companions.
 
 ## Source and reuse
 
