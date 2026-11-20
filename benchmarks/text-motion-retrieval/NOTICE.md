@@ -1,0 +1,5 @@
+# Sources and rights
+
+Matthias Plappert, Christian Mandery and Tamim Asfour created the KIT Motion–Language Dataset. The study uses genuine English descriptions paired with a subset of Karlsruhe’s own recorded movements, subsequently fitted to the Master Motor Map. The original whole-body motion database was described by Christian Mandery, Omer Terlemez, Martin Do, Nikolaus Vahrenkamp and Tamim Asfour. The dataset and its source files remain with the providers. [KIT Motion–Language Dataset and citation](https://motion-annotation.humanoids.kit.edu/dataset/) · [KIT Whole-Body Human Motion Database](https://motion-database.humanoids.kit.edu/)
+
+Project-owned code and explanatory writing are dedicated to the public domain under CC0 1.0. The training instructions operate on a copy of the original release obtained from KIT. This distribution contains the study's numerical summaries and factual split metadata. An open redistribution grant for the underlying descriptions, trajectories and weights fitted to them has not been established. Dependencies have their own terms. [CC0 dedication](LICENSE) · [PyTorch](https://pytorch.org/) · [NumPy](https://numpy.org/)

@@ -1,0 +1,9 @@
+# Credit, licence and changes
+
+Justin Shin and Shantanu Jadhav (2024), *Single Day W-Track Learning*, DANDI Archive, version 0.240511.0307. DOI 10.48324/dandi.000978/0.240511.0307. The original study includes eight male Long–Evans rats learning a spatial alternation task. This package uses subject JDS-SingleDay-JS14, archived session 01 and running epoch ID 5 only. [Versioned dataset](https://doi.org/10.48324/dandi.000978/0.240511.0307) · [Archive asset](https://api.dandiarchive.org/api/assets/4b7c7959-04b3-4817-8f96-1af6f41888c1/)
+
+The source data are licensed under Creative Commons Attribution 4.0 International. Keep this credit, the dataset citation and licence link, and identify further changes. The selected tracking and spike records, illustrative inputs, measured targets, data-derived forecasts and fitted weights retain the attribution supplied here. No author endorsement is implied. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+We selected 34 whole annotated trips, retained the original positions and event times, and put them in per-trip arrays. The study builds past-only inputs from those arrays, derives velocities and spike counts, fits prediction models, and plots their errors against the camera measurements. The source archive includes original row bounds, sample units and per-file hashes. [Source and extraction details](recording/README.md)
+
+Original project code and documentation are dedicated to the public domain under CC0 1.0. The TimeFeatures and ForecastDecoder classes in shared_decoder.py reproduce those two classes from the project’s broader_learner.py; they implement the forecast query for the small attention model. NumPy and PyTorch are separate dependencies under their respective licences. [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)

@@ -1,0 +1,282 @@
+{
+  "inputs": {
+    "windows.py": "bbe0583cd7eea9186a09aa403e0067a3783ac7665a6dcb23854d54ead8f824c5",
+    "learn.py": "bd13560ae6bdc21f09deaf42b98b2ef3465767f0ab361321dbe7eeecaf090e36",
+    "run.py": "eebbe8ce662f35fd946d27635c5748c2689d37173cf4f3695aaa0db9168447f9",
+    "protocol.json": "4a6cda5865641d68d27d22cfae0d1014ed88ca61a5ea112de137924dad4ad98b",
+    "protocol-addendum.json": "fe6d77dbec08a8b5eb2f4ba4dd3905f54b85f1335ef734cc211eebbd314fa9ec",
+    "preceding-words-source/COHORT.json": "873e7081ff0ff309cd5b8ffc8f7d6bc900fa56c090f3e2ee90aa57a142493b6d",
+    "preceding-words-source/events.jsonl": "68c36838a6b4648bb4c6e771b3ca1bf59e5bc235acc3121cdad5288d4d57796c"
+  },
+  "fit_sha256": "a13e1183eef890a547851b2f2076f4d0f36ee27428d55c777b184f18eca69f0b",
+  "coverage": {
+    "flow": {
+      "admitted_speech": 52,
+      "speech_unrated": 52,
+      "past_eligible": 28,
+      "past_unrated": 28,
+      "scorable": 26,
+      "scorable_unrated": 26,
+      "missing_past_observation": 24,
+      "missing_future_observation": 2
+    },
+    "recordings_with_targets": 7,
+    "groups_with_targets": 4,
+    "tasks_with_targets": 5,
+    "lead_seconds": {
+      "speech_end_to_cutoff": {
+        "min": 0.2503333333333302,
+        "median": 0.2666666666666657,
+        "max": 0.2829999999999995
+      },
+      "cutoff_to_target": {
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0
+      },
+      "last_observed_to_target": {
+        "min": 1.0,
+        "median": 1.0,
+        "max": 1.0
+      },
+      "native_wrist_elapsed": {
+        "min": 0.9784476,
+        "median": 1.0007603,
+        "max": 1.0243513
+      }
+    }
+  },
+  "all_scorable": {
+    "scored_examples": 26,
+    "recordings": 7,
+    "groups": 4,
+    "group_balanced_mae_cm": {
+      "persistence": 10.89513829727672,
+      "constant_velocity": 9.271187926065616,
+      "prior_net": 7.381535828905008,
+      "context": 10.79499248646467,
+      "context_words": 11.061647901399555,
+      "motion": 9.72761476761791,
+      "motion_context": 9.788750631483648,
+      "motion_context_words": 10.042522801263761,
+      "ridge_removed": 9.972750231609615
+    },
+    "paired_differences": {
+      "persistence_minus_motion_context_words": {
+        "gain_cm": 0.8526154960129594,
+        "interval_cm": [
+          -2.0070888847313006,
+          3.2794323103245437
+        ],
+        "groups_favoring_actual": 3,
+        "groups": 4
+      },
+      "constant_velocity_minus_motion_context_words": {
+        "gain_cm": -0.771334875198145,
+        "interval_cm": [
+          -6.623959372806448,
+          5.081289622410158
+        ],
+        "groups_favoring_actual": 2,
+        "groups": 4
+      },
+      "prior_net_minus_motion_context_words": {
+        "gain_cm": -2.660986972358753,
+        "interval_cm": [
+          -3.697403603121339,
+          -1.3976023105755926
+        ],
+        "groups_favoring_actual": 0,
+        "groups": 4
+      },
+      "context_minus_motion_context_words": {
+        "gain_cm": 0.7524696852009081,
+        "interval_cm": [
+          -0.4363451522099917,
+          1.8894796633193485
+        ],
+        "groups_favoring_actual": 3,
+        "groups": 4
+      },
+      "context_words_minus_motion_context_words": {
+        "gain_cm": 1.019125100135793,
+        "interval_cm": [
+          -1.2645963401573208,
+          2.963244267278932
+        ],
+        "groups_favoring_actual": 3,
+        "groups": 4
+      },
+      "motion_minus_motion_context_words": {
+        "gain_cm": -0.31490803364585107,
+        "interval_cm": [
+          -1.8417906572345528,
+          1.2119745899428507
+        ],
+        "groups_favoring_actual": 2,
+        "groups": 4
+      },
+      "motion_context_minus_motion_context_words": {
+        "gain_cm": -0.2537721697801133,
+        "interval_cm": [
+          -0.3107717414852833,
+          -0.18210351044591044
+        ],
+        "groups_favoring_actual": 0,
+        "groups": 4
+      },
+      "ridge_removed_minus_motion_context_words": {
+        "gain_cm": -0.06977256965414713,
+        "interval_cm": [
+          -0.18757529505828097,
+          0.0
+        ],
+        "groups_favoring_actual": 0,
+        "groups": 4
+      }
+    }
+  },
+  "same_task_donor_matched": {
+    "scored_examples": 26,
+    "recordings": 7,
+    "groups": 4,
+    "group_balanced_mae_cm": {
+      "persistence": 10.89513829727672,
+      "constant_velocity": 9.271187926065616,
+      "prior_net": 7.381535828905008,
+      "context": 10.79499248646467,
+      "context_words": 11.061647901399555,
+      "motion": 9.72761476761791,
+      "motion_context": 9.788750631483648,
+      "motion_context_words": 10.042522801263761,
+      "ridge_removed": 9.972750231609615,
+      "ridge_substituted": 9.717289738225896
+    },
+    "paired_differences": {
+      "persistence_minus_motion_context_words": {
+        "gain_cm": 0.8526154960129594,
+        "interval_cm": [
+          -2.0070888847313006,
+          3.2794323103245437
+        ],
+        "groups_favoring_actual": 3,
+        "groups": 4
+      },
+      "constant_velocity_minus_motion_context_words": {
+        "gain_cm": -0.771334875198145,
+        "interval_cm": [
+          -6.623959372806448,
+          5.081289622410158
+        ],
+        "groups_favoring_actual": 2,
+        "groups": 4
+      },
+      "prior_net_minus_motion_context_words": {
+        "gain_cm": -2.660986972358753,
+        "interval_cm": [
+          -3.697403603121339,
+          -1.3976023105755926
+        ],
+        "groups_favoring_actual": 0,
+        "groups": 4
+      },
+      "context_minus_motion_context_words": {
+        "gain_cm": 0.7524696852009081,
+        "interval_cm": [
+          -0.4363451522099917,
+          1.8894796633193485
+        ],
+        "groups_favoring_actual": 3,
+        "groups": 4
+      },
+      "context_words_minus_motion_context_words": {
+        "gain_cm": 1.019125100135793,
+        "interval_cm": [
+          -1.2645963401573208,
+          2.963244267278932
+        ],
+        "groups_favoring_actual": 3,
+        "groups": 4
+      },
+      "motion_minus_motion_context_words": {
+        "gain_cm": -0.31490803364585107,
+        "interval_cm": [
+          -1.8417906572345528,
+          1.2119745899428507
+        ],
+        "groups_favoring_actual": 2,
+        "groups": 4
+      },
+      "motion_context_minus_motion_context_words": {
+        "gain_cm": -0.2537721697801133,
+        "interval_cm": [
+          -0.3107717414852833,
+          -0.18210351044591044
+        ],
+        "groups_favoring_actual": 0,
+        "groups": 4
+      },
+      "ridge_removed_minus_motion_context_words": {
+        "gain_cm": -0.06977256965414713,
+        "interval_cm": [
+          -0.18757529505828097,
+          0.0
+        ],
+        "groups_favoring_actual": 0,
+        "groups": 4
+      },
+      "ridge_substituted_minus_motion_context_words": {
+        "gain_cm": -0.32523306303786526,
+        "interval_cm": [
+          -0.9724729890447563,
+          0.23455354452132937
+        ],
+        "groups_favoring_actual": 2,
+        "groups": 4
+      }
+    }
+  },
+  "missing_donor": 0,
+  "rows_with_retained_words": 14,
+  "confidence_status_counts": {
+    "unrated": 26
+  },
+  "conclusion": "language_increment_not_demonstrated",
+  "training_coverage": {
+    "flow": {
+      "admitted_speech": 134,
+      "speech_unrated": 134,
+      "missing_past_observation": 81,
+      "past_eligible": 53,
+      "past_unrated": 53,
+      "scorable": 44,
+      "scorable_unrated": 44,
+      "missing_future_observation": 9
+    },
+    "recordings_with_targets": 12,
+    "groups_with_targets": 9,
+    "tasks_with_targets": 6,
+    "lead_seconds": {
+      "speech_end_to_cutoff": {
+        "min": 0.2499999999999858,
+        "median": 0.2666666666666657,
+        "max": 0.2806666666666686
+      },
+      "cutoff_to_target": {
+        "min": 0.9999999999999991,
+        "median": 1.0,
+        "max": 1.0
+      },
+      "last_observed_to_target": {
+        "min": 0.9999999999999991,
+        "median": 1.0,
+        "max": 1.0
+      },
+      "native_wrist_elapsed": {
+        "min": 0.9791833,
+        "median": 1.0001747,
+        "max": 1.0335838
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Two retrieval studies ask how precisely an observer's words identify a recorded movement."/>
+<title>How precisely do words identify a recorded movement? | NeuroTranslation</title>
+<style>
+:root{color-scheme:light;font-family:"Liberation Sans",Arial,sans-serif;color:#172b32;background:#f4f5f2;font-size:17px;line-height:1.52}
+*{box-sizing:border-box}body{margin:0}main{background:white;max-width:850px;margin:0 auto;padding:clamp(1.15rem,6vw,4.5rem)}
+section+section{border-top:1px solid #b6c7c7;margin-top:2.6rem;padding-top:1.6rem}
+h1,h2,h3,p,table{margin:0 0 .9rem}h1{max-width:19em;font-size:clamp(2rem,6.3vw,3rem);line-height:1.05;letter-spacing:-.035em}
+h2{font-size:1.7rem;line-height:1.15;letter-spacing:-.025em}h3{font-size:1.17rem;line-height:1.28;margin-top:1.55rem}
+.series,.date{font-size:.86rem;color:#405958}.series{margin-bottom:1.25rem}.date{margin-top:.5rem}
+a{color:#0a5360;text-decoration-thickness:1px;text-underline-offset:2px}table{width:100%;border-collapse:collapse;font-size:.93rem;font-variant-numeric:tabular-nums;margin:1.25rem 0}
+caption{text-align:left;font-weight:bold;margin-bottom:.48rem}th,td{text-align:left;vertical-align:top;padding:.37rem .45rem;border-bottom:1px solid #d9e2df}
+thead th{background:#e9f0ed;border-top:1px solid #8ba5a0}table.numeric td+td,table.numeric th+th{text-align:right}
+.refs p{font-size:.92rem}.refs h2,.refs h3{margin-top:1.35rem}.hash{font-family:inherit;overflow-wrap:anywhere}
+@media(max-width:500px){th,td{padding:.35rem .23rem}table{font-size:.86rem}}
+@media print{@page{size:A4;margin:19mm}body,main{background:white;margin:0;padding:0}section{break-before:page}section:first-child{break-before:auto}section+section{border:0;margin:0;padding:0}table,p{break-inside:avoid}}
+</style>
+</head>
+<body><main>
+<section>
+<p class="series">Supplement to <em>NeuroTranslation: A New Paradigm In Brain-Body Mapping.</em></p>
+<h1>How precisely do words identify a recorded movement?</h1>
+<p class="date">Experimental results · 20 November 2026</p>
+<h2>Abstract</h2>
+<p>A person can recognise a walk and describe it accurately. Could someone else use that description to pick the very same walk from a collection? On 38 whole-body recordings, a model that compared the words with a sequence of poses ranked the original recording first in 5.57% of searches. A simpler model reached 6.58%. In a second study, observers described steps in everyday tasks. The original step was easier to find from its duration, its place in the recording and the pattern of missing hand measurements than from the recorded shape and movement of the right hand. Both results concern descriptions written after the event. Neither study met the criterion set in advance for a model advantage.</p>
+<h3>What counted as a match?</h3>
+<p>Each observer supplied words for one recorded event. A model received the words, scored every candidate and returned a list in order of score. We credited the event the observer had seen. Two recordings can both fit the wording, but only one came from that pairing. This is the distinction between naming an action and identifying one performance of it.</p>
+<table><caption>Table 1. The choices available for each description</caption>
+<thead><tr><th>Study</th><th>One search compared</th><th>Assessment material</th></tr></thead>
+<tbody><tr><td>KIT whole-body movement [1, 2]</td><td>All 38 candidate recordings</td><td>90 descriptions, six catalogue subject records</td></tr>
+<tr><td>HoloAssist right hand [3]</td><td>Two to eleven intervals from a single recording</td><td>60 descriptions, ten recordings, six acquisition groups</td></tr></tbody></table>
+<p><strong>Correct first</strong> gives the percentage of searches that put the original event first, using the weights specified for each study. <strong>Mean reciprocal rank</strong> also credits a close result. First place earns one point, second earns half a point, third earns a third, and the scores are averaged. Ties share the credit across all possible orders. A random pick among two candidates has a one-in-two chance of coming first. Among 38, it has one in 38. Each model must therefore be judged on the same choices as its controls.</p>
+</section>
+<section>
+<h2>Finding one performance among 31 walks</h2>
+<p>In the Karlsruhe Institute of Technology (KIT) collection, volunteers watched animations of captured movement and wrote English descriptions [1, 2]. Training used 387 captions for 149 clips from 16 catalogue subject records. Assessment used a separate set of six such records. The motion representation sampled 20 fitted joint angles and two changes in the position of the body model’s reference point (horizontal distance from the start and vertical offset) at 24 points from start to finish. These points describe how a pose changes through a clip. They omit its duration and the direction the person initially faced.</p>
+<p>One model counted words and learned a linear rule for predicting summaries of the movement, such as how much each angle changed. A penalty kept its fitted weights from growing too large. This method is called <em>ridge regression</em>. The other used <em>attention</em>, a calculation that learns how much weight to give the other words when representing one word, and the other poses when representing one pose. It scored how well the two resulting representations matched.</p>
+<table class="numeric"><caption>Table 2. Exact recording among 38 candidates</caption>
+<thead><tr><th>Ranking method</th><th>Correct first</th><th>Mean reciprocal rank</th></tr></thead>
+<tbody>
+<tr><td>Random order</td><td>2.63%</td><td>0.11126</td></tr>
+<tr><td>Attention trained on mismatched captions and clips</td><td>2.89%</td><td>0.08184</td></tr>
+<tr><td>Caption predicts the catalogue action</td><td>7.72%</td><td>0.18042</td></tr>
+<tr><td>Word counts predict movement summaries (ridge)</td><td>6.58%</td><td>0.20038</td></tr>
+<tr><td>Words and movement sequence (attention)</td><td>5.57%</td><td>0.19749</td></tr>
+</tbody></table>
+<p>Descriptions were averaged within each clip, then each clip counted equally. Before assessment, the decision was to credit attention with an advantage only if it beat all four alternatives on both measures. It missed that standard. Across the six catalogue subject records it beat ridge on first place in three and on reciprocal rank in two.</p>
+<p>Walking accounted for 31 of 38 clips. Among those 31 walks alone, correct-first scores were 6.18% for attention, 6.99% for ridge and 3.23% for chance. Of 90 assessment descriptions, 12 repeated training wording after conversion to lowercase words and numbers. Under a separate similarity rule, 28 shared at least 80% of their combined distinct words with a training caption, with at least four distinct words in each caption. Six repeated wording attached to another assessment clip. An independent check reproduced all 20,520 query-to-candidate scores examined and found no identical sampled movement sequences across the split. New catalogue IDs establish neither new writers nor distinct people. A further 31 recordings from four catalogue subject records remained unopened, along with their captions.</p>
+</section>
+<section>
+<h2>Finding one step in a recorded task</h2>
+<p>In HoloAssist, a person wearing a headset worked with a device while someone else helped. The sentences used here came from observers who watched the recording afterwards [3]. The headset estimated positions for 26 joints of the right hand. The study used six of those locations, the wrist and five fingertips. At 24 points within each interval, 15 distances in metres described their separation. A sixteenth measured how far the wrist lay from its first usable position.</p>
+<p>To qualify, an interval needed at least eight usable distances at 12 or more sample points and at least two different sensor timestamps. The fit used 146 eligible intervals from 24 recordings in 15 acquisition groups. Assessment used 60 intervals in ten other recordings from six other groups. A group shared a prefix in the publisher’s recording identifiers. The source does not establish who wore the headset across recordings. All selected recordings came from the publisher’s training partition. A further ten recordings from three groups remained in reserve, unopened.</p>
+<table class="numeric"><caption>Table 3. Exact interval within the same recording</caption>
+<thead><tr><th>Information used to rank intervals</th><th>Correct first</th><th>Mean reciprocal rank</th></tr></thead>
+<tbody>
+<tr><td>Random order within the recording</td><td>20.66%</td><td>0.443</td></tr>
+<tr><td>Sentence length alone predicts hand geometry</td><td>16.44%</td><td>0.419</td></tr>
+<tr><td>Duration alone</td><td>25.76%</td><td>0.502</td></tr>
+<tr><td>Relative time in the recording alone</td><td>24.31%</td><td>0.506</td></tr>
+<tr><td>Tracking availability alone</td><td>24.83%</td><td>0.463</td></tr>
+<tr><td>Duration, relative time and tracking availability</td><td>35.56%</td><td>0.570</td></tr>
+<tr><td>Hand distances (ridge)</td><td>23.89%</td><td>0.514</td></tr>
+<tr><td>Hand distances (attention)</td><td>23.59%</td><td>0.486</td></tr>
+<tr><td>Mismatched training pairs (ridge)</td><td>8.89%</td><td>0.336</td></tr>
+<tr><td>Mismatched training pairs (attention)</td><td>21.71%</td><td>0.436</td></tr>
+</tbody></table>
+<p>The models using duration, timing or tracking availability learned from the words which intervals to favour. Tracking availability indicated where a distance could be measured. The combined model received no distance values. Scores were averaged within interval, recording and then acquisition group, giving each group equal weight. Four of ten recordings offered five choices or fewer.</p>
+<p>An independent calculation reproduced all 4,400 candidate scores across the ten methods. Both hand models had to beat chance, the simpler controls and wrong pairings on both measures. Attention also had to beat ridge. At least six groups were required. For each comparison the lower end of an exploratory 95% interval, calculated by resampling the six groups together with their paired results, had to exceed zero. Both models missed the decision rule. Attention’s correct-first difference from ridge was −0.30 percentage points (95% interval −17.26 to +15.97).</p>
+</section>
+<section class="refs">
+<h2>What the words contributed</h2>
+<p>Think of two buttons on a printer. An observer can name the button that changed the printer’s state. The distances between the fingertips could be much the same for either press. This example illustrates why a good description can be a poor fingerprint for one movement. In HoloAssist, 20 of 60 assessment sentences repeated training wording. Another eight reached 80% word-set overlap. For the remaining 32, correct-first retrieval was 17.96% with ridge, 10.65% with attention and 19.22% by chance. Just six queries in two groups had a competitor with different wording and the same annotated verb and noun.</p>
+<p>NeuroTranslation proposes to relate specified neural measurements to an independently observed outcome in a defined task. These studies establish what a description contributes to one part of that question. Words can name the task and help search past records. A model can also recover the right interval from when a task step tends to happen or when the tracker loses sight of the hand. Such successes cannot establish that a model recovered the movement from language, decoded the performer’s intention, or identified a neural or muscle signal. Neither study analysed such signals.</p>
+<p>The Brain2Body paper asks a further question about physical guidance. Its experiment would have to measure what the recipient did while guidance was present and what the recipient could repeat independently after guidance ended. A sentence attached after an action supplies neither a prior instruction nor a measurement of subsequent learning. No one in these retrieval studies received guidance from either fitted model.</p>
+<h3>Data and permissions</h3>
+<p>KIT provides the 22 June 2017 release for research and requests citation [1, 2]. An onward redistribution grant for its captions, trajectories and fitted weights was not established. The public KIT study provides code, factual split information and aggregate results. HoloAssist releases data under CDLA-Permissive-2.0. The agreement must accompany shared data and places no conditions on computational results, including fitted models. This supplement reports aggregate results. <a href="https://motion-annotation.humanoids.kit.edu/dataset/">KIT release</a> · <a href="https://holoassist.github.io/data_links/README.html">HoloAssist release</a> · <a href="https://cdla.dev/permissive-2-0/">HoloAssist data agreement</a></p>
+<p>The aggregate analyses and their pre-specified comparison rules are available with the code. The file fingerprints identify the exact sources and results used here. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/44cb15a4d8b8b92c24551e555f59f16f4463059f/benchmarks/text-motion-retrieval">KIT study</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/fde458e21b4885e4bddd7614ed2c326374c87253/benchmarks/hand-language-retrieval">HoloAssist study</a> · <a href="evidence.json">File fingerprints (SHA-256)</a></p>
+<h3>References</h3>
+<p>[1] Plappert M, Mandery C, Asfour T. The KIT Motion-Language Dataset. <em>Big Data</em> 4 (2016), 236–252. <a href="https://doi.org/10.1089/big.2016.0028">doi:10.1089/big.2016.0028</a></p>
+<p>[2] Mandery C, Terlemez O, Do M, Vahrenkamp N, Asfour T. The KIT whole-body human motion database. <em>ICAR</em> (2015), 329–336. <a href="https://doi.org/10.1109/ICAR.2015.7251476">doi:10.1109/ICAR.2015.7251476</a></p>
+<p>[3] Wang X, Kwon T, Rad M, et al. HoloAssist: an Egocentric Human Interaction Dataset for Interactive AI Assistants in the Real World. <em>ICCV</em> (2023). <a href="https://doi.org/10.1109/ICCV51070.2023.01854">doi:10.1109/ICCV51070.2023.01854</a></p>
+</section>
+</main></body></html>

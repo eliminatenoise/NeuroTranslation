@@ -1,0 +1,358 @@
+{
+  "splits_sha256": "e10674e7ac32957386d5e88afa60acf3335251b92ba2f8cfb97a736dc85e1621",
+  "source": "https://holoassist.github.io/label_files/data-splits-v1_2.zip",
+  "selection": "Allowed ordinary device tasks, complete unsuffixed R031\u2013R078 train-role sessions excluding any multipart family in any official split. Review groups R034 R041 R059 R073 R076 R077. R102\u2013R106 from the same allowed tasks and publisher train role are sealed. Selected R prefix is indivisible across internal splits, even across tasks and dates. It is not a verified person ID. The published R005 demonstration and the pre-existing first 512 KiB probe are outside every selected group.",
+  "data_scope": "Only selected train/review Coarse grained action > Action sentence and Right_sync.txt; reserve, official test/validation sensor, video and audio payloads excluded. Raw mixed-role annotation blob indexed by recording names; stop at last development record, parse selected records only. No caption or hand values used in selection.",
+  "recordings": [
+    {
+      "recording": "R031-12July-SmallPrinter",
+      "group": "R031",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "smallprinter"
+    },
+    {
+      "recording": "R034-12July-Switch",
+      "group": "R034",
+      "role": "review",
+      "publisher_role": "train",
+      "task_accession": "switch"
+    },
+    {
+      "recording": "R035-12July-Nespresso",
+      "group": "R035",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "nespresso"
+    },
+    {
+      "recording": "R036-12July-DSLR",
+      "group": "R036",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "dslr"
+    },
+    {
+      "recording": "R037-13July-GoPro",
+      "group": "R037",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "gopro"
+    },
+    {
+      "recording": "R040-13July-Nespresso",
+      "group": "R040",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "nespresso"
+    },
+    {
+      "recording": "R041-13July-SmallPrinter",
+      "group": "R041",
+      "role": "review",
+      "publisher_role": "train",
+      "task_accession": "smallprinter"
+    },
+    {
+      "recording": "R042-13July-BigPrinter",
+      "group": "R042",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "bigprinter"
+    },
+    {
+      "recording": "R043-13July-BigPrinter",
+      "group": "R043",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "bigprinter"
+    },
+    {
+      "recording": "R044-13July-BigPrinter",
+      "group": "R044",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "bigprinter"
+    },
+    {
+      "recording": "R045-13July-SmallPrinter",
+      "group": "R045",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "smallprinter"
+    },
+    {
+      "recording": "R057-14July-GoPro",
+      "group": "R057",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "gopro"
+    },
+    {
+      "recording": "R059-14July-DSLR",
+      "group": "R059",
+      "role": "review",
+      "publisher_role": "train",
+      "task_accession": "dslr"
+    },
+    {
+      "recording": "R060-14July-Nespresso",
+      "group": "R060",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "nespresso"
+    },
+    {
+      "recording": "R067-15July-Switch",
+      "group": "R067",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "switch"
+    },
+    {
+      "recording": "R070-19July-BigPrinter",
+      "group": "R070",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "bigprinter"
+    },
+    {
+      "recording": "R070-19July-DSLR",
+      "group": "R070",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "dslr"
+    },
+    {
+      "recording": "R070-19July-SmallPrinter",
+      "group": "R070",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "smallprinter"
+    },
+    {
+      "recording": "R070-19July-Switch",
+      "group": "R070",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "switch"
+    },
+    {
+      "recording": "R071-19July-BigPrinter",
+      "group": "R071",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "bigprinter"
+    },
+    {
+      "recording": "R071-19July-DSLR",
+      "group": "R071",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "dslr"
+    },
+    {
+      "recording": "R071-19July-GoPro",
+      "group": "R071",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "gopro"
+    },
+    {
+      "recording": "R071-19July-Nespresso",
+      "group": "R071",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "nespresso"
+    },
+    {
+      "recording": "R071-19July-SmallPrinter",
+      "group": "R071",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "smallprinter"
+    },
+    {
+      "recording": "R072-20July-DSLR",
+      "group": "R072",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "dslr"
+    },
+    {
+      "recording": "R072-20July-GoPro",
+      "group": "R072",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "gopro"
+    },
+    {
+      "recording": "R073-20July-BigPrinter",
+      "group": "R073",
+      "role": "review",
+      "publisher_role": "train",
+      "task_accession": "bigprinter"
+    },
+    {
+      "recording": "R073-20July-GoPro",
+      "group": "R073",
+      "role": "review",
+      "publisher_role": "train",
+      "task_accession": "gopro"
+    },
+    {
+      "recording": "R073-20July-Nespresso",
+      "group": "R073",
+      "role": "review",
+      "publisher_role": "train",
+      "task_accession": "nespresso"
+    },
+    {
+      "recording": "R074-20July-BigPrinter",
+      "group": "R074",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "bigprinter"
+    },
+    {
+      "recording": "R074-20July-DSLR",
+      "group": "R074",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "dslr"
+    },
+    {
+      "recording": "R074-20July-GoPro",
+      "group": "R074",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "gopro"
+    },
+    {
+      "recording": "R074-20July-SmallPrinter",
+      "group": "R074",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "smallprinter"
+    },
+    {
+      "recording": "R074-20July-Switch",
+      "group": "R074",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "switch"
+    },
+    {
+      "recording": "R076-21July-BigPrinter",
+      "group": "R076",
+      "role": "review",
+      "publisher_role": "train",
+      "task_accession": "bigprinter"
+    },
+    {
+      "recording": "R076-21July-DSLR",
+      "group": "R076",
+      "role": "review",
+      "publisher_role": "train",
+      "task_accession": "dslr"
+    },
+    {
+      "recording": "R076-21July-GoPro",
+      "group": "R076",
+      "role": "review",
+      "publisher_role": "train",
+      "task_accession": "gopro"
+    },
+    {
+      "recording": "R076-21July-SmallPrinter",
+      "group": "R076",
+      "role": "review",
+      "publisher_role": "train",
+      "task_accession": "smallprinter"
+    },
+    {
+      "recording": "R077-21July-Nespresso",
+      "group": "R077",
+      "role": "review",
+      "publisher_role": "train",
+      "task_accession": "nespresso"
+    },
+    {
+      "recording": "R078-21July-SmallPrinter",
+      "group": "R078",
+      "role": "train",
+      "publisher_role": "train",
+      "task_accession": "smallprinter"
+    },
+    {
+      "recording": "R102-2Aug-GoPro",
+      "group": "R102",
+      "role": "reserve",
+      "publisher_role": "train",
+      "task_accession": "gopro"
+    },
+    {
+      "recording": "R105-3Aug-BigPrinter",
+      "group": "R105",
+      "role": "reserve",
+      "publisher_role": "train",
+      "task_accession": "bigprinter"
+    },
+    {
+      "recording": "R105-3Aug-DSLR",
+      "group": "R105",
+      "role": "reserve",
+      "publisher_role": "train",
+      "task_accession": "dslr"
+    },
+    {
+      "recording": "R105-3Aug-GoPro",
+      "group": "R105",
+      "role": "reserve",
+      "publisher_role": "train",
+      "task_accession": "gopro"
+    },
+    {
+      "recording": "R105-3Aug-SmallPrinter",
+      "group": "R105",
+      "role": "reserve",
+      "publisher_role": "train",
+      "task_accession": "smallprinter"
+    },
+    {
+      "recording": "R106-4Aug-BigPrinter",
+      "group": "R106",
+      "role": "reserve",
+      "publisher_role": "train",
+      "task_accession": "bigprinter"
+    },
+    {
+      "recording": "R106-4Aug-DSLR",
+      "group": "R106",
+      "role": "reserve",
+      "publisher_role": "train",
+      "task_accession": "dslr"
+    },
+    {
+      "recording": "R106-4Aug-GoPro",
+      "group": "R106",
+      "role": "reserve",
+      "publisher_role": "train",
+      "task_accession": "gopro"
+    },
+    {
+      "recording": "R106-4Aug-SmallPrinter",
+      "group": "R106",
+      "role": "reserve",
+      "publisher_role": "train",
+      "task_accession": "smallprinter"
+    },
+    {
+      "recording": "R106-4Aug-Switch",
+      "group": "R106",
+      "role": "reserve",
+      "publisher_role": "train",
+      "task_accession": "switch"
+    }
+  ]
+}

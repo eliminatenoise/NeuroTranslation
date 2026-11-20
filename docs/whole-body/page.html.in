@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Three recorded movements · NeuroTranslate</title>
+<style>
+/* GAME STYLES */
+html{color-scheme:dark;background:#101922}
+body{margin:0;color:#e5edf4;font:1rem/1.5 system-ui,sans-serif}
+main{margin:0 auto;padding:1.6rem clamp(.9rem,4vw,2rem) 3rem;max-width:52rem}
+main.activity-map{width:auto;height:auto;max-height:none;overflow:visible;border:none;border-radius:0}
+main h1{font-size:clamp(1.9rem,5.6vw,3.4rem);letter-spacing:-.04em;line-height:1.06;margin:.6rem 0 1.3rem}
+main a{color:#9be3d1}
+header a,footer{font-size:.87rem} footer{margin-top:1.6rem}
+.spatial-panel select{max-width:100%}
+</style>
+</head>
+<body><main class="activity-map">
+<header><a href="https://github.com/eliminatenoise/NeuroTranslation">NeuroTranslate</a><h1>Three recorded movements</h1></header>
+<section id="replay" aria-label="Recorded whole-body movement"></section>
+<noscript>Enable JavaScript to rotate and replay the recordings.</noscript>
+<footer><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/docs/whole-body">Recordings, measurements and source code</a></footer>
+</main>
+<script type="application/json" id="recorded-bytes">/* MODEL FILES */</script>
+<script type="module">/* REPLAY PROGRAM */</script></body></html>

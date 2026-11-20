@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "decision": "frozen before numeric sample extraction or model scoring",
+  "dataset_version": "DANDI:000978/0.240511.0307",
+  "archive_asset": "4b7c7959-04b3-4817-8f96-1af6f41888c1",
+  "subject": "JDS-SingleDay-JS14",
+  "file_session": "01",
+  "selection_rule": "Earliest complete W-track run with at least 40 trials, starting after trial 29. Earlier source exploration printed trial 0\u20133 data, isolated camera probes, and metadata for the first 30 trials.",
+  "epoch_row_and_id": 5,
+  "behavioral_run_ordinal": 3,
+  "epoch_start_s": 5970.043333333333,
+  "epoch_stop_s": 6923.783033333333,
+  "trial_ids_equal_nwb_rows": true,
+  "groups": {
+    "train": {
+      "trial_ids": [
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78
+      ],
+      "start_s": 5970.043333333333,
+      "stop_s": 6440.299366666667
+    },
+    "between_train_test": {
+      "trial_ids": [
+        79
+      ],
+      "start_s": 6440.299366666667,
+      "stop_s": 6461.088966666666
+    },
+    "test": {
+      "trial_ids": [
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89
+      ],
+      "start_s": 6461.088966666666,
+      "stop_s": 6757.101966666667
+    },
+    "between_test_reserve": {
+      "trial_ids": [
+        90
+      ],
+      "start_s": 6757.101966666667,
+      "stop_s": 6781.822933333333
+    },
+    "reserve": {
+      "trial_ids": [
+        91,
+        92,
+        93,
+        94,
+        95
+      ],
+      "start_s": 6781.822933333333,
+      "stop_s": 6923.783033333333
+    }
+  },
+  "withhold": "No packets for the two embargo trials, five terminal reserve trials or any other run/animal. Read only interval metadata for partitioning. Binary-search timestamp probes and physical HDF5 block transfers can cross retained bounds; no held-out reserve trajectory or spike series assembled, scored or supplied.",
+  "selected_units": "All 72 sorted units (file IDs 0\u201371) in the same immutable NWB, same W-track run throughout. One linked electrode row per unit; preserve both electrode table location and referenced group; no recording-availability interval or mask.",
+  "trial_boundary": "Strictly inside original interval on the shared NWB seconds timebase. Preserve all original timestamps and XY values (incl. missing); no shared boundary sample/event, interpolation, velocity, smoothing, or trial labels supplied to the model.",
+  "forecast_scope": "Nominal horizon +0.25 s; four 0.25 s bins of past spike events. Model owner separately freezes exact anchors, frame tolerance, eligibility, donors and training decisions before first score.",
+  "sampling": "Tracked XY in cm relative to center well; nominal video 30 fps. Source preprocessing/visibility latency and ephys coverage/drift per unit are unverified. No image, limb, muscle, force, intervention or live control signals in the packet.",
+  "public_exposure": {
+    "trial_0_interval_s": [
+      1614.8091333333334,
+      1663.7081333333333
+    ],
+    "camera_rows_inclusive": [
+      35254,
+      36640
+    ],
+    "explored_trial_ids": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "earlier_single_camera_row_probes": [
+      {
+        "camera_row": 0,
+        "time_s": 167.58073333333334,
+        "trial_id": []
+      },
+      {
+        "camera_row": 1000,
+        "time_s": 203.09006666666667,
+        "trial_id": []
+      },
+      {
+        "camera_row": 10000,
+        "time_s": 522.5217333333334,
+        "trial_id": []
+      },
+      {
+        "camera_row": 37500,
+        "time_s": 1694.2084666666667,
+        "trial_id": [
+          2
+        ]
+      },
+      {
+        "camera_row": 38200,
+        "time_s": 1719.4189666666666,
+        "trial_id": [
+          3
+        ]
+      }
+    ],
+    "first_30_trial_metadata_printed": true,
+    "first_displayed_unit_ids": [
+      0,
+      21
+    ]
+  },
+  "units_metadata_sha256": "853e0c6c389bb427e30487aa00abed4291a9d2ba62af9813a432a583f7188ac3",
+  "rights": "Shin and Jadhav (2024), Single Day W-Track Learning, DANDI 000978 v0.240511.0307, CC BY 4.0."
+}
