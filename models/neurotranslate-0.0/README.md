@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0 movement forecasts
 
+What does one rule learn from wrist motion and pelvis motion? Compare shared and study-specific forecasts, then rotate the same history to explore how its axes affect the answer. [Open the cross-limb controls](cross_limb/index.html) · [Inputs and fitting instructions](cross_limb/README.md)
+
 Does a walking forecast carry over to standing? Compare leg-muscle amplitudes and all 32 future pelvis positions. [Try the training-data controls](muscle_motion/index.html) · [Use measured inputs and reproduce training](muscle_motion/README.md)
 
 A visual scene rotates during walking. Compare how motion, scalp voltage, eye and muscle signals forecast the next 125 ms at the sacrum and head. [Try the signal controls](visual_balance/index.html) · [Use measured inputs](visual_balance/README.md)

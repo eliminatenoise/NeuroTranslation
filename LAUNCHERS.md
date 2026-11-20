@@ -166,3 +166,7 @@ For the separate elbow experiment, [open the viewer](https://eliminatenoise.gith
 ## Forecast leg-muscle activity and pelvic movement
 
 [Open the forecast](https://eliminatenoise.github.io/NeuroTranslation/muscle-and-motion/) or [download the offline reader](docs/muscle-and-motion-offline.zip). Extract the ZIP, open its folder and choose the launcher for Windows, macOS or Linux. You can also open `index.html` directly. The [model package](models/muscle-and-motion-model.zip) includes three launchers, an offline forecast, fitted weights, the source-data reader, and code to reproduce training and assessment. [Compare the linear forecasts](https://eliminatenoise.github.io/NeuroTranslation/muscle-motion-controls/) · [Read the paper](https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-and-motion/)
+
+## Follow the wrist or the sacrum
+
+[Open the forecast](https://eliminatenoise.github.io/NeuroTranslation/cross-limb-movement/) or [download the offline reader](docs/cross-limb-movement-offline.zip). Extract the whole folder and choose **Open on Windows.cmd**, **Open on macOS.command** or **Open on Linux.sh**. You can also open `index.html` directly. The [model package](models/cross-limb-movement-model.zip) includes Windows, macOS and Linux launchers, an offline forecast, the fitted weights and the code to prepare recordings, train the models and repeat the scoring. [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/cross-limb-movement/)
