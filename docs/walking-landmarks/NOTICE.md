@@ -1,0 +1,7 @@
+# Credits and licences
+
+Florent Moissenet and Céline Schreiber, *A multimodal dataset of human gait at different walking speeds established on injury-free adult participants*, figshare version 8, April 2020. The project used the processed optical and surface muscle recordings from condition C2 to fit the models and calculate aggregate scores. The original authors supplied the recordings and their processing. The model fit, interactive scene and synthetic walk were made for this preview. The dataset contribution to fitted weights, results and other adaptations retains attribution under CC BY 4.0. [Dataset](https://doi.org/10.6084/m9.figshare.7734767.v8) · [Original author licence](DATA-LICENCE.txt) · [CC BY 4.0 terms](licenses/CC-BY-4.0.txt)
+
+Céline Schreiber and Florent Moissenet describe the recordings and acquisition apparatus in *Scientific Data* 6, 111 (2019). The anatomical labels, optical units and electrode placement follow their study and documentation. [Article](https://doi.org/10.1038/s41597-019-0124-4)
+
+To the extent of its rights, the project dedicates its original source code, illustrations, invented signals and prose under CC0 1.0 Universal. A copy that includes fitted parameters or recorded-data results also carries the source attribution above. The scene uses an original parametric figure, an orthographic projection and system sans-serif type. [CC0 dedication](LICENSE)

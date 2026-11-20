@@ -470,6 +470,41 @@
   const plateOffsets = [14, 24, 34, 44];
   const plateModes = ['phase', 'marker_ridge', 'combined_ridge', 'marker_shared', 'combined_shared', 'scrambled_combined'];
 
+  async function forecastPoint(record) {
+    const {positions_mm: p, mode} = record;
+    const modes = ['stationary', 'velocity', 'previous', 'linear', 'shared', 'shuffled'];
+    if (Object.keys(record).length !== 3 || !modes.includes(mode) ||
+        !Array.isArray(p) || p.length !== 9 || !Array.from(p).every(row => finiteRow(row, 3))) {
+      throw new TypeError('Choose an available method and provide nine rows of three finite coordinates in millimetres.');
+    }
+    const step = p.slice(1).map((row, i) => row.map((v, j) => v - p[i][j]));
+    let v = step[7].map(d => 4*d);
+    if (mode === 'stationary') v = [0,0,0];
+    if (mode === 'previous') v = p[8].map((d,j) => d-p[4][j]);
+    if (['linear', 'shared', 'shuffled'].includes(mode)) {
+      const hx = p[8][0]-p[0][0], hy = p[8][1]-p[0][1], h = Math.hypot(hx,hy);
+      const c = h >= 1 ? hx/h : 1, s = h >= 1 ? hy/h : 0;
+      const world = step.map(([x,y,z]) => [x*c+y*s, y*c-x*s, z]);
+      const features = world.flat();
+      const head = await loadGroup('point_motion.readouts');
+      if (mode !== 'linear') {
+        const core = await loadGroup(mode === 'shared' ? 'spatial' : 'point_motion.scrambled');
+        const mean = head['point_motion.token.mean'], scale = head['point_motion.token.scale'];
+        const tokens = [0,2,4,6].map(i => [...world[i],...world[i+1]].map((x,j) => (x-mean[j])/scale[j]));
+        features.push(...encode(core,tokens.map(row => linear(core,'project',row))));
+      }
+      const stem = 'point_motion.'+mode+'.';
+      const offset = Array.from(head[stem+'bias']), coef = head[stem+'coef'];
+      for (const [i,f] of features.entries()) {
+        const z = (f-head[stem+'mean'][i])/head[stem+'scale'][i];
+        for (let j=0;j<3;j++) offset[j] += z*coef[3*i+j];
+      }
+      v = [v[0]+offset[0]*c-offset[1]*s, v[1]+offset[0]*s+offset[1]*c, v[2]+offset[2]];
+    }
+    if (!v.every(Number.isFinite)) throw new RangeError('Positions exceed the supported numerical range.');
+    return {displacement_xyz_mm:v, horizon_ms:200, history_spacing_ms:50, mode};
+  }
+
   async function forecastRightPlate(record) {
     const {mode, offset_frames:offset, markers_m:markers} = record;
     const phase = plateOffsets.indexOf(offset);
@@ -530,6 +565,7 @@
   }
 
   async function forecastMovement(record) {
+    if (record?.domain === 'marker_displacement') return forecastPoint(record);
     if (record?.domain === 'right_plate_force') return forecastRightPlate(record);
     if (record?.domain === 'knee_moment') return forecastMoment(record);
     if (record?.domain === 'knee_angle') return forecastKnee(record);

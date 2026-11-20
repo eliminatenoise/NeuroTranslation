@@ -420,3 +420,7 @@ Every dataset, who made it, its licence and the credit it is owed: [docs/RIGHTS.
 ### Muscle activity and force underfoot
 
 Six models estimate the combined load recorded on two plates during slow overground walking. Eight held-out people contributed 17 trials. The marker Transformer averaged 65.19 N absolute error, the marker and muscle Transformer 70.20 N, and carrying forward an earlier plate reading 63.43 N. A separate experiment forecasts the plate assigned to the right foot after heel strike. The recordings were filtered in both directions before release, so the time offset describes the stored signals. [Two-plate methods and full results](../models/walking-force/) · [Right-foot plate methods and results](../models/neurotranslate-0.0/right-plate/) · [Paper](https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-and-floor/)
+
+### Where walking carries the skin markers
+
+Two experiments used the Rehazenter Adult Walking Dataset. One combined histories from both sides of the body and predicted the movement of six markers at once. The other learned a rule from individual marker histories at six locations, then tested it at 46 other locations. Both report errors in millimetres, 200 milliseconds ahead on the stored recording clock. The original filtering used samples before and after each frame. [Six-point results](../models/walking-landmarks/results.json) · [Transfer to other locations](../models/neurotranslate-0.0/point-motion/results.json) · [See the measured movement](https://eliminatenoise.github.io/Interoceptomics/stride-signals/)

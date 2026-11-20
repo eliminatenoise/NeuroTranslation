@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0 movement forecasts
 
+Follow one spot on the body for 400 milliseconds. A new forecast uses its last nine positions to estimate where it moves over the next 200 milliseconds. On 46 body locations withheld during fitting, its average miss was 31.00 mm. Continuing the last velocity missed by 43.29 mm. The strongest comparison reached 28.73 mm. [Try the point forecast](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#point-motion) · [Measurements and code](point-motion/README.md)
+
 When the right heel lands on a force plate, how much load will that plate record ten camera frames later? On 16 test walks from eight people, adding leg-electrode readings to the shared movement model reduced its average error from 93.93 to 85.18 newtons. The uncertainty includes no improvement. A simple linear model using the same measurements reached 82.04 newtons. All test targets came from loaded plates. [Try the right-foot forecast](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#right-plate) · [Run it locally and inspect the results](right-plate/README.md)
 
 The same checkpoint now forecasts the turning moment about both knees from four seconds of joint angles. A new task-trained calculation improved average error, though the advantage varied across three test walkers. [Try the knee-moment reader](https://eliminatenoise.github.io/NeuroTranslation/knee-moment/) · [Model, units and results](load/README.md)

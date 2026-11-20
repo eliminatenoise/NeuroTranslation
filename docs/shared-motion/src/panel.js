@@ -125,6 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function clearResults(message) {
     revision++;
+    byId("point-results").hidden = true;
+    byId("point-result").textContent = "";
     byId("plate-results").hidden = true;
     byId("plate-force").textContent = "";
     byId("moment-results").hidden = true;
@@ -305,10 +307,63 @@ document.addEventListener("DOMContentLoaded", () => {
     byId("status").textContent = "";
   }
 
+  let pointPlot = null;
+  function drawPoint() {
+    if (!pointPlot || byId("point-results").hidden) return;
+    const canvas = byId("point-plot");
+    const width = Math.max(210, Math.floor(canvas.clientWidth));
+    const stacked = width < 465, height = stacked ? 292 : 162;
+    const dpi = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.style.height = height + "px";
+    canvas.width = Math.round(width*dpi); canvas.height = Math.round(height*dpi);
+    const g = canvas.getContext("2d");
+    g.scale(dpi,dpi); g.font = "12px system-ui, sans-serif";
+    const {points,delta} = pointPlot, end = points[8];
+    const trace = points.map(row => row.map((n,k) => n-end[k]));
+    const cloud = [...trace,delta];
+    const ranges = [0,1,2].map(axis => {
+      const numbers = cloud.map(row => row[axis]);
+      return [Math.min(...numbers), Math.max(...numbers)];
+    });
+    const panelW = stacked ? width : width/2, panelH = stacked ? height/2 : height;
+    const scale = Math.min((panelW-44)/Math.max(1,ranges[0][1]-ranges[0][0]),
+      (panelH-55)/Math.max(1,...ranges.slice(1).map(([a,b])=>b-a)));
+    if (!Number.isFinite(scale) || scale<=0) return;
+    for (const axis of [1,2]) {
+      const x0 = !stacked && axis===2 ? panelW : 0, y0 = stacked && axis===2 ? panelH : 0;
+      const midX = ranges[0][0]/2+ranges[0][1]/2, midY = ranges[axis][0]/2+ranges[axis][1]/2;
+      const X = p => x0+panelW/2+(p[0]-midX)*scale;
+      const Y = p => y0+(panelH+19)/2-(p[axis]-midY)*scale;
+      g.fillStyle="#f5f8f9";g.fillRect(x0+1,y0+1,panelW-2,panelH-2);
+      g.fillStyle="#253e4d";g.fillText(axis===1?"Top view · X and Y":"Side view · X and Z",x0+9,y0+16);
+      g.lineWidth=2;g.strokeStyle="#28667a";g.beginPath();
+      trace.forEach((p,i)=>i?g.lineTo(X(p),Y(p)):g.moveTo(X(p),Y(p)));g.stroke();
+      for(const p of trace){g.fillStyle="#28667a";g.beginPath();g.arc(X(p),Y(p),2.4,0,2*Math.PI);g.fill();}
+      g.strokeStyle="#ad5a22";g.setLineDash([4,3]);g.beginPath();g.moveTo(X([0,0,0]),Y([0,0,0]));g.lineTo(X(delta),Y(delta));g.stroke();g.setLineDash([]);
+      const x=X(delta),y=Y(delta);
+      g.fillStyle="#ad5a22";g.beginPath();g.moveTo(x,y-5);g.lineTo(x+5,y);g.lineTo(x,y+5);g.lineTo(x-5,y);g.closePath();g.fill();
+    }
+  }
+  new ResizeObserver(drawPoint).observe(byId("point-plot"));
+
+  async function showPoint(positions, token) {
+    const out = await SharedMotion.forecastMovement({domain:"marker_displacement", mode:byId("point-mode").value, positions_mm:positions});
+    if (token !== revision) return;
+    byId("point-result").textContent = out.displacement_xyz_mm.map((x,i) => ["X","Y","Z"][i] + " " + format(x,2) + " mm").join(" · ");
+    pointPlot = {points: positions, delta: out.displacement_xyz_mm};
+    byId("point-results").hidden = false;
+    drawPoint();
+    byId("status").textContent = isCustom() ? "Forecast from supplied positions." : "Forecast from invented positions.";
+  }
+
   async function runCustom() {
     clearResults("");
     const token = revision;
     try {
+      if (currentDomain() === "marker_displacement") {
+        await showPoint(JSON.parse(byId("point-input").value), token);
+        return;
+      }
       if (currentDomain() === "right_plate_force") {
         let record;
         try { record = JSON.parse(byId("plate-input").value); }
@@ -362,6 +417,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const custom = isCustom();
     const angular = domain === "wrist_angle";
     const knee = domain === "knee_angle";
+    const point = domain === "marker_displacement";
+    byId("point-controls").hidden = !point;
+    byId("point-study").hidden = !point;
+    byId("point-custom").hidden = !custom;
     const plate = domain === "right_plate_force";
     byId("plate-controls").hidden = !plate;
     byId("plate-custom").hidden = !custom;
@@ -379,15 +438,16 @@ document.addEventListener("DOMContentLoaded", () => {
     byId("knee-custom").hidden = !custom;
     byId("knee-example-method").hidden = custom;
     byId("knee-study").hidden = !knee;
-    byId("custom").hidden = plate || moment || knee || angular || !custom;
+    byId("custom").hidden = point || plate || moment || knee || angular || !custom;
     byId("angular-custom").hidden = !angular || !custom;
     byId("angle-study").hidden = !angular;
-    byId("distance-study").hidden = plate || moment || angular || knee;
+    byId("distance-study").hidden = point || plate || moment || angular || knee;
     byId("source-line").textContent = custom
       ? "Enter a history from one trial or recording that you have permission to use. The source clock and units must match this task."
       : recorded
         ? "Recorded camera positions from rat JS14. This is the first eligible training window, two seconds into W-track trip 55."
         : forearm ? "An invented half-second from the forearm correction example. It contains wrist angles and four forearm channels. No person supplied these measurements."
+        : point ? "Nine invented positions follow one moving point in the laboratory coordinate system."
         : plate ? "Four invented heel and forefoot positions use the centre of one force plate as their origin. The eight muscle channels are invented too."
         : moment ? "Four seconds of invented leg angles. This walking example has no measured future moment."
         : knee ? "Two invented mathematical waves show the input format. They do not come from a person. The example has no measured future angle."
@@ -396,7 +456,8 @@ document.addEventListener("DOMContentLoaded", () => {
             : "Invented right-wrist movement in three dimensions. There is no measured future endpoint.";
     if (!custom) {
       try {
-        if (plate) await showPlate(inventedPlate(), token);
+        if (point) await showPoint(data.pointExample.positions_mm, token);
+        else if (plate) await showPlate(inventedPlate(), token);
         else if (moment) await showMoment({...data.momentExample, mode:byId("moment-mode").value}, token);
         else if (knee) await showKnees({...data.kneeExample, mode:byId("knee-mode").value}, token);
         else if (angular) await compareAngles(forearm ? data.forearmExample : data.angleExample,token);
@@ -407,6 +468,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (e) { if (token === revision) clearResults(e.message); }
       return;
     }
+    if (point) { clearResults("Supply nine XYZ positions in millimetres."); return; }
     if (plate) {
       clearResults("Supply one marker history from an assigned right-foot plate.");
       return;
@@ -453,6 +515,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   picker.addEventListener("change",selectDomain);
   source.addEventListener("change",selectInput);
+  byId("point-mode").addEventListener("change", selectInput);
+  byId("point-input").addEventListener("input", () => clearResults("Inputs changed. Run the forecast again."));
+  byId("point-fill").addEventListener("click", () => { byId("point-input").value = JSON.stringify(data.pointExample.positions_mm); clearResults("Invented history filled. Run the forecast."); });
+  byId("point-run").addEventListener("click", runCustom);
   byId("plate-mode").addEventListener("change", selectInput);
   byId("plate-scale").addEventListener("change", selectInput);
   byId("plate-run").addEventListener("click", runCustom);
@@ -505,11 +571,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (model.checkpointSha256 !== "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179") {
         throw new Error("The checkpoint differs from the one used for these comparisons.");
       }
-      if (model.movementCheckpointSha256 !== "a52af3c0875a43d3ce8ae70ae7eaa8cf83a9bcd4f75422f1cc84bea6fd8379ee") {
+      if (model.movementCheckpointSha256 !== "eac2b0e49ab68ce6d6a2ff2f09a804f2d41fa3af96d632b7bbbb02f73871bed0") {
         throw new Error("The movement checkpoint differs from the studied model.");
       }
       studyTable();
       picker.disabled = source.disabled = false;
+      if (location.hash === "#point-motion") picker.value = "marker_displacement";
       if (location.hash === "#right-plate") picker.value = "right_plate_force";
       selectDomain();
     } catch(e) {

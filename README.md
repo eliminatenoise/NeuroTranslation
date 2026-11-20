@@ -1,5 +1,7 @@
 # NeuroTranslation
 
+**[Try the walking-marker forecast](https://eliminatenoise.github.io/NeuroTranslation/walking-landmarks/).** Follow the ankles, knees and wrists of an invented walker in 3D. Compare where the model expects each marker to land with where it ends up. [Read both experiments](https://eliminatenoise.github.io/NeuroTranslation/papers/walking-landmarks/).
+
 **What a hand has just done still beats a brain signal read at the scalp.**
 
 That is where [25 small studies](benchmarks/README.md) stand, each a numbered row of the table further down this page. Each takes open recordings of people, measured and shared by others, and forecasts what a hand or an arm does a fraction of a second later: the angle of a wrist, the position of a palm, the force of a grip. A hand tends to keep moving the way it was moving, so its own recent past is a hard forecast to beat. A brain or muscle signal earns its place only by beating it.
@@ -33,10 +35,11 @@ The shared model can also accept recorded brain-cell firing alongside a rat's re
 
 ## Try a model
 
-Fifteen things to try. The first thirteen open in a browser on your own computer, with nothing to install; the fourteenth is code for programmers, and the fifteenth needs Python.
+Most examples open directly in your browser. The wrist-turn predictor is a JavaScript library. The five-sensor walking demo needs Python and includes a launcher for each desktop operating system.
 
 | What it asks | What you can do |
 | --- | --- |
+| Where will a skin marker go in the next fifth of a second? | A model predicted three-dimensional movement at both ankles, knees and wrists during slow walking. Across ten test walkers its average miss was 18.02 mm with right-leg muscle signals. A linear fit using movement alone missed by 17.78 mm. A separate model learned one point at a time and was tested at 46 new locations. [Try six points in 3D](https://eliminatenoise.github.io/NeuroTranslation/walking-landmarks/) · [Try one point](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#point-motion) · [See measured marker travel in Interoceptomics](https://eliminatenoise.github.io/Interoceptomics/stride-signals/) |
 | Do right-leg muscle signals help predict force underfoot? | Eight people supplied 17 eligible test walks across two plates. The movement-only Transformer missed their combined load by 65.19 N on average. Adding eight muscle signals gave 70.20 N. A second study follows just the plate under the right foot after heel strike. [Try the two-plate model](https://eliminatenoise.github.io/NeuroTranslation/walking-force/) · [Try the right-foot model](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#right-plate) · [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-and-floor/) |
 | Does a finger forecast carry over to a new person? | A model learned from four people's recordings and was tested on a fifth after 80 seconds of personal calibration. The displayed finger and time since the cue gave closer forecasts than the model given the cortical recording too. [Run the five-person model](https://eliminatenoise.github.io/NeuroTranslation/finger-transfer/) · [Methods and study](models/finger-transfer/) |
 | How much turning moment follows a step? | Four seconds of walking supply six joint angles. Predict the turning moment about each knee a quarter-second later and compare with the laboratory’s estimate. Across three test walkers, replaying an earlier moment gave the closest answer when that measurement was available. [Try the knee-moment model](https://eliminatenoise.github.io/NeuroTranslation/knee-moment/) · [Source and results](models/neurotranslate-0.0/load/) |

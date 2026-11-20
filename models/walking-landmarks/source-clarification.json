@@ -1,0 +1,6 @@
+{
+  "applies_to_protocol_sha256": "667e684ed25d17ece2149bdf7b04511da0b5ed6778da0cffe1e34d28f1474208",
+  "recorded": "Before training and before assessment access.",
+  "source_correction": "The article and Supplementary Table 2 identify forceplate availability. They do not provide a muscle-channel validity mask. This analysis ignores all plate codes. Derive EMG availability from each recorded C3D using channel label, volt units and finite samples throughout the trailing 60-sample window. If the channel is absent or the window is nonfinite, record missing. Preserve source-coded finite zero and report it if present. Author artifact exclusions, if explicitly identified in the paper by participant and muscle, must be applied and recorded.",
+  "clarification": "Ankle FAL is the author's lateral tibial malleolus skin marker, knee FLE the lateral femoral epicondyle, and wrist RSP the radial styloid. History spans 390 ms between the first and last stored point instants."
+}

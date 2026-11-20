@@ -1,0 +1,1181 @@
+{
+  "checkpoint_sha256": "9d129c87833b768536bd74dd8a88fe1f0b3703a22e59b1e54316d824e619be79",
+  "protocol_sha256": "a133714951379dc5e14b6ea17c430bcc62e75ea509ce01d5e6b9be6afe697fd3",
+  "training": {
+    "format": 1,
+    "sites_fitted": [
+      "L_FAL",
+      "L_FLE",
+      "L_RSP",
+      "R_FAL",
+      "R_FLE",
+      "R_RSP"
+    ],
+    "training_people": 30,
+    "training_walks": 90,
+    "training_marker_windows": 11310,
+    "modes": [
+      "stationary",
+      "velocity",
+      "previous",
+      "linear",
+      "radial",
+      "shared",
+      "shuffled"
+    ],
+    "lead_ms": 200,
+    "source_protocol": "a133714951379dc5e14b6ea17c430bcc62e75ea509ce01d5e6b9be6afe697fd3"
+  },
+  "training_sites": [
+    "L_FAL",
+    "L_FLE",
+    "L_RSP",
+    "R_FAL",
+    "R_FLE",
+    "R_RSP"
+  ],
+  "assessment_sites": [
+    "L_IAS",
+    "L_IPS",
+    "L_FTC",
+    "L_FLE",
+    "L_FME",
+    "L_FAX",
+    "L_TTC",
+    "L_FAL",
+    "L_TAM",
+    "L_FCC",
+    "L_FM1",
+    "L_FM2",
+    "L_FM5",
+    "L_SIA",
+    "L_SRS",
+    "L_SAA",
+    "L_SAE",
+    "L_HLE",
+    "L_HME",
+    "L_UOA",
+    "L_RSP",
+    "L_UHE",
+    "L_HM2",
+    "L_HM5",
+    "R_IAS",
+    "R_IPS",
+    "R_FTC",
+    "R_FLE",
+    "R_FME",
+    "R_FAX",
+    "R_TTC",
+    "R_FAL",
+    "R_TAM",
+    "R_FCC",
+    "R_FM1",
+    "R_FM2",
+    "R_FM5",
+    "R_SIA",
+    "R_SRS",
+    "R_SAA",
+    "R_SAE",
+    "R_HLE",
+    "R_HME",
+    "R_UOA",
+    "R_RSP",
+    "R_UHE",
+    "R_HM2",
+    "R_HM5",
+    "CV7",
+    "TV10",
+    "SXS",
+    "SJN"
+  ],
+  "horizon_ms": 200,
+  "groups": {
+    "other_46": {
+      "coverage": {
+        "people": 10,
+        "trials": 30,
+        "sites": 46,
+        "marker_windows": 28152
+      },
+      "modes": {
+        "stationary": {
+          "endpoint_error_mm": 127.63724764899884,
+          "signed_lab_xyz_mm": [
+            -12.250662727462169,
+            0.5347975569864822,
+            1.0174275482442336
+          ]
+        },
+        "velocity": {
+          "endpoint_error_mm": 43.294861724665445,
+          "signed_lab_xyz_mm": [
+            0.08041382693983277,
+            -0.21876922579173746,
+            1.034253829826687
+          ]
+        },
+        "previous": {
+          "endpoint_error_mm": 60.83077362937283,
+          "signed_lab_xyz_mm": [
+            0.07938259489539111,
+            -0.2404469231278371,
+            1.7774028619538726
+          ]
+        },
+        "linear": {
+          "endpoint_error_mm": 30.641162919274826,
+          "signed_lab_xyz_mm": [
+            -1.1802399495963596,
+            -0.19449853951549903,
+            -0.5981865539266954
+          ]
+        },
+        "radial": {
+          "endpoint_error_mm": 28.72571457820504,
+          "signed_lab_xyz_mm": [
+            -1.6184679326139744,
+            -0.19802756635143567,
+            0.5858483992439991
+          ]
+        },
+        "shared": {
+          "endpoint_error_mm": 31.003008905603398,
+          "signed_lab_xyz_mm": [
+            -0.9718145223275231,
+            -0.13629032637484031,
+            -0.40792667484321665
+          ]
+        },
+        "shuffled": {
+          "endpoint_error_mm": 30.202669330426946,
+          "signed_lab_xyz_mm": [
+            -1.1281919248445194,
+            -0.10309491865675637,
+            -0.7373722251838744
+          ]
+        }
+      },
+      "per_site": {
+        "L_IAS": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 121.44523719001788,
+          "velocity": 24.42095300325745,
+          "previous": 33.28287836041083,
+          "linear": 18.769606057525007,
+          "radial": 18.60821393058551,
+          "shared": 21.263122931163647,
+          "shuffled": 22.520776484889232
+        },
+        "L_IPS": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 121.18263661410516,
+          "velocity": 23.18819971246291,
+          "previous": 31.95891891459577,
+          "linear": 18.156517802119218,
+          "radial": 18.03477288955613,
+          "shared": 19.30052670538713,
+          "shuffled": 19.71693776074915
+        },
+        "L_FTC": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 121.23826936933982,
+          "velocity": 24.741500947022562,
+          "previous": 33.35330776532062,
+          "linear": 19.85166242925441,
+          "radial": 19.497187572829937,
+          "shared": 20.44779502417073,
+          "shuffled": 22.340868381980606
+        },
+        "L_FME": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 120.65665131679748,
+          "velocity": 48.885836847684104,
+          "previous": 65.428473307315,
+          "linear": 35.05270711368311,
+          "radial": 35.101633172163474,
+          "shared": 34.077678336690155,
+          "shuffled": 33.87274856505669
+        },
+        "L_FAX": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 122.50774869706719,
+          "velocity": 43.316654939597726,
+          "previous": 60.451785998514765,
+          "linear": 29.03379294138191,
+          "radial": 29.299665375948884,
+          "shared": 28.940140039660076,
+          "shuffled": 29.036061704776653
+        },
+        "L_TTC": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 124.0734210878254,
+          "velocity": 44.31283450437183,
+          "previous": 62.67273244464623,
+          "linear": 30.639502725226958,
+          "radial": 29.217033451347383,
+          "shared": 31.264970275102495,
+          "shuffled": 30.20889885612689
+        },
+        "L_TAM": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 141.54867169574396,
+          "velocity": 77.64039530826653,
+          "previous": 108.4169534646118,
+          "linear": 42.47387376704193,
+          "radial": 36.19217720489551,
+          "shared": 40.03640822052303,
+          "shuffled": 35.903672500777034
+        },
+        "L_FCC": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 151.91364266314417,
+          "velocity": 95.38328714945845,
+          "previous": 130.95356478951877,
+          "linear": 53.80122895066452,
+          "radial": 48.21565280380411,
+          "shared": 49.3089434108152,
+          "shuffled": 45.29732363119934
+        },
+        "L_FM1": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 148.12859067869942,
+          "velocity": 92.04475628470452,
+          "previous": 131.10681074853827,
+          "linear": 66.00557705837923,
+          "radial": 63.59316860565445,
+          "shared": 66.4595868336717,
+          "shuffled": 63.31770092035034
+        },
+        "L_FM2": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 145.4474206773863,
+          "velocity": 86.79990233555372,
+          "previous": 124.62859555041445,
+          "linear": 63.407790849780724,
+          "radial": 61.24378072717988,
+          "shared": 64.06584398134035,
+          "shuffled": 61.74630188167615
+        },
+        "L_FM5": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 146.25390261617406,
+          "velocity": 88.55593583303,
+          "previous": 126.1876579544498,
+          "linear": 61.766913022225694,
+          "radial": 58.572451151680525,
+          "shared": 61.74397406453958,
+          "shuffled": 57.19156566884628
+        },
+        "L_SIA": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 122.39103744026315,
+          "velocity": 23.842747337587728,
+          "previous": 33.691908846176865,
+          "linear": 17.752568128338265,
+          "radial": 17.230440775130308,
+          "shared": 18.822836845716097,
+          "shuffled": 19.221019467737904
+        },
+        "L_SRS": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 122.41371923563395,
+          "velocity": 22.261733311925894,
+          "previous": 31.624556427779385,
+          "linear": 16.601609388466745,
+          "radial": 15.692503481328073,
+          "shared": 17.292062475239383,
+          "shuffled": 17.852075863132974
+        },
+        "L_SAA": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 121.99943342077228,
+          "velocity": 22.85283926483781,
+          "previous": 31.91760484757706,
+          "linear": 17.92215547955124,
+          "radial": 16.885324223094184,
+          "shared": 18.76109795902692,
+          "shuffled": 18.531763181532053
+        },
+        "L_SAE": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 121.66679498390143,
+          "velocity": 22.925617068890215,
+          "previous": 31.693447279149193,
+          "linear": 18.27114368055766,
+          "radial": 17.236966527068798,
+          "shared": 19.2814372038558,
+          "shuffled": 19.047982851439738
+        },
+        "L_HLE": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 121.86647427817141,
+          "velocity": 29.721199674640456,
+          "previous": 41.6420170538369,
+          "linear": 23.2869895047651,
+          "radial": 22.022009497227106,
+          "shared": 24.063613542606518,
+          "shuffled": 23.06142333217024
+        },
+        "L_HME": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 122.03251106696933,
+          "velocity": 28.82234501343409,
+          "previous": 39.730523010167325,
+          "linear": 23.17029385962118,
+          "radial": 22.36711058887486,
+          "shared": 24.328326169969497,
+          "shuffled": 23.083848328156662
+        },
+        "L_UOA": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 122.58814577490726,
+          "velocity": 30.32456642709412,
+          "previous": 42.59971417917463,
+          "linear": 23.438023844546233,
+          "radial": 23.02635631638197,
+          "shared": 24.360508719863667,
+          "shuffled": 23.465954234768265
+        },
+        "L_UHE": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 127.94700174454559,
+          "velocity": 41.989593476851226,
+          "previous": 60.40790256495112,
+          "linear": 30.160206387477846,
+          "radial": 26.78098211101736,
+          "shared": 29.22983281557796,
+          "shuffled": 28.785998166828197
+        },
+        "L_HM2": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 133.49247116822042,
+          "velocity": 51.50911761451835,
+          "previous": 73.02218619866328,
+          "linear": 41.48699911445359,
+          "radial": 35.83099983758383,
+          "shared": 40.91219089900456,
+          "shuffled": 40.63066444353906
+        },
+        "L_HM5": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 131.83268917593173,
+          "velocity": 49.37614413172886,
+          "previous": 70.66157033872965,
+          "linear": 35.34222034519659,
+          "radial": 32.00501259833245,
+          "shared": 34.80051391034938,
+          "shuffled": 34.81383658907148
+        },
+        "R_IAS": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 121.01267371715512,
+          "velocity": 24.353717031350204,
+          "previous": 33.64774187084829,
+          "linear": 18.864341010666024,
+          "radial": 18.03694750896444,
+          "shared": 22.098539839596164,
+          "shuffled": 21.791057823322955
+        },
+        "R_IPS": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 120.94540942319344,
+          "velocity": 23.313373504575456,
+          "previous": 32.26192194756521,
+          "linear": 18.226699069103677,
+          "radial": 18.248462552846537,
+          "shared": 20.04850815318941,
+          "shuffled": 19.904821165152896
+        },
+        "R_FTC": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 119.95410680696209,
+          "velocity": 25.10867338753044,
+          "previous": 34.00266284651905,
+          "linear": 20.419829703869095,
+          "radial": 19.912752576198677,
+          "shared": 23.36533534131492,
+          "shuffled": 21.95019687651624
+        },
+        "R_FME": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 117.83915456747425,
+          "velocity": 44.24631917089911,
+          "previous": 59.622948818809,
+          "linear": 32.04974690854111,
+          "radial": 32.00483997920482,
+          "shared": 32.02710415660644,
+          "shuffled": 31.508202310182394
+        },
+        "R_FAX": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 118.75380361767887,
+          "velocity": 40.35562368215855,
+          "previous": 56.25639801970124,
+          "linear": 28.695965379252645,
+          "radial": 28.117891644218872,
+          "shared": 28.976108957268497,
+          "shuffled": 29.997091534841555
+        },
+        "R_TTC": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 120.11833507129474,
+          "velocity": 41.600218187524646,
+          "previous": 58.99009321378607,
+          "linear": 30.079710332939495,
+          "radial": 28.77721095023435,
+          "shared": 29.877613971399338,
+          "shuffled": 28.796317275501035
+        },
+        "R_TAM": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 131.1045855691082,
+          "velocity": 72.92595359852943,
+          "previous": 102.0493859391953,
+          "linear": 39.062446640386426,
+          "radial": 34.28886355527102,
+          "shared": 35.50765315973865,
+          "shuffled": 34.979813425743515
+        },
+        "R_FCC": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 140.55774019600952,
+          "velocity": 89.19498850748056,
+          "previous": 123.2928027623854,
+          "linear": 50.91973369551797,
+          "radial": 45.43671190029617,
+          "shared": 45.73563543512918,
+          "shuffled": 42.172042010883196
+        },
+        "R_FM1": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 136.63693299763594,
+          "velocity": 85.78427965146028,
+          "previous": 122.3058197487098,
+          "linear": 63.06845355117578,
+          "radial": 59.633105352469116,
+          "shared": 63.649547237013145,
+          "shuffled": 59.57802455314058
+        },
+        "R_FM2": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 134.3315933851964,
+          "velocity": 81.90992188391162,
+          "previous": 116.93247310167703,
+          "linear": 60.881487186423165,
+          "radial": 57.92710498377214,
+          "shared": 61.39429583006088,
+          "shuffled": 57.44163930794326
+        },
+        "R_FM5": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 134.85951936694065,
+          "velocity": 83.90356025630182,
+          "previous": 118.67023003154382,
+          "linear": 59.70613893388274,
+          "radial": 55.944305307430064,
+          "shared": 58.42184095775734,
+          "shuffled": 53.71663884584466
+        },
+        "R_SIA": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 122.55214850947563,
+          "velocity": 23.927295747524475,
+          "previous": 33.95735164144944,
+          "linear": 17.548239678043984,
+          "radial": 16.858372907529763,
+          "shared": 18.542037880598095,
+          "shuffled": 19.715500886580955
+        },
+        "R_SRS": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 122.58726790092646,
+          "velocity": 22.407466849338324,
+          "previous": 31.917298191849486,
+          "linear": 16.47663770390439,
+          "radial": 15.332131214609092,
+          "shared": 17.391499217371045,
+          "shuffled": 18.27221721125648
+        },
+        "R_SAA": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 122.51167257179509,
+          "velocity": 23.193313932426218,
+          "previous": 32.5525802782323,
+          "linear": 18.040269984817023,
+          "radial": 16.639405934850302,
+          "shared": 18.77466192836637,
+          "shuffled": 19.337038408385162
+        },
+        "R_SAE": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 122.31525799660041,
+          "velocity": 23.21027795594722,
+          "previous": 32.22617706536169,
+          "linear": 18.338003341249763,
+          "radial": 16.907688932259354,
+          "shared": 18.850773270625034,
+          "shuffled": 19.449177035776806
+        },
+        "R_HLE": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 125.53109781035091,
+          "velocity": 29.198313930722392,
+          "previous": 41.227925452512785,
+          "linear": 21.507197355455265,
+          "radial": 19.755121548630903,
+          "shared": 22.871185629969816,
+          "shuffled": 21.71151888538461
+        },
+        "R_HME": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 125.46385472320084,
+          "velocity": 28.61357127092355,
+          "previous": 39.538023316860325,
+          "linear": 22.00666218312479,
+          "radial": 20.472512093257652,
+          "shared": 23.602473241948168,
+          "shuffled": 22.776097147884734
+        },
+        "R_UOA": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 126.57330756244515,
+          "velocity": 29.917222986323633,
+          "previous": 42.276323061969,
+          "linear": 21.950342697930328,
+          "radial": 20.74714514012736,
+          "shared": 23.366448994269266,
+          "shuffled": 22.297977468086632
+        },
+        "R_UHE": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 132.91916755429074,
+          "velocity": 40.73591424869876,
+          "previous": 58.66279084941331,
+          "linear": 28.04723107113652,
+          "radial": 24.08735847925949,
+          "shared": 28.47422227949211,
+          "shuffled": 27.933619900716796
+        },
+        "R_HM2": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 138.18346777818797,
+          "velocity": 49.75472214267391,
+          "previous": 70.75442279995387,
+          "linear": 39.27969972364611,
+          "radial": 33.86860241753994,
+          "shared": 39.09368747071229,
+          "shuffled": 40.07172742771399
+        },
+        "R_HM5": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 136.53874789141034,
+          "velocity": 46.80757706049478,
+          "previous": 67.20515737911695,
+          "linear": 32.54716428999654,
+          "radial": 28.59140717893442,
+          "shared": 33.89658708307383,
+          "shuffled": 33.62462141336462
+        },
+        "CV7": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 122.4934109805656,
+          "velocity": 21.104794884421377,
+          "previous": 30.123917288392185,
+          "linear": 15.546421897520547,
+          "radial": 14.350177383475664,
+          "shared": 16.054639082271486,
+          "shuffled": 17.073904309790997
+        },
+        "TV10": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 121.96761740887152,
+          "velocity": 23.17605036745471,
+          "previous": 32.9011739622751,
+          "linear": 16.606685231189257,
+          "radial": 16.25311609264485,
+          "shared": 18.299204400561273,
+          "shuffled": 19.36892558265323
+        },
+        "SXS": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 121.17062687210183,
+          "velocity": 22.947940842195926,
+          "previous": 31.81506423775764,
+          "linear": 17.724426553310366,
+          "radial": 17.817424420781578,
+          "shared": 20.45377100349596,
+          "shuffled": 19.65248010295364
+        },
+        "SJN": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 121.76542067945797,
+          "velocity": 20.956388066824484,
+          "previous": 29.59179308072388,
+          "linear": 15.508577713301312,
+          "radial": 14.720767700940401,
+          "shared": 16.603624771653724,
+          "shuffled": 16.55471547521338
+        }
+      },
+      "contrasts": {
+        "velocity": {
+          "shared_minus_control_mm": -12.291852819062047,
+          "relative_change": -0.28391019925718525,
+          "interval95_mm": [
+            -13.488341351766689,
+            -11.116670307858971
+          ],
+          "walkers_improved": 10
+        },
+        "previous": {
+          "shared_minus_control_mm": -29.827764723769423,
+          "relative_change": -0.49034005231468475,
+          "interval95_mm": [
+            -32.95968252302147,
+            -27.011341272405236
+          ],
+          "walkers_improved": 10
+        },
+        "linear": {
+          "shared_minus_control_mm": 0.3618459863285818,
+          "relative_change": 0.01180914664635534,
+          "interval95_mm": [
+            -0.13344616630286607,
+            0.9644924058524085
+          ],
+          "walkers_improved": 4
+        },
+        "radial": {
+          "shared_minus_control_mm": 2.2772943273983612,
+          "relative_change": 0.07927720374713342,
+          "interval95_mm": [
+            1.846053059527872,
+            2.7737935907545483
+          ],
+          "walkers_improved": 0
+        },
+        "shuffled": {
+          "shared_minus_control_mm": 0.8003395751764539,
+          "relative_change": 0.026498968234247147,
+          "interval95_mm": [
+            0.4832485033778591,
+            1.0929076619304026
+          ],
+          "walkers_improved": 1
+        }
+      },
+      "walker_error_quartiles_mm": {
+        "stationary": [
+          113.92282854534407,
+          125.81405206696611,
+          138.68826192026052
+        ],
+        "velocity": [
+          38.43040861118571,
+          42.25927740325714,
+          44.00193415193874
+        ],
+        "previous": [
+          54.03414968509482,
+          58.94176965594546,
+          61.83148209274785
+        ],
+        "linear": [
+          28.039709255690113,
+          29.15185152538859,
+          30.955547385172054
+        ],
+        "radial": [
+          25.58021451018885,
+          27.18776193747503,
+          28.96636592019128
+        ],
+        "shared": [
+          28.0351655443293,
+          28.96281468648836,
+          31.771670298758792
+        ],
+        "shuffled": [
+          26.713635362557007,
+          28.353424010350572,
+          30.683801210786108
+        ]
+      },
+      "advantage_gate": false
+    },
+    "fit_6": {
+      "coverage": {
+        "people": 10,
+        "trials": 30,
+        "sites": 6,
+        "marker_windows": 3672
+      },
+      "modes": {
+        "stationary": {
+          "endpoint_error_mm": 129.70886065360148,
+          "signed_lab_xyz_mm": [
+            -12.372900384978575,
+            0.522634040453751,
+            1.7884062419250142
+          ]
+        },
+        "velocity": {
+          "endpoint_error_mm": 54.90152725562901,
+          "signed_lab_xyz_mm": [
+            0.10808760289784823,
+            -0.20194670181365576,
+            1.3138963604862146
+          ]
+        },
+        "previous": {
+          "endpoint_error_mm": 76.7229214958504,
+          "signed_lab_xyz_mm": [
+            0.05678261321375549,
+            -0.2172987692144958,
+            2.512620594396693
+          ]
+        },
+        "linear": {
+          "endpoint_error_mm": 34.67203624027153,
+          "signed_lab_xyz_mm": [
+            -1.2039568986692795,
+            -0.17150938194988963,
+            -0.33278046464307476
+          ]
+        },
+        "radial": {
+          "endpoint_error_mm": 30.821895544293177,
+          "signed_lab_xyz_mm": [
+            -1.6124982046760197,
+            -0.1781021226399034,
+            -0.4431041169621647
+          ]
+        },
+        "shared": {
+          "endpoint_error_mm": 32.98287406163105,
+          "signed_lab_xyz_mm": [
+            -0.9553232692431491,
+            -0.1255744839113509,
+            -0.8223909332150051
+          ]
+        },
+        "shuffled": {
+          "endpoint_error_mm": 31.594508969634706,
+          "signed_lab_xyz_mm": [
+            -1.1444080985779133,
+            -0.16965233917865558,
+            -0.9338303329964673
+          ]
+        }
+      },
+      "per_site": {
+        "L_FLE": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 120.97236979548175,
+          "velocity": 45.24666573737781,
+          "previous": 61.7531179649438,
+          "linear": 29.66510212404978,
+          "radial": 30.405721865239304,
+          "shared": 29.564061815901013,
+          "shuffled": 29.02888859766597
+        },
+        "L_FAL": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 144.10879294104964,
+          "velocity": 81.2938004194505,
+          "previous": 113.66889492394276,
+          "linear": 43.60985943166105,
+          "radial": 36.04460056745335,
+          "shared": 40.212085384035205,
+          "shuffled": 35.48419777934243
+        },
+        "L_RSP": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 128.13432501491178,
+          "velocity": 42.04920149717635,
+          "previous": 60.198805968633685,
+          "linear": 32.75660711625129,
+          "radial": 27.69814389171019,
+          "shared": 31.1345406634159,
+          "shuffled": 30.541968472640544
+        },
+        "R_FLE": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 117.89317955876707,
+          "velocity": 42.37544741911181,
+          "previous": 57.490576376662005,
+          "linear": 29.140624808372163,
+          "radial": 29.469796981736216,
+          "shared": 29.142354490325257,
+          "shuffled": 29.515596382635934
+        },
+        "R_FAL": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 134.2341492575151,
+          "velocity": 77.37237921581523,
+          "previous": 108.49280277626033,
+          "linear": 41.52580280171019,
+          "radial": 35.03259554481017,
+          "shared": 36.81265834113003,
+          "shuffled": 34.32937602947957
+        },
+        "R_RSP": {
+          "coverage": {
+            "people": 10,
+            "trials": 30,
+            "sites": 1,
+            "marker_windows": 612
+          },
+          "stationary": 132.9103473538836,
+          "velocity": 41.071669244842376,
+          "previous": 58.73333096465972,
+          "linear": 31.334221159584796,
+          "radial": 26.280514414809794,
+          "shared": 31.03154367497889,
+          "shuffled": 30.66702655604377
+        }
+      },
+      "contrasts": {
+        "velocity": {
+          "shared_minus_control_mm": -21.91865319399796,
+          "relative_change": -0.39923576427922886,
+          "interval95_mm": [
+            -23.932436870665583,
+            -19.927994228407854
+          ],
+          "walkers_improved": 10
+        },
+        "previous": {
+          "shared_minus_control_mm": -43.74004743421933,
+          "relative_change": -0.5701040390724047,
+          "interval95_mm": [
+            -48.41183582196645,
+            -39.44704912105673
+          ],
+          "walkers_improved": 10
+        },
+        "linear": {
+          "shared_minus_control_mm": -1.689162178640491,
+          "relative_change": -0.0487182860255127,
+          "interval95_mm": [
+            -2.4779756481107036,
+            -0.6829091627449162
+          ],
+          "walkers_improved": 9
+        },
+        "radial": {
+          "shared_minus_control_mm": 2.16097851733788,
+          "relative_change": 0.07011179809601284,
+          "interval95_mm": [
+            1.4492136100518709,
+            3.080998507711952
+          ],
+          "walkers_improved": 0
+        },
+        "shuffled": {
+          "shared_minus_control_mm": 1.3883650919963464,
+          "relative_change": 0.04394324005258939,
+          "interval95_mm": [
+            0.724825935626857,
+            2.0263098760805023
+          ],
+          "walkers_improved": 1
+        }
+      },
+      "walker_error_quartiles_mm": {
+        "stationary": [
+          114.89807441890815,
+          127.17485346609224,
+          140.4531486678251
+        ],
+        "velocity": [
+          48.2796886602069,
+          53.355893489308244,
+          55.92537908696205
+        ],
+        "previous": [
+          66.65746720634147,
+          75.05545161206189,
+          77.57183163371757
+        ],
+        "linear": [
+          31.184747296549073,
+          32.02187108762577,
+          35.71522628373033
+        ],
+        "radial": [
+          26.759440273716464,
+          28.34651822134444,
+          30.82043539148965
+        ],
+        "shared": [
+          28.76178210624537,
+          29.81010111283898,
+          33.40955593193182
+        ],
+        "shuffled": [
+          26.84568550394988,
+          28.568321664709412,
+          30.472173662758927
+        ]
+      },
+      "advantage_gate": false
+    }
+  },
+  "overall_advantage_gate": false
+}

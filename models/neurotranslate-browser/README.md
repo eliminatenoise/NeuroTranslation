@@ -1,5 +1,7 @@
 # Forecast movement from one recording
 
+Run `node predict.mjs point-example.json` for the next 200 milliseconds of one marker’s movement. The input has `domain: "marker_displacement"`, nine laboratory XYZ positions in millimetres spaced 50 milliseconds apart in `positions_mm` and a `mode` of `shared`, `shuffled`, `linear`, `velocity`, `previous` or `stationary`. The output vector gives signed X, Y and Z displacements in millimetres. [Study, source and example](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/point-motion)
+
 How far will a tracked point move? Where will a wrist point? Give the model one movement history and it returns a distance, an angle, a turning moment at each knee or a vertical plate load.
 
 | `domain` | Recording and task | Forecast |

@@ -16,7 +16,7 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 SRC = HERE / 'src'
 STATIC = ('CC0-1.0.txt', 'CDLA-Permissive-2.0.txt', 'DATA-CREDITS.md', 'NOTICE.md', 'README.md',
-          'SPATIAL-API.md', 'right-plate-example.json', 'knee-moment-example.json', 'knee-example.json', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
+          'SPATIAL-API.md', 'point-example.json', 'right-plate-example.json', 'knee-moment-example.json', 'knee-example.json', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
 PLATE_LICENCE = 'RIGHT-PLATE-DATA-LICENCE.txt'
 ARTIFACTS = (*STATIC, PLATE_LICENCE, 'model.json', 'population-example.json', 'shared-motion.js')
 
@@ -140,7 +140,18 @@ def build_runtime(model, out):
         assert len(names) == len(set(names)) == 51
         moment_names = {n for n in saved.files if n.startswith('load.')}
         plate_names = {n for n in saved.files if n.startswith('right_plate.')}
-        assert len(knee_names) == 14 and set(saved.files) == {'configuration', *names, *knee_names, *moment_names, *plate_names}
+        point_names = {n for n in saved.files if n.startswith('point_motion.')}
+        expected_points = {'point_motion.token.mean', 'point_motion.token.scale'}
+        expected_points.update('point_motion.' + m + '.' + field for m in ('shared', 'linear', 'shuffled')
+                               for field in ('mean', 'scale', 'coef', 'bias'))
+        if point_names != expected_points:
+            raise ValueError('Expected only the fourteen deployable point tensors.')
+        groups['point_motion.readouts'], descriptions['point_motion.readouts'] = pack(saved, point_names)
+        point_core_names = sorted(n for n in saved.files if n == 'position' or n.startswith(('project.', 'blocks.', 'last_norm.')))
+        rng = np.random.default_rng(3691)
+        point_core = {n:rng.permutation(saved[n].ravel()).reshape(saved[n].shape) for n in point_core_names}
+        groups['point_motion.scrambled'], descriptions['point_motion.scrambled'] = pack(point_core, point_core)
+        assert len(knee_names) == 14 and set(saved.files) == {'configuration', *names, *knee_names, *moment_names, *plate_names, *point_names}
         assert set(knee['readouts']) == {n.removeprefix('knee.') for n in knee_names}
         readouts = {n.removeprefix('knee.'):saved[n] for n in knee_names}
         groups['knee.readouts'], descriptions['knee.readouts'] = pack(readouts, readouts)

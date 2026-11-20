@@ -43,3 +43,13 @@ docs/walking-force/*.cmd whitespace=cr-at-eol
 models/walking-force/*.cmd whitespace=cr-at-eol
 **/DATA-LICENCE.txt -text whitespace=cr-at-eol
 models/neurotranslate-browser/RIGHT-PLATE-DATA-LICENCE.txt -text whitespace=cr-at-eol
+
+docs/walking-landmarks/** -text
+models/walking-landmarks/** -text
+models/neurotranslate-0.0/point-motion/** -text
+docs/walking-landmarks/*.cmd whitespace=cr-at-eol
+models/walking-landmarks/*.cmd whitespace=cr-at-eol
+
+docs/papers/walking-landmarks/** -text
+# Preserve the published Creative Commons legal text, including its closing blank line.
+docs/walking-landmarks/licenses/CC-BY-4.0.txt whitespace=-blank-at-eof
