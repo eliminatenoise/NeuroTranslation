@@ -1,0 +1,26 @@
+{
+  "format": "gait-prior-stride-comparison-1",
+  "weight_sha256": "cd876eac2165d40b43386643de99178807dc384cc0915abcff3fe92750018efc",
+  "speed_m_s": 0.5,
+  "test_people": 12,
+  "long_history_frames": 240,
+  "model_history_frames": 25,
+  "horizon_frames": 15,
+  "test_cutoffs": 42781,
+  "eligible_cutoffs": 40201,
+  "period_min_frames": 45,
+  "period_max_frames": 180,
+  "match_last_frames": 60,
+  "prior_stride_mean_mae_degrees": 3.5352540464780127,
+  "transformer_mean_mae_degrees": 4.464682328471118,
+  "transformer_minus_stride_mae_degrees": 0.9294282819931055,
+  "paired_person_bootstrap_ci95": [
+    0.35990587277070096,
+    1.571208971514491
+  ],
+  "transformer_wins": 2,
+  "prior_stride_wins": 10,
+  "ties": 0,
+  "fit": "No fitted parameters. Each subject cutoff chooses integer period 45\u2013180 minimizing sum of squared bilateral knee discrepancies between the last 60 samples and the corresponding shifted 60; ties shortest. Forecast the knee pair at cutoff+15\u2212period. Require 240 contiguous finite historical knee samples and the original eligible 15-frame target. Equal-person mean absolute error over both knees, same eligible rows and people for both models. Paired bootstrap by participant, 10000 resamples, seed 21301.",
+  "limits": "One treadmill speed, previously recorded Xsens angle exports. The stride baseline uses four seconds of previous knee angles; the Transformer spans 0.4 seconds of the six joint angles."
+}

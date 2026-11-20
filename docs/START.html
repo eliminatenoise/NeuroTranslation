@@ -109,8 +109,20 @@
 
   <section id="recordings" aria-labelledby="recordings-title">
     <h2 id="recordings-title">Find your recording</h2>
-    <p>The first eight pages need no file from you: open one and start. For the others, find the dataset your file came from. Every page runs on your own computer, and nothing you give it is sent anywhere. Every “ahead” is a distance along a stored recording: nothing here is live.</p>
+    <p>The first nine pages need no file from you: open one and start. For the others, find the dataset your file came from. Every page runs on your own computer, and nothing you give it is sent anywhere. Every “ahead” is a distance along a stored recording: nothing here is live.</p>
     <ul class="tiles recordings">
+      <li>
+        <article aria-labelledby="knee-motion-title">
+          <p class="source">Katmah and colleagues · Treadmill joint angles</p>
+          <h3 id="knee-motion-title">Where will the knees be 15 stored frames later?</h3>
+          <p>Five snapshots of both hips, knees and ankles predict the two knee angles 15 frames later in a stored 60 Hz treadmill recording. On 40,201 forecasts from 12 held-out walkers, replaying a stride from four seconds of knee history gave 3.54° mean absolute error. The transformer, with 0.4 seconds of joint history, gave 4.46° on the same windows. Six of the 51 recordings used whole-file Xsens HD processing, including test recording S48. The other 45 carry the Live label. Physical prediction latency was never measured. Only reconstructed joint angles entered the forecast.</p>
+          <ul class="links">
+            <li><a class="primary" href="knee-motion/">Try the knee forecast</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-motion">Model and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/knee-motion.zip">Offline viewer and model (ZIP)</a></li>
+          </ul>
+        </article>
+      </li>
       <li>
         <article aria-labelledby="stride-title">
           <p class="source">CMU Graphics Lab · Human motion capture</p>
@@ -354,7 +366,7 @@
 
   <section class="support" id="papers" aria-labelledby="papers-title">
     <h2 id="papers-title">Two papers, each written twice</h2>
-    <p>Two working drafts, each in a Technical and a Simple English edition. Nobody outside the project has reviewed them. Every result in them comes from stored recordings, and nothing is live. They report every study of the numbered table, the general model’s first five fits among them. What came after them is not in them: the general model’s shared fit, the studies published after the numbered table, the walk/run generator, and the stride and rat forecasts of a separate supplement.</p>
+    <p>Two working drafts, each in a Technical and a Simple English edition. Nobody outside the project has reviewed them. Every result in them comes from stored recordings, and nothing is live. They report every study of the numbered table, the general model’s first five fits among them. What came after them is not in them: the general model’s shared fit, the studies published after the numbered table, the walk/run generator, the knee forecast, and the stride and rat forecasts of a separate supplement.</p>
     <p><a href="papers/language-and-observed-movement/language-and-movement.html">How precisely do words identify a recorded movement?</a> A separate four-page supplement, not one of the two papers, on the two studies that search recordings of movement with words, one of the whole body and one of the hand. <a href="papers/language-and-observed-movement/language-and-movement.pdf">Open the PDF.</a></p>
     <ul class="links">
       <li><a href="papers/current/">Read the four current drafts, and find each study in them</a></li>

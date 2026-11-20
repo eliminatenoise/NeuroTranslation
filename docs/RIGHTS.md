@@ -2,7 +2,7 @@
 
 **What the project wrote is yours to take.** Its text and code are dedicated to the public domain under [CC0 1.0](LICENSE), as far as the project holds the rights.
 
-**The recordings are not the project's to give.** Eleven open datasets carry every study of the numbered table, and four more carry the studies published after it and the 3D recordings. Each belongs to the people named below, under the terms named below. The repository holds fitted models and summary results derived from those recordings, and some excerpts of the recordings themselves, named below under their datasets. The credit set out here travels with all of it. Fetch a recording from its own archive. A file you open in a browser page stays under the terms it came with.
+**The recordings are not the project's to give.** Eleven open datasets carry every study of the numbered table, and five more carry the studies published after it and the 3D recordings. Each belongs to the people named below, under the terms named below. The repository holds fitted models and summary results derived from those recordings, and some excerpts of the recordings themselves, named below under their datasets. The credit set out here travels with all of it. Fetch a recording from its own archive. A file you open in a browser page stays under the terms it came with.
 
 ## The eleven datasets of the numbered table
 
@@ -98,7 +98,7 @@ Changed here: two walking activities were selected, and the accelerometer readin
 
 [Dataset](https://archive.ics.uci.edu/dataset/256/daily+and+sports+activities) · [DOI 10.24432/C5C59F](https://doi.org/10.24432/C5C59F) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-## Four more datasets, behind the newer studies and the 3D recordings
+## Five more datasets, behind the newer studies and the 3D recordings
 
 These carry the studies published after the numbered table (listed at the end of [the studies page](../benchmarks/README.md)) and the [3D recordings](whole-body/README.md).
 
@@ -127,6 +127,10 @@ The separate three-rat forecast used sixteen annotated trips from each of six ra
 The shared fit learned from both HoloAssist and this dataset. Its fitted weights are released under CC BY 4.0, with credit to the model and to both datasets; [its data credits](../models/shared-motion-browser/DATA-CREDITS.md) give the full author lists and what was changed. Its two browser copies, [`models/shared-motion-browser/`](../models/shared-motion-browser/) and [`models/neurotranslate-browser/`](../models/neurotranslate-browser/), hold its fitted numbers for a web browser and carry the same credits, with the agreement text of HoloAssist beside them.
 
 [Versioned dataset](https://doi.org/10.48324/dandi.000978/0.240511.0307) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+### Treadmill joint angles
+
+Katmah and colleagues released these recordings through PhysioNet under CC BY 4.0. The knee forecast derives weights and aggregate errors from six angle channels at 0.5 m/s. The viewer opens with invented values. Obtain any recorded trial directly from the study. [Full credit and reuse terms](../models/knee-motion/RIGHTS.md) · [Original dataset](https://doi.org/10.13026/r0ea-7161)
 
 ### CMU Graphics Lab Motion Capture Database
 

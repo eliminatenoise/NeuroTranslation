@@ -1,0 +1,50 @@
+:root{color-scheme:light;--ink:#172b30;--muted:#465c61;--line:#bdc9c5;--paper:#f7f8f4;--teal:#056e6c;--accent:#ae461c}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);background:var(--paper);font:1rem/1.5 "Instrument Sans",Arial,Helvetica,sans-serif}
+main,header,footer{width:min(64rem,100% - 2.5rem);margin:auto}
+header{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:1.05rem 0;border-bottom:2px solid var(--ink);font-weight:700}
+button,select,input{font:inherit;color:inherit}
+button,.buttonlike,select{border:1px solid #718681;background:white;border-radius:.35rem;padding:.43rem .7rem;font-weight:600;min-height:2.55rem;cursor:pointer}
+button:disabled,select:disabled{cursor:default;color:#58635f;background:#e4e8e4;border-color:#bcc5c3}
+button:hover:enabled,select:hover:enabled,.buttonlike:hover{background:#ecf2ee}
+button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #88491c;outline-offset:3px}
+a{color:var(--teal);text-underline-offset:3px}
+h1,h2,h3,p{margin:0}
+.intro{padding:clamp(1.3rem,4vw,2.8rem) 0 1.2rem;max-width:55rem}
+h1{font-size:clamp(2rem,5.15vw,3.45rem);line-height:1.07;letter-spacing:-.046em;margin-bottom:.65rem}
+.lede{color:var(--muted);font-size:clamp(1rem,2vw,1.15rem);max-width:47rem}
+.toolbar{margin-top:.65rem;display:flex;flex-wrap:wrap;align-items:end;gap:.65rem 1.2rem;padding:1rem 0;border-block:1px solid var(--line)}
+.control label,.field-title{display:block;font-size:.84rem;font-weight:700;margin:0 0 .26rem}
+.input-actions{display:flex;flex-wrap:wrap;gap:.5rem}
+#file{margin:0;max-width:100%;font-size:.88rem}
+.status{margin-top:.65rem;color:var(--muted);font-size:.93rem}
+.status[data-error=true]{color:#8d321a;font-weight:700}
+.context{padding:1.4rem 0 .75rem;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.3rem 1rem}
+h2{font-size:1.42rem;line-height:1.22;letter-spacing:-.025em}
+.plane{font-size:.85rem;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.card{background:#fff;border:1px solid var(--line);border-radius:.6rem;overflow:hidden}
+.card-head{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem;padding:.8rem 1rem 0}
+.card h3{font-size:1rem;font-weight:700}
+.angle{font-size:1.5rem;color:var(--accent);font-weight:700;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.chart{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:.25rem 1rem;margin:.65rem 0;color:var(--muted);font-size:.88rem}
+.legend b{color:var(--teal)}
+.legend .forecast-key{color:var(--accent);font-weight:700}
+.frame{display:flex;flex-wrap:wrap;align-items:center;gap:.65rem;margin:.6rem 0}
+.frame input{width:min(20rem,100%)}
+.compare{margin-top:.85rem;display:grid;grid-template-columns:minmax(0,1.09fr) minmax(0,.91fr);gap:1.5rem}
+.box,.disclosure{padding:1.1rem 0;border-top:1px solid var(--line)}
+.box p,.disclosure p{color:var(--muted);margin:.55rem 0}
+table{width:100%;border-collapse:collapse;font-size:.9rem;font-variant-numeric:tabular-nums}
+th,td{padding:.35rem .3rem;text-align:right;border-bottom:1px solid #dce2de}
+th:first-child,td:first-child{text-align:left}
+th{color:#394e52} tr.active{color:var(--accent);font-weight:700}
+details summary{cursor:pointer;font-weight:700}
+details p,details table{margin-top:.6rem}
+footer{border-top:1px solid var(--line);padding:.9rem 0 1.6rem;font-size:.85rem;color:var(--muted)}
+[hidden]{display:none!important}
+#evidence-text{max-width:58rem}
+code{font:inherit;background:#e8ede7;overflow-wrap:anywhere}
+@media(max-width:680px){.cards,.compare{grid-template-columns:minmax(0,1fr)}.cards{gap:.6rem}.compare{gap:0}main,header,footer{width:calc(100% - 1.4rem)}.toolbar{align-items:start}.input-actions{width:100%}.card-head{padding:.65rem .8rem 0}}
+@media(max-width:480px){#history-table table{font-size:.72rem;line-height:1.3}#history-table td,#history-table th{padding:.4rem .1rem}#history-table{overflow-x:auto}.card-head .angle{font-size:1.3rem}}
