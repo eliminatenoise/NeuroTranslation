@@ -2,7 +2,7 @@
 
 **What a hand has just done still beats a brain signal read at the scalp.**
 
-That is where [25 small studies](benchmarks/README.md) stand. Each takes open recordings of people, measured and shared by others, and forecasts what a hand or an arm does a fraction of a second later: the angle of a wrist, the position of a palm, the force of a grip. A hand tends to keep moving the way it was moving, so its own recent past is a hard forecast to beat. A brain or muscle signal earns its place only by beating it.
+That is where the [25 small studies of the numbered table](benchmarks/README.md) stand. Each takes open recordings of people, measured and shared by others, and forecasts what a hand or an arm does a fraction of a second later: the angle of a wrist, the position of a palm, the force of a grip. A hand tends to keep moving the way it was moving, so its own recent past is a hard forecast to beat. A brain or muscle signal earns its place only by beating it.
 
 - Adding a brain recording taken at the scalp (EEG) to a forecast that already had the hand's history made it worse in **8 of 13** comparisons. At the wrist, a quarter of a second ahead, the error grew from 4.05° to 4.52°. EEG met none of the 4 pass rules set for it before any scoring.
 - Adding a muscle recording from the forearm (EMG) lowered the error in **10 of 18**. Only at the wrist was the gain clear of the spread between people. At the same wrist, the general model this project is building (more on it below) got worse when it was given EMG: its error rose from 5.43° to 5.87°, and stayed higher with any one of the three people left out (study 28).
@@ -11,7 +11,7 @@ That is where [25 small studies](benchmarks/README.md) stand. Each takes open re
 
 NeuroTranslation is the larger attempt those studies belong to. Reach for a cup: your brain gives the order, the muscles of your forearm pull, and the hand moves. One act, written down three times, in nerve, in muscle and in motion. To translate is to take one of those records, predict another, and check the prediction against what the body did. It is one part of **Brain2Body**, the name of the whole programme and of its second paper, which asks what a person keeps once a machine stops guiding their hand.
 
-What exists today is the studies, 14 [pages that run them in a browser](https://eliminatenoise.github.io/NeuroTranslation/START.html), two draft papers and a sister game, NeuroSurge.
+What exists today is the studies, 16 [pages that run them or replay recordings in a browser](https://eliminatenoise.github.io/NeuroTranslation/START.html), two draft papers and a sister game, NeuroSurge.
 
 What is still being built is the general model, **NeuroTranslate 0.0**: one model meant to learn from many kinds of body signal at once. On 20 November it had its first five fits to real recordings.
 
@@ -25,14 +25,25 @@ What is still being built is the general model, **NeuroTranslate 0.0**: one mode
 
 What does not exist yet: a test of the general model on people nobody has looked at before. So nothing here yet translates between nerve, muscle and movement. Nor is the model inside the browser app titled NeuroTranslate 0.0, the one that lines up your own recordings on one clock. Its three wrist fits run in a browser only as a separate piece of code for programmers, listed below.
 
+## Try a model
+
+Six things you can open and run. The first four open in a browser on your own computer, with nothing to install; the last two are for programmers and for people with Python.
+
+| What it asks | What you can do |
+| --- | --- |
+| Can the firing of brain cells tell where a rat will be a quarter of a second later? | Look at four quarter-second counts of firing from 72 recorded cells, forecast the rat's next position from its positions alone or with the firing as well, then reveal where the camera saw it. In the study, the firing made the forecast worse: its average miss grew from 2.010 cm to 2.237 cm. [Open the track inspector](https://eliminatenoise.github.io/Interoceptomics/stages/#0.2) · [Study and fitted weights](benchmarks/wtrack-neural-motion/) |
+| Which hand movement fits a description? | Type "press the button" to rank five moments of a recording of someone setting up a printer, and replay what the headset tracked of their hand. In the study, the hand's shape picked the right moment first less often (23.89%) than its timing did (35.56%; a random order: 20.66%). [Search the recording](https://eliminatenoise.github.io/NeuroTranslation/hand-search/) · [Study and fitted weights](benchmarks/hand-language-retrieval/) · [Four-page supplement](https://eliminatenoise.github.io/NeuroTranslation/papers/language-and-observed-movement/language-and-movement.pdf) |
+| After an instructor finishes speaking, how far will the wrist move in the next second? | Enter four earlier positions of the wrist and compare forecasts with and without the instructor's words. In the recordings, repeating the wrist's movement over the previous second did best (7.38 cm), and the words raised the fitted model's miss from 9.79 to 10.04 cm. [Run the wrist forecast](https://eliminatenoise.github.io/NeuroTranslation/hand-search/forecast.html) · [Study and fitted weights](benchmarks/preceding-instructions/) |
+| Can a sentence pick out one whole-body recording? | Turn three recorded movements in 3D, a scoop, a jump and a hop, and follow any of 41 markers on the body. That page is a separate demonstration, from another dataset. In the language study, a model given a description found the right one of 38 recordings first only 5.6% of the time, behind a simpler model that counts words (6.6%). [The 3D recordings](https://eliminatenoise.github.io/NeuroTranslation/whole-body/) · [Language study](benchmarks/text-motion-retrieval/) |
+| Which signals help forecast a turn of the wrist? | The fitted models of study 28, rewritten in JavaScript so that a web page can run them in your browser, on your own computer. There is no page to open: it is a building block that other pages load. A test feeds it 36 invented inputs and checks every forecast against the original Python models. A draft of the NeuroSurge game, still under review in that game's repository, uses it to show a recorded trial beside these forecasts. Row 29, a separate experiment, asked whether muscle signals can correct an earlier wrist forecast. [The general model's three wrist fits, as code for programmers](interfaces/paired-wrist-browser/README.md) · [Game draft, under review](https://github.com/eliminatenoise/NeuroSurge/pull/2) · [Correction study](benchmarks/wrist-forearm-correction/) |
+| Can one model forecast five sensors on a walking body? | A page that opens in your browser once a small Python program is running (it needs Python and two libraries; there is a launcher for Windows, macOS and Linux). Pick a sensor on the torso, an arm or a leg: it shows the sensor's last 16 readings, NeuroTranslate 0.0's forecast and what the sensor recorded 120 ms after the last of them. The walk it shows is one the model was fitted on, so it shows the model running, not how well it would forecast someone new. [The general model's five-sensor walking fit, on your own computer](benchmarks/daily-sports-limbs/README.md) |
+
 ## Where to click
 
 - **[Start page](https://eliminatenoise.github.io/NeuroTranslation/START.html).** Runs in a browser, nothing to install. Try an invented example, or pick the kind of recording you have and open the page that reads it. Behind it are the study readers, and an app that lines up your own recordings on one clock.
-- **[The studies](benchmarks/README.md).** All 25, each with its plan and its results file, and the counts above worked out row by row.
-- **[The general model's five-sensor walking fit, on your own computer](benchmarks/daily-sports-limbs/README.md).** A page that opens in your browser once a small Python program is running (it needs Python and two libraries; there is a launcher for Windows, macOS and Linux). Pick a sensor on the torso, an arm or a leg: it shows the sensor's last 16 readings, NeuroTranslate 0.0's forecast and what the sensor recorded 120 ms after the last of them. The walk it shows is one the model was fitted on, so it shows the model running, not how well it would forecast someone new.
-- **[The papers](papers/README.md).** Two working drafts, each in a Technical and a Simple English edition.
+- **[The studies](benchmarks/README.md).** All 25 numbered studies, each with its plan and its results file, and the counts above worked out row by row; then the four published after the table, each with its result in plain words.
+- **[The papers](papers/README.md).** Two working drafts, each in a Technical and a Simple English edition, and a separate four-page supplement on finding a movement from words.
 - **[Launchers and offline copies](LAUNCHERS.md)** for Windows, macOS and Linux.
-- **[The general model's three wrist fits, as code for programmers](interfaces/paired-wrist-browser/README.md).** The fitted models of study 28, rewritten in JavaScript so that a web page can run them in your browser, on your own computer. There is no page to open: it is a building block that other pages load. A test feeds it 36 invented inputs and checks every forecast against the original Python models. A draft of the NeuroSurge game, [still under review in that game's repository](https://github.com/eliminatenoise/NeuroSurge/pull/2), uses it to show a recorded trial beside these forecasts.
 - **[One wrist trial, every channel labelled](interfaces/wrist-language-motion/README.md).** Three seconds of one person turning the wrist toward a target, from an open dataset, with each channel marked by what recorded it (a scalp electrode, two forearm electrodes, two sensors of the wrist's angle, the cue on the screen) and the words a person wrote about it. A small Python program hands it to the general model's code. No model is fitted to it.
 - **[NeuroSurge](https://github.com/eliminatenoise/NeuroSurge)**, the sister game.
 
@@ -53,9 +64,9 @@ Suppose the motion recording belongs to a different reach. It can still teach a 
 
 The project's working presumption is that more data, and more varied data, makes a model that carries further. It is untested: no study here varies how much data a model sees, or how varied it is.
 
-## History did the work: every study in one table
+## History did the work: the numbered table
 
-Each row sets a reference forecast against a challenger that was given something extra. Some rows forecast a movement, some the force at a gauge, some the voltage of a force sensor.
+Each row sets a reference forecast against a challenger that was given something extra. Some rows forecast a movement, some the force at a gauge, some the voltage of a force sensor. The four studies published after the table are on [the studies page](benchmarks/README.md), in no row and no count here.
 
 Every score is an error: how far the forecasts fell from what was measured. Lower is better. Rows 1 to 13, 28 and 29 are scored by the measure that punishes large misses, rows 14 to 23, 26 and 27 by the plain average miss, and rows 24 and 25 by a squared error in units of their own. Row 20 is the odd one: it compares the width of bands, not errors. Units change from block to block, so compare along a row, never down a column.
 
@@ -104,7 +115,7 @@ A *straight-line fit* is the plainest kind of model, a weighted sum of its input
 
 Two more counts. Adjusting a model to one person, one day or one group lowered the error in 5 of 6 comparisons, but in only 1 of them by more than 1% of the error. And 12 studies fixed a pass rule before any scoring: 8 failed it, 2 gave a split answer, 1 passed by a margin too small to tell from zero, and 1 passed on a question about band widths. Rows 27 and 29 are not among them: each set its rule before fitting, but scored it on people already used for fitting. No rule about adding a signal to a forecast was passed outright.
 
-No test group is larger than 4 people, the 25 studies draw on 9 datasets, and several rows score the same three or four people again. The brain signal in every study on people is EEG from 3 to 32 electrodes on the scalp: nothing here was recorded inside a human brain. And nothing was forecast live: every "ahead" is a distance along a stored recording.
+No test group is larger than 4 people, the 25 numbered studies draw on 9 datasets, and several rows score the same three or four people again. The brain signal in every study on people is EEG from 3 to 32 electrodes on the scalp: nothing here was recorded inside a human brain. And nothing was forecast live: every "ahead" is a distance along a stored recording.
 
 [The studies page](benchmarks/README.md) has every number with its range and its controls.
 
@@ -135,13 +146,13 @@ The six pinch studies set nobody aside. Each fixed its test group in advance and
 
 The first paper asks what a recording of brain or muscle adds once a model already knows how the body has been moving. It carries the macaque study and most of the human studies above. The second asks what a person keeps when a machine guides their hand through a skill and then stops. It is a proposal: it reports no experiment of its own on that question.
 
-Both are working drafts, and nobody outside the project has reviewed them. They were last built on 19 November 2026 and do not yet contain studies 8, 10, 13, 23, 26 or 28, nor the general model's walking fits or row 29. [How to read them, and where each study sits in each one](papers/README.md).
+Both are working drafts, and nobody outside the project has reviewed them. They were last built on 19 November 2026 and do not yet contain studies 8, 10, 13, 23, 26 or 28, nor the general model's walking fits or row 29, nor the four studies published after the table. The two of those that search recordings with words are reported in a separate four-page supplement. [How to read the papers, and where each study sits in each one](papers/README.md).
 
 ## Run it yourself
 
 In a browser: open the [start page](https://eliminatenoise.github.io/NeuroTranslation/START.html). A recording you open is read on your own computer and goes nowhere.
 
-Offline: most readers have a ZIP that runs without a network, with a launcher for Windows, macOS and Linux, and the general model's five-sensor walking fit has a page that runs from your own computer. The folders of study 28 and row 29 have launchers that open their results pages, and in study 28's folder one Python command runs its three fitted wrist models on an invented example. [LAUNCHERS.md](LAUNCHERS.md) lists them all.
+Offline: most readers have a ZIP that runs without a network, with a launcher for Windows, macOS and Linux, and the general model's five-sensor walking fit has a page that runs from your own computer. The folders of study 28 and row 29 have launchers that open their results pages, and in study 28's folder one Python command runs its three fitted wrist models on an invented example. [LAUNCHERS.md](LAUNCHERS.md) lists them all. The newer studies' pages carry launchers in their own folders: the hand search and the 3D recordings under [`docs/`](docs/README.md), the wrist forecast after an instruction, and the results pages of the rat study and the whole-body language study.
 
 To score a study again from the original recordings: each folder under [`benchmarks/`](benchmarks/README.md) holds the study's plan and its results file, and several also hold the code that does the scoring. You fetch the recordings yourself, from their own archive. The palm study, for example, with Python 3.13:
 
@@ -157,11 +168,15 @@ To build the app from source: `cd demo`, then `npm test` and `npm run build`. [d
 
 ## Whose recordings these are
 
-None of the recordings is ours. Eleven open datasets, measured by other people, carry everything on this page: nine behind the 25 studies, and two behind the two results reported only in the papers.
+None of the recordings is ours. Eleven open datasets, measured by other people, carry the numbered table: nine behind its 25 studies, and two behind the two results reported only in the papers.
 
 EEG-EMG-WristMotion · KIN-MUS UJI · the upper-limb dataset of Lucchetti and colleagues · IACKD · WAY-EEG-GAL · HYGRIP · Hyser · CEMHSEY GRASP · Daily and Sports Activities · LINK · Reach&Grasp
 
-Who made each one, its licence and the credit it is owed: [docs/RIGHTS.md](docs/RIGHTS.md). The licences are CC BY 4.0, CC0 1.0, ODC-By 1.0 and MIT. What is published here is mostly fitted models and summary results derived from the recordings. Two short excerpts of the recordings themselves are included, each under its dataset's terms: one three-second trial of the wrist-pointing recordings, and 16 readings, with the reading recorded 120 ms after the last of them, from each of the five walking sensors in one clip, which the five-sensor page replays.
+Four more carry the newer studies and the 3D recordings: HoloAssist (the hand search and the wrist forecast after an instruction), the KIT Motion–Language Dataset (the whole-body language study), Single Day W-Track Learning (the rat) and the CMU Graphics Lab Motion Capture Database (the 3D recordings).
+
+Who made each one, its licence and the credit it is owed: [docs/RIGHTS.md](docs/RIGHTS.md). The numbered table's datasets are under CC BY 4.0, CC0 1.0, ODC-By 1.0 and MIT. Of the newer four, HoloAssist is under the Community Data License Agreement (Permissive 2.0), Single Day W-Track Learning under CC BY 4.0, and the CMU recordings under Carnegie Mellon's own terms, which allow reuse but not resale; no open licence to pass on the KIT recordings has been established, so the whole-body language study publishes only numbers and summaries derived from them.
+
+What is published here is mostly fitted models and summary results derived from the recordings. Two short excerpts of the numbered studies' recordings are included, each under its dataset's terms: one three-second trial of the wrist-pointing recordings, and 16 readings, with the reading recorded 120 ms after the last of them, from each of the five walking sensors in one clip, which the five-sensor page replays. The newer folders hold more, each under its own dataset's terms: the rat's positions and firing times on 34 trips round the track, five stretches of hand tracking with the sentences written about them, behind the hand search, and the three 3D recordings.
 
 What the project itself wrote, text and code, is dedicated to the public domain under [CC0 1.0](LICENSE). That covers none of the recordings, nor the fonts inside the PDFs.
 
@@ -169,4 +184,4 @@ What the project itself wrote, text and code, is dedicated to the public domain 
 
 **[NeuroSurge](https://github.com/eliminatenoise/NeuroSurge)** is a game for learning which part of the brain moves which part of the body. Its numbers are made up by the rules of the game. They are not forecasts from the studies here.
 
-**[Interoceptomics](https://github.com/eliminatenoise/Interoceptomics)** is a proposed field of science: how the body senses its own interior, joined to the mapping of nerve connections. Today it is a 3D atlas of the human brain that you can turn, cut and measure.
+**[Interoceptomics](https://github.com/eliminatenoise/Interoceptomics)** (Interotomics for short) is a proposed field of science: how the body senses its own interior, and how the nerve connections involved are arranged. Today it is a 3D atlas of the human brain that you can turn, cut and measure, and an interactive guide to the experiments it proposes, none of which has been run yet.
