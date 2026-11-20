@@ -20,7 +20,7 @@ function clearResult(message) {
   chart.replaceChildren();
   values.replaceChildren();
   status.textContent = message;
-  context.textContent = "The forecast uses the selected sensor's own frame.";
+  context.textContent = "X, Y and Z follow the directions on the selected sensor.";
   run.disabled = !examples;
 }
 
@@ -94,14 +94,14 @@ async function forecast() {
     if (!response.ok) throw Error(result.error || "Could not read the recording.");
     const f = result.forecast;
     drawTrace(record, result);
-    addRow("Shared model", f.shared_forecast);
-    if (result.measured_target) addRow("Measured target", result.measured_target);
+    addRow("Model trained on all five body parts", f.shared_forecast);
+    if (result.measured_target) addRow("What the sensor recorded", result.measured_target);
     addRow("Repeat last reading", f.persistence);
-    addRow("Ridge model", f.ridge);
+    addRow("Weighted past readings (ridge)", f.ridge);
     context.textContent = result.measured_target
-      ? "First parking-lot walking clip from TRAIN participant p1. Target at 720 ms."
-      : "Your input window. No independently measured target was supplied.";
-    status.textContent = "Forecast complete · target timestamp " + f.target_timestamp_ms + " ms.";
+      ? "First walker, first parking-lot recording. The model learned from this walk. Compare the predictions with the reading at 720 milliseconds."
+      : "Your recording contains the 16 past readings. Checking the forecast needs a sensor reading from the later time.";
+    status.textContent = "Time of the prediction · " + f.target_timestamp_ms + " ms.";
   } catch (err) {
     if (active === revision) status.textContent = err.message;
   } finally {

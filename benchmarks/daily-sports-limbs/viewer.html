@@ -9,21 +9,21 @@
 <header><strong>NeuroTranslate <span>0.0</span></strong><span>Walking study</span></header>
 <main>
 <section class="intro">
-<div><h1>120 milliseconds<br>into a walk</h1><p>Choose a wearable sensor. The model reads its last 16 samples and predicts what its three axes will read next.</p></div>
-<aside><strong>4 walkers</strong><span>Parking lot and flat treadmill</span><span>Training data only</span></aside>
+<div><h1>What will the sensor<br>read next?</h1><p>A sensor on a walker’s leg picks up changes as the leg speeds up, slows down or tilts relative to gravity. It measures acceleration in three directions, X, Y and Z. The model uses 16 readings to predict what the same sensor will measure 120 milliseconds later.</p></div>
+<aside><strong>4 walkers</strong><span>Parking lot and flat treadmill</span><span>The model learned from these walks</span></aside>
 </section>
 <section class="panel" aria-labelledby="forecast-label">
 <div class="panel-heading"><h2 id="forecast-label">Forecast a sensor reading</h2>
 <label>Body part <select id="part"><option value="left_leg">Left leg</option><option value="right_leg">Right leg</option><option value="left_arm">Left arm</option><option value="right_arm">Right arm</option><option value="torso">Torso</option></select></label></div>
 <p id="context">Opening the first recorded walking example…</p>
 <div id="chart" aria-hidden="true"></div>
-<div class="chart-key"><span class="axis x">X</span><span class="axis y">Y</span><span class="axis z">Z</span><span>Times run from the first sample. Lines show readings, open circles show forecasts and squares show a known target.</span></div>
-<div class="table-scroll"><table><caption>XYZ values in the selected sensor’s local frame</caption>
+<div class="chart-key"><span class="axis x">X</span><span class="axis y">Y</span><span class="axis z">Z</span><span>Time starts at the first reading. Lines show past readings, circles show predictions and squares show what the sensor recorded later.</span></div>
+<div class="table-scroll"><table><caption>Acceleration along the sensor’s three directions, in its original units</caption>
 <thead><tr><th scope="col">At the target time</th><th scope="col">X</th><th scope="col">Y</th><th scope="col">Z</th></tr></thead><tbody id="values"></tbody></table></div>
-<p class="status" id="status" role="status" aria-live="polite">Loading the checkpoint…</p>
+<p class="status" id="status" role="status" aria-live="polite">Loading the trained model…</p>
 </section>
-<section class="input"><h2>Try your own sensor window</h2><p>Paste 16 complete XYZ samples with their timestamps, 40 ms apart. Use the selected placement and the same sensor axes and scale. The forecast runs on this computer.</p>
-<label for="record">Recording JSON</label><textarea id="record" spellcheck="false" rows="6"></textarea>
+<section class="input"><h2>Try your own recording</h2><p>Paste 16 rows in the format shown below, each with X, Y and Z readings. Their times must be 40 milliseconds apart. Use the same body part, sensor orientation and units. The forecast runs on this computer.</p>
+<label for="record">Recording in the example format (JSON)</label><textarea id="record" spellcheck="false" rows="6"></textarea>
 <div class="actions"><button id="run" type="button">Run forecast</button><button class="secondary" id="restore" type="button">Restore recorded example</button></div>
 </section>
 <footer>Human walking data · Barshan &amp; Altun, UCI Daily and Sports Activities · CC BY 4.0</footer>
