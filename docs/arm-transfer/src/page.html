@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f8f7f2">
+<title>Forecast a cued arm movement · NeuroTranslation</title>
+<link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+<header class="mast"><div class="wrap mast-inner"><span class="brand">NeuroTranslation</span><nav aria-label="Reader sections"><a href="#experiment">Forecast</a><a href="#evidence">Recorded errors</a><a class="download" href="../arm-transfer-offline.zip" download>Offline ZIP ↓</a></nav></div></header>
+<main class="wrap">
+<section class="intro" aria-labelledby="page-title"><h1 id="page-title">Forecast a cued arm movement</h1>
+<p>A seated person sees an instruction to move the right arm. Given that instruction and half a second of sensor history, how far ahead can we predict the elbow, forearm and finger readings?</p></section>
+<section id="experiment" class="experiment" aria-label="Interactive forecast">
+<div class="controls">
+<h2>Your experiment</h2><p>The starting readings are invented. Change the instruction or edit a sensor to try another example.</p>
+<label for="cue">Known instruction</label><select id="cue"></select>
+<label for="method">Forecast method</label><select id="method"></select>
+<label for="reference">Compare with</label><select id="reference"></select>
+<p id="method-note"></p>
+<details id="inputs"><summary>Edit sensor history</summary>
+<label for="sensor">Sensor to edit</label><select id="sensor"></select>
+<p>Each row covers eight readings. Enter their median and the difference between the last four readings’ median and the first four readings’ median.</p>
+<table class="edit-table"><thead><tr><th scope="col">Bin</th><th scope="col">Median</th><th scope="col">Change</th></tr></thead><tbody id="edit-rows"></tbody></table>
+<p>Oldest first. The last bin ends a quarter of a second after the cue. Values use each sensor’s original scale.</p>
+</details>
+<button type="button" id="restore">Restore invented example</button>
+<p id="input-status" role="status" class="status"></p>
+<a class="to-plot" href="#prediction">See predicted change ↓</a>
+</div>
+<div class="plots" id="prediction"><div class="plots-title"><h2>Predicted change</h2><span>Native sensor units</span></div>
+<p>The clock starts 0.25 seconds after the cue. Zero change means the sensor stayed at its last early median. Each panel has its own scale. Lines connect the three forecast times.</p>
+<div class="legend" id="legend"></div>
+<div id="charts"></div>
+<details id="forecast-table"><summary>Read the forecast values</summary><div id="forecast-values"></div></details>
+</div>
+</section>
+<section id="evidence" class="evidence" aria-labelledby="error-title"><h2 id="error-title">How close were the forecasts?</h2>
+<p>Here the later sensor readings were measured. Each row compares predictions with those readings for people excluded from the fit that predicted them. A smaller error means a closer forecast.</p>
+<div class="filters">
+<div><label for="cohort">Evaluation group</label><select id="cohort"></select></div>
+<div><label for="error-cue">Recorded instruction</label><select id="error-cue"></select></div>
+<div><label for="error-sensor">Sensor error</label><select id="error-sensor"></select></div>
+</div>
+<p id="split-note"></p><p id="score-scope" class="scope" aria-live="polite"></p>
+<table class="scores"><caption id="scores-caption">Mean absolute error</caption><thead><tr><th scope="col">Method</th><th scope="col">+0.5 s</th><th scope="col">+1.0 s</th><th scope="col">+1.5 s</th><th scope="col" class="summary-score">Overall*</th></tr></thead><tbody id="scores-body"></tbody></table>
+<p class="table-note">* Overall gives equal weight to all three sensors and times after dividing each error by the spread of that target in the fitting data. The three time columns use the selected sensor’s native units. Groups balance people, runs and cues. “Incorrect cues” averages the errors when the same early readings are paired with each of the six other instructions.</p>
+<div class="result-note"><h3 id="result-title">Across all recorded instructions</h3><p id="overall-result"></p>
+<label for="contrast">Compare the Transformer’s overall error with</label><select id="contrast"></select><p id="interval"></p></div>
+</section>
+<section class="reading" aria-labelledby="measured-title"><h2 id="measured-title">What the sensors recorded</h2><p>The study followed a supported right arm during six instructed movements and rest. Sensors measured elbow motion, forearm rotation and bending near the base of the index finger. The experiment uses those three readings and the known instruction. A rise on a sensor’s stored scale has no verified conversion here to degrees of joint motion.</p>
+<p>There are three forecast times, measured from a cutoff 0.25 seconds after the cue. Each target subtracts the final early median from a later eight-sample median. Only those endpoints were scored. A direction, path through space or individual prediction interval cannot be read from the lines.</p>
+<p>Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz published the recordings under CC BY 4.0. NeuroTranslation fitted the forecasts and computed the errors shown here. <a href="https://doi.org/10.5281/zenodo.834976">Dataset</a> · <a href="https://doi.org/10.1371/journal.pone.0182578">Acquisition paper</a> · <a href="NOTICE.md">Rights</a> · <a href="README.md">Methods and offline use</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/arm-transfer">Study source</a></p>
+</section></main>
+<noscript><p class="wrap">Enable JavaScript to calculate the forecasts. The package also includes the fitted model and reference implementation.</p></noscript>
+<script type="application/json" id="model-data">__MODEL__</script>
+<script type="application/json" id="report-data">__REPORTS__</script>
+<script type="application/json" id="example-data">__EXAMPLE__</script>
+<script src="method/predict.js"></script><script src="src/charts.js"></script><script src="src/app.js"></script>
+</body></html>

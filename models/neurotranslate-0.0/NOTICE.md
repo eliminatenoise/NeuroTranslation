@@ -29,3 +29,7 @@ The single-marker readouts and error summaries use optical positions from the sa
 ## Instructed right-arm movement
 
 Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz (2017) released *Upper limb movements can be decoded from the time-domain of low-frequency EEG*, Zenodo record 834976, under CC BY 4.0. This study uses the visual task classes and mechanical instrument readings from the first participant’s first three execution runs to derive time bins, fit readouts and compare errors. Retain the data attribution and identify further changes. [Original data](https://doi.org/10.5281/zenodo.834976) · [Acquisition study](https://doi.org/10.1371/journal.pone.0182578) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+## Across-person right-arm forecasts
+
+The group-arm readouts, cue medians and scores derive from Ofner, Schwarz, Pereira and Müller-Putz’s 2017 recordings (Zenodo 834976, CC BY 4.0). We fitted on execution runs 1–3 from S1–S7 and tested on the same numbered runs from S8–S12. The last three people remained reserved. This edition adds a pooled fit, a test of sensor starting levels, and a method for personal corrections made with earlier recordings. [Original data](https://doi.org/10.5281/zenodo.834976) · [Methods and reuse](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/arm-transfer)

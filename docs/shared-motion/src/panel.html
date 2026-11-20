@@ -60,9 +60,13 @@
 <div class="buttons"><button type="button" id="angle-run">Compare angle forecasts</button><button type="button" class="secondary" id="angle-fill">Fill with invented input</button></div>
 </div>
 <div id="arm-controls" hidden="">
+<label for="arm-fit">Whose recordings supplied the fit?</label><select id="arm-fit">
+<option value="single">One person · original study</option><option value="group">Training group · transfer study</option></select>
 <label for="arm-method">Forecast method</label><select id="arm-method">
 <option value="cue">Action cue alone</option><option value="shared_cue_motion">Action cue and sensors, shared encoder</option><option value="shared_motion">Sensors alone, shared encoder</option>
-<option value="cue_motion">Action cue and sensors, linear</option><option value="motion">Sensors alone, linear</option><option value="shuffled_cue_motion">Action cue and sensors, shuffled encoder</option><option value="still">No change</option></select>
+<option value="cue_motion">Action cue and sensors, linear</option><option value="motion">Sensors alone, linear</option><option value="shuffled_cue_motion">Action cue and sensors, shuffled encoder</option><option value="still">No change</option><option value="cue_median" hidden>Typical movement for this cue (median)</option>
+<option value="offset_free_linear" hidden>Linear fit without absolute starting levels</option><option value="offset_free_shared" hidden>Shared encoder without absolute starting levels</option>
+<option value="calibrated_shared" hidden>Shared encoder with a first-run correction</option></select>
 <div id="arm-cue-field"><label for="arm-cue">Right-arm instruction</label><input id="arm-cue" list="arm-cues" value="bend my right elbow" autocomplete="off">
 <button id="arm-mic" type="button" class="secondary" aria-pressed="false" hidden="">Dictate on this device</button><span class="hint" id="arm-voice-status" role="status"></span>
 <datalist id="arm-cues"><option value="bend my right elbow"></option><option value="straighten my right elbow"></option><option value="turn my right palm up"></option><option value="turn my right palm down"></option><option value="close my right hand"></option><option value="open my right hand"></option><option value="rest"></option></datalist>
@@ -70,6 +74,10 @@
 <div id="arm-custom-bins" hidden=""><label for="arm-bins">Four bins from the elbow, forearm and index sensors (JSON)</label><textarea id="arm-bins" rows="5" spellcheck="false"></textarea>
 <p class="hint">Each row starts with the three instrument levels. The last three values give the change within that interval. Times, units and the sensor order are described below.</p>
 <button id="arm-fill" type="button" class="secondary">Fill with invented sensor values</button></div>
+<div id="arm-profile" hidden><label for="arm-profile-values">Earlier-run correction (JSON)</label>
+<textarea id="arm-profile-values" rows="4" spellcheck="false"></textarea>
+<button id="arm-profile-practice" type="button" class="secondary">Load an invented correction</button>
+<p class="hint">Use the same person's earlier run. The tool uses only the correction for the selected cue. Make a profile locally with the included calibration script, or try the invented example.</p></div>
 <button id="arm-run" type="button">Forecast the readings</button></div>
 <div id="point-controls" hidden="">
 <label for="point-mode">Forecast method</label><select id="point-mode">
@@ -178,6 +186,10 @@
 </div>
 </section>
 
+<section id="group-arm-study" class="study" hidden><h2>Does an earlier run help with a new person?</h2>
+<p id="group-arm-coverage"></p><p>For each trial, the model estimated nine changes: three instruments, each at three future times. The table scales each error by the variation in that target in the fitting group. A smaller number means a closer forecast.</p>
+<div class="table"><table><thead><tr><th scope="col">Forecast</th><th scope="col">New people · all runs</th><th scope="col">Same people · later runs</th></tr></thead><tbody id="group-arm-table"></tbody></table></div>
+<p id="group-arm-conclusion"></p><p>In the last column, the personal methods had access to the first run's measured outcomes. Each person's later runs supplied the test. All displayed values use these recordings’ native instrument scales before standardization. The setup supplies no verified anatomical angles. <a href="https://eliminatenoise.github.io/NeuroTranslation/arm-transfer/">Try the separately trained Transformer</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/arm-transfer">Measurements, model and first-run correction script</a>.</p></section>
 <section id="arm-study" class="study" hidden=""><h2>What does knowing the instruction add?</h2>
 <p>A participant saw one of seven cues while their right arm rested in a support. The study recorded the elbow and forearm with the support and the base of the index finger with a glove. This reader forecasts each instrument’s change half a second, one second and one and a half seconds after its last input.</p>
 <p>Across 126 trials in three runs, the shared encoder did better with the correct cue than with the cue removed or replaced. The cue alone gave the lowest average error. These are held-run comparisons within one person. The words in the box select a known task. The original record identifies the visual cue’s category.</p>
@@ -239,7 +251,7 @@
 <h3>Knee angles · CC BY 4.0</h3>
 <p>Rateb Katmah, Aamna AlShehhi, Doua Kosaji, Nour Al-Rahmani, Muhammad Abdullah, Abdul Aziz Vaqar Hulleck and Kinda Khalaf (2026), <i>A multimodal gait dataset of brain activity, muscle activity, kinematics and ground forces in young adults</i>, v1.0.0, PhysioNet. NeuroTranslation selected the two reconstructed knee angles at 0.5 m/s, fitted three corrections to a stride forecast and compared their errors. The original data and derived model parameters and results retain CC BY 4.0 attribution. <a href="https://doi.org/10.13026/r0ea-7161">Versioned dataset</a> · <a href="https://doi.org/10.1038/s44360-026-00096-z">PhysioNet platform paper</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
 <h3>Wrist angles, forearm and scalp recordings · CC BY 4.0</h3>
-<p>Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz published the <i>EEG-EMG-WristMotion Dataset</i>, version 3. NeuroTranslation derived two anchor-relative wrist angles, four bipolar forearm amplitudes and eight mean scalp voltages per time bin. The new fits use those features to estimate two absolute angles. All built-in wrist-angle inputs are invented. Retain attribution for the data, derived weights, scales and results under CC BY 4.0. The combined checkpoint has SHA-256 <code>ab3db00e8c048953bdc12d8c978e3cabdf1f2fae7dcfe2f6f53fe8aed724ddfd</code>. <a href="https://doi.org/10.6084/m9.figshare.29666735.v3" rel="noreferrer">Version 3 dataset</a> · <a href="https://doi.org/10.1038/s41597-026-07287-z" rel="noreferrer">Study descriptor</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0</a>.</p>
+<p>Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz published the <i>EEG-EMG-WristMotion Dataset</i>, version 3. NeuroTranslation derived two anchor-relative wrist angles, four bipolar forearm amplitudes and eight mean scalp voltages per time bin. The new fits use those features to estimate two absolute angles. All built-in wrist-angle inputs are invented. Retain attribution for the data, derived weights, scales and results under CC BY 4.0. The combined checkpoint has SHA-256 <code>901922e1db489a06cc3252212232b7df65784128695f86f84a751726b9f0521c</code>. <a href="https://doi.org/10.6084/m9.figshare.29666735.v3" rel="noreferrer">Version 3 dataset</a> · <a href="https://doi.org/10.1038/s41597-026-07287-z" rel="noreferrer">Study descriptor</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0</a>.</p>
 <h3>Rat position data · CC BY 4.0</h3>
 <p>Justin Shin and Shantanu Jadhav, <i>Single Day W-Track Learning</i> (2024), DANDI 000978, version 0.240511.0307. We selected five past camera positions and a later measured endpoint from session 01, animal JS14, running epoch 5, training trip 55. We derived centimetre distances, timing and turn features. The forecast and derived endpoint distance are new calculations at the previously published cutoff. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/4d046b86bfa797e28f29cd4f6b8445a1f4b90487/benchmarks/wtrack-neural-motion/fitted/example.json" rel="noreferrer">Original trip example</a> · <a href="https://doi.org/10.48324/dandi.000978/0.240511.0307" rel="noreferrer">Dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0 licence</a>.</p>
 <h3>Wrist training data · CDLA Permissive 2.0</h3>

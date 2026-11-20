@@ -192,3 +192,7 @@ Both studies use version 8 of the Rehazenter Adult Walking Dataset by Florent Mo
 ### The right-arm cues and elbow forecast
 
 Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz released the EEG and right-arm movement recordings under CC BY 4.0. These studies selected participant S1’s first three movement-execution runs, summarized the instrument readings on their native sample grids and fitted new forecasts. The elbow study used two cues and added scalp or eye measurements. The three-sensor study used seven cues and mechanical measurements. The numerical results and fitted data-derived material retain the attribution requirement. The browser examples contain invented readings. [Original data](https://doi.org/10.5281/zenodo.834976) · [Acquisition paper](https://doi.org/10.1371/journal.pone.0182578) · [CC BY 4.0](elbow-cue/DATA-LICENCE.txt) · [Viewer credits](elbow-cue/NOTICE.md)
+
+### Cued arm movements across people
+
+Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz released the 2017 recordings under CC BY 4.0. This study extracts early and later elbow, forearm and glove readings from motor-execution runs, fits multiple forecasts and compares them on other people. The released data-derived weights and numerical summaries retain that attribution. The examples users can edit are invented. [Original recordings](https://doi.org/10.5281/zenodo.834976) · [Acquisition paper](https://doi.org/10.1371/journal.pone.0182578) · [Reader credits](arm-transfer/NOTICE.md) · [CC BY 4.0](arm-transfer/CC-BY-4.0.txt)

@@ -16,7 +16,7 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 SRC = HERE / 'src'
 STATIC = ('CC0-1.0.txt', 'CDLA-Permissive-2.0.txt', 'DATA-CREDITS.md', 'NOTICE.md', 'README.md',
-          'SPATIAL-API.md', 'arm-example.json', 'point-example.json', 'right-plate-example.json', 'knee-moment-example.json', 'knee-example.json', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
+          'SPATIAL-API.md', 'arm-example.json', 'group-arm-example.json', 'group-arm-scores.json', 'point-example.json', 'right-plate-example.json', 'knee-moment-example.json', 'knee-example.json', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
 PLATE_LICENCE = 'RIGHT-PLATE-DATA-LICENCE.txt'
 ARTIFACTS = (*STATIC, PLATE_LICENCE, 'model.json', 'population-example.json', 'shared-motion.js')
 
@@ -162,7 +162,18 @@ def build_runtime(model, out):
         arm_rng = np.random.default_rng(20495)
         arm_core = {n:arm_rng.permutation(saved[n].ravel()).reshape(saved[n].shape) for n in point_core_names}
         groups['cued_arm.scrambled'],descriptions['cued_arm.scrambled'] = pack(arm_core,arm_core)
-        assert len(knee_names) == 14 and set(saved.files) == {'configuration', *names, *knee_names, *moment_names, *plate_names, *point_names, *arm_names}
+        group_shapes = {k.replace('cued_arm.','group_arm.'):v for k,v in shapes.items()}
+        for key,source in [('offset_free_linear','cue_motion'),('offset_free_shared','shared_cue_motion')]:
+            for field in ('mean','sd','coef','bias'):
+                group_shapes['group_arm.'+key+'.'+field]=group_shapes['group_arm.'+source+'.'+field]
+        group_shapes.update({'group_arm.cue_median':(7,3,3),'group_arm.target_sd':(3,3)})
+        group_names={n for n in saved.files if n.startswith('group_arm.')}
+        if group_names != set(group_shapes) or any(saved[k].shape!=s for k,s in group_shapes.items()):
+            raise ValueError('Unexpected group arm model parameters.')
+        group_values={n.replace('group_arm.','cued_arm.'):saved[n] for n in group_names if n not in ('group_arm.target_sd','group_arm.cue_median')}
+        group_values['group_arm.cue_median']=saved['group_arm.cue_median']
+        groups['group_arm.readouts'],descriptions['group_arm.readouts']=pack(group_values,group_values)
+        assert len(knee_names) == 14 and set(saved.files) == {'configuration', *names, *knee_names, *moment_names, *plate_names, *point_names, *arm_names, *group_names}
         assert set(knee['readouts']) == {n.removeprefix('knee.') for n in knee_names}
         readouts = {n.removeprefix('knee.'):saved[n] for n in knee_names}
         groups['knee.readouts'], descriptions['knee.readouts'] = pack(readouts, readouts)
@@ -178,6 +189,7 @@ def build_runtime(model, out):
 
     ids = dict(spatial=original['checkpoints']['spatial'], movement=sha(checkpoint.read_bytes()))
     template = (SRC/'runtime/runtime.js.in').read_text()
+    template = template.replace('__GROUP_ARM_ID__', config['group_arm']['calibration_id'])
     script = template.replace('__KNEE_CALCULATION__', calculation).replace('__MOMENT_CALCULATION__', moment_js).replace('__CHECKPOINT__', json.dumps(ids)).replace('__GROUPS__', json.dumps(groups, separators=(',', ':')))
     out.mkdir(parents=True, exist_ok=True)
     for name in STATIC:
