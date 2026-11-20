@@ -107,12 +107,27 @@ def forecast(raw, domains, checkpoint=DEFAULT_CHECKPOINT):
     return np.expm1(np.maximum(log_distance, 0))
 
 
-def forecast_angles(bins, anchor_deg, slot, mode, checkpoint=DEFAULT_CHECKPOINT):
+def forecast_angles(bins, anchor_deg, slot, mode, checkpoint=DEFAULT_CHECKPOINT, *, forearm_residual=None):
     """Return absolute angles [N,2] in degrees, nominally 128 stored ticks after the anchor."""
     config, w = read_checkpoint(checkpoint)
     if config.get("angular", {}).get("format") != 1:
         raise ValueError("This checkpoint has no supported angular adapter")
     stats = {k.removeprefix("angular.stats."): v for k, v in w.items() if k.startswith("angular.stats.")}
+    if forearm_residual is not None:
+        from forearm.residual import ARMS, apply
+        if forearm_residual not in ARMS or mode != forearm_residual:
+            raise ValueError("Match forearm_residual and mode to motion or emg")
+        if config["angular"].get("forearm_residual", {}).get("format") != 1:
+            raise ValueError("This checkpoint has no supported forearm correction")
+        # Both corrections receive the same motion forecast. Electrode inputs enter only the correction.
+        x = angular_tokens(np.asarray(bins)[..., :2], anchor_deg, slot, "motion", stats)
+        prefix = "angular.motion."
+        latent = encode(config, w, linear(w, prefix + "project", x))
+        change = linear(w, prefix + "readout", latent) * stats["residual_scale"] + stats["residual_center"]
+        base = change + np.asarray(anchor_deg, dtype=np.float64)
+        key = "angular.residual." + forearm_residual + "."
+        state = {field: w[key + field] for field in ("center", "scale", "coef")}
+        return apply(bins, anchor_deg, base, slot, forearm_residual, state)
     x = angular_tokens(bins, anchor_deg, slot, mode, stats)
     prefix = "angular." + mode + "."
     latent = encode(config, w, linear(w, prefix + "project", x))
@@ -122,8 +137,11 @@ def forecast_angles(bins, anchor_deg, slot, mode, checkpoint=DEFAULT_CHECKPOINT)
 
 def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
     if record.get("domain") == "wrist_angle":
-        y = forecast_angles(record["bins"], record["anchor_deg"], record["slot"], record["mode"], checkpoint)
+        y = forecast_angles(record["bins"], record["anchor_deg"], record["slot"], record["mode"], checkpoint,
+                            forearm_residual=record.get("forearm_residual"))
         return {"axes": AXES, "angle_deg": y.tolist(), "horizon_stored_ticks": 128, "stored_hz": 512}
+    if record.get("forearm_residual") is not None:
+        raise ValueError("Forearm corrections apply only to wrist_angle inputs")
     return {"distance_cm": forecast(record["x"], record["domain"], checkpoint).tolist()}
 
 

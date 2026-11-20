@@ -4,6 +4,10 @@ A person steers a cursor by bending their right wrist up or down and tilting it 
 
 The same computer model already forecasts the straight-line displacement of a human wrist or a tracked rat. We kept the part that reads changes over time and taught it to accept the pointing recordings and return two angles in degrees. The original wrist and rat settings still return a single straight-line distance in centimetres. The three experiments have different subjects, instruments and targets. They share model weights. [Frozen study plan](protocol.json)
 
+## What if we correct the forecast?
+
+First forecast the wrist angles from motion alone. Then use the forearm recordings to correct the shared model’s estimate. Error fell from 4.503° to 4.054°. A matched correction using only wrist motion scored 4.175°. The earlier wrist-specific convolutional network with its own forearm correction still led at 3.549°. The comparison covered the same six previously studied people. Try the fitted correction with `python predict.py forearm/example.json`. [How the forearm correction was tested](forearm/README.md) · [Scores and participant sensitivity](forearm/results.json)
+
 ## What the six people showed
 
 We fitted a new input and output for each set of measurements. In turn, five people supplied the fitting examples and the sixth supplied every test example. Each person counts equally in the error below. A smaller error means a closer forecast.
