@@ -1,0 +1,54 @@
+{
+  "engine": "v26.8.2",
+  "corrupt_or_swapped_weights_rejected": true,
+  "angle_atol_deg": 0.00005,
+  "variance_atol_deg2": 0.00005,
+  "variance_rtol": 0.000008,
+  "modes": {
+    "motion": {
+      "fit_load_ms": 5.395911000000005,
+      "first_prediction_ms": 5.628320000000002,
+      "warm": {
+        "count": 72,
+        "median_ms": 0.5276870000000002,
+        "p95_ms": 3.1300919999999905,
+        "max_ms": 3.986058
+      },
+      "cases": 36,
+      "max_angle_abs_deg": 0.000012516975402832031,
+      "max_variance_abs_deg2": 0.000152587890625,
+      "max_variance_relative": 7.857349814124569e-7,
+      "channel_perturbation_checks": 18
+    },
+    "emg": {
+      "fit_load_ms": 1.0390930000000083,
+      "first_prediction_ms": 3.8837350000000015,
+      "warm": {
+        "count": 72,
+        "median_ms": 0.5983400000000074,
+        "p95_ms": 1.2629850000000147,
+        "max_ms": 2.051084000000003
+      },
+      "cases": 36,
+      "max_angle_abs_deg": 0.000010967254638671875,
+      "max_variance_abs_deg2": 0.0001068115234375,
+      "max_variance_relative": 9.546820253596526e-7,
+      "channel_perturbation_checks": 18
+    },
+    "full": {
+      "fit_load_ms": 1.1018110000000547,
+      "first_prediction_ms": 0.7407999999999788,
+      "warm": {
+        "count": 72,
+        "median_ms": 0.8633000000000379,
+        "p95_ms": 2.352463,
+        "max_ms": 4.134539000000018
+      },
+      "cases": 36,
+      "max_angle_abs_deg": 0.00000667572021484375,
+      "max_variance_abs_deg2": 0.0001068115234375,
+      "max_variance_relative": 0.0000010092555219433418,
+      "channel_perturbation_checks": 18
+    }
+  }
+}

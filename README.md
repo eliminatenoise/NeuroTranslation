@@ -21,6 +21,8 @@ What is still being built is the general model, **NeuroTranslate 0.0**: one mode
 
 What does not exist yet: a test of the general model on people nobody has looked at before. So nothing here yet translates between nerve, muscle and movement. Nor is the model inside the browser app that carries its name.
 
+**Try a wrist forecast.** Three models predict where a recorded wrist will be a quarter-second later. Run them on your own computer and compare what changes when they receive electrical readings from the forearm and scalp. [Browser model and example](interfaces/paired-wrist-browser/) · [Recorded movement in the NeuroSurge game preview](https://github.com/eliminatenoise/NeuroSurge/pull/2) A separate experiment tested whether muscle recordings can correct the early part of a wrist forecast. [Six-person correction study](benchmarks/wrist-forearm-correction/)
+
 ## Where to click
 
 - **[Start page](https://eliminatenoise.github.io/NeuroTranslation/START.html).** Runs in a browser, nothing to install. Try an invented example, or pick the kind of recording you have and open the page that reads it. Behind it are the study readers, and an app that lines up your own recordings on one clock.

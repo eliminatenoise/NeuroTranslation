@@ -1,0 +1,24 @@
+{
+  "model": "NeuroTranslate experimental wrist-pointing forecast",
+  "trained_weights_sha256": {
+    "emg": "c853ea8a7ce44a2ead210fbae362ca938c160c890ed65dea7521ccbf1271396e",
+    "full": "13430427eba9d5140942d8649a9c3360600ad13a48b92c083caa572606310830",
+    "motion": "34204e530608bbdd20cfc1f51d61c9967d2a04cf9f055b7a64f75fe1335cbadd"
+  },
+  "normalizers_sha256": "9f7c68a4520e86f1ced06b5c5172cb71ce440233fe2b12ce7ab6920031fdc292",
+  "parent_shared_learner_sha256": "cfba32415fb8deb982feb463e83da33e7a3b4d0afa088ad2c9be43b8667e171b",
+  "protocol_sha256": "5d9b6692ec3819933fd35bc5bbd2e47be12a8d789e7fc619720c56f626f6c2a9",
+  "research_freeze_sha256": "29bbaa4345f5ba8d0b87b886a98871027b65aa0df757d2a128e549113fa7eb14",
+  "research_train_seal_sha256": "39efcbb93c63dc2269970a0a0ec5b557fb5f3934b8b2e16c449bab728f9226ce",
+  "research_exploratory_seal_sha256": "650cce7f9a90939a0f6f76624c45dab070cb38463d335a3c230ad07f2b5e0fda",
+  "source": "https://doi.org/10.6084/m9.figshare.29666735.v3",
+  "licence": "CC BY 4.0 for source-dependent data and summaries. Original code CC0.",
+  "population": "6 fitting participants, 3 previously scored exploratory participants",
+  "model_state": "81 saved model tensors per fit; numeric NumPy arrays, no pickle",
+  "input": "16 past bins, cue time and last two measured angles; nominal stored lead 128/512 seconds",
+  "baseline_studies": [
+    "https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-temporal",
+    "https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-muscle",
+    "https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-forearm-transfer"
+  ]
+}

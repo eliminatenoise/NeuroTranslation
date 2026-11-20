@@ -6,6 +6,8 @@ Mostly it does not. A model fitted to the target's own recent history beat "repe
 
 This page holds the numbers: 24 studies in 19 of the 20 folders here (two folders hold more than one), the general model's first fit in the folder `daily-sports-limbs/`, which is not a test, and two more studies that are reported only in the papers. [The README](../README.md) has the short version.
 
+**Can muscle recordings correct a wrist forecast?** In 1,879 pointing trials from six people already used for training, adding the forearm signal reduced error from 3.665° to 3.549° against a correction that used wrist motion alone. All six people improved on that comparison. Only three improved over the original uncorrected model. The gains were concentrated early in the movement. [Study, results and reproduction instructions](wrist-forearm-correction/)
+
 ## How to read the numbers
 
 Every score is an error: how far the forecasts fell from what was measured. Lower is better. Studies 1 to 13 use the measure that punishes large misses (root mean squared error), studies 14 to 23 and 26, and the general model's fit in row 27, the plain average miss (mean absolute error), and studies 24 and 25 a squared error in units scaled to the data. Study 20 scores bands, not forecasts, and has a note of its own below.
