@@ -21,7 +21,7 @@ Every page in this table runs on your own computer: a recording you open is read
 
 In each row a model learned from some recordings (it was *fitted* to them) and was scored on others, unless the row says otherwise. The first row is the project's own model. The last three rows are for programmers: a building block other pages load, and two small Python programs.
 
-[The start page](https://eliminatenoise.github.io/NeuroTranslation/START.html) links to every one of the project's browser pages, among them the readers that open files from the datasets of the 25 small studies, and to [NeuroTranslator](https://eliminatenoise.github.io/NeuroTranslation/index.html), the app that lines up your own recordings on one clock.
+[The start page](https://eliminatenoise.github.io/NeuroTranslation/START.html) links to every one of the project's browser pages, among them the readers that open files from the datasets of the 25 small studies, and to the app that lines up your own recordings on one clock, [NeuroTranslator](https://eliminatenoise.github.io/NeuroTranslation/index.html).
 
 | What it asks | What you do, and what was found |
 | --- | --- |

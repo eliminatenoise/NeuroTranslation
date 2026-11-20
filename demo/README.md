@@ -6,7 +6,7 @@ The app does three things with the recordings you give it. It shows each one on 
 
 Your files stay in the browser. The app has nowhere to send them.
 
-NeuroTranslator is the software. NeuroTranslate 0.0, the general model this project is building, is not in it; the model has [a folder of its own](../models/neurotranslate-0.0/).
+Its name is close to that of NeuroTranslate 0.0, the general model this project is building, but the model is not in the app; it has [a folder of its own](../models/neurotranslate-0.0/).
 
 ## Build and test
 
