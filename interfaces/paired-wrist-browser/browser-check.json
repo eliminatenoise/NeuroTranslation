@@ -1,0 +1,77 @@
+{
+  "module_import_ms": 8.600000023841858,
+  "resources": [
+    "/check.mjs",
+    "/fixtures.json",
+    "/public/predictor.mjs",
+    "/public/tensors.mjs",
+    "/public/weights/motion.bin",
+    "/public/weights/emg.bin",
+    "/public/weights/full.bin"
+  ],
+  "result": {
+    "angle_atol_deg": 5e-05,
+    "modes": {
+      "emg": {
+        "cases": 36,
+        "channel_perturbation_checks": 18,
+        "first_prediction_ms": 3.800000011920929,
+        "fit_load_ms": 6.099999964237213,
+        "max_angle_abs_deg": 1.0967254638671875e-05,
+        "max_variance_abs_deg2": 0.0001068115234375,
+        "max_variance_relative": 9.546820253596526e-07,
+        "warm": {
+          "count": 72,
+          "max_ms": 2.300000011920929,
+          "median_ms": 0.800000011920929,
+          "p95_ms": 1.699999988079071
+        }
+      },
+      "full": {
+        "cases": 36,
+        "channel_perturbation_checks": 18,
+        "first_prediction_ms": 1.300000011920929,
+        "fit_load_ms": 6.399999976158142,
+        "max_angle_abs_deg": 6.67572021484375e-06,
+        "max_variance_abs_deg2": 0.0001068115234375,
+        "max_variance_relative": 1.0092555219433418e-06,
+        "warm": {
+          "count": 72,
+          "max_ms": 3.699999988079071,
+          "median_ms": 1,
+          "p95_ms": 2.800000011920929
+        }
+      },
+      "motion": {
+        "cases": 36,
+        "channel_perturbation_checks": 18,
+        "first_prediction_ms": 9.099999964237213,
+        "fit_load_ms": 7.900000035762787,
+        "max_angle_abs_deg": 1.2516975402832031e-05,
+        "max_variance_abs_deg2": 0.000152587890625,
+        "max_variance_relative": 7.857349814124569e-07,
+        "warm": {
+          "count": 72,
+          "max_ms": 4.900000035762787,
+          "median_ms": 0.6000000238418579,
+          "p95_ms": 2.200000047683716
+        }
+      }
+    },
+    "variance_atol_deg2": 5e-05,
+    "variance_rtol": 8e-06
+  },
+  "chromium": "155.0.8059.84",
+  "server_requests": [
+    "/",
+    "/check.mjs",
+    "/fixtures.json",
+    "/public/predictor.mjs",
+    "/public/tensors.mjs",
+    "/public/weights/motion.bin",
+    "/public/weights/emg.bin",
+    "/public/weights/full.bin"
+  ],
+  "origin": "127.0.0.1",
+  "hostname_resolution": "external hostnames disabled"
+}

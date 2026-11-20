@@ -13,6 +13,8 @@ NeuroTranslation is the larger attempt those studies belong to. Reach for a cup:
 
 What exists today is the studies, 14 [pages that run them in a browser](https://eliminatenoise.github.io/NeuroTranslation/START.html), two draft papers and a sister game, NeuroSurge. What does not exist is a general model. **NeuroTranslate 0.0** is the name of the one being built. It has not been fitted to a real recording, and it is not inside the browser app that carries its name.
 
+**Try a wrist forecast.** Three models predict where a recorded wrist will be a quarter-second later. Run them on your own computer and compare what changes when they receive electrical readings from the forearm and scalp. [Browser model and example](interfaces/paired-wrist-browser/) · [Recorded movement in the NeuroSurge game preview](https://github.com/eliminatenoise/NeuroSurge/pull/2)
+
 ## Where to click
 
 - **[Start page](https://eliminatenoise.github.io/NeuroTranslation/START.html).** Runs in a browser, nothing to install. Try an invented example, or pick the kind of recording you have and open the page that reads it. Behind it are the study readers, and an app that lines up your own recordings on one clock.
