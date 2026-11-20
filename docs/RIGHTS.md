@@ -10,9 +10,9 @@ The study numbers are those of [the studies page](../benchmarks/README.md).
 
 ### EEG-EMG-WristMotion Dataset, version 3
 
-Studies 1 to 3 and 28, row 29, the wrist trial example, the browser copy of study 28's models, and the wrist-angle path of the general model's shared fit ([`models/neurotranslate-0.0/`](../models/neurotranslate-0.0/)). Recorded and shared by Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz, under CC BY 4.0.
+Studies 1 to 3 and 28, row 29, the wrist trial example, the browser copy of study 28's models, and the wrist-angle task of the general model's shared fit ([`models/neurotranslate-0.0/`](../models/neurotranslate-0.0/)), with its browser copy ([`models/neurotranslate-browser/`](../models/neurotranslate-browser/)) and the [page](shared-motion/README.md) that runs it. Recorded and shared by Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz, under CC BY 4.0.
 
-Changed here: pointing trials were selected, the encoder angles decoded, and motion, EEG and forearm EMG features derived for the models. Study 28 publishes its three fitted models, with the scales taken from the recordings, and [`interfaces/paired-wrist-browser/`](../interfaces/paired-wrist-browser/README.md) repacks the same fitted numbers for a web browser: all of them keep this credit and the dataset's CC BY 4.0 terms.
+Changed here: pointing trials were selected, the encoder angles decoded, and motion, EEG and forearm EMG features derived for the models. Study 28 publishes its three fitted models, with the scales taken from the recordings, and [`interfaces/paired-wrist-browser/`](../interfaces/paired-wrist-browser/README.md) repacks the same fitted numbers for a web browser, as `models/neurotranslate-browser/` does for the shared fit's wrist-angle task: all of them keep this credit and the dataset's CC BY 4.0 terms.
 
 The [wrist trial example](../interfaces/wrist-language-motion/README.md) holds one three-second trial of the recordings themselves (participant 41, run 03, block 1, trial 1), under the same licence. Changed there: the interval was selected and the two forearm channels were subtracted.
 
@@ -104,7 +104,7 @@ These carry the studies published after the numbered table (listed at the end of
 
 ### HoloAssist
 
-Two newer studies, [finding a hand movement from a sentence](../benchmarks/hand-language-retrieval/) and [an instructor's words and a one-second wrist forecast](../benchmarks/preceding-instructions/), the [hand search](hand-search/README.md) page that runs both, and the general model's [shared fit](../models/README.md). By Xin Wang, Taein Kwon, Mahdi Rad, Bowen Pan, Ishani Chakraborty, Sean Andrist, Dan Bohus, Ashley Feniello, Bugra Tekin, Felipe Vieira Frujeri, Neel Joshi and Marc Pollefeys: *HoloAssist: an Egocentric Human Interaction Dataset for Interactive AI Assistants in the Real World*, ICCV 2023, pages 20270–20281. Released under the Community Data License Agreement – Permissive, Version 2.0, which permits use and modification, and sharing the data with the agreement supplied. It places no conditions on computational results, which include fitted models.
+Two newer studies, [finding a hand movement from a sentence](../benchmarks/hand-language-retrieval/) and [an instructor's words and a one-second wrist forecast](../benchmarks/preceding-instructions/), the [hand search](hand-search/README.md) page that runs both, and the general model's [shared fit](../models/README.md), with its two browser copies and its [page](shared-motion/README.md). By Xin Wang, Taein Kwon, Mahdi Rad, Bowen Pan, Ishani Chakraborty, Sean Andrist, Dan Bohus, Ashley Feniello, Bugra Tekin, Felipe Vieira Frujeri, Neel Joshi and Marc Pollefeys: *HoloAssist: an Egocentric Human Interaction Dataset for Interactive AI Assistants in the Real World*, ICCV 2023, pages 20270–20281. Released under the Community Data License Agreement – Permissive, Version 2.0, which permits use and modification, and sharing the data with the agreement supplied. It places no conditions on computational results, which include fitted models.
 
 Changed here: hand measurements, sentences written by observers and instructors' words were selected and turned into features; models were fitted and scored. The hand search keeps five stretches of one recording, with the observers' sentences and the headset's estimates of the right hand. The agreement's text sits beside each of these and stays with them when they are shared.
 
@@ -122,7 +122,7 @@ The newer study [on brain-cell firing and a rat's movement](../benchmarks/wtrack
 
 Changed here: one rat, one session and one running period were used. 34 whole trips were selected with their original positions and spike times and put in per-trip arrays, from which past-only inputs were built, forecasts fitted and their errors computed. The selected records, the fitted weights and the forecasts keep this credit and licence.
 
-The shared fit learned from both HoloAssist and this dataset. Its fitted weights are released under CC BY 4.0, with credit to the model and to both datasets; [its data credits](../models/shared-motion-browser/DATA-CREDITS.md) give the full author lists and what was changed.
+The shared fit learned from both HoloAssist and this dataset. Its fitted weights are released under CC BY 4.0, with credit to the model and to both datasets; [its data credits](../models/shared-motion-browser/DATA-CREDITS.md) give the full author lists and what was changed. Its two browser copies, [`models/shared-motion-browser/`](../models/shared-motion-browser/) and [`models/neurotranslate-browser/`](../models/neurotranslate-browser/), hold its fitted numbers for a web browser and carry the same credits, with the agreement text of HoloAssist beside them.
 
 [Versioned dataset](https://doi.org/10.48324/dandi.000978/0.240511.0307) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
