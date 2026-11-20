@@ -105,13 +105,14 @@
     <ul class="tiles recordings">
       <li>
         <article aria-labelledby="shared-movement-title">
-          <p class="source">One movement model · Ten kinds of forecast</p>
-          <h3 id="shared-movement-title">Forecast a wrist, a rat, both knees, the force under a foot, one marker on the skin, an arm after a cue, a sensor on the back or a muscle in the shin</h3>
-          <p>Forecast how far a tracked wrist or rat will move in about a quarter of a second, the two angles of a wrist from its movement, forearm and scalp readings, both knees of a walker from four seconds of knee angles, how hard the forces around each knee push it to bend or straighten (its turning moment) from four seconds of leg angles, the force under a walker’s right foot, where one marker on a walking body will be 200 milliseconds later from nine earlier positions, or how three sensors on an arm will change after an instruction such as “bend my right elbow”; and, on pages of their own, how far a sensor strapped to a person’s back will turn in the next tenth of a second and how much a muscle in the shin, filmed by ultrasound, will lengthen or shorten. See how much four forearm electrodes change the angle forecast from the same wrist movement. Start from an invented example (the rat also has one recorded trip), or enter your own measurements. All ten tasks run on one shared model, each with its own input and output; the knee-moment version trained for its task has its own copy of the shared model. On the recordings, its distance forecast missed by 1.725 cm for the wrist and 1.310 cm for the rat; for the wrist’s angles and for the knees’ angles, models made for each did better; for the force under the foot, the single marker and the arm, simpler forecasts did; and a straight-line fit did as well for the back sensor and better for the shin muscle.</p>
+          <p class="source">One movement model · Eleven kinds of forecast</p>
+          <h3 id="shared-movement-title">Forecast a wrist, a rat, both knees, the force under a foot, one marker on the skin, an arm after a cue, a sensor on the back, a muscle in the shin or the load on a pedal</h3>
+          <p>Forecast how far a tracked wrist or rat will move in about a quarter of a second, the two angles of a wrist from its movement, forearm and scalp readings, both knees of a walker from four seconds of knee angles, how hard the forces around each knee push it to bend or straighten (its turning moment) from four seconds of leg angles, the force under a walker’s right foot, where one marker on a walking body will be 200 milliseconds later from nine earlier positions, or how three sensors on an arm will change after an instruction such as “bend my right elbow”; and, on pages of their own, how far a sensor strapped to a person’s back will turn in the next tenth of a second how much a muscle in the shin, filmed by ultrasound, will lengthen or shorten, and how the load on a pedal held still will change. See how much four forearm electrodes change the angle forecast from the same wrist movement. Start from an invented example (the rat also has one recorded trip), or enter your own measurements. All eleven tasks run on one shared model, each with its own input and output; the knee-moment version trained for its task has its own copy of the shared model. On the recordings, its distance forecast missed by 1.725 cm for the wrist and 1.310 cm for the rat; for the wrist’s angles and for the knees’ angles, models made for each did better; for the force under the foot, the single marker and the arm, simpler forecasts did; a straight-line fit did as well for the back sensor and better for the shin muscle; and for the pedal’s load, it beat the simpler forecasts.</p>
           <ul class="links">
             <li><a class="primary" href="shared-motion/">Open the shared model</a></li>
             <li><a href="shared-back-rotation/index.html">Forecast a back sensor’s turn</a></li>
             <li><a href="shared-muscle-tracking/index.html">Forecast a shin muscle’s length</a></li>
+            <li><a href="shared-pedal-load/index.html">Forecast a pedal’s load</a></li>
             <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models">The model, its comparison and a download</a></li>
           </ul>
         </article>
@@ -238,6 +239,21 @@
             <li><a href="papers/arm-transfer/index.html">Read the study</a></li>
             <li><a href="papers/arm-transfer/arm-transfer.pdf">Download the PDF</a></li>
             <li><a href="https://eliminatenoise.github.io/Interoceptomics/scalp-and-arm/">See where scalp and arm readings agreed across seven people</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="pedal-load-title">
+          <p class="source">AnkleImage · Seated fixed-pedal recordings</p>
+          <h3 id="pedal-load-title">Can the shin signal predict the next pedal reading?</h3>
+          <p>People tried to lift a foot strapped to a pedal that could not move, while an electrode on the skin of the shin picked up the muscle’s electrical activity and a sensor recorded the load on the pedal. Change an invented pedal trace and the size of the muscle signal, and compare forecasts of the pedal’s reading a tenth of a second later: a small transformer trained for the task, the general model and simpler rules. The examples you edit are invented; the error tables come from recorded trials. One of the eight recordings kept for the test could not be scored, so the planned test was never completed. The muscle signal helped the transformer for one of the two new people; the general model did best without it, ahead of every simpler forecast for both.</p>
+          <ul class="links">
+            <li><a class="primary" href="pedal-load/index.html">Try the trained transformer</a></li>
+            <li><a href="pedal-load-offline.zip" download>Download the offline reader</a></li>
+            <li><a href="shared-pedal-load/index.html">Try the general model</a></li>
+            <li><a href="papers/pedal-load/index.html">Read the illustrated study</a></li>
+            <li><a href="papers/pedal-load/pedal-load.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/pedal-load/">Replay a recording beside the pedal</a></li>
           </ul>
         </article>
       </li>
@@ -567,9 +583,10 @@
 
   <section class="support" id="papers" aria-labelledby="papers-title">
     <h2 id="papers-title">Two papers, each written twice</h2>
-    <p>Two working drafts, each in a Technical and a Simple English edition. Nobody outside the project has reviewed them. Every result in them comes from stored recordings, and nothing is live. They report every study of the numbered table, the general model’s first five fits among them. What came after them is not in them: the general model’s shared fit, the studies published after the numbered table, the walk/run generator, the knee forecasts, the rhythm comparison and the knee turning moments, the three finger studies, the walking-force, walking-marker, elbow, neck-voltage, back-sensor and shin-muscle studies, the arm forecasts tested on five new people, with and without scalp readings, the general model’s right-foot, single-marker, cued-arm, back-sensor and shin-muscle tasks, and the separate supplements on them.</p>
+    <p>Two working drafts, each in a Technical and a Simple English edition. Nobody outside the project has reviewed them. Every result in them comes from stored recordings, and nothing is live. They report every study of the numbered table, the general model’s first five fits among them. What came after them is not in them: the general model’s shared fit, the studies published after the numbered table, the walk/run generator, the knee forecasts, the rhythm comparison and the knee turning moments, the three finger studies, the walking-force, walking-marker, elbow, neck-voltage, back-sensor, shin-muscle and pedal studies, the arm forecasts tested on five new people, with and without scalp readings, the general model’s right-foot, single-marker, cued-arm, back-sensor, shin-muscle and pedal tasks, and the separate supplements on them.</p>
     <p><a href="papers/language-and-observed-movement/language-and-movement.html">How precisely do words identify a recorded movement?</a> A separate four-page supplement, not one of the two papers, on the two studies that search recordings of movement with words, one of the whole body and one of the hand. <a href="papers/language-and-observed-movement/language-and-movement.pdf">Open the PDF.</a></p>
     <ul class="links">
+      <li><a href="papers/pedal-load/index.html">What can the shin tell us about the next pedal reading?</a>, a six-page illustrated supplement on the pedal study and the general model’s pedal task · <a href="papers/pedal-load/pedal-load.pdf">Download the PDF</a></li>
       <li><a href="papers/muscle-tracking/index.html">Does a muscle bundle’s angle help predict its next change in length?</a>, a five-page illustrated supplement on the shin-muscle study and the general model’s shin-muscle task · <a href="papers/muscle-tracking/muscle-tracking.pdf">Download the PDF</a></li>
       <li><a href="papers/back-rotation/index.html">How far will a sensor on your back turn in a tenth of a second?</a>, a five-page illustrated supplement on the back-sensor study and the general model’s back-sensor task · <a href="papers/back-rotation/back-rotation.pdf">Download the PDF</a></li>
       <li><a href="papers/cervical-forecast/index.html">Can a recording at the armpit improve a forecast at the neck?</a>, a five-page illustrated supplement on the neck-voltage study · <a href="papers/cervical-forecast/cervical-forecast.pdf">Download the PDF</a></li>
