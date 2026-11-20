@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0
 
+[The next-day count model](contact-forecast/) estimates detected events at 26 shared contacts after a push. [Run the fitted models](https://eliminatenoise.github.io/NeuroTranslation/contact-forecast/)
+
 [Forecast a push and a reach](https://eliminatenoise.github.io/NeuroTranslation/cortical-reach/) using recent handle movement, task cues and area 2 counts. The [cortical reach package](cortical-reach/) includes 18 fitted neural models and two sets of linear comparisons.
 
 To forecast a sensory nerve fiber’s firing during a passive stretch, start with the [muscle spindle reader](https://eliminatenoise.github.io/NeuroTranslation/muscle-spindle/). The [training package](muscle-spindle/) includes 45 Transformer checkpoints, fitted count regressions, a separate forecast of future mechanical changes and source readers.

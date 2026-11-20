@@ -1,0 +1,191 @@
+{
+  "sources": {
+    "2017-09-12": {
+      "file": "C_20170912_COactpas_TD.mat",
+      "sha256": "a391516945a67aff89039f33c0829a1c5423d859ce79baaaca962985916996af",
+      "archive_member": "reaching_experiments/C_20170912_COactpas_TD.mat",
+      "payload_inclusive": [
+        211140570,
+        389947745
+      ],
+      "bytes": 178807176,
+      "guide_sha256": "f33ad237cd39b7b8a2c962d96ff5368b055ae3564436754230ed9f64950704b4"
+    },
+    "2017-09-13": {
+      "file": "C_20170913_COactpas_TD.mat",
+      "sha256": "4b81469ed6ef2460d5f07aaf26fe0580d213fd86e0f6a08b0e280292fbef2fe7",
+      "archive_member": "reaching_experiments/C_20170913_COactpas_TD.mat",
+      "payload_inclusive": [
+        389947823,
+        757116368
+      ],
+      "bytes": 367168546,
+      "guide_sha256": "16ea213a0636e7ba27b94b0e1e52fd0c8f4b11570f5c5e3dc7728c656b8a6d39"
+    }
+  },
+  "source_doi": "10.5061/dryad.nk98sf7q7",
+  "paper_doi": "10.7554/eLife.48198",
+  "rights": "CC0-1.0",
+  "archive_url": "https://zenodo.org/records/5010943/files/s1-kinematics.zip",
+  "archive_bytes": 4016198198,
+  "contacts": [
+    4,
+    12,
+    13,
+    15,
+    16,
+    18,
+    19,
+    25,
+    27,
+    29,
+    31,
+    35,
+    36,
+    37,
+    39,
+    49,
+    51,
+    52,
+    53,
+    54,
+    58,
+    61,
+    65,
+    72,
+    88,
+    90
+  ],
+  "held_original_range_inclusive": [
+    2,
+    1388
+  ],
+  "excluded_pilot_original": 1,
+  "accepted_training_archive_sha256": "3c5673f44c6f7ed164918d7f028e72c6acd3196a56137be45856d3f168b0d2e9",
+  "training_fields": {
+    "position_history_cm": {
+      "shape": [
+        1288,
+        20,
+        2
+      ],
+      "dtype": "<f8",
+      "sha256_C_order": "42f2979762f9a4b130a71389fd8f95c21103ab80e6517f6f9fdd544a8166589a"
+    },
+    "count_history": {
+      "shape": [
+        1288,
+        20,
+        26
+      ],
+      "dtype": "<i8",
+      "sha256_C_order": "29f67161ce1bbe63b5bafcb6be7804fb9336f7156e81b713a08fc2f98c3ad134"
+    },
+    "count_tokens_40ms": {
+      "shape": [
+        1288,
+        5,
+        26
+      ],
+      "dtype": "<i8",
+      "sha256_C_order": "2c75e753d40c45f6ae78082ecc99e24b2622611b9ecd267f9681a6070cdb51bc"
+    },
+    "movement_tokens_cm": {
+      "shape": [
+        1288,
+        5,
+        4
+      ],
+      "dtype": "<f8",
+      "sha256_C_order": "209b419588b90954251666b076fa18d09c3393d3866563958870907c0629bfee"
+    },
+    "cues": {
+      "shape": [
+        1288,
+        5,
+        7
+      ],
+      "dtype": "<f8",
+      "sha256_C_order": "f35fe23f2364fd4c97cad86c214170ccf8b0805fd7067eb51328867b57b8bdd5"
+    },
+    "cue_elapsed_s": {
+      "shape": [
+        1288,
+        5,
+        3
+      ],
+      "dtype": "<f8",
+      "sha256_C_order": "1a59f2eb8bcfdb1086e397701690a36af48ea27a7046647acb8259a98f1cf38d"
+    },
+    "prior_count_100ms": {
+      "shape": [
+        1288,
+        26
+      ],
+      "dtype": "<i8",
+      "sha256_C_order": "e6b5edce1786fa97032a0c53c200af1f41fa45d089db2ff972e009c6d09b90af"
+    },
+    "target_count_100ms": {
+      "shape": [
+        1288,
+        26
+      ],
+      "dtype": "<i8",
+      "sha256_C_order": "79cc27cd4edebcd70c713b7e0955ee4169c78768cb1da9142426f85762d16575"
+    },
+    "bump_direction_deg": {
+      "shape": [
+        1288
+      ],
+      "dtype": "<i8",
+      "sha256_C_order": "3efe43baa142eb290e7e8913c8a791cb2471ff6c50cb907e9de8966f0a0d6134"
+    },
+    "trial": {
+      "shape": [
+        1288
+      ],
+      "dtype": "<i4",
+      "sha256_C_order": "9aaf1ae40c070ff6a6235c72b7e32e78f83f28c4cb9bdfcec6ecba4ffa3717ec"
+    },
+    "k": {
+      "shape": [
+        1288
+      ],
+      "dtype": "<i4",
+      "sha256_C_order": "74015cc20998a002f4ccbadacbe2e3269332421a575b138c0581f3c58ae38ec5"
+    },
+    "offset": {
+      "shape": [
+        1288
+      ],
+      "dtype": "<i4",
+      "sha256_C_order": "e097cffb1359d7de40ce6fa5b74ec29a1d5bcb035ae5c6331b1eef10fe71fbae"
+    },
+    "original_ids": {
+      "shape": [
+        324
+      ],
+      "dtype": "<i4",
+      "sha256_C_order": "a3fdaa70dc98e4064e1fcbdab1d3c7610c1baf5f4b521ee990a775216db14620"
+    },
+    "contact_id": {
+      "shape": [
+        26
+      ],
+      "dtype": "<u2",
+      "sha256_C_order": "cf83a7c07e0dcebd19cb40b9352c866517767de1baec6ba3d74516d64674de37"
+    },
+    "matlab_column": {
+      "shape": [
+        26
+      ],
+      "dtype": "<i4",
+      "sha256_C_order": "2d1cfe9627b796f859616d683da7db974116230105669e09102de1b198954e04"
+    }
+  },
+  "portable_identity_sha256": {
+    "encode.py": "9d2c7cf8dace328970a90a6fd24be5f8779f3a3c802f6e37cee663df343203fd",
+    "first-day-split.json": "0f5158c9a95406e70701ce76612b5f187628c46ec1e5964b11c772d3b3940fec",
+    "held-day-membership.json": "8d5dbb19e7de1eb465d0cabf945c61ea65ee45c3ebd6501459a2e481bf15e26e"
+  }
+}
