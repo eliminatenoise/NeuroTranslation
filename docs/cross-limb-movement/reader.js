@@ -225,6 +225,9 @@
   }
   chooseLinkedComparison();
   addEventListener('hashchange',()=>{chooseLinkedComparison();compute();});
+  document.querySelector('.jump a[href="#scalp-input"]').addEventListener('click', () => {
+    if (location.hash === '#scalp-input') { chooseLinkedComparison(); compute(); }
+  });
   buildMenus();compute();evaluation();
   let observedWidth=0;
   new ResizeObserver(entries=>{const width=Math.round(entries[0].contentRect.width);if(width!==observedWidth){observedWidth=width;draw();}}).observe($('path-chart'));
