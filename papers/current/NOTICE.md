@@ -40,7 +40,7 @@ These papers contain no recordings. For each dataset below, this work selected t
 
 - Made by: Matthew D. Luciw, Ewa Jarocka and Benoni B. Edin. The European Commission supported the original recordings through the WAY project (Wearable interfaces for hAnd function recoverY, FP7-ICT-288551).
 - Version and where: Figshare collection, version 2, <https://doi.org/10.6084/m9.figshare.c.988376.v2>. Descriptor: <https://doi.org/10.1038/sdata.2014.47>
-- Licence: Two notices are recorded, CC0 1.0 on the Figshare article records and CC BY 4.0 on the descriptor paper, and no single licence line. To be confirmed at the source.
+- Licence: The two notices disagree: each of the twelve Figshare participant records says CC0 1.0, and the descriptor paper says the data and scripts are under CC BY 4.0, <https://creativecommons.org/licenses/by/4.0/>. This work follows the stricter one: the authors are credited, the changes are listed and the WAY project is acknowledged, as the descriptor asks.
 - Used for: The two pinch-and-lift studies: scalp EEG and forearm EMG added to a forecast of grip force. The sign of the stored grip force was reversed so that squeezing is positive; timed features were derived.
 
 ### HYGRIP (N, B)
@@ -82,7 +82,7 @@ These papers contain no recordings. For each dataset below, this work selected t
 
 - Made by: Charles Guan, Tyson Aflalo, Kelly Kadlec and Jorge Gamez
 - Version and where: DANDI Archive 000252, version 0.230408.2207, <https://doi.org/10.48324/dandi.000252/0.230408.2207>
-- Licence: Licence to be confirmed at the source.
+- Licence: CC BY 4.0, as the DANDI record states, <https://creativecommons.org/licenses/by/4.0/>
 - Used for: The earlier finger classifier (one participant, one session), the later classifier (a second participant, three dates) and the simulated-hand replay of the later classifier's decisions.
 
 ## Recordings of animals
@@ -91,28 +91,28 @@ These papers contain no recordings. For each dataset below, this work selected t
 
 - Made by: Hisham Temmar, Nina Gill, Yixuan Wang and colleagues; the full list of authors is in the reference
 - Version and where: DANDI Archive 001201, version 0.251023.2336, <https://doi.org/10.48324/dandi.001201/0.251023.2336>
-- Licence: Licence to be confirmed at the source.
+- Licence: CC BY 4.0, as the DANDI record states, <https://creativecommons.org/licenses/by/4.0/>
 - Used for: The macaque study: finger position forecast from motor-cortex recordings of one animal.
 
 ### Nonhuman Primate Reaching with Multichannel Sensorimotor Cortex Electrophysiology (N)
 
 - Made by: Joseph E. O'Doherty, Mariana M. B. Cardoso, Joseph G. Makin and Philip N. Sabes; identified also through the Neural Latents Benchmark
 - Version and where: Zenodo dataset, version 2, <https://doi.org/10.5281/zenodo.3854034>. Neural Latents Benchmark release: DANDI Archive 000129
-- Licence: Licence to be confirmed at the source.
+- Licence: CC BY 4.0, as the Zenodo record states (both versions), <https://creativecommons.org/licenses/by/4.0/>
 - Used for: The earlier fingertip-velocity decoder and its different-day test: two recording days of one macaque.
 
 ### Macaque reach-to-grasp recordings with muscle signals, from the FALCON benchmark (N)
 
-- Made by: Brianna M. Karpowicz, Joel Ye and colleagues
-- Version and where: DANDI Archive 000941. Benchmark paper: <https://doi.org/10.52202/079017-2439>
-- Licence: Licence to be confirmed at the source.
+- Made by: Adam G. Rouse and Marc H. Schieber recorded the data, and the archive names them as its authors; the benchmark is by Brianna M. Karpowicz, Joel Ye and colleagues
+- Version and where: DANDI Archive 000941, version 0.241029.1405, <https://doi.org/10.48324/dandi.000941/0.241029.1405>. Benchmark paper: <https://doi.org/10.52202/079017-2439>
+- Licence: CC BY 4.0, as the DANDI record states, <https://creativecommons.org/licenses/by/4.0/>
 - Used for: The earlier decoder of muscle activity from motor-cortex recordings.
 
 ### Touch-area (area 2) recordings with whole-arm movement (N)
 
 - Made by: Raeed H. Chowdhury, Joshua I. Glaser and Lee E. Miller
-- Version and where: DANDI Archive 000127. Paper: <https://doi.org/10.7554/eLife.48198>
-- Licence: Licence to be confirmed at the source.
+- Version and where: DANDI Archive 000127, version 0.220113.0359, credited by the archive to Raeed Chowdhury and Lee Miller, <https://doi.org/10.48324/dandi.000127/0.220113.0359>. Paper: <https://doi.org/10.7554/eLife.48198>
+- Licence: CC BY 4.0, as the DANDI record states, <https://creativecommons.org/licenses/by/4.0/>
 - Used for: The earlier touch-area decoders of hand and arm variables.
 
 ## Simulators and body models
@@ -121,21 +121,21 @@ These papers contain no recordings. For each dataset below, this work selected t
 
 - Made by: Emanuel Todorov, Tom Erez and Yuval Tassa
 - Version and where: Physics engine, version 3.14.0 in the muscle-pulse run of NeuroTranslation section 7.3; paper: <https://doi.org/10.1109/IROS.2012.6386109>
-- Licence: Licence to be confirmed at the source.
+- Licence: Apache License 2.0 for the source code, as its repository states at version 3.14.0, <https://www.apache.org/licenses/LICENSE-2.0>
 - Used for: The physics of the simulated hand and arm.
 
 ### MyoSuite and MyoSim (N, B)
 
 - Made by: Vittorio Caggiano, Huawei Wang, Guillaume Durandau, Massimo Sartori and Vikash Kumar; MyoHub
 - Version and where: MyoSuite paper: <https://proceedings.mlr.press/v168/caggiano22a.html>. MyoSim, version 0.2.3: <https://github.com/MyoHub/myo_sim>
-- Licence: Licence to be confirmed at the source.
+- Licence: Apache License 2.0, as both repositories state (MyoSim at version 0.2.3), <https://www.apache.org/licenses/LICENSE-2.0>
 - Used for: The muscle-driven hand and arm models used in the simulated-hand and simulated-arm studies.
 
 ### OpenSim and the macaque arm model (N)
 
 - Made by: Ajay Seth and colleagues; limblab
 - Version and where: OpenSim paper: <https://doi.org/10.1371/journal.pcbi.1006223>. Arm model: <https://github.com/limblab/monkeyArmModel>
-- Licence: OpenSim: licence to be confirmed at the source. Arm model: MIT, as stated in its reference entry.
+- Licence: OpenSim: Apache License 2.0, as its repository states, <https://www.apache.org/licenses/LICENSE-2.0>. Arm model: MIT, as its repository states.
 - Used for: The macaque arm geometry in the earlier simulated-arm study.
 
 ## Brain template
@@ -144,7 +144,7 @@ These papers contain no recordings. For each dataset below, this work selected t
 
 - Made by: B. Jung, P. A. Taylor, J. Seidlitz, C. Sponheim, P. Perkins, L. G. Ungerleider, D. Glen and A. Messinger; released by the US National Institute of Mental Health (NIMH) through AFNI
 - Version and where: NMT v2.0, symmetric, with the Cortical Hierarchy Atlas of the Rhesus Macaque (CHARM), as released by AFNI: <https://afni.nimh.nih.gov/pub/dist/atlases/macaque/nmt/>. Paper: <https://doi.org/10.1101/2020.08.05.237818>
-- Licence: No licence is stated in the release's README; to be confirmed at the source. The release asks that the paper above be cited. Nothing from the template is redistributed here.
+- Licence: No licence is stated in the release or on AFNI's pages for it (read 21 November 2026). The release asks that the paper above be cited; AFNI's page for the template also asks for Seidlitz and colleagues (2018), <https://doi.org/10.1016/j.neuroimage.2017.04.063>, and its page for the atlas for Reveley and colleagues (2017), <https://doi.org/10.1093/cercor/bhw248>. Nothing from the template is redistributed here.
 - Used for: The template brain of NeuroTranslation appendix B: three counts of faults in its CHARM region-boundary surface. The template was made by averaging the scans of 31 adult rhesus macaques; the papers print no image of it.
 
 ## Typefaces
