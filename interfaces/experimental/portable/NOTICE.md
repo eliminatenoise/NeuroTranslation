@@ -6,6 +6,6 @@ Only these three source files are included. There are no weights, architecture p
 
 The included [README.txt](README.txt) preserves its original source-candidate history and explains the prospective input contract, loopback restrictions, missing dependencies and scientific limits. Its references to a private source-authoring step describe that earlier work; making this source preview public does not claim those runtime or model checks have since passed.
 
-The [browser data companion](https://eliminatenoise.github.io/NeuroTranslation/preview.html) is a separate working static data inspector with invented examples and no trained model. The [papers](../../../papers/README.md) describe the broader research programme. Neither substitutes for this interface's missing model package.
+The [browser data companion](https://eliminatenoise.github.io/NeuroTranslation/index.html) is a separate working static data inspector with invented examples and no trained model. The [papers](../../../papers/README.md) describe the broader research programme. Neither substitutes for this interface's missing model package.
 
 Project-owned source is covered by the repository's [CC0 dedication](../../../LICENSE). Data, model, dependency and other third-party redistribution permissions remain separate. No data or model permission is inferred from publishing this code. Work on the project has resumed. The missing-model and runtime limits above still apply.

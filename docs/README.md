@@ -4,7 +4,7 @@ Choose **Recording source** in the main app to open the reader for that study. W
 
 To read a trace on its own clock, open **Inspect original samples** below it. Use the slider or arrow keys to see each stored timestamp and value. You can inspect recordings with different clocks this way. After aligning traces, choose **Show original samples** to return to those readings.
 
-Open the [experimental data companion](https://eliminatenoise.github.io/NeuroTranslation/preview.html) to import JSON or CSV, inspect samples and their declared metadata, and align recordings that declare compatible subjects, recordings and clocks. The built-in example contains invented signals so you can try the controls without supplying a recording.
+Open the [experimental data companion](https://eliminatenoise.github.io/NeuroTranslation/index.html) to import JSON or CSV, inspect samples and their declared metadata, and align recordings that declare compatible subjects, recordings and clocks. The built-in example contains invented signals so you can try the controls without supplying a recording.
 
 In **Palm replay**, import a trial JSON and choose **Compare estimates**. For an R1 trial, compare palm estimates with and without EEG. For an R2 trial, choose the inputs and compare the original model with the one calibrated on that person's R1. The sample table uses the same positions as the chart. You can download the full numerical results. [Prepare R1](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history#replay-a-recorded-trial) · [Prepare R2](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-personal-calibration#replay-a-second-recording)
 
