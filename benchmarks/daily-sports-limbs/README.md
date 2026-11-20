@@ -1,3 +1,5 @@
+[The studies](../README.md) › Row 27 · Walking: the general model's first fit, five sensors (scored on the people it was fitted on: not a test)
+
 # What will a walker’s leg sensor read next?
 
 A person walks across a parking lot with a sensor strapped to each arm, each leg and the middle of their body (the torso). Each sensor is an accelerometer. Take the one on the left leg. Its reading changes as the leg speeds up, slows down or tilts relative to gravity. It measures along three directions, labelled X, Y and Z on the instrument. Can the past 16 readings from one sensor tell us what **that same sensor** will read 120 milliseconds later?
