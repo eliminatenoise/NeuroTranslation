@@ -12,6 +12,10 @@ The movement viewer compares right-wrist angles with different combinations of m
 
 On the same 549 forecast instants compared in the linear benchmark, the shared movement model had an average error of **2.805 cm** with movement alone and **2.778 cm** with correctly timed CA1 and prefrontal firing. Substituting firing from an earlier trip gave **2.804 cm**. Only one of three rats improved over both controls. A comparison with scrambled movement-encoder weights scored **2.763 cm** with firing. These results establish that the fitted readout uses the firing signal. They give no evidence here that pretraining improved this forecast. A lower average error can hide a worse result in an individual animal. [Study and per-animal results](neurotranslate-0.0/population/)
 
+## Predicting the five glove sensors
+
+A glove recorded how far each finger bent in the device’s own units. Recent glove readings and the word on the screen forecast readings three glove samples ahead. Keeping the last reading gave the lowest average error. Adding a recording from the surface of the brain worsened both fitted forecasts in this one-person experiment. [Study, source and fitted models](cortical-glove/) · [Try the offline-capable reader](https://eliminatenoise.github.io/NeuroTranslation/finger-signals/)
+
 ## Compare the same four seconds of knee movement
 
 An earlier stride supplies the starting answer. A correction trained specifically for the knees averaged 2.679° of error, against 3.535° for stride replay. The new knee output on the shared movement model gave 3.465°. Both evaluations used the same 12 previously studied walkers. [Task-trained model](knee-stride/) · [Download the standalone predictor](knee-stride-model.zip) · [Offline reader](knee-stride.zip) · [Reader source](knee-stride-source.zip)

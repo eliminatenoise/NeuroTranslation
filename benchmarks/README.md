@@ -383,7 +383,11 @@ These were published after the table was made. Each has its own plan and results
 
 A four-page supplement reports the two searches with words together: [*How precisely do words identify a recorded movement?*](../docs/papers/language-and-observed-movement/README.md) It is separate from the two papers, and neither paper's current draft contains these studies.
 
-## Five more studies of recorded movement
+## Six more studies of recorded movement
+
+### Can a recording from the surface of the brain beat the last glove reading?
+
+One person saw a finger named on a screen and bent it, wearing a glove that measures all five fingers, while electrodes laid on the surface of the brain recorded. Models were fitted on 52 trials and scored on the 23 that followed in the same recording, forecasting the glove about 120 ms ahead. The error is scaled by each finger's spread and averaged over the five. Keeping the last reading did best (0.1774). A straight-line model given the recent glove readings and the screen scored 0.2502, and 0.2849 with the brain recording added: worse on every finger and in every trial, by 0.03470 (from 0.02396 to 0.04630 when the trials were resampled). The right trial's brain recording did not clearly beat an earlier trial's, and a small transformer also got worse with the recording (0.1868 to 0.2517). One person, one recording, and only its first 362 seconds. [Study, fitted models and its rights](../models/cortical-glove/) · [Try invented inputs](https://eliminatenoise.github.io/NeuroTranslation/finger-signals/)
 
 ### Can four seconds of walking beat the last stride?
 

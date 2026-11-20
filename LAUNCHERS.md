@@ -88,3 +88,7 @@ In study 28's folder, one command also runs its three fitted models. With Python
 ## Four seconds of walking
 
 [Download the offline knee reader](models/knee-stride.zip), unpack all of it, and open the launcher for your system. On an invented walk it compares the forecasts trained for the knees and the general model's with copying the previous stride. To run the fitted transformer and straight-line corrections yourself, with Python and NumPy, use the launcher for your system in [the model download](models/knee-stride-model.zip); it runs them on an invented example. [The reader's source and how to build it (ZIP)](models/knee-stride-source.zip)
+
+## Five finger forecasts
+
+Open [the reader](https://eliminatenoise.github.io/NeuroTranslation/finger-signals/), or [download it](models/finger-signals.zip), unpack all of it and open the launcher for your system: it runs offline, on invented inputs. To run the fitted models on an invented input with Python and NumPy (and PyTorch for the transformer), follow [the study's example](models/cortical-glove/README.md#run-an-invented-example).

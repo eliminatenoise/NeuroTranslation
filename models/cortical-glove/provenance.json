@@ -1,0 +1,109 @@
+{
+  "version": "1.0-development",
+  "task": "Within-person 120-ms nominal glove forecast after cue and prior glove measurements",
+  "recording_people": 1,
+  "partition": "Development only; original later validation and test and every other participant excluded.",
+  "model_input_units": {
+    "ecog": "0.0298 microvolts per amplifier count",
+    "glove": "stored 5DT glove sensor units",
+    "cue": "recorded visual cue code and trial phase",
+    "forecast_horizon": "3 nominal 25-Hz ticks"
+  },
+  "origin": {
+    "name": "Kai Joshua Miller, A library of human electrocorticographic data and analyses",
+    "repository": "https://purl.stanford.edu/zk881ps0522",
+    "release_version": 11,
+    "source_license": "CC-BY-SA-4.0",
+    "archive": "fingerflex.zip",
+    "mat_member": "fingerflex/data/bp/bp_fingerflex.mat",
+    "mat_member_sha256": "b8222d13c15c97ec8590ed4b9ea180c639cac0b7c3e04bce178bb349f92be03a",
+    "library_doi": "10.1038/s41562-019-0678-3",
+    "study_doi": "10.1371/journal.pcbi.1002655"
+  },
+  "preparation": {
+    "command": "python prepare_prefix.py ORIGINAL_MEMBER.mat PREPARED.npz",
+    "transformation": "Use the first 362000 source rows [0,362000), keeping original data and flex matrices, raveled electrode-region code and cue[:,0]. Write ecog, flex, region_code and cue in that order using NumPy savez_compressed. The source member must be obtained separately.",
+    "source_npz_sha256": "57ea209841127b6cc04f2c03f8f6146f01b3e0235d169365d009cf3f9c643e9c",
+    "ecog_shape": [
+      362000,
+      46
+    ],
+    "flex_shape": [
+      362000,
+      5
+    ],
+    "region_shape": [
+      46
+    ],
+    "cue_shape": [
+      362000
+    ]
+  },
+  "analysis": {
+    "prescore_method_sha256": "43a77b57971aa05c072c40c656c317db7f501333e329f549992516c4837dbda9",
+    "train_rows_half_open": [
+      0,
+      236000
+    ],
+    "development_evaluation_rows_half_open": [
+      244000,
+      362000
+    ],
+    "fit_recipient_trials": 52,
+    "evaluation_recipient_trials": 23,
+    "evaluation_cutoffs": 1564,
+    "resampling": "5000 circular blocks of 3 consecutive recipient trials, seed 48019, paired models; within one recording.",
+    "acute_clinical_or_control_use": false,
+    "primary_gate_passed": false,
+    "results_sha256": "5d3bad9001522f56fefaee72fcbf7ca913a2c20956aacef4f1fd601e549a7264"
+  },
+  "example": {
+    "source": "NumPy PCG64 seed 142, artificial signals generated locally",
+    "sha256": "61a3c6ec4931f0790636404422fcce453e6bdd9c72a2ecec33225ccc19de168e",
+    "reference_units": "synthetic-input model outputs in glove sensor counts",
+    "ridge_abs_tolerance": 1e-08
+  },
+  "rights": {
+    "original_code": "CC0-1.0",
+    "study_derived_weights_aggregates_and_account": "CC-BY-SA-4.0",
+    "full_notice_and_ethics": "RIGHTS.md",
+    "source_data_redistributed": false
+  },
+  "weights": {
+    "aligned.npz": {
+      "sha256": "723bd2b47ed4ea447e6778170fb8e711483b1dc1854dc617bafdec01926fc9d7",
+      "bytes": 31463,
+      "licence": "CC-BY-SA-4.0"
+    },
+    "cue.npz": {
+      "sha256": "88312ecae1b7306ea2d3e1176f2d09ad093a41bbe2139aec0f48057b9b7b14fc",
+      "bytes": 10456,
+      "licence": "CC-BY-SA-4.0"
+    },
+    "earlier_fit.npz": {
+      "sha256": "93aa2ba5f8a67e3e839589ce6dd61e381794001d4d60fd8f5719925b3ad1ff00",
+      "bytes": 31459,
+      "licence": "CC-BY-SA-4.0"
+    },
+    "encoder_aligned.npz": {
+      "sha256": "8cbd2a9b545b34626a800cf0f78d5371af100fdb1bed7f1a0a9cd189b8ea328f",
+      "bytes": 39989,
+      "licence": "CC-BY-SA-4.0"
+    },
+    "encoder_motion_cue.npz": {
+      "sha256": "5dd178aa4238964c0e22a64770381e3cb4216706d4c488bc5b60b1804cee34b1",
+      "bytes": 39952,
+      "licence": "CC-BY-SA-4.0"
+    },
+    "motion.npz": {
+      "sha256": "3f3df0b7e4a658472a42b6e56d2a10285e72ab78233870adf52f012c87ef1150",
+      "bytes": 1969,
+      "licence": "CC-BY-SA-4.0"
+    },
+    "motion_cue.npz": {
+      "sha256": "cb5927652efa7dd9d397a89d1874f9eeaced62f5c8dee3caa164a7d872e6fb35",
+      "bytes": 11549,
+      "licence": "CC-BY-SA-4.0"
+    }
+  }
+}
