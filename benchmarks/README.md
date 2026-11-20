@@ -4,15 +4,15 @@ Every study in this repository asks one question of one open dataset. Most ask t
 
 Mostly it does not. A model fitted to the target's own recent history beat "repeat the last value" every time it was tried on the task it was fitted for. A brain signal from the scalp, added on top, usually made the forecast worse. A muscle signal helped at the wrist, and nowhere else beyond the noise. And when the task or the target moved, a one-line rule beat every fitted model.
 
-This page holds the numbers: 23 studies in the 18 folders here (two folders hold more than one), and two more that are reported only in the papers. [The README](../README.md) has the short version.
+This page holds the numbers: 24 studies in 19 of the 20 folders here (two folders hold more than one), the general model's first fit in the last folder, which is not a test, and two more studies that are reported only in the papers. [The README](../README.md) has the short version.
 
 ## How to read the numbers
 
-Every score is an error: how far the forecasts fell from what was measured. Lower is better. Studies 1 to 13 use the measure that punishes large misses (root mean squared error), studies 14 to 23 the plain average miss (mean absolute error), and studies 24 and 25 a squared error in units scaled to the data. Study 20 scores bands, not forecasts, and has a note of its own below.
+Every score is an error: how far the forecasts fell from what was measured. Lower is better. Studies 1 to 13 use the measure that punishes large misses (root mean squared error), studies 14 to 23 and 26, and the general model's fit in row 27, the plain average miss (mean absolute error), and studies 24 and 25 a squared error in units scaled to the data. Study 20 scores bands, not forecasts, and has a note of its own below.
 
-"Tested on" names people whose test recordings were never used to fit the model. A forecast that "repeats the last value" does nothing clever: it says the next reading will equal the latest one. Where a cell says "not given", the study's results file does not hold that count.
+"Tested on" names people whose test recordings were never used to fit the model. Rows 25 and 27 are the exceptions: both are scored on the recordings they were fitted on, and the table says so. A forecast that "repeats the last value" does nothing clever: it says the next reading will equal the latest one. Where a cell says "not given", the study's results file does not hold that count.
 
-A *straight-line fit* is the plainest kind of model, a weighted sum of its inputs. A *learned forecast* is a small network that reads a stretch of recent history.
+A *straight-line fit* is the plainest kind of model, a weighted sum of its inputs. A *learned forecast* is a small network that reads a stretch of recent history. A *transformer* is the kind of network behind today's large language models: study 26 tried a small one, and the general model is built round one too.
 
 **EEG** is electrical activity of the brain, picked up on the scalp. **EMG** is electrical activity of muscle, picked up on the skin. It is a recording of muscle, not of nerve. **MVC** is the hardest squeeze a person could manage that day; pinch force is given as a percentage of it.
 
@@ -97,6 +97,45 @@ Errors in % of the hardest squeeze the person could manage that day (their MVC, 
 
 Ranges: studies 18 and 19, the middle 95% when the four people are resampled; studies 21 and 22, the smallest and largest change among the four people; study 23, the range across the three people, which the study gives rounded outwards.
 
+### Arm acceleration while walking
+
+Errors in the units the sensor stores: acceleration along its own three axes, gravity included, not converted to physical units.
+
+| # | Study | What was forecast | Tested on | Reference forecast | Challenger | Difference | People better with the challenger |
+| ---: | --- | --- | --- | --- | --- | --- | --- |
+| 26 | [Walking: a small transformer on an arm sensor](daily-sports-arm/) | The right-arm sensor's three readings 120 ms ahead, from its last 16 readings, while walking | 2 people (fitted on 4 others) | Straight-line fit on the last 16 readings: **0.781** | A small transformer on the same 16 readings: **0.855** | 0.074 higher (higher by 0.046 for one person and 0.101 for the other) | 0 of 2 |
+
+Both forecasts in study 26 beat repeating the last value (1.182). The straight-line fit was lower for both people (0.717 against 0.764, and 0.845 against 0.946) and on both walks, so the transformer failed the pass rule set before scoring. With the first 15 of the 16 readings shuffled, the straight-line fit rose to 1.056 and the transformer to 0.957: both had been using the order of the readings.
+
+Two later comparisons used the same two people again, so they are not fresh tests. The general model, fitted to the right arm alone on the same four people, scored 0.869: behind the straight-line fit for both people, behind the transformer for one (0.837 against 0.764) and ahead of it for the other (0.902 against 0.946). And a comparison of how far ahead to forecast found the straight-line fit with one equation per horizon lowest for both people at every horizon from 120 ms on:
+
+| How far ahead | One straight-line fit for each horizon | One straight-line fit fed its own guesses | A downloaded pretrained model, used as it came | Repeat the last value |
+| --- | ---: | ---: | ---: | ---: |
+| 40 ms | **0.549** | **0.549** | 0.654 | 0.647 |
+| 120 ms | **0.781** | 0.807 | 1.096 | 1.182 |
+| 240 ms | **0.880** | 0.913 | 1.487 | 1.685 |
+| 480 ms | **0.918** | 1.001 | 1.415 | 1.412 |
+
+The pretrained model is Chronos-Bolt tiny, a forecasting model trained by others on many kinds of time series and downloaded as it is. [The comparison](daily-sports-arm/architecture/README.md) also times each forecast; its closing advice on what to build next is a proposal, not a result.
+
+### The general model's first fit, scored on the people it was fitted on: not a test
+
+Every score here is on the four people the model was fitted on. Nobody was held out, so nothing in this row is a test, and it enters none of the counts below. Errors in the units the sensors store.
+
+| # | Study | What was forecast | Tested on | Reference forecast | Challenger | Difference | People better with the challenger |
+| ---: | --- | --- | --- | --- | --- | --- | --- |
+| 27 | [Walking: the general model's first fit, five sensors](daily-sports-limbs/) | Each of five body sensors' three readings 120 ms ahead, from that sensor's own last 16 readings, while walking | nobody new: the 4 people it was fitted on | Straight-line fit made for the left-leg sensor alone: **1.929** | The general model, one copy for all five sensors: **1.837** at the left leg | not a test (scored on the people it was fitted on); the table below has all five sensors | 4 of 4 at the left leg; at most 3 of 4 at the other four sensors |
+
+| Sensor | Repeat the last value | Straight-line fit for that sensor | Study 26's transformer, fitted for the right arm alone | The general model, one copy for all five | People for whom the general model beat every other forecast |
+| --- | --- | --- | --- | --- | --- |
+| Torso | 1.284 | **0.696** |  | 0.722 | 1 of 4 |
+| Right arm | 1.165 | 0.869 | **0.668** | 0.806 | 0 of 4 |
+| Left arm | 1.057 | 0.770 |  | **0.727** | 3 of 4 |
+| Right leg | 3.150 | 1.967 |  | **1.891** | 3 of 4 |
+| Left leg | 3.168 | 1.929 |  | **1.837** | 4 of 4 |
+
+Study 26's transformer, fitted for the right-arm sensor alone on the same four people, was lower than the general model there for all four. The rule set before fitting asked the general model to beat every other forecast for every person, sensor by sensor. That happened at the left leg only. Because the people are the ones it was fitted on, the rule says nothing about a new walker, and the plan itself rules out any such claim.
+
 ### Reported only in the papers
 
 No folder under `benchmarks/`. The first has no result file in the repository at all: its numbers are copied from the technical paper. Both use units scaled to the data, so the numbers mean nothing outside their own row.
@@ -124,7 +163,7 @@ The score charges a band for its width and for every reading it misses, so lower
 
 A "comparison" is one pair of scores on the same forecasts. Several studies share the same handful of people, so the comparisons are not independent of one another; statement 7 says how far that goes. In each table the lower score of the pair is in bold.
 
-### 1. A model fitted to the target's own history beat "repeat the last value" in 8 of 8 studies
+### 1. A model fitted to the target's own history beat "repeat the last value" in 9 of 9 studies
 
 | Study | "Repeat the last value" | Fitted to the target's own history |
 | ---: | --- | --- |
@@ -136,10 +175,11 @@ A "comparison" is one pair of scores on the same forecasts. Several studies shar
 | 14 | Last reading repeated: 17.945 mV | Straight-line fit on the last 41 readings: **14.355 mV** |
 | 18 | Last reading repeated: 0.5464% | Straight-line fit on force history and the cue: **0.4634%** |
 | 19 | Last reading repeated: 0.64513% | Straight-line fit on force history and the cue: **0.51675%** |
+| 26 | Last reading repeated: 1.182 | Straight-line fit on the last 16 readings: **0.781** |
 
-That is every study that scores "repeat the last value" and scores the model on the task it was fitted for. Studies 2 and 3 reuse the people of study 1 and are not counted twice. Study 4 has no "repeat the last value" score.
+That is every study that scores "repeat the last value" and scores the model on the task it was fitted for. Studies 2 and 3 reuse the people of study 1 and are not counted twice. Study 4 has no "repeat the last value" score. In study 26 the small transformer beat it too (0.855 against 1.182) and lost to the straight-line fit shown here. The general model's fit in row 27 is not counted: it was scored on the people it was fitted on.
 
-Two of the eight wins carry a footnote. In study 9, whenever the force to be forecast was at or below 0.5 N, repeating the last force beat every fitted model. In study 7, a straight line through the palm's recent speed beat the fitted model on the plain average miss and lost to it on the measure that punishes large misses.
+Two of the nine wins carry a footnote. In study 9, whenever the force to be forecast was at or below 0.5 N, repeating the last force beat every fitted model. In study 7, a straight line through the palm's recent speed beat the fitted model on the plain average miss and lost to it on the measure that punishes large misses.
 
 The fitted models of studies 5 and 6 never saw the target's history. They lost to a fixed average and to a clock.
 
@@ -250,29 +290,30 @@ One comparison is counted per tested group, at each study's main setting. The on
 
 Carrying a model to new people with no adjustment at all worked on the same task in studies 1, 4, 7, 9, 11, 14, 18 and 19: every one beat the simple forecast it was set against, on people it had never seen. That forecast was "repeat the last value", except in study 4, where it was the average angle of the people the model was fitted on: 37.560°, against 36.187° for the fit that knows only the activity and the time. It failed outright in the two one-to-one trials, studies 5 and 6.
 
-### 6. Eleven studies set a pass rule in advance. Seven failed it.
+### 6. Twelve studies set a pass rule in advance. Eight failed it.
 
-- **Failed:** studies 6, 9, 10, 11, 12, 13 and 24.
+- **Failed:** studies 6, 9, 10, 11, 12, 13, 26 and 24.
 - **Split answer:** studies 16 and 19.
 - **Passed by a margin too small to tell from zero:** study 18. Both averages were lower, by amounts whose ranges cross zero.
 - **Passed:** study 20, on whether a band set per part of the pinch is narrower, holds at least as many readings and scores lower than one width throughout. It was, for all three forecasts. That says nothing about which forecast is better.
 - **Set no rule:** the other 14.
+- **Not counted:** row 27, the general model's first fit. Its rule was set before fitting, beat every other forecast for every person, sensor by sensor, and it held at one sensor of 5, the left leg. But it was applied to the people the model was fitted on, and every rule counted here was applied to people held out of the fit.
 
-Every failed rule concerned EEG, EMG, a cue term or a larger network. None concerned the plain history fit. No rule about adding a signal to a forecast was passed outright.
+Every failed rule concerned EEG, EMG, a cue term or a network set against a plainer fit: the two networks of study 24 and the transformer of study 26. None concerned the plain history fit. No rule about adding a signal to a forecast was passed outright.
 
-### 7. No general model has been fitted, and the evidence is narrower than 25 rows suggest
+### 7. The general model's first fits used walking sensors only, and the evidence is narrower than 27 rows suggest
 
-What exists is 23 separate small studies, each with its own straight-line fit or small network for one signal in one task; one macaque study in which two larger networks failed their pass rule, across 18 runs and 720 saved training epochs (study 24); and one run of a single network shared by a muscle signal and a glove signal, on one recording, which lost to "repeat the last value" on its own training data and predicts nothing from one signal to the other (study 25).
+What exists is 24 separate small studies, each with its own straight-line fit or small network for one signal in one task; one macaque study in which two larger networks failed their pass rule, across 18 runs and 720 saved training epochs (study 24); and one run of a single network shared by a muscle signal and a glove signal, on one recording, which lost to "repeat the last value" on its own training data and predicts nothing from one signal to the other (study 25).
 
-That shared network was an earlier, separate attempt. NeuroTranslate 0.0 is the name of the general model being built now. Its code has passed 29 checks on invented data. It has not been fitted to a real recording.
+That shared network was an earlier, separate attempt. The general model being built now, NeuroTranslate 0.0, had its first fits to real recordings on 20 November, both on the walking data of study 26. One copy forecast five sensors on the body and was scored only on the four people it was fitted on (row 27): it beat repeating the last value at all five and met its own rule at one, the left leg. A copy fitted to the right arm alone was scored on study 26's two test people, who had already been scored once, and lost to the straight-line fit for both (0.869 against 0.781). Neither fit was given a brain or muscle signal, and neither was tested on a new person, so nothing here yet translates between nerve, muscle and movement.
 
-The project's working presumption is that more data, and more varied data, gives a more general model. No study here tests it: none varies how much data a model sees, or how varied it is.
+The project's working presumption is that more data, and more varied data, gives a more general model. No study here tests it: none varies how much data a model sees, or how varied it is. The five-sensor fit does not test it either. It has no comparison with a fit on less data, and at the one sensor where a separate network exists, the right arm, the separate network was better.
 
-The test groups are small, between 1 and 4 people. And the 23 studies draw on 8 datasets and fewer independent groups than that. Studies 1 to 3 score the same three people. So do 9 and 10, and 11 to 13. Studies 14 to 17 score the same four, and 21 and 22 the same four, who had already appeared in earlier pinch studies on other days. Studies 14 to 17 also score the 12 people the finger models were fitted on; those results are on each study's page, and are not the main comparison in the table above.
+The test groups are small, between 1 and 4 people. And the 24 studies draw on 9 datasets and fewer independent groups than that. Studies 1 to 3 score the same three people. So do 9 and 10, and 11 to 13. Studies 14 to 17 score the same four, and 21 and 22 the same four, who had already appeared in earlier pinch studies on other days. Studies 14 to 17 also score the 12 people the finger models were fitted on; those results are on each study's page, and are not the main comparison in the table above.
 
 Every result comes from stored recordings scored after the fact. None is a live forecast. Every "120 ms" or "250 ms" is a distance along the stored clock.
 
-## Twenty-two people and four recordings are still unopened
+## Twenty-four people and four recordings are still unopened
 
 When each dataset was split, some people were set aside and their recordings never opened. Until one of these groups is opened, every number on this page describes data the project has already looked at.
 
@@ -285,13 +326,16 @@ When each dataset was split, some people were set aside and their recordings nev
 | Pinch and lift (WAY-EEG-GAL) | 9 and 10 | 3 people |
 | Paced grip (HYGRIP) | 11 to 13 | 3 people |
 | One finger (Hyser) | 14 to 17 | 4 people |
+| Walking (Daily and Sports Activities) | 26 | 2 people |
 | Macaque fingers (LINK) | 24 | 4 recordings |
 
 In the palm data the reserve was named for the first, two-person trial (study 6) and only its description was read. Studies 7 and 8 name no reserve.
 
+In the walking data, study 26 set aside two people. The general model's fit in row 27 opened none of the four people outside its fitting group; two of them are study 26's test people, already scored, and the other two are the pair set aside.
+
 The pinch studies (18 to 23) set nobody aside. Each fixed its test group in advance and scored it once, and the first plan says there is no further group. Later pinch studies reuse people from earlier ones on new days, and say so.
 
-Not known either, because nothing in the repository measures it: any live result; any result in newtons for studies 11 to 17, whose datasets give no conversion from volts; any effect of more or more varied training data; any model that predicts one kind of signal from another across datasets.
+Not known either, because nothing in the repository measures it: any live result; any result in newtons for studies 11 to 17, whose datasets give no conversion from volts; any effect of more or more varied training data; any model that predicts one kind of signal from another across datasets; any score of the general model on a person who had not been looked at before, and any fit of it to a brain or muscle signal.
 
 ## Whose recordings these are
 
