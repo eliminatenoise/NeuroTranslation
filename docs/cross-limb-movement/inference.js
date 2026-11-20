@@ -36,22 +36,44 @@ function validInput(e) {
   if (e.age_s.some(v=>v< -1e-8||v>(e.domain ? 1/500 : 1/256)+1e-8) || Math.abs(e.age_s[19])>1e-7 ||
       e.patch_xyz_mm[19].some(v=>Math.abs(v)>1e-4)) throw Error('Marker time or cutoff-relative coordinate out of range');
 }
+function scalpTokens(weights, event) {
+  const {scalp_values: values, scalp_mask: mask, domain} = event;
+  if (!shape(values,[20,3,2]) || !Array.isArray(mask) || mask.length !== 3 ||
+      mask.some(v => typeof v !== 'boolean') || !mask.some(Boolean))
+    throw Error('Supply twenty scalp mean/RMS bins and three site availability flags');
+  const branch = weights.kind === 'reference' ? 'central' : weights.kind;
+  if (!['central','frontal','eye','neck'].includes(branch)) throw Error('Unknown scalp input branch');
+  const sites = weights.site_names[branch][domain];
+  if (mask.some((present,j) => present && !sites[j])) throw Error('Site unavailable in this study');
+  const scaling = weights.scalp_scales[branch][domain];
+  if (mask.some((present,j)=>present && !(scaling.count[j]>0))) throw Error('Site absent in fitting fold');
+  return values.map(bin => bin.flatMap(([m,r],j) => {
+    if (r < 0 || Math.abs(m) > r + 1e-5*Math.max(1,r) || (!mask[j] && (m !== 0 || r !== 0)))
+      throw Error('Invalid scalp mean, RMS or missing-site placeholder');
+    if (!mask[j] || weights.kind === 'reference') return [0,0,Number(mask[j])];
+    return [Math.fround((m-scaling.mean[j][0])/scaling.scale[j][0]), Math.fround((r-scaling.mean[j][1])/scaling.scale[j][1]), 1];
+  }));
+}
+
 function predict(weights,e) {
   validInput(e);
   const dual = weights.format === 'cross-limb-path-map-v1';
-  if ((!dual && weights.format !== 'cross-limb-temporal-v1') ||
+  const scalp = weights.format === 'scalp-muscle-motion-v1';
+  if ((!dual && !scalp && weights.format !== 'cross-limb-temporal-v1') ||
       (dual && !['separate', 'matched'].includes(weights.kind)) ||
       JSON.stringify(weights.muscles) !== JSON.stringify(muscles))
     throw Error('Unknown checkpoint format or muscle vocabulary');
   const s=weights.state, d=e.domain, mask=e.muscle_mask;
   const rmsScale=weights.scales.amp[d], xyzScale=weights.scales.xyz[d];
+  const electrical = scalp ? scalpTokens(weights, e) : null;
   const active=muscles.map((_,j)=>j).filter(j=>mask[j]);
   const pose=e.patch_xyz_mm.map(x=>x.map(v=>v/xyzScale));
   const x=e.patch_rms.map((r,i)=>{
     const amps=active.map(j=>Math.log1p(r[j]/rmsScale[j]));
     const pool=vector(8,k=>mean(active.map((j,a)=>Math.max(0,s['names.weight'][j][k]+amps[a]*s.slope[k]))));
     const patch=linear(s,'patch',[...pool,...pose[i],e.age_s[i]*500,d===0?e.session:0,e.direction,d]);
-    return add(add(patch,s['time.weight'][i]),s['segment.weight'][d]);
+    const token = electrical ? add(patch,s['scalp_patch.weight'].map(w => dot(w,electrical[i]))) : patch;
+    return add(add(token,s['time.weight'][i]),s['segment.weight'][d]);
   });
   // No later layer mixes tokens. Only the final query influences the two forecasts.
   const qkv=x.map(row=>linear(s,'qkv',row));

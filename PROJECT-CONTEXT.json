@@ -1459,5 +1459,33 @@
       ]
     },
     "scope": "Three development seeds and person-held predictions from the same two studies. Separate and time-blended output maps have 3,975 parameters each. Three wrist and six balance reserve participants were outside the comparison."
+  },
+  "scalp_muscle_movement": {
+    "question": "Does scalp electrical activity improve a 125 ms forecast of muscle signal size and marker movement beyond task, recent motion, muscle history and the available electrode sites?",
+    "model": "models/cross-limb-movement/scalp/README.md",
+    "source": "models/cross-limb-movement/scalp/replay.py",
+    "group_results": "models/cross-limb-movement/scalp/scoring/results.json",
+    "viewer": "docs/cross-limb-movement/index.html#scalp-input",
+    "supplement": "docs/papers/cross-limb-movement/scalp-study/index.html",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/cross-limb-movement/",
+    "development": {
+      "balance_people": 18,
+      "balance_events": 5179,
+      "wrist_people": 6,
+      "wrist_events": 1764,
+      "training_seeds": [
+        1641,
+        2718,
+        3917
+      ],
+      "person_folds": 3,
+      "primary_outcomes_passed": 1,
+      "primary_outcomes_total": 4,
+      "wrong_trial_events": {
+        "balance": 4963,
+        "wrist": 1602
+      }
+    },
+    "interpretation": "The central scalp branch lowered balance muscle error by 0.01435 microvolts against its reference. That comparison against a different trial from the same person gave no clear difference. Average path error increased by 0.03172 mm at the pelvis and 0.21449 mm at the wrist. These offline development recordings do not establish a neural source or an operating feedback system."
   }
 }

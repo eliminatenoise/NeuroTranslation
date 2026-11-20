@@ -45,9 +45,19 @@
     features = prepare(h);
     const m = $('method').value;
     const maps = m === 'maps';
+    const scalp = m === 'scalp';
     $('map-note').hidden = !maps;
-    $('first-legend').textContent = maps ? 'Body-part maps' : 'Shared';
-    $('second-legend').textContent = maps ? 'Early/late maps' : 'Comparison';
+    $('scalp-controls').hidden = !scalp;
+    $('first-legend').textContent = scalp ? 'With scalp' : maps ? 'Body-part maps' : 'Shared';
+    $('second-legend').textContent = scalp ? 'Reference' : maps ? 'Early/late maps' : 'Comparison';
+    if (scalp) {
+      Object.assign(features, editScalpHistory(exampleScalpHistory(domain), Number($('scalp-gain').value),
+        $('scalp-order').value === 'reverse', $('scalp-sites').value));
+      joint = MovementPredict(ScalpModels.central, features);
+      comparison = MovementPredict(ScalpModels.reference, features);
+      draw();
+      return;
+    }
     joint = MovementPredict(maps ? MovementMapWeights.separate : MovementWeights.joint, features);
     if (maps) comparison = MovementPredict(MovementMapWeights.matched, features);
     else if (m === 'matched' || m === 'equal') comparison = MovementPredict(MovementWeights[spec().key][m], features);
@@ -120,6 +130,20 @@
     const s=spec(),h=current(),a=+$('axis').value,c=+$('channel').value,k=s.offset+c;
     const step=+$('step').value,t=1000*step/256, axis=s.axes[a], active=h.enabled[c];
     const first = $('first-legend').textContent, second = $('second-legend').textContent;
+    if ($('method').value === 'scalp') {
+      const site = Number($('scalp-site').value), active = features.scalp_mask[site];
+      const name = ['C3','Cz','C4'][site], native = ['D19','A1','B22'][site];
+      const unit = domain ? 'original scalp amplitude units' : 'µV';
+      $('scalp-description').textContent = domain
+        ? name+' is a site on the grasp-study cap. Its stored voltage scale has no verified conversion to microvolts.'
+        : name+' is the nominal position of balance electrode '+native+'. Its recorded voltage is in microvolts.';
+      const series = k => active ? features.scalp_values.map((bin,i)=>[(i-19)*31.25,bin[site][k]]) : [];
+      plot('scalp-plot',name+' scalp history in '+unit,[
+        {points:series(0),color:'#304d5a'},{points:series(1),color:'#a64f21',dash:'5 3'}],null,!active);
+      $('scalp-caption').textContent = active
+        ? 'Each point summarizes 31.25 ms. Solid shows the signed mean and dashed shows signal size (RMS). The last bin reads '+fmt(features.scalp_values[19][site][0],3)+' and '+fmt(features.scalp_values[19][site][1],3)+' '+unit+', respectively.'
+        : 'This site is excluded from both forecasts. The selected site mask still enters both models.';
+    }
     $('time').value='+'+fmt(t,4)+' ms';
     $('path-title').textContent=s.marker+' displacement · '+axis+' (mm)';
     $('voltage-title').textContent=s.names[c]+' · signed voltage';
@@ -172,6 +196,8 @@
   for(const id of ['method','posture','direction'])$(id).addEventListener('change',()=>{
     if(!domain){current().session=+$('posture').value;current().direction=+$('direction').value;}compute();});
   for(const id of ['axis','channel','step'])$(id).addEventListener('input',draw);
+  for(const id of ['scalp-gain','scalp-order','scalp-sites']) $(id).addEventListener('change',compute);
+  $('scalp-site').addEventListener('change',draw);
   $('edit-channel').addEventListener('change',()=>{fillEditor();$('editing').textContent='';});
   $('samples').addEventListener('input',()=>{pending=true;$('editing').textContent='Edits pending. The charts show the last applied history.';});
   $('mask').addEventListener('change',()=>{
@@ -193,7 +219,12 @@
   });
   $('reset').addEventListener('click',()=>{stories[domain]=example(domain);buildMenus();compute();$('editing').textContent='This task’s original example has been restored.';});
   if(location.protocol==='file:'){$('download').hidden=true;$('offline').hidden=false;}
-  if (location.hash === '#path-maps') $('method').value = 'maps';
+  function chooseLinkedComparison() {
+    if (location.hash === '#scalp-input') $('method').value = 'scalp';
+    if (location.hash === '#path-maps') $('method').value = 'maps';
+  }
+  chooseLinkedComparison();
+  addEventListener('hashchange',()=>{chooseLinkedComparison();compute();});
   buildMenus();compute();evaluation();
   let observedWidth=0;
   new ResizeObserver(entries=>{const width=Math.round(entries[0].contentRect.width);if(width!==observedWidth){observedWidth=width;draw();}}).observe($('path-chart'));
