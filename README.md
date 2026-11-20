@@ -67,7 +67,7 @@ A fifth thing is needed, and it is not data. It is the pairing.
 
 Suppose the motion recording belongs to a different reach. It can still teach a model what reaches look like. It cannot say where *this* hand was when *this* nerve fired. A translation can be checked only when both recordings come from the same person, the same movement and the same clock, and even two files that name the same clock can be offset from each other. Every study below uses signals that were recorded together.
 
-The project's working presumption is that more data, and more varied data, makes a model that carries further. It is untested: no study here varies how much data a model sees, or how varied it is.
+The project's working presumption is that more data, and more varied data, makes a model that carries further. One fit has compared learning two datasets with learning one: the general model's shared fit learned a headset's tracking of people's wrists and a camera's tracking of a rat together. Against the same model fitted on one dataset alone, sharing lowered its error by 0.057 cm for the wrist and 0.032 cm for the rat, but the spread from resampling reached past zero in both (from 0.142 cm better to 0.003 cm worse for the wrist, from 0.081 better to 0.011 worse for the rat), and neither met the rule set in advance for a real gain ([its results](models/shared-motion/shared-motion-model/README.md)). It was scored on recordings kept out of its fitting, but the rat is the one it was fitted on, and the six wrist recording groups, already used in an earlier study, are not known to be people it had never seen. So the presumption is still untested on people the model has not seen.
 
 ## History did the work: the numbered table
 

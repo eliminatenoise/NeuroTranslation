@@ -337,7 +337,7 @@ A shared fit, published after the numbered table and in no count here, learned a
 
 No fit of the general model has been tested on a new person, so nothing here yet translates between nerve, muscle and movement.
 
-The project's working presumption is that more data, and more varied data, gives a more general model. No study here tests it: none varies how much data a model sees, or how varied it is. The general model's fits do not test it either. The five-sensor fit has no comparison with a fit on less data, and at the one sensor where a separate network exists, the right arm, the separate network was better. At the wrist, more kinds of signal did not help it.
+The project's working presumption is that more data, and more varied data, gives a more general model. No study of the numbered table tests it: none varies how much data a model sees, or how varied it is. The general model's fits in the table do not test it either. The five-sensor fit has no comparison with a fit on less data, and at the one sensor where a separate network exists, the right arm, the separate network was better. At the wrist, more kinds of signal did not help it.
 
 The test groups are small, between 1 and 4 people. And the 25 studies draw on 9 datasets and fewer independent groups than that. Studies 1 to 3 and 28 score the same three people (row 29 scores the six people those studies were fitted on). So do 9 and 10, and 11 to 13. Studies 14 to 17 score the same four, and 21 and 22 the same four, who had already appeared in earlier pinch studies on other days. Studies 14 to 17 also score the 12 people the finger models were fitted on; those results are on each study's page, and are not the main comparison in the table above.
 
@@ -367,7 +367,7 @@ In the walking data, study 26 set aside two people. The general model's fit in r
 
 The pinch studies (18 to 23) set nobody aside. Each fixed its test group in advance and scored it once, and the first plan says there is no further group. Later pinch studies reuse people from earlier ones on new days, and say so.
 
-Not known either, because nothing in the repository measures it: any live result; any result in newtons for studies 11 to 17, whose datasets give no conversion from volts; any effect of more or more varied training data; any model that predicts one kind of signal from another across datasets; any score of the general model on a person who had not been looked at before.
+Not known either, because nothing in the repository measures it: any live result; any result in newtons for studies 11 to 17, whose datasets give no conversion from volts; any effect of more or more varied training data on people a model has not seen (the shared fit's comparison of two datasets with one, above, was not scored on such people); any model that predicts one kind of signal from another across datasets; any score of the general model on a person who had not been looked at before.
 
 ## Four newer studies: neither a rat's brain cells nor an instructor's words helped, and a sentence rarely found its movement
 
