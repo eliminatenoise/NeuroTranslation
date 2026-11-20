@@ -1,6 +1,6 @@
 # NeuroTranslation
 
-**The hand's own history (what it has just done) still beats the brain signal (EEG, read at the scalp).**
+**What a hand has just done still beats a brain signal read at the scalp.**
 
 That is where [23 small studies](benchmarks/README.md) stand. Each takes open recordings of people, measured and shared by others, and forecasts what a hand or an arm does a fraction of a second later: the angle of a wrist, the position of a palm, the force of a grip. A hand tends to keep moving the way it was moving, so its own recent past is a hard forecast to beat. A brain or muscle signal earns its place only by beating it.
 
