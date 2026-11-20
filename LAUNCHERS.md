@@ -88,3 +88,7 @@ In study 28's folder, one command also runs its three fitted models. With Python
 ## Four seconds of walking
 
 [Download the offline knee reader](models/knee-stride.zip), extract all files, then open the launcher for your operating system. The reader compares the task-trained and shared model forecasts with the earlier stride. To run the fitted specialist with Python and NumPy, use the platform launcher in the [model download](models/knee-stride-model.zip). [Browser source and build instructions](models/knee-stride-source.zip)
+
+## Five finger forecasts
+
+Open the [interactive reader](https://eliminatenoise.github.io/NeuroTranslation/finger-signals/), or extract the [offline package](models/finger-signals.zip) and use the launcher for your operating system. To run any of the fitted models on an invented input, follow the [Python example](models/cortical-glove/README.md).

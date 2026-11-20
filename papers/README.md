@@ -66,3 +66,5 @@ The four files were last built on 19 November 2026. Where a paper and a results 
 - **Licence.** The project's own text is dedicated to the public domain under CC0 1.0. The fonts inside the PDFs and the recordings behind the studies have their own terms: [fonts and paper notices](current/NOTICE.md), [dataset credits](../docs/RIGHTS.md).
 
 Each new edition replaces these files in place. Earlier editions are in the repository's history.
+
+A separate development study pairs a surface cortical recording and five measured fingers in one person. It tests whether a short history of electrical activity improves a forecast once the current movement and the screen cue are known. Both the linear and Transformer forecasts worsened with the added signal. The methods and results are available with the original study’s ethics statement. [Read the study](../models/cortical-glove/README.md)

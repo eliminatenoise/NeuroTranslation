@@ -153,3 +153,7 @@ The source in [`interfaces/experimental/portable/`](../interfaces/experimental/p
 ## Fonts in the papers
 
 The four PDFs embed Noto Sans, Noto Sans Mono, Fira Math and DejaVu Sans. Their licences travel with the papers: [fonts and paper notices](../papers/current/NOTICE.md).
+
+## Stanford FingerFlex
+
+Kai Joshua Miller and colleagues recorded surface electrical activity and finger-glove readings. Stanford distributes the FingerFlex archive under CC BY-SA 4.0. Changes in this release include selecting an early recording segment, fitting forecasts and publishing derived weights and aggregate comparisons. The raw participant signals stay with Stanford. The source-derived weights, results and combined example retain the source share-alike terms. Original project code carries the CC0 dedication. [Original dataset](https://purl.stanford.edu/zk881ps0522) · [Complete terms, credit and required ethics statement](../models/cortical-glove/RIGHTS.md)
