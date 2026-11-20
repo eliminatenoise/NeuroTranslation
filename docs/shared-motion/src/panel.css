@@ -95,9 +95,15 @@ main {width:calc(100% - 24px)}
 #angle-input {width:100%; margin:.5rem 0}
 #angular-results h2 {color:var(--blue)}
 #angle-timing {margin:.35rem 0 .6rem}
-#angle-values {table-layout:fixed}
-#angle-values th,#angle-values td {overflow-wrap:anywhere}
-#angle-values th:first-child {width:45%}
+.angle-table {table-layout:fixed}
+.angle-table th,.angle-table td {overflow-wrap:anywhere}
+.angle-table th:first-child {width:45%}
+.angle-table caption {color:var(--ink)}
 #angle-bench th:first-child {width:77%}
-#angle-values tbody tr:last-child {background:var(--wash)}
+#correction-values tbody {background:var(--wash)}
 .study + .study {margin-top:.8rem}
+@media(max-width:420px) {
+  .angle-table th:first-child {width:35%}
+  .angle-table th,.angle-table td {padding:.38rem .25rem}
+  .angle-table thead th {overflow-wrap:normal}
+}

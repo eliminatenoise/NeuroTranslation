@@ -57,8 +57,26 @@ Select a mode explicitly. Every required value must be finite and every bin must
 
 For a reproducible three-mode check, take `input` from the invented example. Set `mode` and keep the first 2, 6 or 14 entries of each bin as appropriate. The file gives the expected pair of future angles under each fitted mode. [Invented example and reference predictions](angular-example.json)
 
+## Adjust the forecast with the forearm history
+
+First estimate where the wrist will point from its angles alone. Then ask how far to adjust that estimate. Choose `mode: "motion", forearmResidual: "motion"` to base the adjustment on the sixteen angle bins, the two current angles, the two predicted changes and the cue slot. Choose `mode: "emg", forearmResidual: "emg"` to give the correction the four measured forearm amplitudes in each bin as well. Both choices start from the same motion-only estimate. `full` has no fitted correction.
+
+The input clock, channel order and outputs are the same as above. Omit the optional field or set it to `null` for the original direct forecast. The Python field name `forearm_residual` also works here. Supply only one spelling. The browser takes one window with explicit cue and bin-end ticks. The Python reader takes batched arrays and relies on the caller to check their timing.
+
+From this directory, run the included example with Node.js. The calculation stays on this computer.
+
+```sh
+node predict.mjs forearm-example.json
+```
+
+The invented half-second ends at tick 1512, with the wrist at 10° extension and −2° radial deviation. The program estimates **18.970° extension and −2.058° radial deviation** at tick 1640. Tick 1640 is 250 ms after the cutoff on the stored grid. The delay from physical movement to its recording remains unknown. These numbers are a software check. [Input](forearm-example.json) · [Weights](model.json)
+
 ## What the recordings support
 
 In exploratory whole-person cross-validation among six previously used training participants, two-axis angular RMSE was 4.503° for motion, 4.291° with forearm EMG and 4.491° with EMG and scalp EEG. The EEG addition increased error relative to EMG alone. An earlier EMG-corrected model reached 3.549°. Matched frozen-random encoders also gave lower error than the shared pretrained encoder in all three modes. The deployed weights use the registered all-six refit. The training comparison used complete trials selected retrospectively, including future target availability. Generalization to new participants and performance in live use remain open.
 
+In a separate comparison, six development participants each took a turn as the test person. Each correction learned from the other five people's errors on forecasts made without them. Across 1,879 trials and 11,274 overlapping windows, the motion correction reached 4.175° and the correction with forearm signals reached 4.054° (root mean squared error over both axes, each person weighted equally). Four of six people improved with the forearm input. The wrist-specific convolutional model with its own forearm correction still did better at 3.549°. The packaged corrections use all six people. Their accuracy on new people remains unmeasured.
+
 The scalp electrodes measure scalp voltage. The forearm electrodes measure muscle electrical activity. The encoders measure angles. Spinal signalling, peripheral nerve traffic, muscle force and the timing of a causal brain-to-muscle pathway remain unmeasured. The separate spatial study did not establish positive transfer between the human wrist and animal tracking tasks. [WristMotion dataset](https://doi.org/10.6084/m9.figshare.29666735.v3) · [Original spatial study](https://github.com/eliminatenoise/NeuroTranslation/tree/0ff78bbbd6723e49a72eeb29d93e8765079a2d40/models/shared-motion)
+
+The model places no anatomical limit on a forecast. In a deliberately extreme invented example, the forearm correction returned an extension angle of about −1,692°. A human wrist cannot reach that position. The number shows how the calculation can fail far from ordinary movements. Its frequency in real recordings is unknown. [Study, comparison rules and measured errors](https://github.com/eliminatenoise/NeuroTranslation/tree/c8dfb5e641a4832a965f83469b3c38a601bfdb99/models/neurotranslate-0.0/forearm)

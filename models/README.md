@@ -2,7 +2,7 @@
 
 **The current model has three measurement paths.** One checkpoint forecasts a short movement distance for a human wrist or a rat. An additional path estimates two angles of a human right wrist from its recent motion, with optional electrical measurements from the forearm and scalp. It reuses the trained temporal layers and adds a separately fitted angle readout. The two original distance predictions are preserved. [Download the three-domain package](neurotranslate-0.0.zip) · [Source, examples and results](neurotranslate-0.0/)
 
-**[Try all three paths in the browser](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/).** Compare two wrist angles as movement, forearm and scalp inputs change, or switch to a distance forecast for a wrist or rat. Each forecast shows its original units. [Unified browser API](neurotranslate-browser/) · [Download the JavaScript runtime](movement-browser.zip)
+**[Try all three paths in the browser](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/).** Compare two wrist angles as movement, forearm and scalp inputs change. See how much a forearm-based correction adds to a motion forecast, or switch to a distance forecast for a wrist or rat. Each forecast shows its original units. [Unified browser API](neurotranslate-browser/) · [Download the JavaScript runtime](movement-browser.zip)
 
 ## Which wrist forecast should I run?
 
@@ -15,7 +15,13 @@ Both downloads below forecast how far the right wrist will bend back and tilt to
 
 We compared methods on 1,879 trials from six previously studied people. Each person took a turn as the test person. The shared model’s correction trained on movement alone had an error of 4.175°. Adding forearm activity lowered it to 4.054°, with improvement in four of six people. Using another trial’s forearm recording raised error to 4.419°. Both downloads contain final weights fitted using all six people. Their accuracy on a new participant is unknown. [Shared correction, controls and example](neurotranslate-0.0/forearm/) · [Specialist source and example](wrist-specialist/)
 
-### Earlier wrist-angle modes in the browser
+![Wrist forecast errors in degrees. All three methods had lower average error with forearm input. Among the corrected shared model’s timing tests, the forearm signal recorded alongside the movement gave the lowest error.](figures/wrist-correction.png)
+
+[Download the comparison figure (PDF)](figures/wrist-correction.pdf) · [Recreate it from the published scores](figures/plot_wrist_correction.py)
+
+The wrist models return numerical estimates. In an extreme invented example, the corrected shared model predicted about −1,692° of extension, far beyond the movement of a human wrist. Its output has no anatomical limit. To reproduce both angles, pass the invented input to the browser package’s Node.js command. [Boundary input](examples/wrist-angle-range-check.json) · [Command and input format](neurotranslate-browser/README.md)
+
+### Three direct wrist-angle forecasts
 
 In six tests, each leaving one of six training participants out, reading past wrist angles alone produced **4.503°** of two-axis error. Adding forearm measurements lowered it to **4.291°**. With scalp measurements included as well, it was **4.491°**. An earlier movement-and-forearm correction model reached **3.549°** on the same observations. A matched control with randomly initialized frozen temporal layers also performed at least as well in all three input conditions. The comparison supports running the added angle path but did not establish a predictive benefit from the pretrained core on this task. The fitter and source-data recipe preserve separate angle and distance units. [Angular study and methods](neurotranslate-0.0/README.md)
 

@@ -6,6 +6,8 @@ Each paper has a Technical edition, for readers who want the method, and a Simpl
 
 Two subsequent tests ask what could be forecast from information already available before movement. The wrist study uses completed instructor speech, and the rat-tracking study uses earlier brain-cell spikes. Both compare against the recorded body's own recent movement. [One-second wrist study](../benchmarks/preceding-instructions/) · [Quarter-second track study](../benchmarks/wtrack-neural-motion/)
 
+A newer wrist experiment asks what four forearm electrodes add when a model already knows how the wrist has been moving. The shared model’s error fell from **4.175° to 4.054°**. A smaller wrist-specific model reached **3.549°**. Each number comes from predicting both wrist angles a quarter-second ahead in six previously studied people. The figure also shows what happens when the forearm signal comes from the wrong trial or runs backwards. These results accompany the four paper editions below. [Comparison figure (PDF)](../models/figures/wrist-correction.pdf) · [Methods, paired comparisons and source](../models/neurotranslate-0.0/forearm/)
+
 | | Technical | Simple English |
 | --- | --- | --- |
 | *NeuroTranslation: A New Paradigm In Brain-Body Mapping.* | [PDF, 153 pages](current/neurotranslation-technical.pdf) | [PDF, 188 pages](current/neurotranslation-explained.pdf) |
