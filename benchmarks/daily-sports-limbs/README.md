@@ -34,7 +34,7 @@ Only the left leg met the rule set before training: the shared model had to beat
 
 ## Reproduce the fit
 
-Use the original UCI archive and keep the neighbouring `daily-sports-arm` benchmark in place. It supplies the previous right-arm model and ridge coefficients. The loader verifies the original archive digest and opens only the walking files for p1 through p4. It leaves p5 through p8 outside this study. The runner creates a fit intent in the output directory before loading the data and refuses to reuse that directory.
+Use the original UCI archive and keep the neighbouring `daily-sports-arm` benchmark in place. It supplies the previous right-arm model and ridge coefficients. The loader verifies the original archive digest and opens only the walking files for p1 through p4. It leaves p5 through p8 outside this study. Choose a new, empty output directory. Before loading the data, the runner creates an exclusive intent file. An existing intent blocks a second run.
 
 ```sh
 python test_limb.py
