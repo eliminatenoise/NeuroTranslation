@@ -15,7 +15,7 @@ The project includes the studies, [recordings and models you can open in a brows
 
 ## One model trained on two movement datasets
 
-One fitted Transformer now forecasts a quarter-second displacement from either a human wrist history or a rat’s position on a track. It uses the same learned attention weights and a separate final readout for each task. It averaged **1.725 cm error on the wrist** and **1.310 cm on the rat**. The simpler linear model remained better on the rat data. The comparison did not establish that sharing the weights improved either task. [Download and run NeuroTranslate’s shared model](models/) · [Full source and fitted checkpoint](models/shared-motion/)
+One fitted Transformer now forecasts a quarter-second displacement from either a human wrist history or a rat’s position on a track. It uses the same learned attention weights and a separate final readout for each task. It averaged **1.725 cm error on the wrist** and **1.310 cm on the rat**. The simpler linear model remained better on the rat data. The comparison did not establish that sharing the weights improved either task. [Try the shared model](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/) · [Download the model and comparison figure](models/) · [Full source and fitted checkpoint](models/shared-motion/)
 
 ## Try a model
 

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="color-scheme" content="light">
+<meta name="description" content="Use the same motion Transformer to estimate a rat’s or a human wrist’s displacement a quarter second ahead. The recording and the model stay in your browser.">
+<link rel="icon" href="data:,">
+<title>Motion across two recordings · NeuroTranslate 0.0</title>
+<style>@@STYLE@@</style>
+</head>
+<body>
+<a class="skip" href="#history-select">Skip to movement history</a>
+<main>
+<header><span class="brand">NeuroTranslate <b>0.0</b></span><a class="save" href="" download="neurotranslate-motion.html">Save offline copy</a></header>
+<h1>How far in a quarter second?</h1>
+<p class="lede">A rat crosses a maze. A person moves a wrist. One Transformer reads the past second of movement and predicts the straight-line distance from the last position to the endpoint sampled about a quarter second later. A distance gives no direction.</p>
+
+<section class="workspace" aria-labelledby="history-title">
+<div class="selector"><h2 id="history-title">Movement history</h2>
+<label for="history-select">Choose the input</label>
+<select id="history-select" disabled="">
+<option value="rat">Rat on a maze · recorded</option>
+<option value="wrist">Human wrist · invented</option>
+<option value="custom-rat">Rat · enter samples</option>
+<option value="custom-wrist">Human wrist · enter samples</option>
+</select>
+<p id="source-line"></p>
+</div>
+<div class="experiment">
+<div id="custom" hidden="">
+<label for="cutoff">Forecast cutoff (seconds on the recording clock)</label>
+<input id="cutoff" type="number" step="any" inputmode="decimal" value="1">
+<label for="rows">Past positions (comma-separated rows)</label>
+<p id="schema"></p>
+<textarea id="rows" rows="5" spellcheck="false" aria-describedby="schema"></textarea>
+<p class="hint">Use one recording and one coordinate frame. Include the past second with samples at most 0.10 s apart. Each quarter-second tap needs a sample at or before it, within 0.05 s. Enter only samples up to the cutoff.</p>
+<div class="buttons"><button type="button" id="run">Run forecast</button><button type="button" id="practice" class="secondary">Fill with practice samples</button></div>
+</div>
+<p id="status" role="status" aria-live="polite">Loading the saved model…</p>
+<button id="retry" class="secondary" hidden="">Retry model loading</button>
+<noscript>Enable JavaScript in this page to run the saved model.</noscript>
+<div id="results" hidden="">
+<div class="forecast"><div><h2>Forecast distance</h2><strong id="joint">—</strong><span class="unit">cm</span></div><p id="forecast-caption"></p></div>
+<figure><figcaption>Four past distances and one forecast <small>Centimetres · scheduled end times</small></figcaption>
+<div id="bars" class="bars" aria-label="Past distances and future predicted distance"></div>
+</figure>
+<div class="controls"><article><h3>Keep the latest speed</h3><strong id="recent">—</strong><p>Extend the last observed speed to the scheduled endpoint, allowing for the age of the last sample.</p></article>
+<article><h3>Fit this domain alone</h3><strong id="ridge">—</strong><p>A linear model fitted to log distance (ridge regression) receives the same past movement.</p></article></div>
+<details id="outcome" hidden=""><summary>Reveal the rat’s measured distance</summary><p id="measured"></p></details>
+<details><summary>Inspect the four input intervals</summary><div id="features"></div></details>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="study-heading" class="study"><h2 id="study-heading">Did learning together help?</h2>
+<p>The same learned weights read both histories. Only the final calculation changes between a wrist tracked in three dimensions and a rat tracked in two. Both contribute movement during training. Does adding the other domain improve the prediction?</p>
+<p>Neither domain passed the transfer test. On six wrist recording groups the shared model beat the simple movement rules and both linear models on average. On nine later trips from the same rat, keeping the latest speed already gave a smaller average error.</p>
+<div class="table-wrap"><table id="bench"><caption>Mean absolute error in cm. Each recording group or trip counts equally. Smaller is better.</caption><thead><tr><th scope="col">Method</th><th scope="col">Wrist</th><th scope="col">Rat</th></tr></thead><tbody></tbody></table></div>
+<details><summary>What counted as transfer?</summary>
+<p>We compared the shared model with two Transformers trained on just one domain. At each update one saw the same 32 examples from that domain. The other saw 64, matching the shared model’s total examples per update. Transfer required a lower error than both, with both upper limits of the paired 95% intervals below zero. Both comparisons also had to favor joint training at each of two further random starts.</p>
+<p id="intervals-report"></p>
+<p>The 583 wrist histories came from six acquisition groups, which may include the same people. The 106 rat histories came from nine trips by one animal. These reused assessment groups were separate from training. Resampling groups for the wrist and blocks of three successive trips for the rat describes variation within these recordings. Transfer to new people, animals or tasks remains untested.</p>
+</details>
+<details><summary>How the model reads movement</summary>
+<p>Five positions become four intervals. For each interval the model uses the distance between its endpoints, elapsed recording time, the age of its final sample, distance across the last two intervals and how sharply the movement turned. The model also derives a speed scaled to a quarter second. The first interval carries zeros for the two features that require an earlier step.</p>
+<p>A temporal Transformer lets each of the four past intervals draw on all four. The shared layer combines them into one learned representation. A wrist or rat readout then adjusts the latest-speed estimate. The future measured position enters only when scoring a prediction. Training used a nominal lead of 0.25 s. The recording clocks put the admitted endpoints 0.20–0.30 s after the last observed position.</p>
+<p>The recording supplies positions alone. Neural activity, muscle force and intended movements are outside this experiment.</p>
+</details>
+<details><summary>Credits, licences and checkpoint</summary>
+<h3>Rat position data · CC BY 4.0</h3>
+<p>Justin Shin and Shantanu Jadhav, <i>Single Day W-Track Learning</i> (2024), DANDI 000978, version 0.240511.0307. We selected five past camera positions and a later measured endpoint from session 01, animal JS14, running epoch 5, training trip 55. We derived centimetre distances, timing and turn features. The forecast and derived endpoint distance are new calculations at the previously published cutoff. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/4d046b86bfa797e28f29cd4f6b8445a1f4b90487/benchmarks/wtrack-neural-motion/fitted/example.json" rel="noreferrer">Original trip example</a> · <a href="https://doi.org/10.48324/dandi.000978/0.240511.0307" rel="noreferrer">Dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0 licence</a>.</p>
+<h3>Wrist training data · CDLA Permissive 2.0</h3>
+<p>Xin Wang, Taein Kwon, Mahdi Rad, Bowen Pan, Ishani Chakraborty, Sean Andrist, Dan Bohus, Ashley Feniello, Bugra Tekin, Felipe Vieira Frujeri, Neel Joshi and Marc Pollefeys, <i>HoloAssist: an Egocentric Human Interaction Dataset for Interactive AI Assistants in the Real World</i> (ICCV 2023). We derived movement features from tracked right-wrist positions and converted metres to centimetres. The wrist example on this page is invented. <a href="https://holoassist.github.io/" rel="noreferrer">HoloAssist dataset and terms</a>.</p>
+<details><summary>Read the CDLA Permissive 2.0 text</summary><pre>@@CDLA@@</pre></details>
+<h3>Model and viewer</h3><p>The deployed shared checkpoint uses the preselected training seed 27181. SHA-256 <code>9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179</code>. NeuroTranslate releases the shared weights, fitted comparison weights and numerical results under CC BY 4.0. The browser scorer packs the original 5,234 parameters as float32. This viewer also includes the two fitted log-distance ridge comparisons. The original code, documentation and invented examples carry CC0 1.0. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/1cc81b20a14b81aebfb1f47d13d75b8d79c6e6ce/models/shared-motion" rel="noreferrer">Frozen model, methods and scores</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0</a>.</p>
+<details><summary>Read the CC0 1.0 text</summary><pre>@@CC0@@</pre></details>
+</details>
+</section>
+</main>
+<script id="data" type="application/json">@@PAYLOAD@@</script>
+<script>@@RUNTIME@@</script>
+<script>@@APP@@</script>
+</body></html>
