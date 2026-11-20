@@ -12,7 +12,7 @@ Every score is an error: how far the forecasts fell from what was measured. Lowe
 
 "Tested on" names people whose test recordings were never used to fit the model. Rows 25 and 27 are the exceptions: both are scored on the recordings they were fitted on, and the table says so. Row 29 scores each person with models fitted on the other five, but all six are the people studies 1 to 3 and 28 were fitted on, so it is not a test either. A forecast that "repeats the last value" does nothing clever: it says the reading being forecast will equal the latest one. Where a cell says "not given", the study's results file does not hold that count.
 
-A *straight-line fit* is the plainest kind of model, a weighted sum of its inputs. A *learned forecast* is a small network that reads a stretch of recent history. A *transformer* is a kind of network that learns which of the earlier readings matter most to the forecast, the same kind that runs today's chatbots: study 26 tried a small one, and the general model of study 28 is built round one too.
+A *straight-line fit* is the plainest kind of model, a weighted sum of its inputs. A *learned forecast* is a small network that reads a stretch of recent history. A *transformer* is a kind of network that learns which of the earlier readings matter most to the forecast, the same kind that runs today's chatbots: study 26 tried a small one, and the general model is built round one too.
 
 **EEG** is electrical activity of the brain, picked up on the scalp. **EMG** is electrical activity of muscle, picked up on the skin. It is a recording of muscle, not of nerve. **MVC** is the hardest squeeze a person could manage that day; pinch force is given as a percentage of it.
 
@@ -22,7 +22,7 @@ Units and measures change from study to study. Compare along a row, never betwee
 
 ### Wrist angle
 
-Errors in degrees, both wrist axes together. Row 29 is not a test: its six people are the ones the earlier wrist models were fitted on, so it enters none of the counts below, although each person was scored by models fitted on the other five.
+Errors in degrees, both wrist axes together. Row 29 enters none of the counts below.
 
 | # | Study | What was forecast | Tested on | Reference forecast | Challenger | Difference | People better with the challenger |
 | ---: | --- | --- | --- | --- | --- | --- | --- |
@@ -35,7 +35,7 @@ Errors in degrees, both wrist axes together. Row 29 is not a test: its six peopl
 
 Ranges: study 1, the results file gives no range across people; studies 2, 3 and 28, whichever one of the three people is left out; study 4, the middle 95% when the four people are resampled; study 29, whichever one of the six people is left out.
 
-Study 28 is the general model's first fit with a muscle or brain signal: three fits, one for each set of inputs, on the six people studies 1 to 3 were fitted on, scored on those studies' three test people (959 of their 960 trials; one trial that had been published as an example elsewhere was removed). The straight-line fits beside them are study 2's own fits, re-scored on the same trials: they are not new, and they count nowhere.
+Study 28 holds the general model's first fits on a recording that also has muscle and brain signals: three fits, one for each set of inputs, on the six people studies 1 to 3 were fitted on, scored on those studies' three test people (959 of their 960 trials; one trial that had been published as an example elsewhere was removed). The straight-line fits beside them are study 2's own fits, re-scored on the same trials: they are not new, and they count nowhere.
 
 | What the forecast read | The general model | Study 2's straight-line fit, re-scored |
 | --- | ---: | ---: |
@@ -45,9 +45,9 @@ Study 28 is the general model's first fit with a muscle or brain signal: three f
 | Wrist history and forearm EMG, the EMG taken from the next trial | **5.867°** | 6.940° |
 | Wrist history, EMG and EEG, the EEG taken from the next trial | **5.826°** | 6.378° |
 
-Repeating the last angle scored 7.924°. Study 1's learned forecast, which reads only the wrist's history, re-scored on the same trials, scored 4.053°: lower than every fit above. EMG made the general model worse whichever of the three people was left out (0.400 to 0.467 higher). Given the next trial's EMG instead of its own, the general model's error moved by 0.0009°, and given the next trial's EEG, by 0.005°; the straight-line fits rose by 0.766° and 0.252°. The straight-line fits used the timing of the electrical signals; the general model hardly did. The study set no pass rule.
+Repeating the last angle scored 7.924°. Study 1's learned forecast, which reads only the wrist's history, re-scored on the same trials, scored 4.053°: lower than every fit above. EMG made the general model worse whichever of the three people was left out (0.400 to 0.467 higher). Given the next trial's EMG instead of its own, the general model's error rose by only 0.0009°, and given the next trial's EEG, by 0.0046°; the straight-line fits rose by 0.766° and 0.252°. The straight-line fits depended on each trial's own electrical signals; the general model hardly did. The study set no pass rule.
 
-Row 29 is not a test. Its six people are the ones studies 1 to 3 and 28 were fitted on. Each was scored in turn by models fitted on the other five: a learned forecast of study 1's design (3.618°), then the same forecast with a correction learned from its mistakes on the other five, from wrist motion alone (3.665°) or with forearm EMG as well (3.549°), over 1,879 trials. The EMG correction beat the motion-only one for 6 of 6 people, but against the uncorrected forecast only 3 of 6 did better. It helped early, 0.75 and 1 second after the cue (at 0.75 seconds, 6.949° against 7.441°), and made the forecast worse at the four later moments. Given another person's EMG the correction scored 3.828°, and given its own EMG in reverse order, 3.720°. The folder notes that movement and electrode contact both reach surface EMG, and that neither control tells them apart.
+In row 29, each of the six people was scored in turn by models fitted on the other five: a learned forecast of study 1's design (3.618°), then the same forecast with a correction learned from its mistakes on the other five, from wrist motion alone (3.665°) or with forearm EMG as well (3.549°), over 1,879 trials. The EMG correction beat the motion-only one for 6 of 6 people, but against the uncorrected forecast only 3 of 6 did better. It helped early, 0.75 and 1 second after the cue (at 0.75 seconds, 6.949° against 7.441°), and made the forecast worse at the four later moments. Given another person's EMG the correction scored 3.828°, and given its own EMG in reverse order, 3.720°. The folder notes that movement and the contact of the electrodes can both change the EMG reading, and that neither control tells the two apart.
 
 ### Elbow angle
 
@@ -252,7 +252,7 @@ Study 17 splits by measure: on the measure that punishes large misses, both fitt
 
 EEG raised the error in 8 of the 13. Of the 6 that were a study's main question it lowered the error in 1: grip force in study 9, by 0.0040 N, and there EEG taken from a different lift lowered it further.
 
-Twelve of the comparisons also fed the model EEG from the wrong trial or the wrong moment. Properly timed EEG did better than the wrong EEG in 4. It both lowered the error and beat its control in 3: the straight-line wrist fits of studies 1 and 2 and the general model of study 28, all on the same three people, and never as the main question. In study 28 the margins were 0.045° and 0.005°: the same model given another trial's EEG kept almost all of the gain.
+Twelve of the comparisons also fed the model EEG from the wrong trial or the wrong moment. Properly timed EEG did better than the wrong EEG in 4. It both lowered the error and beat its control in 3: the straight-line wrist fits of studies 1 and 2 and the general model of study 28, all on the same three people, and never as the main question. In study 28 EEG took 0.045° off the error, and the same model given another trial's EEG did only 0.0046° worse than with its own: almost all of the gain survived the swap.
 
 Where the model had no history of the hand at all, EEG lost too: alone against a clock in study 6, and added to elapsed time in study 7.
 
@@ -335,11 +335,11 @@ No fit of the general model has been tested on a new person, so nothing here yet
 
 The project's working presumption is that more data, and more varied data, gives a more general model. No study here tests it: none varies how much data a model sees, or how varied it is. The general model's fits do not test it either. The five-sensor fit has no comparison with a fit on less data, and at the one sensor where a separate network exists, the right arm, the separate network was better. At the wrist, more kinds of signal did not help it.
 
-The test groups are small, between 1 and 4 people. And the 25 studies draw on 9 datasets and fewer independent groups than that. Studies 1 to 3 and 28 score the same three people (row 29 scores the six their models were fitted on). So do 9 and 10, and 11 to 13. Studies 14 to 17 score the same four, and 21 and 22 the same four, who had already appeared in earlier pinch studies on other days. Studies 14 to 17 also score the 12 people the finger models were fitted on; those results are on each study's page, and are not the main comparison in the table above.
+The test groups are small, between 1 and 4 people. And the 25 studies draw on 9 datasets and fewer independent groups than that. Studies 1 to 3 and 28 score the same three people (row 29 scores the six people those studies were fitted on). So do 9 and 10, and 11 to 13. Studies 14 to 17 score the same four, and 21 and 22 the same four, who had already appeared in earlier pinch studies on other days. Studies 14 to 17 also score the 12 people the finger models were fitted on; those results are on each study's page, and are not the main comparison in the table above.
 
 Every result comes from stored recordings scored after the fact. None is a live forecast. Every "120 ms" or "250 ms" is a distance along the stored clock.
 
-## Twenty-four people and four recordings are still unopened
+## Twenty-four people and four recordings were set aside and are still unopened
 
 When each dataset was split, some people were set aside and their recordings never opened. Until one of these groups is opened, every number on this page describes data the project has already looked at.
 
