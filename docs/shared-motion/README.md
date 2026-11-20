@@ -1,40 +1,41 @@
-# Motion across two recordings
+# A quarter second ahead
 
-Open **index.html** in a browser and choose a movement history. The same temporal Transformer reads a second of a wrist’s movement or a rat’s movement across a maze. It estimates the straight-line distance between the last observed position and an endpoint sampled about a quarter second later. The answer is a distance in centimetres. [Open the viewer](index.html)
+Open **index.html** or the launcher for your operating system. The first example predicts the distance between a wrist’s last tracked position and its position about a quarter second later. Choose **Right-wrist angles (°)** to ask how far back the wrist will bend and how far it will tilt towards the thumb. **Rat displacement (cm)** predicts an endpoint distance on a maze. Each task starts with invented measurements. [Open the viewer](index.html)
 
-The rat example is the first eligible training window, two seconds into trip 55 of JS14’s W-track session. Choose **Reveal the rat’s measured distance** to compare the model’s estimate with the camera measurement. The wrist example uses invented positions. To try your own past positions, choose **enter samples** for the correct domain. The on-page practice samples demonstrate both input formats. The page verifies the checkpoint and computes all three estimates locally. **Save offline copy** downloads the complete viewer with its original examples.
+## Compare the wrist-angle forecasts
 
-The shared Transformer had a group-averaged absolute error of 1.725 cm on the wrist and 1.310 cm on the rat. The linear fit on log distance reached 1.922 cm and 1.119 cm respectively. Neither domain met the study’s predeclared transfer criterion. Six wrist recording groups and nine trips from one rat supplied the reused assessment histories. The transfer test, units, sample timing and comparison methods appear below the live forecast. [Study, sources and scores](https://github.com/eliminatenoise/NeuroTranslation/tree/1cc81b20a14b81aebfb1f47d13d75b8d79c6e6ce/models/shared-motion)
+The three rows use the same half-second of invented wrist movement. Read down each column to see how the forecast changes when a separately fitted model also sees forearm electrical activity and then scalp voltages. The first column of numbers gives absolute extension in degrees. The second gives absolute radial deviation, positive towards the thumb. All three aim 128 stored samples beyond the cutoff, a quarter second on the 512-Hz recording clock. The invented example has no measured outcome.
 
-## Build from the public repository
+To use measurements you have permission to supply, choose **Enter my own measurements**. **Fill with invented input** shows the exact JSON format. The input panel lists the channel order, units, timing rules and allowed cue slots. Enter only channels actually available, with `motion`, `emg` or `full` as the mode. The viewer compares every supported lower-channel model using that same history. For the distance tasks, the input panel accepts timestamped measured positions in centimetres. Your inputs stay in the tab. **Save offline copy** downloads the complete original examples, model and licences. Each copy starts fresh.
 
-Run this from a checkout containing this directory at `docs/shared-motion/` and the browser runtime at `models/shared-motion-browser/`. The builder uses the Python standard library. It takes the published runtime and two licence texts from that directory, checks their SHA-256 digests, and inserts the saved weights, controls, approved example inputs and terms into one HTML file.
+## What happened on measured movements?
+
+In the angle study, five people supplied training data for each forecast method and the sixth supplied its test data. Every person took a turn being held out. Across 1,879 cued right-wrist trials, movement alone gave 4.503° root-mean-square error on the two axes. Adding forearm EMG reduced it to 4.291°, and adding scalp EEG to both gave 4.491°. An earlier wrist-specific convolutional network with a forearm correction scored 3.549° on the same windows. The six people had already contributed to method development. The example runs the final fits trained on all six, which await independent testing. [Wrist-angle study, weights and aggregate scores](https://github.com/eliminatenoise/NeuroTranslation/tree/c60c12e3355b5d2ba3a50364a7f6d294ec59f48e/models/neurotranslate-0.0)
+
+The wrist and rat distance tasks supplied one temporal Transformer core. All three angle models use the same 5,016 fixed temporal values, with a separately fitted input projection and angle readout for each input set. One matched randomly initialized core had a lower error for all three input sets. The angle comparison therefore provides no evidence that training on the distance tasks improved angle forecasting. Forearm and scalp electrical activity can include movement and contact artifacts. These recordings cannot establish intent, force, peripheral nerve signals or causal transmission.
+
+The original distance comparison remains on the page. The group-averaged absolute errors of the shared model were 1.725 cm on six wrist acquisition groups and 1.310 cm on nine later trips by the same rat. Neither task passed its predeclared test for a benefit from the other task’s training data. Select **Recorded maze trip** to compare one separately credited training example with its observed 2.940 cm endpoint distance. This is the only built-in recording-derived example. [Original spatial study](https://github.com/eliminatenoise/NeuroTranslation/tree/1cc81b20a14b81aebfb1f47d13d75b8d79c6e6ce/models/shared-motion)
+
+## Rebuild and embed
+
+The checked-in HTML is self-contained. The standard-library builder needs the unified JS scorer, its illustrative inputs and the two licence texts. From a release checkout with the viewer at `docs/shared-motion/` and the matching runtime at `models/neurotranslate-browser/`, run the command below. For another runtime location, pass `--runtime PATH`. The builder verifies each consumed runtime and data asset against the digests in the source manifest. [Source identities](src/sources.json)
 
 ```sh
-python docs/shared-motion/build.py
+python -B docs/shared-motion/build.py
 ```
 
-To use a different location for the same released runtime, pass its directory with `--runtime`. To write to a different file, pass `--out`. This edition’s complete HTML has SHA-256 `1c8eaed7b3f1a595fd202b968993da9eee66845938063746bbb369b054e8e258`.
-
-The curated inputs are included in `src/inputs.json`. To reconstruct them from the scientific release, use Python with NumPy and the original public trip-55 recording. From the repository root, run the command below. It reads the fixed fits and public summary, rebuilds the four intervals and future measurement from the rat recording, and selects the invented wrist fixture. It fits no weights. The public source identities and expected hashes are in `src/sources.json`.
-
-```sh
-python -B docs/shared-motion/src/derive.py --out reproduced-inputs.json
-```
-
-### Use in another page
-
-Serve the standalone file over HTTPS or localhost, or open the saved file directly. Checkpoint verification uses Web Crypto. A link to the file works without any host-page code. To reuse the panel in a compatible host page, use one iframe with an accessible title.
+The viewer can open from a local file or a secure context supporting Web Crypto (including localhost). It runs without dependencies, a server, device access or a network connection. Use one iframe in a host page. Allow script execution, Web Crypto and local downloads in the host’s embedding policy. With stricter host policies, link to the standalone file directly.
 
 ```html
-<iframe src="./shared-motion/index.html" title="Forecast movement distance"
+<iframe src="./shared-motion/index.html" title="Forecast movement distance or wrist angles"
         style="width:100%; height:48rem; border:0"></iframe>
 ```
 
-The viewer carries its own styles and model. A host with a stricter content-security policy can serve the original file in a compatible document context and link to it. External source links lead to the named research materials when selected.
+For a game that consumes numbers, use the same scorer as the viewer. Load the runtime once and call `await SharedMotion.forecastMovement(record)`. For a geometry history, supply `{domain,cutoffS,samples}` for `wrist` or `rat`. The result contains `distanceCm` and `unit: "cm"`. The angular input requires the explicit `wrist_angle` domain, mode, slot, cue tick, cutoff tick, sixteen bin end ticks, binned channels and two cutoff angles. Its result contains `angleDeg` in extension and radial-deviation order and `unit: "deg"`. In either case the model forecasts the recorded movement. The game chooses how it presents the forecast.
 
 ## Credits and licences
 
-- **Rat data.** Justin Shin and Shantanu Jadhav (2024), *Single Day W-Track Learning*, version 0.240511.0307. The viewer shows derived distances, times and turns for JS14, session 01, epoch 5, trip 55. The original camera positions supplied an observed displacement of 2.940 cm over 0.2403 s. We computed this endpoint and the new forecasts at the earlier public example’s cutoff. [DANDI dataset](https://doi.org/10.48324/dandi.000978/0.240511.0307) · [Original example identity](https://github.com/eliminatenoise/NeuroTranslation/blob/4d046b86bfa797e28f29cd4f6b8445a1f4b90487/benchmarks/wtrack-neural-motion/fitted/example.json) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- **Wrist training data.** Xin Wang and colleagues (2023), *HoloAssist*. The fits use movement features derived from tracked right-wrist positions, converted from metres to centimetres. The human examples built into this viewer are invented. The full author list and CDLA Permissive 2.0 text travel with the HTML. [Publisher](https://holoassist.github.io/) · [Data credits](../../models/shared-motion/shared-motion-data/NOTICE.md)
-- **Model and viewer.** NeuroTranslate’s jointly fitted weights, fitted comparison weights and numeric summaries carry CC BY 4.0. The browser scorer packs the shared checkpoint’s original 5,234 float32 values. The viewer exports the standardization parameters and log-distance coefficients of the two domain-specific ridge fits. Original code, documentation and invented examples carry CC0 1.0. [Rights notice](../../models/shared-motion/shared-motion-model/NOTICE.md) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+- Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz published the EEG-EMG-WristMotion Dataset v3. We used two measured wrist axes and aligned scalp and forearm voltages to form sixteen-bin histories. Attribution and CC BY 4.0 accompany the data, derived scales, fitted weights and reported results. [Version 3 data](https://doi.org/10.6084/m9.figshare.29666735.v3) · [Study descriptor](https://doi.org/10.1038/s41597-026-07287-z) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- Justin Shin and Shantanu Jadhav published *Single Day W-Track Learning* (2024), version 0.240511.0307. The existing derived illustration uses JS14, session 01, epoch 5, trip 55. Camera measurements supply distances, timing, turn features and an endpoint comparison at the published cutoff. [DANDI dataset](https://doi.org/10.48324/dandi.000978/0.240511.0307) · [Original example](https://github.com/eliminatenoise/NeuroTranslation/blob/4d046b86bfa797e28f29cd4f6b8445a1f4b90487/benchmarks/wtrack-neural-motion/fitted/example.json) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- Xin Wang and colleagues published *HoloAssist* (ICCV 2023). The original spatial study converted tracked right-wrist positions into centimetres. The full author list and CDLA Permissive 2.0 agreement accompany the viewer. [HoloAssist](https://holoassist.github.io/)
+- The fitted weights, comparison weights, scales and numerical results carry CC BY 4.0. NeuroTranslation contributed the angular projections, readouts and comparisons. The project’s original software, documentation and invented inputs carry CC0 1.0. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)

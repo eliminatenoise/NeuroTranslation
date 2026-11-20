@@ -4,26 +4,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="color-scheme" content="light">
-<meta name="description" content="Use the same motion Transformer to estimate a rat’s or a human wrist’s displacement a quarter second ahead. The recording and the model stay in your browser.">
+<meta name="description" content="Forecast a wrist angle or a movement distance a quarter second ahead. The saved model runs offline in your browser.">
 <link rel="icon" href="data:,">
-<title>Motion across two recordings · NeuroTranslate 0.0</title>
+<title>A quarter second of movement · NeuroTranslate 0.0</title>
 <style>@@STYLE@@</style>
 </head>
 <body>
 <a class="skip" href="#history-select">Skip to movement history</a>
 <main>
 <header><span class="brand">NeuroTranslate <b>0.0</b></span><a class="save" href="" download="neurotranslate-motion.html">Save offline copy</a></header>
-<h1>How far in a quarter second?</h1>
-<p class="lede">A rat crosses a maze. A person moves a wrist. One Transformer reads the past second of movement and predicts the straight-line distance from the last position to the endpoint sampled about a quarter second later. A distance gives no direction.</p>
+<h1>A quarter second ahead</h1>
+<p class="lede">How far from its last position will a wrist move? Which way will it bend? Try a forecast from a short movement history. The same model also reads the path of a rat on a maze.</p>
 
 <section class="workspace" aria-labelledby="history-title">
 <div class="selector"><h2 id="history-title">Movement history</h2>
-<label for="history-select">Choose the input</label>
+<label for="history-select">What should the model forecast?</label>
 <select id="history-select" disabled="">
-<option value="rat">Rat on a maze · recorded</option>
-<option value="wrist">Human wrist · invented</option>
-<option value="custom-rat">Rat · enter samples</option>
-<option value="custom-wrist">Human wrist · enter samples</option>
+<option value="wrist">Wrist displacement (cm)</option>
+<option value="wrist_angle">Right-wrist angles (°)</option>
+<option value="rat">Rat displacement (cm)</option>
+</select>
+<label for="source-select">Which history?</label>
+<select id="source-select" disabled="">
+<option value="invented">Invented example</option>
+<option value="custom">Enter my own measurements</option>
 </select>
 <p id="source-line"></p>
 </div>
@@ -36,6 +40,16 @@
 <textarea id="rows" rows="5" spellcheck="false" aria-describedby="schema"></textarea>
 <p class="hint">Use one recording and one coordinate frame. Include the past second with samples at most 0.10 s apart. Each quarter-second tap needs a sample at or before it, within 0.05 s. Enter only samples up to the cutoff.</p>
 <div class="buttons"><button type="button" id="run">Run forecast</button><button type="button" id="practice" class="secondary">Fill with practice samples</button></div>
+</div>
+<div id="angular-custom" hidden="">
+<label for="angle-input">Past wrist measurements (JSON)</label>
+<p class="hint">Use sixteen consecutive bins from one trial. Paste the complete input object, or fill in an invented example to see the format. Your measurements stay in this tab.</p>
+<textarea id="angle-input" rows="7" spellcheck="false" aria-describedby="angle-schema"></textarea>
+<details><summary>Input units, channels and clock</summary>
+<p id="angle-schema">Use <code>wrist_angle</code> for the domain. The cutoff angles in <code>anchorDeg</code> are extension and radial deviation, in degrees. In every bin, the first two columns are the mean angles minus those cutoff angles. Use mode <code>motion</code> for these two columns. Mode <code>emg</code> adds four root-mean-square amplitudes in µV, each from the left-minus-right difference of forearm pair M1, M2, M3 or M4, in order. Mode <code>full</code> adds eight signed mean scalp voltages in µV, in the order C3, C1, Cz, C2, C4, CP3, CPz, CP4.</p>
+<p>Each bin spans 16 stored samples at 512 Hz. Its final sample belongs to the bin. Enter the 16 ordered integer end ticks in <code>binEndTicks</code>. The last equals <code>cutoffTick</code>. For slot 0 through 5, the cutoff is <code>cueTick + 256 + 128 × slot</code>. Only include earlier measurements through that cutoff. Mode and column count must agree. The browser can check the declared timing. You must confirm how the samples were acquired and binned.</p>
+</details>
+<div class="buttons"><button type="button" id="angle-run">Compare angle forecasts</button><button type="button" class="secondary" id="angle-fill">Fill with invented input</button></div>
 </div>
 <p id="status" role="status" aria-live="polite">Loading the saved model…</p>
 <button id="retry" class="secondary" hidden="">Retry model loading</button>
@@ -50,10 +64,31 @@
 <details id="outcome" hidden=""><summary>Reveal the rat’s measured distance</summary><p id="measured"></p></details>
 <details><summary>Inspect the four input intervals</summary><div id="features"></div></details>
 </div>
+<div id="angular-results" hidden="">
+<h2>Forecast right-wrist angles</h2>
+<p id="angle-timing" class="hint"></p>
+<table id="angle-values"><caption>Absolute angles a quarter second after cutoff. Positive values point back at the wrist (extension) or towards the thumb (radial deviation).</caption><thead><tr><th scope="col">Inputs</th><th scope="col">Extension (°)</th><th scope="col">Radial deviation (°)</th></tr></thead><tbody></tbody></table>
+<p id="angle-interpretation" class="hint"></p>
+</div>
 </div>
 </section>
 
-<section aria-labelledby="study-heading" class="study"><h2 id="study-heading">Did learning together help?</h2>
+<section id="angle-study" class="study" aria-labelledby="angle-study-heading" hidden="">
+<h2 id="angle-study-heading">Did the electrodes help?</h2>
+<p>Six people steered a cursor with their right wrist. Two encoders on the pointing device measured the angles. Forearm electrodes recorded muscle electrical activity (EMG), and scalp electrodes recorded voltage (EEG). The forecast uses only the preceding half-second and the timing of the cue.</p>
+<table id="angle-bench"><caption>Two-axis root-mean-square error in degrees. Each of six people counts equally. Smaller is better.</caption><thead><tr><th scope="col">Method</th><th scope="col">Error (°)</th></tr></thead><tbody></tbody></table>
+<p>The forearm channels reduced error for five of six people. Adding scalp voltages to that model raised error for all six. The earlier wrist-specific convolutional network with a forearm correction gave the closest forecasts on these same rows.</p>
+<details><summary>What the three forecasts share</summary>
+<p>The wrist and rat distance tasks taught a Transformer to read four successive pieces of movement. We kept 5,016 learned values in that temporal core fixed. Four new wrist-angle bins make one piece, so the same core can read sixteen bins. Each set of channels has its own fitted input projection and output for the two angles. A change between rows therefore reflects the different fitted models as well as their inputs.</p>
+<p>The forearm recording measures electrical activity at the skin. The scalp recording measures voltage at electrodes. Movement or changes in electrode contact can enter either. A predicted wrist angle tells us how the model expects the wrist to turn. The experiment did not measure intent, spinal signals, nerve traffic, force or a causal path from brain to muscle.</p>
+</details>
+<details><summary>How far do the results travel?</summary>
+<p>Each test held out one whole person and fitted the new weights using the other five. The six had all contributed to earlier development. There were 1,879 eligible trials and six overlapping forecast windows per trial, giving 11,274 windows. Selecting complete trials required seeing that their eventual measurements existed. Live coverage and hardware delay remain unknown. The displayed fits used all six people and await an independent test.</p>
+<p>With both electrical recordings, average error fell just 0.012° compared with movement alone. Three people improved. Omitting one person at a time gave differences from −0.087° to +0.069°. One matched randomly initialized temporal core had lower error in all three comparisons. This study found no advantage from learning the earlier distance tasks.</p>
+</details>
+</section>
+
+<section id="distance-study" aria-labelledby="study-heading" class="study"><h2 id="study-heading">Did learning together help?</h2>
 <p>The same learned weights read both histories. Only the final calculation changes between a wrist tracked in three dimensions and a rat tracked in two. Both contribute movement during training. Does adding the other domain improve the prediction?</p>
 <p>Neither domain passed the transfer test. On six wrist recording groups the shared model beat the simple movement rules and both linear models on average. On nine later trips from the same rat, keeping the latest speed already gave a smaller average error.</p>
 <div class="table-wrap"><table id="bench"><caption>Mean absolute error in cm. Each recording group or trip counts equally. Smaller is better.</caption><thead><tr><th scope="col">Method</th><th scope="col">Wrist</th><th scope="col">Rat</th></tr></thead><tbody></tbody></table></div>
@@ -67,13 +102,16 @@
 <p>A temporal Transformer lets each of the four past intervals draw on all four. The shared layer combines them into one learned representation. A wrist or rat readout then adjusts the latest-speed estimate. The future measured position enters only when scoring a prediction. Training used a nominal lead of 0.25 s. The recording clocks put the admitted endpoints 0.20–0.30 s after the last observed position.</p>
 <p>The recording supplies positions alone. Neural activity, muscle force and intended movements are outside this experiment.</p>
 </details>
-<details><summary>Credits, licences and checkpoint</summary>
+</section>
+<section class="study"><details><summary>Credits, licences and checkpoints</summary>
+<h3>Wrist angles, forearm and scalp recordings · CC BY 4.0</h3>
+<p>Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz published the <i>EEG-EMG-WristMotion Dataset</i>, version 3. NeuroTranslation derived two anchor-relative wrist angles, four bipolar forearm amplitudes and eight mean scalp voltages per time bin. The new fits use those features to estimate two absolute angles. All built-in wrist-angle inputs are invented. Retain attribution for the data, derived weights, scales and results under CC BY 4.0. The combined checkpoint has SHA-256 <code>8636991f783c781142ab811096b0f1769db0a6bcf9386810a3ad7b25fae4e2a6</code>. <a href="https://doi.org/10.6084/m9.figshare.29666735.v3" rel="noreferrer">Version 3 dataset</a> · <a href="https://doi.org/10.1038/s41597-026-07287-z" rel="noreferrer">Study descriptor</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0</a>.</p>
 <h3>Rat position data · CC BY 4.0</h3>
 <p>Justin Shin and Shantanu Jadhav, <i>Single Day W-Track Learning</i> (2024), DANDI 000978, version 0.240511.0307. We selected five past camera positions and a later measured endpoint from session 01, animal JS14, running epoch 5, training trip 55. We derived centimetre distances, timing and turn features. The forecast and derived endpoint distance are new calculations at the previously published cutoff. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/4d046b86bfa797e28f29cd4f6b8445a1f4b90487/benchmarks/wtrack-neural-motion/fitted/example.json" rel="noreferrer">Original trip example</a> · <a href="https://doi.org/10.48324/dandi.000978/0.240511.0307" rel="noreferrer">Dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0 licence</a>.</p>
 <h3>Wrist training data · CDLA Permissive 2.0</h3>
 <p>Xin Wang, Taein Kwon, Mahdi Rad, Bowen Pan, Ishani Chakraborty, Sean Andrist, Dan Bohus, Ashley Feniello, Bugra Tekin, Felipe Vieira Frujeri, Neel Joshi and Marc Pollefeys, <i>HoloAssist: an Egocentric Human Interaction Dataset for Interactive AI Assistants in the Real World</i> (ICCV 2023). We derived movement features from tracked right-wrist positions and converted metres to centimetres. The wrist example on this page is invented. <a href="https://holoassist.github.io/" rel="noreferrer">HoloAssist dataset and terms</a>.</p>
 <details><summary>Read the CDLA Permissive 2.0 text</summary><pre>@@CDLA@@</pre></details>
-<h3>Model and viewer</h3><p>The deployed shared checkpoint uses the preselected training seed 27181. SHA-256 <code>9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179</code>. NeuroTranslate releases the shared weights, fitted comparison weights and numerical results under CC BY 4.0. The browser scorer packs the original 5,234 parameters as float32. This viewer also includes the two fitted log-distance ridge comparisons. The original code, documentation and invented examples carry CC0 1.0. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/1cc81b20a14b81aebfb1f47d13d75b8d79c6e6ce/models/shared-motion" rel="noreferrer">Frozen model, methods and scores</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0</a>.</p>
+<h3>Spatial model and viewer</h3><p>The deployed shared checkpoint uses the preselected training seed 27181. SHA-256 <code>9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179</code>. NeuroTranslate releases the shared weights, fitted comparison weights and numerical results under CC BY 4.0. The browser scorer packs the original 5,234 parameters as float32. This viewer also includes the two fitted log-distance ridge comparisons. The original code, documentation and invented examples carry CC0 1.0. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/1cc81b20a14b81aebfb1f47d13d75b8d79c6e6ce/models/shared-motion" rel="noreferrer">Frozen model, methods and scores</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0</a>.</p>
 <details><summary>Read the CC0 1.0 text</summary><pre>@@CC0@@</pre></details>
 </details>
 </section>
