@@ -104,3 +104,9 @@ Open [the reader](https://eliminatenoise.github.io/NeuroTranslation/finger-motio
 ## Knee turning moments
 
 [Download the knee-moment reader and materials](models/knee-moment.zip), extract the folder and open the launcher. The reader predicts signed moments from an invented gait. [Run the shared checkpoint with Python](models/neurotranslate-0.0/load/)
+
+## Forecast the force underfoot during a walk
+
+[Open the two-plate viewer](https://eliminatenoise.github.io/NeuroTranslation/walking-force/) or [download its ZIP](models/walking-force.zip) and extract it. Open **index.html** or the launcher labelled for Windows, macOS or Linux. All six fitted models run in the browser without a connection. Try the same marker history twice and change one muscle signal. The recorded error comparison sits below the invented walk.
+
+[Download the Python study](models/overground-force-forecast.zip) for the fitted weights, NumPy command and source-to-score instructions. [Download the source reader](models/overground-source-reader.zip) to reconstruct the trial selection locally from the original deposit. For the separate estimate on the plate under the right foot, [open the shared model](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#right-plate).
