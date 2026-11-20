@@ -41,7 +41,7 @@ Several studies have a Python runner as well, for scoring many recordings at onc
 
 ## A page that runs from your own computer
 
-The general model's first fit has a page of its own that is not on the site: a small Python program on your computer serves it to your browser. Install Python 3.13 and the two libraries in the folder's [`requirements.txt`](benchmarks/daily-sports-limbs/requirements.txt), then open the launcher for your system, or run `python serve.py` in [the folder](benchmarks/daily-sports-limbs/README.md). Pick a sensor on the torso, an arm or a leg to see its last 16 readings, the model's forecast and what the sensor recorded 120 ms after the last of them. The walk it shows is one the model was fitted on, so it shows the model running, not how well it would forecast someone new.
+The general model's five-sensor walking fit has a page of its own that is not on the site: a small Python program on your computer serves it to your browser. Install Python 3.13 and the two libraries in the folder's [`requirements.txt`](benchmarks/daily-sports-limbs/requirements.txt), then open the launcher for your system, or run `python serve.py` in [the folder](benchmarks/daily-sports-limbs/README.md). Pick a sensor on the torso, an arm or a leg to see its last 16 readings, the model's forecast and what the sensor recorded 120 ms after the last of them. The walk it shows is one the model was fitted on, so it shows the model running, not how well it would forecast someone new.
 
 | Your computer | Launcher |
 | --- | --- |

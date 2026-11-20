@@ -4,7 +4,7 @@ Every study in this repository asks one question of one open dataset. Most ask t
 
 Mostly it does not. A model fitted to the target's own recent history beat "repeat the last value" every time it was tried on the task it was fitted for. A brain signal from the scalp, added on top, usually made the forecast worse. A muscle signal helped at the wrist, and nowhere else beyond the noise; the general model, given the same muscle signal at the wrist, got worse. And when the task or the target moved, a one-line rule beat every fitted model.
 
-This page holds the numbers: 25 studies in 20 of the 22 folders here (two folders hold more than one), two more studies that are reported only in the papers, and two rows that are not tests, each in a folder of its own: the general model's first fit (`daily-sports-limbs/`) and a correction scored on the people the wrist models were fitted on (`wrist-forearm-correction/`). [The README](../README.md) has the short version.
+This page holds the numbers: 25 studies in 20 of the 22 folders here (two folders hold more than one), two more studies that are reported only in the papers, and two rows that are not tests, each in a folder of its own: the general model's five-sensor walking fit (`daily-sports-limbs/`) and a correction scored on the people the wrist models were fitted on (`wrist-forearm-correction/`). [The README](../README.md) has the short version.
 
 ## How to read the numbers
 
@@ -134,13 +134,13 @@ Two later comparisons used the same two people again, so they are not fresh test
 
 The pretrained model is Chronos-Bolt tiny, a forecasting model trained by others on many kinds of time series and downloaded as it is. [The comparison](daily-sports-arm/architecture/README.md) also times each forecast; its closing advice on what to build next is a proposal, not a result.
 
-### The general model's first fit, scored on the people it was fitted on: not a test
+### The general model's five-sensor walking fit, scored on the people it was fitted on: not a test
 
 Every score here is on the four people the model was fitted on. Nobody was held out, so nothing in this row is a test, and it enters none of the counts below. Errors in the units the sensors store.
 
 | # | Study | What was forecast | Tested on | Reference forecast | Challenger | Difference | People better with the challenger |
 | ---: | --- | --- | --- | --- | --- | --- | --- |
-| 27 | [Walking: the general model's first fit, five sensors](daily-sports-limbs/) | Each of five body sensors' three readings 120 ms ahead, from that sensor's own last 16 readings, while walking | nobody new: the 4 people it was fitted on | Straight-line fit made for the left-leg sensor alone: **1.929** | The general model, one fit for all five sensors: **1.837** at the left leg | not a test (scored on the people it was fitted on); the table below has all five sensors | 4 of 4 at the left leg; at most 3 of 4 at the other four sensors |
+| 27 | [Walking: the general model's five-sensor fit](daily-sports-limbs/) | Each of five body sensors' three readings 120 ms ahead, from that sensor's own last 16 readings, while walking | nobody new: the 4 people it was fitted on | Straight-line fit made for the left-leg sensor alone: **1.929** | The general model, one fit for all five sensors: **1.837** at the left leg | not a test (scored on the people it was fitted on); the table below has all five sensors | 4 of 4 at the left leg; at most 3 of 4 at the other four sensors |
 
 | Sensor | Repeat the last value | Straight-line fit for that sensor | Study 26's transformer, fitted for the right arm alone | The general model, one fit for all five | People for whom the general model beat every other forecast |
 | --- | --- | --- | --- | --- | --- |
@@ -317,7 +317,7 @@ Carrying a model to new people with no adjustment at all worked on the same task
 - **Passed by a margin too small to tell from zero:** study 18. Both averages were lower, by amounts whose ranges cross zero.
 - **Passed:** study 20, on whether a band set per part of the pinch is narrower, holds at least as many readings and scores lower than one width throughout. It was, for all three forecasts. That says nothing about which forecast is better.
 - **Set no rule:** the other 15.
-- **Not counted:** row 27, the general model's first fit. Its rule, set before fitting, was to beat every other forecast for every person, sensor by sensor, and it held at one sensor of five, the left leg. But it was applied to the people the model was fitted on, and every rule counted here was applied to people held out of the fit.
+- **Not counted:** row 27, the general model's five-sensor walking fit. Its rule, set before fitting, was to beat every other forecast for every person, sensor by sensor, and it held at one sensor of five, the left leg. But it was applied to the people the model was fitted on, and every rule counted here was applied to people held out of the fit.
 - **Not counted either:** row 29. Its plan said before fitting that a forearm gain needs the EMG correction to beat both the correction without EMG and the uncorrected forecast. Both held on the overall score, but only 3 of 6 people beat the uncorrected forecast, and all six had been used for fitting before.
 
 Every failed rule concerned EEG, EMG, a cue term or a network set against a plainer fit: the two networks of study 24 and the transformer of study 26. None concerned the plain history fit. No rule about adding a signal to a forecast was passed outright.

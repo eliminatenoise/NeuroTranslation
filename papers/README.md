@@ -35,7 +35,7 @@ Fourteen of the studies have a passage of their own in every edition. The number
 | 22 · Pinch, next day | [p. 37](current/neurotranslation-technical.pdf#page=37) | [p. 58](current/neurotranslation-explained.pdf#page=58) | [p. 18](current/brain2body-article.pdf#page=18) | [p. 29](current/brain2body-simple-english.pdf#page=29) |
 | Brain2Body only: development and repair in marsupials |  |  | [p. 30](current/brain2body-article.pdf#page=30) | [p. 43](current/brain2body-simple-english.pdf#page=43) |
 
-The other eleven have no passage of their own in all four. The NeuroTranslation paper tells five of them along the way: studies 1, 2, 5, 6 and 7. Six are not in the papers yet: 8, 10, 13, 23, 26 and 28, the newest, which holds the general model's first fits with muscle and brain signals. Nor are rows 27 and 29 of the studies page, the general model's first walking fit and a correction scored on the people the wrist models were fitted on, both made on 20 November, after the papers were built. [The studies page](../benchmarks/README.md) is the complete list.
+The other eleven have no passage of their own in all four. The NeuroTranslation paper tells five of them along the way: studies 1, 2, 5, 6 and 7. Six are not in the papers yet: 8, 10, 13, 23, 26 and 28, the newest, which holds the general model's first fits with muscle and brain signals. Nor are rows 27 and 29 of the studies page, the general model's five-sensor walking fit and a correction scored on the people the wrist models were fitted on, both made on 20 November, after the papers were built. [The studies page](../benchmarks/README.md) is the complete list.
 
 The [study notes](current/research-evidence-reading-aid.md) retell each study outside the papers.
 

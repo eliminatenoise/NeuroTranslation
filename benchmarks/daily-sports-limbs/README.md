@@ -1,4 +1,4 @@
-[The studies](../README.md) › Row 27 · Walking: the general model's first fit, five sensors (scored on the people it was fitted on: not a test)
+[The studies](../README.md) › Row 27 · Walking: the general model's five-sensor fit (scored on the people it was fitted on: not a test)
 
 # What will a walker’s leg sensor read next?
 
