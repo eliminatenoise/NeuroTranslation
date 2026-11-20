@@ -132,6 +132,8 @@ The [3D recordings](whole-body/README.md): trials 02_06, 13_11 and 132_23. The d
 
 Changed here: every fourth frame was kept, with 41 named markers, rounded to 0.1 mm for storage.
 
+The walk/run model was fitted to 31 CMU recordings. Its viewer includes two measured training excerpts, a walk from trial 07_01 and a run from 09_01. Each keeps every third frame from the selected interval and uses 18 surface landmarks. CMU’s terms apply to these excerpts, including copies inside the page and offline ZIP. [Model and data credits](../models/word-motion/RIGHTS.md)
+
 [CMU terms](http://mocap.cs.cmu.edu/) · [CMU FAQ](http://mocap.cs.cmu.edu/faqs.php)
 
 ## One more recording, behind the portable interface source

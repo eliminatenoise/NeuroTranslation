@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Walk or run? · NeuroTranslation</title>
+<style>/* STYLE */</style>
+</head>
+<body>
+<header class="mast"><div><strong>NeuroTranslation</strong><span>Movement studies</span></div><a id="save" href="index.html" download="walk-or-run.html">Save offline copy</a></header>
+<main>
+<section class="intro"><h1>Walk or run?</h1><p>Give the model an action word. It draws 0.60 seconds of a stride, from the swing of the wrists to the lift of the heels.</p></section>
+<div class="workbench">
+<section class="command">
+  <h2>Choose the action</h2>
+  <form id="form">
+    <label for="words">Action word</label>
+    <div class="input-row"><input id="words" value="walk" maxlength="120" autocomplete="off" spellcheck="false"><button class="go" type="submit">Generate</button></div>
+    <div class="examples" id="examples" aria-label="Example action words"></div>
+    <p role="status" id="status"></p>
+  </form>
+  <hr>
+  <h2>Compare the motion</h2>
+  <fieldset class="mode"><legend>Visible trajectories</legend>
+    <label><input type="radio" name="layer" value="generated" checked> Generated</label>
+    <label><input type="radio" name="layer" value="recorded"> Recorded example</label>
+    <label><input type="radio" name="layer" value="overlay"> Overlay both</label>
+  </fieldset>
+  <p id="reference-caption"></p>
+  <details id="point-details"><summary>Inspect a body point</summary>
+    <label for="point">Body point</label><select id="point"></select><p>The thin line traces this point over the full 0.60 seconds.</p><div id="readout"></div>
+  </details>
+</section>
+<section class="player" aria-label="3D movement viewer">
+  <div class="stage-top"><strong id="motion-title">Movement</strong><span id="layer-caption"></span></div>
+  <canvas id="stage" tabindex="0" aria-label="3D movement. Drag, or use arrow keys here to rotate.">Choose a body point to read its three coordinates.</canvas>
+  <div class="stage-foot"><span>Drag or use arrow keys to rotate</span><button type="button" id="reset">Reset view</button></div>
+  <div class="transport"><button type="button" id="play">Play</button><label class="sr" for="scrub">Time in movement</label><input id="scrub" type="range" min="0" max="24" step="1" value="0"><output id="time" for="scrub">0.000 s</output></div>
+  <p id="coordinate-note"></p>
+</section>
+</div>
+<section class="study"><div><h2>What the word buys you</h2><p id="scope"></p></div>
+<div><h2>How close did it get?</h2><p id="bench-note"></p><div id="bench"></div></div></section>
+<details class="sources"><summary>Recordings, model and units</summary><div id="sources"></div></details>
+<noscript>Enable JavaScript to generate or inspect a movement.</noscript>
+</main>
+<script type="application/json" id="motion-data">/* DATA */</script>
+<script>/* INFERENCE */</script>
+<script>/* CAMERA */</script>
+<script>/* VIEWER */</script>
+</body></html>

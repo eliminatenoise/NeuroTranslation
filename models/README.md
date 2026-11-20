@@ -4,6 +4,12 @@
 
 **[Try all three paths in the browser](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/).** Compare two wrist angles as movement, forearm and scalp inputs change. See how much a forearm-based correction adds to a motion forecast, or switch to a distance forecast for a wrist or rat. Each forecast shows its original units. [Unified browser API](neurotranslate-browser/) · [Download the JavaScript runtime](movement-browser.zip)
 
+## Generate a walk or a run
+
+Enter **walk** or **run**. A small network fitted to 31 motion-capture recordings generates the positions of 18 surface landmarks over 0.60 seconds. The viewer can overlay those points on a measured training example. Two walks and a run qualified for the held-out comparison. The model’s average error relative to the pelvis was 89.82 mm. Using the training average for each action gave 89.88 mm.
+
+[Try the two commands](https://eliminatenoise.github.io/NeuroTranslation/word-motion/) · [Python and JavaScript inference, weights and study](word-motion/) · [Offline viewer and model (ZIP)](word-motion.zip)
+
 ## Which wrist forecast should I run?
 
 Both downloads below forecast how far the right wrist will bend back and tilt towards the thumb a quarter-second later. Each accepts recent wrist motion and optional measurements of electrical activity at the forearm. Both run locally with Python and NumPy.

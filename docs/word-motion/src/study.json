@@ -1,0 +1,59 @@
+{
+  "examples": [
+    "walk",
+    "run"
+  ],
+  "scope": "The model learned two actions from 31 motion-capture trials across six CMU catalogue groups. “Walking” calls up the same movement as “walk”. “Running”, “jog”, “jogging” and “run/jog” call up “run”. It generates the same stride segment each time. A forecast of one person’s next step would need observations of that person. Arbitrary instructions and neural intent remain outside this study.",
+  "metric": "Eight trials from three CMU catalogue groups were set aside. Three trials from two groups met the 120 Hz recording requirement. The other five ran at 60 Hz. We measured the distance between each generated and recorded body point relative to its pelvis, then averaged across times, points and trials, giving each group equal weight.",
+  "conclusion": "The model edged the action mean by 0.06 mm. Two walks and one run give little evidence of an advantage beyond these examples. The generated pelvis path also differed from the recorded one by 185.0 mm on average.",
+  "rows": [
+    [
+      "Word-conditioned model",
+      89.8167552947998
+    ],
+    [
+      "Mean for each action",
+      89.87807369232178
+    ],
+    [
+      "Decoder without action words",
+      102.50599098205566
+    ],
+    [
+      "Mean across both actions",
+      102.52171897888184
+    ],
+    [
+      "Decoder with shuffled words",
+      114.13068771362305
+    ]
+  ],
+  "sourceNotes": [
+    "Carnegie Mellon University recorded reflective markers on people walking and running. The 18 displayed sites use surface markers or the mean of two markers. Lines connect these sites as a guide. The source gives us neither the internal joint centres nor their measurement error.",
+    "Each excerpt preserves 25 samples, every third frame of a 120 Hz recording. To align the strides, the study used the moment in the middle part of each trial when the right heel had its largest forward lead over the left. That alignment uses the recorded movement itself. The 0.60-second model output follows this convention.",
+    "The pelvis is the mean of four waist markers. Body sites are generated relative to the pelvis at that instant, then added to its displacement from the first frame. The Y axis follows the recording’s overall course. A short window may move backward along it. X points right of that course, Z points up, and left and right limb labels follow the person. The grid sits at the lowest height in either displayed trajectory.",
+    "The data used in this project was obtained from mocap.cs.cmu.edu. The database was created with funding from NSF EIA-0196217. CMU prohibits direct resale of its data, including converted data. Original viewer code and text use CC0 1.0."
+  ],
+  "links": [
+    [
+      "Walk recording · CMU 07_01",
+      "https://mocap.cs.cmu.edu/subjects/07/07_01.c3d"
+    ],
+    [
+      "Run recording · CMU 09_01",
+      "https://mocap.cs.cmu.edu/subjects/09/09_01.c3d"
+    ],
+    [
+      "CMU Motion Capture Database and data terms",
+      "https://mocap.cs.cmu.edu/"
+    ],
+    [
+      "Model weights, Python generator, protocol and results",
+      "https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/word-motion"
+    ],
+    [
+      "CC0 1.0 dedication for the viewer",
+      "https://creativecommons.org/publicdomain/zero/1.0/"
+    ]
+  ]
+}

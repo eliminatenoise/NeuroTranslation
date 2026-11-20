@@ -16,6 +16,10 @@ Keep the file extensions, and follow your system's usual prompts about a downloa
 
 Checked: the format of the Windows and macOS shortcuts, and the Linux installer in an isolated folder. Not checked: opening the shortcuts on a real Windows or macOS machine. [Checksums](docs/launchers/SHA256SUMS)
 
+## Walk or run, online or offline
+
+Type **walk** or **run** to see a short model-generated stride. For the offline version, unpack the ZIP and open `docs/word-motion/index.html`, or use the Windows, macOS or Linux launcher beside it. The fitted weights and Python and JavaScript inference code are in `models/word-motion/`. [Open the viewer](https://eliminatenoise.github.io/NeuroTranslation/word-motion/) · [Download the viewer and model](models/word-motion.zip)
+
 ## Offline copies of the study readers
 
 Each ZIP holds one reader and its own launchers for Windows, macOS and Linux. Unpack the whole folder, then open the launcher for your system, or open `index.html`. A recording you open is read on your computer and goes nowhere. Each reader is named after its study, with the study's number on [the studies page](benchmarks/README.md).
