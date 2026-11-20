@@ -35,7 +35,7 @@
     ]
   },
   "scope_note": "Names and definitions identify the programme and development scope. They do not establish a completed game, validated model, biological or clinical capability.",
-  "release_policy": "Existing experimental previews may be published with their actual version, source and limitations. Production-grade acceptance is not a prerequisite for preview upload; privacy, redistribution rights, security and truthful scientific scope remain required. Paper content pointers distinguish selected compiled PDFs from preserved historical source snapshots; content identity does not establish remote publication verification. Git history and original local evidence remain.",
+  "release_policy": "Work is published here while it is still experimental, with its version, sources and limits stated. Privacy, redistribution rights, security and an honest statement of scientific scope are required of everything published.",
   "license_note": "Project-owned contributions CC0-1.0; third-party materials retain their own rights and notices.",
   "development_status": "active; work has resumed alongside NeuroSurge and Interoceptomics",
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
@@ -45,8 +45,8 @@
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
       "buildId": "766379180ba7fc610ce31b9ee2c6dc7649159c11732d0064640bf63fcb94574a",
-      "meaning": "Import and inspect recordings locally. Replay the R1 cohort fit, or compare the fixed and personally calibrated models on an imported R2 trial. Full R2 trials are checked against their archived sample clock and four selected input streams. Aggregate evidence is shown separately.",
-      "hosting": "Prepared static main/docs payload; actual Pages deployment/readback is verified separately",
+      "meaning": "Import and inspect recordings locally. Replay the fit made on first recordings (R1), or compare the fixed and personally calibrated models on an imported second recording (R2). Complete R2 trials are checked against their archived sample clock and the four input streams the study used. Group results are shown separately.",
+      "hosting": "Static files in docs/ on the main branch, served by GitHub Pages.",
       "study": "benchmarks/scalp-eeg-palm-history",
       "model_sha256": "c9c9e6a5c357274103e339f69517ae6a11f1d90c39f1d172585ad81a38ee8337",
       "personal_calibration_study": "benchmarks/scalp-eeg-personal-calibration",
@@ -65,7 +65,7 @@
       },
       "navigation_overlay": {
         "entry_source": "demo/src/index.html",
-        "scope": "The source chooser is part of the rebuilt, content-addressed Pages companion. The ordinary generic CSV/JSON inspector remains available.",
+        "scope": "The recording-source chooser is part of the app. The general CSV and JSON inspector remains available.",
         "recording_sources": 7,
         "entry": "docs/index.html#study-readers",
         "fit": "docs/cemhsey-arrays/index.html#fit-local",
@@ -82,11 +82,11 @@
       "manifest": "papers/current/manifest.json",
       "manifest_sha256": "cd0b1aaf3fb7cfa08b902e932a3d9ef3b74828fc9bfa1733111eb0843500defc",
       "scope": "Four manuscripts now report the prospective next-day transfer of a personal correction. At 50% MVC, carrying the five-grid correction improved mean absolute error by 0.000006520 of MVC versus fresh practice, with better forecasts in three of four people. The simple current-force-plus-scheduled-change control still gave the lowest mean error. The corpus covers four adults and one transition between indexed recording days.",
-      "build_provenance": "Four PDFs rebuilt through the retained offline Tectonic toolchain.",
+      "build_provenance": "Four PDFs built offline with the Tectonic TeX engine.",
       "historical_erratum": null,
       "historical_source": null,
-      "source_status": "77 cleared TeX/BibTeX files. The manifest identifies omitted build dependencies.",
-      "publication_scope": "This metadata identifies selected content; actual publication and remote readback require a separate receipt.",
+      "source_status": "77 TeX and BibTeX files. The manifest lists the inputs a full rebuild also needs.",
+      "publication_scope": "This block identifies the files of the current edition.",
       "download_bundle": {
         "path": "papers/downloads/NeuroTranslation-Brain2Body-Papers.zip",
         "bytes": 3401572,
@@ -111,7 +111,7 @@
           "bytes": 629286,
           "sha256": "dbdf2c6ef372e196fab772359c5cefe6eafd1b8c11b38d028e829096da8ce63f",
           "members": 80,
-          "scope": "77 cleared TeX/BibTeX files. The manifest identifies omitted build dependencies."
+          "scope": "77 TeX and BibTeX files. The manifest lists the inputs a full rebuild also needs."
         }
       },
       "historical_scientific_layout": {
@@ -126,7 +126,7 @@
           "sha256": "519a88c6881852b66d5db8efd74e351a661a6acfeb643ee79cc68f489a69bf9b",
           "members": 14,
           "extraction_folder": "NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15",
-          "scope": "Four exact selected PDFs, three companions, README, content manifest and five notice files. No standalone font, source, model or private evidence files. Native extraction/PDF-link behavior across operating systems remains unverified."
+          "scope": "Four PDFs, three companion files, README, manifest and five notice files; no font, source or model files."
         },
         "source_status": "No matching source was published with that edition."
       },
@@ -134,7 +134,7 @@
     },
     "portable_interface": {
       "source": "interfaces/experimental/portable",
-      "status": "Source only; no model payload, download, runtime or finished GUI claim"
+      "status": "Source only: no model weights, no download, nothing that runs, not a finished interface."
     },
     "wrist_pointing": {
       "source_doi": "https://doi.org/10.6084/m9.figshare.29666735.v3",
@@ -152,7 +152,7 @@
         "motion_plus_EMG": 6.174289,
         "motion_plus_EMG_and_EEG": 6.126739
       },
-      "scope_note": "The interactive controls change explicitly invented features. Reported errors describe separate, frozen analyses of the measured pointing task at a nominal 250 ms forecast horizon; physical latency is unmeasured."
+      "scope_note": "The interactive controls change explicitly invented features. Reported errors describe separate, fixed analyses of the measured pointing task at a nominal 250 ms forecast horizon; physical latency is unmeasured."
     },
     "wrist_pointing_forecasts": {
       "dataset": "EEG-EMG-WristMotion v3",
@@ -189,7 +189,7 @@
         "dataset_doi": "10.6084/m9.figshare.29666735.v3",
         "data_license": "CC BY 4.0",
         "public_contents": "Public artifact contains aggregate scores, fitted models, code and checksums; the reader supplies a trial locally.",
-        "limits": "Verified on Linux Chromium with hosted, offline and emulated narrow-screen cases. No TEST records included or examined."
+        "limits": "Verified on Linux Chromium with hosted, offline and emulated narrow-screen cases. No recordings from the reserved test group are included or were examined."
       }
     },
     "wrist_forearm_transfer": {
@@ -267,7 +267,7 @@
           "bytes": 96254,
           "sha256": "9c9d992c0f58a7fc0ff9cf0f64ea99d88ca4e8ad12c7535615505b3bc1fc4c1f"
         },
-        "scope": "Estimates of retrospectively filtered glove angles in offline daily-activity trials. The interface runs two fixed estimators and a weighted combination on invented or compatible local inputs. The weights were selected within training. The four development participants had been studied before, and final test participants remain reserved."
+        "scope": "Estimates of retrospectively filtered glove angles in offline daily-activity trials. The interface runs two fixed estimators and a weighted combination on invented or compatible local inputs. The weights were chosen using training data only. The four development participants had been studied before, and the final test participants are still unopened."
       }
     },
     "way_grip_force": {
@@ -338,7 +338,7 @@
         400
       ],
       "recording_clock_horizon_ms": 120,
-      "scope": "Two offline grip-force forecasts compared after the tenth consecutive sample at or above 0.5 N on the 500 Hz recording clock. Adding aligned scalp EEG increased average error in both families on the same explored development cohort. Final test reserved. The launchers use invented input by default.",
+      "scope": "Two offline grip-force forecasts compared after the tenth consecutive sample at or above 0.5 N on the 500 Hz recording clock. Adding aligned scalp EEG increased average error in both families on the same development group, which had been looked at before. The final test group is still unopened. The launchers use invented input by default.",
       "browser": {
         "entry": "docs/contact-force/index.html",
         "url": "https://eliminatenoise.github.io/NeuroTranslation/contact-force/",
@@ -358,7 +358,7 @@
           "sha256": "932e26938b53ffc44fbe402679410eb2554445fc0c47e8fb952d34439150bb44"
         },
         "build_instructions": "benchmarks/way-contact-force/browser-release/README.md",
-        "scope": "Frozen ridge and causal CNN weights run on the same prior window. An invented example or compatible local JSON supplies inputs. A future target sample can be shown only when supplied. Rotation is an aggregate control. The 120 ms horizon is on the recording clock."
+        "scope": "Fixed ridge and causal CNN weights run on the same prior window. An invented example or compatible local JSON supplies inputs. A future target sample can be shown only when supplied. Rotation is an aggregate control. The 120 ms horizon is on the recording clock."
       }
     },
     "hygrip_force": {
@@ -394,7 +394,7 @@
         "development_common_scored_issues": 7995,
         "development_directional_screen_passed": false
       },
-      "scope": "First scoring of three original HYGRIP development participants after public protocol posting. The browser uses fixed TRAIN fits and invented example inputs by default. FINAL remains reserved.",
+      "scope": "First scoring of three original HYGRIP development participants after public protocol posting. The browser uses fixed fits from the training group and invented example inputs by default. The final test group is still unopened.",
       "secondary_emg": {
         "path": "benchmarks/hygrip-force/forearm-results/README.md",
         "training": {
@@ -413,7 +413,7 @@
           "bytes": 39241
         },
         "tested_endpoint": "forecast of released sensor voltage 120 ms after issue",
-        "scope": "Secondary right-hand analysis on the same three previously studied development people. Timing-specific forearm EMG and scalp EEG directional screens failed on TRAIN and DEV."
+        "scope": "Secondary right-hand analysis on the same three previously studied development people. Timing-specific forearm EMG and scalp EEG directional screens failed on the training group and on the development group."
       }
     },
     "hyser_index": {
@@ -429,7 +429,7 @@
           "bytes": 53858,
           "sha256": "17e7fa782aeb4fd3ca994d7a141cec750e7d3835e70857b0edc28f43858c6a25"
         },
-        "decision": "No average primary incremental gain from aligned EMG in this experiment; held-participant and day-specific results reported.",
+        "decision": "Aligned EMG gave no average gain on the main measure in this experiment; results for each held-out participant and each day are reported.",
         "development_people": 4
       },
       "url": "https://eliminatenoise.github.io/NeuroTranslation/hyser-index/",
@@ -451,7 +451,7 @@
           "bytes": 7004,
           "sha256": "8b57ab57f7b72829ce09bb22c022c15f87a381ba0d2b2308e096a8eeb4811f5d"
         },
-        "scope": "Matched Day 1 supervised calibration on an output offset and gain, followed by fixed Day 2 scoring. Shared model had the lowest mean Day 2 MAE on the four previously studied DEV participants. Paired-donor control and pair-level descriptive uncertainty are reported.",
+        "scope": "Matched Day 1 supervised calibration on an output offset and gain, followed by fixed Day 2 scoring. Shared model had the lowest mean Day 2 MAE on the four development participants, who had been studied before. Paired-donor control and pair-level descriptive uncertainty are reported.",
         "results": {
           "path": "benchmarks/hyser-index/crossday/RESULTS.json",
           "bytes": 18360,
@@ -588,7 +588,7 @@
         "sha256": "20784db8a62434247bef939593787156b6c2518dec5f3bb0e33b75126934acdb",
         "bytes": 1103
       },
-      "status": "Measured held comparison of pooled and cue-phase widths; public single-trial example uses invented values.",
+      "status": "Measured comparison of pooled and cue-phase widths on held-out trials; the public single-trial example uses invented values.",
       "results": {
         "path": "benchmarks/cemhsey-intervals/RESULTS.json",
         "bytes": 16485,
@@ -633,7 +633,7 @@
         "sha256": "dd55a1a94172e3d5de2f0a95f0e416a57b352ff976715590121ebabafffc91ab"
       },
       "point_forecasts": 4,
-      "support": "CEMHSEY GRASP Session 5 Task 2 duplicates detected from canonical local packet contents. Training, interval calibration and evaluation are distinct."
+      "support": "Duplicate CEMHSEY GRASP Session 5 Task 2 recordings are detected from the decoded contents of the local files. Training, interval calibration and evaluation use separate recordings."
     },
     "cemhsey_force_transfer": {
       "protocol": {
@@ -697,7 +697,7 @@
         "bytes": 1016,
         "sha256": "02af0de3738d3cb7fa9923b6fc9277902b3639370b98cb53e22b6b4b63747451"
       },
-      "status": "Second repeats on the next indexed day independently scored, source-scope checked.",
+      "status": "Second repeats on the next indexed day, scored independently; the set of source recordings was checked.",
       "aggregate": {
         "path": "benchmarks/cemhsey-carry/RESULTS.json",
         "bytes": 87536,
@@ -751,7 +751,7 @@
         "bytes": 1166,
         "sha256": "4ca8e9bb9666ff921bfad49ceb6b56cbbebdec3599b4685e7ae7bfda338fa635"
       },
-      "status": "Six test records scored on an independent group, then independently reproduced. Public ranges rounded outward under the pre-outcome reporting rule.",
+      "status": "Six test records scored on an independent group, then independently reproduced. Public ranges rounded outward under the reporting rule set before the results were seen.",
       "public_reporting": {
         "path": "benchmarks/cemhsey-phase/PUBLIC-REPORTING.md",
         "sha256": "bdd81c63eb0516e481d9a6b1a9e5a09cb583e89590a2c239a40f5bde3be765bf",
@@ -808,11 +808,11 @@
         "bytes": 9297,
         "sha256": "7e36a71dc2bc6fb1602eaaaa9df39935d4d6c92950bd36af9608ca82851b0402"
       },
-      "edition": "2026-11-19-pre-dev",
-      "status": "Protocol and source coverage after TRAIN work began and before DEV or FINAL access.",
+      "edition": "2026-11-19-first-development",
+      "status": "Finished. The three development participants were first scored after the protocol was published; the results are in experimental_previews.hygrip_force. The final test group is still unopened.",
       "scope": "Cued right-hand power grip in a separate dataset. Target is a transducer-voltage reading 120 ms ahead on the released clock.",
-      "runnable_model": false,
-      "model_results": false
+      "runnable_model": true,
+      "model_results": true
     },
     "hygrip_cue_phase": {
       "design": {
@@ -821,7 +821,7 @@
         "sha256": "8b84c26db90a9019a12a0a78706b0ab5dae072217b73257914bd3802b8f9cb38"
       },
       "scope": "Comparison of cue-conditioned and shared voltage dynamics on the previously studied healthy HYGRIP cohort.",
-      "outcome": "The phase-conditioned residual did not beat the original full-history benchmark on either split. Previously studied development cohort. The full-history ridge remains selected.",
+      "outcome": "The phase-conditioned residual did not beat the original full-history benchmark on either split. Previously studied development cohort. The full-history ridge stays the chosen model.",
       "results": {
         "path": "benchmarks/hygrip-force/cue-phase/README.md",
         "bytes": 4413,
@@ -845,7 +845,7 @@
         "bytes": 53858,
         "sha256": "17e7fa782aeb4fd3ca994d7a141cec750e7d3835e70857b0edc28f43858c6a25"
       },
-      "decision": "No average primary incremental gain from aligned EMG in this experiment; held-participant and day-specific results reported.",
+      "decision": "Aligned EMG gave no average gain on the main measure in this experiment; results for each held-out participant and each day are reported.",
       "development_people": 4
     },
     "hyser_crossday": {
@@ -854,7 +854,7 @@
         "bytes": 7004,
         "sha256": "8b57ab57f7b72829ce09bb22c022c15f87a381ba0d2b2308e096a8eeb4811f5d"
       },
-      "scope": "Matched Day 1 supervised calibration on an output offset and gain, followed by fixed Day 2 scoring. Shared model had the lowest mean Day 2 MAE on the four previously studied DEV participants. Paired-donor control and pair-level descriptive uncertainty are reported.",
+      "scope": "Matched Day 1 supervised calibration on an output offset and gain, followed by fixed Day 2 scoring. Shared model had the lowest mean Day 2 MAE on the four development participants, who had been studied before. Paired-donor control and pair-level descriptive uncertainty are reported.",
       "results": {
         "path": "benchmarks/hyser-index/crossday/RESULTS.json",
         "bytes": 18360,
@@ -984,7 +984,7 @@
         "sha256": "20784db8a62434247bef939593787156b6c2518dec5f3bb0e33b75126934acdb",
         "bytes": 1103
       },
-      "status": "Measured held comparison of pooled and cue-phase widths; public single-trial example uses invented values.",
+      "status": "Measured comparison of pooled and cue-phase widths on held-out trials; the public single-trial example uses invented values.",
       "results": {
         "path": "benchmarks/cemhsey-intervals/RESULTS.json",
         "bytes": 16485,
@@ -1059,7 +1059,7 @@
         "bytes": 1016,
         "sha256": "02af0de3738d3cb7fa9923b6fc9277902b3639370b98cb53e22b6b4b63747451"
       },
-      "status": "Second repeats on the next indexed day independently scored, source-scope checked.",
+      "status": "Second repeats on the next indexed day, scored independently; the set of source recordings was checked.",
       "aggregate": {
         "path": "benchmarks/cemhsey-carry/RESULTS.json",
         "bytes": 87536,
@@ -1113,7 +1113,7 @@
         "bytes": 1166,
         "sha256": "4ca8e9bb9666ff921bfad49ceb6b56cbbebdec3599b4685e7ae7bfda338fa635"
       },
-      "status": "Six test records scored on an independent group, then independently reproduced. Public ranges rounded outward under the pre-outcome reporting rule.",
+      "status": "Six test records scored on an independent group, then independently reproduced. Public ranges rounded outward under the reporting rule set before the results were seen.",
       "public_reporting": {
         "path": "benchmarks/cemhsey-phase/PUBLIC-REPORTING.md",
         "sha256": "bdd81c63eb0516e481d9a6b1a9e5a09cb583e89590a2c239a40f5bde3be765bf",
@@ -1161,5 +1161,6 @@
       },
       "limitations": "Three fitting and three separate evaluation participants; one target on one indexed day. Other records from these people were known in prior studies. Forecast horizon uses nominal indices."
     }
-  }
+  },
+  "prospective_studies_note": "Studies entered here when they were planned. All eleven now have results, given or linked in each entry; none is still waiting to be run."
 }
