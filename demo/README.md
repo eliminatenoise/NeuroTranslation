@@ -15,15 +15,17 @@ npm test
 npm run build
 ```
 
-`npm test` runs the checks on constructed data. `npm run build` writes `dist/`: an `index.html`, its scripts and data under names that carry the build's hash, and a manifest. Serve that folder over HTTP. The app has no dependencies, so there is nothing to install.
+`npm test` runs the checks on invented data. `npm run build` writes `dist/`: an `index.html`, its scripts and data under names that carry the build's hash, and a manifest. Serve that folder over HTTP. The app has no dependencies, so there is nothing to install.
 
 ## Give it a file
 
-**JSON.** Download the example from the app to see a complete file. It holds `schemaVersion: 1`, one `dataset` object and a `streams` list. The dataset says what was recorded: an ID, a name, the organism, the subject, the recording, the task, the clock (`timebase`), where it came from, its licence and which split it belongs to (`split`). Each stream gives an ID, its kind (`modality`), a label, a unit, an origin, timestamps in seconds and values. A value may be `null` where the source has none.
+**JSON.** Download the example from the app to see a complete file. It holds `schemaVersion: 1`, one `dataset` object and a `streams` list. The dataset says what was recorded: an ID, a name, the organism, the subject, the recording, the task, the clock (`timebase`), where it came from, its licence, and whether it was used to fit a model or held back to test one (`split`). Each stream gives an ID, its kind (`modality`), a label, a unit, an origin, timestamps in seconds and values. A value may be `null` where the source has none.
 
 **CSV.** Two columns, `time,value`, with time in seconds. You type the rest into the import form, and you choose the kind of signal and its origin yourself.
 
 A stream's kind is `neural`, `muscle`, `displacement` or `mechanics`. EMG is `muscle`. A neural stream may say where it was recorded: `brain`, `spinal`, `peripheral`, `autonomic` or `visceral`. Leave that out if you do not know it.
+
+These are kinds of measurement. They are not the four kinds of training data in [the project's README](../README.md): a simulated stream is marked by its origin, which comes next.
 
 A stream's origin is `measured`, `derived` (computed from a recording, such as filtered EMG), `inferred` (a model's output) or `simulated` (a simulator's output). The origin travels with every sample into every export. To tie a derived stream to the recording it came from, name the parent in `policyMetadata.provenance.derivedFrom`; [docs/METADATA.md](docs/METADATA.md) gives the format.
 
@@ -65,6 +67,6 @@ All of this is replay of recordings that were processed after the fact. Nothing 
 
 ## What the app is not
 
-It is not the general model, and it does not turn one kind of signal into another. Its built-in example is invented numbers, labelled as invented wherever they appear, and is there to show the controls. It holds no recordings: its dataset cards link to the archives.
+It does not turn one kind of signal into another. Its built-in example is invented numbers, labelled as invented wherever they appear, and is there to show the controls. It holds no recordings: its dataset cards link to the archives.
 
 The app's own code is dedicated to the public domain under [CC0 1.0](LICENSE). The recordings it reads belong to the people who made them: [RIGHTS.md](RIGHTS.md).
