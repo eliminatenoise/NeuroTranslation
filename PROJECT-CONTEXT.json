@@ -80,38 +80,38 @@
     "papers": {
       "latest_rendered": "papers/current",
       "manifest": "papers/current/manifest.json",
-      "manifest_sha256": "8859c64f4ed2779fe02de999cd88354d2f9afcf26d733f2a467227a13a9311e9",
-      "scope": "Four manuscripts now report the prospective next-day transfer of a personal correction. At 50% MVC, carrying the five-grid correction improved mean absolute error by 0.000006520 of MVC versus fresh practice, with better forecasts in three of four people. The simple current-force-plus-scheduled-change control still gave the lowest mean error. The corpus covers four adults and one transition between indexed recording days.",
-      "build_provenance": "Four PDFs built offline with the Tectonic TeX engine.",
+      "manifest_sha256": "fdeb470b4a17a1985e5eadef3f9344fdb25265746cd2f4988563ee12473246e6",
+      "scope": "The current edition, 20 November 2026: NeuroTranslation (53 pages, Simple English Edition 63) and Brain2Body (29 pages, Simple English Edition 33), working drafts not reviewed outside the project. NeuroTranslation reports every study of the numbered table, 1 to 29, with a row for each in its appendix B.",
+      "build_provenance": "Four PDFs built offline with the Tectonic 0.17 TeX engine; a rebuild from the source ZIP gives the same bytes.",
       "historical_erratum": "",
       "historical_source": "",
-      "source_status": "77 TeX and BibTeX files. The manifest lists the inputs a full rebuild also needs.",
+      "source_status": "The complete source of the four PDFs (91 files: TeX, bibliography, figure, fonts and tools), the build script, and the ledger and small result files its number check reads. The TeX engine and its package files are named in the ZIP, not included.",
       "publication_scope": "This block identifies the files of the current edition.",
       "download_bundle": {
         "path": "papers/downloads/NeuroTranslation-Brain2Body-Papers.zip",
-        "bytes": 3399662,
-        "sha256": "abd8bb77b9868aed7a18c36031fe6392b6f1f22e85f9247ad09a571d45afdef3",
+        "bytes": 831408,
+        "sha256": "548ae0d21ac73e58354295ede7111c098610975011b9db8b053093438e222049",
         "checksum": "downloads/NeuroTranslation-Brain2Body-Papers.zip.sha256",
-        "members": 15,
-        "extraction_folder": "NeuroTranslation-Brain2Body-CEMHSEY-Pinch-Next-Day-2026-11-19"
+        "members": 19,
+        "extraction_folder": "NeuroTranslation-Brain2Body-Papers"
       },
       "latest_experimental_candidate": {
-        "version": "cemhsey-pinch-carry-2026-11-19",
+        "version": "2026-11-20",
         "directory": "papers/current",
         "archive": {
           "path": "papers/downloads/NeuroTranslation-Brain2Body-Papers.zip",
-          "bytes": 3399662,
-          "sha256": "abd8bb77b9868aed7a18c36031fe6392b6f1f22e85f9247ad09a571d45afdef3"
+          "bytes": 831408,
+          "sha256": "548ae0d21ac73e58354295ede7111c098610975011b9db8b053093438e222049"
         },
-        "reading_aid": "papers/current/research-evidence-reading-aid.md",
-        "pages_total": 629,
-        "scope": "Four manuscripts now report the prospective next-day transfer of a personal correction. At 50% MVC, carrying the five-grid correction improved mean absolute error by 0.000006520 of MVC versus fresh practice, with better forecasts in three of four people. The simple current-force-plus-scheduled-change control still gave the lowest mean error. The corpus covers four adults and one transition between indexed recording days.",
+        "reading_aid": null,
+        "pages_total": 178,
+        "scope": "The current edition, 20 November 2026: NeuroTranslation (53 pages, Simple English Edition 63) and Brain2Body (29 pages, Simple English Edition 33), working drafts not reviewed outside the project. NeuroTranslation reports every study of the numbered table, 1 to 29, with a row for each in its appendix B.",
         "selected_manuscript_source": {
           "path": "papers/downloads/NeuroTranslation-Brain2Body-Papers-Source.zip",
-          "bytes": 629286,
-          "sha256": "dbdf2c6ef372e196fab772359c5cefe6eafd1b8c11b38d028e829096da8ce63f",
-          "members": 80,
-          "scope": "77 TeX and BibTeX files. The manifest lists the inputs a full rebuild also needs."
+          "bytes": 2534173,
+          "sha256": "97f2ee89fd16ed3a5dc8c3d8943dbeb43878bfc4fbcff0815d8a2df78c002f26",
+          "members": 107,
+          "scope": "The complete source of the four PDFs (91 files: TeX, bibliography, figure, fonts and tools), the build script, and the ledger and small result files its number check reads. The TeX engine and its package files are named in the ZIP, not included."
         }
       },
       "historical_scientific_layout": {

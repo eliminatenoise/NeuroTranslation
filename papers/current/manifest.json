@@ -1,228 +1,295 @@
 {
-  "schema": "experimental-paper-candidate-v5",
-  "version": "cemhsey-pinch-carry-2026-11-19",
-  "status": "Experimental working drafts",
-  "previous_paper_release": "ab12fccc18709c3d56227984a410809957959228",
+  "schema": "paper-edition-v6",
+  "version": "2026-11-20",
+  "status": "Working drafts",
+  "previous_paper_release": "41d573cd908561a893d73c961d8a38a7e5e7cdac",
   "grip_benchmark_commit": "3af280cdb164a35e35c50cded35dcbdc199f6a19",
-  "previous_candidate_receipt_sha256": "7b2c8b6ec1c2531ac2914cb5d553b935f8c76ecdc82a7be51dfbf76260165af8",
+  "previous_candidate_receipt_sha256": "8859c64f4ed2779fe02de999cd88354d2f9afcf26d733f2a467227a13a9311e9",
   "grip_aggregate_sha256": "1f831ffa7cfe943b100487e7fdddeb980628d9827b5d4c05fbf54dc2931e7021",
   "glossary": {
-    "revision": 36,
-    "sha256": "40b98695e6204bc9e305ecdea853756aec30f48a6ae67d29e92c8bb220b3e406"
+    "revision": null,
+    "sha256": "4d3ad0bc8a13677285e2b841dd8be080af92c6af728071cdb076bf3feeda5e71"
   },
-  "rights": "The notices accompany the PDF fonts. Review of figure, dataset, participant and combined-use rights remains open.",
+  "rights": "NOTICE.md lists every dataset, simulator and typeface the papers rely on, with its licence and the credit it is owed; the two font licence texts are in third-party-notices/. Where NOTICE.md says a licence is to be confirmed at its source, it has not yet been checked there.",
   "PDFs": [
     {
-      "correction_page": 23,
-      "uji_page": 24,
-      "hygrip_primary_page": 27,
-      "hygrip_secondary_page": 28,
-      "hyser_index_page": 28,
-      "hyser_next_day_page": 30,
-      "hyser_whole_hand_page": 30,
-      "grip_page": 25,
+      "correction_page": 50,
+      "uji_page": 50,
+      "hygrip_primary_page": 50,
+      "hygrip_secondary_page": 50,
+      "hyser_index_page": 51,
+      "hyser_next_day_page": 51,
+      "hyser_whole_hand_page": 51,
+      "grip_page": 50,
       "development_page": null,
       "filename": "neurotranslation-technical.pdf",
-      "sha256": "f92b251fb380f51e8ae6182bf7a2c5ab48abe52c9b419075fbc17884ef286309",
-      "bytes": 1793497,
-      "pages": 153,
-      "previous_pdf_sha256": "13d6bd5de3dd10c26ee679e62a03938a72b6ea266ce93b94894335b3c51a6f8a",
-      "previous_pages": 152,
-      "hyser_end_page": 32,
+      "sha256": "2875e251694d0b40d0309a400f4880e50cdc8c81a59a50d7ab2b32a1a2ad93dd",
+      "bytes": 247030,
+      "pages": 53,
+      "previous_pdf_sha256": "f92b251fb380f51e8ae6182bf7a2c5ab48abe52c9b419075fbc17884ef286309",
+      "previous_pages": 153,
+      "hyser_end_page": 51,
       "reference_pages": [
-        144
+        36
       ],
-      "rasterized_pages": [
-        36,
-        37,
-        38,
-        39
-      ],
-      "prescribed_task_page": 31,
-      "pinch_page": 32,
-      "pinch_end_page": 34,
-      "five_grid_page": 34,
-      "five_grid_end_page": 35,
-      "interval_page": 35,
-      "interval_end_page": 36,
-      "transfer_page": 36,
-      "transfer_end_page": 37,
-      "carry_page": 37,
-      "carry_end_page": 38
+      "rasterized_pages": [],
+      "prescribed_task_page": 51,
+      "pinch_page": 51,
+      "pinch_end_page": 51,
+      "five_grid_page": 51,
+      "five_grid_end_page": 51,
+      "interval_page": 51,
+      "interval_end_page": 51,
+      "transfer_page": 51,
+      "transfer_end_page": 51,
+      "carry_page": 51,
+      "carry_end_page": 51,
+      "named_destinations": {
+        "sec:wrist-forecast-evidence": 50,
+        "sec:forearm-correction": 50,
+        "sec:uji-wrist": 50,
+        "sec:surface-emg-elbow": 50,
+        "sec:scalp-eeg-pilot": 50,
+        "sec:scalp-eeg-palm-history": 50,
+        "sec:way-grip": 50,
+        "sec:hygrip-primary": 50,
+        "sec:hygrip-forearm": 50,
+        "sec:hyser-index": 51,
+        "hyser-next-day": 51,
+        "hyser-whole-hand": 51,
+        "cemhsey-pinch": 51,
+        "cemhsey-five-grid": 51,
+        "cemhsey-pinch-intervals": 51,
+        "cemhsey-transfer": 51,
+        "cemhsey-carry": 51,
+        "sec:self-forecast": 51,
+        "sec:earlier-recorded-signals": 52,
+        "palm-calibration": 50,
+        "way-contact": 50,
+        "hygrip-cue-phase": 50,
+        "hyser-prescribed": 51,
+        "cemhsey-phase": 51,
+        "daily-sports-arm": 51,
+        "paired-wrist-forecast": 50,
+        "daily-sports-limbs": 51,
+        "wrist-forearm-correction": 50,
+        "appendix.A": 46,
+        "appendix.B": 49
+      }
     },
     {
-      "correction_page": 42,
-      "uji_page": 42,
-      "hygrip_primary_page": 46,
-      "hygrip_secondary_page": 47,
-      "hyser_index_page": 48,
-      "hyser_next_day_page": 50,
-      "hyser_whole_hand_page": 50,
-      "grip_page": 44,
+      "correction_page": 59,
+      "uji_page": 59,
+      "hygrip_primary_page": 60,
+      "hygrip_secondary_page": 60,
+      "hyser_index_page": 60,
+      "hyser_next_day_page": 60,
+      "hyser_whole_hand_page": 60,
+      "grip_page": 60,
       "development_page": null,
       "filename": "neurotranslation-explained.pdf",
-      "sha256": "322e6df39aba30ef604271015d1e4a1c8275307992d1d4defed89fd0f1ff296c",
-      "bytes": 1896649,
-      "pages": 188,
-      "previous_pdf_sha256": "ca05ec8666a176255a5e4c7d941006e2c8813df234f8f5633e7774be224c4d23",
-      "previous_pages": 187,
-      "hyser_end_page": 52,
+      "sha256": "74b3d7a79ce6633f6ac61cdd4a43188fbccda35c3e183ccc754c98f94f96ce41",
+      "bytes": 269489,
+      "pages": 63,
+      "previous_pdf_sha256": "322e6df39aba30ef604271015d1e4a1c8275307992d1d4defed89fd0f1ff296c",
+      "previous_pages": 188,
+      "hyser_end_page": 60,
       "reference_pages": [
-        179
+        44
       ],
-      "rasterized_pages": [
-        57,
-        58,
-        59,
-        60
-      ],
-      "prescribed_task_page": 51,
-      "pinch_page": 52,
-      "pinch_end_page": 54,
-      "five_grid_page": 54,
-      "five_grid_end_page": 56,
-      "interval_page": 56,
-      "interval_end_page": 57,
-      "transfer_page": 57,
-      "transfer_end_page": 58,
-      "carry_page": 58,
-      "carry_end_page": 59
+      "rasterized_pages": [],
+      "prescribed_task_page": 60,
+      "pinch_page": 60,
+      "pinch_end_page": 60,
+      "five_grid_page": 60,
+      "five_grid_end_page": 60,
+      "interval_page": 60,
+      "interval_end_page": 60,
+      "transfer_page": 60,
+      "transfer_end_page": 60,
+      "carry_page": 60,
+      "carry_end_page": 60,
+      "named_destinations": {
+        "sec:wrist-forecast-evidence": 59,
+        "sec:forearm-correction": 59,
+        "sec:uji-wrist": 59,
+        "sec:surface-emg-elbow": 59,
+        "sec:scalp-eeg-pilot": 59,
+        "sec:scalp-eeg-palm-history": 59,
+        "sec:way-grip": 60,
+        "sec:hygrip-primary": 60,
+        "sec:hygrip-forearm": 60,
+        "sec:hyser-index": 60,
+        "hyser-next-day": 60,
+        "hyser-whole-hand": 60,
+        "cemhsey-pinch": 60,
+        "cemhsey-five-grid": 60,
+        "cemhsey-pinch-intervals": 60,
+        "cemhsey-transfer": 60,
+        "cemhsey-carry": 60,
+        "sec:self-forecast": 61,
+        "sec:earlier-recorded-signals": 61,
+        "palm-calibration": 59,
+        "way-contact": 60,
+        "hygrip-cue-phase": 60,
+        "hyser-prescribed": 60,
+        "cemhsey-phase": 60,
+        "daily-sports-arm": 60,
+        "paired-wrist-forecast": 59,
+        "daily-sports-limbs": 60,
+        "wrist-forearm-correction": 59,
+        "appendix.A": 54,
+        "appendix.B": 59
+      }
     },
     {
-      "correction_page": 4,
-      "uji_page": 4,
-      "hygrip_primary_page": 7,
-      "hygrip_secondary_page": 8,
-      "hyser_index_page": 9,
-      "hyser_next_day_page": 11,
-      "hyser_whole_hand_page": 11,
-      "grip_page": 6,
-      "development_page": 30,
+      "correction_page": null,
+      "uji_page": null,
+      "hygrip_primary_page": null,
+      "hygrip_secondary_page": null,
+      "hyser_index_page": null,
+      "hyser_next_day_page": null,
+      "hyser_whole_hand_page": null,
+      "grip_page": null,
+      "development_page": 14,
       "filename": "brain2body-article.pdf",
-      "sha256": "63078132c718968d4942a26e6390f062dece50121d6ba6e329772a349e0bd081",
-      "bytes": 436815,
-      "pages": 136,
-      "previous_pdf_sha256": "74068d6adbf1ee46a4771c987c2679341fb6ea1e38961da5dab615b80b91eb8a",
-      "previous_pages": 135,
-      "hyser_end_page": 13,
+      "sha256": "c8c4b39021ba3c04c45fbc8680d4f600de70b2f68b305a983ec3f0aaf9fc6d59",
+      "bytes": 136016,
+      "pages": 29,
+      "previous_pdf_sha256": "63078132c718968d4942a26e6390f062dece50121d6ba6e329772a349e0bd081",
+      "previous_pages": 136,
+      "hyser_end_page": null,
       "reference_pages": [
-        125
+        21
       ],
-      "rasterized_pages": [
-        17,
-        18,
-        19,
-        20
-      ],
-      "prescribed_task_page": 12,
-      "pinch_page": 13,
-      "pinch_end_page": 15,
-      "five_grid_page": 15,
-      "five_grid_end_page": 16,
-      "interval_page": 16,
-      "interval_end_page": 17,
-      "transfer_page": 17,
-      "transfer_end_page": 18,
-      "carry_page": 18,
-      "carry_end_page": 19
+      "rasterized_pages": [],
+      "prescribed_task_page": null,
+      "pinch_page": null,
+      "pinch_end_page": null,
+      "five_grid_page": null,
+      "five_grid_end_page": null,
+      "interval_page": null,
+      "interval_end_page": null,
+      "transfer_page": null,
+      "transfer_end_page": null,
+      "carry_page": null,
+      "carry_end_page": null,
+      "named_destinations": {}
     },
     {
-      "correction_page": 12,
-      "uji_page": 13,
-      "hygrip_primary_page": 16,
-      "hygrip_secondary_page": 18,
-      "hyser_index_page": 19,
-      "hyser_next_day_page": 20,
-      "hyser_whole_hand_page": 21,
-      "grip_page": 15,
-      "development_page": 43,
+      "correction_page": null,
+      "uji_page": null,
+      "hygrip_primary_page": null,
+      "hygrip_secondary_page": null,
+      "hyser_index_page": null,
+      "hyser_next_day_page": null,
+      "hyser_whole_hand_page": null,
+      "grip_page": null,
+      "development_page": 17,
       "filename": "brain2body-simple-english.pdf",
-      "sha256": "c7a2c17430f3f2dbf2bfd0a67c1754448077c0b019f53a5818126ae2ae28087f",
-      "bytes": 489959,
-      "pages": 152,
-      "previous_pdf_sha256": "d5466fc65337b5bbef481509b77d4ac6cd8b13291cff372f5241813b3207425b",
-      "previous_pages": 151,
-      "hyser_end_page": 23,
+      "sha256": "67bfc0defbd253b34c3a557aea8c3fcc91fb7e62fa73a021ec0ea131e78484cd",
+      "bytes": 145842,
+      "pages": 33,
+      "previous_pdf_sha256": "c7a2c17430f3f2dbf2bfd0a67c1754448077c0b019f53a5818126ae2ae28087f",
+      "previous_pages": 152,
+      "hyser_end_page": null,
       "reference_pages": [
-        142
+        25
       ],
-      "rasterized_pages": [
-        28,
-        29,
-        30,
-        31
-      ],
-      "prescribed_task_page": 22,
-      "pinch_page": 23,
-      "pinch_end_page": 25,
-      "five_grid_page": 25,
-      "five_grid_end_page": 26,
-      "interval_page": 27,
-      "interval_end_page": 28,
-      "transfer_page": 28,
-      "transfer_end_page": 29,
-      "carry_page": 29,
-      "carry_end_page": 30
+      "rasterized_pages": [],
+      "prescribed_task_page": null,
+      "pinch_page": null,
+      "pinch_end_page": null,
+      "five_grid_page": null,
+      "five_grid_end_page": null,
+      "interval_page": null,
+      "interval_end_page": null,
+      "transfer_page": null,
+      "transfer_end_page": null,
+      "carry_page": null,
+      "carry_end_page": null,
+      "named_destinations": {}
     }
   ],
-  "source_manifest_sha256": "96d1d7b4c5f575b03a5be6215e76c29aba8aa19d1efc00f50afaff61dad0b148",
-  "evidence_revision_date": "2026-11-19",
-  "build": "Four PDFs rebuilt through the retained offline Tectonic toolchain.",
+  "named_destinations_note": "Each NeuroTranslation PDF has a named destination at every study's row in its appendix B (and appendix.A, the macaque study in full, and appendix.B, the table of every study), with the page it lands on; link to <file>.pdf#nameddest=<name>. The page keys above give the page of the same row. The Brain2Body editions have no study rows, so their page keys are null; development_page there is the page of section 6, on the marsupial.",
+  "source_manifest_sha256": "9e575a42401b4f3d34829e844b51daa0427b27545bbb644ab5f0ca590d6a4472",
+  "evidence_revision_date": "2026-11-20",
+  "build": "Four PDFs built offline with the Tectonic 0.17 TeX engine, SOURCE_DATE_EPOCH 1795132800 (20 November 2026, 00:00 UTC). The source ZIP holds everything but the engine and its package files; built from it, the four PDFs come out byte for byte the same.",
   "files_excluding_this_manifest": [
     {
       "path": "NOTICE.md",
-      "bytes": 6553,
-      "sha256": "a2d4b365cd8119597fc1bf0de16a78d334209e0e280d4b4e00522a8c2403c6e0"
+      "bytes": 12527,
+      "sha256": "8a942d5b32c0420e390b66a41d83c3034daa3070812a4507f948f2f9e537f175"
     },
     {
       "path": "README.md",
-      "bytes": 5020,
-      "sha256": "f779adccc1bd79f64901aaaa75b87f1ff95a9105c7800d9a82a52122bfc340a0"
+      "bytes": 8960,
+      "sha256": "aa463d38a8b90f9972e3fa8e443d133c9ae7fbb7bf7e3a7f68deba6c69e344d6"
     },
     {
       "path": "brain2body-article.pdf",
-      "bytes": 436815,
-      "sha256": "63078132c718968d4942a26e6390f062dece50121d6ba6e329772a349e0bd081"
+      "bytes": 136016,
+      "sha256": "c8c4b39021ba3c04c45fbc8680d4f600de70b2f68b305a983ec3f0aaf9fc6d59"
     },
     {
       "path": "brain2body-simple-english.pdf",
-      "bytes": 489959,
-      "sha256": "c7a2c17430f3f2dbf2bfd0a67c1754448077c0b019f53a5818126ae2ae28087f"
+      "bytes": 145842,
+      "sha256": "67bfc0defbd253b34c3a557aea8c3fcc91fb7e62fa73a021ec0ea131e78484cd"
     },
     {
       "path": "font-provenance.json",
-      "bytes": 10260,
-      "sha256": "5fee7dfc4dbbab8287fe6d962544006cc4d523e731afd516f554ef58ea41954c"
+      "bytes": 7812,
+      "sha256": "07f55be197028936f8044541687c8723ce95dee2805ea99ea6cea1917c2c5849"
     },
     {
       "path": "index.html",
-      "bytes": 7705,
-      "sha256": "89253f531cbd3c14de3602bb362856ddc3496be64753ba63ec4e04b5d19534d1"
+      "bytes": 10968,
+      "sha256": "791592da3bae10e373fb53453c925d56d6e1c8b1c893086fda164f0210312d52"
     },
     {
       "path": "neurotranslation-explained.pdf",
-      "bytes": 1896649,
-      "sha256": "322e6df39aba30ef604271015d1e4a1c8275307992d1d4defed89fd0f1ff296c"
+      "bytes": 269489,
+      "sha256": "74b3d7a79ce6633f6ac61cdd4a43188fbccda35c3e183ccc754c98f94f96ce41"
     },
     {
       "path": "neurotranslation-technical.pdf",
-      "bytes": 1793497,
-      "sha256": "f92b251fb380f51e8ae6182bf7a2c5ab48abe52c9b419075fbc17884ef286309"
+      "bytes": 247030,
+      "sha256": "2875e251694d0b40d0309a400f4880e50cdc8c81a59a50d7ab2b32a1a2ad93dd"
     },
     {
-      "path": "research-evidence-reading-aid.md",
-      "bytes": 32020,
-      "sha256": "ffd61692b4d6572bc671a6f0de496aecc882fb6d7ffd6aa1e2bbea23b40e6827"
+      "path": "results/earlier-decoding.json",
+      "bytes": 21357,
+      "sha256": "9568d7c7e23433f239f817ef18cc6cbfda00eeb5446ab78ccbea339514bd928b"
     },
     {
-      "path": "research-evidence.json",
-      "bytes": 96609,
-      "sha256": "98763346a1dee37e6dc938d73c858410b04121dbf0d511f7f55afebe5e728bbf"
+      "path": "results/finger-intent-and-replay.json",
+      "bytes": 7575,
+      "sha256": "b560c177dd142fe2157d28281800295a880a41a453cd8ac71d1c40669eb4b4b0"
     },
     {
-      "path": "third-party-notices/DejaVu-LICENSE.txt",
-      "bytes": 4816,
-      "sha256": "d75938dec098f06f0ac3c00853065d94f020be1c3c62ef1dc2975ba15b4d9b0e"
+      "path": "results/link-macaque.json",
+      "bytes": 34004,
+      "sha256": "9e327582a029521e185f01fa7cd2628c8ad67e7452883b367fe8a667ec8dc622"
+    },
+    {
+      "path": "results/muscle-pulse.json",
+      "bytes": 9487,
+      "sha256": "8f3b9cd9747d6484592336c573dfb309fcccf8b1ff2fe6ac7df0baf2b61ab965"
+    },
+    {
+      "path": "results/phrase-policy.json",
+      "bytes": 4283,
+      "sha256": "0453e6b18322f218ed9aa74854011ff3067aa15b817287db586e7c47fe09128b"
+    },
+    {
+      "path": "results/simulated-arm.json",
+      "bytes": 8840,
+      "sha256": "7f9749abe680c788d75353d95c952a3f4e25c86b056f96be15923a596da8dd3c"
+    },
+    {
+      "path": "results/template-mesh.json",
+      "bytes": 1509,
+      "sha256": "b269c740a32f0a11888a7feaa4f47e5cf6fa8796b3aeea6cb6c079bc4a54e60e"
     },
     {
       "path": "third-party-notices/FiraMath-LICENSE.txt",
@@ -329,7 +396,7 @@
     "endpoint": "Released index-sensor voltage 12 ticks ahead on a nominal 100 Hz grid.",
     "scope": "Frozen Random-task weights, prescribed trials from 12 fit participants and four development participants outside fitting, all 15 combinations and both index-cue groups."
   },
-  "previous_scientific_edition_commit": "ab12fccc18709c3d56227984a410809957959228",
+  "previous_scientific_edition_commit": "41d573cd908561a893d73c961d8a38a7e5e7cdac",
   "cemhsey_pinch_evidence": {
     "protocol": {
       "commit": "a2382b0d546c451b825e9ed5f88fcc3957bff1ea",
@@ -414,5 +481,6 @@
     "source_recordings": {
       "doi": "https://doi.org/10.1038/s41597-025-05733-y"
     }
-  }
+  },
+  "evidence_blocks_note": "The blocks ending in _evidence pin result files at the commits earlier editions cited, and are kept as history. This edition reads its numbers from a ledger of results whose pointers name the files as they are in the repository now; the small result files of studies without a folder are in results/."
 }

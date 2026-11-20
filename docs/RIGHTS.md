@@ -78,7 +78,7 @@ Changed here: one two-finger pinch task was used, with the gauge force as releas
 
 Study 24. By Hisham Temmar, Nina Gill, Yixuan Wang, Nicholas B. Mellon, Chang Liu, Luis Hernan Cubillos, Rio I. Parsons, Joseph T. Costello, Matteo Ceradini, Madison M. Kelberman, Matthew J. Mender, Aren I. Hite, Dylan M. Wallace, Samuel R. Nason-Tomaszewski, Matthew S. Willsey, Parag G. Patil, Anne W. Draelos and Cynthia A. Chestek.
 
-Licence: the papers say the DANDI recordings they use are listed under CC BY 4.0. They do not name this record when they say it, so read the terms at the record itself before you reuse the data.
+Licence: not yet confirmed. The papers' notice lists it as to be confirmed at the source, so read the terms at the record itself before you reuse the data. The study's aggregate results are published with the papers ([`link-macaque.json`](../papers/current/results/link-macaque.json)); nothing from the recordings themselves is.
 
 [DANDI 001201, version 0.251023.2336](https://dandiarchive.org/dandiset/001201/0.251023.2336)
 
@@ -138,10 +138,19 @@ The walk/run model was fitted to 31 CMU recordings. Its viewer includes two meas
 
 ## One more recording, behind the portable interface source
 
-The source in [`interfaces/experimental/portable/`](../interfaces/experimental/portable/NOTICE.md) was written for one macaque reaching recording: *Nonhuman Primate Reaching with Multichannel Sensorimotor Cortex Electrophysiology*, by Joseph E. O'Doherty, Mariana M. B. Cardoso, Joseph G. Makin and Philip N. Sabes (Zenodo, version 2, 2020), reported as CC BY 4.0 at its source. No study on the studies page uses it. Nothing from that recording, and no model fitted to it, is published here.
+The source in [`interfaces/experimental/portable/`](../interfaces/experimental/portable/NOTICE.md) was written for one macaque reaching recording: *Nonhuman Primate Reaching with Multichannel Sensorimotor Cortex Electrophysiology*, by Joseph E. O'Doherty, Mariana M. B. Cardoso, Joseph G. Makin and Philip N. Sabes (Zenodo, version 2, 2020), reported as CC BY 4.0 at its source (the papers' notice still lists its licence as to be confirmed). No study on the studies page uses it. The NeuroTranslation paper's earlier studies (its section 4.8) used two recording days of it, and their aggregate scores are published with the papers ([`earlier-decoding.json`](../papers/current/results/earlier-decoding.json)). Nothing from that recording, and no model fitted to it, is published here.
 
 [Zenodo record 3854034](https://zenodo.org/records/3854034) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
+## Three more recordings and three simulators, behind the papers' earlier studies
+
+The NeuroTranslation paper's earlier studies, and the two simulated hands of the Brain2Body paper, used these as well. No study on the studies page uses them, and nothing from them is published here except aggregate scores, in [the papers' result files](../papers/current/results/). The papers' notice gives each with what it was used for: [papers/current/NOTICE.md](../papers/current/NOTICE.md).
+
+- *Attempted finger movements recorded from two participants* (Finger_RL), by Charles Guan, Tyson Aflalo, Kelly Kadlec and Jorge Gamez. [DANDI 000252, version 0.230408.2207](https://doi.org/10.48324/dandi.000252/0.230408.2207). Licence to be confirmed at the source.
+- Macaque reach-to-grasp recordings with muscle signals, from the FALCON benchmark, by Brianna M. Karpowicz, Joel Ye and colleagues. DANDI 000941; [benchmark paper](https://doi.org/10.52202/079017-2439). Licence to be confirmed at the source.
+- Touch-area (area 2) recordings with whole-arm movement, by Raeed H. Chowdhury, Joshua I. Glaser and Lee E. Miller. DANDI 000127; [paper](https://doi.org/10.7554/eLife.48198). Licence to be confirmed at the source.
+- MuJoCo, the physics engine, by Emanuel Todorov, Tom Erez and Yuval Tassa ([paper](https://doi.org/10.1109/IROS.2012.6386109)); MyoSuite and MyoSim, the muscle-driven hand and arm models, by Vittorio Caggiano, Huawei Wang, Guillaume Durandau, Massimo Sartori and Vikash Kumar ([MyoSuite paper](https://proceedings.mlr.press/v168/caggiano22a.html), [MyoSim 0.2.3](https://github.com/MyoHub/myo_sim)); OpenSim, by Ajay Seth and colleagues ([paper](https://doi.org/10.1371/journal.pcbi.1006223)), with limblab's macaque arm model ([MIT](https://github.com/limblab/monkeyArmModel)). The licences of MuJoCo, MyoSuite, MyoSim and OpenSim are still to be confirmed at their sources.
+
 ## Fonts in the papers
 
-The four PDFs embed Noto Sans, Noto Sans Mono, Fira Math and DejaVu Sans. Their licences travel with the papers: [fonts and paper notices](../papers/current/NOTICE.md).
+The four PDFs embed Noto Sans and Noto Sans Mono, and the two NeuroTranslation editions Fira Math as well, all under the SIL Open Font License 1.1. The licence texts travel with the papers: [credits and font licences](../papers/current/NOTICE.md). The seven font files are in the papers' source download.

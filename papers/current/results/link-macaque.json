@@ -1,0 +1,789 @@
+{
+ "study": "One macaque: finger position from motor-cortex recordings (the LINK archive, six sessions of Monkey N)",
+ "what": "Two finger positions predicted from recordings at 96 contacts in the hand area of motor cortex; fitted on four days, checked on two later days. Both networks lowered the average error and failed the rule fixed before fitting.",
+ "numbers": [
+  {
+   "macro": "MacaqueScoreMean",
+   "value": 0.031757787057088004,
+   "print": "0.0317578",
+   "what": "score on the two checking days: always answering with the average finger position of the fitting days",
+   "source": {
+    "file": "research/link-fit-admission-r5/report.json",
+    "pointer": "/completed_prefix_findings/selected_scores/training_mean"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueScoreLast",
+   "value": 0.03149823818235437,
+   "print": "0.0314982",
+   "what": "score on the two checking days: a linear fit on the latest brain sample (the reference the networks had to beat)",
+   "source": {
+    "file": "research/link-fit-admission-r5/report.json",
+    "pointer": "/completed_prefix_findings/selected_scores/current_bin_ridge"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueScoreEleven",
+   "value": 0.038376512445979165,
+   "print": "0.0383765",
+   "what": "score on the two checking days: a linear fit on the eleven latest brain samples",
+   "source": {
+    "file": "research/link-fit-admission-r5/report.json",
+    "pointer": "/completed_prefix_findings/selected_scores/history_ridge"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueScoreNet",
+   "value": 0.031230424746312643,
+   "print": "0.0312304",
+   "what": "score on the two checking days: the network that read eleven brain samples and was trained on finger position only (average of three trainings)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/candidate_primary_scores/gru_position"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueScoreNetNext",
+   "value": 0.029960917456751855,
+   "print": "0.0299609",
+   "what": "score on the two checking days: the same network also trained to predict the next brain sample (average of three trainings)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/candidate_primary_scores/gru_position_next_neural"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueScoreMeanShort",
+   "value": 0.031757787057088004,
+   "print": "0.0318",
+   "what": "the same score, shorter: always answering with the average finger position of the fitting days",
+   "source": {
+    "file": "research/link-fit-admission-r5/report.json",
+    "pointer": "/completed_prefix_findings/selected_scores/training_mean"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueScoreLastShort",
+   "value": 0.03149823818235437,
+   "print": "0.0315",
+   "what": "the same score, shorter: a linear fit on the latest brain sample (the reference the networks had to beat)",
+   "source": {
+    "file": "research/link-fit-admission-r5/report.json",
+    "pointer": "/completed_prefix_findings/selected_scores/current_bin_ridge"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueScoreElevenShort",
+   "value": 0.038376512445979165,
+   "print": "0.0384",
+   "what": "the same score, shorter: a linear fit on the eleven latest brain samples",
+   "source": {
+    "file": "research/link-fit-admission-r5/report.json",
+    "pointer": "/completed_prefix_findings/selected_scores/history_ridge"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueScoreNetShort",
+   "value": 0.031230424746312643,
+   "print": "0.0312",
+   "what": "the same score, shorter: the network that read eleven brain samples and was trained on finger position only (average of three trainings)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/candidate_primary_scores/gru_position"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueScoreNetNextShort",
+   "value": 0.029960917456751855,
+   "print": "0.0300",
+   "what": "the same score, shorter: the same network also trained to predict the next brain sample (average of three trainings)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/candidate_primary_scores/gru_position_next_neural"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetDiff",
+   "value": -0.0002678134360417734,
+   "print": "-0.0002678",
+   "what": "the position-only network minus the last-sample linear fit, average over the four day-and-finger scores",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position~1best_ridge/primary_candidate_minus_baseline_mse"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetLo",
+   "value": -0.0014148838726729097,
+   "print": "-0.0014149",
+   "what": "low end of the 95% interval of that difference (1,000 resamplings of whole trials)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position~1best_ridge/primary_interval_95_percent/0"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetHi",
+   "value": 0.0009468841435193169,
+   "print": "+0.0009469",
+   "what": "high end of the 95% interval of that difference",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position~1best_ridge/primary_interval_95_percent/1"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetDiffShort",
+   "value": -0.0002678134360417734,
+   "print": "-0.00027",
+   "what": "the position-only network minus the last-sample linear fit, average over the four day-and-finger scores (shorter)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position~1best_ridge/primary_candidate_minus_baseline_mse"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetLoShort",
+   "value": -0.0014148838726729097,
+   "print": "-0.0014",
+   "what": "low end of the 95% interval of that difference (1,000 resamplings of whole trials) (shorter)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position~1best_ridge/primary_interval_95_percent/0"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetHiShort",
+   "value": 0.0009468841435193169,
+   "print": "+0.00095",
+   "what": "high end of the 95% interval of that difference (shorter)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position~1best_ridge/primary_interval_95_percent/1"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetNextDiff",
+   "value": -0.0015373207256025602,
+   "print": "-0.0015373",
+   "what": "the network with the extra training task minus the last-sample linear fit, average over the four day-and-finger scores",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position_next_neural~1best_ridge/primary_candidate_minus_baseline_mse"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetNextLo",
+   "value": -0.0027586736792521694,
+   "print": "-0.0027587",
+   "what": "low end of the 95% interval of that difference (1,000 resamplings of whole trials)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position_next_neural~1best_ridge/primary_interval_95_percent/0"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetNextHi",
+   "value": -0.0003470099416608161,
+   "print": "-0.0003470",
+   "what": "high end of the 95% interval of that difference",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position_next_neural~1best_ridge/primary_interval_95_percent/1"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetNextDiffShort",
+   "value": -0.0015373207256025602,
+   "print": "-0.0015",
+   "what": "the network with the extra training task minus the last-sample linear fit, average over the four day-and-finger scores (shorter)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position_next_neural~1best_ridge/primary_candidate_minus_baseline_mse"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetNextLoShort",
+   "value": -0.0027586736792521694,
+   "print": "-0.0028",
+   "what": "low end of the 95% interval of that difference (1,000 resamplings of whole trials) (shorter)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position_next_neural~1best_ridge/primary_interval_95_percent/0"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetNextHiShort",
+   "value": -0.0003470099416608161,
+   "print": "-0.00035",
+   "what": "high end of the 95% interval of that difference (shorter)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position_next_neural~1best_ridge/primary_interval_95_percent/1"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetWorseIndex",
+   "value": 0.005247198558133075,
+   "print": "0.0052472",
+   "what": "later checking day (11 February 2020), index finger: the position-only network's error minus the linear fit's",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position~1best_ridge/dates/20200211/candidate_minus_baseline_mse/0"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetWorseIndexShort",
+   "value": 0.005247198558133075,
+   "print": "0.0052",
+   "what": "later checking day (11 February 2020), index finger: the position-only network's error minus the linear fit's (shorter)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position~1best_ridge/dates/20200211/candidate_minus_baseline_mse/0"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetWorseGroup",
+   "value": 0.006140563527457871,
+   "print": "0.0061406",
+   "what": "later checking day, the other three fingers: the position-only network's error minus the linear fit's",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position~1best_ridge/dates/20200211/candidate_minus_baseline_mse/1"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetWorseGroupShort",
+   "value": 0.006140563527457871,
+   "print": "0.0061",
+   "what": "later checking day, the other three fingers: the position-only network's error minus the linear fit's (shorter)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position~1best_ridge/dates/20200211/candidate_minus_baseline_mse/1"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetNextWorseIndex",
+   "value": 0.004357476727782873,
+   "print": "0.0043575",
+   "what": "later checking day, index finger: the extra-task network's error minus the linear fit's",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position_next_neural~1best_ridge/dates/20200211/candidate_minus_baseline_mse/0"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetNextWorseIndexShort",
+   "value": 0.004357476727782873,
+   "print": "0.0044",
+   "what": "later checking day, index finger: the extra-task network's error minus the linear fit's (shorter)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position_next_neural~1best_ridge/dates/20200211/candidate_minus_baseline_mse/0"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetNextBetterGroup",
+   "value": -0.0020872083541331426,
+   "print": "-0.0020872",
+   "what": "later checking day, the other three fingers: the extra-task network's error minus the linear fit's (negative: the network was better there)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position_next_neural~1best_ridge/dates/20200211/candidate_minus_baseline_mse/1"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetNextBetterGroupShort",
+   "value": -0.0020872083541331426,
+   "print": "-0.0021",
+   "what": "later checking day, the other three fingers: the extra-task network's error minus the linear fit's (negative: the network was better there) (shorter)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/bootstraps/gru_position_next_neural~1best_ridge/dates/20200211/candidate_minus_baseline_mse/1"
+   },
+   "unit": "mean squared error, squared units of the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueNetFitIndex",
+   "value": -0.09974217159579224,
+   "print": "-0.0997",
+   "what": "later checking day, index finger: fit score of the position-only network",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/development_gates/gru_position/failed_neural_information_cells/0/measured_r_squared"
+   },
+   "unit": "fit score (R squared against the day's own average; 1 is perfect, 0 is no better than that average, below 0 is worse)"
+  },
+  {
+   "macro": "MacaqueNetMismatchFitIndex",
+   "value": -0.08398553712126788,
+   "print": "-0.0840",
+   "what": "later checking day, index finger: fit score of the same position-only network trained on mismatched pairs",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/development_gates/gru_position/failed_neural_information_cells/0/association_control_r_squared"
+   },
+   "unit": "fit score (R squared against the day's own average; 1 is perfect, 0 is no better than that average, below 0 is worse)"
+  },
+  {
+   "macro": "MacaqueNetFitGroup",
+   "value": -0.3537994956218764,
+   "print": "-0.3538",
+   "what": "later checking day, the other three fingers: fit score of the position-only network",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/development_gates/gru_position/failed_neural_information_cells/1/measured_r_squared"
+   },
+   "unit": "fit score (R squared against the day's own average; 1 is perfect, 0 is no better than that average, below 0 is worse)"
+  },
+  {
+   "macro": "MacaqueNetMismatchFitGroup",
+   "value": -0.13530417225675606,
+   "print": "-0.1353",
+   "what": "later checking day, the other three fingers: fit score of the same position-only network trained on mismatched pairs",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/development_gates/gru_position/failed_neural_information_cells/1/association_control_r_squared"
+   },
+   "unit": "fit score (R squared against the day's own average; 1 is perfect, 0 is no better than that average, below 0 is worse)"
+  },
+  {
+   "macro": "MacaqueNetNextFitIndex",
+   "value": -0.07116237772457956,
+   "print": "-0.0712",
+   "what": "later checking day, index finger: fit score of the extra-task network",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/development_gates/gru_position_next_neural/failed_neural_information_cells/0/measured_r_squared"
+   },
+   "unit": "fit score (R squared against the day's own average; 1 is perfect, 0 is no better than that average, below 0 is worse)"
+  },
+  {
+   "macro": "MacaqueNetNextMismatchFitIndex",
+   "value": -0.08689413975841132,
+   "print": "-0.0869",
+   "what": "later checking day, index finger: fit score of the same extra-task network trained on mismatched pairs",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/development_gates/gru_position_next_neural/failed_neural_information_cells/0/association_control_r_squared"
+   },
+   "unit": "fit score (R squared against the day's own average; 1 is perfect, 0 is no better than that average, below 0 is worse)"
+  },
+  {
+   "macro": "MacaqueNetNextFitGroup",
+   "value": -0.11639006743588198,
+   "print": "-0.1164",
+   "what": "later checking day, the other three fingers: fit score of the extra-task network",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/development_gates/gru_position_next_neural/failed_neural_information_cells/1/measured_r_squared"
+   },
+   "unit": "fit score (R squared against the day's own average; 1 is perfect, 0 is no better than that average, below 0 is worse)"
+  },
+  {
+   "macro": "MacaqueNetNextMismatchFitGroup",
+   "value": -0.12931544742733814,
+   "print": "-0.1293",
+   "what": "later checking day, the other three fingers: fit score of the same extra-task network trained on mismatched pairs",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/development_gates/gru_position_next_neural/failed_neural_information_cells/1/association_control_r_squared"
+   },
+   "unit": "fit score (R squared against the day's own average; 1 is perfect, 0 is no better than that average, below 0 is worse)"
+  },
+  {
+   "macro": "MacaqueEpochs",
+   "value": 720,
+   "print": "720",
+   "what": "training passes saved, over all runs",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/complete_run_coverage/epochs"
+   }
+  },
+  {
+   "macro": "MacaqueTrialsPerSession",
+   "value": 375,
+   "print": "375",
+   "what": "trials in each of the six sessions (the same count in all six: /per_date_findings/0 to /5)",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/0/trials"
+   }
+  },
+  {
+   "macro": "MacaqueFramesA",
+   "value": 27649,
+   "print": "27,649",
+   "what": "20 ms frames in the session of 27 January 2020",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/0/frames"
+   }
+  },
+  {
+   "macro": "MacaqueEndpointsA",
+   "value": 23524,
+   "print": "23,524",
+   "what": "frames of the session of 27 January 2020 that could be scored (eleven samples of history inside one trial, and a following sample)",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/0/eligible_windows"
+   }
+  },
+  {
+   "macro": "MacaqueFramesB",
+   "value": 26944,
+   "print": "26,944",
+   "what": "20 ms frames in the session of 30 January 2020",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/1/frames"
+   }
+  },
+  {
+   "macro": "MacaqueEndpointsB",
+   "value": 22819,
+   "print": "22,819",
+   "what": "frames of the session of 30 January 2020 that could be scored (eleven samples of history inside one trial, and a following sample)",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/1/eligible_windows"
+   }
+  },
+  {
+   "macro": "MacaqueFramesC",
+   "value": 26441,
+   "print": "26,441",
+   "what": "20 ms frames in the session of 4 February 2020",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/2/frames"
+   }
+  },
+  {
+   "macro": "MacaqueEndpointsC",
+   "value": 22316,
+   "print": "22,316",
+   "what": "frames of the session of 4 February 2020 that could be scored (eleven samples of history inside one trial, and a following sample)",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/2/eligible_windows"
+   }
+  },
+  {
+   "macro": "MacaqueFramesD",
+   "value": 26571,
+   "print": "26,571",
+   "what": "20 ms frames in the session of 5 February 2020",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/3/frames"
+   }
+  },
+  {
+   "macro": "MacaqueEndpointsD",
+   "value": 22446,
+   "print": "22,446",
+   "what": "frames of the session of 5 February 2020 that could be scored (eleven samples of history inside one trial, and a following sample)",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/3/eligible_windows"
+   }
+  },
+  {
+   "macro": "MacaqueFramesE",
+   "value": 26957,
+   "print": "26,957",
+   "what": "20 ms frames in the session of 6 February 2020",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/4/frames"
+   }
+  },
+  {
+   "macro": "MacaqueEndpointsE",
+   "value": 22832,
+   "print": "22,832",
+   "what": "frames of the session of 6 February 2020 that could be scored (eleven samples of history inside one trial, and a following sample)",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/4/eligible_windows"
+   }
+  },
+  {
+   "macro": "MacaqueFramesF",
+   "value": 27050,
+   "print": "27,050",
+   "what": "20 ms frames in the session of 11 February 2020",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/5/frames"
+   }
+  },
+  {
+   "macro": "MacaqueEndpointsF",
+   "value": 22925,
+   "print": "22,925",
+   "what": "frames of the session of 11 February 2020 that could be scored (eleven samples of history inside one trial, and a following sample)",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/5/eligible_windows"
+   }
+  },
+  {
+   "macro": "MacaqueFramesNotEndpoints",
+   "value": 4125,
+   "print": "4,125",
+   "what": "frames per session that could not be scored because their history would cross a trial boundary (the same in all six sessions)",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/per_date_findings/0/excluded_frames"
+   }
+  },
+  {
+   "macro": "MacaqueFitEndpoints",
+   "value": 91105,
+   "print": "91,105",
+   "what": "scorable frames on the four fitting days together",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/window_totals/TRAIN_windows"
+   }
+  },
+  {
+   "macro": "MacaqueCheckEndpoints",
+   "value": 45757,
+   "print": "45,757",
+   "what": "scorable frames on the two checking days together",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/window_totals/VAL_windows"
+   }
+  },
+  {
+   "macro": "MacaqueScalerFrames",
+   "value": 107605,
+   "print": "107,605",
+   "what": "frames of the four fitting days, each counted once, that set the scale of the inputs",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/normalizer/unique_TRAIN_frames"
+   }
+  },
+  {
+   "macro": "MacaqueFitTrials",
+   "value": 1500,
+   "print": "1,500",
+   "what": "trials on the four fitting days together",
+   "source": {
+    "file": "research/link-train-state-support-r2/result.json",
+    "pointer": "/scope/trials"
+   }
+  },
+  {
+   "macro": "MacaqueParameters",
+   "value": 169090,
+   "print": "169,090",
+   "what": "fitted numbers in each of the two networks",
+   "source": {
+    "file": "research/link_full_training_protocol_r2/protocol.json",
+    "pointer": "/learning_contract/parameter_accounting/total"
+   }
+  },
+  {
+   "macro": "MacaqueParametersPosition",
+   "value": 144322,
+   "print": "144,322",
+   "what": "of those, the fitted numbers the position-only training uses",
+   "source": {
+    "file": "research/link_full_training_protocol_r2/protocol.json",
+    "pointer": "/learning_contract/parameter_accounting/position_objective_active"
+   }
+  },
+  {
+   "macro": "MacaqueNextBranchParameters",
+   "value": 780,
+   "print": "780",
+   "what": "fitted numbers the proposed next branch would add (worked out from its design; the branch has not been built or fitted)",
+   "source": {
+    "file": "research/link-state-conditioned-refinement-r3/prospective-protocol.json",
+    "pointer": "/primary_candidate/new_parameters_derived_not_instantiated/additional"
+   }
+  },
+  {
+   "macro": "MacaqueOffsetBelow",
+   "value": 0.05864501017650575,
+   "print": "0.058645",
+   "what": "later checking day, index finger, extra-task network: how far below the measured position its predictions sat on average",
+   "source": {
+    "file": "research/link-residual-diagnosis-r1/result.json",
+    "pointer": "computed: the size of /cells/gru_position_next_neural/20200211/index/residual_mean_prediction_minus_target (the file holds prediction minus target, which is negative)"
+   },
+   "unit": "the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueOffsetBelowShort",
+   "value": 0.05864501017650575,
+   "print": "0.0586",
+   "what": "the same, shorter",
+   "source": {
+    "file": "research/link-residual-diagnosis-r1/result.json",
+    "pointer": "computed: the size of /cells/gru_position_next_neural/20200211/index/residual_mean_prediction_minus_target (the file holds prediction minus target, which is negative)"
+   },
+   "unit": "the archive's 0-to-1 finger-position scale"
+  },
+  {
+   "macro": "MacaqueOffsetShare",
+   "value": 77.54246349431453,
+   "print": "77.5",
+   "what": "share of the extra-task network's extra error on the later day's index finger that is the average offset",
+   "source": {
+    "file": "research/link-residual-diagnosis-r1/result.json",
+    "pointer": "computed: 100 x (squared_mean_error of the network minus that of the linear fit) / (mse of the network minus that of the linear fit), fields under /cells/gru_position_next_neural/20200211/index and /cells/current_bin_ridge/20200211/index"
+   },
+   "unit": "%"
+  },
+  {
+   "macro": "MacaqueSpreadShare",
+   "value": 22.457536505685475,
+   "print": "22.5",
+   "what": "share of that extra error that is wider scatter round the average",
+   "source": {
+    "file": "research/link-residual-diagnosis-r1/result.json",
+    "pointer": "computed: 100 x (centered_residual_variance of the network minus that of the linear fit) / (mse of the network minus that of the linear fit), the same cells"
+   },
+   "unit": "%"
+  },
+  {
+   "macro": "MacaqueCountsWithinTrial",
+   "value": 71.55934507505924,
+   "print": "71.6",
+   "what": "fitting days only: share of the variation of the ten-sample average of the threshold-crossing counts that lies within a trial",
+   "source": {
+    "file": "research/link-train-state-support-r2/result.json",
+    "pointer": "computed: 100 x the sum over the 96 threshold-crossing counts features of the within a trial variance / the sum of all three variance parts, fields under /frame_weighted_global/features"
+   },
+   "unit": "%"
+  },
+  {
+   "macro": "MacaqueCountsBetweenTrials",
+   "value": 18.850140817769233,
+   "print": "18.9",
+   "what": "fitting days only: share of the variation of the ten-sample average of the threshold-crossing counts that lies between trials of one day",
+   "source": {
+    "file": "research/link-train-state-support-r2/result.json",
+    "pointer": "computed: 100 x the sum over the 96 threshold-crossing counts features of the between trials of one day variance / the sum of all three variance parts, fields under /frame_weighted_global/features"
+   },
+   "unit": "%"
+  },
+  {
+   "macro": "MacaqueCountsBetweenDays",
+   "value": 9.590514107171524,
+   "print": "9.6",
+   "what": "fitting days only: share of the variation of the ten-sample average of the threshold-crossing counts that lies between days",
+   "source": {
+    "file": "research/link-train-state-support-r2/result.json",
+    "pointer": "computed: 100 x the sum over the 96 threshold-crossing counts features of the between days variance / the sum of all three variance parts, fields under /frame_weighted_global/features"
+   },
+   "unit": "%"
+  },
+  {
+   "macro": "MacaquePowerWithinTrial",
+   "value": 51.278200470158026,
+   "print": "51.3",
+   "what": "fitting days only: share of the variation of the ten-sample average of the spiking-band power that lies within a trial",
+   "source": {
+    "file": "research/link-train-state-support-r2/result.json",
+    "pointer": "computed: 100 x the sum over the 96 spiking-band power features of the within a trial variance / the sum of all three variance parts, fields under /frame_weighted_global/features"
+   },
+   "unit": "%"
+  },
+  {
+   "macro": "MacaquePowerBetweenTrials",
+   "value": 13.54846489882069,
+   "print": "13.5",
+   "what": "fitting days only: share of the variation of the ten-sample average of the spiking-band power that lies between trials of one day",
+   "source": {
+    "file": "research/link-train-state-support-r2/result.json",
+    "pointer": "computed: 100 x the sum over the 96 spiking-band power features of the between trials of one day variance / the sum of all three variance parts, fields under /frame_weighted_global/features"
+   },
+   "unit": "%"
+  },
+  {
+   "macro": "MacaquePowerBetweenDays",
+   "value": 35.173334631021284,
+   "print": "35.2",
+   "what": "fitting days only: share of the variation of the ten-sample average of the spiking-band power that lies between days",
+   "source": {
+    "file": "research/link-train-state-support-r2/result.json",
+    "pointer": "computed: 100 x the sum over the 96 spiking-band power features of the between days variance / the sum of all three variance parts, fields under /frame_weighted_global/features"
+   },
+   "unit": "%"
+  }
+ ],
+ "printed_without_macro": [
+  {
+   "value": 18,
+   "what": "training runs (two networks, three starting seeds, three conditions)",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/complete_run_coverage/runs"
+   }
+  },
+  {
+   "value": 40,
+   "what": "training passes saved per run",
+   "source": {
+    "file": "research/link-postfit-audit-r2/report.json",
+    "pointer": "/retained_numerical_evidence/complete_run_coverage/epochs_per_run"
+   }
+  },
+  {
+   "value": 4.5380366131553274e-13,
+   "what": "largest difference between the saved input scale and an independent recomputation from the source files (printed as 4.54 x 10^-13)",
+   "source": {
+    "file": "research/link-six-source-audit-r1/report.json",
+    "pointer": "/normalizer/maximum_absolute_error/std"
+   }
+  }
+ ],
+ "why_some_numbers_have_no_macro": "Whole numbers below 100, and round numbers that double as percentages or durations elsewhere in the papers, have no macro: the build would otherwise refuse the same digits wherever another section types them as an ordinary number. The papers print them as words or as plain digits; each is listed here with its source so that it can be checked.",
+ "limits": [
+  "One animal. The two checking days chose each network's stopping point, so these are development results, not a fresh test.",
+  "Four later recordings (22 and 24 February 2020; 21 and 22 June 2023) are reserved and have not been opened.",
+  "The unit is the archive's own finger-position scale (0 fully extended, 1 fully flexed, by the archive's description), not degrees or newtons.",
+  "The fitting has not been re-derived by an independent numerical route: the checks made after fitting recomputed the reported scores from the saved predictions.",
+  "The intervals describe these two days and these fitted networks; they are not estimates for another animal or another day."
+ ],
+ "credit": "LINK: Long-Term Intracortical Neural Activity and Kinematics, DANDI Archive 001201, version 0.251023.2336 (Temmar and colleagues)."
+}

@@ -1,0 +1,41 @@
+{
+ "study": "Defects disclosed in one surface of the template brain",
+ "what": "A check of the triangle meshes of the template brain used for display. The two mid-cortical surfaces passed their closed-surface checks; the optional region-boundary surface did not.",
+ "numbers": [
+  {
+   "macro": "MeshOpenEdges",
+   "value": 432,
+   "print": "432",
+   "what": "open edges in the region-boundary surface (an edge that belongs to one triangle only)",
+   "source": {
+    "file": "research/nmt-mid-binary-audit-r1/report.json",
+    "pointer": "/criteria/4/evidence/topology/boundary_edges"
+   }
+  },
+  {
+   "macro": "MeshTurnedTriangles",
+   "value": 838,
+   "print": "838",
+   "what": "edges whose two triangles face inconsistent ways",
+   "source": {
+    "file": "research/nmt-mid-binary-audit-r1/report.json",
+    "pointer": "/criteria/4/evidence/topology/inconsistent_two_face_edge_winding"
+   }
+  },
+  {
+   "macro": "MeshBadNeighbourhoods",
+   "value": 6,
+   "print": "6",
+   "what": "points whose ring of triangles is not a single fan",
+   "source": {
+    "file": "research/nmt-mid-binary-audit-r1/report.json",
+    "pointer": "/criteria/4/evidence/topology/nonmanifold_vertex_links"
+   }
+  }
+ ],
+ "limits": [
+  "A template is not the brain of any recorded subject, and a mesh check says nothing about function.",
+  "The counts describe the region-boundary surface as supplied; nothing was repaired."
+ ],
+ "credit": "The template surfaces are a third party's; the counts are this project's check of them."
+}

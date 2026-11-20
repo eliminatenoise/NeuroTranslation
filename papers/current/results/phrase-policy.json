@@ -1,0 +1,110 @@
+{
+ "study": "A simulated hand trained to play held-back phrases and chords at four keys",
+ "what": "A muscle-control policy for a simulated four-key hand, trained on requested phrases and scored on phrase orders, rhythms, chords, tempos and starting poses set aside before tuning. No brain recording drove it.",
+ "numbers": [
+  {
+   "macro": "PhraseStrikes",
+   "value": 704,
+   "print": "704",
+   "what": "key strikes the final policy made as intended, over all held-back phrases (every strike asked for)",
+   "source": {
+    "file": "artifacts/hand_keyboard-v3/study_acceptance.json",
+    "pointer": "/held_results/corrective/intended_hits"
+   },
+   "unit": "strikes"
+  },
+  {
+   "macro": "PhraseChords",
+   "value": 192,
+   "print": "192",
+   "what": "two-key chords the final policy played correctly (every chord asked for)",
+   "source": {
+    "file": "artifacts/hand_keyboard-v3/study_acceptance.json",
+    "pointer": "/held_results/corrective/correct_chords"
+   },
+   "unit": "chords"
+  }
+ ],
+ "printed_without_macro": [
+  {
+   "value": 32,
+   "what": "held-back phrases the final policy played without a fault",
+   "source": {
+    "file": "artifacts/hand_keyboard-v3/study_acceptance.json",
+    "pointer": "/held_results/corrective/full_score_successes"
+   }
+  },
+  {
+   "value": 32,
+   "what": "held-back phrases (eight phrase orders, two tempos, two starting poses)",
+   "source": {
+    "file": "artifacts/hand_keyboard-v3/study_acceptance.json",
+    "pointer": "/held_results/corrective/episodes"
+   }
+  },
+  {
+   "value": 0,
+   "what": "held-back phrases played without a fault by the starting policy",
+   "source": {
+    "file": "artifacts/hand_keyboard-v3/study_acceptance.json",
+    "pointer": "/held_results/warm/full_score_successes"
+   }
+  },
+  {
+   "value": 20,
+   "what": "held-back phrases played without a fault by the first new fit",
+   "source": {
+    "file": "artifacts/hand_keyboard-v3/study_acceptance.json",
+    "pointer": "/held_results/supervised/full_score_successes"
+   }
+  },
+  {
+   "value": 24,
+   "what": "held-back phrases played without a fault by the reference controller",
+   "source": {
+    "file": "artifacts/hand_keyboard-v3/study_acceptance.json",
+    "pointer": "/held_results/expert/full_score_successes"
+   }
+  },
+  {
+   "value": 0,
+   "what": "held-back phrases played with no muscle command",
+   "source": {
+    "file": "artifacts/hand_keyboard-v3/study_acceptance.json",
+    "pointer": "/held_results/zero/full_score_successes"
+   }
+  },
+  {
+   "value": 22,
+   "what": "saved example phrase: strikes made as intended (of the same number asked for)",
+   "source": {
+    "file": "artifacts/hand_keyboard-v3/study_acceptance.json",
+    "pointer": "/demonstration/source_metrics/intended_hits"
+   }
+  },
+  {
+   "value": 6,
+   "what": "saved example phrase: chords played correctly (of the same number asked for)",
+   "source": {
+    "file": "artifacts/hand_keyboard-v3/study_acceptance.json",
+    "pointer": "/demonstration/source_metrics/correct_chords"
+   }
+  },
+  {
+   "value": 0.03400000000035597,
+   "what": "saved example phrase: largest timing error, seconds (printed as 34 ms)",
+   "source": {
+    "file": "artifacts/hand_keyboard-v3/study_acceptance.json",
+    "pointer": "/demonstration/source_metrics/max_abs_timing_error_s"
+   }
+  }
+ ],
+ "why_some_numbers_have_no_macro": "Whole numbers below 100, and round numbers that double as percentages or durations elsewhere in the papers, have no macro: the build would otherwise refuse the same digits wherever another section types them as an ordinary number. The papers print them as words or as plain digits; each is listed here with its source so that it can be checked.",
+ "limits": [
+  "A simulation: a generic hand with wrist, thumb and finger spreading braced, following scripted fingertip paths. No living hand learned anything.",
+  "The held-back phrases are eight orders at two tempos from two starting poses, not independent subjects.",
+  "The first scoring program was terminated (exit code 143) after it had saved its complete results; why is unknown. A separate full replay finished cleanly and agreed.",
+  "The simulated keys have soft limits, so key travel can pass the nominal 6 mm."
+ ],
+ "credit": "Hand model: MyoSim; simulator: MuJoCo; environment: MyoSuite."
+}

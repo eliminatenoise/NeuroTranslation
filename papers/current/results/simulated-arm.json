@@ -1,0 +1,251 @@
+{
+ "study": "A decoded reach driven through a simulated human arm, and controllers rejected on a macaque arm model",
+ "what": "Two decoded components of fingertip velocity from a macaque reaching session were turned into shoulder and elbow goals for a simulated human arm with 63 muscles; separately, controllers for a macaque arm model were scored on recorded cases set aside for them.",
+ "numbers": [
+  {
+   "macro": "ArmOwnCorrected",
+   "value": 0.0374252125620842,
+   "print": "0.0374",
+   "what": "simulated human arm, with feedback correction: error against its own commanded path",
+   "source": {
+    "file": "artifacts/motor_transfer_physics_metrics.json",
+    "pointer": "/metrics/corrected/tracking_rmse_rad"
+   },
+   "unit": "radians (typical error: root mean square)"
+  },
+  {
+   "macro": "ArmOwnRaw",
+   "value": 1.5802794694900513,
+   "print": "1.5803",
+   "what": "the same arm sent the raw command with no correction: error against its own commanded path",
+   "source": {
+    "file": "artifacts/motor_transfer_physics_metrics.json",
+    "pointer": "/metrics/raw/tracking_rmse_rad"
+   },
+   "unit": "radians (typical error: root mean square)"
+  },
+  {
+   "macro": "ArmCommonCorrected",
+   "value": 0.263022243976593,
+   "print": "0.26302",
+   "what": "with correction: error against one reference path worked out from the recorded movement",
+   "source": {
+    "file": "artifacts/motor_transfer_physics_metrics.json",
+    "pointer": "/metrics/corrected/observed_retarget_rmse_rad"
+   },
+   "unit": "radians (typical error: root mean square)"
+  },
+  {
+   "macro": "ArmCommonRaw",
+   "value": 1.493249773979187,
+   "print": "1.49325",
+   "what": "raw command: error against that same reference path",
+   "source": {
+    "file": "artifacts/motor_transfer_physics_metrics.json",
+    "pointer": "/metrics/raw/observed_retarget_rmse_rad"
+   },
+   "unit": "radians (typical error: root mean square)"
+  },
+  {
+   "macro": "ArmCommonCorrectedShort",
+   "value": 0.263022243976593,
+   "print": "0.263",
+   "what": "with correction, against the common reference (shorter)",
+   "source": {
+    "file": "artifacts/motor_transfer_physics_metrics.json",
+    "pointer": "/metrics/corrected/observed_retarget_rmse_rad"
+   },
+   "unit": "radians (typical error: root mean square)"
+  },
+  {
+   "macro": "ArmCommonRawShort",
+   "value": 1.493249773979187,
+   "print": "1.493",
+   "what": "raw command, against the common reference (shorter)",
+   "source": {
+    "file": "artifacts/motor_transfer_physics_metrics.json",
+    "pointer": "/metrics/raw/observed_retarget_rmse_rad"
+   },
+   "unit": "radians (typical error: root mean square)"
+  },
+  {
+   "macro": "ArmForceFeedback",
+   "value": 0.05504815591664714,
+   "print": "0.05505",
+   "what": "macaque arm model, controller fed back the modelled tendon forces: error on the recorded case set aside for it",
+   "source": {
+    "file": "artifacts/native_force_metrics.json",
+    "pointer": "/reserved_test/tendon_feedback/metrics/joint_rmse_rad"
+   },
+   "unit": "radians (typical error: root mean square)"
+  },
+  {
+   "macro": "ArmForceSteady",
+   "value": 0.04512345090655416,
+   "print": "0.04512",
+   "what": "a constant muscle command on that same recorded case",
+   "source": {
+    "file": "artifacts/native_force_metrics.json",
+    "pointer": "/reserved_test/tonic/metrics/joint_rmse_rad"
+   },
+   "unit": "radians (typical error: root mean square)"
+  },
+  {
+   "macro": "ArmPlanner",
+   "value": 0.05970933388983338,
+   "print": "0.05971",
+   "what": "macaque arm model, controller that tries commands in a copy of the simulation before choosing: error on its recorded case",
+   "source": {
+    "file": "artifacts/native_horizon_metrics.json",
+    "pointer": "/reserved_test/horizon/metrics/joint_rmse_rad"
+   },
+   "unit": "radians (typical error: root mean square)"
+  },
+  {
+   "macro": "ArmPlannerSteady",
+   "value": 0.03263352332507217,
+   "print": "0.03263",
+   "what": "a constant muscle command on that recorded case",
+   "source": {
+    "file": "artifacts/native_horizon_metrics.json",
+    "pointer": "/reserved_test/tonic/metrics/joint_rmse_rad"
+   },
+   "unit": "radians (typical error: root mean square)"
+  },
+  {
+   "macro": "ArmPlannerMadeUp",
+   "value": 0.012698852663479416,
+   "print": "0.01270",
+   "what": "the same planning controller on made-up test movements",
+   "source": {
+    "file": "artifacts/native_horizon_metrics.json",
+    "pointer": "/validation/horizon/metrics/joint_rmse_rad"
+   },
+   "unit": "radians (typical error: root mean square)"
+  },
+  {
+   "macro": "ArmPlannerMadeUpSteady",
+   "value": 0.019888412712454923,
+   "print": "0.01989",
+   "what": "a constant muscle command on those made-up movements",
+   "source": {
+    "file": "artifacts/native_horizon_metrics.json",
+    "pointer": "/validation/tonic/metrics/joint_rmse_rad"
+   },
+   "unit": "radians (typical error: root mean square)"
+  },
+  {
+   "macro": "ArmPlannerSeconds",
+   "value": 4.524413211210049,
+   "print": "4.52",
+   "what": "time the planning controller took to plan each 20 ms step",
+   "source": {
+    "file": "artifacts/native_horizon_metrics.json",
+    "pointer": "/reserved_test/horizon/metrics/planning_mean_wall_seconds"
+   },
+   "unit": "seconds"
+  },
+  {
+   "macro": "ArmLengthFactor",
+   "value": 1.2413815073453434,
+   "print": "1.2413815",
+   "what": "one length factor fitted on 128 poses to bring the macaque arm model's muscle paths to the reference lengths",
+   "source": {
+    "file": "artifacts/source_scale_frozen.json",
+    "pointer": "/factor"
+   }
+  },
+  {
+   "macro": "ArmLengthBefore",
+   "value": 27.754265740953162,
+   "print": "27.75",
+   "what": "typical muscle-path length error before the factor, on poses kept out of its fitting",
+   "source": {
+    "file": "artifacts/source_scale_metrics.json",
+    "pointer": "/metrics/validation/unscaled/rms_m",
+    "scale": 1000,
+    "value_in_file": 0.027754265740953164
+   },
+   "unit": "mm"
+  },
+  {
+   "macro": "ArmLengthAfter",
+   "value": 0.5522613335450082,
+   "print": "0.552",
+   "what": "typical muscle-path length error after the factor, on the same poses",
+   "source": {
+    "file": "artifacts/source_scale_metrics.json",
+    "pointer": "/metrics/validation/scaled/rms_m",
+    "scale": 1000,
+    "value_in_file": 0.0005522613335450082
+   },
+   "unit": "mm"
+  }
+ ],
+ "printed_without_macro": [
+  {
+   "value": 75,
+   "what": "frames in which the raw command pushed a joint more than 0.001 radian past its limit",
+   "source": {
+    "file": "artifacts/motor_transfer_physics_metrics.json",
+    "pointer": "/metrics/raw/anatomical_violating_frames_at1mrad"
+   }
+  },
+  {
+   "value": 500,
+   "what": "frames replayed",
+   "source": {
+    "file": "artifacts/motor_transfer_physics_metrics.json",
+    "pointer": "/frames"
+   }
+  },
+  {
+   "value": 0,
+   "what": "the same count with correction",
+   "source": {
+    "file": "artifacts/motor_transfer_physics_metrics.json",
+    "pointer": "/metrics/corrected/anatomical_violating_frames_at1mrad"
+   }
+  },
+  {
+   "value": 63,
+   "what": "simulated muscles in the human arm model",
+   "source": {
+    "file": "artifacts/motor_transfer_physics_metrics.json",
+    "pointer": "/muscles"
+   }
+  },
+  {
+   "value": 128,
+   "what": "poses the length factor was fitted on",
+   "source": {
+    "file": "artifacts/source_scale_frozen.json",
+    "pointer": "/fit_samples"
+   }
+  },
+  {
+   "value": false,
+   "what": "planning controller accepted",
+   "source": {
+    "file": "artifacts/native_horizon_metrics.json",
+    "pointer": "/acceptance/admitted"
+   }
+  },
+  {
+   "value": false,
+   "what": "force-feedback controller accepted",
+   "source": {
+    "file": "artifacts/native_force_metrics.json",
+    "pointer": "/acceptance/admitted"
+   }
+  }
+ ],
+ "why_some_numbers_have_no_macro": "Whole numbers below 100, and round numbers that double as percentages or durations elsewhere in the papers, have no macro: the build would otherwise refuse the same digits wherever another section types them as an ordinary number. The papers print them as words or as plain digits; each is listed here with its source so that it can be checked.",
+ "limits": [
+  "Simulation only. The step from a macaque's fingertip velocity to a human shoulder and elbow is an engineering rule, not a measured correspondence.",
+  "The corrected arm follows its own command closely partly because the correction may change the command; the comparison against one common reference is the fairer one.",
+  "Three controllers for the macaque arm model were rejected on recorded cases; the planning controller had done better than the constant command on made-up movements first.",
+  "The reference muscle lengths come from tracking and a body model, not from measured muscle fibres."
+ ],
+ "credit": "MuJoCo; MyoSuite and MyoSim (human arm model); OpenSim and the limblab macaque arm model."
+}

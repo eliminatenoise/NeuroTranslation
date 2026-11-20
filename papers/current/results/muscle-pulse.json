@@ -1,0 +1,158 @@
+{
+ "study": "One muscle pulse in a simulated hand: two simulated runs compared",
+ "what": "A simulated human right forearm and hand was run twice from the same starting state for 0.2 seconds of simulated time. In one run a single finger muscle received a short pulse of excitation; in the other nothing was sent. The numbers are differences between the two simulated runs at the end. No recording of a living hand went in or was compared, and no model was trained.",
+ "source_note": "Every source.file below is relative to the project's private working folder of 5 November 2026, not to the October workspace that the other files in this folder point into.",
+ "numbers": [
+  {
+   "macro": "PulseJointGap",
+   "value": 0.5027347840656727,
+   "print": "0.503",
+   "what": "largest gap between the two runs in any one of the 23 joint angles, at the end of the run (it was at the knuckle of the index finger; the sign is dropped)",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "/contrast/final_max_abs_qpos_difference_rad"
+   },
+   "unit": "radians"
+  },
+  {
+   "macro": "PulseJointGapDeg",
+   "value": 28.804581341383837,
+   "print": "28.8",
+   "what": "the same largest gap in a joint angle, in degrees",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "computed: /contrast/final_max_abs_qpos_difference_rad multiplied by 180 and divided by pi"
+   },
+   "unit": "degrees"
+  },
+  {
+   "macro": "PulseActivationGap",
+   "value": 0.05205729904534248,
+   "print": "0.0521",
+   "what": "activation of the pulsed muscle at the end of the run, with the pulse minus without (the model's own scale; no physical unit)",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "/contrast/final_selected_activation_difference"
+   },
+   "unit": "none (the model's activation scale)"
+  },
+  {
+   "macro": "PulseForceGap",
+   "value": -6.407722136774943,
+   "print": "-6.41",
+   "what": "force in the pulsed muscle's tendon at the end of the run, with the pulse minus without, in the simulator's sign convention (in this record the activated muscle's force is negative and the unactivated one's is zero)",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "/contrast/final_selected_tendon_actuator_force_difference_N"
+   },
+   "unit": "newtons"
+  },
+  {
+   "macro": "PulseStillMove",
+   "value": 0.13436646293935753,
+   "print": "0.134",
+   "what": "the run without the pulse: largest change of any joint angle between the start and the end (the hand moved with no command, under gravity and its passive mechanics; it was the sideways joint of the index finger's knuckle)",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "/branches/matched_control/max_abs_qpos_change_rad"
+   },
+   "unit": "radians"
+  },
+  {
+   "macro": "PulseStillMoveDeg",
+   "value": 7.698631234526176,
+   "print": "7.7",
+   "what": "the run without the pulse: the same largest change of a joint angle between start and end, in degrees",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "computed: /branches/matched_control/max_abs_qpos_change_rad multiplied by 180 and divided by pi"
+   },
+   "unit": "degrees"
+  }
+ ],
+ "printed_without_macro": [
+  {
+   "value": 23,
+   "what": "joint angles of the simulated forearm and hand (forearm rotation, two at the wrist, four in the thumb, four in each finger), all hinges measured in radians",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "/shape/nq (names in /names/joints)"
+   }
+  },
+  {
+   "value": 39,
+   "what": "simulated muscles (muscle-tendon actuators), each with one activation state",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "/shape/nu and /shape/na"
+   }
+  },
+  {
+   "value": 0,
+   "what": "sensors in the simulated hand",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "/shape/nsensor"
+   }
+  },
+  {
+   "value": 0.2,
+   "what": "length of each run in seconds of simulated time: 100 steps of 0.002 s (printed as 0.2 s and as a fifth of a second)",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "/config/steps_per_branch and /options/timestep; end time in /branches/FDS2_pulse/final/time_s"
+   }
+  },
+  {
+   "value": 0.2,
+   "what": "the pulse: excitation sent to the one muscle, on the model's control scale of 0 to 1",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "/config/pulse/control; the scale in /effective_model_parameters/actuator_ctrlrange/11"
+   }
+  },
+  {
+   "value": "20 ms to 120 ms",
+   "what": "when the pulse was on: steps 10 to 59 of 100, counted from zero (50 steps of 2 ms); the step-by-step record shows the control at 0.2 on exactly those steps and at zero on every other step, muscle and run",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "/config/pulse/start_step and /config/pulse/stop_step; the control column of TRACE.jsonl in the same folder"
+   }
+  },
+  {
+   "value": "FDS2_r",
+   "what": "the pulsed muscle as the model names it: the part of flexor digitorum superficialis that goes to the index finger (printed as the finger flexor's slip to the index finger)",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "/config/actuator (index 11 of /names/actuators)"
+   }
+  },
+  {
+   "value": "mcp2_flexion_r",
+   "what": "the joint with the largest gap between the runs: bending at the knuckle of the index finger (0.5023 rad with the pulse, -0.0004 rad without); worked out from the two lists of final joint angles",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "/branches/FDS2_pulse/final/qpos_rad and /branches/matched_control/final/qpos_rad, entry 7 (names in /names/joints)"
+   }
+  },
+  {
+   "value": "0.2.3 and 3.14.0",
+   "what": "versions of the hand model's package (MyoSim) and of the simulator (MuJoCo) that ran",
+   "source": {
+    "file": "myohand-runtime-candidate-r1/revision-r2/run-myohand-native-fds2-r2-case-001/RUN-RESULT.json",
+    "pointer": "/runtime/myo_sim and /runtime/mujoco_library"
+   }
+  }
+ ],
+ "why_some_numbers_have_no_macro": "Whole numbers and the round design numbers of the run (joints, muscles, steps, the size and timing of the pulse, software versions) have no macro: the build would otherwise refuse the same digits wherever another section types them as an ordinary number. Each is listed here with its source so that it can be checked.",
+ "checked_how": "Every value above was read again at its field on 20 November 2026. The three differences were recomputed from the two runs' stored final states (joint angles, the pulsed muscle's activation and its tendon force) and equal the stored contrasts to the last digit; the joint with the largest gap and the joint that moved most without the pulse were found from the stored joint lists. The two runs' stored starting states are identical, both ran 100 steps to 0.2 s, and neither recorded a contact. The step-by-step record shows a control of 0.2 on muscle 11 on steps 10 to 59 of the pulse run and on no other step, muscle or run. An earlier independent re-read of the stored record made 132 checks and none failed; it did not run the simulation again (myohand-outcome-review-r2/REVIEW.json, fields /independent_audit/checks and /independent_audit/failed_checks).",
+ "limits": [
+  "A simulation of one hand model, one muscle, one pulse and one starting state. It shows a simulated state changing under a simulated input. It measures nothing about a living hand, was compared with no recording and trained no model.",
+  "The 200 steps of the two runs are one calculation, not 200 trials: no statistic follows from them, and the digits printed say nothing about accuracy against a hand.",
+  "The pulse is a command to a muscle model. It is not an EMG amplitude, a voltage or a joint target, and the simulated tendon force is not a measured force.",
+  "As built by its own package, the model's four fixed scaffold bodies had each rotational inertia component changed from 1 to 0.0001 kg m2; that change is part of the model that ran. Nothing else was retuned.",
+  "The model's joint limits are soft: at the end of the run without the pulse one joint sat 0.0004 rad past its limit. No contact occurred in either run.",
+  "No check of energy, of a smaller time step or of another solver setting was made, and the model's scale, pose and tissue properties were not calibrated against any hand."
+ ],
+ "credit": "Hand model: MyoSim (MyoHub), version 0.2.3. Simulator: MuJoCo, version 3.14.0."
+}

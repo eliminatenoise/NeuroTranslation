@@ -156,12 +156,12 @@ Study 26's transformer, fitted for the right-arm sensor alone on the same four p
 
 ### Reported only in the papers
 
-No folder under `benchmarks/`. The first has no result file in the repository at all: its numbers are copied from the technical paper. Both use units scaled to the data, so the numbers mean nothing outside their own row.
+No folder under `benchmarks/`: each study is told in the NeuroTranslation paper, and its result file is published with the papers ([`link-macaque.json`](../papers/current/results/link-macaque.json), [`training-diagnostic-summary.json`](../papers/current/training-diagnostic-summary.json)). Both use units scaled to the data, so the numbers mean nothing outside their own row.
 
 | # | Study | What was forecast | Tested on | Reference forecast | Challenger | Difference | People better with the challenger |
 | ---: | --- | --- | --- | --- | --- | --- | --- |
-| 24 | [Macaque fingers from motor cortex (LINK)](../papers/current/neurotranslation-technical.pdf#page=13) | The position of the index finger, and of the other three fingers as a group, from the brain recording | 1 macaque, 2 later days (fitted on 4 days) | Straight-line fit on the latest brain sample: **0.0314982** | The better of two networks that read recent brain history: **0.0299609** | 0.0015373 lower (0.0003470 to 0.0027587 lower) | one animal |
-| 25 | [One network shared by two signals: first run](../papers/current/research-evidence-reading-aid.md#one-acquisition-two-forecasting-tasks) | Each signal's own next values from its own past. Nothing is predicted from one signal to the other | nobody: scored on its own training recording | Repeat the last value (glove signal): **0.0245** | One network shared by both signals, after 990 training steps (glove signal): **0.3722** | 0.3477 higher (one recording, no range) | one recording |
+| 24 | [Macaque fingers from motor cortex (LINK)](../papers/current/neurotranslation-technical.pdf#nameddest=appendix.A) | The position of the index finger, and of the other three fingers as a group, from the brain recording | 1 macaque, 2 later days (fitted on 4 days) | Straight-line fit on the latest brain sample: **0.0314982** | The better of two networks that read recent brain history: **0.0299609** | 0.0015373 lower (0.0003470 to 0.0027587 lower) | one animal |
+| 25 | [One network shared by two signals: first run](../papers/current/neurotranslation-technical.pdf#nameddest=sec:self-forecast) | Each signal's own next values from its own past. Nothing is predicted from one signal to the other | nobody: scored on its own training recording | Repeat the last value (glove signal): **0.0245** | One network shared by both signals, after 990 training steps (glove signal): **0.3722** | 0.3477 higher (one recording, no range) | one recording |
 
 Ranges: study 24, the 95% interval given in the paper.
 
@@ -326,7 +326,7 @@ Every failed rule concerned EEG, EMG, a cue term or a network set against a plai
 
 ### 7. The general model has not yet been tested on a new person, and the evidence is narrower than 29 rows suggest
 
-What exists is 25 separate small studies, each with its own straight-line fit or small network for one signal in one task; one macaque study in which two larger networks failed their pass rule, across 18 runs and 720 saved training epochs (study 24); and one run of a single network shared by a muscle signal and a glove signal, on one recording, which lost to "repeat the last value" on its own training data and predicts nothing from one signal to the other (study 25).
+What exists is 25 separate small studies, each with its own straight-line fit or small network for one signal in one task; one macaque study in which two larger networks failed their pass rule, across 18 runs and 720 saved passes through the fitting data (study 24); and one run of a single network shared by a muscle signal and a glove signal, on one recording, which lost to "repeat the last value" on its own training data and predicts nothing from one signal to the other (study 25).
 
 That shared network was an earlier, separate attempt. The general model being built now, NeuroTranslate 0.0, had its first five fits to real recordings on 20 November:
 

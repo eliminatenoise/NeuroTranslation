@@ -1,32 +1,31 @@
 {
-  "scope": "Font notices and Poppler readback for the four candidate experimental paper PDFs.",
+  "scope": "Fonts embedded in the four PDFs of this edition, their licence texts, and the font files the source download builds them from.",
   "PDFs": [
     {
       "filename": "neurotranslation-technical.pdf",
       "edition": "neurotranslation-technical",
-      "sha256": "f92b251fb380f51e8ae6182bf7a2c5ab48abe52c9b419075fbc17884ef286309"
+      "sha256": "2875e251694d0b40d0309a400f4880e50cdc8c81a59a50d7ab2b32a1a2ad93dd"
     },
     {
       "filename": "neurotranslation-explained.pdf",
       "edition": "neurotranslation-explained",
-      "sha256": "322e6df39aba30ef604271015d1e4a1c8275307992d1d4defed89fd0f1ff296c"
+      "sha256": "74b3d7a79ce6633f6ac61cdd4a43188fbccda35c3e183ccc754c98f94f96ce41"
     },
     {
       "filename": "brain2body-article.pdf",
       "edition": "brain2body-article",
-      "sha256": "63078132c718968d4942a26e6390f062dece50121d6ba6e329772a349e0bd081"
+      "sha256": "c8c4b39021ba3c04c45fbc8680d4f600de70b2f68b305a983ec3f0aaf9fc6d59"
     },
     {
       "filename": "brain2body-simple-english.pdf",
       "edition": "brain2body-simple-english",
-      "sha256": "c7a2c17430f3f2dbf2bfd0a67c1754448077c0b019f53a5818126ae2ae28087f"
+      "sha256": "67bfc0defbd253b34c3a557aea8c3fcc91fb7e62fa73a021ec0ea131e78484cd"
     }
   ],
   "font_families": [
     "Noto Sans",
     "Noto Sans Mono",
-    "Fira Math",
-    "DejaVu Sans"
+    "Fira Math"
   ],
   "notices": [
     {
@@ -39,12 +38,6 @@
       "path": "third-party-notices/FiraMath-LICENSE.txt",
       "bytes": 4367,
       "sha256": "573c14d3ddf557b59bf1fb5537a116a85f264654cdb9ba194ac305acd8ce5dc6",
-      "unmodified_from_retained_source": true
-    },
-    {
-      "path": "third-party-notices/DejaVu-LICENSE.txt",
-      "bytes": 4816,
-      "sha256": "d75938dec098f06f0ac3c00853065d94f020be1c3c62ef1dc2975ba15b4d9b0e",
       "unmodified_from_retained_source": true
     }
   ],
@@ -62,34 +55,27 @@
       "ref": "tags/v0.3",
       "commit": "8f1423fbfcc659c44772d2523be82073eb26ad3a",
       "license_URL": "https://github.com/firamath/firamath/blob/8f1423fbfcc659c44772d2523be82073eb26ad3a/LICENSE"
-    },
-    {
-      "family": "DejaVu",
-      "repository": "https://github.com/dejavu-fonts/dejavu-fonts",
-      "ref": "tags/version_2_37",
-      "commit": "0eda8a319c08835009849583cd090bb5b141ce25",
-      "license_URL": "https://github.com/dejavu-fonts/dejavu-fonts/blob/0eda8a319c08835009849583cd090bb5b141ce25/LICENSE"
     }
   ],
   "limits": [
-    "Exact font binary versions have not been independently recovered. Noto/Fira source hashes remain in private build-custody evidence. The selected PDFs contain embedded fonts; no standalone font files are included.",
+    "The PDFs embed subsets of the seven font files listed under source_font_files, which are published in the source download with their SHA-256. Which upstream release each file was taken from has not been traced; the licence texts were copied from the commits named under primary_sources.",
     "The retained Fira copyright is 2018--2020. Primary v0.3 says 2018 and current main says 2018--2023; the remaining license text is byte-identical. The selected-source notice is preserved unchanged.",
-    "The retained DejaVu notice matches the installed Matplotlib notice exactly. Its Bitstream/Arev text matches primary DejaVu 2.37 after whitespace normalization; that upstream package also includes a TeX Gyre Math section. No TeX Gyre Math font appears in the selected cached font tables.",
-    "Font-family names alone do not establish exact binary provenance for historical figure dependencies.",
-    "These notices do not settle all figure, dataset, privacy, participant, trademark or combined-use rights, or certify scientific validity or finished-product acceptance."
+    "Fira Math is embedded only in the two NeuroTranslation editions, which set mathematics; the two Brain2Body editions embed Noto Sans and Noto Sans Mono only.",
+    "No DejaVu font is embedded in this edition (the previous edition carried DejaVu Sans in its figures).",
+    "These notices cover the fonts. Dataset credits and licences are in NOTICE.md."
   ],
   "standalone_font_files_included": false,
   "selected_PDFs_contain_embedded_font_programs": true,
   "recorded_PDF_font_table_rows": {
     "neurotranslation-technical.pdf": [
       {
-        "name": "NotoSans-Regular",
+        "name": "NotoSans-Bold",
         "embedded": "yes",
         "subsetted": "yes",
         "unicode": "yes"
       },
       {
-        "name": "NotoSans-Bold",
+        "name": "NotoSans-Regular",
         "embedded": "yes",
         "subsetted": "yes",
         "unicode": "yes"
@@ -101,19 +87,19 @@
         "unicode": "yes"
       },
       {
-        "name": "DejaVuSans-Bold",
+        "name": "NotoSans-Bold",
         "embedded": "yes",
         "subsetted": "yes",
         "unicode": "yes"
       },
       {
-        "name": "DejaVuSans",
+        "name": "NotoSans-Regular",
         "embedded": "yes",
         "subsetted": "yes",
         "unicode": "yes"
       },
       {
-        "name": "DejaVuSans",
+        "name": "NotoSans-Regular",
         "embedded": "yes",
         "subsetted": "yes",
         "unicode": "yes"
@@ -125,55 +111,7 @@
         "unicode": "yes"
       },
       {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "NotoSans-Regular",
-        "embedded": "yes",
-        "subsetted": "no",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "NotoSans-Regular",
-        "embedded": "yes",
-        "subsetted": "no",
-        "unicode": "yes"
-      },
-      {
         "name": "NotoSansMono-Regular",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
         "embedded": "yes",
         "subsetted": "yes",
         "unicode": "yes"
@@ -181,7 +119,19 @@
     ],
     "neurotranslation-explained.pdf": [
       {
+        "name": "NotoSans-Bold",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
         "name": "NotoSans-Regular",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Italic",
         "embedded": "yes",
         "subsetted": "yes",
         "unicode": "yes"
@@ -193,85 +143,25 @@
         "unicode": "yes"
       },
       {
+        "name": "NotoSans-Regular",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
+        "name": "NotoSans-Regular",
+        "embedded": "yes",
+        "subsetted": "yes",
+        "unicode": "yes"
+      },
+      {
         "name": "FiraMath-Regular-Identity-H",
         "embedded": "yes",
         "subsetted": "yes",
         "unicode": "yes"
       },
       {
-        "name": "DejaVuSans-Bold",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
         "name": "NotoSansMono-Regular",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "NotoSans-Regular",
-        "embedded": "yes",
-        "subsetted": "no",
-        "unicode": "yes"
-      },
-      {
-        "name": "NotoSans-Italic",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "NotoSans-Regular",
-        "embedded": "yes",
-        "subsetted": "no",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
         "embedded": "yes",
         "subsetted": "yes",
         "unicode": "yes"
@@ -291,12 +181,6 @@
         "unicode": "yes"
       },
       {
-        "name": "FiraMath-Regular-Identity-H",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
         "name": "NotoSans-Italic",
         "embedded": "yes",
         "subsetted": "yes",
@@ -304,24 +188,6 @@
       },
       {
         "name": "NotoSansMono-Regular",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans-Bold",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
         "embedded": "yes",
         "subsetted": "yes",
         "unicode": "yes"
@@ -347,35 +213,42 @@
         "unicode": "yes"
       },
       {
-        "name": "FiraMath-Regular-Identity-H",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
         "name": "NotoSansMono-Regular",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans-Bold",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
-        "embedded": "yes",
-        "subsetted": "yes",
-        "unicode": "yes"
-      },
-      {
-        "name": "DejaVuSans",
         "embedded": "yes",
         "subsetted": "yes",
         "unicode": "yes"
       }
     ]
-  }
+  },
+  "source_font_files": [
+    {
+      "file_in_source_zip": "source/fonts/FiraMath-Regular.otf",
+      "sha256": "2028cbd3dd4d8c0cf1608520eb4759956a83a67931d7b6d8e7c313520186e35b"
+    },
+    {
+      "file_in_source_zip": "source/fonts/NotoSans-Bold.ttf",
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    },
+    {
+      "file_in_source_zip": "source/fonts/NotoSans-BoldItalic.ttf",
+      "sha256": "1b602a9d6353be42c91df097a4857b69fa2696f26703d7a33b54a15d87c2622c"
+    },
+    {
+      "file_in_source_zip": "source/fonts/NotoSans-Italic.ttf",
+      "sha256": "467e3f89eeca4108bb8710a2b9e0cf2281ac56d5b0609211a83776d0505eecb5"
+    },
+    {
+      "file_in_source_zip": "source/fonts/NotoSans-Regular.ttf",
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    {
+      "file_in_source_zip": "source/fonts/NotoSansMono-Bold.ttf",
+      "sha256": "a21ea0ba6ea49fda7b34ca39a504b487f1130885d36e1a4f9f4255b3ba6994bc"
+    },
+    {
+      "file_in_source_zip": "source/fonts/NotoSansMono-Regular.ttf",
+      "sha256": "65b5e2b2c4a1fba9ae8be1f026cb35b03dcb8886d9b2a4147054fde12f7e767d"
+    }
+  ],
+  "source_font_files_note": "The seven font files are not in this folder or in the papers ZIP; they are in the source ZIP, under source/fonts/."
 }

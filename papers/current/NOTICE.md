@@ -1,87 +1,171 @@
-# Reuse and third-party material
+# Credits, licences and notices for this edition of the papers
 
-CC0 1.0 applies to project-owned paper contributions to the extent the project holds those rights. It does not relicense third-party fonts, figures, cited publications, datasets, software or trademarks. Their original terms remain.
+This file is generated from the papers' own credits table (`shared/credits.tex`), so it says what the papers
+say. Each paper prints the rows it relies on; the letter after each heading says which: NeuroTranslation (N),
+Brain2Body (B), or both.
 
-The four candidate NeuroTranslation and Brain2Body paper PDFs embed Noto Sans, Noto Sans Mono, Fira Math and DejaVu Sans. Their notices travel with this edition:
+These papers contain no recordings. For each dataset below, this work selected trials, derived features from them and reports aggregate errors; that is what was changed. The recordings stay with the people who made them.
 
-| Font family | Preserved notice | Source |
-| --- | --- | --- |
-| Noto Sans and Noto Sans Mono | [SIL Open Font License 1.1](third-party-notices/Noto-OFL.txt) | [The Noto Project](https://github.com/notofonts/latin-greek-cyrillic/blob/ffaec0a756877220dbf718ce08b8479a0be82479/OFL.txt) |
-| Fira Math | [SIL Open Font License 1.1](third-party-notices/FiraMath-LICENSE.txt) | [Fira Math](https://github.com/firamath/firamath/blob/8f1423fbfcc659c44772d2523be82073eb26ad3a/LICENSE) |
-| DejaVu Sans, including Bold | [Bitstream Vera and Arev notices](third-party-notices/DejaVu-LICENSE.txt) | [DejaVu Fonts](https://github.com/dejavu-fonts/dejavu-fonts/blob/0eda8a319c08835009849583cd090bb5b141ce25/LICENSE) |
+## Recordings of people
 
-The Noto and Fira Math notices are preserved from the selected manuscript sources. The DejaVu notice is an unmodified copy supplied with installed Matplotlib. The font tables identify the embedded families; they do not establish the exact font version in every older figure. [Font provenance](font-provenance.json) records that limit and the candidate PDF fingerprints. No separate font binaries are supplied by this notice package.
+### EEG-EMG-WristMotion Dataset (N, B)
 
-Existing figures keep their source and attribution requirements. Citation alone grants no redistribution rights. This notice adds the font texts; review of every figure, dataset, participant permission and combined use remains open. The papers are experimental drafts, and this notice makes no claim that their scientific or finished-product criteria have passed.
+- Made by: Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz
+- Version and where: Version 3, Figshare, <https://doi.org/10.6084/m9.figshare.29666735.v3>. Descriptor: <https://doi.org/10.1038/s41597-026-07287-z>
+- Licence: CC BY 4.0, <https://creativecommons.org/licenses/by/4.0/>
+- Used for: The four wrist-pointing studies (the fourth holds the general model's wrist fits) and one correction analysis among the fitting people: scalp EEG and forearm EMG added to a forecast of wrist angle. Pointing trials were selected; encoder angles were decoded; motion, EEG and EMG features were derived.
 
-## Wrist-pointing recordings
+### KIN-MUS UJI (N)
 
-Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz deposited
-*EEG-EMG-WristMotion Dataset*, version 3. NeuroTranslation selected
-pointing trials, decoded encoder angles and derived motion, EEG and
-forearm EMG features for the reported models. The papers cite aggregate
-results and distribute no participant recordings from this study.
-[Version 3 deposit](https://doi.org/10.6084/m9.figshare.29666735.v3) ·
-[Scientific Data descriptor](https://doi.org/10.1038/s41597-026-07287-z) ·
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- Made by: Néstor J. Jarque-Bou, Margarita Vergara, Joaquín L. Sancho-Bru, Verónica Gracia-Ibáñez and Alba Roda-Sales
+- Version and where: Version 1.0, Zenodo, <https://doi.org/10.5281/zenodo.3469380>. Descriptor: <https://doi.org/10.1038/s41597-019-0285-1>
+- Licence: CC BY 4.0, <https://creativecommons.org/licenses/by/4.0/>
+- Used for: The everyday-tasks study: forearm EMG added to an estimate of wrist angle. EMG features were derived and two of the publisher's calibrated glove-angle columns were used.
 
-## KIN-MUS UJI recordings
+### A kinematic and EMG dataset for upper limb and hand movement analysis in post-stroke and healthy subjects (N)
 
-Néstor J. Jarque-Bou, Margarita Vergara, Joaquín L. Sancho-Bru,
-Verónica Gracia-Ibáñez and Alba Roda-Sales deposited the KIN-MUS UJI
-dataset. The papers use aggregate results from derived EMG features and
-two publisher-calibrated glove-angle columns. The linked archive is the
-source for recordings. This package contains paper text, notices and
-study-level summaries.
-[Dataset version 1.0](https://zenodo.org/records/3469380) ·
-[Scientific Data descriptor](https://pmc.ncbi.nlm.nih.gov/articles/PMC6848200/) ·
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- Made by: Francesca Lucchetti, Gaia Bailo, Monia Cabinio, Alberto Marzegan, Arturo Nuara, Federica Rossetto, Simona Squartecchia, Ilaria Carpinella, Maurizio Ferrarin and Tiziana Lencioni; the two participant records used are by Francesca Lucchetti, Tiziana Lencioni and Gaia Bailo
+- Version and where: Figshare participant records HS 01 and HS 02, version 1, <https://doi.org/10.6084/m9.figshare.28596026.v1> and <https://doi.org/10.6084/m9.figshare.28596038.v1>. Dataset paper: <https://doi.org/10.1038/s41597-025-06174-3>
+- Licence: CC BY 4.0, <https://creativecommons.org/licenses/by/4.0/>
+- Used for: The elbow study: EMG from one person fitted to elbow angle and tried on another. The two files were used unmodified.
 
+### IACKD: Intention Action Conflict EEG-Hand Kinematics Dataset (N, B)
 
-## WAY-EEG-GAL grip and lift recordings
+- Made by: Mengpu Cai, Rongrong Fu, Yaodong Wang, Bin Lu, Saiwei Guo and Fangyao Xu
+- Version and where: OpenNeuro ds006840, version 1.0.0, <https://doi.org/10.18112/openneuro.ds006840.v1.0.0>. Descriptor: <https://doi.org/10.1038/s41597-026-07146-x>
+- Licence: CC0 1.0. No credit is legally required; the release and its descriptor are cited.
+- Used for: The three palm-position studies: scalp EEG against a task clock, EEG added to a forecast of palm position, and that forecast adjusted to a person.
 
-Matthew D. Luciw, Ewa Jarocka and Benoni B. Edin deposited the WAY-EEG-GAL
-recordings. The WAY project (Wearable interfaces for hAnd function recoverY, FP7-ICT-288551) supported the original WAY-EEG-GAL recordings. The papers report aggregates from force signs and timed features
-derived from the archive. The reader package contains paper text and aggregate
-scores. The linked source records carry their own licence notices.
-[Acquisition descriptor](https://doi.org/10.1038/sdata.2014.47) · [Collection v2](https://doi.org/10.6084/m9.figshare.c.988376.v2) ·
-[Underlying record CC0 notices](https://creativecommons.org/publicdomain/zero/1.0/) ·
-[Descriptor attribution licence](https://creativecommons.org/licenses/by/4.0/)
+### WAY-EEG-GAL (N, B)
 
-## HYGRIP paced power-grip recordings
+- Made by: Matthew D. Luciw, Ewa Jarocka and Benoni B. Edin. The European Commission supported the original recordings through the WAY project (Wearable interfaces for hAnd function recoverY, FP7-ICT-288551).
+- Version and where: Figshare collection, version 2, <https://doi.org/10.6084/m9.figshare.c.988376.v2>. Descriptor: <https://doi.org/10.1038/sdata.2014.47>
+- Licence: Two notices are recorded, CC0 1.0 on the Figshare article records and CC BY 4.0 on the descriptor paper, and no single licence line. To be confirmed at the source.
+- Used for: The two pinch-and-lift studies: scalp EEG and forearm EMG added to a forecast of grip force. The sign of the stored grip force was reversed so that squeezing is positive; timed features were derived.
 
-Pablo Ortega, Tong Zhao and A. Aldo Faisal wrote the HYGRIP acquisition paper.
-Aldo A. Faisal and Pablo Ortega are the named authors of the version-1
-`hygrip.h5` deposit. The papers report aggregate outcomes for the released
-signed transducer-voltage forecast from right-hand trials. The companion
-contains methods, limited aggregate results and source links.
-[Acquisition descriptor](https://doi.org/10.3389/fnins.2020.00919) ·
-[Descriptor CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) ·
-[Version-1 data deposit](https://doi.org/10.6084/m9.figshare.12383639.v1) ·
-[Deposit terms (MIT)](https://api.figshare.com/v2/articles/12383639/versions/1)
+### HYGRIP (N, B)
 
+- Made by: Pablo Ortega, Tong Zhao and A. Aldo Faisal wrote the acquisition paper; the data deposit names Aldo A. Faisal and Pablo Ortega
+- Version and where: Figshare deposit `hygrip.h5`, version 1, <https://doi.org/10.6084/m9.figshare.12383639.v1>. Acquisition paper: <https://doi.org/10.3389/fnins.2020.00919>
+- Licence: MIT for the data deposit (its terms: <https://api.figshare.com/v2/articles/12383639/versions/1>); CC BY 4.0 for the acquisition paper. Nothing from the deposit is redistributed here; its MIT notice stays with it.
+- Used for: The three paced-grip studies: scalp EEG, forearm EMG and a cue-phase term added to a forecast of the grip sensor's voltage, from right-hand trials.
 
-## Hyser index-finger recordings
+### Hyser: Open Access Dataset and Toolbox of High-Density Surface Electromyogram Recordings (N)
 
-Contains information from the [Hyser database, PhysioNet 2.0.0](https://doi.org/10.13026/hxan-pe94), by Xinyu Jiang, Chenyun Dai, Xiangyu Liu and Jiahao Fan, made available under the [ODC Attribution License 1.0](https://opendatacommons.org/licenses/by/1-0/).
-The sensor forecasts report derived aggregate errors. The recording arrays
-and participant-level outcomes stay with their original custodians.
-[Study and benchmark paper](https://doi.org/10.1109/TNSRE.2021.3082551) ·
-[PhysioNet citation](https://doi.org/10.1038/s44360-026-00096-z)
+- Made by: Xinyu Jiang, Chenyun Dai, Xiangyu Liu and Jiahao Fan
+- Version and where: Version 2.0.0, PhysioNet, <https://doi.org/10.13026/hxan-pe94>. Paper: <https://doi.org/10.1109/TNSRE.2021.3082551>. PhysioNet's own citation: <https://doi.org/10.1038/s44360-026-00096-z>
+- Licence: Open Data Commons Attribution License 1.0, <https://opendatacommons.org/licenses/by/1-0/>. Contains information from the Hyser database, version 2.0.0, made available under the Open Data Commons Attribution License 1.0.
+- Used for: The four finger-sensor studies: forearm EMG, a next-day adjustment, the other four finger sensors and a prescribed task, each scored on a forecast of the index-finger sensor's voltage.
 
-The next-day comparison uses the same dataset and reports derived aggregate errors.
+### CEMHSEY GRASP (N, B)
 
-The five-sensor comparison derives aggregate voltage errors from the same Hyser release.
+- Made by: Shutian Yang, Dongxuan Li, Chen Chen and Xiangyang Zhu
+- Version and where: Version 2, two Zenodo deposits, <https://doi.org/10.5281/zenodo.15077957> and <https://doi.org/10.5281/zenodo.15070187>. Acquisition paper: <https://doi.org/10.1038/s41597-025-05733-y>
+- Licence: CC BY 4.0, <https://creativecommons.org/licenses/by/4.0/>
+- Used for: The six pinch studies: forearm EMG, the five electrode grids, error bands, new target levels, the next day and a correction learned from other people, each scored on a forecast of pinch force.
 
-The prescribed-task comparison uses the same Hyser release and reports aggregate voltage errors.
+### Reach&Grasp: a multimodal dataset of the whole upper-limb during simple and complex movements (N)
 
+- Made by: Published by IIT Dataverse; the record held here names no authors
+- Version and where: Version 1.0, IIT Dataverse, <https://doi.org/10.48557/L6OWMM>
+- Licence: CC BY 4.0, as declared in the dataset's metadata
+- Used for: The long training run: one recording of one person (muscle activity and glove angles). Four invalid rows were excluded and features were derived.
 
-The pinch comparison reports aggregate errors derived from the CEMHSEY dataset deposits [Part I v2](https://doi.org/10.5281/zenodo.15077957) and [Part II v2](https://doi.org/10.5281/zenodo.15070187), available under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The papers cite Yang and colleagues' [Scientific Data article](https://doi.org/10.1038/s41597-025-05733-y) for the acquisition methods.
+### Daily and Sports Activities (N, B)
 
-The five-grid study derives aggregate errors from the same CEMHSEY v2 deposits. The source article describes the electrode arrays, and the mapped coordinates refer to the electronics within each array.
+- Made by: Billur Barshan and Kerem Altun
+- Version and where: UCI Machine Learning Repository, <https://doi.org/10.24432/C5C59F>
+- Licence: CC BY 4.0, <https://creativecommons.org/licenses/by/4.0/>
+- Used for: The walking study (NeuroTranslation section 3.1 (Simple English Edition: 3.2), Brain2Body section 4.3) and the general model's walking fits (NeuroTranslation section 7.4). Two walking activities and the accelerometer axes of the right arm or of all five sensor units were selected, windows of 16 readings with the reading 120 ms later were cut, forecasts were fitted and errors calculated.
 
-The pinch interval study derives aggregate pointwise coverage, width and interval scores from new trial records in the same CEMHSEY v2 deposits. The force readings and EMG data remain at their original sources.
+### Attempted finger movements recorded from two participants (Finger_RL) (N, B)
 
-The three-target transfer study derives its comparisons from the same CEMHSEY v2 recordings on a single indexed day.
+- Made by: Charles Guan, Tyson Aflalo, Kelly Kadlec and Jorge Gamez
+- Version and where: DANDI Archive 000252, version 0.230408.2207, <https://doi.org/10.48324/dandi.000252/0.230408.2207>
+- Licence: Licence to be confirmed at the source.
+- Used for: The earlier finger classifier (one participant, one session), the later classifier (a second participant, three dates) and the simulated-hand replay of the later classifier's decisions.
 
-The next-day pinch study derives aggregate errors from a pair of indexed days in those CEMHSEY v2 deposits. Each day uses its own maximum voluntary contraction scale.
+## Recordings of animals
+
+### LINK: Long-Term Intracortical Neural Activity and Kinematics (N, B)
+
+- Made by: Hisham Temmar, Nina Gill, Yixuan Wang and colleagues; the full list of authors is in the reference
+- Version and where: DANDI Archive 001201, version 0.251023.2336, <https://doi.org/10.48324/dandi.001201/0.251023.2336>
+- Licence: Licence to be confirmed at the source.
+- Used for: The macaque study: finger position forecast from motor-cortex recordings of one animal.
+
+### Nonhuman Primate Reaching with Multichannel Sensorimotor Cortex Electrophysiology (N)
+
+- Made by: Joseph E. O'Doherty, Mariana M. B. Cardoso, Joseph G. Makin and Philip N. Sabes; identified also through the Neural Latents Benchmark
+- Version and where: Zenodo dataset, version 2, <https://doi.org/10.5281/zenodo.3854034>. Neural Latents Benchmark release: DANDI Archive 000129
+- Licence: Licence to be confirmed at the source.
+- Used for: The earlier fingertip-velocity decoder and its different-day test: two recording days of one macaque.
+
+### Macaque reach-to-grasp recordings with muscle signals, from the FALCON benchmark (N)
+
+- Made by: Brianna M. Karpowicz, Joel Ye and colleagues
+- Version and where: DANDI Archive 000941. Benchmark paper: <https://doi.org/10.52202/079017-2439>
+- Licence: Licence to be confirmed at the source.
+- Used for: The earlier decoder of muscle activity from motor-cortex recordings.
+
+### Touch-area (area 2) recordings with whole-arm movement (N)
+
+- Made by: Raeed H. Chowdhury, Joshua I. Glaser and Lee E. Miller
+- Version and where: DANDI Archive 000127. Paper: <https://doi.org/10.7554/eLife.48198>
+- Licence: Licence to be confirmed at the source.
+- Used for: The earlier touch-area decoders of hand and arm variables.
+
+## Simulators and body models
+
+### MuJoCo (N, B)
+
+- Made by: Emanuel Todorov, Tom Erez and Yuval Tassa
+- Version and where: Physics engine, version 3.14.0 in the muscle-pulse run of NeuroTranslation section 7.3; paper: <https://doi.org/10.1109/IROS.2012.6386109>
+- Licence: Licence to be confirmed at the source.
+- Used for: The physics of the simulated hand and arm.
+
+### MyoSuite and MyoSim (N, B)
+
+- Made by: Vittorio Caggiano, Huawei Wang, Guillaume Durandau, Massimo Sartori and Vikash Kumar; MyoHub
+- Version and where: MyoSuite paper: <https://proceedings.mlr.press/v168/caggiano22a.html>. MyoSim, version 0.2.3: <https://github.com/MyoHub/myo_sim>
+- Licence: Licence to be confirmed at the source.
+- Used for: The muscle-driven hand and arm models used in the simulated-hand and simulated-arm studies.
+
+### OpenSim and the macaque arm model (N)
+
+- Made by: Ajay Seth and colleagues; limblab
+- Version and where: OpenSim paper: <https://doi.org/10.1371/journal.pcbi.1006223>. Arm model: <https://github.com/limblab/monkeyArmModel>
+- Licence: OpenSim: licence to be confirmed at the source. Arm model: MIT, as stated in its reference entry.
+- Used for: The macaque arm geometry in the earlier simulated-arm study.
+
+## Typefaces
+
+### Noto Sans and Noto Sans Mono (N, B)
+
+- Made by: The Noto Project Authors
+- Version and where: <https://github.com/notofonts/latin-greek-cyrillic>
+- Licence: SIL Open Font License 1.1
+- Used for: The text of this paper.
+
+### Fira Math (N)
+
+- Made by: The Fira Math authors
+- Version and where: <https://github.com/firamath/firamath>
+- Licence: SIL Open Font License 1.1
+- Used for: The mathematics of this paper.
+
+## Fonts embedded in the PDFs
+
+| Family | Licence | Licence text | Source | Embedded in |
+| --- | --- | --- | --- | --- |
+| Noto Sans and Noto Sans Mono | SIL Open Font License 1.1 | [Noto-OFL.txt](third-party-notices/Noto-OFL.txt) | <https://github.com/notofonts/latin-greek-cyrillic> ([the licence as copied](https://github.com/notofonts/latin-greek-cyrillic/blob/ffaec0a756877220dbf718ce08b8479a0be82479/OFL.txt)) | all four papers |
+| Fira Math | SIL Open Font License 1.1 | [FiraMath-LICENSE.txt](third-party-notices/FiraMath-LICENSE.txt) | <https://github.com/firamath/firamath> ([the licence as copied](https://github.com/firamath/firamath/blob/8f1423fbfcc659c44772d2523be82073eb26ad3a/LICENSE)) | the two NeuroTranslation editions (mathematics) |
+
+No other typeface is embedded: every PDF of this edition was checked to carry only Noto Sans, Noto Sans Mono
+and Fira Math, all embedded. The previous edition also carried DejaVu Sans, in its figures, and a DejaVu
+notice; this edition embeds no DejaVu font, so that notice is no longer needed here (it is in the repository's
+history). The seven font files themselves are in the source download, beside these two licence texts.
+
+## The papers' own text
+
+The text of this paper is dedicated to the public domain under CC0 1.0, to the extent the project holds the rights. Material made by others, which is everything listed above and every publication cited, keeps its own licence and its own requirement of credit.

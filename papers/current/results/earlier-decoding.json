@@ -1,0 +1,563 @@
+{
+ "study": "Earlier decoders fitted one recording at a time, the different-day transfer study, and the defect found in one input pipeline",
+ "what": "Small models fitted to single public recordings in October 2026: fingertip velocity and muscle-activity envelopes from macaque motor cortex, hand mechanics from macaque touch cortex and the reverse, an attempted-finger classifier, and a test of carrying a fitted model to another recording day.",
+ "numbers": [
+  {
+   "macro": "DecodeVelocity",
+   "value": 0.7291152477264404,
+   "print": "0.729",
+   "what": "fingertip-velocity decoder, one macaque reaching session",
+   "source": {
+    "file": "artifacts/metrics.json",
+    "pointer": "/test/gru/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "DecodeVelocityLinear",
+   "value": 0.5585275888442993,
+   "print": "0.559",
+   "what": "the linear fit on the same reaching session",
+   "source": {
+    "file": "artifacts/metrics.json",
+    "pointer": "/test/ridge/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "DecodeMuscle",
+   "value": 0.7038613557815552,
+   "print": "0.704",
+   "what": "muscle-signal decoder, mean over sixteen rescaled muscle-activity envelopes",
+   "source": {
+    "file": "artifacts/emg_metrics.json",
+    "pointer": "/test/gru/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "DecodeMuscleLinear",
+   "value": 0.5952725410461426,
+   "print": "0.595",
+   "what": "the linear fit on the same recording",
+   "source": {
+    "file": "artifacts/emg_metrics.json",
+    "pointer": "/test/ridge/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "DecodeMuscleWeakest",
+   "value": 0.08806496858596802,
+   "print": "0.088",
+   "what": "the weakest of the sixteen muscle channels",
+   "source": {
+    "file": "artifacts/emg_metrics.json",
+    "pointer": "computed: the smallest of the sixteen values of /test/gru/r2_channels"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "DecodeTouch",
+   "value": 0.7099714875221252,
+   "print": "0.710",
+   "what": "touch-area decoder: seventeen earlier hand and handle quantities in five groups, mean of the group scores",
+   "source": {
+    "file": "artifacts/sensory_metrics.json",
+    "pointer": "/decoder_test/gru/group_macro_r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "DecodeTouchLinear",
+   "value": 0.4718835175037384,
+   "print": "0.472",
+   "what": "the linear fit on the same recording, scored the same way",
+   "source": {
+    "file": "artifacts/sensory_metrics.json",
+    "pointer": "/decoder_test/ridge/group_macro_r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "EncodeTouch",
+   "value": 0.17697796268200522,
+   "print": "0.177",
+   "what": "the reverse model (movement and handle forces to expected touch-area activity): gain over a constant firing rate",
+   "source": {
+    "file": "artifacts/sensory_metrics.json",
+    "pointer": "/encoding_test/model/bits_per_spike_vs_training_mean"
+   },
+   "unit": "bits per spike"
+  },
+  {
+   "macro": "EncodeTouchJoints",
+   "value": 0.11879207764841232,
+   "print": "0.119",
+   "what": "the reverse model given seven joint angles only",
+   "source": {
+    "file": "artifacts/sensory_joint_metrics.json",
+    "pointer": "/test/bits_per_spike_vs_training_mean"
+   },
+   "unit": "bits per spike"
+  },
+  {
+   "macro": "FamilyVelocityUnits",
+   "value": 130,
+   "print": "130",
+   "what": "sorted units in the reaching session behind the velocity decoder (2 February 2017)",
+   "source": {
+    "file": "artifacts/metrics.json",
+    "pointer": "/source/neurons"
+   }
+  },
+  {
+   "macro": "FamilyOtherDayFeatures",
+   "value": 171,
+   "print": "171",
+   "what": "sorted units in the other reaching day (31 January 2017)",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/target_source/neurons"
+   }
+  },
+  {
+   "macro": "FamilyFingerUnits",
+   "value": 298,
+   "print": "298",
+   "what": "recorded units in the attempted-finger session of the earlier classifier (139 in motor cortex, 159 in posterior parietal cortex)",
+   "source": {
+    "file": "artifacts/finger_specialist_metrics.json",
+    "pointer": "/source/units"
+   }
+  },
+  {
+   "macro": "TransferSmallLabels",
+   "value": 1425,
+   "print": "1,425",
+   "what": "new labelled windows in the small-label condition of the different-day study",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/first5percent/adaptation_label_windows"
+   }
+  },
+  {
+   "macro": "TransferSmallSeconds",
+   "value": 28.5,
+   "print": "28.5",
+   "what": "length of recording those labelled windows cover",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "computed: the second value minus the first of /conditions/first5percent/adaptation_label_time_min_max_s"
+   },
+   "unit": "seconds"
+  },
+  {
+   "macro": "TransferTestWindows",
+   "value": 6050,
+   "print": "6,050",
+   "what": "test windows shared by all eight outcomes of the different-day study",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/full/methods/scratch/test/windows"
+   }
+  },
+  {
+   "macro": "TransferSmallOldSelect",
+   "value": 0.3932437300682068,
+   "print": "0.393",
+   "what": "different-day study, small-label condition, the old model kept fixed behind a new input layer: score used for the decision",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/first5percent/methods/transfer/validation/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferSmallOldTest",
+   "value": 0.42462658882141113,
+   "print": "0.425",
+   "what": "different-day study, small-label condition, the old model kept fixed behind a new input layer: score on the shared test windows",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/first5percent/methods/transfer/test/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferSmallRandomSelect",
+   "value": 0.31158915162086487,
+   "print": "0.312",
+   "what": "different-day study, small-label condition, a fixed model of random numbers behind the same input layer: score used for the decision",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/first5percent/methods/random_frozen/validation/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferSmallRandomTest",
+   "value": 0.33140110969543457,
+   "print": "0.331",
+   "what": "different-day study, small-label condition, a fixed model of random numbers behind the same input layer: score on the shared test windows",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/first5percent/methods/random_frozen/test/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferSmallFreshSelect",
+   "value": 0.5334715247154236,
+   "print": "0.533",
+   "what": "different-day study, small-label condition, a model trained from scratch on the new day: score used for the decision",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/first5percent/methods/scratch/validation/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferSmallFreshTest",
+   "value": 0.5198594331741333,
+   "print": "0.520",
+   "what": "different-day study, small-label condition, a model trained from scratch on the new day: score on the shared test windows",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/first5percent/methods/scratch/test/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferSmallLinearSelect",
+   "value": 0.27553611993789673,
+   "print": "0.276",
+   "what": "different-day study, small-label condition, a linear fit: score used for the decision",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/first5percent/methods/ridge/validation/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferSmallLinearTest",
+   "value": 0.22049066424369812,
+   "print": "0.220",
+   "what": "different-day study, small-label condition, a linear fit: score on the shared test windows",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/first5percent/methods/ridge/test/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferFullOldSelect",
+   "value": 0.6832382082939148,
+   "print": "0.683",
+   "what": "different-day study, all new labels, the old model kept fixed behind a new input layer: score used for the decision",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/full/methods/transfer/validation/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferFullOldTest",
+   "value": 0.7036690711975098,
+   "print": "0.704",
+   "what": "different-day study, all new labels, the old model kept fixed behind a new input layer: score on the shared test windows",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/full/methods/transfer/test/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferFullRandomSelect",
+   "value": 0.6314663887023926,
+   "print": "0.631",
+   "what": "different-day study, all new labels, a fixed model of random numbers behind the same input layer: score used for the decision",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/full/methods/random_frozen/validation/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferFullRandomTest",
+   "value": 0.6464394330978394,
+   "print": "0.646",
+   "what": "different-day study, all new labels, a fixed model of random numbers behind the same input layer: score on the shared test windows",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/full/methods/random_frozen/test/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferFullFreshSelect",
+   "value": 0.7243457436561584,
+   "print": "0.724",
+   "what": "different-day study, all new labels, a model trained from scratch on the new day: score used for the decision",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/full/methods/scratch/validation/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferFullFreshTest",
+   "value": 0.7474601864814758,
+   "print": "0.747",
+   "what": "different-day study, all new labels, a model trained from scratch on the new day: score on the shared test windows",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/full/methods/scratch/test/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferFullLinearSelect",
+   "value": 0.5497968196868896,
+   "print": "0.550",
+   "what": "different-day study, all new labels, a linear fit: score used for the decision",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/full/methods/ridge/validation/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "TransferFullLinearTest",
+   "value": 0.5480170249938965,
+   "print": "0.548",
+   "what": "different-day study, all new labels, a linear fit: score on the shared test windows",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/full/methods/ridge/test/r2"
+   },
+   "unit": "fit score (R squared; 1 is perfect, 0 is no better than answering with the average)"
+  },
+  {
+   "macro": "BandVelocityEach",
+   "value": 90.62304646801417,
+   "print": "90.6",
+   "what": "velocity decoder (two outputs): test readings inside a band built to hold 90% of them, averaged over the outputs one at a time",
+   "source": {
+    "file": "artifacts/uncertainty_metrics.json",
+    "pointer": "/tasks/velocity/test/mean_output_coverage",
+    "scale": 100,
+    "value_in_file": 0.9062304646801417
+   },
+   "unit": "%"
+  },
+  {
+   "macro": "BandVelocityAll",
+   "value": 84.78849760366744,
+   "print": "84.8",
+   "what": "velocity decoder (two outputs): test moments at which every output was inside its band at once",
+   "source": {
+    "file": "artifacts/uncertainty_metrics.json",
+    "pointer": "/tasks/velocity/test/all_outputs_simultaneous_coverage_descriptive",
+    "scale": 100,
+    "value_in_file": 0.8478849760366743
+   },
+   "unit": "%"
+  },
+  {
+   "macro": "BandMuscleEach",
+   "value": 90.08069757365685,
+   "print": "90.1",
+   "what": "muscle-signal decoder (sixteen outputs): test readings inside a band built to hold 90% of them, averaged over the outputs one at a time",
+   "source": {
+    "file": "artifacts/uncertainty_metrics.json",
+    "pointer": "/tasks/emg/test/mean_output_coverage",
+    "scale": 100,
+    "value_in_file": 0.9008069757365684
+   },
+   "unit": "%"
+  },
+  {
+   "macro": "BandMuscleAll",
+   "value": 43.54419410745234,
+   "print": "43.5",
+   "what": "muscle-signal decoder (sixteen outputs): test moments at which every output was inside its band at once",
+   "source": {
+    "file": "artifacts/uncertainty_metrics.json",
+    "pointer": "/tasks/emg/test/all_outputs_simultaneous_coverage_descriptive",
+    "scale": 100,
+    "value_in_file": 0.4354419410745234
+   },
+   "unit": "%"
+  },
+  {
+   "macro": "BandTouchEach",
+   "value": 90.93768376784219,
+   "print": "90.9",
+   "what": "touch-area decoder (seventeen outputs): test readings inside a band built to hold 90% of them, averaged over the outputs one at a time",
+   "source": {
+    "file": "artifacts/sensory_metrics.json",
+    "pointer": "/empirical_bands/test/mean_output_coverage",
+    "scale": 100,
+    "value_in_file": 0.9093768376784219
+   },
+   "unit": "%"
+  },
+  {
+   "macro": "BandTouchAll",
+   "value": 49.45471069372917,
+   "print": "49.5",
+   "what": "touch-area decoder (seventeen outputs): test moments at which every output was inside its band at once",
+   "source": {
+    "file": "artifacts/sensory_metrics.json",
+    "pointer": "/empirical_bands/test/all_outputs_simultaneous_coverage_descriptive",
+    "scale": 100,
+    "value_in_file": 0.4945471069372917
+   },
+   "unit": "%"
+  },
+  {
+   "macro": "DefectCountCells",
+   "value": 866594,
+   "print": "866,594",
+   "what": "cells of the unit-by-time count table that were wrong before the event streams were put in time order",
+   "source": {
+    "file": "artifacts/source_audit.json",
+    "pointer": "/mismatched_unit_bins"
+   }
+  }
+ ],
+ "printed_without_macro": [
+  {
+   "value": 0.9,
+   "what": "earlier finger classifier, its own session: share of the test trials right (45 of 50)",
+   "source": {
+    "file": "artifacts/finger_specialist_metrics.json",
+    "pointer": "/test/selected/accuracy"
+   }
+  },
+  {
+   "value": 50,
+   "what": "earlier finger classifier, its own session: test trials",
+   "source": {
+    "file": "artifacts/finger_specialist_metrics.json",
+    "pointer": "/test/selected/trials"
+   }
+  },
+  {
+   "value": 0.1,
+   "what": "a version built to carry across days (its inputs pooled by brain region), tried on another recording day of that participant with no examples from the day: share right (10 of 100, the chance rate for ten labels)",
+   "source": {
+    "file": "artifacts/finger_metrics.json",
+    "pointer": "/test/selected/accuracy"
+   }
+  },
+  {
+   "value": 100,
+   "what": "trials on that other day",
+   "source": {
+    "file": "artifacts/finger_metrics.json",
+    "pointer": "/test/selected/trials"
+   }
+  },
+  {
+   "value": 64,
+   "what": "spike features in the reach-to-grasp recording behind the muscle-signal decoder",
+   "source": {
+    "file": "artifacts/emg_metrics.json",
+    "pointer": "/source/neurons"
+   }
+  },
+  {
+   "value": 16,
+   "what": "muscle channels in that recording",
+   "source": {
+    "file": "artifacts/emg_metrics.json",
+    "pointer": "computed: the number of names in /source/muscles"
+   }
+  },
+  {
+   "value": 65,
+   "what": "units in the touch-area recording",
+   "source": {
+    "file": "artifacts/sensory_metrics.json",
+    "pointer": "/source/units"
+   }
+  },
+  {
+   "value": 17,
+   "what": "quantities the touch-area decoder outputs",
+   "source": {
+    "file": "artifacts/sensory_metrics.json",
+    "pointer": "computed: the number of names in /mechanics_names"
+   }
+  },
+  {
+   "value": 40,
+   "what": "how much earlier than the brain sample the reconstructed mechanics lie, milliseconds",
+   "source": {
+    "file": "artifacts/sensory_metrics.json",
+    "pointer": "/alignment/selected_lag_ms"
+   }
+  },
+  {
+   "value": 10,
+   "what": "attempted-finger labels",
+   "source": {
+    "file": "artifacts/finger_specialist_metrics.json",
+    "pointer": "computed: the number of names in /class_names"
+   }
+  },
+  {
+   "value": 33,
+   "what": "event streams of the reach-to-grasp recording that were not in time order",
+   "source": {
+    "file": "artifacts/source_audit.json",
+    "pointer": "/falcon_m1_nonmonotonic_units"
+   }
+  },
+  {
+   "value": 64,
+   "what": "event streams in that recording",
+   "source": {
+    "file": "artifacts/source_audit.json",
+    "pointer": "/independent_raw_source_verification/units"
+   }
+  },
+  {
+   "value": "validationR2 exceeds every random-frozen/scratch/ridge control by.01",
+   "what": "the rule for accepting a transferred model (the margin is 0.01)",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/full/acceptance/rule"
+   }
+  },
+  {
+   "value": false,
+   "what": "small-label condition: transferred model accepted",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/first5percent/acceptance/transfer_accepted"
+   }
+  },
+  {
+   "value": false,
+   "what": "all new labels: transferred model accepted",
+   "source": {
+    "file": "artifacts/motor_transfer_metrics.json",
+    "pointer": "/conditions/full/acceptance/transfer_accepted"
+   }
+  }
+ ],
+ "why_some_numbers_have_no_macro": "Whole numbers below 100, and round numbers that double as percentages or durations elsewhere in the papers, have no macro: the build would otherwise refuse the same digits wherever another section types them as an ordinary number. The papers print them as words or as plain digits; each is listed here with its source so that it can be checked.",
+ "limits": [
+  "Each score is from one recording, on a part of that recording kept out of fitting; none is a test on another animal or person.",
+  "These models were scored against a linear fit on the same brain recording, not against a forecast made from the target's own history.",
+  "The muscle decoder's target is a rescaled envelope with no physical unit, although the source file labels it in millivolts. Its mean hides a weakest channel far below it.",
+  "The earlier finger classifier's own-session test had been looked at in an earlier pilot; a version built to carry to another day, with no local examples, scored at the chance rate there.",
+  "The different-day study looks backwards (the new day is two days earlier than the day the old model was fitted on), and its eight outcomes share one set of test windows that has been inspected: they are not eight independent experiments.",
+  "A band that holds 90% of readings one output at a time holds far fewer moments at which all outputs are inside at once.",
+  "Before the event streams of the reach-to-grasp recording were put in time order, the muscle-decoder, shared-model and band results built on them were wrong; those results were withdrawn and the numbers here are from the corrected pipeline."
+ ],
+ "credit": "Macaque reaching: O'Doherty and colleagues (Zenodo 3854034) and the Neural Latents Benchmark release (DANDI 000129). Reach-to-grasp with muscle signals: the FALCON benchmark (DANDI 000941). Touch cortex: Chowdhury, Glaser and Miller (DANDI 000127). Attempted fingers: Finger_RL (DANDI 000252)."
+}

@@ -1,0 +1,205 @@
+{
+ "study": "Attempted-finger classifier on three later dates, and its decisions replayed through a simulated hand",
+ "what": "A classifier read which finger one person with tetraplegia was attempting to move, from recordings in posterior parietal cortex; its decisions, right and wrong, then drove a simulated hand with 39 muscles at four keys.",
+ "numbers": [
+  {
+   "macro": "IntentRight",
+   "value": 116,
+   "print": "116",
+   "what": "attempted-finger labels the classifier got right on the three later dates together",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/model_result/correct_attempted_finger_labels"
+   }
+  },
+  {
+   "macro": "IntentTrials",
+   "value": 150,
+   "print": "150",
+   "what": "labels tested on the three later dates together (fifty on each date)",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/model_result/total"
+   }
+  },
+  {
+   "macro": "ReplayCommandsIssued",
+   "value": 54,
+   "print": "54",
+   "what": "commands issued to the simulated hand in the replay",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/muscle_body/aggregate_controls/learned/issued_supported_goals"
+   },
+   "unit": "commands"
+  },
+  {
+   "macro": "ReplayCommandsDone",
+   "value": 54,
+   "print": "54",
+   "what": "of those, commands the simulated hand carried out",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/muscle_body/aggregate_controls/learned/decoded_goal_execution_successes"
+   },
+   "unit": "commands"
+  },
+  {
+   "macro": "ReplayAttempted",
+   "value": 60,
+   "print": "60",
+   "what": "presses the person attempted with the four supported right-hand fingers",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/muscle_body/aggregate_controls/learned/source_right_finger_trials"
+   },
+   "unit": "presses"
+  },
+  {
+   "macro": "ReplayRight",
+   "value": 41,
+   "print": "41",
+   "what": "of those, presses where the simulated hand struck the key the person had attempted",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/muscle_body/aggregate_controls/learned/source_intention_to_contact_successes"
+   },
+   "unit": "presses"
+  },
+  {
+   "macro": "ReplayNoCommandRight",
+   "value": 0,
+   "print": "0",
+   "what": "control with no muscle command: attempted presses that came out right",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/muscle_body/aggregate_controls/zero_excitation/source_intention_to_contact_successes"
+   },
+   "unit": "presses"
+  },
+  {
+   "macro": "ReplayTrueLabelsRight",
+   "value": 60,
+   "print": "60",
+   "what": "control given the true labels in place of the classifier's decisions: attempted presses that came out right",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/muscle_body/aggregate_controls/cue_reference/source_intention_to_contact_successes"
+   },
+   "unit": "presses"
+  },
+  {
+   "macro": "ReplayMovedRight",
+   "value": 4,
+   "print": "4",
+   "what": "control with the classifier's decisions moved to other trials: attempted presses that came out right",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/muscle_body/aggregate_controls/shuffled_predictions/source_intention_to_contact_successes"
+   },
+   "unit": "presses"
+  },
+  {
+   "macro": "ReplayMovedCommandsDone",
+   "value": 54,
+   "print": "54",
+   "what": "the same control: commands the simulated hand carried out",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/muscle_body/aggregate_controls/shuffled_predictions/decoded_goal_execution_successes"
+   },
+   "unit": "commands"
+  }
+ ],
+ "printed_without_macro": [
+  {
+   "value": 35,
+   "what": "labels right on the first later date (16 May 2016), of fifty",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/model_result/per_day/0"
+   }
+  },
+  {
+   "value": 44,
+   "what": "labels right on the second later date (20 May 2016), of fifty",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/model_result/per_day/1"
+   }
+  },
+  {
+   "value": 37,
+   "what": "labels right on the third later date (23 May 2016), of fifty",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/model_result/per_day/2"
+   }
+  },
+  {
+   "value": 50,
+   "what": "labels tested on each later date",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/prospective_design/common_late_rows"
+   }
+  },
+  {
+   "value": 50,
+   "what": "labelled examples from the start of each date used to adjust the classifier to that date",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/prospective_design/early_local_examples_required"
+   }
+  },
+  {
+   "value": 11,
+   "what": "labels right, of all the later labels, for a classifier given no examples from the date",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/model_result/uncalibrated_population_baseline_correct"
+   }
+  },
+  {
+   "value": 17,
+   "what": "classifiers compared before the later dates were opened",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/prospective_design/candidate_count"
+   }
+  },
+  {
+   "value": 13,
+   "what": "presses in the replay that were unintended or mistimed",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/muscle_body/aggregate_controls/learned/unintended_or_mistimed_presses"
+   }
+  },
+  {
+   "value": 50,
+   "what": "the same count in the control with decisions moved to other trials",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/muscle_body/aggregate_controls/shuffled_predictions/unintended_or_mistimed_presses"
+   }
+  },
+  {
+   "value": 39,
+   "what": "simulated muscles in the hand model",
+   "source": {
+    "file": "artifacts/finger_neural_bridge/study_acceptance.json",
+    "pointer": "/muscle_body/muscle_actuators"
+   }
+  }
+ ],
+ "why_some_numbers_have_no_macro": "Whole numbers below 100, and round numbers that double as percentages or durations elsewhere in the papers, have no macro: the build would otherwise refuse the same digits wherever another section types them as an ordinary number. The papers print them as words or as plain digits; each is listed here with its source so that it can be checked.",
+ "limits": [
+  "One participant; three dates are not three people. The labels are cued attempts, not measured finger movements, and seeing the cue is not separated from attempting the movement.",
+  "The classifier needed fifty labelled examples from each date; with none it scored at the chance rate.",
+  "The hand is a generic simulated hand, not the participant's. Nothing here was recorded from muscle, nerve or spinal cord.",
+  "The replay ran from stored recordings after the fact; it is not live.",
+  "The three later dates have now been seen and count as development data for any later work."
+ ],
+ "credit": "Finger_RL, DANDI Archive 000252, version 0.230408.2207 (Guan, Aflalo, Kadlec and Gamez). Hand model: MyoSim; simulator: MuJoCo."
+}
