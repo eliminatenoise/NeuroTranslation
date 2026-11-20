@@ -2,23 +2,33 @@
 
 **What a hand has just done still beats a brain signal read at the scalp.**
 
-That is where [23 small studies](benchmarks/README.md) stand. Each takes open recordings of people, measured and shared by others, and forecasts what a hand or an arm does a fraction of a second later: the angle of a wrist, the position of a palm, the force of a grip. A hand tends to keep moving the way it was moving, so its own recent past is a hard forecast to beat. A brain or muscle signal earns its place only by beating it.
+That is where [24 small studies](benchmarks/README.md) stand. Each takes open recordings of people, measured and shared by others, and forecasts what a hand or an arm does a fraction of a second later: the angle of a wrist, the position of a palm, the force of a grip. A hand tends to keep moving the way it was moving, so its own recent past is a hard forecast to beat. A brain or muscle signal earns its place only by beating it.
 
 - Adding a brain recording taken at the scalp (EEG) to a forecast that already had the hand's history made it worse in **8 of 12** comparisons. At the wrist, a quarter of a second ahead, the error grew from 4.05° to 4.52°. EEG met none of the 4 pass rules set for it before any scoring.
 - Adding a muscle recording from the forearm (EMG) lowered the error in **10 of 17**. Only at the wrist was the gain clear of the spread between people.
-- On the task it was fitted for, a forecast fitted to the hand's recent past beat simply repeating the last value in **8 of 8** studies: 4.05° against 7.92° at the wrist.
+- On the task it was fitted for, a forecast fitted to the hand's or arm's own recent past beat simply repeating the last value in **9 of 9** studies: 4.05° against 7.92° at the wrist.
 - Change the task or the target, and a rule you could write in one line, such as "repeat the last value", beat the best fitted model in **6 of 6** settings.
 
 NeuroTranslation is the larger attempt those studies belong to. Reach for a cup: your brain gives the order, the muscles of your forearm pull, and the hand moves. One act, written down three times, in nerve, in muscle and in motion. To translate is to take one of those records, predict another, and check the prediction against what the body did. It is one part of **Brain2Body**, the name of the whole programme and of its second paper, which asks what a person keeps once a machine stops guiding their hand.
 
-What exists today is the studies, 14 [pages that run them in a browser](https://eliminatenoise.github.io/NeuroTranslation/START.html), two draft papers and a sister game, NeuroSurge. What does not exist is a general model. **NeuroTranslate 0.0** is the name of the one being built. It has not been fitted to a real recording, and it is not inside the browser app that carries its name.
+What exists today is the studies, 14 [pages that run them in a browser](https://eliminatenoise.github.io/NeuroTranslation/START.html), two draft papers and a sister game, NeuroSurge.
+
+What is still being built is the general model, **NeuroTranslate 0.0**: one model meant to learn from many kinds of body signal at once. On 20 November it had its first fits to real recordings, and they were small.
+
+- Both used one kind of sensor, strapped to the body, that records how its speed changes as a person walks (an accelerometer), from one open dataset of people walking. The errors below are in the units the sensor stores.
+- One copy of the model forecast five such sensors (torso, both arms, both legs) 120 ms ahead and was scored only on the four people it was fitted on. It met the rule set before fitting, to beat every other forecast for every person, at one sensor of five: the left leg, where its average miss was 1.837 against 1.929 for a straight-line fit made for that sensor.
+- A copy fitted to the right arm alone was scored on two people that another study had already used. A straight-line fit beat it for both: 0.869 against 0.781.
+
+What does not exist yet: a test of the general model on people nobody has looked at before, and any fit of it to a brain or muscle signal. So nothing here yet translates between nerve, muscle and movement. Nor is the model inside the browser app that carries its name.
 
 ## Where to click
 
 - **[Start page](https://eliminatenoise.github.io/NeuroTranslation/START.html).** Runs in a browser, nothing to install. Try an invented example, or pick the kind of recording you have and open the page that reads it. Behind it are the study readers, and an app that lines up your own recordings on one clock.
-- **[The studies](benchmarks/README.md).** All 23, each with its plan and its results file, and the counts above worked out row by row.
+- **[The studies](benchmarks/README.md).** All 24, each with its plan and its results file, and the counts above worked out row by row.
+- **[The general model's first fit, on your own computer](benchmarks/daily-sports-limbs/README.md).** A page that opens in your browser once a small Python program is running (it needs Python and two libraries; there is a launcher for Windows, macOS and Linux). Pick a sensor on the torso, an arm or a leg: it shows the sensor's last 16 readings, NeuroTranslate 0.0's forecast and what the sensor recorded next. The walks it shows are ones the model was fitted on, so it shows the model working, not how good it is.
 - **[The papers](papers/README.md).** Two working drafts, each in a Technical and a Simple English edition.
 - **[Launchers and offline copies](LAUNCHERS.md)** for Windows, macOS and Linux.
+- **[One wrist trial, every channel labelled](interfaces/wrist-language-motion/README.md).** Three seconds of one person turning the wrist toward a target, from an open dataset, with each channel marked by what recorded it (a scalp electrode, two forearm electrodes, two sensors of the wrist's angle, the cue on the screen) and the words a person wrote about it. A small Python program hands it to the general model's code. No model is fitted to it.
 - **[NeuroSurge](https://github.com/eliminatenoise/NeuroSurge)**, the sister game.
 
 ## A translation needs both texts from the same moment
@@ -42,9 +52,9 @@ The project's working presumption is that more data, and more varied data, makes
 
 Each row sets a reference forecast against a challenger that was given something extra. Some rows forecast a movement, some the force at a gauge, some the voltage of a force sensor.
 
-Every score is an error: how far the forecasts fell from what was measured. Lower is better. Rows 1 to 13 are scored by the measure that punishes large misses, rows 14 to 23 by the plain average miss, and the last two by a squared error in units of their own. Row 20 is the odd one: it compares the width of bands, not errors. Units change from block to block, so compare along a row, never down a column.
+Every score is an error: how far the forecasts fell from what was measured. Lower is better. Rows 1 to 13 are scored by the measure that punishes large misses, rows 14 to 23, 26 and 27 by the plain average miss, and rows 24 and 25 by a squared error in units of their own. Row 20 is the odd one: it compares the width of bands, not errors. Units change from block to block, so compare along a row, never down a column.
 
-A *straight-line fit* is the plainest kind of model, a weighted sum of its inputs. A *learned forecast* is a small network that reads a stretch of recent history. The recordings a model is scored on were never used to fit it, except in the last row.
+A *straight-line fit* is the plainest kind of model, a weighted sum of its inputs. A *learned forecast* is a small network that reads a stretch of recent history. A *transformer* is the kind of network behind today's large language models: study 26 tried a small one, and the general model is built round one too. The recordings a model is scored on were never used to fit it, except in rows 25 and 27.
 
 | Study | Tested on | Reference forecast | Challenger | Who won |
 | --- | --- | --- | --- | --- |
@@ -77,19 +87,23 @@ A *straight-line fit* is the plainest kind of model, a weighted sum of its input
 | 21 · [Pinch at new targets](benchmarks/cemhsey-transfer/) | 4 people | A one-line rule, the current reading plus the change the on-screen schedule calls for: 0.572% | The fitted five-grid model after one practice pinch: 0.699% | **The one-line rule.** The model beat it for 0 of 4 people. |
 | 22 · [Pinch, next day](benchmarks/cemhsey-carry/) | the same 4, a day later | The fitted model, corrected on one practice pinch from the new day: 0.70643% | Corrected on yesterday's practice pinch instead: 0.70578% | **No measurable difference.** The one-line rule beat both: 0.584%. |
 | 23 · [Pinch: a correction learned from other people](benchmarks/cemhsey-phase/) | 3 people | The one-line rule: 0.70007% | With separate corrections for the rise and the release, learned from 3 other people: 0.69509% | **The correction**, by 0.005%, for 3 of 3. One correction for both directions did as well (0.69507%). The fitted model lost to both: 0.822%. |
+| **Arm acceleration while walking, 120 ms ahead** (in the units the sensor stores) | | | | |
+| 26 · [Walking: a small transformer on an arm sensor](benchmarks/daily-sports-arm/) | 2 people | Straight-line fit on the sensor's last 16 readings: 0.781 | A small transformer on the same 16 readings: 0.855 | **The straight-line fit**, by 0.074, for both people. Both beat repeating the last value (1.182), and the transformer failed the pass rule set for it. |
+| **The general model's first fit** (scored on the people it was fitted on: not a test) | | | | |
+| 27 · [Walking: the general model's first fit, five sensors](benchmarks/daily-sports-limbs/) | nobody new: the 4 people it was fitted on | Straight-line fit made for the left-leg sensor alone: 1.929 | NeuroTranslate 0.0, one copy for all five sensors: 1.837 at the left leg | **Not a test.** It beat repeating the last value at all five sensors and the straight-line fit at four. The rule set before fitting, better for every person, held only at the left leg. |
 | **Reported only in the papers** (units scaled to the data) | | | | |
 | 24 · [Macaque fingers from motor cortex (LINK)](papers/current/neurotranslation-technical.pdf#page=13) | 1 macaque | Straight-line fit on the latest brain sample: 0.03150 | The better of two networks that read recent brain history: 0.02996 | **Both failed their pass rule.** Lower on average, but worse for the index finger on the second test day. All five further claims failed too. |
 | 25 · [One network shared by two signals: first run](papers/current/research-evidence-reading-aid.md#one-acquisition-two-forecasting-tasks) | nobody held out | Repeat the last value: 0.0245 | One network shared by a muscle signal and a glove signal, after 990 training steps: 0.372 | **Repeating the last value**, on the network's own training recording. |
 
-Two more counts. Adjusting a model to one person, one day or one group lowered the error in 5 of 6 comparisons, but in only 1 of them by more than 1% of the error. And 11 studies fixed a pass rule before any scoring: 7 failed it, 2 gave a split answer, 1 passed by a margin too small to tell from zero, and 1 passed on a question about band widths. No rule about adding a signal to a forecast was passed outright.
+Two more counts. Adjusting a model to one person, one day or one group lowered the error in 5 of 6 comparisons, but in only 1 of them by more than 1% of the error. And 12 studies fixed a pass rule before any scoring: 8 failed it, 2 gave a split answer, 1 passed by a margin too small to tell from zero, and 1 passed on a question about band widths. Row 27 is not among them: its rule was set before fitting, but it was applied to the people the model was fitted on. No rule about adding a signal to a forecast was passed outright.
 
-No test group is larger than 4 people, the 23 studies draw on 8 datasets, and several rows score the same three or four people again. The brain signal in every study on people is EEG from 3 to 32 electrodes on the scalp: nothing here was recorded inside a human brain. And nothing was forecast live: every "ahead" is a distance along a stored recording.
+No test group is larger than 4 people, the 24 studies draw on 9 datasets, and several rows score the same three or four people again. The brain signal in every study on people is EEG from 3 to 32 electrodes on the scalp: nothing here was recorded inside a human brain. And nothing was forecast live: every "ahead" is a distance along a stored recording.
 
 [The studies page](benchmarks/README.md) has every number with its range and its controls.
 
-## Twenty-two people have never been scored
+## Twenty-four people have never been scored
 
-When each dataset was split, some people were set aside and their recordings left unopened: 22 people in 7 datasets, and four recordings of the macaque. Until one of those groups is opened, every number above comes from people the project has already looked at.
+When each dataset was split, some people were set aside and their recordings left unopened: 24 people in 8 datasets, and four recordings of the macaque. Until one of those groups is opened, every number above comes from people the project has already looked at.
 
 | Recordings | Studies | Set aside, never opened |
 | --- | --- | --- |
@@ -100,6 +114,7 @@ When each dataset was split, some people were set aside and their recordings lef
 | Pinch and lift (WAY-EEG-GAL) | 9 and 10 | 3 people |
 | Paced grip (HYGRIP) | 11 to 13 | 3 people |
 | One finger (Hyser) | 14 to 17 | 4 people |
+| Walking (Daily and Sports Activities) | 26 | 2 people |
 | Macaque fingers (LINK) | 24 | 4 recordings |
 
 The six pinch studies set nobody aside. Each fixed its test group in advance and scored it once.
@@ -113,13 +128,13 @@ The six pinch studies set nobody aside. Each fixed its test group in advance and
 
 The first paper asks what a recording of brain or muscle adds once a model already knows how the body has been moving. It carries the macaque study and most of the human studies above. The second asks what a person keeps when a machine guides their hand through a skill and then stops. It is a proposal: it reports no experiment of its own on that question.
 
-Both are working drafts, and nobody outside the project has reviewed them. They were last built on 19 November 2026 and do not yet contain studies 8, 10, 13 or 23. [How to read them, and where each study sits in each one](papers/README.md).
+Both are working drafts, and nobody outside the project has reviewed them. They were last built on 19 November 2026 and do not yet contain studies 8, 10, 13, 23 or 26, nor the general model's first fits. [How to read them, and where each study sits in each one](papers/README.md).
 
 ## Run it yourself
 
 In a browser: open the [start page](https://eliminatenoise.github.io/NeuroTranslation/START.html). A recording you open is read on your own computer and goes nowhere.
 
-Offline: most readers have a ZIP that runs without a network, with a launcher for Windows, macOS and Linux. [LAUNCHERS.md](LAUNCHERS.md) lists them.
+Offline: most readers have a ZIP that runs without a network, with a launcher for Windows, macOS and Linux, and the general model's first fit has a page that runs from your own computer. [LAUNCHERS.md](LAUNCHERS.md) lists them.
 
 To score a study again from the original recordings: each folder under [`benchmarks/`](benchmarks/README.md) holds the study's plan and its results file, and several also hold the code that does the scoring. You fetch the recordings yourself, from their own archive. The palm study, for example, with Python 3.13:
 
@@ -135,11 +150,11 @@ To build the app from source: `cd demo`, then `npm test` and `npm run build`. [d
 
 ## Whose recordings these are
 
-None of the recordings is ours. Ten open datasets, measured by other people, carry everything on this page: eight behind the 23 studies, and two behind the two results reported only in the papers.
+None of the recordings is ours. Eleven open datasets, measured by other people, carry everything on this page: nine behind the 24 studies, and two behind the two results reported only in the papers.
 
-EEG-EMG-WristMotion · KIN-MUS UJI · the upper-limb dataset of Lucchetti and colleagues · IACKD · WAY-EEG-GAL · HYGRIP · Hyser · CEMHSEY GRASP · LINK · Reach&Grasp
+EEG-EMG-WristMotion · KIN-MUS UJI · the upper-limb dataset of Lucchetti and colleagues · IACKD · WAY-EEG-GAL · HYGRIP · Hyser · CEMHSEY GRASP · Daily and Sports Activities · LINK · Reach&Grasp
 
-Who made each one, its licence and the credit it is owed: [docs/RIGHTS.md](docs/RIGHTS.md). The licences are CC BY 4.0, CC0 1.0, ODC-By 1.0 and MIT. What is published here is fitted models and summary results derived from the recordings, not the recordings themselves.
+Who made each one, its licence and the credit it is owed: [docs/RIGHTS.md](docs/RIGHTS.md). The licences are CC BY 4.0, CC0 1.0, ODC-By 1.0 and MIT. What is published here is mostly fitted models and summary results derived from the recordings. Two short excerpts of the recordings themselves are included, each under its dataset's terms: one three-second trial of the wrist-pointing recordings, and 16 readings, with the reading that came next, from each of the five walking sensors in one clip, which the five-sensor page replays.
 
 What the project itself wrote, text and code, is dedicated to the public domain under [CC0 1.0](LICENSE). That covers none of the recordings, nor the fonts inside the PDFs.
 
