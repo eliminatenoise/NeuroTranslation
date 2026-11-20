@@ -1,0 +1,143 @@
+{
+  "sourceSha256": "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179",
+  "weightsSha256": "950b480e52f5ae6fd880f2cb6636b697c8d22e8fefe55d3400c8500018779750",
+  "values": 5234,
+  "seed": 27181,
+  "config": {
+    "format": 1,
+    "width": 24,
+    "heads": 4,
+    "feedforward": 48,
+    "layers": 1,
+    "domains": [
+      "wrist",
+      "rat"
+    ]
+  },
+  "tensors": [
+    [
+      "blocks.0.attention_norm.bias",
+      [
+        24
+      ]
+    ],
+    [
+      "blocks.0.attention_norm.weight",
+      [
+        24
+      ]
+    ],
+    [
+      "blocks.0.attention_out.bias",
+      [
+        24
+      ]
+    ],
+    [
+      "blocks.0.attention_out.weight",
+      [
+        24,
+        24
+      ]
+    ],
+    [
+      "blocks.0.ff_in.bias",
+      [
+        48
+      ]
+    ],
+    [
+      "blocks.0.ff_in.weight",
+      [
+        48,
+        24
+      ]
+    ],
+    [
+      "blocks.0.ff_norm.bias",
+      [
+        24
+      ]
+    ],
+    [
+      "blocks.0.ff_norm.weight",
+      [
+        24
+      ]
+    ],
+    [
+      "blocks.0.ff_out.bias",
+      [
+        24
+      ]
+    ],
+    [
+      "blocks.0.ff_out.weight",
+      [
+        24,
+        48
+      ]
+    ],
+    [
+      "blocks.0.qkv.bias",
+      [
+        72
+      ]
+    ],
+    [
+      "blocks.0.qkv.weight",
+      [
+        72,
+        24
+      ]
+    ],
+    [
+      "last_norm.bias",
+      [
+        24
+      ]
+    ],
+    [
+      "last_norm.weight",
+      [
+        24
+      ]
+    ],
+    [
+      "position",
+      [
+        4,
+        24
+      ]
+    ],
+    [
+      "project.bias",
+      [
+        24
+      ]
+    ],
+    [
+      "project.weight",
+      [
+        24,
+        6
+      ]
+    ],
+    [
+      "readout.bias",
+      [
+        2
+      ]
+    ],
+    [
+      "readout.weight",
+      [
+        2,
+        24
+      ]
+    ]
+  ],
+  "encoding": "IEEE 754 little-endian float32, tensor names sorted, C order within tensor; embedded in shared-motion.js",
+  "contractSha256": "48d3dc03e05fce2b1c95e10aeca45ef934e3cd0108b7a53036b1616b29fc40a2",
+  "numpyPredictorSha256": "4086677a141b950d5408666939c50c8122967cde72820e81eb6e2231bc017090"
+}

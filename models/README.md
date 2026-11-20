@@ -4,6 +4,8 @@ A headset tracks a wrist in three dimensions. A camera tracks a rat in two dimen
 
 The two tasks use **one fitted Transformer checkpoint**. The same attention layers learn from both kinds of movement. A small final readout for each task turns the shared representation into a distance. The result gives a magnitude. The positions along a path and its direction require other predictions. [Download the model and source (ZIP)](shared-motion-distance.zip) · [Usage and reproduction](shared-motion/README.md)
 
+The same fitted weights also run directly in a browser. The JavaScript API accepts the four motion intervals or derives them from time-stamped tracking points. It uses one model file for both tasks, and both distributed examples are invented. [Browser runtime and API](shared-motion-browser/) · [Download the standalone JavaScript package](shared-motion-browser.zip)
+
 ## Did learning together help?
 
 | Quarter-second forecast | Human wrist | Rat position |
