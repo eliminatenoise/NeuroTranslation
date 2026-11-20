@@ -1,18 +1,32 @@
-# How much does forearm EMG add to a wrist forecast?
+[The studies](../README.md) › Study 2 · Wrist pointing: muscle signal on a straight-line fit
 
-[Download the interactive experimental preview ZIP](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/wrist-pointing-muscle/wrist-pointing-muscle-r1-preview.zip)
+# Forearm EMG lowered the wrist forecast's error by 0.355°
 
-There are two traces of the same turn. The exoskeleton encoders tell us how the right wrist moved. Surface electromyography (EMG) picks up electrical activity at the skin of the forearm. To see what the muscle signal adds, we fit one ridge regression to cue time and recent wrist angles, then fit a second with the same inputs plus surface EMG.
+Three people turned a wrist towards a target. A straight-line fit, made on six other people from the wrist's recent angles and the time since the cue, forecast both wrist angles 250 ms ahead and missed by **6.530°**. Given surface EMG from the forearm as well, it missed by **6.174°**, 0.355° better. Given EMG from the next trial instead, it missed by **6.941°**: wrongly timed EMG did worse than no EMG at all. Whichever one of the three people is left out, the gain stays between 0.232° and 0.469°.
 
-We fit the regressions on six people and evaluated them on three different people. The development set has 960 pointing trials and 5,760 two-axis angle pairs. With surface EMG, the equal-person root mean square error fell from **6.530° to 6.174°**, a reduction of **0.355°** using the full-precision scores. Giving that same model EMG from the next eligible trial at the same cue offset in the same recording block raised error to **6.941°**. Adding scalp EEG after EMG brought overall error to **6.127°**. On the radial–ulnar axis, that last step raised error slightly, from 3.987° to 3.998°.
+Every score here is the measure that punishes large misses (root mean squared error), over both wrist axes, with each person counting equally. EMG is electrical activity of muscle, picked up on the skin over it: a recording of muscle, not of nerve. A *straight-line fit* is the plainest kind of model, a weighted sum of its inputs; this one is a ridge regression, which keeps the weights small.
 
-Each prediction takes aim at a pair of encoder measurements in degrees, one for flexion–extension and one for radial–ulnar deviation. The last input comes 128 stored rows before the target, a nominal **250 ms** at 512 Hz. Physical clock and signal delays remain unverified. The inputs can also reflect electrical activity from adjacent muscles, contact changes and movement artefacts. These offline measurements concern a specific task and three development participants. The reserved test cohort remains sealed.
+## What was forecast
 
-The [companion temporal forecast](../wrist-pointing-temporal/) uses the same participants and trials to ask what EEG adds to a learned model of wrist history. Its stronger motion-only result comes from a different model class. The EMG study compares inputs within one class of ridge regression.
+Two records of the same turn: the exoskeleton's encoders measure how the right wrist moved, and four pairs of electrodes on the forearm pick up the muscles' electrical activity. Each forecast aims at two encoder angles in degrees, bending up and down (flexion–extension) and tilting side to side (radial–ulnar deviation). The test is 960 pointing trials and 5,760 pairs of angles from three people the fit never saw. Six more people were set aside when the dataset was split, and their recordings are unopened.
 
-## Open the preview
+The last input comes 128 stored samples before the target, which is 250 ms on the 512 Hz clock. The physical delays of the clocks and signals were never measured. Electrodes on the skin also pick up nearby muscles, changes in contact and movement itself.
 
-Extract the whole ZIP and open `index.html` in a browser, or use the launcher for your operating system.
+Adding scalp EEG after EMG brought the error to 6.127°. On the side-to-side axis that last step made it slightly worse, 3.987° to 3.998°.
+
+[Study 1](../wrist-pointing-temporal/) uses the same people and trials to ask what scalp EEG adds to a learned forecast of the wrist's history. Its stronger result without any signal, 4.053°, comes from a different kind of model. This study compares inputs within one straight-line fit.
+
+## What it does not show
+
+One pointing task, three people, stored recordings scored after the fact. The same three people are the test group of studies 1 and 3 as well, so the three studies are three looks at one group, not three groups.
+
+## The plan
+
+The plan, `DESIGN.json` inside the [study ZIP](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/wrist-pointing-muscle/wrist-pointing-muscle-r1-preview.zip), fixed the comparison before scoring and calls the study "a prospective exploratory analysis … not another independent cohort". It set no pass threshold.
+
+## Run it yourself
+
+[Download the study ZIP](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/wrist-pointing-muscle/wrist-pointing-muscle-r1-preview.zip), extract all of it and open `index.html` in a browser, or use the launcher for your system.
 
 | System | Launcher |
 | --- | --- |
@@ -20,12 +34,12 @@ Extract the whole ZIP and open `index.html` in a browser, or use the launcher fo
 | macOS | Open `Launch-macOS.command` or run it in Terminal |
 | Windows | Open `Launch-Windows.cmd` |
 
-Choose an axis to see where error changed, or open **All scores** to see the baselines and trial controls. The browser view works offline without dependencies. With Python and NumPy, `python -B synthetic_model.py` runs the bundled fitted ridge heads on artificial inputs. The Linux launcher has been run from the archive. The macOS and Windows launchers are supplied for those systems and await native verification.
+Choose an axis to see where the error changed, or open **All scores** for the simple forecasts and the wrong-trial controls. The page works offline with nothing to install. With Python and NumPy, `python -B synthetic_model.py` runs the fitted models on invented inputs. The Linux launcher has been run from the archive; the macOS and Windows launchers have not yet been run on those systems.
 
-[Development aggregate](RESULTS.json) · [Sources and checksums](SOURCE.json)
+[Results file](RESULTS.json) · [Sources and checksums](SOURCE.json)
 
-## Data credit
+## Whose recordings
 
-Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz deposited *EEG-EMG-WristMotion Dataset*, version 3, under CC BY 4.0. NeuroTranslation selected eligible pointing trials and derived features from the earlier encoder angles, scalp EEG and software differences between forearm electrodes. The project authored the analysis code, fitted ridge heads and interactive comparison. [Version 3 deposit](https://doi.org/10.6084/m9.figshare.29666735.v3) · [Primary study](https://doi.org/10.1038/s41597-026-07287-z) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz deposited the *EEG-EMG-WristMotion Dataset*, version 3, under CC BY 4.0. NeuroTranslation selected the usable pointing trials and worked out features from the earlier encoder angles, the scalp EEG and the differences between pairs of forearm electrodes. The project wrote the analysis code, the fitted models and the interactive comparison. [Version 3 deposit](https://doi.org/10.6084/m9.figshare.29666735.v3) · [Primary study](https://doi.org/10.1038/s41597-026-07287-z) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-A later comparison asked whether surface EMG could still help after a temporal model had learned the wrist’s recent motion. Adding EMG to its motion correction reduced development error from 3.957° to 3.853°. The same three development participants supplied these trials. [Forearm correction study and recorded-trial runner](../wrist-forearm-transfer/)
+A later study asked whether EMG still helps once a learned forecast already knows the wrist's recent motion. Added to a correction on top of that forecast, it lowered the error from 3.957° to 3.853°, on the same three people: [Study 3 · Wrist pointing: muscle signal on the learned forecast](../wrist-forearm-transfer/).
