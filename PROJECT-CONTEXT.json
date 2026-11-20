@@ -78,36 +78,36 @@
       }
     },
     "papers": {
-      "latest_rendered": "papers/experimental/cemhsey-pinch-carry-2026-11-19",
-      "manifest": "papers/experimental/cemhsey-pinch-carry-2026-11-19/manifest.json",
+      "latest_rendered": "papers/current",
+      "manifest": "papers/current/manifest.json",
       "manifest_sha256": "cd0b1aaf3fb7cfa08b902e932a3d9ef3b74828fc9bfa1733111eb0843500defc",
       "scope": "Four manuscripts now report the prospective next-day transfer of a personal correction. At 50% MVC, carrying the five-grid correction improved mean absolute error by 0.000006520 of MVC versus fresh practice, with better forecasts in three of four people. The simple current-force-plus-scheduled-change control still gave the lowest mean error. The corpus covers four adults and one transition between indexed recording days.",
       "build_provenance": "Four PDFs rebuilt through the retained offline Tectonic toolchain.",
-      "historical_erratum": "papers/errata/r9-reading-aid-metadata.txt",
-      "historical_source": "papers/experimental/r11-source",
+      "historical_erratum": null,
+      "historical_source": null,
       "source_status": "77 cleared TeX/BibTeX files. The manifest identifies omitted build dependencies.",
       "publication_scope": "This metadata identifies selected content; actual publication and remote readback require a separate receipt.",
       "download_bundle": {
-        "path": "papers/downloads/NeuroTranslation-Brain2Body-CEMHSEY-Pinch-Next-Day-2026-11-19.zip",
+        "path": "papers/downloads/NeuroTranslation-Brain2Body-Papers.zip",
         "bytes": 3401572,
         "sha256": "1822d46739a4da865a913d9bb3663b714478eb415e8e9063584e03ab930ae0e7",
-        "checksum": "downloads/NeuroTranslation-Brain2Body-CEMHSEY-Pinch-Next-Day-2026-11-19.zip.sha256",
+        "checksum": "downloads/NeuroTranslation-Brain2Body-Papers.zip.sha256",
         "members": 15,
         "extraction_folder": "NeuroTranslation-Brain2Body-CEMHSEY-Pinch-Next-Day-2026-11-19"
       },
       "latest_experimental_candidate": {
         "version": "cemhsey-pinch-carry-2026-11-19",
-        "directory": "papers/experimental/cemhsey-pinch-carry-2026-11-19",
+        "directory": "papers/current",
         "archive": {
-          "path": "papers/downloads/NeuroTranslation-Brain2Body-CEMHSEY-Pinch-Next-Day-2026-11-19.zip",
+          "path": "papers/downloads/NeuroTranslation-Brain2Body-Papers.zip",
           "bytes": 3401572,
           "sha256": "1822d46739a4da865a913d9bb3663b714478eb415e8e9063584e03ab930ae0e7"
         },
-        "reading_aid": "papers/experimental/cemhsey-pinch-carry-2026-11-19/research-evidence-reading-aid.md",
+        "reading_aid": "papers/current/research-evidence-reading-aid.md",
         "pages_total": 629,
         "scope": "Four manuscripts now report the prospective next-day transfer of a personal correction. At 50% MVC, carrying the five-grid correction improved mean absolute error by 0.000006520 of MVC versus fresh practice, with better forecasts in three of four people. The simple current-force-plus-scheduled-change control still gave the lowest mean error. The corpus covers four adults and one transition between indexed recording days.",
         "selected_manuscript_source": {
-          "path": "papers/downloads/NeuroTranslation-Brain2Body-Selected-CEMHSEY-Pinch-Next-Day-Source-2026-11-19.zip",
+          "path": "papers/downloads/NeuroTranslation-Brain2Body-Papers-Source.zip",
           "bytes": 629286,
           "sha256": "dbdf2c6ef372e196fab772359c5cefe6eafd1b8c11b38d028e829096da8ce63f",
           "members": 80,
@@ -115,20 +115,20 @@
         }
       },
       "historical_scientific_layout": {
-        "latest_rendered": "papers/experimental/scientific-layout-2026-11-15",
-        "manifest": "papers/experimental/scientific-layout-2026-11-15/manifest.json",
+        "latest_rendered": "https://github.com/eliminatenoise/NeuroTranslation/tree/168833b6c3d3e0056cb2df0aeb9138de76e9ab84/papers/experimental/scientific-layout-2026-11-15",
+        "manifest": "https://github.com/eliminatenoise/NeuroTranslation/blob/168833b6c3d3e0056cb2df0aeb9138de76e9ab84/papers/experimental/scientific-layout-2026-11-15/manifest.json",
         "manifest_sha256": "a524e17ae958ae14ffc7ece9e311ea4810094256dff502c1863cfa3408768184",
-        "scope": "Four experimental working drafts, 546 pages; recorded targeted visual evidence covers 26 pages, with 520 outside visual acceptance; no whole-paper or biological acceptance.",
-        "build_provenance": "R2 technical PDFs retained; accessible editions have actual R3 builds. The R3 Brain2Body Simple English PDF equals its preceding R2 bytes.",
+        "scope": "The 15 November 2026 edition: four drafts, 546 pages, of which 26 had a recorded visual check. The current edition replaced it; the link shows it in the repository history.",
+        "build_provenance": "The two technical PDFs came from the previous build; the two Simple English PDFs were rebuilt, and the rebuilt Brain2Body one was byte-identical to its predecessor.",
         "download_bundle": {
-          "path": "papers/downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip",
+          "path": "https://github.com/eliminatenoise/NeuroTranslation/blob/168833b6c3d3e0056cb2df0aeb9138de76e9ab84/papers/downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip",
           "bytes": 3083960,
           "sha256": "519a88c6881852b66d5db8efd74e351a661a6acfeb643ee79cc68f489a69bf9b",
           "members": 14,
           "extraction_folder": "NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15",
           "scope": "Four exact selected PDFs, three companions, README, content manifest and five notice files. No standalone font, source, model or private evidence files. Native extraction/PDF-link behavior across operating systems remains unverified."
         },
-        "source_status": "Preserved R9/R11 sources are historical, not matching build-source bundles for the current PDFs. R11 remains unbuilt/nonstandalone, with its G35 proposal unadopted."
+        "source_status": "No matching source was published with that edition."
       },
       "online_reader": "https://eliminatenoise.github.io/NeuroTranslation/papers/current/"
     },

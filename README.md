@@ -76,18 +76,16 @@ In a separate two-finger pinch recording, four forearm EMG features lowered mean
 
 In the three-target study, the scheduled cue improved predictions at the strongest target. One practice attempt helped on the rise and hurt on release. On the next recording day, the earlier five-grid correction beat a fresh one in three of the four participants at 50% of maximum force. The current gauge reading plus the scheduled change still had the smallest average miss.
 
-[Read the four paper editions](https://eliminatenoise.github.io/NeuroTranslation/papers/current/) · [Download the PDFs and reading aid](papers/downloads/NeuroTranslation-Brain2Body-CEMHSEY-Pinch-Next-Day-2026-11-19.zip) · [Download the selected manuscript sources](papers/downloads/NeuroTranslation-Brain2Body-Selected-CEMHSEY-Pinch-Next-Day-Source-2026-11-19.zip)
+[Read the four paper editions](https://eliminatenoise.github.io/NeuroTranslation/papers/current/) · [Download the PDFs and reading aid](papers/downloads/NeuroTranslation-Brain2Body-Papers.zip) · [Download the manuscript sources](papers/downloads/NeuroTranslation-Brain2Body-Papers-Source.zip)
 
-The previously selected scientific-layout edition is listed below.
-
-| Paper | Technical edition | Plain-English edition |
+| Paper | Technical edition | Simple English edition |
 | --- | --- | --- |
-| *NeuroTranslation: A New Paradigm In Brain-Body Mapping.* | [NeuroTranslation technical edition](papers/experimental/scientific-layout-2026-11-15/neurotranslation-technical.pdf) | [Read NeuroTranslation explained](papers/experimental/scientific-layout-2026-11-15/neurotranslation-explained.pdf) |
-| *Brain2Body: The Next Generation In Body-Brain Interfacing.* | [Brain2Body technical edition](papers/experimental/scientific-layout-2026-11-15/brain2body-article.pdf) | [Read Brain2Body explained](papers/experimental/scientific-layout-2026-11-15/brain2body-simple-english.pdf) |
+| *NeuroTranslation: A New Paradigm In Brain-Body Mapping.* | [NeuroTranslation technical](papers/current/neurotranslation-technical.pdf), 153 pages | [NeuroTranslation explained](papers/current/neurotranslation-explained.pdf), 188 pages |
+| *Brain2Body: The Next Generation In Body-Brain Interfacing.* | [Brain2Body article](papers/current/brain2body-article.pdf), 136 pages | [Brain2Body Simple English](papers/current/brain2body-simple-english.pdf), 152 pages |
 
-Both editions develop the methods and their limits. The plain-English editions give more space to the steps between them. [Download all four papers with their companions](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/papers/downloads/NeuroTranslation-Brain2Body-Paper-Previews-2026-11-15.zip), or use the [reading aid](papers/experimental/scientific-layout-2026-11-15/research-evidence-reading-aid.md) to trace the studies behind the argument. Extract the ZIP with its folder structure intact so links between files work.
+Both editions develop the methods and their limits. The Simple English editions give more space to the steps between them. Use the [reading aid](papers/current/research-evidence-reading-aid.md) to trace the studies behind the argument. If you download the ZIP, extract it with its folder structure intact so links between files work.
 
-These are experimental drafts. The recorded visual reviews cover selected issues on 26 of 546 pages. The [paper index](papers/) identifies the selected builds, the 520 pages outside that review and the historical source editions.
+These are working drafts and have not been peer reviewed. The [paper index](papers/) lists the files. Earlier editions remain in the repository's history.
 
 ## What goes into a translation?
 
@@ -110,12 +108,11 @@ The separate general learner passed 29 synthetic software checks across its four
 
 For a biological result, specify which inputs were available at prediction time, the organism, task, target and units. Keep evaluation subjects or sessions outside training and model selection. A hand tends to keep moving in its current direction, so a predictor can obtain a low error using only recent motion. Compare against that baseline and test what changes when the neural input is withheld.
 
-The papers retain a negative result from a separate forecasting comparison. Across 18 fits and 720 saved epochs, neither model-admission rule passed and none of the five benefit claims held. Reconstructing recorded features leaves sensory delivery and skill transfer as separate experimental questions. [Read the forecasting results](papers/experimental/scientific-layout-2026-11-15/research-evidence-reading-aid.md)
+The papers retain a negative result from a separate forecasting comparison. Across 18 fits and 720 saved epochs, neither model-admission rule passed and none of the five benefit claims held. Reconstructing recorded features leaves sensory delivery and skill transfer as separate experimental questions. [Read the forecasting results](papers/current/research-evidence-reading-aid.md#separate-studies)
 
 ## Code, related projects and reuse
 
 - [Portable interface source](interfaces/experimental/portable/) contains the Python and HTML proposal for a recording-specific interface. The package contains no weights.
-- [Historical R11 manuscript source](papers/experimental/r11-source/) preserves an unbuilt snapshot. Its external figures and fonts are incomplete, its proposed terminology was never adopted, and the selected PDFs have separate build provenance. [R9 metadata erratum](papers/errata/r9-reading-aid-metadata.txt)
 - [Interoceptomics](https://github.com/eliminatenoise/Interoceptomics) explores internal-body sensing and neural connectivity through anatomical models. [NeuroSurge](https://github.com/eliminatenoise/NeuroSurge) uses a virtual cortex and limb to explore left-hand and arm control in a first-person game. [Shared terminology and project scope](PROJECT-CONTEXT.json)
 
-Original project contributions are dedicated to the public domain under [CC0 1.0](LICENSE) to the extent the project holds the rights. Fonts, cited works and incorporated figures may carry separate terms. [Paper and font notices](papers/experimental/scientific-layout-2026-11-15/NOTICE.md)
+Original project contributions are dedicated to the public domain under [CC0 1.0](LICENSE) to the extent the project holds the rights. Fonts, cited works and incorporated figures may carry separate terms. [Paper, font and dataset notices](papers/current/NOTICE.md)
