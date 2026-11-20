@@ -4,6 +4,10 @@ A person was setting up a printer. A HoloLens headset estimated the positions of
 
 The word-count and attention models both put the button press first for that example. The headset interval starts at 42.65 seconds and ends at 47.65 seconds. This recording was in training. An arbitrary new description may fit more than one movement, or none. If every word is unfamiliar, the viewer lets you browse the five moments manually.
 
+## Forecast after an instruction
+
+The recording search above uses a description written after the action. A separate study used the instructor’s earlier words to forecast how far the wrist would move in the next second. Its small offline calculator accepts four earlier positions and keeps any later comparison reading separate. The default example is invented, and all predictions are computed with the published coefficients. [Open the one-second forecast](forecast.html) · [Study, data access and weights](../../benchmarks/preceding-instructions/)
+
 ## Which information did the work?
 
 The two movement models used the wrist and five fingertips. Fifteen distances describe the shape of the hand, and one measures how far the wrist has moved from its first usable position in the interval. The timing comparison uses the words too. It ranks the intervals by their duration, their position within the recording and how often tracking was available.

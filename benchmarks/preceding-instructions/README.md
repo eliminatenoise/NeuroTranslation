@@ -6,4 +6,6 @@ Repeating the wrist’s previous one-second displacement gave the smallest avera
 
 The linear models were fitted on 44 usable examples. The study required at least 160 before fitting an attention model. The publisher’s transcript-confidence field was unrated throughout the admitted sample. These observations limit what this experiment can establish about language and later movement. [Methods, comparison models and uncertainty](preceding-words-model/README.md) · [Data source](https://holoassist.github.io/)
 
+**[Try the wrist forecast](https://eliminatenoise.github.io/NeuroTranslation/hand-search/forecast.html).** Enter four earlier wrist positions and choose the words the model can use. To open it offline, double-click `forecast.html` or use the launcher for your operating system. An optional later measurement stays separate until you choose to compare it.
+
 **Run the published calculation.** The package contains fitted coefficients, training scales, an invented input, and source code. The example’s coordinates and instruction are artificial. The reported study errors above come from the recordings. [Invented example and calculation](preceding-words-model/artificial.py) · [Fitted coefficients](preceding-words-model/results/weights.json) · [Aggregate results](preceding-words-model/results/aggregate.json)

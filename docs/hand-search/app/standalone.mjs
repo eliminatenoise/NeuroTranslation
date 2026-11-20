@@ -12,6 +12,8 @@ async function readAsset(rawUrl) {
   return new Response(bytes, {headers:{'Content-Type':'application/json'}});
 }
 const viewer = mountHandSearch(document.getElementById('hand-search'), {baseUrl:base, fetchImpl:readAsset,headingLevel:1});
-viewer.show();
+const openSelected = () => location.hash === '#forecast' ? viewer.showForecastOnly() : viewer.show();
+openSelected();
+window.addEventListener('hashchange',openSelected);
 window.addEventListener('pagehide', () => viewer.hide());
-window.addEventListener('pageshow', event => { if (event.persisted) viewer.show(); });
+window.addEventListener('pageshow', event => { if (event.persisted) openSelected(); });

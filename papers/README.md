@@ -4,6 +4,8 @@ Each paper has a Technical edition, for readers who want the method, and a Simpl
 
 **New research supplement.** *How precisely do words identify a recorded movement?* reports two experiments comparing descriptions with recorded movements. It explains why the timing of an action can be easier to identify than its hand shape, and which question about physical guidance remains open. [Read online](https://eliminatenoise.github.io/NeuroTranslation/papers/language-and-observed-movement/language-and-movement.html) · [Download the four-page PDF](../docs/papers/language-and-observed-movement/language-and-movement.pdf) · [Editable source and evidence](../docs/papers/language-and-observed-movement/)
 
+Two subsequent tests ask what could be forecast from information already available before movement. The wrist study uses completed instructor speech, and the rat-tracking study uses earlier brain-cell spikes. Both compare against the recorded body's own recent movement. [One-second wrist study](../benchmarks/preceding-instructions/) · [Quarter-second track study](../benchmarks/wtrack-neural-motion/)
+
 | | Technical | Simple English |
 | --- | --- | --- |
 | *NeuroTranslation: A New Paradigm In Brain-Body Mapping.* | [PDF, 153 pages](current/neurotranslation-technical.pdf) | [PDF, 188 pages](current/neurotranslation-explained.pdf) |

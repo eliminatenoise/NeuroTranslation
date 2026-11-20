@@ -1,0 +1,211 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forecast a one-second wrist displacement · NeuroTranslate</title>
+<style>.hand-search{--hand-ink:#e8f1f4;--hand-dim:#c5d2d8;--hand-accent:#aee5d1;color:var(--hand-ink);line-height:1.48}
+.hand-search [hidden]{display:none!important}
+.hand-search :is(h1,h2){font-size:clamp(1.45rem,4vw,2rem);line-height:1.12;margin:.6rem 0}
+.hand-search .hand-search-source,.hand-search .hand-search-note{color:var(--hand-dim);font-size:.87rem}
+.hand-search [data-hand-form]{margin:1rem 0;border-left:3px solid var(--hand-accent);padding-left:.75rem}
+.hand-search [data-hand-form] label{display:block;font-weight:650}
+.hand-search [data-hand-input]{display:block;box-sizing:border-box;width:100%;margin:.35rem 0 .65rem;padding:.65rem .7rem;border:1px solid #82969d;border-radius:.3rem;background:#f4f7f6;color:#14232c;font:inherit}
+.hand-search .hand-search-actions{display:flex;flex-wrap:wrap;gap:.55rem}
+.hand-search button,.hand-search select{font:inherit;color:var(--hand-ink);background:#20323f;border:1px solid #6d8791;border-radius:.32rem;padding:.36rem .6rem}
+.hand-search button{cursor:pointer}
+.hand-search button[type=submit],.hand-search tr button[aria-pressed=true]{background:var(--hand-accent);color:#123a2c;border-color:var(--hand-accent)}
+.hand-search :focus-visible{outline:3px solid #f1d675;outline-offset:2px}
+.hand-search input,.hand-search select{max-width:100%}
+.hand-search [data-hand-ranking]{margin:.8rem 0 1.2rem}
+.hand-search [data-hand-ranking] label{display:flex;align-items:baseline;gap:.4rem;flex-wrap:wrap;font-size:.86rem}
+.hand-search table{border-collapse:collapse;width:100%;margin:.6rem 0;font-size:.87rem;font-variant-numeric:tabular-nums}
+.hand-search caption{text-align:left;color:var(--hand-dim);margin:.25rem 0}
+.hand-search td,.hand-search th{padding:.32rem .2rem;border-bottom:1px solid #425863;text-align:right}
+.hand-search th:first-child{text-align:left}
+.hand-search tbody button{font-size:.9em;min-height:2rem;white-space:normal}
+.hand-search details{margin-top:.7rem}
+.hand-search [data-hand-message]:empty,.hand-search [data-hand-load]:empty{display:none}
+@media(max-width:390px){.hand-search td,.hand-search th{font-size:.81rem;padding:.24rem .12rem}}
+.hand-search [data-hand-licence]{white-space:pre-wrap;font:inherit;font-size:.8rem;word-break:break-word}
+
+.hand-search .handReplay .hr-caption{display:none}
+.hand-search [data-hand-browse]{display:block;margin:1rem 0 .5rem}
+
+.wrist-future {padding:.65rem .75rem;border:1px solid #607b83;border-radius:.35rem}
+.wrist-future label {display:block;margin:.4rem 0}
+.wrist-future textarea,.wrist-future input[type=number],.wrist-future input[type=text]{display:block;box-sizing:border-box;margin:.12rem 0 .45rem;max-width:100%;padding:.3rem .45rem;color:#18252a;background:#f5f7f7;font:inherit}
+.wrist-future textarea{width:100%;font-family:ui-monospace,monospace}
+.wrist-future fieldset{border:1px solid #607b83;margin:.75rem 0;padding:.35rem .55rem}
+.wrist-future [data-fw-words]{display:flex;flex-wrap:wrap;gap:.4rem .7rem}
+.wrist-future [data-fw-words] label{white-space:nowrap}
+.wrist-future summary{cursor:pointer}
+
+.handReplay{--hr-ink:#112e32;--hr-muted:#4b6568;--hr-line:#c7d7d6;box-sizing:border-box;color:var(--hr-ink);background:#f4f8f7;border:1px solid var(--hr-line);border-radius:12px;padding:clamp(12px,2.1vw,24px);font:15px/1.45 system-ui,sans-serif;min-width:0;color-scheme:light}
+.handReplay *{box-sizing:border-box}.handReplay [hidden]{display:none!important}
+.handReplay label{font-weight:600;color:var(--hr-ink)}
+.handReplay button,.handReplay select{font:inherit;max-width:100%;color:var(--hr-ink);background:#fff;border:1px solid #98b0b1;border-radius:6px;min-height:36px;padding:5px 9px;line-height:1.35}
+.handReplay button{cursor:pointer;font-weight:600}.handReplay button:disabled{cursor:default;opacity:.5}
+.handReplay :focus-visible{outline:3px solid #168e90;outline-offset:2px}
+.handReplay select{display:block;width:100%;margin-top:3px}.handReplay .hr-pick{display:block}
+.handReplay .hr-caption{margin:.65rem 0 .8rem;font-weight:500}
+.handReplay .hr-stage{position:relative;border:1px solid #2b4d50;border-radius:8px;overflow:hidden;background:#0d2429}
+.handReplay canvas{display:block;width:100%;height:clamp(220px,34vh,365px);touch-action:none;cursor:grab}.handReplay canvas:active{cursor:grabbing}
+.handReplay .hr-empty{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:88%;color:#e6f2ed;text-align:center;pointer-events:none;font-weight:600}
+.handReplay .hr-clock{display:flex;align-items:center;gap:12px;margin:.8rem 0}.handReplay .hr-clock button{background:#174a4b;color:white;border-color:#174a4b;min-width:58px}.handReplay .hr-clock label{display:block;flex:1;min-width:0}.handReplay .hr-clock output{font-variant-numeric:tabular-nums;font-weight:650;float:right}
+.handReplay .hr-clock input{display:block;width:100%;margin:7px 0;accent-color:#007b78}
+.handReplay .hr-inspect,.handReplay .hr-view{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.handReplay .hr-inspect{padding:.7rem 0;border-top:1px solid var(--hr-line);border-bottom:1px solid var(--hr-line);gap:5px 18px}.handReplay .hr-inspect label{min-width:140px}.handReplay .hr-joint{min-width:0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.handReplay .hr-joint strong,.handReplay .hr-joint span{display:block}.handReplay .hr-joint strong{white-space:pre-wrap}.handReplay .hr-joint span{font-size:13px;color:var(--hr-muted)}
+.handReplay .hr-view{margin-top:10px}.handReplay .hr-view button{min-width:36px}.handReplay .hr-view label{font-weight:500}.handReplay .hr-view input{accent-color:#007b78}
+.handReplay .hr-status,.handReplay .hr-instruction{font-size:13px;color:var(--hr-muted);margin:.4rem 0 0;line-height:1.45;overflow-wrap:anywhere}
+
+html{background:#101922;color-scheme:dark}body{margin:0;color:#e5edf4;font:1rem/1.5 system-ui,sans-serif}
+main{box-sizing:border-box;max-width:48rem;padding:1.6rem clamp(.95rem,4vw,1.8rem) 3rem;margin:auto}
+h1{font-size:clamp(1.85rem,5vw,3.1rem);line-height:1.1;margin:1rem 0}
+a{color:#aee5d1}footer{font-size:.86rem;margin-top:1rem}.wrist-future{border:none;padding:0}
+</style><main class="hand-search"><header><a href="https://github.com/eliminatenoise/NeuroTranslation">NeuroTranslate</a><h1>How far will the wrist move in one second?</h1></header>
+<section id="wrist-forecast" class="wrist-future"></section><noscript>Enable JavaScript to calculate predictions. The accompanying study reports the results from the recordings.</noscript>
+<footer><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/d32fd9f57c706fb52ad11c6a10239166e5b25088/benchmarks/preceding-instructions">Study and fitted weights</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/hand-search/">Search a recorded hand movement</a></footer></main>
+<script type="application/json" id="fitted-coefficients">{"schema":"neurotranslate-wrist-forecast-public-v1","spec":{"vocabulary":["back","change","off","on","put","turn"],"tasks":["bigprinter","dslr","gopro","nespresso","smallprinter","switch"],"context_mean":[4.187008163559733,1.106950655593029,1.8409090909090908,1.0],"context_scale":[0.7603777523596856,0.46185462432906804,1.0432288561389547,1.0],"motion_mean":[-1.3086437114647458,1.0223948529788445,1.423221796920358,9.747899632542916,-1.4795415200196513,0.39944407082603206,0.018227151474144734,8.110724346455859,-0.02577127606580382,0.021773009476337202,-0.17979082027026794,6.076192479608144,6.802959028764533,0.0007575757575757549,0.0007575757575759164,0.017424242424243373,0.0],"motion_scale":[6.878394819076068,9.22191736410264,7.162167783114879,9.665121579523545,7.024613704373394,7.083821186879561,5.3426372324267986,8.039563071504977,4.245550738071443,4.892608778350235,5.465099099770241,5.9112585639825355,6.071368762633981,0.004967756457804256,0.00496775645780531,0.004967756457806136,1.0],"attention_admitted":false},"weights":{"context":[4.728863421076516,-0.8017595676982016,2.580363227002837,-0.7603509001555979,0.0,-2.162278034029123,0.2694368155282978,0.9048707014879722,-1.2340869566623274,1.8296982526879024,0.3923592209872538],"context_words":[4.034814426161445,-1.5666351968973273,1.924453232623152,-0.9197489128070736,0.0,-2.900331268699044,0.11963285703931138,1.3943687451444102,-1.8815115873838562,2.94365810861644,0.32418314528270264,-1.1270944228395643,-0.1705767179007819,-0.16697086427466756,0.9106034154206497,3.0529169889485765,-1.3097244557497485],"motion":[5.356081240095492,-2.6555120191958044,0.591258666279199,-1.0921102596512524,5.557151821530105,1.4751584805787186,-0.3433899519633766,0.49099477094887245,-1.2757593030101484,1.2718285930775948,-0.26681598043533467,-0.23141032638166434,0.30493145644347724,-1.0412100674569895,-1.1957049322159932,-0.31344684727190536,0.004123097950463604,0.0],"motion_context":[5.426214965531629,-0.9104748466012696,1.0846075706550158,-0.5583658608789046,2.797104517558639,0.6174195454114471,-1.144819390656651,-0.10150048570508911,-0.6084055492074257,0.8605029025322093,0.1883943723487303,-0.049487170799410514,0.4801996306123891,0.07600260891098648,-0.6200724575314688,-0.2829086914943993,-0.7432887020514977,0.0,-0.7666940627203107,1.2696895669064583,-0.3280754810207333,0.0,-2.406595398141135,-0.2861394844346821,0.3668779748593174,-1.5974978551002021,4.324495369460198,-0.4011406066435022],"motion_context_words":[5.390450359944397,-0.69351446659758,0.8232705797106404,-0.3505699266758322,2.8199402990850806,0.550280622638264,-0.7402764298979386,-0.029503793295274448,-0.3851530258175933,0.9013438916422761,0.09894632592921497,-0.054739233505468124,0.42247476704016695,-0.28299651578063645,-0.7122222208779959,-0.46174016954503316,-0.744757140986914,0.0,-0.895876024361264,1.0150450862424163,-0.13999086012621004,0.0,-2.320427237201953,-0.4920797095513078,0.29086033346348084,-1.8830610370627352,4.420511997329606,-0.015804346977088823,-1.1806711112374833,-0.32247678807166275,-1.2183161574282728,-0.08435841992865711,1.3546104224707693,-0.36083364114635513]},"source":{"model.json":"d7669c5e64a29f7ef82e9a202bc7d5b9d6768d0848bb2eabd07bdeeba9c2f711","weights.json":"e81325254bcada5575475b2af041e4a084b356053064145b1e98ba2ef5f54804"}}
+</script><script type="module">// study-release/docs/hand-search/app/wrist-future.mjs
+var phases = [-1, -0.5, -0.25, 0];
+var inventedHistory = [[0, 0, 0], [2, 0, 0], [3, 1, 0], [3, 2, 0]];
+var distance = (a, b) => Math.hypot(...a.map((v, i) => v - b[i]));
+var finiteVector = (x, n) => Array.isArray(x) && x.length === n && x.every(Number.isFinite);
+function standardized(values, mean, scale) {
+  if (!finiteVector(mean, values.length) || !finiteVector(scale, values.length) || scale.some((x) => x <= 0)) throw Error("Invalid training scales.");
+  return values.map((v, i) => (v - mean[i]) / scale[i]);
+}
+function forecastWrist({ positions, task, words, cutoff, duration }, spec, weights) {
+  if (!Array.isArray(positions) || positions.length !== 4 || !positions.every((p) => finiteVector(p, 3))) throw Error("Enter four positions, each with three numbers in centimetres.");
+  if (!spec.tasks.includes(task) || !Array.isArray(words) || new Set(words).size !== words.length || !words.every((w) => spec.vocabulary.includes(w))) throw Error("Choose one of the fitted tasks and words.");
+  if (!Number.isFinite(cutoff) || !Number.isFinite(duration) || duration <= 0 || cutoff < duration + 0.25) throw Error("Allow the instruction to finish at least a quarter-second before the forecast.");
+  const features = [];
+  for (let i = 1; i < positions.length; i++) {
+    const elapsed = phases[i] - phases[i - 1];
+    const speed = positions[i].map((v, j) => (v - positions[i - 1][j]) / elapsed);
+    features.push(...speed, Math.hypot(...speed));
+  }
+  const recent = distance(positions[0], positions[3]);
+  features.push(recent, 0, 0, 0, 0);
+  const motion = standardized(features, spec.motion_mean, spec.motion_scale);
+  const context = standardized([Math.log1p(cutoff), Math.log1p(duration), words.length, 1], spec.context_mean, spec.context_scale);
+  const terms = spec.vocabulary.map((w) => Number(words.includes(w)));
+  const base = [...motion, ...context, ...spec.tasks.map((t) => Number(t === task))];
+  function fit(name, values) {
+    const coefficients = weights[name];
+    if (!finiteVector(coefficients, values.length + 1)) throw Error("The coefficient count differs from the feature count.");
+    const estimate = coefficients[0] + values.reduce((sum, v, i) => sum + coefficients[i + 1] * v, 0);
+    if (!Number.isFinite(estimate)) throw Error("These coordinates exceed the available numeric range.");
+    return Math.max(0, estimate);
+  }
+  return {
+    recent,
+    motion: fit("motion_context", base),
+    withWords: fit("motion_context_words", [...base, ...terms]),
+    removed: fit("motion_context_words", [...base, ...terms.map(() => 0)]),
+    previousPositions: positions.map((p) => distance(p, positions[3]))
+  };
+}
+function mountWristForecast(host2, fit) {
+  const doc = host2.ownerDocument, spec = fit.spec;
+  host2.innerHTML = `<p>An instructor speaks, the instruction ends, and a headset has one more quarter-second to observe the wrist. How far will the wrist be from its current position one second later?</p>
+    <p>The example starts with invented positions. Change them to run the published models on your device. Distances describe the straight line between two positions.</p>
+    <form data-fw-form><fieldset><legend>Words available before the forecast</legend><div data-fw-words></div></fieldset>
+    <details><summary>Change the movement or timing</summary>
+      <label>Task <select data-fw-task></select></label>
+      <label>Wrist positions in cm <textarea data-fw-points rows="4" spellcheck="false"></textarea></label>
+      <p>Enter one X, Y, Z position per line, for 1.00, 0.50 and 0.25 seconds before the cutoff, then the cutoff itself. All four readings use the same axes.</p>
+      <label>Time in recording at cutoff, seconds <input data-fw-time type="number" min="1" step="any" value="60" required></label>
+      <label>Duration of completed instruction, seconds <input data-fw-duration type="number" min="0.001" step="any" value="3" required></label>
+    </details><button type="submit">Run forecast</button></form>
+    <p data-fw-status role="status"></p><div data-fw-result>
+      <table><caption>Predicted displacement one second after the cutoff</caption><thead><tr><th scope="col">Information used</th><th scope="col">Distance</th></tr></thead><tbody data-fw-rows></tbody></table>
+      <details><summary>Compare with a known later position</summary><label>Later X, Y, Z in cm <input data-fw-later type="text" placeholder="Three numbers separated by commas"></label>
+      <button type="button" data-fw-compare>Compare distances</button><p data-fw-error role="status"></p></details>
+    </div><details><summary>How well did this work on recordings?</summary><p>Across 26 forecasts from four acquisition groups, repeating the wrist\u2019s previous one-second displacement missed by 7.38 cm on average. A learned model using motion, task and speech timing missed by 9.79 cm. Adding the retained words increased the error to 10.04 cm.</p><p>Twenty forecasts came from one acquisition group. Every included transcript had an unrated confidence field. The study kept six recurring word indicators and fitted its linear models on 44 examples. That was below the prespecified minimum of 160 for training an attention model.</p></details>`;
+  const q = (n) => host2.querySelector("[data-fw-" + n + "]");
+  const picker = q("task");
+  const taskNames = { smallprinter: "Small printer", bigprinter: "Large printer", gopro: "Action camera", switch: "Game console", nespresso: "Coffee maker", dslr: "Digital camera" };
+  for (const t of spec.tasks) {
+    const o = doc.createElement("option");
+    o.value = t;
+    o.textContent = taskNames[t] || t;
+    picker.append(o);
+  }
+  picker.value = spec.tasks.includes("gopro") ? "gopro" : spec.tasks[0];
+  q("points").value = inventedHistory.map((x) => x.join(", ")).join("\n");
+  for (const word of spec.vocabulary) {
+    const label = doc.createElement("label"), c = doc.createElement("input");
+    c.type = "checkbox";
+    c.value = word;
+    c.checked = word === "turn";
+    label.append(c, doc.createTextNode(word));
+    q("words").append(label);
+  }
+  const labels = { recent: "Repeat previous one-second displacement", motion: "Motion, task and timing", withWords: "Motion, task, timing and word identities", removed: "Same fitted model with word identities removed" };
+  function parsePoint(line) {
+    const fields = line.trim().split(/[\s,]+/);
+    if (fields.length !== 3 || fields.some((x) => !x)) throw Error("Enter three numbers on each coordinate line.");
+    const values = fields.map(Number);
+    if (!finiteVector(values, 3)) throw Error("Every coordinate must be a finite number.");
+    return values;
+  }
+  let run = null, anchor = null;
+  function submit(e) {
+    e?.preventDefault();
+    q("error").textContent = "";
+    q("status").textContent = "";
+    try {
+      const positions = q("points").value.trim().split(/\r?\n/).map(parsePoint);
+      const words = Array.from(q("words").querySelectorAll("input:checked"), (c) => c.value);
+      run = forecastWrist({ positions, task: picker.value, words, cutoff: q("time").valueAsNumber, duration: q("duration").valueAsNumber }, spec, fit.weights);
+      anchor = positions[3];
+      const rows = q("rows");
+      rows.replaceChildren();
+      for (const [k, label] of Object.entries(labels)) {
+        const tr = rows.insertRow(), th = doc.createElement("th");
+        th.scope = "row";
+        th.textContent = label;
+        tr.append(th);
+        tr.insertCell().textContent = run[k].toFixed(2) + " cm";
+      }
+      q("status").textContent = "Forecast calculated from the four earlier positions. Transcript confidence is set to unrated, as in the study.";
+      q("result").hidden = false;
+    } catch (error) {
+      run = null;
+      anchor = null;
+      q("result").hidden = true;
+      q("status").textContent = error.message;
+    }
+  }
+  q("form").addEventListener("submit", submit);
+  q("form").addEventListener("input", () => {
+    run = null;
+    anchor = null;
+    q("result").hidden = true;
+    q("status").textContent = "Run the forecast to use the changed inputs.";
+  });
+  q("later").addEventListener("input", () => {
+    q("error").textContent = "";
+  });
+  q("compare").addEventListener("click", () => {
+    try {
+      if (!run) throw Error("Run the forecast first.");
+      const observed = distance(parsePoint(q("later").value), anchor);
+      q("error").textContent = "Entered displacement " + observed.toFixed(2) + " cm. Absolute errors: repeat previous displacement " + Math.abs(run.recent - observed).toFixed(2) + " cm, movement with words " + Math.abs(run.withWords - observed).toFixed(2) + " cm.";
+    } catch (e) {
+      q("error").textContent = e.message;
+    }
+  });
+  submit();
+}
+
+// study-release/docs/hand-search/app/forecast-standalone.mjs
+var host = document.getElementById("wrist-forecast");
+try {
+  const text = document.getElementById("fitted-coefficients").textContent;
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  const hex = Array.from(new Uint8Array(digest), (v) => v.toString(16).padStart(2, "0")).join("");
+  if (hex !== "2cc76edab06641ef8bf1fb2b2a359d1c0914c438a6749f9fffe2034debb3662d") throw Error("Changed model file");
+  mountWristForecast(host, JSON.parse(text));
+} catch {
+  host.setAttribute("role", "status");
+  host.textContent = "The fitted coefficients could not be verified. Download a fresh copy of this page to run the forecast.";
+}
+</script></html>

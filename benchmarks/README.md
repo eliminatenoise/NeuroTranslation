@@ -6,6 +6,8 @@ Mostly it does not. A model fitted to the target's own recent history beat "repe
 
 The numbered comparison below covers the original 23 repository studies and two studies reported in the papers. The wrist correction and language studies have their own results and score definitions. [The README](../README.md) has the short version.
 
+**Two tests of a future position.** Both studies ask what a signal adds after the model has seen recent movement. For a human wrist, adding preceding word identities increased error from 9.79 to 10.04 cm at one second. For a rat on a W-shaped track, adding spike counts increased error from 2.010 to 2.237 cm at a quarter-second. Each result belongs to its own task, timescale and held-out unit. [Instructor words and wrist motion](preceding-instructions/) · [Brain-cell firing and rat position](wtrack-neural-motion/)
+
 **Can muscle recordings correct a wrist forecast?** In 1,879 pointing trials from six people already used for training, adding the forearm signal reduced error from 3.665° to 3.549° against a correction that used wrist motion alone. All six people improved on that comparison. Only three improved over the original uncorrected model. The gains were concentrated early in the movement. [Study, results and reproduction instructions](wrist-forearm-correction/)
 
 **Can the words pick the right hand movement within one task?** Across 60 assessment intervals, hand geometry reached 23.89% first-place retrieval with the simpler model. A comparison based on duration, timing and tracking coverage reached 35.56%. [Study and fitted models](hand-language-retrieval/) · [Inspect five recorded movements](https://eliminatenoise.github.io/NeuroTranslation/hand-search/)
