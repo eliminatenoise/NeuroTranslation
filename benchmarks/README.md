@@ -292,12 +292,12 @@ Carrying a model to new people with no adjustment at all worked on the same task
 
 ### 6. Twelve studies set a pass rule in advance. Eight failed it.
 
-- **Failed:** studies 6, 9, 10, 11, 12, 13, 26 and 24.
+- **Failed:** studies 6, 9, 10, 11, 12, 13, 24 and 26.
 - **Split answer:** studies 16 and 19.
 - **Passed by a margin too small to tell from zero:** study 18. Both averages were lower, by amounts whose ranges cross zero.
 - **Passed:** study 20, on whether a band set per part of the pinch is narrower, holds at least as many readings and scores lower than one width throughout. It was, for all three forecasts. That says nothing about which forecast is better.
 - **Set no rule:** the other 14.
-- **Not counted:** row 27, the general model's first fit. Its rule was set before fitting, beat every other forecast for every person, sensor by sensor, and it held at one sensor of 5, the left leg. But it was applied to the people the model was fitted on, and every rule counted here was applied to people held out of the fit.
+- **Not counted:** row 27, the general model's first fit. Its rule, set before fitting, was to beat every other forecast for every person, sensor by sensor, and it held at one sensor of five, the left leg. But it was applied to the people the model was fitted on, and every rule counted here was applied to people held out of the fit.
 
 Every failed rule concerned EEG, EMG, a cue term or a network set against a plainer fit: the two networks of study 24 and the transformer of study 26. None concerned the plain history fit. No rule about adding a signal to a forecast was passed outright.
 

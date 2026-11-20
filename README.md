@@ -17,7 +17,7 @@ What is still being built is the general model, **NeuroTranslate 0.0**: one mode
 
 - Both used one kind of sensor, strapped to the body, that records how its speed changes as a person walks (an accelerometer), from one open dataset of people walking. The errors below are in the units the sensor stores.
 - One copy of the model forecast five such sensors (torso, both arms, both legs) 120 ms ahead and was scored only on the four people it was fitted on. It met the rule set before fitting, to beat every other forecast for every person, at one sensor of five: the left leg, where its average miss was 1.837 against 1.929 for a straight-line fit made for that sensor.
-- A copy fitted to the right arm alone was scored on two people that another study had already used. A straight-line fit beat it for both: 0.869 against 0.781.
+- A copy fitted to the right arm alone was scored on the two people study 26 had already scored. A straight-line fit beat it for both: 0.869 against 0.781.
 
 What does not exist yet: a test of the general model on people nobody has looked at before, and any fit of it to a brain or muscle signal. So nothing here yet translates between nerve, muscle and movement. Nor is the model inside the browser app that carries its name.
 
