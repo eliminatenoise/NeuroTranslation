@@ -5,7 +5,7 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.6889e2c9594ee2881ee148b18aa7807ffab243c2024a6b241e611b7dfc896f10.css">
+  <link rel="stylesheet" href="style.5e71d324c7376767547121be9b4b028ad74def6a913598943664889925407f16.css">
 </head>
 <body>
   <header class="topbar">
@@ -89,6 +89,15 @@
         <p>Open a prepared HYGRIP window or trial in JSON. Recent grip-sensor voltage and cue time give one forecast. Adding scalp EEG gives another. Readings are in volts and the study reports forecast error in millivolts.</p>
         <nav class="section-links" aria-label="Cued grip · HYGRIP actions">
           <a href="./hygrip-force/index.html" data-pages-href="./hygrip-force/index.html">Open the grip-voltage reader</a>
+        </nav>
+      </article>
+      <article class="study-choice-card" data-study-key="finger-motion" aria-labelledby="reader-finger-motion">
+        <h3 id="reader-finger-motion">Finger cues and cortical recordings · FingerFlex</h3>
+        <p>Six fitted models estimate how much five fingers move. Change a finger cue and an invented cortical rhythm, then compare the results with measurements from 23 later trials in one recording.</p>
+        <nav class="section-links" aria-label="FingerFlex models and evidence">
+          <a href="./finger-motion/index.html" data-pages-href="./finger-motion/index.html">Try the finger-motion models</a>
+          <a href="./finger-signals/index.html" data-pages-href="./finger-signals/index.html">Compare the earlier glove forecast</a>
+          <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/finger-motion">Methods and measured results</a>
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="finger-voltage" aria-labelledby="reader-finger-voltage">
@@ -286,6 +295,6 @@
     document.getElementById("study-choice-label").hidden = false;
     showStudy();
   </script>
-  <script type="module" src="app.6889e2c9594ee2881ee148b18aa7807ffab243c2024a6b241e611b7dfc896f10.mjs"></script>
+  <script type="module" src="app.5e71d324c7376767547121be9b4b028ad74def6a913598943664889925407f16.mjs"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 **What the project wrote is yours to take.** Its text and code are dedicated to the public domain under [CC0 1.0](LICENSE), as far as the project holds the rights.
 
-**The recordings are not the project's to give.** Eleven open datasets carry every study of the numbered table, and six more carry the studies published after it and the 3D recordings. Each belongs to the people named below, under the terms named below. The repository holds fitted models and summary results derived from those recordings, and some excerpts of the recordings themselves, named below under their datasets. The credit set out here travels with all of it. Fetch a recording from its own archive. A file you open in a browser page stays under the terms it came with.
+**The recordings are not the project's to give.** Eleven open datasets carry every study of the numbered table, and seven more carry the studies published after it and the 3D recordings. Each belongs to the people named below, under the terms named below. The repository holds fitted models and summary results derived from those recordings, and some excerpts of the recordings themselves, named below under their datasets. The credit set out here travels with all of it. Fetch a recording from its own archive. A file you open in a browser page stays under the terms it came with.
 
 ## The eleven datasets of the numbered table
 
@@ -98,7 +98,7 @@ Changed here: two walking activities were selected, and the accelerometer readin
 
 [Dataset](https://archive.ics.uci.edu/dataset/256/daily+and+sports+activities) · [DOI 10.24432/C5C59F](https://doi.org/10.24432/C5C59F) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-## Six more datasets, behind the newer studies and the 3D recordings
+## Seven more datasets, behind the newer studies and the 3D recordings
 
 These carry the studies published after the numbered table (listed at the end of [the studies page](../benchmarks/README.md)) and the [3D recordings](whole-body/README.md).
 
@@ -148,7 +148,11 @@ The stride continuation viewer also carries a short walk and run excerpt. It sam
 
 Kai Joshua Miller deposited *A library of human electrocorticographic data and analyses* in the Stanford Digital Repository; Miller and colleagues reported the finger experiment in *Human Motor Cortical Activity Is Selectively Phase-Entrained on Underlying Rhythms* (2012). The recordings are of electrical activity picked up by electrodes laid on the surface of the brain, beside a glove's readings of five fingers. Stanford's catalogue licenses the library under CC BY-SA 4.0: credit it, say what was changed, and share what is made from it under the same or a compatible licence. Its use statement also asks that the people recorded be protected from identification.
 
-Changed here: only the first 362 seconds of one person's recording were used; band power of the brain signal and the glove and screen-cue histories were derived from them; forecasting models were fitted and their errors published as averages. The fitted weights, the results and the example worked with those weights are under CC BY-SA 4.0; the project's own code is CC0. The recordings stay with Stanford. The archive asks that an ethics statement go with publications that use the data: it is in the study's rights file. [Stanford Digital Repository](https://purl.stanford.edu/zk881ps0522) · [Library descriptor](https://doi.org/10.1038/s41562-019-0678-3) · [Original publication](https://doi.org/10.1371/journal.pcbi.1002655) · [Terms, credit and the ethics statement](../models/cortical-glove/RIGHTS.md)
+Changed here, in both studies that use it: only the first 362 seconds of one person's recording were used; band power of the brain signal and the glove and screen-cue histories were derived from them; forecasting models were fitted and their errors published as averages. The fitted weights, the results and the example worked with those weights are under CC BY-SA 4.0; the project's own code is CC0. The recordings stay with Stanford. The archive asks that an ethics statement go with publications that use the data: it is in the study's rights file. [Stanford Digital Repository](https://purl.stanford.edu/zk881ps0522) · [Library descriptor](https://doi.org/10.1038/s41562-019-0678-3) · [Original publication](https://doi.org/10.1371/journal.pcbi.1002655) · [Terms, credit and the ethics statement](../models/cortical-glove/RIGHTS.md) · [The same for the study of how much each finger moves](../models/finger-motion/RIGHTS.md)
+
+### Treadmill walking recorded with optical markers (Reznick and colleagues)
+
+E. Reznick, K. Embry, R. Neuman, E. Bolívar, N. Fey and R. Gregg recorded ten adults walking on a treadmill, tracked by cameras following markers on the body. The streaming release used here, with its data dictionary, is under CC0 1.0; the article that describes the recordings is under CC BY 4.0. Changed here: level walking at a nominal 0.8 m/s was selected and the stored knee angles were compared with the forecasts of the four-second knee model, unchanged. Only scores are published. [Data and licence](https://doi.org/10.6084/m9.figshare.14558181.v1) · [How they were recorded](https://doi.org/10.1038/s41597-021-01057-9) · [The test, its scores and its credits](../models/knee-stride/external-optical/)
 
 ## One more recording, behind the portable interface source
 

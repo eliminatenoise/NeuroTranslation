@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light"><title>Finger motion · NeuroTranslation</title><style>__STYLE__</style></head>
+<body><a class="skip" href="#experiment">Skip to experiment</a>
+<header><nav aria-label="Page navigation"><span class="brand">NeuroTranslation</span><span class="divider" aria-hidden="true">/</span><span class="crumb">Finger motion</span><a href="#recorded">Recorded results</a><a id="save" download="finger-motion.html">Save offline</a></nav></header>
+<main>
+<section class="intro"><h1>Which fingers follow the cue?</h1><p>A screen asks someone to move one finger. A glove measures what all five do. Give a decoder the cue, electrical activity from the brain’s surface, or both. How closely can it estimate the change in each glove sensor?</p></section>
+<section id="experiment" aria-labelledby="exp-title">
+<div class="section-head"><div><h2 id="exp-title">Try an invented signal</h2><p>Change the finger on screen or the strength of one rhythm. The three estimates come from fitted models.</p></div></div>
+<div class="bench">
+<div class="controls">
+<label for="digit">Finger named by cue</label><select id="digit"><option>Thumb</option><option selected>Index</option><option>Middle</option><option>Ring</option><option>Little</option></select>
+<label for="phase">Screen at cutoff</label><select id="phase"><option value="0">Cue visible</option><option value="1">Blank screen</option></select>
+<div class="range-title"><label for="level">90 Hz rhythm</label><output id="level-out" for="level"></output></div>
+<input id="level" type="range" min="0" max="8" step="1" value="4" aria-describedby="rhythm-help">
+<div class="marks" aria-hidden="true"><span>Off</span><span>Double amplitude</span></div>
+<p id="rhythm-help">The slower 24 Hz rhythm stays fixed. Both waves are invented.</p>
+</div>
+<div class="readout"><div class="readout-top"><h3>Estimated sensor change</h3><fieldset><legend class="sr">Model family</legend><label><input type="radio" name="family" value="ridge" checked><span>Ridge</span></label><label><input type="radio" name="family" value="transformer"><span>Transformer</span></label></fieldset></div>
+<p class="units">Glove counts per 40 ms step · mean absolute change</p>
+<table class="motion"><caption class="sr">Estimates for all five fingers, given different information</caption>
+<thead><tr><th scope="col">Finger</th><th scope="col"><i class="mark cue"></i>Cue only</th><th scope="col"><i class="mark cortex"></i>Cortex only</th><th scope="col"><i class="mark aligned"></i>Both</th></tr></thead><tbody id="rows"></tbody></table>
+<p id="readout-note"></p><p class="note">All three models work without past glove readings. The invented signal has no recorded outcome.</p>
+</div></div>
+<p id="status" class="sr" role="status" aria-live="polite"></p>
+<details><summary>What goes into a guess?</summary>
+<p>The cue-only model receives the named finger, the display or blank phase, and time within that phase. Here the cutoff is always 920 ms into the selected phase. During the blank screen the cue history identifies the finger last shown.</p>
+<p>The cortex-only model receives power at 46 contacts in two frequency bands (12–32 and 70–150 Hz, excluding bins around 120 Hz). Each model sees four summaries ending 120, 80, 40 and 0 ms before the cutoff. Each summary covers the preceding 160 ms. Moving the rhythm slider changes the invented 90 Hz wave before those summaries are calculated. The contact pattern is an arbitrary mathematical example.</p>
+<p>Ridge learns a weighted sum of the four summaries. The Transformer learns how to weight earlier summaries when reading the last one. Each family has a separate fit for each combination of inputs. Both return five nonnegative estimates. A change in an estimate here shows how a fitted model responds to the controls.</p>
+</details></section>
+<section id="recorded" aria-labelledby="record-title"><h2 id="record-title">The screen cue gave the lowest error.</h2>
+<p class="lead">In one person’s recording, adding cortical activity to the cue made both model families less accurate on average. The cue described the task well enough to win this comparison.</p>
+<div class="evidence"><div><h3>Average error on recorded trials</h3><p class="units">Normalized absolute error · lower is better</p><table class="scores"><thead><tr><th scope="col">Input</th><th scope="col">Ridge</th><th scope="col">Transformer</th></tr></thead><tbody>__SCORES__</tbody></table>
+<p>__COMPARATORS__</p></div>
+<div class="outcome"><h3>What did the glove measure?</h3><p>After each cutoff, take four readings from each finger at +40, +80, +120 and +160 ms. Take the size of each of the three successive changes, then average them. A count gained and a count lost contribute equally.</p>
+<p>A person could move several fingers under one cue. The target measures how much each sensor changed. Picking the word on the screen would answer a different question. These counts have no calibration in degrees and do not distinguish flexion from extension.</p></div></div>
+<h3>Did the signal explain differences between repeats?</h3><p>__CONDITIONAL__</p>
+<details><summary>Paired gains and 95% intervals</summary><p>A positive gain means the cue-plus-cortex fit had lower error than its comparator. A negative gain favours the comparator. Each entry is the gain followed by its paired 95% interval. The earlier-trial control substitutes cortical activity from the preceding eligible trial with the same cue at the corresponding phase and tick.</p>
+<table class="intervals"><caption>Predict the measured change on each trial</caption><thead><tr><th scope="col">Comparator</th><th scope="col">Ridge</th><th scope="col">Transformer</th></tr></thead><tbody>__PRIMARY__</tbody></table>
+<table class="intervals"><caption>Predict the difference between two repeats of one cue</caption><thead><tr><th scope="col">Comparator</th><th scope="col">Ridge</th><th scope="col">Transformer</th></tr></thead><tbody>__PAIRS__</tbody></table>
+<p>__CROSS__</p></details>
+<details><summary>Which trials counted?</summary><p>__SUPPORT__</p>
+<p>Errors for each finger were divided by the spread of its target during training, then averaged with equal weight per finger and per trial. The paired intervals resampled consecutive blocks of three trials or three nonoverlapping pairs 5,000 times. Overlapping estimates within a trial share measurements.</p>
+<p>The same development split had already served a different glove experiment. The later reserved intervals and other participants stayed closed. This experiment cannot establish transfer to another person, live timing, joint angles or the cause of a movement.</p></details>
+</section>
+<section class="sources"><details><summary>Methods, source and rights</summary>
+<p>Kai Joshua Miller deposited the Seattle FingerFlex recordings with the Stanford Digital Repository. This page converts fitted weights from a development prefix of one recording for local inference. It includes aggregate results, the invented waveform’s band powers and their associated model outputs. Source-derived material is available under CC BY-SA 4.0. Original browser code and the invented waveform generator are dedicated under CC0 1.0.</p>
+<p><a href="https://purl.stanford.edu/zk881ps0522">Stanford data record</a> · <a href="https://purl.stanford.edu/zk881ps0522.json">Catalogue and terms</a> · <a href="https://doi.org/10.1038/s41562-019-0678-3">Miller, data library</a> · <a href="https://doi.org/10.1371/journal.pcbi.1002655">Original experiment</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> · <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a></p>
+<h3>Original study ethics statement</h3><p class="source-copy">__ETHICS__</p><h3>Stanford catalogue terms</h3><p>__PRIVACY__</p>
+<details><summary>Licence texts</summary><div class="legal">__LEGAL__</div></details></details></section></main>
+<script type="application/json" id="study">__DATA__</script><script>__SCRIPT__</script></body></html>

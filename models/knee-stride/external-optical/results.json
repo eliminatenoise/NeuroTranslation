@@ -1,0 +1,756 @@
+{
+  "archive_sha256": "df8b3e31d2fe6869b95b4776a8f77639da476685b4c0ccb86c985bee3f01b531",
+  "protocol_hashes": {
+    "preregistration.md": "f0b0b4c3ea5fe6b5491b736129aede492336b91342cb886e91e9fcd97a77392a",
+    "clock-addendum.md": "3d1ffb783dec4290d6c3beb5e898acf0f017cafa5953dc025f69cd688dde222c",
+    "selection.json": "a5fddd10358ae4f3d4dbeaa6d80442b3811749888ffad2a19e4dea92f1cb59f1",
+    "select_segments.py": "2bb72655fc42815df6d4f9960455b18bd889a9220c991d0afbc19e99a6e14cd8"
+  },
+  "model_hashes": {
+    "predict.py": "a32a7ffd371b8512e322f57f0f35849dc11e31d4b54174bba91ee70a71cca4f1",
+    "weights.json": "c866348ffd0b6e3fcefc5feb9ce6178d3c3e88c5f92d7a2474fa9176e379afbe",
+    "protocol.json": "a96040d1cfd327d1170bb836137aa8abf622bf1bebdc18288f30a76880ecb890",
+    "trials.py": "09e95a79067543396f9ed917cab0c54d98cca48bbd256e631584dbf6f32ae425",
+    "results.json": "b695de7f97aa7bc0d8d6d1c7546e040ac651fec46c312eea9499103ae5038770"
+  },
+  "domain": "Reznick US study, offline optical knee estimates, level s0x8 task, 250 ms",
+  "participants_screened": 10,
+  "participants_scored": 10,
+  "cutoffs": 4828,
+  "mean_person_mae_deg": {
+    "prior_stride": {
+      "right": 3.236370587990039,
+      "left": 3.5604281359944023,
+      "bilateral": 3.39839936199222
+    },
+    "ridge_residual": {
+      "right": 3.5007869704848837,
+      "left": 3.7026861451743,
+      "bilateral": 3.601736557829592
+    },
+    "transformer_residual": {
+      "right": 3.3267685490097185,
+      "left": 3.157615571014743,
+      "bilateral": 3.2421920600122305
+    }
+  },
+  "comparisons": {
+    "ridge_residual_minus_prior_stride": {
+      "mean": 0.20333719583737175,
+      "CI95": [
+        0.014316211275203463,
+        0.38389517724146327
+      ],
+      "wins": 1,
+      "ties": 0,
+      "losses": 9,
+      "passed": false
+    },
+    "transformer_residual_minus_prior_stride": {
+      "mean": -0.15620730197998958,
+      "CI95": [
+        -0.44730798785207043,
+        0.0691345500400028
+      ],
+      "wins": 6,
+      "ties": 0,
+      "losses": 4,
+      "passed": false
+    },
+    "transformer_residual_minus_ridge_residual": {
+      "mean": -0.3595444978173613,
+      "CI95": [
+        -0.5107613653909137,
+        -0.19938862796420853
+      ],
+      "wins": 9,
+      "ties": 0,
+      "losses": 1,
+      "passed": true
+    }
+  },
+  "participants": [
+    {
+      "person": "AB01",
+      "available": true,
+      "all_windows": 515,
+      "n": 515,
+      "excluded": 0,
+      "failing_bilateral_history": 0,
+      "failing_short_six_joint": 0,
+      "mae_deg": {
+        "prior_stride": {
+          "right": 3.64375850867314,
+          "left": 3.2500681352750798,
+          "bilateral": 3.44691332197411
+        },
+        "ridge_residual": {
+          "right": 3.618283866661272,
+          "left": 3.434953443509859,
+          "bilateral": 3.5266186550855654
+        },
+        "transformer_residual": {
+          "right": 3.4628053034312116,
+          "left": 2.9930309693759085,
+          "bilateral": 3.2279181364035603
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": 0.07970533311145545,
+        "transformer_residual_minus_prior_stride": -0.21899518557054964,
+        "transformer_residual_minus_ridge_residual": -0.2987005186820051
+      },
+      "clock_controls": [
+        {
+          "model_cut": 240,
+          "native_cut_0based": 11233,
+          "native_target_0based": 11258,
+          "period": 159,
+          "max_batch_scalar_deg": 1.7763568394002505e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1011,
+          "native_cut_0based": 12518,
+          "native_target_0based": 12543,
+          "period": 75,
+          "max_batch_scalar_deg": 1.7763568394002505e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1782,
+          "native_cut_0based": 13803,
+          "native_target_0based": 13828,
+          "period": 160,
+          "max_batch_scalar_deg": 7.105427357601002e-15,
+          "future_change_forecast_deg": 0.0
+        }
+      ],
+      "native_column_sha256_le_f8": {
+        "RKneeAngles": "0634512f1213eb57a890a2e1f22bdfd8ee81f43fe581469bdab87ce0aaa19354",
+        "LKneeAngles": "01543458f8d69467746982e66e845458f7f65f1ea3f43bc47cb8c09ad8600770",
+        "RHipAngles": "6c9f58b93d192fc8bcca6b6f868260ec374305fea25ebd3344418ffdfbb5ec7a",
+        "LHipAngles": "695afaf84c568efe9420d955e57df757dc0f528e0264dd58c662ada14ce92c87",
+        "RAnkleAngles": "3bca28683b13d25168983c4c1929bc00cff1d26a76a909c8dc352661a3d4b1d9",
+        "LAnkleAngles": "e79c6959f04fff71cecd3dfcdac34dd815d6d11a52c193a1d500667f04710884"
+      },
+      "native_cut_index_sha256_le_i8": "87bf6b213951eba940ab8cfec263b14c633dfd7ddad3c47dde885f072abeaae4",
+      "native_target_pairs_sha256_le_f8": "92f86ca37c9a91c2db8d046affca780d3b99bb15e0e119b557cfea020c3ff5ff",
+      "native_selected_knees_sha256_le_f8": "707941b9639984716c44740ba121943e813e22b10148e8f02e3d94ac65448241"
+    },
+    {
+      "person": "AB02",
+      "available": true,
+      "all_windows": 516,
+      "n": 516,
+      "excluded": 0,
+      "failing_bilateral_history": 0,
+      "failing_short_six_joint": 0,
+      "mae_deg": {
+        "prior_stride": {
+          "right": 3.567293010335916,
+          "left": 4.397873651162789,
+          "bilateral": 3.9825833307493523
+        },
+        "ridge_residual": {
+          "right": 3.6997950835511153,
+          "left": 4.298063191745572,
+          "bilateral": 3.998929137648344
+        },
+        "transformer_residual": {
+          "right": 3.7841046158471308,
+          "left": 3.7409455237413964,
+          "bilateral": 3.762525069794264
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": 0.016345806898991455,
+        "transformer_residual_minus_prior_stride": -0.2200582609550885,
+        "transformer_residual_minus_ridge_residual": -0.23640406785407997
+      },
+      "clock_controls": [
+        {
+          "model_cut": 240,
+          "native_cut_0based": 9344,
+          "native_target_0based": 9369,
+          "period": 88,
+          "max_batch_scalar_deg": 2.6645352591003757e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1014,
+          "native_cut_0based": 10634,
+          "native_target_0based": 10659,
+          "period": 85,
+          "max_batch_scalar_deg": 3.552713678800501e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1785,
+          "native_cut_0based": 11919,
+          "native_target_0based": 11944,
+          "period": 83,
+          "max_batch_scalar_deg": 7.105427357601002e-15,
+          "future_change_forecast_deg": 0.0
+        }
+      ],
+      "native_column_sha256_le_f8": {
+        "RKneeAngles": "a18a20cf04cbdcdf28559b6e0e498962b49a73864431608234e6e086c5c7ff7a",
+        "LKneeAngles": "117555821a8ed8f505fd1d563a1dc6e5cdb20ae4c4a2609a6f79a24e17148964",
+        "RHipAngles": "6a08a54d27c40fdf75f6e198027996e8ca88bbadfe519b4828d440062fefb129",
+        "LHipAngles": "babeffc2a6b6c72864fd20120dd8f2652bc640f27127e0f7677c04c48e63b27a",
+        "RAnkleAngles": "e9a8f4ce1f532e83d09c87ed5daa58f2f583695e589634d706e9c90ab83ae8b1",
+        "LAnkleAngles": "b0826b6fdbfe7dfb34a5e078868ebdb288bbb898b5af31a71380ecf7bf61dd75"
+      },
+      "native_cut_index_sha256_le_i8": "3f7a196d33768d503151b2d8d18d00cd697b8aa3ff9ed8d96ed771d1a458127f",
+      "native_target_pairs_sha256_le_f8": "dee6f8918cef843b406afd13f591b91c14a106e4e5d9a1f0175b48bc7e6a81dd",
+      "native_selected_knees_sha256_le_f8": "2c9a007e3b9d45e504e0a08e0d8b02fc450410fbf301e7d4c0b330a0b308b142"
+    },
+    {
+      "person": "AB03",
+      "available": true,
+      "all_windows": 517,
+      "n": 517,
+      "excluded": 0,
+      "failing_bilateral_history": 0,
+      "failing_short_six_joint": 0,
+      "mae_deg": {
+        "prior_stride": {
+          "right": 2.4438636557059947,
+          "left": 2.5477198745970364,
+          "bilateral": 2.4957917651515156
+        },
+        "ridge_residual": {
+          "right": 2.5567368927349783,
+          "left": 2.506815322253661,
+          "bilateral": 2.53177610749432
+        },
+        "transformer_residual": {
+          "right": 2.7776585404471192,
+          "left": 2.5303983307385276,
+          "bilateral": 2.6540284355928234
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": 0.03598434234280434,
+        "transformer_residual_minus_prior_stride": 0.15823667044130785,
+        "transformer_residual_minus_ridge_residual": 0.1222523280985035
+      },
+      "clock_controls": [
+        {
+          "model_cut": 240,
+          "native_cut_0based": 12925,
+          "native_target_0based": 12950,
+          "period": 81,
+          "max_batch_scalar_deg": 1.7763568394002505e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1014,
+          "native_cut_0based": 14215,
+          "native_target_0based": 14240,
+          "period": 82,
+          "max_batch_scalar_deg": 3.552713678800501e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1788,
+          "native_cut_0based": 15505,
+          "native_target_0based": 15530,
+          "period": 165,
+          "max_batch_scalar_deg": 8.881784197001252e-16,
+          "future_change_forecast_deg": 0.0
+        }
+      ],
+      "native_column_sha256_le_f8": {
+        "RKneeAngles": "7810be5f89f8648c3bd285df9e978ce15808fec01e6a0a9c92b0ec0db702cfe8",
+        "LKneeAngles": "fb79f1ea160a718a6620faf2490256bfc960974841282612ebb209c8ef28f5bc",
+        "RHipAngles": "2cb14a771e1a2f681995fe902ef41e232045852d4fa1e862256b314159361607",
+        "LHipAngles": "2113def2879a13e27ad893d26fb353eefd9f8bf6532ce7a1c7f2252585caa21a",
+        "RAnkleAngles": "079ecc7af050d861fcb9ce2ffebfd43b1595608464c7fa18c40a14b37b82d562",
+        "LAnkleAngles": "0a9a5693a69c33493d7de32302fd4853b0f10a8bc059dccb747360107827a5ea"
+      },
+      "native_cut_index_sha256_le_i8": "c5e81688593c4414b0d9e91df81279ec91f5dbf9900033d234e746f72dae12ef",
+      "native_target_pairs_sha256_le_f8": "e9bf6cc48135f79a0b4462dc5a95a2fcb503679a929aa64c1462e53edc966eee",
+      "native_selected_knees_sha256_le_f8": "0cc0529ab66996d7057394b4c37d5ce7ee5f5a92eedc1c73020ce4bdebdf1551"
+    },
+    {
+      "person": "AB04",
+      "available": true,
+      "all_windows": 516,
+      "n": 516,
+      "excluded": 0,
+      "failing_bilateral_history": 0,
+      "failing_short_six_joint": 0,
+      "mae_deg": {
+        "prior_stride": {
+          "right": 2.091063636440568,
+          "left": 2.2099070219638226,
+          "bilateral": 2.150485329202195
+        },
+        "ridge_residual": {
+          "right": 2.4696987466439877,
+          "left": 2.6012972762773243,
+          "bilateral": 2.535498011460656
+        },
+        "transformer_residual": {
+          "right": 2.5066772475204684,
+          "left": 2.1757369981203483,
+          "bilateral": 2.3412071228204083
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": 0.38501268225846097,
+        "transformer_residual_minus_prior_stride": 0.1907217936182133,
+        "transformer_residual_minus_ridge_residual": -0.19429088864024768
+      },
+      "clock_controls": [
+        {
+          "model_cut": 240,
+          "native_cut_0based": 11274,
+          "native_target_0based": 11299,
+          "period": 157,
+          "max_batch_scalar_deg": 7.105427357601002e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1014,
+          "native_cut_0based": 12564,
+          "native_target_0based": 12589,
+          "period": 78,
+          "max_batch_scalar_deg": 3.552713678800501e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1785,
+          "native_cut_0based": 13849,
+          "native_target_0based": 13874,
+          "period": 151,
+          "max_batch_scalar_deg": 7.105427357601002e-15,
+          "future_change_forecast_deg": 0.0
+        }
+      ],
+      "native_column_sha256_le_f8": {
+        "RKneeAngles": "bdbddc7059cd65f31f166238f45c2582e1da9e7713b4e4f9fdd2601b139a608d",
+        "LKneeAngles": "4690f812a8b2d66918e989d8400f6feb7cf06b2480eada507fce56cf2e33423a",
+        "RHipAngles": "d01bb27094ef3aa256635d3f775c2e1fa315840b2d7b64b213b6e124793b70fe",
+        "LHipAngles": "a76bfbd5adb77dc63ab9ee4c6a147b6e7df656b0760e23c6180a0d57b60a7cda",
+        "RAnkleAngles": "e50deb7667d6a5d69994ba5e37c26198c96b2e849ad580927cd5cfb9f006a85f",
+        "LAnkleAngles": "cc11a1201dca7db128077dbe785033b6c21430ce6e967d339ca9307549df8ecb"
+      },
+      "native_cut_index_sha256_le_i8": "7a003a77b02b5956380fe9d97775d1f15e6e0ea304a705ed09964f2fce6a0ffe",
+      "native_target_pairs_sha256_le_f8": "b4d8e96bd5f95e549ec9f06519ee68156660a74a2ea6dd93b4bdca28b36d2470",
+      "native_selected_knees_sha256_le_f8": "42167c7c105a48747c3e479493fa5f72b1b25f748a75b22fa799e621f3640e61"
+    },
+    {
+      "person": "AB05",
+      "available": true,
+      "all_windows": 516,
+      "n": 516,
+      "excluded": 0,
+      "failing_bilateral_history": 0,
+      "failing_short_six_joint": 0,
+      "mae_deg": {
+        "prior_stride": {
+          "right": 2.845614989793284,
+          "left": 3.8468992640697643,
+          "bilateral": 3.3462571269315244
+        },
+        "ridge_residual": {
+          "right": 3.091744411631519,
+          "left": 4.085648947499456,
+          "bilateral": 3.588696679565487
+        },
+        "transformer_residual": {
+          "right": 2.7776080033120256,
+          "left": 3.2765297965213636,
+          "bilateral": 3.027068899916695
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": 0.24243955263396266,
+        "transformer_residual_minus_prior_stride": -0.31918822701482963,
+        "transformer_residual_minus_ridge_residual": -0.5616277796487923
+      },
+      "clock_controls": [
+        {
+          "model_cut": 240,
+          "native_cut_0based": 3753,
+          "native_target_0based": 3778,
+          "period": 76,
+          "max_batch_scalar_deg": 4.440892098500626e-16,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1014,
+          "native_cut_0based": 5043,
+          "native_target_0based": 5068,
+          "period": 145,
+          "max_batch_scalar_deg": 7.105427357601002e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1785,
+          "native_cut_0based": 6328,
+          "native_target_0based": 6353,
+          "period": 150,
+          "max_batch_scalar_deg": 7.105427357601002e-15,
+          "future_change_forecast_deg": 0.0
+        }
+      ],
+      "native_column_sha256_le_f8": {
+        "RKneeAngles": "6c56edfea07d8f59fb12950457b4606fcde83bf05ede9a82389008fd85ec25f6",
+        "LKneeAngles": "e6fc76a223e2fb843f7951a1b5c083e392c52f5521475c4d60edfc098ae12dd7",
+        "RHipAngles": "b52ef210fa5d07383dc84f610b76474a01909468160d667148fbf7036f233c60",
+        "LHipAngles": "a7155fe40cb0d84aac6e39f79e0308c6574e40990368eb71f6c13d5995446d35",
+        "RAnkleAngles": "e069bf532e0316d7dc57ba65fb7c17ac22ed88c72cc744ab93a74c2f044a7d28",
+        "LAnkleAngles": "2b6a5ab4844be2b519275ff9897649ce68902fc3ff269a70ae9814173fb60dd5"
+      },
+      "native_cut_index_sha256_le_i8": "19d5e7e929d4fcca80f9e6dc40ad7d17fab16163a5818fff4f3e8cd33592d046",
+      "native_target_pairs_sha256_le_f8": "361cf3a0f69889e1b808a89d35ad15dbe2e5f54b2dd886a0cff8649662eb4170",
+      "native_selected_knees_sha256_le_f8": "c7ecbaf3baf272a79520902886bd97752111b0eee0d472d376ab812b354cf698"
+    },
+    {
+      "person": "AB06",
+      "available": true,
+      "all_windows": 516,
+      "n": 516,
+      "excluded": 0,
+      "failing_bilateral_history": 0,
+      "failing_short_six_joint": 0,
+      "mae_deg": {
+        "prior_stride": {
+          "right": 2.4601586437338505,
+          "left": 3.258595278049093,
+          "bilateral": 2.859376960891472
+        },
+        "ridge_residual": {
+          "right": 2.917466829511124,
+          "left": 3.392358495801744,
+          "bilateral": 3.154912662656434
+        },
+        "transformer_residual": {
+          "right": 2.965656928611547,
+          "left": 3.002354916056609,
+          "bilateral": 2.9840059223340782
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": 0.29553570176496224,
+        "transformer_residual_minus_prior_stride": 0.12462896144260638,
+        "transformer_residual_minus_ridge_residual": -0.17090674032235587
+      },
+      "clock_controls": [
+        {
+          "model_cut": 240,
+          "native_cut_0based": 9580,
+          "native_target_0based": 9605,
+          "period": 153,
+          "max_batch_scalar_deg": 1.7763568394002505e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1014,
+          "native_cut_0based": 10870,
+          "native_target_0based": 10895,
+          "period": 154,
+          "max_batch_scalar_deg": 0.0,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1785,
+          "native_cut_0based": 12155,
+          "native_target_0based": 12180,
+          "period": 76,
+          "max_batch_scalar_deg": 0.0,
+          "future_change_forecast_deg": 0.0
+        }
+      ],
+      "native_column_sha256_le_f8": {
+        "RKneeAngles": "0e8ebbd284d5bbd536ab3f6644dfb52464552b282da2e0c61d7625d384d24bdf",
+        "LKneeAngles": "110cca4702da66545818ca28237020c4b56cbcab707a86329f6827f23fdeccf3",
+        "RHipAngles": "0d2117b3282a81d5a128023c84ca23d150b7a046ab672963fe47ef3d9010feab",
+        "LHipAngles": "c5a20c3cd6071bd0688985d17c1544c3a9f4b0fd4b96aef9af3baca371d04eef",
+        "RAnkleAngles": "d105bf3091a269d0b4a97267cc2e0e29bb8176746f9a23bb94d4d23617613841",
+        "LAnkleAngles": "3333ee3acbf2a430ed8462d60209f95a62e6f7d3d0076f1b7b549718bda9581e"
+      },
+      "native_cut_index_sha256_le_i8": "1514609d4dd75c0ef9ff6d4e45820c3f67f6940fab4fc595dfaaf5f89f794eed",
+      "native_target_pairs_sha256_le_f8": "a809ec98dced0a1bbd3bf5faf2c5f37636f362b66e6ca94cc988d801af2eecdf",
+      "native_selected_knees_sha256_le_f8": "0c6adf1acbda38beceb9d16f4f579d63046b262bcac1d703215fc9a3623cb87f"
+    },
+    {
+      "person": "AB07",
+      "available": true,
+      "all_windows": 516,
+      "n": 516,
+      "excluded": 0,
+      "failing_bilateral_history": 0,
+      "failing_short_six_joint": 0,
+      "mae_deg": {
+        "prior_stride": {
+          "right": 2.990927966408272,
+          "left": 3.642694061408273,
+          "bilateral": 3.3168110139082723
+        },
+        "ridge_residual": {
+          "right": 3.6076560693202486,
+          "left": 3.820817011515734,
+          "bilateral": 3.7142365404179913
+        },
+        "transformer_residual": {
+          "right": 3.3908530838027233,
+          "left": 2.870790302762862,
+          "bilateral": 3.1308216932827926
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": 0.3974255265097191,
+        "transformer_residual_minus_prior_stride": -0.18598932062547968,
+        "transformer_residual_minus_ridge_residual": -0.5834148471351988
+      },
+      "clock_controls": [
+        {
+          "model_cut": 240,
+          "native_cut_0based": 4201,
+          "native_target_0based": 4226,
+          "period": 74,
+          "max_batch_scalar_deg": 8.881784197001252e-16,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1014,
+          "native_cut_0based": 5491,
+          "native_target_0based": 5516,
+          "period": 147,
+          "max_batch_scalar_deg": 8.881784197001252e-16,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1785,
+          "native_cut_0based": 6776,
+          "native_target_0based": 6801,
+          "period": 149,
+          "max_batch_scalar_deg": 1.7763568394002505e-15,
+          "future_change_forecast_deg": 0.0
+        }
+      ],
+      "native_column_sha256_le_f8": {
+        "RKneeAngles": "174b32e719a8a7c3c887416eb4b9fb085f5ee4fe5e419310e60d640519d02c20",
+        "LKneeAngles": "7cf1f5e2488eeba0e7e3c9a1435209c5d0cbed885adbb01d89e93fa491176133",
+        "RHipAngles": "d190760559f1d52e657e1ae574b5414e71f8f54b1fb695cfb91c31cb191d1691",
+        "LHipAngles": "a64db11ab5c8a6daa3ea103f8325f9c344db0a7dd831aede35b02f0ae3fa9b0d",
+        "RAnkleAngles": "11761bcea227533cf4181f04b2b5d9ae5b1b4791d2ad77e7dfc070e0dedda9a3",
+        "LAnkleAngles": "7b6c1a9826d18b0791266686bb2668cf64defa2fc7d873328484998312296f4d"
+      },
+      "native_cut_index_sha256_le_i8": "1d677fb6cf9ea31636684a6398962a5b89b70e75a66676c501677a0078d1a30e",
+      "native_target_pairs_sha256_le_f8": "61e35e7ba8f4737289b51dbeb3e375bd19d205d92f5952f524c4f5b14383dd92",
+      "native_selected_knees_sha256_le_f8": "27e42bdd4a35bc0e1879f5a0f6fc91ab534ccab96c1313a65b4b1a4fcea12e11"
+    },
+    {
+      "person": "AB08",
+      "available": true,
+      "all_windows": 517,
+      "n": 183,
+      "excluded": 334,
+      "failing_bilateral_history": 334,
+      "failing_short_six_joint": 334,
+      "mae_deg": {
+        "prior_stride": {
+          "right": 5.677932047358834,
+          "left": 6.622274398907104,
+          "bilateral": 6.1501032231329695
+        },
+        "ridge_residual": {
+          "right": 5.332190053376046,
+          "left": 6.044682351014494,
+          "bilateral": 5.68843620219527
+        },
+        "transformer_residual": {
+          "right": 4.68226832190913,
+          "left": 5.0818876504820585,
+          "bilateral": 4.882077986195594
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": -0.46166702093769985,
+        "transformer_residual_minus_prior_stride": -1.2680252369373752,
+        "transformer_residual_minus_ridge_residual": -0.8063582159996754
+      },
+      "clock_controls": [
+        {
+          "model_cut": 240,
+          "native_cut_0based": 12990,
+          "native_target_0based": 13015,
+          "period": 158,
+          "max_batch_scalar_deg": 8.881784197001252e-16,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 513,
+          "native_cut_0based": 13445,
+          "native_target_0based": 13470,
+          "period": 91,
+          "max_batch_scalar_deg": 3.552713678800501e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 786,
+          "native_cut_0based": 13900,
+          "native_target_0based": 13925,
+          "period": 77,
+          "max_batch_scalar_deg": 7.105427357601002e-15,
+          "future_change_forecast_deg": 0.0
+        }
+      ],
+      "native_column_sha256_le_f8": {
+        "RKneeAngles": "a5570efa067cb93fc419eaa4431268820c43bdee61057cbf4d3fcf8c79dfa1bb",
+        "LKneeAngles": "5e3e6d508585f8d177d85676ba119dba36fa4d45d406195b0c12786dc30e13e8",
+        "RHipAngles": "786d28e74465c3f9e81189b95ec64cdfc662404cf21eda937f63d7c2f375f91e",
+        "LHipAngles": "1d7e586dc9417811320939d7bfe56156dc467fb9e177cfca8d008cfd5c92cf9e",
+        "RAnkleAngles": "8d6bdea6f49c3ac559e5a6ebad96b9e5bf9f5bce95fc865f1f95550ab1dd4d22",
+        "LAnkleAngles": "5e875c8b44aaa290cd7e2db84810566288151cc6afa978ce2b20556c3d579259"
+      },
+      "native_cut_index_sha256_le_i8": "d35fc6177a5663e15ea19b003de821460fd78266ca12423710179243593f6a6b",
+      "native_target_pairs_sha256_le_f8": "2b467f33b2b0b320b707706bd3c7bbff91a89d5a71fef567b4bf271841ccf88e",
+      "native_selected_knees_sha256_le_f8": "cff24c42bf70b25bd71d915056b53ffbffc40730d6587e112fe9785c35f6b993"
+    },
+    {
+      "person": "AB09",
+      "available": true,
+      "all_windows": 516,
+      "n": 516,
+      "excluded": 0,
+      "failing_bilateral_history": 0,
+      "failing_short_six_joint": 0,
+      "mae_deg": {
+        "prior_stride": {
+          "right": 2.61896468992248,
+          "left": 1.761493888888888,
+          "bilateral": 2.190229289405684
+        },
+        "ridge_residual": {
+          "right": 3.2933034036564637,
+          "left": 2.589875179212639,
+          "bilateral": 2.9415892914345516
+        },
+        "transformer_residual": {
+          "right": 2.846805200864457,
+          "left": 2.1628672063550995,
+          "bilateral": 2.504836203609778
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": 0.7513600020288678,
+        "transformer_residual_minus_prior_stride": 0.31460691420409415,
+        "transformer_residual_minus_ridge_residual": -0.4367530878247736
+      },
+      "clock_controls": [
+        {
+          "model_cut": 240,
+          "native_cut_0based": 9748,
+          "native_target_0based": 9773,
+          "period": 69,
+          "max_batch_scalar_deg": 1.7763568394002505e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1014,
+          "native_cut_0based": 11038,
+          "native_target_0based": 11063,
+          "period": 141,
+          "max_batch_scalar_deg": 7.105427357601002e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1785,
+          "native_cut_0based": 12323,
+          "native_target_0based": 12348,
+          "period": 142,
+          "max_batch_scalar_deg": 1.7763568394002505e-15,
+          "future_change_forecast_deg": 0.0
+        }
+      ],
+      "native_column_sha256_le_f8": {
+        "RKneeAngles": "746fac14524f4e64d8579822a27d7fc02997515d22f1ead0ba24109d93b95bcb",
+        "LKneeAngles": "ef2b56d1474af25a8e20fbe8a69cbade7d9adfd4850d967ff830aa835fafdd08",
+        "RHipAngles": "ad090d7956ab126fba5bcf26fe8cd251a33d4791f568a9bd63537528794987fb",
+        "LHipAngles": "a637edbc8e6872004e0ac1541ea1f9c5074254328f42f3bc87a8cb822983e95e",
+        "RAnkleAngles": "c4627b3e6a7127246e60951c150df642e6b77d4dfb7db031f3b71b9280d34b86",
+        "LAnkleAngles": "fafcb46c8ac2c29ec8d933faee5dc6546abeae6c31ecde2e12d7687e508b4149"
+      },
+      "native_cut_index_sha256_le_i8": "d47c2484b27c72eb95101067f6011abd4a6d26b412bad15c697d2e846ae9178b",
+      "native_target_pairs_sha256_le_f8": "182564b0248e71a8b4cd4c7999d9327c6e50480c817ab5d0a0f2895599144c48",
+      "native_selected_knees_sha256_le_f8": "6f27191d4e3195ae49e5146ddb852ef67a1eca8bd58953603e33826f07761128"
+    },
+    {
+      "person": "AB10",
+      "available": true,
+      "all_windows": 517,
+      "n": 517,
+      "excluded": 0,
+      "failing_bilateral_history": 0,
+      "failing_short_six_joint": 0,
+      "mae_deg": {
+        "prior_stride": {
+          "right": 4.0241287315280445,
+          "left": 4.066755785622178,
+          "bilateral": 4.045442258575111
+        },
+        "ridge_residual": {
+          "right": 4.420994347762088,
+          "left": 4.252350232912522,
+          "bilateral": 4.3366722903373045
+        },
+        "transformer_residual": {
+          "right": 4.073248244351374,
+          "left": 3.741614015993258,
+          "bilateral": 3.9074311301723164
+        }
+      },
+      "paired_differences_deg": {
+        "ridge_residual_minus_prior_stride": 0.2912300317621934,
+        "transformer_residual_minus_prior_stride": -0.13801112840279472,
+        "transformer_residual_minus_ridge_residual": -0.42924116016498814
+      },
+      "clock_controls": [
+        {
+          "model_cut": 240,
+          "native_cut_0based": 10868,
+          "native_target_0based": 10893,
+          "period": 125,
+          "max_batch_scalar_deg": 3.552713678800501e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1014,
+          "native_cut_0based": 12158,
+          "native_target_0based": 12183,
+          "period": 149,
+          "max_batch_scalar_deg": 1.7763568394002505e-15,
+          "future_change_forecast_deg": 0.0
+        },
+        {
+          "model_cut": 1788,
+          "native_cut_0based": 13448,
+          "native_target_0based": 13473,
+          "period": 76,
+          "max_batch_scalar_deg": 2.6645352591003757e-15,
+          "future_change_forecast_deg": 0.0
+        }
+      ],
+      "native_column_sha256_le_f8": {
+        "RKneeAngles": "19e01856627e80d44160427dd67e449730b2058c1b7fa7f961c871a6dc87e459",
+        "LKneeAngles": "97a6cf86f29ab28a4a5d5c17b71ce2461f8adf9f4e2395681e9b0bca76af2554",
+        "RHipAngles": "10be3153700dba589aa9668af866747d54f98152e469182f1eac41645f07ed36",
+        "LHipAngles": "06014b59280d3d3436bb774ab615d35a11fe929541671ef3582379219f45ee23",
+        "RAnkleAngles": "2248c42ffeda5c514c3a75be639a030ab87a316df8cf37ab6545b026a0012366",
+        "LAnkleAngles": "297f54bccfeebd9f74003607958dea6a1fe731d03a915e0dc38d059c66b85ce7"
+      },
+      "native_cut_index_sha256_le_i8": "59bac309d7fa9140d10d61ddb0814ebe73b45ae4ace429c667aed701019a82a4",
+      "native_target_pairs_sha256_le_f8": "7214e508ca44c9b2be7e9366c5f25a838f86050ea7d82d3b28d02d7a0ddfa8cb",
+      "native_selected_knees_sha256_le_f8": "74c512e15f434b58f1e611935359bdcf9407904f40bce573f23fa89751978f4b"
+    }
+  ],
+  "archived_original_prior_stride_deg": 3.5352540464780127,
+  "archived_original_cutoffs": 40201
+}

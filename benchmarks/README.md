@@ -383,7 +383,11 @@ These were published after the table was made. Each has its own plan and results
 
 A four-page supplement reports the two searches with words together: [*How precisely do words identify a recorded movement?*](../docs/papers/language-and-observed-movement/README.md) It is separate from the two papers, and neither paper's current draft contains these studies.
 
-## Six more studies of recorded movement
+## Seven more studies of recorded movement
+
+### How much will each finger move?
+
+The same person, glove, screen and brain-surface recording as the study below, but no model is given a recent glove reading: each forecasts how much every finger will move, step by step, over the next 160 ms. The models were fitted on the same 52 trials and scored on the same 23, with the error scaled by each finger's spread and averaged over the five. Given the screen alone, a straight-line model scored 0.288 and a small transformer 0.289; given the brain recording as well, 0.354 and 0.321, both worse with ranges that stayed clear of zero. The brain recording alone did little better than the training average for the straight-line model (0.454 against 0.455). [Study, weights and its rights](../models/finger-motion/) · [Try the six models](https://eliminatenoise.github.io/NeuroTranslation/finger-motion/)
 
 ### Can a recording from the surface of the brain beat the last glove reading?
 
@@ -391,7 +395,7 @@ One person saw a finger named on a screen and bent it, wearing a glove that meas
 
 ### Can four seconds of walking beat the last stride?
 
-Three forecasts were given the same 240 earlier readings of both knees, four seconds at 60 Hz, and asked for both angles 15 frames later: copying the matching moment of the previous stride, that copy with a straight-line correction, and that copy with a correction from a small transformer trained for the knees. The corrections were fitted on 39 walkers. On 40,201 forecasts from the 12 walkers of the 15-frame forecast below, they missed by 3.535°, 3.411° and 2.679° on average, and the transformer was closer than both for every one of the 12. Those walkers were kept out of fitting, but their earlier results were known when this comparison was designed. The general model, its shared part left as it was and a new final step fitted for the knees, missed by 3.465°: no better than the same final step without the shared part (3.460°), and a copy with its shared part scrambled did better (3.422°). [Fitted model, every comparison and source](../models/knee-stride/) · [The general model's knee task](../models/neurotranslate-0.0/knee/) · [Compare the forecasts](https://eliminatenoise.github.io/NeuroTranslation/knee-stride/)
+Three forecasts were given the same 240 earlier readings of both knees, four seconds at 60 Hz, and asked for both angles 15 frames later: copying the matching moment of the previous stride, that copy with a straight-line correction, and that copy with a correction from a small transformer trained for the knees. The corrections were fitted on 39 walkers. On 40,201 forecasts from the 12 walkers of the 15-frame forecast below, they missed by 3.535°, 3.411° and 2.679° on average, and the transformer was closer than both for every one of the 12. Those walkers were kept out of fitting, but their earlier results were known when this comparison was designed. The general model, its shared part left as it was and a new final step fitted for the knees, missed by 3.465°: no better than the same final step without the shared part (3.460°), and a copy with its shared part scrambled did better (3.422°). In a second laboratory, ten other people walking faster and measured with cameras and markers, the unchanged transformer missed by 3.242° against 3.398° for the copied stride: closer for only six of the ten, a lead within the noise, though it beat the straight-line correction for nine. [Fitted model, every comparison and source](../models/knee-stride/) · [The test in a second laboratory](../models/knee-stride/external-optical/) · [The general model's knee task](../models/neurotranslate-0.0/knee/) · [Compare the forecasts](https://eliminatenoise.github.io/NeuroTranslation/knee-stride/)
 
 ### Do the muscles and knees repeat at the same rate?
 

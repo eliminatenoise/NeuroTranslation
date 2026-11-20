@@ -92,3 +92,7 @@ In study 28's folder, one command also runs its three fitted models. With Python
 ## Five finger forecasts
 
 Open [the reader](https://eliminatenoise.github.io/NeuroTranslation/finger-signals/), or [download it](models/finger-signals.zip), unpack all of it and open the launcher for your system: it runs offline, on invented inputs. To run the fitted models on an invented input with Python and NumPy (and PyTorch for the transformer), follow [the study's example](models/cortical-glove/README.md#run-an-invented-example).
+
+## How much each finger will move
+
+Open [the reader](https://eliminatenoise.github.io/NeuroTranslation/finger-motion/), or [download it](models/finger-motion.zip), unpack all of it and open the launcher at the top of the folder for your system (or open `docs/finger-motion/index.html` directly). The download also holds the study, the six models for the browser, seven for Python, invented examples and both licences.
