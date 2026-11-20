@@ -128,9 +128,9 @@ The shared fit learned from both HoloAssist and this dataset. Its fitted weights
 
 [Versioned dataset](https://doi.org/10.48324/dandi.000978/0.240511.0307) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-### Treadmill joint angles
+### Treadmill muscle and joint-angle recordings
 
-Katmah and colleagues released these recordings through PhysioNet under CC BY 4.0. The knee forecast derives weights and aggregate errors from six angle channels at 0.5 m/s. The viewer opens with invented values. Obtain any recorded trial directly from the study. [Full credit and reuse terms](../models/knee-motion/RIGHTS.md) · [Original dataset](https://doi.org/10.13026/r0ea-7161)
+Katmah and colleagues released these recordings through PhysioNet under CC BY 4.0. The knee forecast derives weights and aggregate errors from six angle channels at 0.5 m/s. The knee viewer opens with invented values. The separate rhythm reader presents frequencies derived from 12 surface muscle channels and two reconstructed knee angles. Its reported peak rates and fitted coefficients retain CC BY 4.0 attribution. [Rhythm study and reuse terms](../models/gait-rhythm/README.md#sources-and-reuse) Obtain any recorded trial directly from the study. [Full credit and reuse terms](../models/knee-motion/RIGHTS.md) · [Original dataset](https://doi.org/10.13026/r0ea-7161)
 
 ### CMU Graphics Lab Motion Capture Database
 

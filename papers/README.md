@@ -51,6 +51,8 @@ A later experiment gives two words a movement of their own. Enter **walk** or **
 
 A two-page supplement asks where the body goes next. One experiment follows a human stride for 600 milliseconds. The other uses the movement and brain-cell firing of a rat to forecast how far it will move in a quarter of a second. The walk or run label helped locate body points relative to the waist. Correctly timed firing improved on both comparisons in only one of three rats. These results came after the two paper drafts. [Read the supplement](https://eliminatenoise.github.io/NeuroTranslation/papers/forecasting-movement/) · [Download the two-page PDF](../docs/papers/forecasting-movement/movement-forecast.pdf) · [Editable source and figures](../docs/papers/forecasting-movement/)
 
+A three-page supplement follows two treadmill experiments. The first predicts where the knees were 15 stored frames later. The second asks whether leg-muscle and knee-angle recordings agree on a walking rhythm when the clocks cannot establish the timing of individual steps. [Read the supplement](https://eliminatenoise.github.io/NeuroTranslation/papers/walking-rhythm/) · [Download the PDF](../docs/papers/walking-rhythm/gait-clocks.pdf) · [Editable source and results](../docs/papers/walking-rhythm/)
+
 ## Nobody outside the project has reviewed them
 
 "Working Draft — Review Pending" is printed on each title page, and it is true.

@@ -385,6 +385,10 @@ A four-page supplement reports the two searches with words together: [*How preci
 
 ## Two forecasts from recorded movement
 
+### Do the muscles and knees repeat at the same rate?
+
+For 11 held-out walkers at 0.5 m/s, the strongest rhythms in the leg-muscle recordings and knee angles differed by 0.027 cycles per minute on average. Pairing each walk with another walker’s muscle recording raised the difference to 3.055. Each instrument supplied its own 40-second window. Agreement in rate leaves the timing of individual steps unresolved. [Study, fitted comparisons and source](../models/gait-rhythm/) · [Open the rhythm reader](https://eliminatenoise.github.io/NeuroTranslation/gait-rhythm/)
+
 ### Where will the knees be 15 stored frames later?
 
 Five snapshots of both hips, knees and ankles predict the two knee angles 15 frames later in a stored 60 Hz treadmill recording. On 40,201 forecasts from 12 held-out walkers, replaying a stride from four seconds of knee history gave 3.54° mean absolute error. The transformer, with 0.4 seconds of joint history, gave 4.46° on the same windows. Six of the 51 recordings used whole-file Xsens HD processing, including test recording S48. The other 45 carry the Live label. Physical prediction latency was never measured. Only reconstructed joint angles entered the forecast. [Fitted model, full comparison and source](../models/knee-motion/) · [Try the knee forecast](https://eliminatenoise.github.io/NeuroTranslation/knee-motion/)
