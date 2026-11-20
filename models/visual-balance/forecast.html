@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' file:; style-src 'unsafe-inline'; connect-src 'none'">
+<title>The next 125 milliseconds of a walk</title><style>
+*{box-sizing:border-box}body{max-width:53rem;margin:auto;padding:clamp(1.2rem,4vw,4rem);font:1.05rem/1.5 Inter,Arial,sans-serif;color:#182323;background:#fbfaf5}h1{font-size:clamp(2rem,6vw,3.45rem);letter-spacing:-.05em;line-height:1.06;margin:.1em 0 .35em;max-width:15ch}p{max-width:62ch}.controls{display:flex;align-items:flex-end;gap:.9rem;flex-wrap:wrap;margin:2rem 0}label{display:grid;gap:.35rem;max-width:100%;min-width:0}select,button,input{font:inherit;max-width:100%}button,select{padding:.4rem .65rem;background:white;color:inherit;border:1px solid #59706e;border-radius:4px}input[type=file]{font-size:.9rem;width:16rem;min-width:0}table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}th,td{text-align:right;padding:.5em .26em;border-bottom:1px solid #b9c8c5}th:first-child{text-align:left}caption{text-align:left;font-size:1.14rem;font-weight:bold;margin:.5rem 0}#status{min-height:1.5em;color:#284c48}a{color:#18534d}p.small{font-size:.93rem}@media(max-width:380px){body{font-size:.93rem}}
+</style></head><body>
+<h1>The next 125 milliseconds of a walk</h1>
+<p>A walker sees the visual field rotate. Given the direction of rotation, earlier marker positions and electrode readings, how far will the sacrum and head move?</p>
+<div class="controls">
+<label>Visual rotation<select id="direction"><option value="1">Clockwise</option><option value="-1">Counterclockwise</option></select></label>
+<label>Fitted model<select id="branch"><option value="full">With scalp voltage</option><option value="no_scalp">Without scalp voltage</option></select></label>
+</div>
+<p id="status" role="status">Invented walking example. The positions and voltages are synthetic.</p>
+<table><caption>Forecast displacement in millimetres</caption><thead><tr><th scope="col">Marker</th><th scope="col">ML</th><th scope="col">SI</th><th scope="col">AP</th></tr></thead><tbody id="results"></tbody></table>
+<p class="small">The axes follow the recording order, mediolateral (ML), superior–inferior (SI), and anteroposterior (AP). The measurements establish neither the anatomical sign of each axis nor a cortical cause.</p>
+<div class="controls"><label>Open an event JSON on this device<input type="file" accept=".json,application/json" id="file"></label><button id="reset">Restore synthetic example</button></div>
+<p class="small"><a href="README.md">Model, controls and reproduction instructions</a> · <a href="synthetic-event.json" download>Example event JSON</a></p>
+<script src="visual-walk.js"></script><script src="weights.js"></script>
+<script>
+'use strict';
+const el=id=>document.getElementById(id);
+let record=VisualWalkForecast.example(), fileName='';
+function show(){
+ const prediction=VisualWalkForecast.predict(record,VisualWalkWeights[el('branch').value]);
+ el('results').replaceChildren(...prediction.map((xyz,index)=>{
+   const tr=document.createElement('tr'), header=document.createElement('th');
+   header.scope='row'; header.textContent=['Sacrum','Head'][index]; tr.append(header);
+   for(const value of xyz){const td=document.createElement('td'); td.textContent=value.toFixed(3);tr.append(td);}
+   return tr;
+ }));
+}
+el('branch').onchange=show;
+el('direction').onchange=()=>{record={...record,direction:Number(el('direction').value)};show();
+ if(fileName)el('status').textContent=fileName+' with edited visual direction.';};
+let pending=0;
+el('file').onchange=async()=>{
+ const f=el('file').files[0]; if(!f)return; const ticket=++pending;
+ try{
+  const candidate=JSON.parse(await f.text());
+  VisualWalkForecast.predict(candidate,VisualWalkWeights.full);
+  if(ticket!==pending)return;
+  record=candidate;fileName=f.name;el('direction').value=String(candidate.direction);
+  el('status').textContent=f.name+' loaded from this device.';show();
+ }catch(error){if(ticket===pending)el('status').textContent='Could not load event. '+error.message+' The table keeps the previous event.';}
+};
+el('reset').onclick=()=>{pending++;record=VisualWalkForecast.example();fileName='';
+ el('file').value='';el('direction').value='1';el('branch').value='full';
+ el('status').textContent='Invented walking example. The positions and voltages are synthetic.';show();};
+show();
+</script></body></html>

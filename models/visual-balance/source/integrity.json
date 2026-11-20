@@ -1,0 +1,55 @@
+{
+  "dataset": "OpenNeuro ds003739",
+  "version": "1.0.3",
+  "rights": "Dataset metadata: CC0.",
+  "package_sha256_lf": {
+    "README.md": "4d9e7680a8b2d94a8daa930149cf861d40d497dc6d30bd946adb98950957b0c2",
+    "acquire.py": "d0c07386ea9f359cc74708e8fad99b847122e2899768b9b4a2885402fb664f13",
+    "extract.py": "93b7895c3f38662e77356f7dd22365fe7c47f615dd5af369a54a1bbf1a5a7f62",
+    "requirements.txt": "7f25d6435e8b664fe179e4cc57ec7c36b61c9f32ad9c7285a1723e3612b4cd2d",
+    "verify.py": "e78cf541e61c9f2e60bccdc815c23e6f812221c533202f1304ec65da4e13d16b"
+  },
+  "stages": {
+    "development": {
+      "canonical_files_receipt_sha256": "6847f51131eadfdf253a2ca36307c7b9450fccc79c2affffbaba10ba3fa2fed9",
+      "typed_arrays_sha256": "c21d848c8982faa517544bf7b6f992ee5eebbebd0d85b60efb85257d0c2563ed",
+      "totals": {
+        "catalogue_selected": 18,
+        "catalogue_omissions": 0,
+        "people_represented": 17,
+        "people_with_both_directions": 17,
+        "original_rotations": 2682,
+        "admitted": 2430,
+        "independent_flag_counts": {
+          "marker_zero": 250,
+          "step_over_20mm": 20
+        },
+        "primary_exclusions": {
+          "marker_zero": 250,
+          "step_over_20mm": 2
+        },
+        "admitted_neighbors_of_excluded_ordinals": 73
+      }
+    },
+    "assessment": {
+      "canonical_files_receipt_sha256": "00b63c34204cbfd1aad5b40e3d963c22bbf4d8ea33a4250e49f717653e51547e",
+      "typed_arrays_sha256": "51fe79b369888301ff5e8b242180db7c44b1814626daeb0bccaef84694ed5554",
+      "totals": {
+        "catalogue_selected": 6,
+        "catalogue_omissions": 0,
+        "people_represented": 6,
+        "people_with_both_directions": 6,
+        "original_rotations": 894,
+        "admitted": 880,
+        "independent_flag_counts": {
+          "marker_zero": 14,
+          "step_over_20mm": 3
+        },
+        "primary_exclusions": {
+          "marker_zero": 14
+        },
+        "admitted_neighbors_of_excluded_ordinals": 25
+      }
+    }
+  }
+}

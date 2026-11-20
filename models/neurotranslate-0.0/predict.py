@@ -161,6 +161,14 @@ def forecast_population(cutoff_s, prior_time_s, prior_xy_cm, mode, checkpoint=DE
 
 
 def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
+    if record.get("domain") == "visual_balance":
+        from visual_balance.forecast import forecast as predict_visual_balance
+        import hashlib
+        source = Path(checkpoint)
+        state = json.loads((source.parent / "visual_balance/model.json").read_bytes())
+        if hashlib.sha256(source.read_bytes()).hexdigest() != state["parent_sha256"]:
+            raise ValueError("The visual-balance forecast requires its matching movement checkpoint.")
+        return predict_visual_balance(record, state, read_checkpoint(source))
     if record.get("domain") == "walking_cues":
         from walking_cues.forecast import forecast as predict_walk, load_encoders
         import hashlib
@@ -281,7 +289,7 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path, help="JSON walking instruction, heel movement and force, pedal load change, muscle length change, back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
+    parser.add_argument("input", type=Path, help="JSON visual balance, walking instruction, heel movement and force, pedal load change, muscle length change, back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
     args = parser.parse_args()
     try:

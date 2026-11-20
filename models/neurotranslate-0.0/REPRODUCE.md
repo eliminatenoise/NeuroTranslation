@@ -1,5 +1,7 @@
 # Predict and reproduce
 
+For the visual balance task run `python predict.py visual_balance/example.json`. [Rebuild the output layers, both comparison signals and the scored results](visual_balance/README.md).
+
 For the two walking instructions, run `python predict.py walking_cues/example.json` and follow the [training and scoring instructions](walking_cues/README.md).
 
 For right heel travel and plate force, run `python predict.py heel_force/example.json`. [Reproduce training and both assessment sets](heel_force/README.md).

@@ -1361,5 +1361,26 @@
     "paper_source": "docs/papers/walking-instructions/walking-instructions-source.zip",
     "atlas": "https://eliminatenoise.github.io/Interoceptomics/walking-instructions/",
     "domain": "Two walking instructions, pelvis and right heel surface markers, 100 ms displacement from 200 ms of offline processed movement. Development used 30 participants, 180 walks and 645 eligible windows. Historical assessment used ten people, 60 walks and 216 windows. No recorded neural activity or word timing."
+  },
+  "visual_balance": {
+    "version": "2026-11-21 experimental preview",
+    "source_doi": "10.18112/openneuro.ds003739.v1.0.3",
+    "method_doi": "10.1016/j.dib.2021.107635",
+    "source_license": "CC0 1.0",
+    "model": "models/visual-balance/README.md",
+    "model_zip": "models/visual-balance-model.zip",
+    "weights": "models/visual-balance/weights.json",
+    "viewer": "docs/visual-balance/index.html",
+    "offline_viewer": "docs/visual-balance-offline.zip",
+    "aggregate": "models/visual-balance/assessment-summary.json",
+    "shared_model": "models/neurotranslate-0.0/visual_balance/model.json",
+    "shared_viewer": "docs/visual-balance-controls/index.html",
+    "shared_assessment": "models/neurotranslate-0.0/visual_balance/historical.json",
+    "shared_zip": "models/neurotranslate-0.0.zip",
+    "paper": "docs/papers/visual-balance/index.html",
+    "paper_pdf": "docs/papers/visual-balance/visual-balance.pdf",
+    "paper_source": "docs/papers/visual-balance/visual-balance-source.zip",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/visual-balance/",
+    "domain": "Forecast head and sacrum displacement 125 ms ahead on stored, offline-processed visual-rotation walking trials. Development retained 2,430 rotations from 17 of 18 selected participants. Assessment retained 880 of 894 rotations from six people. Six reserve EEG SET/FDT recordings remained unopened. The Transformer and shared encoder each missed the adjusted scalp-benefit criterion at both markers."
   }
 }
