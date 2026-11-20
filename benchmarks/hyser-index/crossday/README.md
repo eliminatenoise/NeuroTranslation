@@ -1,41 +1,51 @@
-# Yesterday’s calibration did little for the next day
+[The studies](../../README.md) › Study 15 · One finger: next-day adjustment
 
-A person presses the same finger against the same kind of sensor on two different days. Could the first day’s readings help us forecast the second? In a twelve-person Hyser assessment, the person’s own Day 1 calibration lowered Day 2 mean absolute error by 0.021 mV with force history and 0.076 mV with force history plus forearm surface EMG. Both ranges from resampling donor pairs crossed zero. In a separate reuse of four development participants, the unchanged shared forecast had the lowest mean absolute error in both arms.
+# A correction fitted on the first day helped one of four people on the second
 
-| Day 2 evaluation | Inputs | Shared forecast (mV) | Own Day 1 (mV) | Someone else’s Day 1 (mV) |
+A person presses the same finger against the same kind of sensor on two days. Can the first day's readings improve the forecast on the second? For the four test people of [study 14](../RESULTS.md), the shared forecast of the index sensor 120 ms ahead missed by **14.912 mV** on day 2. Corrected on the person's own day 1, it missed by **15.091 mV**: 0.180 mV worse, and better for one person of four. With forearm EMG in the forecast the result was the same: the unchanged shared forecast had the smallest average miss.
+
+In the twelve people the shared fit was made on, the same correction went the other way, a little. The person's own day 1 lowered the day-2 average miss by 0.021 mV with the sensor's history alone (17.610 to 17.589 mV, better for 4 of 12) and by 0.076 mV with EMG added. Both ranges cross zero.
+
+Every score here is the plain average miss (mean absolute error), in millivolts of the sensor's output, with each person counting equally. EMG is electrical activity of muscle, picked up on the skin: a recording of muscle, not of nerve.
+
+| Scored on day 2 | Inputs | Shared forecast (mV) | Corrected on own day 1 (mV) | Corrected on someone else's day 1 (mV) |
 | --- | --- | ---: | ---: | ---: |
-| TRAIN, 12 people | Force history | 17.610 | 17.589 | 17.726 |
-| TRAIN, 12 people | Force history + aligned EMG | 17.871 | 17.794 | 17.913 |
-| DEV reuse, 4 people | Force history | 14.912 | 15.091 | 15.401 |
-| DEV reuse, 4 people | Force history + aligned EMG | 14.903 | 15.122 | 15.496 |
+| 4 test people, already scored in study 14 | The sensor's history | 14.912 | 15.091 | 15.401 |
+| 4 test people, already scored in study 14 | The sensor's history and timed EMG | 14.903 | 15.122 | 15.496 |
+| 12 fitting people | The sensor's history | 17.610 | 17.589 | 17.726 |
+| 12 fitting people | The sensor's history and timed EMG | 17.871 | 17.794 | 17.913 |
 
-These are person-weighted mean absolute errors. Each person provided five labeled trials on Day 1 and five scoring trials on Day 2, with 450 windows per trial. The twelve TRAIN participants provided 60 trials and 27,000 windows on each day. The four DEV participants provided 20 trials and 9,000 windows on each day. Day 1 supplies calibration labels. Day 2 gives an identical scoring set for all three forecasts in each arm.
+Each person gave five labelled trials on day 1 and five scored trials on day 2, with 450 forecasts per trial: 60 trials and 27,000 forecasts each day from the twelve fitting people, 20 trials and 9,000 forecasts each day from the four test people. Day 1 supplies the corrections; day 2 is the same scoring set for all three forecasts in each row.
 
-## Whose calibration helps?
+## Whose day 1 matters
 
-A calibration can come from the right person and still make a forecast worse. On the reused DEV records, using someone’s own Day 1 reduced error relative to using the paired donor by 0.310 mV with force history and 0.375 mV with aligned EMG. Applying either calibration still yielded higher average absolute error than leaving the shared model alone. Force-history root mean squared error changed from 23.287 to 23.280 mV with own calibration, a small change on a metric that weights larger errors more heavily, with a paired range of −0.150 to +0.164 mV.
+A correction can come from the right person and still make a forecast worse. In the four test people, the person's own day 1 beat the paired donor's by 0.310 mV with the sensor's history and 0.375 mV with EMG, and either correction still left a larger average miss than leaving the shared model alone. On the measure that punishes large misses (root mean squared error), the own-day correction moved the history forecast from 23.287 to 23.280 mV, with a paired range of −0.150 to +0.164 mV.
 
-| Comparison, positive favors own calibration | TRAIN gain (mV) | DEV reuse gain (mV) |
+| Gain, positive favours the own-day correction | 12 fitting people (mV) | 4 test people (mV) |
 | --- | ---: | ---: |
-| Force history, own versus shared | +0.021 [−0.276, +0.455] | −0.180 [−0.188, −0.171] |
-| Force history, own versus paired donor | +0.138 [+0.043, +0.238] | +0.310 [+0.102, +0.518] |
-| Aligned EMG, own versus shared | +0.076 [−0.279, +0.495] | −0.219 [−0.258, −0.180] |
-| Aligned EMG, own versus paired donor | +0.119 [−0.006, +0.326] | +0.375 [+0.166, +0.583] |
+| The sensor's history: own day 1 against the shared forecast | +0.021 [−0.276, +0.455] | −0.180 [−0.188, −0.171] |
+| The sensor's history: own day 1 against the paired donor's | +0.138 [+0.043, +0.238] | +0.310 [+0.102, +0.518] |
+| Timed EMG: own day 1 against the shared forecast | +0.076 [−0.279, +0.495] | −0.219 [−0.258, −0.180] |
+| Timed EMG: own day 1 against the paired donor's | +0.119 [−0.006, +0.326] | +0.375 [+0.166, +0.583] |
 
-The brackets give the middle 95% of resampled pair averages. A pair’s members served as one another’s donor, so both move together in the resampling. TRAIN used six such pairs and overlapping base-fit populations. DEV had just two pairs and reused Day 2 records scored in the initial R106 study. The ranges describe those observations. Four reserved FINAL participants remain unopened. The paired control gives a reason to keep asking whose labels matter, while the shared forecast produced lower mean absolute error on these development records.
+The brackets hold the middle 95% of resampled pair averages. The two people of a pair served as each other's donor, so they move together in the resampling. The fitting people formed six such pairs, with overlapping groups behind their shared fits; the test people formed only two pairs, and their day-2 records had already been scored in study 14. So the four-person ranges are a range across two pairs, not across people, and they describe these records only. The donor comparison gives a reason to keep asking whose labels matter; the shared forecast still had the smaller average miss on these records.
 
-## What changed in the model?
+## What the correction is
 
-The original forecast estimated where the recorded index sensor voltage would be in 120 ms. The adapter learns two numbers from Day 1: a voltage offset and a gain correction on the forecast change from the current reading. It shrinks both numbers toward zero with a fixed ridge penalty of 0.1. On Day 2, the base and the two numbers stay fixed. The paired donor goes through the same math with the same number of labeled trials.
+The original forecast estimated where the index sensor's recorded voltage would be in 120 ms. The correction learns two numbers from day 1: a voltage offset and a gain on the forecast's change from the current reading. A fixed ridge penalty of 0.1 pulls both towards zero. On day 2 the shared forecast and the two numbers stay fixed. The donor correction goes through the same arithmetic with the same number of labelled trials.
 
-For each TRAIN pair, the shared base learned from both days of ten other people and picked its ridge penalty within those ten. This keeps both people in the comparison outside the shared fit. The earlier R106 TRAIN evaluation left one person out of each fit and recorded Day 2 mean absolute errors of 17.550 mV for force history and 17.927 mV with aligned EMG. These are separate historical scores from eleven-person bases. On DEV, the shared model is exactly the published R106 twelve-person TRAIN fit and reproduces the published Day 2 reference.
+For each pair of fitting people, the shared forecast was fitted on both days of ten other people and chose its penalty within those ten, so both people of the pair stay outside the fit. Study 14 had scored the fitting people with one person left out of each fit, and recorded day-2 average misses of 17.550 mV for the sensor's history and 17.927 mV with EMG; those are separate, earlier scores from fits on eleven people. For the test people, the shared forecast is exactly study 14's fit on all twelve fitting people, and it reproduces study 14's published day-2 score.
 
-The target is released voltage from the index force transducer during Hyser’s isometric Random task in adults with intact fingers. The 120 ms comes from the nominal released sampling grid. The causal availability of the distributed force signal and its upstream processing remain unverified. Drift and real-time device latency were unmeasured. Surface EMG here measures muscle electrical activity. This experiment evaluates an offline single-channel voltage forecast in one task.
+## What it does not show
 
-[Design and calibration equation](PROTOCOL.md) · [Machine-readable results and paired diagnostics](RESULTS.json)
+The target is the released voltage of the index sensor during Hyser's Random task, in which the fingers press without moving, in adults with intact fingers. The 120 ms comes from the nominal released sampling grid: whether the released force could have been available live, how it was processed upstream, drift and the delay of a live device are not known. Surface EMG measures the electrical activity of muscle. The study covers a forecast of one voltage channel, after the fact, in one task. The four people set aside were not opened.
+
+[The plan and the correction's equation](PROTOCOL.md) · [Results file with the paired checks](RESULTS.json)
 
 Contains aggregate results derived from Hyser 2.0.0, published by Xinyu Jiang, Chenyun Dai, Xiangyu Liu and Jiahao Fan and made available by PhysioNet under ODC-By 1.0. [Dataset](https://doi.org/10.13026/hxan-pe94) · [Protocol paper](https://doi.org/10.1109/TNSRE.2021.3082551) · [Dataset license](https://physionet.org/content/hd-semg/view-license/2.0.0/)
 
-[Score your own original session folders](../SCORE-SESSION.md) · [Download the local Python scorer](../downloads/Hyser-Crossday-Python.zip) · [Reference scoring implementation](../crossday_study.py).
+## Try it
 
-[Open the interactive Hyser reader](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) and choose **Personalize across two days**. Pick first-day and second-day folders, or try the two invented days. [Download the offline reader](../downloads/Hyser-Index-Voltage-Reader.zip).
+[Score your own original session folders](../SCORE-SESSION.md) · [Download the local Python scorer](../downloads/Hyser-Crossday-Python.zip) · [Reference scoring code](../crossday_study.py)
+
+[Open the interactive Hyser reader](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) and choose **Personalize across two days**. Pick a first-day and a second-day folder, or try the two invented days. [Download the offline reader](../downloads/Hyser-Index-Voltage-Reader.zip)

@@ -1,40 +1,46 @@
-# Five finger histories beat one. Repeating the last reading had the smallest average miss.
+[The studies](../../README.md) › Study 17 · One finger: new task
 
-A participant follows a prescribed finger combination. Can a model trained on freely chosen presses predict the index sensor 120 ms later? Across the 15 prescribed combinations, the five-history model lowered mean absolute error relative to index history alone in all 12 people whose Random recordings trained the weights. It also lowered error in all four people whose earlier Random recordings had been used only for development. But repeating the current index reading gave the smallest mean absolute error in both groups. The five-history model gave the smallest root mean squared error, which gives larger misses more weight.
+# On a new task, five finger histories beat one, and repeating the last reading beat both
 
-The models, cutoff times, cue groups, outcome measures and analysis were fixed before scoring the N-DoF recordings. Each person contributed the first repetition of all 15 combinations on each of two days. The 12-person group contributed 360 trials and 162,000 cutoffs per method; the four-person group contributed 120 trials and 54,000 cutoffs. The second group’s N-DoF trials were new to this test. Those four people's Random-task scores had already informed the research question. All data come from the same Hyser cohort and apparatus. The four reserved final participants remain unopened. [Prespecified protocol](https://github.com/eliminatenoise/NeuroTranslation/blob/45c1547a8b77a7f38394ff2d2a27735cfec8d75d/benchmarks/hyser-index/prescribed/PROTOCOL.md) · [Original study and task design](https://doi.org/10.1109/TNSRE.2021.3082551)
+The finger forecasts of studies [14](../RESULTS.md) and [16](../whole-hand/README.md) were fitted on freely chosen presses. Here the same people followed prescribed finger combinations instead. For the four test people, the fit on the index sensor's own history forecast its voltage 120 ms ahead with an average miss of **7.992 mV**; the fit on all five finger histories missed by **7.802 mV**, better for all four. But simply repeating the last index reading missed by 7.222 mV, less than either. On the measure that punishes large misses, the order flips: the five-history fit was best and repeating the last reading worst. The twelve people whose free presses fitted the models gave the same pattern, 12 of 12 better with five histories.
+
+The main measure is the plain average miss (mean absolute error), in millivolts of the sensor's output; the measure that punishes large misses is root mean squared error. A study that reports only the fitted models, or only one of the two measures, would miss this.
+
+The models, cutoffs, cue groups, measures and analysis were fixed before any prescribed-combination recording was scored. Each person gave the first repetition of all 15 combinations on each of two days. The twelve fitting people gave 360 trials and 162,000 cutoffs per forecast; the four test people gave 120 trials and 54,000. The four test people's prescribed-combination trials were new to this test, though their free-press scores had already shaped the question. All the data come from the same Hyser group and apparatus. The four people set aside remain unopened. [The plan, fixed before scoring](https://github.com/eliminatenoise/NeuroTranslation/blob/45c1547a8b77a7f38394ff2d2a27735cfec8d75d/benchmarks/hyser-index/prescribed/PROTOCOL.md) · [Original study and task design](https://doi.org/10.1109/TNSRE.2021.3082551)
 
 ## Errors across all prescribed combinations
 
-All entries are in millivolts of index-sensor output. First pool the scheduled windows for each person on each day. Average the two day scores for that person, then weight the people equally. The last-reading forecast has no learned coefficients.
+All entries are in millivolts of the index sensor's output. The forecasts of each person on each day are pooled, the two days averaged for that person, and the people weighted equally. Repeating the last reading has no fitted weights.
 
-| Forecast | MAE, 12 fit participants | RMSE, 12 fit participants | MAE, 4 outside the fit | RMSE, 4 outside the fit |
+| Forecast | Average miss, 12 fitting people | Large misses, 12 fitting people | Average miss, 4 test people | Large misses, 4 test people |
 | --- | ---: | ---: | ---: | ---: |
-| Last reading | 7.372 | 12.932 | 7.222 | 14.212 |
+| Repeat the last reading | 7.372 | 12.932 | 7.222 | 14.212 |
 | Index history | 8.095 | 12.495 | 7.992 | 12.957 |
-| Five histories | 7.894 | 12.172 | 7.802 | 12.655 |
-| Five-sensor summary | 7.977 | 12.338 | 7.863 | 12.792 |
+| Five finger histories | 7.894 | 12.172 | 7.802 | 12.655 |
+| Five sensors, compact | 7.977 | 12.338 | 7.863 | 12.792 |
 
-## When was the index finger cued?
+## Whether the index finger was cued
 
-Eight combinations asked for index-finger contraction. Seven prescribed other fingers. All five transducers kept recording in both cases. “Index uncued” describes the instruction, not an assumption of zero index voltage. The table reports matched MAE in mV, with the gain from five histories calculated before rounding. Positive gain means a smaller error than the index-history model. Brackets show the middle 95% of participant-resampled mean gains.
+Eight combinations asked for the index finger to press; seven asked for other fingers. All five sensors kept recording either way, so "index not cued" describes the instruction, not a voltage of zero. The table gives the matched average miss in mV, with the gain from five histories worked out before rounding; a positive gain means a smaller miss than the index-history fit. The brackets hold the middle 95% of mean gains when people are resampled.
 
-| People | Combinations | Last reading | Index history | Five histories | Five-sensor summary | Five vs index, mV [range] | People improved |
+| People | Combinations | Repeat the last reading | Index history | Five histories | Five sensors, compact | Five against index, mV [range] | People better |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 12 fit | All 15 | 7.372 | 8.095 | 7.894 | 7.977 | +0.201 [+0.147, +0.255] | 12/12 |
-| 12 fit | Index cued | 8.702 | 8.970 | 8.758 | 8.849 | +0.212 [+0.157, +0.267] | 12/12 |
-| 12 fit | Index uncued | 5.851 | 7.095 | 6.906 | 6.981 | +0.189 [+0.126, +0.256] | 11/12 |
-| 4 outside fit | All 15 | 7.222 | 7.992 | 7.802 | 7.863 | +0.190 [+0.124, +0.279] | 4/4 |
-| 4 outside fit | Index cued | 8.562 | 8.951 | 8.743 | 8.815 | +0.208 [+0.125, +0.314] | 4/4 |
-| 4 outside fit | Index uncued | 5.690 | 6.896 | 6.727 | 6.775 | +0.169 [+0.123, +0.238] | 4/4 |
+| 12 fitting | All 15 | 7.372 | 8.095 | 7.894 | 7.977 | +0.201 [+0.147, +0.255] | 12/12 |
+| 12 fitting | Index cued | 8.702 | 8.970 | 8.758 | 8.849 | +0.212 [+0.157, +0.267] | 12/12 |
+| 12 fitting | Index not cued | 5.851 | 7.095 | 6.906 | 6.981 | +0.189 [+0.126, +0.256] | 11/12 |
+| 4 test | All 15 | 7.222 | 7.992 | 7.802 | 7.863 | +0.190 [+0.124, +0.279] | 4/4 |
+| 4 test | Index cued | 8.562 | 8.951 | 8.743 | 8.815 | +0.208 [+0.125, +0.314] | 4/4 |
+| 4 test | Index not cued | 5.690 | 6.896 | 6.727 | 6.775 | +0.169 [+0.123, +0.238] | 4/4 |
 
-Across all 15 combinations, the five-history forecast lowered RMSE relative to repeating the last reading in both cohorts. Among uncued trials alone, repeating the last reading also had the smallest RMSE in the 12-person group; the five-history forecast had the smallest RMSE in the four-person group. A comparison that reports only the learned models, or only one error measure, misses that distinction. Day-specific results and the remaining paired contrasts are available at full precision. [Aggregate results](RESULTS.json)
+Across all 15 combinations the five-history fit had fewer large misses than repeating the last reading, in both groups. On the combinations where the index finger was not cued, repeating the last reading had the fewest large misses in the twelve fitting people, and the five-history fit in the four test people. The results for each day and the other paired comparisons are in the [results file](RESULTS.json), at full precision.
 
-The input and target are released transducer voltages. The comparison leaves upstream filtering delay, live causal availability, the source of cross-finger correlation, and force in newtons unresolved. It does not estimate nerve activity, muscle force or the effect of commanding a device. No N-DoF samples updated the model weights or scaling. [Model inputs and coefficients](../whole-hand/PREDICTOR.md) · [Hyser 2.0.0](https://physionet.org/content/hd-semg/2.0.0/)
+## What it does not show
 
-## Reproduce the two cohort summaries
+The input and the target are released sensor voltages. The delay of upstream filtering, whether the signals could have been available live, where the link between fingers comes from, and the force in newtons stay open. The study estimates no nerve activity, no muscle force and no effect of controlling a device. No prescribed-combination sample changed the models' weights or scaling. [Model inputs and weights](../whole-hand/PREDICTOR.md) · [Hyser 2.0.0](https://physionet.org/content/hd-semg/2.0.0/)
 
-The [Python scorer](../score_prescribed.py) includes the same four forecasts and paired summaries. Keep the `ndof_dataset` directory structure from Hyser 2.0.0 and verify the original files against PhysioNet's checksum index. From the directory containing `score_prescribed.py`, supply your local dataset path. This example selects only first repetitions. It prints cohort summaries and keeps individual session scores in memory.
+## Score the two groups again
+
+The [Python scorer](../score_prescribed.py) holds the same four forecasts and paired summaries. Keep the `ndof_dataset` folder structure of Hyser 2.0.0 and check the original files against PhysioNet's checksum index. From the folder holding `score_prescribed.py`, give the path of your local copy of the dataset. This example takes only first repetitions, prints the group summaries and keeps each session's scores in memory.
 
 ```python
 import hashlib
@@ -57,6 +63,6 @@ for label, members in (("random_fit", people[:12]), ("previous_development", peo
     print(json.dumps({label: summarize_people(days)}, allow_nan=False))
 ```
 
-The four reserved people are outside both selections. [Download the Python scorer](../downloads/Hyser-Crossday-Python.zip) · [Score a single combination](../SCORE-SESSION.md)
+The code's two labels are the twelve fitting people (`random_fit`) and the four test people (`previous_development`); the four people set aside fall outside both. [Download the Python scorer](../downloads/Hyser-Crossday-Python.zip) · [Score a single combination](../SCORE-SESSION.md)
 
 Contains information from Jiang, Dai, Liu and Fan’s Hyser 2.0.0, made available under the Open Data Commons Attribution License. [License](https://physionet.org/content/hd-semg/view-license/2.0.0/) · [PhysioNet platform](https://doi.org/10.1038/s44360-026-00096-z)
