@@ -10,9 +10,9 @@ The study numbers are those of [the studies page](../benchmarks/README.md).
 
 ### EEG-EMG-WristMotion Dataset, version 3
 
-Studies 1 to 3, and the wrist trial example. Recorded and shared by Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz, under CC BY 4.0.
+Studies 1 to 3 and 28, row 29, the wrist trial example, and the browser copy of study 28's models. Recorded and shared by Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz, under CC BY 4.0.
 
-Changed here: pointing trials were selected, the encoder angles decoded, and motion, EEG and forearm EMG features derived for the models.
+Changed here: pointing trials were selected, the encoder angles decoded, and motion, EEG and forearm EMG features derived for the models. Study 28 publishes its three fitted models, with the scales taken from the recordings, and [`interfaces/paired-wrist-browser/`](../interfaces/paired-wrist-browser/README.md) repacks the same fitted numbers for a web browser: all of them keep this credit and the dataset's CC BY 4.0 terms.
 
 The [wrist trial example](../interfaces/wrist-language-motion/README.md) holds one three-second trial of the recordings themselves (participant 41, run 03, block 1, trial 1), under the same licence. Changed there: the interval was selected and the two forearm channels were subtracted.
 
