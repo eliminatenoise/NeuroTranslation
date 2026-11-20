@@ -63,3 +63,14 @@ models/cue-elbow/*.cmd whitespace=cr-at-eol
 # Retain the closing line in the original CC BY 4.0 legal code.
 docs/elbow-cue/DATA-LICENCE.txt whitespace=-blank-at-eof
 models/neurotranslate-0.0/cued-arm/CC-BY-4.0.txt whitespace=-blank-at-eof
+
+docs/arm-transfer/** -text
+models/arm-transfer/** -text
+models/neurotranslate-0.0/arm-transfer/** -text
+docs/papers/arm-transfer/** -text
+docs/arm-transfer/*.cmd whitespace=cr-at-eol
+models/arm-transfer/*.cmd whitespace=cr-at-eol
+# Preserve the original licence text exactly as supplied in the model and readers.
+docs/arm-transfer/CC-BY-4.0.txt whitespace=-blank-at-eof
+models/arm-transfer/CC-BY-4.0.txt whitespace=-blank-at-eof
+models/neurotranslate-0.0/arm-transfer/CC-BY-4.0.txt whitespace=-blank-at-eof

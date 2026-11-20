@@ -1,6 +1,6 @@
 /** Apply fixed R1 parameters to archived, source-qualified R2 packets. */
-import { sha256Hex } from './hash.b65181ca3605f939880df899d5b7729b976114fa704642d0be4827dc0ee42f0e.mjs';
-import { eegReplaySupport, validateEegReplayModel } from './palm-model.b65181ca3605f939880df899d5b7729b976114fa704642d0be4827dc0ee42f0e.mjs';
+import { sha256Hex } from './hash.06cb8cc4b65ef3d687a44a0ea518a15876f5c3f867ccd13aae08a88d46e35362.mjs';
+import { eegReplaySupport, validateEegReplayModel } from './palm-model.06cb8cc4b65ef3d687a44a0ea518a15876f5c3f867ccd13aae08a88d46e35362.mjs';
 
 const {
   OFFSETS, STEP_MS, TOLERANCE_MS, NOMINAL_LEAD_MS, FRAME, ReplayInputError, requireInput,

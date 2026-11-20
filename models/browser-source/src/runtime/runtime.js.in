@@ -472,7 +472,42 @@
 
   const armCues = ['elbow flexion','elbow extension','supination','pronation','hand close','hand open','rest'];
   const armModes = ['still','cue','motion','cue_motion','shared_motion','shared_cue_motion','shuffled_cue_motion'];
-  async function forecastCuedArm(record) {
+  async function forecastGroupArm(record) {
+    const {mode, cue} = record;
+    if (mode === 'cue_median') {
+      if (!armCues.includes(cue) || Object.keys(record).sort().join(',') !== 'cue,domain,mode') {
+        throw new TypeError('The cue median needs a supported instruction and no sensor history.');
+      }
+      const group = await loadGroup('group_arm.readouts');
+      const first = armCues.indexOf(cue)*9;
+      const values = Array.from(group['group_arm.cue_median'].slice(first,first+9));
+      return {mode,horizon_after_cutoff_s:[0.5,1,1.5],channels:['elbow','forearm rotation','index near'],
+              change_native_units:[values.slice(0,3),values.slice(3,6),values.slice(6)]};
+    }
+    if (mode === 'offset_free_linear' || mode === 'offset_free_shared') {
+      const matched = mode === 'offset_free_linear' ? 'cue_motion' : 'shared_cue_motion';
+      const result = await forecastCuedArm({...record, mode:matched}, 'group_arm.readouts', mode);
+      return {...result,mode};
+    }
+    if (mode !== 'calibrated_shared') return forecastCuedArm(record, 'group_arm.readouts');
+    const {calibration, ...ordinary} = record;
+    const result = await forecastCuedArm({...ordinary,mode:'shared_cue_motion'}, 'group_arm.readouts');
+    const summary = calibration?.by_cue?.[cue];
+    if (calibration?.model_id !== '__GROUP_ARM_ID__' || !summary ||
+        Object.keys(summary).sort().join(',')!=='count,median_residual' ||
+        !Number.isSafeInteger(summary.count) || summary.count<0 ||
+        !Array.isArray(summary.median_residual) || summary.median_residual.length!==3 ||
+        !Array.from(summary.median_residual).every(row=>finiteRow(row,3)) ||
+        (!summary.count && summary.median_residual.flat().some(v=>v!==0))) {
+      throw new TypeError('Use a first-run correction for this cue and this fitted group model.');
+    }
+    const fraction=summary.count/(summary.count+6);
+    const corrected=result.change_native_units.map((row,i)=>row.map((v,j)=>v+fraction*summary.median_residual[i][j]));
+    if(!corrected.flat().every(Number.isFinite)) throw new RangeError('The correction exceeds the supported range.');
+    return {...result,mode,change_native_units:corrected};
+  }
+
+  async function forecastCuedArm(record, headGroup='cued_arm.readouts', readoutMode=record.mode) {
     const mode = record.mode;
     if (!armModes.includes(mode)) throw new RangeError('Choose one of the seven arm forecast methods.');
     const useCue = ['cue','cue_motion','shared_cue_motion','shuffled_cue_motion'].includes(mode);
@@ -488,7 +523,7 @@
     }
     let output = Array(9).fill(0);
     if (mode!=='still') {
-      const head = await loadGroup('cued_arm.readouts');
+      const head = await loadGroup(headGroup);
       if (useMotion) {
         const b=record.bins;
         if (!Array.isArray(b)||b.length!==4||!Array.from(b).every(v=>finiteRow(v,6))) throw new TypeError('Use four rows of six finite mechanical readings.');
@@ -501,7 +536,7 @@
           features.push(...encode(core,tokens.map(row=>linear(core,'project',row.map((v,j)=>(v-mu[j])/sd[j])))));
         }
       }
-      const stem='cued_arm.'+mode+'.';
+      const stem='cued_arm.'+readoutMode+'.';
       output=Array.from(head[stem+'bias']);
       features.forEach((v,j)=>{
         const z=(v-head[stem+'mean'][j])/head[stem+'sd'][j];
@@ -608,6 +643,7 @@
   }
 
   async function forecastMovement(record) {
+    if (record?.domain === 'group_arm_change') return forecastGroupArm(record);
     if (record?.domain === 'cued_arm_change') return forecastCuedArm(record);
     if (record?.domain === 'marker_displacement') return forecastPoint(record);
     if (record?.domain === 'right_plate_force') return forecastRightPlate(record);

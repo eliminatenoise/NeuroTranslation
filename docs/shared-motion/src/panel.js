@@ -421,13 +421,39 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener('visibilitychange',()=>{if(document.hidden && listening)endDictation();});
   window.addEventListener('pagehide',()=>{if(listening)endDictation();});
 
+  function displayGroupStudy(){
+    const dataSet=data.groupArmScores, all=dataSet.unseen_person, later=dataSet.after_first_run;
+    if(!all?.models || !later?.models) {
+      byId('group-arm-coverage').textContent='This build contains fitted weights. Held-person results are unavailable in this copy.';
+      byId('group-arm-table').replaceChildren();byId('group-arm-conclusion').textContent='';return;
+    }
+    byId('group-arm-coverage').textContent='The group model fitted '+dataSet.training.eligible_trials+' trials from '+dataSet.training.eligible_people+' people. The assessment used '+all.coverage.trials+' trials from '+all.coverage.people+' other people. The first-run comparison used '+later.coverage.trials+' later trials.';
+    const methods=[['still','No change'],['cue','Cue alone, fitted mean'],['cue_median','Typical movement for the cue'],['s1_shared_cue_motion','Shared encoder fitted on one person'],['shared_motion','Group encoder without the cue'],['wrong_cue','Group encoder given a different cue'],['cue_motion','Group linear fit with cue and motion'],['shuffled_cue_motion','Group fit with shuffled encoder'],['shared_cue_motion','Group fit with the original encoder'],['offset_free_linear','Linear fit without absolute levels'],['offset_free_shared','Shared encoder without absolute levels'],['personal_median','Cue median from the person’s first run'],['calibrated_shared','Group encoder corrected using that first run']];
+    const cell=(study,k)=>Number.isFinite(study.models[k]?.standardized_mae)?study.models[k].standardized_mae.toFixed(3):'—';
+    byId('group-arm-table').replaceChildren(...methods.map(([k,title])=>{
+      const tr=document.createElement('tr'),h=document.createElement('th');h.scope='row';h.textContent=title;tr.append(h);
+      for(const study of [all,later]){const td=document.createElement('td');td.textContent=cell(study,k);tr.append(td);}return tr;
+    }));
+    const formatScore=(study,key)=>cell(study,key);
+    byId('group-arm-conclusion').textContent='Before using a new person’s outcomes, the original single-person encoder averaged '+formatScore(all,'s1_shared_cue_motion')+' and the group encoder averaged '+formatScore(all,'shared_cue_motion')+'. The group cue median reached '+formatScore(all,'cue_median')+'. On later runs the first-run correction lowered shared-model error from '+formatScore(later,'shared_cue_motion')+' to '+formatScore(later,'calibrated_shared')+'. The person’s own first-run cue median scored '+formatScore(later,'personal_median')+'. A dash means that method was not part of the comparison.';
+  }
   async function showArm(token) {
-    const mode = byId('arm-method').value, usesCue=['cue','cue_motion','shared_cue_motion','shuffled_cue_motion'].includes(mode);
-    const usesMotion=!['cue','still'].includes(mode);
+    const pooled=byId('arm-fit').value==='group',selector=byId('arm-method');
+    for(const name of ['cue_median','calibrated_shared','offset_free_linear','offset_free_shared']){const opt=selector.querySelector('option[value="'+name+'"]');opt.hidden=!pooled;opt.disabled=!pooled;}
+    if(!pooled&&['cue_median','calibrated_shared','offset_free_linear','offset_free_shared'].includes(selector.value))selector.value='cue';
+    const mode=selector.value, usesCue=['cue','cue_median','cue_motion','shared_cue_motion','shuffled_cue_motion','calibrated_shared','offset_free_linear','offset_free_shared'].includes(mode);
+    const usesMotion=!['cue','cue_median','still'].includes(mode);
+    byId('arm-study').hidden=pooled;byId('group-arm-study').hidden=!pooled;
+    if(pooled)displayGroupStudy();
+    byId('arm-profile').hidden=mode!=='calibrated_shared';
     const custom=isCustom();
     byId('arm-cue-field').hidden=!usesCue;
     byId('arm-custom-bins').hidden=!(usesMotion && custom);
-    const record={domain:'cued_arm_change',mode};
+    const record={domain:pooled?'group_arm_change':'cued_arm_change',mode};
+    if (mode==='calibrated_shared') {
+      try {record.calibration=JSON.parse(byId('arm-profile-values').value);}
+      catch {throw new Error('Load an invented correction or paste a profile made from an earlier run.');}
+    }
     if (usesCue) {
       record.cue=asArmCue(byId('arm-cue').value);
       if (!record.cue) throw Error('Choose a listed right-arm action, or enter its study name.');
@@ -519,7 +545,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const knee = domain === "knee_angle";
     const arm = domain === "cued_arm_change";
     byId("arm-controls").hidden = !arm;
-    byId("arm-study").hidden = !arm;
+    byId("arm-study").hidden = !arm || byId("arm-fit").value==="group";
+    byId("group-arm-study").hidden = !arm || byId("arm-fit").value!=="group";
     const point = domain === "marker_displacement";
     byId("point-controls").hidden = !point;
     byId("point-study").hidden = !point;
@@ -630,6 +657,9 @@ document.addEventListener("DOMContentLoaded", () => {
     selectDomain();
     byId("arm-cue").focus();byId("arm-cue").select();
   });
+  byId("arm-fit").addEventListener("change",selectInput);
+  byId("arm-profile-values").addEventListener("input",()=>clearResults("Run the forecast with this earlier-run profile."));
+  byId("arm-profile-practice").addEventListener("click",()=>{byId("arm-profile-values").value=JSON.stringify(data.groupArmExample.calibration);clearResults("Invented correction loaded. Run the forecast.");});
   byId("arm-run").addEventListener("click",runCustom);
   byId("arm-method").addEventListener("change",selectInput);
   byId("arm-cue").addEventListener("input",()=>clearResults("Run the forecast for this instruction."));
@@ -692,11 +722,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (model.checkpointSha256 !== "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179") {
         throw new Error("The checkpoint differs from the one used for these comparisons.");
       }
-      if (model.movementCheckpointSha256 !== "ab3db00e8c048953bdc12d8c978e3cabdf1f2fae7dcfe2f6f53fe8aed724ddfd") {
+      if (model.movementCheckpointSha256 !== "901922e1db489a06cc3252212232b7df65784128695f86f84a751726b9f0521c") {
         throw new Error("The movement checkpoint differs from the studied model.");
       }
       studyTable();
       picker.disabled = source.disabled = false;
+      if (location.hash === "#arm-transfer") {picker.value="cued_arm_change";byId("arm-fit").value="group";byId("arm-method").value="cue_median";}
       if (location.hash === "#cued-arm") picker.value = "cued_arm_change";
       if (location.hash === "#point-motion") picker.value = "marker_displacement";
       if (location.hash === "#right-plate") picker.value = "right_plate_force";

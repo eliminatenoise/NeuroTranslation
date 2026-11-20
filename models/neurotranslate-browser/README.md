@@ -1,5 +1,7 @@
 # Forecast movement from one recording
 
+Run `node predict.mjs group-arm-example.json` to try the shared group model with an invented first-run correction. Use `domain: "group_arm_change"` for the group methods. `cue_median` needs only a cue; `calibrated_shared` also needs a model-matched profile for that cue. [Full inputs and scores](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/arm-transfer)
+
 Run `node predict.mjs arm-example.json` to forecast three instrument readings after one of seven right-arm cues. The new record uses `domain: "cued_arm_change"`. Methods can take a cue, four bins of sensor readings, or both. [Input schema, source, units and results](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/cued-arm)
 
 Run `node predict.mjs point-example.json` for the next 200 milliseconds of one marker’s movement. The input has `domain: "marker_displacement"`, nine laboratory XYZ positions in millimetres spaced 50 milliseconds apart in `positions_mm` and a `mode` of `shared`, `shuffled`, `linear`, `velocity`, `previous` or `stationary`. The output vector gives signed X, Y and Z displacements in millimetres. [Study, source and example](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/point-motion)

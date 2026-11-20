@@ -2,7 +2,9 @@
 
 ## Predict without fitting
 
-Python and NumPy run all examples. Use the included `movement-weights.npz` (SHA-256 `ab3db00e8c048953bdc12d8c978e3cabdf1f2fae7dcfe2f6f53fe8aed724ddfd`). Run `python predict.py cued-arm/example.json` to see the cued right-arm forecast. [Source, input, licence and study reproduction](cued-arm/README.md)
+Python and NumPy run all examples. Use the included `movement-weights.npz` (SHA-256 `901922e1db489a06cc3252212232b7df65784128695f86f84a751726b9f0521c`). Run `python predict.py arm-transfer/example.json` to forecast from the group median for a known arm cue. [Fitting, local corrections and assessment on new people](arm-transfer/README.md)
+
+The earlier single-person arm readouts first appeared in checkpoint `ab3db00e8c048953bdc12d8c978e3cabdf1f2fae7dcfe2f6f53fe8aed724ddfd`. Run `python predict.py cued-arm/example.json` to see the cued right-arm forecast. [Source, input, licence and study reproduction](cued-arm/README.md)
 
 The single-marker forecast first appeared in checkpoint `eac2b0e49ab68ce6d6a2ff2f09a804f2d41fa3af96d632b7bbbb02f73871bed0`. Run `python predict.py point-motion/example.json` to forecast one skin marker’s movement in three dimensions. [Point inputs, fitting and tested body locations](point-motion/README.md)
 

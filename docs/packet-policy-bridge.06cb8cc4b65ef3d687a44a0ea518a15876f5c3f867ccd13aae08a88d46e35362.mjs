@@ -1,7 +1,7 @@
 /** Packet v1 -> policy descriptor v1. No pairing, conversion or model execution. */
-import { summarizeObservations, toPlainSnapshot, validateDescriptor } from './compat-policy.b65181ca3605f939880df899d5b7729b976114fa704642d0be4827dc0ee42f0e.mjs';
-import { canonicalJson, fingerprint } from './hash.b65181ca3605f939880df899d5b7729b976114fa704642d0be4827dc0ee42f0e.mjs';
-import { MEASUREMENTS } from './vocabulary.b65181ca3605f939880df899d5b7729b976114fa704642d0be4827dc0ee42f0e.mjs';
+import { summarizeObservations, toPlainSnapshot, validateDescriptor } from './compat-policy.06cb8cc4b65ef3d687a44a0ea518a15876f5c3f867ccd13aae08a88d46e35362.mjs';
+import { canonicalJson, fingerprint } from './hash.06cb8cc4b65ef3d687a44a0ea518a15876f5c3f867ccd13aae08a88d46e35362.mjs';
+import { MEASUREMENTS } from './vocabulary.06cb8cc4b65ef3d687a44a0ea518a15876f5c3f867ccd13aae08a88d46e35362.mjs';
 
 export const BRIDGE = Object.freeze({ version: '0.1.0-candidate', packetVersion: 1, descriptorVersion: 1 });
 export const LIMITS = Object.freeze({ maxIdentityChars: 2000, maxStreams: 64, maxSamples: 50000 });

@@ -5,7 +5,7 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.b65181ca3605f939880df899d5b7729b976114fa704642d0be4827dc0ee42f0e.css">
+  <link rel="stylesheet" href="style.06cb8cc4b65ef3d687a44a0ea518a15876f5c3f867ccd13aae08a88d46e35362.css">
 </head>
 <body>
   <header class="topbar">
@@ -24,6 +24,7 @@
       <div>
         <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p>
         <nav class="section-links wrist-links" aria-label="Study recordings">
+          <a href="./arm-transfer/index.html" data-pages-href="./arm-transfer/index.html">Forecast movement in a new person</a>
           <a href="./shared-motion/index.html#cued-arm" data-pages-href="./shared-motion/index.html#cued-arm">Give the model an arm instruction</a>
           <a href="./walking-landmarks/index.html" data-pages-href="./walking-landmarks/index.html">Try the six-point walking forecast</a>
           <a href="#study-readers">Choose a study reader</a>
@@ -94,6 +95,16 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="finger-transfer" aria-labelledby="cohort-choice"><h3 id="cohort-choice">A different person’s finger movement</h3><p>Learn from four people, calibrate on a fifth, then compare the cue with the recorded brain signal.</p><a href="finger-transfer/index.html">Run the five-person comparison</a></article>
+      <article class="study-choice-card" data-study-key="arm-transfer" aria-labelledby="reader-arm-transfer">
+        <h3 id="reader-arm-transfer">Will the arm forecast work for someone new?</h3>
+        <p>Seven people supplied the training examples. Compare forecasts on five other people who saw the same cues to bend an elbow, turn the forearm, open or close the hand, or rest.</p>
+        <nav class="section-links" aria-label="Arm forecasts across people">
+          <a href="./arm-transfer/index.html" data-pages-href="./arm-transfer/index.html">Try the trained Transformer and cue-only forecast</a>
+          <a href="./shared-motion/index.html#arm-transfer" data-pages-href="./shared-motion/index.html#arm-transfer">Try the shared model and first-run correction</a>
+          <a href="./papers/arm-transfer/index.html" data-pages-href="./papers/arm-transfer/index.html">Read the study</a>
+          <a href="https://eliminatenoise.github.io/Interoceptomics/scalp-and-arm/">Compare scalp and arm readings across seven people</a>
+        </nav>
+      </article>
       <article class="study-choice-card" data-study-key="cued-arm" aria-labelledby="reader-cued-arm">
         <h3 id="reader-cued-arm">A cue to move the right arm</h3>
         <p>Give the model an instruction from a seven-choice experiment. See how it expects the elbow, forearm and index finger sensors to change. A separate forecast lets you add a scalp electrode while keeping the elbow history fixed.</p>
@@ -328,6 +339,6 @@
     document.getElementById("study-choice-label").hidden = false;
     showStudy();
   </script>
-  <script type="module" src="app.b65181ca3605f939880df899d5b7729b976114fa704642d0be4827dc0ee42f0e.mjs"></script>
+  <script type="module" src="app.06cb8cc4b65ef3d687a44a0ea518a15876f5c3f867ccd13aae08a88d46e35362.mjs"></script>
 </body>
 </html>
