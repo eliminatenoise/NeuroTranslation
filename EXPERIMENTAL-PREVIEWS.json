@@ -3798,18 +3798,23 @@
     },
     {
       "path": "docs/shared-motion/README.md",
-      "bytes": 5261,
-      "sha256": "014caf15bbc3fcf659134b2edf50b6cbd7acc2aa758dbee74d6a6a05ff5cd143"
+      "bytes": 7188,
+      "sha256": "345fc9413c45a3af6f1dba3d6cddae9ebce442e37a2967d573cbe1bebd856ef6"
     },
     {
       "path": "docs/shared-motion/build.py",
-      "bytes": 2067,
-      "sha256": "80d4f028f203d6a90be3502a1c6926a117120d612f1f98ca2be4b891cceef88d"
+      "bytes": 2668,
+      "sha256": "7b5b56fc9ee9ed66cec035d34b875653052fa0ebb935eeafec1ee487fd0fad24"
     },
     {
       "path": "docs/shared-motion/index.html",
-      "bytes": 82078,
-      "sha256": "1c8eaed7b3f1a595fd202b968993da9eee66845938063746bbb369b054e8e258"
+      "bytes": 129942,
+      "sha256": "ae01be6cb100a0ea6032bf1c9b3f077911539cb6c8136fc9dd4caae55dc03b48"
+    },
+    {
+      "path": "docs/shared-motion/src/angular-scores.json",
+      "bytes": 251,
+      "sha256": "512b857c89946bec1f1d225a1ca97b2bbb7ff035d8db4e7125ab9d587bb4a5d0"
     },
     {
       "path": "docs/shared-motion/src/derive.py",
@@ -3823,23 +3828,23 @@
     },
     {
       "path": "docs/shared-motion/src/panel.css",
-      "bytes": 5871,
-      "sha256": "dfaefd6837f0c8d6042cab2c6317533e8ed180992987ddf9f8e961ee26641bd9"
+      "bytes": 6304,
+      "sha256": "654ff53a52f3a3b7c627ef24f5cddbfb587926d041a3d467e0f8fab88e860dea"
     },
     {
       "path": "docs/shared-motion/src/panel.html",
-      "bytes": 9222,
-      "sha256": "0173a30b8e04c57b960be084e36ece4cf39b972273f9708c515d44e54256cc9e"
+      "bytes": 15131,
+      "sha256": "720c69575dd8ac7687b737969f7dacc67e155b12cf3e123573e0e4c84a6f3509"
     },
     {
       "path": "docs/shared-motion/src/panel.js",
-      "bytes": 12446,
-      "sha256": "2df319ab9c2d7e877053b124fa38c9f019b5d4a22b8b8711bf5f8fba9d459a53"
+      "bytes": 18688,
+      "sha256": "52363e044c2c1f06da5de08a274077fe467094d94c43065f5568783557e62963"
     },
     {
       "path": "docs/shared-motion/src/sources.json",
-      "bytes": 1825,
-      "sha256": "aade48cb357dedbd125cce641b840bb2ad7c027986403f480822da37775940f3"
+      "bytes": 2729,
+      "sha256": "6b64477da82a9b2816d34a80a66f26bfd98bc413b2806ec619bf689a101ff76b"
     },
     {
       "path": "docs/style.6889e2c9594ee2881ee148b18aa7807ffab243c2024a6b241e611b7dfc896f10.css",
@@ -4208,8 +4213,8 @@
     },
     {
       "path": "models/README.md",
-      "bytes": 4505,
-      "sha256": "03732af20e708dc7dba6933c63c9549c2384812190a6f5bd254d440638d0aed0"
+      "bytes": 4857,
+      "sha256": "6f100cb5f5f4df93b9b0d4df920d7a75ef637b1799d3df52ae275602257ceca0"
     },
     {
       "path": "models/figures/plot_transfer.py",
@@ -4225,6 +4230,11 @@
       "path": "models/figures/transfer-comparison.png",
       "bytes": 151045,
       "sha256": "b710006dea69bfd6c7caa54201a2c3750064adf5e298db7875f14e2744fcd88d"
+    },
+    {
+      "path": "models/movement-browser.zip",
+      "bytes": 61462,
+      "sha256": "fec86de44d2a870a6591fe9bec0b6e2a16c3b5a727b9990deab1534f84803c93"
     },
     {
       "path": "models/neurotranslate-0.0.zip",
@@ -4380,6 +4390,66 @@
       "path": "models/neurotranslate-0.0/wrist-source/features.py",
       "bytes": 3060,
       "sha256": "6becd772f804ac12fba2e5118282faa8ac72da102f0153c647f4d17b83931c7d"
+    },
+    {
+      "path": "models/neurotranslate-browser/CC0-1.0.txt",
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "path": "models/neurotranslate-browser/CDLA-Permissive-2.0.txt",
+      "bytes": 2354,
+      "sha256": "4531a67d443284d93ffed0803df5b10634aff21c3d77e381f2d48af01d875868"
+    },
+    {
+      "path": "models/neurotranslate-browser/DATA-CREDITS.md",
+      "bytes": 3151,
+      "sha256": "aabfb0ea49ca23ec2eb55eb41dcf0c08ab22fafaa9cb26c698800f950a1ec286"
+    },
+    {
+      "path": "models/neurotranslate-browser/NOTICE.md",
+      "bytes": 2873,
+      "sha256": "c7b56b030a40867d70f9691c5ddd4524f77a2b6410e85355d0a80f1a32194c55"
+    },
+    {
+      "path": "models/neurotranslate-browser/README.md",
+      "bytes": 7115,
+      "sha256": "d9721db54ffa8f5a5d2e142e6221b61f4fcafab4be57f47170eb6713d97c5151"
+    },
+    {
+      "path": "models/neurotranslate-browser/SHA256SUMS",
+      "bytes": 890,
+      "sha256": "5c5f8d2060691334e1098c35f4b9192e9cc14c503e7bdff594757d8e2069d9e4"
+    },
+    {
+      "path": "models/neurotranslate-browser/SPATIAL-API.md",
+      "bytes": 4765,
+      "sha256": "1fb331ef51229bbe995412d868bb14cc8dacf5be5cb494e8aa3a69478a2aa91a"
+    },
+    {
+      "path": "models/neurotranslate-browser/angular-example.json",
+      "bytes": 4569,
+      "sha256": "f65c333e973c93bd6fec7f97c403085c00149b0de689419aa961a1eea74af221"
+    },
+    {
+      "path": "models/neurotranslate-browser/examples.json",
+      "bytes": 2025,
+      "sha256": "3cf55f662b5b661a9c4b20ba47e4b77639c96f743cb62efb3f10972d5d18b57c"
+    },
+    {
+      "path": "models/neurotranslate-browser/model.json",
+      "bytes": 7268,
+      "sha256": "0c83830ac3eee8cadf3f7b5ddf461a78466230217b54760989f11c764e4bbae8"
+    },
+    {
+      "path": "models/neurotranslate-browser/predictor.mjs",
+      "bytes": 164,
+      "sha256": "e667564c4545db1369610d31f5e25d59e17613fa465492f32f784e1618f08a51"
+    },
+    {
+      "path": "models/neurotranslate-browser/shared-motion.js",
+      "bytes": 71649,
+      "sha256": "889dc52d36058497925836162d612373320afe865b7b1735bda09dd7781f490a"
     },
     {
       "path": "models/shared-motion-browser.zip",
@@ -5308,6 +5378,7 @@
       "docs/shared-motion/README.md",
       "docs/shared-motion/build.py",
       "docs/shared-motion/index.html",
+      "docs/shared-motion/src/angular-scores.json",
       "docs/shared-motion/src/derive.py",
       "docs/shared-motion/src/inputs.json",
       "docs/shared-motion/src/panel.css",
@@ -5372,6 +5443,7 @@
       "models/figures/plot_transfer.py",
       "models/figures/transfer-comparison.pdf",
       "models/figures/transfer-comparison.png",
+      "models/movement-browser.zip",
       "models/neurotranslate-0.0.zip",
       "models/neurotranslate-0.0/CDLA-Permissive-2.0.txt",
       "models/neurotranslate-0.0/LICENSE",
@@ -5403,6 +5475,18 @@
       "models/neurotranslate-0.0/wrist-source/decode_source.py",
       "models/neurotranslate-0.0/wrist-source/extract_wrist.py",
       "models/neurotranslate-0.0/wrist-source/features.py",
+      "models/neurotranslate-browser/CC0-1.0.txt",
+      "models/neurotranslate-browser/CDLA-Permissive-2.0.txt",
+      "models/neurotranslate-browser/DATA-CREDITS.md",
+      "models/neurotranslate-browser/NOTICE.md",
+      "models/neurotranslate-browser/README.md",
+      "models/neurotranslate-browser/SHA256SUMS",
+      "models/neurotranslate-browser/SPATIAL-API.md",
+      "models/neurotranslate-browser/angular-example.json",
+      "models/neurotranslate-browser/examples.json",
+      "models/neurotranslate-browser/model.json",
+      "models/neurotranslate-browser/predictor.mjs",
+      "models/neurotranslate-browser/shared-motion.js",
       "models/shared-motion-browser.zip",
       "models/shared-motion-browser/CC0-1.0.txt",
       "models/shared-motion-browser/CDLA-Permissive-2.0.txt",
