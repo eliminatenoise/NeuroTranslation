@@ -1,0 +1,19 @@
+{
+  "dataset": "HoloAssist, ICCV 2023",
+  "edition": "data-annotation-trainval-v1_1, data-splits-v1_2, hands.tar",
+  "subset": "50 selected official train-role recordings, 40 accessed, 10 reserve untouched. Right hand only. No video, audio, private auth or actuation.",
+  "sources": {
+    "source_split": "1be4ec20c77da82a73a14ecbea8f9097e4240ea44596ed80c1678ba076529cac",
+    "source_extraction": "877559c20717e95a0add69e476a8c01cc03b9aa46d02a5fbfc74a3902b8ca52c",
+    "independent_review": "988e8b79c2410ac500016b707498547d081df80483afbb9ea922a0a2416eb2ac",
+    "glossary": "2dfd29ae05c509025bd5c1a74a940a2a933b78c6c44fe2f94030d6fb69709741",
+    "glossary_revision": 39,
+    "programme": "bb49233fac69b0308fa04db2356b4c3b2c20717d9b95185cefe063661e13510c",
+    "local_execution_policy": "5a04355382a3e2648e283c9862872074d695ed520362fade61fa5b6c36cba823"
+  },
+  "fit_sha256": "8b1d2495f030e09f6e63c9e14f4b50bba79d968d9bd8e0c6b41ba72449b717f1",
+  "assessment_seal_sha256": "8ca9ee69a26f7e5ff541130d2ae0c740cb5b2af5cd47774c589b7f4ea013ed72",
+  "reviewed_scores": 4400,
+  "independent_scorer_max_abs_error": 3.3e-07,
+  "glossary_scope": "Uses ordinary hand, metric and text-retrieval labels. No new field name coined."
+}
