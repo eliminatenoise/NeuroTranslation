@@ -1,0 +1,50 @@
+{
+  "initial_state_sha256": "9c5a2e41bffe6acb8a500669afccd9545ca8852e9f48047f33976c596e2e17a6",
+  "final_state_sha256": "17a7d9b4ba350e7d65c939a6f3f3a148bc04119c63955b2e9feae6b5607041c8",
+  "train_seconds": 0.38566549902316183,
+  "optimizer_updates": 400,
+  "loss_trace_sha256": "d07f73dc534b6f98b3a26911ddb31d871e997138468a6c99b6b0598227345ae4",
+  "initial_loss": 0.264141708612442,
+  "last_loss": 0.2053479701280594,
+  "gradients": {
+    "wrist": {
+      "step_index": 1,
+      "after_updates": 1,
+      "common_parameter": "blocks.0.qkv.weight",
+      "common_l2": 0.0009017328266054392,
+      "head_l2": [
+        0.5632023215293884,
+        0.0
+      ]
+    },
+    "rat": {
+      "step_index": 1,
+      "after_updates": 1,
+      "common_parameter": "blocks.0.qkv.weight",
+      "common_l2": 0.0015959901502355933,
+      "head_l2": [
+        0.0,
+        0.4448542296886444
+      ]
+    }
+  },
+  "seed": 27183,
+  "arm": "joint",
+  "fitted_parameter_slots": 5234,
+  "exposures": {
+    "wrist": {
+      "opportunities": 12800,
+      "unique_rows": 606,
+      "unique_groups": 10,
+      "ordered_row_index_sha256": "cb6ce090bc6a80a4762172e9073258bf7d170a4d58eb75dd14698be8e8f0ddbc"
+    },
+    "rat": {
+      "opportunities": 12800,
+      "unique_rows": 188,
+      "unique_groups": 24,
+      "ordered_row_index_sha256": "00f61a85ee15c90ecff471e3e740988b4c6c3d472c78014d2c4f8e73840f496a"
+    }
+  },
+  "batch_indices_sha256": "75e47c94f0fd169cc01941e446038164fcb2f6b1db7b7ebae89979ececbafe4c",
+  "checkpoint_sha256": "cb4e62f91486023af58bb70043eee24f38f848b952d667ce8dd5d226c28d0509"
+}

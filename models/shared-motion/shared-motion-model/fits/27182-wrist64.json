@@ -1,0 +1,29 @@
+{
+  "initial_state_sha256": "9194ad9ae702e94f37e438c799e9135dcd294658ba013d48f6184120c671a3ce",
+  "final_state_sha256": "fefe445a588d08e6b7aac704bdd0694d1c66a70ea661c14e8e7c839650896d5a",
+  "train_seconds": 0.363184587971773,
+  "optimizer_updates": 400,
+  "loss_trace_sha256": "b2c587b90b828236d4cb9297972c764fc8c1ed86694e3d012444fce90ac93429",
+  "initial_loss": 0.13019803166389465,
+  "last_loss": 0.09090129286050797,
+  "gradients": {},
+  "seed": 27182,
+  "arm": "wrist64",
+  "fitted_parameter_slots": 5234,
+  "exposures": {
+    "wrist": {
+      "opportunities": 25600,
+      "unique_rows": 606,
+      "unique_groups": 10,
+      "ordered_row_index_sha256": "abd34fbc6c93768978c2cc5117c1abb2511156f5c5b9c0f1b305919ddd9de5af"
+    },
+    "rat": {
+      "opportunities": 0,
+      "unique_rows": 0,
+      "unique_groups": 0,
+      "ordered_row_index_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "batch_indices_sha256": "abd34fbc6c93768978c2cc5117c1abb2511156f5c5b9c0f1b305919ddd9de5af",
+  "checkpoint_sha256": "9f139c3c1315633008f910f30cbff60153dda8d50b2a44bb19e2ea3a281db89d"
+}
