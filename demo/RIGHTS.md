@@ -1,3 +1,5 @@
-Project-owned application code is released under CC0-1.0; see LICENSE.
+The app's own code is dedicated to the public domain under CC0 1.0; see [LICENSE](LICENSE).
 
-Dataset references retain the source and licence shown for each entry. Imported files remain governed by their original rights. The application code licence grants no rights to those recordings or to separately supplied anatomical assets.
+A file you open in the app stays under the terms it came with. The app's licence gives no rights to any recording, nor to anatomical assets supplied separately. The dataset cards in the app show each dataset's source and licence.
+
+Who made each dataset used in this project, its licence and the credit it is owed: [docs/RIGHTS.md](../docs/RIGHTS.md).
