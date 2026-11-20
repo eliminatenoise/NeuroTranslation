@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forecast the next neck reading · NeuroTranslate 0.0</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f7f2;color:#162923;font:16px/1.58 system-ui,Arial,sans-serif}main{max-width:980px;margin:auto;padding:28px clamp(16px,4vw,56px) 55px}nav{display:flex;gap:7px 20px;flex-wrap:wrap}a{color:#175c4a;text-underline-offset:.2em}h1,h2,h3{line-height:1.18;letter-spacing:-.035em}h1{font-size:clamp(2.45rem,7vw,4.6rem);max-width:15ch;margin:.6em 0 .28em}h2{font-size:1.62rem;margin:.2em 0 .5em}p{max-width:72ch}section{border-top:1px solid #a2b8a8;padding:24px 0}header{padding:8px 0 18px}.lead{font-size:1.18rem}label{font-weight:650;display:block}.channel{display:grid;grid-template-columns:minmax(7.8rem,.68fr) 2fr;gap:12px;align-items:center;margin:10px 0}.channel input{width:100%;font:inherit;color:inherit;border:1px solid #839e91;padding:9px;border-radius:3px;background:white}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}button{font:inherit;font-weight:650;cursor:pointer;border-radius:4px;background:#17523f;color:white;padding:9px 18px;border:1px solid #17523f}button.secondary{background:transparent;color:#17523f}.table{overflow-x:auto}table{border-collapse:collapse;width:100%;max-width:820px;font-variant-numeric:tabular-nums}th,td{border-bottom:1px solid #c2cec5;padding:.52em .35em;text-align:right}th:first-child,td:first-child{text-align:left}output{display:block;min-height:1.8em;font-weight:600;margin:10px 0}.strong{font-weight:650}.detail{color:#395449}input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #d17825;outline-offset:2px}@media(max-width:580px){.channel{display:block}.channel label{margin-bottom:3px}td,th{font-size:.92rem}.lead{font-size:1.05rem}}
+</style><main>
+<nav aria-label="Related models"><a href="https://eliminatenoise.github.io/NeuroTranslation/">NeuroTranslation</a><a href="https://eliminatenoise.github.io/NeuroTranslation/cervical-forecast/">Try the Transformer</a><a href="https://eliminatenoise.github.io/Interoceptomics/cervical-signals/">Locate the electrodes</a></nav>
+<header><h1>Forecast the next neck reading</h1>
+<p class="lead">An electrode on the back of the neck measures a voltage. If you know its last reading and what four other electrodes picked up, how close can you get to its reading a few milliseconds later?</p>
+<p>In the original study, people lay still while researchers recorded their responses to a timed event at the left median nerve. The neck electrode sat over the sixth cervical vertebra. Its voltage was measured against a second electrode on the back, over T6. The electrodes can pick up several sources of electricity, including nearby muscles and the heart.</p></header>
+<section><h2>Give the models an example</h2>
+<p>Each box holds eight invented voltages in microvolts (µV). The first five are one-millisecond averages from 15 to 10 milliseconds before the event. The last three cover 5 to 8 milliseconds after it. The gap has no input. Try changing the last three numbers in the axilla row. Only one forecast uses that electrode.</p>
+<form id="inputs" novalidate><div id="channels"></div><div class="actions"><button>Calculate forecasts</button><button type="button" class="secondary" id="reset">Restore example</button></div></form>
+<output id="notice" aria-live="polite"></output><div class="table"><table><thead><tr><th scope="col">Method</th><th scope="col">Forecast change (µV)</th></tr></thead><tbody id="values"></tbody></table></div>
+<p class="detail">Each forecast is the mean neck voltage from 12 to 14 milliseconds after the event, relative to the five-millisecond baseline before it. A positive forecast means a more positive reading against T6. The robust models start from the most recent neck reading and learn a correction. Large training errors have less influence on that correction.</p>
+</section><section><h2>What happened with recorded signals?</h2><p>Four people supplied the training data. The development column uses each person in turn as the evaluation case, with only the other three used to fit the model. The second column uses six different people, after the final models had been fixed. Each person contributes 80 events. Smaller errors are better.</p><div class="table"><table><thead><tr><th scope="col">Method</th><th scope="col">Development error (µV)</th><th scope="col">New people (µV)</th></tr></thead><tbody id="scores"></tbody></table></div>
+<p id="finding"></p><p>The wrong-event comparison gives the full model an axillary recording from a different event in the same person. The true neck outcome stays with its original event. Comparing those errors asks how much the particular pairing mattered. The experiment measured electrical responses in people lying still. There are no joint positions or movement targets in these recordings.</p></section>
+<nav aria-label="Sources"><a href="https://eliminatenoise.github.io/NeuroTranslation/papers/cervical-forecast/">Read the study</a><a href="https://doi.org/10.1371/journal.pbio.3002828">Original experiment</a><a href="https://doi.org/10.18112/openneuro.ds004388.v1.0.0">OpenNeuro recordings</a></nav>
+<script type="application/json" id="study">@@DATA@@</script><script>
+const data=JSON.parse(document.getElementById("study").textContent);
+const model=data.model,names=model.channels, modes=Object.keys(data.labels);
+const sites={Biceps:"Axilla (Biceps)",SC6:"Neck (SC6)",Thumb:"Thumb muscle",CP4:"Scalp (CP4)",ECG:"Heart (ECG)"};
+const $=id=>document.getElementById(id);
+function estimate(mode, inputs) {
+  if(mode==="event_median")return model.event_median;
+  const centered=Object.fromEntries(Object.entries(inputs).map(([name,row])=>{
+    const base=row.slice(0,5).reduce((a,b)=>a+b,0)/5;
+    return [name,row.map(v=>v-base)];
+  }));
+  const anchor=centered.SC6[7];
+  if(mode==="persistence")return anchor;
+  if(mode==="median_innovation")return anchor+model.median_innovation;
+  const sites=mode==="neck"?["SC6"]:mode==="other_sites"?["SC6","Thumb","CP4","ECG"]:names;
+  const fit=model.fits[mode];
+  let v=fit.bias;
+  for(let i=0;i<8;i++)sites.forEach((site,j)=>{
+    const k=i*sites.length+j;
+    const z=(centered[site][i]-fit.center[k])/fit.scale[k];
+    v+=Math.min(8,Math.max(-8,z))*fit.coef[k];
+  });
+  return anchor+fit.target_center+fit.target_scale*v;
+}
+function addRow(tbody,label, values) {
+  const row=document.createElement("tr"), th=document.createElement("th");
+  th.scope="row"; th.textContent=label; row.append(th);
+  for(const value of values){const td=document.createElement("td");td.textContent=value;row.append(td);}
+  tbody.append(row);
+}
+for(const name of names){
+  const div=document.createElement("div"), label=document.createElement("label"), input=document.createElement("input");
+  div.className="channel";input.id="in-"+name;label.htmlFor=input.id;label.textContent=sites[name];div.append(label,input);$("channels").append(div);
+}
+function show(){
+  $("values").replaceChildren();
+  try{
+    const obj={};
+    for(const name of names){
+      const fields=$("in-"+name).value.split(",");
+      const vals=fields.map(Number);
+      if(fields.length!==8||fields.some(x=>!x.trim())||!vals.every(Number.isFinite))throw Error(sites[name]+" needs eight finite numbers separated by commas.");
+      obj[name]=vals;
+    }
+    const out=modes.filter(m=>m!=="wrong_event").map(m=>estimate(m,obj));
+    if(!out.every(Number.isFinite))throw Error("The voltages exceed the numerical range.");
+    out.forEach((v,i)=>addRow($("values"),data.labels[modes[i]],[v.toFixed(3)]));
+    $("notice").textContent="Forecasts for the readings above.";
+  }catch(e){$("notice").textContent=e.message;}
+}
+function reset(){for(const n of names)$("in-"+n).value=data.example.readings_uV[n].join(", ");show();}
+$("inputs").addEventListener("submit",event=>{event.preventDefault();show();});
+$("inputs").addEventListener("input",()=>{$("values").replaceChildren();$("notice").textContent="Readings changed. Calculate the new forecasts.";});
+$("reset").addEventListener("click",reset);
+for(const key of modes)addRow($("scores"),data.labels[key],[data.dev.macro[key].mae_uV.toFixed(2),data.held.macro[key].mae_uV.toFixed(2)]);
+$("finding").textContent=data.finding;
+reset();
+</script></main></html>

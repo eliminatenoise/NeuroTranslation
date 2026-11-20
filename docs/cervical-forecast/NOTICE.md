@@ -1,0 +1,5 @@
+# Credits and licence
+
+Birgit Nierula, Tilman Stephani, Merve Kaptan, André Moruaux, Burkhard Maess, Gabriel Curio, Vadim V. Nikulin and Falk Eippert released the development recordings in OpenNeuro ds004388 version 1.0.0 under CC0. The original acquisition study describes the skin electrodes, voltage references and stimulus protocol. [Dataset](https://doi.org/10.18112/openneuro.ds004388.v1.0.0) · [Publisher metadata and licence](https://github.com/OpenNeuroDatasets/ds004388/blob/ab5f0cb559249cb6d82b6f763767c6fe99292886/dataset_description.json) · [Research article](https://doi.org/10.1371/journal.pbio.3002828)
+
+NeuroTranslation fitted new models to selected windows from those recordings, calculated comparison errors, and created the synthetic example, reader and diagrams. To the extent of its rights, the project dedicates its original contributions to the public domain under CC0 1.0 Universal. The editable curves and parity fixtures are synthetic. The package contains fitted weights and aggregate results. [CC0 legal text](CC0.txt)

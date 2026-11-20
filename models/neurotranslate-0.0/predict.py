@@ -161,6 +161,10 @@ def forecast_population(cutoff_s, prior_time_s, prior_xy_cm, mode, checkpoint=DE
 
 
 def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
+    if record.get("domain") == "cervical_voltage":
+        from cervical.forecast import predict as predict_voltage, read_model
+        model = read_model(Path(checkpoint).parent / "cervical" / "model.json")
+        return predict_voltage(record, model)
     if record.get("domain") == "early_signal_change":
         from scalp_residual import forecast as early_forecast
         config, weights = read_checkpoint(checkpoint)
@@ -218,7 +222,7 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path, help="JSON right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
+    parser.add_argument("input", type=Path, help="JSON cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
     args = parser.parse_args()
     try:

@@ -1,5 +1,7 @@
 # Predict and reproduce
 
+For the neck-voltage forecast, run `python predict.py cervical/example.json` with NumPy installed. [Fit and score the cervical study](cervical/README.md).
+
 ## Predict without fitting
 
 Python and NumPy run all examples. Use the included `movement-weights.npz` (SHA-256 `6a05e06ecbf0eadb4524369d9089847813763d0d2a3c1a49bdd1e4bf295e4864`). Run `python predict.py scalp-residual/example.json` to forecast using invented arm, scalp and eye readings. [Source and reproduction](scalp-residual/README.md)
