@@ -6,7 +6,7 @@ A gauge between thumb and forefinger already says how hard someone is pinching. 
 
 Every error here is in % of the person's hardest squeeze that day (their maximum voluntary contraction, MVC). The main measure is the plain average miss (mean absolute error); the measure that punishes large misses (root mean squared error) comes second. EMG is electrical activity of muscle, picked up on the skin: a recording of muscle, not of nerve. A *straight-line fit* is a weighted sum of its inputs, here a ridge regression.
 
-The same-trial EMG also beat EMG taken from the person's other repeat, by 0.0007766%, and that range crosses zero too. The rule set before scoring counted a lower average in both comparisons as an observed advantage on this group, to be reported with its size and uncertainty. Both averages were lower, by margins too small to tell from zero. [Results file](RESULTS.json)
+Against EMG taken from the person's other repeat, the same-trial EMG's average miss was 0.0007766% lower, and that range crosses zero too. The rule set before scoring counted a lower average in both comparisons as an observed advantage on this group, to be reported with its size and uncertainty. Both averages were lower, by margins too small to tell from zero. [Results file](RESULTS.json)
 
 CEMHSEY GRASP recorded a right-hand pinch, thumb pad to index pad, on a P200 dynamometer at a prescribed 30% of the hardest squeeze. The target is the released force reading, divided by the person's hardest squeeze for that session and grasp. The cue on the screen supplies context; the dynamometer supplies the outcome. [Study methods](https://doi.org/10.1038/s41597-025-05733-y) · [The plan, fixed before scoring](PROTOCOL.md)
 
