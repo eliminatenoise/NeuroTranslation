@@ -16,6 +16,12 @@ Keep the file extensions, and follow your system's usual prompts about a downloa
 
 Checked: the format of the Windows and macOS shortcuts, and the Linux installer in an isolated folder. Not checked: opening the shortcuts on a real Windows or macOS machine. [Checksums](docs/launchers/SHA256SUMS)
 
+## See both knees 15 stored frames ahead
+
+Extract the download and open the launcher for your operating system. You can also open `docs/knee-motion/index.html` directly. The invented example works offline. To reveal a recorded endpoint, open a supported angle file from the study in the viewer. Five snapshots of both hips, knees and ankles predict the two knee angles 15 frames later in a stored 60 Hz treadmill recording. On 40,201 forecasts from 12 held-out walkers, replaying a stride from four seconds of knee history gave 3.54° mean absolute error. The transformer, with 0.4 seconds of joint history, gave 4.46° on the same windows. Six of the 51 recordings used whole-file Xsens HD processing, including test recording S48. The other 45 carry the Live label. Physical prediction latency was never measured. Only reconstructed joint angles entered the forecast.
+
+[Open the knee viewer](https://eliminatenoise.github.io/NeuroTranslation/knee-motion/) · [Download the viewer, model and source](models/knee-motion.zip)
+
 ## Continue a measured stride or follow a rat’s trip
 
 Choose a download, extract it, and open the launcher for Windows, macOS or Linux at the top of the extracted folder. You can also open the indicated HTML file directly. Both viewers carry the recordings they show and work offline in a browser.

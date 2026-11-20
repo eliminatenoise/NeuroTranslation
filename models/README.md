@@ -10,6 +10,14 @@ The movement viewer compares right-wrist angles with different combinations of m
 
 On the same 549 forecast instants compared in the linear benchmark, the shared movement model had an average error of **2.805 cm** with movement alone and **2.778 cm** with correctly timed CA1 and prefrontal firing. Substituting firing from an earlier trip gave **2.804 cm**. Only one of three rats improved over both controls. A comparison with scrambled movement-encoder weights scored **2.763 cm** with firing. These results establish that the fitted readout uses the firing signal. They give no evidence here that pretraining improved this forecast. A lower average error can hide a worse result in an individual animal. [Study and per-animal results](neurotranslate-0.0/population/)
 
+## Where will the knees be 15 stored frames later?
+
+Five snapshots of both hips, knees and ankles predict the two knee angles 15 frames later in a stored 60 Hz treadmill recording. On 40,201 forecasts from 12 held-out walkers, replaying a stride from four seconds of knee history gave 3.54° mean absolute error. The transformer, with 0.4 seconds of joint history, gave 4.46° on the same windows. At the same five input times, the transformer averaged 4.47° across all 42,781 eligible windows and a six-joint linear fit averaged 5.60°. Each walker counts equally.
+
+Six of the 51 recordings used whole-file Xsens HD processing, including test recording S48. The other 45 carry the Live label. Physical prediction latency was never measured. Only reconstructed joint angles entered the forecast. The brain and muscle recordings from the source study belong to separate measurements.
+
+[Try the knee forecast](https://eliminatenoise.github.io/NeuroTranslation/knee-motion/) · [Model and results](knee-motion/) · [Offline viewer and model (ZIP)](knee-motion.zip)
+
 ## Where will the next step land?
 
 Give the model half a second of a measured walk or run. It predicts the next 0.60 seconds at 18 points on the body. Turn the figure, follow one foot and reveal where its markers landed. The walk or run label reduced average error at points measured relative to the pelvis from 71.9 to 69.1 mm across six fresh recording groups. A linear forecast tracked the pelvis through the room more closely. Only one of the six groups ran.

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<title>Where will each knee be? · NeuroTranslation</title><style>__STYLE__</style></head>
+<body><header><span>NeuroTranslation</span><button id="save" type="button">Save offline copy</button></header>
+<main><section class="intro"><h1>Where will each knee be?</h1><p class="lede">Take five readings from both hips, knees and ankles during a step. How far will each knee bend 15 frames later? Compare five forecasts, then use a recorded walk to see what followed.</p></section>
+<div class="toolbar"><div class="control"><label for="method">Forecast to plot</label><select id="method"></select></div>
+<div class="control"><label for="file">Open a local angle file</label><input id="file" type="file" accept=".csv,.json"></div>
+<div class="input-actions"><button id="example" type="button">Use invented example</button></div></div>
+<p id="status" class="status" role="status"></p>
+<section aria-labelledby="forecast-title"><div class="context"><h2 id="forecast-title">Knee flexion and extension</h2><span id="frames" class="plane"></span></div>
+<div class="frame" id="scrubbing" hidden><label for="cut">Input cutoff</label><input id="cut" type="range" min="0" step="1"><output id="frame-value" for="cut"></output></div>
+<div class="cards">
+<article class="card"><div class="card-head"><h3>Right knee</h3><output class="angle" id="right-angle" aria-label="Right knee forecast"></output></div><svg class="chart" viewBox="0 0 400 188" id="right-chart" role="img" aria-label="Right knee angle by frame"></svg></article>
+<article class="card"><div class="card-head"><h3>Left knee</h3><output class="angle" id="left-angle" aria-label="Left knee forecast"></output></div><svg class="chart" viewBox="0 0 400 188" id="left-chart" role="img" aria-label="Left knee angle by frame"></svg></article>
+</div><p class="legend"><span><b>●</b> Five input readings</span><span><b class="forecast-key">◇</b> Forecast at +15 frames</span><span id="recorded-key" hidden>× Later recorded angle</span></p>
+<button id="reveal" type="button" disabled>Reveal recorded angles</button>
+<p class="status" id="reveal-note" aria-live="polite"></p></section>
+<div class="compare"><section class="box"><h2>Compare forecasts</h2><p>Each estimate uses only the five frames through the cutoff. Angles are in degrees.</p>
+<table><thead><tr><th scope="col">Method</th><th scope="col">Right</th><th scope="col">Left</th></tr></thead><tbody id="forecast-rows"></tbody></table></section>
+<section class="box"><h2>How accurate were they?</h2><p id="results-intro"></p>
+<table><thead><tr><th scope="col">Method</th><th scope="col">Mean absolute error</th></tr></thead><tbody id="scores"></tbody></table>
+<p id="result-note"></p></section></div>
+<details class="disclosure"><summary>Read the five input frames</summary><p>R is right and L is left. Hips and knees use flexion/extension, ankles use dorsiflexion/plantarflexion. All six columns keep the source signs and units of degrees.</p><div id="history-table"></div></details>
+<details class="disclosure" id="file-help"><summary>Which files can I open?</summary><p>For a recorded comparison, extract <code id="suggested-file"></code> from the study’s IMU archive (about 3.92 GB) and choose that CSV above. The page starts at the first complete window. The cutoff slider steps through every eligible window. This file comes from a person held out when the models were fitted. The viewer also accepts the other verified held-out files from the same study. The original file’s SHA-256 fingerprint identifies it.</p><p>For another forecast, choose a JSON file containing <code>history_degrees</code> with five rows of six numbers. Use frames −24, −18, −12, −6 and 0, in right hip, left hip, right knee, left knee, right ankle, left ankle order. An invented or user-supplied history has no verified future observation. A local file stays in this tab. The offline copy contains the invented example alone.</p><p><button id="template" type="button">Download example JSON</button> <a href="https://physionet.org/content/multimodal-gait-dataset/1.0.0/#files-panel">Find the study files</a></p></details>
+<details class="disclosure"><summary>What did the sensors measure?</summary><p>Body-worn inertial sensors recorded motion. Xsens software reconstructed the stored ZXY joint angles. We use its signed flexion/extension estimates for walking on a treadmill at 0.5 m/s. All 51 study files report 60 Hz, so 15 frames span a nominal quarter of a second. Six files used Xsens HD, which processes the whole recording. The other 45 carry the label “Live.” Neither label establishes end-to-end sensing latency. This is a forecast within a stored recording.</p>
+<p>The transformer learns how the six joint angles change together. The two fitted linear models use either knee readings alone or all six joints. The simpler rules keep each knee where it was or continue its last slope. Every forecast estimates two angles in a recording. The viewer sends no movement command. Brain and muscle electrical signals have no verified sample alignment to these frames and do not enter the model.</p></details>
+</main><footer>Walking study by Rateb Katmah and colleagues (2026). Joint-angle definitions and derived results use version 1.0.0. <a href="https://doi.org/10.13026/r0ea-7161">PhysioNet dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-motion">Model and methods</a></footer>
+<script type="application/json" id="study">__STUDY__</script><script>__SCRIPTS__</script></body></html>

@@ -385,6 +385,10 @@ A four-page supplement reports the two searches with words together: [*How preci
 
 ## Two forecasts from recorded movement
 
+### Where will the knees be 15 stored frames later?
+
+Five snapshots of both hips, knees and ankles predict the two knee angles 15 frames later in a stored 60 Hz treadmill recording. On 40,201 forecasts from 12 held-out walkers, replaying a stride from four seconds of knee history gave 3.54° mean absolute error. The transformer, with 0.4 seconds of joint history, gave 4.46° on the same windows. Six of the 51 recordings used whole-file Xsens HD processing, including test recording S48. The other 45 carry the Live label. Physical prediction latency was never measured. Only reconstructed joint angles entered the forecast. [Fitted model, full comparison and source](../models/knee-motion/) · [Try the knee forecast](https://eliminatenoise.github.io/NeuroTranslation/knee-motion/)
+
 ### Where will the next step land?
 
 Eleven observations at 20 Hz capture half a second of a walk or run. The source cameras recorded at 60 or 120 Hz, so the analysis keeps every third or sixth frame. Across 351 overlapping windows from twelve fresh recordings in six source groups, the model told the action missed the 18 body sites by 69.1 mm on average after removing pelvic translation. Movement alone scored 71.9 mm. In room coordinates the measured centre of the pelvis tells a different story. The linear model missed it by 59.0 mm, the action-labelled model by 66.7 mm. Five groups walked and only one ran. The group numbers need not identify distinct people. Repeating the training-stride retrieval comparison requires rebuilding the gallery from the cited CMU originals. [Method and reproduction](../models/stride-continuation/REPRODUCE.md) · [Results by source group](../models/stride-continuation/fresh-results.json) · [Continue a measured stride](https://eliminatenoise.github.io/NeuroTranslation/stride/)

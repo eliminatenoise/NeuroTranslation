@@ -128,6 +128,10 @@ The shared fit learned from both HoloAssist and this dataset. Its fitted weights
 
 [Versioned dataset](https://doi.org/10.48324/dandi.000978/0.240511.0307) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
+### Treadmill joint angles
+
+Katmah and colleagues released these recordings through PhysioNet under CC BY 4.0. The knee forecast derives weights and aggregate errors from six angle channels at 0.5 m/s. The viewer opens with invented values. Obtain any recorded trial directly from the study. [Full credit and reuse terms](../models/knee-motion/RIGHTS.md) · [Original dataset](https://doi.org/10.13026/r0ea-7161)
+
 ### CMU Graphics Lab Motion Capture Database
 
 The [3D recordings](whole-body/README.md): trials 02_06, 13_11 and 132_23. The data used in this project was obtained from mocap.cs.cmu.edu. The database was created with funding from NSF EIA-0196217. Carnegie Mellon permits copying, modification and redistribution of the motion recordings, including use in commercial products, and prohibits direct resale of the data, converted data included. Those terms apply to the movement files in `docs/whole-body/data/` and to their copies inside its page.

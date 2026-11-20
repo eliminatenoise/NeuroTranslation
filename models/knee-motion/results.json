@@ -1,0 +1,239 @@
+{
+  "format": "gait-knees-results-1",
+  "archive_version": "1.0.0",
+  "source": "https://doi.org/10.13026/r0ea-7161",
+  "weights_sha256": "cd876eac2165d40b43386643de99178807dc384cc0915abcff3fe92750018efc",
+  "train_people": 39,
+  "test_people": 12,
+  "train_windows": 140189,
+  "test_windows": 42781,
+  "measurement": "Offline Xsens-derived bilateral knee flexion/extension, degrees, +15 stored frames at 0.5 m/s.",
+  "weighting": "Within participant mean absolute error over both knees and all eligible cutoffs; arithmetic mean across people. Right/left scores also equal-person.",
+  "uncertainty": "Paired percentile bootstrap across held participants, 10000 resamples seed 21301. Overlapping frames do not enter as independent draws.",
+  "split_exclusions": {
+    "source_lists_missing_training": [
+      24
+    ],
+    "duplicate_train": {},
+    "duplicate_test": {}
+  },
+  "error_summary": {
+    "persistence": {
+      "equal_person_mean_mae_degrees": 15.816078496691675,
+      "right_left_mae_degrees": [
+        15.77957931072707,
+        15.852577682656284
+      ],
+      "median_person_mae_degrees": 15.770803843079255,
+      "person_range_degrees": [
+        13.30178673980186,
+        17.63710058690473
+      ],
+      "bootstrap95_mean_mae_degrees": [
+        15.189265536429488,
+        16.392372753247212
+      ]
+    },
+    "slope": {
+      "equal_person_mean_mae_degrees": 22.748744172487246,
+      "right_left_mae_degrees": [
+        22.459271456579113,
+        23.03821688839538
+      ],
+      "median_person_mae_degrees": 22.45602545486372,
+      "person_range_degrees": [
+        18.745385658035918,
+        25.57228980456016
+      ],
+      "bootstrap95_mean_mae_degrees": [
+        21.67456511063249,
+        23.806053586208442
+      ]
+    },
+    "knee_ridge": {
+      "equal_person_mean_mae_degrees": 6.3391779325640725,
+      "right_left_mae_degrees": [
+        6.330933212587829,
+        6.347422652540316
+      ],
+      "median_person_mae_degrees": 6.018929074812412,
+      "person_range_degrees": [
+        5.325228522206127,
+        8.87241317621903
+      ],
+      "bootstrap95_mean_mae_degrees": [
+        5.766472418152858,
+        7.0364117751367115
+      ]
+    },
+    "all_ridge": {
+      "equal_person_mean_mae_degrees": 5.59973457676028,
+      "right_left_mae_degrees": [
+        5.728392884546221,
+        5.47107626897434
+      ],
+      "median_person_mae_degrees": 5.163821386520033,
+      "person_range_degrees": [
+        3.4621071140422455,
+        8.321576297641066
+      ],
+      "bootstrap95_mean_mae_degrees": [
+        4.877891123822018,
+        6.3697840344118974
+      ]
+    },
+    "transformer": {
+      "equal_person_mean_mae_degrees": 4.466900819161863,
+      "right_left_mae_degrees": [
+        4.451409685197211,
+        4.482391953126515
+      ],
+      "median_person_mae_degrees": 4.386267010153393,
+      "person_range_degrees": [
+        2.719886364971882,
+        6.022137088789922
+      ],
+      "bootstrap95_mean_mae_degrees": [
+        3.911378347519565,
+        5.017125676009605
+      ]
+    },
+    "all_ridge_mismatched_hips_ankles": {
+      "equal_person_mean_mae_degrees": 17.055105394883718,
+      "right_left_mae_degrees": [
+        13.5218299073482,
+        20.588380882419226
+      ],
+      "median_person_mae_degrees": 15.733405722818476,
+      "person_range_degrees": [
+        12.675864633027002,
+        23.32957436861085
+      ],
+      "bootstrap95_mean_mae_degrees": [
+        15.175743593837701,
+        19.053736963215506
+      ]
+    },
+    "transformer_mismatched_hips_ankles": {
+      "equal_person_mean_mae_degrees": 16.29919957379025,
+      "right_left_mae_degrees": [
+        15.561726092575581,
+        17.036673055004915
+      ],
+      "median_person_mae_degrees": 15.51026630133326,
+      "person_range_degrees": [
+        12.202414494756614,
+        20.981432009396997
+      ],
+      "bootstrap95_mean_mae_degrees": [
+        14.749855203084893,
+        17.87971500496125
+      ]
+    }
+  },
+  "paired_differences": {
+    "transformer_vs_persistence": {
+      "baseline_minus_model_mae_degrees": 11.349177677529815,
+      "bootstrap95_degrees": [
+        10.517634841429999,
+        12.108650131209568
+      ],
+      "participant_wins": 12,
+      "ties": 0,
+      "participants": 12
+    },
+    "transformer_vs_slope": {
+      "baseline_minus_model_mae_degrees": 18.28184335332538,
+      "bootstrap95_degrees": [
+        16.986035377634956,
+        19.520092114236782
+      ],
+      "participant_wins": 12,
+      "ties": 0,
+      "participants": 12
+    },
+    "transformer_vs_knee_ridge": {
+      "baseline_minus_model_mae_degrees": 1.872277113402209,
+      "bootstrap95_degrees": [
+        1.3177576469560701,
+        2.409203133548704
+      ],
+      "participant_wins": 12,
+      "ties": 0,
+      "participants": 12
+    },
+    "transformer_vs_all_ridge": {
+      "baseline_minus_model_mae_degrees": 1.1328337575984169,
+      "bootstrap95_degrees": [
+        0.8566350006580579,
+        1.464480986115128
+      ],
+      "participant_wins": 12,
+      "ties": 0,
+      "participants": 12
+    },
+    "transformer_vs_transformer_mismatched_hips_ankles": {
+      "baseline_minus_model_mae_degrees": 11.832298754628384,
+      "bootstrap95_degrees": [
+        10.275854780305174,
+        13.42877113304143
+      ],
+      "participant_wins": 12,
+      "ties": 0,
+      "participants": 12
+    },
+    "all_ridge_vs_persistence": {
+      "baseline_minus_model_mae_degrees": 10.216343919931397,
+      "bootstrap95_degrees": [
+        9.206463061762868,
+        11.12645630825421
+      ],
+      "participant_wins": 12,
+      "ties": 0,
+      "participants": 12
+    },
+    "all_ridge_vs_slope": {
+      "baseline_minus_model_mae_degrees": 17.149009595726962,
+      "bootstrap95_degrees": [
+        15.716877043610129,
+        18.503728798899978
+      ],
+      "participant_wins": 12,
+      "ties": 0,
+      "participants": 12
+    },
+    "all_ridge_vs_knee_ridge": {
+      "baseline_minus_model_mae_degrees": 0.739443355803792,
+      "bootstrap95_degrees": [
+        0.2772920869903122,
+        1.176418829157413
+      ],
+      "participant_wins": 10,
+      "ties": 0,
+      "participants": 12
+    },
+    "all_ridge_vs_transformer": {
+      "baseline_minus_model_mae_degrees": -1.1328337575984169,
+      "bootstrap95_degrees": [
+        -1.464480986115128,
+        -0.8566350006580579
+      ],
+      "participant_wins": 0,
+      "ties": 0,
+      "participants": 12
+    },
+    "all_ridge_vs_all_ridge_mismatched_hips_ankles": {
+      "baseline_minus_model_mae_degrees": 11.455370818123436,
+      "bootstrap95_degrees": [
+        9.528197049401482,
+        13.398479566754512
+      ],
+      "participant_wins": 12,
+      "ties": 0,
+      "participants": 12
+    }
+  },
+  "mismatch": "Retrospective control: keep knee histories, cyclically move complete bilateral hip and ankle histories by half the ordered eligible windows within each held trial. Same weights; no refit.",
+  "causal_input_check": "Every model returned identical values when all later six-joint values were increased 123 degrees, with the future endpoint also increasing 123 degrees. One interior cutoff per scored participant. Six trial headers report whole-record HD processing and 45 report Live. Actual per-frame availability was not measured.",
+  "longer_history_comparison": "A prior-stride copy with 240 available frames beats the 25-frame-span Transformer in 10 of 12 people on their common cutoffs. See phase-results.json for both errors and the paired interval."
+}
