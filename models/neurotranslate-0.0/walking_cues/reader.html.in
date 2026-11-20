@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Which way is forward? · NeuroTranslate 0.0</title>
+<style>
+*{box-sizing:border-box}html{color:#203936;background:#f4f2eb;font:17px/1.48 system-ui,sans-serif}body{max-width:1100px;padding:clamp(16px,4vw,52px);margin:auto}h1{font-size:clamp(2.5rem,6vw,4.8rem);line-height:1.04;letter-spacing:-.055em;margin:.3em 0}.intro{font-size:1.15rem;max-width:72ch}p{max-width:75ch}h2{font-size:1.45rem;line-height:1.2;margin:0 0 .8rem}a{color:#00615b}.study{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,1.5fr);gap:14px;margin:1.5rem 0}.box{padding:clamp(16px,2.7vw,30px);border-radius:12px;background:#fff;border:1px solid #b6c9bd}label{display:block;font-weight:650;margin:.8em 0 .2em}select,input{width:100%;font:inherit;accent-color:#257063}select{padding:.38em;min-height:40px;border:1px solid #788d84;background:#fff;color:#203936;border-radius:5px}canvas{width:100%;height:220px;display:block}output,td{font-variant-numeric:tabular-nums}.small{font-size:.9rem;color:#485b51}.values{display:grid;grid-template-columns:1fr 1fr;gap:12px}.values div{border-top:2px solid #007366;padding:.55em 0}.values div+div{border-color:#a8552e}.values b{display:block;font-size:1.1rem}table{border-collapse:collapse;width:100%;font-size:.95em}td,th{border-bottom:1px solid #d1d9d3;padding:.45em .2em;text-align:left}td+td,th+th{text-align:right}footer{margin:2rem 0}ul{padding-left:1.3em}@media(max-width:700px){.study{grid-template-columns:1fr}.values{grid-template-columns:1fr}canvas{height:175px}body{padding:14px}td,th{padding:.45em .1em}}
+</style></head><body><main>
+<header><p>NeuroTranslate 0.0 · Walking directions</p><h1>Which way is forward?</h1><p class="intro">A walker can cross a laboratory in either direction. Turn this invented walk and watch the camera coordinates change. The question stays the same. Where will the pelvis and the right heel be a tenth of a second later?</p></header>
+<section class="study"><div class="box"><h2>Set up the walk</h2>
+<label for="heading">Direction in the laboratory <output id="angle"></output></label><input id="heading" type="range" min="-180" max="180" value="25" step="5">
+<label for="pace">Past pelvis speed <output id="speed"></output></label><input id="pace" type="range" min=".5" max="2.5" step=".05" value="1.35">
+<label for="phrase">Instruction</label><select id="phrase"><option value="4">As usual</option><option value="5">Fast but not running</option></select>
+<label for="method">Forecast method</label><select id="method"></select>
+<label for="offset">Time since right foot strike</label><select id="offset"><option value="10">100 ms</option><option value="20" selected>200 ms</option><option value="30">300 ms</option><option value="40">400 ms</option></select><p id="effect" class="small"></p></div>
+<div class="box"><h2>From above the laboratory</h2><canvas id="path" role="img" aria-label="Top view of invented past and predicted future pelvis and heel positions"></canvas><p class="small">Solid lines show the last 200 ms. Dotted lines lead to the forecast endpoints. Green follows the pelvis. Rust follows the right heel.</p>
+<label for="frame">Show forecast distances along</label><select id="frame"><option value="travel">The walker’s axes · forward, left, up</option><option value="lab">The laboratory axes · X, Y, Z</option></select>
+<div class="values" aria-live="polite"><div>Pelvis change<b id="pelvis"></b></div><div>Right heel change<b id="heel"></b></div></div></div></section>
+<section class="box"><h2>What changed in real walks?</h2><label for="sample">Compare recordings</label><select id="sample"><option value="historical">Historical assessment · people outside the fit</option><option value="dev">Development · people scored outside their fitting fold</option></select><p id="support"></p><p class="small">The error is the straight-line distance between predicted and measured position, averaged with equal weight per person. Smaller is closer.</p><table><thead><tr><th>Prediction</th><th>Pelvis (mm)</th><th>Heel (mm)</th></tr></thead><tbody id="results"></tbody></table><p id="verdict"></p></section>
+<section><h2>Why turn the walk?</h2><p>For each forecast, two earlier positions of the pelvis define forward. Left is at right angles to that line, and up stays vertical. The model sees the same walk whichever direction it crossed the room. Turn the angle slider with the outputs set to the walker’s axes, then switch to laboratory axes.</p><p>The study used two instructions for entire walks. A phrase and its original condition code give the model exactly the same information. The coordinates follow skin markers in already filtered recordings. The test provides no spoken cue timing or measurement of a command travelling through the nervous system.</p></section><footer><a href="https://eliminatenoise.github.io/NeuroTranslation/walking-instructions/">Try the directly trained Transformer</a> · <a href="https://eliminatenoise.github.io/Interoceptomics/walking-instructions/">See the recorded walks in 3D</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/papers/walking-instructions/">Read the paper</a> · <a href="https://doi.org/10.6084/m9.figshare.7734767.v8">Original walking recordings</a></footer></main>
+<script id="data" type="application/json">@@DATA@@</script><script>
+'use strict';
+@@ENCODER@@
+const bundle=JSON.parse(document.getElementById('data').textContent), state=bundle.state;
+const $=s=>document.getElementById(s);
+const names={encoder_cue:'Movement encoder with instruction',encoder_motion:'Movement encoder · motion alone',linear_cue:'Linear model with instruction',linear_motion:'Linear model · motion alone',random_cue:'Untrained encoder with fitted output',pace_phase:'Recent travel, speed and step timing',condition_phase_mean:'Typical change at this instruction and time',cue_only:'Fitted instruction and time alone',velocity_50ms:'Continue the last 50 ms of motion',repeat_100ms:'Repeat the last 100 ms of motion',hold:'Stay still'};
+const usesCue=new Set(['encoder_cue','linear_cue','random_cue','condition_phase_mean','cue_only']);
+for(const [key,label] of Object.entries(names))$('method').add(new Option(label,key));
+function invented(pace,angle){
+  const a=angle*Math.PI/180,c=Math.cos(a),s=Math.sin(a),h=[];
+  for(let i=0;i<21;i++){const t=i/20;
+    const p=[pace*200*(t-1),3*Math.sin(2*Math.PI*t),860+3*Math.sin(Math.PI*t)];
+    const foot=[p[0]+55-170*t+15*t*t,p[1]-89+3*t,p[2]-830-1.5*t];
+    h.push([p,foot].map(([x,y,z])=>[370+c*x-s*y,-240+s*x+c*y,z]));}
+  return h;
+}
+function orient(h){
+  const start=h[0][0],end=h[20][0],dx=end[0]-start[0],dy=end[1]-start[1],dist=Math.hypot(dx,dy),c=dx/dist,s=dy/dist;
+  return {c,s,history:h.map(frame=>frame.map(([x,y,z])=>[(x-end[0])*c+(y-end[1])*s,-(x-end[0])*s+(y-end[1])*c,z-end[2]]))};
+}
+function estimate(mode,h,condition,offset){
+  const last=h[20],recent=last.flatMap((v,k)=>v.map((a,j)=>a-h[10][k][j]));
+  if(mode==='hold')return Array(6).fill(0);
+  if(mode==='repeat_100ms')return recent;
+  if(mode==='velocity_50ms')return last.flatMap((v,k)=>v.map((a,j)=>2*(a-h[15][k][j])));
+  if(mode==='condition_phase_mean')return state.cell_means[condition+'/'+offset].flat();
+  const intervals=[5,10,15,20].map(i=>h[i].flatMap((v,k)=>v.map((a,j)=>a-h[i-5][k][j])));
+  const speed=Math.hypot(last[0][0]-h[0][0][0],last[0][1]-h[0][0][1])/200,phase=[10,20,30,40].map(v=>Number(v===offset));
+  const cue=usesCue.has(mode)?(condition===4?-1:1):0;
+  let x=[];
+  if(mode==='pace_phase')x=[speed,...phase];
+  else if(mode==='cue_only')x=[...phase,cue,...phase.map(a=>cue*a)];
+  else{x=[...intervals.flat(),...last[1].map((v,j)=>v-last[0][j]),speed,...phase,cue,...phase.map(a=>cue*a),cue*speed];
+    if(mode.startsWith('encoder')||mode==='random_cue'){
+      const w=mode==='random_cue'?bundle.random:bundle.trained;
+      const z=intervals.map(t=>t.map((v,j)=>(v-state.token_mean[j])/state.token_sd[j]));
+      x.push(...encode(w,z.map(v=>linear(w,'project',v))));
+    }
+  }
+  const fit=state.fits[mode],base=mode==='cue_only'?Array(6).fill(0):recent;
+  return base.map((b,j)=>b+fit.bias[j]+x.reduce((sum,val,i)=>sum+(val-fit.mean[i])/fit.sd[i]*fit.coef[i][j],0));
+}
+function labDelta(d,c,s){return [c*d[0]-s*d[1],s*d[0]+c*d[1],d[2]];}
+function paint(h,d){
+ const canvas=$('path'),w=canvas.clientWidth,height=canvas.clientHeight,ratio=window.devicePixelRatio||1;canvas.width=Math.round(w*ratio);canvas.height=Math.round(height*ratio);const g=canvas.getContext('2d');g.scale(ratio,ratio);
+ const tracks=[0,1].map(k=>h.map(row=>row[k]).concat([h[20][k].map((a,j)=>a+d[k][j])]));
+ const pts=tracks.flat(),xx=pts.map(p=>p[0]),yy=pts.map(p=>p[1]),xl=Math.min(...xx),xr=Math.max(...xx),yl=Math.min(...yy),yr=Math.max(...yy);
+ const scale=Math.min((w-42)/Math.max(xr-xl,100),(height-38)/Math.max(yr-yl,100));
+ function pixel(p){return [w/2+(p[0]-(xl+xr)/2)*scale,height/2-(p[1]-(yl+yr)/2)*scale];}
+ tracks.forEach((track,k)=>{const color=k?'#ac542b':'#187567';
+   function draw(sub,dash){g.beginPath();g.strokeStyle=color;g.lineWidth=3;g.setLineDash(dash);sub.forEach((p,i)=>{const [x,y]=pixel(p);i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();}
+   draw(track.slice(0,21),[]);draw(track.slice(20),[4,4]);g.beginPath();g.arc(...pixel(track[21]),4,0,2*Math.PI);g.fillStyle=color;g.fill();});
+ g.font='13px sans-serif';g.fillStyle='#44594f';g.fillText('Y ↑   X →',6,height-5);
+}
+function refresh(){
+ const pace=+$('pace').value,deg=+$('heading').value,cue=+$('phrase').value,method=$('method').value,offset=+$('offset').value;
+ const h=invented(pace,deg),o=orient(h),delta=estimate(method,o.history,cue,offset);
+ const travel=[delta.slice(0,3),delta.slice(3)],lab=travel.map(v=>labDelta(v,o.c,o.s)),out=$('frame').value==='lab'?lab:travel;
+ $('speed').textContent=pace.toFixed(2)+' m/s';$('angle').textContent=deg+'°';['pelvis','heel'].forEach((id,k)=>$(id).textContent=out[k].map(n=>n.toFixed(2)).join(', ')+' mm');
+ $('effect').textContent=usesCue.has(method)?'This method uses the selected instruction.':'This method uses the same forecast for either instruction.';paint(h,lab);
+}
+function table(){
+ const r=bundle[$('sample').value];$('support').textContent=r.people+' people contributed '+r.recordings+' recordings and '+r.windows+' observations. Each person supplied both walking instructions.';
+ const list=[['encoder_cue',names.encoder_cue],['encoder_motion',names.encoder_motion],['swapped_encoder','Same fitted encoder, opposite instruction'],['linear_cue',names.linear_cue],['linear_motion',names.linear_motion],['pace_phase',names.pace_phase],['velocity_50ms',names.velocity_50ms],['condition_phase_mean',names.condition_phase_mean]];
+ $('results').replaceChildren(...list.map(([k,name])=>{const tr=document.createElement('tr');for(const item of [name,...r.methods[k].endpoint_mm.map(n=>n.toFixed(2))]){const td=document.createElement('td');td.textContent=item;tr.append(td)}return tr}));
+ const pass=r.cue_test.encoder_cue.passes_pelvis_heel.map((v,i)=>v?['pelvis','heel'][i]:null).filter(Boolean);
+ $('verdict').textContent=pass.length?'The correct instruction met the paired improvement test for the '+pass.join(' and ')+'.':'Neither landmark met the prespecified test for an instruction advantage over both motion alone and the opposite instruction.';
+}
+['heading','pace','phrase','method','offset','frame'].forEach(k=>$(k).addEventListener('input',refresh));$('sample').addEventListener('change',table);window.addEventListener('resize',refresh);refresh();table();
+</script></body></html>

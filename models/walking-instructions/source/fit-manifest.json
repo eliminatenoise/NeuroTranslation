@@ -1,0 +1,27 @@
+{
+  "description": "Public checksum extract from the two model manifests frozen before assessment. Includes the released code, weights and training summary covered by those manifests.",
+  "release_utc": "2026-11-20T19:46:44.951585+00:00",
+  "original_release_sha256": "e848c985bc7c5ac68ca0da1fcb1b40684bef8cdb7852a4b2c6c803325bab56f8",
+  "original_linear_fit_manifest_sha256": "a9ac8b28d0858f1e204a80a4dfd2b6c313afc1104a54cbd77da6c2b4a31dda91",
+  "original_transformer_fit_manifest_sha256": "716f9c563a9e8118a5517a76f66880b65ad0213c8c6ae79c9c5a0fe775370598",
+  "development_npz_sha256": "30e584890531eb9576c10581839e48244961d0bf98ad767470cff67755f1e735",
+  "fixed_history_model_files": {
+    "walking_cues/DESIGN.md": "4cb155767933d7e6c402777942577890cbe0905ead7b893d131809b933d612f8",
+    "walking_cues/forecast.py": "80d6d44ac523755c1bba6d10ec43f44b6cf4b9c54d1bb237d6e468d4492ecd69",
+    "walking_cues/study.py": "6792d7c936faaf572f8d6c6e6975b51257994d33f289978b82b37a95d637a089",
+    "walking_cues/model.json": "00a3976b99138ce30953fc3d4c30c9ff6405f7c055fac8302368299e2b6a4b8c",
+    "walking_cues/development.json": "fa22493d174e04474e2381bc94195c14d6bf363a23469c793fb60f8800dd5bf1",
+    "movement-weights.npz": "6a05e06ecbf0eadb4524369d9089847813763d0d2a3c1a49bdd1e4bf295e4864",
+    "predict.py": "04166a9e3389a1de3910efdbbbd966b2be934d755e4853e6055524150295e40c",
+    "back_rotation/random-encoder.json": "4e4c66728adf70f158225f89c0919142bea8e58a114fb4e4ea3504a1ba154384"
+  },
+  "trainable_transformer_files": {
+    "model.py": "4529720053339be9c0ee41b66e625f7d9111dc880d37a21b03738672e6c82392",
+    "train.py": "ecac1ee1120982db5e0876329a7f2cceb2139207a27ca777970616f8e73e5e9c",
+    "score.py": "ee72f4521700465a27e495f991ef665e72411754740c8fbf87ae1281fedd07a4",
+    "predict.js": "576c58e4d0262c2b469337c06c195a542e0e2bf9b927dc81cc1dbc7d2a226d47",
+    "weights.json": "bb6b1847e6ac0ba273dc9e4c79ba8d509da30e0df094aecf0f06d6b317da16e2",
+    "example.json": "f58d6705b6e14a5d8deb1f55828557427cd36a08019f0eb4e0391f559e9b35f1",
+    "development-summary.json": "0ec838ae75b9cf90f074426cf0d440cf68854701057dcac02d0455d96c56c0c4"
+  }
+}

@@ -1,0 +1,399 @@
+{
+  "dataset": {
+    "descriptor": "https://doi.org/10.1038/s41597-026-07146-x",
+    "doi": "https://doi.org/10.18112/openneuro.ds006840.v1.0.0",
+    "id": "ds006840",
+    "license": "CC0 1.0",
+    "url": "https://openneuro.org/datasets/ds006840/versions/1.0.0",
+    "version": "1.0.0"
+  },
+  "participants": [
+    {
+      "asset_bytes": 2508160,
+      "asset_sha256": "2f89e4c1317ae512f8bd6f5df2f23809b04877538a5a53c3eb365132a5c19173",
+      "basename": "sub-13_task-ihc_run-01_eeg_leap_R1.mat",
+      "channels": [
+        {
+          "index_zero_based": 11,
+          "name": "C3",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 12,
+          "name": "Cz",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 13,
+          "name": "C4",
+          "type": "EEG"
+        }
+      ],
+      "derivative": {
+        "release_path": "derivatives/movement-execution/sub-13/ihc/sub-13_task-ihc_run-01_eeg_leap_R1.mat",
+        "s3_version_id": "1fLfcLuSR4.WxaqiAI9rmPK08PIFSpeB",
+        "versioned_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-13/ihc/sub-13_task-ihc_run-01_eeg_leap_R1.mat?versionId=1fLfcLuSR4.WxaqiAI9rmPK08PIFSpeB"
+      },
+      "n_channels": 28,
+      "raw_context": {
+        "all_hand_rows_right": true,
+        "clock_ordered_within_own_recording": true,
+        "counts_by_raw_event_kind": {
+          "execution": 60,
+          "hit": 60,
+          "premove": 60
+        },
+        "events_sha256": "0560fd582bbf63d91c1fc49fabd4921e74e93a0f5dc5ec6b755bfe9fb46a85e3",
+        "limit": "Raw event counts describe tagged source context. No assumed one-to-one raw-event-to-derivative trial binding.",
+        "raw_duration_seconds": 492.6865234375
+      },
+      "raw_sources": {
+        "brainvision_header": {
+          "sha256": "39968745c46613a48866a114de167552edcad2b6f1c6b5e5633aaa523c39e4ab",
+          "url": "https://s3.amazonaws.com/openneuro.org/ds006840/sub-13/eeg/sub-13_task-ihc_acq-right_run-01_eeg.vhdr?versionId=B7kLCgIdacd6SEnZ7mtQcxnJtvcuXs3m"
+        },
+        "channels_tsv": {
+          "sha256": "00dabfdae483fd93ab68d908706b0f058a9562491f586d712853a3087df710bf",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-13/eeg/sub-13_task-ihc_acq-right_run-01_channels.tsv"
+        },
+        "eeg_sidecar": {
+          "sha256": "7a90e7e08d7a0621c23b2670fc7e91a53bcdfd2da695fb4ccb4d5aec460a7284",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-13/eeg/sub-13_task-ihc_acq-right_run-01_eeg.json"
+        },
+        "events_tsv": {
+          "sha256": "0560fd582bbf63d91c1fc49fabd4921e74e93a0f5dc5ec6b755bfe9fb46a85e3",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-13/eeg/sub-13_task-ihc_acq-right_run-01_events.tsv"
+        }
+      },
+      "released_trials": 57,
+      "role": "CALIBRATION",
+      "run": "01",
+      "subject": "sub-13"
+    },
+    {
+      "asset_bytes": 2192569,
+      "asset_sha256": "38300b68973a4575df597d4d0f6c42c401df0c913f40d7e1e245e5b2c6b50829",
+      "basename": "sub-13_task-ihc_run-02_eeg_leap_R2.mat",
+      "channels": [
+        {
+          "index_zero_based": 11,
+          "name": "C3",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 12,
+          "name": "Cz",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 13,
+          "name": "C4",
+          "type": "EEG"
+        }
+      ],
+      "derivative": {
+        "release_path": "derivatives/movement-execution/sub-13/ihc/sub-13_task-ihc_run-02_eeg_leap_R2.mat",
+        "s3_version_id": "ZlM8oMmX4PIPBlI.O4QbPYjy7XZVUa4B",
+        "versioned_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-13/ihc/sub-13_task-ihc_run-02_eeg_leap_R2.mat?versionId=ZlM8oMmX4PIPBlI.O4QbPYjy7XZVUa4B"
+      },
+      "n_channels": 28,
+      "raw_context": {
+        "all_hand_rows_right": true,
+        "clock_ordered_within_own_recording": true,
+        "counts_by_raw_event_kind": {
+          "execution": 60,
+          "hit": 60,
+          "premove": 60
+        },
+        "events_sha256": "7fbacc25c82f618298bbf2057050e9303721c934aef309b8a450ce35247cf745",
+        "limit": "Raw event counts describe tagged source context. No assumed one-to-one raw-event-to-derivative trial binding.",
+        "raw_duration_seconds": 374.6865234375
+      },
+      "raw_sources": {
+        "brainvision_header": {
+          "sha256": "d0f4cf3f3b3888f2b674bdac91b515a10b74abe4437336f6b9be8ae33a19f99d",
+          "url": "https://s3.amazonaws.com/openneuro.org/ds006840/sub-13/eeg/sub-13_task-ihc_acq-right_run-02_eeg.vhdr?versionId=I_uXsF8GvM2_MhKHg5eBwf87tkc5cGDB"
+        },
+        "channels_tsv": {
+          "sha256": "00dabfdae483fd93ab68d908706b0f058a9562491f586d712853a3087df710bf",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-13/eeg/sub-13_task-ihc_acq-right_run-02_channels.tsv"
+        },
+        "eeg_sidecar": {
+          "sha256": "9599b4006a7420361b4a3dbd7226ac63292dba66f1e0724886c94bc5c5160ddc",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-13/eeg/sub-13_task-ihc_acq-right_run-02_eeg.json"
+        },
+        "events_tsv": {
+          "sha256": "7fbacc25c82f618298bbf2057050e9303721c934aef309b8a450ce35247cf745",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-13/eeg/sub-13_task-ihc_acq-right_run-02_events.tsv"
+        }
+      },
+      "released_trials": 58,
+      "role": "EVALUATION",
+      "run": "02",
+      "subject": "sub-13"
+    },
+    {
+      "asset_bytes": 2462331,
+      "asset_sha256": "43786292b72675f1eab9350b4b40358b84e66ae7ce944897f21f7c5eb0654ed1",
+      "basename": "sub-14_task-ihc_run-01_eeg_leap_R1.mat",
+      "channels": [
+        {
+          "index_zero_based": 11,
+          "name": "C3",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 12,
+          "name": "Cz",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 13,
+          "name": "C4",
+          "type": "EEG"
+        }
+      ],
+      "derivative": {
+        "release_path": "derivatives/movement-execution/sub-14/ihc/sub-14_task-ihc_run-01_eeg_leap_R1.mat",
+        "s3_version_id": "eP5If7pe14V80zd3ieZ6A.We_P3Lvl5V",
+        "versioned_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-14/ihc/sub-14_task-ihc_run-01_eeg_leap_R1.mat?versionId=eP5If7pe14V80zd3ieZ6A.We_P3Lvl5V"
+      },
+      "n_channels": 28,
+      "raw_context": {
+        "all_hand_rows_right": true,
+        "clock_ordered_within_own_recording": true,
+        "counts_by_raw_event_kind": {
+          "execution": 60,
+          "hit": 60,
+          "premove": 60
+        },
+        "events_sha256": "cbc42f5afb84c91ffe633f0d44b51901fe869a1cbb7f4b9f9de1b091944b89f1",
+        "limit": "Raw event counts describe tagged source context. No assumed one-to-one raw-event-to-derivative trial binding.",
+        "raw_duration_seconds": 465.4990234375
+      },
+      "raw_sources": {
+        "brainvision_header": {
+          "sha256": "9526d85cce74f61e6ee3fb0a8c36db0bb03c053cd01e4d1339ffbc8b63b26ec3",
+          "url": "https://s3.amazonaws.com/openneuro.org/ds006840/sub-14/eeg/sub-14_task-ihc_acq-right_run-01_eeg.vhdr?versionId=C2aafFhv.8M356QmI4G7pjkEoQVJ0q43"
+        },
+        "channels_tsv": {
+          "sha256": "00dabfdae483fd93ab68d908706b0f058a9562491f586d712853a3087df710bf",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-14/eeg/sub-14_task-ihc_acq-right_run-01_channels.tsv"
+        },
+        "eeg_sidecar": {
+          "sha256": "4b5e91b2dd45f207e5b3e1ba15dfa02cf98e1e4628932e15efcdaca7c0a4952e",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-14/eeg/sub-14_task-ihc_acq-right_run-01_eeg.json"
+        },
+        "events_tsv": {
+          "sha256": "cbc42f5afb84c91ffe633f0d44b51901fe869a1cbb7f4b9f9de1b091944b89f1",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-14/eeg/sub-14_task-ihc_acq-right_run-01_events.tsv"
+        }
+      },
+      "released_trials": 59,
+      "role": "CALIBRATION",
+      "run": "01",
+      "subject": "sub-14"
+    },
+    {
+      "asset_bytes": 2535076,
+      "asset_sha256": "c3467f1f805ef94137f902dfbc0ca15f69573fd295b097c45ab439ca76c97115",
+      "basename": "sub-14_task-ihc_run-02_eeg_leap_R2.mat",
+      "channels": [
+        {
+          "index_zero_based": 11,
+          "name": "C3",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 12,
+          "name": "Cz",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 13,
+          "name": "C4",
+          "type": "EEG"
+        }
+      ],
+      "derivative": {
+        "release_path": "derivatives/movement-execution/sub-14/ihc/sub-14_task-ihc_run-02_eeg_leap_R2.mat",
+        "s3_version_id": "cux7B1Or3hL7iG3ii7Tg3QgdmPs9HbkS",
+        "versioned_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-14/ihc/sub-14_task-ihc_run-02_eeg_leap_R2.mat?versionId=cux7B1Or3hL7iG3ii7Tg3QgdmPs9HbkS"
+      },
+      "n_channels": 28,
+      "raw_context": {
+        "all_hand_rows_right": true,
+        "clock_ordered_within_own_recording": true,
+        "counts_by_raw_event_kind": {
+          "execution": 60,
+          "hit": 60,
+          "premove": 60
+        },
+        "events_sha256": "31c03090848a4ba4b8d67326245357aeb8b13bcab76983fafdf927ddaebdca79",
+        "limit": "Raw event counts describe tagged source context. No assumed one-to-one raw-event-to-derivative trial binding.",
+        "raw_duration_seconds": 517.6240234375
+      },
+      "raw_sources": {
+        "brainvision_header": {
+          "sha256": "a027b934f7bd55dac3cf7855ee19e7c3157aa7fac8ded18fed39dedf96de889c",
+          "url": "https://s3.amazonaws.com/openneuro.org/ds006840/sub-14/eeg/sub-14_task-ihc_acq-right_run-02_eeg.vhdr?versionId=Y_7dvxI2oCDpqc5_2_9BU4IoXrUpUEb4"
+        },
+        "channels_tsv": {
+          "sha256": "00dabfdae483fd93ab68d908706b0f058a9562491f586d712853a3087df710bf",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-14/eeg/sub-14_task-ihc_acq-right_run-02_channels.tsv"
+        },
+        "eeg_sidecar": {
+          "sha256": "f1e3bf9d3107beef9788a82d011ffe9a1ff41d7ee9bf7bc722b067f767471bc2",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-14/eeg/sub-14_task-ihc_acq-right_run-02_eeg.json"
+        },
+        "events_tsv": {
+          "sha256": "31c03090848a4ba4b8d67326245357aeb8b13bcab76983fafdf927ddaebdca79",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-14/eeg/sub-14_task-ihc_acq-right_run-02_events.tsv"
+        }
+      },
+      "released_trials": 60,
+      "role": "EVALUATION",
+      "run": "02",
+      "subject": "sub-14"
+    },
+    {
+      "asset_bytes": 2652261,
+      "asset_sha256": "45a41dfce8816a4082f5313bbd6712ce5d22afe23d5183c731c13f9505089ddf",
+      "basename": "sub-15_task-ihc_run-01_eeg_leap_R1.mat",
+      "channels": [
+        {
+          "index_zero_based": 11,
+          "name": "C3",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 12,
+          "name": "Cz",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 13,
+          "name": "C4",
+          "type": "EEG"
+        }
+      ],
+      "derivative": {
+        "release_path": "derivatives/movement-execution/sub-15/ihc/sub-15_task-ihc_run-01_eeg_leap_R1.mat",
+        "s3_version_id": "29RDgxHj0f6BcJ60Gbu3vmRchlsyOxGJ",
+        "versioned_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-15/ihc/sub-15_task-ihc_run-01_eeg_leap_R1.mat?versionId=29RDgxHj0f6BcJ60Gbu3vmRchlsyOxGJ"
+      },
+      "n_channels": 28,
+      "raw_context": {
+        "all_hand_rows_right": true,
+        "clock_ordered_within_own_recording": true,
+        "counts_by_raw_event_kind": {
+          "execution": 60,
+          "hit": 60,
+          "premove": 60
+        },
+        "events_sha256": "d3ba5fceea273470b65220eed2a3799e31f349677bd6b8d810d4e85d07937e98",
+        "limit": "Raw event counts describe tagged source context. No assumed one-to-one raw-event-to-derivative trial binding.",
+        "raw_duration_seconds": 370.1240234375
+      },
+      "raw_sources": {
+        "brainvision_header": {
+          "sha256": "15cc5955f9735142f350a812db8c80d21e52a7afc0c5a4716769fde08200b177",
+          "url": "https://s3.amazonaws.com/openneuro.org/ds006840/sub-15/eeg/sub-15_task-ihc_acq-right_run-01_eeg.vhdr?versionId=wGDsYxE_CXDENC6FNRrH8HclI1ny79Aw"
+        },
+        "channels_tsv": {
+          "sha256": "00dabfdae483fd93ab68d908706b0f058a9562491f586d712853a3087df710bf",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-15/eeg/sub-15_task-ihc_acq-right_run-01_channels.tsv"
+        },
+        "eeg_sidecar": {
+          "sha256": "ede20091c7e48bf013a7e886ac6c311e9b598eb7127464ccf413c06211eea800",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-15/eeg/sub-15_task-ihc_acq-right_run-01_eeg.json"
+        },
+        "events_tsv": {
+          "sha256": "d3ba5fceea273470b65220eed2a3799e31f349677bd6b8d810d4e85d07937e98",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-15/eeg/sub-15_task-ihc_acq-right_run-01_events.tsv"
+        }
+      },
+      "released_trials": 60,
+      "role": "CALIBRATION",
+      "run": "01",
+      "subject": "sub-15"
+    },
+    {
+      "asset_bytes": 2408999,
+      "asset_sha256": "8bbba5f7accdb5bd56de5d4c7ae07fe41232ebcf2e46d106a317401cb6483681",
+      "basename": "sub-15_task-ihc_run-02_eeg_leap_R2.mat",
+      "channels": [
+        {
+          "index_zero_based": 11,
+          "name": "C3",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 12,
+          "name": "Cz",
+          "type": "EEG"
+        },
+        {
+          "index_zero_based": 13,
+          "name": "C4",
+          "type": "EEG"
+        }
+      ],
+      "derivative": {
+        "release_path": "derivatives/movement-execution/sub-15/ihc/sub-15_task-ihc_run-02_eeg_leap_R2.mat",
+        "s3_version_id": "C6XfIaVtSvopkEYSYUJ.IEwcy2KMKiuk",
+        "versioned_url": "https://s3.amazonaws.com/openneuro.org/ds006840/derivatives/movement-execution/sub-15/ihc/sub-15_task-ihc_run-02_eeg_leap_R2.mat?versionId=C6XfIaVtSvopkEYSYUJ.IEwcy2KMKiuk"
+      },
+      "n_channels": 28,
+      "raw_context": {
+        "all_hand_rows_right": true,
+        "clock_ordered_within_own_recording": true,
+        "counts_by_raw_event_kind": {
+          "execution": 59,
+          "hit": 59,
+          "premove": 59
+        },
+        "events_sha256": "4d559fbc4c907346d0cadbe629f2558e9034ed137f429f739cdd068e6aeb725f",
+        "limit": "Raw event counts describe tagged source context. No assumed one-to-one raw-event-to-derivative trial binding.",
+        "raw_duration_seconds": 353.4365234375
+      },
+      "raw_sources": {
+        "brainvision_header": {
+          "sha256": "59ddaa128f8eae530dbf585438b87d1745702ba983e51013a2cdf5687e148e4d",
+          "url": "https://s3.amazonaws.com/openneuro.org/ds006840/sub-15/eeg/sub-15_task-ihc_acq-right_run-02_eeg.vhdr?versionId=Q.xf0gZQB1WyAL6HvlcexyKn1b.9V0Te"
+        },
+        "channels_tsv": {
+          "sha256": "00dabfdae483fd93ab68d908706b0f058a9562491f586d712853a3087df710bf",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-15/eeg/sub-15_task-ihc_acq-right_run-02_channels.tsv"
+        },
+        "eeg_sidecar": {
+          "sha256": "2f9ccc6df444bf18f1daeb94c77e658741b8bbda528c1c163fbf3c722d1afcbf",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-15/eeg/sub-15_task-ihc_acq-right_run-02_eeg.json"
+        },
+        "events_tsv": {
+          "sha256": "4d559fbc4c907346d0cadbe629f2558e9034ed137f429f739cdd068e6aeb725f",
+          "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds006840/0c701aadfa562b8662e76ca0dd6831788e02e8b6/sub-15/eeg/sub-15_task-ihc_acq-right_run-02_events.tsv"
+        }
+      },
+      "released_trials": 59,
+      "role": "EVALUATION",
+      "run": "02",
+      "subject": "sub-15"
+    }
+  ],
+  "prospective_design_sha256": "d621ee2859bc8e8e2f16f553e332f63b4fdf890fbc52a38c6684e86839b578cd",
+  "raw_to_derivative_channel_binding": {
+    "indices_zero_based": {
+      "C3": 11,
+      "C4": 13,
+      "Cz": 12
+    },
+    "limit": "Raw header/table plus processing-order evidence and derivative geometry support this inference. The derivative has no channel names.",
+    "status": "supported_for_named_central_rows"
+  },
+  "release_commit": "0c701aadfa562b8662e76ca0dd6831788e02e8b6",
+  "role_freeze_sha256": "706a47afb13c75c6efb01af4014a7cf72633fbe555c1ebb70f81ff33a2b5889e",
+  "schema_version": 1,
+  "source_allowlist_sha256": "8b49f602e148517f9870fa5155d4c2d0376f7a6cd573c66fde43caa9c5bd1ea3",
+  "source_qa_receipt_sha256": "0ecb0ce77fccb7d82d00370944cc3975e53192ac6782ddbbb8a83da436814258"
+}

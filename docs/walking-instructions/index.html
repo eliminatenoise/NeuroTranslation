@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Change the walking instruction for one invented marker history. Compare forecasts from a fitted NeuroTranslation Transformer against measurements from recorded walks.">
+<title>Walking instructions · NeuroTranslation</title>
+<link rel="icon" href="data:,"><link rel="stylesheet" href="reader.css">
+<script defer src="weights.js"></script><script defer src="predict.js"></script><script defer src="examples.js"></script><script defer src="reader.js"></script>
+</head>
+<body>
+<a class="skip" href="#forecast">Skip to forecast</a>
+<header class="mast wrap">
+<a class="brand" href="/NeuroTranslation/">NeuroTranslation</a>
+<nav aria-label="Related work"><a href="/NeuroTranslation/papers/walking-instructions/">Read the paper</a><a href="/Interoceptomics/walking-instructions/">View recorded gait ↗</a></nav>
+</header>
+<main class="wrap">
+<div class="intro">
+<h1>Does the walking instruction help?</h1>
+<p>Give a Transformer the same 200 milliseconds of motion twice. Change the instruction from “as usual” to “fast but not running”. Where does it put the pelvis and right heel 100 milliseconds later?</p>
+</div>
+<section id="forecast" aria-labelledby="forecast-title">
+<div class="top-line"><h2 id="forecast-title">Try the forecast</h2><a id="download" href="../walking-instructions-offline.zip" download>Download offline reader ↓</a></div>
+<div class="instrument">
+<aside class="controls">
+<fieldset class="cue-set"><legend>Walking instruction</legend>
+<label class="choice"><input type="radio" name="cue" value="4" checked><span>“as usual”</span></label>
+<label class="choice"><input type="radio" name="cue" value="5"><span>“fast but not running”</span></label>
+<label class="choice"><input type="radio" name="cue" value="none"><span>Withhold instruction</span></label>
+</fieldset>
+<p class="cue-note" id="cue-note"></p>
+<details class="history-options" id="history-options" open><summary>Edit invented movement history</summary><fieldset class="history"><legend class="sr">Invented movement history</legend>
+<label for="speed">Pelvis speed <output for="speed" id="speed-out">1.10 m/s</output></label>
+<input id="speed" type="range" min=".5" max="2" value="1.10" step=".05">
+<label for="lift">Heel lift amplitude <output for="lift" id="lift-out">70 mm</output></label>
+<input id="lift" type="range" min="0" max="140" value="70" step="5">
+<label for="offset">Time after right foot strike</label>
+<select id="offset"><option value="10">100 ms</option><option value="20">200 ms</option><option value="30" selected>300 ms</option><option value="40">400 ms</option></select>
+</fieldset>
+<button type="button" id="reset">Restore example</button></details>
+</aside>
+<div class="display"><div class="plot-head"><h3>Displacement from cutoff</h3>
+<label class="axis-label" for="axis">Axis <select id="axis"><option value="0">X · forward</option><option value="1">Y · left</option><option value="2">Z · up</option></select></label></div>
+<div class="legend" aria-hidden="true"><span class="series pelvis">Pelvis</span><span class="series heel">Right heel</span></div>
+<div id="chart"></div>
+<p class="caption">Solid lines trace the invented history. Each open point marks one forecast. The dashed guide joins it to the cutoff, where each landmark starts at zero.</p>
+<div class="output-head"><h3>Forecast at +100 ms</h3><span>Displacement in mm</span></div>
+<div role="status" aria-live="polite" aria-atomic="true" id="result-status" class="sr"></div>
+<div class="table-scroll"><table id="pred"><thead><tr><th scope="col">Landmark</th><th scope="col">X · forward</th><th scope="col">Y · left</th><th scope="col">Z · up</th></tr></thead><tbody>
+<tr data-landmark="0"><th scope="row">Pelvis</th><td>—</td><td>—</td><td>—</td></tr><tr data-landmark="1"><th scope="row">Right heel</th><td>—</td><td>—</td><td>—</td></tr>
+</tbody></table></div><p class="caption">Negative values point backward, right or down. Each displacement starts from that landmark’s own position at cutoff.</p>
+<p id="fail" role="alert" hidden></p>
+</div></div>
+<noscript><p>The interactive forecast needs JavaScript. The recorded-walk results are below.</p></noscript>
+<details class="data-details" id="alternatives"><summary>Compare all three inputs on this same history</summary>
+<p>Both phrases use the same fitted weights. Withholding the instruction selects a second Transformer trained on the same motion with the same capacity and number of updates. A changed forecast on an invented history has no measured future to check it against.</p>
+<div class="table-scroll"><table id="all-pred"><thead><tr><th scope="col">Input</th><th scope="col">Landmark</th><th scope="col">Forward</th><th scope="col">Left</th><th scope="col">Up</th></tr></thead><tbody></tbody></table></div>
+</details>
+<p class="caption">To rotate the laboratory frame and compare simple forecasts, <a href="/NeuroTranslation/walking-instruction-controls/">open the shared-model controls</a>.</p>
+</section>
+<section class="evidence" aria-labelledby="evidence-title"><h2 id="evidence-title">Did the cue help on recorded walks?</h2>
+<p>The researchers compared each forecast with the position of the same landmark 100 ms later. The error is the distance between those two points, in millimetres. Smaller is better.</p>
+<p>For each landmark, the correct cue must beat <em>both</em> the withheld and swapped cues. We subtract each control’s error from the correct-cue error. Both paired 95% intervals must lie below zero. Intervals resample whole people 5,000 times. People count equally, as do instructions within person, walks within instruction and windows within walk.</p>
+<section class="results-section" id="historical"><h3>Previously assessed participants</h3><p>The fits and scoring rules were fixed before this assessment. These ten people belonged to earlier gait studies. Eight contributed eligible walks to the earlier C2 heel-and-force assessment and six also contributed later repeats.</p>
+<p>10 of 10 people contributed both instructions. 60 walks yielded 216 of 240 candidate windows. 112 usual and 104 fast windows entered the paired comparison.</p>
+<p class="verdict">The pelvis missed the cue-benefit criterion. The right heel missed it.</p>
+<div class="table-scroll"><table class=""><thead><tr><th scope="col">Forecast</th><th scope="col">Pelvis error (mm)</th><th scope="col">Right heel error (mm)</th></tr></thead><tbody><tr><th scope="row">Correct instruction</th><td>5.02</td><td>5.74</td></tr><tr><th scope="row">Instruction withheld</th><td>5.12</td><td>5.68</td></tr><tr><th scope="row">Instructions swapped</th><td>5.49</td><td>6.26</td></tr><tr><th scope="row">Training instructions shuffled</th><td>5.22</td><td>5.98</td></tr><tr><th scope="row">Typical motion for instruction and strike time</th><td>14.37</td><td>14.26</td></tr></tbody></table></div>
+<div class="table-scroll"><table class="paired"><thead><tr><th scope="col">Landmark</th><th scope="col">Compared with</th><th scope="col">Error change (mm)</th><th scope="col">Paired 95% interval (mm)</th></tr></thead><tbody><tr><th scope="row">Pelvis</th><td>Instruction withheld</td><td>−0.09</td><td>−0.23 to +0.02</td></tr><tr><th scope="row">Right heel</th><td>Instruction withheld</td><td>+0.07</td><td>−0.13 to +0.26</td></tr><tr><th scope="row">Pelvis</th><td>Instructions swapped</td><td>−0.47</td><td>−0.71 to −0.25</td></tr><tr><th scope="row">Right heel</th><td>Instructions swapped</td><td>−0.52</td><td>−0.80 to −0.22</td></tr></tbody></table></div>
+<details><summary>Error for each instruction and directional bias</summary><p>Bias is predicted minus observed displacement. Its signs use the same forward, left and up axes as the forecast.</p>
+<h4>“as usual”</h4>
+<div class="table-scroll"><table class=""><thead><tr><th scope="col">Forecast</th><th scope="col">Pelvis error (mm)</th><th scope="col">Right heel error (mm)</th></tr></thead><tbody><tr><th scope="row">Correct instruction</th><td>4.05</td><td>3.14</td></tr><tr><th scope="row">Instruction withheld</th><td>4.19</td><td>3.13</td></tr><tr><th scope="row">Instructions swapped</th><td>4.33</td><td>3.27</td></tr><tr><th scope="row">Training instructions shuffled</th><td>4.12</td><td>3.24</td></tr><tr><th scope="row">Typical motion for instruction and strike time</th><td>11.16</td><td>4.21</td></tr></tbody></table></div>
+<h4>“fast but not running”</h4>
+<div class="table-scroll"><table class=""><thead><tr><th scope="col">Forecast</th><th scope="col">Pelvis error (mm)</th><th scope="col">Right heel error (mm)</th></tr></thead><tbody><tr><th scope="row">Correct instruction</th><td>5.99</td><td>8.34</td></tr><tr><th scope="row">Instruction withheld</th><td>6.04</td><td>8.22</td></tr><tr><th scope="row">Instructions swapped</th><td>6.65</td><td>9.26</td></tr><tr><th scope="row">Training instructions shuffled</th><td>6.32</td><td>8.72</td></tr><tr><th scope="row">Typical motion for instruction and strike time</th><td>17.58</td><td>24.32</td></tr></tbody></table></div>
+<div class="table-scroll"><table class=""><thead><tr><th scope="col">Correct cue</th><th scope="col">Landmark</th><th scope="col">Forward bias (mm)</th><th scope="col">Left bias (mm)</th><th scope="col">Up bias (mm)</th></tr></thead><tbody><tr><th scope="row">Both instructions</th><td>Pelvis</td><td>−0.41</td><td>+0.46</td><td>+0.34</td></tr><tr><th scope="row">Both instructions</th><td>Right heel</td><td>−1.28</td><td>+0.33</td><td>−0.69</td></tr><tr><th scope="row">As usual</th><td>Pelvis</td><td>−1.02</td><td>+0.36</td><td>+0.31</td></tr><tr><th scope="row">As usual</th><td>Right heel</td><td>−0.52</td><td>+0.35</td><td>+0.21</td></tr><tr><th scope="row">Fast</th><td>Pelvis</td><td>+0.20</td><td>+0.56</td><td>+0.37</td></tr><tr><th scope="row">Fast</th><td>Right heel</td><td>−2.03</td><td>+0.31</td><td>−1.60</td></tr></tbody></table></div>
+</details>
+<details><summary>Compare simple forecasts and the shared encoder</summary>
+<p>These methods and the Transformer used the same historical walks.</p>
+<div class="table-scroll"><table class=""><thead><tr><th scope="col">Forecast</th><th scope="col">Pelvis error (mm)</th><th scope="col">Right heel error (mm)</th></tr></thead><tbody><tr><th scope="row">Linear forecast from movement</th><td>6.19</td><td>8.79</td></tr><tr><th scope="row">Linear forecast with instruction</th><td>5.76</td><td>8.51</td></tr><tr><th scope="row">Shared encoder with instruction</th><td>5.63</td><td>7.65</td></tr><tr><th scope="row">Hold both landmarks still</th><td>140.74</td><td>24.79</td></tr><tr><th scope="row">Repeat previous 100 ms</th><td>23.24</td><td>20.73</td></tr><tr><th scope="row">Continue last 50 ms velocity</th><td>19.02</td><td>19.29</td></tr></tbody></table></div>
+</details>
+<h4>Does the Transformer beat a linear forecast?</h4>
+<p>With the correct cue in both models, the Transformer had lower error on these same walks. This secondary comparison changes the model architecture. It does not isolate what the cue contributes. The intervals have no adjustment for multiple comparisons.</p>
+<div class="table-scroll"><table class=""><thead><tr><th scope="col">Transformer minus linear</th><th scope="col">Mean difference (mm)</th><th scope="col">Paired 95% interval (mm)</th></tr></thead><tbody><tr><th scope="row">Pelvis</th><td>−0.74</td><td>−1.17 to −0.32</td></tr><tr><th scope="row">Right heel</th><td>−2.77</td><td>−3.32 to −2.21</td></tr></tbody></table></div>
+</section>
+<section class="results-section" id="development"><h3>Grouped development folds</h3><p>Each forecast came from a model trained on the other two of three participant groups. All walks and both conditions for a person stayed together. The earlier feasibility check had used one development participant.</p>
+<p>30 of 30 people contributed both instructions. 180 walks yielded 645 of 720 candidate windows. 323 usual and 322 fast windows entered the paired comparison.</p>
+<p class="verdict">The pelvis missed the cue-benefit criterion. The right heel missed it.</p>
+<div class="table-scroll"><table class=""><thead><tr><th scope="col">Forecast</th><th scope="col">Pelvis error (mm)</th><th scope="col">Right heel error (mm)</th></tr></thead><tbody><tr><th scope="row">Correct instruction</th><td>5.78</td><td>6.91</td></tr><tr><th scope="row">Instruction withheld</th><td>5.64</td><td>6.80</td></tr><tr><th scope="row">Instructions swapped</th><td>6.21</td><td>7.28</td></tr><tr><th scope="row">Training instructions shuffled</th><td>5.70</td><td>6.89</td></tr><tr><th scope="row">Typical motion for instruction and strike time</th><td>18.87</td><td>16.84</td></tr></tbody></table></div>
+<div class="table-scroll"><table class="paired"><thead><tr><th scope="col">Landmark</th><th scope="col">Compared with</th><th scope="col">Error change (mm)</th><th scope="col">Paired 95% interval (mm)</th></tr></thead><tbody><tr><th scope="row">Pelvis</th><td>Instruction withheld</td><td>+0.14</td><td>+0.02 to +0.26</td></tr><tr><th scope="row">Right heel</th><td>Instruction withheld</td><td>+0.10</td><td>−0.19 to +0.33</td></tr><tr><th scope="row">Pelvis</th><td>Instructions swapped</td><td>−0.43</td><td>−0.64 to −0.21</td></tr><tr><th scope="row">Right heel</th><td>Instructions swapped</td><td>−0.37</td><td>−0.59 to −0.15</td></tr></tbody></table></div>
+<details><summary>Error for each instruction and directional bias</summary><p>Bias is predicted minus observed displacement. Its signs use the same forward, left and up axes as the forecast.</p>
+<h4>“as usual”</h4>
+<div class="table-scroll"><table class=""><thead><tr><th scope="col">Forecast</th><th scope="col">Pelvis error (mm)</th><th scope="col">Right heel error (mm)</th></tr></thead><tbody><tr><th scope="row">Correct instruction</th><td>4.13</td><td>3.69</td></tr><tr><th scope="row">Instruction withheld</th><td>3.95</td><td>3.53</td></tr><tr><th scope="row">Instructions swapped</th><td>4.37</td><td>4.18</td></tr><tr><th scope="row">Training instructions shuffled</th><td>4.02</td><td>3.66</td></tr><tr><th scope="row">Typical motion for instruction and strike time</th><td>13.05</td><td>5.49</td></tr></tbody></table></div>
+<h4>“fast but not running”</h4>
+<div class="table-scroll"><table class=""><thead><tr><th scope="col">Forecast</th><th scope="col">Pelvis error (mm)</th><th scope="col">Right heel error (mm)</th></tr></thead><tbody><tr><th scope="row">Correct instruction</th><td>7.44</td><td>10.12</td></tr><tr><th scope="row">Instruction withheld</th><td>7.33</td><td>10.08</td></tr><tr><th scope="row">Instructions swapped</th><td>8.05</td><td>10.37</td></tr><tr><th scope="row">Training instructions shuffled</th><td>7.38</td><td>10.11</td></tr><tr><th scope="row">Typical motion for instruction and strike time</th><td>24.69</td><td>28.19</td></tr></tbody></table></div>
+<div class="table-scroll"><table class=""><thead><tr><th scope="col">Correct cue</th><th scope="col">Landmark</th><th scope="col">Forward bias (mm)</th><th scope="col">Left bias (mm)</th><th scope="col">Up bias (mm)</th></tr></thead><tbody><tr><th scope="row">Both instructions</th><td>Pelvis</td><td>−0.28</td><td>−0.11</td><td>+0.51</td></tr><tr><th scope="row">Both instructions</th><td>Right heel</td><td>+0.20</td><td>−0.32</td><td>−0.17</td></tr><tr><th scope="row">As usual</th><td>Pelvis</td><td>−0.05</td><td>−0.22</td><td>+0.09</td></tr><tr><th scope="row">As usual</th><td>Right heel</td><td>+0.10</td><td>−0.28</td><td>−0.04</td></tr><tr><th scope="row">Fast</th><td>Pelvis</td><td>−0.51</td><td>+0.00</td><td>+0.93</td></tr><tr><th scope="row">Fast</th><td>Right heel</td><td>+0.29</td><td>−0.36</td><td>−0.29</td></tr></tbody></table></div>
+</details>
+<details><summary>Compare simple forecasts and the shared encoder</summary>
+<p>Development comparators used five participant folds. The Transformer used three, so the development figures describe different training partitions.</p>
+<div class="table-scroll"><table class=""><thead><tr><th scope="col">Forecast</th><th scope="col">Pelvis error (mm)</th><th scope="col">Right heel error (mm)</th></tr></thead><tbody><tr><th scope="row">Linear forecast from movement</th><td>6.47</td><td>8.68</td></tr><tr><th scope="row">Linear forecast with instruction</th><td>6.39</td><td>8.58</td></tr><tr><th scope="row">Shared encoder with instruction</th><td>6.37</td><td>7.79</td></tr><tr><th scope="row">Hold both landmarks still</th><td>136.69</td><td>25.00</td></tr><tr><th scope="row">Repeat previous 100 ms</th><td>22.64</td><td>20.33</td></tr><tr><th scope="row">Continue last 50 ms velocity</th><td>18.52</td><td>18.43</td></tr></tbody></table></div>
+</details>
+</section>
+<p>The 10 reserve participants remain outside this experiment. The source team filled marker gaps and filtered the signals forward and backward before export. The forecast uses that processed history. Real-time accuracy remains unmeasured.</p>
+</section>
+<section class="notes" aria-labelledby="measure-title"><h2 id="measure-title">What the experiment measures</h2>
+<div><h3>Two instructions</h3><p>Schreiber and Moissenet describe barefoot walking along a 10 m walkway. C4 carries the instruction “as usual”, C5 “fast but not running”. The authors report these phrases in the protocol. The recordings supply the condition of each trial, with no speech track or timestamp for either phrase. C1–C3 used a different protocol and fall outside this comparison.</p></div>
+<div><h3>Two landmarks</h3><p>The pelvis is the centre of four skin markers. A fifth marker tracks the right heel. Twenty-one samples at 100 Hz supply each history. The pelvis’s horizontal travel sets forward. Left and up complete the coordinate frame. The model also receives elapsed time since the first right foot strike. It estimates six displacements together.</p></div>
+<div><h3>What can change</h3><p>Changing the text changes a two-value condition code. Swapping the cue in a recorded walk tests how the model responds while the measured outcome stays fixed. We do not know how that person would have moved under a different instruction on that same walk. General language comprehension, neural activity and the ability to command a body remain untested.</p></div>
+<p class="sources">Céline Schreiber and Florent Moissenet released the recordings under CC BY 4.0. This reader includes derived fits, aggregate scores and invented inputs. <a href="NOTICE.md">Source and reuse</a> · <a href="https://doi.org/10.1038/s41597-019-0124-4">Original study</a> · <a href="https://doi.org/10.6084/m9.figshare.7734767.v8">Recordings, v8</a></p>
+</section>
+</main>
+</body></html>
