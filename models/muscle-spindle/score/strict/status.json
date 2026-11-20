@@ -1,0 +1,53 @@
+{
+  "population": "strict",
+  "test": "original three held filename prefixes",
+  "status": "unevaluable",
+  "reason": "Only prefix 0 has any eligible windows on separate deposited electrical and mechanics clocks. Prefixes 1 and 4 supply zero windows. A three-prefix fit and gate cannot be evaluated.",
+  "gate_pass": null,
+  "models_fit": 0,
+  "scores": null,
+  "eligible_by_prefix": {
+    "0": {
+      "stored_trials": 148,
+      "eligible_trials": 94,
+      "eligible_windows": 16262,
+      "exclusions": {
+        "internal identity or trial-label cardinality mismatch": 38,
+        "irregular or incompatible time_PotMem lattice (0.000249999999998s)": 2,
+        "irregular or incompatible time_PotMem lattice (0.000249999999999s)": 5,
+        "irregular or incompatible time_PotMem lattice (0.000250000000001s)": 2,
+        "irregular or incompatible time_PotMem lattice (0.000250000000002s)": 1,
+        "irregular or incompatible time_PotMem lattice (0.00025s)": 6
+      }
+    },
+    "1": {
+      "stored_trials": 380,
+      "eligible_trials": 0,
+      "eligible_windows": 0,
+      "exclusions": {
+        "missing or non-real-vector time_PotMem": 380
+      }
+    },
+    "4": {
+      "stored_trials": 26,
+      "eligible_trials": 0,
+      "eligible_windows": 0,
+      "exclusions": {
+        "internal identity or trial-label cardinality mismatch": 26
+      }
+    }
+  },
+  "member_windows": {
+    "aff004": 6086,
+    "aff015": 2506,
+    "aff017": 7670,
+    "aff021": 0,
+    "aff101": 0,
+    "aff102": 0,
+    "aff103": 0,
+    "aff107": 0,
+    "aff406": 0
+  },
+  "window_source_sha256": "60a6c637e078975307b1b063aa335f32107ad55decd0fb6619ca398aa758185a",
+  "QC_summary_sha256": "9e0de19b444d87ee8f468a447e1f30e1838e225fc7213494d0363602309e54fb"
+}

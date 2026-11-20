@@ -1,0 +1,5 @@
+# Exploratory individual-afferent holdout
+
+The prospective clock addendum allowed an exploratory strict leave-one-afferent-out analysis if neither archive population retained all three requested prefixes and at least three strict afferents remained. Only aff004, aff015 and aff017 qualified under the original separate-clock rules. All belong to prefix 0. Each model trains on two whole afferent members and tests on every eligible trial of the third. The original strict and expanded three-prefix comparisons remain unevaluable. All eligible rows, count models, hyperparameters, three seeds, nonoverlapping controls, outcome metrics and predefined conditional/pairing criteria are retained. The exploratory consistency tests now refer to the three held afferents individually. They have no cross-prefix or population-level interpretation.
+
+With a single source prefix, equally weighted training prefixes → afferents → trials → windows reduces to equal afferents → trials → windows. The all-window auxiliary GLM shares this weighting and the same objective with the primary model. The exact sampled-multiset GLMs remain a distinct comparison.

@@ -1,5 +1,7 @@
 # The hand's own history is the forecast to beat
 
+The [muscle spindle study](https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-spindle/) scores the next 20 ms of sensory firing on three held fibers. Compare the history-only and mechanically informed models against recent firing and a regularized count model. [Full scores](../models/muscle-spindle/score/strict-afferent/summary.json)
+
 Every study in this repository asks one question of one open dataset. Most ask the same one: a model already knows something about a movement, so does one more signal help it forecast what comes next?
 
 Mostly it does not. A model that learned from the recent history of the very thing it forecast (it was *fitted* to that history) beat "repeat the last value" every time it was tried on the task it was fitted for. A brain signal from the scalp, added on top, usually made the forecast worse. A muscle signal helped at the wrist, and nowhere else beyond the noise. The general model this project is building, one model meant to learn from many kinds of body signal at once, got worse when it was given the same muscle signal at the wrist. And when the task changed, or the person had to follow a new force level shown on a screen, a one-line rule beat every fitted model.

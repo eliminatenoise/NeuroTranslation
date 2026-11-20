@@ -1,5 +1,7 @@
 # Launchers and offline copies
 
+To follow a stretch and inspect its predicted sensory firing, extract the [muscle spindle reader](docs/muscle-spindle-offline.zip) and choose **Open on Windows.cmd**, **Open on macOS.command** or **Open on Linux.sh**. [Model weights, source readers and training code](models/muscle-spindle.zip)
+
 Almost everything here runs in a browser. A launcher is a shortcut that opens the right page. An offline copy is a ZIP that holds the page itself, so it works with no network. The general model’s five-sensor walking page and the study 28 wrist command need Python. The two newer stride and rat viewers open without it.
 
 ## A shortcut to the app

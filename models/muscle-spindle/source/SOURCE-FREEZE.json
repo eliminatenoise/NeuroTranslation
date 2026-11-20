@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "sealed_at_utc": "2026-11-20T22:09:38.884032+00:00",
+  "dataset": "Blum et al. (2020), Dryad published version 2 ID 95220; corresponding Zenodo record 4315453, spindle_data.zip, CC0.",
+  "source_url": "https://zenodo.org/records/4315453/files/spindle_data.zip",
+  "archive_bytes": 1555917733,
+  "archive_publisher_sha256": "e9bcc0b9ed8b0c5d894c5f9be7b7ed9267de39a0ae70d1372dd514fdf5f450d5",
+  "members": [
+    {
+      "name": "eLife_data/aff102_proc.mat",
+      "uncompressed_size": 218362716,
+      "compressed_size": 214620811,
+      "header_offset": 73,
+      "compression": 8,
+      "crc32": "31d941cc"
+    },
+    {
+      "name": "eLife_data/aff103_proc.mat",
+      "uncompressed_size": 194847531,
+      "compressed_size": 191386504,
+      "header_offset": 214621195,
+      "compression": 8,
+      "crc32": "7ae274ce"
+    },
+    {
+      "name": "eLife_data/aff017_proc.mat",
+      "uncompressed_size": 54106643,
+      "compressed_size": 50227617,
+      "header_offset": 406007803,
+      "compression": 8,
+      "crc32": "218c6821"
+    },
+    {
+      "name": "eLife_data/aff021_proc.mat",
+      "uncompressed_size": 85392358,
+      "compressed_size": 82867625,
+      "header_offset": 794729129,
+      "compression": 8,
+      "crc32": "e2be74a3"
+    },
+    {
+      "name": "eLife_data/aff015_proc.mat",
+      "uncompressed_size": 20380286,
+      "compressed_size": 19090579,
+      "header_offset": 877597065,
+      "compression": 8,
+      "crc32": "be44b145"
+    },
+    {
+      "name": "eLife_data/aff101_proc.mat",
+      "uncompressed_size": 190021454,
+      "compressed_size": 186724582,
+      "header_offset": 896687955,
+      "compression": 8,
+      "crc32": "e9961d60"
+    },
+    {
+      "name": "eLife_data/aff107_proc.mat",
+      "uncompressed_size": 358332736,
+      "compressed_size": 352678298,
+      "header_offset": 1088347535,
+      "compression": 8,
+      "crc32": "81104e4f"
+    },
+    {
+      "name": "eLife_data/aff004_proc.mat",
+      "uncompressed_size": 66889176,
+      "compressed_size": 63634970,
+      "header_offset": 1441025937,
+      "compression": 8,
+      "crc32": "ca541de0"
+    },
+    {
+      "name": "eLife_data/aff406_proc.mat",
+      "uncompressed_size": 47894575,
+      "compressed_size": 46205503,
+      "header_offset": 1509707352,
+      "compression": 8,
+      "crc32": "606c4645"
+    }
+  ],
+  "prefix_folds": [
+    0,
+    1,
+    4
+  ],
+  "reserve": [
+    "aff502_proc.mat",
+    "aff503_proc.mat"
+  ],
+  "other_members": "All other member payloads excluded. Reuse already accepted pilot MAT. Load only numerical healthy three-digit allowlist.",
+  "original_pilot": {
+    "afferent": "aff015",
+    "trial_matlab": 1,
+    "sha256": "b3312ecf0a5840d96336a309a26afaaa4d1396107dc20035d58f2a65d3b56a23",
+    "choice": "Prior metadata-only smallest compressed healthy member, first trial; pilot properties already known. Illustration fixed on this trial, using prefix-0 held predictions. Never suggest the trial was wholly unseen by investigators."
+  },
+  "trial_admission": "Every stored healthy proc_data trial from these nine source identities, in MATLAB order. README defines triangle_series as repeated ramp-release; every other nonempty source protocol label is a ramp-hold-release variant. Accept both classes. Preserve every exact label. Missing/blank label, unmatched trial-to-label count or nonmatching affname fails. The authors already selected analyzable stretches; add no firing-count, waveform amplitude, movement, fitted-error or activity threshold.",
+  "clocks": "time and time_PotMem are finite vectors of at least two strictly increasing entries in seconds. Infer native median periods, round samples per 0.020s to nearest integer, require at least two mechanics samples and one neural sample per bin, every relative timestamp vs the implied uniform lattice within 1e-8 s, including both clocks' accumulated drift. Require mechanics origin to align to electrical lattice to 1e-8 s. Verify rate and offsets for each trial; report mismatches to published nominal mechanics frequencies (2kHz for 0/1, 10kHz for 4) without overriding measured regular clocks. No imputation or interpolation.",
+  "events": "spiketimes must be real finite monotone, unique and within the electrical recording; empty and singleton numeric event vectors allowed. Prefer absolute seconds only when every event equals a stored electrical timestamp within 1e-8 s. If that fails, accept exact integers in [1,n] (README describes indices) ONLY with at least two events and archived ISI agreeing with differences of translated native event times to 1e-8 s, and label conversion explicitly. Ambiguous non-equivalent interpretations or other coordinates fail closed; never subtract an undocumented start time. Verify ISI and firing_rate against event interval and reciprocal if present (seconds within 1e-8, relative rate tolerance 1e-7 plus 1e-7 Hz). Interval summary issues are reported independently; neither series defines an input or target. Empty genuinely numerical event vector counts as 0.",
+  "support": "Zero-based bin j=[mechanics origin + j*0.020, origin+(j+1)*0.020) seconds; integer native ticks resolve float-edge roundoff. Require both clocks to span both exact edges (including right endpoint) and aligned mechanics, electrical lengths. Length/Force/PotMem source vectors must be real and length-match their clocks. A nonfinite mechanics or raw potential sample masks its bin. Flag finite flat signals and signed ranges, keep polarity as stored; no physical digitizer calibration inferred. No clipping, trial exclusion for silence, baseline subtraction, balancing, spike re-detection or filtering. Save bin mask and raw-trial counts/reasons. A target row j requires j-5...j all valid and belongs exclusively to that same source trial. Trailing partial bins and insufficient history are reported.",
+  "features": "Per completed causal 20ms bin: last force/servomotor position measured at time strictly before right edge, native means of force/position, within-bin backward rates = (last-first)/(sample time last - sample time first) in archived amplitude units/s, and detected spike count. Five consecutive bins constitute exactly 100ms, oldest first. Force/Length/PotMem remain archived scale and polarity. Use archive PotMem only for coverage QC and held illustration. Never feed Velocity, dVdt, dFdt, ISI, firing_rate, labels, future outcomes or potentials into history.",
+  "labels": "Primary y_count counts detected events in the following completed 20ms bin, from its left edge (inclusive) to right edge (exclusive). Secondary y_delta computes the last native force/position of that following bin minus the last currently observed native values of the preceding bin. Save per-row cutoff and native force/position separately; mask membership is identical across modalities and model controls. All calibration/scaling fitting belongs to training side.",
+  "interface": {
+    "X": "float64 [N,5,5], chronological bins; last force, last actuator position, backward force rate, backward position rate, spike count",
+    "mech_mean": "float64 [N,5,2] native force and position means",
+    "y_count": "int32 [N]",
+    "current_mech": "float64 [N,2] force and actuator position at last history sample",
+    "y_delta": "float64 [N,2] next minus current for force, position",
+    "prefix": "int8 [N], 0,1,4",
+    "afferent": "unicode [N] e.g. aff015",
+    "trial": "int32 [N], MATLAB 1-based within afferent",
+    "bin_index": "int32 [N], target bin, zero-based",
+    "cutoff_s": "float64 [N], native clock seconds",
+    "trial_type": "unicode [N], original label"
+  },
+  "all_trial_grouping": "Whole afferents, all their trials, and complete prefixes move together. Nine developmental afferents only, leave-prefix 0,1,4. Prefix-5 reserve unopened. Individual animal identities unverified despite recording-date/filename proxies."
+}

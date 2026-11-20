@@ -5,7 +5,7 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.e857080fae8333b54a69fc8d6427e6f53816c5561698dbaca9af46657094c6cc.css">
+  <link rel="stylesheet" href="style.2bd83ab9185cb8a5bd93d258409767e4c9a13f90eaed7b0ce486c7c28f4ccf73.css">
 </head>
 <body>
   <header class="topbar">
@@ -24,6 +24,7 @@
       <div>
         <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p>
         <nav class="section-links wrist-links" aria-label="Study recordings">
+          <a href="./muscle-spindle/index.html" data-pages-href="./muscle-spindle/index.html">Forecast sensory spikes during a stretch</a>
           <a href="./cross-limb-movement/index.html" data-pages-href="./cross-limb-movement/index.html">Forecast wrist and sacrum movement</a>
           <a href="./muscle-and-motion/index.html" data-pages-href="./muscle-and-motion/index.html">Forecast leg-muscle activity and pelvic movement</a>
           <a href="./visual-balance/index.html" data-pages-href="./visual-balance/index.html">Forecast balance after a visual rotation</a>
@@ -105,6 +106,15 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="finger-transfer" aria-labelledby="cohort-choice"><h3 id="cohort-choice">A different person’s finger movement</h3><p>Learn from four people, calibrate on a fifth, then compare the cue with the recorded brain signal.</p><a href="finger-transfer/index.html">Run the five-person comparison</a></article>
+      <article class="study-choice-card" data-study-key="muscle-spindle" aria-labelledby="reader-muscle-spindle">
+        <h3 id="reader-muscle-spindle">From stretch to spikes</h3>
+        <p>As a rat muscle stretches, how many impulses will a sensory fiber send next? Replay the recorded spikes and compare forecasts from the nerve’s history, tendon force and apparatus motion. The three eligible fibers share one filename group.</p>
+        <nav class="section-links" aria-label="Muscle spindle study">
+          <a href="./muscle-spindle/index.html" data-pages-href="./muscle-spindle/index.html">Replay the stretch</a>
+          <a href="./papers/muscle-spindle/index.html" data-pages-href="./papers/muscle-spindle/index.html">Read the study</a>
+          <a href="https://eliminatenoise.github.io/Interoceptomics/muscle-spindle/">Rotate the spindle model</a>
+        </nav>
+      </article>
       <article class="study-choice-card" data-study-key="cross-limb-movement" aria-labelledby="reader-cross-limb-movement">
         <h3 id="reader-cross-limb-movement">Can the same model follow a wrist and the base of the spine?</h3>
         <p>Choose a reaching hand or a balancing body. Change a muscle signal and follow the next 125 milliseconds of the wrist or sacrum. Compare a model trained on both studies with one trained on the selected task.</p>
@@ -449,6 +459,6 @@
     document.getElementById("study-choice-label").hidden = false;
     showStudy();
   </script>
-  <script type="module" src="app.e857080fae8333b54a69fc8d6427e6f53816c5561698dbaca9af46657094c6cc.mjs"></script>
+  <script type="module" src="app.2bd83ab9185cb8a5bd93d258409767e4c9a13f90eaed7b0ce486c7c28f4ccf73.mjs"></script>
 </body>
 </html>

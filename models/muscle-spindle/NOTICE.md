@@ -1,0 +1,5 @@
+# Source and reuse
+
+Kyle P. Blum and colleagues released the rat spindle recordings for their 2020 study of muscle spindle firing and muscle mechanics. The source deposit dedicates the data to the public domain under CC0 1.0. The example uses a healthy recording of one sensory fiber, aff015, trial 1, from the publicly identified archive. NeuroTranslation dedicates its reader, fitted models and original code to the public domain under CC0 to the extent of its rights. [Original paper](https://doi.org/10.7554/eLife.55177) · [Dryad data and licence](https://doi.org/10.5061/dryad.vdncjsxsw) · [Open archive mirror](https://zenodo.org/records/4315453) · [CC0 terms](LICENSE)
+
+The displacement channel is the recorded position of the apparatus. It is not a measured muscle-fiber length. The archive’s file-specific absolute voltage, position and force calibrations have not been verified. All three signals retain their archive units. Detected impulses are timed events, counted as spikes. The anatomical illustrations in the companion atlas are explanatory reconstructions.

@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0
 
+To forecast a sensory nerve fiber’s firing during a passive stretch, start with the [muscle spindle reader](https://eliminatenoise.github.io/NeuroTranslation/muscle-spindle/). The [training package](muscle-spindle/) includes 45 Transformer checkpoints, fitted count regressions, a separate forecast of future mechanical changes and source readers.
+
 The current checkpoint also forecasts both knees 15 frames ahead from four seconds of walking. [Run the knee example](neurotranslate-0.0/knee/) · [Compare forecasts](https://eliminatenoise.github.io/NeuroTranslation/knee-stride/)
 
 The same checkpoint forecasts tracked movement distance in centimetres, two right-wrist angles in degrees and displacement on a rat’s W-shaped track. Give it five earlier tracking points and, optionally, a second of firing counts from two brain regions. The movement encoder first reads the changes in position. A separate fitted calculation pairs the firing in each interval with the movement state from that interval. [Download the CPU model](neurotranslate-0.0.zip) · [Input examples and methods](neurotranslate-0.0/)

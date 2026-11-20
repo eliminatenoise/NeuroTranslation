@@ -1,0 +1,3468 @@
+{
+  "source": "Blum et al. 2020, original observed healthy rat muscle-spindle recordings.",
+  "source_doi": "https://doi.org/10.5061/dryad.vdncjsxsw",
+  "paper": "https://doi.org/10.7554/eLife.55177",
+  "data_licence": "Creative Commons CC0 1.0",
+  "data_grain": "one sensory afferent, one archived stretch trial, one nonoverlapping target bin of 20 ms; consecutive 100 ms histories overlap",
+  "excluded_near_uniform_electrical_lattices": [
+    {
+      "afferent": "aff004",
+      "trial": 20,
+      "measured_hz": 19998.581560344857,
+      "measured_span_s": 3.5249999999999995,
+      "signed_last_time_error_vs_required_grid_s": 0.00024999999999941735,
+      "electrical_step_range_s": [
+        5.0003546348875716e-05,
+        5.000354635242843e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff004",
+      "trial": 21,
+      "measured_hz": 20001.418640974025,
+      "measured_span_s": 3.5244999999999997,
+      "signed_last_time_error_vs_required_grid_s": -0.00025000000000030553,
+      "electrical_step_range_s": [
+        4.999645364733851e-05,
+        4.9996453650891226e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff004",
+      "trial": 24,
+      "measured_hz": 19999.409506729833,
+      "measured_span_s": 8.4675,
+      "signed_last_time_error_vs_required_grid_s": 0.00024999999999941735,
+      "electrical_step_range_s": [
+        5.0001476274985635e-05,
+        5.000147627853835e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff004",
+      "trial": 25,
+      "measured_hz": 20000.5905275231,
+      "measured_span_s": 8.466999999999999,
+      "signed_last_time_error_vs_required_grid_s": -0.0002500000000011937,
+      "electrical_step_range_s": [
+        4.9998523721228594e-05,
+        4.999852372833402e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff004",
+      "trial": 26,
+      "measured_hz": 19999.165135814776,
+      "measured_span_s": 5.988999999999997,
+      "signed_last_time_error_vs_required_grid_s": 0.000249999999997641,
+      "electrical_step_range_s": [
+        5.000208724581512e-05,
+        5.000208724936783e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff004",
+      "trial": 27,
+      "measured_hz": 20000.834933273494,
+      "measured_span_s": 5.988500000000002,
+      "signed_last_time_error_vs_required_grid_s": -0.000249999999997641,
+      "electrical_step_range_s": [
+        4.999791275039911e-05,
+        4.999791275395182e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff004",
+      "trial": 44,
+      "measured_hz": 19997.846220285403,
+      "measured_span_s": 2.3215000000000003,
+      "signed_last_time_error_vs_required_grid_s": 0.00025000000000030553,
+      "electrical_step_range_s": [
+        5.000538502741847e-05,
+        5.000538503097118e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff004",
+      "trial": 45,
+      "measured_hz": 20002.154243784476,
+      "measured_span_s": 2.3209999999999997,
+      "signed_last_time_error_vs_required_grid_s": -0.00025000000000030553,
+      "electrical_step_range_s": [
+        4.999461496879576e-05,
+        4.999461497234847e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff004",
+      "trial": 46,
+      "measured_hz": 19998.596885299972,
+      "measured_span_s": 3.5634999999999994,
+      "signed_last_time_error_vs_required_grid_s": 0.00024999999999941735,
+      "electrical_step_range_s": [
+        5.000350803285869e-05,
+        5.000350803463505e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff004",
+      "trial": 47,
+      "measured_hz": 20001.403311693975,
+      "measured_span_s": 3.562999999999999,
+      "signed_last_time_error_vs_required_grid_s": -0.0002500000000011937,
+      "electrical_step_range_s": [
+        4.999649196335554e-05,
+        4.9996491970460966e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff004",
+      "trial": 52,
+      "measured_hz": 19998.196573578327,
+      "measured_span_s": 2.772499999999999,
+      "signed_last_time_error_vs_required_grid_s": 0.00024999999999897327,
+      "electrical_step_range_s": [
+        5.000450897085784e-05,
+        5.0004508974410555e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff004",
+      "trial": 53,
+      "measured_hz": 20001.80375180826,
+      "measured_span_s": 2.7720000000000002,
+      "signed_last_time_error_vs_required_grid_s": -0.00024999999999986144,
+      "electrical_step_range_s": [
+        4.999549102535639e-05,
+        4.99954910289091e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff004",
+      "trial": 54,
+      "measured_hz": 19998.611496992693,
+      "measured_span_s": 3.601,
+      "signed_last_time_error_vs_required_grid_s": 0.00024999999999986144,
+      "electrical_step_range_s": [
+        5.000347149675122e-05,
+        5.000347150030393e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff004",
+      "trial": 55,
+      "measured_hz": 20001.388695921378,
+      "measured_span_s": 3.6004999999999985,
+      "signed_last_time_error_vs_required_grid_s": -0.0002500000000016378,
+      "electrical_step_range_s": [
+        4.999652849946301e-05,
+        4.9996528503015725e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff015",
+      "trial": 17,
+      "measured_hz": 19998.581962455013,
+      "measured_span_s": 3.526,
+      "signed_last_time_error_vs_required_grid_s": 0.00024999999999986144,
+      "electrical_step_range_s": [
+        5.0003545343457745e-05,
+        5.000354534701046e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    },
+    {
+      "afferent": "aff015",
+      "trial": 18,
+      "measured_hz": 20001.418238039147,
+      "measured_span_s": 3.525500000000001,
+      "signed_last_time_error_vs_required_grid_s": -0.00024999999999897327,
+      "electrical_step_range_s": [
+        4.9996454652756483e-05,
+        4.99964546563092e-05
+      ],
+      "measured_mechanical_and_electrical_last_time_difference_s": 0.0
+    }
+  ],
+  "quarantined_member_diagnostics": {
+    "aff021": {
+      "excluded_trials": 38,
+      "eligible_rows": 0,
+      "native_mechanics_hz": [
+        2000.0
+      ],
+      "native_electrical_hz": [
+        20000.0
+      ],
+      "trials_with_verified_event_coordinates": 36,
+      "diagnostic_failures": {
+        "irregular or incompatible time_PotMem lattice (0.000250000000008s)": 2
+      }
+    },
+    "aff406": {
+      "excluded_trials": 26,
+      "eligible_rows": 0,
+      "native_mechanics_hz": [
+        10000.0
+      ],
+      "native_electrical_hz": [
+        10000.0
+      ],
+      "trials_with_verified_event_coordinates": 26,
+      "diagnostic_failures": {}
+    }
+  },
+  "metadata_checks": {
+    "aff004": {
+      "archive_member": "aff004_proc.mat",
+      "internal_affname": "aff004",
+      "archive_date": "05-Jun-2014 14:10:30",
+      "actual_trials": 55,
+      "type_labels": 55,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff015": {
+      "archive_member": "aff015_proc.mat",
+      "internal_affname": "aff015",
+      "archive_date": "05-Jun-2014 18:01:28",
+      "actual_trials": 22,
+      "type_labels": 22,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff017": {
+      "archive_member": "aff017_proc.mat",
+      "internal_affname": "aff017",
+      "archive_date": "06-Jun-2014 14:00:10",
+      "actual_trials": 33,
+      "type_labels": 33,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff021": {
+      "archive_member": "aff021_proc.mat",
+      "internal_affname": "aff021",
+      "archive_date": "06-Jun-2014 17:00:08",
+      "actual_trials": 38,
+      "type_labels": 39,
+      "internal_name_agrees": true,
+      "label_count_agrees": false
+    },
+    "aff101": {
+      "archive_member": "aff101_proc.mat",
+      "internal_affname": "aff101",
+      "archive_date": "2016_02_02",
+      "actual_trials": 100,
+      "type_labels": 100,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff102": {
+      "archive_member": "aff102_proc.mat",
+      "internal_affname": "aff102",
+      "archive_date": "2016_02_02",
+      "actual_trials": 68,
+      "type_labels": 68,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff103": {
+      "archive_member": "aff103_proc.mat",
+      "internal_affname": "aff103",
+      "archive_date": "2016_02_02",
+      "actual_trials": 88,
+      "type_labels": 88,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff107": {
+      "archive_member": "aff107_proc.mat",
+      "internal_affname": "aff107",
+      "archive_date": "2016_02_02",
+      "actual_trials": 124,
+      "type_labels": 124,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff406": {
+      "archive_member": "aff406_proc.mat",
+      "internal_affname": "aff106",
+      "archive_date": "2017_03_31",
+      "actual_trials": 26,
+      "type_labels": 26,
+      "internal_name_agrees": false,
+      "label_count_agrees": true
+    }
+  },
+  "overall": {
+    "stored_trials": 554,
+    "eligible_trials": 94,
+    "excluded_trials": 460,
+    "exclusions": {
+      "internal identity or trial-label cardinality mismatch": 64,
+      "irregular or incompatible time_PotMem lattice (0.000249999999998s)": 2,
+      "irregular or incompatible time_PotMem lattice (0.000249999999999s)": 5,
+      "irregular or incompatible time_PotMem lattice (0.000250000000001s)": 2,
+      "irregular or incompatible time_PotMem lattice (0.000250000000002s)": 1,
+      "irregular or incompatible time_PotMem lattice (0.00025s)": 6,
+      "missing or non-real-vector time_PotMem": 380
+    },
+    "trial_labels": {
+      "(not assigned because source identity or label count failed)": 64,
+      "accel_ramp": 250,
+      "accel_series": 1,
+      "trad_ramp": 1,
+      "trad_series": 80,
+      "triangle_series": 158
+    },
+    "sparse_trials_lt_50_archived_events": 143,
+    "zero_event_trials": 0,
+    "native_mechanics_hz": [
+      2000.0,
+      10000.0
+    ],
+    "native_electrical_hz": [
+      20000.0
+    ],
+    "event_coordinates": {
+      "seconds on electrical sample times": 94,
+      "unverified; native clock or structural QC failed": 460
+    },
+    "exclusions_missing_explicit_electrical_clock": 380,
+    "failed_clock_lattice_trials": 16,
+    "nominal_mechanical_rate_disagreements": 380,
+    "trials_checked_for_interval_consistency_before_source_gate": 94,
+    "tail_after_last_complete_bin_s_total_on_admitted_trials": 0.8130000000000001,
+    "supplied_ISI_disagreements": 0,
+    "supplied_interval_rate_disagreements": 0,
+    "signal_ranges_native_units": {
+      "Force": [
+        0.0038355721527891518,
+        3.4314809579473917
+      ],
+      "Length": [
+        -0.27753349999999977,
+        4.618858100000001
+      ],
+      "PotMem": [
+        -355.835,
+        49.759
+      ]
+    },
+    "flat_trials_by_signal": {
+      "Force": 0,
+      "Length": 0,
+      "PotMem": 0
+    },
+    "complete_mechanics_bins": 16732,
+    "joint_valid_bins": 16732,
+    "bins_missing_electrical_coverage": 0,
+    "bins_nonfinite_potential": 0,
+    "bins_nonfinite_mechanics": 0,
+    "candidate_windows_from_structurally_valid_trials": 16262,
+    "eligible_windows": 16262,
+    "events_in_trials_with_event_inventory": 65462,
+    "events_in_eligible_windows": 12280
+  },
+  "prefixes": {
+    "0": {
+      "stored_trials": 148,
+      "eligible_trials": 94,
+      "excluded_trials": 54,
+      "exclusions": {
+        "internal identity or trial-label cardinality mismatch": 38,
+        "irregular or incompatible time_PotMem lattice (0.000249999999998s)": 2,
+        "irregular or incompatible time_PotMem lattice (0.000249999999999s)": 5,
+        "irregular or incompatible time_PotMem lattice (0.000250000000001s)": 2,
+        "irregular or incompatible time_PotMem lattice (0.000250000000002s)": 1,
+        "irregular or incompatible time_PotMem lattice (0.00025s)": 6
+      },
+      "trial_labels": {
+        "(not assigned because source identity or label count failed)": 38,
+        "accel_series": 1,
+        "trad_ramp": 1,
+        "trad_series": 80,
+        "triangle_series": 28
+      },
+      "sparse_trials_lt_50_archived_events": 22,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        2000.0
+      ],
+      "native_electrical_hz": [
+        20000.0
+      ],
+      "event_coordinates": {
+        "seconds on electrical sample times": 94,
+        "unverified; native clock or structural QC failed": 54
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 16,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 94,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0.8130000000000001,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.0274658203125,
+          0.87646484375
+        ],
+        "Length": [
+          -0.17297843807996702,
+          3.1751883867520045
+        ],
+        "PotMem": [
+          -86.36474609375,
+          17.51708984375
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 16732,
+      "joint_valid_bins": 16732,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 16262,
+      "eligible_windows": 16262,
+      "events_in_trials_with_event_inventory": 17998,
+      "events_in_eligible_windows": 12280
+    },
+    "1": {
+      "stored_trials": 380,
+      "eligible_trials": 0,
+      "excluded_trials": 380,
+      "exclusions": {
+        "missing or non-real-vector time_PotMem": 380
+      },
+      "trial_labels": {
+        "accel_ramp": 250,
+        "triangle_series": 130
+      },
+      "sparse_trials_lt_50_archived_events": 121,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        10000.0
+      ],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "unverified; native clock or structural QC failed": 380
+      },
+      "exclusions_missing_explicit_electrical_clock": 380,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 380,
+      "trials_checked_for_interval_consistency_before_source_gate": 0,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.0038355721527891518,
+          3.4314809579473917
+        ],
+        "Length": [
+          -0.12767269999999886,
+          4.618858100000001
+        ],
+        "PotMem": [
+          -355.835,
+          49.759
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 0,
+      "joint_valid_bins": 0,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 0,
+      "eligible_windows": 0,
+      "events_in_trials_with_event_inventory": 44294,
+      "events_in_eligible_windows": 0
+    },
+    "4": {
+      "stored_trials": 26,
+      "eligible_trials": 0,
+      "excluded_trials": 26,
+      "exclusions": {
+        "internal identity or trial-label cardinality mismatch": 26
+      },
+      "trial_labels": {
+        "(not assigned because source identity or label count failed)": 26
+      },
+      "sparse_trials_lt_50_archived_events": 0,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "unverified; native clock or structural QC failed": 26
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 0,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.029945605026943586,
+          1.3000190527675888
+        ],
+        "Length": [
+          -0.27753349999999977,
+          2.9531865
+        ],
+        "PotMem": [
+          -0.84761,
+          -0.33342
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 0,
+      "joint_valid_bins": 0,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 0,
+      "eligible_windows": 0,
+      "events_in_trials_with_event_inventory": 3170,
+      "events_in_eligible_windows": 0
+    }
+  },
+  "members": {
+    "aff004": {
+      "stored_trials": 55,
+      "eligible_trials": 41,
+      "excluded_trials": 14,
+      "exclusions": {
+        "irregular or incompatible time_PotMem lattice (0.000249999999998s)": 2,
+        "irregular or incompatible time_PotMem lattice (0.000249999999999s)": 4,
+        "irregular or incompatible time_PotMem lattice (0.000250000000001s)": 2,
+        "irregular or incompatible time_PotMem lattice (0.000250000000002s)": 1,
+        "irregular or incompatible time_PotMem lattice (0.00025s)": 5
+      },
+      "trial_labels": {
+        "trad_ramp": 1,
+        "trad_series": 32,
+        "triangle_series": 22
+      },
+      "sparse_trials_lt_50_archived_events": 0,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        2000.0
+      ],
+      "native_electrical_hz": [
+        20000.0
+      ],
+      "event_coordinates": {
+        "seconds on electrical sample times": 41,
+        "unverified; native clock or structural QC failed": 14
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 14,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 41,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0.34600000000000003,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.0341796875,
+          0.853424072265625
+        ],
+        "Length": [
+          -0.11050340388167999,
+          3.1751883867520045
+        ],
+        "PotMem": [
+          -9.46044921875,
+          17.51708984375
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 6291,
+      "joint_valid_bins": 6291,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 6086,
+      "eligible_windows": 6086,
+      "events_in_trials_with_event_inventory": 8364,
+      "events_in_eligible_windows": 5154
+    },
+    "aff015": {
+      "stored_trials": 22,
+      "eligible_trials": 20,
+      "excluded_trials": 2,
+      "exclusions": {
+        "irregular or incompatible time_PotMem lattice (0.000249999999999s)": 1,
+        "irregular or incompatible time_PotMem lattice (0.00025s)": 1
+      },
+      "trial_labels": {
+        "trad_series": 16,
+        "triangle_series": 6
+      },
+      "sparse_trials_lt_50_archived_events": 0,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        2000.0
+      ],
+      "native_electrical_hz": [
+        20000.0
+      ],
+      "event_coordinates": {
+        "seconds on electrical sample times": 20,
+        "unverified; native clock or structural QC failed": 2
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 2,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 20,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0.1675,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.0274658203125,
+          0.87646484375
+        ],
+        "Length": [
+          -0.032681949482506856,
+          2.0779793819081815
+        ],
+        "PotMem": [
+          -6.2255859375,
+          1.6021728515625
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 2606,
+      "joint_valid_bins": 2606,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 2506,
+      "eligible_windows": 2506,
+      "events_in_trials_with_event_inventory": 3578,
+      "events_in_eligible_windows": 3338
+    },
+    "aff017": {
+      "stored_trials": 33,
+      "eligible_trials": 33,
+      "excluded_trials": 0,
+      "exclusions": {},
+      "trial_labels": {
+        "accel_series": 1,
+        "trad_series": 32
+      },
+      "sparse_trials_lt_50_archived_events": 0,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        2000.0
+      ],
+      "native_electrical_hz": [
+        20000.0
+      ],
+      "event_coordinates": {
+        "seconds on electrical sample times": 33
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 33,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0.2995,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.042572021484375,
+          0.44586181640625
+        ],
+        "Length": [
+          -0.17297843807996702,
+          2.0365941109538848
+        ],
+        "PotMem": [
+          -15.07568359375,
+          4.852294921875
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 7835,
+      "joint_valid_bins": 7835,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 7670,
+      "eligible_windows": 7670,
+      "events_in_trials_with_event_inventory": 3788,
+      "events_in_eligible_windows": 3788
+    },
+    "aff021": {
+      "stored_trials": 38,
+      "eligible_trials": 0,
+      "excluded_trials": 38,
+      "exclusions": {
+        "internal identity or trial-label cardinality mismatch": 38
+      },
+      "trial_labels": {
+        "(not assigned because source identity or label count failed)": 38
+      },
+      "sparse_trials_lt_50_archived_events": 22,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "unverified; native clock or structural QC failed": 38
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 0,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.050048828125,
+          0.503692626953125
+        ],
+        "Length": [
+          -0.03539151785893677,
+          2.030409558345963
+        ],
+        "PotMem": [
+          -86.36474609375,
+          -16.54052734375
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 0,
+      "joint_valid_bins": 0,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 0,
+      "eligible_windows": 0,
+      "events_in_trials_with_event_inventory": 2268,
+      "events_in_eligible_windows": 0
+    },
+    "aff101": {
+      "stored_trials": 100,
+      "eligible_trials": 0,
+      "excluded_trials": 100,
+      "exclusions": {
+        "missing or non-real-vector time_PotMem": 100
+      },
+      "trial_labels": {
+        "accel_ramp": 74,
+        "triangle_series": 26
+      },
+      "sparse_trials_lt_50_archived_events": 44,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        10000.0
+      ],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "unverified; native clock or structural QC failed": 100
+      },
+      "exclusions_missing_explicit_electrical_clock": 100,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 100,
+      "trials_checked_for_interval_consistency_before_source_gate": 0,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.0038355721527891518,
+          0.9148473667700786
+        ],
+        "Length": [
+          -0.010582499999999995,
+          4.2107675
+        ],
+        "PotMem": [
+          -28.931,
+          22.858
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 0,
+      "joint_valid_bins": 0,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 0,
+      "eligible_windows": 0,
+      "events_in_trials_with_event_inventory": 8431,
+      "events_in_eligible_windows": 0
+    },
+    "aff102": {
+      "stored_trials": 68,
+      "eligible_trials": 0,
+      "excluded_trials": 68,
+      "exclusions": {
+        "missing or non-real-vector time_PotMem": 68
+      },
+      "trial_labels": {
+        "accel_ramp": 49,
+        "triangle_series": 19
+      },
+      "sparse_trials_lt_50_archived_events": 20,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        10000.0
+      ],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "unverified; native clock or structural QC failed": 68
+      },
+      "exclusions_missing_explicit_electrical_clock": 68,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 68,
+      "trials_checked_for_interval_consistency_before_source_gate": 0,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.03577324948926853,
+          0.9618255055745573
+        ],
+        "Length": [
+          0.0638842999999999,
+          3.2625143000000003
+        ],
+        "PotMem": [
+          -355.835,
+          -14.618
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 0,
+      "joint_valid_bins": 0,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 0,
+      "eligible_windows": 0,
+      "events_in_trials_with_event_inventory": 9686,
+      "events_in_eligible_windows": 0
+    },
+    "aff103": {
+      "stored_trials": 88,
+      "eligible_trials": 0,
+      "excluded_trials": 88,
+      "exclusions": {
+        "missing or non-real-vector time_PotMem": 88
+      },
+      "trial_labels": {
+        "accel_ramp": 35,
+        "triangle_series": 53
+      },
+      "sparse_trials_lt_50_archived_events": 33,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        10000.0
+      ],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "unverified; native clock or structural QC failed": 88
+      },
+      "exclusions_missing_explicit_electrical_clock": 88,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 88,
+      "trials_checked_for_interval_consistency_before_source_gate": 0,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.047932484803619065,
+          1.036551881646917
+        ],
+        "Length": [
+          -0.12767269999999886,
+          3.1875673000000013
+        ],
+        "PotMem": [
+          -50.598,
+          8.545
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 0,
+      "joint_valid_bins": 0,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 0,
+      "eligible_windows": 0,
+      "events_in_trials_with_event_inventory": 8079,
+      "events_in_eligible_windows": 0
+    },
+    "aff107": {
+      "stored_trials": 124,
+      "eligible_trials": 0,
+      "excluded_trials": 124,
+      "exclusions": {
+        "missing or non-real-vector time_PotMem": 124
+      },
+      "trial_labels": {
+        "accel_ramp": 92,
+        "triangle_series": 32
+      },
+      "sparse_trials_lt_50_archived_events": 24,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        10000.0
+      ],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "unverified; native clock or structural QC failed": 124
+      },
+      "exclusions_missing_explicit_electrical_clock": 124,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 124,
+      "trials_checked_for_interval_consistency_before_source_gate": 0,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.05030169761723996,
+          3.4314809579473917
+        ],
+        "Length": [
+          -0.01082189999999894,
+          4.618858100000001
+        ],
+        "PotMem": [
+          14.633,
+          49.759
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 0,
+      "joint_valid_bins": 0,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 0,
+      "eligible_windows": 0,
+      "events_in_trials_with_event_inventory": 18098,
+      "events_in_eligible_windows": 0
+    },
+    "aff406": {
+      "stored_trials": 26,
+      "eligible_trials": 0,
+      "excluded_trials": 26,
+      "exclusions": {
+        "internal identity or trial-label cardinality mismatch": 26
+      },
+      "trial_labels": {
+        "(not assigned because source identity or label count failed)": 26
+      },
+      "sparse_trials_lt_50_archived_events": 0,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "unverified; native clock or structural QC failed": 26
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 0,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.029945605026943586,
+          1.3000190527675888
+        ],
+        "Length": [
+          -0.27753349999999977,
+          2.9531865
+        ],
+        "PotMem": [
+          -0.84761,
+          -0.33342
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 0,
+      "joint_valid_bins": 0,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 0,
+      "eligible_windows": 0,
+      "events_in_trials_with_event_inventory": 3170,
+      "events_in_eligible_windows": 0
+    }
+  },
+  "excluded_trials": [
+    {
+      "afferent": "aff004",
+      "trial": 20,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999999s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 21,
+      "reason": "irregular or incompatible time_PotMem lattice (0.00025s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 24,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999999s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 25,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000250000000001s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 26,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999998s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 27,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999998s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 44,
+      "reason": "irregular or incompatible time_PotMem lattice (0.00025s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 45,
+      "reason": "irregular or incompatible time_PotMem lattice (0.00025s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 46,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999999s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 47,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000250000000001s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 52,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999999s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 53,
+      "reason": "irregular or incompatible time_PotMem lattice (0.00025s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 54,
+      "reason": "irregular or incompatible time_PotMem lattice (0.00025s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 55,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000250000000002s)"
+    },
+    {
+      "afferent": "aff015",
+      "trial": 17,
+      "reason": "irregular or incompatible time_PotMem lattice (0.00025s)"
+    },
+    {
+      "afferent": "aff015",
+      "trial": 18,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999999s)"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 1,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 2,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 3,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 4,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 5,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 6,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 7,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 8,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 9,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 10,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 11,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 12,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 13,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 14,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 15,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 16,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 17,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 18,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 19,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 20,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 21,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 22,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 23,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 24,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 25,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 26,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 27,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 28,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 29,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 30,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 31,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 32,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 33,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 34,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 35,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 36,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 37,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 38,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 1,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 2,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 3,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 4,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 5,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 6,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 7,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 8,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 9,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 10,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 11,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 12,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 13,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 14,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 15,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 16,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 17,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 18,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 19,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 20,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 21,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 22,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 23,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 24,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 25,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 26,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 27,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 28,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 29,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 30,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 31,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 32,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 33,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 34,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 35,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 36,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 37,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 38,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 39,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 40,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 41,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 42,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 43,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 44,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 45,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 46,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 47,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 48,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 49,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 50,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 51,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 52,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 53,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 54,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 55,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 56,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 57,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 58,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 59,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 60,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 61,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 62,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 63,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 64,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 65,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 66,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 67,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 68,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 69,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 70,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 71,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 72,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 73,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 74,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 75,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 76,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 77,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 78,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 79,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 80,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 81,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 82,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 83,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 84,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 85,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 86,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 87,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 88,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 89,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 90,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 91,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 92,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 93,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 94,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 95,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 96,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 97,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 98,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 99,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff101",
+      "trial": 100,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 1,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 2,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 3,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 4,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 5,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 6,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 7,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 8,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 9,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 10,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 11,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 12,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 13,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 14,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 15,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 16,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 17,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 18,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 19,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 20,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 21,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 22,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 23,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 24,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 25,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 26,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 27,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 28,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 29,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 30,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 31,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 32,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 33,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 34,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 35,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 36,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 37,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 38,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 39,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 40,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 41,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 42,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 43,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 44,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 45,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 46,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 47,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 48,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 49,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 50,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 51,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 52,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 53,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 54,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 55,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 56,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 57,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 58,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 59,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 60,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 61,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 62,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 63,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 64,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 65,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 66,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 67,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff102",
+      "trial": 68,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 1,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 2,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 3,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 4,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 5,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 6,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 7,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 8,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 9,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 10,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 11,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 12,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 13,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 14,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 15,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 16,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 17,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 18,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 19,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 20,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 21,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 22,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 23,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 24,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 25,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 26,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 27,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 28,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 29,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 30,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 31,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 32,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 33,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 34,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 35,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 36,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 37,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 38,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 39,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 40,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 41,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 42,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 43,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 44,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 45,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 46,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 47,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 48,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 49,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 50,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 51,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 52,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 53,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 54,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 55,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 56,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 57,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 58,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 59,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 60,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 61,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 62,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 63,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 64,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 65,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 66,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 67,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 68,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 69,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 70,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 71,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 72,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 73,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 74,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 75,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 76,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 77,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 78,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 79,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 80,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 81,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 82,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 83,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 84,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 85,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 86,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 87,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff103",
+      "trial": 88,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 1,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 2,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 3,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 4,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 5,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 6,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 7,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 8,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 9,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 10,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 11,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 12,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 13,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 14,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 15,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 16,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 17,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 18,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 19,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 20,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 21,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 22,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 23,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 24,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 25,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 26,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 27,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 28,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 29,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 30,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 31,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 32,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 33,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 34,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 35,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 36,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 37,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 38,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 39,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 40,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 41,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 42,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 43,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 44,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 45,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 46,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 47,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 48,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 49,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 50,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 51,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 52,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 53,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 54,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 55,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 56,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 57,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 58,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 59,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 60,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 61,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 62,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 63,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 64,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 65,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 66,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 67,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 68,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 69,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 70,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 71,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 72,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 73,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 74,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 75,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 76,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 77,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 78,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 79,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 80,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 81,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 82,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 83,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 84,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 85,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 86,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 87,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 88,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 89,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 90,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 91,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 92,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 93,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 94,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 95,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 96,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 97,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 98,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 99,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 100,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 101,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 102,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 103,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 104,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 105,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 106,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 107,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 108,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 109,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 110,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 111,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 112,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 113,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 114,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 115,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 116,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 117,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 118,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 119,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 120,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 121,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 122,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 123,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff107",
+      "trial": 124,
+      "reason": "missing or non-real-vector time_PotMem"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 1,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 2,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 3,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 4,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 5,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 6,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 7,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 8,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 9,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 10,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 11,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 12,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 13,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 14,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 15,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 16,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 17,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 18,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 19,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 20,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 21,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 22,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 23,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 24,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 25,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 26,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    }
+  ],
+  "on_disk": {
+    "X": {
+      "dtype": "float64",
+      "shape": [
+        16262,
+        5,
+        5
+      ]
+    },
+    "mech_mean": {
+      "dtype": "float64",
+      "shape": [
+        16262,
+        5,
+        2
+      ]
+    },
+    "y_count": {
+      "dtype": "int32",
+      "shape": [
+        16262
+      ]
+    },
+    "current_mech": {
+      "dtype": "float64",
+      "shape": [
+        16262,
+        2
+      ]
+    },
+    "y_delta": {
+      "dtype": "float64",
+      "shape": [
+        16262,
+        2
+      ]
+    },
+    "bin_index": {
+      "dtype": "int32",
+      "shape": [
+        16262
+      ]
+    },
+    "cutoff_s": {
+      "dtype": "float64",
+      "shape": [
+        16262
+      ]
+    },
+    "clock_route": {
+      "dtype": "<U9",
+      "shape": [
+        16262
+      ]
+    },
+    "trial": {
+      "dtype": "int32",
+      "shape": [
+        16262
+      ]
+    },
+    "prefix": {
+      "dtype": "int8",
+      "shape": [
+        16262
+      ]
+    },
+    "afferent": {
+      "dtype": "<U6",
+      "shape": [
+        16262
+      ]
+    },
+    "trial_type": {
+      "dtype": "<U15",
+      "shape": [
+        16262
+      ]
+    }
+  },
+  "output_sha256": {
+    "windows.npz": "60a6c637e078975307b1b063aa335f32107ad55decd0fb6619ca398aa758185a",
+    "bin-mask.npz": "226ca70e9b239726546c4c521244d0089fa87c51b97c461c7d5f4271f0afcd7f",
+    "trial-qc.json": "408cee445f743feb380e02cf462759f9230de5c44cf2cf3f2bd5fd0a95c15a5c",
+    "member-metadata.json": "956df9f1b87001a1edef39f03da861f8413bfd0ec630fa3a03b6ad0b0d076a00",
+    "quarantined-measurements.json": "493643c8a17b82e58d7fc54c68a8cff116b1e7e5c9e7651e57100bd61a495b8f",
+    "aff015-trial1-native.npz": "960b56a98d3e0058054c5d9eea4cd50629c40bcb88de012360db459e851b0809"
+  },
+  "source_freeze": "97aee143a33d147bf968203efb6c6e3d1c7bbb05777c98d1c1e9e12c25756928",
+  "units": "Force, servo position and potential retain their signed archive scales. No documented individual gain/offset or absolute anatomical or electrical reference; no signal polarity inversion. Time is in seconds and rates of change use archived amplitude units per second.",
+  "limits": "Archive included selected analyzable stretches and previously discriminated events. A held prefix is a filename group. Animal-wise independence, out-of-species or voluntary control, intrafusal force, causal feedback and prospective or closed-loop performance are unverified. aff015 trial 1 appeared in a prior engineering pilot; later model training and scaling exclude prefix 0 for its held replay.",
+  "rights": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "reserve_access": "Zero prefix-5, disease, stimulation or numerical simulation member payloads requested.",
+  "source_integrity": "ZIP central directory from prior source verification; exact allowlisted local headers and compressed bytes from Zenodo (except source-verified retained pilot). Archive SHA-256 published by Dryad; individual approved MAT size, CRC32 and SHA-256 reproduced locally."
+}

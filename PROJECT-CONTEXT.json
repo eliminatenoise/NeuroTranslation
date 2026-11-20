@@ -1487,5 +1487,19 @@
       }
     },
     "interpretation": "The central scalp branch lowered balance muscle error by 0.01435 microvolts against its reference. That comparison against a different trial from the same person gave no clear difference. Average path error increased by 0.03172 mm at the pelvis and 0.21449 mm at the wrist. These offline development recordings do not establish a neural source or an operating feedback system."
+  },
+  "muscle_spindle": {
+    "viewer": "docs/muscle-spindle/index.html",
+    "offline_reader": "docs/muscle-spindle-offline.zip",
+    "model": "models/muscle-spindle/README.md",
+    "model_zip": "models/muscle-spindle.zip",
+    "paper": "docs/papers/muscle-spindle/index.html",
+    "paper_pdf": "docs/papers/muscle-spindle/muscle-spindle.pdf",
+    "results": "models/muscle-spindle/score/strict-afferent/summary.json",
+    "mechanical_forecasts": "models/muscle-spindle/mechanics/strict-afferent/results.json",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/muscle-spindle/",
+    "source_doi": "10.5061/dryad.vdncjsxsw",
+    "publication_doi": "10.7554/eLife.55177",
+    "scope": "Archived passive muscle and axon recording in rats. The two three-prefix evaluations were unavailable. Exploratory held-afferent fits used 3 fibers from one filename group, 94 trials and 16,262 20-ms targets. Mean count deviance favored spike history over the combined Transformer. Timely mechanics improved the combined forecast against time-shifted mechanics on its eligible subset. File-specific force/position calibration and animal-independent generalization remain unverified."
   }
 }

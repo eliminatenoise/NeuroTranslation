@@ -1,0 +1,1311 @@
+{
+  "source_freeze": "97aee143a33d147bf968203efb6c6e3d1c7bbb05777c98d1c1e9e12c25756928",
+  "additional_freeze": "05af8508e8f41c72ea4e67aa515b208b6c0bcad0f7ae35d23032de21d42ed45c",
+  "scope": "Original two-clock windows plus windows of members passing the separate one-deposited-time source gates. Named time only where archived; no independently deposited electrical clock for the sensitivity additions.",
+  "metadata_checks": {
+    "aff004": {
+      "archive_member": "aff004_proc.mat",
+      "internal_affname": "aff004",
+      "archive_date": "05-Jun-2014 14:10:30",
+      "actual_trials": 55,
+      "type_labels": 55,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff015": {
+      "archive_member": "aff015_proc.mat",
+      "internal_affname": "aff015",
+      "archive_date": "05-Jun-2014 18:01:28",
+      "actual_trials": 22,
+      "type_labels": 22,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff017": {
+      "archive_member": "aff017_proc.mat",
+      "internal_affname": "aff017",
+      "archive_date": "06-Jun-2014 14:00:10",
+      "actual_trials": 33,
+      "type_labels": 33,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff021": {
+      "archive_member": "aff021_proc.mat",
+      "internal_affname": "aff021",
+      "archive_date": "06-Jun-2014 17:00:08",
+      "actual_trials": 38,
+      "type_labels": 39,
+      "internal_name_agrees": true,
+      "label_count_agrees": false
+    },
+    "aff101": {
+      "archive_member": "aff101_proc.mat",
+      "internal_affname": "aff101",
+      "archive_date": "2016_02_02",
+      "actual_trials": 100,
+      "type_labels": 100,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff102": {
+      "archive_member": "aff102_proc.mat",
+      "internal_affname": "aff102",
+      "archive_date": "2016_02_02",
+      "actual_trials": 68,
+      "type_labels": 68,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff103": {
+      "archive_member": "aff103_proc.mat",
+      "internal_affname": "aff103",
+      "archive_date": "2016_02_02",
+      "actual_trials": 88,
+      "type_labels": 88,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff107": {
+      "archive_member": "aff107_proc.mat",
+      "internal_affname": "aff107",
+      "archive_date": "2016_02_02",
+      "actual_trials": 124,
+      "type_labels": 124,
+      "internal_name_agrees": true,
+      "label_count_agrees": true
+    },
+    "aff406": {
+      "archive_member": "aff406_proc.mat",
+      "internal_affname": "aff106",
+      "archive_date": "2017_03_31",
+      "actual_trials": 26,
+      "type_labels": 26,
+      "internal_name_agrees": false,
+      "label_count_agrees": true
+    }
+  },
+  "overall": {
+    "stored_trials": 554,
+    "eligible_trials": 474,
+    "excluded_trials": 80,
+    "exclusions": {
+      "internal identity or trial-label cardinality mismatch": 64,
+      "irregular or incompatible time_PotMem lattice (0.000249999999998s)": 2,
+      "irregular or incompatible time_PotMem lattice (0.000249999999999s)": 5,
+      "irregular or incompatible time_PotMem lattice (0.000250000000001s)": 2,
+      "irregular or incompatible time_PotMem lattice (0.000250000000002s)": 1,
+      "irregular or incompatible time_PotMem lattice (0.00025s)": 6
+    },
+    "trial_labels": {
+      "(not assigned because source identity or label count failed)": 64,
+      "accel_ramp": 250,
+      "accel_series": 1,
+      "trad_ramp": 1,
+      "trad_series": 80,
+      "triangle_series": 158
+    },
+    "sparse_trials_lt_50_archived_events": 143,
+    "zero_event_trials": 0,
+    "native_mechanics_hz": [
+      2000.0,
+      10000.0
+    ],
+    "native_electrical_hz": [
+      20000.0
+    ],
+    "event_coordinates": {
+      "absolute seconds on one deposited time axis": 380,
+      "seconds on electrical sample times": 94,
+      "unverified; native clock or structural QC failed": 80
+    },
+    "exclusions_missing_explicit_electrical_clock": 0,
+    "failed_clock_lattice_trials": 16,
+    "nominal_mechanical_rate_disagreements": 380,
+    "trials_checked_for_interval_consistency_before_source_gate": 474,
+    "tail_after_last_complete_bin_s_total_on_admitted_trials": 4.4513,
+    "supplied_ISI_disagreements": 0,
+    "supplied_interval_rate_disagreements": 0,
+    "signal_ranges_native_units": {
+      "Force": [
+        0.0038355721527891518,
+        3.4314809579473917
+      ],
+      "Length": [
+        -0.27753349999999977,
+        4.618858100000001
+      ],
+      "PotMem": [
+        -355.835,
+        49.759
+      ]
+    },
+    "flat_trials_by_signal": {
+      "Force": 0,
+      "Length": 0,
+      "PotMem": 0
+    },
+    "complete_mechanics_bins": 116327,
+    "joint_valid_bins": 116327,
+    "bins_missing_electrical_coverage": 0,
+    "bins_nonfinite_potential": 0,
+    "bins_nonfinite_mechanics": 0,
+    "candidate_windows_from_structurally_valid_trials": 113957,
+    "eligible_windows": 113957,
+    "events_in_trials_with_event_inventory": 65462,
+    "events_in_eligible_windows": 56569
+  },
+  "prefixes": {
+    "0": {
+      "stored_trials": 148,
+      "eligible_trials": 94,
+      "excluded_trials": 54,
+      "exclusions": {
+        "internal identity or trial-label cardinality mismatch": 38,
+        "irregular or incompatible time_PotMem lattice (0.000249999999998s)": 2,
+        "irregular or incompatible time_PotMem lattice (0.000249999999999s)": 5,
+        "irregular or incompatible time_PotMem lattice (0.000250000000001s)": 2,
+        "irregular or incompatible time_PotMem lattice (0.000250000000002s)": 1,
+        "irregular or incompatible time_PotMem lattice (0.00025s)": 6
+      },
+      "trial_labels": {
+        "(not assigned because source identity or label count failed)": 38,
+        "accel_series": 1,
+        "trad_ramp": 1,
+        "trad_series": 80,
+        "triangle_series": 28
+      },
+      "sparse_trials_lt_50_archived_events": 22,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        2000.0
+      ],
+      "native_electrical_hz": [
+        20000.0
+      ],
+      "event_coordinates": {
+        "seconds on electrical sample times": 94,
+        "unverified; native clock or structural QC failed": 54
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 16,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 94,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0.8130000000000001,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.0274658203125,
+          0.87646484375
+        ],
+        "Length": [
+          -0.17297843807996702,
+          3.1751883867520045
+        ],
+        "PotMem": [
+          -86.36474609375,
+          17.51708984375
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 16732,
+      "joint_valid_bins": 16732,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 16262,
+      "eligible_windows": 16262,
+      "events_in_trials_with_event_inventory": 17998,
+      "events_in_eligible_windows": 12280
+    },
+    "1": {
+      "stored_trials": 380,
+      "eligible_trials": 380,
+      "excluded_trials": 0,
+      "exclusions": {},
+      "trial_labels": {
+        "accel_ramp": 250,
+        "triangle_series": 130
+      },
+      "sparse_trials_lt_50_archived_events": 121,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        10000.0
+      ],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "absolute seconds on one deposited time axis": 380
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 380,
+      "trials_checked_for_interval_consistency_before_source_gate": 380,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 3.6383,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.0038355721527891518,
+          3.4314809579473917
+        ],
+        "Length": [
+          -0.12767269999999886,
+          4.618858100000001
+        ],
+        "PotMem": [
+          -355.835,
+          49.759
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 99595,
+      "joint_valid_bins": 99595,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 97695,
+      "eligible_windows": 97695,
+      "events_in_trials_with_event_inventory": 44294,
+      "events_in_eligible_windows": 44289
+    },
+    "4": {
+      "stored_trials": 26,
+      "eligible_trials": 0,
+      "excluded_trials": 26,
+      "exclusions": {
+        "internal identity or trial-label cardinality mismatch": 26
+      },
+      "trial_labels": {
+        "(not assigned because source identity or label count failed)": 26
+      },
+      "sparse_trials_lt_50_archived_events": 0,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "unverified; native clock or structural QC failed": 26
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 0,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.029945605026943586,
+          1.3000190527675888
+        ],
+        "Length": [
+          -0.27753349999999977,
+          2.9531865
+        ],
+        "PotMem": [
+          -0.84761,
+          -0.33342
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 0,
+      "joint_valid_bins": 0,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 0,
+      "eligible_windows": 0,
+      "events_in_trials_with_event_inventory": 3170,
+      "events_in_eligible_windows": 0
+    }
+  },
+  "members": {
+    "aff004": {
+      "stored_trials": 55,
+      "eligible_trials": 41,
+      "excluded_trials": 14,
+      "exclusions": {
+        "irregular or incompatible time_PotMem lattice (0.000249999999998s)": 2,
+        "irregular or incompatible time_PotMem lattice (0.000249999999999s)": 4,
+        "irregular or incompatible time_PotMem lattice (0.000250000000001s)": 2,
+        "irregular or incompatible time_PotMem lattice (0.000250000000002s)": 1,
+        "irregular or incompatible time_PotMem lattice (0.00025s)": 5
+      },
+      "trial_labels": {
+        "trad_ramp": 1,
+        "trad_series": 32,
+        "triangle_series": 22
+      },
+      "sparse_trials_lt_50_archived_events": 0,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        2000.0
+      ],
+      "native_electrical_hz": [
+        20000.0
+      ],
+      "event_coordinates": {
+        "seconds on electrical sample times": 41,
+        "unverified; native clock or structural QC failed": 14
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 14,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 41,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0.34600000000000003,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.0341796875,
+          0.853424072265625
+        ],
+        "Length": [
+          -0.11050340388167999,
+          3.1751883867520045
+        ],
+        "PotMem": [
+          -9.46044921875,
+          17.51708984375
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 6291,
+      "joint_valid_bins": 6291,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 6086,
+      "eligible_windows": 6086,
+      "events_in_trials_with_event_inventory": 8364,
+      "events_in_eligible_windows": 5154
+    },
+    "aff015": {
+      "stored_trials": 22,
+      "eligible_trials": 20,
+      "excluded_trials": 2,
+      "exclusions": {
+        "irregular or incompatible time_PotMem lattice (0.000249999999999s)": 1,
+        "irregular or incompatible time_PotMem lattice (0.00025s)": 1
+      },
+      "trial_labels": {
+        "trad_series": 16,
+        "triangle_series": 6
+      },
+      "sparse_trials_lt_50_archived_events": 0,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        2000.0
+      ],
+      "native_electrical_hz": [
+        20000.0
+      ],
+      "event_coordinates": {
+        "seconds on electrical sample times": 20,
+        "unverified; native clock or structural QC failed": 2
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 2,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 20,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0.1675,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.0274658203125,
+          0.87646484375
+        ],
+        "Length": [
+          -0.032681949482506856,
+          2.0779793819081815
+        ],
+        "PotMem": [
+          -6.2255859375,
+          1.6021728515625
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 2606,
+      "joint_valid_bins": 2606,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 2506,
+      "eligible_windows": 2506,
+      "events_in_trials_with_event_inventory": 3578,
+      "events_in_eligible_windows": 3338
+    },
+    "aff017": {
+      "stored_trials": 33,
+      "eligible_trials": 33,
+      "excluded_trials": 0,
+      "exclusions": {},
+      "trial_labels": {
+        "accel_series": 1,
+        "trad_series": 32
+      },
+      "sparse_trials_lt_50_archived_events": 0,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        2000.0
+      ],
+      "native_electrical_hz": [
+        20000.0
+      ],
+      "event_coordinates": {
+        "seconds on electrical sample times": 33
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 33,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0.2995,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.042572021484375,
+          0.44586181640625
+        ],
+        "Length": [
+          -0.17297843807996702,
+          2.0365941109538848
+        ],
+        "PotMem": [
+          -15.07568359375,
+          4.852294921875
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 7835,
+      "joint_valid_bins": 7835,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 7670,
+      "eligible_windows": 7670,
+      "events_in_trials_with_event_inventory": 3788,
+      "events_in_eligible_windows": 3788
+    },
+    "aff021": {
+      "stored_trials": 38,
+      "eligible_trials": 0,
+      "excluded_trials": 38,
+      "exclusions": {
+        "internal identity or trial-label cardinality mismatch": 38
+      },
+      "trial_labels": {
+        "(not assigned because source identity or label count failed)": 38
+      },
+      "sparse_trials_lt_50_archived_events": 22,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "unverified; native clock or structural QC failed": 38
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 0,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.050048828125,
+          0.503692626953125
+        ],
+        "Length": [
+          -0.03539151785893677,
+          2.030409558345963
+        ],
+        "PotMem": [
+          -86.36474609375,
+          -16.54052734375
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 0,
+      "joint_valid_bins": 0,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 0,
+      "eligible_windows": 0,
+      "events_in_trials_with_event_inventory": 2268,
+      "events_in_eligible_windows": 0
+    },
+    "aff101": {
+      "stored_trials": 100,
+      "eligible_trials": 100,
+      "excluded_trials": 0,
+      "exclusions": {},
+      "trial_labels": {
+        "accel_ramp": 74,
+        "triangle_series": 26
+      },
+      "sparse_trials_lt_50_archived_events": 44,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        10000.0
+      ],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "absolute seconds on one deposited time axis": 100
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 100,
+      "trials_checked_for_interval_consistency_before_source_gate": 100,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 1.0282,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.0038355721527891518,
+          0.9148473667700786
+        ],
+        "Length": [
+          -0.010582499999999995,
+          4.2107675
+        ],
+        "PotMem": [
+          -28.931,
+          22.858
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 19736,
+      "joint_valid_bins": 19736,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 19236,
+      "eligible_windows": 19236,
+      "events_in_trials_with_event_inventory": 8431,
+      "events_in_eligible_windows": 8431
+    },
+    "aff102": {
+      "stored_trials": 68,
+      "eligible_trials": 68,
+      "excluded_trials": 0,
+      "exclusions": {},
+      "trial_labels": {
+        "accel_ramp": 49,
+        "triangle_series": 19
+      },
+      "sparse_trials_lt_50_archived_events": 20,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        10000.0
+      ],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "absolute seconds on one deposited time axis": 68
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 68,
+      "trials_checked_for_interval_consistency_before_source_gate": 68,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0.5827,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.03577324948926853,
+          0.9618255055745573
+        ],
+        "Length": [
+          0.0638842999999999,
+          3.2625143000000003
+        ],
+        "PotMem": [
+          -355.835,
+          -14.618
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 22580,
+      "joint_valid_bins": 22580,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 22240,
+      "eligible_windows": 22240,
+      "events_in_trials_with_event_inventory": 9686,
+      "events_in_eligible_windows": 9686
+    },
+    "aff103": {
+      "stored_trials": 88,
+      "eligible_trials": 88,
+      "excluded_trials": 0,
+      "exclusions": {},
+      "trial_labels": {
+        "accel_ramp": 35,
+        "triangle_series": 53
+      },
+      "sparse_trials_lt_50_archived_events": 33,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        10000.0
+      ],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "absolute seconds on one deposited time axis": 88
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 88,
+      "trials_checked_for_interval_consistency_before_source_gate": 88,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 1.0208,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.047932484803619065,
+          1.036551881646917
+        ],
+        "Length": [
+          -0.12767269999999886,
+          3.1875673000000013
+        ],
+        "PotMem": [
+          -50.598,
+          8.545
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 20039,
+      "joint_valid_bins": 20039,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 19599,
+      "eligible_windows": 19599,
+      "events_in_trials_with_event_inventory": 8079,
+      "events_in_eligible_windows": 8076
+    },
+    "aff107": {
+      "stored_trials": 124,
+      "eligible_trials": 124,
+      "excluded_trials": 0,
+      "exclusions": {},
+      "trial_labels": {
+        "accel_ramp": 92,
+        "triangle_series": 32
+      },
+      "sparse_trials_lt_50_archived_events": 24,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [
+        10000.0
+      ],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "absolute seconds on one deposited time axis": 124
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 124,
+      "trials_checked_for_interval_consistency_before_source_gate": 124,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 1.0066,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.05030169761723996,
+          3.4314809579473917
+        ],
+        "Length": [
+          -0.01082189999999894,
+          4.618858100000001
+        ],
+        "PotMem": [
+          14.633,
+          49.759
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 37240,
+      "joint_valid_bins": 37240,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 36620,
+      "eligible_windows": 36620,
+      "events_in_trials_with_event_inventory": 18098,
+      "events_in_eligible_windows": 18096
+    },
+    "aff406": {
+      "stored_trials": 26,
+      "eligible_trials": 0,
+      "excluded_trials": 26,
+      "exclusions": {
+        "internal identity or trial-label cardinality mismatch": 26
+      },
+      "trial_labels": {
+        "(not assigned because source identity or label count failed)": 26
+      },
+      "sparse_trials_lt_50_archived_events": 0,
+      "zero_event_trials": 0,
+      "native_mechanics_hz": [],
+      "native_electrical_hz": [],
+      "event_coordinates": {
+        "unverified; native clock or structural QC failed": 26
+      },
+      "exclusions_missing_explicit_electrical_clock": 0,
+      "failed_clock_lattice_trials": 0,
+      "nominal_mechanical_rate_disagreements": 0,
+      "trials_checked_for_interval_consistency_before_source_gate": 0,
+      "tail_after_last_complete_bin_s_total_on_admitted_trials": 0,
+      "supplied_ISI_disagreements": 0,
+      "supplied_interval_rate_disagreements": 0,
+      "signal_ranges_native_units": {
+        "Force": [
+          0.029945605026943586,
+          1.3000190527675888
+        ],
+        "Length": [
+          -0.27753349999999977,
+          2.9531865
+        ],
+        "PotMem": [
+          -0.84761,
+          -0.33342
+        ]
+      },
+      "flat_trials_by_signal": {
+        "Force": 0,
+        "Length": 0,
+        "PotMem": 0
+      },
+      "complete_mechanics_bins": 0,
+      "joint_valid_bins": 0,
+      "bins_missing_electrical_coverage": 0,
+      "bins_nonfinite_potential": 0,
+      "bins_nonfinite_mechanics": 0,
+      "candidate_windows_from_structurally_valid_trials": 0,
+      "eligible_windows": 0,
+      "events_in_trials_with_event_inventory": 3170,
+      "events_in_eligible_windows": 0
+    }
+  },
+  "source_gates": {
+    "aff101": {
+      "candidate_trials": 100,
+      "native_single_axis_hz": [
+        10000.0
+      ],
+      "max_abs_event_grid_error_s": 0.0,
+      "matched_voltage_events": 8431,
+      "timing_failures": 0,
+      "voltage_contributing_trials": 100,
+      "voltage_wins": 100,
+      "voltage_median_excess": 16.04421572353779,
+      "voltage_member_gate": true,
+      "timing_member_gate": true,
+      "admitted": true
+    },
+    "aff102": {
+      "candidate_trials": 68,
+      "native_single_axis_hz": [
+        10000.0
+      ],
+      "max_abs_event_grid_error_s": 0.0,
+      "matched_voltage_events": 9686,
+      "timing_failures": 0,
+      "voltage_contributing_trials": 68,
+      "voltage_wins": 68,
+      "voltage_median_excess": 6.841195144724556,
+      "voltage_member_gate": true,
+      "timing_member_gate": true,
+      "admitted": true
+    },
+    "aff103": {
+      "candidate_trials": 88,
+      "native_single_axis_hz": [
+        10000.0
+      ],
+      "max_abs_event_grid_error_s": 0.0,
+      "matched_voltage_events": 8079,
+      "timing_failures": 0,
+      "voltage_contributing_trials": 88,
+      "voltage_wins": 88,
+      "voltage_median_excess": 9.476136029411766,
+      "voltage_member_gate": true,
+      "timing_member_gate": true,
+      "admitted": true
+    },
+    "aff107": {
+      "candidate_trials": 124,
+      "native_single_axis_hz": [
+        10000.0
+      ],
+      "max_abs_event_grid_error_s": 0.0,
+      "matched_voltage_events": 18097,
+      "timing_failures": 0,
+      "voltage_contributing_trials": 119,
+      "voltage_wins": 119,
+      "voltage_median_excess": 13.331292207792218,
+      "voltage_member_gate": true,
+      "timing_member_gate": true,
+      "admitted": true
+    }
+  },
+  "window_clock_routes": {
+    "one_deposited_time": 97695,
+    "two_clock": 16262
+  },
+  "excluded_trials": [
+    {
+      "afferent": "aff004",
+      "trial": 20,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999999s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 21,
+      "reason": "irregular or incompatible time_PotMem lattice (0.00025s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 24,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999999s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 25,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000250000000001s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 26,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999998s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 27,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999998s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 44,
+      "reason": "irregular or incompatible time_PotMem lattice (0.00025s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 45,
+      "reason": "irregular or incompatible time_PotMem lattice (0.00025s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 46,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999999s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 47,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000250000000001s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 52,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999999s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 53,
+      "reason": "irregular or incompatible time_PotMem lattice (0.00025s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 54,
+      "reason": "irregular or incompatible time_PotMem lattice (0.00025s)"
+    },
+    {
+      "afferent": "aff004",
+      "trial": 55,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000250000000002s)"
+    },
+    {
+      "afferent": "aff015",
+      "trial": 17,
+      "reason": "irregular or incompatible time_PotMem lattice (0.00025s)"
+    },
+    {
+      "afferent": "aff015",
+      "trial": 18,
+      "reason": "irregular or incompatible time_PotMem lattice (0.000249999999999s)"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 1,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 2,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 3,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 4,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 5,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 6,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 7,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 8,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 9,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 10,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 11,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 12,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 13,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 14,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 15,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 16,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 17,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 18,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 19,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 20,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 21,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 22,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 23,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 24,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 25,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 26,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 27,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 28,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 29,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 30,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 31,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 32,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 33,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 34,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 35,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 36,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 37,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff021",
+      "trial": 38,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 1,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 2,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 3,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 4,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 5,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 6,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 7,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 8,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 9,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 10,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 11,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 12,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 13,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 14,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 15,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 16,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 17,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 18,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 19,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 20,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 21,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 22,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 23,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 24,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 25,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    },
+    {
+      "afferent": "aff406",
+      "trial": 26,
+      "reason": "internal identity or trial-label cardinality mismatch"
+    }
+  ],
+  "output_sha256": {
+    "windows.npz": "964922264e7b93159d350206e292fe2dcfd12222985c3a59ac4a5cf18ae607cf",
+    "bin-mask.npz": "94fc8d277057de654ef74ec0db2d58a282f52ceabbf625b58d30a82784bba496",
+    "trial-qc.json": "4da812104e95ff48cb8def46517a4d1b605dcaa7df2322a44da0cb0f25719c35"
+  }
+}

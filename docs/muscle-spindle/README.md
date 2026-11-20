@@ -1,0 +1,9 @@
+# From stretch to spikes
+
+Extract the whole ZIP, then open the launcher for Windows, macOS or Linux. On Linux you can run `sh "Open on Linux.sh"`. You can also open **index.html** directly. All measurements, fitted models and plots for this reader work offline. The paper, rotating anatomical model and original data links open online.
+
+Move the time slider one step at a time. In the recorded example, 100 ms of force, apparatus movement and previously detected spikes are available at the cutoff. The next 20 ms contains the spikes the model is trying to forecast. The figure shows the whole 3.213 seconds of this excerpt. The two mechanical lines are displayed on their own scales at 805 evenly spaced display points. The spike marks retain their event times. Numerical features come from the deposited native samples. The archive timestamp at the beginning of the excerpt is 8.460 s.
+
+Choose a trained model or the recent-rate rule. **Expected spikes** can be fractional; **Observed spikes** is the count actually detected. In **Invent a history**, switch the tendon-force trend, the apparatus movement or the earlier spike pattern. Five bins feed the fitted models, and the underlying values are available below the workspace. The separate force/position table asks the reverse predictive question. These experiments use recordings from a passive preparation and do not establish a working biological control loop.
+
+The example uses the first trial of one previously selected sensory fiber. All of this fiber's trials were held out of the illustrated model's fit. For the group results, three full recordings were held out in turn. The three share one filename prefix, and the planned comparison across three prefixes was unavailable. [Study and source](https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-spindle/) · [Source and reuse](NOTICE.md)

@@ -1,0 +1,49 @@
+{
+  "fit_count": 45,
+  "split": "afferent",
+  "rows_by_native_filename_prefix": {
+    "0": {
+      "rows": 16262,
+      "matched_rows": 15792,
+      "members": [
+        "aff004",
+        "aff015",
+        "aff017"
+      ]
+    }
+  },
+  "rows_by_afferent": {
+    "aff004": {
+      "rows": 6086,
+      "matched_rows": 5881
+    },
+    "aff015": {
+      "rows": 2506,
+      "matched_rows": 2406
+    },
+    "aff017": {
+      "rows": 7670,
+      "matched_rows": 7505
+    }
+  },
+  "deployment_checkpoint": "aff015-seed1641-all.json",
+  "train_probe_plan": "All full batch plans reproduced; zero held afferent training rows; train-only fold scales replayed.",
+  "control": "Exactly five target bins / 100 ms apart, same afferent, trial and prefix on all matched rows. Missing predictions are NaN only on structurally unavailable control rows.",
+  "full_refit_weights_byte_identical": true,
+  "refit_held_group": "aff015",
+  "full_refit_held_predictions_bit_identical": true,
+  "selected_group_oof_count": 2506,
+  "held_aff015_trial1_rows": 155,
+  "max_abs_pytorch_vs_python": 5.948348684725602e-07,
+  "max_abs_pytorch_vs_js": 5.948348684725602e-07,
+  "inference_cases": 325,
+  "runtimes_checked": [
+    "Python standard library",
+    "JavaScript Node ESM bridge"
+  ],
+  "invalid_python_rejections": 12,
+  "invalid_js_rejections": 14,
+  "absolute_tolerance": 3e-05,
+  "synthetic_fixture_count": 10,
+  "recorded_fixture_count": 5
+}

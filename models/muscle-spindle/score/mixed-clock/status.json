@@ -1,0 +1,50 @@
+{
+  "population": "mixed-clock",
+  "status": "unevaluable",
+  "gate_pass": null,
+  "models_fit": 0,
+  "scores": null,
+  "reason": "Only prefixes 0 and 1 are represented. aff406 filename and internal aff106 identity conflict. The expanded three-prefix test cannot run.",
+  "eligible_by_prefix": {
+    "0": {
+      "stored_trials": 148,
+      "eligible_trials": 94,
+      "eligible_windows": 16262,
+      "exclusions": {
+        "internal identity or trial-label cardinality mismatch": 38,
+        "irregular or incompatible time_PotMem lattice (0.000249999999998s)": 2,
+        "irregular or incompatible time_PotMem lattice (0.000249999999999s)": 5,
+        "irregular or incompatible time_PotMem lattice (0.000250000000001s)": 2,
+        "irregular or incompatible time_PotMem lattice (0.000250000000002s)": 1,
+        "irregular or incompatible time_PotMem lattice (0.00025s)": 6
+      }
+    },
+    "1": {
+      "stored_trials": 380,
+      "eligible_trials": 380,
+      "eligible_windows": 97695,
+      "exclusions": {}
+    },
+    "4": {
+      "stored_trials": 26,
+      "eligible_trials": 0,
+      "eligible_windows": 0,
+      "exclusions": {
+        "internal identity or trial-label cardinality mismatch": 26
+      }
+    }
+  },
+  "member_windows": {
+    "aff004": 6086,
+    "aff015": 2506,
+    "aff017": 7670,
+    "aff021": 0,
+    "aff101": 19236,
+    "aff102": 22240,
+    "aff103": 19599,
+    "aff107": 36620,
+    "aff406": 0
+  },
+  "window_source_sha256": "964922264e7b93159d350206e292fe2dcfd12222985c3a59ac4a5cf18ae607cf",
+  "QC_summary_sha256": "ddb7c9508348012ac2e6e1ab15c624b2d1bf28dd16ea11a680cfad8971da362c"
+}
