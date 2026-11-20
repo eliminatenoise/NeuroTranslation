@@ -5,7 +5,7 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.9764d9142d271b69e768a93f0cac33e9a936738cb3d2402e729cf7af939d8384.css">
+  <link rel="stylesheet" href="style.9ef85312bd592d4c6452f9d9d055b46bfd23c7922432106f94e8fe4bcfe76eee.css">
 </head>
 <body>
   <header class="topbar">
@@ -24,6 +24,7 @@
       <div>
         <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p>
         <nav class="section-links wrist-links" aria-label="Study recordings">
+          <a href="./visual-balance/index.html" data-pages-href="./visual-balance/index.html">Forecast balance after a visual rotation</a>
           <a href="./walking-instructions/index.html" data-pages-href="./walking-instructions/index.html">Change the walking instruction</a>
           <a href="./heel-and-force/index.html" data-pages-href="./heel-and-force/index.html">Forecast a heel marker and the force underfoot</a>
           <a href="./pedal-load/index.html" data-pages-href="./pedal-load/index.html">Forecast the next pedal reading</a>
@@ -102,6 +103,16 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="finger-transfer" aria-labelledby="cohort-choice"><h3 id="cohort-choice">A different person’s finger movement</h3><p>Learn from four people, calibrate on a fifth, then compare the cue with the recorded brain signal.</p><a href="finger-transfer/index.html">Run the five-person comparison</a></article>
+      <article class="study-choice-card" data-study-key="visual-balance" aria-labelledby="reader-visual-balance">
+        <h3 id="reader-visual-balance">Does scalp voltage help forecast a walker’s balance?</h3>
+        <p>Turn the scene in a walker’s headset. Change the scalp input in an invented example and forecast where the head and the base of the spine will move over the next 125 milliseconds.</p>
+        <nav class="section-links" aria-label="Balance after a visual rotation">
+          <a href="./visual-balance/index.html" data-pages-href="./visual-balance/index.html">Try the trained Transformer</a>
+          <a href="./visual-balance-controls/index.html" data-pages-href="./visual-balance-controls/index.html">Compare NeuroTranslate 0.0</a>
+          <a href="./papers/visual-balance/index.html" data-pages-href="./papers/visual-balance/index.html">Read the study</a>
+          <a href="https://eliminatenoise.github.io/Interoceptomics/visual-balance/">See a recorded rotation</a>
+        </nav>
+      </article>
       <article class="study-choice-card" data-study-key="walking-instructions" aria-labelledby="reader-walking-instructions">
         <h3 id="reader-walking-instructions">Does the walking instruction help?</h3>
         <p>“As usual” or “fast but not running”. Keep the previous 200 milliseconds of a step fixed and change the cue. Watch what happens to the forecast for the pelvis and the right heel.</p>
@@ -416,6 +427,6 @@
     document.getElementById("study-choice-label").hidden = false;
     showStudy();
   </script>
-  <script type="module" src="app.9764d9142d271b69e768a93f0cac33e9a936738cb3d2402e729cf7af939d8384.mjs"></script>
+  <script type="module" src="app.9ef85312bd592d4c6452f9d9d055b46bfd23c7922432106f94e8fe4bcfe76eee.mjs"></script>
 </body>
 </html>

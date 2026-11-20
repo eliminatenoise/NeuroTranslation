@@ -224,3 +224,7 @@ Florent Moissenet and Céline Schreiber released version 8 of their multimodal g
 ### Walking to two instructions
 
 Céline Schreiber and Florent Moissenet released the barefoot walking recordings under CC BY 4.0. This study takes the two trial instructions and the recorded skin-marker positions, derives pelvis and heel displacement, fits short-horizon forecasts and reports aggregate errors. Both interactive forecasters use invented movement. The Interoceptomics atlas credits the recorded examples it shows. [Original data](https://doi.org/10.6084/m9.figshare.7734767.v8) · [Methods](https://doi.org/10.1038/s41597-019-0124-4) · [Data licence](https://creativecommons.org/licenses/by/4.0/)
+
+### Visual rotation during beam walking
+
+Steven M. Peterson and Daniel P. Ferris published the Perturbed beam-walking task as OpenNeuro ds003739 version 1.0.3 under CC0 1.0. The model uses their marker and electrode measurements to forecast movement and reports aggregate errors. The controls in the two NeuroTranslation readers use invented events. The linked Interoceptomics atlas attributes its short measured example. [Dataset](https://doi.org/10.18112/openneuro.ds003739.v1.0.3) · [Acquisition and processing](https://doi.org/10.1016/j.dib.2021.107635) · [Original balance study](https://doi.org/10.1523/ENEURO.0207-18.2018) · [CC0](https://creativecommons.org/publicdomain/zero/1.0/)

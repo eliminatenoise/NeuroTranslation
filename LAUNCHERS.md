@@ -158,3 +158,7 @@ For the separate elbow experiment, [open the viewer](https://eliminatenoise.gith
 ## Change the walking instruction
 
 [Open the forecast](https://eliminatenoise.github.io/NeuroTranslation/walking-instructions/) or [download the offline reader](docs/walking-instructions-offline.zip). Extract the entire folder and open its launcher for Windows, macOS or Linux. The [trained model download](models/walking-instructions-model.zip) includes its own three launchers that open a local forecast in your browser. It also includes the fitted weights, training code and instructions to reconstruct the experiment. [Compare NeuroTranslate 0.0](https://eliminatenoise.github.io/NeuroTranslation/walking-instruction-controls/) · [Read the paper](https://eliminatenoise.github.io/NeuroTranslation/papers/walking-instructions/)
+
+## Forecast a walker’s balance
+
+[Open the reader](https://eliminatenoise.github.io/NeuroTranslation/visual-balance/) or [download it for offline use](docs/visual-balance-offline.zip). Extract the ZIP, open the folder and choose the launcher for Windows, macOS or Linux. You can also open `index.html` directly. The [trained model ZIP](models/visual-balance-model.zip) contains its own three launchers, a `forecast.html` that accepts a local event, fitted weights and the code to reconstruct and score the experiment. [Compare the shared model](https://eliminatenoise.github.io/NeuroTranslation/visual-balance-controls/) · [Read the paper](https://eliminatenoise.github.io/NeuroTranslation/papers/visual-balance/)

@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0 movement forecasts
 
+A visual scene rotates during walking. Compare how motion, scalp voltage, eye and muscle signals forecast the next 125 ms at the sacrum and head. [Try the signal controls](visual_balance/index.html) · [Use measured inputs](visual_balance/README.md)
+
 Turn an invented walk in the laboratory, switch its instruction and compare pelvis and heel forecasts. [Try the walking directions reader](walking_cues/index.html) · [Use your own measurements](walking_cues/README.md)
 
 Where will the heel go, and what will the floor plate read? Try a 100 ms walking forecast, then see what happened when four outputs had to share two learned numbers. [Open the offline model](heel_force/index.html) · [Methods and measurements](heel_force/README.md)

@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>When eye and scalp signals move together · NeuroTranslate</title><style>
+*{box-sizing:border-box}html{background:#f7f5ee;color:#213b39;font:17px/1.48 system-ui,sans-serif}body{max-width:1100px;padding:clamp(14px,4vw,52px);margin:auto}h1{font-size:clamp(2.3rem,6vw,4.3rem);line-height:1.03;letter-spacing:-.045em;max-width:900px;margin:.35em 0}.intro{font-size:1.12rem}p{max-width:75ch}h2{font-size:1.5rem;line-height:1.2;margin:.05rem 0 .65rem}h3{font-size:1.15rem;margin:.65rem 0}.workspace{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,1.6fr);gap:14px;margin:1.5rem 0}.box{border:1px solid #b7c6bd;border-radius:12px;padding:clamp(14px,2.8vw,28px);background:white}label{display:block;font-weight:650;margin:.85rem 0 .15rem}select,input{width:100%;font:inherit;accent-color:#10766a}select{background:#fff;color:#213b39;border:1px solid #8b9a92;border-radius:5px;padding:.38em}canvas{width:100%;height:170px;display:block}a{color:#006862}.small{color:#4a6255;font-size:.92rem}td,output{font-variant-numeric:tabular-nums}table{width:100%;border-collapse:collapse;font-size:.94rem}caption{text-align:left;margin:.6em 0}td,th{text-align:left;padding:.45em .2em;border-bottom:1px solid #d3ded5}td+td,th+th{text-align:right}.readouts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:.8rem 0}.readouts div{border-top:2px solid #248476;padding:.4rem 0}.readouts div+div{border-color:#b35c35}.readouts b{display:block}footer{margin:1.5rem 0}@media(max-width:700px){.workspace{grid-template-columns:1fr}.readouts{grid-template-columns:1fr}table{font-size:.86rem}td,th{padding:.38rem .12rem}}
+</style></head><body><main>
+<header><p>NeuroTranslate 0.0 · Visual balance</p><h1>When eye and scalp signals move together</h1><p class="intro">An electrode on the head can pick up a change when the eyes move. If that signal helps predict body movement, what part was already visible at the eye electrodes? Try a short, invented recording and compare forecasts from the same movement history.</p></header>
+<section class="workspace"><div class="box"><h2>Change the inputs</h2>
+<label for="eyes">Eye signal <output id="eyesV"></output></label><input id="eyes" type="range" min="0" max="30" value="12" step="1">
+<label for="pickup">Same pattern added at the scalp <output id="pickupV"></output></label><input id="pickup" type="range" min="0" max="1" value=".4" step=".05">
+<label for="separate">Separate scalp pattern <output id="separateV"></output></label><input id="separate" type="range" min="0" max="12" value="3" step=".5">
+<label for="availability">Scalp sites supplied</label><select id="availability"><option value="128">All 128</option><option value="96">First 96</option><option value="64">First 64</option><option value="0">None</option></select>
+<label for="direction">Direction of the visual rotation</label><select id="direction"><option value="-1">Counterclockwise</option><option value="1">Clockwise</option></select>
+<p class="small">These sliders set a mathematical example. The amount of eye signal in any real scalp electrode is unknown. µV means microvolts.</p></div>
+<div class="box"><h2>Follow eight time bins</h2><canvas id="chart" role="img" aria-label="Invented eye and scalp mean voltage across eight consecutive time bins"></canvas><p class="small">Green shows a right horizontal eye channel. Rust shows one scalp site, A1. Each bin covers 20 samples. The final bin ends about 125 ms after the visual rotation starts.</p>
+<label for="method">Use these measurements for the forecast</label><select id="method"></select>
+<div class="readouts" aria-live="polite"><div>Sacrum displacement<b id="sacrum"></b></div><div>Head displacement<b id="head"></b></div></div>
+<p class="small">Three distances in millimetres over the next 125 ms. The source axes run side to side, up and down, and front to back, in that order. The anatomical meaning of a positive sign is unverified.</p></div></section>
+<section class="box"><h2>How close was the model on real recordings?</h2><label for="sample">Recordings</label><select id="sample"><option value="assessment">People outside the fit</option><option value="development">Development · held-person folds</option></select>
+<p id="scope"></p><table><caption>Average distance from the measured endpoint. Smaller is closer.</caption><thead><tr><th>Forecast</th><th>Sacrum (mm)</th><th>Head (mm)</th></tr></thead><tbody id="scores"></tbody></table><p id="finding"></p></section>
+<section><h2>What gets subtracted?</h2><p>The adjusted model first learns how much of a scalp-group reading it can predict from the recorded eye, neck and leg channels in the fitting participants. It subtracts that estimate and uses the remainder alongside the original motion and muscle inputs. Subtraction can remove shared biological signals as well as electrical pickup. It cannot identify where the residual voltage came from.</p><p>The scalp model averages groups of eight numbered electrode sites. A group records electrical voltage, not the activity of a specific brain region. Two optical marker streams give the head and sacrum positions in the archived experiment. The authors resampled these optical recordings onto the EEG clock. All timings here refer to that processed recording.</p></section>
+<footer><a href="https://eliminatenoise.github.io/NeuroTranslation/visual-balance/">Try the directly trained Transformer</a> · <a href="https://eliminatenoise.github.io/Interoceptomics/visual-balance/">See the recorded signals in 3D</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/papers/visual-balance/">Read the paper</a> · <a href="https://doi.org/10.18112/openneuro.ds003739.v1.0.3">Original dataset</a></footer>
+</main><script type="application/json" id="modelData">@@DATA@@</script><script>
+'use strict';
+@@ENCODER@@
+const pack=JSON.parse(document.getElementById('modelData').textContent),s=pack.state,$=id=>document.getElementById(id);
+const labels={shared_full:'Motion, eye, neck, leg and scalp',shared_nuisance:'Same encoder without scalp voltage',shared_residual:'Scalp after eye and muscle adjustment',linear_full:'Linear model with scalp',linear_nuisance:'Linear model without scalp',linear_motion:'Motion and cue',motion_eyes:'Motion, cue and eyes',motion_neck:'Motion, cue and neck',motion_legs:'Motion, cue and legs',scalp_only:'Scalp and cue alone',masks_only:'Sensor availability and cue',cue_mean:'Typical change for the cue',velocity:'Continue recent velocity',recent:'Repeat the last change',hold:'Stay still'};
+for(const [key,label] of Object.entries(labels))$('method').add(new Option(label,key));
+const ctr=(x,f)=>x.map((v,i)=>(v-f.mean[i])/f.sd[i]);
+function rowMat(x,w){return w[0].map((_,i)=>x.reduce((a,v,j)=>a+v*w[j][i],0));}
+function estimate(mode,r){
+ const h=r.motion_mm.map(t=>t.flat()),last=h[159],cue=r.direction==='clockwise'?1:-1,nuis=r.nuisance_good.map(Number);
+ const rel=h.map(t=>t.map((v,i)=>v-last[i])),recent=last.map((v,i)=>v-h[127][i]);
+ if(mode==='hold')return Array(6).fill(0);if(mode==='recent')return recent;
+ if(mode==='velocity')return last.map((v,i)=>2*(v-h[143][i]));if(mode==='cue_mean')return s.cue_mean[cue];
+ const ne=r.nuisance_mean_uv.map((v,t)=>ctr([...v,...r.nuisance_rms_uv[t].map(Math.log1p)],s.nuisance_stats).map((x,i)=>nuis[i%13]?x:0));
+ const fraction=Array.from({length:16},(_,g)=>r.eeg_good.slice(8*g,8*g+8).filter(Boolean).length/8);
+ const scalp=r.eeg_mean_uv.map((v,t)=>{
+    const group=a=>fraction.map((f,g)=>f?a.slice(8*g,8*g+8).reduce((acc,z,j)=>acc+(r.eeg_good[8*g+j]?z:0),0)/(8*f):0);
+    return ctr([...group(v),...group(r.eeg_rms_uv[t].map(Math.log1p))],s.scalp_stats).map((n,i)=>fraction[i%16]?n:0);});
+ let x=[];
+ if(mode==='masks_only')x=[cue,...fraction,...nuis];else if(mode==='scalp_only')x=[cue,...fraction,...scalp.flat()];
+ else{
+    const ends=[],changes=[];for(let i=0;i<8;i++){ends.push(...rel[i*20+19]);changes.push(...last.map((_,j)=>h[i*20+19][j]-h[i*20][j]));}
+    x.push(...ends,...changes,...[16,32,64].flatMap(k=>last.map((v,j)=>v-h[159-k][j])),cue);
+    if(mode!=='linear_motion'){
+       const all=Array.from({length:13},(_,j)=>j),sub=({motion_eyes:[2,3,4],motion_neck:[0,1],motion_legs:all.slice(5)})[mode]||all;
+       x.push(...ne.flatMap(row=>[...sub,...sub.map(j=>j+13)].map(j=>row[j])),...sub.map(j=>nuis[j]));
+    }
+    if(['linear_nuisance','linear_full','shared_nuisance','shared_full','shared_residual'].includes(mode)){
+       x.push(...fraction);
+       for(let t=0;t<8;t++){let e=scalp[t];
+          if(mode.endsWith('nuisance'))e=Array(32).fill(0);
+          if(mode==='shared_residual'){
+              const f=s.nuisance_regression,p=rowMat([...ne[t],...nuis],f.coef);
+              e=e.map((v,j)=>fraction[j%16]?v-(p[j]+f.bias[j]):0);}
+          x.push(...e);}
+    }
+    if(mode.startsWith('shared_')){
+       const tok=Array.from({length:4},(_,k)=>last.map((_,i)=>(h[40*k+39][i]-h[40*k][i]-s.token_mean[i])/s.token_sd[i]));
+       x.push(...encode(pack.encoder,tok.map(v=>linear(pack.encoder,'project',v))));}
+ }
+ const f=s.fits[mode],corr=rowMat(ctr(x,f),f.coef),noMotion=['masks_only','scalp_only'].includes(mode);
+ return corr.map((v,j)=>v+f.bias[j]+(noMotion?0:recent[j]));
+}
+function example(){
+ const r=structuredClone(pack.example),eyes=+$('eyes').value,pickup=+$('pickup').value,other=+$('separate').value;
+ r.eeg_good=r.eeg_good.map((_,j)=>j<+$('availability').value);r.direction=+$('direction').value===1?'clockwise':'counterclockwise';
+ for(let t=0;t<8;t++){const pulse=eyes*Math.exp(-.5*((t-4.5)/1.3)**2);
+   for(let j=2;j<5;j++){const v=r.nuisance_mean_uv[t][j]+(j===3?-pulse:pulse);r.nuisance_mean_uv[t][j]=v;r.nuisance_rms_uv[t][j]=Math.abs(v)+5;}
+   for(let j=0;j<128;j++){const v=r.eeg_mean_uv[t][j]+pickup*pulse*Math.cos(.03*j)+other*Math.sin(.9*t+.03*j);
+      r.eeg_mean_uv[t][j]=v;r.eeg_rms_uv[t][j]=Math.abs(v)+5;}
+ }return r;
+}
+function draw(r){
+ const cv=$('chart'),w=cv.clientWidth,h=cv.clientHeight,d=window.devicePixelRatio||1;cv.width=w*d;cv.height=h*d;const g=cv.getContext('2d');g.scale(d,d);
+ const traces=[r.nuisance_mean_uv.map(v=>v[2]),r.eeg_mean_uv.map(v=>v[0])],limit=44,x=t=>35+t*(w-50)/7,y=v=>h-24-(v+10)*(h-45)/limit;
+ g.strokeStyle='#c8d2c9';g.beginPath();g.moveTo(30,y(0));g.lineTo(w-8,y(0));g.stroke();g.fillStyle='#38574d';g.font='12px sans-serif';g.fillText('0 µV',0,y(0)+3);
+ traces.forEach((values,k)=>{if(k&&!r.eeg_good[0])return;g.strokeStyle=k?'#ae5834':'#16796c';g.lineWidth=2.6;g.beginPath();values.forEach((v,t)=>t?g.lineTo(x(t),y(v)):g.moveTo(x(t),y(v)));g.stroke();});g.fillText('Earlier',32,h-2);g.fillText('Cutoff',w-43,h-2);
+}
+function update(){const r=example(),v=estimate($('method').value,r);$('eyesV').textContent=$('eyes').value+' µV';$('pickupV').textContent=Math.round(100*$('pickup').value)+'%';$('separateV').textContent=$('separate').value+' µV';$('sacrum').textContent=v.slice(0,3).map(x=>x.toFixed(2)).join(', ')+' mm';$('head').textContent=v.slice(3).map(x=>x.toFixed(2)).join(', ')+' mm';draw(r);}
+function results(){const q=pack[$('sample').value];$('scope').textContent=q.events+' rotations from '+q.people+' people had a different, same-direction comparison event. Each person contributes equal weight.';const methods=['shared_full','shared_nuisance','shared_full_wrong_cycle','shared_residual','linear_full','linear_nuisance','motion_eyes','motion_neck','motion_legs','linear_motion','velocity'];$('scores').replaceChildren(...methods.map(k=>{const tr=document.createElement('tr');for(const val of [labels[k]||'Same encoder, other event’s scalp voltage',...q.methods[k].map(n=>n.toFixed(2))]){const td=document.createElement('td');td.textContent=val;tr.append(td);}return tr;}));const m=q.test.passes_sacrum_head.map((v,i)=>v?['sacrum','head'][i]:null).filter(Boolean);$('finding').textContent=m.length?'The registered scalp comparison passed for the '+m.join(' and ')+'.':'The correctly paired scalp signal did not pass both registered comparisons for either marker.';}
+['eyes','pickup','separate','availability','direction','method'].forEach(id=>$(id).addEventListener('input',update));$('sample').addEventListener('change',results);window.addEventListener('resize',update);update();results();
+</script></body></html>
