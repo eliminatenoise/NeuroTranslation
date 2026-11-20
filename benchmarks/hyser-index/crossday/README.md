@@ -2,9 +2,9 @@
 
 # A correction fitted on the first day helped one of four people on the second
 
-A person presses the same finger against the same kind of sensor on two days. Can the first day's readings improve the forecast on the second? For the four test people of [study 14](../RESULTS.md), the shared forecast of the index sensor 120 ms ahead missed by **14.912 mV** on day 2. Corrected on the person's own day 1, it missed by **15.091 mV**: 0.180 mV worse, and better for one person of four. With forearm EMG in the forecast the result was the same: the unchanged shared forecast had the smallest average miss.
+A person presses the same finger against the same kind of sensor on two days. Can the first day's readings improve the forecast on the second? For the four test people of [study 14](../RESULTS.md), the shared forecast of the index sensor 120 ms ahead missed by **14.912 mV** on day 2. Adjusted with a correction fitted on the person's own day 1, it missed by **15.091 mV**: 0.180 mV worse, and better for one person of four. With forearm EMG in the forecast the result was the same: the unchanged shared forecast had the smallest average miss.
 
-In the twelve people the shared fit was made on, the same correction went the other way, a little. The person's own day 1 lowered the day-2 average miss by 0.021 mV with the sensor's history alone (17.610 to 17.589 mV, better for 4 of 12) and by 0.076 mV with EMG added. Both ranges cross zero.
+In the twelve fitting people of study 14, each pair scored with a shared fit made on the other ten, the same correction went the other way, a little. The person's own day 1 lowered the day-2 average miss by 0.021 mV with the sensor's history alone (17.610 to 17.589 mV, better for 4 of 12) and by 0.076 mV with EMG added. Both ranges cross zero.
 
 Every score here is the plain average miss (mean absolute error), in millivolts of the sensor's output, with each person counting equally. EMG is electrical activity of muscle, picked up on the skin: a recording of muscle, not of nerve.
 
@@ -19,7 +19,7 @@ Each person gave five labelled trials on day 1 and five scored trials on day 2, 
 
 ## Whose day 1 matters
 
-A correction can come from the right person and still make a forecast worse. In the four test people, the person's own day 1 beat the paired donor's by 0.310 mV with the sensor's history and 0.375 mV with EMG, and either correction still left a larger average miss than leaving the shared model alone. On the measure that punishes large misses (root mean squared error), the own-day correction moved the history forecast from 23.287 to 23.280 mV, with a paired range of −0.150 to +0.164 mV.
+A correction can come from the right person and still make a forecast worse. In the four test people, a correction from the person's own day 1 beat one taken from their paired partner's day 1 (the donor: the two people of each pair swapped corrections) by 0.310 mV with the sensor's history and 0.375 mV with EMG, and either correction still left a larger average miss than leaving the shared model alone. On the measure that punishes large misses (root mean squared error), the own-day correction moved the history forecast from 23.287 to 23.280 mV, with a paired range of −0.150 to +0.164 mV.
 
 | Gain, positive favours the own-day correction | 12 fitting people (mV) | 4 test people (mV) |
 | --- | ---: | ---: |
@@ -32,13 +32,13 @@ The brackets hold the middle 95% of resampled pair averages. The two people of a
 
 ## What the correction is
 
-The original forecast estimated where the index sensor's recorded voltage would be in 120 ms. The correction learns two numbers from day 1: a voltage offset and a gain on the forecast's change from the current reading. A fixed ridge penalty of 0.1 pulls both towards zero. On day 2 the shared forecast and the two numbers stay fixed. The donor correction goes through the same arithmetic with the same number of labelled trials.
+The original forecast estimated where the index sensor's recorded voltage would be in 120 ms. The correction learns two numbers from day 1: a voltage offset and a gain on the forecast's change from the current reading. A fixed penalty of 0.1 pulls both towards zero. On day 2 the shared forecast and the two numbers stay fixed. The donor correction goes through the same arithmetic with the same number of labelled trials.
 
 For each pair of fitting people, the shared forecast was fitted on both days of ten other people and chose its penalty within those ten, so both people of the pair stay outside the fit. Study 14 had scored the fitting people with one person left out of each fit, and recorded day-2 average misses of 17.550 mV for the sensor's history and 17.927 mV with EMG; those are separate, earlier scores from fits on eleven people. For the test people, the shared forecast is exactly study 14's fit on all twelve fitting people, and it reproduces study 14's published day-2 score.
 
 ## What it does not show
 
-The target is the released voltage of the index sensor during Hyser's Random task, in which the fingers press without moving, in adults with intact fingers. The 120 ms comes from the nominal released sampling grid: whether the released force could have been available live, how it was processed upstream, drift and the delay of a live device are not known. Surface EMG measures the electrical activity of muscle. The study covers a forecast of one voltage channel, after the fact, in one task. The four people set aside were not opened.
+The target is the released voltage of the index sensor during Hyser's Random task, in which the fingers press without moving, in adults with intact fingers. The 120 ms comes from the nominal released sampling grid: whether the released force could have been available live, how it was processed upstream, drift and the delay of a live device are not known. The four people set aside were not opened.
 
 [The plan and the correction's equation](PROTOCOL.md) · [Results file with the paired checks](RESULTS.json)
 

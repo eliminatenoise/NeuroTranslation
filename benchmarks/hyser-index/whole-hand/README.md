@@ -1,12 +1,12 @@
 [The studies](../../README.md) › Study 16 · One finger: the other four fingers
 
-# The other four fingers helped the four test people and not the twelve the fit was made on
+# The other four fingers lowered the test people's average error, for two of the four, and raised the fitting people's
 
 How much do the other fingers say about the next index reading? For the four test people of [study 14](../RESULTS.md), a straight-line fit on the index sensor's last 41 readings forecast its voltage 120 ms ahead with an average miss of **14.355 mV**. Given the same history from all five finger sensors, it missed by **14.161 mV**: 0.193 mV better on average, though better for only two of the four, with a range from 0.573 mV better to 0.187 mV worse. In the twelve people the fit was made on, the same change raised the average miss, from 16.854 to 16.915 mV. One group gained and the other did not, so the question stays open. The rule set before scoring asked for a gain against both the index history and a control from another trial; it got a split answer.
 
-The main measure is the plain average miss (mean absolute error), in millivolts of the sensor's output; the measure that punishes large misses (root mean squared error) is shown beside it. A *straight-line fit* is a weighted sum of its inputs, here a ridge regression.
+The main measure is the plain average miss (mean absolute error), in millivolts of the sensor's output; the measure that punishes large misses (root mean squared error) is shown beside it. A *straight-line fit* is a weighted sum of its inputs, with a penalty that keeps the weights small.
 
-## Same target, different inputs
+## Four forecasts of the same index reading
 
 Every version saw the same index history, cutoffs and targets. The index-only fit takes 41 readings up to the cutoff. The five-finger fit adds 41 readings from each of the other four sensors in the same trial. The other-trial control swaps those four histories for the matching ones from the next trial of the same person and day, wrapping from trial 5 to trial 1: it keeps the time in the trial and the number of inputs, but its four added histories belong to a different press, which only an analysis after the fact can do. The compact fit replaces the four extra histories with each sensor's current reading and its straight-line trend over the same 41 readings.
 
@@ -40,7 +40,7 @@ The test people's result is stronger on the measure that punishes large misses: 
 
 ## What it does not show
 
-Four test people reused from study 14, fitting groups that overlap, and one fixed reassignment of trials for the control limit what these comparisons can show. These are voltages from one task in which the fingers press without moving; no instrument delay, force in newtons, mechanism linking the fingers, brain activity or control of a device was measured.
+The four test people were reused from study 14, the fitting groups overlap, and the control reassigns trials in one fixed way. These are voltages from one task in which the fingers press without moving: no instrument delay or force in newtons was measured, and nothing here says why the fingers move together.
 
 ## Use the forecast
 
