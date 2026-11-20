@@ -27,4 +27,4 @@ Open an original Session 5, Task 2 MATLAB trial in the browser to inspect the tw
 
 [How the browser fits, and how closely it matches the Python code](BROWSER-FITTING.md)
 
-The same model then faced three prescribed pinch targets, with one practice repeat at each to adjust it to the person: [Study 21 · Pinch at new targets](../cemhsey-transfer/) · [Try two recordings on your computer](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/)
+The same model then faced three prescribed pinch targets, with one practice repeat at each to adjust it to the person: [Study 21 · Pinch at new targets](../cemhsey-transfer/) · [Compare the three targets](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/results/) · [Try two recordings on your computer](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/)

@@ -30,6 +30,6 @@ cutoff = len(voltage_frames) - 1
 index_voltage = predict(voltage_frames, [cutoff], weights, "aligned_five")[0]
 ```
 
-The predictor expects finite voltages for the selected arm’s inputs, at least 41 frames and an integer cutoff. The index-only arm uses only the index column. Other models require all five. A standalone scoring run may of course have the later measured voltage available for comparison.
+The predictor expects finite voltages for the selected model’s inputs, at least 41 frames and an integer cutoff. The index-only model uses only the index column. Other models require all five. A standalone scoring run may of course have the later measured voltage available for comparison.
 
 Contains models derived from Jiang, X., Dai, C., Liu, X., & Fan, J. (2023), *Open Access Dataset and Toolbox of High-Density Surface Electromyogram Recordings*, version 2.0.0, PhysioNet. [Dataset](https://doi.org/10.13026/hxan-pe94) · [Paper](https://doi.org/10.1109/TNSRE.2021.3082551) · [Open Data Commons Attribution 1.0](https://physionet.org/content/hd-semg/view-license/2.0.0/)

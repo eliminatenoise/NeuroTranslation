@@ -32,4 +32,4 @@ The plan fixed the average miss at the 50% target as the main result, the 10% ta
 
 [Explore the measured results](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/results/) · [Compare two recordings on your computer](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/) · [Download the offline reader](../../docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip) · [Results file](RESULTS.json)
 
-The next study brings the same saved corrections back on a new recording day: [Study 22 · Pinch, next day](../cemhsey-carry/README.md).
+The next study brings the same saved corrections back on a new recording day: [Study 22 · Pinch, next day](../cemhsey-carry/README.md) · [Its measurements in the browser](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-carry/)

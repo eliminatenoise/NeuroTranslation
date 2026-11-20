@@ -20,7 +20,7 @@ Every score here is the measure that punishes large misses (root mean squared er
 
 All 337 released trials qualified. The three test people supplied 173 trials and 1,557 scored positions, and every method was scored on those same positions. The three people's increases with EEG were 0.170, 0.030 and 0.166 mm. EEG did lower the squared error on 72 of the 173 trials, 31 of 58 for sub-10, but larger errors on other trials pulled each person's score up. Leaving out one test person at a time gives increases from 0.109 to 0.167 mm. On the plain average miss (mean absolute error), carrying the speed forward beat the fitted model, 0.667 against 0.706 mm; on the measure that punishes large misses it lost. [Errors by person, by moment and by trial](RESULT.json)
 
-![Paired dot plot of root mean squared error in millimetres. Adding EEG raised error for sub-10 by 0.170, sub-11 by 0.030 and sub-12 by 0.166. Equal-weight cohort error rose from 1.093 to 1.223 mm.](cohort-comparison.png)
+![Paired dot plot of root mean squared error in millimetres. Adding EEG raised error for sub-10 by 0.170, sub-11 by 0.030 and sub-12 by 0.166. Error with the three people weighted equally rose from 1.093 to 1.223 mm.](cohort-comparison.png)
 
 ## What each model sees
 
