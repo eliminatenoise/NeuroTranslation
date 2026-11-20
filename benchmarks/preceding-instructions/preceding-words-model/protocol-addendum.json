@@ -1,0 +1,8 @@
+{
+  "before_any_outcome_inspection": true,
+  "basis": "Independent prospective review of design and accession names only.",
+  "additional_descriptive_ridges": "Task/timing/completed-utterance word count/confidence only, and those features plus lexical identities without motion; same training rows, loss, weights and regularization as all ridges. Include both in all-model group results.",
+  "duplicates": "Within a recording sort by end, then start and event ID. Retain first complete event per cutoff grid row; after past eligibility is established retain first event per last observed native wrist tick. This avoids counting a repeatedly reused sensor sample as another independent forecast. Report exclusions before consulting target.",
+  "donors": "The two token bags must differ after projection to the final training vocabulary. Use distinct training R group with same task. Compare all controls including the primary and physical benchmarks on an identical donor-matched population; also show all-scorable MAE.",
+  "prospective_group_counts_from_metadata": {"training_recordings":18,"training_groups":11,"assessment_recordings":11,"assessment_groups":6}
+}
