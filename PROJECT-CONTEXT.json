@@ -1501,5 +1501,19 @@
     "source_doi": "10.5061/dryad.vdncjsxsw",
     "publication_doi": "10.7554/eLife.55177",
     "scope": "Archived passive muscle and axon recording in rats. The two three-prefix evaluations were unavailable. Exploratory held-afferent fits used 3 fibers from one filename group, 94 trials and 16,262 20-ms targets. Mean count deviance favored spike history over the combined Transformer. Timely mechanics improved the combined forecast against time-shifted mechanics on its eligible subset. File-specific force/position calibration and animal-independent generalization remain unverified."
+  },
+  "cortical_reach": {
+    "reader": "docs/cortical-reach/index.html",
+    "offline_reader": "docs/cortical-reach-offline.zip",
+    "model": "models/cortical-reach/README.md",
+    "model_zip": "models/cortical-reach.zip",
+    "paper": "docs/papers/cortical-reach/index.html",
+    "pdf": "docs/papers/cortical-reach/cortical-reach.pdf",
+    "test": "models/cortical-reach/score/test/scores.json",
+    "markers": "models/cortical-reach/landmarks/test/results.json",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/cortical-reach/",
+    "source_doi": "10.5061/dryad.nk98sf7q7",
+    "paper_doi": "10.7554/eLife.48198",
+    "scope": "One macaque session, 540 rewarded originals split 324/108/108 in chronological order. Across 778 matching windows from 105 later trials, earlier sorted spikes increased joint Transformer endpoint error by 0.1070 cm. Correct vs wrong-trial timing remained unresolved. Two 3D landmarks helped during perturbations but slightly worsened reach forecasts. The archived kinematics were processed offline."
   }
 }

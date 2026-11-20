@@ -1,0 +1,7 @@
+# When the arm is moved
+
+Extract the full ZIP and choose **Open on Windows.cmd**, **Open on macOS.command** or **Open on Linux.sh**. On Linux you can also run `sh "Open on Linux.sh"`. Opening **index.html** directly works without a server. Forecasts are calculated on your device. The paper, atlas and dataset links open online.
+
+The macaque held a robotic handle. A brief push and a later visually cued reach occurred in the same original trial. Choose the event, then choose a forecast time. The dark trace shows the preceding 200 ms of handle motion. The orange trace shows the following 100 ms as recorded. Both forecasts start from the open circle. Each coordinate is a change in the robot encoder frame, in centimetres. The square and outlined circle distinguish the joint model and recorded endpoint. The results table evaluates later trials, whereas the interactive case uses one prespecified fit.
+
+Choose **Invent a history** to change how far the handle moves or how many spikes precede the cutoff. No camera, microphone or connection is needed. In the recorded case, the additional linear comparison uses two 3D landmarks from the arm. Those inputs retain their native shoulder-relative coordinates in metres. The predicted endpoint is still the planar handle movement in centimetres. [Read the full study](https://eliminatenoise.github.io/NeuroTranslation/papers/cortical-reach/) · [Open the 3D recording](https://eliminatenoise.github.io/Interoceptomics/cortical-reach/)
