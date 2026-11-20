@@ -1,4 +1,4 @@
-# The hand's own history is the forecaster to beat
+# The hand's own history is the forecast to beat
 
 Every study in this repository asks one question of one open dataset. Most ask the same one: a model already knows something about a movement, so does one more signal help it forecast what comes next?
 
@@ -131,11 +131,11 @@ A "comparison" is one pair of scores on the same forecasts. Several studies shar
 | 1 | Last angle repeated: 7.925° | Learned forecast on wrist history: **4.053°** |
 | 7 | Last palm position repeated: 4.439 mm | Straight-line fit on time and past palm: **1.093 mm** |
 | 9 | Last force repeated: 0.7878 N | Straight-line fit on force and motion history: **0.4442 N** |
-| 10 | Current force repeated: 1.7173 N | Straight-line fit on force and motion history: **0.6770 N** |
-| 11 | Current voltage repeated: 0.5168 mV | Straight-line fit on timing and recent voltage: **0.3601 mV** |
-| 14 | Current reading repeated: 17.945 mV | Straight-line fit on the last 41 readings: **14.355 mV** |
-| 18 | Current reading repeated: 0.5464% | Straight-line fit on force history and the cue: **0.4634%** |
-| 19 | Current reading repeated: 0.64513% | Straight-line fit on force history and the cue: **0.51675%** |
+| 10 | Last force repeated: 1.7173 N | Straight-line fit on force and motion history: **0.6770 N** |
+| 11 | Last voltage repeated: 0.5168 mV | Straight-line fit on timing and recent voltage: **0.3601 mV** |
+| 14 | Last reading repeated: 17.945 mV | Straight-line fit on the last 41 readings: **14.355 mV** |
+| 18 | Last reading repeated: 0.5464% | Straight-line fit on force history and the cue: **0.4634%** |
+| 19 | Last reading repeated: 0.64513% | Straight-line fit on force history and the cue: **0.51675%** |
 
 That is every study that scores "repeat the last value" and scores the model on the task it was fitted for. Studies 2 and 3 reuse the people of study 1 and are not counted twice. Study 4 has no "repeat the last value" score.
 
