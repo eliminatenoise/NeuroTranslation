@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forearm signals and the early turn of a wrist</title>
+<style>
+body{font:1rem/1.55 system-ui,sans-serif;color:#17212c;background:#fafbfc;margin:0}
+main{max-width:49rem;margin:auto;padding:2rem 1.2rem}h1{font-size:clamp(2rem,5vw,3.25rem);line-height:1.08;max-width:18ch}
+h2{line-height:1.24;margin-top:2rem}table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{padding:.5rem .35rem;border-bottom:1px solid #bdc8d2;text-align:left}td{white-space:nowrap;text-align:right}
+thead th:last-child{text-align:right}caption{margin-bottom:.6rem;text-align:left;color:#384651}
+a{color:#16486a}strong{color:#123e52}p{max-width:72ch}code{overflow-wrap:anywhere}
+</style>
+</head>
+<body><main>
+<h1>Forearm signals helped predict the early turn of a wrist</h1>
+<p>A person turns a supported right wrist towards a target. A device measures how far the wrist bends and tilts. From the preceding half-second of motion, a model predicts the two angles a quarter-second ahead on the recording clock.</p>
+<p>We kept the motion forecast fixed and taught a second model to correct its mistakes. Adding the forearm’s electrical activity to that correction brought the error down from <strong>3.665° to 3.549°</strong>. This gain appeared in all six people. The original motion forecast scored <strong>3.618°</strong>. Adding the muscle-informed correction improved on that original forecast for three of the six.</p>
+<table><caption>Error across two wrist angles, giving each person equal weight. Smaller is closer to the sensors’ readings.</caption><thead><tr><th scope="col">What the model used</th><th scope="col">Error</th></tr></thead>
+<tbody>
+<tr><th scope="row">Last angle, repeated</th><td>7.216°</td></tr>
+<tr><th scope="row">Last velocity, extrapolated</th><td>7.166°</td></tr>
+<tr><th scope="row">Recent wrist motion</th><td>3.618°</td></tr>
+<tr><th scope="row">Motion, plus a correction learned from motion</th><td>3.665°</td></tr>
+<tr><th scope="row">Motion, plus a correction learned from motion and forearm activity</th><td>3.549°</td></tr>
+<tr><th scope="row">Motion and forearm activity learned together</th><td>3.575°</td></tr>
+</tbody></table>
+<h2>Most of the gain came early</h2>
+<p>At the first target time, 0.75 seconds after the cue, the extra forearm signal reduced error from 7.441° to 6.949°. It also helped at 1.00 seconds. For the four later targets, from 1.25 through 2.00 seconds, the motion correction did better without the muscle signal.</p>
+<h2>Which movement supplied the muscle signal?</h2>
+<p>Four pairs of forearm electrodes recorded surface muscle activity, called EMG. Giving the correction a different person’s EMG from another trial raised its error from 3.549° to 3.828°. Reversing the order of the actual forearm measurements raised it to 3.720°. Both muscle activity and movement of the electrodes can affect these voltages.</p>
+<p>The six people supplied 1,879 eligible trials and 11,274 pairs of target angles. All six had supplied training data to earlier studies. Each person’s current forecast came from models fitted to the others. The three previously evaluated people and six reserved people stayed outside this analysis. Physical timing delays and accuracy on a fresh cohort remain open.</p>
+<p><a href="results.json">All scores and sensitivity</a> · <a href="REPRODUCE.md">Run the study</a> · <a href="study.json">Source files and checksums</a></p>
+<p>Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz published the EEG-EMG-WristMotion Dataset, version 3. <a href="https://doi.org/10.6084/m9.figshare.29666735.v3">Original dataset</a> · <a href="NOTICE.md">Sources and rights</a></p>
+</main></body></html>
