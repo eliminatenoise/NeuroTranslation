@@ -1,26 +1,30 @@
-# How wide should the pinch forecast be?
+[The studies](../README.md) › Study 20 · Pinch: width of the band
 
-A point forecast gives you one force reading to expect. How often does the gauge land close to that number? We test two bands around the same forecast. One uses errors from across the pinch. The other uses errors from the same part of the cue, such as the ramp or the steady hold. Both aim to include 90% of later readings.
+# A band set stage by stage was narrower and held more readings, and every band fell short during the release
 
-The point models were already fitted. Eight recordings from four people set the band widths. Eight different recordings from two other people test how much they cover and how wide they have to be. The interval score charges for both width and misses, so drawing a very wide band carries a cost. Each 30-second trial contributes 592 overlapping forecasts. We report how the bands behave on these two people. [Study design](PROTOCOL.md) · [Input commitments](DESIGN.json) · [Original acquisition study](https://doi.org/10.1038/s41597-025-05733-y) · [Interval score, equation 43](https://sites.stat.washington.edu/raftery/Research/PDF/Gneiting2007jasa.pdf)
+A forecast gives one force reading to expect. A band around it says how far off the gauge may land: here, a range meant to hold 90% of the readings that follow. Around the five-grid pinch forecast of [study 19](../cemhsey-arrays/README.md), one band width for the whole pinch was **2.21%** wide and held 4,476 of 4,736 later readings (94.5%). A width set separately for each stage of the cue was **2.16%** wide and held 4,502 (95.1%): narrower, and it held more. The same held for all three forecasts tested. But while the pinch was being released, every band fell below 90%.
 
-## What happened on the eight evaluation trials?
+Widths are in % of the person's hardest squeeze that day (their maximum voluntary contraction, MVC). The band score charges a band both for its width and for every reading it misses, so drawing a very wide band costs something; lower is better. [Interval score, equation 43](https://sites.stat.washington.edu/raftery/Research/PDF/Gneiting2007jasa.pdf)
 
-For the five-grid point forecast, one fixed width covered 4,476 of 4,736 later readings (94.5%). Letting the width change with the cue covered 4,502 (95.1%). The phase-based band was narrower, covered at least as many readings and lowered the interval score on these two people.
-
-| Point forecast | Band width set by | Later readings inside | Coverage | Mean width | Mean interval score |
+| Band around | Width set from | Later readings inside | Share inside | Average width | Average band score |
 | --- | --- | ---: | ---: | ---: | ---: |
-| Current force carried forward | All cutoffs | 4,493 / 4,736 | 94.9% | 0.0289 | 0.0332 |
-| Current force carried forward | Matching cue phase | 4,499 / 4,736 | 95.0% | 0.0254 | 0.0290 |
-| Force history and cue | All cutoffs | 4,466 / 4,736 | 94.3% | 0.0220 | 0.0260 |
-| Force history and cue | Matching cue phase | 4,494 / 4,736 | 94.9% | 0.0215 | 0.0247 |
-| Force, cue and five EMG grids | All cutoffs | 4,476 / 4,736 | 94.5% | 0.0221 | 0.0260 |
-| Force, cue and five EMG grids | Matching cue phase | 4,502 / 4,736 | 95.1% | 0.0216 | 0.0248 |
+| Repeat the current force | The whole pinch | 4,493 / 4,736 | 94.9% | 2.89% | 3.32 |
+| Repeat the current force | The same stage of the cue | 4,499 / 4,736 | 95.0% | 2.54% | 2.90 |
+| Force history and cue | The whole pinch | 4,466 / 4,736 | 94.3% | 2.20% | 2.60 |
+| Force history and cue | The same stage of the cue | 4,494 / 4,736 | 94.9% | 2.15% | 2.47 |
+| Force, cue and five EMG grids | The whole pinch | 4,476 / 4,736 | 94.5% | 2.21% | 2.60 |
+| Force, cue and five EMG grids | The same stage of the cue | 4,502 / 4,736 | 95.1% | 2.16% | 2.48 |
 
-Release was the difficult part of the cue. Every band fell below its 90% target there. The phase-based band around the five-grid forecast covered 704 of 800 release readings (88.0%), despite its higher coverage over the whole trial.
+The release was the hard part of the cue. Around the five-grid forecast, the band set by stage held 704 of 800 release readings (88.0%), despite its higher share over the whole trial; the single width held 87.1%. All six bands held between 86.1% and 89.6% of the release readings, short of the 90% target. Widths and scores are counted over the same forecast moments. Rounding the widths for display can hide small differences; the comparison uses the unrounded averages. [Results file](RESULTS.json) · [Explore by stage of the cue or recording day](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-intervals/)
 
-Width and interval score are in fractions of maximum voluntary contraction. Both include the same forecast cutoffs. A smaller score reflects the combined cost of width and misses. The target coverage was 90%. Rounding the widths for display can hide small differences. The comparison uses the unrounded means. [Full numerical results](RESULTS.json) · [Explore by cue phase or recording day](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-intervals/)
+## What was done
 
-Each trial spans the same 30-second cue. A band can miss at many adjacent cutoffs during one excursion of the gauge. Four calibration participants and two evaluation participants do not establish population coverage, online timing, or simultaneous coverage of an entire trace. [Original recording study](https://doi.org/10.1038/s41597-025-05733-y) · [Interval score, equation 43](https://sites.stat.washington.edu/raftery/Research/PDF/Gneiting2007jasa.pdf)
+The forecasts had already been fitted, in study 19. Eight recordings from four people set the band widths. Eight other recordings, from two other people, tested how much the bands held and how wide they had to be. The test recordings were opened once, after the widths were fixed. Each 30-second trial gives 592 overlapping forecasts. [Study plan](PROTOCOL.md) · [Inputs fixed in advance](DESIGN.json) · [Original acquisition study](https://doi.org/10.1038/s41597-025-05733-y)
 
-[Download the 48 pooled and phase-based comparisons, including the fraction below and above each band](../../docs/cemhsey-intervals/metrics.csv).
+The rule set before scoring called a band set by stage "a descriptive gain on this panel" if it was narrower, held at least as many readings and had a lower score than the single width; narrower but missing more would have been a trade-off. All three bands set by stage were descriptive gains. That is a rule about how a band is drawn; it says nothing about which forecast is better.
+
+## What it does not show
+
+Every trial follows the same 30-second cue, and a band can miss at many neighbouring moments during one swing of the gauge. Four people setting widths and two testing them say nothing about how much a band would hold for other people, nothing about live timing, and nothing about holding a whole trace at once. [Original recording study](https://doi.org/10.1038/s41597-025-05733-y)
+
+[Download the 48 comparisons, whole-pinch and by stage, with the share of readings below and above each band](../../docs/cemhsey-intervals/metrics.csv)
