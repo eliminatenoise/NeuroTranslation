@@ -1,71 +1,40 @@
-# Open NeuroTranslation
+# Launchers and offline copies
 
-[Open Palm replay](https://eliminatenoise.github.io/NeuroTranslation/index.html#palm-replay) or [download a launcher for Windows, macOS or Linux](https://eliminatenoise.github.io/NeuroTranslation/START.html). These shortcuts lead to the same current replay as the browser link.
+Everything here runs in a browser. A launcher is a shortcut that opens the right page. An offline copy is a ZIP that holds the page itself, so it works with no network.
 
-Import a prepared IACKD right-hand trial and choose **Compare estimates**. For an R1 trial, compare the fixed hand and EEG models. For R2, compare the original estimates with the estimates calibrated on the person's first recording. Files stay in your browser. [Prepare R1](benchmarks/scalp-eeg-palm-history/#replay-a-recorded-trial) · [Prepare R2](benchmarks/scalp-eeg-personal-calibration/#replay-a-second-recording) · [Import and alignment](demo/README.md)
+## A shortcut to the app
 
-- **Windows** — Download and open `NeuroTranslation-Windows.url`.
-- **macOS** — Download and open `NeuroTranslation-macOS.webloc`.
-- **Linux** — Open `NeuroTranslation-Linux.desktop` using your desktop’s usual launcher handling. For an application-menu entry, extract the ZIP and run `sh Install-NeuroTranslation-Linux.sh` in that folder.
+The shortcut opens the app at its palm replay. It needs a network connection.
 
-The installer writes one per-user menu entry. It prefers the installed Omarchy opener and otherwise uses `xdg-open`. Installation opens no browser. An earlier entry from this installer still opens the preview. Choose **Palm replay** in its navigation. The installer preserves existing entries, including customized files and symlinks.
+| Your computer | What to do |
+| --- | --- |
+| Windows | Download [`NeuroTranslation-Windows.url`](https://eliminatenoise.github.io/NeuroTranslation/launchers/NeuroTranslation-Windows.url) and open it. |
+| macOS | Download [`NeuroTranslation-macOS.webloc`](https://eliminatenoise.github.io/NeuroTranslation/launchers/NeuroTranslation-macOS.webloc) and open it. |
+| Linux | Download [`NeuroTranslation-Linux.desktop`](https://eliminatenoise.github.io/NeuroTranslation/launchers/NeuroTranslation-Linux.desktop) and open it the way your desktop opens launchers. For an entry in the applications menu, extract [the launchers ZIP](https://eliminatenoise.github.io/NeuroTranslation/launchers/NeuroTranslation-Launchers.zip) and run `sh Install-NeuroTranslation-Linux.sh` in that folder. |
 
-Keep the filename extensions and follow your operating system’s normal trust prompts. Opening the preview requires a network connection and browser. The shortcuts carry the URL only. The study parameters are served to the browser, and you provide the trial file. A general NeuroTranslate model and live decoding remain outside the preview.
+Keep the file extensions, and follow your system's usual prompts about a downloaded file. If a shortcut opens as text, take it from the ZIP instead. The Linux installer writes one menu entry for your user, leaves existing entries alone and opens no browser.
 
-Windows and macOS shortcut formats were checked. Isolated installation was tested on Linux. Native shortcut opening on Windows and macOS remains unchecked.
+Checked: the format of the Windows and macOS shortcuts, and the Linux installer in an isolated folder. Not checked: opening the shortcuts on a real Windows or macOS machine. [Checksums](docs/launchers/SHA256SUMS)
 
-## Open the wrist models
+## Offline copies of the study readers
 
-The wrist studies have their own downloads and launchers. Open a study, download its ZIP and extract the folder before running the launcher for your system. The temporal model includes a three-seed convolutional ensemble. The muscle study compares fitted linear models using wrist history, surface EMG and scalp EEG. [Temporal forecast](benchmarks/wrist-pointing-temporal/) · [Surface EMG forecast](benchmarks/wrist-pointing-muscle/)
+Each ZIP holds one reader and its own launchers for Windows, macOS and Linux. Unpack the whole folder, then open the launcher for your system, or open `index.html`. A recording you open is read on your computer and goes nowhere.
 
-The [recorded-trial replay](https://eliminatenoise.github.io/NeuroTranslation/wrist-replay/) runs the six fitted temporal models on a trial file in your browser. For offline replay, [download the standalone browser and desktop launchers](benchmarks/wrist-pointing-temporal/WristMotion-Recorded-Replay.zip), extract the folder and open the launcher for your system. Use the [trial converter](benchmarks/wrist-pointing-temporal/#replay-a-recorded-trial) to prepare a file from the original study.
+| Reader | Online | Offline ZIP | The recording it reads |
+| --- | --- | --- | --- |
+| Wrist pointing, recorded trials | [open](https://eliminatenoise.github.io/NeuroTranslation/wrist-replay/) | [WristMotion-Recorded-Replay.zip](benchmarks/wrist-pointing-temporal/WristMotion-Recorded-Replay.zip) | One trial of the wrist-pointing dataset, prepared with the [study's converter](benchmarks/wrist-pointing-temporal/#replay-a-recorded-trial) |
+| Wrist pointing, with and without the muscle signal | [open](https://eliminatenoise.github.io/NeuroTranslation/wrist-pointing/) | [wrist-pointing-muscle-r1-preview.zip](benchmarks/wrist-pointing-muscle/wrist-pointing-muscle-r1-preview.zip) | Invented inputs that you can change |
+| Wrist pointing, forearm correction | [open](https://eliminatenoise.github.io/NeuroTranslation/wrist-forearm/) | [WristMotion-Forearm-Browser.zip](benchmarks/wrist-forearm-transfer/WristMotion-Forearm-Browser.zip) | One of the dataset's own ZIP files, opened as it comes |
+| Wrist angles in everyday tasks | [open](https://eliminatenoise.github.io/NeuroTranslation/daily-wrist/) | [UJI-Daily-Wrist-Browser.zip](benchmarks/uji-wrist-emg/UJI-Daily-Wrist-Browser.zip) | Half a second of seven forearm channels, as JSON |
+| Grip force during a lift | [open](https://eliminatenoise.github.io/NeuroTranslation/grip-force/) | [WAY-EEG-GAL-grip-force-browser.zip](benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-browser.zip) | One lift, saved as JSON with the converter on the page |
+| Grip force after the squeeze registers | [open](https://eliminatenoise.github.io/NeuroTranslation/contact-force/) | [NeuroTranslation-Grip-After-Contact-Comparison.zip](benchmarks/way-contact-force/NeuroTranslation-Grip-After-Contact-Comparison.zip) | A prepared JSON capture of one lift |
+| Paced grip, sensor voltage | [open](https://eliminatenoise.github.io/NeuroTranslation/hygrip-force/) | [HYGRIP-trial-replay.zip](benchmarks/hygrip-force/trial-replay/HYGRIP-trial-replay.zip) | One right-hand trial, converted from the dataset's `hygrip.h5` |
+| One finger, sensor voltage | [open](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) | [Hyser-Index-Voltage-Reader.zip](benchmarks/hyser-index/downloads/Hyser-Index-Voltage-Reader.zip) | The dataset's own `.hea` and `.dat` files |
+| Pinch, overall muscle amplitude | [open](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-pinch/) | [CEMHSEY-Pinch-Reader.zip](benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip) | One trial, converted with the Python tool in the ZIP |
+| Pinch, five electrode grids | [open](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/) | [CEMHSEY-Array-Reader.zip](benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip) | The dataset's own MATLAB file for one trial |
+| Pinch, a practice attempt and a second one | [open](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/) | [CEMHSEY-Pinch-Transfer.zip](docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip) | Two recordings of one person at the same target |
+| Pinch, a correction learned across people | [open](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-phase/reader/) | [CEMHSEY-Population-Forecasts.zip](docs/cemhsey-phase/reader/CEMHSEY-Population-Forecasts.zip) | Two recordings from each of three people to fit, one from someone else to test |
 
-To compare an original wrist movement with the learned forearm correction, [download the recorded-trial runner](benchmarks/wrist-forearm-transfer/WristMotion-Forearm-Recorded-Trial.zip), extract it and use the launcher for your system. The [study](./benchmarks/wrist-forearm-transfer/README.md) also includes a Python-only synthetic model demonstration.
+Most readers open with an invented example, so you can try one before you have a file. The pinch readers also ship with invented weights, and say so on the page: the weights fitted in the pinch studies are not published.
 
-The [forearm browser ZIP](benchmarks/wrist-forearm-transfer/WristMotion-Forearm-Browser.zip) runs all three trained models on an original wrist development recording without Python. Extract the entire folder, then open `index.html` or the included launcher for your system. The [hosted version](https://eliminatenoise.github.io/NeuroTranslation/wrist-forearm/) uses the same local recording reader.
-
-The [UJI forearm estimator](benchmarks/uji-wrist-emg/UJI-Wrist-Supported-Forearm-Model.zip) has its own desktop launchers. Extract the full ZIP, open the launcher for your operating system, and follow its README to run the two trained models on a compatible input. The [study and replication code](benchmarks/uji-wrist-emg/) describe the required seven channels and the offline time convention.
-
-The daily-activity wrist browser runs the UJI models on a compatible seven-channel window. For offline use, extract the whole archive, then open the launcher for your desktop or open `index.html`. [Open the browser preview](https://eliminatenoise.github.io/NeuroTranslation/daily-wrist/) · [Download the browser and launchers](benchmarks/uji-wrist-emg/UJI-Daily-Wrist-Browser.zip)
-
-## Open the grip-force forecast
-
-The grip-force browser shows the past sensor window alongside four fitted forecasts. Open it online, or extract the browser ZIP and open its Windows, macOS or Linux launcher. You can also open `index.html` directly. [Open the browser forecast](https://eliminatenoise.github.io/NeuroTranslation/grip-force/) · [Download the offline browser](benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-browser.zip)
-
-The separate Python runner can forecast batches of compatible windows. Extract its ZIP and open the launcher for your system to try an invented window with Python and NumPy. This launcher ran on Linux. Native Windows and macOS launches remain unchecked. [Download the Python runner](benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-experimental-preview.zip) · [Study and input instructions](benchmarks/way-grip-force/)
-
-The contact-triggered study has two offline Python runners. The ridge runner takes a compatible capture. The temporal CNN runner takes a window prepared through the forecast time. Both ZIPs include Windows, macOS and Linux launchers and start with invented readings. The European Commission supported the original recordings through WAY (FP7-ICT-288551). [Download both contact-triggered forecasts](benchmarks/way-contact-force/#run-the-forecasts) · [Original study acknowledgments](https://pmc.ncbi.nlm.nih.gov/articles/PMC4365902/#ack1)
-
-To compare the two contact-triggered models without Python, extract the browser ZIP and open its Windows, macOS or Linux launcher or its `index.html`. An invented squeeze opens first. A compatible local recording stays in the browser. [Open the contact-force comparison](https://eliminatenoise.github.io/NeuroTranslation/contact-force/) · [Download the offline comparison](benchmarks/way-contact-force/NeuroTranslation-Grip-After-Contact-Comparison.zip)
-
-The HYGRIP preview forecasts grip transducer voltage. It accepts a local forecast window or a complete right-hand trial. Move the replay slider to inspect the forecast and the reading six ticks later. Use the Windows, macOS or Linux launcher in the extracted ZIP, or open its `index.html`. [Open the voltage forecast](https://eliminatenoise.github.io/NeuroTranslation/hygrip-force/) · [Download the offline trial reader](benchmarks/hygrip-force/trial-replay/HYGRIP-trial-replay.zip) · [First development results](benchmarks/hygrip-force/results-2026-11-19/)
-
-## Hyser index-finger trial reader
-
-Open the reader for an invented example or an original Hyser WFDB recording. Extract the ZIP and run your Windows, macOS or Linux launcher, or open `index.html` directly. The models run locally and your recordings stay in the browser. [Browser reader](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) · [Offline ZIP](benchmarks/hyser-index/downloads/Hyser-Index-Voltage-Reader.zip) · [Study](benchmarks/hyser-index/).
-
-In the browser or offline reader, choose **Personalize across two days**. Fit an adjustment from the original five first-day trials, then open a second-day trial from the same participant. **Try two invented days** runs the workflow without a recording.
-
-The [Python session scorer](benchmarks/hyser-index/downloads/Hyser-Crossday-Python.zip) reads original WFDB session folders, fits on Day 1 and compares shared and personal errors on Day 2. The example runs with invented data. [Read the command-line instructions](benchmarks/hyser-index/SCORE-SESSION.md).
-
-In the Hyser reader, choose **Finger sensor context** to inspect the other four fingers on a Random or prescribed N-DoF trial. Choose one original session folder or matching force files. In N-DoF, pick a combination and repetition. Click **Score trial** to compare the fixed forecasts at all 450 cutoffs of the selected trial. N-DoF also scores the last index reading as a benchmark. [Random-task results](benchmarks/hyser-index/whole-hand/README.md) · [Prescribed-task study](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hyser-index/prescribed).
-
-For a prescribed combination in Python, use `score_prescribed.py` from the scoring ZIP. [Command and recording names](benchmarks/hyser-index/SCORE-SESSION.md).
-
-## CEMHSEY two-finger pinch
-
-Extract the [pinch reader and Python tools](benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip). Open the launcher for your computer or open `index.html`. Choose **Try an invented pinch** or use the converter in the `python` folder to open a private trial. The force cutoff, later-reading reveal and full-trial scoring each have separate controls. [Browser reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-pinch/) · [Study and source](benchmarks/cemhsey-pinch/README.md).
-
-The pinch-force reader and its fitting tool open directly from the same extracted folder. Use the launcher for your operating system, then open an original Session 5, Task 2 MATLAB file, a converted array packet, or the local fitting tool. [Download the CEMHSEY array reader](benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip) · [Open the web reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-arrays/)
-
-## Open the two-day pinch reader
-
-[Download the pinch practice reader](docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip) and extract the whole folder. Open **Open Pinch Transfer on Windows**, **Open Pinch Transfer on macOS** or **Open Pinch Transfer on Linux**. You can also open `index.html` directly. The built-in example uses invented recordings and weights.
-
-To compare your own recording days, choose the same point-model file and force target on both days. Fit the correction from the earlier first repeat, save the practice file and keep its separate key. Reopen the file and key alongside the later recordings to compare the earlier correction with a fresh one. The reader processes them locally. [Online reader](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/) · [Measured two-day study](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-carry/)
-
-## Fit separate squeeze and release corrections
-
-[Download the population pinch reader](docs/cemhsey-phase/reader/CEMHSEY-Population-Forecasts.zip) and extract the entire folder. Choose **Open Pinch Forecasts on Windows**, **Open Pinch Forecasts on macOS** or **Open Pinch Forecasts on Linux**. Opening `index.html` directly also starts the reader. The built-in example runs offline with invented recordings and weights.
-
-Use both repeat files from each of three fitting participants to learn the corrections. Then open a repeat from a different participant to see how the eleven forecasts compare. You can keep the correction file and its key for later sessions. The reader processes the selected files locally. [Online tool](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-phase/reader/) · [Measured group comparison](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-phase/)
+Several studies have a Python runner as well, for scoring many recordings at once. Each study's own page says how: [the studies](benchmarks/README.md).

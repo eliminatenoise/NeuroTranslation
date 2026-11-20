@@ -1,57 +1,70 @@
-# NeuroTranslate 0.0
+# The app
 
-Put compatible neural, muscle, displacement and mechanics recordings on a shared timeline. Each stream keeps its units, origin and source. Files stay in the browser; this application has no recording-upload endpoint.
+This folder is the source of the browser app at [eliminatenoise.github.io/NeuroTranslation/index.html](https://eliminatenoise.github.io/NeuroTranslation/index.html).
 
-This companion imports JSON and CSV, checks their structure, displays original samples and aligns recordings on their declared clocks. The palm replay estimates horizontal palm position from an imported IACKD trial. A second recording can be replayed with the model calibrated on that person’s first recording. The bundled example contains invented numbers, clearly labelled throughout the interface. It demonstrates the software rather than a biological relationship. [NeuroSurge](https://github.com/eliminatenoise/NeuroSurge), the separate arm-and-brain game, is still being developed.
+The app does three things with the recordings you give it. It shows each one on its own clock. It lines several up on a shared clock. And it replays a palm trial against the fitted models of the two palm studies.
 
-Run `npm test` for the constructed-data and build checks, then `npm run build`. The build creates a stable `index.html`, versioned dependencies and a manifest in `dist`, replacing the previous output. Serve that directory over HTTP. No application dependencies or numerical frameworks are required.
+Your files stay in the browser. The app has nowhere to send them.
 
-## Replay a palm-position estimate
+The page is titled NeuroTranslate 0.0, which is the name of the model this project is building. The model is not in the app.
 
-Choose **Import a trial**, open the JSON you prepared from IACKD and select **Compare estimates**. Keep the recording on your own device. The horizontal axis starts at the first finite palm observation at or after the cue. The tracked position and all estimates are in millimetres, measured along the same device axis.
+## Build and test
 
-For a first-recording trial (R1), the chart compares timing and hand history with the same model inputs plus scalp EEG. The published comparison used three people for training and three others for development. [Prepare an R1 trial](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history#replay-a-recorded-trial)
+```
+npm test
+npm run build
+```
 
-For a second-recording trial (R2), the fixed model and the personally calibrated model see exactly the same inputs. Use **Model inputs for the chart and sample table** to compare them with hand history alone or with EEG added. The error table covers all four models. **Read sample values** gives their positions for the selected inputs. **Download trial results** saves all four estimates, the source and model identities, the timing and the reasons for any missing results. [Prepare an R2 trial](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-personal-calibration#replay-a-second-recording)
+`npm test` runs the checks on constructed data. `npm run build` writes `dist/`: an `index.html`, its scripts and data under names that carry the build's hash, and a manifest. Serve that folder over HTTP. The app has no dependencies, so there is nothing to install.
 
-Each complete R2 trial is checked against the selected source recording. A clipped window has a different denominator and is labelled separately. The R2 trial whose clock falls outside the frozen tolerance retains its exclusion. The [calibration comparison](https://eliminatenoise.github.io/NeuroTranslation/index.html#personal-calibration) combines three people’s second recordings, giving each person equal weight. All estimates use recordings processed after collection.
+## Give it a file
 
-## Import
+**JSON.** Download the example from the app to see a complete file. It holds `schemaVersion: 1`, one `dataset` object and a `streams` list. The dataset says what was recorded: an ID, a name, the organism, the subject, the recording, the task, the clock (`timebase`), where it came from, its licence and which split it belongs to (`split`). Each stream gives an ID, its kind (`modality`), a label, a unit, an origin, timestamps in seconds and values. A value may be `null` where the source has none.
 
-Download the JSON example from the application for a complete packet. It contains `schemaVersion: 1`, one `dataset` object and a `streams` array. Dataset metadata includes ID, name, organism, subject, recording, task, clock (`timebase`), source URL, licence and partition (`split`). Each stream declares its ID, modality, label, unit, origin, timestamps in seconds and values. Values may be `null` where observations are missing.
+**CSV.** Two columns, `time,value`, with time in seconds. You type the rest into the import form, and you choose the kind of signal and its origin yourself.
 
-For a stream computed from recorded data, such as filtered EMG, use `derived` as its origin. To link a processed stream to its parent, use the parent’s policy stream ID from the metadata report’s identity map in `policyMetadata.provenance.derivedFrom`. The map lists that ID beside the name supplied in the file. [Metadata format](docs/METADATA.md) Use `inferred` for model output and `simulated` for a simulator’s output. The aligned export keeps the stream origin alongside each sample’s resampling status.
+A stream's kind is `neural`, `muscle`, `displacement` or `mechanics`. EMG is `muscle`. A neural stream may say where it was recorded: `brain`, `spinal`, `peripheral`, `autonomic` or `visceral`. Leave that out if you do not know it.
 
-The four modality values are `neural`, `muscle`, `displacement` and `mechanics`. Neural streams can declare `brain`, `spinal`, `peripheral`, `autonomic` or `visceral` as their region. A region label describes the supplied stream; it does not establish coverage elsewhere. EMG belongs to the muscle category.
+A stream's origin is `measured`, `derived` (computed from a recording, such as filtered EMG), `inferred` (a model's output) or `simulated` (a simulator's output). The origin travels with every sample into every export. To tie a derived stream to the recording it came from, name the parent in `policyMetadata.provenance.derivedFrom`; [docs/METADATA.md](docs/METADATA.md) gives the format.
 
-A CSV file uses `time,value` columns. Enter its metadata in the import form and choose the signal type and origin explicitly. Leave the neural region unspecified when it is unknown. Unknown organism or identity fields permit inspection but prevent alignment. Import checks cannot verify the truth of supplied metadata or grant data rights.
+The app checks that a file is well formed. It cannot check that what the file says is true.
 
-Project-owned code is released under [CC0-1.0](LICENSE). Dataset and anatomical assets retain their own rights; see [RIGHTS.md](RIGHTS.md).
+## Look at the samples as they were stored
 
-## Inspecting original samples
+Open **Inspect original samples** under a trace. The slider steps through one stream at a time, at the timestamps the file holds, so uneven gaps look uneven. A gap in the source reads **Missing in source**. If the recordings are lined up, choose **Show original samples** first.
 
-Open **Inspect original samples** below a trace. If the recordings are aligned, choose **Show original samples** first. The slider steps through one stream at a time. The marker follows the stored timestamp, so uneven intervals appear at their actual spacing. Each trace keeps its own cursor. A missing value reads **Missing in source**. A file can also supply a measurement description and a unit label that differs from the plotted unit.
+## Line recordings up
 
-## Alignment
+Two recordings can share a timeline only if they declare the same organism, the same subject, the same recording and the same clock. Recordings of different people do not become simultaneous because the tasks look alike. A file that leaves the organism or the subject unknown can be inspected, not lined up.
 
-Recordings must declare the same organism, subject, recording and clock. Different data partitions remain separate. An unknown partition is not proof of an independent test set. Neural, muscle and movement signals from unrelated subjects are not synchronized merely because their tasks resemble one another.
+Choose a step, the longest gap you will allow, and nearest-sample or straight-line interpolation. The result covers only the stretch that all the recordings share. A missing sample stays missing, a gap longer than your limit stays a gap, and nothing is extended past the ends. Units are kept as they came.
 
-Choose a sampling step, a maximum permitted gap and nearest-sample or linear interpolation. The result covers only the common time interval. Missing samples and gaps beyond the selected limit stay missing; values are not extrapolated. Units and coordinate frames are retained without conversion. Chart bins retain extrema and break at missing data; exports contain the aligned values and original packets.
+Move **Aligned time** to read every trace at one instant, with its unit and whether the value was stored, interpolated or missing. In the built-in example, try 1.5 seconds: the force is missing in the source, and the displacement is interpolated between its neighbours.
 
-Move **Aligned time** or focus the slider and use the arrow keys to step through the grid. All traces show the value and unit at that time, alongside how the value was selected or why it is missing. In the invented example, try 1.5 seconds with the default settings. The force is missing in the source, while the displacement is interpolated between the surrounding points. The JSON export retains the full numeric precision.
+The limits keep the browser responsive: 5 MiB per file and in total, 64 streams, 50,000 input samples, 5,000 points on the shared timeline, 500,000 aligned values.
 
-File and combined-packet limits are 5 MiB, with at most 64 selected streams, 50,000 input samples, 5,000 aligned time points and 500,000 aligned values. These bounds protect browser responsiveness; they do not define a scientific sampling requirement. Metadata warnings remain visible when source rights, partitions or coordinate frames are unknown.
+## Check what a file declares
 
-## Metadata checks
+**Metadata checks**, beside the traces, lists what each stream says about its measurement, its unit, its clock, who it was recorded from and where it came from, and marks what is missing or contradicts itself. The built-in example leaves some of this out on purpose, so that you can see what a gap looks like.
 
-Open **Metadata checks** beside the signal explorer to inspect each stream's declared measurement, units, clock, identity and provenance. Missing or conflicting details remain visible. The generic invented example deliberately lacks measurement and generator details; plotting its numbers does not make those declarations complete.
+A licence written in a file is a claim, not a permission. Matching subject names or clock names show how two files say they are related. They do not show that the recordings were made together.
 
-The report keeps exact source IDs beside their encoded internal IDs, plus the origin of each mapped field. A generic EMG label never becomes a surface or intramuscular recording by guesswork. A licence string grants no permission, and matching subjects or clock names creates no biological pairing. Alignment continues to follow the separately declared common clock; it does not establish acquisition synchronization.
+**Export samples + checks** saves `neurotranslate-0.0-inspection.json`: the files as you gave them, with the report.
 
-Use **Export samples + checks** to save `neurotranslate-0.0-inspection.json` independently, or retain the report with an aligned-data export. Both include the original packets, mapping diagnostics and declaration checks. Metadata fingerprints identify the supplied declarations; they do not authenticate a recording or certify its sample values. Your browser saves the export as a local file. [Metadata format and API](docs/METADATA.md) describes optional richer declarations.
+## Replay a palm trial
 
-## What remains
+Choose **Import a trial**, open a trial prepared from the palm dataset (IACKD), and choose **Compare estimates**. The chart starts at the first tracked palm position at or after the cue. Everything on it is in millimetres, along one axis of the tracker.
 
-The whole-body ambition includes brain, spinal, peripheral and relevant autonomic or visceral activity. The catalogue currently establishes separate, limited source examples. It does not establish one dataset covering all those regions, paired with all muscle, movement and mechanics observations.
+A trial from a person's **first recording** compares two forecasts: time and hand history, and the same with scalp EEG added. [Prepare one](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history#replay-a-recorded-trial).
 
-A functioning learned translation needs separately qualified adapters and a validated model, with measured error, uncertainty, held-out comparisons and failure reporting. Those are still pending. Dataset reference cards link to existing sources; no recordings or third-party model assets are bundled here. This interface does not supply stimulation, clinical decisions or biological validation.
+A trial from a person's **second recording** compares each model as fitted on other people with the same model adjusted on that person's first recording. **Model inputs for the chart and sample table** switches between hand history alone and hand history with EEG. **Read sample values** gives the numbers behind the chart, and **Download trial results** saves all four estimates, with the reason for any that is missing. [Prepare one](https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-personal-calibration#replay-a-second-recording).
+
+The error shown for one trial and the error a study publishes are averages over different things, so do not set them side by side. [The second study's results, person by person](https://eliminatenoise.github.io/NeuroTranslation/index.html#personal-calibration) give each of its three people equal weight.
+
+All of this is replay of recordings that were processed after the fact. Nothing in the app is live.
+
+## What the app is not
+
+It is not the general model, and it does not turn one kind of signal into another. Its built-in example is invented numbers, labelled as invented wherever they appear, and is there to show the controls. It holds no recordings: its dataset cards link to the archives.
+
+The app's own code is dedicated to the public domain under [CC0 1.0](LICENSE). The recordings it reads belong to the people who made them: [RIGHTS.md](RIGHTS.md).
