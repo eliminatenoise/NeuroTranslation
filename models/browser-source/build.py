@@ -16,7 +16,7 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 SRC = HERE / 'src'
 STATIC = ('CC0-1.0.txt', 'CDLA-Permissive-2.0.txt', 'DATA-CREDITS.md', 'NOTICE.md', 'README.md',
-          'SPATIAL-API.md', 'arm-example.json', 'group-arm-example.json', 'group-arm-scores.json', 'point-example.json', 'right-plate-example.json', 'knee-moment-example.json', 'knee-example.json', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
+          'SPATIAL-API.md', 'early-example.json', 'early-scores.json', 'arm-example.json', 'group-arm-example.json', 'group-arm-scores.json', 'point-example.json', 'right-plate-example.json', 'knee-moment-example.json', 'knee-example.json', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
 PLATE_LICENCE = 'RIGHT-PLATE-DATA-LICENCE.txt'
 ARTIFACTS = (*STATIC, PLATE_LICENCE, 'model.json', 'population-example.json', 'shared-motion.js')
 
@@ -173,7 +173,18 @@ def build_runtime(model, out):
         group_values={n.replace('group_arm.','cued_arm.'):saved[n] for n in group_names if n not in ('group_arm.target_sd','group_arm.cue_median')}
         group_values['group_arm.cue_median']=saved['group_arm.cue_median']
         groups['group_arm.readouts'],descriptions['group_arm.readouts']=pack(group_values,group_values)
-        assert len(knee_names) == 14 and set(saved.files) == {'configuration', *names, *knee_names, *moment_names, *plate_names, *point_names, *arm_names, *group_names}
+        residual_names={n for n in saved.files if n.startswith('scalp_residual.')}
+        expected_residual={'scalp_residual.precue_sd99':(9,), 'scalp_residual.ocular.coef':(3,6)}
+        for t,dim in [('eye',3),('scalp',6)]:
+            for stat in ('mean','sd'): expected_residual['scalp_residual.ocular.'+t+'_'+stat]=(dim,)
+        for method,width in [('mechanics',48),('scalp',72),('eye',60),('residual_scalp',72),('joint',84)]:
+            for field,shape in [('mean',(width,)),('sd',(width,)),('coef',(width,9))]:
+                expected_residual['scalp_residual.'+method+'.'+field]=shape
+        if set(expected_residual)!=residual_names or any(saved[k].shape!=v for k,v in expected_residual.items()):
+            raise ValueError('Unexpected scalp residual tensors.')
+        sr={k:saved[k] for k in residual_names};sr['group_arm.target_sd']=saved['group_arm.target_sd']
+        groups['scalp_residual.readouts'],descriptions['scalp_residual.readouts']=pack(sr,sr)
+        assert len(knee_names) == 14 and set(saved.files) == {'configuration', *names, *knee_names, *moment_names, *plate_names, *point_names, *arm_names, *group_names, *residual_names}
         assert set(knee['readouts']) == {n.removeprefix('knee.') for n in knee_names}
         readouts = {n.removeprefix('knee.'):saved[n] for n in knee_names}
         groups['knee.readouts'], descriptions['knee.readouts'] = pack(readouts, readouts)

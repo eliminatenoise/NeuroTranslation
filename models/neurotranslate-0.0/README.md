@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0 movement forecasts
 
+Can early scalp signals improve a forecast of right-arm movement? In 210 new trials from five people, adding six scalp sites to a correction based on the arm lowered scaled error from 0.49777 to 0.49628. Substituting another repeat’s scalp readings gave 0.49675. The extra scalp information missed both prespecified tests. [Try the corrections](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#early-signals) · [Run the model and read the full comparisons](scalp-residual/README.md)
+
 The right-arm model now has a fit from seven people and a separate first-run correction for a new person. On five people kept out of fitting, the group model cut the original one-person model’s average error by 36%. A simple group median for each instruction did better still. [Try the transfer study](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#arm-transfer) · [Full scores and local program](arm-transfer/README.md)
 
 Choose one of seven right-arm instructions and see how the model expects an elbow sensor, a forearm sensor and a glove to change. Across three runs from one person, knowing the instruction improved the shared model’s forecast. The cue alone gave the closest prediction on average. [Try a cued movement](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#cued-arm) · [Compare the measurements and fits](cued-arm/README.md)

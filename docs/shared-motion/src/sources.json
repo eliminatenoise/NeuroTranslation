@@ -2,7 +2,7 @@
   "studyRevision": "1cc81b20a14b81aebfb1f47d13d75b8d79c6e6ce",
   "buildInputsSha256": {
     "inputs.json": "3ab258b866f61923d233fa44f49b5fe2ad0ee05e9d56cbf0d9c238547cd1e36e",
-    "shared-motion.js": "2fe241673f7edd4667004d28eb7abed1274778818aa74e7beddbad056ddc5d1a",
+    "shared-motion.js": "b6c55e470a3e68034de326b77484779bc56591ff32e1f4b378c868c1f1ea4314",
     "CC0-1.0.txt": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
     "CDLA-Permissive-2.0.txt": "4531a67d443284d93ffed0803df5b10634aff21c3d77e381f2d48af01d875868",
     "angular-example.json": "f65c333e973c93bd6fec7f97c403085c00149b0de689419aa961a1eea74af221",
@@ -16,7 +16,9 @@
     "point-example.json": "e32d1982d90c7e636a3243fc8590d5111038e56e283713678d3102fec4fe1e58",
     "arm-example.json": "4ee42d69ef47d91dc24d3df4cafc5801721500f7e3bf789ba747d4598f19ab05",
     "group-arm-example.json": "32df7ff54a115dcf8fca50c56d38578b07f17a7e7d0e35531172406c044c2e9c",
-    "group-arm-scores.json": "e36c135aa257bb1d326f65c7fce299fc8b0da7ddb13ac1c700657a487ea412f9"
+    "group-arm-scores.json": "e36c135aa257bb1d326f65c7fce299fc8b0da7ddb13ac1c700657a487ea412f9",
+    "early-example.json": "a14454a78e9fed81bd4826730ae6fe5645020095dcefc40dc7b7412197b8d98f",
+    "early-scores.json": "28a5595c5d7a35e853a749ecc60c9d7be0e6d9601584941c06dbf9c6a00813a0"
   },
   "scientificSourcesSha256": {
     "models/shared-motion/shared-motion-data/contract.json": "48d3dc03e05fce2b1c95e10aeca45ef934e3cd0108b7a53036b1616b29fc40a2",
@@ -30,9 +32,9 @@
     "models/shared-motion/shared-motion-model/fits/ridge-rat.npz": "a0a2b0e9166dd7921803d73163d6af05b542e2cc25b8d4a273bd2767c2201b30",
     "benchmarks/wtrack-neural-motion/recording/pairs/train/trial-055.npz": "54560f4ce8a2bc8b4f69b2fa26d97bd8975595ef89044ff2ebcc2e7d22c3a755",
     "models/neurotranslate-0.0/results.json": "0add7bc8efbbcbc8734fe5bc894e62bfdbe49b85209cfd52d6dda29adf943e5b",
-    "models/neurotranslate-0.0/movement-weights.npz": "901922e1db489a06cc3252212232b7df65784128695f86f84a751726b9f0521c",
+    "models/neurotranslate-0.0/movement-weights.npz": "6a05e06ecbf0eadb4524369d9089847813763d0d2a3c1a49bdd1e4bf295e4864",
     "models/neurotranslate-0.0/protocol.json": "049f4ccb5d6fbdb447262e66501e108e96f5a59df949ecd95f12c8c5a8acc910",
-    "models/neurotranslate-0.0/NOTICE.md": "e3b0f90b1adfcdc5059c6ffc5f1fc5d9e8dcaa4c5f556436b48496525bad4bc3",
+    "models/neurotranslate-0.0/NOTICE.md": "2e9a527cf3f20524d0c7ad073653d68769ab3e417813f9bc4a0f811422182c98",
     "models/neurotranslate-0.0/forearm/results.json": "ba78ac2cd76296afbf7a6e72dde379d7131b8b09a2ad9899d4626fbb503bb135",
     "models/neurotranslate-0.0/forearm/PROTOCOL.md": "405641c20e33e2ca3c1cb036b7fd473e9b0b5395f483633d4981616cb42749e1",
     "models/neurotranslate-0.0/forearm/PROTOCOL-ADDENDUM.md": "be1e0e3104ec0b7be89cc70f7e6ed9b2462cca817fc75293ccfcb47d5f15216b",
@@ -46,7 +48,7 @@
     "models/neurotranslate-0.0/load/adapter.py": "147cb3cc3975e88dea92746b5ed145d186f8121e5d202ccf81840e21a025c5f8",
     "models/neurotranslate-0.0/load/knee_moment_schema.json": "f478a70d96c2928b2a699fb4fcb3aeaed1c383ca4d753082f9248d95fe88de53",
     "models/neurotranslate-0.0/load/results.json": "98ecfe47355b3533c2e8f7aebd9542a4f78f9eb229b0125d7dd2359d59910f5d",
-    "models/neurotranslate-0.0/predict.py": "7ca6f985ce0bbdc65decebdde9b7533ca711d5e47ffb3ae1412adfb5aad6068c",
+    "models/neurotranslate-0.0/predict.py": "fb0cad889707b256570325b5eb92cd74eeb9a8fa2b5f931b985751232c88bf36",
     "models/neurotranslate-0.0/right_plate.py": "9ac29ca788b0282b514b96aadd68c5ca8bb4993097849d4eb139ea5947d1f129",
     "models/neurotranslate-0.0/right-plate/METHOD.md": "ae34d05c9d01dd005dc24d85465c682b9992cc79e1edf2cc93f24dadb3ffc82e",
     "models/neurotranslate-0.0/right-plate/example.json": "a3e555f7c3a38313020f23ea9abd473b121e3186463fdc1762c8270a672e4a01",
@@ -96,11 +98,25 @@
     "models/neurotranslate-0.0/arm-transfer/example-results.json": "98327a54e8975ed685dd6eca2a28754a5980e60098093a4d9c8ddb411e9468e0",
     "models/neurotranslate-0.0/arm-transfer/download_originals.py": "450bc0f0f00e85a3562cfebea5eb2045266eb8084f3bc63cb5b53527572d16cb",
     "models/neurotranslate-0.0/arm-transfer/SOURCE.md": "fc677efd8353433a89e3ff3c2e9f8988c70650070104bfbf81bd7afe4b11ecda",
-    "models/neurotranslate-0.0/arm-transfer/results.json": "e36c135aa257bb1d326f65c7fce299fc8b0da7ddb13ac1c700657a487ea412f9"
+    "models/neurotranslate-0.0/arm-transfer/results.json": "e36c135aa257bb1d326f65c7fce299fc8b0da7ddb13ac1c700657a487ea412f9",
+    "models/neurotranslate-0.0/scalp_residual.py": "851d9fe1de0b621ff29f87b289b67cb8eeda778e3ef46a7171322a74e8099c3a",
+    "models/neurotranslate-0.0/scalp-residual/PROTOCOL.md": "0476e81b91d6a6a447bc504379460bc02d46703a5a672a7e2e77d64e979e1f93",
+    "models/neurotranslate-0.0/scalp-residual/study.py": "5561b46b9c2e82867f04101a896254c2120c8fa9495220ba1433cf8fd4b988c3",
+    "models/neurotranslate-0.0/scalp-residual/ofner_early.py": "7198036aa3d8b9222506385e6e7ffde9345fb1280d2f817270adf4eb5938be79",
+    "models/neurotranslate-0.0/scalp-residual/fit.json": "79326183fb4d5bf148d46beee9ab8422791f13cdcec7a821b0d46f0e6a99a9ab",
+    "models/neurotranslate-0.0/scalp-residual/download_early_originals.py": "e3fc4fb2249be9f03c47ca3339e2b46b6e9efe0818baadb1e2b7d02ede8234bf",
+    "models/neurotranslate-0.0/scalp-residual/CC-BY-4.0.txt": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+    "models/neurotranslate-0.0/scalp-residual/example.json": "a14454a78e9fed81bd4826730ae6fe5645020095dcefc40dc7b7412197b8d98f",
+    "models/neurotranslate-0.0/scalp-residual/example-results.json": "5a0614895e56cbcbbf11467f5f6a0e5b8a029488c774db9be484d4dd80193c2a",
+    "models/neurotranslate-0.0/scalp-residual/README.md": "664be25c3c0067bc9ad10029f71887a09b773f75dbc897a27c18790386d103b1",
+    "models/neurotranslate-0.0/scalp-residual/results.json": "28a5595c5d7a35e853a749ecc60c9d7be0e6d9601584941c06dbf9c6a00813a0",
+    "models/neurotranslate-0.0/scalp-residual/SOURCE.md": "d4168975b860997a5dd6923c698cb3fd94c8df208abf2560b59b7e90d2dfebea",
+    "models/neurotranslate-0.0/scalp-residual/fitting-hashes.sha256": "17bcaeac65cfeda79144b80ec7ae0dcb0b31f64e0b95ff69b55c5868ef684d67",
+    "models/neurotranslate-0.0/scalp-residual/fourth-hashes.sha256": "4070db4821a1d48ce28e7b3f7d0278b617163810677211157ec3a2a1281a702f"
   },
   "originalViewerSha256": "1c8eaed7b3f1a595fd202b968993da9eee66845938063746bbb369b054e8e258",
   "angleStudyRevision": "c60c12e3355b5d2ba3a50364a7f6d294ec59f48e",
   "forearmStudyRevision": "c8dfb5e641a4832a965f83469b3c38a601bfdb99",
   "previousAngularViewerSha256": "ae01be6cb100a0ea6032bf1c9b3f077911539cb6c8136fc9dd4caae55dc03b48",
-  "previousMovementCheckpointSha256": "ab3db00e8c048953bdc12d8c978e3cabdf1f2fae7dcfe2f6f53fe8aed724ddfd"
+  "previousMovementCheckpointSha256": "901922e1db489a06cc3252212232b7df65784128695f86f84a751726b9f0521c"
 }

@@ -5,7 +5,7 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.06cb8cc4b65ef3d687a44a0ea518a15876f5c3f867ccd13aae08a88d46e35362.css">
+  <link rel="stylesheet" href="style.c1c843f619668cbbd64ce9061cab9fdf3d24da4f04f9045df7a35d655c3971a6.css">
 </head>
 <body>
   <header class="topbar">
@@ -24,6 +24,7 @@
       <div>
         <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p>
         <nav class="section-links wrist-links" aria-label="Study recordings">
+          <a href="./scalp-forecast/index.html" data-pages-href="./scalp-forecast/index.html">Test scalp and eye readings in an arm forecast</a>
           <a href="./arm-transfer/index.html" data-pages-href="./arm-transfer/index.html">Forecast movement in a new person</a>
           <a href="./shared-motion/index.html#cued-arm" data-pages-href="./shared-motion/index.html#cued-arm">Give the model an arm instruction</a>
           <a href="./walking-landmarks/index.html" data-pages-href="./walking-landmarks/index.html">Try the six-point walking forecast</a>
@@ -95,6 +96,16 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="finger-transfer" aria-labelledby="cohort-choice"><h3 id="cohort-choice">A different person’s finger movement</h3><p>Learn from four people, calibrate on a fifth, then compare the cue with the recorded brain signal.</p><a href="finger-transfer/index.html">Run the five-person comparison</a></article>
+      <article class="study-choice-card" data-study-key="scalp-forecast" aria-labelledby="reader-scalp-forecast">
+        <h3 id="reader-scalp-forecast">Do scalp electrodes help predict the next arm movement?</h3>
+        <p>The model knows the cue and the first arm readings. Adding six scalp electrodes barely changed the average error on five other people. Try the same forecast with the eye readings.</p>
+        <nav class="section-links" aria-label="Scalp and eye readings in arm forecasts">
+          <a href="./scalp-forecast/index.html" data-pages-href="./scalp-forecast/index.html">Try the scalp and eye forecasts</a>
+          <a href="./shared-motion/index.html#early-signals" data-pages-href="./shared-motion/index.html#early-signals">Try the shared model’s eye adjustment</a>
+          <a href="./papers/scalp-forecast/index.html" data-pages-href="./papers/scalp-forecast/index.html">Read the illustrated study</a>
+          <a href="https://eliminatenoise.github.io/Interoceptomics/scalp-and-arm/">Open the atlas and choose “Scalp and eye signals”</a>
+        </nav>
+      </article>
       <article class="study-choice-card" data-study-key="arm-transfer" aria-labelledby="reader-arm-transfer">
         <h3 id="reader-arm-transfer">Will the arm forecast work for someone new?</h3>
         <p>Seven people supplied the training examples. Compare forecasts on five other people who saw the same cues to bend an elbow, turn the forearm, open or close the hand, or rest.</p>
@@ -339,6 +350,6 @@
     document.getElementById("study-choice-label").hidden = false;
     showStudy();
   </script>
-  <script type="module" src="app.06cb8cc4b65ef3d687a44a0ea518a15876f5c3f867ccd13aae08a88d46e35362.mjs"></script>
+  <script type="module" src="app.c1c843f619668cbbd64ce9061cab9fdf3d24da4f04f9045df7a35d655c3971a6.mjs"></script>
 </body>
 </html>

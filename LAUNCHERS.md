@@ -128,3 +128,9 @@ For the separate elbow experiment, [open the viewer](https://eliminatenoise.gith
 [Open the arm Transformer](https://eliminatenoise.github.io/NeuroTranslation/arm-transfer/) or [download the offline reader](docs/arm-transfer-offline.zip). Extract the ZIP. Open **index.html** or the launcher marked for Windows, macOS or Linux. Change the cue or an invented sensor reading to compare forecasts. The experiment’s recorded errors appear below the controls.
 
 [Download the fitted arm model](models/arm-transfer-model.zip) to make the same nine predictions from a local input. Its launcher runs an invented example with Node.js or Python and NumPy. [Open the shared model](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#arm-transfer) to try its earlier-run correction, or [download the shared browser](models/movement-browser.zip). [Study and instructions](https://eliminatenoise.github.io/NeuroTranslation/papers/arm-transfer/)
+
+## Try an arm forecast with scalp or eye readings
+
+[Open the reader](https://eliminatenoise.github.io/NeuroTranslation/scalp-forecast/) or [download its offline version](docs/scalp-forecast-offline.zip). Extract the ZIP and open the launcher for Windows, macOS or Linux, or open **index.html**. Change the movement cue, then switch the recordings the model can use. The recorded test results appear beneath the invented example.
+
+[Download the fitted Transformer](models/scalp-forecast-model.zip) to run a forecast with Node.js or Python and NumPy. [Open the shared model](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#early-signals) to try an adjustment for activity shared with the eye electrodes. Its [offline browser](models/movement-browser.zip) also includes the earlier movement experiments. [Read the illustrated study](https://eliminatenoise.github.io/NeuroTranslation/papers/scalp-forecast/)

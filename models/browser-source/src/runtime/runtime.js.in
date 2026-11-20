@@ -472,6 +472,56 @@
 
   const armCues = ['elbow flexion','elbow extension','supination','pronation','hand close','hand open','rest'];
   const armModes = ['still','cue','motion','cue_motion','shared_motion','shared_cue_motion','shuffled_cue_motion'];
+  const signalModes=['still','cue_median','previous_shared','mechanics','scalp','eye','residual_scalp','joint'];
+  async function forecastEarlySignal(record) {
+    const mode=record.mode;
+    if(!signalModes.includes(mode)) throw new RangeError('Choose a supported early-signal method.');
+    const moving=!['still','cue_median'].includes(mode);
+    const useScalp=['scalp','residual_scalp','joint'].includes(mode);
+    const useEye=['eye','residual_scalp','joint'].includes(mode);
+    const fields=['domain','mode',...(mode==='still'?[]:['cue']),...(moving?['bins']:[]),...(useScalp?['scalp_bins']:[]),...(useEye?['eye_bins']:[])];
+    if(Object.keys(record).length!==fields.length || !fields.every(k=>Object.hasOwn(record,k)))
+      throw new TypeError('Provide exactly the inputs required by the selected method.');
+    const check=(a,n)=>Array.isArray(a)&&a.length===4&&Array.from(a).every(row=>finiteRow(row,n));
+    if(mode!=='still' && !armCues.includes(record.cue)) throw new RangeError('Unknown right-arm instruction.');
+    if(moving && !check(record.bins,6)) throw new TypeError('Use four rows of six mechanical readings.');
+    if(useScalp && !check(record.scalp_bins,6)) throw new TypeError('Use four rows of six scalp readings.');
+    if(useEye && !check(record.eye_bins,3)) throw new TypeError('Use four rows of three eye readings.');
+    if(mode==='still' || mode==='previous_shared'){
+      const out=await forecastGroupArm({...record,domain:'group_arm_change',mode:mode==='still'?'still':'shared_cue_motion'});
+      return {...out,mode};
+    }
+    const baseline=await forecastGroupArm({domain:'group_arm_change',mode:'cue_median',cue:record.cue});
+    if(mode==='cue_median')return {...baseline,mode};
+    const [source,base,head]=await Promise.all([loadGroup('spatial'),loadGroup('group_arm.readouts'),loadGroup('scalp_residual.readouts')]);
+    const anchor=record.bins[3].slice(0,3);
+    const tokens=record.bins.map(row=>row.map((v,i)=>i<3?v-anchor[i]:v));
+    const mu=base['cued_arm.token.mean'],sd=base['cued_arm.token.sd'];
+    const features=[...tokens.flat(),...encode(source,tokens.map(row=>linear(source,'project',row.map((v,i)=>(v-mu[i])/sd[i]))))];
+    const center=a=>a.map(row=>row.map((v,i)=>v-(a[0][i]+a[1][i])/2));
+    const s=useScalp?center(record.scalp_bins):null;
+    const e=useEye?center(record.eye_bins):null;
+    if(mode==='eye'||mode==='joint')features.push(...e.flat());
+    if(mode==='scalp')features.push(...s.flat());
+    if(mode==='residual_scalp'||mode==='joint'){
+      const root='scalp_residual.ocular.';
+      for(let t=0;t<4;t++)for(let k=0;k<6;k++){
+        let estimate=0;
+        for(let j=0;j<3;j++) estimate += (e[t][j]-head[root+'eye_mean'][j])/head[root+'eye_sd'][j]*head[root+'coef'][6*j+k];
+        features.push((s[t][k]-head[root+'scalp_mean'][k])/head[root+'scalp_sd'][k]-estimate);
+      }
+    }
+    const stem='scalp_residual.'+mode+'.';
+    const values=baseline.change_native_units.flat();
+    for(let k=0;k<9;k++){
+      let correction=0;
+      features.forEach((v,j)=>{correction+=(v-head[stem+'mean'][j])/head[stem+'sd'][j]*head[stem+'coef'][9*j+k];});
+      values[k]+=correction*head['group_arm.target_sd'][k];
+    }
+    if(!values.every(Number.isFinite))throw new RangeError('Instrument values exceed the numerical range.');
+    return {...baseline,mode,change_native_units:[values.slice(0,3),values.slice(3,6),values.slice(6)]};
+  }
+
   async function forecastGroupArm(record) {
     const {mode, cue} = record;
     if (mode === 'cue_median') {
@@ -643,6 +693,7 @@
   }
 
   async function forecastMovement(record) {
+    if (record?.domain === 'early_signal_change') return forecastEarlySignal(record);
     if (record?.domain === 'group_arm_change') return forecastGroupArm(record);
     if (record?.domain === 'cued_arm_change') return forecastCuedArm(record);
     if (record?.domain === 'marker_displacement') return forecastPoint(record);

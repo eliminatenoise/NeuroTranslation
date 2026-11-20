@@ -2,7 +2,9 @@
 
 ## Predict without fitting
 
-Python and NumPy run all examples. Use the included `movement-weights.npz` (SHA-256 `901922e1db489a06cc3252212232b7df65784128695f86f84a751726b9f0521c`). Run `python predict.py arm-transfer/example.json` to forecast from the group median for a known arm cue. [Fitting, local corrections and assessment on new people](arm-transfer/README.md)
+Python and NumPy run all examples. Use the included `movement-weights.npz` (SHA-256 `6a05e06ecbf0eadb4524369d9089847813763d0d2a3c1a49bdd1e4bf295e4864`). Run `python predict.py scalp-residual/example.json` to forecast using invented arm, scalp and eye readings. [Source and reproduction](scalp-residual/README.md)
+
+The group arm model first appeared in checkpoint `901922e1db489a06cc3252212232b7df65784128695f86f84a751726b9f0521c`. Run `python predict.py arm-transfer/example.json` to forecast from the group median for a known arm cue. [Fitting, local corrections and assessment on new people](arm-transfer/README.md)
 
 The earlier single-person arm readouts first appeared in checkpoint `ab3db00e8c048953bdc12d8c978e3cabdf1f2fae7dcfe2f6f53fe8aed724ddfd`. Run `python predict.py cued-arm/example.json` to see the cued right-arm forecast. [Source, input, licence and study reproduction](cued-arm/README.md)
 

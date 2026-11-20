@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function clearResults(message) {
     revision++;
-    byId("arm-results").hidden = true;
+    byId("arm-results").hidden = true;byId("early-chart-panel").hidden = true;
     byId("arm-values").tBodies[0].replaceChildren();
     byId("point-results").hidden = true;
     byId("point-result").textContent = "";
@@ -437,7 +437,85 @@ document.addEventListener("DOMContentLoaded", () => {
     const formatScore=(study,key)=>cell(study,key);
     byId('group-arm-conclusion').textContent='Before using a new person’s outcomes, the original single-person encoder averaged '+formatScore(all,'s1_shared_cue_motion')+' and the group encoder averaged '+formatScore(all,'shared_cue_motion')+'. The group cue median reached '+formatScore(all,'cue_median')+'. On later runs the first-run correction lowered shared-model error from '+formatScore(later,'shared_cue_motion')+' to '+formatScore(later,'calibrated_shared')+'. The person’s own first-run cue median scored '+formatScore(later,'personal_median')+'. A dash means that method was not part of the comparison.';
   }
+  let earlyPlot=null;
+  function drawEarlyChart(){
+    const panel=byId('early-chart-panel');
+    if(!earlyPlot || panel.hidden || byId('arm-results').hidden) return;
+    const canvas=byId('early-chart'), width=Math.max(194,Math.floor(canvas.clientWidth)),height=158;
+    const dpi=Math.min(2,devicePixelRatio||1);
+    canvas.width=Math.round(width*dpi);canvas.height=Math.round(height*dpi);
+    const g=canvas.getContext('2d');g.scale(dpi,dpi);
+    const k=Number(byId('early-sensor').value),pred=earlyPlot.pred.map(row=>row[k]),typical=earlyPlot.typical.map(row=>row[k]);
+    const low=Math.min(0,...pred,...typical),high=Math.max(0,...pred,...typical),range=high-low||1;
+    const left=64,right=width-22,top=14,bottom=height-26;
+    const X=i=>left+(right-left)*i/2,Y=v=>bottom-(bottom-top)*(v-low)/range;
+    g.fillStyle='#f4f7f8';g.fillRect(0,0,width,height);
+    g.font='11px system-ui,sans-serif';g.textAlign='right';
+    const ticks=low===high?[low]:[low,(low+high)/2,high];
+    for(const v of ticks){
+      g.strokeStyle='#d2dbdd';g.beginPath();g.moveTo(left,Y(v));g.lineTo(right,Y(v));g.stroke();
+      g.fillStyle='#344d58';g.fillText(Number(v.toPrecision(3)).toString(),left-6,Y(v)+3);
+    }
+    g.textAlign='center';for(let i=0;i<3;i++)g.fillText(['0.5 s','1.0 s','1.5 s'][i],X(i),height-8);
+    function line(values,color,dash){
+      g.strokeStyle=color;g.fillStyle=color;g.setLineDash(dash);g.lineWidth=2;
+      g.beginPath();values.forEach((v,i)=>i?g.lineTo(X(i),Y(v)):g.moveTo(X(i),Y(v)));g.stroke();g.setLineDash([]);
+      values.forEach((v,i)=>{g.beginPath();g.arc(X(i),Y(v),3,0,Math.PI*2);g.fill();});
+    }
+    line(typical,'#526b78',[4,3]);line(pred,'#ae551e',[]);
+    canvas.setAttribute('aria-label','Three predicted changes for '+earlyPlot.channels[k]+': '+pred.map(v=>Number(v.toPrecision(4))).join(', ')+'. Typical changes for this cue: '+typical.map(v=>Number(v.toPrecision(4))).join(', ')+'.');
+  }
+  new ResizeObserver(drawEarlyChart).observe(byId('early-chart'));
+  byId('early-sensor').addEventListener('change',drawEarlyChart);
+
+  async function showEarly(token) {
+    const mode=byId('early-method').value, custom=isCustom();
+    const moving=!['still','cue_median'].includes(mode), useScalp=['scalp','residual_scalp','joint'].includes(mode);
+    const useEye=['eye','residual_scalp','joint'].includes(mode);
+    byId('arm-study').hidden=true;byId('group-arm-study').hidden=true;byId('early-study').hidden=false;
+    byId('arm-profile').hidden=true;byId('arm-cue-field').hidden=mode==='still';byId('arm-custom-bins').hidden=!(custom&&moving);
+    byId('early-practice').hidden=custom || !(useScalp||useEye);byId('early-custom').hidden=!custom||!(useEye||useScalp);
+    byId('early-scalp-field').hidden=!useScalp;byId('early-eye-field').hidden=!useEye;
+    displayEarlyStudy();
+    const record={domain:'early_signal_change',mode};
+    if(mode!=='still'){
+      record.cue=asArmCue(byId('arm-cue').value);
+      if(!record.cue)throw Error('Choose a listed right-arm instruction.');
+    }
+    const read=(id)=>{try{return JSON.parse(byId(id).value);}catch{throw Error('Paste the required rows or fill the box with the invented example.');}};
+    if(moving)record.bins=custom?read('arm-bins'):data.earlyExample.bins;
+    const scale=a=>a.map(row=>row.map((v,i)=>a[0][i]+Number(byId('early-gain').value)*(v-a[0][i])));
+    if(useScalp)record.scalp_bins=custom?read('early-scalp'):scale(data.earlyExample.scalp_bins);
+    if(useEye)record.eye_bins=custom?read('early-eyes'):scale(data.earlyExample.eye_bins);
+    const r=await SharedMotion.forecastMovement(record);
+    const typical=record.cue ? await SharedMotion.forecastMovement({domain:'early_signal_change',mode:'cue_median',cue:record.cue}) : null;
+    if(token!==revision)return;
+    byId('arm-result-label').textContent=record.cue?'Matched task: '+record.cue+'.':'This method forecasts no change.';
+    showArmValues(r);
+    byId('early-chart-panel').hidden=!typical;
+    if(typical){earlyPlot={pred:r.change_native_units,typical:typical.change_native_units,channels:r.channels};drawEarlyChart();}
+    byId('status').textContent=moving?(custom?'Forecast from the supplied readings.':'Forecast from invented instrument readings.'):'Forecast needs no instrument history.';
+  }
+  function displayEarlyStudy(){
+    const a=data.earlyScores, summary=a.groups?.all;
+    if(!summary){byId('early-coverage').textContent='This build contains fitted weights. Assessment results are unavailable in this copy.';return;}
+    byId('early-coverage').textContent='The corrections were fitted on '+a.fit.trials+' trials from '+a.fit.people+' people. Testing used '+summary.trials+' trials from '+summary.people+' other people. Their fourth runs had been kept unopened until fitting finished.';
+    const methods=[['still','No change'],['cue_median','Typical response to cue'],['previous_shared','Earlier cue-and-motion fit'],['mechanics','Arm correction'],['scalp','Arm and scalp'],['eye','Arm and eyes'],['residual_scalp','Arm and eye-adjusted scalp'],['joint','Arm, eyes and eye-adjusted scalp'],['scalp_shifted','Scalp taken from a different same-cue trial'],['joint_shifted','Scalp residual taken from a different same-cue trial']];
+    byId('early-scores').replaceChildren(...methods.map(([k,title])=>{
+      const tr=document.createElement('tr'),h=document.createElement('th');h.scope='row';h.textContent=title;tr.append(h);
+      for(const group of [a.groups.paired,a.groups.screened_pairs]){
+        const td=document.createElement('td'),v=group.models[k]?.scaled_mae;
+        td.textContent=Number.isFinite(v)?v.toFixed(3):'Unavailable';tr.append(td);
+      }return tr;
+    }));
+    byId('early-screened').textContent='The paired comparison uses '+a.groups.paired.trials+' trials. The sensitivity check uses '+a.groups.screened_pairs.trials+' trials where both the original and replacement recordings pass the pre-cue screen.';
+  }
+
   async function showArm(token) {
+    const early=byId('arm-fit').value==='signals';
+    byId('early-controls').hidden=!early;byId('early-study').hidden=!early;
+    byId('arm-method').hidden=early;document.querySelector('label[for="arm-method"]').hidden=early;
+    if (early){await showEarly(token);return;}
     const pooled=byId('arm-fit').value==='group',selector=byId('arm-method');
     for(const name of ['cue_median','calibrated_shared','offset_free_linear','offset_free_shared']){const opt=selector.querySelector('option[value="'+name+'"]');opt.hidden=!pooled;opt.disabled=!pooled;}
     if(!pooled&&['cue_median','calibrated_shared','offset_free_linear','offset_free_shared'].includes(selector.value))selector.value='cue';
@@ -468,6 +546,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if(token!==revision)return;
     const caption=byId('arm-result-label');
     caption.textContent=usesCue ? 'Matched task: '+record.cue+'.' : 'This method does not use an action label.';
+    showArmValues(r);
+    byId('status').textContent=usesMotion ? (custom?'Forecast from the supplied sensor bins.':'Forecast from invented sensor bins.') : 'Forecast needs no sensor history.';
+  }
+  function showArmValues(r){
     const body=byId('arm-values').tBodies[0];
     body.replaceChildren(...r.change_native_units.map((v,k)=>{
       const tr=document.createElement('tr');
@@ -476,7 +558,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return tr;
     }));
     byId('arm-results').hidden=false;
-    byId('status').textContent=usesMotion ? (custom?'Forecast from the supplied sensor bins.':'Forecast from invented sensor bins.') : 'Forecast needs no sensor history.';
+    return;
   }
 
   async function runCustom() {
@@ -545,6 +627,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const knee = domain === "knee_angle";
     const arm = domain === "cued_arm_change";
     byId("arm-controls").hidden = !arm;
+    byId("early-study").hidden=!arm || byId("arm-fit").value!=="signals";
     byId("arm-study").hidden = !arm || byId("arm-fit").value==="group";
     byId("group-arm-study").hidden = !arm || byId("arm-fit").value!=="group";
     const point = domain === "marker_displacement";
@@ -654,9 +737,13 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     picker.value="cued_arm_change";
     byId("arm-method").value="cue";
+    if(byId("arm-fit").value==="signals" && byId("early-method").value==="still")byId("early-method").value="cue_median";
     selectDomain();
     byId("arm-cue").focus();byId("arm-cue").select();
   });
+  byId("early-method").addEventListener("change",selectInput);byId("early-gain").addEventListener("change",selectInput);
+  for(const id of ['early-scalp','early-eyes'])byId(id).addEventListener('input',()=>clearResults('Run the forecast with the new electrical readings.'));
+  byId('early-fill').addEventListener('click',()=>{byId('early-scalp').value=JSON.stringify(data.earlyExample.scalp_bins);byId('early-eyes').value=JSON.stringify(data.earlyExample.eye_bins);clearResults('Invented electrical readings filled. Run the forecast.');});
   byId("arm-fit").addEventListener("change",selectInput);
   byId("arm-profile-values").addEventListener("input",()=>clearResults("Run the forecast with this earlier-run profile."));
   byId("arm-profile-practice").addEventListener("click",()=>{byId("arm-profile-values").value=JSON.stringify(data.groupArmExample.calibration);clearResults("Invented correction loaded. Run the forecast.");});
@@ -722,11 +809,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (model.checkpointSha256 !== "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179") {
         throw new Error("The checkpoint differs from the one used for these comparisons.");
       }
-      if (model.movementCheckpointSha256 !== "901922e1db489a06cc3252212232b7df65784128695f86f84a751726b9f0521c") {
+      if (model.movementCheckpointSha256 !== "6a05e06ecbf0eadb4524369d9089847813763d0d2a3c1a49bdd1e4bf295e4864") {
         throw new Error("The movement checkpoint differs from the studied model.");
       }
       studyTable();
       picker.disabled = source.disabled = false;
+      if (location.hash === "#early-signals") {picker.value="cued_arm_change";byId("arm-fit").value="signals";}
       if (location.hash === "#arm-transfer") {picker.value="cued_arm_change";byId("arm-fit").value="group";byId("arm-method").value="cue_median";}
       if (location.hash === "#cued-arm") picker.value = "cued_arm_change";
       if (location.hash === "#point-motion") picker.value = "marker_displacement";

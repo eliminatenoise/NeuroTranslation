@@ -161,6 +161,10 @@ def forecast_population(cutoff_s, prior_time_s, prior_xy_cm, mode, checkpoint=DE
 
 
 def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
+    if record.get("domain") == "early_signal_change":
+        from scalp_residual import forecast as early_forecast
+        config, weights = read_checkpoint(checkpoint)
+        return early_forecast(record, config, weights, linear, encode)
     if record.get("domain") == "group_arm_change":
         from group_arm import forecast as group_arm_forecast
         config, weights = read_checkpoint(checkpoint)

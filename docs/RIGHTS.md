@@ -196,3 +196,7 @@ Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz release
 ### Cued arm movements across people
 
 Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz released the 2017 recordings under CC BY 4.0. This study extracts early and later elbow, forearm and glove readings from motor-execution runs, fits multiple forecasts and compares them on other people. The released data-derived weights and numerical summaries retain that attribution. The examples users can edit are invented. [Original recordings](https://doi.org/10.5281/zenodo.834976) · [Acquisition paper](https://doi.org/10.1371/journal.pone.0182578) · [Reader credits](arm-transfer/NOTICE.md) · [CC BY 4.0](arm-transfer/CC-BY-4.0.txt)
+
+### Early scalp and eye readings in arm forecasts
+
+Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz released the 2017 upper-limb recordings under CC BY 4.0. The study aligns scalp, eye and movement measurements to the visual cue, fits models and compares their errors. The released weights and summaries derived from the recordings retain that credit. The example inputs are invented. [Original recordings](https://doi.org/10.5281/zenodo.834976) · [Acquisition paper](https://doi.org/10.1371/journal.pone.0182578) · [Reader credits](scalp-forecast/NOTICE.md) · [CC BY 4.0](scalp-forecast/CC-BY-4.0.txt)

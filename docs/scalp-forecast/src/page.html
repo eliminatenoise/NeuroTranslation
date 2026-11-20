@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Forecast arm movement from early signals · NeuroTranslation</title>
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+  <a class="skip" href="#forecast">Skip to the forecasts</a>
+  <header class="mast"><div class="wrap bar"><a href="#top" class="wordmark" aria-label="NeuroTranslation, top"><span class="mark" aria-hidden="true"></span>NeuroTranslation</a><nav aria-label="Reader sections"><a href="#forecast">Forecast</a><a href="#cohorts">Evidence</a><a class="download" href="../scalp-forecast-offline.zip" hidden>Download ZIP ↓</a></nav></div></header>
+  <main id="top">
+    <section class="hero"><div class="wrap hero-inner">
+      <div><p class="overline">Cued movement study</p><h1>Can early scalp signals forecast arm movement?</h1><p class="lead">A cue tells a person how to move. Give the model the cue and a quarter-second head start. What do scalp electrodes add to what the arm sensors already tell it?</p></div>
+      <figure class="montage" aria-labelledby="montage-caption">
+        <svg viewBox="0 0 330 183" role="img" aria-label="Schematic top view of the head. Six scalp electrodes form three left and right pairs. Three numbered eye channels are separate.">
+          <g fill="none" stroke="#78a8a3" stroke-width="1.8">
+            <path d="M99 26 108 15l10 11M49 88Q38 77 40 99t13 21M164 88q12-12 10 10t-12 22"/>
+            <ellipse cx="108" cy="97" rx="58" ry="72"/><path stroke-opacity=".5" stroke-dasharray="3 4" d="M108 27v139M53 96h109"/>
+          </g>
+          <g fill="#c5f27f" stroke="#132f2e" stroke-width="1.5"><circle cx="85" cy="71" r="5"/><circle cx="130" cy="71" r="5"/><circle cx="80" cy="97" r="5"/><circle cx="136" cy="97" r="5"/><circle cx="85" cy="124" r="5"/><circle cx="130" cy="124" r="5"/></g>
+          <g fill="#d8ebe6" font-family="Arial,sans-serif" font-size="10"><text x="78" y="63">FC3</text><text x="123" y="63">FC4</text><text x="68" y="89">C3</text><text x="137" y="90">C4</text><text x="70" y="143">CP3</text><text x="124" y="143">CP4</text></g>
+          <g transform="translate(207,46)" fill="none" stroke="#eec788" stroke-width="1.7"><path d="M0 12Q18-7 37 12Q18 31 0 12Z"/><circle cx="18.5" cy="12" r="5"/></g>
+          <g font-family="Arial,sans-serif"><text x="207" y="92" fill="#fff" font-weight="bold" font-size="14">Eye channels</text><text x="207" y="111" fill="#d8ebe6" font-size="12">EOG 62 · 63 · 64</text><text x="207" y="142" fill="#a8c6bd" font-size="11">Recorded separately</text></g>
+        </svg><figcaption id="montage-caption">Scalp recording sites, seen from above. Eye channels keep their source column numbers.</figcaption>
+      </figure>
+    </div></section>
+    <div class="wrap main">
+    <section class="timing" aria-labelledby="timing-title"><h2 id="timing-title">When does the forecast begin?</h2><div class="timeline" role="img" aria-label="Early inputs end 0.25 seconds after the cue. Predictions fall 0.5, 1.0 and 1.5 seconds beyond that cutoff.">
+      <div class="time-step early"><strong>Early readings</strong><span>≈ −0.25 s to +0.25 s around cue</span></div>
+      <div class="time-step cut"><strong>Cutoff</strong><span>Cue +0.25 s</span></div>
+      <div class="time-step future"><strong>Three forecasts</strong><span>Cutoff +0.5, +1.0 and +1.5 s</span></div></div>
+      <p>All models stop reading at the cutoff. Later arm and hand measurements enter only when researchers score the forecasts.</p>
+    </section>
+    <section id="forecast" class="section" aria-labelledby="forecast-title"><div class="section-title"><div><p class="overline">Interactive forecast</p><h2 id="forecast-title">Follow three sensors forward</h2></div><span class="data-tag"><i></i> Synthetic example</span></div>
+      <p class="intro">Change the instruction or the early readings. Each point is a predicted change from that sensor’s last early median, in its own recorded units.</p>
+      <div class="controls"><label>Movement cue<select id="cue"></select></label><label>Forecast with<select id="method"></select></label><label>Compare with<select id="reference"></select></label></div>
+      <div id="method-notes"></div><div id="forecast-status" aria-live="polite"></div>
+      <div id="plots" class="plots"></div>
+      <p class="fine">Each plot has its own vertical scale. The three dots mark forecast horizons. Lines guide the eye between them.</p>
+      <details id="inputs" class="panel"><summary>Edit the early readings</summary><div class="panel-content">
+        <p>These invented sensor values stay in this browser. Changing the cue keeps the same readings, so you can test what the instruction contributes.</p>
+        <div class="input-toolbar"><label>Recording<select id="recording"></select></label><label>Channel<select id="channel"></select></label><button type="button" id="restore">Restore example</button></div>
+        <p id="feature-help"></p><div id="edit-fields"></div>
+        <p class="fine" id="window-help"></p><p class="fine">Clear a value to mark it missing. Models that need it pause. The fits clip standardized inputs at ±6 fitting standard deviations. An invented combination can still fall outside the movements studied.</p>
+      </div></details>
+      <details id="numbers" class="panel"><summary>Read all nine forecast values</summary><div class="panel-content"><div id="numbers-table"></div></div></details>
+    </section>
+    <section id="cohorts" class="section" aria-labelledby="scores-title"><p class="overline">Recorded outcomes</p><h2 id="scores-title">How close were the forecasts?</h2><p class="intro" id="study-result"></p>
+      <div class="controls score-controls"><label>Evaluation group<select id="cohort"></select></label><label>Sensor<select id="score-sensor"></select></label></div>
+      <p id="score-scope"></p><div id="score-table"></div>
+      <p class="fine" id="metric-note"></p>
+      <div class="contrast-box"><label>Paired comparison<select id="contrast"></select></label><p id="contrast-result"></p></div>
+    </section>
+    <section id="reading" class="section reading" aria-labelledby="source-title"><div><p class="overline">Measurements and limits</p><h2 id="source-title">What did the electrodes pick up?</h2></div><div><p>Electrical activity around the eyes can appear at scalp electrodes. A scalp signal that varies with an eye channel raises a different question from one that improves a forecast. Correlation describes how two recordings vary together. Prediction asks whether adding a recording reduces error on later movement in people outside the fit.</p><p id="eye-evidence"></p><p>These forecasts describe three instrument readings during instructed upper-limb movements. Their anatomical scale and sign remain unresolved. Scalp potentials alone cannot locate the generator of a signal.</p></div></section>
+    <footer><p><strong>Ofner, Schwarz, Pereira &amp; Müller-Putz (2017).</strong> The authors recorded upper-limb movements with EEG, eye and movement sensors. This reader uses their motor-execution recordings. <a href="https://doi.org/10.5281/zenodo.834976">Dataset</a> · <a href="https://doi.org/10.1371/journal.pone.0182578">Acquisition paper</a></p><p id="related" hidden><a href="../shared-motion/#early-signals">Shared motion model</a> · <a href="../papers/scalp-forecast/">Study paper</a></p><p><a href="README.md">Method and reproduction</a> · <a href="NOTICE.md">Credits and licences</a> · <a href="method/model.json">Fitted model</a> · <a href="method/assessment.json">Assessment scores</a></p></footer>
+    </div>
+  </main>
+  <script id="reader-data" type="application/json">__EMBEDDED_PAYLOAD__</script>
+  <script src="src/predict.js"></script><script src="src/charts.js"></script><script src="src/app.js"></script>
+</body>
+</html>
