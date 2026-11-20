@@ -1,6 +1,6 @@
 [The studies](../README.md) › Study 9 · Pinch and lift: grip force
 
-# EEG from the wrong lift did as well as EEG from the right one
+# EEG from the wrong lift beat EEG from the right one
 
 A thumb and forefinger squeeze a small object before lifting it, and plates under the fingertips measure the squeeze. A straight-line fit, made on six people from the cue, the recent force and the movement of hand and object, forecast the grip force 120 ms ahead for three other people with an error of **0.4442 N**. Given scalp EEG as well, it missed by **0.4402 N**: 0.0040 N better, for two of the three. But the same fit given EEG from a different lift did better still, **0.4388 N**. The pass rule set before scoring required the right EEG to beat that control, so EEG failed it.
 
