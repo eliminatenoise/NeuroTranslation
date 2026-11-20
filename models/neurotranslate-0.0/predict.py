@@ -161,6 +161,19 @@ def forecast_population(cutoff_s, prior_time_s, prior_xy_cm, mode, checkpoint=DE
 
 
 def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
+    if record.get("domain") == "heel_force":
+        from heel_force.forecast import forecast as predict_heel_force
+        import hashlib
+        source = Path(checkpoint)
+        state = json.loads((source.parent / "heel_force/model.json").read_bytes())
+        if hashlib.sha256(source.read_bytes()).hexdigest() != state["parent_sha256"]:
+            raise ValueError("The heel and force readout requires its matching movement checkpoint.")
+        config, weights = read_checkpoint(source)
+        comparison = {}
+        if record.get("mode") == "random_full_rank2":
+            comparison = {k: np.asarray(v) for k, v in json.loads(
+                (source.parent / "back_rotation/random-encoder.json").read_bytes()).items()}
+        return predict_heel_force(record, state, (config, weights, comparison))
     if record.get("domain") == "pedal_load":
         from pedal_load.forecast import forecast as predict_load_cell
         import hashlib
@@ -260,7 +273,7 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path, help="JSON pedal load change, muscle length change, back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
+    parser.add_argument("input", type=Path, help="JSON heel movement and force, pedal load change, muscle length change, back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
     args = parser.parse_args()
     try:

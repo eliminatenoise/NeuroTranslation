@@ -1,0 +1,604 @@
+:root {
+  color-scheme: light;
+  --ink: #112a27;
+  --muted: #4c625b;
+  --rule: #c9d4cd;
+  --paper: #fbfcf7;
+  --mint: #dcebe3;
+  --joint: #006e58;
+  --single: #a44916;
+  --signal: #283e67;
+  --gap: clamp(1rem,2.4vw,2rem);
+  font: 16px/1.52 "Inter","Segoe UI",Arial,sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+main,
+header > div,
+footer {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding-inline: clamp(1rem,4vw,3.5rem);
+}
+header {
+  border-bottom: 1px solid var(--rule);
+}
+header > div,
+.brand,
+.topnav,
+nav,
+.fieldtop,
+.legend,
+.timing,
+.cardtitle {
+  display: flex;
+  align-items: center;
+}
+.brand {
+  font-weight: 800;
+  letter-spacing: -.03em;
+  gap: .58rem;
+}
+.brand i {
+  width: 1.3rem;
+  height: 1.3rem;
+  background: repeating-linear-gradient(110deg,var(--joint) 0 4px,transparent 4px 6px);
+  border-radius: 55% 12%;
+  display: inline-block;
+}
+header > div {
+  min-height: 4.2rem;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.topnav,
+nav {
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+a {
+  color: #005f4d;
+  text-underline-offset: .2em;
+}
+a:hover {
+  text-decoration-thickness: 2px;
+}
+nav a,
+.brand,
+.topnav a {
+  text-decoration: none;
+}
+.topnav a:hover,
+nav a:hover {
+  text-decoration: underline;
+}
+.hero {
+  padding-block: clamp(2rem,4.2vw,3.6rem) 1.75rem;
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  align-items: end;
+  gap: var(--gap);
+}
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+h1 {
+  font-size: clamp(3rem,6.1vw,5.6rem);
+  line-height: .96;
+  letter-spacing: -.07em;
+  font-weight: 690;
+}
+h2 {
+  font-size: clamp(1.7rem,3vw,2.8rem);
+  letter-spacing: -.055em;
+  line-height: 1.1;
+}
+h3 {
+  font-size: 1.22rem;
+  letter-spacing: -.025em;
+}
+h4 {
+  font-size: 1rem;
+}
+.hero p {
+  max-width: 34rem;
+  font-size: 1.08rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.timing {
+  border-block: 1px solid var(--rule);
+  padding: .62rem .05rem;
+  justify-content: space-between;
+  gap: .5rem;
+  font-size: .85rem;
+  font-weight: 640;
+}
+.timing span {
+  color: var(--muted);
+  font-weight: 480;
+}
+.bench {
+  margin-top: 1.2rem;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(15rem,27%);
+  gap: var(--gap);
+  align-items: start;
+}
+.plotcard {
+  background: #eaf2ec;
+  border: 1px solid #c4d6c9;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.cardtitle {
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.15rem 1.25rem 0;
+}
+.cardtitle h2 {
+  font-size: 1.55rem;
+  letter-spacing: -.035em;
+}
+.cardtitle p,
+.small,
+.note {
+  font-size: .86rem;
+  color: var(--muted);
+}
+#trajectory {
+  display: block;
+  width: 100%;
+  height: clamp(13rem,22vw,20rem);
+}
+svg text {
+  font-family: inherit;
+}
+.chartfooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: .55rem 1.25rem .85rem;
+}
+.legend {
+  gap: .9rem;
+  flex-wrap: wrap;
+  font-size: .79rem;
+}
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: .32rem;
+}
+.legend i {
+  width: 1rem;
+  height: .18rem;
+  background: var(--joint);
+}
+.legend i.spec {
+  background: transparent;
+  border-top: 2px dashed var(--single);
+}
+.legend i.past {
+  background: #6a7973;
+}
+.legend i.origin {
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  background: white;
+  outline: 1px solid var(--ink);
+}
+select,
+button,
+input,
+textarea {
+  font: inherit;
+  max-width: 100%;
+}
+select,
+button {
+  border: 1px solid #a6b9ad;
+  color: var(--ink);
+  background: #fffef9;
+  border-radius: .45rem;
+  padding: .4rem .58rem;
+}
+.viewlabel {
+  font-size: .79rem;
+  color: var(--muted);
+}
+.viewlabel select {
+  font-size: .82rem;
+}
+.loadcard {
+  display: grid;
+  grid-template-columns: minmax(10rem, .72fr) 1.3fr;
+  gap: .8rem var(--gap);
+  padding: 1.15rem 1.25rem;
+  border-block: 1px solid var(--rule);
+  margin-top: .9rem;
+}
+.barrow {
+  display: grid;
+  grid-template-columns: minmax(5.4rem,1fr) minmax(3rem,2.5fr) 5.5rem;
+  align-items: center;
+  gap: .65rem;
+  font-size: .84rem;
+}
+.barrow + .barrow {
+  margin-top: .45rem;
+}
+.track {
+  position: relative;
+  background: #d5dfd5;
+  height: .4rem;
+  border-radius: 2px;
+}
+.track i {
+  position: absolute;
+  height: 100%;
+  background: var(--joint);
+  border-radius: 2px;
+}
+.barrow.single .track i {
+  background: var(--single);
+}
+.value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  font-weight: 680;
+}
+.loadrows p {
+  margin-top: .4rem;
+}
+.editor {
+  background: #fffef9;
+  border: 1px solid var(--rule);
+  padding: 1.15rem;
+  border-radius: .85rem;
+}
+.editor h2 {
+  font-size: 1.35rem;
+  letter-spacing: -.035em;
+}
+.editor .note {
+  margin-top: .45rem;
+}
+.field {
+  margin-top: 1.05rem;
+}
+.fieldtop {
+  justify-content: space-between;
+  gap: .55rem;
+  font-size: .88rem;
+  font-weight: 620;
+}
+.fieldtop output {
+  color: var(--joint);
+  font-variant-numeric: tabular-nums;
+}
+.field select {
+  width: 100%;
+  margin-top: .25rem;
+  font-size: .9rem;
+}
+.field input[type=range] {
+  display: block;
+  width: 100%;
+  margin: .55rem 0 .2rem;
+  accent-color: var(--joint);
+}
+button {
+  cursor: pointer;
+}
+.editor button {
+  margin-top: 1rem;
+}
+.editor summary {
+  font-size: .89rem;
+}
+.editor details {
+  margin-top: 1.05rem;
+  border-top: 1px solid var(--rule);
+  padding-top: .75rem;
+}
+.rawedit {
+  margin: 1.15rem 0;
+  border: 1px solid var(--rule);
+  border-radius: .65rem;
+  padding: .7rem 1.05rem;
+}
+.rawedit p {
+  margin: .65rem 0;
+}
+.rawedit label {
+  display: block;
+  font-weight: 660;
+}
+.rawedit textarea {
+  width: 100%;
+  height: 11rem;
+  border-radius: .4rem;
+  border: 1px solid #9caea3;
+  background: #fffefb;
+  color: var(--ink);
+  font-size: .85rem;
+  padding: .5rem;
+  margin: .3rem 0;
+}
+.controlsrow {
+  display: flex;
+  gap: .7rem;
+  flex-wrap: wrap;
+}
+.warn {
+  color: #893314;
+  font-weight: 620;
+}
+.results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .8rem;
+}
+.axisresult {
+  border-left: 3px solid var(--joint);
+  padding-left: .7rem;
+}
+.axisresult.spec {
+  border-color: var(--single);
+}
+.axisresult span {
+  display: block;
+  font-size: .78rem;
+  color: var(--muted);
+}
+.axisresult b {
+  font-size: .9rem;
+  font-variant-numeric: tabular-nums;
+}
+.subsection {
+  margin: clamp(2rem,5vw,4.4rem) 0;
+}
+.subsection > h2 {
+  margin-bottom: 1rem;
+}
+.textcols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem var(--gap);
+}
+.textcols p {
+  margin: .4rem 0;
+}
+.studytable {
+  width: 100%;
+  margin: .85rem 0;
+  border-collapse: collapse;
+  font-size: .93rem;
+}
+.studytable th,
+.studytable td {
+  padding: .48rem .55rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: right;
+}
+.studytable th:first-child,
+.studytable td:first-child {
+  text-align: left;
+}
+.studytable thead th {
+  font-size: .79rem;
+  color: var(--muted);
+  vertical-align: bottom;
+}
+.studytable tr.key {
+  background: #eaf2ec;
+  font-weight: 650;
+}
+.more {
+  padding: .8rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.more p {
+  margin: .65rem 0;
+}
+summary {
+  cursor: pointer;
+  font-weight: 640;
+}
+footer {
+  border-top: 1px solid var(--rule);
+  padding-block: 1.5rem 2rem;
+  font-size: .88rem;
+}
+footer p {
+  margin: .7rem 0;
+}
+button:focus-visible,
+summary:focus-visible,
+select:focus-visible,
+input:focus-visible,
+a:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #227d9c;
+  outline-offset: 2px;
+}
+[hidden] {
+  display: none!important;
+}
+.screenreader {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(100%);
+  white-space: nowrap;
+}
+@media (max-width:800px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: .8rem;
+  }
+  .bench {
+    grid-template-columns: minmax(0,1fr);
+  }
+  .editor {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .2rem 1rem;
+  }
+  .editor > h2,
+  .editor > .note,
+  .editor > .controlsrow {
+    grid-column: 1/-1;
+  }
+  .editor .field {
+    margin-top: .7rem;
+  }
+  .loadcard {
+    padding: 1rem .3rem;
+  }
+  .textcols {
+    grid-template-columns: 1fr;
+  }
+  .rawedit {
+    margin-top: 1rem;
+  }
+  .subsection {
+    margin-top: 2.5rem;
+  }
+}
+@media (max-width:500px) {
+  header > div {
+    min-height: 3.5rem;
+  }
+  .topnav {
+    gap: .65rem;
+    font-size: .8rem;
+  }
+  .hero {
+    padding-top: 1.6rem;
+  }
+  .hero p {
+    font-size: .95rem;
+  }
+  .timing {
+    font-size: .78rem;
+    flex-wrap: wrap;
+  }
+  .cardtitle {
+    padding: .9rem .8rem 0;
+  }
+  .cardtitle h2 {
+    font-size: 1.25rem;
+  }
+  .cardtitle p {
+    font-size: .77rem;
+  }
+  .chartfooter {
+    padding: .2rem .8rem .7rem;
+  }
+  .bench {
+    margin-top: .8rem;
+    gap: 1rem;
+  }
+  .loadcard {
+    grid-template-columns: 1fr;
+    gap: .6rem;
+    margin-top: .6rem;
+  }
+  .editor {
+    padding: .9rem;
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  }
+  .fieldtop {
+    font-size: .82rem;
+    flex-wrap: wrap;
+  }
+  .barrow {
+    grid-template-columns: 5rem 1fr 4.8rem;
+  }
+  .axisresult b {
+    font-size: .82rem;
+  }
+  .studytable th,
+  .studytable td {
+    padding: .42rem .25rem;
+  }
+  .topnav .online {
+    display: none;
+  }
+  .legend {
+    gap: .55rem;
+  }
+  .legend span {
+    gap: .25rem;
+  }
+  .results {
+    gap: .3rem;
+  }
+  .viewlabel select {
+    max-width: 6rem;
+  }
+}
+#study {
+  max-width: 61rem;
+}
+#study > p + p,
+.studyblock {
+  margin-top: .8rem;
+}
+.studyblock {
+  padding-top: .8rem;
+}
+.studyblock h3,
+#study .more h3 {
+  margin-bottom: .35rem;
+}
+#study .more h3 {
+  margin-top: .85rem;
+}
+#study .more .more {
+  border-bottom: 0;
+  margin-left: .45rem;
+}
+#study > .small {
+  margin-top: 1rem;
+}
+@media (max-width:500px) {
+  .chartfooter {
+    column-gap: .45rem;
+    row-gap: .45rem;
+  }
+  .chartfooter .legend {
+    width: 100%;
+  }
+  .chartfooter .viewlabel select {
+    max-width: 8.7rem;
+  }
+  .chartfooter .small {
+    font-size: .72rem;
+  }
+  .topnav {
+    gap: .7rem;
+  }
+}
+#support {
+  margin-top: .35rem;
+  font-size: .76rem;
+}

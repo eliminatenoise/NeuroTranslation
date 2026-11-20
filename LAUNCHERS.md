@@ -150,3 +150,7 @@ For the separate elbow experiment, [open the viewer](https://eliminatenoise.gith
 ## Forecast a fixed pedal’s next reading
 
 [Open the interactive forecast](https://eliminatenoise.github.io/NeuroTranslation/pedal-load/) or [download the offline reader](docs/pedal-load-offline.zip). Extract the folder and use its Windows, macOS or Linux launcher. For command-line predictions, extract the [Python model](models/pedal-load-model.zip) and run the matching launcher inside. Python 3 and NumPy are required. Its default input is an invented example. [Try the shared movement model](https://eliminatenoise.github.io/NeuroTranslation/shared-pedal-load/) · [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/pedal-load/)
+
+## Forecast the right heel and the force plate
+
+[Open the paired forecast](https://eliminatenoise.github.io/NeuroTranslation/heel-and-force/) or [download the offline reader](docs/heel-and-force-offline.zip). Extract the folder and open its launcher for Windows, macOS or Linux. For command-line predictions, the [model download](models/heel-and-force-model.zip) has its own three launchers and requires Node.js. Each launcher runs the fitted joint network on an invented input. [Try NeuroTranslate 0.0](https://eliminatenoise.github.io/NeuroTranslation/shared-heel-and-force/) · [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/heel-and-force/)

@@ -465,3 +465,7 @@ After its first five fits, all in the table, the general model learned two datas
 ## Whose recordings these are
 
 Every dataset, who made it, its licence and the credit it is owed: [docs/RIGHTS.md](../docs/RIGHTS.md). The newer studies' datasets are there too.
+
+## The heel and the force plate
+
+A tenth of a second after the cutoff, where did the right heel marker move and what load did the plate under that foot measure? Eight people supplied 53 paired instants in 16 recordings. The joint Transformer missed the heel endpoint by 1.156 mm and the plate by 92.36 N on average. The separately trained specialists missed by 1.183 mm and 93.73 N. The participant-bootstrap intervals for both differences crossed zero. Six of the same people supplied 31 more instants in ten later recordings. Both intervals again crossed zero. Neither assessment established that adding muscle activity met the prespecified benefit criteria. [All methods and results](../models/heel-and-force/aggregate.json) · [Study and movement-model comparison](https://eliminatenoise.github.io/NeuroTranslation/papers/heel-and-force/)

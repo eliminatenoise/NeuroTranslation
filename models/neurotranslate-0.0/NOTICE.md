@@ -45,3 +45,5 @@ The back-rotation study uses the CC BY 4.0 recordings from Gracia Laso, Iáñez,
 The muscle-tracking study uses AnkleImage from Zhang and colleagues under CC BY 4.0. [Dataset](https://doi.org/10.6019/S-BIAD1482) · [Licence](muscle_tracking/CC-BY-4.0.txt).
 
 The Task 1 fixed-pedal recordings are part of AnkleImage, Zhang and colleagues, CC BY 4.0. [Source dataset](https://doi.org/10.6019/S-BIAD1482) · [Licence](pedal_load/CC-BY-4.0.txt).
+
+The heel and force study uses the walking recordings of Schreiber and Moissenet, version 8, CC BY 4.0. [Original data](https://doi.org/10.6084/m9.figshare.7734767.v8) · [Licence](heel_force/CC-BY-4.0.txt).

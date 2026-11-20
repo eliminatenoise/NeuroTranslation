@@ -1,0 +1,72 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where will the heel go? · NeuroTranslate 0.0</title>
+<style>
+*{box-sizing:border-box}html{color:#192f33;background:#f4f4ef;font:17px/1.5 system-ui,sans-serif}body{max-width:1080px;margin:auto;padding:clamp(16px,4vw,52px)}h1{font-size:clamp(2.4rem,6vw,4.8rem);line-height:1.02;letter-spacing:-.055em;max-width:800px;margin:.4em 0 .3em}h2{font-size:1.48rem;margin-bottom:.45em}p{max-width:75ch}a{color:#17645e}.study{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,1.5fr);gap:1rem;margin:1.6rem 0}.box{border:1px solid #b1c1bc;border-radius:12px;padding:clamp(14px,3vw,26px);background:#fff}label{display:block;font-weight:650;margin:.7rem 0 .25rem}select,input{width:100%;accent-color:#146f69;font:inherit}select{padding:.42rem;color:#192f33;background:white;border-radius:5px}output,td{text-align:right;font-variant-numeric:tabular-nums}.measure{display:grid;gap:8px;grid-template-columns:2fr 1fr}.metric{border-bottom:2px solid #187369;padding:.4em 0}.metric:last-child{border-color:#a5522b}.metric b{font-size:clamp(1.1rem,2.4vw,1.65rem);display:block}canvas{width:100%;height:180px;display:block}table{width:100%;border-collapse:collapse;font-size:.94rem}td,th{border-bottom:1px solid #cdd4cd;padding:.45em;text-align:left}td+td,th+th{text-align:right}caption{text-align:left;margin:.7em 0}.note{font-size:.9em;color:#42565a}footer{margin:1.8rem 0}button{font:inherit;cursor:pointer}input{cursor:pointer}@media(max-width:680px){.study{grid-template-columns:1fr}.measure{grid-template-columns:1fr}td,th{padding:.35em .15em}body{padding:15px}}
+</style>
+<main><header><p>NeuroTranslate 0.0 · Walking</p><h1>Where will the heel go?</h1><p>A camera follows a skin marker on a walker’s right heel. A plate in the floor measures the upward force under that foot. Can the same model forecast both readings a tenth of a second ahead?</p></header>
+<section class="study"><div class="box"><h2>Try an invented step</h2>
+<label for="method">Forecast method</label><select id="method"></select>
+<label for="phase">Time since right foot strike</label><select id="phase"><option value="14">140 ms</option><option value="24" selected>240 ms</option><option value="34">340 ms</option><option value="44">440 ms</option></select>
+<label for="travel">Added forward travel over 23 frames <output id="tvalue">0 mm</output></label><input type="range" min="-8" max="8" step=".5" value="0" id="travel">
+<label for="muscle">Shin muscle signal <output id="mvalue">1×</output></label><input id="muscle" type="range" min="0" max="3" step=".1" value="1">
+<p class="note">Both sliders change an invented step. Moving the muscle slider scales the invented signal over the front of the shin.</p></div>
+<div class="box"><h2>Forecast at 100 ms</h2><div aria-live="polite" class="measure"><div class="metric">Heel change in lab X, Y, Z<b id="xyz"></b></div><div class="metric">Upward plate force<b id="force"></b></div></div><canvas id="plot" width="660" height="180" aria-label="Invented past heel height and forecast change against forward position"></canvas>
+<p class="note">The solid line follows the invented heel history in the X and Z directions. The dotted line reaches the predicted endpoint. The plate reading is the total upward load beneath the foot.</p></div></section>
+<section class="box"><h2>How close were the forecasts in walking records?</h2><label for="cohort">Recordings</label><select id="cohort"><option value="1">Original assessment repeats</option><option value="2">Later repeats from the same assessment roster</option><option value="0">Development · each person scored outside their fitting fold</option></select><p id="support"></p>
+<table><caption>Average error. Smaller is closer to the measurement.</caption><thead><tr><th>Method</th><th>Heel (mm)</th><th>Plate (N)</th></tr></thead><tbody id="scores"></tbody></table><p id="finding"></p></section>
+<section><h2>What the two measurements can tell us</h2><p>The heel reading follows skin over bone. Electrodes on the skin measure electrical activity near eight leg muscles. The floor plate records contact force. Each measures a different part of the step. These recordings cannot say how much force one muscle produced.</p><p>The compressed model uses two learned numbers to correct its four outputs. The unrestricted model can fit a separate correction for each output. Both start with the same movement encoder. The two simpler plate comparisons get an extra measurement, the force already on the plate. Here the example uses invented earlier readings of 500 and 470 newtons.</p>
+<p>The source researchers filtered their signals using samples on both sides of each instant. The 100 ms forecast is measured on their processed recording clock. These errors describe offline walking records.</p></section><footer><a href="https://eliminatenoise.github.io/NeuroTranslation/heel-and-force/">Compare the separately trained Transformer</a> · <a href="https://eliminatenoise.github.io/Interoceptomics/heel-and-force/">See a recorded step in 3D</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/papers/heel-and-force/">Read the paper</a> · <a href="https://doi.org/10.6084/m9.figshare.7734767.v8">Original walking recordings</a></footer></main>
+<script id="payload" type="application/json">@@DATA@@</script><script>
+'use strict';
+@@ENCODER@@
+const pack=JSON.parse(document.getElementById('payload').textContent),s=pack.model;
+const $=id=>document.getElementById(id);
+const labels={encoder_full_rank2:'Two shared factors · motion and muscle',encoder_full_unrestricted:'Unrestricted · motion and muscle',encoder_motion_rank2:'Two shared factors · motion',linear_motion:'Linear · motion',linear_full:'Linear · motion and muscle',random_full_rank2:'Untrained encoder · fitted output',hold_heel:'Keep heel still · typical load',velocity_heel:'Continue recent velocity · typical load',recent_heel:'Repeat recent travel · typical load',force_hold:'Earlier plate reading · repeat heel travel',force_trend:'Earlier plate trend · repeat heel travel'};
+for(const [key,label] of Object.entries(labels)) $('method').add(new Option(label,key));
+function rowTimes(row,weights){return weights[0].map((_,j)=>row.reduce((a,v,i)=>a+v*weights[i][j],0));}
+function motionForecast(mode,markers,emg,offset,prior=[500,470]){
+  const delta=markers[23][0].map((v,j)=>v-markers[13][0][j]),out=[...delta,s.phase_medians[offset]];
+  if(mode==='hold_heel')return [0,0,0,out[3]];
+  if(mode==='velocity_heel')return [...markers[23][0].map((v,j)=>(v-markers[17][0][j])*10/6),out[3]];
+  if(mode==='recent_heel')return out;
+  if(mode==='force_hold'||mode==='force_trend'){out[3]=mode==='force_hold'?prior[0]:2*prior[0]-prior[1];return out;}
+  const standardized=emg.map((e,k)=>{
+    const first=markers[6*k],last=markers[6*k+5];
+    const token=[...last.flatMap((m,i)=>m.map((v,j)=>v-first[i][j])),...last[1].map((v,j)=>v-last[0][j]),...e.map(Math.log1p)];
+    return token.map((v,i)=>(mode.includes('motion')&&i>=9)?0:(v-s.token_mean[i])/s.token_scale[i]);
+  });
+  const features=[...standardized.flat(),...delta,...[14,24,34,44].map(t=>Number(t===offset))];
+  if(!mode.startsWith('linear')){
+    const weights=mode.startsWith('random')?pack.random:pack.trained;
+    features.push(...encode(weights,standardized.map(v=>linear(weights,'project',v.slice(0,6)))));
+  }
+  const fit=s.fits[mode], z=features.map((v,i)=>(v-fit.mean[i])/fit.scale[i]);
+  const correction=fit.decoder?rowTimes(rowTimes(z,fit.factors),fit.decoder):rowTimes(z,fit.coefficients);
+  return out.map((v,i)=>v+s.target_mean[i]+s.target_scale[i]*correction[i]);
+}
+function draw(markers,pred){
+  const c=$('plot'),ctx=c.getContext('2d'),w=c.clientWidth,h=180,ratio=window.devicePixelRatio||1;
+  c.width=Math.max(1,Math.round(w*ratio));c.height=h*ratio;ctx.scale(ratio,ratio);
+  const a=markers.map(row=>[row[0][0],row[0][2]]),last=a.at(-1),target=[last[0]+pred[0],last[1]+pred[2]];
+  const paths=[...a,target], x=paths.map(p=>p[0]),z=paths.map(p=>p[1]),scale=Math.min((w-52)/Math.max(3,Math.max(...x)-Math.min(...x)),(h-56)/Math.max(3,Math.max(...z)-Math.min(...z)));
+  const transform=p=>[w/2+(p[0]-(Math.min(...x)+Math.max(...x))/2)*scale,h/2-(p[1]-(Math.min(...z)+Math.max(...z))/2)*scale];
+  function line(pts,style,dash){ctx.beginPath();ctx.strokeStyle=style;ctx.lineWidth=3;ctx.setLineDash(dash);pts.forEach((p,i)=>{const [x,y]=transform(p);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.stroke();}
+  line(a,'#17645e',[]);line([last,target],'#984c26',[4,4]);ctx.beginPath();ctx.arc(...transform(target),4,0,2*Math.PI);ctx.fillStyle='#984c26';ctx.fill();ctx.fillStyle='#44565a';ctx.font='13px sans-serif';ctx.fillText('Z ↑   X →',12,h-5);
+}
+function update(){
+ const travel=Number($('travel').value),gain=Number($('muscle').value);
+ const markers=pack.example.markers_mm.map((row,t)=>row.map(m=>[m[0]+travel*t/23,m[1],m[2]]));
+ const emg=pack.example.emg_rms_uv.map(e=>e.map((v,j)=>j===0?v*gain:v));
+ const y=motionForecast($('method').value,markers,emg,Number($('phase').value));
+ $('xyz').textContent=y.slice(0,3).map(v=>v.toFixed(2)).join(', ')+' mm';$('force').textContent=y[3].toFixed(1)+' N';
+ $('tvalue').textContent=travel+' mm';$('mvalue').textContent=gain+'×';draw(markers,y);
+}
+function results(){
+ const r=pack.reports[Number($('cohort').value)],m=r.main;
+ $('support').textContent=m.people+' people contributed '+m.repeats+' recordings and '+m.windows+' paired observations. Each person receives equal weight.';
+ $('scores').replaceChildren(...Object.entries(labels).map(([k,label])=>{const row=document.createElement('tr');
+ for(const v of [label,m.methods[k].heel_error_mm.toFixed(2),m.methods[k].force_error_n.toFixed(1)]){const c=document.createElement('td');c.textContent=v;row.append(c);}return row;}));
+ $('finding').textContent='Compressing the output missed the prespecified accuracy requirement. A second comparison tested muscle signals on '+r.same_phase_donor_support.windows+' observations with another recording at the same stage of the step. The correct signal did not meet the requirement for improving both forecasts.';
+}
+['method','phase','travel','muscle'].forEach(id=>$(id).addEventListener('input',update));$('cohort').addEventListener('change',results);window.addEventListener('resize',update);results();update();
+</script></html>
