@@ -134,3 +134,7 @@ For the separate elbow experiment, [open the viewer](https://eliminatenoise.gith
 [Open the reader](https://eliminatenoise.github.io/NeuroTranslation/scalp-forecast/) or [download its offline version](docs/scalp-forecast-offline.zip). Extract the ZIP and open the launcher for Windows, macOS or Linux, or open **index.html**. Change the movement cue, then switch the recordings the model can use. The recorded test results appear beneath the invented example.
 
 [Download the fitted Transformer](models/scalp-forecast-model.zip) to run a forecast with Node.js or Python and NumPy. [Open the shared model](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#early-signals) to try an adjustment for activity shared with the eye electrodes. Its [offline browser](models/movement-browser.zip) also includes the earlier movement experiments. [Read the illustrated study](https://eliminatenoise.github.io/NeuroTranslation/papers/scalp-forecast/)
+
+## Forecast surface voltage at the neck
+
+[Open the Transformer](https://eliminatenoise.github.io/NeuroTranslation/cervical-forecast/) or [download the offline reader](docs/cervical-forecast-offline.zip). Extract the folder and use its Windows, macOS or Linux launcher, or open `index.html`. The [model package](models/cervical-forecast-model.zip) has a separate launcher for each system that runs a synthetic prediction with Python and NumPy. [Try the second model](https://eliminatenoise.github.io/NeuroTranslation/neck-voltage/) · [Study](https://eliminatenoise.github.io/NeuroTranslation/papers/cervical-forecast/)
