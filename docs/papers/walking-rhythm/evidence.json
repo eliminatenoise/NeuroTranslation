@@ -254,5 +254,356 @@
     "results_path": "models/knee-stride/external-optical/results.json",
     "results_sha256": "e36a2566f060654187991a6c6b5c5b38b0cfbc521ab3802b5c3f33d213905765",
     "metric": "Equal-person mean absolute error across left and right knee angles, degrees. Signed paired differences in this JSON are candidate error minus comparator error; the text reports reductions, reversing their sign."
+  },
+  "knee_moment": {
+    "source_attribution": "Reznick E, Embry KR, Neuman R, Bolívar E, Fey NP and Gregg RD (2021). Human lower-limb kinematics and kinetics during continuously varying locomotion.",
+    "source": "https://doi.org/10.6084/m9.figshare.14558181.v1",
+    "licence": "CC0 1.0",
+    "definition": "https://doi.org/10.6084/m9.figshare.14125814.v1",
+    "paper": "https://doi.org/10.1038/s41597-021-01057-9",
+    "aggregate_results_url": "https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0/load/results.json",
+    "aggregate_results_sha256": "98ecfe47355b3533c2e8f7aebd9542a4f78f9eb229b0125d7dd2359d59910f5d",
+    "design_url": "https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0/load/METHOD.md",
+    "target": "Bilateral sagittal net internal knee moment from inverse dynamics, positive towards flexion. N·m/kg at frame t+25, 100 Hz stored clock.",
+    "scoring": "Equal weights for knees and for people. Primary fit had access to 400 prior angle frames per cutoff. Privileged comparison has earlier reconstructed moments. Held angles appeared in the previous angle study, held moments remained closed until fit.",
+    "training": {
+      "people": [
+        "AB01",
+        "AB02",
+        "AB03",
+        "AB04",
+        "AB05",
+        "AB06",
+        "AB07"
+      ],
+      "windows_by_person": [
+        515,
+        517,
+        517,
+        498,
+        516,
+        480,
+        516
+      ],
+      "windows": 3559
+    },
+    "evaluation": {
+      "scope": "Held mechanical outcomes of three people whose earlier optical angle outcomes were previously studied.",
+      "people": [
+        "AB08",
+        "AB09",
+        "AB10"
+      ],
+      "windows": 1207,
+      "per_person": [
+        {
+          "person": "AB08",
+          "windows": 183,
+          "eligibility": {
+            "candidates": 517,
+            "bad_angle_history": 328,
+            "bad_target": 334,
+            "bad_target_after_angle_gate": 6
+          },
+          "right_left_mae": {
+            "mean": [
+              0.14916244063400866,
+              0.14858454108662267
+            ],
+            "ridge": [
+              0.17438579079414437,
+              0.09808645999645357
+            ],
+            "shared": [
+              0.17411452150105403,
+              0.09843665878428781
+            ],
+            "scrambled": [
+              0.1680491035141686,
+              0.10266970880193847
+            ],
+            "trained": [
+              0.11906751468244667,
+              0.10132296802840192
+            ],
+            "train_walker_match": [
+              0.10412930721311477,
+              0.08925445695628413
+            ]
+          },
+          "past_moment_windows": 183,
+          "right_left_mae_with_past_measurements": {
+            "mean": [
+              0.14916244063400866,
+              0.14858454108662267
+            ],
+            "ridge": [
+              0.17438579079414437,
+              0.09808645999645357
+            ],
+            "shared": [
+              0.17411452150105403,
+              0.09843665878428781
+            ],
+            "scrambled": [
+              0.1680491035141686,
+              0.10266970880193847
+            ],
+            "trained": [
+              0.11906751468244667,
+              0.10132296802840192
+            ],
+            "train_walker_match": [
+              0.10412930721311477,
+              0.08925445695628413
+            ],
+            "hold_past_moment": [
+              0.18714047103825143,
+              0.19821084101639352
+            ],
+            "replay_past_moment": [
+              0.08608519218579236,
+              0.09986216203825142
+            ]
+          }
+        },
+        {
+          "person": "AB09",
+          "windows": 517,
+          "eligibility": {
+            "candidates": 517,
+            "bad_angle_history": 0,
+            "bad_target": 0,
+            "bad_target_after_angle_gate": 0
+          },
+          "right_left_mae": {
+            "mean": [
+              0.12278279440430101,
+              0.12327877195306236
+            ],
+            "ridge": [
+              0.07803454544922893,
+              0.07381036066025888
+            ],
+            "shared": [
+              0.07579721262147819,
+              0.10189798543149735
+            ],
+            "scrambled": [
+              0.08727959825120693,
+              0.10148253342867372
+            ],
+            "trained": [
+              0.06890505366797904,
+              0.09194681651264965
+            ],
+            "train_walker_match": [
+              0.0748072012940039,
+              0.07939808224371381
+            ]
+          },
+          "past_moment_windows": 517,
+          "right_left_mae_with_past_measurements": {
+            "mean": [
+              0.12278279440430101,
+              0.12327877195306236
+            ],
+            "ridge": [
+              0.07803454544922893,
+              0.07381036066025888
+            ],
+            "shared": [
+              0.07579721262147819,
+              0.10189798543149735
+            ],
+            "scrambled": [
+              0.08727959825120693,
+              0.10148253342867372
+            ],
+            "trained": [
+              0.06890505366797904,
+              0.09194681651264965
+            ],
+            "train_walker_match": [
+              0.0748072012940039,
+              0.07939808224371381
+            ],
+            "hold_past_moment": [
+              0.2047875211992262,
+              0.19316143802707922
+            ],
+            "replay_past_moment": [
+              0.042282938011605466,
+              0.03601905591102514
+            ]
+          }
+        },
+        {
+          "person": "AB10",
+          "windows": 507,
+          "eligibility": {
+            "candidates": 517,
+            "bad_angle_history": 0,
+            "bad_target": 10,
+            "bad_target_after_angle_gate": 10
+          },
+          "right_left_mae": {
+            "mean": [
+              0.16575375745980397,
+              0.16103790488289552
+            ],
+            "ridge": [
+              0.06964685506182952,
+              0.09172542267542677
+            ],
+            "shared": [
+              0.08255964715784939,
+              0.07856927870542735
+            ],
+            "scrambled": [
+              0.07599254329227154,
+              0.08543704782513263
+            ],
+            "trained": [
+              0.07579612873643472,
+              0.07541982197673833
+            ],
+            "train_walker_match": [
+              0.08565096048717953,
+              0.12913870683037476
+            ]
+          },
+          "past_moment_windows": 487,
+          "right_left_mae_with_past_measurements": {
+            "mean": [
+              0.16584215727372803,
+              0.16157948185960594
+            ],
+            "ridge": [
+              0.07034746302350653,
+              0.09280001083779782
+            ],
+            "shared": [
+              0.08308100711817099,
+              0.07934429089468983
+            ],
+            "scrambled": [
+              0.07618543666989105,
+              0.08553690526382868
+            ],
+            "trained": [
+              0.07608085000975191,
+              0.07571780077810934
+            ],
+            "train_walker_match": [
+              0.08737554457700213,
+              0.13039503723408624
+            ],
+            "hold_past_moment": [
+              0.2763829189938399,
+              0.25409806507186866
+            ],
+            "replay_past_moment": [
+              0.07941159428542097,
+              0.06341715665092403
+            ]
+          }
+        }
+      ]
+    },
+    "mean_person_mae_Nm_per_kg": {
+      "mean": 0.14510003507011568,
+      "ridge": 0.09761490577289034,
+      "shared": 0.10189588403359902,
+      "scrambled": 0.10348508918556532,
+      "trained": 0.08874305060077504,
+      "train_walker_match": 0.09372978583744514
+    },
+    "mean_person_mae_past_moment_subset": {
+      "mean": 0.1452050312018881,
+      "ridge": 0.09791077179356501,
+      "shared": 0.1021119460585297,
+      "scrambled": 0.10353388098828457,
+      "trained": 0.08884016727988975,
+      "train_walker_match": 0.09422660491970085,
+      "hold_past_moment": 0.2189635425577765,
+      "replay_past_moment": 0.06784634984716989
+    },
+    "paired_differences_Nm_per_kg": {
+      "trained_minus_ridge": {
+        "per_walker": [
+          -0.026040884039874673,
+          0.004503482035570439,
+          -0.005078163512041614
+        ],
+        "mean": -0.008871855172115284,
+        "wins": 2
+      },
+      "trained_minus_train_walker_match": {
+        "per_walker": [
+          0.013503359270724852,
+          0.003323293321455492,
+          -0.03178685830219061
+        ],
+        "mean": -0.004986735236670088,
+        "wins": 1
+      },
+      "shared_minus_ridge": {
+        "per_walker": [
+          3.946474737195893e-05,
+          0.012925145971743865,
+          -0.00012167593698977908
+        ],
+        "mean": 0.004280978260708682,
+        "wins": 1
+      },
+      "shared_minus_scrambled": {
+        "per_walker": [
+          0.0009161839846174025,
+          -0.005533466813452556,
+          -0.0001503326270637234
+        ],
+        "mean": -0.0015892051519662924,
+        "wins": 2
+      }
+    },
+    "trained_advantage": false,
+    "shared_encoder_advantage": false,
+    "checkpoint_sha256": "7a0c17c66049fba7812d0acf1392af21829c3c6528ace3667202c8091f97f8b4",
+    "parent_sha256": "4541317c4e5d7f08f24d221278a0f3fec6f9f9acb9c7ea17669ef28511c187fe",
+    "method_sha256": "c19fb4fe4c323c0bba559a8e03e92a7dc120704566a807b5dd3d2f351ce7c412",
+    "independent_gate_checks": {
+      "trained_vs_ridge_wins": 2,
+      "trained_vs_six_angle_matching_wins": 1,
+      "shared_vs_ridge_wins": 1,
+      "shared_vs_scrambled_wins": 2,
+      "trained_advantage": false,
+      "shared_advantage": false,
+      "n_people": 3,
+      "primary_cutoffs": 1207,
+      "restricted_cutoffs": 1187
+    },
+    "independent_additional_angle_reference": {
+      "definition": "Nearest matching movement from a training walker, using bilateral knee angles only.",
+      "primary_mean_mae": 0.09396208724059961,
+      "primary_by_person": {
+        "AB08": {
+          "right": 0.10705330333989072,
+          "left": 0.08282514329508193,
+          "both": 0.09493922331748633
+        },
+        "AB09": {
+          "right": 0.0940906476382978,
+          "left": 0.08003641516441004,
+          "both": 0.08706353140135392
+        },
+        "AB10": {
+          "right": 0.08071346442998019,
+          "left": 0.11905354957593692,
+          "both": 0.09988350700295856
+        }
+      }
+    },
+    "limitations": "Three walkers, one retrospective interval per person, with missing-data exclusions and overlapping cutoffs. Instantaneous joint contact force, muscle-specific forces, live preprocessing latency and performance on another cohort remain unresolved."
   }
 }

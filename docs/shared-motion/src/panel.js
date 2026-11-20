@@ -125,6 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function clearResults(message) {
     revision++;
+    byId("moment-results").hidden = true;
+    for (const id of ["moment-name", "moment-right", "moment-left", "moment-timing"]) byId(id).textContent = "";
     byId("knee-results").hidden = true;
     for (const id of ["knee-name", "knee-right", "knee-left", "knee-timing"]) byId(id).textContent = "";
     byId("angular-results").hidden = true;
@@ -255,10 +257,34 @@ document.addEventListener("DOMContentLoaded", () => {
     byId("status").textContent = "";
   }
 
+  async function showMoment(record, token) {
+    if (record?.domain !== "knee_moment" || !Array.isArray(record.frames) || Array.isArray(record.frames[0])) {
+      throw new Error("Supply one knee_moment walking history for this view.");
+    }
+    const result = await SharedMotion.forecastMovement(record);
+    if (token !== revision) return;
+    const [right, left] = result.internal_knee_moment_Nm_per_kg[0];
+    const method = Array.from(byId("moment-mode").options).find(option => option.value === result.mode);
+    byId("moment-name").textContent = method.text;
+    byId("moment-right").textContent = format(right, 5);
+    byId("moment-left").textContent = format(left, 5);
+    const cutoff = record.frames[399];
+    byId("moment-timing").textContent = "25 frames after cutoff " + cutoff + " (0.25 s at 100 Hz). The stride match spans " + result.period_frames[0] + " frames.";
+    byId("moment-results").hidden = false;
+    byId("status").textContent = "";
+  }
+
   async function runCustom() {
     clearResults("");
     const token = revision;
     try {
+      if (currentDomain() === "knee_moment") {
+        let record;
+        try { record = JSON.parse(byId("moment-input").value); }
+        catch { throw new Error("Paste the complete knee moment input or choose Show invented input."); }
+        await showMoment(record, token);
+        return;
+      }
       if (currentDomain() === "knee_angle") {
         let record;
         try { record = JSON.parse(byId("knee-input").value); }
@@ -298,28 +324,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const custom = isCustom();
     const angular = domain === "wrist_angle";
     const knee = domain === "knee_angle";
+    const moment = domain === "knee_moment";
     const recorded = source.value === "recorded";
     const forearm = source.value === "forearm";
+    byId("moment-controls").hidden = !moment;
+    byId("moment-custom").hidden = !custom;
+    byId("moment-example-method").hidden = custom;
+    byId("moment-study").hidden = !moment;
     byId("knee-controls").hidden = !knee;
     byId("knee-custom").hidden = !custom;
     byId("knee-example-method").hidden = custom;
     byId("knee-study").hidden = !knee;
-    byId("custom").hidden = knee || angular || !custom;
+    byId("custom").hidden = moment || knee || angular || !custom;
     byId("angular-custom").hidden = !angular || !custom;
     byId("angle-study").hidden = !angular;
-    byId("distance-study").hidden = angular || knee;
+    byId("distance-study").hidden = moment || angular || knee;
     byId("source-line").textContent = custom
       ? "Enter a history from one trial or recording that you have permission to use. The source clock and units must match this task."
       : recorded
         ? "Recorded camera positions from rat JS14. This is the first eligible training window, two seconds into W-track trip 55."
         : forearm ? "An invented half-second from the forearm correction example. It contains wrist angles and four forearm channels. No person supplied these measurements."
+        : moment ? "Four seconds of invented leg angles. This walking example has no measured future moment."
         : knee ? "Two invented mathematical waves show the input format. They do not come from a person. The example has no measured future angle."
         : angular ? "Invented wrist angles, forearm muscle activity and scalp voltages. All five forecasts use the same half-second."
           : domain === "rat" ? "Invented positions on a two-dimensional maze. There is no measured future endpoint."
             : "Invented right-wrist movement in three dimensions. There is no measured future endpoint.";
     if (!custom) {
       try {
-        if (knee) await showKnees({...data.kneeExample, mode:byId("knee-mode").value}, token);
+        if (moment) await showMoment({...data.momentExample, mode:byId("moment-mode").value}, token);
+        else if (knee) await showKnees({...data.kneeExample, mode:byId("knee-mode").value}, token);
         else if (angular) await compareAngles(forearm ? data.forearmExample : data.angleExample,token);
         else {
           const intervals = domain === "rat" && !recorded ? data.inventedRat : data.examples[domain].intervals;
@@ -328,7 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (e) { if (token === revision) clearResults(e.message); }
       return;
     }
-    if (knee) {
+    if (moment || knee) {
       clearResults("Supply the earlier frame numbers and angles to forecast the next quarter second.");
       return;
     }
@@ -370,6 +403,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   picker.addEventListener("change",selectDomain);
   source.addEventListener("change",selectInput);
+  byId("moment-mode").addEventListener("change", selectInput);
+  byId("moment-run").addEventListener("click", runCustom);
+  byId("moment-input").addEventListener("input", () => clearResults("Inputs changed. Run the forecast to use these angles."));
+  byId("moment-fill").addEventListener("click", () => {
+    byId("moment-input").value = JSON.stringify(data.momentExample);
+    clearResults("Run the forecast on these invented angles, or replace them with your own.");
+  });
   byId("knee-mode").addEventListener("change", selectInput);
   byId("knee-run").addEventListener("click", runCustom);
   byId("knee-input").addEventListener("input", () => clearResults("Inputs changed. Run the knee forecast to use these values."));
@@ -407,7 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (model.checkpointSha256 !== "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179") {
         throw new Error("The checkpoint differs from the one used for these comparisons.");
       }
-      if (model.movementCheckpointSha256 !== "4541317c4e5d7f08f24d221278a0f3fec6f9f9acb9c7ea17669ef28511c187fe") {
+      if (model.movementCheckpointSha256 !== "7a0c17c66049fba7812d0acf1392af21829c3c6528ace3667202c8091f97f8b4") {
         throw new Error("The movement checkpoint differs from the studied model.");
       }
       studyTable();

@@ -48,6 +48,12 @@ dd { margin:0; }
   .bar { display:none; }
   dl>div { grid-template-columns:1fr; gap:3px; }
 }
+@media screen and (max-width:415px) {
+  .sheet[aria-labelledby="mechanics"] { padding-left:12px; padding-right:12px; }
+  .sheet[aria-labelledby="mechanics"] table { font-size:14px; }
+  .sheet[aria-labelledby="mechanics"] th, .sheet[aria-labelledby="mechanics"] td { padding:5px 2px; }
+  .sheet[aria-labelledby="mechanics"] thead th { white-space:normal; }
+}
 @page { size:A4; margin:17mm 21mm 18mm;
   @bottom-left { content:"NeuroTranslation  /  Interoceptomics"; font:9pt "Liberation Sans",Arial,sans-serif; color:#4e6058; }
   @bottom-right { content:counter(page) " / " counter(pages); font:9pt "Liberation Sans",Arial,sans-serif; color:#4e6058; }
@@ -152,5 +158,25 @@ dd { margin:0; }
 <p>Reznick E, Embry K, Neuman R, Bolívar E, Fey N and Gregg R (2021). <i>Human lower-limb kinematics and kinetics during continuously varying locomotion.</i> We selected continuous level walking and scored the frozen model on the optical knee angles. <a href="https://doi.org/10.1038/s41597-021-01057-9">Acquisition</a> · <a href="https://doi.org/10.6084/m9.figshare.14558181.v1">Streaming dataset, CC0</a></p>
 <p>Try the <a href="https://eliminatenoise.github.io/NeuroTranslation/knee-motion/">knee forecast</a> or the <a href="https://eliminatenoise.github.io/NeuroTranslation/gait-rhythm/">rhythm comparison</a>. Source code and numerical results accompany the <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-motion">knee-angle study</a> and <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/gait-rhythm">gait-rhythm study</a>.</p>
 </footer>
+</section>
+<section class="sheet" aria-labelledby="mechanics">
+<p class="mast">Knee mechanics · A different target</p>
+<h2 id="mechanics">Can joint angles predict a knee’s turning moment?</h2>
+<p class="lead">A knee can keep bending while the muscles crossing it act to slow the bend. An angle tells us where the leg is. The net internal turning moment describes the combined turning effect of forces acting across the joint. How much of that can we recover from watching the walk?</p>
+<p>Reznick and colleagues combined optical motion capture with external forces to estimate each knee’s turning moment using inverse dynamics. Positive values act toward bending and negative values toward straightening. The unit is newton-metres per kilogram of body mass (N·m/kg). An individual muscle’s force and the contact force inside the knee would each require more information.</p>
+<h3>Four seconds of angles, two future moments</h3>
+<p>For the same ten optical walkers at nominally 0.8 m/s, we used the preceding 400 frames of both hip, knee and ankle angles to predict the two knee moments 25 frames later at 100 Hz. Seven walkers provided 3,559 training cutoffs. The other three walkers’ angles had appeared in the angle study. Their mechanical outcomes stayed closed until the fit was fixed.</p>
+<figure><figcaption>Table 4. Absolute error in later knee moments (N·m/kg)</figcaption>
+<table><thead><tr><th scope="col">Walker</th><th scope="col">Cutoffs</th><th scope="col">Linear fit</th><th scope="col">Matched walk¹</th><th scope="col">Task-trained²</th></tr></thead><tbody>
+<tr><th scope="row">AB08</th><td>183</td><td>0.13624</td><td>0.09669</td><td>0.11020</td></tr>
+<tr><th scope="row">AB09</th><td>517</td><td>0.07592</td><td>0.07710</td><td>0.08043</td></tr>
+<tr><th scope="row">AB10</th><td>507</td><td>0.08069</td><td>0.10739</td><td>0.07561</td></tr>
+<tr><th scope="row">Equal-person mean</th><td>1,207 total</td><td>0.09761</td><td>0.09373</td><td><strong>0.08874</strong></td></tr>
+</tbody></table>
+<p class="footnote">¹ Match motion to the training walkers’ steps. ² Train the encoder to correct the linear fit. The task-trained model beat the linear fit for two people and matching for one. The frozen shared encoder (0.10190) beat the linear fit for one and its scrambled counterpart (0.10349) for two. Both tests required wins against both controls in all three people. Neither passed.</p>
+</figure>
+<h3>What if we also know an earlier knee moment?</h3>
+<p>On the same 1,187 cutoffs with earlier moments available, copying the moment at the matching point of the previous stride scored <strong>0.06785 N·m/kg</strong>. The task-trained angle-only model scored 0.08884 and carrying the current moment forward scored 0.21896. Knowing the earlier mechanical outcome gave the stride match an input the angle-only model lacked.</p>
+<p class="footnote">One interval per walker supplied overlapping forecasts. AB08 retained 183 of 517 candidates after excluding zero or missing angles and outcomes. The rule can also discard a genuine zero. Speeds were scaled to leg length. AB10 lacks a separate command trace. Optical gap filling and smoothing can use later raw samples, leaving live latency unresolved. <a href="https://eliminatenoise.github.io/NeuroTranslation/knee-moment/">Try the moment forecast</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/load">Method and all scores</a> · <a href="https://doi.org/10.6084/m9.figshare.14125814.v1">Source units and fields</a></p>
 </section>
 </main></body></html>

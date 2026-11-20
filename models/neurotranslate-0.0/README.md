@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0 movement forecasts
 
+The same checkpoint now forecasts the turning moment about both knees from four seconds of joint angles. A new task-trained calculation improved average error, though the advantage varied across three test walkers. [Try the knee-moment reader](https://eliminatenoise.github.io/NeuroTranslation/knee-moment/) · [Model, units and results](load/README.md)
+
 Give the model four seconds of knee angles from one walker, a short wrist history or a movement record from a rat. Choose the input to match the measurement you have. The same checkpoint supplies all three tasks. For the knees, reusing the trained encoder gave 3.465° of error. Training a separate Transformer to correct stride replay gave 2.679° on the same previously studied walkers. [Compare both knee forecasts](https://eliminatenoise.github.io/NeuroTranslation/knee-stride/) · [Run the knee model](knee/README.md)
 
 ## Can a model that forecasts distance also forecast a wrist angle?

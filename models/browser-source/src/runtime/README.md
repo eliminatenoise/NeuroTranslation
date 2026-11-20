@@ -1,6 +1,6 @@
 # Forecast movement from one recording
 
-How far will a tracked point move? Where will a wrist point? Give the model one movement history and it returns the quantity that instrument measured.
+How far will a tracked point move? Where will a wrist point? Give the model one movement history and it returns a distance, an angle or an estimate of the turning moment at each knee.
 
 | `domain` | Recording and task | Forecast |
 | --- | --- | --- |
@@ -8,9 +8,22 @@ How far will a tracked point move? Where will a wrist point? Give the model one 
 | `rat` | JS14 camera positions while one rat ran a W-track | Straight-line displacement in 2D, one distance in centimetres |
 | `wrist_angle` | WristMotion v3, a person pointing with a supported right wrist | Absolute wrist extension and radial deviation in degrees, 128 stored ticks after the last observed angle |
 | `knee_angle` | Reconstructed right and left knee angles during treadmill walking at 0.5 m/s | Both flexion/extension angles in degrees, 15 stored frames later |
+| `knee_moment` | Six optical knee, hip and ankle angles during treadmill walking at a nominal 0.8 m/s | Signed right and left internal knee moments in N·m/kg, 25 stored frames later |
 | `rat_population` | Five W-track camera positions, optionally with spikes from dorsal CA1 and prefrontal cortex | Straight-line displacement in 2D, one distance in centimetres |
 
-The trained shared model uses the same four-token temporal encoder across five domains. Each recording has its own input and output. Each call uses the clock of its own recording. The rat population study paired camera and firing histories from that one clock. Supply one history per call. [Spatial recording and clock rules](SPATIAL-API.md) · [Source credits](NOTICE.md)
+The trained shared model uses the same four-token temporal encoder across the movement tasks. The task-trained moment correction has its own copy of that encoder. Each recording has its own input and output. Each call uses the clock of its own recording. The rat population study paired camera and firing histories from that one clock. Use one history per call for the older tasks. The knee moment reader also accepts batches. [Spatial recording and clock rules](SPATIAL-API.md) · [Source credits](NOTICE.md)
+
+## Forecast the turning moment at both knees
+
+Four seconds of earlier leg angles give five methods a chance to predict how hard the leg will turn at the knee a quarter second later. Run the invented example offline.
+
+```sh
+node predict.mjs knee-moment-example.json
+```
+
+Use the same record with `forecastMovement(record)` in a browser or ES module. Supply 400 consecutive nonnegative integer frame numbers below 2⁵³ and six angles in degrees per frame. Within each row the columns are right knee, left knee, right hip, left hip, right ankle and left ankle. The caller establishes that these come from one walking record at 100 Hz. The original gap rule excludes zero and nonfinite angles, which can exclude a genuine zero crossing.
+
+Set `domain` to `knee_moment` and choose `mean`, `ridge`, `shared`, `scrambled` or `trained` as the mode. Supply `frames` and `angles_deg`. In JavaScript you can use `anglesDeg` in place of `angles_deg`. For a batch, wrap both fields in lists of histories. Each entry in `internal_knee_moment_Nm_per_kg` contains a right/left pair, including for a single history. A positive moment acts towards flexion and a negative moment towards extension. `period_frames` contains the stride match for each window. The horizon is 25 frames on the stored 100 Hz clock. The reference moments were estimated from motion and ground forces. This test does not resolve the forces from individual muscles. [Invented input](knee-moment-example.json) · [Source and credits](NOTICE.md)
 
 ## Forecast two knee angles
 

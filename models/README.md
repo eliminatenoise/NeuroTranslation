@@ -12,6 +12,14 @@ The movement viewer compares right-wrist angles with different combinations of m
 
 On the same 549 forecast instants compared in the linear benchmark, the shared movement model had an average error of **2.805 cm** with movement alone and **2.778 cm** with correctly timed CA1 and prefrontal firing. Substituting firing from an earlier trip gave **2.804 cm**. Only one of three rats improved over both controls. A comparison with scrambled movement-encoder weights scored **2.763 cm** with firing. These results establish that the fitted readout uses the firing signal. They give no evidence here that pretraining improved this forecast. A lower average error can hide a worse result in an individual animal. [Study and per-animal results](neurotranslate-0.0/population/)
 
+## Predicting finger movement in a different person
+
+The five people had different recording layouts. We grouped contacts by the brain area named in the source, recorded which areas were missing, then trained on four people at a time. A model based on the cue and its timing still had the smallest average error in the fifth person. [Test the model](https://eliminatenoise.github.io/NeuroTranslation/finger-transfer/) · [Calibrations, fitted weights and results](finger-transfer/)
+
+## Predicting a knee's turning moment
+
+The shared checkpoint now takes six sagittal joint angles to estimate both knee moments in N·m/kg. On three test walkers, the task-trained model gave 0.08874 average error, the linear fit 0.09761 and motion matching 0.09373. Their ranking varied by person. [Run the model](https://eliminatenoise.github.io/NeuroTranslation/knee-moment/) · [Angle-only and earlier-moment comparisons](neurotranslate-0.0/load/)
+
 ## Predicting the five glove sensors
 
 How much will each finger move when the screen names one of them? In a single recording, the cue alone gave lower errors than a model that also received cortical activity. The target was the average size of the changes between four future glove readings. [Study and saved models](finger-motion/) · [Try the browser model](https://eliminatenoise.github.io/NeuroTranslation/finger-motion/) · [Complete offline download](finger-motion.zip)

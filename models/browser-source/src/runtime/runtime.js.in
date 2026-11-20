@@ -444,7 +444,29 @@
             cutoffFrame, periodFrames:result.period_frames, horizonStoredFrames:15, storedHz:60};
   }
 
+  __MOMENT_CALCULATION__
+
+  async function forecastMoment(record) {
+    // Snapshot before loading any weights. The caller can reuse its original arrays.
+    const input = structuredClone(record);
+    if (Object.hasOwn(input, 'anglesDeg')) {
+      if (Object.hasOwn(input, 'angles_deg')) throw new TypeError('Supply the angle history only once.');
+      input.angles_deg = input.anglesDeg;
+      delete input.anglesDeg;
+    }
+    const weights = {format:1, stats:await loadGroup('moment.stats')};
+    if (input.mode === 'shared') weights.shared = await loadGroup('spatial');
+    if (input.mode === 'scrambled' || input.mode === 'trained') {
+      weights[input.mode] = await loadGroup('moment.' + input.mode);
+    }
+    const result = kneeMoment.predict(input, weights);
+    // The mean method returns a slice of our typed tensor. Publish plain JSON arrays throughout.
+    result.internal_knee_moment_Nm_per_kg = result.internal_knee_moment_Nm_per_kg.map(pair => Array.from(pair));
+    return {domain:input.domain, mode:input.mode, unit:'N·m/kg', ...result};
+  }
+
   async function forecastMovement(record) {
+    if (record?.domain === 'knee_moment') return forecastMoment(record);
     if (record?.domain === 'knee_angle') return forecastKnee(record);
     if (record?.domain === 'rat_population') return forecastPopulation(record);
     if (record?.domain === 'wrist_angle') {

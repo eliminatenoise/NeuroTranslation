@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light"><title>The turning knee · NeuroTranslate 0.0</title>
+<style>__STYLE__</style></head>
+<body>
+<header><div class="wrap mast"><span class="brand">NeuroTranslate <span>0.0</span></span><a href="#study">Walking study ↓</a></div></header>
+<main class="wrap">
+<section class="intro"><h1>The turning knee</h1>
+<p>A knee can be straightening while the muscles and tissues around it pull toward bending. How much can four seconds of leg angles tell us about that turning effect a quarter of a second later?</p></section>
+<div class="workbench">
+<section class="card input-panel" aria-labelledby="history-title">
+<div class="panel-head"><h2 id="history-title">Leg angle history</h2><select id="joint" aria-label="Joint shown in angle history"><option value="0">Knees</option><option value="2">Hips</option><option value="4">Ankles</option></select></div>
+<div class="legend"><span class="key r">Right</span><span class="key l">Left</span><span id="source-flag">Invented walk</span></div>
+<canvas id="angles" role="img" aria-label="Right and left joint angles in degrees over the four seconds of input"></canvas>
+<p class="foot" id="angle-caption"></p>
+<div class="controls"><label for="phase">Where the history ends <output id="phase-out" for="phase">0% of cycle</output></label>
+<input id="phase" type="range" min="0" max="99" step="1" value="0">
+<p class="foot" id="phase-help">Move through one cycle of an invented walk. Each stop supplies a new history of both knees, hips and ankles.</p></div>
+<details class="file-controls"><summary>Use a local angle history</summary>
+<p>Open one 400-frame JSON record to run the same forecast on your angles. Your file stays in this browser.</p>
+<div class="file-buttons"><label class="button" for="file">Open JSON</label><input id="file" type="file" accept=".json,application/json"><button id="save" type="button">Save invented example</button><button id="reset" type="button" hidden>Return to invented walk</button></div>
+<p class="foot" id="message" role="status"></p></details>
+</section>
+<section class="card output-panel" aria-labelledby="moment-title">
+<h2 id="moment-title">Knee moment</h2>
+<p class="time">Forecast at <strong>+25 frames</strong> <span>·</span> 0.25 s at 100 Hz</p>
+<label for="mode">Forecast method</label><select id="mode">
+<option value="trained">Task-trained Transformer</option><option value="ridge">Linear model on angles</option><option value="shared">Frozen movement encoder</option><option value="scrambled">Shuffled encoder weights</option><option value="mean">Training mean</option></select>
+<div id="readouts" aria-live="polite" aria-atomic="true"></div>
+<div class="axis-caption"><span>← Extension (−)</span><span>Flexion (+) →</span></div>
+<p class="foot" id="lag"></p><p class="sign">Each value is a net internal turning moment in newton-metres per kilogram of body mass. Its sign gives the direction of the turning effect. The angle trace gives the position of the joint.</p>
+</section>
+</div>
+<section id="study" aria-labelledby="study-title"><h2 id="study-title">What happened on real walks?</h2>
+<div class="study-grid"><div><p>Seven people supplied the training walks. Three others supplied the test moments, across 1,207 overlapping windows of level treadmill walking at a nominal 0.8 m/s. An earlier study examined these same people's knee angles.</p>
+<p>The task-trained Transformer had the lowest average error from angles alone. It beat the linear model for two of the three people and beat matching to a training walker for one. The frozen encoder also fell short of beating both the linear and shuffled controls for every person.</p>
+<p>What if you already know the moment from an earlier stride? On the 1,187 windows with the required earlier measurements, replaying the earlier moment gave <strong>0.0678 N·m/kg</strong> error. The trained model gave <strong>0.0888</strong> on those same windows.</p></div>
+<div class="table-wrap"><table><caption>Mean absolute error, N·m/kg</caption><thead><tr><th scope="col">Angle-only method</th><th scope="col">All windows</th></tr></thead><tbody id="scores"></tbody></table>
+<p class="foot">Smaller is closer. Average the absolute error across both knees within each person, then give each person equal weight.</p></div></div>
+<p class="sources">The reference moments come from a model combining camera measurements with forces at the treadmill belts. They describe the combined turning effect across each knee. Individual muscle and joint contact forces remain unknown. The forecast targets later stored frames, and the live processing delay is unknown. <a href="https://doi.org/10.1038/s41597-021-01057-9">Acquisition study</a> · <a href="https://doi.org/10.6084/m9.figshare.14558181.v1">Original recordings</a></p></section>
+</main><footer class="wrap"><details><summary>Source credits and reuse</summary>__NOTICE__</details></footer>
+<script type="application/json" id="weights">__WEIGHTS__</script><script type="application/json" id="study-results">__SCORES__</script><script>__SCRIPTS__</script>
+</body></html>

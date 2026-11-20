@@ -1,7 +1,7 @@
 {
   "checkpoints": {
     "spatial": "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179",
-    "movement": "4541317c4e5d7f08f24d221278a0f3fec6f9f9acb9c7ea17669ef28511c187fe"
+    "movement": "7a0c17c66049fba7812d0acf1392af21829c3c6528ace3667202c8091f97f8b4"
   },
   "config": {
     "format": 1,
@@ -64,6 +64,21 @@
         "shared",
         "scrambled"
       ]
+    },
+    "knee_moment": {
+      "format": 1,
+      "sample_hz": 100,
+      "history_frames": 400,
+      "lead_frames": 25,
+      "input": [
+        "right_knee",
+        "left_knee",
+        "right_hip",
+        "left_hip",
+        "right_ankle",
+        "left_ankle"
+      ],
+      "units": "N m/kg"
     }
   },
   "groups": {
@@ -726,11 +741,411 @@
           "dtype": "<f4"
         }
       ]
+    },
+    "moment.stats": {
+      "bytes": 15632,
+      "sha256": "850b9a1fa230982ffd7d52f6c781c203768a8851c4b79ab19a022a8ef8bd88b6",
+      "tensors": [
+        {
+          "name": "bin_mean",
+          "shape": [
+            6
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "bin_sd",
+          "shape": [
+            6
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "ridge.bias",
+          "shape": [
+            2
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "ridge.coef",
+          "shape": [
+            97,
+            2
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "ridge.mean",
+          "shape": [
+            97
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "ridge.sd",
+          "shape": [
+            97
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "scrambled.bias",
+          "shape": [
+            2
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "scrambled.coef",
+          "shape": [
+            193,
+            2
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "scrambled.mean",
+          "shape": [
+            193
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "scrambled.sd",
+          "shape": [
+            193
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "shared.bias",
+          "shape": [
+            2
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "shared.coef",
+          "shape": [
+            193,
+            2
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "shared.mean",
+          "shape": [
+            193
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "shared.sd",
+          "shape": [
+            193
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "target_mean",
+          "shape": [
+            2
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "target_sd",
+          "shape": [
+            2
+          ],
+          "dtype": "<f8"
+        }
+      ]
+    },
+    "moment.trained": {
+      "bytes": 20936,
+      "sha256": "d93910c941fe58b8ec5dcd27ecc844b9198e952e3dcb73af2c814b8b0aea20dd",
+      "tensors": [
+        {
+          "name": "blocks.0.attention_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_out.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_out.weight",
+          "shape": [
+            24,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_in.bias",
+          "shape": [
+            48
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_in.weight",
+          "shape": [
+            48,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_out.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_out.weight",
+          "shape": [
+            24,
+            48
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.qkv.bias",
+          "shape": [
+            72
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.qkv.weight",
+          "shape": [
+            72,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "last_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "last_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "position",
+          "shape": [
+            4,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "project.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "project.weight",
+          "shape": [
+            24,
+            6
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "readout.bias",
+          "shape": [
+            2
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "readout.weight",
+          "shape": [
+            2,
+            24
+          ],
+          "dtype": "<f4"
+        }
+      ]
+    },
+    "moment.scrambled": {
+      "bytes": 20736,
+      "sha256": "bf2bc252ea464fd0d240a88f9bdbbbbeb9ee7ffab5c455273c5ca7c6edb53acf",
+      "tensors": [
+        {
+          "name": "blocks.0.attention_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_out.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_out.weight",
+          "shape": [
+            24,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_in.bias",
+          "shape": [
+            48
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_in.weight",
+          "shape": [
+            48,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_out.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_out.weight",
+          "shape": [
+            24,
+            48
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.qkv.bias",
+          "shape": [
+            72
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.qkv.weight",
+          "shape": [
+            72,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "last_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "last_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "position",
+          "shape": [
+            4,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "project.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "project.weight",
+          "shape": [
+            24,
+            6
+          ],
+          "dtype": "<f4"
+        }
+      ]
     }
   },
-  "pythonPredictorSha256": "b407e1dbff16476602cb891b90dda11574aaf1a90846e563aeee676abfec832f",
+  "pythonPredictorSha256": "3386297ff3555fd0024e8a39c4ffa9b3c24d79f707aa0758f1097c954c175096",
   "pythonCorrectionSha256": "753ce7469f3f9d956dd461763af4ff10415606b62cf3f451897a1c9eeb46031b",
   "pythonPopulationSha256": "a90b69e5346efe0fd91c1f89df16a570386c90a0b836062a309dfcb5679ae789",
   "kneeExportSha256": "4ee73623e94404a5115b5743fdab94095cc03cee1d986201d0379c74d5730f45",
+  "momentExportSha256": "b4062509f2cdf4cbe7e5ce968ebac54d9dcc47e9edf1978fdf9f3b51364c9884",
+  "pythonMomentSha256": "147cb3cc3975e88dea92746b5ed145d186f8121e5d202ccf81840e21a025c5f8",
   "encoding": "Original little-endian IEEE 754 bytes, C order, sorted tensor names per group."
 }

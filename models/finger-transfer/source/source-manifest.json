@@ -1,0 +1,493 @@
+{
+  "source": "Kai Joshua Miller. A library of human electrocorticographic data and analyses. Stanford Digital Repository, version 11.",
+  "catalog": "https://purl.stanford.edu/zk881ps0522.json",
+  "catalog_version": 11,
+  "catalog_response_sha256": "ff5e2227325e0f8615dfc7ea386b7785fc8b30e2fb49023d37ee1a924aceb799",
+  "catalog_privacy": "User agrees that, where applicable, content will not be used to identify or to otherwise infringe the privacy or confidentiality rights of individuals. Content distributed via the Stanford Digital Repository may be subject to additional license and use restrictions applied by the depositor.",
+  "license": "https://creativecommons.org/licenses/by-sa/4.0/legalcode",
+  "archive": "https://stacks.stanford.edu/file/druid:zk881ps0522/fingerflex.zip",
+  "archive_size": 580522436,
+  "archive_repository_sha1": "83acfe25c27da197db0feaf742d9c5f3f9ee99bf",
+  "zip_central_directory_sha256": "5f7fd76160dacfa4e52790a667fb5ab35afabe62e38cb01b796c9b628c6421cf",
+  "original_study": "https://doi.org/10.1371/journal.pcbi.1002655",
+  "data_descriptor": "https://doi.org/10.1038/s41562-019-0678-3",
+  "original_task_readme": {
+    "member": "fingerflex/README_fingerflex_dataset_notes.docx",
+    "sha256": "4426827c5181bd994a30b5230c046fba196e78ac03bad8210946ca05094929f4"
+  },
+  "original_region_codebook": {
+    "member": "fingerflex/call_subs_processing.m",
+    "sha256": "d726eeecbdcf75807b1b898ca32f3972aff5e2f2192b2ae914f2ac2e66e3258d"
+  },
+  "selection_sha256": "adb035242a082cd5a2f286bca63b5bd7c23a92d2889c019fd034420042c36f16",
+  "method_sha256": "cd65faff30d4071070d01d22eef0e8c4467613cfab0cb6ce031c9f2f11e68f2c",
+  "original_participant_split_sha256": "fed7021d3c13aaee8e1344d1f52652c54f82cce29aa73fe178962caa2c11865b",
+  "bp_prior_training_prefix_sha256": "57ea209841127b6cc04f2c03f8f6146f01b3e0235d169365d009cf3f9c643e9c",
+  "digit_order": [
+    "thumb",
+    "index",
+    "middle",
+    "ring",
+    "little"
+  ],
+  "target_source": "flex",
+  "stimulus_source": "cue",
+  "voltage_microvolts_per_count": 0.0298,
+  "grid_hz": 1000,
+  "glove_nominal_hz": 25,
+  "region_codes": {
+    "1": "dorsal M1",
+    "2": "rolandic (unspecified)",
+    "3": "dorsal S1",
+    "4": "ventral sensorimotor",
+    "6": "frontal, non-rolandic",
+    "7": "parietal, non-rolandic",
+    "8": "temporal",
+    "9": "occipital"
+  },
+  "members": {
+    "bp": {
+      "member": {
+        "name": "fingerflex/data/bp/bp_fingerflex.mat",
+        "local_header_offset": 6331,
+        "start": 6413,
+        "end": 58845098,
+        "crc32": "ee515565",
+        "size": 58929343,
+        "compressed_sha256": "b2905446cc76f2e28410160a239ba6a68aabe4151efe62f2f8f0e23bfef2e0b5",
+        "sha256": "b8222d13c15c97ec8590ed4b9ea180c639cac0b7c3e04bce178bb349f92be03a"
+      },
+      "working_id": "D01",
+      "release_rows": 610040,
+      "contacts": 46,
+      "administrative_prefix_end": 362000,
+      "admitted_end": 236000,
+      "hemisphere": "left",
+      "README_array_location": "frontoparietal",
+      "region_counts": {
+        "0": 4,
+        "1": 2,
+        "2": 1,
+        "3": 4,
+        "4": 5,
+        "6": 24,
+        "7": 6
+      },
+      "variable_names": [
+        "data",
+        "elec_regions",
+        "flex",
+        "brain",
+        "locs",
+        "cue"
+      ],
+      "phase_ms": 0,
+      "glove_ticks": 5900,
+      "all_five_columns_vary": true,
+      "crop_arrays": {
+        "ecog": {
+          "dtype": "int32",
+          "shape": [
+            236000,
+            46
+          ],
+          "sha256_c_order": "6bba419f53f575777ac53877218c1795314a6ab8c44780b042733dadc81947dc"
+        },
+        "flex": {
+          "dtype": "uint16",
+          "shape": [
+            236000,
+            5
+          ],
+          "sha256_c_order": "c11ff6ec8314cbf4c4ada7d33eb715a47028f72fd8446aa4131b2d491dfa2875"
+        },
+        "cue": {
+          "dtype": "uint8",
+          "shape": [
+            236000
+          ],
+          "sha256_c_order": "78683b53ba0cbb909c4147b2415b67804b5f5fdbd5541ae170f501ad35a94eeb"
+        },
+        "region_code": {
+          "dtype": "uint8",
+          "shape": [
+            46
+          ],
+          "sha256_c_order": "01f791f3168c8d0799feb6a59e373d1311f30fc2e5e3ea84f97a9420a727fd7a"
+        }
+      },
+      "complete_display_blank_pairs": {
+        "1": 11,
+        "2": 12,
+        "3": 14,
+        "4": 9,
+        "5": 11
+      },
+      "complete_calibration_pairs_by_cue": {
+        "1": 4,
+        "2": 3,
+        "3": 3,
+        "4": 2,
+        "5": 6
+      },
+      "unknown_region_contacts": 4,
+      "voltage_finite": true,
+      "all_sensor_values_finite": true
+    },
+    "cc": {
+      "member": {
+        "name": "fingerflex/data/cc/cc_fingerflex.mat",
+        "local_header_offset": 58850368,
+        "start": 58850450,
+        "end": 146307660,
+        "crc32": "213f5aca",
+        "size": 87584870,
+        "compressed_sha256": "711d5e128b8d650b94dc38a25f32118a343527468c27f36bcd92892ce7bf903b",
+        "sha256": "ef6f6e87d6ce9fbb3a1719838ad1fccc51a7b983b8cb61c1e3d0d0acab281248"
+      },
+      "working_id": "D02",
+      "release_rows": 610040,
+      "contacts": 63,
+      "administrative_prefix_end": 362000,
+      "admitted_end": 362000,
+      "hemisphere": "right",
+      "README_array_location": "frontotemporal",
+      "region_counts": {
+        "0": 14,
+        "1": 5,
+        "2": 1,
+        "3": 3,
+        "4": 7,
+        "6": 8,
+        "7": 23,
+        "9": 2
+      },
+      "variable_names": [
+        "data",
+        "elec_regions",
+        "flex",
+        "brain",
+        "locs",
+        "cue"
+      ],
+      "phase_ms": 0,
+      "glove_ticks": 9050,
+      "all_five_columns_vary": true,
+      "crop_arrays": {
+        "ecog": {
+          "dtype": "int32",
+          "shape": [
+            362000,
+            63
+          ],
+          "sha256_c_order": "c50e40dab7f002d7a7192a263180b6c23c7e717772fc463409706ae3d98bcc08"
+        },
+        "flex": {
+          "dtype": "uint16",
+          "shape": [
+            362000,
+            5
+          ],
+          "sha256_c_order": "bca8df6799306ebd7f7a4f3f231ba84701e5796019a1ace61817778682d9f03f"
+        },
+        "cue": {
+          "dtype": "uint8",
+          "shape": [
+            362000
+          ],
+          "sha256_c_order": "17fb745c167dfa60ee0f79879eff5efe81715853fa5b9129248b84e2dacc909d"
+        },
+        "region_code": {
+          "dtype": "uint8",
+          "shape": [
+            63
+          ],
+          "sha256_c_order": "eee08d37ae55cb24a2576965397a87e93e5c414c64d2a4b855546097f88b7d28"
+        }
+      },
+      "complete_display_blank_pairs": {
+        "1": 18,
+        "2": 22,
+        "3": 15,
+        "4": 18,
+        "5": 15
+      },
+      "complete_calibration_pairs_by_cue": {
+        "1": 3,
+        "2": 3,
+        "3": 7,
+        "4": 2,
+        "5": 3
+      },
+      "unknown_region_contacts": 14,
+      "voltage_finite": true,
+      "all_sensor_values_finite": true
+    },
+    "ht": {
+      "member": {
+        "name": "fingerflex/data/ht/ht_fingerflex.mat",
+        "local_header_offset": 146312711,
+        "start": 146312793,
+        "end": 235328746,
+        "crc32": "b15f8846",
+        "size": 89158640,
+        "compressed_sha256": "c0013a0d2d72db7749cb571307e5674034098614be3f147e9409bef57f0840e0",
+        "sha256": "ab0c08401599a637bf614d9eb8adc0eb7adeb0a0b0125808fd4bd52c73060106"
+      },
+      "working_id": "D03",
+      "release_rows": 610040,
+      "contacts": 64,
+      "administrative_prefix_end": 362000,
+      "admitted_end": 362000,
+      "hemisphere": "left",
+      "README_array_location": "parietal-temporal-occipital",
+      "region_counts": {
+        "0": 7,
+        "1": 3,
+        "3": 3,
+        "4": 3,
+        "7": 23,
+        "8": 18,
+        "9": 7
+      },
+      "variable_names": [
+        "data",
+        "elec_regions",
+        "flex",
+        "brain",
+        "locs",
+        "cue"
+      ],
+      "phase_ms": 0,
+      "glove_ticks": 9050,
+      "all_five_columns_vary": true,
+      "crop_arrays": {
+        "ecog": {
+          "dtype": "int32",
+          "shape": [
+            362000,
+            64
+          ],
+          "sha256_c_order": "f6c4a8e29958bf30b7ec6056a241b733134972042076e4bc680a4e1bf4ccfb63"
+        },
+        "flex": {
+          "dtype": "uint16",
+          "shape": [
+            362000,
+            5
+          ],
+          "sha256_c_order": "29f950a7249df986fd148a9f1bf94d83d7d10b7098613f5a14171da8a65ef978"
+        },
+        "cue": {
+          "dtype": "uint8",
+          "shape": [
+            362000
+          ],
+          "sha256_c_order": "31253d4f76b2d5dc59146d6abcb8b11ecd2380008dc352da70a7025928c21aab"
+        },
+        "region_code": {
+          "dtype": "uint8",
+          "shape": [
+            64
+          ],
+          "sha256_c_order": "7c8c796d17bde6aa19be4cba325356ae1e6741d39f78ac7eec6ca72bb93ba484"
+        }
+      },
+      "complete_display_blank_pairs": {
+        "1": 15,
+        "2": 18,
+        "3": 18,
+        "4": 17,
+        "5": 20
+      },
+      "complete_calibration_pairs_by_cue": {
+        "1": 4,
+        "2": 6,
+        "3": 2,
+        "4": 3,
+        "5": 3
+      },
+      "unknown_region_contacts": 7,
+      "voltage_finite": true,
+      "all_sensor_values_finite": true
+    },
+    "jc": {
+      "member": {
+        "name": "fingerflex/data/jc/jc_fingerflex.mat",
+        "local_header_offset": 235333944,
+        "start": 235334026,
+        "end": 289759475,
+        "crc32": "91f69889",
+        "size": 54514317,
+        "compressed_sha256": "f02432bb5221bdb0e9482efcc95fe5a5e54f5b16734f4c231ba5c23487e19123",
+        "sha256": "d764fc3ec03f3733eb82d8839ad568b098803c446ae26decd36982f555b7646d"
+      },
+      "working_id": "D04",
+      "release_rows": 530440,
+      "contacts": 47,
+      "administrative_prefix_end": 314240,
+      "admitted_end": 314240,
+      "hemisphere": "left",
+      "README_array_location": "frontal",
+      "region_counts": {
+        "0": 1,
+        "1": 4,
+        "2": 1,
+        "3": 2,
+        "4": 6,
+        "6": 24,
+        "7": 7,
+        "8": 2
+      },
+      "variable_names": [
+        "data",
+        "elec_regions",
+        "flex",
+        "brain",
+        "locs",
+        "cue"
+      ],
+      "phase_ms": 0,
+      "glove_ticks": 7856,
+      "all_five_columns_vary": true,
+      "crop_arrays": {
+        "ecog": {
+          "dtype": "int32",
+          "shape": [
+            314240,
+            47
+          ],
+          "sha256_c_order": "2b30a49cb93af4c4bd80b172ab5d45f54e35a6d68b4c3f4d23ac715db263e92b"
+        },
+        "flex": {
+          "dtype": "uint16",
+          "shape": [
+            314240,
+            5
+          ],
+          "sha256_c_order": "8b1bd3e4042fb12c1621fdf23b515fe3985c7803eff34960121b6a49e3a797e9"
+        },
+        "cue": {
+          "dtype": "uint8",
+          "shape": [
+            314240
+          ],
+          "sha256_c_order": "a5aefc35769410f0703c68944bdf91d19a67e1aee95dba17ed45db8d465ce411"
+        },
+        "region_code": {
+          "dtype": "uint8",
+          "shape": [
+            47
+          ],
+          "sha256_c_order": "9e5c9e1a00cedd3f5f4f7154031a05aadc3aa567cb3ccf98c06576f460739d39"
+        }
+      },
+      "complete_display_blank_pairs": {
+        "1": 14,
+        "2": 11,
+        "3": 22,
+        "4": 13,
+        "5": 16
+      },
+      "complete_calibration_pairs_by_cue": {
+        "1": 5,
+        "2": 4,
+        "3": 6,
+        "4": 2,
+        "5": 1
+      },
+      "unknown_region_contacts": 1,
+      "voltage_finite": true,
+      "all_sensor_values_finite": true
+    },
+    "jp": {
+      "member": {
+        "name": "fingerflex/data/jp/jp_fingerflex.mat",
+        "local_header_offset": 289764201,
+        "start": 289764283,
+        "end": 340271577,
+        "crc32": "234a4110",
+        "size": 50502113,
+        "compressed_sha256": "711ba2ea96652ecdada1b1bcfed51e0582ad237861713fa1217726a591b4118e",
+        "sha256": "3c077022eee8ce210f72958d6a815a4b340249ec0d90d477e7962f897b39e494"
+      },
+      "working_id": "D05",
+      "release_rows": 465840,
+      "contacts": 58,
+      "administrative_prefix_end": 275480,
+      "admitted_end": 275480,
+      "hemisphere": "left",
+      "README_array_location": "frontotemporal",
+      "region_counts": {
+        "0": 15,
+        "1": 7,
+        "4": 1,
+        "5": 1,
+        "6": 9,
+        "7": 7,
+        "8": 17,
+        "9": 1
+      },
+      "variable_names": [
+        "data",
+        "elec_regions",
+        "flex",
+        "brain",
+        "locs",
+        "cue"
+      ],
+      "phase_ms": 0,
+      "glove_ticks": 6887,
+      "all_five_columns_vary": true,
+      "crop_arrays": {
+        "ecog": {
+          "dtype": "int16",
+          "shape": [
+            275480,
+            58
+          ],
+          "sha256_c_order": "5532685bb86c22374733489192a64bbb9cbb1ad10ebbf098b062aa4c32330797"
+        },
+        "flex": {
+          "dtype": "uint16",
+          "shape": [
+            275480,
+            5
+          ],
+          "sha256_c_order": "06efed6e8988a05804c5fb5bae4b8b3ea8a8bd80dccd701c11269541a511dfa4"
+        },
+        "cue": {
+          "dtype": "uint8",
+          "shape": [
+            275480
+          ],
+          "sha256_c_order": "b213b024aa36df601c2ad5e5f7a8b5ee247bcd6eeabc0b468b3b1f8a0f5ac729"
+        },
+        "region_code": {
+          "dtype": "uint8",
+          "shape": [
+            58
+          ],
+          "sha256_c_order": "ab35188d5f10d2de2a5034f3cd15f0b8bfa1946e0e190a7d3c293ef53113b5ec"
+        }
+      },
+      "complete_display_blank_pairs": {
+        "1": 10,
+        "2": 19,
+        "3": 11,
+        "4": 12,
+        "5": 15
+      },
+      "complete_calibration_pairs_by_cue": {
+        "1": 2,
+        "2": 5,
+        "3": 3,
+        "4": 4,
+        "5": 4
+      },
+      "unknown_region_contacts": 16,
+      "voltage_finite": true,
+      "all_sensor_values_finite": true
+    }
+  }
+}

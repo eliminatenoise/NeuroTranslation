@@ -172,3 +172,9 @@ The NeuroTranslation paper's earlier studies, and the two simulated hands of the
 ## Fonts in the papers
 
 The four PDFs embed Noto Sans and Noto Sans Mono, and the two NeuroTranslation editions Fira Math as well, all under the SIL Open Font License 1.1. The licence texts travel with the papers: [credits and font licences](../papers/current/NOTICE.md). The seven font files are in the papers' source download.
+
+## Calibrated cortical transfer and knee turning moments
+
+The five-person model groups contacts from the Stanford FingerFlex release by the source's anatomical labels. The source-derived model weights and comparative results carry CC BY-SA 4.0. The archive's required ethics statement appears in the model methods, the browser companion and the finger-cue research note. [Full attribution and licences](../models/finger-transfer/RIGHTS.md)
+
+The Reznick optical kinematics and inverse-dynamics estimates used by the knee-moment study are CC0. The older shared checkpoint keeps its original source terms; training an additional readout does not change the original contributions. [Authors, source fields and units](../models/neurotranslate-0.0/load/SOURCE.md) · [Shared checkpoint licences](../models/neurotranslate-0.0/NOTICE.md)

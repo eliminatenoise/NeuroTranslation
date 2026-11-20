@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Does a cortical recording tell us how much a finger moves after the screen has named it? Three experiments with Stanford FingerFlex.">
+<title>What a finger cue can predict</title>
+<style>
+:root{color-scheme:light;--ink:#192839;--accent:#254d76;--line:#bccbd7;--muted:#485c6f}
+*{box-sizing:border-box}
+body{background:#edf1f4;color:var(--ink);margin:0;font:17px/1.48 "Liberation Sans",Arial,sans-serif}
+main{max-width:850px;margin:24px auto}
+.sheet{padding:44px 56px;background:white;margin:0 0 18px}
+h1,h2,h3,p,figure,figcaption,table{margin:0}
+h1,h2{line-height:1.09;letter-spacing:-.03em;margin:8px 0 14px}
+h1{font-size:clamp(2.4rem,6vw,3.25rem)}
+h2{font-size:clamp(1.9rem,4.6vw,2.4rem)}
+h3{font-size:1.16rem;margin:18px 0 5px;line-height:1.2}
+p+p{margin-top:8px}
+.mast,.foot,.sources{color:var(--muted)}
+.mast{color:var(--accent);font-size:.81rem;letter-spacing:.065em;text-transform:uppercase;font-weight:700}
+.byline{color:var(--muted);font-size:.87rem;margin:0 0 14px}
+.lead{font-size:1.15em;line-height:1.38}
+figure{margin:16px 0 12px}
+figcaption{font-weight:700;font-size:.95em;margin-bottom:5px}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.93em;line-height:1.27}
+thead{border-top:2px solid var(--accent);background:#edf3f7}
+th,td{padding:6px 5px;border-bottom:1px solid var(--line);text-align:right;vertical-align:middle}
+th:first-child,td:first-child{text-align:left}
+tbody th{font-weight:400}
+.foot,.sources{font-size:.86em;line-height:1.39}
+.foot{margin-top:7px}
+.sources{margin-top:14px;border-top:1px solid var(--line);padding-top:7px}
+.sources p+p{margin-top:4px}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:.12em}
+a:focus-visible{outline:3px solid var(--accent)}
+.download{float:right;font-size:.86em;letter-spacing:0;text-transform:none}
+.ethics{font-size:.89em;line-height:1.42}
+@media screen and (max-width:640px){main{margin:0}.sheet{margin:0;padding:28px 16px;border-bottom:1px solid var(--line)}table{font-size:.88em}th,td{padding:6px 3px}.download{display:block;float:none;margin:2px 0 0}}
+@media screen and (max-width:360px){.sheet{padding-left:12px;padding-right:12px}table{font-size:13.5px}th,td{padding-left:2px;padding-right:2px}}
+@page{size:A4;margin:16mm 19mm 17mm;@bottom-left{content:"NeuroTranslation  /  Brain2Body";font:9pt "Liberation Sans",Arial,sans-serif;color:#485c6f}@bottom-right{content:counter(page) " / " counter(pages);font:9pt "Liberation Sans",Arial,sans-serif;color:#485c6f}}
+@media print{body{background:white;font-size:11.3pt;line-height:1.37;print-color-adjust:exact}main{max-width:none;margin:0}.sheet{break-after:page;margin:0;padding:0}.sheet:last-child{break-after:auto}.download{display:none}.mast{font-size:9pt}.byline{font-size:9.8pt;margin-bottom:10pt}h1{font-size:34pt}h2{font-size:26pt}h3{font-size:13pt;margin:12pt 0 4pt}h1,h2{margin:5pt 0 10pt}table{font-size:.96em}th,td{padding:4.25pt 4pt}figure{margin:12pt 0 9pt}.sources{margin-top:10pt}.foot{font-size:9.8pt}}
+</style></head><body><main>
+<section class="sheet" aria-labelledby="title">
+<p class="mast">NeuroTranslation / Brain2Body <a class="download" href="finger-cues.pdf">Download PDF</a></p>
+<h1 id="title">What a finger cue can predict</h1>
+<p class="byline">@eliminatenoise · Research supplement · 21 November 2026</p>
+<p class="lead">The word <i>index</i> appears on a screen. You can already guess which finger will move. Can electrodes on the surface of the brain tell you how much the finger will move on this particular try?</p>
+<h3>Abstract</h3>
+<p>A glove recorded all five fingers while participants bent and straightened the named finger at their own pace. We tested three forecasts using electrical recordings from the cortical surface. In one person, carrying the last glove reading forward gave the closest estimate of the reading three ticks ahead. When past glove readings were withheld and the target became the size of future movements, the screen cue and clock beat the model that also read the electrodes. Across five separately calibrated people, both models did better with the correct trial’s signal than with an earlier one. Yet predicting the same amount of movement on two repetitions of a cue gave smaller errors in every person.</p>
+<h3>Experiment 1 · Where will the glove reading be?</h3>
+<p>One sensor on each finger measured bend in its own counts. Every 40 milliseconds the archived file supplies another glove reading. The first forecast asks for each finger’s value three ticks later, 120 ms on that clock. A linear model with a penalty on large weights (ridge regression) and a Transformer that learns which time points to weight saw four glove readings, the named finger and the elapsed display or blank-screen time. Their paired versions also saw electrical power in two frequency bands from 46 contacts.</p>
+<figure><figcaption>Table 1. Later finger readings in one person</figcaption>
+<table><thead><tr><th scope="col">Forecast of the value at +120 ms</th><th scope="col">Scaled mean error</th></tr></thead><tbody>
+<tr><th scope="row">Keep each finger’s last reading</th><td><strong>0.1774</strong></td></tr>
+<tr><th scope="row">Ridge with glove and cue / also with cortex</th><td>0.2502 / 0.2849</td></tr>
+<tr><th scope="row">Transformer with glove and cue / also with cortex</th><td>0.1868 / 0.2517</td></tr>
+</tbody></table><p class="foot">Error is the average absolute difference in sensor counts divided by each finger’s training-target standard deviation, then averaged across fingers. Smaller is closer.</p></figure>
+<p>In raw counts, carrying the last value forward missed the thumb by 19.26 on average and the index finger by 51.04. Adding cortical power raised ridge error on all 23 later trials. Its mean increase was 0.0347 (paired 95% interval 0.0240 to 0.0463). Replacing the real signal with an earlier trial of the same cue raised error by just 0.0043 (−0.0006 to 0.0090). Both comparisons needed a positive advantage for the real signal. Neither met that requirement. <a href="https://eliminatenoise.github.io/NeuroTranslation/finger-signals/">Try the value forecast</a></p>
+</section>
+<section class="sheet" aria-labelledby="movement">
+<p class="mast">One person · Movement magnitude</p>
+<h2 id="movement">How much movement follows the word?</h2>
+<p class="lead">A finger can bend and return to where it started. A forecast of its final position can miss the whole excursion. The second experiment changes both the measurement and what the model gets to know.</p>
+<h3>Experiment 2 · Withhold the past glove</h3>
+<p>Take four future readings at +40, +80, +120 and +160 ms. Suppose they read 100, 130, 130 and 115 counts. The three changes have magnitudes 30, 0 and 15. Their average is 15 counts per 40 ms step. We used this calculation for every finger. A static hand scores zero. Opening and closing both count as motion, so direction is lost.</p>
+<p>Each main model saw either the cue and clock, the cortical signals, or both. Only a separate glove-history comparison received past finger readings. The same 52 earlier trials trained the models and the same 23 later trials assessed them as in the first experiment. Those produced 3,536 and 1,564 forecast points respectively, with 34 points during each display and 34 during each following blank. Overlapping windows within one trial share observations.</p>
+<figure><figcaption>Table 2. Error in estimating future movement size</figcaption><table><thead><tr><th scope="col">Information supplied</th><th scope="col">Ridge</th><th scope="col">Transformer</th></tr></thead><tbody>
+<tr><th scope="row">Cue and clock</th><td><strong>0.288</strong></td><td><strong>0.289</strong></td></tr>
+<tr><th scope="row">Cortical power alone</th><td>0.454</td><td>0.412</td></tr>
+<tr><th scope="row">Cue and correctly paired cortex</th><td>0.354</td><td>0.321</td></tr>
+<tr><th scope="row">Cue and earlier same-cue cortex</th><td>0.372</td><td>0.341</td></tr>
+</tbody></table><p class="foot">Each finger’s raw error is in counts per 40 ms step. Here its divisor is the training variation in movement <em>size</em>. Scores in Tables 1 and 2 use different targets and scales. For the index finger, the cue-only Transformer missed by 14.93 counts per step and the combined model by 16.24. The glove-history-only ridge scored 0.403.</p></figure>
+<h3>Two tries at the same instruction</h3>
+<p>Within ten disjoint pairs, subtract the first movement size from the second at each corresponding tick. The cue and clock were identical, so a cue-only model predicted zero difference. The correctly paired Transformer beat the earlier-signal version by 0.076 (95% interval 0.038 to 0.113) on these differences. Predicting zero beat the correctly paired model by 0.083 (0.063 to 0.105). Both model families missed their five required comparisons taken together.</p>
+<p class="foot">There were two thumb-cue pairs, two index, three middle and three ring. Only one scored trial cued the little finger. All five sensors still contributed to every pair. For both single-person experiments, intervals resample groups of three consecutive trials or disjoint pairs, 5,000 times. These describe variation in this one familiar recording. <a href="https://eliminatenoise.github.io/NeuroTranslation/finger-motion/">Try the movement-size forecast</a></p>
+</section>
+<section class="sheet" aria-labelledby="cohort">
+<p class="mast">Five people · Calibrated transfer</p>
+<h2 id="cohort">Whose electrodes? Whose hand?</h2>
+<p class="lead">Contact 10 in one person can sit over a different part of the brain from contact 10 in the next. To carry a model between people, we first need to say which measurements can travel together.</p>
+<h3>Experiment 3 · Fit on four, assess the fifth</h3>
+<p>For each person, the first 80 seconds supplied 18 trials to calibrate their own contacts and glove. We scaled each finger by its early root-mean-square movement size (floor of one count per step). After an eight-second gap the other four people supplied all examples for training the fold. The held person supplied only later trials for scoring. No earlier glove reading entered a forecast. The previously studied person, bp, contributed only the earlier study’s fitting interval. Four additional people and the later reserved recording intervals stayed outside this study.</p>
+<p>Each prediction used four 160 ms windows of electrical power ending 120, 80, 40 and 0 ms before or at the cutoff. We normalized the 12–32 and 70–150 Hz bands per contact using that person’s calibration, then averaged by the contributor’s anatomical labels. Eight named areas contained 236 of 278 contacts. The other 42 contributed to the common electrical reference and an unassigned-contact flag. Only 21 contacts were labelled dorsal primary motor and 12 dorsal primary sensory. Each absent region got zero power and an explicit absence flag. Four arrays were on the left and one on the right. Broad labels cannot establish that two contacts record equivalent function.</p>
+<figure><figcaption>Table 3. How the held person changed the result</figcaption><table><thead><tr><th scope="col">Record</th><th scope="col">Trials /<br>repeat pairs</th><th scope="col">Cue<br>table</th><th scope="col">Cue + cortex<br>Transformer</th><th scope="col">Extra repeat<br>error vs zero</th></tr></thead><tbody>
+<tr><th scope="row">bp</th><td>31 / 6</td><td>0.4315</td><td>0.4574</td><td>0.0642</td></tr>
+<tr><th scope="row">cc</th><td>62 / 15</td><td>0.3964</td><td>0.4119</td><td>0.0148</td></tr>
+<tr><th scope="row">ht</th><td>62 / 15</td><td>0.4022</td><td>0.5302</td><td>0.0176</td></tr>
+<tr><th scope="row">jc</th><td>50 / 11</td><td>0.5454</td><td>0.4548</td><td>0.0401</td></tr>
+<tr><th scope="row">jp</th><td>41 / 9</td><td>0.6094</td><td>0.7126</td><td>0.0604</td></tr>
+</tbody></table><p class="foot">The cue table learns one expected movement per output finger, named finger, phase and tick. Its error and the Transformer’s use each person’s calibration units. The final column gives the extra error from predicting differences between repetitions instead of predicting zero difference. Each of the 56 pairs has two separate earlier same-cue donor trials.</p></figure>
+<p>The cue table averaged 0.4770 against 0.5134 for the Transformer with current cortex and 0.5011 for ridge with current cortex. Each of the five people counted once. Only jc’s Transformer beat the table. Even for jc, the table’s zero difference between two repeats was closer to the measured difference. <a href="https://eliminatenoise.github.io/NeuroTranslation/finger-transfer/">Explore the five held-person comparisons</a></p>
+</section>
+<section class="sheet" aria-labelledby="discussion">
+<p class="mast">Interpretation and source methods</p>
+<h2 id="discussion">What the right recording adds</h2>
+<p>The correct trial’s signal beat an earlier signal from the same person, finger cue, phase and tick in all five people. The Transformer’s average gain was 0.0041 calibration units (descriptive 95% interval 0.0030 to 0.0050). For the difference between two repetitions, predicting zero beat it by 0.0394 (0.0210 to 0.0578). These intervals enumerate all 3,125 ways to resample five people with replacement. The folds share training people.</p>
+<figure><figcaption>Table 4. People in whom the correctly paired model beat each control</figcaption><table><thead><tr><th scope="col">Comparison</th><th scope="col">Control</th><th scope="col">Ridge</th><th scope="col">Transformer</th></tr></thead><tbody>
+<tr><th scope="row">Movement size</th><td>Cue-only fit</td><td>2 / 5</td><td>1 / 5</td></tr>
+<tr><th scope="row">Movement size</th><td>Cue table</td><td>2 / 5</td><td>1 / 5</td></tr>
+<tr><th scope="row">Movement size</th><td>Earlier signal</td><td>5 / 5</td><td>5 / 5</td></tr>
+<tr><th scope="row">Repeat difference</th><td>Zero</td><td>0 / 5</td><td>0 / 5</td></tr>
+<tr><th scope="row">Repeat difference</th><td>Cue-only fit</td><td>0 / 5</td><td>0 / 5</td></tr>
+<tr><th scope="row">Repeat difference</th><td>Earlier signal</td><td>4 / 5</td><td>3 / 5</td></tr>
+</tbody></table><p class="foot">The prespecified rule required gains in every person and lower 95% interval limits above zero on all six comparisons, plus at least six repeat pairs across three cues per person. All five had sufficient trials. Each family passed only the ordinary earlier-signal comparison.</p></figure>
+<p>Miller and colleagues observed finger-specific cortical responses during movement. A signal can track which finger bends and still leave the next bend’s size uncertain when the cue is already known. Keeping the cue fixed exposes that distinction. Trial-specific changes could reflect sensory feedback, movement or its preparation. The original between-device lag was 37 ms (standard error 3 ms), and the released file lacks individual packet times. These forecasts cannot separate those sources or establish a command that drives a hand. A stronger test would keep the instruction fixed, align the instruments to a measured event and ask whether cortical activity predicts the timing, direction and size of a new person’s individual bends. Whether a person learns a movement through feedback would require its own test after feedback ends.</p>
+<h3>Methods · Original study ethics statement</h3>
+<p class="ethics">Ethics statement: All patients participated in a purely voluntary manner, after providing informed written consent, under experimental protocols approved by the Institutional Review Board of the University of Washington (#12193). All patient data was anonymized according to IRB protocol, in accordance with HIPAA mandate. These data originally appeared in the manuscript “Human Motor Cortical Activity Is Selectively Phase- Entrained on Underlying Rhythms” published in PLoS Computational Biology in 2012 [Reference].</p>
+<footer class="sources">
+<p>[Reference] Miller KJ, Hermes D, Honey CJ, Hebb AO, Ramsey NF, Knight RT, Ojemann JG and Fetz EE (2012). <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1002655">Original finger experiment, PLOS Computational Biology 8, e1002655</a>.</p>
+<p>Kai Joshua Miller, <i>A library of human electrocorticographic data and analyses</i>, Stanford Digital Repository, v11. This adaptation selects early recording intervals, derives forecasts and compares errors. The source-derived account and supplementary evidence carry CC BY-SA 4.0. Respect participant privacy and confidentiality. <a href="https://purl.stanford.edu/zk881ps0522">Stanford collection</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">Licence</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/papers/finger-cues/evidence.json">Supplementary evidence and study files</a></p>
+</footer></section>
+</main></body></html>

@@ -167,6 +167,16 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
         return {"axes": AXES, "angle_deg": y.tolist(), "horizon_stored_ticks": 128, "stored_hz": 512}
     if record.get("forearm_residual") is not None:
         raise ValueError("Forearm corrections apply only to wrist_angle inputs")
+    if record.get("domain") == "knee_moment":
+        from load.adapter import forecast as knee_moment
+        if set(record) != {"domain", "frames", "angles_deg", "mode"}:
+            raise ValueError("Knee moment requires domain, frames, angles_deg and mode.")
+        config, weights = read_checkpoint(checkpoint)
+        y, periods = knee_moment(record["frames"], record["angles_deg"], record["mode"],
+                                config, weights, linear, encode)
+        return {"axes": ["right", "left"], "internal_knee_moment_Nm_per_kg": y.tolist(),
+                "positive": "flexion", "period_frames": periods.tolist(),
+                "horizon_stored_frames": 25, "stored_hz": 100}
     if record.get("domain") == "knee_angle":
         allowed = {"domain", "mode", "frames", "knee_deg"}
         if set(record) != allowed:
@@ -188,7 +198,7 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path, help="JSON wrist-angle, knee-angle, spatial or rat population input")
+    parser.add_argument("input", type=Path, help="JSON knee-moment, wrist-angle, knee-angle, spatial or rat population input")
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
     args = parser.parse_args()
     try:

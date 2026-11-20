@@ -96,3 +96,11 @@ Open [the reader](https://eliminatenoise.github.io/NeuroTranslation/finger-signa
 ## How much each finger will move
 
 Open [the reader](https://eliminatenoise.github.io/NeuroTranslation/finger-motion/), or [download it](models/finger-motion.zip), unpack all of it and open the launcher at the top of the folder for your system (or open `docs/finger-motion/index.html` directly). The download also holds the study, the six models for the browser, seven for Python, invented examples and both licences.
+
+## Calibrated finger movement
+
+[Download the finger-transfer reader and model](models/finger-transfer.zip), extract the folder and open the launcher for your system. You can also open `docs/finger-transfer/index.html` in a browser. [Model and reproduction instructions](models/finger-transfer/)
+
+## Knee turning moments
+
+[Download the knee-moment reader and materials](models/knee-moment.zip), extract the folder and open the launcher. The reader predicts signed moments from an invented gait. [Run the shared checkpoint with Python](models/neurotranslate-0.0/load/)
