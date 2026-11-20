@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "study": "Reznick, Embry, Neuman, Bolívar, Fey and Gregg (2021)",
+  "article": "https://doi.org/10.1038/s41597-021-01057-9",
+  "download_release": "https://doi.org/10.6084/m9.figshare.14558181.v1",
+  "dictionary": "https://doi.org/10.6084/m9.figshare.14125814.v1",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "archive": {
+    "filename": "Streaming.mat",
+    "figshare_file_id": 28998048,
+    "bytes": 2195168300,
+    "md5": "4a32dc419f6bac1a8a9b39537430f734",
+    "sha256": "df8b3e31d2fe6869b95b4776a8f77639da476685b4c0ccb86c985bee3f01b531"
+  },
+  "selection_origin_sha256": "a5fddd10358ae4f3d4dbeaa6d80442b3811749888ffad2a19e4dea92f1cb59f1",
+  "trial": "Streaming/{person}/Tread/i0",
+  "task_label": "s0x8",
+  "condition": "level walking, nominal 0.8 m/s treadmill command; participant-specific after leg-length adjustment",
+  "angles": {
+    "fields": [
+      "jointAngles/RKneeAngles",
+      "jointAngles/LKneeAngles",
+      "jointAngles/RHipAngles",
+      "jointAngles/LHipAngles",
+      "jointAngles/RAnkleAngles",
+      "jointAngles/LAnkleAngles"
+    ],
+    "h5py_component": 0,
+    "rate_hz": 100,
+    "unit": "degree"
+  },
+  "moments": {
+    "fields": [
+      "jointMoments/RKneeMoment",
+      "jointMoments/LKneeMoment"
+    ],
+    "h5py_component": 0,
+    "rate_hz": 100,
+    "unit": "N m / kg",
+    "sign": "knee flexion positive, extension negative; retain archived sign on both sides",
+    "measurement": "model-estimated net internal sagittal knee moment, using optical movement and external force plate recordings with Plug-in Gait inverse dynamics",
+    "already_normalized_by_body_mass": true
+  },
+  "timing": {
+    "last_optical_index": "k",
+    "endpoint_index": "k+25",
+    "seconds": 0.25,
+    "averaging": "single stored sample per knee, no averaging",
+    "index_origin": "zero-based at first retained source frame, in both modalities",
+    "time_semantics": "archived frames in the common 100 Hz trial; time of live availability of processed input unknown"
+  },
+  "validity": {
+    "target": "Both sagittal moments finite and nonzero at endpoint; no interpolation, forward fill, censoring by amplitude or requirement for continuity of intervening moments. Genuine exact zeros may be omitted.",
+    "angle_history": "An all-channels finite/nonzero check is available over the model-specified history only. The model protocol fixes the input channels, history length and cutoff grid."
+  },
+  "source_segmentation": "zero_based_half_open=[first stored event bound+1, second bound-1); all history frames and both targets must lie within the same selected interval",
+  "prior_exposure": "The knee angles for all ten people were scored in an earlier angle-only study. The subject holdout here applies to developing the mechanics predictor and to its target labels.",
+  "development": [
+    "AB01",
+    "AB02",
+    "AB03",
+    "AB04",
+    "AB05",
+    "AB06",
+    "AB07"
+  ],
+  "assessment": [
+    "AB08",
+    "AB09",
+    "AB10"
+  ],
+  "participants": {
+    "AB01": {
+      "full_trial_samples": 17572,
+      "native_event_bounds": [
+        10832,
+        13832
+      ],
+      "zero_based_half_open": [
+        10833,
+        13831
+      ],
+      "normalized_command_stream_verified": true,
+      "README_leg_length_adjusted_command_mps": 0.824322
+    },
+    "AB02": {
+      "full_trial_samples": 17373,
+      "native_event_bounds": [
+        8943,
+        11950
+      ],
+      "zero_based_half_open": [
+        8944,
+        11949
+      ],
+      "normalized_command_stream_verified": true,
+      "README_leg_length_adjusted_command_mps": 0.790062
+    },
+    "AB03": {
+      "full_trial_samples": 17207,
+      "native_event_bounds": [
+        12524,
+        15534
+      ],
+      "zero_based_half_open": [
+        12525,
+        15533
+      ],
+      "normalized_command_stream_verified": true,
+      "README_leg_length_adjusted_command_mps": 0.779997
+    },
+    "AB04": {
+      "full_trial_samples": 17121,
+      "native_event_bounds": [
+        10873,
+        13879
+      ],
+      "zero_based_half_open": [
+        10874,
+        13878
+      ],
+      "normalized_command_stream_verified": true,
+      "README_leg_length_adjusted_command_mps": 0.8
+    },
+    "AB05": {
+      "full_trial_samples": 17232,
+      "native_event_bounds": [
+        3352,
+        6358
+      ],
+      "zero_based_half_open": [
+        3353,
+        6357
+      ],
+      "normalized_command_stream_verified": true,
+      "README_leg_length_adjusted_command_mps": 0.779997
+    },
+    "AB06": {
+      "full_trial_samples": 17842,
+      "native_event_bounds": [
+        9179,
+        12185
+      ],
+      "zero_based_half_open": [
+        9180,
+        12184
+      ],
+      "normalized_command_stream_verified": true,
+      "README_leg_length_adjusted_command_mps": 0.815649
+    },
+    "AB07": {
+      "full_trial_samples": 17663,
+      "native_event_bounds": [
+        3800,
+        6807
+      ],
+      "zero_based_half_open": [
+        3801,
+        6806
+      ],
+      "normalized_command_stream_verified": true,
+      "README_leg_length_adjusted_command_mps": 0.806884
+    },
+    "AB08": {
+      "full_trial_samples": 17146,
+      "native_event_bounds": [
+        12589,
+        15597
+      ],
+      "zero_based_half_open": [
+        12590,
+        15596
+      ],
+      "normalized_command_stream_verified": true,
+      "README_leg_length_adjusted_command_mps": 0.830053
+    },
+    "AB09": {
+      "full_trial_samples": 17730,
+      "native_event_bounds": [
+        9347,
+        12354
+      ],
+      "zero_based_half_open": [
+        9348,
+        12353
+      ],
+      "normalized_command_stream_verified": true,
+      "README_leg_length_adjusted_command_mps": 0.809816
+    },
+    "AB10": {
+      "full_trial_samples": 18707,
+      "native_event_bounds": [
+        10467,
+        13476
+      ],
+      "zero_based_half_open": [
+        10468,
+        13475
+      ],
+      "normalized_command_stream_verified": false,
+      "README_leg_length_adjusted_command_mps": 0.772362
+    }
+  }
+}

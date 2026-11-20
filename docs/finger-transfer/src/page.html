@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#163e3b">
+<meta name="description" content="Try a five-finger movement decoder on invented regional brain signals, then see how it performed on recordings from five people.">
+<title>Finger movement across people · NeuroTranslation</title>
+<style>__STYLE__</style>
+</head>
+<body>
+<header class="mast"><div class="wrap mast-inner"><a href="#top" class="brand">NeuroTranslation</a><nav aria-label="Page sections"><a href="#experiment">Try the decoder</a><a href="#evidence">See the results</a></nav></div></header>
+<main id="top">
+<section class="hero"><div class="wrap hero-inner"><div>
+<p class="overline">Cortical recordings · Five-person study</p>
+<h1>How much will<br>a finger move?</h1>
+<p class="lead">“Index” appears on a screen. A person bends their finger. A glove measures the movement. Can electrodes on the surface of the brain tell us more than the word and the clock already do?</p></div>
+<aside class="finding"><h2>The cue and the clock came closest</h2><p>Average prediction error when the model learned from four people and predicted movement in a fifth. Lower is better.</p>
+<div class="hero-score"><span>Cue and clock table</span><strong id="hero-control">0.4770</strong></div>
+<div class="hero-score"><span>Cue and cortex, Transformer</span><strong id="hero-model">0.5134</strong></div>
+<a href="#evidence">Compare all five people <span aria-hidden="true">↓</span></a></aside></div></section>
+
+<section id="experiment" class="wrap section" aria-labelledby="exp-title">
+<p class="overline">Interactive experiment · Invented inputs</p>
+<h2 id="exp-title">Give the decoder a signal</h2>
+<p class="intro">Choose a finger and change the strength of two electrical rhythms in one brain area. The estimates below come from the final models fitted to all five people. This invented hand has no measured movement to score.</p>
+<div class="lab">
+<form id="controls" class="controls">
+<h3>Task &amp; signal</h3>
+<div class="split"><label for="digit">Named finger<select id="digit"><option value="1">Thumb</option><option value="2" selected>Index</option><option value="3">Middle</option><option value="4">Ring</option><option value="5">Little</option></select></label>
+<label for="phase">Screen<select id="phase"><option value="0">Word shown</option><option value="1">Following blank</option></select></label></div>
+<label class="range" for="tick">Time in this phase <output id="time-value" for="tick">800 ms</output><input id="tick" type="range" min="9" max="42" value="20"></label>
+<p class="hint">On the blank screen, the model still knows which finger the word named.</p>
+<div class="divider"></div>
+<label for="region">Brain area to change<select id="region"></select></label>
+<label class="range" for="low">Slower rhythm <output id="low-value" for="low"></output><input id="low" type="range" min="-2" max="2" value="-0.5" step="0.25"></label>
+<label class="range" for="high">Faster rhythm <output id="high-value" for="high"></output><input id="high" type="range" min="-2" max="2" value="1" step="0.25"></label>
+<p id="band-note" class="hint"></p>
+<details class="coverage"><summary>Which areas have electrodes? <span id="covered"></span></summary><p class="hint">An area with no contacts gets zero signal and a separate “absent” flag. A measured area at its usual level has zero signal and a “present” flag.</p><div id="mask-list" class="checks"></div><label class="unknown"><input type="checkbox" id="unknown" checked> Contacts of unknown location</label></details>
+<button type="reset" class="reset">Reset inputs</button>
+</form>
+<div class="output"><div class="output-head"><p class="overline">Predicted movement</p><h3>Five fingers, three estimates</h3><p>For each finger, the models predict the average size of a glove reading’s change across three 40 ms steps. A bend or a release can produce the same value.</p></div>
+<div class="output-select"><label for="mode">Inputs to the two decoders<select id="mode"><option value="aligned">Cue and cortex</option><option value="cue">Cue only</option><option value="cortex">Cortex only</option></select></label><label for="unit">Output scale<select id="unit"><option value="scaled">Calibration units</option><option value="counts">Invented glove counts</option></select></label></div>
+<div class="legend"><span class="series transformer">Transformer</span><span class="series ridge">Linear model (ridge)</span><span class="series table">Cue and clock table</span></div>
+<div id="chart" role="img" aria-label="Estimated movement by finger"></div><p id="axis-caption" class="hint"></p>
+<details class="compact"><summary>Read the five estimates as numbers</summary><div class="scroll"><table><caption id="pred-units">Predicted movement in calibration units</caption><thead><tr><th>Finger</th><th>Transformer</th><th>Ridge</th><th>Cue table</th></tr></thead><tbody id="pred-rows"></tbody></table></div></details>
+<p id="scale-note" class="hint"></p></div>
+</div>
+<details class="notes"><summary>What enters each estimate?</summary>
+<p>The Transformer learns which of four recent signal summaries to weigh together. Ridge learns a linear combination of those same summaries. The third predictor looks up the average movement for this word and instant in the training data. Only that table stays tied to the cue when you choose “Cortex only.” None of the three receives a glove reading at prediction time.</p>
+<p>In the study, each summary came from 160 ms of voltage. The four windows ended 120, 80, 40 and 0 ms before the prediction. The slower band spans 12–32 Hz. The faster spans 70–150 Hz with 113.75–126.25 Hz omitted. Each contact’s band power was scaled against its own early recording, then averaged within its brain area.</p>
+<p>Here the sliders set the last summary directly in units of that calibration spread. The four values rise or fall in equal steps from one quarter of the slider value to its full value. Other covered areas stay at their calibration mean. Toggling an area changes its model inputs after calibration. Unknown contacts have a presence flag and no named-area power value. Blank and display timing both start on an invented 40 ms grid boundary.</p>
+</details></section>
+
+<section id="evidence" class="evidence"><div class="wrap section">
+<p class="overline">Recorded experiment · Stanford FingerFlex</p>
+<h2>Learn from four people. Test on a fifth.</h2>
+<p class="intro">Each person’s first 80 seconds of voltage <em>and glove readings</em> set their personal scales. After an eight-second gap, later trials from four people taught the models how to predict movement. The fifth person’s later trials supplied the test. Each person took that turn once.</p>
+<div class="results-box"><h3>The five held-person tests</h3><p>Mean absolute error in personal calibration units. The two decoders here receive the cue and the current cortical recording. The cue table receives the named finger, screen phase and exact tick.</p>
+<div class="scroll" tabindex="0" role="region" aria-label="Five-person scores"><table id="fold-table"><thead><tr><th scope="col">Test person</th><th scope="col">Scored trials</th><th scope="col">Repeat pairs</th><th scope="col">Cue table</th><th scope="col">Ridge</th><th scope="col">Transformer</th></tr></thead><tbody id="fold-rows"></tbody><tfoot id="fold-mean"></tfoot></table></div>
+<p class="hint">Each person contributes one fifth of the average. The five folds shared some training people. These were early portions of five development recordings. One had informed an earlier design. The remaining people and time intervals have yet to test either model.</p>
+<details class="compact"><summary>Inspect one person’s training split, electrodes and gains</summary><label class="person-label" for="person">Test person<select id="person"></select></label><p id="split-note"></p><div class="coverage-grid" id="fold-coverage"></div><p class="hint" id="unknown-count"></p><div class="scroll"><table><caption id="person-gain-caption"></caption><thead><tr><th>Comparison</th><th>Ridge gain</th><th>Transformer gain</th></tr></thead><tbody id="person-gains"></tbody></table></div></details></div>
+
+<h3 class="subhead">Does the right recording help on this trial?</h3>
+<p class="intro small">Swap in the preceding trial’s cortical signal from the same person, cued finger, phase and tick. Keep the true cue and clock. Using the correct signal lowered error for both models in all five people. The cue table still made the smallest average error across all nine comparisons.</p>
+<div class="scroll" tabindex="0" role="region" aria-label="Average error by comparator"><table><thead><tr><th>Inputs to prediction</th><th>Ridge error</th><th>Transformer error</th></tr></thead><tbody id="primary-rows"></tbody></table></div>
+<h3 class="subhead">Can it tell two repetitions apart?</h3>
+<p class="intro small">Four successive trials of the same cue form one group. Compare the change in movement between the second and fourth trials. The first and third supply the wrong signals for those trials. Across 56 such pairs, predicting identical movement on both tries beat the cue-plus-cortex prediction in every person, for both models.</p>
+<div class="scroll" tabindex="0" role="region" aria-label="Six prespecified comparisons"><table><caption>Gain from the correct cortical signal. Positive means the cue-plus-cortex model made a smaller error than the comparison.</caption><thead><tr><th>Comparison</th><th>Ridge gain [95% interval]</th><th>Transformer gain [95% interval]</th></tr></thead><tbody id="gain-rows"></tbody></table></div>
+<p class="conclusion"><strong>Neither model passed the five-person transfer test.</strong> Before fitting, the study required gains in all five people and positive lower bounds for all six comparisons. Each person also needed at least six groups of four repeats across at least three cues. All five met that sample requirement. Each model passed only the comparison with a wrong recording on an individual trial.</p>
+<p class="hint">Intervals describe the spread across all 3,125 ordered resamples of these five people, weighting each sampled person equally. Five clinical recordings and overlapping training sets leave population uncertainty unresolved.</p>
+</div></section>
+
+<section class="wrap section sources"><h2>Sources &amp; reuse</h2><p>Kai Joshua Miller deposited the cortical and glove recordings in the Stanford Digital Repository. Miller and colleagues reported the original finger experiment in 2012. This companion converts fitted weights to browser form, generates synthetic regional signals and reports the five held-person comparisons. The adapted weights, readouts, results and scientific account are licensed under CC BY-SA 4.0. The original viewer code is available under CC0 1.0. Credit Miller and the collection, identify changes and preserve share-alike terms.</p>
+<p class="links"><a href="https://purl.stanford.edu/zk881ps0522">Stanford data collection</a><a href="https://doi.org/10.1371/journal.pcbi.1002655">Original finger experiment</a><a href="https://doi.org/10.1038/s41562-019-0678-3">Collection description</a></p>
+<details class="notes"><summary>Original study ethics, privacy and license texts</summary>
+<p>__ETHICS__</p><p>[Reference] Miller KJ et al. (2012). Human Motor Cortical Activity Is Selectively Phase-Entrained on Underlying Rhythms. <em>PLoS Computational Biology</em> 8(9), e1002655.</p><p>__PRIVACY__</p><pre>__LEGAL__</pre></details></section>
+</main>
+<script type="application/json" id="study">__DATA__</script><script>__SCRIPT__</script>
+</body></html>

@@ -15,3 +15,7 @@ The population adapter groups sorted dorsal CA1 and prefrontal units and pairs f
 ## Treadmill knee angles
 
 The four-second knee corrections and aggregate results derive from the PhysioNet version 1.0.0 recordings of Katmah and colleagues, under CC BY 4.0. We selected one speed and trained new readouts to estimate reconstructed angles. The previous movement weights retain the terms described above. [Authors, processing and licence](knee/README.md) · [Original dataset](https://doi.org/10.13026/r0ea-7161)
+
+## Knee turning moments during walking
+
+Emma Reznick, Kyle R. Embry, Ross Neuman, Edgar Bolívar, Nicholas P. Fey and Robert D. Gregg released the optical walking recordings and inverse-dynamics estimates under CC0. The new knee-moment readouts use these recordings. The original shared checkpoint retains its earlier source conditions. [Original dataset](https://doi.org/10.6084/m9.figshare.14558181.v1) · [Methods and credit](load/SOURCE.md)
