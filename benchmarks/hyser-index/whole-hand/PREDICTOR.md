@@ -2,7 +2,7 @@
 
 The fitted predictors accept released Hyser Random force-transducer voltages on their native 100 Hz clock. Give the model 41 consecutive frames ending at the cutoff. The output is the forecast of the index transducer 12 ticks later, in volts. The 120 ms horizon describes the released trace. The acquisition and filtering history does not establish live causal availability or device delay.
 
-Use rows in the publisher’s channel order `[thumb, index, middle, ring, little]` after converting counts to volts with each channel’s header gain and baseline. The same-trial forecasters were fit on 12 TRAIN people.
+Use rows in the publisher’s channel order `[thumb, index, middle, ring, little]` after converting counts to volts with each channel’s header gain and baseline. The same-trial forecasters were fitted on the 12 fitting people of study 14.
 
 | Weight entry | Feature sequence | Width |
 | --- | --- | ---: |
@@ -10,7 +10,7 @@ Use rows in the publisher’s channel order `[thumb, index, middle, ring, little
 | `aligned_five` | The index history followed by the thumb, middle, ring and little histories. Every 41-value block runs oldest first. | 205 |
 | `aligned_summary` | The index history followed by eight values. For each of thumb, middle, ring and little, give the latest voltage then the least-squares slope across the 41 frames in V/tick. | 49 |
 
-The retrospective other-trial control stays in the aggregate report. All three weight entries are ordinary same-trial predictors. Each weight entry holds `alpha`, `mean`, `scale`, `intercept` and `coef`. Normalize each feature `x[i]` using its saved statistics. The output is
+The retrospective other-trial control stays in the aggregate report. All three weight entries are ordinary same-trial forecasters. Each weight entry holds `alpha`, `mean`, `scale`, `intercept` and `coef`. Normalize each feature `x[i]` using its saved statistics. The output is
 
 ```text
 index_at_cutoff + intercept + Σ coef[i] × (x[i] − mean[i]) / scale[i]

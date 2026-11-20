@@ -1,6 +1,6 @@
 # Rebuild the contact-force comparison
 
-The browser compares two frozen model families on the same sensor history. The build checks the two published Python preview ZIPs and reads their fitted weights, channel order and aggregate results. The complete app then runs in the browser with local files. No training or original trial data are needed.
+The browser compares two fixed kinds of model on the same sensor history. The build checks the two published Python preview ZIPs and reads their fitted weights, channel order and aggregate results. The complete app then runs in the browser with local files. No training or original trial data are needed.
 
 From the repository root on Linux or macOS, run this with Python 3.10 or later. The temporary build folder holds the output and leaves the checked-out files alone.
 
