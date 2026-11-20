@@ -4,7 +4,7 @@
 
 Two people each brought a hand to the mouth five times while electrodes on the skin recorded the arm's muscles and cameras followed markers on the arm. A straight-line fit on the first person's EMG was asked to follow the second person's elbow angle 40 ms ahead. It missed by **62.36°**. The first person's average elbow path, started at the moment the second person's movement started, missed by **30.77°**. The EMG fit lost in all five repetitions.
 
-Those two scores are the measure that punishes large misses (root mean squared error). On the plain average miss (mean absolute error) the result is the same: 58.24° for the EMG fit, 26.37° for the timed average path and 25.10° for a single fixed angle, the first person's average. EMG is electrical activity of muscle, picked up on the skin: a recording of muscle, not of nerve. A *straight-line fit* is a weighted sum of its inputs, here a ridge regression.
+Those two scores are the measure that punishes large misses (root mean squared error). On the plain average miss (mean absolute error) the EMG fit lost too: 58.24°, against 25.10° for a single fixed angle (the first person's average) and 26.37° for the timed average path. On this measure the fixed angle, not the average path, did best. EMG is electrical activity of muscle, picked up on the skin: a recording of muscle, not of nerve. A *straight-line fit* is a weighted sum of its inputs, with a penalty that keeps the weights small.
 
 | Recording | Frames scored | EMG fit: average miss / large misses | One fixed angle: average miss / large misses | Average path from the start of movement: average miss / large misses |
 | --- | ---: | ---: | ---: | ---: |
@@ -13,7 +13,7 @@ Those two scores are the measure that punishes large misses (root mean squared e
 
 The person and the arm changed together, left arm to fit and right arm to test, so the study cannot say which of the two broke the fit. The two simple forecasts answer different questions. The fixed angle uses nothing from the test recording. The average path is told when the test movement starts and uses the time since then to look up an angle learned from HS01; it is not stretched or adjusted to fit HS02.
 
-![Pooled elbow-angle root mean squared error in degrees. Training and development respectively: surface EMG ridge 26.2 and 62.4, training mean 36.8 and 35.0, onset trajectory 8.0 and 30.8.](elbow-angle-error.png)
+![Elbow-angle error on the measure that punishes large misses, in degrees, first for the person the fit was made on, then for the test person: EMG fit 26.2 and 62.4; one fixed angle 36.8 and 35.0; average path from the start of movement 8.0 and 30.8.](elbow-angle-error.png)
 
 ## What went into each forecast
 
@@ -31,7 +31,7 @@ Five repetitions from one test person cannot speak for anyone else. A third pers
 
 ## The plan
 
-The plan, fixed before scoring, is [DESIGN.json](DESIGN.json); the recording IDs, who was used for what and the checksums are in [ASSETS.json](ASSETS.json). It tests no pass threshold: this two-person trial was a first look. The runner's output uses its own labels, **train reference** and **development**, for the fitting and test recordings, and reports CPU affinity on systems that expose it. The original run and the released runner do the same arithmetic.
+The plan, fixed before scoring, is [DESIGN.json](DESIGN.json); the recording IDs, who was used for what and the checksums are in [ASSETS.json](ASSETS.json). It tests no pass threshold: this two-person trial was a first look. The runner's output calls the fitting recording `train reference` and the test recording `development`. The original run and the released runner do the same arithmetic.
 
 ## Run it yourself
 

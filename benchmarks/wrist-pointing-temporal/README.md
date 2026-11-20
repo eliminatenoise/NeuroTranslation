@@ -2,11 +2,11 @@
 
 # Scalp EEG made the wrist forecast worse
 
-Three people turned a wrist towards a target. A learned forecast, fitted on six other people, read the wrist's recent path and the time since the cue and forecast both wrist angles a quarter of a second (250 ms) ahead. It missed by **4.053°**. Given eight channels of scalp EEG as well, it missed by **4.523°**, 0.469° worse. Given EEG from a different trial instead, it missed by **4.880°**. Simply repeating the last angle missed by 7.925°.
+Three people turned a wrist towards a target. A learned forecast, fitted on six other people, read the wrist's recent path and the time since the cue and forecast both wrist angles a quarter of a second (250 ms) ahead. It missed by **4.053°**. Given eight channels of scalp EEG as well, it missed by **4.523°**, 0.469° worse. Given EEG from a different trial of the same recording block, at the same time after the cue, it missed by **4.880°**. Simply repeating the last angle missed by 7.925°.
 
-Every score here is the measure that punishes large misses (root mean squared error), over both wrist axes, with each of the three people counting equally. EEG is electrical activity of the brain picked up on the scalp. A *learned forecast* is a small network that reads a stretch of recent history. This one was trained three times, and the three forecasts were averaged before the error was worked out.
+Every score here is the measure that punishes large misses (root mean squared error), over both wrist axes, with each of the three people counting equally. EEG is electrical activity of the brain picked up on the scalp. A *learned forecast* is a small network that reads a stretch of recent history. This one was fitted three times, and the three forecasts were averaged before the error was worked out.
 
-![At six target times between 750 and 2,000 milliseconds after the cue, holding the last angle has higher error than either model. Adding EEG raises flexion–extension error by 1.45 degrees at the first target time and lowers it slightly at the last two. Radial–ulnar deviation error rises at all six target times.](wrist-forecast-public.png)
+![At six target times between 750 and 2,000 milliseconds after the cue, holding the last angle has higher error than either model. Adding EEG raises the error in bending up and down (flexion–extension) by 1.45 degrees at the first target time and lowers it slightly at the last two. The error in tilting side to side (radial–ulnar deviation) rises at all six target times.](wrist-forecast-public.png)
 
 ## What was forecast
 
@@ -14,7 +14,7 @@ The person sees a target and turns the right wrist towards it, inside an exoskel
 
 The last input ends 128 samples before the target on the recording's 512 Hz clock: that is the 250 ms. The source reports that the encoders update at 100 Hz, and the delays between the instruments and the movement were never measured, so the 250 ms is a distance along a stored recording, not a live forecast.
 
-A plain straight-line fit (a weighted sum of its inputs, here ridge regression) on the same wrist history went from 6.530° to 6.439° when EEG was added: slightly better, and EEG from another trial took it to 6.782°. [Study 2](../wrist-pointing-muscle/) asks what forearm EMG adds to that straight-line fit, on the same three people and the same trials.
+A plain straight-line fit (a weighted sum of its inputs, with a penalty that keeps the weights small) on the same wrist history went from 6.530° to 6.439° when EEG was added: slightly better, and EEG from another trial took it to 6.782°. [Study 2](../wrist-pointing-muscle/) asks what forearm EMG adds to that straight-line fit, on the same three people and the same trials.
 
 ## What it does not show
 
@@ -40,9 +40,9 @@ It prints the measured results offline. Add `--synthetic` to run the fitted mode
 
 ## Replay a recorded trial
 
-[Open the wrist replay](https://eliminatenoise.github.io/NeuroTranslation/wrist-replay/) or [download the browser page and its three desktop launchers](WristMotion-Recorded-Replay.zip) for offline use. It opens on the errors at each of the six target times. Switch between the three trained copies of the model and their averaged forecast.
+[Open the wrist replay](https://eliminatenoise.github.io/NeuroTranslation/wrist-replay/) or [download the browser page and its three desktop launchers](WristMotion-Recorded-Replay.zip) for offline use. It opens on the errors at each of the six target times. Switch between the three fitted copies of the model and their averaged forecast.
 
-To see where the wrist went on one trial, [download the converter](WristMotion-Recorded-Trial-Converter.zip), extract it and follow its README to turn one trial of the original recordings into a JSON file. The converter checks the source before it writes the six input windows and the measured angles. On the replay page, choose the file under **Open a recorded trial**. The page checks the trial against the 960 fingerprints of the test trials, then runs the six trained models on the earlier inputs and sets their forecasts beside the measured angles. Each point is one target on the stored clock. The data stay in the browser tab, and **Clear recording** returns to the study view.
+To see where the wrist went on one trial, [download the converter](WristMotion-Recorded-Trial-Converter.zip), extract it and follow its README to turn one trial of the original recordings into a JSON file. The converter checks the source before it writes the six input windows and the measured angles. On the replay page, choose the file under **Open a recorded trial**. The page checks that the trial is one of the 960 test trials, then runs the six fitted models on the earlier inputs and sets their forecasts beside the measured angles. Each point is one target on the stored clock. The data stay in the browser tab, and **Clear recording** returns to the study view.
 
 For a first run, save [the example archive from Figshare version 3](https://ndownloader.figshare.com/files/62570998) as `recording.zip` and keep it zipped. From the extracted converter folder, with Python 3.11 or newer and NumPy 2:
 

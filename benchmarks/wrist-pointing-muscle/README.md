@@ -2,9 +2,9 @@
 
 # Forearm EMG lowered the wrist forecast's error by 0.355°
 
-Three people turned a wrist towards a target. A straight-line fit, made on six other people from the wrist's recent angles and the time since the cue, forecast both wrist angles 250 ms ahead and missed by **6.530°**. Given surface EMG from the forearm as well, it missed by **6.174°**, 0.355° better. Given EMG from the next trial instead, it missed by **6.941°**: wrongly timed EMG did worse than no EMG at all. Whichever one of the three people is left out, the gain stays between 0.232° and 0.469°.
+Three people turned a wrist towards a target. A straight-line fit, made on six other people from the wrist's recent angles and the time since the cue, forecast both wrist angles 250 ms ahead and missed by **6.530°**. Given surface EMG from the forearm as well, it missed by **6.174°**, 0.355° better. Given EMG from the next trial of the same person and recording block, at the same time after the cue, it missed by **6.941°**: wrongly timed EMG did worse than no EMG at all. Whichever one of the three people is left out, the gain stays between 0.232° and 0.469°.
 
-Every score here is the measure that punishes large misses (root mean squared error), over both wrist axes, with each person counting equally. EMG is electrical activity of muscle, picked up on the skin over it: a recording of muscle, not of nerve. A *straight-line fit* is the plainest kind of model, a weighted sum of its inputs; this one is a ridge regression, which keeps the weights small.
+Every score here is the measure that punishes large misses (root mean squared error), over both wrist axes, with each person counting equally. EMG is electrical activity of muscle, picked up on the skin over it: a recording of muscle, not of nerve. A *straight-line fit* is the plainest kind of model, a weighted sum of its inputs; this one has a penalty that keeps the weights small.
 
 ## What was forecast
 
@@ -22,7 +22,7 @@ One pointing task, three people, stored recordings scored after the fact. The sa
 
 ## The plan
 
-The plan, `DESIGN.json` inside the [study ZIP](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/wrist-pointing-muscle/wrist-pointing-muscle-r1-preview.zip), fixed the comparison before scoring and calls the study "a prospective exploratory analysis … not another independent cohort". It set no pass threshold.
+The plan, `DESIGN.json` inside the [study ZIP](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/wrist-pointing-muscle/wrist-pointing-muscle-r1-preview.zip), fixed the comparison before scoring, calls the study exploratory, and says plainly that the three test people are not a new, independent group. It set no pass threshold.
 
 ## Run it yourself
 
