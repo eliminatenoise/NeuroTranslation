@@ -47,3 +47,5 @@ The muscle-tracking study uses AnkleImage from Zhang and colleagues under CC BY 
 The Task 1 fixed-pedal recordings are part of AnkleImage, Zhang and colleagues, CC BY 4.0. [Source dataset](https://doi.org/10.6019/S-BIAD1482) · [Licence](pedal_load/CC-BY-4.0.txt).
 
 The heel and force study uses the walking recordings of Schreiber and Moissenet, version 8, CC BY 4.0. [Original data](https://doi.org/10.6084/m9.figshare.7734767.v8) · [Licence](heel_force/CC-BY-4.0.txt).
+
+The two walking instructions study uses Céline Schreiber and Florent Moissenet’s version 8 recordings of barefoot walking. [Original data](https://doi.org/10.6084/m9.figshare.7734767.v8) · [CC BY 4.0](walking_cues/CC-BY-4.0.txt).

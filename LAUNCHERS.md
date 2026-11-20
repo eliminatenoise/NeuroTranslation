@@ -154,3 +154,7 @@ For the separate elbow experiment, [open the viewer](https://eliminatenoise.gith
 ## Forecast the right heel and the force plate
 
 [Open the paired forecast](https://eliminatenoise.github.io/NeuroTranslation/heel-and-force/) or [download the offline reader](docs/heel-and-force-offline.zip). Extract the folder and open its launcher for Windows, macOS or Linux. For command-line predictions, the [model download](models/heel-and-force-model.zip) has its own three launchers and requires Node.js. Each launcher runs the fitted joint network on an invented input. [Try NeuroTranslate 0.0](https://eliminatenoise.github.io/NeuroTranslation/shared-heel-and-force/) · [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/heel-and-force/)
+
+## Change the walking instruction
+
+[Open the forecast](https://eliminatenoise.github.io/NeuroTranslation/walking-instructions/) or [download the offline reader](docs/walking-instructions-offline.zip). Extract the entire folder and open its launcher for Windows, macOS or Linux. The [trained model download](models/walking-instructions-model.zip) includes its own three launchers that open a local forecast in your browser. It also includes the fitted weights, training code and instructions to reconstruct the experiment. [Compare NeuroTranslate 0.0](https://eliminatenoise.github.io/NeuroTranslation/walking-instruction-controls/) · [Read the paper](https://eliminatenoise.github.io/NeuroTranslation/papers/walking-instructions/)

@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0 movement forecasts
 
+Turn an invented walk in the laboratory, switch its instruction and compare pelvis and heel forecasts. [Try the walking directions reader](walking_cues/index.html) · [Use your own measurements](walking_cues/README.md)
+
 Where will the heel go, and what will the floor plate read? Try a 100 ms walking forecast, then see what happened when four outputs had to share two learned numbers. [Open the offline model](heel_force/index.html) · [Methods and measurements](heel_force/README.md)
 
 Does shin muscle voltage improve a forecast from a fixed pedal? Test invented signals and compare the three supported groups of original recordings. The planned two-person test remains incomplete. [Try the model](pedal_load/index.html) · [Measurements and source](pedal_load/README.md)

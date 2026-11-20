@@ -38,7 +38,7 @@ export async function showCalibrationStudy() {
   const byId = id => document.getElementById(id);
   const status = byId('calibration-status');
   try {
-    const response = await fetch('./calibration-summary.4a04840c2566f457b57cd349f8ab92815e4b5908eeefa7d25fe07f06e734f416.json');
+    const response = await fetch('./calibration-summary.9764d9142d271b69e768a93f0cac33e9a936738cb3d2402e729cf7af939d8384.json');
     if (!response.ok) throw new Error('Archived results unavailable');
     const study = await response.json();
     const people = Object.entries(study.participants ?? {});

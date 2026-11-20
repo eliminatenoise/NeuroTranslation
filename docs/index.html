@@ -5,7 +5,7 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.4a04840c2566f457b57cd349f8ab92815e4b5908eeefa7d25fe07f06e734f416.css">
+  <link rel="stylesheet" href="style.9764d9142d271b69e768a93f0cac33e9a936738cb3d2402e729cf7af939d8384.css">
 </head>
 <body>
   <header class="topbar">
@@ -24,6 +24,7 @@
       <div>
         <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p>
         <nav class="section-links wrist-links" aria-label="Study recordings">
+          <a href="./walking-instructions/index.html" data-pages-href="./walking-instructions/index.html">Change the walking instruction</a>
           <a href="./heel-and-force/index.html" data-pages-href="./heel-and-force/index.html">Forecast a heel marker and the force underfoot</a>
           <a href="./pedal-load/index.html" data-pages-href="./pedal-load/index.html">Forecast the next pedal reading</a>
           <a href="./muscle-tracking/index.html" data-pages-href="./muscle-tracking/index.html">Forecast a change in muscle length</a>
@@ -101,6 +102,16 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="finger-transfer" aria-labelledby="cohort-choice"><h3 id="cohort-choice">A different person’s finger movement</h3><p>Learn from four people, calibrate on a fifth, then compare the cue with the recorded brain signal.</p><a href="finger-transfer/index.html">Run the five-person comparison</a></article>
+      <article class="study-choice-card" data-study-key="walking-instructions" aria-labelledby="reader-walking-instructions">
+        <h3 id="reader-walking-instructions">Does the walking instruction help?</h3>
+        <p>“As usual” or “fast but not running”. Keep the previous 200 milliseconds of a step fixed and change the cue. Watch what happens to the forecast for the pelvis and the right heel.</p>
+        <nav class="section-links" aria-label="Walking instructions and movement">
+          <a href="./walking-instructions/index.html" data-pages-href="./walking-instructions/index.html">Try the trained Transformer</a>
+          <a href="./walking-instruction-controls/index.html" data-pages-href="./walking-instruction-controls/index.html">Compare NeuroTranslate 0.0</a>
+          <a href="./papers/walking-instructions/index.html" data-pages-href="./papers/walking-instructions/index.html">Read the study</a>
+          <a href="https://eliminatenoise.github.io/Interoceptomics/walking-instructions/">See the recorded walks</a>
+        </nav>
+      </article>
       <article class="study-choice-card" data-study-key="heel-and-force" aria-labelledby="reader-heel-and-force">
         <h3 id="reader-heel-and-force">Where will the heel move, and what will the floor measure?</h3>
         <p>After a bare foot meets a force plate, a camera follows the heel and the plate measures the load. Change an invented step and compare what a joint model and two specialists expect to happen a tenth of a second later.</p>
@@ -405,6 +416,6 @@
     document.getElementById("study-choice-label").hidden = false;
     showStudy();
   </script>
-  <script type="module" src="app.4a04840c2566f457b57cd349f8ab92815e4b5908eeefa7d25fe07f06e734f416.mjs"></script>
+  <script type="module" src="app.9764d9142d271b69e768a93f0cac33e9a936738cb3d2402e729cf7af939d8384.mjs"></script>
 </body>
 </html>

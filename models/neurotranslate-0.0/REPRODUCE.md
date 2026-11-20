@@ -1,5 +1,7 @@
 # Predict and reproduce
 
+For the two walking instructions, run `python predict.py walking_cues/example.json` and follow the [training and scoring instructions](walking_cues/README.md).
+
 For right heel travel and plate force, run `python predict.py heel_force/example.json`. [Reproduce training and both assessment sets](heel_force/README.md).
 
 For a fixed-pedal load example, use `python predict.py pedal_load/example.json`. [Fit and assess the pedal model](pedal_load/README.md).
