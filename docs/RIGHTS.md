@@ -228,3 +228,7 @@ Céline Schreiber and Florent Moissenet released the barefoot walking recordings
 ### Visual rotation during beam walking
 
 Steven M. Peterson and Daniel P. Ferris published the Perturbed beam-walking task as OpenNeuro ds003739 version 1.0.3 under CC0 1.0. The model uses their marker and electrode measurements to forecast movement and reports aggregate errors. The controls in the two NeuroTranslation readers use invented events. The linked Interoceptomics atlas attributes its short measured example. [Dataset](https://doi.org/10.18112/openneuro.ds003739.v1.0.3) · [Acquisition and processing](https://doi.org/10.1016/j.dib.2021.107635) · [Original balance study](https://doi.org/10.1523/ENEURO.0207-18.2018) · [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
+
+### Leg-muscle activity and sacrum motion
+
+Steven M. Peterson and Daniel P. Ferris recorded the standing and walking visual rotations. Their Perturbed beam-walking task, OpenNeuro ds003739 version 1.0.3, is licensed CC0 1.0. Both NeuroTranslation readers start with invented histories. The study reports group results. The linked Interoceptomics atlas credits its two measured examples at the point of use. [Dataset](https://doi.org/10.18112/openneuro.ds003739.v1.0.3) · [Methods](https://doi.org/10.1016/j.dib.2021.107635) · [CC0](https://creativecommons.org/publicdomain/zero/1.0/)

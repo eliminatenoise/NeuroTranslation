@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' file:; style-src 'unsafe-inline'; connect-src 'none'">
+<title>One eighth of a second · NeuroTranslation</title>
+<style>
+*{box-sizing:border-box}html{background:#f6f5ef;color:#182825}body{margin:0 auto;max-width:59rem;padding:clamp(1rem,4vw,3.5rem);font:1rem/1.5 'Atkinson Hyperlegible Next',Arial,sans-serif}h1{font-size:clamp(2.3rem,7vw,4.3rem);letter-spacing:-.055em;line-height:1.05;margin:.55em 0 .3em}h2{font-size:1.25rem;margin:1.5em 0 .35em}p{max-width:70ch}label,button,select{font:inherit}label{display:inline-block;margin:0 .75rem .65rem 0}select,button{border:1px solid #50645b;border-radius:.3rem;background:#fff;color:inherit;padding:.45em}.panel{padding:1rem;background:#fff;border:1px solid #b6c4b9}.grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}table{font-variant-numeric:tabular-nums;border-collapse:collapse;width:100%}th,td{text-align:right;padding:.25rem;border-bottom:1px solid #dde4df}th:first-child{text-align:left}#plot{display:block;width:100%;height:auto}output{font-variant-numeric:tabular-nums}.key span{display:inline-block;margin-right:1rem}#message{color:#8b241b}[hidden]{display:none!important}@media(max-width:650px){.grid{display:block}.panel+.panel{margin-top:.75rem}}
+</style>
+<main>
+<h1>One eighth of a second</h1>
+<p>A scene tilts. Eight electrodes pick up voltage in the lower legs, and a camera tracks a marker at the base of the spine. Give the model the last 160 samples. It forecasts the strength of each muscle’s electrical signal and the next 32 positions of the marker.</p>
+<p>The example below is invented. Change the posture or rotation to see how the fitted model responds to the same signal history.</p>
+<label>Forecast <select id="mode"><option value="joint">One shared model</option><option value="specialists">Two specialists</option></select></label>
+<label>Posture <select id="posture"><option value="1">Walking</option><option value="0">Standing</option></select></label>
+<label>Scene rotation <select id="direction"><option value="-1">Counterclockwise</option><option value="1">Clockwise</option></select></label>
+<p role="alert" id="message" hidden></p>
+<div class="grid" aria-live="polite"><section class="panel"><h2>Leg voltage across the forecast</h2>
+<p>Root mean square (RMS) is the square root of the mean squared voltage across the next 125 ms. Squaring keeps opposite electrical signs from cancelling.</p>
+<table><thead><tr><th scope="col">Muscle</th><th scope="col">Left (µV)</th><th scope="col">Right (µV)</th></tr></thead><tbody id="muscles"></tbody></table></section>
+<section class="panel"><h2>Predicted marker displacement</h2>
+<p>Each line follows one camera axis from the last observed position. The axes share a millimetre scale.</p>
+<svg id="plot" viewBox="0 0 360 175" role="img" aria-label="Three predicted marker displacements over the next 125 milliseconds"></svg>
+<p class="key"><span style="color:#075f78">ML</span><span style="color:#9a4218">SI</span><span style="color:#51662a">AP</span></p>
+<p>At 125 ms <output id="endpoint"></output></p>
+</section></div>
+<p>ML, SI and AP are the source system’s three axis labels. Their anatomical signs are unresolved. The signal histories were filtered or resampled offline. This experiment measures forecasts of electrode voltage and camera movement on recorded trials.</p>
+</main>
+<script src="model.js"></script><script src="weights.js"></script><script src="example.js"></script>
+<script>
+const byId = id => document.getElementById(id);
+const names = ["Tibialis anterior","Soleus","Medial gastrocnemius","Peroneus longus"];
+function render() {
+ try {
+  const input = {...MuscleMotionExample,posture:Number(byId("posture").value),direction:Number(byId("direction").value)};
+  const forecast = MuscleMotion.predict(MuscleMotionWeights,input,byId("mode").value);
+  const muscle = forecast.future_rms_uv, path = [[0,0,0],...forecast.future_path_mm];
+  byId("muscles").innerHTML=names.map((n,i)=>'<tr><th scope="row">'+n+'</th><td>'+muscle[i].toFixed(2)+'</td><td>'+muscle[i+4].toFixed(2)+'</td></tr>').join("");
+  const extent = Math.max(1,...path.flat().map(Math.abs));
+  const xy = (i,y) => (38+i*9.35).toFixed(2)+","+(77-y*60/extent).toFixed(2);
+  let drawing='<path d="M38 15v125h300 M38 77h299" fill="none" stroke="#b9c5be"/>';
+  drawing+='<g fill="#344b40" font-family="Arial,sans-serif" font-size="11"><text x="1" y="20">'+extent.toFixed(1)+'</text><text x="1" y="81">0</text><text x="0" y="141">−'+extent.toFixed(1)+'</text><text x="38" y="157">0 ms</text><text x="302" y="157">125 ms</text></g>';
+  ["#075f78","#9a4218","#51662a"].forEach((color,k)=>{drawing+='<polyline fill="none" stroke="'+color+'" stroke-width="2" points="'+path.map((row,i)=>xy(i,row[k])).join(" ")+'"/>';});
+  byId("plot").innerHTML=drawing;
+  byId("endpoint").textContent=path[32].map((v,i)=>["ML","SI","AP"][i]+" "+v.toFixed(2)+" mm").join(", ")+".";
+ } catch (err) {byId("message").textContent=err.message;byId("message").hidden=false;}
+}
+for (const id of ["mode","posture","direction"]) byId(id).addEventListener("change",render);
+render();
+</script></html>

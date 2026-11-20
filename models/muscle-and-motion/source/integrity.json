@@ -1,0 +1,127 @@
+{
+  "source": "OpenNeuro ds003739 release 1.0.3",
+  "package_sha256_lf": {
+    "README.md": "fed242f147d871b79c9bda48cf58c9a8e49cc3603dbff5725a3539406fbca415",
+    "acquire.py": "369a129dd5816c9a0d374eeb4d41ea6fdca333784340b1488a6e74b3dc11a434",
+    "extract.py": "7640597d81090a331f55b6be221df79a79cabe76e36ea659b02a7e8836023696",
+    "requirements.txt": "7f25d6435e8b664fe179e4cc57ec7c36b61c9f32ad9c7285a1723e3612b4cd2d",
+    "verify.py": "33e45884dbc825ac3b8687fe463f1863b873ea875682abb13331ae7ae1f92eb1"
+  },
+  "stages": {
+    "development": {
+      "canonical_files_receipt_sha256": "10a01ddf2116a992ad38943c62712eef045e4fb10af1224e9a4d556f90ff7487",
+      "typed_arrays_sha256": "b6a6deec93013f95b2d990bcbc42e340ca271bfc73a93b2f260d2976e0b762a3",
+      "totals": {
+        "catalogue_selected": 18,
+        "catalogue_omissions": 0,
+        "represented_people": 18,
+        "original_rotations": 5364,
+        "retained": 5179,
+        "paired_people": 18,
+        "paired_rows": 5179,
+        "one_qualified_posture_people": 0,
+        "no_qualified_postures_people": 0,
+        "by_posture": {
+          "rotatestand": {
+            "sessions": 18,
+            "original_rotations": 2682,
+            "retained": 2600,
+            "retained_by_direction": {
+              "-1": 1288,
+              "1": 1312
+            },
+            "qualifying_people": 18,
+            "primary_exclusions": {
+              "joint_eight_leg_zero": 54,
+              "sacrum_step_above_20mm": 27,
+              "sacrum_zero_triplet": 1
+            },
+            "independent_flag_counts": {
+              "joint_eight_leg_zero": 54,
+              "constant_leg_run_32": 54,
+              "sacrum_zero_triplet": 55,
+              "sacrum_step_above_20mm": 33
+            }
+          },
+          "rotatewalk": {
+            "sessions": 18,
+            "original_rotations": 2682,
+            "retained": 2579,
+            "retained_by_direction": {
+              "-1": 1282,
+              "1": 1297
+            },
+            "qualifying_people": 18,
+            "primary_exclusions": {
+              "joint_eight_leg_zero": 60,
+              "sacrum_zero_triplet": 43
+            },
+            "independent_flag_counts": {
+              "joint_eight_leg_zero": 60,
+              "constant_leg_run_32": 60,
+              "sacrum_zero_triplet": 103,
+              "sacrum_step_above_20mm": 16
+            }
+          }
+        }
+      },
+      "person_qc_sha256": "a76150b6acaa732d8fb309fbee0a772c093ae3e45c56d1b8029f6027d337b027"
+    },
+    "assessment": {
+      "canonical_files_receipt_sha256": "e428566a3d0170514398114f61bd9a2baec114d75545aad82d0a5b15e7838861",
+      "typed_arrays_sha256": "0f49657f6dbf09292650e56d0306833ee609ca47c8c1fb92807df3b77a695779",
+      "totals": {
+        "catalogue_selected": 6,
+        "catalogue_omissions": 0,
+        "represented_people": 6,
+        "original_rotations": 1788,
+        "retained": 1759,
+        "paired_people": 6,
+        "paired_rows": 1759,
+        "one_qualified_posture_people": 0,
+        "no_qualified_postures_people": 0,
+        "by_posture": {
+          "rotatestand": {
+            "sessions": 6,
+            "original_rotations": 894,
+            "retained": 879,
+            "retained_by_direction": {
+              "-1": 439,
+              "1": 440
+            },
+            "qualifying_people": 6,
+            "primary_exclusions": {
+              "joint_eight_leg_zero": 14,
+              "sacrum_zero_triplet": 1
+            },
+            "independent_flag_counts": {
+              "joint_eight_leg_zero": 14,
+              "constant_leg_run_32": 14,
+              "sacrum_zero_triplet": 15
+            }
+          },
+          "rotatewalk": {
+            "sessions": 6,
+            "original_rotations": 894,
+            "retained": 880,
+            "retained_by_direction": {
+              "-1": 436,
+              "1": 444
+            },
+            "qualifying_people": 6,
+            "primary_exclusions": {
+              "joint_eight_leg_zero": 14
+            },
+            "independent_flag_counts": {
+              "joint_eight_leg_zero": 14,
+              "constant_leg_run_32": 14,
+              "sacrum_zero_triplet": 14,
+              "sacrum_step_above_20mm": 3
+            }
+          }
+        }
+      },
+      "person_qc_sha256": "996671c496abc3c7013cac87c66f80c4c10b03497bed7fb2cec47e2dfca5c91c"
+    }
+  }
+}
