@@ -1,7 +1,7 @@
 {
   "checkpoints": {
     "spatial": "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179",
-    "movement": "da243393b7a6f72558365a30f7361e45ef7af680538a7fb5a927e930d91b3458"
+    "movement": "08f4a025be7d3dfa6e3de5899fa445d019f8c70c82b1f5d6531bef1407e0616a"
   },
   "config": {
     "format": 1,
@@ -43,6 +43,15 @@
           "PROTOCOL-ADDENDUM.md": "be1e0e3104ec0b7be89cc70f7e6ed9b2462cca817fc75293ccfcb47d5f15216b"
         }
       }
+    },
+    "rat_population": {
+      "format": 1,
+      "region_order": [
+        "CA1",
+        "PFC"
+      ],
+      "protocol_sha256": "679c858206898bbb3d36d3f3ad79bf19d6452b56ed3a52f601dccfd459edae24",
+      "original_checkpoint_sha256": "da243393b7a6f72558365a30f7361e45ef7af680538a7fb5a927e930d91b3458"
     }
   },
   "groups": {
@@ -403,9 +412,74 @@
           "dtype": "<f8"
         }
       ]
+    },
+    "population.motion": {
+      "bytes": 680,
+      "sha256": "df915d5058b5db29c602ba7c2cbf9d65c1c6a483ccf059798726d064fe8361d1",
+      "tensors": [
+        {
+          "name": "population.motion.coef",
+          "shape": [
+            28
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "population.motion.intercept",
+          "shape": [],
+          "dtype": "<f8"
+        },
+        {
+          "name": "population.motion.mean",
+          "shape": [
+            28
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "population.motion.scale",
+          "shape": [
+            28
+          ],
+          "dtype": "<f8"
+        }
+      ]
+    },
+    "population.combined": {
+      "bytes": 1064,
+      "sha256": "2266feb6b02ac6a5b87a021f39efc4b8ef54e0dc75e2cc3fd73c38057a2937d5",
+      "tensors": [
+        {
+          "name": "population.combined.coef",
+          "shape": [
+            44
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "population.combined.intercept",
+          "shape": [],
+          "dtype": "<f8"
+        },
+        {
+          "name": "population.combined.mean",
+          "shape": [
+            44
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "population.combined.scale",
+          "shape": [
+            44
+          ],
+          "dtype": "<f8"
+        }
+      ]
     }
   },
-  "pythonPredictorSha256": "53fd7619217ef0a4e288698f5a9a59ac5d7da86a53f81797e3f496b84204a14a",
+  "pythonPredictorSha256": "cb482e82552d033d42021ca7adebcc404548b3b3cff4c6066ca2d4d12e2bfd4a",
   "pythonCorrectionSha256": "753ce7469f3f9d956dd461763af4ff10415606b62cf3f451897a1c9eeb46031b",
+  "pythonPopulationSha256": "a90b69e5346efe0fd91c1f89df16a570386c90a0b836062a309dfcb5679ae789",
   "encoding": "Original little-endian IEEE 754 bytes, C order, sorted tensor names per group."
 }

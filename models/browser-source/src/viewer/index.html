@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'; connect-src 'none'">
+  <title>How far will this rat move? · NeuroTranslation</title>
+  <style>{{STYLE}}</style>
+</head>
+<body>
+  <a class="skip" href="#trip">Skip to trip replay</a>
+  <header class="mast"><div class="wrap"><div class="wordmark">NeuroTranslation</div><nav aria-label="Page sections"><a href="#trip">Trip replay</a><a href="#results">Results</a><a href="#source">Source</a></nav></div></header>
+  <main class="wrap">
+    <div class="intro">
+      <h1>How far will this rat move?</h1>
+      <p>An overhead camera followed a rat on a W-shaped track. Pause the recording and use its last second of movement to forecast the next quarter-second. Does adding the firing of neurons in two brain regions bring the forecast closer?</p>
+    </div>
+    <noscript>This saved page uses JavaScript to calculate forecasts and draw the recorded positions. Enable JavaScript to use the replay.</noscript>
+    <section id="trip" aria-labelledby="trip-title">
+      <div class="transport">
+        <div class="trip-id"><h2 id="trip-title">Trip replay</h2><p>Rat JS21 · epoch 1 · trip 1</p></div>
+        <div class="scrub">
+          <div class="scrub-readout"><label for="cutoff">Forecast cutoff <strong id="cutoff-number"></strong></label><span id="elapsed"></span></div>
+          <div class="scrub-controls">
+            <button type="button" id="prev" aria-label="Previous cutoff" title="Previous cutoff">←</button>
+            <input id="cutoff" type="range" min="1" max="12" step="1" value="1">
+            <button type="button" id="next" aria-label="Next cutoff" title="Next cutoff">→</button>
+          </div>
+        </div>
+      </div>
+      <div class="panels">
+        <div class="panel camera">
+          <h3>Camera position</h3>
+          <p class="desc">Five dots mark the frames the forecast uses. The line follows the camera samples available by the cutoff.</p>
+          <svg id="map" viewBox="0 0 384 323" role="img" aria-label="Camera positions in centimetres"></svg>
+          <div class="mapkey"><span><i class="dot"></i>Input frame</span><span><i class="ring"></i>Last input</span><span id="target-key" hidden><i class="diamond"></i>Later frame</span></div>
+          <label class="check" id="whole-control" hidden><input id="whole" type="checkbox"> Show the whole recorded trip</label>
+        </div>
+        <div class="panel forecasts">
+          <h3>Distance forecast</h3>
+          <p class="desc">Each bar predicts the straight-line distance between two camera positions, in any direction.</p>
+          <h4 class="method-title">Direct ridge regression</h4>
+          <div id="bars"></div>
+          <h4 class="method-title">Shared NeuroTranslate Transformer</h4>
+          <div id="shared-bars" aria-busy="true"></div>
+          <div class="answer">
+            <button type="button" class="primary" id="reveal" aria-expanded="false" aria-controls="actual">Reveal the later frame</button>
+            <div id="actual" hidden></div>
+          </div>
+        </div>
+      </div>
+      <section class="signal" aria-labelledby="signal-title">
+        <div class="signal-intro"><h3 id="signal-title">The second before the cutoff</h3>
+          <p>Each pair of bars counts spikes over 250 milliseconds. Switch trips to see the firing substituted in the timing control. The five camera inputs and the fitted model stay the same.</p>
+          <fieldset class="switch"><legend class="sr">Source of displayed firing</legend><label><input type="radio" name="activity" value="aligned" checked>Current trip</label><label><input type="radio" name="activity" value="donor">Earlier trip</label></fieldset>
+          <p class="meta" id="donor-note"></p>
+        </div>
+        <div class="signal-plot"><div class="spike-key"><span><i class="swatch ca"></i>Dorsal CA1 · 26 units</span><span><i class="swatch pf"></i>Prefrontal cortex · 46 units</span></div><svg id="activity" viewBox="0 0 452 206" role="img" aria-label="Spike counts before this cutoff"></svg></div>
+      </section>
+      <details id="observations"><summary>Read the recorded inputs</summary><div class="raw-grid">
+        <div><h4>Five camera frames</h4><table><thead><tr><th>Before cutoff (ms)</th><th>X (cm)</th><th>Y (cm)</th></tr></thead><tbody id="camera-rows"></tbody></table></div>
+        <div><h4 id="counts-heading">Four firing intervals</h4><table><thead><tr><th>Time before cutoff (ms)</th><th>CA1 spikes</th><th>PFC spikes</th></tr></thead><tbody id="count-rows"></tbody></table></div>
+      </div></details>
+      <span class="sr" id="announce" aria-live="polite" aria-atomic="true"></span>
+    </section>
+    <section class="study" id="results" aria-labelledby="study-title">
+      <h2 id="study-title">Did firing help across rats?</h2>
+      <p>The forecast had never seen any of these three rats during training. Correctly timed firing beat both movement alone and earlier-trip firing for <strong>one rat, KL8</strong>. Even there, continuing at the last measured speed gave the smallest error.</p>
+      <h3 class="result-heading">Direct ridge regression</h3>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="All-animal results, scroll horizontally on small screens"><table class="results-table">
+        <caption>Mean absolute error in centimetres · smaller is better</caption>
+        <thead><tr><th scope="col">Rat</th><th scope="col">Forecasts</th><th scope="col">Last speed</th><th scope="col">Movement only</th><th scope="col">Movement + firing</th><th scope="col">Movement + earlier firing</th></tr></thead>
+        <tbody id="rat-rows"></tbody><tfoot id="mean-row"></tfoot>
+      </table></div>
+      <p class="footnote">Each rat contributed 15 scored trips. Every trip counts equally within its rat, and each rat counts equally in the last row. The small average gain from adding firing (0.028 cm) hides the different outcomes in individual animals.</p>
+      <h3 class="result-heading">Shared movement encoder</h3>
+      <p>The camera frames go through the same Transformer used for wrist and rat movement. Its attention sees only movement. After attention, the model pairs each region’s firing rate with the movement signal for that same quarter-second. The final readout predicts distance.</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Shared model errors by rat, scroll horizontally on small screens"><table class="results-table">
+        <caption>Mean absolute error in centimetres · smaller is better</caption>
+        <thead><tr><th scope="col">Rat</th><th scope="col">Forecasts</th><th scope="col">Movement only</th><th scope="col">Movement + firing</th><th scope="col">Movement + earlier firing</th><th scope="col">Scrambled encoder + firing</th></tr></thead>
+        <tbody id="shared-rat-rows"></tbody><tfoot id="shared-mean-row"></tfoot>
+      </table></div>
+      <p>JS21 did better on movement alone. For JS34, firing from the earlier trip did a little better than firing from the right trip. Only KL8 improved on both checks, and continuing at its last speed still did better. Across the three rats, one encoder with its learned weights scrambled and its readout refitted scored 2.763 cm against the trained encoder’s 2.778 cm. The earlier direct-model results were already known when we designed this comparison.</p>
+    </section>
+    <section id="source" class="source" aria-labelledby="source-title"><h2 id="source-title">Where the measurements came from</h2>
+      <div class="source-grid"><div><h3>Position and time</h3><p>The study tracked lights on the rat’s headstage with an overhead camera. Each point here is one archived XY position, in centimetres. Doubling back can leave a rat close to where it began, however far it ran along the way. The models predict only that separation.</p>
+      <p>At five quarter-second ticks, the model takes the latest camera sample available. To score a forecast we compare the final input position with the first frame at or after 250 ms beyond the cutoff. Frame timing varies. Across the three rats, the two measured positions were 250.4–320.7 ms apart.</p></div>
+      <div><h3>What travels between rats?</h3><p>The two areas are dorsal CA1, part of the hippocampus, and the prefrontal cortex (PFC). A recorded unit is a spike train separated from an electrode recording. Individual units belong to their own recording. What carries across rats is the rate per recorded unit in each area.</p>
+      <p>We fitted two ridge regressions using ER1, JS15 and JS17. One uses the movement history. The other adds four pairs of firing rates, each transformed as log(1 + rate). Replacing those eight values with an earlier trip tests how much the timing matters. These offline comparisons cannot establish that firing caused the movement.</p></div></div>
+      <p class="credits">Justin Shin and Shantanu Jadhav, <cite>Single Day W-Track Learning</cite> (2024), version 0.240511.0307. This reanalysis selected trips, grouped spike counts and fitted movement forecasts. The replay shows JS21’s first scored trip, selected before its errors were known. <a href="https://doi.org/10.48324/dandi.000978/0.240511.0307">Archived data</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6923537/">Recording methods</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 data licence</a></p>
+      <p class="credits">The shared encoder also learned from wrist positions in <cite>HoloAssist</cite> (Wang and colleagues, 2023). The bundled wrist-angle weights use the <cite>EEG-EMG-WristMotion Dataset</cite> v3 by Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz. NeuroTranslation packed the original fitted weights for this browser and added two readouts for the rat population histories.</p>
+      <details class="rights"><summary>Model credits and licence texts</summary><p>NeuroTranslation’s shared spatial weights and the rat population data, fitted coefficients and results retain CC BY 4.0 attribution. The original code is dedicated to the public domain under CC0.</p>
+        <p><a href="https://holoassist.github.io/">HoloAssist dataset</a> · <a href="https://doi.org/10.6084/m9.figshare.29666735.v3">WristMotion v3</a></p>
+        <h4>HoloAssist authors</h4><p>Xin Wang, Taein Kwon, Mahdi Rad, Bowen Pan, Ishani Chakraborty, Sean Andrist, Dan Bohus, Ashley Feniello, Bugra Tekin, Felipe Vieira Frujeri, Neel Joshi and Marc Pollefeys.</p>
+        <h4>Community Data License Agreement – Permissive 2.0</h4><div class="licence-text">{{CDLA}}</div>
+        <h4>CC0 1.0 Universal</h4><div class="licence-text">{{CC0}}</div>
+      </details>
+    </section>
+  </main>
+  <script type="application/json" id="dataset">{{DATA}}</script>
+  <script>{{MODEL}}</script>
+  <script>{{RUNTIME}}</script>
+  <script>{{VIEW}}</script>
+</body>
+</html>

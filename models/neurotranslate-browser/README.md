@@ -7,8 +7,9 @@ How far will a tracked point move? Where will a wrist point? Give the model one 
 | `wrist` | HoloAssist right-wrist positions during device tasks | Straight-line displacement in 3D, one distance in centimetres |
 | `rat` | JS14 camera positions while one rat ran a W-track | Straight-line displacement in 2D, one distance in centimetres |
 | `wrist_angle` | WristMotion v3, a person pointing with a supported right wrist | Absolute wrist extension and radial deviation in degrees, 128 stored ticks after the last observed angle |
+| `rat_population` | Five W-track camera positions, optionally with spikes from dorsal CA1 and prefrontal cortex | Straight-line displacement in 2D, one distance in centimetres |
 
-All three use the same four-token temporal encoder. Each recording has its own input and output. A camera track and a wrist-electrode trial have separate clocks and subjects. Supply one history per call. [Spatial recording and clock rules](SPATIAL-API.md) · [Source credits](NOTICE.md)
+All four domains use the same four-token temporal encoder. Each recording has its own input and output. Each call uses the clock of its own recording. The rat population study paired camera and firing histories from that one clock. Supply one history per call. [Spatial recording and clock rules](SPATIAL-API.md) · [Source credits](NOTICE.md)
 
 ## Try an invented wrist movement
 
@@ -38,6 +39,32 @@ Put this example in an HTML file beside `shared-motion.js`, then open it in a br
 `forecastMovement(record)` returns a promise. For angles, read `angleDeg` in the order given by `axes` (`extension`, `radial_deviation`). The result also gives `domain`, `unit: "deg"`, `storedHz: 512`, `horizonStoredTicks: 128` and `targetTick`. For a HoloAssist or JS14 record, pass `{domain, intervals}` for prepared measurements or `{domain, cutoffS, samples}` for dense source observations. Read one number from `distanceCm` with `unit: "cm"`. The spatial study measured distances over 0.20–0.30 s around a nominal 0.25 s lead. [Spatial examples](examples.json)
 
 The classic script carries all parameter bytes and requires no network connection. Each input route verifies and decodes its weights on first use. Modules can import the same functions from `predictor.mjs`. The older `historyFromGeometry`, `recentDistance` and synchronous `model.forecast(domain, intervals)` still work through their existing entry points. Obtain `model` with `await SharedMotion.loadSharedMotion()`. Both the module and the loaded model also expose `forecastWristAngles(record)`, which returns the angular fields directly. [Tensor inventory and checkpoint identities](model.json)
+
+## Compare movement with correctly timed firing
+
+Run the JS21 record from the W-track replay with Node.js 22 or newer.
+
+```sh
+node predict.mjs population-example.json
+```
+
+The camera measured **1.831 cm** between the last input frame and the scoring frame. The shared model predicts **6.424 cm** from movement alone. Add firing from the matching second and it predicts **6.998 cm**. Substitute the earlier trip’s firing and it predicts **7.148 cm**. The same test can favour a different forecast on another trip. [Measured input and aligned firing](population-example.json)
+
+Call `forecastMovement(record)` with `domain: "rat_population"` and one measured history. The result holds `distanceCm` and `unit: "cm"`. Choose `mode: "motion"` for the camera alone or `mode: "combined"` to add grouped firing.
+
+| Input | Units and order |
+| --- | --- |
+| `cutoffS` | Cutoff on the recording clock, in seconds |
+| `priorTimeS` | Five distinct native camera times increasing from oldest to newest |
+| `priorXyCm` | Five corresponding [X, Y] positions in centimetres |
+| `regionalCounts` | Combined mode needs four [CA1, PFC] spike-count pairs, oldest bin first |
+| `unitCounts` | Combined mode needs the two positive counts of recorded units, [CA1, PFC], from this recording |
+
+Use the latest available camera frame at or before each tick, from cutoff −1 s through cutoff in 0.25 s steps. A frame may precede its tick by at most 75 ms. Count spikes in four quarter-second bins on that clock, each open on the left and closed on the right. Supply whole counts in the browser’s safe-integer range. The caller checks the recording identities, native time alignment, region order and source units. The browser checks the shapes, counts, time order and ages. The Python field spellings `cutoff_s`, `prior_time_s`, `prior_xy_cm`, `regional_counts` and `unit_counts` also work. Give each field once.
+
+The frozen movement encoder reads four camera intervals. The motion-only readout uses four speed extrapolations and the encoder’s last state. In combined mode, each region’s firing count first becomes log(1 + spikes per second per recorded unit). The readout then pairs both rates in each time bin with the rat movement correction from that bin’s encoded camera state. Firing enters after attention. To run the earlier-trip control, replace only the four firing pairs with the matched earlier trip from the same recording.
+
+Across 549 windows in three rats held out of these readout fits, the mean absolute errors were 2.805 cm for shared motion, 2.778 cm with aligned firing, 2.804 cm with earlier firing, and 2.870 cm for direct ridge with aligned firing. Each trip counts equally within a rat, then each rat equally. Only KL8 improved on both timing and motion comparisons. A single scrambled encoder with a newly fitted readout scored **2.763 cm**, slightly better than the trained encoder. The direct ridge results on these same test rats were known when we designed the comparison. [W-track recordings](https://doi.org/10.48324/dandi.000978/0.240511.0307)
 
 ## What goes into an angular forecast?
 

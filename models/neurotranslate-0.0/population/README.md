@@ -28,7 +28,7 @@ Across all 549 instants, reversing the bins changed 546 forecasts by more than 0
 
 ## Run the two inputs
 
-From the package root, with Python 3 and NumPy installed, run both commands. Each returns a list of straight-line distances in centimetres. Set `mode` to `motion` for the fitted camera-only comparison. That mode also accepts just the cutoff, camera times and positions. The integrated Python model supplies this rat population mode. The separately released browser reads earlier model modes.
+From the package root, with Python 3 and NumPy installed, run both commands. Each returns a list of straight-line distances in centimetres. Set `mode` to `motion` for the fitted camera-only comparison. That mode also accepts just the cutoff, camera times and positions. The Python predictor and the [offline-capable track viewer](https://eliminatenoise.github.io/NeuroTranslation/population-motion/) run this same fitted mode. Use the viewer’s model choice to compare it with the direct linear forecast on the recorded trip.
 
 ```sh
 python predict.py population/example.json

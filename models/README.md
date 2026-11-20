@@ -2,7 +2,9 @@
 
 One fitted checkpoint forecasts tracked movement distance in centimetres and two right-wrist angles in degrees. It now accepts a fourth input format for recordings from a rat on a W-shaped track. Give it five earlier tracking points and, optionally, a second of firing counts from two brain regions. The movement encoder first reads the changes in position. A separate fitted calculation pairs the firing in each interval with the movement state from that interval. [Download the CPU model](neurotranslate-0.0.zip) · [Input examples and methods](neurotranslate-0.0/)
 
-The earlier browser view compares right-wrist angles with different combinations of movement, forearm and scalp input, and still runs the two original distance forecasts. The cross-animal track viewer shows the direct linear benchmark for the regional firing study. [Original movement viewer](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/) · [Track recording and direct comparison](https://eliminatenoise.github.io/NeuroTranslation/population-motion/)
+The movement viewer compares right-wrist angles with different combinations of movement, forearm and scalp input, and still runs the two original distance forecasts. The cross-animal track viewer lets you choose the direct linear benchmark or the shared movement encoder at the same forecast cutoff. [Wrist and distance viewer](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/) · [Track recording and both model families](https://eliminatenoise.github.io/NeuroTranslation/population-motion/)
+
+[Download the browser predictor](movement-browser.zip) · [Rebuild the browser model and trace viewer](browser-source/)
 
 ### What did firing add to the shared model?
 

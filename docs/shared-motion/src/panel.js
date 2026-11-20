@@ -366,7 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (model.checkpointSha256 !== "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179") {
         throw new Error("The checkpoint differs from the one used for these comparisons.");
       }
-      if (model.movementCheckpointSha256 !== "da243393b7a6f72558365a30f7361e45ef7af680538a7fb5a927e930d91b3458") {
+      if (model.movementCheckpointSha256 !== "08f4a025be7d3dfa6e3de5899fa445d019f8c70c82b1f5d6531bef1407e0616a") {
         throw new Error("The wrist-angle checkpoint differs from the studied model.");
       }
       studyTable();
