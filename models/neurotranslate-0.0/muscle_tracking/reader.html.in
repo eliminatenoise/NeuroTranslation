@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forecast a muscle bundle’s next change in length · NeuroTranslate 0.0</title>
+<style>@@STYLE@@
+fieldset{min-width:0;margin:1em 0}textarea{min-height:3em}.result{font-size:1.25rem;font-weight:650}.figure{background:#edf3ed;padding:14px;border-radius:5px;max-width:750px}canvas{width:100%;max-width:700px;height:155px;display:block}figcaption{color:#254a3f}.table th,.table td{vertical-align:top}nav{align-items:baseline}.num{font-variant-numeric:tabular-nums}.rowlabels{font-weight:650;color:#215542}
+</style><main>
+<nav aria-label="Related studies"><a href="https://eliminatenoise.github.io/NeuroTranslation/">NeuroTranslation</a><a href="https://eliminatenoise.github.io/NeuroTranslation/muscle-tracking/">Try the separately trained Transformer</a><a href="https://eliminatenoise.github.io/Interoceptomics/muscle-tracking/">Explore the anatomy</a></nav>
+<header><h1>Will this muscle bundle shorten?</h1>
+<p class="lead">An ultrasound probe on the shin follows a bundle of muscle fibres as a seated volunteer lifts their forefoot. The tracking software estimates the bundle’s length and the angle it makes with a sheet of connective tissue. Give a model the last 21 observations. How many millimetres will the bundle gain or lose over the next ten tracking steps?</p>
+<p>The shared model reuses a movement encoder trained on earlier movement studies. Its new output was fitted to the ultrasound tracking records. A simple geometry calculation gives us another point of comparison.</p></header>
+<section><h2>Try an invented recording</h2><p>Read each row from earliest to latest. To see what the angle contributes, change only the angle history. Negative forecasts mean shortening.</p>
+<label for="lengths">Bundle length (21 values in millimetres)</label><textarea id="lengths" rows="2" spellcheck="false"></textarea>
+<label for="angles">Bundle angle (21 values in degrees)</label><textarea id="angles" rows="2" spellcheck="false"></textarea>
+<div class="controls"><button id="go" type="button">Calculate forecasts</button><button id="reset" type="button" class="secondary">Restore invented recording</button></div>
+<output id="status" aria-live="polite"></output><figure class="figure"><canvas id="sketch" width="700" height="155" aria-label="Drawing of the entered bundle and its geometric forecast"></canvas><figcaption id="geometry"></figcaption></figure>
+<div class="table"><table><thead><tr><th scope="col">Model or comparison</th><th scope="col">Change (mm)</th><th scope="col">Later length (mm)</th></tr></thead><tbody id="forecast"></tbody></table></div>
+<details><summary>How the geometry estimate works</summary><p>Picture the bundle as the sloping side of a right triangle in the ultrasound image. Its length and angle give a span along the reference tissue and a span across it. We hold the transverse span fixed and continue the longitudinal span by the same change as over the previous ten steps. The new sloping side gives a length. A real muscle can change shape in other ways. This estimate does not measure tissue thickness or muscle force.</p></details></section>
+<section><h2>How close were the forecasts?</h2><p id="scope"></p><p>Error here is the mean absolute difference in millimetres between the forecast length change and the later change in the tracking file. A smaller error is closer to the measured track. A forecast of zero holds the last observed length. Each trial contributes equally within each person, and each person contributes equally to the group.</p>
+<div class="table"><table><thead><tr><th scope="col">Method</th><th scope="col">Development error (mm)</th><th scope="col">New people (mm)</th></tr></thead><tbody id="scores"></tbody></table></div><p id="finding"></p><p>The wrong-trial row runs the full fitted model with the angle history from the other trial of the same person. The original length history stays in place. Both angle and length are derived from the same images, so any advantage could include shared tracking errors. The experiment also recorded muscle voltage, but the mapping from image frames to its electrical clock remains unresolved. All horizons here are counted in original tracking steps.</p></section>
+<nav aria-label="Study sources"><a href="https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-tracking/">Read the study</a><a href="https://doi.org/10.6019/S-BIAD1482">Original dataset</a><a href="https://doi.org/10.1038/s41597-024-04285-x">Original paper</a></nav>
+<script type="application/json" id="data">@@DATA@@</script><script>@@ENCODER@@
+const store=JSON.parse(document.getElementById('data').textContent),model=store.model;
+const $=id=>document.getElementById(id);const rad=t=>t*Math.PI/180;
+function project(l,a){return l*Math.cos(rad(a));}
+function triangular(l,a){return Math.hypot(2*project(l[20],a[20])-project(l[10],a[10]),l[20]*Math.sin(rad(a[20])));}
+function estimate(mode,l,a){
+ const anchor=l[20]-l[10],last=l[20];if(mode==="hold")return 0;if(mode==="recent")return Math.max(anchor,-last);if(mode==="typical")return Math.max(model.typical,-last);
+ if(mode==="geometry")return triangular(l,a)-last;
+ const f=model.readouts[mode], z=[];
+ for(let i=0;i<20;i+=5){const j=i+5, avg=l.slice(i,j+1).reduce((sum,v)=>sum+v,0)/6;
+  const fields=[l[j],l[j]-l[i],avg-(l[j]+l[i])/2,a[j],a[j]-a[i],project(l[j],a[j])-project(l[i],a[i])];
+  z.push(fields.map((v,k)=>mode.endsWith('_length')&&k>=3?0:(v-f.token_mean[k])/f.token_sd[k]));
+ }
+ const inpt=[...z.flat(),anchor];if(!mode.startsWith('linear')){const s=mode==='random_both'?store.random:store.shared;inpt.push(...encode(s,z.map(v=>linear(s,'project',v))));}
+ return Math.max(-last,anchor+inpt.reduce((acc,v,i)=>acc+(v-f.mean[i])/f.sd[i]*f.coef[i],f.intercept));
+}
+function cells(body,name,values){const row=document.createElement('tr');const h=document.createElement('th');h.scope='row';h.textContent=name;row.append(h);for(const x of values){const v=document.createElement('td');v.textContent=x;row.append(v);}body.append(row);}
+function plot(l,a){
+ const can=$('sketch'),ct=can.getContext('2d');ct.clearRect(0,0,can.width,can.height);
+ const x=project(l[20],a[20]), h=l[20]*Math.sin(rad(a[20])), next=2*x-project(l[10],a[10]);
+ const origin=48,base=82,scale=Math.min(590/Math.max(1,Math.abs(x),Math.abs(next)),55/Math.max(1,Math.abs(h)));
+ const minX=Math.min(0,x,next),maxX=Math.max(0,x,next);const sx=Math.min(scale,590/Math.max(1,maxX-minX));
+ const px=t=>origin+(t-minX)*sx,py=v=>base-v*sx;
+ function line(x1,y1,x2,y2,color,dash=[]){ct.beginPath();ct.strokeStyle=color;ct.lineWidth=3;ct.setLineDash(dash);ct.moveTo(x1,y1);ct.lineTo(x2,y2);ct.stroke();}
+ line(px(0),py(0),px(x),py(h),'#176451');line(px(0),py(0),px(next),py(h),'#a34d17',[8,6]);line(px(minX),py(0),px(maxX),py(0),'#839689',[2,4]);
+ ct.setLineDash([]);ct.fillStyle='#18543f';ct.font='17px sans-serif';ct.fillText('Entered bundle',12,144);ct.fillStyle='#91451d';ct.fillText('Dashed: geometry forecast',200,144);
+ $('geometry').textContent='The entered length is '+l[20].toFixed(2)+' mm. Holding the transverse span at '+Math.abs(h).toFixed(2)+' mm gives a later length of '+triangular(l,a).toFixed(2)+' mm.';
+}
+function read(id,positive){const raw=$(id).value.split(',');const v=raw.map(t=>t.trim()===''?NaN:Number(t));if(v.length!==21||v.some(x=>!Number.isFinite(x)||(positive&&x<=0)))throw Error('Enter 21 finite '+(positive?'positive lengths':'angles')+', separated by commas.');return v;}
+function clear(){ $('forecast').replaceChildren();$('sketch').getContext('2d').clearRect(0,0,700,155);$('geometry').textContent='';}
+function calculate(){clear();try{const l=read('lengths',true),a=read('angles',false);const results=Object.entries(store.labels).filter(([m])=>m!=='wrong_both').map(([m,label])=>[label,estimate(m,l,a)]);
+ if(results.some(([,v])=>!Number.isFinite(v)||!Number.isFinite(v+l[20])))throw Error('These numbers exceed the model range.');plot(l,a);
+ for(const [name,v] of results)cells($('forecast'),name,[v.toFixed(3),(l[20]+v).toFixed(3)]);$('status').textContent='Forecasts for the values you entered.';}catch(e){clear();$('status').textContent=e.message;}}
+function reset(){const e=store.example;$('lengths').value=e.length_mm.join(', ');$('angles').value=e.angle_deg.join(', ');calculate();}
+for(const id of ['lengths','angles'])$(id).addEventListener('input',()=>{clear();$('status').textContent='Values changed. Calculate the new forecasts.';});
+$('reset').addEventListener('click',reset);$('go').addEventListener('click',calculate);
+for(const [k,label] of Object.entries(store.labels))cells($('scores'),label,[store.dev.scores[k].mae_mm.toFixed(3),store.held.scores[k].mae_mm.toFixed(3)]);
+$('scope').textContent=store.scope;$('finding').textContent=store.finding;reset();
+</script></main></html>

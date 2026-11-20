@@ -1,0 +1,24 @@
+{
+  "scope": "Before any of the four assessment participants’ files were opened, the two prediction designs, fitted weights, scorers and source reader were hashed. Paths below are relative to the NeuroTranslation repository. seal.json gives the individual checksums for the specialist model and training code.",
+  "verified_utc": "2026-11-20T18:36:38.179289+00:00",
+  "sha256": {
+    "models/muscle-tracking/seal.json": "8c74c9dc8e7772ec42a9c21f39d11972cf9af0cd49cc5d23f27eaed662328cef",
+    "models/neurotranslate-0.0/muscle_tracking/DESIGN.md": "374319e33607c5cf3804f81775b325ba5dab9f251a61ae96e5225d97ccdbdb39",
+    "models/neurotranslate-0.0/muscle_tracking/study.py": "97302c27a2ec590c1983b25e97bf394510cf8b1b300c10043f61459e320b695f",
+    "models/neurotranslate-0.0/muscle_tracking/forecast.py": "0852f81343440dd202a0092a47fcdada6ad4c7b84f4557c590ec8b54738d447e",
+    "models/neurotranslate-0.0/predict.py": "5761ad8db0e93e059082748b235b33a77aee863b936bf671f0e5db7e454e83ef",
+    "models/neurotranslate-0.0/movement-weights.npz": "6a05e06ecbf0eadb4524369d9089847813763d0d2a3c1a49bdd1e4bf295e4864",
+    "models/neurotranslate-0.0/back_rotation/random-encoder.json": "4e4c66728adf70f158225f89c0919142bea8e58a114fb4e4ea3504a1ba154384",
+    "models/neurotranslate-0.0/muscle_tracking/model.json": "7b2f95220ff4c132856923a9556c02a3ca64383f5d8ba204a4a60667d347bd99"
+  },
+  "source_at_freeze": {
+    "acquire.py": "9e3ee44d9ebe848ac40b9413adc72c08e389266a9ba9a53c6b101e9929c3d8df",
+    "source-manifest.json": "c549e1347d618264000a8bf2142283db7054dd5c8f1cf2160637582d6c1be83b"
+  },
+  "source_as_released": {
+    "acquire.py": "9e3ee44d9ebe848ac40b9413adc72c08e389266a9ba9a53c6b101e9929c3d8df",
+    "source-manifest.json": "c549e1347d618264000a8bf2142283db7054dd5c8f1cf2160637582d6c1be83b",
+    "assessment-manifest.json": "6929a2cca56fddc01b533f5ea4658899251b59828c2b8333c01ef0c884cee807",
+    "acquire_assessment.py": "660bf7917040fe87409e6f894e0cff108a4b8cfefb0310548dc2d5262228bcb2"
+  }
+}

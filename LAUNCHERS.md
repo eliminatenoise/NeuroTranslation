@@ -142,3 +142,7 @@ For the separate elbow experiment, [open the viewer](https://eliminatenoise.gith
 ## Forecast the rotation of a back-mounted sensor
 
 [Open the specialist Transformer](https://eliminatenoise.github.io/NeuroTranslation/back-rotation/) or [download its offline reader](docs/back-rotation-offline.zip). Extract the folder before running its launcher for Windows, macOS or Linux. The [model ZIP](models/back-rotation-model.zip) includes a separate launcher for each system to run an invented input through the fitted weights with Python and NumPy. [Open the shared movement model](https://eliminatenoise.github.io/NeuroTranslation/shared-back-rotation/) · [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/back-rotation/)
+
+## Follow a muscle bundle in ultrasound
+
+[Open the browser reader](https://eliminatenoise.github.io/NeuroTranslation/muscle-tracking/) or [download its offline folder](docs/muscle-tracking-offline.zip). Extract the folder and open the launcher for your operating system. The [Python model package](models/muscle-tracking-model.zip) includes fitted weights and an invented history you can change. The model launchers use Python 3 and NumPy. [Open the shared movement model](https://eliminatenoise.github.io/NeuroTranslation/shared-muscle-tracking/) · [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-tracking/)

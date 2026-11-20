@@ -41,3 +41,5 @@ Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz (2017) 
 The cervical voltage preview uses the CC0 dataset published by Nierula and colleagues, [OpenNeuro ds004388 v1.0.0](https://doi.org/10.18112/openneuro.ds004388.v1.0.0). The coefficients and reader use the project CC0 dedication. [Primary article](https://doi.org/10.1371/journal.pbio.3002828).
 
 The back-rotation study uses the CC BY 4.0 recordings from Gracia Laso, Iáñez, Ortiz and Azorín. [Original dataset](https://doi.org/10.5281/zenodo.19065545) · [Licence text](back_rotation/CC-BY-4.0.txt). Model inputs are derived from device orientation and two surface electrode arrays.
+
+The muscle-tracking study uses AnkleImage from Zhang and colleagues under CC BY 4.0. [Dataset](https://doi.org/10.6019/S-BIAD1482) · [Licence](muscle_tracking/CC-BY-4.0.txt).

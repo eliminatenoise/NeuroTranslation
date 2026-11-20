@@ -161,6 +161,19 @@ def forecast_population(cutoff_s, prior_time_s, prior_xy_cm, mode, checkpoint=DE
 
 
 def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
+    if record.get("domain") == "muscle_tracking":
+        from muscle_tracking.forecast import forecast as predict_tracking
+        import hashlib
+        source = Path(checkpoint)
+        state = json.loads((source.parent / "muscle_tracking/model.json").read_bytes())
+        if hashlib.sha256(source.read_bytes()).hexdigest() != state["parent_sha256"]:
+            raise ValueError("This tracking readout requires its matching movement checkpoint.")
+        random = {}
+        if record.get("mode") == "random_both":
+            raw = json.loads((source.parent / "back_rotation/random-encoder.json").read_bytes())
+            random = {k: np.asarray(v, dtype=float) for k, v in raw.items()}
+        config, weights = read_checkpoint(source)
+        return predict_tracking(record, state, weights, random, config, linear, encode)
     if record.get("domain") == "back_rotation":
         from back_rotation.forecast import forecast as predict_rotation
         import hashlib
@@ -234,7 +247,7 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path, help="JSON back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
+    parser.add_argument("input", type=Path, help="JSON muscle length change, back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
     args = parser.parse_args()
     try:

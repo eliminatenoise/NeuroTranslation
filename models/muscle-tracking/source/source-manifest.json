@@ -1,0 +1,276 @@
+{
+  "title": "AnkleImage Task 3, fascicle tracking source files",
+  "dataset": "https://doi.org/10.6019/S-BIAD1482",
+  "methods": "https://doi.org/10.1038/s41597-024-04285-x",
+  "data_licence": "https://creativecommons.org/licenses/by/4.0/",
+  "selected_trials": [
+    1,
+    2
+  ],
+  "development": [
+    "A01",
+    "A02",
+    "A03",
+    "A04"
+  ],
+  "assessment": [
+    "A05",
+    "A06",
+    "A07",
+    "A08"
+  ],
+  "manifest_coverage": "development",
+  "program_sha256": "9e3ee44d9ebe848ac40b9413adc72c08e389266a9ba9a53c6b101e9929c3d8df",
+  "units": {
+    "length_mm": "millimetres",
+    "angle_deg": "degrees",
+    "tracker_time": "timestamp as labelled by the tracking software. Physical acquisition time has not been established."
+  },
+  "members": [
+    {
+      "person": "A01",
+      "trial": 1,
+      "member": "Task 3/Sub_A01/A01_echo_emg_angle_PA_FL_trial1.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A01/A01_echo_emg_angle_PA_FL_trial1.mat",
+      "bytes": 5138639,
+      "sha256": "505b10295bb76e8f7808e673d8a1473d2c129bde6fbf9e2fc12c879cb52297d0",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "6b4887b6a131cfe310105625cef2db75f8128fa2f54b9a49cfd1264160e38ae4",
+      "array_sha256": {
+        "length_mm": "0b6a8bf6507ee1435160bd830f6ff10c54f15a1b273fe102ffb2ec666be83698",
+        "angle_deg": "521474c384cf7308625634bcda9961cca95744c0abe5bffb28237a0ef8e3c06c",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "9a71c8fd34330e77c9e85c1eb7c3d4377ccdd50320b38a91f00ca7b97eb20110",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA1 = rad2deg(A.data(:,3) - B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 9.620992704277759,
+          "minus": 1.7763568394002505e-15
+        },
+        "maximum_absolute_residual_deg": 1.7763568394002505e-15
+      }
+    },
+    {
+      "person": "A01",
+      "trial": 2,
+      "member": "Task 3/Sub_A01/A01_echo_emg_angle_PA_FL_trial2.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A01/A01_echo_emg_angle_PA_FL_trial2.mat",
+      "bytes": 5107334,
+      "sha256": "0fd22c86365560c9c63cdb76b9b5223d562f89f4523a2f8d7211899f2d3ef887",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "6c034cd1bbd62ff0324bdd30833b60592d26912a35dc0027192c367b81544084",
+      "array_sha256": {
+        "length_mm": "f927ffb552a3db97e8473f9fd578c8267977857c2e2c61f2cc9ec9101ecdf1a0",
+        "angle_deg": "3166b31058818f26d0fbe4c1d2adcab0a65d19d8f5b95ee57f07c8de227d74c8",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "9a71c8fd34330e77c9e85c1eb7c3d4377ccdd50320b38a91f00ca7b97eb20110",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA1 = rad2deg(A.data(:,3) - B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 14.229063067396918,
+          "minus": 7.105427357601002e-15
+        },
+        "maximum_absolute_residual_deg": 7.105427357601002e-15
+      }
+    },
+    {
+      "person": "A02",
+      "trial": 1,
+      "member": "Task 3/Sub_A02/A02_echo_emg_angle_PA_FL_trial1.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A02/A02_echo_emg_angle_PA_FL_trial1.mat",
+      "bytes": 3274440,
+      "sha256": "f3a509f710423ca6a3c2336c637ac30a324d260a14dbded68c87df8b99bb6597",
+      "qualified": true,
+      "n": 9920,
+      "npz_sha256": "6fe2ce0101cd43e03a526d759aecd8529067b764da15b2adb8790085df5fa940",
+      "array_sha256": {
+        "length_mm": "672293e99b44e72ad36c217f355e3b19a5b00350cbfe1bedc4d69bcdd4a64487",
+        "angle_deg": "bf9f44f13c0b40e3b136e5e092f3e422809a609bafc9e5dd997ec714716d6df2",
+        "tracking_row": "226d6af2d0266b5fd2608f153b699fd848e1b610e029c2c3b33a93c5ba09a066",
+        "tracker_time": "6ca7682ffad8aafcd5313867f3f856e2fbc93a623a5de02b7a54bd0b760ba585",
+        "segment_id": "37a6966315bcb0c727ee1a1c06670f833ce9488debdb934e0f1611c8f445705d"
+      },
+      "identity": {
+        "length": "fascicle_length = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA = rad2deg(A.data(:,3) + B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 3.552713678800501e-15,
+          "minus": 4.747642882013029
+        },
+        "maximum_absolute_residual_deg": 3.552713678800501e-15,
+        "smallest_max_error_of_ten_possible_interpolation_phases": {
+          "length_mm": 0.029323000000001542,
+          "angle_deg": 0.1453937700923973
+        }
+      }
+    },
+    {
+      "person": "A02",
+      "trial": 2,
+      "member": "Task 3/Sub_A02/A02_echo_emg_angle_PA_FL_trial2.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A02/A02_echo_emg_angle_PA_FL_trial2.mat",
+      "bytes": 3271159,
+      "sha256": "ea287474cd2017c7a0f18504882be4b7bd8fa4aa735b3a5f789db48fc608b189",
+      "qualified": true,
+      "n": 9920,
+      "npz_sha256": "0e6e70e661c12d411ec09008aa8f016f462bb175e7b94774b21e18acb28e284a",
+      "array_sha256": {
+        "length_mm": "a047c7bc95b5791953240d7d3918fd0931279d9e9ea6417e756939947e12354d",
+        "angle_deg": "2e5039d6f2e4f4bb7c0db46c94edb609e368130a339ca074f0a5a8ded71d0bec",
+        "tracking_row": "226d6af2d0266b5fd2608f153b699fd848e1b610e029c2c3b33a93c5ba09a066",
+        "tracker_time": "6ca7682ffad8aafcd5313867f3f856e2fbc93a623a5de02b7a54bd0b760ba585",
+        "segment_id": "37a6966315bcb0c727ee1a1c06670f833ce9488debdb934e0f1611c8f445705d"
+      },
+      "identity": {
+        "length": "fascicle_length = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA = rad2deg(A.data(:,3) + B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 1.7763568394002505e-15,
+          "minus": 5.245199431304635
+        },
+        "maximum_absolute_residual_deg": 1.7763568394002505e-15,
+        "smallest_max_error_of_ten_possible_interpolation_phases": {
+          "length_mm": 0.037238999999996025,
+          "angle_deg": 0.12229211179272248
+        }
+      }
+    },
+    {
+      "person": "A03",
+      "trial": 1,
+      "member": "Task 3/Sub_A03/A03_echo_emg_angle_PA_FL_trial1.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A03/A03_echo_emg_angle_PA_FL_trial1.mat",
+      "bytes": 7890880,
+      "sha256": "14668f11abc8ba1944c05f50c771eeccd801cd9a08341e66ec3e339091cc9874",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "467bc4658ab998db4ba062d0cd36c64b2e3ed662c256ffde9cf684033f8ee382",
+      "array_sha256": {
+        "length_mm": "56ac4946cd3781f1b61995f579066b39ebc5a999f87106a64ecc881bfa2368c2",
+        "angle_deg": "7cfbc66206925f0ce876e4117763fbfa56014136fd791c2d87a75bf02775a278",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "9a71c8fd34330e77c9e85c1eb7c3d4377ccdd50320b38a91f00ca7b97eb20110",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A1.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "common_orientation_difference_residual_deg": 6.772360450213455e-15,
+        "angle": "PA1 is the first tracked fascicle's source angle. Published PA reproduces it by tenfold linear interpolation.",
+        "reference_orientation": "Separate orientation of the reference sheet is unavailable.",
+        "dense_field_reconstruction_max_errors": {
+          "PA": {
+            "first": 1.4210854715202004e-14,
+            "second": 0.507067648690775,
+            "mean": 0.25353382434538574
+          },
+          "FL": {
+            "first": 1.4210854715202004e-14,
+            "second": 2.308916,
+            "mean": 1.1544580000000018
+          }
+        }
+      }
+    },
+    {
+      "person": "A03",
+      "trial": 2,
+      "member": "Task 3/Sub_A03/A03_echo_emg_angle_PA_FL_trial2.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A03/A03_echo_emg_angle_PA_FL_trial2.mat",
+      "bytes": 7739272,
+      "sha256": "1b96d9cb4ac3a0b0aae9f815f0e779ba562cd49187ab0a27272b78383ce38a37",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "29c3db41da7fb0b6fc7e9ef50d79b8950b56c9dd8bfef4df7ac6c9b92d8a1f1b",
+      "array_sha256": {
+        "length_mm": "4554a9d43aef12a3901b51dfdf451035dc2fe8e217a7e757270715861f8afcda",
+        "angle_deg": "904f58ab5202a7a2b9770a94d6d1321480296263ca5da3dc09198e5b5d2503a7",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "9a71c8fd34330e77c9e85c1eb7c3d4377ccdd50320b38a91f00ca7b97eb20110",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A1.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA1 is the first tracked fascicle's source angle. Published PA reproduces it by tenfold linear interpolation.",
+        "reference_orientation": "Separate orientation of the reference sheet is unavailable.",
+        "dense_field_reconstruction_max_errors": {
+          "PA": {
+            "first": 3.197442310920451e-14
+          },
+          "FL": {
+            "first": 2.1316282072803006e-14
+          }
+        }
+      }
+    },
+    {
+      "person": "A04",
+      "trial": 1,
+      "member": "Task 3/Sub_A04/A04_echo_emg_angle_PA_FL_trial1.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A04/A04_echo_emg_angle_PA_FL_trial1.mat",
+      "bytes": 5335749,
+      "sha256": "e2fa075cb5ee5d531ff0ee71c7911e0c3a53f9e7ef33ecc1b04a2fdbb3dec8f1",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "8e160a56394e5304bf28376c004fb036a72e08f6f2d1d29d8ed34c2af181e4dd",
+      "array_sha256": {
+        "length_mm": "81e0f2bf11e71b4ac368ed59d48f158c3675ea94df0d57c332689403cbeb8201",
+        "angle_deg": "510e983f0d0f2d3bfd15dde105ce1073048264d6ddd13ac280963da50e3cda2c",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "10dce03255dd6496efb93b8386a80819321b57b552296f272b694164eb3843d7",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA1 = rad2deg(A.data(:,3) + B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 3.552713678800501e-15,
+          "minus": 16.660008400577972
+        },
+        "maximum_absolute_residual_deg": 3.552713678800501e-15
+      }
+    },
+    {
+      "person": "A04",
+      "trial": 2,
+      "member": "Task 3/Sub_A04/A04_echo_emg_angle_PA_FL_trial2.mat",
+      "url": "https://ftp.ebi.ac.uk/biostudies/fire/S-BIAD/482/S-BIAD1482/Files/ScientificData/Task%203/Sub_A04/A04_echo_emg_angle_PA_FL_trial2.mat",
+      "bytes": 5308977,
+      "sha256": "c7b6c024c08ca613fa3f2840e7ede20cb013340b611d70c9766d8023eb36d653",
+      "qualified": true,
+      "n": 992,
+      "npz_sha256": "bbe73a554578ab31cd1072997bfddb889dff1a07d420d1d7621f93fb6543df46",
+      "array_sha256": {
+        "length_mm": "28893f664723717b3b3eec18b94d2270b8499c7495820d087fe3ba8bad8753fc",
+        "angle_deg": "c0d96738ca630865b374ae18900743f61e46905243ea6788d10eb65f5a6023ed",
+        "tracking_row": "b637f56c776739b8c36b7ec16ed3793cabd1c90972c93a6160956e35654dbd95",
+        "tracker_time": "10dce03255dd6496efb93b8386a80819321b57b552296f272b694164eb3843d7",
+        "segment_id": "4d43e29c25a5373456903bfaf34890647e795515a94dcf1a1034d6d952b5dce0"
+      },
+      "identity": {
+        "length": "fascicle_length1 = A.data(:,2)",
+        "maximum_absolute_residual_mm": 0.0,
+        "angle": "PA1 = rad2deg(A.data(:,3) + B.data(:,3))",
+        "source_angle_decomposition_errors_deg": {
+          "plus": 3.552713678800501e-15,
+          "minus": 16.998282682823213
+        },
+        "maximum_absolute_residual_deg": 3.552713678800501e-15
+      }
+    }
+  ]
+}

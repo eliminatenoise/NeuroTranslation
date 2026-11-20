@@ -5,7 +5,7 @@
   <title>NeuroTranslate 0.0</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.0cb79b5eeadfc5538cd0f3540e82a9bc2d523acfaf707243f7a359b490f527d7.css">
+  <link rel="stylesheet" href="style.c9d35d043d9803d35bd03ba900e0cdc641598ea113d2b0c76685aa31a9f7d6d5.css">
 </head>
 <body>
   <header class="topbar">
@@ -24,6 +24,7 @@
       <div>
         <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p>
         <nav class="section-links wrist-links" aria-label="Study recordings">
+          <a href="./muscle-tracking/index.html" data-pages-href="./muscle-tracking/index.html">Forecast a change in muscle length</a>
           <a href="./back-rotation/index.html" data-pages-href="./back-rotation/index.html">Forecast back sensor rotation</a>
           <a href="./cervical-forecast/index.html" data-pages-href="./cervical-forecast/index.html">Forecast the neck electrode reading</a>
           <a href="./scalp-forecast/index.html" data-pages-href="./scalp-forecast/index.html">Test scalp and eye readings in an arm forecast</a>
@@ -98,6 +99,16 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="finger-transfer" aria-labelledby="cohort-choice"><h3 id="cohort-choice">A different person’s finger movement</h3><p>Learn from four people, calibrate on a fifth, then compare the cue with the recorded brain signal.</p><a href="finger-transfer/index.html">Run the five-person comparison</a></article>
+      <article class="study-choice-card" data-study-key="muscle-tracking" aria-labelledby="reader-muscle-tracking">
+        <h3 id="reader-muscle-tracking">Will this bundle of shin muscle fibres shorten?</h3>
+        <p>Pull your toes toward your shin. In seated volunteers, ultrasound followed a bundle of muscle fibres during that movement. Give a forecast the bundle’s recent lengths, then add its earlier angles. How close does each method come to its length ten tracking steps later?</p>
+        <nav class="section-links" aria-label="Muscle length forecasts">
+          <a href="./muscle-tracking/index.html" data-pages-href="./muscle-tracking/index.html">Try the task-trained Transformer</a>
+          <a href="./shared-muscle-tracking/index.html" data-pages-href="./shared-muscle-tracking/index.html">Try the shared movement model</a>
+          <a href="./papers/muscle-tracking/index.html" data-pages-href="./papers/muscle-tracking/index.html">Read the study</a>
+          <a href="https://eliminatenoise.github.io/Interoceptomics/muscle-tracking/">Explore the ultrasound geometry</a>
+        </nav>
+      </article>
       <article class="study-choice-card" data-study-key="back-rotation" aria-labelledby="reader-back-rotation">
         <h3 id="reader-back-rotation">How far will a sensor on the back turn in the next tenth of a second?</h3>
         <p>Stand still, then walk. A sensor on the back measures how far it turns during each task. Try an invented movement, then compare forecasts for the three new people whose orientation channels could be verified.</p>
@@ -372,6 +383,6 @@
     document.getElementById("study-choice-label").hidden = false;
     showStudy();
   </script>
-  <script type="module" src="app.0cb79b5eeadfc5538cd0f3540e82a9bc2d523acfaf707243f7a359b490f527d7.mjs"></script>
+  <script type="module" src="app.c9d35d043d9803d35bd03ba900e0cdc641598ea113d2b0c76685aa31a9f7d6d5.mjs"></script>
 </body>
 </html>
