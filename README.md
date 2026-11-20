@@ -17,6 +17,8 @@ The project includes the studies, [recordings and models you can open in a brows
 
 One fitted Transformer now forecasts a quarter-second displacement from either a human wrist history or a rat’s position on a track. It uses the same learned attention weights and a separate final readout for each task. It averaged **1.725 cm error on the wrist** and **1.310 cm on the rat**. The simpler linear model remained better on the rat data. The comparison did not establish that sharing the weights improved either task. [Try the shared model](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/) · [Download the model and comparison figure](models/) · [Full source and fitted checkpoint](models/shared-motion/)
 
+The current CPU package adds a third path for wrist bend and sideways tilt, in degrees. It preserves the existing distance predictions and can also read forearm and scalp voltages recorded alongside wrist motion. Forearm input lowered error from 4.503° to 4.291° in six leave-one-person-out tests; the previously tested correction model still had lower error. [Download the three-domain model](models/neurotranslate-0.0.zip) · [How to run all three paths](models/neurotranslate-0.0/)
+
 ## Try a model
 
 | Question | What you can do |

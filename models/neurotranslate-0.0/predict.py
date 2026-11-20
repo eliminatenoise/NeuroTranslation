@@ -1,0 +1,138 @@
+"""CPU/NumPy reader for spatial distance and two-axis angular wrist forecasts."""
+import argparse
+import json
+from pathlib import Path
+
+import numpy as np
+
+DEFAULT_CHECKPOINT = Path(__file__).with_name("movement-weights.npz")
+DOMAINS = ("wrist", "rat")
+MODES = {"motion": 2, "emg": 6, "full": 14}
+AXES = ["extension", "radial_deviation"]
+
+
+def physical_features(raw):
+    """Transform four already admitted past intervals; missing or stale input abstains."""
+    x = np.asarray(raw, dtype=np.float64)
+    if x.ndim != 3 or x.shape[1:] != (4, 5) or not np.isfinite(x).all():
+        raise ValueError("Expected finite [batch,4,5] past-only motion intervals")
+    length, duration, age, two_step, cosine = x.transpose(2, 0, 1)
+    if (np.any(length < 0) or np.any(two_step < 0)
+            or np.any((duration < .2-1e-7) | (duration > .3+1e-7))
+            or np.any((age < -1e-7) | (age > .05+1e-7))
+            or np.any(np.abs(cosine) > 1+1e-6)
+            or np.any(np.abs(two_step[:, 0]) > 1e-7) or np.any(np.abs(cosine[:, 0]) > 1e-7)):
+        raise ValueError("History is outside the measured interval contract")
+    scaled = .25 * length / duration
+    z = np.stack([np.log1p(length), (duration-.25)/.05, age/.05, np.log1p(two_step),
+                  cosine, np.log1p(scaled)], axis=-1)
+    recent = length[:, -1] / duration[:, -1] * (.25 + age[:, -1])
+    return z, recent
+
+
+def angular_tokens(bins, anchor_deg, slot, mode, stats):
+    """Prepare only the required, available channels. The caller enforces clock alignment."""
+    if mode not in MODES:
+        raise ValueError("Select motion, emg or full wrist input")
+    bins = np.asarray(bins, dtype=np.float64)
+    anchor = np.asarray(anchor_deg, dtype=np.float64)
+    slot = np.asarray(slot)
+    n = len(anchor) if anchor.ndim else 0
+    channels = MODES[mode]
+    if n == 0 or bins.shape != (n, 16, channels) or anchor.shape != (n, 2):
+        raise ValueError(f"Expected bins [N,16,{channels}] and anchor_deg [N,2] for a nonempty batch")
+    if slot.shape != (n,) or slot.dtype.kind not in "iu" or np.any((slot < 0) | (slot >= 6)):
+        raise ValueError("Each row needs one integer cue slot 0 through 5")
+    if not np.isfinite(bins).all() or not np.isfinite(anchor).all():
+        raise ValueError("All measurements required for this mode must be finite")
+    if channels >= 6 and (bins[:, :, 2:6] < 0).any():
+        raise ValueError("Bipolar EMG RMS amplitudes must be nonnegative")
+    encoded = np.zeros((n, 16, 14), dtype=np.float64)
+    encoded[:, :, :channels] = (bins - stats["bins_center"][:channels]) / stats["bins_scale"][:channels]
+    anchor_z = (anchor - stats["anchor_center"]) / stats["anchor_scale"]
+    context = np.concatenate((anchor_z, np.eye(6)[slot]), axis=1)
+    return np.concatenate((encoded.reshape(n, 4, 56), np.broadcast_to(context[:, None], (n, 4, 8))), axis=2)
+
+
+def read_checkpoint(path):
+    with np.load(path, allow_pickle=False) as saved:
+        config = json.loads(str(saved["configuration"]))
+        w = {k: saved[k].astype(np.float64) for k in saved.files if k != "configuration"}
+    if config.get("format") != 1 or tuple(config.get("domains", ())) != DOMAINS:
+        raise ValueError("Unsupported original spatial configuration")
+    return config, w
+
+
+def linear(w, name, x):
+    return x @ w[name + ".weight"].T + w[name + ".bias"]
+
+
+def norm(w, name, x):
+    mean = x.mean(axis=-1, keepdims=True)
+    var = ((x - mean)**2).mean(axis=-1, keepdims=True)
+    return (x - mean) / np.sqrt(var + 1e-5) * w[name + ".weight"] + w[name + ".bias"]
+
+
+def encode(config, w, projected):
+    """Both distance and angle heads execute this same temporal encoder."""
+    z = projected + w["position"]
+    n, tokens, width = z.shape
+    heads = config["heads"]
+    for block in range(config["layers"]):
+        key = f"blocks.{block}."
+        qkv = linear(w, key + "qkv", norm(w, key + "attention_norm", z))
+        q, k, v = qkv.reshape(n, tokens, 3, heads, width//heads).transpose(2, 0, 3, 1, 4)
+        score = (q @ k.swapaxes(-2, -1)) / np.sqrt(width//heads)
+        weights = np.exp(score - score.max(axis=-1, keepdims=True))
+        weights /= weights.sum(axis=-1, keepdims=True)
+        mix = (weights @ v).transpose(0, 2, 1, 3).reshape(n, tokens, width)
+        z = z + linear(w, key + "attention_out", mix)
+        hidden = np.maximum(linear(w, key + "ff_in", norm(w, key + "ff_norm", z)), 0)
+        z = z + linear(w, key + "ff_out", hidden)
+    return norm(w, "last_norm", z[:, -1])
+
+
+def forecast(raw, domains, checkpoint=DEFAULT_CHECKPOINT):
+    """Existing spatial API. Each labelled row returns one distance in centimetres."""
+    x, recent = physical_features(raw)
+    if isinstance(domains, str):
+        raise ValueError("Supply one domain label per input row")
+    domains = list(domains)
+    if len(domains) != len(x) or any(d not in DOMAINS for d in domains):
+        raise ValueError("Each row must name its measured spatial domain: wrist or rat")
+    ids = np.asarray([DOMAINS.index(d) for d in domains], dtype=int)
+    config, w = read_checkpoint(checkpoint)
+    all_outputs = linear(w, "readout", encode(config, w, linear(w, "project", x)))
+    log_distance = np.log1p(recent) + all_outputs[np.arange(len(x)), ids]
+    return np.expm1(np.maximum(log_distance, 0))
+
+
+def forecast_angles(bins, anchor_deg, slot, mode, checkpoint=DEFAULT_CHECKPOINT):
+    """Return absolute angles [N,2] in degrees, nominally 128 stored ticks after the anchor."""
+    config, w = read_checkpoint(checkpoint)
+    if config.get("angular", {}).get("format") != 1:
+        raise ValueError("This checkpoint has no supported angular adapter")
+    stats = {k.removeprefix("angular.stats."): v for k, v in w.items() if k.startswith("angular.stats.")}
+    x = angular_tokens(bins, anchor_deg, slot, mode, stats)
+    prefix = "angular." + mode + "."
+    latent = encode(config, w, linear(w, prefix + "project", x))
+    y = linear(w, prefix + "readout", latent)
+    return y * stats["residual_scale"] + stats["residual_center"] + np.asarray(anchor_deg, dtype=np.float64)
+
+
+def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
+    if record.get("domain") == "wrist_angle":
+        y = forecast_angles(record["bins"], record["anchor_deg"], record["slot"], record["mode"], checkpoint)
+        return {"axes": AXES, "angle_deg": y.tolist(), "horizon_stored_ticks": 128, "stored_hz": 512}
+    return {"distance_cm": forecast(record["x"], record["domain"], checkpoint).tolist()}
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("input", type=Path, help="JSON angular or spatial input")
+    parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
+    args = parser.parse_args()
+    try:
+        print(json.dumps(predict_record(json.loads(args.input.read_text()), args.checkpoint), allow_nan=False))
+    except (ValueError, KeyError, TypeError, OSError) as exc:
+        parser.exit(2, f"Input or checkpoint error: {exc}\n")

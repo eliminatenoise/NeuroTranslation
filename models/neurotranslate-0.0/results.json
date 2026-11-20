@@ -1,0 +1,306 @@
+{
+  "units": "degrees",
+  "people": 6,
+  "trials": 1879,
+  "rows": 11274,
+  "axes": [
+    "extension",
+    "radial_deviation"
+  ],
+  "array_manifest_sha256": "beaf658491c6d402a63876cdf883b563ce65cad028383ce6bcdba485a844c7f9",
+  "fit_seal": "90b50631dacc71d9ad5cd21063b0d2b90ff40e58f396c642f0dbf7af48d2e9ef",
+  "prior_comparator_fit": "3eec2d874ba897a2449ae48ee651be08f59f1bd03e2c1fa8d12bc2e342ca231d",
+  "scores": {
+    "persistence": {
+      "rmse_deg": 7.215506899326593,
+      "axis_rmse_deg": [
+        9.18307452000108,
+        4.449519298594656
+      ]
+    },
+    "prior_motion_cnn": {
+      "rmse_deg": 3.618353202348676,
+      "axis_rmse_deg": [
+        4.473285408695914,
+        2.4848898257753924
+      ]
+    },
+    "prior_emg_corrected_cnn": {
+      "rmse_deg": 3.549125052033554,
+      "axis_rmse_deg": [
+        4.371646308785363,
+        2.46602632200625
+      ]
+    },
+    "pretrained.motion": {
+      "rmse_deg": 4.502685640388549,
+      "axis_rmse_deg": [
+        5.556945158633506,
+        3.109455974324467
+      ]
+    },
+    "pretrained.emg": {
+      "rmse_deg": 4.2907653321103405,
+      "axis_rmse_deg": [
+        5.220956378573349,
+        3.0924017791215577
+      ]
+    },
+    "pretrained.emg.wrong": {
+      "rmse_deg": 5.105533280445764,
+      "axis_rmse_deg": [
+        6.3528627215928095,
+        3.431337260613559
+      ]
+    },
+    "pretrained.full": {
+      "rmse_deg": 4.4911321200206125,
+      "axis_rmse_deg": [
+        5.486349508770223,
+        3.2000788281819585
+      ]
+    },
+    "pretrained.full.wrong": {
+      "rmse_deg": 4.586672558560931,
+      "axis_rmse_deg": [
+        5.613586683716443,
+        3.250042286388466
+      ]
+    },
+    "random.motion": {
+      "rmse_deg": 4.268459493970471,
+      "axis_rmse_deg": [
+        5.200920581256444,
+        3.064297311097019
+      ]
+    },
+    "random.emg": {
+      "rmse_deg": 4.281959858583343,
+      "axis_rmse_deg": [
+        5.173950931279034,
+        3.1465206533177215
+      ]
+    },
+    "random.emg.wrong": {
+      "rmse_deg": 5.176734723837452,
+      "axis_rmse_deg": [
+        6.483683391050751,
+        3.399855068467108
+      ]
+    },
+    "random.full": {
+      "rmse_deg": 4.391109707826109,
+      "axis_rmse_deg": [
+        5.319809536990753,
+        3.20364096341516
+      ]
+    },
+    "random.full.wrong": {
+      "rmse_deg": 4.5054859742514495,
+      "axis_rmse_deg": [
+        5.481199674943345,
+        3.248885632298255
+      ]
+    }
+  },
+  "comparisons": {
+    "pretrained.full minus pretrained.motion": {
+      "difference_deg": -0.011553520367936443,
+      "people_lower_error": 3,
+      "omit_one_from_summary_range_deg": [
+        -0.08726193114245451,
+        0.06856283392826601
+      ]
+    },
+    "pretrained.emg minus pretrained.motion": {
+      "difference_deg": -0.2119203082782084,
+      "people_lower_error": 5,
+      "omit_one_from_summary_range_deg": [
+        -0.3013105383293073,
+        -0.1338768903292662
+      ]
+    },
+    "pretrained.full minus pretrained.emg": {
+      "difference_deg": 0.20036678791027196,
+      "people_lower_error": 0,
+      "omit_one_from_summary_range_deg": [
+        0.18528690858916796,
+        0.2140486071868528
+      ]
+    },
+    "pretrained.motion minus random.motion": {
+      "difference_deg": 0.23422614641807815,
+      "people_lower_error": 0,
+      "omit_one_from_summary_range_deg": [
+        0.22610206002019684,
+        0.24666301884918074
+      ]
+    },
+    "pretrained.motion minus persistence": {
+      "difference_deg": -2.7128212589380443,
+      "people_lower_error": 6,
+      "omit_one_from_summary_range_deg": [
+        -2.8705558650140297,
+        -2.582981953026252
+      ]
+    },
+    "pretrained.motion minus prior_motion_cnn": {
+      "difference_deg": 0.8843324380398729,
+      "people_lower_error": 0,
+      "omit_one_from_summary_range_deg": [
+        0.7281229506736708,
+        1.016804797924769
+      ]
+    },
+    "pretrained.motion minus prior_emg_corrected_cnn": {
+      "difference_deg": 0.9535605883549949,
+      "people_lower_error": 0,
+      "omit_one_from_summary_range_deg": [
+        0.7695566597669541,
+        1.1018479587166703
+      ]
+    },
+    "pretrained.emg minus random.emg": {
+      "difference_deg": 0.008805473526997787,
+      "people_lower_error": 3,
+      "omit_one_from_summary_range_deg": [
+        -0.02105920914252568,
+        0.03677814750045716
+      ]
+    },
+    "pretrained.emg minus persistence": {
+      "difference_deg": -2.9247415672162527,
+      "people_lower_error": 6,
+      "omit_one_from_summary_range_deg": [
+        -3.047593691005332,
+        -2.8512625727046386
+      ]
+    },
+    "pretrained.emg minus prior_motion_cnn": {
+      "difference_deg": 0.6724121297616645,
+      "people_lower_error": 1,
+      "omit_one_from_summary_range_deg": [
+        0.5095183221922057,
+        0.8116124727490939
+      ]
+    },
+    "pretrained.emg minus prior_emg_corrected_cnn": {
+      "difference_deg": 0.7416402800767865,
+      "people_lower_error": 1,
+      "omit_one_from_summary_range_deg": [
+        0.550952031285489,
+        0.8966556335409952
+      ]
+    },
+    "pretrained.full minus random.full": {
+      "difference_deg": 0.10002241219450347,
+      "people_lower_error": 1,
+      "omit_one_from_summary_range_deg": [
+        0.08095620566489092,
+        0.14017133456748887
+      ]
+    },
+    "pretrained.full minus persistence": {
+      "difference_deg": -2.7243747793059807,
+      "people_lower_error": 6,
+      "omit_one_from_summary_range_deg": [
+        -2.848517661626043,
+        -2.648177467469141
+      ]
+    },
+    "pretrained.full minus prior_motion_cnn": {
+      "difference_deg": 0.8727789176719365,
+      "people_lower_error": 0,
+      "omit_one_from_summary_range_deg": [
+        0.6948052307813737,
+        1.0146975779845913
+      ]
+    },
+    "pretrained.full minus prior_emg_corrected_cnn": {
+      "difference_deg": 0.9420070679870585,
+      "people_lower_error": 0,
+      "omit_one_from_summary_range_deg": [
+        0.7362389398746569,
+        1.0997407387764926
+      ]
+    },
+    "pretrained.emg minus pretrained.emg.wrong": {
+      "difference_deg": -0.8147679483354233,
+      "people_lower_error": 6,
+      "omit_one_from_summary_range_deg": [
+        -0.8810303843377456,
+        -0.7208951808243373
+      ]
+    },
+    "pretrained.full minus pretrained.full.wrong": {
+      "difference_deg": -0.09554043854031846,
+      "people_lower_error": 6,
+      "omit_one_from_summary_range_deg": [
+        -0.10968947222868497,
+        -0.07852404072911501
+      ]
+    },
+    "random.emg minus random.emg.wrong": {
+      "difference_deg": -0.8947748652541092,
+      "people_lower_error": 6,
+      "omit_one_from_summary_range_deg": [
+        -0.9911535310201485,
+        -0.8063802364784758
+      ]
+    },
+    "random.full minus random.full.wrong": {
+      "difference_deg": -0.11437626642534049,
+      "people_lower_error": 6,
+      "omit_one_from_summary_range_deg": [
+        -0.13009609534561672,
+        -0.10178457945685881
+      ]
+    }
+  },
+  "signal_swaps": {
+    "pretrained.emg": {
+      "rms_shift_deg": 2.7231468875556093,
+      "equal_person_mean_signed_axis_shift_deg": [
+        0.01700270607675462,
+        0.1362294897473617
+      ],
+      "equal_person_mean_absolute_axis_shift_deg": [
+        2.267040967005469,
+        0.9214641615887541
+      ]
+    },
+    "pretrained.full": {
+      "rms_shift_deg": 1.277940146582844,
+      "equal_person_mean_signed_axis_shift_deg": [
+        0.020394979585908562,
+        -0.006116221833292609
+      ],
+      "equal_person_mean_absolute_axis_shift_deg": [
+        0.9981232382350204,
+        0.46835978087632485
+      ]
+    },
+    "random.emg": {
+      "rms_shift_deg": 2.9809568568098035,
+      "equal_person_mean_signed_axis_shift_deg": [
+        0.05769719681824496,
+        0.02490149802982346
+      ],
+      "equal_person_mean_absolute_axis_shift_deg": [
+        2.472139995275244,
+        0.7837492071737052
+      ]
+    },
+    "random.full": {
+      "rms_shift_deg": 1.2637092051535639,
+      "equal_person_mean_signed_axis_shift_deg": [
+        3.9783046453081374e-05,
+        0.0011142510277726044
+      ],
+      "equal_person_mean_absolute_axis_shift_deg": [
+        1.0290627695141097,
+        0.40249044198317435
+      ]
+    }
+  }
+}
