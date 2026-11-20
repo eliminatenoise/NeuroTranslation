@@ -32,8 +32,8 @@ cat > "$temporary" <<_BRAIN2BODY_DESKTOP_
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=NeuroTranslation Data Companion
-Comment=Open the browser companion at the palm-position replay
+Name=NeuroTranslator
+Comment=Open NeuroTranslator at the palm-position replay
 Exec=$launcher_exec "$target"
 TryExec=$launcher_tryexec
 Icon=web-browser
@@ -56,6 +56,10 @@ if [ -e "$destination" ] || [ -L "$destination" ]; then
         803708a27a1bee65a5e5f4ef47d0cb8e118c5b6c9bb6bf188392316b020fbc43|a254e05887f1c2c361db2c4b557c50f63100b0874175acf764aeba922a1c92e2)
           printf 'Already installed: %s\nOpen it and choose Palm replay in the browser.\n' "$destination"
           exit 0 ;;
+        # The entry the installer before this one wrote, under the app's earlier name, with either opener.
+        eb432dc4b15c591b3bf105a566472d4d6ce7903e37671b87a5eb1cf372b17dc4|de85edf843cc0b1dd319b2b75865c2c45105d1927e7615ec73eccb6d35396845)
+          printf 'Already installed: %s\nIt keeps its earlier name, NeuroTranslation Data Companion.\n' "$destination"
+          exit 0 ;;
       esac
     fi
   fi
@@ -69,4 +73,4 @@ if ! ln -T -- "$temporary" "$destination"; then
   exit 1
 fi
 printf 'Installed: %s\n' "$destination"
-printf '%s\n' 'Open your application menu and search for NeuroTranslation Data Companion.'
+printf '%s\n' 'Open your application menu and search for NeuroTranslator.'

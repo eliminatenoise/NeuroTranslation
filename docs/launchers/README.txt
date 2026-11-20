@@ -19,7 +19,7 @@ that folder and run:
 
   sh Install-NeuroTranslation-Linux.sh
 
-Look for NeuroTranslation Data Companion in your applications. The installer
+Look for NeuroTranslator in your applications. The installer
 creates one entry for your user in
 ${XDG_DATA_HOME:-$HOME/.local/share}/applications. It uses the installed
 Omarchy web-app opener when available and otherwise uses xdg-open. It opens
@@ -29,6 +29,9 @@ preview's navigation. The installer preserves existing files and symlinks,
 including any customizations. To remove an installed entry, delete
 brain2body-neurotranslation.desktop from the location printed by the
 installer.
+
+An entry made by the installer before this one is called NeuroTranslation
+Data Companion. It opens the same page and is left as it is.
 
 Palm replay
 https://eliminatenoise.github.io/NeuroTranslation/index.html#palm-replay
