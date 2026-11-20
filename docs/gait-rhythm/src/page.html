@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; worker-src blob:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+  <title>Muscle and knee rhythm · NeuroTranslation</title>
+  <style>/*__CSS__*/</style>
+</head>
+<body>
+<header><div class="wrap"><span>NeuroTranslation</span><a href="#local">Check original files <span aria-hidden="true">↓</span></a></div></header>
+<main class="wrap">
+  <div class="intro">
+    <h1>Does the knee keep the muscle’s rhythm?</h1>
+    <p>Eleven people walked on a treadmill at 0.5 m/s. Electrodes measured leg muscle activity while motion sensors estimated how far each knee bent. How often did each pattern repeat?</p>
+  </div>
+  <section aria-labelledby="case-title">
+    <div class="section-top"><h2 id="case-title">One walk, two measurements</h2>
+      <label class="selector">Recording <select id="record"></select></label></div>
+    <p class="sub">Each point marks the strongest repeating rate in cycles on one side of the body. Matching rates tell us how often a pattern repeats. The separate device clocks leave the timing of individual bursts and bends unresolved.</p>
+    <figure class="rate-panel">
+      <figcaption>Peak rate <span>cycles per minute</span></figcaption>
+      <div class="plot-axis" aria-hidden="true"><span></span><div class="ticks"><b>30</b><b>35</b><b>40</b><b>45</b><b>50</b></div><span></span></div>
+      <div id="rate-rows"></div>
+      <p id="difference" role="status"></p>
+    </figure>
+    <p id="control-note" class="sub"></p>
+  </section>
+  <section class="cohort" aria-labelledby="cohort-title">
+    <div><h2 id="cohort-title">Across all 11 walks</h2>
+    <p>The muscle and knee peaks landed on the same frequency in nine recordings and one grid interval apart in two. Using another person’s muscle recording increased the average error.</p>
+    <p>A 40-second window gives a natural frequency scale of about <strong>1.5 cycles/min</strong>. The search grid is finer at 0.15 cycles/min. Close grid matches alone cannot establish the true rhythm to a fraction of a cycle per minute.</p></div>
+    <table><caption>Mean absolute difference from the knee peak</caption><thead><tr><th scope="col">Estimate</th><th scope="col">Cycles/min</th></tr></thead><tbody id="cohort-body"></tbody></table>
+  </section>
+  <section id="local" aria-labelledby="local-title">
+    <h2 id="local-title">Find both peaks in the original files</h2>
+    <p>Choose the two CSV files for the selected recording. Your browser checks their fingerprints and calculates each spectrum on your device. Both files stay local.</p>
+    <p class="sub" id="file-guide"></p>
+    <p class="sub"><a id="emg-source" href="https://physionet.org/content/multimodal-gait-dataset/1.0.0/">Get the muscle CSV</a> · <a href="https://physionet.org/files/multimodal-gait-dataset/1.0.0/Dataset/IMU_Data/IMU.tar.gz">Get the IMU archive (3.92 GB)</a></p>
+    <div class="pickers">
+      <label>Muscle amplitude CSV<input type="file" id="muscle" accept=".csv,text/csv"></label>
+      <label>Knee angle CSV<input type="file" id="knee" accept=".csv,text/csv"></label>
+    </div>
+    <p id="file-state" role="status" aria-live="polite"></p>
+    <div id="spectra" hidden>
+      <div class="spectra-grid">
+        <figure><figcaption>Muscle amplitude <span>12 channels · volts</span></figcaption><canvas id="muscle-plot" role="img"></canvas><p id="muscle-caption"></p></figure>
+        <figure><figcaption>Knee angle <span>2 channels · degrees</span></figcaption><canvas id="knee-plot" role="img"></canvas><p id="knee-caption"></p></figure>
+      </div>
+      <p class="sub">Height gives the mean fraction of in-band power per frequency bin, shown as a percentage. Each channel contributes equally. Both panels use the same axes.</p>
+    </div>
+  </section>
+  <details><summary>How the comparison works</summary>
+    <p>The muscle file contains mean absolute voltages from surface electromyography (EMG). The knee file contains left and right flexion angles estimated from inertial sensors. Each uses the interval from 5 seconds up to, but excluding, 45 seconds after its own first sample. The EMG times are in seconds. The knee frame numbers run at 60 per second.</p>
+    <p>For each channel, subtract its mean, apply a Hann taper, and evaluate power at the observed time points from 0.45 to 1.50 Hz, every 0.0025 Hz. Divide by that channel’s total power across the band, then average over channels. The first frequency with the greatest average power gives the peak rate.</p>
+    <p>The reference median and the linear adjustment to the muscle rate were fixed using 38 earlier participants. The comparison uses 11 other participants with both files. The same-person muscle estimate had lower absolute error than the median in 10 of 11 walks and than the different-person estimate in all 11. This met the study’s preset criteria.</p>
+    <p>The instruments recorded the same walk on separate exported clocks. These results compare repetition rates. They cannot tell which muscle burst accompanied a particular bend, establish subsecond neural or muscle timing, or validate a step count or coordination pattern. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/gait-rhythm">Study protocol, signed errors and full results</a></p>
+  </details>
+  <footer><p>Data from Katmah and colleagues’ 2026 study of treadmill walking. Peak rates and frequency comparisons derived from version 1.0.0. <a href="https://physionet.org/content/multimodal-gait-dataset/1.0.0/">PhysioNet dataset and original files</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p></footer>
+</main>
+<script id="study" type="application/json">__STUDY__</script>
+<script id="worker-source" type="text/plain">/*__WORKER__*/</script>
+<script>/*__APP__*/</script>
+</body>
+</html>

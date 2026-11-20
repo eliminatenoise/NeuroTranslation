@@ -383,7 +383,11 @@ These were published after the table was made. Each has its own plan and results
 
 A four-page supplement reports the two searches with words together: [*How precisely do words identify a recorded movement?*](../docs/papers/language-and-observed-movement/README.md) It is separate from the two papers, and neither paper's current draft contains these studies.
 
-## Three forecasts from recorded movement
+## Four more studies of recorded movement
+
+### Do the muscles and knees repeat at the same rate?
+
+For 11 held-out walkers at 0.5 m/s, the strongest rhythms in the leg-muscle recordings and knee angles differed by 0.027 cycles per minute on average. Pairing each walk with another walker’s muscle recording raised the difference to 3.055. Each instrument supplied its own 40-second window. Agreement in rate leaves the timing of individual steps unresolved. [Study, fitted comparisons and source](../models/gait-rhythm/) · [Open the rhythm reader](https://eliminatenoise.github.io/NeuroTranslation/gait-rhythm/)
 
 ### Where will the knees be 15 stored frames later?
 

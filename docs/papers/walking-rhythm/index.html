@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Two tests of treadmill walking. What predicts the next knee angle, and what muscle recordings reveal about the rhythm of a trial.">
+<title>The next knee angle and the rhythm of a walk</title>
+<style>
+:root { color-scheme: light; --ink:#172721; --muted:#4e6058; --accent:#176451; --line:#bdcfc6; --tint:#edf4ef; }
+* { box-sizing:border-box; }
+body { margin:0; color:var(--ink); background:#edf1ed; font:17px/1.52 "Liberation Sans",Arial,sans-serif; }
+main { max-width:850px; margin:26px auto; }
+.sheet { background:white; padding:48px 60px; margin:0 0 20px; }
+.mast { color:var(--accent); margin:0 0 17px; font-weight:700; font-size:.78rem; letter-spacing:.075em; text-transform:uppercase; }
+.download { float:right; text-transform:none; letter-spacing:0; }
+h1,h2,h3,p,ul,figure,table { margin:0; }
+h1,h2 { max-width:25ch; margin-bottom:16px; line-height:1.07; letter-spacing:-.035em; }
+h1 { font-size:clamp(34px,5.0vw,49px); }
+h2 { max-width:31ch; font-size:clamp(28px,4.1vw,38px); }
+h3 { margin-top:24px; margin-bottom:5px; font-size:1.12em; line-height:1.25; }
+p+p { margin-top:10px; }
+.lead { font-size:1.09em; line-height:1.44; }
+figure { margin:20px 0 15px; }
+figcaption { margin-bottom:7px; font-weight:700; }
+table { border-collapse:collapse; width:100%; font-variant-numeric:tabular-nums; }
+th,td { text-align:left; padding:6px 4px; border-bottom:1px solid var(--line); }
+th:first-child,td:first-child { padding-left:0; }
+th:last-child,td:last-child { text-align:right; padding-right:0; white-space:nowrap; }
+thead th { border-top:1.7px solid var(--accent); font-size:.83em; color:var(--muted); }
+tbody th { font-weight:400; }
+.bar { width:20%; }
+.bar span { display:block; background:#a1c3b0; height:7px; width:var(--w); }
+.footnote { color:var(--muted); font-size:.88em; margin-top:8px; line-height:1.4; }
+.result { border-left:3px solid var(--accent); padding:1px 0 1px 14px; margin:18px 0 12px; }
+.result strong { color:var(--accent); }
+a { color:var(--accent); text-decoration:underline; text-underline-offset:.16em; }
+a:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+dl { margin:16px 0; border-top:1.5px solid var(--accent); }
+dl>div { display:grid; grid-template-columns:9.5em 1fr; gap:16px; padding:9px 0; border-bottom:1px solid var(--line); }
+dt { font-weight:700; }
+dd { margin:0; }
+.sources { margin-top:18px; border-top:1.5px solid var(--accent); padding-top:11px; font-size:.86em; line-height:1.45; }
+.sources h3 { font-size:1.16em; margin:0 0 7px; }
+.sources p+p { margin-top:6px; }
+@media screen and (max-width:640px) {
+  main { margin:0; }
+  .sheet { padding:32px 20px; margin:0; border-bottom:1px solid var(--line); }
+  .bar { display:none; }
+  dl>div { grid-template-columns:1fr; gap:3px; }
+}
+@page { size:A4; margin:17mm 21mm 18mm;
+  @bottom-left { content:"NeuroTranslation  /  Interoceptomics"; font:9pt "Liberation Sans",Arial,sans-serif; color:#4e6058; }
+  @bottom-right { content:counter(page) " / " counter(pages); font:9pt "Liberation Sans",Arial,sans-serif; color:#4e6058; }
+}
+@media print {
+  :root,body { background:white; font-size:11pt; line-height:1.37; print-color-adjust:exact; }
+  main { margin:0; max-width:none; }
+  .sheet { margin:0; padding:0; break-after:page; }
+  .sheet:last-child { break-after:auto; }
+  h1 { font-size:33pt; }
+  h2 { font-size:25.5pt; }
+  h3 { margin-top:14pt; }
+  .mast { margin-bottom:9pt; }
+  .download { display:none; }
+  th,td { padding:4pt 3pt; }
+  .result { margin:12pt 0 9pt; }
+  figure { margin:14pt 0 12pt; }
+  .sources { margin-top:12pt; }
+}
+</style>
+</head>
+<body><main>
+<section class="sheet" aria-labelledby="title">
+<p class="mast">NeuroTranslation / Interoceptomics <a class="download" href="gait-clocks.pdf">Download PDF</a></p>
+<h1 id="title">The next knee angle and the rhythm of a walk</h1>
+<p class="lead">Watch a few seconds of someone walking at a steady pace and you may already have seen the next bend of their knee. In one treadmill study, replaying part of an earlier stride gave a closer forecast than a model trained on 39 walkers. The same recordings let us ask a different question. Can electrical signals from the legs tell us how often the knees bend?</p>
+<h3>Fifteen frames ahead</h3>
+<p>Katmah and colleagues recorded healthy young adults walking on a treadmill. At one belt speed, 0.5 metres per second, body-worn inertial sensors supplied estimates of how far each joint bent. We took five snapshots of both hips, knees and ankles across 0.4 seconds. A small Transformer, a model trained to combine information across those snapshots, estimated both knee angles 15 stored frames after the last snapshot. At 60 frames per second, that is a quarter of a second in the file.</p>
+<figure>
+<figcaption>Table 1. How far did each forecast miss the recorded angles?</figcaption>
+<table><thead><tr><th scope="col">Method</th><th class="bar" aria-hidden="true"></th><th scope="col">Mean error</th></tr></thead>
+<tbody>
+<tr><th scope="row">Transformer using all six joints</th><td class="bar" aria-hidden="true"><span style="--w:19.65%"></span></td><td>4.47°</td></tr>
+<tr><th scope="row">Linear fit using all six joints</th><td class="bar" aria-hidden="true"><span style="--w:24.62%"></span></td><td>5.60°</td></tr>
+<tr><th scope="row">Linear fit using both knees</th><td class="bar" aria-hidden="true"><span style="--w:27.87%"></span></td><td>6.34°</td></tr>
+<tr><th scope="row">Hold the last knee angles</th><td class="bar" aria-hidden="true"><span style="--w:69.53%"></span></td><td>15.82°</td></tr>
+<tr><th scope="row">Continue the latest change in angle</th><td class="bar" aria-hidden="true"><span style="--w:100%"></span></td><td>22.75°</td></tr>
+</tbody></table>
+<p class="footnote">All five methods used the same 42,781 forecast points from 12 people held out of training. We averaged absolute errors over both knees and all forecasts within each person, then gave each person equal weight. Adjacent forecasts share frames.</p>
+</figure>
+<h3>What if the model can look back a whole stride?</h3>
+<p>A rule with four seconds of knee history searched for an earlier stride whose movement resembled the latest second. It copied the angles 15 frames beyond that earlier match. The rule needed no training. It needed more history, leaving 40,201 forecast points on which to compare the two methods directly.</p>
+<p class="result"><strong>The earlier stride won for 10 of 12 people.</strong> On those same points its mean error was 3.535°, compared with 4.465° for the Transformer. The average advantage was 0.93° (95% interval 0.36° to 1.57°, resampling whole people and preserving each person’s paired errors).</p>
+</section>
+<section class="sheet" aria-labelledby="rhythm">
+<p class="mast">Trial-level rhythm</p>
+<h2 id="rhythm">How often does the knee bend?</h2>
+<p class="lead">Slide a recording of repeated knee bends one second along a timeline. Every bend moves, and the number of bends per minute stays the same. That distinction lets us compare the rhythm recorded by two instruments even when we cannot line up each movement between them.</p>
+<h3>One number from each instrument</h3>
+<p>Skin electrodes on the legs measured electrical activity near the muscles. The surface electromyography (EMG) files contain a summary for each of 12 channels, the average size of the voltage regardless of its sign. The movement files contain a bend angle for each knee. A person and a treadmill speed identify the corresponding pair of files.</p>
+<p>In each file we used seconds 5 to 45 on its own clock. We asked how strongly each signal repeated at rates from 27 to 90 cycles per minute. For each channel we removed its average level, gave the middle of the interval more weight (a Hann taper), and calculated the power at each possible rate. We scaled those powers to add up to one so that louder channels had no extra say. Averaging across the 12 muscle channels gave one strongest rate. Averaging across the two knees gave another. Each is a repeating cycle rate. Neither instrument counted footfalls in this test.</p>
+<figure>
+<figcaption>Table 2. Which estimate came closest to the knee rhythm?</figcaption>
+<table><thead><tr><th scope="col">Estimate of knee rhythm</th><th scope="col">Mean error<br>(cycles/min)</th></tr></thead>
+<tbody>
+<tr><th scope="row">Muscle rhythm from the same walk</th><td>0.027</td></tr>
+<tr><th scope="row">Same rhythm, adjusted by a line fitted on training data</th><td>0.042</td></tr>
+<tr><th scope="row">Typical knee rhythm in training (median)</th><td>2.550</td></tr>
+<tr><th scope="row">Muscle rhythm from another walker</th><td>3.055</td></tr>
+</tbody></table>
+<p class="footnote">The training group contained 38 people with both files. Eleven of the 12 knee-forecast test participants also had a muscle file. Each contributed one pair at 0.5 m/s and one absolute error per estimate. For the wrong-person check, each person received the next person’s muscle rhythm in identifier order, wrapping at the end.</p>
+</figure>
+<h3>How small is 0.027 cycles per minute?</h3>
+<p>Nine of the 11 pairs selected the same point on the analysis grid. The other two differed by one point, 0.15 cycles per minute. Averaging the two differences and nine zeros gives 0.027. The matched estimate beat the training median for ten people and tied for one. It beat the wrong-person comparison for all eleven.</p>
+<p class="result">One extra cycle in a 40-second window corresponds to 1.5 cycles per minute (60 ÷ 40), the characteristic frequency scale of the analysis. Searching it in 0.15-cycle increments gives a finer grid on which to compare peaks. The three decimal places describe agreement between estimated peaks.</p>
+</section>
+<section class="sheet" aria-labelledby="clocks">
+<p class="mast">Acquisition and interpretation</p>
+<h2 id="clocks">When did a muscle signal occur relative to a bend?</h2>
+<p class="lead">A claim about the order of two events needs a time reference that survives the trip from instrument to file. The study authors describe a shared trigger during acquisition. We inspected the published exports for one development walk, S1 at 0.5 m/s, to see which timing evidence a reader can recover.</p>
+<dl>
+<div><dt>Scalp electrodes</dt><dd>The 300 Hz scalp electrical recording (EEG) contains 110 trigger changes. Its header reports a 40 ms firmware filter delay. Neither gait test used scalp signals.</dd></div>
+<div><dt>Muscle electrodes</dt><dd>The 12 mean absolute voltage channels carry time labels about 16.05 times per second. The export has no matching trigger column. The labels alone leave open which original samples contributed to each average.</dd></div>
+<div><dt>Movement sensors</dt><dd>The inertial measurement unit (IMU) export includes numbered frames at 60 Hz. Its marker table has no event rows with which to match the other devices.</dd></div>
+</dl>
+<p>The recorded angles introduce a second timing question. The headers for six of the 51 angle files carried the Xsens “HD” label. This processing uses the whole recording and can refine an earlier angle using later information. The other 45 said “Live”. Neither label measures the delay from a person bending a knee to that angle becoming available to a predictor. <a href="https://www.xsens.com/hubfs/User_Manual_Xsens%202025.pdf">Xsens manual, §9.1</a></p>
+<h3>What would settle the timing?</h3>
+<p>Match identifiable events across the devices, measure clock drift from start to finish, and establish when each muscle average and joint estimate became available. A live forecast also needs a separate measurement of the physical knee against which to test its error. Here the target came from the same reconstruction as the inputs. Agreement on rhythm leaves contraction onset, neural intent and the direction of influence unresolved. Other speeds, patients and overground walking remain untested.</p>
+<footer class="sources">
+<h3>Source and reproducibility</h3>
+<p>Katmah R, AlShehhi A, Kosaji D, Al-Rahmani N, Abdullah M, Hulleck AAV and Khalaf K (2026). <i>A multimodal gait dataset of brain activity, muscle activity, kinematics and ground forces in young adults</i>, v1.0.0. PhysioNet. The tables report new aggregate analyses of the published recordings. <a href="https://doi.org/10.13026/r0ea-7161">Dataset and methods</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · <a href="https://doi.org/10.1038/s44360-026-00096-z">PhysioNet platform citation</a></p>
+<p>Try the <a href="https://eliminatenoise.github.io/NeuroTranslation/knee-motion/">knee forecast</a> or the <a href="https://eliminatenoise.github.io/NeuroTranslation/gait-rhythm/">rhythm comparison</a>. Source code and numerical results accompany the <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-motion">knee-angle study</a> and <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/gait-rhythm">gait-rhythm study</a>.</p>
+</footer>
+</section>
+</main></body></html>

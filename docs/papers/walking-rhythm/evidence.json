@@ -1,0 +1,166 @@
+{
+  "title": "The next knee angle and the rhythm of a walk",
+  "dataset": {
+    "citation": "Katmah R, AlShehhi A, Kosaji D, Al-Rahmani N, Abdullah M, Hulleck AAV and Khalaf K (2026). A multimodal gait dataset of brain activity, muscle activity, kinematics and ground forces in young adults. PhysioNet v1.0.0.",
+    "doi": "10.13026/r0ea-7161",
+    "licence": "CC BY 4.0",
+    "files_base": "https://physionet.org/files/multimodal-gait-dataset/1.0.0/",
+    "sha256sums_txt_sha256": "d2e302605b86e264bb7b0d710c7e19214cd5bf487d2f1c70170f9fae4961c147",
+    "selected_source_files_sha256": {
+      "Dataset/EEG_Data/EEG.csv/S1_0.5_raw.csv": "38fb9b4ffb7af9eb4eba48e6079937e87bdf673aa675e76b90b811521f0a7709",
+      "Dataset/EMG_Data/EMG_S1_0.5.csv": "b23f01da1191df2b8b906c2d2e8c46ad7c602dd88e0a6fac5cd496206006c4d2",
+      "Dataset/EEG_Data/README.txt": "6bd4003f1d0c10a6e4c43f90f6d1cfcb5ac98b18e592199e924a31db3dc0034b",
+      "Dataset/EMG_Data/README.txt": "3fa4998dc04c66a2ccac60930c7ba009b015ef6091d0290cae4a2b5c5dca9955",
+      "Dataset/IMU_Data/README.txt": "b4462330a39112a83b041c38dd68612f8c77ce449fe4f9db1a039c7fde2a0f68"
+    },
+    "IMU_tar_gz_sha256": "70ebdfee244c78c5726ec99be7864b99629c0b1eb02a66a558a625fd095b06b2",
+    "S1_0.5_archive_members_sha256": {
+      "IMU_S1_0.5/General_Information.csv": "0760e23f0a036217287b6279969b0193b4432048ff6ed8b4922132f5d122d4b6",
+      "IMU_S1_0.5/Joint_Angles_ZXY.csv": "bb95ba46283a82f465d84048147dabc05ae16d4fa29a874ee37cd82cc4e6325d",
+      "IMU_S1_0.5/Markers.csv": "8ac061bee382e9f04bfa47336a1315c2b37952a150602b316456133f80c3838a"
+    },
+    "changes": "Selected one speed, calculated angle forecasts and rhythmic rates from the original exports, and summarized errors across held-out people."
+  },
+  "angle_forecast": {
+    "speed_m_s": 0.5,
+    "unit": "degrees, equally weighted participant means of absolute bilateral knee errors",
+    "train_people": 39,
+    "test_people": 12,
+    "test_cutoffs": 42781,
+    "historical_frame_offsets_before_cutoff": [
+      24,
+      18,
+      12,
+      6,
+      0
+    ],
+    "target_frame_offset_after_cutoff": 15,
+    "mean_errors": {
+      "transformer": 4.466900819161863,
+      "all_ridge": 5.59973457676028,
+      "knee_ridge": 6.3391779325640725,
+      "persistence": 15.816078496691675,
+      "slope": 22.748744172487246
+    },
+    "four_seconds_available": {
+      "eligible_cutoffs": 40201,
+      "prior_stride_mean_mae_degrees": 3.5352540464780127,
+      "transformer_mean_mae_degrees": 4.464682328471118,
+      "prior_stride_wins": 10,
+      "transformer_wins": 2,
+      "ties": 0,
+      "transformer_minus_stride_mae_degrees": 0.9294282819931055,
+      "paired_person_bootstrap_ci95": [
+        0.35990587277070096,
+        1.571208971514491
+      ]
+    },
+    "technical_header_counts": [
+      {
+        "frame_rate_hz": 60.0,
+        "processing_quality": "HD",
+        "files": 6
+      },
+      {
+        "frame_rate_hz": 60.0,
+        "processing_quality": "LIVE",
+        "files": 45
+      }
+    ]
+  },
+  "trial_level_rhythm": {
+    "units": "cycles per minute, one pair per person",
+    "train_people": 38,
+    "test_people": 11,
+    "test_people_also_in_angle_evaluation": 11,
+    "source_interval_seconds_each_clock": [
+      5,
+      45
+    ],
+    "rate_grid_min_max_step": [
+      27,
+      90,
+      0.15
+    ],
+    "window_scale_cycles_per_minute": 1.5,
+    "matched_error_zero_or_one_grid_step_people": [
+      9,
+      2
+    ],
+    "scores": {
+      "matched_emg": {
+        "mae": 0.027272727272727015,
+        "bias": 0.027272727272727015
+      },
+      "training_median": {
+        "mae": 2.5500000000000003,
+        "bias": 0.39545454545454944
+      },
+      "affine_emg": {
+        "mae": 0.041976288588428966,
+        "bias": 0.0035290368279102713
+      },
+      "wrong_person": {
+        "mae": 3.0545454545454542,
+        "bias": 0.027272727272727015
+      }
+    },
+    "paired": {
+      "training_median": {
+        "mae_difference": -2.5227272727272725,
+        "people_with_lower_error": 10,
+        "ties": 1,
+        "leave_one_out_mean_difference_range": [
+          -2.7749999999999995,
+          -2.19
+        ]
+      },
+      "wrong_person": {
+        "mae_difference": -3.027272727272727,
+        "people_with_lower_error": 11,
+        "ties": 0,
+        "leave_one_out_mean_difference_range": [
+          -3.315,
+          -2.6849999999999996
+        ]
+      }
+    }
+  },
+  "S1_clock_evidence": {
+    "condition_m_s": 0.5,
+    "EEG_Hz": 300.0,
+    "EEG_filter_delay_ms": 40.0,
+    "EEG_trigger_changes": 110,
+    "EMG_amplitude_channels": 12,
+    "EMG_label_rate_Hz": 16.04938271604976,
+    "EMG_has_matching_trigger_column": false,
+    "IMU_frames_per_second": 60,
+    "IMU_event_marker_rows": 0,
+    "xsens_manual": {
+      "url": "https://www.xsens.com/hubfs/User_Manual_Xsens%202025.pdf",
+      "section": "9.1, Reprocess HD",
+      "sha256": "16619fd927009ef4c5f18d22e6be511c4661aa809ef46d1e9c7a669cfa55ccce"
+    }
+  },
+  "benchmark_input_sha256": {
+    "knee_motion": {
+      "protocol.json": "eadf8e0d3482f395c592eb7d9fb9abfe97c0fc9b69d99eafbe90c8e10ca8396d",
+      "sources.json": "695d0ff23daba2093e04467aeb3900de2a4735843baec54bf3ca4bab51e731c1",
+      "results.json": "f9681929fe8e0523071226e0ade55805d466648b4701fbb495586c9165ebc6ae",
+      "phase-results.json": "a8107b736be94bc553be68424f6a36a053abf2744726fa2ecca184b526f6d88d",
+      "technical-summary.json": "26fa714e060896d6c3e362956f7432f7c4e02b388db7486eaa445a9e5242058c",
+      "prior_stride.py": "0f349b53aade29db2ece6587352cffe40c12ef53df6b2a2b189213534757b2fa",
+      "assess.py": "8af90326516fe29a18780366a6de0343590cf0e22f1ded6b71609170ff5270dd",
+      "fit.py": "c857da4c91f4493e6213e65bf47d071932f09ac7e15414c55fbe97751a18195e",
+      "weights.json": "cd876eac2165d40b43386643de99178807dc384cc0915abcff3fe92750018efc"
+    },
+    "gait_rhythm": {
+      "protocol.json": "67b33f3a79fb013cb71f7a59e1dca0fd34a4b2bbafbfe1437b719df4c584b34c",
+      "source-clarification.json": "dfcbfca1e194c0afdefacd37a0fff9234fdd16ffe73caa08f2b1b36e44166be0",
+      "study.py": "08307e5ff7ff042569b31d610ec573d9f91af0fafd9cc470050dd9cb57a6556a",
+      "fit.json": "57e989090a461f3f4903c8ebc9d05bc6cf22bd60c6e731b007ade0f4d8110ac9",
+      "results.json": "e17f74ee9dc2c09b0843111ecb8c5783920f6a5dfc4245ab5c1f978031ab0c21",
+      "sources.json": "9aad04819541368a4c0edaac7d095c4a8911da28f96322becc8b88e262e70956"
+    }
+  }
+}

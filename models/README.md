@@ -10,6 +10,12 @@ The movement viewer compares right-wrist angles with different combinations of m
 
 On the same 549 forecast instants compared in the linear benchmark, the shared movement model had an average error of **2.805 cm** with movement alone and **2.778 cm** with correctly timed CA1 and prefrontal firing. Substituting firing from an earlier trip gave **2.804 cm**. Only one of three rats improved over both controls. A comparison with scrambled movement-encoder weights scored **2.763 cm** with firing. These results establish that the fitted readout uses the firing signal. They give no evidence here that pretraining improved this forecast. A lower average error can hide a worse result in an individual animal. [Study and per-animal results](neurotranslate-0.0/population/)
 
+## Do the muscles and knees repeat at the same rate?
+
+For 11 held-out walkers at 0.5 m/s, the strongest rhythms in the leg-muscle recordings and knee angles differed by 0.027 cycles per minute on average. Pairing each walk with another walker’s muscle recording raised the difference to 3.055. Each instrument supplied its own 40-second window. Agreement in rate leaves the timing of individual steps unresolved. The peaks landed on the same search frequency for nine people and one 0.15-cycle-per-minute grid interval apart for two. A 40-second window has a natural frequency spacing of about 1.5 cycles per minute. These comparisons measure agreement between estimates made with the same method.
+
+[Compare the rhythms](https://eliminatenoise.github.io/NeuroTranslation/gait-rhythm/) · [Study and results](gait-rhythm/) · [Offline reader and source (ZIP)](gait-rhythm.zip) · [Read the supplement](https://eliminatenoise.github.io/NeuroTranslation/papers/walking-rhythm/)
+
 ## Where will the knees be 15 stored frames later?
 
 Five snapshots of both hips, knees and ankles predict the two knee angles 15 frames later in a stored 60 Hz treadmill recording. On 40,201 forecasts from 12 held-out walkers, replaying a stride from four seconds of knee history gave 3.54° mean absolute error. The transformer, with 0.4 seconds of joint history, gave 4.46° on the same windows. At the same five input times, the transformer averaged 4.47° across all 42,781 eligible windows and a six-joint linear fit averaged 5.60°. Each walker counts equally.

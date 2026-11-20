@@ -1,0 +1,451 @@
+{
+  "version": "1.0.0",
+  "license": "CC BY 4.0",
+  "doi": "10.13026/r0ea-7161",
+  "archive_url": "https://physionet.org/files/multimodal-gait-dataset/1.0.0/Dataset/IMU_Data/IMU.tar.gz",
+  "archive_sha256": "70ebdfee244c78c5726ec99be7864b99629c0b1eb02a66a558a625fd095b06b2",
+  "release_index_sha256": "d2e302605b86e264bb7b0d710c7e19214cd5bf487d2f1c70170f9fae4961c147",
+  "members": {
+    "1": {
+      "emg_path": "Dataset/EMG_Data/EMG_S1_0.5.csv",
+      "emg_sha256": "b23f01da1191df2b8b906c2d2e8c46ad7c602dd88e0a6fac5cd496206006c4d2",
+      "knee_member": "IMU_S1_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "bb95ba46283a82f465d84048147dabc05ae16d4fa29a874ee37cd82cc4e6325d",
+      "technical_member": "IMU_S1_0.5/General_Information.csv",
+      "technical_sha256": "0760e23f0a036217287b6279969b0193b4432048ff6ed8b4922132f5d122d4b6",
+      "frame_hz": 60
+    },
+    "2": {
+      "emg_path": "Dataset/EMG_Data/EMG_S2_0.5.csv",
+      "emg_sha256": "540de74275fb930bc6e2be6bee97b22b4e4226c383e63c783fc8d2495a2763e6",
+      "knee_member": "IMU_S2_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "daa4c1917affedb6e2be3b30a193062b6970fa742643dacf51de3b92fba0e34b",
+      "technical_member": "IMU_S2_0.5/General_Information.csv",
+      "technical_sha256": "d411b51cbcc577ab80194238e953964307aa449fce13e25a0a64966d2f6d99b1",
+      "frame_hz": 60
+    },
+    "3": {
+      "emg_path": "Dataset/EMG_Data/EMG_S3_0.5.csv",
+      "emg_sha256": "5759faa54583dc6682ee17fcb16cba724e064590d59a85766c02287a66995c61",
+      "knee_member": "IMU_S3_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "4c03c1cb7007582df0574a70a8724a9393ce58be256f06b4b145c9f5e00490a5",
+      "technical_member": "IMU_S3_0.5/General_Information.csv",
+      "technical_sha256": "13d772e6c0717c6c58f5ebb8652f5fa12aae923be07eaaf8a3c0031f1025ecd8",
+      "frame_hz": 60
+    },
+    "4": {
+      "emg_path": "Dataset/EMG_Data/EMG_S4_0.5.csv",
+      "emg_sha256": "eac8d238ee12080ff08baad78e57b4de101180db35d2f36203b564c116d00d69",
+      "knee_member": "IMU_S4_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "b75b7a173d0a7a7335319c58e11b5ebdd80358de514964bfae98fd0698b785a8",
+      "technical_member": "IMU_S4_0.5/General_Information.csv",
+      "technical_sha256": "ae28f5a6161602a4a914cd7740e4815c087b99a27847b39de1c72e4dd8e195de",
+      "frame_hz": 60
+    },
+    "5": {
+      "emg_path": "Dataset/EMG_Data/EMG_S5_0.5.csv",
+      "emg_sha256": "996903bdfae265242168f08c3cb628201db218131b9e9ad0e3f35079dcd2b6fe",
+      "knee_member": "IMU_S5_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "243323298970450eceec25fa5e99e67cab8bbacd4f4c2ebcc8ddc446a8152c7f",
+      "technical_member": "IMU_S5_0.5/General_Information.csv",
+      "technical_sha256": "d920d4718da08c72099fae97ab741fd71f24e3424e354827a40b83c58a5439b7",
+      "frame_hz": 60
+    },
+    "6": {
+      "emg_path": "Dataset/EMG_Data/EMG_S6_0.5.csv",
+      "emg_sha256": "31ca8700017995ee01548fe0cb9ad9b6dc4c66a783782d3ca9fb003f54cab1f9",
+      "knee_member": "IMU_S6_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "241503d49f43e9e3e4cd7b093ccda70d70cfa7c002a8d9e17083c222b2b9d998",
+      "technical_member": "IMU_S6_0.5/General_Information.csv",
+      "technical_sha256": "c263b3af95a6d45ed9893214240e426ba5eecd0c425a372dc72e1895c691d962",
+      "frame_hz": 60
+    },
+    "7": {
+      "emg_path": "Dataset/EMG_Data/EMG_S7_0.5.csv",
+      "emg_sha256": "2a9872346a8f16318ea32db5f3f6ab0205578ba2c4fb4acd6ba490aa7b1d9e33",
+      "knee_member": "IMU_S7_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "d0869bb9f5142ec83e5e69eb9a895191ed72ad9fab96f715abe97a1c5c074741",
+      "technical_member": "IMU_S7_0.5/General_Information.csv",
+      "technical_sha256": "224e30937ad36bf130a10e676fc8e75f8861fd0f571df568c17c729e0ce3ac4d",
+      "frame_hz": 60
+    },
+    "9": {
+      "emg_path": "Dataset/EMG_Data/EMG_S9_0.5.csv",
+      "emg_sha256": "f8cdeb46194a58146078604fd44023deaacb98b4fdc06778db6a5c3dcd1b7363",
+      "knee_member": "IMU_S9_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "d252f9d88dc349cdafd086f0431732de69c242091586ce1608cf5939fa80e7d4",
+      "technical_member": "IMU_S9_0.5/General_Information.csv",
+      "technical_sha256": "b9b15ecdba50bf900bceb1b7b5276cada5fa935a50278b9d5e63222bb2af2921",
+      "frame_hz": 60
+    },
+    "10": {
+      "emg_path": "Dataset/EMG_Data/EMG_S10_0.5.csv",
+      "emg_sha256": "daf0ae5d4d48c608e04dab60d302894079f4f29bed725a1f0f82004afc245251",
+      "knee_member": "IMU_S10_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "69cb2c272ad7cec76d7028a6acf5b07bc6b7be0ac4b4e769dea7d265cf61c1c2",
+      "technical_member": "IMU_S10_0.5/General_Information.csv",
+      "technical_sha256": "a82f801299b52150edfc8932e9c0b2dd9d54d3547d720001663c71ed59602ebe",
+      "frame_hz": 60
+    },
+    "11": {
+      "emg_path": "Dataset/EMG_Data/EMG_S11_0.5.csv",
+      "emg_sha256": "c79f8e6ba8703856a60fd0c4d1f6d0c5582718b4dc1536d7a53adbb1157275b7",
+      "knee_member": "IMU_S11_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "08d30ab05502d37d34ab85b427aa00c0940931b6a2aec0b2b8558a05d771d851",
+      "technical_member": "IMU_S11_0.5/General_Information.csv",
+      "technical_sha256": "bd98062f74d61510ab55c5b0f550ab2eff33698d39e7c36b7727d405c36199af",
+      "frame_hz": 60
+    },
+    "12": {
+      "emg_path": "Dataset/EMG_Data/EMG_S12_0.5.csv",
+      "emg_sha256": "04ceead0fff65124d431c7166b4d00750b21f08865316e55470184b897070481",
+      "knee_member": "IMU_S12_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "66eb4e5d0f218e1afa2a8515cf7bf4ab27836ac44e131b3e4043886f5b3e5e90",
+      "technical_member": "IMU_S12_0.5/General_Information.csv",
+      "technical_sha256": "1a87e07bc00ab16454bde5e5f112927de6baefbf221fd760d9f399cb60ba9b84",
+      "frame_hz": 60
+    },
+    "13": {
+      "emg_path": "Dataset/EMG_Data/EMG_S13_0.5.csv",
+      "emg_sha256": "e65a6022e0d3be7eea75529b6e01027d3c8177aacca34b394401aa6f12bf3b1d",
+      "knee_member": "IMU_S13_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "1ed0d9b89051dd50dff7a56ba88d92176d1b4e78995e03531e5c2dab10e30f90",
+      "technical_member": "IMU_S13_0.5/General_Information.csv",
+      "technical_sha256": "dc623fabb1b1234e33651247cfaf3e5e5698d0b073dc472bf38d2f81e2697ff8",
+      "frame_hz": 60
+    },
+    "14": {
+      "emg_path": "Dataset/EMG_Data/EMG_S14_0.5.csv",
+      "emg_sha256": "768338a2eddce15c84aaa565732672f05294913def96ee5bd0706eb52b5527c2",
+      "knee_member": "IMU_S14_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "75a272619965915c42c2feca27fa333b0e49e8f4edef014c853e78465bac73e0",
+      "technical_member": "IMU_S14_0.5/General_Information.csv",
+      "technical_sha256": "97f3c769183a77aee760c47f00748363c04b7c3362b631e29c56a3b99966cf9c",
+      "frame_hz": 60
+    },
+    "15": {
+      "emg_path": "Dataset/EMG_Data/EMG_S15_0.5.csv",
+      "emg_sha256": "f3c4145cda4baf999856b1a85ade283ac88195f3cfc631da8a2ce0df771268e6",
+      "knee_member": "IMU_S15_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "914b5505ac69f0637d87e435a055513c37646729c81471310817a2d11c4e3d34",
+      "technical_member": "IMU_S15_0.5/General_Information.csv",
+      "technical_sha256": "f2c2d8664b5e8aae2f802b77d2eaebc3f437939aba8efa984d2b77b26c43b996",
+      "frame_hz": 60
+    },
+    "16": {
+      "emg_path": "Dataset/EMG_Data/EMG_S16_0.5.csv",
+      "emg_sha256": "69de86deefcac03682009fd5dfa5b8a14abd4d1d3d5b9f65695046c77b65c0f4",
+      "knee_member": "IMU_S16_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "e56225abc6fa1ef55dd0b208032175785c3f86d27028e3afe389b82a927315c6",
+      "technical_member": "IMU_S16_0.5/General_Information.csv",
+      "technical_sha256": "968a26b4c7e834ddf0297283246955de24da4ee9b54450f80290925f5321dc36",
+      "frame_hz": 60
+    },
+    "17": {
+      "emg_path": "Dataset/EMG_Data/EMG_S17_0.5.csv",
+      "emg_sha256": "cddac12fcf26d429f8187152db9081860251d87b3995a7c0d33ed547a4fdbc5f",
+      "knee_member": "IMU_S17_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "533e6a2907eb09501a62776e616c88990923b852ebc9d579a91174c0de7bb7fc",
+      "technical_member": "IMU_S17_0.5/General_Information.csv",
+      "technical_sha256": "ddda1898c0a27ee510dbdc39d9904118cd379fbd00a3ccb129ffc8bd672cf3a8",
+      "frame_hz": 60
+    },
+    "18": {
+      "emg_path": "Dataset/EMG_Data/EMG_S18_0.5.csv",
+      "emg_sha256": "262fe4ada0710b06e6367cd9f67f4229408b589f0fb8c81c1881becc2647786a",
+      "knee_member": "IMU_S18_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "0d32e41266356703f3fcaacd0fd2ded63d6d9e321951d50e9affab80d3f40285",
+      "technical_member": "IMU_S18_0.5/General_Information.csv",
+      "technical_sha256": "e7c2a67d339226a5aeda3c267d81180cff0362877316a78442f5e5676ea7b342",
+      "frame_hz": 60
+    },
+    "19": {
+      "emg_path": "Dataset/EMG_Data/EMG_S19_0.5.csv",
+      "emg_sha256": "b51960fc94a80241f4c84a6c86ef48110806252dd79b4d08c256f5f352b291a8",
+      "knee_member": "IMU_S19_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "f0a9704ef0fab8db8c5827ae034563197bb8ba1cb991a5859094f50eb31ce432",
+      "technical_member": "IMU_S19_0.5/General_Information.csv",
+      "technical_sha256": "f22875bf72d67e5ece4ca8db8b0290e77fea28b168c2c993830724b04f4a0458",
+      "frame_hz": 60
+    },
+    "20": {
+      "emg_path": "Dataset/EMG_Data/EMG_S20_0.5.csv",
+      "emg_sha256": "bfb4ecd11bb3321ff0c34b3861ad33c473ef606c3a3a92fb125498da65151d60",
+      "knee_member": "IMU_S20_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "16c0162855b8cef7fc9c70f1dd2b79f819fc33fa6042bc2a8999cf3efbd685a8",
+      "technical_member": "IMU_S20_0.5/General_Information.csv",
+      "technical_sha256": "cced7a3f8da24983c904d504ec5b0e73a9add742862ea618e96e1cd083cda0e5",
+      "frame_hz": 60
+    },
+    "21": {
+      "emg_path": "Dataset/EMG_Data/EMG_S21_0.5.csv",
+      "emg_sha256": "33abf573b8f66f18f4880ecdee972a401d0f7633dd3dd24c79b2917e0495809e",
+      "knee_member": "IMU_S21_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "4ff5c056cabd421d3de1e2221a05767387e10f32169a90e282a28757ab7e2ed5",
+      "technical_member": "IMU_S21_0.5/General_Information.csv",
+      "technical_sha256": "0f0e53efd7676643dd7cee650dca1cbf35806378f8e7b8f5d38033b34b868882",
+      "frame_hz": 60
+    },
+    "22": {
+      "emg_path": "Dataset/EMG_Data/EMG_S22_0.5.csv",
+      "emg_sha256": "ab6abce344288d7a78c25ee95cc5d875e64e0d50b611ca752a1b93df3c16c5f5",
+      "knee_member": "IMU_S22_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "7393e42609557e5576028ac80b21529c828206a7166454ff23bb7e1587c92beb",
+      "technical_member": "IMU_S22_0.5/General_Information.csv",
+      "technical_sha256": "b3742343312768f777e85eb1c480d23aa49d57164c7e4eb4f68d15d591bbb89e",
+      "frame_hz": 60
+    },
+    "23": {
+      "emg_path": "Dataset/EMG_Data/EMG_S23_0.5.csv",
+      "emg_sha256": "cf0d906fc3ae1551d3046fe06f99f5affdafd826f83c3da27715865f26f99cf4",
+      "knee_member": "IMU_S23_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "bb0443298db4c76e1f1b0bd9efbbcf074a9889fa2a75dc707d7cfeb0acaafd92",
+      "technical_member": "IMU_S23_0.5/General_Information.csv",
+      "technical_sha256": "5b37b75bcbc274148d4db6dacfb58156fc7d8748e0447ea5a3e9f9893a1cff53",
+      "frame_hz": 60
+    },
+    "25": {
+      "emg_path": "Dataset/EMG_Data/EMG_S25_0.5.csv",
+      "emg_sha256": "b05311d2c494736847fea975a958ef7fc6f1e18af798d41cce9eb3e2a8f62a47",
+      "knee_member": "IMU_S25_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "e512efaeae8c4aa9fe5ab1eae9fdff24e9a5086c4610099b5a1aa58f039b96cc",
+      "technical_member": "IMU_S25_0.5/General_Information.csv",
+      "technical_sha256": "00f0264ed86cae8d230700d263a5c4202329c4bc81cfc8f756fc9db414b6773b",
+      "frame_hz": 60
+    },
+    "26": {
+      "emg_path": "Dataset/EMG_Data/EMG_S26_0.5.csv",
+      "emg_sha256": "662b41824a9673d133939c40ceff240a297906df9a1d7b571ba6758bbf64d29a",
+      "knee_member": "IMU_S26_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "318f08a2ac84d61e2c1c9f012c7633e29285e8b0468a82f976f1f9b6aec38434",
+      "technical_member": "IMU_S26_0.5/General_Information.csv",
+      "technical_sha256": "e691cf14af0e9c90ebea80c2cd2672bf770823db31b52dd08659cc64f3f91e0c",
+      "frame_hz": 60
+    },
+    "27": {
+      "emg_path": "Dataset/EMG_Data/EMG_S27_0.5.csv",
+      "emg_sha256": "b3171ffffe4dee0f1afbc54da9936f5da2cf022ee42739141c5335a641029de8",
+      "knee_member": "IMU_S27_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "a5f3dbd456b3e4790f559132e8b4f1025b61e42bd3da3c530836b15d3af4840e",
+      "technical_member": "IMU_S27_0.5/General_Information.csv",
+      "technical_sha256": "36423cfbecfe7513e0da06ad99d96073344e21e256f2779575cf9f2741cef171",
+      "frame_hz": 60
+    },
+    "28": {
+      "emg_path": "Dataset/EMG_Data/EMG_S28_0.5.csv",
+      "emg_sha256": "59972e3e23d02e4928c793919a5506db025f5dcdf214260f22cf14cdfc5ab946",
+      "knee_member": "IMU_S28_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "718d0d8ba5093055c44d723b36ae9b5be0dfb238e347bf2d358d1dfc5327e3dc",
+      "technical_member": "IMU_S28_0.5/General_Information.csv",
+      "technical_sha256": "194357f3c3dc9d92cf20bb89fdf28d6c0313747f9fb1f092d50b08e8db6b8be5",
+      "frame_hz": 60
+    },
+    "29": {
+      "emg_path": "Dataset/EMG_Data/EMG_S29_0.5.csv",
+      "emg_sha256": "c2bcbca8f970bb7fc3b70d92c73c56c8aafe951104ded167b5b827a3650ee4d1",
+      "knee_member": "IMU_S29_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "1a15113039609397725e130bf0ad70667138f88fae97f4e32de40c89bd0c0108",
+      "technical_member": "IMU_S29_0.5/General_Information.csv",
+      "technical_sha256": "31469d9b38273eefdaa564c9a47fb010c25b80eae29e78c633480a6ce3a45bd0",
+      "frame_hz": 60
+    },
+    "30": {
+      "emg_path": "Dataset/EMG_Data/EMG_S30_0.5.csv",
+      "emg_sha256": "815d1a371a8582790f24dfb8ea6e06e8d0eba5ad17e6a937a31200308d02fd28",
+      "knee_member": "IMU_S30_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "adc1f87c2eac0d1b5ba146e62b17ba8492efd7943c03c51e81b4916c2b9ac7fd",
+      "technical_member": "IMU_S30_0.5/General_Information.csv",
+      "technical_sha256": "f2d61edc70814c859d913ad6bbd874772ddb41cca2b997f69e520514d57b03de",
+      "frame_hz": 60
+    },
+    "31": {
+      "emg_path": "Dataset/EMG_Data/EMG_S31_0.5.csv",
+      "emg_sha256": "22fbd1a78e7c13bd5b79f91ef00771986e20df018f7b27813c8dfaaed558e5d7",
+      "knee_member": "IMU_S31_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "9342b229b446955f743799143c380d6da17474164f36adcfb104f43173d18b1e",
+      "technical_member": "IMU_S31_0.5/General_Information.csv",
+      "technical_sha256": "00ddc4a3c1ce177af20b5df8176feff5244145b866d550e6bfcd3c25287d7215",
+      "frame_hz": 60
+    },
+    "32": {
+      "emg_path": "Dataset/EMG_Data/EMG_S32_0.5.csv",
+      "emg_sha256": "241c899f02ab27d5fc0f2866143aca7110b0b81befb79d65d069cd29d31d04db",
+      "knee_member": "IMU_S32_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "2eb4b37d6f5913c694c6b292f6e36fc848f2886a460eac7522d2ece2cd92782b",
+      "technical_member": "IMU_S32_0.5/General_Information.csv",
+      "technical_sha256": "634befa8091dd1728d6a4425c928f681f984ab4e799685a3718b64eef2bb795f",
+      "frame_hz": 60
+    },
+    "33": {
+      "emg_path": "Dataset/EMG_Data/EMG_S33_0.5.csv",
+      "emg_sha256": "8b1a39e3e8b2c7099f1fce115d7b853d84f7e0de7d4620c5d45ab12bd807a7b8",
+      "knee_member": "IMU_S33_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "9699c2be2b1394b8e8f20a0d9f9823b9a22edb44b7ed695af6e896cafc65e1d4",
+      "technical_member": "IMU_S33_0.5/General_Information.csv",
+      "technical_sha256": "d5a5fe19172d33025935c5514dd29aed8a2566caee21112352db517824be857c",
+      "frame_hz": 60
+    },
+    "34": {
+      "emg_path": "Dataset/EMG_Data/EMG_S34_0.5.csv",
+      "emg_sha256": "74a2942248a37e416dd85ef5c884f558d24d39c7c4e3c4ea16f8d33e7e19cd36",
+      "knee_member": "IMU_S34_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "ac1aaedf8cc5c4d1dae73808c6894da1eae34f70494bb40f43a9715a74c2f21d",
+      "technical_member": "IMU_S34_0.5/General_Information.csv",
+      "technical_sha256": "bd858e79cfdfb37f5b938ae536e1ee7829a191d8b2987a5191e82d1cb88afe60",
+      "frame_hz": 60
+    },
+    "35": {
+      "emg_path": "Dataset/EMG_Data/EMG_S35_0.5.csv",
+      "emg_sha256": "97f9cd4053f728a50d3c24b8211c7e37c9bf49c580c7925c2054d7d04cfc0c5b",
+      "knee_member": "IMU_S35_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "ebebf082c848804469cc208359365079a8563526e168450ec1cc76e44990d6aa",
+      "technical_member": "IMU_S35_0.5/General_Information.csv",
+      "technical_sha256": "50cf0dad11a1fe40a1b6ceacc3c7d76877963ef432f5cd93ab0a96c6bcf1d9f1",
+      "frame_hz": 60
+    },
+    "36": {
+      "emg_path": "Dataset/EMG_Data/EMG_S36_0.5.csv",
+      "emg_sha256": "2904a69e83b3a6aefe35bca7e4fe644c5222692da53ab798d168c25aa3a705ee",
+      "knee_member": "IMU_S36_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "bba241b47f25de4821adbb2cf418c62f8f9fad1ca178bbb0848890f22cb450e6",
+      "technical_member": "IMU_S36_0.5/General_Information.csv",
+      "technical_sha256": "d3bc6b2a3e1c8bc0fdb27ed16a88a48c4921c375d37fdabe1d75e441ecc1bf1e",
+      "frame_hz": 60
+    },
+    "37": {
+      "emg_path": "Dataset/EMG_Data/EMG_S37_0.5.csv",
+      "emg_sha256": "8bfffe35e16d9fc243e1ab2847ed1f328bdf104be2840c3c0f712b69e628d8db",
+      "knee_member": "IMU_S37_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "cb52b5f400bdff5e38b7b67e332a43ef0f8f5f4c56323df6e84ce134c8a3f61b",
+      "technical_member": "IMU_S37_0.5/General_Information.csv",
+      "technical_sha256": "d1198b38777016d4f38abebc4fbc02f2a1733774fe55a948e87941c8bf228978",
+      "frame_hz": 60
+    },
+    "38": {
+      "emg_path": "Dataset/EMG_Data/EMG_S38_0.5.csv",
+      "emg_sha256": "ab13b6e8e141f899cdfee3b0683d6d58f0f5f003aa95392baf02b07a71cb06d2",
+      "knee_member": "IMU_S38_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "1972f959300960faa50be8d8c02f7bae88fa3a7859b48e123058b8b4fe01b9f3",
+      "technical_member": "IMU_S38_0.5/General_Information.csv",
+      "technical_sha256": "ed89b65bfce19ddd9209946f669600c38c80119ba74d89b55b208b2884a93025",
+      "frame_hz": 60
+    },
+    "39": {
+      "emg_path": "Dataset/EMG_Data/EMG_S39_0.5.csv",
+      "emg_sha256": "43a25a21f727171e4a0594d93b8eb15b1047fb5ec171096a74c244e2c7ff0a52",
+      "knee_member": "IMU_S39_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "8d8713de07bc1f79579d3968a28cc8ad22306f0af71514621e89f2d2431d9dc3",
+      "technical_member": "IMU_S39_0.5/General_Information.csv",
+      "technical_sha256": "f574b07b04b6483390018b136529784f86600a171a12ee8f70badcff20e8ea25",
+      "frame_hz": 60
+    },
+    "40": {
+      "emg_path": "Dataset/EMG_Data/EMG_S40_0.5.csv",
+      "emg_sha256": "cf523e1fae3f6fbdc55876b705efe574e5738e52380295e934969947a023c409",
+      "knee_member": "IMU_S40_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "beff1e72267861fbf1864074d273fc8222bfcdb1dbb8acbfff4eb434e770f838",
+      "technical_member": "IMU_S40_0.5/General_Information.csv",
+      "technical_sha256": "38a6731d714e298c1314d1d68e7d61511f85b713177259420059ec95ee9196dc",
+      "frame_hz": 60
+    },
+    "41": {
+      "emg_path": "Dataset/EMG_Data/EMG_S41_0.5.csv",
+      "emg_sha256": "da03f38f847b94d1d74f1f094b1b17de010f27807ec2c34a167665af6a1d90f4",
+      "knee_member": "IMU_S41_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "ae6b484863ff956b50542580644d7daa60bc4bd9b0b727e25a4ee20f37d1309f",
+      "technical_member": "IMU_S41_0.5/General_Information.csv",
+      "technical_sha256": "9fc5aeebe093045ddaa5978da260854dd026bcd0de53f9cca39a989e8d46822a",
+      "frame_hz": 60
+    },
+    "42": {
+      "emg_path": "Dataset/EMG_Data/EMG_S42_0.5.csv",
+      "emg_sha256": "c0a30f612280d039a2540540d2521788dd0fe84c966023da6aa4f6202bf14baa",
+      "knee_member": "IMU_S42_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "ecca40a8d82f97ee86cbfe4a68190c7b8ae31b8d0835754da7cfa90647de1fa2",
+      "technical_member": "IMU_S42_0.5/General_Information.csv",
+      "technical_sha256": "2a54148ed73f477fbb5debeb056e18b1a49a0cecec729c54a47770c7b381136f",
+      "frame_hz": 60
+    },
+    "43": {
+      "emg_path": "Dataset/EMG_Data/EMG_S43_0.5.csv",
+      "emg_sha256": "28cd0035e6769917c3f3c67919f4b2dffe91f3454c098d79480040027333c63d",
+      "knee_member": "IMU_S43_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "bf652f54b3c6c7dbf68ca6ef5c7323972e460708e732e3733c04697304864038",
+      "technical_member": "IMU_S43_0.5/General_Information.csv",
+      "technical_sha256": "e30a2fdaf0883426c88c71ac6d44bb123de21d5dcc09c1455c1c0feb915ef38f",
+      "frame_hz": 60
+    },
+    "44": {
+      "emg_path": "Dataset/EMG_Data/EMG_S44_0.5.csv",
+      "emg_sha256": "91849e398b034354e6ac54d08591efad264828c597c8c046d4f272e534324d33",
+      "knee_member": "IMU_S44_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "247c0ac6759d6f5707305fd24441ff06addd4ec58f2ab4729cb290cbef3d0c52",
+      "technical_member": "IMU_S44_0.5/General_Information.csv",
+      "technical_sha256": "a8cd00bae29f97ca0a802a972ff66f21545e8fa1cc97937c54b6b2f3749a9ea1",
+      "frame_hz": 60
+    },
+    "45": {
+      "emg_path": "Dataset/EMG_Data/EMG_S45_0.5.csv",
+      "emg_sha256": "9f3aedc821bd2a102d813da84f0cadc67ca3b98806fd1e2ff4af46e4ce3479fa",
+      "knee_member": "IMU_S45_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "ebd8b9ab402ad0bc9e06e5e4b312450101d3fd37054a6a63ec91b6cf01ca81ce",
+      "technical_member": "IMU_S45_0.5/General_Information.csv",
+      "technical_sha256": "b4e983f4ecf2330adff42af044c503b4e0a8c5d62569c08e781348d70cdb842b",
+      "frame_hz": 60
+    },
+    "46": {
+      "emg_path": "Dataset/EMG_Data/EMG_S46_0.5.csv",
+      "emg_sha256": "de897216378eb2f5fd29c6779a7a3c9330861b7709bc520ac406d423ea248db8",
+      "knee_member": "IMU_S46_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "a7e27b8e658119241ad102962ec4cbb2dfa158c8d98c9633964aa8e026eed1a0",
+      "technical_member": "IMU_S46_0.5/General_Information.csv",
+      "technical_sha256": "a5521649b813b782d60263e4d6d327ec7056556b437c95b6133a53ad5d0e9bda",
+      "frame_hz": 60
+    },
+    "47": {
+      "emg_path": "Dataset/EMG_Data/EMG_S47_0.5.csv",
+      "emg_sha256": "7385e7dafc4144aedb53f404dc3212741e69e03ca28798f7ddecb84082e075c8",
+      "knee_member": "IMU_S47_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "9c1a16ef97266b46ee4b07d442406ef962690aae8820323e596b5eaa72a2a7f3",
+      "technical_member": "IMU_S47_0.5/General_Information.csv",
+      "technical_sha256": "4df039c116ccc1059464823d2d70be36f6b92dd7303d8021f0685f5a1a96a748",
+      "frame_hz": 60
+    },
+    "48": {
+      "emg_path": "Dataset/EMG_Data/EMG_S48_0.5.csv",
+      "emg_sha256": "6728ca641dcb019824be579bd9c69be2dd7323495575196090372fdac064bc94",
+      "knee_member": "IMU_S48_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "4fae193f5086d76a9b9905a89761295bda59540f67c04a91b2ccc404b29146aa",
+      "technical_member": "IMU_S48_0.5/General_Information.csv",
+      "technical_sha256": "eda9c8e993740c6a5b0b7793c5eb53b880f49bf6f08e475f3087b46a40215ab8",
+      "frame_hz": 60
+    },
+    "49": {
+      "emg_path": "Dataset/EMG_Data/EMG_S49_0.5.csv",
+      "emg_sha256": "514fd819765b8dbbc0c74b21ff699d992c029b77092564cc8d3eaf2fac1f171d",
+      "knee_member": "IMU_S49_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "8702ff9fd4e3a832a17378bbd3ed81b8bcc8e5881351be852665b57ff3f34fb0",
+      "technical_member": "IMU_S49_0.5/General_Information.csv",
+      "technical_sha256": "09635dfcb4dafab41c47e86844f3da40946804887bbb3e4afa3b236b0d7f6586",
+      "frame_hz": 60
+    },
+    "51": {
+      "emg_path": "Dataset/EMG_Data/EMG_S51_0.5.csv",
+      "emg_sha256": "9fbd3dcfd99c11dc1199892010b0fe2ac53083709ab1341340b6af1be1fb5e9c",
+      "knee_member": "IMU_S51_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "7c29c09c73fd54a584d7e31bdaff26c09a0649f344028485235a660ceb262f99",
+      "technical_member": "IMU_S51_0.5/General_Information.csv",
+      "technical_sha256": "a2b278c2f6d26170752bb483f5fc25c564a5f97d4240207fa49f8d5ce1e32271",
+      "frame_hz": 60
+    },
+    "52": {
+      "emg_path": "Dataset/EMG_Data/EMG_S52_0.5.csv",
+      "emg_sha256": "b4654c161081e15fd0a0b5f1b23a98d6d24d79c2c4c0670aae2d007a0892c3f8",
+      "knee_member": "IMU_S52_0.5/Joint_Angles_ZXY.csv",
+      "knee_sha256": "1e1544fe36753e4d8f9aedfc6d6dad31a8516d3fdea6608736e74144c6813b7c",
+      "technical_member": "IMU_S52_0.5/General_Information.csv",
+      "technical_sha256": "53c35d1d2f7402e9f8ae5a42b03591b2ea4ba9483f66bb2174b41b50c2735c7f",
+      "frame_hz": 60
+    }
+  }
+}
