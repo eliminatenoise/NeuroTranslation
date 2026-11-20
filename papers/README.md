@@ -10,53 +10,53 @@ Each paper has a Technical edition, for readers who want the method, and a Simpl
 
 | | Technical | Simple English |
 | --- | --- | --- |
-| *NeuroTranslation: A New Paradigm In Brain-Body Mapping.* | [PDF, 53 pages](current/neurotranslation-technical.pdf) | [PDF, 63 pages](current/neurotranslation-explained.pdf) |
+| *NeuroTranslation: A New Paradigm In Brain-Body Mapping.* | [PDF, 53 pages](current/neurotranslation-technical.pdf) | [PDF, 64 pages](current/neurotranslation-explained.pdf) |
 | *Brain2Body: The Next Generation In Body-Brain Interfacing.* | [PDF, 29 pages](current/brain2body-article.pdf) | [PDF, 33 pages](current/brain2body-simple-english.pdf) |
 
 [Read all four online](https://eliminatenoise.github.io/NeuroTranslation/papers/current/), or [download them in one ZIP](downloads/NeuroTranslation-Brain2Body-Papers.zip) and unpack the whole folder so that the links between its files work.
 
 ## Every study of the numbered table has its place in the NeuroTranslation paper
 
-Appendix B of each NeuroTranslation edition is a table of every study: what was recorded, who was fitted and who was tested, and the link to its folder. It starts on page 49 of the Technical edition and page 59 of the Simple English. Each link below opens the PDF at that study's row (the macaque study at appendix A, where it is told in full). Study numbers are those of [the studies page](../benchmarks/README.md); rows 27 and 29 are not tests, and the paper says so.
+Appendix B of each NeuroTranslation edition is a table of every study: what was recorded, who was fitted and who was tested, and the link to its folder. It starts on page 49 of the Technical edition and page 60 of the Simple English. Each link below opens the PDF at that study's row (the macaque study at appendix A, where it is told in full). Study numbers are those of [the studies page](../benchmarks/README.md); rows 27 and 29 are not tests, and the paper says so.
 
 | Study | NeuroTranslation, Technical | NeuroTranslation, Simple English |
 | --- | ---: | ---: |
-| 1 · Wrist pointing: brain signal on a learned forecast | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:wrist-forecast-evidence) | [p. 59](current/neurotranslation-explained.pdf#nameddest=sec:wrist-forecast-evidence) |
-| 2 · Wrist pointing: muscle signal on a straight-line fit | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:wrist-forecast-evidence) | [p. 59](current/neurotranslation-explained.pdf#nameddest=sec:wrist-forecast-evidence) |
-| 3 · Wrist pointing: muscle signal on the learned forecast | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:forearm-correction) | [p. 59](current/neurotranslation-explained.pdf#nameddest=sec:forearm-correction) |
-| 4 · Everyday tasks: wrist angle from the muscle signal | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:uji-wrist) | [p. 59](current/neurotranslation-explained.pdf#nameddest=sec:uji-wrist) |
-| 5 · Hand to mouth: one person's muscle signal, another's elbow | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:surface-emg-elbow) | [p. 59](current/neurotranslation-explained.pdf#nameddest=sec:surface-emg-elbow) |
-| 6 · Palm, first try: brain signal alone | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:scalp-eeg-pilot) | [p. 59](current/neurotranslation-explained.pdf#nameddest=sec:scalp-eeg-pilot) |
-| 7 · Palm: brain signal on top of hand history | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:scalp-eeg-palm-history) | [p. 59](current/neurotranslation-explained.pdf#nameddest=sec:scalp-eeg-palm-history) |
-| 8 · Palm: adjusted on the person's first recording | [p. 50](current/neurotranslation-technical.pdf#nameddest=palm-calibration) | [p. 59](current/neurotranslation-explained.pdf#nameddest=palm-calibration) |
-| 9 · Pinch and lift: grip force | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:way-grip) | [p. 60](current/neurotranslation-explained.pdf#nameddest=sec:way-grip) |
-| 10 · Pinch and lift: grip force, timed from the squeeze | [p. 50](current/neurotranslation-technical.pdf#nameddest=way-contact) | [p. 60](current/neurotranslation-explained.pdf#nameddest=way-contact) |
-| 11 · Paced grip: brain signal | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:hygrip-primary) | [p. 60](current/neurotranslation-explained.pdf#nameddest=sec:hygrip-primary) |
-| 12 · Paced grip: muscle signal | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:hygrip-forearm) | [p. 60](current/neurotranslation-explained.pdf#nameddest=sec:hygrip-forearm) |
-| 13 · Paced grip: a fit that changes with the cue | [p. 50](current/neurotranslation-technical.pdf#nameddest=hygrip-cue-phase) | [p. 60](current/neurotranslation-explained.pdf#nameddest=hygrip-cue-phase) |
-| 14 · One finger: muscle signal | [p. 51](current/neurotranslation-technical.pdf#nameddest=sec:hyser-index) | [p. 60](current/neurotranslation-explained.pdf#nameddest=sec:hyser-index) |
-| 15 · One finger: next-day adjustment | [p. 51](current/neurotranslation-technical.pdf#nameddest=hyser-next-day) | [p. 60](current/neurotranslation-explained.pdf#nameddest=hyser-next-day) |
-| 16 · One finger: the other four fingers | [p. 51](current/neurotranslation-technical.pdf#nameddest=hyser-whole-hand) | [p. 60](current/neurotranslation-explained.pdf#nameddest=hyser-whole-hand) |
-| 17 · One finger: new task | [p. 51](current/neurotranslation-technical.pdf#nameddest=hyser-prescribed) | [p. 60](current/neurotranslation-explained.pdf#nameddest=hyser-prescribed) |
-| 18 · Pinch: muscle signal | [p. 51](current/neurotranslation-technical.pdf#nameddest=cemhsey-pinch) | [p. 60](current/neurotranslation-explained.pdf#nameddest=cemhsey-pinch) |
-| 19 · Pinch: five electrode grids | [p. 51](current/neurotranslation-technical.pdf#nameddest=cemhsey-five-grid) | [p. 60](current/neurotranslation-explained.pdf#nameddest=cemhsey-five-grid) |
-| 20 · Pinch: width of the band | [p. 51](current/neurotranslation-technical.pdf#nameddest=cemhsey-pinch-intervals) | [p. 60](current/neurotranslation-explained.pdf#nameddest=cemhsey-pinch-intervals) |
-| 21 · Pinch at new targets | [p. 51](current/neurotranslation-technical.pdf#nameddest=cemhsey-transfer) | [p. 60](current/neurotranslation-explained.pdf#nameddest=cemhsey-transfer) |
-| 22 · Pinch, next day | [p. 51](current/neurotranslation-technical.pdf#nameddest=cemhsey-carry) | [p. 60](current/neurotranslation-explained.pdf#nameddest=cemhsey-carry) |
-| 23 · Pinch: a correction learned from other people | [p. 51](current/neurotranslation-technical.pdf#nameddest=cemhsey-phase) | [p. 60](current/neurotranslation-explained.pdf#nameddest=cemhsey-phase) |
-| 24 · Macaque fingers from motor cortex (LINK) | [p. 46](current/neurotranslation-technical.pdf#nameddest=appendix.A) | [p. 54](current/neurotranslation-explained.pdf#nameddest=appendix.A) |
-| 25 · One network shared by two signals: first run | [p. 51](current/neurotranslation-technical.pdf#nameddest=sec:self-forecast) | [p. 61](current/neurotranslation-explained.pdf#nameddest=sec:self-forecast) |
-| 26 · Walking: a small transformer on an arm sensor | [p. 51](current/neurotranslation-technical.pdf#nameddest=daily-sports-arm) | [p. 60](current/neurotranslation-explained.pdf#nameddest=daily-sports-arm) |
-| 27 · Walking: the general model's five-sensor fit | [p. 51](current/neurotranslation-technical.pdf#nameddest=daily-sports-limbs) | [p. 60](current/neurotranslation-explained.pdf#nameddest=daily-sports-limbs) |
-| 28 · Wrist pointing: the general model with muscle and brain signals | [p. 50](current/neurotranslation-technical.pdf#nameddest=paired-wrist-forecast) | [p. 59](current/neurotranslation-explained.pdf#nameddest=paired-wrist-forecast) |
-| 29 · Wrist pointing: a muscle correction, scored on the people used for fitting | [p. 50](current/neurotranslation-technical.pdf#nameddest=wrist-forearm-correction) | [p. 59](current/neurotranslation-explained.pdf#nameddest=wrist-forearm-correction) |
-| Earlier studies of recorded brain signals, with no row on the studies page | [p. 52](current/neurotranslation-technical.pdf#nameddest=sec:earlier-recorded-signals) | [p. 61](current/neurotranslation-explained.pdf#nameddest=sec:earlier-recorded-signals) |
+| 1 · Wrist pointing: brain signal on a learned forecast | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:wrist-forecast-evidence) | [p. 60](current/neurotranslation-explained.pdf#nameddest=sec:wrist-forecast-evidence) |
+| 2 · Wrist pointing: muscle signal on a straight-line fit | [p. 50](current/neurotranslation-technical.pdf#nameddest=wrist-pointing-muscle) | [p. 60](current/neurotranslation-explained.pdf#nameddest=wrist-pointing-muscle) |
+| 3 · Wrist pointing: muscle signal on the learned forecast | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:forearm-correction) | [p. 60](current/neurotranslation-explained.pdf#nameddest=sec:forearm-correction) |
+| 4 · Everyday tasks: wrist angle from the muscle signal | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:uji-wrist) | [p. 60](current/neurotranslation-explained.pdf#nameddest=sec:uji-wrist) |
+| 5 · Hand to mouth: one person's muscle signal, another's elbow | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:surface-emg-elbow) | [p. 60](current/neurotranslation-explained.pdf#nameddest=sec:surface-emg-elbow) |
+| 6 · Palm, first try: brain signal alone | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:scalp-eeg-pilot) | [p. 60](current/neurotranslation-explained.pdf#nameddest=sec:scalp-eeg-pilot) |
+| 7 · Palm: brain signal on top of hand history | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:scalp-eeg-palm-history) | [p. 60](current/neurotranslation-explained.pdf#nameddest=sec:scalp-eeg-palm-history) |
+| 8 · Palm: adjusted on the person's first recording | [p. 50](current/neurotranslation-technical.pdf#nameddest=palm-calibration) | [p. 60](current/neurotranslation-explained.pdf#nameddest=palm-calibration) |
+| 9 · Pinch and lift: grip force | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:way-grip) | [p. 61](current/neurotranslation-explained.pdf#nameddest=sec:way-grip) |
+| 10 · Pinch and lift: grip force, timed from the squeeze | [p. 50](current/neurotranslation-technical.pdf#nameddest=way-contact) | [p. 61](current/neurotranslation-explained.pdf#nameddest=way-contact) |
+| 11 · Paced grip: brain signal | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:hygrip-primary) | [p. 61](current/neurotranslation-explained.pdf#nameddest=sec:hygrip-primary) |
+| 12 · Paced grip: muscle signal | [p. 50](current/neurotranslation-technical.pdf#nameddest=sec:hygrip-forearm) | [p. 61](current/neurotranslation-explained.pdf#nameddest=sec:hygrip-forearm) |
+| 13 · Paced grip: a fit that changes with the cue | [p. 50](current/neurotranslation-technical.pdf#nameddest=hygrip-cue-phase) | [p. 61](current/neurotranslation-explained.pdf#nameddest=hygrip-cue-phase) |
+| 14 · One finger: muscle signal | [p. 51](current/neurotranslation-technical.pdf#nameddest=sec:hyser-index) | [p. 61](current/neurotranslation-explained.pdf#nameddest=sec:hyser-index) |
+| 15 · One finger: next-day adjustment | [p. 51](current/neurotranslation-technical.pdf#nameddest=hyser-next-day) | [p. 61](current/neurotranslation-explained.pdf#nameddest=hyser-next-day) |
+| 16 · One finger: the other four fingers | [p. 51](current/neurotranslation-technical.pdf#nameddest=hyser-whole-hand) | [p. 61](current/neurotranslation-explained.pdf#nameddest=hyser-whole-hand) |
+| 17 · One finger: new task | [p. 51](current/neurotranslation-technical.pdf#nameddest=hyser-prescribed) | [p. 61](current/neurotranslation-explained.pdf#nameddest=hyser-prescribed) |
+| 18 · Pinch: muscle signal | [p. 51](current/neurotranslation-technical.pdf#nameddest=cemhsey-pinch) | [p. 61](current/neurotranslation-explained.pdf#nameddest=cemhsey-pinch) |
+| 19 · Pinch: five electrode grids | [p. 51](current/neurotranslation-technical.pdf#nameddest=cemhsey-five-grid) | [p. 61](current/neurotranslation-explained.pdf#nameddest=cemhsey-five-grid) |
+| 20 · Pinch: width of the band | [p. 51](current/neurotranslation-technical.pdf#nameddest=cemhsey-pinch-intervals) | [p. 61](current/neurotranslation-explained.pdf#nameddest=cemhsey-pinch-intervals) |
+| 21 · Pinch at new targets | [p. 51](current/neurotranslation-technical.pdf#nameddest=cemhsey-transfer) | [p. 61](current/neurotranslation-explained.pdf#nameddest=cemhsey-transfer) |
+| 22 · Pinch, next day | [p. 51](current/neurotranslation-technical.pdf#nameddest=cemhsey-carry) | [p. 61](current/neurotranslation-explained.pdf#nameddest=cemhsey-carry) |
+| 23 · Pinch: a correction learned from other people | [p. 51](current/neurotranslation-technical.pdf#nameddest=cemhsey-phase) | [p. 61](current/neurotranslation-explained.pdf#nameddest=cemhsey-phase) |
+| 24 · Macaque fingers from motor cortex (LINK) | [p. 46](current/neurotranslation-technical.pdf#nameddest=appendix.A) | [p. 55](current/neurotranslation-explained.pdf#nameddest=appendix.A) |
+| 25 · One network shared by two signals: first run | [p. 51](current/neurotranslation-technical.pdf#nameddest=sec:self-forecast) | [p. 62](current/neurotranslation-explained.pdf#nameddest=sec:self-forecast) |
+| 26 · Walking: a small transformer on an arm sensor | [p. 51](current/neurotranslation-technical.pdf#nameddest=daily-sports-arm) | [p. 61](current/neurotranslation-explained.pdf#nameddest=daily-sports-arm) |
+| 27 · Walking: the general model's five-sensor fit | [p. 51](current/neurotranslation-technical.pdf#nameddest=daily-sports-limbs) | [p. 61](current/neurotranslation-explained.pdf#nameddest=daily-sports-limbs) |
+| 28 · Wrist pointing: the general model with muscle and brain signals | [p. 50](current/neurotranslation-technical.pdf#nameddest=paired-wrist-forecast) | [p. 60](current/neurotranslation-explained.pdf#nameddest=paired-wrist-forecast) |
+| 29 · Wrist pointing: a muscle correction, scored on the people used for fitting | [p. 50](current/neurotranslation-technical.pdf#nameddest=wrist-forearm-correction) | [p. 60](current/neurotranslation-explained.pdf#nameddest=wrist-forearm-correction) |
+| Earlier studies of recorded brain signals, with no row on the studies page | [p. 52](current/neurotranslation-technical.pdf#nameddest=sec:earlier-recorded-signals) | [p. 62](current/neurotranslation-explained.pdf#nameddest=sec:earlier-recorded-signals) |
 
 The Brain2Body paper sums up eight of these results in one table, in its section 4.3, beside two simulated hands of its own (sections 4.1 and 4.2).
 
 ## Not in either paper: what came after them
 
-The NeuroTranslation paper ends its account of the general model with its first five fits, in section 7.4. Later that night the model was fitted on two datasets at once, and the paper says only that this happened and where it is listed. Everything below was published after the papers were written, grouped by the question it asks.
+The NeuroTranslation paper ends its account of the general model with its first five fits, in section 7.4. It then says, in one paragraph, what came next: on 20 November a fit on two datasets at once, and after it the model's first tests on people nobody had looked at, which it leaves to the repository's front page. Everything below was published after the papers were written, grouped by the question it asks.
 
 ### Forecasts from brain, muscle and movement: brain signals mostly made them worse
 
@@ -92,11 +92,11 @@ The NeuroTranslation paper ends its account of the general model with its first 
 
 [The studies page](../benchmarks/README.md) has each of these studies with its numbers, among them the four published after the numbered table as folders of their own.
 
-## Checked inside the project before the last fixes, and by nobody outside it
+## Checked twice inside the project, and by nobody outside it
 
-Each title page says "Working draft, 20 November 2026. Not peer reviewed.", and both are true.
+Each title page says "Working draft, 21 November 2026. Not peer reviewed.", and both are true.
 
-Before the last round of fixes, the four PDFs had two checks inside the project, each by a checker who had not written the text. One re-read every number at the result file it came from, and checked the statements in words against their sources; the other read every page for plain words and for the voice the papers are meant to have. This edition carries the fixes; the fixed text has not been checked again. One kind of finding could not be settled without the cited papers themselves, and each paper says so above its references: figures quoted from other groups' papers were not re-read in the full papers. Nobody outside the project has reviewed the papers.
+Inside the project the papers have been checked in two rounds, each by two checkers who had not written the text. In each round one re-read every number at the result file it came from and checked the statements in words against their sources, and the other read every page for plain words and for the voice the papers are meant to have. The second round read the edition of 20 November. It checked that the first round's findings had been fixed, and asked for more: among other things, that the NeuroTranslation paper say plainly that the general model's later fits are not in it, and that the template brain it draws be named and credited. This edition carries those fixes; they have not been checked again. One kind of finding could not be settled without the cited papers themselves, and each paper says so above its references: figures quoted from other groups' papers were not re-read in the full papers. Nobody outside the project has reviewed the papers.
 
 Where a paper and a result file disagree, the result file is right: [the studies page](../benchmarks/README.md) is written from the result files.
 

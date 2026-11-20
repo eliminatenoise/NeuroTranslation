@@ -1,12 +1,8 @@
 # Credits, licences and notices for this edition of the papers
 
-This file was generated from the papers' own credits table (`shared/credits.tex`), so it says what the papers
-say, and then added to by hand. Four links were added from the notice of the previous edition, so that none is
-lost: the terms of the HYGRIP deposit, PhysioNet's own citation for Hyser, and the two font licences at the commits
-they were copied from. A file name the table prints as TeX code (`hygrip.h5`) is printed plainly. The template
-brain of NeuroTranslation appendix B, which the papers name without a credit, has a section of its own below.
-And the last paragraph under the font table says why the previous edition's DejaVu notice is gone. Each paper prints the rows it relies
-on; the letter after each heading says which: NeuroTranslation (N), Brain2Body (B), or both.
+This file is generated from the papers' own credits table (`shared/credits.tex`), so it says what the papers
+say; the table of fonts is added from the font licences that travel with the PDFs. Each paper prints the rows
+it relies on; the letter after each heading says which: NeuroTranslation (N), Brain2Body (B), or both.
 
 These papers contain no recordings. For each dataset below, this work selected trials, derived features from them and reports aggregate errors; that is what was changed. The recordings stay with the people who made them.
 
@@ -17,7 +13,7 @@ These papers contain no recordings. For each dataset below, this work selected t
 - Made by: Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz
 - Version and where: Version 3, Figshare, <https://doi.org/10.6084/m9.figshare.29666735.v3>. Descriptor: <https://doi.org/10.1038/s41597-026-07287-z>
 - Licence: CC BY 4.0, <https://creativecommons.org/licenses/by/4.0/>
-- Used for: The four wrist-pointing studies (the fourth holds the general model's wrist fits) and one correction analysis among the fitting people: scalp EEG and forearm EMG added to a forecast of wrist angle. Pointing trials were selected; encoder angles were decoded; motion, EEG and EMG features were derived.
+- Used for: The four wrist-pointing studies (the fourth holds the wrist fits of NeuroTranslate 0.0, the general model) and one correction analysis among the fitting people: scalp EEG and forearm EMG added to a forecast of wrist angle. Pointing trials were selected; encoder angles were decoded; motion, EEG and EMG features were derived.
 
 ### KIN-MUS UJI (N)
 
@@ -80,7 +76,7 @@ These papers contain no recordings. For each dataset below, this work selected t
 - Made by: Billur Barshan and Kerem Altun
 - Version and where: UCI Machine Learning Repository, <https://doi.org/10.24432/C5C59F>
 - Licence: CC BY 4.0, <https://creativecommons.org/licenses/by/4.0/>
-- Used for: The walking study (NeuroTranslation section 3.1 (Simple English Edition: 3.2), Brain2Body section 4.3) and the general model's walking fits (NeuroTranslation section 7.4). Two walking activities and the accelerometer axes of the right arm or of all five sensor units were selected, windows of 16 readings with the reading 120 ms later were cut, forecasts were fitted and errors calculated.
+- Used for: The walking study (NeuroTranslation section 3.1 (Simple English Edition: 3.2), Brain2Body section 4.3) and the walking fits of NeuroTranslate 0.0, the general model (NeuroTranslation section 7.4). Two walking activities and the accelerometer axes of the right arm or of all five sensor units were selected, windows of 16 readings with the reading 120 ms later were cut, forecasts were fitted and errors calculated.
 
 ### Attempted finger movements recorded from two participants (Finger_RL) (N, B)
 
@@ -149,7 +145,7 @@ These papers contain no recordings. For each dataset below, this work selected t
 - Made by: B. Jung, P. A. Taylor, J. Seidlitz, C. Sponheim, P. Perkins, L. G. Ungerleider, D. Glen and A. Messinger; released by the US National Institute of Mental Health (NIMH) through AFNI
 - Version and where: NMT v2.0, symmetric, with the Cortical Hierarchy Atlas of the Rhesus Macaque (CHARM), as released by AFNI: <https://afni.nimh.nih.gov/pub/dist/atlases/macaque/nmt/>. Paper: <https://doi.org/10.1101/2020.08.05.237818>
 - Licence: No licence is stated in the release's README; to be confirmed at the source. The release asks that the paper above be cited. Nothing from the template is redistributed here.
-- Used for: The template brain of NeuroTranslation appendix B: three counts of faults in its CHARM region-boundary surface, published beside the papers as `results/template-mesh.json`. The template was made by averaging the scans of 31 adult rhesus macaques. The papers print no image of it.
+- Used for: The template brain of NeuroTranslation appendix B: three counts of faults in its CHARM region-boundary surface. The template was made by averaging the scans of 31 adult rhesus macaques; the papers print no image of it.
 
 ## Typefaces
 
@@ -175,9 +171,8 @@ These papers contain no recordings. For each dataset below, this work selected t
 | Fira Math | SIL Open Font License 1.1 | [FiraMath-LICENSE.txt](third-party-notices/FiraMath-LICENSE.txt) | <https://github.com/firamath/firamath> ([the licence as copied](https://github.com/firamath/firamath/blob/8f1423fbfcc659c44772d2523be82073eb26ad3a/LICENSE)) | the two NeuroTranslation editions (mathematics) |
 
 No other typeface is embedded: every PDF of this edition was checked to carry only Noto Sans, Noto Sans Mono
-and Fira Math, all embedded. The previous edition also carried DejaVu Sans, in its figures, and a DejaVu
-notice; this edition embeds no DejaVu font, so that notice is no longer needed here (it is in the repository's
-history). The seven font files themselves are in the source download, beside these two licence texts.
+and Fira Math, all embedded. The seven font files themselves are in the source download, beside these two
+licence texts.
 
 ## The papers' own text
 

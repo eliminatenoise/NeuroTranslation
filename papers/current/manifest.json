@@ -1,14 +1,14 @@
 {
   "schema": "paper-edition-v6",
-  "version": "2026-11-20",
+  "version": "2026-11-21",
   "status": "Working drafts",
-  "previous_paper_release": "41d573cd908561a893d73c961d8a38a7e5e7cdac",
+  "previous_paper_release": "69130bf97046756e498e00b62f22cbdfca2cdb2d",
   "grip_benchmark_commit": "3af280cdb164a35e35c50cded35dcbdc199f6a19",
-  "previous_candidate_receipt_sha256": "8859c64f4ed2779fe02de999cd88354d2f9afcf26d733f2a467227a13a9311e9",
+  "previous_candidate_receipt_sha256": "55893ed4c780d1e91ab1db37003031a15f1d6e32d63bdb3074eb6aae408a4fc0",
   "grip_aggregate_sha256": "1f831ffa7cfe943b100487e7fdddeb980628d9827b5d4c05fbf54dc2931e7021",
   "glossary": {
     "revision": null,
-    "sha256": "63bef9ee99bac74257d7fcf5c799fd9e735be3fc0732d5b43fa3ab491dcac383"
+    "sha256": "0f58ac6fb9a28252fe0c9904e5ef85caca771802a4cb3aa93b26cd90acae4b8d"
   },
   "rights": "NOTICE.md lists every dataset, simulator and typeface the papers rely on, with its licence and the credit it is owed; the two font licence texts are in third-party-notices/. Where NOTICE.md says a licence is to be confirmed at its source, it has not yet been checked there.",
   "PDFs": [
@@ -23,11 +23,11 @@
       "grip_page": 50,
       "development_page": null,
       "filename": "neurotranslation-technical.pdf",
-      "sha256": "2875e251694d0b40d0309a400f4880e50cdc8c81a59a50d7ab2b32a1a2ad93dd",
-      "bytes": 247030,
+      "sha256": "d77cca438425abb74aa712d13a719b8eb0bfd873c4b4eebb60496fc36f54a637",
+      "bytes": 250514,
       "pages": 53,
-      "previous_pdf_sha256": "f92b251fb380f51e8ae6182bf7a2c5ab48abe52c9b419075fbc17884ef286309",
-      "previous_pages": 153,
+      "previous_pdf_sha256": "2875e251694d0b40d0309a400f4880e50cdc8c81a59a50d7ab2b32a1a2ad93dd",
+      "previous_pages": 53,
       "hyser_end_page": 51,
       "reference_pages": [
         36
@@ -46,6 +46,7 @@
       "carry_end_page": 51,
       "named_destinations": {
         "sec:wrist-forecast-evidence": 50,
+        "wrist-pointing-muscle": 50,
         "sec:forearm-correction": 50,
         "sec:uji-wrist": 50,
         "sec:surface-emg-elbow": 50,
@@ -78,68 +79,69 @@
       }
     },
     {
-      "correction_page": 59,
-      "uji_page": 59,
-      "hygrip_primary_page": 60,
-      "hygrip_secondary_page": 60,
-      "hyser_index_page": 60,
-      "hyser_next_day_page": 60,
-      "hyser_whole_hand_page": 60,
-      "grip_page": 60,
+      "correction_page": 60,
+      "uji_page": 60,
+      "hygrip_primary_page": 61,
+      "hygrip_secondary_page": 61,
+      "hyser_index_page": 61,
+      "hyser_next_day_page": 61,
+      "hyser_whole_hand_page": 61,
+      "grip_page": 61,
       "development_page": null,
       "filename": "neurotranslation-explained.pdf",
-      "sha256": "74b3d7a79ce6633f6ac61cdd4a43188fbccda35c3e183ccc754c98f94f96ce41",
-      "bytes": 269489,
-      "pages": 63,
-      "previous_pdf_sha256": "322e6df39aba30ef604271015d1e4a1c8275307992d1d4defed89fd0f1ff296c",
-      "previous_pages": 188,
-      "hyser_end_page": 60,
+      "sha256": "66406caa64b12a23fb0a0b65ae57e493fe3f690eccb276ac0a3968ad2bcf9dbd",
+      "bytes": 272964,
+      "pages": 64,
+      "previous_pdf_sha256": "74b3d7a79ce6633f6ac61cdd4a43188fbccda35c3e183ccc754c98f94f96ce41",
+      "previous_pages": 63,
+      "hyser_end_page": 61,
       "reference_pages": [
         44
       ],
       "rasterized_pages": [],
-      "prescribed_task_page": 60,
-      "pinch_page": 60,
-      "pinch_end_page": 60,
-      "five_grid_page": 60,
-      "five_grid_end_page": 60,
-      "interval_page": 60,
-      "interval_end_page": 60,
-      "transfer_page": 60,
-      "transfer_end_page": 60,
-      "carry_page": 60,
-      "carry_end_page": 60,
+      "prescribed_task_page": 61,
+      "pinch_page": 61,
+      "pinch_end_page": 61,
+      "five_grid_page": 61,
+      "five_grid_end_page": 61,
+      "interval_page": 61,
+      "interval_end_page": 61,
+      "transfer_page": 61,
+      "transfer_end_page": 61,
+      "carry_page": 61,
+      "carry_end_page": 61,
       "named_destinations": {
-        "sec:wrist-forecast-evidence": 59,
-        "sec:forearm-correction": 59,
-        "sec:uji-wrist": 59,
-        "sec:surface-emg-elbow": 59,
-        "sec:scalp-eeg-pilot": 59,
-        "sec:scalp-eeg-palm-history": 59,
-        "sec:way-grip": 60,
-        "sec:hygrip-primary": 60,
-        "sec:hygrip-forearm": 60,
-        "sec:hyser-index": 60,
-        "hyser-next-day": 60,
-        "hyser-whole-hand": 60,
-        "cemhsey-pinch": 60,
-        "cemhsey-five-grid": 60,
-        "cemhsey-pinch-intervals": 60,
-        "cemhsey-transfer": 60,
-        "cemhsey-carry": 60,
-        "sec:self-forecast": 61,
-        "sec:earlier-recorded-signals": 61,
-        "palm-calibration": 59,
-        "way-contact": 60,
-        "hygrip-cue-phase": 60,
-        "hyser-prescribed": 60,
-        "cemhsey-phase": 60,
-        "daily-sports-arm": 60,
-        "paired-wrist-forecast": 59,
-        "daily-sports-limbs": 60,
-        "wrist-forearm-correction": 59,
-        "appendix.A": 54,
-        "appendix.B": 59
+        "sec:wrist-forecast-evidence": 60,
+        "wrist-pointing-muscle": 60,
+        "sec:forearm-correction": 60,
+        "sec:uji-wrist": 60,
+        "sec:surface-emg-elbow": 60,
+        "sec:scalp-eeg-pilot": 60,
+        "sec:scalp-eeg-palm-history": 60,
+        "sec:way-grip": 61,
+        "sec:hygrip-primary": 61,
+        "sec:hygrip-forearm": 61,
+        "sec:hyser-index": 61,
+        "hyser-next-day": 61,
+        "hyser-whole-hand": 61,
+        "cemhsey-pinch": 61,
+        "cemhsey-five-grid": 61,
+        "cemhsey-pinch-intervals": 61,
+        "cemhsey-transfer": 61,
+        "cemhsey-carry": 61,
+        "sec:self-forecast": 62,
+        "sec:earlier-recorded-signals": 62,
+        "palm-calibration": 60,
+        "way-contact": 61,
+        "hygrip-cue-phase": 61,
+        "hyser-prescribed": 61,
+        "cemhsey-phase": 61,
+        "daily-sports-arm": 61,
+        "paired-wrist-forecast": 60,
+        "daily-sports-limbs": 61,
+        "wrist-forearm-correction": 60,
+        "appendix.A": 55,
+        "appendix.B": 60
       }
     },
     {
@@ -153,11 +155,11 @@
       "grip_page": null,
       "development_page": 14,
       "filename": "brain2body-article.pdf",
-      "sha256": "c8c4b39021ba3c04c45fbc8680d4f600de70b2f68b305a983ec3f0aaf9fc6d59",
-      "bytes": 136016,
+      "sha256": "6ebd97e224bcc5a5f67caefe4fc6186c87cd724f0b3737adc9ab2b37d9a7fa86",
+      "bytes": 136234,
       "pages": 29,
-      "previous_pdf_sha256": "63078132c718968d4942a26e6390f062dece50121d6ba6e329772a349e0bd081",
-      "previous_pages": 136,
+      "previous_pdf_sha256": "c8c4b39021ba3c04c45fbc8680d4f600de70b2f68b305a983ec3f0aaf9fc6d59",
+      "previous_pages": 29,
       "hyser_end_page": null,
       "reference_pages": [
         21
@@ -187,11 +189,11 @@
       "grip_page": null,
       "development_page": 17,
       "filename": "brain2body-simple-english.pdf",
-      "sha256": "67bfc0defbd253b34c3a557aea8c3fcc91fb7e62fa73a021ec0ea131e78484cd",
-      "bytes": 145842,
+      "sha256": "1e3ee4bf727543c8934ddbc803242e12de62bd053b6be6d60c802f0ad31927a8",
+      "bytes": 145955,
       "pages": 33,
-      "previous_pdf_sha256": "c7a2c17430f3f2dbf2bfd0a67c1754448077c0b019f53a5818126ae2ae28087f",
-      "previous_pages": 152,
+      "previous_pdf_sha256": "67bfc0defbd253b34c3a557aea8c3fcc91fb7e62fa73a021ec0ea131e78484cd",
+      "previous_pages": 33,
       "hyser_end_page": null,
       "reference_pages": [
         25
@@ -212,49 +214,49 @@
     }
   ],
   "named_destinations_note": "Each NeuroTranslation PDF has a named destination at every study's row in its appendix B (and appendix.A, the macaque study in full, and appendix.B, the table of every study), with the page it lands on; link to <file>.pdf#nameddest=<name>. The page keys above give the page of the same row. The Brain2Body editions have no study rows, so their page keys are null; development_page there is the page of section 6, on the marsupial.",
-  "source_manifest_sha256": "0ff4db10f6ee9ede70ea61fb6a9f96acdc26003b2c2203e31751c7e2a4c296b0",
-  "evidence_revision_date": "2026-11-20",
-  "build": "Four PDFs built offline with the Tectonic 0.17 TeX engine, SOURCE_DATE_EPOCH 1795132800 (20 November 2026, 00:00 UTC). The source ZIP holds everything but the engine and its package files; built from it, the four PDFs come out byte for byte the same.",
+  "source_manifest_sha256": "9ac088e806ed5dc9d0c22eb1eb8b2230a5d9c326797f92cd36a8aa6fb1e1c265",
+  "evidence_revision_date": "2026-11-21",
+  "build": "Four PDFs built offline with the Tectonic 0.17 TeX engine, SOURCE_DATE_EPOCH 1795219200 (21 November 2026, 00:00 UTC). The source ZIP holds everything but the engine and its package files; built from it, the four PDFs come out byte for byte the same.",
   "files_excluding_this_manifest": [
     {
       "path": "NOTICE.md",
-      "bytes": 14092,
-      "sha256": "af5e8037bf1377a1dbd67382eff032649cb7d78a8e4a6df9ed7ec9f24f1bfe83"
+      "bytes": 13419,
+      "sha256": "15abdf5af62f43a4976aad4ce779832d2a6d7286e3e7d9317f4e0996dac71114"
     },
     {
       "path": "README.md",
-      "bytes": 9080,
-      "sha256": "d6229cfdc9d7bab42cfc2dded997b9793d109b8ecec618f0a445ca7dead404e2"
+      "bytes": 9225,
+      "sha256": "156c59a90198ae413e6769d37944ee2a63ded2239b2ee439abe20a2695f89cfb"
     },
     {
       "path": "brain2body-article.pdf",
-      "bytes": 136016,
-      "sha256": "c8c4b39021ba3c04c45fbc8680d4f600de70b2f68b305a983ec3f0aaf9fc6d59"
+      "bytes": 136234,
+      "sha256": "6ebd97e224bcc5a5f67caefe4fc6186c87cd724f0b3737adc9ab2b37d9a7fa86"
     },
     {
       "path": "brain2body-simple-english.pdf",
-      "bytes": 145842,
-      "sha256": "67bfc0defbd253b34c3a557aea8c3fcc91fb7e62fa73a021ec0ea131e78484cd"
+      "bytes": 145955,
+      "sha256": "1e3ee4bf727543c8934ddbc803242e12de62bd053b6be6d60c802f0ad31927a8"
     },
     {
       "path": "font-provenance.json",
       "bytes": 7812,
-      "sha256": "07f55be197028936f8044541687c8723ce95dee2805ea99ea6cea1917c2c5849"
+      "sha256": "87b9a73c84deda4c2b2183f8ad8a0523e4fcb7f7d0bf26001af5386cd7e59ac2"
     },
     {
       "path": "index.html",
-      "bytes": 11073,
-      "sha256": "2362e6ebef1ca988ef7f32d091e9cf32ed22197a1fdb5320b40a8a02fa529d16"
+      "bytes": 11218,
+      "sha256": "75e25ef083d5a1adb3efaca30368d29df9ae63893246e80b77037d54687f4f26"
     },
     {
       "path": "neurotranslation-explained.pdf",
-      "bytes": 269489,
-      "sha256": "74b3d7a79ce6633f6ac61cdd4a43188fbccda35c3e183ccc754c98f94f96ce41"
+      "bytes": 272964,
+      "sha256": "66406caa64b12a23fb0a0b65ae57e493fe3f690eccb276ac0a3968ad2bcf9dbd"
     },
     {
       "path": "neurotranslation-technical.pdf",
-      "bytes": 247030,
-      "sha256": "2875e251694d0b40d0309a400f4880e50cdc8c81a59a50d7ab2b32a1a2ad93dd"
+      "bytes": 250514,
+      "sha256": "d77cca438425abb74aa712d13a719b8eb0bfd873c4b4eebb60496fc36f54a637"
     },
     {
       "path": "results/earlier-decoding.json",
@@ -283,8 +285,8 @@
     },
     {
       "path": "results/simulated-arm.json",
-      "bytes": 8840,
-      "sha256": "7f9749abe680c788d75353d95c952a3f4e25c86b056f96be15923a596da8dd3c"
+      "bytes": 8821,
+      "sha256": "5b9c463393ab38a502a4dd7f0a4d4b6cea95501375c7e598982a9ade5cd3945e"
     },
     {
       "path": "results/template-mesh.json",
@@ -396,7 +398,7 @@
     "endpoint": "Released index-sensor voltage 12 ticks ahead on a nominal 100 Hz grid.",
     "scope": "Frozen Random-task weights, prescribed trials from 12 fit participants and four development participants outside fitting, all 15 combinations and both index-cue groups."
   },
-  "previous_scientific_edition_commit": "41d573cd908561a893d73c961d8a38a7e5e7cdac",
+  "previous_scientific_edition_commit": "69130bf97046756e498e00b62f22cbdfca2cdb2d",
   "cemhsey_pinch_evidence": {
     "protocol": {
       "commit": "a2382b0d546c451b825e9ed5f88fcc3957bff1ea",
