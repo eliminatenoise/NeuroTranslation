@@ -2,7 +2,9 @@
 
 This file is generated from the papers' own credits table (`shared/credits.tex`), so it says what the papers
 say. Each paper prints the rows it relies on; the letter after each heading says which: NeuroTranslation (N),
-Brain2Body (B), or both.
+Brain2Body (B), or both. Four links were added here from the notice of the previous edition, so that none is lost:
+the terms of the HYGRIP deposit, PhysioNet's own citation for Hyser, and the two font licences at the commits they
+were copied from.
 
 These papers contain no recordings. For each dataset below, this work selected trials, derived features from them and reports aggregate errors; that is what was changed. The recordings stay with the people who made them.
 

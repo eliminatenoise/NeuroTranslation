@@ -80,7 +80,7 @@
     "papers": {
       "latest_rendered": "papers/current",
       "manifest": "papers/current/manifest.json",
-      "manifest_sha256": "fdeb470b4a17a1985e5eadef3f9344fdb25265746cd2f4988563ee12473246e6",
+      "manifest_sha256": "121bdde4eafb435b44a73139d55f8c78cb41276b9ac91d07b86b97883ea90009",
       "scope": "The current edition, 20 November 2026: NeuroTranslation (53 pages, Simple English Edition 63) and Brain2Body (29 pages, Simple English Edition 33), working drafts not reviewed outside the project. NeuroTranslation reports every study of the numbered table, 1 to 29, with a row for each in its appendix B.",
       "build_provenance": "Four PDFs built offline with the Tectonic 0.17 TeX engine; a rebuild from the source ZIP gives the same bytes.",
       "historical_erratum": "",
@@ -89,8 +89,8 @@
       "publication_scope": "This block identifies the files of the current edition.",
       "download_bundle": {
         "path": "papers/downloads/NeuroTranslation-Brain2Body-Papers.zip",
-        "bytes": 831408,
-        "sha256": "548ae0d21ac73e58354295ede7111c098610975011b9db8b053093438e222049",
+        "bytes": 831488,
+        "sha256": "b6339dd68f0850fb56dd92bb38ecd65a900ea89ec76cb7fdafcf0fa66ccd1b1d",
         "checksum": "downloads/NeuroTranslation-Brain2Body-Papers.zip.sha256",
         "members": 19,
         "extraction_folder": "NeuroTranslation-Brain2Body-Papers"
@@ -100,16 +100,16 @@
         "directory": "papers/current",
         "archive": {
           "path": "papers/downloads/NeuroTranslation-Brain2Body-Papers.zip",
-          "bytes": 831408,
-          "sha256": "548ae0d21ac73e58354295ede7111c098610975011b9db8b053093438e222049"
+          "bytes": 831488,
+          "sha256": "b6339dd68f0850fb56dd92bb38ecd65a900ea89ec76cb7fdafcf0fa66ccd1b1d"
         },
         "reading_aid": null,
         "pages_total": 178,
         "scope": "The current edition, 20 November 2026: NeuroTranslation (53 pages, Simple English Edition 63) and Brain2Body (29 pages, Simple English Edition 33), working drafts not reviewed outside the project. NeuroTranslation reports every study of the numbered table, 1 to 29, with a row for each in its appendix B.",
         "selected_manuscript_source": {
           "path": "papers/downloads/NeuroTranslation-Brain2Body-Papers-Source.zip",
-          "bytes": 2534173,
-          "sha256": "97f2ee89fd16ed3a5dc8c3d8943dbeb43878bfc4fbcff0815d8a2df78c002f26",
+          "bytes": 2534255,
+          "sha256": "d9b80109920822703c7021c5d7370c3cc5d160a52c037c855fb67f4f4af7d073",
           "members": 107,
           "scope": "The complete source of the four PDFs (91 files: TeX, bibliography, figure, fonts and tools), the build script, and the ledger and small result files its number check reads. The TeX engine and its package files are named in the ZIP, not included."
         }
