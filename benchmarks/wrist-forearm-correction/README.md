@@ -1,3 +1,5 @@
+[The studies](../README.md) › Row 29 · Wrist pointing: a muscle correction, scored on the people used for fitting (not a test)
+
 # Forearm signals helped predict the early turn of a wrist
 
 A target appears. A person turns a supported right wrist to move a cursor towards it. Two sensors measure how far the wrist bends and how far it tilts sideways. From half a second of earlier movement, a forecast estimates where both angles will be a quarter-second later. Can the muscles tell us something the moving wrist hasn't already told us?
