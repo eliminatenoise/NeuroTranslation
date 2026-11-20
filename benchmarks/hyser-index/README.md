@@ -1,25 +1,22 @@
-# Forecasting the index-finger sensor
+[The studies](../README.md) › Studies 14 to 17 · One finger
 
-Give the model 400 ms of recent index-finger voltage and ask what the sensor will read twelve ticks later. Across both recording days in the four-person development set, the force-history model gave **14.35 mV** mean absolute error. Adding aligned forearm surface EMG gave **14.46 mV**. Two participants improved and two did worse. Four other participants remain reserved by the study design.
+# The finger sensor's own history was the forecast to beat
 
-[Open the interactive trial reader](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) · [Download the reader for Windows, macOS or Linux](downloads/Hyser-Index-Voltage-Reader.zip) · [Results, days and timing controls](RESULTS.md) · [Frozen protocol](PROTOCOL.md)
+Give a model 400 ms of the index-finger sensor's recent voltage and ask what it will read 120 ms later. On both recording days of four test people, a straight-line fit on that history missed by **14.355 mV**. With the forearm's surface EMG added, it missed by **14.457 mV**: two people did better and two worse. Four more people were set aside when the dataset was split, and their recordings are unopened.
+
+Every score in these four studies is the plain average miss (mean absolute error), in millivolts of the sensor's output; the dataset gives no conversion to newtons. EMG is electrical activity of muscle, picked up on the skin: a recording of muscle, not of nerve. A *straight-line fit* is a weighted sum of its inputs, here a ridge regression.
+
+- [Study 14 · One finger: muscle signal](RESULTS.md): the result in full, with both days and the timing controls.
+- [Study 15 · One finger: next-day adjustment](crossday/README.md): a correction fitted on the person's first day and scored on their second. On the four test people the unchanged shared forecast stayed ahead with and without EMG, though a person's own first day beat another person's.
+- [Study 16 · One finger: the other four fingers](whole-hand/README.md): the other four finger sensors lowered the error from 14.355 to 14.161 mV in the four test people, and raised it from 16.854 to 16.915 mV in the twelve people the fit was made on. The four-person range covers both better and worse.
+- [Study 17 · One finger: new task](prescribed/README.md): on prescribed finger combinations, five finger histories beat one, and simply repeating the last index reading beat both on the average miss. The five-history fit had the smallest error on the measure that punishes large misses (root mean squared error).
+
+[Open the interactive trial reader](https://eliminatenoise.github.io/NeuroTranslation/hyser-index/) · [Download the reader for Windows, macOS or Linux](downloads/Hyser-Index-Voltage-Reader.zip) · [The plan](PROTOCOL.md)
 
 ## Use the model
 
-The browser opens the original Random-task WFDB files without sending them anywhere. Use a force pair alone, or include the matching raw forearm recording from the same person, day and trial. Loading the invented example needs no recording.
+The reader opens the original Random-task WFDB files of the dataset without sending them anywhere. Use a force pair alone, or add the matching raw forearm recording from the same person, day and trial. The invented example needs no recording. In the reader, **Finger sensor context** shows the other fingers up to the cutoff, and **Score trial** compares the three forecasts of study 16 across all 450 cutoffs of the trial you opened, or the four forecasts of study 17 on a prescribed-combination trial.
 
-For Python, the [reference implementation](hyser_index.py) uses NumPy. Supply the 25-second trial as a 51,200 × 256 raw forearm array in header-scaled volts and a length-2,500 array of the named index force channel in volts. `predict_trial(raw, force, TICKS, weights)` uses the two shared fits in [predictors.json](predictors.json) and returns voltages for the requested cutoffs. [The scoring code](study.py) contains the person-held-out and known-person comparisons. The [aggregate record](RESULTS.json) includes the uncertainty estimates and both days. Individual recordings are available from the source database.
+For Python, the [reference code](hyser_index.py) uses NumPy. Give it the 25-second trial as a 51,200 × 256 array of raw forearm EMG in volts, scaled by its header, and a 2,500-sample array of the named index force channel in volts. `predict_trial(raw, force, TICKS, weights)` uses the two shared fits in [predictors.json](predictors.json) and returns voltages for the cutoffs you ask for. [The scoring code](study.py) holds the comparisons on people left out of the fit and on people inside it. The [results file](RESULTS.json) has the ranges and both days. The recordings themselves come from the source database. [Score original session folders with Python](SCORE-SESSION.md)
 
 Contains information from Jiang, Dai, Liu and Fan’s Hyser 2.0.0 database, made available under the Open Data Commons Attribution License 1.0. [PhysioNet](https://doi.org/10.13026/hxan-pe94) · [License](https://physionet.org/content/hd-semg/view-license/2.0.0/) · [Original study](https://doi.org/10.1109/TNSRE.2021.3082551)
-
-## Can yesterday’s recording help today?
-
-A separate experiment compares the shared forecast with two adjustments, one fitted on the same person’s first day and one fitted on a different person’s first day. Both are evaluated on the same second-day voltages. The four development participants had already been scored in the original Hyser study. Across four previously studied development participants, the shared models gave the lowest mean absolute error in both input conditions. The same person’s first day gave a smaller error than the paired donor’s first day. [Read the calibration results](crossday/README.md) · [Score original session folders with Python](SCORE-SESSION.md).
-
-## Do the other fingers help?
-
-In four previously studied participants, adding the other four finger sensors lowered the average index forecast error from 14.355 to 14.161 mV. In the 12-person training comparison, the same change raised it from 16.854 to 16.915 mV. The four-person estimate spans both improvement and worsening. Choose **Finger sensor context** in the reader to see the other digits up to the cutoff. Click **Score trial** to compare the three forecasts across all 450 cutoffs in the trial you opened. [Study results and timing control](whole-hand/README.md) · [Model inputs and pooled weights](whole-hand/PREDICTOR.md) · [Python session scorer](SCORE-SESSION.md).
-
-## A different finger task
-
-In Hyser’s N-DoF task, participants followed prescribed finger combinations. With the weights learned from freely chosen presses, five sensor histories gave a smaller average absolute error than one. Repeating the last index reading had the smallest average absolute error overall in both groups. The five-history model had the smallest root mean squared error overall. Use **Finger sensor context** to score all four on a local N-DoF trial. [Results by cue and participant group](prescribed/README.md) · [Prespecified comparison](prescribed/PROTOCOL.md).
