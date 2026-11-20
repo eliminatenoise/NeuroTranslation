@@ -1,27 +1,35 @@
-# Changing the pinch target
+[The studies](../README.md) › Study 21 · Pinch at new targets
 
-The original forearm model learned a two-finger pinch at 30% of maximum voluntary contraction. Here the participants saw 10%, 30% or 50% on the screen. Their task was to follow that target while a gauge recorded the force between the opposing fingers.
+# At a new pinch target, a one-line rule beat the fitted model for all four people
 
-We keep the trained point model fixed. The first comparison lets it use the change the cue will ask for during the next 24 force samples. The second gives it one practice repeat to estimate how much that change should affect the forecast. All methods then face the same second repeat at each target. Four people contribute one recording day each. Performance can change with the prescribed force, the second attempt, or the way the person follows the cue. [Prespecified methods and comparisons](PROTOCOL.md) · [Study design](DESIGN.json) · [Original recording study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12354741/)
+The five-grid model of [study 19](../cemhsey-arrays/README.md) learned a two-finger pinch at 30% of the hardest squeeze. Here four people followed targets of 10%, 30% and 50% on a screen while a gauge recorded the force between their fingers. At 50%, the rule "take the current reading and add the change the on-screen schedule calls for" forecast the gauge 120 ms ahead with an average miss of **0.5721%**, the lowest of the nine forecasts. The fitted five-grid model, given one practice pinch, missed by **0.6987%**: 0.1266% worse, and worse for all four people, by 0.0502% to 0.1938%.
 
-## What changed on the second pinch?
+Every error here is the plain average miss (mean absolute error) over the whole trial, in % of the person's hardest squeeze that day (their maximum voluntary contraction, MVC), with the four people counting equally. The forearm signal is surface EMG, electrical activity of muscle picked up on the skin.
 
-At the 50% target, adding the scheduled change to the current gauge reading gave the lowest whole-trial error of the nine forecasts. Its mean absolute error was 0.5721 percentage points of maximum voluntary contraction (MVC). The five-grid model reached 0.6987 after one practice attempt. The simple forecast beat that model in all four people.
+The cue did help the five-grid model itself. Adjusting its fixed forecast for the stronger target lowered its average miss by 0.0485%, and all four people gained. Learning one more weight from the practice pinch changed the average by only 0.0008%: two people gained and two lost, because timing mattered. Practice lowered the error by 0.0779% during the rise and raised it by 0.0737% during the release, in every person both times.
 
-The cue helped the five-grid model itself. Adjusting its frozen forecast for the stronger target reduced mean absolute error by 0.0485 percentage points of MVC. All four people gained. Learning one more coefficient from the practice attempt changed the average by only 0.0008 percentage points. Two people gained and two lost. Timing mattered. Practice reduced error by 0.0779 percentage points during the rise and increased it by 0.0737 during release. Both directions held in every participant.
+Average miss over the whole trial, in % of the hardest squeeze:
 
-Whole-trial mean absolute error follows, in percentage points of MVC. Each value gives equal weight to the four participants. The downloadable tables retain fractions of MVC and the full nine-arm comparison.
-
-| Target | Current force + scheduled change | History adjusted | History after practice | Five grids adjusted | Five grids after practice |
+| Target | Current force plus scheduled change | Force history, adjusted | Force history, after practice | Five grids, adjusted | Five grids, after practice |
 |---|---:|---:|---:|---:|---:|
 | 10% | 0.3693 | 0.5639 | 0.5635 | 0.5737 | 0.5734 |
 | 30% | 0.4480 | 0.4265 | 0.4274 | 0.4299 | 0.4306 |
 | 50% | 0.5721 | 0.7095 | 0.7085 | 0.6995 | 0.6987 |
 
-At 10%, current force plus the scheduled change also beat the adjusted and practice-fitted models for all four people. At 30%, the cue adjustment is exactly zero by construction. Force history plus phase performed better there than current force plus cue change. Each target contributed four second repeats and 2,368 overlapping forecast cutoffs. Those repeats came from one indexed day per person, always after practice. The comparison leaves open what would happen on a different day, in a different order or with a new group.
+At 10% the one-line rule also beat the adjusted and practised models for all four people. At 30%, the level the model was fitted at, the target adjustment is zero by construction, and the fit on force history and cue stage beat the one-line rule. The model was not broken; it had learned one target.
 
-The protocol uses the phrase “absolute mean error” once. The intended metric, the implemented metric and the metric independently reproduced were all mean absolute error, the average absolute difference between forecast and gauge.
+## What was done
 
-[Explore the measured results](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/results/) · [Compare two local recordings](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/) · [Download the offline reader](../../docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip) · [Complete aggregate](RESULTS.json)
+The fitted model stayed fixed. The first comparison let it use the change the cue would ask for over the next 24 force samples; the second gave it one practice repeat to learn how much that change should move the forecast. Every method then faced the same second repeat at each target. Four people gave one recording day each; none of them was in the original fit, though earlier studies had used other days from the same four. Each target gave four second repeats and 2,368 overlapping forecasts. The repeats came from one recording day per person, always after the practice pinch.
 
-The next study tests the same saved corrections on a new recording day. [Cross-day measurements](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-carry/)
+## What it does not show
+
+Performance can change with the prescribed force, with the second attempt, or with the way a person follows the cue, and here they changed together. What would happen on another day, in another order or with another group is open. No group was set aside for this study.
+
+## The plan
+
+The plan fixed the average miss at the 50% target as the main result, the 10% target as its companion and 30% as a check; it set no pass rule. It uses the phrase "absolute mean error" once: the measure intended, the measure computed and the measure checked independently were all the mean absolute error, the average gap between forecast and gauge. [The plan and its comparisons](PROTOCOL.md) · [Study design](DESIGN.json) · [Original recording study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12354741/)
+
+[Explore the measured results](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/results/) · [Compare two recordings on your computer](https://eliminatenoise.github.io/NeuroTranslation/cemhsey-transfer/) · [Download the offline reader](../../docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip) · [Results file](RESULTS.json)
+
+The next study brings the same saved corrections back on a new recording day: [Study 22 · Pinch, next day](../cemhsey-carry/README.md).
