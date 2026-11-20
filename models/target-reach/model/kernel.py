@@ -44,4 +44,4 @@ if __name__=='__main__':
     import argparse
     cli=argparse.ArgumentParser(description=__doc__);cli.add_argument('weights',type=Path);cli.add_argument('example',type=Path);args=cli.parse_args()
     h=json.loads(args.example.read_bytes());m=json.loads(args.weights.read_bytes());x=tokens([h['xyz']],[h['time']],[h['hand']],[h['target']])
-    print(json.dumps({'horizon_seconds_from_recording_start':HORIZONS,'displacements_m':predict(x,m)[0].tolist()}))
+    print(json.dumps({'horizon_seconds_from_selected_anchor':HORIZONS,'displacements_m':predict(x,m)[0].tolist()}))
