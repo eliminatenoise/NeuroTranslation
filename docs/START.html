@@ -83,7 +83,7 @@
 <main>
   <header>
     <h1>The hand’s own history still beats the brain signal</h1>
-    <p>This page gathers every NeuroTranslation page that runs in a browser. Most of them forecast: from a short stretch of a recording, they predict what a hand, a knee or a rat will do a fraction of a second later. Everything runs on your own computer, and nothing you give a page is sent anywhere. Pick one below: most open with an example, so you can start straight away.</p>
+    <p>NeuroTranslation tries to predict one recording of a movement from another: brain, muscle, force and motion, all from open datasets. This page gathers every one of its pages that runs in a browser. Most of them forecast: from a short stretch of a recording, they predict what a hand, a knee or a rat will do a fraction of a second later. Everything runs on your own computer, and nothing you give a page is sent anywhere. Pick one below: most open with an example, so you can start straight away.</p>
     <p>What the studies found: a hand tends to keep moving the way it was moving, so what it has just done is the forecast to beat. In 25 small studies so far, each a numbered row of one table on the studies page, adding a brain recording taken with electrodes on the scalp (EEG) made that forecast worse in 8 of 13 comparisons. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/README.md">Every study, with its numbers</a>.</p>
     <nav aria-label="On this page">
       <ul class="jump">
@@ -98,13 +98,13 @@
 
   <section id="examples" aria-labelledby="examples-title">
     <h2 id="examples-title">Start with an example</h2>
-    <p>Several pages open with an example, so you can start with nothing of your own. Start at the top: the general model’s own page comes first. Every page runs on your own computer, and nothing you give it is sent anywhere. Every “ahead” is a distance along a stored recording: nothing here is live.</p>
+    <p>Several pages open with an example, so you can start with nothing of your own. Start at the top: the first card is the project’s general model, NeuroTranslate 0.0, one model meant to learn from many kinds of body signal at once. Every “ahead” is a distance along a stored recording: nothing here is live.</p>
     <ul class="tiles recordings">
       <li>
         <article aria-labelledby="shared-movement-title">
           <p class="source">One movement model · Five kinds of forecast</p>
           <h3 id="shared-movement-title">Forecast movement distance, a wrist angle, both knees or the turning at the knees</h3>
-          <p>Forecast how far a tracked wrist or rat will move in about a quarter of a second, the two angles of a wrist from its movement, forearm and scalp readings, both knees of a walker from four seconds of knee angles, or the turning moment at each knee from four seconds of leg angles. See how much four forearm electrodes change the angle forecast from the same wrist movement. Start from an invented example (the rat also has one recorded trip), or enter your own measurements. All of them share one core of the general model, each with its own first and last steps; the knee-moment version trained for its task has its own copy of that core. On the recordings, its distance forecast missed by 1.725 cm for the wrist and 1.310 cm for the rat; for the wrist’s angles and for the knees’ angles, models made for each did better.</p>
+          <p>Forecast how far a tracked wrist or rat will move in about a quarter of a second, the two angles of a wrist from its movement, forearm and scalp readings, both knees of a walker from four seconds of knee angles, or how hard the forces around each knee push it to bend or straighten (its turning moment) from four seconds of leg angles. See how much four forearm electrodes change the angle forecast from the same wrist movement. Start from an invented example (the rat also has one recorded trip), or enter your own measurements. All five tasks run on one shared model, with a small first and last step of their own; the knee-moment version trained for its task has its own copy of the shared model. On the recordings, its distance forecast missed by 1.725 cm for the wrist and 1.310 cm for the rat; for the wrist’s angles and for the knees’ angles, models made for each did better.</p>
           <ul class="links">
             <li><a class="primary" href="shared-motion/">Open the shared model</a></li>
             <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models">The model, its comparison and a download</a></li>
@@ -236,7 +236,7 @@
         <article aria-labelledby="knee-moment-title">
           <p class="source">Reznick and colleagues · Optical treadmill walking and ground forces</p>
           <h3 id="knee-moment-title">How much turning moment follows a step?</h3>
-          <p>A knee can bend while the estimated moment at the joint resists that bend. See what the last four seconds of joint motion predict about the net turning moment at the knee, on an invented walk. On three test walkers, the general model trained for this task had the lowest average error of the methods that saw only angles, and copying an earlier measured moment did better still.</p>
+          <p>The turning moment is how hard the forces around the knee push it to bend or straighten; a laboratory estimated it from cameras and the forces under the feet. A knee can bend while that push resists the bend. See what the last four seconds of joint motion predict about the net turning moment at the knee, on an invented walk. On three test walkers, the general model trained for this task had the lowest average error of the methods that saw only angles, and copying an earlier measured moment did better still.</p>
           <ul class="links">
             <li><a class="primary" href="knee-moment/">Explore the mechanical forecast</a></li>
             <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/load">Source and results</a></li>
