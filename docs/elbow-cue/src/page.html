@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Change an elbow cue and sensor readings to forecast the next three quarters of a second. Compare the forecast methods on three recorded runs.">
+<title>The elbow after the cue · NeuroTranslation</title>
+<style>/*__STYLE__*/</style>
+</head>
+<body>
+<a class="skip" href="#experiment">Skip to experiment</a>
+<header class="mast"><div class="mast-inner"><a href="#top" aria-label="NeuroTranslation, top of page"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>NeuroTranslation</a><nav aria-label="Page sections"><a href="#experiment">Experiment</a><a href="#results">Results</a><a href="#source">Source</a></nav></div></header>
+<main id="top">
+<section class="intro" aria-labelledby="title">
+<div><p class="kicker">Right arm <span> / </span> Movement forecast</p><h1 id="title">The elbow after the cue</h1>
+<p class="lead">A person sees a cue to bend or straighten their elbow. A sensor in the arm support records what happens next. Once the first quarter-second has passed, how much will its reading change over the next three quarters?</p></div>
+<div class="study-id"><span>Ofner and colleagues</span><strong>One participant</strong><span>Motor execution · Runs 1–3</span></div>
+</section>
+<section id="experiment" aria-labelledby="experiment-title">
+<div class="section-head"><div><p class="kicker">Invented inputs · Fitted model</p><h2 id="experiment-title">Try a forecast</h2></div><button type="button" id="reset">Restore example</button></div>
+<div class="bench">
+<div class="setup">
+<fieldset class="cue"><legend>Give the visual cue</legend><div class="switch">
+<label><input type="radio" name="cue" value="flexion" checked><span>Bend</span></label>
+<label><input type="radio" name="cue" value="extension"><span>Straighten</span></label></div></fieldset>
+<p class="hint" id="cue-description"></p>
+<label class="heading" for="mode">What can the forecast use?</label>
+<select id="mode"></select><p id="mode-description" class="hint"></p>
+<details id="readings"><summary>Edit sensor readings</summary>
+<p class="hint">Each row has four invented summaries, earliest to latest. Changing the cue in this example leaves these values in place.</p>
+<div id="signals"></div></details>
+<div class="outcome">
+<label class="check"><input type="checkbox" id="observe"> Add an invented later reading</label>
+<div id="future-input" hidden><label for="future">Elbow sensor at +1.00 s</label><input type="number" id="future" step="any"><p class="hint">This lets you check the error after the forecast.</p></div>
+</div>
+</div>
+<div class="scope">
+<div class="scope-head"><div><p class="scope-label">Predicted sensor change</p><strong id="delta">—</strong></div><span>native elbow units</span></div>
+<svg id="chart" role="img" aria-labelledby="chart-title chart-desc" viewBox="0 0 640 235" preserveAspectRatio="xMidYMid meet"><title id="chart-title">Elbow history and predicted endpoint</title><desc id="chart-desc"></desc><g id="marks"></g></svg>
+<div class="legend"><span><i class="history-key"></i>Invented history</span><span><i class="forecast-key"></i>Forecast endpoint</span><span id="outcome-key" hidden><i class="outcome-key"></i>Invented outcome</span></div>
+<p id="comparison" aria-live="polite"></p>
+</div></div>
+<p class="caption">Each dot sits at the nominal end of a short window of invented sensor readings. The diamond marks a single predicted reading at +1.00 s. The intervening movement is unknown. A positive forecast means the sensor value rises. Its anatomical sign and scale are uncalibrated.</p>
+<details class="compare"><summary>Compare forecasts on these same inputs</summary><div class="table-scroll"><table><thead><tr><th scope="col">Forecast method</th><th scope="col">Predicted change</th><th scope="col">Predicted endpoint</th></tr></thead><tbody id="predictions"></tbody></table></div><p class="hint">Both columns use native elbow units. These example forecasts use the coefficients fitted on all three runs.</p></details>
+</section>
+<section id="results" aria-labelledby="results-title" class="lower">
+<p class="kicker">Observed sensor outcomes · Development runs</p><h2 id="results-title">Did scalp activity help?</h2>
+<p class="intro-text">Each method faced one entire run after fitting on the other two. The elbow sensor gave the answer on every trial. Take the distance between the forecast and that answer, then average it. A smaller mean absolute error is better.</p>
+<p id="finding"></p>
+<div class="section-head table-head"><h3>Forecast error by run</h3><label>Cue group <select id="group"><option value="all">Both cues</option><option value="flexion">Bend only</option><option value="extension">Straighten only</option></select></label></div>
+<div class="table-scroll"><table id="scores"><thead><tr><th scope="col">Inputs or control</th><th scope="col">Run 1</th><th scope="col">Run 2</th><th scope="col">Run 3</th><th scope="col">Mean</th></tr></thead><tbody></tbody></table></div>
+<p class="hint" id="denominators"></p>
+<details class="compare"><summary>How to read the controls</summary><div class="explainer">
+<p><strong>Keep the cue and elbow readings.</strong> Add C3, a scalp electrode over the left side of the head. An apparent gain could come from the visual cue, eye movements or the movement itself.</p>
+<p><strong>Replace C3 with eye recordings.</strong> Three electrodes near the eyes give a comparison. Another control substitutes the C3 summaries from the next trial with the same cue in the same run, wrapping back to the first trial at the end.</p>
+<p><strong>Change how the four scalp summaries are combined.</strong> The exploratory attention calculation gives each time bin a weight and averages them. It tests one pooling rule. Its mean error on these runs was slightly lower than the cue-and-elbow forecast, but it did worse on bend trials. This separate comparison had no matching attention-specific eye or swapped-trial test.</p>
+<p>One bend trial from run 1 had been examined during an earlier source check before the forecast protocol was fixed. All 36 trials from these three development runs contribute to the scores.</p>
+</div></details>
+</section>
+<section id="source" class="lower" aria-labelledby="source-title">
+<p class="kicker">Acquisition and attribution</p><h2 id="source-title">What was measured?</h2>
+<div class="columns"><div><h3>The signalled task</h3><p>One seated participant moved a supported right arm. Codes 0x600 and 0x601 identify elbow flexion and extension. “Bend” and “straighten” describe those cue classes. The release does not establish the exact words shown on the screen or what the participant intended.</p></div>
+<div><h3>Three kinds of reading</h3><p>The exoskeleton elbow sensor sampled at 64 Hz. Scalp electrical activity (EEG) and eye-area electrical activity (EOG) sampled at 512 Hz. C3 identifies a scalp electrode. The signal cannot establish which brain structure produced it.</p></div>
+<div><h3>One signed outcome</h3><p>Each elbow summary takes the middle of eight recent readings, averaged across the two middle samples. Subtract the summary at +0.25 s from the summary at +1.00 s. The result measures change on the stored sensor scale. The recording supplies no verified conversion into elbow degrees. Display latency, sensor delay and clock drift are unknown.</p></div></div>
+<p class="attribution">Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz, Graz University of Technology, collected the recordings. NeuroTranslation fitted the forecasts and calculated the run comparisons. The downloadable reader includes the protocols, coefficients, scores and invented example. Data-derived material retains CC BY 4.0 attribution. Original reader code and text are released under CC0.</p>
+<div class="links"><a id="download" hidden href="../elbow-cue-offline.zip" download>Download the offline experiment</a><a href="https://doi.org/10.5281/zenodo.834976">Original recordings ↗</a><a href="https://doi.org/10.1371/journal.pone.0182578">Research article ↗</a><a href="https://zenodo.org/records/834976/files/data%20set%20description.pdf">Event and channel tables ↗</a><a href="NOTICE.md">Credits and licences</a></div>
+</section></main><footer>NeuroTranslation · Elbow cue experiment</footer>
+<script>/*__BUNDLE__*/</script></body></html>

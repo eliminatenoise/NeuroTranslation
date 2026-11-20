@@ -64,5 +64,5 @@ class SharedMotion(nn.Module):
         with np.load(path, allow_pickle=False) as d:
             model = cls(json.loads(str(d["configuration"])))
             model.load_state_dict({key:torch.from_numpy(d[key]) for key in d.files
-                                   if key != "configuration" and not key.startswith(("angular.", "population.", "knee.", "load.", "right_plate.", "point_motion."))})
+                                   if key != "configuration" and not key.startswith(("angular.", "population.", "knee.", "load.", "right_plate.", "point_motion.", "cued_arm."))})
         return model

@@ -53,3 +53,13 @@ models/walking-landmarks/*.cmd whitespace=cr-at-eol
 docs/papers/walking-landmarks/** -text
 # Preserve the published Creative Commons legal text, including its closing blank line.
 docs/walking-landmarks/licenses/CC-BY-4.0.txt whitespace=-blank-at-eof
+
+docs/elbow-cue/** -text
+models/cue-elbow/** -text
+models/neurotranslate-0.0/cued-arm/** -text
+docs/papers/cued-arm/** -text
+docs/elbow-cue/*.cmd whitespace=cr-at-eol
+models/cue-elbow/*.cmd whitespace=cr-at-eol
+# Retain the closing line in the original CC BY 4.0 legal code.
+docs/elbow-cue/DATA-LICENCE.txt whitespace=-blank-at-eof
+models/neurotranslate-0.0/cued-arm/CC-BY-4.0.txt whitespace=-blank-at-eof

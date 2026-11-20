@@ -1,7 +1,7 @@
 {
   "checkpoints": {
     "spatial": "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179",
-    "movement": "eac2b0e49ab68ce6d6a2ff2f09a804f2d41fa3af96d632b7bbbb02f73871bed0"
+    "movement": "ab3db00e8c048953bdc12d8c978e3cabdf1f2fae7dcfe2f6f53fe8aed724ddfd"
   },
   "config": {
     "format": 1,
@@ -118,6 +118,42 @@
       "lead_ms": 200,
       "source_protocol": "a133714951379dc5e14b6ea17c430bcc62e75ea509ce01d5e6b9be6afe697fd3",
       "radial_control": "Reproduce from original training data; scores are in point-motion/results.json."
+    },
+    "cued_arm": {
+      "format": 1,
+      "source": "10.5281/zenodo.834976",
+      "protocol": "ed4a6e0f8b6f927683a7445449a6a6213249ea409869a41b58abc85ed3281e02",
+      "modes": [
+        "still",
+        "cue",
+        "motion",
+        "cue_motion",
+        "shared_motion",
+        "shared_cue_motion",
+        "shuffled_cue_motion"
+      ],
+      "cues": [
+        "elbow flexion",
+        "elbow extension",
+        "supination",
+        "pronation",
+        "hand close",
+        "hand open",
+        "rest"
+      ],
+      "sensors": [
+        "elbow",
+        "forearm rotation",
+        "index near"
+      ],
+      "horizon_after_cutoff_s": [
+        0.5,
+        1.0,
+        1.5
+      ],
+      "fit_people": 1,
+      "fit_runs": 3,
+      "fit_trials": 126
     }
   },
   "groups": {
@@ -653,6 +689,331 @@
     "point_motion.scrambled": {
       "bytes": 20736,
       "sha256": "6f877ab5f1ad4237a6328b594d611bf83ffa44bd9cb7484306d5aef18194d133",
+      "tensors": [
+        {
+          "name": "blocks.0.attention_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_out.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_out.weight",
+          "shape": [
+            24,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_in.bias",
+          "shape": [
+            48
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_in.weight",
+          "shape": [
+            48,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_out.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_out.weight",
+          "shape": [
+            24,
+            48
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.qkv.bias",
+          "shape": [
+            72
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.qkv.weight",
+          "shape": [
+            72,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "last_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "last_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "position",
+          "shape": [
+            4,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "project.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "project.weight",
+          "shape": [
+            24,
+            6
+          ],
+          "dtype": "<f4"
+        }
+      ]
+    },
+    "cued_arm.readouts": {
+      "bytes": 21208,
+      "sha256": "b29bb9761a6e6e74dd5bf954ed26a098c8ce409411f3869d3864638771a50584",
+      "tensors": [
+        {
+          "name": "cued_arm.cue.bias",
+          "shape": [
+            9
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.cue.coef",
+          "shape": [
+            7,
+            9
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.cue.mean",
+          "shape": [
+            7
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.cue.sd",
+          "shape": [
+            7
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.cue_motion.bias",
+          "shape": [
+            9
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.cue_motion.coef",
+          "shape": [
+            34,
+            9
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.cue_motion.mean",
+          "shape": [
+            34
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.cue_motion.sd",
+          "shape": [
+            34
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.motion.bias",
+          "shape": [
+            9
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.motion.coef",
+          "shape": [
+            27,
+            9
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.motion.mean",
+          "shape": [
+            27
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.motion.sd",
+          "shape": [
+            27
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.shared_cue_motion.bias",
+          "shape": [
+            9
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.shared_cue_motion.coef",
+          "shape": [
+            58,
+            9
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.shared_cue_motion.mean",
+          "shape": [
+            58
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.shared_cue_motion.sd",
+          "shape": [
+            58
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.shared_motion.bias",
+          "shape": [
+            9
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.shared_motion.coef",
+          "shape": [
+            51,
+            9
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.shared_motion.mean",
+          "shape": [
+            51
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.shared_motion.sd",
+          "shape": [
+            51
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.shuffled_cue_motion.bias",
+          "shape": [
+            9
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.shuffled_cue_motion.coef",
+          "shape": [
+            58,
+            9
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.shuffled_cue_motion.mean",
+          "shape": [
+            58
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.shuffled_cue_motion.sd",
+          "shape": [
+            58
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.token.mean",
+          "shape": [
+            6
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "cued_arm.token.sd",
+          "shape": [
+            6
+          ],
+          "dtype": "<f8"
+        }
+      ]
+    },
+    "cued_arm.scrambled": {
+      "bytes": 20736,
+      "sha256": "08ef34cae2a9c927dc24995cb6625bf45cf5d4a9cf85a30a687a934d861f9b20",
       "tensors": [
         {
           "name": "blocks.0.attention_norm.bias",
@@ -1706,7 +2067,7 @@
       ]
     }
   },
-  "pythonPredictorSha256": "037361bc4fd2c07ee73968a287c063e77a28bd5b2d18707491e29ef18de7f485",
+  "pythonPredictorSha256": "23b241244865f76ed9e0750561c3e13976b073926240850728d8408992c7d119",
   "pythonCorrectionSha256": "753ce7469f3f9d956dd461763af4ff10415606b62cf3f451897a1c9eeb46031b",
   "pythonPopulationSha256": "a90b69e5346efe0fd91c1f89df16a570386c90a0b836062a309dfcb5679ae789",
   "kneeExportSha256": "4ee73623e94404a5115b5743fdab94095cc03cee1d986201d0379c74d5730f45",

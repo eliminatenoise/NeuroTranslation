@@ -14,15 +14,16 @@
 <main>
 <header><span class="brand">NeuroTranslate <b>0.0</b></span><a class="save" href="" download="neurotranslate-motion.html">Save offline copy</a></header>
 <h1>What can past movement predict?</h1>
-<p class="lede">How far from its last position will a wrist move? Which way will it bend? How far will each knee bend on the next step? Which way will the net turning moment act? How much load will the plate under the right foot register? Try a forecast from a short movement history. The same model also reads the path of a rat on a maze.</p>
+<p class="lede">Choose a measurement to forecast. Follow a wrist, a knee, a tracked point or the load under a foot. For a supported right-arm task, you can also type an instruction and see how the model expects three sensor readings to change.</p>
 
-<p><a href="https://eliminatenoise.github.io/NeuroTranslation/population-motion/">Compare movement and brain-cell firing on a recorded rat trip</a>. Both model families forecast distance in centimetres using earlier measurements.</p>
+<p><a href="https://eliminatenoise.github.io/NeuroTranslation/population-motion/">Compare movement and brain-cell firing on a recorded rat trip</a>. The rat forecasts give distance in centimetres.</p>
 <section class="workspace" aria-labelledby="history-title">
 <div class="selector"><h2 id="history-title">Movement history</h2>
 <label for="history-select">What should the model forecast?</label>
 <select id="history-select" disabled="">
 <option value="wrist">Wrist displacement (cm)</option>
 <option value="wrist_angle">Right-wrist angles (°)</option>
+<option value="cued_arm_change">Cued right arm</option>
 <option value="marker_displacement">One tracked body point (mm)</option>
 <option value="right_plate_force">Right-foot plate load (N)</option>
 <option value="knee_moment">Knee moments (N·m/kg)</option>
@@ -58,6 +59,18 @@
 </details>
 <div class="buttons"><button type="button" id="angle-run">Compare angle forecasts</button><button type="button" class="secondary" id="angle-fill">Fill with invented input</button></div>
 </div>
+<div id="arm-controls" hidden="">
+<label for="arm-method">Forecast method</label><select id="arm-method">
+<option value="cue">Action cue alone</option><option value="shared_cue_motion">Action cue and sensors, shared encoder</option><option value="shared_motion">Sensors alone, shared encoder</option>
+<option value="cue_motion">Action cue and sensors, linear</option><option value="motion">Sensors alone, linear</option><option value="shuffled_cue_motion">Action cue and sensors, shuffled encoder</option><option value="still">No change</option></select>
+<div id="arm-cue-field"><label for="arm-cue">Right-arm instruction</label><input id="arm-cue" list="arm-cues" value="bend my right elbow" autocomplete="off">
+<button id="arm-mic" type="button" class="secondary" aria-pressed="false" hidden="">Dictate on this device</button><span class="hint" id="arm-voice-status" role="status"></span>
+<datalist id="arm-cues"><option value="bend my right elbow"></option><option value="straighten my right elbow"></option><option value="turn my right palm up"></option><option value="turn my right palm down"></option><option value="close my right hand"></option><option value="open my right hand"></option><option value="rest"></option></datalist>
+<p class="hint">Press F to enter an instruction. Choose a listed phrase or type a study label, then press Enter. The reader matches a fixed list of actions.</p></div>
+<div id="arm-custom-bins" hidden=""><label for="arm-bins">Four bins from the elbow, forearm and index sensors (JSON)</label><textarea id="arm-bins" rows="5" spellcheck="false"></textarea>
+<p class="hint">Each row starts with the three instrument levels. The last three values give the change within that interval. Times, units and the sensor order are described below.</p>
+<button id="arm-fill" type="button" class="secondary">Fill with invented sensor values</button></div>
+<button id="arm-run" type="button">Forecast the readings</button></div>
 <div id="point-controls" hidden="">
 <label for="point-mode">Forecast method</label><select id="point-mode">
 <option value="shared">Shared movement encoder</option><option value="linear">Linear fit</option><option value="shuffled">Shuffled movement encoder</option><option value="velocity">Continue the latest velocity</option><option value="previous">Repeat the previous 200 ms</option><option value="stationary">Stay in place</option></select>
@@ -137,6 +150,9 @@
 <details id="outcome" hidden=""><summary>Reveal the rat’s measured distance</summary><p id="measured"></p></details>
 <details><summary>Inspect the four input intervals</summary><div id="features"></div></details>
 </div>
+<div id="arm-results" hidden=""><h2>Predicted changes from the last reading</h2><p id="arm-result-label"></p>
+<div style="overflow-x:auto"><table id="arm-values"><thead><tr><th>Time ahead</th><th>Elbow</th><th>Forearm rotation</th><th>Index finger</th></tr></thead><tbody></tbody></table></div>
+<p class="hint">Each column uses that instrument’s native scale. Its sign gives the direction of change on the sensor. Physical angle calibration is unknown.</p></div>
 <div id="point-results" hidden=""><h2>Where the point moves over the next 200 milliseconds</h2>
 <p id="point-result" aria-live="polite"></p><canvas id="point-plot" role="img" aria-label="Top and side views of the supplied marker history and forecast"></canvas><p class="hint">Blue dots trace the nine input positions. The orange diamond marks the predicted endpoint. The dashed line joins it to the last input. Both views use the same scale.</p></div>
 <div id="plate-results" hidden="">
@@ -162,6 +178,10 @@
 </div>
 </section>
 
+<section id="arm-study" class="study" hidden=""><h2>What does knowing the instruction add?</h2>
+<p>A participant saw one of seven cues while their right arm rested in a support. The study recorded the elbow and forearm with the support and the base of the index finger with a glove. This reader forecasts each instrument’s change half a second, one second and one and a half seconds after its last input.</p>
+<p>Across 126 trials in three runs, the shared encoder did better with the correct cue than with the cue removed or replaced. The cue alone gave the lowest average error. These are held-run comparisons within one person. The words in the box select a known task. The original record identifies the visual cue’s category.</p>
+<p>The input ends a quarter second after the stored cue. Each of four successive 125 ms bins contains three sensor medians, followed by the three differences between the second-half and first-half medians. This branch uses the mechanical sensors. A separate study examines scalp and eye recordings. <a href="https://eliminatenoise.github.io/NeuroTranslation/elbow-cue/">Try the scalp-and-elbow study</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/cued-arm">Study, source and limitations</a>.</p></section>
 <section id="point-study" class="study" hidden=""><h2>Can one rule follow another body location?</h2>
 <p>Nine positions describe the last 400 milliseconds of one skin marker. The model learned from markers on the outer ankles, outer knees and thumb side of the wrists. We tested the same rule on 46 other locations in 10 walkers.</p>
 <p>Across those 46 locations, the shared encoder missed the future point by 31.00 mm on average. Continuing the last velocity missed by 43.29 mm. A separate fit that compared the movement with training examples came closest at 28.73 mm. The public reader offers the six methods that can run without distributing individual training examples. The study code reproduces all seven from the original data.</p>
@@ -219,7 +239,7 @@
 <h3>Knee angles · CC BY 4.0</h3>
 <p>Rateb Katmah, Aamna AlShehhi, Doua Kosaji, Nour Al-Rahmani, Muhammad Abdullah, Abdul Aziz Vaqar Hulleck and Kinda Khalaf (2026), <i>A multimodal gait dataset of brain activity, muscle activity, kinematics and ground forces in young adults</i>, v1.0.0, PhysioNet. NeuroTranslation selected the two reconstructed knee angles at 0.5 m/s, fitted three corrections to a stride forecast and compared their errors. The original data and derived model parameters and results retain CC BY 4.0 attribution. <a href="https://doi.org/10.13026/r0ea-7161">Versioned dataset</a> · <a href="https://doi.org/10.1038/s44360-026-00096-z">PhysioNet platform paper</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
 <h3>Wrist angles, forearm and scalp recordings · CC BY 4.0</h3>
-<p>Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz published the <i>EEG-EMG-WristMotion Dataset</i>, version 3. NeuroTranslation derived two anchor-relative wrist angles, four bipolar forearm amplitudes and eight mean scalp voltages per time bin. The new fits use those features to estimate two absolute angles. All built-in wrist-angle inputs are invented. Retain attribution for the data, derived weights, scales and results under CC BY 4.0. The combined checkpoint has SHA-256 <code>eac2b0e49ab68ce6d6a2ff2f09a804f2d41fa3af96d632b7bbbb02f73871bed0</code>. <a href="https://doi.org/10.6084/m9.figshare.29666735.v3" rel="noreferrer">Version 3 dataset</a> · <a href="https://doi.org/10.1038/s41597-026-07287-z" rel="noreferrer">Study descriptor</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0</a>.</p>
+<p>Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz published the <i>EEG-EMG-WristMotion Dataset</i>, version 3. NeuroTranslation derived two anchor-relative wrist angles, four bipolar forearm amplitudes and eight mean scalp voltages per time bin. The new fits use those features to estimate two absolute angles. All built-in wrist-angle inputs are invented. Retain attribution for the data, derived weights, scales and results under CC BY 4.0. The combined checkpoint has SHA-256 <code>ab3db00e8c048953bdc12d8c978e3cabdf1f2fae7dcfe2f6f53fe8aed724ddfd</code>. <a href="https://doi.org/10.6084/m9.figshare.29666735.v3" rel="noreferrer">Version 3 dataset</a> · <a href="https://doi.org/10.1038/s41597-026-07287-z" rel="noreferrer">Study descriptor</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0</a>.</p>
 <h3>Rat position data · CC BY 4.0</h3>
 <p>Justin Shin and Shantanu Jadhav, <i>Single Day W-Track Learning</i> (2024), DANDI 000978, version 0.240511.0307. We selected five past camera positions and a later measured endpoint from session 01, animal JS14, running epoch 5, training trip 55. We derived centimetre distances, timing and turn features. The forecast and derived endpoint distance are new calculations at the previously published cutoff. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/4d046b86bfa797e28f29cd4f6b8445a1f4b90487/benchmarks/wtrack-neural-motion/fitted/example.json" rel="noreferrer">Original trip example</a> · <a href="https://doi.org/10.48324/dandi.000978/0.240511.0307" rel="noreferrer">Dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0 licence</a>.</p>
 <h3>Wrist training data · CDLA Permissive 2.0</h3>

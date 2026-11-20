@@ -16,7 +16,7 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 SRC = HERE / 'src'
 STATIC = ('CC0-1.0.txt', 'CDLA-Permissive-2.0.txt', 'DATA-CREDITS.md', 'NOTICE.md', 'README.md',
-          'SPATIAL-API.md', 'point-example.json', 'right-plate-example.json', 'knee-moment-example.json', 'knee-example.json', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
+          'SPATIAL-API.md', 'arm-example.json', 'point-example.json', 'right-plate-example.json', 'knee-moment-example.json', 'knee-example.json', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
 PLATE_LICENCE = 'RIGHT-PLATE-DATA-LICENCE.txt'
 ARTIFACTS = (*STATIC, PLATE_LICENCE, 'model.json', 'population-example.json', 'shared-motion.js')
 
@@ -151,7 +151,18 @@ def build_runtime(model, out):
         rng = np.random.default_rng(3691)
         point_core = {n:rng.permutation(saved[n].ravel()).reshape(saved[n].shape) for n in point_core_names}
         groups['point_motion.scrambled'], descriptions['point_motion.scrambled'] = pack(point_core, point_core)
-        assert len(knee_names) == 14 and set(saved.files) == {'configuration', *names, *knee_names, *moment_names, *plate_names, *point_names}
+        arm_names = {n for n in saved.files if n.startswith('cued_arm.')}
+        shapes = {'cued_arm.token.mean':(6,), 'cued_arm.token.sd':(6,)}
+        for mode,width in [('cue',7),('motion',27),('cue_motion',34),('shared_motion',51),('shared_cue_motion',58),('shuffled_cue_motion',58)]:
+            for key,shape in [('mean',(width,)),('sd',(width,)),('coef',(width,9)),('bias',(9,))]:
+                shapes['cued_arm.'+mode+'.'+key] = shape
+        if set(shapes) != arm_names or any(saved[n].shape != v for n,v in shapes.items()):
+            raise ValueError('Incomplete arm cue model.')
+        groups['cued_arm.readouts'],descriptions['cued_arm.readouts'] = pack(saved,arm_names)
+        arm_rng = np.random.default_rng(20495)
+        arm_core = {n:arm_rng.permutation(saved[n].ravel()).reshape(saved[n].shape) for n in point_core_names}
+        groups['cued_arm.scrambled'],descriptions['cued_arm.scrambled'] = pack(arm_core,arm_core)
+        assert len(knee_names) == 14 and set(saved.files) == {'configuration', *names, *knee_names, *moment_names, *plate_names, *point_names, *arm_names}
         assert set(knee['readouts']) == {n.removeprefix('knee.') for n in knee_names}
         readouts = {n.removeprefix('knee.'):saved[n] for n in knee_names}
         groups['knee.readouts'], descriptions['knee.readouts'] = pack(readouts, readouts)

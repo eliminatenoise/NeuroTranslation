@@ -2,7 +2,9 @@
 
 ## Predict without fitting
 
-Python and NumPy run all examples. Use the included `movement-weights.npz` (SHA-256 `eac2b0e49ab68ce6d6a2ff2f09a804f2d41fa3af96d632b7bbbb02f73871bed0`). Run `python predict.py point-motion/example.json` to forecast one skin marker’s movement in three dimensions. [Point inputs, fitting and tested body locations](point-motion/README.md)
+Python and NumPy run all examples. Use the included `movement-weights.npz` (SHA-256 `ab3db00e8c048953bdc12d8c978e3cabdf1f2fae7dcfe2f6f53fe8aed724ddfd`). Run `python predict.py cued-arm/example.json` to see the cued right-arm forecast. [Source, input, licence and study reproduction](cued-arm/README.md)
+
+The single-marker forecast first appeared in checkpoint `eac2b0e49ab68ce6d6a2ff2f09a804f2d41fa3af96d632b7bbbb02f73871bed0`. Run `python predict.py point-motion/example.json` to forecast one skin marker’s movement in three dimensions. [Point inputs, fitting and tested body locations](point-motion/README.md)
 
 The right-foot readouts first appeared in checkpoint `a52af3c0875a43d3ce8ae70ae7eaa8cf83a9bcd4f75422f1cc84bea6fd8379ee`. Run `python predict.py right-plate/example.json` to predict the upward force on the right foot’s plate. The invented example gives 582.15 N. [Source files, original study and reproduction steps](right-plate/README.md) · [Original data attribution and licence](right-plate/DATA-LICENCE.txt)
 

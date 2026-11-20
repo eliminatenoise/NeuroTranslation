@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Change an elbow cue and sensor readings to forecast the next three quarters of a second. Compare the forecast methods on three recorded runs.">
+<title>The elbow after the cue · NeuroTranslation</title>
+<style>:root{color-scheme:light;--ink:#152822;--text:#243a33;--paper:#f7f7ef;--line:#ccd2c5;--dark:#162e28;--accent:#a8edbd;--teal:#176349;--faint:#557062;font-family:"Inter","Helvetica Neue",Arial,sans-serif;color:var(--text);background:var(--paper);font-synthesis:none}
+*{box-sizing:border-box}body{margin:0}html{scroll-behavior:smooth;scroll-padding-top:1.5rem}h1,h2,h3,p,fieldset{margin:0}button,select,input{font:inherit;color:inherit}.skip{position:absolute;left:-9999px}.skip:focus{position:fixed;top:8px;left:8px;background:white;color:black;z-index:5;padding:.5rem}a{color:var(--teal);text-underline-offset:.2em}a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #ab5b14;outline-offset:3px}
+.mast{background:var(--dark);color:white}.mast-inner,main,footer{max-width:1210px;margin:auto;padding:0 clamp(16px,4vw,60px)}.mast-inner{min-height:59px;display:flex;align-items:center;justify-content:space-between;gap:10px}.mast a{color:inherit;text-decoration:none}.mast a:hover{text-decoration:underline}.mast-inner>a{display:inline-flex;align-items:center;font-weight:760;letter-spacing:-.045em;font-size:1.12rem;gap:.6rem}.mark{display:inline-flex;align-items:center;gap:3px}.mark i{background:var(--accent);height:12px;width:3px;border-radius:5px}.mark i:nth-child(2){height:23px}.mark i:nth-child(3){height:16px}.mark i:nth-child(4){height:7px}nav{display:flex;gap:clamp(12px,3vw,30px);font-size:.87rem}.intro{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:28px;padding:clamp(34px,5vw,72px) 0 32px;border-bottom:1px solid var(--line)}.kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.105em;font-weight:750;line-height:1.5;color:var(--teal)}.kicker span{padding:0 .35em;color:#97a69b}h1,h2,h3{color:var(--ink)}h1{font-size:clamp(2.65rem,6vw,5.15rem);letter-spacing:-.076em;line-height:1.02;font-weight:650;margin:.16em 0 .24em}h2{font-size:clamp(1.85rem,3.3vw,3.15rem);letter-spacing:-.065em;line-height:1.08;font-weight:660}h3{font-size:1.22rem;letter-spacing:-.036em;font-weight:700}p{line-height:1.57}.lead{max-width:795px;font-size:clamp(1.02rem,1.6vw,1.28rem);line-height:1.48}.study-id{border-left:2px solid #9bac96;padding:4px 0 4px 15px;display:grid;gap:5px;font-size:.77rem;color:var(--faint);white-space:nowrap}.study-id strong{font-size:1.06rem;color:var(--ink);letter-spacing:-.03em}.section-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:27px 0 17px}.section-head .kicker,.lower>.kicker{margin-bottom:6px}
+button,select{background:#fdfdf7;border:1px solid #9eac9c;border-radius:5px;min-height:38px;padding:7px 10px}button{cursor:pointer;font-size:.88rem;font-weight:650}button:hover{background:#e7ede2}select{font-size:.91rem;max-width:100%}.bench{display:grid;grid-template-columns:minmax(260px,.92fr) minmax(0,2fr);border:1px solid #bac4b8;border-radius:12px;overflow:hidden;background:#fcfcf5}.setup{padding:22px 23px 20px;min-width:0}fieldset{border:0;padding:0;min-width:0}.heading,legend{font-weight:720;font-size:.91rem;display:block;line-height:1.4}legend{padding:0}.switch{display:flex;margin:8px 0 5px}.switch label{flex:1;position:relative;cursor:pointer}.switch input{opacity:0;position:absolute;width:1px;height:1px}.switch span{display:block;text-align:center;border:1px solid #abb8aa;padding:8px 5px;font-size:.91rem}.switch label:first-child span{border-radius:5px 0 0 5px}.switch label:last-child span{border-radius:0 5px 5px 0;border-left:0}.switch input:checked+span{background:#28533f;color:white;border-color:#28533f;font-weight:700}.switch input:focus-visible+span{position:relative;outline:3px solid #ab5b14;z-index:1}.hint,.caption{font-size:.85rem;color:#526457;line-height:1.5}.heading{margin:17px 0 6px}#mode{width:100%}#mode-description{margin-top:5px}.setup details,.outcome{border-top:1px solid var(--line);margin-top:16px;padding-top:13px}summary{cursor:pointer;font-weight:680;font-size:.88rem;line-height:1.5}summary:hover{color:var(--teal)}details[open]>summary{margin-bottom:8px}.check{font-size:.86rem;font-weight:640;line-height:1.4;display:flex;gap:7px;align-items:center}.check input{width:16px;height:16px;accent-color:var(--teal);flex:none}.outcome input[type=number],.signal input{max-width:100%;min-width:0;border:1px solid #a5b2a5;border-radius:4px;background:white;padding:6px 4px;font-size:.85rem}.outcome input[type=number]{display:block;margin:5px 0}#future-input{margin-top:9px;font-size:.83rem}.signal{margin-top:10px}.signal label{min-width:0}.signal legend{font-size:.81rem}.bins{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.bins label span{display:block;font-size:.68rem;color:var(--faint);padding:3px 0}.bins input{width:100%}
+.scope{background:var(--dark);color:#f2faf4;padding:22px clamp(13px,2.5vw,34px) 18px;align-self:stretch;display:flex;flex-direction:column;justify-content:flex-start;min-width:0}.scope-head{display:flex;align-items:end;justify-content:space-between;gap:7px}.scope-label{font-size:.77rem;letter-spacing:.065em;color:#c8dbc9;text-transform:uppercase}.scope-head strong{display:block;font-size:clamp(2.6rem,4.1vw,4.1rem);font-weight:600;letter-spacing:-.045em;line-height:1.1;font-variant-numeric:tabular-nums;color:#b6f3c7}.scope-head>span{font-size:.75rem;color:#d4dfd3;padding-bottom:5px}#chart{width:100%;display:block;margin:10px 0 6px;overflow:visible}.legend{display:flex;flex-wrap:wrap;gap:5px 16px;color:#dfebdf;font-size:.76rem}.legend span{display:inline-flex;align-items:center;gap:7px}.legend i{width:9px;height:9px;display:inline-block}.history-key{border-radius:50%;background:#c4d3c8}.forecast-key{background:#a9efbe;transform:rotate(45deg)}.outcome-key{border:2px solid #fac780}.legend span[hidden],*[hidden]{display:none!important}#comparison{color:#d4e0d5;font-size:.85rem;margin-top:13px}.caption{margin:10px 0 0;max-width:890px}.compare{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0;margin-top:17px}.compare summary{font-size:.98rem}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.92rem;font-variant-numeric:tabular-nums}th,td{text-align:right;padding:10px 11px;border-bottom:1px solid var(--line)}th:first-child,td:first-child{text-align:left}thead th{font-size:.76rem;color:var(--faint);background:#edf0e6}tbody th{font-weight:530}tbody tr.featured{background:#e2eddf}tbody tr.featured th{font-weight:750}.compare .hint,#denominators{margin-top:9px}.lower{border-top:2px solid #a4b39e;padding-top:28px;margin-top:48px}.intro-text,.lower>p:not(.kicker){max-width:850px}.intro-text{margin-top:14px}#finding{margin-top:14px;padding-left:15px;border-left:3px solid var(--teal);color:var(--ink)}.table-head{margin-top:20px;margin-bottom:10px}.table-head label{display:flex;align-items:center;gap:8px;font-size:.83rem}.explainer{max-width:850px;display:grid;gap:10px;font-size:.93rem}.columns{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,3vw,38px);margin:21px 0}.columns h3{margin-bottom:6px}.columns p,.attribution{font-size:.92rem}.links{display:flex;flex-wrap:wrap;gap:8px 20px;margin:13px 0 0;font-size:.86rem}footer{padding-top:24px;padding-bottom:24px;margin-top:40px;border-top:1px solid var(--line);font-size:.8rem;color:var(--faint)}
+@media(max-width:760px){.intro{display:block}.study-id{display:flex;flex-wrap:wrap;gap:7px 13px;border:0;padding:0;margin-top:16px;align-items:baseline}.study-id strong{font-size:.8rem}.mast-inner{min-height:52px}.bench{display:flex;flex-direction:column}.setup{padding:16px 18px}.scope{padding:19px 17px}.columns{grid-template-columns:1fr;gap:17px}.section-head{margin-top:20px}.lower{margin-top:35px}.intro{padding-bottom:24px}.switch{max-width:330px}.table-head{align-items:flex-start}.table-head label{display:grid;gap:3px}.scope-head strong{font-size:3.2rem}#chart{max-height:250px}.compare summary{font-size:.91rem}.legend{gap:5px 12px}}
+@media(max-width:460px){nav a:first-child{display:none}.mast-inner>a{font-size:1.02rem}.kicker{font-size:.66rem}.study-id span:first-child{display:none}.btn,button{font-size:.79rem}.scope{padding-left:12px;padding-right:12px}#scores th,#scores td{padding:7px 3px;font-size:.78rem}#scores thead th{font-size:.68rem}#scores th:first-child{max-width:115px}.table-head{align-items:center}h3{font-size:1.1rem}.legend{font-size:.68rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#experiment">Skip to experiment</a>
+<header class="mast"><div class="mast-inner"><a href="#top" aria-label="NeuroTranslation, top of page"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>NeuroTranslation</a><nav aria-label="Page sections"><a href="#experiment">Experiment</a><a href="#results">Results</a><a href="#source">Source</a></nav></div></header>
+<main id="top">
+<section class="intro" aria-labelledby="title">
+<div><p class="kicker">Right arm <span> / </span> Movement forecast</p><h1 id="title">The elbow after the cue</h1>
+<p class="lead">A person sees a cue to bend or straighten their elbow. A sensor in the arm support records what happens next. Once the first quarter-second has passed, how much will its reading change over the next three quarters?</p></div>
+<div class="study-id"><span>Ofner and colleagues</span><strong>One participant</strong><span>Motor execution · Runs 1–3</span></div>
+</section>
+<section id="experiment" aria-labelledby="experiment-title">
+<div class="section-head"><div><p class="kicker">Invented inputs · Fitted model</p><h2 id="experiment-title">Try a forecast</h2></div><button type="button" id="reset">Restore example</button></div>
+<div class="bench">
+<div class="setup">
+<fieldset class="cue"><legend>Give the visual cue</legend><div class="switch">
+<label><input type="radio" name="cue" value="flexion" checked><span>Bend</span></label>
+<label><input type="radio" name="cue" value="extension"><span>Straighten</span></label></div></fieldset>
+<p class="hint" id="cue-description"></p>
+<label class="heading" for="mode">What can the forecast use?</label>
+<select id="mode"></select><p id="mode-description" class="hint"></p>
+<details id="readings"><summary>Edit sensor readings</summary>
+<p class="hint">Each row has four invented summaries, earliest to latest. Changing the cue in this example leaves these values in place.</p>
+<div id="signals"></div></details>
+<div class="outcome">
+<label class="check"><input type="checkbox" id="observe"> Add an invented later reading</label>
+<div id="future-input" hidden><label for="future">Elbow sensor at +1.00 s</label><input type="number" id="future" step="any"><p class="hint">This lets you check the error after the forecast.</p></div>
+</div>
+</div>
+<div class="scope">
+<div class="scope-head"><div><p class="scope-label">Predicted sensor change</p><strong id="delta">—</strong></div><span>native elbow units</span></div>
+<svg id="chart" role="img" aria-labelledby="chart-title chart-desc" viewBox="0 0 640 235" preserveAspectRatio="xMidYMid meet"><title id="chart-title">Elbow history and predicted endpoint</title><desc id="chart-desc"></desc><g id="marks"></g></svg>
+<div class="legend"><span><i class="history-key"></i>Invented history</span><span><i class="forecast-key"></i>Forecast endpoint</span><span id="outcome-key" hidden><i class="outcome-key"></i>Invented outcome</span></div>
+<p id="comparison" aria-live="polite"></p>
+</div></div>
+<p class="caption">Each dot sits at the nominal end of a short window of invented sensor readings. The diamond marks a single predicted reading at +1.00 s. The intervening movement is unknown. A positive forecast means the sensor value rises. Its anatomical sign and scale are uncalibrated.</p>
+<details class="compare"><summary>Compare forecasts on these same inputs</summary><div class="table-scroll"><table><thead><tr><th scope="col">Forecast method</th><th scope="col">Predicted change</th><th scope="col">Predicted endpoint</th></tr></thead><tbody id="predictions"></tbody></table></div><p class="hint">Both columns use native elbow units. These example forecasts use the coefficients fitted on all three runs.</p></details>
+</section>
+<section id="results" aria-labelledby="results-title" class="lower">
+<p class="kicker">Observed sensor outcomes · Development runs</p><h2 id="results-title">Did scalp activity help?</h2>
+<p class="intro-text">Each method faced one entire run after fitting on the other two. The elbow sensor gave the answer on every trial. Take the distance between the forecast and that answer, then average it. A smaller mean absolute error is better.</p>
+<p id="finding"></p>
+<div class="section-head table-head"><h3>Forecast error by run</h3><label>Cue group <select id="group"><option value="all">Both cues</option><option value="flexion">Bend only</option><option value="extension">Straighten only</option></select></label></div>
+<div class="table-scroll"><table id="scores"><thead><tr><th scope="col">Inputs or control</th><th scope="col">Run 1</th><th scope="col">Run 2</th><th scope="col">Run 3</th><th scope="col">Mean</th></tr></thead><tbody></tbody></table></div>
+<p class="hint" id="denominators"></p>
+<details class="compare"><summary>How to read the controls</summary><div class="explainer">
+<p><strong>Keep the cue and elbow readings.</strong> Add C3, a scalp electrode over the left side of the head. An apparent gain could come from the visual cue, eye movements or the movement itself.</p>
+<p><strong>Replace C3 with eye recordings.</strong> Three electrodes near the eyes give a comparison. Another control substitutes the C3 summaries from the next trial with the same cue in the same run, wrapping back to the first trial at the end.</p>
+<p><strong>Change how the four scalp summaries are combined.</strong> The exploratory attention calculation gives each time bin a weight and averages them. It tests one pooling rule. Its mean error on these runs was slightly lower than the cue-and-elbow forecast, but it did worse on bend trials. This separate comparison had no matching attention-specific eye or swapped-trial test.</p>
+<p>One bend trial from run 1 had been examined during an earlier source check before the forecast protocol was fixed. All 36 trials from these three development runs contribute to the scores.</p>
+</div></details>
+</section>
+<section id="source" class="lower" aria-labelledby="source-title">
+<p class="kicker">Acquisition and attribution</p><h2 id="source-title">What was measured?</h2>
+<div class="columns"><div><h3>The signalled task</h3><p>One seated participant moved a supported right arm. Codes 0x600 and 0x601 identify elbow flexion and extension. “Bend” and “straighten” describe those cue classes. The release does not establish the exact words shown on the screen or what the participant intended.</p></div>
+<div><h3>Three kinds of reading</h3><p>The exoskeleton elbow sensor sampled at 64 Hz. Scalp electrical activity (EEG) and eye-area electrical activity (EOG) sampled at 512 Hz. C3 identifies a scalp electrode. The signal cannot establish which brain structure produced it.</p></div>
+<div><h3>One signed outcome</h3><p>Each elbow summary takes the middle of eight recent readings, averaged across the two middle samples. Subtract the summary at +0.25 s from the summary at +1.00 s. The result measures change on the stored sensor scale. The recording supplies no verified conversion into elbow degrees. Display latency, sensor delay and clock drift are unknown.</p></div></div>
+<p class="attribution">Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz, Graz University of Technology, collected the recordings. NeuroTranslation fitted the forecasts and calculated the run comparisons. The downloadable reader includes the protocols, coefficients, scores and invented example. Data-derived material retains CC BY 4.0 attribution. Original reader code and text are released under CC0.</p>
+<div class="links"><a id="download" hidden href="../elbow-cue-offline.zip" download>Download the offline experiment</a><a href="https://doi.org/10.5281/zenodo.834976">Original recordings ↗</a><a href="https://doi.org/10.1371/journal.pone.0182578">Research article ↗</a><a href="https://zenodo.org/records/834976/files/data%20set%20description.pdf">Event and channel tables ↗</a><a href="NOTICE.md">Credits and licences</a></div>
+</section></main><footer>NeuroTranslation · Elbow cue experiment</footer>
+<script>const ELBOW_MODEL={"schema":1,"protocol_sha256":"f0e1525bcebf19010f668c36c5d7f308aedccc5c49ff6bc181b4ae2857abd6b7","dataset":"doi:10.5281/zenodo.834976","training":{"person":"S1","execution_runs":[1,2,3],"trials":36},"units":"native elbow-sensor change","models":{"persistence":{"value":0.0},"cue_median":{"by_cue":{"flexion":0.046596527099609375,"extension":-0.011417388916015625}},"cue_mechanics":{"features":["cue01","m3","m3-m2","m2-m1","m1-m0"],"means":[0.5,44.19605774349637,0.011734591590033637,0.007462130652533637,0.01015011469523112],"scales":[0.5,1.7080586350679998,0.02026861570370574,0.015888143808822246,0.018830965630234654],"intercept":0.0064021216498480905,"weights":[-0.020737011258492474,0.01744952620905682,0.0053465905240287,0.04313773055788921,0.010662414334853515]},"cue_mechanics_c3":{"features":["cue01","m3","m3-m2","m2-m1","m1-m0","s1-s0","s2-s0","s3-s0"],"means":[0.5,44.19605774349637,0.011734591590033637,0.007462130652533637,0.01015011469523112,0.11557912826538086,-1.196516990661621,-1.7689053217569988],"scales":[0.5,1.7080586350679998,0.02026861570370574,0.015888143808822246,0.018830965630234654,22.114083758940815,40.63358564776253,60.387500815911245],"intercept":0.0064021216498480905,"weights":[-0.021930747448352213,0.016713812227747437,0.0030603685225975116,0.04386974702771879,0.009242106072630957,0.008304747351166368,0.0015489154305054493,0.004498959878422966]},"cue_mechanics_eog":{"features":["cue01","m3","m3-m2","m2-m1","m1-m0","s1-s0","s2-s0","s3-s0"],"means":[0.5,44.19605774349637,0.011734591590033637,0.007462130652533637,0.01015011469523112,-1.882802892614235,-3.713091020230839,-4.014172659979863],"scales":[0.5,1.7080586350679998,0.02026861570370574,0.015888143808822246,0.018830965630234654,23.53424328903959,46.01115661785633,68.18034991958207],"intercept":0.0064021216498480905,"weights":[-0.022445009244208364,0.016690525698882495,0.0030399043297084233,0.043998468032608144,0.009499172367671236,0.0006046821369616589,0.00401001241521728,0.008108049724617952]},"temporal_attention":{"features":["cue01","m3","m3-m2","m2-m1","m1-m0","attention_pool"],"means":[0.5,44.19605774349637,0.011734591590033637,0.007462130652533637,0.01015011469523112,-0.1326278985981112],"scales":[0.5,1.7080586350679998,0.02026861570370574,0.015888143808822246,0.018830965630234654,1.1678362720646682],"intercept":0.0064021216498480905,"weights":[-0.021325338128462563,0.01747111304815028,0.0036877552412658793,0.04465648433173823,0.009299458382415518,0.01378916431033639],"token_scale":38.05044439741919}}};
+const ELBOW_SCORES={"protocol_sha256":"f0e1525bcebf19010f668c36c5d7f308aedccc5c49ff6bc181b4ae2857abd6b7","units":"native elbow-sensor change","protocol":"Three whole-run rotations within S1 TRAIN development","folds":[{"fit_runs":[2,3],"fit_n":24,"held_run":1,"held_n":12},{"fit_runs":[1,3],"fit_n":24,"held_run":2,"held_n":12},{"fit_runs":[1,2],"fit_n":24,"held_run":3,"held_n":12}],"pooled":{"n":36,"mae":{"persistence":0.07515822516547309,"cue_median":0.07431719038221571,"cue_mechanics":0.07237136398485221,"cue_mechanics_c3":0.07859292654326161,"cue_mechanics_eog":0.09081829541089707,"temporal_attention":0.07122022081031015,"shifted_c3":0.07780370884398523},"small_abs_le_0_1":25,"opposite_training_cue_median":17,"zero_change":0},"balanced_mae":{"persistence":0.07515822516547309,"cue_median":0.0743171903822157,"cue_mechanics":0.07237136398485221,"cue_mechanics_c3":0.07859292654326162,"cue_mechanics_eog":0.09081829541089705,"temporal_attention":0.07122022081031017,"shifted_c3":0.07780370884398523},"by_run":{"1":{"n":12,"mae":{"persistence":0.0745234489440918,"cue_median":0.0745234489440918,"cue_mechanics":0.08974221952794746,"cue_mechanics_c3":0.08987692398420212,"cue_mechanics_eog":0.08954974540364584,"temporal_attention":0.08924476583008019,"shifted_c3":0.09022018728105842},"small_abs_le_0_1":8,"opposite_training_cue_median":6,"zero_change":0},"2":{"n":12,"mae":{"persistence":0.05829938252766927,"cue_median":0.05819161732991537,"cue_mechanics":0.05639656304008134,"cue_mechanics_c3":0.05566672155758268,"cue_mechanics_eog":0.05504764058301977,"temporal_attention":0.05530252226374518,"shifted_c3":0.05556068544941614},"small_abs_le_0_1":10,"opposite_training_cue_median":5,"zero_change":0},"3":{"n":12,"mae":{"persistence":0.0926518440246582,"cue_median":0.09023650487263997,"cue_mechanics":0.07097530938652784,"cue_mechanics_c3":0.09023513408800006,"cue_mechanics_eog":0.12785750024602552,"temporal_attention":0.06911337433710509,"shifted_c3":0.08763025380148114},"small_abs_le_0_1":7,"opposite_training_cue_median":6,"zero_change":0}},"by_cue":{"flexion":{"n":18,"mae":{"persistence":0.06468062930636936,"cue_median":0.05246575673421224,"cue_mechanics":0.057245405349254264,"cue_mechanics_c3":0.06197765157981126,"cue_mechanics_eog":0.06572752771206448,"temporal_attention":0.05791218352351996,"shifted_c3":0.05228958917800109},"small_abs_le_0_1":13,"opposite_training_cue_median":5,"zero_change":0},"extension":{"n":18,"mae":{"persistence":0.08563582102457683,"cue_median":0.09616862403021918,"cue_mechanics":0.08749732262045012,"cue_mechanics_c3":0.09520820150671198,"cue_mechanics_eog":0.11590906310972963,"temporal_attention":0.08452825809710035,"shifted_c3":0.10331782850996937},"small_abs_le_0_1":12,"opposite_training_cue_median":12,"zero_change":0}},"by_run_cue":{"1":{"flexion":{"n":6,"mae":{"persistence":0.06729984283447266,"cue_median":0.06729984283447266,"cue_mechanics":0.07098524460143266,"cue_mechanics_c3":0.07319751655195662,"cue_mechanics_eog":0.07020758388120865,"temporal_attention":0.07194610710949538,"shifted_c3":0.07233629032104087},"small_abs_le_0_1":4,"opposite_training_cue_median":3,"zero_change":0},"extension":{"n":6,"mae":{"persistence":0.08174705505371094,"cue_median":0.08174705505371094,"cue_mechanics":0.10849919445446222,"cue_mechanics_c3":0.1065563314164476,"cue_mechanics_eog":0.10889190692608304,"temporal_attention":0.10654342455066503,"shifted_c3":0.10810408424107598},"small_abs_le_0_1":4,"opposite_training_cue_median":3,"zero_change":0}},"2":{"flexion":{"n":6,"mae":{"persistence":0.05922476450602213,"cue_median":0.035094896952311196,"cue_mechanics":0.04986569039344843,"cue_mechanics_c3":0.048342514800492696,"cue_mechanics_eog":0.04792024413137466,"temporal_attention":0.04889684037420653,"shifted_c3":0.04882312606614416},"small_abs_le_0_1":5,"opposite_training_cue_median":1,"zero_change":0},"extension":{"n":6,"mae":{"persistence":0.057374000549316406,"cue_median":0.08128833770751953,"cue_mechanics":0.06292743568671423,"cue_mechanics_c3":0.06299092831467266,"cue_mechanics_eog":0.06217503703466487,"temporal_attention":0.061708204153283826,"shifted_c3":0.062298244832688116},"small_abs_le_0_1":5,"opposite_training_cue_median":4,"zero_change":0}},"3":{"flexion":{"n":6,"mae":{"persistence":0.06751728057861328,"cue_median":0.05500253041585287,"cue_mechanics":0.05088528105288171,"cue_mechanics_c3":0.06439292338698448,"cue_mechanics_eog":0.07905475512361017,"temporal_attention":0.052893603086857977,"shifted_c3":0.035709351146818245},"small_abs_le_0_1":4,"opposite_training_cue_median":1,"zero_change":0},"extension":{"n":6,"mae":{"persistence":0.11778640747070312,"cue_median":0.1254704793294271,"cue_mechanics":0.09106533772017394,"cue_mechanics_c3":0.11607734478901566,"cue_mechanics_eog":0.17666024536844094,"temporal_attention":0.08533314558735221,"shifted_c3":0.13955115645614402},"small_abs_le_0_1":3,"opposite_training_cue_median":5,"zero_change":0}}},"decision":{"balanced_c3_beats":{"cue_mechanics":false,"cue_mechanics_eog":true,"shifted_c3":false},"cue_groups_c3_beats_mechanics":0,"runs_c3_beats_mechanics":1,"incremental_c3_gate_passed":false}};
+const ELBOW_EXAMPLE={"description":"Invented inputs for a software demonstration. No participant trial is reproduced.","cue":"flexion","elbow_medians":[44.0,44.01,44.02,44.035],"c3_means":[2,-3,1,0],"eog_means":[1,-1,0.5,0]};
+/* Signed change in the stored elbow-sensor units. No display or network dependency. */
+const ElbowPredict = (() => {
+  const modes = ["persistence", "cue_median", "cue_mechanics", "cue_mechanics_c3", "cue_mechanics_eog", "temporal_attention"];
+  const names = {
+    persistence: "No change", cue_median: "Cue alone", cue_mechanics: "Cue + elbow history",
+    cue_mechanics_c3: "Cue + elbow + scalp", cue_mechanics_eog: "Cue + elbow + eyes",
+    temporal_attention: "Cue + elbow + scalp attention", shifted_c3: "Scalp from another trial"
+  };
+  function attention(signal, scale) {
+    const tokens = signal.map(value => Math.min(4, Math.max(-4, (value - signal[0]) / scale)));
+    const logits = tokens.map((value, i) => value * tokens[3] + (i - 3) / 4);
+    const peak = Math.max(...logits);
+    const weights = logits.map(value => Math.exp(value - peak));
+    return tokens.reduce((sum, token, i) => sum + token * weights[i], 0) / weights.reduce((a,b) => a+b, 0);
+  }
+  function forecast(models, mode, input) {
+    if (!modes.includes(mode) || !["flexion", "extension"].includes(input.cue)) throw Error("Unknown model or cue");
+    const model = models[mode];
+    if (mode === "persistence") return model.value;
+    if (mode === "cue_median") return model.by_cue[input.cue];
+    const m = input.elbow_medians;
+    const x = [Number(input.cue === "extension"), m[3], m[3]-m[2], m[2]-m[1], m[1]-m[0]];
+    if (mode === "temporal_attention") x.push(attention(input.c3_means, model.token_scale));
+    if (mode === "cue_mechanics_c3" || mode === "cue_mechanics_eog") {
+      const signal = mode === "cue_mechanics_eog" ? input.eog_means : input.c3_means;
+      x.push(signal[1]-signal[0], signal[2]-signal[0], signal[3]-signal[0]);
+    }
+    if (model.weights.length !== x.length) throw Error("Model feature count mismatch");
+    return x.reduce((sum,value,i) => sum + (value - model.means[i]) / model.scales[i] * model.weights[i], model.intercept);
+  }
+  return { forecast, names, modes };
+})();
+if (typeof module !== "undefined" && module.exports) module.exports = ElbowPredict;
+
+function plotElbow(history, change, outcome) {
+  const svg = document.getElementById("chart"), group = document.getElementById("marks");
+  const mobile = svg.getBoundingClientRect().width < 450;
+  const width = mobile ? 380 : 640, height = 222;
+  svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+  group.replaceChildren();
+  const left = mobile ? 52 : 66, right = width-26, top = 34, bottom = height-43;
+  const endpoint = history[3] + change;
+  const values = [...history, endpoint, ...(outcome === null ? [] : [outcome])];
+  const lo = Math.min(...values), hi = Math.max(...values), span = Math.max(hi-lo, 0.12);
+  const mid = (lo+hi)/2, lower = mid - span*.66, upper = mid + span*.66;
+  const x = t => left + (t + .25)/1.25 * (right-left);
+  const y = value => bottom - (value-lower)/(upper-lower) * (bottom-top);
+  const fmt = n => Math.abs(n) >= 10000 ? n.toExponential(1) : Number(n.toFixed(span < .1 ? 3 : 2)).toString();
+  function el(tag, attrs, label) {
+    const node = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (const [key, value] of Object.entries(attrs)) node.setAttribute(key, value);
+    if (label !== undefined) node.textContent = label;
+    group.append(node);
+    return node;
+  }
+  function line(x1,y1,x2,y2,stroke,dash) {
+    return el("line",{x1,y1,x2,y2,stroke,"stroke-width":1,...(dash ? {"stroke-dasharray":dash} : {})});
+  }
+  function label(x, y, text, anchor="middle", color="#c7dace") {
+    return el("text",{x,y,"text-anchor":anchor,fill:color,"font-size":mobile?12:13},text);
+  }
+  el("rect",{x:x(-.25),y:top,width:x(.25)-x(-.25),height:bottom-top,fill:"#263f36"});
+  for (const value of [lower, mid, upper]) {
+    line(left,y(value),right,y(value),"#456052","3 4");
+    label(left-6,y(value)+4,fmt(value),"end");
+  }
+  for (const [time,text] of [[0,"Cue"],[.25,"Cutoff"],[1,"Endpoint"]]) {
+    line(x(time),top-4,x(time),bottom+3,time===.25?"#92ba9f":"#587062",time===.25?"4 4":"2 5");
+    label(x(time),top-12,text, time===1?"end":"middle");
+    label(x(time),bottom+20,time===0?"0 s":`+${time.toFixed(2)} s`,time===1?"end":"middle");
+  }
+  const points = history.map((v,i) => [x(-.125+i*.125),y(v)]);
+  el("polyline",{points:points.map(p=>p.join(",")).join(" "),fill:"none",stroke:"#cad8cc","stroke-width":2});
+  points.forEach(([cx,cy])=>el("circle",{cx,cy,r:3.8,fill:"#d4dfd4",stroke:"#263f36"}));
+  const fx=x(1), fy=y(endpoint), r=7;
+  el("polygon",{points:`${fx},${fy-r} ${fx+r},${fy} ${fx},${fy+r} ${fx-r},${fy}`,fill:"#adf0c0",stroke:"#142d26","stroke-width":1.5});
+  if (outcome !== null) {
+    // The hollow square still reveals the diamond when forecast and outcome coincide.
+    el("rect",{x:fx-9,y:y(outcome)-9,width:18,height:18,fill:"none",stroke:"#ffcc86","stroke-width":2});
+  }
+  document.getElementById("chart-desc").textContent = `Four invented summaries are ${history.join(", ")}. Predicted endpoint ${endpoint.toFixed(5)} native units. ${outcome===null?"No later observation entered.":"Invented later observation "+outcome+"."}`;
+}
+
+const get = id => document.getElementById(id);
+const modelNames = ElbowPredict.names, methods = ElbowPredict.modes, models = ELBOW_MODEL.models;
+const decimal = n => n.toFixed(4);
+const signed = n => (n > 0 ? "+" : "") + decimal(n);
+const keys = [
+  ["elbow_medians", "Elbow sensor · medians"],
+  ["c3_means", "Scalp electrode C3 · means"],
+  ["eog_means", "Eye electrodes · means"]
+];
+const descriptions = {
+  persistence: "Carry the last elbow reading forward. The predicted change is zero.",
+  cue_median: "Use the middle change seen for this cue during fitting. Earlier readings have no influence on this estimate.",
+  cue_mechanics: "Use the cue, the latest elbow reading and three recent changes in that reading.",
+  cue_mechanics_c3: "Add changes in four early scalp readings to the cue and elbow history.",
+  cue_mechanics_eog: "Replace the scalp input with changes measured near the eyes. This checks one source of interference.",
+  temporal_attention: "Weight four early scalp readings using their values and order, then add the result to cue and elbow history."
+};
+for (const mode of methods) get("mode").add(new Option(modelNames[mode],mode));
+for (const [key,title] of keys) {
+  const field = document.createElement("fieldset"); field.className = "signal";
+  const legend = document.createElement("legend"); legend.textContent=title; field.append(legend);
+  const bins = document.createElement("div"); bins.className="bins";
+  for (let i=0;i<4;i++) {
+    const label=document.createElement("label"),name=document.createElement("span"),input=document.createElement("input");
+    name.textContent="Bin "+(i+1);input.id=key+"-"+i;input.type="number";input.step="any";
+    input.min=-100000000;input.max=100000000;input.required=true;input.setAttribute("aria-label",title+", bin "+(i+1));
+    label.append(name,input);bins.append(label);
+  }
+  field.append(bins);get("signals").append(field);
+}
+function row(label, values, featured=false) {
+  const tr = document.createElement("tr");
+  if (featured) tr.className = "featured";
+  const heading=document.createElement("th");heading.scope="row";heading.textContent=label;tr.append(heading);
+  for(const value of values){const td=document.createElement("td");td.textContent=value;tr.append(td);}
+  return tr;
+}
+function rawInput() {
+  const obj = {cue: document.querySelector("input[name=cue]:checked").value};
+  for(const [key] of keys) obj[key]=Array.from({length:4},(_,i)=>{
+    const field=get(key+"-"+i);return field.validity.valid?field.valueAsNumber:NaN;
+  });
+  return obj;
+}
+function updateForecast() {
+  const input=rawInput(), mode=get("mode").value, observed=get("observe").checked;
+  get("mode-description").textContent=descriptions[mode];
+  get("cue-description").textContent = input.cue === "flexion" ? "Elbow flexion · event 0x600" : "Elbow extension · event 0x601";
+  get("future-input").hidden = !observed;
+  const futureValue = get("future").validity.valid ? get("future").valueAsNumber : NaN;
+  const outcome = observed && Number.isFinite(futureValue) ? futureValue : null;
+  get("outcome-key").hidden = outcome === null;
+  get("predictions").replaceChildren();
+  if (keys.some(([key])=>input[key].some(n=>!Number.isFinite(n)))) {
+    get("marks").replaceChildren();get("chart-desc").textContent="An input is missing or outside the display range.";
+    get("delta").textContent="—";get("comparison").textContent="Enter four finite readings in every row, between −100 million and +100 million.";
+    return;
+  }
+  const change = ElbowPredict.forecast(models,mode,input);
+  const cutoff=input.elbow_medians[3],endpoint=cutoff+change;
+  get("delta").textContent=signed(change);
+  plotElbow(input.elbow_medians,change,outcome);
+  let summary=`Cutoff reading ${decimal(cutoff)}. Predicted endpoint ${decimal(endpoint)}.`;
+  if (outcome !== null) summary+=` Invented outcome ${decimal(outcome)}. Absolute error ${decimal(Math.abs(outcome-endpoint))}.`;
+  else if (observed) summary+=" Enter a finite later reading within the display range to compare.";
+  get("comparison").textContent=summary;
+  for (const name of methods) {
+    const pred=ElbowPredict.forecast(models,name,input);
+    get("predictions").append(row(modelNames[name],[signed(pred),decimal(cutoff+pred)],mode===name));
+  }
+}
+function updateEvidence() {
+  const S=ELBOW_SCORES,group=get("group").value,all=group==="all";
+  const runs=["1","2","3"].map(n=>all?S.by_run[n]:S.by_run_cue[n][group]);
+  const mean=all?S.balanced_mae:S.by_cue[group].mae;
+  const body=get("scores").tBodies[0];body.replaceChildren();
+  for (const name of [...methods,"shifted_c3"]) {
+    body.append(row(modelNames[name], [...runs.map(g=>decimal(g.mae[name])),decimal(mean[name])], name==="cue_mechanics_c3"));
+  }
+  const observed=all?S.pooled:S.by_cue[group];
+  get("denominators").textContent = `${runs[0].n} trials per run · ${observed.n} trials shown · native elbow units. ${observed.small_abs_le_0_1} had a measured change of at most 0.1 units in magnitude. ${observed.opposite_training_cue_median} had a sign opposite to the median for their cue in the two training runs.`;
+  const d=S.decision,primary=S.balanced_mae;
+  const statement=d.incremental_c3_gate_passed ? "Scalp readings met the prespecified improvement test in this participant." : "Scalp readings did not meet the prespecified improvement test in this participant.";
+  get("finding").textContent = `${statement} Adding C3 changed mean error from ${decimal(primary.cue_mechanics)} to ${decimal(primary.cue_mechanics_c3)} native units. Error fell in ${d.runs_c3_beats_mechanics} of 3 runs and ${d.cue_groups_c3_beats_mechanics} of 2 cue groups. These three runs cannot tell us how the forecasts would fare on another person.`;
+}
+function resetExample() {
+  document.querySelector(`input[name=cue][value="${ELBOW_EXAMPLE.cue}"]`).checked=true;
+  for(const [key] of keys)ELBOW_EXAMPLE[key].forEach((n,i)=>{get(key+"-"+i).value=n;});
+  get("mode").value="cue_mechanics";get("observe").checked=false;get("future").value=44.1;
+  updateForecast();
+}
+get("download").hidden = !["http:", "https:"].includes(window.location.protocol);
+get("future").min=-100000000;get("future").max=100000000;
+get("experiment").addEventListener("input",updateForecast);
+get("reset").addEventListener("click",resetExample);
+get("group").addEventListener("change",updateEvidence);
+window.addEventListener("resize",updateForecast);
+resetExample();updateEvidence();
+</script></body></html>
