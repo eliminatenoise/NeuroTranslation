@@ -2,9 +2,9 @@
 
 **What the project wrote is yours to take.** Its text and code are dedicated to the public domain under [CC0 1.0](LICENSE), as far as the project holds the rights.
 
-**The recordings are not the project's to give.** Eleven open datasets carry every study here. Each belongs to the people named below, under the licence named below. The repository holds fitted models and summary results derived from those recordings, and two short excerpts of the recordings themselves, named below under their datasets. The credit set out here travels with all of it. Fetch a recording from its own archive. A file you open in a browser page stays under the terms it came with.
+**The recordings are not the project's to give.** Eleven open datasets carry every study of the numbered table, and four more carry the studies published after it and the 3D recordings. Each belongs to the people named below, under the terms named below. The repository holds fitted models and summary results derived from those recordings, and some excerpts of the recordings themselves, named below under their datasets. The credit set out here travels with all of it. Fetch a recording from its own archive. A file you open in a browser page stays under the terms it came with.
 
-## The eleven datasets
+## The eleven datasets of the numbered table
 
 The study numbers are those of [the studies page](../benchmarks/README.md).
 
@@ -97,6 +97,40 @@ Study 26 and the general model's five-sensor walking fit (row 27 of the studies 
 Changed here: two walking activities were selected, and the accelerometer readings of the right-arm sensor (study 26) or of all five sensors (row 27) were cut into short histories of 16 readings, each with the reading recorded three readings (120 ms) after its last one; forecasts were fitted and their errors computed. The five-sensor folder also holds an excerpt of the recordings themselves: 16 readings, and the reading recorded 120 ms after the last of them, from each of the five sensors in one clip of one person, under the same licence.
 
 [Dataset](https://archive.ics.uci.edu/dataset/256/daily+and+sports+activities) · [DOI 10.24432/C5C59F](https://doi.org/10.24432/C5C59F) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+## Four more datasets, behind the newer studies and the 3D recordings
+
+These carry the studies published after the numbered table (listed at the end of [the studies page](../benchmarks/README.md)) and the [3D recordings](whole-body/README.md).
+
+### HoloAssist
+
+Two newer studies, [finding a hand movement from a sentence](../benchmarks/hand-language-retrieval/) and [an instructor's words and a one-second wrist forecast](../benchmarks/preceding-instructions/), and the [hand search](hand-search/README.md) page that runs both. By Xin Wang, Taein Kwon, Mahdi Rad, Bowen Pan, Ishani Chakraborty, Sean Andrist, Dan Bohus, Ashley Feniello, Bugra Tekin, Felipe Vieira Frujeri, Neel Joshi and Marc Pollefeys: *HoloAssist: an Egocentric Human Interaction Dataset for Interactive AI Assistants in the Real World*, ICCV 2023, pages 20270–20281. Released under the Community Data License Agreement – Permissive, Version 2.0, which permits use and modification, and sharing the data with the agreement supplied. It places no conditions on computational results, which include fitted models.
+
+Changed here: hand measurements, sentences written by observers and instructors' words were selected and turned into features; models were fitted and scored. The hand search keeps five stretches of one recording, with the observers' sentences and the headset's estimates of the right hand. The agreement's text sits beside each of these and stays with them when they are shared.
+
+[Publisher](https://holoassist.github.io/) · [Paper](https://doi.org/10.1109/ICCV51070.2023.01854) · [Agreement](../benchmarks/hand-language-retrieval/CDLA-Permissive-2.0.txt)
+
+### KIT Motion–Language Dataset
+
+The newer study [which recording a sentence describes](../benchmarks/text-motion-retrieval/). Created by Matthias Plappert, Christian Mandery and Tamim Asfour, from movements recorded for the KIT Whole-Body Human Motion Database, which Christian Mandery, Omer Terlemez, Martin Do, Nikolaus Vahrenkamp and Tamim Asfour described. No open licence to pass on its descriptions, its movements or models fitted to them has been established, so the folder holds only the study's numerical summaries and the facts of its split. To run the study again, fetch the release from KIT.
+
+[Dataset and citation](https://motion-annotation.humanoids.kit.edu/dataset/) · [KIT Whole-Body Human Motion Database](https://motion-database.humanoids.kit.edu/)
+
+### Single Day W-Track Learning, version 0.240511.0307
+
+The newer study [on brain-cell firing and a rat's movement](../benchmarks/wtrack-neural-motion/). By Justin Shin and Shantanu Jadhav (2024), DANDI Archive, under CC BY 4.0. No endorsement by the authors is implied.
+
+Changed here: one rat, one session and one running period were used. 34 whole trips were selected with their original positions and spike times and put in per-trip arrays, from which past-only inputs were built, forecasts fitted and their errors computed. The selected records, the fitted weights and the forecasts keep this credit and licence.
+
+[Versioned dataset](https://doi.org/10.48324/dandi.000978/0.240511.0307) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+### CMU Graphics Lab Motion Capture Database
+
+The [3D recordings](whole-body/README.md): trials 02_06, 13_11 and 132_23. The data used in this project was obtained from mocap.cs.cmu.edu. The database was created with funding from NSF EIA-0196217. Carnegie Mellon permits copying, modification and redistribution of the motion recordings, including use in commercial products, and prohibits direct resale of the data, converted data included. Those terms apply to the movement files in `docs/whole-body/data/` and to their copies inside its page.
+
+Changed here: every fourth frame was kept, with 41 named markers, rounded to 0.1 mm for storage.
+
+[CMU terms](http://mocap.cs.cmu.edu/) · [CMU FAQ](http://mocap.cs.cmu.edu/faqs.php)
 
 ## One more recording, behind the portable interface source
 
