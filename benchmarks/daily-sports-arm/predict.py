@@ -15,6 +15,16 @@ CHECKPOINT_HASH = "96018afd0b6f5e38f6af721a540a1b6bca55b0f4c7c4a321c535b3d2722d8
 def read_history(path):
     with path.open(encoding="utf-8") as stream:
         rows = json.load(stream)
+    if isinstance(rows, dict):
+        if set(rows) != {"timestamps_ms", "samples"}:
+            raise ValueError("A dated window needs exactly timestamps_ms and samples.")
+        times = rows["timestamps_ms"]
+        if (not isinstance(times, list) or len(times) != 16
+                or any(type(ms) is not int for ms in times)):
+            raise ValueError("Expected 16 integer millisecond timestamps.")
+        if any(b - a != 40 for a, b in zip(times, times[1:])):
+            raise ValueError("Expected consecutive 25 Hz readings, 40 ms apart, oldest first.")
+        rows = rows["samples"]
     if not (isinstance(rows, list) and len(rows) == 16 and
             all(isinstance(row, list) and len(row) == 3 and
                 all(type(v) in (int, float) for v in row) for row in rows)):
@@ -43,7 +53,7 @@ def forecast_file(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path, help="one JSON array with exactly 16 consecutive XYZ readings")
+    parser.add_argument("input", type=Path, help="16 consecutive XYZ readings as a JSON array, or an object with samples and timestamps_ms at 40 ms intervals")
     args = parser.parse_args()
     torch.set_num_threads(1)
     torch.set_num_interop_threads(1)

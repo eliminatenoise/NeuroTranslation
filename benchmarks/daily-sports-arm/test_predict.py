@@ -37,6 +37,25 @@ class InferenceTests(unittest.TestCase):
         self.assertEqual(run.stdout, "")
         self.assertIn("16 consecutive", run.stderr)
 
+    def test_timestamped_input(self):
+        samples = json.loads((HERE / "example.json").read_text())
+        base = 1_795_000_000_000
+        times = [base + 40 * i for i in range(16)]
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "window.json"
+            path.write_text(json.dumps({"samples": samples, "timestamps_ms": times}))
+            np.testing.assert_array_equal(read_history(path), samples)
+            accepted = self.call(path)
+            self.assertEqual(accepted.returncode, 0, accepted.stderr)
+            self.assertEqual(json.loads(accepted.stdout)["forecasts"]["persistence"], samples[-1])
+            for change in [0, 80, -40, 1, None, True]:
+                with self.subTest(change=change):
+                    broken = times.copy()
+                    broken[7] = (times[6] + change if type(change) is int else change)
+                    path.write_text(json.dumps({"samples": samples, "timestamps_ms": broken}))
+                    with self.assertRaises(ValueError):
+                        read_history(path)
+
     def test_bad_measurements(self):
         cases = [[0, 0], ["1", 0, 0], [True, 0, 0], [float("nan"), 0, 0], [float("inf"), 0, 0]]
         with tempfile.TemporaryDirectory() as tmp:
