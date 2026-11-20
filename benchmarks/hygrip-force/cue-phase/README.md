@@ -18,7 +18,7 @@ Each person counts equally, each trial equally within a person, and each forecas
 
 Against its own compact version, the squeeze-and-rest terms lowered the fitting people's error by 0.007752 mV (6 of 7 better, 95% range across people −0.017523 to +0.002020 mV) and raised the test people's by 0.000482 mV (1 of 3 better, range −0.011141 to +0.012105 mV). Against the original 27-input fit they raised the error by 0.009005 mV among the fitting people and 0.014000 mV among the test people, where none of the three did better (range −0.017095 to +0.045094 mV). The original fit had the lower error, but it differs in two ways: it forecasts the voltage directly and reads all 20 recent readings separately. Only the compact fit differs by the squeeze-and-rest terms alone, so that comparison is the one that tests them.
 
-In the test people, the two stretches where the cue switched favoured the new fit over the original on average. They held 540 and 390 forecasts, against 5,505 during scheduled squeezing and 1,560 during scheduled rest. Those differences are descriptive, and every stretch comes from the same three people.
+In the test people, the two stretches where the cue switched favoured the new fit over the original on average. They held 540 and 390 forecasts, against 5,505 during scheduled squeezing and 1,560 during scheduled rest. Those differences describe these three people only: every stretch comes from them.
 
 ## What was measured
 

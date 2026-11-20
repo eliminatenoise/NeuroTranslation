@@ -41,4 +41,4 @@ The browser model and archive checker can be rebuilt from the two published ZIPs
 
 Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz deposited the *EEG-EMG-WristMotion Dataset*, version 3, under CC BY 4.0. NeuroTranslation worked out the earlier wrist and forearm features, fitted the corrections and drew the figure from the summary errors. [Dataset](https://doi.org/10.6084/m9.figshare.29666735.v3) · [Study descriptor](https://doi.org/10.1038/s41597-026-07287-z) · [Licence](https://creativecommons.org/licenses/by/4.0/)
 
-[Study 4 · Everyday tasks: wrist angle from the muscle signal](../uji-wrist-emg/) asks a related question in other people: later wrist angles from a glove, estimated from the task, the time and seven forearm signals, in the KIN-MUS UJI dataset recorded in Spain. Its inputs and task differ from the pointing study here.
+[Study 4 · Everyday tasks: wrist angle from the muscle signal](../uji-wrist-emg/) asks a related question in other people: later wrist angles from a glove, forecast from the task, the time and seven forearm signals, in the KIN-MUS UJI dataset recorded in Spain. Its inputs and task differ from the pointing study here.
