@@ -23,3 +23,9 @@ Emma Reznick, Kyle R. Embry, Ross Neuman, Edgar Bolívar, Nicholas P. Fey and Ro
 ## Right foot on a force plate
 
 Céline Schreiber and Florent Moissenet released the motion, muscle and platform recordings from the Rehazenter study under CC BY 4.0. This edition selects barefoot walking trials, fits new model readouts and reports errors on other walkers. The right-platform readouts and results use those data. Keep the authors’ credit and licence with the derived material and identify further changes. [Original data release](https://doi.org/10.6084/m9.figshare.7734767.v8) · [Authors’ licence and citation](right-plate/DATA-LICENCE.txt) · [Processing and results](right-plate/README.md)
+
+The single-marker readouts and error summaries use optical positions from the same Schreiber and Moissenet version 8 walking dataset. These new weights and aggregate results retain the source attribution and CC BY 4.0 terms. [What was fitted](point-motion/README.md) · [Original licence and citation](point-motion/DATA-LICENCE.txt)
+
+## Instructed right-arm movement
+
+Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz (2017) released *Upper limb movements can be decoded from the time-domain of low-frequency EEG*, Zenodo record 834976, under CC BY 4.0. This study uses the visual task classes and mechanical instrument readings from the first participant’s first three execution runs to derive time bins, fit readouts and compare errors. Retain the data attribution and identify further changes. [Original data](https://doi.org/10.5281/zenodo.834976) · [Acquisition study](https://doi.org/10.1371/journal.pone.0182578) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).

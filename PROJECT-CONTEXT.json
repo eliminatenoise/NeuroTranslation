@@ -1181,5 +1181,34 @@
     "right_plate_reader": "docs/shared-motion/index.html#right-plate",
     "paper": "docs/papers/muscle-and-floor/muscle-and-floor.pdf",
     "scope": "Retrospective tests on slow overground walking. Eight held-out people contributed 17 trials to the two-plate task and 16 to the assigned right-plate task. Neither established the prespecified benefit of adding muscle signals."
+  },
+  "walking_marker_displacement": {
+    "specialist": "models/walking-landmarks/README.md",
+    "viewer": "docs/walking-landmarks/index.html",
+    "offline_viewer": "models/walking-landmarks.zip",
+    "assessment": "models/walking-landmarks/results.json",
+    "shared_model": "models/neurotranslate-0.0/point-motion/README.md",
+    "shared_viewer": "docs/shared-motion/index.html#point-motion",
+    "measured_reference": "https://eliminatenoise.github.io/Interoceptomics/stride-signals/",
+    "source_doi": "10.6084/m9.figshare.7734767.v8",
+    "domain": "Slow barefoot overground walking. The six-point and single-point studies estimate 200 ms displacement on the processed recording clock. Displayed examples are invented. The separate Interoceptomics reference shows movement observed in recordings."
+  },
+  "cued_right_arm": {
+    "shared_model": "models/neurotranslate-0.0/cued-arm/README.md",
+    "shared_scores": "models/neurotranslate-0.0/cued-arm/results.json",
+    "shared_viewer": "docs/shared-motion/index.html#cued-arm",
+    "specialist": "models/cue-elbow/README.md",
+    "specialist_scores": "models/cue-elbow/scores.json",
+    "viewer": "docs/elbow-cue/index.html",
+    "offline_viewer": "docs/elbow-cue-offline.zip",
+    "specialist_zip": "models/cue-elbow-forecast.zip",
+    "shared_cpu": "models/neurotranslate-0.0.zip",
+    "shared_browser": "models/movement-browser.zip",
+    "paper": "docs/papers/cued-arm/index.html",
+    "paper_pdf": "docs/papers/cued-arm/cued-arm.pdf",
+    "paper_source": "docs/papers/cued-arm/cued-arm-source.zip",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/scalp-and-arm/",
+    "source_doi": "10.5281/zenodo.834976",
+    "domain": "Supported right-arm execution in three runs from one participant. The seven-cue experiment estimates changes at the elbow, forearm and index finger. The two-cue experiment tests what scalp measurements add to an elbow forecast. The sensor readings use their native scales."
   }
 }

@@ -1,0 +1,28 @@
+{
+  "fit": {
+    "format": 1,
+    "sites_fitted": [
+      "L_FAL",
+      "L_FLE",
+      "L_RSP",
+      "R_FAL",
+      "R_FLE",
+      "R_RSP"
+    ],
+    "training_people": 30,
+    "training_walks": 90,
+    "training_marker_windows": 11310,
+    "modes": [
+      "stationary",
+      "velocity",
+      "previous",
+      "linear",
+      "radial",
+      "shared",
+      "shuffled"
+    ],
+    "lead_ms": 200,
+    "source_protocol": "a133714951379dc5e14b6ea17c430bcc62e75ea509ce01d5e6b9be6afe697fd3"
+  },
+  "checkpoint": "9d129c87833b768536bd74dd8a88fe1f0b3703a22e59b1e54316d824e619be79"
+}

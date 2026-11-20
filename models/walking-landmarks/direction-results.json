@@ -1,0 +1,355 @@
+{
+  "status": "Exploratory follow-up after primary scores",
+  "train_heading_ties": 0,
+  "test_heading_ties": 0,
+  "later_repeat_trials_by_heading": {
+    "match": 10,
+    "reverse": 10
+  },
+  "later_repeat_cutoffs_by_heading": {
+    "match": 412,
+    "reverse": 403
+  },
+  "all_anchor_phase": {
+    "mean_mm": 31.853417011496465,
+    "ci95_mm": [
+      24.848658809699092,
+      41.14460576515638
+    ],
+    "coverage": {
+      "people": 10,
+      "trials": 30,
+      "cutoffs": 1220,
+      "landmark_targets": 7320
+    },
+    "by_landmark": {
+      "L_FAL": {
+        "mean_mm": 27.640799124986337,
+        "ci95_mm": [
+          22.606024948025414,
+          33.69115330380858
+        ],
+        "people": 10,
+        "trials": 30,
+        "cutoffs": 1220
+      },
+      "R_FAL": {
+        "mean_mm": 26.784685421493453,
+        "ci95_mm": [
+          22.86875591503527,
+          31.65615745844647
+        ],
+        "people": 10,
+        "trials": 30,
+        "cutoffs": 1220
+      },
+      "L_FLE": {
+        "mean_mm": 21.758784582416332,
+        "ci95_mm": [
+          18.753425844200347,
+          25.370320594155107
+        ],
+        "people": 10,
+        "trials": 30,
+        "cutoffs": 1220
+      },
+      "R_FLE": {
+        "mean_mm": 22.092654364340387,
+        "ci95_mm": [
+          19.48591238594337,
+          25.527791570829425
+        ],
+        "people": 10,
+        "trials": 30,
+        "cutoffs": 1220
+      },
+      "L_RSP": {
+        "mean_mm": 47.79609760918226,
+        "ci95_mm": [
+          32.00576211192092,
+          71.933525905563
+        ],
+        "people": 10,
+        "trials": 30,
+        "cutoffs": 1220
+      },
+      "R_RSP": {
+        "mean_mm": 45.04748096656001,
+        "ci95_mm": [
+          29.074426941081857,
+          67.73777484670705
+        ],
+        "people": 10,
+        "trials": 30,
+        "cutoffs": 1220
+      }
+    },
+    "walker_mean_range_mm": [
+      20.997215514400157,
+      64.86839034613816
+    ],
+    "walker_mean_sd_mm": 14.308196722765254,
+    "cutoff_range_per_scored_walker": [
+      113,
+      127
+    ]
+  },
+  "later_repeat_personal": {
+    "mean_mm": 18.939467047667595,
+    "ci95_mm": [
+      15.852270865026489,
+      22.670868591464384
+    ],
+    "coverage": {
+      "people": 10,
+      "trials": 20,
+      "cutoffs": 815,
+      "landmark_targets": 4890
+    },
+    "by_landmark": {
+      "L_FAL": {
+        "mean_mm": 18.098403759695536,
+        "ci95_mm": [
+          14.302226606240792,
+          22.32167703976675
+        ],
+        "people": 10,
+        "trials": 20,
+        "cutoffs": 815
+      },
+      "R_FAL": {
+        "mean_mm": 16.288675877347394,
+        "ci95_mm": [
+          13.338900892859348,
+          20.063157509141384
+        ],
+        "people": 10,
+        "trials": 20,
+        "cutoffs": 815
+      },
+      "L_FLE": {
+        "mean_mm": 14.601941150390946,
+        "ci95_mm": [
+          11.39197819438039,
+          18.143687148761174
+        ],
+        "people": 10,
+        "trials": 20,
+        "cutoffs": 815
+      },
+      "R_FLE": {
+        "mean_mm": 13.438838443111782,
+        "ci95_mm": [
+          11.313411895350987,
+          15.991850759218131
+        ],
+        "people": 10,
+        "trials": 20,
+        "cutoffs": 815
+      },
+      "L_RSP": {
+        "mean_mm": 27.702184640874634,
+        "ci95_mm": [
+          22.647577959324387,
+          33.71731212004388
+        ],
+        "people": 10,
+        "trials": 20,
+        "cutoffs": 815
+      },
+      "R_RSP": {
+        "mean_mm": 23.506758414585256,
+        "ci95_mm": [
+          18.830187425929317,
+          29.094997420188765
+        ],
+        "people": 10,
+        "trials": 20,
+        "cutoffs": 815
+      }
+    },
+    "walker_mean_range_mm": [
+      12.848239946782762,
+      32.79302626160527
+    ],
+    "walker_mean_sd_mm": 6.018448104608044,
+    "cutoff_range_per_scored_walker": [
+      76,
+      85
+    ]
+  },
+  "transformer_minus_phase": {
+    "mean_mm": -13.837158801921708,
+    "ci95_mm": [
+      -20.657307665433393,
+      -8.31233779925101
+    ],
+    "coverage": {
+      "people": 10,
+      "trials": 30,
+      "cutoffs": 1220,
+      "landmark_targets": 7320
+    },
+    "by_landmark": {
+      "L_FAL": {
+        "mean_mm": -5.541009217392761,
+        "ci95_mm": [
+          -9.938046057772716,
+          -1.5238299188176097
+        ],
+        "people": 10,
+        "trials": 30,
+        "cutoffs": 1220
+      },
+      "R_FAL": {
+        "mean_mm": -4.348312656691144,
+        "ci95_mm": [
+          -9.428771429237244,
+          0.21190119641106034
+        ],
+        "people": 10,
+        "trials": 30,
+        "cutoffs": 1220
+      },
+      "L_FLE": {
+        "mean_mm": -7.7626719004083515,
+        "ci95_mm": [
+          -10.630378470554376,
+          -5.193986250653312
+        ],
+        "people": 10,
+        "trials": 30,
+        "cutoffs": 1220
+      },
+      "R_FLE": {
+        "mean_mm": -8.296646155437037,
+        "ci95_mm": [
+          -11.346849397377483,
+          -5.573913734594393
+        ],
+        "people": 10,
+        "trials": 30,
+        "cutoffs": 1220
+      },
+      "L_RSP": {
+        "mean_mm": -29.31595545800696,
+        "ci95_mm": [
+          -50.229815358759055,
+          -14.999772660846231
+        ],
+        "people": 10,
+        "trials": 30,
+        "cutoffs": 1220
+      },
+      "R_RSP": {
+        "mean_mm": -27.758357423593992,
+        "ci95_mm": [
+          -45.433353041287425,
+          -15.53760427252142
+        ],
+        "people": 10,
+        "trials": 30,
+        "cutoffs": 1220
+      }
+    },
+    "walker_mean_range_mm": [
+      -36.931190373895845,
+      -2.8167063965268535
+    ],
+    "walker_mean_sd_mm": 10.743398183088315,
+    "cutoff_range_per_scored_walker": [
+      113,
+      127
+    ],
+    "walkers_improved": 10,
+    "walkers_compared": 10,
+    "passes": true
+  },
+  "transformer_minus_personal": {
+    "mean_mm": -0.8934656766561456,
+    "ci95_mm": [
+      -4.2524864704306875,
+      1.9826037543801873
+    ],
+    "coverage": {
+      "people": 10,
+      "trials": 20,
+      "cutoffs": 815,
+      "landmark_targets": 4890
+    },
+    "by_landmark": {
+      "L_FAL": {
+        "mean_mm": 3.6060095062347286,
+        "ci95_mm": [
+          0.005173642260024713,
+          6.81350404813319
+        ],
+        "people": 10,
+        "trials": 20,
+        "cutoffs": 815
+      },
+      "R_FAL": {
+        "mean_mm": 5.831200584999895,
+        "ci95_mm": [
+          0.973038616252526,
+          10.549348933572821
+        ],
+        "people": 10,
+        "trials": 20,
+        "cutoffs": 815
+      },
+      "L_FLE": {
+        "mean_mm": -0.4684842918864577,
+        "ci95_mm": [
+          -3.843367425064,
+          2.2755036615894415
+        ],
+        "people": 10,
+        "trials": 20,
+        "cutoffs": 815
+      },
+      "R_FLE": {
+        "mean_mm": 0.446845238433858,
+        "ci95_mm": [
+          -2.374612821613212,
+          3.040638841612544
+        ],
+        "people": 10,
+        "trials": 20,
+        "cutoffs": 815
+      },
+      "L_RSP": {
+        "mean_mm": -8.682479473652272,
+        "ci95_mm": [
+          -11.818829272138096,
+          -5.912512696519831
+        ],
+        "people": 10,
+        "trials": 20,
+        "cutoffs": 815
+      },
+      "R_RSP": {
+        "mean_mm": -6.093885624066625,
+        "ci95_mm": [
+          -11.112338476860478,
+          -1.0775772779904103
+        ],
+        "people": 10,
+        "trials": 20,
+        "cutoffs": 815
+      }
+    },
+    "walker_mean_range_mm": [
+      -11.989464327891318,
+      5.490586283738
+    ],
+    "walker_mean_sd_mm": 5.283983971080458,
+    "cutoff_range_per_scored_walker": [
+      76,
+      85
+    ],
+    "walkers_improved": 4,
+    "walkers_compared": 10,
+    "passes": false
+  }
+}

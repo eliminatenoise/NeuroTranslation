@@ -1,0 +1,727 @@
+{
+  "dataset": "10.5281/zenodo.834976",
+  "authors": [
+    "Patrick Ofner",
+    "Andreas Schwarz",
+    "Joana Pereira",
+    "Gernot R. Müller-Putz"
+  ],
+  "rights": "https://creativecommons.org/licenses/by/4.0/",
+  "paper": "10.1371/journal.pone.0182578",
+  "source": "https://zenodo.org/records/834976/files/data%20set%20description.pdf",
+  "codebook_sha256": "2cfbf40bddf48a4803c9c4c2bade581892acb45e5921c36ee6230f5383c6713a",
+  "scope": "S1, right-arm execution, runs 1–3",
+  "provenance": "Publisher table 2 gives the codebook labels. Native labels, rates and limits are from the verified GDF header for each run. Channel numbers are one-based. A dash represents a blank assignment in the published table.",
+  "calibration": "All channels store little-endian float64 with GDF identity digital-to-physical conversion (minimum −250000, maximum +250000 for both). Dimension codes 0; old physical-unit strings blank. Anatomical signs and absolute sensor units unverified.",
+  "recording_grid": "Zero-based native sample n at n / Hz seconds from the start of the file. Channel i begins at header_bytes + record*278528 + 8*sum(samples_per_record_before_i) bytes. Every record is one second (64/64 in the header).",
+  "events": {
+    "position": "Stored uint32 positions are one-based on the 512 Hz grid. Elapsed recording ticks = position minus 1. Codes uint16. Mode 1. No event duration/channel field.",
+    "cue_onsets": {
+      "0x600": "elbow flexion",
+      "0x601": "elbow extension",
+      "0x602": "supination",
+      "0x603": "pronation",
+      "0x604": "hand close",
+      "0x605": "hand open",
+      "0x606": "rest"
+    },
+    "matching_ends": {
+      "0x8600": "elbow flexion",
+      "0x8601": "elbow extension",
+      "0x8602": "supination",
+      "0x8603": "pronation",
+      "0x8604": "hand close",
+      "0x8605": "hand open",
+      "0x8606": "rest"
+    },
+    "other_observed": [
+      "0x300",
+      "0x311",
+      "0x312",
+      "0x8300",
+      "0x8312"
+    ],
+    "notes": "Each onset has a unique matching end 1536 ticks later. The trial markers 0x300, 0x311 and 0x312 share an instant 1024 ticks before each cue. No new task categories assigned to the additional markers."
+  },
+  "channels": [
+    {
+      "index": 1,
+      "group": "scalp EEG",
+      "codebook": "F3",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 2,
+      "group": "scalp EEG",
+      "codebook": "F1",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 3,
+      "group": "scalp EEG",
+      "codebook": "Fz",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 4,
+      "group": "scalp EEG",
+      "codebook": "F2",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 5,
+      "group": "scalp EEG",
+      "codebook": "F4",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 6,
+      "group": "scalp EEG",
+      "codebook": "FFC5h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 7,
+      "group": "scalp EEG",
+      "codebook": "FFC3h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 8,
+      "group": "scalp EEG",
+      "codebook": "FFC1h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 9,
+      "group": "scalp EEG",
+      "codebook": "FFC2h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 10,
+      "group": "scalp EEG",
+      "codebook": "FFC4h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 11,
+      "group": "scalp EEG",
+      "codebook": "FFC6h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 12,
+      "group": "scalp EEG",
+      "codebook": "FC5",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 13,
+      "group": "scalp EEG",
+      "codebook": "FC3",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 14,
+      "group": "scalp EEG",
+      "codebook": "FC1",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 15,
+      "group": "scalp EEG",
+      "codebook": "FCz",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 16,
+      "group": "scalp EEG",
+      "codebook": "FC2",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 17,
+      "group": "scalp EEG",
+      "codebook": "FC4",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 18,
+      "group": "scalp EEG",
+      "codebook": "FC6",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 19,
+      "group": "scalp EEG",
+      "codebook": "FTT7h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 20,
+      "group": "scalp EEG",
+      "codebook": "FCC5h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 21,
+      "group": "scalp EEG",
+      "codebook": "FCC3h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 22,
+      "group": "scalp EEG",
+      "codebook": "FCC1h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 23,
+      "group": "scalp EEG",
+      "codebook": "FCC2h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 24,
+      "group": "scalp EEG",
+      "codebook": "FCC4h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 25,
+      "group": "scalp EEG",
+      "codebook": "FCC6h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 26,
+      "group": "scalp EEG",
+      "codebook": "FTT8h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 27,
+      "group": "scalp EEG",
+      "codebook": "C5",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 28,
+      "group": "scalp EEG",
+      "codebook": "C3",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 29,
+      "group": "scalp EEG",
+      "codebook": "C1",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 30,
+      "group": "scalp EEG",
+      "codebook": "Cz",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 31,
+      "group": "scalp EEG",
+      "codebook": "C2",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 32,
+      "group": "scalp EEG",
+      "codebook": "C4",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 33,
+      "group": "scalp EEG",
+      "codebook": "C6",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 34,
+      "group": "scalp EEG",
+      "codebook": "TTP7h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 35,
+      "group": "scalp EEG",
+      "codebook": "CCP5h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 36,
+      "group": "scalp EEG",
+      "codebook": "CCP3h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 37,
+      "group": "scalp EEG",
+      "codebook": "CCP1h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 38,
+      "group": "scalp EEG",
+      "codebook": "CCP2h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 39,
+      "group": "scalp EEG",
+      "codebook": "CCP4h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 40,
+      "group": "scalp EEG",
+      "codebook": "CCP6h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 41,
+      "group": "scalp EEG",
+      "codebook": "TTP8h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 42,
+      "group": "scalp EEG",
+      "codebook": "CP5",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 43,
+      "group": "scalp EEG",
+      "codebook": "CP3",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 44,
+      "group": "scalp EEG",
+      "codebook": "CP1",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 45,
+      "group": "scalp EEG",
+      "codebook": "CPz",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 46,
+      "group": "scalp EEG",
+      "codebook": "CP2",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 47,
+      "group": "scalp EEG",
+      "codebook": "CP4",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 48,
+      "group": "scalp EEG",
+      "codebook": "CP6",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 49,
+      "group": "scalp EEG",
+      "codebook": "CPP5h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 50,
+      "group": "scalp EEG",
+      "codebook": "CPP3h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 51,
+      "group": "scalp EEG",
+      "codebook": "CPP1h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 52,
+      "group": "scalp EEG",
+      "codebook": "CPP2h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 53,
+      "group": "scalp EEG",
+      "codebook": "CPP4h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 54,
+      "group": "scalp EEG",
+      "codebook": "CPP6h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 55,
+      "group": "scalp EEG",
+      "codebook": "P3",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 56,
+      "group": "scalp EEG",
+      "codebook": "P1",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 57,
+      "group": "scalp EEG",
+      "codebook": "Pz",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 58,
+      "group": "scalp EEG",
+      "codebook": "P2",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 59,
+      "group": "scalp EEG",
+      "codebook": "P4",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 60,
+      "group": "scalp EEG",
+      "codebook": "PPO1h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 61,
+      "group": "scalp EEG",
+      "codebook": "PPO2h",
+      "gdf": "eeg",
+      "Hz": 512
+    },
+    {
+      "index": 62,
+      "group": "EOG",
+      "codebook": "EOG left",
+      "gdf": "eog-r",
+      "Hz": 512,
+      "note": "Published and native laterality disagree."
+    },
+    {
+      "index": 63,
+      "group": "EOG",
+      "codebook": "EOG middle",
+      "gdf": "eog-m",
+      "Hz": 512
+    },
+    {
+      "index": 64,
+      "group": "EOG",
+      "codebook": "EOG right",
+      "gdf": "eog-l",
+      "Hz": 512,
+      "note": "Published and native laterality disagree."
+    },
+    {
+      "index": 65,
+      "group": "5DT glove",
+      "codebook": "thumb near",
+      "gdf": "thumb_near",
+      "Hz": 64
+    },
+    {
+      "index": 66,
+      "group": "5DT glove",
+      "codebook": "thumb far",
+      "gdf": "thumb_far",
+      "Hz": 64
+    },
+    {
+      "index": 67,
+      "group": "5DT glove",
+      "codebook": "thumb index",
+      "gdf": "thumb_index",
+      "Hz": 64
+    },
+    {
+      "index": 68,
+      "group": "5DT glove",
+      "codebook": "index near",
+      "gdf": "index_near",
+      "Hz": 64
+    },
+    {
+      "index": 69,
+      "group": "5DT glove",
+      "codebook": "index far",
+      "gdf": "index_far",
+      "Hz": 64
+    },
+    {
+      "index": 70,
+      "group": "5DT glove",
+      "codebook": "index middle",
+      "gdf": "index_middle",
+      "Hz": 64
+    },
+    {
+      "index": 71,
+      "group": "5DT glove",
+      "codebook": "middle near",
+      "gdf": "middle_near",
+      "Hz": 64
+    },
+    {
+      "index": 72,
+      "group": "5DT glove",
+      "codebook": "middle far",
+      "gdf": "middle_far",
+      "Hz": 64
+    },
+    {
+      "index": 73,
+      "group": "5DT glove",
+      "codebook": "middle ring",
+      "gdf": "middle_ring",
+      "Hz": 64
+    },
+    {
+      "index": 74,
+      "group": "5DT glove",
+      "codebook": "ring near",
+      "gdf": "ring_near",
+      "Hz": 64
+    },
+    {
+      "index": 75,
+      "group": "5DT glove",
+      "codebook": "ring far",
+      "gdf": "ring_far",
+      "Hz": 64
+    },
+    {
+      "index": 76,
+      "group": "5DT glove",
+      "codebook": "ring little",
+      "gdf": "ring_little",
+      "Hz": 64
+    },
+    {
+      "index": 77,
+      "group": "5DT glove",
+      "codebook": "little near",
+      "gdf": "litte_near",
+      "Hz": 64
+    },
+    {
+      "index": 78,
+      "group": "5DT glove",
+      "codebook": "little far",
+      "gdf": "litte_far",
+      "Hz": 64
+    },
+    {
+      "index": 79,
+      "group": "5DT glove",
+      "codebook": "thumb palm",
+      "gdf": "thumb_palm",
+      "Hz": 64
+    },
+    {
+      "index": 80,
+      "group": "5DT glove",
+      "codebook": "-",
+      "gdf": "wrist_bend",
+      "Hz": 64,
+      "note": "Native header supplies a name. The authors’ table leaves this index unassigned."
+    },
+    {
+      "index": 81,
+      "group": "5DT glove",
+      "codebook": "-",
+      "gdf": "roll",
+      "Hz": 64,
+      "note": "Native header supplies a name. The authors’ table leaves this index unassigned."
+    },
+    {
+      "index": 82,
+      "group": "5DT glove",
+      "codebook": "-",
+      "gdf": "pitch",
+      "Hz": 64,
+      "note": "Native header supplies a name. The authors’ table leaves this index unassigned."
+    },
+    {
+      "index": 83,
+      "group": "5DT glove",
+      "codebook": "-",
+      "gdf": "gesture",
+      "Hz": 64,
+      "note": "Native header supplies a name. The authors’ table leaves this index unassigned."
+    },
+    {
+      "index": 84,
+      "group": "exoskeleton",
+      "codebook": "hand X",
+      "gdf": "handPosX",
+      "Hz": 64
+    },
+    {
+      "index": 85,
+      "group": "exoskeleton",
+      "codebook": "hand Y",
+      "gdf": "handPosY",
+      "Hz": 64
+    },
+    {
+      "index": 86,
+      "group": "exoskeleton",
+      "codebook": "hand Z",
+      "gdf": "handPosZ",
+      "Hz": 64
+    },
+    {
+      "index": 87,
+      "group": "exoskeleton",
+      "codebook": "elbow X",
+      "gdf": "elbowPosX",
+      "Hz": 64
+    },
+    {
+      "index": 88,
+      "group": "exoskeleton",
+      "codebook": "elbow Y",
+      "gdf": "elbowPosY",
+      "Hz": 64
+    },
+    {
+      "index": 89,
+      "group": "exoskeleton",
+      "codebook": "elbow Z",
+      "gdf": "elbowPosZ",
+      "Hz": 64
+    },
+    {
+      "index": 90,
+      "group": "exoskeleton",
+      "codebook": "shoulder adduction",
+      "gdf": "ShoulderAdductio",
+      "Hz": 64
+    },
+    {
+      "index": 91,
+      "group": "exoskeleton",
+      "codebook": "shoulder flexion/extension",
+      "gdf": "ShoulderFlexionE",
+      "Hz": 64
+    },
+    {
+      "index": 92,
+      "group": "exoskeleton",
+      "codebook": "shoulder rotation",
+      "gdf": "ShoulderRotation",
+      "Hz": 64
+    },
+    {
+      "index": 93,
+      "group": "exoskeleton",
+      "codebook": "elbow",
+      "gdf": "Elbow",
+      "Hz": 64
+    },
+    {
+      "index": 94,
+      "group": "exoskeleton",
+      "codebook": "pro/supination",
+      "gdf": "ProSupination",
+      "Hz": 64
+    },
+    {
+      "index": 95,
+      "group": "exoskeleton",
+      "codebook": "wrist flexion/extension",
+      "gdf": "Wrist",
+      "Hz": 64
+    },
+    {
+      "index": 96,
+      "group": "exoskeleton",
+      "codebook": "-",
+      "gdf": "GripPressure",
+      "Hz": 64,
+      "note": "Native header supplies a name. The authors’ table leaves this index unassigned."
+    }
+  ]
+}

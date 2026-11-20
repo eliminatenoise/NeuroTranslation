@@ -1,0 +1,245 @@
+{
+  "protocol_sha256": "f0e1525bcebf19010f668c36c5d7f308aedccc5c49ff6bc181b4ae2857abd6b7",
+  "units": "native elbow-sensor change",
+  "protocol": "Three whole-run rotations within S1 TRAIN development",
+  "folds": [
+    {
+      "fit_runs": [
+        2,
+        3
+      ],
+      "fit_n": 24,
+      "held_run": 1,
+      "held_n": 12
+    },
+    {
+      "fit_runs": [
+        1,
+        3
+      ],
+      "fit_n": 24,
+      "held_run": 2,
+      "held_n": 12
+    },
+    {
+      "fit_runs": [
+        1,
+        2
+      ],
+      "fit_n": 24,
+      "held_run": 3,
+      "held_n": 12
+    }
+  ],
+  "pooled": {
+    "n": 36,
+    "mae": {
+      "persistence": 0.07515822516547309,
+      "cue_median": 0.07431719038221571,
+      "cue_mechanics": 0.07237136398485221,
+      "cue_mechanics_c3": 0.07859292654326161,
+      "cue_mechanics_eog": 0.09081829541089707,
+      "temporal_attention": 0.07122022081031015,
+      "shifted_c3": 0.07780370884398523
+    },
+    "small_abs_le_0_1": 25,
+    "opposite_training_cue_median": 17,
+    "zero_change": 0
+  },
+  "balanced_mae": {
+    "persistence": 0.07515822516547309,
+    "cue_median": 0.0743171903822157,
+    "cue_mechanics": 0.07237136398485221,
+    "cue_mechanics_c3": 0.07859292654326162,
+    "cue_mechanics_eog": 0.09081829541089705,
+    "temporal_attention": 0.07122022081031017,
+    "shifted_c3": 0.07780370884398523
+  },
+  "by_run": {
+    "1": {
+      "n": 12,
+      "mae": {
+        "persistence": 0.0745234489440918,
+        "cue_median": 0.0745234489440918,
+        "cue_mechanics": 0.08974221952794746,
+        "cue_mechanics_c3": 0.08987692398420212,
+        "cue_mechanics_eog": 0.08954974540364584,
+        "temporal_attention": 0.08924476583008019,
+        "shifted_c3": 0.09022018728105842
+      },
+      "small_abs_le_0_1": 8,
+      "opposite_training_cue_median": 6,
+      "zero_change": 0
+    },
+    "2": {
+      "n": 12,
+      "mae": {
+        "persistence": 0.05829938252766927,
+        "cue_median": 0.05819161732991537,
+        "cue_mechanics": 0.05639656304008134,
+        "cue_mechanics_c3": 0.05566672155758268,
+        "cue_mechanics_eog": 0.05504764058301977,
+        "temporal_attention": 0.05530252226374518,
+        "shifted_c3": 0.05556068544941614
+      },
+      "small_abs_le_0_1": 10,
+      "opposite_training_cue_median": 5,
+      "zero_change": 0
+    },
+    "3": {
+      "n": 12,
+      "mae": {
+        "persistence": 0.0926518440246582,
+        "cue_median": 0.09023650487263997,
+        "cue_mechanics": 0.07097530938652784,
+        "cue_mechanics_c3": 0.09023513408800006,
+        "cue_mechanics_eog": 0.12785750024602552,
+        "temporal_attention": 0.06911337433710509,
+        "shifted_c3": 0.08763025380148114
+      },
+      "small_abs_le_0_1": 7,
+      "opposite_training_cue_median": 6,
+      "zero_change": 0
+    }
+  },
+  "by_cue": {
+    "flexion": {
+      "n": 18,
+      "mae": {
+        "persistence": 0.06468062930636936,
+        "cue_median": 0.05246575673421224,
+        "cue_mechanics": 0.057245405349254264,
+        "cue_mechanics_c3": 0.06197765157981126,
+        "cue_mechanics_eog": 0.06572752771206448,
+        "temporal_attention": 0.05791218352351996,
+        "shifted_c3": 0.05228958917800109
+      },
+      "small_abs_le_0_1": 13,
+      "opposite_training_cue_median": 5,
+      "zero_change": 0
+    },
+    "extension": {
+      "n": 18,
+      "mae": {
+        "persistence": 0.08563582102457683,
+        "cue_median": 0.09616862403021918,
+        "cue_mechanics": 0.08749732262045012,
+        "cue_mechanics_c3": 0.09520820150671198,
+        "cue_mechanics_eog": 0.11590906310972963,
+        "temporal_attention": 0.08452825809710035,
+        "shifted_c3": 0.10331782850996937
+      },
+      "small_abs_le_0_1": 12,
+      "opposite_training_cue_median": 12,
+      "zero_change": 0
+    }
+  },
+  "by_run_cue": {
+    "1": {
+      "flexion": {
+        "n": 6,
+        "mae": {
+          "persistence": 0.06729984283447266,
+          "cue_median": 0.06729984283447266,
+          "cue_mechanics": 0.07098524460143266,
+          "cue_mechanics_c3": 0.07319751655195662,
+          "cue_mechanics_eog": 0.07020758388120865,
+          "temporal_attention": 0.07194610710949538,
+          "shifted_c3": 0.07233629032104087
+        },
+        "small_abs_le_0_1": 4,
+        "opposite_training_cue_median": 3,
+        "zero_change": 0
+      },
+      "extension": {
+        "n": 6,
+        "mae": {
+          "persistence": 0.08174705505371094,
+          "cue_median": 0.08174705505371094,
+          "cue_mechanics": 0.10849919445446222,
+          "cue_mechanics_c3": 0.1065563314164476,
+          "cue_mechanics_eog": 0.10889190692608304,
+          "temporal_attention": 0.10654342455066503,
+          "shifted_c3": 0.10810408424107598
+        },
+        "small_abs_le_0_1": 4,
+        "opposite_training_cue_median": 3,
+        "zero_change": 0
+      }
+    },
+    "2": {
+      "flexion": {
+        "n": 6,
+        "mae": {
+          "persistence": 0.05922476450602213,
+          "cue_median": 0.035094896952311196,
+          "cue_mechanics": 0.04986569039344843,
+          "cue_mechanics_c3": 0.048342514800492696,
+          "cue_mechanics_eog": 0.04792024413137466,
+          "temporal_attention": 0.04889684037420653,
+          "shifted_c3": 0.04882312606614416
+        },
+        "small_abs_le_0_1": 5,
+        "opposite_training_cue_median": 1,
+        "zero_change": 0
+      },
+      "extension": {
+        "n": 6,
+        "mae": {
+          "persistence": 0.057374000549316406,
+          "cue_median": 0.08128833770751953,
+          "cue_mechanics": 0.06292743568671423,
+          "cue_mechanics_c3": 0.06299092831467266,
+          "cue_mechanics_eog": 0.06217503703466487,
+          "temporal_attention": 0.061708204153283826,
+          "shifted_c3": 0.062298244832688116
+        },
+        "small_abs_le_0_1": 5,
+        "opposite_training_cue_median": 4,
+        "zero_change": 0
+      }
+    },
+    "3": {
+      "flexion": {
+        "n": 6,
+        "mae": {
+          "persistence": 0.06751728057861328,
+          "cue_median": 0.05500253041585287,
+          "cue_mechanics": 0.05088528105288171,
+          "cue_mechanics_c3": 0.06439292338698448,
+          "cue_mechanics_eog": 0.07905475512361017,
+          "temporal_attention": 0.052893603086857977,
+          "shifted_c3": 0.035709351146818245
+        },
+        "small_abs_le_0_1": 4,
+        "opposite_training_cue_median": 1,
+        "zero_change": 0
+      },
+      "extension": {
+        "n": 6,
+        "mae": {
+          "persistence": 0.11778640747070312,
+          "cue_median": 0.1254704793294271,
+          "cue_mechanics": 0.09106533772017394,
+          "cue_mechanics_c3": 0.11607734478901566,
+          "cue_mechanics_eog": 0.17666024536844094,
+          "temporal_attention": 0.08533314558735221,
+          "shifted_c3": 0.13955115645614402
+        },
+        "small_abs_le_0_1": 3,
+        "opposite_training_cue_median": 5,
+        "zero_change": 0
+      }
+    }
+  },
+  "decision": {
+    "balanced_c3_beats": {
+      "cue_mechanics": false,
+      "cue_mechanics_eog": true,
+      "shifted_c3": false
+    },
+    "cue_groups_c3_beats_mechanics": 0,
+    "runs_c3_beats_mechanics": 1,
+    "incremental_c3_gate_passed": false
+  }
+}

@@ -470,6 +470,84 @@
   const plateOffsets = [14, 24, 34, 44];
   const plateModes = ['phase', 'marker_ridge', 'combined_ridge', 'marker_shared', 'combined_shared', 'scrambled_combined'];
 
+  const armCues = ['elbow flexion','elbow extension','supination','pronation','hand close','hand open','rest'];
+  const armModes = ['still','cue','motion','cue_motion','shared_motion','shared_cue_motion','shuffled_cue_motion'];
+  async function forecastCuedArm(record) {
+    const mode = record.mode;
+    if (!armModes.includes(mode)) throw new RangeError('Choose one of the seven arm forecast methods.');
+    const useCue = ['cue','cue_motion','shared_cue_motion','shuffled_cue_motion'].includes(mode);
+    const useMotion = !['still','cue'].includes(mode);
+    const fields = ['domain','mode',...(useCue?['cue']:[]),...(useMotion?['bins']:[])];
+    if (Object.keys(record).length!==fields.length || !fields.every(f=>Object.hasOwn(record,f))) {
+      throw new TypeError('Only supply inputs used by the selected method.');
+    }
+    const features = [];
+    if (useCue) {
+      if (!armCues.includes(record.cue)) throw new RangeError('Unknown study action.');
+      features.push(...armCues.map(task=>Number(task===record.cue)));
+    }
+    let output = Array(9).fill(0);
+    if (mode!=='still') {
+      const head = await loadGroup('cued_arm.readouts');
+      if (useMotion) {
+        const b=record.bins;
+        if (!Array.isArray(b)||b.length!==4||!Array.from(b).every(v=>finiteRow(v,6))) throw new TypeError('Use four rows of six finite mechanical readings.');
+        const anchor=b[3].slice(0,3);
+        const tokens=b.map(row=>row.map((x,j)=>j<3?x-anchor[j]:x));
+        features.push(...tokens.flat(),...anchor);
+        if (['shared_motion','shared_cue_motion','shuffled_cue_motion'].includes(mode)) {
+          const core=await loadGroup(mode==='shuffled_cue_motion'?'cued_arm.scrambled':'spatial');
+          const mu=head['cued_arm.token.mean'],sd=head['cued_arm.token.sd'];
+          features.push(...encode(core,tokens.map(row=>linear(core,'project',row.map((v,j)=>(v-mu[j])/sd[j])))));
+        }
+      }
+      const stem='cued_arm.'+mode+'.';
+      output=Array.from(head[stem+'bias']);
+      features.forEach((v,j)=>{
+        const z=(v-head[stem+'mean'][j])/head[stem+'sd'][j];
+        for(let k=0;k<9;k++) output[k]+=z*head[stem+'coef'][9*j+k];
+      });
+    }
+    if(!output.every(Number.isFinite)) throw new RangeError('Instrument readings exceed the numerical range.');
+    return {mode,horizon_after_cutoff_s:[0.5,1,1.5],channels:['elbow','forearm rotation','index near'],
+            change_native_units:[output.slice(0,3),output.slice(3,6),output.slice(6)]};
+  }
+
+  async function forecastPoint(record) {
+    const {positions_mm: p, mode} = record;
+    const modes = ['stationary', 'velocity', 'previous', 'linear', 'shared', 'shuffled'];
+    if (Object.keys(record).length !== 3 || !modes.includes(mode) ||
+        !Array.isArray(p) || p.length !== 9 || !Array.from(p).every(row => finiteRow(row, 3))) {
+      throw new TypeError('Choose an available method and provide nine rows of three finite coordinates in millimetres.');
+    }
+    const step = p.slice(1).map((row, i) => row.map((v, j) => v - p[i][j]));
+    let v = step[7].map(d => 4*d);
+    if (mode === 'stationary') v = [0,0,0];
+    if (mode === 'previous') v = p[8].map((d,j) => d-p[4][j]);
+    if (['linear', 'shared', 'shuffled'].includes(mode)) {
+      const hx = p[8][0]-p[0][0], hy = p[8][1]-p[0][1], h = Math.hypot(hx,hy);
+      const c = h >= 1 ? hx/h : 1, s = h >= 1 ? hy/h : 0;
+      const world = step.map(([x,y,z]) => [x*c+y*s, y*c-x*s, z]);
+      const features = world.flat();
+      const head = await loadGroup('point_motion.readouts');
+      if (mode !== 'linear') {
+        const core = await loadGroup(mode === 'shared' ? 'spatial' : 'point_motion.scrambled');
+        const mean = head['point_motion.token.mean'], scale = head['point_motion.token.scale'];
+        const tokens = [0,2,4,6].map(i => [...world[i],...world[i+1]].map((x,j) => (x-mean[j])/scale[j]));
+        features.push(...encode(core,tokens.map(row => linear(core,'project',row))));
+      }
+      const stem = 'point_motion.'+mode+'.';
+      const offset = Array.from(head[stem+'bias']), coef = head[stem+'coef'];
+      for (const [i,f] of features.entries()) {
+        const z = (f-head[stem+'mean'][i])/head[stem+'scale'][i];
+        for (let j=0;j<3;j++) offset[j] += z*coef[3*i+j];
+      }
+      v = [v[0]+offset[0]*c-offset[1]*s, v[1]+offset[0]*s+offset[1]*c, v[2]+offset[2]];
+    }
+    if (!v.every(Number.isFinite)) throw new RangeError('Positions exceed the supported numerical range.');
+    return {displacement_xyz_mm:v, horizon_ms:200, history_spacing_ms:50, mode};
+  }
+
   async function forecastRightPlate(record) {
     const {mode, offset_frames:offset, markers_m:markers} = record;
     const phase = plateOffsets.indexOf(offset);
@@ -530,6 +608,8 @@
   }
 
   async function forecastMovement(record) {
+    if (record?.domain === 'cued_arm_change') return forecastCuedArm(record);
+    if (record?.domain === 'marker_displacement') return forecastPoint(record);
     if (record?.domain === 'right_plate_force') return forecastRightPlate(record);
     if (record?.domain === 'knee_moment') return forecastMoment(record);
     if (record?.domain === 'knee_angle') return forecastKnee(record);

@@ -1,0 +1,7 @@
+# Source and reuse
+
+Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz released the original recordings as *Upper limb movements can be decoded from the time-domain of low-frequency EEG*, version 1 (2017). Credit all four authors, cite their dataset and paper, and identify this NeuroTranslation pilot as a subsequent analysis. The recordings and any material derived from them are distributed here under Creative Commons Attribution 4.0. The original authors have not endorsed the forecasts. [Dataset and original licence](https://doi.org/10.5281/zenodo.834976) · [Acquisition paper](https://doi.org/10.1371/journal.pone.0182578) · [Codebook](https://zenodo.org/records/834976/files/data%20set%20description.pdf) · [CC BY 4.0 legal code](https://creativecommons.org/licenses/by/4.0/legalcode)
+
+This analysis selects the first three right-arm execution runs of participant S1 and two elbow cues. It calculates time-window summaries, fits linear coefficients, pools four signal bins in the attention comparison and reports errors on withheld development runs. The package contains a channel and event crosswalk, aggregate coefficients, scalers, cue medians and group scores. The input example is invented. The original GDF files remain available from the publisher.
+
+The accompanying software, original documentation and invented example are dedicated under CC0 1.0 Universal to the extent the project holds the rights. Third-party material retains its own licence. [CC0 text](LICENSE)

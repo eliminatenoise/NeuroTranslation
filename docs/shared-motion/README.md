@@ -1,5 +1,9 @@
 # What can past movement predict?
 
+Choose **Cued right arm**, enter one of the seven listed instructions and inspect the forecast differences in three sensors at three future times. Press F to focus the instruction box. On browsers with on-device English dictation, the microphone button fills in the words for review. Press Enter to run the forecast. The dropdown compares seven methods on invented or supplied sensor bins. [On-device speech specification](https://webaudio.github.io/web-speech-api/#dom-speechrecognition-processlocally) [Task vocabulary and evaluation](../../models/neurotranslate-0.0/cued-arm/README.md)
+
+Choose **One tracked body point (mm)** to forecast 200 milliseconds of movement from nine positions. Compare six methods or paste your own XYZ values. The source study tested 46 locations beyond the six used for fitting. [Methods and errors by body location](../../models/neurotranslate-0.0/point-motion/README.md)
+
 Open **index.html** or the launcher for your operating system. The first example predicts the distance between a wrist’s last tracked position and its position about a quarter second later. Choose **Right-wrist angles (°)** to ask how far back the wrist will bend and how far it will tilt towards the thumb. **Rat displacement (cm)** predicts an endpoint distance on a maze. **Right and left knee angles (°)** forecasts both knees from 240 consecutive pairs of angles. Choose **Knee moments (N·m/kg)** to estimate the net turning moment at each knee. Each task starts with an invented example. [Open the viewer](index.html)
 
 ## Forecast the load on one plate

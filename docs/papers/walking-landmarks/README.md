@@ -1,0 +1,15 @@
+# Where will the wrist be in a fifth of a second?
+
+A scientific supplement to NeuroTranslation and Interoceptomics. Two slow-walking experiments use the same ten designated assessment walkers. The first forecasts six skin markers from multiple marker histories with or without surface muscle signals. The second asks whether one marker’s history can forecast its displacement at a site withheld from fitting. The closing figure shows what was actually measured during the next 200 ms in a separate group of thirty training walkers. [Read the HTML](index.html) · [Open the PDF](walking-landmarks.pdf)
+
+## Rebuild
+
+Keep `build.py`, `paper.html.in`, `numbers.json` and `DATA-LICENCE.txt` in one directory. Run `python build.py --html-only` with Python 3 to rebuild the self-contained HTML. For the four-page PDF install the Python package `pypdf`, Chrome or Chromium, and Liberation Sans, then run `python build.py`. Use `--browser PATH` to select a browser executable. Rebuilding these two formats uses the published group values and requires no individual records. The complete analysis code, frozen protocols, aggregate results and reproduction instructions are available with the source studies.
+
+The JSON records the URLs and SHA-256 hashes of the exact numerical or methodological inputs. It retains the aggregate source precision. The two tables and the plotted means, intervals and stride curves are generated from those numbers. Both documents work offline. Use the external links when connected to obtain the original recordings or rerun the underlying analyses. [Six landmarks](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/walking-landmarks) · [One unnamed marker](https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/point-motion) · [Measured stride travel](https://github.com/eliminatenoise/Interoceptomics/tree/1c39a161ea9b1f20e570a585b2055771d8ada438/models/stride-signals)
+
+## Attribution
+
+Original recordings by Céline Schreiber and Florent Moissenet, Rehazenter Adult Walking Dataset, Figshare v8, under Creative Commons Attribution 4.0 International. The original reference is Schreiber & Moissenet (2019), *A multimodal dataset of human gait at different walking speeds established on injury-free adult participants*, Scientific Data 6, 111. This analysis selects C2 recordings, composes marker histories and future displacements, compares forecasts and plots group means. Attribute the recordings and identify further changes when reusing these data-derived results. [Figshare v8](https://doi.org/10.6084/m9.figshare.7734767.v8) · [Article](https://doi.org/10.1038/s41597-019-0124-4) · [Authors’ processing code](https://github.com/fmoissenet/CGA_Rehazenter_Toolbox/tree/e35dc90c1acd24da134897fd1b4241152cff6005) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+The original [LICENCE](DATA-LICENCE.txt) retains the exact bytes from the authors’ version 8 archive. It is also embedded in the HTML download link and attached to the PDF under the same filename.

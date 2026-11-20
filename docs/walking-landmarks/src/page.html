@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
+<title>Walking, 200 ms ahead · NeuroTranslation</title>
+<style>/*__STYLE__*/</style>
+</head>
+<body>
+<header class="mast"><div class="wrap mast-inner"><a class="brand" href="#main"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>NeuroTranslation</a><nav aria-label="Sections"><a href="#experiment">Model</a><a href="#evidence">Results</a><a href="#source">Source</a></nav></div></header>
+<main class="wrap" id="main">
+<h1>Walking, 200 ms ahead<span>.</span></h1>
+<p class="intro">Watch both ankles, knees and wrists. Given 40 camera frames of a walking body, where will those six points be a fifth of a second later?</p>
+<section id="experiment" aria-label="Interactive landmark forecast" class="workbench">
+<div class="scene-pane">
+<div class="scene-head"><div><span class="signal"></span>Invented walk</div><span id="clock">+200 ms forecast</span></div>
+<canvas width="740" height="520" id="scene" tabindex="0" aria-label="Three-dimensional walking marker plot. Drag to rotate, or use the arrow keys. All six marker displacements are also tabulated below.">Read the six coordinate displacements in the marker table below.</canvas>
+<div class="views" role="group" aria-label="Camera view">
+<button type="button" data-view="Oblique" aria-pressed="true">Oblique</button><button type="button" data-view="Side" aria-pressed="false">Side</button><button type="button" data-view="Front" aria-pressed="false">Front</button><button type="button" data-view="Top" aria-pressed="false">Top</button>
+</div>
+<div class="legend"><label><input type="checkbox" id="trails" checked><i class="trail"></i>History</label><label><input type="checkbox" id="forecasts" checked><i class="fore"></i>Forecast</label><label><input type="checkbox" id="future" checked><i class="next"></i>Invented future</label></div>
+</div>
+<div class="controls"><h2>Change the walk</h2>
+<label for="model">Predictor</label><select id="model">
+<option value="transformer_combined">Transformer · markers + muscle</option><option value="transformer_markers">Transformer · markers only</option><option value="ridge_combined">Linear · markers + muscle</option><option value="ridge_markers">Linear · markers only</option><option value="velocity">Constant marker velocity</option><option value="persistence">Stay in place</option>
+</select>
+<label for="landmark">Follow a landmark</label><select id="landmark"></select>
+<div class="slider"><label for="phase">Stride cycle</label><output for="phase" id="phaseval"></output><input type="range" min="0" max="100" step="1" value="26" id="phase"></div>
+<div class="slider"><label for="speed">Forward speed</label><output for="speed" id="speedval"></output><input type="range" min="0.3" max="1.6" step="0.05" value="0.80" id="speed"></div>
+<div class="slider"><label for="cadence">Cadence</label><output for="cadence" id="cadenceval"></output><input type="range" min="55" max="132" step="1" value="92" id="cadence"></div>
+<div class="slider"><label for="gain">Right-leg muscle signal</label><output for="gain" id="gainval"></output><input type="range" min="0" max="3" step="0.05" value="1" id="gain"></div>
+<div class="actions"><button type="button" id="play">Play stride</button><button type="button" id="reset">Reset</button></div>
+</div></section>
+<p class="caption">Drag to rotate. The body gives the markers a frame of reference. Its shape, motion and muscle signals are invented. Only the fitted predictors use data from recorded walks.</p>
+<div class="readout"><div class="chart-block"><h2 id="detailheading">Marker displacement</h2><div id="strip"></div></div><div class="metric"><span>Forecast distance</span><strong id="distance">—</strong></div><div class="metric"><span>Miss on invented walk</span><strong id="miss">—</strong></div></div>
+<details class="detail"><summary>See all six displacements and their coordinates</summary><p>Each displacement starts at the last input frame. X, Y and Z follow the laboratory axes in millimetres. Z points up. The miss is the straight-line distance from the forecast endpoint to the invented future endpoint.</p><div class="scroll"><table><caption>Invented walk · 200 ms forecast</caption><thead><tr><th>Landmark</th><th>ΔX (mm)</th><th>ΔY (mm)</th><th>ΔZ (mm)</th><th>Miss (mm)</th></tr></thead><tbody id="coordRows"></tbody></table></div></details>
+<section id="evidence" class="section"><div class="section-title"><p class="eyebrow">Recorded walks</p><h2>How far did the forecasts miss?</h2></div>
+<p id="evidenceIntro"></p><p id="outcome" class="result-callout"></p>
+<div class="scroll"><table id="summary"><caption>Mean distance from the later recorded marker position</caption><thead><tr><th>Predictor</th><th>Mean error (mm)</th><th>95% interval (mm)</th></tr></thead><tbody></tbody></table></div>
+<details class="detail"><summary>Inspect variation across walkers and landmarks</summary>
+<p>Every walker contributed to the overall result with equal weight. Select a predictor to see how the spread of walker averages and the error at each body location.</p>
+<label for="measure">Results for</label><select id="measure"></select>
+<div class="pair"><div class="scroll"><table><caption>Spread of walker-level mean errors</caption><thead><tr><th>Percentile across walkers</th><th>Error (mm)</th></tr></thead><tbody id="people"></tbody></table></div><div class="scroll"><table><caption id="jointCaption">Mean error by landmark</caption><thead><tr><th>Landmark</th><th>Error (mm)</th><th>95% interval (mm)</th></tr></thead><tbody id="joints"></tbody></table></div></div></details>
+<details class="detail"><summary>Compare the muscle, walking-phase and personal controls</summary><div id="controlsText"></div></details></section>
+<section id="source" class="section method"><div class="section-title"><p class="eyebrow">Source and scope</p><h2>What did the cameras see?</h2></div><div class="two-prose"><div><p>Schreiber and Moissenet recorded barefoot adults walking overground. Skin markers tracked the outside of each ankle and knee and the thumb side of each wrist. Two more markers on the front of the pelvis helped locate the moving body. Eight surface electrodes measured electrical activity in the right leg.</p><p>The model reads 40 frames at 100 Hz and predicts six changes in position 20 frames later. The recorded markers were gap-filled and filtered in both time directions. The muscle traces were also filtered in both directions. The 200 ms horizon refers to the stored recording clock. Live forecasting still needs a test with causal signal processing.</p></div><div><p>A marker follows a point on the skin. The six outputs say how far those points travelled along three laboratory axes. They do not measure nerve signals, joint angles, foot contact or forces.</p><p>Dataset by Florent Moissenet and Céline Schreiber, version 8, under CC BY 4.0. This project fitted the predictors and made the invented example. Original project code and illustrations carry CC0. <a href="https://doi.org/10.6084/m9.figshare.7734767.v8">Dataset</a> · <a href="https://doi.org/10.1038/s41597-019-0124-4">Study</a> · <a href="data:text/plain;base64,__SOURCE_LICENCE__" download="DATA-LICENCE.txt">Original data licence</a> · <a href="data:text/markdown;base64,__NOTICE__" download="NOTICE.md">Credits</a></p></div></div></section>
+</main><footer><div class="wrap">NeuroTranslation <span>Walking landmarks</span></div></footer>
+<noscript>Enable JavaScript to draw the walk and run the fitted models offline. The model and evaluation files are included in this package.</noscript>
+<script>/*__BUNDLE__*/</script></body></html>

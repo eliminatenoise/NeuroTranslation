@@ -125,6 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function clearResults(message) {
     revision++;
+    byId("arm-results").hidden = true;
+    byId("arm-values").tBodies[0].replaceChildren();
+    byId("point-results").hidden = true;
+    byId("point-result").textContent = "";
     byId("plate-results").hidden = true;
     byId("plate-force").textContent = "";
     byId("moment-results").hidden = true;
@@ -305,10 +309,160 @@ document.addEventListener("DOMContentLoaded", () => {
     byId("status").textContent = "";
   }
 
+  let pointPlot = null;
+  function drawPoint() {
+    if (!pointPlot || byId("point-results").hidden) return;
+    const canvas = byId("point-plot");
+    const width = Math.max(210, Math.floor(canvas.clientWidth));
+    const stacked = width < 465, height = stacked ? 292 : 162;
+    const dpi = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.style.height = height + "px";
+    canvas.width = Math.round(width*dpi); canvas.height = Math.round(height*dpi);
+    const g = canvas.getContext("2d");
+    g.scale(dpi,dpi); g.font = "12px system-ui, sans-serif";
+    const {points,delta} = pointPlot, end = points[8];
+    const trace = points.map(row => row.map((n,k) => n-end[k]));
+    const cloud = [...trace,delta];
+    const ranges = [0,1,2].map(axis => {
+      const numbers = cloud.map(row => row[axis]);
+      return [Math.min(...numbers), Math.max(...numbers)];
+    });
+    const panelW = stacked ? width : width/2, panelH = stacked ? height/2 : height;
+    const scale = Math.min((panelW-44)/Math.max(1,ranges[0][1]-ranges[0][0]),
+      (panelH-55)/Math.max(1,...ranges.slice(1).map(([a,b])=>b-a)));
+    if (!Number.isFinite(scale) || scale<=0) return;
+    for (const axis of [1,2]) {
+      const x0 = !stacked && axis===2 ? panelW : 0, y0 = stacked && axis===2 ? panelH : 0;
+      const midX = ranges[0][0]/2+ranges[0][1]/2, midY = ranges[axis][0]/2+ranges[axis][1]/2;
+      const X = p => x0+panelW/2+(p[0]-midX)*scale;
+      const Y = p => y0+(panelH+19)/2-(p[axis]-midY)*scale;
+      g.fillStyle="#f5f8f9";g.fillRect(x0+1,y0+1,panelW-2,panelH-2);
+      g.fillStyle="#253e4d";g.fillText(axis===1?"Top view · X and Y":"Side view · X and Z",x0+9,y0+16);
+      g.lineWidth=2;g.strokeStyle="#28667a";g.beginPath();
+      trace.forEach((p,i)=>i?g.lineTo(X(p),Y(p)):g.moveTo(X(p),Y(p)));g.stroke();
+      for(const p of trace){g.fillStyle="#28667a";g.beginPath();g.arc(X(p),Y(p),2.4,0,2*Math.PI);g.fill();}
+      g.strokeStyle="#ad5a22";g.setLineDash([4,3]);g.beginPath();g.moveTo(X([0,0,0]),Y([0,0,0]));g.lineTo(X(delta),Y(delta));g.stroke();g.setLineDash([]);
+      const x=X(delta),y=Y(delta);
+      g.fillStyle="#ad5a22";g.beginPath();g.moveTo(x,y-5);g.lineTo(x+5,y);g.lineTo(x,y+5);g.lineTo(x-5,y);g.closePath();g.fill();
+    }
+  }
+  new ResizeObserver(drawPoint).observe(byId("point-plot"));
+
+  async function showPoint(positions, token) {
+    const out = await SharedMotion.forecastMovement({domain:"marker_displacement", mode:byId("point-mode").value, positions_mm:positions});
+    if (token !== revision) return;
+    byId("point-result").textContent = out.displacement_xyz_mm.map((x,i) => ["X","Y","Z"][i] + " " + format(x,2) + " mm").join(" · ");
+    pointPlot = {points: positions, delta: out.displacement_xyz_mm};
+    byId("point-results").hidden = false;
+    drawPoint();
+    byId("status").textContent = isCustom() ? "Forecast from supplied positions." : "Forecast from invented positions.";
+  }
+
+  const armNames = [
+    ['elbow flexion','bend my right elbow'],['elbow extension','straighten my right elbow'],
+    ['supination','turn my right palm up'],['pronation','turn my right palm down'],
+    ['hand close','close my right hand'],['hand open','open my right hand'],['rest','rest']
+  ];
+  const asArmCue = raw => {
+    const key = raw.trim().toLowerCase().replace(/[.!?]+$/,'').replace(/\s+/g,' ');
+    return armNames.find(([label,phrase])=>key===label || key===phrase)?.[0];
+  };
+  // Use only a recognizer that can require on-device processing.
+  const Voice = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const localVoice = !!(Voice && 'processLocally' in Voice.prototype);
+  const mic = byId('arm-mic'), voiceNote = byId('arm-voice-status');
+  let listening = null;
+
+  function endDictation(message='') {
+    const active = listening;
+    listening = null;
+    if (active) {
+      active.onresult = active.onerror = active.onend = null;
+      try { active.abort(); } catch {}
+    }
+    mic.textContent = 'Dictate on this device';
+    mic.setAttribute('aria-pressed','false');
+    voiceNote.textContent = message;
+  }
+
+  mic.hidden = !localVoice;
+  if (!localVoice) voiceNote.textContent = 'Type the instruction here. On-device dictation is unavailable in this browser.';
+  mic.addEventListener('click', () => {
+    if (!localVoice || currentDomain() !== 'cued_arm_change' || byId('arm-cue-field').hidden) return;
+    if (listening) { endDictation('Dictation cancelled.'); return; }
+    try {
+      const active = new Voice();
+      active.processLocally = true;
+      if (active.processLocally !== true) throw new Error('No on-device recognizer');
+      active.lang = 'en-US';
+      active.continuous = false;active.interimResults = false;active.maxAlternatives = 1;
+      listening = active;
+      active.onresult = event => {
+        if (listening !== active) return;
+        const result = event.results?.[event.resultIndex ?? 0];
+        const words = result?.[0]?.transcript?.trim();
+        if (!result?.isFinal || !words) return;
+        endDictation('Read the words, edit them if needed, then press Enter.');
+        byId('arm-cue').value = words;
+        clearResults('Review the dictated instruction.');byId('arm-cue').focus();
+      };
+      active.onend = () => { if (listening === active) endDictation('Dictation ended. You can type an instruction.'); };
+      active.onerror = event => {
+        if (listening !== active) return;
+        const message = event.error === 'not-allowed' ? 'Microphone access was not granted. You can type the instruction.' : 'On-device dictation is unavailable. You can type the instruction.';
+        endDictation(message);
+      };
+      mic.textContent='Cancel dictation';mic.setAttribute('aria-pressed','true');
+      voiceNote.textContent='Listening on this device…';clearResults('Listening for an instruction.');
+      active.start();
+    } catch { endDictation('On-device dictation is unavailable. You can type the instruction.'); }
+  });
+  byId('arm-cue').addEventListener('input',()=>{if(listening)endDictation();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden && listening)endDictation();});
+  window.addEventListener('pagehide',()=>{if(listening)endDictation();});
+
+  async function showArm(token) {
+    const mode = byId('arm-method').value, usesCue=['cue','cue_motion','shared_cue_motion','shuffled_cue_motion'].includes(mode);
+    const usesMotion=!['cue','still'].includes(mode);
+    const custom=isCustom();
+    byId('arm-cue-field').hidden=!usesCue;
+    byId('arm-custom-bins').hidden=!(usesMotion && custom);
+    const record={domain:'cued_arm_change',mode};
+    if (usesCue) {
+      record.cue=asArmCue(byId('arm-cue').value);
+      if (!record.cue) throw Error('Choose a listed right-arm action, or enter its study name.');
+    }
+    if (usesMotion) {
+      if (custom) {
+        try { record.bins=JSON.parse(byId('arm-bins').value); }
+        catch { throw Error('Enter four sensor rows or fill the box with invented values.'); }
+      } else record.bins=data.armExample.bins;
+    }
+    const r=await SharedMotion.forecastMovement(record);
+    if(token!==revision)return;
+    const caption=byId('arm-result-label');
+    caption.textContent=usesCue ? 'Matched task: '+record.cue+'.' : 'This method does not use an action label.';
+    const body=byId('arm-values').tBodies[0];
+    body.replaceChildren(...r.change_native_units.map((v,k)=>{
+      const tr=document.createElement('tr');
+      const h=document.createElement('th');h.scope='row';h.textContent=r.horizon_after_cutoff_s[k].toFixed(1)+' s';tr.append(h);
+      v.forEach(x=>{const td=document.createElement('td');td.textContent=x.toFixed(4);tr.append(td);});
+      return tr;
+    }));
+    byId('arm-results').hidden=false;
+    byId('status').textContent=usesMotion ? (custom?'Forecast from the supplied sensor bins.':'Forecast from invented sensor bins.') : 'Forecast needs no sensor history.';
+  }
+
   async function runCustom() {
+    if (listening) endDictation();
     clearResults("");
     const token = revision;
     try {
+      if (currentDomain() === "cued_arm_change") { await showArm(token); return; }
+      if (currentDomain() === "marker_displacement") {
+        await showPoint(JSON.parse(byId("point-input").value), token);
+        return;
+      }
       if (currentDomain() === "right_plate_force") {
         let record;
         try { record = JSON.parse(byId("plate-input").value); }
@@ -356,12 +510,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function selectInput() {
+    if (listening) endDictation();
     clearResults("");
     const token = revision;
     const domain = currentDomain();
     const custom = isCustom();
     const angular = domain === "wrist_angle";
     const knee = domain === "knee_angle";
+    const arm = domain === "cued_arm_change";
+    byId("arm-controls").hidden = !arm;
+    byId("arm-study").hidden = !arm;
+    const point = domain === "marker_displacement";
+    byId("point-controls").hidden = !point;
+    byId("point-study").hidden = !point;
+    byId("point-custom").hidden = !custom;
     const plate = domain === "right_plate_force";
     byId("plate-controls").hidden = !plate;
     byId("plate-custom").hidden = !custom;
@@ -379,15 +541,17 @@ document.addEventListener("DOMContentLoaded", () => {
     byId("knee-custom").hidden = !custom;
     byId("knee-example-method").hidden = custom;
     byId("knee-study").hidden = !knee;
-    byId("custom").hidden = plate || moment || knee || angular || !custom;
+    byId("custom").hidden = arm || point || plate || moment || knee || angular || !custom;
     byId("angular-custom").hidden = !angular || !custom;
     byId("angle-study").hidden = !angular;
-    byId("distance-study").hidden = plate || moment || angular || knee;
+    byId("distance-study").hidden = arm || point || plate || moment || angular || knee;
     byId("source-line").textContent = custom
       ? "Enter a history from one trial or recording that you have permission to use. The source clock and units must match this task."
       : recorded
         ? "Recorded camera positions from rat JS14. This is the first eligible training window, two seconds into W-track trip 55."
         : forearm ? "An invented half-second from the forearm correction example. It contains wrist angles and four forearm channels. No person supplied these measurements."
+        : arm ? "Choose an instruction from the supported right-arm tasks. The fitted model estimates three instrument changes."
+        : point ? "Nine invented positions follow one moving point in the laboratory coordinate system."
         : plate ? "Four invented heel and forefoot positions use the centre of one force plate as their origin. The eight muscle channels are invented too."
         : moment ? "Four seconds of invented leg angles. This walking example has no measured future moment."
         : knee ? "Two invented mathematical waves show the input format. They do not come from a person. The example has no measured future angle."
@@ -396,7 +560,9 @@ document.addEventListener("DOMContentLoaded", () => {
             : "Invented right-wrist movement in three dimensions. There is no measured future endpoint.";
     if (!custom) {
       try {
-        if (plate) await showPlate(inventedPlate(), token);
+        if (arm) await showArm(token);
+        else if (point) await showPoint(data.pointExample.positions_mm, token);
+        else if (plate) await showPlate(inventedPlate(), token);
         else if (moment) await showMoment({...data.momentExample, mode:byId("moment-mode").value}, token);
         else if (knee) await showKnees({...data.kneeExample, mode:byId("knee-mode").value}, token);
         else if (angular) await compareAngles(forearm ? data.forearmExample : data.angleExample,token);
@@ -407,6 +573,8 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (e) { if (token === revision) clearResults(e.message); }
       return;
     }
+    if (arm) { await runCustom(); return; }
+    if (point) { clearResults("Supply nine XYZ positions in millimetres."); return; }
     if (plate) {
       clearResults("Supply one marker history from an assigned right-foot plate.");
       return;
@@ -453,6 +621,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   picker.addEventListener("change",selectDomain);
   source.addEventListener("change",selectInput);
+  document.addEventListener("keydown",e=>{
+    if(e.key.toLowerCase()!=="f" || e.repeat || e.ctrlKey || e.metaKey || e.altKey ||
+       e.target.closest?.("input, textarea, select, button, [contenteditable=true]")) return;
+    e.preventDefault();
+    picker.value="cued_arm_change";
+    byId("arm-method").value="cue";
+    selectDomain();
+    byId("arm-cue").focus();byId("arm-cue").select();
+  });
+  byId("arm-run").addEventListener("click",runCustom);
+  byId("arm-method").addEventListener("change",selectInput);
+  byId("arm-cue").addEventListener("input",()=>clearResults("Run the forecast for this instruction."));
+  byId("arm-cue").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runCustom();}});
+  byId("arm-bins").addEventListener("input",()=>clearResults("Run the forecast for these readings."));
+  byId("arm-fill").addEventListener("click",()=>{byId("arm-bins").value=JSON.stringify(data.armExample.bins);clearResults("Invented sensor readings filled.");});
+  byId("point-mode").addEventListener("change", selectInput);
+  byId("point-input").addEventListener("input", () => clearResults("Inputs changed. Run the forecast again."));
+  byId("point-fill").addEventListener("click", () => { byId("point-input").value = JSON.stringify(data.pointExample.positions_mm); clearResults("Invented history filled. Run the forecast."); });
+  byId("point-run").addEventListener("click", runCustom);
   byId("plate-mode").addEventListener("change", selectInput);
   byId("plate-scale").addEventListener("change", selectInput);
   byId("plate-run").addEventListener("click", runCustom);
@@ -505,11 +692,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (model.checkpointSha256 !== "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179") {
         throw new Error("The checkpoint differs from the one used for these comparisons.");
       }
-      if (model.movementCheckpointSha256 !== "a52af3c0875a43d3ce8ae70ae7eaa8cf83a9bcd4f75422f1cc84bea6fd8379ee") {
+      if (model.movementCheckpointSha256 !== "ab3db00e8c048953bdc12d8c978e3cabdf1f2fae7dcfe2f6f53fe8aed724ddfd") {
         throw new Error("The movement checkpoint differs from the studied model.");
       }
       studyTable();
       picker.disabled = source.disabled = false;
+      if (location.hash === "#cued-arm") picker.value = "cued_arm_change";
+      if (location.hash === "#point-motion") picker.value = "marker_displacement";
       if (location.hash === "#right-plate") picker.value = "right_plate_force";
       selectDomain();
     } catch(e) {

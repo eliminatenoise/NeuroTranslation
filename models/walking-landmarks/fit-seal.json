@@ -1,0 +1,43 @@
+{
+  "threads": 2,
+  "interop_threads": 1,
+  "torch": "2.14.1+cpu",
+  "numpy": "2.4.6",
+  "cuda": false,
+  "people": 30,
+  "trials": 90,
+  "cutoffs": 3750,
+  "valid_by_landmark": [
+    3750,
+    3750,
+    3750,
+    3750,
+    3750,
+    3750
+  ],
+  "quality": {
+    "markers": {
+      "updates": 720,
+      "max_portable_error_mm": 2.306262845863336e-05,
+      "probe": 0.037690095603466034
+    },
+    "combined": {
+      "updates": 720,
+      "max_portable_error_mm": 2.0606285134045066e-05,
+      "probe": 0.03485332429409027
+    }
+  },
+  "fit_seconds": 2.1784888869151473,
+  "protocol_sha256": "667e684ed25d17ece2149bdf7b04511da0b5ed6778da0cffe1e34d28f1474208",
+  "weights_sha256": "bd53e09f8bf08bda70cfdee47bc5bf9186c365819ebda3d3e28bc6ba215f0c6c",
+  "phase_sha256": "731c0d0f592489d1495f8890b7f27d705c93ea016a0951f2464bc2d3174ea31b",
+  "train_data_sha256": "38a27b77ab9a2d3cd01cb9fe47e4701e9fd34658c1ad6b3c7c02e9dde060d1ee",
+  "source_sha256": {
+    "protocol.json": "667e684ed25d17ece2149bdf7b04511da0b5ed6778da0cffe1e34d28f1474208",
+    "source-clarification.json": "6f4c73bdbed30383f0560fb36ea3329bd1ce96b4d69b16e94cee3029b5aea297",
+    "fit.py": "e330b0828feee63d08a4dd3ecb0257dfda09999c15533bfd32dc9dd847888448",
+    "predict.py": "687604d39a10bb4966bd2101916e637b0d7bda40acf6f96443a3d2ec6b4179ab",
+    "assess.py": "0768584315c3325c91ad6cfc17ace26ac8a3f94c56acba25dfb20bd454723112",
+    "extract.py": "ad0367ca9be3c853ffb5ba49475c3a378034750df12afe04543a6d77327e629f"
+  }
+}
