@@ -138,3 +138,7 @@ For the separate elbow experiment, [open the viewer](https://eliminatenoise.gith
 ## Forecast surface voltage at the neck
 
 [Open the Transformer](https://eliminatenoise.github.io/NeuroTranslation/cervical-forecast/) or [download the offline reader](docs/cervical-forecast-offline.zip). Extract the folder and use its Windows, macOS or Linux launcher, or open `index.html`. The [model package](models/cervical-forecast-model.zip) has a separate launcher for each system that runs a synthetic prediction with Python and NumPy. [Try the second model](https://eliminatenoise.github.io/NeuroTranslation/neck-voltage/) · [Study](https://eliminatenoise.github.io/NeuroTranslation/papers/cervical-forecast/)
+
+## Forecast the rotation of a back-mounted sensor
+
+[Open the specialist Transformer](https://eliminatenoise.github.io/NeuroTranslation/back-rotation/) or [download its offline reader](docs/back-rotation-offline.zip). Extract the folder before running its launcher for Windows, macOS or Linux. The [model ZIP](models/back-rotation-model.zip) includes a separate launcher for each system to run an invented input through the fitted weights with Python and NumPy. [Open the shared movement model](https://eliminatenoise.github.io/NeuroTranslation/shared-back-rotation/) · [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/back-rotation/)

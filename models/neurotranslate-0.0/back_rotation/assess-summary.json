@@ -1,0 +1,213 @@
+{
+  "people": 3,
+  "windows": 2304,
+  "balanced": {
+    "zero": {
+      "mae_deg": 1.0532550002974885,
+      "rmse_deg": 1.267024633372383
+    },
+    "recent": {
+      "mae_deg": 0.44512959272634883,
+      "rmse_deg": 0.6458032917875546
+    },
+    "task_median": {
+      "mae_deg": 0.5374500897105449,
+      "rmse_deg": 0.7957867310872402
+    },
+    "linear_motion": {
+      "mae_deg": 0.3763848016947575,
+      "rmse_deg": 0.5472022174568548
+    },
+    "shared_motion": {
+      "mae_deg": 0.37625460655082393,
+      "rmse_deg": 0.5512283529051141
+    },
+    "shared_upper": {
+      "mae_deg": 0.3784298953750094,
+      "rmse_deg": 0.5537699407088966
+    },
+    "shared_lower": {
+      "mae_deg": 0.3823703769027065,
+      "rmse_deg": 0.5598829781403766
+    },
+    "linear_full": {
+      "mae_deg": 0.38006572717463133,
+      "rmse_deg": 0.5534197697158078
+    },
+    "shared_full": {
+      "mae_deg": 0.3849519480709181,
+      "rmse_deg": 0.5650702579003601
+    },
+    "random_full": {
+      "mae_deg": 0.3815321632556991,
+      "rmse_deg": 0.5602737036607809
+    },
+    "wrong_full": {
+      "mae_deg": 0.38529667478035323,
+      "rmse_deg": 0.5657973088782212
+    }
+  },
+  "tasks": {
+    "standing": {
+      "zero": {
+        "mae_deg": 0.33240942964005055,
+        "rmse_deg": 0.5334863028301459
+      },
+      "recent": {
+        "mae_deg": 0.1551107079226254,
+        "rmse_deg": 0.3101245214285762
+      },
+      "task_median": {
+        "mae_deg": 0.24009903364314164,
+        "rmse_deg": 0.46137425754577616
+      },
+      "linear_motion": {
+        "mae_deg": 0.1360835051188072,
+        "rmse_deg": 0.2634516995453486
+      },
+      "shared_motion": {
+        "mae_deg": 0.1306603211213042,
+        "rmse_deg": 0.25078088976455054
+      },
+      "shared_upper": {
+        "mae_deg": 0.13183791043533835,
+        "rmse_deg": 0.2515294432015515
+      },
+      "shared_lower": {
+        "mae_deg": 0.13520317951040164,
+        "rmse_deg": 0.2622002099262181
+      },
+      "linear_full": {
+        "mae_deg": 0.13736507403173928,
+        "rmse_deg": 0.2663580657331461
+      },
+      "shared_full": {
+        "mae_deg": 0.13588658723386116,
+        "rmse_deg": 0.26381715743313655
+      },
+      "random_full": {
+        "mae_deg": 0.1338243638615898,
+        "rmse_deg": 0.26110204705812
+      },
+      "wrong_full": {
+        "mae_deg": 0.1350549972857958,
+        "rmse_deg": 0.2624479655057404
+      }
+    },
+    "walking": {
+      "zero": {
+        "mae_deg": 1.7741005709549267,
+        "rmse_deg": 2.00056296391462
+      },
+      "recent": {
+        "mae_deg": 0.7351484775300724,
+        "rmse_deg": 0.981482062146533
+      },
+      "task_median": {
+        "mae_deg": 0.834801145777948,
+        "rmse_deg": 1.1301992046287042
+      },
+      "linear_motion": {
+        "mae_deg": 0.6166860982707077,
+        "rmse_deg": 0.8309527353683611
+      },
+      "shared_motion": {
+        "mae_deg": 0.6218488919803437,
+        "rmse_deg": 0.8516758160456775
+      },
+      "shared_upper": {
+        "mae_deg": 0.6250218803146804,
+        "rmse_deg": 0.8560104382162419
+      },
+      "shared_lower": {
+        "mae_deg": 0.6295375742950112,
+        "rmse_deg": 0.8575657463545351
+      },
+      "linear_full": {
+        "mae_deg": 0.6227663803175234,
+        "rmse_deg": 0.8404814736984694
+      },
+      "shared_full": {
+        "mae_deg": 0.6340173089079751,
+        "rmse_deg": 0.8663233583675839
+      },
+      "random_full": {
+        "mae_deg": 0.6292399626498084,
+        "rmse_deg": 0.8594453602634416
+      },
+      "wrong_full": {
+        "mae_deg": 0.6355383522749106,
+        "rmse_deg": 0.8691466522507018
+      }
+    }
+  },
+  "contrasts": {
+    "shared_motion": {
+      "mean_gain_deg": -0.008697341520094215,
+      "paired_gains_deg": [
+        -0.014655934696738981,
+        -0.0073229565697225385,
+        -0.004113133293821125
+      ],
+      "people_improved": 0
+    },
+    "wrong_full": {
+      "mean_gain_deg": 0.00034472670943510214,
+      "paired_gains_deg": [
+        -0.0027560057579075203,
+        0.001587526692196084,
+        0.002202659194016743
+      ],
+      "people_improved": 2
+    },
+    "linear_full": {
+      "mean_gain_deg": -0.004886220896286819,
+      "paired_gains_deg": [
+        -0.014229883174782909,
+        0.00329159929967765,
+        -0.0037203788137551985
+      ],
+      "people_improved": 1
+    },
+    "random_full": {
+      "mean_gain_deg": -0.003419784815219059,
+      "paired_gains_deg": [
+        -0.005425113836756923,
+        -0.002507563487803788,
+        -0.0023266771210964654
+      ],
+      "people_improved": 0
+    },
+    "recent": {
+      "mean_gain_deg": 0.06017764465543072,
+      "paired_gains_deg": [
+        0.042651835005141914,
+        0.054077608074453665,
+        0.08380349088669659
+      ],
+      "people_improved": 3
+    }
+  },
+  "better_on_both": 0,
+  "practical_criterion": null,
+  "support": {
+    "standing": 1152,
+    "walking": 1152
+  },
+  "target_degrees": {
+    "standing": {
+      "median_of_participant_medians": 0.18633018628946482,
+      "minimum": 0.0,
+      "maximum": 4.463713729082141
+    },
+    "walking": {
+      "median_of_participant_medians": 1.6639425862664052,
+      "minimum": 0.09009628580945186,
+      "maximum": 9.994200618750018
+    }
+  },
+  "paired_order": "Anonymous participants sorted by their shared-motion gain, with the same order used across contrasts within this evaluation.",
+  "planned_people": 4,
+  "assessment_status": "incomplete",
+  "physical_target_qualification": "Both recordings from one prespecified person list quaternion components 2, 3 and 4 followed by BufferChannel. The first component could not be verified. The four-person assessment is incomplete for both models. Scores below describe three other people with four documented orientation components. No replacement or refit."
+}

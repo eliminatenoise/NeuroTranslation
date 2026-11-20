@@ -204,3 +204,7 @@ Patrick Ofner, Andreas Schwarz, Joana Pereira and Gernot R. Müller-Putz release
 ### Cervical surface voltage after a wrist stimulus
 
 Nierula and colleagues released the simultaneous surface recordings in OpenNeuro ds004388 version 1.0.0 under CC0. The two fitted models, synthetic examples, summary errors and electrode diagrams accompany a secondary analysis. [Dataset and creators](https://doi.org/10.18112/openneuro.ds004388.v1.0.0) · [Recording methods](https://doi.org/10.1371/journal.pbio.3002828) · [Reader credits](cervical-forecast/NOTICE.md)
+
+### Rotation of a back-mounted sensor during standing and walking
+
+Desirée Irene Gracia Laso, Eduardo Iáñez, Mario Ortiz and José M. Azorín released the source recordings under Creative Commons Attribution 4.0. The model downloads contain derived weights, aggregate scores, code and invented inputs. The acquisition program retrieves the original recordings separately from the authors’ archive. [Experiment 2, version 2](https://doi.org/10.5281/zenodo.19065545) · [Recording methods](https://doi.org/10.1038/s41597-026-07592-7) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

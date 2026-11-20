@@ -161,6 +161,18 @@ def forecast_population(cutoff_s, prior_time_s, prior_xy_cm, mode, checkpoint=DE
 
 
 def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
+    if record.get("domain") == "back_rotation":
+        from back_rotation.forecast import forecast as predict_rotation
+        import hashlib
+        source = Path(checkpoint)
+        folder = source.parent / "back_rotation"
+        model = json.loads((folder / "model.json").read_bytes())
+        if hashlib.sha256(source.read_bytes()).hexdigest() != model["parent_sha256"]:
+            raise ValueError("This rotation adapter requires its matching movement checkpoint.")
+        if record.get("mode") == "random_full":
+            model["random_encoder"] = json.loads((folder / "random-encoder.json").read_bytes())
+        cfg, weights = read_checkpoint(source)
+        return predict_rotation(record, model, cfg, weights, linear, encode)
     if record.get("domain") == "cervical_voltage":
         from cervical.forecast import predict as predict_voltage, read_model
         model = read_model(Path(checkpoint).parent / "cervical" / "model.json")
@@ -222,7 +234,7 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path, help="JSON cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
+    parser.add_argument("input", type=Path, help="JSON back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
     args = parser.parse_args()
     try:

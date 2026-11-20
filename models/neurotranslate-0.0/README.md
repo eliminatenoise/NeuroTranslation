@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0 movement forecasts
 
+How far will a sensor strapped to the back turn in the next tenth of a second? In the three new people with four documented orientation components, the shared encoder’s mean absolute error was 0.376° using motion and 0.385° after adding both back electrode arrays. [Try the model](back_rotation/index.html) · [Study and source](back_rotation/README.md)
+
 Can a voltage at the axilla improve a forecast from a neck electrode? In six people outside training, the latest neck reading missed by 8.09 µV on average. A model using the neck, scalp, thumb and heart readings missed by 7.77 µV. Adding the axillary recording gave 9.65 µV. [Run the electrical forecast](cervical/index.html) · [Read the methods and results](cervical/README.md)
 
 Can early scalp signals improve a forecast of right-arm movement? In 210 new trials from five people, adding six scalp sites to a correction based on the arm lowered scaled error from 0.49777 to 0.49628. Substituting another repeat’s scalp readings gave 0.49675. The extra scalp information missed both prespecified tests. [Try the corrections](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/#early-signals) · [Run the model and read the full comparisons](scalp-residual/README.md)

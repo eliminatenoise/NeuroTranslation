@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#172b39">
+  <title>Back sensor rotation · NeuroTranslation</title>
+  <noscript><style>.bench { display: none !important; }</style></noscript>
+  <link href="reader.css" rel="stylesheet">
+  <script defer src="weights.js"></script>
+  <script defer src="inference.js"></script>
+  <script defer src="example.js"></script>
+  <script defer src="reader.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to reader</a>
+  <header>
+    <div class="wrap masthead">
+      <a class="brand" href="https://eliminatenoise.github.io/NeuroTranslation/">NeuroTranslation</a>
+      <nav aria-label="Reader sections">
+        <a href="#example">Try the model</a><a href="#recordings">Recorded results</a><a href="#sources">Sources</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <section class="intro" aria-labelledby="title">
+      <h1 id="title">How far will the back sensor turn?</h1>
+      <p>Give a model a tenth of a second of motion. Ask how many degrees a sensor strapped to someone’s back will turn in the next tenth. Do electrodes on the skin add anything to what the sensor already tells us?</p>
+    </section>
+    <section id="example" aria-labelledby="example-title">
+      <div class="section-heading">
+        <h2 id="example-title">Try an invented history</h2>
+        <p>These inputs are made up. Change them to run the trained model in your browser. There’s no measured future to check for this example.</p>
+      </div>
+      <div class="bench">
+        <form id="editor" class="controls" aria-label="Invented input controls">
+          <fieldset>
+            <legend>Known task</legend>
+            <div class="radio-row">
+              <label><input type="radio" name="task" value="621" checked> Moving</label>
+              <label><input type="radio" name="task" value="611"> Standing</label>
+            </div>
+          </fieldset>
+          <label for="variant">Model inputs</label>
+          <select id="variant" aria-describedby="variant-help">
+            <option value="full">Motion + upper and lower back</option>
+            <option value="motion">Motion only</option>
+            <option value="upper">Motion + upper back</option>
+            <option value="lower">Motion + lower back</option>
+            <option value="wrong">Motion + different electrode history</option>
+          </select>
+          <p class="control-hint" id="variant-help"></p>
+          <div class="sliders">
+            <div><label for="motion">Size of sensor turns <span id="motion-value"></span></label>
+              <input id="motion" type="range" min="0" max="200" value="100" step="5"></div>
+            <div><label for="upper">Upper-back signal size <span id="upper-value"></span></label>
+              <input id="upper" type="range" min="0" max="200" value="100" step="5"></div>
+            <div><label for="lower">Lower-back signal size <span id="lower-value"></span></label>
+              <input id="lower" type="range" min="0" max="200" value="100" step="5"></div>
+          </div>
+          <p class="mobile-forecast" aria-hidden="true">Forecast <strong id="mobile-angle"></strong></p>
+          <button type="button" id="restore">Restore example</button>
+        </form>
+        <div class="prediction" aria-labelledby="prediction-title">
+          <h3 id="prediction-title">Forecast for the next 100 ms</h3>
+          <div class="angle" role="status" aria-live="polite" aria-atomic="true" aria-label="Predicted unsigned rotation"><span id="forecast">—</span><span class="degree" aria-hidden="true">°</span><span class="sr"> degrees</span></div>
+          <p id="forecast-description">Unsigned change in the worn sensor’s orientation.</p>
+          <p class="carry">If the last 100 ms turn repeats <strong id="carry"></strong></p>
+          <div class="history">
+            <h4>Sensor turns in the preceding 100 ms</h4>
+            <svg id="trace" viewBox="0 0 440 96" role="img" aria-labelledby="trace-title trace-desc" preserveAspectRatio="none"><title id="trace-title">Invented motion history</title><desc id="trace-desc"></desc></svg>
+            <div class="time-axis"><span>100 ms ago</span><span>Forecast starts</span></div>
+          </div>
+          <details class="samples"><summary>Read the input values</summary><div id="input-values"></div></details>
+        </div>
+      </div>
+      <noscript><p>The editable model needs JavaScript. The study description and sources are available below.</p></noscript>
+    </section>
+    <section id="recordings" class="reading" aria-labelledby="recordings-title">
+      <h2 id="recordings-title">What happened on recorded movement?</h2>
+      <p class="lede">Volunteers wore two grids of 32 electrodes, one on the upper back and one on the lower back. They also wore an orientation sensor. Its reading at the forecast cutoff and its reading 100 milliseconds later give us the turn to check against.</p>
+      <div id="recorded-results"><!-- RESULTS -->
+<aside class="assessment-limit"><h3>The planned four-person test is incomplete</h3><p>In both trials from one of the four new people, the file labels three channels as orientation components 2, 3 and 4. It labels the remaining channel “BufferChannel”. Calculating a turn requires all four orientation components. The identity of the missing component could not be verified, so those two trials supply no verified turn to score.</p><p>Both model studies required all four people. Neither has a formal pass or fail result on its planned assessment.</p></aside><section class="result-set"><h3>Three new people with verified orientations</h3><p>These six trials describe the three people whose readings could be checked. All models kept their original weights. For each forecast, the error is the distance in degrees between prediction and measurement. We average the moving and standing errors equally for each person, then average the three people.</p><p>The specialist model scored <strong>0.361° from motion alone</strong>, 0.382° with both grids and 0.381° with the electrodes from another time. A simple forecast that repeats the turn observed over the preceding 100 ms scored 0.445°.</p><div class="table-scroll" role="region" aria-label="Mean absolute error in the three-person comparison. Lower is closer to the recorded turn." tabindex="0"><table><caption>Mean absolute error in the three-person comparison. Lower is closer to the recorded turn.</caption><thead><tr><th scope="col">Method</th><th scope="col">Moving (°)</th><th scope="col">Standing (°)</th><th scope="col">Balanced (°)</th></tr></thead><tbody><tr><th scope="row">Predict zero turn</th><td>1.774</td><td>0.332</td><td>1.053</td></tr><tr><th scope="row">Repeat the previous turn</th><td>0.735</td><td>0.155</td><td>0.445</td></tr><tr><th scope="row">Typical turn for this task</th><td>0.835</td><td>0.240</td><td>0.537</td></tr><tr><th scope="row">Linear motion model</th><td>0.612</td><td>0.142</td><td>0.377</td></tr><tr><th scope="row">Motion Transformer</th><td>0.596</td><td>0.127</td><td>0.361</td></tr><tr><th scope="row">Motion + upper-back Transformer</th><td>0.619</td><td>0.135</td><td>0.377</td></tr><tr><th scope="row">Motion + lower-back Transformer</th><td>0.611</td><td>0.133</td><td>0.372</td></tr><tr><th scope="row">Motion + both grids</th><td>0.626</td><td>0.137</td><td>0.382</td></tr><tr><th scope="row">Both grids from a different time</th><td>0.626</td><td>0.137</td><td>0.381</td></tr></tbody></table></div><p class="results-note">1,152 moving windows and 1,152 standing windows. Repeated windows give repeated measurements of the same three people.</p></section><section class="result-set"><h3>What if the model starts with an existing movement encoder?</h3><p>A second model reused weights from an existing movement Transformer and fitted a new readout. Its four time slices and its voltage summaries differ from the specialist model above. For its time-swap comparison, the electrodes came from the same person doing the same task in the other trial.</p><p>Across the same three people, its balanced error was 0.376° from motion, 0.385° with both grids, and 0.385° with swapped grids.</p><p>A version with one untrained set of encoder weights scored 0.382°. The full linear model scored 0.380°. Both comparisons used the same input features as the pretrained model.</p><p><a href="https://eliminatenoise.github.io/NeuroTranslation/shared-back-rotation/">Explore the shared-encoder model</a></p></section><details class="result-detail"><summary>Development results before the final test</summary><section class="result-set"><h3>Four people in development</h3><p>For each turn at testing, one development volunteer was left out and the model learned from the other three. Both trials for the same person stayed together. One development trial had already helped establish that the instrument could measure this target.</p><p>The model using both grids had a balanced error of 0.302°, compared with 0.271° for motion alone and 0.299° after swapping the electrodes. It beat both in 0 of four people. The electrical histories fell short of the preset test for added predictive information.</p><p>A simple forecast repeats the turn that the sensor just made over the preceding 100 milliseconds. Its balanced error was 0.315°.</p><div class="table-scroll" role="region" aria-label="Mean absolute error in degrees. Lower is closer to the recorded turn." tabindex="0"><table><caption>Mean absolute error in degrees. Lower is closer to the recorded turn.</caption><thead><tr><th scope="col">Method</th><th scope="col">Moving (°)</th><th scope="col">Standing (°)</th><th scope="col">Balanced (°)</th></tr></thead><tbody><tr><th scope="row">Predict zero turn</th><td>1.236</td><td>0.263</td><td>0.750</td></tr><tr><th scope="row">Repeat the previous turn</th><td>0.508</td><td>0.121</td><td>0.315</td></tr><tr><th scope="row">Typical turn for this task</th><td>0.508</td><td>0.212</td><td>0.360</td></tr><tr><th scope="row">Linear motion model</th><td>0.425</td><td>0.129</td><td>0.277</td></tr><tr><th scope="row">Motion Transformer</th><td>0.416</td><td>0.126</td><td>0.271</td></tr><tr><th scope="row">Motion + upper-back Transformer</th><td>0.451</td><td>0.147</td><td>0.299</td></tr><tr><th scope="row">Motion + lower-back Transformer</th><td>0.422</td><td>0.125</td><td>0.274</td></tr><tr><th scope="row">Motion + both grids</th><td>0.442</td><td>0.162</td><td>0.302</td></tr><tr><th scope="row">Both grids from a different time</th><td>0.440</td><td>0.158</td><td>0.299</td></tr></tbody></table></div><p class="results-note">There were 1,536 moving windows and 1,536 standing windows across eight trials. Each task and each person contributes equally to the balanced score.</p><details class="result-detail"><summary>Each person’s error and the test criteria</summary><p>Intervals stayed inside one standing or movement instruction. Incomplete windows at the edges of those instructions were outside the test. Among the complete candidate windows, 0 were excluded for an invalid history or target.</p><div class="table-scroll" role="region" aria-label="Mean absolute error averaged across the two tasks, in degrees." tabindex="0"><table><caption>Mean absolute error averaged across the two tasks, in degrees.</caption><thead><tr><th scope="col">Person</th><th scope="col">Motion</th><th scope="col">Both grids</th><th scope="col">Swapped</th></tr></thead><tbody><tr><th scope="row">Person 1</th><td>0.216</td><td>0.234</td><td>0.225</td></tr><tr><th scope="row">Person 2</th><td>0.217</td><td>0.236</td><td>0.237</td></tr><tr><th scope="row">Person 3</th><td>0.244</td><td>0.269</td><td>0.270</td></tr><tr><th scope="row">Person 4</th><td>0.408</td><td>0.471</td><td>0.465</td></tr></tbody></table></div><p>Rows are ordered by the both-grid error within this group. All three values in a row belong to the same person.</p><p>Those criteria required the full model to beat the best simple or motion-only method by at least 5%, the swapped-history control by at least 2%, and both the motion-only model and the swap in at least three people. Neither task could get worse on average against either of those two comparisons. The best comparison without electrodes was “Motion Transformer” (0.271°).</p><p>The average advantage of correctly timed voltages over swapped voltages was -0.003° (95% interval from resampling the four people, -0.007° to +0.001°). Positive values favour correct timing. The range describes these four people. The upper-back grid did not pass its separate test. The lower-back grid did not pass its separate test.</p></details></section></details>
+<!-- END RESULTS --></div>
+    </section>
+    <section id="method" class="reading ruled" aria-labelledby="method-title">
+      <h2 id="method-title">What the forecast measures</h2>
+      <div class="notes">
+        <div><h3>A turn without a direction</h3><p>A 5° turn to the left and a 5° turn to the right both score 5°. A sensor can turn then return to its starting orientation and score zero. Its readings describe the worn unit. Recovering a joint angle or a person’s position would require other measurements.</p></div>
+        <div><h3>Why swap the electrodes?</h3><p>Skin electrodes pick up a mixture of electrical sources. Muscles, the heartbeat and movement of the contacts can all contribute. For the recorded comparison we keep the person’s task and motion history fixed, then pair them with both grids from another time in the same trial, while the same person performed the same task. A forecast that survives the swap may need little information about the timing of those voltages.</p></div>
+        <div><h3>How the model reads time</h3><p>The Transformer splits the past 100 milliseconds into ten slices. In each slice it reads the sensor’s turn, its change since the start, the known task and the electrical summaries selected for that model. Two sets of learned attention weights let it compare earlier and later slices. It uses the last slice to estimate a correction to the turn already observed. Each choice of electrode grids has its own fitted model. Setting a grid’s signal size to zero gives that model a flat signal.</p></div>
+      </div>
+    </section>
+    <section class="reading ruled" aria-labelledby="other-experiment">
+      <h2 id="other-experiment">A different test of surface voltage</h2>
+      <p>In an earlier study, people received a brief wrist stimulus. Adding an armpit electrode reading to a neck-voltage forecast did not pass the timing test on six new people. The walking study uses different participants, a different task and a different target. <a href="https://eliminatenoise.github.io/NeuroTranslation/cervical-forecast/">See the neck-voltage results</a>.</p>
+    </section>
+    <section id="sources" class="reading ruled" aria-labelledby="sources-title">
+      <h2 id="sources-title">Recordings and model</h2>
+      <p>Desirée Irene Gracia Laso, Eduardo Iáñez, Mario Ortiz and José M. Azorín released the recordings. This analysis uses trials 02 and 03 from Experiment 2. The forecasts, errors and invented inputs shown here are part of NeuroTranslation’s analysis.</p>
+      <ul class="source-links">
+        <li><a href="results.json" download>Recorded scores as JSON</a></li>
+        <li><a href="https://doi.org/10.5281/zenodo.19065545">Original recordings, version 2</a></li>
+        <li><a href="https://doi.org/10.1038/s41597-026-07592-7">Study of the recordings</a></li>
+        <li><a href="https://creativecommons.org/licenses/by/4.0/">Dataset licence · CC BY 4.0</a></li>
+        <li><a href="https://eliminatenoise.github.io/NeuroTranslation/papers/back-rotation/">NeuroTranslation research paper</a></li>
+        <li><a href="https://eliminatenoise.github.io/Interoceptomics/back-rotation/">Recording atlas</a></li>
+        <li><a href="https://eliminatenoise.github.io/NeuroTranslation/shared-back-rotation/">Shared-encoder comparison</a></li>
+        <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/back-rotation">Training and scoring code</a></li>
+        <li><a href="../back-rotation-offline.zip" id="offline-download" download>Download this reader for offline use</a></li>
+      </ul>
+    </section>
+  </main>
+  <footer><div class="wrap"><span>NeuroTranslation</span><a href="#main">Back to top ↑</a></div></footer>
+</body>
+</html>

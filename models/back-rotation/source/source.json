@@ -1,0 +1,1380 @@
+{
+  "dataset": "An Electrospinography Database of Spinal Cord Activity During Gait-Related Tasks and Motor Imagery Exercises",
+  "creators": [
+    "Gracia Laso, Desirée Irene",
+    "Iáñez, Eduardo",
+    "Ortiz, Mario",
+    "Azorin, Jose M."
+  ],
+  "doi": "10.5281/zenodo.19065545",
+  "version": "v2",
+  "catalog_url": "https://zenodo.org/records/19065545",
+  "publication_date": "2026",
+  "paper_doi": "10.1038/s41597-026-07592-7",
+  "license_code": "cc-by-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "provenance": "Archived native MATLAB members. Source records are downloaded directly from the authors’ dataset. Machine-readable summaries report clocks, units, channel layouts and source quality flags.",
+  "trials": [
+    2,
+    3
+  ],
+  "integrity_manifest": {
+    "url": "https://zenodo.org/api/records/19065545/files/trial_integrity_manifest.csv/content",
+    "md5": "0df75829b3f53e78b0c9bb6b495bdf51",
+    "sha256": "58480537843f63884817d5ff6a3cb3a5e29a9b88e5850a037cd632affca83de6",
+    "bytes": 376,
+    "checked_selection": "No development trial 02 or 03 in the four selected Experiment 2 sessions is listed as missing or truncated."
+  },
+  "measures": {
+    "surface_electricity": "Two 32-electrode surface grids, 8 by 4, 10 mm spacing. Right scapula reference. The authors describe placement over C4 and L2. Raw values are in microvolts. Surface voltages can include contributions from muscle, cardiac activity and movement.",
+    "orientation": "Back-mounted BNO055 fusion output. Nominal 100 Hz internal updates, repeated on the shared 2000 Hz storage grid. Four components stored in arbitrary units. Relative unsigned device rotation can be computed from normalized quaternion endpoints in degrees.",
+    "processing": "The authors provide quality masks and preprocessed arrays. Raw past data are the input to a prospective analysis. Masks and preprocessed arrays may use information after the prediction cutoff.",
+    "scope": "Placement gives the anatomical region of a surface measurement. The shared storage clock leaves device lag uncalibrated. Neural generators, joint angles, position, walking speed and foot contacts remain undetermined."
+  },
+  "cohort": "development",
+  "archives": {
+    "S01": {
+      "name": "Experiment2_S01_20240523.zip",
+      "size": 1839638211,
+      "md5": "md5:b12b528e14fa347177c93df3052a54b4",
+      "url": "https://zenodo.org/api/records/19065545/files/Experiment2_S01_20240523.zip/content"
+    },
+    "S02": {
+      "name": "Experiment2_S02_20240611.zip",
+      "size": 1858262205,
+      "md5": "md5:e91594d1fb745f252c7fd40fc46f0224",
+      "url": "https://zenodo.org/api/records/19065545/files/Experiment2_S02_20240611.zip/content"
+    },
+    "S03": {
+      "name": "Experiment2_S03_20240507.zip",
+      "size": 1953555509,
+      "md5": "md5:5c289b2a5469d551e490d03947bcb016",
+      "url": "https://zenodo.org/api/records/19065545/files/Experiment2_S03_20240507.zip/content"
+    },
+    "S05": {
+      "name": "Experiment2_S05_20240507.zip",
+      "size": 1773854410,
+      "md5": "md5:239da8d98e363454bf1a1fe64f95754d",
+      "url": "https://zenodo.org/api/records/19065545/files/Experiment2_S05_20240507.zip/content"
+    }
+  },
+  "catalog_api_url": "https://zenodo.org/api/records/19065545",
+  "members": {
+    "S01_20240523_trial_02.mat": {
+      "central_directory_range": [
+        1839635621,
+        1839638188
+      ],
+      "central_directory_sha256": "0762d8a7103671f877e8f611df37c093ee8efb83b30927ec1821fd231da9bde6",
+      "eocd_range": [
+        1839638189,
+        1839638210
+      ],
+      "eocd_sha256": "e21e6fc56db912593e479495885f6bbb98d43040c36527e098d4655c3f01da92",
+      "local_header_range": [
+        152877174,
+        152877228
+      ],
+      "local_header_sha256": "053419b7226364c3a1ece69bf3d99a20e9ec6fccd44b4c4e1a3cb053ac41813d",
+      "compressed_range": [
+        152877229,
+        232709500
+      ],
+      "compressed_bytes": 79832272,
+      "compressed_sha256": "5b662e786f480d071bbc0bc812504522442ab3fc66f28413adc41226bc93f81c",
+      "member_bytes": 80020933,
+      "member_sha256": "5fb8715aa7adb6ab10cb2cc8c0361212bfdd994b863afcba6084e9546e90c2a7",
+      "member_crc32": "2445125a",
+      "payload_ranges": [
+        {
+          "inclusive_range": [
+            152877229,
+            157071532
+          ],
+          "sha256": "283aacc3c07600ea51d0e0b74d3f180e6097c0bb2efbbf7a45a175a0b9a3427a"
+        },
+        {
+          "inclusive_range": [
+            157071533,
+            161265836
+          ],
+          "sha256": "28c21502107e039a5ef2acfd07b33b35d1b5884cfcf9d19e9c890e685ec3b97b"
+        },
+        {
+          "inclusive_range": [
+            161265837,
+            165460140
+          ],
+          "sha256": "57e7f43228c7c075f504309b4e7241818ae5b97a263f3d9fb25c33bed9a063fa"
+        },
+        {
+          "inclusive_range": [
+            165460141,
+            169654444
+          ],
+          "sha256": "96ce6ac0703bc9ea7ce9534d19b28b1c02dc98a0eb811de69490f85009baf9f0"
+        },
+        {
+          "inclusive_range": [
+            169654445,
+            173848748
+          ],
+          "sha256": "b29b464a5b407d05dbe541082cb8bdb72da369b05b63eb4b84179ea1491b1845"
+        },
+        {
+          "inclusive_range": [
+            173848749,
+            178043052
+          ],
+          "sha256": "8aa5e63b2d9a04b9b8182f5d304b51cb73eba8431592ff66fad0af67cb895d33"
+        },
+        {
+          "inclusive_range": [
+            178043053,
+            182237356
+          ],
+          "sha256": "817d63aa5d33309b3c28085229ba1f9aabf7235202e7edfb202ed11d953268c0"
+        },
+        {
+          "inclusive_range": [
+            182237357,
+            186431660
+          ],
+          "sha256": "e39d880b6ef38c503580054f02c22d34237e2fb0c148b1a858310541266dfbd0"
+        },
+        {
+          "inclusive_range": [
+            186431661,
+            190625964
+          ],
+          "sha256": "4f8fd36c7cd997aa6f905bd134f45741a434d38daf2d06d4af9fdcf0cda25fab"
+        },
+        {
+          "inclusive_range": [
+            190625965,
+            194820268
+          ],
+          "sha256": "7044b3bd3b49e3f52916012bd58e24c40ad0042180dab8ad3a05f92ca648f801"
+        },
+        {
+          "inclusive_range": [
+            194820269,
+            199014572
+          ],
+          "sha256": "b727ff31a6fba71bc77adf5dd4ba6c62731c63612972078d9714636730110d55"
+        },
+        {
+          "inclusive_range": [
+            199014573,
+            203208876
+          ],
+          "sha256": "bd3a15350072e44f3fa7a55e10cbddfb505a8d646d1ab449de0dcdf4260d83ec"
+        },
+        {
+          "inclusive_range": [
+            203208877,
+            207403180
+          ],
+          "sha256": "eb0a97cf232195aca5d3be98e912a7146b82f9ccb1edfb92c95ed7540ae34670"
+        },
+        {
+          "inclusive_range": [
+            207403181,
+            211597484
+          ],
+          "sha256": "dd5fd47361816b184bfd583ba115c87f01d43f9dda633cba3a5ffd92f7db7db4"
+        },
+        {
+          "inclusive_range": [
+            211597485,
+            215791788
+          ],
+          "sha256": "1c72d66a6487ff03ce31bfd7a14e4ed1bd94c999613641319423bfbf11bd2031"
+        },
+        {
+          "inclusive_range": [
+            215791789,
+            219986092
+          ],
+          "sha256": "dee25e3dac2b916514cf7fb226366b48568417183040c4aede49e85032740f30"
+        },
+        {
+          "inclusive_range": [
+            219986093,
+            224180396
+          ],
+          "sha256": "201c648ad8278eac87a650695f7543ea31d13427ddc92607f6844ed538570d60"
+        },
+        {
+          "inclusive_range": [
+            224180397,
+            228374700
+          ],
+          "sha256": "1e22899619934dc3fa705b2df84c8918056a9b2894a398af31dcc2d05bb0d3b6"
+        },
+        {
+          "inclusive_range": [
+            228374701,
+            232569004
+          ],
+          "sha256": "e62b3e90752cabdae051d56185de2731156214b36564c31f9b6664e0debdc847"
+        },
+        {
+          "inclusive_range": [
+            232569005,
+            232709500
+          ],
+          "sha256": "4be45f5452281bc8aa00be0e8a1a5cc91366b5fd4f0f550b7d77125e0b3dd4bf"
+        }
+      ]
+    },
+    "S01_20240523_trial_03.mat": {
+      "central_directory_range": [
+        1839635621,
+        1839638188
+      ],
+      "central_directory_sha256": "0762d8a7103671f877e8f611df37c093ee8efb83b30927ec1821fd231da9bde6",
+      "eocd_range": [
+        1839638189,
+        1839638210
+      ],
+      "eocd_sha256": "e21e6fc56db912593e479495885f6bbb98d43040c36527e098d4655c3f01da92",
+      "local_header_range": [
+        232709501,
+        232709555
+      ],
+      "local_header_sha256": "dcd885e0e08be1d80cb0a0bdb945b489bd278387f8e33702778aa36af7484d05",
+      "compressed_range": [
+        232709556,
+        311766608
+      ],
+      "compressed_bytes": 79057053,
+      "compressed_sha256": "a6c72b4195a0af1a2ada026ab3643819e15bc99f1717e1d6151cedf07e68f379",
+      "member_bytes": 79248858,
+      "member_sha256": "7946fbd8c77b1151564f6339b36d6f2374fff4249ceb3960461e37fc7769736d",
+      "member_crc32": "7fe0a65a",
+      "payload_ranges": [
+        {
+          "inclusive_range": [
+            232709556,
+            236903859
+          ],
+          "sha256": "d0348416376461cb1fb67d61ea7e06363a817e1b9c5475adccb837a63f1e2b27"
+        },
+        {
+          "inclusive_range": [
+            236903860,
+            241098163
+          ],
+          "sha256": "01e444c4560a05f1f8d6857ac3c5a5a6599f8d68e0e6e466c5bba11361889044"
+        },
+        {
+          "inclusive_range": [
+            241098164,
+            245292467
+          ],
+          "sha256": "ed1a824e6f2dcbd525f970acf2283fd00b117c48f311a7615ea7473dd5f99009"
+        },
+        {
+          "inclusive_range": [
+            245292468,
+            249486771
+          ],
+          "sha256": "f77d73bdeefd906d50504f4b3e8bfc37a30b5598eea5ad0c7d6179a29c2395ed"
+        },
+        {
+          "inclusive_range": [
+            249486772,
+            253681075
+          ],
+          "sha256": "7281322a1b19151e2b1c4549b5779985e7e2656cc4398f221d0079986b5f6fdf"
+        },
+        {
+          "inclusive_range": [
+            253681076,
+            257875379
+          ],
+          "sha256": "f1cb9ff8c808c5ae7dbb6a2932d7457f7c4889eaa076649a9d69a00e9b5429e3"
+        },
+        {
+          "inclusive_range": [
+            257875380,
+            262069683
+          ],
+          "sha256": "8273888676f77050e2a16f7fdb76d35d9dbc1594985b95b492783a729bf9b5a8"
+        },
+        {
+          "inclusive_range": [
+            262069684,
+            266263987
+          ],
+          "sha256": "5652a4358b7d9e6f7ca352ee6dfa3335caf34857bb7e310e6c1ac1336a20f45d"
+        },
+        {
+          "inclusive_range": [
+            266263988,
+            270458291
+          ],
+          "sha256": "6ff4664767181acbc3a33b7b4c11add4334819b91b67883418f7c7aceacaa4ba"
+        },
+        {
+          "inclusive_range": [
+            270458292,
+            274652595
+          ],
+          "sha256": "24d7de15d310742bba0e2738e8fb9db71a6ea00ab7542528bc8cac39c679e314"
+        },
+        {
+          "inclusive_range": [
+            274652596,
+            278846899
+          ],
+          "sha256": "086f4d35d1a0756bc6abc557b09ed8f35fac33e62ad9618711cef7415974b9a8"
+        },
+        {
+          "inclusive_range": [
+            278846900,
+            283041203
+          ],
+          "sha256": "17a264c6d3b6b213ba2248118887e0a97e15619e71876fd077ec62e624e9374a"
+        },
+        {
+          "inclusive_range": [
+            283041204,
+            287235507
+          ],
+          "sha256": "0c80b2daacff7146548a09b9dd06cb188a47b3d4cfc8ccaf7981a8df0cdc7e4d"
+        },
+        {
+          "inclusive_range": [
+            287235508,
+            291429811
+          ],
+          "sha256": "f7b9b88fe755100a36ef2750ac4d0544147c22d06b22d4acdcf2d729b32bf58c"
+        },
+        {
+          "inclusive_range": [
+            291429812,
+            295624115
+          ],
+          "sha256": "57a318f1038f44e53d135caa73c1d96f665838f0762c5b1773c73befaf93962a"
+        },
+        {
+          "inclusive_range": [
+            295624116,
+            299818419
+          ],
+          "sha256": "fd255673c786397a16ad3ec146833ed757042dbe4fe3c0836793b06035d5d26b"
+        },
+        {
+          "inclusive_range": [
+            299818420,
+            304012723
+          ],
+          "sha256": "308c2aa464d2013a3155cfba20a7b81706cfdd3a1137a2364a05a304481946cb"
+        },
+        {
+          "inclusive_range": [
+            304012724,
+            308207027
+          ],
+          "sha256": "18b0e6d97c56952182bed2ca027b0702f1100bee33b9db322a1befa7fc8d88ee"
+        },
+        {
+          "inclusive_range": [
+            308207028,
+            311766608
+          ],
+          "sha256": "c4be3a93dc230338c2c822746356877e0768ded39fd4a7d0f18947ba2df5a405"
+        }
+      ]
+    },
+    "S02_20240611_trial_02.mat": {
+      "central_directory_range": [
+        1858259615,
+        1858262182
+      ],
+      "central_directory_sha256": "acd358b2ca6790b19281f2f5743ef899202c23a3a9b75f6dd014ffbc2fa7d750",
+      "eocd_range": [
+        1858262183,
+        1858262204
+      ],
+      "eocd_sha256": "7c6ae67cc421e5e3e2cd78d9acc88fc9dfc908a63fe263f443ddd045574c7ea3",
+      "local_header_range": [
+        171198107,
+        171198161
+      ],
+      "local_header_sha256": "55299e6b6d5f0951947b5c2b2db8889fdec60720ecd977ed9442be2a1b314773",
+      "compressed_range": [
+        171198162,
+        251503736
+      ],
+      "compressed_bytes": 80305575,
+      "compressed_sha256": "ccd1d3b4778df2fe839ee86ddbdf2afbe05ea85407dab44b40bb51a3da2eb955",
+      "member_bytes": 80502158,
+      "member_sha256": "d3944deb9bc0f9a844e74ac7233c05452be0829762847408f8553a92f4cecc96",
+      "member_crc32": "28581388",
+      "payload_ranges": [
+        {
+          "inclusive_range": [
+            171198162,
+            175392465
+          ],
+          "sha256": "180b37f9f48ea4c2d11ae76ceb46a2b129ccc002a8c1b207a92674a65dcc29c2"
+        },
+        {
+          "inclusive_range": [
+            175392466,
+            179586769
+          ],
+          "sha256": "ffb7f411540049fe0d5d9c11109cbeef460bbf3ed8e4660c0f22395997f8f207"
+        },
+        {
+          "inclusive_range": [
+            179586770,
+            183781073
+          ],
+          "sha256": "fe42fe900fad0b1ee74d9c1cfa8c24f808c3ff74f4f315791889a10f7b9c2b44"
+        },
+        {
+          "inclusive_range": [
+            183781074,
+            187975377
+          ],
+          "sha256": "1446f7dff25c93a9d9e83c0fa2d98b5cc9f9658cf2ccc2854296eb9174b2a770"
+        },
+        {
+          "inclusive_range": [
+            187975378,
+            192169681
+          ],
+          "sha256": "dc525138aaa0e6263f2596b3ecc81ba2c56cc48d129e3b81f7855fac04a5e9fc"
+        },
+        {
+          "inclusive_range": [
+            192169682,
+            196363985
+          ],
+          "sha256": "998c4d8dabd7dba747fab18e01bbd0c2ce68bf162b282211829a7383bf811b0c"
+        },
+        {
+          "inclusive_range": [
+            196363986,
+            200558289
+          ],
+          "sha256": "2423a6bdde6185e03e5cdd3854f5706671077f58f1bc76f5028e92e20af22cc3"
+        },
+        {
+          "inclusive_range": [
+            200558290,
+            204752593
+          ],
+          "sha256": "6ce299bced1294ee67d4de797ff82b9ba1a079596daa362f40ed87865174b079"
+        },
+        {
+          "inclusive_range": [
+            204752594,
+            208946897
+          ],
+          "sha256": "02b6a599496b0f7c9a049f01fe9c44d07c1eea366287eb60036f8fc3f5bee933"
+        },
+        {
+          "inclusive_range": [
+            208946898,
+            213141201
+          ],
+          "sha256": "3269377f8bc26a12ca785053192d7478dc0d23de46af0c73a65e67e0b9b34742"
+        },
+        {
+          "inclusive_range": [
+            213141202,
+            217335505
+          ],
+          "sha256": "a7fbe5f1bd37d1bcb3951573b172d2ddcdfb65ecc3c8b3cfece72b2335c9bb71"
+        },
+        {
+          "inclusive_range": [
+            217335506,
+            221529809
+          ],
+          "sha256": "4ea9d1cd9a716948c980d2a54e2f84ea9620d5756d0df26dc99fbd6e6723651e"
+        },
+        {
+          "inclusive_range": [
+            221529810,
+            225724113
+          ],
+          "sha256": "33e7183714bc7796d75831bebc137e8dd665c652adbba6c508d9b9e9ae1d42fc"
+        },
+        {
+          "inclusive_range": [
+            225724114,
+            229918417
+          ],
+          "sha256": "8e8a3fc830f02535e9c2eceeb823350497a2a308eafa8f5949b55aac6b8f60e5"
+        },
+        {
+          "inclusive_range": [
+            229918418,
+            234112721
+          ],
+          "sha256": "242b680bb4452375a06a409b9160312e01f37480d8dd6a72f7a9022882326d31"
+        },
+        {
+          "inclusive_range": [
+            234112722,
+            238307025
+          ],
+          "sha256": "b1683672e86d7b088afd920cd6abfafd25590cf661b8aee9735232a6230fc8f6"
+        },
+        {
+          "inclusive_range": [
+            238307026,
+            242501329
+          ],
+          "sha256": "e05f6c43bd3c3804f5fb5dc96a9b8351d0ef71d89e992301f3a6ba01fbc324a3"
+        },
+        {
+          "inclusive_range": [
+            242501330,
+            246695633
+          ],
+          "sha256": "4ee386df0e642f439ecac5b6d687ac5d86dee525069b1a47e15781ae7b4c2499"
+        },
+        {
+          "inclusive_range": [
+            246695634,
+            250889937
+          ],
+          "sha256": "f2fa660ba2afec2bac6f6d40f2b611913fa919a00cbf13be0505ba8e3fa52f96"
+        },
+        {
+          "inclusive_range": [
+            250889938,
+            251503736
+          ],
+          "sha256": "55f92ccc71abb79677976056a4332b228d7b7dece56619ac7726bbdaf428413a"
+        }
+      ]
+    },
+    "S02_20240611_trial_03.mat": {
+      "central_directory_range": [
+        1858259615,
+        1858262182
+      ],
+      "central_directory_sha256": "acd358b2ca6790b19281f2f5743ef899202c23a3a9b75f6dd014ffbc2fa7d750",
+      "eocd_range": [
+        1858262183,
+        1858262204
+      ],
+      "eocd_sha256": "7c6ae67cc421e5e3e2cd78d9acc88fc9dfc908a63fe263f443ddd045574c7ea3",
+      "local_header_range": [
+        251503737,
+        251503791
+      ],
+      "local_header_sha256": "a5088e3ebef36767f7fb24543948cbc0e577e582044b626c1e9cd1c3093108c1",
+      "compressed_range": [
+        251503792,
+        331110054
+      ],
+      "compressed_bytes": 79606263,
+      "compressed_sha256": "e264514544de30870faa1ef8098f3ac2573627b1b0f791865e7bc32667d08643",
+      "member_bytes": 79805990,
+      "member_sha256": "ecad82eda47d7aa309b72ed586ce5c69ce419ff7ed9c2f712821e266a23eddb4",
+      "member_crc32": "3b594fbf",
+      "payload_ranges": [
+        {
+          "inclusive_range": [
+            251503792,
+            255698095
+          ],
+          "sha256": "6090ed8f6eab33ea510bf251f0c1376b3fd664d53ecaec4b4ae21aaa09e792c9"
+        },
+        {
+          "inclusive_range": [
+            255698096,
+            259892399
+          ],
+          "sha256": "73739a9ef22386220597e9446995e099f4793672ced5fa24495acf78673c6c28"
+        },
+        {
+          "inclusive_range": [
+            259892400,
+            264086703
+          ],
+          "sha256": "439000b8bf31d6c4bdc2371ac171c30996bba24911b2edd1c0c636a6bc091ae5"
+        },
+        {
+          "inclusive_range": [
+            264086704,
+            268281007
+          ],
+          "sha256": "dc6e171c8df90b80f138d199bdcb1cd378717fba38eaaacb8a23bd37ca66d929"
+        },
+        {
+          "inclusive_range": [
+            268281008,
+            272475311
+          ],
+          "sha256": "c31af74502f86ebb2fa5abd20483ed3f4bc03ab61f66355c3e33856e5022c70a"
+        },
+        {
+          "inclusive_range": [
+            272475312,
+            276669615
+          ],
+          "sha256": "c559dbb99e09f6273ce040395e1a789fc0e3370abb7266a808b4a48c08c1dc5f"
+        },
+        {
+          "inclusive_range": [
+            276669616,
+            280863919
+          ],
+          "sha256": "83d9f786f4f35b60a30b897318437940a7c4c3c63e6b011b6ed5a3206649ae95"
+        },
+        {
+          "inclusive_range": [
+            280863920,
+            285058223
+          ],
+          "sha256": "00a161fdf9c4f859c001c6552f6e382af231fe6f5c79f5e32e3709e5de0a8b62"
+        },
+        {
+          "inclusive_range": [
+            285058224,
+            289252527
+          ],
+          "sha256": "a3e5b6fd5224e5bf130088a66f34ac4fd0a94f9c753f30b4b01310d4e9287292"
+        },
+        {
+          "inclusive_range": [
+            289252528,
+            293446831
+          ],
+          "sha256": "501104a90dd66cc2a0157e8b77f81449ef6004c7953d6591e0a289881b927770"
+        },
+        {
+          "inclusive_range": [
+            293446832,
+            297641135
+          ],
+          "sha256": "9608c10a8c69a7dbb613ff236b418a9201accf9e28cd69a91a898eaa2cd62fcb"
+        },
+        {
+          "inclusive_range": [
+            297641136,
+            301835439
+          ],
+          "sha256": "b45aca223bc9190a5ab6397b42bdc85b897f06cbd72ebe7e9dc23472d2d4e9fb"
+        },
+        {
+          "inclusive_range": [
+            301835440,
+            306029743
+          ],
+          "sha256": "705d96094f98800f2b6178b82a3a9535147ca3300666f716499be4bd08bb5a82"
+        },
+        {
+          "inclusive_range": [
+            306029744,
+            310224047
+          ],
+          "sha256": "a63f41046fd74137d3400e7066a61376f2eaeef54c91bf7cb0c84d2ca75a592a"
+        },
+        {
+          "inclusive_range": [
+            310224048,
+            314418351
+          ],
+          "sha256": "97e910cdc9cd3b34bd4a3ae37a32b058b5fdb90dd6eebbcde26008e3ef39663d"
+        },
+        {
+          "inclusive_range": [
+            314418352,
+            318612655
+          ],
+          "sha256": "1e8d7ab99c7a110110e078580bf958ab5ac2c924e9ff4eee9cd12b856fabf0e9"
+        },
+        {
+          "inclusive_range": [
+            318612656,
+            322806959
+          ],
+          "sha256": "2b99afe1e19892c09621f456be1d195425e737a0d5dec545ec9d6659c6705b65"
+        },
+        {
+          "inclusive_range": [
+            322806960,
+            327001263
+          ],
+          "sha256": "2f7325f1ed271b985f713b6ccaa1ffc1fb37be07b3c0bbefb90f7e247b4d9490"
+        },
+        {
+          "inclusive_range": [
+            327001264,
+            331110054
+          ],
+          "sha256": "f493521afcb16af7f999aca9da53c7e30a90587891c0279dbdf2629a6917f736"
+        }
+      ]
+    },
+    "S03_20240507_trial_02.mat": {
+      "central_directory_range": [
+        1953552919,
+        1953555486
+      ],
+      "central_directory_sha256": "31090c9e2482542c4c95a33c5d3acd5e669c2407805dad50bacc9403c318a1fc",
+      "eocd_range": [
+        1953555487,
+        1953555508
+      ],
+      "eocd_sha256": "67c1292510acdd83b249dd231ee361683188a67e2bf6c5775c7479c759e507e9",
+      "local_header_range": [
+        174037280,
+        174037334
+      ],
+      "local_header_sha256": "57d584a98790d307133fcf9a9c6cccee187b9969ed5e9b43369d49dd6d9bedaa",
+      "compressed_range": [
+        174037335,
+        256459355
+      ],
+      "compressed_bytes": 82422021,
+      "compressed_sha256": "3f3ed41529de7faafb36bb4db0f932fd74a51f3373da2e314c23ef1b3ce69cb9",
+      "member_bytes": 82615053,
+      "member_sha256": "7ccb1bc9ac8abd72dac98af4578f423410c3d5ae4f9ed2f20b1ac8bba055a1ec",
+      "member_crc32": "4b6c85cc",
+      "payload_ranges": [
+        {
+          "inclusive_range": [
+            174037335,
+            178231638
+          ],
+          "sha256": "2cdcd312719c894fde03560ee2a5df6fd9492f3f93073841ea93114b5e679cc6"
+        },
+        {
+          "inclusive_range": [
+            178231639,
+            182425942
+          ],
+          "sha256": "2c2966d1c62e467813b72bd98070bcd2913de3a7ce4cd79f248b91b6527223e8"
+        },
+        {
+          "inclusive_range": [
+            182425943,
+            186620246
+          ],
+          "sha256": "7956fb51608561a139548922ae896463ac35f13ab4b602f1204f794f328ed499"
+        },
+        {
+          "inclusive_range": [
+            186620247,
+            190814550
+          ],
+          "sha256": "1f2da5382da45c933543dbc17cf539a8bcb672bcd2bdd75ef8a075cb7fd12a35"
+        },
+        {
+          "inclusive_range": [
+            190814551,
+            195008854
+          ],
+          "sha256": "e76fd83f896cb000d1c46f3da34eec8bd9a0319532fe84544d074c1c83b28de5"
+        },
+        {
+          "inclusive_range": [
+            195008855,
+            199203158
+          ],
+          "sha256": "1a33cfd4fd179c9dbd24215856cd53844363a5391a0556cbb3f845374a7f5914"
+        },
+        {
+          "inclusive_range": [
+            199203159,
+            203397462
+          ],
+          "sha256": "d967b438aaf183ee85c479f073a1e407144021bc1c8a18305615ebfdafb048a2"
+        },
+        {
+          "inclusive_range": [
+            203397463,
+            207591766
+          ],
+          "sha256": "a21864f12c3b52a7ba06072e6b86b13df3bbca2ccec24dc939d5ad63edf5fe25"
+        },
+        {
+          "inclusive_range": [
+            207591767,
+            211786070
+          ],
+          "sha256": "40fbd2935ef3b7e17017ffd099cd5c1199d82068533de45b72c5d67913c0f3fb"
+        },
+        {
+          "inclusive_range": [
+            211786071,
+            215980374
+          ],
+          "sha256": "3d0edcbd8ae85804393a5e15f290edf4bfd09cfe3e3cd900bcbd5bc1688b8b7a"
+        },
+        {
+          "inclusive_range": [
+            215980375,
+            220174678
+          ],
+          "sha256": "a5b8eb8222aefc34ab19be1ffadd6b52e024bb620eaa9fa21c1d62da08028182"
+        },
+        {
+          "inclusive_range": [
+            220174679,
+            224368982
+          ],
+          "sha256": "71423274ec2648b12493c6aad4447950efb76d1ec6071e4180da0b6420c60113"
+        },
+        {
+          "inclusive_range": [
+            224368983,
+            228563286
+          ],
+          "sha256": "c442b764f6a5de79a46d710b662122a1d7799b20a066bfc8cdd7c7f8765fa623"
+        },
+        {
+          "inclusive_range": [
+            228563287,
+            232757590
+          ],
+          "sha256": "90b54b691a899ef52e641173196dc52c4ea9ba3388bdb632953e90494730b019"
+        },
+        {
+          "inclusive_range": [
+            232757591,
+            236951894
+          ],
+          "sha256": "186d17d4ba318042338ee334b86d76042d6698d578a968a14f4961775c727abe"
+        },
+        {
+          "inclusive_range": [
+            236951895,
+            241146198
+          ],
+          "sha256": "59694bca906f7145bd7397e98e424e702696975794b2edb529a0f9b6ebc964bd"
+        },
+        {
+          "inclusive_range": [
+            241146199,
+            245340502
+          ],
+          "sha256": "109f44ead3e8a9f5734c8df44a32476bcadb6ac8068b854da108d0a8981fbdb1"
+        },
+        {
+          "inclusive_range": [
+            245340503,
+            249534806
+          ],
+          "sha256": "6a189410f962fdc4517e4b868d9005747e9f265873ac4a514a5c57f50f135ead"
+        },
+        {
+          "inclusive_range": [
+            249534807,
+            253729110
+          ],
+          "sha256": "f0c1be064c80293bcac5730c50deb46d77c37b596523d293ab60a528d4d547be"
+        },
+        {
+          "inclusive_range": [
+            253729111,
+            256459355
+          ],
+          "sha256": "fef89b162234e64233dd871849c94f3ea2159a6d46e9c56cbe830f894b5ff4dc"
+        }
+      ]
+    },
+    "S03_20240507_trial_03.mat": {
+      "central_directory_range": [
+        1953552919,
+        1953555486
+      ],
+      "central_directory_sha256": "31090c9e2482542c4c95a33c5d3acd5e669c2407805dad50bacc9403c318a1fc",
+      "eocd_range": [
+        1953555487,
+        1953555508
+      ],
+      "eocd_sha256": "67c1292510acdd83b249dd231ee361683188a67e2bf6c5775c7479c759e507e9",
+      "local_header_range": [
+        256459356,
+        256459410
+      ],
+      "local_header_sha256": "e2f49e8e0b079d4deb5e918c9257650b07897d644aad2950fd8673b605b3dad0",
+      "compressed_range": [
+        256459411,
+        338629297
+      ],
+      "compressed_bytes": 82169887,
+      "compressed_sha256": "666e5b452c28376c0e4d92a1443ae6bf9f7ce9b5bf7c6899d7afc03bea12231f",
+      "member_bytes": 82363461,
+      "member_sha256": "4f1211c12632fee24a4609abc25372fd2f29f64cc47dde5edd218f94103cc8f7",
+      "member_crc32": "b2793a71",
+      "payload_ranges": [
+        {
+          "inclusive_range": [
+            256459411,
+            260653714
+          ],
+          "sha256": "60b0f7598fc4dab2a17e6c4f82ba2c0704b58654bc7ab98d1ccf515af4a3f603"
+        },
+        {
+          "inclusive_range": [
+            260653715,
+            264848018
+          ],
+          "sha256": "b02de133bfc456ab58e7e6d5240bfdc7142972e8b9b0242b0b26e2ae6068c748"
+        },
+        {
+          "inclusive_range": [
+            264848019,
+            269042322
+          ],
+          "sha256": "8950ac06544b0eb4ee9688da2394355829dad1ce0e573a64c29b019cd537ee5a"
+        },
+        {
+          "inclusive_range": [
+            269042323,
+            273236626
+          ],
+          "sha256": "f43bed3c0a477d1811b10e2a58679e5810aaf01bf71eca85339475bc580ec607"
+        },
+        {
+          "inclusive_range": [
+            273236627,
+            277430930
+          ],
+          "sha256": "90c8ecc902d7f336a7ae332aaaba6d697d19aa8c07aa36d333c87a021fb3bcfb"
+        },
+        {
+          "inclusive_range": [
+            277430931,
+            281625234
+          ],
+          "sha256": "75a3e0c97e25f21723733288c4b21826bd36b469bc0d2480e1e2103045679309"
+        },
+        {
+          "inclusive_range": [
+            281625235,
+            285819538
+          ],
+          "sha256": "341e2c9446c02f336239fedff1716d88b84ad3e3e6ac353bda3f97bf61986614"
+        },
+        {
+          "inclusive_range": [
+            285819539,
+            290013842
+          ],
+          "sha256": "ad791a5b43dcb0edf1367e57b0af380b5b59efb9f1a6c0a6a8fb490c7a188b66"
+        },
+        {
+          "inclusive_range": [
+            290013843,
+            294208146
+          ],
+          "sha256": "97e187a5386d4fef63c00d3c09f8a81678d4c675c0c439c407e72baf389aeaf8"
+        },
+        {
+          "inclusive_range": [
+            294208147,
+            298402450
+          ],
+          "sha256": "9be1b15b5cc981042db75a0e7f9b04507029448b1162d2847baf6d18fe17b1cd"
+        },
+        {
+          "inclusive_range": [
+            298402451,
+            302596754
+          ],
+          "sha256": "4fdd7a615deef2e06245508be3f12bdcedec33c19a0d13c281a3f2c1843eda2e"
+        },
+        {
+          "inclusive_range": [
+            302596755,
+            306791058
+          ],
+          "sha256": "11c847688a369e24efe0ffaa5f7904ceae7a832feb7165578082ed79322f7c66"
+        },
+        {
+          "inclusive_range": [
+            306791059,
+            310985362
+          ],
+          "sha256": "259e8727ce62c7db1745a950b9d88d993acf512c833f9c1481365ead49f333f4"
+        },
+        {
+          "inclusive_range": [
+            310985363,
+            315179666
+          ],
+          "sha256": "53ac9e2ae47b147c683a3bc9130c2044a8e1a774e46b4eafd9e39cdc5110f3cb"
+        },
+        {
+          "inclusive_range": [
+            315179667,
+            319373970
+          ],
+          "sha256": "2b94fac04b29b053f7274efb832f4629e6a0fa115aedd123e4e124bf7ff09fad"
+        },
+        {
+          "inclusive_range": [
+            319373971,
+            323568274
+          ],
+          "sha256": "8d416fec03e50eedc596339e35c83036b47d9c5b4b62a8328bb573ad71578c72"
+        },
+        {
+          "inclusive_range": [
+            323568275,
+            327762578
+          ],
+          "sha256": "af07ff07621074a3315c0b7378b64570fe28a6af5faef77956221d800509bd9d"
+        },
+        {
+          "inclusive_range": [
+            327762579,
+            331956882
+          ],
+          "sha256": "82db4727fd041582708c0c9c8f76159360e44db673df499746e37852c8e51bc7"
+        },
+        {
+          "inclusive_range": [
+            331956883,
+            336151186
+          ],
+          "sha256": "6eb7b7e6bb61d564941e3abcda69ce848fe0de83164491aca62b8ea6858eaabb"
+        },
+        {
+          "inclusive_range": [
+            336151187,
+            338629297
+          ],
+          "sha256": "46095587c59b3e208613f03afc4aec8e5ddd4ea1ad40223be7f6e53cfc9a1c25"
+        }
+      ]
+    },
+    "S05_20240507_trial_02.mat": {
+      "central_directory_range": [
+        1773851820,
+        1773854387
+      ],
+      "central_directory_sha256": "6a0674b82cca5bc2476cc95f33cad1935f4a23f1f89b9b4d7e8d110cb84819cc",
+      "eocd_range": [
+        1773854388,
+        1773854409
+      ],
+      "eocd_sha256": "a0df830a678ea7a5eb79fc1a64061a4e45ed9eccbeda5e8a99545f9d51b33965",
+      "local_header_range": [
+        164497506,
+        164497560
+      ],
+      "local_header_sha256": "ed7398cf5dea11cb3c425ed178001d96139bdb0f612f040c9ab8e7d9e8b57e00",
+      "compressed_range": [
+        164497561,
+        242127743
+      ],
+      "compressed_bytes": 77630183,
+      "compressed_sha256": "717c45a712e369e588add7129c200d5436bb435ce3c1e2986cc0f739109f438f",
+      "member_bytes": 77860597,
+      "member_sha256": "b5963b0f14902f5b5ef1e96802c3296610196140c750363271bb444a21accead",
+      "member_crc32": "72dd8b05",
+      "payload_ranges": [
+        {
+          "inclusive_range": [
+            164497561,
+            168691864
+          ],
+          "sha256": "fdb0b1dbb51ec1fa46a5ea6475f1a43064eb6da01b99dbe706b640210cbeda56"
+        },
+        {
+          "inclusive_range": [
+            168691865,
+            172886168
+          ],
+          "sha256": "1236de0afd478cfa46face2770e89805811604e3466ec536b6a743cb25bd3b6f"
+        },
+        {
+          "inclusive_range": [
+            172886169,
+            177080472
+          ],
+          "sha256": "b062772e3d822e918a1e7db23e38f0a7916256bf9a7f0c4c8d7847bc8a5c2468"
+        },
+        {
+          "inclusive_range": [
+            177080473,
+            181274776
+          ],
+          "sha256": "9c8e5a734e663818fbbcf5ed196b6961130bf9d03d11599005e7a9dc107e3603"
+        },
+        {
+          "inclusive_range": [
+            181274777,
+            185469080
+          ],
+          "sha256": "c6c560399dd08fa19e6b773dcb4197d2d24b91a46b40b4736744bdc554371c15"
+        },
+        {
+          "inclusive_range": [
+            185469081,
+            189663384
+          ],
+          "sha256": "746dd15e828003ca9afffa5f3861f2eaa7a0bf34be50b0e02ee42ca22cc2fc83"
+        },
+        {
+          "inclusive_range": [
+            189663385,
+            193857688
+          ],
+          "sha256": "1bc12d8d38a634f08ab6b0806db85befa9fb2df5fe469e98213d8b87aabc5174"
+        },
+        {
+          "inclusive_range": [
+            193857689,
+            198051992
+          ],
+          "sha256": "c1ce8bff6ef878e1545087fb86be1d09a0e9ac4bf814891e27bc289e3952e557"
+        },
+        {
+          "inclusive_range": [
+            198051993,
+            202246296
+          ],
+          "sha256": "e615bd5e75102bab22afac0189756040cc1ff54f9340ca9fdbf2986c8ffd847a"
+        },
+        {
+          "inclusive_range": [
+            202246297,
+            206440600
+          ],
+          "sha256": "4d084ac6f164d724f8352985cf54951eb047f0f62f57e69ef07f8b0df26decc9"
+        },
+        {
+          "inclusive_range": [
+            206440601,
+            210634904
+          ],
+          "sha256": "2ff2e4d39fd4cf9520797af8e8529104fcfb87f2c9fdf2754969c08f1bd05a82"
+        },
+        {
+          "inclusive_range": [
+            210634905,
+            214829208
+          ],
+          "sha256": "02ddf13baad980e8a1b8942f338e3916b8356b569a23e60e566260e30a6fbf48"
+        },
+        {
+          "inclusive_range": [
+            214829209,
+            219023512
+          ],
+          "sha256": "a998dd69ad58374e50d70a67b2d682276a4034417b11b10860ed683eeaefb955"
+        },
+        {
+          "inclusive_range": [
+            219023513,
+            223217816
+          ],
+          "sha256": "ae5b51fbc9ac1f8b46ccfa2699b47fbf0143641577eb29be32746f2de2fdff16"
+        },
+        {
+          "inclusive_range": [
+            223217817,
+            227412120
+          ],
+          "sha256": "c76d14c54ddb1aa2851de56e802459cbad097492e08a3808d9414c7e1b0b9a99"
+        },
+        {
+          "inclusive_range": [
+            227412121,
+            231606424
+          ],
+          "sha256": "3f26d30e948ae188dbf5f89a47731a2327859980a0bd6a95a517b2d69f9eff0a"
+        },
+        {
+          "inclusive_range": [
+            231606425,
+            235800728
+          ],
+          "sha256": "23d2f23171842b368cd847b180a2961125c8ff0ae0e3f4a5d145d2a74b10a564"
+        },
+        {
+          "inclusive_range": [
+            235800729,
+            239995032
+          ],
+          "sha256": "395a21d17bfe4b800fa06d805019abdc32e7a69462ed60389bef9d0f52d9a857"
+        },
+        {
+          "inclusive_range": [
+            239995033,
+            242127743
+          ],
+          "sha256": "3b0952924a8aa8278d4e08656ab6c1bf6ec6041105c95eb136cb7242be27e852"
+        }
+      ]
+    },
+    "S05_20240507_trial_03.mat": {
+      "central_directory_range": [
+        1773851820,
+        1773854387
+      ],
+      "central_directory_sha256": "6a0674b82cca5bc2476cc95f33cad1935f4a23f1f89b9b4d7e8d110cb84819cc",
+      "eocd_range": [
+        1773854388,
+        1773854409
+      ],
+      "eocd_sha256": "a0df830a678ea7a5eb79fc1a64061a4e45ed9eccbeda5e8a99545f9d51b33965",
+      "local_header_range": [
+        242127744,
+        242127798
+      ],
+      "local_header_sha256": "ab97a28e747314f9532767ef7215b1181f15ca60246d1ec25003727b21774148",
+      "compressed_range": [
+        242127799,
+        317782980
+      ],
+      "compressed_bytes": 75655182,
+      "compressed_sha256": "c0aeb843eb4fbfb3d3e545c1a308f54b7c4be60af65caeb659afdd448d29bde3",
+      "member_bytes": 75878517,
+      "member_sha256": "fe8e0bfd9098cc5de555b02f60e4dcd3342ce45e53711981dd311cd6af151c8d",
+      "member_crc32": "32351fbe",
+      "payload_ranges": [
+        {
+          "inclusive_range": [
+            242127799,
+            246322102
+          ],
+          "sha256": "f7c1ba677871845d611967c0a1de646a70f750ea9905daf1284941bbea6451a9"
+        },
+        {
+          "inclusive_range": [
+            246322103,
+            250516406
+          ],
+          "sha256": "027d47449121794649a89ac0475e01d3eedf1662c8f9f52f31948979168003f4"
+        },
+        {
+          "inclusive_range": [
+            250516407,
+            254710710
+          ],
+          "sha256": "c36820908ad0e33bf6ebd0b7798c2b1dba2f9d460574192ae2e442f589a6814c"
+        },
+        {
+          "inclusive_range": [
+            254710711,
+            258905014
+          ],
+          "sha256": "2834ca0123946d2627953a39b3e0aeeb427c7d06ce95e1647d7feb9be524171f"
+        },
+        {
+          "inclusive_range": [
+            258905015,
+            263099318
+          ],
+          "sha256": "09e400846c1eac400c110b1f33e2618630a88cc01dc38cd6ee295eee42396ca4"
+        },
+        {
+          "inclusive_range": [
+            263099319,
+            267293622
+          ],
+          "sha256": "33545949753a5b7f557f7128f563879ae7434c6c6d5946795a2c889576481c91"
+        },
+        {
+          "inclusive_range": [
+            267293623,
+            271487926
+          ],
+          "sha256": "fdbf2bab5b0047360d307a517c5b9821b06e865caf928ad5059d2a58c88c8c2c"
+        },
+        {
+          "inclusive_range": [
+            271487927,
+            275682230
+          ],
+          "sha256": "d23a397691b4e269a06211d6f2046c74a252004041244e702409deec13655400"
+        },
+        {
+          "inclusive_range": [
+            275682231,
+            279876534
+          ],
+          "sha256": "782c4a1828dff983cbb38ab8fd585ab23f2219e892eaf144f0cda6854a916a9a"
+        },
+        {
+          "inclusive_range": [
+            279876535,
+            284070838
+          ],
+          "sha256": "690e66e7beaec3d5b4740eb51e36397fe6e6078d9c2115e9a8defee087f48da2"
+        },
+        {
+          "inclusive_range": [
+            284070839,
+            288265142
+          ],
+          "sha256": "d4b883d590dd70f7575d6d560ad90c392c13f14f04866aef10286e19ef5b11eb"
+        },
+        {
+          "inclusive_range": [
+            288265143,
+            292459446
+          ],
+          "sha256": "a13cd1b989df24df108be5baccb8cbf3200a5cb6677f5fb099b2c1b5303a1542"
+        },
+        {
+          "inclusive_range": [
+            292459447,
+            296653750
+          ],
+          "sha256": "b634544a316aa6ec722552ce87a844abd2f9a1534e44f4183ec29c3b05967a22"
+        },
+        {
+          "inclusive_range": [
+            296653751,
+            300848054
+          ],
+          "sha256": "07d92cb7682f991445f839833d0c7cef6da2f51c2f031f2a87ac73bd246d13ae"
+        },
+        {
+          "inclusive_range": [
+            300848055,
+            305042358
+          ],
+          "sha256": "982c72559069eafd8eb66f78bbca0f9c7e1b5bfdb3c606cd8f504864494baf08"
+        },
+        {
+          "inclusive_range": [
+            305042359,
+            309236662
+          ],
+          "sha256": "f010ddfc90b5e5d82171e854edf90594ee3c6e533fb66d381f87956b2af47355"
+        },
+        {
+          "inclusive_range": [
+            309236663,
+            313430966
+          ],
+          "sha256": "08cef69485ace57bf1e99f51726a87a25ec4f764ec90481f2af968886fb85bbd"
+        },
+        {
+          "inclusive_range": [
+            313430967,
+            317625270
+          ],
+          "sha256": "8f6c8b0ca2f887710c6bcf3b1bd86911187e0fe9d65daabab67a1f095a462f9f"
+        },
+        {
+          "inclusive_range": [
+            317625271,
+            317782980
+          ],
+          "sha256": "02994aad960769faf078e70319287e1057d5b984e2932e977382e33423dfd7c3"
+        }
+      ]
+    }
+  }
+}

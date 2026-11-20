@@ -1,5 +1,7 @@
 # Predict and reproduce
 
+For the back-rotation study, run `python predict.py back_rotation/example.json`. [Reproduce its original fits and assessment](back_rotation/README.md).
+
 For the neck-voltage forecast, run `python predict.py cervical/example.json` with NumPy installed. [Fit and score the cervical study](cervical/README.md).
 
 ## Predict without fitting

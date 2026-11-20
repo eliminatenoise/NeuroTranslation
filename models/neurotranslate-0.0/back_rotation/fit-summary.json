@@ -1,0 +1,220 @@
+{
+  "people": 4,
+  "windows": 3072,
+  "balanced": {
+    "zero": {
+      "mae_deg": 0.7496440917391696,
+      "rmse_deg": 0.9016309116854518
+    },
+    "recent": {
+      "mae_deg": 0.31477510520718527,
+      "rmse_deg": 0.446579729786365
+    },
+    "task_median": {
+      "mae_deg": 0.36006734267536206,
+      "rmse_deg": 0.5143354179544259
+    },
+    "linear_motion": {
+      "mae_deg": 0.2720293440348987,
+      "rmse_deg": 0.38031279532503787
+    },
+    "shared_motion": {
+      "mae_deg": 0.2660228358782691,
+      "rmse_deg": 0.37179722983532415
+    },
+    "shared_upper": {
+      "mae_deg": 0.26846704435960456,
+      "rmse_deg": 0.37417847998058723
+    },
+    "shared_lower": {
+      "mae_deg": 0.2683616157296062,
+      "rmse_deg": 0.37559546443951736
+    },
+    "linear_full": {
+      "mae_deg": 0.27588036178740444,
+      "rmse_deg": 0.38311237820679284
+    },
+    "shared_full": {
+      "mae_deg": 0.27038589982635736,
+      "rmse_deg": 0.3773594755470542
+    },
+    "random_full": {
+      "mae_deg": 0.2776977938269716,
+      "rmse_deg": 0.38208385875786544
+    },
+    "wrong_full": {
+      "mae_deg": 0.271561227171347,
+      "rmse_deg": 0.37764465940957936
+    }
+  },
+  "tasks": {
+    "standing": {
+      "zero": {
+        "mae_deg": 0.26332360028528035,
+        "rmse_deg": 0.43146287847543796
+      },
+      "recent": {
+        "mae_deg": 0.12129747652083656,
+        "rmse_deg": 0.23410458580731938
+      },
+      "task_median": {
+        "mae_deg": 0.21178954401805733,
+        "rmse_deg": 0.37196363033689084
+      },
+      "linear_motion": {
+        "mae_deg": 0.11572575632282792,
+        "rmse_deg": 0.2084874819425767
+      },
+      "shared_motion": {
+        "mae_deg": 0.10609285075095765,
+        "rmse_deg": 0.1947084005394925
+      },
+      "shared_upper": {
+        "mae_deg": 0.11114499822133782,
+        "rmse_deg": 0.20028488908119632
+      },
+      "shared_lower": {
+        "mae_deg": 0.10936808865470758,
+        "rmse_deg": 0.19896500475900664
+      },
+      "linear_full": {
+        "mae_deg": 0.11787268606038553,
+        "rmse_deg": 0.20695617795639776
+      },
+      "shared_full": {
+        "mae_deg": 0.11282171036221816,
+        "rmse_deg": 0.20210432373180323
+      },
+      "random_full": {
+        "mae_deg": 0.12289539625502474,
+        "rmse_deg": 0.20607804555361997
+      },
+      "wrong_full": {
+        "mae_deg": 0.11183812728804296,
+        "rmse_deg": 0.20021329233783805
+      }
+    },
+    "walking": {
+      "zero": {
+        "mae_deg": 1.2359645831930588,
+        "rmse_deg": 1.371798944895466
+      },
+      "recent": {
+        "mae_deg": 0.508252733893534,
+        "rmse_deg": 0.6590548737654107
+      },
+      "task_median": {
+        "mae_deg": 0.5083451413326668,
+        "rmse_deg": 0.656707205571961
+      },
+      "linear_motion": {
+        "mae_deg": 0.42833293174696946,
+        "rmse_deg": 0.552138108707499
+      },
+      "shared_motion": {
+        "mae_deg": 0.42595282100558063,
+        "rmse_deg": 0.548886059131156
+      },
+      "shared_upper": {
+        "mae_deg": 0.4257890904978714,
+        "rmse_deg": 0.5480720708799781
+      },
+      "shared_lower": {
+        "mae_deg": 0.42735514280450476,
+        "rmse_deg": 0.5522259241200281
+      },
+      "linear_full": {
+        "mae_deg": 0.4338880375144234,
+        "rmse_deg": 0.5592685784571878
+      },
+      "shared_full": {
+        "mae_deg": 0.42795008929049655,
+        "rmse_deg": 0.5526146273623052
+      },
+      "random_full": {
+        "mae_deg": 0.4325001913989185,
+        "rmse_deg": 0.5580896719621109
+      },
+      "wrong_full": {
+        "mae_deg": 0.4312843270546509,
+        "rmse_deg": 0.5550760264813207
+      }
+    }
+  },
+  "contrasts": {
+    "shared_motion": {
+      "mean_gain_deg": -0.004363063948088247,
+      "paired_gains_deg": [
+        -0.009660864894663362,
+        -0.004105026610417062,
+        -0.0023666615239662236,
+        -0.0013197027633063407
+      ],
+      "people_improved": 0,
+      "sign_p": 0.125
+    },
+    "wrong_full": {
+      "mean_gain_deg": 0.0011753273449896032,
+      "paired_gains_deg": [
+        -0.0015972425424465586,
+        0.0035404126856959095,
+        -0.00044625752495278115,
+        0.003204396761661843
+      ],
+      "people_improved": 2,
+      "sign_p": 1.0
+    },
+    "linear_full": {
+      "mean_gain_deg": 0.005494461961047102,
+      "paired_gains_deg": [
+        0.01097808688179333,
+        0.0033921178277086794,
+        0.0007121912539933273,
+        0.006895451880693071
+      ],
+      "people_improved": 4,
+      "sign_p": 0.125
+    },
+    "random_full": {
+      "mean_gain_deg": 0.007311894000614244,
+      "paired_gains_deg": [
+        0.0311665136141365,
+        -0.0016389793868897828,
+        -0.0004582783049709993,
+        0.0001783200801812601
+      ],
+      "people_improved": 2,
+      "sign_p": 1.0
+    },
+    "recent": {
+      "mean_gain_deg": 0.04438920538082789,
+      "paired_gains_deg": [
+        0.02683035788826718,
+        0.02083266949150739,
+        0.045378729986583016,
+        0.08451506415695398
+      ],
+      "people_improved": 4,
+      "sign_p": 0.125
+    }
+  },
+  "better_on_both": 0,
+  "practical_criterion": false,
+  "support": {
+    "standing": 1536,
+    "walking": 1536
+  },
+  "target_degrees": {
+    "standing": {
+      "median_of_participant_medians": 0.13131469760830647,
+      "minimum": 0.0,
+      "maximum": 2.856894129370483
+    },
+    "walking": {
+      "median_of_participant_medians": 1.0587411491221195,
+      "minimum": 0.027088148683026482,
+      "maximum": 5.723156504009435
+    }
+  },
+  "paired_order": "Anonymous participants sorted by their shared-motion gain, with the same order used across contrasts within this evaluation."
+}

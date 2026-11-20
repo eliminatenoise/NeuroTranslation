@@ -95,3 +95,17 @@ docs/neck-voltage/** -text
 docs/papers/cervical-forecast/** -text
 models/cervical-forecast/*.cmd whitespace=cr-at-eol
 docs/cervical-forecast/*.cmd whitespace=cr-at-eol
+
+docs/back-rotation/** -text
+models/back-rotation/** -text
+models/neurotranslate-0.0/back_rotation/** -text
+docs/shared-back-rotation/** -text
+docs/papers/back-rotation/** -text
+models/back-rotation/*.cmd whitespace=cr-at-eol
+docs/back-rotation/*.cmd whitespace=cr-at-eol
+
+# Preserve upstream licence text and the byte-identical shared encoder implementation.
+docs/back-rotation/CC-BY-4.0.txt whitespace=-blank-at-eof
+models/back-rotation/CC-BY-4.0.txt whitespace=-blank-at-eof
+models/neurotranslate-0.0/back_rotation/CC-BY-4.0.txt whitespace=-blank-at-eof
+models/neurotranslate-0.0/back_rotation/encoder.js whitespace=-blank-at-eof

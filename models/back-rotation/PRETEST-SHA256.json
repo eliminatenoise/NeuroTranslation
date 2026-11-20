@@ -1,0 +1,30 @@
+{
+  "subsequent_eligibility_checks": {
+    "reason": "The shared reader originally accepted four array rows by shape. An added label check stops when a row has a buffer label. The four-person assessment remains incomplete. Both sets of weights are unchanged.",
+    "amended_files": {
+      "models/neurotranslate-0.0/back_rotation/features.py": {
+        "at_freeze": "9af35fa8edad8a10ea6ffad31b8431e0991e4417846dd952f66e9df69f9cf6a3",
+        "released": "1bf93c15930cad54b0454302da4ebaa04bd0487b5796528689c2d74ab7bbf680"
+      },
+      "models/neurotranslate-0.0/back_rotation/study.py": {
+        "at_freeze": "7dbf756c9db9a57f7d8214345bba381328a158483709635f17a57c25746d9b50",
+        "released": "7aecc1046ca9700e7b4edffb8ce18debf2b2207c975902bffc34eed2189ffe20"
+      }
+    }
+  },
+  "scope": "Files verified before the four assessment participants’ records were opened. Paths are relative to the NeuroTranslation repository. The specialist seal also lists its individual model, training and test files.",
+  "verified_utc": "2026-11-20T18:07:21.330323+00:00",
+  "sha256": {
+    "models/back-rotation/seal.json": "adb98306f995fe9c54109ce26e920309d2822f5b9ff960680bcb3f09e66b26e6",
+    "models/back-rotation/source/acquire.py": "893e5ebeffaf0d72aef86c1b5c1a278808e68cd325e1b1883dee103a2b22565b",
+    "models/back-rotation/source/qualify.py": "6d64a6a845354a790745c662d31833d57bb515f8c0859bd0b5d37addd8a2e79f",
+    "models/back-rotation/source/source.json": "4215d092f0b97cc1fed85bc4b63cd8e0a1b8f918b5624b7cda3e75324ae0b859",
+    "models/neurotranslate-0.0/back_rotation/DESIGN.md": "9242acfa581e8246dcc9fa185854dd8a384857420376d61ef79ebf51b42ca858",
+    "models/neurotranslate-0.0/back_rotation/forecast.py": "712f9ebbbb491a58bb2f71b30e25b0d65618ffb2f117d5b19dc64d3d5edd93c1",
+    "models/neurotranslate-0.0/back_rotation/project.py": "b454ceb54864d20194871f97ae12a6fd356afa5596c95ef24dd0ffee8d2dc94d",
+    "models/neurotranslate-0.0/back_rotation/random-encoder.json": "4e4c66728adf70f158225f89c0919142bea8e58a114fb4e4ea3504a1ba154384",
+    "models/neurotranslate-0.0/movement-weights.npz": "6a05e06ecbf0eadb4524369d9089847813763d0d2a3c1a49bdd1e4bf295e4864",
+    "models/neurotranslate-0.0/predict.py": "5b0790c50836a2c875dfa34936b1ba45d0d5a902f39f7b7d2f24ac544c7712ea",
+    "models/neurotranslate-0.0/back_rotation/model.json": "c3117dea0a0af305a240b6f4a027485e9d50f0dbfd8f4a49260ad069b66d604e"
+  }
+}

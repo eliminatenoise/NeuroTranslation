@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forecast a back sensor’s next rotation · NeuroTranslate 0.0</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#faf9f3;color:#172e2b;font:16px/1.6 system-ui,Arial,sans-serif}main{max-width:1050px;margin:auto;padding:28px clamp(16px,4vw,60px) 50px}header{padding:12px 0 20px}a{color:#175b4d;text-underline-offset:.2em}nav,.controls{display:flex;gap:8px 20px;flex-wrap:wrap}h1,h2,h3{line-height:1.14;letter-spacing:-.035em}h1{font-size:clamp(2.45rem,7vw,4.5rem);max-width:17ch;margin:.55em 0 .3em}h2{font-size:1.65rem}section{border-top:1px solid #a8b9ae;padding:14px 0 20px}p{max-width:76ch}.lead{font-size:1.18rem}label{font-weight:650}input,button,textarea,select{font:inherit}textarea{width:100%;max-width:700px;display:block;line-height:1.6;padding:.6em;border:1px solid #729185;color:inherit;background:#fff;border-radius:3px}input,select{max-width:100%;padding:5px 7px;border:1px solid #839b8d;border-radius:4px;background:#fff}button{border:1px solid #225848;border-radius:4px;background:#225848;color:white;padding:8px 15px;font-weight:650;cursor:pointer}button.secondary{background:none;color:#225848}fieldset{margin:12px 0 16px;border:0;padding:0}legend{font-weight:650}.table{overflow-x:auto}table{border-collapse:collapse;width:100%;max-width:850px;font-variant-numeric:tabular-nums}th,td{padding:.45em .4em;border-bottom:1px solid #c4d2c8;text-align:right}th:first-child,td:first-child{text-align:left}output{display:block;font-weight:650;min-height:1.7em;margin:.7em 0}.detail{color:#38534a}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #cf7c19;outline-offset:2px}details{margin:.7em 0}summary{cursor:pointer;font-weight:650}@media(max-width:500px){.lead{font-size:1.02rem}th,td{font-size:.9rem}.controls label{display:block}}
+</style><main>
+<nav aria-label="Related studies"><a href="https://eliminatenoise.github.io/NeuroTranslation/">NeuroTranslation</a><a href="https://eliminatenoise.github.io/NeuroTranslation/back-rotation/">Try the task-trained Transformer</a><a href="https://eliminatenoise.github.io/Interoceptomics/back-rotation/">Explore the recording</a></nav>
+<header><h1>How far will the back sensor turn?</h1><p class="lead">A person walks or stands with a motion sensor strapped to their back. The model sees the last tenth of a second. It forecasts how many degrees the sensor will turn over the next tenth of a second.</p>
+<p>The shared encoder is the part of NeuroTranslate that extracts patterns from earlier movement measurements. Its weights stay fixed here. A new calculation learns how to turn those patterns into a forecast for the back sensor. You can compare it with carrying the last angle forward and with fitting a straight line to the same measurements.</p></header>
+<section><h2>Try an invented example</h2><div class="controls"><label>Instruction <select id="task"><option value="walking">Walk</option><option value="standing">Stand</option></select></label><label>Last 0.10-second turn (°) <input id="recent" type="number" min="0" max="180" step="any"></label></div>
+<fieldset><legend>Last four intervals, earliest first</legend><p>Each line covers 25 milliseconds. Enter six comma-separated numbers. First come the angle between the two endpoint orientations and the total rotation along the intervening path, both in degrees. Next come two voltage readings for the upper back, then two for the lower back.</p>
+<label for="matrix">Motion and voltage history</label><textarea id="matrix" rows="4" spellcheck="false"></textarea>
+<details><summary>What do the voltage numbers mean?</summary><p>For each region, the first number measures how much voltage varies during that interval. The second measures how much it changes from one stored sample to the next. Each number uses the middle value across the available electrode channels, in microvolts (µV). Skin electrodes can pick up muscle activity, the heartbeat and movement of the electrodes themselves.</p></details></fieldset>
+<div class="controls"><button id="run" type="button">Calculate forecasts</button><button id="reset" class="secondary" type="button">Restore example</button></div><output id="status" aria-live="polite"></output><div class="table"><table><thead><tr><th scope="col">Forecast</th><th scope="col">Next turn (°)</th></tr></thead><tbody id="values"></tbody></table></div></section>
+<section><h2>What did the three verified pairs of trials show?</h2><p>Four other people supplied the fitting recordings. The models were fixed before recordings from four new people were opened. In both trials from one person, the file labels list only three orientation components and a buffer channel. A rotation in space requires all four components. The results below describe the other three people, each with two trials. The planned four-person test remains incomplete. The errors below give equal weight to each person, task and trial. Smaller errors indicate closer forecasts.</p>
+<label>Show errors for <select id="stratum"><option value="balanced">Walking and standing equally</option><option value="walking">Walking</option><option value="standing">Standing</option></select></label><div class="table"><table><thead><tr><th scope="col">Method</th><th scope="col">Development error (°)</th><th scope="col">Three new people (°)</th></tr></thead><tbody id="scores"></tbody></table></div><p id="finding"></p>
+<p>The wrong-trial comparison uses the same fitted model. It takes the electrical history from the other trial of the same person following the same instruction. The actual movement history stays in place. These recordings measure the orientation of a worn sensor. They cannot tell us how far a joint moved or which tissue generated a voltage.</p></section>
+<nav aria-label="Study and original recordings"><a href="https://eliminatenoise.github.io/NeuroTranslation/papers/back-rotation/">Read the study</a><a href="https://doi.org/10.5281/zenodo.19065545">Original recordings</a><a href="https://doi.org/10.1038/s41597-026-07592-7">Original paper</a></nav>
+<script type="application/json" id="data">@@DATA@@</script><script>@@ENCODER@@
+const data=JSON.parse(document.getElementById("data").textContent);
+const $=id=>document.getElementById(id);const model=data.model;
+function estimate(mode,raw,anchor,task){
+  if(mode==="zero")return 0;if(mode==="recent")return anchor;
+  if(mode==="task_median")return model.task_medians[task==="walking"?"621":"611"];
+  const fit=model.fits[mode],mask=mode.endsWith("motion")?[0,1]:mode.endsWith("upper")?[0,1,2,3]:mode.endsWith("lower")?[0,1,4,5]:[0,1,2,3,4,5];
+  const z=raw.map(row=>row.map((v,i)=>mask.includes(i)?(Math.log1p(v)-fit.bin_mean[i])/fit.bin_sd[i]:0));
+  const fields=[...z.flat(),Math.log1p(anchor),task==="walking"?1:0];
+  if(!mode.startsWith("linear")){
+    const state=mode==="random_full"?data.random:data.shared;
+    fields.push(...encode(state,z.map(row=>linear(state,"project",row))));
+  }
+  const adjust=fields.reduce((a,v,i)=>a+(v-fit.mean[i])/fit.sd[i]*fit.coef[i],fit.intercept);
+  return Math.expm1(Math.max(0,Math.min(Math.log1p(180),Math.log1p(anchor)+adjust)));
+}
+function row(t,label,values){const tr=document.createElement("tr"),th=document.createElement("th");th.scope="row";th.textContent=label;tr.append(th);for(const value of values){const td=document.createElement("td");td.textContent=value;tr.append(td);}t.append(tr);}
+function run(){
+ $("values").replaceChildren();
+ try{
+  const a=Number($("recent").value), task=$("task").value;if(!$("recent").value.trim()||!Number.isFinite(a)||a<0||a>180)throw Error("Enter a recent turn between 0 and 180 degrees.");
+  const grid=$("matrix").value.trim().split(/\r?\n/).map(r=>r.split(",").map(x=>x.trim()===""?NaN:Number(x)));
+  if(grid.length!==4||grid.some(r=>r.length!==6||r.some(x=>!Number.isFinite(x)||x<0)||r[0]>180||r[1]>9000.0001))throw Error("Supply four rows of six finite, nonnegative readings with valid angles.");
+  for(const [m,label] of Object.entries(data.labels)){if(m!=="wrong_full")row($("values"),label,[estimate(m,grid,a,task).toFixed(3)]);}
+  $("status").textContent="Forecasts for the entered history.";
+ }catch(e){$("status").textContent=e.message;}
+}
+function reset(){const ex=data.example;$("task").value=ex.task;$("recent").value=ex.recent_angle_deg;$("matrix").value=ex.bins.map(r=>r.join(", ")).join("\n");run();}
+function scores(){
+ const t=$("stratum").value;$("scores").replaceChildren();const group=s=>t==="balanced"?s.balanced:s.tasks[t];
+ for(const [m,label] of Object.entries(data.labels))row($("scores"),label,[group(data.dev)[m].mae_deg.toFixed(3),group(data.test)[m].mae_deg.toFixed(3)]);
+ $("finding").textContent=data.finding;
+}
+for(const id of ["recent","matrix","task"])$(id).addEventListener("input",()=>{$("values").replaceChildren();$("status").textContent="Readings changed. Calculate the new forecasts.";});
+$("run").addEventListener("click",run);$("reset").addEventListener("click",reset);$("stratum").addEventListener("change",scores);reset();scores();
+</script></main></html>

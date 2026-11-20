@@ -1,0 +1,62 @@
+{
+  "stage": "Descriptive subset of three new people with verified orientation labels",
+  "n_people": 3,
+  "n_trials": 6,
+  "n": {
+    "611": 1152,
+    "621": 1152
+  },
+  "model_sha256": "d337cc59694a9f3b374c740079b74d5ac956d3b3d100460ca6a2e049478b429b",
+  "mae_deg": {
+    "zero": {
+      "611": 0.33240942964005055,
+      "621": 1.774100570954927,
+      "balanced": 1.0532550002974885
+    },
+    "constant_speed": {
+      "611": 0.1551107079226254,
+      "621": 0.7351484775300725,
+      "balanced": 0.44512959272634894
+    },
+    "task_median": {
+      "611": 0.24007874981502475,
+      "621": 0.8346755906641947,
+      "balanced": 0.5373771702396097
+    },
+    "ridge_motion": {
+      "611": 0.14168020276485402,
+      "621": 0.6123399794003911,
+      "balanced": 0.37701009108262257
+    },
+    "motion": {
+      "611": 0.12659512446815693,
+      "621": 0.5960367209823979,
+      "balanced": 0.36131592272527735
+    },
+    "upper": {
+      "611": 0.13469564894471805,
+      "621": 0.6187901373562426,
+      "balanced": 0.3767428931504803
+    },
+    "lower": {
+      "611": 0.13338270206234004,
+      "621": 0.6112782953318447,
+      "balanced": 0.37233049869709234
+    },
+    "full": {
+      "611": 0.1374058199758438,
+      "621": 0.6264070230077202,
+      "balanced": 0.381906421491782
+    },
+    "wrong": {
+      "611": 0.13663979872369403,
+      "621": 0.6262988389284213,
+      "balanced": 0.3814693188260576
+    }
+  },
+  "incremental_gate_passes": null,
+  "regional_gates": null,
+  "planned_people": 4,
+  "assessment_status": "incomplete",
+  "physical_target_qualification": "Both recordings from one prespecified person list quaternion components 2, 3 and 4 followed by BufferChannel. The first component could not be verified. The four-person assessment is incomplete for both models. Scores below describe three other people with four documented orientation components. No replacement or refit."
+}
