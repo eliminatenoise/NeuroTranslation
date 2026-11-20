@@ -34,6 +34,7 @@ def main():
     spatial = json.loads(verified(args.runtime, "examples.json"))
     rat = spatial["domain"].index("rat")
     data["inventedRat"] = spatial["x"][rat]
+    data["momentExample"] = json.loads(verified(args.runtime, "knee-moment-example.json"))
     data["kneeExample"] = json.loads(verified(args.runtime, "knee-example.json"))
     data["angleExample"] = json.loads(verified(args.runtime, "angular-example.json"))["input"]
     data["forearmExample"] = json.loads(verified(args.runtime, "forearm-example.json"))

@@ -1,6 +1,12 @@
 # A quarter second ahead
 
-Open **index.html** or the launcher for your operating system. The first example predicts the distance between a wrist’s last tracked position and its position about a quarter second later. Choose **Right-wrist angles (°)** to ask how far back the wrist will bend and how far it will tilt towards the thumb. **Rat displacement (cm)** predicts an endpoint distance on a maze. **Right and left knee angles (°)** forecasts both knees from 240 consecutive pairs of angles. Each task starts with an invented example. [Open the viewer](index.html)
+Open **index.html** or the launcher for your operating system. The first example predicts the distance between a wrist’s last tracked position and its position about a quarter second later. Choose **Right-wrist angles (°)** to ask how far back the wrist will bend and how far it will tilt towards the thumb. **Rat displacement (cm)** predicts an endpoint distance on a maze. **Right and left knee angles (°)** forecasts both knees from 240 consecutive pairs of angles. Choose **Knee moments (N·m/kg)** to estimate the net turning moment at each knee. Each task starts with an invented example. [Open the viewer](index.html)
+
+## Estimate the turning moment at each knee
+
+Choose **Knee moments (N·m/kg)** and switch between the five methods. Each one sees the same four seconds of earlier leg angles. A positive moment acts towards flexion and a negative moment towards extension. The reference comes from a laboratory estimate using movement and ground forces. On three test walkers the task-trained model missed by 0.08874 N·m/kg on average and beat both the linear fit and the training-walker match on one walker.
+
+Choose **Enter my own measurements** and use **Show invented input** to inspect the format. Supply 400 consecutive frames from one walk at 100 Hz and six angles per frame in right knee, left knee, right hip, left hip, right ankle, left ankle order. Under the source’s gap rule, a zero angle excludes that window. [Study and comparison](https://eliminatenoise.github.io/NeuroTranslation/knee-moment/)
 
 ## Forecast a walking step
 

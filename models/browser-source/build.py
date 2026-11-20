@@ -4,6 +4,7 @@ import base64
 import hashlib
 from html import escape
 import json
+import importlib.util
 from pathlib import Path
 import zipfile
 import subprocess
@@ -15,7 +16,7 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 SRC = HERE / 'src'
 STATIC = ('CC0-1.0.txt', 'CDLA-Permissive-2.0.txt', 'DATA-CREDITS.md', 'NOTICE.md', 'README.md',
-          'SPATIAL-API.md', 'knee-example.json', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
+          'SPATIAL-API.md', 'knee-moment-example.json', 'knee-example.json', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
 ARTIFACTS = (*STATIC, 'model.json', 'population-example.json', 'shared-motion.js')
 
 
@@ -58,6 +59,40 @@ def export_knee(model, checkpoint):
         return read(path), calc.decode()
 
 
+def moment_parameters(checkpoint, saved, manifest, groups, descriptions):
+    converter = SRC/'moment_export.py'
+    calculation = (SRC/'runtime/knee-moment.js').read_bytes()
+    if sha(converter.read_bytes()) != manifest['momentConversionSha256'] or sha(calculation) != manifest['momentCalculationSha256']:
+        raise ValueError('The knee moment calculation or weight conversion differs from the checked reader.')
+    spec = importlib.util.spec_from_file_location('moment_export', converter)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    weights = module.export(checkpoint)
+    encoded = json.dumps(weights, separators=(',', ':'), allow_nan=False).encode() + b'\n'
+    if sha(encoded) != manifest['momentExportSha256']:
+        raise ValueError('The five knee moment methods differ from the checked weight export.')
+
+    for name, flat in weights['shared'].items():
+        if not np.array_equal(saved[name].ravel(), flat):
+            raise ValueError('The shared knee moment encoder differs from the spatial encoder.')
+    used = set()
+    for kind, prefix in [('stats', 'load.'), ('trained', 'load.trained.'), ('scrambled', '')]:
+        tensors = {}
+        for name, flat in weights[kind].items():
+            template = saved[prefix + name]
+            vector = np.asarray(flat, dtype=template.dtype)
+            if not np.array_equal(vector, flat):
+                raise ValueError('Loss of precision in knee moment weights.')
+            tensors[name] = vector.reshape(template.shape)
+            if kind != 'scrambled':
+                used.add(prefix + name)
+        group = 'moment.' + kind
+        groups[group], descriptions[group] = pack(tensors, tensors)
+    if used != {name for name in saved.files if name.startswith('load.')} or len(used) != 35:
+        raise ValueError('Incomplete set of knee moment parameters.')
+    return calculation.decode().removesuffix("if (typeof module === 'object' && module.exports) module.exports = kneeMoment;\n")
+
+
 def build_runtime(model, out):
     original = read(SRC/'runtime/original-groups.json')
     checkpoint = model/'movement-weights.npz'
@@ -82,7 +117,8 @@ def build_runtime(model, out):
         names = [name for group in groups.values() for name, *_ in group['layout']]
         knee_names = {n for n in saved.files if n.startswith('knee.')}
         assert len(names) == len(set(names)) == 51
-        assert len(knee_names) == 14 and set(saved.files) == {'configuration', *names, *knee_names}
+        moment_names = {n for n in saved.files if n.startswith('load.')}
+        assert len(knee_names) == 14 and set(saved.files) == {'configuration', *names, *knee_names, *moment_names}
         assert set(knee['readouts']) == {n.removeprefix('knee.') for n in knee_names}
         readouts = {n.removeprefix('knee.'):saved[n] for n in knee_names}
         groups['knee.readouts'], descriptions['knee.readouts'] = pack(readouts, readouts)
@@ -92,10 +128,12 @@ def build_runtime(model, out):
             assert np.array_equal(array.ravel(), knee['encoder'][name])
             shuffled[name] = np.asarray(flat, dtype=array.dtype).reshape(array.shape)
         groups['knee.scramble'], descriptions['knee.scramble'] = pack(shuffled, shuffled)
+        manifest = read(SRC/'inputs.json')
+        moment_js = moment_parameters(checkpoint, saved, manifest, groups, descriptions)
 
     ids = dict(spatial=original['checkpoints']['spatial'], movement=sha(checkpoint.read_bytes()))
     template = (SRC/'runtime/runtime.js.in').read_text()
-    script = template.replace('__KNEE_CALCULATION__', calculation).replace('__CHECKPOINT__', json.dumps(ids)).replace('__GROUPS__', json.dumps(groups, separators=(',', ':')))
+    script = template.replace('__KNEE_CALCULATION__', calculation).replace('__MOMENT_CALCULATION__', moment_js).replace('__CHECKPOINT__', json.dumps(ids)).replace('__GROUPS__', json.dumps(groups, separators=(',', ':')))
     out.mkdir(parents=True, exist_ok=True)
     for name in STATIC:
         (out/name).write_bytes((SRC/'runtime'/name).read_bytes())
@@ -104,7 +142,8 @@ def build_runtime(model, out):
                pythonPredictorSha256=sha((model/'predict.py').read_bytes()),
                pythonCorrectionSha256=sha((model/'forearm/residual.py').read_bytes()),
                pythonPopulationSha256=sha((model/'population/adapter.py').read_bytes()),
-               kneeExportSha256=read(SRC/'inputs.json')['kneeExportSha256'], encoding=original['encoding']))
+               kneeExportSha256=manifest['kneeExportSha256'], momentExportSha256=manifest['momentExportSha256'],
+               pythonMomentSha256=manifest['model']['load/adapter.py'], encoding=original['encoding']))
     example = read(model/'population/example.json')
     # Limit the worked record to the six measured inputs and the two API selectors.
     keys = {'domain':'domain', 'mode':'mode', 'cutoffS':'cutoff_s', 'priorTimeS':'prior_time_s',
@@ -165,8 +204,8 @@ def build_viewer(direct, model, runtime, out):
 GUI_SOURCES = ('build.py', 'README.md', 'Open on Linux.sh', 'Open on Windows.cmd', 'Open on macOS.command',
                'src/panel.html', 'src/panel.js', 'src/panel.css', 'src/inputs.json',
                'src/sources.json', 'src/derive.py', 'src/angular-scores.json')
-GEN_SOURCES = ('build.py', 'README.md', 'src/inputs.json',
-               *('src/runtime/' + n for n in (*STATIC, 'original-groups.json', 'knee.js', 'runtime.js.in')),
+GEN_SOURCES = ('build.py', 'README.md', 'src/inputs.json', 'src/moment_export.py',
+               *('src/runtime/' + n for n in (*STATIC, 'original-groups.json', 'knee.js', 'knee-moment.js', 'runtime.js.in')),
                *('src/viewer/' + n for n in ('index.html', 'model.js', 'viewer.css', 'viewer.js')))
 
 
