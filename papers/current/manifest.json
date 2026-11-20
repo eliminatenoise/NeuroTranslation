@@ -2,13 +2,13 @@
   "schema": "paper-edition-v6",
   "version": "2026-11-21",
   "status": "Working drafts",
-  "previous_paper_release": "69130bf97046756e498e00b62f22cbdfca2cdb2d",
+  "previous_paper_release": "00a8893e4d8f1f6b0b85e78d0f70c4f456d1a984",
   "grip_benchmark_commit": "3af280cdb164a35e35c50cded35dcbdc199f6a19",
-  "previous_candidate_receipt_sha256": "55893ed4c780d1e91ab1db37003031a15f1d6e32d63bdb3074eb6aae408a4fc0",
+  "previous_candidate_receipt_sha256": "8062c6539d89b992dbea7428f8e19a437aacdbd59c33f41b2f22400c60546d79",
   "grip_aggregate_sha256": "1f831ffa7cfe943b100487e7fdddeb980628d9827b5d4c05fbf54dc2931e7021",
   "glossary": {
     "revision": null,
-    "sha256": "0f58ac6fb9a28252fe0c9904e5ef85caca771802a4cb3aa93b26cd90acae4b8d"
+    "sha256": "b8e896730f41831c543f7eb43f675ddbb2d2545d034cc647a7b8656ca16ccd66"
   },
   "rights": "NOTICE.md lists every dataset, simulator and typeface the papers rely on, with its licence and the credit it is owed; the two font licence texts are in third-party-notices/. Where NOTICE.md says a licence is to be confirmed at its source, it has not yet been checked there.",
   "PDFs": [
@@ -23,10 +23,10 @@
       "grip_page": 50,
       "development_page": null,
       "filename": "neurotranslation-technical.pdf",
-      "sha256": "d77cca438425abb74aa712d13a719b8eb0bfd873c4b4eebb60496fc36f54a637",
-      "bytes": 250514,
+      "sha256": "9a01168cdc313a303e1e8c70ab6b1748d3d86c7ef545e86ec7cda869d3683315",
+      "bytes": 250307,
       "pages": 53,
-      "previous_pdf_sha256": "2875e251694d0b40d0309a400f4880e50cdc8c81a59a50d7ab2b32a1a2ad93dd",
+      "previous_pdf_sha256": "d77cca438425abb74aa712d13a719b8eb0bfd873c4b4eebb60496fc36f54a637",
       "previous_pages": 53,
       "hyser_end_page": 51,
       "reference_pages": [
@@ -89,11 +89,11 @@
       "grip_page": 61,
       "development_page": null,
       "filename": "neurotranslation-explained.pdf",
-      "sha256": "66406caa64b12a23fb0a0b65ae57e493fe3f690eccb276ac0a3968ad2bcf9dbd",
-      "bytes": 272964,
+      "sha256": "50be1da15710f96263c38256a77401aeda5beb10281e5863cb2e1f28356f9a9f",
+      "bytes": 272988,
       "pages": 64,
-      "previous_pdf_sha256": "74b3d7a79ce6633f6ac61cdd4a43188fbccda35c3e183ccc754c98f94f96ce41",
-      "previous_pages": 63,
+      "previous_pdf_sha256": "66406caa64b12a23fb0a0b65ae57e493fe3f690eccb276ac0a3968ad2bcf9dbd",
+      "previous_pages": 64,
       "hyser_end_page": 61,
       "reference_pages": [
         44
@@ -158,7 +158,7 @@
       "sha256": "6ebd97e224bcc5a5f67caefe4fc6186c87cd724f0b3737adc9ab2b37d9a7fa86",
       "bytes": 136234,
       "pages": 29,
-      "previous_pdf_sha256": "c8c4b39021ba3c04c45fbc8680d4f600de70b2f68b305a983ec3f0aaf9fc6d59",
+      "previous_pdf_sha256": "6ebd97e224bcc5a5f67caefe4fc6186c87cd724f0b3737adc9ab2b37d9a7fa86",
       "previous_pages": 29,
       "hyser_end_page": null,
       "reference_pages": [
@@ -192,7 +192,7 @@
       "sha256": "1e3ee4bf727543c8934ddbc803242e12de62bd053b6be6d60c802f0ad31927a8",
       "bytes": 145955,
       "pages": 33,
-      "previous_pdf_sha256": "67bfc0defbd253b34c3a557aea8c3fcc91fb7e62fa73a021ec0ea131e78484cd",
+      "previous_pdf_sha256": "1e3ee4bf727543c8934ddbc803242e12de62bd053b6be6d60c802f0ad31927a8",
       "previous_pages": 33,
       "hyser_end_page": null,
       "reference_pages": [
@@ -214,7 +214,7 @@
     }
   ],
   "named_destinations_note": "Each NeuroTranslation PDF has a named destination at every study's row in its appendix B (and appendix.A, the macaque study in full, and appendix.B, the table of every study), with the page it lands on; link to <file>.pdf#nameddest=<name>. The page keys above give the page of the same row. The Brain2Body editions have no study rows, so their page keys are null; development_page there is the page of section 6, on the marsupial.",
-  "source_manifest_sha256": "9ac088e806ed5dc9d0c22eb1eb8b2230a5d9c326797f92cd36a8aa6fb1e1c265",
+  "source_manifest_sha256": "a2854eca7d4ae2b465061decf332a5f55b5e2730847f2bcf74474886eee62d3f",
   "evidence_revision_date": "2026-11-21",
   "build": "Four PDFs built offline with the Tectonic 0.17 TeX engine, SOURCE_DATE_EPOCH 1795219200 (21 November 2026, 00:00 UTC). The source ZIP holds everything but the engine and its package files; built from it, the four PDFs come out byte for byte the same.",
   "files_excluding_this_manifest": [
@@ -225,8 +225,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 9225,
-      "sha256": "156c59a90198ae413e6769d37944ee2a63ded2239b2ee439abe20a2695f89cfb"
+      "bytes": 9370,
+      "sha256": "ce561b8fb58989419aa559d5114c7b48b221ddb0fbf83f4a4d7bc8f1a56f5db8"
     },
     {
       "path": "brain2body-article.pdf",
@@ -241,22 +241,22 @@
     {
       "path": "font-provenance.json",
       "bytes": 7812,
-      "sha256": "87b9a73c84deda4c2b2183f8ad8a0523e4fcb7f7d0bf26001af5386cd7e59ac2"
+      "sha256": "be4a5e5cfa2c56b29f6ed6e60589cc0de3ab58f80139b2651b39b6d8736cc956"
     },
     {
       "path": "index.html",
-      "bytes": 11218,
-      "sha256": "75e25ef083d5a1adb3efaca30368d29df9ae63893246e80b77037d54687f4f26"
+      "bytes": 11363,
+      "sha256": "973866e38e596163a39660ac4f7379cbb9da0ccc9ce86cf31d3761ef79c901b1"
     },
     {
       "path": "neurotranslation-explained.pdf",
-      "bytes": 272964,
-      "sha256": "66406caa64b12a23fb0a0b65ae57e493fe3f690eccb276ac0a3968ad2bcf9dbd"
+      "bytes": 272988,
+      "sha256": "50be1da15710f96263c38256a77401aeda5beb10281e5863cb2e1f28356f9a9f"
     },
     {
       "path": "neurotranslation-technical.pdf",
-      "bytes": 250514,
-      "sha256": "d77cca438425abb74aa712d13a719b8eb0bfd873c4b4eebb60496fc36f54a637"
+      "bytes": 250307,
+      "sha256": "9a01168cdc313a303e1e8c70ab6b1748d3d86c7ef545e86ec7cda869d3683315"
     },
     {
       "path": "results/earlier-decoding.json",
@@ -398,7 +398,7 @@
     "endpoint": "Released index-sensor voltage 12 ticks ahead on a nominal 100 Hz grid.",
     "scope": "Frozen Random-task weights, prescribed trials from 12 fit participants and four development participants outside fitting, all 15 combinations and both index-cue groups."
   },
-  "previous_scientific_edition_commit": "69130bf97046756e498e00b62f22cbdfca2cdb2d",
+  "previous_scientific_edition_commit": "00a8893e4d8f1f6b0b85e78d0f70c4f456d1a984",
   "cemhsey_pinch_evidence": {
     "protocol": {
       "commit": "a2382b0d546c451b825e9ed5f88fcc3957bff1ea",

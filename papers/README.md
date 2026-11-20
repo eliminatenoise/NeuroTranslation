@@ -56,7 +56,7 @@ The Brain2Body paper sums up eight of these results in one table, in its section
 
 ## Not in either paper: what came after them
 
-The NeuroTranslation paper ends its account of the general model with its first five fits, in section 7.4. It then says, in one paragraph, what came next: on 20 November a fit on two datasets at once, and after it the model's first tests on people nobody had looked at, which it leaves to the repository's front page. Everything below was published after the papers were written, grouped by the question it asks.
+The NeuroTranslation paper ends its account of the general model with its first five fits, in section 7.4. It then says, in one paragraph, that later fits are outside it: a release of 20 November with a fit on two datasets at once, and later releases with the model's first tests on new people, which it leaves to the repository's front page. Everything below was published after the papers were written, grouped by the question it asks.
 
 ### Forecasts from brain, muscle and movement: brain signals mostly made them worse
 
@@ -96,11 +96,11 @@ The NeuroTranslation paper ends its account of the general model with its first 
 
 [The studies page](../benchmarks/README.md) has each of these studies with its numbers, among them the four published after the numbered table as folders of their own.
 
-## Checked twice inside the project, and by nobody outside it
+## Checked twice inside the project, its last fixes once more, and by nobody outside it
 
 Each title page says "Working draft, 21 November 2026. Not peer reviewed.", and both are true.
 
-Inside the project the papers have been checked in two rounds, each by two checkers who had not written the text. In each round one re-read every number at the result file it came from and checked the statements in words against their sources, and the other read every page for plain words and for the voice the papers are meant to have. The second round read the edition of 20 November. It checked that the first round's findings had been fixed, and asked for more: among other things, that the NeuroTranslation paper say plainly that the general model's later fits are not in it, and that the template brain it draws be named and credited. This edition carries those fixes; they have not been checked again. One kind of finding could not be settled without the cited papers themselves, and each paper says so above its references: figures quoted from other groups' papers were not re-read in the full papers. Nobody outside the project has reviewed the papers.
+Inside the project the papers have been checked in two rounds, each by two checkers who had not written the text. In each round one re-read every number at the result file it came from and checked the statements in words against their sources, and the other read every page for plain words and for the voice the papers are meant to have. The second round read the edition of 20 November. It checked that the first round's findings had been fixed, and asked for more: among other things, that the NeuroTranslation paper say plainly that the general model's later fits are not in it, and that the template brain it draws be named and credited. That final round of fixes was then verified by an independent facts check and voice check of the changed text. The facts check found every number in the changed sentences equal to its source, and five small errors of description; the voice check found that the fixes had made the NeuroTranslation paper refer to itself again and again where it says what it does not report, and that one new sentence pointed the scalp recording at a network it was never added to. The fixes those two checks found are in this edition; these last few have not been checked again. One kind of finding could not be settled without the cited papers themselves, and each paper says so above its references: figures quoted from other groups' papers were not re-read in the full papers. Nobody outside the project has reviewed the papers.
 
 Where a paper and a result file disagree, the result file is right: [the studies page](../benchmarks/README.md) is written from the result files.
 
