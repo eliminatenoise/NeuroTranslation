@@ -1406,5 +1406,31 @@
     "paper_source": "docs/papers/muscle-and-motion/muscle-and-motion-source.zip",
     "atlas": "https://eliminatenoise.github.io/Interoceptomics/muscle-and-motion/",
     "domain": "From 625 ms of offline-processed leg voltages and sacrum motion, predict eight muscle RMS amplitudes and 32 XYZ path positions over the next 125 ms. Eighteen people provided 5,179 eligible development rotations. Six people outside training provided 879 standing and 880 walking assessment rotations. Their walking records appeared in earlier research. Six reserve participants’ recording payloads stayed unopened. The joint Transformer missed its two-outcome improvement criterion against separately trained specialists. Neither force nor neural conduction time was measured."
+  },
+  "cross_limb_movement": {
+    "version": "2026-11-21 experimental preview",
+    "source_dois": [
+      "10.6084/m9.figshare.c.988376.v2",
+      "10.18112/openneuro.ds003739.v1.0.3"
+    ],
+    "methods_dois": [
+      "10.1038/sdata.2014.47",
+      "10.1016/j.dib.2021.107635"
+    ],
+    "model": "models/cross-limb-movement/README.md",
+    "model_zip": "models/cross-limb-movement-model.zip",
+    "weights": "models/cross-limb-movement/model-joint.json",
+    "source_reader": "models/cross-limb-movement/source/README.md",
+    "viewer": "docs/cross-limb-movement/index.html",
+    "offline_viewer": "docs/cross-limb-movement-offline.zip",
+    "aggregate": "models/cross-limb-movement/scores.json",
+    "linear_comparison": "models/neurotranslate-0.0/cross_limb/historical-model-comparison.json",
+    "linear_viewer": "docs/cross-limb-controls/index.html",
+    "shared_zip": "models/neurotranslate-0.0.zip",
+    "paper": "docs/papers/cross-limb-movement/index.html",
+    "paper_pdf": "docs/papers/cross-limb-movement/cross-limb-movement.pdf",
+    "paper_source": "docs/papers/cross-limb-movement/cross-limb-movement-source.zip",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/cross-limb-movement/",
+    "domain": "Across 882 lifts from three people, the shared model missed the wrist path by 4.870 mm. The arm specialist missed by 5.100 mm after the same number of arm updates and 4.394 mm when given the shared model’s full training budget. Across 1,759 visual rotations from six other people, the shared model missed the sacrum path by 2.169 mm and the exposure-matched balance specialist by 1.962 mm. The two studies measured different people performing different tasks. The arm electrical amplitude stays in its original exported units. No strict five-channel arm assessment was available."
   }
 }

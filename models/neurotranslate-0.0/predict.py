@@ -161,6 +161,11 @@ def forecast_population(cutoff_s, prior_time_s, prior_xy_cm, mode, checkpoint=DE
 
 
 def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
+    if record.get("domain") == "cross_limb":
+        from cross_limb.forecast import forecast as predict_cross_limb
+        source = Path(checkpoint)
+        state = json.loads((source.parent/"cross_limb/model.json").read_bytes())
+        return predict_cross_limb(record,state)
     if record.get("domain") == "muscle_motion":
         from muscle_motion.forecast import forecast as predict_muscles_and_path
         source = Path(checkpoint)
@@ -294,7 +299,7 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path, help="JSON muscle activity and sacrum path, visual balance, walking instruction, heel movement and force, pedal load change, muscle length change, back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
+    parser.add_argument("input", type=Path, help="JSON cross-limb movement, muscle activity and sacrum path, visual balance, walking instruction, heel movement and force, pedal load change, muscle length change, back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
     args = parser.parse_args()
     try:

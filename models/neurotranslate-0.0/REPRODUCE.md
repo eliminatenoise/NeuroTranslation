@@ -1,5 +1,7 @@
 # Predict and reproduce
 
+To forecast a 125 ms wrist or sacrum movement with its observed muscle channels, try `python predict.py cross_limb/grasp_lift-example.json`. [Rebuild the two-study comparison](cross_limb/README.md).
+
 For eight leg-muscle readings and a full 125 ms sacrum path, run `python predict.py muscle_motion/example.json`. [Fit the baseline and standing transfer models](muscle_motion/README.md).
 
 For the visual balance task run `python predict.py visual_balance/example.json`. [Rebuild the output layers, both comparison signals and the scored results](visual_balance/README.md).

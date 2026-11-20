@@ -232,3 +232,7 @@ Steven M. Peterson and Daniel P. Ferris published the Perturbed beam-walking tas
 ### Leg-muscle activity and sacrum motion
 
 Steven M. Peterson and Daniel P. Ferris recorded the standing and walking visual rotations. Their Perturbed beam-walking task, OpenNeuro ds003739 version 1.0.3, is licensed CC0 1.0. Both NeuroTranslation readers start with invented histories. The study reports group results. The linked Interoceptomics atlas credits its two measured examples at the point of use. [Dataset](https://doi.org/10.18112/openneuro.ds003739.v1.0.3) · [Methods](https://doi.org/10.1016/j.dib.2021.107635) · [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
+
+### Wrist and sacrum forecasts
+
+Matthew D. Luciw, Ewa Jarocka and Benoni B. Edin recorded the grasp-and-lift trials. The released Figshare participant deposits carry CC0, and the associated data paper credits its data and scripts under CC BY 4.0. Steven M. Peterson and Daniel P. Ferris recorded the balance trials and released them on OpenNeuro under CC0. The reader supplies invented histories, fitted forecasts and grouped study results. The paper source includes its font licence. [Grasp and lift](https://doi.org/10.1038/sdata.2014.47) · [Figshare collection](https://doi.org/10.6084/m9.figshare.c.988376.v2) · [Balance release 1.0.3](https://doi.org/10.18112/openneuro.ds003739.v1.0.3) · [Balance methods](https://doi.org/10.1016/j.dib.2021.107635)

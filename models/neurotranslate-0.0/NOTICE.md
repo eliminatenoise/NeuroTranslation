@@ -53,3 +53,5 @@ The two walking instructions study uses Céline Schreiber and Florent Moissenet�
 Peterson and Ferris released the visual balance recordings under CC0. [Original data](https://doi.org/10.18112/openneuro.ds003739.v1.0.3) · [Article](https://doi.org/10.1016/j.dib.2021.107635).
 
 The muscle and sacrum study uses CC0 measurements by Steven M. Peterson and Daniel P. Ferris. [Dataset version 1.0.3](https://doi.org/10.18112/openneuro.ds003739.v1.0.3) · [Original data publication](https://doi.org/10.1016/j.dib.2021.107635).
+
+The cross-limb control models use the WAY-EEG-GAL dataset of Luciw, Jarocka and Edin and the visual-balance dataset of Peterson and Ferris. Both original recording releases carry CC0 source notices. [WAY data](https://doi.org/10.6084/m9.figshare.c.988376.v2) · [Balance data](https://doi.org/10.18112/openneuro.ds003739.v1.0.3).

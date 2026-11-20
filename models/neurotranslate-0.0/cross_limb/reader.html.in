@@ -1,0 +1,73 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A wrist and a pelvis on the same clock · NeuroTranslate</title><style>
+*{box-sizing:border-box}html{font:17px/1.48 system-ui,sans-serif;color:#1a3633;background:#f4f4ee}body{max-width:1130px;margin:auto;padding:clamp(15px,4vw,50px)}h1{font-size:clamp(2.4rem,6vw,4.65rem);line-height:1.02;letter-spacing:-.05em;margin:.35em 0;max-width:920px}.intro{font-size:1.16rem}p{max-width:77ch}h2{font-size:1.43rem;line-height:1.2;margin:.1em 0 .8em}.study{display:grid;grid-template-columns:minmax(220px,.82fr) minmax(0,1.6fr);gap:14px;margin:1.5rem 0}.panel{background:white;border:1px solid #bbcbbd;border-radius:12px;padding:clamp(14px,2.8vw,28px)}label{display:block;font-weight:650;margin:.75rem 0 .18rem}select,input{width:100%;font:inherit;accent-color:#1e7564}select{color:#1a3633;border:1px solid #8e9c90;border-radius:5px;background:white;padding:.4em}a{color:#006557}canvas{height:184px;width:100%;display:block}.small{font-size:.92rem;color:#4a5f54}.answer{border-top:2px solid #247665;display:block;font-weight:650;padding-top:.45rem;margin:.65rem 0}table{border-collapse:collapse;width:100%;font-size:.93rem}td,th{text-align:left;border-bottom:1px solid #d6ded4;padding:.4em .18em}td+td,th+th{text-align:right;font-variant-numeric:tabular-nums}.grid{display:grid;grid-template-columns:1fr 1fr;gap:3px 1.2rem}.grid div{display:flex;gap:.3rem;justify-content:space-between;border-bottom:1px solid #e1e6dd;font-size:.9rem;font-variant-numeric:tabular-nums}.note{color:#465c50}.download{margin-top:1.6em}@media(max-width:700px){.study,.grid{grid-template-columns:1fr}body{padding:14px}td,th{padding:.36rem .1rem}table{font-size:.83rem}}
+</style></head><body><main>
+<header><p>NeuroTranslate 0.0 · Cross-limb controls</p><h1>A wrist and a pelvis on the same clock</h1><p class="intro">A wrist moves as a person reaches for an object. A marker on the lower back moves as another person balances. Here one set of rules can read either history. It estimates the muscle signals and the marker path over the next eighth of a second.</p></header>
+<div class="study"><section class="panel"><h2>Try two invented recordings</h2><label for="source">Recording type</label><select id="source"><option value="grasp_lift">Arm · grasp and lift</option><option value="balance">Leg · visual balance</option></select>
+<label for="method">Forecast method</label><select id="method"></select>
+<label for="gain">First muscle’s voltage scale <output id="gainV"></output></label><input type="range" id="gain" min=".25" max="3" step=".05" value="1">
+<label for="turn">Rotate the first two axes <output id="turnV"></output></label><input type="range" id="turn" min="-180" max="180" step="5" value="0">
+<label for="mask">Arm channels supplied</label><select id="mask"><option value="5">Five available</option><option value="4">First four available</option><option value="3">First three available</option></select><p id="explain" class="small"></p></section>
+<section class="panel"><h2 id="marker">Marker path</h2><canvas id="chart" role="img" aria-label="Projection of earlier invented motion and the 32 future points forecast from it"></canvas><p class="small">The solid line shows past movement. The dotted line is the 32-point forecast on the first two display axes. Changing the angle rotates this chart and its coordinate values.</p><output id="xyz" class="answer"></output><h2>Predicted muscle amplitude</h2><div class="grid" id="vals" aria-live="polite"></div><p id="units" class="small"></p></section></div>
+<section class="panel"><h2>What carried over on the recorded events?</h2><label for="sample">People scored</label><select id="sample"><option value="assessment">Historical assessment</option><option value="development">Development · held-person folds</option></select><p id="coverage"></p>
+<table><thead><tr><th>Training data or rule</th><th id="ampunit">Muscle error</th><th>Path error (mm)</th><th>End error (mm)</th></tr></thead><tbody id="scores"></tbody></table><p id="verdict"></p></section>
+<section><h2>What can stay the same across limbs?</h2><p>The rule compares each muscle’s recent pattern with its own earlier amplitude. It learns combinations of past movement vectors. A muscle with a larger voltage scale should get a larger predicted voltage, and turning the coordinate frame should turn the movement forecast. Neither operation adds a new observation. The device used for the arm recordings has no verified conversion from its exported amplitude to microvolts.</p><p>The two experiments measured different people doing different tasks. Missing or unreliable muscle channels are omitted. A shared formula can be tested against separate fits on those two sets of recordings. Its error cannot establish that one limb has learned a skill from the other.</p></section>
+<footer class="download"><a href="https://eliminatenoise.github.io/NeuroTranslation/cross-limb-movement/">Try the trainable Transformer</a> · <a href="https://eliminatenoise.github.io/Interoceptomics/cross-limb-movement/">Explore the measured events</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/papers/cross-limb-movement/">Read the paper</a></footer></main>
+<script type="application/json" id="payload">@@PAYLOAD@@</script><script>
+'use strict';
+const pack=JSON.parse(document.getElementById('payload').textContent),state=pack.state,$=id=>document.getElementById(id);
+const labels={pooled:'One rule fitted on both studies',leg:'Balance recordings only',arm:'Grasp-and-lift recordings only',arm_limited:'Early arm events only',leg_limited:'Early balance events only',leg_to_arm:'Balance fit adjusted on early arm events',arm_to_leg:'Arm fit adjusted on early balance events',hold_still:'Hold muscle amplitude and position',hold_repeat:'Hold muscle amplitude, repeat recent path',hold_velocity:'Hold muscle amplitude, continue recent velocity',context_mean:'Typical reading for the recorded task'};
+for(const [k,v] of Object.entries(labels))$('method').add(new Option(v,k));
+const avg=x=>x.reduce((a,b)=>a+b,0)/x.length, dot=(a,b)=>a.reduce((sum,v,i)=>sum+v*b[i],0);
+function estimate(mode,r){
+ const data=r.patch_rms,h=r.patch_xyz_mm,m=data[0].length,prev=r.repeat_path_mm;
+ const scale=Array.from({length:m},(_,i)=>Math.sqrt(avg(data.map(row=>row[i]**2))));
+ const z=data.map(row=>row.map((v,i)=>scale[i]?v/scale[i]:0)),across=z.map(avg);
+ const rms=Array.from({length:m},(_,i)=>Math.sqrt(avg(data.slice(-4).map(row=>row[i]**2))));
+ if(mode==='hold_still')return {rms,path:Array.from({length:32},()=>[0,0,0])};
+ if(mode==='hold_repeat')return {rms,path:prev};
+ if(mode==='hold_velocity')return {rms,path:prev.map((_,i)=>prev[31].map(v=>v*(i+1)/32))};
+ if(mode==='context_mean'){
+   const k=r.study==='grasp_lift'?'grasp_lift':('balance/'+(r.context.startsWith('walking')?'1':'0')+'/'+(r.context.endsWith('ccw')?'-1':'1'));
+   const v=state.means[k],all=[...pack.examples.balance.channel_names,...pack.examples.grasp_lift.channel_names];
+   return {rms:r.channel_names.map(n=>v.rms[all.indexOf(n)]),path:v.path};}
+ const fit=state.fits[mode],s=4*Math.sqrt(avg(h.slice(1).map((row,i)=>row.reduce((a,v,j)=>a+(v-h[i][j])**2,0))));
+ const basis=[1,2,4,8,16].map(k=>h[19].map((v,j)=>s>=1e-8?(v-h[19-k][j])/s:0));
+ const descriptors=basis.map(row=>Math.hypot(...row));
+ const result=rms.map((v,i)=>Math.max(0,v+scale[i]*dot([...z.map(row=>row[i]),1,...across,...descriptors],fit.muscle_coef)));
+ function fraction(rows){return avg(scale.map((_,i)=>Math.sqrt(avg(rows.map(row=>row[i]**2)))));}
+ const multipliers=[1,fraction(z.slice(-4)),fraction(z.slice(-8,-4))];
+ const cols=[0,1,2].map(j=>basis.flatMap(row=>multipliers.map(a=>a*row[j])));
+ return {rms:result,path:prev.map((row,t)=>row.map((v,j)=>v+s*cols[j].reduce((sum,u,i)=>sum+u*fit.path_coef[i][t],0)))};
+}
+function fixture(){
+ const study=$('source').value,r=structuredClone(pack.examples[study]),n=study==='grasp_lift'?+$('mask').value:8;
+ const g=+$('gain').value,angle=+$('turn').value*Math.PI/180,c=Math.cos(angle),s=Math.sin(angle);
+ function rotate(row){return [c*row[0]-s*row[1],s*row[0]+c*row[1],row[2]];}
+ r.patch_rms=r.patch_rms.map(row=>row.slice(0,n).map((v,i)=>i===0?g*v:v));r.channel_names=r.channel_names.slice(0,n);
+ r.patch_xyz_mm=r.patch_xyz_mm.map(rotate);r.repeat_path_mm=r.repeat_path_mm.map(rotate);return r;
+}
+function draw(h,f){
+ const cv=$('chart'),w=cv.clientWidth,height=cv.clientHeight,ratio=window.devicePixelRatio||1;cv.width=w*ratio;cv.height=height*ratio;const g=cv.getContext('2d');g.scale(ratio,ratio);
+ const a=h.slice(-5),b=[[0,0,0],...f],all=[...a,...b],xs=all.map(p=>p[0]),ys=all.map(p=>p[1]),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+ const sc=Math.min((w-48)/Math.max(x1-x0,3),(height-38)/Math.max(y1-y0,3));
+ const pos=p=>[w/2+(p[0]-(x0+x1)/2)*sc,height/2-(p[1]-(y0+y1)/2)*sc];
+ function line(seq,color,dash){g.strokeStyle=color;g.lineWidth=2.8;g.setLineDash(dash);g.beginPath();seq.forEach((p,i)=>i?g.lineTo(...pos(p)):g.moveTo(...pos(p)));g.stroke();}
+ line(a,'#1b7965',[]);line(b,'#a95231',[4,3]);g.fillStyle='#a95231';g.beginPath();g.arc(...pos(f[31]),4,0,2*Math.PI);g.fill();
+}
+function refresh(){const r=fixture(),arm=r.study==='grasp_lift',v=estimate($('method').value,r);
+ $('mask').disabled=!arm;$('turnV').textContent=$('turn').value+'°';$('gainV').textContent=(+$('gain').value)+'×';
+ $('explain').textContent='The gain control multiplies the observed voltage for the '+r.channel_names[0]+'. It illustrates a scale change on this invented history.';
+ $('marker').textContent=arm?'Right wrist path':'Sacrum path';$('xyz').textContent='Final change on the three display axes: '+v.path[31].map(n=>n.toFixed(2)).join(', ')+' mm';
+ draw(r.patch_xyz_mm,v.path);$('vals').replaceChildren(...v.rms.map((x,i)=>{const box=document.createElement('div'),n=document.createElement('span'),val=document.createElement('span');n.textContent=r.channel_names[i];val.textContent=x.toFixed(arm?4:2);box.append(n,val);return box;}));
+ $('units').textContent=arm?'Values use the original grasp-and-lift recording’s amplitude scale. A missing arm channel has no forecast in this example.':'Values are predicted RMS voltages in microvolts (µV) from eight lower-leg surface electrodes.';table();}
+function table(){
+ const arm=$('source').value==='grasp_lift',q=pack[$('sample').value][arm?'grasp_lift':'balance'],target=arm?'arm':'leg',source=arm?'leg':'arm';
+ const rows=['pooled',target,source,target+'_limited',source+'_to_'+target,'hold_repeat','hold_velocity'];
+ $('ampunit').textContent=arm?'Muscle error (source units)':'Muscle error (µV)';
+ $('coverage').textContent=q.events+' eligible events from '+q.people+' people. '+(arm?q.strict+' of these events have all five muscle channels qualified. The table measures error only on available channels.':'Each person’s standing and walking recordings have equal weight.');
+ $('scores').replaceChildren(...rows.map(k=>{const tr=document.createElement('tr');for(const val of [labels[k],q.errors[k][0].toFixed(arm?5:2),q.errors[k][1].toFixed(2),q.errors[k][2].toFixed(2)]){const td=document.createElement('td');td.textContent=val;tr.append(td);}return tr;}));
+ const passed=q.transfer_pass.map((v,i)=>v?['muscle amplitude','marker path'][i]:null).filter(Boolean);
+ $('verdict').textContent=passed.length?'The calibrated foreign-study fit met the adjusted comparison against limited target-only training here for '+passed.join(' and ')+'.':'Starting with the other study’s coefficients did not establish an improvement over the matched limited target-only fit for either outcome here.';}
+['method','source','gain','turn','mask'].forEach(k=>$(k).addEventListener('input',refresh));$('sample').addEventListener('change',table);window.addEventListener('resize',refresh);refresh();
+</script></body></html>
