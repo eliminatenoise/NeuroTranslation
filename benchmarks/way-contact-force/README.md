@@ -1,65 +1,71 @@
-# Grip after contact
+[The studies](../README.md) › Study 10 · Pinch and lift: grip force, timed from the squeeze
 
-The force plates register a squeeze. How hard will the fingers be pressing in 120 milliseconds? In these recorded lifts, the hand and object already tell us quite a bit. Across 882 lifts from three people, a ridge regression using earlier force and motion averaged **0.676974 N** of error. Adding scalp EEG raised the average to **0.695471 N**. A temporal convolution also gave more error with aligned EEG than with mechanics alone. Both results come from the same previously explored development recordings.
+# Timed from the squeeze, EEG made the grip forecast worse for all three people
+
+The plates register a squeeze: how hard will the fingers be pressing 120 ms later? For the three test people of [study 9](../way-grip-force/), across 882 lifts, a straight-line fit on the earlier force and motion missed by **0.6770 N**. Given scalp EEG as well, it missed by **0.6955 N**: 0.0185 N worse, and worse for each of the three. A learned forecast also did worse with EEG than without it. The pass rule set before scoring asked EEG to beat both the fit without it and EEG from another lift; it beat neither.
+
+Every score here is the measure that punishes large misses (root mean squared error), worked out for each person and averaged over the three. EEG is electrical activity of the brain, picked up on the scalp. A *straight-line fit* is a weighted sum of its inputs, here a ridge regression; a *learned forecast* is a small network that reads a stretch of recent history, here a temporal convolutional network.
+
+| Forecast, on the same forecasts for every row | Error, averaged over the three people (N) |
+| --- | ---: |
+| Repeat the current force | 1.717316 |
+| Carry the last 80 ms of change forward | 1.347735 |
+| Straight-line fit · force and motion | **0.676974** |
+| Straight-line fit · force, motion and EEG timed with the lift | 0.695471 |
+| Straight-line fit · force, motion and EEG from another lift | 0.691861 |
+| Learned forecast · timing only | 2.399912 |
+| Learned forecast · force and motion | **0.977953** |
+| Learned forecast · force, motion and EEG timed with the lift | 0.993569 |
+| Learned forecast · force, motion and EEG from another lift | 0.987271 |
+| Learned forecast · force, motion and EEG from 300 ms earlier | 0.983329 |
+
+For each person the error counts every lift equally, and every scored moment equally within a lift; then the three people's errors are averaged. Every row uses the same 4,410 forecasts from 882 lifts. The five forecasts from each lift are repeated looks at the same lift, so the person is the unit for the paired comparisons below.
+
+| Paired comparison (first minus second) | Average change (N) | 95% interval across the three people (N) | People with lower error on the first | Two-sided exact sign test p |
+| --- | ---: | ---: | ---: | ---: |
+| Straight-line fit · EEG timed with the lift − no EEG | +0.018497 | [−0.003430, +0.040424] | 0 of 3 | 0.25 |
+| Straight-line fit · EEG timed with the lift − EEG from another lift | +0.003610 | [−0.022002, +0.029222] | 2 of 3 | 1.00 |
+| Learned forecast · EEG timed with the lift − no EEG | +0.015616 | [−0.136012, +0.167244] | 1 of 3 | 1.00 |
+| Learned forecast · EEG timed with the lift − EEG from another lift | +0.006298 | [−0.045941, +0.058538] | 2 of 3 | 1.00 |
+| Learned forecast · EEG timed with the lift − EEG from 300 ms earlier | +0.010239 | [−0.119302, +0.139781] | 1 of 3 | 1.00 |
+
+The intervals are descriptive, worked out from the three people's paired changes. The best result here was the straight-line fit on force and motion. It used different inputs and training choices from the learned forecast, so the gap between the two says nothing about which kind of model is better. [Results file, unrounded, with where the data came from](RESULTS.json)
+
+## When the clock starts
+
+[Study 9](../way-grip-force/) forecast on a schedule tied to the go cue. A cue tells a person when to start; a force plate tells us when the squeeze reaches a level that can be seen. Here the cue starts the search for that moment, and the force sets the schedule.
+
+On the 500 Hz recording clock, wait after the LED cue for a grip sample below 0.5 N. Then count ten samples in a row at or above 0.5 N; a dip below 0.5 N breaks the run. Time zero is the **tenth** sample, 18 ms after the first sample of the run, so the rule confirms the crossing when it happens instead of dating it back. A trial already at or above the threshold at the first sample after the cue has a crossing that cannot be known, and is left out as censored. The rule marks a moment in the recorded force; the first touch of the skin and the source study's own touch annotations are different events.
+
+Forecasts are made at **0, 100, 200, 300 and 400 ms** after that moment. Each window takes the 200 sensor rows ending at the moment of the forecast, 398 ms from first to last sample. The target is the measured average normal force on the two fingertip plates, compression positive, **60 samples (120 ms) later**. The straight-line fit uses the average grip and the summed load columns of the source's windowed files, with the grip's sign turned so that compression is positive, and keeps the source's scales for position and the electrical signals. The trial cutting, processing and synchronising of the source all come before this study. The 120 ms is time on the recording clock; the sensing, processing and display delays of a live system were never measured.
+
+## What EEG was given, and what it was tested against
+
+The straight-line fit uses features of the earlier grip, load and four position tracks, with a penalty that keeps its weights small. Its timing inputs are the time since the cue and the time since the squeeze was confirmed. The EEG version adds summaries of the 32 scalp channels over the same history. The learned forecast instead reads the series through convolutions that see only samples up to the moment of the forecast, after averaging the 200 rows into 50 bins of four samples; its timing-only version sees the trial's timing. Both kinds of model had their settings fixed on six fitting people, with 1,763 confirmed lifts and 8,815 forecast windows for the common group. The test applied those fixed fits; nothing new was chosen or fitted.
+
+Moving the scalp recording in time tests whether the right pairing matters. The other-lift control keeps the original force and motion and takes EEG from the next usable lift of the same person, recording series, object weight and surface, scored at the same time after that lift's own squeeze. The 300 ms control keeps the same lift and moves the EEG window 300 ms earlier; its history still overlaps the timed window by 100 ms. These controls keep parts of the task's stage and the recording's context. Movement and muscle activity can reach scalp EEG, and this comparison cannot say where any effect comes from.
+
+## What it does not show
+
+Three healthy adults, already explored in study 9, doing one pinch-lift task; the intervals leave room for effects either way. Other recordings, features and tasks can give other answers. Three more people were set aside when the people were split, and their recordings have not been opened. The original recordings, the results of single people and the set-aside group are not published here. [SHA-256 checksums](SHA256SUMS)
 
 ## Run the forecasts
 
-Put ridge and the temporal CNN side by side on the same past readings. Move the issue time, change the inputs, or reveal the recorded target when your capture supplies it. The browser opens with an invented squeeze and can read a compatible capture without uploading it. [Open the browser comparison](https://eliminatenoise.github.io/NeuroTranslation/contact-force/) · [Download the offline comparison and launchers](NeuroTranslation-Grip-After-Contact-Comparison.zip) · [Rebuild from the fitted model ZIPs](browser-release/)
+Put the straight-line fit and the learned forecast side by side on the same past readings. Move the moment of the forecast, change the inputs, or reveal the recorded target when your recording has it. The page opens on an invented squeeze and reads a compatible recording on your computer without sending it anywhere. [Open the browser comparison](https://eliminatenoise.github.io/NeuroTranslation/contact-force/) · [Download the offline comparison and launchers](NeuroTranslation-Grip-After-Contact-Comparison.zip) · [Rebuild it from the fitted model ZIPs](browser-release/)
 
-The command-line runners are also available.
+The command-line runners are here too.
 
-| Download | What runs | Requirements |
+| Download | What runs | Needs |
 | --- | --- | --- |
-| [Grip after contact · ridge regression ZIP](NeuroTranslation-Grip-After-Contact-Experimental-Preview.zip) | Five fitted predictors and two force formulas. The runner can detect force confirmation in a compatible local capture. | Python 3.10+ and NumPy |
-| [Grip after contact · temporal CNN ZIP](grip-contact-temporal-preview.zip) | Three fitted predictors. Give the runner a window prepared through the forecast time to compare timing, mechanics and aligned EEG. | Python 3.10+ |
+| [Grip after contact · straight-line fit ZIP](NeuroTranslation-Grip-After-Contact-Experimental-Preview.zip) | Five fitted forecasts and two force formulas. The runner can find the confirmed squeeze in a compatible recording of your own. | Python 3.10+ and NumPy |
+| [Grip after contact · learned forecast ZIP](grip-contact-temporal-preview.zip) | Three fitted forecasts. Give the runner a window prepared up to the moment of the forecast to compare timing, force and motion, and timed EEG. | Python 3.10+ |
 
-Extract either ZIP. On Linux run `sh ./Run-Linux.sh` in the extracted folder. On macOS use `sh ./Run-macOS.command`. On Windows open `Run-Windows.cmd`. Each starts with invented readings and prints forecasts in newtons. Both packages ran on Linux. Their macOS and Windows launchers have had static checks.
+Extract either ZIP. On Linux run `sh ./Run-Linux.sh` in the extracted folder; on macOS use `sh ./Run-macOS.command`; on Windows open `Run-Windows.cmd`. Each starts with invented readings and prints forecasts in newtons. Both packages ran on Linux; their macOS and Windows launchers have been checked by reading, not by running.
 
-To use recorded inputs, see the array layouts and units in each archive’s README. The ridge runner accepts a local NumPy file with a compatible capture and go-cue time. The temporal runner accepts a local JSON window aligned and cut by the caller. Both run offline. The examples exercise the shipped weights on invented inputs. The ridge runner can return forecasts outside physically plausible bounds. The errors below come from measured lifts. Control comparisons using a different or earlier EEG window are reported in the study results.
+To use recorded inputs, see the array layouts and units in each archive's README. The straight-line runner takes a local NumPy file with a compatible recording and its go-cue time; the learned-forecast runner takes a JSON window that you align and cut yourself. Both run offline. The examples run the shipped weights on invented inputs, and the straight-line runner can return forecasts outside what is physically possible. The errors above come from measured lifts. The archives hold the input recipes, code, fitted weights, training checks and summary results.
 
-## When does the clock start?
+The same question in a different grip task, where EEG raised the error too: [Study 11 · Paced grip: brain signal](../hygrip-force/).
 
-The [earlier cue-grid study](../way-grip-force/) asked for predictions on a schedule tied to the go cue. A cue tells a person when to start. A force plate tells us when the squeeze reaches an observable level. Here the cue starts the search for a crossing, then the force signal sets the schedule.
+## Whose recordings
 
-On the 500 Hz recording clock, wait for a grip sample below 0.5 N after the LED cue. Count ten consecutive samples at or above 0.5 N after the crossing. A dip below 0.5 N breaks the run. Put time zero on the **tenth** sample, 18 ms after the first sample in the successful run. The rule can confirm the crossing at that point without backdating it. A trial already at or above the threshold at the first available post-cue sample has an unknown crossing and is treated as left-censored. This rule defines a recorded-force proxy. First anatomical touch and the source study’s digit-touch annotations describe separate events.
-
-Make a forecast at **0, 100, 200, 300 and 400 ms** after confirmation. Each window takes the 200 sensor rows ending at the issue sample. Its first and last samples are 398 ms apart. The target is the measured mean normal force on the two fingertip plates, positive for compression, **60 samples (120 ms) later**. The ridge input uses the mean grip and summed load columns of the source windowed files, changing the grip sign to make compression positive. It retains the source scales for position and electrical signals. Stored trial segmentation, source preprocessing and synchronization precede the benchmark. The 120 ms describes time on the recording clock. Sensing, processing and display delays in a live setup remain unmeasured.
-
-## What does EEG add?
-
-The registered ridge study fits a penalty-regularized linear regression on engineered features from earlier grip, load and four position tracks. Its timing inputs are elapsed time since the cue and time since force confirmation. The EEG branch adds summaries of the 32 scalp channels from the same history. The CNN diagnostic instead feeds the time series through causal convolutions, which only see samples through issue. It averages the 200 rows into 50 consecutive four-sample bins. The timing-only branch sees trial timing. Both model families fixed their settings using six training people, with 1,763 confirmed lifts and 8,815 forecast windows for the common population. The development run applied the frozen fits without selecting or fitting a new model.
-
-Changing when the scalp recording was made tests whether the correct pairing matters. The rotated control keeps the original mechanics and takes EEG from the next eligible lift in the same person, recording series, object mass and surface. The donor is evaluated at the same offset after its own confirmation. The lagged CNN control keeps the same lift and moves the EEG window 300 ms earlier. Its history still overlaps the aligned window by 100 ms. These controls preserve aspects of task phase and recording context. Movement and muscle activity can contribute to scalp EEG, and this comparison cannot establish the source of any effect.
-
-| Forecast on matched development rows | Mean participant RMSE (N) |
-| --- | ---: |
-| Keep the current force | 1.717316 |
-| Extend the backward 80 ms slope | 1.347735 |
-| Ridge · force and motion | **0.676974** |
-| Ridge · mechanics + aligned EEG | 0.695471 |
-| Ridge · mechanics + rotated EEG | 0.691861 |
-| CNN · timing only | 2.399912 |
-| CNN · force and motion | **0.977953** |
-| CNN · mechanics + aligned EEG | 0.993569 |
-| CNN · mechanics + rotated EEG | 0.987271 |
-| CNN · mechanics + lagged EEG | 0.983329 |
-
-For each person, calculate the root mean squared error (RMSE) with equal weight per lift and per scored offset within that lift. Then average the three people’s RMSEs. The compared branches use the same **4,410 forecasts from 882 lifts**. The five windows from each lift are repeated observations from the same lift, so the person is the unit for the paired comparison.
-
-| Paired comparison (first minus second) | Mean change (N) | Descriptive 95% paired t interval (N) | People with lower error on the first branch | Two-sided exact sign p |
-| --- | ---: | ---: | ---: | ---: |
-| Ridge · aligned EEG − mechanics | +0.018497 | [−0.003430, +0.040424] | 0 of 3 | 0.25 |
-| Ridge · aligned EEG − rotated EEG | +0.003610 | [−0.022002, +0.029222] | 2 of 3 | 1.00 |
-| CNN · aligned EEG − mechanics | +0.015616 | [−0.136012, +0.167244] | 1 of 3 | 1.00 |
-| CNN · aligned EEG − rotated EEG | +0.006298 | [−0.045941, +0.058538] | 2 of 3 | 1.00 |
-| CNN · aligned EEG − lagged EEG | +0.010239 | [−0.119302, +0.139781] | 1 of 3 | 1.00 |
-
-The registered criterion required aligned EEG to beat both mechanics and rotated EEG on average. It lost both comparisons. Aligned EEG incurred higher error on average in the temporal diagnostic too. The best measured result here was the mechanical ridge. It used different input features and training choices from the CNN, so the gap does not isolate the effect of architecture. With just three previously explored healthy adults performing one pinch-lift task, the intervals leave room for effects in either direction. Different recordings, features and tasks can produce different results. The reserved final test cohort remained unopened.
-
-The [aggregate results](RESULTS.json) give unrounded comparisons and data provenance. The archives include the input recipes, code, fitted parameters, training diagnostics and aggregate results. Their offline examples accept locally prepared inputs. The original recordings, participant-level results and final test set are outside this release. [SHA-256 checksums](SHA256SUMS)
-
-A separate study, HYGRIP, asked what scalp EEG adds to a forecast during paced power grip against a hand-held transducer. There too EEG raised the error. [Read the HYGRIP study](../hygrip-force/)
-
-## Source recordings
-
-Matthew D. Luciw, Ewa Jarocka and Benoni B. Edin recorded healthy adults pinching and lifting an object while its weight and surface varied. They measured fingertip force, hand and object position, scalp potentials and surface muscle activity. The European Commission supported the original recordings through the WAY project (FP7-ICT-288551). The descriptor and data deposit document the original measurements, clocks and reuse terms. [Scientific Data descriptor](https://doi.org/10.1038/sdata.2014.47) · [WAY-EEG-GAL Figshare collection, version 2](https://doi.org/10.6084/m9.figshare.988376)
+Matthew D. Luciw, Ewa Jarocka and Benoni B. Edin recorded healthy adults pinching and lifting an object while its weight and surface varied. They measured fingertip force, hand and object position, scalp potentials and surface muscle activity. The European Commission supported the original recordings through the WAY project (FP7-ICT-288551). The descriptor and the data deposit document the original measurements, clocks and terms of reuse. [Scientific Data descriptor](https://doi.org/10.1038/sdata.2014.47) · [WAY-EEG-GAL Figshare collection, version 2](https://doi.org/10.6084/m9.figshare.988376)
