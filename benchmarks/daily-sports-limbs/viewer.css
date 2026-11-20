@@ -1,0 +1,29 @@
+*{box-sizing:border-box}
+:root{font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#112820;background:#f2f5ee;line-height:1.5}
+body{margin:0}
+header,main{max-width:940px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #b6c5b8;padding:20px 0;font-size:.95rem}
+header strong{letter-spacing:-.03em;font-size:1.15rem}header strong span{font-weight:500;color:#476456}
+.intro{display:flex;align-items:flex-end;justify-content:space-between;gap:3rem;padding:48px 0 28px}
+h1,h2,p{margin-top:0}h1{font-size:clamp(2.8rem,7.5vw,5rem);letter-spacing:-.075em;line-height:.95;margin-bottom:18px;font-weight:650}
+h2{font-size:1.37rem;letter-spacing:-.04em;margin-bottom:6px}.intro p,.input p{max-width:53ch}
+aside{display:grid;min-width:165px;padding-left:14px;border-left:3px solid #418064;color:#345443;font-size:.87rem}
+aside strong{font-size:1.15rem;color:#122b20}
+.panel{background:#fff;border:1px solid #c2cec2;border-radius:12px;padding:24px}
+.panel-heading,.actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+label{font-weight:600;font-size:.9rem}select,button{font:inherit}
+select{background:white;border:1px solid #809589;padding:.45rem .7rem;border-radius:5px;color:inherit}
+#context,.status,.chart-key,caption{font-size:.875rem;color:#435d4c}
+#chart{min-height:150px;background:#f4f7f1;border-radius:5px}svg{width:100%;height:auto;display:block}
+.chart-key{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:6px 0 14px}
+.axis{font-weight:700}.x{color:#136c52}.y{color:#8a4516}.z{color:#505295}
+.table-scroll{overflow:auto}table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+caption{text-align:left;margin-bottom:.2rem}th,td{text-align:right;border-bottom:1px solid #d7e0d5;padding:.45rem .4rem}
+th:first-child{text-align:left}th{font-weight:600}tbody tr:first-child{background:#e8f1e5}
+.status{margin:12px 0 0}.input{padding:32px 0}.input label{display:block}
+textarea{width:100%;resize:vertical;margin:4px 0 10px;border:1px solid #a7b8a9;border-radius:6px;background:white;color:#183d26;font-family:ui-monospace,monospace;padding:10px}
+.actions{justify-content:flex-start}button{border:1px solid #183f2f;border-radius:5px;background:#183f2f;color:white;padding:.55rem .85rem;cursor:pointer;font-weight:600}
+button.secondary{background:transparent;color:#183f2f}button:disabled{opacity:.5;cursor:wait}
+:focus-visible{outline:3px solid #93600d;outline-offset:2px}footer{padding:16px 0 30px;border-top:1px solid #bfcebf;color:#435d4c;font-size:.86rem}
+@media(max-width:1000px){header,main{margin-left:5vw;margin-right:5vw}}
+@media(max-width:620px){.intro{align-items:flex-start;flex-direction:column;gap:4px;padding-top:30px}.panel{padding:14px}.panel-heading{align-items:flex-start}.chart-key{gap:8px}th,td{padding:.4rem .2rem}}

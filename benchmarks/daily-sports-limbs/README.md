@@ -2,7 +2,17 @@
 
 Pick the sensor on a walker’s left leg. Give NeuroTranslate 0.0 its last 16 readings. What will the accelerometer read 120 milliseconds later? Switch to the right arm and ask the same question. One checkpoint handles both arms, both legs and the torso. Each forecast stays in the local axes of the sensor you chose.
 
-## Try it
+## Open the local demo
+
+With the Python requirements installed, open the launcher for your operating system or run the command below. Select a body part to forecast its first recorded window. The plot shows the 16 observations and the model’s prediction alongside the reading at the target time. Paste a comparable sensor window to run another forecast through the same checkpoint. The browser speaks only to the local Python process. Press Ctrl+C in its terminal to close it.
+
+```sh
+python serve.py
+```
+
+[Windows launcher](<Open on Windows.cmd>) · [macOS launcher](<Open on macOS.command>) · [Linux launcher](<Open on Linux.sh>)
+
+## Try the command line
 
 The examples are real readings from the first parking-lot walking segment used for training. From this folder, use an environment with Python 3.13, NumPy and CPU PyTorch. The recorded run used NumPy 2.4.6 and PyTorch 2.14.1+cpu.
 
