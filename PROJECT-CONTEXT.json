@@ -41,10 +41,10 @@
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
   "experimental_previews": {
     "data_companion": {
-      "version": "2026-11-20 recording readers with population rise and fall corrections",
+      "version": "Recording readers including overground walking force",
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
-      "buildId": "5e71d324c7376767547121be9b4b028ad74def6a913598943664889925407f16",
+      "buildId": "ecd988c8dcb282aa7a9f4a35a5a70f449040ee1617a4fe97d9d67484746e76bf",
       "meaning": "Import and inspect recordings locally. Replay the fit made on first recordings (R1), or compare the fixed and personally calibrated models on an imported second recording (R2). Complete R2 trials are checked against their archived sample clock and the four input streams the study used. Group results are shown separately.",
       "hosting": "Static files in docs/ on the main branch, served by GitHub Pages.",
       "study": "benchmarks/scalp-eeg-palm-history",
@@ -1173,5 +1173,13 @@
       "docs/papers/walking-rhythm/gait-clocks.pdf"
     ],
     "scope": "Five participants with different cortical recording layouts contributed to calibrated finger-transfer comparisons. Seven walkers fitted and three tested the knee-moment model. The two studies use separate people, clocks and units."
+  },
+  "overground_walking_force": {
+    "two_plate_model": "models/walking-force/README.md",
+    "two_plate_reader": "docs/walking-force/index.html",
+    "right_plate_model": "models/neurotranslate-0.0/right-plate/README.md",
+    "right_plate_reader": "docs/shared-motion/index.html#right-plate",
+    "paper": "docs/papers/muscle-and-floor/muscle-and-floor.pdf",
+    "scope": "Retrospective tests on slow overground walking. Eight held-out people contributed 17 trials to the two-plate task and 16 to the assigned right-plate task. Neither established the prespecified benefit of adding muscle signals."
   }
 }

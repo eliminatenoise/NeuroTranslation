@@ -416,3 +416,7 @@ Three rats supplied the training data. On three different rats, 549 forecasts es
 ## Whose recordings these are
 
 Every dataset, who made it, its licence and the credit it is owed: [docs/RIGHTS.md](../docs/RIGHTS.md). The newer studies' datasets are there too.
+
+### Muscle activity and force underfoot
+
+Six models estimate the combined load recorded on two plates during slow overground walking. Eight held-out people contributed 17 trials. The marker Transformer averaged 65.19 N absolute error, the marker and muscle Transformer 70.20 N, and carrying forward an earlier plate reading 63.43 N. A separate experiment forecasts the plate assigned to the right foot after heel strike. The recordings were filtered in both directions before release, so the time offset describes the stored signals. [Two-plate methods and full results](../models/walking-force/) · [Right-foot plate methods and results](../models/neurotranslate-0.0/right-plate/) · [Paper](https://eliminatenoise.github.io/NeuroTranslation/papers/muscle-and-floor/)

@@ -1,7 +1,7 @@
 {
   "checkpoints": {
     "spatial": "9a3649cb8f2119984e7f9f0b96a07bdc95e1833c7068f0e9caef2680f22e3179",
-    "movement": "7a0c17c66049fba7812d0acf1392af21829c3c6528ace3667202c8091f97f8b4"
+    "movement": "a52af3c0875a43d3ce8ae70ae7eaa8cf83a9bcd4f75422f1cc84bea6fd8379ee"
   },
   "config": {
     "format": 1,
@@ -79,6 +79,20 @@
         "left_ankle"
       ],
       "units": "N m/kg"
+    },
+    "right_plate_force": {
+      "format": 1,
+      "input_bin_ms": 60,
+      "bins": 4,
+      "elapsed_since_annotated_strike_frames": [
+        14,
+        24,
+        34,
+        44
+      ],
+      "horizon_frames": 10,
+      "unit": "N",
+      "measurement": "upward external load on the source-assigned platform"
     }
   },
   "groups": {
@@ -742,6 +756,294 @@
         }
       ]
     },
+    "right_plate.readouts": {
+      "bytes": 9864,
+      "sha256": "ef3100f367069e381d6c956af772e55682aa9fc7604683162f8665f460fadaf9",
+      "tensors": [
+        {
+          "name": "right_plate.combined_ridge.bias",
+          "shape": [],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.combined_ridge.coef",
+          "shape": [
+            92
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.combined_ridge.mean",
+          "shape": [
+            92
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.combined_ridge.sd",
+          "shape": [
+            92
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.combined_shared.bias",
+          "shape": [],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.combined_shared.coef",
+          "shape": [
+            116
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.combined_shared.mean",
+          "shape": [
+            116
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.combined_shared.sd",
+          "shape": [
+            116
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.marker_mean",
+          "shape": [
+            6
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.marker_ridge.bias",
+          "shape": [],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.marker_ridge.coef",
+          "shape": [
+            28
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.marker_ridge.mean",
+          "shape": [
+            28
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.marker_ridge.sd",
+          "shape": [
+            28
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.marker_sd",
+          "shape": [
+            6
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.marker_shared.bias",
+          "shape": [],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.marker_shared.coef",
+          "shape": [
+            52
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.marker_shared.mean",
+          "shape": [
+            52
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.marker_shared.sd",
+          "shape": [
+            52
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.phase",
+          "shape": [
+            4
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.scrambled_combined.bias",
+          "shape": [],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.scrambled_combined.coef",
+          "shape": [
+            116
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.scrambled_combined.mean",
+          "shape": [
+            116
+          ],
+          "dtype": "<f8"
+        },
+        {
+          "name": "right_plate.scrambled_combined.sd",
+          "shape": [
+            116
+          ],
+          "dtype": "<f8"
+        }
+      ]
+    },
+    "right_plate.scrambled": {
+      "bytes": 20736,
+      "sha256": "a2601a140ed45b12c50cc640cc893b745cf186e3accbbdc64fe27b429c2ac177",
+      "tensors": [
+        {
+          "name": "blocks.0.attention_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_out.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.attention_out.weight",
+          "shape": [
+            24,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_in.bias",
+          "shape": [
+            48
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_in.weight",
+          "shape": [
+            48,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_out.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.ff_out.weight",
+          "shape": [
+            24,
+            48
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.qkv.bias",
+          "shape": [
+            72
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "blocks.0.qkv.weight",
+          "shape": [
+            72,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "last_norm.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "last_norm.weight",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "position",
+          "shape": [
+            4,
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "project.bias",
+          "shape": [
+            24
+          ],
+          "dtype": "<f4"
+        },
+        {
+          "name": "project.weight",
+          "shape": [
+            24,
+            6
+          ],
+          "dtype": "<f4"
+        }
+      ]
+    },
     "moment.stats": {
       "bytes": 15632,
       "sha256": "850b9a1fa230982ffd7d52f6c781c203768a8851c4b79ab19a022a8ef8bd88b6",
@@ -1141,11 +1443,12 @@
       ]
     }
   },
-  "pythonPredictorSha256": "3386297ff3555fd0024e8a39c4ffa9b3c24d79f707aa0758f1097c954c175096",
+  "pythonPredictorSha256": "6f3f75ee9a8875ac6f7fafc78b121de92b3ffc4ced047a8cafa80cf07e7a9679",
   "pythonCorrectionSha256": "753ce7469f3f9d956dd461763af4ff10415606b62cf3f451897a1c9eeb46031b",
   "pythonPopulationSha256": "a90b69e5346efe0fd91c1f89df16a570386c90a0b836062a309dfcb5679ae789",
   "kneeExportSha256": "4ee73623e94404a5115b5743fdab94095cc03cee1d986201d0379c74d5730f45",
   "momentExportSha256": "b4062509f2cdf4cbe7e5ce968ebac54d9dcc47e9edf1978fdf9f3b51364c9884",
   "pythonMomentSha256": "147cb3cc3975e88dea92746b5ed145d186f8121e5d202ccf81840e21a025c5f8",
+  "pythonRightPlateSha256": "9ac29ca788b0282b514b96aadd68c5ca8bb4993097849d4eb139ea5947d1f129",
   "encoding": "Original little-endian IEEE 754 bytes, C order, sorted tensor names per group."
 }

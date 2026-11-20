@@ -10,7 +10,7 @@ python -B build.py --model ../neurotranslate-0.0 --out build
 
 In a complete NeuroTranslation checkout, add `--direct ../population-motion` to also generate the separate rat-trip viewer at `build/viewer/index.html`. The offline package contains the model and the sources needed for its own products. The separate rat replay reads the published camera, firing and study files from the checkout.
 
-The generator checks scientific input files against `src/inputs.json`. All 65 numerical arrays from the preceding movement checkpoint keep their original stored values. This version adds 35 arrays for the knee moment models. The generator verifies both knee exports and keeps the two studies’ different encoder permutations separate. The checkpoint hash and tensor identities appear in `runtime/model.json`. Archive members come from an explicit list, in a fixed order with fixed timestamps.
+The generator checks scientific input files against `src/inputs.json`. All 100 numerical arrays from the preceding movement checkpoint keep their stored values. This edition adds 23 arrays for the right-plate readouts and their normalization. The generator verifies both original knee exports and keeps each study’s different encoder permutation separate. To try the plate forecast, run `node predict.mjs right-plate-example.json` from the top-level extracted folder. The checkpoint hash and tensor identities appear in `runtime/model.json`. Archive members come from an explicit list, in a fixed order with fixed timestamps.
 
 | Output | Use |
 | --- | --- |

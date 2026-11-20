@@ -16,8 +16,9 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 SRC = HERE / 'src'
 STATIC = ('CC0-1.0.txt', 'CDLA-Permissive-2.0.txt', 'DATA-CREDITS.md', 'NOTICE.md', 'README.md',
-          'SPATIAL-API.md', 'knee-moment-example.json', 'knee-example.json', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
-ARTIFACTS = (*STATIC, 'model.json', 'population-example.json', 'shared-motion.js')
+          'SPATIAL-API.md', 'right-plate-example.json', 'knee-moment-example.json', 'knee-example.json', 'angular-example.json', 'examples.json', 'forearm-example.json', 'predict.mjs', 'predictor.mjs')
+PLATE_LICENCE = 'RIGHT-PLATE-DATA-LICENCE.txt'
+ARTIFACTS = (*STATIC, PLATE_LICENCE, 'model.json', 'population-example.json', 'shared-motion.js')
 
 
 def sha(data):
@@ -93,6 +94,26 @@ def moment_parameters(checkpoint, saved, manifest, groups, descriptions):
     return calculation.decode().removesuffix("if (typeof module === 'object' && module.exports) module.exports = kneeMoment;\n")
 
 
+def right_plate_parameters(saved, groups, descriptions):
+    widths = {'marker_ridge':28, 'combined_ridge':92, 'marker_shared':52,
+              'combined_shared':116, 'scrambled_combined':116}
+    sizes = {'right_plate.phase':4, 'right_plate.marker_mean':6, 'right_plate.marker_sd':6}
+    for mode, width in widths.items():
+        for field in ('mean', 'sd', 'coef', 'bias'):
+            sizes[f'right_plate.{mode}.{field}'] = 1 if field == 'bias' else width
+    heads = {name:saved[name] for name in saved.files if name.startswith('right_plate.')}
+    if set(heads) != set(sizes):
+        raise ValueError('Incomplete or unexpected right-plate parameters.')
+    for name, array in heads.items():
+        if array.shape != (() if name.endswith('.bias') else (sizes[name],)) or (name.endswith('sd') and np.any(array <= 0)):
+            raise ValueError('Invalid right-plate tensor: ' + name)
+    groups['right_plate.readouts'], descriptions['right_plate.readouts'] = pack(heads, heads)
+    names = sorted(n for n in saved.files if n == 'position' or n.startswith(('project.', 'blocks.', 'last_norm.')))
+    rng = np.random.default_rng(71863)
+    shuffled = {n:rng.permutation(saved[n].ravel()).reshape(saved[n].shape) for n in names}
+    groups['right_plate.scrambled'], descriptions['right_plate.scrambled'] = pack(shuffled, shuffled)
+
+
 def build_runtime(model, out):
     original = read(SRC/'runtime/original-groups.json')
     checkpoint = model/'movement-weights.npz'
@@ -118,7 +139,8 @@ def build_runtime(model, out):
         knee_names = {n for n in saved.files if n.startswith('knee.')}
         assert len(names) == len(set(names)) == 51
         moment_names = {n for n in saved.files if n.startswith('load.')}
-        assert len(knee_names) == 14 and set(saved.files) == {'configuration', *names, *knee_names, *moment_names}
+        plate_names = {n for n in saved.files if n.startswith('right_plate.')}
+        assert len(knee_names) == 14 and set(saved.files) == {'configuration', *names, *knee_names, *moment_names, *plate_names}
         assert set(knee['readouts']) == {n.removeprefix('knee.') for n in knee_names}
         readouts = {n.removeprefix('knee.'):saved[n] for n in knee_names}
         groups['knee.readouts'], descriptions['knee.readouts'] = pack(readouts, readouts)
@@ -128,6 +150,7 @@ def build_runtime(model, out):
             assert np.array_equal(array.ravel(), knee['encoder'][name])
             shuffled[name] = np.asarray(flat, dtype=array.dtype).reshape(array.shape)
         groups['knee.scramble'], descriptions['knee.scramble'] = pack(shuffled, shuffled)
+        right_plate_parameters(saved, groups, descriptions)
         manifest = read(SRC/'inputs.json')
         moment_js = moment_parameters(checkpoint, saved, manifest, groups, descriptions)
 
@@ -137,13 +160,15 @@ def build_runtime(model, out):
     out.mkdir(parents=True, exist_ok=True)
     for name in STATIC:
         (out/name).write_bytes((SRC/'runtime'/name).read_bytes())
+    (out/PLATE_LICENCE).write_bytes((model/'right-plate/DATA-LICENCE.txt').read_bytes())
     (out/'shared-motion.js').write_text(script)
     write_json(out/'model.json', dict(checkpoints=ids, config=config, groups=descriptions,
                pythonPredictorSha256=sha((model/'predict.py').read_bytes()),
                pythonCorrectionSha256=sha((model/'forearm/residual.py').read_bytes()),
                pythonPopulationSha256=sha((model/'population/adapter.py').read_bytes()),
                kneeExportSha256=manifest['kneeExportSha256'], momentExportSha256=manifest['momentExportSha256'],
-               pythonMomentSha256=manifest['model']['load/adapter.py'], encoding=original['encoding']))
+               pythonMomentSha256=manifest['model']['load/adapter.py'],
+               pythonRightPlateSha256=manifest['model']['right_plate.py'], encoding=original['encoding']))
     example = read(model/'population/example.json')
     # Limit the worked record to the six measured inputs and the two API selectors.
     keys = {'domain':'domain', 'mode':'mode', 'cutoffS':'cutoff_s', 'priorTimeS':'prior_time_s',

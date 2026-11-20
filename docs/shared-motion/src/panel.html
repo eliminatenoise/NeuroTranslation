@@ -4,17 +4,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="color-scheme" content="light">
-<meta name="description" content="Forecast wrist angles, knee angles, knee moments or a movement distance a quarter second ahead. The saved model runs offline in your browser.">
+<meta name="description" content="Forecast a plate load, knee moments, joint angles or movement distance from a short recording. The saved model runs offline in your browser.">
 <link rel="icon" href="data:,">
-<title>A quarter second of movement · NeuroTranslate 0.0</title>
+<title>Forecast a movement · NeuroTranslate 0.0</title>
 <style>@@STYLE@@</style>
 </head>
 <body>
 <a class="skip" href="#history-select">Skip to movement history</a>
 <main>
 <header><span class="brand">NeuroTranslate <b>0.0</b></span><a class="save" href="" download="neurotranslate-motion.html">Save offline copy</a></header>
-<h1>A quarter second ahead</h1>
-<p class="lede">How far from its last position will a wrist move? Which way will it bend? How far will each knee bend on the next step? Which way will the net turning moment act? Try a forecast from a short movement history. The same model also reads the path of a rat on a maze.</p>
+<h1>What can past movement predict?</h1>
+<p class="lede">How far from its last position will a wrist move? Which way will it bend? How far will each knee bend on the next step? Which way will the net turning moment act? How much load will the plate under the right foot register? Try a forecast from a short movement history. The same model also reads the path of a rat on a maze.</p>
 
 <p><a href="https://eliminatenoise.github.io/NeuroTranslation/population-motion/">Compare movement and brain-cell firing on a recorded rat trip</a>. Both model families forecast distance in centimetres using earlier measurements.</p>
 <section class="workspace" aria-labelledby="history-title">
@@ -23,6 +23,7 @@
 <select id="history-select" disabled="">
 <option value="wrist">Wrist displacement (cm)</option>
 <option value="wrist_angle">Right-wrist angles (°)</option>
+<option value="right_plate_force">Right-foot plate load (N)</option>
 <option value="knee_moment">Knee moments (N·m/kg)</option>
 <option value="knee_angle">Right and left knee angles (°)</option>
 <option value="rat">Rat displacement (cm)</option>
@@ -55,6 +56,30 @@
 <p>The reader accepts measured wrist angles between −180° and 180°. Unusually large inputs can produce forecasts outside that range.</p>
 </details>
 <div class="buttons"><button type="button" id="angle-run">Compare angle forecasts</button><button type="button" class="secondary" id="angle-fill">Fill with invented input</button></div>
+</div>
+<div id="plate-controls" hidden="">
+<div id="plate-example-controls">
+<label for="plate-mode">Forecast method</label><select id="plate-mode">
+<option value="combined_shared">Shared encoder with foot markers and muscle signals</option>
+<option value="marker_shared">Shared encoder with foot markers</option>
+<option value="combined_ridge">Linear fit with foot markers and muscle signals</option>
+<option value="marker_ridge">Linear fit with foot markers</option>
+<option value="phase">Average at this time after heel strike</option>
+<option value="scrambled_combined">Shuffled encoder with foot markers and muscle signals</option>
+</select>
+<div id="plate-scale-control"><label for="plate-scale">Invented muscle amplitudes</label>
+<select id="plate-scale"><option value="1">As supplied</option><option value="0.5">Half the amplitude</option><option value="2">Twice the amplitude</option></select>
+<p class="hint">Only the available muscle amplitudes change. The foot positions and the time since heel strike stay fixed.</p></div>
+</div>
+<div id="plate-custom" hidden="">
+<label for="plate-input">One foot-marker history after heel strike (JSON)</label>
+<textarea id="plate-input" rows="7" spellcheck="false" aria-describedby="plate-schema"></textarea>
+<details><summary>Marker positions, muscle channels and time</summary>
+<p id="plate-schema">Set <code>domain</code> to <code>right_plate_force</code>. Enter the cutoff in <code>offset_frames</code>, either 14, 24, 34 or 44 frames after the recorded right-foot strike at 100 Hz. Each of the four rows of <code>markers_m</code> ends a successive 60 ms bin. Put the XYZ coordinates of the right heel first, then the second metatarsal, in metres relative to the assigned plate centre. At the original strike, both markers must project inside the assigned plate boundary.</p>
+<p>For <code>combined_ridge</code>, <code>combined_shared</code> or <code>scrambled_combined</code>, supply four rows of eight RMS muscle amplitudes in microvolts in <code>emg_uV</code>. Their right-leg order is tibialis anterior, soleus, medial gastrocnemius, vastus medialis, rectus femoris, semitendinosus, gluteus maximus and gluteus medius. Each amplitude uses 90 analog samples. Set each matching <code>emg_valid</code> flag to 1 for an available measurement. For an unavailable measurement use zero for both fields. Omit both electrical fields for <code>marker_ridge</code>, <code>marker_shared</code> or <code>phase</code>.</p>
+</details>
+<div class="buttons"><button type="button" id="plate-run">Forecast plate load</button><button type="button" id="plate-fill" class="secondary">Show invented input</button></div>
+</div>
 </div>
 <div id="moment-controls" hidden="">
 <div id="moment-example-method">
@@ -104,6 +129,10 @@
 <details id="outcome" hidden=""><summary>Reveal the rat’s measured distance</summary><p id="measured"></p></details>
 <details><summary>Inspect the four input intervals</summary><div id="features"></div></details>
 </div>
+<div id="plate-results" hidden="">
+<div class="forecast"><div><h2>Predicted vertical plate load</h2><strong id="plate-force"></strong><span class="unit">N</span></div><p id="plate-timing"></p></div>
+<p id="plate-negative" hidden="">This estimate lies below zero. The fitted equation can produce a negative value even though upward load is positive.</p>
+</div>
 <div id="moment-results" hidden="">
 <h2>Forecast internal knee moments</h2>
 <p>Positive acts towards bending the knee. Negative acts towards straightening it. A moment can oppose the movement you see.</p>
@@ -123,6 +152,11 @@
 </div>
 </section>
 
+<section id="plate-study" class="study" hidden="" aria-labelledby="plate-question"><h2 id="plate-question">What reaches the plate after heel strike?</h2>
+<p>Two markers track the right heel and forefoot through four short intervals. Eight electrodes on the same leg record muscle activity. The model can use the markers alone or add the muscle signals to estimate the vertical load ten frames later. The reference is the mean of 15 force samples from one platform whose location and right-foot contact were checked at heel strike. Other loads elsewhere on the walkway fall outside this measurement.</p>
+<p>Of ten test walkers, eight provided 53 eligible windows from 16 walks. With muscle signals added, the shared model missed by 85.18 N on average. Using markers with the same encoder missed by 93.93 N. Five of eight walkers improved, but the paired 95% interval for the difference spanned −28.99 to +9.03 N. A linear fit with both signals scored 82.04 N. The tests did not establish an advantage for the shared encoder or a consistent contribution from the correctly timed muscle signal.</p>
+<p>The source was processed across time in both directions and the muscle recordings were centred across the trial. These forecasts use the stored clock. Live performance and biological lead time remain unknown.</p>
+</section>
 <section id="moment-study" class="study" hidden="" aria-labelledby="moment-question"><h2 id="moment-question">Can angles tell us how hard the leg turns?</h2>
 <p>Optical markers track the motion. Force plates record the load on the ground. Together these measurements let scientists estimate the net turning effect around each knee and divide it by the person’s mass. The model gets only the angles. It estimates the turning moment a quarter second later in newton-metres per kilogram (N·m/kg).</p>
 <p>Seven people supplied the training walks. Across 1,207 forecasts for three other walkers at a nominal 0.8 m/s, the task-trained model missed by 0.08874 N·m/kg on average. A linear fit scored 0.09761 and matching the motion to training walkers’ steps scored 0.09373. The task-trained model beat both for just one walker. These are offline comparisons with inverse-dynamics estimates. The sign and size of the moment cannot identify the force from an individual muscle. <a href="https://eliminatenoise.github.io/NeuroTranslation/knee-moment/">Explore the knee moment comparison</a>.</p>
@@ -164,12 +198,14 @@
 </details>
 </section>
 <section class="study"><details><summary>Credits, licences and checkpoints</summary>
+<h3>Overground walking · CC BY 4.0</h3>
+<p>Céline Schreiber and Florent Moissenet recorded the walks in Luxembourg. NeuroTranslation used the version 8 C2 walking trials, the authors’ platform assignments, and the right heel and forefoot markers to select contacts. The derived scales, force readouts and study results retain CC BY 4.0 attribution. The built-in input is invented. <a id="plate-licence" href="data:application/octet-stream;base64,@@PLATE_LICENCE@@" download="Rehazenter-walking-data-LICENCE.txt">Download the authors’ original licence and requested citations</a> · <a href="https://doi.org/10.6084/m9.figshare.7734767.v8">Version 8 recordings</a> · <a href="https://doi.org/10.1038/s41597-019-0124-4">Acquisition and processing</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
 <h3>Knee moments · CC0 source recordings</h3>
 <p>Emma Reznick, Kyle R. Embry, Ross Neuman, Edgar Bolívar, Nicholas P. Fey and Robert D. Gregg released the treadmill recordings under CC0. They estimated internal knee moments from optical motion and force plates using inverse dynamics. NeuroTranslation used six reconstructed joint angles to predict those moments. The included input is invented. The earlier shared model retains its original terms. <a href="https://doi.org/10.6084/m9.figshare.14558181.v1">Source recordings</a> · <a href="https://doi.org/10.1038/s41597-021-01057-9">Acquisition and inverse dynamics</a>.</p>
 <h3>Knee angles · CC BY 4.0</h3>
 <p>Rateb Katmah, Aamna AlShehhi, Doua Kosaji, Nour Al-Rahmani, Muhammad Abdullah, Abdul Aziz Vaqar Hulleck and Kinda Khalaf (2026), <i>A multimodal gait dataset of brain activity, muscle activity, kinematics and ground forces in young adults</i>, v1.0.0, PhysioNet. NeuroTranslation selected the two reconstructed knee angles at 0.5 m/s, fitted three corrections to a stride forecast and compared their errors. The original data and derived model parameters and results retain CC BY 4.0 attribution. <a href="https://doi.org/10.13026/r0ea-7161">Versioned dataset</a> · <a href="https://doi.org/10.1038/s44360-026-00096-z">PhysioNet platform paper</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
 <h3>Wrist angles, forearm and scalp recordings · CC BY 4.0</h3>
-<p>Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz published the <i>EEG-EMG-WristMotion Dataset</i>, version 3. NeuroTranslation derived two anchor-relative wrist angles, four bipolar forearm amplitudes and eight mean scalp voltages per time bin. The new fits use those features to estimate two absolute angles. All built-in wrist-angle inputs are invented. Retain attribution for the data, derived weights, scales and results under CC BY 4.0. The combined checkpoint has SHA-256 <code>7a0c17c66049fba7812d0acf1392af21829c3c6528ace3667202c8091f97f8b4</code>. <a href="https://doi.org/10.6084/m9.figshare.29666735.v3" rel="noreferrer">Version 3 dataset</a> · <a href="https://doi.org/10.1038/s41597-026-07287-z" rel="noreferrer">Study descriptor</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0</a>.</p>
+<p>Jorge German Perez Blanco and Javier Mauricio Anteliz Ortiz published the <i>EEG-EMG-WristMotion Dataset</i>, version 3. NeuroTranslation derived two anchor-relative wrist angles, four bipolar forearm amplitudes and eight mean scalp voltages per time bin. The new fits use those features to estimate two absolute angles. All built-in wrist-angle inputs are invented. Retain attribution for the data, derived weights, scales and results under CC BY 4.0. The combined checkpoint has SHA-256 <code>a52af3c0875a43d3ce8ae70ae7eaa8cf83a9bcd4f75422f1cc84bea6fd8379ee</code>. <a href="https://doi.org/10.6084/m9.figshare.29666735.v3" rel="noreferrer">Version 3 dataset</a> · <a href="https://doi.org/10.1038/s41597-026-07287-z" rel="noreferrer">Study descriptor</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0</a>.</p>
 <h3>Rat position data · CC BY 4.0</h3>
 <p>Justin Shin and Shantanu Jadhav, <i>Single Day W-Track Learning</i> (2024), DANDI 000978, version 0.240511.0307. We selected five past camera positions and a later measured endpoint from session 01, animal JS14, running epoch 5, training trip 55. We derived centimetre distances, timing and turn features. The forecast and derived endpoint distance are new calculations at the previously published cutoff. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/4d046b86bfa797e28f29cd4f6b8445a1f4b90487/benchmarks/wtrack-neural-motion/fitted/example.json" rel="noreferrer">Original trip example</a> · <a href="https://doi.org/10.48324/dandi.000978/0.240511.0307" rel="noreferrer">Dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0 licence</a>.</p>
 <h3>Wrist training data · CDLA Permissive 2.0</h3>

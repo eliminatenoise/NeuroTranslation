@@ -465,7 +465,72 @@
     return {domain:input.domain, mode:input.mode, unit:'N·m/kg', ...result};
   }
 
+  // The four motion tokens enter the original encoder. Elapsed time and muscle
+  // measurements join the representation only at the task-specific readout.
+  const plateOffsets = [14, 24, 34, 44];
+  const plateModes = ['phase', 'marker_ridge', 'combined_ridge', 'marker_shared', 'combined_shared', 'scrambled_combined'];
+
+  async function forecastRightPlate(record) {
+    const {mode, offset_frames:offset, markers_m:markers} = record;
+    const phase = plateOffsets.indexOf(offset);
+    if (!plateModes.includes(mode) || phase < 0) {
+      throw new RangeError('Choose a right-plate method and an elapsed offset of 14, 24, 34 or 44 frames.');
+    }
+    const combined = mode.includes('combined');
+    const fields = ['domain', 'mode', 'offset_frames', 'markers_m'];
+    if (combined) fields.push('emg_uV', 'emg_valid');
+    if (fields.some(name => !Object.hasOwn(record, name)) || Object.keys(record).some(name => !fields.includes(name))) {
+      throw new TypeError('Right-plate fields must match the selected method. Only combined methods take muscle amplitudes and validity flags.');
+    }
+    if (!Array.isArray(markers) || markers.length !== 4 || !Array.from(markers).every(row => finiteRow(row, 6))) {
+      throw new TypeError('Supply four rows of six finite plate-relative marker coordinates in metres.');
+    }
+    const tokens = Array.from(markers, row => row.slice());
+    const features = [...tokens.flat(), ...plateOffsets.map(value => Number(value === offset))];
+    if (combined) {
+      const {emg_uV:rms, emg_valid:valid} = record;
+      if (!Array.isArray(rms) || rms.length !== 4 || !Array.isArray(valid) || valid.length !== 4) {
+        throw new TypeError('Supply four rows each of muscle amplitudes and validity flags.');
+      }
+      const flags = [];
+      for (let t = 0; t < 4; t++) {
+        if (!finiteRow(rms[t], 8) || !Array.isArray(valid[t]) || valid[t].length !== 8) {
+          throw new TypeError('Each muscle bin needs eight finite RMS values and eight validity flags.');
+        }
+        for (let i = 0; i < 8; i++) {
+          const flag = valid[t][i], value = rms[t][i];
+          if (![false, true, 0, 1].includes(flag) || value < 0 || (!flag && value !== 0)) {
+            throw new RangeError('Each RMS amplitude must be nonnegative. Use a 0 or 1 flag and zero amplitude when unavailable.');
+          }
+          features.push(Math.log1p(value));
+          flags.push(Number(flag));
+        }
+      }
+      features.push(...flags);
+    }
+    const head = await loadGroup('right_plate.readouts');
+    let forceN;
+    if (mode === 'phase') {
+      forceN = head['right_plate.phase'][phase];
+    } else {
+      if (mode.endsWith('_shared') || mode === 'scrambled_combined') {
+        const core = await loadGroup(mode === 'scrambled_combined' ? 'right_plate.scrambled' : 'spatial');
+        const mean = head['right_plate.marker_mean'], sd = head['right_plate.marker_sd'];
+        const projected = tokens.map(row => linear(core, 'project', row.map((value, j) => (value - mean[j]) / sd[j])));
+        features.push(...encode(core, projected));
+      }
+      const prefix = 'right_plate.' + mode + '.';
+      const mean = head[prefix+'mean'], sd = head[prefix+'sd'], coef = head[prefix+'coef'];
+      let sum = 0;
+      for (let j = 0; j < features.length; j++) sum += ((features[j] - mean[j]) / sd[j]) * coef[j];
+      forceN = sum + head[prefix+'bias'][0];
+    }
+    if (!Number.isFinite(forceN)) throw new RangeError('Right-plate load exceeds the numerical range.');
+    return {domain:'right_plate_force', mode, offset_frames:offset, stored_hz:100, lead_frames:10, right_vertical_plate_force_N:forceN};
+  }
+
   async function forecastMovement(record) {
+    if (record?.domain === 'right_plate_force') return forecastRightPlate(record);
     if (record?.domain === 'knee_moment') return forecastMoment(record);
     if (record?.domain === 'knee_angle') return forecastKnee(record);
     if (record?.domain === 'rat_population') return forecastPopulation(record);

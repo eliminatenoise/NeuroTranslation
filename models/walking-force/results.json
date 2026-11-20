@@ -1,0 +1,327 @@
+{
+  "held_people": 8,
+  "held_trials": 17,
+  "held_anchors": 1297,
+  "metrics": {
+    "constant-zero": {
+      "people": 8,
+      "trials": 17,
+      "anchors": 1297,
+      "MAE_N": 481.1861559740989,
+      "RMSE_N": 583.2162267292333,
+      "bias_N": -481.1861559740989
+    },
+    "training-mean": {
+      "people": 8,
+      "trials": 17,
+      "anchors": 1297,
+      "MAE_N": 292.2215421121644,
+      "RMSE_N": 329.5799943194035,
+      "bias_N": -4.682118796371098
+    },
+    "current-plate-persistence": {
+      "people": 8,
+      "trials": 17,
+      "anchors": 1297,
+      "MAE_N": 63.432807522543115,
+      "RMSE_N": 112.77242276725707,
+      "bias_N": 23.15005516050683
+    },
+    "transformer-markers": {
+      "people": 8,
+      "trials": 17,
+      "anchors": 1297,
+      "MAE_N": 65.18918184354496,
+      "RMSE_N": 95.0293798255786,
+      "bias_N": -9.681278045031492
+    },
+    "ridge-markers": {
+      "people": 8,
+      "trials": 17,
+      "anchors": 1297,
+      "MAE_N": 279.74980541986014,
+      "RMSE_N": 314.2113739528076,
+      "bias_N": -20.604837971784995
+    },
+    "transformer-emg": {
+      "people": 8,
+      "trials": 17,
+      "anchors": 1297,
+      "MAE_N": 286.35426898111507,
+      "RMSE_N": 333.0076576561654,
+      "bias_N": 0.5150035731682152
+    },
+    "ridge-emg": {
+      "people": 8,
+      "trials": 17,
+      "anchors": 1297,
+      "MAE_N": 289.900572978348,
+      "RMSE_N": 331.448764316811,
+      "bias_N": 1.8276810369151093
+    },
+    "transformer-combined": {
+      "people": 8,
+      "trials": 17,
+      "anchors": 1297,
+      "MAE_N": 70.19743007919602,
+      "RMSE_N": 107.03499891850898,
+      "bias_N": -12.367657905198582
+    },
+    "ridge-combined": {
+      "people": 8,
+      "trials": 17,
+      "anchors": 1297,
+      "MAE_N": 274.891605519888,
+      "RMSE_N": 312.73108677393054,
+      "bias_N": -7.105639336362976
+    },
+    "marker-kernel": {
+      "people": 8,
+      "trials": 17,
+      "anchors": 1297,
+      "MAE_N": 91.2545609017038,
+      "RMSE_N": 123.13704295408584,
+      "bias_N": -13.583846494237914
+    },
+    "wrong-repeat-emg": {
+      "people": 6,
+      "trials": 15,
+      "anchors": 1143,
+      "MAE_N": 73.28209868911013,
+      "RMSE_N": 113.05729617626288,
+      "bias_N": -19.862764375909624
+    }
+  },
+  "target_strata": {
+    "source-coded-zero": {
+      "constant-zero": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 354,
+        "MAE_N": 0.0,
+        "RMSE_N": 0.0,
+        "bias_N": 0.0
+      },
+      "training-mean": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 354,
+        "MAE_N": 476.5040371777279,
+        "RMSE_N": 476.5040371777278,
+        "bias_N": 476.5040371777279
+      },
+      "current-plate-persistence": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 354,
+        "MAE_N": 25.704223627578493,
+        "RMSE_N": 75.76134267720444,
+        "bias_N": 25.704223627578493
+      },
+      "transformer-markers": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 354,
+        "MAE_N": 17.121448277109543,
+        "RMSE_N": 35.470987542118806,
+        "bias_N": 17.121448277109543
+      },
+      "ridge-markers": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 354,
+        "MAE_N": 426.64418531834235,
+        "RMSE_N": 435.23630758663774,
+        "bias_N": 426.64418531834235
+      },
+      "transformer-emg": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 354,
+        "MAE_N": 467.3447038247706,
+        "RMSE_N": 476.5743007635917,
+        "bias_N": 467.3447038247706
+      },
+      "ridge-emg": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 354,
+        "MAE_N": 476.6179181147197,
+        "RMSE_N": 478.0870192607957,
+        "bias_N": 476.6179181147197
+      },
+      "transformer-combined": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 354,
+        "MAE_N": 21.13192394857287,
+        "RMSE_N": 41.78049672406272,
+        "bias_N": 21.13192394857287
+      },
+      "ridge-combined": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 354,
+        "MAE_N": 437.873034313434,
+        "RMSE_N": 447.2326684893612,
+        "bias_N": 437.873034313434
+      },
+      "marker-kernel": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 354,
+        "MAE_N": 62.555325751334465,
+        "RMSE_N": 100.32096362432154,
+        "bias_N": 62.555325751334465
+      },
+      "wrong-repeat-emg": {
+        "people": 6,
+        "trials": 15,
+        "anchors": 316,
+        "MAE_N": 10.277124417277465,
+        "RMSE_N": 26.112654912756174,
+        "bias_N": 10.277124417277465
+      }
+    },
+    "nonzero": {
+      "constant-zero": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 943,
+        "MAE_N": 657.9909137725441,
+        "RMSE_N": 681.7529820622754,
+        "bias_N": -657.9909137725441
+      },
+      "training-mean": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 943,
+        "MAE_N": 224.01203333439253,
+        "RMSE_N": 254.50456247328805,
+        "bias_N": -181.48687659481627
+      },
+      "current-plate-persistence": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 943,
+        "MAE_N": 77.18489872454533,
+        "RMSE_N": 123.4071306018219,
+        "bias_N": 22.175515888533187
+      },
+      "transformer-markers": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 943,
+        "MAE_N": 82.77513479112733,
+        "RMSE_N": 108.95241661641147,
+        "bias_N": -19.502835499910912
+      },
+      "ridge-markers": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 943,
+        "MAE_N": 225.0217758087138,
+        "RMSE_N": 254.88218299241424,
+        "bias_N": -184.76497436216593
+      },
+      "transformer-emg": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 943,
+        "MAE_N": 219.61220927537124,
+        "RMSE_N": 260.81047738910456,
+        "bias_N": -171.02570146465618
+      },
+      "ridge-emg": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 943,
+        "MAE_N": 220.726571461992,
+        "RMSE_N": 256.62244279620404,
+        "bias_N": -172.59102849421632
+      },
+      "transformer-combined": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 943,
+        "MAE_N": 88.1820577558575,
+        "RMSE_N": 122.49725560611842,
+        "bias_N": -24.50293937757647
+      },
+      "ridge-combined": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 943,
+        "MAE_N": 214.04564978331916,
+        "RMSE_N": 244.29057348357264,
+        "bias_N": -170.46829770726237
+      },
+      "marker-kernel": {
+        "people": 8,
+        "trials": 17,
+        "anchors": 943,
+        "MAE_N": 102.90333165143694,
+        "RMSE_N": 131.24625044940643,
+        "bias_N": -40.931769137367546
+      },
+      "wrong-repeat-emg": {
+        "people": 6,
+        "trials": 15,
+        "anchors": 827,
+        "MAE_N": 96.8233290477772,
+        "RMSE_N": 131.34194494044414,
+        "bias_N": -30.93437330091599
+      }
+    }
+  },
+  "incremental_EMG_comparisons": {
+    "transformer-markers": {
+      "people": 8,
+      "trials": 17,
+      "anchors": 1297,
+      "combined_MAE_N": 70.19743007919602,
+      "comparator_MAE_N": 65.18918184354496,
+      "difference_N": 5.0082482356510765,
+      "paired_95pct_bootstrap_N": [
+        -0.04359043933889506,
+        10.226222465310546
+      ],
+      "relative_reduction": -0.07682637048077923,
+      "people_better": 2,
+      "pass": false
+    },
+    "marker-kernel": {
+      "people": 8,
+      "trials": 17,
+      "anchors": 1297,
+      "combined_MAE_N": 70.19743007919602,
+      "comparator_MAE_N": 91.2545609017038,
+      "difference_N": -21.05713082250776,
+      "paired_95pct_bootstrap_N": [
+        -34.75056643025442,
+        -7.238442328114256
+      ],
+      "relative_reduction": 0.2307515439714819,
+      "people_better": 6,
+      "pass": true
+    },
+    "wrong-repeat-emg": {
+      "people": 6,
+      "trials": 15,
+      "anchors": 1143,
+      "combined_MAE_N": 72.20490207710992,
+      "comparator_MAE_N": 73.28209868911013,
+      "difference_N": -1.0771966120002052,
+      "paired_95pct_bootstrap_N": [
+        -7.3144341166577975,
+        4.670841917726136
+      ],
+      "relative_reduction": 0.014699314447448875,
+      "people_better": 3,
+      "pass": false
+    }
+  },
+  "incremental_EMG_gate_passed": false,
+  "wrong_repeat_median_squared_pose_distance_z": 0.9213461346096463,
+  "uncertainty": "10,000 bootstrap draws of paired whole people, equal people with equal trials within each person; all prespecified intervals shown."
+}
