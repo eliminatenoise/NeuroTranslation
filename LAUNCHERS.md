@@ -199,3 +199,7 @@ Extract the [offline reach and cortical activity reader](docs/reach-feedback-off
 ## Follow the reach models a week later
 
 Extract the [one-week reader with muscle–tendon paths](docs/reach-feedback/one-week-offline.zip) or the [complete one-week model package](models/reach-feedback-week.zip). Open the launcher for your operating system.
+
+## Forecast both wrists on another day
+
+Extract the [two-wrist reader](docs/human-wrist-offline.zip) or the [software and worked example](models/human-wrist.zip), then open the launcher for your operating system. The supplied arm movement is simulated. Imported examples are processed on your computer.

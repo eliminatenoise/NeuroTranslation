@@ -78,8 +78,14 @@ def here(path):
 
 
 def load(rel):
+    """A JSON file of the repository, or one inside a ZIP of the repository written as 'folder/file.zip!member.json'."""
     if rel not in _json:
-        _json[rel] = json.loads((REPO / rel).read_text(encoding='utf-8'))
+        if '!' in rel:
+            import zipfile
+            archive, member = rel.split('!', 1)
+            _json[rel] = json.loads(zipfile.ZipFile(REPO / archive).read(member).decode('utf-8'))
+        else:
+            _json[rel] = json.loads((REPO / rel).read_text(encoding='utf-8'))
     return _json[rel]
 
 
@@ -1164,6 +1170,7 @@ LATER_ABSENT = {   # work published after the papers were written -> words and d
     'models/cross-limb-movement/scalp': ('4.120', '3.905', '2.699', '2.667', '11.370', '11.385', '11.355'),
     'models/cross-limb-movement/path-maps': ('2.582', '2.645', '2.583', '3.878', '3.877', '3.686', '2.497', '2.481'),
     'models/muscle-spindle': ('0.499', '0.842', '0.325', '0.387', '0.435', '1.010', 'Blum', 'aff015'),
+    'models/human-wrist': ('29.40', '47.32', '45.59', '51.79', '29.68', '48.83', 'AJILE12', '0.220127.0436'),
     'models/reach-feedback-week': ('0.201', '4.118', '4.783', '4.680', '3.852', '0.468', '0.882', '1.047', '1.539', '0.689', '0.540', '0.096', 'C_20170914'),
     'models/reach-feedback': ('1.1595', '1.1834', '1.1934', '1.1158', '8.398', '9.362', '8.421', '8.115', 'C_20170907'),
     'models/cylinder-rotation': ('0.1584', '0.1622', '0.1772', '0.1508', '0.2525', '2,653', 'gyroscope', 'MTw'),
@@ -1936,7 +1943,7 @@ def later_heading():
     return f'{spell(n_later(), True)} newer studies, outside the numbered table'
 
 
-PAGE_ROWS = ('hand-search', 'shared-motion', 'whole-body', 'word-motion', 'stride', 'population-motion', 'knee-motion', 'gait-rhythm', 'knee-stride', 'finger-signals', 'finger-motion', 'finger-transfer', 'knee-moment', 'walking-force', 'walking-landmarks', 'elbow-cue', 'arm-transfer', 'scalp-forecast', 'cervical-forecast', 'neck-voltage', 'back-rotation', 'shared-back-rotation', 'muscle-tracking', 'shared-muscle-tracking', 'pedal-load', 'shared-pedal-load', 'heel-and-force', 'shared-heel-and-force', 'walking-instructions', 'walking-instruction-controls', 'cross-limb-movement', 'cross-limb-controls', 'muscle-and-motion', 'muscle-motion-controls', 'visual-balance', 'visual-balance-controls', 'muscle-spindle', 'cortical-reach', 'contact-forecast', 'target-reach', 'cylinder-rotation', 'reach-feedback')      # the site pages that are not study readers and have a row of their own
+PAGE_ROWS = ('hand-search', 'shared-motion', 'whole-body', 'word-motion', 'stride', 'population-motion', 'knee-motion', 'gait-rhythm', 'knee-stride', 'finger-signals', 'finger-motion', 'finger-transfer', 'knee-moment', 'walking-force', 'walking-landmarks', 'elbow-cue', 'arm-transfer', 'scalp-forecast', 'cervical-forecast', 'neck-voltage', 'back-rotation', 'shared-back-rotation', 'muscle-tracking', 'shared-muscle-tracking', 'pedal-load', 'shared-pedal-load', 'heel-and-force', 'shared-heel-and-force', 'walking-instructions', 'walking-instruction-controls', 'cross-limb-movement', 'cross-limb-controls', 'muscle-and-motion', 'muscle-motion-controls', 'visual-balance', 'visual-balance-controls', 'muscle-spindle', 'cortical-reach', 'contact-forecast', 'target-reach', 'cylinder-rotation', 'reach-feedback', 'human-wrist')      # the site pages that are not study readers and have a row of their own
 
 
 def other_pages():
@@ -2164,6 +2171,7 @@ SUPPLEMENTS = {     # the short PDFs published beside the papers; their page cou
     'cylinder': 'docs/papers/cylinder-rotation/cylinder-rotation.pdf',
     'reach': 'docs/papers/reach-feedback/reach-feedback.pdf',
     'week': 'docs/papers/reach-feedback/one-week/one-week.pdf',
+    'wrist2': 'docs/papers/human-wrist/human-wrist.pdf',
 }
 _pdf_pages = {}
 
@@ -2751,6 +2759,95 @@ def rw_checks():
         field='primary_incremental_success; workspaces/*/populations/primary (and ' + RW_L + ', ' + RW_M + ', ' + RW_P + ')', full=None,
         note='second region: with the movement 4.783 / without 4.680 / training average 4.118; hand +0.468 and +0.882 mm; paths 1.047 and '
              '1.539 against no change 0.689 and 0.540 mm')
+    return ''
+
+
+HW_SRC = 'docs/papers/human-wrist/human-wrist-source.zip'
+HW = HW_SRC + '!results.json'                         # one person's two wrists on a second recording day: the supplement's results file
+HW_README = 'models/human-wrist/README.md'
+HW_TASK = 'models/neurotranslate-0.0/bilateral_wrist/README.md'
+HW_PAGE = 'docs/human-wrist/README.md'
+HW_SEEDS = (17, 37, 73)
+
+
+def _hw_n58(side, h):
+    """Every forecast scored on all 58 held reaches for that wrist and horizon: {method: mean error in camera pixels}."""
+    a = load(HW)['absolute']
+    return {k: v[side][h]['mean_px'] for k, v in a.items()
+            if side in v and h in v[side] and v[side][h].get('n') == 58 and v[side][h].get('mean_px') is not None}
+
+
+def HWA(method, side, h, dp=2):      # noqa: N802
+    """Mean endpoint error, in camera pixels, of one forecast of one wrist at 8 or 15 camera frames, over the 58 held reaches."""
+    return N(HW, f'absolute/{method}/{side}/{h}/mean_px', dp)
+
+
+def HWN(field):      # noqa: N802
+    """A count from the results file."""
+    return N(HW, field)
+
+
+def HWMAX():      # noqa: N802
+    """The largest gain on the right wrist from the voltages, against the same transformer on the pose alone (57 common reaches)."""
+    pc = load(HW)['primary_common']
+    cells = [(pc[f'transformer_anchored_full_s{s}__minus__transformer_anchored_pose_s{s}']['right'][h]['mean_delta_px'], s, h)
+             for s in HW_SEEDS for h in ('8', '15')]
+    v, s, h = min(cells)
+    return N(HW, f'primary_common/transformer_anchored_full_s{s}__minus__transformer_anchored_pose_s{s}/right/{h}/mean_delta_px', 2, absolute=True)
+
+
+def hw_checks():
+    """Every direction and count the pages state about the two-wrist study, asserted against its results file and its own pages:
+    the training reaches' average movement is the closest forecast of the right wrist at both horizons, and no movement the closest
+    of the left (of every forecast scored on all 58 reaches); on the 57 reaches with an earlier reach to lend its voltages, the voltages
+    lower each of the three transformers' right-wrist error against the same transformer on the pose alone, while another reach's voltages
+    do as well or better in three of those six comparisons; the test set in advance failed for both wrists; the transformers of the
+    general model's folder carry weights of their own."""
+    d = load(HW)
+    for h in ('8', '15'):
+        right, left = _hw_n58('right', h), _hw_n58('left', h)
+        assert min(right, key=right.get) == 'mean', (h, min(right, key=right.get))
+        assert left['zero'] == min(left.values()), h
+        assert right['transformer_anchored_full_s17'] > right['mean'] and len(right) == 86 and len(left) == 34, (h, len(right), len(left))
+    pc = d['primary_common']
+    for s in HW_SEEDS:
+        for h in ('8', '15'):
+            c = pc[f'transformer_anchored_full_s{s}__minus__transformer_anchored_pose_s{s}']['right'][h]
+            assert c['n'] == 57 and c['mean_delta_px'] < 0, (s, h, c['n'], c['mean_delta_px'])
+    wrong = [pc[f'transformer_anchored_full_s{s}__minus__transformer_anchored_full_s{s}_wrong']['right'][h]['mean_delta_px'] >= 0
+             for s in HW_SEEDS for h in ('8', '15')]
+    assert sum(wrong) == 3 and len(wrong) == 6, wrong
+    assert d['primary'] == {'right': {'defined': True, 'lower_against_both_controls_all_seeds_and_horizons': False},
+                            'left': {'defined': True, 'lower_against_both_controls_all_seeds_and_horizons': False}}, d['primary']
+    st = d['study']
+    assert (st['species'], st['training_session'], st['test_session'], st['training_hours'], st['training_blocks'], st['horizons_frames'],
+            st['video_hz'], st['electrical_hz'], st['seeds']) == ('human', 3, 4, [0, 16], 60, [8, 15], 30, 500, [17, 37, 73]), st
+    assert st['population'] == 'one AJILE12 participant, release 0.220127.0436', st['population']
+    assert d['rows'] == 58 and d['stratum_window_counts'] == [3, 7, 12, 12, 12, 12] and d['eligible_prior_voltage_donor'] == 57
+    readme = re.sub(r'\s+', ' ', (REPO / HW_README).read_text(encoding='utf-8'))
+    for s in ('A camera tracks two wrists, two elbows and two shoulders.', 'Eight electrodes measure electrical activity at the surface of the brain.',
+              'The experiment fits one recording from AJILE12 and tests the next recording of the same person.',
+              'The public example uses invented movement and voltage.', 'Eight frames take about 267 milliseconds at 30 frames per second. Fifteen take half a second.',
+              'The authors detected right-wrist reaches retrospectively from tracked video.', 'No instructions were given at these onsets.',
+              'The first 16 hours of session 3 supplied 60 eligible right-wrist events.',
+              'Session 4 contributed the first twelve eligible events in each four-hour interval where available.',
+              'Each example contains 250 earlier samples at 500 Hz from eight grid channels, and fifteen earlier camera frames at 30 Hz for each of six landmarks.',
+              'without a depth or physical-distance calibration', 'Each set has five simple forecasts and 36 combinations of linear regression, small causal Transformers, pose alone, pose plus voltage and earlier-event voltage controls.',
+              'three fixed initializations (17, 37, 73)', 'Neither wrist met the prespecified requirement to beat both controls at both horizons in every fit.',
+              'The left-wrist estimates describe what happened during selected **right**-wrist movements.',
+              'The frozen fitted weights and individual event values stay out of this distribution.'):
+        assert s in readme, s
+    task = re.sub(r'\s+', ' ', (REPO / HW_TASK).read_text(encoding='utf-8'))
+    assert 'Each wrist has its own fitted Transformer.' in task and 'The older movement checkpoint has no role in its predictions.' in task
+    page = re.sub(r'\s+', ' ', (REPO / HW_PAGE).read_text(encoding='utf-8'))
+    assert 'Each reference and every fitted parameter in the built-in example come from simulation.' in page
+    assert 'Move a wrist or change the signal gain to see the prediction update.' in page
+    assert GENERAL_FITS['bilateral_wrist'] == 'not the general model'
+    log('the closest forecasts; the voltages against the pose alone and against another reach\'s voltages; the test set in advance',
+        file=HW, field='absolute/*/{right,left}/{8,15}/mean_px (n 58); primary_common; primary; study; rows; stratum_window_counts; '
+        'eligible_prior_voltage_donor', full=None,
+        note='right: training mean lowest at both horizons; left: zero lowest; voltages lower for all three seeds at both horizons on the '
+             'right; another reach\'s voltages as good or better in 3 of 6; prespecified test failed for both wrists')
     return ''
 
 
@@ -3682,6 +3779,7 @@ GENERAL_FITS = {   # every task folder of the general model -> who it was scored
     'walking_cues': 'seen',           # the same ten-person test group, "already used in earlier studies" (its README)
     'cervical': 'not the general model',   # a straight-line correction with coefficients of its own (neck_checks())
     'muscle_motion': 'not the general model',   # straight-line fits with coefficients of their own, no parent_sha256 (mm_checks())
+    'bilateral_wrist': 'not the general model',   # a transformer per wrist with weights of its own; the movement checkpoint has no role (hw_checks())
     'cross_limb': 'not the general model',      # straight-line fits with coefficients of their own, no parent_sha256 (xl_checks())
     'wrist-source': 'not a task',          # the source recordings of the wrist-angle task
 }

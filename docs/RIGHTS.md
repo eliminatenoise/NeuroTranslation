@@ -270,3 +270,7 @@ Raeed H. Chowdhury, Joshua I. Glaser and Lee E. Miller released the recordings u
 ### The reaching model one week later
 
 The dated arm positions, cortical event counts and OpenSim muscle–tendon path estimates used here come from the CC0 recordings by Raeed H. Chowdhury, Joshua I. Glaser and Lee E. Miller. The project dedicates its original code, fitted parameters, text and newly drawn figures to CC0 1.0. Images reproduced from the original article retain the licences identified in the paper and its editable sources. [Recording archive](https://doi.org/10.5061/dryad.nk98sf7q7) · [Original study](https://doi.org/10.7554/eLife.48198)
+
+### One person's wrists on two recording days (the two-wrist study)
+
+Peterson, Singh, Dichter, Scheid, Rao and Brunton released AJILE12 under CC BY 4.0. The human-wrist study selected reach annotations, paired earlier camera and electrode measurements, fitted forecasting models and reports aggregate errors. The illustrated public reader uses independently generated example measurements and model parameters. Original project code, text and original demonstration materials are dedicated to CC0 1.0. Consult the accompanying notices for the source recording licence and any attributed items. [AJILE12 data](https://doi.org/10.48324/dandi.000055/0.220127.0436) · [Original study](https://doi.org/10.1038/s41597-022-01280-y) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
