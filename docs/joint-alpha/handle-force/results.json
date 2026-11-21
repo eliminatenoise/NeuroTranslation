@@ -1,0 +1,777 @@
+{
+  "edition": "2026-11-21",
+  "dataset": {
+    "paper": "https://doi.org/10.7554/eLife.48198",
+    "archive": "https://doi.org/10.5061/dryad.nk98sf7q7",
+    "date": "2017-09-07",
+    "subject": "C",
+    "workspace": 1,
+    "task": "TRT",
+    "sample_period_ms": 10,
+    "history_ms": 200,
+    "forecast_ms": 100,
+    "movement_coordinates": 8,
+    "cortical_contacts": 37,
+    "measured_force_axes": 3,
+    "force_unit": "N",
+    "scope": "One macaque, one retrospectively processed recording. The comparison uses development folds previously used in model-capacity selection."
+  },
+  "fit": {
+    "original_trials": 119,
+    "windows": 317,
+    "seeds": [
+      431,
+      827
+    ],
+    "steps": 80,
+    "learning_rate": 0.002,
+    "shared_attention_width": 24,
+    "attention_heads": 4
+  },
+  "scope": "Development only, one macaque and one recording block. Original test and reserve untouched.",
+  "motion_metric": "absolute error in millimetres, averaged across eight measured coordinates",
+  "count_metric": "Poisson negative log likelihood in nats per contact per 100 ms",
+  "windows": 196,
+  "original_trials": 77,
+  "strict_development_direction_supported": {
+    "motion": {
+      "linear": false,
+      "attention": true
+    },
+    "count": {
+      "linear": false,
+      "attention": false
+    }
+  },
+  "outcomes": {
+    "431": {
+      "motion": {
+        "means": {
+          "source": {
+            "all": 4.318928525387472,
+            "fold_3": 4.398999409065574,
+            "fold_4": 4.240910741290859
+          },
+          "frozen": {
+            "all": 4.11557827604771,
+            "fold_3": 4.078148183164063,
+            "fold_4": 4.152048622959982
+          },
+          "linear_omitted": {
+            "all": 4.320737605129237,
+            "fold_3": 4.302788464655142,
+            "fold_4": 4.3382265112322
+          },
+          "linear_measured": {
+            "all": 4.28092488962687,
+            "fold_3": 4.273143945437863,
+            "fold_4": 4.288506322426415
+          },
+          "linear_measured_inference_omitted": {
+            "all": 4.351393591119639,
+            "fold_3": 4.335711273422292,
+            "fold_4": 4.366673798106797
+          },
+          "linear_measured_inference_substituted": {
+            "all": 4.373320320976867,
+            "fold_3": 4.352422263257164,
+            "fold_4": 4.3936825310627325
+          },
+          "attention_omitted": {
+            "all": 4.160383230529751,
+            "fold_3": 4.1153058039861605,
+            "fold_4": 4.204304825623507
+          },
+          "attention_measured": {
+            "all": 4.1136829133741575,
+            "fold_3": 4.0776104608681125,
+            "fold_4": 4.14883043120056
+          },
+          "attention_measured_inference_omitted": {
+            "all": 4.166257617078877,
+            "fold_3": 4.14318483490576,
+            "fold_4": 4.188738789452681
+          },
+          "attention_measured_inference_substituted": {
+            "all": 4.188694693067439,
+            "fold_3": 4.14340697826137,
+            "fold_4": 4.2328211844169426
+          }
+        },
+        "paired": {
+          "attention_measured vs linear_measured": {
+            "loss_reduction": 0.16724197625271264,
+            "bootstrap_95_percent": [
+              0.07008601557748145,
+              0.26470906037859443
+            ],
+            "fold_3_loss_reduction": 0.19553348456975073,
+            "fold_4_loss_reduction": 0.13967589122585508,
+            "originals_improved": 51,
+            "originals_tied": 0
+          },
+          "linear_measured vs linear_omitted": {
+            "loss_reduction": 0.039812715502367146,
+            "bootstrap_95_percent": [
+              0.0015919215416786015,
+              0.07746169122310914
+            ],
+            "fold_3_loss_reduction": 0.029644519217279664,
+            "fold_4_loss_reduction": 0.04972018880578572,
+            "originals_improved": 51,
+            "originals_tied": 0
+          },
+          "linear_measured vs linear_measured_inference_substituted": {
+            "loss_reduction": 0.09239543134999745,
+            "bootstrap_95_percent": [
+              0.03678374160373452,
+              0.14561504552229534
+            ],
+            "fold_3_loss_reduction": 0.07927831781930049,
+            "fold_4_loss_reduction": 0.10517620863631755,
+            "originals_improved": 55,
+            "originals_tied": 0
+          },
+          "linear_measured vs linear_measured_inference_omitted": {
+            "loss_reduction": 0.07046870149276929,
+            "bootstrap_95_percent": [
+              0.03395532905250122,
+              0.10466430692649269
+            ],
+            "fold_3_loss_reduction": 0.06256732798442903,
+            "fold_4_loss_reduction": 0.07816747568038289,
+            "originals_improved": 54,
+            "originals_tied": 0
+          },
+          "linear_measured vs frozen": {
+            "loss_reduction": -0.16534661357915947,
+            "bootstrap_95_percent": [
+              -0.2687714273474397,
+              -0.06780090535057545
+            ],
+            "fold_3_loss_reduction": -0.19499576227379992,
+            "fold_4_loss_reduction": -0.136457699466433,
+            "originals_improved": 34,
+            "originals_tied": 0
+          },
+          "linear_measured vs source": {
+            "loss_reduction": 0.03800363576060181,
+            "bootstrap_95_percent": [
+              -0.36815467759099024,
+              0.44621054541654054
+            ],
+            "fold_3_loss_reduction": 0.12585546362771047,
+            "fold_4_loss_reduction": -0.047595581135555384,
+            "originals_improved": 39,
+            "originals_tied": 0
+          },
+          "attention_measured vs attention_omitted": {
+            "loss_reduction": 0.046700317155593966,
+            "bootstrap_95_percent": [
+              -0.03817061577879248,
+              0.13248854423769815
+            ],
+            "fold_3_loss_reduction": 0.037695343118046586,
+            "fold_4_loss_reduction": 0.055474394422947826,
+            "originals_improved": 43,
+            "originals_tied": 0
+          },
+          "attention_measured vs attention_measured_inference_substituted": {
+            "loss_reduction": 0.0750117796932819,
+            "bootstrap_95_percent": [
+              0.016697766039207047,
+              0.132833355514371
+            ],
+            "fold_3_loss_reduction": 0.06579651739325769,
+            "fold_4_loss_reduction": 0.08399075321638243,
+            "originals_improved": 49,
+            "originals_tied": 0
+          },
+          "attention_measured vs attention_measured_inference_omitted": {
+            "loss_reduction": 0.052574703704719006,
+            "bootstrap_95_percent": [
+              0.0037493123516674854,
+              0.10025312549495585
+            ],
+            "fold_3_loss_reduction": 0.0655743740376478,
+            "fold_4_loss_reduction": 0.039908358252121724,
+            "originals_improved": 47,
+            "originals_tied": 0
+          },
+          "attention_measured vs frozen": {
+            "loss_reduction": 0.0018953626735531202,
+            "bootstrap_95_percent": [
+              -0.07022037469357095,
+              0.0724625248808688
+            ],
+            "fold_3_loss_reduction": 0.0005377222959507968,
+            "fold_4_loss_reduction": 0.003218191759422051,
+            "originals_improved": 39,
+            "originals_tied": 0
+          },
+          "attention_measured vs source": {
+            "loss_reduction": 0.20524561201331443,
+            "bootstrap_95_percent": [
+              -0.20640302655826714,
+              0.6284403116685794
+            ],
+            "fold_3_loss_reduction": 0.3213889481974611,
+            "fold_4_loss_reduction": 0.09208031009029966,
+            "originals_improved": 39,
+            "originals_tied": 0
+          }
+        },
+        "originals_per_fold": {
+          "3": 38,
+          "4": 39
+        }
+      },
+      "count": {
+        "means": {
+          "source": {
+            "all": 6.299907940596826,
+            "fold_3": 6.6199948071903965,
+            "fold_4": 5.988028429556938
+          },
+          "frozen": {
+            "all": 2.250068484856223,
+            "fold_3": 2.2513334601758883,
+            "fold_4": 2.248835944801166
+          },
+          "linear_omitted": {
+            "all": 2.4524956532936453,
+            "fold_3": 2.4519934959046763,
+            "fold_4": 2.452984934852129
+          },
+          "linear_measured": {
+            "all": 2.457271160319801,
+            "fold_3": 2.463274020005624,
+            "fold_4": 2.451422220113101
+          },
+          "linear_measured_inference_omitted": {
+            "all": 2.4795550340058066,
+            "fold_3": 2.4782845148404657,
+            "fold_4": 2.4807929757566507
+          },
+          "linear_measured_inference_substituted": {
+            "all": 2.5189218640584676,
+            "fold_3": 2.512533799702537,
+            "fold_4": 2.52514613189245
+          },
+          "attention_omitted": {
+            "all": 2.3284472949503625,
+            "fold_3": 2.324350253147284,
+            "fold_4": 2.3324392843995168
+          },
+          "attention_measured": {
+            "all": 2.3189851712811604,
+            "fold_3": 2.327826833417527,
+            "fold_4": 2.310370218430343
+          },
+          "attention_measured_inference_omitted": {
+            "all": 2.3441563034017987,
+            "fold_3": 2.3472204443931375,
+            "fold_4": 2.3411707301281863
+          },
+          "attention_measured_inference_substituted": {
+            "all": 2.3584055102601496,
+            "fold_3": 2.3616821337146177,
+            "fold_4": 2.3552129027916937
+          }
+        },
+        "paired": {
+          "attention_measured vs linear_measured": {
+            "loss_reduction": 0.13828598903864012,
+            "bootstrap_95_percent": [
+              0.10973421885170995,
+              0.1677079202397788
+            ],
+            "fold_3_loss_reduction": 0.13544718658809748,
+            "fold_4_loss_reduction": 0.14105200168275867,
+            "originals_improved": 66,
+            "originals_tied": 0
+          },
+          "linear_measured vs linear_omitted": {
+            "loss_reduction": -0.004775507026155035,
+            "bootstrap_95_percent": [
+              -0.01354541372050334,
+              0.0041956558443131415
+            ],
+            "fold_3_loss_reduction": -0.01128052410094785,
+            "fold_4_loss_reduction": 0.0015627147390277073,
+            "originals_improved": 34,
+            "originals_tied": 0
+          },
+          "linear_measured vs linear_measured_inference_substituted": {
+            "loss_reduction": 0.061650703738666414,
+            "bootstrap_95_percent": [
+              0.04262078333831242,
+              0.08095630244623642
+            ],
+            "fold_3_loss_reduction": 0.049259779696912566,
+            "fold_4_loss_reduction": 0.07372391177934966,
+            "originals_improved": 63,
+            "originals_tied": 0
+          },
+          "linear_measured vs linear_measured_inference_omitted": {
+            "loss_reduction": 0.022283873686005515,
+            "bootstrap_95_percent": [
+              0.00960819271360629,
+              0.03502483607789543
+            ],
+            "fold_3_loss_reduction": 0.015010494834841258,
+            "fold_4_loss_reduction": 0.029370755643550177,
+            "originals_improved": 51,
+            "originals_tied": 0
+          },
+          "linear_measured vs frozen": {
+            "loss_reduction": -0.20720267546357723,
+            "bootstrap_95_percent": [
+              -0.23414311996271178,
+              -0.18169217268288196
+            ],
+            "fold_3_loss_reduction": -0.21194055982973617,
+            "fold_4_loss_reduction": -0.20258627531193527,
+            "originals_improved": 1,
+            "originals_tied": 0
+          },
+          "linear_measured vs source": {
+            "loss_reduction": 3.8426367802770263,
+            "bootstrap_95_percent": [
+              3.475931278684816,
+              4.273132640504514
+            ],
+            "fold_3_loss_reduction": 4.156720787184773,
+            "fold_4_loss_reduction": 3.5366062094438373,
+            "originals_improved": 77,
+            "originals_tied": 0
+          },
+          "attention_measured vs attention_omitted": {
+            "loss_reduction": 0.009462123669202236,
+            "bootstrap_95_percent": [
+              -0.00939866861523216,
+              0.0283697603062889
+            ],
+            "fold_3_loss_reduction": -0.00347658027024344,
+            "fold_4_loss_reduction": 0.022069065969174944,
+            "originals_improved": 41,
+            "originals_tied": 0
+          },
+          "attention_measured vs attention_measured_inference_substituted": {
+            "loss_reduction": 0.039420338978989035,
+            "bootstrap_95_percent": [
+              0.024918306581823046,
+              0.05458954985433081
+            ],
+            "fold_3_loss_reduction": 0.03385530029709022,
+            "fold_4_loss_reduction": 0.044842684361351984,
+            "originals_improved": 56,
+            "originals_tied": 0
+          },
+          "attention_measured vs attention_measured_inference_omitted": {
+            "loss_reduction": 0.025171132120638283,
+            "bootstrap_95_percent": [
+              0.015411060028243943,
+              0.03587283821226776
+            ],
+            "fold_3_loss_reduction": 0.01939361097561091,
+            "fold_4_loss_reduction": 0.03080051169784444,
+            "originals_improved": 53,
+            "originals_tied": 0
+          },
+          "attention_measured vs frozen": {
+            "loss_reduction": -0.06891668642493712,
+            "bootstrap_95_percent": [
+              -0.08782568259602701,
+              -0.05136168517213961
+            ],
+            "fold_3_loss_reduction": -0.07649337324163867,
+            "fold_4_loss_reduction": -0.06153427362917665,
+            "originals_improved": 13,
+            "originals_tied": 0
+          },
+          "attention_measured vs source": {
+            "loss_reduction": 3.980922769315665,
+            "bootstrap_95_percent": [
+              3.6172508433730104,
+              4.408552273401626
+            ],
+            "fold_3_loss_reduction": 4.2921679737728695,
+            "fold_4_loss_reduction": 3.6776582111265963,
+            "originals_improved": 77,
+            "originals_tied": 0
+          }
+        },
+        "originals_per_fold": {
+          "3": 38,
+          "4": 39
+        }
+      }
+    },
+    "827": {
+      "motion": {
+        "means": {
+          "source": {
+            "all": 4.318928525387472,
+            "fold_3": 4.398999409065574,
+            "fold_4": 4.240910741290859
+          },
+          "frozen": {
+            "all": 4.16142647284557,
+            "fold_3": 4.223677370907241,
+            "fold_4": 4.100771751657275
+          },
+          "linear_omitted": {
+            "all": 4.292123154518399,
+            "fold_3": 4.3329352691782095,
+            "fold_4": 4.252357504337043
+          },
+          "linear_measured": {
+            "all": 4.244836803900697,
+            "fold_3": 4.305410893508994,
+            "fold_4": 4.185815896077228
+          },
+          "linear_measured_inference_omitted": {
+            "all": 4.293235417640957,
+            "fold_3": 4.359526730458718,
+            "fold_4": 4.22864388207493
+          },
+          "linear_measured_inference_substituted": {
+            "all": 4.384692113799231,
+            "fold_3": 4.458279971523122,
+            "fold_4": 4.3129911242221075
+          },
+          "attention_omitted": {
+            "all": 4.218726078824513,
+            "fold_3": 4.298335622668928,
+            "fold_4": 4.141157805335083
+          },
+          "attention_measured": {
+            "all": 4.193856700762032,
+            "fold_3": 4.2851511105960665,
+            "fold_4": 4.1049031732314365
+          },
+          "attention_measured_inference_omitted": {
+            "all": 4.262015506425669,
+            "fold_3": 4.336675317026291,
+            "fold_4": 4.189270049943011
+          },
+          "attention_measured_inference_substituted": {
+            "all": 4.280752315871416,
+            "fold_3": 4.352761265039144,
+            "fold_4": 4.210589750015683
+          }
+        },
+        "paired": {
+          "attention_measured vs linear_measured": {
+            "loss_reduction": 0.05098010313866488,
+            "bootstrap_95_percent": [
+              -0.059234689725855286,
+              0.15474728023637388
+            ],
+            "fold_3_loss_reduction": 0.020259782912928504,
+            "fold_4_loss_reduction": 0.08091272284579262,
+            "originals_improved": 40,
+            "originals_tied": 0
+          },
+          "linear_measured vs linear_omitted": {
+            "loss_reduction": 0.047286350617701305,
+            "bootstrap_95_percent": [
+              0.005866802643326441,
+              0.08835904450678406
+            ],
+            "fold_3_loss_reduction": 0.027524375669217033,
+            "fold_4_loss_reduction": 0.06654160825981419,
+            "originals_improved": 43,
+            "originals_tied": 0
+          },
+          "linear_measured vs linear_measured_inference_substituted": {
+            "loss_reduction": 0.13985530989853362,
+            "bootstrap_95_percent": [
+              0.06493452064634007,
+              0.21428966251785514
+            ],
+            "fold_3_loss_reduction": 0.15286907801412758,
+            "fold_4_loss_reduction": 0.127175228144878,
+            "originals_improved": 51,
+            "originals_tied": 0
+          },
+          "linear_measured vs linear_measured_inference_omitted": {
+            "loss_reduction": 0.048398613740258625,
+            "bootstrap_95_percent": [
+              -0.0048763079251752045,
+              0.10172340707446234
+            ],
+            "fold_3_loss_reduction": 0.054115836949724855,
+            "fold_4_loss_reduction": 0.042827985997701795,
+            "originals_improved": 47,
+            "originals_tied": 0
+          },
+          "linear_measured vs frozen": {
+            "loss_reduction": -0.08341033105512685,
+            "bootstrap_95_percent": [
+              -0.18668166719771645,
+              0.022318808329709987
+            ],
+            "fold_3_loss_reduction": -0.08173352260175241,
+            "fold_4_loss_reduction": -0.08504414441995321,
+            "originals_improved": 32,
+            "originals_tied": 0
+          },
+          "linear_measured vs source": {
+            "loss_reduction": 0.07409172148677436,
+            "bootstrap_95_percent": [
+              -0.3404606334335599,
+              0.4842758875212958
+            ],
+            "fold_3_loss_reduction": 0.09358851555657961,
+            "fold_4_loss_reduction": 0.05509484521363079,
+            "originals_improved": 39,
+            "originals_tied": 0
+          },
+          "attention_measured vs attention_omitted": {
+            "loss_reduction": 0.02486937806248111,
+            "bootstrap_95_percent": [
+              -0.035293866986876546,
+              0.08250752267053794
+            ],
+            "fold_3_loss_reduction": 0.0131845120728636,
+            "fold_4_loss_reduction": 0.03625463210364689,
+            "originals_improved": 43,
+            "originals_tied": 0
+          },
+          "attention_measured vs attention_measured_inference_substituted": {
+            "loss_reduction": 0.08689561510938358,
+            "bootstrap_95_percent": [
+              0.0345042916478184,
+              0.13903074094804418
+            ],
+            "fold_3_loss_reduction": 0.06761015444307729,
+            "fold_4_loss_reduction": 0.10568657678424612,
+            "originals_improved": 52,
+            "originals_tied": 0
+          },
+          "attention_measured vs attention_measured_inference_omitted": {
+            "loss_reduction": 0.0681588056636369,
+            "bootstrap_95_percent": [
+              0.031078995938777675,
+              0.10331413247982879
+            ],
+            "fold_3_loss_reduction": 0.051524206430226385,
+            "fold_4_loss_reduction": 0.08436687671157535,
+            "originals_improved": 49,
+            "originals_tied": 0
+          },
+          "attention_measured vs frozen": {
+            "loss_reduction": -0.03243022791646197,
+            "bootstrap_95_percent": [
+              -0.0830870202397303,
+              0.01993698500559436
+            ],
+            "fold_3_loss_reduction": -0.061473739688823914,
+            "fold_4_loss_reduction": -0.004131421574160588,
+            "originals_improved": 33,
+            "originals_tied": 0
+          },
+          "attention_measured vs source": {
+            "loss_reduction": 0.12507182462543925,
+            "bootstrap_95_percent": [
+              -0.2901713766060998,
+              0.5497651349627063
+            ],
+            "fold_3_loss_reduction": 0.11384829846950814,
+            "fold_4_loss_reduction": 0.13600756805942338,
+            "originals_improved": 40,
+            "originals_tied": 0
+          }
+        },
+        "originals_per_fold": {
+          "3": 38,
+          "4": 39
+        }
+      },
+      "count": {
+        "means": {
+          "source": {
+            "all": 6.299907940596826,
+            "fold_3": 6.6199948071903965,
+            "fold_4": 5.988028429556938
+          },
+          "frozen": {
+            "all": 2.2040211016087343,
+            "fold_3": 2.1743838045405615,
+            "fold_4": 2.2328984679828503
+          },
+          "linear_omitted": {
+            "all": 2.400016627319453,
+            "fold_3": 2.358742336831971,
+            "fold_4": 2.440232602666232
+          },
+          "linear_measured": {
+            "all": 2.4018805087087363,
+            "fold_3": 2.37286223432346,
+            "fold_4": 2.4301547247764423
+          },
+          "linear_measured_inference_omitted": {
+            "all": 2.428775515164377,
+            "fold_3": 2.38403102041984,
+            "fold_4": 2.4723727151718746
+          },
+          "linear_measured_inference_substituted": {
+            "all": 2.4724857364906208,
+            "fold_3": 2.424299862877382,
+            "fold_4": 2.5194360748830067
+          },
+          "attention_omitted": {
+            "all": 2.2660210205582003,
+            "fold_3": 2.2332352732076166,
+            "fold_4": 2.2979661077203075
+          },
+          "attention_measured": {
+            "all": 2.2613291297065876,
+            "fold_3": 2.239277547852503,
+            "fold_4": 2.2828152863849263
+          },
+          "attention_measured_inference_omitted": {
+            "all": 2.2819152935606737,
+            "fold_3": 2.262328762946738,
+            "fold_4": 2.3009996054409196
+          },
+          "attention_measured_inference_substituted": {
+            "all": 2.2922832755024265,
+            "fold_3": 2.271426684962717,
+            "fold_4": 2.3126050816693233
+          }
+        },
+        "paired": {
+          "attention_measured vs linear_measured": {
+            "loss_reduction": 0.1405513790021489,
+            "bootstrap_95_percent": [
+              0.11179563827290462,
+              0.1699393398769565
+            ],
+            "fold_3_loss_reduction": 0.13358468647095764,
+            "fold_4_loss_reduction": 0.1473394383915148,
+            "originals_improved": 65,
+            "originals_tied": 0
+          },
+          "linear_measured vs linear_omitted": {
+            "loss_reduction": -0.0018638813892834685,
+            "bootstrap_95_percent": [
+              -0.011990998372282081,
+              0.008418854452210875
+            ],
+            "fold_3_loss_reduction": -0.014119897491489885,
+            "fold_4_loss_reduction": 0.01007787788978945,
+            "originals_improved": 35,
+            "originals_tied": 0
+          },
+          "linear_measured vs linear_measured_inference_substituted": {
+            "loss_reduction": 0.07060522778188398,
+            "bootstrap_95_percent": [
+              0.05042757632817753,
+              0.09081308248554322
+            ],
+            "fold_3_loss_reduction": 0.051437628553921436,
+            "fold_4_loss_reduction": 0.08928135010656546,
+            "originals_improved": 60,
+            "originals_tied": 0
+          },
+          "linear_measured vs linear_measured_inference_omitted": {
+            "loss_reduction": 0.02689500645564025,
+            "bootstrap_95_percent": [
+              0.012762725962648177,
+              0.04129309015637038
+            ],
+            "fold_3_loss_reduction": 0.011168786096379613,
+            "fold_4_loss_reduction": 0.04221799039543267,
+            "originals_improved": 53,
+            "originals_tied": 0
+          },
+          "linear_measured vs frozen": {
+            "loss_reduction": -0.1978594071000024,
+            "bootstrap_95_percent": [
+              -0.22500191142931383,
+              -0.17143825754723274
+            ],
+            "fold_3_loss_reduction": -0.1984784297828989,
+            "fold_4_loss_reduction": -0.19725625679359046,
+            "originals_improved": 4,
+            "originals_tied": 0
+          },
+          "linear_measured vs source": {
+            "loss_reduction": 3.8980274318880896,
+            "bootstrap_95_percent": [
+              3.532492678649531,
+              4.3160727006028505
+            ],
+            "fold_3_loss_reduction": 4.247132572866937,
+            "fold_4_loss_reduction": 3.5578737047804965,
+            "originals_improved": 77,
+            "originals_tied": 0
+          },
+          "attention_measured vs attention_omitted": {
+            "loss_reduction": 0.004691890851612536,
+            "bootstrap_95_percent": [
+              -0.01563147834780929,
+              0.02351534189961673
+            ],
+            "fold_3_loss_reduction": -0.006042274644886258,
+            "fold_4_loss_reduction": 0.015150821335380593,
+            "originals_improved": 44,
+            "originals_tied": 0
+          },
+          "attention_measured vs attention_measured_inference_substituted": {
+            "loss_reduction": 0.0309541457958387,
+            "bootstrap_95_percent": [
+              0.014370990318140308,
+              0.04873600843837632
+            ],
+            "fold_3_loss_reduction": 0.03214913711021385,
+            "fold_4_loss_reduction": 0.029789795284396237,
+            "originals_improved": 48,
+            "originals_tied": 0
+          },
+          "attention_measured vs attention_measured_inference_omitted": {
+            "loss_reduction": 0.02058616385408612,
+            "bootstrap_95_percent": [
+              0.00860752298238505,
+              0.033313668303299175
+            ],
+            "fold_3_loss_reduction": 0.02305121509423492,
+            "fold_4_loss_reduction": 0.01818431905599242,
+            "originals_improved": 52,
+            "originals_tied": 0
+          },
+          "attention_measured vs frozen": {
+            "loss_reduction": -0.05730802809785351,
+            "bootstrap_95_percent": [
+              -0.07673726104739256,
+              -0.03923691828246557
+            ],
+            "fold_3_loss_reduction": -0.0648937433119413,
+            "fold_4_loss_reduction": -0.04991681840207568,
+            "originals_improved": 17,
+            "originals_tied": 0
+          },
+          "attention_measured vs source": {
+            "loss_reduction": 4.03857881089024,
+            "bootstrap_95_percent": [
+              3.6677132046864735,
+              4.460134070938227
+            ],
+            "fold_3_loss_reduction": 4.380717259337893,
+            "fold_4_loss_reduction": 3.7052131431720112,
+            "originals_improved": 77,
+            "originals_tied": 0
+          }
+        },
+        "originals_per_fold": {
+          "3": 38,
+          "4": 39
+        }
+      }
+    }
+  },
+  "interval_method": "The interval covers the middle 95 percent of 4000 paired resampled means using whole trials from the same recording. Positive loss reduction favors the named candidate."
+}
