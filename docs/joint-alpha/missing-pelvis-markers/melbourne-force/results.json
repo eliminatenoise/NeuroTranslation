@@ -1,0 +1,643 @@
+{
+  "dataset": {
+    "title": "Biomechanics and energetics of neurotypical (un)constrained walking",
+    "credit": "Tomislav Baček and colleagues",
+    "version": "1",
+    "licence": "CC BY 4.0",
+    "data": "https://doi.org/10.26188/24288265.v1",
+    "methods": "https://doi.org/10.1038/s41597-024-03444-4",
+    "residual_format": "https://www.c3d.org/HTML/Documents/3dpointresiduals.htm"
+  },
+  "study": {
+    "scope": "Retrospective development on the seven people already scored in the Melbourne walking comparison.",
+    "fit_people_per_fold": 6,
+    "held_people_per_fold": 1,
+    "folds": 7,
+    "matched_windows_per_target": 917,
+    "camera_prefix_seconds": 15,
+    "camera_rate_hz": 100,
+    "force_rate_hz_per_plate": 2000,
+    "treadmill_force_plates": 2,
+    "camera_history_frames": 80,
+    "force_samples_per_average_per_plate": 20,
+    "force_cutoff": "Last force group ends before the last camera reading on the stored clock.",
+    "forecast_horizon_native_frames": 10,
+    "forecast_horizon_ms": 100,
+    "force_control_shift_frames": 100,
+    "force_control_shift_ms": 1000,
+    "uses_force_for_window_selection": false,
+    "uses_emg": false,
+    "live_delivery_timing_measured": false,
+    "external_validation": false,
+    "interpretation": "The shift tests information in the recorded alignment. Physical causality requires a different experiment."
+  },
+  "camera_support": {
+    "all_four_original_export_positions_throughout_all_histories": 917,
+    "all_four_positive_residuals_throughout_histories": 866,
+    "minimum_scored_people_for_metrics": 6
+  },
+  "uncertainty": {
+    "bootstrap_people": true,
+    "paired": true,
+    "draws": 5000,
+    "interval": "95% paired person percentile, per comparison"
+  },
+  "methods": {
+    "earlier_stride": "Replay an earlier stride",
+    "recent_speed": "Continue recent camera speed",
+    "ridge_camera": "Ridge · camera only",
+    "ridge_camera_force": "Ridge · camera + latest force",
+    "ridge_camera_shifted_force": "Ridge · camera + shifted force",
+    "attention_camera": "Attention · camera only",
+    "attention_camera_force": "Attention · camera + latest force",
+    "attention_camera_shifted_force": "Attention · camera + shifted force"
+  },
+  "displayed_contrasts": {
+    "ridge_camera_force_minus_ridge_camera": "Ridge vs camera only",
+    "ridge_camera_force_minus_ridge_camera_shifted_force": "Ridge vs shifted force",
+    "attention_camera_force_minus_attention_camera": "Attention vs camera only",
+    "attention_camera_force_minus_attention_camera_shifted_force": "Attention vs shifted force"
+  },
+  "endpoints": {
+    "four_marker": {
+      "overall": {
+        "scheduled": 917,
+        "issued": 917,
+        "withheld": 0,
+        "missing_endpoint": 0,
+        "scored": 917,
+        "scored_people": 7,
+        "strict_history_scored": 866,
+        "stride_fallback_scored": 0,
+        "speed_fallback_scored": 0,
+        "counts_only": false,
+        "person_equal_mae_mm": {
+          "earlier_stride": 3.4152913733163084,
+          "recent_speed": 8.649318832347543,
+          "ridge_camera": 2.5399701508807686,
+          "ridge_camera_force": 2.24183298961645,
+          "ridge_camera_shifted_force": 2.5157062124219864,
+          "attention_camera": 3.7147919900084525,
+          "attention_camera_force": 3.6168346015171986,
+          "attention_camera_shifted_force": 4.2502489671171775
+        },
+        "pooled_p90_absolute_error_mm": {
+          "earlier_stride": 7.190335083007812,
+          "recent_speed": 16.506689453124995,
+          "ridge_camera": 5.273371092834624,
+          "ridge_camera_force": 4.75540686258494,
+          "ridge_camera_shifted_force": 5.007815663843533,
+          "attention_camera": 8.239912089573323,
+          "attention_camera_force": 7.62911892424601,
+          "attention_camera_shifted_force": 8.606808017244465
+        },
+        "paired": {
+          "recent_speed_minus_earlier_stride": {
+            "mean_mm": 5.234027459031234,
+            "bootstrap95_mm": [
+              3.9507167470884164,
+              6.784276831241054
+            ]
+          },
+          "ridge_camera_minus_earlier_stride": {
+            "mean_mm": -0.8753212224355401,
+            "bootstrap95_mm": [
+              -1.262713003476957,
+              -0.4471709868694476
+            ]
+          },
+          "ridge_camera_force_minus_earlier_stride": {
+            "mean_mm": -1.173458383699858,
+            "bootstrap95_mm": [
+              -1.531395459169696,
+              -0.6960859579078067
+            ]
+          },
+          "ridge_camera_shifted_force_minus_earlier_stride": {
+            "mean_mm": -0.8995851608943222,
+            "bootstrap95_mm": [
+              -1.3222355176640679,
+              -0.36962677181321624
+            ]
+          },
+          "attention_camera_minus_earlier_stride": {
+            "mean_mm": 0.2995006166921437,
+            "bootstrap95_mm": [
+              -0.6384015458451352,
+              1.7635087706043462
+            ]
+          },
+          "attention_camera_force_minus_earlier_stride": {
+            "mean_mm": 0.2015432282008907,
+            "bootstrap95_mm": [
+              -0.651718705987299,
+              1.2246602691296544
+            ]
+          },
+          "attention_camera_shifted_force_minus_earlier_stride": {
+            "mean_mm": 0.8349575938008681,
+            "bootstrap95_mm": [
+              0.07851501715386533,
+              1.72680498532523
+            ]
+          },
+          "ridge_camera_force_minus_ridge_camera": {
+            "mean_mm": -0.29813716126431794,
+            "bootstrap95_mm": [
+              -0.5096587044915932,
+              -0.09623850823301026
+            ]
+          },
+          "ridge_camera_shifted_force_minus_ridge_camera": {
+            "mean_mm": -0.024263938458781942,
+            "bootstrap95_mm": [
+              -0.18319216389343748,
+              0.11409845728843944
+            ]
+          },
+          "ridge_camera_force_minus_ridge_camera_shifted_force": {
+            "mean_mm": -0.273873222805536,
+            "bootstrap95_mm": [
+              -0.472379045958961,
+              -0.10771248837100991
+            ]
+          },
+          "attention_camera_force_minus_attention_camera": {
+            "mean_mm": -0.09795738849125295,
+            "bootstrap95_mm": [
+              -0.77399487465465,
+              0.5417483270265875
+            ]
+          },
+          "attention_camera_shifted_force_minus_attention_camera": {
+            "mean_mm": 0.5354569771087244,
+            "bootstrap95_mm": [
+              -0.20802454223929315,
+              1.1499821417780096
+            ]
+          },
+          "attention_camera_force_minus_attention_camera_shifted_force": {
+            "mean_mm": -0.6334143655999774,
+            "bootstrap95_mm": [
+              -1.045542773215362,
+              -0.2568372969969424
+            ]
+          }
+        }
+      },
+      "by_original_export_gap": {
+        "complete": {
+          "scheduled": 917,
+          "issued": 917,
+          "withheld": 0,
+          "missing_endpoint": 0,
+          "scored": 917,
+          "scored_people": 7,
+          "strict_history_scored": 866,
+          "stride_fallback_scored": 0,
+          "speed_fallback_scored": 0,
+          "counts_only": false,
+          "person_equal_mae_mm": {
+            "earlier_stride": 3.4152913733163084,
+            "recent_speed": 8.649318832347543,
+            "ridge_camera": 2.5399701508807686,
+            "ridge_camera_force": 2.24183298961645,
+            "ridge_camera_shifted_force": 2.5157062124219864,
+            "attention_camera": 3.7147919900084525,
+            "attention_camera_force": 3.6168346015171986,
+            "attention_camera_shifted_force": 4.2502489671171775
+          },
+          "pooled_p90_absolute_error_mm": {
+            "earlier_stride": 7.190335083007812,
+            "recent_speed": 16.506689453124995,
+            "ridge_camera": 5.273371092834624,
+            "ridge_camera_force": 4.75540686258494,
+            "ridge_camera_shifted_force": 5.007815663843533,
+            "attention_camera": 8.239912089573323,
+            "attention_camera_force": 7.62911892424601,
+            "attention_camera_shifted_force": 8.606808017244465
+          },
+          "paired": {
+            "recent_speed_minus_earlier_stride": {
+              "mean_mm": 5.234027459031234,
+              "bootstrap95_mm": [
+                3.9507167470884164,
+                6.784276831241054
+              ]
+            },
+            "ridge_camera_minus_earlier_stride": {
+              "mean_mm": -0.8753212224355401,
+              "bootstrap95_mm": [
+                -1.262713003476957,
+                -0.4471709868694476
+              ]
+            },
+            "ridge_camera_force_minus_earlier_stride": {
+              "mean_mm": -1.173458383699858,
+              "bootstrap95_mm": [
+                -1.531395459169696,
+                -0.6960859579078067
+              ]
+            },
+            "ridge_camera_shifted_force_minus_earlier_stride": {
+              "mean_mm": -0.8995851608943222,
+              "bootstrap95_mm": [
+                -1.3222355176640679,
+                -0.36962677181321624
+              ]
+            },
+            "attention_camera_minus_earlier_stride": {
+              "mean_mm": 0.2995006166921437,
+              "bootstrap95_mm": [
+                -0.6384015458451352,
+                1.7635087706043462
+              ]
+            },
+            "attention_camera_force_minus_earlier_stride": {
+              "mean_mm": 0.2015432282008907,
+              "bootstrap95_mm": [
+                -0.651718705987299,
+                1.2246602691296544
+              ]
+            },
+            "attention_camera_shifted_force_minus_earlier_stride": {
+              "mean_mm": 0.8349575938008681,
+              "bootstrap95_mm": [
+                0.07851501715386533,
+                1.72680498532523
+              ]
+            },
+            "ridge_camera_force_minus_ridge_camera": {
+              "mean_mm": -0.29813716126431794,
+              "bootstrap95_mm": [
+                -0.5096587044915932,
+                -0.09623850823301026
+              ]
+            },
+            "ridge_camera_shifted_force_minus_ridge_camera": {
+              "mean_mm": -0.024263938458781942,
+              "bootstrap95_mm": [
+                -0.18319216389343748,
+                0.11409845728843944
+              ]
+            },
+            "ridge_camera_force_minus_ridge_camera_shifted_force": {
+              "mean_mm": -0.273873222805536,
+              "bootstrap95_mm": [
+                -0.472379045958961,
+                -0.10771248837100991
+              ]
+            },
+            "attention_camera_force_minus_attention_camera": {
+              "mean_mm": -0.09795738849125295,
+              "bootstrap95_mm": [
+                -0.77399487465465,
+                0.5417483270265875
+              ]
+            },
+            "attention_camera_shifted_force_minus_attention_camera": {
+              "mean_mm": 0.5354569771087244,
+              "bootstrap95_mm": [
+                -0.20802454223929315,
+                1.1499821417780096
+              ]
+            },
+            "attention_camera_force_minus_attention_camera_shifted_force": {
+              "mean_mm": -0.6334143655999774,
+              "bootstrap95_mm": [
+                -1.045542773215362,
+                -0.2568372969969424
+              ]
+            }
+          }
+        },
+        "front_only": {
+          "scheduled": 0,
+          "issued": 0,
+          "withheld": 0,
+          "missing_endpoint": 0,
+          "scored": 0,
+          "scored_people": 0,
+          "strict_history_scored": 0,
+          "stride_fallback_scored": 0,
+          "speed_fallback_scored": 0,
+          "counts_only": true
+        },
+        "rear_only": {
+          "scheduled": 0,
+          "issued": 0,
+          "withheld": 0,
+          "missing_endpoint": 0,
+          "scored": 0,
+          "scored_people": 0,
+          "strict_history_scored": 0,
+          "stride_fallback_scored": 0,
+          "speed_fallback_scored": 0,
+          "counts_only": true
+        },
+        "mixed": {
+          "scheduled": 0,
+          "issued": 0,
+          "withheld": 0,
+          "missing_endpoint": 0,
+          "scored": 0,
+          "scored_people": 0,
+          "strict_history_scored": 0,
+          "stride_fallback_scored": 0,
+          "speed_fallback_scored": 0,
+          "counts_only": true
+        }
+      }
+    },
+    "rear_pair": {
+      "overall": {
+        "scheduled": 917,
+        "issued": 917,
+        "withheld": 0,
+        "missing_endpoint": 0,
+        "scored": 917,
+        "scored_people": 7,
+        "strict_history_scored": 866,
+        "stride_fallback_scored": 0,
+        "speed_fallback_scored": 0,
+        "counts_only": false,
+        "person_equal_mae_mm": {
+          "earlier_stride": 3.6674570730494307,
+          "recent_speed": 8.828934231657238,
+          "ridge_camera": 2.718434358564284,
+          "ridge_camera_force": 2.460722887809754,
+          "ridge_camera_shifted_force": 2.7303155368017022,
+          "attention_camera": 3.967315535936519,
+          "attention_camera_force": 3.954279746452241,
+          "attention_camera_shifted_force": 4.365498033570738
+        },
+        "pooled_p90_absolute_error_mm": {
+          "earlier_stride": 7.756249999999999,
+          "recent_speed": 16.402368164062498,
+          "ridge_camera": 5.367675399473268,
+          "ridge_camera_force": 5.107585261340172,
+          "ridge_camera_shifted_force": 5.458219035059865,
+          "attention_camera": 8.467884163579392,
+          "attention_camera_force": 7.713009250566078,
+          "attention_camera_shifted_force": 8.716680708110292
+        },
+        "paired": {
+          "recent_speed_minus_earlier_stride": {
+            "mean_mm": 5.161477158607807,
+            "bootstrap95_mm": [
+              3.8138062962788926,
+              6.767523046928247
+            ]
+          },
+          "ridge_camera_minus_earlier_stride": {
+            "mean_mm": -0.9490227144851472,
+            "bootstrap95_mm": [
+              -1.2638530057305197,
+              -0.561435515681162
+            ]
+          },
+          "ridge_camera_force_minus_earlier_stride": {
+            "mean_mm": -1.2067341852396771,
+            "bootstrap95_mm": [
+              -1.5712349427638015,
+              -0.7299592462268486
+            ]
+          },
+          "ridge_camera_shifted_force_minus_earlier_stride": {
+            "mean_mm": -0.9371415362477287,
+            "bootstrap95_mm": [
+              -1.3263054702133423,
+              -0.4582632086905188
+            ]
+          },
+          "attention_camera_minus_earlier_stride": {
+            "mean_mm": 0.2998584628870882,
+            "bootstrap95_mm": [
+              -0.6038455178578506,
+              1.6745698198203347
+            ]
+          },
+          "attention_camera_force_minus_earlier_stride": {
+            "mean_mm": 0.2868226734028103,
+            "bootstrap95_mm": [
+              -0.5618084378875973,
+              1.271256076898437
+            ]
+          },
+          "attention_camera_shifted_force_minus_earlier_stride": {
+            "mean_mm": 0.6980409605213066,
+            "bootstrap95_mm": [
+              -0.07975282829515372,
+              1.571051205397027
+            ]
+          },
+          "ridge_camera_force_minus_ridge_camera": {
+            "mean_mm": -0.25771147075453005,
+            "bootstrap95_mm": [
+              -0.4576246208203043,
+              -0.05208176010416532
+            ]
+          },
+          "ridge_camera_shifted_force_minus_ridge_camera": {
+            "mean_mm": 0.011881178237418346,
+            "bootstrap95_mm": [
+              -0.12622083191016822,
+              0.1364171288004488
+            ]
+          },
+          "ridge_camera_force_minus_ridge_camera_shifted_force": {
+            "mean_mm": -0.2695926489919484,
+            "bootstrap95_mm": [
+              -0.46032674207688545,
+              -0.08809428227134229
+            ]
+          },
+          "attention_camera_force_minus_attention_camera": {
+            "mean_mm": -0.01303578948427786,
+            "bootstrap95_mm": [
+              -0.7236965714736886,
+              0.6986028656148326
+            ]
+          },
+          "attention_camera_shifted_force_minus_attention_camera": {
+            "mean_mm": 0.3981824976342185,
+            "bootstrap95_mm": [
+              -0.363027623859697,
+              1.092288903613394
+            ]
+          },
+          "attention_camera_force_minus_attention_camera_shifted_force": {
+            "mean_mm": -0.41121828711849634,
+            "bootstrap95_mm": [
+              -0.8419782523244631,
+              0.021984531887118765
+            ]
+          }
+        }
+      },
+      "by_original_export_gap": {
+        "complete": {
+          "scheduled": 917,
+          "issued": 917,
+          "withheld": 0,
+          "missing_endpoint": 0,
+          "scored": 917,
+          "scored_people": 7,
+          "strict_history_scored": 866,
+          "stride_fallback_scored": 0,
+          "speed_fallback_scored": 0,
+          "counts_only": false,
+          "person_equal_mae_mm": {
+            "earlier_stride": 3.6674570730494307,
+            "recent_speed": 8.828934231657238,
+            "ridge_camera": 2.718434358564284,
+            "ridge_camera_force": 2.460722887809754,
+            "ridge_camera_shifted_force": 2.7303155368017022,
+            "attention_camera": 3.967315535936519,
+            "attention_camera_force": 3.954279746452241,
+            "attention_camera_shifted_force": 4.365498033570738
+          },
+          "pooled_p90_absolute_error_mm": {
+            "earlier_stride": 7.756249999999999,
+            "recent_speed": 16.402368164062498,
+            "ridge_camera": 5.367675399473268,
+            "ridge_camera_force": 5.107585261340172,
+            "ridge_camera_shifted_force": 5.458219035059865,
+            "attention_camera": 8.467884163579392,
+            "attention_camera_force": 7.713009250566078,
+            "attention_camera_shifted_force": 8.716680708110292
+          },
+          "paired": {
+            "recent_speed_minus_earlier_stride": {
+              "mean_mm": 5.161477158607807,
+              "bootstrap95_mm": [
+                3.8138062962788926,
+                6.767523046928247
+              ]
+            },
+            "ridge_camera_minus_earlier_stride": {
+              "mean_mm": -0.9490227144851472,
+              "bootstrap95_mm": [
+                -1.2638530057305197,
+                -0.561435515681162
+              ]
+            },
+            "ridge_camera_force_minus_earlier_stride": {
+              "mean_mm": -1.2067341852396771,
+              "bootstrap95_mm": [
+                -1.5712349427638015,
+                -0.7299592462268486
+              ]
+            },
+            "ridge_camera_shifted_force_minus_earlier_stride": {
+              "mean_mm": -0.9371415362477287,
+              "bootstrap95_mm": [
+                -1.3263054702133423,
+                -0.4582632086905188
+              ]
+            },
+            "attention_camera_minus_earlier_stride": {
+              "mean_mm": 0.2998584628870882,
+              "bootstrap95_mm": [
+                -0.6038455178578506,
+                1.6745698198203347
+              ]
+            },
+            "attention_camera_force_minus_earlier_stride": {
+              "mean_mm": 0.2868226734028103,
+              "bootstrap95_mm": [
+                -0.5618084378875973,
+                1.271256076898437
+              ]
+            },
+            "attention_camera_shifted_force_minus_earlier_stride": {
+              "mean_mm": 0.6980409605213066,
+              "bootstrap95_mm": [
+                -0.07975282829515372,
+                1.571051205397027
+              ]
+            },
+            "ridge_camera_force_minus_ridge_camera": {
+              "mean_mm": -0.25771147075453005,
+              "bootstrap95_mm": [
+                -0.4576246208203043,
+                -0.05208176010416532
+              ]
+            },
+            "ridge_camera_shifted_force_minus_ridge_camera": {
+              "mean_mm": 0.011881178237418346,
+              "bootstrap95_mm": [
+                -0.12622083191016822,
+                0.1364171288004488
+              ]
+            },
+            "ridge_camera_force_minus_ridge_camera_shifted_force": {
+              "mean_mm": -0.2695926489919484,
+              "bootstrap95_mm": [
+                -0.46032674207688545,
+                -0.08809428227134229
+              ]
+            },
+            "attention_camera_force_minus_attention_camera": {
+              "mean_mm": -0.01303578948427786,
+              "bootstrap95_mm": [
+                -0.7236965714736886,
+                0.6986028656148326
+              ]
+            },
+            "attention_camera_shifted_force_minus_attention_camera": {
+              "mean_mm": 0.3981824976342185,
+              "bootstrap95_mm": [
+                -0.363027623859697,
+                1.092288903613394
+              ]
+            },
+            "attention_camera_force_minus_attention_camera_shifted_force": {
+              "mean_mm": -0.41121828711849634,
+              "bootstrap95_mm": [
+                -0.8419782523244631,
+                0.021984531887118765
+              ]
+            }
+          }
+        },
+        "front_only": {
+          "scheduled": 0,
+          "issued": 0,
+          "withheld": 0,
+          "missing_endpoint": 0,
+          "scored": 0,
+          "scored_people": 0,
+          "strict_history_scored": 0,
+          "stride_fallback_scored": 0,
+          "speed_fallback_scored": 0,
+          "counts_only": true
+        },
+        "rear_only": {
+          "scheduled": 0,
+          "issued": 0,
+          "withheld": 0,
+          "missing_endpoint": 0,
+          "scored": 0,
+          "scored_people": 0,
+          "strict_history_scored": 0,
+          "stride_fallback_scored": 0,
+          "speed_fallback_scored": 0,
+          "counts_only": true
+        },
+        "mixed": {
+          "scheduled": 0,
+          "issued": 0,
+          "withheld": 0,
+          "missing_endpoint": 0,
+          "scored": 0,
+          "scored_people": 0,
+          "strict_history_scored": 0,
+          "stride_fallback_scored": 0,
+          "speed_fallback_scored": 0,
+          "counts_only": true
+        }
+      }
+    }
+  }
+}

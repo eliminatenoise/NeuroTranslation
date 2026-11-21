@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Compare camera forecasts with and without treadmill force for the same seven Melbourne walkers.">
+<title>Can force from the treadmill sharpen a camera forecast? · NeuroTranslation</title>
+<style>
+:root{color-scheme:light;color:#18362d;background:#f8faf5;font:17px/1.6 system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0}[hidden]{display:none!important}
+main{max-width:58rem;margin:auto;padding:clamp(1.25rem,4vw,2.7rem) 1rem 4rem}
+nav{display:flex;align-items:baseline;flex-wrap:wrap;gap:.3rem 1.4rem;font-size:.85rem}
+nav a:first-child{font-weight:700}a{color:#1a4f42;text-underline-offset:.2em}
+:focus-visible{outline:3px solid #18614e;outline-offset:3px}p{max-width:72ch;margin:.55rem 0 .8rem}
+h1{font-size:clamp(2.05rem,5.7vw,4.15rem);line-height:1.03;letter-spacing:-.045em;margin:.45em 0 .35em;max-width:19ch}
+h2{font-size:1.38rem;line-height:1.2;margin:1.5em 0 .35em;letter-spacing:-.02em}
+.intro{font-size:1.08rem}.support{color:#3c5c50;font-size:.92rem}.result{margin:1rem 0 1.8rem}
+.result h2{margin-top:.8rem}.difference{border-left:3px solid #7fa692;padding:.35rem 0 .35rem .7rem}
+label{display:block;max-width:22rem;font-weight:660;margin:1.2rem 0 0}
+select{display:block;width:100%;min-height:2.7rem;padding:.3rem .5rem;margin-top:.25rem;border:1px solid #859c90;border-radius:.3rem;color:inherit;background:#fff;font:inherit}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;line-height:1.35;margin:.6rem 0 1rem}
+caption{text-align:left;font-weight:680;padding:.3rem 0}th,td{border-bottom:1px solid #c6d5ca;padding:.5rem .38rem;text-align:left;vertical-align:top}
+thead th{border-bottom:2px solid #829589;text-align:right}thead th:first-child{text-align:left}
+tbody th{font-weight:540}td{text-align:right}tbody tr:nth-child(even){background:#edf3ec}td.lowest{background:#dbeadd;color:#173b2e;font-weight:760}
+.gaps{font-size:.88rem}.interval{white-space:normal}details{margin:1rem 0}summary{font-weight:690;cursor:pointer}
+@media(max-width:31rem){main{padding:1.1rem .72rem 3rem}table{font-size:.86rem}.gaps{font-size:.71rem}th,td{padding:.43rem .17rem}.gaps th:last-child{max-width:5rem}.gaps td:last-child .interval{display:block}}
+.pick{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;max-width:44rem;margin:1.25rem 0}
+.pick label{margin:0;min-width:0}
+@media(max-width:31rem){.pick{grid-template-columns:1fr;gap:.65rem}.gaps th:last-child{width:30%}}
+.contrasts th:last-child{width:39%}
+@media(max-width:31rem){.contrasts th:last-child{width:42%}.contrasts th[scope=row]{overflow-wrap:anywhere}}
+</style>
+</head>
+<body><main>
+<nav aria-label="Related studies">
+  <a href="../../../">NeuroTranslation</a>
+  <a href="../melbourne-walking/">Melbourne walking comparison</a>
+</nav>
+<h1>Can force from the treadmill sharpen a camera forecast?</h1>
+<p class="intro">A camera can see the hips rise and fall. A force plate under the treadmill measures the push against it. With the seven walkers from our earlier Melbourne comparison, adding the latest stored force lowered the ridge model’s average error from <strong>2.54 to 2.24 mm</strong> for all four pelvis markers and from <strong>2.72 to 2.46 mm</strong> for the rear pair.</p>
+<p>Ridge fits a weighted sum of the past readings. Its latest-force version also beat the control that used force from one second earlier. In the attention model, which learns which readings to weigh, the intervals for adding force span zero. The attention model with the latest force had higher average errors than the earlier-stride replay.</p>
+<div class="pick" id="pick" hidden>
+  <label for="marker-target">Markers in the forecast
+    <select id="marker-target">
+      <option value="four_marker">All four pelvis markers</option>
+      <option value="rear_pair">The two rear markers</option>
+    </select>
+  </label>
+</div>
+
+<section class="result" data-target="four_marker" aria-labelledby="heading-four_marker">
+  <h2 id="heading-four_marker">All four pelvis markers</h2>
+  <p class="support">7 people · 917 matched forecasts for each method</p>
+  <table class="forecast">
+    <caption>Forecast error in millimetres</caption>
+    <thead><tr><th scope="col">Method</th><th scope="col">Average</th><th scope="col">90th percentile</th></tr></thead>
+    <tbody><tr><th scope="row">Replay an earlier stride</th><td>3.42</td><td>7.19</td></tr><tr><th scope="row">Continue recent camera speed</th><td>8.65</td><td>16.51</td></tr><tr><th scope="row">Ridge · camera only</th><td>2.54</td><td>5.27</td></tr><tr><th scope="row">Ridge · camera + latest force</th><td class="lowest">2.24</td><td>4.76</td></tr><tr><th scope="row">Ridge · camera + shifted force</th><td>2.52</td><td>5.01</td></tr><tr><th scope="row">Attention · camera only</th><td>3.71</td><td>8.24</td></tr><tr><th scope="row">Attention · camera + latest force</th><td>3.62</td><td>7.63</td></tr><tr><th scope="row">Attention · camera + shifted force</th><td>4.25</td><td>8.61</td></tr></tbody>
+  </table>
+  <p>Each row subtracts the alternative’s error from the error with the latest force. A negative change means the latest force helped.</p>
+  <table class="contrasts">
+    <caption>Change in average error with the latest force, in mm</caption>
+    <thead><tr><th scope="col">Comparison</th><th scope="col">Change</th><th scope="col">95% interval</th></tr></thead>
+    <tbody><tr><th scope="row">Ridge vs camera only</th><td>−0.30</td><td>−0.51 to −0.10</td></tr><tr><th scope="row">Ridge vs shifted force</th><td>−0.27</td><td>−0.47 to −0.11</td></tr><tr><th scope="row">Attention vs camera only</th><td>−0.10</td><td>−0.77 to +0.54</td></tr><tr><th scope="row">Attention vs shifted force</th><td>−0.63</td><td>−1.05 to −0.26</td></tr></tbody>
+  </table>
+  <details>
+    <summary>See which readings qualified</summary>
+    <p>Every scheduled forecast was made and scored. All four markers had a positive residual throughout the history in 866 forecasts.</p>
+    <table class="gaps">
+      <caption>Marker availability in the released export</caption>
+      <thead><tr><th scope="col">History</th><th scope="col">Scored</th><th scope="col">People</th></tr></thead>
+      <tbody><tr><th scope="row">All markers present</th><td>917</td><td>7</td></tr><tr><th scope="row">Front gaps only</th><td>0</td><td>0</td></tr><tr><th scope="row">Rear gaps only</th><td>0</td><td>0</td></tr><tr><th scope="row">Front and rear gaps</th><td>0</td><td>0</td></tr></tbody>
+    </table>
+    <p>The download keeps groups with fewer than six people to counts.</p>
+  </details>
+</section>
+
+<section class="result" data-target="rear_pair" aria-labelledby="heading-rear_pair">
+  <h2 id="heading-rear_pair">The two rear markers</h2>
+  <p class="support">7 people · 917 matched forecasts for each method</p>
+  <table class="forecast">
+    <caption>Forecast error in millimetres</caption>
+    <thead><tr><th scope="col">Method</th><th scope="col">Average</th><th scope="col">90th percentile</th></tr></thead>
+    <tbody><tr><th scope="row">Replay an earlier stride</th><td>3.67</td><td>7.76</td></tr><tr><th scope="row">Continue recent camera speed</th><td>8.83</td><td>16.40</td></tr><tr><th scope="row">Ridge · camera only</th><td>2.72</td><td>5.37</td></tr><tr><th scope="row">Ridge · camera + latest force</th><td class="lowest">2.46</td><td>5.11</td></tr><tr><th scope="row">Ridge · camera + shifted force</th><td>2.73</td><td>5.46</td></tr><tr><th scope="row">Attention · camera only</th><td>3.97</td><td>8.47</td></tr><tr><th scope="row">Attention · camera + latest force</th><td>3.95</td><td>7.71</td></tr><tr><th scope="row">Attention · camera + shifted force</th><td>4.37</td><td>8.72</td></tr></tbody>
+  </table>
+  <p>Each row subtracts the alternative’s error from the error with the latest force. A negative change means the latest force helped.</p>
+  <table class="contrasts">
+    <caption>Change in average error with the latest force, in mm</caption>
+    <thead><tr><th scope="col">Comparison</th><th scope="col">Change</th><th scope="col">95% interval</th></tr></thead>
+    <tbody><tr><th scope="row">Ridge vs camera only</th><td>−0.26</td><td>−0.46 to −0.05</td></tr><tr><th scope="row">Ridge vs shifted force</th><td>−0.27</td><td>−0.46 to −0.09</td></tr><tr><th scope="row">Attention vs camera only</th><td>−0.01</td><td>−0.72 to +0.70</td></tr><tr><th scope="row">Attention vs shifted force</th><td>−0.41</td><td>−0.84 to +0.02</td></tr></tbody>
+  </table>
+  <details>
+    <summary>See which readings qualified</summary>
+    <p>Every scheduled forecast was made and scored. All four markers had a positive residual throughout the history in 866 forecasts.</p>
+    <table class="gaps">
+      <caption>Marker availability in the released export</caption>
+      <thead><tr><th scope="col">History</th><th scope="col">Scored</th><th scope="col">People</th></tr></thead>
+      <tbody><tr><th scope="row">All markers present</th><td>917</td><td>7</td></tr><tr><th scope="row">Front gaps only</th><td>0</td><td>0</td></tr><tr><th scope="row">Rear gaps only</th><td>0</td><td>0</td></tr><tr><th scope="row">Front and rear gaps</th><td>0</td><td>0</td></tr></tbody>
+    </table>
+    <p>The download keeps groups with fewer than six people to counts.</p>
+  </details>
+</section>
+<h2>What the model knew when it made a forecast</h2>
+<p>The camera stored 100 frames per second. Each forecast used 80 camera frames through its last reading and predicted the change in average height 100 milliseconds later. Two treadmill plates each stored 2,000 force readings per second. We averaged each plate’s vertical force in groups of 20 readings. The final group ended just before the last camera reading on the stored clock.</p>
+<p>The shifted control uses the same force history from one second earlier. This tests whether the recorded timing helped the models. Establishing how a change in force causes a change in movement would require a separate experiment. Use in real time would also require measuring when force samples actually reach the model.</p>
+<p>All eight methods used the same 917 forecast windows for each marker target. A shared camera clock selected the windows within the first 15 seconds of the recordings, beginning once enough history was available for the one-second control. Muscle electrical activity, or EMG, was outside this test.</p>
+<h2>What seven people can tell us</h2>
+<p>These walkers already appeared in the Melbourne walking comparison. Each time, we fitted the models and set their scales on six people, saved the forecasts for the seventh, and then checked that person’s later camera readings. We repeated this for each person in turn. An independent test of the gain would need new people.</p>
+<p>All 917 tested camera histories contained all four exported marker positions. A separate reconstruction field, called a residual, was positive throughout 866 of the 917 histories. Every scored forecast met the residual rule at both endpoints for its chosen marker average. <a href="https://www.c3d.org/HTML/Documents/3dpointresiduals.htm">How C3D records residuals</a>.</p>
+<details>
+  <summary>How the eight forecasts were compared</summary>
+  <p>Replay finds a similar stretch in the recent camera history and borrows the movement that followed it. The speed estimate extends the last 50 milliseconds of change. These two reference methods use only the camera. We fitted ridge and attention three ways each, with cameras alone, with the latest force, and with the one-second-shifted force. The fitted models had the same architecture within a family. The camera-only versions received zeros in the two force channels.</p>
+  <p>We average absolute errors within each person and give every person equal weight in the average. The 90th percentile marks the start of the largest tenth of errors across all scored forecasts. Each difference compares methods on the same forecast windows. The 95% intervals come from resampling people 5,000 times while keeping each person’s two results together. These intervals apply to each comparison separately.</p>
+</details>
+<p>Walking recordings by Tomislav Baček and colleagues. The Melbourne source dataset, version 1, is released under CC BY 4.0.</p>
+<p><a href="results.json" download>Download aggregate results</a> · <a href="https://doi.org/10.26188/24288265.v1">Source dataset</a> · <a href="https://doi.org/10.1038/s41597-024-03444-4">Recording methods</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Source licence</a></p>
+</main>
+<script>
+const markers = document.querySelector('#marker-target');
+const panels = document.querySelectorAll('.result');
+function showSelection() {
+  for (const panel of panels) panel.hidden = panel.dataset.target !== markers.value;
+}
+showSelection();
+markers.addEventListener('change', showSelection);
+document.querySelector('#pick').hidden = false;
+</script>
+</body>
+</html>
