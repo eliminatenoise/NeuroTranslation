@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Balancing two forecasts · NeuroTranslation</title>
+  <style>
+    :root { font: 100%/1.62 system-ui, sans-serif; color: #203538; background: #f5f6f2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(45rem, calc(100% - 2rem)); margin: 2rem auto 4rem; }
+    header { border-top: .35rem solid #1b4647; }
+    h1, h2 { line-height: 1.15; letter-spacing: -.035em; }
+    h1 { font-size: clamp(2.3rem, 7vw, 4rem); margin: .35em 0; }
+    a { color: #075d52; text-underline-offset: .2em; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #c44c14; outline-offset: 3px; }
+    section { margin-top: 2rem; border-top: 1px solid #b9c7c4; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    caption, th, td { text-align: left; }
+    caption { font-weight: 650; margin-bottom: .35rem; }
+    th, td { padding: .36rem .4rem; border-bottom: 1px solid #bdc9c6; vertical-align: top; }
+    details { border-bottom: 1px solid #bdc9c6; }
+    details table { margin-bottom: .8rem; }
+    summary { padding: .55em .2em; cursor: pointer; font-weight: 650; }
+    @media (forced-colors: active) {
+      a:focus-visible, summary:focus-visible { outline-color: Highlight; }
+      th, td, details { border-color: CanvasText; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p><a href="../">Can one model learn both forecasts?</a></p>
+    <h1>Balancing two forecasts</h1>
+    <p>A grasp gives us two things to predict. One is how a sensor reading changes as an object slides. The other is how many short electrical pulses nearby brain cells produce in the next 20 milliseconds. What happens when both tasks have the same influence on the layers they share?</p>
+  </header>
+  <section>
+    <h2>Spike forecasts improved. Movement forecasts got worse.</h2>
+    <p>Against training both forecasts with fixed equal weights, balancing the updates reduced the spike-count penalty by about 0.0034 and 0.0047 in the two fits. The model trained only on spike counts was still close enough that the paired uncertainty ranges included zero.</p>
+    <table data-target="count"><caption>Spike-count penalty, nats per unit per 20 ms</caption><thead>
+<tr><th scope="col">Forecast</th><th scope="col">First fit</th><th scope="col">Second fit</th></tr>
+</thead><tbody><tr data-method="count_single"><th scope="row">Train this task alone</th><td>0.6890</td><td>0.6871</td></tr><tr data-method="count_equal"><th scope="row">Train both with equal weights</th><td>0.6918</td><td>0.6922</td></tr><tr data-method="count_balanced"><th scope="row">Train both with balanced updates</th><td>0.6884</td><td>0.6875</td></tr><tr data-method="count_mean"><th scope="row">Use each unit’s average</th><td>0.7552</td><td>0.7552</td></tr><tr data-method="count_recent"><th scope="row">Use recent counts adjusted towards average</th><td>0.8530</td><td>0.8530</td></tr></tbody></table>
+    <p>The error in the object sensor rose by 9.05 counts in the first fit and 5.63 in the second. Continuing at the recent velocity also beat the balanced model in both fits.</p>
+    <table data-target="sensor"><caption>Object sensor error in sensor counts</caption><thead>
+<tr><th scope="col">Forecast</th><th scope="col">First fit</th><th scope="col">Second fit</th></tr>
+</thead><tbody><tr data-method="sensor_single"><th scope="row">Train this task alone</th><td>115.06</td><td>112.26</td></tr><tr data-method="sensor_equal"><th scope="row">Train both with equal weights</th><td>118.01</td><td>119.17</td></tr><tr data-method="sensor_balanced"><th scope="row">Train both with balanced updates</th><td>127.06</td><td>124.81</td></tr><tr data-method="velocity"><th scope="row">Continue at recent velocity</th><td>104.74</td><td>104.74</td></tr><tr data-method="persist"><th scope="row">Keep the last reading</th><td>143.78</td><td>143.78</td></tr></tbody></table>
+    <p>Lower values are better in each table. A sensor count is one digital step in the recording. Conversion to millimetres remains unverified. The spike-count score is lower when the actual counts receive higher probability.</p>
+  </section>
+  <section>
+    <h2>Check that balancing changed the training</h2>
+    <p>The model uses the same fixed Transformer as the previous experiment. With equal weights, the task that predicts physical readings usually sends a larger update to the shared layers. In these fits the typical ratio was about three to one. We measured the size of each update before combining them. Balancing made their sizes equal at every step where both sent a measurable update, 599 steps per fit.</p>
+    <p>We scored 1,100 windows from 15 original trials in one macaque recording. The split comes from trials previously used for fitting. The two fits use the same evaluation trials, and the result for each trial has equal weight. Spikes were sorted after recording. A different animal and a live recording remain untested.</p>
+    <p><a href="results.json">Download all sensor scores, paired uncertainty ranges and training measurements</a></p>
+    <p>Recording by Thomas Brochier and colleagues at INT and INM-6. <a href="https://doi.gin.g-node.org/10.12751/g-node.f83565/">Recording and attribution</a> · <a href="https://doi.org/10.1038/sdata.2018.55">Study methods</a></p>
+  </section>
+</main>
+</body>
+</html>
