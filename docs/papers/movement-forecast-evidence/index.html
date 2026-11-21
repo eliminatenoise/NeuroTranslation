@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What helped predict the next 100 milliseconds?</title>
+<style>
+:root{color:#18312d;background:#f4f6ef;font:11pt/1.42 "Liberation Sans",Arial,sans-serif;color-scheme:light}
+*{box-sizing:border-box}body{margin:0}main{max-width:188mm;margin:10mm auto;padding:9mm;background:white}
+.sheet{display:flex;flex-direction:column}.sheet+.sheet{margin-top:12mm;padding-top:7mm;border-top:1px solid #9aada4}
+.mast,.folio{display:flex;justify-content:space-between;gap:.75em;color:#405c54;font-size:8.5pt}
+.mast{padding-block:0 2.5mm;border-bottom:1px solid #82988e}.folio{margin-top:auto;padding-top:2.5mm;border-top:1px solid #9aada4}
+h1,h2,h3,p,table{margin:0}h1{font-size:34pt;line-height:.99;letter-spacing:-.045em;max-width:20ch;margin:4.5mm 0 3mm}
+h2{font-size:21pt;line-height:1.06;letter-spacing:-.026em;margin:4mm 0 2mm}h3{font-size:12pt;margin:3.5mm 0 1mm}
+p{margin:0 0 2.6mm}.intro{font-size:13pt;line-height:1.35}.small,.refs{font-size:9pt;line-height:1.31}
+table{width:100%;border-collapse:collapse;font-size:9pt;line-height:1.28;margin:3mm 0 2mm;font-variant-numeric:tabular-nums}
+caption{text-align:left;font-weight:bold;padding:0 0 1.5mm}th,td{text-align:left;border-bottom:1px solid #bdcbc5;padding:1.45mm 1.3mm;vertical-align:top}
+thead th{background:#e7eee7}tbody th{width:40%;font-weight:normal}.num{white-space:nowrap}a{color:#185448;text-underline-offset:.16em}
+a:focus-visible{outline:2px solid #185448;outline-offset:3px}.refs p{margin-bottom:1.2mm}
+@media(max-width:630px){main{margin:0;padding:5vw}h1{font-size:clamp(24pt,8vw,34pt)}table{font-size:8.4pt}.num{white-space:normal}}
+@media print{
+  @page{size:A4;margin:15mm 17mm}
+  :root{background:white;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  main{max-width:none;margin:0;padding:0}.screen{display:none}
+  .sheet{min-height:265mm;break-inside:avoid}
+  .sheet+.sheet{margin:0;padding:0;border:none;break-before:page}
+}
+</style>
+</head>
+<body><main>
+<section class="sheet" aria-labelledby="running">
+  <div class="mast"><span>NeuroTranslation</span><span>Research supplement · 22 November 2026</span></div>
+  <p class="screen small"><a href="movement-forecast-evidence.pdf" download>Download the PDF</a></p>
+  <h1 id="running">What helped predict the next 100 milliseconds?</h1>
+  <p class="intro">A model trained on chair movements had a hard time with runners. An earlier stride gave the running model a better starting point. In a squat, the plates underfoot gave the camera forecast another useful reading.</p>
+  <p>Each test asks how far the pelvis will rise or fall over the next 100 milliseconds. The camera follows four landmarks on the pelvis. We forecast the change in their average height and, separately, the change in the average height of the two rear markers. A forecast earns a score when its target has the required camera readings at the last input frame and 100 milliseconds later. Forecasts were sealed before computing and scoring endpoint displacements. We measure each miss in millimetres and give each person equal weight. <a href="https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/missing-pelvis-markers/running-transfer/">Chair transfer test</a></p>
+  <h2>Running needs an earlier stride</h2>
+  <p>Two frozen chair-trained forecasts made larger errors than predicting zero displacement on running clips, even when all input markers were present. The stride method starts with 800 milliseconds of camera history. It finds a similar patch earlier in that history, then reuses the change it can actually read from the following 100 milliseconds of that earlier stride. A 7,618-parameter attention model learns a correction from 21 runners in Fukuchi release 1. It receives 16 earlier and current input slots and uses the earlier frame when a slot falls between camera samples. The model falls back to zero without an earlier cycle. With fewer than two markers in the last frame, it withholds the forecast.</p>
+  <table>
+    <caption>Table 1. Participant-equal mean absolute error in running (mm)</caption>
+    <thead><tr><th scope="col">Test and comparison</th><th scope="col">All four markers</th><th scope="col">Rear pair</th></tr></thead>
+    <tbody>
+    <tr><th scope="row">Fukuchi v1 complete inputs (27 people), zero / best chair model</th><td class="num">43.43 / 53.45</td><td class="num">47.88 / 56.54</td></tr>
+    <tr><th scope="row">Bath fixed-speed early trials, stride / learned correction</th><td class="num">8.04 / 5.79</td><td class="num">8.67 / 6.23</td></tr>
+    <tr><th scope="row">Fukuchi v5 front-only gaps at 3.5 m/s, stride / learned correction</th><td class="num">8.62 / 6.29</td><td class="num">9.11 / 6.66</td></tr>
+    </tbody>
+  </table>
+  <p>The frozen correction helped in the first ten seconds of fixed-speed running at 12 km/h among 40 Bath runners. At 250 camera frames per second, 25 frames give the 100-millisecond outcome. The outcome was available for 3,636 four-marker and 3,640 rear-pair forecasts. No scored history contained an original marker gap. <a href="https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/missing-pelvis-markers/running-stride/">Bath stride results</a></p>
+  <p>The correction helped with original front-marker gaps among 11 later Fukuchi v5 runners from the training lab who were held out of fitting. At 150 frames per second, the outcome is 15 frames later. There were 1,570 four-marker and 2,200 rear-pair forecasts. The archive identifies missing samples. Its available coordinates lack positive per-point reconstruction flags or camera counts. <a href="https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/missing-pelvis-markers/stride-front-gap/">Front-gap results</a></p>
+  <div class="folio"><span>Movement forecasts across recordings</span><span>1 / 2</span></div>
+</section>
+<section class="sheet" aria-labelledby="squat">
+  <div class="mast"><span>NeuroTranslation</span><span>Camera, floor force and thigh electrical activity</span></div>
+  <h2 id="squat">The floor adds a reading during a squat</h2>
+  <p>As you rise, the camera sees the movement. The plates measure the upward force from the floor. Thigh electrodes record electrical activity at the skin. Those electrical readings describe a different part of the movement from the force registered underfoot.</p>
+  <p>The frozen squat models were fitted on Kuopio recordings. The main Georgia Tech comparison used 417 matching histories from ten other people doing ordinary bodyweight squats. The camera ran at 200 frames per second, so the outcome comes 20 frames after the last input. Each of five camera instants could be paired with the preceding 50 milliseconds of floor-force or thigh-electrode readings. The floor input sums upward forces from the recorded plates. The electrical input summarizes the size of signals from four thigh electrodes.</p>
+  <p>Every method was scored against the same outcomes. We hid selected earlier readings to test what each forecast could do without them. The camera archive lacks positive reconstruction flags for these points. The gaps below were introduced deliberately. <a href="https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/missing-pelvis-markers/squat-sensor-transfer/">Georgia Tech squat results</a></p>
+  <table>
+    <caption>Table 2. Camera / camera plus floor force, ordinary bodyweight squats (mm)</caption>
+    <thead><tr><th scope="col">Earlier camera readings</th><th scope="col">All four markers</th><th scope="col">Rear pair</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">All readings present</th><td class="num">5.81 / 4.43</td><td class="num">5.60 / 4.29</td></tr>
+      <tr><th scope="row">Left-front marker hidden in all five sets</th><td class="num">5.97 / 4.52</td><td class="num">6.32 / 4.80</td></tr>
+      <tr><th scope="row">Two rear markers hidden in the last two sets</th><td class="num">8.55 / 7.60</td><td class="num">11.99 / 11.04</td></tr>
+    </tbody>
+  </table>
+  <p>Floor force reduced average error in all six comparisons. For all four markers with complete inputs, it reduced error by 1.39 mm. Resampling people and keeping each pair of errors together put the 95% interval for the reduction at 0.89 to 1.87 mm. Adding thigh electrical activity gave no consistent gain. The Georgia report keeps added weight and emphasis on either leg in separate groups.</p>
+  <h3>What carried across</h3>
+  <p>Repeating movement helped in the running tests. Measured floor force helped in the squat tests. The tests share a forecast horizon and a physical outcome. Their fitted models, recording setups and movement conditions differ. The running evidence with original gaps is specific to front markers at one speed. The squat evidence uses deliberately hidden camera inputs.</p>
+  <div class="refs" aria-label="Recording sources">
+    <h3>Recording sources</h3>
+    <p>Fukuchi, Fukuchi and Duarte, 2017. <a href="https://doi.org/10.7717/peerj.3298">Running study</a> · <a href="https://doi.org/10.6084/m9.figshare.4543435.v1">Release 1</a> · <a href="https://doi.org/10.6084/m9.figshare.4543435.v5">Release 5</a></p>
+    <p>Carter et al., 2024. <a href="https://doi.org/10.15125/BATH-01341">Bath treadmill running recordings</a></p>
+    <p>Scherpereel et al., 2023. <a href="https://doi.org/10.1038/s41597-023-02840-6">Georgia Tech methods</a> · <a href="https://doi.org/10.35090/gatech/70296">Georgia Tech recordings</a></p>
+    <p>Beattie et al., 2026. <a href="https://doi.org/10.1038/s41597-026-08550-z">Kuopio methods</a> · <a href="https://doi.org/10.5281/zenodo.24194741">Kuopio fitting recordings</a></p>
+  </div>
+  <div class="folio"><span>Movement forecasts across recordings</span><span>2 / 2</span></div>
+</section>
+</main></body>
+</html>
