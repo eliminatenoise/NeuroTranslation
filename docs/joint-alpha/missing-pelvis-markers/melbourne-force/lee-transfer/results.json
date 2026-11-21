@@ -1,0 +1,169 @@
+{
+  "study": {
+    "scope": "Transfer on exported recordings from a new group of Lee treadmill walkers.",
+    "fit_source": "Seven development walkers in Melbourne",
+    "weights_refit_on_lee": false,
+    "belt_layout_melbourne": "side by side",
+    "belt_layout_lee": "front to rear",
+    "force_input": "Sum of the two calibrated vertical belt forces",
+    "held_people": 11,
+    "engineering_record_excluded": 1,
+    "matched_windows_per_person_target": 131,
+    "camera_segment_seconds": {
+      "start_inclusive": 20,
+      "end_exclusive": 35
+    },
+    "walking_speed_kmh": 4,
+    "camera_frame_rate_hz": 100,
+    "force_sample_rate_hz_per_plate": 1000,
+    "camera_history_frames": 80,
+    "force_samples_per_camera_period": 10,
+    "forecast_ahead_native_frames": 10,
+    "forecast_ahead_ms": 100,
+    "shifted_force_ms": 1000,
+    "force_input_cutoff": "Force was bounded before issue on the stored recording clock.",
+    "possible_later_camera_information": true,
+    "live_delivery_tested": false,
+    "unfilled_camera_tested": false
+  },
+  "camera_availability": {
+    "exported_test_segment_values_present": 66000,
+    "exported_test_segment_values_with_positive_reconstruction_residual": 0,
+    "scope": "Exported camera values can inherit information from later observations through gap filling."
+  },
+  "uncertainty": {
+    "statistic": "Person-equal mean absolute error",
+    "paired_percentile_confidence": 0.95,
+    "paired_resamples": 5000,
+    "minimum_windows_per_person_endpoint": 105,
+    "minimum_people_per_endpoint_for_joint_gain": 8,
+    "criterion": "Both latest-force comparison intervals must fall below zero on both marker targets.",
+    "joint_gain_rule_passed": false
+  },
+  "methods": {
+    "camera": "Camera-only ridge",
+    "camera_force": "Camera + latest total force",
+    "camera_shifted_force": "Camera + total force from 1 second earlier",
+    "earlier_stride": "Replay an earlier stride"
+  },
+  "marker_targets": {
+    "four_marker": "All four markers",
+    "rear_pair": "Rear pair"
+  },
+  "primary_comparisons": {
+    "camera_force_minus_camera": "vs camera only",
+    "camera_force_minus_camera_shifted_force": "vs shifted force"
+  },
+  "results": {
+    "four_marker": {
+      "people": 11,
+      "matched_windows": 1441,
+      "mean_mae_mm": {
+        "camera": 2.7883173541731625,
+        "camera_force": 2.493152731647278,
+        "camera_shifted_force": 2.6918244622051897,
+        "earlier_stride": 4.205946052430158
+      },
+      "paired_intervals": {
+        "camera_force_minus_camera": {
+          "mean_mm": -0.29516462252588516,
+          "paired_person_interval_mm": [
+            -0.6940733995445743,
+            0.06170513531013841
+          ]
+        },
+        "camera_force_minus_camera_shifted_force": {
+          "mean_mm": -0.19867173055791135,
+          "paired_person_interval_mm": [
+            -0.6956399403198429,
+            0.1943783926717949
+          ]
+        },
+        "camera_force_minus_earlier_stride": {
+          "mean_mm": -1.7127933207828796,
+          "paired_person_interval_mm": [
+            -2.38913675695817,
+            -1.0636236647707726
+          ]
+        },
+        "camera_shifted_force_minus_camera": {
+          "mean_mm": -0.09649289196797374,
+          "paired_person_interval_mm": [
+            -0.21091554701618836,
+            0.03164851586920013
+          ]
+        }
+      },
+      "endpoint_gain_rule_passed": false
+    },
+    "rear_pair": {
+      "people": 11,
+      "matched_windows": 1441,
+      "mean_mae_mm": {
+        "camera": 2.6212058620637926,
+        "camera_force": 2.7367525184952197,
+        "camera_shifted_force": 2.7103916057616044,
+        "earlier_stride": 4.251240484421656
+      },
+      "paired_intervals": {
+        "camera_force_minus_camera": {
+          "mean_mm": 0.11554665643142671,
+          "paired_person_interval_mm": [
+            -0.18012566552865678,
+            0.4273416318456673
+          ]
+        },
+        "camera_force_minus_camera_shifted_force": {
+          "mean_mm": 0.026360912733615172,
+          "paired_person_interval_mm": [
+            -0.3549119509710103,
+            0.36182052716434243
+          ]
+        },
+        "camera_force_minus_earlier_stride": {
+          "mean_mm": -1.514487965926436,
+          "paired_person_interval_mm": [
+            -2.178868267712924,
+            -0.9220822969018655
+          ]
+        },
+        "camera_shifted_force_minus_camera": {
+          "mean_mm": 0.08918574369781154,
+          "paired_person_interval_mm": [
+            -0.05652887289756416,
+            0.23179678273447696
+          ]
+        }
+      },
+      "endpoint_gain_rule_passed": false
+    }
+  },
+  "melbourne_development": {
+    "scope": "Reused development folds, seven walkers",
+    "people": 7,
+    "matched_windows_per_target": 917,
+    "mean_mae_mm": {
+      "camera": [
+        2.5399701508807686,
+        2.718434358564284
+      ],
+      "camera_force": [
+        2.0676399968278747,
+        2.2782380678156438
+      ],
+      "camera_shifted_force": [
+        2.5565135153858978,
+        2.7502113736602105
+      ]
+    }
+  },
+  "sources": {
+    "lee_methods": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13572550/",
+    "lee_dataset": "https://doi.org/10.5281/zenodo.19632046",
+    "lee_data_licence": "https://creativecommons.org/licenses/by/4.0/",
+    "melbourne_report": "../",
+    "melbourne_dataset": "https://doi.org/10.26188/24288265.v1",
+    "melbourne_methods": "https://doi.org/10.1038/s41597-024-03444-4",
+    "reconstruction_residuals": "https://www.c3d.org/HTML/Documents/3dpointresiduals.htm"
+  }
+}
