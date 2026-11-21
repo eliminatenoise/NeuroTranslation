@@ -193,5 +193,8 @@ Extract the [offline cylinder-rotation reader](docs/cylinder-rotation-offline.zi
 
 ## Follow a reach and the spikes after it
 
-Extract the [one-week reader with muscle–tendon paths](docs/reach-feedback/one-week-offline.zip) or the [complete one-week model package](models/reach-feedback-week.zip). Open the launcher for your operating system.
 Extract the [offline reach and cortical activity reader](docs/reach-feedback-offline.zip) or [the trained models](models/reach-feedback.zip). Open the launcher for your operating system and select a recorded reach.
+
+## Follow the reach models a week later
+
+Extract the [one-week reader with muscle–tendon paths](docs/reach-feedback/one-week-offline.zip) or the [complete one-week model package](models/reach-feedback-week.zip). Open the launcher for your operating system.
