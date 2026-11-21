@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-21.1",
+  "version": "2026-11-21.2",
   "forecast_target": "Count of spikes in the next 20 ms from the same fingertip afferent.",
   "units": "Natural-log loss per 20 ms window, lower is better.",
   "human_internal_validation": {
@@ -73,5 +73,69 @@
     "10.1371/journal.pbio.3000431",
     "10.1093/cercor/bhz305"
   ],
-  "exploratory_transfer_criterion_met": false
+  "exploratory_transfer_criterion_met": false,
+  "local_rate_follow_up": {
+    "speeds_share_recorded_fibres": true,
+    "new_condition_mm_s": 40,
+    "previously_scored_condition_mm_s": 80,
+    "model_criterion_met": false,
+    "local_recent_formula": "(sum of four consecutive 20 ms counts + human prior) / 5",
+    "human_prior_for_external_forecasts": 0.09536640674956011,
+    "cohorts": {
+      "human": {
+        "groups": 7,
+        "windows": 176686,
+        "mean_poisson_negative_log_likelihood": {
+          "constant": 0.3554635578682457,
+          "history_rate": 0.26364315519690773,
+          "poisson_glm": 0.3099330397283734,
+          "transformer_431": 0.2588349584085695,
+          "transformer_977": 0.2617586727870374,
+          "local_recent": 0.25598043802496656,
+          "sum_only": 0.2559751151502671,
+          "recency": 0.26760344887707405,
+          "relative_431": 0.259642887034469,
+          "relative_977": 0.26165206855550144,
+          "reversed_431": 0.25435350160185516,
+          "reversed_977": 0.26104336513239057
+        }
+      },
+      "40": {
+        "groups": 28,
+        "windows": 41580,
+        "mean_poisson_negative_log_likelihood": {
+          "constant": 1.5424500199110212,
+          "history_rate": 0.8266162290840259,
+          "poisson_glm": 0.8816560438668474,
+          "transformer_431": 0.8643926190607351,
+          "transformer_977": 0.849936268713804,
+          "local_recent": 0.7977839847164845,
+          "sum_only": 0.7977895006438416,
+          "recency": 0.8224624467056924,
+          "relative_431": 0.8211944300845123,
+          "relative_977": 0.8215654512890237,
+          "reversed_431": 0.8215148837303689,
+          "reversed_977": 0.8193561629985844
+        }
+      },
+      "80": {
+        "groups": 39,
+        "windows": 99330,
+        "mean_poisson_negative_log_likelihood": {
+          "constant": 2.3973198429986433,
+          "history_rate": 1.0266116396432576,
+          "poisson_glm": 1.0629752500789778,
+          "transformer_431": 1.0715785334792962,
+          "transformer_977": 1.0495268482305184,
+          "local_recent": 0.9462948509513981,
+          "sum_only": 0.9463038808423024,
+          "recency": 0.9935442753497904,
+          "relative_431": 0.9817727503706803,
+          "relative_977": 0.9849325430862367,
+          "reversed_431": 0.9976773197886971,
+          "reversed_977": 0.9931537545361294
+        }
+      }
+    }
+  }
 }
