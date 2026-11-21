@@ -38,6 +38,9 @@
     status.textContent = "The model files couldn’t be read or verified in this browser. The archived scores below are still available.";
     controls.hidden = true;
     recovery.hidden = false;
+    // The hosted link only helps someone who opened a saved copy; on the hosted page it would reopen the page that failed.
+    const hosted = document.querySelector("#hosted-recovery");
+    if (hosted) hosted.hidden = location.protocol !== "file:";
   }
 
   function update({ cases, parameters }) {
