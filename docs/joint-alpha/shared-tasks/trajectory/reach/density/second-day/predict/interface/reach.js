@@ -6,6 +6,7 @@
   const columnNames = ["hand X", "hand Y", "hand Z", "elbow X", "elbow Y", "elbow Z", "handle X", "handle Y"];
   const ahead = [20, 50, 70, 100];
   const draws = 32;
+  const samplingSeed = 1117;
   const markers = ["Hand marker", "Elbow marker"];
   const get = id => document.getElementById(id);
   const history = get("history");
@@ -16,6 +17,7 @@
   const status = get("status");
   const inputError = get("input-error");
   const result = get("result");
+  const saveLink = get("save-forecast");
   const placeholder = get("empty-result");
   const canvases = [get("hand-plot"), get("elbow-plot")];
   let forecast = null;
@@ -63,6 +65,10 @@
   function stopShowingResult(message) {
     revision++;
     forecast = null;
+    if (saveLink.hasAttribute("href")) {
+      URL.revokeObjectURL(saveLink.href);
+      saveLink.removeAttribute("href");
+    }
     run.disabled = false;
     result.hidden = true;
     placeholder.hidden = false;
@@ -226,6 +232,31 @@
     updatePlots();
   }
 
+  function linkForecastDownload() {
+    const model = globalThis.ReachForecastModel;
+    const output = {
+      format: "NeuroTranslation reach forecast",
+      version: 1,
+      quantity: "Forecast displacement from each marker's last input position",
+      units: {displacement: "mm", time: "ms"},
+      axes: columns.slice(0, 6),
+      timeAfterLastReadingMs: forecast.timesMs,
+      model: {
+        id: model.schema,
+        fitSeed: model.fitSeed,
+        weightsSha256: model.weightsSha256,
+        normalizersSha256: model.normalizersSha256,
+        samplingSeed,
+        drawCount: forecast.pathsMm.length,
+        pathsMm: forecast.pathsMm,
+        meanMm: forecast.meanMm
+      },
+      constantVelocity: {historyWindowMs: 20, displacementMm: forecast.velocity20Mm}
+    };
+    const file = new Blob([JSON.stringify(output, null, 2), "\n"], {type: "application/json"});
+    saveLink.href = URL.createObjectURL(file);
+  }
+
   function runForecast(focusInvalid = false) {
     stopShowingResult("Calculating the marker paths…");
     let readings;
@@ -245,7 +276,7 @@
     setTimeout(() => {
       if (ticket !== revision) return;
       try {
-        const prediction = globalThis.ReachForecast.predict(readings, {seed: 1117, draws});
+        const prediction = globalThis.ReachForecast.predict(readings, {seed: samplingSeed, draws});
         if (prediction.velocity20Mm.some(row => row.some(value => !Number.isFinite(value)))) {
           throw new RangeError("The final velocity exceeds the numeric range.");
         }
@@ -264,6 +295,7 @@
       updateSelection();
       run.disabled = false;
       status.textContent = "Forecast ready for these 20 readings.";
+      linkForecastDownload();
     }, 0);
   }
 

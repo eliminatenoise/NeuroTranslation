@@ -10,6 +10,8 @@ The page starts with a recorded training example. Run it to see where the model 
 
 The forecasts give changes from each marker's last position. A forecast of 5 mm on hand X means the model places the hand 5 mm along that axis from its last reading. The recent-velocity forecast shows what happens if each marker keeps moving at the speed and direction of its last 20 milliseconds. The learned model can draw several possible paths.
 
+Choose Save forecast after running the model. The JSON file contains all 32 paths, their mean, the velocity comparison, the model settings, and the times and axes for reading each value.
+
 The viewer runs on this computer. It reads the values you enter or the file you choose. All model files are in this folder.
 
 This model learned from motion records gathered from one macaque. The times refer to the processed recording clock. Results from a different setup, another animal or a live camera need a separate check.
