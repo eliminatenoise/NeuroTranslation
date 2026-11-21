@@ -9,7 +9,7 @@
 <p class="lead">An electrode on the back of the neck measures a voltage. If you know its last reading and what four other electrodes picked up, how close can you get to its reading a few milliseconds later?</p>
 <p>In the original study, people lay still while researchers recorded their responses to a timed event at the left median nerve. The neck electrode sat over the sixth cervical vertebra. Its voltage was measured against a second electrode on the back, over T6. The electrodes can pick up several sources of electricity, including nearby muscles and the heart.</p></header>
 <section><h2>Give the models an example</h2>
-<p>Each box holds eight invented voltages in microvolts (µV). The first five are one-millisecond averages from 15 to 10 milliseconds before the event. The last three cover 5 to 8 milliseconds after it. The gap has no input. Try changing the last three numbers in the axilla row. Only one forecast uses that electrode.</p>
+<p>Each box holds eight invented voltages in microvolts (µV). The first five are one-millisecond averages from 15 to 10 milliseconds before the event. The last three cover 5 to 8 milliseconds after it. The gap has no input. Try changing the last three numbers in the armpit row. Only one forecast uses that electrode.</p>
 <form id="inputs" novalidate><div id="channels"></div><div class="actions"><button>Calculate forecasts</button><button type="button" class="secondary" id="reset">Restore example</button></div></form>
 <output id="notice" aria-live="polite"></output><div class="table"><table><thead><tr><th scope="col">Method</th><th scope="col">Forecast change (µV)</th></tr></thead><tbody id="values"></tbody></table></div>
 <p class="detail">Each forecast is the mean neck voltage from 12 to 14 milliseconds after the event, relative to the five-millisecond baseline before it. A positive forecast means a more positive reading against T6. The robust models start from the most recent neck reading and learn a correction. Large training errors have less influence on that correction.</p>
@@ -19,7 +19,7 @@
 <script type="application/json" id="study">@@DATA@@</script><script>
 const data=JSON.parse(document.getElementById("study").textContent);
 const model=data.model,names=model.channels, modes=Object.keys(data.labels);
-const sites={Biceps:"Axilla (Biceps)",SC6:"Neck (SC6)",Thumb:"Thumb muscle",CP4:"Scalp (CP4)",ECG:"Heart (ECG)"};
+const sites={Biceps:"Armpit nerve (file label “Biceps”)",SC6:"Neck (SC6)",Thumb:"Thumb muscle",CP4:"Scalp (CP4)",ECG:"Heart (ECG)"};
 const $=id=>document.getElementById(id);
 function estimate(mode, inputs) {
   if(mode==="event_median")return model.event_median;
