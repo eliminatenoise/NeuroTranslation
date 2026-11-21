@@ -134,12 +134,12 @@
       return row;
     }));
     const k=report.summary;
-    el("result-title").textContent=cohort==="assessment"?"The fixed model on five new people":"Seven development fits";
+    el("result-title").textContent=(cohort==="assessment"?"The fixed model on five new people":"Seven development fits")+" · all seven instructions together";
     const eligibility=k.complete_people_cues_runs?"": " Some people, cues or runs were missing.";
     el("overall-result").textContent=(cohort==="assessment"
       ? (k.overall_advantage?"The Transformer met the prespecified overall improvement criterion.":"The Transformer fell short of the prespecified overall improvement criterion.")+" The test required at least 5% lower overall error and a lower error in every person against each of six comparisons."
       : "Each development result comes from a different fit. The spread across these people describes this small group; the fixed model’s separate assessment tests its performance on new people."
-    )+eligibility;
+    )+eligibility+(cue==="all"?"":" This summary always pools all seven instructions; the table above shows only the instruction you chose, so its numbers differ.");
     if(cohort==="assessment" && k.criteria) {
       const domains=[["cue_contribution","using the correct cue"],["attention_architecture","beating both fitted alternatives"],["net_benefit","beating the cue average and no change"]];
       const passed=domains.filter(([key])=>k.criteria[key]).map(([,label])=>label);
