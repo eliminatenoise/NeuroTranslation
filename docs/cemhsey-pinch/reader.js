@@ -314,8 +314,15 @@
         Object.entries(scores).map(([key, v]) => [api.labels[key], fmt(v.mae), fmt(v.rmse)]),
       );
       byId("scores").hidden = false;
+      const demo = fit === bundledFit && globalThis.CEMHSEY_BUNDLED_FIT_KIND !== "local_study";
       byId("score-status").textContent =
-        (inventedTrial ? "Invented example · " : "") + "592 matched cutoffs.";
+        (inventedTrial ? "Invented example · " : "") +
+        "592 matched cutoffs." +
+        (inventedTrial || demo
+          ? " " +
+            (demo ? "The model was fitted on invented signals" : "The trial is invented") +
+            ", so these errors are illustrative and say nothing about the study result. On real recordings from four test people, forearm EMG moved the average miss from 0.4634% to 0.4632% of the hardest pinch."
+          : "");
     } catch (e) {
       resetScores();
       byId("score-status").textContent = e.message;
