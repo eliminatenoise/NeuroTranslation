@@ -6,9 +6,9 @@
 <p>Change a past reading and forecast what comes next. You can switch tasks while the same trained model stays in memory on your computer.</p></header>
 <p id="status" role="status">Loading the checkpoint…</p>
 <div id="work" hidden>
-<section class="task"><form id="outcome-form"><label for="outcome-text">Describe the outcome</label>
-<p class="horizon">A phrase picks a task. The forecast uses the input history shown below.</p>
-<div class="intent-input"><input id="outcome-text" type="text" maxlength="500" placeholder="Where will the macaque’s hand move?" required><button>Use description</button></div></form>
+<section class="task"><form id="outcome-form"><label for="outcome-text">Bio-robotic commands</label>
+<p class="horizon">“Where will the tracked wrist move?” forecasts from the input history. “Raise the avatar’s left hand above its left shoulder” proposes a goal for the local game to confirm.</p>
+<div class="intent-input"><input id="outcome-text" type="text" maxlength="500" placeholder="Where will the tracked wrist move?" required><button>Use command</button></div></form>
 <details><summary>Use a local language-model proposal</summary><p>Paste the JSON output from the optional text encoder. Each proposal selects a supported task or virtual goal.</p><form id="proposal-form"><label>Proposal JSON<input id="proposal" type="text" maxlength="2000" required></label><button>Use proposal</button></form></details>
 <div id="intent-result" role="status"></div>
 <label for="task">What should the model forecast?</label><select id="task"></select>
