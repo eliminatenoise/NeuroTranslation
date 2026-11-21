@@ -181,6 +181,7 @@ For the paired recorded perturbation and cued reach, extract the [offline cortic
 
 ## Forecast the next day’s electrode counts
 
+Extract the [offline reach and cortical activity reader](docs/reach-feedback-offline.zip) or [the trained models](models/reach-feedback.zip). Open the launcher for your operating system and select a recorded reach.
 Extract the [offline cylinder-rotation reader](docs/cylinder-rotation-offline.zip) or [the models and data](models/cylinder-rotation.zip). Launch it to forecast turning rate and acceleration from recent sensor samples.
 Extract the [offline target-reach reader](docs/target-reach-offline.zip) or the [complete fitted-model package](models/target-reach.zip). Open the launcher named for your system to compare a recorded destination with a new one.
 To forecast next-day sensory-cortex counts, extract the [offline reader](docs/contact-forecast-offline.zip) or the [complete fitted model package](models/contact-forecast.zip), then use the launcher for your system.

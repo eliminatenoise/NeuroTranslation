@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0
 
+The [reach feedback package](reach-feedback/) predicts hand, elbow and handle movement and estimates how much electrical activity follows in 23 recorded units of sensory cortex. [Try the model](https://eliminatenoise.github.io/NeuroTranslation/reach-feedback/) · [Compare the two workspaces](https://eliminatenoise.github.io/NeuroTranslation/papers/reach-feedback/)
+
 The [cylinder-rotation package](cylinder-rotation/) contains fitted models that read a single moving sensor and forecast the next 100 ms. [Change a sensor reading and try the model](https://eliminatenoise.github.io/NeuroTranslation/cylinder-rotation/)
 
 The [target-reach model and source](target-reach/) predict object displacement to three future times after an initial 200 ms of tracked motion. [Type a destination](https://eliminatenoise.github.io/NeuroTranslation/target-reach/)

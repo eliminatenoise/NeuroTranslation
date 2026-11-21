@@ -1,0 +1,382 @@
+{
+  "recording": "reaching_experiments/C_20170907_TRT_TD.mat",
+  "recording_sha256": "6062b7e8dacdf46f7eee465bd844ffe1fb3b7ce0793c34d3e4d106be357f4746",
+  "weight_and_source_example_sha256": {
+    "motor": "27ca5f4d5201a38052a5f2365246aac2dbe81931483d0d69040eea720594c54f",
+    "full": "72f1e6e067890bc373009772bb8eb969fb9e22d2592ac3de88472d2307bff162",
+    "direct": "c281c095af5f6012139b015d5664de42b1a4cef5c3df74e7b747ca529ad1f0eb",
+    "train_example": "c0ab9bf79b9938667ded19d7ae46091b01dd15f9b35a463ae1cc32eb770bfab4",
+    "validation_example": "063982850b5f7054a44042354f752c2e35e337716c0fe9de352a527f0dc1ee1a",
+    "within_example": "ffbfd382c2bb610e9582e18bab7a3e91a7f78d93bd98dc39350534c1d16a3a4e",
+    "transfer_example": "03b2226f55a9a64014839cc8b2b8bd7008a0dbb72dc62a1dac4df243249c76f5"
+  },
+  "seeds": [
+    17,
+    41,
+    73
+  ],
+  "count_error": "Poisson deviance per sorted unit over 100 ms, lower is better",
+  "primary_differences": "augmented minus comparison; losses averaged across seeds, then paired by original",
+  "motor_differences": "full minus pose and cue endpoint Euclidean error; hand/elbow mm, handle cm",
+  "cohorts": {
+    "train": {
+      "eligible_windows": 519,
+      "eligible_sequences": 198,
+      "matched_windows": 405,
+      "matched_sequences": 157,
+      "roster_sequences": 198,
+      "count_eligible_windows": 408,
+      "count_matched_deviance": {
+        "direct": 0.819333162918627,
+        "full": 0.8150898432434698,
+        "wrong": 0.9656217495884833,
+        "train_mean": 1.0830228002950353
+      },
+      "count_comparisons": {
+        "full_minus_direct": {
+          "difference": -0.004243319675157142,
+          "moving_block_95": [
+            -0.011376154597162456,
+            0.002519518454649219
+          ],
+          "iid_95": [
+            -0.010910165901462024,
+            0.0023386479525098524
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        },
+        "full_minus_wrong": {
+          "difference": -0.1505319063450135,
+          "moving_block_95": [
+            -0.1661651904340843,
+            -0.13557857939035092
+          ],
+          "iid_95": [
+            -0.1674596929292689,
+            -0.13385012225019252
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        }
+      },
+      "motor_comparisons": {
+        "hand": {
+          "difference": 0.13577170233542749,
+          "moving_block_95": [
+            0.05004459289734452,
+            0.24671336172349342
+          ],
+          "iid_95": [
+            0.027428421574167645,
+            0.24821759153394163
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        },
+        "elbow": {
+          "difference": 0.11543212487122975,
+          "moving_block_95": [
+            0.07551365322391293,
+            0.15720685847737845
+          ],
+          "iid_95": [
+            0.07454769890189811,
+            0.15504208716187914
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        },
+        "handle": {
+          "difference": 0.029381882460917594,
+          "moving_block_95": [
+            0.020311441387863876,
+            0.038939742991097745
+          ],
+          "iid_95": [
+            0.01869183982400311,
+            0.0398147449017209
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        }
+      },
+      "count_gate": {
+        "status": "not_applicable"
+      },
+      "motor_gate": {
+        "status": "not_applicable"
+      }
+    },
+    "validation": {
+      "eligible_windows": 113,
+      "eligible_sequences": 42,
+      "matched_windows": 110,
+      "matched_sequences": 41,
+      "roster_sequences": 42,
+      "count_eligible_windows": 113,
+      "count_matched_deviance": {
+        "direct": 1.1502964896169525,
+        "full": 1.155011897316662,
+        "wrong": 1.199540831193784,
+        "train_mean": 1.0682098299157639
+      },
+      "count_comparisons": {
+        "full_minus_direct": {
+          "difference": 0.004715407699709149,
+          "moving_block_95": [
+            -0.021361840933041554,
+            0.03274982176559535
+          ],
+          "iid_95": [
+            -0.02240457626165578,
+            0.03163394337724433
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        },
+        "full_minus_wrong": {
+          "difference": -0.04452893387712254,
+          "moving_block_95": [
+            -0.07650073560685298,
+            -0.022658621797515377
+          ],
+          "iid_95": [
+            -0.06764311884740869,
+            -0.023735661602900627
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        }
+      },
+      "motor_comparisons": {
+        "hand": {
+          "difference": 0.6882779386363473,
+          "moving_block_95": [
+            0.45546876255772417,
+            0.9135477943131998
+          ],
+          "iid_95": [
+            0.41255733383810017,
+            1.000063228254204
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        },
+        "elbow": {
+          "difference": 0.33856957714103547,
+          "moving_block_95": [
+            0.22673500234103258,
+            0.457677793369909
+          ],
+          "iid_95": [
+            0.22205653827712737,
+            0.45364198154250274
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        },
+        "handle": {
+          "difference": 0.07999941748743297,
+          "moving_block_95": [
+            0.060953374450524477,
+            0.09705375356311997
+          ],
+          "iid_95": [
+            0.05619120913085301,
+            0.1039924909238715
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        }
+      },
+      "count_gate": {
+        "status": "not_applicable"
+      },
+      "motor_gate": {
+        "status": "not_applicable"
+      }
+    },
+    "within": {
+      "eligible_windows": 116,
+      "eligible_sequences": 43,
+      "matched_windows": 113,
+      "matched_sequences": 42,
+      "roster_sequences": 43,
+      "count_eligible_windows": 116,
+      "count_matched_deviance": {
+        "direct": 1.057800276521081,
+        "full": 1.0612727431563023,
+        "wrong": 1.0806769811196506,
+        "train_mean": 0.9701888187989653
+      },
+      "count_comparisons": {
+        "full_minus_direct": {
+          "difference": 0.003472466635221495,
+          "moving_block_95": [
+            -0.023199663441316153,
+            0.027741006780754928
+          ],
+          "iid_95": [
+            -0.01890266321537333,
+            0.02520516964679221
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        },
+        "full_minus_wrong": {
+          "difference": -0.01940423796334802,
+          "moving_block_95": [
+            -0.03747016218256351,
+            -0.004758333301297708
+          ],
+          "iid_95": [
+            -0.04134832608218752,
+            0.001701879795570131
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        }
+      },
+      "motor_comparisons": {
+        "hand": {
+          "difference": 0.34572437041374465,
+          "moving_block_95": [
+            0.21062440838299368,
+            0.5806081285837122
+          ],
+          "iid_95": [
+            0.06638408767168313,
+            0.6143058169657574
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        },
+        "elbow": {
+          "difference": 0.3411830273943567,
+          "moving_block_95": [
+            0.2640093684825455,
+            0.4668164014403699
+          ],
+          "iid_95": [
+            0.23774553477629032,
+            0.4404917392479662
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        },
+        "handle": {
+          "difference": 0.05835807250404002,
+          "moving_block_95": [
+            0.022826372340420457,
+            0.0881052135061945
+          ],
+          "iid_95": [
+            0.030741594362475033,
+            0.08475379799017772
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        }
+      },
+      "count_gate": {
+        "status": "evaluated",
+        "pass": false
+      },
+      "motor_gate": {
+        "status": "not_applicable"
+      }
+    },
+    "transfer": {
+      "eligible_windows": 825,
+      "eligible_sequences": 316,
+      "matched_windows": 822,
+      "matched_sequences": 315,
+      "roster_sequences": 321,
+      "count_eligible_windows": 825,
+      "count_matched_deviance": {
+        "direct": 1.1834036445594835,
+        "full": 1.1934221381704624,
+        "wrong": 1.1967087018268112,
+        "train_mean": 1.1594883526271558
+      },
+      "count_comparisons": {
+        "full_minus_direct": {
+          "difference": 0.010018493610978906,
+          "moving_block_95": [
+            0.0011285711557284621,
+            0.018455696683957634
+          ],
+          "iid_95": [
+            0.001254517204534738,
+            0.01908385828620323
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        },
+        "full_minus_wrong": {
+          "difference": -0.003286563656348617,
+          "moving_block_95": [
+            -0.008022946554609259,
+            0.002407242207711554
+          ],
+          "iid_95": [
+            -0.008223309512381179,
+            0.001959045031167603
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        }
+      },
+      "motor_comparisons": {
+        "hand": {
+          "difference": -0.9640041138251997,
+          "moving_block_95": [
+            -1.1020727606909024,
+            -0.8609595319529046
+          ],
+          "iid_95": [
+            -1.0804319920046594,
+            -0.8417357208140493
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        },
+        "elbow": {
+          "difference": 0.30539462382862037,
+          "moving_block_95": [
+            0.246572660073249,
+            0.359433693257428
+          ],
+          "iid_95": [
+            0.24971512828864442,
+            0.36088776095468744
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        },
+        "handle": {
+          "difference": 0.07336906013133795,
+          "moving_block_95": [
+            0.059664838577549485,
+            0.08624079641948783
+          ],
+          "iid_95": [
+            0.05954938780575281,
+            0.08641449727636506
+          ],
+          "moving_block_95_defined_draws": 5000,
+          "iid_95_defined_draws": 5000
+        }
+      },
+      "count_gate": {
+        "status": "evaluated",
+        "pass": false
+      },
+      "motor_gate": {
+        "status": "evaluated",
+        "pass": false
+      }
+    }
+  }
+}
