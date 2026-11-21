@@ -76,6 +76,12 @@
       </tbody>
     </table>
   </section>
+  <section aria-labelledby="run">
+    <h2 id="run">Run a forecast on your computer</h2>
+    <p><a href="turning-lift-forecast.zip" download>Download the fitted models and example</a>. Extract the ZIP. With Python and NumPy installed, run <code>python forecast.py</code> from that folder. It prints how far the right wrist is predicted to move in each direction over 100 ms.</p>
+    <p>The included example uses generated readings. To see all 38 forecasts, run <code>python forecast.py --arm all</code>. To check them against the bundled reference, run <code>python forecast.py --self-check</code>. The guide inside the ZIP shows how to supply a history of your own.</p>
+    <p>Forecasts run offline once the dependencies are installed. The package ran on Linux in an isolated network. Windows and macOS launchers are included and await testing on those systems.</p>
+  </section>
   <section aria-labelledby="limits">
     <h2 id="limits">What each sensor measured</h2>
     <p>The wrist marks measure movement. The plates measure external force underfoot. The muscle channels measure electrical activity. The setup gives no direct measure of grip force or of the force produced by an individual muscle. It also cannot tell us why a particular wrist path occurred.</p>
