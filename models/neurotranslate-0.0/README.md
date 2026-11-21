@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0 movement forecasts
 
+Where will the two wrists go in the next half-second? Feed the model fifteen earlier camera frames and eight earlier voltage traces. Run `python predict.py bilateral_wrist/example.json` for both forecasts in image pixels. The public weights and histories come entirely from simulated movements. The same command accepts a locally fitted AJILE12 model and case. [Run the model, understand its limits and reproduce the example](bilateral_wrist/README.md)
+
 What does one rule learn from wrist motion and pelvis motion? Compare shared and study-specific forecasts, then rotate the same history to explore how its axes affect the answer. [Open the cross-limb controls](cross_limb/index.html) · [Inputs and fitting instructions](cross_limb/README.md)
 
 Does a walking forecast carry over to standing? Compare leg-muscle amplitudes and all 32 future pelvis positions. [Try the training-data controls](muscle_motion/index.html) · [Use measured inputs and reproduce training](muscle_motion/README.md)

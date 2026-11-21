@@ -1,0 +1,35 @@
+{
+  "description": "Native PyTorch forecast for bundled simulated case 0.",
+  "method": "transformer_anchored_full_s17",
+  "wrists": [
+    "right",
+    "left"
+  ],
+  "horizons_frames": [
+    8,
+    15
+  ],
+  "absolute_endpoint_px": [
+    [
+      [
+        52.101876808203905,
+        35.34323150944262
+      ],
+      [
+        -49.90129798541734,
+        21.366763446991555
+      ]
+    ],
+    [
+      [
+        51.79137048274723,
+        36.849789468797596
+      ],
+      [
+        -49.494783486875455,
+        23.872230650273618
+      ]
+    ]
+  ],
+  "absolute_tolerance_px": 1e-09
+}
