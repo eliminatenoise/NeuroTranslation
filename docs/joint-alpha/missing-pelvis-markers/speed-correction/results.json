@@ -1,0 +1,435 @@
+{
+  "archive": {
+    "source": "https://doi.org/10.17632/3dmymnb65h.1",
+    "paper": "https://doi.org/10.1016/j.dib.2026.112943",
+    "license": "CC BY 4.0",
+    "camera_hz": 100,
+    "condition": "Nominal treadmill speed 1.0 m/s",
+    "clock_offsets_ms": [
+      -200,
+      -150,
+      -100,
+      -50,
+      0
+    ],
+    "output_horizon_ms": 100,
+    "masking_scope": "Artificial gaps applied to archived coordinates. Original camera visibility unverified."
+  },
+  "target_order": [
+    "four_marker_centre",
+    "back_pair_centre"
+  ],
+  "methods": {
+    "extended_speed": "Speed-based forecast",
+    "direct_ridge": "Linear fit that predicts the change",
+    "correction_ridge": "Linear fit that corrects speed",
+    "historical_variable_ridge": "Earlier linear fit",
+    "historical_mixed_attention": "Earlier attention model",
+    "direct_attention": "Attention that predicts the change",
+    "correction_attention": "Attention that corrects speed"
+  },
+  "earlier_selector_mae_mm": {
+    "direct_ridge": [
+      7.543174812553245,
+      8.230433285386242
+    ],
+    "correction_ridge": [
+      7.544910052706355,
+      8.19699799714364
+    ],
+    "historical_variable_ridge": [
+      10.068638072331796,
+      11.031173375275378
+    ],
+    "historical_mixed_attention": [
+      10.797606690277409,
+      12.13669118199344
+    ],
+    "extended_speed": [
+      7.9431604219390035,
+      8.563077834380062
+    ],
+    "zero_displacement": [
+      16.618404773067688,
+      18.126150135612967
+    ],
+    "direct_attention": [
+      5.880935063988126,
+      6.684972542120454
+    ],
+    "correction_attention": [
+      5.796514396847329,
+      6.4700698859991705
+    ]
+  },
+  "independent_archive": {
+    "people": {
+      "Young": 8,
+      "Old": 8
+    },
+    "rows": {
+      "Young": {
+        "scheduled": 2388,
+        "complete_inputs": 2388,
+        "four_endpoints": 2388,
+        "back_endpoints": 2388,
+        "masked_inputs": 31044,
+        "strict_speed_windows": 16716
+      },
+      "Old": {
+        "scheduled": 2606,
+        "complete_inputs": 2606,
+        "four_endpoints": 2606,
+        "back_endpoints": 2606,
+        "masked_inputs": 33878,
+        "strict_speed_windows": 18242
+      }
+    },
+    "recording_quality_counts_by_marker": {
+      "unavailable": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "positive_residual": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "nonzero_camera_field": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "all": {
+      "all": {
+        "extended_speed": [
+          8.850255844397857,
+          8.601490406613564
+        ],
+        "direct_ridge": [
+          8.349208341336453,
+          8.023195306808418
+        ],
+        "correction_ridge": [
+          8.355519761235858,
+          8.023568257949046
+        ],
+        "historical_variable_ridge": [
+          8.388039771252394,
+          8.120449060937172
+        ],
+        "historical_mixed_attention": [
+          12.590942536837954,
+          12.050114254027271
+        ],
+        "direct_attention": [
+          7.3714072294602335,
+          6.80072576137132
+        ],
+        "correction_attention": [
+          7.7372590912240975,
+          7.488262723112464
+        ]
+      },
+      "strict_latest_pair": {
+        "extended_speed": [
+          8.165901442655795,
+          8.013630603202712
+        ],
+        "direct_ridge": [
+          7.628662360003947,
+          7.278896273141815
+        ],
+        "correction_ridge": [
+          7.631222137835555,
+          7.277921462060879
+        ],
+        "historical_variable_ridge": [
+          7.836079436373568,
+          7.5108329099254405
+        ],
+        "historical_mixed_attention": [
+          7.296847591971613,
+          6.569526509311492
+        ],
+        "direct_attention": [
+          5.902327570751883,
+          5.238118798750188
+        ],
+        "correction_attention": [
+          6.448591491851395,
+          6.223512556333899
+        ]
+      },
+      "full": {
+        "extended_speed": [
+          8.120994309263693,
+          7.976969321792835
+        ],
+        "direct_ridge": [
+          7.66594824955844,
+          7.191881216795
+        ],
+        "correction_ridge": [
+          7.656368813284463,
+          7.17614583215421
+        ],
+        "historical_variable_ridge": [
+          8.596511108563252,
+          8.030221746831955
+        ],
+        "historical_mixed_attention": [
+          5.002078903888462,
+          4.411133361041818
+        ],
+        "direct_attention": [
+          5.259884963299139,
+          4.7265691777261765
+        ],
+        "correction_attention": [
+          6.315168023245565,
+          6.154432392769907
+        ]
+      },
+      "intermittent": {
+        "extended_speed": [
+          8.182863325808784,
+          8.032298406052787
+        ],
+        "direct_ridge": [
+          7.915198387906303,
+          7.573818018709545
+        ],
+        "correction_ridge": [
+          7.9032421476328825,
+          7.569833017080402
+        ],
+        "historical_variable_ridge": [
+          8.111142710421117,
+          7.83793242949269
+        ],
+        "historical_mixed_attention": [
+          9.553228096040252,
+          8.844994634198418
+        ],
+        "direct_attention": [
+          6.158298192059734,
+          5.480996320684488
+        ],
+        "correction_attention": [
+          6.592763600876776,
+          6.401175361143796
+        ]
+      },
+      "sustained": {
+        "extended_speed": [
+          8.193846692894907,
+          8.03162408176252
+        ],
+        "direct_ridge": [
+          7.304840442547114,
+          7.0709895839209125
+        ],
+        "correction_ridge": [
+          7.334055452589314,
+          7.087785536948029
+        ],
+        "historical_variable_ridge": [
+          6.800584490136341,
+          6.66434455345167
+        ],
+        "historical_mixed_attention": [
+          7.3352357759861375,
+          6.452451532694228
+        ],
+        "direct_attention": [
+          6.28879955689677,
+          5.506790897839899
+        ],
+        "correction_attention": [
+          6.437842851431849,
+          6.114929915087988
+        ]
+      },
+      "older_overlap": {
+        "extended_speed": [
+          10.476615557610165,
+          9.987609955274639
+        ],
+        "direct_ridge": [
+          9.67793599095056,
+          9.360689159944926
+        ],
+        "correction_ridge": [
+          9.700024017608444,
+          9.370426736700882
+        ],
+        "historical_variable_ridge": [
+          9.040994698161056,
+          8.850897304630704
+        ],
+        "historical_mixed_attention": [
+          19.112169534769478,
+          18.327554962560622
+        ],
+        "direct_attention": [
+          8.99941587511844,
+          8.38376701572283
+        ],
+        "correction_attention": [
+          8.95817012712525,
+          8.47149902562664
+        ]
+      },
+      "no_repeat": {
+        "extended_speed": [
+          9.27695933641176,
+          8.97895026818503
+        ],
+        "direct_ridge": [
+          9.182118635719856,
+          8.918598554671727
+        ],
+        "correction_ridge": [
+          9.183908375064188,
+          8.913650166861743
+        ],
+        "historical_variable_ridge": [
+          9.390965848980223,
+          9.218849270278845
+        ],
+        "historical_mixed_attention": [
+          21.952000373505424,
+          22.21443677964125
+        ],
+        "direct_attention": [
+          10.150637559927109,
+          9.905505394883214
+        ],
+        "correction_attention": [
+          10.38235085344105,
+          10.299276920934002
+        ]
+      }
+    },
+    "each_cohort": {
+      "Young": {
+        "extended_speed": [
+          8.32053646934252,
+          8.10140840505194
+        ],
+        "direct_ridge": [
+          7.933953959268168,
+          7.752161881701891
+        ],
+        "correction_ridge": [
+          7.965087689533759,
+          7.734579883408424
+        ],
+        "historical_variable_ridge": [
+          7.9680881452103804,
+          7.878238890700332
+        ],
+        "historical_mixed_attention": [
+          11.331593912552645,
+          10.764268619019628
+        ],
+        "direct_attention": [
+          6.955779092974665,
+          6.394479726220001
+        ],
+        "correction_attention": [
+          7.252397904394934,
+          6.95034343988238
+        ]
+      },
+      "Old": {
+        "extended_speed": [
+          9.379975219453195,
+          9.101572408175187
+        ],
+        "direct_ridge": [
+          8.764462723404739,
+          8.294228731914945
+        ],
+        "correction_ridge": [
+          8.745951832937957,
+          8.312556632489668
+        ],
+        "historical_variable_ridge": [
+          8.807991397294408,
+          8.362659231174014
+        ],
+        "historical_mixed_attention": [
+          13.85029116112326,
+          13.335959889034916
+        ],
+        "direct_attention": [
+          7.787035365945803,
+          7.206971796522638
+        ],
+        "correction_attention": [
+          8.22212027805326,
+          8.026182006342548
+        ]
+      }
+    },
+    "contrasts": {
+      "extended_speed": {
+        "correction_minus_reference_mm": [
+          -1.1129967531737597,
+          -1.1132276835011004
+        ],
+        "95_percent_paired_interval_mm": [
+          [
+            -1.4528761424458863,
+            -0.7607781323132825
+          ],
+          [
+            -1.4716616999712295,
+            -0.735846252132939
+          ]
+        ]
+      },
+      "direct_attention": {
+        "correction_minus_reference_mm": [
+          0.365851861763864,
+          0.6875369617411442
+        ],
+        "95_percent_paired_interval_mm": [
+          [
+            0.18662267908754515,
+            0.5298809746228154
+          ],
+          [
+            0.5339194165105896,
+            0.8382785277793795
+          ]
+        ]
+      },
+      "correction_ridge": {
+        "correction_minus_reference_mm": [
+          -0.6182606700117601,
+          -0.5353055348365823
+        ],
+        "95_percent_paired_interval_mm": [
+          [
+            -0.8043598246855052,
+            -0.423294278892538
+          ],
+          [
+            -0.7127090882801761,
+            -0.3496518885705148
+          ]
+        ]
+      }
+    },
+    "worst_gap_or_cohort_increase_mm": 1.320326652748971,
+    "passes_independent_challenger_rule": false
+  }
+}
