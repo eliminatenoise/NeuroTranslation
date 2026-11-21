@@ -1,0 +1,94 @@
+{
+  "source_sha256": "308cfb92f66c627cda88babe818c5b4431c8dcfda9629d58f0123693b95e4f6b",
+  "rule": "First eligible interval, plus first with a strictly earlier metadata donor, per block and workspace. No substitution for missing numerical support.",
+  "cases": [
+    {
+      "selection": "first",
+      "source_index": 4,
+      "block": 1,
+      "original": 7,
+      "workspace": 1,
+      "ordinal": 2,
+      "event": 2587,
+      "k": 2592,
+      "metadata_donor_index_zero_based": null
+    },
+    {
+      "selection": "first_with_prior",
+      "source_index": 8,
+      "block": 1,
+      "original": 9,
+      "workspace": 1,
+      "ordinal": 2,
+      "event": 3556,
+      "k": 3561,
+      "metadata_donor_index_zero_based": 4
+    },
+    {
+      "selection": "first",
+      "source_index": 0,
+      "block": 1,
+      "original": 2,
+      "workspace": 2,
+      "ordinal": 2,
+      "event": 717,
+      "k": 722,
+      "metadata_donor_index_zero_based": null
+    },
+    {
+      "selection": "first_with_prior",
+      "source_index": 2,
+      "block": 1,
+      "original": 6,
+      "workspace": 2,
+      "ordinal": 2,
+      "event": 2083,
+      "k": 2088,
+      "metadata_donor_index_zero_based": 0
+    },
+    {
+      "selection": "first",
+      "source_index": 113,
+      "block": 2,
+      "original": 1,
+      "workspace": 1,
+      "ordinal": 2,
+      "event": 571,
+      "k": 576,
+      "metadata_donor_index_zero_based": null
+    },
+    {
+      "selection": "first_with_prior",
+      "source_index": 115,
+      "block": 2,
+      "original": 4,
+      "workspace": 1,
+      "ordinal": 2,
+      "event": 1522,
+      "k": 1527,
+      "metadata_donor_index_zero_based": 113
+    },
+    {
+      "selection": "first",
+      "source_index": 117,
+      "block": 2,
+      "original": 7,
+      "workspace": 2,
+      "ordinal": 2,
+      "event": 2634,
+      "k": 2639,
+      "metadata_donor_index_zero_based": null
+    },
+    {
+      "selection": "first_with_prior",
+      "source_index": 119,
+      "block": 2,
+      "original": 8,
+      "workspace": 2,
+      "ordinal": 2,
+      "event": 3122,
+      "k": 3127,
+      "metadata_donor_index_zero_based": 117
+    }
+  ]
+}

@@ -265,3 +265,7 @@ Jan de Wit, Emiel Krahmer and Paul Vogt recorded the NEMO-Lowlands iconic gestur
 ### A reach and the later spikes (the reach-feedback study)
 
 Raeed H. Chowdhury, Joshua I. Glaser and Lee E. Miller released the recordings under CC0 1.0. The reach-feedback reader uses selected windows from macaque C on 7 September 2017. The project dedicates its own software, fitted weights, figures and prose to CC0 1.0. The paper also reproduces the apparatus (Figure 2) and workspace layout (Figure 3A) drawn by Chowdhury, Glaser and Miller. Those illustrations retain their CC BY 4.0 licence. The paper and editable source identify the resizing and crop. The 3D paths are reconstructions of the marker positions in that recording. [Dataset](https://doi.org/10.5061/dryad.nk98sf7q7) · [Original study](https://doi.org/10.7554/eLife.48198)
+
+## The reaching model one week later
+
+The dated arm positions, cortical event counts and OpenSim muscle–tendon path estimates used here come from the CC0 recordings by Raeed H. Chowdhury, Joshua I. Glaser and Lee E. Miller. The project dedicates its original code, fitted parameters, text and newly drawn figures to CC0 1.0. Images reproduced from the original article retain the licences identified in the paper and its editable sources. [Recording archive](https://doi.org/10.5061/dryad.nk98sf7q7) · [Original study](https://doi.org/10.7554/eLife.48198)

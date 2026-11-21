@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0
 
+The [one-week reach package](reach-feedback-week/) contains the trained models, a reader, and instructions for rebuilding the comparison from two recordings. [Open the later-day reader](https://eliminatenoise.github.io/NeuroTranslation/reach-feedback/one-week/)
+
 The [reach feedback package](reach-feedback/) predicts hand, elbow and handle movement and estimates how much electrical activity follows in 23 recorded units of sensory cortex. [Try the model](https://eliminatenoise.github.io/NeuroTranslation/reach-feedback/) · [Compare the two workspaces](https://eliminatenoise.github.io/NeuroTranslation/papers/reach-feedback/)
 
 The [cylinder-rotation package](cylinder-rotation/) contains fitted models that read a single moving sensor and forecast the next 100 ms. [Change a sensor reading and try the model](https://eliminatenoise.github.io/NeuroTranslation/cylinder-rotation/)

@@ -5,7 +5,7 @@
   <title>NeuroTranslator</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.1f6ec5c2b1c054293dcc89133d0082143a67f3c87ac81f85f917f75523f7b34a.css">
+  <link rel="stylesheet" href="style.b8cb42049f85a5cb7eaf6d1c13203962ce17cc8574166aec5f198bb1833b9ad5.css">
 </head>
 <body>
   <header class="topbar">
@@ -24,6 +24,7 @@
       <div>
         <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p>
         <nav class="section-links wrist-links" aria-label="Study recordings">
+          <a href="./reach-feedback/one-week/index.html" data-pages-href="./reach-feedback/one-week/index.html">Try the reach forecast one week later</a>
           <a href="./reach-feedback/index.html" data-pages-href="./reach-feedback/index.html">Forecast a reach and later cortical activity</a>
           <a href="./cylinder-rotation/index.html" data-pages-href="./cylinder-rotation/index.html">Forecast how a cylinder turns</a>
           <a href="./target-reach/index.html" data-pages-href="./target-reach/index.html">Move a cylinder to a target</a>
@@ -111,6 +112,13 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="finger-transfer" aria-labelledby="cohort-choice"><h3 id="cohort-choice">A different person’s finger movement</h3><p>Learn from four people, calibrate on a fifth, then compare the cue with the recorded brain signal.</p><a href="finger-transfer/index.html">Run the five-person comparison</a></article>
+      <article class="study-choice-card" data-study-key="reach-feedback-week" aria-labelledby="reader-one-week">
+        <h3 id="reader-one-week">Does the forecast work a week later?</h3>
+        <p>The macaque returns to the same task. Run the fitted movement and spike-count models on a later day, then follow the change in length of a muscle–tendon path.</p>
+        <nav class="section-links" aria-label="Week-later reaching study"><a href="./reach-feedback/one-week/index.html" data-pages-href="./reach-feedback/one-week/index.html">Run a later reach</a>
+        <a href="./reach-feedback/one-week/muscle-paths/index.html" data-pages-href="./reach-feedback/one-week/muscle-paths/index.html">Inside the arm model</a>
+        <a href="./papers/reach-feedback/one-week/index.html" data-pages-href="./papers/reach-feedback/one-week/index.html">Read the study</a><a href="https://eliminatenoise.github.io/Interoceptomics/reach-feedback/one-week/">Replay the arm in 3D</a></nav>
+      </article>
       <article class="study-choice-card" data-study-key="reach-feedback" aria-labelledby="reader-reach-feedback">
         <h3 id="reader-reach-feedback">After a reach, what will the sensory cortex do?</h3>
         <p>A macaque reached for one target after another. See how well earlier movement and electrical activity predict where its hand goes, then compare the forecast with spikes recorded a tenth of a second later.</p>
@@ -500,6 +508,6 @@
     document.getElementById("study-choice-label").hidden = false;
     showStudy();
   </script>
-  <script type="module" src="app.1f6ec5c2b1c054293dcc89133d0082143a67f3c87ac81f85f917f75523f7b34a.mjs"></script>
+  <script type="module" src="app.b8cb42049f85a5cb7eaf6d1c13203962ce17cc8574166aec5f198bb1833b9ad5.mjs"></script>
 </body>
 </html>

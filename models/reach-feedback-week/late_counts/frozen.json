@@ -1,0 +1,20 @@
+{
+  "study": "one-week transfer of a positive-sort count update",
+  "trained_on": "September 7 training rows only",
+  "cutoff": "k+10",
+  "weights_sha256": "3cc1921584bb309249c2eec47c5aa14b3e9f349c2f3dac98036437bf4a2ad2ca",
+  "positive_contact_heads": 88,
+  "independent_forward_check": {
+    "fits": 352,
+    "training_only_windows": 408,
+    "originals": 158,
+    "measured_minus_stale": {
+      "mean": -0.014645784296127591,
+      "block_of_eight_95": [
+        -0.03179183238786454,
+        -0.0014791055097184683
+      ]
+    },
+    "maximum_relative_rate_difference": 1.4298458578755818e-06
+  }
+}
