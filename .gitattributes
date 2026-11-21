@@ -199,3 +199,7 @@ models/neurotranslate-0.0/next_neuron_prediction/** -text
 docs/first-use-body/*.cmd whitespace=cr-at-eol
 docs/next-neuron-prediction/*.cmd whitespace=cr-at-eol
 "models/neurotranslate-0.0/Run forecasts on Windows.cmd" -text whitespace=cr-at-eol
+
+# Keep the pinned scoring code, fitted coefficients and dataset-register downloads byte stable.
+models/vertebrate-neural-data/** -text
+docs/vertebrate-neural-data/** -text

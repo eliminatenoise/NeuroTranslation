@@ -17,3 +17,7 @@ Record how much earlier movement was visible, how long the first forecast took, 
 ## What happened when a model met other tracked animals?
 
 One fit learned from mouse and gerbil recordings. A second also learned from fly and worm recordings. Both watched only the points visible in the past of the new recording. Adding the extra training recordings improved the slower locust forecast and worsened the mean on the common shorter-horizon comparisons. The endpoint measures position in the camera plane. Projected size and shape depend on camera angle and posture. [Try the forecast](https://eliminatenoise.github.io/NeuroTranslation/first-use-body/) · [Read the animal study](https://eliminatenoise.github.io/NeuroTranslation/papers/first-use-body/) · [Code, weights and sources](../models/first-use-body/).
+
+## Where can I find neural recordings?
+
+The [vertebrate neural data register](https://eliminatenoise.github.io/NeuroTranslation/vertebrate-neural-data/) describes each measurement and links to the original deposit. The [fly and worm comparison](when-fly-and-worm-data-help.md) asks what a wiring diagram or developmental reconstruction can contribute to a vertebrate test.

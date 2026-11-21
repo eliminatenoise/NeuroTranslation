@@ -1,0 +1,912 @@
+{
+  "schema_version": 1,
+  "edition": "2026-11-21.1",
+  "unit_of_inventory": "one cited deposit, not an independent animal, laboratory, species, or model test",
+  "scope": "Fifteen vertebrate neural recording deposits. Birds are within the reptile lineage. The release includes a non-avian turtle. A second salamander deposit shares investigators and does not establish an independent cohort.",
+  "recording_coverage": "Each entry identifies a particular recorded signal or a stored response derived from it. File evidence covers only the stated example. Source digests describe the archive object unless marked as locally measured.",
+  "model_evidence_scope": "A proposed task is an experimental design. The register itself fits no models. See the separate benchmark reports for actual tests and outcomes.",
+  "datasets": [
+    {
+      "id": "salamander-timed-retina",
+      "species": "Larval tiger salamander (species epithet unspecified in the cited methods)",
+      "lineage": "Tetrapoda / Lissamphibia / Caudata",
+      "recording_site": "Isolated retina, ganglion cells.",
+      "measurement": "Extracellular array. Sorted ganglion-cell event times.",
+      "experiment_and_clock": "Four visual protocols include repeated and unrepeated movies, white-noise checkerboard and a moving bar. Acquisition sampled at 10 kHz. Check the native MAT time units separately.",
+      "independence": "Keep each preparation and stimulus run together. Never assume that cell indices align across retinas or protocols. A repeated movie can leak stimulus identity across trial splits.",
+      "proposed_task": "Rank the next recorded unit within a verified simultaneous population. For a stimulus test, hold out a whole movie or protocol.",
+      "unit_identity": "The sort supplies recording-local labels. Equal timestamps need a tie rule. An observed unit set covers only part of a retina.",
+      "source": {
+        "accession": "10.5061/dryad.1f1rc",
+        "doi": "10.5061/dryad.1f1rc",
+        "version": "Dryad v1 (2017-10-18)",
+        "landing": "https://doi.org/10.5061/dryad.1f1rc",
+        "citation": "Loback, Tkačik, Prentice, Ioffe, Berry II, Marre, Berry. Data from: Error-robust modes of the retinal population code. Dryad, 2017.",
+        "metadata_url": "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.1f1rc",
+        "version_metadata": "https://datadryad.org/api/v2/versions/1813",
+        "license": "CC0-1.0",
+        "license_url": "https://spdx.org/licenses/CC0-1.0.html",
+        "access": "Public deposit. Use the file link on the landing page. The Dryad download API can require a bearer token.",
+        "asset": {
+          "path": "error_robust_mode_data.zip",
+          "bytes": 87524253,
+          "asset_metadata": "https://datadryad.org/api/v2/files/10783",
+          "download": "https://datadryad.org/downloads/file_stream/10783",
+          "archive_checksum": {
+            "md5": "f34c92b51f2abcc3ff965500176ff9fc"
+          },
+          "mirror_download": "https://zenodo.org/records/4976473/files/error_robust_mode_data.zip?download=1"
+        },
+        "data_reuse": "Public-domain dedication. Cite the deposit and respect separately identified third-party material."
+      },
+      "primary_study": "https://doi.org/10.1371/journal.pcbi.1005148",
+      "evidence": {
+        "level": "archive member directory inspected",
+        "observations": {
+          "outer_object": "error_robust_mode_data.zip",
+          "outer_checksum": "md5:f34c92b51f2abcc3ff965500176ff9fc",
+          "zip_members": 39,
+          "sample_member": "mode_paper_data/white_noise_checkerboard/data.mat",
+          "member_bytes": 1964531,
+          "range_bytes": 9117,
+          "inspected": "ZIP central-directory metadata"
+        }
+      },
+      "model_evidence": "The rat-trained model was evaluated on sorted ganglion-cell events in an isolated larval tiger salamander retina under three visual protocols.",
+      "next_spike_evaluation": "https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/vertebrate-neural-data/amphibian"
+    },
+    {
+      "id": "salamander-binned-movies",
+      "species": "Larval tiger salamander (species epithet unspecified in the deposit description)",
+      "lineage": "Tetrapoda / Lissamphibia / Caudata",
+      "recording_site": "Isolated retina, ganglion cells.",
+      "measurement": "Extracellular spikes curated by template sorting, released as binary activity per cell per bin.",
+      "experiment_and_clock": "Five 20-second natural movies with at least 80 repeats each. The source reports 16.667 ms bins and 93 cells.",
+      "independence": "Group by retina, movie and repeat. This release describes a single retinal preparation. Two deposits with overlapping authorship do not establish independent animals.",
+      "proposed_task": "Forecast occupancy of the next 16.667 ms bin and separately score each movie.",
+      "unit_identity": "Multiple cells can be active in the same bin. Their sub-bin firing order is lost.",
+      "source": {
+        "accession": "10.5061/dryad.4qrfj6qm8",
+        "doi": "10.5061/dryad.4qrfj6qm8",
+        "version": "Dryad v3 (2024-12-11)",
+        "landing": "https://doi.org/10.5061/dryad.4qrfj6qm8",
+        "citation": "Palmer, Holmes, Hoshal, Bojanek, Salisbury, Berry, Marre. Larval salamander retinal population data in response to natural movies from the Chicago Motion Database. Dryad, 2024.",
+        "metadata_url": "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.4qrfj6qm8",
+        "version_metadata": "https://datadryad.org/api/v2/versions/334025",
+        "license": "CC0-1.0",
+        "license_url": "https://spdx.org/licenses/CC0-1.0.html",
+        "access": "Public deposit. Use the file link on the landing page. The Dryad download API can require a bearer token.",
+        "asset": {
+          "path": "movieBinnedSpiking.mat",
+          "bytes": 733167,
+          "asset_metadata": "https://datadryad.org/api/v2/files/3710982",
+          "download": "https://datadryad.org/downloads/file_stream/3710982",
+          "archive_checksum": {
+            "sha-256": "fc09c6366614c54d77e2d1ccfcfca69e884e18996a42be337f7911cad202a162"
+          }
+        },
+        "data_reuse": "Public-domain dedication. Cite the deposit and respect separately identified third-party material."
+      },
+      "primary_study": "https://doi.org/10.1073/pnas.2313676121",
+      "evidence": {
+        "level": "provider documentation and asset listing"
+      },
+      "model_evidence": "No model evaluation in this register."
+    },
+    {
+      "id": "xenopus-tectal-current-steps",
+      "species": "African clawed frog (Xenopus laevis)",
+      "lineage": "Tetrapoda / Lissamphibia / Anura",
+      "recording_site": "Optic tectum in developing tadpoles.",
+      "measurement": "Whole-cell recordings. The current-injection folders contain single-neuron membrane voltage. Voltage-clamp folders contain currents.",
+      "experiment_and_clock": "Step and cosine current injections, optic nerve stimulation, and spontaneous miniature currents have distinct protocols. Use sweep timing and command waveform for the chosen cell.",
+      "independence": "The master file maps sweeps to a cell ID. Group all sweeps from one cell, then by animal where a mapping is available. Without animal IDs, report cell-level generalization only.",
+      "proposed_task": "Predict a cell’s membrane-voltage response to an unseen injected current. Use matched protocol and developmental stage.",
+      "unit_identity": "A single patched cell has a physical identity for a sweep. Separate cells are not a simultaneously observed population.",
+      "source": {
+        "accession": "10.5061/dryad.18kk6",
+        "doi": "10.5061/dryad.18kk6",
+        "version": "Dryad v1 (2016-11-18)",
+        "landing": "https://doi.org/10.5061/dryad.18kk6",
+        "citation": "Ciarleglio, Khakhalin, Wang, Constantino, Yip, Aizenman. Data from: Multivariate analysis of electrophysiological diversity of Xenopus visual neurons during development and plasticity. Dryad, 2016.",
+        "metadata_url": "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.18kk6",
+        "version_metadata": "https://datadryad.org/api/v2/versions/574",
+        "license": "CC0-1.0",
+        "license_url": "https://spdx.org/licenses/CC0-1.0.html",
+        "access": "Public deposit. Use the file link on the landing page. The Dryad download API can require a bearer token.",
+        "asset": {
+          "path": "eLife_Data-2015-10-27.zip",
+          "bytes": 447261841,
+          "asset_metadata": "https://datadryad.org/api/v2/files/3222",
+          "download": "https://datadryad.org/downloads/file_stream/3222",
+          "archive_checksum": {
+            "md5": "5ec7049c035b5670eda96dc957ffefac"
+          },
+          "mirror_download": "https://zenodo.org/records/4962280/files/eLife_Data-2015-10-27.zip?download=1"
+        },
+        "data_reuse": "Public-domain dedication. Cite the deposit and respect separately identified third-party material."
+      },
+      "primary_study": "https://doi.org/10.7554/eLife.11351",
+      "evidence": {
+        "level": "individual MAT variable directory inspected",
+        "observations": {
+          "outer_object": "eLife_Data-2015-10-27.zip",
+          "outer_checksum": "md5:5ec7049c035b5670eda96dc957ffefac",
+          "zip_members": 853,
+          "sample_member": "eLife_Data-2015-10-27/02 Current step injections/20121209e_0038.mat",
+          "member_bytes": 87502,
+          "range_bytes": 224401,
+          "inspected": "ZIP member and MAT variable directory",
+          "sample_sha256": "f94be25acc56c31ad2b4b03522b0beb048124289a1fe9241d259c20a8239a900",
+          "variables": [
+            [
+              "S",
+              [
+                1,
+                1
+              ],
+              "struct"
+            ]
+          ]
+        }
+      },
+      "model_evidence": "No model evaluation in this register."
+    },
+    {
+      "id": "cane-toad-mesh",
+      "species": "Cane toad (Rhinella marina)",
+      "lineage": "Tetrapoda / Lissamphibia / Anura",
+      "recording_site": "Telencephalon.",
+      "measurement": "Raw extracellular microelectrode voltages in Intan RHD files. Sorting was part of the study.",
+      "experiment_and_clock": "Representative one-minute snippets from multiple days in awake, partially restrained or anesthetized animals. Conditions depend on the individual and date.",
+      "independence": "Group the six specimen folders by toad, keep acquisition dates and continuous recordings together. Consecutive minutes and electrodes in one animal share a source.",
+      "proposed_task": "Forecast channel activity within an awake segment, then evaluate on a held-out awake toad where data permit.",
+      "unit_identity": "A raw electrode can detect several neurons. A new sort needs its own unit quality checks and event-time validation.",
+      "source": {
+        "accession": "10.5061/dryad.np5hqc03s",
+        "doi": "10.5061/dryad.np5hqc03s",
+        "version": "Dryad v5 (2025-03-17)",
+        "landing": "https://doi.org/10.5061/dryad.np5hqc03s",
+        "citation": "Shaykevich, Woods, O'Connell, Hong. Raw electrophysiology recording files from toads implanted with flexible mesh electronics. Dryad, 2025.",
+        "metadata_url": "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.np5hqc03s",
+        "version_metadata": "https://datadryad.org/api/v2/versions/352605",
+        "license": "CC0-1.0",
+        "license_url": "https://spdx.org/licenses/CC0-1.0.html",
+        "access": "Public deposit. Use the file link on the landing page. The Dryad download API can require a bearer token.",
+        "asset": {
+          "path": "F02_data.zip",
+          "bytes": 300967286,
+          "asset_metadata": "https://datadryad.org/api/v2/files/3956274",
+          "download": "https://datadryad.org/downloads/file_stream/3956274",
+          "archive_checksum": {
+            "sha-256": "ee471d6f5ddb7545f0923b90f3e3e20c0a2949de990754e5e01ce3f1164887ac"
+          }
+        },
+        "data_reuse": "Public-domain dedication. Cite the deposit and respect separately identified third-party material."
+      },
+      "primary_study": "https://doi.org/10.1016/j.jneumeth.2025.110449",
+      "evidence": {
+        "level": "provider documentation and asset listing"
+      },
+      "model_evidence": "No model evaluation in this register."
+    },
+    {
+      "id": "slider-turtle-dorsal-cortex",
+      "species": "Red-eared slider (Trachemys scripta elegans)",
+      "lineage": "Tetrapoda / Sauropsida / Testudines",
+      "recording_site": "Dorsal visual cortex.",
+      "measurement": "Two distinct products. Downsampled local field potential (LFP) and derived components, plus figure data with cluster-labeled spike timestamps.",
+      "experiment_and_clock": "Behaving turtles saw a visual oddball sequence while their eyes and heads were tracked. The raster code uses milliseconds. Its 200 stimulus onsets are sorted by condition.",
+      "independence": "Use recname and the animal-to-session mapping where available. Restore true time from onset values. The inspected spike example represents one recording.",
+      "proposed_task": "Use a single recording to forecast its next observed cluster, or predict a separate field-potential response to stimulus position. Evaluate each target separately.",
+      "unit_identity": "109 distinct cluster labels occur in the inspected array. The label count does not certify 109 well-isolated neurons. LFP and its principal components contain no cell IDs.",
+      "source": {
+        "accession": "10.5061/dryad.k98sf7mm6",
+        "doi": "10.5061/dryad.k98sf7mm6",
+        "version": "Dryad v5 (2025-10-22)",
+        "landing": "https://doi.org/10.5061/dryad.k98sf7mm6",
+        "citation": "Shein-Idelson, Becker, Leberstein. Data from: View invariant representations in ancestral cortex. Dryad, 2025.",
+        "metadata_url": "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.k98sf7mm6",
+        "version_metadata": "https://datadryad.org/api/v2/versions/406647",
+        "license": "CC0-1.0",
+        "license_url": "https://spdx.org/licenses/CC0-1.0.html",
+        "access": "Public deposit. Use the file link on the landing page. The Dryad download API can require a bearer token.",
+        "asset": {
+          "path": "SpatiallySelectiveViewInvariance-1.0.0.zip",
+          "bytes": 27434407,
+          "asset_metadata": "https://datadryad.org/api/v2/files/4420246",
+          "download": "https://datadryad.org/downloads/file_stream/4420246",
+          "archive_checksum": {
+            "sha-256": "099b99139102008095a83484974f1cf96eb55439801d1bd2505bd60524290787"
+          }
+        },
+        "author_files": {
+          "commit": "b421ce0a62140a812e964cb027b97f979e98f049",
+          "spike_file": "https://raw.githubusercontent.com/EvolutionaryNeuralCodingLab/SpatiallySelectiveViewInvariance/b421ce0a62140a812e964cb027b97f979e98f049/spikes.mat",
+          "plot_and_clock": "https://github.com/EvolutionaryNeuralCodingLab/SpatiallySelectiveViewInvariance/blob/b421ce0a62140a812e964cb027b97f979e98f049/plot_Fig1h.m",
+          "field_trace": "https://github.com/EvolutionaryNeuralCodingLab/SpatiallySelectiveViewInvariance/blob/b421ce0a62140a812e964cb027b97f979e98f049/example_trace.mat"
+        },
+        "data_reuse": "Public-domain dedication. Cite the deposit and respect separately identified third-party material."
+      },
+      "primary_study": "https://doi.org/10.1126/sciadv.ady9659",
+      "evidence": {
+        "level": "author MAT and raster code inspected",
+        "observations": {
+          "asset": "spikes.mat",
+          "sha256": "e5a609e6dc28c05a88d51e71cdfd74cc6f6107958aed7592dee3a88fe3ba7881",
+          "variables": {
+            "sig_units": [
+              72
+            ],
+            "spiketime": [
+              347291
+            ],
+            "cluster": [
+              347291
+            ],
+            "clusterIdentity": [
+              109
+            ],
+            "onStim_sorted": [
+              200
+            ],
+            "recname": []
+          },
+          "unique_cluster_labels": 109
+        }
+      },
+      "model_evidence": "The rat-trained model was evaluated on the cluster-labeled event times in one author-provided visual oddball recording from dorsal cortex. The field potentials supplied no targets for this test.",
+      "next_spike_evaluation": "https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/vertebrate-neural-data/turtle"
+    },
+    {
+      "id": "zebra-finch-song",
+      "species": "Zebra finch (Taeniopygia guttata)",
+      "lineage": "Tetrapoda / Sauropsida / Archosauria / Aves / Passeriformes",
+      "recording_site": "Song motor nucleus RA (robust nucleus of the arcopallium).",
+      "measurement": "Neuropixels channel threshold crossings and microphone audio. Broadband voltage is a separate companion deposit.",
+      "experiment_and_clock": "One bird sang across multiple days. tx stores threshold crossings on the 30 kHz acquisition clock, and the benchmark target is an audio spectrogram.",
+      "independence": "One animal. Hold out sessions/days and keep song renditions intact. The three archive subject labels encode benchmark splits. Minival repeats a subset of calibration trials.",
+      "proposed_task": "Decode the sound spectrogram or forecast a channel event in a later time bin.",
+      "unit_identity": "The 85 tx columns in the inspected file index recording channels. Threshold crossings do not individually identify neurons.",
+      "source": {
+        "accession": "DANDI:001046",
+        "version": "draft",
+        "landing": "https://dandiarchive.org/dandiset/001046/draft",
+        "citation": "Tostado-Marcos, Pablo; Arneodo, Ezequiel Matias; Gentner, Timothy Q.; Gilja, Vikash (2024) FALCON Benchmark B1: zebra finch RA Neuropixels recordings during birdsong (Version draft) [Data set]. DANDI archive. https://dandiarchive.org/dandiset/001046/draft",
+        "metadata_url": "https://api.dandiarchive.org/api/dandisets/001046/versions/draft/info/",
+        "license": "CC-BY-4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "access": "Public archive. Draft collection. Pin the asset identifier and digest.",
+        "asset": {
+          "path": "sub-Finch-z-r12r13-21-held-in-minival/sub-Finch-z-r12r13-21-held-in-minival_ses-20210626.nwb",
+          "asset_metadata": "https://api.dandiarchive.org/api/assets/43119082-43c0-4dee-a6c7-63c5ff71a819/",
+          "download": "https://api.dandiarchive.org/api/assets/43119082-43c0-4dee-a6c7-63c5ff71a819/download/",
+          "bytes": 40999840,
+          "archive_sha256": "dadcb12db523336b6ddfe89ea06b06d2490d3d0811b898088121852d94e42e97"
+        },
+        "data_reuse": "Reuse with attribution, license link and notice of changes, subject to applicable additional terms and third-party rights."
+      },
+      "primary_study": "https://papers.neurips.cc/paper_files/paper/2024/file/8c2e6bb15be1894b8fb4e0f9bcad1739-Paper-Datasets_and_Benchmarks_Track.pdf",
+      "evidence": {
+        "level": "NWB dataset shapes inspected",
+        "observations": {
+          "asset_id": "43119082-43c0-4dee-a6c7-63c5ff71a819",
+          "source_sha256": "dadcb12db523336b6ddfe89ea06b06d2490d3d0811b898088121852d94e42e97",
+          "path": "sub-Finch-z-r12r13-21-held-in-minival/sub-Finch-z-r12r13-21-held-in-minival_ses-20210626.nwb",
+          "nwb_version": "2.7.0",
+          "groups": {
+            "acquisition": [
+              "eval_mask_audio",
+              "tx",
+              "vocalizations"
+            ],
+            "processing": [],
+            "intervals": [
+              "trials"
+            ]
+          },
+          "shape_dtype": {
+            "/acquisition/tx/data": [
+              [
+                54000,
+                85
+              ],
+              "float64"
+            ],
+            "/acquisition/vocalizations/data": [
+              [
+                45000
+              ],
+              "int64"
+            ],
+            "/intervals/trials/id": [
+              [
+                2
+              ],
+              "int64"
+            ]
+          },
+          "range_bytes": 393216
+        }
+      },
+      "model_evidence": "No model evaluation in this register.",
+      "companion_broadband": "https://dandiarchive.org/dandiset/001245"
+    },
+    {
+      "id": "pigeon-visual-entopallium",
+      "species": "Rock pigeon (Columba livia)",
+      "lineage": "Tetrapoda / Sauropsida / Archosauria / Aves / Columbiformes",
+      "recording_site": "Anterior entopallium, a visual forebrain area.",
+      "measurement": "Extracellular channel responses to images. The paper describes mainly multi-unit recordings, a further isolation-quality subset, and repeated responses averaged for its analysis.",
+      "experiment_and_clock": "Sixteen anesthetized pigeons viewed images of objects with variations in category or viewing angle. The primary analysis used mean response 50–500 ms after stimulus onset.",
+      "independence": "Keep channel records with their experiment and bird wherever mappings are documented. Separate objects or categories when testing visual generalization. Never count channels as animals.",
+      "proposed_task": "Predict the response of a channel to a held-out visual stimulus.",
+      "unit_identity": "The checked file has experiment/channel response keys. It offers no demonstrated single-neuron event stream for a next-unit test.",
+      "source": {
+        "accession": "10.6084/m9.figshare.30406729.v1",
+        "doi": "10.6084/m9.figshare.30406729.v1",
+        "version": "Figshare v1",
+        "landing": "https://figshare.com/articles/dataset/_b_Neural_Representation_of_Object_Category_and_Viewpoint_in_the_Entopallium_of_Pigeons_b_/30406729/1",
+        "metadata_url": "https://api.figshare.com/v2/articles/30406729/versions/1",
+        "citation": "Zhu, Juncai (2025). Neural Representation of Object Category and Viewpoint in the Entopallium of Pigeons. figshare. Dataset. https://doi.org/10.6084/m9.figshare.30406729.v1",
+        "license": "CC-BY-4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "access": "Public Figshare deposit. Both neural dictionaries are separate from the stimulus photographs.",
+        "asset": {
+          "path": "dict_class1.pkl",
+          "bytes": 2589318,
+          "download": "https://ndownloader.figshare.com/files/58913521",
+          "archive_checksum": {
+            "md5": "e9a96a38b6a1220fe3669e4d3a395126"
+          }
+        },
+        "data_reuse": "Reuse with attribution, license link and notice of changes, subject to applicable additional terms and third-party rights."
+      },
+      "primary_study": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13647044/",
+      "evidence": {
+        "level": "response dictionary inspected without executing pickle",
+        "observations": {
+          "asset": "dict_class1.pkl",
+          "sha256": "20f4c0069ebbf9ea7efbd079e445e45c440c8a05bebbfba572387abb1aef8bdf",
+          "inspected": "Static pickle opcodes only",
+          "record_example": "ento_exp15_ch20",
+          "response_key_present": true,
+          "number_distinct_experiment_channel_strings": 127
+        }
+      },
+      "model_evidence": "No model evaluation in this register."
+    },
+    {
+      "id": "knifefish-electrosensory",
+      "species": "Brown ghost knifefish (Apteronotus leptorhynchus)",
+      "lineage": "Actinopterygii / Teleostei / Gymnotiformes",
+      "recording_site": "Electrosensory afferents, hindbrain and midbrain in separate recordings.",
+      "measurement": "Afferent single recordings, simultaneously recorded pairs, and central electrophysiology. The listed sample is the hindbrain archive.",
+      "experiment_and_clock": "Responses to weakly electric fish communication signals (chirps) presented at different phases of a background beat. Event and stimulus clocks must come from each file’s documentation.",
+      "independence": "Distinguish simultaneous afferent pairs from cells recorded at different times. Group all trials of each recording, then by animal where IDs are recoverable.",
+      "proposed_task": "Measure whether a held-out chirp can be detected across different beat phases. For population-event questions use only truly simultaneous recordings.",
+      "unit_identity": "A list of single-cell recordings does not form a simultaneous population. Recording type and timing determine the valid target.",
+      "source": {
+        "accession": "10.5061/dryad.d8p66",
+        "doi": "10.5061/dryad.d8p66",
+        "version": "Dryad v1 (2016-08-18)",
+        "landing": "https://doi.org/10.5061/dryad.d8p66",
+        "citation": "Metzen, Hofmann, Chacron. Data from: Neural correlations enable invariant coding and perception of natural stimuli in weakly electric fish. Dryad, 2016.",
+        "metadata_url": "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.d8p66",
+        "version_metadata": "https://datadryad.org/api/v2/versions/12890",
+        "license": "CC0-1.0",
+        "license_url": "https://spdx.org/licenses/CC0-1.0.html",
+        "access": "Public deposit. Use the file link on the landing page. The Dryad download API can require a bearer token.",
+        "asset": {
+          "path": "hindbrain_electrophysiological_recordings.zip",
+          "bytes": 6918917,
+          "asset_metadata": "https://datadryad.org/api/v2/files/50017",
+          "download": "https://datadryad.org/downloads/file_stream/50017",
+          "archive_checksum": {
+            "md5": "c752357e54894b5eb03769b7969f2690"
+          },
+          "mirror_download": "https://zenodo.org/records/4950096/files/hindbrain_electrophysiological_recordings.zip?download=1"
+        },
+        "data_reuse": "Public-domain dedication. Cite the deposit and respect separately identified third-party material."
+      },
+      "primary_study": "https://doi.org/10.7554/eLife.12993",
+      "evidence": {
+        "level": "hindbrain ZIP member directory inspected",
+        "observations": {
+          "outer_object": "hindbrain_electrophysiological_recordings.zip",
+          "outer_checksum": "md5:c752357e54894b5eb03769b7969f2690",
+          "zip_members": 68,
+          "sample_member": "data_hindbrain_resub2/U30.mat",
+          "member_bytes": 195178,
+          "range_bytes": 13061,
+          "inspected": "ZIP central-directory metadata"
+        }
+      },
+      "model_evidence": "No model evaluation in this register.",
+      "afferent_pair_asset_metadata": "https://datadryad.org/api/v2/files/50013",
+      "afferent_pair_download": "https://zenodo.org/records/4950096/files/dual_recordings.zip?download=1",
+      "single_afferent_asset_metadata": "https://datadryad.org/api/v2/files/50015"
+    },
+    {
+      "id": "zebrafish-forebrain-heat",
+      "species": "Zebrafish (Danio rerio)",
+      "lineage": "Actinopterygii / Teleostei / Cypriniformes",
+      "recording_site": "Forebrain in larval zebrafish.",
+      "measurement": "Two-photon fluorescence imaging, including the neural calcium indicator GCaMP6s and a fluorescent cell-type marker.",
+      "experiment_and_clock": "Random-wave temperature stimulation in larvae. Read each series’ imaging clock and optical-channel metadata before assigning an indicator or sampling rate.",
+      "independence": "Eight fish listed. Keep both channels, all optical planes and all sessions of a fish together.",
+      "proposed_task": "Relate temperature history to an identified calcium-indicator channel on a held-out fish. Separate marker channels from neural dynamics.",
+      "unit_identity": "Indicator fluorescence integrates neural activity over time. Extracted or deconvolved calcium events would be inferred quantities.",
+      "source": {
+        "accession": "DANDI:000235",
+        "version": "0.230316.1600",
+        "landing": "https://dandiarchive.org/dandiset/000235/0.230316.1600",
+        "citation": "Haesemeyer, Martin; Balakrishnan, Kaarthik (2023) Thermoregulatory Responses Forebrain (Version 0.230316.1600) [Data set]. DANDI archive. https://doi.org/10.48324/dandi.000235/0.230316.1600",
+        "metadata_url": "https://api.dandiarchive.org/api/dandisets/000235/versions/0.230316.1600/info/",
+        "license": "CC-BY-4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "access": "Public archive. Published version.",
+        "doi": "10.48324/dandi.000235/0.230316.1600",
+        "asset": {
+          "path": "sub-Fish58-GCaMP-vlgut-FBd-5dpf-RandomWave/sub-Fish58-GCaMP-vlgut-FBd-5dpf-RandomWave_ses-20220525T092829_behavior+ophys.nwb",
+          "asset_metadata": "https://api.dandiarchive.org/api/assets/141d29b1-d651-4d10-8fdc-770f9485610c/",
+          "download": "https://api.dandiarchive.org/api/assets/141d29b1-d651-4d10-8fdc-770f9485610c/download/",
+          "bytes": 3994737479,
+          "archive_sha256": "a6082ea8acef8cef3d11ceadd2535e992299843dd77f49e7640dffdb4242ba27"
+        },
+        "data_reuse": "Reuse with attribution, license link and notice of changes, subject to applicable additional terms and third-party rights."
+      },
+      "primary_study": "https://dandiarchive.org/dandiset/000235/0.230316.1600",
+      "evidence": {
+        "level": "NWB imaging-series shapes inspected",
+        "observations": {
+          "asset_id": "141d29b1-d651-4d10-8fdc-770f9485610c",
+          "source_sha256": "a6082ea8acef8cef3d11ceadd2535e992299843dd77f49e7640dffdb4242ba27",
+          "path": "sub-Fish58-GCaMP-vlgut-FBd-5dpf-RandomWave/sub-Fish58-GCaMP-vlgut-FBd-5dpf-RandomWave_ses-20220525T092829_behavior+ophys.nwb",
+          "nwb_version": "2.4.0",
+          "groups_first_four": {
+            "acquisition": [
+              "Z0_0",
+              "Z0_1",
+              "Z10_0",
+              "Z10_1"
+            ],
+            "processing": [
+              "behavior",
+              "ophys"
+            ],
+            "stimulus": [
+              "presentation",
+              "templates"
+            ]
+          },
+          "shape_dtype": {
+            "acquisition/Z0_0": [
+              "data",
+              "imaging_plane",
+              "starting_time"
+            ],
+            "acquisition/Z0_0/data": [
+              [
+                1182,
+                512,
+                512
+              ],
+              "uint8"
+            ],
+            "acquisition/Z0_1": [
+              "data",
+              "imaging_plane",
+              "starting_time"
+            ],
+            "acquisition/Z0_1/data": [
+              [
+                1182,
+                512,
+                512
+              ],
+              "uint8"
+            ]
+          },
+          "range_bytes": 180224
+        }
+      },
+      "model_evidence": "No model evaluation in this register."
+    },
+    {
+      "id": "rat-w-track",
+      "species": "Long–Evans rat (Rattus norvegicus)",
+      "lineage": "Tetrapoda / Mammalia / Rodentia",
+      "recording_site": "Dorsal CA1 of hippocampus and prefrontal cortex.",
+      "measurement": "Sorted extracellular units, local field potentials and tracked position.",
+      "experiment_and_clock": "Eight rats learned alternation on a W-shaped track. Behavioral sessions alternate with rest or sleep. Use each trial’s own start and stop timestamps.",
+      "independence": "Split by rat for cross-animal results. Within an animal keep whole sessions and trips intact. Sorter labels belong to the recording.",
+      "proposed_task": "Rank the next observed unit in the next occupied time bin using past spikes. Compare with a causal rate baseline.",
+      "unit_identity": "Use the unit table, its spike times and recording-local indices. Check censored trials, timestamp ties and sorter quality separately.",
+      "source": {
+        "accession": "DANDI:000978",
+        "version": "0.240511.0307",
+        "landing": "https://dandiarchive.org/dandiset/000978/0.240511.0307",
+        "citation": "Shin, Justin; Jadhav, Shantanu (2024) Single Day W-Track Learning (Version 0.240511.0307) [Data set]. DANDI archive. https://doi.org/10.48324/dandi.000978/0.240511.0307",
+        "metadata_url": "https://api.dandiarchive.org/api/dandisets/000978/versions/0.240511.0307/info/",
+        "license": "CC-BY-4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "access": "Public archive. Published version.",
+        "doi": "10.48324/dandi.000978/0.240511.0307",
+        "asset": {
+          "path": "sub-JDS-SingleDay-JS14/sub-JDS-SingleDay-JS14_behavior+ecephys.nwb",
+          "asset_metadata": "https://api.dandiarchive.org/api/assets/4b7c7959-04b3-4817-8f96-1af6f41888c1/",
+          "download": "https://api.dandiarchive.org/api/assets/4b7c7959-04b3-4817-8f96-1af6f41888c1/download/",
+          "bytes": 28291364968,
+          "archive_sha256": "6b8cf8ce3bbe34374e10a8a310592d1ae9762b20554569bc3c45fcfecdcf67b6"
+        },
+        "data_reuse": "Reuse with attribution, license link and notice of changes, subject to applicable additional terms and third-party rights."
+      },
+      "primary_study": "https://doi.org/10.48324/dandi.000978/0.240511.0307",
+      "evidence": {
+        "level": "NWB unit-table shapes inspected",
+        "observations": {
+          "asset_id": "4b7c7959-04b3-4817-8f96-1af6f41888c1",
+          "source_sha256": "6b8cf8ce3bbe34374e10a8a310592d1ae9762b20554569bc3c45fcfecdcf67b6",
+          "path": "sub-JDS-SingleDay-JS14/sub-JDS-SingleDay-JS14_behavior+ecephys.nwb",
+          "nwb_version": "2.6.0",
+          "groups": {
+            "acquisition": [
+              "ElectricalSeries"
+            ],
+            "processing": [
+              "behavior",
+              "ecephys"
+            ],
+            "units": [
+              "electrodes",
+              "id",
+              "spike_times",
+              "spike_times_index"
+            ],
+            "intervals": [
+              "epoch intervals",
+              "trials"
+            ]
+          },
+          "shape_dtype": {
+            "/units/spike_times": [
+              [
+                1836621
+              ],
+              "float64"
+            ],
+            "/units/spike_times_index": [
+              [
+                72
+              ],
+              "uint64"
+            ],
+            "/units/id": [
+              [
+                72
+              ],
+              "int64"
+            ],
+            "/intervals/trials/id": [
+              [
+                298
+              ],
+              "int64"
+            ]
+          },
+          "range_bytes": 458752
+        }
+      },
+      "model_evidence": "The original next-recorded-unit study fitted on earlier JS14 trips and evaluated later JS14 trips and a second rat, ER1, in the same experiment.",
+      "additional_unit_recording": "https://api.dandiarchive.org/api/assets/b6425692-0f32-4087-8412-aebcfc37cd96/",
+      "next_spike_evaluation": "https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/next-neuron-prediction"
+    },
+    {
+      "id": "mouse-visual-neuropixels",
+      "species": "House mouse (Mus musculus)",
+      "lineage": "Tetrapoda / Mammalia / Rodentia",
+      "recording_site": "Visual cortex, visual thalamus and other sampled structures. Use each probe’s histological location.",
+      "measurement": "Neuropixels sorted spike times in the session NWB. Probe-level files hold field potentials.",
+      "experiment_and_clock": "Visual stimulation includes gratings, natural movies and images. Use the source presentation interval tables and exclude invalid intervals.",
+      "independence": "Hold out mice. Group probes by session and animal. Repeated movie frames require a stimulus-aware split for claims about new visual content.",
+      "proposed_task": "Forecast sorted-unit events under a defined visual stimulus. Freeze channel and unit quality thresholds before comparing mice.",
+      "unit_identity": "The example has 2,779 unit rows before quality filtering. Isolation, refractory-period violations, missing spikes and drift vary across rows.",
+      "source": {
+        "accession": "DANDI:000021",
+        "version": "0.251116.2246",
+        "landing": "https://dandiarchive.org/dandiset/000021/0.251116.2246",
+        "citation": "Siegle, Josh; Wakeman, Wayne; Jia, Xiaoxuan; Heller, Gregg; Ramirez, Tamina; Graddis, Nile; Mei, Nicholas; Durand, Severine (2025) Allen Institute - Visual Coding - Neuropixels (Brain Observatory 1.1 Stimulus Set) (Version 0.251116.2246) [Data set]. DANDI Archive. https://doi.org/10.48324/dandi.000021/0.251116.2246",
+        "metadata_url": "https://api.dandiarchive.org/api/dandisets/000021/versions/0.251116.2246/info/",
+        "license": "CC-BY-4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "access": "Public archive. Published version.",
+        "doi": "10.48324/dandi.000021/0.251116.2246",
+        "asset": {
+          "path": "sub-699733573/sub-699733573_ses-715093703.nwb",
+          "asset_metadata": "https://api.dandiarchive.org/api/assets/58703c97-c0a9-4736-b684-73c85c1a444a/",
+          "download": "https://api.dandiarchive.org/api/assets/58703c97-c0a9-4736-b684-73c85c1a444a/download/",
+          "bytes": 2856232912,
+          "archive_sha256": "8bf172c54eba23835c3780ff91463177d959badb87034a784f024bceb429406a"
+        },
+        "data_reuse": "Reuse with attribution, license link and notice of changes, subject to applicable additional terms and third-party rights."
+      },
+      "primary_study": "https://doi.org/10.1038/s41586-020-03171-x",
+      "evidence": {
+        "level": "NWB unit and stimulus metadata inspected",
+        "observations": {
+          "asset_id": "58703c97-c0a9-4736-b684-73c85c1a444a",
+          "source_sha256": "8bf172c54eba23835c3780ff91463177d959badb87034a784f024bceb429406a",
+          "path": "sub-699733573/sub-699733573_ses-715093703.nwb",
+          "nwb_version": "2.2.2",
+          "groups": {
+            "acquisition": [
+              "raw_running_wheel_rotation",
+              "running_wheel_signal_voltage",
+              "running_wheel_supply_voltage"
+            ],
+            "processing": [
+              "eye_tracking_rig_metadata",
+              "optotagging",
+              "running",
+              "stimulus"
+            ],
+            "units": [
+              "PT_ratio",
+              "amplitude",
+              "amplitude_cutoff",
+              "cluster_id",
+              "cumulative_drift",
+              "d_prime",
+              "firing_rate",
+              "id",
+              "isi_violations",
+              "isolation_distance",
+              "l_ratio",
+              "local_index",
+              "max_drift",
+              "nn_hit_rate",
+              "nn_miss_rate"
+            ],
+            "intervals": [
+              "drifting_gratings_presentations",
+              "flashes_presentations",
+              "gabors_presentations",
+              "invalid_times",
+              "natural_movie_one_presentations",
+              "natural_movie_three_presentations",
+              "natural_scenes_presentations",
+              "spontaneous_presentations",
+              "static_gratings_presentations"
+            ]
+          },
+          "shape_dtype": {
+            "/units/spike_times": [
+              [
+                131242535
+              ],
+              "float64"
+            ],
+            "/units/spike_times_index": [
+              [
+                2779
+              ],
+              "int64"
+            ],
+            "/units/id": [
+              [
+                2779
+              ],
+              "int64"
+            ]
+          },
+          "range_bytes": 1245184
+        }
+      },
+      "model_evidence": "No model evaluation in this register.",
+      "additional_provider_terms": "https://alleninstitute.org/terms-of-use/"
+    },
+    {
+      "id": "macaque-area2-reach",
+      "species": "Rhesus macaque (Macaca mulatta)",
+      "lineage": "Tetrapoda / Mammalia / Primates",
+      "recording_site": "Area 2 of primary somatosensory cortex.",
+      "measurement": "Extracellular sorted unit times recorded with an implanted array.",
+      "experiment_and_clock": "One macaque made center-out reaches with a manipulandum. Some trials included a mechanical perturbation before reaching. Match trial timestamps to motion and applied force.",
+      "independence": "One subject, Han. Respect the source train/test partitions and unit masks. Trials give within-animal replication.",
+      "proposed_task": "Predict activity of held-out units during reach or perturbation, or rank next observed unit within a defined simultaneous subset.",
+      "unit_identity": "The inspected training NWB lists 65 units, including a heldout flag. Sorter labels remain local to the recording.",
+      "source": {
+        "accession": "DANDI:000127",
+        "version": "0.220113.0359",
+        "landing": "https://dandiarchive.org/dandiset/000127/0.220113.0359",
+        "citation": "Chowdhury, Raeed; Miller, Lee (2022) Area2_Bump: macaque somatosensory area 2 spiking activity during reaching with perturbations (Version 0.220113.0359) [Data set]. DANDI archive. https://doi.org/10.48324/dandi.000127/0.220113.0359",
+        "metadata_url": "https://api.dandiarchive.org/api/dandisets/000127/versions/0.220113.0359/info/",
+        "license": "CC-BY-4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "access": "Public archive. Published version.",
+        "doi": "10.48324/dandi.000127/0.220113.0359",
+        "asset": {
+          "path": "sub-Han/sub-Han_desc-train_behavior+ecephys.nwb",
+          "asset_metadata": "https://api.dandiarchive.org/api/assets/ded26b6c-418d-43f5-8a37-dfd072c2dbd4/",
+          "download": "https://api.dandiarchive.org/api/assets/ded26b6c-418d-43f5-8a37-dfd072c2dbd4/download/",
+          "bytes": 1822876234,
+          "archive_sha256": "639b1a03ab813f96fec76681110a1634942476badc0fd4c93d406c24701f5db2"
+        },
+        "data_reuse": "Reuse with attribution, license link and notice of changes, subject to applicable additional terms and third-party rights."
+      },
+      "primary_study": "https://doi.org/10.7554/eLife.48198",
+      "evidence": {
+        "level": "NWB unit and trial shapes inspected",
+        "observations": {
+          "asset_id": "ded26b6c-418d-43f5-8a37-dfd072c2dbd4",
+          "source_sha256": "639b1a03ab813f96fec76681110a1634942476badc0fd4c93d406c24701f5db2",
+          "path": "sub-Han/sub-Han_desc-train_behavior+ecephys.nwb",
+          "nwb_version": "2.4.0",
+          "groups": {
+            "acquisition": [],
+            "processing": [
+              "behavior"
+            ],
+            "units": [
+              "electrodes",
+              "electrodes_index",
+              "heldout",
+              "id",
+              "obs_intervals",
+              "obs_intervals_index",
+              "spike_times",
+              "spike_times_index"
+            ],
+            "intervals": [
+              "trials"
+            ]
+          },
+          "shape_dtype": {
+            "/units/spike_times": [
+              [
+                1017465
+              ],
+              "float64"
+            ],
+            "/units/spike_times_index": [
+              [
+                65
+              ],
+              "uint32"
+            ],
+            "/units/id": [
+              [
+                65
+              ],
+              "int64"
+            ],
+            "/intervals/trials/id": [
+              [
+                826
+              ],
+              "int64"
+            ]
+          },
+          "range_bytes": 327680
+        }
+      },
+      "model_evidence": "No model evaluation in this register."
+    },
+    {
+      "id": "human-ajile12",
+      "species": "Human (Homo sapiens)",
+      "lineage": "Tetrapoda / Mammalia / Primates",
+      "recording_site": "Clinically selected intracranial cortical surface electrodes. Implant coverage varies by participant.",
+      "measurement": "Electrocorticography (ECoG), synchronized with video-derived upper-body joint positions.",
+      "experiment_and_clock": "Twelve participants during natural inpatient activity over 55 semi-continuous days in total. Wrist movement events and pose estimates accompany continuous neural recordings.",
+      "independence": "Hold out whole people for cross-person evaluation. For within-person tests separate days, movement bouts and neighboring windows. The position estimates and ECoG are distinct inputs.",
+      "proposed_task": "Forecast recorded field activity or compare field-based and motion-only prediction of later wrist position. State which inputs the model actually saw.",
+      "unit_identity": "One ECoG contact records a local aggregate voltage. The accompanying pose estimates provide no individual-neuron label.",
+      "source": {
+        "accession": "DANDI:000055",
+        "version": "0.220127.0436",
+        "landing": "https://dandiarchive.org/dandiset/000055/0.220127.0436",
+        "citation": "Peterson, Steven M.; Singh, Satpreet H.; Dichter, Benjamin; Scheid, Micheal; Rao, Rajesh P. N.; Brunton, Bingni W. (2022) AJILE12: Long-term naturalistic human intracranial neural recordings and pose (Version 0.220127.0436) [Data set]. DANDI archive. https://doi.org/10.48324/dandi.000055/0.220127.0436",
+        "metadata_url": "https://api.dandiarchive.org/api/dandisets/000055/versions/0.220127.0436/info/",
+        "license": "CC-BY-4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "access": "Public archive. Published version.",
+        "doi": "10.48324/dandi.000055/0.220127.0436",
+        "asset": {
+          "path": "sub-02/sub-02_ses-3_behavior+ecephys.nwb",
+          "asset_metadata": "https://api.dandiarchive.org/api/assets/42f73251-88be-4407-a7bf-4ea671bbb448/",
+          "download": "https://api.dandiarchive.org/api/assets/42f73251-88be-4407-a7bf-4ea671bbb448/download/",
+          "bytes": 13932801912
+        },
+        "data_reuse": "Reuse with attribution, license link and notice of changes, subject to applicable additional terms and third-party rights."
+      },
+      "primary_study": "https://doi.org/10.1038/s41597-022-01280-y",
+      "evidence": {
+        "level": "provider documentation and asset listing"
+      },
+      "model_evidence": "The separate cross-person wrist work used movement outcomes from this source. Dataset membership alone does not show that a model used cortical voltage as input."
+    },
+    {
+      "id": "human-medial-temporal-units",
+      "species": "Human (Homo sapiens)",
+      "lineage": "Tetrapoda / Mammalia / Primates",
+      "recording_site": "Medial temporal lobe, including amygdala and hippocampus.",
+      "measurement": "Microwire recordings with sorted extracellular units. The NWB release includes a Units table.",
+      "experiment_and_clock": "People undergoing intracranial monitoring viewed images and made recognition-memory judgments. The deposit reports 59 participants. Read event clocks, observation intervals and simultaneous unit membership within each session.",
+      "independence": "Group repeated sessions by participant. Check for duplicate recordings or reused stimulus images across partitions before reporting a cross-person result.",
+      "proposed_task": "Rank the next observed sorted unit within a held-out participant’s simultaneous recording, or decode recognition outcomes from neural responses with a separate validated split.",
+      "unit_identity": "These source-local unit labels support a candidate event target once clock, quality and simultaneous membership are verified. They do not map a cell from one person to another.",
+      "source": {
+        "accession": "DANDI:000004",
+        "version": "0.220126.1852",
+        "landing": "https://dandiarchive.org/dandiset/000004/0.220126.1852",
+        "citation": "Chandravadia, Nand; Liang, Dehua; Schjetnan, Andrea Gomez Palacio; Carlson, April; Faraut, Mailys; Chung, Jeffrey M.; Reed, Chrystal M.; Dichter, Ben; Maoz, Uri; Kalia, Suneil K.; Valiante, Taufik A.; Mamelak, Adam N.; Rutishauser, Ueli (2022) A NWB-based dataset and processing pipeline of human single-neuron activity during a declarative memory task (Version 0.220126.1852) [Data set]. DANDI archive. https://doi.org/10.48324/dandi.000004/0.220126.1852",
+        "metadata_url": "https://api.dandiarchive.org/api/dandisets/000004/versions/0.220126.1852/info/",
+        "license": "CC-BY-4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "access": "Public archive. Published version.",
+        "doi": "10.48324/dandi.000004/0.220126.1852",
+        "asset": {
+          "path": "sub-P10HMH/sub-P10HMH_ses-20060901_ecephys+image.nwb",
+          "asset_metadata": "https://api.dandiarchive.org/api/assets/38304fe9-5f37-4c0d-a741-9cf2bafab9ff/",
+          "download": "https://api.dandiarchive.org/api/assets/38304fe9-5f37-4c0d-a741-9cf2bafab9ff/download/",
+          "bytes": 73156888
+        },
+        "data_reuse": "Reuse with attribution, license link and notice of changes, subject to applicable additional terms and third-party rights."
+      },
+      "primary_study": "https://doi.org/10.1038/s41597-020-0415-9",
+      "evidence": {
+        "level": "provider documentation and asset listing"
+      },
+      "model_evidence": "No model evaluation in this register."
+    },
+    {
+      "id": "human-scalp-motor",
+      "species": "Human (Homo sapiens)",
+      "lineage": "Tetrapoda / Mammalia / Primates",
+      "recording_site": "Scalp over the head, 10–10 EEG electrode montage.",
+      "measurement": "64 electroencephalography (EEG) channels plus EDF+ event annotations.",
+      "experiment_and_clock": "The archive describes 109 volunteers and 14 runs per participant, including actual and imagined fist or foot movements. EEG sampled at 160 Hz. Cue labels depend on the run.",
+      "independence": "Hold out whole participants. Keep trial windows together and never mix imagery, execution and baseline when assigning the motor label.",
+      "proposed_task": "Decode the cue condition in unseen volunteers. Explain when an outcome is an instruction or imagery and when a movement was independently measured.",
+      "unit_identity": "Each scalp channel sums activity from many sources and contains artifacts. Neither electrodes nor cue codes designate neurons.",
+      "source": {
+        "accession": "PhysioNet eegmmidb",
+        "version": "1.0.0",
+        "doi": "10.13026/C28G6P",
+        "landing": "https://physionet.org/content/eegmmidb/1.0.0/",
+        "citation": "Schalk and colleagues. EEG Motor Movement/Imagery Dataset. PhysioNet, version 1.0.0.",
+        "metadata_url": "https://physionet.org/content/eegmmidb/1.0.0/",
+        "license": "ODC-By-1.0",
+        "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+        "access": "Open PhysioNet release. The data page requires attribution under the Open Data Commons Attribution License v1.0.",
+        "asset": {
+          "path": "S001/S001R03.edf",
+          "download": "https://physionet.org/files/eegmmidb/1.0.0/S001/S001R03.edf",
+          "bytes": 2596896
+        },
+        "data_reuse": "Database reuse requires attribution and preservation of applicable notices. Consult the release and licence."
+      },
+      "primary_study": "https://physionet.org/content/eegmmidb/1.0.0/",
+      "evidence": {
+        "level": "EDF+ header inspected, zero waveform samples read",
+        "observations": {
+          "header_bytes_read": 16896,
+          "number_of_signals_including_annotation": 65,
+          "record_count": 125,
+          "record_duration_s": 1.0,
+          "channel_examples": [
+            "Fc5.",
+            "Fc3.",
+            "Fc1.",
+            "EDF Annotations"
+          ],
+          "data_samples_read": 0,
+          "header_sha256": "4570d7191cfd76a3b0a4e5dd4cffc5807d15903221e4483928eb65c2856cc083"
+        }
+      },
+      "model_evidence": "No model evaluation in this register."
+    }
+  ]
+}

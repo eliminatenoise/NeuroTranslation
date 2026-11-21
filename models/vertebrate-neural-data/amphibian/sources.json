@@ -1,0 +1,104 @@
+{
+  "dataset": {
+    "doi": "10.5061/dryad.1f1rc",
+    "version": 1,
+    "version_id": 1813,
+    "file_id": 10783,
+    "name": "error_robust_mode_data.zip",
+    "size_bytes": 87524253,
+    "publisher_md5": "f34c92b51f2abcc3ff965500176ff9fc",
+    "verified_sha256": "f5ffc42ef4db643c83c70ac3a3b727e3192478c1401bd796184d8856de8a6039",
+    "license": "CC0-1.0",
+    "zenodo_record": 4976473,
+    "source_methods_doi": "10.1371/journal.pcbi.1005148",
+    "full_original_file": "https://zenodo.org/api/records/4976473/files/error_robust_mode_data.zip/content",
+    "author_file_metadata": "https://datadryad.org/api/v2/versions/1813/files"
+  },
+  "members": [
+    {
+      "member": "mode_paper_data/repeated_natural_movie/data.mat",
+      "sha256": "46b7964dbe41516cb8744a42ce9ade4d0a91c9e122354bdc729a98e5414ff676",
+      "bytes": 10028085,
+      "experiment_date": "05-29-2014",
+      "sorted_cell_entries": 178,
+      "source_analysis_cells": 170,
+      "source_repeat_markers": 73,
+      "markers_at_least_10s": 73,
+      "markers_shorter_than_10s": 0,
+      "selected_one_based_repeat_rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "sample_rate_Hz": 10000,
+      "global_within_unit_inversions": 54
+    },
+    {
+      "member": "mode_paper_data/white_noise_checkerboard/data.mat",
+      "sha256": "4dfaccb7fbe658f1667b4a16941a9f75e545f4e3396d6a23472516b460ba2f06",
+      "bytes": 1964531,
+      "experiment_date": null,
+      "sorted_cell_entries": 155,
+      "source_analysis_cells": null,
+      "source_repeat_markers": 69,
+      "markers_at_least_10s": 69,
+      "markers_shorter_than_10s": 0,
+      "selected_one_based_repeat_rows": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "sample_rate_Hz": 10000,
+      "global_within_unit_inversions": 0
+    },
+    {
+      "member": "mode_paper_data/randomly_moving_bar/data.mat",
+      "sha256": "fac11df016fdc2180ad43bc1ce271d8c27875543115d63a0fde55a1d948a3adf",
+      "bytes": 6397907,
+      "experiment_date": null,
+      "sorted_cell_entries": 140,
+      "source_analysis_cells": null,
+      "source_repeat_markers": 238,
+      "markers_at_least_10s": 108,
+      "markers_shorter_than_10s": 130,
+      "selected_one_based_repeat_rows": [
+        1,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        28,
+        29,
+        30
+      ],
+      "sample_rate_Hz": 10000,
+      "global_within_unit_inversions": 0
+    }
+  ],
+  "inspected_source_not_used": {
+    "doi": "10.5061/dryad.4qrfj6qm8",
+    "version": 3,
+    "version_id": 334025,
+    "file": "movieBinnedSpiking.mat",
+    "size_bytes": 733167,
+    "publisher_sha256": "fc09c6366614c54d77e2d1ccfcfca69e884e18996a42be337f7911cad202a162",
+    "resolution_ms": 16.667,
+    "basis": "Dryad dataset methods and public file manifest. No spike times reconstructed from binned movie responses."
+  }
+}

@@ -1623,5 +1623,14 @@
     "motion_study": "docs/papers/first-use-body/index.html",
     "offline": "docs/first-use-body-offline.zip",
     "optional_invertebrate_evidence": "Invertebrate recordings are optional. To test their value, train otherwise matched models with and without them, then compare their predictions on the same held-out vertebrates."
+  },
+  "vertebrate_neural_data": {
+    "reader": "docs/vertebrate-neural-data/index.html",
+    "register": "models/vertebrate-neural-data/datasets.json",
+    "original_rat_study": "docs/papers/next-neuron-prediction/index.html",
+    "turtle_test": "models/vertebrate-neural-data/turtle/README.md",
+    "salamander_test": "models/vertebrate-neural-data/amphibian/README.md",
+    "comparison": "docs/when-fly-and-worm-data-help.md",
+    "scope": "The register counts source deposits. The original two-rat study and the separate turtle dorsal cortex and salamander retina tests use recorded spike times and local unit labels. Neither the deposit count nor these three experiments measures general transfer across vertebrates."
   }
 }

@@ -196,3 +196,7 @@ The shared model’s average errors were slightly lower than those of the separa
 ![Mean absolute error and uncertainty for the shared model compared with single-task models. The paired intervals for both tasks include zero.](figures/transfer-comparison.png)
 
 [Download the figure as a PDF](figures/transfer-comparison.pdf) · [Figure source](figures/plot_transfer.py)
+
+## Vertebrate neural recordings
+
+[Browse the recording sources](https://eliminatenoise.github.io/NeuroTranslation/vertebrate-neural-data/) by animal and measurement. The fitted next-spike model has separate evaluations on [turtle cortex](vertebrate-neural-data/turtle/) and [salamander retina](vertebrate-neural-data/amphibian/). The original [two-rat study](next-neuron-prediction/) includes the fitted coefficients and controls.

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vertebrate neural recordings · NeuroTranslation</title>
+<meta name="description" content="Browse vertebrate neural data by lineage and recording method. Compare what a rat-trained spike forecast did on a turtle and an isolated salamander retina.">
+<style>
+:root{color-scheme:light;--ink:#172f34;--muted:#46636a;--teal:#07595e;--line:#bdcfcb;--paper:#fafaf6;--wash:#e6eeea}
+*{box-sizing:border-box}html{scroll-padding-top:1rem}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.52 "Source Sans 3",Arial,sans-serif}
+main,header,footer{width:min(100% - 2.4rem,72rem);margin:auto}header,footer{padding:1rem 0}header{border-bottom:1px solid var(--line)}footer{border-top:1px solid var(--line);color:var(--muted)}
+a{color:var(--teal);font-weight:600;text-underline-offset:.18em;text-decoration-thickness:.08em}a:hover{text-decoration-thickness:.18em}a:focus-visible,summary:focus-visible{outline:3px solid #983d24;outline-offset:3px}
+h1,h2,h3,h4{line-height:1.15;letter-spacing:-.025em}h1{font-size:clamp(2.25rem,6vw,4.65rem);max-width:17ch;margin:.65em 0 .27em}h2{font-size:clamp(1.65rem,4vw,2.45rem);margin:0 0 .6em}h3{font-size:1.45rem}h4{font-size:1.18rem;margin:0}
+.intro{max-width:69ch;font-size:1.15rem;margin:0 0 1rem}.start,nav{display:flex;gap:.5rem 1.2rem;flex-wrap:wrap}.start{margin:1rem 0 2.7rem}
+.block{padding:2rem 0;border-top:1px solid var(--line)}.block>p{max-width:76ch}nav a{border:1px solid var(--line);padding:.35rem .7rem;border-radius:.25rem;text-decoration:none}nav a:hover{background:var(--wash)}
+.studies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem}.study{border-top:4px solid var(--teal);padding-top:.8rem}.study h3{margin:.15rem 0}.study p{margin:.65rem 0}
+small{font-size:.78rem;font-weight:500;letter-spacing:0;color:var(--muted)}.entry{padding:1rem 0;border-top:1px solid var(--line)}.entry p{margin:.25rem 0;max-width:80ch}.entry .signal{color:var(--teal);font-weight:650}.checked{color:var(--muted);font-size:.92rem}
+details{margin:.6rem 0}summary{color:var(--teal);cursor:pointer;width:fit-content;font-weight:600}.entry details p{margin:.55rem 0;overflow-wrap:anywhere}#deposits>section{margin-top:2rem}.counts{display:flex;gap:.4rem 1.2rem;flex-wrap:wrap;padding:0;list-style:none}.counts b{font-variant-numeric:tabular-nums}
+@media(max-width:45rem){.studies{grid-template-columns:1fr}.block{padding:1.6rem 0}.start{margin-bottom:1.75rem}}
+@media print{body{background:white;font-size:10pt}.start,header,nav,footer{display:none}.studies{display:block}.entry,.study{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header><a href="../START.html">NeuroTranslation</a></header>
+<main>
+<h1>Vertebrate neural recordings</h1>
+<p class="intro">An electrode picks up electrical impulses. Spike sorting can assign those impulses to individual cells. A camera can follow changes in calcium fluorescence across a fish’s brain. Both record neural activity, but they answer different questions. These $count deposits show what was measured, which files were checked and where a prediction was tested.</p>
+<div class="start"><a href="#deposits">Find a data source</a><a href="#measured">Read the spike tests</a><a href="../next-neuron-prediction/index.html">Try a fictional spike sequence</a></div>
+<section class="block" id="measured" aria-labelledby="results-title">
+<h2 id="results-title">Which recorded unit spikes next?</h2>
+<p>Spike sorting assigns detected electrical events to local clusters called units. Five coefficients fitted on one rat’s spike history were applied to other recordings with their own unit labels. Each forecast ranks the units for the next millisecond that contains a spike. Bins with multiple target spikes have no single scored identity.</p>
+<div class="studies">
+<article class="study"><h3>Rat · hippocampus and prefrontal cortex</h3><p>The original study tested later trips from the training rat and trips from a second rat. The second recording had $rat_units candidate units. A running count almost matched the fitted model’s first-choice accuracy.</p><a href="../papers/next-neuron-prediction/index.html">Read the two-rat study</a></article>
+<article class="study"><h3>Turtle · dorsal cortex</h3><p>In one recording during visual stimulation, the fitted model assigned better probabilities than running counts across $turtle_n scored transitions. Log loss was $turtle_model against $turtle_count, where lower is better. Giving each target cluster equal weight reversed that comparison. The archive gives each cluster a local label with uncertain single-cell identity.</p><a href="$model/turtle">Read the turtle analysis</a></article>
+<article class="study"><h3>Salamander · isolated retina</h3><p>Three visual stimuli supplied $salamander_n scored forecasts from sorted retinal ganglion-cell spikes. A rule that favoured recently active cells beat the rat fit for every stimulus. Giving each stimulus equal weight, log loss was $sal_recency for that rule and $sal_model for the fitted model. The archive does not identify an animal for each experiment.</p><a href="$model/amphibian">Read the salamander analysis</a></article>
+</div>
+</section>
+<section class="block" id="deposits" aria-labelledby="deposits-title">
+<h2 id="deposits-title">Find a data source</h2>
+<p>Choose a lineage, then open a deposit for its data and access terms. A listing records what the provider describes. A file check names the header, table or other content inspected. The spike tests above use observed events from three of the listed deposits. The register includes human source descriptions and contains no participant recordings.</p>
+<nav aria-label="Jump to a vertebrate group">$jumps</nav>
+<p>Turtles and birds are separate branches of the reptile lineage. The counts refer to deposits. Two deposits can share animals, researchers or recordings.</p>
+<details><summary>Count deposits by recorded signal</summary><p>Each deposit appears under one label for its selected data, even where the archive includes other measurements.</p><ul class="counts">$signals</ul></details>
+$groups
+</section>
+<section class="block" aria-labelledby="scope-title"><h2 id="scope-title">What could a fly or worm contribute?</h2>
+<p>FlyWire traces connections in a fly brain. Reconstructions of worms at different ages show how their wiring differs across development. They can suggest which connections to test. Predicting activity in a vertebrate requires a separate experiment on a vertebrate recording.</p>
+<a href="$github/blob/main/docs/when-fly-and-worm-data-help.md">Read the comparative sources and proposed test</a></section>
+</main>
+<footer>Register $edition · <a href="datasets.json" download>Download the dataset register (JSON)</a> · <a href="$model">Source notes and analysis code</a></footer>
+</body></html>

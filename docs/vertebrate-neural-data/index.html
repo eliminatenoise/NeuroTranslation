@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vertebrate neural recordings · NeuroTranslation</title>
+<meta name="description" content="Browse vertebrate neural data by lineage and recording method. Compare what a rat-trained spike forecast did on a turtle and an isolated salamander retina.">
+<style>
+:root{color-scheme:light;--ink:#172f34;--muted:#46636a;--teal:#07595e;--line:#bdcfcb;--paper:#fafaf6;--wash:#e6eeea}
+*{box-sizing:border-box}html{scroll-padding-top:1rem}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.52 "Source Sans 3",Arial,sans-serif}
+main,header,footer{width:min(100% - 2.4rem,72rem);margin:auto}header,footer{padding:1rem 0}header{border-bottom:1px solid var(--line)}footer{border-top:1px solid var(--line);color:var(--muted)}
+a{color:var(--teal);font-weight:600;text-underline-offset:.18em;text-decoration-thickness:.08em}a:hover{text-decoration-thickness:.18em}a:focus-visible,summary:focus-visible{outline:3px solid #983d24;outline-offset:3px}
+h1,h2,h3,h4{line-height:1.15;letter-spacing:-.025em}h1{font-size:clamp(2.25rem,6vw,4.65rem);max-width:17ch;margin:.65em 0 .27em}h2{font-size:clamp(1.65rem,4vw,2.45rem);margin:0 0 .6em}h3{font-size:1.45rem}h4{font-size:1.18rem;margin:0}
+.intro{max-width:69ch;font-size:1.15rem;margin:0 0 1rem}.start,nav{display:flex;gap:.5rem 1.2rem;flex-wrap:wrap}.start{margin:1rem 0 2.7rem}
+.block{padding:2rem 0;border-top:1px solid var(--line)}.block>p{max-width:76ch}nav a{border:1px solid var(--line);padding:.35rem .7rem;border-radius:.25rem;text-decoration:none}nav a:hover{background:var(--wash)}
+.studies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem}.study{border-top:4px solid var(--teal);padding-top:.8rem}.study h3{margin:.15rem 0}.study p{margin:.65rem 0}
+small{font-size:.78rem;font-weight:500;letter-spacing:0;color:var(--muted)}.entry{padding:1rem 0;border-top:1px solid var(--line)}.entry p{margin:.25rem 0;max-width:80ch}.entry .signal{color:var(--teal);font-weight:650}.checked{color:var(--muted);font-size:.92rem}
+details{margin:.6rem 0}summary{color:var(--teal);cursor:pointer;width:fit-content;font-weight:600}.entry details p{margin:.55rem 0;overflow-wrap:anywhere}#deposits>section{margin-top:2rem}.counts{display:flex;gap:.4rem 1.2rem;flex-wrap:wrap;padding:0;list-style:none}.counts b{font-variant-numeric:tabular-nums}
+@media(max-width:45rem){.studies{grid-template-columns:1fr}.block{padding:1.6rem 0}.start{margin-bottom:1.75rem}}
+@media print{body{background:white;font-size:10pt}.start,header,nav,footer{display:none}.studies{display:block}.entry,.study{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header><a href="../START.html">NeuroTranslation</a></header>
+<main>
+<h1>Vertebrate neural recordings</h1>
+<p class="intro">An electrode picks up electrical impulses. Spike sorting can assign those impulses to individual cells. A camera can follow changes in calcium fluorescence across a fish’s brain. Both record neural activity, but they answer different questions. These 15 deposits show what was measured, which files were checked and where a prediction was tested.</p>
+<div class="start"><a href="#deposits">Find a data source</a><a href="#measured">Read the spike tests</a><a href="../next-neuron-prediction/index.html">Try a fictional spike sequence</a></div>
+<section class="block" id="measured" aria-labelledby="results-title">
+<h2 id="results-title">Which recorded unit spikes next?</h2>
+<p>Spike sorting assigns detected electrical events to local clusters called units. Five coefficients fitted on one rat’s spike history were applied to other recordings with their own unit labels. Each forecast ranks the units for the next millisecond that contains a spike. Bins with multiple target spikes have no single scored identity.</p>
+<div class="studies">
+<article class="study"><h3>Rat · hippocampus and prefrontal cortex</h3><p>The original study tested later trips from the training rat and trips from a second rat. The second recording had 122 candidate units. A running count almost matched the fitted model’s first-choice accuracy.</p><a href="../papers/next-neuron-prediction/index.html">Read the two-rat study</a></article>
+<article class="study"><h3>Turtle · dorsal cortex</h3><p>In one recording during visual stimulation, the fitted model assigned better probabilities than running counts across 6,978 scored transitions. Log loss was 3.992 against 4.044, where lower is better. Giving each target cluster equal weight reversed that comparison. The archive gives each cluster a local label with uncertain single-cell identity.</p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/vertebrate-neural-data/turtle">Read the turtle analysis</a></article>
+<article class="study"><h3>Salamander · isolated retina</h3><p>Three visual stimuli supplied 34,490 scored forecasts from sorted retinal ganglion-cell spikes. A rule that favoured recently active cells beat the rat fit for every stimulus. Giving each stimulus equal weight, log loss was 4.419 for that rule and 4.507 for the fitted model. The archive does not identify an animal for each experiment.</p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/vertebrate-neural-data/amphibian">Read the salamander analysis</a></article>
+</div>
+</section>
+<section class="block" id="deposits" aria-labelledby="deposits-title">
+<h2 id="deposits-title">Find a data source</h2>
+<p>Choose a lineage, then open a deposit for its data and access terms. A listing records what the provider describes. A file check names the header, table or other content inspected. The spike tests above use observed events from three of the listed deposits. The register includes human source descriptions and contains no participant recordings.</p>
+<nav aria-label="Jump to a vertebrate group"><a href="#fish">Ray-finned fishes (2)</a>
+<a href="#amphibians">Amphibians (4)</a>
+<a href="#turtles">Turtles (1)</a>
+<a href="#birds">Birds (2)</a>
+<a href="#mammals">Mammals (6)</a></nav>
+<p>Turtles and birds are separate branches of the reptile lineage. The counts refer to deposits. Two deposits can share animals, researchers or recordings.</p>
+<details><summary>Count deposits by recorded signal</summary><p>Each deposit appears under one label for its selected data, even where the archive includes other measurements.</p><ul class="counts"><li>Spike times <b>3</b></li><li>Spike times and field potentials <b>3</b></li><li>Binned spikes <b>1</b></li><li>Cell voltage or current <b>1</b></li><li>Cortical surface voltage <b>1</b></li><li>Electrophysiology <b>1</b></li><li>Extracellular voltage <b>1</b></li><li>Fluorescence imaging <b>1</b></li><li>Scalp voltage <b>1</b></li><li>Threshold crossings <b>1</b></li><li>Visual response summaries <b>1</b></li></ul></details>
+<section id="fish" aria-labelledby="fish-title"><h3 id="fish-title">Ray-finned fishes <small>2 deposits</small></h3><article class="entry" id="knifefish-electrosensory">
+      <h4>Brown ghost knifefish (Apteronotus leptorhynchus)</h4>
+      <p class="signal">Electrophysiology</p>
+      <p>Electrosensory afferents, hindbrain and midbrain in separate recordings. Afferent single recordings, simultaneously recorded pairs, and central electrophysiology. The listed sample is the hindbrain archive.</p>
+      <p class="checked">Source check · hindbrain ZIP member directory inspected.</p>
+      <a href="https://doi.org/10.5061/dryad.d8p66">Data deposit</a> · <a href="https://doi.org/10.7554/eLife.12993">Original study</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>Responses to weakly electric fish communication signals (chirps) presented at different phases of a background beat. Event and stimulus clocks must come from each file’s documentation.</p>
+      <p>A list of single-cell recordings does not form a simultaneous population. Recording type and timing determine the valid target. Distinguish simultaneous afferent pairs from cells recorded at different times. Group all trials of each recording, then by animal where IDs are recoverable.</p>
+      <p>Public deposit. Use the file link on the landing page. The Dryad download API can require a bearer token.</p>
+      <p>Metzen, Hofmann, Chacron. Data from: Neural correlations enable invariant coding and perception of natural stimuli in weakly electric fish. Dryad, 2016. · <a href="https://spdx.org/licenses/CC0-1.0.html">CC0-1.0</a></p></details>
+    </article><article class="entry" id="zebrafish-forebrain-heat">
+      <h4>Zebrafish (Danio rerio)</h4>
+      <p class="signal">Fluorescence imaging</p>
+      <p>Forebrain in larval zebrafish. Two-photon fluorescence imaging, including the neural calcium indicator GCaMP6s and a fluorescent cell-type marker.</p>
+      <p class="checked">Source check · NWB imaging-series shapes inspected.</p>
+      <a href="https://dandiarchive.org/dandiset/000235/0.230316.1600">Data deposit</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>Random-wave temperature stimulation in larvae. Read each series’ imaging clock and optical-channel metadata before assigning an indicator or sampling rate.</p>
+      <p>Indicator fluorescence integrates neural activity over time. Extracted or deconvolved calcium events would be inferred quantities. Eight fish listed. Keep both channels, all optical planes and all sessions of a fish together.</p>
+      <p>Public archive. Published version.</p>
+      <p>Haesemeyer, Martin; Balakrishnan, Kaarthik (2023) Thermoregulatory Responses Forebrain (Version 0.230316.1600) [Data set]. DANDI archive. https://doi.org/10.48324/dandi.000235/0.230316.1600 · <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p></details>
+    </article></section>
+<section id="amphibians" aria-labelledby="amphibians-title"><h3 id="amphibians-title">Amphibians <small>4 deposits</small></h3><article class="entry" id="salamander-timed-retina">
+      <h4>Larval tiger salamander (species epithet unspecified in the cited methods)</h4>
+      <p class="signal">Spike times</p>
+      <p>Isolated retina, ganglion cells. Extracellular array. Sorted ganglion-cell event times.</p>
+      <p class="checked">Source check · archive member directory inspected.</p>
+      <a href="https://doi.org/10.5061/dryad.1f1rc">Data deposit</a> · <a href="https://doi.org/10.1371/journal.pcbi.1005148">Original study</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/vertebrate-neural-data/amphibian">Spike forecast results</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>Four visual protocols include repeated and unrepeated movies, white-noise checkerboard and a moving bar. Acquisition sampled at 10 kHz. Check the native MAT time units separately.</p>
+      <p>The sort supplies recording-local labels. Equal timestamps need a tie rule. An observed unit set covers only part of a retina. Keep each preparation and stimulus run together. Never assume that cell indices align across retinas or protocols. A repeated movie can leak stimulus identity across trial splits.</p>
+      <p>Public deposit. Use the file link on the landing page. The Dryad download API can require a bearer token.</p>
+      <p>Loback, Tkačik, Prentice, Ioffe, Berry II, Marre, Berry. Data from: Error-robust modes of the retinal population code. Dryad, 2017. · <a href="https://spdx.org/licenses/CC0-1.0.html">CC0-1.0</a></p></details>
+    </article><article class="entry" id="salamander-binned-movies">
+      <h4>Larval tiger salamander (species epithet unspecified in the deposit description)</h4>
+      <p class="signal">Binned spikes</p>
+      <p>Isolated retina, ganglion cells. Extracellular spikes curated by template sorting, released as binary activity per cell per bin.</p>
+      <p class="checked">Source check · provider documentation and asset listing.</p>
+      <a href="https://doi.org/10.5061/dryad.4qrfj6qm8">Data deposit</a> · <a href="https://doi.org/10.1073/pnas.2313676121">Original study</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>Five 20-second natural movies with at least 80 repeats each. The source reports 16.667 ms bins and 93 cells.</p>
+      <p>Multiple cells can be active in the same bin. Their sub-bin firing order is lost. Group by retina, movie and repeat. This release describes a single retinal preparation. Two deposits with overlapping authorship do not establish independent animals.</p>
+      <p>Public deposit. Use the file link on the landing page. The Dryad download API can require a bearer token.</p>
+      <p>Palmer, Holmes, Hoshal, Bojanek, Salisbury, Berry, Marre. Larval salamander retinal population data in response to natural movies from the Chicago Motion Database. Dryad, 2024. · <a href="https://spdx.org/licenses/CC0-1.0.html">CC0-1.0</a></p></details>
+    </article><article class="entry" id="xenopus-tectal-current-steps">
+      <h4>African clawed frog (Xenopus laevis)</h4>
+      <p class="signal">Cell voltage or current</p>
+      <p>Optic tectum in developing tadpoles. Whole-cell recordings. The current-injection folders contain single-neuron membrane voltage. Voltage-clamp folders contain currents.</p>
+      <p class="checked">Source check · individual MAT variable directory inspected.</p>
+      <a href="https://doi.org/10.5061/dryad.18kk6">Data deposit</a> · <a href="https://doi.org/10.7554/eLife.11351">Original study</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>Step and cosine current injections, optic nerve stimulation, and spontaneous miniature currents have distinct protocols. Use sweep timing and command waveform for the chosen cell.</p>
+      <p>A single patched cell has a physical identity for a sweep. Separate cells are not a simultaneously observed population. The master file maps sweeps to a cell ID. Group all sweeps from one cell, then by animal where a mapping is available. Without animal IDs, report cell-level generalization only.</p>
+      <p>Public deposit. Use the file link on the landing page. The Dryad download API can require a bearer token.</p>
+      <p>Ciarleglio, Khakhalin, Wang, Constantino, Yip, Aizenman. Data from: Multivariate analysis of electrophysiological diversity of Xenopus visual neurons during development and plasticity. Dryad, 2016. · <a href="https://spdx.org/licenses/CC0-1.0.html">CC0-1.0</a></p></details>
+    </article><article class="entry" id="cane-toad-mesh">
+      <h4>Cane toad (Rhinella marina)</h4>
+      <p class="signal">Extracellular voltage</p>
+      <p>Telencephalon. Raw extracellular microelectrode voltages in Intan RHD files. Sorting was part of the study.</p>
+      <p class="checked">Source check · provider documentation and asset listing.</p>
+      <a href="https://doi.org/10.5061/dryad.np5hqc03s">Data deposit</a> · <a href="https://doi.org/10.1016/j.jneumeth.2025.110449">Original study</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>Representative one-minute snippets from multiple days in awake, partially restrained or anesthetized animals. Conditions depend on the individual and date.</p>
+      <p>A raw electrode can detect several neurons. A new sort needs its own unit quality checks and event-time validation. Group the six specimen folders by toad, keep acquisition dates and continuous recordings together. Consecutive minutes and electrodes in one animal share a source.</p>
+      <p>Public deposit. Use the file link on the landing page. The Dryad download API can require a bearer token.</p>
+      <p>Shaykevich, Woods, O&#x27;Connell, Hong. Raw electrophysiology recording files from toads implanted with flexible mesh electronics. Dryad, 2025. · <a href="https://spdx.org/licenses/CC0-1.0.html">CC0-1.0</a></p></details>
+    </article></section>
+<section id="turtles" aria-labelledby="turtles-title"><h3 id="turtles-title">Turtles <small>1 deposit</small></h3><article class="entry" id="slider-turtle-dorsal-cortex">
+      <h4>Red-eared slider (Trachemys scripta elegans)</h4>
+      <p class="signal">Spike times and field potentials</p>
+      <p>Dorsal visual cortex. Two distinct products. Downsampled local field potential (LFP) and derived components, plus figure data with cluster-labeled spike timestamps.</p>
+      <p class="checked">Source check · author MAT and raster code inspected.</p>
+      <a href="https://doi.org/10.5061/dryad.k98sf7mm6">Data deposit</a> · <a href="https://doi.org/10.1126/sciadv.ady9659">Original study</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/vertebrate-neural-data/turtle">Spike forecast results</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>Behaving turtles saw a visual oddball sequence while their eyes and heads were tracked. The raster code uses milliseconds. Its 200 stimulus onsets are sorted by condition.</p>
+      <p>109 distinct cluster labels occur in the inspected array. The label count does not certify 109 well-isolated neurons. LFP and its principal components contain no cell IDs. Use recname and the animal-to-session mapping where available. Restore true time from onset values. The inspected spike example represents one recording.</p>
+      <p>Public deposit. Use the file link on the landing page. The Dryad download API can require a bearer token.</p>
+      <p>Shein-Idelson, Becker, Leberstein. Data from: View invariant representations in ancestral cortex. Dryad, 2025. · <a href="https://spdx.org/licenses/CC0-1.0.html">CC0-1.0</a></p></details>
+    </article></section>
+<section id="birds" aria-labelledby="birds-title"><h3 id="birds-title">Birds <small>2 deposits</small></h3><article class="entry" id="zebra-finch-song">
+      <h4>Zebra finch (Taeniopygia guttata)</h4>
+      <p class="signal">Threshold crossings</p>
+      <p>Song motor nucleus RA (robust nucleus of the arcopallium). Neuropixels channel threshold crossings and microphone audio. Broadband voltage is a separate companion deposit.</p>
+      <p class="checked">Source check · NWB dataset shapes inspected.</p>
+      <a href="https://dandiarchive.org/dandiset/001046/draft">Data deposit</a> · <a href="https://papers.neurips.cc/paper_files/paper/2024/file/8c2e6bb15be1894b8fb4e0f9bcad1739-Paper-Datasets_and_Benchmarks_Track.pdf">Original study</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>One bird sang across multiple days. tx stores threshold crossings on the 30 kHz acquisition clock, and the benchmark target is an audio spectrogram.</p>
+      <p>The 85 tx columns in the inspected file index recording channels. Threshold crossings do not individually identify neurons. One animal. Hold out sessions/days and keep song renditions intact. The three archive subject labels encode benchmark splits. Minival repeats a subset of calibration trials.</p>
+      <p>Public archive. Draft collection. Pin the asset identifier and digest.</p>
+      <p>Tostado-Marcos, Pablo; Arneodo, Ezequiel Matias; Gentner, Timothy Q.; Gilja, Vikash (2024) FALCON Benchmark B1: zebra finch RA Neuropixels recordings during birdsong (Version draft) [Data set]. DANDI archive. https://dandiarchive.org/dandiset/001046/draft · <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p></details>
+    </article><article class="entry" id="pigeon-visual-entopallium">
+      <h4>Rock pigeon (Columba livia)</h4>
+      <p class="signal">Visual response summaries</p>
+      <p>Anterior entopallium, a visual forebrain area. Extracellular channel responses to images. The paper describes mainly multi-unit recordings, a further isolation-quality subset, and repeated responses averaged for its analysis.</p>
+      <p class="checked">Source check · response dictionary inspected without executing pickle.</p>
+      <a href="https://figshare.com/articles/dataset/_b_Neural_Representation_of_Object_Category_and_Viewpoint_in_the_Entopallium_of_Pigeons_b_/30406729/1">Data deposit</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13647044/">Original study</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>Sixteen anesthetized pigeons viewed images of objects with variations in category or viewing angle. The primary analysis used mean response 50–500 ms after stimulus onset.</p>
+      <p>The checked file has experiment/channel response keys. It offers no demonstrated single-neuron event stream for a next-unit test. Keep channel records with their experiment and bird wherever mappings are documented. Separate objects or categories when testing visual generalization. Never count channels as animals.</p>
+      <p>Public Figshare deposit. Both neural dictionaries are separate from the stimulus photographs.</p>
+      <p>Zhu, Juncai (2025). Neural Representation of Object Category and Viewpoint in the Entopallium of Pigeons. figshare. Dataset. https://doi.org/10.6084/m9.figshare.30406729.v1 · <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p></details>
+    </article></section>
+<section id="mammals" aria-labelledby="mammals-title"><h3 id="mammals-title">Mammals <small>6 deposits</small></h3><article class="entry" id="rat-w-track">
+      <h4>Long–Evans rat (Rattus norvegicus)</h4>
+      <p class="signal">Spike times and field potentials</p>
+      <p>Dorsal CA1 of hippocampus and prefrontal cortex. Sorted extracellular units, local field potentials and tracked position.</p>
+      <p class="checked">Source check · NWB unit-table shapes inspected.</p>
+      <a href="https://dandiarchive.org/dandiset/000978/0.240511.0307">Data deposit</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/next-neuron-prediction">Spike forecast results</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>Eight rats learned alternation on a W-shaped track. Behavioral sessions alternate with rest or sleep. Use each trial’s own start and stop timestamps.</p>
+      <p>Use the unit table, its spike times and recording-local indices. Check censored trials, timestamp ties and sorter quality separately. Split by rat for cross-animal results. Within an animal keep whole sessions and trips intact. Sorter labels belong to the recording.</p>
+      <p>Public archive. Published version.</p>
+      <p>Shin, Justin; Jadhav, Shantanu (2024) Single Day W-Track Learning (Version 0.240511.0307) [Data set]. DANDI archive. https://doi.org/10.48324/dandi.000978/0.240511.0307 · <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p></details>
+    </article><article class="entry" id="mouse-visual-neuropixels">
+      <h4>House mouse (Mus musculus)</h4>
+      <p class="signal">Spike times and field potentials</p>
+      <p>Visual cortex, visual thalamus and other sampled structures. Use each probe’s histological location. Neuropixels sorted spike times in the session NWB. Probe-level files hold field potentials.</p>
+      <p class="checked">Source check · NWB unit and stimulus metadata inspected.</p>
+      <a href="https://dandiarchive.org/dandiset/000021/0.251116.2246">Data deposit</a> · <a href="https://doi.org/10.1038/s41586-020-03171-x">Original study</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>Visual stimulation includes gratings, natural movies and images. Use the source presentation interval tables and exclude invalid intervals.</p>
+      <p>The example has 2,779 unit rows before quality filtering. Isolation, refractory-period violations, missing spikes and drift vary across rows. Hold out mice. Group probes by session and animal. Repeated movie frames require a stimulus-aware split for claims about new visual content.</p>
+      <p>Public archive. Published version.</p>
+      <p>Siegle, Josh; Wakeman, Wayne; Jia, Xiaoxuan; Heller, Gregg; Ramirez, Tamina; Graddis, Nile; Mei, Nicholas; Durand, Severine (2025) Allen Institute - Visual Coding - Neuropixels (Brain Observatory 1.1 Stimulus Set) (Version 0.251116.2246) [Data set]. DANDI Archive. https://doi.org/10.48324/dandi.000021/0.251116.2246 · <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p></details>
+    </article><article class="entry" id="macaque-area2-reach">
+      <h4>Rhesus macaque (Macaca mulatta)</h4>
+      <p class="signal">Spike times</p>
+      <p>Area 2 of primary somatosensory cortex. Extracellular sorted unit times recorded with an implanted array.</p>
+      <p class="checked">Source check · NWB unit and trial shapes inspected.</p>
+      <a href="https://dandiarchive.org/dandiset/000127/0.220113.0359">Data deposit</a> · <a href="https://doi.org/10.7554/eLife.48198">Original study</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>One macaque made center-out reaches with a manipulandum. Some trials included a mechanical perturbation before reaching. Match trial timestamps to motion and applied force.</p>
+      <p>The inspected training NWB lists 65 units, including a heldout flag. Sorter labels remain local to the recording. One subject, Han. Respect the source train/test partitions and unit masks. Trials give within-animal replication.</p>
+      <p>Public archive. Published version.</p>
+      <p>Chowdhury, Raeed; Miller, Lee (2022) Area2_Bump: macaque somatosensory area 2 spiking activity during reaching with perturbations (Version 0.220113.0359) [Data set]. DANDI archive. https://doi.org/10.48324/dandi.000127/0.220113.0359 · <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p></details>
+    </article><article class="entry" id="human-ajile12">
+      <h4>Human (Homo sapiens)</h4>
+      <p class="signal">Cortical surface voltage</p>
+      <p>Clinically selected intracranial cortical surface electrodes. Implant coverage varies by participant. Electrocorticography (ECoG), synchronized with video-derived upper-body joint positions.</p>
+      <p class="checked">Source check · provider documentation and asset listing.</p>
+      <a href="https://dandiarchive.org/dandiset/000055/0.220127.0436">Data deposit</a> · <a href="https://doi.org/10.1038/s41597-022-01280-y">Original study</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>Twelve participants during natural inpatient activity over 55 semi-continuous days in total. Wrist movement events and pose estimates accompany continuous neural recordings.</p>
+      <p>One ECoG contact records a local aggregate voltage. The accompanying pose estimates provide no individual-neuron label. Hold out whole people for cross-person evaluation. For within-person tests separate days, movement bouts and neighboring windows. The position estimates and ECoG are distinct inputs.</p>
+      <p>Public archive. Published version.</p>
+      <p>Peterson, Steven M.; Singh, Satpreet H.; Dichter, Benjamin; Scheid, Micheal; Rao, Rajesh P. N.; Brunton, Bingni W. (2022) AJILE12: Long-term naturalistic human intracranial neural recordings and pose (Version 0.220127.0436) [Data set]. DANDI archive. https://doi.org/10.48324/dandi.000055/0.220127.0436 · <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p></details>
+    </article><article class="entry" id="human-medial-temporal-units">
+      <h4>Human (Homo sapiens)</h4>
+      <p class="signal">Spike times</p>
+      <p>Medial temporal lobe, including amygdala and hippocampus. Microwire recordings with sorted extracellular units. The NWB release includes a Units table.</p>
+      <p class="checked">Source check · provider documentation and asset listing.</p>
+      <a href="https://dandiarchive.org/dandiset/000004/0.220126.1852">Data deposit</a> · <a href="https://doi.org/10.1038/s41597-020-0415-9">Original study</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>People undergoing intracranial monitoring viewed images and made recognition-memory judgments. The deposit reports 59 participants. Read event clocks, observation intervals and simultaneous unit membership within each session.</p>
+      <p>These source-local unit labels support a candidate event target once clock, quality and simultaneous membership are verified. They do not map a cell from one person to another. Group repeated sessions by participant. Check for duplicate recordings or reused stimulus images across partitions before reporting a cross-person result.</p>
+      <p>Public archive. Published version.</p>
+      <p>Chandravadia, Nand; Liang, Dehua; Schjetnan, Andrea Gomez Palacio; Carlson, April; Faraut, Mailys; Chung, Jeffrey M.; Reed, Chrystal M.; Dichter, Ben; Maoz, Uri; Kalia, Suneil K.; Valiante, Taufik A.; Mamelak, Adam N.; Rutishauser, Ueli (2022) A NWB-based dataset and processing pipeline of human single-neuron activity during a declarative memory task (Version 0.220126.1852) [Data set]. DANDI archive. https://doi.org/10.48324/dandi.000004/0.220126.1852 · <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p></details>
+    </article><article class="entry" id="human-scalp-motor">
+      <h4>Human (Homo sapiens)</h4>
+      <p class="signal">Scalp voltage</p>
+      <p>Scalp over the head, 10–10 EEG electrode montage. 64 electroencephalography (EEG) channels plus EDF+ event annotations.</p>
+      <p class="checked">Source check · EDF+ header inspected, zero waveform samples read.</p>
+      <a href="https://physionet.org/content/eegmmidb/1.0.0/">Data deposit</a>
+      <details><summary>Recording conditions and reuse</summary>
+      <p>The archive describes 109 volunteers and 14 runs per participant, including actual and imagined fist or foot movements. EEG sampled at 160 Hz. Cue labels depend on the run.</p>
+      <p>Each scalp channel sums activity from many sources and contains artifacts. Neither electrodes nor cue codes designate neurons. Hold out whole participants. Keep trial windows together and never mix imagery, execution and baseline when assigning the motor label.</p>
+      <p>Open PhysioNet release. The data page requires attribution under the Open Data Commons Attribution License v1.0.</p>
+      <p>Schalk and colleagues. EEG Motor Movement/Imagery Dataset. PhysioNet, version 1.0.0. · <a href="https://opendatacommons.org/licenses/by/1-0/">ODC-By-1.0</a></p></details>
+    </article></section>
+</section>
+<section class="block" aria-labelledby="scope-title"><h2 id="scope-title">What could a fly or worm contribute?</h2>
+<p>FlyWire traces connections in a fly brain. Reconstructions of worms at different ages show how their wiring differs across development. They can suggest which connections to test. Predicting activity in a vertebrate requires a separate experiment on a vertebrate recording.</p>
+<a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/docs/when-fly-and-worm-data-help.md">Read the comparative sources and proposed test</a></section>
+</main>
+<footer>Register 2026-11-21.1 · <a href="datasets.json" download>Download the dataset register (JSON)</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/vertebrate-neural-data">Source notes and analysis code</a></footer>
+</body></html>
