@@ -1,0 +1,150 @@
+{
+  "title": "Where will the wrist go?",
+  "source": {
+    "dataset": "https://doi.org/10.5281/zenodo.24194741",
+    "methods": "https://doi.org/10.1038/s41597-026-08550-z",
+    "version": "1.2.1",
+    "licence": "CC-BY-4.0",
+    "credit": "Alexander K. Beattie, Matti J. Kortelainen, Paavo Vartiainen and Pasi A. Karjalainen"
+  },
+  "scope": "One crouch-lift recording per person, with no confirmation people included in fitting.",
+  "fit": {
+    "people": 7,
+    "windows": 2316,
+    "seeds": [
+      17,
+      29,
+      41
+    ],
+    "attention_parameters": 9859,
+    "ridge_l2_penalty": 0.1,
+    "attention_epochs": 40,
+    "learning_rate": 0.001
+  },
+  "confirmation": {
+    "people": 6,
+    "complete_truth": 2385,
+    "invalid_history": 17,
+    "missing_later_observation": 0,
+    "qualified_history": 2385,
+    "scheduled": 2402,
+    "horizon_ms": 100,
+    "point_hz": 100,
+    "stored_analog_hz": 2400
+  },
+  "meaning": {
+    "endpoint_error": "Mean Euclidean error in mm within each person, then the arithmetic mean across people.",
+    "primary_improvement": "The motion-and-ground-force attention error minus the all-current attention error."
+  },
+  "feature_labels": {
+    "motion": "Wrist positions",
+    "motion_and_emg": "Wrist positions and muscle readings",
+    "motion_and_ground_force": "Wrist positions and floor forces",
+    "all_current": "Wrist positions, floor forces and current muscle readings",
+    "earlier_emg": "Wrist positions, floor forces and earlier muscle readings",
+    "earlier_emg_and_ground_force": "Wrist positions with earlier floor forces and muscle readings"
+  },
+  "person_macro_endpoint_errors_mm": {
+    "attention/all_current": 14.16069770041402,
+    "attention/earlier_emg": 15.392062657092785,
+    "attention/earlier_emg_and_ground_force": 15.542081898414787,
+    "attention/motion": 12.170561722082946,
+    "attention/motion_and_emg": 13.112788002956869,
+    "attention/motion_and_ground_force": 13.37386029260171,
+    "persistence": 43.61003708679798,
+    "ridge/all_current": 13.502781171594586,
+    "ridge/earlier_emg": 13.158708946251336,
+    "ridge/earlier_emg_and_ground_force": 11.810743680292717,
+    "ridge/motion": 10.329639813376618,
+    "ridge/motion_and_emg": 11.697857024936255,
+    "ridge/motion_and_ground_force": 12.136850082779157,
+    "velocity": 11.95626317511388
+  },
+  "person_macro_axis_mean_absolute_errors_mm": {
+    "attention/all_current": [
+      2.476174926780131,
+      6.4520588672682955,
+      10.620842131172969
+    ],
+    "attention/earlier_emg": [
+      2.6631967112586907,
+      6.892296296824558,
+      11.539037007036818
+    ],
+    "attention/earlier_emg_and_ground_force": [
+      2.7482464310115193,
+      7.9004227496542,
+      11.264131584538765
+    ],
+    "attention/motion": [
+      2.100211736982964,
+      6.292833833691543,
+      8.583998823541481
+    ],
+    "attention/motion_and_emg": [
+      2.1907519049369837,
+      6.7149593831531265,
+      9.160689013052826
+    ],
+    "attention/motion_and_ground_force": [
+      2.394537239724037,
+      6.149915852107932,
+      9.85902898474143
+    ],
+    "persistence": [
+      3.7995199439750653,
+      22.07920342491391,
+      33.93763666339286
+    ],
+    "ridge/all_current": [
+      2.4932735940761312,
+      5.69082514770659,
+      10.32124318195295
+    ],
+    "ridge/earlier_emg": [
+      2.579194950664537,
+      5.595999947060359,
+      9.97699738894489
+    ],
+    "ridge/earlier_emg_and_ground_force": [
+      2.4998873622764415,
+      5.996444820437712,
+      8.128719468359952
+    ],
+    "ridge/motion": [
+      2.1757701492855985,
+      5.148372250420711,
+      7.135254599865025
+    ],
+    "ridge/motion_and_emg": [
+      2.419787289817917,
+      5.81089799481341,
+      8.266556516279232
+    ],
+    "ridge/motion_and_ground_force": [
+      2.3016564791492717,
+      5.13670650517309,
+      9.253416696010225
+    ],
+    "velocity": [
+      2.2675580853166406,
+      5.871815722104593,
+      8.53293346108647
+    ]
+  },
+  "attention_primary": {
+    "mean_improvement_mm": -0.7868374078123109,
+    "median_improvement_mm": -1.1209628911905876,
+    "positive_negative_ties_and_p": {
+      "negative": 4,
+      "positive": 2,
+      "ties": 0,
+      "two_sided_exact_p": 0.6875
+    }
+  },
+  "zero_rms_sensitivity": {
+    "windows": 2339,
+    "mean_attention_improvement_mm": -0.7875809186044606,
+    "definition": "Descriptive rerun of the summary after excluding issues with any whole zero-RMS EMG block in either history."
+  }
+}
