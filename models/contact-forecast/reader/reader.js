@@ -80,7 +80,9 @@
       const summary=[['Counts + cues',metric(s.countCue,6)],['Earlier trial’s movement',metric(s.wrong,6)]];
       const wrap=document.createElement('div');wrap.className='scroll';
       wrap.append(table(['Full model minus comparison','Mean deviance difference [95% interval]'],summary));el.append(wrap);
-      if(s.fullMae)p('Full Transformer on the matched trials · mean absolute error '+metric(s.fullMae)+' events per contact per 100 ms.');
+      if(s.fullMae)p('Full Transformer on the '+s.matched.originals+' matched trials · mean absolute error '+metric(s.fullMae)+' events per contact per 100 ms. The same model scored on all '+s.all_eligible.originals+' eligible trials can show a slightly different average and interval, because the trial sets differ.');
+      const rep=s.all_eligible.scores?.persistence, full=s.all_eligible.scores?.transformer_all;
+      if(rep&&full&&rep.mae.estimate<full.mae.estimate)p('Repeating the last count missed by less than the full Transformer across all '+s.all_eligible.originals+' eligible trials: mean absolute error '+metric(rep.mae)+' against '+metric(full.mae)+'.');
     }
     const family=$('family').value, mode=$('mode').value;
     const scoreId=family==='simple'?(mode==='mean'?'training_mean':'persistence'):family+'_'+mode;
@@ -88,7 +90,7 @@
     const selected=s[group].scores?.[scoreId];
     if(selected){
       const method=$('family').selectedOptions[0].textContent+' · '+$('mode').selectedOptions[0].textContent;
-      p(method+' across '+(group==='matched'?'matched':'all eligible')+' original trials. Mean absolute error '+metric(selected.mae)+' events per contact per 100 ms. Mean deviance '+metric(selected.deviance)+'.'+(family==='transformer'?' Group scores average the three fits.':''));
+      p(method+' across '+(group==='matched'?'the '+s.matched.originals+' matched':'all '+s.all_eligible.originals+' eligible')+' original trials. Mean absolute error '+metric(selected.mae)+' events per contact per 100 ms. Mean deviance '+metric(selected.deviance)+'.'+(family==='transformer'?' Group scores average the three fits.':''));
     }
     if(date==='test' && phase==='bump'){
       const passed=ContactEvidence[date].passed;
