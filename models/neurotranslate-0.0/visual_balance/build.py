@@ -31,6 +31,13 @@ def main():
         return {'people':q['people'],'events':q['events'],'methods':{k:v['endpoint_mm'] for k,v in q['methods'].items()},'test':q['scalp_tests']['shared_full']}
     payload={'state':s,'encoder':enc,'example':example,'development':brief('development'),'assessment':brief('historical')}
     html=(HERE/'reader.html.in').read_text().replace('@@DATA@@',json.dumps(payload,separators=(',',':'),allow_nan=False))
+    whole=load('historical.json')['all'];m=whole['methods']
+    scalp=[k for k in ('linear_full','shared_full','shared_residual','scalp_only')]
+    if any(m[k]['endpoint_mm'][i]<=m['linear_motion']['endpoint_mm'][i] for k in scalp for i in (0,1)):raise ValueError('Review the first-screen finding.')
+    for key,value in (('@@EVENTS@@',f"{whole['events']:,}"),('@@PEOPLE@@',['no','one','two','three','four','five','six','seven','eight','nine','ten'][whole['people']]),
+                      ('@@LIN_S@@',f"{m['linear_motion']['endpoint_mm'][0]:.2f}"),('@@LIN_H@@',f"{m['linear_motion']['endpoint_mm'][1]:.2f}"),
+                      ('@@FULL_S@@',f"{m['shared_full']['endpoint_mm'][0]:.2f}"),('@@FULL_H@@',f"{m['shared_full']['endpoint_mm'][1]:.2f}")):
+        assert html.count(key)==1;html=html.replace(key,value)
     html=html.replace('@@ENCODER@@',(HERE.parent/'back_rotation/encoder.js').read_text())
     (HERE/'index.html').write_text(html)
 if __name__=='__main__':main()
