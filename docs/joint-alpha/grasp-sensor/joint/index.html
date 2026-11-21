@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Can one model learn both forecasts? · NeuroTranslation</title>
+  <style>
+    :root { font: 100%/1.62 system-ui, sans-serif; color: #203538; background: #f5f6f2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(45rem, calc(100% - 2rem)); margin: 2rem auto 4rem; }
+    header { border-top: .35rem solid #1b4647; }
+    h1, h2 { line-height: 1.15; letter-spacing: -.035em; }
+    h1 { font-size: clamp(2.3rem, 7vw, 4rem); margin: .35em 0; }
+    a { color: #075d52; text-underline-offset: .2em; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #c44c14; outline-offset: 3px; }
+    section { margin-top: 2rem; border-top: 1px solid #b9c7c4; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    caption, th, td { text-align: left; }
+    caption { font-weight: 650; margin-bottom: .35rem; }
+    th, td { padding: .36rem .4rem; border-bottom: 1px solid #bdc9c6; vertical-align: top; }
+    details { border-bottom: 1px solid #bdc9c6; }
+    details table { margin-bottom: .8rem; }
+    summary { padding: .55em .2em; cursor: pointer; font-weight: 650; }
+    @media (forced-colors: active) {
+      a:focus-visible, summary:focus-visible { outline-color: Highlight; }
+      th, td, details { border-color: CanvasText; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p><a href="../">Twenty milliseconds of a grasp</a></p>
+    <h1>Can one model learn both forecasts?</h1>
+    <p>As a macaque grasps and pulls a sliding object, sensors track its travel and respond to contact and load. Electrodes record brief electrical pulses called spikes. We gave a model the last tenth of a second from both sets of instruments. Then we asked it to forecast the next 20 milliseconds.</p>
+  </header>
+  <section>
+    <h2>Training one task at a time gave lower error</h2>
+    <p>With two forecasts trained together, the object sensor error rose by 0.56 counts in the first fit and 6.19 in the second. The model trained on spike counts alone also scored better in both fits. Lower numbers are better in both tables.</p>
+    <table data-target="sensor"><caption>Object sensor forecast error in sensor counts</caption>
+<thead><tr><th scope="col">Forecast</th><th scope="col">First fit</th><th scope="col">Second fit</th></tr></thead>
+<tbody><tr data-method="sensor_single"><th scope="row">Train on the sensor</th><td>119.35</td><td>109.76</td></tr><tr data-method="sensor_joint"><th scope="row">Train on the sensor and spikes</th><td>119.91</td><td>115.95</td></tr><tr data-method="sensor_joint_substituted"><th scope="row">Joint model with spikes from an earlier trial</th><td>137.29</td><td>138.28</td></tr><tr data-method="velocity"><th scope="row">Continue at recent velocity</th><td>118.18</td><td>118.18</td></tr><tr data-method="persist"><th scope="row">Keep the last reading</th><td>150.16</td><td>150.16</td></tr></tbody></table>
+    <p>A sensor count is one step in the recording device's digital reading. These are readings from the sensor that follows the object’s travel. Its conversion to millimetres remains unverified for this recording.</p>
+    <table data-target="count"><caption>Spike-count forecast penalty in nats per unit</caption>
+<thead><tr><th scope="col">Forecast</th><th scope="col">First fit</th><th scope="col">Second fit</th></tr></thead>
+<tbody><tr data-method="count_single"><th scope="row">Train on spike counts</th><td>0.6894</td><td>0.6886</td></tr><tr data-method="count_joint"><th scope="row">Train on spike counts and the sensor</th><td>0.6934</td><td>0.6926</td></tr><tr data-method="count_joint_substituted"><th scope="row">Joint model with spikes from an earlier trial</th><td>0.7234</td><td>0.7237</td></tr><tr data-method="count_mean"><th scope="row">Use each unit’s average count</th><td>0.7582</td><td>0.7582</td></tr><tr data-method="count_recent"><th scope="row">Use recent counts adjusted towards the average</th><td>0.8523</td><td>0.8523</td></tr></tbody></table>
+    <p>The spike-count penalty is lower when the model gives the recorded counts a higher probability. The score averages all 93 sorted units. We also swapped in the spike history from an earlier trial at the same point in the task and with the same cues. The joint model did worse on both forecasts with the swap. It was sensitive to which trial supplied the spikes.</p>
+  </section>
+  <section>
+    <h2>The same starting weights</h2>
+    <p>All fits kept the original seven-task NeuroTranslate Transformer fixed. They trained new layers from the same initial values. One version learned to forecast sensor changes. One learned spike counts. The third trained both readouts together. Every version received the same past physical readings, spikes and task cues.</p>
+    <p>We scored 1,465 windows from 20 original trials. Those trials came from the earlier study’s fit set. The two fits used the same evaluation trials, and each trial had equal weight. The authors sorted spikes after recording. Live decoding and performance on another animal remain untested.</p>
+    <p><a href="results.json">Download all six sensor scores and paired uncertainty ranges</a></p>
+    <p>Recording by Thomas Brochier and colleagues at INT and INM-6. <a href="https://doi.gin.g-node.org/10.12751/g-node.f83565/">Recording and attribution</a> · <a href="https://doi.org/10.1038/sdata.2018.55">Study methods</a></p>
+  </section>
+</main>
+</body>
+</html>
