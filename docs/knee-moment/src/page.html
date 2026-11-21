@@ -34,7 +34,7 @@
 </div>
 <section id="study" aria-labelledby="study-title"><h2 id="study-title">What happened on real walks?</h2>
 <div class="study-grid"><div><p>Seven people supplied the training walks. Three others supplied the test moments, across 1,207 overlapping windows of level treadmill walking at a nominal 0.8 m/s. An earlier study examined these same people's knee angles.</p>
-<p>The task-trained Transformer had the lowest average error from angles alone. It beat the linear model for two of the three people and beat matching to a training walker for one. The frozen encoder also fell short of beating both the linear and shuffled controls for every person.</p>
+<p>The task-trained Transformer had the lowest average error from angles alone. It beat the linear model for two of the three people and beat matching to a training walker for one. The frozen movement encoder beat both of its comparisons, the linear model and the same encoder with shuffled weights, for only one of the three people. Each model had to beat both of its comparisons for all three people; neither did.</p>
 <p>What if you already know the moment from an earlier stride? On the 1,187 windows with the required earlier measurements, replaying the earlier moment gave <strong>0.0678 N·m/kg</strong> error. The trained model gave <strong>0.0888</strong> on those same windows.</p></div>
 <div class="table-wrap"><table><caption>Mean absolute error, N·m/kg</caption><thead><tr><th scope="col">Angle-only method</th><th scope="col">All windows</th></tr></thead><tbody id="scores"></tbody></table>
 <p class="foot">Smaller is closer. Average the absolute error across both knees within each person, then give each person equal weight.</p></div></div>
