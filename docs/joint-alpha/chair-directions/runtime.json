@@ -1,0 +1,32 @@
+{
+  "zip_sha256": "213b09767865645761186c68734e501cea70b248e0bad1b6316f13672852560d",
+  "bytes": 156485,
+  "included_files": [
+    "NeuroTranslate-chair-movement/LICENSE.txt",
+    "NeuroTranslate-chair-movement/README.md",
+    "NeuroTranslate-chair-movement/SHA256SUMS.txt",
+    "NeuroTranslate-chair-movement/chair-movement-model.npz",
+    "NeuroTranslate-chair-movement/chair_movement.py",
+    "NeuroTranslate-chair-movement/example-reference.json",
+    "NeuroTranslate-chair-movement/run-linux.sh",
+    "NeuroTranslate-chair-movement/run-macos.command",
+    "NeuroTranslate-chair-movement/run-windows.cmd",
+    "NeuroTranslate-chair-movement/synthetic-history.json"
+  ],
+  "native_run_verified": "Linux, network namespace with only loopback; all eight example forecasts matched",
+  "launchers_present": [
+    "Linux",
+    "macOS",
+    "Windows"
+  ],
+  "native_platform_verification_pending": [
+    "macOS",
+    "Windows"
+  ],
+  "matched_histories": {
+    "sit_down": 1796,
+    "stand_up": 1357
+  },
+  "matched_input_combinations": 8,
+  "largest_difference_mm": 1.3708819459168353e-05
+}

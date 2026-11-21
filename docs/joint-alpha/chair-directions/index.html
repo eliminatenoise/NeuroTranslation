@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Can a model trained to stand predict a sit? · NeuroTranslation</title>
+<style>
+:root{font:17px/1.55 system-ui,sans-serif;color:#14342c;background:#f9faf3}
+body{margin:0} main{max-width:56rem;margin:auto;padding:1.8rem 1rem 3.5rem} h1{font-size:clamp(2rem,6vw,3.1rem);line-height:1.09;max-width:15em;margin-block:1.25rem}
+h2{font-size:1.37rem} p{max-width:69ch} a{color:inherit;text-underline-offset:.16em}
+[hidden]{display:none!important} section{margin-block:1.7rem} details{margin-block:1.2rem} summary,label{font-weight:650} summary{cursor:pointer}
+.controls{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));margin-block:1rem}
+select{display:block;width:100%;font:inherit;color:inherit;background:transparent;border:1px solid #809587;border-radius:.25rem;padding:.3rem}
+table{margin:.75rem 0 1.2rem;width:100%;border-collapse:collapse;table-layout:fixed;font-variant-numeric:tabular-nums}
+caption{text-align:left;font-size:.96rem;margin-block:.25rem}
+th,td{border-bottom:1px solid #c1cfc6;text-align:left;padding:.42rem .3rem;overflow-wrap:anywhere}
+th:first-child{width:72%} tbody th{font-weight:500}
+a:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #116454;outline-offset:3px}
+@media(forced-colors:active){th,td,select{border-color:CanvasText}}
+</style></head>
+<body><main>
+<a href="../">NeuroTranslation studies</a>
+<h1>Can a model trained to stand predict a sit?</h1>
+<p>Standing up and sitting down both move the hips between two heights. To test whether a model learned the movement or just one direction, we gave it earlier readings from people sitting down and asked how far four hip markers would move in the next tenth of a second.</p>
+<p>With two camera positions, the stand-only model missed the sit-down displacement by <strong>19.84 mm</strong> on average. Training on both directions brought that to <strong>3.63 mm</strong> and lowered error for all 22 people. A model trained to sit averaged 3.10 mm. The comparison used 1,692 forecasts from 22 people.</p><p>On the earlier standing-up recordings, the joint model averaged 4.17 mm with two camera positions. The stand-only model averaged 3.63 mm. One model learned both directions. Training each model on one movement gave the lowest camera-only attention error for that movement.</p>
+<section aria-labelledby="compare">
+<h2 id="compare">Compare the same forecasts</h2>
+<p>Full tracking supplied positions and recent changes across four times. Sparse tracking supplied just two positions 150 milliseconds apart. Models received those measurements without a label saying which movement the person was doing.</p>
+<div class="controls" id="controls" hidden>
+<div><label for="movement">Movement tested</label><select id="movement"><option value="sit_down">Sitting down</option><option value="stand_up">Standing up</option></select></div>
+<div><label for="history">Camera history</label><select id="history"><option value="sparse">Sparse · two positions</option><option value="full">Full · four positions</option></select></div>
+</div>
+<table data-entry='sit_down-sparse'><caption>Sitting down with two camera positions</caption><thead><tr><th scope='col'>Forecast model</th><th scope='col'>Error (mm)</th></tr></thead><tbody><tr><th scope='row'>Trained to stand</th><td>19.84</td></tr><tr><th scope='row'>Trained to sit</th><td>3.10</td></tr><tr><th scope='row'>Trained on both movements</th><td>3.63</td></tr><tr><th scope='row'>Linear fit · rise recordings</th><td>20.60</td></tr><tr><th scope='row'>Linear fit · sit-down recordings</th><td>4.78</td></tr><tr><th scope='row'>Linear fit · both movements</th><td>5.98</td></tr><tr><th scope='row'>Continue the recent speed</th><td>8.66</td></tr><tr><th scope='row'>Hold the last height</th><td>22.55</td></tr></tbody></table><table data-entry='sit_down-full'><caption>Sitting down with full camera history</caption><thead><tr><th scope='col'>Forecast model</th><th scope='col'>Error (mm)</th></tr></thead><tbody><tr><th scope='row'>Trained to stand</th><td>21.35</td></tr><tr><th scope='row'>Trained to sit</th><td>2.78</td></tr><tr><th scope='row'>Trained on both movements</th><td>3.41</td></tr><tr><th scope='row'>Linear fit · rise recordings</th><td>6.74</td></tr><tr><th scope='row'>Linear fit · sit-down recordings</th><td>2.81</td></tr><tr><th scope='row'>Linear fit · both movements</th><td>3.11</td></tr><tr><th scope='row'>Continue the recent speed</th><td>5.72</td></tr><tr><th scope='row'>Hold the last height</th><td>22.55</td></tr></tbody></table><table data-entry='stand_up-sparse'><caption>Standing up with two camera positions</caption><thead><tr><th scope='col'>Forecast model</th><th scope='col'>Error (mm)</th></tr></thead><tbody><tr><th scope='row'>Trained to stand</th><td>3.63</td></tr><tr><th scope='row'>Trained to sit</th><td>27.57</td></tr><tr><th scope='row'>Trained on both movements</th><td>4.17</td></tr><tr><th scope='row'>Linear fit · rise recordings</th><td>4.61</td></tr><tr><th scope='row'>Linear fit · sit-down recordings</th><td>20.73</td></tr><tr><th scope='row'>Linear fit · both movements</th><td>6.68</td></tr><tr><th scope='row'>Continue the recent speed</th><td>13.69</td></tr><tr><th scope='row'>Hold the last height</th><td>30.36</td></tr></tbody></table><table data-entry='stand_up-full'><caption>Standing up with full camera history</caption><thead><tr><th scope='col'>Forecast model</th><th scope='col'>Error (mm)</th></tr></thead><tbody><tr><th scope='row'>Trained to stand</th><td>3.18</td></tr><tr><th scope='row'>Trained to sit</th><td>26.82</td></tr><tr><th scope='row'>Trained on both movements</th><td>3.95</td></tr><tr><th scope='row'>Linear fit · rise recordings</th><td>2.37</td></tr><tr><th scope='row'>Linear fit · sit-down recordings</th><td>14.13</td></tr><tr><th scope='row'>Linear fit · both movements</th><td>2.89</td></tr><tr><th scope='row'>Continue the recent speed</th><td>8.50</td></tr><tr><th scope='row'>Hold the last height</th><td>30.36</td></tr></tbody></table>
+<p role="status" id="shown"></p>
+<p><a href="results.json" download>Download results for all camera and sensor combinations</a></p>
+</section>
+<section aria-labelledby="offline">
+<h2 id="offline">Try the model trained on both directions</h2>
+<p>Unzip the download, then open the launcher for your computer. The included example uses invented readings. You can supply an earlier history of your own in the format described in the package. The model needs Python and NumPy. The Linux launcher passed with networking disabled.</p>
+<p><a href="NeuroTranslate-chair-movement.zip" download>Download the offline chair movement model</a> · <a href="runtime.json">Package checks</a></p>
+</section>
+<details><summary>How the comparison works</summary>
+<p>All forecast versions used the same earlier sensor windows and later camera endpoints within each comparison. Each test person counted equally after averaging their trials. Each model used 11,809 adjustable numbers. The reported forecast averages three training runs. The two-movement training gave the two directions equal weight.</p>
+<p>The sit-down forecasts used new movement recordings from the same 22 people held out of the earlier chair-rise experiment. The rise scores reuse those earlier recordings and show how the two-movement training behaved on the original task. The authors filled gaps in the camera tracks and smoothed them before publication, a step that can use later samples. These comparisons concern the archived camera tracks.</p>
+<p>Electrodes record muscle electrical activity, and floor plates record force against the ground. See the download for comparisons that add each stream. Those readings describe measured signals near the muscles and at the floor. They leave individual muscle force and live camera timing open.</p>
+</details>
+<p>Recordings by Seungbum Koo, Junyo Boo, Dongwook Seo and Minseung Kim. <a href="https://doi.org/10.1038/s41597-025-05391-0">Recording methods</a> · <a href="https://doi.org/10.6084/m9.figshare.27677016.v1">Gait120 archive</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+</main>
+<script>
+const movement = document.getElementById('movement');
+const history = document.getElementById('history');
+const tables = [...document.querySelectorAll('[data-entry]')];
+const status = document.getElementById('shown');
+function select(announce) {
+  const current = movement.value + '-' + history.value;
+  for (const view of tables) {
+    view.hidden = view.dataset.entry !== current;
+    if (!view.hidden && announce) status.textContent = view.caption.textContent;
+  }
+}
+document.getElementById('controls').hidden = false;
+movement.addEventListener('change', () => select(true));
+history.addEventListener('change', () => select(true));
+select(false);
+</script></body></html>
