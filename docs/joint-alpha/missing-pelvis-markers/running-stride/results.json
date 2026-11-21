@@ -1,0 +1,222 @@
+{
+  "archive": "https://doi.org/10.15125/BATH-01341",
+  "training_archive": "https://doi.org/10.6084/m9.figshare.4543435.v1",
+  "condition": "Fixed treadmill running at 12 km/h, +1% grade, early trial.",
+  "time": {
+    "source_camera_hz": 250,
+    "frames_read_per_record": 2500,
+    "first_input_length_ms": 800,
+    "forecast_horizon_ms": 100,
+    "issue_seconds_first_last": [
+      0.8,
+      9.8
+    ]
+  },
+  "recruitment": {
+    "archives_listed": 50,
+    "matching_condition": 46,
+    "engineering": 1,
+    "candidates_for_comparison": 45,
+    "schema_exclusions": 5,
+    "analyzed_people": 40
+  },
+  "counts": {
+    "scheduled": 3640,
+    "issued": 3640,
+    "verified_people": 40,
+    "stride_used": 3640,
+    "fallbacks": 0
+  },
+  "scores": {
+    "all": {
+      "four_marker": {
+        "people_with_scheduled_rows": 40,
+        "scheduled": 3640,
+        "issued": 3640,
+        "person_equal_endpoint_coverage": 0.9989010989010989,
+        "people": 40,
+        "windows": 3636,
+        "person_equal_mae_mm": {
+          "zero": 47.67591686006209,
+          "camera_speed": 62.573150046781635,
+          "chair_direct": 55.71370464838907,
+          "chair_correction": 59.604900452338256,
+          "stride": 8.041447129214053,
+          "learned_stride": 5.787016250930684
+        },
+        "difference_from_analytic_stride_mm": {
+          "zero": 39.63446973084804,
+          "camera_speed": 54.531702917567586,
+          "chair_direct": 47.67225751917502,
+          "chair_correction": 51.56345332312421,
+          "stride": 0.0,
+          "learned_stride": -2.254430878283369
+        },
+        "pooled_p90_mm": {
+          "zero": 77.64043426513672,
+          "camera_speed": 99.794681255634,
+          "chair_direct": 93.36498563614815,
+          "chair_correction": 106.85647237646023,
+          "stride": 17.4849853515625,
+          "learned_stride": 12.012441340279686
+        }
+      },
+      "rear_pair": {
+        "people_with_scheduled_rows": 40,
+        "scheduled": 3640,
+        "issued": 3640,
+        "person_equal_endpoint_coverage": 1.0,
+        "people": 40,
+        "windows": 3640,
+        "person_equal_mae_mm": {
+          "zero": 51.617586165208095,
+          "camera_speed": 67.49588454078034,
+          "chair_direct": 58.54527233983477,
+          "chair_correction": 64.92837117587146,
+          "stride": 8.666941565209694,
+          "learned_stride": 6.234367298300858
+        },
+        "difference_from_analytic_stride_mm": {
+          "zero": 42.9506445999984,
+          "camera_speed": 58.82894297557064,
+          "chair_direct": 49.87833077462507,
+          "chair_correction": 56.261429610661764,
+          "stride": 0.0,
+          "learned_stride": -2.432574266908836
+        },
+        "pooled_p90_mm": {
+          "zero": 83.57727355957032,
+          "camera_speed": 110.02464411808893,
+          "chair_direct": 99.24440179353789,
+          "chair_correction": 116.05450006441957,
+          "stride": 19.00397338867187,
+          "learned_stride": 13.124753064610674
+        }
+      }
+    },
+    "complete_five_slots": {
+      "four_marker": {
+        "people_with_scheduled_rows": 40,
+        "scheduled": 3632,
+        "issued": 3632,
+        "person_equal_endpoint_coverage": 0.9994252114164904,
+        "people": 40,
+        "windows": 3630,
+        "person_equal_mae_mm": {
+          "zero": 47.67173321029689,
+          "camera_speed": 62.589248873451496,
+          "chair_direct": 55.720451396979215,
+          "chair_correction": 59.6340847534449,
+          "stride": 8.038712860713517,
+          "learned_stride": 5.788018517673807
+        },
+        "difference_from_analytic_stride_mm": {
+          "zero": 39.633020349583376,
+          "camera_speed": 54.55053601273798,
+          "chair_direct": 47.6817385362657,
+          "chair_correction": 51.595371892731386,
+          "stride": 0.0,
+          "learned_stride": -2.2506943430397097
+        },
+        "pooled_p90_mm": {
+          "zero": 77.63160247802735,
+          "camera_speed": 99.7820817213792,
+          "chair_direct": 93.36341694684204,
+          "chair_correction": 106.87964679129439,
+          "stride": 17.45909423828125,
+          "learned_stride": 12.008064075635271
+        }
+      },
+      "rear_pair": {
+        "people_with_scheduled_rows": 40,
+        "scheduled": 3632,
+        "issued": 3632,
+        "person_equal_endpoint_coverage": 1.0,
+        "people": 40,
+        "windows": 3632,
+        "person_equal_mae_mm": {
+          "zero": 51.60437501714989,
+          "camera_speed": 67.49929615965235,
+          "chair_direct": 58.53805617129486,
+          "chair_correction": 64.9483259930579,
+          "stride": 8.666662240438828,
+          "learned_stride": 6.233626514300022
+        },
+        "difference_from_analytic_stride_mm": {
+          "zero": 42.93771277671107,
+          "camera_speed": 58.83263391921352,
+          "chair_direct": 49.87139393085603,
+          "chair_correction": 56.28166375261908,
+          "stride": 0.0,
+          "learned_stride": -2.4330357261388063
+        },
+        "pooled_p90_mm": {
+          "zero": 83.5630584716797,
+          "camera_speed": 110.01031400240385,
+          "chair_direct": 99.15507626393142,
+          "chair_correction": 116.04805763994045,
+          "stride": 18.96505126953125,
+          "learned_stride": 13.081328520773685
+        }
+      }
+    }
+  },
+  "other_strata_counts": {
+    "front_only_gap": {
+      "four_marker": {
+        "scheduled": 0,
+        "issued": 0,
+        "people": 0,
+        "windows": 0
+      },
+      "rear_pair": {
+        "scheduled": 0,
+        "issued": 0,
+        "people": 0,
+        "windows": 0
+      }
+    },
+    "rear_only_gap": {
+      "four_marker": {
+        "scheduled": 0,
+        "issued": 0,
+        "people": 0,
+        "windows": 0
+      },
+      "rear_pair": {
+        "scheduled": 0,
+        "issued": 0,
+        "people": 0,
+        "windows": 0
+      }
+    },
+    "front_rear_gap": {
+      "four_marker": {
+        "scheduled": 0,
+        "issued": 0,
+        "people": 0,
+        "windows": 0
+      },
+      "rear_pair": {
+        "scheduled": 0,
+        "issued": 0,
+        "people": 0,
+        "windows": 0
+      }
+    },
+    "unresolved_without_gap": {
+      "four_marker": {
+        "scheduled": 8,
+        "issued": 8,
+        "people": 2,
+        "windows": 6
+      },
+      "rear_pair": {
+        "scheduled": 8,
+        "issued": 8,
+        "people": 2,
+        "windows": 8
+      }
+    }
+  }
+}
