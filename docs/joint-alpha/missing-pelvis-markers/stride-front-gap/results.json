@@ -1,0 +1,280 @@
+{
+  "dataset": "https://doi.org/10.6084/m9.figshare.4543435.v5",
+  "paper": "https://doi.org/10.7717/peerj.3298",
+  "condition": {
+    "speed_m_s": 3.5,
+    "history_scope": "full_800ms",
+    "group": "front_only"
+  },
+  "camera_hz": 150,
+  "forecast_horizon_ms": 100,
+  "reference": "Present archive coordinates. No positive marker residual or camera count attestation.",
+  "results": {
+    "four_marker": {
+      "people": 11,
+      "windows": 1570,
+      "has_six_people": true,
+      "person_equal_mae_mm": {
+        "zero": 43.93927911625567,
+        "camera_actual_time_speed": 59.507793078128934,
+        "chair_direct": 53.11847886350628,
+        "chair_speed_correction": 56.342612414061136,
+        "analytic_stride": 8.621757811686706,
+        "learned_stride": 6.293423222081011
+      },
+      "person_equal_p90_mm": {
+        "zero": 69.03233711936258,
+        "camera_actual_time_speed": 96.31600359136407,
+        "chair_direct": 89.05588027206548,
+        "chair_speed_correction": 100.74049340230422,
+        "analytic_stride": 16.83214693936435,
+        "learned_stride": 12.01746721955291
+      },
+      "pooled_window_p90_mm": {
+        "zero": 72.34604339599609,
+        "camera_actual_time_speed": 98.06737804412842,
+        "chair_direct": 90.9398525025361,
+        "chair_speed_correction": 101.20208593771551,
+        "analytic_stride": 16.312813822428392,
+        "learned_stride": 11.90845851250575
+      },
+      "paired_person_changes_learned_minus_comparator": {
+        "zero": {
+          "mean_mm": -37.64585589417465,
+          "median_mm": -39.2147376436004,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "camera_actual_time_speed": {
+          "mean_mm": -53.21436985604793,
+          "median_mm": -53.42719171424383,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "chair_direct": {
+          "mean_mm": -46.82505564142527,
+          "median_mm": -46.5380347854262,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "chair_speed_correction": {
+          "mean_mm": -50.04918919198012,
+          "median_mm": -49.99926198768865,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "analytic_stride": {
+          "mean_mm": -2.3283345896056953,
+          "median_mm": -1.7531949765861965,
+          "lower_error_people": 10,
+          "equal_error_people": 0,
+          "higher_error_people": 1
+        }
+      }
+    },
+    "rear_pair": {
+      "people": 11,
+      "windows": 2200,
+      "has_six_people": true,
+      "person_equal_mae_mm": {
+        "zero": 49.292861545431876,
+        "camera_actual_time_speed": 65.22449229592961,
+        "chair_direct": 57.23852859601149,
+        "chair_speed_correction": 64.02359905498224,
+        "analytic_stride": 9.108252330758594,
+        "learned_stride": 6.65654240242013
+      },
+      "person_equal_p90_mm": {
+        "zero": 77.40320545543324,
+        "camera_actual_time_speed": 108.42183588201351,
+        "chair_direct": 96.70685057400132,
+        "chair_speed_correction": 114.07270526754151,
+        "analytic_stride": 18.95525263006037,
+        "learned_stride": 13.114386384787354
+      },
+      "pooled_window_p90_mm": {
+        "zero": 77.16239318847656,
+        "camera_actual_time_speed": 107.12756271362305,
+        "chair_direct": 96.8580362664259,
+        "chair_speed_correction": 112.78935439409292,
+        "analytic_stride": 18.266851806640627,
+        "learned_stride": 12.611745936449502
+      },
+      "paired_person_changes_learned_minus_comparator": {
+        "zero": {
+          "mean_mm": -42.636319143011754,
+          "median_mm": -43.26076157710435,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "camera_actual_time_speed": {
+          "mean_mm": -58.567949893509486,
+          "median_mm": -57.50703473540291,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "chair_direct": {
+          "mean_mm": -50.58198619359136,
+          "median_mm": -49.57411805388093,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "chair_speed_correction": {
+          "mean_mm": -57.367056652562106,
+          "median_mm": -56.77706383983781,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "analytic_stride": {
+          "mean_mm": -2.4517099283384622,
+          "median_mm": -2.0332145396894594,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        }
+      }
+    }
+  },
+  "short_history_subset": {
+    "four_marker": {
+      "people": 11,
+      "windows": 560,
+      "has_six_people": true,
+      "person_equal_mae_mm": {
+        "zero": 45.561476174907995,
+        "camera_actual_time_speed": 58.950976526493974,
+        "chair_direct": 54.44953439768574,
+        "chair_speed_correction": 52.938662942203045,
+        "analytic_stride": 7.824528773911251,
+        "learned_stride": 6.047750490990566
+      },
+      "person_equal_p90_mm": {
+        "zero": 67.24067452170631,
+        "camera_actual_time_speed": 93.2377427187833,
+        "chair_direct": 89.73076761811699,
+        "chair_speed_correction": 86.56204234197739,
+        "analytic_stride": 13.91961813262015,
+        "learned_stride": 11.04987743471115
+      },
+      "pooled_window_p90_mm": {
+        "zero": 72.2729705810547,
+        "camera_actual_time_speed": 95.94135856628418,
+        "chair_direct": 93.55357404772988,
+        "chair_speed_correction": 84.19859747835464,
+        "analytic_stride": 13.63997751871745,
+        "learned_stride": 10.38671054439789
+      },
+      "paired_person_changes_learned_minus_comparator": {
+        "zero": {
+          "mean_mm": -39.51372568391742,
+          "median_mm": -39.300848347076396,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "camera_actual_time_speed": {
+          "mean_mm": -52.903226035503415,
+          "median_mm": -50.87303821747083,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "chair_direct": {
+          "mean_mm": -48.401783906695165,
+          "median_mm": -49.401400103157194,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "chair_speed_correction": {
+          "mean_mm": -46.89091245121247,
+          "median_mm": -47.22175217180084,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "analytic_stride": {
+          "mean_mm": -1.776778282920683,
+          "median_mm": -1.37564495411209,
+          "lower_error_people": 10,
+          "equal_error_people": 0,
+          "higher_error_people": 1
+        }
+      }
+    },
+    "rear_pair": {
+      "people": 11,
+      "windows": 1059,
+      "has_six_people": true,
+      "person_equal_mae_mm": {
+        "zero": 50.637701919582675,
+        "camera_actual_time_speed": 66.27506219481609,
+        "chair_direct": 60.35465533853333,
+        "chair_speed_correction": 62.76581404920149,
+        "analytic_stride": 8.198663546960589,
+        "learned_stride": 6.1789476972702655
+      },
+      "person_equal_p90_mm": {
+        "zero": 75.43942704634233,
+        "camera_actual_time_speed": 106.4051139831543,
+        "chair_direct": 97.13581842566454,
+        "chair_speed_correction": 105.6547408884638,
+        "analytic_stride": 16.120583829012784,
+        "learned_stride": 11.646772138707531
+      },
+      "pooled_window_p90_mm": {
+        "zero": 76.22686767578125,
+        "camera_actual_time_speed": 108.04738693237304,
+        "chair_direct": 98.63361366000926,
+        "chair_speed_correction": 109.59227543377298,
+        "analytic_stride": 17.2841552734375,
+        "learned_stride": 11.794345386025944
+      },
+      "paired_person_changes_learned_minus_comparator": {
+        "zero": {
+          "mean_mm": -44.458754222312415,
+          "median_mm": -42.325709997961226,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "camera_actual_time_speed": {
+          "mean_mm": -60.09611449754582,
+          "median_mm": -62.40566779745888,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "chair_direct": {
+          "mean_mm": -54.17570764126306,
+          "median_mm": -52.52069907470678,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "chair_speed_correction": {
+          "mean_mm": -56.58686635193123,
+          "median_mm": -55.52491235439448,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        },
+        "analytic_stride": {
+          "mean_mm": -2.019715849690322,
+          "median_mm": -1.6038811647850286,
+          "lower_error_people": 11,
+          "equal_error_people": 0,
+          "higher_error_people": 0
+        }
+      }
+    }
+  }
+}

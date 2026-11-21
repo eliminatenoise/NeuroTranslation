@@ -21,6 +21,7 @@ summary{cursor:pointer;font-weight:650}details{margin-top:1.4rem}
 <p>When you run, your hips rise and fall in a repeating pattern. The stride forecast looks for an earlier part of the run that resembles the latest camera readings. It estimates the next 100 milliseconds from what already happened at that point in the earlier stride. A small attention model then adjusts that estimate.</p>
 <p>The learned adjustment reduced average four-marker error from <strong>8.04 to 5.79 mm</strong> on recordings from 40 runners at the University of Bath. The model learned its adjustment from a separate Brazilian running dataset.</p>
 <p><a href="../stride-demo/">Try the stride forecast</a> with invented camera readings.</p>
+<p><a href="../stride-front-gap/">See how the model handles original front-marker gaps</a> in a separate group of runners.</p>
 <h2>Compare the forecasts</h2>
 <p>Each forecast estimates how far the average height of the named markers will rise or fall. Each person counts equally. Smaller errors are better.</p>
 <table><caption>40 people. 3,636 four-marker and 3,640 rear-pair forecasts.</caption>
