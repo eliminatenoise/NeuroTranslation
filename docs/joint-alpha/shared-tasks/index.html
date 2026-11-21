@@ -51,4 +51,15 @@
     <p><a href="warm-start/">Compare fresh and previously trained weights</a>. The same six forecasts get equal new training from different starting points.</p>
     <p>Source recordings. <a href="https://openneuro.org/datasets/ds003739/versions/1.0.3">Human balance</a> · <a href="https://doi.org/10.5061/dryad.nk98sf7q7">Macaque reaching</a> · <a href="https://doi.gin.g-node.org/10.12751/g-node.f83565/">Macaque grasp</a></p>
   </section>
+  <section>
+    <h2>What held up in the second fit?</h2>
+    <p>The two fits agreed on which model had the smaller error in 11 of 12 comparisons. Averaged across the two fits, the compact shared model reduced reaching movement error by 0.023 fitted standard deviations. The wider shared model reduced reaching spike-count loss by 0.174 nats. Each comparison uses a separately trained control of the same size.</p>
+    <p>Both grasp forecasts still scored better in their own models at both widths. The wider human pelvis forecast changed direction. Its paired range across people included zero. Both fits used the same previously studied groups.</p>
+    <p><a href="seed-repeat.json">Download the paired results for both fits</a></p>
+  </section>
+  <section>
+    <h2>Try both model sizes offline</h2>
+    <p>Choose one of the six tasks and compare both models on its two invented histories. The browser shows saved results from the fitted models. The included Python code runs a new forecast when you change an input.</p>
+    <p><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/six-task-forecasts/neurotranslate-six-task-preview.zip">Download the six-task preview</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/six-task-forecasts">Open the launcher instructions</a></p>
+  </section>
 </main></body></html>

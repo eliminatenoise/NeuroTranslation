@@ -1,0 +1,481 @@
+{
+  "tasks": {
+    "human_leg_emg": {
+      "rows": 761,
+      "groups": 3,
+      "metric": "mean absolute error divided by fitted per-output population SD",
+      "widths": {
+        "compact": {
+          "431": {
+            "shared": 0.38291495529152847,
+            "single": 0.37688880777411843,
+            "paired": {
+              "shared_minus_single": 0.006026147517410023,
+              "paired_percentile_95": [
+                0.004794255278315396,
+                0.007858256137352027
+              ]
+            }
+          },
+          "827": {
+            "shared": 0.3872785069967974,
+            "single": 0.3820536465963609,
+            "paired": {
+              "shared_minus_single": 0.005224860400436441,
+              "paired_percentile_95": [
+                0.002475934433375959,
+                0.008306622574908662
+              ]
+            }
+          },
+          "fixed_seed_mean": {
+            "shared": 0.3850967311441629,
+            "single": 0.3794712271852396,
+            "paired": {
+              "shared_minus_single": 0.005625503958923232,
+              "paired_percentile_95": [
+                0.004843139735670077,
+                0.006866276855735598
+              ]
+            }
+          },
+          "point_direction_disagreement": false
+        },
+        "wider": {
+          "431": {
+            "shared": 0.3795522651550755,
+            "single": 0.37704624235376566,
+            "paired": {
+              "shared_minus_single": 0.0025060228013098116,
+              "paired_percentile_95": [
+                -0.0012887414434042954,
+                0.006739542087154937
+              ]
+            }
+          },
+          "827": {
+            "shared": 0.38433392169326314,
+            "single": 0.37306054561777974,
+            "paired": {
+              "shared_minus_single": 0.011273376075483454,
+              "paired_percentile_95": [
+                0.008051722659087601,
+                0.016800183928716517
+              ]
+            }
+          },
+          "fixed_seed_mean": {
+            "shared": 0.38194309342416927,
+            "single": 0.3750533939857727,
+            "paired": {
+              "shared_minus_single": 0.006889699438396642,
+              "paired_percentile_95": [
+                0.003381490607841653,
+                0.009433725844447682
+              ]
+            }
+          },
+          "point_direction_disagreement": false
+        }
+      }
+    },
+    "human_sacrum_path": {
+      "rows": 761,
+      "groups": 3,
+      "metric": "mean absolute error divided by fitted per-output population SD",
+      "widths": {
+        "compact": {
+          "431": {
+            "shared": 0.42208040537809177,
+            "single": 0.4108833876697135,
+            "paired": {
+              "shared_minus_single": 0.011197017708378295,
+              "paired_percentile_95": [
+                0.008966452006397785,
+                0.012967417023239503
+              ]
+            }
+          },
+          "827": {
+            "shared": 0.4101648456812141,
+            "single": 0.40310029704474903,
+            "paired": {
+              "shared_minus_single": 0.007064548636464996,
+              "paired_percentile_95": [
+                0.004205114423233847,
+                0.009436987371766903
+              ]
+            }
+          },
+          "fixed_seed_mean": {
+            "shared": 0.4161226255296529,
+            "single": 0.40699184235723124,
+            "paired": {
+              "shared_minus_single": 0.009130783172421645,
+              "paired_percentile_95": [
+                0.007931149259365722,
+                0.01025948056881687
+              ]
+            }
+          },
+          "point_direction_disagreement": false
+        },
+        "wider": {
+          "431": {
+            "shared": 0.39724896755465827,
+            "single": 0.392292739148382,
+            "paired": {
+              "shared_minus_single": 0.0049562284062763156,
+              "paired_percentile_95": [
+                0.0006567022806943656,
+                0.008584244816119191
+              ]
+            }
+          },
+          "827": {
+            "shared": 0.38851971467974106,
+            "single": 0.3908314960853611,
+            "paired": {
+              "shared_minus_single": -0.0023117814056200503,
+              "paired_percentile_95": [
+                -0.009456615540476665,
+                0.004305337296799994
+              ]
+            }
+          },
+          "fixed_seed_mean": {
+            "shared": 0.39288434111719966,
+            "single": 0.3915621176168716,
+            "paired": {
+              "shared_minus_single": 0.001322223500328105,
+              "paired_percentile_95": [
+                -0.0019144387092306925,
+                0.0064447910564595645
+              ]
+            }
+          },
+          "point_direction_disagreement": true
+        }
+      }
+    },
+    "macaque_cortex_to_motion": {
+      "rows": 199,
+      "groups": 78,
+      "metric": "mean absolute error divided by fitted per-output population SD",
+      "widths": {
+        "compact": {
+          "431": {
+            "shared": 0.52171905149342,
+            "single": 0.5559523042727889,
+            "paired": {
+              "shared_minus_single": -0.034233252779368686,
+              "paired_percentile_95": [
+                -0.04985833536997105,
+                -0.018512919700755918
+              ]
+            }
+          },
+          "827": {
+            "shared": 0.512154501843993,
+            "single": 0.523983537518072,
+            "paired": {
+              "shared_minus_single": -0.011829035674078874,
+              "paired_percentile_95": [
+                -0.02884696565028268,
+                0.005739001918858278
+              ]
+            }
+          },
+          "fixed_seed_mean": {
+            "shared": 0.5169367766687066,
+            "single": 0.5399679208954306,
+            "paired": {
+              "shared_minus_single": -0.02303114422672378,
+              "paired_percentile_95": [
+                -0.034708931378359044,
+                -0.011388571157696089
+              ]
+            }
+          },
+          "point_direction_disagreement": false
+        },
+        "wider": {
+          "431": {
+            "shared": 0.5605638077483801,
+            "single": 0.5474036813859026,
+            "paired": {
+              "shared_minus_single": 0.013160126362477636,
+              "paired_percentile_95": [
+                -0.008961571990401034,
+                0.03637153037408946
+              ]
+            }
+          },
+          "827": {
+            "shared": 0.5728440307676027,
+            "single": 0.5553021270793687,
+            "paired": {
+              "shared_minus_single": 0.0175419036882342,
+              "paired_percentile_95": [
+                -0.003488604883732742,
+                0.037993730371352404
+              ]
+            }
+          },
+          "fixed_seed_mean": {
+            "shared": 0.5667039192579915,
+            "single": 0.5513529042326356,
+            "paired": {
+              "shared_minus_single": 0.015351015025355923,
+              "paired_percentile_95": [
+                -0.0008130169233113115,
+                0.03191352198723701
+              ]
+            }
+          },
+          "point_direction_disagreement": false
+        }
+      }
+    },
+    "macaque_motion_to_cortex": {
+      "rows": 199,
+      "groups": 78,
+      "metric": "full Poisson NLL, nats per observed count channel and prediction bin",
+      "widths": {
+        "compact": {
+          "431": {
+            "shared": 2.101400631313468,
+            "single": 2.103430098731665,
+            "paired": {
+              "shared_minus_single": -0.0020294674181963322,
+              "paired_percentile_95": [
+                -0.011012527034552702,
+                0.006523323030625849
+              ]
+            }
+          },
+          "827": {
+            "shared": 2.1155195448810096,
+            "single": 2.1250406196137286,
+            "paired": {
+              "shared_minus_single": -0.00952107473271965,
+              "paired_percentile_95": [
+                -0.022612043782833817,
+                0.002269456545920318
+              ]
+            }
+          },
+          "fixed_seed_mean": {
+            "shared": 2.108460088097239,
+            "single": 2.114235359172697,
+            "paired": {
+              "shared_minus_single": -0.005775271075458026,
+              "paired_percentile_95": [
+                -0.015819539226461062,
+                0.002990906724743443
+              ]
+            }
+          },
+          "point_direction_disagreement": false
+        },
+        "wider": {
+          "431": {
+            "shared": 2.3631502940553992,
+            "single": 2.5639503792104517,
+            "paired": {
+              "shared_minus_single": -0.20080008515505282,
+              "paired_percentile_95": [
+                -0.24447116882112202,
+                -0.15760763655489787
+              ]
+            }
+          },
+          "827": {
+            "shared": 2.3765639493944746,
+            "single": 2.5237531841596326,
+            "paired": {
+              "shared_minus_single": -0.1471892347651579,
+              "paired_percentile_95": [
+                -0.18578577956837777,
+                -0.10625249076254932
+              ]
+            }
+          },
+          "fixed_seed_mean": {
+            "shared": 2.3698571217249365,
+            "single": 2.543851781685042,
+            "paired": {
+              "shared_minus_single": -0.17399465996010546,
+              "paired_percentile_95": [
+                -0.20510967997588628,
+                -0.14240803072039052
+              ]
+            }
+          },
+          "point_direction_disagreement": false
+        }
+      }
+    },
+    "brochier_grasp_sensors": {
+      "rows": 733,
+      "groups": 10,
+      "metric": "mean absolute error divided by fitted per-output population SD",
+      "widths": {
+        "compact": {
+          "431": {
+            "shared": 0.3723067287087555,
+            "single": 0.3664762458658409,
+            "paired": {
+              "shared_minus_single": 0.005830482842914669,
+              "paired_percentile_95": [
+                0.002943758399541596,
+                0.009234504930075346
+              ]
+            }
+          },
+          "827": {
+            "shared": 0.37799968172657045,
+            "single": 0.36574179447324645,
+            "paired": {
+              "shared_minus_single": 0.012257887253323895,
+              "paired_percentile_95": [
+                0.008742246255024035,
+                0.01580812850613481
+              ]
+            }
+          },
+          "fixed_seed_mean": {
+            "shared": 0.37515320521766293,
+            "single": 0.36610902016954366,
+            "paired": {
+              "shared_minus_single": 0.009044185048119274,
+              "paired_percentile_95": [
+                0.00659616374852142,
+                0.01161159616671842
+              ]
+            }
+          },
+          "point_direction_disagreement": false
+        },
+        "wider": {
+          "431": {
+            "shared": 0.36113820006251546,
+            "single": 0.32103151337652397,
+            "paired": {
+              "shared_minus_single": 0.040106686685991474,
+              "paired_percentile_95": [
+                0.03291240963605452,
+                0.04680625953858607
+              ]
+            }
+          },
+          "827": {
+            "shared": 0.3572732848305621,
+            "single": 0.3181963574869095,
+            "paired": {
+              "shared_minus_single": 0.039076927343652604,
+              "paired_percentile_95": [
+                0.027912770001685894,
+                0.048860528702804426
+              ]
+            }
+          },
+          "fixed_seed_mean": {
+            "shared": 0.35920574244653874,
+            "single": 0.31961393543171673,
+            "paired": {
+              "shared_minus_single": 0.03959180701482204,
+              "paired_percentile_95": [
+                0.03099553759969281,
+                0.04685086934852738
+              ]
+            }
+          },
+          "point_direction_disagreement": false
+        }
+      }
+    },
+    "brochier_grasp_counts": {
+      "rows": 733,
+      "groups": 10,
+      "metric": "full Poisson NLL, nats per observed count channel and prediction bin",
+      "widths": {
+        "compact": {
+          "431": {
+            "shared": 0.7016389590834764,
+            "single": 0.6935148146224551,
+            "paired": {
+              "shared_minus_single": 0.008124144461021244,
+              "paired_percentile_95": [
+                0.007356386363899926,
+                0.008855316632365174
+              ]
+            }
+          },
+          "827": {
+            "shared": 0.7022856474595558,
+            "single": 0.694936181229618,
+            "paired": {
+              "shared_minus_single": 0.007349466229938007,
+              "paired_percentile_95": [
+                0.006343260412904698,
+                0.008264675479170024
+              ]
+            }
+          },
+          "fixed_seed_mean": {
+            "shared": 0.7019623032715161,
+            "single": 0.6942254979260365,
+            "paired": {
+              "shared_minus_single": 0.007736805345479625,
+              "paired_percentile_95": [
+                0.006945270599328185,
+                0.008474026462033116
+              ]
+            }
+          },
+          "point_direction_disagreement": false
+        },
+        "wider": {
+          "431": {
+            "shared": 0.6919295686232587,
+            "single": 0.6866459167347939,
+            "paired": {
+              "shared_minus_single": 0.005283651888464714,
+              "paired_percentile_95": [
+                0.00458415386070094,
+                0.006040014390131354
+              ]
+            }
+          },
+          "827": {
+            "shared": 0.6928203394524426,
+            "single": 0.6849861712053327,
+            "paired": {
+              "shared_minus_single": 0.007834168247109951,
+              "paired_percentile_95": [
+                0.006459833753233521,
+                0.009117203684191277
+              ]
+            }
+          },
+          "fixed_seed_mean": {
+            "shared": 0.6923749540378507,
+            "single": 0.6858160439700632,
+            "paired": {
+              "shared_minus_single": 0.006558910067787338,
+              "paired_percentile_95": [
+                0.005700239683581525,
+                0.007437441750287827
+              ]
+            }
+          },
+          "point_direction_disagreement": false
+        }
+      }
+    }
+  },
+  "point_directions_agree": 11,
+  "comparisons": 12,
+  "scope": "Two fixed seeds and the same previously used internal comparison groups. Paired intervals resample original groups, not training seeds."
+}
