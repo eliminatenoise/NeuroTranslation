@@ -1,0 +1,453 @@
+{
+  "scope": "One H recording under the original task; both fits from C.",
+  "fitting_recording": "C_20170907_TRT_TD",
+  "comparison_recording": "H_20171106_TRT_TD",
+  "representation": "Position history or history relative to the last reading in each channel.",
+  "selected_originals": 266,
+  "scored_windows": 14025,
+  "coverage": {
+    "grid_before_bounds": 14791,
+    "short_history": 532,
+    "short_future_after_history": 234,
+    "candidate_windows": 14025,
+    "nonfinite_past_windows": 0,
+    "admitted_windows": 14025,
+    "incomplete_target_windows": 0,
+    "scored_windows": 14025
+  },
+  "horizons_ms": [
+    20,
+    50,
+    70,
+    100
+  ],
+  "fit": {
+    "originals": 72,
+    "windows_per_representation": 1533,
+    "updates": 640,
+    "seeds": [
+      1117,
+      2971
+    ],
+    "draws": 32,
+    "fit_sources": {
+      "absolute": {
+        "path": "touch-calibration/reach-cross-recording/FIT-FREEZE.json",
+        "sha256": "e4d9b6dc48a03c572ab921c0f6f55f325e2073a0d5c0f6b424e390ca039bce10"
+      },
+      "relative": {
+        "path": "touch-calibration/reach-cross-animal/relative-fit/FIT-FREEZE.json",
+        "sha256": "7745df4ac0e45f26820b1c4f74f90341d7b74f59e1ba3d108bcb3386a2c5da6a"
+      }
+    }
+  },
+  "metric_definition": "Fair energy uses the 24-coordinate displacement path, with Euclidean distances divided by sqrt(8) for two markers at four times. Subtract half the mean distance between distinct ordered draws from the mean draw-to-observation distance. A deterministic path has no spread correction. Geometric errors compare the forecast mean with the observed markers.",
+  "uncertainty": {
+    "unit": "original trial within the one H recording",
+    "originals": 266,
+    "replicates": 4000,
+    "seed": 270411,
+    "index_sha256": "12d27202bffdb7b1c8a1bc1cda77390c5f229e4a3a0024f903d99a66d4d54275",
+    "interval": "Unadjusted trial-paired percentile 95% intervals. Each bootstrap replicate uses the same original IDs for both fits and fixed seeds."
+  },
+  "estimators": {
+    "ar_ridge": "Autoregressive transformer",
+    "diff_ridge": "Diffusion transformer",
+    "ridge_residual": "Linear paths with sampled errors",
+    "ridge_point": "One linear path",
+    "velocity20": "Continue the last 20 ms of velocity",
+    "velocity100": "Continue the last 100 ms of velocity"
+  },
+  "scores": {
+    "ar_ridge": {
+      "absolute": {
+        "energy_mm": 3.2323583061809664,
+        "ADE_mm": 3.417376928369182,
+        "FDE_mm": 6.8538889565353305
+      },
+      "relative": {
+        "energy_mm": 2.654903359249249,
+        "ADE_mm": 2.72065958643796,
+        "FDE_mm": 5.325444781255307
+      },
+      "relative_minus_absolute": {
+        "difference": {
+          "energy_mm": -0.577454946931717,
+          "ADE_mm": -0.6967173419312263,
+          "FDE_mm": -1.5284441752800244
+        },
+        "lower_95": {
+          "energy_mm": -0.5969940847450568,
+          "ADE_mm": -0.7195734644670548,
+          "FDE_mm": -1.5777125626094486
+        },
+        "upper_95": {
+          "energy_mm": -0.5585716962068975,
+          "ADE_mm": -0.6736604386013514,
+          "FDE_mm": -1.478941868411207
+        },
+        "originals_lower": {
+          "energy_mm": 265,
+          "ADE_mm": 266,
+          "FDE_mm": 266
+        },
+        "originals_tied": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        },
+        "originals_higher": {
+          "energy_mm": 1,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        }
+      }
+    },
+    "diff_ridge": {
+      "absolute": {
+        "energy_mm": 3.1985908249153128,
+        "ADE_mm": 3.3877865846885724,
+        "FDE_mm": 6.7076483464594165
+      },
+      "relative": {
+        "energy_mm": 2.676751644475076,
+        "ADE_mm": 2.717100512273652,
+        "FDE_mm": 5.319080704173223
+      },
+      "relative_minus_absolute": {
+        "difference": {
+          "energy_mm": -0.5218391804402365,
+          "ADE_mm": -0.6706860724149227,
+          "FDE_mm": -1.3885676422861903
+        },
+        "lower_95": {
+          "energy_mm": -0.5391639438242861,
+          "ADE_mm": -0.6921858300533633,
+          "FDE_mm": -1.432957601834711
+        },
+        "upper_95": {
+          "energy_mm": -0.5046911297834544,
+          "ADE_mm": -0.6486734927203998,
+          "FDE_mm": -1.3435886945285318
+        },
+        "originals_lower": {
+          "energy_mm": 266,
+          "ADE_mm": 266,
+          "FDE_mm": 266
+        },
+        "originals_tied": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        },
+        "originals_higher": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        }
+      }
+    },
+    "ridge_residual": {
+      "absolute": {
+        "energy_mm": 3.027302092159225,
+        "ADE_mm": 3.2145454707365033,
+        "FDE_mm": 6.361417132148447
+      },
+      "relative": {
+        "energy_mm": 2.6982669866765625,
+        "ADE_mm": 2.7299528806627253,
+        "FDE_mm": 5.329407145201052
+      },
+      "relative_minus_absolute": {
+        "difference": {
+          "energy_mm": -0.3290351054826633,
+          "ADE_mm": -0.48459259007378047,
+          "FDE_mm": -1.0320099869474
+        },
+        "lower_95": {
+          "energy_mm": -0.34534602536931885,
+          "ADE_mm": -0.5044318489842009,
+          "FDE_mm": -1.0739322561424036
+        },
+        "upper_95": {
+          "energy_mm": -0.3132179678168363,
+          "ADE_mm": -0.46431319838763613,
+          "FDE_mm": -0.9890566980499016
+        },
+        "originals_lower": {
+          "energy_mm": 265,
+          "ADE_mm": 265,
+          "FDE_mm": 265
+        },
+        "originals_tied": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        },
+        "originals_higher": {
+          "energy_mm": 1,
+          "ADE_mm": 1,
+          "FDE_mm": 1
+        }
+      }
+    },
+    "ridge_point": {
+      "absolute": {
+        "energy_mm": 4.020904871888958,
+        "ADE_mm": 3.150880850704842,
+        "FDE_mm": 6.245622468068393
+      },
+      "relative": {
+        "energy_mm": 3.388422192172483,
+        "ADE_mm": 2.6235576434561128,
+        "FDE_mm": 5.118135681669936
+      },
+      "relative_minus_absolute": {
+        "difference": {
+          "energy_mm": -0.6324826797164737,
+          "ADE_mm": -0.5273232072487294,
+          "FDE_mm": -1.1274867863984577
+        },
+        "lower_95": {
+          "energy_mm": -0.6583420352296514,
+          "ADE_mm": -0.5480302870590574,
+          "FDE_mm": -1.1713808089471054
+        },
+        "upper_95": {
+          "energy_mm": -0.606518516354077,
+          "ADE_mm": -0.5062562305363822,
+          "FDE_mm": -1.0819939931420297
+        },
+        "originals_lower": {
+          "energy_mm": 265,
+          "ADE_mm": 265,
+          "FDE_mm": 265
+        },
+        "originals_tied": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        },
+        "originals_higher": {
+          "energy_mm": 1,
+          "ADE_mm": 1,
+          "FDE_mm": 1
+        }
+      }
+    },
+    "velocity20": {
+      "absolute": {
+        "energy_mm": 4.170673418335235,
+        "ADE_mm": 3.2512228873941322,
+        "FDE_mm": 6.289018836290698
+      },
+      "relative": {
+        "energy_mm": 4.170673418335235,
+        "ADE_mm": 3.2512228873941322,
+        "FDE_mm": 6.289018836290698
+      },
+      "relative_minus_absolute": {
+        "difference": {
+          "energy_mm": 0.0,
+          "ADE_mm": 0.0,
+          "FDE_mm": 0.0
+        },
+        "lower_95": {
+          "energy_mm": 0.0,
+          "ADE_mm": 0.0,
+          "FDE_mm": 0.0
+        },
+        "upper_95": {
+          "energy_mm": 0.0,
+          "ADE_mm": 0.0,
+          "FDE_mm": 0.0
+        },
+        "originals_lower": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        },
+        "originals_tied": {
+          "energy_mm": 266,
+          "ADE_mm": 266,
+          "FDE_mm": 266
+        },
+        "originals_higher": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        }
+      }
+    },
+    "velocity100": {
+      "absolute": {
+        "energy_mm": 5.390644523835837,
+        "ADE_mm": 4.4019980505775775,
+        "FDE_mm": 7.787875494585469
+      },
+      "relative": {
+        "energy_mm": 5.390644523835837,
+        "ADE_mm": 4.4019980505775775,
+        "FDE_mm": 7.787875494585469
+      },
+      "relative_minus_absolute": {
+        "difference": {
+          "energy_mm": 0.0,
+          "ADE_mm": 0.0,
+          "FDE_mm": 0.0
+        },
+        "lower_95": {
+          "energy_mm": 0.0,
+          "ADE_mm": 0.0,
+          "FDE_mm": 0.0
+        },
+        "upper_95": {
+          "energy_mm": 0.0,
+          "ADE_mm": 0.0,
+          "FDE_mm": 0.0
+        },
+        "originals_lower": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        },
+        "originals_tied": {
+          "energy_mm": 266,
+          "ADE_mm": 266,
+          "FDE_mm": 266
+        },
+        "originals_higher": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        }
+      }
+    }
+  },
+  "descriptive_input_overlap": {
+    "last_position_any_axis_outside_training_range": 0.9797113273264062,
+    "last_20_ms_change_any_axis_outside_training_range": 0.02105525339333746
+  },
+  "origin_shift_control": {
+    "C_fitting_route": {
+      "absolute": {
+        "x": {
+          "1117-ar": {
+            "mean_marker_distance_mm": 3.7418648165292923,
+            "max_marker_distance_mm": 21.219852752427695
+          },
+          "1117-diffusion": {
+            "mean_marker_distance_mm": 3.958478559908143,
+            "max_marker_distance_mm": 14.106518342685758
+          },
+          "2971-ar": {
+            "mean_marker_distance_mm": 3.525027341671203,
+            "max_marker_distance_mm": 16.122156965178885
+          },
+          "2971-diffusion": {
+            "mean_marker_distance_mm": 4.089688887337982,
+            "max_marker_distance_mm": 13.710492356186988
+          }
+        },
+        "y": {
+          "1117-ar": {
+            "mean_marker_distance_mm": 2.826474400509697,
+            "max_marker_distance_mm": 12.468921257436861
+          },
+          "1117-diffusion": {
+            "mean_marker_distance_mm": 2.805322646567556,
+            "max_marker_distance_mm": 7.6100965875134055
+          },
+          "2971-ar": {
+            "mean_marker_distance_mm": 2.3047408269259084,
+            "max_marker_distance_mm": 8.043891434895212
+          },
+          "2971-diffusion": {
+            "mean_marker_distance_mm": 2.5766513484420797,
+            "max_marker_distance_mm": 7.858933881006652
+          }
+        },
+        "z": {
+          "1117-ar": {
+            "mean_marker_distance_mm": 4.261764481635178,
+            "max_marker_distance_mm": 22.914711085697324
+          },
+          "1117-diffusion": {
+            "mean_marker_distance_mm": 3.466922944504376,
+            "max_marker_distance_mm": 11.159179403088737
+          },
+          "2971-ar": {
+            "mean_marker_distance_mm": 3.400630668565448,
+            "max_marker_distance_mm": 18.60577784793668
+          },
+          "2971-diffusion": {
+            "mean_marker_distance_mm": 2.6982808127654727,
+            "max_marker_distance_mm": 10.00883055252603
+          }
+        }
+      },
+      "relative": {
+        "x": {
+          "1117-ar": {
+            "mean_marker_distance_mm": 0.0,
+            "max_marker_distance_mm": 0.0
+          },
+          "1117-diffusion": {
+            "mean_marker_distance_mm": 0.0,
+            "max_marker_distance_mm": 0.0
+          },
+          "2971-ar": {
+            "mean_marker_distance_mm": 0.0,
+            "max_marker_distance_mm": 0.0
+          },
+          "2971-diffusion": {
+            "mean_marker_distance_mm": 0.0,
+            "max_marker_distance_mm": 0.0
+          }
+        },
+        "y": {
+          "1117-ar": {
+            "mean_marker_distance_mm": 0.0,
+            "max_marker_distance_mm": 0.0
+          },
+          "1117-diffusion": {
+            "mean_marker_distance_mm": 0.0,
+            "max_marker_distance_mm": 0.0
+          },
+          "2971-ar": {
+            "mean_marker_distance_mm": 0.0,
+            "max_marker_distance_mm": 0.0
+          },
+          "2971-diffusion": {
+            "mean_marker_distance_mm": 0.0,
+            "max_marker_distance_mm": 0.0
+          }
+        },
+        "z": {
+          "1117-ar": {
+            "mean_marker_distance_mm": 0.0,
+            "max_marker_distance_mm": 0.0
+          },
+          "1117-diffusion": {
+            "mean_marker_distance_mm": 0.0,
+            "max_marker_distance_mm": 0.0
+          },
+          "2971-ar": {
+            "mean_marker_distance_mm": 0.0,
+            "max_marker_distance_mm": 0.0
+          },
+          "2971-diffusion": {
+            "mean_marker_distance_mm": 0.0,
+            "max_marker_distance_mm": 0.0
+          }
+        }
+      }
+    },
+    "H_blinded_relative_max_difference_mm": {
+      "1117-ar": 0,
+      "1117-diffusion": 0,
+      "2971-ar": 0,
+      "2971-diffusion": 0
+    }
+  }
+}

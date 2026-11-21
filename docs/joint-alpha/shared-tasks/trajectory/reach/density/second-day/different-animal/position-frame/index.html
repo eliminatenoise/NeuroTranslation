@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start at the last position · NeuroTranslation</title>
+  <style>:root { font: 100%/1.62 system-ui, sans-serif; color: #203538; background: #f5f6f2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(45rem, calc(100% - 2rem)); margin: 2rem auto 4rem; }
+    header { border-top: .35rem solid #1b4647; }
+    h1, h2 { line-height: 1.15; letter-spacing: -.035em; }
+    h1 { font-size: clamp(2.3rem, 7vw, 4rem); margin: .35em 0; }
+    a { color: #075d52; text-underline-offset: .2em; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #c44c14; outline-offset: 3px; }
+    section { margin-top: 2rem; border-top: 1px solid #b9c7c4; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    caption, th, td { text-align: left; }
+    caption { font-weight: 650; margin-bottom: .35rem; }
+    th, td { padding: .36rem .4rem; border-bottom: 1px solid #bdc9c6; vertical-align: top; }
+    details { border-bottom: 1px solid #bdc9c6; }
+    details table { margin-bottom: .8rem; }
+    summary { padding: .55em .2em; cursor: pointer; font-weight: 650; }
+    @media (forced-colors: active) {
+      a:focus-visible, summary:focus-visible { outline-color: Highlight; }
+      th, td, details { border-color: CanvasText; }
+    }
+    table { table-layout: fixed; }
+    th:first-child { width: 39%; }
+    @media(max-width: 400px) {
+      th, td { padding: .32rem .2rem; overflow-wrap: anywhere; font-size: .87rem; }
+    }</style>
+</head><body><main>
+  <header>
+    <p><a href="../">A reach from a different animal</a></p>
+    <h1>Start at the last position</h1>
+    <p>Move the zero on a ruler and every position number shifts by the same amount. We tested whether two forecasting models handle that choice differently when learning from one macaque and predicting a reach from another.</p>
+  </header>
+  <section>
+    <h2>Give both fits the same movement</h2>
+    <p>We fitted each transformer twice on the same 72 trials from macaque C. One fit used the recorded position at each of the last 20 times. The other measured every earlier position from the most recent reading in its own channel. Each pair used the same architecture, number of training steps, two seeds and 32 paths per forecast. Each representation had its own fitted scales and linear starting path.</p>
+    <p>In a controlled replay of C’s fitting histories, moving a coordinate origin by 50 mm changed the original models’ forecasts by 2.3 to 4.3 mm on average, depending on the axis and model. The movement-relative models gave identical forecasts with the same draws. We repeated that shift check on 12 earlier histories from H before reading their later positions.</p>
+  </section>
+  <section>
+    <h2>Both transformers improved on the third recording</h2>
+    <p>We tested macaque H’s November 6 recording with the fitted models from C. We saved every forecast before reading the future marker positions. All 14,025 windows from the 266 eligible trials could be scored, with each trial given equal weight.</p>
+    <p>With movement-relative inputs, autoregression’s path-distribution error fell by <strong>0.577 mm</strong>. The paired 95% interval for the reduction was 0.559 to 0.597 mm. Diffusion improved by <strong>0.522 mm</strong>, with an interval of 0.505 to 0.539 mm. Autoregression improved on 265 trials and diffusion on all 266.</p>
+    <table><caption>Path distribution error in millimetres. Lower is better.</caption>
+    <thead><tr><th scope="col">Forecast</th><th scope="col">Positions</th><th scope="col">Changes</th><th scope="col">Difference</th></tr></thead>
+    <tbody>
+      <tr data-estimator="ar_ridge"><th scope="row">Autoregressive transformer</th><td>3.232</td><td>2.655</td><td>-0.577</td></tr>
+      <tr data-estimator="diff_ridge"><th scope="row">Diffusion transformer</th><td>3.199</td><td>2.677</td><td>-0.522</td></tr>
+      <tr data-estimator="ridge_residual"><th scope="row">Linear paths with sampled errors</th><td>3.027</td><td>2.698</td><td>-0.329</td></tr>
+      <tr data-estimator="ridge_point"><th scope="row">One linear path</th><td>4.021</td><td>3.388</td><td>-0.632</td></tr>
+      <tr data-estimator="velocity20"><th scope="row">Continue the last 20 ms of velocity</th><td>4.171</td><td>4.171</td><td>0.000</td></tr>
+      <tr data-estimator="velocity100"><th scope="row">Continue the last 100 ms of velocity</th><td>5.391</td><td>5.391</td><td>0.000</td></tr>
+    </tbody></table>
+    <p>The movement-relative autoregressive model scored lowest when we compared sets of possible paths. When we compared single paths, the movement-relative linear estimate gave the closest average position (2.624 mm) and final position (5.118 mm).</p>
+  </section>
+  <section>
+    <h2>Where the recordings overlap</h2>
+    <p>About 98% of H’s trial-weighted histories ended with at least one position outside C’s observed fitting range. For changes over the final 20 ms, about 2.1% of histories fell outside that range. Those counts describe the inputs in these recordings. The cause of the difference in position is open.</p>
+    <p>The archive defines the workspace relative to the reaching hand. The 20, 50, 70 and 100 ms targets use processed camera and handle readings, where nearby observations can contribute to a row. The accuracy result covers one held animal and one recorded session.</p>
+    <p><a href="results.json">Download the aggregate scores and trial counts</a></p>
+    <p>Dataset by Chowdhury, Glaser and Miller. <a href="https://datadryad.org/dataset/doi:10.5061/dryad.nk98sf7q7">Recording archive</a> · <a href="https://elifesciences.org/articles/48198">Study methods</a></p>
+  </section>
+</main></body></html>
