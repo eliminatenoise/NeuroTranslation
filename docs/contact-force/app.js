@@ -391,7 +391,7 @@ function startupFailure() {
   el("workbench").hidden = true;
   el("study-table").hidden = true;
   const status = el("startup-status");
-  status.textContent = "The fitted model files could not load. Extract the whole ZIP to one folder and reopen index.html.";
+  status.textContent = "The fitted model files could not load. Reload the page. In a downloaded copy, extract the whole ZIP to one folder and reopen index.html.";
   status.classList.add("error");
 }
 
