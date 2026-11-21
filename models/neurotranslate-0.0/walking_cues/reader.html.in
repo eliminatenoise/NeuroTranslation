@@ -77,10 +77,13 @@ function refresh(){
 }
 function table(){
  const r=bundle[$('sample').value];$('support').textContent=r.people+' people contributed '+r.recordings+' recordings and '+r.windows+' observations. Each person supplied both walking instructions.';
- const list=[['encoder_cue',names.encoder_cue],['encoder_motion',names.encoder_motion],['swapped_encoder','Same fitted encoder, opposite instruction'],['linear_cue',names.linear_cue],['linear_motion',names.linear_motion],['pace_phase',names.pace_phase],['velocity_50ms',names.velocity_50ms],['condition_phase_mean',names.condition_phase_mean]];
+ const list=[['encoder_cue',names.encoder_cue],['encoder_motion',names.encoder_motion],['swapped_encoder','Same fitted encoder, opposite instruction'],['random_cue',names.random_cue],['linear_cue',names.linear_cue],['linear_motion',names.linear_motion],['pace_phase',names.pace_phase],['velocity_50ms',names.velocity_50ms],['condition_phase_mean',names.condition_phase_mean]];
  $('results').replaceChildren(...list.map(([k,name])=>{const tr=document.createElement('tr');for(const item of [name,...r.methods[k].endpoint_mm.map(n=>n.toFixed(2))]){const td=document.createElement('td');td.textContent=item;tr.append(td)}return tr}));
  const pass=r.cue_test.encoder_cue.passes_pelvis_heel.map((v,i)=>v?['pelvis','heel'][i]:null).filter(Boolean);
- $('verdict').textContent=pass.length?'The correct instruction met the paired improvement test for the '+pass.join(' and ')+'.':'Neither landmark met the prespecified test for an instruction advantage over both motion alone and the opposite instruction.';
+ const u=r.methods.random_cue.endpoint_mm,c=r.methods.encoder_cue.endpoint_mm,historical=$('sample').value==='historical';
+ $('verdict').textContent=(pass.length?'With the shared movement encoder, the correct instruction met the paired improvement test for the '+pass.join(' and ')+'.':'With the shared movement encoder, neither landmark met the prespecified test for an instruction advantage over both motion alone and the opposite instruction.')+
+  (u[0]<=c[0]&&u[1]<=c[1]?' An untrained copy of the encoder, given the same instruction, did as well or better ('+u.map(n=>n.toFixed(2)).join(' and ')+' mm).':'')+
+  (historical?' These ten people had already been used in earlier studies. The directly trained Transformer on the walking-instructions page missed by less, and its instruction did not pass the same kind of test in them.':'');
 }
 ['heading','pace','phrase','method','offset','frame'].forEach(k=>$(k).addEventListener('input',refresh));$('sample').addEventListener('change',table);window.addEventListener('resize',refresh);refresh();table();
 </script></body></html>
