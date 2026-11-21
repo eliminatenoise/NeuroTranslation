@@ -1,0 +1,46 @@
+:root{font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#192b2d;background:#f5f5ee;font-synthesis:none;line-height:1.5;--accent:#185e54;--border:#ced6c9}
+*{box-sizing:border-box}body{margin:0}a{color:var(--accent);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}button,input,select{font:inherit;color:inherit}
+button,select{cursor:pointer}button,select,input{min-height:42px;border:1px solid #a9b8ad;border-radius:6px;background:#fff;padding:7px 11px;font-size:.9rem}
+:focus-visible{outline:3px solid #cc691b;outline-offset:3px}label{font-size:.81rem;font-weight:670;display:block}label+select,label+div.inline{margin-top:5px}
+h1,h2,p{margin:0}h2{font-size:1.3rem;line-height:1.23;letter-spacing:-.035em}input,select{width:100%;max-width:100%}.mast,main,footer{max-width:1296px;margin:auto;padding-inline:clamp(16px,4vw,58px)}
+.mast{padding-block:19px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:.86rem}.mast div a{font-weight:760;text-decoration:none;color:inherit}.mast div span{margin-inline:9px;color:#6f806f}.mast>a{text-decoration:none;font-weight:640}
+.intro{padding-block:clamp(28px,4vw,50px)}.intro h1{font-size:clamp(2.6rem,5vw,4.6rem);font-weight:640;line-height:1.04;letter-spacing:-.065em;margin:6px 0 15px}.intro>p{max-width:795px;font-size:clamp(1rem,1.38vw,1.15rem);color:#435453}
+.eyebrow{color:#42675a;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;font-weight:730}
+.workspace{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(0,2fr);gap:16px;align-items:stretch}
+.panel,.details{border:1px solid var(--border);background:#fffef9;border-radius:15px}.selectors{padding:clamp(17px,2.2vw,29px)}.selectors h2{margin:0 0 15px}
+.hint{font-size:.81rem;line-height:1.5;color:#53625e}.selectors .hint{margin:8px 0 13px}.paired{display:grid;grid-template-columns:1fr 1fr;gap:9px}.divider{height:1px;background:var(--border);margin:18px 0}.inline{display:flex;gap:6px}.inline input{min-width:0}.inline button{background:#255c52;color:white;border-color:#255c52;font-weight:680}
+.targets{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:3px}.targets button{font-weight:700;padding:3px 0;min-height:37px;font-size:.83rem}.targets button[aria-pressed="true"]{background:#254d45;color:white;border-color:#254d45}
+.ends{display:flex;align-items:center;justify-content:space-between;color:#586a61;font-size:.68rem;margin:3px 0 11px}.reset{border:0;padding:0;background:none;font-size:.79rem;min-height:28px;color:var(--accent);text-decoration:underline;text-underline-offset:3px}.status{font-size:.82rem;line-height:1.4;margin-top:3px;font-weight:620;color:#294e42}
+.chartCard{background:#182c2e;border-radius:15px;color:#eaf6e9;padding:clamp(17px,2.2vw,28px);display:flex;flex-direction:column;min-width:0}
+.chartTop,.sectionHead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.chartTop .eyebrow{color:#a2c6b1}.chartTop h2{margin-top:5px;color:#fff;font-size:clamp(1.25rem,2.3vw,1.95rem)}
+.view{min-width:120px}.chartCard select{margin-top:4px;color:#f4fff4;background:#233c3e;border-color:#55706b;color-scheme:dark}.chartCard label{color:#d8e5da}
+canvas{width:100%;display:block;height:clamp(220px,26vw,325px);flex:1 1 auto;min-height:218px;margin:8px 0;touch-action:pan-y}
+.plotLegend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.76rem;color:#eef3ed}.plotLegend span{display:flex;align-items:center;gap:6px}.plotLegend span:before{content:"";width:16px;border-top:3px solid}.past:before{color:#8fd6fc}.forecast:before{color:#f5bd65}.actual:before{color:#b1eeae}.original:before{color:#c3b9ff;border-top-style:dashed!important}
+.chartCaption{font-size:.79rem;color:#c6d7d2;margin:9px 0 14px;line-height:1.4}.plotFoot{border-top:1px solid #43605d;padding-top:12px;display:grid;grid-template-columns:3fr 1fr;gap:12px}.plotFoot select:disabled{opacity:.6}
+.details{padding:clamp(18px,2.5vw,33px);margin:16px 0}.sectionHead h2{font-size:clamp(1.4rem,2.6vw,2.1rem);margin-top:3px}.sectionHead label{min-width:145px}.sectionHead select{display:block;margin-top:4px}.details>p,.about p,details p{font-size:.93rem;max-width:880px;margin:13px 0;color:#435453}
+.tableWrap{overflow-x:auto}table{font-size:.85rem;border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}th,td{padding:8px 10px;border-bottom:1px solid #e1e5dc;text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left;padding-left:0}thead th{font-size:.75rem;color:#54675e;font-weight:650}tbody th{font-weight:580}.focusRow{background:#eaf3e8}details{margin-top:13px}summary{color:var(--accent);cursor:pointer;font-weight:650;font-size:.86rem}.details>.finding{background:#e9f1e6;border-left:3px solid #608663;padding:10px 13px;max-width:none}
+.about{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;padding:28px 2px}.references{display:flex;flex-wrap:wrap;column-gap:17px;row-gap:6px;font-size:.85rem}footer{padding-block:21px;border-top:1px solid var(--border);font-size:.76rem;color:#56685e}.skip,.sr{position:absolute;left:-9999px}.skip:focus{position:static}.sr{width:1px;overflow:hidden}#fatal{padding:14px;background:#f7dfc7}
+@media(max-width:800px){.workspace{grid-template-columns:minmax(220px,.9fr) minmax(0,1.4fr)}.chartTop{flex-wrap:wrap}.chartTop .view{min-width:0}.chartTop .view select{max-width:125px}.targets{gap:1px}.targets button{border-radius:3px}.about{gap:20px}}
+@media(max-width:640px){.workspace,.about{grid-template-columns:1fr}.mast{font-size:.78rem}.intro{padding-block:26px}.chartTop{flex-wrap:nowrap}.chartTop .view{min-width:98px}.chartTop .view select{max-width:103px}.targets{gap:4px}.targets button{min-height:40px}.chartCard{padding:17px}.sectionHead{align-items:flex-end}.sectionHead label{min-width:96px;max-width:129px}.details{padding:16px}.plotFoot{grid-template-columns:minmax(0,2.5fr) minmax(66px,1fr)}.about{gap:16px}.about h2{font-size:1.27rem}.ends{font-size:.73rem}th,td{padding:6px}.sectionHead h2{font-size:1.3rem}.details>p,.about p{font-size:.87rem}.plotLegend{gap:4px 13px}}
+@media(max-width:360px){.mast,.intro,main,footer{padding-inline:12px}.intro{padding-inline:0}.mast div span{margin-inline:3px}.plotFoot select,.view select{font-size:.78rem}.targets{gap:2px}.chartTop h2{font-size:1.13rem}.intro h1{font-size:2.4rem}}
+.intro{display:flex;align-items:center;justify-content:space-between;gap:24px}.introText{max-width:850px}.introText>p{max-width:795px;color:#435453;font-size:clamp(1rem,1.38vw,1.15rem)}.intro figure{margin:0;flex:0 0 155px}.intro figure img{display:block;width:100%;height:125px;object-fit:cover;object-position:50% 46%;border-radius:10px}.intro figcaption{color:#516458;font-size:.7rem;margin-top:4px}@media(max-width:800px){.intro figure{flex-basis:124px}.intro figure img{height:111px}}@media(max-width:640px){.intro{display:block}.intro figure{display:flex;align-items:center;gap:9px;margin-top:12px}.intro figure img{width:44px;height:44px;border-radius:5px}}
+
+.intro figure img{object-fit:contain;background:#a6a79e}.intro figcaption a{white-space:nowrap}
+@media(max-width:640px){
+  .tableWrap table{font-size:.78rem}
+  .tableWrap th,.tableWrap td{white-space:normal;overflow-wrap:anywhere}
+  .tableWrap table:has(#scores),.tableWrap table:has(#pairs){table-layout:fixed}
+  .tableWrap table:has(#scores) th:first-child,.tableWrap table:has(#pairs) th:first-child{width:42%}
+  .tableWrap table:has(#scores) th:nth-child(2),.tableWrap table:has(#pairs) th:nth-child(2){width:24%}
+  .tableWrap table:has(#coordinates){display:block}
+  table:has(#coordinates) thead{position:absolute;left:-9999px}
+  #coordinates{display:block}
+  #coordinates tr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:7px 6px;border-bottom:1px solid #d9e2d7}
+  #coordinates td,#coordinates th{text-align:left;display:block;padding:2px 0;border:0}
+  #coordinates th{grid-column:1/-1;font-size:.83rem}
+  #coordinates td{font-size:.74rem}
+  #coordinates td::before{display:block;content:attr(data-label);font-size:.62rem;color:#465e54;font-weight:620}
+  .chartTop .view{min-width:105px}
+  .chartTop .view select{max-width:108px}
+}
+@media(max-width:430px){#coordinates tr{grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 10px}#coordinates td{font-size:.8rem}#coordinates td::before{font-size:.67rem}}

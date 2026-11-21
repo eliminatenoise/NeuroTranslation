@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "source": "https://doi.org/10.17605/OSF.IO/J3QC8",
+  "archive": "Ruhr_HandMotion_CenterOutTask.tar.gz",
+  "sha256": "ebcde74b260f4a1e7b57ce0bb626bb6ee0703e6ba75c258267211933da3d8c79",
+  "bytes": 1928361942,
+  "selection_before_payload_inspection": true,
+  "experiment": "Center-out transport, all nine visually assigned spatial targets, both separate hand sessions; use measurement Vicon (unrotated optical marker positions).",
+  "participant_rule": "All 31 participants in full archive; the article reports numbering by age. Every fourth ID (4,8,12,16,20,24,28) is sealed, distributing holdouts across the ordered list. The other 24 form development.",
+  "trial_rule": "Select the first two assignments of every target per participant-hand in session recording order, then drop author exclusions or unusable series with explicit reasons. Never backfill missed trials.",
+  "public_rule": "Development participant 01, first assigned trial for every target and each hand, after the same exclusions. No substitutions.",
+  "missingness_rule": "Retain original frame grid and represent absent measurements explicitly. Determine stable within-trial marker membership from start-frame availability to prevent switching on dropouts. No extrapolation or post-trial alignment for predictive inputs.",
+  "evaluation_scope": "The seven listed people formed a participant-disjoint test set for the two prespecified clocks."
+}

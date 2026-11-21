@@ -1,0 +1,50 @@
+Target reach • NeuroTranslation experimental reader, v1
+
+Extract the entire target-reach folder. Open index.html in a web browser, or use
+the dedicated launcher for Windows, macOS or Linux. Local computation uses
+files beside the page. The atlas, paper, citations and download link go online.
+
+Use the hand selector and the assigned target to choose a recording. The clock
+starts at the first usable optical measurement, or at the third consecutive
+250 Hz camera frame at least 15 mm from that starting position. Five measurements
+over the next 0.200 s enter the forecast. Future coordinates are displacements
+from the last input. Their clocks read 0.400, 0.600 and 0.800 s from the anchor.
+Controls work with a keyboard. Select a target button or type “target 5” and
+press Enter. Forecasts run on this device.
+
+Each displayed hand/target example is the first eligible held-out participant,
+then recording, under the original ordering. Selection uses input availability.
+Missing endpoints stay missing. Separate clock models use development-only
+parameters. The motion-only arm excludes the target and the target-only arm
+excludes the optical coordinates; both retain hand and time. The source study
+presented visual destinations and an acoustic go signal. Typed commands are
+reader controls. An edited target is a conditional simulation with no matched
+measurement; the three endpoints are discrete predictions at three times.
+
+Tim Sziburis, Susanne Blex, Tobias Glasmachers and Ioannis Iossifidis (2025).
+Ruhr Hand Motion Catalog of Human Center-Out Transport Trajectories Measured
+Redundantly in 3D Task-Space, version 1. Original data: CC BY 4.0.
+https://doi.org/10.17605/OSF.IO/J3QC8
+https://doi.org/10.1038/s41597-025-05576-7
+https://creativecommons.org/licenses/by/4.0/
+
+A photograph of the tracked cylinder comes from Fig. 2 in the authors' article,
+under CC BY 4.0. The reader displays a reduced JPEG of the published figure.
+https://www.nature.com/articles/s41597-025-05576-7/figures/2
+The target arrangement, apparatus and visual/acoustic timing appear in Figs. 3–6.
+https://www.nature.com/articles/s41597-025-05576-7/figures/3
+https://www.nature.com/articles/s41597-025-05576-7/figures/4
+https://www.nature.com/articles/s41597-025-05576-7/figures/5
+https://www.nature.com/articles/s41597-025-05576-7/figures/6
+
+This adaptation selects and averages source optical object markers, samples
+original world-frame positions and takes their differences in metres. A missing
+member of a trial’s fixed marker set makes a frame unavailable. Published
+optical data can contain fills made during the authors' optical reconstruction.
+The original camera axes are preserved. Object motion cannot identify joint
+angles, muscle signals, neural activity or the meaning of a novel sentence.
+
+Original reader code, graphics and fitted model contributions are dedicated
+to the public domain under CC0 to the extent of the project's rights. The source
+measurement excerpts and cylinder photograph retain CC BY 4.0 attribution.
+CC-BY-4.0.txt and CC0-1.0.txt accompany this package.

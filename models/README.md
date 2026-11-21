@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0
 
+The [target-reach model and source](target-reach/) predict object displacement to three future times after an initial 200 ms of tracked motion. [Type a destination](https://eliminatenoise.github.io/NeuroTranslation/target-reach/)
+
 [The next-day count model](contact-forecast/) estimates detected events at 26 shared contacts after a push. [Run the fitted models](https://eliminatenoise.github.io/NeuroTranslation/contact-forecast/)
 
 [Forecast a push and a reach](https://eliminatenoise.github.io/NeuroTranslation/cortical-reach/) using recent handle movement, task cues and area 2 counts. The [cortical reach package](cortical-reach/) includes 18 fitted neural models and two sets of linear comparisons.

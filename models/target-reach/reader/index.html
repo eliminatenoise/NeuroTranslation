@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light"><title>Target reach · NeuroTranslation</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="weights.js"></script><script defer src="data.js"></script><script defer src="kernel.js"></script>
+<script defer src="plot.js"></script><script defer src="app.js"></script></head>
+<body><a class="skip" href="#main">Skip to reader</a>
+<header class="mast"><div><a href="https://eliminatenoise.github.io/NeuroTranslation/">NeuroTranslation</a><span> / </span> Target reach</div><a id="download" href="../target-reach-offline.zip" download>Download reader <span aria-hidden="true">↓</span></a></header>
+<main id="main"><section class="intro"><div class="introText"><div class="eyebrow">Ruhr Hand Motion Catalog</div><h1>Where will the cylinder go?</h1>
+<p>A person sees one of nine destinations and moves a cylinder toward it. Give a model the destination and the first 200 milliseconds of optical measurements. Change the destination and see where the same start takes it.</p></div><figure><img src="marker-cylinder.jpg" width="306" height="300" alt="Two reflective balls fixed to an orange mount on top of the dark cylinder"><figcaption>The tracked cylinder · <a href="https://www.nature.com/articles/s41597-025-05576-7/figures/2">Fig. 2 ↗</a></figcaption></figure></section>
+<div id="fatal" role="alert" hidden></div><noscript>This reader needs JavaScript to calculate the forecasts.</noscript>
+<section class="workspace" aria-label="Forecast explorer">
+<aside class="panel selectors"><h2>Choose a recording</h2>
+<label for="alignment">Start the clock at</label><select id="alignment"><option value="acquisition">First optical sample · primary</option><option value="crossing">15 mm crossing · secondary</option></select><p class="hint" id="clockHint"></p>
+<div class="paired"><div><label for="hand">Hand session</label><select id="hand"><option value="right">Right hand</option><option value="left">Left hand</option></select></div>
+<div><label for="trial">Recorded trial</label><select id="trial"></select></div></div>
+<p id="selectedCase" class="hint"></p>
+<div class="divider"></div><h2>Change the destination</h2>
+<form id="commandForm"><label for="command">Forecast command</label><div class="inline"><input id="command" type="text" maxlength="32" autocomplete="off" spellcheck="false" placeholder="target 5" aria-describedby="commandHint"><button type="submit">Apply</button></div></form>
+<p class="hint" id="commandHint">Type “target 5” or choose a number. These commands control the reader. Participants saw a visual cue.</p>
+<div class="targets" id="targets" aria-label="Forecast target options"></div>
+<div class="ends"><span>Participant’s left</span><span>Participant’s right</span></div>
+<button class="reset" id="reset" type="button">Restore assigned target</button>
+<p class="status" id="status" aria-live="polite"></p>
+</aside>
+<section class="chartCard"><div class="chartTop"><div><p class="eyebrow">Optical object coordinates</p><h2>Recorded start and forecast</h2></div>
+<label class="view">View<select id="projection"><option value="oblique">3D oblique</option><option value="xy">X–Y plane</option><option value="xz">X–Z plane</option><option value="yz">Y–Z plane</option></select></label></div>
+<canvas id="chart" role="img" aria-label="Trajectory projected from three measured axes. Coordinates follow the chart."></canvas>
+<div class="plotLegend"><span class="past">Input samples</span><span class="forecast">Selected forecast</span><span id="referenceLegend" class="actual">Recorded endpoints</span></div>
+<p class="chartCaption" id="caption"></p>
+<div class="plotFoot"><label for="method">Forecast to plot<select id="method"><option value="transformer_full">Transformer · motion + target</option><option value="transformer_pose_only">Transformer · motion only</option><option value="transformer_goal_only">Transformer · target only</option><option value="ridge_full">Linear · motion + target</option><option value="ridge_pose_only">Linear · motion only</option><option value="ridge_goal_only">Linear · target only</option><option value="stationary">Stay at last position</option><option value="velocity">Continue recent velocity</option><option value="goal_hand_mean">Training mean · hand + target</option></select></label>
+<label for="seed">Training seed<select id="seed"><option>17</option><option>41</option><option>73</option></select></label></div>
+</section></section>
+<section class="details"><div class="sectionHead"><div><p class="eyebrow">One recording</p><h2 id="endpointTitle">Read an endpoint</h2></div>
+<label for="horizon">Time from clock start<select id="horizon"><option value="0">0.400 s</option><option value="1" selected>0.600 s</option><option value="2">0.800 s</option></select></label></div>
+<p>Each value is a change in position from the last input sample, in metres along the original camera axes. The forecast and the measurement meet only if all three coordinates agree.</p>
+<div class="tableWrap"><table><caption class="sr">This trial’s endpoint displacements in metres</caption><thead><tr><th scope="col">Endpoint</th><th scope="col">X (m)</th><th scope="col">Y (m)</th><th scope="col">Z (m)</th><th scope="col" id="distanceHead">3D error (m)</th></tr></thead><tbody id="coordinates"></tbody></table></div>
+<p class="hint" id="endpointNote"></p><details><summary>See the five input positions</summary><p>Absolute position in the source camera frame, in metres. Each input is at or before its nominal time. A missing measurement can move the last input back by up to one 4 ms frame.</p>
+<div class="tableWrap"><table><thead><tr><th>Time (s)</th><th>X (m)</th><th>Y (m)</th><th>Z (m)</th></tr></thead><tbody id="inputs"></tbody></table></div></details></section>
+<section class="details"><div class="sectionHead"><div><p class="eyebrow">Across held-out people</p><h2>How far did each forecast miss?</h2></div><label for="group">Score group<select id="group"><option value="both">Both hands</option><option value="left">Left hand</option><option value="right">Right hand</option></select></label></div>
+<p id="benchmarkContext"></p><p id="gateResult" class="finding"></p>
+<div class="tableWrap"><table><thead><tr><th scope="col">Method</th><th scope="col">Mean 3D error (m)</th><th scope="col">95% interval (m)</th></tr></thead><tbody id="scores"></tbody></table></div>
+<details><summary>Compare the fitted Transformer with each alternative</summary><p>Subtract each alternative’s error from the motion-and-target Transformer’s error for the same person, then average across people. A negative difference favours the full Transformer. An interval spanning zero leaves the direction uncertain.</p><div class="tableWrap"><table><thead><tr><th>Alternative</th><th>Difference (m)</th><th>Paired 95% interval (m)</th></tr></thead><tbody id="pairs"></tbody></table></div></details>
+<details><summary>Coverage, baselines and uncertainty</summary><p id="coverage"></p><p>Each person counts equally. The Transformer scores average the three fits’ errors. For the wrong-target test, the full model tries all eight other targets and the analysis averages their individual errors. The training mean averages each development person’s displacement for the selected hand and target. Intervals resample held-out people 10,000 times.</p></details></section>
+<section class="about"><div><h2>What the cameras saw</h2><p>Reflective markers sat on a cylinder. The cameras sampled at 250 Hz while people moved the cylinder with one hand. Each trial follows the mean position of the markers visible at its first usable frame, as long as those same markers remain available. A wrist joint can move differently from the object it carries.</p><p>Targets ran from 1 on the participant’s left to 9 on their right along a semicircle of radius 0.25 m. Left and right hands performed separate trials. This recording does not place the go sound or the target display on the optical clock. A camera coordinate alone does not identify a person’s left, right or up.</p></div>
+<div><h2>Follow the measurement</h2><p>Tim Sziburis, Susanne Blex, Tobias Glasmachers and Ioannis Iossifidis released the measurements in 2025 under CC BY 4.0. This reader selects and averages optical marker positions, samples five time points and fits forecasts on development participants.</p><nav class="references" aria-label="Study sources"><a href="https://doi.org/10.17605/OSF.IO/J3QC8">Ruhr Hand Motion Catalog ↗</a><a href="https://doi.org/10.1038/s41597-025-05576-7">Study and apparatus photographs ↗</a><a href="https://creativecommons.org/licenses/by/4.0/">Data licence ↗</a><a href="https://eliminatenoise.github.io/Interoceptomics/target-reach/">Inspect the optical recordings ↗</a><a href="https://eliminatenoise.github.io/NeuroTranslation/papers/target-reach/">Read the forecast study ↗</a></nav></div></section>
+</main><footer>NeuroTranslation · Target reach · Experimental reader v1</footer></body></html>
