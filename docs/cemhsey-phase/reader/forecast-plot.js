@@ -28,17 +28,23 @@
     const x = tick => margins.left + horizontal * tick / 6000;
     let min = Infinity;
     let max = -Infinity;
+    let lowestReading = Infinity;
     for (const entry of series) {
       min = Math.min(min, entry.point, entry.range?.lower ?? Infinity, entry.observed ?? Infinity);
       max = Math.max(max, entry.point, entry.range?.upper ?? -Infinity, entry.observed ?? -Infinity);
+      lowestReading = Math.min(lowestReading, entry.point, entry.observed ?? Infinity);
     }
-    const extent = Math.max(Math.abs(min), Math.abs(max), 1e-12);
-    const low = min / extent;
-    const high = max / extent;
-    const margin = Math.max(.025, (high - low) * .13);
-    const displayLow = low - margin;
-    const displayHigh = high + margin;
-    const y = value => bottom - (value / extent - displayLow) * vertical / (displayHigh - displayLow);
+    // Force is a share of the hardest pinch: start the axis at zero unless a forecast or reading is itself negative,
+    // and use round tick steps. A band edge below zero is drawn at the axis floor.
+    const floor = lowestReading >= 0 ? 0 : min;
+    const pad = Math.max((max - floor) * .08, 1e-6);
+    const rawStep = (max + pad - floor) / 4;
+    const power = 10 ** Math.floor(Math.log10(rawStep));
+    const mantissa = rawStep / power;
+    const tickStep = (mantissa <= 1 ? 1 : mantissa <= 2 ? 2 : mantissa <= 2.5 ? 2.5 : mantissa <= 5 ? 5 : 10) * power;
+    const axisLow = lowestReading >= 0 ? 0 : Math.floor((min - pad) / tickStep) * tickStep;
+    const axisHigh = Math.ceil((max + pad) / tickStep) * tickStep;
+    const y = value => bottom - (Math.min(axisHigh, Math.max(axisLow, value)) - axisLow) * vertical / (axisHigh - axisLow);
 
     function line(points, color, strokeWidth, dash = []) {
       ctx.beginPath();
@@ -67,9 +73,10 @@
     ctx.textAlign = "left";
     ctx.fillText("Force (fraction of MVC)", margins.left, 15);
     ctx.textAlign = "right";
-    for (let step = 0; step <= 4; step++) {
-      const yy = bottom - vertical * step / 4;
-      const value = (displayLow + (displayHigh - displayLow) * step / 4) * extent;
+    const steps = Math.round((axisHigh - axisLow) / tickStep);
+    for (let step = 0; step <= steps; step++) {
+      const value = axisLow + tickStep * step;
+      const yy = y(value);
       const printed = Number.isFinite(value) ? Number(value.toPrecision(3)).toString() : "";
       line([[margins.left, yy], [right, yy]], colours.grid, 1);
       ctx.fillText(printed, margins.left - 7, yy + 4, margins.left - 9);
