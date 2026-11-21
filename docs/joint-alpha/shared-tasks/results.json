@@ -1,0 +1,976 @@
+{
+  "scope": "One training seed. Internal retrospective groups. Group means, then equal group weights. No whole-model replacement decision.",
+  "size_parameters": {
+    "compact": 36580,
+    "wider": 376740
+  },
+  "tasks": {
+    "human_leg_emg": {
+      "area": "human_balance",
+      "rows": 761,
+      "groups": 3,
+      "metric": "mean absolute error divided by fitted per-output population SD",
+      "output_units": [
+        "uV RMS",
+        "uV RMS",
+        "uV RMS",
+        "uV RMS",
+        "uV RMS",
+        "uV RMS",
+        "uV RMS",
+        "uV RMS"
+      ],
+      "outputs_in_order": [
+        "left_tibialis_anterior",
+        "left_soleus",
+        "left_medial_gastrocnemius",
+        "left_peroneus_longus",
+        "right_tibialis_anterior",
+        "right_soleus",
+        "right_medial_gastrocnemius",
+        "right_peroneus_longus"
+      ],
+      "groups_with_observations_by_output": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "fitted_target_sd_in_output_units": [
+        31.030147552490234,
+        14.493757247924805,
+        31.521764755249023,
+        37.248714447021484,
+        27.52011489868164,
+        12.211906433105469,
+        30.001262664794922,
+        33.07834243774414
+      ],
+      "widths": {
+        "compact": {
+          "single": {
+            "group_equal_primary": 0.37688880777411843,
+            "group_equal_physical_mae_by_output": [
+              10.055698374918707,
+              3.614942298606761,
+              17.694023198992017,
+              9.243151812718487,
+              11.608000247598374,
+              4.068449342647665,
+              13.697753349680658,
+              13.913842544838579
+            ]
+          },
+          "shared": {
+            "group_equal_primary": 0.38291495529152847,
+            "group_equal_physical_mae_by_output": [
+              10.253398924472853,
+              3.678592240896046,
+              18.111329798215447,
+              9.581033163299097,
+              11.587027338970517,
+              4.165662980207692,
+              13.77031335328086,
+              14.096426042972489
+            ]
+          },
+          "paired": {
+            "shared_minus_single": 0.006026147517410023,
+            "paired_percentile_95": [
+              0.004794255278315396,
+              0.007858256137352027
+            ]
+          }
+        },
+        "wider": {
+          "single": {
+            "group_equal_primary": 0.37704624235376566,
+            "group_equal_physical_mae_by_output": [
+              10.502534008137644,
+              3.831050103999066,
+              17.26328772960955,
+              8.9653621013242,
+              11.358582548081495,
+              4.286316140547988,
+              13.610273425702948,
+              13.490766531112074
+            ]
+          },
+          "shared": {
+            "group_equal_primary": 0.3795522651550755,
+            "group_equal_physical_mae_by_output": [
+              10.573937974446622,
+              3.753741932352144,
+              17.945493382117196,
+              9.157110459285624,
+              11.270379357787979,
+              4.181290363760134,
+              13.875543860056583,
+              13.466095161963368
+            ]
+          },
+          "paired": {
+            "shared_minus_single": 0.0025060228013098116,
+            "paired_percentile_95": [
+              -0.0012887414434042954,
+              0.006739542087154937
+            ]
+          }
+        }
+      }
+    },
+    "human_sacrum_path": {
+      "area": "human_balance",
+      "rows": 761,
+      "groups": 3,
+      "metric": "mean absolute error divided by fitted per-output population SD",
+      "output_units": [
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm"
+      ],
+      "outputs_in_order": [
+        "future_mediolateral_8",
+        "future_superior_inferior_8",
+        "future_anterior_posterior_8",
+        "future_mediolateral_16",
+        "future_superior_inferior_16",
+        "future_anterior_posterior_16",
+        "future_mediolateral_24",
+        "future_superior_inferior_24",
+        "future_anterior_posterior_24",
+        "future_mediolateral_32",
+        "future_superior_inferior_32",
+        "future_anterior_posterior_32"
+      ],
+      "groups_with_observations_by_output": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "fitted_target_sd_in_output_units": [
+        2.0597825050354004,
+        2.6379215717315674,
+        1.345350980758667,
+        4.0008039474487305,
+        5.247795581817627,
+        2.595402717590332,
+        5.918506145477295,
+        7.815227031707764,
+        3.690495252609253,
+        7.792609214782715,
+        10.316581726074219,
+        4.615760803222656
+      ],
+      "widths": {
+        "compact": {
+          "single": {
+            "group_equal_primary": 0.4108833876697135,
+            "group_equal_physical_mae_by_output": [
+              1.0382197075288258,
+              0.773619659200287,
+              0.6660896979501534,
+              1.6537963924781447,
+              1.5687711251205665,
+              1.2077642814539302,
+              2.4343936938516118,
+              2.4107127473840784,
+              1.7725195818161428,
+              3.2858876446473757,
+              3.4581891938310676,
+              2.324411833828002
+            ]
+          },
+          "shared": {
+            "group_equal_primary": 0.42208040537809177,
+            "group_equal_physical_mae_by_output": [
+              1.0676462710356258,
+              0.8238778877796475,
+              0.6699689651466073,
+              1.6978136770299492,
+              1.6380694332375807,
+              1.2043629253982864,
+              2.509920737400515,
+              2.6504597613896,
+              1.7908587451379845,
+              3.3901878517810533,
+              3.577588856503336,
+              2.3330896978446614
+            ]
+          },
+          "paired": {
+            "shared_minus_single": 0.011197017708378295,
+            "paired_percentile_95": [
+              0.008966452006397785,
+              0.012967417023239503
+            ]
+          }
+        },
+        "wider": {
+          "single": {
+            "group_equal_primary": 0.392292739148382,
+            "group_equal_physical_mae_by_output": [
+              1.0171105218067282,
+              0.6999075346686204,
+              0.643592787636197,
+              1.6104237254549325,
+              1.3387403901474677,
+              1.1800354102302697,
+              2.372314574502369,
+              2.139489916171291,
+              1.7470230699173666,
+              3.2027015858770285,
+              3.057439255242997,
+              2.3189034828001156
+            ]
+          },
+          "shared": {
+            "group_equal_primary": 0.39724896755465827,
+            "group_equal_physical_mae_by_output": [
+              1.0112455042987738,
+              0.7131289348537072,
+              0.6613870345783478,
+              1.6204750346043202,
+              1.3746984265199036,
+              1.2147528028099637,
+              2.3449343243665504,
+              2.231355902757103,
+              1.768939758832088,
+              3.1786588553120168,
+              3.1368872598254254,
+              2.3357965866593275
+            ]
+          },
+          "paired": {
+            "shared_minus_single": 0.0049562284062763156,
+            "paired_percentile_95": [
+              0.0006567022806943656,
+              0.008584244816119191
+            ]
+          }
+        }
+      }
+    },
+    "macaque_cortex_to_motion": {
+      "area": "macaque_C_reach",
+      "rows": 199,
+      "groups": 78,
+      "metric": "mean absolute error divided by fitted per-output population SD",
+      "output_units": [
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm",
+        "mm"
+      ],
+      "outputs_in_order": [
+        "delta_hand_x",
+        "delta_hand_y",
+        "delta_hand_z",
+        "delta_elbow_x",
+        "delta_elbow_y",
+        "delta_elbow_z",
+        "delta_handle_x",
+        "delta_handle_y"
+      ],
+      "groups_with_observations_by_output": [
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78
+      ],
+      "fitted_target_sd_in_output_units": [
+        11.142727851867676,
+        11.004823684692383,
+        2.444591760635376,
+        3.7636234760284424,
+        6.037025451660156,
+        1.9245431423187256,
+        13.038798332214355,
+        12.23832893371582
+      ],
+      "widths": {
+        "compact": {
+          "single": {
+            "group_equal_primary": 0.5559523042727889,
+            "group_equal_physical_mae_by_output": [
+              7.886856667570067,
+              5.767304022501931,
+              1.075415156586653,
+              2.2203555841946123,
+              3.4567524340729086,
+              1.1063334973843402,
+              6.823381904926566,
+              6.304163773854572
+            ]
+          },
+          "shared": {
+            "group_equal_primary": 0.52171905149342,
+            "group_equal_physical_mae_by_output": [
+              7.103579635739837,
+              5.381927589734649,
+              1.0579579398792198,
+              2.1663656626175287,
+              3.048035225788684,
+              0.9970754614462043,
+              6.641295608355959,
+              6.1985679767452755
+            ]
+          },
+          "paired": {
+            "shared_minus_single": -0.034233252779368686,
+            "paired_percentile_95": [
+              -0.04985833536997105,
+              -0.018512919700755918
+            ]
+          }
+        },
+        "wider": {
+          "single": {
+            "group_equal_primary": 0.5474036813859026,
+            "group_equal_physical_mae_by_output": [
+              7.521250207200009,
+              5.543655421903246,
+              1.211276403337749,
+              2.244609669929482,
+              3.20421161724137,
+              1.1089920987052697,
+              5.953642719003381,
+              6.66983194076098
+            ]
+          },
+          "shared": {
+            "group_equal_primary": 0.5605638077483801,
+            "group_equal_physical_mae_by_output": [
+              7.570431117573356,
+              5.414497644250464,
+              1.342119614732985,
+              2.4746081168827017,
+              3.139658182809173,
+              1.1131046486075207,
+              6.177301099858223,
+              6.539763400888342
+            ]
+          },
+          "paired": {
+            "shared_minus_single": 0.013160126362477636,
+            "paired_percentile_95": [
+              -0.008961571990401034,
+              0.03637153037408946
+            ]
+          }
+        }
+      }
+    },
+    "macaque_motion_to_cortex": {
+      "area": "macaque_C_reach",
+      "rows": 199,
+      "groups": 78,
+      "metric": "full Poisson NLL, nats per observed count channel and prediction bin",
+      "output_units": [
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms",
+        "spikes/100 ms"
+      ],
+      "outputs_in_order": [
+        "area2_contact_2",
+        "area2_contact_4",
+        "area2_contact_6",
+        "area2_contact_10",
+        "area2_contact_12",
+        "area2_contact_13",
+        "area2_contact_15",
+        "area2_contact_16",
+        "area2_contact_18",
+        "area2_contact_19",
+        "area2_contact_20",
+        "area2_contact_21",
+        "area2_contact_23",
+        "area2_contact_28",
+        "area2_contact_33",
+        "area2_contact_35",
+        "area2_contact_36",
+        "area2_contact_37",
+        "area2_contact_39",
+        "area2_contact_44",
+        "area2_contact_46",
+        "area2_contact_47",
+        "area2_contact_49",
+        "area2_contact_53",
+        "area2_contact_55",
+        "area2_contact_56",
+        "area2_contact_58",
+        "area2_contact_59",
+        "area2_contact_64",
+        "area2_contact_72",
+        "area2_contact_74",
+        "area2_contact_84",
+        "area2_contact_87",
+        "area2_contact_88",
+        "area2_contact_89",
+        "area2_contact_94",
+        "area2_contact_95"
+      ],
+      "groups_with_observations_by_output": [
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78,
+        78
+      ],
+      "widths": {
+        "compact": {
+          "single": {
+            "group_equal_primary": 2.103430098731665
+          },
+          "shared": {
+            "group_equal_primary": 2.101400631313468
+          },
+          "paired": {
+            "shared_minus_single": -0.0020294674181963322,
+            "paired_percentile_95": [
+              -0.011012527034552702,
+              0.006523323030625849
+            ]
+          }
+        },
+        "wider": {
+          "single": {
+            "group_equal_primary": 2.5639503792104517
+          },
+          "shared": {
+            "group_equal_primary": 2.3631502940553992
+          },
+          "paired": {
+            "shared_minus_single": -0.20080008515505282,
+            "paired_percentile_95": [
+              -0.24447116882112202,
+              -0.15760763655489787
+            ]
+          }
+        }
+      }
+    },
+    "brochier_grasp_sensors": {
+      "area": "macaque_L_grasp",
+      "rows": 733,
+      "groups": 10,
+      "metric": "mean absolute error divided by fitted per-output population SD",
+      "output_units": [
+        "ADC counts",
+        "ADC counts",
+        "ADC counts",
+        "ADC counts",
+        "ADC counts",
+        "ADC counts"
+      ],
+      "outputs_in_order": [
+        "delta_sensor_137",
+        "delta_sensor_138",
+        "delta_sensor_139",
+        "delta_sensor_140",
+        "delta_sensor_141",
+        "delta_sensor_143"
+      ],
+      "groups_with_observations_by_output": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "fitted_target_sd_in_output_units": [
+        139.66217041015625,
+        76.84634399414062,
+        83.51445770263672,
+        89.63882446289062,
+        83.01041412353516,
+        291.37841796875
+      ],
+      "widths": {
+        "compact": {
+          "single": {
+            "group_equal_primary": 0.3664762458658409,
+            "group_equal_physical_mae_by_output": [
+              43.946373340613334,
+              23.002170960457118,
+              18.59592134326084,
+              45.27242848297115,
+              35.400353826212516,
+              125.49407191222983
+            ]
+          },
+          "shared": {
+            "group_equal_primary": 0.3723067287087555,
+            "group_equal_physical_mae_by_output": [
+              44.27157463303443,
+              23.635694543393328,
+              18.456712207769787,
+              46.417039237852734,
+              35.83019935010488,
+              127.8629538812072
+            ]
+          },
+          "paired": {
+            "shared_minus_single": 0.005830482842914669,
+            "paired_percentile_95": [
+              0.002943758399541596,
+              0.009234504930075346
+            ]
+          }
+        },
+        "wider": {
+          "single": {
+            "group_equal_primary": 0.32103151337652397,
+            "group_equal_physical_mae_by_output": [
+              36.93196189427299,
+              21.3051904357512,
+              15.91363254079412,
+              33.602523586567045,
+              33.30379920177451,
+              121.76464942242244
+            ]
+          },
+          "shared": {
+            "group_equal_primary": 0.36113820006251546,
+            "group_equal_physical_mae_by_output": [
+              43.58358200707496,
+              22.48136677526921,
+              19.209576468600133,
+              42.895193875694744,
+              34.712586298120456,
+              126.89389610872425
+            ]
+          },
+          "paired": {
+            "shared_minus_single": 0.040106686685991474,
+            "paired_percentile_95": [
+              0.03291240963605452,
+              0.04680625953858607
+            ]
+          }
+        }
+      }
+    },
+    "brochier_grasp_counts": {
+      "area": "macaque_L_grasp",
+      "rows": 733,
+      "groups": 10,
+      "metric": "full Poisson NLL, nats per observed count channel and prediction bin",
+      "output_units": [
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms",
+        "waveforms per 20 ms"
+      ],
+      "outputs_in_order": [
+        "electrode_3_unit_1",
+        "electrode_5_unit_1",
+        "electrode_5_unit_2",
+        "electrode_6_unit_1",
+        "electrode_7_unit_1",
+        "electrode_7_unit_2",
+        "electrode_10_unit_1",
+        "electrode_11_unit_1",
+        "electrode_11_unit_2",
+        "electrode_13_unit_1",
+        "electrode_13_unit_2",
+        "electrode_13_unit_3",
+        "electrode_14_unit_1",
+        "electrode_14_unit_2",
+        "electrode_15_unit_1",
+        "electrode_17_unit_1",
+        "electrode_19_unit_1",
+        "electrode_20_unit_1",
+        "electrode_22_unit_1",
+        "electrode_23_unit_1",
+        "electrode_23_unit_2",
+        "electrode_24_unit_1",
+        "electrode_24_unit_2",
+        "electrode_25_unit_1",
+        "electrode_25_unit_2",
+        "electrode_25_unit_3",
+        "electrode_26_unit_1",
+        "electrode_27_unit_1",
+        "electrode_28_unit_1",
+        "electrode_31_unit_1",
+        "electrode_32_unit_1",
+        "electrode_32_unit_2",
+        "electrode_33_unit_1",
+        "electrode_34_unit_1",
+        "electrode_34_unit_2",
+        "electrode_36_unit_1",
+        "electrode_37_unit_1",
+        "electrode_38_unit_1",
+        "electrode_39_unit_1",
+        "electrode_39_unit_2",
+        "electrode_39_unit_3",
+        "electrode_41_unit_1",
+        "electrode_44_unit_1",
+        "electrode_45_unit_1",
+        "electrode_46_unit_1",
+        "electrode_48_unit_1",
+        "electrode_48_unit_2",
+        "electrode_51_unit_1",
+        "electrode_52_unit_1",
+        "electrode_52_unit_2",
+        "electrode_54_unit_1",
+        "electrode_55_unit_1",
+        "electrode_56_unit_1",
+        "electrode_56_unit_2",
+        "electrode_60_unit_1",
+        "electrode_61_unit_1",
+        "electrode_61_unit_2",
+        "electrode_62_unit_1",
+        "electrode_63_unit_1",
+        "electrode_63_unit_2",
+        "electrode_64_unit_1",
+        "electrode_66_unit_1",
+        "electrode_68_unit_1",
+        "electrode_68_unit_2",
+        "electrode_69_unit_1",
+        "electrode_70_unit_1",
+        "electrode_70_unit_2",
+        "electrode_71_unit_1",
+        "electrode_71_unit_2",
+        "electrode_75_unit_1",
+        "electrode_76_unit_1",
+        "electrode_76_unit_2",
+        "electrode_77_unit_1",
+        "electrode_77_unit_2",
+        "electrode_77_unit_3",
+        "electrode_78_unit_1",
+        "electrode_78_unit_2",
+        "electrode_80_unit_1",
+        "electrode_80_unit_2",
+        "electrode_81_unit_1",
+        "electrode_82_unit_1",
+        "electrode_83_unit_1",
+        "electrode_84_unit_1",
+        "electrode_85_unit_1",
+        "electrode_85_unit_2",
+        "electrode_89_unit_1",
+        "electrode_90_unit_1",
+        "electrode_91_unit_1",
+        "electrode_92_unit_1",
+        "electrode_93_unit_1",
+        "electrode_94_unit_1",
+        "electrode_95_unit_1",
+        "electrode_96_unit_1"
+      ],
+      "groups_with_observations_by_output": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "widths": {
+        "compact": {
+          "single": {
+            "group_equal_primary": 0.6935148146224551
+          },
+          "shared": {
+            "group_equal_primary": 0.7016389590834764
+          },
+          "paired": {
+            "shared_minus_single": 0.008124144461021244,
+            "paired_percentile_95": [
+              0.007356386363899926,
+              0.008855316632365174
+            ]
+          }
+        },
+        "wider": {
+          "single": {
+            "group_equal_primary": 0.6866459167347939
+          },
+          "shared": {
+            "group_equal_primary": 0.6919295686232587
+          },
+          "paired": {
+            "shared_minus_single": 0.005283651888464714,
+            "paired_percentile_95": [
+              0.00458415386070094,
+              0.006040014390131354
+            ]
+          }
+        }
+      }
+    }
+  },
+  "paired_interval": "95 percent resampling interval using 4,000 draws of the original groups. Pair predictions from the same original group."
+}
