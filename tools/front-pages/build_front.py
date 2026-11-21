@@ -1786,7 +1786,7 @@ def shared_checks():
 
 
 def arm_more_data_check():
-    """README, presumption paragraph: the arm task is a test on people kept out of its fitting (GENERAL_FITS) in which only the
+    """README, presumption paragraph: the arm task is a test on new people (GENERAL_FITS) in which only the
     straight-line readouts were refitted on seven people instead of one, the shared part unchanged (its protocol keeps the encoder and
     trains a new collection of readouts); the seven-person readouts were closer on the five new people than the one-person readouts,
     and the fitting group's median change for each cue closer still."""
@@ -2908,8 +2908,8 @@ def hw_checks():
     return ''
 
 
-GENERAL_HEADING = ("The general model has had its first runs, and in six tests on people kept out of each task's fitting it beat "
-                   'simpler forecasts once')
+GENERAL_HEADING = ('The general model has had its first runs, and in five tests on new people, simpler forecasts matched or beat it '
+                   'every time')
 
 
 def try_rows(kind):
@@ -3918,13 +3918,13 @@ def audit_checks():
 
 
 GENERAL_FITS = {
-    'joint_alpha': 'joint alpha; separate retrospective assessment',   # every task folder of the general model -> who it was scored on; read a new folder's own files before classifying it; 'unseen' = people kept out of that task's fitting (no test published its plan or seal before its results)
+    'joint_alpha': 'joint alpha; separate retrospective assessment',   # every task folder of the general model -> who it was scored on; read a new folder's own files before classifying it; 'unseen' = new people: kept out of that task's fitting and scored by no earlier study (git history: no earlier commit scores them); no such test published its plan, or a record of its fitted model, before its results
     'right-plate': 'unseen',          # 8 walkers, no training data; also the two-plate study's test group, same commit; METHOD.md's order claim is self-attested
     'arm-transfer': 'unseen',         # 5 people new to the project; receipt fit.json untimestamped, published with the results
     'back_rotation': 'unseen',        # 4 kept (3 scorable); PRETEST manifest pins the readout; the exclusion code was amended after opening
     'muscle_tracking': 'unseen',      # 4 people; PRETEST manifest pins DESIGN, code, model.json and checkpoint; self-dated, published with the scores
     'visual_balance': 'unseen',       # 6 people, first use of the dataset; no seal of this fit; the transformer study scored the same six, same commit
-    'pedal_load': 'unseen',           # 2 people kept out of this task's fitting whose ultrasound recordings trained muscle_tracking; no checksum of this readout before scoring; scorer and grouping set after the bad recording was found
+    'pedal_load': 'seen',             # 2 people kept out of this task's fitting, whose ultrasound recordings trained muscle_tracking and were scored in its development folds (muscle_tracking/DESIGN.md "Hold out each development person for one fold"; fit-summary.json people 4; 48f6a12, 23 minutes before 2490899); no checksum of this readout before scoring; scorer and grouping set after the bad recording was found; from the pedal's readings ahead of every simpler forecast (pedal_checks())
     'knee': 'seen',                   # 12 walkers whose earlier forecasts were already known
     'load': 'seen',                   # 3 walkers whose angles an earlier comparison had used
     'point-motion': 'seen',           # 10 walkers already studied for other questions
@@ -3972,14 +3972,9 @@ def _beaten_shin():
     return False
 
 
-def _won_pedal():
-    pedal_checks()          # from the pedal's own readings ahead of every simpler forecast in all three groups; worse with the muscle signal
-    return True
-
-
-UNSEEN = {   # each test on people kept out of that task's fitting -> a function that asserts its result and returns True if the general model beat every simpler forecast
+UNSEEN = {   # each test on new people -> a function that asserts its result and returns True if the general model beat every simpler forecast
     'right-plate': _beaten_right_plate, 'arm-transfer': _beaten_arm, 'back_rotation': _tied_back, 'muscle_tracking': _beaten_shin,
-    'pedal_load': _won_pedal, 'visual_balance': lambda: _beaten_balance(),
+    'visual_balance': lambda: _beaten_balance(),
 }
 TIMES = {0: 'never', 1: 'once', 2: 'twice'}
 _unseen_cache = []
@@ -3994,8 +3989,9 @@ def _unseen():
         assert unseen == sorted(UNSEEN), ('every test on unseen people needs its result asserted in UNSEEN', unseen, sorted(UNSEEN))
         wins = [k for k in unseen if UNSEEN[k]()]
         n = len(unseen)
-        heading = (f'The general model has had its first runs, and in {spell(n)} tests on people kept out of each task\'s fitting it beat '
-                   f'simpler forecasts '
+        heading = (f'The general model has had its first runs, and in {spell(n)} tests on new people, simpler forecasts matched or beat it '
+                   f'every time' if not wins else
+                   f'The general model has had its first runs, and in {spell(n)} tests on new people it beat simpler forecasts '
                    f'{TIMES.get(len(wins), spell(len(wins)) + " times")}')
         assert GENERAL_HEADING == heading, ('GENERAL_HEADING must say', heading)
         _unseen_cache.append((n, wins))
@@ -4006,52 +4002,52 @@ def _unseen_log(printed, what, full):
     n, wins = _unseen()
     log(printed, file='models/neurotranslate-0.0/*/ (each task folder classified in GENERAL_FITS); ' + '; '.join((RP, GA, BS, MS, PS)),
         field=what, full=full,
-        note=f'tests on people kept out of that task\'s fitting: {", ".join(sorted(UNSEEN))}; beat every simpler forecast in: '
-             f'{", ".join(wins)}; right foot, eight walkers kept out of that task\'s fitting: beaten; arm, five people kept out of that task\'s '
-             f'fitting: beaten; back sensor, three people kept out of that task\'s fitting: tied from the turns alone (0.376 each), beaten with the '
-             f'grids; shin muscle, four people kept out of that task\'s fitting: beaten with and without the angle; fixed pedal, two people kept out '
-             f'of that task\'s fitting (the two had trained the shin-muscle readout; comparison not set in advance; test incomplete): ahead of every '
-             f'simpler forecast from the pedal\'s readings, worse with the muscle signal; balance on a beam, six people kept out of that task\'s '
-             f'fitting: a straight-line fit on the movement and the rotation\'s direction beat it, with and without the scalp; no test published '
-             f'its plan or seal before its results')
+        note=f'tests on new people (kept out of that task\'s fitting, scored by no earlier study): {", ".join(sorted(UNSEEN))}; beat every '
+             f'simpler forecast in: {", ".join(wins) or "none"}; right foot, eight new walkers (also the two-plate study\'s test group, same '
+             f'commit): beaten; arm, five new people: beaten; back sensor, three new people: tied from the turns alone (0.376 each), beaten with '
+             f'the grids; shin muscle, four new people: beaten with and without the angle; balance on a beam, six new people (also the balance '
+             f'transformer study\'s test group, same commit): a straight-line fit on the movement and the rotation\'s direction beat it, with and '
+             f'without the scalp; none of the five published its plan, or a record of its fitted model, before its results; fixed pedal: not '
+             f'counted, its two test people had trained, and been scored in, the shin-muscle task (from the pedal\'s readings ahead of every '
+             f'simpler forecast in a comparison with no pass mark set in advance, test incomplete, worse with the muscle signal)')
 
 
 def unseen_count(cap=False):
-    """How many times the general model has been scored on people kept out of that task's fitting (GENERAL_FITS, UNSEEN)."""
+    """How many times the general model has been scored on new people (kept out of that task's fitting, scored by no earlier study) (GENERAL_FITS, UNSEEN)."""
     n, _ = _unseen()
-    _unseen_log(spell(n, cap), 'tests of the general model on people kept out of that task\'s fitting', n)
+    _unseen_log(spell(n, cap), 'tests of the general model on new people', n)
     return spell(n, cap)
 
 
 def unseen_lost(cap=False):
     """Of those tests, how many a simpler forecast matched or beat."""
     n, wins = _unseen()
-    _unseen_log(spell(n - len(wins), cap), 'tests on people kept out of that task\'s fitting in which a simpler forecast matched or beat the '
-                'general model', n - len(wins))
+    _unseen_log(spell(n - len(wins), cap), 'tests on new people in which a simpler forecast matched or beat the general model',
+                n - len(wins))
     return spell(n - len(wins), cap)
 
 
 def unseen_won(*folders):
-    """The words that name the general model's lead on people kept out of that task's fitting (the pedal) are true only while these are
-    exactly the tests where it beat every simpler forecast."""
+    """Words that name the tests on new people where the general model beat every simpler forecast (none: called with no folder, it
+    guards a sentence that says simpler forecasts matched or beat it every time) are true only while these are exactly those tests."""
     _, wins = _unseen()
     assert sorted(wins) == sorted(folders), (wins, folders)
-    _unseen_log(TIMES.get(len(wins), spell(len(wins))), 'tests on people kept out of that task\'s fitting in which it beat every simpler '
-                'forecast: ' + ', '.join(wins), len(wins))
+    _unseen_log(TIMES.get(len(wins), spell(len(wins))), 'tests on new people in which it beat every simpler forecast: '
+                + (', '.join(wins) or 'none'), len(wins))
     return TIMES.get(len(wins), spell(len(wins)) + ' times')
 
 
 _U = []
 
 
-def U(folder, group='list'):     # noqa: N802  (marks one test named in a page's list or sentence of the tests on people kept out of that task's fitting)
+def U(folder, group='list'):     # noqa: N802  (marks one test named in a page's list or sentence of the tests on new people)
     assert GENERAL_FITS.get(folder) == 'unseen', folder
     _U.append((PAGE[0], group, folder))
     return ''
 
 
 def unseen_list_check(group='list'):
-    """A page's list (or sentence) of the tests on people kept out of that task's fitting names each test in the table once, and no other."""
+    """A page's list (or sentence) of the tests on new people names each test in the table once, and no other."""
     got = sorted(f for p, g, f in _U if p == PAGE[0] and g == group)
     assert got == sorted(UNSEEN), (PAGE[0], group, got)
     _unseen_log(str(len(got)), f'tests named in "{group}" on {PAGE[0]}', len(got))
@@ -4059,12 +4055,11 @@ def unseen_list_check(group='list'):
 
 
 def unseen_check():
-    """For the general-model heading and the sentences that count its tests on people kept out of that task's fitting: the table above,
+    """For the general-model heading and the sentences that count its tests on new people (kept out of that task's fitting, scored by no earlier study): the table above,
     every result asserted."""
     _unseen()
     n, wins = _unseen()
-    _unseen_log(f'in {spell(n)} tests on people kept out of each task\'s fitting it beat simpler forecasts '
-                f'{TIMES.get(len(wins), spell(len(wins)) + " times")}', 'the heading', None)
+    _unseen_log(GENERAL_HEADING.split(', and ', 1)[1], 'the heading', None)
     return ''
 
 
