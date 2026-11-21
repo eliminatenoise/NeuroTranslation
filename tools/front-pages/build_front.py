@@ -4000,7 +4000,7 @@ def _unseen():
 
 def _unseen_log(printed, what, full):
     n, wins = _unseen()
-    log(printed, file='models/neurotranslate-0.0/*/ (each task folder classified in GENERAL_FITS); ' + '; '.join((RP, GA, BS, MS, PS)),
+    log(printed, file='models/neurotranslate-0.0/*/ (each task folder classified in GENERAL_FITS); ' + '; '.join((RP, GA, BS, MS, VS, PS)),
         field=what, full=full,
         note=f'tests on new people (kept out of that task\'s fitting, scored by no earlier study): {", ".join(sorted(UNSEEN))}; beat every '
              f'simpler forecast in: {", ".join(wins) or "none"}; right foot, eight new walkers (also the two-plate study\'s test group, same '
