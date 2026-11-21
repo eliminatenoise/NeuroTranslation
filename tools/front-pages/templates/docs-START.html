@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NeuroTranslation</title>
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      color-scheme: light dark;
+      --page: #f6f8fc;
+      --panel: #fff;
+      --ink: #182237;
+      --muted: #4a5870;
+      --line: #c9d3e2;
+      --link: #2445b3;
+      --accent: #eaf0ff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page: #111824;
+        --panel: #182237;
+        --ink: #f2f5fc;
+        --muted: #bdc8dc;
+        --line: #495872;
+        --link: #b1c7ff;
+        --accent: #25365b;
+      }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--page); line-height: 1.55; }
+    main { width: min(68rem, 100% - 2.5rem); margin: clamp(2rem, 5vw, 4rem) auto; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { line-height: 1.18; }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.035em; }
+    h2 { font-size: clamp(1.45rem, 3vw, 2rem); letter-spacing: -.02em; }
+    h3 { font-size: 1.15rem; }
+    p { max-width: 70ch; }
+    a { color: var(--link); text-underline-offset: .19em; }
+    a:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+    code { font-family: "Noto Sans Mono", "DejaVu Sans Mono", Consolas, Menlo, sans-serif; }
+    header > p, section > p { margin-top: .65rem; }
+    section { margin-top: 2.35rem; }
+    section:target h2 { color: var(--link); }
+    .jump, .links, .tiles { list-style: none; margin: 0; padding: 0; }
+    .jump, .links { display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
+    .jump { margin-top: 1.05rem; }
+    .jump a, .links a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+    .tiles { display: grid; gap: .75rem; margin-top: 1rem; }
+    .examples { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .examples a {
+      display: block;
+      height: 100%;
+      padding: .9rem;
+      background: var(--accent);
+      border-radius: .45rem;
+      font-weight: 650;
+    }
+    .recordings { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .recordings article {
+      height: 100%;
+      padding: 1rem 1rem .6rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: .45rem;
+    }
+    .recordings h3 { margin: .3rem 0 .45rem; }
+    .recordings p:not(.source) { color: var(--muted); }
+    .source { color: var(--muted); font-size: .875rem; font-weight: 650; }
+    .recordings .links { margin-top: .3rem; gap: 0 .9rem; }
+    .primary { font-weight: 650; }
+    .support { border-top: 1px solid var(--line); padding-top: 1.15rem; }
+    .projects { margin: .65rem 0 0; padding-left: 1.25rem; }
+    .projects li { max-width: 70ch; margin-top: .55rem; }
+    @media (max-width: 50rem) {
+      .examples { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 38rem) {
+      main { width: calc(100% - 2rem); }
+      .recordings { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>The hand’s own history still beats the brain signal</h1>
+    <p>NeuroTranslation tries to predict one recording of the body from another, most often of a movement: brain, nerve, muscle, force and motion, all from open datasets. This page gathers every one of its pages that runs in a browser. Most of them forecast: from a short stretch of a recording, they predict what a hand, a knee or a rat will do a fraction of a second later. Everything runs on your own computer, and nothing you give a page is sent anywhere. Pick one below: most open with an example, so you can start straight away.</p>
+    <p>What the studies found: a hand tends to keep moving the way it was moving, so what it has just done is the forecast to beat. In {{ n_studies() }} small studies so far, each a numbered row of one table on the studies page, adding a brain recording taken with electrodes on the scalp (EEG) made that forecast worse in {{ eeg_raised() }} of {{ C('eeg', 'n') }} comparisons. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/README.md">Every study, with its numbers</a>.</p>
+    <nav aria-label="On this page">
+      <ul class="jump">
+        <li><a href="#examples">Start with an example</a></li>
+        <li><a href="#recordings">Open a recording from a study</a></li>
+        <li><a href="#launchers">Launchers</a></li>
+        <li><a href="#local">With Python</a></li>
+        <li><a href="#papers">The papers</a></li>
+        <li><a href="#projects">Three projects, one question</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="examples" aria-labelledby="examples-title">
+    <h2 id="examples-title">Start with an example</h2>
+    <p>Several pages open with an example, so you can start with nothing of your own. Start at the top: the first card is the project’s general model, NeuroTranslate 0.0, one model meant to learn from many kinds of body signal at once. Every “ahead” is a distance along a stored recording: nothing here is live.{{ later_checks() }}</p>
+    <ul class="tiles recordings">
+      <li>
+        <article aria-labelledby="shared-movement-title">
+          <p class="source">One movement model · {{ general_tasks(True) }} kinds of forecast</p>
+          <h3 id="shared-movement-title">Forecast a wrist, a rat, both knees, the force under a foot, one marker on the skin, an arm after a cue, a sensor on the back, a muscle in the shin, the load on a pedal, a heel and the force under it, a walk after an instruction or balance on a beam</h3>
+          <p>Forecast how far a tracked wrist or rat will move in about a quarter of a second, the two angles of a wrist from its movement, forearm and scalp readings, both knees of a walker from four seconds of knee angles, how hard the forces around each knee push it to bend or straighten (its turning moment) from four seconds of leg angles, the force under a walker’s right foot, where one marker on a walking body will be 200 milliseconds later from nine earlier positions, or how three sensors on an arm will change after an instruction such as “bend my right elbow”; and, on pages of their own, how far a sensor strapped to a person’s back will turn in the next tenth of a second, how much a muscle in the shin, filmed by ultrasound, will lengthen or shorten, how the load on a pedal held still will change, where a walker’s heel will be and how hard that foot will press on the floor a tenth of a second ahead, and where a walker’s pelvis and heel will be a tenth of a second ahead after the instruction “as usual” or “fast but not running”, and how far a walker’s head and the base of the spine will move in the next eighth of a second after the view in a headset rotates. See how much four forearm electrodes change the angle forecast from the same wrist movement. Start from an invented example (the rat also has one recorded trip), or enter your own measurements. All {{ general_tasks() }} tasks run on one shared model, each with its own input and output; the knee-moment version trained for its task has its own copy of the shared model. On the recordings, its distance forecast missed by {{ N(SM, 'domains/wrist/macro_mae_cm/joint_27181', 3) }} cm for the wrist and {{ N(SM, 'domains/rat/macro_mae_cm/joint_27181', 3) }} cm for the rat; for the wrist’s angles and for the knees’ angles, models made for each did better; for the force under the foot, the single marker and the arm, simpler forecasts did; a straight-line fit did as well for the back sensor and better for the shin muscle, the heel and the force under it, and balance on a beam; and for the pedal’s load, it beat the simpler forecasts, and for the walking instructions it beat them too, though a copy with its shared part left untrained did better.{{ walk_checks() }}{{ balance_checks() }}{{ heel_checks() }}{{ back_checks() }}{{ muscle_checks() }}{{ pedal_checks() }}{{ shared_checks() }}{{ angle_checks() }}{{ knee_stride_checks() }}{{ force_checks() }}{{ point_motion_checks() }}{{ cued_arm_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="shared-motion/">Open the shared model</a></li>
+            <li><a href="shared-back-rotation/index.html">Forecast a back sensor’s turn</a></li>
+            <li><a href="shared-muscle-tracking/index.html">Forecast a shin muscle’s length</a></li>
+            <li><a href="shared-pedal-load/index.html">Forecast a pedal’s load</a></li>
+            <li><a href="shared-heel-and-force/index.html">Forecast a heel and the force under it</a></li>
+            <li><a href="walking-instruction-controls/index.html">Forecast a walk after an instruction</a></li>
+            <li><a href="visual-balance-controls/index.html">Forecast balance on a beam</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models">The model, its comparison and a download</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="track-title">
+          <p class="source">Single Day W-Track Learning · Brain-cell firing and position</p>
+          <h3 id="track-title">Reveal the rat’s next position</h3>
+          <p>See whether the firing of {{ L_len(WT_UNITS, '', 'sorted units') }} brain cells improves a quarter-second forecast of where a rat goes next, then reveal what the camera recorded. In the study, the firing raised the forecast’s average miss from {{ N(WT, 'metrics/ridge_motion/mean_trip_error_cm', 3) }} to {{ N(WT, 'metrics/ridge_combined/mean_trip_error_cm', 3) }} cm.</p>
+          <ul class="links">
+            <li><a class="primary" href="https://eliminatenoise.github.io/Interoceptomics/stages/#0.2">Open the track inspector</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wtrack-neural-motion">The study, its results page and its fitted weights</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="population-motion-title">
+          <p class="source">Shin &amp; Jadhav · W-track recordings</p>
+          <h3 id="population-motion-title">Can brain activity sharpen a rat’s movement forecast?</h3>
+          <p>Step through one recorded trip and compare how far a rat moved with forecasts that use its earlier movement alone or also use firing from two brain regions. Across three rats kept out of fitting, the average miss fell from {{ N(POP, 'equal_rat/motion', 3) }} to {{ N(POP, 'equal_rat/combined', 3) }} cm when firing was added. Only one rat improved against both movement alone and firing from an earlier trip. For that rat, continuing at the last observed speed did better still.</p>
+          <ul class="links">
+            <li><a class="primary" href="population-motion/">Explore a recorded trip</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/population-motion">Model and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/population-motion.zip">Offline viewer and model (ZIP)</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="stride-title">
+          <p class="source">CMU Graphics Lab · Human motion capture</p>
+          <h3 id="stride-title">Where will the next step land?</h3>
+          <p>Give the model half a second of a measured walk or run. It predicts the next {{ stride_horizon() }} seconds at {{ L_len(STRIDE_SCHEMA, 'sites', 'body sites the model places') }} points on the body. Turn the figure, follow one foot and reveal where its markers landed. Telling the model whether the person walked or ran lowered its average error at points measured from the hips from {{ N(STRIDE, 'models/history-only/overall/bodyMeanMm', 1) }} to {{ N(STRIDE, 'models/conditional/overall/bodyMeanMm', 1) }} mm, across {{ spell(L_len(STRIDE, 'eligibleGroups', 'source groups scored')) }} groups of recordings it had not been fitted on. A straight-line forecast tracked the hips through the room more closely. Only one of the six groups ran.{{ stride_pop_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="stride/">Continue a measured stride</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/stride-continuation">Model and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/stride-continuation.zip">Offline viewer and model (ZIP)</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="word-motion-title">
+          <p class="source">CMU Graphics Lab · Optical motion capture</p>
+          <h3 id="word-motion-title">Generate a walk or a run</h3>
+          <p>Enter either word to draw a {{ N(WM_SCHEMA, 'durationSeconds', 2) }}-second stride at {{ L_len(WM_SCHEMA, 'joints', 'body points the model places') }} points on the body. Overlay a recorded example from training, rotate the two bodies and inspect a point as it moves. On {{ spell(N(WM, 'dataCounts/trials')) }} recordings kept out of fitting, the model nearly tied the average walk or run from training.{{ word_motion_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="word-motion/">Try a walk or run</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/word-motion">Weights, code and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/word-motion.zip">Offline viewer and model (ZIP)</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="hand-search-title">
+          <p class="source">HoloAssist · Right-hand tracking and descriptions</p>
+          <h3 id="hand-search-title">Which movement fits your words?</h3>
+          <p>Type a description, compare three rankings and replay 26 tracked hand joints. In the study, a model that knew only each moment’s length, its place in the recording and how often the hand was tracked found the right one more often than a model reading the shape of the hand.</p>
+          <ul class="links">
+            <li><a class="primary" href="hand-search/">Search the hand recording</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hand-language-retrieval">The study and its fitted models</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="five-finger-title">
+          <p class="source">Miller and colleagues · Brain-surface and glove recordings</p>
+          <h3 id="five-finger-title">Can a recording from the surface of the brain beat the last glove reading?</h3>
+          <p>Give two fitted models of one person's glove the same invented finger movement, one of them with a signal from electrodes on the surface of the brain as well, and compare their forecasts of the five fingers. In the recorded trials, keeping the last glove reading did best, and adding the brain recording made the straight-line model worse on every finger.{{ finger_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="finger-signals/">Explore the five finger forecasts</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/cortical-glove">Study and fitted models</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/finger-signals.zip">Offline reader (ZIP)</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="finger-motion-title">
+          <p class="source">Miller and colleagues · Brain-surface and glove recordings</p>
+          <h3 id="finger-motion-title">How much will each finger move?</h3>
+          <p>A screen named one finger and a glove measured all five. Change the finger named on the screen and an invented brain-surface rhythm, and see how six fitted models forecast the movement of each finger. On {{ N(FM, 'evaluation/trials') }} later trials from one person, adding the brain recording to the screen made both kinds of model worse.{{ finger_motion_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="finger-motion/">Try the six forecasts</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/finger-motion">Study, weights and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/finger-motion.zip">Offline reader (ZIP)</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/recorded-cortex/">The recorded brain-surface activity, by finger</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="cohort-transfer-title">
+          <p class="source">Miller and colleagues · Five people’s brain-surface and glove recordings</p>
+          <h3 id="cohort-transfer-title">Which finger forecasts carry over to a new person?</h3>
+          <p>Five people saw finger cues and wore a glove. Change the finger on the screen, the time since it appeared, or an invented rhythm in one brain area, and compare what a model predicts from the cue with what it gets from the brain recording. Tested on each person in turn after learning from the other four, a table that knew only the cue and its timing did best on average.{{ finger_transfer_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="finger-transfer/">Explore the five-person comparison</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/finger-transfer">Methods and results</a></li>
+            <li><a href="papers/finger-cues/">Read the finger-cue study</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/cortex-coverage/">Compare the five recording layouts</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="cued-arm-title">
+          <p class="source">Ofner and colleagues · A right arm moving on cue, with scalp recordings</p>
+          <h3 id="cued-arm-title">What does the arm cue already tell us?</h3>
+          <p>One seated person saw a picture asking for one of six movements of the right arm and hand, or for rest. On the general model’s page, type an instruction such as “bend my right elbow” and see how it expects three sensors, at the elbow, the turn of the forearm and the index finger, to change; on a second page, ask whether a scalp electrode helps forecast the elbow. In the recorded trials, a model that knew only the cue beat the general model, and adding the scalp electrode made the elbow forecast worse.{{ cued_arm_checks() }}{{ elbow_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="shared-motion/index.html#cued-arm">Type an instruction and forecast three sensor readings</a></li>
+            <li><a href="elbow-cue/index.html">Compare the elbow forecast with and without scalp input</a></li>
+            <li><a href="elbow-cue-offline.zip" download>Download the elbow experiment</a></li>
+            <li><a href="papers/cued-arm/index.html">Read the study and see the recorded results</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/scalp-and-arm/">Find the sensors in the Interoceptomics atlas</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="arm-transfer-title">
+          <p class="source">Ofner and colleagues · Twelve people’s arms moving on cue</p>
+          <h3 id="arm-transfer-title">Can a forecast learned on seven people carry over to five others?</h3>
+          <p>Choose a right-arm instruction and compare the changes predicted for the elbow, forearm and finger half a second, one second and one and a half seconds after the early readings end. The examples you edit are invented; the error tables come from recorded trials. On the five new people, the average change for each cue beat the small transformer trained for the task, and the training group’s usual change for each cue beat the general model.{{ arm_transfer_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="arm-transfer/index.html">Try the trained transformer</a></li>
+            <li><a href="arm-transfer-offline.zip" download>Download the offline reader</a></li>
+            <li><a href="shared-motion/index.html#arm-transfer">Compare the shared model and first-run correction</a></li>
+            <li><a href="papers/arm-transfer/index.html">Read the study</a></li>
+            <li><a href="papers/arm-transfer/arm-transfer.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/scalp-and-arm/">See where scalp and arm readings agreed across seven people</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="one-week-title">
+          <p class="source">Chowdhury, Glaser and Miller · The reach-feedback macaque, a week later</p>
+          <h3 id="one-week-title">Can a forecast survive a week?</h3>
+          <p>Models fitted on a macaque’s reaches were run, unchanged, on the same animal seven days later. Choose a recorded reach and an electrode contact, change a hand, elbow or handle coordinate, and compare forecasts of the spikes that follow, made before and after another 100 milliseconds of the arm’s movement. Seeing the movement helped in one region of the apparatus and hurt in the other; for 39 muscle–tendon paths of an arm model, forecasting no change did best.{{ rw_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="reach-feedback/one-week/index.html">Try a later reach</a></li>
+            <li><a href="reach-feedback/one-week-offline.zip" download>Download the offline reader</a> · <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/refs/heads/main/models/reach-feedback-week.zip">Download the models</a></li>
+            <li><a href="reach-feedback/one-week/muscle-paths/index.html">Follow a muscle–tendon path</a> · <a href="https://eliminatenoise.github.io/Interoceptomics/reach-feedback/one-week/">Open the 3D replay</a></li>
+            <li><a href="papers/reach-feedback/one-week/index.html">Read the study</a> · <a href="papers/reach-feedback/one-week/one-week.pdf">Download the PDF</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="reach-feedback-title">
+          <p class="source">Chowdhury, Glaser and Miller · A macaque’s reach, with the brain’s touch area recorded</p>
+          <h3 id="reach-feedback-title">After a reach, what will the sensory cortex do?</h3>
+          <p>A camera tracked a macaque’s arm, encoders its handle, and electrodes in area 2 counted the spikes of 23 units. Choose one of four recorded reaches, shift the hand’s last positions or add spikes, and see a forecast of the next 100 milliseconds of movement and of the spikes in the 100 milliseconds after. The movement forecast did not help predict the spikes, and in a second region of the apparatus each unit’s average count in the training reaches did better.{{ rf_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="reach-feedback/index.html">Explore a recorded reach</a></li>
+            <li><a href="reach-feedback-offline.zip" download>Download the offline reader</a> · <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/refs/heads/main/models/reach-feedback.zip">Download the fitted models</a></li>
+            <li><a href="papers/reach-feedback/index.html">Read the study</a> · <a href="papers/reach-feedback/reach-feedback.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/reach-feedback/">See the arm paths in 3D</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="cylinder-rotation-title">
+          <p class="source">Sziburis, Blex, Glasmachers and Iossifidis · A sensor on a carried cylinder</p>
+          <h3 id="cylinder-rotation-title">How fast will the cylinder turn?</h3>
+          <p>A sensor on a cylinder recorded how fast it turned and how it accelerated while a person carried it to one of nine targets. Choose a recorded trip and a moment in it, edit an earlier acceleration reading, and compare forecasts of the next tenth of a second with what the sensor recorded. The acceleration added nothing clear to the sensor’s own recent turning, and the model did best without the target.{{ cy_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="cylinder-rotation/index.html">Edit a reading and compare the forecasts</a></li>
+            <li><a href="cylinder-rotation-offline.zip" download>Download the offline reader</a> · <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/refs/heads/main/models/cylinder-rotation.zip">Download the models and data</a></li>
+            <li><a href="papers/cylinder-rotation/index.html">Read the study</a> · <a href="papers/cylinder-rotation/cylinder-rotation.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/cylinder-rotation/">Turn the cylinder in 3D</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="target-reach-title">
+          <p class="source">Sziburis, Blex, Glasmachers and Iossifidis · A cylinder carried to one of nine targets</p>
+          <h3 id="target-reach-title">Does knowing where a carried cylinder is headed help forecast where it will be?</h3>
+          <p>A screen showed one of nine targets and a person carried a cylinder there with one hand. Choose a hand and a recorded trial, change the destination, and see where a model given 200 milliseconds of the cylinder’s tracked movement forecasts it will be. Once the cylinder was moving, a wrong destination made the forecast worse, but the right one did not clearly beat the movement alone.{{ tr_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="target-reach/index.html">Change the destination</a></li>
+            <li><a href="target-reach-offline.zip" download>Download the offline reader</a> · <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/refs/heads/main/models/target-reach.zip">Download the models and data</a></li>
+            <li><a href="papers/target-reach/index.html">Read the study</a> · <a href="papers/target-reach/target-reach.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/target-reach/">Follow the cylinder in 3D</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="contact-forecast-title">
+          <p class="source">Chowdhury, Glaser and Miller · The brain’s touch area of one macaque, recorded on two days</p>
+          <h3 id="contact-forecast-title">Will a model fitted one day forecast the next day’s activity in the brain’s touch area?</h3>
+          <p>A robot pushed a macaque’s hand while electrodes in area 2 counted electrical events at {{ N(NDC, 'phases/pre_target_bump/matched/contacts') }} contacts. Choose a day, a trial and a contact, and compare a forecast of the next 100 milliseconds, made by models fitted on the first day, with the count recorded, or swap in an earlier trial’s movement. On the second day the right movement beat a borrowed one but not a model without the movement, and a count regression given only the task’s cues came closest.{{ ndc_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="contact-forecast/index.html">Compare the electrode forecasts</a></li>
+            <li><a href="contact-forecast-offline.zip" download>Download the offline reader</a> · <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/refs/heads/main/models/contact-forecast.zip">Download the models and training code</a></li>
+            <li><a href="papers/contact-forecast/index.html">Read the study</a> · <a href="papers/contact-forecast/contact-forecast.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/contact-forecast/">Rotate the recorded arm in 3D</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="cortical-reach-title">
+          <p class="source">Chowdhury, Glaser and Miller · A macaque’s arm pushed by a robot, then reaching, with the brain’s touch area recorded</p>
+          <h3 id="cortical-reach-title">Does the brain’s touch area help forecast where a pushed or reaching arm goes next?</h3>
+          <p>A robot gave a macaque’s hand a brief push; later a target appeared and the animal reached for it, while electrodes in area 2, a region of the brain that responds to touch and to the body’s own movement, recorded spikes. Pause one recorded trial at the push or the reach, or invent a history, and compare forecasts of the handle’s next 100 milliseconds with and without the spikes. On the last {{ L_len(CXR_IDS, 'test', 'test trials') }} trials of the day, kept closed until the analysis was fixed, the spikes made a small transformer’s forecast worse, and a straight-line fit on the handle’s movement and the task events did best.{{ cr_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="cortical-reach/index.html">Follow the handle and the spikes</a></li>
+            <li><a href="cortical-reach-offline.zip" download>Download the offline reader</a> · <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/refs/heads/main/models/cortical-reach.zip">Download the models and training code</a></li>
+            <li><a href="papers/cortical-reach/index.html">Read the illustrated study</a> · <a href="papers/cortical-reach/cortical-reach.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/cortical-reach/">Rotate the measured arm in 3D</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="spindle-title">
+          <p class="source">Blum and colleagues · A rat’s calf muscle stretched by a motor, and one sensory nerve fibre</p>
+          <h3 id="spindle-title">Does a muscle’s stretch help forecast its sensory nerve’s next spikes?</h3>
+          <p>A motor stretched a rat’s calf muscle while an electrode recorded the spikes of one sensory nerve fibre from a stretch sensor inside it. Step through a recorded stretch, or invent the pull, the motor’s movement and the earlier spikes, and compare forecasts of the next 20 milliseconds with the spikes counted. Scored on {{ spell(L_len(SP, 'group_sizes_windows/full/member', 'fibres scored')) }} fibres, each by models fitted on the other two, a small transformer given only the fibre’s past spikes did best by the study’s chosen score, and adding the pull and position made it worse; counted plainly, repeating the last count missed by least.{{ sp_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="muscle-spindle/index.html">Replay the stretch</a></li>
+            <li><a href="muscle-spindle-offline.zip" download>Download the offline reader</a> · <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/refs/heads/main/models/muscle-spindle.zip">Download the models and training code</a></li>
+            <li><a href="papers/muscle-spindle/index.html">Read the illustrated study</a> · <a href="papers/muscle-spindle/muscle-spindle.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/muscle-spindle/">See inside a muscle spindle in 3D</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="cross-limb-movement-title">
+          <p class="source">Luciw, Jarocka and Edin · Peterson and Ferris · Lifting an object; standing and walking on a beam</p>
+          <h3 id="cross-limb-movement-title">Can one model follow a lifting wrist and a balancing body?</h3>
+          <p>A light tells someone to reach for an object; in another laboratory, the view rotates around someone standing or walking on a narrow beam. Change an invented history of the wrist or of the base of the spine, with its muscles, and compare forecasts of the next eighth of a second from one small transformer that learned both tasks and from models that each learned one. The examples are invented; the error tables come from nine people outside the fitting groups, all scored before by earlier studies. On the wrist the joint model beat a wrist model trained on the same examples and lost to one trained twice as long; on the base of the spine both balance models beat it. A follow-up on the training people found that a separate last step for each body part helped the base of the spine only as far as continuing its most recent movement. A second follow-up on the same people found that voltages from three places on the scalp made both paths worse and the leg muscles' forecast only a little better, as much with another trial's voltages.{{ xs_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="cross-limb-movement/index.html">Try the wrist and sacrum forecast</a></li>
+            <li><a href="cross-limb-movement-offline.zip" download>Download the offline reader</a></li>
+            <li><a href="cross-limb-movement/index.html#scalp-input">Try the wrist and pelvis forecasts with scalp signals</a> · <a href="papers/cross-limb-movement/scalp-study/index.html">Read the results</a></li>
+            <li><a href="cross-limb-movement/index.html#path-maps">Compare one last step per body part with one shared step</a> · <a href="papers/cross-limb-movement/decoder-study/index.html">Read the follow-up</a></li>
+            <li><a href="cross-limb-controls/index.html">Compare the straight-line fits</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/refs/heads/main/models/cross-limb-movement-model.zip">Download the training code and fitted models</a></li>
+            <li><a href="papers/cross-limb-movement/index.html">Read the illustrated study</a></li>
+            <li><a href="papers/cross-limb-movement/cross-limb-movement.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/cross-limb-movement/">See a recorded lift and a recorded rotation</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="muscle-and-motion-title">
+          <p class="source">Peterson and Ferris · Standing and walking on a balance beam</p>
+          <h3 id="muscle-and-motion-title">Can one model forecast a leg’s muscles and the pelvis together?</h3>
+          <p>People stood on or walked along a narrow beam while the view in their headset rotated, with electrodes over four muscles of each lower leg and a camera marker on the base of the spine. Change an invented movement or muscle signal and compare forecasts of the next eighth of a second, from one small transformer that learned both and two that each learned one. The examples are invented; the error tables come from six people outside the fitting group, whose walking an earlier study had already examined. The two separate transformers were a little closer on both, and a straight-line fit did worse than all three.{{ mm_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="muscle-and-motion/index.html">Try the muscle and motion forecast</a></li>
+            <li><a href="muscle-and-motion-offline.zip" download>Download the offline reader</a></li>
+            <li><a href="muscle-motion-controls/index.html">Compare the straight-line fits</a></li>
+            <li><a href="papers/muscle-and-motion/index.html">Read the illustrated study</a></li>
+            <li><a href="papers/muscle-and-motion/muscle-and-motion.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/muscle-and-motion/">See a standing rotation and a walking rotation</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="visual-balance-title">
+          <p class="source">Peterson and Ferris · Walking on a balance beam</p>
+          <h3 id="visual-balance-title">Does scalp voltage help forecast a walker’s balance?</h3>
+          <p>People walked a narrow beam while the view in their headset rotated, with cameras on the head and the base of the spine and electrodes on the scalp, beside the eyes and over muscles of the neck and legs. Change an invented movement or electrode signal and compare forecasts of the next eighth of a second, from a small transformer with and without the scalp, and from the general model. The examples are invented; the error tables come from six people whose recordings were opened only after the models were sealed. Without the scalp the transformer did a little better, and a straight-line fit given only the movement and the rotation’s direction beat both models.{{ balance_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="visual-balance/index.html">Try the balance forecast</a></li>
+            <li><a href="visual-balance-offline.zip" download>Download the offline reader</a></li>
+            <li><a href="visual-balance-controls/index.html">Try the general model</a></li>
+            <li><a href="papers/visual-balance/index.html">Read the illustrated study</a></li>
+            <li><a href="papers/visual-balance/visual-balance.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/visual-balance/">See a recorded rotation</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="walking-instructions-title">
+          <p class="source">Schreiber and Moissenet · Two walking instructions</p>
+          <h3 id="walking-instructions-title">Do the words help forecast a walk?</h3>
+          <p>People walked barefoot, told either “as usual” or “fast but not running”, while cameras tracked the hips and the right heel. Change the instruction while the movement stays the same, and see where a small transformer, and the general model, expect the pelvis and the heel to be a tenth of a second later. The examples are invented; the error tables come from recorded walks of ten people studied before. For the transformer, the instruction’s help was within the noise; the opposite instruction made it worse.{{ walk_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="walking-instructions/index.html">Change the walking instruction</a></li>
+            <li><a href="walking-instructions-offline.zip" download>Download the offline reader</a></li>
+            <li><a href="walking-instruction-controls/index.html">Try the general model</a></li>
+            <li><a href="papers/walking-instructions/index.html">Read the illustrated study</a></li>
+            <li><a href="papers/walking-instructions/walking-instructions.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/walking-instructions/">See the recorded walks</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="heel-and-force-title">
+          <p class="source">Schreiber and Moissenet · Barefoot overground walking</p>
+          <h3 id="heel-and-force-title">Where will the heel move, and what will the floor measure?</h3>
+          <p>People walked barefoot across force plates, panels in the floor that measure how hard a foot presses down, while cameras tracked markers on the right heel and the ball of the foot and eight electrodes on the skin of the right leg picked up its muscles. Change an invented step and compare forecasts of where the heel will be and how hard the foot will press a tenth of a second later: one small transformer that learns both, two that each learn one, and the general model. The examples you edit are invented; the error tables come from recorded walks of people studied before. Learning both at once did not clearly help: the joint transformer’s lead over the separate pair was within the noise. A straight-line fit forecast the heel better, and carrying forward the plate’s current reading forecast the force better.{{ heel_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="heel-and-force/index.html">Try the trained transformer</a></li>
+            <li><a href="heel-and-force-offline.zip" download>Download the offline reader</a></li>
+            <li><a href="shared-heel-and-force/index.html">Try the general model</a></li>
+            <li><a href="papers/heel-and-force/index.html">Read the illustrated study</a></li>
+            <li><a href="papers/heel-and-force/heel-and-force.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/heel-and-force/">Replay one recorded step on the plate</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="pedal-load-title">
+          <p class="source">AnkleImage · Seated fixed-pedal recordings</p>
+          <h3 id="pedal-load-title">Can the shin signal predict the next pedal reading?</h3>
+          <p>People tried to lift a foot strapped to a pedal that could not move, while an electrode on the skin of the shin picked up the muscle’s electrical activity and a sensor recorded the load on the pedal. Change an invented pedal trace and the size of the muscle signal, and compare forecasts of the pedal’s reading a tenth of a second later: a small transformer trained for the task, the general model and simpler rules. The examples you edit are invented; the error tables come from recorded trials. One of the eight recordings kept for the test could not be scored, so the planned test was never completed. The muscle signal helped the transformer for one of the two new people; the general model did best without it, ahead of every simpler forecast for both.{{ pedal_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="pedal-load/index.html">Try the trained transformer</a></li>
+            <li><a href="pedal-load-offline.zip" download>Download the offline reader</a></li>
+            <li><a href="shared-pedal-load/index.html">Try the general model</a></li>
+            <li><a href="papers/pedal-load/index.html">Read the illustrated study</a></li>
+            <li><a href="papers/pedal-load/pedal-load.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/pedal-load/">Replay a recording beside the pedal</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="muscle-tracking-title">
+          <p class="source">AnkleImage · Ultrasound of the front of the shin</p>
+          <h3 id="muscle-tracking-title">Will this bundle of shin muscle fibres shorten?</h3>
+          <p>People sat and pulled the front of the foot upward while ultrasound filmed the muscle at the front of the shin, and tracking software followed one bundle of its fibres. Choose or type an invented history of the bundle’s length and angle, and compare forecasts of how much longer or shorter it will look ten tracking steps later: a small transformer trained for the task, the general model and simpler rules. The examples you edit are invented; the error tables come from recorded trials. On four new people, a straight-line fit on the bundle’s recent lengths beat both models, and its angle helped them only a little.{{ muscle_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="muscle-tracking/index.html">Try the trained transformer</a></li>
+            <li><a href="muscle-tracking-offline.zip" download>Download the offline reader</a></li>
+            <li><a href="shared-muscle-tracking/index.html">Try the general model</a></li>
+            <li><a href="papers/muscle-tracking/index.html">Read the illustrated study</a></li>
+            <li><a href="papers/muscle-tracking/muscle-tracking.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/muscle-tracking/">Follow a recording on a 3D leg</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="back-rotation-title">
+          <p class="source">Gracia Laso and colleagues · Standing and walking with a sensor on the back</p>
+          <h3 id="back-rotation-title">How far will a sensor on the back turn in the next tenth of a second?</h3>
+          <p>People stood still and walked with a sensor strapped to the back and two grids of electrodes on the skin over the spine. Choose walking or standing and the readings a model may use, change an invented history, and compare two forecasts of how many degrees the sensor will turn: a small transformer trained for the task, and the general model. The examples you edit are invented; the error tables come from recorded trials. One of the four people kept for the test could not be scored, so the planned test was never completed. On the other three, both models did worse with the electrodes than without them, and the general model did only as well as a straight-line fit.{{ back_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="back-rotation/index.html">Try the trained transformer</a></li>
+            <li><a href="back-rotation-offline.zip" download>Download the offline reader</a></li>
+            <li><a href="shared-back-rotation/index.html">Try the general model</a></li>
+            <li><a href="papers/back-rotation/index.html">Read the illustrated study</a></li>
+            <li><a href="papers/back-rotation/back-rotation.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/back-rotation/">Replay a recorded trial and see the electrode sites</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="cervical-forecast-title">
+          <p class="source">Nierula and colleagues · Neck, armpit, scalp, thumb and chest after a pulse at the wrist</p>
+          <h3 id="cervical-forecast-title">What will the neck electrode read four milliseconds later?</h3>
+          <p>People lay still while a nerve at the left wrist was stimulated again and again with a brief pulse. Change the early readings of an invented example and compare two forecasts of the neck electrode’s voltage 12 to 14 milliseconds after the pulse: a small transformer, and a straight-line correction to the last neck reading that the general model’s program also runs. On six new people, carrying the last neck reading forward beat the transformer, and the recording at the armpit passed neither model’s test.{{ neck_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="cervical-forecast/index.html">Try the transformer</a></li>
+            <li><a href="cervical-forecast-offline.zip" download>Download the offline reader</a></li>
+            <li><a href="neck-voltage/index.html">Try the model that starts at the last neck reading</a></li>
+            <li><a href="papers/cervical-forecast/index.html">Read the illustrated study</a></li>
+            <li><a href="papers/cervical-forecast/cervical-forecast.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/cervical-signals/">See the electrode sites and their references</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="scalp-forecast-title">
+          <p class="source">Ofner and colleagues · Arm movement with scalp and eye recordings</p>
+          <h3 id="scalp-forecast-title">Do early scalp readings improve an arm forecast?</h3>
+          <p>Choose a movement cue and compare forecasts for the elbow, forearm and index finger with and without early readings from six scalp electrodes or three around the eyes. The editable example is invented; the error tables come from recorded movement. On the fourth runs of the five new people, the scalp electrodes left the transformer’s error almost unchanged, and the usual change for each cue did better.{{ scalp_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="scalp-forecast/index.html">Try the scalp and eye forecasts</a></li>
+            <li><a href="scalp-forecast-offline.zip" download>Download the offline reader</a></li>
+            <li><a href="shared-motion/index.html#early-signals">Try the shared model’s eye adjustment</a></li>
+            <li><a href="papers/scalp-forecast/index.html">Read the illustrated study</a></li>
+            <li><a href="papers/scalp-forecast/scalp-forecast.pdf">Download the PDF</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/scalp-and-arm/">Compare recordings from the scalp and around the eyes</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="knee-stride-title">
+          <p class="source">Katmah and colleagues · Treadmill joint angles</p>
+          <h3 id="knee-stride-title">Can four seconds of walking beat the last stride?</h3>
+          <p>Follow both knees through four seconds of a walk and forecast both angles a quarter of a second later. On {{ N(KS, 'people') }} walkers, copying the matching moment of the previous stride missed by {{ N(KS, 'mean_person_mae_deg/prior_stride/bilateral', 3) }}° on average; a small transformer trained to correct that copy missed by {{ N(KS, 'mean_person_mae_deg/transformer_residual/bilateral', 3) }}°, closer for every one of them; with ten walkers in a second laboratory, it was closer for only {{ spell(N(KX, 'comparisons/transformer_residual_minus_prior_stride/wins')) }}. The general model, given the same four seconds, missed by {{ N(KSH, 'mae_degrees/shared', 3) }}°, and a copy of it with its shared part scrambled did better.{{ knee_stride_checks() }}{{ knee_external_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="knee-stride/">Compare the knee forecasts</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-stride">Model and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/knee-stride.zip">Offline reader (ZIP)</a></li>
+            <li><a href="papers/walking-rhythm/">Read the {{ pdf_pages('walking') }}-page supplement</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="knee-motion-title">
+          <p class="source">Katmah and colleagues · Treadmill joint angles</p>
+          <h3 id="knee-motion-title">Can a short look at the hips, knees and ankles beat replaying a stride?</h3>
+          <p>Five snapshots of both hips, knees and ankles, spanning 0.4 seconds, predict both knee angles about a quarter of a second later. Move the cutoff through an invented walk and reveal the later angles. On {{ knee_n() }} forecasts from {{ N(KNEE, 'test_people') }} walkers kept out of fitting, replaying a stride from four seconds of knee history missed by {{ N(KNEE, 'prior_stride_mean_mae_degrees', 2) }}° on average, and the small transformer by {{ N(KNEE, 'transformer_mean_mae_degrees', 2) }}°. The angles are the motion sensors’ own reconstructions, and nothing was forecast live.{{ knee_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="knee-motion/">Try the knee forecast</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/knee-motion">Model and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/knee-motion.zip">Offline viewer and model (ZIP)</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="knee-moment-title">
+          <p class="source">Reznick and colleagues · Optical treadmill walking and ground forces</p>
+          <h3 id="knee-moment-title">How much turning moment follows a step?</h3>
+          <p>The turning moment is how hard the forces around the knee push it to bend or straighten; a laboratory estimated it from cameras and the forces under the feet. A knee can bend while that push resists the bend. See what the last four seconds of joint motion predict about the net turning moment at the knee, on an invented walk. On three test walkers, the general model trained for this task had the lowest average error of the methods that saw only angles, and copying an earlier measured moment did better still.{{ knee_moment_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="knee-moment/">Explore the mechanical forecast</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/load">Source and results</a></li>
+            <li><a href="papers/walking-rhythm/">Read the walking study</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="walking-force-title">
+          <p class="source">Schreiber and Moissenet · Overground walking on two force plates</p>
+          <h3 id="walking-force-title">What can a muscle tell us about the force of a step?</h3>
+          <p>People walked slowly across two force plates, panels in the floor that measure how hard a foot presses down, while eight electrodes on the right leg picked up its muscles. Hold an invented walk’s marker paths fixed, change the muscle signals, and compare six fitted models. On {{ N(WF, 'held_people') }} walkers kept out of fitting, adding the muscle signals made a small transformer’s estimate worse ({{ N(WF, 'metrics/transformer-markers/MAE_N', 2) }} to {{ N(WF, 'metrics/transformer-combined/MAE_N', 2) }} newtons), and carrying forward the plates’ current reading did best.{{ force_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="walking-force/">Try the two-plate model</a></li>
+            <li><a href="shared-motion/index.html#right-plate">Try the shared model on the plate under the right foot</a></li>
+            <li><a href="papers/muscle-and-floor/">Read the walking-force study</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/walking-force.zip">Download the two-plate viewer for offline use</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="walking-landmarks-title">
+          <p class="source">Schreiber and Moissenet · Skin markers in overground walking</p>
+          <h3 id="walking-landmarks-title">Where does a step carry the ankles, knees and wrists?</h3>
+          <p>Cameras tracked small markers on the skin of people walking slowly. One experiment forecast six marker positions together, at both ankles, knees and wrists: turn an invented walker in 3D and compare each forecast with where its marker goes. Another, a task of the general model, followed one point at a time, then tried the same rule at 46 new places on the body. Both looked a fifth of a second ahead on the processed recordings, and in both a simpler forecast did best: in the first, a straight-line fit given the markers alone; in the second, a look-up of similar paths among the training examples.{{ landmark_checks() }}{{ point_motion_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="walking-landmarks/index.html">Try the six-point forecast on an invented walker</a></li>
+            <li><a href="shared-motion/index.html#point-motion">Give the shared model nine positions from one marker</a></li>
+            <li><a href="papers/walking-landmarks/index.html">Read the two walking-marker experiments</a></li>
+            <li><a href="https://eliminatenoise.github.io/Interoceptomics/stride-signals/">Follow the measured travel of a marker in Interoceptomics</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/walking-landmarks.zip">Download the six-point viewer for offline use</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="gait-rhythm-title">
+          <p class="source">Katmah and colleagues · Treadmill muscle and knee recordings</p>
+          <h3 id="gait-rhythm-title">Do the muscles and knees repeat at the same rate?</h3>
+          <p>Choose one of {{ N(GAIT, 'included_people') }} treadmill walks and compare how often the leg muscles’ activity repeats with how often the knees bend. For those {{ N(GAIT, 'included_people') }} test walkers, at 0.5 m/s, the strongest rhythms in the leg-muscle recordings and knee angles differed by {{ N(GAIT, 'scores/matched_emg/mae', 3) }} cycles per minute on average. Pairing each walk with another walker’s muscle recording raised the difference to {{ N(GAIT, 'scores/wrong_person/mae', 3) }}. Each instrument supplied its own 40-second window. Agreement in rate leaves the timing of individual steps unresolved.{{ gait_checks() }}</p>
+          <ul class="links">
+            <li><a class="primary" href="gait-rhythm/">Compare the rhythms</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/gait-rhythm">Study and results</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/gait-rhythm.zip">Offline reader and source (ZIP)</a></li>
+            <li><a href="papers/walking-rhythm/">Read the {{ pdf_pages('walking') }}-page supplement</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="spoken-title">
+          <p class="source">HoloAssist · Completed instructor speech</p>
+          <h3 id="spoken-title">Forecast the wrist one second ahead</h3>
+          <p>Enter an earlier wrist path and compare movement, timing and word inputs. In the study, the instructor’s words made the forecast worse, and repeating the wrist’s movement over the previous second did best.</p>
+          <ul class="links">
+            <li><a class="primary" href="hand-search/forecast.html">Run the forecast</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/preceding-instructions">The study and its fitted numbers</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="markers-title">
+          <p class="source">CMU Graphics Lab · Optical motion capture</p>
+          <h3 id="markers-title">Three recorded whole-body movements</h3>
+          <p>Turn a recorded jump in 3D. Follow any of {{ N(WB, 'clips/0/markers') }} body markers as the person bends, lifts or hops. No model runs on them.</p>
+          <ul class="links">
+            <li><a class="primary" href="whole-body/">Open the recordings</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/docs/whole-body">Where the recordings come from, and how the page is built</a></li>
+          </ul>
+        </article>
+      </li>
+    </ul>
+    <p>Four readers of the numbered studies also open with an invented example:</p>
+    <ul class="tiles examples">
+      <li><a href="./index.html">Line up sensor traces</a></li>
+      <li><a href="grip-force/">Forecast a pinch lift</a></li>
+      <li><a href="contact-force/">Compare two grip models</a></li>
+      <li><a href="wrist-pointing/">Change a wrist model’s inputs</a></li>
+    </ul>
+    <p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-muscle">Study behind the wrist example</a></p>
+  </section>
+
+  <section id="recordings" aria-labelledby="recordings-title">
+    <h2 id="recordings-title">Open a recording from a study’s dataset</h2>
+    <p>Each reader below takes a file from the open dataset its study used, or one prepared from it with the study’s converter. Find the dataset your recording came from: each card’s top line names it.</p>
+    <ul class="tiles recordings">
+      <li>
+        <article aria-labelledby="way-title">
+          <p class="source">WAY-EEG-GAL · Windowed-series <code>.mat</code></p>
+          <h3 id="way-title">Grip force during a lift</h3>
+          <p>Save a lift as JSON with the converter you download from the page. Move the cutoff and compare the forecasts with the squeeze measured 120 ms later, in newtons.</p>
+          <ul class="links">
+            <li><a class="primary" href="grip-force/">Replay a WAY lift</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/way-grip-force/">The study, and a forecast to run on your desktop</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="contact-title">
+          <p class="source">WAY-EEG-GAL · One lift, prepared as JSON</p>
+          <h3 id="contact-title">Grip after the squeeze registers</h3>
+          <p>Open one lift saved as JSON, or a prepared 200-row window of it. Compare a straight-line fit with a small network, 120 ms ahead, timed from the moment the plates register the squeeze.</p>
+          <ul class="links">
+            <li><a class="primary" href="contact-force/">Compare the two forecasts</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/way-contact-force/">The study, and how to prepare a file</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="hygrip-title">
+          <p class="source">HYGRIP · The dataset’s own <code>hygrip.h5</code></p>
+          <h3 id="hygrip-title">Grip sensor voltage</h3>
+          <p>Convert one cued right-hand trial to JSON with the converter you download from the page. Compare the forecasts with and without scalp EEG against the sensor voltage 120 ms later.</p>
+          <ul class="links">
+            <li><a class="primary" href="hygrip-force/">Replay a HYGRIP trial</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hygrip-force/">The study’s plan</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hygrip-force/results-2026-11-19/">Results</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="hyser-title">
+          <p class="source">Hyser 2.0.0, Random task (freely chosen presses) · The dataset’s own <code>.hea</code> and <code>.dat</code> files</p>
+          <h3 id="hyser-title">Index-finger sensor voltage</h3>
+          <p>Open the pair of force files from one session. Add the matching pair of forearm EMG files to compare the forecast with and without the muscle signal: the index sensor’s voltage 120 ms ahead, in volts. You can also load an invented trial.</p>
+          <ul class="links">
+            <li><a class="primary" href="hyser-index/">Open the finger-sensor reader</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hyser-index">The study and its controls</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hyser-index/crossday">An adjustment from day one, tested on day two</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hyser-index/whole-hand">The index finger alone, or all five</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/hyser-index/prescribed">The same models on a new task</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="pinch-title">
+          <p class="source">CEMHSEY GRASP · The dataset’s own MATLAB file</p>
+          <h3 id="pinch-title">Two-finger pinch force</h3>
+          <p>Open the dataset’s own MATLAB file for one pinch (Session 5, Task 2), or a converted copy. The reader compares the five electrode grids on the forearm and forecasts the force gauge 120 ms later, as a share of the hardest squeeze the person managed that day.</p>
+          <ul class="links">
+            <li><a class="primary" href="cemhsey-arrays/">Open a pinch recording</a></li>
+            <li><a href="cemhsey-arrays/#fit-local">Fit a local model from 12 recordings</a></li>
+            <li><a href="cemhsey-transfer/">Use a practice pinch to forecast a second attempt</a></li>
+            <li><a href="cemhsey-transfer/results/">Compare errors at three pinch-force targets</a></li>
+            <li><a href="cemhsey-carry/">An earlier practice fit, tried on a new day</a></li>
+            <li><a href="cemhsey-phase/reader/">Fit a correction on other people’s pinches</a></li>
+            <li><a href="cemhsey-phase/">Separate corrections for the rise and the release</a></li>
+            <li><a href="cemhsey-intervals/">Band widths around a forecast</a></li>
+            <li><a href="cemhsey-pinch/">The reader for overall muscle amplitude</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cemhsey-arrays">Study and offline download</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="daily-title">
+          <p class="source">KIN-MUS UJI · Seven-electrode window in JSON</p>
+          <h3 id="daily-title">Wrist angles during daily tasks</h3>
+          <p>Supply the task, its timing and half a second of forearm activity. Compare the angles estimated 250 ms later with and without the muscle signal.</p>
+          <ul class="links">
+            <li><a class="primary" href="daily-wrist/">Open the everyday-wrist reader</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/uji-wrist-emg">The study, and the format of the file</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="forearm-title">
+          <p class="source">EEG-EMG-WristMotion · The dataset’s own ZIP</p>
+          <h3 id="forearm-title">Forearm EMG took {{ S(3).gap(2) }} off the wrist forecast’s error</h3>
+          <p>Open one of the dataset’s own ZIP files as it comes: the reader’s page links to one. Compare three forecasts against the measured angles at six moments of a pointing movement.</p>
+          <ul class="links">
+            <li><a class="primary" href="wrist-forearm/">Open a wrist recording ZIP</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-forearm-transfer">The study, and a replay to run on your desktop</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="temporal-title">
+          <p class="source">EEG-EMG-WristMotion · One trial, prepared as JSON</p>
+          <h3 id="temporal-title">Scalp EEG made the wrist forecast worse</h3>
+          <p>In the study, adding scalp EEG raised the error from {{ S(1).ref(2) }} to {{ S(1).cand(2) }}. Prepare one trial with the study’s converter and compare the two forecasts, with and without EEG, against the measured angles. The study’s error plots open without a file.</p>
+          <ul class="links">
+            <li><a class="primary" href="wrist-replay/">Replay a wrist turn</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/wrist-pointing-temporal">The study, its converter and its launchers</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="palm-title">
+          <p class="source">IACKD · One right-hand trial, prepared as JSON</p>
+          <h3 id="palm-title">Track a palm through a reach</h3>
+          <p>Prepare a trial with the study’s converter. A trial from a person’s first recording compares position estimates with and without scalp EEG. A trial from their second shows what changes once the model has been adjusted on the first.</p>
+          <ul class="links">
+            <li><a class="primary" href="./index.html#palm-replay">Open the palm replay</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-palm-history/">The first-recording study, and how to prepare a trial</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-personal-calibration#replay-a-second-recording">The second-recording study, and how to prepare a trial</a></li>
+          </ul>
+        </article>
+      </li>
+      <li>
+        <article aria-labelledby="signal-title">
+          <p class="source">Your own signals · JSON or CSV</p>
+          <h3 id="signal-title">Put traces on the same clock</h3>
+          <p>Look at each trace on its own clock. Line traces up when their files name the same subject, the same recording and the same clock. CSV uses <code>time,value</code> with time in seconds.</p>
+          <ul class="links">
+            <li><a class="primary" href="./index.html">Open NeuroTranslator</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/demo">How to import files and line them up</a></li>
+          </ul>
+        </article>
+      </li>
+    </ul>
+  </section>
+
+  <section class="support" id="launchers" aria-labelledby="launchers-title">
+    <h2 id="launchers-title">Keep a launcher on your computer</h2>
+    <p>These shortcuts open NeuroTranslator, the project’s app, in your browser, at the part that replays a recorded palm movement. They need a network connection. If a shortcut opens as text, extract the ZIP first. Keep the filename extension and follow your system’s normal opening prompts.</p>
+    <ul class="links">
+      <li><a download="NeuroTranslation-Windows.url" href="launchers/NeuroTranslation-Windows.url">Windows launcher</a></li>
+      <li><a download="NeuroTranslation-macOS.webloc" href="launchers/NeuroTranslation-macOS.webloc">macOS launcher</a></li>
+      <li><a download="NeuroTranslation-Linux.desktop" href="launchers/NeuroTranslation-Linux.desktop">Linux launcher</a></li>
+      <li><a download="Install-NeuroTranslation-Linux.sh" href="launchers/Install-NeuroTranslation-Linux.sh">Linux menu installer</a></li>
+      <li><a download="NeuroTranslation-Launchers.zip" href="launchers/NeuroTranslation-Launchers.zip">All launchers ZIP</a></li>
+    </ul>
+    <p>For a Linux application-menu entry, extract the ZIP and run <code>sh Install-NeuroTranslation-Linux.sh</code> in that folder. An entry made by an earlier installer opens this page. Choose <strong>Open the palm replay</strong> under Open a recording from a study’s dataset. The installer leaves existing entries and your changes to them alone, and opens no browser.</p>
+    <p>Checked: the format of the Windows and macOS shortcuts, and the Linux installer in an isolated folder. Not checked: opening the shortcuts on a real Windows or macOS machine.</p>
+    <ul class="links">
+      <li><a href="launchers/README.txt">Launcher instructions</a></li>
+      <li><a href="launchers/SHA256SUMS">Checksums</a></li>
+      <li><a href="launchers/MANIFEST.json">Package details</a></li>
+    </ul>
+  </section>
+
+  <section class="support" id="local" aria-labelledby="local-title">
+    <h2 id="local-title">Run two measured recordings with Python</h2>
+    <p>Both run on your own computer, not on this site. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/daily-sports-limbs">The general model’s five-sensor walking fit</a> opens a page in your browser that forecasts five sensors on a walking person, on a walk it was fitted on, so it shows the model running, not how well it would forecast someone new. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/interfaces/wrist-language-motion">One wrist trial</a> shows how a recording is labelled, channel by channel, for the general model. No model is fitted to it.</p>
+  </section>
+
+  <section class="support" id="papers" aria-labelledby="papers-title">
+    <h2 id="papers-title">Two papers, each written twice</h2>
+    <p>Two working drafts, each in a Technical and a Simple English edition. Nobody outside the project has reviewed them. Every result in them comes from stored recordings, and nothing is live. They report every study of the numbered table, the general model’s first {{ spell(C('general_learner', 'fits')) }} fits among them. What came after them is not in them: the general model’s shared fit, the studies published after the numbered table, the walk/run generator, the knee forecasts, the rhythm comparison and the knee turning moments, the three finger studies, the walking-force, walking-marker, elbow, neck-voltage, back-sensor, shin-muscle, pedal, heel-and-force, walking-instruction, visual-balance, muscle-and-motion, wrist-and-sacrum, muscle-spindle, cortical-reach, contact-forecast, target-reach, cylinder-rotation and reach-feedback studies, the reach-feedback models’ test a week later, the arm forecasts tested on five new people, with and without scalp readings, the general model’s right-foot, single-marker, cued-arm, back-sensor, shin-muscle, pedal, heel-and-force, walking-instruction and visual-balance tasks, and the separate supplements on them.{{ first_fits() }}{{ not_in_papers() }}</p>
+    <p><a href="papers/language-and-observed-movement/language-and-movement.html">How precisely do words identify a recorded movement?</a> A separate {{ pdf_pages('language') }}-page supplement, not one of the two papers, on the two studies that search recordings of movement with words, one of the whole body and one of the hand. <a href="papers/language-and-observed-movement/language-and-movement.pdf">Open the PDF.</a></p>
+    <ul class="links">
+      <li><a href="papers/reach-feedback/one-week/index.html">A week later, does seeing the arm improve a forecast of the brain?</a>, a supplement of {{ pdf_pages('week') }} pages on the reach-feedback models tested on the same macaque a week later · <a href="papers/reach-feedback/one-week/one-week.pdf">Download the PDF</a></li>
+      <li><a href="papers/reach-feedback/index.html">Can a forecast of the arm improve a forecast of sensory cortex?</a>, a {{ pdf_pages('reach') }}-page supplement on forecasting a macaque’s reach and the spikes that follow it · <a href="papers/reach-feedback/reach-feedback.pdf">Download the PDF</a></li>
+      <li><a href="papers/cylinder-rotation/index.html">How fast will the cylinder turn?</a>, a supplement of {{ pdf_pages('cylinder') }} pages on forecasting a carried cylinder’s turn from its own sensor, with a separate test on repeated gestures · <a href="papers/cylinder-rotation/cylinder-rotation.pdf">Download the PDF</a></li>
+      <li><a href="papers/target-reach/index.html">Does knowing the target improve a reach forecast?</a>, a {{ pdf_pages('target') }}-page supplement on forecasting a carried cylinder, with a separate test on improvised gestures · <a href="papers/target-reach/target-reach.pdf">Download the PDF</a></li>
+      <li><a href="papers/contact-forecast/index.html">The same electrodes, one day later</a>, a {{ pdf_pages('contact') }}-page supplement on the contact-forecast study · <a href="papers/contact-forecast/contact-forecast.pdf">Download the PDF</a></li>
+      <li><a href="papers/cortical-reach/index.html">Can a sensory brain signal improve a reach forecast?</a>, a {{ pdf_pages('cortical') }}-page illustrated supplement on the cortical-reach study · <a href="papers/cortical-reach/cortical-reach.pdf">Download the PDF</a></li>
+      <li><a href="papers/muscle-spindle/index.html">What can a stretch tell us about the next sensory spikes?</a>, a {{ pdf_pages('spindle') }}-page illustrated supplement on the muscle-spindle study · <a href="papers/muscle-spindle/muscle-spindle.pdf">Download the PDF</a></li>
+      <li><a href="papers/cross-limb-movement/scalp-study/index.html">What does the scalp add to a movement forecast?</a>, a {{ pdf_pages('cross-limb-scalp') }}-page illustrated follow-up to the wrist-and-sacrum study · <a href="papers/cross-limb-movement/scalp-study/scalp-study.pdf">Download the PDF</a></li>
+      <li><a href="papers/cross-limb-movement/decoder-study/index.html">Should the wrist and pelvis have separate movement decoders?</a>, a {{ pdf_pages('cross-limb-maps') }}-page illustrated follow-up to the wrist-and-sacrum study · <a href="papers/cross-limb-movement/decoder-study/decoder-study.pdf">Download the PDF</a></li>
+      <li><a href="papers/cross-limb-movement/index.html">Can a model trained on balance help forecast a reach?</a>, a {{ pdf_pages('cross-limb') }}-page illustrated supplement on the wrist-and-sacrum study · <a href="papers/cross-limb-movement/cross-limb-movement.pdf">Download the PDF</a></li>
+      <li><a href="papers/muscle-and-motion/index.html">Can one model forecast leg-muscle activity and pelvic motion?</a>, a {{ pdf_pages('muscle-motion') }}-page illustrated supplement on the muscle-and-motion study · <a href="papers/muscle-and-motion/muscle-and-motion.pdf">Download the PDF</a></li>
+      <li><a href="papers/visual-balance/index.html">Can scalp voltage improve a 125-millisecond balance forecast?</a>, a {{ pdf_pages('balance') }}-page illustrated supplement on the balance study and the general model’s balance task · <a href="papers/visual-balance/visual-balance.pdf">Download the PDF</a></li>
+      <li><a href="papers/walking-instructions/index.html">What does “fast” add once a person is moving?</a>, a {{ pdf_pages('walking-instructions') }}-page illustrated supplement on the walking-instruction study and the general model’s walking-instruction task · <a href="papers/walking-instructions/walking-instructions.pdf">Download the PDF</a></li>
+      <li><a href="papers/heel-and-force/index.html">One footstep, two forecasts</a>, a {{ pdf_pages('heel') }}-page illustrated supplement on the heel-and-force study and the general model’s heel-and-force task · <a href="papers/heel-and-force/heel-and-force.pdf">Download the PDF</a></li>
+      <li><a href="papers/pedal-load/index.html">What can the shin tell us about the next pedal reading?</a>, a {{ pdf_pages('pedal') }}-page illustrated supplement on the pedal study and the general model’s pedal task · <a href="papers/pedal-load/pedal-load.pdf">Download the PDF</a></li>
+      <li><a href="papers/muscle-tracking/index.html">Does a muscle bundle’s angle help predict its next change in length?</a>, a {{ pdf_pages('muscle') }}-page illustrated supplement on the shin-muscle study and the general model’s shin-muscle task · <a href="papers/muscle-tracking/muscle-tracking.pdf">Download the PDF</a></li>
+      <li><a href="papers/back-rotation/index.html">How far will a sensor on your back turn in a tenth of a second?</a>, a {{ pdf_pages('back') }}-page illustrated supplement on the back-sensor study and the general model’s back-sensor task · <a href="papers/back-rotation/back-rotation.pdf">Download the PDF</a></li>
+      <li><a href="papers/cervical-forecast/index.html">Can a recording at the armpit improve a forecast at the neck?</a>, a {{ pdf_pages('neck') }}-page illustrated supplement on the neck-voltage study · <a href="papers/cervical-forecast/cervical-forecast.pdf">Download the PDF</a></li>
+      <li><a href="papers/scalp-forecast/index.html">Do early scalp readings improve an arm forecast?</a>, a {{ pdf_pages('scalp') }}-page illustrated supplement on the scalp and eye readings in the arm forecasts · <a href="papers/scalp-forecast/scalp-forecast.pdf">Download the PDF</a></li>
+      <li><a href="papers/arm-transfer/index.html">Forecasting cued arm movements in new people</a>, a {{ pdf_pages('arm') }}-page supplement on the arm transformer and the general model’s arm task, tested on five new people · <a href="papers/arm-transfer/arm-transfer.pdf">Download the PDF</a></li>
+      <li><a href="papers/cued-arm/index.html">What does the arm cue already tell us?</a>, a {{ pdf_pages('cued') }}-page supplement on the elbow study and the general model’s cued-arm task · <a href="papers/cued-arm/cued-arm.pdf">Download the PDF</a></li>
+      <li><a href="papers/walking-landmarks/index.html">Where will the wrist be in a fifth of a second?</a>, a {{ pdf_pages('landmarks') }}-page supplement on the walking-marker study and the general model’s single-marker task · <a href="papers/walking-landmarks/walking-landmarks.pdf">Download the PDF</a></li>
+      <li><a href="papers/muscle-and-floor/">One stride, two force plates</a>, a {{ pdf_pages('force') }}-page supplement on the walking-force study and the general model’s right-foot task · <a href="papers/muscle-and-floor/muscle-and-floor.pdf">Download the PDF</a></li>
+      <li><a href="papers/current/">Read the four current drafts, and find each study in them</a></li>
+      <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers">Paper files, notices and source</a></li>
+      <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/papers/downloads/NeuroTranslation-Brain2Body-Papers.zip">Latest four drafts (ZIP)</a></li>
+      <li><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/interfaces/experimental/portable">Source of an interface that has never been run</a></li>
+      <li><a href="https://github.com/eliminatenoise/NeuroTranslation">Project source and licences</a></li>
+      <li><a href="https://github.com/eliminatenoise/NeuroTranslation/archive/refs/heads/main.zip">Repository ZIP</a></li>
+    </ul>
+  </section>
+
+  <section class="support" id="projects" aria-labelledby="projects-title">
+    <h2 id="projects-title">Three projects, one question</h2>
+    <p>NeuroTranslation is one of three projects in one programme, Brain2Body, that ask the same question: what passes between the brain and the body? The brain sends orders out to the muscles, and the body reports back what it is doing and feeling. Each project comes at that traffic from a different side.</p>
+    <ul class="projects">
+      <li><strong>NeuroTranslation</strong>, whose pages are gathered above, predicts one recording of the body from another, most of them of a movement: brain, nerve, muscle, force or motion, recorded by scientists who share their data openly. Every prediction is checked against what was actually recorded, and so far a signal’s own recent past, above all a hand’s own recent movement, has been the forecast to beat. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/README.md">Every study and its result, on GitHub</a></li>
+      <li><strong><a href="https://github.com/eliminatenoise/NeuroSurge">NeuroSurge</a></strong> is a game for learning which part of the brain moves which part of the body. You look out from inside a body without skin. Turn your view to a coloured area of the brain in front of you, and the body part it controls moves; click a muscle and its area lights up. What the game’s brain does is made up by the game’s rules, not read from anyone’s brain. <a class="primary" href="https://eliminatenoise.github.io/NeuroSurge/">Play NeuroSurge in your browser</a></li>
+      <li><strong><a href="https://github.com/eliminatenoise/Interoceptomics">Interoceptomics</a></strong> is a proposed field of science that would measure what the body senses of its own interior, a heartbeat or a breath, and then ask which nerve connections carry it. None of its experiments has been run yet. Two of its pages run in your browser. <a class="primary" href="https://eliminatenoise.github.io/Interoceptomics/stages/">The experiment guide</a> walks through the proposed experiments one step at a time, each beside a 3D sketch you can turn. <a class="primary" href="https://eliminatenoise.github.io/Interoceptomics/atlas/">The atlas viewer</a> is a 3D model of the left half of a human brain that you can turn, cut and measure. It is built from the Allen Institute’s published map of the brain’s regions: a map, not a measurement.</li>
+    </ul>
+    <p>They are joined by a plan and a guide.</p>
+    <ul class="projects">
+      <li>The game is meant to become the place where NeuroTranslation’s model is used. The plan: type or say an action, or move in front of your camera, and the body on screen does it, driven by NeuroTranslate 0.0, the one model NeuroTranslation is building to learn from many kinds of body signal at once. None of this is in the published game. A first draft is <a href="https://github.com/eliminatenoise/NeuroSurge/pull/2">a proposed change to the game</a>, not yet merged: commands you type or speak choose from a set of the game’s own movements, an arm or knee on screen follows yours as your camera sees it, and a map inside the game opens the recordings NeuroTranslation studies and its fitted models.</li>
+      <li>The experiment guide lays out the proposed experiments step by step, in two halves. Human movement (the “Small vision”) holds the movement tasks in people, where NeuroTranslation and the game meet; Animal learning (the “Big vision”) is Interoceptomics’ road map: six proposed stages of experiments in animals, in 22 numbered steps. Several of NeuroTranslation’s examples already sit inside the guide, among them two forecasts a quarter of a second ahead: the two angles of a person’s right wrist as they steer a cursor to a target, from three of its models, and where a rat on a W-shaped track will be.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroTranslation and Brain2Body: the four papers</title>
+<style>
+:root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.55; }
+body { max-width: 52rem; padding: 1.5rem; margin: 2rem auto; }
+h1 { line-height: 1.12; margin: .35em 0 .5em; } h2 { line-height: 1.2; margin: 1.6em 0 .3em; } p { max-width: 68ch; }
+a { text-underline-offset: .18em; }
+table { border-collapse: collapse; margin: 1rem 0; }
+th, td { padding: .35rem .7rem; text-align: left; border-bottom: 1px solid color-mix(in srgb, currentColor 22%, transparent); }
+tbody th { font-weight: 500; } td { white-space: nowrap; }
+.wide { overflow-x: auto; }
+</style>
+</head>
+<body><main>
+<h1>NeuroTranslation and Brain2Body: the four papers</h1>
+<p>Two papers, each written twice: a Technical edition, and a Simple English edition that explains the same things in ordinary words. Start with a Simple English edition.</p>
+<h2>NeuroTranslation: A New Paradigm In Brain-Body Mapping.</h2>
+<p>What does a recording of the brain or of a muscle add to a forecast of a movement that already knows how the body has just been moving? The paper reports every study of the numbered table on the studies page, all {{ n_in_papers() }} rows.</p>
+<p><a href="neurotranslation-technical.pdf{{ edition_query() }}">Technical edition</a> (PDF, {{ pages(0) }} pages) · <a href="neurotranslation-explained.pdf{{ edition_query() }}">Simple English edition</a> (PDF, {{ pages(1) }} pages)</p>
+<h2>Brain2Body: The Next Generation In Body-Brain Interfacing.</h2>
+<p>What does a person keep when a machine guides their hand through a skill and then stops? The paper is a proposal: it reports no experiment on that question.</p>
+<p><a href="brain2body-article.pdf{{ edition_query() }}">Technical edition</a> (PDF, {{ pages(2) }} pages) · <a href="brain2body-simple-english.pdf{{ edition_query() }}">Simple English edition</a> (PDF, {{ pages(3) }} pages)</p>
+<h2>Where each study is</h2>
+<p>Each link opens the NeuroTranslation PDF at the study’s row in appendix B, the table of every study (the macaque study at appendix A, where it is told in full). The study numbers are those of the <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/README.md">studies page</a>, which lists every study with its results.</p>
+<div class="wide">
+{{ page_table_html(edition_query()) }}
+</div>
+<p>Not in these papers: what came after them. That is the general model’s shared fit on two datasets at once, with its wrist-angle task and the correction fitted on it, the studies published after the numbered table, a model that generates a short walk or run from one word, two knee forecasts and a comparison of muscle and knee rhythms, the knees’ turning moments, three forecasts of five fingers from a glove, a screen and a recording from the surface of the brain, the walking-force, walking-marker, elbow, neck-voltage, back-sensor, shin-muscle, pedal, heel-and-force, walking-instruction, visual-balance, muscle-and-motion, wrist-and-sacrum, muscle-spindle, cortical-reach, contact-forecast, target-reach, cylinder-rotation and reach-feedback studies, the reach-feedback models’ test a week later, the arm forecasts tested on five new people, with and without scalp readings, the general model’s right-foot, single-marker, cued-arm, back-sensor, shin-muscle, pedal, heel-and-force, walking-instruction and visual-balance tasks, and the supplements on them.{{ not_in_papers() }}{{ later_checks() }}{{ word_motion_checks() }} <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers#not-in-either-paper-what-came-after-them">Each of them, with its result</a></p>
+<p><a href="../reach-feedback/one-week/index.html">The reaching model, one week later.</a> Does adding recorded movement help a model forecast later brain activity when the same animal returns? The result differed between workspaces. A second comparison follows changes in 39 modeled muscle–tendon paths.</p>
+<p><a href="../reach-feedback/index.html">Reaching and sensory cortex.</a> One recording lets us compare the measured path of the arm, its forecast, and the spikes that followed.</p>
+<p><a href="../cylinder-rotation/index.html">Forecasting a cylinder’s turn.</a> Later repetitions in the same volunteers test whether a fitted model can make use of acceleration in addition to earlier turning rates.</p>
+<p><a href="../target-reach/index.html">Does knowing the target improve a reach forecast?</a> Human transport and prompted gestures, with the cue and measured endpoint defined separately for each experiment.</p>
+<p><a href="../contact-forecast/index.html">The same electrodes, one day later.</a> A held-day test of whether handle movement adds to earlier electrical counts and cues.</p>
+<p><a href="../cortical-reach/index.html">When the arm is moved.</a> A matched comparison of neural, cue and handle histories in 105 later trials from one macaque.</p>
+<p><a href="../muscle-spindle/index.html">From stretch to spikes.</a> The spike-history forecast had lower count deviance than a model that also read tendon mechanics, in an exploratory comparison of three sensory fibers.</p>
+<p><a href="../cross-limb-movement/scalp-study/index.html">Does scalp voltage help forecast movement?</a> Compare the correctly timed recording with an earlier trial from the same person.</p>
+<p><a href="../cross-limb-movement/decoder-study/index.html">Should a wrist and pelvis use different output maps?</a> Two equally sized models turn earlier movement and muscle recordings into 125 milliseconds of forecast motion.</p>
+<p><a href="../cross-limb-movement/index.html">Can the same model follow a wrist and the base of the spine?</a> The wrist result depended on the training budget. The balance specialist followed the sacrum more closely. <a href="../cross-limb-movement/cross-limb-movement.pdf">Download the paper</a>.</p>
+<p><a href="../muscle-and-motion/index.html">Can one model forecast the muscle and the movement?</a> Two specialist models had the lower average errors on 1,759 standing and walking rotations. <a href="../muscle-and-motion/muscle-and-motion.pdf">Download the paper</a>.</p>
+<p><a href="../visual-balance/index.html">Does scalp voltage help forecast a walker’s balance?</a> In 880 recorded rotations, neither marker met the test for a benefit from scalp input. <a href="../visual-balance/visual-balance.pdf">Download the paper</a>.</p>
+<p><a href="../walking-instructions/index.html">Does the walking instruction help?</a> Ten people, two cues and 60 walks put a task-trained Transformer and the shared movement encoder to the test. <a href="../walking-instructions/walking-instructions.pdf">Download the paper</a>.</p>
+<p><a href="../heel-and-force/index.html">Where will the heel move, and what will the floor measure?</a> Two forecasts from the same step put a joint Transformer and the general movement encoder to separate tests. <a href="../heel-and-force/heel-and-force.pdf">Download the illustrated PDF</a>.</p>
+<p><a href="../pedal-load/index.html">Can the shin signal predict the next pedal reading?</a> Four volunteers pulled against a fixed pedal. An ambiguous recording left the planned two-person test incomplete. What do the qualified trials show? <a href="../pedal-load/pedal-load.pdf">Download the illustrated PDF</a>.</p>
+<p><a href="../muscle-tracking/index.html">Will this bundle of shin muscle fibres shorten?</a> Two models forecast a change in length from ultrasound tracking. Does adding the angle from the same recording help? <a href="../muscle-tracking/muscle-tracking.pdf">Download the illustrated PDF</a>.</p>
+<p><a href="../back-rotation/index.html">How far will a sensor on the back turn in the next tenth of a second?</a> Two forecasts test whether voltages recorded on the back add to what recent motion already tells us. <a href="../back-rotation/back-rotation.pdf">Download the illustrated PDF</a>.</p>
+<p><a href="../cervical-forecast/index.html">What will the neck electrode read four milliseconds later?</a> Two models forecast a small change in surface voltage. Matching the upper-arm signal to the right stimulus tests what that electrode contributes. <a href="../cervical-forecast/cervical-forecast.pdf">Download the illustrated PDF</a>.</p>
+<p><a href="../scalp-forecast/index.html">Do early scalp readings improve an arm forecast?</a> Two families of models predict the later elbow, forearm and finger readings. Eye electrodes and recordings from other repetitions of the same task help test what the scalp contributes. <a href="../scalp-forecast/scalp-forecast.pdf">Download the illustrated PDF</a>.</p>
+<p><a href="../arm-transfer/index.html">Forecasting cued arm movements in new people</a>. Seven people supplied the fitting recordings. Five others supplied the recorded test of the cue, early motion and a first-run correction. <a href="../arm-transfer/arm-transfer.pdf">Download the PDF</a>.</p>
+<p><a href="../cued-arm/index.html">What does the arm cue already tell us?</a> Two experiments compare what an instruction, recent movement and a scalp electrode contribute to a right-arm forecast. <a href="../cued-arm/cued-arm.pdf">Download the cued-arm study as a PDF</a>.</p>
+<p><a href="../walking-landmarks/index.html">Where will the wrist be in a fifth of a second?</a> tests two ways to forecast the movement of skin markers in slow walking. <a href="../walking-landmarks/walking-landmarks.pdf">Download the walking-marker study as a PDF</a>.</p>
+<p><a href="../muscle-and-floor/">One stride, two force plates</a> reports two later experiments on overground walking. <a href="../muscle-and-floor/muscle-and-floor.pdf">Read the supplement as a PDF</a>.</p>
+<p>These are working drafts, built on {{ built_date() }}. Inside the project they have been read by checkers who had not written them, one for every number and statement against its source, the other for the writing: the whole of two editions, then every change made after that, the licences included. Every fix in this edition has been checked; the last few were made in the words the last check gave. Nobody outside the project has reviewed them.</p>
+<p><a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/papers/current/NOTICE.md">Credits and licences</a> ·
+<a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers/current/results">Result files of the studies without a folder</a> ·
+<a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/papers/current/manifest.json">File manifest</a> ·
+<a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/docs/RIGHTS.md">All dataset credits</a></p>
+<p><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/papers/downloads/NeuroTranslation-Brain2Body-Papers.zip">Download all four PDFs with their notes (ZIP)</a> ·
+<a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/papers/downloads/NeuroTranslation-Brain2Body-Papers-Source.zip">The source that builds them (ZIP)</a> ·
+<a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers">How to read them</a> ·
+<a href="../../START.html">Start page</a></p>
+</main></body></html>

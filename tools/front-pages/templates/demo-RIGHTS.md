@@ -1,0 +1,5 @@
+The app's own code is dedicated to the public domain under CC0 1.0; see [LICENSE](LICENSE).
+
+A file you open in the app stays under the terms it came with. The app's licence gives no rights to any recording, nor to anatomical assets supplied separately. The dataset cards in the app show each dataset's source and licence.
+
+Who made each dataset used in this project, its licence and the credit it is owed: [docs/RIGHTS.md](../docs/RIGHTS.md).
