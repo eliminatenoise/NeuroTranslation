@@ -1051,7 +1051,7 @@ def n_datasets(benchmarks_only=True):
 
 
 HELD = [  # label, studies, how many, what, file, field, what the field must hold
-    ('Wrist pointing (EEG-EMG-WristMotion)', '1 to 3 and 28', 6, 'people', 'benchmarks/wrist-forearm-transfer/SOURCE.json', 'slices', 'six reserved test participants not examined'),
+    ('Wrist pointing (EEG-EMG-WristMotion)', "1 to 3, 28 and 29, and the general model's wrist-angle task and its forearm correction", 6, 'people', 'benchmarks/wrist-forearm-transfer/SOURCE.json', 'slices', 'six reserved test participants not examined'),
     ('Everyday tasks (KIN-MUS UJI)', '4', 4, 'people', 'benchmarks/uji-wrist-emg/DEVELOPMENT-AGGREGATE.json', 'cohort/reserved_test', 4),
     ('Hand to mouth (Lucchetti and colleagues)', '5', 1, 'person', 'benchmarks/surface-emg-elbow/RESULT.json', 'interpretation/confirmation_asset_HS03_opened', False),
     ('Palm (IACKD)', '6', 1, 'person', 'benchmarks/scalp-eeg-hand/DESIGN.json', 'reserve', 'sub-06, metadata only'),
@@ -1786,9 +1786,12 @@ def shared_checks():
 
 
 def arm_more_data_check():
-    """README, presumption paragraph: the arm task is a test on unseen people (GENERAL_FITS), fitted on seven people instead of
-    one; the seven-person fit was closer on the five new people than the one-person fit, and the fitting group's median change
-    for each cue closer still."""
+    """README, presumption paragraph: the arm task is a test on people kept out of its fitting (GENERAL_FITS) in which only the
+    straight-line readouts were refitted on seven people instead of one, the shared part unchanged (its protocol keeps the encoder and
+    trains a new collection of readouts); the seven-person readouts were closer on the five new people than the one-person readouts,
+    and the fitting group's median change for each cue closer still."""
+    plan = re.sub(r'\s+', ' ', (REPO / GA_PLAN).read_text(encoding='utf-8'))
+    assert 'Keep the existing 24-wide time encoder' in plan and 'Train a new collection of readouts on the seven fitting participants.' in plan
     assert GENERAL_FITS['arm-transfer'] == 'unseen' and 'arm-transfer' in UNSEEN
     assert walk(load(GA), 'training/eligible_people') == 7 and walk(load(GA), 'assessment/eligible_people') == 5
     seven, one, cue = (walk(load(GA), f'unseen_person/models/{k}/standardized_mae') for k in ('shared_cue_motion', 's1_shared_cue_motion', 'cue_median'))
@@ -2905,7 +2908,8 @@ def hw_checks():
     return ''
 
 
-GENERAL_HEADING = 'The general model has had its first runs, and in six tests on unseen people it beat simpler forecasts once'
+GENERAL_HEADING = ("The general model has had its first runs, and in six tests on people kept out of each task's fitting it beat "
+                   'simpler forecasts once')
 
 
 def try_rows(kind):
@@ -3815,14 +3819,112 @@ def walk_checks():
     return ''
 
 
+# ---------------------------------------------------------------------------------------------------
+# The general model's tests, as the independent audit of 21 November corrected their description: "tests on people kept out of
+# that task's fitting" (not "people nobody had looked at"), the pedal lead qualified, and the directions of the sentences that
+# correction added, each asserted against its result file.
+# ---------------------------------------------------------------------------------------------------
+KM_COMPARE = 'models/neurotranslate-0.0/cross_limb/historical-model-comparison.json'
+
+
+def km_past_n():
+    """How many cutoffs of the knee-moment task had an earlier measured moment of the same walker (the past-moment subset)."""
+    n = sum(p['past_moment_windows'] for p in load(KM)['evaluation']['per_person'])
+    log(f'{n:,}', file=KM, field='evaluation/per_person/*/past_moment_windows (sum)', full=n)
+    return f'{n:,}'
+
+
+def pop_kl8(field, dp=3):
+    """One score of the population task for rat KL8 (by_rat is a list; the rat is found by name)."""
+    rows = load(POPSHARED)['by_rat']
+    i = [r['rat'] for r in rows].index('KL8')
+    return N(POPSHARED, f'by_rat/{i}/{field}', dp)
+
+
+def ca_margin(other):
+    """How much higher, in per cent, the cued-arm task's error with the shared part was than another method's (balanced over the runs)."""
+    b = load(CA)['balanced_standardized_mae']
+    v = (b['shared_cue_motion'] / b[other] - 1) * 100
+    assert v > 0, (other, v)
+    log(f'{v:.1f}', file=CA, field=f'balanced_standardized_mae/shared_cue_motion / {other} - 1 (x100)', full=v)
+    return f'{v:.1f}'
+
+
+def audit_checks():
+    """Every direction the audit's corrections added to the pages, asserted: scalp worse at the sacrum (interval above zero) and
+    within the noise at the head; the forearm correction lower than the uncorrected forecast for all six and its two rules; the
+    knee-moment copy's wins and both rules failed; the single-marker straight-line gap within the noise; the cued-arm wrong cue worse
+    in every run, keeping the last reading closer than the cue alone in run 1, the shared-part rule's two margins; the pedal order
+    reversed in development and the muscle rule already failing on the complete person; the population readout's scrambled copy
+    and KL8's last speed; the scalp correction's interval; the knee correction no better without the shared part; the balance-only
+    straight-line fit closer to the sacrum's final point than the joint transformer for all six people."""
+    v = load(VS)['all_correct_minus_nuisance']['ci95_mm']
+    assert v[0][0] > 0 and v[1][0] < 0 < v[1][1], v
+    fa = load(FA)
+    assert fa['contrasts']['emg_minus_zero']['people_lower_error'] == fa['people'] == 6
+    assert fa['aligned_forearm_gate'] is True and fa['beats_prior_corrected_cnn_on_these_rows'] is False
+    km = load(KM)
+    pd_ = km['paired_differences_Nm_per_kg']
+    assert (pd_['trained_minus_ridge']['wins'], pd_['trained_minus_train_walker_match']['wins'], pd_['shared_minus_ridge']['wins'],
+            pd_['shared_minus_scrambled']['wins']) == (2, 1, 1, 2), pd_
+    assert km['trained_advantage'] is False and km['shared_encoder_advantage'] is False
+    sub = km['mean_person_mae_past_moment_subset']
+    assert sub['replay_past_moment'] < sub['trained'], sub
+    lin = load(PM)['groups']['other_46']['contrasts']['linear']
+    assert lin['interval95_mm'][0] < 0 < lin['interval95_mm'][1] and lin['shared_minus_control_mm'] > 0, lin
+    ca = load(CA)
+    runs = ca['held_runs']
+    assert all(r['balanced_standardized_mae']['wrong_cue'] > r['balanced_standardized_mae']['shared_cue_motion'] for r in runs)
+    assert runs[0]['balanced_standardized_mae']['still'] < runs[0]['balanced_standardized_mae']['cue']
+    b = ca['balanced_standardized_mae']
+    assert round(b['shared_cue_motion'] / b['cue_motion'] - 1, 3) == 0.055 and round(b['shared_cue_motion'] / b['shuffled_cue_motion'] - 1, 3) == 0.014
+    below = [r['balanced_standardized_mae']['shared_cue_motion'] < r['balanced_standardized_mae']['shuffled_cue_motion'] for r in runs]
+    assert below == [False, False, True], below
+    assert all(r['balanced_standardized_mae']['shared_cue_motion'] > r['balanced_standardized_mae']['cue_motion'] for r in runs)
+    fit = load(PS_FIT)['scores']['balanced']
+    assert fit['shared_load']['mae'] > fit['recent']['mae'], fit
+    c = load(PS)['groups']['complete']['scores']['balanced']
+    assert c['shared_both']['mae'] > c['shared_load']['mae'], c
+    pop = load(POPSHARED)
+    kl8 = [r for r in pop['by_rat'] if r['rat'] == 'KL8'][0]
+    assert pop['equal_rat']['scrambled_combined'] < pop['equal_rat']['shared_combined'] and kl8['speed'] < kl8['shared_combined']
+    assert pop['consistent_neural_gain'] is False
+    sr = load(SR)['groups']['all']
+    iv = sr['comparisons']['scalp_vs_mechanics']['interval95']
+    assert iv[0] < 0 < iv[1] and sr['comparisons']['scalp_vs_mechanics']['improved'] == 2
+    assert sr['models']['previous_shared']['scaled_mae'] > sr['models']['still']['scaled_mae'] > sr['models']['cue_median']['scaled_mae']
+    k = load(KSH)['mae_degrees']
+    assert k['raw'] < k['shared'] and k['scrambled'] < k['shared'] < k['stride'], k
+    ml, mm = load(ML), load(MM)['transformer_and_controls']
+    fitted = ('pooled', 'pooled_no_posture', 'motion_signal', 'muscle_signal', 'walk_only', 'stand_only', 'stand_limited', 'adapted_walk')
+    best_emg = min(mm[k]['scores']['muscle_mae_uv'] for k in ('joint', 'specialists'))
+    best_path = min(mm[k]['scores']['path_mean_distance_mm'] for k in ('joint', 'specialists'))
+    p = ml['primary']['methods']
+    assert all(p[k]['emg_mae_uv'] > best_emg and p[k]['path_error_mm'] > best_path and p[k]['emg_mae_uv'] > p['persistence']['emg_mae_uv']
+               for k in fitted), 'a straight-line fit of the muscle-and-motion task is not behind both transformers and the held strength'
+    s = ml['postures']['standing']
+    ci = s['adapted_minus_comparator']['stand_limited']['ci95']
+    assert ci[0][0] > 0 and ci[1][0] > 0, ci
+    assert all(s['methods'][k]['emg_mae_uv'] > s['methods']['persistence']['emg_mae_uv'] and
+               s['methods'][k]['path_error_mm'] > s['methods']['velocity16']['path_error_mm'] for k in fitted)
+    cmp_ = load(KM_COMPARE)['domains']['balance']['comparisons']['joint_minus_leg']
+    assert cmp_['mean'][2] > 0 and cmp_['people_improved'][2] == 0, cmp_
+    assert walk(load(XC), 'domains/balance/methods/leg/endpoint_mm') < walk(load(XL), 'lower/methods/joint/scores/endpoint_distance_mm')
+    log('directions added by the audit corrections', file='; '.join((VS, FA, KM, PM, CA, PS_FIT, PS, POPSHARED, SR, KSH, KM_COMPARE)),
+        field='all_correct_minus_nuisance/ci95_mm; contrasts, gates; paired_differences_Nm_per_kg, advantages; other_46/contrasts/linear; '
+              'held_runs; scores/balanced; groups/complete; equal_rat, by_rat; comparisons/scalp_vs_mechanics; mae_degrees; joint_minus_leg',
+        full=None, note='each direction asserted; see the docstring of audit_checks()')
+    return ''
+
+
 GENERAL_FITS = {
-    'joint_alpha': 'joint alpha; separate retrospective assessment',   # every task folder of the general model -> who it was scored on; read a new folder's own files before classifying it
-    'right-plate': 'unseen',          # 8 walkers; its design fixed before anyone inspected their force or muscle recordings (METHOD.md)
-    'arm-transfer': 'unseen',         # 5 people, opened only after the plan, the code and the fitted model were sealed (PROTOCOL.md)
-    'back_rotation': 'unseen',        # 4 people kept for the test (3 scorable), opened after the fit was fixed (PRETEST-SHA256.json)
-    'muscle_tracking': 'unseen',      # 4 people, opened after the fit was sealed (PRETEST-SHA256.json)
-    'visual_balance': 'unseen',       # 6 people of a dataset not used before; models and scoring sealed before their files were opened
-    'pedal_load': 'unseen',           # 2 people, opened after the fit was fixed (README.md)
+    'joint_alpha': 'joint alpha; separate retrospective assessment',   # every task folder of the general model -> who it was scored on; read a new folder's own files before classifying it; 'unseen' = people kept out of that task's fitting (no test published its plan or seal before its results)
+    'right-plate': 'unseen',          # 8 walkers, no training data; also the two-plate study's test group, same commit; METHOD.md's order claim is self-attested
+    'arm-transfer': 'unseen',         # 5 people new to the project; receipt fit.json untimestamped, published with the results
+    'back_rotation': 'unseen',        # 4 kept (3 scorable); PRETEST manifest pins the readout; the exclusion code was amended after opening
+    'muscle_tracking': 'unseen',      # 4 people; PRETEST manifest pins DESIGN, code, model.json and checkpoint; self-dated, published with the scores
+    'visual_balance': 'unseen',       # 6 people, first use of the dataset; no seal of this fit; the transformer study scored the same six, same commit
+    'pedal_load': 'unseen',           # 2 people kept out of this task's fitting whose ultrasound recordings trained muscle_tracking; no checksum of this readout before scoring; scorer and grouping set after the bad recording was found
     'knee': 'seen',                   # 12 walkers whose earlier forecasts were already known
     'load': 'seen',                   # 3 walkers whose angles an earlier comparison had used
     'point-motion': 'seen',           # 10 walkers already studied for other questions
@@ -3875,7 +3977,7 @@ def _won_pedal():
     return True
 
 
-UNSEEN = {   # each test on unseen people -> a function that asserts its result and returns True if the general model beat every simpler forecast
+UNSEEN = {   # each test on people kept out of that task's fitting -> a function that asserts its result and returns True if the general model beat every simpler forecast
     'right-plate': _beaten_right_plate, 'arm-transfer': _beaten_arm, 'back_rotation': _tied_back, 'muscle_tracking': _beaten_shin,
     'pedal_load': _won_pedal, 'visual_balance': lambda: _beaten_balance(),
 }
@@ -3892,7 +3994,8 @@ def _unseen():
         assert unseen == sorted(UNSEEN), ('every test on unseen people needs its result asserted in UNSEEN', unseen, sorted(UNSEEN))
         wins = [k for k in unseen if UNSEEN[k]()]
         n = len(unseen)
-        heading = (f'The general model has had its first runs, and in {spell(n)} tests on unseen people it beat simpler forecasts '
+        heading = (f'The general model has had its first runs, and in {spell(n)} tests on people kept out of each task\'s fitting it beat '
+                   f'simpler forecasts '
                    f'{TIMES.get(len(wins), spell(len(wins)) + " times")}')
         assert GENERAL_HEADING == heading, ('GENERAL_HEADING must say', heading)
         _unseen_cache.append((n, wins))
@@ -3903,46 +4006,52 @@ def _unseen_log(printed, what, full):
     n, wins = _unseen()
     log(printed, file='models/neurotranslate-0.0/*/ (each task folder classified in GENERAL_FITS); ' + '; '.join((RP, GA, BS, MS, PS)),
         field=what, full=full,
-        note=f'tests on people nobody had looked at when the test was fixed: {", ".join(sorted(UNSEEN))}; beat every simpler forecast in: '
-             f'{", ".join(wins)}; right foot: beaten; arm on five new people: beaten; back sensor on three new people: tied from the turns alone '
-             f'(0.376 each), beaten with the grids; shin muscle on four new people: beaten with and without the angle; fixed pedal on two new '
-             f'people (incomplete): ahead of every simpler forecast from the pedal\'s readings, worse with the muscle signal; balance on a beam, six '
-             f'new people: a straight-line fit on the movement and the rotation\'s direction beat it, with and without the scalp')
+        note=f'tests on people kept out of that task\'s fitting: {", ".join(sorted(UNSEEN))}; beat every simpler forecast in: '
+             f'{", ".join(wins)}; right foot, eight walkers kept out of that task\'s fitting: beaten; arm, five people kept out of that task\'s '
+             f'fitting: beaten; back sensor, three people kept out of that task\'s fitting: tied from the turns alone (0.376 each), beaten with the '
+             f'grids; shin muscle, four people kept out of that task\'s fitting: beaten with and without the angle; fixed pedal, two people kept out '
+             f'of that task\'s fitting (the two had trained the shin-muscle readout; comparison not set in advance; test incomplete): ahead of every '
+             f'simpler forecast from the pedal\'s readings, worse with the muscle signal; balance on a beam, six people kept out of that task\'s '
+             f'fitting: a straight-line fit on the movement and the rotation\'s direction beat it, with and without the scalp; no test published '
+             f'its plan or seal before its results')
 
 
 def unseen_count(cap=False):
-    """How many times the general model has been scored on people nobody had looked at when the test was fixed (GENERAL_FITS, UNSEEN)."""
+    """How many times the general model has been scored on people kept out of that task's fitting (GENERAL_FITS, UNSEEN)."""
     n, _ = _unseen()
-    _unseen_log(spell(n, cap), 'tests of the general model on unseen people', n)
+    _unseen_log(spell(n, cap), 'tests of the general model on people kept out of that task\'s fitting', n)
     return spell(n, cap)
 
 
 def unseen_lost(cap=False):
     """Of those tests, how many a simpler forecast matched or beat."""
     n, wins = _unseen()
-    _unseen_log(spell(n - len(wins), cap), 'tests on unseen people in which a simpler forecast matched or beat the general model', n - len(wins))
+    _unseen_log(spell(n - len(wins), cap), 'tests on people kept out of that task\'s fitting in which a simpler forecast matched or beat the '
+                'general model', n - len(wins))
     return spell(n - len(wins), cap)
 
 
 def unseen_won(*folders):
-    """The words that name the general model's wins on unseen people (the pedal) are true only while these are exactly its wins."""
+    """The words that name the general model's lead on people kept out of that task's fitting (the pedal) are true only while these are
+    exactly the tests where it beat every simpler forecast."""
     _, wins = _unseen()
     assert sorted(wins) == sorted(folders), (wins, folders)
-    _unseen_log(TIMES.get(len(wins), spell(len(wins))), 'tests on unseen people in which it beat every simpler forecast: ' + ', '.join(wins), len(wins))
+    _unseen_log(TIMES.get(len(wins), spell(len(wins))), 'tests on people kept out of that task\'s fitting in which it beat every simpler '
+                'forecast: ' + ', '.join(wins), len(wins))
     return TIMES.get(len(wins), spell(len(wins)) + ' times')
 
 
 _U = []
 
 
-def U(folder, group='list'):     # noqa: N802  (marks one test named in a page's list or sentence of the tests on unseen people)
+def U(folder, group='list'):     # noqa: N802  (marks one test named in a page's list or sentence of the tests on people kept out of that task's fitting)
     assert GENERAL_FITS.get(folder) == 'unseen', folder
     _U.append((PAGE[0], group, folder))
     return ''
 
 
 def unseen_list_check(group='list'):
-    """A page's list (or sentence) of the tests on unseen people names each test in the table once, and no other."""
+    """A page's list (or sentence) of the tests on people kept out of that task's fitting names each test in the table once, and no other."""
     got = sorted(f for p, g, f in _U if p == PAGE[0] and g == group)
     assert got == sorted(UNSEEN), (PAGE[0], group, got)
     _unseen_log(str(len(got)), f'tests named in "{group}" on {PAGE[0]}', len(got))
@@ -3950,10 +4059,12 @@ def unseen_list_check(group='list'):
 
 
 def unseen_check():
-    """For the general-model heading and the sentences that count its tests on unseen people: the table above, every result asserted."""
+    """For the general-model heading and the sentences that count its tests on people kept out of that task's fitting: the table above,
+    every result asserted."""
     _unseen()
     n, wins = _unseen()
-    _unseen_log(f'in {spell(n)} tests on unseen people it beat simpler forecasts {TIMES.get(len(wins), spell(len(wins)) + " times")}', 'the heading', None)
+    _unseen_log(f'in {spell(n)} tests on people kept out of each task\'s fitting it beat simpler forecasts '
+                f'{TIMES.get(len(wins), spell(len(wins)) + " times")}', 'the heading', None)
     return ''
 
 
