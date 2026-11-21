@@ -1,0 +1,783 @@
+{
+  "version": "065037816cd2",
+  "task": "Predict 100 ms of vertical pelvis-marker movement",
+  "conditions": {
+    "training_one": "Gait120 standing and sitting",
+    "training_two": "Gait120 plus Monash sit-to-walk",
+    "confirmation": "Hunt independent laboratory, seven included people",
+    "camera": "Archived marker positions; direct camera visibility could not be confirmed"
+  },
+  "archive_sources": {
+    "gait120": "https://doi.org/10.6084/m9.figshare.27677016.v1",
+    "monash": "https://doi.org/10.26180/24515092.v4",
+    "hunt": "https://doi.org/10.6084/m9.figshare.26282872.v2"
+  },
+  "missing_later_outcomes": 7,
+  "parameters_per_network": 9409,
+  "comparison": {
+    "rise": {
+      "rows": 702,
+      "people": 7,
+      "mae_mm": {
+        "persistence": 36.52267075554738,
+        "velocity_full": 9.444960316364837,
+        "velocity_sparse": 15.345618700842346,
+        "one_lab_full_camera": 5.515980214087557,
+        "one_lab_full_force": 5.598213153152439,
+        "one_lab_full_muscle": 5.636650179379772,
+        "one_lab_full_both": 5.61733745796659,
+        "one_lab_sparse_camera": 7.495906479420701,
+        "one_lab_sparse_force": 7.020674966244292,
+        "one_lab_sparse_muscle": 7.506168100613448,
+        "one_lab_sparse_both": 7.166530087590113,
+        "one_lab_ridge_full": 4.833512363211668,
+        "one_lab_ridge_sparse": 10.844138486306173,
+        "two_labs_full_camera": 5.996073680325333,
+        "two_labs_full_force": 5.803537989523681,
+        "two_labs_full_muscle": 6.1339540896927,
+        "two_labs_full_both": 5.852694309613903,
+        "two_labs_sparse_camera": 7.532593969905685,
+        "two_labs_sparse_force": 7.148406483436786,
+        "two_labs_sparse_muscle": 7.468647538917156,
+        "two_labs_sparse_both": 7.176661016868054,
+        "two_labs_ridge_full": 4.2318447342949215,
+        "two_labs_ridge_sparse": 10.417725912283581
+      },
+      "paired": {
+        "two_labs_full_camera_minus_one_lab_full_camera": {
+          "change_mm": 0.4800934662377774,
+          "people_improved": 3,
+          "interval_mm": [
+            -0.10733489275531863,
+            1.064390428593746
+          ]
+        },
+        "two_labs_full_force_minus_one_lab_full_force": {
+          "change_mm": 0.2053248363712424,
+          "people_improved": 3,
+          "interval_mm": [
+            -0.3389710342985149,
+            0.7847181498282614
+          ]
+        },
+        "two_labs_full_muscle_minus_one_lab_full_muscle": {
+          "change_mm": 0.497303910312926,
+          "people_improved": 2,
+          "interval_mm": [
+            -0.054664727427712174,
+            1.0138977881761684
+          ]
+        },
+        "two_labs_full_both_minus_one_lab_full_both": {
+          "change_mm": 0.23535685164731326,
+          "people_improved": 2,
+          "interval_mm": [
+            -0.2702972750511473,
+            0.7192917053565716
+          ]
+        },
+        "two_labs_sparse_camera_minus_one_lab_sparse_camera": {
+          "change_mm": 0.03668749048498337,
+          "people_improved": 4,
+          "interval_mm": [
+            -0.45580712641869525,
+            0.5560604020498948
+          ]
+        },
+        "two_labs_sparse_force_minus_one_lab_sparse_force": {
+          "change_mm": 0.12773151719249448,
+          "people_improved": 3,
+          "interval_mm": [
+            -0.4639406099775522,
+            0.7331909786135979
+          ]
+        },
+        "two_labs_sparse_muscle_minus_one_lab_sparse_muscle": {
+          "change_mm": -0.037520561696291664,
+          "people_improved": 4,
+          "interval_mm": [
+            -0.47653146048273676,
+            0.4141983447394829
+          ]
+        },
+        "two_labs_sparse_both_minus_one_lab_sparse_both": {
+          "change_mm": 0.010130929277940634,
+          "people_improved": 3,
+          "interval_mm": [
+            -0.6966909860502949,
+            0.7147262653865536
+          ]
+        },
+        "one_lab_full_force_minus_one_lab_full_camera": {
+          "change_mm": 0.0822329390648814,
+          "people_improved": 2,
+          "interval_mm": [
+            -0.29481831185052193,
+            0.3906926440358734
+          ]
+        },
+        "one_lab_full_muscle_minus_one_lab_full_camera": {
+          "change_mm": 0.12066996529221592,
+          "people_improved": 1,
+          "interval_mm": [
+            0.047111565210629154,
+            0.18956560296038819
+          ]
+        },
+        "one_lab_full_both_minus_one_lab_full_camera": {
+          "change_mm": 0.1013572438790333,
+          "people_improved": 3,
+          "interval_mm": [
+            -0.2046109195444751,
+            0.36951388597713575
+          ]
+        },
+        "one_lab_sparse_force_minus_one_lab_sparse_camera": {
+          "change_mm": -0.47523151317640877,
+          "people_improved": 6,
+          "interval_mm": [
+            -0.9151645494272495,
+            0.025352766575085135
+          ]
+        },
+        "one_lab_sparse_muscle_minus_one_lab_sparse_camera": {
+          "change_mm": 0.01026162119274776,
+          "people_improved": 4,
+          "interval_mm": [
+            -0.17542586225170023,
+            0.20704893841935196
+          ]
+        },
+        "one_lab_sparse_both_minus_one_lab_sparse_camera": {
+          "change_mm": -0.3293763918305874,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.6034710423964903,
+            -0.0397472334781211
+          ]
+        },
+        "two_labs_full_force_minus_two_labs_full_camera": {
+          "change_mm": -0.19253569080165356,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.3839025924052497,
+            0.04568855926968762
+          ]
+        },
+        "two_labs_full_muscle_minus_two_labs_full_camera": {
+          "change_mm": 0.1378804093673645,
+          "people_improved": 2,
+          "interval_mm": [
+            0.002472801344856152,
+            0.28532384680850953
+          ]
+        },
+        "two_labs_full_both_minus_two_labs_full_camera": {
+          "change_mm": -0.1433793707114308,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.41867511177900213,
+            0.15788511830807006
+          ]
+        },
+        "two_labs_sparse_force_minus_two_labs_sparse_camera": {
+          "change_mm": -0.3841874864688976,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.7897151761955401,
+            0.08295464023916425
+          ]
+        },
+        "two_labs_sparse_muscle_minus_two_labs_sparse_camera": {
+          "change_mm": -0.06394643098852727,
+          "people_improved": 3,
+          "interval_mm": [
+            -0.3322014230039269,
+            0.2064160291944988
+          ]
+        },
+        "two_labs_sparse_both_minus_two_labs_sparse_camera": {
+          "change_mm": -0.3559329530376302,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.755827844241775,
+            0.06172623228885778
+          ]
+        }
+      }
+    },
+    "sit": {
+      "rows": 1044,
+      "people": 7,
+      "mae_mm": {
+        "persistence": 25.398421348580577,
+        "velocity_full": 6.082470148753909,
+        "velocity_sparse": 9.074944897055229,
+        "one_lab_full_camera": 5.584103417944868,
+        "one_lab_full_force": 5.7074457617574845,
+        "one_lab_full_muscle": 5.830143364494669,
+        "one_lab_full_both": 5.9075285252837855,
+        "one_lab_sparse_camera": 7.178237476365717,
+        "one_lab_sparse_force": 7.092965630930541,
+        "one_lab_sparse_muscle": 7.283045671396509,
+        "one_lab_sparse_both": 7.16999253318536,
+        "one_lab_ridge_full": 5.270745676639446,
+        "one_lab_ridge_sparse": 10.471561930221418,
+        "two_labs_full_camera": 7.916808463797726,
+        "two_labs_full_force": 6.48023403472979,
+        "two_labs_full_muscle": 7.791804176005625,
+        "two_labs_full_both": 6.612822795702535,
+        "two_labs_sparse_camera": 7.512059488193432,
+        "two_labs_sparse_force": 6.151920130560884,
+        "two_labs_sparse_muscle": 7.763218547566966,
+        "two_labs_sparse_both": 6.348611885971641,
+        "two_labs_ridge_full": 5.211982419463957,
+        "two_labs_ridge_sparse": 9.127844586087553
+      },
+      "paired": {
+        "two_labs_full_camera_minus_one_lab_full_camera": {
+          "change_mm": 2.332705045852858,
+          "people_improved": 0,
+          "interval_mm": [
+            1.5164450345226277,
+            3.155905089285793
+          ]
+        },
+        "two_labs_full_force_minus_one_lab_full_force": {
+          "change_mm": 0.7727882729723061,
+          "people_improved": 2,
+          "interval_mm": [
+            0.2155460350600966,
+            1.4151284759673004
+          ]
+        },
+        "two_labs_full_muscle_minus_one_lab_full_muscle": {
+          "change_mm": 1.9616608115109557,
+          "people_improved": 0,
+          "interval_mm": [
+            1.2376998827145138,
+            2.6602924817155134
+          ]
+        },
+        "two_labs_full_both_minus_one_lab_full_both": {
+          "change_mm": 0.705294270418751,
+          "people_improved": 2,
+          "interval_mm": [
+            0.1301446129621367,
+            1.3544567120133273
+          ]
+        },
+        "two_labs_sparse_camera_minus_one_lab_sparse_camera": {
+          "change_mm": 0.3338220118277163,
+          "people_improved": 2,
+          "interval_mm": [
+            -0.10362191642855495,
+            0.823314434365667
+          ]
+        },
+        "two_labs_sparse_force_minus_one_lab_sparse_force": {
+          "change_mm": -0.9410455003696568,
+          "people_improved": 6,
+          "interval_mm": [
+            -1.7669988431400832,
+            -0.047248616975872286
+          ]
+        },
+        "two_labs_sparse_muscle_minus_one_lab_sparse_muscle": {
+          "change_mm": 0.4801728761704577,
+          "people_improved": 2,
+          "interval_mm": [
+            0.027830554839366632,
+            0.9836560752031515
+          ]
+        },
+        "two_labs_sparse_both_minus_one_lab_sparse_both": {
+          "change_mm": -0.821380647213719,
+          "people_improved": 4,
+          "interval_mm": [
+            -1.6786021163883906,
+            0.046144131706345536
+          ]
+        },
+        "one_lab_full_force_minus_one_lab_full_camera": {
+          "change_mm": 0.12334234381261654,
+          "people_improved": 3,
+          "interval_mm": [
+            -0.20270019972888445,
+            0.4535834118832935
+          ]
+        },
+        "one_lab_full_muscle_minus_one_lab_full_camera": {
+          "change_mm": 0.2460399465498019,
+          "people_improved": 1,
+          "interval_mm": [
+            0.10820841674145715,
+            0.41440217132134344
+          ]
+        },
+        "one_lab_full_both_minus_one_lab_full_camera": {
+          "change_mm": 0.32342510733891733,
+          "people_improved": 2,
+          "interval_mm": [
+            0.049396884495469404,
+            0.6158930859741171
+          ]
+        },
+        "one_lab_sparse_force_minus_one_lab_sparse_camera": {
+          "change_mm": -0.08527184543517587,
+          "people_improved": 3,
+          "interval_mm": [
+            -0.5771577332004997,
+            0.43695954131915443
+          ]
+        },
+        "one_lab_sparse_muscle_minus_one_lab_sparse_camera": {
+          "change_mm": 0.1048081950307915,
+          "people_improved": 4,
+          "interval_mm": [
+            -0.1806123949983454,
+            0.43778402576365266
+          ]
+        },
+        "one_lab_sparse_both_minus_one_lab_sparse_camera": {
+          "change_mm": -0.008244943180357036,
+          "people_improved": 3,
+          "interval_mm": [
+            -0.45319605131949536,
+            0.44065905019674223
+          ]
+        },
+        "two_labs_full_force_minus_two_labs_full_camera": {
+          "change_mm": -1.4365744290679354,
+          "people_improved": 7,
+          "interval_mm": [
+            -1.9430897537836491,
+            -0.9559387221527597
+          ]
+        },
+        "two_labs_full_muscle_minus_two_labs_full_camera": {
+          "change_mm": -0.12500428779210068,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.3111439191956981,
+            0.07568379347260194
+          ]
+        },
+        "two_labs_full_both_minus_two_labs_full_camera": {
+          "change_mm": -1.3039856680951896,
+          "people_improved": 7,
+          "interval_mm": [
+            -2.0001278924968613,
+            -0.6153059888437505
+          ]
+        },
+        "two_labs_sparse_force_minus_two_labs_sparse_camera": {
+          "change_mm": -1.3601393576325491,
+          "people_improved": 7,
+          "interval_mm": [
+            -1.5814638733135418,
+            -1.1161158063578367
+          ]
+        },
+        "two_labs_sparse_muscle_minus_two_labs_sparse_camera": {
+          "change_mm": 0.25115905937353283,
+          "people_improved": 1,
+          "interval_mm": [
+            0.0567172629850197,
+            0.40534105627603445
+          ]
+        },
+        "two_labs_sparse_both_minus_two_labs_sparse_camera": {
+          "change_mm": -1.1634476022217923,
+          "people_improved": 6,
+          "interval_mm": [
+            -1.5233481933458701,
+            -0.6881946694161181
+          ]
+        }
+      }
+    },
+    "all": {
+      "rows": 4047,
+      "people": 7,
+      "mae_mm": {
+        "persistence": 13.77416282554608,
+        "velocity_full": 3.7039815741313293,
+        "velocity_sparse": 5.585039273428227,
+        "one_lab_full_camera": 4.536161436440292,
+        "one_lab_full_force": 4.542586813325931,
+        "one_lab_full_muscle": 4.683760269718168,
+        "one_lab_full_both": 4.6433335677865815,
+        "one_lab_sparse_camera": 5.682430321035578,
+        "one_lab_sparse_force": 5.563491552815301,
+        "one_lab_sparse_muscle": 5.512036552043083,
+        "one_lab_sparse_both": 5.43728479904514,
+        "one_lab_ridge_full": 4.837918623175157,
+        "one_lab_ridge_sparse": 11.069549293715196,
+        "two_labs_full_camera": 4.223294155516156,
+        "two_labs_full_force": 4.041119049113191,
+        "two_labs_full_muscle": 4.34166453298071,
+        "two_labs_full_both": 4.1679603490906265,
+        "two_labs_sparse_camera": 4.778692346638688,
+        "two_labs_sparse_force": 4.666444127966472,
+        "two_labs_sparse_muscle": 4.924109676430727,
+        "two_labs_sparse_both": 4.589653149124279,
+        "two_labs_ridge_full": 3.4293665981248256,
+        "two_labs_ridge_sparse": 8.171036385061297
+      },
+      "paired": {
+        "two_labs_full_camera_minus_one_lab_full_camera": {
+          "change_mm": -0.3128672809241366,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.6575885498509418,
+            0.033467128786317316
+          ]
+        },
+        "two_labs_full_force_minus_one_lab_full_force": {
+          "change_mm": -0.5014677642127402,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.8272958671400286,
+            -0.16682032466658386
+          ]
+        },
+        "two_labs_full_muscle_minus_one_lab_full_muscle": {
+          "change_mm": -0.34209573673745775,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.6192379402260035,
+            -0.04117351743579599
+          ]
+        },
+        "two_labs_full_both_minus_one_lab_full_both": {
+          "change_mm": -0.47537321869595467,
+          "people_improved": 6,
+          "interval_mm": [
+            -0.7469746580502662,
+            -0.19084098073589484
+          ]
+        },
+        "two_labs_sparse_camera_minus_one_lab_sparse_camera": {
+          "change_mm": -0.9037379743968906,
+          "people_improved": 7,
+          "interval_mm": [
+            -1.3170666638582103,
+            -0.5405878397212309
+          ]
+        },
+        "two_labs_sparse_force_minus_one_lab_sparse_force": {
+          "change_mm": -0.8970474248488279,
+          "people_improved": 7,
+          "interval_mm": [
+            -1.2299377082604255,
+            -0.5779685521877944
+          ]
+        },
+        "two_labs_sparse_muscle_minus_one_lab_sparse_muscle": {
+          "change_mm": -0.5879268756123551,
+          "people_improved": 6,
+          "interval_mm": [
+            -0.9173602226878811,
+            -0.27028721181247445
+          ]
+        },
+        "two_labs_sparse_both_minus_one_lab_sparse_both": {
+          "change_mm": -0.847631649920862,
+          "people_improved": 7,
+          "interval_mm": [
+            -1.1499013943776295,
+            -0.579109897073519
+          ]
+        },
+        "one_lab_full_force_minus_one_lab_full_camera": {
+          "change_mm": 0.006425376885639774,
+          "people_improved": 2,
+          "interval_mm": [
+            -0.15466534138194138,
+            0.11934528692796101
+          ]
+        },
+        "one_lab_full_muscle_minus_one_lab_full_camera": {
+          "change_mm": 0.14759883327787637,
+          "people_improved": 0,
+          "interval_mm": [
+            0.10203551588950889,
+            0.21307467265924096
+          ]
+        },
+        "one_lab_full_both_minus_one_lab_full_camera": {
+          "change_mm": 0.10717213134629018,
+          "people_improved": 1,
+          "interval_mm": [
+            -0.04449572283289235,
+            0.23114935656364624
+          ]
+        },
+        "one_lab_sparse_force_minus_one_lab_sparse_camera": {
+          "change_mm": -0.11893876822027773,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.3130268906020716,
+            0.09695233979754565
+          ]
+        },
+        "one_lab_sparse_muscle_minus_one_lab_sparse_camera": {
+          "change_mm": -0.17039376899249584,
+          "people_improved": 6,
+          "interval_mm": [
+            -0.2508609371481338,
+            -0.07352180568837774
+          ]
+        },
+        "one_lab_sparse_both_minus_one_lab_sparse_camera": {
+          "change_mm": -0.24514552199043832,
+          "people_improved": 6,
+          "interval_mm": [
+            -0.4153115361199077,
+            -0.08012239867687183
+          ]
+        },
+        "two_labs_full_force_minus_two_labs_full_camera": {
+          "change_mm": -0.1821751064029638,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.37830679926054567,
+            -0.014884336376293827
+          ]
+        },
+        "two_labs_full_muscle_minus_two_labs_full_camera": {
+          "change_mm": 0.11837037746455525,
+          "people_improved": 2,
+          "interval_mm": [
+            0.041746250069171174,
+            0.19455330600042692
+          ]
+        },
+        "two_labs_full_both_minus_two_labs_full_camera": {
+          "change_mm": -0.05533380642552789,
+          "people_improved": 4,
+          "interval_mm": [
+            -0.31027588928432903,
+            0.17671269574191686
+          ]
+        },
+        "two_labs_sparse_force_minus_two_labs_sparse_camera": {
+          "change_mm": -0.11224821867221506,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.2828709135099508,
+            0.08928774706859777
+          ]
+        },
+        "two_labs_sparse_muscle_minus_two_labs_sparse_camera": {
+          "change_mm": 0.14541732979203964,
+          "people_improved": 1,
+          "interval_mm": [
+            0.04019573947466388,
+            0.2747300226675116
+          ]
+        },
+        "two_labs_sparse_both_minus_two_labs_sparse_camera": {
+          "change_mm": -0.18903919751440976,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.4547598053860323,
+            0.12298322956815223
+          ]
+        }
+      }
+    },
+    "direction_balanced": {
+      "rows": 1746,
+      "people": 7,
+      "mae_mm": {
+        "persistence": 30.960546052063982,
+        "velocity_full": 7.763715232559373,
+        "velocity_sparse": 12.210281798948786,
+        "one_lab_full_camera": 5.550041816016212,
+        "one_lab_full_force": 5.6528294574549625,
+        "one_lab_full_muscle": 5.733396771937221,
+        "one_lab_full_both": 5.762432991625188,
+        "one_lab_sparse_camera": 7.337071977893209,
+        "one_lab_sparse_force": 7.056820298587417,
+        "one_lab_sparse_muscle": 7.394606886004978,
+        "one_lab_sparse_both": 7.168261310387736,
+        "one_lab_ridge_full": 5.052129019925557,
+        "one_lab_ridge_sparse": 10.657850208263795,
+        "two_labs_full_camera": 6.95644107206153,
+        "two_labs_full_force": 6.141886012126736,
+        "two_labs_full_muscle": 6.962879132849161,
+        "two_labs_full_both": 6.23275855265822,
+        "two_labs_sparse_camera": 7.522326729049559,
+        "two_labs_sparse_force": 6.650163306998834,
+        "two_labs_sparse_muscle": 7.615933043242061,
+        "two_labs_sparse_both": 6.762636451419847,
+        "two_labs_ridge_full": 4.721913576879438,
+        "two_labs_ridge_sparse": 9.772785249185565
+      },
+      "paired": {
+        "two_labs_full_camera_minus_one_lab_full_camera": {
+          "change_mm": 1.4063992560453176,
+          "people_improved": 0,
+          "interval_mm": [
+            0.7998759173816467,
+            2.053102921776597
+          ]
+        },
+        "two_labs_full_force_minus_one_lab_full_force": {
+          "change_mm": 0.4890565546717743,
+          "people_improved": 2,
+          "interval_mm": [
+            0.09888657781002815,
+            0.9122465246533803
+          ]
+        },
+        "two_labs_full_muscle_minus_one_lab_full_muscle": {
+          "change_mm": 1.2294823609119407,
+          "people_improved": 0,
+          "interval_mm": [
+            0.743963907121145,
+            1.745034391802284
+          ]
+        },
+        "two_labs_full_both_minus_one_lab_full_both": {
+          "change_mm": 0.47032556103303236,
+          "people_improved": 1,
+          "interval_mm": [
+            0.14394303924885424,
+            0.8158893796046264
+          ]
+        },
+        "two_labs_sparse_camera_minus_one_lab_sparse_camera": {
+          "change_mm": 0.18525475115634965,
+          "people_improved": 2,
+          "interval_mm": [
+            -0.07793058746749537,
+            0.4194388638450027
+          ]
+        },
+        "two_labs_sparse_force_minus_one_lab_sparse_force": {
+          "change_mm": -0.40665699158858104,
+          "people_improved": 5,
+          "interval_mm": [
+            -0.7158761232679848,
+            -0.09187124620230833
+          ]
+        },
+        "two_labs_sparse_muscle_minus_one_lab_sparse_muscle": {
+          "change_mm": 0.22132615723708313,
+          "people_improved": 1,
+          "interval_mm": [
+            0.058397323657565385,
+            0.32005418236927685
+          ]
+        },
+        "two_labs_sparse_both_minus_one_lab_sparse_both": {
+          "change_mm": -0.40562485896788897,
+          "people_improved": 6,
+          "interval_mm": [
+            -0.7418295802611884,
+            -0.02853557125520695
+          ]
+        },
+        "one_lab_full_force_minus_one_lab_full_camera": {
+          "change_mm": 0.1027876414387489,
+          "people_improved": 1,
+          "interval_mm": [
+            -0.15489439278651446,
+            0.3058142136255671
+          ]
+        },
+        "one_lab_full_muscle_minus_one_lab_full_camera": {
+          "change_mm": 0.18335495592100884,
+          "people_improved": 0,
+          "interval_mm": [
+            0.11827747550917563,
+            0.26141587715898573
+          ]
+        },
+        "one_lab_full_both_minus_one_lab_full_camera": {
+          "change_mm": 0.2123911756089752,
+          "people_improved": 1,
+          "interval_mm": [
+            -0.029409085364609337,
+            0.3980116302833351
+          ]
+        },
+        "one_lab_sparse_force_minus_one_lab_sparse_camera": {
+          "change_mm": -0.2802516793057925,
+          "people_improved": 6,
+          "interval_mm": [
+            -0.6403234413074885,
+            0.1796907915805129
+          ]
+        },
+        "one_lab_sparse_muscle_minus_one_lab_sparse_camera": {
+          "change_mm": 0.05753490811176931,
+          "people_improved": 3,
+          "interval_mm": [
+            -0.07487163443004517,
+            0.19930153650404353
+          ]
+        },
+        "one_lab_sparse_both_minus_one_lab_sparse_camera": {
+          "change_mm": -0.16881066750547255,
+          "people_improved": 6,
+          "interval_mm": [
+            -0.4435648719862219,
+            0.13381110130349633
+          ]
+        },
+        "two_labs_full_force_minus_two_labs_full_camera": {
+          "change_mm": -0.8145550599347945,
+          "people_improved": 7,
+          "interval_mm": [
+            -1.0885100074037675,
+            -0.5679618994922853
+          ]
+        },
+        "two_labs_full_muscle_minus_two_labs_full_camera": {
+          "change_mm": 0.006438060787631983,
+          "people_improved": 4,
+          "interval_mm": [
+            -0.14637128052315526,
+            0.15923783344709516
+          ]
+        },
+        "two_labs_full_both_minus_two_labs_full_camera": {
+          "change_mm": -0.7236825194033101,
+          "people_improved": 7,
+          "interval_mm": [
+            -1.1146249080907766,
+            -0.3770960098431862
+          ]
+        },
+        "two_labs_sparse_force_minus_two_labs_sparse_camera": {
+          "change_mm": -0.8721634220507232,
+          "people_improved": 7,
+          "interval_mm": [
+            -1.0775487574726816,
+            -0.6540049044159875
+          ]
+        },
+        "two_labs_sparse_muscle_minus_two_labs_sparse_camera": {
+          "change_mm": 0.09360631419250279,
+          "people_improved": 3,
+          "interval_mm": [
+            -0.07272522003991126,
+            0.2645009841172175
+          ]
+        },
+        "two_labs_sparse_both_minus_two_labs_sparse_camera": {
+          "change_mm": -0.7596902776297112,
+          "people_improved": 7,
+          "interval_mm": [
+            -1.0283818762493044,
+            -0.4748487345299831
+          ]
+        }
+      }
+    }
+  }
+}
