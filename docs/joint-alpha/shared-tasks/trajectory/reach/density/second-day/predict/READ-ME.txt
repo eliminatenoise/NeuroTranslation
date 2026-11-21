@@ -1,0 +1,17 @@
+Forecast a reach
+
+Extract the complete folder. Open index.html in your browser or use the launcher for your computer.
+
+Windows     Open on Windows.cmd
+macOS       Open on macOS.command
+Linux       Open on Linux.sh
+
+The page starts with a recorded training example. Run it to see where the model places a hand marker and an elbow marker at four times over the next tenth of a second. You can use the example as a template for your own readings. Use 20 rows from oldest to newest, spaced 10 milliseconds apart. Each row gives hand X, Y and Z, elbow X, Y and Z, then handle X and Y. Enter positions in millimetres and use a consistent coordinate frame. The source positions refer the markers to the shoulder and use the robot's handle coordinates.
+
+The forecasts give changes from each marker's last position. A forecast of 5 mm on hand X means the model places the hand 5 mm along that axis from its last reading. The recent-velocity forecast shows what happens if each marker keeps moving at the speed and direction of its last 20 milliseconds. The learned model can draw several possible paths.
+
+The viewer runs on this computer. It reads the values you enter or the file you choose. All model files are in this folder.
+
+This model learned from motion records gathered from one macaque. The times refer to the processed recording clock. Results from a different setup, another animal or a live camera need a separate check.
+
+See NOTICE.md for the original study, model fit and rights.

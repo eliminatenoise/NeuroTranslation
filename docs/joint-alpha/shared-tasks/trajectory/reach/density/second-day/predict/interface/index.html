@@ -1,0 +1,111 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' file:; style-src 'self' file:; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="color-scheme" content="light">
+  <title>Forecast a reach · NeuroTranslation</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="reach.css">
+  <script defer src="../engine/reach-model.js"></script>
+  <script defer src="../engine/reach-engine.js"></script>
+  <script defer src="../example.js"></script>
+  <script defer src="reach.js"></script>
+</head>
+<body>
+  <a class="skip" href="#readings">Skip to movement readings</a>
+  <header class="masthead">
+    <div class="wrap masthead-inner">
+      <span class="brand">NeuroTranslation</span>
+      <nav aria-label="On this page"><a href="#forecast">Forecast</a><a href="#recording">Recording notes</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="intro">
+      <h1>Forecast a reach</h1>
+      <p>A macaque moved a handle. A camera tracked a marker on its hand and another near its elbow. Give the model 20 readings and see where it expects both markers to move in the next 100 milliseconds.</p>
+    </div>
+
+    <noscript><p class="notice">Turn on JavaScript in your browser to run the forecast.</p></noscript>
+    <div class="workbench">
+      <section id="readings" class="input-panel" aria-labelledby="input-title" tabindex="-1">
+        <h2 id="input-title">Movement readings</h2>
+        <form id="input-form">
+          <label for="history">Positions in millimetres</label>
+          <p id="timing-help" class="hint">Paste 20 rows, oldest first, 10 ms apart.</p>
+          <textarea id="history" name="history" rows="6" wrap="off" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="timing-help column-help input-error"></textarea>
+          <p id="source-name" class="source-name"></p>
+          <details class="format-details">
+            <summary>Column order and units</summary>
+            <p id="column-help">Each row gives the hand marker’s X, Y and Z position, then the elbow marker’s X, Y and Z, then the handle’s X and Y. Enter all eight positions in millimetres, separated by commas. In the source recording, marker positions are relative to the shoulder and handle positions use the robot’s coordinates.</p>
+            <p>You can include this header on the first line.</p>
+            <samp>hand_x,hand_y,hand_z,elbow_x,elbow_y,elbow_z,handle_x,handle_y</samp>
+          </details>
+          <div class="file-row">
+            <label for="file">Or open a local CSV</label>
+            <input id="file" type="file" accept=".csv,text/csv,text/plain">
+          </div>
+          <div class="actions">
+            <button class="primary" id="run" type="submit">Run forecast</button>
+            <button class="link-button" id="restore" type="button">Restore example</button>
+          </div>
+          <p id="input-error" class="error" role="alert" aria-atomic="true"></p>
+          <p id="status" class="status" role="status" aria-atomic="true"></p>
+        </form>
+        <p class="local-note">The readings and the model stay in this browser.</p>
+      </section>
+
+      <section id="forecast" class="forecast-panel" aria-labelledby="forecast-title" tabindex="-1">
+        <h2 id="forecast-title">The next 100 ms</h2>
+        <p id="empty-result" class="empty-result">Open the recorded example or enter readings to see a forecast.</p>
+        <div id="result" hidden>
+          <p class="forecast-intro">Each marker starts at its last input position. Choose one model path or the mean of all 32. The dashed line shows how far the marker would move if it kept the speed and direction measured over the final 20 ms of input.</p>
+          <div class="path-control">
+            <label for="path">Model path</label>
+            <select id="path"></select>
+          </div>
+          <figure class="plot-card" aria-labelledby="plot-title">
+            <figcaption id="plot-title">Distance from the last position <span>(mm)</span></figcaption>
+            <div class="legend" aria-hidden="true">
+              <span><i class="line model-line"></i>Model</span>
+              <span><i class="line velocity-line"></i>Constant velocity</span>
+            </div>
+            <div class="plots">
+              <div class="plot">
+                <h3>Hand marker</h3>
+                <canvas id="hand-plot" role="img" aria-label="Hand distance forecast"></canvas>
+              </div>
+              <div class="plot">
+                <h3>Elbow marker</h3>
+                <canvas id="elbow-plot" role="img" aria-label="Elbow distance forecast"></canvas>
+              </div>
+            </div>
+            <p>Time after the last reading (ms)</p>
+          </figure>
+
+          <section class="coordinates" aria-labelledby="displacement-title">
+            <h3 id="displacement-title">Changes along each axis</h3>
+            <p id="table-note" class="hint">X, Y and Z give the change in millimetres from each marker’s last reading, rounded for display. A minus sign means movement toward smaller coordinate values.</p>
+            <div id="model-tables" class="tables"></div>
+            <details class="compare">
+              <summary>Compare constant-velocity values</summary>
+              <div id="velocity-tables" class="tables"></div>
+            </details>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <section id="recording" class="recording" aria-labelledby="recording-title" tabindex="-1">
+      <h2 id="recording-title">About this recording</h2>
+      <div class="recording-copy">
+        <p>The example comes from the model’s fitting day, 7 September 2017. This forecast uses motion alone. The archive smooths the camera and handle signals using readings on both sides of each time point, so the times here describe an offline recording.</p>
+        <p>The study tested two training seeds on 304 trials recorded eight days later in the same macaque. This preview runs one trained version (seed 1117). Its transformer builds each possible path one time point at a time. It learned from movements around reach cues and at regular intervals. The same readings give the same 32 paths each time.</p>
+        <p class="credit">Dataset by Raeed H. Chowdhury, Joshua I. Glaser and Lee E. Miller. Dryad, CC0. DOI <span>10.5061/dryad.nk98sf7q7</span>. Study methods, eLife. DOI <span>10.7554/eLife.48198</span>.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

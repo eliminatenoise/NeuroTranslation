@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "model": "Frozen autoregressive residual transformer, cue plus regular training windows, fit seed 1117",
+  "method": "A fitted linear model uses recent marker and handle motion to estimate four future displacements. A transformer samples a correction in six coordinates at each step. Each sampled correction conditions the next one. The accumulated corrections are added to the linear estimate.",
+  "scripts_in_order": ["reach-model.js", "reach-engine.js"],
+  "runtime": "Load the two classic scripts from the same local directory, in order. The engine runs synchronously offline.",
+  "call": "globalThis.ReachForecast.predict(historyMm, {seed: 1117, draws: 32})",
+  "historyMm": {
+    "shape": [20, 8],
+    "columns": ["hand_x", "hand_y", "hand_z", "elbow_x", "elbow_y", "elbow_z", "handle_x", "handle_y"],
+    "units": "Millimetres in the processed recording coordinate frame, absolute positions",
+    "timing": "Oldest to newest at 10 ms intervals, from -190 ms through 0 ms inclusive",
+    "validation": "Supply finite values representable in float32. The engine masks all 37 spike channels."
+  },
+  "options": {
+    "seed": "Unsigned 32-bit draw seed. Defaults to 1117. The fitted weights always use training seed 1117.",
+    "draws": "Integer from 1 to 128. Default 32, as in the recorded comparison.",
+    "noise": "Optional [draws][4][6] array of finite standard-normal variates. Supply it to share identical noise between runtimes. Its length determines the number of paths when draws is omitted."
+  },
+  "returns": {
+    "timesMs": [20, 50, 70, 100],
+    "pathsMm": "[draw][4][6] sampled marker displacements, relative to each marker's last observed position",
+    "meanMm": "[4][6] arithmetic mean of the sampled paths",
+    "velocity20Mm": "[4][6] constant-velocity comparison estimated from the final 20 ms",
+    "ridgeMm": "[4][6] fitted deterministic ridge anchor"
+  },
+  "output_columns": ["hand_x", "hand_y", "hand_z", "elbow_x", "elbow_y", "elbow_z"],
+  "display": "To draw absolute coordinates, add each marker's last observed XYZ. Label the spread as model draws. The browser repeats its draws for a given seed. Numerical comparisons with PyTorch use identical explicit noise.",
+  "source": {
+    "recording": "Chowdhury, Glaser and Miller, optical arm markers and handle position from macaque reaching. The model was fitted on the 7 September 2017 session.",
+    "dataset": "https://doi.org/10.5061/dryad.nk98sf7q7",
+    "methods": "https://doi.org/10.7554/eLife.48198",
+    "data_and_engine_license": "CC0-1.0"
+  },
+  "scope": "The study tested processed marker forecasts on a separate day in the same macaque. Some camera and handle smoothing uses surrounding observations on either side of a recorded time point. The horizons refer to that processed clock. The study evaluated two training seeds. This engine runs the first fit."
+}
