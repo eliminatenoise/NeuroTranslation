@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="See how a running forecast uses a previous stride when camera readings are missing.">
+  <title>Forecast the next part of a stride · NeuroTranslation</title>
+  <link rel="stylesheet" href="stride.css">
+  <script defer src="stride-weights.js"></script>
+  <script defer src="stride-core.js"></script>
+  <script defer src="stride-demo.js"></script>
+</head>
+<body>
+  <main>
+    <a class="project" href="https://eliminatenoise.github.io/NeuroTranslation/">NeuroTranslation</a>
+    <h1>Forecast the next part of a stride</h1>
+    <p class="intro">The model takes four camera marker heights around the pelvis. It looks for an earlier stretch of the run that resembles the latest readings, then estimates how far the markers will rise or fall in the 100 milliseconds after the last reading.</p>
+
+    <div class="controls" id="controls" hidden>
+      <label for="example">Invented camera readings
+        <select id="example">
+          <option value="repeat">Repeating stride</option>
+          <option value="gap">A rear marker disappears briefly</option>
+          <option value="fallback">No earlier stride to use</option>
+          <option value="withhold">Only one marker in the last reading</option>
+        </select>
+      </label>
+      <label for="target">Show on the plot
+        <select id="target">
+          <option value="0">All four pelvis markers</option>
+          <option value="1">The two rear markers</option>
+        </select>
+      </label>
+      <label for="rate">Camera sampling
+        <select id="rate">
+          <option value="250">250 readings per second</option>
+          <option value="150">150 readings per second</option>
+        </select>
+      </label>
+    </div>
+    <p id="loading">Loading the stride model…</p>
+    <noscript><p>Turn on JavaScript to run the forecast in your browser.</p></noscript>
+
+    <section class="workspace" id="workspace" aria-label="Interactive stride forecast" hidden>
+      <figure>
+        <canvas id="graph" role="img" aria-labelledby="plot-title" aria-describedby="plot-note"></canvas>
+        <figcaption>
+          <p id="plot-title">Average marker height (mm)</p>
+          <div class="key">
+            <span class="recorded">Earlier readings</span>
+            <span class="matched">Earlier stride used</span>
+            <span class="future">Forecast</span>
+          </div>
+          <p class="small" id="plot-note"></p>
+        </figcaption>
+      </figure>
+      <div class="result">
+        <h2>Forecast at +100 ms</h2>
+        <dl>
+          <div><dt>All four markers</dt><dd id="four">—</dd><dd class="small" id="four-base"></dd></div>
+          <div><dt>Two rear markers</dt><dd id="rear">—</dd><dd class="small" id="rear-base"></dd></div>
+        </dl>
+        <div class="evidence" role="status" aria-atomic="true">
+          <h3 id="support-title"></h3>
+          <p id="support"></p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>The demo uses invented readings. The Bath test covered the first ten seconds of fixed-speed running for 40 people. Those forecast histories contained no original camera gaps. <a href="https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/missing-pelvis-markers/running-stride/">See the measured results</a>.</p>
+      <p id="download" hidden><a href="NeuroTranslate-stride.zip" download>Download the offline preview</a></p>
+    </footer>
+  </main>
+</body>
+</html>
