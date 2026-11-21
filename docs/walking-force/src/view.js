@@ -81,10 +81,20 @@
       ' barefoot walks supplied '+a.held_anchors.toLocaleString('en-US')+
       ' overlapping predictions. Each measured target is the combined upward force recorded by two plates during slow walking at 0.4–0.8 m/s.';
     const both=a.metrics['transformer-combined'].MAE_N,kin=a.metrics['transformer-markers'].MAE_N;
+    const cmp=a.incremental_EMG_comparisons,keys=Object.keys(cmp),won=keys.filter(k=>cmp[k].pass),lost=keys.filter(k=>!cmp[k].pass);
+    const word=n=>['no','one','two','three','four'][n]||String(n);
+    const plain={'transformer-markers':'the Transformer given movement alone','marker-kernel':'the nonlinear movement-only ridge',
+      'wrong-repeat-emg':'the same Transformer given that person’s muscle signals from another walk'};
+    const carry=a.metrics['current-plate-persistence'].MAE_N;
+    const bestModel=Math.min(...Object.entries(a.metrics).filter(([k])=>k!=='current-plate-persistence').map(([,r])=>r.MAE_N));
     el('result-summary').textContent='With both signals, the Transformer missed the recorded load by '+both.toFixed(1)+
-      ' N on average. With movement alone, it missed by '+kin.toFixed(1)+' N. '+(a.incremental_EMG_gate_passed?
-      'Adding muscle signals met the prespecified improvement rule against all three comparisons.':
-      'The combined model fell short of the prespecified improvement rule across the three comparisons. These walks do not establish that adding muscle signals improves the forecast.');
+      ' N on average. With movement alone, it missed by '+kin.toFixed(1)+' N'+(both>kin?': the muscle signals made it worse. ':'. ')+
+      (a.incremental_EMG_gate_passed?'Adding muscle signals met the improvement rule set in advance against all '+word(keys.length)+' comparisons.':
+      'The improvement rule set in advance asked the combined model to beat all '+word(keys.length)+' comparisons. It beat '+
+      (won.length?won.map(k=>plain[k]+' ('+cmp[k].comparator_MAE_N.toFixed(1)+' N)').join(' and '):'none of them')+
+      ' and failed against the other '+word(lost.length)+': '+lost.map(k=>plain[k]).join(', and ')+
+      '. These walks do not show that adding muscle signals improves the forecast.')+
+      (carry<bestModel?' Carrying the plates’ earlier reading forward missed by '+carry.toFixed(1)+' N, less than any model.':'');
     const c=a.incremental_EMG_comparisons['wrong-repeat-emg'];
     el('strong-control').textContent= c.people ? 'Keeping each marker history and substituting the same person’s muscle signals from another walk gave '+c.comparator_MAE_N.toFixed(1)+' N error. Correctly paired signals gave '+c.combined_MAE_N.toFixed(1)+' N on those same '+c.anchors.toLocaleString('en-US')+' windows from '+c.people+' walkers.' : 'No eligible wrong-repeat pairs were available.';
     const s=el('stats');
