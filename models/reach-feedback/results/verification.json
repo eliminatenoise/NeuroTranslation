@@ -1,0 +1,167 @@
+{
+  "reproduction": {
+    "train": {
+      "source_and_prediction_archives": {
+        "source/train.npz": "40bb17cd64e61bfb4ef52b5ee943d27d50e1c82bbf487d58c623c4ed2d6666ab",
+        "motor/train-predictions.npz": "c783a2b00987b0e65b2e6e4eb191cb022eccd7f8523ed7ed1b855df1373623cb",
+        "cortex/train-predictions.npz": "5b5e8a14c148c85cbee21b4b1429e6c3bf40580692cf7171579119bd6f6f215b",
+        "joint/train/predictions.npz": "4847f0fc6fd4152ed4373afd28ba4fc1cfdeb946711aba37939a8b7dcce32c2c"
+      },
+      "complete_score_tables_exact": true
+    },
+    "validation": {
+      "source_and_prediction_archives": {
+        "source/validation.npz": "15591797a12d79e48056c81aea5ea31070efe6aec3b9216b231e92a939ff4c9d",
+        "motor/validation-predictions.npz": "7c5aa3614afb42b4170a1e16c4e7e7e73df863a6f327b8cda785313c1d72818c",
+        "cortex/validation-predictions.npz": "db7e3adf1d1bbc04245d73d7d6f924bca149d27dcf2ec439b926392d44a253ff",
+        "joint/validation/predictions.npz": "4502eaf5c170564fe7ce9b6616542674e0df82dfb1c654c8400fc109b3ed2316"
+      },
+      "complete_score_tables_exact": true
+    },
+    "within": {
+      "source_and_prediction_archives": {
+        "source/within.npz": "eb486ddfecae2babda1daf8a7ed017f64bd57aa7ddcc443bfafa4c2cffd71654",
+        "motor/within-predictions.npz": "bc5de33dfd2d7e5008b16e78c4b2e4c6ac36f99fe00d15fabddf6b5ae1691e10",
+        "cortex/within-predictions.npz": "01d16624151e5b4df28860b82bb6041ba735bf2d95a131cec67debaa5501ccad",
+        "joint/within/predictions.npz": "d9b4634856dd241c5b1ab029752a1ac67566bf7a07637e34ada686572890faad"
+      },
+      "complete_score_tables_exact": true
+    },
+    "transfer": {
+      "source_and_prediction_archives": {
+        "source/transfer.npz": "0ad6f19de985e2bbf7d22ac8472a95d8e12a7dd2b65962bfd04a4653e2fa377d",
+        "motor/transfer-predictions.npz": "d75c010859ed857c88aef8135795fb1bc633e3cc0d1fe4f6917aa38a9106a2a1",
+        "cortex/transfer-predictions.npz": "e8f6d135ac0382b6d312decf7e5f710e5ee0dbe1f82daaf15d6a4d1d74b21419",
+        "joint/transfer/predictions.npz": "3668e5369bd853a0e44f6f4bd7f58b7839965d4a63ad72c0e64c25aa4e5c78bd"
+      },
+      "complete_score_tables_exact": true
+    }
+  },
+  "independent_arrays": {
+    "train": {
+      "max_original_mat_reader_difference": 0.0,
+      "native_rows_equal": true,
+      "transformer_motor_max_normalized_difference": 6.757781876941953e-13,
+      "transformer_count_max_expected_counts_difference": 1.3088636017233313e-06,
+      "independently_refitted_glm_max_expected_counts_difference": 3.091079851813561e-05
+    },
+    "validation": {
+      "max_original_mat_reader_difference": 0.0,
+      "native_rows_equal": true,
+      "transformer_motor_max_normalized_difference": 4.3810707830585e-13,
+      "transformer_count_max_expected_counts_difference": 7.222357252256728e-07,
+      "independently_refitted_glm_max_expected_counts_difference": 1.0364665781081861e-05
+    },
+    "within": {
+      "max_original_mat_reader_difference": 0.0,
+      "native_rows_equal": true,
+      "transformer_motor_max_normalized_difference": 4.4021971038930195e-13,
+      "transformer_count_max_expected_counts_difference": 7.271121671426073e-07,
+      "independently_refitted_glm_max_expected_counts_difference": 5.376023470837765e-06
+    },
+    "transfer": {
+      "max_original_mat_reader_difference": 0.0,
+      "native_rows_equal": true,
+      "transformer_motor_max_normalized_difference": 9.78148654638257e-13,
+      "transformer_count_max_expected_counts_difference": 9.118471367974834e-07,
+      "independently_refitted_glm_max_expected_counts_difference": 0.00021685654922976028
+    }
+  },
+  "independent_fits": {
+    "motor_fold1_seed17_parameter_maxabs": 0.0,
+    "motor_fold4_seed17_parameter_maxabs": 0.0,
+    "cortex_direct_seed17_parameter_maxabs": 0.0,
+    "cortex_full_seed17_parameter_maxabs": 0.0,
+    "cortex_privileged_seed17_parameter_maxabs": 0.0
+  },
+  "original_recording_sha256": "6062b7e8dacdf46f7eee465bd844ffe1fb3b7ce0793c34d3e4d106be357f4746",
+  "replay_interface_held": {
+    "validation": {
+      "windows": 113,
+      "ordered_units": 23,
+      "max_abs": {
+        "17": {
+          "motor": 0.0,
+          "augmented": 0.0,
+          "direct": 0.0
+        },
+        "41": {
+          "motor": 0.0,
+          "augmented": 0.0,
+          "direct": 0.0
+        },
+        "73": {
+          "motor": 0.0,
+          "augmented": 0.0,
+          "direct": 0.0
+        },
+        "ridge": {
+          "motor": 0.0,
+          "augmented": 0.0,
+          "direct": 0.0
+        }
+      }
+    },
+    "within": {
+      "windows": 116,
+      "ordered_units": 23,
+      "max_abs": {
+        "17": {
+          "motor": 0.0,
+          "augmented": 0.0,
+          "direct": 0.0
+        },
+        "41": {
+          "motor": 0.0,
+          "augmented": 0.0,
+          "direct": 0.0
+        },
+        "73": {
+          "motor": 0.0,
+          "augmented": 0.0,
+          "direct": 0.0
+        },
+        "ridge": {
+          "motor": 0.0,
+          "augmented": 0.0,
+          "direct": 0.0
+        }
+      }
+    },
+    "transfer": {
+      "windows": 825,
+      "ordered_units": 23,
+      "max_abs": {
+        "17": {
+          "motor": 0.0,
+          "augmented": 0.0,
+          "direct": 0.0
+        },
+        "41": {
+          "motor": 0.0,
+          "augmented": 0.0,
+          "direct": 0.0
+        },
+        "73": {
+          "motor": 0.0,
+          "augmented": 0.0,
+          "direct": 0.0
+        },
+        "ridge": {
+          "motor": 0.0,
+          "augmented": 0.0,
+          "direct": 0.0
+        }
+      }
+    }
+  },
+  "forward_fold_forecasts_sha256": "9f48f6e8c46df780509e9c2186d82a6f2a802dd6b546a6a0701189e21a7f980f",
+  "fitted_artifact_counts": {
+    "motor_final": 20,
+    "motor_training_fold_fits": 16,
+    "count_heads": 28,
+    "count_rate_controls_archive": 1,
+    "joint_models": 15
+  },
+  "interpretation": "Archive identities refer to this reference environment. Independent results use separately implemented numerical readers, model reconstructions and refits. A reproducible result can still fail the scientific comparison."
+}

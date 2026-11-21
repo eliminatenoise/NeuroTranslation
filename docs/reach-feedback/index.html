@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Replay a recorded macaque reach. Change the recent hand path or spike history and run two fitted cortical forecasts in your browser.">
+  <title>What follows a reach? · NeuroTranslation</title>
+  <link rel="stylesheet" href="reader.css">
+  <script defer src="examples.js"></script>
+  <script defer src="weights.js"></script>
+  <script defer src="inference.js"></script>
+  <script defer src="reader.js"></script>
+</head>
+<body>
+<a class="skip" href="#reader">Skip to the reader</a>
+<header class="mast"><nav class="wrap" aria-label="Study links">
+  <a class="brand" href="https://eliminatenoise.github.io/NeuroTranslation/">NeuroTranslation</a>
+  <div><a href="https://eliminatenoise.github.io/Interoceptomics/reach-feedback/">3D atlas</a>
+  <a href="https://eliminatenoise.github.io/NeuroTranslation/papers/reach-feedback/">Paper</a>
+  <a id="download" href="../reach-feedback-offline.zip" download>Download offline <span aria-hidden="true">↓</span></a></div>
+</nav></header>
+<main class="wrap">
+  <section class="intro" aria-labelledby="title">
+    <div><p class="byline">Area 2 of sensory cortex <span>·</span> Macaque C <span>·</span> 7 September 2017</p>
+    <h1 id="title">What follows a reach?</h1>
+    <p class="lead">A macaque moves a handle toward a target. Take the last fifth of a second before the forecast. Can you tell where the hand goes next? Does that predicted movement help you tell how many spikes will follow in sensory cortex?</p></div>
+    <ol class="clock" aria-label="Stages on the recording clock">
+      <li><b>−200–0 ms</b><span>Read the earlier movement, spikes and go cues.</span></li>
+      <li><b>0–100 ms</b><span>Forecast the hand, elbow marker and handle.</span></li>
+      <li><b>100–200 ms</b><span>Estimate later spikes from 23 sorted units.</span></li>
+    </ol>
+  </section>
+  <section id="reader" class="instrument" aria-labelledby="reader-title">
+    <div class="panelhead"><div><h2 id="reader-title">Replay a reach</h2><p id="identity"></p></div>
+      <label>Recording<select id="split">
+        <option value="within" selected>Workspace 1 · later test</option><option value="transfer">Workspace 2 · transfer test</option>
+        <option value="validation">Workspace 1 · validation</option><option value="train">Workspace 1 · training warm-up</option>
+      </select></label></div>
+    <noscript>Enable JavaScript in your browser to run the fitted models. The group results below are available as text.</noscript>
+    <div class="state" aria-live="polite" id="state">Loading the recorded history…</div>
+    <div class="plots">
+      <article class="plot">
+        <div class="plothead"><div><div class="timing">0–100 ms</div><h3>Where the hand goes</h3></div>
+          <label>Axes<select id="plane"><option value="0,1">X / Y</option><option value="0,2">X / Z</option><option value="1,2">Y / Z</option></select></label>
+        </div>
+        <svg id="path" class="chart" viewBox="0 0 420 264" role="img" aria-label="Hand trajectory"></svg>
+        <ul class="legend"><li class="key history" id="history-key">Earlier hand path</li><li class="key full">Forecast</li><li class="key measured observation">Measured</li></ul>
+        <p class="caption" id="path-caption"></p>
+      </article>
+      <article class="plot">
+        <div class="plothead"><div><div class="timing">100–200 ms</div><h3>How many spikes follow?</h3></div>
+        <label>Electrode · sort<select id="unit"></select></label></div>
+        <svg id="counts" class="chart" viewBox="0 0 420 264" role="img" aria-label="Later spike counts"></svg>
+        <ul class="legend"><li class="key full forecast-key">History + path</li><li class="key direct forecast-key">History only</li><li class="key bar observation">Measured</li></ul>
+        <p class="caption" id="count-caption"></p>
+      </article>
+    </div>
+    <div class="drawers">
+      <details id="editor"><summary>Change the earlier measurements</summary>
+        <p>Shift the hand along its measured X axis with a gradual bend over the final five history samples, or add spikes to one sorted unit in the last 10-ms bin. The models rerun on your edit. A hypothetical reach has no recorded outcome.</p>
+        <div class="edits"><label>Final hand shift on X <output id="shift-value" for="shift">0 mm</output><input id="shift" type="range" min="-15" max="15" step="1" value="0"></label>
+          <label>Edited electrode · sort<select id="edit-unit"></select></label>
+          <label>Added spikes <output id="extra-value" for="extra">0</output><input id="extra" type="range" min="0" max="5" step="1" value="0"></label>
+          <button id="restore" type="button">Restore recording</button></div>
+      </details>
+      <details><summary>Read the numerical forecasts</summary>
+        <p>Displacements give the hand’s three coordinates in millimetres from the last known position. The final sample is 100 ms after that position. The spike table sums the following ten 10-ms bins for each electrode and its sorted unit.</p>
+        <div class="tables"><div><h4>Hand displacement</h4><table id="path-table"></table></div><div><h4>Spikes over 100 ms</h4><table id="count-table"></table></div></div>
+      </details>
+    </div>
+  </section>
+  <section class="findings" aria-labelledby="findings-title">
+    <p class="byline">Across the two test workspaces</p>
+    <h2 id="findings-title">The predicted path added no reliable gain.</h2>
+    <p>Both count models saw the same earlier positions, spikes and go cues. One also saw the movement forecast. In later workspace-1 reaches its average error barely changed. In the second workspace the added forecast raised the error.</p>
+    <div class="results-grid">
+      <article><h3>Later in workspace 1</h3><p class="support">113 matched reaches · 42 sequences</p><dl><div><dt>History only</dt><dd>1.05780</dd></div><div><dt>History + path</dt><dd>1.06127</dd></div><div><dt>Difference</dt><dd>+0.00347</dd></div></dl><p class="ci">95% interval −0.02320 to +0.02774</p></article>
+      <article><h3>Transfer to workspace 2</h3><p class="support">822 matched reaches · 315 sequences</p><dl><div><dt>History only</dt><dd>1.18340</dd></div><div><dt>History + path</dt><dd>1.19342</dd></div><div><dt>Difference</dt><dd>+0.01002</dd></div></dl><p class="ci">95% interval +0.00113 to +0.01846</p></article>
+    </div>
+    <p>Lower error is better. The score is Poisson deviance per sorted unit for the whole 100-ms count. We averaged errors from three independently initialized fits and gave each original sequence equal weight. The intervals come from 5,000 resamples of blocks of eight consecutive sequences.</p>
+    <details><summary>What did the other comparisons show?</summary>
+    <p>Each matched reach had an earlier reach in the same workspace and block at the same go-cue number. Swapping in that reach’s forecast increased error in workspace 1. The correct path minus the borrowed path gave −0.01940 (95% interval −0.03747 to −0.00476). Workspace 2 gave −0.00329 (−0.00802 to +0.00241). The planned test required the correct path to beat both borrowed motion and direct history in both workspaces. It fell short.</p>
+    <p>Adding earlier spikes to the movement model helped forecast the hand endpoint in workspace 2 by 0.964 mm on average. Elbow-marker error rose by 0.305 mm. The test required improvement at both markers. The matched count comparisons used 113 of 116 eligible workspace-1 windows and 822 of 825 in workspace 2. Their full rosters contained 43 and 321 original sequences respectively.</p></details>
+  </section>
+  <section class="method" aria-labelledby="method-title"><h2 id="method-title">What the instruments recorded</h2>
+    <p>Researchers tracked a hand marker and a marker near the elbow in three dimensions relative to the shoulder. A robot encoder tracked the handle in its own plane. Electrodes recorded activity in area 2 of the primary somatosensory cortex. A “sort” distinguishes spike waveforms grouped as a unit on a given electrode. An average forecast of 0.3 spikes can make sense across repeats even though one measured bin contains a whole number of spikes.</p>
+    <p>Each recording here is the first eligible example in its split. Seed 17 identifies the fitted Transformers used in the reader. The motor model takes 20 earlier samples. The count models read those samples either directly or alongside ten forecast displacements. Their training used movement forecasts made from earlier training sequences. The first training block supplied that initial history and has no count-model prediction in this study.</p>
+    <p>The task controller marked go cues. Its exported data omit the random target coordinates. Both workspaces were visited on the same day by the same animal, and the trials interleave in time. Prior smoothing, interpolation, bidirectional handle filtering and offline spike sorting limit claims about live timing. These comparisons test whether one forecast helps another. Establishing that movement caused the later firing would take a different experiment.</p>
+    <p>To see where the three instruments sit, visit the 3D atlas. It plays the recorded hand, near-elbow marker and handle alongside the movement forecast. The stage guide places this recording among the other measured examples. <a href="https://eliminatenoise.github.io/Interoceptomics/reach-feedback/">Visit the reach atlas</a> · <a href="https://eliminatenoise.github.io/Interoceptomics/stages/">Open the stage guide</a></p>
+    <p class="links"><a href="https://doi.org/10.5061/dryad.nk98sf7q7">Chowdhury, Glaser &amp; Miller · CC0 data ↗</a><a href="https://doi.org/10.7554/eLife.48198">Original area 2 article ↗</a><a href="NOTICE.md">Data and licence</a><a href="results.json">Group results (JSON)</a></p>
+  </section>
+</main>
+</body>
+</html>
