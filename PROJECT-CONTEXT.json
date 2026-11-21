@@ -1528,5 +1528,19 @@
     "data_doi": "10.5061/dryad.nk98sf7q7",
     "article_doi": "10.7554/eLife.48198",
     "scope": "26 shared electrode contacts in one macaque on September 12–13, 2017. In 2436 matched pre-target push windows from 609 second-day originals, correct movement outperformed earlier-trial movement on count deviance. The comparison to past counts and cues remained unresolved. Recorded event counts do not establish individual cell identities across dates."
+  },
+  "target_reach": {
+    "reader": "docs/target-reach/index.html",
+    "offline_reader": "docs/target-reach-offline.zip",
+    "model": "models/target-reach/README.md",
+    "model_zip": "models/target-reach.zip",
+    "paper": "docs/papers/target-reach/index.html",
+    "pdf": "docs/papers/target-reach/target-reach.pdf",
+    "test": "models/target-reach/results/acquisition/summary.json",
+    "movement_aligned_test": "models/target-reach/results/crossing/summary.json",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/target-reach/",
+    "source_doi": "10.17605/OSF.IO/J3QC8",
+    "paper_doi": "10.1038/s41597-025-05576-7",
+    "scope": "People carried a cylinder to nine visual targets in separate left- and right-hand sessions. Seven people were held out. At the 15 mm crossing clock the full model missed the optical centroid by 12.13 mm at 600 ms. The benefit over pose alone remained unresolved. Recorded-frame timing is distinct from acoustic go or physical lift onset."
   }
 }

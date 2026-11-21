@@ -5,7 +5,7 @@
   <title>NeuroTranslator</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.891886e56a4483d640c8fff15364e74e251b800281c94d424aa89aaae8dbbcaf.css">
+  <link rel="stylesheet" href="style.119bf80fffef7e3e50a4199c86b393faa5f6f3df8d5095d956628af4782211f5.css">
 </head>
 <body>
   <header class="topbar">
@@ -24,6 +24,7 @@
       <div>
         <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p>
         <nav class="section-links wrist-links" aria-label="Study recordings">
+          <a href="./target-reach/index.html" data-pages-href="./target-reach/index.html">Move a cylinder to a target</a>
           <a href="./contact-forecast/index.html" data-pages-href="./contact-forecast/index.html">Forecast next-day brain activity</a>
           <a href="./cortical-reach/index.html" data-pages-href="./cortical-reach/index.html">Forecast a push and a reach</a>
           <a href="./muscle-spindle/index.html" data-pages-href="./muscle-spindle/index.html">Forecast sensory spikes during a stretch</a>
@@ -108,6 +109,12 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="finger-transfer" aria-labelledby="cohort-choice"><h3 id="cohort-choice">A different person’s finger movement</h3><p>Learn from four people, calibrate on a fifth, then compare the cue with the recorded brain signal.</p><a href="finger-transfer/index.html">Run the five-person comparison</a></article>
+      <article class="study-choice-card" data-study-key="target-reach" aria-labelledby="reader-target-reach">
+        <h3 id="reader-target-reach">Choose a destination</h3>
+        <p>A volunteer moves a cylinder toward a circle. Give a model 200 milliseconds of the recorded path, change the requested target, and see where it predicts the object will go.</p>
+        <nav class="section-links" aria-label="Object transport study"><a href="./target-reach/index.html" data-pages-href="./target-reach/index.html">Try a new target</a>
+        <a href="./papers/target-reach/index.html" data-pages-href="./papers/target-reach/index.html">Read the study</a><a href="https://eliminatenoise.github.io/Interoceptomics/target-reach/">Rotate the measured paths</a></nav>
+      </article>
       <article class="study-choice-card" data-study-key="contact-forecast" aria-labelledby="reader-next-day">
         <h3 id="reader-next-day">The same electrodes, one day later</h3>
         <p>What can a push on a macaque’s hand tell us about the brain activity that follows? Compare a model trained the previous day with the next 100 milliseconds of recorded activity.</p>
@@ -479,6 +486,6 @@
     document.getElementById("study-choice-label").hidden = false;
     showStudy();
   </script>
-  <script type="module" src="app.891886e56a4483d640c8fff15364e74e251b800281c94d424aa89aaae8dbbcaf.mjs"></script>
+  <script type="module" src="app.119bf80fffef7e3e50a4199c86b393faa5f6f3df8d5095d956628af4782211f5.mjs"></script>
 </body>
 </html>
