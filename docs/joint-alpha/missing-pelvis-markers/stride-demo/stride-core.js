@@ -8,6 +8,12 @@
   const WIDTH = 32;
   const HEADS = 4;
   const HEAD_WIDTH = WIDTH / HEADS;
+  // Keep the native sample counts and reference rounding for each camera rate.
+  const PROFILES = new Map([
+    [100, {history: 80, horizon: 10, tail: 20, minLag: 22, maxLag: 60, sharedMinimum: 15}],
+    [150, {history: 120, horizon: 15, tail: 30, minLag: 33, maxLag: 90, sharedMinimum: 22}],
+    [250, {history: 200, horizon: 25, tail: 50, minLag: 55, maxLag: 150, sharedMinimum: 38}],
+  ]);
 
   function addSquares(history, recentStart, lag, squares) {
     const perMarker = [0, 0, 0, 0];
@@ -52,21 +58,18 @@
     return pairwiseSum(values, start, split) + pairwiseSum(values, start + split, length - split);
   }
 
-  function matchCycle(history, rate) {
+  function matchCycle(history, profile) {
     const issue = history.length - 1;
     if (history[issue].filter(value => value !== null).length < 2) {
       return {stride: [null, null], cycleFrames: 0, issued: false};
     }
-    const horizon = rate / 10;
-    const tail = rate / 5;
+    const {horizon, tail, minLag, maxLag, sharedMinimum} = profile;
     const recentStart = history.length - tail;
-    // The reference rounds 22.5 to 22 and 37.5 to 38.
-    const sharedMinimum = rate === 150 ? 22 : 38;
     let bestError = Infinity;
     let cycleFrames = 0;
     const squares = new Float64Array(tail * MARKERS);
 
-    for (let lag = rate === 150 ? 33 : 55; lag <= rate * 0.6; lag++) {
+    for (let lag = minLag; lag <= maxLag; lag++) {
       const earlier = history[issue - lag];
       const later = history[issue - lag + horizon];
       const hasRearMovement = (earlier[2] !== null && later[2] !== null)
@@ -200,8 +203,9 @@
   }
 
   function predict(historyRows, rateHz, weights) {
-    if (rateHz !== 150 && rateHz !== 250) throw new RangeError("Use 150 or 250 camera frames per second.");
-    if (!Array.isArray(historyRows) || historyRows.length < rateHz * 0.8) {
+    const profile = PROFILES.get(rateHz);
+    if (!profile) throw new RangeError("Use 100, 150 or 250 camera frames per second.");
+    if (!Array.isArray(historyRows) || historyRows.length < profile.history) {
       throw new RangeError("Provide at least 800 milliseconds of camera readings.");
     }
     for (const row of historyRows) {
@@ -210,7 +214,7 @@
       }
     }
     if (!weights || weights.sha256 !== CHECKPOINT) throw new Error("The frozen stride checkpoint is missing.");
-    const matched = matchCycle(historyRows, rateHz);
+    const matched = matchCycle(historyRows, profile);
     if (!matched.cycleFrames) return {...matched, prediction: matched.stride.slice()};
     const {stride, cycleFrames} = matched;
     const {sequence, context} = inputs(historyRows, rateHz, stride, cycleFrames, weights.scale);
