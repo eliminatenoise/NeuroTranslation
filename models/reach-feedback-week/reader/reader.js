@@ -34,17 +34,18 @@
   }
   function pathChart(col, history, future, velocity, adapter, edited) {
     const chart = byId("path");
-    const unit = col < 6 ? "m" : "cm";
+    // Positions are stored in metres (arm landmarks) or centimetres (handle); show both in millimetres, like the sliders.
+    const unit = "mm", scale = col < 6 ? 1000 : 10;
     const series = [{label:edited ? "Path input" : "Measured",cls:"measured",color:"#162d35",start:-20,values:[...history,...future]}];
     series.push({label:"Constant velocity", cls:"velocity",color:"#84500a",dash:"7 4",start:-1,values:[history[19], ...velocity]});
     if (adapter) series.push({label:"Fitted movement model",cls:"adapter",color:"#62559d",dash:"2 3",start:-1,values:[history[19],...adapter]});
     const legend = byId("legend");legend.replaceChildren();
     for (const s of series) {const lab=document.createElement("span");lab.textContent=s.label;lab.className=s.cls;legend.append(lab);}
-    const values = series.flatMap(s => s.values.map(v => v[col]));
+    const values = series.flatMap(s => s.values.map(v => v[col] * scale));
     const width = Math.max(228, chart.getBoundingClientRect().width || 640);
     const left = 61, right = 15, top = 23, bottom = 170;
     let lo = Math.min(...values), hi = Math.max(...values);
-    const pad = Math.max((hi-lo)*.12,col < 6 ? .0001 : .01);lo-=pad;hi+=pad;
+    const pad = Math.max((hi-lo)*.12,.1);lo-=pad;hi+=pad;
     const X = t => left+(t+20)*(width-left-right)/29;
     const Y = v => bottom-(v-lo)*(bottom-top)/(hi-lo);
     chart.setAttribute("viewBox", `0 0 ${width} 218`);
@@ -55,13 +56,13 @@
     for(let j=0;j<3;j++) {
       const value = lo + j*(hi-lo)/2, y=Y(value);
       chart.append(svg("line",{x1:left,x2:X(9),y1:y,y2:y,stroke:"#cad7d4"}));
-      chart.append(svg("text",{x:left-5,y:y+4,"text-anchor":"end"},value.toFixed(col<6?3:2)));
+      chart.append(svg("text",{x:left-5,y:y+4,"text-anchor":"end"},value.toFixed(1)));
     }
     chart.append(svg("line",{x1:X(0),x2:X(0),y1:top,y2:bottom,stroke:"#517b7d","stroke-dasharray":"3 3"}));
     for(const t of [-20,-10,0,9]) chart.append(svg("text",{x:X(t),y:bottom+19,"text-anchor":"middle"},String(t*10).replace("-","−")));
     chart.append(svg("text",{x:(left+X(9))/2,y:211,"text-anchor":"middle"},"ms from first forecast"));
     for(const s of series) {
-      chart.append(svg("polyline",{points:s.values.map((v,j)=>[X(s.start+j),Y(v[col])].join(",")).join(" "),
+      chart.append(svg("polyline",{points:s.values.map((v,j)=>[X(s.start+j),Y(v[col]*scale)].join(",")).join(" "),
         fill:"none",stroke:s.color,"stroke-width":s.cls==="measured"?2.8:2.3,"stroke-linecap":"round","stroke-dasharray":s.dash||"none"}));
     }
     const lab=byId("landmark").selectedOptions[0].text, axis=byId("axis").value;
@@ -70,8 +71,8 @@
       : "The constant-velocity forecast extends the slope over the last five old samples. Both lines use the current path inputs.";
     table(byId("path-values"),`${lab} · ${axis} coordinate · ${unit}. The old history ends at −10 ms. The ten new samples span 0–90 ms.`,
       ["Time (ms)",edited?"Path input":"Measured","Constant velocity",...(adapter?["Fitted model"]:[])],
-      [...history.map((v,j)=>[(j-20)*10,v[col].toFixed(col<6?5:3),"—",...(adapter?["—"]:[])]),
-       ...future.map((v,j)=>[j*10,v[col].toFixed(col<6?5:3),velocity[j][col].toFixed(col<6?5:3),...(adapter?[adapter[j][col].toFixed(col<6?5:3)]:[])])]);
+      [...history.map((v,j)=>[(j-20)*10,(v[col]*scale).toFixed(2),"—",...(adapter?["—"]:[])]),
+       ...future.map((v,j)=>[j*10,(v[col]*scale).toFixed(2),(velocity[j][col]*scale).toFixed(2),...(adapter?[(adapter[j][col]*scale).toFixed(2)]:[])])]);
   }
   function countsChart(rec, arm, edited) {
     const mode = pop(), late = mode === "late", contacts=contactList();
