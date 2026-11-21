@@ -20,7 +20,7 @@
     cells.forEach((v,i)=>{const c=document.createElement(i===0?'th':'td');if(!i)c.scope='row';c.textContent=v;row.append(c);});
     return row;
   }
-  function atTime(v){return f(v*1000,0)+' ms';}
+  function atTime(v){const ms=Math.round(v*1000);return f(ms===0?0:ms,0)+' ms';}
   function glm(model,input){
     if (model.zero_boundary) return 0;
     let value=model.intercept;
