@@ -1,0 +1,150 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Which recorded neuron fires next? | NeuroTranslation</title><style>*{box-sizing:border-box}html{color:#182b2e;background:#f3f6f5;font:17px/1.58 'DejaVu Sans',Arial,sans-serif}body{max-width:900px;margin:0 auto;background:white;padding:clamp(20px,5vw,68px)}header,footer,nav{color:#356059;font-size:.85rem}nav{display:flex;gap:1.1em;flex-wrap:wrap;padding:.9rem 0;border-top:1px solid #bed0cb;border-bottom:1px solid #bed0cb}a{color:#135d58;text-underline-offset:.14em}h1,h2{color:#173c38;line-height:1.15;letter-spacing:-.035em}h1{font-size:clamp(2.2rem,6vw,3.6rem);max-width:18ch;margin:.7rem 0 1.1rem}h2{font-size:1.6rem;margin:1.8rem 0 .6rem}p{margin:.8em 0}table{font-size:.79em;border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}thead{background:#e8f0ed;color:#123932}th,td{text-align:right!important;vertical-align:top;padding:.55em .45em;border-bottom:1px solid #c9d6d1}th:first-child,td:first-child{text-align:left!important}tr:nth-child(even) td{background:#f7f9f8}pre{padding:.8em 1em;background:#f2f5f4;border-left:3px solid #4b8277;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.81em}code{font-family:'DejaVu Sans Mono',monospace}.table-wrap{max-width:100%;overflow:auto}footer{border-top:1px solid #bed0cb;margin-top:2rem;padding-top:.7rem}
+@page{size:A4;margin:16mm 17mm 18mm;@bottom-left{content:"NeuroTranslation · Next Neuron Prediction";font:8pt Arial,sans-serif;color:#45665c}@bottom-right{content:counter(page);font:8pt Arial,sans-serif;color:#45665c}}@media print{html,body{background:white;margin:0;padding:0;font:10.5pt/1.45 'DejaVu Sans',Arial,sans-serif;color:#122527}nav,footer{display:none}header{font-size:9pt}h1{font-size:30pt}h2{font-size:17pt;break-after:avoid}p{orphans:3;widows:3}table{font-size:8.4pt}tr,pre{break-inside:avoid}th,td{padding:.45em .32em}a{text-decoration:none;color:#174944}.table-wrap{overflow:visible}.print-page{break-before:page}.print-page:first-child{break-before:auto}.print-label{display:block;color:#45665c;font-size:9pt;margin-bottom:6mm}}@media screen{.print-label{display:none}}</style></head><body><header>NeuroTranslation · Next Neuron Prediction</header><nav aria-label="Study files"><a href="../../next-neuron-prediction/index.html">Try the spike forecast</a><a href="next-neuron-prediction.pdf">Read the PDF</a><a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/models/next-neuron-prediction/README.md">Model and source</a></nav><main><section class="print-page"><h1>Which recorded neuron fires next?</h1>
+<p>Stop a recording after a spike. Give each recorded neuron a probability of producing the next one. Then play the recording forward. On ten trips by a second rat, a model fitted to the first rat assigned more probability to the unit that fired next than a running count did. Its first choice was right about once in five. A simple rule that favored recently active units picked the winner just as often.</p>
+<p>The electrodes recorded groups of spikes that the experimenters attributed to individual neurons. Each group is called a <em>sorted unit</em>. The target here is the next unit observed among those listed in that recording. An unrecorded neuron could have fired between any two observations. These two animals share a species, an experiment and a laboratory. Tests in another species, body plan or recording system remain open. <a href="https://doi.org/10.48324/dandi.000978/0.240511.0307">Dataset</a></p>
+<h2>Two rats, two sets of units</h2>
+<p>JS14 ran along a W-shaped track. The model learned five numbers from 54,578 resolved transitions on trips 55–78. Trip 79 separated training from the ten held trips, 80–89. Those ten trips had appeared in an earlier study of movement. Here the target is which unit fires next. Trips 90–95 contributed no observations. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/3e43795adeb6c33b8302e952f45af03be5a71fb1/benchmarks/wtrack-neural-motion">Earlier movement study</a></p>
+<p>The second rat, ER1, had 122 units in its recording. Its unit 6 and JS14’s unit 6 are just two entries in different tables. On ER1’s first ten trips the model started each trial with empty counters and used the five numbers learned from JS14. From the first occupied millisecond onward it could update the forecast whenever an event arrived. Its coefficients stayed fixed. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/models/next-neuron-prediction/protocol.json">Frozen study design</a></p></section><section class="print-page"><span class="print-label">Forecasts on the held trials</span><div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Rat and method</th>
+<th style="text-align: right;">Log loss ↓</th>
+<th style="text-align: right;">First choice correct</th>
+<th style="text-align: right;">Mean rank ↓</th>
+<th style="text-align: right;">Log loss, equal weight per unit ↓</th>
+<th style="text-align: right;">First choice, equal weight per unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JS14 · uniform</td>
+<td style="text-align: right;">4.277</td>
+<td style="text-align: right;">1.39%</td>
+<td style="text-align: right;">36.50</td>
+<td style="text-align: right;">4.277</td>
+<td style="text-align: right;">1.39%</td>
+</tr>
+<tr>
+<td>JS14 · rates from training</td>
+<td style="text-align: right;">3.074</td>
+<td style="text-align: right;">25.05%</td>
+<td style="text-align: right;">10.02</td>
+<td style="text-align: right;">4.911</td>
+<td style="text-align: right;">1.69%</td>
+</tr>
+<tr>
+<td>JS14 · running rates</td>
+<td style="text-align: right;">3.028</td>
+<td style="text-align: right;">24.98%</td>
+<td style="text-align: right;">9.26</td>
+<td style="text-align: right;">4.638</td>
+<td style="text-align: right;">1.70%</td>
+</tr>
+<tr>
+<td>JS14 · running rates and recency</td>
+<td style="text-align: right;">3.039</td>
+<td style="text-align: right;">25.11%</td>
+<td style="text-align: right;">8.32</td>
+<td style="text-align: right;">5.037</td>
+<td style="text-align: right;">1.76%</td>
+</tr>
+<tr>
+<td><strong>JS14 · fitted history model</strong></td>
+<td style="text-align: right;"><strong>2.872</strong></td>
+<td style="text-align: right;"><strong>25.15%</strong></td>
+<td style="text-align: right;"><strong>7.48</strong></td>
+<td style="text-align: right;"><strong>4.285</strong></td>
+<td style="text-align: right;"><strong>1.87%</strong></td>
+</tr>
+<tr>
+<td>ER1 · uniform</td>
+<td style="text-align: right;">4.804</td>
+<td style="text-align: right;">0.82%</td>
+<td style="text-align: right;">61.50</td>
+<td style="text-align: right;">4.804</td>
+<td style="text-align: right;">0.82%</td>
+</tr>
+<tr>
+<td>ER1 · running rates</td>
+<td style="text-align: right;">3.483</td>
+<td style="text-align: right;">19.48%</td>
+<td style="text-align: right;">13.98</td>
+<td style="text-align: right;">4.974</td>
+<td style="text-align: right;">1.32%</td>
+</tr>
+<tr>
+<td>ER1 · running rates and recency</td>
+<td style="text-align: right;">3.484</td>
+<td style="text-align: right;">19.50%</td>
+<td style="text-align: right;">12.55</td>
+<td style="text-align: right;">5.297</td>
+<td style="text-align: right;">1.35%</td>
+</tr>
+<tr>
+<td><strong>ER1 · fitted history model</strong></td>
+<td style="text-align: right;"><strong>3.379</strong></td>
+<td style="text-align: right;"><strong>19.49%</strong></td>
+<td style="text-align: right;"><strong>11.51</strong></td>
+<td style="text-align: right;"><strong>4.645</strong></td>
+<td style="text-align: right;"><strong>1.35%</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Log loss penalizes a forecast according to how little probability it gave the recorded unit. It uses natural logarithms. Rank 1 means the unit was the first choice. Tied probabilities share credit and take their mean rank. Each ordinary score gives every resolved event equal weight. The last two columns give each unit with a scored target equal weight. On JS14, the model’s equal-unit log loss was slightly worse than uniform. A few often-recorded units can account for many correct first choices. The rates learned for JS14’s units have no counterparts in ER1. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/models/next-neuron-prediction/js14-results.json">JS14 results</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/models/next-neuron-prediction/er1-results.json">ER1 results</a></p>
+<p>Averaging the ten trips equally, the model reduced log loss against running rates by 0.159 on JS14 and 0.108 on ER1. The 95% intervals from resampling trips were 0.141–0.178 and 0.095–0.121. Each set contains consecutive trips from one animal. The intervals describe variation among those trips and give no estimate of variation among animals.</p>
+<p>The first few spikes tell a different story. For forecasts issued at the end of occupied bins 1 through 10 in each trial, the model’s log loss was 3.789 on JS14 and 4.338 on ER1. The fixed recency rule did better on both, with 3.680 and 4.237. Only 95 and 93 resolved forecasts respectively fell in that early group. A fresh recording can update the model immediately. How much those first updates help depends on which comparison you use.</p></section><section class="print-page"><h2>One millisecond to separate events</h2>
+<p>The recorder supplies a clock for every sorted spike. Split each trial into complete one-millisecond bins. At the end of an occupied bin, count everything that has arrived, including a spike exactly on the closing boundary. Issue the forecast there. A spike has to occur strictly later to become a target. Empty bins leave the forecast in place. The next occupied bin gives a single answer only if it contains one spike. Two spikes in that bin leave the forecast unresolved at the chosen resolution. Both still contribute to the following forecast.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Trials scored</th>
+<th style="text-align: right;">Listed units</th>
+<th style="text-align: right;">Units with a scored target</th>
+<th style="text-align: right;">Occupied bins</th>
+<th style="text-align: right;">Resolved targets</th>
+<th style="text-align: right;">Multi-spike targets</th>
+<th style="text-align: right;">Forecasts censored at trial end</th>
+<th style="text-align: right;">Spikes in incomplete edge bins</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JS14 · 80–89</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">34,885</td>
+<td style="text-align: right;">32,866</td>
+<td style="text-align: right;">2,009</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>ER1 · 0–9</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">62,657</td>
+<td style="text-align: right;">56,926</td>
+<td style="text-align: right;">5,721</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table></div>
+<p>The first occupied bin supplies history. The final forecast in each trial has no observable target before the trial ends. The recording lists no per-unit intervals of reliable detection. An empty bin could mean silence or a missed event. The original sorting used the acquired recording. The archive gives no time at which a live sorter would have supplied the identity of a spike. These scores describe offline replay.</p>
+<p>The running-rate rule starts with one count for each unit and adds the spikes seen so far in the trial. The recency rule also favors a unit with recent spikes, with their weight decaying over 100 milliseconds. The fitted model gives every candidate the same five questions. How many spikes has it supplied in this trial? How much activity remains on each of three decaying traces, covering 10, 100 and 1,000 milliseconds? Did it fire in the latest occupied bin? A shared weighted sum followed by softmax gives the probabilities. The future event time, the rat’s position and the candidate’s identity are absent from the inputs. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/models/next-neuron-prediction/weights.json">Fitted coefficients</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/models/next-neuron-prediction/benchmark.py">Scoring code</a></p></section><section class="print-page"><h2>Try it</h2>
+<p>Three fictional units, Amber, Birch and Cedar, show how a prediction changes. At 1 ms Birch has supplied the only spike. The fitted model gives Birch 57.7% and the other two 21.2% each. At 5 ms Amber has fired too. Birch still leads with 45.1%. The next occupied bin contains both Birch and Cedar, so the forecast made at 5 ms is unresolved. Both observed spikes count toward the forecast at 9 ms. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/models/next-neuron-prediction/fictional-case.json">Fictional worked example</a></p>
+<p>From this directory, use Python 3.12 or 3.13 in a virtual environment. The fictional example and scoring with the saved weights need NumPy. The full reproduction uses the pinned packages below. Each data command writes into the directory you specify.</p>
+<pre><code class="language-sh">python -m pip install -r requirements.txt
+python benchmark.py example
+python get_inputs.py js14 input-js14
+python get_inputs.py er1 input-er1
+python benchmark.py train --packets input-js14/train --output fitted.json
+python benchmark.py js14 --packets input-js14/test --model fitted.json --output my-js14.json
+python benchmark.py er1 --packets input-er1 --model fitted.json --output my-er1.json
+python benchmark.py timing
+</code></pre>
+<p>JS14 downloads the 34 checked trip packets from the earlier movement study. ER1 reads the sorted-unit field and trial metadata in checked byte ranges of the original NWB. It exports only the first ten trips and verifies their digests. For an existing full ER1 file, run <code>python prepare_er1.py recording.nwb input-er1</code>. It checks the archive’s SHA-256 before extraction. The public benchmark contains weights, aggregate scores, code and a fictional example. Downloading inputs is optional.</p>
+<p>On one AMD Ryzen AI Max+ 395 CPU, an update and a probability vector took a median 10.1 microseconds for 72 fictional units. The 95th percentile was 10.4 microseconds over 2,000 updates after 100 warm-up updates. This measures the scorer alone. Electrode acquisition, spike sorting, transport and display delays remain unmeasured.</p>
+<p>Justin Shin and Shantanu Jadhav released <em>Single Day W-Track Learning</em> under CC BY 4.0. Their experiment supplied the spike times. This benchmark selected trials, grouped spikes on a millisecond clock, fitted the model and measured forecast errors. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/models/next-neuron-prediction/NOTICE.md">Source and reuse terms</a></p>
+<h2>Millisecond boundaries</h2>
+<p>After evaluation, we corrected how the scorer assigns timestamps that fall exactly on a millisecond boundary. Refitting gave the same five coefficients, and both held result files were byte-identical.</p></section></main><footer>Justin Shin and Shantanu Jadhav supplied the original recordings. The study reports offline replay.</footer></body></html>

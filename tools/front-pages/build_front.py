@@ -1944,7 +1944,7 @@ def later_heading():
     return f'{spell(n_later(), True)} newer studies, outside the numbered table'
 
 
-PAGE_ROWS = ('hand-search', 'shared-motion', 'whole-body', 'word-motion', 'stride', 'population-motion', 'knee-motion', 'gait-rhythm', 'knee-stride', 'finger-signals', 'finger-motion', 'finger-transfer', 'knee-moment', 'walking-force', 'walking-landmarks', 'elbow-cue', 'arm-transfer', 'scalp-forecast', 'cervical-forecast', 'neck-voltage', 'back-rotation', 'shared-back-rotation', 'muscle-tracking', 'shared-muscle-tracking', 'pedal-load', 'shared-pedal-load', 'heel-and-force', 'shared-heel-and-force', 'walking-instructions', 'walking-instruction-controls', 'cross-limb-movement', 'cross-limb-controls', 'muscle-and-motion', 'muscle-motion-controls', 'visual-balance', 'visual-balance-controls', 'muscle-spindle', 'cortical-reach', 'contact-forecast', 'target-reach', 'cylinder-rotation', 'reach-feedback', 'human-wrist', 'cross-person-wrist')      # the site pages that are not study readers and have a row of their own
+PAGE_ROWS = ('hand-search', 'shared-motion', 'whole-body', 'word-motion', 'stride', 'population-motion', 'knee-motion', 'gait-rhythm', 'knee-stride', 'finger-signals', 'finger-motion', 'finger-transfer', 'knee-moment', 'walking-force', 'walking-landmarks', 'elbow-cue', 'arm-transfer', 'scalp-forecast', 'cervical-forecast', 'neck-voltage', 'back-rotation', 'shared-back-rotation', 'muscle-tracking', 'shared-muscle-tracking', 'pedal-load', 'shared-pedal-load', 'heel-and-force', 'shared-heel-and-force', 'walking-instructions', 'walking-instruction-controls', 'cross-limb-movement', 'cross-limb-controls', 'muscle-and-motion', 'muscle-motion-controls', 'visual-balance', 'visual-balance-controls', 'muscle-spindle', 'cortical-reach', 'contact-forecast', 'target-reach', 'cylinder-rotation', 'reach-feedback', 'human-wrist', 'cross-person-wrist', 'first-use-body', 'next-neuron-prediction')      # the site pages that are not study readers and have a row of their own
 
 
 def other_pages():
@@ -2173,6 +2173,9 @@ SUPPLEMENTS = {     # the short PDFs published beside the papers; their page cou
     'reach': 'docs/papers/reach-feedback/reach-feedback.pdf',
     'week': 'docs/papers/reach-feedback/one-week/one-week.pdf',
     'wrist2': 'docs/papers/human-wrist/human-wrist.pdf',
+    'first_use': 'docs/papers/first-use-body/first-use-body.pdf',
+    'next_spike': 'docs/papers/next-neuron-prediction/next-neuron-prediction.pdf',
+
     'wrist_transfer': 'docs/papers/cross-person-wrist/cross-person-wrist.pdf',
 }
 _pdf_pages = {}
@@ -2763,6 +2766,38 @@ def rw_checks():
              '1.539 against no change 0.689 and 0.540 mm')
     return ''
 
+
+BODY_COMPARISON = 'models/first-use-body/matched-comparison.json'
+SECOND_RAT = 'models/next-neuron-prediction/er1-results.json'
+
+
+def first_use_checks():
+    rows = load(BODY_COMPARISON)
+    mammal, mixed, mammal_locust, mixed_locust = (rows[i] for i in (0, 12, 6, 18))
+    for earlier, later in ((mammal, mixed), (mammal_locust, mixed_locust)):
+        assert (earlier['fit'], later['fit']) == ('mammal', 'mixed')
+        assert all(row['condition'] == 'observed' and row['phase'] == 'all' for row in (earlier, later))
+        assert earlier['matched_points'] == later['matched_points']
+        assert earlier['recordings'] == later['recordings']
+        assert earlier['methods'] == later['methods'] and earlier['methods'][:2] == ['shape', 'no_shape']
+    assert mammal['horizon_s'] == mixed['horizon_s'] == 0.12
+    assert mammal_locust['horizon_s'] == mixed_locust['horizon_s'] == 0.2
+    assert mammal['recording_mean'][0] < mixed['recording_mean'][0]
+    assert mixed_locust['recording_mean'][0] < mammal_locust['recording_mean'][0]
+    log('mixed training improved the slower locust forecast and worsened the common short-horizon mean',
+        file=BODY_COMPARISON, field='matched observed sets; recording_mean/shape', full=None)
+    return ''
+
+
+def next_neuron_checks():
+    methods = load(SECOND_RAT)['methods']
+    fitted, running, recent = [methods[name]['pooled'] for name in ('shared_model', 'online_rate', 'recency')]
+    assert fitted['rows'] == running['rows'] == recent['rows']
+    assert fitted['log_loss'] < min(running['log_loss'], recent['log_loss'])
+    assert running['top1'] < fitted['top1'] < recent['top1']
+    log('second rat: fitted history improves log loss while recency has slightly higher first-choice accuracy',
+        file=SECOND_RAT, field='methods/{shared_model,online_rate,recency}/pooled', full=None)
+    return ''
 
 CROSS_WRIST = 'docs/papers/cross-person-wrist/cross-person-wrist-source.zip!aggregate.json'
 
@@ -3798,6 +3833,9 @@ GENERAL_FITS = {   # every task folder of the general model -> who it was scored
     'walking_cues': 'seen',           # the same ten-person test group, "already used in earlier studies" (its README)
     'cervical': 'not the general model',   # a straight-line correction with coefficients of its own (neck_checks())
     'muscle_motion': 'not the general model',   # straight-line fits with coefficients of their own, no parent_sha256 (mm_checks())
+    'first_use_body': 'not the general model',  # landmark predictor with its own fitted geometry weights
+    'next_neuron_prediction': 'not the general model',  # shared coefficients fitted to sorted spike histories
+
     'cross_person_wrist': 'not the general model',   # dedicated optical fits; see the task's README and synthetic-fit.json
     'bilateral_wrist': 'not the general model',   # a transformer per wrist with weights of its own; the movement checkpoint has no role (hw_checks())
     'cross_limb': 'not the general model',      # straight-line fits with coefficients of their own, no parent_sha256 (xl_checks())

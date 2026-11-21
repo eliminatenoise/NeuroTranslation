@@ -1,0 +1,12 @@
+{
+  "research_package": "https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/next-neuron-prediction",
+  "source_sha256": {
+    "benchmark.py": "3514e7925fd9c833ab5f939513991eadb04b246cab3d63ee320e807410251f61",
+    "weights.json": "25f9d22ee284b794c1a4f7019587b6e4b92631ab04ff9664266045aa4718ecad",
+    "protocol.json": "c0c04287d26d8b1ab7996053adaee26b858ce4b2a0f0110d88726a4c4a06bc08",
+    "NOTICE.md": "bc4a6cc9c0510d18799a025355b79e04b333b0cdb7e5373b6e00f3194e2c782b",
+    "LICENSE-CODE": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+    "fictional-case.json": "60d543eed195961a2e7be0cd749ecde65cb3e75076e05e03e5a9dc4da65cab10"
+  },
+  "package_changes": "history.py contains the original History and logprobs definitions, with the original trace durations. The JSON adapter takes counts at integer closing boundaries. Only the five shared weights enter the scorer. The fixture uses the benchmark's invented three-unit history."
+}

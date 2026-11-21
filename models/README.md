@@ -1,5 +1,12 @@
 # NeuroTranslate 0.0
 
+Forecast the next positions in a moving set of points, or the next detected spike among the recorded units. Each predictor has fitted weights of its own. Both run through the [normal Python download](neurotranslate-0.0.zip). The complete studies are available with their training and scoring code.
+
+| Study | Run locally | Read the evidence |
+| --- | --- | --- |
+| [First use on an unfamiliar body](first-use-body/) | [Browser, model and paper](../docs/first-use-body-offline.zip) | [Optical tracking study](https://eliminatenoise.github.io/NeuroTranslation/papers/first-use-body/) |
+| [Next Neuron Prediction](next-neuron-prediction/) | [Browser, model and paper](../docs/next-neuron-prediction-offline.zip) | [Sorted spike study](https://eliminatenoise.github.io/NeuroTranslation/papers/next-neuron-prediction/) |
+
 The ordinary [NeuroTranslate 0.0 download](neurotranslate-0.0.zip) includes a cross-person wrist example. From the extracted folder, run `python predict.py cross_person_wrist/example.json`. [Try it in the browser](https://eliminatenoise.github.io/NeuroTranslation/cross-person-wrist/).
 
 The [human wrist package](human-wrist/) includes the simulation used in the public reader and the code for learning from locally acquired recordings. [Run a wrist forecast](https://eliminatenoise.github.io/NeuroTranslation/human-wrist/) · [Read the cross-day results](https://eliminatenoise.github.io/NeuroTranslation/papers/human-wrist/)

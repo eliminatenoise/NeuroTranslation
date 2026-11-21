@@ -1,0 +1,50 @@
+{
+  "origin": "Authored fictional event stream for illustrating inference",
+  "local_units": [
+    "Amber",
+    "Birch",
+    "Cedar"
+  ],
+  "note": "At 5 ms a forecast exists. The next occupied bin contains two spikes, so that forecast is unresolved. At 9 ms both observations update history.",
+  "steps": [
+    {
+      "forecast_time_ms": 1,
+      "observed_counts": [
+        0,
+        1,
+        0
+      ],
+      "next_unit_probabilities": {
+        "Amber": 0.21164246475457363,
+        "Birch": 0.5767150704908527,
+        "Cedar": 0.21164246475457363
+      }
+    },
+    {
+      "forecast_time_ms": 5,
+      "observed_counts": [
+        1,
+        0,
+        0
+      ],
+      "next_unit_probabilities": {
+        "Amber": 0.40136968168366827,
+        "Birch": 0.4513359730567386,
+        "Cedar": 0.1472943452595931
+      }
+    },
+    {
+      "forecast_time_ms": 9,
+      "observed_counts": [
+        0,
+        1,
+        1
+      ],
+      "next_unit_probabilities": {
+        "Amber": 0.28263388629520675,
+        "Birch": 0.4660219272287369,
+        "Cedar": 0.2513441864760563
+      }
+    }
+  ]
+}

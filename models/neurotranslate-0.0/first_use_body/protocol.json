@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "task": "Forecast the next 2-D optical landmark positions near 120 ms from a naturally observed prefix. Persistent within-track point identities only; independent maps across source recordings.",
+  "history_frames": 5,
+  "maximum_interframe_gap_s": 0.24,
+  "maximum_history_span_s": 0.96,
+  "minimum_observations_per_point_including_origin": 3,
+  "horizon_s": 0.12,
+  "horizon_tolerance_s": 0.04,
+  "origin_stride_s": 0.12,
+  "max_train_origins_per_track": 160,
+  "max_test_origins_per_track": 48,
+  "seed": 1729,
+  "hidden": 32,
+  "adam_steps": 192,
+  "adam_lr": 0.003,
+  "batch_size": 512,
+  "loss": "Euclidean pseudo-Huber on displacements divided by the current RMS landmark radius, delta 0.1. Draw group then track uniformly, eligible origin uniformly within track and observed eligible landmark uniformly within origin.",
+  "architecture": "Per-landmark shared MLP with pooled set kinematics and radial geometric neighborhood observer, convex gate over six velocity hypotheses including zero. Shape ablation supplies zeros in the seven geometry features, leaving all other features, vector proposals, architecture, training schedule and initialization identical.",
+  "baselines": [
+    "persistence",
+    "last_velocity",
+    "half_velocity",
+    "rigid"
+  ],
+  "locked_comparison": "All six named predictors on the same finite points. Report normalized Euclidean endpoint error and raw errors in native units by recording, pooled points vs equally weighted recording means, and first forecast vs later. First means earliest input-eligible prespecified forecast per track; an unavailable outcome stays unscored. No test-driven model selection, recalibration or retraining.",
+  "stressed_input": "Randomly hide 20% of previously visible history and origin points, independent deterministic stream derived from track ID and origin. Do not alter endpoint target. Report eligibility and coverage.",
+  "uncertainty": "Describe within-study variability across available recording groups and interval coverage from TRAIN-only leave-one-recording-group-out normalized error 90th quantile with equal group weights. No population coverage guarantee, no individual-based interval when identities across clips are unverified.",
+  "generalization": "Independent source owner chooses groups and licenses before outcome access. No test species, site, record, ID, K, class labels or fixed skeleton as network features. No person-specific fit. Source recording counts bound claims.",
+  "low_rate_rule": "When median acquisition frame interval exceeds 0.12 s, assess next position at 0.20 s \u00b1 0.04 s as a separate secondary horizon. Never pool primary and secondary scores.",
+  "low_rate_horizon_s": 0.2
+}

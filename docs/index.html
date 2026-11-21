@@ -5,7 +5,7 @@
   <title>NeuroTranslator</title>
   <meta name="description" content="Inspect and align neural, muscle, movement and mechanics recordings. Keep their clocks, units and provenance in view.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b5bff'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-size='46' font-weight='700' fill='white'%3EN%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.20d35c436c4dd12aafb7beb69f29c702771d6d6639132213f7c278350c6893bc.css">
+  <link rel="stylesheet" href="style.7fc2776f09dcb8c3ec4a3c88ec3f948f31744385a1a3443f15ba2adde09c3f5e.css">
 </head>
 <body>
   <header class="topbar">
@@ -24,6 +24,10 @@
       <div>
         <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p>
         <nav class="section-links wrist-links" aria-label="Study recordings">
+          <a href="./first-use-body/index.html" data-pages-href="./first-use-body/index.html">Forecast a moving body</a>
+
+          <a href="./next-neuron-prediction/index.html" data-pages-href="./next-neuron-prediction/index.html">Predict the next unit</a>
+
           <a href="./cross-person-wrist/index.html" data-pages-href="./cross-person-wrist/index.html">Try the forecast on a different body</a>
           <a href="./human-wrist/index.html" data-pages-href="./human-wrist/index.html">Forecast both wrists on a second day</a>
           <a href="./reach-feedback/one-week/index.html" data-pages-href="./reach-feedback/one-week/index.html">Try the reach forecast one week later</a>
@@ -114,6 +118,16 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="finger-transfer" aria-labelledby="cohort-choice"><h3 id="cohort-choice">A different person’s finger movement</h3><p>Learn from four people, calibrate on a fifth, then compare the cue with the recorded brain signal.</p><a href="finger-transfer/index.html">Run the five-person comparison</a></article>
+      <article class="study-choice-card" data-study-key="first-use-body" aria-labelledby="reader-first-use-body">
+        <h3 id="reader-first-use-body">Where will a point on an unfamiliar body go?</h3><p>Watch the model follow the points already visible. Change the shape of the figure, hide its future and compare the forecast with where the points actually land.</p>
+        <nav class="section-links" aria-label="Animal tracking and first-use forecasts"><a href="./first-use-body/index.html" data-pages-href="./first-use-body/index.html">Forecast a moving body</a> <a href="./papers/first-use-body/index.html" data-pages-href="./papers/first-use-body/index.html">Read the study</a></nav>
+      </article>
+
+      <article class="study-choice-card" data-study-key="next-neuron-prediction" aria-labelledby="reader-next-neuron-prediction">
+        <h3 id="reader-next-neuron-prediction">Which recorded neuron will fire next?</h3><p>Add a spike to a fictional recording and see what happens to the forecast for every unit. The benchmark compares these probabilities with the next recorded spike.</p>
+        <nav class="section-links" aria-label="Next Neuron Prediction"><a href="./next-neuron-prediction/index.html" data-pages-href="./next-neuron-prediction/index.html">Predict the next unit</a> <a href="./papers/next-neuron-prediction/index.html" data-pages-href="./papers/next-neuron-prediction/index.html">Read the study</a></nav>
+      </article>
+
       <article class="study-choice-card" data-study-key="cross-person-wrist" aria-labelledby="reader-cross-person-wrist">
         <h3 id="reader-cross-person-wrist">What changes when a different person reaches?</h3>
         <p>Train on one person’s right-wrist reaches. Test on another person’s left-wrist reaches. Try a fictional example and see how tracking the shoulders gives the forecast a reference point.</p>
@@ -521,6 +535,6 @@
     document.getElementById("study-choice-label").hidden = false;
     showStudy();
   </script>
-  <script type="module" src="app.20d35c436c4dd12aafb7beb69f29c702771d6d6639132213f7c278350c6893bc.mjs"></script>
+  <script type="module" src="app.7fc2776f09dcb8c3ec4a3c88ec3f948f31744385a1a3443f15ba2adde09c3f5e.mjs"></script>
 </body>
 </html>

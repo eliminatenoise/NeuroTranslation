@@ -186,3 +186,16 @@ docs/cross-person-wrist/** -text
 docs/papers/cross-person-wrist/** -text
 models/neurotranslate-0.0/cross_person_wrist/** -text
 docs/cross-person-wrist/*.cmd whitespace=cr-at-eol
+
+# Keep the bytes used to verify the two fitted models and their offline readers.
+docs/first-use-body/** -text
+docs/next-neuron-prediction/** -text
+docs/papers/first-use-body/** -text
+docs/papers/next-neuron-prediction/** -text
+models/first-use-body/** -text
+models/next-neuron-prediction/** -text
+models/neurotranslate-0.0/first_use_body/** -text
+models/neurotranslate-0.0/next_neuron_prediction/** -text
+docs/first-use-body/*.cmd whitespace=cr-at-eol
+docs/next-neuron-prediction/*.cmd whitespace=cr-at-eol
+"models/neurotranslate-0.0/Run forecasts on Windows.cmd" -text whitespace=cr-at-eol

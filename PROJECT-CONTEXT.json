@@ -41,10 +41,10 @@
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
   "experimental_previews": {
     "data_companion": {
-      "version": "Recording readers including cross-person wrist forecasting",
+      "version": "Recording readers including first-use optical forecasts and next recorded spike prediction",
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
-      "buildId": "20d35c436c4dd12aafb7beb69f29c702771d6d6639132213f7c278350c6893bc",
+      "buildId": "7fc2776f09dcb8c3ec4a3c88ec3f948f31744385a1a3443f15ba2adde09c3f5e",
       "meaning": "Import and inspect recordings locally. Replay the fit made on first recordings (R1), or compare the fixed and personally calibrated models on an imported second recording (R2). Complete R2 trials are checked against their archived sample clock and the four input streams the study used. Group results are shown separately.",
       "hosting": "Static files in docs/ on the main branch, served by GitHub Pages.",
       "study": "benchmarks/scalp-eeg-palm-history",
@@ -1604,14 +1604,24 @@
   "next_neuron_prediction": {
     "preferred_label": "Next Neuron Prediction",
     "meaning": "Predict which of the recorded neurons fires the next spike using only earlier activity.",
-    "reader": "docs/next-neuron-prediction.md",
-    "status": "proposed project task",
+    "reader": "docs/next-neuron-prediction/index.html",
+    "status": "Implemented and evaluated on sorted spike histories from two rats in the same laboratory and task, with a frozen fit transferred between local unit sets.",
     "glossary_revision": 40,
     "glossary_sha256": "0a508c6a52f9e1dcf49f6bcfbbcf3a52136a24aee863eb28785f76fef0c5d03a",
-    "term_id": "next-neuron-prediction"
+    "term_id": "next-neuron-prediction",
+    "definition": "docs/next-neuron-prediction.md",
+    "model": "models/next-neuron-prediction",
+    "study": "docs/papers/next-neuron-prediction/index.html",
+    "offline": "docs/next-neuron-prediction-offline.zip",
+    "correction": "The selected source scorer includes exact closing boundaries. The refit coefficients and both held score files reproduced."
   },
   "unfamiliar_bodies": {
     "reader": "docs/body-adaptation.md",
-    "unit_of_evaluation": "Original animal, person, recording, species, phylum or acquisition domain as applicable. Report actual coverage and elapsed first-use history."
+    "unit_of_evaluation": "Group by biological individual, recording and acquisition site as applicable. For neural generalization, evaluate diverse vertebrate clades and classes, recording types, tasks, individuals and sites. The optical landmark study separately compares animal movement in the camera plane.",
+    "motion_reader": "docs/first-use-body/index.html",
+    "motion_model": "models/first-use-body",
+    "motion_study": "docs/papers/first-use-body/index.html",
+    "offline": "docs/first-use-body-offline.zip",
+    "optional_invertebrate_evidence": "Invertebrate recordings are optional. To test their value, train otherwise matched models with and without them, then compare their predictions on the same held-out vertebrates."
   }
 }

@@ -278,3 +278,11 @@ Peterson, Singh, Dichter, Scheid, Rao and Brunton released AJILE12 under CC BY 4
 ### Camera-based forecasts tested on another person
 
 Both people’s wrist, elbow and shoulder tracks came from the same AJILE12 release. The paper reports aggregate errors across reaches. The software distributes invented tracks and fits trained on those invented tracks. The project’s original code and text use CC0. Peterson, Singh, Dichter, Scheid, Rao and Brunton released AJILE12 under CC BY 4.0. [Versioned data](https://doi.org/10.48324/dandi.000055/0.220127.0436) · [Original methods](https://doi.org/10.1038/s41597-022-01280-y) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+### Optical landmarks across body plans
+
+The study uses SLEAP tracking examples, TRex locust tracking and the nematode recordings released by Javer and colleagues. The source kit identifies each recording, contributor and reuse licence, including the SLEAP licence and the CC BY sources. The reader opens with invented coordinates. [Recording credits](../models/first-use-body/SOURCES.md) · [Source selection and fetcher](../models/first-use-body/sources/)
+
+### Sorted spikes during track running
+
+Justin Shin and Shantanu Jadhav recorded hippocampal spikes for *Single Day W-Track Learning*. The benchmark derives millisecond bins and summary scores from sorted units in that release. The interactive example uses fictional spikes. [Dataset and rights notice](../models/next-neuron-prediction/NOTICE.md) · [Original release](https://doi.org/10.48324/dandi.000978/0.240511.0307)

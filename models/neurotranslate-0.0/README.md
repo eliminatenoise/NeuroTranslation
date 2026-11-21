@@ -1,5 +1,11 @@
 # NeuroTranslate 0.0 movement forecasts
 
+A camera can follow a paw, a wing or a line of points along a worm. Where will those points go next? Run `python predict.py first_use_body/example.json` with the saved mixed-species fit. One frame holds a visible point still. Five frames can forecast movement. [Use your own points](first_use_body/README.md)
+
+Which recorded neuron fires next? Run `python predict.py next_neuron_prediction/example.json` on a counted spike history. Each local unit gets a probability, including units that have not yet fired. The coefficients were fitted on one rat and replayed on a second. [Use your own spike counts](next_neuron_prediction/README.md)
+
+Install Python 3 and NumPy (`python -m pip install numpy` in your Python environment). Open the **Run forecasts** launcher for your operating system to run both invented examples, or pass it your own JSON file from a terminal. The existing **Open** launchers open the results page. [Linux](Run%20forecasts%20on%20Linux.sh) · [macOS](Run%20forecasts%20on%20macOS.command) · [Windows](Run%20forecasts%20on%20Windows.cmd)
+
 Which wrist should a model follow when the annotated reach switches sides? Give it fifteen earlier frames of both arms. It builds a frame from the shoulders, forecasts each wrist eight and fifteen frames ahead, and puts the points back into the original camera image. Run `python predict.py cross_person_wrist/example.json` on an invented reach. Compare the linear forecast with a Transformer that can see both arms, block the other arm, or replace it with an earlier one. [Use the cross-person wrist model](cross_person_wrist/README.md)
 
 Where will the two wrists go in the next half-second? Feed the model fifteen earlier camera frames and eight earlier voltage traces. Run `python predict.py bilateral_wrist/example.json` for both forecasts in image pixels. The public weights and histories come entirely from simulated movements. The same command accepts a locally fitted AJILE12 model and case. [Run the model, understand its limits and reproduce the example](bilateral_wrist/README.md)

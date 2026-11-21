@@ -207,3 +207,11 @@ Extract the [two-wrist reader](docs/human-wrist-offline.zip) or the [software an
 ## Forecast both wrists on a different person
 
 [Open the browser model](https://eliminatenoise.github.io/NeuroTranslation/cross-person-wrist/) or extract the [offline reader](docs/cross-person-wrist-offline.zip) and open its Windows, macOS or Linux launcher. Both run the model with invented positions and weights. For the Python version, extract [NeuroTranslate 0.0](models/neurotranslate-0.0.zip) and run `python predict.py cross_person_wrist/example.json` with NumPy installed.
+
+## Animal tracking and first-use forecasts
+
+[Open the browser model](https://eliminatenoise.github.io/NeuroTranslation/first-use-body/) or extract the [offline kit](docs/first-use-body-offline.zip). Open the launcher for Windows, macOS or Linux. The included paper, study code and fitted weights are available from the reader. The fictional example runs entirely in your browser.
+
+## Next Neuron Prediction
+
+[Open the browser model](https://eliminatenoise.github.io/NeuroTranslation/next-neuron-prediction/) or extract the [offline kit](docs/next-neuron-prediction-offline.zip). Open the launcher for Windows, macOS or Linux. The included paper, study code and fitted weights are available from the reader. The fictional example runs entirely in your browser.

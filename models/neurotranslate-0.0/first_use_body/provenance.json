@@ -1,0 +1,14 @@
+{
+  "research_package": "https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/first-use-body",
+  "source_sha256": {
+    "forecaster.py": "56b70007ccf0b73893e6a379ecd1c3fd23752c73e6fe2834f893d363e38a4c3b",
+    "first_use.py": "7ce17aa204aa01b01f6d50494b74a88f92211ef10e44e3b2dbd85148ca3e51da",
+    "mixed-weights.json": "78415cfdfa371f4571a810af992133058fb7d0ae62bbd5f25f887df9cfa7073c",
+    "protocol.json": "fcc5961dfea90f7eb49e68020146f77b328a764a225afd35b826a1871ce0f5e2",
+    "SOURCES.md": "503ff9f283f7a106365efe7d1d28f8c12e4f9b9fa80a2dbd1980c5a9f0ce28b0",
+    "LICENSE": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+    "CC-BY-4.0.txt": "d557539df68e771cc1eedcc91d13f70fca930e508d11eedcafa4b15db49e3744",
+    "SLEAP-LICENSE.txt": "484405fdfb2ec9c1f54b2bb58271bb25dbafaab272510b3c79e0b68d47e46477"
+  },
+  "package_changes": "The first_use.py import supports both this package and direct execution. The numerical functions and mixed weights are unchanged. The JSON adapter accepts null observations. The example is the source's fictional figure. Its input and output are serialized here."
+}

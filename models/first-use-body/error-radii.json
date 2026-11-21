@@ -1,0 +1,17 @@
+{
+  "mammal": {
+    "normalized_q90": {
+      "shape": 0.5424721568479893,
+      "no_shape": 0.5963526038052744
+    },
+    "train_recordings": 2
+  },
+  "mixed": {
+    "normalized_q90": {
+      "shape": 0.46036517826185896,
+      "no_shape": 0.4882795470301996
+    },
+    "train_recordings": 5
+  },
+  "method": "For each learned endpoint draw a circle centered at the prediction, radius equal to the training normalized quantile times the RMS distance of usable prefix-origin landmarks from their centroid. Requires positive observed radius. The radius describes recording-held-out training error and carries no distribution-free coverage claim."
+}

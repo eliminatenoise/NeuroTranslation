@@ -1,0 +1,3904 @@
+{
+  "methods": [
+    "shape",
+    "no_shape",
+    "persistence",
+    "last_velocity",
+    "half_velocity",
+    "rigid"
+  ],
+  "coverage_methods": [
+    "shape",
+    "no_shape"
+  ],
+  "groups": [
+    {
+      "group": "bees",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Arthropoda",
+      "species": "Bombus impatiens",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 1261,
+      "scored_forecasts": 95,
+      "available_target_points": 1763,
+      "mean_raw": [
+        52.89817077604895,
+        55.20257703750298,
+        67.0068557928395,
+        114.25284081212646,
+        74.16462032621133,
+        62.75070401465684
+      ],
+      "mean_normalized": [
+        0.4221442265813359,
+        0.4399963752519194,
+        0.5326448263208206,
+        0.9041877916111518,
+        0.5876354606585298,
+        0.5023898501256433
+      ],
+      "interval_points": 1261,
+      "trained_90pct_radius_coverage": [
+        0.7034099920697859,
+        0.7319587628865979
+      ]
+    },
+    {
+      "group": "bees",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Arthropoda",
+      "species": "Bombus impatiens",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 32,
+      "scored_forecasts": 2,
+      "available_target_points": 40,
+      "mean_raw": [
+        46.205512788649244,
+        47.35867712631027,
+        74.50580994588702,
+        128.66320604823738,
+        66.84053098220983,
+        66.63220527191802
+      ],
+      "mean_normalized": [
+        0.36138684875815924,
+        0.37036048526423715,
+        0.5917553105686614,
+        1.009585197395148,
+        0.5252930007452399,
+        0.5278435841117595
+      ],
+      "interval_points": 32,
+      "trained_90pct_radius_coverage": [
+        0.8125,
+        0.78125
+      ]
+    },
+    {
+      "group": "bees",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Arthropoda",
+      "species": "Bombus impatiens",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 1229,
+      "scored_forecasts": 93,
+      "available_target_points": 1723,
+      "mean_raw": [
+        53.07243038190475,
+        55.406812022985626,
+        66.81160230797578,
+        113.87763195325296,
+        74.3553207810592,
+        62.64963970201864
+      ],
+      "mean_normalized": [
+        0.42372619248071886,
+        0.44180951477967034,
+        0.5311057412956529,
+        0.9014435141619344,
+        0.5892586980199823,
+        0.5017271003391863
+      ],
+      "interval_points": 1229,
+      "trained_90pct_radius_coverage": [
+        0.7005695687550855,
+        0.7306753458096013
+      ]
+    },
+    {
+      "group": "bees",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Arthropoda",
+      "species": "Bombus impatiens",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 1598,
+      "scored_forecasts": 95,
+      "available_target_points": 1763,
+      "mean_raw": [
+        52.00000344023337,
+        53.59684740699366,
+        67.0394255665833,
+        113.61852977338248,
+        73.9370899244584,
+        58.34701881332873
+      ],
+      "mean_normalized": [
+        0.4147003521927844,
+        0.42659633635687644,
+        0.533104476996451,
+        0.9006773216096554,
+        0.5867998729347765,
+        0.4664518733840522
+      ],
+      "interval_points": 1598,
+      "trained_90pct_radius_coverage": [
+        0.7215269086357947,
+        0.753441802252816
+      ]
+    },
+    {
+      "group": "bees",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Arthropoda",
+      "species": "Bombus impatiens",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 37,
+      "scored_forecasts": 2,
+      "available_target_points": 40,
+      "mean_raw": [
+        50.53339806496676,
+        50.511434789352606,
+        75.00713838978393,
+        144.38505622452396,
+        71.26651664343491,
+        58.11886025823792
+      ],
+      "mean_normalized": [
+        0.39440198315017233,
+        0.3943232105759157,
+        0.5948527756733094,
+        1.1323801048679136,
+        0.5584955369701607,
+        0.45928117202635554
+      ],
+      "interval_points": 37,
+      "trained_90pct_radius_coverage": [
+        0.7837837837837838,
+        0.8108108108108109
+      ]
+    },
+    {
+      "group": "bees",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Arthropoda",
+      "species": "Bombus impatiens",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 1561,
+      "scored_forecasts": 93,
+      "available_target_points": 1723,
+      "mean_raw": [
+        52.034766027603546,
+        53.66998018524653,
+        66.85056882445748,
+        112.88927834564883,
+        74.00038986769854,
+        58.35242679958009
+      ],
+      "mean_normalized": [
+        0.4151814794538841,
+        0.4273612983388723,
+        0.5316408722232008,
+        0.8951853273876469,
+        0.5874707636655202,
+        0.46662183875896235
+      ],
+      "interval_points": 1561,
+      "trained_90pct_radius_coverage": [
+        0.7200512491992312,
+        0.75208199871877
+      ]
+    },
+    {
+      "group": "flies13",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Arthropoda",
+      "species": "Drosophila melanogaster",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 891,
+      "scored_forecasts": 96,
+      "available_target_points": 1202,
+      "mean_raw": [
+        16.572774196134162,
+        17.59173230425522,
+        25.616889711218473,
+        33.31112755175474,
+        24.33564724168201,
+        20.081942152290114
+      ],
+      "mean_normalized": [
+        0.4149692431448458,
+        0.43944513152523196,
+        0.6413228784452933,
+        0.8313520686622481,
+        0.6082359826844833,
+        0.5014247347133017
+      ],
+      "interval_points": 891,
+      "trained_90pct_radius_coverage": [
+        0.6947250280583613,
+        0.7272727272727273
+      ]
+    },
+    {
+      "group": "flies13",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Arthropoda",
+      "species": "Drosophila melanogaster",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 19,
+      "scored_forecasts": 2,
+      "available_target_points": 26,
+      "mean_raw": [
+        9.535324214798292,
+        10.261711997427124,
+        9.08006656167631,
+        12.9863942153728,
+        7.695540261699992,
+        9.175062694395779
+      ],
+      "mean_normalized": [
+        0.27298881156859073,
+        0.29524611504995013,
+        0.25888074064566985,
+        0.3752445568448169,
+        0.21486271267475324,
+        0.2615078879002643
+      ],
+      "interval_points": 19,
+      "trained_90pct_radius_coverage": [
+        0.9473684210526315,
+        0.9473684210526315
+      ]
+    },
+    {
+      "group": "flies13",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Arthropoda",
+      "species": "Drosophila melanogaster",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 872,
+      "scored_forecasts": 94,
+      "available_target_points": 1176,
+      "mean_raw": [
+        16.726113129213726,
+        17.751446049472804,
+        25.97721039910987,
+        33.75398297995572,
+        24.698218380007308,
+        20.319592048735057
+      ],
+      "mean_normalized": [
+        0.41806285346588806,
+        0.44258708257228513,
+        0.6496559066771659,
+        0.8412901910527655,
+        0.6168071892557961,
+        0.5066522806874391
+      ],
+      "interval_points": 872,
+      "trained_90pct_radius_coverage": [
+        0.6892201834862385,
+        0.7224770642201835
+      ]
+    },
+    {
+      "group": "flies13",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Arthropoda",
+      "species": "Drosophila melanogaster",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 1163,
+      "scored_forecasts": 96,
+      "available_target_points": 1202,
+      "mean_raw": [
+        16.12513982072692,
+        16.78431535730477,
+        25.553429548036593,
+        33.343938572296416,
+        24.269819198622564,
+        18.168289997996027
+      ],
+      "mean_normalized": [
+        0.4039206373847508,
+        0.42002848238944057,
+        0.6397488530436773,
+        0.8329372748127933,
+        0.6071340549961004,
+        0.4541050796886346
+      ],
+      "interval_points": 1163,
+      "trained_90pct_radius_coverage": [
+        0.7248495270851246,
+        0.766122098022356
+      ]
+    },
+    {
+      "group": "flies13",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Arthropoda",
+      "species": "Drosophila melanogaster",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 23,
+      "scored_forecasts": 2,
+      "available_target_points": 26,
+      "mean_raw": [
+        10.310445965633612,
+        10.894962787256803,
+        11.205739729137344,
+        14.826004354366654,
+        10.205320714789579,
+        9.797780713785285
+      ],
+      "mean_normalized": [
+        0.29795574439286876,
+        0.31593987391109296,
+        0.32540323928297427,
+        0.43375774000943385,
+        0.2935364874223052,
+        0.282340580826901
+      ],
+      "interval_points": 23,
+      "trained_90pct_radius_coverage": [
+        0.9130434782608695,
+        0.9130434782608695
+      ]
+    },
+    {
+      "group": "flies13",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Arthropoda",
+      "species": "Drosophila melanogaster",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 1140,
+      "scored_forecasts": 94,
+      "available_target_points": 1176,
+      "mean_raw": [
+        16.24245381955775,
+        16.903135628454862,
+        25.842900482979296,
+        33.71754601704413,
+        24.553576624173576,
+        18.33716869408098
+      ],
+      "mean_normalized": [
+        0.40605852557669236,
+        0.42212851571838966,
+        0.6460909136721826,
+        0.8409908970061946,
+        0.6134610234646944,
+        0.45757050378847663
+      ],
+      "interval_points": 1140,
+      "trained_90pct_radius_coverage": [
+        0.7210526315789474,
+        0.7631578947368421
+      ]
+    },
+    {
+      "group": "fly32",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Arthropoda",
+      "species": "Drosophila melanogaster",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 1227,
+      "scored_forecasts": 48,
+      "available_target_points": 1528,
+      "mean_raw": [
+        10.590480732467872,
+        11.129416394005855,
+        5.9962416139174355,
+        34.818808845736605,
+        18.648940708634548,
+        11.056027381931761
+      ],
+      "mean_normalized": [
+        0.24317080971869012,
+        0.2555346413095773,
+        0.13800293141937903,
+        0.7979084319112821,
+        0.42759989307062446,
+        0.2546690283338303
+      ],
+      "interval_points": 1227,
+      "trained_90pct_radius_coverage": [
+        0.8997555012224939,
+        0.908720456397718
+      ]
+    },
+    {
+      "group": "fly32",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Arthropoda",
+      "species": "Drosophila melanogaster",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 30,
+      "scored_forecasts": 1,
+      "available_target_points": 32,
+      "mean_raw": [
+        10.282456084470068,
+        11.055692334333962,
+        7.1024061527913,
+        29.165918096203526,
+        16.314130999535347,
+        11.91268213551322
+      ],
+      "mean_normalized": [
+        0.24345833408645104,
+        0.2617662955015686,
+        0.16816409968193372,
+        0.6905632052762168,
+        0.38627066554787065,
+        0.282057294812453
+      ],
+      "interval_points": 30,
+      "trained_90pct_radius_coverage": [
+        0.8666666666666667,
+        0.8666666666666667
+      ]
+    },
+    {
+      "group": "fly32",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Arthropoda",
+      "species": "Drosophila melanogaster",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 1197,
+      "scored_forecasts": 47,
+      "available_target_points": 1496,
+      "mean_raw": [
+        10.598200648457793,
+        11.131264114799638,
+        5.968518191890521,
+        34.96048530562465,
+        18.70745724269718,
+        11.034557337982353
+      ],
+      "mean_normalized": [
+        0.2431636035941849,
+        0.25537845950025423,
+        0.13724701241530496,
+        0.8005987884685518,
+        0.42863571330928996,
+        0.2539826056150678
+      ],
+      "interval_points": 1197,
+      "trained_90pct_radius_coverage": [
+        0.9005847953216374,
+        0.9097744360902256
+      ]
+    },
+    {
+      "group": "fly32",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Arthropoda",
+      "species": "Drosophila melanogaster",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 1525,
+      "scored_forecasts": 48,
+      "available_target_points": 1528,
+      "mean_raw": [
+        10.41410441036131,
+        10.88682203105992,
+        6.096532417332367,
+        36.14596809032111,
+        19.26494089926357,
+        9.764915884253197
+      ],
+      "mean_normalized": [
+        0.23929058122101904,
+        0.2501211597213002,
+        0.14035164635003844,
+        0.8282814725546694,
+        0.4417146345298786,
+        0.22462033038007767
+      ],
+      "interval_points": 1525,
+      "trained_90pct_radius_coverage": [
+        0.9036065573770492,
+        0.9029508196721312
+      ]
+    },
+    {
+      "group": "fly32",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Arthropoda",
+      "species": "Drosophila melanogaster",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 32,
+      "scored_forecasts": 1,
+      "available_target_points": 32,
+      "mean_raw": [
+        10.999784978248375,
+        11.494032916748607,
+        7.5481919250402925,
+        30.276938380998647,
+        16.498048449236347,
+        12.164174734494887
+      ],
+      "mean_normalized": [
+        0.2604425736530181,
+        0.2721449119605618,
+        0.1787189963505515,
+        0.7168688996988751,
+        0.3906252901186734,
+        0.28801190027637746
+      ],
+      "interval_points": 32,
+      "trained_90pct_radius_coverage": [
+        0.875,
+        0.875
+      ]
+    },
+    {
+      "group": "fly32",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Arthropoda",
+      "species": "Drosophila melanogaster",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 1493,
+      "scored_forecasts": 47,
+      "available_target_points": 1496,
+      "mean_raw": [
+        10.401551310446786,
+        10.873807464186484,
+        6.065418482806811,
+        36.271761091458636,
+        19.324244689217267,
+        9.713491715996177
+      ],
+      "mean_normalized": [
+        0.23883722304431174,
+        0.24964911680659407,
+        0.1395293052917555,
+        0.8306694178536549,
+        0.44280965061906713,
+        0.22326163631666063
+      ],
+      "interval_points": 1493,
+      "trained_90pct_radius_coverage": [
+        0.9042196918955124,
+        0.9035498995311454
+      ]
+    },
+    {
+      "group": "locust",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Arthropoda",
+      "species": "Schistocerca gregaria",
+      "units": "px",
+      "horizon_s": 0.2,
+      "matched_points": 1308,
+      "scored_forecasts": 240,
+      "available_target_points": 1680,
+      "mean_raw": [
+        9.400052237316276,
+        10.800168323325241,
+        13.945583811861871,
+        9.263807566835418,
+        10.099597863522927,
+        8.799866427775452
+      ],
+      "mean_normalized": [
+        0.16431241171534805,
+        0.18711697683445835,
+        0.2383795450783615,
+        0.16462678760549876,
+        0.17697898789650832,
+        0.15434176051431323
+      ],
+      "interval_points": 1308,
+      "trained_90pct_radius_coverage": [
+        0.9717125382262997,
+        0.9694189602446484
+      ]
+    },
+    {
+      "group": "locust",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Arthropoda",
+      "species": "Schistocerca gregaria",
+      "units": "px",
+      "horizon_s": 0.2,
+      "matched_points": 30,
+      "scored_forecasts": 5,
+      "available_target_points": 35,
+      "mean_raw": [
+        4.970223193953072,
+        6.2340916382955625,
+        9.108158663107524,
+        5.764853467518433,
+        6.174838439297048,
+        5.2709034420597485
+      ],
+      "mean_normalized": [
+        0.08091628311379133,
+        0.10104309578046576,
+        0.14648809798503865,
+        0.09389754185847217,
+        0.10071642985218293,
+        0.08464471732387062
+      ],
+      "interval_points": 30,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "locust",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Arthropoda",
+      "species": "Schistocerca gregaria",
+      "units": "px",
+      "horizon_s": 0.2,
+      "matched_points": 1278,
+      "scored_forecasts": 235,
+      "available_target_points": 1645,
+      "mean_raw": [
+        9.504038834578324,
+        10.907353222034857,
+        14.059138392818545,
+        9.345942639589335,
+        10.191728366439026,
+        8.882705934482393
+      ],
+      "mean_normalized": [
+        0.16627006731632357,
+        0.18913749047422346,
+        0.2405366213012095,
+        0.16628709853852755,
+        0.1787691887895676,
+        0.15597784134037998
+      ],
+      "interval_points": 1278,
+      "trained_90pct_radius_coverage": [
+        0.9710485133020345,
+        0.9687010954616588
+      ]
+    },
+    {
+      "group": "locust",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Arthropoda",
+      "species": "Schistocerca gregaria",
+      "units": "px",
+      "horizon_s": 0.2,
+      "matched_points": 1680,
+      "scored_forecasts": 240,
+      "available_target_points": 1680,
+      "mean_raw": [
+        9.223846747195697,
+        10.6912889997979,
+        13.729363410214301,
+        9.412632462349894,
+        10.030164759104032,
+        8.636913054778493
+      ],
+      "mean_normalized": [
+        0.1607948904915461,
+        0.18456333785465098,
+        0.2339465077490657,
+        0.16695304137707476,
+        0.17526309096488396,
+        0.15017396760694268
+      ],
+      "interval_points": 1680,
+      "trained_90pct_radius_coverage": [
+        0.9797619047619047,
+        0.9785714285714285
+      ]
+    },
+    {
+      "group": "locust",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Arthropoda",
+      "species": "Schistocerca gregaria",
+      "units": "px",
+      "horizon_s": 0.2,
+      "matched_points": 35,
+      "scored_forecasts": 5,
+      "available_target_points": 35,
+      "mean_raw": [
+        4.888386432107659,
+        6.048051266076895,
+        8.778882420907637,
+        6.033611045741101,
+        6.20196668400052,
+        5.063810662362952
+      ],
+      "mean_normalized": [
+        0.07975673522873272,
+        0.09828581784057544,
+        0.1415596151679199,
+        0.09840987758504559,
+        0.10126032255019254,
+        0.08156724084757033
+      ],
+      "interval_points": 35,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "locust",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Arthropoda",
+      "species": "Schistocerca gregaria",
+      "units": "px",
+      "horizon_s": 0.2,
+      "matched_points": 1645,
+      "scored_forecasts": 235,
+      "available_target_points": 1645,
+      "mean_raw": [
+        9.316090583686934,
+        10.790081292004729,
+        13.834692792965509,
+        9.484526535043697,
+        10.111615781978577,
+        8.712936509936272
+      ],
+      "mean_normalized": [
+        0.16251910656096766,
+        0.1863990297698441,
+        0.23591218631462205,
+        0.16841140656413922,
+        0.1768376179524306,
+        0.15163368519756765
+      ],
+      "interval_points": 1645,
+      "trained_90pct_radius_coverage": [
+        0.9793313069908814,
+        0.9781155015197568
+      ]
+    },
+    {
+      "group": "mice_hc",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Chordata",
+      "species": "Mus musculus",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 330,
+      "scored_forecasts": 94,
+      "available_target_points": 441,
+      "mean_raw": [
+        18.622703095601295,
+        18.633147814295693,
+        24.1460908858602,
+        23.740320306920037,
+        19.023698029309745,
+        21.23837019252362
+      ],
+      "mean_normalized": [
+        0.17407426424185637,
+        0.17306699804597414,
+        0.22534218150692875,
+        0.21695322680297438,
+        0.17632250981362038,
+        0.19360507999869248
+      ],
+      "interval_points": 327,
+      "trained_90pct_radius_coverage": [
+        0.9113149847094801,
+        0.9296636085626911
+      ]
+    },
+    {
+      "group": "mice_hc",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Chordata",
+      "species": "Mus musculus",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 10,
+      "scored_forecasts": 2,
+      "available_target_points": 10,
+      "mean_raw": [
+        34.592455481333516,
+        33.96514098863796,
+        49.10898955303457,
+        52.1041767271317,
+        32.36087431399979,
+        42.72388808655889
+      ],
+      "mean_normalized": [
+        0.2753145161646807,
+        0.27172803096822884,
+        0.38584650391873127,
+        0.39812853724747665,
+        0.2578912508223698,
+        0.33437665978606657
+      ],
+      "interval_points": 10,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "mice_hc",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Chordata",
+      "species": "Mus musculus",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 320,
+      "scored_forecasts": 92,
+      "available_target_points": 431,
+      "mean_raw": [
+        18.123648333547163,
+        18.154023027597496,
+        23.366000302511,
+        22.853949793788424,
+        18.606911270413185,
+        20.56694775833501
+      ],
+      "mean_normalized": [
+        0.17091050636926813,
+        0.16998384076715364,
+        0.22032642143155998,
+        0.21129149835158367,
+        0.17377348665709696,
+        0.18920596813033708
+      ],
+      "interval_points": 317,
+      "trained_90pct_radius_coverage": [
+        0.9085173501577287,
+        0.9274447949526814
+      ]
+    },
+    {
+      "group": "mice_hc",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Chordata",
+      "species": "Mus musculus",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 433,
+      "scored_forecasts": 95,
+      "available_target_points": 441,
+      "mean_raw": [
+        19.446134476739463,
+        19.949756008683444,
+        25.077293043695008,
+        26.99558638271459,
+        20.758598141503658,
+        21.35749563055355
+      ],
+      "mean_normalized": [
+        0.18064354299773525,
+        0.185429485958197,
+        0.23178339533385034,
+        0.24730982383052433,
+        0.19170273751944575,
+        0.19637860128330661
+      ],
+      "interval_points": 433,
+      "trained_90pct_radius_coverage": [
+        0.9445727482678984,
+        0.9468822170900693
+      ]
+    },
+    {
+      "group": "mice_hc",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Chordata",
+      "species": "Mus musculus",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 10,
+      "scored_forecasts": 2,
+      "available_target_points": 10,
+      "mean_raw": [
+        34.788791493707805,
+        34.25506171794366,
+        49.10898955303457,
+        52.63095957192129,
+        32.72703333726186,
+        42.72388808655889
+      ],
+      "mean_normalized": [
+        0.2775091500123963,
+        0.2743085086785112,
+        0.38584650391873127,
+        0.4039573931975676,
+        0.26146886189760216,
+        0.33437665978606657
+      ],
+      "interval_points": 10,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "mice_hc",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Chordata",
+      "species": "Mus musculus",
+      "units": "px",
+      "horizon_s": 0.12,
+      "matched_points": 423,
+      "scored_forecasts": 93,
+      "available_target_points": 431,
+      "mean_raw": [
+        19.08342390896243,
+        19.611569112483448,
+        24.509167830708247,
+        26.38954919148039,
+        20.475656411107494,
+        20.85237996965509
+      ],
+      "mean_normalized": [
+        0.17835357592883075,
+        0.18332832702863877,
+        0.22814124146659545,
+        0.24360657159962498,
+        0.19005342015825996,
+        0.19311623583406884
+      ],
+      "interval_points": 423,
+      "trained_90pct_radius_coverage": [
+        0.9432624113475178,
+        0.9456264775413712
+      ]
+    },
+    {
+      "group": "worm1005864",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1343,
+      "scored_forecasts": 40,
+      "available_target_points": 1960,
+      "mean_raw": [
+        8.503945805895352,
+        8.086909202203088,
+        8.088108316333482,
+        16.00552845470182,
+        10.699864299425734,
+        8.813961851321931
+      ],
+      "mean_normalized": [
+        0.02971171395753768,
+        0.02831841969151608,
+        0.028399069884826513,
+        0.05564344312279691,
+        0.03725389590599164,
+        0.03096561370943801
+      ],
+      "interval_points": 1343,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1005864",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 41,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        12.078788472384963,
+        15.691415469681024,
+        19.358774284832826,
+        12.402894557444819,
+        10.93519449415044,
+        15.80802317730665
+      ],
+      "mean_normalized": [
+        0.046253332911373804,
+        0.06008717391062414,
+        0.07413059958783402,
+        0.04749443309995221,
+        0.041874165819272245,
+        0.06053370007781146
+      ],
+      "interval_points": 41,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1005864",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1302,
+      "scored_forecasts": 39,
+      "available_target_points": 1911,
+      "mean_raw": [
+        8.391373955414496,
+        7.847443183027514,
+        7.733194871856928,
+        16.118975451466444,
+        10.692453747978952,
+        8.593718752731014
+      ],
+      "mean_normalized": [
+        0.02919081812258586,
+        0.02731802113315707,
+        0.02695898331199755,
+        0.055900055573593094,
+        0.03710840353545054,
+        0.030034514215503058
+      ],
+      "interval_points": 1302,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1005864",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1960,
+      "scored_forecasts": 40,
+      "available_target_points": 1960,
+      "mean_raw": [
+        8.249459835080062,
+        7.895974952053525,
+        7.90491177916569,
+        16.11576495093925,
+        10.72396107079777,
+        8.547151398450302
+      ],
+      "mean_normalized": [
+        0.02877158697984823,
+        0.027597492707254166,
+        0.02769771213307374,
+        0.055982819693160664,
+        0.03730102334012869,
+        0.02999205681374046
+      ],
+      "interval_points": 1960,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1005864",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 49,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        12.875081939463726,
+        16.357692494491708,
+        19.45056682924458,
+        12.19564016619158,
+        11.700885868692389,
+        15.727302702128348
+      ],
+      "mean_normalized": [
+        0.049302581344869534,
+        0.0626385500780456,
+        0.07448210099256228,
+        0.04670079337541389,
+        0.044806229588335265,
+        0.06022459697366135
+      ],
+      "interval_points": 49,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1005864",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1911,
+      "scored_forecasts": 39,
+      "available_target_points": 1911,
+      "mean_raw": [
+        8.130854140095867,
+        7.679007835580751,
+        7.608869341984181,
+        16.21628097106099,
+        10.6989117170056,
+        8.36304495476625
+      ],
+      "mean_normalized": [
+        0.02824515122689896,
+        0.02669900405672105,
+        0.02649811241872788,
+        0.056220820367974676,
+        0.03710858215427724,
+        0.029216863476306584
+      ],
+      "interval_points": 1911,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1011834",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1573,
+      "scored_forecasts": 43,
+      "available_target_points": 2107,
+      "mean_raw": [
+        14.721068714670126,
+        15.858069304727724,
+        20.080744755665943,
+        23.02463057950597,
+        17.183277862058787,
+        14.864701731144015
+      ],
+      "mean_normalized": [
+        0.05038212321357227,
+        0.05428119825736237,
+        0.06851123587294786,
+        0.07857490745381658,
+        0.05881208671778007,
+        0.050798313256641296
+      ],
+      "interval_points": 1573,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1011834",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 38,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        22.684273493727133,
+        25.250241407518757,
+        28.100909869400947,
+        21.917069205496134,
+        23.584205253688324,
+        20.076854748690966
+      ],
+      "mean_normalized": [
+        0.08309542191752647,
+        0.09249489360359617,
+        0.10293726014676936,
+        0.08028505357819567,
+        0.08639198811840731,
+        0.07354411048609087
+      ],
+      "interval_points": 38,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1011834",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1535,
+      "scored_forecasts": 42,
+      "available_target_points": 2058,
+      "mean_raw": [
+        14.523934003527348,
+        15.625559506743318,
+        19.882199951547424,
+        23.052049036973308,
+        17.02481842174483,
+        14.735671232989763
+      ],
+      "mean_normalized": [
+        0.04957228259419099,
+        0.05333519146703215,
+        0.06765899553261873,
+        0.07853257158884826,
+        0.05812932694369289,
+        0.050235225116759145
+      ],
+      "interval_points": 1535,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1011834",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2107,
+      "scored_forecasts": 43,
+      "available_target_points": 2107,
+      "mean_raw": [
+        14.906282923513805,
+        16.27378406168954,
+        20.460159740177502,
+        24.405475837540095,
+        17.765165340550706,
+        15.211334842945984
+      ],
+      "mean_normalized": [
+        0.05106296230186783,
+        0.055738855494485956,
+        0.0698663395362386,
+        0.08334422981098731,
+        0.0608211924523586,
+        0.05203645483617241
+      ],
+      "interval_points": 2107,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1011834",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 49,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        24.486107413067963,
+        26.466785038856553,
+        28.778605682714172,
+        23.725394339106003,
+        25.415580618621156,
+        20.841615087902188
+      ],
+      "mean_normalized": [
+        0.08969577214669915,
+        0.09695124995792459,
+        0.10541974738862775,
+        0.08690918196312863,
+        0.09310055247602443,
+        0.07634552632469462
+      ],
+      "interval_points": 49,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1011834",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2058,
+      "scored_forecasts": 42,
+      "available_target_points": 2058,
+      "mean_raw": [
+        14.678191864238705,
+        16.031093562233185,
+        20.262101503450438,
+        24.421668254169475,
+        17.583012595834745,
+        15.077280551399411
+      ],
+      "mean_normalized": [
+        0.0501431334960385,
+        0.054757608007261226,
+        0.06901982982546742,
+        0.08325934999784108,
+        0.06005263626131894,
+        0.05145766741977903
+      ],
+      "interval_points": 2058,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1013091",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1472,
+      "scored_forecasts": 42,
+      "available_target_points": 2058,
+      "mean_raw": [
+        17.353250359773494,
+        20.531351263301172,
+        28.4015579363925,
+        24.63649206439809,
+        19.107390910169148,
+        20.32655171384143
+      ],
+      "mean_normalized": [
+        0.056662822757194115,
+        0.06695199057878533,
+        0.09208088282243049,
+        0.08038678946257742,
+        0.06233923528205774,
+        0.0664146006592775
+      ],
+      "interval_points": 1472,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1013091",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 38,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        11.654735116827293,
+        19.795490565439632,
+        39.957111890634785,
+        21.369892240123082,
+        12.292920575716801,
+        21.569078181941514
+      ],
+      "mean_normalized": [
+        0.03787054824100923,
+        0.06432287588677535,
+        0.1298354461304667,
+        0.06943868967183002,
+        0.039944249012868985,
+        0.07008591852284649
+      ],
+      "interval_points": 38,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1013091",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1434,
+      "scored_forecasts": 41,
+      "available_target_points": 2009,
+      "mean_raw": [
+        17.504257039851563,
+        20.550851058641996,
+        28.095343814871434,
+        24.72305468177777,
+        19.287969621960777,
+        20.293625628912697
+      ],
+      "mean_normalized": [
+        0.05716080492707906,
+        0.06702166028471028,
+        0.0910804132229149,
+        0.08067690647237406,
+        0.062932686801046,
+        0.06631731329608669
+      ],
+      "interval_points": 1434,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1013091",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2058,
+      "scored_forecasts": 42,
+      "available_target_points": 2058,
+      "mean_raw": [
+        17.94187727682034,
+        21.41562275566474,
+        29.174471740362414,
+        26.433335620340852,
+        19.837479593087743,
+        21.916907828250725
+      ],
+      "mean_normalized": [
+        0.05879164629561256,
+        0.07015061197799852,
+        0.09513718420803179,
+        0.08641379354321882,
+        0.06487058699800587,
+        0.07206580407287483
+      ],
+      "interval_points": 2058,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1013091",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 49,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        11.44199785284198,
+        20.01573900695062,
+        40.421217442598895,
+        20.480526458275747,
+        12.712585379520085,
+        21.831763307345405
+      ],
+      "mean_normalized": [
+        0.03717928612842943,
+        0.06503854459529936,
+        0.1313434968513449,
+        0.06654881105959766,
+        0.04130789529381614,
+        0.07093947972471719
+      ],
+      "interval_points": 49,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1013091",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2009,
+      "scored_forecasts": 41,
+      "available_target_points": 2009,
+      "mean_raw": [
+        18.100410921307613,
+        21.449766261730932,
+        28.90016086957616,
+        26.578526087708287,
+        20.01125750073573,
+        21.918984523882564
+      ],
+      "mean_normalized": [
+        0.05931877703139752,
+        0.07027529654830826,
+        0.09425410341185342,
+        0.08689830531111202,
+        0.06544528679566904,
+        0.07209327539843965
+      ],
+      "interval_points": 2009,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1018179",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1512,
+      "scored_forecasts": 42,
+      "available_target_points": 2058,
+      "mean_raw": [
+        21.952802141426123,
+        24.884448482746564,
+        31.576498550837385,
+        24.79947254939858,
+        21.843813423448005,
+        23.54113474973217
+      ],
+      "mean_normalized": [
+        0.07454453562423957,
+        0.08487824339346235,
+        0.10757865553345602,
+        0.08413874322528703,
+        0.07368066426959113,
+        0.08090697647434286
+      ],
+      "interval_points": 1512,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1018179",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 27,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        22.512797302237274,
+        26.66609596292545,
+        34.695624737616996,
+        25.56213662496984,
+        23.219790654207188,
+        34.695624737616996
+      ],
+      "mean_normalized": [
+        0.09009156394310157,
+        0.10671220716396877,
+        0.13884472252074354,
+        0.10229438995756909,
+        0.09292080528176079,
+        0.13884472252074354
+      ],
+      "interval_points": 27,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1018179",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1485,
+      "scored_forecasts": 41,
+      "available_target_points": 2009,
+      "mean_raw": [
+        21.94262041122956,
+        24.852054892197856,
+        31.519787165623203,
+        24.78560592984274,
+        21.818795655616018,
+        23.33832584086153
+      ],
+      "mean_normalized": [
+        0.07426186238207845,
+        0.0844812622339986,
+        0.10701018158823263,
+        0.08380864055742734,
+        0.07333084352391532,
+        0.07985356290986285
+      ],
+      "interval_points": 1485,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1018179",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2058,
+      "scored_forecasts": 42,
+      "available_target_points": 2058,
+      "mean_raw": [
+        21.596900223499837,
+        24.67870699954191,
+        31.1716327193071,
+        25.441213166507787,
+        21.282762581553836,
+        23.463656832267347
+      ],
+      "mean_normalized": [
+        0.07337164532997399,
+        0.08428227069354854,
+        0.10632544255326883,
+        0.08656281474372848,
+        0.07180524755067594,
+        0.08067351540798672
+      ],
+      "interval_points": 2058,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1018179",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 49,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        22.398954717290035,
+        26.181075597597232,
+        33.431323129823355,
+        27.385616942543816,
+        23.558494844093794,
+        33.431323129823355
+      ],
+      "mean_normalized": [
+        0.0896359894365873,
+        0.10477125586102555,
+        0.13378524867514605,
+        0.10959158148042698,
+        0.09427622947766612,
+        0.13378524867514605
+      ],
+      "interval_points": 49,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1018179",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2009,
+      "scored_forecasts": 41,
+      "available_target_points": 2009,
+      "mean_raw": [
+        21.577337918773246,
+        24.64206386300398,
+        31.116518319050606,
+        25.393788684165443,
+        21.227256916613836,
+        23.220543020131828
+      ],
+      "mean_normalized": [
+        0.07297495401030049,
+        0.08378253934800033,
+        0.10565569118444254,
+        0.08600113750624803,
+        0.07125717482074935,
+        0.07937810727951941
+      ],
+      "interval_points": 2009,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1019605",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1767,
+      "scored_forecasts": 47,
+      "available_target_points": 2303,
+      "mean_raw": [
+        11.680570205693874,
+        12.737920685933268,
+        15.570670781378746,
+        19.23251905842317,
+        14.03782663660853,
+        12.499538448478404
+      ],
+      "mean_normalized": [
+        0.04893193244211259,
+        0.0533949903459664,
+        0.06545724513917967,
+        0.0810536381926199,
+        0.058660415784224984,
+        0.05257860235516518
+      ],
+      "interval_points": 1767,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1019605",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 37,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        5.432057324822221,
+        4.842700160576117,
+        4.02025996258429,
+        16.757064730986848,
+        9.953930614297262,
+        5.483213872737785
+      ],
+      "mean_normalized": [
+        0.021253785500757287,
+        0.018947832156895765,
+        0.015729904489703714,
+        0.06556467248370867,
+        0.03894633165945447,
+        0.021453943605015183
+      ],
+      "interval_points": 37,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1019605",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1730,
+      "scored_forecasts": 46,
+      "available_target_points": 2254,
+      "mean_raw": [
+        11.814208920487083,
+        12.906778003527611,
+        15.817702689063946,
+        19.285462301264296,
+        14.125170077548136,
+        12.64959856946245
+      ],
+      "mean_normalized": [
+        0.04952389281022249,
+        0.054131721474865585,
+        0.0665207778582725,
+        0.08138490508928445,
+        0.05908204648515939,
+        0.053244274247509424
+      ],
+      "interval_points": 1730,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1019605",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2303,
+      "scored_forecasts": 47,
+      "available_target_points": 2303,
+      "mean_raw": [
+        11.656489124025443,
+        12.869554065974718,
+        15.660004927556725,
+        20.718531318078902,
+        14.65172282981554,
+        12.422138693660655
+      ],
+      "mean_normalized": [
+        0.04877240783918607,
+        0.053893342145815516,
+        0.0657599099221187,
+        0.08705750485667284,
+        0.061132134433646526,
+        0.05214090553066103
+      ],
+      "interval_points": 2303,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1019605",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 49,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        4.749466793235661,
+        4.278718393693844,
+        3.7465842800310667,
+        16.715555315928885,
+        9.526494867603114,
+        5.21860909405399
+      ],
+      "mean_normalized": [
+        0.01858304182563169,
+        0.016741164078324593,
+        0.01465910499221316,
+        0.06540226031624638,
+        0.037273921533353536,
+        0.020418635457046617
+      ],
+      "interval_points": 49,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1019605",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2254,
+      "scored_forecasts": 46,
+      "available_target_points": 2254,
+      "mean_raw": [
+        11.80664178339044,
+        13.056311363198217,
+        15.91899233293772,
+        20.805552535516945,
+        14.763140828994075,
+        12.57873716321732
+      ],
+      "mean_normalized": [
+        0.04942869840469813,
+        0.05470099819076097,
+        0.0668707969858123,
+        0.08752827104233428,
+        0.0616507912358268,
+        0.05283052009747873
+      ],
+      "interval_points": 2254,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1024230",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1750,
+      "scored_forecasts": 47,
+      "available_target_points": 2303,
+      "mean_raw": [
+        9.810723710083357,
+        9.406238389103697,
+        10.261456284930452,
+        18.61434890013501,
+        12.356299293702119,
+        9.834740812234028
+      ],
+      "mean_normalized": [
+        0.042389991044491246,
+        0.040770952371753384,
+        0.0445451287881231,
+        0.0796851891855922,
+        0.0531468035202333,
+        0.0424646942488327
+      ],
+      "interval_points": 1750,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1024230",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 40,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        4.8104058051855585,
+        4.048860491528817,
+        3.3001804492143414,
+        13.664749472451234,
+        7.424683654064417,
+        8.668458327448347
+      ],
+      "mean_normalized": [
+        0.019466569509954307,
+        0.01638477654203088,
+        0.013355046270892536,
+        0.055297994850004625,
+        0.03004593090368,
+        0.03507919152964397
+      ],
+      "interval_points": 40,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1024230",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1710,
+      "scored_forecasts": 46,
+      "available_target_points": 2254,
+      "mean_raw": [
+        9.927690210782718,
+        9.531557170333517,
+        10.42429314658463,
+        18.73012900370656,
+        12.471658723869082,
+        9.862022273866442
+      ],
+      "mean_normalized": [
+        0.04292621143126404,
+        0.041341389233267356,
+        0.04527472136162557,
+        0.08025564987180475,
+        0.0536871748095094,
+        0.04263745454635758
+      ],
+      "interval_points": 1710,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1024230",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2303,
+      "scored_forecasts": 47,
+      "available_target_points": 2303,
+      "mean_raw": [
+        9.667691424542735,
+        9.182234971205917,
+        10.080166516131936,
+        19.963196458431593,
+        12.7961926205663,
+        9.647380725029585
+      ],
+      "mean_normalized": [
+        0.04174719082906111,
+        0.03978733600052014,
+        0.04372204085160093,
+        0.08532526524643819,
+        0.05495296482006446,
+        0.041621968637579505
+      ],
+      "interval_points": 2303,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1024230",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 49,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        4.802970314950232,
+        3.9797860726027254,
+        3.399284484511763,
+        15.317874028279881,
+        8.09652163609151,
+        8.787298216520476
+      ],
+      "mean_normalized": [
+        0.019436479847383527,
+        0.01610524877829523,
+        0.013756096758099776,
+        0.06198779720305358,
+        0.032764699611812595,
+        0.035560108328531105
+      ],
+      "interval_points": 49,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1024230",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2254,
+      "scored_forecasts": 46,
+      "available_target_points": 2254,
+      "mean_raw": [
+        9.773446231273008,
+        9.295331686392943,
+        10.22540308203672,
+        20.06418172865228,
+        12.89835938109836,
+        9.666078170866738
+      ],
+      "mean_normalized": [
+        0.04223220628518453,
+        0.040302163983611985,
+        0.04437347441885096,
+        0.08583260150825091,
+        0.055435318411548196,
+        0.04175374820951534
+      ],
+      "interval_points": 2254,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1025134",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1806,
+      "scored_forecasts": 47,
+      "available_target_points": 2303,
+      "mean_raw": [
+        7.841857569756454,
+        7.398268672309968,
+        7.891920434970013,
+        18.526025897933366,
+        11.26211158375073,
+        8.213421283764985
+      ],
+      "mean_normalized": [
+        0.03347178748553372,
+        0.0316724761605846,
+        0.03414664032489017,
+        0.07898021011778111,
+        0.04797026795678245,
+        0.03520481207642183
+      ],
+      "interval_points": 1806,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1025134",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 20,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        7.4219091135651825,
+        7.924412827155753,
+        10.219721595292594,
+        9.581157922559882,
+        7.938486619809962,
+        10.219721595292594
+      ],
+      "mean_normalized": [
+        0.03539754944984448,
+        0.03779415654626425,
+        0.048741246355581094,
+        0.04569572412719413,
+        0.037861279137473766,
+        0.048741246355581094
+      ],
+      "interval_points": 20,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1025134",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1786,
+      "scored_forecasts": 46,
+      "available_target_points": 2254,
+      "mean_raw": [
+        7.846560240038551,
+        7.39237680047519,
+        7.865853232726758,
+        18.626192392618396,
+        11.29933022836373,
+        8.190954314990881
+      ],
+      "mean_normalized": [
+        0.03345022240194681,
+        0.03160392430856131,
+        0.033983206886696544,
+        0.0793529367246186,
+        0.04808347051914873,
+        0.03505322826590493
+      ],
+      "interval_points": 1786,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1025134",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2303,
+      "scored_forecasts": 47,
+      "available_target_points": 2303,
+      "mean_raw": [
+        7.852748721717719,
+        7.44910053808049,
+        7.937300683837106,
+        20.236198406277417,
+        12.011948291421561,
+        8.369841002252096
+      ],
+      "mean_normalized": [
+        0.033563966184868795,
+        0.031982566037848,
+        0.03440600553744221,
+        0.08627505492106372,
+        0.05116677719931061,
+        0.03597325897176931
+      ],
+      "interval_points": 2303,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1025134",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 49,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        8.170556732611443,
+        8.599246741104999,
+        10.93372514079115,
+        10.417557707015785,
+        8.891671137145122,
+        10.93372514079115
+      ],
+      "mean_normalized": [
+        0.03896809857813592,
+        0.04101266360070806,
+        0.05214656639149418,
+        0.04968479247566054,
+        0.042407332662371997,
+        0.05214656639149418
+      ],
+      "interval_points": 49,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1025134",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2254,
+      "scored_forecasts": 46,
+      "available_target_points": 2254,
+      "mean_raw": [
+        7.845839851915682,
+        7.424097359753868,
+        7.872161021729408,
+        20.449647117130933,
+        12.079780403471048,
+        8.314104390544726
+      ],
+      "mean_normalized": [
+        0.03344648504588473,
+        0.03178625956909017,
+        0.03402034117104978,
+        0.08707049540900726,
+        0.05135719990663536,
+        0.03562166533221007
+      ],
+      "interval_points": 2254,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1032845",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1400,
+      "scored_forecasts": 42,
+      "available_target_points": 2058,
+      "mean_raw": [
+        16.931669881881195,
+        19.19490858321519,
+        25.726886687069456,
+        24.429305983867785,
+        18.807003042188878,
+        20.554244375402934
+      ],
+      "mean_normalized": [
+        0.06738185822110816,
+        0.07598348922495392,
+        0.10170513291874585,
+        0.09831131447909842,
+        0.07504188126059146,
+        0.0817684998097512
+      ],
+      "interval_points": 1400,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1032845",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 21,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        16.95675744349837,
+        13.643749848966777,
+        42.79860388904143,
+        35.098842280575234,
+        12.332278135588803,
+        42.79860388904143
+      ],
+      "mean_normalized": [
+        0.06501454975254531,
+        0.05231202111150359,
+        0.16409575776236943,
+        0.13457380842480285,
+        0.04728365744925398,
+        0.16409575776236943
+      ],
+      "interval_points": 21,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1032845",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1379,
+      "scored_forecasts": 41,
+      "available_target_points": 2009,
+      "mean_raw": [
+        16.93128783779565,
+        19.279443995411867,
+        25.466911298206938,
+        24.266825735694574,
+        18.905602913862992,
+        20.21549778382468
+      ],
+      "mean_normalized": [
+        0.06741790860387815,
+        0.07634396843480341,
+        0.10075502188051808,
+        0.09775909375911308,
+        0.0754645953287844,
+        0.08051478522164025
+      ],
+      "interval_points": 1379,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1032845",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2058,
+      "scored_forecasts": 42,
+      "available_target_points": 2058,
+      "mean_raw": [
+        17.2883412211688,
+        19.834335555352556,
+        26.370920028630522,
+        25.216028800663434,
+        19.268309741491688,
+        21.57743831216491
+      ],
+      "mean_normalized": [
+        0.06865705281115818,
+        0.07830087559490903,
+        0.10399295578979757,
+        0.1011933327564196,
+        0.07677328861808284,
+        0.08549512859757548
+      ],
+      "interval_points": 2058,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1032845",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 49,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        15.828012382385403,
+        16.748298611607453,
+        44.16838869423107,
+        37.4081656701755,
+        14.967387065647651,
+        44.16838869423107
+      ],
+      "mean_normalized": [
+        0.06068678530947919,
+        0.06421528980308334,
+        0.16934770187161463,
+        0.14342807321617965,
+        0.057387028993462486,
+        0.16934770187161463
+      ],
+      "interval_points": 49,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1032845",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 2009,
+      "scored_forecasts": 41,
+      "available_target_points": 2009,
+      "mean_raw": [
+        17.323958997724493,
+        19.909604749102435,
+        25.936835427030505,
+        24.918659608724113,
+        19.373210294561055,
+        21.02643952235842
+      ],
+      "mean_normalized": [
+        0.06885144957949182,
+        0.0786444264678804,
+        0.10239893759268008,
+        0.10016321713544984,
+        0.07724612421868332,
+        0.08344994388357452
+      ],
+      "interval_points": 2009,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1032915",
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1048,
+      "scored_forecasts": 34,
+      "available_target_points": 1666,
+      "mean_raw": [
+        23.131986281461593,
+        26.467436462099098,
+        34.11082018271052,
+        27.449401701821085,
+        24.226458906192736,
+        27.08192239021592
+      ],
+      "mean_normalized": [
+        0.07181427012002023,
+        0.08221040097400803,
+        0.10600907945562245,
+        0.0849727538073747,
+        0.0751171007444721,
+        0.08398007986553571
+      ],
+      "interval_points": 1048,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1032915",
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 24,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        26.573680635350467,
+        29.247071456918295,
+        33.0660749692867,
+        29.563429074468562,
+        30.412682222750348,
+        33.0660749692867
+      ],
+      "mean_normalized": [
+        0.08207661285870464,
+        0.09033376272412237,
+        0.10212930121545644,
+        0.09131087846720969,
+        0.0939339182646337,
+        0.10212930121545644
+      ],
+      "interval_points": 24,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1032915",
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1024,
+      "scored_forecasts": 33,
+      "available_target_points": 1617,
+      "mean_raw": [
+        23.051321570042326,
+        26.40228876690803,
+        34.135306398650144,
+        27.399854185274663,
+        24.08146929721092,
+        26.94166881414395
+      ],
+      "mean_normalized": [
+        0.07157374646208231,
+        0.08202000968298971,
+        0.10610001175812633,
+        0.08482420401065982,
+        0.07467608158384331,
+        0.08355470749014694
+      ],
+      "interval_points": 1024,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1032915",
+      "condition": "observed",
+      "phase": "all",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1666,
+      "scored_forecasts": 34,
+      "available_target_points": 1666,
+      "mean_raw": [
+        23.666262346605514,
+        27.21971012375735,
+        34.045664655531496,
+        28.376754454555492,
+        24.975104857526258,
+        27.662865625974888
+      ],
+      "mean_normalized": [
+        0.07329861577126746,
+        0.08432049078592593,
+        0.10550605649071364,
+        0.0876935623384818,
+        0.07724648480251611,
+        0.08555134432848718
+      ],
+      "interval_points": 1666,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1032915",
+      "condition": "observed",
+      "phase": "first",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 49,
+      "scored_forecasts": 1,
+      "available_target_points": 49,
+      "mean_raw": [
+        26.209707673436018,
+        29.239897236130215,
+        33.18047910982588,
+        29.06790535623653,
+        30.096299223763484,
+        33.18047910982588
+      ],
+      "mean_normalized": [
+        0.08095243031523158,
+        0.09031160411725614,
+        0.10248265476407907,
+        0.08978038260020006,
+        0.09295672412734966,
+        0.10248265476407907
+      ],
+      "interval_points": 49,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "group": "worm1032915",
+      "condition": "observed",
+      "phase": "later",
+      "taxon": "Nematoda",
+      "species": "Caenorhabditis elegans",
+      "units": "um",
+      "horizon_s": 0.12,
+      "matched_points": 1617,
+      "scored_forecasts": 33,
+      "available_target_points": 1617,
+      "mean_raw": [
+        23.58918824579246,
+        27.158492332473326,
+        34.071882399340744,
+        28.355810487837882,
+        24.81991714945847,
+        27.495665217373347
+      ],
+      "mean_normalized": [
+        0.07306668199720794,
+        0.08413894189709772,
+        0.10559767472485408,
+        0.087630325360854,
+        0.07677041694418782,
+        0.08503827431528745
+      ],
+      "interval_points": 1617,
+      "trained_90pct_radius_coverage": [
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "horizon_s": 0.12,
+      "condition": "observed",
+      "phase": "all",
+      "n_groups": 13,
+      "n_points": 23535,
+      "group_mean": [
+        0.1320455529337795,
+        0.1390945619895477,
+        0.1690309245189464,
+        0.2745426362090626,
+        0.18334007693807622,
+        0.14439279399483987
+      ],
+      "pooled": [
+        0.10880551685556085,
+        0.11524534201245314,
+        0.13799013710496982,
+        0.22815226740038988,
+        0.15104471955757368,
+        0.11901911322046992
+      ],
+      "worst_group_each_method": [
+        0.4147003521927844,
+        0.42659633635687644,
+        0.6397488530436773,
+        0.9006773216096554,
+        0.6071340549961004,
+        0.4664518733840522
+      ],
+      "by_phylum": {
+        "Arthropoda": [
+          0.35263719026618473,
+          0.36558199282253906,
+          0.4377349921300557,
+          0.853965356325706,
+          0.5452161874869185,
+          0.3817257611509215
+        ],
+        "Chordata": [
+          0.18064354299773525,
+          0.185429485958197,
+          0.23178339533385034,
+          0.24730982383052433,
+          0.19170273751944575,
+          0.19637860128330661
+        ],
+        "Nematoda": [
+          0.053115230482538245,
+          0.05845042682647842,
+          0.07249040522469845,
+          0.0844275975455746,
+          0.061785522246087736,
+          0.05950560413298299
+        ]
+      },
+      "phylum_mean": [
+        0.1954653212488194,
+        0.20315396853573817,
+        0.2473362642295348,
+        0.395234259233935,
+        0.2662348157508173,
+        0.21253665552240372
+      ]
+    },
+    {
+      "horizon_s": 0.12,
+      "condition": "observed",
+      "phase": "first",
+      "n_groups": 13,
+      "n_points": 543,
+      "group_mean": [
+        0.13190383970314637,
+        0.13957708276892647,
+        0.1755572487623653,
+        0.26207675472797676,
+        0.15695436847484107,
+        0.16040467934051425
+      ],
+      "pooled": [
+        0.1036697829397842,
+        0.11167549011678685,
+        0.14391346840036784,
+        0.2101943289750919,
+        0.1267184568247292,
+        0.1314708278779685
+      ],
+      "worst_group_each_method": [
+        0.39440198315017233,
+        0.3943232105759157,
+        0.5948527756733094,
+        1.1323801048679136,
+        0.5584955369701607,
+        0.45928117202635554
+      ],
+      "by_phylum": {
+        "Arthropoda": [
+          0.31760010039868636,
+          0.3274693321491901,
+          0.3663250037689451,
+          0.7610022481920743,
+          0.41421910483704644,
+          0.343211217709878
+        ],
+        "Chordata": [
+          0.2775091500123963,
+          0.2743085086785112,
+          0.38584650391873127,
+          0.4039573931975676,
+          0.26146886189760216,
+          0.33437665978606657
+        ],
+        "Nematoda": [
+          0.053826718325827486,
+          0.06197617454110693,
+          0.08860252429835352,
+          0.08000374152110082,
+          0.05958673486268803,
+          0.08013894650122053
+        ]
+      },
+      "phylum_mean": [
+        0.21631198957897005,
+        0.2212513384562694,
+        0.28025801066201,
+        0.4149877943035809,
+        0.2450915671991122,
+        0.25257560799905504
+      ]
+    },
+    {
+      "horizon_s": 0.12,
+      "condition": "observed",
+      "phase": "later",
+      "n_groups": 13,
+      "n_points": 22992,
+      "group_mean": [
+        0.13201064162160164,
+        0.13904265353547898,
+        0.16877625341442098,
+        0.2746966721143226,
+        0.18385526066587987,
+        0.14395463693155996
+      ],
+      "pooled": [
+        0.10892680702241311,
+        0.11532965088420619,
+        0.13785024632150597,
+        0.22857637842008957,
+        0.15161923072075797,
+        0.11872504219319863
+      ],
+      "worst_group_each_method": [
+        0.4151814794538841,
+        0.4273612983388723,
+        0.6460909136721826,
+        0.8951853273876469,
+        0.6134610234646944,
+        0.46662183875896235
+      ],
+      "by_phylum": {
+        "Arthropoda": [
+          0.35335907602496275,
+          0.3663796436212854,
+          0.439087030395713,
+          0.8556152140824987,
+          0.5479138125830939,
+          0.3824846596213665
+        ],
+        "Chordata": [
+          0.17835357592883075,
+          0.18332832702863877,
+          0.22814124146659545,
+          0.24360657159962498,
+          0.19005342015825996,
+          0.19311623583406884
+        ],
+        "Nematoda": [
+          0.05307861523078918,
+          0.05834302645208134,
+          0.07207655130374872,
+          0.08451161373767468,
+          0.06181372563876623,
+          0.05898222949023454
+        ]
+      },
+      "phylum_mean": [
+        0.19493042239486089,
+        0.2026836657006685,
+        0.24643494105535238,
+        0.3945777998065995,
+        0.2665936527933734,
+        0.2115277083152233
+      ]
+    },
+    {
+      "horizon_s": 0.12,
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "n_groups": 13,
+      "n_points": 17380,
+      "group_mean": [
+        0.13304996758096446,
+        0.14050040824085352,
+        0.16813429911020336,
+        0.26708834677189236,
+        0.18013970751299865,
+        0.15209006812514414
+      ],
+      "pooled": [
+        0.11299428621722722,
+        0.11983724648703692,
+        0.14037151325209907,
+        0.23172696904941847,
+        0.15411884389782363,
+        0.12839610700270926
+      ],
+      "worst_group_each_method": [
+        0.4221442265813359,
+        0.4399963752519194,
+        0.6413228784452933,
+        0.9041877916111518,
+        0.6082359826844833,
+        0.5023898501256433
+      ],
+      "by_phylum": {
+        "Arthropoda": [
+          0.3600947598149573,
+          0.3783253826955762,
+          0.43732354539516427,
+          0.8444827640615605,
+          0.5411571121378792,
+          0.41949453772425843
+        ],
+        "Chordata": [
+          0.17407426424185637,
+          0.17306699804597414,
+          0.22534218150692875,
+          0.21695322680297438,
+          0.17632250981362038,
+          0.19360507999869248
+        ],
+        "Nematoda": [
+          0.052810114985089945,
+          0.057606906777599165,
+          0.07204811897113579,
+          0.08019410989410493,
+          0.060224705715747215,
+          0.05834246582837848
+        ]
+      },
+      "phylum_mean": [
+        0.19565971301396787,
+        0.20299976250638319,
+        0.2449046152910763,
+        0.38054336691954666,
+        0.2592347758890823,
+        0.2238140278504431
+      ]
+    },
+    {
+      "horizon_s": 0.12,
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "n_groups": 13,
+      "n_points": 377,
+      "group_mean": [
+        0.12566680343559222,
+        0.13373004818690507,
+        0.16880353379190868,
+        0.24349824164800962,
+        0.14565538118746452,
+        0.16309948605277702
+      ],
+      "pooled": [
+        0.10965988220820831,
+        0.11860548165693112,
+        0.14954897707176001,
+        0.2257361145238358,
+        0.13456956903606376,
+        0.14435719618400317
+      ],
+      "worst_group_each_method": [
+        0.36138684875815924,
+        0.37036048526423715,
+        0.5917553105686614,
+        1.009585197395148,
+        0.5252930007452399,
+        0.5278435841117595
+      ],
+      "by_phylum": {
+        "Arthropoda": [
+          0.292611331471067,
+          0.309124298605252,
+          0.339600050298755,
+          0.6917976531720605,
+          0.3754754596559546,
+          0.3571362556081589
+        ],
+        "Chordata": [
+          0.2753145161646807,
+          0.27172803096822884,
+          0.38584650391873127,
+          0.39812853724747665,
+          0.2578912508223698,
+          0.33437665978606657
+        ],
+        "Nematoda": [
+          0.0533911037872019,
+          0.059932188849531255,
+          0.08775547605331296,
+          0.07688396051782966,
+          0.056578036182978374,
+          0.07938976578617317
+        ]
+      },
+      "phylum_mean": [
+        0.20710565047431653,
+        0.21359483947433736,
+        0.2710673434235997,
+        0.3889367169791223,
+        0.22998158222043427,
+        0.2569675603934662
+      ]
+    },
+    {
+      "horizon_s": 0.12,
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "n_groups": 13,
+      "n_points": 17003,
+      "group_mean": [
+        0.13314930043426063,
+        0.14056584968251915,
+        0.16797518424774513,
+        0.2674706888986583,
+        0.18084382436713195,
+        0.1517702323139847
+      ],
+      "pooled": [
+        0.11306821848279214,
+        0.11986455786390865,
+        0.1401680254052478,
+        0.23185980161756195,
+        0.15455230132432976,
+        0.12804220883054265
+      ],
+      "worst_group_each_method": [
+        0.42372619248071886,
+        0.44258708257228513,
+        0.6496559066771659,
+        0.9014435141619344,
+        0.6168071892557961,
+        0.5066522806874391
+      ],
+      "by_phylum": {
+        "Arthropoda": [
+          0.3616508831802639,
+          0.37992501895073655,
+          0.4393362201293746,
+          0.8477774978944171,
+          0.5449005335283561,
+          0.4207873288805644
+        ],
+        "Chordata": [
+          0.17091050636926813,
+          0.16998384076715364,
+          0.22032642143155998,
+          0.21129149835158367,
+          0.17377348665709696,
+          0.18920596813033708
+        ],
+        "Nematoda": [
+          0.05278641663725868,
+          0.05751079425037616,
+          0.07170470148900031,
+          0.08027721818308038,
+          0.060277181058950004,
+          0.05793834058997454
+        ]
+      },
+      "phylum_mean": [
+        0.1951159353955969,
+        0.2024732179894221,
+        0.2437891143499783,
+        0.3797820714763604,
+        0.25965040041480103,
+        0.22264387920029197
+      ]
+    },
+    {
+      "horizon_s": 0.2,
+      "condition": "observed",
+      "phase": "all",
+      "n_groups": 1,
+      "n_points": 1680,
+      "group_mean": [
+        0.1607948904915461,
+        0.18456333785465098,
+        0.2339465077490657,
+        0.16695304137707476,
+        0.17526309096488396,
+        0.15017396760694268
+      ],
+      "pooled": [
+        0.1607948904915461,
+        0.18456333785465098,
+        0.2339465077490657,
+        0.16695304137707476,
+        0.17526309096488396,
+        0.15017396760694268
+      ],
+      "worst_group_each_method": [
+        0.1607948904915461,
+        0.18456333785465098,
+        0.2339465077490657,
+        0.16695304137707476,
+        0.17526309096488396,
+        0.15017396760694268
+      ],
+      "by_phylum": {
+        "Arthropoda": [
+          0.1607948904915461,
+          0.18456333785465098,
+          0.2339465077490657,
+          0.16695304137707476,
+          0.17526309096488396,
+          0.15017396760694268
+        ]
+      },
+      "phylum_mean": [
+        0.1607948904915461,
+        0.18456333785465098,
+        0.2339465077490657,
+        0.16695304137707476,
+        0.17526309096488396,
+        0.15017396760694268
+      ]
+    },
+    {
+      "horizon_s": 0.2,
+      "condition": "observed",
+      "phase": "first",
+      "n_groups": 1,
+      "n_points": 35,
+      "group_mean": [
+        0.07975673522873272,
+        0.09828581784057544,
+        0.1415596151679199,
+        0.09840987758504559,
+        0.10126032255019254,
+        0.08156724084757033
+      ],
+      "pooled": [
+        0.07975673522873272,
+        0.09828581784057544,
+        0.1415596151679199,
+        0.09840987758504559,
+        0.10126032255019254,
+        0.08156724084757033
+      ],
+      "worst_group_each_method": [
+        0.07975673522873272,
+        0.09828581784057544,
+        0.1415596151679199,
+        0.09840987758504559,
+        0.10126032255019254,
+        0.08156724084757033
+      ],
+      "by_phylum": {
+        "Arthropoda": [
+          0.07975673522873272,
+          0.09828581784057544,
+          0.1415596151679199,
+          0.09840987758504559,
+          0.10126032255019254,
+          0.08156724084757033
+        ]
+      },
+      "phylum_mean": [
+        0.07975673522873272,
+        0.09828581784057544,
+        0.1415596151679199,
+        0.09840987758504559,
+        0.10126032255019254,
+        0.08156724084757033
+      ]
+    },
+    {
+      "horizon_s": 0.2,
+      "condition": "observed",
+      "phase": "later",
+      "n_groups": 1,
+      "n_points": 1645,
+      "group_mean": [
+        0.16251910656096766,
+        0.1863990297698441,
+        0.23591218631462205,
+        0.16841140656413922,
+        0.1768376179524306,
+        0.15163368519756765
+      ],
+      "pooled": [
+        0.16251910656096766,
+        0.1863990297698441,
+        0.23591218631462205,
+        0.16841140656413922,
+        0.1768376179524306,
+        0.15163368519756765
+      ],
+      "worst_group_each_method": [
+        0.16251910656096766,
+        0.1863990297698441,
+        0.23591218631462205,
+        0.16841140656413922,
+        0.1768376179524306,
+        0.15163368519756765
+      ],
+      "by_phylum": {
+        "Arthropoda": [
+          0.16251910656096766,
+          0.1863990297698441,
+          0.23591218631462205,
+          0.16841140656413922,
+          0.1768376179524306,
+          0.15163368519756765
+        ]
+      },
+      "phylum_mean": [
+        0.16251910656096766,
+        0.1863990297698441,
+        0.23591218631462205,
+        0.16841140656413922,
+        0.1768376179524306,
+        0.15163368519756765
+      ]
+    },
+    {
+      "horizon_s": 0.2,
+      "condition": "20pct_hidden",
+      "phase": "all",
+      "n_groups": 1,
+      "n_points": 1308,
+      "group_mean": [
+        0.16431241171534805,
+        0.18711697683445835,
+        0.2383795450783615,
+        0.16462678760549876,
+        0.17697898789650832,
+        0.15434176051431323
+      ],
+      "pooled": [
+        0.16431241171534805,
+        0.18711697683445835,
+        0.2383795450783615,
+        0.16462678760549876,
+        0.17697898789650832,
+        0.15434176051431323
+      ],
+      "worst_group_each_method": [
+        0.16431241171534805,
+        0.18711697683445835,
+        0.2383795450783615,
+        0.16462678760549876,
+        0.17697898789650832,
+        0.15434176051431323
+      ],
+      "by_phylum": {
+        "Arthropoda": [
+          0.16431241171534805,
+          0.18711697683445835,
+          0.2383795450783615,
+          0.16462678760549876,
+          0.17697898789650832,
+          0.15434176051431323
+        ]
+      },
+      "phylum_mean": [
+        0.16431241171534805,
+        0.18711697683445835,
+        0.2383795450783615,
+        0.16462678760549876,
+        0.17697898789650832,
+        0.15434176051431323
+      ]
+    },
+    {
+      "horizon_s": 0.2,
+      "condition": "20pct_hidden",
+      "phase": "first",
+      "n_groups": 1,
+      "n_points": 30,
+      "group_mean": [
+        0.08091628311379133,
+        0.10104309578046576,
+        0.14648809798503865,
+        0.09389754185847217,
+        0.10071642985218293,
+        0.08464471732387062
+      ],
+      "pooled": [
+        0.08091628311379133,
+        0.10104309578046576,
+        0.14648809798503865,
+        0.09389754185847217,
+        0.10071642985218293,
+        0.08464471732387062
+      ],
+      "worst_group_each_method": [
+        0.08091628311379133,
+        0.10104309578046576,
+        0.14648809798503865,
+        0.09389754185847217,
+        0.10071642985218293,
+        0.08464471732387062
+      ],
+      "by_phylum": {
+        "Arthropoda": [
+          0.08091628311379133,
+          0.10104309578046576,
+          0.14648809798503865,
+          0.09389754185847217,
+          0.10071642985218293,
+          0.08464471732387062
+        ]
+      },
+      "phylum_mean": [
+        0.08091628311379133,
+        0.10104309578046576,
+        0.14648809798503865,
+        0.09389754185847217,
+        0.10071642985218293,
+        0.08464471732387062
+      ]
+    },
+    {
+      "horizon_s": 0.2,
+      "condition": "20pct_hidden",
+      "phase": "later",
+      "n_groups": 1,
+      "n_points": 1278,
+      "group_mean": [
+        0.16627006731632357,
+        0.18913749047422346,
+        0.2405366213012095,
+        0.16628709853852755,
+        0.1787691887895676,
+        0.15597784134037998
+      ],
+      "pooled": [
+        0.16627006731632357,
+        0.18913749047422346,
+        0.2405366213012095,
+        0.16628709853852755,
+        0.1787691887895676,
+        0.15597784134037998
+      ],
+      "worst_group_each_method": [
+        0.16627006731632357,
+        0.18913749047422346,
+        0.2405366213012095,
+        0.16628709853852755,
+        0.1787691887895676,
+        0.15597784134037998
+      ],
+      "by_phylum": {
+        "Arthropoda": [
+          0.16627006731632357,
+          0.18913749047422346,
+          0.2405366213012095,
+          0.16628709853852755,
+          0.1787691887895676,
+          0.15597784134037998
+        ]
+      },
+      "phylum_mean": [
+        0.16627006731632357,
+        0.18913749047422346,
+        0.2405366213012095,
+        0.16628709853852755,
+        0.1787691887895676,
+        0.15597784134037998
+      ]
+    }
+  ],
+  "timing_by_group": {
+    "bees": [
+      {
+        "track": "bees_t0",
+        "K": 21,
+        "origins": 48,
+        "first_wait_s": [
+          0.04
+        ],
+        "first_span_s": [
+          0.04
+        ],
+        "horizon_range_s": [
+          0.11999999999999744,
+          0.120000000000001
+        ],
+        "history_range_s": [
+          0.03999999999999915,
+          0.0400000000000027
+        ]
+      },
+      {
+        "track": "bees_t1",
+        "K": 21,
+        "origins": 48,
+        "first_wait_s": [
+          0.04
+        ],
+        "first_span_s": [
+          0.04
+        ],
+        "horizon_range_s": [
+          0.11999999999999922,
+          0.120000000000001
+        ],
+        "history_range_s": [
+          0.03999999999999915,
+          0.040000000000000924
+        ]
+      }
+    ],
+    "flies13": [
+      {
+        "track": "flies13_t0",
+        "K": 13,
+        "origins": 48,
+        "first_wait_s": [
+          0.02666666666666667
+        ],
+        "first_span_s": [
+          0.02666666666666667
+        ],
+        "horizon_range_s": [
+          0.08666666666666778,
+          0.120000000000001
+        ],
+        "history_range_s": [
+          0.026666666666665506,
+          0.026666666666667282
+        ]
+      },
+      {
+        "track": "flies13_t1",
+        "K": 13,
+        "origins": 48,
+        "first_wait_s": [
+          0.02666666666666667
+        ],
+        "first_span_s": [
+          0.02666666666666667
+        ],
+        "horizon_range_s": [
+          0.08666666666666778,
+          0.120000000000001
+        ],
+        "history_range_s": [
+          0.026666666666665506,
+          0.026666666666667282
+        ]
+      }
+    ],
+    "fly32": [
+      {
+        "track": "fly32_t0",
+        "K": 32,
+        "origins": 48,
+        "first_wait_s": [
+          0.04
+        ],
+        "first_span_s": [
+          0.04
+        ],
+        "horizon_range_s": [
+          0.11999999999999744,
+          0.120000000000001
+        ],
+        "history_range_s": [
+          0.03999999999999915,
+          0.0400000000000027
+        ]
+      }
+    ],
+    "locust": [
+      {
+        "track": "locust_t0",
+        "K": 7,
+        "origins": 48,
+        "first_wait_s": [
+          0.8
+        ],
+        "first_span_s": [
+          0.8
+        ],
+        "horizon_range_s": [
+          0.1999999999999318,
+          0.20000000000004547
+        ],
+        "history_range_s": [
+          0.7999999999999545,
+          0.8000000000000682
+        ]
+      },
+      {
+        "track": "locust_t1",
+        "K": 7,
+        "origins": 48,
+        "first_wait_s": [
+          0.8
+        ],
+        "first_span_s": [
+          0.8
+        ],
+        "horizon_range_s": [
+          0.1999999999999318,
+          0.20000000000004547
+        ],
+        "history_range_s": [
+          0.7999999999999545,
+          0.8000000000000682
+        ]
+      },
+      {
+        "track": "locust_t2",
+        "K": 7,
+        "origins": 48,
+        "first_wait_s": [
+          0.8
+        ],
+        "first_span_s": [
+          0.8
+        ],
+        "horizon_range_s": [
+          0.1999999999999318,
+          0.20000000000001705
+        ],
+        "history_range_s": [
+          0.799999999999983,
+          0.8000000000000682
+        ]
+      },
+      {
+        "track": "locust_t3",
+        "K": 7,
+        "origins": 48,
+        "first_wait_s": [
+          0.8
+        ],
+        "first_span_s": [
+          0.8
+        ],
+        "horizon_range_s": [
+          0.1999999999999318,
+          0.20000000000004547
+        ],
+        "history_range_s": [
+          0.7999999999999545,
+          0.8000000000000682
+        ]
+      },
+      {
+        "track": "locust_t4",
+        "K": 7,
+        "origins": 48,
+        "first_wait_s": [
+          0.8
+        ],
+        "first_span_s": [
+          0.8
+        ],
+        "horizon_range_s": [
+          0.1999999999999318,
+          0.20000000000004547
+        ],
+        "history_range_s": [
+          0.7999999999999545,
+          0.8000000000000682
+        ]
+      }
+    ],
+    "mice_hc": [
+      {
+        "track": "mice_hc_t0",
+        "K": 5,
+        "origins": 48,
+        "first_wait_s": [
+          0.1
+        ],
+        "first_span_s": [
+          0.1
+        ],
+        "horizon_range_s": [
+          0.125,
+          0.125
+        ],
+        "history_range_s": [
+          0.09999999999999432,
+          0.10000000000000142
+        ]
+      },
+      {
+        "track": "mice_hc_t1",
+        "K": 5,
+        "origins": 48,
+        "first_wait_s": [
+          0.1
+        ],
+        "first_span_s": [
+          0.1
+        ],
+        "horizon_range_s": [
+          0.125,
+          0.125
+        ],
+        "history_range_s": [
+          0.09999999999999432,
+          0.10000000000000142
+        ]
+      }
+    ],
+    "worm1005864": [
+      {
+        "track": "worm1005864_t0",
+        "K": 49,
+        "origins": 48,
+        "first_wait_s": [
+          0.16
+        ],
+        "first_span_s": [
+          0.16
+        ],
+        "horizon_range_s": [
+          0.10999999999999943,
+          0.12000000000000455
+        ],
+        "history_range_s": [
+          0.14999999999997726,
+          0.160000000000025
+        ]
+      }
+    ],
+    "worm1011834": [
+      {
+        "track": "worm1011834_t0",
+        "K": 49,
+        "origins": 48,
+        "first_wait_s": [
+          0.13
+        ],
+        "first_span_s": [
+          0.13
+        ],
+        "horizon_range_s": [
+          0.09999999999999432,
+          0.13999999999999702
+        ],
+        "history_range_s": [
+          0.12999999999999545,
+          0.14000000000010004
+        ]
+      }
+    ],
+    "worm1013091": [
+      {
+        "track": "worm1013091_t0",
+        "K": 49,
+        "origins": 48,
+        "first_wait_s": [
+          0.13
+        ],
+        "first_span_s": [
+          0.13
+        ],
+        "horizon_range_s": [
+          0.09999999999999432,
+          0.14000000000000057
+        ],
+        "history_range_s": [
+          0.12999999999999545,
+          0.14000000000010004
+        ]
+      }
+    ],
+    "worm1018179": [
+      {
+        "track": "worm1018179_t0",
+        "K": 49,
+        "origins": 48,
+        "first_wait_s": [
+          0.2
+        ],
+        "first_span_s": [
+          0.13
+        ],
+        "horizon_range_s": [
+          0.10000000000002274,
+          0.14000000000000057
+        ],
+        "history_range_s": [
+          0.12999999999999545,
+          0.14000000000010004
+        ]
+      }
+    ],
+    "worm1019605": [
+      {
+        "track": "worm1019605_t0",
+        "K": 49,
+        "origins": 48,
+        "first_wait_s": [
+          0.13
+        ],
+        "first_span_s": [
+          0.13
+        ],
+        "horizon_range_s": [
+          0.1,
+          0.14000000000000057
+        ],
+        "history_range_s": [
+          0.12999999999999545,
+          0.14000000000010004
+        ]
+      }
+    ],
+    "worm1024230": [
+      {
+        "track": "worm1024230_t0",
+        "K": 49,
+        "origins": 48,
+        "first_wait_s": [
+          0.13
+        ],
+        "first_span_s": [
+          0.13
+        ],
+        "horizon_range_s": [
+          0.09999999999999432,
+          0.14000000000000057
+        ],
+        "history_range_s": [
+          0.12999999999999545,
+          0.14000000000010004
+        ]
+      }
+    ],
+    "worm1025134": [
+      {
+        "track": "worm1025134_t0",
+        "K": 49,
+        "origins": 48,
+        "first_wait_s": [
+          0.47
+        ],
+        "first_span_s": [
+          0.13999999999999996
+        ],
+        "horizon_range_s": [
+          0.10000000000002274,
+          0.14000000000000057
+        ],
+        "history_range_s": [
+          0.12999999999999545,
+          0.14000000000010004
+        ]
+      }
+    ],
+    "worm1032845": [
+      {
+        "track": "worm1032845_t0",
+        "K": 49,
+        "origins": 48,
+        "first_wait_s": [
+          0.44
+        ],
+        "first_span_s": [
+          0.15000000000000002
+        ],
+        "horizon_range_s": [
+          0.10000000000000142,
+          0.14000000000000057
+        ],
+        "history_range_s": [
+          0.13999999999998636,
+          0.1500000000000341
+        ]
+      }
+    ],
+    "worm1032915": [
+      {
+        "track": "worm1032915_t0",
+        "K": 49,
+        "origins": 48,
+        "first_wait_s": [
+          0.51
+        ],
+        "first_span_s": [
+          0.16000000000000003
+        ],
+        "horizon_range_s": [
+          0.1099999999999568,
+          0.12000000000000455
+        ],
+        "history_range_s": [
+          0.14999999999999147,
+          0.160000000000025
+        ]
+      }
+    ]
+  },
+  "prediction_archive_sha256": "0883a1194074380ad5c91399eca06dd5a8667f07a1cb6b5b174742a7a675afd9"
+}
