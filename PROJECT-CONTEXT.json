@@ -176,8 +176,8 @@
         "browser": "docs/wrist-replay/index.html",
         "offline_browser": {
           "path": "benchmarks/wrist-pointing-temporal/WristMotion-Recorded-Replay.zip",
-          "bytes": 240571,
-          "sha256": "f9cae2b47218f1798fd2d15878c3034a8842a29df14535d08119b39d347f299f"
+          "bytes": 240703,
+          "sha256": "409764d7dd5641485d4145d5ac03d9db11654234f2ffb5eac309e7ab8edae3c4"
         },
         "convert_public_recording": {
           "path": "benchmarks/wrist-pointing-temporal/WristMotion-Recorded-Trial-Converter.zip",
@@ -254,8 +254,8 @@
         "invented_window": "https://eliminatenoise.github.io/NeuroTranslation/daily-wrist/example-window.json",
         "offline_browser": {
           "path": "benchmarks/uji-wrist-emg/UJI-Daily-Wrist-Browser.zip",
-          "bytes": 37933,
-          "sha256": "64259d916fe08b32530c08fc85a576a6831213cd1ed8b72d83b2ca4b06c5ff8b"
+          "bytes": 38173,
+          "sha256": "5a3e1fbdf038ae837c172293836dcc70fa5f5037ff7c27a4b7211d80804f1de8"
         },
         "portable_axis_blend": {
           "path": "benchmarks/uji-wrist-emg/UJI-Wrist-Axis-Blend-Preview.zip",
@@ -294,8 +294,8 @@
         "url": "https://eliminatenoise.github.io/NeuroTranslation/grip-force/",
         "offline_zip": {
           "path": "benchmarks/way-grip-force/WAY-EEG-GAL-grip-force-browser.zip",
-          "bytes": 185320,
-          "sha256": "b54674e607f68f3cec42a5b72c044c33e48b93f6956982ffe56851ce38dabca8"
+          "bytes": 186089,
+          "sha256": "7a456878e6b738685cc2d56f44d5aee120f648b07e0c02c51432c8c246009c6a"
         },
         "input_scope": "Original single windows, invented trial replay, and compatible locally converted WAY-EEG-GAL WS trials. Four displayed predictors use preceding sensor samples. Twenty-nine separately stored later grip forces can be revealed to score each forecast. The browser ZIP contains no participant samples.",
         "trial_converter": {
@@ -344,13 +344,13 @@
         "url": "https://eliminatenoise.github.io/NeuroTranslation/contact-force/",
         "archive": {
           "path": "benchmarks/way-contact-force/NeuroTranslation-Grip-After-Contact-Comparison.zip",
-          "bytes": 128047,
-          "sha256": "1671044c72f241a0c575208ee72cc3f5881a19a37f4013c5f1e46bfe2897de65"
+          "bytes": 128098,
+          "sha256": "a2d42d420ec6c4638bc3d9ae195cb406e26b9f2d3e2037cb816a83aa8467b583"
         },
         "package_manifest": {
           "path": "docs/contact-force/MANIFEST.json",
           "bytes": 2066,
-          "sha256": "8139ef8370db8a6fea7ec7c3625b6e132f679cde5b241a6cdfb0b70bad6b8240"
+          "sha256": "00ead7e659ffb1bcc96c3e59a435c3fe95ae03c453abe8a3084fa012b7764b81"
         },
         "build_source": {
           "path": "benchmarks/way-contact-force/browser-release/build.py",
@@ -436,8 +436,8 @@
       "entry": "docs/hyser-index/index.html",
       "offline_download": {
         "path": "benchmarks/hyser-index/downloads/Hyser-Index-Voltage-Reader.zip",
-        "bytes": 43655,
-        "sha256": "fe607a9472618871d585128a9e0699b1e62b2d8a569b007b6449297f16bec4b6"
+        "bytes": 43722,
+        "sha256": "0c8684bdfec26d059b4a4dd0eaf2b6c04a9a0b34d7685125e33387d1d335a186"
       },
       "shared_train_predictors": {
         "path": "benchmarks/hyser-index/predictors.json",
@@ -572,8 +572,8 @@
       "reader": "https://eliminatenoise.github.io/NeuroTranslation/cemhsey-pinch/",
       "download": {
         "path": "benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip",
-        "bytes": 34641,
-        "sha256": "96a0e3dba860743c6675635433fe06bee46ee2697aff1dbea3dfaa73e78744c7"
+        "bytes": 34796,
+        "sha256": "d8b2aa2883152ff76f2b4d532ec3c985d2b00a83d18bdbf94767ab8c1dd90eb9"
       },
       "scope": "Offline normalized scalar P200 pinch-force recording. Three fit participants over two days, four different evaluation participants on different indexed days. The public reader includes an invented model and supports local fit import; the study fit stays private. No cross-device physical availability or individual finger force inference."
     },
@@ -619,8 +619,8 @@
       },
       "offline": {
         "path": "benchmarks/cemhsey-arrays/downloads/CEMHSEY-Array-Reader.zip",
-        "sha256": "f8a48a589b17a3718791e08ea30011268f4b4835ce5a6dbc56ffe05fa6bcb427",
-        "bytes": 86577
+        "sha256": "60f49dc48661c78a7cdcc18c2c7769fd2f37ae00a54bc2e0b1e2ca9a8cbd3a5f",
+        "bytes": 86803
       },
       "method": {
         "path": "benchmarks/cemhsey-arrays/BROWSER-FITTING.md",
@@ -659,13 +659,13 @@
       },
       "offline": {
         "path": "docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip",
-        "bytes": 44908,
-        "sha256": "04008a2400cc7f47bead8c72370380216cf3199363490fad3b4806ed58c21d3a"
+        "bytes": 45132,
+        "sha256": "52f783e682128f8c33d57a07cce77bad09d441632045eea67689751d6a026e02"
       },
       "interactive_results": {
         "path": "docs/cemhsey-transfer/results/index.html",
-        "bytes": 3917,
-        "sha256": "bbd3992cd054501690da12eba36dc8eedb11404b89efd91d99234cdebda23547"
+        "bytes": 4466,
+        "sha256": "3f8059d198432761e27ab260239fd655766c26b8fc070a478c1d6f29dc189084"
       },
       "metrics": {
         "path": "docs/cemhsey-transfer/results/metrics.csv",
@@ -705,8 +705,8 @@
       },
       "explorer": {
         "path": "docs/cemhsey-carry/index.html",
-        "bytes": 4224,
-        "sha256": "8c220ff049eec5108836bb3bec7465c9bc42bf4d7009807bd18e376394ff3298"
+        "bytes": 4790,
+        "sha256": "18409bbb56079bacee64372fc56e60a6443d57da2caee59e81c853f7d004c999"
       },
       "reader": {
         "path": "docs/cemhsey-transfer/index.html",
@@ -715,8 +715,8 @@
       },
       "zip": {
         "path": "docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip",
-        "bytes": 44908,
-        "sha256": "04008a2400cc7f47bead8c72370380216cf3199363490fad3b4806ed58c21d3a"
+        "bytes": 45132,
+        "sha256": "52f783e682128f8c33d57a07cce77bad09d441632045eea67689751d6a026e02"
       },
       "metrics": {
         "path": "docs/cemhsey-carry/metrics.csv",
@@ -764,18 +764,18 @@
       },
       "reader": {
         "path": "docs/cemhsey-phase/reader/index.html",
-        "bytes": 7069,
-        "sha256": "3c8550fec6cad512d9becdcb241d4f66bfe06726a133d5232164a639ec986fcd"
+        "bytes": 7148,
+        "sha256": "3f98f6c2d17e488f8e80334f59928fabe8c0b29c56e4c3c47d70cf061131d542"
       },
       "offline": {
         "path": "docs/cemhsey-phase/reader/CEMHSEY-Population-Forecasts.zip",
-        "bytes": 44361,
-        "sha256": "ec43ac040b38d1fb8322a9bea1a8226ca4262bce95128107fc98b4edd398408d"
+        "bytes": 44611,
+        "sha256": "08f8f9582d02de6d47cb7a844ec9abb634e00c58dacefe5ea3c5aa7859ac0790"
       },
       "explorer": {
         "path": "docs/cemhsey-phase/index.html",
-        "bytes": 4930,
-        "sha256": "11f0d24642534ecf6770e69ce4d0ab2426f8044113e2efcef59d24ace9472cd8"
+        "bytes": 5109,
+        "sha256": "8a8f039946974332d51a781e905a23ca979fe43345e855499982075829f5a16f"
       },
       "metrics": {
         "path": "docs/cemhsey-phase/metrics.csv",
@@ -968,8 +968,8 @@
       "reader": "https://eliminatenoise.github.io/NeuroTranslation/cemhsey-pinch/",
       "download": {
         "path": "benchmarks/cemhsey-pinch/downloads/CEMHSEY-Pinch-Reader.zip",
-        "bytes": 34641,
-        "sha256": "96a0e3dba860743c6675635433fe06bee46ee2697aff1dbea3dfaa73e78744c7"
+        "bytes": 34796,
+        "sha256": "d8b2aa2883152ff76f2b4d532ec3c985d2b00a83d18bdbf94767ab8c1dd90eb9"
       },
       "scope": "Offline normalized scalar P200 pinch-force recording. Three fit participants over two days, four different evaluation participants on different indexed days. The public reader includes an invented model and supports local fit import; the study fit stays private. No cross-device physical availability or individual finger force inference."
     },
@@ -1021,13 +1021,13 @@
       },
       "offline": {
         "path": "docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip",
-        "bytes": 44908,
-        "sha256": "04008a2400cc7f47bead8c72370380216cf3199363490fad3b4806ed58c21d3a"
+        "bytes": 45132,
+        "sha256": "52f783e682128f8c33d57a07cce77bad09d441632045eea67689751d6a026e02"
       },
       "interactive_results": {
         "path": "docs/cemhsey-transfer/results/index.html",
-        "bytes": 3917,
-        "sha256": "bbd3992cd054501690da12eba36dc8eedb11404b89efd91d99234cdebda23547"
+        "bytes": 4466,
+        "sha256": "3f8059d198432761e27ab260239fd655766c26b8fc070a478c1d6f29dc189084"
       },
       "metrics": {
         "path": "docs/cemhsey-transfer/results/metrics.csv",
@@ -1067,8 +1067,8 @@
       },
       "explorer": {
         "path": "docs/cemhsey-carry/index.html",
-        "bytes": 4224,
-        "sha256": "8c220ff049eec5108836bb3bec7465c9bc42bf4d7009807bd18e376394ff3298"
+        "bytes": 4790,
+        "sha256": "18409bbb56079bacee64372fc56e60a6443d57da2caee59e81c853f7d004c999"
       },
       "reader": {
         "path": "docs/cemhsey-transfer/index.html",
@@ -1077,8 +1077,8 @@
       },
       "zip": {
         "path": "docs/cemhsey-transfer/CEMHSEY-Pinch-Transfer.zip",
-        "bytes": 44908,
-        "sha256": "04008a2400cc7f47bead8c72370380216cf3199363490fad3b4806ed58c21d3a"
+        "bytes": 45132,
+        "sha256": "52f783e682128f8c33d57a07cce77bad09d441632045eea67689751d6a026e02"
       },
       "metrics": {
         "path": "docs/cemhsey-carry/metrics.csv",
@@ -1126,18 +1126,18 @@
       },
       "reader": {
         "path": "docs/cemhsey-phase/reader/index.html",
-        "bytes": 7069,
-        "sha256": "3c8550fec6cad512d9becdcb241d4f66bfe06726a133d5232164a639ec986fcd"
+        "bytes": 7148,
+        "sha256": "3f98f6c2d17e488f8e80334f59928fabe8c0b29c56e4c3c47d70cf061131d542"
       },
       "offline": {
         "path": "docs/cemhsey-phase/reader/CEMHSEY-Population-Forecasts.zip",
-        "bytes": 44361,
-        "sha256": "ec43ac040b38d1fb8322a9bea1a8226ca4262bce95128107fc98b4edd398408d"
+        "bytes": 44611,
+        "sha256": "08f8f9582d02de6d47cb7a844ec9abb634e00c58dacefe5ea3c5aa7859ac0790"
       },
       "explorer": {
         "path": "docs/cemhsey-phase/index.html",
-        "bytes": 4930,
-        "sha256": "11f0d24642534ecf6770e69ce4d0ab2426f8044113e2efcef59d24ace9472cd8"
+        "bytes": 5109,
+        "sha256": "8a8f039946974332d51a781e905a23ca979fe43345e855499982075829f5a16f"
       },
       "metrics": {
         "path": "docs/cemhsey-phase/metrics.csv",
