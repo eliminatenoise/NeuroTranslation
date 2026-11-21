@@ -41,10 +41,10 @@
   "programme_focus": "NeuroTranslation, NeuroSurge and Interoceptomics are active together.",
   "experimental_previews": {
     "data_companion": {
-      "version": "Recording readers including overground walking force",
+      "version": "Recording readers including cross-person wrist forecasting",
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
-      "buildId": "be05e904d3c2ff759120a581d46b28a78fb65b32468c6fc1fe4f314c3ed6320d",
+      "buildId": "20d35c436c4dd12aafb7beb69f29c702771d6d6639132213f7c278350c6893bc",
       "meaning": "Import and inspect recordings locally. Replay the fit made on first recordings (R1), or compare the fixed and personally calibrated models on an imported second recording (R2). Complete R2 trials are checked against their archived sample clock and the four input streams the study used. Group results are shown separately.",
       "hosting": "Static files in docs/ on the main branch, served by GitHub Pages.",
       "study": "benchmarks/scalp-eeg-palm-history",
@@ -1592,5 +1592,26 @@
     "data_doi": "10.48324/dandi.000055/0.220127.0436",
     "article_doi": "10.1038/s41597-022-01280-y",
     "scope": "One person, two recordings, one pair of wrists at camera-frame horizons of eight and fifteen. Events are retrospective right-wrist movements. The public demonstration is simulated; compatible recordings and trained fits can be prepared and opened locally."
+  },
+  "cross_person_wrist": {
+    "reader": "docs/cross-person-wrist/index.html",
+    "reader_download": "docs/cross-person-wrist-offline.zip",
+    "paper": "docs/papers/cross-person-wrist/index.html",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/cross-person-wrist/",
+    "model": "models/neurotranslate-0.0/cross_person_wrist",
+    "scope": "One person supplied the right-wrist reaches for fitting. A different person supplied the left-wrist reaches for testing. Both wrists were scored from camera-derived positions. The distributed tracks and fitted weights are synthetic."
+  },
+  "next_neuron_prediction": {
+    "preferred_label": "Next Neuron Prediction",
+    "meaning": "Predict which of the recorded neurons fires the next spike using only earlier activity.",
+    "reader": "docs/next-neuron-prediction.md",
+    "status": "proposed project task",
+    "glossary_revision": 40,
+    "glossary_sha256": "0a508c6a52f9e1dcf49f6bcfbbcf3a52136a24aee863eb28785f76fef0c5d03a",
+    "term_id": "next-neuron-prediction"
+  },
+  "unfamiliar_bodies": {
+    "reader": "docs/body-adaptation.md",
+    "unit_of_evaluation": "Original animal, person, recording, species, phylum or acquisition domain as applicable. Report actual coverage and elapsed first-use history."
   }
 }

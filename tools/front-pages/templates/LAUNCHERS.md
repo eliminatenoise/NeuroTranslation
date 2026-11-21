@@ -202,3 +202,7 @@ Extract the [one-week reader with muscle–tendon paths](docs/reach-feedback/one
 ## Forecast both wrists on another day
 
 Extract the [two-wrist reader](docs/human-wrist-offline.zip) or the [software and worked example](models/human-wrist.zip), then open the launcher for your operating system. The supplied arm movement is simulated. Imported examples are processed on your computer.
+
+## Forecast both wrists on a different person
+
+[Open the browser model](https://eliminatenoise.github.io/NeuroTranslation/cross-person-wrist/) or extract the [offline reader](docs/cross-person-wrist-offline.zip) and open its Windows, macOS or Linux launcher. Both run the model with invented positions and weights. For the Python version, extract [NeuroTranslate 0.0](models/neurotranslate-0.0.zip) and run `python predict.py cross_person_wrist/example.json` with NumPy installed.

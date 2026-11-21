@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0
 
+The ordinary [NeuroTranslate 0.0 download](neurotranslate-0.0.zip) includes a cross-person wrist example. From the extracted folder, run `python predict.py cross_person_wrist/example.json`. [Try it in the browser](https://eliminatenoise.github.io/NeuroTranslation/cross-person-wrist/).
+
 The [human wrist package](human-wrist/) includes the simulation used in the public reader and the code for learning from locally acquired recordings. [Run a wrist forecast](https://eliminatenoise.github.io/NeuroTranslation/human-wrist/) · [Read the cross-day results](https://eliminatenoise.github.io/NeuroTranslation/papers/human-wrist/)
 
 The [one-week reach package](reach-feedback-week/) contains the trained models, a reader, and instructions for rebuilding the comparison from two recordings. [Open the later-day reader](https://eliminatenoise.github.io/NeuroTranslation/reach-feedback/one-week/)

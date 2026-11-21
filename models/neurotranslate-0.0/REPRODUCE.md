@@ -1,5 +1,7 @@
 # Predict and reproduce
 
+To rebuild the cross-person wrist checkpoint from the invented camera series and score held invented gestures, run `python -m cross_person_wrist.rebuild rebuilt.json`. Run `python predict.py cross_person_wrist/example.json --checkpoint rebuilt.json` for its two wrists and two forecast times. [Inputs, fitted controls and local recording workflow](cross_person_wrist/README.md)
+
 For both wrists in the camera frame, run `python predict.py bilateral_wrist/example.json`. Use a local `wrist-forecast-v1` file from the same exporter to substitute your own earlier measurements and fitted weights. [Input contract, output axes and synthetic fitting procedure](bilateral_wrist/README.md)
 
 To forecast a 125 ms wrist or sacrum movement with its observed muscle channels, try `python predict.py cross_limb/grasp_lift-example.json`. [Rebuild the two-study comparison](cross_limb/README.md).

@@ -178,6 +178,9 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT, *, wrist_case=None, wr
                               modality="full" if wrist_modality is None else wrist_modality)
     if any(value is not None for value in (wrist_case, wrist_treatment, wrist_modality)):
         raise ValueError("Wrist endpoint options require a wrist-forecast-v1 input.")
+    if record.get("domain") == "cross_person_wrist":
+        from cross_person_wrist.forecast import DEFAULT_FIT, forecast as predict_role_wrists
+        return predict_role_wrists(record, DEFAULT_FIT if Path(checkpoint) == DEFAULT_CHECKPOINT else checkpoint)
     if record.get("domain") == "cross_limb":
         from cross_limb.forecast import forecast as predict_cross_limb
         source = Path(checkpoint)
@@ -316,7 +319,7 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT, *, wrist_case=None, wr
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path, help="JSON bilateral wrist endpoints, cross-limb movement, muscle activity and sacrum path, visual balance, walking instruction, heel movement and force, pedal load change, muscle length change, back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
+    parser.add_argument("input", type=Path, help="JSON cross-person wrist positions, bilateral wrist endpoints, cross-limb movement, muscle activity and sacrum path, visual balance, walking instruction, heel movement and force, pedal load change, muscle length change, back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
     parser.add_argument("--wrist-case", type=int, help="Index in a bilateral wrist package (default 0)")
     parser.add_argument("--wrist-treatment", choices=("anchored", "direct", "bounded_zero"),

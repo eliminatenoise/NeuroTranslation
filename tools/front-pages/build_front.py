@@ -1170,6 +1170,7 @@ LATER_ABSENT = {   # work published after the papers were written -> words and d
     'models/cross-limb-movement/scalp': ('4.120', '3.905', '2.699', '2.667', '11.370', '11.385', '11.355'),
     'models/cross-limb-movement/path-maps': ('2.582', '2.645', '2.583', '3.878', '3.877', '3.686', '2.497', '2.481'),
     'models/muscle-spindle': ('0.499', '0.842', '0.325', '0.387', '0.435', '1.010', 'Blum', 'aff015'),
+    'models/neurotranslate-0.0/cross_person_wrist': ('94.32', '44.18', 'cross-person-wrist'),
     'models/human-wrist': ('29.40', '47.32', '45.59', '51.79', '29.68', '48.83', 'AJILE12', '0.220127.0436'),
     'models/reach-feedback-week': ('0.201', '4.118', '4.783', '4.680', '3.852', '0.468', '0.882', '1.047', '1.539', '0.689', '0.540', '0.096', 'C_20170914'),
     'models/reach-feedback': ('1.1595', '1.1834', '1.1934', '1.1158', '8.398', '9.362', '8.421', '8.115', 'C_20170907'),
@@ -1943,7 +1944,7 @@ def later_heading():
     return f'{spell(n_later(), True)} newer studies, outside the numbered table'
 
 
-PAGE_ROWS = ('hand-search', 'shared-motion', 'whole-body', 'word-motion', 'stride', 'population-motion', 'knee-motion', 'gait-rhythm', 'knee-stride', 'finger-signals', 'finger-motion', 'finger-transfer', 'knee-moment', 'walking-force', 'walking-landmarks', 'elbow-cue', 'arm-transfer', 'scalp-forecast', 'cervical-forecast', 'neck-voltage', 'back-rotation', 'shared-back-rotation', 'muscle-tracking', 'shared-muscle-tracking', 'pedal-load', 'shared-pedal-load', 'heel-and-force', 'shared-heel-and-force', 'walking-instructions', 'walking-instruction-controls', 'cross-limb-movement', 'cross-limb-controls', 'muscle-and-motion', 'muscle-motion-controls', 'visual-balance', 'visual-balance-controls', 'muscle-spindle', 'cortical-reach', 'contact-forecast', 'target-reach', 'cylinder-rotation', 'reach-feedback', 'human-wrist')      # the site pages that are not study readers and have a row of their own
+PAGE_ROWS = ('hand-search', 'shared-motion', 'whole-body', 'word-motion', 'stride', 'population-motion', 'knee-motion', 'gait-rhythm', 'knee-stride', 'finger-signals', 'finger-motion', 'finger-transfer', 'knee-moment', 'walking-force', 'walking-landmarks', 'elbow-cue', 'arm-transfer', 'scalp-forecast', 'cervical-forecast', 'neck-voltage', 'back-rotation', 'shared-back-rotation', 'muscle-tracking', 'shared-muscle-tracking', 'pedal-load', 'shared-pedal-load', 'heel-and-force', 'shared-heel-and-force', 'walking-instructions', 'walking-instruction-controls', 'cross-limb-movement', 'cross-limb-controls', 'muscle-and-motion', 'muscle-motion-controls', 'visual-balance', 'visual-balance-controls', 'muscle-spindle', 'cortical-reach', 'contact-forecast', 'target-reach', 'cylinder-rotation', 'reach-feedback', 'human-wrist', 'cross-person-wrist')      # the site pages that are not study readers and have a row of their own
 
 
 def other_pages():
@@ -2172,6 +2173,7 @@ SUPPLEMENTS = {     # the short PDFs published beside the papers; their page cou
     'reach': 'docs/papers/reach-feedback/reach-feedback.pdf',
     'week': 'docs/papers/reach-feedback/one-week/one-week.pdf',
     'wrist2': 'docs/papers/human-wrist/human-wrist.pdf',
+    'wrist_transfer': 'docs/papers/cross-person-wrist/cross-person-wrist.pdf',
 }
 _pdf_pages = {}
 
@@ -2759,6 +2761,23 @@ def rw_checks():
         field='primary_incremental_success; workspaces/*/populations/primary (and ' + RW_L + ', ' + RW_M + ', ' + RW_P + ')', full=None,
         note='second region: with the movement 4.783 / without 4.680 / training average 4.118; hand +0.468 and +0.882 mm; paths 1.047 and '
              '1.539 against no change 0.689 and 0.540 mm')
+    return ''
+
+
+CROSS_WRIST = 'docs/papers/cross-person-wrist/cross-person-wrist-source.zip!aggregate.json'
+
+
+def cross_wrist_checks():
+    """Check the support and direction of the primary wrist comparison at both horizons."""
+    results = load(CROSS_WRIST)
+    for horizon in (8, 15):
+        row = results['primary'][f'contralateral_{horizon}']
+        assert row['n'] == results['selected'] == results['width']['test']['count']
+        assert row['means']['pixels']['ridge'] > row['means']['pixels']['damped_velocity']
+        assert row['ridge_minus_damped']['shoulder_widths'] > 0
+    assert GENERAL_FITS['cross_person_wrist'] == 'not the general model'
+    log('the regression missed farther than continuing a fraction of earlier velocity at both horizons',
+        file=CROSS_WRIST, field='primary/{contralateral_8,contralateral_15}; selected; width/test/count', full=None)
     return ''
 
 
@@ -3779,6 +3798,7 @@ GENERAL_FITS = {   # every task folder of the general model -> who it was scored
     'walking_cues': 'seen',           # the same ten-person test group, "already used in earlier studies" (its README)
     'cervical': 'not the general model',   # a straight-line correction with coefficients of its own (neck_checks())
     'muscle_motion': 'not the general model',   # straight-line fits with coefficients of their own, no parent_sha256 (mm_checks())
+    'cross_person_wrist': 'not the general model',   # dedicated optical fits; see the task's README and synthetic-fit.json
     'bilateral_wrist': 'not the general model',   # a transformer per wrist with weights of its own; the movement checkpoint has no role (hw_checks())
     'cross_limb': 'not the general model',      # straight-line fits with coefficients of their own, no parent_sha256 (xl_checks())
     'wrist-source': 'not a task',          # the source recordings of the wrist-angle task

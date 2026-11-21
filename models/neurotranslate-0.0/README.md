@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0 movement forecasts
 
+Which wrist should a model follow when the annotated reach switches sides? Give it fifteen earlier frames of both arms. It builds a frame from the shoulders, forecasts each wrist eight and fifteen frames ahead, and puts the points back into the original camera image. Run `python predict.py cross_person_wrist/example.json` on an invented reach. Compare the linear forecast with a Transformer that can see both arms, block the other arm, or replace it with an earlier one. [Use the cross-person wrist model](cross_person_wrist/README.md)
+
 Where will the two wrists go in the next half-second? Feed the model fifteen earlier camera frames and eight earlier voltage traces. Run `python predict.py bilateral_wrist/example.json` for both forecasts in image pixels. The public weights and histories come entirely from simulated movements. The same command accepts a locally fitted AJILE12 model and case. [Run the model, understand its limits and reproduce the example](bilateral_wrist/README.md)
 
 What does one rule learn from wrist motion and pelvis motion? Compare shared and study-specific forecasts, then rotate the same history to explore how its axes affect the answer. [Open the cross-limb controls](cross_limb/index.html) · [Inputs and fitting instructions](cross_limb/README.md)

@@ -273,3 +273,7 @@ The dated arm positions, cortical event counts and OpenSim muscle–tendon path 
 ### One person's wrists on two recording days (the two-wrist study)
 
 Peterson, Singh, Dichter, Scheid, Rao and Brunton released AJILE12 under CC BY 4.0. The human-wrist study selected reach annotations, paired earlier camera and electrode measurements, fitted forecasting models and reports aggregate errors. The illustrated public reader uses independently generated example measurements and model parameters. Original project code, text and original demonstration materials are dedicated to CC0 1.0. Consult the accompanying notices for the source recording licence and any attributed items. [AJILE12 data](https://doi.org/10.48324/dandi.000055/0.220127.0436) · [Original study](https://doi.org/10.1038/s41597-022-01280-y) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+### Camera-based forecasts tested on another person
+
+Both people’s wrist, elbow and shoulder tracks came from the same AJILE12 release. The paper reports aggregate errors across reaches. The software distributes invented tracks and fits trained on those invented tracks. The project’s original code and text use CC0. Peterson, Singh, Dichter, Scheid, Rao and Brunton released AJILE12 under CC BY 4.0. [Versioned data](https://doi.org/10.48324/dandi.000055/0.220127.0436) · [Original methods](https://doi.org/10.1038/s41597-022-01280-y) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

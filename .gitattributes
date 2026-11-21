@@ -180,3 +180,9 @@ docs/cross-limb-controls/** -text
 docs/papers/cross-limb-movement/** -text
 docs/cross-limb-movement/*.cmd whitespace=cr-at-eol
 models/cross-limb-movement/*.cmd whitespace=cr-at-eol
+
+# Preserve the cross-person wrist reader, paper sources and model checksums on checkout.
+docs/cross-person-wrist/** -text
+docs/papers/cross-person-wrist/** -text
+models/neurotranslate-0.0/cross_person_wrist/** -text
+docs/cross-person-wrist/*.cmd whitespace=cr-at-eol

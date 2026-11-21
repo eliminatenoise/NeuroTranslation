@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light"><title>Where will the wrists land? · NeuroTranslation</title>
+<link rel="stylesheet" href="style.css"></head>
+<body><header><div><span class="brand">NeuroTranslation</span><a href="../papers/cross-person-wrist/index.html">Read the study <span aria-hidden="true">↗</span></a></div></header>
+<main><section class="intro"><h1>Where will the wrists land?</h1><p>A camera watched two wrists, two elbows and two shoulders. Give a model the last 15 frames and ask where each wrist will land. What does the other arm add to the forecast?</p></section>
+<section class="workbench" aria-label="Wrist forecast">
+<div class="controls"><h2>Run a forecast</h2>
+<label for="case">Earlier movement</label><select id="case"><option value="L">Fictional left-wrist onset</option><option value="R">Fictional right-wrist onset</option></select>
+<label for="gaps">Available measurements</label><select id="gaps"><option value="none">Complete example</option><option value="wrist">Other wrist drops out</option><option value="shoulder">One shoulder drops out</option><option value="outcome">One later wrist is missing</option><option value="donor">No earlier partner event</option></select>
+<label for="family">Forecast model</label><select id="family"><option value="ridge">One arm · ridge</option><option value="intact">Both arms · Transformer</option><option value="matched_intact">Both arms · matched Transformer</option></select>
+<label for="control">Compare with</label><select id="control"></select>
+<label for="horizon">Time after final input</label><select id="horizon"><option value="0">+8 frames · 267 ms</option><option value="1" selected>+15 frames · 500 ms</option></select>
+<p id="source" class="source"></p></div>
+<div class="display"><div class="heading"><h2>Wrist in the camera plane</h2><p id="geometry"></p></div>
+<div class="plots"><figure><figcaption id="title0"></figcaption><canvas id="plot0" aria-labelledby="title0"></canvas><p id="status0"></p></figure>
+<figure><figcaption id="title1"></figcaption><canvas id="plot1" aria-labelledby="title1"></canvas><p id="status1"></p></figure></div>
+<ul class="legend"><li><i class="track"></i>Earlier wrist</li><li><i class="forecast"></i>Forecast</li><li><i class="compare"></i>Comparison</li><li id="ref-key"><i class="reference">×</i><span>Later wrist</span></li></ul>
+<p class="caption">Each view follows one wrist at the same magnification. Image x increases to the right and y downwards. Distances are projected onto the camera image.</p></div></section>
+<section class="numbers" aria-labelledby="endpoint-heading"><h2 id="endpoint-heading">Where did each wrist land?</h2>
+<p id="units">An endpoint is a position (x, y) in the original image. Error is the straight-line distance to the later wrist. Divide that distance by the median width between the shoulders in the 15 earlier frames to compare camera scales.</p>
+<div id="results" aria-live="polite"></div><p id="method-note"></p></section>
+<section class="reading"><div><h2>Which arm is which?</h2><p>In the recordings, a wrist movement identified afterwards sets the cutoff. “Contralateral” means the wrist opposite the side of the brain implant. “Ipsilateral” means the wrist on the implant side. Swapping sides lets the same model follow the annotated wrist from one person to the next. The implant supplies a side label. The model receives camera positions alone.</p></div>
+<div><h2>What can the other arm tell us?</h2><p>The Transformer can give weight to earlier frames from either arm. Block its view across arms, or substitute the other arm from an earlier event. Every version still uses both shoulders to orient the camera frame. The matched versions learned from the same set of events with an eligible earlier partner.</p></div></section>
+<section class="study" aria-labelledby="study-head"><h2 id="study-head">What happened in the recordings?</h2><div id="study-result"></div><p><a href="../papers/cross-person-wrist/index.html">Read the cross-person wrist study</a></p></section>
+<details class="local"><summary>Run your own earlier frames</summary><div><p>Open a JSON file from your computer. Your file stays in this tab. You can also load a compatible checkpoint fitted locally. The built-in models learned entirely from invented movements. The recorded study used separate, private fits.</p>
+<p><a href="input.html">Input format and coordinate conventions</a> · <button type="button" id="save" class="link">Save the fictional input</button></p>
+<div class="file-grid"><label>Earlier frames (.json)<input id="case-file" type="file" accept=".json,application/json"></label><label>Optional fitted coefficients (.json)<input id="weight-file" type="file" accept=".json,application/json"></label></div>
+<p id="message" role="status"></p><button id="reset" type="button">Restore the fictional example</button></div></details>
+</main><footer>NeuroTranslation · Optical wrist forecasting</footer>
+<script src="weights.js"></script><script src="engine.js"></script><script src="examples.js"></script><script src="study.js"></script><script src="app.js"></script></body></html>
