@@ -1,0 +1,384 @@
+{
+  "source": "Delhaye et al. (2021), Zenodo 4818439, DOI 10.5281/zenodo.4818439; CC BY 4.0.",
+  "summary": {
+    "file": "data_summary.mat",
+    "bytes": 243307,
+    "md5": "md5:fe24578ed500432c903a980f3a82d60f",
+    "sha256": "cdebecfaf58a92e99907bbb17acbeba07c35c2dd025544e00998d66d837b74b7"
+  },
+  "partitions": {
+    "train": [
+      "U101",
+      "U103",
+      "U104",
+      "U107",
+      "U109",
+      "U112",
+      "U115"
+    ],
+    "development_validation": [
+      "U105",
+      "U111"
+    ],
+    "test": [
+      "U108",
+      "U110",
+      "U113"
+    ],
+    "reserve": [
+      "U116"
+    ]
+  },
+  "recordings": [
+    {
+      "file": "U101-01-trans1.mat",
+      "person": "U101",
+      "split": "train",
+      "unit": "U101-01",
+      "receptor_class": "FAI",
+      "field_vs_contact": "border",
+      "bytes": 62587282,
+      "md5": "md5:befbcdbe350fe11a6782def3cdd991f8"
+    },
+    {
+      "file": "U101-01-trans2.mat",
+      "person": "U101",
+      "split": "train",
+      "unit": "U101-01",
+      "receptor_class": "FAI",
+      "field_vs_contact": "border",
+      "bytes": 64175479,
+      "md5": "md5:8b56a548e0482d7d743c805cccf06a6a"
+    },
+    {
+      "file": "U103-02-trans1.mat",
+      "person": "U103",
+      "split": "train",
+      "unit": "U103-02",
+      "receptor_class": "SAI",
+      "field_vs_contact": "border",
+      "bytes": 64098733,
+      "md5": "md5:4082ceef6c8482cde70253e2a9c6ac8a"
+    },
+    {
+      "file": "U103-03-trans1.mat",
+      "person": "U103",
+      "split": "train",
+      "unit": "U103-03",
+      "receptor_class": "SAI",
+      "field_vs_contact": "in",
+      "bytes": 64001051,
+      "md5": "md5:2eb951258138ba6b2c002ee4aa93d810"
+    },
+    {
+      "file": "U103-03-trans2.mat",
+      "person": "U103",
+      "split": "train",
+      "unit": "U103-03",
+      "receptor_class": "SAI",
+      "field_vs_contact": "in",
+      "bytes": 64039679,
+      "md5": "md5:7c9a62b1a84a6a40153fa40022bfbc1a"
+    },
+    {
+      "file": "U103-04-trans1.mat",
+      "person": "U103",
+      "split": "train",
+      "unit": "U103-04",
+      "receptor_class": "SAII",
+      "field_vs_contact": "in",
+      "bytes": 19572442,
+      "md5": "md5:ee28cb912e78e57f38b9583f36627590"
+    },
+    {
+      "file": "U104-02-trans1.mat",
+      "person": "U104",
+      "split": "train",
+      "unit": "U104-02",
+      "receptor_class": "FAI",
+      "field_vs_contact": "in",
+      "bytes": 63895847,
+      "md5": "md5:9301ddea58a8e9f009038eda076ffe66"
+    },
+    {
+      "file": "U104-03-trans1.mat",
+      "person": "U104",
+      "split": "train",
+      "unit": "U104-03",
+      "receptor_class": "FAI",
+      "field_vs_contact": "in",
+      "bytes": 63992262,
+      "md5": "md5:04086d5d4e9553ae584135ca670231cc"
+    },
+    {
+      "file": "U105-03-trans1.mat",
+      "person": "U105",
+      "split": "development_validation",
+      "unit": "U105-03",
+      "receptor_class": "FAI",
+      "field_vs_contact": "in",
+      "bytes": 63995045,
+      "md5": "md5:6ce09c500b8497ffaeddca068218f951"
+    },
+    {
+      "file": "U105-03-trans2.mat",
+      "person": "U105",
+      "split": "development_validation",
+      "unit": "U105-03",
+      "receptor_class": "FAI",
+      "field_vs_contact": "in",
+      "bytes": 64055676,
+      "md5": "md5:41edf4558cad9dd67a434ea6db1b6d8e"
+    },
+    {
+      "file": "U107-02-trans1.mat",
+      "person": "U107",
+      "split": "train",
+      "unit": "U107-02",
+      "receptor_class": "SAII",
+      "field_vs_contact": "out",
+      "bytes": 32228748,
+      "md5": "md5:ea59132768bbdc8301e8332b709f7dee"
+    },
+    {
+      "file": "U107-04-trans1.mat",
+      "person": "U107",
+      "split": "train",
+      "unit": "U107-04",
+      "receptor_class": "FAI",
+      "field_vs_contact": "out",
+      "bytes": 63919487,
+      "md5": "md5:f23a791deb401dc56f6847cf1c4d8cff"
+    },
+    {
+      "file": "U107-05-trans1.mat",
+      "person": "U107",
+      "split": "train",
+      "unit": "U107-05",
+      "receptor_class": "FAI",
+      "field_vs_contact": "in",
+      "bytes": 60762844,
+      "md5": "md5:e632a68575fbc10f868fc8d6d4034e44"
+    },
+    {
+      "file": "U107-05-trans2.mat",
+      "person": "U107",
+      "split": "train",
+      "unit": "U107-05",
+      "receptor_class": "FAI",
+      "field_vs_contact": "in",
+      "bytes": 63944433,
+      "md5": "md5:acd2db2f5e5b5b2bf71386d78f2761d3"
+    },
+    {
+      "file": "U108-02-trans1.mat",
+      "person": "U108",
+      "split": "test",
+      "unit": "U108-02",
+      "receptor_class": "SAII",
+      "field_vs_contact": "border",
+      "bytes": 63981492,
+      "md5": "md5:890e12ac94d7b0c5ba42519444c290d0"
+    },
+    {
+      "file": "U108-06-trans1.mat",
+      "person": "U108",
+      "split": "test",
+      "unit": "U108-06",
+      "receptor_class": "SAII",
+      "field_vs_contact": "out",
+      "bytes": 64096860,
+      "md5": "md5:02dbcdad3e369c8a734c9b7c1a84da7e"
+    },
+    {
+      "file": "U108-06-trans2.mat",
+      "person": "U108",
+      "split": "test",
+      "unit": "U108-06",
+      "receptor_class": "SAII",
+      "field_vs_contact": "out",
+      "bytes": 63981811,
+      "md5": "md5:3b7ed98c76cd7665f74282dcc5d125c7"
+    },
+    {
+      "file": "U109-03-trans1.mat",
+      "person": "U109",
+      "split": "train",
+      "unit": "U109-03",
+      "receptor_class": "FAI",
+      "field_vs_contact": "in",
+      "bytes": 63856037,
+      "md5": "md5:dce04cba2cc050e5980d389b3b0d3b88"
+    },
+    {
+      "file": "U109-04-trans1.mat",
+      "person": "U109",
+      "split": "train",
+      "unit": "U109-04",
+      "receptor_class": "FAI",
+      "field_vs_contact": "border",
+      "bytes": 63993369,
+      "md5": "md5:5cd2e4c3e1d6296200c06daa74c65a0a"
+    },
+    {
+      "file": "U109-04-trans2.mat",
+      "person": "U109",
+      "split": "train",
+      "unit": "U109-04",
+      "receptor_class": "FAI",
+      "field_vs_contact": "border",
+      "bytes": 64063106,
+      "md5": "md5:b47d4b359f240e5d9376b3fe19108190"
+    },
+    {
+      "file": "U110-03-trans1.mat",
+      "person": "U110",
+      "split": "test",
+      "unit": "U110-03",
+      "receptor_class": "FAI",
+      "field_vs_contact": "in",
+      "bytes": 63989062,
+      "md5": "md5:c4f00582cc5ac0ed35667d8a3a99bf21"
+    },
+    {
+      "file": "U110-06-trans1.mat",
+      "person": "U110",
+      "split": "test",
+      "unit": "U110-06",
+      "receptor_class": "SAI",
+      "field_vs_contact": "border",
+      "bytes": 63995832,
+      "md5": "md5:ea91bfa660b2e881c1e70cf354013917"
+    },
+    {
+      "file": "U110-06-trans2.mat",
+      "person": "U110",
+      "split": "test",
+      "unit": "U110-06",
+      "receptor_class": "SAI",
+      "field_vs_contact": "border",
+      "bytes": 62502216,
+      "md5": "md5:54f239a6fa7be5679d14e482a6879924"
+    },
+    {
+      "file": "U111-01-trans1.mat",
+      "person": "U111",
+      "split": "development_validation",
+      "unit": "U111-01",
+      "receptor_class": "SAI",
+      "field_vs_contact": "in",
+      "bytes": 64079497,
+      "md5": "md5:afb5c0079cf7f3be05b68a7d3c6f1c43"
+    },
+    {
+      "file": "U111-01-trans2.mat",
+      "person": "U111",
+      "split": "development_validation",
+      "unit": "U111-01",
+      "receptor_class": "SAI",
+      "field_vs_contact": "in",
+      "bytes": 63778877,
+      "md5": "md5:a40e83e0ff3cc9ef21b05cc1161142ec"
+    },
+    {
+      "file": "U112-01-trans1.mat",
+      "person": "U112",
+      "split": "train",
+      "unit": "U112-01",
+      "receptor_class": "FAI",
+      "field_vs_contact": "in",
+      "bytes": 22678731,
+      "md5": "md5:9c5c780f68847a5ea237a7594a846dd6"
+    },
+    {
+      "file": "U112-04-trans1.mat",
+      "person": "U112",
+      "split": "train",
+      "unit": "U112-04",
+      "receptor_class": "FAI",
+      "field_vs_contact": "border",
+      "bytes": 63792625,
+      "md5": "md5:1318223121d6a64344e6a9e832192d8f"
+    },
+    {
+      "file": "U113-01-trans1.mat",
+      "person": "U113",
+      "split": "test",
+      "unit": "U113-01",
+      "receptor_class": "FAI",
+      "field_vs_contact": "out",
+      "bytes": 63968393,
+      "md5": "md5:32a9c5aa3b6cac2356fd99ffe3cd15c9"
+    },
+    {
+      "file": "U115-01-trans1.mat",
+      "person": "U115",
+      "split": "train",
+      "unit": "U115-01",
+      "receptor_class": "FAI",
+      "field_vs_contact": "out",
+      "bytes": 63751087,
+      "md5": "md5:bfe552e606566940d374a777bd974184"
+    },
+    {
+      "file": "U115-02-trans1.mat",
+      "person": "U115",
+      "split": "train",
+      "unit": "U115-02",
+      "receptor_class": "FAI",
+      "field_vs_contact": "out",
+      "bytes": 63916709,
+      "md5": "md5:32f1c96992c69daec16830a186d33236"
+    },
+    {
+      "file": "U115-03-trans1.mat",
+      "person": "U115",
+      "split": "train",
+      "unit": "U115-03",
+      "receptor_class": "FAI",
+      "field_vs_contact": "in",
+      "bytes": 40278214,
+      "md5": "md5:2acb4395835a6fa0b947f2586448d4c2"
+    },
+    {
+      "file": "U115-04-trans1.mat",
+      "person": "U115",
+      "split": "train",
+      "unit": "U115-04",
+      "receptor_class": "FAI",
+      "field_vs_contact": "in",
+      "bytes": 64166981,
+      "md5": "md5:ea00bf7dcd63eeaa83639948b72f243f"
+    },
+    {
+      "file": "U116-02-trans1.mat",
+      "person": "U116",
+      "split": "reserve",
+      "unit": "U116-02",
+      "receptor_class": "SAI",
+      "field_vs_contact": "border",
+      "bytes": 62612355,
+      "md5": "md5:dec0eabb088e5586244a658b0b9ed8e1"
+    },
+    {
+      "file": "U116-03-trans1.mat",
+      "person": "U116",
+      "split": "reserve",
+      "unit": "U116-03",
+      "receptor_class": "FAII",
+      "field_vs_contact": "out",
+      "bytes": 64045195,
+      "md5": "md5:299e43e38b467dd231e0f0d5112e03a1"
+    },
+    {
+      "file": "U116-06-trans1.mat",
+      "person": "U116",
+      "split": "reserve",
+      "unit": "U116-06",
+      "receptor_class": "SAI",
+      "field_vs_contact": "out",
+      "bytes": 63878475,
+      "md5": "md5:f6093af50875b8c74b859eaa5bf4020e"
+    }
+  ]
+}

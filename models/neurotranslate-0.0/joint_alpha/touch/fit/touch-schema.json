@@ -1,0 +1,29 @@
+{
+  "baseline_description": "Previous observed 20-ms spike count. previous_repeat_force permits the force substitution from the immediately preceding matched trial at identical source times.",
+  "channels": [
+    "raw_force_x_N",
+    "raw_force_y_N",
+    "raw_force_z_N",
+    "spike_count",
+    "trial_elapsed_s"
+  ],
+  "history": "At cutoff t (zero-based row in ms), ten complete bins t-199 through t. Each bin holds the three mean raw device-force axes, source-discriminated spike count and time in seconds at its right edge.",
+  "history_steps": 10,
+  "input_units": [
+    "N",
+    "N",
+    "N",
+    "spikes per 20 ms",
+    "s"
+  ],
+  "kind": "count",
+  "limits": "Offline impulse discrimination on a 1 kHz deposited event grid. Device load differs from local skin strain and voluntary movement. Strict zero source-invalid flags on both trials, consecutive columns with same material/direction, finite force on both histories, finite binary events on current history and target. Independent sample size is people.",
+  "output_units": [
+    "spikes per 20 ms"
+  ],
+  "outputs": [
+    "future_single_afferent_spike_count"
+  ],
+  "source": "Delhaye et al. (2021), eLife 64679; Zenodo 4818439, CC BY 4.0. Passive robotic loading of a supported fingertip.",
+  "target": "Direct afferent spike count at source rows t+21 through t+40 inclusive, following a 20 ms gap. The forecast origin starts at t=200 and advances by 20 ms."
+}

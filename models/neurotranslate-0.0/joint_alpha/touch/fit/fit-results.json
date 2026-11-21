@@ -1,0 +1,641 @@
+{
+  "title": "Adding a fingertip sensory forecast to the seven-task transformer",
+  "plan_sha256": "8620602eef8ed5aa7c0dfe678c4f33aa70fc9cf9b21cf216a37c7b55761c754a",
+  "architecture": {
+    "width": 32,
+    "heads": 4,
+    "depth": 1,
+    "ff_width": 64
+  },
+  "training": {
+    "seed": 431,
+    "steps": 1920,
+    "batch_per_task": 32,
+    "learning_rate": 0.0015,
+    "schedule": "warmup_cosine",
+    "optimizer": "AdamW",
+    "weight_decay": 0.001,
+    "clip_norm": 2.0,
+    "dropout": 0,
+    "dtype": "float32"
+  },
+  "old_checkpoint_sha256": "f58dec8857015d84962aeb00259badf71b42d9bf7105cec35851a87826ed57d6",
+  "initial_shared_parameters_sha256": "f2824f124dd5339f7893dccc83be96b95cb80f33934133d6425342c658de6094",
+  "training_file_sha256": {
+    "human_leg_emg": "ce306e0144496161a483d13b3d7c3cc50521acde07638ef257ecadfdb6e5260b",
+    "human_sacrum_path": "a5ee2fcca91a3034e11444dd40b775b42c0a2965a84b607b585ad828622f7e61",
+    "landmark_motion": "b6514e194c77d88df12936bcd725e111adf6c2dd1813617f1ad0165122828c96",
+    "macaque_cortex_to_motion": "d1f1b2800821f67ae727b7005180e84479514730fd039c62c6943041a7911aa9",
+    "macaque_motion_to_cortex": "ef831bf2f518e580f5d43d0adcf2fc9c85a6d86619ab90cc03172f91e380edfd",
+    "optical_fluorescence": "d2414a185a7fb08dafce9888b6c038f4a2434f8f4d202eacbacf41d2a47272d6",
+    "rat_next_unit": "3c4248abd994380dccc36f2913e0682b01e254a88a2844b9447265df30a837e0",
+    "human_touch_afferent": "fc8aead483a5e8a5e06dfcdcbbc9ed9ab0be1c01fda8c584d83f79747332917d"
+  },
+  "training_content_sha256": {
+    "human_leg_emg": "2d1b0d97992488f2be0373cd96e3f33931085a31756b59b31520fe40bd9cafbc",
+    "human_sacrum_path": "bda07926e3eff7e041080bba639d6ca03f0003c8ffccaa248a7269763ac3b856",
+    "macaque_cortex_to_motion": "972c1c49310c0a355886ef8fda4b0652f19f583e86fc7bb13addb7021a2a846b",
+    "macaque_motion_to_cortex": "8f888348b91b81854f1287abdb6fa2b0c0055f5541bf07e4b7ee2616c5372736",
+    "rat_next_unit": "54427dfa159a987e89a14404a3bc4a3aec0d2848399051eaf3839081e9d511ef",
+    "optical_fluorescence": "ac678550289906a0dcc9c0b67f9cdfc2eb1dcfafc660164a8c017b9c30f35db7",
+    "landmark_motion": "fd633563abeea10b9cff666c919e49fa96c596ce2c0e7e6b18d95b34eaaa3279",
+    "human_touch_afferent": "dd28405745a334c5cc342a828dd7a0687628148fb2a940f04d7f4eaac567396b"
+  },
+  "training_rows": {
+    "human_leg_emg": 5179,
+    "human_sacrum_path": 5179,
+    "landmark_motion": 13816,
+    "macaque_cortex_to_motion": 519,
+    "macaque_motion_to_cortex": 519,
+    "optical_fluorescence": 35552,
+    "rat_next_unit": 54578,
+    "human_touch_afferent": 176685
+  },
+  "training_groups": {
+    "human_leg_emg": 18,
+    "human_sacrum_path": 18,
+    "landmark_motion": 2,
+    "macaque_cortex_to_motion": 198,
+    "macaque_motion_to_cortex": 198,
+    "optical_fluorescence": 9,
+    "rat_next_unit": 24,
+    "human_touch_afferent": 7
+  },
+  "initialization_order": [
+    "human_leg_emg",
+    "human_sacrum_path",
+    "landmark_motion",
+    "macaque_cortex_to_motion",
+    "macaque_motion_to_cortex",
+    "optical_fluorescence",
+    "rat_next_unit",
+    "human_touch_afferent"
+  ],
+  "eight": {
+    "filename": "eight-task.npz",
+    "role": "Jointly fitted on every source at every optimizer step",
+    "sha256": "40ae99055d36bf6f1cac9cbf8d4ee29a6b4bb56a88b24b923869e1c375a4bd79",
+    "compressed_checkpoint_bytes": 109034,
+    "parameter_count": 21830,
+    "shared_parameter_count": 8576,
+    "fit_seconds": 12.04782407998573,
+    "input_draws_per_task": {
+      "human_leg_emg": 61440,
+      "human_sacrum_path": 61440,
+      "landmark_motion": 61440,
+      "macaque_cortex_to_motion": 61440,
+      "macaque_motion_to_cortex": 61440,
+      "optical_fluorescence": 61440,
+      "rat_next_unit": 61440,
+      "human_touch_afferent": 61440
+    },
+    "observed_row_index_sequence_sha256": {
+      "human_leg_emg": "cbb86c95085d37655e9fdc900ed5d3d2c757c8dadb5df787c1ef2a22e3dffeaf",
+      "human_sacrum_path": "62a6d65eabc4920b251188c599e26eb5ca9dd806081e79c8b3a106ed0829b2ee",
+      "landmark_motion": "000c7d668f95812203bbc07785369503d294c660f05792cbad7008db45020bdf",
+      "macaque_cortex_to_motion": "607f58452475b37c5c0685835ce76b903b989f97ede842c3fec14b286ca6378a",
+      "macaque_motion_to_cortex": "e825281714078d8589d70c5c67908758b39cf60f72ab2fe5832eb8ad8869563d",
+      "optical_fluorescence": "8b6d3823838951aec4b9c0be94142f1657d6988ddbfd074870ffe570d745e9fa",
+      "rat_next_unit": "ab0600810a626f9573554b62a35010dca624528e208869e1da7546b71918aa87",
+      "human_touch_afferent": "ef1b18b520ad0c0ee874e65b4f6a29ba4857e54b413a041e617f0a3b955436f3"
+    },
+    "initial_all_parameters_sha256": "ab746bc2218c86859f7d6cbaf7c3c2c5bdb2a5f2e87e0532fc24e6d306b9b201",
+    "final_all_parameters_sha256": "4af1830073a9dcfcb1492f64058f4c55ba723628a5c188d74d9e3f2f50bca083",
+    "final_shared_parameters_sha256": "a268a3b69345bc00f71a6121abd00a029167be73ab647b3242c6db85c483370e",
+    "shared_gradient_l2_by_task": {
+      "1": {
+        "human_leg_emg": 0.48651918953779594,
+        "human_sacrum_path": 0.4169392343755488,
+        "landmark_motion": 1.4321036316623417,
+        "macaque_cortex_to_motion": 0.44500844145240004,
+        "macaque_motion_to_cortex": 1.0354788237110828,
+        "optical_fluorescence": 2.872243792572428,
+        "rat_next_unit": 1.3035535484067446,
+        "human_touch_afferent": 0.298427960042325
+      },
+      "1920": {
+        "human_leg_emg": 0.17338485223910477,
+        "human_sacrum_path": 0.2538383348626636,
+        "landmark_motion": 0.41763992713539544,
+        "macaque_cortex_to_motion": 0.2792259526907519,
+        "macaque_motion_to_cortex": 0.39773210171653034,
+        "optical_fluorescence": 0.19798131552854642,
+        "rat_next_unit": 0.5980752787813715,
+        "human_touch_afferent": 0.37151699463927634
+      }
+    }
+  },
+  "touch_only": {
+    "filename": "touch-only.npz",
+    "role": "Touch-only control with matched initial shared weights, touch head, cases and updates",
+    "sha256": "d43ad40f3cf3e788492d33396291b199b646046ec11f0eae632404914ccaaed3",
+    "compressed_checkpoint_bytes": 40944,
+    "parameter_count": 8961,
+    "shared_parameter_count": 8576,
+    "fit_seconds": 1.9701868620468304,
+    "input_draws_per_task": {
+      "human_touch_afferent": 61440
+    },
+    "observed_row_index_sequence_sha256": {
+      "human_touch_afferent": "ef1b18b520ad0c0ee874e65b4f6a29ba4857e54b413a041e617f0a3b955436f3"
+    },
+    "initial_all_parameters_sha256": "eff35627e272968ae5e5d0ff6237e8d129a382b7adf3f9a50b55795f0eedbba4",
+    "final_all_parameters_sha256": "690945a2b35557f576d76e18a48772dd6e0776d0985e04aba603060dad9ce1f3",
+    "final_shared_parameters_sha256": "50597d09709736028e58494649dd114db461af7eda9c6c4b35b88e0f5137f359",
+    "shared_gradient_l2_by_task": {
+      "1": {
+        "human_touch_afferent": 0.298427960042325
+      },
+      "1920": {
+        "human_touch_afferent": 0.29197452769694227
+      }
+    }
+  },
+  "architecture_note": "Eight task-specific adapters and output heads share the weights of a single temporal-attention block. Both touch models predict the expected spike count using a Poisson objective and a train-only rate offset.",
+  "runtime": {
+    "torch": "2.14.0+rocm10.1.0",
+    "numpy": "2.5.3",
+    "device": "cpu",
+    "torch_intraop": 2,
+    "torch_interop": 1,
+    "openblas": "1",
+    "processes": 1,
+    "loader_workers": 0,
+    "peak_rss_kib": 1137376
+  },
+  "runtime_scope": "Process peak RSS includes loaded arrays and fitting both models. Per-model fit seconds include the optimizer loop; whole process time also includes Python startup, input loading, checks and saving.",
+  "machine": "AMD Ryzen AI Max+ 395 (16 physical cores, 32 logical CPUs), two Torch CPU threads per fit.",
+  "full_training_process_seconds": 16.16,
+  "source_dependencies_sha256": {
+    "train.py": "b300c41913f9f28a3901912abff1536cbb0413e0ab6afaf0b5bdca1a6d2ae7df",
+    "network.py": "6313cfce4716c9eaf1ee4105e87d0f5e7a209827c8327b7dae89d38360a18666",
+    "inference.py": "f29848baa787581a979a5d9f3d5eca3f1fd894bfb2e40125a9b6a11abf88b1d8",
+    "protocol.json": "522c16a08533a6eb870cef4be3465847c88475a34563f26b394df7374913bf45",
+    "evaluate.py": "4eb028172c70893f8fdc3e9d6027b5d0f547cb942cb3cad6e1e02979baa859bb",
+    "training-summary.json": "4154f211a6e2843d2c4eecdc34a7d9b22db6e880a012c2696298d4a34f30f3d2"
+  },
+  "cpu_prefix": {
+    "fit_compute": {
+      "1": 0.5149297929601744,
+      "2": 0.45822179096285254
+    },
+    "after_import_complete_seconds": {
+      "1": 1.4360191959422082,
+      "2": 1.3835897779790685
+    },
+    "parity_on_train_inputs": {
+      "human_leg_emg": {
+        "rows": 32,
+        "max_abs": 7.62939453125e-06,
+        "within_float_tolerance": true
+      },
+      "human_sacrum_path": {
+        "rows": 32,
+        "max_abs": 1.9073486328125e-06,
+        "within_float_tolerance": true
+      },
+      "macaque_cortex_to_motion": {
+        "rows": 32,
+        "max_abs": 3.337860107421875e-06,
+        "within_float_tolerance": true
+      },
+      "macaque_motion_to_cortex": {
+        "rows": 32,
+        "max_abs": 5.7220458984375e-06,
+        "within_float_tolerance": true
+      },
+      "rat_next_unit": {
+        "rows": 32,
+        "max_abs": 1.4901161193847656e-07,
+        "within_float_tolerance": true
+      },
+      "optical_fluorescence": {
+        "rows": 32,
+        "max_abs": 1.1920928955078125e-07,
+        "within_float_tolerance": true
+      },
+      "landmark_motion": {
+        "rows": 32,
+        "max_abs": 5.587935447692871e-08,
+        "within_float_tolerance": true
+      },
+      "human_touch_afferent": {
+        "rows": 32,
+        "max_abs": 2.2351741790771484e-08,
+        "within_float_tolerance": true
+      }
+    },
+    "all_draws_match": true,
+    "complete_cold_process_seconds": {
+      "1": 2.72,
+      "2": 2.93
+    }
+  },
+  "historical_comparisons": {
+    "human_leg_emg": {
+      "test": {
+        "group_definition": "Whole person; all events and both posture sessions travel together. 18 development and six historical assessment participants. The separate reserve is excluded.",
+        "groups": 6,
+        "rows": 1759,
+        "primary_metric": "mae",
+        "eight": 10.078193664550781,
+        "matched_seven": 10.11608600616455,
+        "published_prior": 10.11608600616455,
+        "paired_eight_minus_seven": {
+          "mean": -0.03789218266805013,
+          "observed_group_bootstrap95": [
+            -0.08258784214655558,
+            0.0044901768366495025
+          ],
+          "groups": 6
+        },
+        "change_exceeds_numerical_tolerance": false,
+        "portable_parity_max_abs_32_rows": 1.1444091796875e-05,
+        "all_metrics": {
+          "mae": {
+            "eight": 10.078193664550781,
+            "matched_seven": 10.11608600616455
+          }
+        }
+      }
+    },
+    "human_sacrum_path": {
+      "test": {
+        "group_definition": "Whole person; all events and both posture sessions travel together. 18 development and six historical assessment participants. The separate reserve is excluded.",
+        "groups": 6,
+        "rows": 1759,
+        "primary_metric": "mean_knot_distance_mm",
+        "eight": 2.647035837173462,
+        "matched_seven": 2.6445019245147705,
+        "published_prior": 2.6445019245147705,
+        "paired_eight_minus_seven": {
+          "mean": 0.002533892790476481,
+          "observed_group_bootstrap95": [
+            -0.01637055476506551,
+            0.02912361274162927
+          ],
+          "groups": 6
+        },
+        "change_exceeds_numerical_tolerance": true,
+        "portable_parity_max_abs_32_rows": 3.5762786865234375e-06,
+        "all_metrics": {
+          "mean_knot_distance_mm": {
+            "eight": 2.647035837173462,
+            "matched_seven": 2.6445019245147705
+          },
+          "endpoint_distance_mm": {
+            "eight": 4.594074726104736,
+            "matched_seven": 4.586704730987549
+          },
+          "coordinate_mae": {
+            "eight": 1.3172922134399414,
+            "matched_seven": 1.3161940574645996
+          }
+        }
+      }
+    },
+    "macaque_cortex_to_motion": {
+      "test_block1": {
+        "group_definition": "Original trial nested within date and physical block. Earlier date train only. Both physical blocks seven days later held. This is one animal.",
+        "groups": 60,
+        "rows": 113,
+        "primary_metric": "mae",
+        "eight": 4.3903889656066895,
+        "matched_seven": 4.403834819793701,
+        "published_prior": 4.403834819793701,
+        "paired_eight_minus_seven": {
+          "mean": -0.013446174065272013,
+          "observed_group_bootstrap95": [
+            -0.17458542674779892,
+            0.14920760557055454
+          ],
+          "groups": 60
+        },
+        "change_exceeds_numerical_tolerance": false,
+        "portable_parity_max_abs_32_rows": 1.621246337890625e-05,
+        "all_metrics": {
+          "mae": {
+            "eight": 4.3903889656066895,
+            "matched_seven": 4.403834819793701
+          }
+        }
+      },
+      "test_block2": {
+        "group_definition": "Original trial nested within date and physical block. Earlier date train only. Both physical blocks seven days later held. This is one animal.",
+        "groups": 214,
+        "rows": 380,
+        "primary_metric": "mae",
+        "eight": 4.414082050323486,
+        "matched_seven": 4.411613464355469,
+        "published_prior": 4.411613464355469,
+        "paired_eight_minus_seven": {
+          "mean": 0.0024683001999543093,
+          "observed_group_bootstrap95": [
+            -0.0763376619631999,
+            0.0801837197948839
+          ],
+          "groups": 214
+        },
+        "change_exceeds_numerical_tolerance": true,
+        "portable_parity_max_abs_32_rows": 1.9550323486328125e-05,
+        "all_metrics": {
+          "mae": {
+            "eight": 4.414082050323486,
+            "matched_seven": 4.411613464355469
+          }
+        }
+      }
+    },
+    "macaque_motion_to_cortex": {
+      "test_block1": {
+        "group_definition": "Original trial nested within date and physical block. Earlier date train only. Both physical blocks seven days later held. This is one animal.",
+        "groups": 60,
+        "rows": 113,
+        "primary_metric": "poisson_nll_nats",
+        "eight": 2.4584156129696035,
+        "matched_seven": 2.3669695703482794,
+        "published_prior": 2.3669695703482794,
+        "paired_eight_minus_seven": {
+          "mean": 0.09144604262132364,
+          "observed_group_bootstrap95": [
+            0.062455065810616515,
+            0.1185069954327333
+          ],
+          "groups": 60
+        },
+        "change_exceeds_numerical_tolerance": true,
+        "portable_parity_max_abs_32_rows": 1.239776611328125e-05,
+        "all_metrics": {
+          "poisson_nll_nats": {
+            "eight": 2.4584156129696035,
+            "matched_seven": 2.3669695703482794
+          },
+          "count_mae": {
+            "eight": 2.1751599311828613,
+            "matched_seven": 2.086639165878296
+          }
+        }
+      },
+      "test_block2": {
+        "group_definition": "Original trial nested within date and physical block. Earlier date train only. Both physical blocks seven days later held. This is one animal.",
+        "groups": 214,
+        "rows": 380,
+        "primary_metric": "poisson_nll_nats",
+        "eight": 2.5117002841583975,
+        "matched_seven": 2.4711165009260836,
+        "published_prior": 2.4711165009260836,
+        "paired_eight_minus_seven": {
+          "mean": 0.04058378323231361,
+          "observed_group_bootstrap95": [
+            0.026240139917088737,
+            0.05490795667046818
+          ],
+          "groups": 214
+        },
+        "change_exceeds_numerical_tolerance": true,
+        "portable_parity_max_abs_32_rows": 9.5367431640625e-06,
+        "all_metrics": {
+          "poisson_nll_nats": {
+            "eight": 2.5117002841583975,
+            "matched_seven": 2.4711165009260836
+          },
+          "count_mae": {
+            "eight": 2.2916791439056396,
+            "matched_seven": 2.2691969871520996
+          }
+        }
+      }
+    },
+    "rat_next_unit": {
+      "test_js14": {
+        "group_definition": "Trip number within recording; one rat trained, JS14 55\u201378 inclusive; JS14 80\u201389 held, trial 79 omitted. ER1 0\u20139 external. Never equate sorted unit IDs between rats.",
+        "groups": 10,
+        "rows": 32866,
+        "primary_metric": "log_loss_nats",
+        "eight": 2.7829504013061523,
+        "matched_seven": 2.785806179046631,
+        "published_prior": 2.785806179046631,
+        "paired_eight_minus_seven": {
+          "mean": -0.0028558969497680664,
+          "observed_group_bootstrap95": [
+            -0.0032778531312942505,
+            -0.002374550104141236
+          ],
+          "groups": 10
+        },
+        "change_exceeds_numerical_tolerance": false,
+        "portable_parity_max_abs_32_rows": 1.7881393432617188e-07,
+        "all_metrics": {
+          "log_loss_nats": {
+            "eight": 2.7829504013061523,
+            "matched_seven": 2.785806179046631
+          },
+          "top1": {
+            "eight": 0.24954976975620516,
+            "matched_seven": 0.2487905020049732
+          },
+          "midrank": {
+            "eight": 7.319640445529937,
+            "matched_seven": 7.332118791038726
+          }
+        }
+      },
+      "test_er1": {
+        "group_definition": "Trip number within recording; one rat trained, JS14 55\u201378 inclusive; JS14 80\u201389 held, trial 79 omitted. ER1 0\u20139 external. Never equate sorted unit IDs between rats.",
+        "groups": 10,
+        "rows": 56926,
+        "primary_metric": "log_loss_nats",
+        "eight": 3.2859790325164795,
+        "matched_seven": 3.28752064704895,
+        "published_prior": 3.28752064704895,
+        "paired_eight_minus_seven": {
+          "mean": -0.001541447639465332,
+          "observed_group_bootstrap95": [
+            -0.0019721865653991697,
+            -0.00107258677482605
+          ],
+          "groups": 10
+        },
+        "change_exceeds_numerical_tolerance": false,
+        "portable_parity_max_abs_32_rows": 2.384185791015625e-07,
+        "all_metrics": {
+          "log_loss_nats": {
+            "eight": 3.2859790325164795,
+            "matched_seven": 3.28752064704895
+          },
+          "top1": {
+            "eight": 0.19278679839147989,
+            "matched_seven": 0.19159379507218322
+          },
+          "midrank": {
+            "eight": 11.353416242352413,
+            "matched_seven": 11.362624186031098
+          }
+        }
+      }
+    },
+    "optical_fluorescence": {
+      "test_fish": {
+        "group_definition": "One training fish and eight worm recordings on different dates, one subject per recording in the source. Seven distinct held zebrafish. ROIs and windows are repeated observations. No held worm assessment.",
+        "groups": 7,
+        "rows": 28000,
+        "primary_metric": "mae",
+        "eight": 0.07139835506677628,
+        "matched_seven": 0.07070329785346985,
+        "published_prior": 0.07070329785346985,
+        "paired_eight_minus_seven": {
+          "mean": 0.0006950561489377703,
+          "observed_group_bootstrap95": [
+            -0.00035468808242252896,
+            0.0014780980002667224
+          ],
+          "groups": 7
+        },
+        "change_exceeds_numerical_tolerance": true,
+        "portable_parity_max_abs_32_rows": 2.384185791015625e-07,
+        "all_metrics": {
+          "mae": {
+            "eight": 0.07139835506677628,
+            "matched_seven": 0.07070329785346985
+          }
+        }
+      }
+    },
+    "landmark_motion": {
+      "test_120ms": {
+        "group_definition": "Two original development recording groups containing 9 within-video tracks (mouse open field and gerbils). Historical test retains all 14 original held recording groups. Track IDs are local; cross-recording individual identity unverified.",
+        "groups": 13,
+        "rows": 23535,
+        "primary_metric": "mae",
+        "eight": 0.09256475418806076,
+        "matched_seven": 0.09222293645143509,
+        "published_prior": 0.09222293645143509,
+        "paired_eight_minus_seven": {
+          "mean": 0.0003418244708042878,
+          "observed_group_bootstrap95": [
+            -0.00027637509987331354,
+            0.0011923665897204323
+          ],
+          "groups": 13
+        },
+        "change_exceeds_numerical_tolerance": true,
+        "portable_parity_max_abs_32_rows": 8.940696716308594e-08,
+        "all_metrics": {
+          "mae": {
+            "eight": 0.09256475418806076,
+            "matched_seven": 0.09222293645143509
+          }
+        }
+      },
+      "test_200ms": {
+        "group_definition": "Two original development recording groups containing 9 within-video tracks (mouse open field and gerbils). Historical test retains all 14 original held recording groups. Track IDs are local; cross-recording individual identity unverified.",
+        "groups": 1,
+        "rows": 1680,
+        "primary_metric": "mae",
+        "eight": 0.13489899039268494,
+        "matched_seven": 0.13813957571983337,
+        "published_prior": 0.13813957571983337,
+        "paired_eight_minus_seven": {
+          "mean": -0.0032405853271484375,
+          "observed_group_bootstrap95": null,
+          "groups": 1
+        },
+        "change_exceeds_numerical_tolerance": false,
+        "portable_parity_max_abs_32_rows": 1.1175870895385742e-07,
+        "all_metrics": {
+          "mae": {
+            "eight": 0.13489899039268494,
+            "matched_seven": 0.13813957571983337
+          }
+        }
+      }
+    }
+  },
+  "touch_development": {
+    "people": 2,
+    "rows": 41416,
+    "participant_balanced": {
+      "joint_true_force": {
+        "poisson_nll_nats": 0.19260327667139712,
+        "count_mae": 0.10571536713532582
+      },
+      "joint_previous_repeat_force": {
+        "poisson_nll_nats": 0.19260856821196257,
+        "count_mae": 0.105712850206936
+      },
+      "touch_only_true_force": {
+        "poisson_nll_nats": 0.18231193424245676,
+        "count_mae": 0.09758418865201633
+      },
+      "touch_only_previous_repeat_force": {
+        "poisson_nll_nats": 0.18229962734387659,
+        "count_mae": 0.0976173710825807
+      },
+      "training_rate": {
+        "poisson_nll_nats": 0.2367951987843413,
+        "count_mae": 0.15588506364661342
+      },
+      "source_baseline": {
+        "poisson_nll_nats": 0.9837272945538489,
+        "count_mae": 0.10083059687077459
+      }
+    },
+    "portable_torch_max_abs_on_32_cases": {
+      "joint": 1.7881393432617188e-07,
+      "touch_only": 1.1920928955078125e-07
+    }
+  },
+  "replacement_decision": {
+    "legacy_regressions": [
+      [
+        "human_sacrum_path",
+        "test"
+      ],
+      [
+        "macaque_cortex_to_motion",
+        "test_block2"
+      ],
+      [
+        "macaque_motion_to_cortex",
+        "test_block1"
+      ],
+      [
+        "macaque_motion_to_cortex",
+        "test_block2"
+      ],
+      [
+        "optical_fluorescence",
+        "test_fish"
+      ],
+      [
+        "landmark_motion",
+        "test_120ms"
+      ]
+    ],
+    "both_development_people_beat_training_rate": true,
+    "person_balanced_joint_nll_no_worse_than_touch_only": false,
+    "status": "retain the public seven-task prior"
+  },
+  "portable_reproduction": {
+    "fitted_checkpoints": {
+      "eight": {
+        "expected_sha256": "40ae99055d36bf6f1cac9cbf8d4ee29a6b4bb56a88b24b923869e1c375a4bd79",
+        "observed_sha256": "40ae99055d36bf6f1cac9cbf8d4ee29a6b4bb56a88b24b923869e1c375a4bd79",
+        "identical_bytes": true
+      },
+      "touch_only": {
+        "expected_sha256": "d43ad40f3cf3e788492d33396291b199b646046ec11f0eae632404914ccaaed3",
+        "observed_sha256": "d43ad40f3cf3e788492d33396291b199b646046ec11f0eae632404914ccaaed3",
+        "identical_bytes": true
+      },
+      "seven": {
+        "expected_sha256": "f58dec8857015d84962aeb00259badf71b42d9bf7105cec35851a87826ed57d6",
+        "observed_sha256": "f58dec8857015d84962aeb00259badf71b42d9bf7105cec35851a87826ed57d6",
+        "identical_bytes": true
+      }
+    },
+    "eight_and_touch_only_seconds_whole_process": 16.71,
+    "seven_seconds_whole_process": 13.45,
+    "train_script_sha256": "8eedd134585f0e76918970a62e87c2fa11cc1b517259d9e3c16aad425829cfc3"
+  }
+}

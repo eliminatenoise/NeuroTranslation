@@ -164,11 +164,13 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT, *, wrist_case=None, wr
                    wrist_modality=None):
     if not isinstance(record, dict):
         raise ValueError("Expected a JSON input object.")
-    if record.get("domain") == "joint_alpha" or ("task" in record and "X" in record and "domain" not in record):
-        from joint_alpha.product import Product, WEIGHTS
+    if record.get("domain") in ("joint_alpha", "joint_touch") or ("task" in record and "X" in record and "domain" not in record):
+        from joint_alpha.product import Product, TOUCH_WEIGHTS, WEIGHTS
         if any(value is not None for value in (wrist_case, wrist_treatment, wrist_modality)):
             raise ValueError("Wrist endpoint options require a wrist-forecast-v1 input.")
-        return Product(WEIGHTS if Path(checkpoint) == DEFAULT_CHECKPOINT else checkpoint).predict(record)
+        if Path(checkpoint) == DEFAULT_CHECKPOINT:
+            checkpoint = TOUCH_WEIGHTS if record.get("domain") == "joint_touch" else WEIGHTS
+        return Product(checkpoint).predict(record)
     if record.get("domain") == "bilateral_wrist_endpoint" or {"format", "weights", "cases"} <= record.keys():
         from bilateral_wrist.forecast import forecast as predict_wrists
         if Path(checkpoint) != DEFAULT_CHECKPOINT:
@@ -342,7 +344,13 @@ if __name__ == "__main__":
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--list-joint", action="store_true", help="show the joint alpha tasks, inputs and output units")
     mode.add_argument("--example", metavar="TASK", help="forecast the invented input for a joint alpha task")
+    parser.add_argument("--touch", action="store_true", help="use the eight-task touch-study checkpoint")
     args = parser.parse_args()
+    if args.touch:
+        if args.checkpoint != DEFAULT_CHECKPOINT:
+            parser.error("Choose either --touch or --checkpoint.")
+        from joint_alpha.product import TOUCH_WEIGHTS
+        args.checkpoint = TOUCH_WEIGHTS
     if args.input and (args.example or args.list_joint):
         parser.error("Choose an input file or a joint example.")
     try:
@@ -354,7 +362,8 @@ if __name__ == "__main__":
                 model = Product(WEIGHTS if args.checkpoint == DEFAULT_CHECKPOINT else args.checkpoint)
                 print(json.dumps(model.catalog(), ensure_ascii=False, indent=2))
                 parser.exit()
-            cases = examples()
+            with_touch = args.checkpoint != DEFAULT_CHECKPOINT and Product(args.checkpoint).with_touch
+            cases = examples(with_touch=with_touch)
             task = args.example or next(iter(cases))
             if task not in cases:
                 parser.error("Unknown task. Run --list-joint for the available names.")

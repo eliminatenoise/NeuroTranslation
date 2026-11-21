@@ -3,6 +3,8 @@
 
 **[Run the joint alpha demo](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/)**. Extract [NeuroTranslate 0.0](models/neurotranslate-0.0.zip), install Python and NumPy if needed, and choose **Demo on Windows**, **Demo on macOS** or **Demo on Linux**. The demo loads the same local weights as `python predict.py`. The Run forecasts launcher executes a fictional example in the terminal.
 
+Choose **Touch study** in the same extracted folder to try the eight-task model. [Fingertip experiment and results](https://eliminatenoise.github.io/NeuroTranslation/touch-feedback/).
+
 Almost everything here runs in a browser. A launcher is a shortcut that opens the right page. An offline copy is a ZIP that holds the page itself, so it works with no network. The general model’s five-sensor walking page and the study 28 wrist command need Python. The two newer stride and rat viewers open without it.
 
 ## A shortcut to NeuroTranslator, the app

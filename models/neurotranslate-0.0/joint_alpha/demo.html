@@ -20,7 +20,7 @@
 <p id="range"></p>
 <div class="controls"><label>Time step<select id="step"></select></label><label>Reading <span id="unit"></span><input id="value" type="number" step="any"></label></div>
 <div class="buttons"><button id="run" class="run">Run forecast</button><button id="reset">Restore example</button></div>
-<details><summary>Use your own input</summary><p>Choose one JSON record for this task. A null channel value represents a missing reading. The file stays on this computer.</p>
+<details><summary>Use your own input</summary><p>Choose one JSON record for this task. <span id="missing-hint">A null channel value represents a missing reading.</span> The file stays on this computer.</p>
 <label>Input JSON file<input id="upload" type="file" accept=".json,application/json"></label>
 <button id="save">Save this input as JSON</button></details>
 </section><section><h2>Forecast</h2><p id="forecast-note"></p>
