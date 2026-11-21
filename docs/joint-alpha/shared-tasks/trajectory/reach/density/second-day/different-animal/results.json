@@ -1,0 +1,322 @@
+{
+  "scope": "Different-animal transfer from C to L on one processed recorded reaching task.",
+  "training_recording": "C_20170907_TRT_TD",
+  "comparison_recording": "L_20170921_TRT_TD",
+  "input_fields": [
+    "hand position",
+    "elbow marker position",
+    "planar handle position"
+  ],
+  "fit": {
+    "originals": 72,
+    "cue_windows": 194,
+    "union_windows": 1533,
+    "seeds": [
+      1117,
+      2971
+    ],
+    "draws": 32
+  },
+  "horizons_ms": [
+    20,
+    50,
+    70,
+    100
+  ],
+  "source_originals": 789,
+  "selected_originals": 312,
+  "scored_windows": 10349,
+  "coverage": {
+    "grid_before_bounds": 11253,
+    "short_history": 624,
+    "short_future_after_history": 280,
+    "candidate_windows": 10349,
+    "nonfinite_past_windows": 0,
+    "admitted_windows": 10349,
+    "incomplete_target_windows": 0,
+    "scored_windows": 10349
+  },
+  "uncertainty": {
+    "unit": "original trial in one L recording",
+    "originals": 312,
+    "replicates": 4000,
+    "seed": 270411,
+    "index_sha256": "03ddd6e34531ef060f3f72285e4d5f02d92c075286d4f864a818728f5dc1a9fd",
+    "interval": "Unadjusted paired 95% percentile interval. Both fits and both fixed seeds use the same resampled original IDs."
+  },
+  "metric_definition": "Fair energy uses the complete 24-coordinate displacement path. Divide distances by sqrt(8) for two markers at four horizons. Subtract half the mean distance between distinct ordered draws from mean sample-to-observation distance. For deterministic methods use normalized path distance. ADE and FDE use Euclidean marker distances from the ensemble mean at all horizons or the final horizon.",
+  "estimators": {
+    "ar_ridge": "Autoregressive transformer",
+    "diff_ridge": "Diffusion transformer",
+    "ridge_residual": "Linear paths with sampled errors",
+    "ridge_point": "One linear path",
+    "velocity20": "Continue the last 20 ms of velocity",
+    "velocity100": "Continue the last 100 ms of velocity"
+  },
+  "scores": {
+    "ar_ridge": {
+      "cue_fit": {
+        "energy_mm": 3.1794793795623306,
+        "ADE_mm": 3.7225556106901965,
+        "FDE_mm": 5.862542872368492
+      },
+      "denser_fit": {
+        "energy_mm": 2.7910837165697906,
+        "ADE_mm": 3.0197813346666385,
+        "FDE_mm": 5.9826081791958545
+      },
+      "denser_minus_cue": {
+        "difference": {
+          "energy_mm": -0.38839566299253886,
+          "ADE_mm": -0.7027742760235588,
+          "FDE_mm": 0.12006530682736336
+        },
+        "lower_95": {
+          "energy_mm": -0.42173043881525296,
+          "ADE_mm": -0.7397740720102688,
+          "FDE_mm": 0.0714134336625287
+        },
+        "upper_95": {
+          "energy_mm": -0.35503460335802367,
+          "ADE_mm": -0.6658946618957498,
+          "FDE_mm": 0.1682142969258403
+        },
+        "originals_lower": {
+          "energy_mm": 283,
+          "ADE_mm": 306,
+          "FDE_mm": 123
+        },
+        "originals_tied": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        },
+        "originals_higher": {
+          "energy_mm": 29,
+          "ADE_mm": 6,
+          "FDE_mm": 189
+        }
+      }
+    },
+    "diff_ridge": {
+      "cue_fit": {
+        "energy_mm": 5.443643304277375,
+        "ADE_mm": 5.25960398836888,
+        "FDE_mm": 8.988602174208332
+      },
+      "denser_fit": {
+        "energy_mm": 2.669516881250797,
+        "ADE_mm": 2.9904902776955824,
+        "FDE_mm": 5.8070930702362284
+      },
+      "denser_minus_cue": {
+        "difference": {
+          "energy_mm": -2.7741264230265754,
+          "ADE_mm": -2.2691137106733,
+          "FDE_mm": -3.1815091039721137
+        },
+        "lower_95": {
+          "energy_mm": -2.8302192222505207,
+          "ADE_mm": -2.3180928841645025,
+          "FDE_mm": -3.243148990465017
+        },
+        "upper_95": {
+          "energy_mm": -2.7194646087631895,
+          "ADE_mm": -2.220703698633032,
+          "FDE_mm": -3.1195658056331808
+        },
+        "originals_lower": {
+          "energy_mm": 312,
+          "ADE_mm": 312,
+          "FDE_mm": 312
+        },
+        "originals_tied": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        },
+        "originals_higher": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        }
+      }
+    },
+    "ridge_residual": {
+      "cue_fit": {
+        "energy_mm": 4.370938852987401,
+        "ADE_mm": 4.836858268982385,
+        "FDE_mm": 8.100269363446241
+      },
+      "denser_fit": {
+        "energy_mm": 2.5285386877369005,
+        "ADE_mm": 2.8196695835415184,
+        "FDE_mm": 5.47043640996986
+      },
+      "denser_minus_cue": {
+        "difference": {
+          "energy_mm": -1.8424001652505002,
+          "ADE_mm": -2.017188685440866,
+          "FDE_mm": -2.629832953476376
+        },
+        "lower_95": {
+          "energy_mm": -1.8923038140370128,
+          "ADE_mm": -2.0653326722215013,
+          "FDE_mm": -2.696613067376774
+        },
+        "upper_95": {
+          "energy_mm": -1.7945727080567706,
+          "ADE_mm": -1.970097476431568,
+          "FDE_mm": -2.5665521517108854
+        },
+        "originals_lower": {
+          "energy_mm": 312,
+          "ADE_mm": 312,
+          "FDE_mm": 312
+        },
+        "originals_tied": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        },
+        "originals_higher": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        }
+      }
+    },
+    "ridge_point": {
+      "cue_fit": {
+        "energy_mm": 5.966957058712397,
+        "ADE_mm": 4.810575692153892,
+        "FDE_mm": 8.049804543820516
+      },
+      "denser_fit": {
+        "energy_mm": 3.478800379545784,
+        "ADE_mm": 2.7514776476651868,
+        "FDE_mm": 5.34189126974369
+      },
+      "denser_minus_cue": {
+        "difference": {
+          "energy_mm": -2.488156679166609,
+          "ADE_mm": -2.0590980444887035,
+          "FDE_mm": -2.7079132740768252
+        },
+        "lower_95": {
+          "energy_mm": -2.538321682065424,
+          "ADE_mm": -2.107540042580453,
+          "FDE_mm": -2.772417677619479
+        },
+        "upper_95": {
+          "energy_mm": -2.4382534329193555,
+          "ADE_mm": -2.0128245813952796,
+          "FDE_mm": -2.6453873726573556
+        },
+        "originals_lower": {
+          "energy_mm": 312,
+          "ADE_mm": 312,
+          "FDE_mm": 312
+        },
+        "originals_tied": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        },
+        "originals_higher": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        }
+      }
+    },
+    "velocity20": {
+      "cue_fit": {
+        "energy_mm": 2.8014780216145287,
+        "ADE_mm": 2.2253814913892485,
+        "FDE_mm": 4.061811710939536
+      },
+      "denser_fit": {
+        "energy_mm": 2.8014780216145287,
+        "ADE_mm": 2.2253814913892485,
+        "FDE_mm": 4.061811710939536
+      },
+      "denser_minus_cue": {
+        "difference": {
+          "energy_mm": 0.0,
+          "ADE_mm": 0.0,
+          "FDE_mm": 0.0
+        },
+        "lower_95": {
+          "energy_mm": 0.0,
+          "ADE_mm": 0.0,
+          "FDE_mm": 0.0
+        },
+        "upper_95": {
+          "energy_mm": 0.0,
+          "ADE_mm": 0.0,
+          "FDE_mm": 0.0
+        },
+        "originals_lower": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        },
+        "originals_tied": {
+          "energy_mm": 312,
+          "ADE_mm": 312,
+          "FDE_mm": 312
+        },
+        "originals_higher": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        }
+      }
+    },
+    "velocity100": {
+      "cue_fit": {
+        "energy_mm": 3.284868909970386,
+        "ADE_mm": 2.6877098251104754,
+        "FDE_mm": 4.657881221917485
+      },
+      "denser_fit": {
+        "energy_mm": 3.284868909970386,
+        "ADE_mm": 2.6877098251104754,
+        "FDE_mm": 4.657881221917485
+      },
+      "denser_minus_cue": {
+        "difference": {
+          "energy_mm": 0.0,
+          "ADE_mm": 0.0,
+          "FDE_mm": 0.0
+        },
+        "lower_95": {
+          "energy_mm": 0.0,
+          "ADE_mm": 0.0,
+          "FDE_mm": 0.0
+        },
+        "upper_95": {
+          "energy_mm": 0.0,
+          "ADE_mm": 0.0,
+          "FDE_mm": 0.0
+        },
+        "originals_lower": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        },
+        "originals_tied": {
+          "energy_mm": 312,
+          "ADE_mm": 312,
+          "FDE_mm": 312
+        },
+        "originals_higher": {
+          "energy_mm": 0,
+          "ADE_mm": 0,
+          "FDE_mm": 0
+        }
+      }
+    }
+  }
+}
