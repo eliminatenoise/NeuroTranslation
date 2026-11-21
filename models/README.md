@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0
 
+The [cylinder-rotation package](cylinder-rotation/) contains fitted models that read a single moving sensor and forecast the next 100 ms. [Change a sensor reading and try the model](https://eliminatenoise.github.io/NeuroTranslation/cylinder-rotation/)
+
 The [target-reach model and source](target-reach/) predict object displacement to three future times after an initial 200 ms of tracked motion. [Type a destination](https://eliminatenoise.github.io/NeuroTranslation/target-reach/)
 
 [The next-day count model](contact-forecast/) estimates detected events at 26 shared contacts after a push. [Run the fitted models](https://eliminatenoise.github.io/NeuroTranslation/contact-forecast/)

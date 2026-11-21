@@ -1,0 +1,55 @@
+{
+  "clock": "Native first exported row = 0 s. Export has no packet counter, independent hardware event marker or per-packet receipt time.",
+  "dataset": {
+    "archive_sha256": "ebcde74b260f4a1e7b57ce0bb626bb6ee0703e6ba75c258267211933da3d8c79",
+    "measurement_header": [
+      "time[s]",
+      "acc_x[m/s^2]",
+      "acc_y[m/s^2]",
+      "acc_z[m/s^2]",
+      "acc_free_x[m/s^2]",
+      "acc_free_y[m/s^2]",
+      "acc_free_z[m/s^2]",
+      "gyroscope_x[rad/s]",
+      "gyroscope_y[rad/s]",
+      "gyroscope_z[rad/s]",
+      "magnetometer_x[au]",
+      "magnetometer_y[au]",
+      "magnetometer_z[au]",
+      "quaternion_w",
+      "quaternion_x",
+      "quaternion_y",
+      "quaternion_z"
+    ],
+    "size_bytes": 1928361942,
+    "version": 1
+  },
+  "donor": "Within this split, use closest strictly earlier eligible original by native recording order within participant, hand, target and cutoff. Change only the accelerometer history. Use -1 if no earlier valid donor.",
+  "gallery": "First usable development participant then earliest native recording, for each hand and target, allowing all future usable cutoffs in gallery. Require contiguous native time and finite display channels including a near-unit quaternion (norm within 0.001) for gallery only.",
+  "original_protocol_sha256": "f027c7c3f7c362b7800946f73002ca61d55cae690eed96db280556ba9d84ea99",
+  "release": "Numerical decoding train first. Validate source-bound authorization from the integration owner before each evaluation split. Copying opaque selected file bytes for a single archive decompression pass does not open numerical outcomes.",
+  "roster": "Same 24 development participants; separately numbered native recording series per hand. Use both original modality flags. Never replace excluded trials. Fit/validation/test span zero-based assigned repetitions 2..5/6..7/8..9.",
+  "sha256": {
+    "build.py": "477528c86725d641f4b8b4fbe13f836a54343cd79d6a6186fb64b0c66d073cb2",
+    "prospective-repetitions.csv": "636d035a298cf4a3517d039e08b1111e210b170ad4acfabb9ae3328b15130828",
+    "stage.py": "4a013d79dd169222e916a111f5c6de9e3daced54951e85ce4eb0a58c111bb91e",
+    "windows.py": "90109c3c65e9a6c53ffe57f6cbf8bd4cf602bad5535a1336a75c491fb668ae7c"
+  },
+  "source_protocol_id": "Ruhr cylinder inertial single-clock repetition forecast",
+  "window": {
+    "cutoff_ms": [
+      200,
+      600,
+      1000,
+      1400,
+      1800,
+      2200,
+      2600
+    ],
+    "history": "20 consecutive samples immediately before cutoff",
+    "outcome": "axis-wise mean of next 10 consecutive samples including cutoff",
+    "period_s": 0.01,
+    "sources": "Native device XYZ calibrated acceleration with gravity, native gyro XYZ, both required finite for joint windows. Ignore other columns for eligibility. Keep zero. Retain complete rows without imputation. Record skipped/incomplete windows.",
+    "tolerance_s": 1e-07
+  }
+}

@@ -1542,5 +1542,19 @@
     "source_doi": "10.17605/OSF.IO/J3QC8",
     "paper_doi": "10.1038/s41597-025-05576-7",
     "scope": "People carried a cylinder to nine visual targets in separate left- and right-hand sessions. Seven people were held out. At the 15 mm crossing clock the full model missed the optical centroid by 12.13 mm at 600 ms. The benefit over pose alone remained unresolved. Recorded-frame timing is distinct from acoustic go or physical lift onset."
+  },
+  "cylinder_rotation": {
+    "reader": "docs/cylinder-rotation/index.html",
+    "offline_reader": "docs/cylinder-rotation-offline.zip",
+    "model": "models/cylinder-rotation/README.md",
+    "model_zip": "models/cylinder-rotation.zip",
+    "paper": "docs/papers/cylinder-rotation/index.html",
+    "pdf": "docs/papers/cylinder-rotation/cylinder-rotation.pdf",
+    "test": "models/cylinder-rotation/results/test/summary.json",
+    "orientation": "models/cylinder-rotation/orientation/test.json",
+    "atlas": "https://eliminatenoise.github.io/Interoceptomics/cylinder-rotation/",
+    "data_doi": "10.17605/OSF.IO/J3QC8",
+    "article_doi": "10.1038/s41597-025-05576-7",
+    "scope": "The one-clock sensor forecasts mean angular velocity and acceleration in the next 100 ms of later target repetitions in 24 previously recorded volunteers. Correctly paired acceleration beat an earlier-trial replacement, while improvement over angular history and cues remained uncertain. The lowest angular-velocity miss came from both sensors without target number. On-device orientation is a secondary reference."
   }
 }
