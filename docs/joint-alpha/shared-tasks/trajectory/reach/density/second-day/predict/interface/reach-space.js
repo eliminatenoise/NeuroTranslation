@@ -120,6 +120,20 @@
     }
   }
 
+  function timeIndicator(key, marker) {
+    const group = svg("g", {class: "space-indicator " + key, "data-marker": marker, display: "none"});
+    const mark = symbolFor(key);
+    placeSymbol(mark, key, [0, 0]);
+    // Different sizes keep a circle, triangle and square legible at the same position.
+    const scale = {input: 3.6, absolute: 2.25, relative: 1.55, velocity: 3.6};
+    mark.setAttribute("transform", "scale(" + scale[key] + ")");
+    const border = mark.cloneNode(false);
+    border.setAttribute("class", "symbol-border");
+    group.append(border, mark);
+    if (key === "input") group.append(svg("circle", {class: "input-dot", r: 2.75}));
+    return group;
+  }
+
   function createReachSpace() {
     const get = id => document.getElementById(id);
     const card = get("space-view");
@@ -127,9 +141,77 @@
     const plot = get("space-plot"), focus = get("space-markers"), angle = get("space-angle");
     const series = get("space-series"), details = get("space-readout"), tables = get("space-tables");
     const summary = get("space-summary");
+    const slider = get("space-time"), instant = get("space-instant");
+    const previous = get("space-previous"), next = get("space-next"), play = get("space-play");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const savedSteps = new WeakMap();
     let [yaw, pitch] = angles.oblique;
     let sites = [], visible = [], lines = [], labels = [], times = {}, frame, guideLayer, gesture;
     let selection = "", preferredSeries = "input", drawRequest = 0;
+    let readingsInView = null, instants = [], step = 0, playTimer = 0, projection = null;
+
+    function highlightStep() {
+      if (!projection || !instants.length) return;
+      const input = step < times.input.length;
+      // Each forecast track starts with a copy of its last input, before its four estimates.
+      const pointIndex = input ? step : step - times.input.length + 1;
+      for (const {key, path, indicator} of lines) {
+        if (input !== (key === "input")) {
+          indicator.setAttribute("display", "none");
+          continue;
+        }
+        indicator.removeAttribute("display");
+        const [x, y] = projection.project(path[pointIndex]);
+        indicator.setAttribute("transform", `translate(${x} ${y})`);
+      }
+      for (const {site, text} of labels) {
+        const path = input ? site.tracks.input : (site.tracks.absolute || site.tracks.relative);
+        const [x, y] = projection.project(path[pointIndex]);
+        text.setAttribute("x", Math.max(32, Math.min(plot.clientWidth - 32, x)));
+        text.setAttribute("y", Math.max(16, Math.min(plot.clientHeight - 12, y + (site.name === "Hand" ? -14 : 21))));
+      }
+    }
+
+    function markTableStep() {
+      if (!details.open) return;
+      for (const row of tables.querySelectorAll("[aria-current]")) row.removeAttribute("aria-current");
+      for (const row of tables.querySelectorAll(`tr[data-time="${instants[step]}"]`)) row.setAttribute("aria-current", "step");
+    }
+
+    function setStep(index) {
+      if (!instants.length) return;
+      step = index;
+      savedSteps.set(readingsInView, step);
+      slider.value = String(step);
+      const ms = instants[step], count = times.input.length;
+      const signed = ms > 0 ? "+" + ms : String(ms).replace("-", "−");
+      const source = step < count ? `Input ${step + 1} of ${count}` : `Forecast ${step - count + 1} of ${instants.length - count}`;
+      const label = `${signed} ms · ${source}`;
+      instant.textContent = label;
+      slider.setAttribute("aria-valuetext", label);
+      previous.disabled = step === 0;
+      next.disabled = step === instants.length - 1;
+      if (!playTimer) play.textContent = next.disabled ? "Replay slowly" : "Play slowly";
+      highlightStep();
+      markTableStep();
+    }
+
+    function pause() {
+      clearTimeout(playTimer);
+      playTimer = 0;
+      play.textContent = instants.length && step === instants.length - 1 ? "Replay slowly" : "Play slowly";
+      instant.setAttribute("aria-live", "polite");
+    }
+
+    function playNext() {
+      if (step >= instants.length - 1) {
+        pause();
+        return;
+      }
+      // Slow the recorded intervals for inspection. Only move to a supplied instant.
+      const interval = instants[step + 1] - instants[step];
+      playTimer = setTimeout(() => { setStep(step + 1); playNext(); }, 25 * interval);
+    }
 
     function draw() {
       drawRequest = 0;
@@ -146,13 +228,13 @@
         const first = key === "input" ? 0 : 1;
         symbols.forEach((symbol, i) => placeSymbol(symbol, key, points[i + first]));
       }
-      for (const {site, mark, text} of labels) {
+      for (const {site, mark} of labels) {
         const [x, y] = view.project(site.last);
         mark.setAttribute("cx", x);
         mark.setAttribute("cy", y);
-        text.setAttribute("x", Math.max(32, Math.min(w - 32, x)));
-        text.setAttribute("y", Math.max(16, Math.min(h - 12, y + (site.name === "Hand" ? -14 : 21))));
       }
+      projection = view;
+      highlightStep();
     }
 
     function schedule() {
@@ -176,6 +258,7 @@
         const body = table.createTBody();
         site.tracks[key].forEach((point, i) => {
           const row = body.insertRow();
+          row.dataset.time = times[key][i];
           const time = document.createElement("th");
           time.scope = "row";
           time.textContent = String(times[key][i]);
@@ -184,12 +267,14 @@
         });
         tables.append(table);
       }
+      markTableStep();
     }
 
     function setMarkers() {
       if (!sites.length) return;
       visible = sites.filter(site => focus.value === "both" || site.name.toLowerCase() === focus.value);
       frame = frameFor(visible);
+      projection = null;
       guideLayer = svg("g");
       const drawing = document.createDocumentFragment();
       drawing.append(guideLayer);
@@ -202,13 +287,21 @@
           const symbols = (key === "input" ? path : path.slice(1)).map(() => symbolFor(key));
           group.append(line, ...symbols);
           drawing.append(group);
-          lines.push({key, path, line, symbols});
+          const indicator = timeIndicator(key, site.name.toLowerCase());
+          lines.push({key, path, line, symbols, indicator});
         }
         const mark = svg("circle", {class: "space-origin", r: 4.5});
         const text = svg("text", {class: "space-label", "text-anchor": "middle"}, site.name);
         labels.push({site, mark, text});
       }
-      for (const {mark, text} of labels) drawing.append(mark, text);
+      for (const {mark} of labels) drawing.append(mark);
+      const highlights = svg("g", {"aria-hidden": "true"});
+      for (const {key, indicator} of lines) {
+        if (key === "velocity") highlights.prepend(indicator);
+        else highlights.append(indicator);
+      }
+      drawing.append(highlights);
+      for (const {text} of labels) drawing.append(text);
       plot.replaceChildren(drawing);
       summary.textContent = visible.map(site => site.name).join(" and ") + ". " + selection + ". " +
         Object.keys(times).map(key => seriesNames[key]).join(", ") + ". Each forecast begins at the marker’s last input position.";
@@ -254,13 +347,43 @@
     angle.addEventListener("change", () => { if (Object.hasOwn(angles, angle.value)) setAngle(angle.value); });
     details.addEventListener("toggle", readout);
     series.addEventListener("change", () => { preferredSeries = series.value; readout(); });
+    slider.addEventListener("pointerdown", pause);
+    slider.addEventListener("input", () => { pause(); setStep(slider.valueAsNumber); });
+    function stepBy(button, offset) {
+      const focused = document.activeElement === button;
+      pause();
+      setStep(step + offset);
+      if (button.disabled && focused) slider.focus({preventScroll: true});
+    }
+    previous.addEventListener("click", () => stepBy(previous, -1));
+    next.addEventListener("click", () => stepBy(next, 1));
+    play.addEventListener("click", () => {
+      if (playTimer) { pause(); return; }
+      if (reducedMotion.matches || !instants.length) return;
+      instant.setAttribute("aria-live", "off");
+      if (step === instants.length - 1) setStep(0);
+      play.textContent = "Pause";
+      playNext();
+    });
+    function respectMotionSetting() {
+      if (reducedMotion.matches) pause();
+      play.hidden = reducedMotion.matches;
+    }
+    respectMotionSetting();
+    reducedMotion.addEventListener("change", respectMotionSetting);
+    document.addEventListener("visibilitychange", () => { if (document.hidden) pause(); });
+    window.addEventListener("pagehide", pause);
     if (typeof ResizeObserver === "function") new ResizeObserver(schedule).observe(plot);
     else window.addEventListener("resize", schedule);
 
     return {
       show(readings, paths, futureTimes, selectedPath) {
+        pause();
+        readingsInView = readings;
         sites = [0, 3].map(offset => markerTracks(readings, paths, offset));
         times = {input: readings.map((_, i) => (i + 1 - readings.length) * 10)};
+        instants = times.input.concat(futureTimes);
+        slider.max = String(instants.length - 1);
         for (const key of Object.keys(paths)) times[key] = [0, ...futureTimes];
         selection = selectedPath;
         series.replaceChildren(...Object.keys(times).map(key => new Option(seriesNames[key], key)));
@@ -268,11 +391,17 @@
         for (const key of ["absolute", "relative"]) get("space-" + key + "-key").hidden = !Object.hasOwn(paths, key);
         card.hidden = false;
         setMarkers();
+        setStep(savedSteps.get(readings) ?? 0);
       },
       clear() {
+        pause();
         if (drawRequest) cancelAnimationFrame(drawRequest);
         drawRequest = 0;
         sites = []; visible = []; lines = []; labels = []; times = {}; frame = null; gesture = null;
+        readingsInView = null; instants = []; projection = null; step = 0;
+        slider.value = "0";
+        slider.removeAttribute("aria-valuetext");
+        instant.textContent = "";
         card.hidden = true;
         plot.replaceChildren();
         series.replaceChildren();

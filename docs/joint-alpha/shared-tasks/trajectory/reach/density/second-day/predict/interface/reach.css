@@ -171,15 +171,29 @@ thead th { color: var(--muted); font-size: .8rem; font-weight: 650; }
 .space-track { stroke: currentColor; }
 .space-track polyline { stroke-width: 2; }
 .space-track circle, .space-track polygon, .space-track rect { fill: var(--space-surface); stroke-width: 1.65; }
-.space-track.input { color: var(--space-input); }
+.space-track.input, .space-indicator.input { color: var(--space-input); }
 .space-track.input polyline { stroke-width: 1.5; }
 .space-track.input circle { fill: currentColor; stroke: none; }
-.space-track.absolute { color: var(--space-absolute); }
-.space-track.relative { color: var(--space-relative); }
+.space-track.absolute, .space-indicator.absolute { color: var(--space-absolute); }
+.space-track.relative, .space-indicator.relative { color: var(--space-relative); }
 .space-track.relative polyline { stroke-dasharray: 2 4; }
-.space-track.velocity { color: var(--space-velocity); }
+.space-track.velocity, .space-indicator.velocity { color: var(--space-velocity); }
 .space-track.velocity polyline { stroke-dasharray: 7 4; }
 .space-origin { fill: var(--space-input); stroke: var(--space-surface); stroke-width: 1.5; }
+.space-indicator { fill: none; stroke: currentColor; pointer-events: none; }
+.space-indicator > * { stroke-width: 2.25; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.space-indicator .symbol-border { stroke: var(--space-surface); stroke-width: 4.5; }
+.space-indicator .input-dot { fill: currentColor; stroke: none; }
+.space-timeline { margin: .65rem 0 .75rem; padding-bottom: .75rem; border-bottom: 1px solid var(--rule); }
+.space-time-heading, .space-transport { display: flex; align-items: center; flex-wrap: wrap; gap: .2rem .5rem; }
+.space-time-heading { justify-content: space-between; }
+.space-time-heading label, #space-instant { font-size: .87rem; }
+#space-instant { font-variant-numeric: tabular-nums; font-weight: 650; }
+#space-time { display: block; width: 100%; margin: 0; min-height: 1.8rem; accent-color: var(--green); cursor: pointer; }
+.space-transport button { min-height: 2.25rem; padding: .25rem .65rem; border: 1px solid #748a83; border-radius: .22rem; background: white; color: var(--green); font: 600 .83rem/1.25 system-ui, sans-serif; }
+.space-transport button:disabled { color: #65736f; border-color: var(--rule); cursor: default; }
+#space-tables [aria-current="step"] > * { background: #dfebe0; font-weight: 720; }
+#space-tables [aria-current="step"] > th { box-shadow: inset 3px 0 var(--green); padding-left: .55rem; }
 .space-controls { align-items: end; flex-wrap: wrap; gap: .4rem 1rem; margin-top: .7rem; }
 .space-controls label, #space-readout label { font-size: .82rem; }
 .space-controls select, #space-series { display: block; margin-top: .15rem; min-height: 2.25rem; font-size: .87rem; }
@@ -212,6 +226,7 @@ thead th { color: var(--muted); font-size: .8rem; font-weight: 650; }
   #space-plot { border-color: CanvasText; }
   #space-plot:focus-visible { outline-color: Highlight; }
   .space-grid { opacity: .35; }
+  #space-tables [aria-current="step"] { outline: 2px solid Highlight; outline-offset: -2px; }
   :root { --chart-label: CanvasText; --chart-bg: Canvas; --chart-model: CanvasText; --chart-relative: CanvasText; --chart-velocity: CanvasText; --chart-grid: GrayText; }
   :where(a, button, select, textarea, input, summary):focus-visible { outline-color: Highlight; }
   .model-choices label:has(:focus-visible) { outline-color: Highlight; }

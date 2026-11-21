@@ -79,15 +79,27 @@
           </div>
           <figure id="space-view" class="space-card" aria-labelledby="space-title" hidden>
             <figcaption id="space-title">Hand and elbow paths in 3D</figcaption>
-            <p class="space-intro">Dots trace 20 input positions for each marker. In the recording they come from processed camera tracks. Each forecast starts at the last dot. Open symbols give its estimates at 20, 50, 70 and 100 ms.</p>
+            <p class="space-intro">Dots trace 20 input positions for each marker. In the example they come from processed camera tracks. The last dot sets time zero. Open symbols mark forecasts at 20, 50, 70 and 100 ms. Larger symbols show the time you choose.</p>
             <div class="space-legend" aria-label="Path key">
               <span><i class="swatch input" aria-hidden="true">●</i>Input positions</span>
               <span id="space-absolute-key"><i class="swatch absolute" aria-hidden="true">○</i>Recorded-position model</span>
               <span id="space-relative-key" hidden><i class="swatch relative" aria-hidden="true">△</i>Relative-position model</span>
               <span><i class="swatch velocity" aria-hidden="true">□</i>Constant velocity</span>
             </div>
-            <svg id="space-plot" xmlns="http://www.w3.org/2000/svg" tabindex="0" role="img" aria-labelledby="space-title" aria-describedby="space-summary space-help"></svg>
+            <svg id="space-plot" xmlns="http://www.w3.org/2000/svg" tabindex="0" role="img" aria-labelledby="space-title" aria-describedby="space-summary space-instant space-help"></svg>
             <p id="space-summary" class="visually-hidden"></p>
+            <div class="space-timeline">
+              <div class="space-time-heading">
+                <label for="space-time">Time step</label>
+                <span id="space-instant" aria-live="polite" aria-atomic="true"></span>
+              </div>
+              <input id="space-time" type="range" min="0" step="1" value="0">
+              <div class="space-transport">
+                <button id="space-previous" type="button" aria-label="Previous time step">Previous</button>
+                <button id="space-next" type="button" aria-label="Next time step">Next</button>
+                <button id="space-play" type="button">Play slowly</button>
+              </div>
+            </div>
             <div class="space-controls">
               <label>Markers
                 <select id="space-markers">
