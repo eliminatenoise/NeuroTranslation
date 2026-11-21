@@ -20,6 +20,9 @@ EXAMPLES = {
         "Estimate the next GCaMP signal in the imaging data."],
     "landmark_motion": ["Where will these camera points be next?", "Forecast the next position of the landmarks in my video.",
         "Where will the tracked wrist go in a moment?"],
+    "human_touch_afferent": ["Forecast how many spikes a fingertip sensory nerve will send.",
+        "Predict the firing of a touch afferent during loading of the finger pad.",
+        "How many tactile nerve spikes come after the plate slides?"],
     "unsupported": ["I want a medical diagnosis.", "What is the weather tomorrow?", "Write poetry about a birthday.",
         "Tell me the force in newtons inside an individual tendon.", "Operate a stimulator or make my physical hand move.",
         "How much tension is each muscle producing?"]

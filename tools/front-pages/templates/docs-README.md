@@ -5,6 +5,7 @@ This folder is served as [eliminatenoise.github.io/NeuroTranslation](https://eli
 | Page | What it is |
 | --- | --- |
 | [NeuroTranslate 0.0 joint alpha](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/) | Download the joint checkpoint, open the offline demo and compare its forecasts with the published baselines. |
+| [Fingertip touch](https://eliminatenoise.github.io/NeuroTranslation/touch-feedback/) | Try an eight-task model and compare forecasts of measured nerve spikes in three new people. |
 | [`START.html`](https://eliminatenoise.github.io/NeuroTranslation/START.html) | The start page. The finding so far, invented examples to try, and a list that matches each open dataset to the page that reads it. |
 | [`index.html`](https://eliminatenoise.github.io/NeuroTranslation/index.html) | NeuroTranslator, the app. It shows a recording on its own clock, lines several recordings up on a shared clock, and replays a palm trial against the fitted palm models. |
 | {{ spell(n_readers(), True) }} folders, from `cemhsey-arrays/` to `wrist-replay/` (excluding the other readers listed below){{ other_pages() and '' }} | The study readers of the numbered table, one per folder. Each reads a recording of the kind one study used and runs that study's forecasts on it, or shows the study's results. |

@@ -2,6 +2,7 @@
 (function(){
   'use strict';
   const labels=Object.freeze({
+    human_touch_afferent:'Forecast spikes from a fingertip sensory nerve',
     human_leg_emg:'Forecast human lower-leg muscle electrical activity',
     human_sacrum_path:'Forecast the path of the human pelvis marker',
     macaque_cortex_to_motion:'Forecast macaque reaching movement',
@@ -31,6 +32,9 @@
       if(left!==right)return validateProposal({kind:'game_goal',effector:left?'left_hand':'right_hand',goal:'above_shoulder'});
       return {kind:'ambiguous',message:'Which avatar hand should rise above its shoulder: left or right?',choices:[]};
     }
+    const touch = /\b(touch|fingertip|tactile|cutaneous)\b/.test(t) && /\b(spikes?|nerve (activity|signals?)|firing)\b/.test(t);
+    if(touch && !/\b(cortex|cortical|fluorescence|emg|calcium|muscle|pelvis|where|pressure|how much force|predict (the )?force|estimate (the )?force)\b/.test(t))
+      return validateProposal({kind:'forecast',task:'human_touch_afferent'});
     if(/\b(force|tension|torque|newtons|pain|intentions?)\b/.test(t))return fail('This checkpoint has no direct measurement head for that quantity. Select a measured output such as EMG or tracked position.');
     const chosen=[];
     const use=(k)=>chosen.push(k);
