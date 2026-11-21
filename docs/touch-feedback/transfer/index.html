@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What carries from one fingertip to another? · NeuroTranslation</title>
+  <style>
+    :root { color-scheme: light; font: 100%/1.58 system-ui, Arial, sans-serif; background: #f5f6f0; color: #17353c; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(100%, 49rem); margin: auto; padding: clamp(1rem, 5vw, 3.5rem); }
+    nav { padding: 0 0 1rem; border-bottom: 1px solid #c4ceca; }
+    h1 { font-size: clamp(2rem, 6vw, 4rem); line-height: 1.03; margin: 1rem 0 1.5rem; letter-spacing: -.035em; }
+    h2 { font-size: clamp(1.35rem, 4vw, 2rem); line-height: 1.2; margin-top: 2.3rem; }
+    p { margin: 0 0 1.2rem; }
+    a { color: #14525f; text-underline-offset: .14em; overflow-wrap: anywhere; }
+    a:focus-visible { outline: 2px solid currentColor; outline-offset: .18em; }
+    .edition { margin-top: 2rem; font-size: .88rem; font-weight: 650; }
+    h1 + p { font-size: 1.19rem; }
+    table { width: 100%; border-collapse: collapse; margin: 0 0 1.3rem; font-variant-numeric: tabular-nums; }
+    caption { padding: .55rem 0; text-align: left; font-size: .9rem; }
+    td, th { padding: .5rem .35rem; border-block: 1px solid #c4ceca; text-align: right; }
+    tr > :first-child { text-align: left; }
+    footer { border-top: 1px solid #c4ceca; padding-top: 1rem; margin-top: 2rem; }
+    @media (max-width: 390px) { table { font-size: .84rem; } }
+    @media print { :root { background: white; color: black; } main { padding: 0; } table { break-inside: avoid; } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Study navigation"><a href="../">Back to the fingertip study</a></nav>
+    <p class="edition">NeuroTranslation research supplement · 21 November 2026</p>
+    <h1>What carries from one fingertip to another?</h1>
+<p>A spike is a brief electrical event that travels along a nerve fibre. Can the spike counts from four short intervals tell us how many will arrive in the next 20 milliseconds? We trained on human recordings and asked the model to answer the same question in macaque recordings. A forecast that combined the average of the last four counts with the human training average worked better on the macaque recordings.</p>
+<h2>The test</h2>
+<p>The human study recorded single sensory nerve fibres while a plate moved against a fingertip. We used 176,686 windows from 17 fibres in seven people, all from the original training group. We divided those people into three groups. For each internal comparison we fitted the model on the other people and forecast each window for the withheld people. The final fit used all seven for the macaque comparison. The original human development, test and reserve recordings were kept outside this study. <a href="https://doi.org/10.7554/eLife.64679">Human recording study</a></p>
+<p>The macaque study recorded single sensory fibres as a drum drew textures across a fingertip. We used the middle condition, which matches the original recordings at 80 mm/s, and worked from 100 ms up to 600 ms on the stored response clock. A prediction could begin at 180 ms once four 20-ms counts were available and a spike had already been seen since the 100-ms start. Once it began, a later bin with zero spikes still counted toward the score. The 81,476 forecasts covered 4,071 texture presentations and 39 fibres. The study reports six macaques. The figure archive gives each fibre an index without naming its animal. <a href="https://www.nature.com/articles/s41467-022-28873-w">Macaque study and source data</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3800989/">Original peripheral recording protocol</a> · <a href="https://gin.g-node.org/JohnDowney/Feeling_Fooled">Original recording archive</a></p>
+<p>Every method predicted the expected number of spikes in the next bin. The transformer could learn that two spikes in the most recent bin carry a different signal from two spikes 80 ms ago. It had two attention blocks, four attention heads per block, a width of 24 and 9,961 learned values. Each fit took six passes of 16,384 human examples, drawn with equal probability per training participant. We ran the two fixed random seeds separately. A smaller regression gave the four previous counts different weights. The simplest useful comparison pooled the past 80 ms and averaged its rate with the average rate from the human training group. For the macaque comparison, each method’s output was saved and hashed before a separate file of next-bin outcomes was made.</p>
+<h2>What happened</h2>
+<p>We used a probability score called Poisson negative log likelihood. It penalizes a model for assigning a low probability to the count that actually occurred. A lower number is better. We averaged the scores per human participant or macaque fibre before giving each group equal weight.</p>
+<table><caption>Forecast loss in nats per 20 milliseconds</caption><thead><tr><th scope="col">Forecast</th><th scope="col">Human, 7 people</th><th scope="col">Macaque, 39 fibres</th></tr></thead><tbody><tr><th scope="row">Human training average</th><td>0.35546</td><td>2.58763</td></tr><tr><th scope="row">Recent count average with human prior</th><td>0.26364</td><td><strong>1.13680</strong></td></tr><tr><th scope="row">Weighted regression</th><td>0.30993</td><td>1.17981</td></tr><tr><th scope="row">Transformer, seed 431</th><td><strong>0.25883</strong></td><td>1.19318</td></tr><tr><th scope="row">Transformer, seed 977</th><td>0.26176</td><td>1.16713</td></tr></tbody></table>
+<p>Each transformer run improved on the recent-count baseline for four of seven people. On macaque recordings the corresponding counts were three and nine of 39 fibres. The macaque result therefore missed the decision rule for making this model the next transfer candidate. Both transformer runs reduced the average difference between predicted and recorded counts, with a worse mean probability score.</p>
+<p>The last 80 ms contained a median of zero spikes in the human windows and three in the macaque forecast windows. The recordings used different stimuli and the macaque test starts after a recorded spike, so that difference describes the two samples in this test. It cannot be assigned to species alone. After scoring, we split macaque windows by whether the exact pattern of four counts appeared in the human archive. The transformer’s deficit was larger on patterns absent from the human archive, which came from 37 fibres. A deficit remained on patterns present in both, which came from 39 fibres.</p>
+<h2>What about quiet responses?</h2>
+<p>An empty entry in the figure archive could mean that nothing fired or that the response was missing. The original companion deposit resolves those cases. In the 80 mm/s condition, each of the 4,730 finite rates equals the number of spikes stored on the archive’s one-second clock, including 476 responses that report zero. The other 3,850 positions carry missing rates. The archive lacks a separate timestamp for the instant of physical contact. The forecast window sits within the one-second stored response. <a href="https://gin.g-node.org/JohnDowney/Feeling_Fooled">Companion data and analysis</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7197205/">Recording methods and analysis intervals</a></p>
+<p>We repeated the comparison using all 99,330 windows in the confirmed responses, with the same trained weights. The recent-count average scored 1.02661. The two transformer runs scored 1.07158 and 1.04953. Both transformer runs assigned less expected activity to the responses that remained quiet throughout. Across all the confirmed responses, the recent-count average kept its lead. This is a second way of counting the same recordings.</p>
+<p>Human training supplied 13 fast-adapting type I fibres, two slowly adapting type I fibres and two slowly adapting type II fibres. The two slowly adapting type I fibres came from the same person. The macaque source included seven Pacinian fibres, which respond to vibration. The human source supplied no Pacinian fibres for training. These differences in coverage affect what a result for a particular fibre type can establish. <a href="https://doi.org/10.7554/eLife.64679">Human recording study</a> · <a href="https://www.nature.com/articles/s41467-022-28873-w">Macaque recording study</a></p>
+<p>Each fibre is a local observation. The comparison measures whether a model can forecast the count from a nerve’s own recently observed activity. It supplies a check on one component of Next Neuron Prediction. A link from the fingertip all the way to the brain, or from muscle activation to a movement, needs measurements aligned along that route. That wider experiment still needs its own data and proof.</p>
+    <footer><a href="metrics.json">Download the aggregate scores</a></footer>
+  </main>
+</body>
+</html>

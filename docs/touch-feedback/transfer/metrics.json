@@ -1,0 +1,77 @@
+{
+  "version": "2026-11-21.1",
+  "forecast_target": "Count of spikes in the next 20 ms from the same fingertip afferent.",
+  "units": "Natural-log loss per 20 ms window, lower is better.",
+  "human_internal_validation": {
+    "group_is": "person",
+    "groups": 7,
+    "windows": 176686,
+    "zero_targets": 158385,
+    "mean_poisson_negative_log_likelihood": {
+      "constant": 0.3554635578682457,
+      "history_rate": 0.26364315519690773,
+      "poisson_glm": 0.3099330397283734,
+      "transformer_431": 0.2588349584085695,
+      "transformer_977": 0.2617586727870374
+    },
+    "absolute_mean_count_bias": {
+      "constant": 0.09312693534689008,
+      "history_rate": 0.04653748563852035,
+      "poisson_glm": 0.07399100498415712,
+      "transformer_431": 0.035487206986968105,
+      "transformer_977": 0.042612905926585856
+    }
+  },
+  "macaque_after_prior_spike_in_window": {
+    "group_is": "recorded fibre",
+    "groups": 39,
+    "windows": 81476,
+    "zero_targets": 35850,
+    "mean_poisson_negative_log_likelihood": {
+      "constant": 2.587630520713271,
+      "history_rate": 1.1367985051501022,
+      "poisson_glm": 1.179805392577494,
+      "transformer_431": 1.19318334449784,
+      "transformer_977": 1.1671346004955139
+    },
+    "absolute_mean_count_bias": {
+      "constant": 0.8169229230729704,
+      "history_rate": 0.40149458076814404,
+      "poisson_glm": 0.38408917707969054,
+      "transformer_431": 0.33079261108439584,
+      "transformer_977": 0.36760206589484845
+    }
+  },
+  "macaque_all_confirmed_presentations": {
+    "group_is": "recorded fibre",
+    "groups": 39,
+    "windows": 99330,
+    "zero_targets": 52994,
+    "mean_poisson_negative_log_likelihood": {
+      "constant": 2.3973198429986433,
+      "history_rate": 1.0266116396432576,
+      "poisson_glm": 1.0629752500789778,
+      "transformer_431": 1.0715785334792962,
+      "transformer_977": 1.0495268482305184
+    },
+    "absolute_mean_count_bias": {
+      "constant": 0.7463429150306922,
+      "history_rate": 0.3719601688040574,
+      "poisson_glm": 0.3409315230522803,
+      "transformer_431": 0.3097945053530802,
+      "transformer_977": 0.34054353238287866
+    }
+  },
+  "macaque_source_presentation_counts": {
+    "confirmed": 4730,
+    "missing": 3850,
+    "zero_total": 476
+  },
+  "source_doi": [
+    "10.7554/eLife.64679",
+    "10.1038/s41467-022-28873-w",
+    "10.1371/journal.pbio.3000431",
+    "10.1093/cercor/bhz305"
+  ],
+  "exploratory_transfer_criterion_met": false
+}
