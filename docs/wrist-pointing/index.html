@@ -71,7 +71,7 @@
     <section class="panel" aria-labelledby="results-title">
       <h2 id="results-title">What happened on recorded trials?</h2>
       <p class="finding">6.530° → 6.174°</p>
-      <p>Adding surface EMG lowered the two-axis forecast error by 0.355° using the full-precision scores. Giving that same model EMG from the next eligible trial raised the error to 6.941°. That swap kept the participant, recording block and cue offset fixed. Adding scalp EEG after EMG lowered the overall error by a further 0.048° and raised the radial–ulnar error by 0.011°.</p>
+      <p>Adding surface EMG lowered the two-axis forecast error by 0.355° using the full-precision scores. Giving that same model EMG from the next eligible trial raised the error to 6.941°. That swap kept the participant, recording block and cue offset fixed. Adding scalp EEG after EMG lowered the overall error by a further 0.048° and raised the radial–ulnar error by 0.011°. Every forecast in this table is a straight-line formula: a weighted sum of its inputs. On the same three people and trials, a small learned network given scalp EEG did worse, not better (4.053° without EEG, 4.523° with it): see <a href="https://eliminatenoise.github.io/NeuroTranslation/wrist-replay/">the wrist replay</a>.</p>
       <p>Six participants supplied the fits. Three different participants supplied 960 development trials. The six reserved test participants remain sealed. Changing an invented example above leaves these archived scores fixed.</p>
       <table id="archive-scores">
         <caption>Archived development root-mean-square error (RMSE) in degrees</caption>

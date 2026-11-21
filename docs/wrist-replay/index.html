@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; form-action 'none'; object-src 'none'; base-uri 'none'">
-  <title>Replay a wrist movement · NeuroTranslation</title>
+  <title>Scalp EEG made the wrist forecast worse · NeuroTranslation</title>
   <link rel="stylesheet" href="replay.css">
   <script src="study.js" defer></script>
   <script src="wrist-recorded.js" defer></script>
@@ -14,8 +14,9 @@
   <main>
     <header>
       <nav aria-label="Breadcrumb"><a href="https://eliminatenoise.github.io/NeuroTranslation/START.html">NeuroTranslation</a><span aria-hidden="true"> / </span> Wrist studies</nav>
-      <h1>Replay a wrist movement</h1>
-      <p>A person sees a target and turns their wrist. Given half a second of movement, where will their wrist be a quarter of a second later? Compare the forecast from wrist motion alone with one that also uses electrical activity measured at eight scalp electrodes (EEG).</p>
+      <h1>Scalp EEG made the wrist forecast worse</h1>
+      <p>A person sees a target and turns their wrist. Given half a second of movement, where will their wrist be a quarter of a second later? A small learned network made that forecast from wrist motion alone, and again with electrical activity measured at eight scalp electrodes (EEG).</p>
+      <p>Over both wrist axes and all six moments, it missed by 4.053° from motion alone and by 4.523° with EEG added. The error is root mean square (large misses count more), with each of the three test people counting equally. Holding the last angle missed by 7.925°.</p>
       <a href="#load-title">Open a trial from the study</a>
     </header>
 
