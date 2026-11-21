@@ -1,0 +1,424 @@
+{
+  "study": "Measured optical marker gaps in one original Kuopio deep-squat trial per test participant",
+  "source": {
+    "authors": [
+      "Alexander K. Beattie",
+      "Matti J. Kortelainen",
+      "Paavo Vartiainen",
+      "Pasi A. Karjalainen"
+    ],
+    "paper_doi": "10.1038/s41597-026-08550-z",
+    "data_doi": "10.5281/zenodo.24194741",
+    "data_license": "CC BY 4.0"
+  },
+  "horizon_ms": 100,
+  "input_offsets_ms": [
+    -200,
+    -150,
+    -100,
+    -50,
+    0
+  ],
+  "camera_sample_hz": 100,
+  "no_force_inputs_or_force_cutoff": true,
+  "number_of_test_people": 12,
+  "engineering_trial_excluded": true,
+  "primary_means": "Equal weight on each participant with matched outcome windows.",
+  "methods": {
+    "attention_complete": "Attention trained on complete readings",
+    "attention_mixed": "Attention trained with missing readings",
+    "ridge_variable": "Linear fit trained with varying gaps",
+    "continue_speed": "Continue the recent speed",
+    "ridge_legacy_exact": "Earlier linear fit for this exact pattern"
+  },
+  "recorded_quality": {
+    "marker_order": [
+      "LASI",
+      "RASI",
+      "LPSI",
+      "RPSI"
+    ],
+    "point_counts": {
+      "native_missing_or_invalid": [
+        3505,
+        5678,
+        0,
+        32
+      ],
+      "finite_zero_residual": [
+        2203,
+        2206,
+        2407,
+        2408
+      ],
+      "positive_residual": [
+        20996,
+        18820,
+        24297,
+        24264
+      ],
+      "nonzero_camera_flags": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "zero_residual_windows_without_native_gaps": 185
+  },
+  "results": {
+    "natural_gap": {
+      "four_marker": {
+        "coverage": {
+          "scheduled": 2640,
+          "stratum": 777,
+          "insufficient_issue_markers": 57,
+          "target_missing_at_issue": 590,
+          "target_missing_at_future": 5,
+          "no_speed": 0,
+          "no_legacy_exact_mask": 125,
+          "matched": 125
+        },
+        "people": 11,
+        "publish_performance": true,
+        "mae_mm": {
+          "attention_complete": 26.54723993069903,
+          "attention_mixed": 19.852209135287527,
+          "ridge_variable": 12.276204526500532,
+          "continue_speed": 5.310291011562095
+        },
+        "contrasts": {
+          "attention_mixed_minus_attention_complete": {
+            "mean_mm": -6.695030795411506,
+            "person_resample_95_percent_mm": [
+              -9.44190596496954,
+              -3.8001731954447537
+            ],
+            "people_mixed_lower": 10
+          },
+          "attention_mixed_minus_ridge_variable": {
+            "mean_mm": 7.576004608786993,
+            "person_resample_95_percent_mm": [
+              0.98855669867936,
+              15.7696314115559
+            ],
+            "people_mixed_lower": 4
+          },
+          "attention_mixed_minus_continue_speed": {
+            "mean_mm": 14.541918123725429,
+            "person_resample_95_percent_mm": [
+              6.470510030196137,
+              25.024014188749156
+            ],
+            "people_mixed_lower": 1
+          }
+        }
+      },
+      "back_pair": {
+        "coverage": {
+          "scheduled": 2640,
+          "stratum": 777,
+          "insufficient_issue_markers": 57,
+          "target_missing_at_issue": 1,
+          "target_missing_at_future": 0,
+          "no_speed": 0,
+          "no_legacy_exact_mask": 339,
+          "matched": 719
+        },
+        "people": 11,
+        "publish_performance": true,
+        "mae_mm": {
+          "attention_complete": 24.76845453395254,
+          "attention_mixed": 20.007972658635897,
+          "ridge_variable": 13.60527033842588,
+          "continue_speed": 13.537680140098695
+        },
+        "contrasts": {
+          "attention_mixed_minus_attention_complete": {
+            "mean_mm": -4.760481875316644,
+            "person_resample_95_percent_mm": [
+              -6.350673052507696,
+              -3.1190642367277506
+            ],
+            "people_mixed_lower": 10
+          },
+          "attention_mixed_minus_ridge_variable": {
+            "mean_mm": 6.402702320210015,
+            "person_resample_95_percent_mm": [
+              2.740921739255811,
+              10.816397925063159
+            ],
+            "people_mixed_lower": 2
+          },
+          "attention_mixed_minus_continue_speed": {
+            "mean_mm": 6.470292518537195,
+            "person_resample_95_percent_mm": [
+              3.177614035618222,
+              10.45176828504244
+            ],
+            "people_mixed_lower": 1
+          }
+        }
+      }
+    },
+    "moving_natural_gap": {
+      "four_marker": {
+        "coverage": {
+          "scheduled": 2640,
+          "stratum": 542,
+          "insufficient_issue_markers": 0,
+          "target_missing_at_issue": 438,
+          "target_missing_at_future": 2,
+          "no_speed": 0,
+          "no_legacy_exact_mask": 102,
+          "matched": 102
+        },
+        "people": 11,
+        "publish_performance": true,
+        "mae_mm": {
+          "attention_complete": 31.14526775619258,
+          "attention_mixed": 23.430952226984815,
+          "ridge_variable": 14.79425654172644,
+          "continue_speed": 8.515721593647848
+        },
+        "contrasts": {
+          "attention_mixed_minus_attention_complete": {
+            "mean_mm": -7.714315529207761,
+            "person_resample_95_percent_mm": [
+              -10.202035439923645,
+              -5.082809341760663
+            ],
+            "people_mixed_lower": 11
+          },
+          "attention_mixed_minus_ridge_variable": {
+            "mean_mm": 8.636695685258378,
+            "person_resample_95_percent_mm": [
+              1.292848968436765,
+              17.050093180711084
+            ],
+            "people_mixed_lower": 4
+          },
+          "attention_mixed_minus_continue_speed": {
+            "mean_mm": 14.915230633336968,
+            "person_resample_95_percent_mm": [
+              6.1080136636775695,
+              25.6862204353264
+            ],
+            "people_mixed_lower": 1
+          }
+        }
+      },
+      "back_pair": {
+        "coverage": {
+          "scheduled": 2640,
+          "stratum": 542,
+          "insufficient_issue_markers": 0,
+          "target_missing_at_issue": 0,
+          "target_missing_at_future": 0,
+          "no_speed": 0,
+          "no_legacy_exact_mask": 296,
+          "matched": 542
+        },
+        "people": 11,
+        "publish_performance": true,
+        "mae_mm": {
+          "attention_complete": 30.2639682941109,
+          "attention_mixed": 25.508383896870267,
+          "ridge_variable": 16.619274581737685,
+          "continue_speed": 17.299274393959323
+        },
+        "contrasts": {
+          "attention_mixed_minus_attention_complete": {
+            "mean_mm": -4.755584397240636,
+            "person_resample_95_percent_mm": [
+              -6.466188590419879,
+              -3.0645888110849193
+            ],
+            "people_mixed_lower": 10
+          },
+          "attention_mixed_minus_ridge_variable": {
+            "mean_mm": 8.889109315132584,
+            "person_resample_95_percent_mm": [
+              4.890467164717759,
+              13.19794302668555
+            ],
+            "people_mixed_lower": 0
+          },
+          "attention_mixed_minus_continue_speed": {
+            "mean_mm": 8.209109502910943,
+            "person_resample_95_percent_mm": [
+              3.9277428392373763,
+              12.613030855504633
+            ],
+            "people_mixed_lower": 1
+          }
+        }
+      }
+    },
+    "complete_input": {
+      "four_marker": {
+        "coverage": {
+          "scheduled": 2640,
+          "stratum": 1678,
+          "insufficient_issue_markers": 0,
+          "target_missing_at_issue": 0,
+          "target_missing_at_future": 53,
+          "no_speed": 0,
+          "no_legacy_exact_mask": 0,
+          "matched": 1625
+        },
+        "people": 11,
+        "publish_performance": true,
+        "mae_mm": {
+          "attention_complete": 7.429346105219818,
+          "attention_mixed": 7.293844708369463,
+          "ridge_variable": 8.365305917742539,
+          "continue_speed": 6.071100199684494
+        },
+        "contrasts": {
+          "attention_mixed_minus_attention_complete": {
+            "mean_mm": -0.13550139685035445,
+            "person_resample_95_percent_mm": [
+              -0.593474074948222,
+              0.3382169152446643
+            ],
+            "people_mixed_lower": 6
+          },
+          "attention_mixed_minus_ridge_variable": {
+            "mean_mm": -1.071461209373077,
+            "person_resample_95_percent_mm": [
+              -2.591048610202853,
+              0.8866316326441428
+            ],
+            "people_mixed_lower": 9
+          },
+          "attention_mixed_minus_continue_speed": {
+            "mean_mm": 1.222744508684968,
+            "person_resample_95_percent_mm": [
+              -0.48378895675251027,
+              3.3880479622999307
+            ],
+            "people_mixed_lower": 5
+          }
+        }
+      },
+      "back_pair": {
+        "coverage": {
+          "scheduled": 2640,
+          "stratum": 1678,
+          "insufficient_issue_markers": 0,
+          "target_missing_at_issue": 0,
+          "target_missing_at_future": 0,
+          "no_speed": 0,
+          "no_legacy_exact_mask": 0,
+          "matched": 1678
+        },
+        "people": 11,
+        "publish_performance": true,
+        "mae_mm": {
+          "attention_complete": 7.604769347385973,
+          "attention_mixed": 7.266006474563724,
+          "ridge_variable": 8.035276899789766,
+          "continue_speed": 6.262949543272853
+        },
+        "contrasts": {
+          "attention_mixed_minus_attention_complete": {
+            "mean_mm": -0.33876287282224865,
+            "person_resample_95_percent_mm": [
+              -0.5850413393330386,
+              -0.09920262832528388
+            ],
+            "people_mixed_lower": 9
+          },
+          "attention_mixed_minus_ridge_variable": {
+            "mean_mm": -0.7692704252260426,
+            "person_resample_95_percent_mm": [
+              -3.0967198536025005,
+              2.0891542505502687
+            ],
+            "people_mixed_lower": 9
+          },
+          "attention_mixed_minus_continue_speed": {
+            "mean_mm": 1.0030569312908708,
+            "person_resample_95_percent_mm": [
+              -0.8198147117275808,
+              3.3232894483162956
+            ],
+            "people_mixed_lower": 7
+          }
+        }
+      }
+    },
+    "legacy_exact_natural_gap": {
+      "four_marker": {
+        "coverage": {
+          "scheduled": 2640,
+          "stratum": 777,
+          "insufficient_issue_markers": 57,
+          "target_missing_at_issue": 590,
+          "target_missing_at_future": 5,
+          "no_speed": 0,
+          "no_legacy_exact_mask": 125,
+          "matched": 0
+        },
+        "people": 0,
+        "publish_performance": false
+      },
+      "back_pair": {
+        "coverage": {
+          "scheduled": 2640,
+          "stratum": 777,
+          "insufficient_issue_markers": 57,
+          "target_missing_at_issue": 1,
+          "target_missing_at_future": 0,
+          "no_speed": 0,
+          "no_legacy_exact_mask": 339,
+          "matched": 380
+        },
+        "people": 11,
+        "publish_performance": true,
+        "mae_mm": {
+          "attention_complete": 24.29695213947239,
+          "attention_mixed": 22.32763637049452,
+          "ridge_variable": 15.855521763418755,
+          "continue_speed": 17.91148193985915,
+          "ridge_legacy_exact": 7.088312667958448
+        },
+        "contrasts": {
+          "attention_mixed_minus_attention_complete": {
+            "mean_mm": -1.9693157689778706,
+            "person_resample_95_percent_mm": [
+              -5.207548885770614,
+              1.4115617212341318
+            ],
+            "people_mixed_lower": 7
+          },
+          "attention_mixed_minus_ridge_variable": {
+            "mean_mm": 6.472114607075762,
+            "person_resample_95_percent_mm": [
+              0.8890163151774844,
+              12.968118380571914
+            ],
+            "people_mixed_lower": 4
+          },
+          "attention_mixed_minus_continue_speed": {
+            "mean_mm": 4.416154430635369,
+            "person_resample_95_percent_mm": [
+              -0.7347049879542128,
+              10.648663320407268
+            ],
+            "people_mixed_lower": 6
+          },
+          "attention_mixed_minus_ridge_legacy_exact": {
+            "mean_mm": 15.23932370253607,
+            "person_resample_95_percent_mm": [
+              5.678413226540955,
+              26.694910227804318
+            ],
+            "people_mixed_lower": 1
+          }
+        }
+      }
+    }
+  }
+}
