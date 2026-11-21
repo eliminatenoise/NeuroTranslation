@@ -10,6 +10,7 @@
   --chart-label: #ecf4ed;
   --chart-grid: #577572;
   --chart-model: #b8f1bc;
+  --chart-relative: #a8dbff;
   --chart-velocity: #ffc78d;
 }
 * { box-sizing: border-box; }
@@ -76,6 +77,18 @@ button { cursor: pointer; }
 .error, .notice { color: #872c16; font-size: .92rem; font-weight: 600; }
 [aria-invalid="true"] { border-color: #a13c24; }
 .local-note { margin-top: .9rem; border-top: 1px solid var(--rule); padding-top: .7rem; }
+.model-control { min-width: 0; border: 0; margin: .8rem 0; padding: 0; }
+.model-control legend { padding: 0; font-size: .94rem; font-weight: 640; }
+.model-choices { display: flex; flex-wrap: wrap; gap: .35rem .5rem; margin: .3rem 0 .45rem; }
+.model-choices label {
+  display: inline-flex; align-items: center; gap: .4rem; padding: .38rem .63rem;
+  border: 1px solid var(--rule); border-radius: .22rem; background: #fff;
+  font-size: .88rem; font-weight: 560; cursor: pointer;
+}
+.model-choices label:has(:checked) { color: #143f39; background: #dcece3; border-color: var(--green); }
+.model-choices input { margin: 0; accent-color: var(--green); }
+.model-choices label:has(:focus-visible) { outline: 3px solid #a9410c; outline-offset: 2px; }
+.model-choices label:has(:focus-visible) input:focus-visible { outline: 0; }
 .forecast-intro, .empty-result { margin-top: .4rem; font-size: .97rem; }
 .path-control { flex-wrap: wrap; gap: .35rem .75rem; margin: .85rem 0; }
 select { max-width: 100%; min-height: 2.45rem; padding: .35rem .6rem; font-size: .92rem; }
@@ -86,12 +99,14 @@ figcaption span { white-space: nowrap; font-weight: 450; }
 .legend span, .plot-card > p { font-size: .8rem; }
 .legend span { gap: .36rem; }
 .line { width: 1.5rem; display: block; border-top: 3px solid var(--chart-model); }
+.relative-line { border-top: 3px dotted var(--chart-relative); }
 .velocity-line { border-top: 2px dashed var(--chart-velocity); }
 .plots, .tables { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .plots { margin-top: .95rem; }
 .plot h3 { font-size: .92rem; font-weight: 630; letter-spacing: 0; }
 canvas { display: block; width: 100%; height: 8.1rem; }
 .plot-card > p { text-align: center; }
+.plot-card .comparison-gap { margin-top: .65rem; padding-top: .65rem; border-top: 1px solid var(--chart-grid); text-align: left; font-size: .9rem; }
 .coordinates { margin-top: 1.35rem; }
 .coordinates h3 { font-size: 1.24rem; }
 .coordinates .hint { margin: .35rem 0 .85rem; }
@@ -122,7 +137,8 @@ thead th { color: var(--muted); font-size: .8rem; font-weight: 650; }
   canvas { height: 7.4rem; }
 }
 @media (forced-colors: active) {
-  :root { --chart-label: CanvasText; --chart-bg: Canvas; --chart-model: CanvasText; --chart-velocity: CanvasText; --chart-grid: GrayText; }
+  :root { --chart-label: CanvasText; --chart-bg: Canvas; --chart-model: CanvasText; --chart-relative: CanvasText; --chart-velocity: CanvasText; --chart-grid: GrayText; }
   :where(a, button, select, textarea, input, summary):focus-visible { outline-color: Highlight; }
+  .model-choices label:has(:focus-visible) { outline-color: Highlight; }
   .plot-card, .input-panel, .line, th, td, .local-note, .file-row { border-color: CanvasText; }
 }

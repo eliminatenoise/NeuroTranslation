@@ -10,6 +10,7 @@
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="reach.css">
   <script defer src="../engine/reach-model.js"></script>
+  <script defer src="../engine/reach-relative-model.js"></script>
   <script defer src="../engine/reach-engine.js"></script>
   <script defer src="../example.js"></script>
   <script defer src="reach.js"></script>
@@ -25,7 +26,7 @@
   <main class="wrap">
     <div class="intro">
       <h1>Forecast a reach</h1>
-      <p>A macaque moved a handle. A camera tracked a marker on its hand and another near its elbow. Give the model 20 readings and see where it expects both markers to move in the next 100 milliseconds.</p>
+      <p>A macaque moved a handle. A camera tracked a marker on its hand and another near its elbow. How far will each move in the next 100 milliseconds? Give two models the same 20 readings and compare their forecasts.</p>
     </div>
 
     <noscript><p class="notice">Turn on JavaScript in your browser to run the forecast.</p></noscript>
@@ -39,7 +40,7 @@
           <p id="source-name" class="source-name"></p>
           <details class="format-details">
             <summary>Column order and units</summary>
-            <p id="column-help">Each row gives the hand marker’s X, Y and Z position, then the elbow marker’s X, Y and Z, then the handle’s X and Y. Enter all eight positions in millimetres, separated by commas. In the source recording, marker positions are relative to the shoulder and handle positions use the robot’s coordinates.</p>
+            <p id="column-help">Each row gives the hand marker’s X, Y and Z position, then the elbow marker’s X, Y and Z, then the handle’s X and Y. For either model, enter all eight positions as recorded in millimetres, separated by commas. In the source recording, marker positions are relative to the shoulder and handle positions use the robot’s coordinates.</p>
             <p>You can include this header on the first line.</p>
             <samp>hand_x,hand_y,hand_z,elbow_x,elbow_y,elbow_z,handle_x,handle_y</samp>
           </details>
@@ -54,14 +55,23 @@
           <p id="input-error" class="error" role="alert" aria-atomic="true"></p>
           <p id="status" class="status" role="status" aria-atomic="true"></p>
         </form>
-        <p class="local-note">The readings and the model stay in this browser.</p>
+        <p class="local-note">The readings and both models stay in this browser.</p>
       </section>
 
       <section id="forecast" class="forecast-panel" aria-labelledby="forecast-title" tabindex="-1">
         <h2 id="forecast-title">The next 100 ms</h2>
+        <fieldset class="model-control" aria-describedby="model-help">
+          <legend>Model input</legend>
+          <div class="model-choices">
+            <label><input type="radio" name="model-mode" value="absolute" checked>Recorded positions</label>
+            <label><input type="radio" name="model-mode" value="relative">Relative positions</label>
+            <label><input type="radio" name="model-mode" value="comparison">Compare both</label>
+          </div>
+          <p id="model-help" class="hint">One model uses the positions as recorded. The other subtracts each coordinate’s last reading from all 20, so it sees how the hand, elbow and handle moved relative to where they ended up.</p>
+        </fieldset>
         <p id="empty-result" class="empty-result">Open the recorded example or enter readings to see a forecast.</p>
         <div id="result" hidden>
-          <p class="forecast-intro">Each marker starts at its last input position. Choose one model path or the mean of all 32. The dashed line shows how far the marker would move if it kept the speed and direction measured over the final 20 ms of input.</p>
+          <p class="forecast-intro">The readings end at time zero. Each model draws 32 possible paths. The mean path averages their X, Y and Z positions at each time. The constant-velocity line carries the marker’s speed and direction from the final 20 ms into the forecast.</p>
           <div class="path-control">
             <label for="path">Model path</label>
             <select id="path"></select>
@@ -69,7 +79,8 @@
           <figure class="plot-card" aria-labelledby="plot-title">
             <figcaption id="plot-title">Distance from the last position <span>(mm)</span></figcaption>
             <div class="legend" aria-hidden="true">
-              <span><i class="line model-line"></i>Model</span>
+              <span id="absolute-key"><i class="line model-line"></i>Recorded positions</span>
+              <span id="relative-key" hidden><i class="line relative-line"></i>Relative positions</span>
               <span><i class="line velocity-line"></i>Constant velocity</span>
             </div>
             <div class="plots">
@@ -83,6 +94,7 @@
               </div>
             </div>
             <p>Time after the last reading (ms)</p>
+            <p id="comparison-gap" class="comparison-gap" hidden></p>
           </figure>
 
           <section class="coordinates" aria-labelledby="displacement-title">
@@ -106,7 +118,8 @@
       <h2 id="recording-title">About this recording</h2>
       <div class="recording-copy">
         <p>The example comes from the model’s fitting day, 7 September 2017. This forecast uses motion alone. The archive smooths the camera and handle signals using readings on both sides of each time point, so the times here describe an offline recording.</p>
-        <p>The study tested two training seeds on 304 trials recorded eight days later in the same macaque. This preview runs one trained version (seed 1117). Its transformer builds each possible path one time point at a time. It learned from movements around reach cues and at regular intervals. The same readings give the same 32 paths each time.</p>
+        <p>The two models learned from the same 72 trials in macaque C. The recorded-position model was tested on 304 trials from the same animal eight days later. A second study compared the two models on 266 trials from macaque H on 6 November 2017. That comparison used two training seeds. The browser runs one fit of each model (seed 1117).</p>
+        <p>Each model first estimates a path from the recent readings. It then samples a correction for each future time, using the previous correction to draw the next one. Running the same readings again gives the same 32 paths per model. The comparison pairs draws with the same random seed.</p>
         <p class="credit">Dataset by Raeed H. Chowdhury, Joshua I. Glaser and Lee E. Miller. Dryad, CC0. DOI <span>10.5061/dryad.nk98sf7q7</span>. Study methods, eLife. DOI <span>10.7554/eLife.48198</span>.</p>
       </div>
     </section>

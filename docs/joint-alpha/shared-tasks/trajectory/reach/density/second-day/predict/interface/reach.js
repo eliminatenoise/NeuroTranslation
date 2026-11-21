@@ -8,6 +8,10 @@
   const draws = 32;
   const samplingSeed = 1117;
   const markers = ["Hand marker", "Elbow marker"];
+  const labels = {absolute: "Recorded positions", relative: "Relative positions", velocity: "Constant velocity"};
+  const colors = {absolute: "model", relative: "relative", velocity: "velocity"};
+  const dashes = {absolute: [], relative: [2, 4], velocity: [7, 4]};
+  const modes = document.querySelectorAll('input[name="model-mode"]');
   const get = id => document.getElementById(id);
   const history = get("history");
   const fileInput = get("file");
@@ -20,8 +24,16 @@
   const saveLink = get("save-forecast");
   const placeholder = get("empty-result");
   const canvases = [get("hand-plot"), get("elbow-plot")];
-  let forecast = null;
+  let current = null;
   let revision = 0;
+
+  function mode() {
+    return document.querySelector('input[name="model-mode"]:checked').value;
+  }
+
+  function modelKeys(view = mode()) {
+    return view === "comparison" ? ["absolute", "relative"] : [view];
+  }
 
   function fields(line) {
     return line.split(",").map(cell => {
@@ -62,17 +74,30 @@
     });
   }
 
-  function stopShowingResult(message) {
-    revision++;
-    forecast = null;
+  function hideResult(message) {
     if (saveLink.hasAttribute("href")) {
       URL.revokeObjectURL(saveLink.href);
       saveLink.removeAttribute("href");
     }
-    run.disabled = false;
+    get("model-tables").replaceChildren();
+    get("velocity-tables").replaceChildren();
+    get("comparison-gap").textContent = "";
+    get("comparison-gap").hidden = true;
+    canvases.forEach((canvas, i) => {
+      const ctx = canvas.getContext("2d");
+      if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+      canvas.setAttribute("aria-label", markers[i] + " distance forecast");
+    });
     result.hidden = true;
     placeholder.hidden = false;
     placeholder.textContent = message;
+  }
+
+  function stopShowingResult(message) {
+    revision++;
+    current = null;
+    hideResult(message);
+    run.disabled = false;
     inputError.textContent = "";
     history.removeAttribute("aria-invalid");
     status.textContent = "";
@@ -118,16 +143,18 @@
     return table;
   }
 
-  function showTables(container, values, method) {
-    container.replaceChildren(...markers.map((marker, i) => {
-      const table = makeTable(marker + " (mm)", values, i * 3);
+  function markerTables(values, method, modelLabel = "") {
+    return markers.map((marker, i) => {
+      const title = modelLabel ? marker + " · " + modelLabel : marker;
+      const table = makeTable(title + " (mm)", values, i * 3);
       table.setAttribute("aria-label", marker + " displacement in millimetres, " + method);
       return table;
-    }));
+    });
   }
 
-  function selectedPath() {
-    return pathMenu.value === "mean" ? forecast.meanMm : forecast.pathsMm[Number(pathMenu.value)];
+  function selectedPath(key) {
+    const prediction = current.predictions[key];
+    return pathMenu.value === "mean" ? prediction.meanMm : prediction.pathsMm[Number(pathMenu.value)];
   }
 
   function distanceSeries(path, offset) {
@@ -147,12 +174,15 @@
     return String(Number(value.toPrecision(3)));
   }
 
-  function drawPlot(canvas, marker, model, velocity, maximum) {
+  function drawPlot(canvas, marker, lines, maximum) {
     const selected = pathMenu.selectedOptions[0].text;
-    const description = ahead.map((time, i) =>
-      `${time} ms, ${formatted(model[i + 1])} mm model and ${formatted(velocity[i + 1])} mm constant velocity`
-    ).join(". ");
-    canvas.setAttribute("aria-label", `${marker} distance from its last recorded position. ${selected}. ${description}.`);
+    const description = ahead.map((time, i) => {
+      const distances = Object.entries(lines).map(([key, values]) =>
+        labels[key] + " " + formatted(values[i + 1]) + " mm"
+      );
+      return time + " ms, " + distances.join(", ");
+    }).join(". ");
+    canvas.setAttribute("aria-label", marker + " distance from its last input position. " + selected + ". " + description + ".");
 
     const ctx = canvas.getContext("2d");
     const width = canvas.clientWidth;
@@ -189,10 +219,10 @@
     ctx.textBaseline = "top";
     for (const time of times) ctx.fillText(String(time), x(time), bottom + 5);
 
-    function line(values, isModel) {
-      ctx.strokeStyle = ctx.fillStyle = color(isModel ? "model" : "velocity");
-      ctx.lineWidth = isModel ? 2.5 : 2;
-      ctx.setLineDash(isModel ? [] : [6, 4]);
+    function line(key, values) {
+      ctx.strokeStyle = ctx.fillStyle = color(colors[key]);
+      ctx.lineWidth = key === "velocity" ? 2 : 2.5;
+      ctx.setLineDash(dashes[key]);
       ctx.beginPath();
       values.forEach((distance, i) => {
         if (i === 0) ctx.moveTo(x(times[i]), y(distance));
@@ -202,101 +232,202 @@
       ctx.setLineDash([]);
       for (let i = 1; i < values.length; i++) {
         const px = x(times[i]), py = y(values[i]);
-        if (isModel) {
+        if (key === "velocity") {
+          ctx.strokeRect(px - 2.7, py - 2.7, 5.4, 5.4);
+        } else if (key === "relative") {
+          ctx.beginPath();
+          ctx.moveTo(px, py - 3.5);
+          ctx.lineTo(px - 3.5, py + 2.8);
+          ctx.lineTo(px + 3.5, py + 2.8);
+          ctx.closePath();
+          ctx.stroke();
+        } else {
           ctx.beginPath();
           ctx.arc(px, py, 2.7, 0, 2 * Math.PI);
           ctx.fill();
-        } else {
-          ctx.strokeRect(px - 2.6, py - 2.6, 5.2, 5.2);
         }
       }
     }
-    line(velocity, false);
-    line(model, true);
+    for (const [key, values] of Object.entries(lines)) line(key, values);
   }
 
   function updatePlots() {
-    if (!forecast) return;
-    const path = selectedPath();
-    const series = markers.map((marker, i) => ({
-      marker,
-      model: distanceSeries(path, i * 3),
-      velocity: distanceSeries(forecast.velocity20Mm, i * 3)
-    }));
-    const maximum = axisMaximum(Math.max(...series.flatMap(item => [...item.model, ...item.velocity])));
-    series.forEach((item, i) => drawPlot(canvases[i], item.marker, item.model, item.velocity, maximum));
+    if (!current || result.hidden) return;
+    const keys = modelKeys();
+    const velocity = current.predictions[keys[0]].velocity20Mm;
+    const series = markers.map((_, i) => {
+      const lines = {velocity: distanceSeries(velocity, i * 3)};
+      for (const key of keys) lines[key] = distanceSeries(selectedPath(key), i * 3);
+      return lines;
+    });
+    const maximum = axisMaximum(Math.max(...series.flatMap(lines => Object.values(lines).flat())));
+    series.forEach((lines, i) => drawPlot(canvases[i], markers[i], lines, maximum));
   }
 
   function updateSelection() {
-    showTables(get("model-tables"), selectedPath(), pathMenu.selectedOptions[0].text);
+    const keys = modelKeys();
+    const paired = keys.length === 2;
+    const pathName = pathMenu.selectedOptions[0].text;
+    const tables = keys.flatMap(key =>
+      markerTables(selectedPath(key), labels[key] + ", " + pathName, paired ? labels[key] : "")
+    );
+    get("model-tables").replaceChildren(...tables);
+    const gap = get("comparison-gap");
+    if (paired) {
+      const absolute = selectedPath("absolute").at(-1);
+      const relative = selectedPath("relative").at(-1);
+      const difference = absolute.map((value, i) => value - relative[i]);
+      const hand = formatted(Math.hypot(...difference.slice(0, 3)));
+      const elbow = formatted(Math.hypot(...difference.slice(3, 6)));
+      gap.textContent = "At 100 ms, the two predicted hand positions are " + hand +
+        " mm apart in 3D. The predicted elbow positions are " + elbow + " mm apart.";
+    }
+    gap.hidden = !paired;
     updatePlots();
   }
 
-  function linkForecastDownload() {
-    const model = globalThis.ReachForecastModel;
-    const output = {
+  function modelRecord(key) {
+    const model = key === "absolute" ? globalThis.ReachForecastModel : globalThis.ReachForecastRelativeModel;
+    const prediction = current.predictions[key];
+    return {
+      id: model.schema,
+      fitSeed: model.fitSeed,
+      weightsSha256: model.weightsSha256,
+      normalizersSha256: model.normalizersSha256,
+      samplingSeed,
+      drawCount: prediction.pathsMm.length,
+      pathsMm: prediction.pathsMm,
+      meanMm: prediction.meanMm
+    };
+  }
+
+  function linkForecastDownload(view, keys) {
+    const prediction = current.predictions[keys[0]];
+    const common = {
       format: "NeuroTranslation reach forecast",
-      version: 1,
+      version: view === "absolute" ? 1 : 2,
       quantity: "Forecast displacement from each marker's last input position",
       units: {displacement: "mm", time: "ms"},
       axes: columns.slice(0, 6),
-      timeAfterLastReadingMs: forecast.timesMs,
-      model: {
-        id: model.schema,
-        fitSeed: model.fitSeed,
-        weightsSha256: model.weightsSha256,
-        normalizersSha256: model.normalizersSha256,
-        samplingSeed,
-        drawCount: forecast.pathsMm.length,
-        pathsMm: forecast.pathsMm,
-        meanMm: forecast.meanMm
-      },
-      constantVelocity: {historyWindowMs: 20, displacementMm: forecast.velocity20Mm}
+      timeAfterLastReadingMs: prediction.timesMs
     };
+    const constantVelocity = {historyWindowMs: 20, displacementMm: prediction.velocity20Mm};
+    let output;
+    if (view === "absolute") {
+      // Keep the published v1 record and filename byte-compatible.
+      output = {...common, model: modelRecord("absolute"), constantVelocity};
+      saveLink.download = "reach-forecast-v1.json";
+      saveLink.textContent = "Save forecast";
+      get("save-help").textContent = "The JSON file contains all 32 model paths, their mean and the constant-velocity forecast.";
+    } else {
+      const descriptions = {
+        absolute: "The model reads the original recorded positions.",
+        relative: "The model subtracts each coordinate's last reading from its 20 readings."
+      };
+      const models = Object.fromEntries(keys.map(key => [key, {
+        historyRepresentation: key,
+        historyTransform: descriptions[key],
+        ...modelRecord(key)
+      }]));
+      output = {
+        ...common,
+        mode: view,
+        expectedInputFrame: {
+          markers: "Hand and elbow XYZ relative to the shoulder on the recording's axes.",
+          handle: "Handle XY in the recording robot's coordinates.",
+          positionUnits: "mm",
+          readings: 20,
+          intervalMs: 10,
+          timeFromLastReadingMs: [-190, 0]
+        },
+        outputFrame: "Displacement along the recorded X, Y and Z axes from each marker's own last input position.",
+        provenance: {
+          engineContractVersion: 2,
+          engineSha256: "48a4b2aea1896fdd6fb227190f76b9de42bbff7697a6052dbf28e1cbe375ef86",
+          trainingDatasetDoi: "10.5061/dryad.nk98sf7q7",
+          methodsDoi: "10.7554/eLife.48198",
+          fittingRecording: "Macaque C, 7 September 2017"
+        },
+        models,
+        constantVelocity
+      };
+      saveLink.download = "reach-forecast-" + view + "-v2.json";
+      saveLink.textContent = view === "comparison" ? "Save both forecasts" : "Save relative forecast";
+      get("save-help").textContent = view === "comparison"
+        ? "The JSON file contains 32 paths and their mean for each model, plus the shared constant-velocity forecast."
+        : "The JSON file contains all 32 relative-model paths, their mean and the constant-velocity forecast.";
+    }
     const file = new Blob([JSON.stringify(output, null, 2), "\n"], {type: "application/json"});
     saveLink.href = URL.createObjectURL(file);
   }
 
-  function runForecast(focusInvalid = false) {
-    stopShowingResult("Calculating the marker paths…");
-    let readings;
-    try {
-      readings = readHistory(history.value);
-    } catch (error) {
-      reportError(error.message, true, focusInvalid);
+  function showMode(focusInvalid = false) {
+    if (!current) return;
+    const ticket = ++revision;
+    const view = mode();
+    const keys = modelKeys(view);
+    hideResult("Calculating the marker paths…");
+    inputError.textContent = "";
+    status.textContent = "";
+    history.removeAttribute("aria-invalid");
+    const engines = {
+      absolute: globalThis.ReachForecasts?.absolute ?? globalThis.ReachForecast,
+      relative: globalThis.ReachForecasts?.relative
+    };
+    if (keys.some(key => typeof engines[key]?.predict !== "function")) {
+      reportError("The files for this model choice could not open. Extract the whole preview together and reopen it.", false, false);
       return;
     }
-    if (typeof globalThis.ReachForecast?.predict !== "function") {
-      reportError("The model files could not open. Extract the whole preview together and reopen it.", false, false);
-      return;
-    }
-    const ticket = revision;
     run.disabled = true;
-    status.textContent = "Calculating 32 model paths…";
-    setTimeout(() => {
+    status.textContent = view === "comparison" ? "Calculating 32 paths for each model…" : "Calculating 32 model paths…";
+    function finish() {
       if (ticket !== revision) return;
       try {
-        const prediction = globalThis.ReachForecast.predict(readings, {seed: samplingSeed, draws});
-        if (prediction.velocity20Mm.some(row => row.some(value => !Number.isFinite(value)))) {
-          throw new RangeError("The final velocity exceeds the numeric range.");
+        for (const key of keys) {
+          if (current.predictions[key]) continue;
+          const prediction = engines[key].predict(current.readings, {seed: samplingSeed, draws});
+          if (prediction.velocity20Mm.some(row => row.some(value => !Number.isFinite(value)))) {
+            throw new RangeError("The final velocity exceeds the numeric range.");
+          }
+          current.predictions[key] = prediction;
         }
-        forecast = prediction;
+        get("absolute-key").hidden = !keys.includes("absolute");
+        get("relative-key").hidden = !keys.includes("relative");
+        const velocity = current.predictions[keys[0]].velocity20Mm;
+        get("velocity-tables").replaceChildren(...markerTables(velocity, "constant velocity"));
+        linkForecastDownload(view, keys);
+        placeholder.hidden = true;
+        result.hidden = false;
+        updateSelection();
+        run.disabled = false;
+        const messages = {
+          absolute: "Forecast ready for these 20 readings.",
+          relative: "Relative-position forecast ready for these 20 readings.",
+          comparison: "Both forecasts are ready for the same 20 readings."
+        };
+        status.textContent = messages[view];
       } catch (error) {
+        stopShowingResult("The model could not finish the forecast.");
         if (error instanceof RangeError) {
           reportError("These readings exceed the fitted model’s numeric range. Check that each position uses millimetres.", true, focusInvalid);
         } else {
           reportError("The model could not return a forecast. Reopen the complete preview and run it again.", false, false);
         }
-        return;
       }
-      placeholder.hidden = true;
-      result.hidden = false;
-      showTables(get("velocity-tables"), forecast.velocity20Mm, "constant velocity");
-      updateSelection();
-      run.disabled = false;
-      status.textContent = "Forecast ready for these 20 readings.";
-      linkForecastDownload();
-    }, 0);
+    }
+    if (keys.every(key => current.predictions[key])) finish();
+    else setTimeout(finish, 0);
+  }
+
+  function runForecast(focusInvalid = false) {
+    stopShowingResult("Calculating the marker paths…");
+    try {
+      current = {readings: readHistory(history.value), predictions: {}};
+    } catch (error) {
+      reportError(error.message, true, focusInvalid);
+      return;
+    }
+    showMode(focusInvalid);
   }
 
   function restoreExample() {
@@ -349,8 +480,9 @@
       }
     }
   });
+  modes.forEach(radio => radio.addEventListener("change", () => showMode()));
   pathMenu.addEventListener("change", () => {
-    if (!forecast) return;
+    if (!current || result.hidden) return;
     updateSelection();
     status.textContent = "Showing " + pathMenu.selectedOptions[0].text.toLowerCase() + ".";
   });
