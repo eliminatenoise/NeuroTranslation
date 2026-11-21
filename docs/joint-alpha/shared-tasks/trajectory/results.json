@@ -1,0 +1,67 @@
+{
+  "rows": 1462,
+  "people": 5,
+  "draws_per_event": 32,
+  "updates_per_seed": 640,
+  "scope": "Short-path internal comparison from one existing fit archive. Both neural modes use the same two seeds.",
+  "scores": {
+    "velocity32": {
+      "energy_mm": 4.062368814886783,
+      "ADE_mm": 3.600167907184806,
+      "FDE_mm": 6.149099472793014
+    },
+    "velocity8": {
+      "energy_mm": 3.2453908622196166,
+      "ADE_mm": 2.8101182437485037,
+      "FDE_mm": 5.024135280974601
+    },
+    "ridge_point": {
+      "energy_mm": 2.8011764823983842,
+      "ADE_mm": 2.4426692457150336,
+      "FDE_mm": 4.280188054789031
+    },
+    "ridge_residual": {
+      "energy_mm": 2.1133385357770544,
+      "ADE_mm": 2.536276347928948,
+      "FDE_mm": 4.439325627100567
+    },
+    "ar": {
+      "energy_mm": 2.809471002210369,
+      "ADE_mm": 3.4573968357757012,
+      "FDE_mm": 5.811509866759918
+    },
+    "diffusion": {
+      "energy_mm": 2.708860478663773,
+      "ADE_mm": 3.380856831391528,
+      "FDE_mm": 5.6650574126725575
+    }
+  },
+  "run_measurements": {
+    "ar": {
+      "parameters": 28201,
+      "forecast_events_per_s_pooled": 3166.3944003233837,
+      "inference_passes_per_path": 4,
+      "forecast_s_per_seed": [
+        0.45584675506688654,
+        0.46760106296278536
+      ],
+      "whole_process_wall_s_per_seed": [
+        4.224905138951726,
+        4.089566931012087
+      ]
+    },
+    "diffusion": {
+      "parameters": 28003,
+      "forecast_events_per_s_pooled": 758.7973903642475,
+      "inference_passes_per_path": 16,
+      "forecast_s_per_seed": [
+        1.9306463549146429,
+        1.9228197180200368
+      ],
+      "whole_process_wall_s_per_seed": [
+        5.402999259997159,
+        5.407927901018411
+      ]
+    }
+  }
+}
