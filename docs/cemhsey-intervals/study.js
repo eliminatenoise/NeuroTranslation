@@ -75,7 +75,7 @@
       const s = current.group[model][scheme];
       const row = element("tr"); const heading = element("th","",schemeNames[i]); heading.scope = "row";row.append(heading);
       const tails = count => count.toLocaleString("en")+" ("+(100*count/s.issue_windows).toFixed(1)+"%)";
-      for (const n of [tails(s.miss_low),s.covered,tails(s.miss_high),display(value(s,"coverage"),"coverage"),s.mean_width.toFixed(4),s.mean_interval_score.toFixed(4)]) row.append(element("td","",String(n)));
+      for (const n of [tails(s.miss_low),s.covered.toLocaleString("en"),tails(s.miss_high),display(value(s,"coverage"),"coverage"),s.mean_width.toFixed(4),s.mean_interval_score.toFixed(4)]) row.append(element("td","",String(n)));
       table.append(row);
     }
     const ref = current.group[model].pooled;
