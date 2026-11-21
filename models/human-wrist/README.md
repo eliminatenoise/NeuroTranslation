@@ -88,10 +88,10 @@ The primary comparison pairs true pose-plus-voltage forecasts with both pose-onl
 | Mean error in pixels across 58 held events | Right +8 | Right +15 | Left +8 | Left +15 |
 | --- | ---: | ---: | ---: | ---: |
 | Seed-17 Transformer, velocity plus learned correction, pose and voltage | 29.68 | 48.83 | 46.43 | 53.12 |
-| Same treatment, separately fitted on pose alone | 30.03 | 50.00 | 46.46 | 53.13 |
+| Same treatment, separately fitted on pose alone | 30.03 | 49.99 | 46.46 | 53.13 |
 | Fitted fraction of earlier velocity | 31.02 | 50.31 | 45.59 | 51.79 |
 
-Adding voltage to pose lowered the right-wrist mean error at both horizons in all three fits on the common 57 events. Voltage from a different event sometimes performed as well or better. Neither wrist met the prespecified requirement to beat both controls at both horizons in every fit. The simpler fitted-velocity forecast had lower left-wrist mean error than the illustrated seed-17 model. All three seeds share one training recording and one test recording. The left-wrist estimates describe what happened during selected **right**-wrist movements. Generalization to another person, an online onset detector and a causal effect of one arm’s cortical activity require different evidence. [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/human-wrist/)
+Adding voltage to pose lowered the right-wrist mean error at both horizons in all three fits on the common 57 events, though one of those six gains was 0.000081 pixels and two reversed when each four-hour period of the test day counted equally. Voltage from a different event sometimes performed as well or better. Neither wrist met the prespecified requirement to beat both controls at both horizons in every fit. The simpler fitted-velocity forecast had lower left-wrist mean error than the illustrated seed-17 model. All three seeds share one training recording and one test recording. The left-wrist estimates describe what happened during selected **right**-wrist movements. Generalization to another person, an online onset detector and a causal effect of one arm’s cortical activity require different evidence. [Read the study](https://eliminatenoise.github.io/NeuroTranslation/papers/human-wrist/)
 
 ## Files, sources and rights
 

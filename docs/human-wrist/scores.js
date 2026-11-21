@@ -2,7 +2,7 @@
 globalThis.WristScores = {
   "summary": [
     "The research models fitted 60 earlier right-wrist events on day three. The test used 58 preselected events on day four of the same participant’s recording. Each row below compares a predicted wrist position with the position estimated from the video. Lower error in pixels is better.",
-    "Adding voltage to pose reduced right-wrist mean error at both horizons in all three fits. Giving the model voltage from a different event sometimes did just as well or better. Neither wrist passed the test of a consistent benefit from the matching voltage."
+    "On the 57 events that had an earlier event to borrow voltage from, adding voltage to pose lowered the right-wrist mean error at both horizons in all three fits. One of those six gains was less than a ten-thousandth of a pixel, and two of them reversed when each four-hour period of the test day counted equally. Giving the model voltage from a different event sometimes did just as well or better. For the left wrist, keeping the wrist still (45.59 and 51.79 pixels) beat the model with voltage (46.43 and 53.12 pixels for the fit shown). Neither wrist passed the test of a consistent benefit from the matching voltage."
   ],
   "tables": [
     {
@@ -108,7 +108,7 @@ globalThis.WristScores = {
         [
           "37 vs pose alone",
           "-0.656 (57)",
-          "-8.1e-05 (57)",
+          "−0.000081 (57)",
           "+0.28 (57)",
           "-0.0043 (57)"
         ],
@@ -138,6 +138,7 @@ globalThis.WristScores = {
     }
   ],
   "notes": [
+    "Every score here is copied from results.json in the study’s source download (human-wrist-source.zip, beside the paper), fields absolute and primary_common, rounded for display.",
     "The three fits differ by their initial random weights. They share one training day and one test day. The camera measures projected motion in pixels. These results do not establish the same relationship in another participant, a real-time detector of movement onset or a causal effect of cortical activity."
   ]
 };
