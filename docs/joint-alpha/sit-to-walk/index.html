@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What helps predict the rise from a chair? · NeuroTranslation</title>
+<style>
+:root{font:17px/1.55 system-ui,sans-serif;color:#112f28;background:#f9faf4}
+body{margin:0} main{max-width:55rem;margin:auto;padding:2rem 1rem 4rem} h1{font-size:clamp(2rem,5.5vw,3.05rem);line-height:1.08;margin-block:1.1rem;max-width:15em}
+h2{font-size:1.35rem} p{max-width:70ch} a{color:inherit;text-underline-offset:.16em} details{margin-block:1rem}
+summary{cursor:pointer;font-weight:650} a:focus-visible,summary:focus-visible{outline:3px solid #116454;outline-offset:4px}
+table{table-layout:fixed;border-collapse:collapse;margin:.8rem 0 1.25rem;width:100%;font-variant-numeric:tabular-nums}
+caption{text-align:left;font-size:.94rem;padding-bottom:.45rem}
+th,td{border-bottom:1px solid #bdcfc4;padding:.45rem .3rem;text-align:left;overflow-wrap:anywhere}
+th:first-child{width:74%} tbody th{font-weight:400}
+@media(forced-colors:active){th,td{border-color:CanvasText}}
+</style>
+</head>
+<body><main>
+<a href="../">NeuroTranslation studies</a>
+<h1>What helps predict the rise from a chair?</h1>
+<p>As you stand, your hips rise, your feet press on the floor, and your leg muscles become active. We used these three recordings to predict how far the hips would rise or fall in the next tenth of a second. Every version was tested on the same 3,965 moments from 15 people kept out of training and model selection.</p>
+
+<h2>The cameras did most of the work</h2>
+<p>The attention model used a short run of earlier measurements to weight the parts that helped predict the next movement. It missed by <strong>1.93 mm</strong> on average with camera tracking alone. Floor force changed that error by less than 0.01 mm. Adding only muscle activity increased it by 0.09 mm. Adding both increased it by 0.04 mm.</p>
+<table><caption>Average absolute error across all matched forecasts</caption><thead><tr><th scope='col'>Forecast</th><th scope='col'>Error (mm)</th></tr></thead><tbody><tr><th scope='row'>Hold the last height</th><td>8.53</td></tr><tr><th scope='row'>Continue the recent rising or falling speed</th><td>4.57</td></tr><tr><th scope='row'>Linear fit · movement</th><td>2.18</td></tr><tr><th scope='row'>Attention model · movement</th><td>1.93</td></tr><tr><th scope='row'>Attention model · movement and floor force</th><td>1.93</td></tr><tr><th scope='row'>Attention model · movement and muscle activity</th><td>2.02</td></tr><tr><th scope='row'>Attention model · all three signals</th><td>1.98</td></tr></tbody></table>
+<p>For floor force, the estimated difference ranged from 0.07 mm lower to 0.07 mm higher when the 15 people were resampled. The study leaves the value of floor force unresolved for this forecast.</p>
+
+<details><summary>While the person was already rising</summary>
+<p>At 798 forecasts, the hips had already risen at least 5 mm over the preceding 50 milliseconds. The simple linear model had the lowest average error in this subset. This check describes that part of the movement and the same test group.</p>
+<table><caption>Average absolute error during those 798 forecasts</caption><thead><tr><th scope='col'>Forecast</th><th scope='col'>Error (mm)</th></tr></thead><tbody><tr><th scope='row'>Hold the last height</th><td>27.52</td></tr><tr><th scope='row'>Continue the recent rising or falling speed</th><td>10.11</td></tr><tr><th scope='row'>Linear fit · movement</th><td>3.97</td></tr><tr><th scope='row'>Attention model · movement</th><td>4.17</td></tr><tr><th scope='row'>Attention model · movement and floor force</th><td>4.18</td></tr><tr><th scope='row'>Attention model · movement and muscle activity</th><td>4.35</td></tr><tr><th scope='row'>Attention model · all three signals</th><td>4.33</td></tr></tbody></table>
+</details>
+
+<details><summary>How the recordings and models were checked</summary>
+<p>Floor plates recorded the force against the ground. Sensors on one leg recorded electrical activity near eight muscles. Their electrical readings depend on muscle activation, sensor placement and how the signal was recorded. Each force window used earlier measurements. Muscle windows ended 50 ms sooner because the separate muscle files carry sample rates and share the recorded start, without individual sample timestamps.</p>
+<p>The four attention versions each used a model with 11,553 adjustable numbers, trained from scratch in three runs. Forty people supplied training examples and ten different people were used to choose how long to train. The fifteen remaining people supplied all the forecasts above. Each person counted equally, and each of their trials counted equally within their own result.</p>
+<p>The original archive includes filled-in camera tracks. A second decoder reproduced all 3,965 later position changes. Restricting the comparison to 2,729 forecasts with positive camera-quality records at both endpoints still gave a larger average error with muscle activity. A further 75 forecasts fell past the end of their recording and had no later camera position to check.</p>
+<p>The findings describe one movement, one recording setup and healthy adults. The test concerns earlier archived signals and a later marker position. It gives no estimate of live device delay or the force produced by a single muscle.</p>
+</details>
+
+<p><a href="results.json" download>Download the aggregate results</a></p>
+<p>The recordings come from Chamalka Kenneth Perera and colleagues at Monash University Malaysia. <a href="https://doi.org/10.1038/s41597-024-03740-z">Recording methods</a> · <a href="https://doi.org/10.26180/24515092.v4">Source archive, version 4</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+</main></body>
+</html>

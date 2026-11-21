@@ -1,0 +1,129 @@
+{
+  "version": "a60813d9ae71",
+  "recordings": "https://doi.org/10.26180/24515092.v4",
+  "recording_methods": "https://doi.org/10.1038/s41597-024-03740-z",
+  "recording_license": "CC BY 4.0",
+  "forecast": "100 ms future vertical displacement of four camera-tracked pelvis markers",
+  "participants": {
+    "development": 40,
+    "validation": 10,
+    "confirmation": 15
+  },
+  "network_parameters": 11553,
+  "training_updates": 640,
+  "strongest_validation_movement_control": "attention_motion",
+  "unscored_forecasts": 75,
+  "earlier_muscle_cutoff_ms": 50,
+  "analyses": {
+    "primary": {
+      "scope": "all matched times",
+      "measured_rows": 3965,
+      "people": 15,
+      "trials": 75,
+      "mae_mm": {
+        "persistence": 8.5293171712731,
+        "velocity": 4.571974329349428,
+        "ridge_motion": 2.1788586349115304,
+        "attention_motion": 1.9342014537071772,
+        "attention_motion_force": 1.9319832015856742,
+        "attention_motion_muscle": 2.021213059920114,
+        "attention_motion_force_muscle": 1.978160289146954
+      },
+      "paired_comparisons": {
+        "attention_motion_force_minus_attention_motion": {
+          "mean_mm": -0.0022182521215029873,
+          "people_with_lower_error": 10,
+          "bootstrap_95_percentile_interval_mm": [
+            -0.06812095523688,
+            0.06986362147767232
+          ]
+        },
+        "attention_motion_muscle_minus_attention_motion": {
+          "mean_mm": 0.08701160621293615,
+          "people_with_lower_error": 5,
+          "bootstrap_95_percentile_interval_mm": [
+            0.010607455603413515,
+            0.1601544354194561
+          ]
+        },
+        "attention_motion_force_muscle_minus_attention_motion": {
+          "mean_mm": 0.04395883543977625,
+          "people_with_lower_error": 7,
+          "bootstrap_95_percentile_interval_mm": [
+            -0.03684358595128669,
+            0.12655816100405898
+          ]
+        }
+      }
+    },
+    "rising": {
+      "scope": "past pelvis rise of at least 5 mm over 50 ms",
+      "measured_rows": 798,
+      "people": 15,
+      "trials": 75,
+      "mae_mm": {
+        "persistence": 27.522562321397587,
+        "velocity": 10.105524789123724,
+        "ridge_motion": 3.9737430786143966,
+        "attention_motion": 4.174326802218264,
+        "attention_motion_force": 4.184262385431881,
+        "attention_motion_muscle": 4.354426251467644,
+        "attention_motion_force_muscle": 4.32964374930171
+      },
+      "paired_comparisons": {
+        "attention_motion_force_minus_attention_motion": {
+          "mean_mm": 0.009935583213617486,
+          "people_with_lower_error": 10,
+          "bootstrap_95_percentile_interval_mm": [
+            -0.20819428266853857,
+            0.24430097775287354
+          ]
+        },
+        "attention_motion_muscle_minus_attention_motion": {
+          "mean_mm": 0.1800994492493806,
+          "people_with_lower_error": 7,
+          "bootstrap_95_percentile_interval_mm": [
+            -0.07742335976605152,
+            0.45348085995885623
+          ]
+        },
+        "attention_motion_force_muscle_minus_attention_motion": {
+          "mean_mm": 0.15531694708344676,
+          "people_with_lower_error": 7,
+          "bootstrap_95_percentile_interval_mm": [
+            -0.15163294737832034,
+            0.45684131390461585
+          ]
+        }
+      }
+    }
+  },
+  "optical_support": {
+    "positive_residual_at_both_endpoints": {
+      "rows": 2729,
+      "people": 15,
+      "mae_mm": {
+        "persistence": 9.290003688979832,
+        "velocity": 6.139838438632986,
+        "ridge_motion": 2.602164655871725,
+        "attention_motion": 2.3412660598752253,
+        "attention_motion_force": 2.308426113947114,
+        "attention_motion_muscle": 2.4674335062978154,
+        "attention_motion_force_muscle": 2.4135987157108376
+      }
+    },
+    "positive_residual_for_all_input_positions_and_both_endpoints": {
+      "rows": 830,
+      "people": 15,
+      "mae_mm": {
+        "persistence": 8.122338734074738,
+        "velocity": 6.082053038717834,
+        "ridge_motion": 2.777684392193197,
+        "attention_motion": 2.4656787939089937,
+        "attention_motion_force": 2.4241846587464257,
+        "attention_motion_muscle": 2.637183275465589,
+        "attention_motion_force_muscle": 2.5554870542731485
+      }
+    }
+  }
+}
