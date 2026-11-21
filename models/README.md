@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0
 
+The [human wrist package](human-wrist/) includes the simulation used in the public reader and the code for learning from locally acquired recordings. [Run a wrist forecast](https://eliminatenoise.github.io/NeuroTranslation/human-wrist/) · [Read the cross-day results](https://eliminatenoise.github.io/NeuroTranslation/papers/human-wrist/)
+
 The [one-week reach package](reach-feedback-week/) contains the trained models, a reader, and instructions for rebuilding the comparison from two recordings. [Open the later-day reader](https://eliminatenoise.github.io/NeuroTranslation/reach-feedback/one-week/)
 
 The [reach feedback package](reach-feedback/) predicts hand, elbow and handle movement and estimates how much electrical activity follows in 23 recorded units of sensory cortex. [Try the model](https://eliminatenoise.github.io/NeuroTranslation/reach-feedback/) · [Compare the two workspaces](https://eliminatenoise.github.io/NeuroTranslation/papers/reach-feedback/)

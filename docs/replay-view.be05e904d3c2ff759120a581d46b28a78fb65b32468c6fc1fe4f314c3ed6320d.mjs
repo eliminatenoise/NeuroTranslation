@@ -1,6 +1,6 @@
-import {normalizeFinite} from './plot.b8cb42049f85a5cb7eaf6d1c13203962ce17cc8574166aec5f198bb1833b9ad5.mjs';
-import {sha256Hex} from './hash.b8cb42049f85a5cb7eaf6d1c13203962ce17cc8574166aec5f198bb1833b9ad5.mjs';
-import {scoreEegReplay, validateEegReplayModel} from './palm-model.b8cb42049f85a5cb7eaf6d1c13203962ce17cc8574166aec5f198bb1833b9ad5.mjs';
+import {normalizeFinite} from './plot.be05e904d3c2ff759120a581d46b28a78fb65b32468c6fc1fe4f314c3ed6320d.mjs';
+import {sha256Hex} from './hash.be05e904d3c2ff759120a581d46b28a78fb65b32468c6fc1fe4f314c3ed6320d.mjs';
+import {scoreEegReplay, validateEegReplayModel} from './palm-model.be05e904d3c2ff759120a581d46b28a78fb65b32468c6fc1fe4f314c3ed6320d.mjs';
 
 const expectedModelSha256 = 'c9c9e6a5c357274103e339f69517ae6a11f1d90c39f1d172585ad81a38ee8337';
 const byId = id => document.getElementById(id);
@@ -254,7 +254,7 @@ export function createPalmReplay({openImport, download}) {
     if (!response.ok) throw new Error('Fitted parameters unavailable');
     return new TextDecoder('utf-8', {fatal: true, ignoreBOM: true}).decode(await response.arrayBuffer());
   }
-  const baseText = fetch('./palm-model.b8cb42049f85a5cb7eaf6d1c13203962ce17cc8574166aec5f198bb1833b9ad5.json').then(assetText);
+  const baseText = fetch('./palm-model.be05e904d3c2ff759120a581d46b28a78fb65b32468c6fc1fe4f314c3ed6320d.json').then(assetText);
   baseText.then(text => {
     const digest = sha256Hex(text);
     if (digest !== expectedModelSha256) throw new Error('Fitted parameters differ from the released model');
@@ -264,8 +264,8 @@ export function createPalmReplay({openImport, download}) {
     if (!isRunTwo(selectedPacket())) reset();
   }).catch(() => { loadError = true; reset(); });
 
-  Promise.all([import('./r2-replay.b8cb42049f85a5cb7eaf6d1c13203962ce17cc8574166aec5f198bb1833b9ad5.mjs'), baseText, fetch('./r2-calibration-state.b8cb42049f85a5cb7eaf6d1c13203962ce17cc8574166aec5f198bb1833b9ad5.json').then(assetText),
-    fetch('./r2-source.b8cb42049f85a5cb7eaf6d1c13203962ce17cc8574166aec5f198bb1833b9ad5.json').then(assetText), fetch('./r2-trial-index.b8cb42049f85a5cb7eaf6d1c13203962ce17cc8574166aec5f198bb1833b9ad5.json').then(assetText)])
+  Promise.all([import('./r2-replay.be05e904d3c2ff759120a581d46b28a78fb65b32468c6fc1fe4f314c3ed6320d.mjs'), baseText, fetch('./r2-calibration-state.be05e904d3c2ff759120a581d46b28a78fb65b32468c6fc1fe4f314c3ed6320d.json').then(assetText),
+    fetch('./r2-source.be05e904d3c2ff759120a581d46b28a78fb65b32468c6fc1fe4f314c3ed6320d.json').then(assetText), fetch('./r2-trial-index.be05e904d3c2ff759120a581d46b28a78fb65b32468c6fc1fe4f314c3ed6320d.json').then(assetText)])
     .then(([replay, baseModel, calibrationState, source, trialIndex]) => {
       const state = replay.loadR2ReplayState({baseModel, calibrationState, source, trialIndex});
       runR2 = packet => replay.scoreR2Replay(state, packet);

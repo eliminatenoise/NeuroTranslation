@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'">
+<title>Two wrists on a second recording day</title>
+<style>
+*{box-sizing:border-box}body{margin:0;color:#162e32;background:#f3f5f0;font:1.06rem/1.55 system-ui,sans-serif}main,footer{max-width:64rem;margin:auto;padding:clamp(1.2rem,5vw,4rem)}main{padding-bottom:1.5rem}h1{font-size:clamp(2.4rem,6vw,4.8rem);line-height:1.05;max-width:15ch;letter-spacing:-.055em;margin:.4em 0}h2{font-size:1.3rem;margin:.2em 0}.deck{max-width:62ch}.open{display:inline-block;color:white;background:#135e58;padding:.7em 1.15em;margin:.4em 0 1em;text-decoration:none;border-radius:.3rem}.open:focus-visible,a:focus-visible{outline:3px solid #ab4d14;outline-offset:3px}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1.6rem;max-width:56rem;margin-top:1.9rem}.two section{border-top:2px solid #87a7a0;padding:1em 0}a{color:#0c5956;text-underline-offset:.16em}code{overflow-wrap:anywhere}footer{border-top:1px solid #bdcfc9;padding-top:1.2rem}nav{display:flex;flex-wrap:wrap;gap:1.1rem}
+</style>
+</head>
+<body><main>
+<h1>Two wrists on a second recording day</h1>
+<p class="deck">A camera follows both arms. Eight electrodes record voltage at the brain’s surface. Give a model the half-second before a recorded movement and it estimates where each wrist will appear eight and fifteen frames later.</p>
+<a class="open" href="reader/index.html">Open the wrist reader</a>
+<div class="two">
+<section><h2>Try an invented movement</h2><p>The reader comes with four simulated movements. Change an earlier wrist position or the voltage gain to see the forecast move. You can also import the case from the fictional training exercise.</p><a href="fictional-example.json" download>Save the fictional training example</a></section>
+<section><h2>Repeat the recording study</h2><p>Train on 60 movements from one recording and test 58 from the next day. The software evaluates 110 forecasts and controls, scores each wrist in pixels and exports a privately fitted case for the reader.</p><a href="README.md">Training and reproduction instructions</a></section>
+</div>
+<p class="deck">In this person’s next recording, adding voltage to earlier pose lowered right-wrist mean error at both horizons across three fits. Voltage borrowed from a different event sometimes did as well or better. The timing of the voltage did not consistently improve either wrist’s forecast.</p>
+</main><footer><nav aria-label="Study resources"><a href="https://eliminatenoise.github.io/NeuroTranslation/papers/human-wrist/">Read the paper</a><a href="https://eliminatenoise.github.io/Interoceptomics/human-wrist/">Open the electrode atlas</a><a href="https://eliminatenoise.github.io/NeuroTranslation/human-wrist/">Online wrist reader</a><a href="https://doi.org/10.48324/dandi.000055/0.220127.0436">Original AJILE12 dataset</a></nav></footer></body></html>

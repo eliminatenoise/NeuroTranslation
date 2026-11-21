@@ -1,4 +1,4 @@
-"""CPU/NumPy reader for movement distance, wrist angles and paired rat population histories."""
+"""Run a NeuroTranslate 0.0 forecast from a JSON input record using NumPy."""
 import argparse
 import json
 from pathlib import Path
@@ -160,7 +160,24 @@ def forecast_population(cutoff_s, prior_time_s, prior_xy_cm, mode, checkpoint=DE
     return ridge_prediction(features, state)
 
 
-def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
+def predict_record(record, checkpoint=DEFAULT_CHECKPOINT, *, wrist_case=None, wrist_treatment=None,
+                   wrist_modality=None):
+    if not isinstance(record, dict):
+        raise ValueError("Expected a JSON input object.")
+    if record.get("domain") == "bilateral_wrist_endpoint" or {"format", "weights", "cases"} <= record.keys():
+        from bilateral_wrist.forecast import forecast as predict_wrists
+        if Path(checkpoint) != DEFAULT_CHECKPOINT:
+            raise ValueError("The bilateral wrist task takes fitted weights from its input JSON.")
+        # The browser exporter sends the portable package directly. A domain-labelled record
+        # may use the same three fields alongside its domain.
+        package = {k: v for k, v in record.items() if k != "domain"}
+        if "domain" in record and record["domain"] != "bilateral_wrist_endpoint":
+            raise ValueError("Inconsistent task and wrist package format.")
+        return predict_wrists(package, case_index=0 if wrist_case is None else wrist_case,
+                              treatment="anchored" if wrist_treatment is None else wrist_treatment,
+                              modality="full" if wrist_modality is None else wrist_modality)
+    if any(value is not None for value in (wrist_case, wrist_treatment, wrist_modality)):
+        raise ValueError("Wrist endpoint options require a wrist-forecast-v1 input.")
     if record.get("domain") == "cross_limb":
         from cross_limb.forecast import forecast as predict_cross_limb
         source = Path(checkpoint)
@@ -299,10 +316,17 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path, help="JSON cross-limb movement, muscle activity and sacrum path, visual balance, walking instruction, heel movement and force, pedal load change, muscle length change, back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
+    parser.add_argument("input", type=Path, help="JSON bilateral wrist endpoints, cross-limb movement, muscle activity and sacrum path, visual balance, walking instruction, heel movement and force, pedal load change, muscle length change, back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
+    parser.add_argument("--wrist-case", type=int, help="Index in a bilateral wrist package (default 0)")
+    parser.add_argument("--wrist-treatment", choices=("anchored", "direct", "bounded_zero"),
+                        help="Wrist displacement model (default anchored)")
+    parser.add_argument("--wrist-modality", choices=("full", "pose"),
+                        help="Earlier pose with voltage, or earlier pose alone (default full)")
     args = parser.parse_args()
     try:
-        print(json.dumps(predict_record(json.loads(args.input.read_text()), args.checkpoint), allow_nan=False))
+        result = predict_record(json.loads(args.input.read_text()), args.checkpoint, wrist_case=args.wrist_case,
+                                wrist_treatment=args.wrist_treatment, wrist_modality=args.wrist_modality)
+        print(json.dumps(result, allow_nan=False))
     except (ValueError, KeyError, TypeError, OSError) as exc:
         parser.exit(2, f"Input or checkpoint error: {exc}\n")

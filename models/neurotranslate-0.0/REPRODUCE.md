@@ -1,5 +1,7 @@
 # Predict and reproduce
 
+For both wrists in the camera frame, run `python predict.py bilateral_wrist/example.json`. Use a local `wrist-forecast-v1` file from the same exporter to substitute your own earlier measurements and fitted weights. [Input contract, output axes and synthetic fitting procedure](bilateral_wrist/README.md)
+
 To forecast a 125 ms wrist or sacrum movement with its observed muscle channels, try `python predict.py cross_limb/grasp_lift-example.json`. [Rebuild the two-study comparison](cross_limb/README.md).
 
 For eight leg-muscle readings and a full 125 ms sacrum path, run `python predict.py muscle_motion/example.json`. [Fit the baseline and standing transfer models](muscle_motion/README.md).

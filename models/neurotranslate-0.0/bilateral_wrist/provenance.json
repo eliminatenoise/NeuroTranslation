@@ -1,0 +1,18 @@
+{
+  "description": "Independent simulated wrist histories and models trained entirely on simulated events.",
+  "fit_events": 64,
+  "fit_motion_seed": 19037,
+  "example_events": 4,
+  "example_motion_seed": 33117,
+  "network_seed": 17,
+  "optimizer_steps": 48,
+  "weights_sha256": "673e7b0bcdaafb615862d98db64a49672e2521007402b994e4df6abc3a522c19",
+  "history_sha256": [
+    "0a89b668bc5a2b45a7aec48e371c1ebd6109f9d87468a9688665e6e414385b83",
+    "1233ea1b29b37e425d3737d05cf010d9cb1567fa06272c498dccfa1a9b558dc3",
+    "29447944f11d48cdd4051a0bd44e811ce9401b058238bc3c915f45d534fa02d2",
+    "084937d6a1c11077cd710e0eae6f1ed561ee2e6b7f82238d974ee94a5f58d699"
+  ],
+  "fingerprints": "SHA-256 of the normalized numeric JSON, sorted keys and compact separators; each history covers ecog_uv and pose_px only.",
+  "generator": "simulate.py"
+}
