@@ -85,7 +85,12 @@
     get("comparison-gap").hidden = true;
     canvases.forEach((canvas, i) => {
       const ctx = canvas.getContext("2d");
-      if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (ctx) {
+        ctx.save();
+        ctx.resetTransform();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+      }
       canvas.setAttribute("aria-label", markers[i] + " distance forecast");
     });
     result.hidden = true;
@@ -420,10 +425,10 @@
   }
 
   function runForecast(focusInvalid = false) {
-    stopShowingResult("Calculating the marker paths…");
     try {
       current = {readings: readHistory(history.value), predictions: {}};
     } catch (error) {
+      stopShowingResult("Check the movement readings.");
       reportError(error.message, true, focusInvalid);
       return;
     }
