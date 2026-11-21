@@ -2,13 +2,13 @@
   "schema": "paper-edition-v6",
   "version": "2026-11-21",
   "status": "Working drafts",
-  "previous_paper_release": "fe9e3d66b11ccf62c4665949192f0306ee8e59a4",
+  "previous_paper_release": "8f548e4df38396d45860e353b26b32f9cb9a8472",
   "grip_benchmark_commit": "3af280cdb164a35e35c50cded35dcbdc199f6a19",
-  "previous_candidate_receipt_sha256": "1eaa8d77053128dd8ad1c3336950784eaaef6c926ca37b98c31b855b8e02d56b",
+  "previous_candidate_receipt_sha256": "01b70f98803154a2a93ea6a7af191a89ed5424b50ba3115ada3b935728c854e1",
   "grip_aggregate_sha256": "1f831ffa7cfe943b100487e7fdddeb980628d9827b5d4c05fbf54dc2931e7021",
   "glossary": {
     "revision": null,
-    "sha256": "b8e896730f41831c543f7eb43f675ddbb2d2545d034cc647a7b8656ca16ccd66"
+    "sha256": "5a84bf93fe2dd5779213b7086536a635ac404b31a5c109ca9bc09f2c8fe6731b"
   },
   "rights": "NOTICE.md lists every dataset, simulator and typeface the papers rely on, with its licence and the credit it is owed; the two font licence texts are in third-party-notices/. Every licence in NOTICE.md was read at its source on 21 November 2026; where a source states none, NOTICE.md says so.",
   "PDFs": [
@@ -26,8 +26,8 @@
       "sha256": "e3d165ebe6eb98be1f1d4b4a48b2c09c3c3c4c211fe3663bb47650542dd9f9a7",
       "bytes": 253396,
       "pages": 54,
-      "previous_pdf_sha256": "9a01168cdc313a303e1e8c70ab6b1748d3d86c7ef545e86ec7cda869d3683315",
-      "previous_pages": 53,
+      "previous_pdf_sha256": "e3d165ebe6eb98be1f1d4b4a48b2c09c3c3c4c211fe3663bb47650542dd9f9a7",
+      "previous_pages": 54,
       "hyser_end_page": 52,
       "reference_pages": [
         36
@@ -92,7 +92,7 @@
       "sha256": "3b97e84f5460c606cf4fbea731bf9acd99af490ef531acc61ef395be7d85f58c",
       "bytes": 275691,
       "pages": 64,
-      "previous_pdf_sha256": "50be1da15710f96263c38256a77401aeda5beb10281e5863cb2e1f28356f9a9f",
+      "previous_pdf_sha256": "3b97e84f5460c606cf4fbea731bf9acd99af490ef531acc61ef395be7d85f58c",
       "previous_pages": 64,
       "hyser_end_page": 61,
       "reference_pages": [
@@ -155,10 +155,10 @@
       "grip_page": null,
       "development_page": 14,
       "filename": "brain2body-article.pdf",
-      "sha256": "54779b26d3ac9e934d232df0e726608f80fc56a10d26c15220a2fb47fdfb8f3e",
-      "bytes": 137282,
+      "sha256": "6e149535c46519c018f863b10647ef6e87ee52d1081ab0c1384584f063c29851",
+      "bytes": 138195,
       "pages": 29,
-      "previous_pdf_sha256": "6ebd97e224bcc5a5f67caefe4fc6186c87cd724f0b3737adc9ab2b37d9a7fa86",
+      "previous_pdf_sha256": "54779b26d3ac9e934d232df0e726608f80fc56a10d26c15220a2fb47fdfb8f3e",
       "previous_pages": 29,
       "hyser_end_page": null,
       "reference_pages": [
@@ -187,12 +187,12 @@
       "hyser_next_day_page": null,
       "hyser_whole_hand_page": null,
       "grip_page": null,
-      "development_page": 17,
+      "development_page": 18,
       "filename": "brain2body-simple-english.pdf",
-      "sha256": "40026c3251ecb7f7141039859247783a32f57f7701bc1fa885dea79fbccb4901",
-      "bytes": 147032,
+      "sha256": "90d747a5f40d45c6a8c8d03ccc4c4165f784f4aaa3265ff0e4af6a0dbe154693",
+      "bytes": 147375,
       "pages": 33,
-      "previous_pdf_sha256": "1e3ee4bf727543c8934ddbc803242e12de62bd053b6be6d60c802f0ad31927a8",
+      "previous_pdf_sha256": "40026c3251ecb7f7141039859247783a32f57f7701bc1fa885dea79fbccb4901",
       "previous_pages": 33,
       "hyser_end_page": null,
       "reference_pages": [
@@ -214,7 +214,7 @@
     }
   ],
   "named_destinations_note": "Each NeuroTranslation PDF has a named destination at every study's row in its appendix B (and appendix.A, the macaque study in full, and appendix.B, the table of every study), with the page it lands on; link to <file>.pdf#nameddest=<name>. The page keys above give the page of the same row. The Brain2Body editions have no study rows, so their page keys are null; development_page there is the page of section 6, on the marsupial.",
-  "source_manifest_sha256": "b8739b51420e6361ec1921c3d2f40835681e98c5d840ff79cbe079e3e86f6bd9",
+  "source_manifest_sha256": "84383a2dad06f70ce071a5ab95dd32255681e9dfca387704d18a8a71fe4c10d8",
   "evidence_revision_date": "2026-11-21",
   "build": "Four PDFs built offline with the Tectonic 0.17 TeX engine, SOURCE_DATE_EPOCH 1795219200 (21 November 2026, 00:00 UTC). The source ZIP holds everything but the engine and its package files; built from it, the four PDFs come out byte for byte the same.",
   "files_excluding_this_manifest": [
@@ -230,18 +230,18 @@
     },
     {
       "path": "brain2body-article.pdf",
-      "bytes": 137282,
-      "sha256": "54779b26d3ac9e934d232df0e726608f80fc56a10d26c15220a2fb47fdfb8f3e"
+      "bytes": 138195,
+      "sha256": "6e149535c46519c018f863b10647ef6e87ee52d1081ab0c1384584f063c29851"
     },
     {
       "path": "brain2body-simple-english.pdf",
-      "bytes": 147032,
-      "sha256": "40026c3251ecb7f7141039859247783a32f57f7701bc1fa885dea79fbccb4901"
+      "bytes": 147375,
+      "sha256": "90d747a5f40d45c6a8c8d03ccc4c4165f784f4aaa3265ff0e4af6a0dbe154693"
     },
     {
       "path": "font-provenance.json",
       "bytes": 7812,
-      "sha256": "4c3add1ebd66d96e4c18c09b007749c48494aba2cde4d829aabb1fa3c3bd727d"
+      "sha256": "f0e5fa9662e732910a8fa61967512a501e3106e49ebbb75425b07055daf89b9c"
     },
     {
       "path": "index.html",
@@ -398,7 +398,7 @@
     "endpoint": "Released index-sensor voltage 12 ticks ahead on a nominal 100 Hz grid.",
     "scope": "Frozen Random-task weights, prescribed trials from 12 fit participants and four development participants outside fitting, all 15 combinations and both index-cue groups."
   },
-  "previous_scientific_edition_commit": "fe9e3d66b11ccf62c4665949192f0306ee8e59a4",
+  "previous_scientific_edition_commit": "8f548e4df38396d45860e353b26b32f9cb9a8472",
   "cemhsey_pinch_evidence": {
     "protocol": {
       "commit": "a2382b0d546c451b825e9ed5f88fcc3957bff1ea",
