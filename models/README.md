@@ -202,3 +202,7 @@ The shared model’s average errors were slightly lower than those of the separa
 [Browse the recording sources](https://eliminatenoise.github.io/NeuroTranslation/vertebrate-neural-data/) by animal and measurement. The fitted next-spike model has separate evaluations on [turtle cortex](vertebrate-neural-data/turtle/) and [salamander retina](vertebrate-neural-data/amphibian/). The original [two-rat study](next-neuron-prediction/) includes the fitted coefficients and controls.
 
 A separate [calcium fluorescence experiment](vertebrate-neural-data/worm-transfer/) fits otherwise identical forecasts with and without recordings from eight worms. [Compare the errors in seven held-out zebrafish](https://eliminatenoise.github.io/NeuroTranslation/worm-to-vertebrate/).
+
+## Neural signals, muscle and movement
+
+[Compare the measured outcomes](https://eliminatenoise.github.io/NeuroTranslation/neural-and-muscle-composites/) or [run the macaque models and examine the three studies](neural-and-muscle-composites/). The human study includes source code to fit models on independently obtained data.

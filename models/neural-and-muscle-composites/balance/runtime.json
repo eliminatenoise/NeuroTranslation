@@ -1,0 +1,111 @@
+{
+  "host": "AMD Ryzen AI MAX+ 395, 16 physical cores/32 logical, Radeon 8060S; Linux; one process. Native timings on this workstation.",
+  "development_prefix": "Same staged input, seed 431, 32 updates with batches of 128, 128 predictions and compressed output. One fresh process per route; cold process timing includes importing PyTorch, loading private arrays, fitting normalization, training, scoring and serializing the array. No general speed or cost conclusion from a single prefix.",
+  "routes": {
+    "cpu1": {
+      "cold_seconds": 2.78,
+      "peak_rss_kib": 998188,
+      "maximum_standardized_prediction_difference_from_cpu1": 0.0
+    },
+    "cpu2": {
+      "cold_seconds": 2.81,
+      "peak_rss_kib": 1000060,
+      "maximum_standardized_prediction_difference_from_cpu1": 0.0
+    },
+    "cuda1": {
+      "cold_seconds": 2.81,
+      "peak_rss_kib": 1234500,
+      "maximum_standardized_prediction_difference_from_cpu1": 2.980232238769531e-07
+    }
+  },
+  "selected": "CPU1, lowest observed cold wall time in the bounded prefix. All completed modes and seeds used it. Torch intra-op 1/inter-op 1, BLAS/OpenMP/MKL 1. No worker pools. GPU used one default stream; PyTorch and ROCm select launch sizes and kernel geometry. No other process or global setting changed.",
+  "fit": {
+    "torch": "2.14.0+rocm10.1.0",
+    "numpy": "2.5.3",
+    "device": "cpu",
+    "threads": 1,
+    "interop": 1,
+    "updates_each": 384,
+    "parameters_each": 6244,
+    "train_seconds": {
+      "paired_431": 1.1181050509912893,
+      "early_431": 0.2562550900038332,
+      "crossed_431": 0.23860881000291556,
+      "without_scalp_431": 0.23231828899588436,
+      "without_muscle_431": 0.23020027205348015,
+      "without_position_431": 0.2282688569976017,
+      "without_physics_431": 0.22758601896930486,
+      "without_electrical_431": 0.23472447996027768,
+      "without_mechanics_431": 0.23746510199271142,
+      "paired_827": 0.248183257994242,
+      "early_827": 0.27272888796869665,
+      "crossed_827": 0.24773927999194711,
+      "without_scalp_827": 0.2536742900265381,
+      "without_muscle_827": 0.25053915404714644,
+      "without_position_827": 0.2553977029165253,
+      "without_physics_827": 0.2543252980103716,
+      "without_electrical_827": 0.25191686395555735,
+      "without_mechanics_827": 0.2374319100053981,
+      "paired_1201": 0.24798276997171342,
+      "early_1201": 0.26160757103934884,
+      "crossed_1201": 0.22988592798355967,
+      "without_scalp_1201": 0.23832078697159886,
+      "without_muscle_1201": 0.2322248329874128,
+      "without_position_1201": 0.24573164095636457,
+      "without_physics_1201": 0.22555100894533098,
+      "without_electrical_1201": 0.273810820071958,
+      "without_mechanics_1201": 0.24796763097401708
+    },
+    "models": 9,
+    "seeds": [
+      431,
+      827,
+      1201
+    ],
+    "examples_each": 49152
+  },
+  "full_fit_wall_seconds": 9.6,
+  "full_fit_peak_rss_kib": 998816,
+  "historical_input_reconstruction_wall_seconds": 1.73,
+  "historical_scoring_and_timing_wall_seconds": 1.93,
+  "forward_only": "Single CPU thread, fitted seed 431, cached standardized tensors, 12 warm-ups then 150 forward calls. Excludes input capture, reconstruction, storage, preprocessing, output decoding, display and communication.",
+  "warmed_forward_batch_sizes": {
+    "paired": {
+      "1": {
+        "median_ms": 0.028579,
+        "p95_ms": 0.03651395,
+        "iterations": 150
+      },
+      "128": {
+        "median_ms": 0.055966,
+        "p95_ms": 0.07904404999999999,
+        "iterations": 150
+      }
+    },
+    "early": {
+      "1": {
+        "median_ms": 0.040667,
+        "p95_ms": 0.0460055,
+        "iterations": 150
+      },
+      "128": {
+        "median_ms": 0.070638,
+        "p95_ms": 0.0765015,
+        "iterations": 150
+      }
+    },
+    "crossed": {
+      "1": {
+        "median_ms": 0.028658999999999997,
+        "p95_ms": 0.031764,
+        "iterations": 150
+      },
+      "128": {
+        "median_ms": 0.056236,
+        "p95_ms": 0.06081064999999999,
+        "iterations": 150
+      }
+    }
+  },
+  "limits": "Single snapshot under workstation load. CPU pressure was present; no material concurrent memory/IO pressure observed. No direct measurements of energy, subscription cost, end-to-end biological latency, live closed-loop operation or cross-device reproducibility."
+}

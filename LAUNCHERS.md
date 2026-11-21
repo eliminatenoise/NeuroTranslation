@@ -215,3 +215,7 @@ Extract the [two-wrist reader](docs/human-wrist-offline.zip) or the [software an
 ## Next Neuron Prediction
 
 [Open the browser model](https://eliminatenoise.github.io/NeuroTranslation/next-neuron-prediction/) or extract the [offline kit](docs/next-neuron-prediction-offline.zip). Open the launcher for Windows, macOS or Linux. The included paper, study code and fitted weights are available from the reader. The fictional example runs entirely in your browser.
+
+## Neural signals, muscle and movement
+
+[Open the report](https://eliminatenoise.github.io/NeuroTranslation/neural-and-muscle-composites/) or [download the study and code](docs/neural-and-muscle-composites/study.zip). Extract the directory fully and choose the Windows, macOS or Linux launcher. The report and print edition work offline. The package includes a Python example that forecasts from invented movement using the fitted macaque models.

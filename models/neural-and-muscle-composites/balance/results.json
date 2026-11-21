@@ -1,0 +1,969 @@
+{
+  "source": "OpenNeuro ds003739 1.0.3, historical whole-person comparison",
+  "scalp_sites_present_events": {
+    "D19": 1465,
+    "A1": 1466,
+    "B22": 1466
+  },
+  "outcomes": [
+    "muscle_mae_uV",
+    "path_error_mm",
+    "endpoint_error_mm"
+  ],
+  "seeds": [
+    431,
+    827,
+    1201
+  ],
+  "coverage": {
+    "all": {
+      "people": 6,
+      "events": 1759,
+      "standing": 879,
+      "walking": 880
+    },
+    "valid_donor": {
+      "people": 6,
+      "events": 1687,
+      "standing": 843,
+      "walking": 844
+    }
+  },
+  "scores": {
+    "paired": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "both": {
+        "muscle_mae_uV": 10.102197716853402,
+        "path_error_mm": 2.0553242752759258,
+        "endpoint_error_mm": 4.30446832600641
+      },
+      "standing": {
+        "muscle_mae_uV": 5.024904477146102,
+        "path_error_mm": 0.8328677576451898,
+        "endpoint_error_mm": 1.5973266644957917
+      },
+      "walking": {
+        "muscle_mae_uV": 15.1794909565607,
+        "path_error_mm": 3.2777807929066616,
+        "endpoint_error_mm": 7.011609987517029
+      },
+      "per_seed_both": {
+        "431": {
+          "muscle_mae_uV": 10.128342039695587,
+          "path_error_mm": 2.0512638372576286,
+          "endpoint_error_mm": 4.291243443298998
+        },
+        "827": {
+          "muscle_mae_uV": 10.09773176744048,
+          "path_error_mm": 2.0399863539289993,
+          "endpoint_error_mm": 4.278951887988744
+        },
+        "1201": {
+          "muscle_mae_uV": 10.080519343424141,
+          "path_error_mm": 2.074722634641149,
+          "endpoint_error_mm": 4.343209646731488
+        }
+      }
+    },
+    "wrong_electrical": {
+      "support": {
+        "people": 6,
+        "events": 1687,
+        "standing": 843,
+        "walking": 844
+      },
+      "both": {
+        "muscle_mae_uV": 14.182051562013966,
+        "path_error_mm": 2.1221477589793354,
+        "endpoint_error_mm": 4.475174685643027
+      },
+      "standing": {
+        "muscle_mae_uV": 7.1817242693436585,
+        "path_error_mm": 0.835592691675172,
+        "endpoint_error_mm": 1.606244621546157
+      },
+      "walking": {
+        "muscle_mae_uV": 21.18237885468427,
+        "path_error_mm": 3.408702826283498,
+        "endpoint_error_mm": 7.344104749739896
+      }
+    },
+    "wrong_mechanics": {
+      "support": {
+        "people": 6,
+        "events": 1687,
+        "standing": 843,
+        "walking": 844
+      },
+      "both": {
+        "muscle_mae_uV": 10.272307076016766,
+        "path_error_mm": 6.165556888748227,
+        "endpoint_error_mm": 11.531377778518959
+      },
+      "standing": {
+        "muscle_mae_uV": 5.0307988476474605,
+        "path_error_mm": 1.5038428225076785,
+        "endpoint_error_mm": 2.8049531620322745
+      },
+      "walking": {
+        "muscle_mae_uV": 15.513815304386071,
+        "path_error_mm": 10.827270954988771,
+        "endpoint_error_mm": 20.257802395005637
+      }
+    },
+    "wrong_scalp": {
+      "support": {
+        "people": 6,
+        "events": 1687,
+        "standing": 843,
+        "walking": 844
+      },
+      "both": {
+        "muscle_mae_uV": 10.012573565117153,
+        "path_error_mm": 2.053003127462919,
+        "endpoint_error_mm": 4.299586754343022
+      },
+      "standing": {
+        "muscle_mae_uV": 5.022173899783508,
+        "path_error_mm": 0.8264889193191921,
+        "endpoint_error_mm": 1.5822040516079159
+      },
+      "walking": {
+        "muscle_mae_uV": 15.002973230450799,
+        "path_error_mm": 3.279517335606645,
+        "endpoint_error_mm": 7.0169694570781305
+      }
+    },
+    "early": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "both": {
+        "muscle_mae_uV": 9.862891951472028,
+        "path_error_mm": 2.118600603997756,
+        "endpoint_error_mm": 4.369396947559397
+      },
+      "standing": {
+        "muscle_mae_uV": 4.844200933851586,
+        "path_error_mm": 0.9039155751125878,
+        "endpoint_error_mm": 1.6900482196597377
+      },
+      "walking": {
+        "muscle_mae_uV": 14.881582969092465,
+        "path_error_mm": 3.333285632882925,
+        "endpoint_error_mm": 7.048745675459056
+      },
+      "per_seed_both": {
+        "431": {
+          "muscle_mae_uV": 9.850098670370992,
+          "path_error_mm": 2.116413087677162,
+          "endpoint_error_mm": 4.3946353804861
+        },
+        "827": {
+          "muscle_mae_uV": 9.852590494877672,
+          "path_error_mm": 2.1237930828458413,
+          "endpoint_error_mm": 4.353694067397869
+        },
+        "1201": {
+          "muscle_mae_uV": 9.885986689167416,
+          "path_error_mm": 2.1155956414702657,
+          "endpoint_error_mm": 4.359861394794223
+        }
+      }
+    },
+    "crossed": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "both": {
+        "muscle_mae_uV": 10.04493635191905,
+        "path_error_mm": 2.1278986768827974,
+        "endpoint_error_mm": 4.454590887649519
+      },
+      "standing": {
+        "muscle_mae_uV": 4.939843603489062,
+        "path_error_mm": 0.9189886694637925,
+        "endpoint_error_mm": 1.7709727173799943
+      },
+      "walking": {
+        "muscle_mae_uV": 15.15002910034904,
+        "path_error_mm": 3.3368086843018028,
+        "endpoint_error_mm": 7.138209057919043
+      },
+      "per_seed_both": {
+        "431": {
+          "muscle_mae_uV": 9.908711866911098,
+          "path_error_mm": 2.119160418376433,
+          "endpoint_error_mm": 4.446545383288716
+        },
+        "827": {
+          "muscle_mae_uV": 10.15770104601548,
+          "path_error_mm": 2.105927173872596,
+          "endpoint_error_mm": 4.412276022857014
+        },
+        "1201": {
+          "muscle_mae_uV": 10.068396142830572,
+          "path_error_mm": 2.1586084383993636,
+          "endpoint_error_mm": 4.504951256802827
+        }
+      }
+    },
+    "without_scalp": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "both": {
+        "muscle_mae_uV": 9.971624438685021,
+        "path_error_mm": 2.0243705943621015,
+        "endpoint_error_mm": 4.252514562260001
+      },
+      "standing": {
+        "muscle_mae_uV": 4.958115291035672,
+        "path_error_mm": 0.8208913308543858,
+        "endpoint_error_mm": 1.5788589982897834
+      },
+      "walking": {
+        "muscle_mae_uV": 14.98513358633437,
+        "path_error_mm": 3.227849857869817,
+        "endpoint_error_mm": 6.926170126230221
+      }
+    },
+    "without_muscle": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "both": {
+        "muscle_mae_uV": 13.459722482383308,
+        "path_error_mm": 2.064702683364775,
+        "endpoint_error_mm": 4.326550033899389
+      },
+      "standing": {
+        "muscle_mae_uV": 7.257046365618933,
+        "path_error_mm": 0.8067473137966631,
+        "endpoint_error_mm": 1.522041851562484
+      },
+      "walking": {
+        "muscle_mae_uV": 19.662398599147686,
+        "path_error_mm": 3.3226580529328866,
+        "endpoint_error_mm": 7.131058216236294
+      }
+    },
+    "without_position": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "both": {
+        "muscle_mae_uV": 10.086485456572076,
+        "path_error_mm": 2.030363725898329,
+        "endpoint_error_mm": 4.297138439296853
+      },
+      "standing": {
+        "muscle_mae_uV": 5.020228717919852,
+        "path_error_mm": 0.8399760636398609,
+        "endpoint_error_mm": 1.6254735068371933
+      },
+      "walking": {
+        "muscle_mae_uV": 15.1527421952243,
+        "path_error_mm": 3.2207513881567973,
+        "endpoint_error_mm": 6.96880337175651
+      }
+    },
+    "without_physics": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "both": {
+        "muscle_mae_uV": 10.11742334833168,
+        "path_error_mm": 2.1004246477476145,
+        "endpoint_error_mm": 4.390775395012633
+      },
+      "standing": {
+        "muscle_mae_uV": 5.028351984564245,
+        "path_error_mm": 0.8687360818757272,
+        "endpoint_error_mm": 1.6582281803005714
+      },
+      "walking": {
+        "muscle_mae_uV": 15.206494712099117,
+        "path_error_mm": 3.332113213619502,
+        "endpoint_error_mm": 7.123322609724695
+      }
+    },
+    "without_electrical": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "both": {
+        "muscle_mae_uV": 13.4015302502468,
+        "path_error_mm": 2.045352620943626,
+        "endpoint_error_mm": 4.286423250985565
+      },
+      "standing": {
+        "muscle_mae_uV": 7.2584440069225336,
+        "path_error_mm": 0.7992043871233045,
+        "endpoint_error_mm": 1.4983357005011306
+      },
+      "walking": {
+        "muscle_mae_uV": 19.544616493571066,
+        "path_error_mm": 3.2915008547639477,
+        "endpoint_error_mm": 7.074510801470001
+      }
+    },
+    "without_mechanics": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "both": {
+        "muscle_mae_uV": 10.118984042593143,
+        "path_error_mm": 4.538257894935817,
+        "endpoint_error_mm": 8.56736729866113
+      },
+      "standing": {
+        "muscle_mae_uV": 5.045334144335286,
+        "path_error_mm": 1.357009999318661,
+        "endpoint_error_mm": 2.5239390846598284
+      },
+      "walking": {
+        "muscle_mae_uV": 15.192633940851001,
+        "path_error_mm": 7.719505790552972,
+        "endpoint_error_mm": 14.610795512662436
+      }
+    },
+    "stationary": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "both": {
+        "muscle_mae_uV": 10.273911454655012,
+        "path_error_mm": 4.491085158667129,
+        "endpoint_error_mm": 8.493855694063138
+      },
+      "standing": {
+        "muscle_mae_uV": 4.781838965728409,
+        "path_error_mm": 0.9766254436831412,
+        "endpoint_error_mm": 1.7995705191816578
+      },
+      "walking": {
+        "muscle_mae_uV": 15.765983943581617,
+        "path_error_mm": 8.005544873651116,
+        "endpoint_error_mm": 15.188140868944616
+      }
+    },
+    "velocity32": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "both": {
+        "muscle_mae_uV": 10.273911454655012,
+        "path_error_mm": 2.7689965860723356,
+        "endpoint_error_mm": 5.893936748761335
+      },
+      "standing": {
+        "muscle_mae_uV": 4.781838965728409,
+        "path_error_mm": 0.6735548722956803,
+        "endpoint_error_mm": 1.305191258088255
+      },
+      "walking": {
+        "muscle_mae_uV": 15.765983943581617,
+        "path_error_mm": 4.864438299848991,
+        "endpoint_error_mm": 10.482682239434412
+      }
+    }
+  },
+  "comparisons": {
+    "wrong_electrical": {
+      "support": {
+        "people": 6,
+        "events": 1687,
+        "standing": 843,
+        "walking": 844
+      },
+      "aligned_paired": {
+        "muscle_mae_uV": 10.016387822998603,
+        "path_error_mm": 2.055992215153879,
+        "endpoint_error_mm": 4.305120600302327
+      },
+      "comparator": {
+        "muscle_mae_uV": 14.182051562013966,
+        "path_error_mm": 2.1221477589793354,
+        "endpoint_error_mm": 4.475174685643027
+      },
+      "paired_minus_comparator": {
+        "muscle_mae_uV": -4.165663739015361,
+        "path_error_mm": -0.06615554382545567,
+        "endpoint_error_mm": -0.17005408534069977
+      },
+      "ci95_low": {
+        "muscle_mae_uV": -4.933106530960129,
+        "path_error_mm": -0.07920901000676388,
+        "endpoint_error_mm": -0.2025256782347936
+      },
+      "ci95_high": {
+        "muscle_mae_uV": -3.5871927792896874,
+        "path_error_mm": -0.052220423265215414,
+        "endpoint_error_mm": -0.13758249244660595
+      },
+      "upper_98_75": {
+        "muscle_mae_uV": -3.5172752325671683,
+        "path_error_mm": -0.05037960555321345,
+        "endpoint_error_mm": -0.13073196496427783
+      },
+      "people_lower_with_paired": {
+        "muscle_mae_uV": 6,
+        "path_error_mm": 6,
+        "endpoint_error_mm": 6
+      }
+    },
+    "wrong_mechanics": {
+      "support": {
+        "people": 6,
+        "events": 1687,
+        "standing": 843,
+        "walking": 844
+      },
+      "aligned_paired": {
+        "muscle_mae_uV": 10.016387822998603,
+        "path_error_mm": 2.055992215153879,
+        "endpoint_error_mm": 4.305120600302327
+      },
+      "comparator": {
+        "muscle_mae_uV": 10.272307076016766,
+        "path_error_mm": 6.165556888748227,
+        "endpoint_error_mm": 11.531377778518959
+      },
+      "paired_minus_comparator": {
+        "muscle_mae_uV": -0.2559192530181633,
+        "path_error_mm": -4.109564673594346,
+        "endpoint_error_mm": -7.22625717821663
+      },
+      "ci95_low": {
+        "muscle_mae_uV": -0.3138789446100259,
+        "path_error_mm": -4.640080608940443,
+        "endpoint_error_mm": -8.114363053744535
+      },
+      "ci95_high": {
+        "muscle_mae_uV": -0.20194961947259463,
+        "path_error_mm": -3.6232169922785693,
+        "endpoint_error_mm": -6.411434038004867
+      },
+      "upper_98_75": {
+        "muscle_mae_uV": -0.1956837047499036,
+        "path_error_mm": -3.5539510353945194,
+        "endpoint_error_mm": -6.288006856149887
+      },
+      "people_lower_with_paired": {
+        "muscle_mae_uV": 6,
+        "path_error_mm": 6,
+        "endpoint_error_mm": 6
+      }
+    },
+    "wrong_scalp": {
+      "support": {
+        "people": 6,
+        "events": 1687,
+        "standing": 843,
+        "walking": 844
+      },
+      "aligned_paired": {
+        "muscle_mae_uV": 10.016387822998603,
+        "path_error_mm": 2.055992215153879,
+        "endpoint_error_mm": 4.305120600302327
+      },
+      "comparator": {
+        "muscle_mae_uV": 10.012573565117153,
+        "path_error_mm": 2.053003127462919,
+        "endpoint_error_mm": 4.299586754343022
+      },
+      "paired_minus_comparator": {
+        "muscle_mae_uV": 0.0038142578814485497,
+        "path_error_mm": 0.0029890876909607713,
+        "endpoint_error_mm": 0.0055338459593041
+      },
+      "ci95_low": {
+        "muscle_mae_uV": -0.0314876226289084,
+        "path_error_mm": -0.001524814949837842,
+        "endpoint_error_mm": 7.023080196844056e-05
+      },
+      "ci95_high": {
+        "muscle_mae_uV": 0.03997193187364386,
+        "path_error_mm": 0.007146488202980879,
+        "endpoint_error_mm": 0.010794357665949198
+      },
+      "upper_98_75": {
+        "muscle_mae_uV": 0.04590066117442889,
+        "path_error_mm": 0.008304303169254235,
+        "endpoint_error_mm": 0.011458800050845394
+      },
+      "people_lower_with_paired": {
+        "muscle_mae_uV": 3,
+        "path_error_mm": 2,
+        "endpoint_error_mm": 1
+      }
+    },
+    "early": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "aligned_paired": {
+        "muscle_mae_uV": 10.102197716853402,
+        "path_error_mm": 2.0553242752759258,
+        "endpoint_error_mm": 4.30446832600641
+      },
+      "comparator": {
+        "muscle_mae_uV": 9.862891951472028,
+        "path_error_mm": 2.118600603997756,
+        "endpoint_error_mm": 4.369396947559397
+      },
+      "paired_minus_comparator": {
+        "muscle_mae_uV": 0.23930576538137535,
+        "path_error_mm": -0.06327632872183049,
+        "endpoint_error_mm": -0.0649286215529871
+      },
+      "ci95_low": {
+        "muscle_mae_uV": 0.204726631866742,
+        "path_error_mm": -0.09457287665271319,
+        "endpoint_error_mm": -0.11886245083455578
+      },
+      "ci95_high": {
+        "muscle_mae_uV": 0.27472203367899467,
+        "path_error_mm": -0.02832915047854497,
+        "endpoint_error_mm": 0.0032269612775381873
+      },
+      "upper_98_75": {
+        "muscle_mae_uV": 0.2796308094939466,
+        "path_error_mm": -0.02357983598044444,
+        "endpoint_error_mm": 0.00825752877449278
+      },
+      "people_lower_with_paired": {
+        "muscle_mae_uV": 0,
+        "path_error_mm": 5,
+        "endpoint_error_mm": 5
+      }
+    },
+    "crossed": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "aligned_paired": {
+        "muscle_mae_uV": 10.102197716853402,
+        "path_error_mm": 2.0553242752759258,
+        "endpoint_error_mm": 4.30446832600641
+      },
+      "comparator": {
+        "muscle_mae_uV": 10.04493635191905,
+        "path_error_mm": 2.1278986768827974,
+        "endpoint_error_mm": 4.454590887649519
+      },
+      "paired_minus_comparator": {
+        "muscle_mae_uV": 0.05726136493435193,
+        "path_error_mm": -0.07257440160687186,
+        "endpoint_error_mm": -0.15012256164310936
+      },
+      "ci95_low": {
+        "muscle_mae_uV": 0.0006444459072281935,
+        "path_error_mm": -0.09519969522490428,
+        "endpoint_error_mm": -0.19475531189971496
+      },
+      "ci95_high": {
+        "muscle_mae_uV": 0.11515762022562726,
+        "path_error_mm": -0.04838640047991557,
+        "endpoint_error_mm": -0.10872124587400034
+      },
+      "upper_98_75": {
+        "muscle_mae_uV": 0.1242775040977137,
+        "path_error_mm": -0.04525537446733319,
+        "endpoint_error_mm": -0.10471641886368466
+      },
+      "people_lower_with_paired": {
+        "muscle_mae_uV": 2,
+        "path_error_mm": 6,
+        "endpoint_error_mm": 6
+      }
+    },
+    "without_scalp": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "aligned_paired": {
+        "muscle_mae_uV": 10.102197716853402,
+        "path_error_mm": 2.0553242752759258,
+        "endpoint_error_mm": 4.30446832600641
+      },
+      "comparator": {
+        "muscle_mae_uV": 9.971624438685021,
+        "path_error_mm": 2.0243705943621015,
+        "endpoint_error_mm": 4.252514562260001
+      },
+      "paired_minus_comparator": {
+        "muscle_mae_uV": 0.13057327816838052,
+        "path_error_mm": 0.030953680913824295,
+        "endpoint_error_mm": 0.0519537637464084
+      },
+      "ci95_low": {
+        "muscle_mae_uV": 0.08908144787398313,
+        "path_error_mm": 0.020602373829900305,
+        "endpoint_error_mm": 0.03340862833398569
+      },
+      "ci95_high": {
+        "muscle_mae_uV": 0.17889096609312874,
+        "path_error_mm": 0.047766654612863,
+        "endpoint_error_mm": 0.07826456930604782
+      },
+      "upper_98_75": {
+        "muscle_mae_uV": 0.18610448329348042,
+        "path_error_mm": 0.04910142783674657,
+        "endpoint_error_mm": 0.08161606485299015
+      },
+      "people_lower_with_paired": {
+        "muscle_mae_uV": 0,
+        "path_error_mm": 0,
+        "endpoint_error_mm": 0
+      }
+    },
+    "without_muscle": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "aligned_paired": {
+        "muscle_mae_uV": 10.102197716853402,
+        "path_error_mm": 2.0553242752759258,
+        "endpoint_error_mm": 4.30446832600641
+      },
+      "comparator": {
+        "muscle_mae_uV": 13.459722482383308,
+        "path_error_mm": 2.064702683364775,
+        "endpoint_error_mm": 4.326550033899389
+      },
+      "paired_minus_comparator": {
+        "muscle_mae_uV": -3.3575247655299076,
+        "path_error_mm": -0.00937840808884908,
+        "endpoint_error_mm": -0.022081707892979585
+      },
+      "ci95_low": {
+        "muscle_mae_uV": -3.937347167668888,
+        "path_error_mm": -0.04299394143340388,
+        "endpoint_error_mm": -0.07737677797229559
+      },
+      "ci95_high": {
+        "muscle_mae_uV": -2.67338848742844,
+        "path_error_mm": 0.02780134550436471,
+        "endpoint_error_mm": 0.03748392421105393
+      },
+      "upper_98_75": {
+        "muscle_mae_uV": -2.6215157822167767,
+        "path_error_mm": 0.03263253836339364,
+        "endpoint_error_mm": 0.047345961024849524
+      },
+      "people_lower_with_paired": {
+        "muscle_mae_uV": 6,
+        "path_error_mm": 3,
+        "endpoint_error_mm": 4
+      }
+    },
+    "without_position": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "aligned_paired": {
+        "muscle_mae_uV": 10.102197716853402,
+        "path_error_mm": 2.0553242752759258,
+        "endpoint_error_mm": 4.30446832600641
+      },
+      "comparator": {
+        "muscle_mae_uV": 10.086485456572076,
+        "path_error_mm": 2.030363725898329,
+        "endpoint_error_mm": 4.297138439296853
+      },
+      "paired_minus_comparator": {
+        "muscle_mae_uV": 0.015712260281325403,
+        "path_error_mm": 0.02496054937759673,
+        "endpoint_error_mm": 0.007329886709557328
+      },
+      "ci95_low": {
+        "muscle_mae_uV": -0.00673378491091962,
+        "path_error_mm": 0.0070808489252705,
+        "endpoint_error_mm": -0.03455929572436898
+      },
+      "ci95_high": {
+        "muscle_mae_uV": 0.03816434511699818,
+        "path_error_mm": 0.05005644288051503,
+        "endpoint_error_mm": 0.059675513999631224
+      },
+      "upper_98_75": {
+        "muscle_mae_uV": 0.041572628352534245,
+        "path_error_mm": 0.053093146656267964,
+        "endpoint_error_mm": 0.06664326852765538
+      },
+      "people_lower_with_paired": {
+        "muscle_mae_uV": 2,
+        "path_error_mm": 0,
+        "endpoint_error_mm": 3
+      }
+    },
+    "without_physics": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "aligned_paired": {
+        "muscle_mae_uV": 10.102197716853402,
+        "path_error_mm": 2.0553242752759258,
+        "endpoint_error_mm": 4.30446832600641
+      },
+      "comparator": {
+        "muscle_mae_uV": 10.11742334833168,
+        "path_error_mm": 2.1004246477476145,
+        "endpoint_error_mm": 4.390775395012633
+      },
+      "paired_minus_comparator": {
+        "muscle_mae_uV": -0.015225631478278897,
+        "path_error_mm": -0.045100372471689,
+        "endpoint_error_mm": -0.0863070690062236
+      },
+      "ci95_low": {
+        "muscle_mae_uV": -0.028006129692979147,
+        "path_error_mm": -0.06640176790897352,
+        "endpoint_error_mm": -0.12140468045550934
+      },
+      "ci95_high": {
+        "muscle_mae_uV": -0.002238928137788735,
+        "path_error_mm": -0.021870831898870808,
+        "endpoint_error_mm": -0.05092987646893676
+      },
+      "upper_98_75": {
+        "muscle_mae_uV": -0.0006623934548575979,
+        "path_error_mm": -0.01873790516081682,
+        "endpoint_error_mm": -0.04183334635007574
+      },
+      "people_lower_with_paired": {
+        "muscle_mae_uV": 4,
+        "path_error_mm": 6,
+        "endpoint_error_mm": 6
+      }
+    },
+    "without_electrical": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "aligned_paired": {
+        "muscle_mae_uV": 10.102197716853402,
+        "path_error_mm": 2.0553242752759258,
+        "endpoint_error_mm": 4.30446832600641
+      },
+      "comparator": {
+        "muscle_mae_uV": 13.4015302502468,
+        "path_error_mm": 2.045352620943626,
+        "endpoint_error_mm": 4.286423250985565
+      },
+      "paired_minus_comparator": {
+        "muscle_mae_uV": -3.299332533393398,
+        "path_error_mm": 0.009971654332299554,
+        "endpoint_error_mm": 0.01804507502084422
+      },
+      "ci95_low": {
+        "muscle_mae_uV": -3.84756762214599,
+        "path_error_mm": -0.03132159922128471,
+        "endpoint_error_mm": -0.06066850194492823
+      },
+      "ci95_high": {
+        "muscle_mae_uV": -2.609449205665227,
+        "path_error_mm": 0.056337696267307814,
+        "endpoint_error_mm": 0.10090084830782116
+      },
+      "upper_98_75": {
+        "muscle_mae_uV": -2.518403519269107,
+        "path_error_mm": 0.06315278048376116,
+        "endpoint_error_mm": 0.11059440924891677
+      },
+      "people_lower_with_paired": {
+        "muscle_mae_uV": 6,
+        "path_error_mm": 3,
+        "endpoint_error_mm": 3
+      }
+    },
+    "without_mechanics": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "aligned_paired": {
+        "muscle_mae_uV": 10.102197716853402,
+        "path_error_mm": 2.0553242752759258,
+        "endpoint_error_mm": 4.30446832600641
+      },
+      "comparator": {
+        "muscle_mae_uV": 10.118984042593143,
+        "path_error_mm": 4.538257894935817,
+        "endpoint_error_mm": 8.56736729866113
+      },
+      "paired_minus_comparator": {
+        "muscle_mae_uV": -0.016786325739740704,
+        "path_error_mm": -2.4829336196598906,
+        "endpoint_error_mm": -4.262898972654722
+      },
+      "ci95_low": {
+        "muscle_mae_uV": -0.08454542249673569,
+        "path_error_mm": -2.8135471185824508,
+        "endpoint_error_mm": -4.835825069592518
+      },
+      "ci95_high": {
+        "muscle_mae_uV": 0.05041212219776181,
+        "path_error_mm": -2.1762333147263053,
+        "endpoint_error_mm": -3.730784312538102
+      },
+      "upper_98_75": {
+        "muscle_mae_uV": 0.056838430714221864,
+        "path_error_mm": -2.1405118165036563,
+        "endpoint_error_mm": -3.669442127697311
+      },
+      "people_lower_with_paired": {
+        "muscle_mae_uV": 3,
+        "path_error_mm": 6,
+        "endpoint_error_mm": 6
+      }
+    },
+    "stationary": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "aligned_paired": {
+        "muscle_mae_uV": 10.102197716853402,
+        "path_error_mm": 2.0553242752759258,
+        "endpoint_error_mm": 4.30446832600641
+      },
+      "comparator": {
+        "muscle_mae_uV": 10.273911454655012,
+        "path_error_mm": 4.491085158667129,
+        "endpoint_error_mm": 8.493855694063138
+      },
+      "paired_minus_comparator": {
+        "muscle_mae_uV": -0.17171373780161078,
+        "path_error_mm": -2.4357608833912026,
+        "endpoint_error_mm": -4.189387368056728
+      },
+      "ci95_low": {
+        "muscle_mae_uV": -0.4440540099113563,
+        "path_error_mm": -2.80016732336054,
+        "endpoint_error_mm": -4.8395338800733345
+      },
+      "ci95_high": {
+        "muscle_mae_uV": 0.1048031035684559,
+        "path_error_mm": -2.1224963554962746,
+        "endpoint_error_mm": -3.6362554265215485
+      },
+      "upper_98_75": {
+        "muscle_mae_uV": 0.17596038753990642,
+        "path_error_mm": -2.0827966893169356,
+        "endpoint_error_mm": -3.5828033367190044
+      },
+      "people_lower_with_paired": {
+        "muscle_mae_uV": 4,
+        "path_error_mm": 6,
+        "endpoint_error_mm": 6
+      }
+    },
+    "velocity32": {
+      "support": {
+        "people": 6,
+        "events": 1759,
+        "standing": 879,
+        "walking": 880
+      },
+      "aligned_paired": {
+        "muscle_mae_uV": 10.102197716853402,
+        "path_error_mm": 2.0553242752759258,
+        "endpoint_error_mm": 4.30446832600641
+      },
+      "comparator": {
+        "muscle_mae_uV": 10.273911454655012,
+        "path_error_mm": 2.7689965860723356,
+        "endpoint_error_mm": 5.893936748761335
+      },
+      "paired_minus_comparator": {
+        "muscle_mae_uV": -0.17171373780161078,
+        "path_error_mm": -0.7136723107964097,
+        "endpoint_error_mm": -1.5894684227549252
+      },
+      "ci95_low": {
+        "muscle_mae_uV": -0.4440540099113563,
+        "path_error_mm": -0.8641692704204619,
+        "endpoint_error_mm": -1.8988584246507276
+      },
+      "ci95_high": {
+        "muscle_mae_uV": 0.1048031035684559,
+        "path_error_mm": -0.5632779262699069,
+        "endpoint_error_mm": -1.273928126730987
+      },
+      "upper_98_75": {
+        "muscle_mae_uV": 0.17596038753990642,
+        "path_error_mm": -0.5433856638267661,
+        "endpoint_error_mm": -1.224689648200291
+      },
+      "people_lower_with_paired": {
+        "muscle_mae_uV": 4,
+        "path_error_mm": 6,
+        "endpoint_error_mm": 6
+      }
+    }
+  },
+  "paired_superiority_passed": false
+}

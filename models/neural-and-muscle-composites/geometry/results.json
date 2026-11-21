@@ -1,0 +1,109 @@
+{
+  "target": "Measured handle planar endpoint displacement, millimetres, 100 ms after last earlier observation",
+  "training_windows": 519,
+  "registered_test_windows": [
+    113,
+    380
+  ],
+  "original_evaluation_unit": "Workspace with equal original trial weight; unique trial identity includes acquisition block.",
+  "comparisons": {
+    "pose": {
+      "1": {
+        "all": {
+          "rows": 201,
+          "trials": 111,
+          "endpoint_error_mm": {
+            "persistence": 13.09619903338016,
+            "zero_geometry": 8.421046759679049,
+            "true_geometry": 8.530335281183975
+          }
+        },
+        "paired": {
+          "rows": 197,
+          "trials": 109,
+          "endpoint_error_mm": {
+            "persistence": 13.039559670330842,
+            "zero_geometry": 8.351836737207263,
+            "true_geometry": 8.451947262099544,
+            "earlier_geometry": 8.822082123372288
+          }
+        }
+      },
+      "2": {
+        "all": {
+          "rows": 292,
+          "trials": 163,
+          "endpoint_error_mm": {
+            "persistence": 10.614878418212218,
+            "zero_geometry": 6.517969780110875,
+            "true_geometry": 8.622881587441407
+          }
+        },
+        "paired": {
+          "rows": 288,
+          "trials": 161,
+          "endpoint_error_mm": {
+            "persistence": 10.50593456730107,
+            "zero_geometry": 6.451023236620987,
+            "true_geometry": 8.557352873529915,
+            "earlier_geometry": 9.681789217424738
+          }
+        }
+      }
+    },
+    "pose_and_cortex": {
+      "1": {
+        "all": {
+          "rows": 201,
+          "trials": 111,
+          "endpoint_error_mm": {
+            "persistence": 13.09619903338016,
+            "zero_geometry": 8.432780326290361,
+            "true_geometry": 8.368609856479136
+          }
+        },
+        "paired": {
+          "rows": 197,
+          "trials": 109,
+          "endpoint_error_mm": {
+            "persistence": 13.039559670330842,
+            "zero_geometry": 8.404975495959455,
+            "true_geometry": 8.330280932177535,
+            "earlier_geometry": 8.824076844061794
+          }
+        }
+      },
+      "2": {
+        "all": {
+          "rows": 292,
+          "trials": 163,
+          "endpoint_error_mm": {
+            "persistence": 10.614878418212218,
+            "zero_geometry": 7.141027012109837,
+            "true_geometry": 10.077122253865475
+          }
+        },
+        "paired": {
+          "rows": 288,
+          "trials": 161,
+          "endpoint_error_mm": {
+            "persistence": 10.50593456730107,
+            "zero_geometry": 7.079865454004335,
+            "true_geometry": 10.02556795659633,
+            "earlier_geometry": 10.950537761253074
+          }
+        }
+      }
+    }
+  },
+  "case_selection": "Retrospective new predeclared comparison on the prior qualified days. No outcome enters earlier features. One macaque.",
+  "evaluation_files": {
+    "source/train.npz": "edf4a94b3cb9a60a7706324b4f3a85c959df2dfdae475948706853f528136f6e",
+    "source/block1.npz": "b0be522db123796da5a7f0ddb50f4b9b7e7c8980493904d7fb776abdb23525e9",
+    "source/block2.npz": "4e28e2173402418efead06c8b815ad4f9cbf9e5418d700f146db5efa3fbf6bb8",
+    "mechanics/train-lengths.npz": "0f0bd5b25b82a941be60430a5a246e279a83bfdd84a2022f564c3243797d0bc4",
+    "mechanics/block1-lengths.npz": "9a7f7c07132edd83b71c97e7ae79b9aaf97784f7142692c65b5a971068ed0043",
+    "mechanics/block2-lengths.npz": "47a0f325bfb60a7d5d6d4037246eb4a7baf34788240455080c7e56453bc87b80"
+  },
+  "incremental_geometry_pass": false
+}

@@ -1,0 +1,198 @@
+{
+  "hardware": "AMD Ryzen AI MAX+ 395, 16 physical cores and 32 logical threads; single process, two PyTorch intra-op threads, one inter-op thread, one BLAS thread; CPU training and inference, float32. AMD GPU compared using ROCm in train-only prefix. PyTorch controls attention and BLAS kernel geometry. No system-wide changes. Shared-host time; no energy measurement.",
+  "runtime": {
+    "model_python": "3.14",
+    "torch": "2.14.0+rocm10.1.0",
+    "numpy_model": "2.5.3",
+    "reconstruction_numpy": "2.5.5",
+    "reconstruction_scipy": "1.18.1"
+  },
+  "latency_definition": "Encoder and decoder, including model input tensor conversion and result copies, in batches of up to 32 windows with 16 trajectories each. Mean across both held blocks and three seeds for full inputs. Excludes dataset parsing, noise generation, physical-unit transformation, metric calculation, and model load. Separate complete process costs include all stages. Not a measured live-loop latency.",
+  "sensors": {
+    "handle": {
+      "systems": {
+        "movement-ar": {
+          "trainable_parameters": 23170,
+          "additional_fitted_AR_noise_scales": 4,
+          "mean_training_seconds": 0.57603009204225,
+          "mean_batched_16_draw_ms_per_window": 0.08068096548812546,
+          "sequential_decoder_calls_per_trajectory": 2,
+          "draws": 16
+        },
+        "movement-diffusion": {
+          "trainable_parameters": 23170,
+          "additional_fitted_AR_noise_scales": 0,
+          "mean_training_seconds": 0.44549103535246104,
+          "mean_batched_16_draw_ms_per_window": 0.2662285429880809,
+          "sequential_decoder_calls_per_trajectory": 8,
+          "draws": 16
+        },
+        "movement-hybrid": {
+          "trainable_parameters": 23170,
+          "additional_fitted_AR_noise_scales": 0,
+          "mean_training_seconds": 0.48985013637381297,
+          "mean_batched_16_draw_ms_per_window": 0.5497663198265627,
+          "sequential_decoder_calls_per_trajectory": 16,
+          "draws": 16
+        },
+        "neural-ar": {
+          "trainable_parameters": 25445,
+          "additional_fitted_AR_noise_scales": 74,
+          "mean_training_seconds": 0.5063442082998032,
+          "mean_batched_16_draw_ms_per_window": 0.07644146462012034,
+          "sequential_decoder_calls_per_trajectory": 2,
+          "draws": 16
+        },
+        "neural-diffusion": {
+          "trainable_parameters": 25445,
+          "additional_fitted_AR_noise_scales": 0,
+          "mean_training_seconds": 0.444964328315109,
+          "mean_batched_16_draw_ms_per_window": 0.2908345158076502,
+          "sequential_decoder_calls_per_trajectory": 8,
+          "draws": 16
+        },
+        "neural-hybrid": {
+          "trainable_parameters": 25445,
+          "additional_fitted_AR_noise_scales": 0,
+          "mean_training_seconds": 0.49472329928539693,
+          "mean_batched_16_draw_ms_per_window": 0.5678470325835699,
+          "sequential_decoder_calls_per_trajectory": 16,
+          "draws": 16
+        }
+      },
+      "probe": {
+        "cpu-1": {
+          "cold_seconds": 3.41,
+          "cold_peak_rss_kib": 987052,
+          "exit": 0,
+          "paired_primary_max_abs_cm": 0.0,
+          "train_seconds": 0.41621693794149905,
+          "parameters": 23170,
+          "innovation_scales_fitted": 0,
+          "initial_loss": 1.2001066207885742,
+          "final_loss": 0.7932710647583008,
+          "steps": 16,
+          "inference_seconds": 0.018890958046540618
+        },
+        "cpu-2": {
+          "cold_seconds": 3.29,
+          "cold_peak_rss_kib": 987372,
+          "exit": 0,
+          "paired_primary_max_abs_cm": 1.6320249396351016e-07,
+          "train_seconds": 0.26985388598404825,
+          "parameters": 23170,
+          "innovation_scales_fitted": 0,
+          "initial_loss": 1.2001066207885742,
+          "final_loss": 0.793271005153656,
+          "steps": 16,
+          "inference_seconds": 0.01946171501185745
+        },
+        "cuda-1": {
+          "cold_seconds": 5.47,
+          "cold_peak_rss_kib": 1582740,
+          "exit": 0,
+          "paired_primary_max_abs_cm": 3.077337633605737e-07,
+          "train_seconds": 1.8416227020788938,
+          "parameters": 23170,
+          "innovation_scales_fitted": 0,
+          "initial_loss": 1.2001066207885742,
+          "final_loss": 0.7932710647583008,
+          "steps": 16,
+          "inference_seconds": 0.015778584987856448
+        }
+      },
+      "fit": {
+        "command_wall_seconds": 11.8,
+        "peak_rss_kib": 990344,
+        "exit": 0
+      },
+      "score": {
+        "command_wall_seconds": 14.57,
+        "peak_rss_kib": 847172,
+        "exit": 0
+      }
+    },
+    "hand": {
+      "systems": {
+        "movement-ar": {
+          "trainable_parameters": 23299,
+          "additional_fitted_AR_noise_scales": 6,
+          "mean_training_seconds": 0.5582487066664422,
+          "mean_batched_16_draw_ms_per_window": 0.06755362612719851,
+          "sequential_decoder_calls_per_trajectory": 2,
+          "draws": 16
+        },
+        "movement-diffusion": {
+          "trainable_parameters": 23299,
+          "additional_fitted_AR_noise_scales": 0,
+          "mean_training_seconds": 0.42390041798353195,
+          "mean_batched_16_draw_ms_per_window": 0.25362193652449466,
+          "sequential_decoder_calls_per_trajectory": 8,
+          "draws": 16
+        },
+        "movement-hybrid": {
+          "trainable_parameters": 23299,
+          "additional_fitted_AR_noise_scales": 0,
+          "mean_training_seconds": 0.4408428933626662,
+          "mean_batched_16_draw_ms_per_window": 0.5441233407903747,
+          "sequential_decoder_calls_per_trajectory": 16,
+          "draws": 16
+        },
+        "neural-ar": {
+          "trainable_parameters": 25509,
+          "additional_fitted_AR_noise_scales": 74,
+          "mean_training_seconds": 0.44297044867804897,
+          "mean_batched_16_draw_ms_per_window": 0.07834656318640834,
+          "sequential_decoder_calls_per_trajectory": 2,
+          "draws": 16
+        },
+        "neural-diffusion": {
+          "trainable_parameters": 25509,
+          "additional_fitted_AR_noise_scales": 0,
+          "mean_training_seconds": 0.44020988260551047,
+          "mean_batched_16_draw_ms_per_window": 0.3085956632325261,
+          "sequential_decoder_calls_per_trajectory": 8,
+          "draws": 16
+        },
+        "neural-hybrid": {
+          "trainable_parameters": 25509,
+          "additional_fitted_AR_noise_scales": 0,
+          "mean_training_seconds": 0.4490109510176505,
+          "mean_batched_16_draw_ms_per_window": 0.58927686617063,
+          "sequential_decoder_calls_per_trajectory": 16,
+          "draws": 16
+        }
+      },
+      "probe": {
+        "cpu-1": {
+          "probe_max_abs_cm": 0.0,
+          "cold_seconds": 3.11,
+          "peak_rss_kib": 990016,
+          "exit": 0
+        },
+        "cpu-2": {
+          "probe_max_abs_cm": 1.1362958529659295e-07,
+          "cold_seconds": 2.69,
+          "peak_rss_kib": 990556,
+          "exit": 0
+        },
+        "cuda-1": {
+          "probe_max_abs_cm": 1.3199586534895502e-07,
+          "cold_seconds": 3.99,
+          "peak_rss_kib": 1509156,
+          "exit": 0
+        }
+      },
+      "fit": {
+        "command_wall_seconds": 10.78,
+        "peak_rss_kib": 990484,
+        "exit": 0
+      },
+      "score": {
+        "command_wall_seconds": 14.5,
+        "peak_rss_kib": 846272,
+        "exit": 0
+      }
+    }
+  }
+}

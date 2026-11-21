@@ -1,0 +1,100 @@
+{
+  "scope": "Candidate human recording pairs for NeuroTranslation. The assessments below use original study methods and repository metadata. They do not establish file-level synchronization, calibrated export units, sufficient held-out trials, or the outcome of any proposed comparison.",
+  "candidates": [
+    {
+      "priority": 1,
+      "authors": "Delhaye, Jarocka, Barrea, Thonnard, Edin and Lefèvre",
+      "pair": "Fingertip cutaneous afferent activity, contact mechanics and optical skin strain",
+      "deposit": "https://zenodo.org/records/4818439",
+      "methods": "https://doi.org/10.7554/eLife.64679",
+      "terms": "CC BY 4.0",
+      "terms_record": "https://zenodo.org/api/records/4818439",
+      "listed_materials": "Record lists per-recording MAT files, image archives and a summary MAT file. Some MAT entries have no accompanying image archive.",
+      "qualification": "Match each analysed fibre to its imaged contact, trial, frame and force clock. Verify usable receptive-field location and available friction conditions before fixing a split. Distinct fibres were recorded separately."
+    },
+    {
+      "priority": 2,
+      "authors": "Avrillon, Hug, Enoka, Caillet and Farina",
+      "pair": "High-density surface EMG, decomposed motor-unit discharges, measured force and a requested force trajectory",
+      "deposit": "https://doi.org/10.6084/m9.figshare.24640944.v1",
+      "methods": "https://doi.org/10.7554/eLife.97085.3",
+      "terms": "CC BY 4.0",
+      "terms_record": "https://api.figshare.com/v2/articles/24640944/versions/1",
+      "listed_materials": "Original version lists 124 MATLAB files. The authors distinguish raw muscle voltage, force and target, automatically decomposed units, and edited unit discharge times.",
+      "qualification": "Verify which exported channel is achieved force, its scale, timing and participant normalization. Test ankle and knee separately. Edited firing times are retrospective decomposition estimates. The record does not by itself support fatigue, variable muscle length or individual-muscle tension as labels."
+    },
+    {
+      "priority": 3,
+      "authors": "Wilterson and Taylor",
+      "pair": "Reported aim, actual hand heading and altered visual feedback",
+      "deposit": "https://osf.io/vtqa3/",
+      "methods": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8362683/",
+      "terms": "No project licence specified in the OSF metadata inspected. Establish rights for the intended reuse.",
+      "terms_record": "https://api.osf.io/v2/nodes/vtqa3/",
+      "file_listing": "https://api.osf.io/v2/nodes/vtqa3/files/osfstorage/6108150d904bff01749b22d0/",
+      "listed_materials": "MirrorData.mat and RotationData.mat. Participants tapped their aim using one hand and reached with the other. The original study defined early heading between 1 and 3 cm of travel.",
+      "qualification": "Confirm which trials contain an actual report and the feedback actually shown. The no-feedback baseline and washout differ from feedback trials. A difference between reported and executed angles is a derived quantity."
+    },
+    {
+      "priority": 4,
+      "authors": "Muller, Panfili, Shields, Matthis, Bonnen and Hayhoe",
+      "pair": "Estimated gaze direction, footfall coordinates and photogrammetric terrain",
+      "deposit": "https://doi.org/10.5061/dryad.r7sqv9sn2",
+      "methods": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10462120/",
+      "terms": "CC0 1.0",
+      "terms_record": "https://api.datacite.org/dois/10.5061/dryad.r7sqv9sn2",
+      "listed_materials": "Deposit README documents the original and downsampled gaze direction, head position, footfall frame and foot identity with XYZ position. The surface reconstruction comes from video.",
+      "qualification": "Check spatial scale and coordinate conventions, missing gaze, downsampling and the method used to register the map. Retrospective reconstruction can support a fixed-map comparison. Gaze and head motion do not directly measure vestibular afferent firing."
+    },
+    {
+      "priority": 5,
+      "authors": "Rolandino",
+      "pair": "Forearm high-density EMG and hand kinematics with a physical change in electrode placement",
+      "deposit": "https://zenodo.org/records/16789929",
+      "methods": "https://doi.org/10.1109/TNSRE.2024.3490796",
+      "terms": "CC BY 4.0",
+      "terms_record": "https://api.datacite.org/dois/10.5281/zenodo.16789929",
+      "listed_materials": "DS2 contains two sessions per participant. DS3.a includes four people and repositioning between trials. DS3.b contains real-time model outputs and prompt targets.",
+      "qualification": "Use DS3.a for placement robustness and check the hand-angle reference, units, recorded placement/repetition labels and how many repetitions are available. Separate a pose prompt, a measured pose and a model's own estimate."
+    },
+    {
+      "priority": 6,
+      "authors": "Taylor and colleagues, CAMS-Knee",
+      "pair": "Six-component implant load, fluoroscopic knee tracking, external force, EMG and movement",
+      "deposit": "https://movement.ethz.ch/data-repository/cams-knee-project.html",
+      "methods": "https://doi.org/10.1016/j.jbiomech.2017.09.022",
+      "terms": "An example walk is available without a license agreement. The full data require registration, noncommercial scientific use at the registered facility and no transfer to third parties, with mandatory attribution.",
+      "terms_record": "https://cams-knee.orthoload.com/wp-content/uploads/sites/4/Description_CAMS_Knee_Full_Dataset_v1.1.pdf",
+      "listed_materials": "Six knee-replacement recipients with instrumented implants. Full data include implant contact-force components in newtons and implant-component transformations. The standardized reference called Stan is derived across people and trials.",
+      "qualification": "Use individual measured trials for an individual-level test. Check implant coordinates, reference frames, rights and access. Total implant contact load and individual-muscle force are different quantities."
+    }
+  ],
+  "already_considered": [
+    {
+      "pair": "Ultrasound, EMG, motion and external load",
+      "sources": [
+        "https://doi.org/10.6019/S-BIAD1482",
+        "https://doi.org/10.6084/m9.figshare.28937612.v1",
+        "https://doi.org/10.1038/s41597-026-08156-5"
+      ],
+      "status": "AnkleImage already supplied ankle ultrasound and a separate fixed-pedal task. The project already named the Kim walking data. Its catalogue lists ultrasound archives, motion and kinetic data at eleven walking conditions. Frame alignment and usable target channels in the chosen export need verification.",
+      "kim_terms": "CC BY 4.0",
+      "kim_terms_record": "https://api.figshare.com/v2/articles/28937612/versions/1"
+    },
+    {
+      "pair": "Muscle stretch, tendon force and spindle firing",
+      "sources": ["https://doi.org/10.5061/dryad.vdncjsxsw", "https://pubmed.ncbi.nlm.nih.gov/19036957/"],
+      "status": "The rat spindle study already includes tendon force and recorded Ia spikes. The project has also cited human muscle-receptor recordings during grasp. Identified Golgi tendon-organ firing paired with independently measured tension from the same tendon remains a separate candidate with no qualified deposit here."
+    },
+    {
+      "pair": "Brain or muscle signals, movement and external forces",
+      "sources": ["https://doi.org/10.5061/dryad.nk98sf7q7", "https://doi.org/10.18112/openneuro.ds003739.v1.0.3", "https://eliminatenoise.github.io/NeuroTranslation/contact-force/"],
+      "status": "Existing studies cover cortical spike counts and handle motion with perturbations, scalp/leg-muscle signals and balance motion, and WAY grip and object load. Modelled muscle paths are computed from measured pose. Cutaneous nerve spikes and measured internal implant load would add independent physical observations."
+    },
+    {
+      "pair": "Words, cues and movement",
+      "sources": ["https://holoassist.github.io/", "https://osf.io/r59hj/"],
+      "status": "The programme has tested instructors' preceding words, observed movements and task cues, and has considered a charades prompt given before the gesture. A participant's own reported aim is a different observation."
+    }
+  ]
+}
