@@ -1,0 +1,836 @@
+{
+  "edition": "kuopio-lift-to-rotation-count-matched-v1",
+  "source": {
+    "name": "Kuopio Full-Body Dataset",
+    "authors": [
+      "Alexander K. Beattie",
+      "Matti J. Kortelainen",
+      "Paavo Vartiainen",
+      "Pasi A. Karjalainen"
+    ],
+    "edition": "1.2.1",
+    "data_url": "https://doi.org/10.5281/zenodo.24194741",
+    "recording_methods_url": "https://doi.org/10.1038/s41597-026-08550-z",
+    "data_licence_url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "measurement": {
+    "target": "Change in the midpoint of two optical marks on the right wrist over 100 ms.",
+    "window_optical_frames": 25,
+    "optical_hz": 100,
+    "analog_hz": 2400,
+    "current_analog_block_offset_optical_frames": 2,
+    "earlier_control_shift_ms": 1000,
+    "axis_order": [
+      "native laboratory X",
+      "native laboratory Y",
+      "native laboratory Z"
+    ],
+    "aggregation": "Average each person's error across their eligible forecast windows, then give each person equal weight."
+  },
+  "fitting": {
+    "people": 7,
+    "examples_per_mixture": 1986,
+    "examples_from_each_task_in_mixed_fit": 993,
+    "case_selection": "Use the largest even count available to both tasks for each fitting person. Rank each person's native issue numbers within a task by SHA-256 of kuopio-task-transfer-v1|person|task|native-issue-frame. The mixed fit uses the first half of each ranked selection.",
+    "task_labels": {
+      "lift_only": "Straight lifts",
+      "rotation_only": "Turning lifts",
+      "mixed_tasks": "Both lifts"
+    },
+    "model_labels": {
+      "ridge": "Linear model (ridge)",
+      "attention": "Attention model"
+    },
+    "sensor_labels": {
+      "motion": "Wrists",
+      "motion_and_emg": "Wrists and muscle readings",
+      "motion_and_ground_force": "Wrists and floor forces",
+      "all_current": "Wrists, floor forces and muscle readings",
+      "earlier_emg": "Wrists and floor forces, with muscle readings from one second earlier",
+      "earlier_emg_and_ground_force": "Wrists, with floor forces and muscle readings from one second earlier"
+    },
+    "model_inputs": "18 values and 18 availability flags at each of 25 steps. Use means and scales learned on fitting people only.",
+    "linear_model": "One regularized linear regression for each sensor combination. Penalty 0.1 with an unpenalized intercept on standardized targets.",
+    "attention_model": "9,859 parameters. One attention block with width 32, four heads and a 64-wide feed-forward layer. Use 40 AdamW epochs, learning rate 0.001, weight decay 0.01, and mean predictions across seeds 17, 29 and 41.",
+    "shared_controls": {
+      "persistence": "Keep the wrist at its last position",
+      "velocity": "Continue the last 50 ms of motion at the same speed and direction"
+    }
+  },
+  "confirmation": {
+    "task": "Lifting a 12 kg box while turning the torso.",
+    "people": 6,
+    "scheduled_windows": 3278,
+    "excluded_for_input_history": 469,
+    "excluded_for_later_wrist": 1,
+    "scored_windows": 2808,
+    "scored_windows_with_exactly_zero_muscle_block": 0,
+    "boundary": "This study uses a different task from the straight-lift report, with the same people assigned separately to fitting and confirmation. Predictions were committed before attaching later confirmation positions."
+  },
+  "planned_comparisons": {
+    "added_current_emg_rotation_attention": {
+      "reference_forecast": "rotation_only/attention/motion_and_ground_force",
+      "comparison_forecast": "rotation_only/attention/all_current",
+      "mean_error_change_mm": 2.7444368323098174,
+      "median_error_change_mm": 2.485723956548635,
+      "people_with_higher_error": 6,
+      "people_with_lower_error": 0,
+      "people_with_same_error": 0,
+      "description": "Adding current muscle readings to the turning-lift attention model",
+      "exact_two_sided_sign_test_p_unadjusted": 0.03125
+    },
+    "mixed_vs_rotation_motion_ridge": {
+      "reference_forecast": "rotation_only/ridge/motion",
+      "comparison_forecast": "mixed_tasks/ridge/motion",
+      "mean_error_change_mm": 0.17009645277300875,
+      "median_error_change_mm": 0.15474986113831335,
+      "people_with_higher_error": 6,
+      "people_with_lower_error": 0,
+      "people_with_same_error": 0,
+      "description": "Mixing both lifts for the wrist-only linear model",
+      "exact_two_sided_sign_test_p_unadjusted": 0.03125
+    }
+  },
+  "mean_errors_by_forecast": {
+    "lift_only/attention/all_current": {
+      "mean_distance_error_mm": 24.158411540805712,
+      "mean_absolute_error_by_axis_mm": [
+        12.071055344704092,
+        10.809834324219567,
+        12.058328258052612
+      ]
+    },
+    "lift_only/attention/earlier_emg": {
+      "mean_distance_error_mm": 25.407056049761213,
+      "mean_absolute_error_by_axis_mm": [
+        12.565932842873684,
+        10.253791167860756,
+        13.78317399401135
+      ]
+    },
+    "lift_only/attention/earlier_emg_and_ground_force": {
+      "mean_distance_error_mm": 24.66073614266874,
+      "mean_absolute_error_by_axis_mm": [
+        11.954039467840213,
+        10.369641134827758,
+        12.549742867001349
+      ]
+    },
+    "lift_only/attention/motion": {
+      "mean_distance_error_mm": 21.40066606532396,
+      "mean_absolute_error_by_axis_mm": [
+        10.679979535801444,
+        10.636763064182984,
+        9.740104849764988
+      ]
+    },
+    "lift_only/attention/motion_and_emg": {
+      "mean_distance_error_mm": 23.808977313451788,
+      "mean_absolute_error_by_axis_mm": [
+        10.948534749001874,
+        10.498083685140838,
+        12.881401310643996
+      ]
+    },
+    "lift_only/attention/motion_and_ground_force": {
+      "mean_distance_error_mm": 23.498896565281658,
+      "mean_absolute_error_by_axis_mm": [
+        11.966888923558715,
+        10.636118748663284,
+        11.9584560172768
+      ]
+    },
+    "lift_only/ridge/all_current": {
+      "mean_distance_error_mm": 19.043959737913664,
+      "mean_absolute_error_by_axis_mm": [
+        8.494193735769953,
+        8.522423984216305,
+        10.773005029997668
+      ]
+    },
+    "lift_only/ridge/earlier_emg": {
+      "mean_distance_error_mm": 19.31646108319902,
+      "mean_absolute_error_by_axis_mm": [
+        8.832951218719963,
+        8.564114323772715,
+        10.824658584232344
+      ]
+    },
+    "lift_only/ridge/earlier_emg_and_ground_force": {
+      "mean_distance_error_mm": 19.17686806783727,
+      "mean_absolute_error_by_axis_mm": [
+        8.830999257797293,
+        8.480195756418327,
+        10.776718143290339
+      ]
+    },
+    "lift_only/ridge/motion": {
+      "mean_distance_error_mm": 17.42149081518529,
+      "mean_absolute_error_by_axis_mm": [
+        8.538590100952065,
+        7.618237141410108,
+        9.417332698235866
+      ]
+    },
+    "lift_only/ridge/motion_and_emg": {
+      "mean_distance_error_mm": 18.206432059005188,
+      "mean_absolute_error_by_axis_mm": [
+        8.580369294697835,
+        8.201972463682273,
+        9.91925950337452
+      ]
+    },
+    "lift_only/ridge/motion_and_ground_force": {
+      "mean_distance_error_mm": 18.228894376125833,
+      "mean_absolute_error_by_axis_mm": [
+        8.481910665291016,
+        7.951096057387879,
+        10.361820953556668
+      ]
+    },
+    "mixed_tasks/attention/all_current": {
+      "mean_distance_error_mm": 16.12946902698688,
+      "mean_absolute_error_by_axis_mm": [
+        5.861052317387326,
+        6.942981509911248,
+        10.500343722213797
+      ]
+    },
+    "mixed_tasks/attention/earlier_emg": {
+      "mean_distance_error_mm": 17.160420901480947,
+      "mean_absolute_error_by_axis_mm": [
+        5.452652448756493,
+        8.455101074800895,
+        10.9378581907148
+      ]
+    },
+    "mixed_tasks/attention/earlier_emg_and_ground_force": {
+      "mean_distance_error_mm": 17.607789259740876,
+      "mean_absolute_error_by_axis_mm": [
+        6.342070110526259,
+        9.194238114430762,
+        9.944730435193081
+      ]
+    },
+    "mixed_tasks/attention/motion": {
+      "mean_distance_error_mm": 12.12742221387338,
+      "mean_absolute_error_by_axis_mm": [
+        4.466529503142232,
+        5.145815619365606,
+        7.9049327834837415
+      ]
+    },
+    "mixed_tasks/attention/motion_and_emg": {
+      "mean_distance_error_mm": 14.470569414327594,
+      "mean_absolute_error_by_axis_mm": [
+        5.683853911790667,
+        6.208440213038007,
+        9.017030152123112
+      ]
+    },
+    "mixed_tasks/attention/motion_and_ground_force": {
+      "mean_distance_error_mm": 15.138477052296222,
+      "mean_absolute_error_by_axis_mm": [
+        5.2102564687210595,
+        7.213419026074141,
+        9.83348105817155
+      ]
+    },
+    "mixed_tasks/ridge/all_current": {
+      "mean_distance_error_mm": 15.038635920803948,
+      "mean_absolute_error_by_axis_mm": [
+        6.052933826560834,
+        7.118039353289927,
+        8.957749445998841
+      ]
+    },
+    "mixed_tasks/ridge/earlier_emg": {
+      "mean_distance_error_mm": 15.410847160876507,
+      "mean_absolute_error_by_axis_mm": [
+        6.649461853756356,
+        7.494026381137188,
+        8.721595960996174
+      ]
+    },
+    "mixed_tasks/ridge/earlier_emg_and_ground_force": {
+      "mean_distance_error_mm": 15.484583349582785,
+      "mean_absolute_error_by_axis_mm": [
+        6.809209440220443,
+        7.618550110606562,
+        8.322415610572945
+      ]
+    },
+    "mixed_tasks/ridge/motion": {
+      "mean_distance_error_mm": 12.689842696872732,
+      "mean_absolute_error_by_axis_mm": [
+        5.143060089143152,
+        5.905355807772516,
+        7.36458001421061
+      ]
+    },
+    "mixed_tasks/ridge/motion_and_emg": {
+      "mean_distance_error_mm": 14.849644334192801,
+      "mean_absolute_error_by_axis_mm": [
+        6.488225770192176,
+        6.80774402340689,
+        8.57795382837142
+      ]
+    },
+    "mixed_tasks/ridge/motion_and_ground_force": {
+      "mean_distance_error_mm": 13.66604169263241,
+      "mean_absolute_error_by_axis_mm": [
+        5.602012591385551,
+        6.456355292476645,
+        8.084883544936288
+      ]
+    },
+    "persistence": {
+      "mean_distance_error_mm": 50.64307487127501,
+      "mean_absolute_error_by_axis_mm": [
+        20.61136583540529,
+        20.28267974085188,
+        28.1967131008401
+      ]
+    },
+    "rotation_only/attention/all_current": {
+      "mean_distance_error_mm": 16.8189315422034,
+      "mean_absolute_error_by_axis_mm": [
+        6.083656902624784,
+        6.604480429291836,
+        11.69990914260722
+      ]
+    },
+    "rotation_only/attention/earlier_emg": {
+      "mean_distance_error_mm": 18.955178408937083,
+      "mean_absolute_error_by_axis_mm": [
+        5.8587467837811005,
+        10.600868903251916,
+        11.213772600886477
+      ]
+    },
+    "rotation_only/attention/earlier_emg_and_ground_force": {
+      "mean_distance_error_mm": 18.79375894660258,
+      "mean_absolute_error_by_axis_mm": [
+        6.345370656730371,
+        10.678386115554018,
+        10.433963170540345
+      ]
+    },
+    "rotation_only/attention/motion": {
+      "mean_distance_error_mm": 12.800438818457577,
+      "mean_absolute_error_by_axis_mm": [
+        4.892086333455189,
+        6.270696172279783,
+        7.595544631826036
+      ]
+    },
+    "rotation_only/attention/motion_and_emg": {
+      "mean_distance_error_mm": 15.246639634657368,
+      "mean_absolute_error_by_axis_mm": [
+        5.962445522075693,
+        6.084542371964254,
+        10.165678563041224
+      ]
+    },
+    "rotation_only/attention/motion_and_ground_force": {
+      "mean_distance_error_mm": 14.074494709893584,
+      "mean_absolute_error_by_axis_mm": [
+        4.712556621220451,
+        6.218478625854567,
+        9.417009378979985
+      ]
+    },
+    "rotation_only/ridge/all_current": {
+      "mean_distance_error_mm": 15.590947621455037,
+      "mean_absolute_error_by_axis_mm": [
+        6.731857861901364,
+        7.466618506661701,
+        8.891247118437889
+      ]
+    },
+    "rotation_only/ridge/earlier_emg": {
+      "mean_distance_error_mm": 16.371868096546816,
+      "mean_absolute_error_by_axis_mm": [
+        7.547530551191367,
+        7.673711928422374,
+        9.087276523416863
+      ]
+    },
+    "rotation_only/ridge/earlier_emg_and_ground_force": {
+      "mean_distance_error_mm": 16.271024585690345,
+      "mean_absolute_error_by_axis_mm": [
+        7.601528713523468,
+        7.595033291518061,
+        8.710238609681186
+      ]
+    },
+    "rotation_only/ridge/motion": {
+      "mean_distance_error_mm": 12.519746244099727,
+      "mean_absolute_error_by_axis_mm": [
+        5.318716005581214,
+        5.581684746275094,
+        7.131981801931796
+      ]
+    },
+    "rotation_only/ridge/motion_and_emg": {
+      "mean_distance_error_mm": 15.79496798595648,
+      "mean_absolute_error_by_axis_mm": [
+        7.049012941830219,
+        7.162316119790432,
+        9.100324303725879
+      ]
+    },
+    "rotation_only/ridge/motion_and_ground_force": {
+      "mean_distance_error_mm": 13.671498247242804,
+      "mean_absolute_error_by_axis_mm": [
+        5.820375929055274,
+        5.999749138561927,
+        8.28434393704269
+      ]
+    },
+    "velocity": {
+      "mean_distance_error_mm": 14.283678987760046,
+      "mean_absolute_error_by_axis_mm": [
+        6.10154379396106,
+        6.71724388928495,
+        7.69988134139826
+      ]
+    }
+  },
+  "timing_comparisons": [
+    {
+      "reference_forecast": "lift_only/ridge/earlier_emg",
+      "comparison_forecast": "lift_only/ridge/all_current",
+      "mean_error_change_mm": -0.27250134528535713,
+      "median_error_change_mm": -0.16831638428510587,
+      "people_with_higher_error": 3,
+      "people_with_lower_error": 3,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/ridge/earlier_emg_and_ground_force",
+      "comparison_forecast": "lift_only/ridge/all_current",
+      "mean_error_change_mm": -0.1329083299236098,
+      "median_error_change_mm": 0.04642013990435423,
+      "people_with_higher_error": 3,
+      "people_with_lower_error": 3,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/earlier_emg",
+      "comparison_forecast": "lift_only/attention/all_current",
+      "mean_error_change_mm": -1.2486445089555012,
+      "median_error_change_mm": -1.1216061738775132,
+      "people_with_higher_error": 1,
+      "people_with_lower_error": 5,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/earlier_emg_and_ground_force",
+      "comparison_forecast": "lift_only/attention/all_current",
+      "mean_error_change_mm": -0.5023246018630244,
+      "median_error_change_mm": -0.45982766843262546,
+      "people_with_higher_error": 2,
+      "people_with_lower_error": 4,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/ridge/earlier_emg",
+      "comparison_forecast": "rotation_only/ridge/all_current",
+      "mean_error_change_mm": -0.7809204750917775,
+      "median_error_change_mm": -1.1342929784039182,
+      "people_with_higher_error": 1,
+      "people_with_lower_error": 5,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/ridge/earlier_emg_and_ground_force",
+      "comparison_forecast": "rotation_only/ridge/all_current",
+      "mean_error_change_mm": -0.6800769642353058,
+      "median_error_change_mm": -0.7474396984533014,
+      "people_with_higher_error": 2,
+      "people_with_lower_error": 4,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/attention/earlier_emg",
+      "comparison_forecast": "rotation_only/attention/all_current",
+      "mean_error_change_mm": -2.1362468667336865,
+      "median_error_change_mm": -0.9119330836251631,
+      "people_with_higher_error": 1,
+      "people_with_lower_error": 5,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/attention/earlier_emg_and_ground_force",
+      "comparison_forecast": "rotation_only/attention/all_current",
+      "mean_error_change_mm": -1.9748274043991787,
+      "median_error_change_mm": -3.1596196001221255,
+      "people_with_higher_error": 2,
+      "people_with_lower_error": 4,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "mixed_tasks/ridge/earlier_emg",
+      "comparison_forecast": "mixed_tasks/ridge/all_current",
+      "mean_error_change_mm": -0.3722112400725586,
+      "median_error_change_mm": -0.2699737096800572,
+      "people_with_higher_error": 1,
+      "people_with_lower_error": 5,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "mixed_tasks/ridge/earlier_emg_and_ground_force",
+      "comparison_forecast": "mixed_tasks/ridge/all_current",
+      "mean_error_change_mm": -0.4459474287788341,
+      "median_error_change_mm": -0.851096667140375,
+      "people_with_higher_error": 2,
+      "people_with_lower_error": 4,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "mixed_tasks/attention/earlier_emg",
+      "comparison_forecast": "mixed_tasks/attention/all_current",
+      "mean_error_change_mm": -1.0309518744940658,
+      "median_error_change_mm": -0.6574452203753438,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "mixed_tasks/attention/earlier_emg_and_ground_force",
+      "comparison_forecast": "mixed_tasks/attention/all_current",
+      "mean_error_change_mm": -1.4783202327539942,
+      "median_error_change_mm": -2.5367693480904663,
+      "people_with_higher_error": 2,
+      "people_with_lower_error": 4,
+      "people_with_same_error": 0
+    }
+  ],
+  "training_mixture_comparisons": [
+    {
+      "reference_forecast": "lift_only/ridge/motion",
+      "comparison_forecast": "rotation_only/ridge/motion",
+      "mean_error_change_mm": -4.901744571085567,
+      "median_error_change_mm": -4.757526779712445,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/ridge/motion_and_emg",
+      "comparison_forecast": "rotation_only/ridge/motion_and_emg",
+      "mean_error_change_mm": -2.411464073048709,
+      "median_error_change_mm": -2.844740604126338,
+      "people_with_higher_error": 2,
+      "people_with_lower_error": 4,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/ridge/motion_and_ground_force",
+      "comparison_forecast": "rotation_only/ridge/motion_and_ground_force",
+      "mean_error_change_mm": -4.557396128883027,
+      "median_error_change_mm": -4.445522300786399,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/ridge/all_current",
+      "comparison_forecast": "rotation_only/ridge/all_current",
+      "mean_error_change_mm": -3.453012116458623,
+      "median_error_change_mm": -3.482750644526182,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/ridge/earlier_emg",
+      "comparison_forecast": "rotation_only/ridge/earlier_emg",
+      "mean_error_change_mm": -2.9445929866522023,
+      "median_error_change_mm": -4.010713188161215,
+      "people_with_higher_error": 2,
+      "people_with_lower_error": 4,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/ridge/earlier_emg_and_ground_force",
+      "comparison_forecast": "rotation_only/ridge/earlier_emg_and_ground_force",
+      "mean_error_change_mm": -2.9058434821469263,
+      "median_error_change_mm": -3.8176668582235775,
+      "people_with_higher_error": 2,
+      "people_with_lower_error": 4,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/motion",
+      "comparison_forecast": "rotation_only/attention/motion",
+      "mean_error_change_mm": -8.600227246866384,
+      "median_error_change_mm": -8.182163915741514,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/motion_and_emg",
+      "comparison_forecast": "rotation_only/attention/motion_and_emg",
+      "mean_error_change_mm": -8.56233767879442,
+      "median_error_change_mm": -7.8018775168868135,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/motion_and_ground_force",
+      "comparison_forecast": "rotation_only/attention/motion_and_ground_force",
+      "mean_error_change_mm": -9.424401855388078,
+      "median_error_change_mm": -9.598345563939748,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/all_current",
+      "comparison_forecast": "rotation_only/attention/all_current",
+      "mean_error_change_mm": -7.339479998602312,
+      "median_error_change_mm": -8.086374627481508,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/earlier_emg",
+      "comparison_forecast": "rotation_only/attention/earlier_emg",
+      "mean_error_change_mm": -6.451877640824127,
+      "median_error_change_mm": -7.947835144092611,
+      "people_with_higher_error": 1,
+      "people_with_lower_error": 5,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/earlier_emg_and_ground_force",
+      "comparison_forecast": "rotation_only/attention/earlier_emg_and_ground_force",
+      "mean_error_change_mm": -5.866977196066158,
+      "median_error_change_mm": -5.916914722016829,
+      "people_with_higher_error": 1,
+      "people_with_lower_error": 5,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/ridge/motion",
+      "comparison_forecast": "mixed_tasks/ridge/motion",
+      "mean_error_change_mm": -4.731648118312559,
+      "median_error_change_mm": -4.623544013771675,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/ridge/motion_and_emg",
+      "comparison_forecast": "mixed_tasks/ridge/motion_and_emg",
+      "mean_error_change_mm": -3.3567877248123907,
+      "median_error_change_mm": -3.5570690929859836,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/ridge/motion_and_ground_force",
+      "comparison_forecast": "mixed_tasks/ridge/motion_and_ground_force",
+      "mean_error_change_mm": -4.562852683493422,
+      "median_error_change_mm": -4.493384852666694,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/ridge/all_current",
+      "comparison_forecast": "mixed_tasks/ridge/all_current",
+      "mean_error_change_mm": -4.005323817109711,
+      "median_error_change_mm": -3.9967776379054136,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/ridge/earlier_emg",
+      "comparison_forecast": "mixed_tasks/ridge/earlier_emg",
+      "mean_error_change_mm": -3.905613922322509,
+      "median_error_change_mm": -4.183805436020372,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/ridge/earlier_emg_and_ground_force",
+      "comparison_forecast": "mixed_tasks/ridge/earlier_emg_and_ground_force",
+      "mean_error_change_mm": -3.6922847182544865,
+      "median_error_change_mm": -3.971540049701799,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/motion",
+      "comparison_forecast": "mixed_tasks/attention/motion",
+      "mean_error_change_mm": -9.27324385145058,
+      "median_error_change_mm": -9.294831834809619,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/motion_and_emg",
+      "comparison_forecast": "mixed_tasks/attention/motion_and_emg",
+      "mean_error_change_mm": -9.33840789912419,
+      "median_error_change_mm": -8.802293830341402,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/motion_and_ground_force",
+      "comparison_forecast": "mixed_tasks/attention/motion_and_ground_force",
+      "mean_error_change_mm": -8.360419512985441,
+      "median_error_change_mm": -8.453856231521609,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/all_current",
+      "comparison_forecast": "mixed_tasks/attention/all_current",
+      "mean_error_change_mm": -8.028942513818834,
+      "median_error_change_mm": -8.409206203116529,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/earlier_emg",
+      "comparison_forecast": "mixed_tasks/attention/earlier_emg",
+      "mean_error_change_mm": -8.24663514828027,
+      "median_error_change_mm": -8.973806749837845,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "lift_only/attention/earlier_emg_and_ground_force",
+      "comparison_forecast": "mixed_tasks/attention/earlier_emg_and_ground_force",
+      "mean_error_change_mm": -7.052946882927863,
+      "median_error_change_mm": -6.707922379362742,
+      "people_with_higher_error": 1,
+      "people_with_lower_error": 5,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/ridge/motion",
+      "comparison_forecast": "mixed_tasks/ridge/motion",
+      "mean_error_change_mm": 0.17009645277300875,
+      "median_error_change_mm": 0.15474986113831335,
+      "people_with_higher_error": 6,
+      "people_with_lower_error": 0,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/ridge/motion_and_emg",
+      "comparison_forecast": "mixed_tasks/ridge/motion_and_emg",
+      "mean_error_change_mm": -0.9453236517636817,
+      "median_error_change_mm": -1.0001154635927438,
+      "people_with_higher_error": 2,
+      "people_with_lower_error": 4,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/ridge/motion_and_ground_force",
+      "comparison_forecast": "mixed_tasks/ridge/motion_and_ground_force",
+      "mean_error_change_mm": -0.005456554610396698,
+      "median_error_change_mm": -0.0704363316637906,
+      "people_with_higher_error": 2,
+      "people_with_lower_error": 4,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/ridge/all_current",
+      "comparison_forecast": "mixed_tasks/ridge/all_current",
+      "mean_error_change_mm": -0.5523117006510878,
+      "median_error_change_mm": -0.681459272932937,
+      "people_with_higher_error": 2,
+      "people_with_lower_error": 4,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/ridge/earlier_emg",
+      "comparison_forecast": "mixed_tasks/ridge/earlier_emg",
+      "mean_error_change_mm": -0.9610209356703067,
+      "median_error_change_mm": -0.3311558503845724,
+      "people_with_higher_error": 1,
+      "people_with_lower_error": 5,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/ridge/earlier_emg_and_ground_force",
+      "comparison_forecast": "mixed_tasks/ridge/earlier_emg_and_ground_force",
+      "mean_error_change_mm": -0.7864412361075596,
+      "median_error_change_mm": -0.2262118005896232,
+      "people_with_higher_error": 1,
+      "people_with_lower_error": 5,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/attention/motion",
+      "comparison_forecast": "mixed_tasks/attention/motion",
+      "mean_error_change_mm": -0.6730166045841962,
+      "median_error_change_mm": -0.9302330938788721,
+      "people_with_higher_error": 1,
+      "people_with_lower_error": 5,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/attention/motion_and_emg",
+      "comparison_forecast": "mixed_tasks/attention/motion_and_emg",
+      "mean_error_change_mm": -0.776070220329772,
+      "median_error_change_mm": -0.855342815547119,
+      "people_with_higher_error": 2,
+      "people_with_lower_error": 4,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/attention/motion_and_ground_force",
+      "comparison_forecast": "mixed_tasks/attention/motion_and_ground_force",
+      "mean_error_change_mm": 1.0639823424026371,
+      "median_error_change_mm": 1.0339849265058936,
+      "people_with_higher_error": 6,
+      "people_with_lower_error": 0,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/attention/all_current",
+      "comparison_forecast": "mixed_tasks/attention/all_current",
+      "mean_error_change_mm": -0.6894625152165205,
+      "median_error_change_mm": -0.8997128955236748,
+      "people_with_higher_error": 1,
+      "people_with_lower_error": 5,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/attention/earlier_emg",
+      "comparison_forecast": "mixed_tasks/attention/earlier_emg",
+      "mean_error_change_mm": -1.794757507456141,
+      "median_error_change_mm": -1.374854859993972,
+      "people_with_higher_error": 0,
+      "people_with_lower_error": 6,
+      "people_with_same_error": 0
+    },
+    {
+      "reference_forecast": "rotation_only/attention/earlier_emg_and_ground_force",
+      "comparison_forecast": "mixed_tasks/attention/earlier_emg_and_ground_force",
+      "mean_error_change_mm": -1.1859696868617051,
+      "median_error_change_mm": -0.7910076573459133,
+      "people_with_higher_error": 1,
+      "people_with_lower_error": 5,
+      "people_with_same_error": 0
+    }
+  ]
+}
