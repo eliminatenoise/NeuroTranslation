@@ -258,6 +258,6 @@ Tim Sziburis, Susanne Blex, Tobias Glasmachers and Ioannis Iossifidis created th
 
 The inertial-forecast models and viewer use original cylinder-mounted sensor measurements from the Ruhr Hand Motion Catalog by Sziburis, Blex, Glasmachers and Iossifidis, licensed CC BY 4.0. We selected repeated tasks, formed time windows, fitted forecasting models and measured changes in the device’s estimated orientation. Source-derived arrays, weights and figures include attribution. Original project software and prose are CC0 1.0. The public paper contains only aggregate findings from the separate private gesture experiment. [Data source](https://doi.org/10.17605/OSF.IO/J3QC8) · [Study](https://doi.org/10.1038/s41597-025-05576-7)
 
-## The reach and the later spikes
+### A reach and the later spikes (the reach-feedback study)
 
 Raeed H. Chowdhury, Joshua I. Glaser and Lee E. Miller released the recordings under CC0 1.0. The reach-feedback reader uses selected windows from macaque C on 7 September 2017. The project dedicates its own software, fitted weights, figures and prose to CC0 1.0. The paper also reproduces the apparatus (Figure 2) and workspace layout (Figure 3A) drawn by Chowdhury, Glaser and Miller. Those illustrations retain their CC BY 4.0 licence. The paper and editable source identify the resizing and crop. The 3D paths are reconstructions of the marker positions in that recording. [Dataset](https://doi.org/10.5061/dryad.nk98sf7q7) · [Original study](https://doi.org/10.7554/eLife.48198)

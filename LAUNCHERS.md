@@ -189,5 +189,8 @@ Extract the [offline target-reach reader](docs/target-reach-offline.zip) or the 
 
 ## Forecast how a cylinder turns
 
-Extract the [offline reach and cortical activity reader](docs/reach-feedback-offline.zip) or [the trained models](models/reach-feedback.zip). Open the launcher for your operating system and select a recorded reach.
 Extract the [offline cylinder-rotation reader](docs/cylinder-rotation-offline.zip) or [the models and data](models/cylinder-rotation.zip). Launch it to forecast turning rate and acceleration from recent sensor samples.
+
+## Follow a reach and the spikes after it
+
+Extract the [offline reach and cortical activity reader](docs/reach-feedback-offline.zip) or [the trained models](models/reach-feedback.zip). Open the launcher for your operating system and select a recorded reach.
