@@ -13,6 +13,7 @@
   <script defer src="../engine/reach-relative-model.js"></script>
   <script defer src="../engine/reach-engine.js"></script>
   <script defer src="../example.js"></script>
+  <script defer src="reach-space.js"></script>
   <script defer src="reach.js"></script>
 </head>
 <body>
@@ -76,6 +77,44 @@
             <label for="path">Model path</label>
             <select id="path"></select>
           </div>
+          <figure id="space-view" class="space-card" aria-labelledby="space-title" hidden>
+            <figcaption id="space-title">Hand and elbow paths in 3D</figcaption>
+            <p class="space-intro">Dots trace 20 input positions for each marker. In the recording they come from processed camera tracks. Each forecast starts at the last dot. Open symbols give its estimates at 20, 50, 70 and 100 ms.</p>
+            <div class="space-legend" aria-label="Path key">
+              <span><i class="swatch input" aria-hidden="true">●</i>Input positions</span>
+              <span id="space-absolute-key"><i class="swatch absolute" aria-hidden="true">○</i>Recorded-position model</span>
+              <span id="space-relative-key" hidden><i class="swatch relative" aria-hidden="true">△</i>Relative-position model</span>
+              <span><i class="swatch velocity" aria-hidden="true">□</i>Constant velocity</span>
+            </div>
+            <svg id="space-plot" xmlns="http://www.w3.org/2000/svg" tabindex="0" role="img" aria-labelledby="space-title" aria-describedby="space-summary space-help"></svg>
+            <p id="space-summary" class="visually-hidden"></p>
+            <div class="space-controls">
+              <label>Markers
+                <select id="space-markers">
+                  <option value="both">Both markers</option>
+                  <option value="hand">Hand close-up</option>
+                  <option value="elbow">Elbow close-up</option>
+                </select>
+              </label>
+              <label>Viewing angle
+                <select id="space-angle">
+                  <option value="oblique">Starting angle</option>
+                  <option value="xy">XY plane</option>
+                  <option value="xz">XZ plane</option>
+                  <option value="yz">YZ plane</option>
+                  <option value="custom" disabled>Rotated view</option>
+                </select>
+              </label>
+            </div>
+            <p id="space-help">Drag to turn, or focus the plot and use the arrow keys. Home restores the starting angle.</p>
+            <details id="space-readout">
+              <summary>Read the 3D positions</summary>
+              <p>The time is measured from the last input reading. Both markers use the same X, Y and Z axes. Positions are in millimetres relative to the shoulder in the recording.</p>
+              <label for="space-series">Positions to read</label>
+              <select id="space-series"></select>
+              <div id="space-tables" class="tables"></div>
+            </details>
+          </figure>
           <figure class="plot-card" aria-labelledby="plot-title">
             <figcaption id="plot-title">Distance from the last position <span>(mm)</span></figcaption>
             <div class="legend" aria-hidden="true">

@@ -14,6 +14,8 @@ Use the example as a template for your own readings. Enter 20 rows, oldest first
 
 A forecast of 5 mm on hand X places the mark 5 mm along the X axis from its last reading. The recent-velocity forecast keeps the speed and direction of the last 20 milliseconds. The learned models each draw 32 possible paths. That spread comes from the models.
 
+Turn the 3D view to see the hand and elbow paths from another angle. Each dot marks an input position. The open marks show a forecast. Choose an angle or focus the plot and use the arrow keys. Press Home to restore the starting angle. Open Read the 3D positions to find the X, Y and Z values in millimetres.
+
 Choose Save forecast to keep the paths, their average, the recent-velocity forecast and the settings used. A single forecast from recorded positions saves the original v1 JSON format. Forecasts from relative positions and comparisons use v2, which records which model made each path.
 
 The viewer and its model files run on this computer. The readings you enter or open stay in your browser.

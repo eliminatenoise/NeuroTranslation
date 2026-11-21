@@ -123,6 +123,73 @@ thead th { color: var(--muted); font-size: .8rem; font-weight: 650; }
 .recording-copy p + p { margin-top: .6rem; }
 .credit { font-size: .82rem; }
 .credit span { overflow-wrap: anywhere; }
+.space-card {
+  --space-paper: #fbfcf8;
+  --space-surface: #f5f8f3;
+  --space-grid: #d7e2db;
+  --space-soft: #4d6862;
+  --space-input: #273d3b;
+  --space-absolute: #167246;
+  --space-relative: #175fa4;
+  --space-velocity: #9b501b;
+  padding: clamp(.85rem, 2vw, 1.35rem);
+  margin: 0 0 1rem;
+  border: 1px solid var(--rule);
+  border-radius: .3rem;
+  background: var(--space-paper);
+}
+.space-intro, #space-help, #space-readout p { color: var(--muted); font-size: .87rem; }
+.space-intro { margin-top: .4rem; }
+.space-legend, .space-legend span, .swatch, .space-controls { display: flex; align-items: center; }
+.space-legend { flex-wrap: wrap; gap: .3rem 1rem; margin: .7rem 0; font-size: .8rem; }
+.space-legend span { gap: .27rem; }
+.swatch { width: 1.65rem; font: 650 .91rem/1 system-ui, sans-serif; }
+.swatch::before { flex: 1; content: ""; border-top: 2px solid currentColor; }
+.swatch.input { color: var(--space-input); }
+.swatch.absolute { color: var(--space-absolute); }
+.swatch.relative { color: var(--space-relative); }
+.swatch.relative::before { border-top-style: dotted; }
+.swatch.velocity { color: var(--space-velocity); }
+.swatch.velocity::before { border-top-style: dashed; }
+#space-plot {
+  display: block; width: 100%; height: clamp(15rem, 25vw, 20rem);
+  border: 1px solid var(--rule); border-radius: .18rem; background: var(--space-surface);
+  touch-action: none; cursor: grab; user-select: none;
+}
+#space-plot:active { cursor: grabbing; }
+#space-plot:focus-visible { outline: 3px solid #a9410c; outline-offset: 3px; }
+#space-plot path, #space-plot polyline {
+  fill: none; stroke-linejoin: round; stroke-linecap: round;
+}
+.space-grid { stroke: var(--space-grid); stroke-width: 1; }
+.space-ruler { stroke: var(--space-soft); stroke-width: 1.35; }
+.space-guide-text, .space-label {
+  paint-order: stroke; stroke: var(--space-surface); stroke-width: 3.5px; stroke-linejoin: round;
+}
+.space-guide-text { fill: var(--space-soft); font-size: 12px; font-weight: 550; }
+.space-label { fill: var(--space-input); font-size: 13px; font-weight: 700; }
+.space-track { stroke: currentColor; }
+.space-track polyline { stroke-width: 2; }
+.space-track circle, .space-track polygon, .space-track rect { fill: var(--space-surface); stroke-width: 1.65; }
+.space-track.input { color: var(--space-input); }
+.space-track.input polyline { stroke-width: 1.5; }
+.space-track.input circle { fill: currentColor; stroke: none; }
+.space-track.absolute { color: var(--space-absolute); }
+.space-track.relative { color: var(--space-relative); }
+.space-track.relative polyline { stroke-dasharray: 2 4; }
+.space-track.velocity { color: var(--space-velocity); }
+.space-track.velocity polyline { stroke-dasharray: 7 4; }
+.space-origin { fill: var(--space-input); stroke: var(--space-surface); stroke-width: 1.5; }
+.space-controls { align-items: end; flex-wrap: wrap; gap: .4rem 1rem; margin-top: .7rem; }
+.space-controls label, #space-readout label { font-size: .82rem; }
+.space-controls select, #space-series { display: block; margin-top: .15rem; min-height: 2.25rem; font-size: .87rem; }
+#space-help { margin-top: .5rem; }
+#space-readout summary { padding-bottom: .1rem; }
+#space-readout p, #space-readout label, #space-tables { margin-top: .65rem; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; border: 0;
+}
 @media (max-width: 49rem) {
   .workbench, .recording { grid-template-columns: 1fr; }
   .recording-copy { margin-top: .6rem; }
@@ -137,6 +204,14 @@ thead th { color: var(--muted); font-size: .8rem; font-weight: 650; }
   canvas { height: 7.4rem; }
 }
 @media (forced-colors: active) {
+  .space-card {
+    --space-paper: Canvas; --space-surface: Canvas; --space-grid: GrayText; --space-soft: CanvasText;
+    --space-input: CanvasText; --space-absolute: CanvasText; --space-relative: LinkText; --space-velocity: CanvasText;
+  }
+  #space-plot, .swatch { forced-color-adjust: none; }
+  #space-plot { border-color: CanvasText; }
+  #space-plot:focus-visible { outline-color: Highlight; }
+  .space-grid { opacity: .35; }
   :root { --chart-label: CanvasText; --chart-bg: Canvas; --chart-model: CanvasText; --chart-relative: CanvasText; --chart-velocity: CanvasText; --chart-grid: GrayText; }
   :where(a, button, select, textarea, input, summary):focus-visible { outline-color: Highlight; }
   .model-choices label:has(:focus-visible) { outline-color: Highlight; }

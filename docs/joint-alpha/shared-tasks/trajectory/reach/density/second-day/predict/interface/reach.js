@@ -24,6 +24,7 @@
   const saveLink = get("save-forecast");
   const placeholder = get("empty-result");
   const canvases = [get("hand-plot"), get("elbow-plot")];
+  const space = globalThis.createReachSpace?.();
   let current = null;
   let revision = 0;
 
@@ -75,6 +76,7 @@
   }
 
   function hideResult(message) {
+    space?.clear();
     if (saveLink.hasAttribute("href")) {
       URL.revokeObjectURL(saveLink.href);
       saveLink.removeAttribute("href");
@@ -273,6 +275,11 @@
     const keys = modelKeys();
     const paired = keys.length === 2;
     const pathName = pathMenu.selectedOptions[0].text;
+    if (space) {
+      const paths = Object.fromEntries(keys.map(key => [key, selectedPath(key)]));
+      paths.velocity = current.predictions[keys[0]].velocity20Mm;
+      space.show(current.readings, paths, ahead, pathName);
+    }
     const tables = keys.flatMap(key =>
       markerTables(selectedPath(key), labels[key] + ", " + pathName, paired ? labels[key] : "")
     );
