@@ -56,6 +56,8 @@ def entry(row):
                     row["primary_study"] == f'https://doi.org/{source.get("doi", "")}')
     if not same_deposit:
         links.append(f'<a href="{escape(row["primary_study"])}">Original study</a>')
+    if "fluorescence_evaluation" in row:
+        links.append(f'<a href="{escape(row["fluorescence_evaluation"])}">Fluorescence forecast results</a>')
     if "next_spike_evaluation" in row:
         links.append(f'<a href="{escape(row["next_spike_evaluation"])}">Spike forecast results</a>')
     return f'''<article class="entry" id="{escape(row['id'])}">

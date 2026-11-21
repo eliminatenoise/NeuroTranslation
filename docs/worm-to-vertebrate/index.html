@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Can worm recordings help forecast a fish’s neural activity? · NeuroTranslation</title>
+<meta name="description" content="A measured test of short-horizon calcium fluorescence forecasts on seven larval zebrafish, using equal training budgets with and without worm recordings.">
+<style>
+:root{color-scheme:light;--paper:#fafaf6;--ink:#172f34;--muted:#46636a;--line:#bdcfcb;--teal:#07595e}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:1.03rem/1.6 "Source Sans 3",Arial,sans-serif}
+main,nav{width:min(100% - 2.5rem,64rem);margin:auto}nav{padding:1.15rem 0;border-bottom:1px solid var(--line)}
+a{color:var(--teal);font-weight:600;text-underline-offset:.18em}a:focus-visible,summary:focus-visible,.scroll:focus-visible{outline:3px solid #983d24;outline-offset:3px}
+section{border-top:1px solid var(--line);padding:1.5rem 0}h1,h2,h3{line-height:1.13;letter-spacing:-.025em}
+h1{font-size:clamp(2.1rem,6vw,4rem);max-width:24ch;margin:.72em 0 .45em}h2{font-size:clamp(1.55rem,4vw,2.2rem);margin:0 0 .7em}
+p,li{max-width:76ch}p{margin:.75em 0}.answer{font-size:1.3rem;line-height:1.45;margin:.9em 0 1.4em}
+.scroll{overflow:auto;max-width:100%}table{border-collapse:collapse;font-size:.95rem;line-height:1.4;width:100%;margin:.7rem 0}
+th,td{padding:.55em .65em;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;text-align:right}
+th:first-child{text-align:left}thead th{vertical-align:bottom}caption{text-align:left;font-weight:700;padding-bottom:.45rem}
+summary{font-weight:650;color:var(--teal);cursor:pointer;width:fit-content}details{margin:1.4em 0}.note{font-size:.93rem;color:var(--muted)}
+@media(max-width:37rem){nav,main{width:calc(100% - 1.65rem)}th,td{padding:.45em .36em}.answer{font-size:1.14rem}.scroll table{min-width:30rem}}
+@media print{body{background:white;font-size:10pt}nav{display:none}h2{break-after:avoid}.scroll{overflow:visible}tr{break-inside:avoid}}
+</style>
+</head>
+<body><nav aria-label="Study navigation"><a href="../vertebrate-neural-data/index.html">Vertebrate neural recordings</a></nav>
+<main>
+<h1>Can worm recordings help forecast a fish’s neural activity?</h1>
+<p>A fluorescent indicator changes brightness as calcium levels change inside a cell. Given four recent brightness readings from one region of a fish’s forebrain, can a model predict the next reading more closely if some of its training examples come from worms?</p>
+<p class="answer"><strong>Replacing a quarter of the fish examples with worm recordings reduced average squared error by 8.36%.</strong> The mixed model made smaller squared errors on 4 of seven held-out larval zebrafish and larger ones on 3. With seven fish from one study, the uncertainty interval includes both an improvement and a worsening.</p>
+<section aria-labelledby="budget"><h2 id="budget">What changed in training?</h2>
+<p>Each fit used 1,024 examples. All four shared the same 768 from a single fish, Fish01. The fish-only fit spent the remaining 256 on more examples from those same regions and the same early period. The mixed fit spent those 256 on eight freely moving <i>C. elegans</i> worms, 32 examples per worm. Every fit used the same four adjustable coefficients and solved for them once.</p>
+<p>Two further fits used those 256 slots to sample other regions of Fish01 or a later period from the original regions. These comparisons ask how much variation one fish could supply on its own. A fifth forecast simply carried the last brightness reading forward.</p>
+</section>
+<section aria-labelledby="results"><h2 id="results">How far off were the forecasts?</h2>
+<p>Each region had its own scale. An error of one unit equals one standard deviation of that region’s fluorescence during the first 30 seconds of its recording. Mean squared error gives large misses extra weight. Mean absolute error gives the average size of a miss in those same units. Lower is better in both columns.</p>
+<div class="scroll" tabindex="0" role="region" aria-label="Model comparison table"><table><caption>Each of the seven test fish counts equally</caption><thead><tr><th scope="col">Training or comparison</th><th scope="col">Mean squared error</th><th scope="col">Mean absolute error</th><th scope="col">Fish with lower squared error than carrying forward</th></tr></thead><tbody>
+<tr><th scope="row">Fish only · same regions and early period</th><td>2.09061</td><td>0.86846</td><td>4 / 7</td></tr>
+<tr><th scope="row">Fish and eight worms</th><td>1.91584</td><td>0.81915</td><td>7 / 7</td></tr>
+<tr><th scope="row">Fish only · other regions</th><td>2.05961</td><td>0.85935</td><td>5 / 7</td></tr>
+<tr><th scope="row">Fish only · later period</th><td>2.19623</td><td>0.88528</td><td>4 / 7</td></tr>
+<tr><th scope="row">Carry the last observation forward</th><td>2.38541</td><td>0.88616</td><td>—</td></tr>
+</tbody></table></div>
+<p>The fit using other regions of the training fish had 2.05961 squared error, higher than the mixed fit. The fit using a later period in the training fish had 2.19623 squared error, higher than the mixed fit. The mixed model beat the last-reading forecast in 7 of seven fish.</p>
+<div class="scroll" tabindex="0" role="region" aria-label="Individual fish table"><table><caption>Mixed training against fish-only training in each held-out fish</caption><thead><tr><th scope="col">Fish</th><th scope="col">Scored regions</th><th scope="col">Forecasts</th><th scope="col">Fish only</th><th scope="col">Fish and worms</th><th scope="col">Mixed minus fish only</th></tr></thead><tbody>
+<tr><th scope="row">Fish02</th><td>32</td><td>4,000</td><td>0.95518</td><td>0.63549</td><td>−0.31970</td></tr>
+<tr><th scope="row">Fish13</th><td>32</td><td>4,000</td><td>6.22082</td><td>5.42827</td><td>−0.79255</td></tr>
+<tr><th scope="row">Fish31</th><td>32</td><td>4,000</td><td>1.60986</td><td>2.00792</td><td>+0.39806</td></tr>
+<tr><th scope="row">Fish32</th><td>32</td><td>4,000</td><td>1.47848</td><td>1.48798</td><td>+0.00950</td></tr>
+<tr><th scope="row">Fish41</th><td>32</td><td>4,000</td><td>1.62946</td><td>1.14584</td><td>−0.48363</td></tr>
+<tr><th scope="row">Fish47</th><td>32</td><td>4,000</td><td>1.59301</td><td>1.79930</td><td>+0.20628</td></tr>
+<tr><th scope="row">Fish58</th><td>32</td><td>4,000</td><td>1.14743</td><td>0.90611</td><td>−0.24133</td></tr>
+</tbody></table></div>
+<p>The paired difference in mean squared error was <strong>−0.17476</strong> (1.91584 mixed, 2.09061 fish only). A negative difference favours mixed training. A descriptive 95% interval for the mean difference, calculated with a paired <i>t</i> interval across seven fish, runs from <strong>−0.55417 to +0.20464</strong>. Leaving out each fish in turn gave differences from −0.27024 to −0.07180. That range shows how much one fish shifts the result. The 28,000 forecasts include repeated observations of 224 of 224 selected regions. Each animal supplies one comparison. Fish01 and Fish02 were recorded on the same day, as were Fish31 and Fish32.</p>
+<p>In the first scored period (30 to 60 seconds), the mixed fit had higher error than the fish-only fit. Its error was lower from 60 to 120 seconds and lower for the rest of the recording. During larger preceding changes, mean absolute error was 0.93685 for mixed training and 0.92224 for fish alone.</p>
+<details><summary>When the signal changed and when it stayed steady</summary>
+<p>The first three rows group forecasts by elapsed time. The last two split the same observations a different way. A larger change means the latest reading moved by at least half a calibration standard deviation since the preceding input. These groups describe how quickly a trace is changing. How often an individual neuron fires is a separate measurement.</p>
+<div class="scroll" tabindex="0" role="region" aria-label="Time and signal-change groups"><table><caption>Squared error by time period or preceding change</caption><thead><tr><th scope="col">Group</th><th scope="col">Fish</th><th scope="col">Forecasts</th><th scope="col">Fish only</th><th scope="col">Fish and worms</th></tr></thead><tbody>
+<tr><th scope="row">30 to &lt;60 seconds</th><td>7</td><td>5,824</td><td>1.22984</td><td>1.23458</td></tr>
+<tr><th scope="row">60 to &lt;120 seconds</th><td>7</td><td>11,200</td><td>1.28442</td><td>1.21789</td></tr>
+<tr><th scope="row">120 to &lt;180 seconds</th><td>7</td><td>10,976</td><td>3.36998</td><td>2.98953</td></tr>
+<tr><th scope="row">Smaller preceding change</th><td>7</td><td>13,434</td><td>1.28664</td><td>1.20276</td></tr>
+<tr><th scope="row">Larger preceding change</th><td>7</td><td>14,566</td><td>2.50543</td><td>2.41739</td></tr>
+</tbody></table></div></details></section>
+<section aria-labelledby="how"><h2 id="how">How was each prediction made?</h2>
+<p>The worm source supplied fluorescence from tracked neurons. The fish source supplied processed changes in fluorescence relative to baseline from one forebrain imaging plane during a temperature experiment. For each recording we took the first 180 seconds and the first 32 available regions in archive order. We used each region’s first 30 seconds to fix its mean and standard deviation. A forecast required at least 20 finite calibration readings and a positive standard deviation.</p>
+<p>After calibration, the model read the current value and three earlier values spaced about 1.2 seconds apart. It predicted the change to the next observation, approximately 1.2 seconds ahead. We used the nearest recorded frames within 0.36 seconds of their requested times. The measured horizon in the held-out fish was 1.258 seconds. The first predicted frame came 31.457 seconds after the start of each recording. Inputs stayed at or before the forecast origin. Missing values and unmatched times removed a case from every comparison.</p>
+<p>The model fitted a single linear rule across all training regions using ridge regression (penalty 0.01, no intercept). Animal identity, region identity and species never entered that rule. We sampled training examples without replacement using a fixed seed and froze all coefficients before opening the seven test recordings. In each fish we averaged errors first within each region, then across regions. The primary score is the average across fish. An independent calculation recovered all four sets of coefficients and the losses for every fish to within numerical rounding.</p>
+<p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/vertebrate-neural-data/worm-transfer">Run the forecast and inspect the source files</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/models/vertebrate-neural-data/worm-transfer/protocol.json">Full protocol and timing rules</a></p>
+</section>
+<section aria-labelledby="meaning"><h2 id="meaning">What does the result say about biology?</h2>
+<p>The experiment measures the value of what happens when 256 examples from one fish are exchanged for 256 from eight worms. That exchange changes species, number of animals, indicator, recording conditions and processing at the same time. No arm trained on extra fish from the same experiment. A comparison with equally many new fish would help separate the value of adding animals from the value of adding worms.</p>
+<p>The target was a future camera measurement. The worms and fish carried different calcium indicators (GCaMP7f and GCaMP6s). Both respond over time, and the archives supplied traces processed after recording. A model can use the timing of the indicator or the way a trace was processed. Recovering electrical spikes from those signals, predicting muscle force, and testing a common rule of neural development each require their own measurements. FlyWire and the worm developmental connectomes offer wiring evidence for that separate question. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/docs/when-fly-and-worm-data-help.md">Read the comparative evidence.</a></p>
+<p class="note">Worm recordings by Atanas, Kim and colleagues, distributed under CC BY 3.0 US. Zebrafish recordings by Haesemeyer and Balakrishnan, distributed under CC BY 4.0. The study used cropped and standardized extracts. <a href="https://pubmed.ncbi.nlm.nih.gov/37607537/">Worm study</a> · <a href="https://doi.org/10.5281/zenodo.19388374">Worm data</a> · <a href="https://doi.org/10.48324/dandi.000235/0.230316.1600">Fish data</a></p>
+</section>
+</main></body></html>

@@ -39,3 +39,7 @@ The catalogue distributes links and file descriptions. Each original deposit spe
 ## Where the spike forecast was tested
 
 The [two-rat study](../next-neuron-prediction/) fitted five coefficients on earlier trips from one animal. Separate evaluations kept those coefficients fixed for [turtle dorsal cortex](turtle/) and [salamander retina](amphibian/). Each unit label belongs to its recording. The test scores cover detected events during the stated trials and visual stimuli. [Browse the recordings and results](https://eliminatenoise.github.io/NeuroTranslation/vertebrate-neural-data/) · [Optional fly and worm comparisons](../../docs/when-fly-and-worm-data-help.md).
+
+## Calcium fluorescence in seven held-out zebrafish
+
+One fish supplied the vertebrate training data. The [worm-to-fish forecast](worm-transfer/) replaced 256 of its 1,024 examples with brightness readings from eight worms. [See the fish-by-fish errors and the fish-only controls](https://eliminatenoise.github.io/NeuroTranslation/worm-to-vertebrate/).

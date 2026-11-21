@@ -1,0 +1,19 @@
+{
+  "method": "Independent reconstruction of sampled rows, coefficients and held-fish forecasts from the archived slices.",
+  "primary_difference_descriptive_t95": [
+    -0.5541705708207287,
+    0.2046414796982893
+  ],
+  "interval_method": "Two-sided paired Student t reference interval across seven fish differences, six degrees of freedom. Innate dependence within a fish and shared acquisition dates limit population inference.",
+  "numerical_check": {
+    "max_abs_difference_per_coefficient": 2.1510571102112408e-15,
+    "max_abs_error_over_all_donor_strata_models_metrics": 1.2434497875801753e-14,
+    "each_held_row_and_frame_hash_verified": true,
+    "all_condition_inference_units": "First mean within each ROI; mean those ROI means within fish; mean the seven animal scores.",
+    "all_fit_dimensions": [
+      1024,
+      4
+    ],
+    "unique_shared_rows_for_every_pair_of_arms": 768
+  }
+}

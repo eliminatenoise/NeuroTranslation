@@ -1,0 +1,1234 @@
+{
+  "fit_sha256": "42f489776df64ad32aa85db58f7d6102e1dfc1315137cf35a2f3e5113e26d6c8",
+  "held_animals": {
+    "Fish02": {
+      "recording": {
+        "input_sha256": "d108a46b5ce5a649eb7ec1c6b3fcdfdc9ef58f71f919d2bbd672df7c4401fb33",
+        "sampled_frames": 430,
+        "time_span_s": 179.9356416,
+        "native_step_s": {
+          "minimum": 0.4194303999999818,
+          "median": 0.41943039999999954,
+          "maximum": 0.4194304000000102
+        },
+        "raw_roi_count_in_crop": 32,
+        "prefix_qualified_rois": 32,
+        "eligible_rois": 32,
+        "eligible_cases": 4000,
+        "first_forecast_origin_s": 30.1989888,
+        "first_forecast_target_s": 31.45728,
+        "observed_offsets_s": [
+          {
+            "minimum": 0.0,
+            "median": 0.0,
+            "maximum": 0.0
+          },
+          {
+            "minimum": -1.2582912000000093,
+            "median": -1.2582912000000022,
+            "maximum": -1.2582911999999737
+          },
+          {
+            "minimum": -2.5165824000000043,
+            "median": -2.5165824000000043,
+            "maximum": -2.516582399999976
+          },
+          {
+            "minimum": -3.7748736000000065,
+            "median": -3.7748736000000065,
+            "maximum": -3.774873599999978
+          },
+          {
+            "minimum": 1.2582911999999737,
+            "median": 1.2582912000000022,
+            "maximum": 1.2582912000000022
+          }
+        ]
+      },
+      "paired_rows_sha256": "a7839ea281e11cedeca286bba69cb41480244d16a7a6230db423628b04d9fdf7",
+      "scores": {
+        "all": {
+          "cases": 4000,
+          "rois": 32,
+          "mse": {
+            "fish": 0.955184510119488,
+            "worm": 0.6354872106513941,
+            "fish_new_roi": 0.8682064377768042,
+            "fish_late_time": 1.0114442111807014,
+            "persistence": 0.7289619793591005
+          },
+          "mae": {
+            "fish": 0.6860643237920308,
+            "worm": 0.5386178880799761,
+            "fish_new_roi": 0.6539426782227662,
+            "fish_late_time": 0.7076306876064862,
+            "persistence": 0.5678819463296554
+          }
+        },
+        "early": {
+          "cases": 832,
+          "rois": 32,
+          "mse": {
+            "fish": 0.9351992445810385,
+            "worm": 0.5331773401064259,
+            "fish_new_roi": 0.8325879962907343,
+            "fish_late_time": 0.9939198577649567,
+            "persistence": 0.582027494681709
+          },
+          "mae": {
+            "fish": 0.6897892699666092,
+            "worm": 0.5252673911417194,
+            "fish_new_roi": 0.65567621551843,
+            "fish_late_time": 0.7103610299228649,
+            "persistence": 0.550582952950334
+          }
+        },
+        "middle": {
+          "cases": 1600,
+          "rois": 32,
+          "mse": {
+            "fish": 1.0399342432263343,
+            "worm": 0.7163613303800049,
+            "fish_new_roi": 0.9703809837822868,
+            "fish_late_time": 1.1066568307514553,
+            "persistence": 0.8267658083568112
+          },
+          "mae": {
+            "fish": 0.7231696134506828,
+            "worm": 0.5639204578038244,
+            "fish_new_roi": 0.6931621786988283,
+            "fish_late_time": 0.7482369769124393,
+            "persistence": 0.5912545503305991
+          }
+        },
+        "late": {
+          "cases": 1568,
+          "rois": 32,
+          "mse": {
+            "fish": 0.8793096172349447,
+            "worm": 0.6072494687685087,
+            "fish_new_roi": 0.7828462781515731,
+            "fish_late_time": 0.9235871134311436,
+            "persistence": 0.7071273906188269
+          },
+          "mae": {
+            "fish": 0.6462252812722018,
+            "worm": 0.5198828765330841,
+            "fish_new_roi": 0.6130029436617385,
+            "fish_late_time": 0.6647469454529455,
+            "persistence": 0.5532114081218013
+          }
+        },
+        "low_prior_change": {
+          "cases": 2439,
+          "rois": 32,
+          "mse": {
+            "fish": 0.7531167271930057,
+            "worm": 0.5430767531868814,
+            "fish_new_roi": 0.7151476001654297,
+            "fish_late_time": 0.7975540102279849,
+            "persistence": 0.587629529659412
+          },
+          "mae": {
+            "fish": 0.6319468216617197,
+            "worm": 0.4988289802455702,
+            "fish_new_roi": 0.6069469554531229,
+            "fish_late_time": 0.6528996746157448,
+            "persistence": 0.5153042359704603
+          }
+        },
+        "high_prior_change": {
+          "cases": 1561,
+          "rois": 31,
+          "mse": {
+            "fish": 1.1464981214476901,
+            "worm": 0.761043170817714,
+            "fish_new_roi": 1.0311548950353495,
+            "fish_late_time": 1.2113289520923616,
+            "persistence": 0.8936058986824934
+          },
+          "mae": {
+            "fish": 0.7408995110474782,
+            "worm": 0.6076416670234976,
+            "fish_new_roi": 0.7064494277802214,
+            "fish_late_time": 0.7614058348629029,
+            "persistence": 0.6607036214322217
+          }
+        }
+      },
+      "worm_minus_fish_mse": -0.3196972994680939
+    },
+    "Fish13": {
+      "recording": {
+        "input_sha256": "cff0fcbb6b0bfa78db381fd5b08e6d26c06eb2918379924ea5e36a0c72c364db",
+        "sampled_frames": 430,
+        "time_span_s": 179.9356416,
+        "native_step_s": {
+          "minimum": 0.4194303999999818,
+          "median": 0.41943039999999954,
+          "maximum": 0.4194304000000102
+        },
+        "raw_roi_count_in_crop": 32,
+        "prefix_qualified_rois": 32,
+        "eligible_rois": 32,
+        "eligible_cases": 4000,
+        "first_forecast_origin_s": 30.1989888,
+        "first_forecast_target_s": 31.45728,
+        "observed_offsets_s": [
+          {
+            "minimum": 0.0,
+            "median": 0.0,
+            "maximum": 0.0
+          },
+          {
+            "minimum": -1.2582912000000093,
+            "median": -1.2582912000000022,
+            "maximum": -1.2582911999999737
+          },
+          {
+            "minimum": -2.5165824000000043,
+            "median": -2.5165824000000043,
+            "maximum": -2.516582399999976
+          },
+          {
+            "minimum": -3.7748736000000065,
+            "median": -3.7748736000000065,
+            "maximum": -3.774873599999978
+          },
+          {
+            "minimum": 1.2582911999999737,
+            "median": 1.2582912000000022,
+            "maximum": 1.2582912000000022
+          }
+        ]
+      },
+      "paired_rows_sha256": "0ef69320cd630f535d7aafd571d082b7bb7364068fb0125380a91a767efbc325",
+      "scores": {
+        "all": {
+          "cases": 4000,
+          "rois": 32,
+          "mse": {
+            "fish": 6.220815947569811,
+            "worm": 5.42826998877027,
+            "fish_new_roi": 6.257540385027359,
+            "fish_late_time": 6.641014336312956,
+            "persistence": 6.867987590260732
+          },
+          "mae": {
+            "fish": 1.1847690391498018,
+            "worm": 1.152155328445149,
+            "fish_new_roi": 1.1864481527073028,
+            "fish_late_time": 1.2110232306409936,
+            "persistence": 1.268883019048398
+          }
+        },
+        "early": {
+          "cases": 832,
+          "rois": 32,
+          "mse": {
+            "fish": 1.2776640550967928,
+            "worm": 1.4502775954033857,
+            "fish_new_roi": 1.331684591626015,
+            "fish_late_time": 1.3152979287547564,
+            "persistence": 1.8787916480944196
+          },
+          "mae": {
+            "fish": 0.8288744441542841,
+            "worm": 0.8350243126737766,
+            "fish_new_roi": 0.8451544795617454,
+            "fish_late_time": 0.8434536814222644,
+            "persistence": 0.9386223981478162
+          }
+        },
+        "middle": {
+          "cases": 1600,
+          "rois": 32,
+          "mse": {
+            "fish": 1.7208677144172906,
+            "worm": 1.6834925838189956,
+            "fish_new_roi": 1.73892319804032,
+            "fish_late_time": 1.7881675991700183,
+            "persistence": 2.0982668193114518
+          },
+          "mae": {
+            "fish": 0.9601224423164361,
+            "worm": 0.9395498468766766,
+            "fish_new_roi": 0.9705458756540186,
+            "fish_late_time": 0.9796828058796889,
+            "persistence": 1.027424070820914
+          }
+        },
+        "late": {
+          "cases": 1568,
+          "rois": 32,
+          "mse": {
+            "fish": 13.435496781486638,
+            "worm": 11.360242896425431,
+            "fish_new_roi": 13.48209364988015,
+            "fish_late_time": 14.418789100673365,
+            "persistence": 14.382378060542116
+          },
+          "mae": {
+            "fish": 1.6028422904059605,
+            "worm": 1.5373732975977878,
+            "fish_new_roi": 1.5878512007572758,
+            "fish_late_time": 1.6421217922277735,
+            "persistence": 1.6905100303706284
+          }
+        },
+        "low_prior_change": {
+          "cases": 1566,
+          "rois": 32,
+          "mse": {
+            "fish": 1.8620018280365076,
+            "worm": 1.743977071122409,
+            "fish_new_roi": 1.812562319392817,
+            "fish_late_time": 1.91667738305165,
+            "persistence": 1.914388955322913
+          },
+          "mae": {
+            "fish": 0.9505217854087226,
+            "worm": 0.8637968909754955,
+            "fish_new_roi": 0.930926869935732,
+            "fish_late_time": 0.969345471985755,
+            "persistence": 0.9042035601410969
+          }
+        },
+        "high_prior_change": {
+          "cases": 2434,
+          "rois": 32,
+          "mse": {
+            "fish": 8.331652495870856,
+            "worm": 7.472285284153477,
+            "fish_new_roi": 8.593996691662385,
+            "fish_late_time": 8.954411519721896,
+            "persistence": 9.808145858944995
+          },
+          "mae": {
+            "fish": 1.2985652011210918,
+            "worm": 1.31723991272921,
+            "fish_new_roi": 1.3159579003692372,
+            "fish_late_time": 1.3271218163860947,
+            "persistence": 1.482847379948318
+          }
+        }
+      },
+      "worm_minus_fish_mse": -0.7925459587995407
+    },
+    "Fish31": {
+      "recording": {
+        "input_sha256": "4e6aa7d3744ae01b9631211de7c5012e705e4eda02f9c7d84ba0401d1ea0c95b",
+        "sampled_frames": 430,
+        "time_span_s": 179.9356416,
+        "native_step_s": {
+          "minimum": 0.4194303999999818,
+          "median": 0.41943039999999954,
+          "maximum": 0.4194304000000102
+        },
+        "raw_roi_count_in_crop": 32,
+        "prefix_qualified_rois": 32,
+        "eligible_rois": 32,
+        "eligible_cases": 4000,
+        "first_forecast_origin_s": 30.1989888,
+        "first_forecast_target_s": 31.45728,
+        "observed_offsets_s": [
+          {
+            "minimum": 0.0,
+            "median": 0.0,
+            "maximum": 0.0
+          },
+          {
+            "minimum": -1.2582912000000093,
+            "median": -1.2582912000000022,
+            "maximum": -1.2582911999999737
+          },
+          {
+            "minimum": -2.5165824000000043,
+            "median": -2.5165824000000043,
+            "maximum": -2.516582399999976
+          },
+          {
+            "minimum": -3.7748736000000065,
+            "median": -3.7748736000000065,
+            "maximum": -3.774873599999978
+          },
+          {
+            "minimum": 1.2582911999999737,
+            "median": 1.2582912000000022,
+            "maximum": 1.2582912000000022
+          }
+        ]
+      },
+      "paired_rows_sha256": "b1ecb825ad3bb484fb461d903e154528abf2c9e1df99eb7495e4776ead1369ab",
+      "scores": {
+        "all": {
+          "cases": 4000,
+          "rois": 32,
+          "mse": {
+            "fish": 1.6098627651540292,
+            "worm": 2.007924771742928,
+            "fish_new_roi": 1.6838037740881397,
+            "fish_late_time": 1.6385080400809733,
+            "persistence": 2.5814380271122976
+          },
+          "mae": {
+            "fish": 0.7924501447572062,
+            "worm": 0.8400570379506156,
+            "fish_new_roi": 0.8151588647038255,
+            "fish_late_time": 0.7978952007512828,
+            "persistence": 0.9034052151184592
+          }
+        },
+        "early": {
+          "cases": 832,
+          "rois": 32,
+          "mse": {
+            "fish": 1.237809555377136,
+            "worm": 1.7150083380661965,
+            "fish_new_roi": 1.3790353525609655,
+            "fish_late_time": 1.2500757405301024,
+            "persistence": 2.2595710041729737
+          },
+          "mae": {
+            "fish": 0.7646856811747278,
+            "worm": 0.8341265678080066,
+            "fish_new_roi": 0.806989265248616,
+            "fish_late_time": 0.7687653722466918,
+            "persistence": 0.9080420053695415
+          }
+        },
+        "middle": {
+          "cases": 1600,
+          "rois": 32,
+          "mse": {
+            "fish": 1.2287257560880622,
+            "worm": 1.6476616880333865,
+            "fish_new_roi": 1.3512728951702035,
+            "fish_late_time": 1.2469714609179399,
+            "persistence": 2.138368155786274
+          },
+          "mae": {
+            "fish": 0.752309331446857,
+            "worm": 0.7991488412964747,
+            "fish_new_roi": 0.781274016565906,
+            "fish_late_time": 0.7582842433659894,
+            "persistence": 0.8647831641874715
+          }
+        },
+        "late": {
+          "cases": 1568,
+          "rois": 32,
+          "mse": {
+            "fish": 2.1961940693886737,
+            "worm": 2.5309652097239907,
+            "fish_new_roi": 2.18483485379433,
+            "fish_late_time": 2.24414209613147,
+            "persistence": 3.2043367243107395
+          },
+          "mae": {
+            "fish": 0.848142322689081,
+            "worm": 0.884946875836634,
+            "fish_new_roi": 0.8540701298616094,
+            "fish_late_time": 0.8537711887183038,
+            "persistence": 0.9403551334862394
+          }
+        },
+        "low_prior_change": {
+          "cases": 2172,
+          "rois": 32,
+          "mse": {
+            "fish": 1.345067041248361,
+            "worm": 1.5766948932487408,
+            "fish_new_roi": 1.3950400917840193,
+            "fish_late_time": 1.36333336104573,
+            "persistence": 1.6787056544614634
+          },
+          "mae": {
+            "fish": 0.7407633539969686,
+            "worm": 0.6742994820265936,
+            "fish_new_roi": 0.7427991327155997,
+            "fish_late_time": 0.7557709606555423,
+            "persistence": 0.666596468973628
+          }
+        },
+        "high_prior_change": {
+          "cases": 1828,
+          "rois": 32,
+          "mse": {
+            "fish": 1.6321292638766411,
+            "worm": 2.559152011579622,
+            "fish_new_roi": 1.837667462266898,
+            "fish_late_time": 1.6553383603456238,
+            "persistence": 3.7391733982883855
+          },
+          "mae": {
+            "fish": 0.8317070343170425,
+            "worm": 1.0915138485450226,
+            "fish_new_roi": 0.9045266165578542,
+            "fish_late_time": 0.8183670475766449,
+            "persistence": 1.2517191127437075
+          }
+        }
+      },
+      "worm_minus_fish_mse": 0.3980620065888987
+    },
+    "Fish32": {
+      "recording": {
+        "input_sha256": "8e0b745ba9be0cb9b3a755652f5111149c5128de7d6b6778782264cae6abbb69",
+        "sampled_frames": 430,
+        "time_span_s": 179.9356416,
+        "native_step_s": {
+          "minimum": 0.4194303999999818,
+          "median": 0.41943039999999954,
+          "maximum": 0.4194304000000102
+        },
+        "raw_roi_count_in_crop": 32,
+        "prefix_qualified_rois": 32,
+        "eligible_rois": 32,
+        "eligible_cases": 4000,
+        "first_forecast_origin_s": 30.1989888,
+        "first_forecast_target_s": 31.45728,
+        "observed_offsets_s": [
+          {
+            "minimum": 0.0,
+            "median": 0.0,
+            "maximum": 0.0
+          },
+          {
+            "minimum": -1.2582912000000093,
+            "median": -1.2582912000000022,
+            "maximum": -1.2582911999999737
+          },
+          {
+            "minimum": -2.5165824000000043,
+            "median": -2.5165824000000043,
+            "maximum": -2.516582399999976
+          },
+          {
+            "minimum": -3.7748736000000065,
+            "median": -3.7748736000000065,
+            "maximum": -3.774873599999978
+          },
+          {
+            "minimum": 1.2582911999999737,
+            "median": 1.2582912000000022,
+            "maximum": 1.2582912000000022
+          }
+        ]
+      },
+      "paired_rows_sha256": "7d36bf94ea21fd0d07664e314b9b1e479e4145eebd944eb44dcda4a6675351cf",
+      "scores": {
+        "all": {
+          "cases": 4000,
+          "rois": 32,
+          "mse": {
+            "fish": 1.4784784194404788,
+            "worm": 1.4879765022424671,
+            "fish_new_roi": 1.40347088406691,
+            "fish_late_time": 1.524381423333237,
+            "persistence": 1.806883977227443
+          },
+          "mae": {
+            "fish": 0.8927131119342399,
+            "worm": 0.8755046203943705,
+            "fish_new_roi": 0.8705717571271471,
+            "fish_late_time": 0.9065489942406115,
+            "persistence": 0.9514287159709166
+          }
+        },
+        "early": {
+          "cases": 832,
+          "rois": 32,
+          "mse": {
+            "fish": 1.3168902342656692,
+            "worm": 1.3671669178540702,
+            "fish_new_roi": 1.2766469914929544,
+            "fish_late_time": 1.3529117844495264,
+            "persistence": 1.6505284804125142
+          },
+          "mae": {
+            "fish": 0.8733524540335726,
+            "worm": 0.8546290479325672,
+            "fish_new_roi": 0.8602794845326021,
+            "fish_late_time": 0.8871897230138942,
+            "persistence": 0.9193080360332133
+          }
+        },
+        "middle": {
+          "cases": 1600,
+          "rois": 32,
+          "mse": {
+            "fish": 1.443450927948513,
+            "worm": 1.3814713456114194,
+            "fish_new_roi": 1.3517967034932474,
+            "fish_late_time": 1.4949907637780704,
+            "persistence": 1.6781254788922046
+          },
+          "mae": {
+            "fish": 0.8956515006088082,
+            "worm": 0.8531582290553992,
+            "fish_new_roi": 0.8674587210688035,
+            "fish_late_time": 0.9091558685765254,
+            "persistence": 0.9278166459322047
+          }
+        },
+        "late": {
+          "cases": 1568,
+          "rois": 32,
+          "mse": {
+            "fish": 1.5999614273821796,
+            "worm": 1.6607582782761536,
+            "fish_new_roi": 1.523493950099684,
+            "fish_late_time": 1.6453557822870086,
+            "persistence": 2.0212343411856084
+          },
+          "mae": {
+            "fish": 0.8999877582952379,
+            "worm": 0.9093838949036648,
+            "fish_new_roi": 0.8792095304001126,
+            "fish_late_time": 0.9141611847528349,
+            "persistence": 0.992566291079404
+          }
+        },
+        "low_prior_change": {
+          "cases": 1621,
+          "rois": 32,
+          "mse": {
+            "fish": 1.1872195396730005,
+            "worm": 1.252844031094523,
+            "fish_new_roi": 1.1893593198971044,
+            "fish_late_time": 1.2230820192349652,
+            "persistence": 1.4139794933975547
+          },
+          "mae": {
+            "fish": 0.7990623407387261,
+            "worm": 0.7816069258284446,
+            "fish_new_roi": 0.7936010055853093,
+            "fish_late_time": 0.8137769519577657,
+            "persistence": 0.8333366092277611
+          }
+        },
+        "high_prior_change": {
+          "cases": 2379,
+          "rois": 32,
+          "mse": {
+            "fish": 1.666136603689622,
+            "worm": 1.662896313927738,
+            "fish_new_roi": 1.5461963630729494,
+            "fish_late_time": 1.7140506321919988,
+            "persistence": 2.065800772025764
+          },
+          "mae": {
+            "fish": 0.9480686744655724,
+            "worm": 0.940720293649145,
+            "fish_new_roi": 0.9142809388468125,
+            "fish_late_time": 0.9596081265796667,
+            "persistence": 1.0324097749629946
+          }
+        }
+      },
+      "worm_minus_fish_mse": 0.009498082801988383
+    },
+    "Fish41": {
+      "recording": {
+        "input_sha256": "19bac6a0ca0fe7953a718b315fed2ffa1e9636d1e5f18a6c83864665bac1ea6d",
+        "sampled_frames": 430,
+        "time_span_s": 179.9356416,
+        "native_step_s": {
+          "minimum": 0.4194303999999818,
+          "median": 0.41943039999999954,
+          "maximum": 0.4194304000000102
+        },
+        "raw_roi_count_in_crop": 32,
+        "prefix_qualified_rois": 32,
+        "eligible_rois": 32,
+        "eligible_cases": 4000,
+        "first_forecast_origin_s": 30.1989888,
+        "first_forecast_target_s": 31.45728,
+        "observed_offsets_s": [
+          {
+            "minimum": 0.0,
+            "median": 0.0,
+            "maximum": 0.0
+          },
+          {
+            "minimum": -1.2582912000000093,
+            "median": -1.2582912000000022,
+            "maximum": -1.2582911999999737
+          },
+          {
+            "minimum": -2.5165824000000043,
+            "median": -2.5165824000000043,
+            "maximum": -2.516582399999976
+          },
+          {
+            "minimum": -3.7748736000000065,
+            "median": -3.7748736000000065,
+            "maximum": -3.774873599999978
+          },
+          {
+            "minimum": 1.2582911999999737,
+            "median": 1.2582912000000022,
+            "maximum": 1.2582912000000022
+          }
+        ]
+      },
+      "paired_rows_sha256": "ee91679d786beabfaf05a0ce41c618c4c26acf89cd7a37221f37407183b19acc",
+      "scores": {
+        "all": {
+          "cases": 4000,
+          "rois": 32,
+          "mse": {
+            "fish": 1.6294615370601477,
+            "worm": 1.1458354623427438,
+            "fish_new_roi": 1.4937380309855435,
+            "fish_late_time": 1.7180451086984017,
+            "persistence": 1.3495074952584105
+          },
+          "mae": {
+            "fish": 0.8581129572523413,
+            "worm": 0.7668068870482699,
+            "fish_new_roi": 0.8337631047250971,
+            "fish_late_time": 0.8777119086098509,
+            "persistence": 0.8388790457977822
+          }
+        },
+        "early": {
+          "cases": 832,
+          "rois": 32,
+          "mse": {
+            "fish": 1.4184455244367915,
+            "worm": 1.1907846598276144,
+            "fish_new_roi": 1.304951048688646,
+            "fish_late_time": 1.4780247828138526,
+            "persistence": 1.4113714158768345
+          },
+          "mae": {
+            "fish": 0.8623789825657359,
+            "worm": 0.8123174409934311,
+            "fish_new_roi": 0.833257876628378,
+            "fish_late_time": 0.8787493987643198,
+            "persistence": 0.8874475530760296
+          }
+        },
+        "middle": {
+          "cases": 1600,
+          "rois": 32,
+          "mse": {
+            "fish": 1.372330049837013,
+            "worm": 1.0323331762295918,
+            "fish_new_roi": 1.3029350827127972,
+            "fish_late_time": 1.444932583274405,
+            "persistence": 1.2217200173529619
+          },
+          "mae": {
+            "fish": 0.833325956657362,
+            "worm": 0.7403131323131025,
+            "fish_new_roi": 0.8196164698203957,
+            "fish_late_time": 0.8535806642651691,
+            "persistence": 0.8118774063494351
+          }
+        },
+        "late": {
+          "cases": 1568,
+          "rois": 32,
+          "mse": {
+            "fish": 2.0038082858226796,
+            "worm": 1.2378035270580687,
+            "fish_new_roi": 1.7886076014622088,
+            "fish_late_time": 2.124089083069792,
+            "persistence": 1.447077127078684
+          },
+          "mae": {
+            "fish": 0.8811422097339887,
+            "worm": 0.7696928734601921,
+            "fish_new_roi": 0.8484665266791738,
+            "fish_late_time": 0.901785122348992,
+            "persistence": 0.8406606944341686
+          }
+        },
+        "low_prior_change": {
+          "cases": 1692,
+          "rois": 32,
+          "mse": {
+            "fish": 1.4332137177746482,
+            "worm": 1.0576775397513212,
+            "fish_new_roi": 1.3983990455536914,
+            "fish_late_time": 1.5179344876035665,
+            "persistence": 1.1182041772743907
+          },
+          "mae": {
+            "fish": 0.778922397320026,
+            "worm": 0.7094681770202448,
+            "fish_new_roi": 0.7699805810844861,
+            "fish_late_time": 0.7974657006096867,
+            "persistence": 0.7551556149312694
+          }
+        },
+        "high_prior_change": {
+          "cases": 2308,
+          "rois": 32,
+          "mse": {
+            "fish": 1.7882264402115953,
+            "worm": 1.2136687605013199,
+            "fish_new_roi": 1.585470882316753,
+            "fish_late_time": 1.8814329176123679,
+            "persistence": 1.4851716705045501
+          },
+          "mae": {
+            "fish": 0.9178380766853387,
+            "worm": 0.8088788773250646,
+            "fish_new_roi": 0.8809499102688054,
+            "fish_late_time": 0.9382317257359107,
+            "persistence": 0.895288505753258
+          }
+        }
+      },
+      "worm_minus_fish_mse": -0.48362607471740393
+    },
+    "Fish47": {
+      "recording": {
+        "input_sha256": "29a68338f53ff4839bd8e8cbc87df53f794c584ad565be4c7687527dc2742bc5",
+        "sampled_frames": 430,
+        "time_span_s": 179.9356416,
+        "native_step_s": {
+          "minimum": 0.4194303999999818,
+          "median": 0.41943039999999954,
+          "maximum": 0.4194304000000102
+        },
+        "raw_roi_count_in_crop": 32,
+        "prefix_qualified_rois": 32,
+        "eligible_rois": 32,
+        "eligible_cases": 4000,
+        "first_forecast_origin_s": 30.1989888,
+        "first_forecast_target_s": 31.45728,
+        "observed_offsets_s": [
+          {
+            "minimum": 0.0,
+            "median": 0.0,
+            "maximum": 0.0
+          },
+          {
+            "minimum": -1.2582912000000093,
+            "median": -1.2582912000000022,
+            "maximum": -1.2582911999999737
+          },
+          {
+            "minimum": -2.5165824000000043,
+            "median": -2.5165824000000043,
+            "maximum": -2.516582399999976
+          },
+          {
+            "minimum": -3.7748736000000065,
+            "median": -3.7748736000000065,
+            "maximum": -3.774873599999978
+          },
+          {
+            "minimum": 1.2582911999999737,
+            "median": 1.2582912000000022,
+            "maximum": 1.2582912000000022
+          }
+        ]
+      },
+      "paired_rows_sha256": "2c63e72996be6c9284294c65748e2e16ab1310bfb1ee048c6ea5634228634329",
+      "scores": {
+        "all": {
+          "cases": 4000,
+          "rois": 32,
+          "mse": {
+            "fish": 1.5930110071335708,
+            "worm": 1.7992955746448098,
+            "fish_new_roi": 1.6391374861752142,
+            "fish_late_time": 1.6338041819737943,
+            "persistence": 2.286058667233043
+          },
+          "mae": {
+            "fish": 0.8937691257681573,
+            "worm": 0.9155848556189391,
+            "fish_new_roi": 0.9080123915768313,
+            "fish_late_time": 0.9041885866676882,
+            "persistence": 0.9988248841185119
+          }
+        },
+        "early": {
+          "cases": 832,
+          "rois": 32,
+          "mse": {
+            "fish": 1.3350505926111673,
+            "worm": 1.6278048384499022,
+            "fish_new_roi": 1.4119350995880022,
+            "fish_late_time": 1.3580468812985063,
+            "persistence": 2.0777511271178306
+          },
+          "mae": {
+            "fish": 0.8085002947270103,
+            "worm": 0.8585702037318994,
+            "fish_new_roi": 0.8292292016483701,
+            "fish_late_time": 0.8142278245501773,
+            "persistence": 0.9319386370442975
+          }
+        },
+        "middle": {
+          "cases": 1600,
+          "rois": 32,
+          "mse": {
+            "fish": 1.361415373289717,
+            "worm": 1.4257064784704019,
+            "fish_new_roi": 1.388495499217879,
+            "fish_late_time": 1.4069399932654056,
+            "persistence": 1.8212622434528432
+          },
+          "mae": {
+            "fish": 0.84025207621949,
+            "worm": 0.8279673517698878,
+            "fish_new_roi": 0.8508073250609398,
+            "fish_late_time": 0.8525318043105133,
+            "persistence": 0.9000016293706206
+          }
+        },
+        "late": {
+          "cases": 1568,
+          "rois": 32,
+          "mse": {
+            "fish": 1.9662100371289821,
+            "worm": 2.2715040225996654,
+            "fish_new_roi": 2.0154509841167294,
+            "fish_late_time": 2.0116184524427108,
+            "persistence": 2.870871263804584
+          },
+          "mae": {
+            "fish": 0.9936230458600586,
+            "worm": 1.0352431442212986,
+            "fish_new_roi": 1.008188233697945,
+            "fish_late_time": 1.0046338710128722,
+            "persistence": 1.135155601696556
+          }
+        },
+        "low_prior_change": {
+          "cases": 1760,
+          "rois": 32,
+          "mse": {
+            "fish": 1.5038293424043119,
+            "worm": 1.5432390168614862,
+            "fish_new_roi": 1.481418599897287,
+            "fish_late_time": 1.534727846668918,
+            "persistence": 1.6887023410257258
+          },
+          "mae": {
+            "fish": 0.8618659675353737,
+            "worm": 0.8084496667998572,
+            "fish_new_roi": 0.8516767915483353,
+            "fish_late_time": 0.8770826056972137,
+            "persistence": 0.8206593262061698
+          }
+        },
+        "high_prior_change": {
+          "cases": 2240,
+          "rois": 32,
+          "mse": {
+            "fish": 1.5961103172158222,
+            "worm": 2.123506460995145,
+            "fish_new_roi": 1.7329306682941887,
+            "fish_late_time": 1.6369119576151312,
+            "persistence": 3.0192334198889434
+          },
+          "mae": {
+            "fish": 0.9157183592172492,
+            "worm": 1.0655135444774928,
+            "fish_new_roi": 0.9608126525634417,
+            "fish_late_time": 0.9150611843132983,
+            "persistence": 1.2263168947665875
+          }
+        }
+      },
+      "worm_minus_fish_mse": 0.20628456751123903
+    },
+    "Fish58": {
+      "recording": {
+        "input_sha256": "f4a0fdbaf9a8d4831bcf4e410c2709a611db24fd1c9cdb28cd769051651d73b1",
+        "sampled_frames": 430,
+        "time_span_s": 179.9356416,
+        "native_step_s": {
+          "minimum": 0.4194303999999818,
+          "median": 0.41943039999999954,
+          "maximum": 0.4194304000000102
+        },
+        "raw_roi_count_in_crop": 32,
+        "prefix_qualified_rois": 32,
+        "eligible_rois": 32,
+        "eligible_cases": 4000,
+        "first_forecast_origin_s": 30.1989888,
+        "first_forecast_target_s": 31.45728,
+        "observed_offsets_s": [
+          {
+            "minimum": 0.0,
+            "median": 0.0,
+            "maximum": 0.0
+          },
+          {
+            "minimum": -1.2582912000000093,
+            "median": -1.2582912000000022,
+            "maximum": -1.2582911999999737
+          },
+          {
+            "minimum": -2.5165824000000043,
+            "median": -2.5165824000000043,
+            "maximum": -2.516582399999976
+          },
+          {
+            "minimum": -3.7748736000000065,
+            "median": -3.7748736000000065,
+            "maximum": -3.774873599999978
+          },
+          {
+            "minimum": 1.2582911999999737,
+            "median": 1.2582912000000022,
+            "maximum": 1.2582912000000022
+          }
+        ]
+      },
+      "paired_rows_sha256": "24724ed84103f2b9d27a5872613fafb3f7eeddfafda72861ec4d13099aa8fe06",
+      "scores": {
+        "all": {
+          "cases": 4000,
+          "rois": 32,
+          "mse": {
+            "fish": 1.1474340241837688,
+            "worm": 0.9061068813381334,
+            "fish_new_roi": 1.0713992781768369,
+            "fish_late_time": 1.206426828226735,
+            "persistence": 1.0770000054921012
+          },
+          "mae": {
+            "fish": 0.7713207271995033,
+            "worm": 0.6453192056035175,
+            "fish_new_roi": 0.7475320150796585,
+            "fish_late_time": 0.791946188891804,
+            "persistence": 0.6737902185703454
+          }
+        },
+        "early": {
+          "cases": 832,
+          "rois": 32,
+          "mse": {
+            "fish": 1.0878411783356787,
+            "worm": 0.7578115494827607,
+            "fish_new_roi": 0.9965851454803145,
+            "fish_late_time": 1.147713153024091,
+            "persistence": 0.8855118092916089
+          },
+          "mae": {
+            "fish": 0.7724247019021591,
+            "worm": 0.5973280798293812,
+            "fish_new_roi": 0.7347369498600388,
+            "fish_late_time": 0.7952355557939484,
+            "persistence": 0.6147827184202554
+          }
+        },
+        "middle": {
+          "cases": 1600,
+          "rois": 32,
+          "mse": {
+            "fish": 0.824235288292284,
+            "worm": 0.6381865836188008,
+            "fish_new_roi": 0.7899712121595127,
+            "fish_late_time": 0.8713770111193376,
+            "persistence": 0.7522720168469141
+          },
+          "mae": {
+            "fish": 0.6966875122083265,
+            "worm": 0.5861501035498906,
+            "fish_new_roi": 0.6827521176351286,
+            "fish_late_time": 0.7170633747976989,
+            "persistence": 0.6133735582721954
+          }
+        },
+        "late": {
+          "cases": 1568,
+          "rois": 32,
+          "mse": {
+            "fish": 1.5088493463597807,
+            "worm": 1.2581822591790783,
+            "fish_new_roi": 1.3982680690130782,
+            "fish_late_time": 1.579468591709156,
+            "persistence": 1.5099610776037768
+          },
+          "mae": {
+            "fish": 0.8468912865319477,
+            "worm": 0.7311605193343113,
+            "fish_new_roi": 0.8204231695273443,
+            "fish_late_time": 0.8666118453254675,
+            "persistence": 0.7667499740562612
+          }
+        },
+        "low_prior_change": {
+          "cases": 2184,
+          "rois": 32,
+          "mse": {
+            "fish": 0.9220640076612605,
+            "worm": 0.7017779638986975,
+            "fish_new_roi": 0.8587977663123203,
+            "fish_late_time": 0.9689962503261191,
+            "persistence": 0.7668293092577421
+          },
+          "mae": {
+            "fish": 0.7380505634336305,
+            "worm": 0.598290573081488,
+            "fish_new_roi": 0.7067235518492927,
+            "fish_late_time": 0.7580615441129259,
+            "persistence": 0.5923798908878781
+          }
+        },
+        "high_prior_change": {
+          "cases": 1816,
+          "rois": 30,
+          "mse": {
+            "fish": 1.3772346245752118,
+            "worm": 1.1292062024081246,
+            "fish_new_roi": 1.2847259452886175,
+            "fish_late_time": 1.4428866848853243,
+            "persistence": 1.3900357474290348
+          },
+          "mae": {
+            "fish": 0.8028651243466015,
+            "worm": 0.7264193604431087,
+            "fish_new_roi": 0.7884344304553405,
+            "fish_late_time": 0.8203086538867225,
+            "persistence": 0.8068177076234203
+          }
+        }
+      },
+      "worm_minus_fish_mse": -0.2413271428456354
+    }
+  },
+  "equal_animal_scores": {
+    "all": {
+      "animals": 7,
+      "cases": 28000,
+      "mse": {
+        "fish": 2.090606887237328,
+        "worm": 1.9158423416761063,
+        "fish_new_roi": 2.059613753756687,
+        "fish_late_time": 2.1962320185438284,
+        "persistence": 2.3854053917061613
+      },
+      "mae": {
+        "fish": 0.8684570614076116,
+        "worm": 0.8191494033058339,
+        "fish_new_roi": 0.8593469948775184,
+        "fish_late_time": 0.8852778282012453,
+        "persistence": 0.8861561492791525
+      }
+    },
+    "early": {
+      "animals": 7,
+      "cases": 5824,
+      "mse": {
+        "fish": 1.2298429121006105,
+        "worm": 1.234575891312908,
+        "fish_new_roi": 1.2190608893896615,
+        "fish_late_time": 1.2708557326622558,
+        "persistence": 1.5350789970925558
+      },
+      "mae": {
+        "fish": 0.8000008326462998,
+        "worm": 0.7596090063015402,
+        "fish_new_roi": 0.7950462104283115,
+        "fish_late_time": 0.8139975122448802,
+        "persistence": 0.8215320430059269
+      }
+    },
+    "middle": {
+      "animals": 7,
+      "cases": 11200,
+      "mse": {
+        "fish": 1.2844227647284592,
+        "worm": 1.2178875980232289,
+        "fish_new_roi": 1.2705393677966068,
+        "fish_late_time": 1.3371480346109474,
+        "persistence": 1.5052543628570658
+      },
+      "mae": {
+        "fish": 0.814502633272566,
+        "worm": 0.7586011375236079,
+        "fish_new_roi": 0.8093738149291456,
+        "fish_late_time": 0.8312193911582894,
+        "persistence": 0.8195044321804915
+      }
+    },
+    "late": {
+      "animals": 7,
+      "cases": 10976,
+      "mse": {
+        "fish": 3.3699756521148396,
+        "worm": 2.9895293802901284,
+        "fish_new_roi": 3.3107993409311076,
+        "fish_late_time": 3.5638643171063777,
+        "persistence": 3.734712283592048
+      },
+      "mae": {
+        "fish": 0.9598363135412109,
+        "worm": 0.912526211698139,
+        "fish_new_roi": 0.9444588192264571,
+        "fish_late_time": 0.978261707119884,
+        "persistence": 0.988458447606437
+      }
+    },
+    "low_prior_change": {
+      "animals": 7,
+      "cases": 13434,
+      "mse": {
+        "fish": 1.2866446005701564,
+        "worm": 1.202755324166294,
+        "fish_new_roi": 1.2643892490003812,
+        "fish_late_time": 1.3317579083084194,
+        "persistence": 1.3097770657713146
+      },
+      "mae": {
+        "fish": 0.785876175727881,
+        "worm": 0.7049629565682421,
+        "fish_new_roi": 0.7718078411674112,
+        "fish_late_time": 0.8034861299478049,
+        "persistence": 0.7268051009054662
+      }
+    },
+    "high_prior_change": {
+      "animals": 7,
+      "cases": 14566,
+      "mse": {
+        "fish": 2.505426838126777,
+        "worm": 2.4173940291975917,
+        "fish_new_roi": 2.5160204154195918,
+        "fish_late_time": 2.6423372892092436,
+        "persistence": 3.2001666808234526
+      },
+      "mae": {
+        "fish": 0.9222374258857676,
+        "worm": 0.9368467863132202,
+        "fish_new_roi": 0.9244874109773875,
+        "fish_late_time": 0.9343006270487487,
+        "persistence": 1.0508718567472153
+      }
+    }
+  },
+  "primary": {
+    "worm_minus_fish_mse": -0.17476454556122115,
+    "relative_change_percent_vs_fish": -8.35951257159432,
+    "animals_improved": 4,
+    "omit_one_animal_mean_differences": {
+      "Fish02": -0.15060908657674232,
+      "Fish13": -0.07180097668816786,
+      "Fish31": -0.2702356375862411,
+      "Fish32": -0.20547498362175606,
+      "Fish41": -0.12328762403519067,
+      "Fish47": -0.23827273107329783,
+      "Fish58": -0.1636707793471521
+    },
+    "mse_over_persistence": {
+      "fish": 0.8764157633357327,
+      "worm": 0.8031516774202476,
+      "fish_new_roi": 0.8634229472767093,
+      "fish_late_time": 0.9206955036573358
+    }
+  }
+}

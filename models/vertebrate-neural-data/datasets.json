@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "edition": "2026-11-21.1",
+  "edition": "2026-11-21.2",
   "unit_of_inventory": "one cited deposit, not an independent animal, laboratory, species, or model test",
   "scope": "Fifteen vertebrate neural recording deposits. Birds are within the reptile lineage. The release includes a non-avian turtle. A second salamander deposit shares investigators and does not establish an independent cohort.",
   "recording_coverage": "Each entry identifies a particular recorded signal or a stored response derived from it. File evidence covers only the stated example. Source digests describe the archive object unless marked as locally measured.",
@@ -511,7 +511,8 @@
           "range_bytes": 180224
         }
       },
-      "model_evidence": "No model evaluation in this register."
+      "model_evidence": "One fish supplied training examples. Seven other fish supplied the same held-out observations for forecasts fitted with and without worm fluorescence.",
+      "fluorescence_evaluation": "https://eliminatenoise.github.io/NeuroTranslation/worm-to-vertebrate/"
     },
     {
       "id": "rat-w-track",

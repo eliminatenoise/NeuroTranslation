@@ -19,3 +19,7 @@ The worm has another arrangement. Its body-wall muscles contain obliquely arrang
 ## Give each proposed use a test
 
 Choose a neural measurement and a forecast horizon that both sources support. Keep the architecture, training budget and controls fixed. Train one version on vertebrate recordings and a second with part of that training drawn from an invertebrate. Keep whole vertebrate animals and recordings out of both fits. Report error for each animal, including failures and any effect on rarely active units. A reliable improvement would support using the additional source for that task. Comparable forecasts can also arise from the same indicator chemistry, filtering or sampling rate. Establishing a shared developmental mechanism would require independent developmental measurements and a prediction that distinguishes that mechanism from those alternatives.
+
+## A test using activity recorded over time
+
+Can four recent brightness readings predict the next one in a fish’s forebrain? One experiment replaced a quarter of a fish’s training examples with calcium recordings from eight worms, then scored the same forecasts on seven unseen fish. This tests how well a particular signal carries across recordings. The development of a circuit and the forces it produces remain separate questions. [See the matched forecasts and every fish’s result](https://eliminatenoise.github.io/NeuroTranslation/worm-to-vertebrate/).
