@@ -203,3 +203,9 @@ docs/next-neuron-prediction/*.cmd whitespace=cr-at-eol
 # Keep the pinned scoring code, fitted coefficients and dataset-register downloads byte stable.
 models/vertebrate-neural-data/** -text
 docs/vertebrate-neural-data/** -text
+
+# Preserve the published checkpoint, runtime, input sources and checksums on checkout.
+models/neurotranslate-0.0/joint_alpha/** -text
+models/training-scale/** -text
+docs/joint-alpha/** -text
+"models/neurotranslate-0.0/Demo on Windows.cmd" -text whitespace=cr-at-eol

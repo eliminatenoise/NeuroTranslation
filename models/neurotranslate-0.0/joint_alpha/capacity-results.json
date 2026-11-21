@@ -1,0 +1,1123 @@
+{
+  "metric": "Within each task, equally weight the held groups on its primary error: per-case mean absolute error, four-knot mean Euclidean distance for pelvis, Poisson NLL for counts, log loss for rat. Divide by the corresponding inner-train constant or uniform-candidate prior score, lower better. Average the two macaque tasks for their domain, and the two human tasks for theirs. Average the resulting five domain ratios, giving equal weight to macaque, human, rat, optical fluorescence and landmark views. Lowest aggregate wins, regardless of size. Report all task and domain results; numerical ties within 1e-8 use lower median latency.",
+  "selected": {
+    "width": 32,
+    "heads": 4,
+    "depth": 1,
+    "ff_width": 64,
+    "learning_rate": 0.0015,
+    "steps": 1920,
+    "schedule": "warmup_cosine",
+    "aggregate": 0.6837153696394658,
+    "median_latency_seconds": 6.914552068337798e-05
+  },
+  "candidates": [
+    {
+      "depth": 1,
+      "ff_width": 64,
+      "heads": 4,
+      "width": 32,
+      "learning_rate": 0.0015,
+      "steps": 480,
+      "seed": 431,
+      "schedule": "constant",
+      "aggregate": 0.686221889584705,
+      "task_scores": {
+        "human_leg_emg": {
+          "primary": "mae",
+          "score": 10.709437370300293,
+          "prior": 17.839935302734375,
+          "ratio": 0.6003069623609469,
+          "domain": "human"
+        },
+        "human_sacrum_path": {
+          "primary": "mean_knot_distance_mm",
+          "score": 3.81719708442688,
+          "prior": 6.363187313079834,
+          "ratio": 0.5998875872442808,
+          "domain": "human"
+        },
+        "landmark_motion": {
+          "primary": "mae",
+          "score": 0.2012438178062439,
+          "prior": 0.21256980299949646,
+          "ratio": 0.9467187482255917,
+          "domain": "landmark_motion"
+        },
+        "macaque_cortex_to_motion": {
+          "primary": "mae",
+          "score": 3.8138012886047363,
+          "prior": 4.715199947357178,
+          "ratio": 0.8088312969086993,
+          "domain": "macaque"
+        },
+        "macaque_motion_to_cortex": {
+          "primary": "poisson_nll_nats",
+          "score": 2.110448755618193,
+          "prior": 2.1856682890487016,
+          "ratio": 0.9655851101434758,
+          "domain": "macaque"
+        },
+        "optical_fluorescence": {
+          "primary": "mae",
+          "score": 0.19493654370307922,
+          "prior": 0.5814045667648315,
+          "ratio": 0.33528553927222216,
+          "domain": "optical_fluorescence"
+        },
+        "rat_next_unit": {
+          "primary": "log_loss_nats",
+          "score": 2.830296277999878,
+          "prior": 4.276666119016055,
+          "ratio": 0.6617996820970098,
+          "domain": "rat_next_unit"
+        }
+      },
+      "domain_scores": {
+        "human": 0.6000972748026139,
+        "landmark_motion": 0.9467187482255917,
+        "macaque": 0.8872082035260875,
+        "optical_fluorescence": 0.33528553927222216,
+        "rat_next_unit": 0.6617996820970098
+      },
+      "median_latency_seconds": 6.67559215798974e-05,
+      "parameters": 21445,
+      "fit_seconds": 3.0345587249612436,
+      "training_device": "cpu",
+      "peak_rss_kib": 1053968,
+      "gpu_peak_allocated_bytes": null,
+      "checkpoint_sha256": "ddd680883e233e7a5a7b9fb9b2fe280ca9960dd40c1a2e9fc8e2b411f65cfda6"
+    },
+    {
+      "depth": 2,
+      "ff_width": 128,
+      "heads": 4,
+      "width": 64,
+      "learning_rate": 0.0015,
+      "steps": 480,
+      "seed": 431,
+      "schedule": "constant",
+      "aggregate": 0.7004979617371038,
+      "task_scores": {
+        "human_leg_emg": {
+          "primary": "mae",
+          "score": 10.787396430969238,
+          "prior": 17.839935302734375,
+          "ratio": 0.6046768807124443,
+          "domain": "human"
+        },
+        "human_sacrum_path": {
+          "primary": "mean_knot_distance_mm",
+          "score": 3.8328113555908203,
+          "prior": 6.363187313079834,
+          "ratio": 0.6023414315829261,
+          "domain": "human"
+        },
+        "landmark_motion": {
+          "primary": "mae",
+          "score": 0.20199063420295715,
+          "prior": 0.21256980299949646,
+          "ratio": 0.9502320242703317,
+          "domain": "landmark_motion"
+        },
+        "macaque_cortex_to_motion": {
+          "primary": "mae",
+          "score": 4.199553489685059,
+          "prior": 4.715199947357178,
+          "ratio": 0.8906416560423628,
+          "domain": "macaque"
+        },
+        "macaque_motion_to_cortex": {
+          "primary": "poisson_nll_nats",
+          "score": 2.2072177034277596,
+          "prior": 2.1856682890487016,
+          "ratio": 1.0098594166768267,
+          "domain": "macaque"
+        },
+        "optical_fluorescence": {
+          "primary": "mae",
+          "score": 0.1954929232597351,
+          "prior": 0.5814045667648315,
+          "ratio": 0.3362424969372639,
+          "domain": "optical_fluorescence"
+        },
+        "rat_next_unit": {
+          "primary": "log_loss_nats",
+          "score": 2.8322460651397705,
+          "prior": 4.276666119016055,
+          "ratio": 0.6622555949706435,
+          "domain": "rat_next_unit"
+        }
+      },
+      "domain_scores": {
+        "human": 0.6035091561476852,
+        "landmark_motion": 0.9502320242703317,
+        "macaque": 0.9502505363595948,
+        "optical_fluorescence": 0.3362424969372639,
+        "rat_next_unit": 0.6622555949706435
+      },
+      "median_latency_seconds": 0.00011738203465938568,
+      "parameters": 92741,
+      "fit_seconds": 7.3550182320177555,
+      "training_device": "cpu",
+      "peak_rss_kib": 1055208,
+      "gpu_peak_allocated_bytes": null,
+      "checkpoint_sha256": "4dcc826ace15aac18a799fc937660c3007023167df08ebf86b384c3a990f0050"
+    },
+    {
+      "depth": 3,
+      "ff_width": 256,
+      "heads": 8,
+      "width": 128,
+      "learning_rate": 0.0005,
+      "steps": 480,
+      "seed": 431,
+      "schedule": "constant",
+      "aggregate": 0.6922213339361147,
+      "task_scores": {
+        "human_leg_emg": {
+          "primary": "mae",
+          "score": 10.840736389160156,
+          "prior": 17.839935302734375,
+          "ratio": 0.6076667995258126,
+          "domain": "human"
+        },
+        "human_sacrum_path": {
+          "primary": "mean_knot_distance_mm",
+          "score": 3.766214370727539,
+          "prior": 6.363187313079834,
+          "ratio": 0.5918754525716863,
+          "domain": "human"
+        },
+        "landmark_motion": {
+          "primary": "mae",
+          "score": 0.19634023308753967,
+          "prior": 0.21256980299949646,
+          "ratio": 0.9236506329546947,
+          "domain": "landmark_motion"
+        },
+        "macaque_cortex_to_motion": {
+          "primary": "mae",
+          "score": 3.981207847595215,
+          "prior": 4.715199947357178,
+          "ratio": 0.8443348939691607,
+          "domain": "macaque"
+        },
+        "macaque_motion_to_cortex": {
+          "primary": "poisson_nll_nats",
+          "score": 2.1867141296235575,
+          "prior": 2.1856682890487016,
+          "ratio": 1.0004784992215408,
+          "domain": "macaque"
+        },
+        "optical_fluorescence": {
+          "primary": "mae",
+          "score": 0.20505490899085999,
+          "prior": 0.5814045667648315,
+          "ratio": 0.35268885164055014,
+          "domain": "optical_fluorescence"
+        },
+        "rat_next_unit": {
+          "primary": "log_loss_nats",
+          "score": 2.8336734771728516,
+          "prior": 4.276666119016055,
+          "ratio": 0.6625893624412286,
+          "domain": "rat_next_unit"
+        }
+      },
+      "domain_scores": {
+        "human": 0.5997711260487495,
+        "landmark_motion": 0.9236506329546947,
+        "macaque": 0.9224066965953508,
+        "optical_fluorescence": 0.35268885164055014,
+        "rat_next_unit": 0.6625893624412286
+      },
+      "median_latency_seconds": 0.00020463601686060429,
+      "parameters": 449093,
+      "fit_seconds": 9.784552694996819,
+      "training_device": "cuda",
+      "peak_rss_kib": 1562112,
+      "gpu_peak_allocated_bytes": 257253376,
+      "checkpoint_sha256": "69319d426d0712a498448c06f26fecba0440985381264cf85788ae82313255da"
+    },
+    {
+      "depth": 3,
+      "ff_width": 256,
+      "heads": 8,
+      "width": 128,
+      "learning_rate": 0.0015,
+      "steps": 480,
+      "seed": 431,
+      "schedule": "constant",
+      "aggregate": 0.7143621161604672,
+      "task_scores": {
+        "human_leg_emg": {
+          "primary": "mae",
+          "score": 10.865803718566895,
+          "prior": 17.839935302734375,
+          "ratio": 0.6090719239829006,
+          "domain": "human"
+        },
+        "human_sacrum_path": {
+          "primary": "mean_knot_distance_mm",
+          "score": 3.875917434692383,
+          "prior": 6.363187313079834,
+          "ratio": 0.6091157220415703,
+          "domain": "human"
+        },
+        "landmark_motion": {
+          "primary": "mae",
+          "score": 0.2028137445449829,
+          "prior": 0.21256980299949646,
+          "ratio": 0.9541042127487098,
+          "domain": "landmark_motion"
+        },
+        "macaque_cortex_to_motion": {
+          "primary": "mae",
+          "score": 4.141877174377441,
+          "prior": 4.715199947357178,
+          "ratio": 0.8784096582582722,
+          "domain": "macaque"
+        },
+        "macaque_motion_to_cortex": {
+          "primary": "poisson_nll_nats",
+          "score": 2.468703588117457,
+          "prior": 2.1856682890487016,
+          "ratio": 1.129495999226829,
+          "domain": "macaque"
+        },
+        "optical_fluorescence": {
+          "primary": "mae",
+          "score": 0.19902488589286804,
+          "prior": 0.5814045667648315,
+          "ratio": 0.3423173763500387,
+          "domain": "optical_fluorescence"
+        },
+        "rat_next_unit": {
+          "primary": "log_loss_nats",
+          "score": 2.8326170444488525,
+          "prior": 4.276666119016055,
+          "ratio": 0.6623423399488012,
+          "domain": "rat_next_unit"
+        }
+      },
+      "domain_scores": {
+        "human": 0.6090938230122354,
+        "landmark_motion": 0.9541042127487098,
+        "macaque": 1.0039528287425505,
+        "optical_fluorescence": 0.3423173763500387,
+        "rat_next_unit": 0.6623423399488012
+      },
+      "median_latency_seconds": 0.00020030804444104433,
+      "parameters": 449093,
+      "fit_seconds": 9.523308149073273,
+      "training_device": "cuda",
+      "peak_rss_kib": 1609528,
+      "gpu_peak_allocated_bytes": 257253376,
+      "checkpoint_sha256": "bdb700312c1fcfddce29c7d99f9a63d7ee39672bea5744326eb548338a25fa9b"
+    },
+    {
+      "depth": 4,
+      "ff_width": 512,
+      "heads": 8,
+      "width": 256,
+      "learning_rate": 0.0005,
+      "steps": 480,
+      "seed": 431,
+      "schedule": "constant",
+      "aggregate": 0.707253110187119,
+      "task_scores": {
+        "human_leg_emg": {
+          "primary": "mae",
+          "score": 10.690086364746094,
+          "prior": 17.839935302734375,
+          "ratio": 0.5992222608064949,
+          "domain": "human"
+        },
+        "human_sacrum_path": {
+          "primary": "mean_knot_distance_mm",
+          "score": 3.7316291332244873,
+          "prior": 6.363187313079834,
+          "ratio": 0.5864402459996654,
+          "domain": "human"
+        },
+        "landmark_motion": {
+          "primary": "mae",
+          "score": 0.20721109211444855,
+          "prior": 0.21256980299949646,
+          "ratio": 0.9747908178422661,
+          "domain": "landmark_motion"
+        },
+        "macaque_cortex_to_motion": {
+          "primary": "mae",
+          "score": 4.05792236328125,
+          "prior": 4.715199947357178,
+          "ratio": 0.8606045148850315,
+          "domain": "macaque"
+        },
+        "macaque_motion_to_cortex": {
+          "primary": "poisson_nll_nats",
+          "score": 2.4212943178420425,
+          "prior": 2.1856682890487016,
+          "ratio": 1.1078050269448232,
+          "domain": "macaque"
+        },
+        "optical_fluorescence": {
+          "primary": "mae",
+          "score": 0.188060462474823,
+          "prior": 0.5814045667648315,
+          "ratio": 0.32345886706956384,
+          "domain": "optical_fluorescence"
+        },
+        "rat_next_unit": {
+          "primary": "log_loss_nats",
+          "score": 2.8267900943756104,
+          "prior": 4.276666119016055,
+          "ratio": 0.660979841705758,
+          "domain": "rat_next_unit"
+        }
+      },
+      "domain_scores": {
+        "human": 0.5928312534030802,
+        "landmark_motion": 0.9747908178422661,
+        "macaque": 0.9842047709149273,
+        "optical_fluorescence": 0.32345886706956384,
+        "rat_next_unit": 0.660979841705758
+      },
+      "median_latency_seconds": 0.00047221092972904444,
+      "parameters": 2211909,
+      "fit_seconds": 13.661444360972382,
+      "training_device": "cuda",
+      "peak_rss_kib": 1567312,
+      "gpu_peak_allocated_bytes": 406625280,
+      "checkpoint_sha256": "bf7e7ff517ab0515dbd49c6af1fed588d2ec49b7552e615ed345acad309a2ff3"
+    },
+    {
+      "depth": 4,
+      "ff_width": 512,
+      "heads": 8,
+      "width": 256,
+      "learning_rate": 0.0015,
+      "steps": 480,
+      "seed": 431,
+      "schedule": "constant",
+      "aggregate": 0.7214313605690357,
+      "task_scores": {
+        "human_leg_emg": {
+          "primary": "mae",
+          "score": 11.121350288391113,
+          "prior": 17.839935302734375,
+          "ratio": 0.6233963352258634,
+          "domain": "human"
+        },
+        "human_sacrum_path": {
+          "primary": "mean_knot_distance_mm",
+          "score": 3.9752204418182373,
+          "prior": 6.363187313079834,
+          "ratio": 0.6247215815330444,
+          "domain": "human"
+        },
+        "landmark_motion": {
+          "primary": "mae",
+          "score": 0.21128955483436584,
+          "prior": 0.21256980299949646,
+          "ratio": 0.993977281123351,
+          "domain": "landmark_motion"
+        },
+        "macaque_cortex_to_motion": {
+          "primary": "mae",
+          "score": 4.21704626083374,
+          "prior": 4.715199947357178,
+          "ratio": 0.8943515244135835,
+          "domain": "macaque"
+        },
+        "macaque_motion_to_cortex": {
+          "primary": "poisson_nll_nats",
+          "score": 2.5116223030123455,
+          "prior": 2.1856682890487016,
+          "ratio": 1.1491324258108322,
+          "domain": "macaque"
+        },
+        "optical_fluorescence": {
+          "primary": "mae",
+          "score": 0.17453816533088684,
+          "prior": 0.5814045667648315,
+          "ratio": 0.3002008847334779,
+          "domain": "optical_fluorescence"
+        },
+        "rat_next_unit": {
+          "primary": "log_loss_nats",
+          "score": 2.8532962799072266,
+          "prior": 4.276666119016055,
+          "ratio": 0.6671777034966884,
+          "domain": "rat_next_unit"
+        }
+      },
+      "domain_scores": {
+        "human": 0.6240589583794538,
+        "landmark_motion": 0.993977281123351,
+        "macaque": 1.0217419751122079,
+        "optical_fluorescence": 0.3002008847334779,
+        "rat_next_unit": 0.6671777034966884
+      },
+      "median_latency_seconds": 0.0004836129955947399,
+      "parameters": 2211909,
+      "fit_seconds": 13.702857404015958,
+      "training_device": "cuda",
+      "peak_rss_kib": 1570068,
+      "gpu_peak_allocated_bytes": 406625280,
+      "checkpoint_sha256": "03b9a135eb67f31682115b15d34d3bae8885db7bcbe2fbb4ec0854659be67f7b"
+    },
+    {
+      "depth": 6,
+      "ff_width": 1024,
+      "heads": 8,
+      "width": 512,
+      "learning_rate": 0.0005,
+      "steps": 480,
+      "seed": 431,
+      "schedule": "constant",
+      "aggregate": 0.7094685875785351,
+      "task_scores": {
+        "human_leg_emg": {
+          "primary": "mae",
+          "score": 10.941673278808594,
+          "prior": 17.839935302734375,
+          "ratio": 0.6133247174462305,
+          "domain": "human"
+        },
+        "human_sacrum_path": {
+          "primary": "mean_knot_distance_mm",
+          "score": 3.88924503326416,
+          "prior": 6.363187313079834,
+          "ratio": 0.6112102067574896,
+          "domain": "human"
+        },
+        "landmark_motion": {
+          "primary": "mae",
+          "score": 0.20101132988929749,
+          "prior": 0.21256980299949646,
+          "ratio": 0.9456250467041815,
+          "domain": "landmark_motion"
+        },
+        "macaque_cortex_to_motion": {
+          "primary": "mae",
+          "score": 4.210414409637451,
+          "prior": 4.715199947357178,
+          "ratio": 0.8929450408560821,
+          "domain": "macaque"
+        },
+        "macaque_motion_to_cortex": {
+          "primary": "poisson_nll_nats",
+          "score": 2.4828785008695573,
+          "prior": 2.1856682890487016,
+          "ratio": 1.135981389907164,
+          "domain": "macaque"
+        },
+        "optical_fluorescence": {
+          "primary": "mae",
+          "score": 0.17848172783851624,
+          "prior": 0.5814045667648315,
+          "ratio": 0.3069837047061055,
+          "domain": "optical_fluorescence"
+        },
+        "rat_next_unit": {
+          "primary": "log_loss_nats",
+          "score": 2.856827974319458,
+          "prior": 4.276666119016055,
+          "ratio": 0.668003508998906,
+          "domain": "rat_next_unit"
+        }
+      },
+      "domain_scores": {
+        "human": 0.61226746210186,
+        "landmark_motion": 0.9456250467041815,
+        "macaque": 1.014463215381623,
+        "optical_fluorescence": 0.3069837047061055,
+        "rat_next_unit": 0.668003508998906
+      },
+      "median_latency_seconds": 0.0028055949369445443,
+      "parameters": 12824645,
+      "fit_seconds": 49.85794072400313,
+      "training_device": "cuda",
+      "peak_rss_kib": 1610476,
+      "gpu_peak_allocated_bytes": 979726336,
+      "checkpoint_sha256": "a15225340db692a21ee80991f19be58e0e52087dbdb8caa06b92603d4cd67044"
+    },
+    {
+      "depth": 6,
+      "ff_width": 1024,
+      "heads": 8,
+      "width": 512,
+      "learning_rate": 0.0015,
+      "steps": 480,
+      "seed": 431,
+      "schedule": "constant",
+      "aggregate": 0.7265508720955136,
+      "task_scores": {
+        "human_leg_emg": {
+          "primary": "mae",
+          "score": 11.633857727050781,
+          "prior": 17.839935302734375,
+          "ratio": 0.6521244348496953,
+          "domain": "human"
+        },
+        "human_sacrum_path": {
+          "primary": "mean_knot_distance_mm",
+          "score": 4.481662750244141,
+          "prior": 6.363187313079834,
+          "ratio": 0.7043109890906197,
+          "domain": "human"
+        },
+        "landmark_motion": {
+          "primary": "mae",
+          "score": 0.2044643759727478,
+          "prior": 0.21256980299949646,
+          "ratio": 0.9618693393305358,
+          "domain": "landmark_motion"
+        },
+        "macaque_cortex_to_motion": {
+          "primary": "mae",
+          "score": 4.647029876708984,
+          "prior": 4.715199947357178,
+          "ratio": 0.9855424857038348,
+          "domain": "macaque"
+        },
+        "macaque_motion_to_cortex": {
+          "primary": "poisson_nll_nats",
+          "score": 2.307439432272266,
+          "prior": 2.1856682890487016,
+          "ratio": 1.0557134601959954,
+          "domain": "macaque"
+        },
+        "optical_fluorescence": {
+          "primary": "mae",
+          "score": 0.17879460752010345,
+          "prior": 0.5814045667648315,
+          "ratio": 0.30752184922624265,
+          "domain": "optical_fluorescence"
+        },
+        "rat_next_unit": {
+          "primary": "log_loss_nats",
+          "score": 2.841919422149658,
+          "prior": 4.276666119016055,
+          "ratio": 0.664517487000717,
+          "domain": "rat_next_unit"
+        }
+      },
+      "domain_scores": {
+        "human": 0.6782177119701576,
+        "landmark_motion": 0.9618693393305358,
+        "macaque": 1.020627972949915,
+        "optical_fluorescence": 0.30752184922624265,
+        "rat_next_unit": 0.664517487000717
+      },
+      "median_latency_seconds": 0.0026011179434135556,
+      "parameters": 12824645,
+      "fit_seconds": 50.62392210494727,
+      "training_device": "cuda",
+      "peak_rss_kib": 1609988,
+      "gpu_peak_allocated_bytes": 979726336,
+      "checkpoint_sha256": "f5d26af735c25e11bca659ac39115b0a01dd60c9defaa11df5aac9902a65b689"
+    }
+  ],
+  "refinement_candidates": [
+    {
+      "width": 32,
+      "heads": 4,
+      "depth": 1,
+      "ff_width": 64,
+      "learning_rate": 0.0015,
+      "steps": 480,
+      "schedule": "constant",
+      "aggregate": 0.688344138893783,
+      "median_latency_seconds": 6.865442264825106e-05,
+      "seed_scores": [
+        {
+          "depth": 1,
+          "ff_width": 64,
+          "heads": 4,
+          "width": 32,
+          "learning_rate": 0.0015,
+          "steps": 480,
+          "seed": 431,
+          "schedule": "constant",
+          "aggregate": 0.686221889584705,
+          "task_scores": {
+            "human_leg_emg": {
+              "primary": "mae",
+              "score": 10.709437370300293,
+              "prior": 17.839935302734375,
+              "ratio": 0.6003069623609469,
+              "domain": "human"
+            },
+            "human_sacrum_path": {
+              "primary": "mean_knot_distance_mm",
+              "score": 3.81719708442688,
+              "prior": 6.363187313079834,
+              "ratio": 0.5998875872442808,
+              "domain": "human"
+            },
+            "landmark_motion": {
+              "primary": "mae",
+              "score": 0.2012438178062439,
+              "prior": 0.21256980299949646,
+              "ratio": 0.9467187482255917,
+              "domain": "landmark_motion"
+            },
+            "macaque_cortex_to_motion": {
+              "primary": "mae",
+              "score": 3.8138012886047363,
+              "prior": 4.715199947357178,
+              "ratio": 0.8088312969086993,
+              "domain": "macaque"
+            },
+            "macaque_motion_to_cortex": {
+              "primary": "poisson_nll_nats",
+              "score": 2.110448755618193,
+              "prior": 2.1856682890487016,
+              "ratio": 0.9655851101434758,
+              "domain": "macaque"
+            },
+            "optical_fluorescence": {
+              "primary": "mae",
+              "score": 0.19493654370307922,
+              "prior": 0.5814045667648315,
+              "ratio": 0.33528553927222216,
+              "domain": "optical_fluorescence"
+            },
+            "rat_next_unit": {
+              "primary": "log_loss_nats",
+              "score": 2.830296277999878,
+              "prior": 4.276666119016055,
+              "ratio": 0.6617996820970098,
+              "domain": "rat_next_unit"
+            }
+          },
+          "domain_scores": {
+            "human": 0.6000972748026139,
+            "landmark_motion": 0.9467187482255917,
+            "macaque": 0.8872082035260875,
+            "optical_fluorescence": 0.33528553927222216,
+            "rat_next_unit": 0.6617996820970098
+          },
+          "median_latency_seconds": 6.67559215798974e-05,
+          "parameters": 21445,
+          "fit_seconds": 3.0345587249612436,
+          "training_device": "cpu",
+          "peak_rss_kib": 1053968,
+          "gpu_peak_allocated_bytes": null,
+          "checkpoint_sha256": "ddd680883e233e7a5a7b9fb9b2fe280ca9960dd40c1a2e9fc8e2b411f65cfda6"
+        },
+        {
+          "depth": 1,
+          "ff_width": 64,
+          "heads": 4,
+          "width": 32,
+          "learning_rate": 0.0015,
+          "steps": 480,
+          "seed": 827,
+          "schedule": "constant",
+          "aggregate": 0.6904663882028611,
+          "task_scores": {
+            "human_leg_emg": {
+              "primary": "mae",
+              "score": 11.072474479675293,
+              "prior": 17.839935302734375,
+              "ratio": 0.6206566499138696,
+              "domain": "human"
+            },
+            "human_sacrum_path": {
+              "primary": "mean_knot_distance_mm",
+              "score": 4.067918300628662,
+              "prior": 6.363187313079834,
+              "ratio": 0.6392894158980458,
+              "domain": "human"
+            },
+            "landmark_motion": {
+              "primary": "mae",
+              "score": 0.19987532496452332,
+              "prior": 0.21256980299949646,
+              "ratio": 0.9402808966473793,
+              "domain": "landmark_motion"
+            },
+            "macaque_cortex_to_motion": {
+              "primary": "mae",
+              "score": 3.871958017349243,
+              "prior": 4.715199947357178,
+              "ratio": 0.8211651808147472,
+              "domain": "macaque"
+            },
+            "macaque_motion_to_cortex": {
+              "primary": "poisson_nll_nats",
+              "score": 2.1207845842985957,
+              "prior": 2.1856682890487016,
+              "ratio": 0.9703140201671013,
+              "domain": "macaque"
+            },
+            "optical_fluorescence": {
+              "primary": "mae",
+              "score": 0.1901620328426361,
+              "prior": 0.5814045667648315,
+              "ratio": 0.3270735107926207,
+              "domain": "optical_fluorescence"
+            },
+            "rat_next_unit": {
+              "primary": "log_loss_nats",
+              "score": 2.819455862045288,
+              "prior": 4.276666119016055,
+              "ratio": 0.6592649001774233,
+              "domain": "rat_next_unit"
+            }
+          },
+          "domain_scores": {
+            "human": 0.6299730329059576,
+            "landmark_motion": 0.9402808966473793,
+            "macaque": 0.8957396004909243,
+            "optical_fluorescence": 0.3270735107926207,
+            "rat_next_unit": 0.6592649001774233
+          },
+          "median_latency_seconds": 7.055292371660471e-05,
+          "parameters": 21445,
+          "fit_seconds": 3.217225746018812,
+          "training_device": "cpu",
+          "peak_rss_kib": 1028376,
+          "gpu_peak_allocated_bytes": null,
+          "checkpoint_sha256": "58f6ea93606153b887c5d7af334a9d1bfa0a565aabd3f905d9fc477aa1382a06"
+        }
+      ]
+    },
+    {
+      "width": 32,
+      "heads": 4,
+      "depth": 1,
+      "ff_width": 64,
+      "learning_rate": 0.0015,
+      "steps": 1920,
+      "schedule": "warmup_cosine",
+      "aggregate": 0.6837153696394658,
+      "median_latency_seconds": 6.914552068337798e-05,
+      "seed_scores": [
+        {
+          "depth": 1,
+          "ff_width": 64,
+          "heads": 4,
+          "width": 32,
+          "learning_rate": 0.0015,
+          "steps": 1920,
+          "seed": 431,
+          "schedule": "warmup_cosine",
+          "aggregate": 0.6828433607135133,
+          "task_scores": {
+            "human_leg_emg": {
+              "primary": "mae",
+              "score": 10.471588134765625,
+              "prior": 17.839935302734375,
+              "ratio": 0.5869745577586605,
+              "domain": "human"
+            },
+            "human_sacrum_path": {
+              "primary": "mean_knot_distance_mm",
+              "score": 3.537205934524536,
+              "prior": 6.363187313079834,
+              "ratio": 0.555885872989098,
+              "domain": "human"
+            },
+            "landmark_motion": {
+              "primary": "mae",
+              "score": 0.1986066848039627,
+              "prior": 0.21256980299949646,
+              "ratio": 0.9343127857367077,
+              "domain": "landmark_motion"
+            },
+            "macaque_cortex_to_motion": {
+              "primary": "mae",
+              "score": 4.134142875671387,
+              "prior": 4.715199947357178,
+              "ratio": 0.8767693675405075,
+              "domain": "macaque"
+            },
+            "macaque_motion_to_cortex": {
+              "primary": "poisson_nll_nats",
+              "score": 2.2482992088300415,
+              "prior": 2.1856682890487016,
+              "ratio": 1.028655272209032,
+              "domain": "macaque"
+            },
+            "optical_fluorescence": {
+              "primary": "mae",
+              "score": 0.1735798418521881,
+              "prior": 0.5814045667648315,
+              "ratio": 0.29855259448348687,
+              "domain": "optical_fluorescence"
+            },
+            "rat_next_unit": {
+              "primary": "log_loss_nats",
+              "score": 2.8106629848480225,
+              "prior": 4.276666119016055,
+              "ratio": 0.6572088880987229,
+              "domain": "rat_next_unit"
+            }
+          },
+          "domain_scores": {
+            "human": 0.5714302153738793,
+            "landmark_motion": 0.9343127857367077,
+            "macaque": 0.9527123198747698,
+            "optical_fluorescence": 0.29855259448348687,
+            "rat_next_unit": 0.6572088880987229
+          },
+          "median_latency_seconds": 6.819900590926409e-05,
+          "parameters": 21445,
+          "fit_seconds": 11.470042990986258,
+          "training_device": "cpu",
+          "peak_rss_kib": 1054304,
+          "gpu_peak_allocated_bytes": null,
+          "checkpoint_sha256": "010c0bd16cf09f8e00b529fd5c0261f4f2b8da07b66bc7090cb550830c4b891c"
+        },
+        {
+          "depth": 1,
+          "ff_width": 64,
+          "heads": 4,
+          "width": 32,
+          "learning_rate": 0.0015,
+          "steps": 1920,
+          "seed": 827,
+          "schedule": "warmup_cosine",
+          "aggregate": 0.6845873785654183,
+          "task_scores": {
+            "human_leg_emg": {
+              "primary": "mae",
+              "score": 10.4859619140625,
+              "prior": 17.839935302734375,
+              "ratio": 0.5877802657981214,
+              "domain": "human"
+            },
+            "human_sacrum_path": {
+              "primary": "mean_knot_distance_mm",
+              "score": 3.565401792526245,
+              "prior": 6.363187313079834,
+              "ratio": 0.56031696335536,
+              "domain": "human"
+            },
+            "landmark_motion": {
+              "primary": "mae",
+              "score": 0.20119112730026245,
+              "prior": 0.21256980299949646,
+              "ratio": 0.9464708743261103,
+              "domain": "landmark_motion"
+            },
+            "macaque_cortex_to_motion": {
+              "primary": "mae",
+              "score": 4.162718296051025,
+              "prior": 4.715199947357178,
+              "ratio": 0.8828296450894277,
+              "domain": "macaque"
+            },
+            "macaque_motion_to_cortex": {
+              "primary": "poisson_nll_nats",
+              "score": 2.201397111259451,
+              "prior": 2.1856682890487016,
+              "ratio": 1.0071963446098198,
+              "domain": "macaque"
+            },
+            "optical_fluorescence": {
+              "primary": "mae",
+              "score": 0.1747991442680359,
+              "prior": 0.5814045667648315,
+              "ratio": 0.30064976138850874,
+              "domain": "optical_fluorescence"
+            },
+            "rat_next_unit": {
+              "primary": "log_loss_nats",
+              "score": 2.808720350265503,
+              "prior": 4.276666119016055,
+              "ratio": 0.6567546476861077,
+              "domain": "rat_next_unit"
+            }
+          },
+          "domain_scores": {
+            "human": 0.5740486145767407,
+            "landmark_motion": 0.9464708743261103,
+            "macaque": 0.9450129948496238,
+            "optical_fluorescence": 0.30064976138850874,
+            "rat_next_unit": 0.6567546476861077
+          },
+          "median_latency_seconds": 7.009203545749187e-05,
+          "parameters": 21445,
+          "fit_seconds": 11.413260082015768,
+          "training_device": "cpu",
+          "peak_rss_kib": 1055308,
+          "gpu_peak_allocated_bytes": null,
+          "checkpoint_sha256": "def1526b7af83398ca8440cde2e54b23e1b43f55ddae1049dce23531cfa68318"
+        }
+      ]
+    },
+    {
+      "width": 256,
+      "heads": 8,
+      "depth": 4,
+      "ff_width": 512,
+      "learning_rate": 0.0005,
+      "steps": 1920,
+      "schedule": "warmup_cosine",
+      "aggregate": 0.7162948404889027,
+      "median_latency_seconds": 0.0004774464759975672,
+      "seed_scores": [
+        {
+          "depth": 4,
+          "ff_width": 512,
+          "heads": 8,
+          "width": 256,
+          "learning_rate": 0.0005,
+          "steps": 1920,
+          "seed": 431,
+          "schedule": "warmup_cosine",
+          "aggregate": 0.7142886238460184,
+          "task_scores": {
+            "human_leg_emg": {
+              "primary": "mae",
+              "score": 10.195088386535645,
+              "prior": 17.839935302734375,
+              "ratio": 0.5714756367402866,
+              "domain": "human"
+            },
+            "human_sacrum_path": {
+              "primary": "mean_knot_distance_mm",
+              "score": 3.617873430252075,
+              "prior": 6.363187313079834,
+              "ratio": 0.5685630883150908,
+              "domain": "human"
+            },
+            "landmark_motion": {
+              "primary": "mae",
+              "score": 0.2025403380393982,
+              "prior": 0.21256980299949646,
+              "ratio": 0.9528180163947274,
+              "domain": "landmark_motion"
+            },
+            "macaque_cortex_to_motion": {
+              "primary": "mae",
+              "score": 4.179912090301514,
+              "prior": 4.715199947357178,
+              "ratio": 0.8864761064150233,
+              "domain": "macaque"
+            },
+            "macaque_motion_to_cortex": {
+              "primary": "poisson_nll_nats",
+              "score": 2.8358023659681164,
+              "prior": 2.1856682890487016,
+              "ratio": 1.2974532229693378,
+              "domain": "macaque"
+            },
+            "optical_fluorescence": {
+              "primary": "mae",
+              "score": 0.17507055401802063,
+              "prior": 0.5814045667648315,
+              "ratio": 0.30111657875716985,
+              "domain": "optical_fluorescence"
+            },
+            "rat_next_unit": {
+              "primary": "log_loss_nats",
+              "score": 2.803459405899048,
+              "prior": 4.276666119016055,
+              "ratio": 0.6555244968583256,
+              "domain": "rat_next_unit"
+            }
+          },
+          "domain_scores": {
+            "human": 0.5700193625276887,
+            "landmark_motion": 0.9528180163947274,
+            "macaque": 1.0919646646921806,
+            "optical_fluorescence": 0.30111657875716985,
+            "rat_next_unit": 0.6555244968583256
+          },
+          "median_latency_seconds": 0.00047690095379948616,
+          "parameters": 2211909,
+          "fit_seconds": 54.53692021407187,
+          "training_device": "cuda",
+          "peak_rss_kib": 1546280,
+          "gpu_peak_allocated_bytes": 406625280,
+          "checkpoint_sha256": "75ea9cad20bd9e0077c359982f01fafa1d909ee9a3ddb3108d67aa96c0b48419"
+        },
+        {
+          "depth": 4,
+          "ff_width": 512,
+          "heads": 8,
+          "width": 256,
+          "learning_rate": 0.0005,
+          "steps": 1920,
+          "seed": 827,
+          "schedule": "warmup_cosine",
+          "aggregate": 0.7183010571317869,
+          "task_scores": {
+            "human_leg_emg": {
+              "primary": "mae",
+              "score": 10.358694076538086,
+              "prior": 17.839935302734375,
+              "ratio": 0.5806463925320615,
+              "domain": "human"
+            },
+            "human_sacrum_path": {
+              "primary": "mean_knot_distance_mm",
+              "score": 3.6397361755371094,
+              "prior": 6.363187313079834,
+              "ratio": 0.5719989050228741,
+              "domain": "human"
+            },
+            "landmark_motion": {
+              "primary": "mae",
+              "score": 0.20219264924526215,
+              "prior": 0.21256980299949646,
+              "ratio": 0.9511823711185408,
+              "domain": "landmark_motion"
+            },
+            "macaque_cortex_to_motion": {
+              "primary": "mae",
+              "score": 4.150600910186768,
+              "prior": 4.715199947357178,
+              "ratio": 0.88025978887982,
+              "domain": "macaque"
+            },
+            "macaque_motion_to_cortex": {
+              "primary": "poisson_nll_nats",
+              "score": 2.842680211111991,
+              "prior": 2.1856682890487016,
+              "ratio": 1.3006000157275694,
+              "domain": "macaque"
+            },
+            "optical_fluorescence": {
+              "primary": "mae",
+              "score": 0.18489503860473633,
+              "prior": 0.5814045667648315,
+              "ratio": 0.31801442433375876,
+              "domain": "optical_fluorescence"
+            },
+            "rat_next_unit": {
+              "primary": "log_loss_nats",
+              "score": 2.803593873977661,
+              "prior": 4.276666119016055,
+              "ratio": 0.6555559391254728,
+              "domain": "rat_next_unit"
+            }
+          },
+          "domain_scores": {
+            "human": 0.5763226487774677,
+            "landmark_motion": 0.9511823711185408,
+            "macaque": 1.0904299023036947,
+            "optical_fluorescence": 0.31801442433375876,
+            "rat_next_unit": 0.6555559391254728
+          },
+          "median_latency_seconds": 0.0004779919981956482,
+          "parameters": 2211909,
+          "fit_seconds": 54.55919295095373,
+          "training_device": "cuda",
+          "peak_rss_kib": 1568236,
+          "gpu_peak_allocated_bytes": 406625280,
+          "checkpoint_sha256": "28322e100bcb2a5cca185c6198a9239bcfce7b3e332d8d05898872a80118eab5"
+        }
+      ]
+    }
+  ],
+  "selected_full_refit_seed": 431,
+  "evaluation_scope": "Training-internal grouped validation only. Comparison spans the enumerated widths, learning rates, durations and seeds."
+}

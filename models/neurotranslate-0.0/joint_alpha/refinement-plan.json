@@ -1,0 +1,11 @@
+{
+  "reason": "At 480 updates the model draws 15,360 cases per task, fewer than the 54,578 sorted-rat development cases. Larger models may benefit from longer training. This single extra round was defined before external held outcomes or second-rate selection were available.",
+  "inner_folds": "Reuse exactly the original grouped inner folds, validation examples and five-domain normalized error. Seal all eight 480-step search outcomes before launching refinement. No additional adaptive rounds.",
+  "incumbent": "Retain the 480-step constant-rate winner as a deployment candidate. Reuse its original seed 431 fit and fit a second seed 827 for a symmetric two-seed comparison.",
+  "refinement_candidates": "Always compare width 32/depth 1, the original 480-step winner, and the best 480-step variant with width at least 256. Deduplicate identical architecture/rate combinations. For width 32 use its tested learning rate; for others retain the winning or best-wide tested rate.",
+  "updates": 1920,
+  "seeds": [431,827],
+  "schedule": "Warm up over the first 5% of updates from 0.1 to 1.0 times the chosen base rate, then cosine-decay to 0.1 times that rate over the remaining updates. The 480-step incumbent keeps its original constant rate.",
+  "selection": "For each candidate, compute the mean validation aggregate over the two predeclared seeds. Select the lowest mean; if tied within 1e-8 use lower median one-case latency. Refit on all development rows with seed 431 and exactly the winning configuration, schedule and update count. Match single-task controls to that fit. Publish both seeds and both study stages. No external held set or reserve determines selection.",
+  "sampling": "1,920 updates × 32 draws = 61,440 sampled examples per task. Sampling is by group and with replacement, so this is a draw count, not a guarantee that every distinct case appeared."
+}

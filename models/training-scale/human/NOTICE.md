@@ -1,0 +1,3 @@
+# Source and reuse
+
+Steven M. Peterson and Daniel P. Ferris recorded scalp and lower-leg voltages and tracked movement during balance tasks at the University of Michigan. They released version 1.0.3 of the recordings under CC0. This study compares how the number of training participants, examples, input groups and model width affect errors on the held comparison group. The published numerical files contain error summaries. The input recordings and fitted participant data are obtained separately by the reader. [Versioned OpenNeuro data and source terms](https://doi.org/10.18112/openneuro.ds003739.v1.0.3) · [Data paper](https://doi.org/10.1016/j.dib.2021.107635) · [Reanalysis and fitting instructions](README.md)

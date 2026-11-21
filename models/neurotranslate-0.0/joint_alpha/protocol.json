@@ -1,0 +1,17 @@
+{
+  "version": "shared-temporal-alpha-1",
+  "seed": 431,
+  "updates": 480,
+  "batch_per_task": 32,
+  "width": 32,
+  "attention_heads": 4,
+  "learning_rate": 0.0015,
+  "weight_decay": 0.001,
+  "clip_gradient_norm": 2.0,
+  "weights": "Each step draws 32 separate examples for every task, by sampling source groups uniformly then cases uniformly within each sampled group. All tasks contribute equally to the same loss. Each dense case averages over observed targets. A rank case uses the complete local sorting roster.",
+  "normalization": "Channel-specific pooled training-only mean and population scale on finite observations. One extra binary observed/missing channel per field. Missing values map to zero after scaling. Continuous targets use train-only location and scale; counts use a train-only rate offset with an exponential link. No held-person calibration.",
+  "objectives": "Continuous targets: smooth L1 on normalized values. Counts: Poisson negative log likelihood with log mean and bounded log-rate residual. Candidate ranks: cross entropy on local candidate scores.",
+  "evaluation": "Fit the single joint checkpoint before evaluating any held split. Independently fit one control for each task with the same initialization, sampler seed, examples, architecture, optimizer and update count. Compare joint against its single-task control, a frozen training-only or causal reference where supplied, and simple training prior. Each held group has equal weight. Give all outcomes. No selection on held data. Previously examined held recordings provide retrospective assessment. No new reserves opened.",
+  "uncertainty": "Paired 95% percentile intervals over the observed held groups, 2000 draws with fixed seed, descriptive only. A single held group has no group bootstrap. Consecutive trials or recording blocks from one animal do not establish population replication.",
+  "comparators_and_mask_checks": "For the macaque count target also compare a fixed 50/50 mixture of the previous 100 ms count and the training mean. On human and macaque paired views, mask one whole source modality at a time and re-score the same held rows. Missing-modality shifts are sensitivity to this intervention, not causal contribution or a retrained specialist. Compare old trained specialists only on exact matching targets, with their inputs and seed identified."
+}

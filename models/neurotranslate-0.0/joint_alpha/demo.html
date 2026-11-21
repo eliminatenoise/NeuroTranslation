@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NeuroTranslate 0.0 joint alpha</title><link rel="stylesheet" href="/demo.css"><script src="/outcome.js" defer></script><script src="/demo.js" defer></script></head>
+<body><main>
+<header><p class="overline">NeuroTranslation · Experimental model</p><h1>NeuroTranslate 0.0 <span>joint alpha</span></h1>
+<p>Change a past reading and forecast what comes next. You can switch tasks while the same trained model stays in memory on your computer.</p></header>
+<p id="status" role="status">Loading the checkpoint…</p>
+<div id="work" hidden>
+<section class="task"><form id="outcome-form"><label for="outcome-text">Describe the outcome</label>
+<p class="horizon">A phrase picks a task. The forecast uses the input history shown below.</p>
+<div class="intent-input"><input id="outcome-text" type="text" maxlength="500" placeholder="Where will the macaque’s hand move?" required><button>Use description</button></div></form>
+<details><summary>Use a local language-model proposal</summary><p>Paste the JSON output from the optional text encoder. Each proposal selects a supported task or virtual goal.</p><form id="proposal-form"><label>Proposal JSON<input id="proposal" type="text" maxlength="2000" required></label><button>Use proposal</button></form></details>
+<div id="intent-result" role="status"></div>
+<label for="task">What should the model forecast?</label><select id="task"></select>
+<p id="task-note"></p><p class="horizon" id="horizon"></p></section>
+<div class="pair"><section><h2>Input history</h2><p id="source">Invented example</p>
+<label id="candidate-wrap" hidden>Recorded-unit candidate<select id="candidate"></select></label>
+<label for="channel">Input channel</label><select id="channel"></select>
+<canvas id="plot" width="640" height="150" role="img" aria-label="Selected input readings, in time order"></canvas>
+<p id="range"></p>
+<div class="controls"><label>Time step<select id="step"></select></label><label>Reading <span id="unit"></span><input id="value" type="number" step="any"></label></div>
+<div class="buttons"><button id="run" class="run">Run forecast</button><button id="reset">Restore example</button></div>
+<details><summary>Use your own input</summary><p>Choose one JSON record for this task. A null channel value represents a missing reading. The file stays on this computer.</p>
+<label>Input JSON file<input id="upload" type="file" accept=".json,application/json"></label>
+<button id="save">Save this input as JSON</button></details>
+</section><section><h2>Forecast</h2><p id="forecast-note"></p>
+<div id="output" aria-live="polite"></div>
+</section></div><footer><details><summary>Which weights ran this forecast?</summary><p>The SHA-256 fingerprint identifies the checkpoint loaded when you opened the demo.</p><code id="digest"></code></details></footer>
+</div></main></body></html>

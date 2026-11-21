@@ -1,0 +1,851 @@
+{
+  "checkpoint_sha256": "f58dec8857015d84962aeb00259badf71b42d9bf7105cec35851a87826ed57d6",
+  "evaluation": "retrospective previously observed held groups; no reserved recording opened",
+  "methods": "Equal group means on each listed split. All deltas are joint minus comparator. Lower is better except top1. The count log score floors expected counts at 1e-8. Intervals resample groups within the listed split; animals and people are distinguished in each source description.",
+  "tasks": {
+    "human_leg_emg": {
+      "test": {
+        "rows": 1759,
+        "groups": 6,
+        "group_definition": "Whole person; all events and both posture sessions travel together. 18 development and six historical assessment participants. The separate reserve is excluded.",
+        "source_baseline": "Previous 32-sample per-channel measured RMS.",
+        "primary_metric": "mae",
+        "mean_scores": {
+          "joint": {
+            "mae": 10.11608600616455
+          },
+          "single_task": {
+            "mae": 9.877723693847656
+          },
+          "source_baseline": {
+            "mae": 10.275986671447754
+          },
+          "historical_specialist": {
+            "mae": 9.852506637573242
+          },
+          "training_mean_or_uniform": {
+            "mae": 16.936479568481445
+          }
+        },
+        "paired_primary_joint_minus": {
+          "single_task": {
+            "mean": 0.23836223781108856,
+            "observed_group_bootstrap95": [
+              0.140594482421875,
+              0.3259386122226715
+            ],
+            "groups": 6
+          },
+          "source_baseline": {
+            "mean": -0.15990035235881805,
+            "observed_group_bootstrap95": [
+              -0.3674079477787018,
+              -0.011522769927978516
+            ],
+            "groups": 6
+          },
+          "historical_specialist": {
+            "mean": 0.26357904076576233,
+            "observed_group_bootstrap95": [
+              0.016234540333971387,
+              0.5086161494255066
+            ],
+            "groups": 6
+          },
+          "training_mean_or_uniform": {
+            "mean": -6.820394039154053,
+            "observed_group_bootstrap95": [
+              -7.69461966753006,
+              -5.9268973708152775
+            ],
+            "groups": 6
+          }
+        },
+        "masked_modality_change_in_primary_error": {
+          "hide_scalp": 1.482816219329834,
+          "hide_muscle": 5.977242946624756,
+          "hide_sacrum": 0.928565502166748
+        },
+        "joint_mean_absolute_error_by_output": {
+          "left_tibialis_anterior": 10.502655029296875,
+          "left_soleus": 4.386931896209717,
+          "left_medial_gastrocnemius": 13.747820854187012,
+          "left_peroneus_longus": 11.483757972717285,
+          "right_tibialis_anterior": 12.597893714904785,
+          "right_soleus": 4.17021369934082,
+          "right_medial_gastrocnemius": 11.76734447479248,
+          "right_peroneus_longus": 12.27206802368164
+        },
+        "historical_specialist": "Earlier balance study, frozen early neural/muscle fusion, seed 431 (first of three published seeds). Same six historical people and original target. Prior study summarized errors over seeds.",
+        "joint_vs_single_task_direction": "higher_error",
+        "held_numpy_torch_parity": {
+          "rows": 16,
+          "max_abs": 1.52587890625e-05
+        }
+      }
+    },
+    "human_sacrum_path": {
+      "test": {
+        "rows": 1759,
+        "groups": 6,
+        "group_definition": "Whole person; all events and both posture sessions travel together. 18 development and six historical assessment participants. The separate reserve is excluded.",
+        "source_baseline": "Previous 32-sample secant velocity, per-axis constant extrapolation at each requested future knot.",
+        "primary_metric": "mean_knot_distance_mm",
+        "mean_scores": {
+          "joint": {
+            "mean_knot_distance_mm": 2.6445019245147705,
+            "endpoint_distance_mm": 4.586704730987549,
+            "coordinate_mae": 1.3161940574645996
+          },
+          "single_task": {
+            "mean_knot_distance_mm": 2.4997880458831787,
+            "endpoint_distance_mm": 4.3105788230896,
+            "coordinate_mae": 1.242618441581726
+          },
+          "source_baseline": {
+            "mean_knot_distance_mm": 3.4289066791534424,
+            "endpoint_distance_mm": 5.897956848144531,
+            "coordinate_mae": 1.6962789297103882
+          },
+          "historical_specialist": {
+            "mean_knot_distance_mm": 2.532864809036255,
+            "endpoint_distance_mm": 4.292880058288574,
+            "coordinate_mae": 1.2648435831069946
+          },
+          "training_mean_or_uniform": {
+            "mean_knot_distance_mm": 5.421498775482178,
+            "endpoint_distance_mm": 8.51028823852539,
+            "coordinate_mae": 2.5715274810791016
+          }
+        },
+        "paired_primary_joint_minus": {
+          "single_task": {
+            "mean": 0.14471371471881866,
+            "observed_group_bootstrap95": [
+              0.08770767599344254,
+              0.19396289363503455
+            ],
+            "groups": 6
+          },
+          "source_baseline": {
+            "mean": -0.7844049334526062,
+            "observed_group_bootstrap95": [
+              -1.0234305828809738,
+              -0.5334762930870056
+            ],
+            "groups": 6
+          },
+          "historical_specialist": {
+            "mean": 0.11163685470819473,
+            "observed_group_bootstrap95": [
+              0.01889999769628048,
+              0.21771837770938873
+            ],
+            "groups": 6
+          },
+          "training_mean_or_uniform": {
+            "mean": -2.776996612548828,
+            "observed_group_bootstrap95": [
+              -3.2700698375701904,
+              -2.3314571380615234
+            ],
+            "groups": 6
+          }
+        },
+        "masked_modality_change_in_primary_error": {
+          "hide_scalp": 0.03725722059607506,
+          "hide_muscle": 0.7641052603721619,
+          "hide_sacrum": 6.686039447784424
+        },
+        "joint_mean_absolute_error_by_output": {
+          "future_mediolateral_8": 0.48968008160591125,
+          "future_superior_inferior_8": 0.4727148711681366,
+          "future_anterior_posterior_8": 0.34452375769615173,
+          "future_mediolateral_16": 1.0453083515167236,
+          "future_superior_inferior_16": 1.0803585052490234,
+          "future_anterior_posterior_16": 0.7890608906745911,
+          "future_mediolateral_24": 1.7041431665420532,
+          "future_superior_inferior_24": 1.7797117233276367,
+          "future_anterior_posterior_24": 1.2521177530288696,
+          "future_mediolateral_32": 2.436782121658325,
+          "future_superior_inferior_32": 2.6690590381622314,
+          "future_anterior_posterior_32": 1.7308696508407593
+        },
+        "historical_specialist": "Earlier balance study, frozen paired neural/muscle fusion, seed 431 (first of three published seeds). Same six historical people and original target. Prior study summarized errors over seeds.",
+        "joint_vs_single_task_direction": "higher_error",
+        "held_numpy_torch_parity": {
+          "rows": 16,
+          "max_abs": 3.814697265625e-06
+        }
+      }
+    },
+    "landmark_motion": {
+      "test_120ms": {
+        "rows": 23535,
+        "groups": 13,
+        "group_definition": "Two original development recording groups containing 9 within-video tracks (mouse open field and gerbils). Historical test retains all 14 original held recording groups. Track IDs are local; cross-recording individual identity unverified.",
+        "source_baseline": "Constant-velocity from current and most recent earlier visible point, for the requested horizon.",
+        "primary_metric": "mae",
+        "mean_scores": {
+          "joint": {
+            "mae": 0.09222293645143509
+          },
+          "single_task": {
+            "mae": 0.09135797619819641
+          },
+          "source_baseline": {
+            "mae": 0.17218515276908875
+          },
+          "training_mean_or_uniform": {
+            "mae": 0.10693828761577606
+          }
+        },
+        "paired_primary_joint_minus": {
+          "single_task": {
+            "mean": 0.0008649599622003734,
+            "observed_group_bootstrap95": [
+              -0.0006354742698022164,
+              0.0021151001623366025
+            ],
+            "groups": 13
+          },
+          "source_baseline": {
+            "mean": -0.07996223866939545,
+            "observed_group_bootstrap95": [
+              -0.1529124453663826,
+              -0.016218552086502316
+            ],
+            "groups": 13
+          },
+          "training_mean_or_uniform": {
+            "mean": -0.014715348370373249,
+            "observed_group_bootstrap95": [
+              -0.03515715980902314,
+              0.0032933234935626286
+            ],
+            "groups": 13
+          }
+        },
+        "joint_mean_absolute_error_by_output": {
+          "delta_x": 0.09677814692258835,
+          "delta_y": 0.08766773343086243
+        },
+        "joint_vs_single_task_direction": "higher_error",
+        "held_numpy_torch_parity": {
+          "rows": 16,
+          "max_abs": 1.2852251529693604e-07
+        }
+      },
+      "test_200ms": {
+        "rows": 1680,
+        "groups": 1,
+        "group_definition": "Two original development recording groups containing 9 within-video tracks (mouse open field and gerbils). Historical test retains all 14 original held recording groups. Track IDs are local; cross-recording individual identity unverified.",
+        "source_baseline": "Constant-velocity from current and most recent earlier visible point, for the requested horizon.",
+        "primary_metric": "mae",
+        "mean_scores": {
+          "joint": {
+            "mae": 0.13813957571983337
+          },
+          "single_task": {
+            "mae": 0.15073572099208832
+          },
+          "source_baseline": {
+            "mae": 0.10655868053436279
+          },
+          "training_mean_or_uniform": {
+            "mae": 0.15030941367149353
+          }
+        },
+        "paired_primary_joint_minus": {
+          "single_task": {
+            "mean": -0.012596145272254944,
+            "observed_group_bootstrap95": null,
+            "groups": 1
+          },
+          "source_baseline": {
+            "mean": 0.03158089518547058,
+            "observed_group_bootstrap95": null,
+            "groups": 1
+          },
+          "training_mean_or_uniform": {
+            "mean": -0.012169837951660156,
+            "observed_group_bootstrap95": null,
+            "groups": 1
+          }
+        },
+        "joint_mean_absolute_error_by_output": {
+          "delta_x": 0.15757328271865845,
+          "delta_y": 0.1187058761715889
+        },
+        "joint_vs_single_task_direction": "lower_or_equal_error",
+        "held_numpy_torch_parity": {
+          "rows": 16,
+          "max_abs": 1.6065314412117004e-07
+        }
+      }
+    },
+    "macaque_cortex_to_motion": {
+      "test_block1": {
+        "rows": 113,
+        "groups": 60,
+        "group_definition": "Original trial nested within date and physical block. Earlier date train only. Both physical blocks seven days later held. This is one animal.",
+        "source_baseline": "Constant-velocity extrapolation of displacement over last four intersample intervals.",
+        "primary_metric": "mae",
+        "mean_scores": {
+          "joint": {
+            "mae": 4.403834819793701
+          },
+          "single_task": {
+            "mae": 4.378889560699463
+          },
+          "source_baseline": {
+            "mae": 4.321597576141357
+          },
+          "historical_specialist": {
+            "mae": 3.273345947265625
+          },
+          "training_mean_or_uniform": {
+            "mae": 4.42772912979126
+          }
+        },
+        "paired_primary_joint_minus": {
+          "single_task": {
+            "mean": 0.02494504489004612,
+            "observed_group_bootstrap95": [
+              -0.17906494215130805,
+              0.21948307044804052
+            ],
+            "groups": 60
+          },
+          "source_baseline": {
+            "mean": 0.08223700523376465,
+            "observed_group_bootstrap95": [
+              -0.41487555429339407,
+              0.6079539746046064
+            ],
+            "groups": 60
+          },
+          "historical_specialist": {
+            "mean": 1.1304889917373657,
+            "observed_group_bootstrap95": [
+              0.8774554878473282,
+              1.399378591775894
+            ],
+            "groups": 60
+          },
+          "training_mean_or_uniform": {
+            "mean": -0.02389451302587986,
+            "observed_group_bootstrap95": [
+              -0.33641944751143454,
+              0.3000948823988437
+            ],
+            "groups": 60
+          }
+        },
+        "masked_modality_change_in_primary_error": {
+          "hide_motion": 0.5885692238807678,
+          "hide_cortex": 0.29222556948661804
+        },
+        "joint_mean_absolute_error_by_output": {
+          "delta_hand_x": 5.361116886138916,
+          "delta_hand_y": 6.969500541687012,
+          "delta_hand_z": 1.2725797891616821,
+          "delta_elbow_x": 3.1865170001983643,
+          "delta_elbow_y": 3.6074182987213135,
+          "delta_elbow_z": 1.522569179534912,
+          "delta_handle_x": 6.7986578941345215,
+          "delta_handle_y": 6.512320041656494
+        },
+        "historical_specialist": "Earlier reach-feedback-week full movement residual MLP + frozen pose/cue Transformer, ensemble of its three published seeds 17,41,73. Same 100 ms displacement endpoint. This prior specialist additionally observes cue timing.",
+        "joint_vs_single_task_direction": "higher_error",
+        "held_numpy_torch_parity": {
+          "rows": 16,
+          "max_abs": 2.384185791015625e-05
+        }
+      },
+      "test_block2": {
+        "rows": 380,
+        "groups": 214,
+        "group_definition": "Original trial nested within date and physical block. Earlier date train only. Both physical blocks seven days later held. This is one animal.",
+        "source_baseline": "Constant-velocity extrapolation of displacement over last four intersample intervals.",
+        "primary_metric": "mae",
+        "mean_scores": {
+          "joint": {
+            "mae": 4.411613464355469
+          },
+          "single_task": {
+            "mae": 4.521605491638184
+          },
+          "source_baseline": {
+            "mae": 3.993041753768921
+          },
+          "historical_specialist": {
+            "mae": 3.024054765701294
+          },
+          "training_mean_or_uniform": {
+            "mae": 4.140046119689941
+          }
+        },
+        "paired_primary_joint_minus": {
+          "single_task": {
+            "mean": -0.1099921315908432,
+            "observed_group_bootstrap95": [
+              -0.2562968835234642,
+              0.037227894458919754
+            ],
+            "groups": 214
+          },
+          "source_baseline": {
+            "mean": 0.41857197880744934,
+            "observed_group_bootstrap95": [
+              0.1699913799762726,
+              0.658242456614971
+            ],
+            "groups": 214
+          },
+          "historical_specialist": {
+            "mean": 1.387558937072754,
+            "observed_group_bootstrap95": [
+              1.2428509533405303,
+              1.532706755399704
+            ],
+            "groups": 214
+          },
+          "training_mean_or_uniform": {
+            "mean": 0.2715672552585602,
+            "observed_group_bootstrap95": [
+              0.09031962677836418,
+              0.43783867731690385
+            ],
+            "groups": 214
+          }
+        },
+        "masked_modality_change_in_primary_error": {
+          "hide_motion": 0.13690555095672607,
+          "hide_cortex": 0.04974614083766937
+        },
+        "joint_mean_absolute_error_by_output": {
+          "delta_hand_x": 5.049135208129883,
+          "delta_hand_y": 8.09689998626709,
+          "delta_hand_z": 1.0448849201202393,
+          "delta_elbow_x": 2.8366799354553223,
+          "delta_elbow_y": 3.7409112453460693,
+          "delta_elbow_z": 1.6050456762313843,
+          "delta_handle_x": 5.659026145935059,
+          "delta_handle_y": 7.2603254318237305
+        },
+        "historical_specialist": "Earlier reach-feedback-week full movement residual MLP + frozen pose/cue Transformer, ensemble of its three published seeds 17,41,73. Same 100 ms displacement endpoint. This prior specialist additionally observes cue timing.",
+        "joint_vs_single_task_direction": "lower_or_equal_error",
+        "held_numpy_torch_parity": {
+          "rows": 16,
+          "max_abs": 1.52587890625e-05
+        }
+      }
+    },
+    "macaque_motion_to_cortex": {
+      "test_block1": {
+        "rows": 113,
+        "groups": 60,
+        "group_definition": "Original trial nested within date and physical block. Earlier date train only. Both physical blocks seven days later held. This is one animal.",
+        "source_baseline": "Previous 100 ms observed contact totals.",
+        "primary_metric": "poisson_nll_nats",
+        "mean_scores": {
+          "joint": {
+            "poisson_nll_nats": 2.3669695703482794,
+            "count_mae": 2.086639165878296
+          },
+          "single_task": {
+            "poisson_nll_nats": 2.7038789363328495,
+            "count_mae": 2.4156808853149414
+          },
+          "source_baseline": {
+            "poisson_nll_nats": 6.475506928874623,
+            "count_mae": 1.2065314054489136
+          },
+          "half_persistence_half_training_rate": {
+            "poisson_nll_nats": 1.9784526474658657,
+            "count_mae": 1.7707480192184448
+          },
+          "training_mean_or_uniform": {
+            "poisson_nll_nats": 2.923027317516461,
+            "count_mae": 2.863229990005493
+          }
+        },
+        "paired_primary_joint_minus": {
+          "single_task": {
+            "mean": -0.3369093659845692,
+            "observed_group_bootstrap95": [
+              -0.4143067127211137,
+              -0.2569411022410318
+            ],
+            "groups": 60
+          },
+          "source_baseline": {
+            "mean": -4.108537358526343,
+            "observed_group_bootstrap95": [
+              -4.573956715518901,
+              -3.6476423200115202
+            ],
+            "groups": 60
+          },
+          "half_persistence_half_training_rate": {
+            "mean": 0.38851692288241413,
+            "observed_group_bootstrap95": [
+              0.34320622857391575,
+              0.4337227811645046
+            ],
+            "groups": 60
+          },
+          "training_mean_or_uniform": {
+            "mean": -0.5560577471681812,
+            "observed_group_bootstrap95": [
+              -0.6117162318489944,
+              -0.49911671652223705
+            ],
+            "groups": 60
+          }
+        },
+        "masked_modality_change_in_primary_error": {
+          "hide_motion": -0.16785072635288714,
+          "hide_cortex": 0.20409151271723952
+        },
+        "joint_mean_absolute_error_by_output": {
+          "area2_contact_2": 2.9006149768829346,
+          "area2_contact_4": 2.112309217453003,
+          "area2_contact_6": 2.899909257888794,
+          "area2_contact_10": 2.1511967182159424,
+          "area2_contact_12": 2.3341386318206787,
+          "area2_contact_13": 2.4079806804656982,
+          "area2_contact_15": 1.1300684213638306,
+          "area2_contact_16": 3.3112757205963135,
+          "area2_contact_18": 1.9545483589172363,
+          "area2_contact_19": 0.9649606943130493,
+          "area2_contact_20": 1.156190037727356,
+          "area2_contact_21": 2.8885700702667236,
+          "area2_contact_23": 2.013564348220825,
+          "area2_contact_28": 1.5162543058395386,
+          "area2_contact_33": 1.0016885995864868,
+          "area2_contact_35": 4.596688747406006,
+          "area2_contact_36": 0.9408904910087585,
+          "area2_contact_37": 0.7789527773857117,
+          "area2_contact_39": 0.7686649560928345,
+          "area2_contact_44": 0.6826689839363098,
+          "area2_contact_46": 1.8319716453552246,
+          "area2_contact_47": 0.8479621410369873,
+          "area2_contact_49": 0.823281466960907,
+          "area2_contact_53": 1.3258013725280762,
+          "area2_contact_55": 2.786238431930542,
+          "area2_contact_56": 1.11444890499115,
+          "area2_contact_58": 1.3454546928405762,
+          "area2_contact_59": 0.6202942728996277,
+          "area2_contact_64": 2.0822601318359375,
+          "area2_contact_72": 10.51589584350586,
+          "area2_contact_74": 2.6796975135803223,
+          "area2_contact_84": 1.1250993013381958,
+          "area2_contact_87": 0.868806779384613,
+          "area2_contact_88": 2.8675410747528076,
+          "area2_contact_89": 4.821325778961182,
+          "area2_contact_94": 0.8757476806640625,
+          "area2_contact_95": 2.162689447402954
+        },
+        "joint_vs_single_task_direction": "lower_or_equal_error",
+        "held_numpy_torch_parity": {
+          "rows": 16,
+          "max_abs": 5.7220458984375e-06
+        }
+      },
+      "test_block2": {
+        "rows": 380,
+        "groups": 214,
+        "group_definition": "Original trial nested within date and physical block. Earlier date train only. Both physical blocks seven days later held. This is one animal.",
+        "source_baseline": "Previous 100 ms observed contact totals.",
+        "primary_metric": "poisson_nll_nats",
+        "mean_scores": {
+          "joint": {
+            "poisson_nll_nats": 2.4711165009260836,
+            "count_mae": 2.2691969871520996
+          },
+          "single_task": {
+            "poisson_nll_nats": 2.7476492577094405,
+            "count_mae": 2.5180938243865967
+          },
+          "source_baseline": {
+            "poisson_nll_nats": 6.2311514021492656,
+            "count_mae": 1.2078807353973389
+          },
+          "half_persistence_half_training_rate": {
+            "poisson_nll_nats": 2.0094253877960315,
+            "count_mae": 1.8164700269699097
+          },
+          "training_mean_or_uniform": {
+            "poisson_nll_nats": 2.9807067374004212,
+            "count_mae": 2.9206435680389404
+          }
+        },
+        "paired_primary_joint_minus": {
+          "single_task": {
+            "mean": -0.27653275678335615,
+            "observed_group_bootstrap95": [
+              -0.3158982569684424,
+              -0.23473009057813493
+            ],
+            "groups": 214
+          },
+          "source_baseline": {
+            "mean": -3.760034901223182,
+            "observed_group_bootstrap95": [
+              -4.032003834056901,
+              -3.4889431254333045
+            ],
+            "groups": 214
+          },
+          "half_persistence_half_training_rate": {
+            "mean": 0.4616911131300524,
+            "observed_group_bootstrap95": [
+              0.43404505703768576,
+              0.4905889369331885
+            ],
+            "groups": 214
+          },
+          "training_mean_or_uniform": {
+            "mean": -0.5095902364743377,
+            "observed_group_bootstrap95": [
+              -0.5427064183503805,
+              -0.47576395993693316
+            ],
+            "groups": 214
+          }
+        },
+        "masked_modality_change_in_primary_error": {
+          "hide_motion": -0.23394904705999509,
+          "hide_cortex": 0.23245609317084973
+        },
+        "joint_mean_absolute_error_by_output": {
+          "area2_contact_2": 2.6481337547302246,
+          "area2_contact_4": 2.3815481662750244,
+          "area2_contact_6": 2.6587729454040527,
+          "area2_contact_10": 2.5707528591156006,
+          "area2_contact_12": 2.936687707901001,
+          "area2_contact_13": 3.0351364612579346,
+          "area2_contact_15": 1.1219695806503296,
+          "area2_contact_16": 4.0254225730896,
+          "area2_contact_18": 2.9257750511169434,
+          "area2_contact_19": 1.0737956762313843,
+          "area2_contact_20": 1.0982564687728882,
+          "area2_contact_21": 2.756290912628174,
+          "area2_contact_23": 2.4710824489593506,
+          "area2_contact_28": 1.3874520063400269,
+          "area2_contact_33": 1.309551477432251,
+          "area2_contact_35": 5.1299729347229,
+          "area2_contact_36": 0.9892995953559875,
+          "area2_contact_37": 0.8916923999786377,
+          "area2_contact_39": 0.8000935912132263,
+          "area2_contact_44": 0.702499270439148,
+          "area2_contact_46": 1.8500666618347168,
+          "area2_contact_47": 0.9025590419769287,
+          "area2_contact_49": 0.9347780346870422,
+          "area2_contact_53": 1.376732349395752,
+          "area2_contact_55": 2.9745306968688965,
+          "area2_contact_56": 1.2374718189239502,
+          "area2_contact_58": 1.3869391679763794,
+          "area2_contact_59": 0.6309186816215515,
+          "area2_contact_64": 2.21915602684021,
+          "area2_contact_72": 11.363659858703613,
+          "area2_contact_74": 3.0337235927581787,
+          "area2_contact_84": 1.160044550895691,
+          "area2_contact_87": 0.9427483081817627,
+          "area2_contact_88": 3.1270952224731445,
+          "area2_contact_89": 4.3438849449157715,
+          "area2_contact_94": 0.9842967391014099,
+          "area2_contact_95": 2.577500343322754
+        },
+        "joint_vs_single_task_direction": "lower_or_equal_error",
+        "held_numpy_torch_parity": {
+          "rows": 16,
+          "max_abs": 6.67572021484375e-06
+        }
+      }
+    },
+    "optical_fluorescence": {
+      "test_fish": {
+        "rows": 28000,
+        "groups": 7,
+        "group_definition": "One training fish and eight worm recordings on different dates, one subject per recording in the source. Seven distinct held zebrafish. ROIs and windows are repeated observations. No held worm assessment.",
+        "source_baseline": "Persist most recent observed fluorescence value.",
+        "primary_metric": "mae",
+        "mean_scores": {
+          "joint": {
+            "mae": 0.07070329785346985
+          },
+          "single_task": {
+            "mae": 0.0806923657655716
+          },
+          "source_baseline": {
+            "mae": 0.05012265965342522
+          },
+          "training_mean_or_uniform": {
+            "mae": 0.12456618249416351
+          }
+        },
+        "paired_primary_joint_minus": {
+          "single_task": {
+            "mean": -0.009989072568714619,
+            "observed_group_bootstrap95": [
+              -0.013127150991931558,
+              -0.006087394314818084
+            ],
+            "groups": 7
+          },
+          "source_baseline": {
+            "mean": 0.02058064006268978,
+            "observed_group_bootstrap95": [
+              0.0012962244785740045,
+              0.036532964650541545
+            ],
+            "groups": 7
+          },
+          "training_mean_or_uniform": {
+            "mean": -0.05386286973953247,
+            "observed_group_bootstrap95": [
+              -0.06621563937515021,
+              -0.039093468338251114
+            ],
+            "groups": 7
+          }
+        },
+        "joint_mean_absolute_error_by_output": {
+          "next_fluorescence": 0.07070329785346985
+        },
+        "joint_vs_single_task_direction": "lower_or_equal_error",
+        "held_numpy_torch_parity": {
+          "rows": 16,
+          "max_abs": 3.8743019104003906e-07
+        }
+      }
+    },
+    "rat_next_unit": {
+      "test_js14": {
+        "rows": 32866,
+        "groups": 10,
+        "group_definition": "Trip number within recording; one rat trained, JS14 55\u201378 inclusive; JS14 80\u201389 held, trial 79 omitted. ER1 0\u20139 external. Never equate sorted unit IDs between rats.",
+        "source_baseline": "Source fitted five-coefficient softmax model trained on JS14 trials 55\u201378. Weights fixed before historical assessment.",
+        "primary_metric": "log_loss_nats",
+        "mean_scores": {
+          "joint": {
+            "log_loss_nats": 2.785806179046631,
+            "top1": 0.2487905020049732,
+            "midrank": 7.332118791038726
+          },
+          "single_task": {
+            "log_loss_nats": 2.77939772605896,
+            "top1": 0.2497820251597866,
+            "midrank": 7.3027698174039015
+          },
+          "source_baseline": {
+            "log_loss_nats": 2.884059429168701,
+            "top1": 0.25010245977895396,
+            "midrank": 7.568557522001663
+          },
+          "training_mean_or_uniform": {
+            "log_loss_nats": 4.276666119016056,
+            "top1": 0.013888888888888892,
+            "midrank": 36.5
+          }
+        },
+        "paired_primary_joint_minus": {
+          "single_task": {
+            "mean": 0.006408286280930042,
+            "observed_group_bootstrap95": [
+              0.004925480065867305,
+              0.00801483648829162
+            ],
+            "groups": 10
+          },
+          "source_baseline": {
+            "mean": -0.0982532948255539,
+            "observed_group_bootstrap95": [
+              -0.10253427252173423,
+              -0.09372299630194902
+            ],
+            "groups": 10
+          },
+          "training_mean_or_uniform": {
+            "mean": -1.4908598922857093,
+            "observed_group_bootstrap95": [
+              -1.5230467545160098,
+              -1.4617432879575536
+            ],
+            "groups": 10
+          }
+        },
+        "joint_vs_single_task_direction": "higher_error",
+        "held_numpy_torch_parity": {
+          "rows": 16,
+          "max_abs": 2.682209014892578e-07
+        },
+        "candidates_per_row": 72
+      },
+      "test_er1": {
+        "rows": 56926,
+        "groups": 10,
+        "group_definition": "Trip number within recording; one rat trained, JS14 55\u201378 inclusive; JS14 80\u201389 held, trial 79 omitted. ER1 0\u20139 external. Never equate sorted unit IDs between rats.",
+        "source_baseline": "Source fitted five-coefficient softmax model trained on JS14 trials 55\u201378. Weights fixed before historical assessment.",
+        "primary_metric": "log_loss_nats",
+        "mean_scores": {
+          "joint": {
+            "log_loss_nats": 3.28752064704895,
+            "top1": 0.19159379507218322,
+            "midrank": 11.362624186031098
+          },
+          "single_task": {
+            "log_loss_nats": 3.28674578666687,
+            "top1": 0.1921717757658512,
+            "midrank": 11.350542110859335
+          },
+          "source_baseline": {
+            "log_loss_nats": 3.3798489570617676,
+            "top1": 0.19514900515826344,
+            "midrank": 11.564837105965458
+          },
+          "training_mean_or_uniform": {
+            "log_loss_nats": 4.804021044733256,
+            "top1": 0.008196721311475409,
+            "midrank": 61.5
+          }
+        },
+        "paired_primary_joint_minus": {
+          "single_task": {
+            "mean": 0.000774598098360002,
+            "observed_group_bootstrap95": [
+              -7.02470526448451e-05,
+              0.0015899801015621046
+            ],
+            "groups": 10
+          },
+          "source_baseline": {
+            "mean": -0.09232838451862335,
+            "observed_group_bootstrap95": [
+              -0.09627345353364944,
+              -0.08919961638748647
+            ],
+            "groups": 10
+          },
+          "training_mean_or_uniform": {
+            "mean": -1.5165005645773115,
+            "observed_group_bootstrap95": [
+              -1.545391992690296,
+              -1.4859514621517362
+            ],
+            "groups": 10
+          }
+        },
+        "joint_vs_single_task_direction": "higher_error",
+        "held_numpy_torch_parity": {
+          "rows": 16,
+          "max_abs": 1.4901161193847656e-07
+        },
+        "candidates_per_row": 122
+      }
+    }
+  }
+}

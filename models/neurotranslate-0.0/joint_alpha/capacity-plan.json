@@ -1,0 +1,48 @@
+{
+  "purpose": "Choose a model by accuracy on a grouped inner validation partition of the admitted development data. Never consult historical assessment labels for selection.",
+  "architectures": [
+    [
+      32,
+      4,
+      1,
+      64
+    ],
+    [
+      64,
+      4,
+      2,
+      128
+    ],
+    [
+      128,
+      8,
+      3,
+      256
+    ],
+    [
+      256,
+      8,
+      4,
+      512
+    ],
+    [
+      512,
+      8,
+      6,
+      1024
+    ]
+  ],
+  "order": "width, attention heads, depth, feed-forward width",
+  "training": "All candidates use the same 480 optimizer updates, seed 431, batches, grouped sampling, normalization and heads. Fit all available development groups again after selection.",
+  "validation": {
+    "macaque": "Original chronological development folds 3 and 4 are validation. The other three folds fit both tasks.",
+    "human": "Every fifth sorted development participant starting with index 3 (zero-based) held for both outputs. All postures, trials and windows stay with that person.",
+    "rat": "JS14 training trials 74 through 78 held within development. All earlier training trials fit. No cross-trial state.",
+    "fluorescence": "The last two lexically sorted development worm recordings held. Keep the sole development fish on the training side. Recompute assay offset/scale using only inner-training optical histories.",
+    "landmarks": "One complete video holds out: mice_of; fit all tracks from gerbils. Original development contains only two videos. The resulting geometry ranking has limited precision.",
+    "examples": "Evaluate every selected validation group using at most 256 original rows sampled without replacement per group under fixed seed 441 (preserves all rows of smaller groups). Identical rows across all candidates. No development rows are added to historical tests."
+  },
+  "metric": "Within each task, equally weight the held groups on its primary error: per-case mean absolute error, four-knot mean Euclidean distance for pelvis, Poisson NLL for counts, log loss for rat. Divide by the corresponding inner-train constant or uniform-candidate prior score, lower better. Average the two macaque tasks for their domain, and the two human tasks for theirs. Average the resulting five domain ratios, giving equal weight to macaque, human, rat, optical fluorescence and landmark views. Lowest aggregate wins, regardless of size. Report all task and domain results; numerical ties within 1e-8 use lower median latency.",
+  "limitations": "One validation partition and seed. Cross-domain averaging represents one explicit utility. No inference of optimal size beyond these candidates.",
+  "learning_rate_comparison": "For width 128, 256 and 512, fit both the base rate 0.0015 and 0.0005 with identical 480 mixed updates. This addition and the 512-wide candidate were frozen after source hardware timing and before inspecting candidate scores."
+}

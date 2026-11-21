@@ -1,5 +1,7 @@
 # Source credits
 
+For the new joint alpha checkpoint, its source recordings, authors and terms, see [joint alpha credits](joint_alpha/NOTICE.md). The remainder describes the separately published earlier fits and their materials.
+
 The cross-person wrist task follows the camera and event conventions of AJILE12 by Peterson and colleagues. All bundled examples and model coefficients for this task come from invented planar arm movements. The software and synthetic assets carry the package's CC0 dedication. AJILE12 is available separately under CC BY 4.0. [Software licence](LICENSE) · [AJILE12 release](https://doi.org/10.48324/dandi.000055/0.220127.0436) · [Source data licence](https://creativecommons.org/licenses/by/4.0/)
 
 The bilateral wrist endpoint task uses the recording conventions from Steven M. Peterson, Satpreet H. Singh, Benjamin Dichter, Micheal Scheid, Rajesh P. N. Rao and Bingni W. Brunton’s *AJILE12*, version 0.220127.0436 (CC BY 4.0). Its bundled histories, coordinates, voltage values, scaling constants and model weights were generated from simulation. The study of one participant and two recording days is available separately. [Versioned AJILE12 deposit](https://doi.org/10.48324/dandi.000055/0.220127.0436) · [Example source and fitting procedure](bilateral_wrist/README.md)

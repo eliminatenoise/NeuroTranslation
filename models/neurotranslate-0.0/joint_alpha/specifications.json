@@ -1,0 +1,155 @@
+{
+  "model": "NeuroTranslate 0.0",
+  "version": "shared-temporal-alpha-1",
+  "architecture": {
+    "depth": 1,
+    "ff_width": 64,
+    "heads": 4,
+    "width": 32
+  },
+  "parameter_dtype": "float32",
+  "checkpoint_compressed_bytes": 104761,
+  "uncompressed_npz_member_bytes": 158924,
+  "trainable_parameter_count": 21445,
+  "shared_trunk_parameters": 8576,
+  "trainable_parameter_bytes": 85780,
+  "sizing": "Member bytes include parameters, train-only scales, schema and NumPy headers; parameter bytes count floats alone.",
+  "training_device": "cpu",
+  "fit_seconds": 11.159149394952692,
+  "process_peak_rss_through_fit_kib": 1097668,
+  "gpu_peak_allocated_bytes": null,
+  "gpu_peak_reserved_bytes": null,
+  "memory_note": "Peak RSS includes interpreter, optimizer, input caches and CPU allocator. GPU allocator counters cover framework tensors only; driver, other jobs and full machine memory are outside their scope.",
+  "optimization": {
+    "updates": 1920,
+    "batch_per_task": 32,
+    "tasks_per_update": 7,
+    "seed": 431,
+    "learning_rate_schedule": "warmup_cosine",
+    "learning_rate": 0.0015,
+    "optimizer": "AdamW, one global mean over task losses, clip global norm 2, weight decay 0.001. Gradients propagate through every task head and the shared temporal attention by reverse-mode automatic differentiation."
+  },
+  "runtime": {
+    "hardware": "x86_64",
+    "operating_system": "Linux",
+    "numpy": "2.5.3",
+    "cpu_affinity_count": 32,
+    "blas_threads": "1",
+    "method": "Single observed development case on CPU per task. Cold end-to-end is median of three fresh processes including Python, NumPy, reading checkpoint and case, and first prediction. Warm median and p95 over 60 calls after 5 warmups, including model preprocessing and decoding. Excludes sensor capture, feature extraction, user interface and transport. Timing varies by machine."
+  },
+  "flops_note": "Nominal FP multiply/add count for one input shape, counting one multiply-accumulate as two. Includes linear maps and attention score/value products. Excludes normalization, masking, exponentials, biases, activations, data movement and framework overhead. FLOPs per training update were not measured.",
+  "tasks": {
+    "human_leg_emg": {
+      "parameter_count": {
+        "input_adapter": 1824,
+        "output_head": 264
+      },
+      "context_steps": 5,
+      "input_channels": 28,
+      "output_channels": 8,
+      "test_case_candidate_count": null,
+      "context": "Five consecutive 32-sample bins at 256 Hz. Cutoff c=ceil(rotation onset in samples)+32; c-159 through c. Each sacrum value is relative to c, available at issue. EEG missing site is NaN for both moments.",
+      "output": "Eight measured channel RMS voltages over c+1..c+32 (125 ms).",
+      "nominal_inference_flops": 56064,
+      "cold_seconds_median": 0.06135123095009476,
+      "warm_ms_median": 0.05633104592561722,
+      "warm_ms_p95": 0.060005113482475246
+    },
+    "human_sacrum_path": {
+      "parameter_count": {
+        "input_adapter": 1824,
+        "output_head": 396
+      },
+      "context_steps": 5,
+      "input_channels": 28,
+      "output_channels": 12,
+      "test_case_candidate_count": null,
+      "context": "Five consecutive 32-sample bins at 256 Hz. Cutoff c=ceil(rotation onset in samples)+32; c-159 through c. Each sacrum value is relative to c, available at issue. EEG missing site is NaN for both moments.",
+      "output": "Time-major XYZ sacrum displacement from c at samples +8,+16,+24,+32 (31.25, 62.5, 93.75, 125 ms).",
+      "nominal_inference_flops": 56320,
+      "cold_seconds_median": 0.061025337083265185,
+      "warm_ms_median": 0.05530402995646,
+      "warm_ms_p95": 0.06162300705909729
+    },
+    "landmark_motion": {
+      "parameter_count": {
+        "input_adapter": 544,
+        "output_head": 66
+      },
+      "context_steps": 5,
+      "input_channels": 8,
+      "output_channels": 2,
+      "test_case_candidate_count": null,
+      "context": "Five consecutive timed camera frames. Per-point coordinates relative to its current location, pooled offsets of matched currently eligible points, and current point relative to visible body centroid; divide by the physical radius measured at the issue frame. No atlas point or skeleton correspondence across recordings.",
+      "output": "One optical point's 2D displacement at nearest source frame to the requested 120 ms (200 ms for the 5-Hz locust camera), tolerance 40 ms. Model and extrapolator use nominal duration fixed by recording protocol. Native-unit reversal multiplies by stored per-origin body radius.",
+      "nominal_inference_flops": 42880,
+      "cold_seconds_median": 0.0652002670103684,
+      "warm_ms_median": 0.05759904161095619,
+      "warm_ms_p95": 0.06118842284195125
+    },
+    "macaque_cortex_to_motion": {
+      "parameter_count": {
+        "input_adapter": 2912,
+        "output_head": 264
+      },
+      "context_steps": 20,
+      "input_channels": 45,
+      "output_channels": 8,
+      "test_case_candidate_count": null,
+      "context": "20 consecutive completed 10-ms bins from k-20 through k-1. Optical marker positions converted from metres and handle from cm into mm. All available local sorts, including sort zero, summed once on each of 37 predeclared acquisition contacts; original guide differs across days.",
+      "output": "Endpoint displacement relative to k-1 at k+9 (100 ms).",
+      "nominal_inference_flops": 216704,
+      "cold_seconds_median": 0.05869651003740728,
+      "warm_ms_median": 0.06614503217861056,
+      "warm_ms_p95": 0.18799288664013142
+    },
+    "macaque_motion_to_cortex": {
+      "parameter_count": {
+        "input_adapter": 2912,
+        "output_head": 1221
+      },
+      "context_steps": 20,
+      "input_channels": 45,
+      "output_channels": 37,
+      "test_case_candidate_count": null,
+      "context": "20 consecutive completed 10-ms bins from k-20 through k-1. Optical marker positions converted from metres and handle from cm into mm. All available local sorts, including sort zero, summed once on each of 37 predeclared acquisition contacts; original guide differs across days.",
+      "output": "Summed source-observed contact spike counts for k through k+9 (100 ms).",
+      "nominal_inference_flops": 218560,
+      "cold_seconds_median": 0.05414771300274879,
+      "warm_ms_median": 0.06426096661016345,
+      "warm_ms_p95": 0.06659359205514193
+    },
+    "optical_fluorescence": {
+      "parameter_count": {
+        "input_adapter": 224,
+        "output_head": 33
+      },
+      "context_steps": 4,
+      "input_channels": 3,
+      "output_channels": 1,
+      "test_case_candidate_count": null,
+      "context": "Four measured points nearest \u22123.6, \u22122.4, \u22121.2 and 0 s from forecast issue, tolerances 0.36 s; grid every 1.2 s. First 32 ROIs, first 180 s, origin >=30 s. First 30 s only establish the established finite and nonconstant eligibility condition for each ROI.",
+      "output": "Next optical value at approximately +1.2 s, error tolerance 0.36 s, unit of this assay's training-history SD.",
+      "nominal_inference_flops": 35008,
+      "cold_seconds_median": 0.05775543302297592,
+      "warm_ms_median": 0.05679193418473005,
+      "warm_ms_p95": 0.05971402279101312
+    },
+    "rat_next_unit": {
+      "parameter_count": {
+        "input_adapter": 352,
+        "output_head": 33
+      },
+      "context_steps": 1,
+      "input_channels": 5,
+      "output_channels": 1,
+      "test_case_candidate_count": 72,
+      "context": "Trial-local cumulative counts and three exponentially decayed counts through the last completed occupied 1-ms bin; all source candidates retained, including inactive rows. The fifth feature marks the most recent completed bin.",
+      "output": "Source candidate in next occupied complete 1-ms bin, conditional on exactly one spike there. Multiple events unresolved; last issue censored at trial end. Forecast receives no target clock or future gap.",
+      "nominal_inference_flops": 1543680,
+      "cold_seconds_median": 0.056873087072744966,
+      "warm_ms_median": 0.11397048365324736,
+      "warm_ms_p95": 0.12149299145676194
+    }
+  }
+}

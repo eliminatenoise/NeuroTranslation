@@ -1944,7 +1944,7 @@ def later_heading():
     return f'{spell(n_later(), True)} newer studies, outside the numbered table'
 
 
-PAGE_ROWS = ('hand-search', 'shared-motion', 'whole-body', 'word-motion', 'stride', 'population-motion', 'knee-motion', 'gait-rhythm', 'knee-stride', 'finger-signals', 'finger-motion', 'finger-transfer', 'knee-moment', 'walking-force', 'walking-landmarks', 'elbow-cue', 'arm-transfer', 'scalp-forecast', 'cervical-forecast', 'neck-voltage', 'back-rotation', 'shared-back-rotation', 'muscle-tracking', 'shared-muscle-tracking', 'pedal-load', 'shared-pedal-load', 'heel-and-force', 'shared-heel-and-force', 'walking-instructions', 'walking-instruction-controls', 'cross-limb-movement', 'cross-limb-controls', 'muscle-and-motion', 'muscle-motion-controls', 'visual-balance', 'visual-balance-controls', 'muscle-spindle', 'cortical-reach', 'contact-forecast', 'target-reach', 'cylinder-rotation', 'reach-feedback', 'human-wrist', 'cross-person-wrist', 'first-use-body', 'next-neuron-prediction', 'vertebrate-neural-data', 'worm-to-vertebrate', 'neural-and-muscle-composites')      # the site pages that are not study readers and have a row of their own
+PAGE_ROWS = ('hand-search', 'shared-motion', 'whole-body', 'word-motion', 'stride', 'population-motion', 'knee-motion', 'gait-rhythm', 'knee-stride', 'finger-signals', 'finger-motion', 'finger-transfer', 'knee-moment', 'walking-force', 'walking-landmarks', 'elbow-cue', 'arm-transfer', 'scalp-forecast', 'cervical-forecast', 'neck-voltage', 'back-rotation', 'shared-back-rotation', 'muscle-tracking', 'shared-muscle-tracking', 'pedal-load', 'shared-pedal-load', 'heel-and-force', 'shared-heel-and-force', 'walking-instructions', 'walking-instruction-controls', 'cross-limb-movement', 'cross-limb-controls', 'muscle-and-motion', 'muscle-motion-controls', 'visual-balance', 'visual-balance-controls', 'muscle-spindle', 'cortical-reach', 'contact-forecast', 'target-reach', 'cylinder-rotation', 'reach-feedback', 'human-wrist', 'cross-person-wrist', 'first-use-body', 'next-neuron-prediction', 'vertebrate-neural-data', 'worm-to-vertebrate', 'neural-and-muscle-composites', 'joint-alpha')      # the site pages that are not study readers and have a row of their own
 
 
 def other_pages():
@@ -3815,7 +3815,8 @@ def walk_checks():
     return ''
 
 
-GENERAL_FITS = {   # every task folder of the general model -> who it was scored on; read a new folder's own files before classifying it
+GENERAL_FITS = {
+    'joint_alpha': 'joint alpha; separate retrospective assessment',   # every task folder of the general model -> who it was scored on; read a new folder's own files before classifying it
     'right-plate': 'unseen',          # 8 walkers; its design fixed before anyone inspected their force or muscle recordings (METHOD.md)
     'arm-transfer': 'unseen',         # 5 people, opened only after the plan, the code and the fitted model were sealed (PROTOCOL.md)
     'back_rotation': 'unseen',        # 4 people kept for the test (3 scorable), opened after the fit was fixed (PRETEST-SHA256.json)
@@ -3884,7 +3885,7 @@ _unseen_cache = []
 
 def _unseen():
     if not _unseen_cache:
-        folders = {p.name for p in (REPO / 'models' / 'neurotranslate-0.0').iterdir() if p.is_dir()}
+        folders = {p.name for p in (REPO / 'models' / 'neurotranslate-0.0').iterdir() if p.is_dir() and p.name != '__pycache__'}
         assert folders == set(GENERAL_FITS), ('classify every task folder of the general model in GENERAL_FITS, after reading its files',
                                               sorted(folders ^ set(GENERAL_FITS)))
         unseen = sorted(k for k, v in GENERAL_FITS.items() if v == 'unseen')

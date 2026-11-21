@@ -1,10 +1,20 @@
-# NeuroTranslate 0.0 movement forecasts
+# NeuroTranslate 0.0 joint alpha
+
+One checkpoint reads a short history and forecasts the next measurement. Choose the task, change a channel and run the model again. The task specifies what each channel measures and which units come out. An input layer and a readout belong to each task. All tasks update the same temporal encoder during training.
+
+**Start with the demo.** Extract the entire ZIP. Use Python 3.10 or later with NumPy installed in the same Python environment. Run `python -m pip install numpy` if needed. Open **Demo on Windows.cmd**, **Demo on macOS.command** or **Demo on Linux.sh**. If your desktop opens the launcher as text, run `python joint_demo.py` in the extracted folder. Use the Python that has NumPy installed, for example `py -3` on Windows or `python3` on macOS and Linux. After setup the demo runs offline. Keep its terminal open while you try the model.
+
+Type an outcome in the demo to select a task with the local phrase matcher. Changing tasks asks before replacing your current input with an invented example. The [optional 22,713,216-parameter sentence encoder](joint_alpha/TEXT-INPUT.md) can propose the same task locally. Its separate language weights are downloaded only if you choose to install them. Paste its JSON output under **Use a local language-model proposal**. The 21,445 physiological parameters make the forecast. A simulated hand goal opens in a separately supplied [compatible local game](joint_alpha/GAME.md).
+
+For a terminal forecast run `python predict.py` or choose a task with `python predict.py --example TASK`. Run `python predict.py --list-joint` for the channel order and units. The demo can save an input to run again with `python predict.py your-input.json`. Each forecast prints the checkpoint fingerprint. [Measured results, comparison fits and training recipe](joint_alpha/README.md) · [First-use guide](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/).
+
+## Earlier movement and spike forecasts
 
 A camera can follow a paw, a wing or a line of points along a worm. Where will those points go next? Run `python predict.py first_use_body/example.json` with the saved mixed-species fit. One frame holds a visible point still. Five frames can forecast movement. [Use your own points](first_use_body/README.md)
 
 Which recorded neuron fires next? Run `python predict.py next_neuron_prediction/example.json` on a counted spike history. Each local unit gets a probability, including units that have not yet fired. The coefficients were fitted on one rat and replayed on a second. [Use your own spike counts](next_neuron_prediction/README.md)
 
-Install Python 3 and NumPy (`python -m pip install numpy` in your Python environment). Open the **Run forecasts** launcher for your operating system to run both invented examples, or pass it your own JSON file from a terminal. The existing **Open** launchers open the results page. [Linux](Run%20forecasts%20on%20Linux.sh) · [macOS](Run%20forecasts%20on%20macOS.command) · [Windows](Run%20forecasts%20on%20Windows.cmd)
+Install Python 3 and NumPy (`python -m pip install numpy` in your Python environment). Open the **Run forecasts** launcher for a joint example, or pass it a study’s input file from a terminal. The existing **Open** launchers open the results page. [Linux](Run%20forecasts%20on%20Linux.sh) · [macOS](Run%20forecasts%20on%20macOS.command) · [Windows](Run%20forecasts%20on%20Windows.cmd)
 
 Which wrist should a model follow when the annotated reach switches sides? Give it fifteen earlier frames of both arms. It builds a frame from the shoulders, forecasts each wrist eight and fifteen frames ahead, and puts the points back into the original camera image. Run `python predict.py cross_person_wrist/example.json` on an invented reach. Compare the linear forecast with a Transformer that can see both arms, block the other arm, or replace it with an earlier one. [Use the cross-person wrist model](cross_person_wrist/README.md)
 

@@ -1,0 +1,134 @@
+{
+  "forecast_n": 54578,
+  "smaller_mean_log_losses": {
+    "1024": {
+      "ER1": {
+        "rat-linear5": 3.380454353457679,
+        "rat-hinge13": 3.301238178333914,
+        "mixed-linear5": 3.381897915124563,
+        "mixed-hinge13": 3.314502946988608
+      },
+      "turtle": {
+        "rat-linear5": 4.017537586461429,
+        "rat-hinge13": 4.067901402161639,
+        "mixed-linear5": 4.027860148517912,
+        "mixed-hinge13": 4.046406684313996
+      },
+      "turtle_declared": {
+        "rat-linear5": 3.980983660787912,
+        "rat-hinge13": 3.9725675262858,
+        "mixed-linear5": 3.9983005189197933,
+        "mixed-hinge13": 3.971713501787938
+      }
+    },
+    "4096": {
+      "ER1": {
+        "rat-linear5": 3.3831978898329615,
+        "rat-hinge13": 3.3005236855270024,
+        "mixed-linear5": 3.3766999480300153,
+        "mixed-hinge13": 3.310951168188343
+      },
+      "turtle": {
+        "rat-linear5": 4.012752939793522,
+        "rat-hinge13": 4.072330652436919,
+        "mixed-linear5": 4.017771524939519,
+        "mixed-hinge13": 4.032637396330035
+      },
+      "turtle_declared": {
+        "rat-linear5": 3.9765926401086644,
+        "rat-hinge13": 3.9708618150544375,
+        "mixed-linear5": 3.986221610709876,
+        "mixed-hinge13": 3.959506434275356
+      }
+    },
+    "16384": {
+      "ER1": {
+        "rat-linear5": 3.379913175729598,
+        "rat-hinge13": 3.296345469893384,
+        "mixed-linear5": 3.374545705818464,
+        "mixed-hinge13": 3.3076425632304463
+      },
+      "turtle": {
+        "rat-linear5": 4.011041931474046,
+        "rat-hinge13": 4.0712161908795235,
+        "mixed-linear5": 4.01508343875786,
+        "mixed-hinge13": 4.030076450397456
+      },
+      "turtle_declared": {
+        "rat-linear5": 3.974495349584681,
+        "rat-hinge13": 3.969615652941055,
+        "mixed-linear5": 3.9829799616527555,
+        "mixed-hinge13": 3.956263110913904
+      }
+    }
+  },
+  "predictions": {
+    "ER1": {
+      "plateau": {
+        "rat-linear5": 3.379913175729598,
+        "rat-hinge13": 3.296345469893384,
+        "mixed-linear5": 3.374545705818464,
+        "mixed-hinge13": 3.3076425632304463
+      },
+      "log_slope": {
+        "rat-linear5": 3.377061991483786,
+        "rat-hinge13": 3.292718712064451,
+        "mixed-linear5": 3.3726757892102124,
+        "mixed-hinge13": 3.3047706413417464
+      },
+      "tiny_only": {
+        "rat-linear5": 3.380454353457679,
+        "rat-hinge13": 3.301238178333914,
+        "mixed-linear5": 3.381897915124563,
+        "mixed-hinge13": 3.314502946988608
+      }
+    },
+    "turtle": {
+      "plateau": {
+        "rat-linear5": 4.011041931474046,
+        "rat-hinge13": 4.0712161908795235,
+        "mixed-linear5": 4.01508343875786,
+        "mixed-hinge13": 4.030076450397456
+      },
+      "log_slope": {
+        "rat-linear5": 4.009556748955437,
+        "rat-hinge13": 4.070248820467665,
+        "mixed-linear5": 4.0127501370666465,
+        "mixed-hinge13": 4.027853508470831
+      },
+      "tiny_only": {
+        "rat-linear5": 4.017537586461429,
+        "rat-hinge13": 4.067901402161639,
+        "mixed-linear5": 4.027860148517912,
+        "mixed-hinge13": 4.046406684313996
+      }
+    },
+    "turtle_declared": {
+      "plateau": {
+        "rat-linear5": 3.974495349584681,
+        "rat-hinge13": 3.969615652941055,
+        "mixed-linear5": 3.9829799616527555,
+        "mixed-hinge13": 3.956263110913904
+      },
+      "log_slope": {
+        "rat-linear5": 3.972674867949841,
+        "rat-hinge13": 3.9685339643454585,
+        "mixed-linear5": 3.980166158554139,
+        "mixed-hinge13": 3.9534478544924165
+      },
+      "tiny_only": {
+        "rat-linear5": 3.980983660787912,
+        "rat-hinge13": 3.9725675262858,
+        "mixed-linear5": 3.9983005189197933,
+        "mixed-hinge13": 3.971713501787938
+      }
+    }
+  },
+  "slope_multiplier": 0.8680159539280544,
+  "small_scores_sha256": {
+    "1024": "39a69ad35002a57a1898ac1a37bbb1a3b5f4a38325e7624981c335e52f4b43b6",
+    "4096": "f077ef6fff9e586be4637998d76ec125a2a8d2951ae4cdcbc5c2863aa83c9687",
+    "16384": "2dc4331df71181aeb827e4f139754ec960ee015f466845c3c60785bbf1dac815"
+  },
+  "protocol_sha256": "add60d6e73d434ec7cef2342f18b4f2555bf02e18e48bcb6639fc261885c9cc3"
+}

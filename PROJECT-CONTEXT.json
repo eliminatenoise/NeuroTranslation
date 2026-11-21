@@ -1642,5 +1642,27 @@
     "reach": "One macaque, one later day, two sensors, two horizons, three architectures and prespecified baselines.",
     "balance": "Surface EMG and sacrum motion in six historically examined held participants. No learned grouping won on both targets.",
     "geometry": "Adding modelled muscle–tendon lengths did not improve the handle endpoint forecast in both workspaces."
+  },
+  "neurotranslate_joint_alpha": {
+    "model": "NeuroTranslate 0.0 joint alpha",
+    "checkpoint": "models/neurotranslate-0.0/joint_alpha/neurotranslate.npz",
+    "checkpoint_sha256": "f58dec8857015d84962aeb00259badf71b42d9bf7105cec35851a87826ed57d6",
+    "default_entry": "models/neurotranslate-0.0/predict.py",
+    "interactive_demo": "models/neurotranslate-0.0/joint_demo.py",
+    "package": "models/neurotranslate-0.0.zip",
+    "guide": "docs/joint-alpha/index.html",
+    "model_card": "docs/joint-alpha/model-card.html",
+    "training_and_results": "models/neurotranslate-0.0/joint_alpha/README.md",
+    "scale_studies": "models/training-scale/README.md",
+    "tasks": [
+      "human_leg_emg",
+      "human_sacrum_path",
+      "landmark_motion",
+      "macaque_cortex_to_motion",
+      "macaque_motion_to_cortex",
+      "optical_fluorescence",
+      "rat_next_unit"
+    ],
+    "domain": "Seven heads and one jointly trained temporal encoder. Earlier input and output measurements are paired only within their original recording. Eleven retrospective comparisons include five with lower primary error than the matched single-task models and six with higher error."
   }
 }

@@ -1,9 +1,10 @@
 # The website
 
-This folder is served as [eliminatenoise.github.io/NeuroTranslation](https://eliminatenoise.github.io/NeuroTranslation/START.html). Everything in it runs in the browser. A recording you open is read on your own computer and goes nowhere.
+This folder is served as [eliminatenoise.github.io/NeuroTranslation](https://eliminatenoise.github.io/NeuroTranslation/START.html). It links browser readers and downloadable models. The joint alpha demo needs local Python with NumPy. A recording you open is read on your own computer and goes nowhere.
 
 | Page | What it is |
 | --- | --- |
+| [NeuroTranslate 0.0 joint alpha](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/) | Download the joint checkpoint, open the offline demo and compare its forecasts with the published baselines. |
 | [`START.html`](https://eliminatenoise.github.io/NeuroTranslation/START.html) | The start page. The finding so far, invented examples to try, and a list that matches each open dataset to the page that reads it. |
 | [`index.html`](https://eliminatenoise.github.io/NeuroTranslation/index.html) | NeuroTranslator, the app. It shows a recording on its own clock, lines several recordings up on a shared clock, and replays a palm trial against the fitted palm models. |
 | {{ spell(n_readers(), True) }} folders, from `cemhsey-arrays/` to `wrist-replay/` (excluding the other readers listed below){{ other_pages() and '' }} | The study readers of the numbered table, one per folder. Each reads a recording of the kind one study used and runs that study's forecasts on it, or shows the study's results. |

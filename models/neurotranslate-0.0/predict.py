@@ -164,6 +164,11 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT, *, wrist_case=None, wr
                    wrist_modality=None):
     if not isinstance(record, dict):
         raise ValueError("Expected a JSON input object.")
+    if record.get("domain") == "joint_alpha" or ("task" in record and "X" in record and "domain" not in record):
+        from joint_alpha.product import Product, WEIGHTS
+        if any(value is not None for value in (wrist_case, wrist_treatment, wrist_modality)):
+            raise ValueError("Wrist endpoint options require a wrist-forecast-v1 input.")
+        return Product(WEIGHTS if Path(checkpoint) == DEFAULT_CHECKPOINT else checkpoint).predict(record)
     if record.get("domain") == "bilateral_wrist_endpoint" or {"format", "weights", "cases"} <= record.keys():
         from bilateral_wrist.forecast import forecast as predict_wrists
         if Path(checkpoint) != DEFAULT_CHECKPOINT:
@@ -327,16 +332,34 @@ def predict_record(record, checkpoint=DEFAULT_CHECKPOINT, *, wrist_case=None, wr
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path, help="JSON first-use optical landmarks, next recorded unit, cross-person wrist positions, bilateral wrist endpoints, cross-limb movement, muscle activity and sacrum path, visual balance, walking instruction, heel movement and force, pedal load change, muscle length change, back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
+    parser.add_argument("input", type=Path, nargs="?", help="JSON first-use optical landmarks, next recorded unit, cross-person wrist positions, bilateral wrist endpoints, cross-limb movement, muscle activity and sacrum path, visual balance, walking instruction, heel movement and force, pedal load change, muscle length change, back-sensor rotation, cervical voltage, right-plate force, knee-moment, wrist-angle, knee-angle, spatial or rat population input")
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
     parser.add_argument("--wrist-case", type=int, help="Index in a bilateral wrist package (default 0)")
     parser.add_argument("--wrist-treatment", choices=("anchored", "direct", "bounded_zero"),
                         help="Wrist displacement model (default anchored)")
     parser.add_argument("--wrist-modality", choices=("full", "pose"),
                         help="Earlier pose with voltage, or earlier pose alone (default full)")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--list-joint", action="store_true", help="show the joint alpha tasks, inputs and output units")
+    mode.add_argument("--example", metavar="TASK", help="forecast the invented input for a joint alpha task")
     args = parser.parse_args()
+    if args.input and (args.example or args.list_joint):
+        parser.error("Choose an input file or a joint example.")
     try:
-        result = predict_record(json.loads(args.input.read_text()), args.checkpoint, wrist_case=args.wrist_case,
+        if args.input:
+            record = json.loads(args.input.read_text(encoding="utf-8"))
+        else:
+            from joint_alpha.product import Product, WEIGHTS, examples
+            if args.list_joint:
+                model = Product(WEIGHTS if args.checkpoint == DEFAULT_CHECKPOINT else args.checkpoint)
+                print(json.dumps(model.catalog(), ensure_ascii=False, indent=2))
+                parser.exit()
+            cases = examples()
+            task = args.example or next(iter(cases))
+            if task not in cases:
+                parser.error("Unknown task. Run --list-joint for the available names.")
+            record = cases[task]
+        result = predict_record(record, args.checkpoint, wrist_case=args.wrist_case,
                                 wrist_treatment=args.wrist_treatment, wrist_modality=args.wrist_modality)
         print(json.dumps(result, allow_nan=False))
     except (ValueError, KeyError, TypeError, OSError) as exc:

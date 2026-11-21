@@ -1,5 +1,7 @@
 # NeuroTranslate 0.0
 
+**[NeuroTranslate 0.0 joint alpha](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/)** is the current joint model. [Download the model and local demo](neurotranslate-0.0.zip) or inspect [its source and results](neurotranslate-0.0/joint_alpha/). The earlier task-specific fits below retain the inputs from their own studies.
+
 Forecast the next positions in a moving set of points, or the next detected spike among the recorded units. Each predictor has fitted weights of its own. Both run through the [normal Python download](neurotranslate-0.0.zip). The complete studies are available with their training and scoring code.
 
 | Study | Run locally | Read the evidence |

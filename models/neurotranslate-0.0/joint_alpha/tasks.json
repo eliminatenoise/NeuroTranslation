@@ -1,0 +1,44 @@
+{
+  "macaque_cortex_to_motion": {
+    "title": "Macaque · hand, elbow and handle movement",
+    "input": "Six camera coordinates locate the hand and elbow. Two more locate the handle. Each 10 ms bin also carries spike counts from 37 electrode contacts in sensory cortex.",
+    "horizon": "History 200 ms · Forecast 100 ms ahead",
+    "forecast": "Predicted change from the last observed position along each axis, in millimetres. These estimates concern reaches from a single macaque."
+  },
+  "macaque_motion_to_cortex": {
+    "title": "Macaque · cortical spike counts",
+    "input": "The same 20 bins record hand, elbow and handle position alongside cortical spiking. Here each electrode contact gets its own forecast.",
+    "horizon": "History 200 ms · Counts over the next 100 ms",
+    "forecast": "Expected spikes per contact. An average can be fractional even though each recorded count is an integer. A contact can capture activity from more than one neuron."
+  },
+  "human_leg_emg": {
+    "title": "Human · lower-leg muscle activity",
+    "input": "During a visual rotation, scalp electrodes, leg electrodes and a sacrum tracker record how a person stands or walks. Each of five time bins covers 125 ms. The inputs include log-transformed muscle amplitudes, posture and cue direction.",
+    "horizon": "History 625 ms · Muscle activity over the next 125 ms",
+    "forecast": "Predicted root-mean-square (RMS) surface muscle voltage for four muscles in each leg, in microvolts. The recorded signal measures electrical activity at the skin."
+  },
+  "human_sacrum_path": {
+    "title": "Human · movement at the sacrum",
+    "input": "Five 125 ms bins combine scalp and muscle voltages, sacrum positions, posture and cue direction during a visual rotation. Change a reading and inspect where the model places the sacrum.",
+    "horizon": "History 625 ms · Four positions from 31.25 ms to 125 ms ahead",
+    "forecast": "The three coordinates at samples 8, 16, 24 and 32 give displacement from the last observed position, in millimetres. Those samples are 31.25, 62.5, 93.75 and 125 ms ahead."
+  },
+  "rat_next_unit": {
+    "title": "Rat · next recorded unit to spike",
+    "input": "Each candidate has an earlier event count, three counts that give recent spikes more weight, and an indicator of activity in the last occupied bin. Candidate numbers apply within this input.",
+    "horizon": "Next occupied 1 ms bin containing a single spike · Elapsed time varies",
+    "forecast": "Conditional probability that each recorded unit supplies that next spike. A forecast gives the relative chances among eligible candidates. It does not estimate when the event occurs."
+  },
+  "optical_fluorescence": {
+    "title": "Worm and zebrafish · optical fluorescence",
+    "input": "Four optical readings follow a region of interest in a worm or a zebrafish recording, alongside their time offsets and an assay indicator. Each source uses its own development recordings to set the scale.",
+    "horizon": "History approximately 3.6 s · Forecast approximately 1.2 s ahead",
+    "forecast": "Predicted fluorescence in units of the assay’s development-set standard deviation. The worm and fish experiments measure different fluorescence quantities. Neither directly counts spikes."
+  },
+  "landmark_motion": {
+    "title": "Camera landmarks · movement of a visible point",
+    "input": "Five camera frames follow one visible point alongside the other visible points. Distances use the body radius measured in the latest frame, so a change in zoom need not change the forecast. One point can be a wing tip in one recording and a centreline point in another.",
+    "horizon": "Five observed frames · 120 ms ahead, or 200 ms for the 5 Hz locust camera",
+    "forecast": "Predicted horizontal and vertical displacement as a fraction of the observed root-mean-square body radius. Multiply by that radius in camera units to recover the original scale. The forecast concerns visible points and their observed recording conditions."
+  }
+}

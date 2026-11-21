@@ -7,11 +7,7 @@ if errorlevel 1 (
     set "python_command=python"
 )
 if not "%~1"=="" goto custom
-echo first_use_body
-%python_command% "%~dp0predict.py" "%~dp0first_use_body\example.json"
-if errorlevel 1 goto failed
-echo next_neuron_prediction
-%python_command% "%~dp0predict.py" "%~dp0next_neuron_prediction\example.json"
+%python_command% "%~dp0predict.py"
 if errorlevel 1 goto failed
 pause
 exit /b 0

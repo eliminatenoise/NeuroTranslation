@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "first_signal_values_opened": false,
+  "excluded_before_access": {
+    "Dryad 10.5061/dryad.w9ghx3g4v": "Published file returned HTTP 403, REST download HTTP 401. No neural payload obtained. Switched sources for availability before outcomes."
+  },
+  "selection": "First eight lexicographically sorted UID with baseline category in author manifest. All distinct dates. Fit first 180 native seconds starting with first frame and the first min(32,K) ROIs by stored order for every worm and fish. All values including missing and constant retained; select no cells by response or identity. Seven held fish whole donors, ROI-only; no other fish data permitted.",
+  "schema": "NPZ each with float64 time_s [T], origin-zero native physical seconds; float64 fluorescence [T,K]; int64 roi_index [K], zero-based source response-series column indexes.",
+  "worm_doi": "10.5281/zenodo.19388374",
+  "worm_manifest": "https://raw.githubusercontent.com/flavell-lab/WormWideWeb-data/main/activity/raw/atanas_kim_2023.csv",
+  "worm_manifest_sha256": "2376e4d5a6a45e35393689ea573f64da0cd5d8e0423ab5a75c1649b0949ecbba",
+  "worm_license": "CC-BY-3.0-US",
+  "worm_paper": "10.1016/j.cell.2023.07.035",
+  "fish_source": {
+    "doi": "10.48324/dandi.000235/0.230316.1600",
+    "version": "0.230316.1600",
+    "citation": "Haesemeyer, Martin; Balakrishnan, Kaarthik (2023) Thermoregulatory Responses Forebrain (Version 0.230316.1600) [Data set]. DANDI archive. https://doi.org/10.48324/dandi.000235/0.230316.1600",
+    "license": [
+      "spdx:CC-BY-4.0"
+    ]
+  },
+  "train": [
+    {
+      "id": "2021-05-26-07",
+      "group": "2021-05-26-07",
+      "species": "Caenorhabditis elegans",
+      "role": "train",
+      "filename": "2021-05-26-07.npz",
+      "source_file": "2021-05-26-07-data.h5",
+      "source_sha256": "c47b0712e633ec5874997aa3087425dc7ac6b8d42a4b4f98b2a1245794073a03",
+      "type": "baseline"
+    },
+    {
+      "id": "2021-06-11-01",
+      "group": "2021-06-11-01",
+      "species": "Caenorhabditis elegans",
+      "role": "train",
+      "filename": "2021-06-11-01.npz",
+      "source_file": "2021-06-11-01-data.h5",
+      "source_sha256": "3b10e08cb7068aafa784cf7f482015d7405d3e38079847b9e83d6db11699f1d8",
+      "type": "baseline"
+    },
+    {
+      "id": "2021-08-04-06",
+      "group": "2021-08-04-06",
+      "species": "Caenorhabditis elegans",
+      "role": "train",
+      "filename": "2021-08-04-06.npz",
+      "source_file": "2021-08-04-06-data.h5",
+      "source_sha256": "5b3123d267ec12e3629feb8d3245e9e4cd040b317e90b9f54dd20aeec1e52cc2",
+      "type": "baseline"
+    },
+    {
+      "id": "2021-08-17-01",
+      "group": "2021-08-17-01",
+      "species": "Caenorhabditis elegans",
+      "role": "train",
+      "filename": "2021-08-17-01.npz",
+      "source_file": "2021-08-17-01-data.h5",
+      "source_sha256": "99b5975ddea434e5e03510ac380d89ac8d7d4799ab12335555dc0c5cce673eeb",
+      "type": "baseline"
+    },
+    {
+      "id": "2021-08-18-01",
+      "group": "2021-08-18-01",
+      "species": "Caenorhabditis elegans",
+      "role": "train",
+      "filename": "2021-08-18-01.npz",
+      "source_file": "2021-08-18-01-data.h5",
+      "source_sha256": "2080591e161e97d51910065c417232deca63f9e6a37120d3f3b7ca4246029d21",
+      "type": "baseline"
+    },
+    {
+      "id": "2021-09-22-05",
+      "group": "2021-09-22-05",
+      "species": "Caenorhabditis elegans",
+      "role": "train",
+      "filename": "2021-09-22-05.npz",
+      "source_file": "2021-09-22-05-data.h5",
+      "source_sha256": "81ce7050155bf0ae94927952ccb4d846a346e1b0c279b3a2f75e5ba2ffc355ed",
+      "type": "baseline"
+    },
+    {
+      "id": "2021-10-26-01",
+      "group": "2021-10-26-01",
+      "species": "Caenorhabditis elegans",
+      "role": "train",
+      "filename": "2021-10-26-01.npz",
+      "source_file": "2021-10-26-01-data.h5",
+      "source_sha256": "d3ffbb2d47a417f4c4dd0c52849efc83d132ea96bad85dced60cac889f95204d",
+      "type": "baseline"
+    },
+    {
+      "id": "2021-11-12-01",
+      "group": "2021-11-12-01",
+      "species": "Caenorhabditis elegans",
+      "role": "train",
+      "filename": "2021-11-12-01.npz",
+      "source_file": "2021-11-12-01-data.h5",
+      "source_sha256": "99882723843a46fca162b955737e9dc8486a01bcc29b8d7da9eaef1d575b0cc8",
+      "type": "baseline"
+    },
+    {
+      "id": "Fish01",
+      "group": "Fish01",
+      "species": "Danio rerio",
+      "role": "train",
+      "filename": "Fish01.npz",
+      "session": "20210818T112556",
+      "source_file": "sub-Fish01-GCaMP-vlgut-FBd-5dpf-RandomWave/sub-Fish01-GCaMP-vlgut-FBd-5dpf-RandomWave_ses-20210818T112556_behavior+ophys.nwb",
+      "source_sha256": "e8119d699cf0bddd96c10f6d7555b12c3a5c684eb93e7e8453bd8b999fff29eb",
+      "asset_id": "af99ab20-fa1f-4730-b706-8327f2ca48e2",
+      "source_url": "https://dandiarchive.s3.amazonaws.com/blobs/5f5/18f/5f518f65-d329-4d94-8d12-cfcd43d77f2f",
+      "source_bytes": 3730012683
+    }
+  ],
+  "held": [
+    {
+      "id": "Fish02",
+      "group": "Fish02",
+      "species": "Danio rerio",
+      "role": "held",
+      "filename": "Fish02.npz",
+      "session": "20210818T173531",
+      "source_file": "sub-Fish02-GCaMP-vlgut-FBv-5dpf-RandomWave/sub-Fish02-GCaMP-vlgut-FBv-5dpf-RandomWave_ses-20210818T173531_behavior+ophys.nwb",
+      "source_sha256": "9eb0221ff39bb44b47decc3454e75ca17c5117ee0228c7fa7d9ae07686a7bbfc",
+      "asset_id": "50cfdeb7-825c-4534-9b16-af7f7ee152fd",
+      "source_url": "https://dandiarchive.s3.amazonaws.com/blobs/35b/960/35b960de-3b72-46b5-870b-0f5c9d4ba924",
+      "source_bytes": 3878847966
+    },
+    {
+      "id": "Fish13",
+      "group": "Fish13",
+      "species": "Danio rerio",
+      "role": "held",
+      "filename": "Fish13.npz",
+      "session": "20210830T100716",
+      "source_file": "sub-Fish13-GCaMP-vlgut-FBv-5dpf-RandomWave/sub-Fish13-GCaMP-vlgut-FBv-5dpf-RandomWave_ses-20210830T100716_behavior+ophys.nwb",
+      "source_sha256": "ee3f203b91069d142555f3bf3a507a5a98111cd85f8034de1f1674c403a313a3",
+      "asset_id": "9b01cdef-d89b-4964-ac27-2f0c808dfb4e",
+      "source_url": "https://dandiarchive.s3.amazonaws.com/blobs/3b2/332/3b2332a8-80f9-43a2-83ac-9f81577972eb",
+      "source_bytes": 4235528804
+    },
+    {
+      "id": "Fish31",
+      "group": "Fish31",
+      "species": "Danio rerio",
+      "role": "held",
+      "filename": "Fish31.npz",
+      "session": "20210920T120959",
+      "source_file": "sub-Fish31-GCaMP-vlgut-FBd-5dpf-RandomWave/sub-Fish31-GCaMP-vlgut-FBd-5dpf-RandomWave_ses-20210920T120959_behavior+ophys.nwb",
+      "source_sha256": "f659a1295e9e4100ac6094b4973c0ac57c8ebfcbe5060c2f182f74894fc57e68",
+      "asset_id": "b7b9b92c-bd19-4119-9d22-e31646700065",
+      "source_url": "https://dandiarchive.s3.amazonaws.com/blobs/88e/496/88e496a4-d4c7-4c05-9f4d-0feda95112f2",
+      "source_bytes": 3309735634
+    },
+    {
+      "id": "Fish32",
+      "group": "Fish32",
+      "species": "Danio rerio",
+      "role": "held",
+      "filename": "Fish32.npz",
+      "session": "20210920T181347",
+      "source_file": "sub-Fish32-GCaMP-vlgut-FBv-5dpf-RandomWave/sub-Fish32-GCaMP-vlgut-FBv-5dpf-RandomWave_ses-20210920T181347_behavior+ophys.nwb",
+      "source_sha256": "6e40558d1010934d89c16124a3ac5be04806aa738446481c3feab285deee16c9",
+      "asset_id": "7be6a9eb-5c48-4c13-8b86-db6ba4097cb5",
+      "source_url": "https://dandiarchive.s3.amazonaws.com/blobs/d21/738/d217380d-9966-4275-bc27-26bcaa4ec2ba",
+      "source_bytes": 3901951882
+    },
+    {
+      "id": "Fish41",
+      "group": "Fish41",
+      "species": "Danio rerio",
+      "role": "held",
+      "filename": "Fish41.npz",
+      "session": "20210929T173736",
+      "source_file": "sub-Fish41-GCaMP-vlgut-FBv-7dpf-RandomWave/sub-Fish41-GCaMP-vlgut-FBv-7dpf-RandomWave_ses-20210929T173736_behavior+ophys.nwb",
+      "source_sha256": "1fd97f4cac4a01f2499869819c4566102b73e477ecbdd5c1a010e3972d57055b",
+      "asset_id": "755f13af-6bc4-4ce6-befe-a3a9af65ca42",
+      "source_url": "https://dandiarchive.s3.amazonaws.com/blobs/f64/dd8/f64dd869-e8b5-4df0-9825-6aebbabad1cb",
+      "source_bytes": 3665589468
+    },
+    {
+      "id": "Fish47",
+      "group": "Fish47",
+      "species": "Danio rerio",
+      "role": "held",
+      "filename": "Fish47.npz",
+      "session": "20211124T174401",
+      "source_file": "sub-Fish47-GCaMP-vlgut-FBd-7dpf-RandomWave/sub-Fish47-GCaMP-vlgut-FBd-7dpf-RandomWave_ses-20211124T174401_behavior+ophys.nwb",
+      "source_sha256": "ea443ea23c7febd73e1691b7f58c421b0ae736ae2d097ba010fd14d0e3b088c2",
+      "asset_id": "6bd0b26d-6c33-40d4-ae8b-e81e95540d05",
+      "source_url": "https://dandiarchive.s3.amazonaws.com/blobs/616/5f3/6165f3b8-315b-476e-93c9-af7d234e0740",
+      "source_bytes": 3897939760
+    },
+    {
+      "id": "Fish58",
+      "group": "Fish58",
+      "species": "Danio rerio",
+      "role": "held",
+      "filename": "Fish58.npz",
+      "session": "20220525T092829",
+      "source_file": "sub-Fish58-GCaMP-vlgut-FBd-5dpf-RandomWave/sub-Fish58-GCaMP-vlgut-FBd-5dpf-RandomWave_ses-20220525T092829_behavior+ophys.nwb",
+      "source_sha256": "a6082ea8acef8cef3d11ceadd2535e992299843dd77f49e7640dffdb4242ba27",
+      "asset_id": "141d29b1-d651-4d10-8fdc-770f9485610c",
+      "source_url": "https://dandiarchive.s3.amazonaws.com/blobs/3e7/459/3e7459a2-5db0-43d1-a5a9-4bb4a2d3caed",
+      "source_bytes": 3994737479
+    }
+  ]
+}

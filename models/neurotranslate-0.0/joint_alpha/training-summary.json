@@ -1,0 +1,365 @@
+{
+  "checkpoint_sha256": "f58dec8857015d84962aeb00259badf71b42d9bf7105cec35851a87826ed57d6",
+  "steps": 1920,
+  "seed": 431,
+  "architecture": {
+    "width": 32,
+    "heads": 4,
+    "depth": 1,
+    "ff_width": 64
+  },
+  "batch_per_task": 32,
+  "task_count": 7,
+  "parameters_total": 21445,
+  "parameters_shared": 8576,
+  "initial_shared_hash": "f2824f124dd5339f7893dccc83be96b95cb80f33934133d6425342c658de6094",
+  "final_shared_hash": "fc8ddd6a4dd3de1f55b61d45224bc09b13a20f7659dd4a11f244dc5aa6001ddc",
+  "training_rows": {
+    "human_leg_emg": 5179,
+    "human_sacrum_path": 5179,
+    "landmark_motion": 13816,
+    "macaque_cortex_to_motion": 519,
+    "macaque_motion_to_cortex": 519,
+    "optical_fluorescence": 35552,
+    "rat_next_unit": 54578
+  },
+  "training_groups": {
+    "human_leg_emg": 18,
+    "human_sacrum_path": 18,
+    "landmark_motion": 2,
+    "macaque_cortex_to_motion": 198,
+    "macaque_motion_to_cortex": 198,
+    "optical_fluorescence": 9,
+    "rat_next_unit": 24
+  },
+  "learning_rate": 0.0015,
+  "schedule": "warmup_cosine",
+  "training_device": "cpu",
+  "hash_definition": "SHA-256 over sorted named shared parameters, appending each UTF-8 parameter name then its contiguous native float32 bytes.",
+  "gradient_norms_each_task_on_shared_parameters": {
+    "1": {
+      "human_leg_emg": {
+        "null": 0.0077298847027122974,
+        "q.weight": 0.005433470476418734,
+        "q.bias": 0.0010056986939162016,
+        "k.weight": 0.005071844905614853,
+        "k.bias": 9.763533731499408e-11,
+        "v.weight": 0.21471089124679565,
+        "v.bias": 0.056422922760248184,
+        "proj.weight": 0.23477545380592346,
+        "proj.bias": 0.10222630947828293,
+        "ln1.weight": 0.07202694565057755,
+        "ln1.bias": 0.07636812329292297,
+        "ff1.weight": 0.17576760053634644,
+        "ff1.bias": 0.03262561932206154,
+        "ff2.weight": 0.23736844956874847,
+        "ff2.bias": 0.07572716474533081,
+        "ln2.weight": 0.09583520889282227,
+        "ln2.bias": 0.08654157817363739
+      },
+      "human_sacrum_path": {
+        "null": 0.005775987170636654,
+        "q.weight": 0.007157588377594948,
+        "q.bias": 0.001539371907711029,
+        "k.weight": 0.0072691538371145725,
+        "k.bias": 1.0828644231297702e-10,
+        "v.weight": 0.21599754691123962,
+        "v.bias": 0.05972423031926155,
+        "proj.weight": 0.1999375820159912,
+        "proj.bias": 0.0896269753575325,
+        "ln1.weight": 0.05985225364565849,
+        "ln1.bias": 0.06451556086540222,
+        "ff1.weight": 0.10858634859323502,
+        "ff1.bias": 0.020626721903681755,
+        "ff2.weight": 0.19900421798229218,
+        "ff2.bias": 0.061218827962875366,
+        "ln2.weight": 0.08287417888641357,
+        "ln2.bias": 0.0727255567908287
+      },
+      "landmark_motion": {
+        "null": 0.02243993990123272,
+        "q.weight": 0.033774327486753464,
+        "q.bias": 0.006784934084862471,
+        "k.weight": 0.020984604954719543,
+        "k.bias": 5.83529558007001e-10,
+        "v.weight": 0.639369547367096,
+        "v.bias": 0.17366589605808258,
+        "proj.weight": 0.7426745891571045,
+        "proj.bias": 0.3353954255580902,
+        "ln1.weight": 0.2114294320344925,
+        "ln1.bias": 0.22712942957878113,
+        "ff1.weight": 0.38604459166526794,
+        "ff1.bias": 0.07103309035301208,
+        "ff2.weight": 0.7450016736984253,
+        "ff2.bias": 0.2112862914800644,
+        "ln2.weight": 0.2065126895904541,
+        "ln2.bias": 0.23043020069599152
+      },
+      "macaque_cortex_to_motion": {
+        "null": 0.001827737083658576,
+        "q.weight": 0.010417260229587555,
+        "q.bias": 0.0019229543395340443,
+        "k.weight": 0.00890460703521967,
+        "k.bias": 3.633789102952534e-10,
+        "v.weight": 0.24327194690704346,
+        "v.bias": 0.056491389870643616,
+        "proj.weight": 0.21776099503040314,
+        "proj.bias": 0.08547571301460266,
+        "ln1.weight": 0.06431945413351059,
+        "ln1.bias": 0.06846662610769272,
+        "ff1.weight": 0.12980063259601593,
+        "ff1.bias": 0.024503648281097412,
+        "ff2.weight": 0.1870569884777069,
+        "ff2.bias": 0.06661113351583481,
+        "ln2.weight": 0.0928766205906868,
+        "ln2.bias": 0.0800778791308403
+      },
+      "macaque_motion_to_cortex": {
+        "null": 0.0055203670635819435,
+        "q.weight": 0.015493291430175304,
+        "q.bias": 0.003037264570593834,
+        "k.weight": 0.015229669399559498,
+        "k.bias": 1.5341625747566923e-09,
+        "v.weight": 0.5569946765899658,
+        "v.bias": 0.12448113411664963,
+        "proj.weight": 0.4532628655433655,
+        "proj.bias": 0.20824328064918518,
+        "ln1.weight": 0.12690602242946625,
+        "ln1.bias": 0.15859486162662506,
+        "ff1.weight": 0.34468334913253784,
+        "ff1.bias": 0.06714516133069992,
+        "ff2.weight": 0.4308914542198181,
+        "ff2.bias": 0.1609676629304886,
+        "ln2.weight": 0.26010918617248535,
+        "ln2.bias": 0.23096801340579987
+      },
+      "optical_fluorescence": {
+        "null": 0.05858568474650383,
+        "q.weight": 0.047504816204309464,
+        "q.bias": 0.009660360403358936,
+        "k.weight": 0.03989143669605255,
+        "k.bias": 4.897056093966512e-10,
+        "v.weight": 1.3695311546325684,
+        "v.bias": 0.3923977017402649,
+        "proj.weight": 1.399831771850586,
+        "proj.bias": 0.6282598972320557,
+        "ln1.weight": 0.4094485342502594,
+        "ln1.bias": 0.44138798117637634,
+        "ff1.weight": 0.8470515608787537,
+        "ff1.bias": 0.14880965650081635,
+        "ff2.weight": 1.473478078842163,
+        "ff2.bias": 0.4371260404586792,
+        "ln2.weight": 0.43126559257507324,
+        "ln2.bias": 0.4563559889793396
+      },
+      "rat_next_unit": {
+        "null": 0.047667235136032104,
+        "q.weight": 0.1656135767698288,
+        "q.bias": 0.015909628942608833,
+        "k.weight": 0.18050307035446167,
+        "k.bias": 5.467251096291648e-10,
+        "v.weight": 0.4756900668144226,
+        "v.bias": 0.15813753008842468,
+        "proj.weight": 0.4923185706138611,
+        "proj.bias": 0.2736436128616333,
+        "ln1.weight": 0.2740347683429718,
+        "ln1.bias": 0.08208252489566803,
+        "ff1.weight": 0.6612111330032349,
+        "ff1.bias": 0.07882338017225266,
+        "ff2.weight": 0.6490990519523621,
+        "ff2.bias": 0.06580629199743271,
+        "ln2.weight": 0.34243905544281006,
+        "ln2.bias": 2.3447109143148737e-08
+      }
+    },
+    "1920": {
+      "human_leg_emg": {
+        "null": 0.003032857086509466,
+        "q.weight": 0.006218353286385536,
+        "q.bias": 0.001620302558876574,
+        "k.weight": 0.008153978735208511,
+        "k.bias": 1.4025126615635486e-09,
+        "v.weight": 0.08604353666305542,
+        "v.bias": 0.023694181814789772,
+        "proj.weight": 0.07836554199457169,
+        "proj.bias": 0.03750690445303917,
+        "ln1.weight": 0.017023036256432533,
+        "ln1.bias": 0.024573972448706627,
+        "ff1.weight": 0.07513056695461273,
+        "ff1.bias": 0.013896837830543518,
+        "ff2.weight": 0.08155357837677002,
+        "ff2.bias": 0.02333889715373516,
+        "ln2.weight": 0.019706863909959793,
+        "ln2.bias": 0.022710319608449936
+      },
+      "human_sacrum_path": {
+        "null": 0.0032074889168143272,
+        "q.weight": 0.03814579173922539,
+        "q.bias": 0.007978086359798908,
+        "k.weight": 0.054816436022520065,
+        "k.bias": 8.061269429759932e-10,
+        "v.weight": 0.1806260645389557,
+        "v.bias": 0.01934375986456871,
+        "proj.weight": 0.12801013886928558,
+        "proj.bias": 0.03223779797554016,
+        "ln1.weight": 0.023982396349310875,
+        "ln1.bias": 0.02152545005083084,
+        "ff1.weight": 0.055901139974594116,
+        "ff1.bias": 0.008762127719819546,
+        "ff2.weight": 0.07320144027471542,
+        "ff2.bias": 0.021182548254728317,
+        "ln2.weight": 0.021316949278116226,
+        "ln2.bias": 0.019667206332087517
+      },
+      "landmark_motion": {
+        "null": 0.006481376010924578,
+        "q.weight": 0.02593124844133854,
+        "q.bias": 0.005394760984927416,
+        "k.weight": 0.08485030382871628,
+        "k.bias": 2.498589335431234e-09,
+        "v.weight": 0.2513512372970581,
+        "v.bias": 0.056514106690883636,
+        "proj.weight": 0.17206546664237976,
+        "proj.bias": 0.06523807346820831,
+        "ln1.weight": 0.046212341636419296,
+        "ln1.bias": 0.037459176033735275,
+        "ff1.weight": 0.10881476104259491,
+        "ff1.bias": 0.018776074051856995,
+        "ff2.weight": 0.1060362383723259,
+        "ff2.bias": 0.03654949367046356,
+        "ln2.weight": 0.044470228254795074,
+        "ln2.bias": 0.038705840706825256
+      },
+      "macaque_cortex_to_motion": {
+        "null": 0.000738297589123249,
+        "q.weight": 0.022397244349122047,
+        "q.bias": 0.0039109354838728905,
+        "k.weight": 0.030338598415255547,
+        "k.bias": 2.824233735765347e-09,
+        "v.weight": 0.144418403506279,
+        "v.bias": 0.0332624651491642,
+        "proj.weight": 0.1337723582983017,
+        "proj.bias": 0.04104936122894287,
+        "ln1.weight": 0.02521827444434166,
+        "ln1.bias": 0.028340965509414673,
+        "ff1.weight": 0.11404898017644882,
+        "ff1.bias": 0.020777082070708275,
+        "ff2.weight": 0.11385319381952286,
+        "ff2.bias": 0.029583508148789406,
+        "ln2.weight": 0.024966195225715637,
+        "ln2.bias": 0.024360794574022293
+      },
+      "macaque_motion_to_cortex": {
+        "null": 0.0023288214579224586,
+        "q.weight": 0.041294027119874954,
+        "q.bias": 0.007283872924745083,
+        "k.weight": 0.06432341784238815,
+        "k.bias": 5.082839482639656e-09,
+        "v.weight": 0.2802487909793854,
+        "v.bias": 0.05798275023698807,
+        "proj.weight": 0.1842140555381775,
+        "proj.bias": 0.06274335831403732,
+        "ln1.weight": 0.04633442685008049,
+        "ln1.bias": 0.048451945185661316,
+        "ff1.weight": 0.17997945845127106,
+        "ff1.bias": 0.033839426934719086,
+        "ff2.weight": 0.15223680436611176,
+        "ff2.bias": 0.04207267984747887,
+        "ln2.weight": 0.031984150409698486,
+        "ln2.bias": 0.035807397216558456
+      },
+      "optical_fluorescence": {
+        "null": 0.005685425829142332,
+        "q.weight": 0.008828699588775635,
+        "q.bias": 0.0014328078832477331,
+        "k.weight": 0.012802939862012863,
+        "k.bias": 8.933483952588972e-10,
+        "v.weight": 0.09175805002450943,
+        "v.bias": 0.02035791613161564,
+        "proj.weight": 0.10691536217927933,
+        "proj.bias": 0.036029040813446045,
+        "ln1.weight": 0.019799012690782547,
+        "ln1.bias": 0.02941345050930977,
+        "ff1.weight": 0.1107439398765564,
+        "ff1.bias": 0.02037125639617443,
+        "ff2.weight": 0.06259452551603317,
+        "ff2.bias": 0.020129108801484108,
+        "ln2.weight": 0.01704549603164196,
+        "ln2.bias": 0.022639386355876923
+      },
+      "rat_next_unit": {
+        "null": 0.06032271683216095,
+        "q.weight": 0.2028629332780838,
+        "q.bias": 0.026140009984374046,
+        "k.weight": 0.19172678887844086,
+        "k.bias": 9.765373398806787e-09,
+        "v.weight": 0.178219273686409,
+        "v.bias": 0.048567190766334534,
+        "proj.weight": 0.19244202971458435,
+        "proj.bias": 0.053720008581876755,
+        "ln1.weight": 0.099394291639328,
+        "ln1.bias": 0.028275711461901665,
+        "ff1.weight": 0.2807844579219818,
+        "ff1.bias": 0.04530749097466469,
+        "ff2.weight": 0.19029471278190613,
+        "ff2.bias": 0.03227938339114189,
+        "ln2.weight": 0.0711921751499176,
+        "ln2.bias": 2.7683707770620458e-08
+      }
+    }
+  },
+  "gradient_explanation": "Each value is the L2 norm of that task loss gradient for one shared parameter tensor on the indicated mixed training update, measured before averaging the task gradients. The optimizer applies one joint update. Final and initial parameter seals refer to the full shared trunk.",
+  "fictional_shared_weight_intervention": {
+    "human_leg_emg": {
+      "output_shape": [
+        1,
+        8
+      ],
+      "shared_weight_perturbation_max_abs_in_output_units": 23.94947624206543
+    },
+    "human_sacrum_path": {
+      "output_shape": [
+        1,
+        12
+      ],
+      "shared_weight_perturbation_max_abs_in_output_units": 5.3317461013793945
+    },
+    "landmark_motion": {
+      "output_shape": [
+        1,
+        2
+      ],
+      "shared_weight_perturbation_max_abs_in_output_units": 0.06251350790262222
+    },
+    "macaque_cortex_to_motion": {
+      "output_shape": [
+        1,
+        8
+      ],
+      "shared_weight_perturbation_max_abs_in_output_units": 19.12662124633789
+    },
+    "macaque_motion_to_cortex": {
+      "output_shape": [
+        1,
+        37
+      ],
+      "shared_weight_perturbation_max_abs_in_output_units": 8.373748779296875
+    },
+    "optical_fluorescence": {
+      "output_shape": [
+        1,
+        1
+      ],
+      "shared_weight_perturbation_max_abs_in_output_units": 0.14447623491287231
+    },
+    "rat_next_unit": {
+      "output_shape": [
+        1,
+        4
+      ],
+      "shared_weight_perturbation_max_abs_in_output_units": 0.03203359246253967
+    }
+  },
+  "trunk_intervention_description": "For a direct execution check, an in-memory copy sets the shared value-projection weight matrix to zero and preserves every other parameter. Each fictional case changes. This verifies that the output depends on shared weights. Positive or negative transfer requires the held control comparison.",
+  "training_draws_per_task": 61440
+}

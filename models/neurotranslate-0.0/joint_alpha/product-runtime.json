@@ -1,0 +1,97 @@
+{
+  "cpu": "AMD RYZEN AI MAX+ 395 w/ Radeon 8060S",
+  "os": "Linux 7.2.8-9-omarchy",
+  "python": "3.12.14",
+  "allowed_logical_cpus": 32,
+  "method": "One CPU process. Fifty cached calls per invented case, batch size one. Four candidates in the rank example. RSS includes Python and NumPy. CLI wall time includes process and JSON I/O. Host background activity was not isolated. No GPU inference was used.",
+  "threads": {
+    "1": {
+      "tasks": {
+        "human_leg_emg": {
+          "median_ms": 0.11807703413069248,
+          "p95_ms": 0.1434910809621215,
+          "output_sha256": "00dd457d9c512deef9c2667025ea00410492bc1e8e17c99bff4e83d669b9dfa7"
+        },
+        "human_sacrum_path": {
+          "median_ms": 0.11736649321392179,
+          "p95_ms": 0.12336205691099167,
+          "output_sha256": "7a23385a8e9331dfa30ec0f4b849906f7f6b979a18a14941460b0f9b21fd6fc2"
+        },
+        "landmark_motion": {
+          "median_ms": 0.06694102194160223,
+          "p95_ms": 0.0711739994585514,
+          "output_sha256": "441c06ec3c5ed7bdb725b55e3fdbe760311b2f41df23bf65328506eb3796ce98"
+        },
+        "macaque_cortex_to_motion": {
+          "median_ms": 0.26664300821721554,
+          "p95_ms": 0.2708720276132226,
+          "output_sha256": "b43803005e7d71ed3d600fe05b65784c80a859fcd7794820e3542682b310858c"
+        },
+        "macaque_motion_to_cortex": {
+          "median_ms": 0.2691884874366224,
+          "p95_ms": 0.2911989577114582,
+          "output_sha256": "70088f2399e05673f04d100113c15cebec3bbc012b0f4843b70cc1cf4eb9e589"
+        },
+        "optical_fluorescence": {
+          "median_ms": 0.06459199357777834,
+          "p95_ms": 0.07374898996204138,
+          "output_sha256": "b73eb79cbaf940c50c1135f6996292a121064f34beba41f97a635fd123b2ae5a"
+        },
+        "rat_next_unit": {
+          "median_ms": 0.08400401566177607,
+          "p95_ms": 0.09253504686057568,
+          "output_sha256": "947b3d3285cbf47917fe67f43c2bc91e8e4fd5919b25fdfb50f9bbb39a06935d"
+        }
+      },
+      "checkpoint_sha256": "f58dec8857015d84962aeb00259badf71b42d9bf7105cec35851a87826ed57d6",
+      "load_ms": 29.470068984664977,
+      "process_peak_RSS_MiB": 37.828125,
+      "numpy": "2.3.5",
+      "fresh_cli_median_ms": 57.10384203121066
+    },
+    "2": {
+      "tasks": {
+        "human_leg_emg": {
+          "median_ms": 0.11869397712871432,
+          "p95_ms": 0.1303760800510645,
+          "output_sha256": "00dd457d9c512deef9c2667025ea00410492bc1e8e17c99bff4e83d669b9dfa7"
+        },
+        "human_sacrum_path": {
+          "median_ms": 0.11636951239779592,
+          "p95_ms": 0.12295192573219538,
+          "output_sha256": "7a23385a8e9331dfa30ec0f4b849906f7f6b979a18a14941460b0f9b21fd6fc2"
+        },
+        "landmark_motion": {
+          "median_ms": 0.0662450329400599,
+          "p95_ms": 0.07040298078209162,
+          "output_sha256": "441c06ec3c5ed7bdb725b55e3fdbe760311b2f41df23bf65328506eb3796ce98"
+        },
+        "macaque_cortex_to_motion": {
+          "median_ms": 0.26410346617922187,
+          "p95_ms": 0.27265504468232393,
+          "output_sha256": "b43803005e7d71ed3d600fe05b65784c80a859fcd7794820e3542682b310858c"
+        },
+        "macaque_motion_to_cortex": {
+          "median_ms": 0.26712403632700443,
+          "p95_ms": 0.27726299595087767,
+          "output_sha256": "70088f2399e05673f04d100113c15cebec3bbc012b0f4843b70cc1cf4eb9e589"
+        },
+        "optical_fluorescence": {
+          "median_ms": 0.06411102367565036,
+          "p95_ms": 0.06874999962747097,
+          "output_sha256": "b73eb79cbaf940c50c1135f6996292a121064f34beba41f97a635fd123b2ae5a"
+        },
+        "rat_next_unit": {
+          "median_ms": 0.08407299173995852,
+          "p95_ms": 0.09233399759978056,
+          "output_sha256": "947b3d3285cbf47917fe67f43c2bc91e8e4fd5919b25fdfb50f9bbb39a06935d"
+        }
+      },
+      "checkpoint_sha256": "f58dec8857015d84962aeb00259badf71b42d9bf7105cec35851a87826ed57d6",
+      "load_ms": 27.264865930192173,
+      "process_peak_RSS_MiB": 37.3359375,
+      "numpy": "2.3.5",
+      "fresh_cli_median_ms": 55.112312897108495
+    }
+  }
+}
