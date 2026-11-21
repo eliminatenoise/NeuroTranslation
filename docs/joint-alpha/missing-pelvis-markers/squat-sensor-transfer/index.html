@@ -1,0 +1,2885 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare forecasts of pelvis movement from camera readings, floor force and thigh electrical signals on a separate group of people.">
+  <title>Does floor force help forecast a squat? · NeuroTranslation</title>
+  <link rel="stylesheet" href="report.css">
+  <script defer src="report.js"></script>
+</head>
+<body>
+<main>
+  <nav aria-label="Related study"><a href="../squat-sensor-comparison/">Earlier squat comparison</a></nav>
+  <h1>Does floor force help forecast a squat?</h1>
+  <p class="intro">As you rise from a squat, the camera tracks your hips. Plates under your feet measure how hard you push into the ground. We gave a model the same squat recordings and changed which of those readings it could use.</p>
+  <p>In ordinary bodyweight squats from Georgia Tech, adding floor force to complete camera readings reduced average error from <strong>5.81 to 4.43 mm</strong> for all four pelvis markers and from <strong>5.60 to 4.29 mm</strong> for the rear pair.</p>
+
+  <h2>Compare the recorded conditions</h2>
+  <p>The forecast is the change in average marker height over the next 100 milliseconds. Each person counts equally. Smaller errors are better.</p>
+  <div class="controls" id="controls" hidden>
+    <label for="load">Weight held
+      <select id="load">
+        <option value="bodyweight_timing">Bodyweight only</option>
+        <option value="weighted_timing">Holding 25 lb</option>
+      </select>
+    </label>
+    <label for="stance">Squat style
+      <select id="stance">
+        <option value="ordinary">Ordinary squat</option>
+        <option value="left_emphasis">Emphasize the left leg</option>
+        <option value="right_emphasis">Emphasize the right leg</option>
+      </select>
+    </label>
+    <label for="mask">Camera readings used
+      <select id="mask">
+        <option value="complete">All readings</option>
+        <option value="left_front_hidden">Hide the left front marker</option>
+        <option value="rear_pair_recently_hidden">Hide both rear markers late</option>
+      </select>
+    </label>
+  </div>
+  <noscript><p>Turn on JavaScript to compare conditions, or download the aggregate results below.</p></noscript>
+  <section id="interactive" aria-label="Selected results" hidden>
+    <p class="support" id="support" role="status" aria-atomic="true"></p>
+    <table id="average">
+      <caption>Average error</caption>
+      <thead><tr><th scope="col">Readings used by the forecast</th><th scope="col">Four markers (mm)</th><th scope="col">Rear pair (mm)</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <details>
+      <summary>Compare the larger errors and the floor force gains</summary>
+      <p>The 90th percentile shows how large errors get near the worst tenth of all forecasts.</p>
+      <table id="tail">
+        <caption>90th-percentile error</caption>
+        <thead><tr><th scope="col">Readings used by the forecast</th><th scope="col">Four markers (mm)</th><th scope="col">Rear pair (mm)</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p class="support" id="difference"></p>
+    </details>
+  </section>
+
+  <h2>Where the result applies</h2>
+  <p>For ordinary bodyweight squats, floor force improved both targets with all camera readings and under both deliberately hidden patterns. Thigh electrodes recorded electrical activity at the skin. Adding those readings gave no consistent gain in this test.</p>
+  <p>The hidden readings came from available camera records. We left the later records intact so the forecasts could be compared on the same outcomes. The archive’s point flags give no positive reconstruction quality for these markers. The comparison tests deliberate hiding.</p>
+  <details>
+    <summary>How the test was run</summary>
+    <p>The models were fitted in Kuopio and tested on a separate Georgia Tech group. The main comparison used 417 matching histories from 10 people doing ordinary bodyweight squats. Holding 25 lb and the two leg-emphasis styles appear separately. Four condition records had more repetitions than the five expected from the timing labels and were excluded before scoring.</p>
+    <p>For each of five camera instants, the model used the preceding 50 milliseconds of available sensor readings. It used the signed upward force from the floor plates and the size of the electrical signals recorded by four thigh electrodes. Each target required its named markers in the camera record at the forecast start and 100 milliseconds later.</p>
+    <p>Forecast files were fixed before the later marker heights were read for scoring. The 95% intervals come from resampling people, keeping each person’s paired forecast errors together.</p>
+  </details>
+  <p><a href="results.json">Download aggregate results</a> · <a href="https://doi.org/10.35090/gatech/70296">Georgia Tech recordings</a> · <a href="https://doi.org/10.1038/s41597-023-02840-6">Study methods</a> · <a href="https://doi.org/10.5281/zenodo.24194741">Kuopio fitting recordings</a></p>
+</main>
+<script id="data" type="application/json">{
+  "scope": "Independent Georgia Tech replay against archived camera positions, with deliberate input hiding.",
+  "reading_horizon_ms": 100,
+  "earlier_camera_lookup_ms": [
+    -200,
+    -150,
+    -100,
+    -50,
+    0
+  ],
+  "camera_hz": 200,
+  "stored_analog_hz": 2000,
+  "analog_bin_ends_before_camera": true,
+  "primary_condition": "Ordinary bodyweight squats",
+  "timing_blocks_excluded": 4,
+  "references": {
+    "georgia_data": "https://doi.org/10.35090/gatech/70296",
+    "georgia_paper": "https://doi.org/10.1038/s41597-023-02840-6",
+    "kuopio_fit_data": "https://doi.org/10.5281/zenodo.24194741"
+  },
+  "scores": {
+    "bodyweight_timing": {
+      "ordinary": {
+        "complete": {
+          "four_markers": {
+            "people": 10,
+            "windows": 417,
+            "mean_absolute_error_mm": {
+              "camera_speed": 12.041241401402168,
+              "camera": 5.814292255345222,
+              "camera_force": 4.428380876382737,
+              "camera_emg": 5.802559791541174,
+              "camera_force_emg": 4.493638408686122
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 24.613995361328126,
+              "camera": 11.405964771783404,
+              "camera_force": 8.395364021029168,
+              "camera_emg": 11.932708864534856,
+              "camera_force_emg": 8.621672039478206
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.3859113789624862,
+                "interval_95_mm": [
+                  -1.8684454245788669,
+                  -0.8936358870038538
+                ],
+                "people_with_lower_error": 10
+              },
+              "emg_minus_camera": {
+                "change_mm": -0.011732463804048753,
+                "interval_95_mm": [
+                  -0.20433074006756355,
+                  0.15597364603332864
+                ],
+                "people_with_lower_error": 4
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.06525753230338563,
+                "interval_95_mm": [
+                  -0.05956524628921375,
+                  0.2072367923130478
+                ],
+                "people_with_lower_error": 5
+              },
+              "camera_minus_speed": {
+                "change_mm": -6.226949146056944,
+                "interval_95_mm": [
+                  -7.908219405283022,
+                  -4.578230043789562
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -7.61286052501943,
+                "interval_95_mm": [
+                  -9.4351288274842,
+                  -5.817000623048294
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -6.2386816098609925,
+                "interval_95_mm": [
+                  -7.962721261452951,
+                  -4.5283885231391805
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -7.547602992716046,
+                "interval_95_mm": [
+                  -9.371881579656282,
+                  -5.697175699676505
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 10,
+            "windows": 417,
+            "mean_absolute_error_mm": {
+              "camera_speed": 12.85041206387503,
+              "camera": 5.602498255684216,
+              "camera_force": 4.294814212685771,
+              "camera_emg": 5.706861606506927,
+              "camera_force_emg": 4.461764025460512
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 27.59375915527346,
+              "camera": 10.940161341537186,
+              "camera_force": 8.477181236012315,
+              "camera_emg": 11.369782395347478,
+              "camera_force_emg": 8.733525853901202
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.3076840429984453,
+                "interval_95_mm": [
+                  -1.6643323615053816,
+                  -0.9484819116583182
+                ],
+                "people_with_lower_error": 10
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.10436335082271042,
+                "interval_95_mm": [
+                  -0.147321604199648,
+                  0.32528339940670253
+                ],
+                "people_with_lower_error": 3
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.16694981277474114,
+                "interval_95_mm": [
+                  0.011351520218931772,
+                  0.3292866983530608
+                ],
+                "people_with_lower_error": 3
+              },
+              "camera_minus_speed": {
+                "change_mm": -7.247913808190812,
+                "interval_95_mm": [
+                  -9.108414297841174,
+                  -5.447731376102274
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -8.555597851189258,
+                "interval_95_mm": [
+                  -10.521296436746058,
+                  -6.676484647775353
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -7.143550457368102,
+                "interval_95_mm": [
+                  -9.156363084696158,
+                  -5.160163163253049
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -8.388648038414518,
+                "interval_95_mm": [
+                  -10.464696510962714,
+                  -6.378994083458973
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          }
+        },
+        "left_front_hidden": {
+          "four_markers": {
+            "people": 10,
+            "windows": 417,
+            "mean_absolute_error_mm": {
+              "camera_speed": 11.999081388469175,
+              "camera": 5.973665939976774,
+              "camera_force": 4.518493593560111,
+              "camera_emg": 5.991795911085171,
+              "camera_force_emg": 4.597257443800374
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 24.52972513834636,
+              "camera": 11.63059685613186,
+              "camera_force": 8.638351774347148,
+              "camera_emg": 12.344982458368035,
+              "camera_force_emg": 8.919458030106384
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.455172346416663,
+                "interval_95_mm": [
+                  -1.843884222638267,
+                  -1.0746651484258625
+                ],
+                "people_with_lower_error": 10
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.018129971108396516,
+                "interval_95_mm": [
+                  -0.1741745075833054,
+                  0.1999668560698484
+                ],
+                "people_with_lower_error": 5
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.0787638502402627,
+                "interval_95_mm": [
+                  -0.03165497122747886,
+                  0.18178610014523539
+                ],
+                "people_with_lower_error": 2
+              },
+              "camera_minus_speed": {
+                "change_mm": -6.025415448492399,
+                "interval_95_mm": [
+                  -7.62218669022053,
+                  -4.421241369034553
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -7.480587794909061,
+                "interval_95_mm": [
+                  -9.212997067802633,
+                  -5.773851287786072
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -6.007285477384002,
+                "interval_95_mm": [
+                  -7.679402533021926,
+                  -4.318830771438301
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -7.4018239446688,
+                "interval_95_mm": [
+                  -9.174357191194142,
+                  -5.6241235581825935
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 10,
+            "windows": 417,
+            "mean_absolute_error_mm": {
+              "camera_speed": 12.85041206387503,
+              "camera": 6.316772282450556,
+              "camera_force": 4.798217225470729,
+              "camera_emg": 6.424289098089841,
+              "camera_force_emg": 4.947922002070105
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 27.59375915527346,
+              "camera": 12.414633561800285,
+              "camera_force": 9.370410200586598,
+              "camera_emg": 13.130649014813134,
+              "camera_force_emg": 9.518826460838692
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.5185550569798274,
+                "interval_95_mm": [
+                  -1.8344673880915008,
+                  -1.2147790870325896
+                ],
+                "people_with_lower_error": 10
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.10751681563928553,
+                "interval_95_mm": [
+                  -0.15269481817001077,
+                  0.35088067466073286
+                ],
+                "people_with_lower_error": 4
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.14970477659937678,
+                "interval_95_mm": [
+                  -0.02817386445562776,
+                  0.32990102626553336
+                ],
+                "people_with_lower_error": 2
+              },
+              "camera_minus_speed": {
+                "change_mm": -6.533639781424471,
+                "interval_95_mm": [
+                  -8.205088201540953,
+                  -4.876536729678971
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -8.0521948384043,
+                "interval_95_mm": [
+                  -9.817921817335128,
+                  -6.33293404648705
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -6.4261229657851855,
+                "interval_95_mm": [
+                  -8.268623410500156,
+                  -4.599884139529152
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -7.902490061804923,
+                "interval_95_mm": [
+                  -9.830581985162677,
+                  -6.03792780205479
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          }
+        },
+        "rear_pair_recently_hidden": {
+          "four_markers": {
+            "people": 10,
+            "windows": 417,
+            "mean_absolute_error_mm": {
+              "camera_speed": 13.009863651110626,
+              "camera": 8.547503376683961,
+              "camera_force": 7.603674016777246,
+              "camera_emg": 8.344960890339781,
+              "camera_force_emg": 7.601601567770635
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 26.927618408203127,
+              "camera": 16.349989634960963,
+              "camera_force": 14.574457291777723,
+              "camera_emg": 16.105633035439485,
+              "camera_force_emg": 14.9970029113599
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -0.9438293599067155,
+                "interval_95_mm": [
+                  -1.4987645324639722,
+                  -0.3420089750895635
+                ],
+                "people_with_lower_error": 8
+              },
+              "emg_minus_camera": {
+                "change_mm": -0.20254248634418232,
+                "interval_95_mm": [
+                  -0.41237268278897166,
+                  0.018796292292779525
+                ],
+                "people_with_lower_error": 7
+              },
+              "emg_added_to_force": {
+                "change_mm": -0.002072449006611521,
+                "interval_95_mm": [
+                  -0.1134444980622743,
+                  0.10862955538223809
+                ],
+                "people_with_lower_error": 4
+              },
+              "camera_minus_speed": {
+                "change_mm": -4.462360274426664,
+                "interval_95_mm": [
+                  -5.726281866408876,
+                  -3.1980264647020933
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -5.406189634333379,
+                "interval_95_mm": [
+                  -6.966084657735381,
+                  -3.820789988202222
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -4.664902760770846,
+                "interval_95_mm": [
+                  -5.964351437608836,
+                  -3.3014072392873643
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -5.408262083339991,
+                "interval_95_mm": [
+                  -7.006034650419693,
+                  -3.75190359952634
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 10,
+            "windows": 417,
+            "mean_absolute_error_mm": {
+              "camera_speed": 15.389363702794856,
+              "camera": 11.98872786056934,
+              "camera_force": 11.043466452272673,
+              "camera_emg": 11.721293577286954,
+              "camera_force_emg": 10.950671644506269
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 32.30629882812501,
+              "camera": 22.239381124862817,
+              "camera_force": 21.625736428038223,
+              "camera_emg": 22.17604705495231,
+              "camera_force_emg": 21.701765328079567
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -0.9452614082966673,
+                "interval_95_mm": [
+                  -1.4618239852958748,
+                  -0.3785424493398658
+                ],
+                "people_with_lower_error": 9
+              },
+              "emg_minus_camera": {
+                "change_mm": -0.26743428328238955,
+                "interval_95_mm": [
+                  -0.5676954991123256,
+                  0.02309922296878053
+                ],
+                "people_with_lower_error": 7
+              },
+              "emg_added_to_force": {
+                "change_mm": -0.09279480776640589,
+                "interval_95_mm": [
+                  -0.2624694306082591,
+                  0.0772992741912082
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_minus_speed": {
+                "change_mm": -3.4006358422255145,
+                "interval_95_mm": [
+                  -4.501926145235628,
+                  -2.2956303746165423
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -4.345897250522182,
+                "interval_95_mm": [
+                  -5.755717158925583,
+                  -2.949369189829163
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -3.668070125507904,
+                "interval_95_mm": [
+                  -4.923562802212893,
+                  -2.341713710914456
+                ],
+                "people_with_lower_error": 9
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -4.438692058288587,
+                "interval_95_mm": [
+                  -5.919328680815355,
+                  -2.9502821425667753
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          }
+        }
+      },
+      "left_emphasis": {
+        "complete": {
+          "four_markers": {
+            "people": 10,
+            "windows": 156,
+            "mean_absolute_error_mm": {
+              "camera_speed": 7.879269137421519,
+              "camera": 4.427811956277839,
+              "camera_force": 3.14025307938485,
+              "camera_emg": 4.875955003593828,
+              "camera_force_emg": 3.374733675576722
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 14.743133544921875,
+              "camera": 9.019078149165017,
+              "camera_force": 6.7442735305514505,
+              "camera_emg": 10.273251747247485,
+              "camera_force_emg": 7.0789038739221475
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.2875588768929886,
+                "interval_95_mm": [
+                  -1.6064697035691984,
+                  -0.9616101453724909
+                ],
+                "people_with_lower_error": 10
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.4481430473159884,
+                "interval_95_mm": [
+                  0.1401037556272703,
+                  0.7437914722062564
+                ],
+                "people_with_lower_error": 2
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.23448059619187206,
+                "interval_95_mm": [
+                  -0.05050139588916485,
+                  0.48089918821192906
+                ],
+                "people_with_lower_error": 2
+              },
+              "camera_minus_speed": {
+                "change_mm": -3.45145718114368,
+                "interval_95_mm": [
+                  -4.699713622290198,
+                  -2.3074530011006282
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -4.739016058036669,
+                "interval_95_mm": [
+                  -6.020845481470946,
+                  -3.612833137737445
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -3.0033141338276916,
+                "interval_95_mm": [
+                  -4.313924091037975,
+                  -1.8920193941469308
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -4.504535461844798,
+                "interval_95_mm": [
+                  -5.9615651158705445,
+                  -3.3407959451281384
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 10,
+            "windows": 156,
+            "mean_absolute_error_mm": {
+              "camera_speed": 8.02719407102185,
+              "camera": 4.1199623690738045,
+              "camera_force": 3.0590149042853563,
+              "camera_emg": 4.778949808397737,
+              "camera_force_emg": 3.4670577824324296
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 15.505050659179688,
+              "camera": 8.696117740502675,
+              "camera_force": 6.209918179208028,
+              "camera_emg": 9.67868573703728,
+              "camera_force_emg": 7.592416453437394
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.0609474647884487,
+                "interval_95_mm": [
+                  -1.2541580883427157,
+                  -0.8247475733800578
+                ],
+                "people_with_lower_error": 10
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.6589874393239332,
+                "interval_95_mm": [
+                  0.3931868831371261,
+                  0.9181983378207604
+                ],
+                "people_with_lower_error": 1
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.4080428781470733,
+                "interval_95_mm": [
+                  0.16259760989070657,
+                  0.6337032630441606
+                ],
+                "people_with_lower_error": 1
+              },
+              "camera_minus_speed": {
+                "change_mm": -3.907231701948043,
+                "interval_95_mm": [
+                  -5.095809652301176,
+                  -2.8477949675246492
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -4.968179166736492,
+                "interval_95_mm": [
+                  -6.17838060983897,
+                  -3.9315194770099455
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -3.2482442626241097,
+                "interval_95_mm": [
+                  -4.5654832407064,
+                  -2.0900741197267725
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -4.560136288589417,
+                "interval_95_mm": [
+                  -5.948524300656989,
+                  -3.40010318051149
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          }
+        },
+        "left_front_hidden": {
+          "four_markers": {
+            "people": 10,
+            "windows": 156,
+            "mean_absolute_error_mm": {
+              "camera_speed": 7.918462940165098,
+              "camera": 4.541618352130955,
+              "camera_force": 3.3747066146307376,
+              "camera_emg": 4.875290441679827,
+              "camera_force_emg": 3.4598915834095734
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 13.777893066406248,
+              "camera": 9.67531327649406,
+              "camera_force": 6.753968229531726,
+              "camera_emg": 10.413181827500484,
+              "camera_force_emg": 7.439794435839566
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.1669117375002176,
+                "interval_95_mm": [
+                  -1.4215035557960918,
+                  -0.8980518336368541
+                ],
+                "people_with_lower_error": 10
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.3336720895488706,
+                "interval_95_mm": [
+                  0.15095988844704653,
+                  0.5000015780124488
+                ],
+                "people_with_lower_error": 1
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.08518496877883597,
+                "interval_95_mm": [
+                  -0.10645688396566132,
+                  0.2845620239003073
+                ],
+                "people_with_lower_error": 5
+              },
+              "camera_minus_speed": {
+                "change_mm": -3.3768445880341424,
+                "interval_95_mm": [
+                  -4.566355056866707,
+                  -2.2649803678693954
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -4.543756325534361,
+                "interval_95_mm": [
+                  -5.791525238035652,
+                  -3.4604271718087305
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -3.043172498485272,
+                "interval_95_mm": [
+                  -4.317709655160399,
+                  -1.9194317259458265
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -4.458571356755525,
+                "interval_95_mm": [
+                  -5.779230938378704,
+                  -3.2941768368015247
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 10,
+            "windows": 156,
+            "mean_absolute_error_mm": {
+              "camera_speed": 8.02719407102185,
+              "camera": 4.676098788689918,
+              "camera_force": 3.4229497391640984,
+              "camera_emg": 5.237391296362089,
+              "camera_force_emg": 3.7863876244555
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 15.505050659179688,
+              "camera": 9.863423465436558,
+              "camera_force": 6.951477575265768,
+              "camera_emg": 10.95500673118421,
+              "camera_force_emg": 7.874692571526008
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.2531490495258202,
+                "interval_95_mm": [
+                  -1.4731525353371628,
+                  -1.0193738088074737
+                ],
+                "people_with_lower_error": 10
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.561292507672171,
+                "interval_95_mm": [
+                  0.25875429539761446,
+                  0.8151913461202819
+                ],
+                "people_with_lower_error": 1
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.3634378852914017,
+                "interval_95_mm": [
+                  0.14137525671069678,
+                  0.5392210824499704
+                ],
+                "people_with_lower_error": 1
+              },
+              "camera_minus_speed": {
+                "change_mm": -3.3510952823319284,
+                "interval_95_mm": [
+                  -4.385132860093089,
+                  -2.4265867193684083
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -4.604244331857748,
+                "interval_95_mm": [
+                  -5.719013505738641,
+                  -3.653215598601909
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -2.7898027746597576,
+                "interval_95_mm": [
+                  -4.073269402494395,
+                  -1.6903118828789196
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -4.2408064465663475,
+                "interval_95_mm": [
+                  -5.548048179527322,
+                  -3.1778778083430916
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          }
+        },
+        "rear_pair_recently_hidden": {
+          "four_markers": {
+            "people": 10,
+            "windows": 156,
+            "mean_absolute_error_mm": {
+              "camera_speed": 8.81471144901371,
+              "camera": 6.396073565441418,
+              "camera_force": 5.634288340929869,
+              "camera_emg": 6.648031711618012,
+              "camera_force_emg": 5.645800393651742
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 18.184207916259766,
+              "camera": 12.793500606185905,
+              "camera_force": 11.943912173342877,
+              "camera_emg": 12.982876856253817,
+              "camera_force_emg": 11.766456109435643
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -0.7617852245115488,
+                "interval_95_mm": [
+                  -1.2361114618976576,
+                  -0.3071321941645429
+                ],
+                "people_with_lower_error": 8
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.2519581461765935,
+                "interval_95_mm": [
+                  -0.13649442176956592,
+                  0.6064889248837354
+                ],
+                "people_with_lower_error": 3
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.011512052721872612,
+                "interval_95_mm": [
+                  -0.3016559470582034,
+                  0.3016206916359886
+                ],
+                "people_with_lower_error": 4
+              },
+              "camera_minus_speed": {
+                "change_mm": -2.418637883572292,
+                "interval_95_mm": [
+                  -3.4544760696974737,
+                  -1.3408434480904976
+                ],
+                "people_with_lower_error": 9
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -3.1804231080838408,
+                "interval_95_mm": [
+                  -4.413835649277163,
+                  -1.9824442225790229
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -2.166679737395698,
+                "interval_95_mm": [
+                  -3.405310439961517,
+                  -1.0550848201359069
+                ],
+                "people_with_lower_error": 9
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -3.1689110553619684,
+                "interval_95_mm": [
+                  -4.522554816168011,
+                  -2.0289369038515113
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 10,
+            "windows": 156,
+            "mean_absolute_error_mm": {
+              "camera_speed": 10.627670098456203,
+              "camera": 8.875216338598696,
+              "camera_force": 8.223404755865575,
+              "camera_emg": 9.243825287614603,
+              "camera_force_emg": 8.341054842482285
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 22.2607421875,
+              "camera": 18.103597189764834,
+              "camera_force": 17.889940658188873,
+              "camera_emg": 19.78586730633329,
+              "camera_force_emg": 18.330059814336007
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -0.6518115827331198,
+                "interval_95_mm": [
+                  -1.1873558821855306,
+                  -0.11017508686015234
+                ],
+                "people_with_lower_error": 9
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.36860894901591046,
+                "interval_95_mm": [
+                  -0.009303429675280927,
+                  0.711772693583523
+                ],
+                "people_with_lower_error": 2
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.11765008661671006,
+                "interval_95_mm": [
+                  -0.2448520330036207,
+                  0.43906322641336604
+                ],
+                "people_with_lower_error": 3
+              },
+              "camera_minus_speed": {
+                "change_mm": -1.75245375985751,
+                "interval_95_mm": [
+                  -2.6608102546549866,
+                  -0.6939718938679718
+                ],
+                "people_with_lower_error": 9
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -2.40426534259063,
+                "interval_95_mm": [
+                  -3.523067982977506,
+                  -1.2271877055722973
+                ],
+                "people_with_lower_error": 9
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -1.3838448108415997,
+                "interval_95_mm": [
+                  -2.4611981193904366,
+                  -0.34637592547940627
+                ],
+                "people_with_lower_error": 9
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -2.2866152559739197,
+                "interval_95_mm": [
+                  -3.5390247311468865,
+                  -1.2034615271283915
+                ],
+                "people_with_lower_error": 9
+              }
+            }
+          }
+        }
+      },
+      "right_emphasis": {
+        "complete": {
+          "four_markers": {
+            "people": 10,
+            "windows": 167,
+            "mean_absolute_error_mm": {
+              "camera_speed": 7.511463890881633,
+              "camera": 4.520439138457814,
+              "camera_force": 3.0699061853834437,
+              "camera_emg": 4.553964147059684,
+              "camera_force_emg": 3.182476067579029
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 13.383367919921875,
+              "camera": 8.928783994461948,
+              "camera_force": 6.219366330765315,
+              "camera_emg": 9.168126993814287,
+              "camera_force_emg": 6.64594834648894
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.4505329530743698,
+                "interval_95_mm": [
+                  -1.8318363193674785,
+                  -1.134137265509293
+                ],
+                "people_with_lower_error": 10
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.033525008601870666,
+                "interval_95_mm": [
+                  -0.2842327446683599,
+                  0.37866610243731796
+                ],
+                "people_with_lower_error": 6
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.11256988219558502,
+                "interval_95_mm": [
+                  -0.11787275181486748,
+                  0.37391189746239295
+                ],
+                "people_with_lower_error": 4
+              },
+              "camera_minus_speed": {
+                "change_mm": -2.9910247524238196,
+                "interval_95_mm": [
+                  -4.307358429884215,
+                  -1.922261195457756
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -4.441557705498189,
+                "interval_95_mm": [
+                  -5.916389892019564,
+                  -3.273643626224994
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -2.9574997438219492,
+                "interval_95_mm": [
+                  -4.334580363191628,
+                  -1.8162785324689026
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -4.3289878233026045,
+                "interval_95_mm": [
+                  -5.850733313582041,
+                  -3.1159181701769487
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 10,
+            "windows": 167,
+            "mean_absolute_error_mm": {
+              "camera_speed": 7.852853148535118,
+              "camera": 4.204303397111699,
+              "camera_force": 3.0682231747260076,
+              "camera_emg": 4.44868366491737,
+              "camera_force_emg": 3.2842463404335156
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 13.884344482421875,
+              "camera": 8.081917011424393,
+              "camera_force": 6.4533662250194554,
+              "camera_emg": 9.163478154340881,
+              "camera_force_emg": 7.0407567185460245
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.1360802223856923,
+                "interval_95_mm": [
+                  -1.4570198547378501,
+                  -0.8499755630230723
+                ],
+                "people_with_lower_error": 10
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.24438026780566902,
+                "interval_95_mm": [
+                  -0.17712910714574662,
+                  0.6531925402742601
+                ],
+                "people_with_lower_error": 4
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.2160231657075075,
+                "interval_95_mm": [
+                  0.011197330901950141,
+                  0.455483457318655
+                ],
+                "people_with_lower_error": 3
+              },
+              "camera_minus_speed": {
+                "change_mm": -3.648549751423418,
+                "interval_95_mm": [
+                  -5.015805814975657,
+                  -2.6409050357649853
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -4.7846299738091105,
+                "interval_95_mm": [
+                  -6.2095288411405205,
+                  -3.725216355596501
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -3.4041694836177485,
+                "interval_95_mm": [
+                  -4.871416719210496,
+                  -2.310581008734391
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -4.568606808101603,
+                "interval_95_mm": [
+                  -6.063983635883074,
+                  -3.475579425298945
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          }
+        },
+        "left_front_hidden": {
+          "four_markers": {
+            "people": 10,
+            "windows": 167,
+            "mean_absolute_error_mm": {
+              "camera_speed": 7.326947959011872,
+              "camera": 4.605874875187668,
+              "camera_force": 3.4195581854098487,
+              "camera_emg": 4.469117997557722,
+              "camera_force_emg": 3.4253473963881946
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 12.487494913736981,
+              "camera": 9.317645367924763,
+              "camera_force": 6.909326756981149,
+              "camera_emg": 9.043774634796014,
+              "camera_force_emg": 7.155262669255978
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.1863166897778208,
+                "interval_95_mm": [
+                  -1.7073326819096522,
+                  -0.6722331919755654
+                ],
+                "people_with_lower_error": 9
+              },
+              "emg_minus_camera": {
+                "change_mm": -0.13675687762994593,
+                "interval_95_mm": [
+                  -0.4418791026737509,
+                  0.1653652298807883
+                ],
+                "people_with_lower_error": 6
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.005789210978345638,
+                "interval_95_mm": [
+                  -0.19806358626922035,
+                  0.19514980800589424
+                ],
+                "people_with_lower_error": 5
+              },
+              "camera_minus_speed": {
+                "change_mm": -2.721073083824204,
+                "interval_95_mm": [
+                  -3.8838037283427123,
+                  -1.74897175545768
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -3.9073897736020244,
+                "interval_95_mm": [
+                  -5.299801468195792,
+                  -2.751010565849156
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -2.85782996145415,
+                "interval_95_mm": [
+                  -4.117671243877432,
+                  -1.8457837074909011
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -3.901600562623679,
+                "interval_95_mm": [
+                  -5.321522189651824,
+                  -2.7394462307555907
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 10,
+            "windows": 167,
+            "mean_absolute_error_mm": {
+              "camera_speed": 7.852853148535118,
+              "camera": 4.672984955827921,
+              "camera_force": 3.360209217509774,
+              "camera_emg": 4.766133824795047,
+              "camera_force_emg": 3.537854739514606
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 13.884344482421875,
+              "camera": 9.256689411238302,
+              "camera_force": 6.753611267945621,
+              "camera_emg": 9.892553142807136,
+              "camera_force_emg": 6.775122985082269
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.3127757383181475,
+                "interval_95_mm": [
+                  -1.6829859291869906,
+                  -0.9564362102385664
+                ],
+                "people_with_lower_error": 10
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.09314886896712596,
+                "interval_95_mm": [
+                  -0.3420309586848141,
+                  0.519597837076101
+                ],
+                "people_with_lower_error": 5
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.17764552200483266,
+                "interval_95_mm": [
+                  -0.0621324981202444,
+                  0.43982991538956356
+                ],
+                "people_with_lower_error": 4
+              },
+              "camera_minus_speed": {
+                "change_mm": -3.1798681927071963,
+                "interval_95_mm": [
+                  -4.2904125910703295,
+                  -2.311857399634682
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -4.492643931025344,
+                "interval_95_mm": [
+                  -5.761851901780291,
+                  -3.522639210053698
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -3.0867193237400707,
+                "interval_95_mm": [
+                  -4.3734638075515075,
+                  -2.100935434452254
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -4.314998409020512,
+                "interval_95_mm": [
+                  -5.698664984603084,
+                  -3.2939570361871984
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          }
+        },
+        "rear_pair_recently_hidden": {
+          "four_markers": {
+            "people": 10,
+            "windows": 167,
+            "mean_absolute_error_mm": {
+              "camera_speed": 8.45357746966513,
+              "camera": 6.243885943624991,
+              "camera_force": 5.157778759389624,
+              "camera_emg": 6.094513355237361,
+              "camera_force_emg": 5.065653391349995
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 16.36978454589844,
+              "camera": 12.318598540389676,
+              "camera_force": 10.817900510780635,
+              "camera_emg": 12.20109486796646,
+              "camera_force_emg": 11.025128063680512
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.086107184235369,
+                "interval_95_mm": [
+                  -1.477909025280198,
+                  -0.7224877048890023
+                ],
+                "people_with_lower_error": 10
+              },
+              "emg_minus_camera": {
+                "change_mm": -0.1493725883876298,
+                "interval_95_mm": [
+                  -0.5009294417525108,
+                  0.22499862557008235
+                ],
+                "people_with_lower_error": 6
+              },
+              "emg_added_to_force": {
+                "change_mm": -0.09212536803962763,
+                "interval_95_mm": [
+                  -0.25587342299145416,
+                  0.09501276017676835
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_minus_speed": {
+                "change_mm": -2.209691526040136,
+                "interval_95_mm": [
+                  -3.1550802395710185,
+                  -1.3361129518117854
+                ],
+                "people_with_lower_error": 9
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -3.2957987102755046,
+                "interval_95_mm": [
+                  -4.573387503300953,
+                  -2.131205245013584
+                ],
+                "people_with_lower_error": 10
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -2.359064114427766,
+                "interval_95_mm": [
+                  -3.531770669606504,
+                  -1.2895636892444695
+                ],
+                "people_with_lower_error": 9
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -3.3879240783151325,
+                "interval_95_mm": [
+                  -4.734656182989128,
+                  -2.1780396654854193
+                ],
+                "people_with_lower_error": 10
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 10,
+            "windows": 167,
+            "mean_absolute_error_mm": {
+              "camera_speed": 10.057328574817982,
+              "camera": 8.614257767618309,
+              "camera_force": 7.705037062039733,
+              "camera_emg": 8.522218917431774,
+              "camera_force_emg": 7.54325750064001
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 21.5688720703125,
+              "camera": 16.752251237735116,
+              "camera_force": 15.814613098047277,
+              "camera_emg": 17.635836003872885,
+              "camera_force_emg": 16.176980159764323
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -0.9092207055785764,
+                "interval_95_mm": [
+                  -1.2177824989248258,
+                  -0.5836809576879264
+                ],
+                "people_with_lower_error": 10
+              },
+              "emg_minus_camera": {
+                "change_mm": -0.09203885018653483,
+                "interval_95_mm": [
+                  -0.4744674649406276,
+                  0.30522442859676885
+                ],
+                "people_with_lower_error": 5
+              },
+              "emg_added_to_force": {
+                "change_mm": -0.16177956139972233,
+                "interval_95_mm": [
+                  -0.3080539072308049,
+                  -0.006380120218556998
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_minus_speed": {
+                "change_mm": -1.443070807199674,
+                "interval_95_mm": [
+                  -2.3747642767664243,
+                  -0.5848993514322242
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -2.35229151277825,
+                "interval_95_mm": [
+                  -3.5054618984415926,
+                  -1.2810052119587176
+                ],
+                "people_with_lower_error": 9
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -1.535109657386209,
+                "interval_95_mm": [
+                  -2.73278815568232,
+                  -0.3981343460871997
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -2.5140710741779726,
+                "interval_95_mm": [
+                  -3.7848157785430927,
+                  -1.3875376489485796
+                ],
+                "people_with_lower_error": 9
+              }
+            }
+          }
+        }
+      }
+    },
+    "weighted_timing": {
+      "ordinary": {
+        "complete": {
+          "four_markers": {
+            "people": 8,
+            "windows": 346,
+            "mean_absolute_error_mm": {
+              "camera_speed": 10.28789475843851,
+              "camera": 5.8398766699790485,
+              "camera_force": 4.3923769139064035,
+              "camera_emg": 5.861748830926764,
+              "camera_force_emg": 4.48615225020726
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 20.70767593383789,
+              "camera": 11.447157432142031,
+              "camera_force": 8.263856571425787,
+              "camera_emg": 11.391014110372431,
+              "camera_force_emg": 8.617335546946943
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.4474997560726448,
+                "interval_95_mm": [
+                  -1.82736340714764,
+                  -1.006068215254347
+                ],
+                "people_with_lower_error": 8
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.02187216094771599,
+                "interval_95_mm": [
+                  -0.18495749645434822,
+                  0.2703362399154565
+                ],
+                "people_with_lower_error": 4
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.09377533630085594,
+                "interval_95_mm": [
+                  -0.07149158981986117,
+                  0.27690667939301344
+                ],
+                "people_with_lower_error": 4
+              },
+              "camera_minus_speed": {
+                "change_mm": -4.448018088459461,
+                "interval_95_mm": [
+                  -5.8553541128819635,
+                  -2.8378158378507083
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -5.895517844532106,
+                "interval_95_mm": [
+                  -7.360647697700271,
+                  -4.239605640857567
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -4.426145927511745,
+                "interval_95_mm": [
+                  -5.881323164607015,
+                  -2.7649241353341885
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -5.80174250823125,
+                "interval_95_mm": [
+                  -7.337192682499642,
+                  -4.0993833546625975
+                ],
+                "people_with_lower_error": 8
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 8,
+            "windows": 346,
+            "mean_absolute_error_mm": {
+              "camera_speed": 10.986458724858533,
+              "camera": 5.313444939926407,
+              "camera_force": 4.1437839999233095,
+              "camera_emg": 5.381713112623492,
+              "camera_force_emg": 4.206392477863458
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 23.131210327148438,
+              "camera": 10.212366246012829,
+              "camera_force": 7.596985461237233,
+              "camera_emg": 10.272961330321435,
+              "camera_force_emg": 8.211151879708886
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.1696609400030984,
+                "interval_95_mm": [
+                  -1.4715916203616901,
+                  -0.8632611812419168
+                ],
+                "people_with_lower_error": 8
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.06826817269708396,
+                "interval_95_mm": [
+                  -0.12093255908905806,
+                  0.2758229651305468
+                ],
+                "people_with_lower_error": 4
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.06260847794014812,
+                "interval_95_mm": [
+                  -0.12920410424606593,
+                  0.26459892104643773
+                ],
+                "people_with_lower_error": 3
+              },
+              "camera_minus_speed": {
+                "change_mm": -5.673013784932125,
+                "interval_95_mm": [
+                  -7.2669464473873635,
+                  -3.9183493022343554
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -6.8426747249352236,
+                "interval_95_mm": [
+                  -8.576614939710385,
+                  -4.9745748525117515
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -5.604745612235041,
+                "interval_95_mm": [
+                  -7.270551145020716,
+                  -3.803104152168417
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -6.780066246995076,
+                "interval_95_mm": [
+                  -8.564703068899867,
+                  -4.83952182948885
+                ],
+                "people_with_lower_error": 8
+              }
+            }
+          }
+        },
+        "left_front_hidden": {
+          "four_markers": {
+            "people": 8,
+            "windows": 346,
+            "mean_absolute_error_mm": {
+              "camera_speed": 10.343335599222254,
+              "camera": 5.7614989674046955,
+              "camera_force": 4.442818299418628,
+              "camera_emg": 5.646357918640604,
+              "camera_force_emg": 4.408900526931443
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 20.583396911621094,
+              "camera": 11.635421827581432,
+              "camera_force": 8.211319682704659,
+              "camera_emg": 11.420204412111733,
+              "camera_force_emg": 8.443509493634021
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.318680667986067,
+                "interval_95_mm": [
+                  -1.7010329840863845,
+                  -0.8744612771078571
+                ],
+                "people_with_lower_error": 7
+              },
+              "emg_minus_camera": {
+                "change_mm": -0.1151410487640917,
+                "interval_95_mm": [
+                  -0.23288316996694788,
+                  0.05136808836410922
+                ],
+                "people_with_lower_error": 7
+              },
+              "emg_added_to_force": {
+                "change_mm": -0.033917772487183195,
+                "interval_95_mm": [
+                  -0.1784107463539284,
+                  0.08431452747530938
+                ],
+                "people_with_lower_error": 4
+              },
+              "camera_minus_speed": {
+                "change_mm": -4.581836631817557,
+                "interval_95_mm": [
+                  -5.883322612229831,
+                  -3.14585662789702
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -5.900517299803624,
+                "interval_95_mm": [
+                  -7.330076812675729,
+                  -4.3064734193686585
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -4.696977680581649,
+                "interval_95_mm": [
+                  -6.03789254521141,
+                  -3.204827432073758
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -5.934435072290809,
+                "interval_95_mm": [
+                  -7.3544114584585,
+                  -4.3099639102755045
+                ],
+                "people_with_lower_error": 8
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 8,
+            "windows": 346,
+            "mean_absolute_error_mm": {
+              "camera_speed": 10.986458724858533,
+              "camera": 5.979518558855036,
+              "camera_force": 4.5993757740898085,
+              "camera_emg": 5.938807853144988,
+              "camera_force_emg": 4.648839400540842
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 23.131210327148438,
+              "camera": 10.954825744084275,
+              "camera_force": 8.639622207942235,
+              "camera_emg": 11.645526810275829,
+              "camera_force_emg": 8.900635711684103
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.380142784765227,
+                "interval_95_mm": [
+                  -1.6959269087161952,
+                  -1.0620879487426798
+                ],
+                "people_with_lower_error": 8
+              },
+              "emg_minus_camera": {
+                "change_mm": -0.04071070571004709,
+                "interval_95_mm": [
+                  -0.21378214746978114,
+                  0.16328140746180436
+                ],
+                "people_with_lower_error": 5
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.04946362645103225,
+                "interval_95_mm": [
+                  -0.13937244443855362,
+                  0.2565848235619614
+                ],
+                "people_with_lower_error": 4
+              },
+              "camera_minus_speed": {
+                "change_mm": -5.006940166003497,
+                "interval_95_mm": [
+                  -6.397051800596923,
+                  -3.431816437697587
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -6.387082950768724,
+                "interval_95_mm": [
+                  -7.9753717936689315,
+                  -4.677872936846329
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -5.047650871713544,
+                "interval_95_mm": [
+                  -6.514180952077683,
+                  -3.43774051216343
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -6.337619324317692,
+                "interval_95_mm": [
+                  -7.982967969343306,
+                  -4.55635524025945
+                ],
+                "people_with_lower_error": 8
+              }
+            }
+          }
+        },
+        "rear_pair_recently_hidden": {
+          "four_markers": {
+            "people": 8,
+            "windows": 346,
+            "mean_absolute_error_mm": {
+              "camera_speed": 10.928026524304189,
+              "camera": 8.09448185820205,
+              "camera_force": 7.3702985668640055,
+              "camera_emg": 7.881710647714681,
+              "camera_force_emg": 7.380829183195308
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 21.444664001464844,
+              "camera": 15.088965440052949,
+              "camera_force": 14.267608093724377,
+              "camera_emg": 15.209581679548158,
+              "camera_force_emg": 14.360596972154603
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -0.7241832913380455,
+                "interval_95_mm": [
+                  -1.1636622103503167,
+                  -0.3094670611744005
+                ],
+                "people_with_lower_error": 8
+              },
+              "emg_minus_camera": {
+                "change_mm": -0.21277121048736958,
+                "interval_95_mm": [
+                  -0.39344276904516473,
+                  -0.028385820942701145
+                ],
+                "people_with_lower_error": 6
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.010530616331303477,
+                "interval_95_mm": [
+                  -0.12269991964991911,
+                  0.15625778823884842
+                ],
+                "people_with_lower_error": 4
+              },
+              "camera_minus_speed": {
+                "change_mm": -2.8335446661021373,
+                "interval_95_mm": [
+                  -4.000196557067156,
+                  -1.4719238438477162
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -3.557727957440183,
+                "interval_95_mm": [
+                  -5.036634039822716,
+                  -1.8788117476024575
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -3.046315876589507,
+                "interval_95_mm": [
+                  -4.217871118106976,
+                  -1.6661786558628695
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -3.5471973411088795,
+                "interval_95_mm": [
+                  -5.106885172847277,
+                  -1.8395849465865584
+                ],
+                "people_with_lower_error": 7
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 8,
+            "windows": 346,
+            "mean_absolute_error_mm": {
+              "camera_speed": 13.290819096925581,
+              "camera": 11.165623165083856,
+              "camera_force": 10.532204326161217,
+              "camera_emg": 10.878447087293559,
+              "camera_force_emg": 10.449848541248135
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 27.532272338867188,
+              "camera": 19.800599967786866,
+              "camera_force": 19.312915864952565,
+              "camera_emg": 19.66665110010062,
+              "camera_force_emg": 19.04490363305995
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -0.6334188389226376,
+                "interval_95_mm": [
+                  -1.0841796193552737,
+                  -0.18548050156205342
+                ],
+                "people_with_lower_error": 7
+              },
+              "emg_minus_camera": {
+                "change_mm": -0.28717607779029797,
+                "interval_95_mm": [
+                  -0.5392711545143074,
+                  -0.03508100106628853
+                ],
+                "people_with_lower_error": 6
+              },
+              "emg_added_to_force": {
+                "change_mm": -0.08235578491308271,
+                "interval_95_mm": [
+                  -0.28517997209632195,
+                  0.10974702723750374
+                ],
+                "people_with_lower_error": 4
+              },
+              "camera_minus_speed": {
+                "change_mm": -2.1251959318417253,
+                "interval_95_mm": [
+                  -3.3946658061976107,
+                  -0.6647429887176949
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -2.758614770764363,
+                "interval_95_mm": [
+                  -4.358004172431662,
+                  -0.9409185039091241
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -2.412372009632023,
+                "interval_95_mm": [
+                  -3.7203329667651097,
+                  -0.9204990091332682
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -2.840970555677446,
+                "interval_95_mm": [
+                  -4.513257959024454,
+                  -0.9956049109685035
+                ],
+                "people_with_lower_error": 6
+              }
+            }
+          }
+        }
+      },
+      "left_emphasis": {
+        "complete": {
+          "four_markers": {
+            "people": 7,
+            "windows": 124,
+            "mean_absolute_error_mm": {
+              "camera_speed": 7.215722403541619,
+              "camera": 4.865409195415139,
+              "camera_force": 3.412347590853138,
+              "camera_emg": 5.4888528465323345,
+              "camera_force_emg": 3.8551695025888653
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 13.290547180175784,
+              "camera": 9.515024659972402,
+              "camera_force": 7.012618708108988,
+              "camera_emg": 10.66017159744197,
+              "camera_force_emg": 7.3382281993881024
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.4530616045620004,
+                "interval_95_mm": [
+                  -2.122325761926825,
+                  -0.8493804394131652
+                ],
+                "people_with_lower_error": 7
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.6234436511171955,
+                "interval_95_mm": [
+                  0.30246140715704417,
+                  0.9020089254725419
+                ],
+                "people_with_lower_error": 1
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.442821911735727,
+                "interval_95_mm": [
+                  0.28504115337561536,
+                  0.5904965276383857
+                ],
+                "people_with_lower_error": 0
+              },
+              "camera_minus_speed": {
+                "change_mm": -2.350313208126481,
+                "interval_95_mm": [
+                  -4.031506711317092,
+                  -0.8252599255935967
+                ],
+                "people_with_lower_error": 6
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -3.8033748126884817,
+                "interval_95_mm": [
+                  -5.255820922199484,
+                  -2.494087314748154
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -1.7268695570092856,
+                "interval_95_mm": [
+                  -3.3682437684088327,
+                  -0.17282124207754482
+                ],
+                "people_with_lower_error": 6
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -3.3605529009527544,
+                "interval_95_mm": [
+                  -4.817606292189852,
+                  -2.062069178927067
+                ],
+                "people_with_lower_error": 7
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 7,
+            "windows": 124,
+            "mean_absolute_error_mm": {
+              "camera_speed": 7.629305729609803,
+              "camera": 4.464193299590819,
+              "camera_force": 3.2896568923272698,
+              "camera_emg": 5.273501013250487,
+              "camera_force_emg": 3.929351416479586
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 14.495565795898438,
+              "camera": 8.777088188551925,
+              "camera_force": 6.382955934012293,
+              "camera_emg": 10.711230282645243,
+              "camera_force_emg": 7.497976173279399
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.1745364072635491,
+                "interval_95_mm": [
+                  -1.7286511636799815,
+                  -0.7034794771397889
+                ],
+                "people_with_lower_error": 7
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.8093077136596688,
+                "interval_95_mm": [
+                  0.5536258886560571,
+                  1.040311483242999
+                ],
+                "people_with_lower_error": 0
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.639694524152316,
+                "interval_95_mm": [
+                  0.5113027867278955,
+                  0.7629059486875115
+                ],
+                "people_with_lower_error": 0
+              },
+              "camera_minus_speed": {
+                "change_mm": -3.1651124300189837,
+                "interval_95_mm": [
+                  -4.803267448553481,
+                  -1.7237703523352461
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -4.3396488372825335,
+                "interval_95_mm": [
+                  -5.809141742673003,
+                  -2.9911899893158553
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -2.355804716359315,
+                "interval_95_mm": [
+                  -4.015948499502295,
+                  -0.8719071551366737
+                ],
+                "people_with_lower_error": 6
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -3.6999543131302173,
+                "interval_95_mm": [
+                  -5.213507365761638,
+                  -2.309191487812941
+                ],
+                "people_with_lower_error": 7
+              }
+            }
+          }
+        },
+        "left_front_hidden": {
+          "four_markers": {
+            "people": 7,
+            "windows": 124,
+            "mean_absolute_error_mm": {
+              "camera_speed": 7.291060145676923,
+              "camera": 5.063467350854043,
+              "camera_force": 3.3567456102948063,
+              "camera_emg": 5.309526516434909,
+              "camera_force_emg": 3.6735724734045165
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 13.924772135416665,
+              "camera": 9.655867406077652,
+              "camera_force": 6.665153307928605,
+              "camera_emg": 11.115995099532329,
+              "camera_force_emg": 6.818758469410659
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.7067217405592368,
+                "interval_95_mm": [
+                  -2.2516965850516066,
+                  -1.2011996202330113
+                ],
+                "people_with_lower_error": 7
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.2460591655808659,
+                "interval_95_mm": [
+                  0.031107696823464717,
+                  0.4509580469876489
+                ],
+                "people_with_lower_error": 2
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.31682686310970987,
+                "interval_95_mm": [
+                  0.12418114611398334,
+                  0.4836537220434298
+                ],
+                "people_with_lower_error": 1
+              },
+              "camera_minus_speed": {
+                "change_mm": -2.2275927948228795,
+                "interval_95_mm": [
+                  -3.575483649605285,
+                  -0.9520729489477648
+                ],
+                "people_with_lower_error": 6
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -3.9343145353821165,
+                "interval_95_mm": [
+                  -5.357157506142327,
+                  -2.52872350566439
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -1.9815336292420136,
+                "interval_95_mm": [
+                  -3.355214233525906,
+                  -0.6221795383313643
+                ],
+                "people_with_lower_error": 5
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -3.6174876722724063,
+                "interval_95_mm": [
+                  -4.935446049946383,
+                  -2.2888653844282416
+                ],
+                "people_with_lower_error": 7
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 7,
+            "windows": 124,
+            "mean_absolute_error_mm": {
+              "camera_speed": 7.629305729609803,
+              "camera": 4.948135228752444,
+              "camera_force": 3.5628145288742,
+              "camera_emg": 5.718364060798984,
+              "camera_force_emg": 4.2075654961746976
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 14.495565795898438,
+              "camera": 9.841424472293825,
+              "camera_force": 7.023286737495412,
+              "camera_emg": 11.344570697496483,
+              "camera_force_emg": 8.055648748875711
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.3853206998782446,
+                "interval_95_mm": [
+                  -1.959575676178497,
+                  -0.8225987158114157
+                ],
+                "people_with_lower_error": 7
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.7702288320465398,
+                "interval_95_mm": [
+                  0.6441125571796794,
+                  0.8963723992561483
+                ],
+                "people_with_lower_error": 0
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.6447509673004982,
+                "interval_95_mm": [
+                  0.5150514299447705,
+                  0.7509068891342496
+                ],
+                "people_with_lower_error": 0
+              },
+              "camera_minus_speed": {
+                "change_mm": -2.681170500857358,
+                "interval_95_mm": [
+                  -3.967583658729396,
+                  -1.5235429217088503
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -4.066491200735602,
+                "interval_95_mm": [
+                  -5.466830370809528,
+                  -2.77903245141665
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -1.9109416688108187,
+                "interval_95_mm": [
+                  -3.2238665846225394,
+                  -0.67655992004154
+                ],
+                "people_with_lower_error": 6
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -3.421740233435105,
+                "interval_95_mm": [
+                  -4.75292504305697,
+                  -2.124617794035184
+                ],
+                "people_with_lower_error": 7
+              }
+            }
+          }
+        },
+        "rear_pair_recently_hidden": {
+          "four_markers": {
+            "people": 7,
+            "windows": 124,
+            "mean_absolute_error_mm": {
+              "camera_speed": 7.952528937514321,
+              "camera": 6.595504667723484,
+              "camera_force": 5.8007663497835305,
+              "camera_emg": 7.062991518681051,
+              "camera_force_emg": 6.207726049575575
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 17.224789428710938,
+              "camera": 13.330988040824877,
+              "camera_force": 12.147382914569816,
+              "camera_emg": 13.32602543760031,
+              "camera_force_emg": 12.803009896308804
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -0.7947383179399535,
+                "interval_95_mm": [
+                  -1.3838188014653219,
+                  -0.240495727941379
+                ],
+                "people_with_lower_error": 6
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.46748685095756615,
+                "interval_95_mm": [
+                  0.07686727888060771,
+                  0.8259231062140288
+                ],
+                "people_with_lower_error": 1
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.4069596997920447,
+                "interval_95_mm": [
+                  0.22169936217745403,
+                  0.59814216991086
+                ],
+                "people_with_lower_error": 0
+              },
+              "camera_minus_speed": {
+                "change_mm": -1.3570242697908366,
+                "interval_95_mm": [
+                  -2.905028950649022,
+                  0.04925646395792687
+                ],
+                "people_with_lower_error": 5
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -2.1517625877307904,
+                "interval_95_mm": [
+                  -3.880796243853073,
+                  -0.7713030532854992
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -0.8895374188332706,
+                "interval_95_mm": [
+                  -2.2086049270270935,
+                  0.43910917532941984
+                ],
+                "people_with_lower_error": 6
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -1.7448028879387454,
+                "interval_95_mm": [
+                  -3.3261070935200374,
+                  -0.4994483824435798
+                ],
+                "people_with_lower_error": 5
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 7,
+            "windows": 124,
+            "mean_absolute_error_mm": {
+              "camera_speed": 9.815308617171201,
+              "camera": 8.972215961129743,
+              "camera_force": 8.51515637795733,
+              "camera_emg": 9.437218605105473,
+              "camera_force_emg": 8.88501802781914
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 22.485287475585938,
+              "camera": 17.800812562310842,
+              "camera_force": 17.011249328940988,
+              "camera_emg": 18.85166722654021,
+              "camera_force_emg": 17.01588479793312
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -0.457059583172413,
+                "interval_95_mm": [
+                  -1.0754205080026389,
+                  0.11715042300450625
+                ],
+                "people_with_lower_error": 5
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.4650026439757311,
+                "interval_95_mm": [
+                  0.059477946061772896,
+                  0.8679590739591951
+                ],
+                "people_with_lower_error": 2
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.3698616498618114,
+                "interval_95_mm": [
+                  0.22810441238031348,
+                  0.5022703183217624
+                ],
+                "people_with_lower_error": 0
+              },
+              "camera_minus_speed": {
+                "change_mm": -0.84309265604146,
+                "interval_95_mm": [
+                  -2.366374712553571,
+                  0.6817691366015618
+                ],
+                "people_with_lower_error": 5
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -1.300152239213873,
+                "interval_95_mm": [
+                  -2.991441971397503,
+                  0.06951295741282212
+                ],
+                "people_with_lower_error": 5
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -0.37809001206572884,
+                "interval_95_mm": [
+                  -1.732409635599134,
+                  1.2025607806180432
+                ],
+                "people_with_lower_error": 4
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -0.9302905893520615,
+                "interval_95_mm": [
+                  -2.545492837102947,
+                  0.3572924861554636
+                ],
+                "people_with_lower_error": 5
+              }
+            }
+          }
+        }
+      },
+      "right_emphasis": {
+        "complete": {
+          "four_markers": {
+            "people": 8,
+            "windows": 130,
+            "mean_absolute_error_mm": {
+              "camera_speed": 6.738111271453761,
+              "camera": 4.713833699352836,
+              "camera_force": 3.318172613864603,
+              "camera_emg": 4.805310992159422,
+              "camera_force_emg": 3.450320420201193
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 12.915321350097656,
+              "camera": 8.935627576310361,
+              "camera_force": 6.655158911647709,
+              "camera_emg": 10.114996045909564,
+              "camera_force_emg": 7.136233785157606
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.3956610854882343,
+                "interval_95_mm": [
+                  -1.804943650528688,
+                  -0.9862985019620865
+                ],
+                "people_with_lower_error": 8
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.09147729280658548,
+                "interval_95_mm": [
+                  -0.2649683605656495,
+                  0.44471284878748085
+                ],
+                "people_with_lower_error": 4
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.1321478063365901,
+                "interval_95_mm": [
+                  -0.11742091983258018,
+                  0.3627332139660619
+                ],
+                "people_with_lower_error": 2
+              },
+              "camera_minus_speed": {
+                "change_mm": -2.0242775721009227,
+                "interval_95_mm": [
+                  -4.116827428160612,
+                  -0.51791760090986
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -3.419938657589157,
+                "interval_95_mm": [
+                  -5.7211312672349806,
+                  -1.6516256032010903
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -1.9328002792943373,
+                "interval_95_mm": [
+                  -4.0881790200706725,
+                  -0.4289443579579224
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -3.2877908512525673,
+                "interval_95_mm": [
+                  -5.694038508399134,
+                  -1.5440920526494974
+                ],
+                "people_with_lower_error": 8
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 8,
+            "windows": 130,
+            "mean_absolute_error_mm": {
+              "camera_speed": 7.020596184394409,
+              "camera": 4.1259022569405746,
+              "camera_force": 2.9830207200399896,
+              "camera_emg": 4.32670754964299,
+              "camera_force_emg": 3.1470103725898833
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 14.237150573730469,
+              "camera": 8.337676026712568,
+              "camera_force": 6.234627614696026,
+              "camera_emg": 9.154667099615963,
+              "camera_force_emg": 6.992804039291483
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.142881536900585,
+                "interval_95_mm": [
+                  -1.657064850877174,
+                  -0.6633712493892912
+                ],
+                "people_with_lower_error": 8
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.2008052927024147,
+                "interval_95_mm": [
+                  -0.08380321897527548,
+                  0.5195572838079969
+                ],
+                "people_with_lower_error": 3
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.1639896525498933,
+                "interval_95_mm": [
+                  -0.03496460952126654,
+                  0.3706473280721899
+                ],
+                "people_with_lower_error": 2
+              },
+              "camera_minus_speed": {
+                "change_mm": -2.894693927453835,
+                "interval_95_mm": [
+                  -4.905190480226027,
+                  -1.2493232154056906
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -4.03757546435442,
+                "interval_95_mm": [
+                  -6.488936163514875,
+                  -1.9658137696073719
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -2.6938886347514206,
+                "interval_95_mm": [
+                  -4.743288857182776,
+                  -1.0001611636096834
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -3.873585811804527,
+                "interval_95_mm": [
+                  -6.447688039409675,
+                  -1.7935645333267565
+                ],
+                "people_with_lower_error": 7
+              }
+            }
+          }
+        },
+        "left_front_hidden": {
+          "four_markers": {
+            "people": 8,
+            "windows": 130,
+            "mean_absolute_error_mm": {
+              "camera_speed": 6.439882259019077,
+              "camera": 4.125091748223431,
+              "camera_force": 2.8381340063961407,
+              "camera_emg": 4.247526886318486,
+              "camera_force_emg": 2.971232315267594
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 12.432716115315761,
+              "camera": 8.889401962194643,
+              "camera_force": 6.118061237492699,
+              "camera_emg": 10.028265635123741,
+              "camera_force_emg": 7.221670630056561
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.2869577418272904,
+                "interval_95_mm": [
+                  -1.8940715798050067,
+                  -0.7257284941803888
+                ],
+                "people_with_lower_error": 7
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.12243513809505557,
+                "interval_95_mm": [
+                  -0.13382588934975465,
+                  0.40174780825283063
+                ],
+                "people_with_lower_error": 4
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.13309830887145338,
+                "interval_95_mm": [
+                  -0.08329631632847642,
+                  0.34701987393546335
+                ],
+                "people_with_lower_error": 2
+              },
+              "camera_minus_speed": {
+                "change_mm": -2.314790510795646,
+                "interval_95_mm": [
+                  -3.8748218491126174,
+                  -1.2168640861135063
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -3.6017482526229365,
+                "interval_95_mm": [
+                  -5.571499540753457,
+                  -2.013784900749935
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -2.1923553727005904,
+                "interval_95_mm": [
+                  -3.8822235250586012,
+                  -0.9753210653098359
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -3.4686499437514824,
+                "interval_95_mm": [
+                  -5.599534403294882,
+                  -1.809444032387372
+                ],
+                "people_with_lower_error": 8
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 8,
+            "windows": 130,
+            "mean_absolute_error_mm": {
+              "camera_speed": 7.020596184394409,
+              "camera": 4.482358973112641,
+              "camera_force": 3.199035737331096,
+              "camera_emg": 4.58023163567309,
+              "camera_force_emg": 3.2803817298040907
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 14.237150573730469,
+              "camera": 9.625069665582814,
+              "camera_force": 6.529725367467175,
+              "camera_emg": 10.248152715675861,
+              "camera_force_emg": 7.311184842521838
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -1.2833232357815452,
+                "interval_95_mm": [
+                  -1.8708560972180763,
+                  -0.7553370746414667
+                ],
+                "people_with_lower_error": 8
+              },
+              "emg_minus_camera": {
+                "change_mm": 0.09787266256044919,
+                "interval_95_mm": [
+                  -0.14537422800324865,
+                  0.3796662844548715
+                ],
+                "people_with_lower_error": 4
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.0813459924729947,
+                "interval_95_mm": [
+                  -0.12366216904352481,
+                  0.2828254666348951
+                ],
+                "people_with_lower_error": 3
+              },
+              "camera_minus_speed": {
+                "change_mm": -2.5382372112817686,
+                "interval_95_mm": [
+                  -4.247344637552486,
+                  -1.1577421116227584
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -3.8215604470633138,
+                "interval_95_mm": [
+                  -6.060530383929743,
+                  -1.964101603044872
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -2.4403645487213197,
+                "interval_95_mm": [
+                  -4.2418753221040415,
+                  -0.9428735189284468
+                ],
+                "people_with_lower_error": 7
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -3.740214454590319,
+                "interval_95_mm": [
+                  -6.135038543149117,
+                  -1.8093848809247908
+                ],
+                "people_with_lower_error": 8
+              }
+            }
+          }
+        },
+        "rear_pair_recently_hidden": {
+          "four_markers": {
+            "people": 8,
+            "windows": 130,
+            "mean_absolute_error_mm": {
+              "camera_speed": 8.423189568624137,
+              "camera": 6.658070803897229,
+              "camera_force": 6.075304156803448,
+              "camera_emg": 6.566795192210783,
+              "camera_force_emg": 6.09619243226987
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 14.812681579589846,
+              "camera": 12.319431204324015,
+              "camera_force": 11.819825728721385,
+              "camera_emg": 13.243166214687816,
+              "camera_force_emg": 11.4252803259487
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -0.5827666470937805,
+                "interval_95_mm": [
+                  -1.169970548628635,
+                  0.12080024412242452
+                ],
+                "people_with_lower_error": 7
+              },
+              "emg_minus_camera": {
+                "change_mm": -0.0912756116864446,
+                "interval_95_mm": [
+                  -0.47507561522940583,
+                  0.28623368161896534
+                ],
+                "people_with_lower_error": 4
+              },
+              "emg_added_to_force": {
+                "change_mm": 0.02088827546642058,
+                "interval_95_mm": [
+                  -0.20443004399556686,
+                  0.24590694650077782
+                ],
+                "people_with_lower_error": 4
+              },
+              "camera_minus_speed": {
+                "change_mm": -1.7651187647269087,
+                "interval_95_mm": [
+                  -3.639193427820631,
+                  -0.4660971413755268
+                ],
+                "people_with_lower_error": 6
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -2.3478854118206893,
+                "interval_95_mm": [
+                  -4.638691747635469,
+                  -0.8735809774747996
+                ],
+                "people_with_lower_error": 8
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -1.8563943764133533,
+                "interval_95_mm": [
+                  -3.9017498202398175,
+                  -0.2829671000012569
+                ],
+                "people_with_lower_error": 6
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -2.3269971363542687,
+                "interval_95_mm": [
+                  -4.718963187004756,
+                  -0.7936121747824904
+                ],
+                "people_with_lower_error": 8
+              }
+            }
+          },
+          "rear_pair": {
+            "people": 8,
+            "windows": 130,
+            "mean_absolute_error_mm": {
+              "camera_speed": 10.886436917829803,
+              "camera": 9.699634928548004,
+              "camera_force": 9.114990351152313,
+              "camera_emg": 9.482891802651974,
+              "camera_force_emg": 9.096761314893802
+            },
+            "pooled_p90_mm": {
+              "camera_speed": 21.0250244140625,
+              "camera": 17.832548441469473,
+              "camera_force": 17.331951822223495,
+              "camera_emg": 17.95541421720755,
+              "camera_force_emg": 17.389872916953696
+            },
+            "paired_comparisons": {
+              "force_minus_camera": {
+                "change_mm": -0.5846445773956929,
+                "interval_95_mm": [
+                  -1.3025807914635554,
+                  0.17858238594545958
+                ],
+                "people_with_lower_error": 7
+              },
+              "emg_minus_camera": {
+                "change_mm": -0.21674312589603162,
+                "interval_95_mm": [
+                  -0.5343392549212341,
+                  0.11723073626265457
+                ],
+                "people_with_lower_error": 6
+              },
+              "emg_added_to_force": {
+                "change_mm": -0.0182290362585108,
+                "interval_95_mm": [
+                  -0.2315170373364237,
+                  0.17963504989653012
+                ],
+                "people_with_lower_error": 4
+              },
+              "camera_minus_speed": {
+                "change_mm": -1.1868019892817983,
+                "interval_95_mm": [
+                  -3.090603975559759,
+                  0.20033181792032814
+                ],
+                "people_with_lower_error": 5
+              },
+              "camera_force_minus_speed": {
+                "change_mm": -1.771446566677491,
+                "interval_95_mm": [
+                  -4.1584078601183805,
+                  -0.2378371613712292
+                ],
+                "people_with_lower_error": 6
+              },
+              "camera_emg_minus_speed": {
+                "change_mm": -1.4035451151778298,
+                "interval_95_mm": [
+                  -3.3131291208488216,
+                  0.16246057953795479
+                ],
+                "people_with_lower_error": 6
+              },
+              "camera_force_emg_minus_speed": {
+                "change_mm": -1.789675602936002,
+                "interval_95_mm": [
+                  -4.149360962408165,
+                  -0.25759010317895836
+                ],
+                "people_with_lower_error": 6
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</script>
+</body>
+</html>
