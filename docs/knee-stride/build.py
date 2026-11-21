@@ -38,7 +38,16 @@ def assembled(model):
     scored=results["paired_person_differences_deg"]
     if not all(scored["transformer_residual_minus_"+comp]["wins"] == 12 for comp in ["prior_stride","ridge_residual"]):
         raise ValueError("The comparative text must be reviewed for these results")
-    normalized["outcome"]="The knee-trained Transformer gave smaller mean errors than both alternatives for every one of these 12 walkers. Fresh walkers would test whether that advantage carries over."
+    external = json.loads((model / "external-optical" / "results.json").read_text())
+    vs_copy = external["comparisons"]["transformer_residual_minus_prior_stride"]
+    vs_linear = external["comparisons"]["transformer_residual_minus_ridge_residual"]
+    n_external = external["participants_scored"]
+    normalized["outcome"]=("The knee-trained Transformer gave smaller mean errors than both alternatives for every one of these 12 walkers. "
+        "They are not a fresh test: an earlier study had already examined them. "
+        f"Ten new walkers were then recorded in a second laboratory, at a nominal 0.8 m/s, with angles from cameras. There the unchanged model beat the plain stride copy for only {vs_copy['wins']} of {n_external}, "
+        f"and that comparison {'passed' if vs_copy['passed'] else 'failed'} its rule. It beat the linear correction for {vs_linear['wins']} of {n_external}.")
+    if n_external != 10:
+        raise ValueError("Review the external-walker sentence")
 
     shared = json.loads((SRC/"shared-knee.json").read_text())
     scores = shared["scores"]
@@ -52,8 +61,18 @@ def assembled(model):
         raise ValueError("Shared study and knee-trained participant windows differ")
     if scores["shared_advantage_criterion_met"] or scores["mae_degrees"]["shared"] <= min(scores["mae_degrees"][m] for m in ("raw","scrambled")):
         raise ValueError("Review the shared comparison interpretation")
+    m, vs_stride, vs_shuffled = scores["mae_degrees"], scores["comparisons"]["stride"], scores["comparisons"]["scrambled"]
+    low, high = vs_stride["paired_ci95"]
+    if not (low < 0 < high and m["raw"] < m["shared"] and m["scrambled"] < m["raw"]):
+        raise ValueError("Review the shared comparison sentence")
+    signed = lambda v: f"{v:+.2f}".replace("-", "\u2212")
+    shuffled_closer = len(people) - vs_shuffled["shared_wins"] - vs_shuffled["ties"]
     transfer=dict(people=transfer_people,cutoffs=scores["cutoffs"],means=scores["mae_degrees"],comparisons=[],
-           outcome="The frozen encoder beat stride replay on average. Measurements alone gave a slightly smaller mean error, and the shuffled encoder gave the smallest. This comparison found no advantage from the encoder’s learned weights.")
+           outcome=(f"The frozen encoder’s average error was {m['shared']:.3f}°, against {m['stride']:.3f}° for stride replay, "
+                    f"but the 95% interval for that difference runs from {signed(low)}° to {signed(high)}°, so the gain may be none at all. "
+                    f"The correction learned from the measurements alone was slightly closer ({m['raw']:.3f}°), and the shuffled encoder was closest "
+                    f"({m['scrambled']:.3f}°; closer than the trained encoder for {shuffled_closer} of {len(people)} walkers). "
+                    "This comparison found no advantage from the encoder’s learned weights."))
     for b,v in scores["comparisons"].items():
         transfer["comparisons"].append(dict(a="shared",b=b,mean=v["shared_minus_comparator_deg"],ci=v["paired_ci95"],
               wins=v["shared_wins"],ties=v["ties"],losses=len(people)-v["shared_wins"]-v["ties"]))
