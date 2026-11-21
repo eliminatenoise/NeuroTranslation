@@ -206,7 +206,7 @@
     return cells.map(Number);
   }
   byId('preset').addEventListener('change', () => fillPreset(byId('preset').value));
-  byId('restore').addEventListener('click', () => fillPreset('rise'));
+  byId('restore').addEventListener('click', () => fillPreset(byId('preset').value));
   for (const key of fields)
     byId(key).addEventListener('input', () => {
       pending = true;
