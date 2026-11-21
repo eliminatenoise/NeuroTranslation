@@ -186,3 +186,7 @@ To forecast next-day sensory-cortex counts, extract the [offline reader](docs/co
 ## Carry a cylinder to a new target
 
 Extract the [offline target-reach reader](docs/target-reach-offline.zip) or the [complete fitted-model package](models/target-reach.zip). Open the launcher named for your system to compare a recorded destination with a new one.
+
+## Forecast how a cylinder turns
+
+Extract the [offline cylinder-rotation reader](docs/cylinder-rotation-offline.zip) or [the models and data](models/cylinder-rotation.zip). Launch it to forecast turning rate and acceleration from recent sensor samples.
