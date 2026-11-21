@@ -1,0 +1,881 @@
+{
+  "scope": "Early-trial comparison of separate nominal-pace trials within the same Bath collection.",
+  "archive": "https://doi.org/10.15125/BATH-01341",
+  "protocol": "https://doi.org/10.7717/peerj.17896",
+  "nominal_percent_of_usual_pace": {
+    "slow": 90,
+    "norm": 100,
+    "fast": 110
+  },
+  "treadmill_grade_percent": 1,
+  "rate_hz": 250,
+  "forecast_ms": 100,
+  "source_frames": 2500,
+  "issue_seconds_first_last": [
+    0.8,
+    9.8
+  ],
+  "primary": {
+    "four_marker": {
+      "common": {
+        "slow": {
+          "people": 40,
+          "windows": 3616,
+          "descriptive_only": false,
+          "person_equal_mae_mm": {
+            "zero": 46.07123302633002,
+            "camera_speed": 58.95384152564172,
+            "chair_direct": 52.56441063201502,
+            "chair_correction": 55.550020258497455,
+            "stride": 7.017370434783035,
+            "learned_stride": 5.19567969412011
+          },
+          "pooled_p90_abs_error_mm": {
+            "zero": 76.22928619384766,
+            "camera_speed": 92.89610760028546,
+            "chair_direct": 86.96342526155338,
+            "chair_correction": 97.22450089649284,
+            "stride": 15.155441284179688,
+            "learned_stride": 10.984120781217754
+          }
+        },
+        "norm": {
+          "people": 40,
+          "windows": 3616,
+          "descriptive_only": false,
+          "person_equal_mae_mm": {
+            "zero": 47.47258402443642,
+            "camera_speed": 61.01495959517098,
+            "chair_direct": 54.39990135778163,
+            "chair_correction": 57.69076223760858,
+            "stride": 7.317923545759898,
+            "learned_stride": 5.428670256627025
+          },
+          "pooled_p90_abs_error_mm": {
+            "zero": 78.002685546875,
+            "camera_speed": 97.06311974158655,
+            "chair_direct": 90.79064982857327,
+            "chair_correction": 102.79348961083467,
+            "stride": 15.721290588378906,
+            "learned_stride": 11.302366812063987
+          }
+        },
+        "fast": {
+          "people": 40,
+          "windows": 3616,
+          "descriptive_only": false,
+          "person_equal_mae_mm": {
+            "zero": 47.46998873716936,
+            "camera_speed": 62.575561667428836,
+            "chair_direct": 55.47708727012846,
+            "chair_correction": 59.52428866993769,
+            "stride": 8.090942649969808,
+            "learned_stride": 5.788672547334071
+          },
+          "pooled_p90_abs_error_mm": {
+            "zero": 77.49099731445312,
+            "camera_speed": 100.49671114408054,
+            "chair_direct": 94.05428793212641,
+            "chair_correction": 107.26823246294612,
+            "stride": 17.703994750976562,
+            "learned_stride": 12.186788536525075
+          }
+        }
+      },
+      "learned_minus_stride": {
+        "norm": {
+          "mean_mm": -1.8892532891328717,
+          "bootstrap95_mm": [
+            -2.257029815229419,
+            -1.5515811429891246
+          ],
+          "negative_people": 40,
+          "positive_people": 0,
+          "unchanged_people": 0,
+          "descriptive_only": false
+        },
+        "slow": {
+          "mean_mm": -1.8216907406629268,
+          "bootstrap95_mm": [
+            -2.132866447065065,
+            -1.5198026469369166
+          ],
+          "negative_people": 39,
+          "positive_people": 1,
+          "unchanged_people": 0,
+          "descriptive_only": false
+        },
+        "fast": {
+          "mean_mm": -2.3022701026357373,
+          "bootstrap95_mm": [
+            -2.6636056285626752,
+            -1.9701801741532123
+          ],
+          "negative_people": 40,
+          "positive_people": 0,
+          "unchanged_people": 0,
+          "descriptive_only": false
+        }
+      },
+      "error_change_from_usual_pace": {
+        "slow": {
+          "zero": {
+            "mean_mm": -1.401350998106415,
+            "bootstrap95_mm": [
+              -2.1837243973127523,
+              -0.6474865688382091
+            ],
+            "negative_people": 31,
+            "positive_people": 9,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "camera_speed": {
+            "mean_mm": -2.0611180695292433,
+            "bootstrap95_mm": [
+              -2.9971445915081816,
+              -1.170590325115589
+            ],
+            "negative_people": 32,
+            "positive_people": 8,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "chair_direct": {
+            "mean_mm": -1.835490725766626,
+            "bootstrap95_mm": [
+              -2.578658020343799,
+              -1.1233036026582786
+            ],
+            "negative_people": 28,
+            "positive_people": 12,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "chair_correction": {
+            "mean_mm": -2.1407419791111235,
+            "bootstrap95_mm": [
+              -2.9961952938882392,
+              -1.3438878489808521
+            ],
+            "negative_people": 32,
+            "positive_people": 8,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "stride": {
+            "mean_mm": -0.300553110976861,
+            "bootstrap95_mm": [
+              -0.8414219298294342,
+              0.26379074377711953
+            ],
+            "negative_people": 22,
+            "positive_people": 18,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "learned_stride": {
+            "mean_mm": -0.23299056250691583,
+            "bootstrap95_mm": [
+              -0.5563652619314748,
+              0.1288771982778713
+            ],
+            "negative_people": 25,
+            "positive_people": 15,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          }
+        },
+        "fast": {
+          "zero": {
+            "mean_mm": -0.002595287267067725,
+            "bootstrap95_mm": [
+              -0.5279545562698915,
+              0.5243900517026936
+            ],
+            "negative_people": 20,
+            "positive_people": 20,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "camera_speed": {
+            "mean_mm": 1.5606020722578806,
+            "bootstrap95_mm": [
+              0.9161605061960258,
+              2.2434823823587386
+            ],
+            "negative_people": 8,
+            "positive_people": 32,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "chair_direct": {
+            "mean_mm": 1.0771859123468346,
+            "bootstrap95_mm": [
+              0.5150562951823519,
+              1.6497212309132951
+            ],
+            "negative_people": 11,
+            "positive_people": 29,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "chair_correction": {
+            "mean_mm": 1.8335264323291107,
+            "bootstrap95_mm": [
+              1.225755132798417,
+              2.482853194696036
+            ],
+            "negative_people": 6,
+            "positive_people": 34,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "stride": {
+            "mean_mm": 0.7730191042099117,
+            "bootstrap95_mm": [
+              0.23290253657133875,
+              1.3110854292367857
+            ],
+            "negative_people": 13,
+            "positive_people": 27,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "learned_stride": {
+            "mean_mm": 0.36000229070704587,
+            "bootstrap95_mm": [
+              0.06104098051680659,
+              0.6749460359151076
+            ],
+            "negative_people": 17,
+            "positive_people": 23,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          }
+        }
+      }
+    },
+    "rear_pair": {
+      "common": {
+        "slow": {
+          "people": 40,
+          "windows": 3640,
+          "descriptive_only": false,
+          "person_equal_mae_mm": {
+            "zero": 49.60389810918452,
+            "camera_speed": 63.33282575631485,
+            "chair_direct": 54.771011724901214,
+            "chair_correction": 60.293991625906564,
+            "stride": 7.6316514570634455,
+            "learned_stride": 5.622912758466766
+          },
+          "pooled_p90_abs_error_mm": {
+            "zero": 81.47973022460937,
+            "camera_speed": 102.13892258864182,
+            "chair_direct": 92.45526058781982,
+            "chair_correction": 105.94783613393308,
+            "stride": 16.809173583984375,
+            "learned_stride": 11.950153561059633
+          }
+        },
+        "norm": {
+          "people": 40,
+          "windows": 3640,
+          "descriptive_only": false,
+          "person_equal_mae_mm": {
+            "zero": 51.32539869035992,
+            "camera_speed": 65.79161944675528,
+            "chair_direct": 57.02984893782461,
+            "chair_correction": 62.86010660856728,
+            "stride": 8.020321076780885,
+            "learned_stride": 5.979992064927732
+          },
+          "pooled_p90_abs_error_mm": {
+            "zero": 83.2665802001953,
+            "camera_speed": 107.01538273737981,
+            "chair_direct": 96.69608634234015,
+            "chair_correction": 112.23564992639376,
+            "stride": 17.4625244140625,
+            "learned_stride": 12.72636620962319
+          }
+        },
+        "fast": {
+          "people": 40,
+          "windows": 3640,
+          "descriptive_only": false,
+          "person_equal_mae_mm": {
+            "zero": 51.04365765917432,
+            "camera_speed": 66.97438386028738,
+            "chair_direct": 57.950866720652314,
+            "chair_correction": 64.3429216771889,
+            "stride": 8.833648019308573,
+            "learned_stride": 6.355330954521568
+          },
+          "pooled_p90_abs_error_mm": {
+            "zero": 82.15992126464843,
+            "camera_speed": 108.99285231370192,
+            "chair_direct": 99.54124638603467,
+            "chair_correction": 115.11676243896795,
+            "stride": 19.371160888671874,
+            "learned_stride": 13.44402534872908
+          }
+        }
+      },
+      "learned_minus_stride": {
+        "norm": {
+          "mean_mm": -2.040329011853153,
+          "bootstrap95_mm": [
+            -2.4132739068136795,
+            -1.6839823610402362
+          ],
+          "negative_people": 40,
+          "positive_people": 0,
+          "unchanged_people": 0,
+          "descriptive_only": false
+        },
+        "slow": {
+          "mean_mm": -2.008738698596676,
+          "bootstrap95_mm": [
+            -2.3736924134909354,
+            -1.6593176915104226
+          ],
+          "negative_people": 40,
+          "positive_people": 0,
+          "unchanged_people": 0,
+          "descriptive_only": false
+        },
+        "fast": {
+          "mean_mm": -2.478317064787003,
+          "bootstrap95_mm": [
+            -2.8789791082282843,
+            -2.1038720082640943
+          ],
+          "negative_people": 40,
+          "positive_people": 0,
+          "unchanged_people": 0,
+          "descriptive_only": false
+        }
+      },
+      "error_change_from_usual_pace": {
+        "slow": {
+          "zero": {
+            "mean_mm": -1.7215005811754167,
+            "bootstrap95_mm": [
+              -2.526053968366686,
+              -0.9383519723913183
+            ],
+            "negative_people": 32,
+            "positive_people": 8,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "camera_speed": {
+            "mean_mm": -2.4587936904404186,
+            "bootstrap95_mm": [
+              -3.4612538180830863,
+              -1.5060982050536922
+            ],
+            "negative_people": 31,
+            "positive_people": 9,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "chair_direct": {
+            "mean_mm": -2.2588372129233982,
+            "bootstrap95_mm": [
+              -2.973211288811108,
+              -1.5780683799315838
+            ],
+            "negative_people": 33,
+            "positive_people": 7,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "chair_correction": {
+            "mean_mm": -2.5661149826607144,
+            "bootstrap95_mm": [
+              -3.4937192658984406,
+              -1.6728439371065253
+            ],
+            "negative_people": 34,
+            "positive_people": 6,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "stride": {
+            "mean_mm": -0.38866961971744074,
+            "bootstrap95_mm": [
+              -0.959780420575823,
+              0.19341322699745933
+            ],
+            "negative_people": 22,
+            "positive_people": 18,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "learned_stride": {
+            "mean_mm": -0.3570793064609637,
+            "bootstrap95_mm": [
+              -0.6726621592844155,
+              -0.023271869341663108
+            ],
+            "negative_people": 27,
+            "positive_people": 13,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          }
+        },
+        "fast": {
+          "zero": {
+            "mean_mm": -0.2817410311856108,
+            "bootstrap95_mm": [
+              -0.8138526019421239,
+              0.23943470147939858
+            ],
+            "negative_people": 21,
+            "positive_people": 19,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "camera_speed": {
+            "mean_mm": 1.1827644135321196,
+            "bootstrap95_mm": [
+              0.5510731049583618,
+              1.8402614809876277
+            ],
+            "negative_people": 11,
+            "positive_people": 29,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "chair_direct": {
+            "mean_mm": 0.9210177828276848,
+            "bootstrap95_mm": [
+              0.39472775088841255,
+              1.4684789230711208
+            ],
+            "negative_people": 12,
+            "positive_people": 28,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "chair_correction": {
+            "mean_mm": 1.482815068621602,
+            "bootstrap95_mm": [
+              0.8864339904008111,
+              2.121917506683629
+            ],
+            "negative_people": 7,
+            "positive_people": 33,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "stride": {
+            "mean_mm": 0.8133269425276872,
+            "bootstrap95_mm": [
+              0.2407450334318391,
+              1.3920386291336222
+            ],
+            "negative_people": 14,
+            "positive_people": 26,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          },
+          "learned_stride": {
+            "mean_mm": 0.37533888959383754,
+            "bootstrap95_mm": [
+              0.0682409085713041,
+              0.7043808173246853
+            ],
+            "negative_people": 17,
+            "positive_people": 23,
+            "unchanged_people": 0,
+            "descriptive_only": false
+          }
+        }
+      }
+    }
+  },
+  "unmatched_counts_only": {
+    "slow": {
+      "four_marker": {
+        "people": 42,
+        "windows": 3804
+      },
+      "rear_pair": {
+        "people": 42,
+        "windows": 3822
+      }
+    },
+    "norm": {
+      "four_marker": {
+        "people": 44,
+        "windows": 3914
+      },
+      "rear_pair": {
+        "people": 44,
+        "windows": 4004
+      }
+    },
+    "fast": {
+      "four_marker": {
+        "people": 41,
+        "windows": 3725
+      },
+      "rear_pair": {
+        "people": 41,
+        "windows": 3731
+      }
+    }
+  },
+  "coverage_by_pace": {
+    "norm": {
+      "candidate_scheduled": 4459,
+      "schema_admitted_scheduled": 4004,
+      "trial_people": 44,
+      "issued": 4004,
+      "fallbacks": 0
+    },
+    "slow": {
+      "candidate_scheduled": 4459,
+      "schema_admitted_scheduled": 3822,
+      "trial_people": 42,
+      "issued": 3822,
+      "fallbacks": 0
+    },
+    "fast": {
+      "candidate_scheduled": 4459,
+      "schema_admitted_scheduled": 3731,
+      "trial_people": 41,
+      "issued": 3731,
+      "fallbacks": 0
+    }
+  },
+  "camera_reference_support": {
+    "slow": {
+      "five_slot": {
+        "complete": {
+          "four_marker": {
+            "people": 42,
+            "windows": 3786
+          },
+          "rear_pair": {
+            "people": 42,
+            "windows": 3794
+          }
+        },
+        "front_only_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "rear_only_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "front_rear_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "unresolved_without_gap": {
+          "four_marker": {
+            "people": 3,
+            "windows": 18
+          },
+          "rear_pair": {
+            "people": 3,
+            "windows": 28
+          }
+        }
+      },
+      "full_800_ms": {
+        "complete": {
+          "four_marker": {
+            "people": 42,
+            "windows": 3715
+          },
+          "rear_pair": {
+            "people": 42,
+            "windows": 3716
+          }
+        },
+        "front_only_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "rear_only_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "front_rear_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "unresolved_without_gap": {
+          "four_marker": {
+            "people": 7,
+            "windows": 89
+          },
+          "rear_pair": {
+            "people": 7,
+            "windows": 106
+          }
+        }
+      }
+    },
+    "norm": {
+      "five_slot": {
+        "complete": {
+          "four_marker": {
+            "people": 44,
+            "windows": 3905
+          },
+          "rear_pair": {
+            "people": 44,
+            "windows": 3908
+          }
+        },
+        "front_only_gap": {
+          "four_marker": {
+            "people": 1,
+            "windows": 1
+          },
+          "rear_pair": {
+            "people": 1,
+            "windows": 86
+          }
+        },
+        "rear_only_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "front_rear_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "unresolved_without_gap": {
+          "four_marker": {
+            "people": 2,
+            "windows": 8
+          },
+          "rear_pair": {
+            "people": 2,
+            "windows": 10
+          }
+        }
+      },
+      "full_800_ms": {
+        "complete": {
+          "four_marker": {
+            "people": 43,
+            "windows": 3831
+          },
+          "rear_pair": {
+            "people": 43,
+            "windows": 3833
+          }
+        },
+        "front_only_gap": {
+          "four_marker": {
+            "people": 1,
+            "windows": 5
+          },
+          "rear_pair": {
+            "people": 1,
+            "windows": 91
+          }
+        },
+        "rear_only_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "front_rear_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "unresolved_without_gap": {
+          "four_marker": {
+            "people": 4,
+            "windows": 78
+          },
+          "rear_pair": {
+            "people": 4,
+            "windows": 80
+          }
+        }
+      }
+    },
+    "fast": {
+      "five_slot": {
+        "complete": {
+          "four_marker": {
+            "people": 41,
+            "windows": 3707
+          },
+          "rear_pair": {
+            "people": 41,
+            "windows": 3710
+          }
+        },
+        "front_only_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "rear_only_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "front_rear_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "unresolved_without_gap": {
+          "four_marker": {
+            "people": 5,
+            "windows": 18
+          },
+          "rear_pair": {
+            "people": 5,
+            "windows": 21
+          }
+        }
+      },
+      "full_800_ms": {
+        "complete": {
+          "four_marker": {
+            "people": 41,
+            "windows": 3599
+          },
+          "rear_pair": {
+            "people": 41,
+            "windows": 3602
+          }
+        },
+        "front_only_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "rear_only_gap": {
+          "four_marker": {
+            "people": 1,
+            "windows": 5
+          },
+          "rear_pair": {
+            "people": 1,
+            "windows": 5
+          }
+        },
+        "front_rear_gap": {
+          "four_marker": {
+            "people": 0,
+            "windows": 0
+          },
+          "rear_pair": {
+            "people": 0,
+            "windows": 0
+          }
+        },
+        "unresolved_without_gap": {
+          "four_marker": {
+            "people": 7,
+            "windows": 121
+          },
+          "rear_pair": {
+            "people": 7,
+            "windows": 124
+          }
+        }
+      }
+    }
+  },
+  "camera_reference_support_scope": "Counts only, descriptive at every participant count.",
+  "exclusions_by_pace": {
+    "slow": 7,
+    "norm": 5,
+    "fast": 8
+  }
+}
