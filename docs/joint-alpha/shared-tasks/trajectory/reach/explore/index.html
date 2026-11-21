@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Where does the reach go next? · NeuroTranslation</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="examples.js"></script>
+  <script defer src="geometry.js"></script>
+  <script defer src="scene.js"></script>
+  <script defer src="reader.js"></script>
+</head>
+<body>
+  <a class="skip" href="#experiment">Skip to the viewer</a>
+  <header>
+    <div class="mast">NeuroTranslation <span>/</span> Movement models</div>
+    <h1>Where does the reach go next?</h1>
+    <p>A camera tracked two painted marks as a macaque moved a handle. Use the last part of a reach to see where three models place the hand and elbow over the next tenth of a second.</p>
+    <p class="scope">Three examples from trials used to fit the models. Accuracy on new trials needs a separate test.</p>
+  </header>
+  <main id="experiment">
+    <noscript><p>Enable JavaScript to rotate these recorded paths in your browser.</p></noscript>
+    <p id="data-error" role="alert" hidden>Open index.html inside the complete extracted folder so the viewer can read its three examples.</p>
+    <div class="workspace">
+      <section class="plot-panel" aria-labelledby="plot-title">
+        <div class="plot-heading">
+          <h2 id="plot-title">Hand and elbow paths</h2>
+          <label class="example-label">Reach
+            <select id="example" aria-label="Reach example">
+              <option value="0">Example 1</option><option value="1">Example 2</option><option value="2">Example 3</option>
+            </select>
+          </label>
+        </div>
+        <div class="plot-frame">
+          <canvas id="plot" tabindex="0" role="img" aria-label="Rotatable three-dimensional marker paths" aria-describedby="plot-help plot-summary">
+            Use the positions table below to examine the measurements and predictions.
+          </canvas>
+        </div>
+        <div class="plot-footer">
+          <span class="key"><i class="key-line past"></i>Recorded past</span>
+          <span class="key"><i class="key-mark hand"></i>Hand</span>
+          <span class="key"><i class="key-mark elbow"></i>Elbow</span>
+          <span class="key" id="measured-key" hidden><i class="key-line measured"></i>Measured next positions</span>
+        </div>
+        <p id="plot-help">Drag to turn, or focus the plot and use the arrow keys. Home restores the starting angle. The ruler shows millimetres (mm).</p>
+      </section>
+      <section class="controls" aria-label="Plot controls">
+        <fieldset><legend>Marker view</legend>
+          <div class="segments">
+            <label><input type="radio" name="focus" value="both" checked><span>Both</span></label>
+            <label><input type="radio" name="focus" value="hand"><span>Hand</span></label>
+            <label><input type="radio" name="focus" value="elbow"><span>Elbow</span></label>
+          </div>
+          <p>Choose one marker for a closer view.</p>
+        </fieldset>
+        <fieldset class="models"><legend>Forecasts</legend>
+          <label><input id="ridge_point" type="checkbox" checked><i class="key-line ridge"></i>Single fitted path</label>
+          <label><input id="ridge_residual" type="checkbox"><i class="key-line residual"></i>Past errors</label>
+          <label><input id="ar_ridge" type="checkbox" checked><i class="key-line ar"></i>Step by step</label>
+          <label><input id="diff_ridge" type="checkbox"><i class="key-line diff"></i>Remove noise</label>
+          <p>Each family of faint lines contains 32 possible paths. One is traced in bold.</p>
+        </fieldset>
+        <div class="selector-row">
+          <label>Bold path<select id="draw" aria-label="Bold path number"></select></label>
+          <label>Show through<select id="horizon" aria-label="Show through forecast time">
+            <option value="1">+20 ms</option><option value="2">+50 ms</option><option value="3">+70 ms</option><option value="4" selected>+100 ms</option>
+          </select></label>
+        </div>
+        <button id="reveal" type="button" aria-pressed="false">Reveal measured path</button>
+        <label class="angle">Viewing angle<select id="view">
+          <option value="oblique">Starting angle</option><option value="xy">XY plane</option><option value="xz">XZ plane</option><option value="yz">YZ plane</option><option value="custom" disabled>Rotated view</option>
+        </select></label>
+      </section>
+    </div>
+    <p id="plot-summary" class="sr-only" aria-live="polite"></p>
+    <details id="readings">
+      <summary>Read the positions in millimetres</summary>
+      <p>Each row gives the three coordinates of one marker. The hand at the last reading is the origin. Values are rounded to 0.001 mm for display. Change the reach, marker, time or bold path above to update them.</p>
+      <label class="series">Positions to read<select id="series"></select></label>
+      <table><caption id="table-caption"></caption><thead><tr>
+        <th scope="col">Time <span>(ms)</span></th><th scope="col">Marker</th><th scope="col">X</th><th scope="col">Y</th><th scope="col">Z</th>
+      </tr></thead><tbody id="positions"></tbody></table>
+    </details>
+    <section class="notes" aria-labelledby="source-title">
+      <div><h2 id="source-title">What the camera measured</h2>
+        <p>One mark sat on the hand. The other sat near the elbow. Both move in a common frame, with the hand at the last reading set to zero. The gap between them comes from the recording. The paths describe the motion of those two marks.</p>
+        <p>The researchers smoothed each camera reading using five frames around it, filled gaps and aligned the tracks to the shoulder. They also smoothed the handle readings using measurements from before and after each point. A live test would have to build its inputs from readings already available at each prediction.</p>
+        <p>The earlier track spans 190 milliseconds. The next four positions are 20, 50, 70 and 100 milliseconds after the last reading. Lines connect the available points.</p>
+        <p>Raeed H. Chowdhury, Joshua I. Glaser and Lee E. Miller recorded macaque C on 7 September 2017. <a href="https://doi.org/10.5061/dryad.nk98sf7q7">Recording on Dryad</a> · <a href="https://doi.org/10.7554/eLife.48198">Original study</a></p>
+      </div>
+      <div><h2>How the forecasts work</h2>
+        <p>The single fitted path uses earlier marker and handle motion. <strong>Past errors</strong> uses the differences between estimates and measurements from the fitting trials. Each draw adds one of those whole error paths to the single fitted path.</p>
+        <p>The other two models also use earlier electrical activity from the brain. <strong>Step by step</strong> predicts one change to the fitted path at a time with an autoregressive transformer. <strong>Remove noise</strong> starts with noise and refines the entire set of changes together with a diffusion transformer. The spread shows the models’ draws for this reach.</p>
+        <p>All the draws were computed in advance. Changing the viewing angle or the bold path lets you inspect the same predictions. <a href="NOTICE.md">Methods, sources and rights</a></p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

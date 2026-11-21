@@ -32,7 +32,8 @@
   <header>
     <p><a href="../">The next 125 milliseconds of balance</a></p>
     <h1>Two moving points in a reach</h1>
-    <p>Cameras tracked the hand and elbow during a macaque reach. The same recording also captured the moving handle and spikes at 37 cortical recording contacts. We asked what those earlier measurements could tell a model about the two markers over the next tenth of a second.</p>
+    <p>Cameras tracked the hand and elbow during a macaque reach. The same recording captured the moving handle and spike counts from 37 brain-recording channels. We asked what the earlier readings in the archive could tell a model about the two markers over the next tenth of a second.</p>
+    <p><a href="explore/">Rotate three measured reaches and their forecasts</a> · <a href="macaque-reach-paths.zip" download>Download the offline reader</a></p>
   </header>
   <section>
     <h2>Autoregression led the neural fits</h2>
@@ -47,6 +48,7 @@
     <p>A linear model uses earlier marker positions and their recent changes to predict a path through four measured times. Both neural fits receive that path along with the earlier motion and spike counts. Autoregression adds one correction at a time. Diffusion revises all four time points together.</p>
     <p>The linear distribution copies fitting errors from original trials omitted when making their reference forecasts. The two neural fits instead learn a distribution of corrections. With 32 paths per window on the measured CPU setup, the autoregressive version processed about 1,939 windows per second and the diffusion version about 370.</p>
     <p>There were 79 comparison windows from 30 original trials. These came from one macaque session and from previously used training archives. The trials that supplied the comparison values were held apart from this fit. Each trial counts equally. The two seeds used those same trials, and the result applies to this recording and prediction horizon.</p>
+    <p>The released camera tracks use neighboring frames to smooth positions and fill gaps. The handle readings were filtered on both sides of each sample. The 100 ms here counts time in those processed records. A live forecast would need to use only readings available at the time.</p>
     <p><a href="results.json">Download the per-marker scores, paired ranges and run measurements</a></p>
     <p>Recording by Chowdhury, Glaser and Miller. <a href="https://doi.org/10.5061/dryad.nk98sf7q7">Recording archive</a> · <a href="https://doi.org/10.7554/eLife.48198">Study methods</a></p>
   </section>
