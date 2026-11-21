@@ -19,7 +19,12 @@ if __name__=='__main__':
            "In one neutral-pedal recording the right-load field has two columns, and its analysis clock could not be verified. "
            "The other seven recordings support three separate descriptions. One person supplied two trials at each setting. The other supplied both angle5 trials and a single neutral trial with no matching other-trial control. "
            "The latter person's qualified 1 kHz arrays are the author's exact every-tenth-row selections from the raw 10 kHz records.")
-    finding="The registered two-person test for the added muscle signal remains unanswered. Each table selection describes one person’s available trials."
+    full,other=test['groups']['complete']['scores']['balanced'],test['groups']['other_angle5']['scores']['balanced']
+    assert full['shared_both']['mae']>full['shared_load']['mae'] and other['shared_both']['mae']>other['shared_load']['mae']
+    finding=("The planned two-person test for the added muscle signal could not be completed. Each table selection describes one person’s available trials. "
+             f"The muscle signal helped neither person: with it, the shared encoder’s average miss went from {full['shared_load']['mae']:.4f} to {full['shared_both']['mae']:.4f} "
+             f"for the person with every trial, and from {other['shared_load']['mae']:.4f} to {other['shared_both']['mae']:.4f} on the other person’s angle5 trials "
+             "(raw load-sensor units).")
     payload=json.dumps(dict(model=model,dev=dev,test=test,shared=shared,random=random,labels=LABELS,scope=scope,finding=finding),ensure_ascii=False,allow_nan=False,separators=(',',':')).replace('<','\\u003c')
     style=re.search(r'<style>(.*?)</style>',(prior/'reader.html.in').read_text(),re.S)[1]
     text=(HERE/'reader.html.in').read_text().replace('@@STYLE@@',style).replace('@@ENCODER@@',(prior/'encoder.js').read_text()).replace('@@DATA@@',payload)

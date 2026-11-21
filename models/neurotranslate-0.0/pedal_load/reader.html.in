@@ -63,7 +63,7 @@ function score(){
  $('selection').textContent=count+' eligible forecasts. '+(g.has_wrong_trial?'Another trial at the same setting supplies the comparison signal.':'This recording has no qualified partner for the wrong-trial comparison.');
 }
 let editing=false;
-for(const id of ['trend','strength','burst'])$(id).addEventListener('input',()=>{editing=false;invented();});
+for(const id of ['trend','strength','burst'])$(id).addEventListener('input',()=>{if(editing){$('strength-out').textContent=Number($('strength').value).toFixed(1)+' ×';$('status').textContent='Your entered readings are kept. These controls change only the invented example: choose Restore invented example to go back to it.';return;}invented();});
 $('setting').addEventListener('input',()=>{if(editing)custom();else invented();});
 $('pairs').addEventListener('input',()=>{editing=true;clear();$('status').textContent='Values changed. Calculate the entered readings.';});
 $('apply').addEventListener('click',()=>{editing=true;custom();});$('restore').addEventListener('click',()=>{editing=false;$('strength').value=1;$('trend').value='rising';$('burst').value='early';invented();});$('group').addEventListener('change',score);
