@@ -135,7 +135,7 @@ No test group is larger than 4 people, the 25 numbered studies draw on 9 dataset
 
 ## The general model has had its first runs, and in five tests on new people, simpler forecasts matched or beat it every time
 
-NeuroTranslate 0.0 is meant to be a *large movement model*: one model that learns how nerve, muscle and movement go together from many kinds of recording at once. Most studies above fitted a small model of their own, for one signal and one task. Each time the general model learns from a set of recordings is one fit.
+NeuroTranslate 0.0 is meant to be a *large movement model*: one model that learns how nerve, muscle and movement go together from many kinds of recording at once. Most studies above fitted a small model of their own, for one signal and one task. Each time the general model learns from a set of recordings is one fit. The joint alpha edition at the top of this page is a separately trained network; its tests are on its own pages and are not counted here.
 
 It has had its first runs on walking, wrists, a rat, knees, the force under a walker's foot, an arm following a cue, a sensor on a person's back, a muscle in the shin seen by ultrasound, the load on a pedal, a walker's heel, a walker told how fast to walk and a walker's balance on a beam. Five times it was scored on new people (kept out of the task's fitting, and scored by no earlier study), and simpler forecasts matched or beat it every time. Each study says those people's recordings were opened only after its test was fixed, but none of the five published its plan, or a record of its fitted model, before its results:
 
