@@ -1,0 +1,204 @@
+{
+  "forecast_target": "Change in height of the right heel over 100 ms",
+  "measurement_unit": "mm",
+  "fitting_examples": 392,
+  "fitting_people": 4,
+  "confirmation_people_planned": 5,
+  "model_choice_reference": "motion_ridge",
+  "strata": {
+    "new_person_familiar_timing": {
+      "issued_events": 519,
+      "scorable_events": 519,
+      "missing_later_measurements": 0,
+      "met_minimum": true,
+      "methods": {
+        "motion": {
+          "mean_absolute_error_mm": 10.471268225057376,
+          "signed_bias_mm": -8.384714256749064,
+          "people_scored": 5
+        },
+        "motion+force": {
+          "mean_absolute_error_mm": 7.438767815449947,
+          "signed_bias_mm": -3.834599475207964,
+          "people_scored": 5
+        },
+        "motion+EMG": {
+          "mean_absolute_error_mm": 19.229733600768025,
+          "signed_bias_mm": -15.25769120775069,
+          "people_scored": 5
+        },
+        "motion+force+EMG": {
+          "mean_absolute_error_mm": 15.860515435299082,
+          "signed_bias_mm": -13.008386244852314,
+          "people_scored": 5
+        },
+        "conventional_reference": {
+          "mean_absolute_error_mm": 7.179621573647411,
+          "signed_bias_mm": -0.9185355310563971,
+          "people_scored": 5
+        },
+        "zero": {
+          "mean_absolute_error_mm": 13.553180575396826,
+          "signed_bias_mm": -13.51453533730159,
+          "people_scored": 5
+        },
+        "velocity": {
+          "mean_absolute_error_mm": 6.020563035714286,
+          "signed_bias_mm": -3.3905577579365085,
+          "people_scored": 5
+        },
+        "attention::motion": {
+          "mean_absolute_error_mm": 7.828716519921565,
+          "signed_bias_mm": -7.345434224857695,
+          "people_scored": 5
+        },
+        "attention::motion+force+EMG": {
+          "mean_absolute_error_mm": 6.315027251127722,
+          "signed_bias_mm": -5.71758182017312,
+          "people_scored": 5
+        },
+        "secondary_motion_reference": {
+          "mean_absolute_error_mm": 7.179621573647411,
+          "signed_bias_mm": -0.9185355310563971,
+          "people_scored": 5
+        }
+      },
+      "controls": {
+        "steady_force": {
+          "scorable_events": 519,
+          "methods": {
+            "ordinary_full": {
+              "mean_absolute_error_mm": 15.860515435299082,
+              "people_scored": 5
+            },
+            "substitution": {
+              "mean_absolute_error_mm": 16.782316304391706,
+              "people_scored": 5
+            },
+            "matched_motion": {
+              "mean_absolute_error_mm": 10.471268225057376,
+              "people_scored": 5
+            }
+          }
+        },
+        "stale_emg": {
+          "scorable_events": 519,
+          "methods": {
+            "ordinary_full": {
+              "mean_absolute_error_mm": 15.860515435299082,
+              "people_scored": 5
+            },
+            "substitution": {
+              "mean_absolute_error_mm": 11.724944361682105,
+              "people_scored": 5
+            }
+          }
+        }
+      }
+    },
+    "new_person_withheld_late_timing": {
+      "issued_events": 266,
+      "scorable_events": 266,
+      "missing_later_measurements": 0,
+      "met_minimum": true,
+      "methods": {
+        "motion": {
+          "mean_absolute_error_mm": 92.99379630709224,
+          "signed_bias_mm": 85.95914699962958,
+          "people_scored": 5
+        },
+        "motion+force": {
+          "mean_absolute_error_mm": 65.72913220390801,
+          "signed_bias_mm": 52.09452276513865,
+          "people_scored": 5
+        },
+        "motion+EMG": {
+          "mean_absolute_error_mm": 80.32908159370992,
+          "signed_bias_mm": 68.21101428214713,
+          "people_scored": 5
+        },
+        "motion+force+EMG": {
+          "mean_absolute_error_mm": 66.14340642314195,
+          "signed_bias_mm": 48.57016592714608,
+          "people_scored": 5
+        },
+        "conventional_reference": {
+          "mean_absolute_error_mm": 46.86506342887621,
+          "signed_bias_mm": -3.633403818091003,
+          "people_scored": 5
+        },
+        "zero": {
+          "mean_absolute_error_mm": 85.82533985260771,
+          "signed_bias_mm": -85.56203270975057,
+          "people_scored": 5
+        },
+        "velocity": {
+          "mean_absolute_error_mm": 52.856582369614515,
+          "signed_bias_mm": 42.02771236961451,
+          "people_scored": 5
+        },
+        "attention::motion": {
+          "mean_absolute_error_mm": 50.97208616733821,
+          "signed_bias_mm": -47.150386693399014,
+          "people_scored": 5
+        },
+        "attention::motion+force+EMG": {
+          "mean_absolute_error_mm": 53.04645891555409,
+          "signed_bias_mm": -49.71105864896409,
+          "people_scored": 5
+        },
+        "secondary_motion_reference": {
+          "mean_absolute_error_mm": 46.86506342887621,
+          "signed_bias_mm": -3.633403818091003,
+          "people_scored": 5
+        }
+      },
+      "controls": {
+        "steady_force": {
+          "scorable_events": 266,
+          "methods": {
+            "ordinary_full": {
+              "mean_absolute_error_mm": 66.14340642314195,
+              "people_scored": 5
+            },
+            "substitution": {
+              "mean_absolute_error_mm": 55.94117781157801,
+              "people_scored": 5
+            },
+            "matched_motion": {
+              "mean_absolute_error_mm": 92.99379630709224,
+              "people_scored": 5
+            }
+          }
+        },
+        "stale_emg": {
+          "scorable_events": 266,
+          "methods": {
+            "ordinary_full": {
+              "mean_absolute_error_mm": 66.14340642314195,
+              "people_scored": 5
+            },
+            "substitution": {
+              "mean_absolute_error_mm": 60.889975271192405,
+              "people_scored": 5
+            }
+          }
+        }
+      }
+    }
+  },
+  "primary_paired_direction": {
+    "met_minimum": true,
+    "all_five_improved": false,
+    "lower_error": 1,
+    "higher_error": 4,
+    "same_error": 0,
+    "exact_one_sided_p": 0.96875
+  },
+  "source": {
+    "authors": "Dana L. Lorenz and Antonie J. van den Bogert",
+    "dataset_doi": "10.5281/zenodo.10557913",
+    "methods_doi": "10.7717/peerj.17256",
+    "data_license": "CC BY 4.0"
+  }
+}

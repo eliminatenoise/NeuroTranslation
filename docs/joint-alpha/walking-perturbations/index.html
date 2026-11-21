@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Where does the heel go when the belt speeds up? · NeuroTranslation</title>
+<style>
+:root{color:#15352d;background:#fafaf4;font:17px/1.56 system-ui,sans-serif}
+body{margin:0} main{max-width:57rem;margin:auto;padding:2rem 1rem 4rem}
+h1{font-size:clamp(1.9rem,5vw,3rem);line-height:1.12;max-width:17em;margin:.85rem 0}
+h2{font-size:1.42rem;line-height:1.22;margin-top:2rem}
+a{color:#174740;text-underline-offset:.16em} a:focus-visible,summary:focus-visible{outline:3px solid #315d53;outline-offset:3px}
+details{margin:1rem 0;border:1px solid #b7c7bd;border-radius:.55rem;background:#fff}
+summary{font-weight:700;padding:.85rem;cursor:pointer}
+details div{padding:0 .85rem .9rem}
+table{width:100%;border-collapse:collapse;table-layout:fixed;font-variant-numeric:tabular-nums;line-height:1.3}
+th,td{border-bottom:1px solid #d7e1d9;padding:.53rem .36rem;text-align:left;overflow-wrap:anywhere}
+th:first-child{width:57%} td{font-size:.93rem}
+thead{background:#ecf2ea}
+@media(forced-colors:active){a:focus-visible,summary:focus-visible{outline-color:Highlight}}
+</style>
+</head>
+<body><main>
+<nav><a href="../">NeuroTranslation joint forecasts</a></nav>
+<h1>Where does the heel go when the belt speeds up?</h1>
+<p>A treadmill has a separate belt under each foot. After the right belt speeds up, we use earlier readings to forecast how far the right heel will move up or down in the next tenth of a second.</p>
+<p>At the withheld timings, the conventional movement reference averaged 46.87 mm of error. The linear model using movement, muscle and force averaged 66.14 mm. Error fell for 1 person and rose for 4. The planned one-sided sign test gave p = 0.96875.</p>
+<h2>Two tests on people the models had never seen</h2>
+<p>The familiar timings appeared during fitting. The later timings were held out with the new people. Each person has equal weight in the final average, after averaging within each timing and trial.</p>
+<details open><summary>New people at later, withheld timings</summary><div><p>266 measured events from 5 people, of 266 forecasts issued. 0 later readings were missing.</p><table><thead><tr><th scope='col'>Comparison</th><th scope='col'>Error (mm)</th><th scope='col'>Signed bias (mm)</th></tr></thead><tbody><tr><th scope='row'>Best conventional movement reference</th><td>46.87</td><td>-3.63</td></tr><tr><th scope='row'>Keep the heel where it is</th><td>85.83</td><td>-85.56</td></tr><tr><th scope='row'>Continue the last vertical speed</th><td>52.86</td><td>42.03</td></tr><tr><th scope='row'>Linear model with movement</th><td>92.99</td><td>85.96</td></tr><tr><th scope='row'>Linear model with movement and force</th><td>65.73</td><td>52.09</td></tr><tr><th scope='row'>Linear model with movement and muscle readings</th><td>80.33</td><td>68.21</td></tr><tr><th scope='row'>Linear model with all readings</th><td>66.14</td><td>48.57</td></tr><tr><th scope='row'>Attention model with movement</th><td>50.97</td><td>-47.15</td></tr><tr><th scope='row'>Attention model with all readings</th><td>53.05</td><td>-49.71</td></tr><tr><th scope='row'>Best movement reference considered for attention</th><td>46.87</td><td>-3.63</td></tr></tbody></table><h3>Checks using earlier signals</h3><p>Each check uses the events where its earlier signal was available.</p><table><thead><tr><th scope='col'>Comparison</th><th scope='col'>Events</th><th scope='col'>Error (mm)</th></tr></thead><tbody><tr><th scope='row'>Muscle readings from 300 ms earlier · Usual full model</th><td>266</td><td>66.14</td></tr><tr><th scope='row'>Muscle readings from 300 ms earlier · Substituted input</th><td>266</td><td>60.89</td></tr><tr><th scope='row'>Force before the belt sped up · Usual full model</th><td>266</td><td>66.14</td></tr><tr><th scope='row'>Force before the belt sped up · Substituted input</th><td>266</td><td>55.94</td></tr><tr><th scope='row'>Force before the belt sped up · Matched movement-only model</th><td>266</td><td>92.99</td></tr></tbody></table></div></details><details><summary>New people at familiar timings</summary><div><p>519 measured events from 5 people, of 519 forecasts issued. 0 later readings were missing.</p><table><thead><tr><th scope='col'>Comparison</th><th scope='col'>Error (mm)</th><th scope='col'>Signed bias (mm)</th></tr></thead><tbody><tr><th scope='row'>Best conventional movement reference</th><td>7.18</td><td>-0.92</td></tr><tr><th scope='row'>Keep the heel where it is</th><td>13.55</td><td>-13.51</td></tr><tr><th scope='row'>Continue the last vertical speed</th><td>6.02</td><td>-3.39</td></tr><tr><th scope='row'>Linear model with movement</th><td>10.47</td><td>-8.38</td></tr><tr><th scope='row'>Linear model with movement and force</th><td>7.44</td><td>-3.83</td></tr><tr><th scope='row'>Linear model with movement and muscle readings</th><td>19.23</td><td>-15.26</td></tr><tr><th scope='row'>Linear model with all readings</th><td>15.86</td><td>-13.01</td></tr><tr><th scope='row'>Attention model with movement</th><td>7.83</td><td>-7.35</td></tr><tr><th scope='row'>Attention model with all readings</th><td>6.32</td><td>-5.72</td></tr><tr><th scope='row'>Best movement reference considered for attention</th><td>7.18</td><td>-0.92</td></tr></tbody></table><h3>Checks using earlier signals</h3><p>Each check uses the events where its earlier signal was available.</p><table><thead><tr><th scope='col'>Comparison</th><th scope='col'>Events</th><th scope='col'>Error (mm)</th></tr></thead><tbody><tr><th scope='row'>Muscle readings from 300 ms earlier · Usual full model</th><td>519</td><td>15.86</td></tr><tr><th scope='row'>Muscle readings from 300 ms earlier · Substituted input</th><td>519</td><td>11.72</td></tr><tr><th scope='row'>Force before the belt sped up · Usual full model</th><td>519</td><td>15.86</td></tr><tr><th scope='row'>Force before the belt sped up · Substituted input</th><td>519</td><td>16.78</td></tr><tr><th scope='row'>Force before the belt sped up · Matched movement-only model</th><td>519</td><td>10.47</td></tr></tbody></table></div></details>
+<p>Error is the average size of the miss. Signed bias preserves direction. A positive bias means the prediction was higher than the measured heel movement.</p>
+<h2>How the comparison works</h2>
+<p>Cameras followed markers on the leg. Electrodes recorded electrical activity from muscles, and force plates measured contact with the treadmill. The models used readings available at forecast time. We saved the forecasts before extracting the later heel positions.</p>
+<p>We chose settings using 392 events from four fitting participants. The strongest conventional movement-only reference was chosen on those fitting folds. The separate linear and attention comparisons pair the same model family with different sets of readings.</p>
+<p>The results cover an offline forecast on one treadmill setup. Further recordings are needed to assess how well the same models work in other settings.</p>
+<p><a href="results.json" download>Download the aggregate results</a></p>
+<h2>Source recordings</h2>
+<p>Recordings by Dana L. Lorenz and Antonie J. van den Bogert. <a href="https://doi.org/10.5281/zenodo.10557913">Dataset</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11064863/">Recording methods</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Data license</a></p>
+</main></body></html>
