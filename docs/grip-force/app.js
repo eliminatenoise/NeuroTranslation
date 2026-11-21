@@ -218,13 +218,15 @@
     $("error").hidden = true;
     sourceLabel.textContent = synthetic ? "Synthetic input" : "Local sensor window";
     sourceDescription.textContent = synthetic ? "Invented signals. No file is sent to a server." : "The file stays in this browser.";
+    // Invented inputs are plain waves far from the recordings' scale: say so, so the forecasts are not read as results.
+    const madeUp = " The signals are invented, and the EEG and EMG are plain waves far from the size of the recorded signals, so the four forecasts can disagree wildly or fall below zero. They show how each model reacts to made-up input, not how accurate it is: the development errors below come from real lifts.";
     document.querySelector(".forecast-note").textContent = synthetic
-      ? "The example ends at cutoff. It has no later measurement for scoring these forecasts."
+      ? "The example ends at cutoff. It has no later measurement for scoring these forecasts." + madeUp
       : "This input ends at cutoff. Scoring needs a separate grip measurement 120 ms later.";
     if (replay) {
       sourceLabel.textContent = replayExample ? "Invented trial replay" : "Local trial replay";
       sourceDescription.textContent = replayExample ? "All signals and later forces are invented." : "Sensor windows and plate readings stay in this tab.";
-      document.querySelector(".forecast-note").textContent = "Move the cutoff through the lift. Reveal the later grip to compare it with these forecasts.";
+      document.querySelector(".forecast-note").textContent = "Move the cutoff through the lift. Reveal the later grip to compare it with these forecasts." + (replayExample ? madeUp : "");
     }
     $("reset").hidden = synthetic && !replay;
     $("demo-replay").hidden = replayExample;
