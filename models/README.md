@@ -1,4 +1,18 @@
-# NeuroTranslate 0.0
+# NeuroTranslate models
+
+## Current downloads
+
+A checkpoint is the set of weights a model saved after fitting. The downloads include those weights and a way to try them with invented readings.
+
+| Download | What you can try |
+| --- | --- |
+| [NeuroTranslate 0.0](neurotranslate-0.0.zip) | Open the seven-task joint demo or try the new walking force experiment in the same download. [Walking force instructions](neurotranslate-0.0/recorded-force/) |
+| [NeuroTranslate 0.1](neurotranslate-0.1.zip) | Run the new walking force input and output layers with the separately downloaded Inkling 2 Mini model. [Setup and example](neurotranslate-0.1/) |
+| [Walking force comparisons](force-baselines/) | Try simpler fits that read recent force, muscle activity, or both. The files contain multiple candidate settings for later evaluation. |
+
+The walking force models estimate whether a named plate will start carrying load in the next 100 milliseconds. They also estimate the sum of the vertical force readings over that interval, multiplied by the time between readings. Their fitting runs established that they can learn from the recorded inputs. Accuracy on new people is still unmeasured for these releases.
+
+## NeuroTranslate 0.0 studies
 
 **[NeuroTranslate 0.0 joint alpha](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/)** is the current joint model. [Download the model and local demo](neurotranslate-0.0.zip) or inspect [its source and results](neurotranslate-0.0/joint_alpha/). The earlier task-specific fits below retain the inputs from their own studies.
 

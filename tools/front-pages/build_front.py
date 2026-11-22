@@ -3919,6 +3919,7 @@ def audit_checks():
 
 GENERAL_FITS = {
     'joint_alpha': 'joint alpha; separate retrospective assessment',   # every task folder of the general model -> who it was scored on; read a new folder's own files before classifying it; 'unseen' = new people: kept out of that task's fitting and scored by no earlier study (git history: no earlier commit scores them); no such test published its plan, or a record of its fitted model, before its results
+    'recorded-force': 'separate fit-only experiment; no held assessment',
     'right-plate': 'unseen',          # 8 walkers, no training data; also the two-plate study's test group, same commit; METHOD.md's order claim is self-attested
     'arm-transfer': 'unseen',         # 5 people new to the project; receipt fit.json untimestamped, published with the results
     'back_rotation': 'unseen',        # 4 kept (3 scorable); PRETEST manifest pins the readout; the exclusion code was amended after opening

@@ -2,6 +2,8 @@
 
 **[Run NeuroTranslate 0.0 joint alpha](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/)** · [Download the trained model and offline demo](models/neurotranslate-0.0.zip). Pick a recording task, change a past reading and forecast the next measurement. One jointly trained encoder serves the supported tasks. The study reports where it loses to simpler forecasts. [Try the eight-task fingertip experiment](https://eliminatenoise.github.io/NeuroTranslation/touch-feedback/).
 
+[Find the latest saved model weights](models/#current-downloads). The new walking experiments let you give NeuroTranslate a short history of muscle and floor-force readings, then ask what the floor will measure in the next tenth of a second.
+
 **What a hand has just done still beats a brain signal read at the scalp.**
 
 **Start here:** 1. [Try {{ spell(try_rows('browser')) }} pages in your browser]({{ gh_anchor(TRY_HEADING()) }}) · 2. [Read every result](benchmarks/README.md) · 3. [Read the papers](papers/README.md) · 4. [See what the project's own model has learned, and what beat it]({{ gh_anchor(GENERAL_HEADING) }})

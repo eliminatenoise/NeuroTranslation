@@ -5,6 +5,8 @@ This folder is served as [eliminatenoise.github.io/NeuroTranslation](https://eli
 | Page | What it is |
 | --- | --- |
 | [NeuroTranslate 0.0 joint alpha](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/) | Download the joint checkpoint, open the offline demo and compare its forecasts with the published baselines. |
+| [Handle force in a reach forecast](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/handle-force/) | See what force measured under the handle added to forecasts of movement and brain activity in one macaque recording. |
+| [Twenty milliseconds of a grasp](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/grasp-sensor/) | Compare forecasts from six sensors in one recording. See what changes when the same model also gets earlier brain activity. |
 | [Fingertip touch](https://eliminatenoise.github.io/NeuroTranslation/touch-feedback/) | Try an eight-task model and compare forecasts of measured nerve spikes in three new people. |
 | [`START.html`](https://eliminatenoise.github.io/NeuroTranslation/START.html) | The start page. The finding so far, invented examples to try, and a list that matches each open dataset to the page that reads it. |
 | [`index.html`](https://eliminatenoise.github.io/NeuroTranslation/index.html) | NeuroTranslator, the app. It shows a recording on its own clock, lines several recordings up on a shared clock, and replays a palm trial against the fitted palm models. |

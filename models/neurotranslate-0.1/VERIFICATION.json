@@ -1,0 +1,20 @@
+{
+  "base_and_adapter_file_hashes_verified": true,
+  "platform_tested": "Linux x86-64 CPU",
+  "python": "3.13",
+  "torch": "2.14.1+cpu",
+  "transformers": "5.24.0",
+  "cpu_thread_count": 4,
+  "complete_run_wall_seconds": 91.391,
+  "peak_sampled_process_rss_gib": 49.446,
+  "invented_example": {
+    "input": "invented ten-bin muscle voltage and force history",
+    "next_window_ms": 100,
+    "new_load_logit": 0.21241188049316406,
+    "new_load_probability_uncalibrated": 0.5529041886329651,
+    "signed_vertical_force_impulse_N_s": 1.6794459819793701,
+    "decoder_layer_visits": 48,
+    "adapter_restored_all_tensors_exactly": true,
+    "same_fixture_and_withheld_value_checks_match_bit_for_bit": true
+  }
+}
