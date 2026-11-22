@@ -540,5 +540,415 @@
     "held_forecasts_sealed_before_endpoint_scoring": true,
     "held_outcomes_used_for_model_selection": false,
     "independent_outcome_and_model_replay": true
+  },
+  "addendum": {
+    "second_test_mouse": {
+      "quiet": {
+        "rows": 129,
+        "events": 11,
+        "zero_signed_change": 103,
+        "observed_event_rate": 0.08527131782945736,
+        "brier": {
+          "training_history_group_rate": 0.1115691033086384,
+          "linear_wheel_and_cue": 0.10786245158710364,
+          "linear_wheel_cue_and_aligned_spikes": 0.11037993537513824,
+          "linear_wheel_cue_and_other_trial_spikes": 0.11980918540121635,
+          "attention_wheel_and_cue": 0.116670998013697,
+          "attention_wheel_cue_and_aligned_spikes": 0.12255201794515835,
+          "attention_wheel_cue_and_other_trial_spikes": 0.12667338376957107
+        },
+        "mean_predicted_probability": {
+          "training_history_group_rate": 0.2684897206266472,
+          "linear_wheel_and_cue": 0.22008700083549698,
+          "linear_wheel_cue_and_aligned_spikes": 0.2369456158869143,
+          "linear_wheel_cue_and_other_trial_spikes": 0.23048315638170777,
+          "attention_wheel_and_cue": 0.25870001444912083,
+          "attention_wheel_cue_and_aligned_spikes": 0.27326927450128924,
+          "attention_wheel_cue_and_other_trial_spikes": 0.2776564158171942
+        },
+        "mean_absolute_signed_error_rad": {
+          "zero_change": 0.006504554193593129,
+          "repeat_recent_change": 0.006504554193593129,
+          "linear_wheel_and_cue": 0.010479037457223572,
+          "linear_wheel_cue_and_aligned_spikes": 0.01231023482748271,
+          "linear_wheel_cue_and_other_trial_spikes": 0.012205410225632131,
+          "attention_wheel_and_cue": 0.010728405894742757,
+          "attention_wheel_cue_and_aligned_spikes": 0.010366053646584298,
+          "attention_wheel_cue_and_other_trial_spikes": 0.013582672557053033
+        }
+      },
+      "all": {
+        "rows": 234,
+        "events": 78,
+        "zero_signed_change": 133,
+        "observed_event_rate": 0.3333333333333333,
+        "brier": {
+          "training_history_group_rate": 0.18191188244553244,
+          "linear_wheel_and_cue": 0.1567944667976695,
+          "linear_wheel_cue_and_aligned_spikes": 0.16259716867846724,
+          "linear_wheel_cue_and_other_trial_spikes": 0.17448411915094017,
+          "attention_wheel_and_cue": 0.10973648343012449,
+          "attention_wheel_cue_and_aligned_spikes": 0.11413111353298284,
+          "attention_wheel_cue_and_other_trial_spikes": 0.1266164892251376
+        },
+        "mean_predicted_probability": {
+          "training_history_group_rate": 0.3475565937726616,
+          "linear_wheel_and_cue": 0.3744730098526537,
+          "linear_wheel_cue_and_aligned_spikes": 0.38583852837139887,
+          "linear_wheel_cue_and_other_trial_spikes": 0.3782149048500155,
+          "attention_wheel_and_cue": 0.46885266251417546,
+          "attention_wheel_cue_and_aligned_spikes": 0.47540157974497416,
+          "attention_wheel_cue_and_other_trial_spikes": 0.4825444658048693
+        },
+        "mean_absolute_signed_error_rad": {
+          "zero_change": 0.06645938986147351,
+          "repeat_recent_change": 0.03594366094007313,
+          "linear_wheel_and_cue": 0.026739167657764313,
+          "linear_wheel_cue_and_aligned_spikes": 0.02760299949797492,
+          "linear_wheel_cue_and_other_trial_spikes": 0.028462077930753574,
+          "attention_wheel_and_cue": 0.05188736505605034,
+          "attention_wheel_cue_and_aligned_spikes": 0.05204550386517571,
+          "attention_wheel_cue_and_other_trial_spikes": 0.05329417748041747
+        }
+      },
+      "within_trial": {
+        "rows": 234,
+        "events": 78,
+        "zero_signed_change": 133,
+        "observed_event_rate": 0.3333333333333333,
+        "brier": {
+          "training_history_group_rate": 0.18191188244553244,
+          "linear_wheel_and_cue": 0.1567944667976695,
+          "linear_wheel_cue_and_aligned_spikes": 0.16259716867846724,
+          "linear_wheel_cue_and_other_trial_spikes": 0.17448411915094017,
+          "attention_wheel_and_cue": 0.10973648343012449,
+          "attention_wheel_cue_and_aligned_spikes": 0.11413111353298284,
+          "attention_wheel_cue_and_other_trial_spikes": 0.1266164892251376
+        },
+        "mean_predicted_probability": {
+          "training_history_group_rate": 0.3475565937726616,
+          "linear_wheel_and_cue": 0.3744730098526537,
+          "linear_wheel_cue_and_aligned_spikes": 0.38583852837139887,
+          "linear_wheel_cue_and_other_trial_spikes": 0.3782149048500155,
+          "attention_wheel_and_cue": 0.46885266251417546,
+          "attention_wheel_cue_and_aligned_spikes": 0.47540157974497416,
+          "attention_wheel_cue_and_other_trial_spikes": 0.4825444658048693
+        },
+        "mean_absolute_signed_error_rad": {
+          "zero_change": 0.06645938986147351,
+          "repeat_recent_change": 0.03594366094007313,
+          "linear_wheel_and_cue": 0.026739167657764313,
+          "linear_wheel_cue_and_aligned_spikes": 0.02760299949797492,
+          "linear_wheel_cue_and_other_trial_spikes": 0.028462077930753574,
+          "attention_wheel_and_cue": 0.05188736505605034,
+          "attention_wheel_cue_and_aligned_spikes": 0.05204550386517571,
+          "attention_wheel_cue_and_other_trial_spikes": 0.05329417748041747
+        }
+      },
+      "quiet_within_trial": {
+        "rows": 129,
+        "events": 11,
+        "zero_signed_change": 103,
+        "observed_event_rate": 0.08527131782945736,
+        "brier": {
+          "training_history_group_rate": 0.1115691033086384,
+          "linear_wheel_and_cue": 0.10786245158710364,
+          "linear_wheel_cue_and_aligned_spikes": 0.11037993537513824,
+          "linear_wheel_cue_and_other_trial_spikes": 0.11980918540121635,
+          "attention_wheel_and_cue": 0.116670998013697,
+          "attention_wheel_cue_and_aligned_spikes": 0.12255201794515835,
+          "attention_wheel_cue_and_other_trial_spikes": 0.12667338376957107
+        },
+        "mean_predicted_probability": {
+          "training_history_group_rate": 0.2684897206266472,
+          "linear_wheel_and_cue": 0.22008700083549698,
+          "linear_wheel_cue_and_aligned_spikes": 0.2369456158869143,
+          "linear_wheel_cue_and_other_trial_spikes": 0.23048315638170777,
+          "attention_wheel_and_cue": 0.25870001444912083,
+          "attention_wheel_cue_and_aligned_spikes": 0.27326927450128924,
+          "attention_wheel_cue_and_other_trial_spikes": 0.2776564158171942
+        },
+        "mean_absolute_signed_error_rad": {
+          "zero_change": 0.006504554193593129,
+          "repeat_recent_change": 0.006504554193593129,
+          "linear_wheel_and_cue": 0.010479037457223572,
+          "linear_wheel_cue_and_aligned_spikes": 0.01231023482748271,
+          "linear_wheel_cue_and_other_trial_spikes": 0.012205410225632131,
+          "attention_wheel_and_cue": 0.010728405894742757,
+          "attention_wheel_cue_and_aligned_spikes": 0.010366053646584298,
+          "attention_wheel_cue_and_other_trial_spikes": 0.013582672557053033
+        }
+      },
+      "issued": 234,
+      "issued_quiet": 129,
+      "disposition": {
+        "endpoint_outside_recording": 0,
+        "nonfinite_angle_in_scoring_window": 0,
+        "same_encoder_reading_at_issue_and_end": 131,
+        "crossed_threshold_and_returned_to_issue_angle": 0,
+        "recorded_trial_stop_at_or_before_issue": 0,
+        "recorded_trial_stop_during_forecast": 0,
+        "unknown_trial_stop": 0
+      }
+    },
+    "combined_equal_mouse_summary": {
+      "quiet": {
+        "mice": 2,
+        "rows": 245,
+        "events": 14,
+        "equal_mouse_event_rate": 0.0555666933974873,
+        "brier": {
+          "training_history_group_rate": 0.09781525150678669,
+          "linear_wheel_and_cue": 0.0891940167886223,
+          "linear_wheel_cue_and_aligned_spikes": 0.09776879325770288,
+          "linear_wheel_cue_and_other_trial_spikes": 0.08013509404528348,
+          "attention_wheel_and_cue": 0.1029044129048226,
+          "attention_wheel_cue_and_aligned_spikes": 0.11080166037393524,
+          "attention_wheel_cue_and_other_trial_spikes": 0.10073951564220492
+        },
+        "mean_predicted_probability": {
+          "training_history_group_rate": 0.2684897206266472,
+          "linear_wheel_and_cue": 0.22329405789712986,
+          "linear_wheel_cue_and_aligned_spikes": 0.2370289158101364,
+          "linear_wheel_cue_and_other_trial_spikes": 0.17951140289245912,
+          "attention_wheel_and_cue": 0.26410183793364583,
+          "attention_wheel_cue_and_aligned_spikes": 0.27378000958859405,
+          "attention_wheel_cue_and_other_trial_spikes": 0.2534373241578741
+        },
+        "mean_absolute_signed_error_rad": {
+          "zero_change": 0.003986207559966003,
+          "repeat_recent_change": 0.003986207559966003,
+          "linear_wheel_and_cue": 0.007589009521214742,
+          "linear_wheel_cue_and_aligned_spikes": 0.009434709101359101,
+          "linear_wheel_cue_and_other_trial_spikes": 0.00952753849244414,
+          "attention_wheel_and_cue": 0.00817990624167887,
+          "attention_wheel_cue_and_aligned_spikes": 0.00804905243123879,
+          "attention_wheel_cue_and_other_trial_spikes": 0.010338347110524797
+        },
+        "contrasts": {
+          "brier": {
+            "linear": {
+              "aligned_minus_wheel_cue": 0.008574776469080586,
+              "aligned_minus_other_trial": 0.017633699212419404,
+              "mice_with_smaller_error_than_both": 0
+            },
+            "attention": {
+              "aligned_minus_wheel_cue": 0.007897247469112634,
+              "aligned_minus_other_trial": 0.010062144731730324,
+              "mice_with_smaller_error_than_both": 0
+            }
+          },
+          "mean_absolute_signed_error_rad": {
+            "linear": {
+              "aligned_minus_wheel_cue": 0.001845699580144359,
+              "aligned_minus_other_trial": -9.282939108503849e-05,
+              "mice_with_smaller_error_than_both": 0
+            },
+            "attention": {
+              "aligned_minus_wheel_cue": -0.00013085381044007985,
+              "aligned_minus_other_trial": -0.0022892946792860067,
+              "mice_with_smaller_error_than_both": 1
+            }
+          }
+        }
+      },
+      "all": {
+        "mice": 2,
+        "rows": 470,
+        "events": 103,
+        "equal_mouse_event_rate": 0.2196327683615819,
+        "brier": {
+          "training_history_group_rate": 0.16704711849716414,
+          "linear_wheel_and_cue": 0.1487595681975214,
+          "linear_wheel_cue_and_aligned_spikes": 0.16053305441320745,
+          "linear_wheel_cue_and_other_trial_spikes": 0.14284417136422445,
+          "attention_wheel_and_cue": 0.1323923853414036,
+          "attention_wheel_cue_and_aligned_spikes": 0.1319406964809081,
+          "attention_wheel_cue_and_other_trial_spikes": 0.1299584493847482
+        },
+        "mean_predicted_probability": {
+          "training_history_group_rate": 0.3528213371419483,
+          "linear_wheel_and_cue": 0.3521271040252976,
+          "linear_wheel_cue_and_aligned_spikes": 0.3663059975414785,
+          "linear_wheel_cue_and_other_trial_spikes": 0.29840018993523687,
+          "attention_wheel_and_cue": 0.4223931116935392,
+          "attention_wheel_cue_and_aligned_spikes": 0.41406442911081776,
+          "attention_wheel_cue_and_other_trial_spikes": 0.39873217061231625
+        },
+        "mean_absolute_signed_error_rad": {
+          "zero_change": 0.03467917677691683,
+          "repeat_recent_change": 0.019772307920224476,
+          "linear_wheel_and_cue": 0.01836463960228559,
+          "linear_wheel_cue_and_aligned_spikes": 0.019046296857010724,
+          "linear_wheel_cue_and_other_trial_spikes": 0.019415152902036388,
+          "attention_wheel_and_cue": 0.03137836954249071,
+          "attention_wheel_cue_and_aligned_spikes": 0.03029894744654854,
+          "attention_wheel_cue_and_other_trial_spikes": 0.031147057653166745
+        },
+        "contrasts": {
+          "brier": {
+            "linear": {
+              "aligned_minus_wheel_cue": 0.011773486215686052,
+              "aligned_minus_other_trial": 0.017688883048983,
+              "mice_with_smaller_error_than_both": 0
+            },
+            "attention": {
+              "aligned_minus_wheel_cue": -0.0004516888604955138,
+              "aligned_minus_other_trial": 0.001982247096159878,
+              "mice_with_smaller_error_than_both": 0
+            }
+          },
+          "mean_absolute_signed_error_rad": {
+            "linear": {
+              "aligned_minus_wheel_cue": 0.0006816572547251321,
+              "aligned_minus_other_trial": -0.0003688560450256645,
+              "mice_with_smaller_error_than_both": 0
+            },
+            "attention": {
+              "aligned_minus_wheel_cue": -0.0010794220959421674,
+              "aligned_minus_other_trial": -0.0008481102066182043,
+              "mice_with_smaller_error_than_both": 1
+            }
+          }
+        }
+      },
+      "within_trial": {
+        "mice": 2,
+        "rows": 470,
+        "events": 103,
+        "equal_mouse_event_rate": 0.2196327683615819,
+        "brier": {
+          "training_history_group_rate": 0.16704711849716414,
+          "linear_wheel_and_cue": 0.1487595681975214,
+          "linear_wheel_cue_and_aligned_spikes": 0.16053305441320745,
+          "linear_wheel_cue_and_other_trial_spikes": 0.14284417136422445,
+          "attention_wheel_and_cue": 0.1323923853414036,
+          "attention_wheel_cue_and_aligned_spikes": 0.1319406964809081,
+          "attention_wheel_cue_and_other_trial_spikes": 0.1299584493847482
+        },
+        "mean_predicted_probability": {
+          "training_history_group_rate": 0.3528213371419483,
+          "linear_wheel_and_cue": 0.3521271040252976,
+          "linear_wheel_cue_and_aligned_spikes": 0.3663059975414785,
+          "linear_wheel_cue_and_other_trial_spikes": 0.29840018993523687,
+          "attention_wheel_and_cue": 0.4223931116935392,
+          "attention_wheel_cue_and_aligned_spikes": 0.41406442911081776,
+          "attention_wheel_cue_and_other_trial_spikes": 0.39873217061231625
+        },
+        "mean_absolute_signed_error_rad": {
+          "zero_change": 0.03467917677691683,
+          "repeat_recent_change": 0.019772307920224476,
+          "linear_wheel_and_cue": 0.01836463960228559,
+          "linear_wheel_cue_and_aligned_spikes": 0.019046296857010724,
+          "linear_wheel_cue_and_other_trial_spikes": 0.019415152902036388,
+          "attention_wheel_and_cue": 0.03137836954249071,
+          "attention_wheel_cue_and_aligned_spikes": 0.03029894744654854,
+          "attention_wheel_cue_and_other_trial_spikes": 0.031147057653166745
+        },
+        "contrasts": {
+          "brier": {
+            "linear": {
+              "aligned_minus_wheel_cue": 0.011773486215686052,
+              "aligned_minus_other_trial": 0.017688883048983,
+              "mice_with_smaller_error_than_both": 0
+            },
+            "attention": {
+              "aligned_minus_wheel_cue": -0.0004516888604955138,
+              "aligned_minus_other_trial": 0.001982247096159878,
+              "mice_with_smaller_error_than_both": 0
+            }
+          },
+          "mean_absolute_signed_error_rad": {
+            "linear": {
+              "aligned_minus_wheel_cue": 0.0006816572547251321,
+              "aligned_minus_other_trial": -0.0003688560450256645,
+              "mice_with_smaller_error_than_both": 0
+            },
+            "attention": {
+              "aligned_minus_wheel_cue": -0.0010794220959421674,
+              "aligned_minus_other_trial": -0.0008481102066182043,
+              "mice_with_smaller_error_than_both": 1
+            }
+          }
+        }
+      },
+      "quiet_within_trial": {
+        "mice": 2,
+        "rows": 245,
+        "events": 14,
+        "equal_mouse_event_rate": 0.0555666933974873,
+        "brier": {
+          "training_history_group_rate": 0.09781525150678669,
+          "linear_wheel_and_cue": 0.0891940167886223,
+          "linear_wheel_cue_and_aligned_spikes": 0.09776879325770288,
+          "linear_wheel_cue_and_other_trial_spikes": 0.08013509404528348,
+          "attention_wheel_and_cue": 0.1029044129048226,
+          "attention_wheel_cue_and_aligned_spikes": 0.11080166037393524,
+          "attention_wheel_cue_and_other_trial_spikes": 0.10073951564220492
+        },
+        "mean_predicted_probability": {
+          "training_history_group_rate": 0.2684897206266472,
+          "linear_wheel_and_cue": 0.22329405789712986,
+          "linear_wheel_cue_and_aligned_spikes": 0.2370289158101364,
+          "linear_wheel_cue_and_other_trial_spikes": 0.17951140289245912,
+          "attention_wheel_and_cue": 0.26410183793364583,
+          "attention_wheel_cue_and_aligned_spikes": 0.27378000958859405,
+          "attention_wheel_cue_and_other_trial_spikes": 0.2534373241578741
+        },
+        "mean_absolute_signed_error_rad": {
+          "zero_change": 0.003986207559966003,
+          "repeat_recent_change": 0.003986207559966003,
+          "linear_wheel_and_cue": 0.007589009521214742,
+          "linear_wheel_cue_and_aligned_spikes": 0.009434709101359101,
+          "linear_wheel_cue_and_other_trial_spikes": 0.00952753849244414,
+          "attention_wheel_and_cue": 0.00817990624167887,
+          "attention_wheel_cue_and_aligned_spikes": 0.00804905243123879,
+          "attention_wheel_cue_and_other_trial_spikes": 0.010338347110524797
+        },
+        "contrasts": {
+          "brier": {
+            "linear": {
+              "aligned_minus_wheel_cue": 0.008574776469080586,
+              "aligned_minus_other_trial": 0.017633699212419404,
+              "mice_with_smaller_error_than_both": 0
+            },
+            "attention": {
+              "aligned_minus_wheel_cue": 0.007897247469112634,
+              "aligned_minus_other_trial": 0.010062144731730324,
+              "mice_with_smaller_error_than_both": 0
+            }
+          },
+          "mean_absolute_signed_error_rad": {
+            "linear": {
+              "aligned_minus_wheel_cue": 0.001845699580144359,
+              "aligned_minus_other_trial": -9.282939108503849e-05,
+              "mice_with_smaller_error_than_both": 0
+            },
+            "attention": {
+              "aligned_minus_wheel_cue": -0.00013085381044007985,
+              "aligned_minus_other_trial": -0.0022892946792860067,
+              "mice_with_smaller_error_than_both": 1
+            }
+          }
+        }
+      }
+    },
+    "test_support": {
+      "allocated_unseen_labs": 3,
+      "scored_unseen_labs": 2,
+      "second_lab_quiet_without_new_encoder_reading": 129,
+      "remaining_held_source_reason": "Revised wheel positions lacked a source-verified timestamp partner."
+    },
+    "archive_clock": {
+      "source_sample_rate_hz": 30000.0,
+      "original_ordinals_verified_including_sentinels": 3169567,
+      "unmatched_ordinal_count": 0,
+      "meaning": "The released timestamps matched the original sample number divided by the recorded rate over the selected window. This checks the archived time values."
+    },
+    "verification": {
+      "original_pilot_preserved": true,
+      "unchanged_model_weights": true,
+      "independent_sources_models_outcomes_replayed": true
+    }
   }
 }
