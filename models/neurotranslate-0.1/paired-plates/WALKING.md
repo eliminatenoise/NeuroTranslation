@@ -32,7 +32,23 @@ Lower values mean smaller forecast errors. The first column averages the squared
 
 Adding heels to the force model reduced all three errors for each of the five people. Using heels alone gave about the same mean load probability error as using both, while its force impulse error was more than twice as large. The model started with new weights scored better on average for load probability and heel motion, and the model started with earlier force weights had the lowest mean impulse error. The launcher defaults to that second model. Recent muscle readings increased the mean error on all three measures compared with force and heels alone. The recording and muscle comparisons are available for further testing.
 
-These results cover walking-labelled captures from one lab. The trigger interval establishes the time covered by usable readings. The exact treadmill speed and the start and end of steady walking within those recordings are unknown. The forecast horizon follows the recording clock. This experiment uses prepared sensor readings and has no live camera benchmark. [How the recordings were made](https://doi.org/10.1038/s41597-026-08550-z)
+This first test covers walking-labelled captures from one lab. The trigger interval establishes the time covered by usable readings. The exact treadmill speed and the start and end of steady walking within those recordings are unknown. The forecast horizon follows the recording clock. This experiment uses prepared sensor readings and has no live camera benchmark. [How the recordings were made](https://doi.org/10.1038/s41597-026-08550-z)
+
+## How the same weights fared in a second lab
+
+We applied the saved model to a second lab's treadmill recordings without changing its weights. These recordings come from the comfortable-speed condition in the Fukuchi walking dataset. Earlier experiments had used their force readings. This test also uses the left and right heel markers. It compares 14,585 foot forecasts and 983 measured load starts across 39 people. [Fukuchi study and recording methods](https://doi.org/10.7717/peerj.4640)
+
+| Recent measurements | Load probability error | Force impulse error (N·s) | Heel displacement error (mm) |
+| --- | ---: | ---: | ---: |
+| Force plates only | 0.0174 | 5.39 | 46.1 |
+| Heel positions only | 0.0402 | 7.67 | **31.4** |
+| Force plates and heels, starting with earlier force weights | 0.0139 | 4.88 | 38.0 |
+| Force plates and heels, starting with new weights | **0.0130** | **4.85** | 31.5 |
+| Continue the last measured heel velocity | — | — | 65.2 |
+
+The default model was fitted using the earlier force weights as its starting point. It had lower average error on all three forecasts than the model fitted on force alone. Heel positions alone had the lowest average heel error by a small margin. Their force impulse error was more than 50% higher than that of the combined fits.
+
+The `force_motion_cold` option uses both readings and was fitted from new starting weights. It had a lower average heel error than the default at both labs. In the second lab its average heel error was 31.5 mm, compared with 38.0 mm for the default. The difference in force impulse error was small compared with the variation across people. In the first lab the default gave the lower impulse error. The second test covers the lab's comfortable-speed setting on its recording clock. [Source recordings](https://doi.org/10.6084/m9.figshare.5722711.v2)
 
 ## Use your own prepared readings
 

@@ -513,6 +513,183 @@
   "scored_new_load_starts": 531,
   "scored_people": 5,
   "scored_rows": 5700,
+  "second_lab_replay": {
+    "mean_errors": {
+      "force": {
+        "heel_vector_mae_mm": 46.07070763433507,
+        "heel_vertical_mae_mm": 19.321909529966273,
+        "impulse_mae_ns": 5.387427178995106,
+        "load_start_brier": 0.017353370169669525
+      },
+      "force_motion": {
+        "heel_vector_mae_mm": 37.99163689162179,
+        "heel_vertical_mae_mm": 17.10411121188565,
+        "impulse_mae_ns": 4.883832249302403,
+        "load_start_brier": 0.013900264801187952
+      },
+      "force_motion_cold": {
+        "heel_vector_mae_mm": 31.49796655319875,
+        "heel_vertical_mae_mm": 12.394115084545634,
+        "impulse_mae_ns": 4.847671388033037,
+        "load_start_brier": 0.013019702166154232
+      },
+      "heel_velocity": {
+        "heel_vector_mae_mm": 65.22257741592286,
+        "heel_vertical_mae_mm": 31.54772599378505
+      },
+      "last_force": {
+        "impulse_mae_ns": 9.77422743454234
+      },
+      "motion": {
+        "heel_vector_mae_mm": 31.39376619434449,
+        "heel_vertical_mae_mm": 15.530425124533414,
+        "impulse_mae_ns": 7.671688842213678,
+        "load_start_brier": 0.04023776874229591
+      }
+    },
+    "methods": "https://doi.org/10.7717/peerj.4640",
+    "paired_differences": {
+      "force": {
+        "heel_vector_mae_mm": {
+          "change": -8.079070742713283,
+          "people_lower": 30,
+          "person_bootstrap_95pct": [
+            -11.58759258491329,
+            -4.6680508898985895
+          ]
+        },
+        "heel_vertical_mae_mm": {
+          "change": -2.217798318080617,
+          "people_lower": 28,
+          "person_bootstrap_95pct": [
+            -3.6838453602794012,
+            -0.7741466132033296
+          ]
+        },
+        "impulse_mae_ns": {
+          "change": -0.5035949296927017,
+          "people_lower": 28,
+          "person_bootstrap_95pct": [
+            -0.7964861029191446,
+            -0.21145678615366606
+          ]
+        },
+        "load_start_brier": {
+          "change": -0.0034531053684815727,
+          "people_lower": 25,
+          "person_bootstrap_95pct": [
+            -0.006751045909811136,
+            -0.0003875598272120506
+          ]
+        }
+      },
+      "force_motion_cold": {
+        "heel_vector_mae_mm": {
+          "change": 6.4936703384230405,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            4.850635502033408,
+            8.20725049312652
+          ]
+        },
+        "heel_vertical_mae_mm": {
+          "change": 4.70999612734002,
+          "people_lower": 1,
+          "person_bootstrap_95pct": [
+            3.8260444991800373,
+            5.691810755958174
+          ]
+        },
+        "impulse_mae_ns": {
+          "change": 0.036160861269364464,
+          "people_lower": 15,
+          "person_bootstrap_95pct": [
+            -0.35372228312410864,
+            0.3549215231942543
+          ]
+        },
+        "load_start_brier": {
+          "change": 0.000880562635033722,
+          "people_lower": 17,
+          "person_bootstrap_95pct": [
+            -0.0005123707298808986,
+            0.0023247919520790637
+          ]
+        }
+      },
+      "heel_velocity": {
+        "heel_vector_mae_mm": {
+          "change": -27.230940524301065,
+          "people_lower": 38,
+          "person_bootstrap_95pct": [
+            -32.05933925261221,
+            -22.644020113491884
+          ]
+        },
+        "heel_vertical_mae_mm": {
+          "change": -14.443614781899395,
+          "people_lower": 39,
+          "person_bootstrap_95pct": [
+            -18.11804278762782,
+            -12.039127702540366
+          ]
+        }
+      },
+      "last_force": {
+        "impulse_mae_ns": {
+          "change": -4.890395185239934,
+          "people_lower": 38,
+          "person_bootstrap_95pct": [
+            -5.558123795163168,
+            -4.1900522472842
+          ]
+        }
+      },
+      "motion": {
+        "heel_vector_mae_mm": {
+          "change": 6.5978706972772985,
+          "people_lower": 2,
+          "person_bootstrap_95pct": [
+            4.719273682081856,
+            8.589024650695537
+          ]
+        },
+        "heel_vertical_mae_mm": {
+          "change": 1.5736860873522385,
+          "people_lower": 8,
+          "person_bootstrap_95pct": [
+            0.5490994792949261,
+            2.6004995376326914
+          ]
+        },
+        "impulse_mae_ns": {
+          "change": -2.7878565929112753,
+          "people_lower": 37,
+          "person_bootstrap_95pct": [
+            -3.5403302317735155,
+            -2.0975579129190653
+          ]
+        },
+        "load_start_brier": {
+          "change": -0.026337503941107957,
+          "people_lower": 30,
+          "person_bootstrap_95pct": [
+            -0.03545776336577273,
+            -0.017293916492463004
+          ]
+        }
+      }
+    },
+    "recording_rates_hz": {
+      "camera": 150,
+      "force": 300
+    },
+    "recordings": "https://doi.org/10.6084/m9.figshare.5722711.v2",
+    "scope": "Use the previously acquired comfortable-speed T05 treadmill trials of 41 people supported by the exact transport receipt. The other dataset and people were cited in previous force-only testing. This is a new cross-lab replay for the heel-and-force weights, using an already examined archive. Keep the geometric engineering person and the other pace conditions outside the comparison.",
+    "scored_new_load_starts": 983,
+    "scored_people": 39,
+    "scored_rows": 14585
+  },
   "side_order": [
     "left",
     "right"
