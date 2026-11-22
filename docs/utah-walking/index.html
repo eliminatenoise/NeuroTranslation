@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forecasting the next 100 ms of a step · NeuroTranslation</title>
+  <meta name="description" content="Compare forecasts of heel movement, vertical force impulse and the start of loading in eight walkers with an above-knee prosthesis.">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="results.js"></script>
+  <script defer src="reader.js"></script>
+</head>
+<body>
+  <a class="skip" href="#compare">Skip to the comparison</a>
+  <header><div class="wrap top"><a href="../index.html">← NeuroTranslation</a><span>Utah walking study</span></div></header>
+  <main class="wrap">
+    <h1>Forecasting the next <span class="unit">100 ms</span> of a step</h1>
+    <p class="lead">Eight walkers from a separate Utah dataset each used an above-knee prosthesis on a treadmill at <strong>1.0 m/s</strong>. Each method used 200 ms of recorded movement and force history. How well could it predict heel movement, force underfoot and the start of loading over the next 100 ms?</p>
+    <section aria-labelledby="findings">
+      <h2 id="findings">What happened across both feet?</h2>
+      <p class="sub">The research blend combined a trained model with a reference based on recent heel velocity and force. These results use the original calibrated force recording.</p>
+      <div class="findings">
+        <section><h3>Heel movement</h3><strong class="number">0.33 <small>mm</small></strong><p>Less error with the blend. Mean heel error fell from 54.27 to 53.94 mm. Seven of eight walkers had lower error.</p></section>
+        <section><h3>Vertical impulse</h3><strong class="number">−0.081 <small>N·s</small></strong><p>Difference in mean error. The paired 95% interval ran from −0.226 to +0.054 N·s, leaving room for either lower or higher error.</p></section>
+        <section><h3>New load on a foot</h3><strong class="number">0.09960</strong><p>Squared probability error fell from 0.10840 for the reference to 0.09960 for both the research model and its blend. Seven walkers contributed 925 scored foot forecasts, including 104 distinct starts (63 prosthetic and 41 intact).</p></section>
+      </div>
+    </section>
+    <section id="compare" tabindex="-1" aria-labelledby="compare-title">
+      <h2 id="compare-title">Compare the forecasts</h2>
+      <p>Choose a force record, a side and an outcome. The export represents the same force plates as the original calibrated record.</p>
+      <div class="selectors">
+        <label>Force record<select id="encoding"><option value="native">Original calibrated force</option><option value="export">Software force export</option></select></label>
+        <label>Foot selection<select id="side"><option value="both_sides">Both feet</option><option value="prosthetic_side">Prosthetic side</option><option value="intact_side">Intact side</option></select></label>
+      </div>
+      <fieldset><legend>Outcome</legend><div class="options">
+        <label><input type="radio" name="metric" value="heel_error_mm" checked><span>Heel displacement</span></label>
+        <label><input type="radio" name="metric" value="force_impulse_error_ns"><span>Force impulse</span></label>
+        <label><input type="radio" name="metric" value="new_load_brier"><span>Load-start probability</span></label>
+      </div></fieldset>
+      <noscript><p>Enable JavaScript to switch between scores. The findings above summarize the original force record for both feet.</p></noscript>
+      <div id="scores" hidden>
+        <h3 id="outcome"></h3><p id="definition"></p>
+        <p class="support" id="support"></p>
+        <table aria-describedby="table-guide">
+          <caption id="selection"></caption>
+          <thead><tr><th scope="col">Forecast</th><th scope="col">Mean error</th><th scope="col">Difference from reference <span class="th-note">with paired 95% interval</span></th></tr></thead>
+          <tbody id="values"></tbody>
+        </table>
+        <p id="table-guide" class="sub">Lower error is better. Each difference subtracts the physical reference error from the model error. The vertical mark on each line is zero.</p>
+      </div>
+    </section>
+    <p class="sr-only" role="status" aria-live="polite" aria-atomic="true" id="announcement"></p>
+    <section class="methods" aria-labelledby="method">
+      <h2 id="method">How the comparison worked</h2>
+      <h3>Who supplied the recordings?</h3>
+      <p>Of 17 walkers reserved for this external test, eight had a recording at the specified speed. Each contributed one treadmill trial. For the other nine walkers, the archive had no matching 1.0 m/s trial available. A separate walker used to prepare the analysis was excluded from the test. The models and their blend weights were fixed before the outcomes were scored.</p>
+      <h3>What did each forecast use?</h3>
+      <p>The physical reference continued the heel marker’s recent velocity, held the latest force steady and used a fixed probability for a new load. The compact and research models each made their own forecast. Each blend moved the reference toward its model by a weight fixed for that outcome.</p>
+      <h3>Which 100 milliseconds?</h3>
+      <p>Heel displacement starts at the last camera reading. The force forecast starts 10 ms later. Force impulse adds up signed vertical force over the next 100 ms. Force scoring required separate foot placements and a measured force outcome throughout that interval. Load-start scoring also required a confirmed outcome. The timing comes from archived samples. Live sensor delays would need their own measurements.</p>
+      <h3>How much does each walker count?</h3>
+      <p>The models issued forecasts at 756 time points. Each foot can supply an outcome at a time point. For each outcome, we averaged errors within each walker, then gave each walker equal weight. The 95% intervals come from 20,000 resamples of the walkers’ paired differences. They cover one comparison at a time and are unadjusted for multiple comparisons. The results describe this cohort at this speed.</p>
+    </section>
+    <section class="sources" aria-labelledby="credits">
+      <h2 id="credits">Study, data and reuse</h2>
+      <p>Sarah Hood, Marshall K. Ishmael, Andrew Gunnell, K. B. Foreman and Tommaso Lenzi documented treadmill walking with above-knee prostheses. <a href="https://doi.org/10.1038/s41597-020-0494-7">Read the original study</a>.</p>
+      <p>Sarah Hood and Tommaso Lenzi published the Utah kinetic and kinematic data. NeuroTranslation selected the 1.0 m/s recordings and computed the aggregate forecast errors, uncertainty intervals and event counts shown here. The source data and these derived aggregate scores are credited under CC BY 4.0. <a href="https://doi.org/10.6084/m9.figshare.c.4962305.v1">Version 1 data collection</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 licence</a>.</p>
+    </section>
+  </main>
+</body>
+</html>
