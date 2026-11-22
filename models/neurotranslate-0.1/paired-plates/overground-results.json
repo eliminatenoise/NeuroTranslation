@@ -1,0 +1,1225 @@
+{
+  "clips": 266,
+  "comparison_arms": {
+    "body-force": "train_body",
+    "body-motion": "train_body_motion",
+    "room-force": "train_room"
+  },
+  "history_coverage": {
+    "full_context": {
+      "endpoints": {
+        "event": {
+          "people": 12,
+          "rows": 1933
+        },
+        "impulse": {
+          "people": 12,
+          "rows": 2160
+        },
+        "loaded_impulse": {
+          "people": 12,
+          "rows": 1148
+        },
+        "movement": {
+          "people": 12,
+          "rows": 2160
+        }
+      },
+      "left_loads": 0,
+      "mean_scores": {
+        "heel_velocity": {
+          "heel_backward_mm": 38.16044457762761,
+          "heel_displacement_mm": 57.467787734728795,
+          "heel_vertical_mm": 31.169258435244057
+        },
+        "last_force": {
+          "impulse_mae_ns": 6.5860009160775626,
+          "loaded_interval_impulse_mae_ns": 12.534644571228768
+        },
+        "no_new_load": {
+          "load_probability_brier": 0.0
+        },
+        "released_body_scratch": {
+          "heel_backward_mm": 33.06279283308889,
+          "heel_displacement_mm": 42.595594995624865,
+          "heel_vertical_mm": 14.24384103589981,
+          "impulse_mae_ns": 6.559667281195664,
+          "load_probability_brier": 0.09401121969914979,
+          "loaded_interval_impulse_mae_ns": 6.800004225570594
+        },
+        "released_room": {
+          "heel_backward_mm": 72.04508372057064,
+          "heel_displacement_mm": 84.44265203363824,
+          "heel_vertical_mm": 32.98568674922664,
+          "impulse_mae_ns": 8.309922468276307,
+          "load_probability_brier": 0.04468095517131027,
+          "loaded_interval_impulse_mae_ns": 11.16762140149529
+        },
+        "released_room_scratch": {
+          "heel_backward_mm": 70.10962858084744,
+          "heel_displacement_mm": 76.4667050170216,
+          "heel_vertical_mm": 16.453542941889292,
+          "impulse_mae_ns": 6.671918637642732,
+          "load_probability_brier": 0.03930419920186791,
+          "loaded_interval_impulse_mae_ns": 6.419527242261476
+        },
+        "train_body": {
+          "heel_backward_mm": 23.968118518417437,
+          "heel_displacement_mm": 33.4105145129744,
+          "heel_vertical_mm": 14.018750822911231,
+          "impulse_mae_ns": 6.765175511708615,
+          "load_probability_brier": 0.0485146411183281,
+          "loaded_interval_impulse_mae_ns": 7.405455100459612
+        },
+        "train_body_motion": {
+          "heel_backward_mm": 23.943874916278677,
+          "heel_displacement_mm": 32.1227001495789,
+          "heel_vertical_mm": 12.587773143479312,
+          "impulse_mae_ns": 9.038064706080474,
+          "load_probability_brier": 0.055374791854371046,
+          "loaded_interval_impulse_mae_ns": 12.507007245762203
+        },
+        "train_room": {
+          "heel_backward_mm": 53.32941398517207,
+          "heel_displacement_mm": 66.05166326674053,
+          "heel_vertical_mm": 24.652282698857505,
+          "impulse_mae_ns": 6.890344840381761,
+          "load_probability_brier": 0.01540496133448213,
+          "loaded_interval_impulse_mae_ns": 7.638543987562574
+        }
+      },
+      "recorded_new_loads": 0,
+      "right_loads": 0
+    },
+    "short_context": {
+      "endpoints": {
+        "event": {
+          "people": 12,
+          "rows": 1313
+        },
+        "impulse": {
+          "people": 12,
+          "rows": 2660
+        },
+        "loaded_impulse": {
+          "people": 12,
+          "rows": 1999
+        },
+        "movement": {
+          "people": 12,
+          "rows": 2660
+        }
+      },
+      "left_loads": 0,
+      "mean_scores": {
+        "heel_velocity": {
+          "heel_backward_mm": 46.799093896632975,
+          "heel_displacement_mm": 62.94254422114788,
+          "heel_vertical_mm": 30.118477876503956
+        },
+        "last_force": {
+          "impulse_mae_ns": 12.69503989064475,
+          "loaded_interval_impulse_mae_ns": 16.730597521542983
+        },
+        "no_new_load": {
+          "load_probability_brier": 0.2027300808624025
+        },
+        "released_body_scratch": {
+          "heel_backward_mm": 93.91167693139352,
+          "heel_displacement_mm": 115.05516294022152,
+          "heel_vertical_mm": 53.66905186090315,
+          "impulse_mae_ns": 17.69813444687892,
+          "load_probability_brier": 0.3878824859179569,
+          "loaded_interval_impulse_mae_ns": 21.032362445769397
+        },
+        "released_room": {
+          "heel_backward_mm": 114.01891239802949,
+          "heel_displacement_mm": 134.5940276766865,
+          "heel_vertical_mm": 51.008402222558715,
+          "impulse_mae_ns": 18.61134403625259,
+          "load_probability_brier": 0.39550582641705984,
+          "loaded_interval_impulse_mae_ns": 20.907677913534474
+        },
+        "released_room_scratch": {
+          "heel_backward_mm": 103.20724636322639,
+          "heel_displacement_mm": 113.84768477999457,
+          "heel_vertical_mm": 31.841580211559904,
+          "impulse_mae_ns": 18.137509156642185,
+          "load_probability_brier": 0.2473365566284974,
+          "loaded_interval_impulse_mae_ns": 21.659683474838463
+        },
+        "train_body": {
+          "heel_backward_mm": 29.006467248225892,
+          "heel_displacement_mm": 39.139910546199935,
+          "heel_vertical_mm": 14.323850905853313,
+          "impulse_mae_ns": 8.7712364741367,
+          "load_probability_brier": 0.06816983230920494,
+          "loaded_interval_impulse_mae_ns": 9.871852371102078
+        },
+        "train_body_motion": {
+          "heel_backward_mm": 18.309295360446864,
+          "heel_displacement_mm": 27.538655167774422,
+          "heel_vertical_mm": 11.167709035798632,
+          "impulse_mae_ns": 10.370020750247432,
+          "load_probability_brier": 0.17886161404894596,
+          "loaded_interval_impulse_mae_ns": 13.06263932395912
+        },
+        "train_room": {
+          "heel_backward_mm": 71.42233324504825,
+          "heel_displacement_mm": 80.19041091659781,
+          "heel_vertical_mm": 23.053532212851078,
+          "impulse_mae_ns": 11.13680706275288,
+          "load_probability_brier": 0.11015810012920992,
+          "loaded_interval_impulse_mae_ns": 13.004079791964356
+        }
+      },
+      "recorded_new_loads": 265,
+      "right_loads": 265
+    }
+  },
+  "horizon_on_recording_clock_ms": 100,
+  "matched_comparisons": {
+    "adaptive_training_in_room": {
+      "candidate": "train_room",
+      "comparison": "released_room_scratch",
+      "errors_lower_is_better": {
+        "heel_backward_mm": {
+          "mean_change": -25.122532352388685,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -28.112899181366974,
+            -21.983825046786652
+          ]
+        },
+        "heel_displacement_mm": {
+          "mean_change": -23.23087931612793,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -25.50531041458305,
+            -20.867472854716475
+          ]
+        },
+        "heel_vertical_mm": {
+          "mean_change": -1.1024831048634154,
+          "people": 12,
+          "people_improved": 9,
+          "person_bootstrap_95pct": [
+            -2.7296297664698486,
+            0.5849170850842846
+          ]
+        },
+        "impulse_mae_ns": {
+          "mean_change": -3.7689672150987286,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -4.092796795596198,
+            -3.4761049392191157
+          ]
+        },
+        "load_probability_brier": {
+          "mean_change": -0.06914398088376017,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -0.08305343224933698,
+            -0.05331069382615902
+          ]
+        },
+        "loaded_interval_impulse_mae_ns": {
+          "mean_change": -5.06763585397852,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -5.515819870329831,
+            -4.632935801414585
+          ]
+        }
+      }
+    },
+    "adaptive_training_on_body": {
+      "candidate": "train_body",
+      "comparison": "released_body_scratch",
+      "errors_lower_is_better": {
+        "heel_backward_mm": {
+          "mean_change": -40.21044148040226,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -44.10781105386434,
+            -36.09648932780424
+          ]
+        },
+        "heel_displacement_mm": {
+          "mean_change": -46.259258910112315,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -49.38204985229362,
+            -42.967908951906495
+          ]
+        },
+        "heel_vertical_mm": {
+          "mean_change": -21.85557347217805,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -22.87275352694302,
+            -20.774731216755125
+          ]
+        },
+        "impulse_mae_ns": {
+          "mean_change": -4.84405746885689,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -5.342676724164647,
+            -4.3432739616755045
+          ]
+        },
+        "load_probability_brier": {
+          "mean_change": -0.1553067783200355,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -0.16699076309353106,
+            -0.14386924834860923
+          ]
+        },
+        "loaded_interval_impulse_mae_ns": {
+          "mean_change": -6.840939961427556,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -7.499280042372678,
+            -6.174051282896388
+          ]
+        }
+      }
+    },
+    "body_relative_training": {
+      "candidate": "train_body",
+      "comparison": "train_room",
+      "errors_lower_is_better": {
+        "heel_backward_mm": {
+          "mean_change": -36.59247496388125,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -40.62936192460389,
+            -32.19341396150287
+          ]
+        },
+        "heel_displacement_mm": {
+          "mean_change": -37.3452644877101,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -41.14791733798813,
+            -33.07645744765007
+          ]
+        },
+        "heel_vertical_mm": {
+          "mean_change": -9.713757684965962,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -11.072161622283335,
+            -8.227719361526267
+          ]
+        },
+        "impulse_mae_ns": {
+          "mean_change": -1.3527636666610945,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -1.6260538070807424,
+            -1.0785159383764131
+          ]
+        },
+        "load_probability_brier": {
+          "mean_change": 0.0023899112325245025,
+          "people": 12,
+          "people_improved": 4,
+          "person_bootstrap_95pct": [
+            -0.0067950579492339,
+            0.011543756806283278
+          ]
+        },
+        "loaded_interval_impulse_mae_ns": {
+          "mean_change": -2.0475980065831707,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -2.3707565854934503,
+            -1.6726064406640622
+          ]
+        }
+      }
+    },
+    "body_relative_without_retraining": {
+      "candidate": "released_body_scratch",
+      "comparison": "released_room_scratch",
+      "errors_lower_is_better": {
+        "heel_backward_mm": {
+          "mean_change": -21.504565835867677,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -25.73540198523891,
+            -16.891235754976393
+          ]
+        },
+        "heel_displacement_mm": {
+          "mean_change": -14.316884893725708,
+          "people": 12,
+          "people_improved": 11,
+          "person_bootstrap_95pct": [
+            -18.077769006212733,
+            -10.0314559123907
+          ]
+        },
+        "heel_vertical_mm": {
+          "mean_change": 11.039332682348677,
+          "people": 12,
+          "people_improved": 0,
+          "person_bootstrap_95pct": [
+            9.869176640831242,
+            12.149301929691621
+          ]
+        },
+        "impulse_mae_ns": {
+          "mean_change": -0.2776734129029335,
+          "people": 12,
+          "people_improved": 9,
+          "person_bootstrap_95pct": [
+            -0.5166272421696001,
+            -0.03178691750242132
+          ]
+        },
+        "load_probability_brier": {
+          "mean_change": 0.08855270866879984,
+          "people": 12,
+          "people_improved": 0,
+          "person_bootstrap_95pct": [
+            0.07844727078398131,
+            0.09852074286013623
+          ]
+        },
+        "loaded_interval_impulse_mae_ns": {
+          "mean_change": -0.2742938991341342,
+          "people": 12,
+          "people_improved": 8,
+          "person_bootstrap_95pct": [
+            -0.5239161766453404,
+            -0.019935288952441305
+          ]
+        }
+      }
+    },
+    "measured_force_added": {
+      "candidate": "train_body",
+      "comparison": "train_body_motion",
+      "errors_lower_is_better": {
+        "heel_backward_mm": {
+          "mean_change": 5.964890877224456,
+          "people": 12,
+          "people_improved": 0,
+          "person_bootstrap_95pct": [
+            4.7647675997885734,
+            7.017585111251927
+          ]
+        },
+        "heel_displacement_mm": {
+          "mean_change": 7.0271127809493095,
+          "people": 12,
+          "people_improved": 0,
+          "person_bootstrap_95pct": [
+            5.928867896413278,
+            8.047751425247936
+          ]
+        },
+        "heel_vertical_mm": {
+          "mean_change": 2.3918799278338,
+          "people": 12,
+          "people_improved": 1,
+          "person_bootstrap_95pct": [
+            1.6661999479228826,
+            3.044069158136947
+          ]
+        },
+        "impulse_mae_ns": {
+          "mean_change": -1.9645484848527872,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -2.6093628728302947,
+            -1.3205585364421626
+          ]
+        },
+        "load_probability_brier": {
+          "mean_change": -0.050714903972753196,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -0.06496965086520254,
+            -0.03650593602114495
+          ]
+        },
+        "loaded_interval_impulse_mae_ns": {
+          "mean_change": -3.9558810347069873,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -4.807070558273638,
+            -3.107085299276698
+          ]
+        }
+      }
+    },
+    "new_vs_heel_velocity": {
+      "candidate": "train_body",
+      "comparison": "heel_velocity",
+      "errors_lower_is_better": {
+        "heel_backward_mm": {
+          "mean_change": -16.224734816426295,
+          "people": 12,
+          "people_improved": 11,
+          "person_bootstrap_95pct": [
+            -19.701296610563237,
+            -11.933268736299784
+          ]
+        },
+        "heel_displacement_mm": {
+          "mean_change": -23.962681575850667,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -28.067048995541153,
+            -18.998128864153255
+          ]
+        },
+        "heel_vertical_mm": {
+          "mean_change": -16.42067559080913,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -18.44713456389776,
+            -14.203182788300705
+          ]
+        }
+      }
+    },
+    "new_vs_last_force": {
+      "candidate": "train_body",
+      "comparison": "last_force",
+      "errors_lower_is_better": {
+        "impulse_mae_ns": {
+          "mean_change": -2.2480136062274347,
+          "people": 12,
+          "people_improved": 11,
+          "person_bootstrap_95pct": [
+            -3.2902095786996948,
+            -1.1193331002126123
+          ]
+        },
+        "loaded_interval_impulse_mae_ns": {
+          "mean_change": -6.465672227993241,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -7.814441128155507,
+            -4.905624684841243
+          ]
+        }
+      }
+    },
+    "new_vs_no_new_load": {
+      "candidate": "train_body",
+      "comparison": "no_new_load",
+      "errors_lower_is_better": {
+        "load_probability_brier": {
+          "mean_change": -0.02597294529700867,
+          "people": 12,
+          "people_improved": 10,
+          "person_bootstrap_95pct": [
+            -0.0401115515758675,
+            -0.012001723849663365
+          ]
+        }
+      }
+    },
+    "new_vs_original_default": {
+      "candidate": "train_body",
+      "comparison": "released_room",
+      "errors_lower_is_better": {
+        "heel_backward_mm": {
+          "mean_change": -69.17214102734141,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -76.86604799590992,
+            -60.386043807056154
+          ]
+        },
+        "heel_displacement_mm": {
+          "mean_change": -76.3892842881511,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -83.56743927556457,
+            -68.40564742095424
+          ]
+        },
+        "heel_vertical_mm": {
+          "mean_change": -28.976222949275087,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -30.722495267140573,
+            -27.2918889448691
+          ]
+        },
+        "impulse_mae_ns": {
+          "mean_change": -6.097259942125302,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -6.644168126912522,
+            -5.499698857888677
+          ]
+        },
+        "load_probability_brier": {
+          "mean_change": -0.13053993481885645,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -0.13902965174408566,
+            -0.12107756770778262
+          ]
+        },
+        "loaded_interval_impulse_mae_ns": {
+          "mean_change": -8.286864093187539,
+          "people": 12,
+          "people_improved": 12,
+          "person_bootstrap_95pct": [
+            -8.907703303559368,
+            -7.610787413789084
+          ]
+        }
+      }
+    }
+  },
+  "overground_scoring_people": 12,
+  "people_in_treadmill_fit": 6,
+  "person_balanced_errors": {
+    "heel_velocity": {
+      "heel_backward_mm": 43.101132144715166,
+      "heel_displacement_mm": 60.6315503861427,
+      "heel_vertical_mm": 30.60136702772117
+    },
+    "last_force": {
+      "impulse_mae_ns": 10.110647531167151,
+      "loaded_interval_impulse_mae_ns": 15.379751829328816
+    },
+    "no_new_load": {
+      "load_probability_brier": 0.0826187995388052
+    },
+    "released_body_scratch": {
+      "heel_backward_mm": 67.08683880869113,
+      "heel_displacement_mm": 82.92812772040433,
+      "heel_vertical_mm": 36.036264909090086,
+      "impulse_mae_ns": 12.706691393796605,
+      "load_probability_brier": 0.21195263256183206,
+      "loaded_interval_impulse_mae_ns": 15.755019562763133
+    },
+    "released_room": {
+      "heel_backward_mm": 96.0485383556303,
+      "heel_displacement_mm": 113.05815309844313,
+      "heel_vertical_mm": 43.15691438618712,
+      "impulse_mae_ns": 13.959893867065022,
+      "load_probability_brier": 0.187185789060653,
+      "loaded_interval_impulse_mae_ns": 17.20094369452311
+    },
+    "released_room_scratch": {
+      "heel_backward_mm": 88.5914046445588,
+      "heel_displacement_mm": 97.24501261413003,
+      "heel_vertical_mm": 24.996932226741418,
+      "impulse_mae_ns": 12.98436480669954,
+      "load_probability_brier": 0.12339992389303221,
+      "loaded_interval_impulse_mae_ns": 16.02931346189727
+    },
+    "train_body": {
+      "heel_backward_mm": 26.876397328288874,
+      "heel_displacement_mm": 36.66886881029203,
+      "heel_vertical_mm": 14.18069143691204,
+      "impulse_mae_ns": 7.862633924939718,
+      "load_probability_brier": 0.05664585424179655,
+      "loaded_interval_impulse_mae_ns": 8.914079601335578
+    },
+    "train_body_motion": {
+      "heel_backward_mm": 20.91150645106442,
+      "heel_displacement_mm": 29.641756029342716,
+      "heel_vertical_mm": 11.788811509078236,
+      "impulse_mae_ns": 9.827182409792504,
+      "load_probability_brier": 0.10736075821454975,
+      "loaded_interval_impulse_mae_ns": 12.869960636042563
+    },
+    "train_room": {
+      "heel_backward_mm": 63.468872292170126,
+      "heel_displacement_mm": 74.01413329800212,
+      "heel_vertical_mm": 23.894449121878,
+      "impulse_mae_ns": 9.215397591600812,
+      "load_probability_brier": 0.054255943009272035,
+      "loaded_interval_impulse_mae_ns": 10.961677607918746
+    }
+  },
+  "scope": "Instrumented plate loads and observation of marker positions. The original source has manually filled marker gaps and only part of a real overground walk; it has no established live prediction latency. Do not infer force on a foot outside either instrumented plate.",
+  "shape": "Room histories use earlier 3D heel positions. Body histories subtract the midpoint of the two front pelvis markers from both horizontal axes, preserving height above the floor. The target is the measured room displacement minus an estimate from the past horizontal velocity of that midpoint. Its estimated travel is added back at forecast time.",
+  "source": {
+    "camera_hz": 200,
+    "force_hz": 1000,
+    "licence": "https://creativecommons.org/licenses/by/4.0/",
+    "methods": "https://doi.org/10.1038/s41597-025-05113-6",
+    "walking_archive": "https://doi.org/10.17608/k6.auckland.27015301.v2"
+  },
+  "step_widths": {
+    "-13.0": {
+      "endpoints": {
+        "event": {
+          "people": 12,
+          "rows": 558
+        },
+        "impulse": {
+          "people": 12,
+          "rows": 812
+        },
+        "loaded_impulse": {
+          "people": 12,
+          "rows": 523
+        },
+        "movement": {
+          "people": 12,
+          "rows": 812
+        }
+      },
+      "left_loads": 0,
+      "mean_scores": {
+        "heel_velocity": {
+          "heel_backward_mm": 44.39000685910967,
+          "heel_displacement_mm": 62.42526095444015,
+          "heel_vertical_mm": 30.745634761413488
+        },
+        "last_force": {
+          "impulse_mae_ns": 10.20029790104068,
+          "loaded_interval_impulse_mae_ns": 15.681288532804976
+        },
+        "no_new_load": {
+          "load_probability_brier": 0.08136747549817297
+        },
+        "released_body_scratch": {
+          "heel_backward_mm": 68.53712561090911,
+          "heel_displacement_mm": 84.18713650990674,
+          "heel_vertical_mm": 36.58386935444151,
+          "impulse_mae_ns": 12.610915452639885,
+          "load_probability_brier": 0.21284161372962454,
+          "loaded_interval_impulse_mae_ns": 15.620798678377051
+        },
+        "released_room": {
+          "heel_backward_mm": 96.90662118460472,
+          "heel_displacement_mm": 113.87106640392163,
+          "heel_vertical_mm": 42.90905542250315,
+          "impulse_mae_ns": 13.901642402048799,
+          "load_probability_brier": 0.18259584998924192,
+          "loaded_interval_impulse_mae_ns": 17.025433687346517
+        },
+        "released_room_scratch": {
+          "heel_backward_mm": 85.90085688584485,
+          "heel_displacement_mm": 94.76782436275987,
+          "heel_vertical_mm": 25.409159559247907,
+          "impulse_mae_ns": 12.400107824350945,
+          "load_probability_brier": 0.13215331980639858,
+          "loaded_interval_impulse_mae_ns": 15.039178413936375
+        },
+        "train_body": {
+          "heel_backward_mm": 28.734878472629465,
+          "heel_displacement_mm": 37.80425407854933,
+          "heel_vertical_mm": 14.330087119339842,
+          "impulse_mae_ns": 8.556296020004497,
+          "load_probability_brier": 0.06009589403885113,
+          "loaded_interval_impulse_mae_ns": 9.528947856572609
+        },
+        "train_body_motion": {
+          "heel_backward_mm": 20.38561607186872,
+          "heel_displacement_mm": 30.442360694216735,
+          "heel_vertical_mm": 12.961496533305107,
+          "impulse_mae_ns": 10.007053835149899,
+          "load_probability_brier": 0.12149406414984974,
+          "loaded_interval_impulse_mae_ns": 12.741684775153134
+        },
+        "train_room": {
+          "heel_backward_mm": 63.9872454672332,
+          "heel_displacement_mm": 74.38171772485293,
+          "heel_vertical_mm": 24.03076497710151,
+          "impulse_mae_ns": 9.322009301999488,
+          "load_probability_brier": 0.05342466835363377,
+          "loaded_interval_impulse_mae_ns": 10.62396099254799
+        }
+      },
+      "recorded_new_loads": 45,
+      "right_loads": 45
+    },
+    "-6.5": {
+      "endpoints": {
+        "event": {
+          "people": 12,
+          "rows": 567
+        },
+        "impulse": {
+          "people": 12,
+          "rows": 854
+        },
+        "loaded_impulse": {
+          "people": 12,
+          "rows": 558
+        },
+        "movement": {
+          "people": 12,
+          "rows": 854
+        }
+      },
+      "left_loads": 0,
+      "mean_scores": {
+        "heel_velocity": {
+          "heel_backward_mm": 43.5821456301409,
+          "heel_displacement_mm": 60.59746109098892,
+          "heel_vertical_mm": 30.32005954623744
+        },
+        "last_force": {
+          "impulse_mae_ns": 10.08780334324638,
+          "loaded_interval_impulse_mae_ns": 15.325302656911324
+        },
+        "no_new_load": {
+          "load_probability_brier": 0.0835576377307888
+        },
+        "released_body_scratch": {
+          "heel_backward_mm": 66.23501040113905,
+          "heel_displacement_mm": 81.42436354573394,
+          "heel_vertical_mm": 36.22213699463345,
+          "impulse_mae_ns": 12.242159942045653,
+          "load_probability_brier": 0.20580460337368708,
+          "loaded_interval_impulse_mae_ns": 15.06374816509909
+        },
+        "released_room": {
+          "heel_backward_mm": 93.50331315644326,
+          "heel_displacement_mm": 109.89745690546228,
+          "heel_vertical_mm": 42.322561593045336,
+          "impulse_mae_ns": 13.740384192176338,
+          "load_probability_brier": 0.181208747015128,
+          "loaded_interval_impulse_mae_ns": 16.68808143806703
+        },
+        "released_room_scratch": {
+          "heel_backward_mm": 83.61792827682282,
+          "heel_displacement_mm": 91.72525942974805,
+          "heel_vertical_mm": 24.876312462309354,
+          "impulse_mae_ns": 12.28307992442672,
+          "load_probability_brier": 0.12117958027382975,
+          "loaded_interval_impulse_mae_ns": 14.933061822317617
+        },
+        "train_body": {
+          "heel_backward_mm": 28.226699210705988,
+          "heel_displacement_mm": 35.80236858447255,
+          "heel_vertical_mm": 13.056588051444587,
+          "impulse_mae_ns": 8.006173911111844,
+          "load_probability_brier": 0.06048430278677789,
+          "loaded_interval_impulse_mae_ns": 8.833596996135919
+        },
+        "train_body_motion": {
+          "heel_backward_mm": 19.003165615640423,
+          "heel_displacement_mm": 26.222595140471483,
+          "heel_vertical_mm": 10.90381307577597,
+          "impulse_mae_ns": 9.624064563468636,
+          "load_probability_brier": 0.1165912098667159,
+          "loaded_interval_impulse_mae_ns": 12.303226636046169
+        },
+        "train_room": {
+          "heel_backward_mm": 61.304950805859,
+          "heel_displacement_mm": 71.04637873232096,
+          "heel_vertical_mm": 23.751275956918686,
+          "impulse_mae_ns": 9.18462532766365,
+          "load_probability_brier": 0.05941216863259782,
+          "loaded_interval_impulse_mae_ns": 10.520554817418445
+        }
+      },
+      "recorded_new_loads": 47,
+      "right_loads": 47
+    },
+    "0.0": {
+      "endpoints": {
+        "event": {
+          "people": 6,
+          "rows": 315
+        },
+        "impulse": {
+          "people": 6,
+          "rows": 472
+        },
+        "loaded_impulse": {
+          "people": 6,
+          "rows": 305
+        },
+        "movement": {
+          "people": 6,
+          "rows": 472
+        }
+      },
+      "left_loads": 0,
+      "mean_scores": {
+        "heel_velocity": {
+          "heel_backward_mm": 40.901253679528544,
+          "heel_displacement_mm": 57.76446388452219,
+          "heel_vertical_mm": 29.909694707851028
+        },
+        "last_force": {
+          "impulse_mae_ns": 9.712626048496666,
+          "loaded_interval_impulse_mae_ns": 14.885015827272909
+        },
+        "no_new_load": {
+          "load_probability_brier": 0.07857927394969132
+        },
+        "released_body_scratch": {
+          "heel_backward_mm": 65.39831169430894,
+          "heel_displacement_mm": 80.57330978421216,
+          "heel_vertical_mm": 35.74350059227502,
+          "impulse_mae_ns": 13.639848022508614,
+          "load_probability_brier": 0.22683220603146084,
+          "loaded_interval_impulse_mae_ns": 17.074411220924166
+        },
+        "released_room": {
+          "heel_backward_mm": 91.14140718032196,
+          "heel_displacement_mm": 107.6891939067438,
+          "heel_vertical_mm": 42.33591113692781,
+          "impulse_mae_ns": 14.513238751550332,
+          "load_probability_brier": 0.1999803939552485,
+          "loaded_interval_impulse_mae_ns": 17.851655603416415
+        },
+        "released_room_scratch": {
+          "heel_backward_mm": 79.57859548261548,
+          "heel_displacement_mm": 88.17612813648026,
+          "heel_vertical_mm": 24.700023301502792,
+          "impulse_mae_ns": 13.461641272289205,
+          "load_probability_brier": 0.14087720646293703,
+          "loaded_interval_impulse_mae_ns": 16.70535226502866
+        },
+        "train_body": {
+          "heel_backward_mm": 26.503783681213232,
+          "heel_displacement_mm": 33.71079836438253,
+          "heel_vertical_mm": 12.586962752635685,
+          "impulse_mae_ns": 8.87947197419787,
+          "load_probability_brier": 0.05018586909631164,
+          "loaded_interval_impulse_mae_ns": 10.382295987496883
+        },
+        "train_body_motion": {
+          "heel_backward_mm": 18.676092465438543,
+          "heel_displacement_mm": 25.969968451435914,
+          "heel_vertical_mm": 11.193441429805816,
+          "impulse_mae_ns": 10.261336068688115,
+          "load_probability_brier": 0.10455193593772301,
+          "loaded_interval_impulse_mae_ns": 13.505768787578816
+        },
+        "train_room": {
+          "heel_backward_mm": 57.39014551539955,
+          "heel_displacement_mm": 66.98902045341579,
+          "heel_vertical_mm": 22.647255257677188,
+          "impulse_mae_ns": 9.615632570813261,
+          "load_probability_brier": 0.0456944869052019,
+          "loaded_interval_impulse_mae_ns": 11.795861943789772
+        }
+      },
+      "recorded_new_loads": 24,
+      "right_loads": 24
+    },
+    "13.0": {
+      "endpoints": {
+        "event": {
+          "people": 12,
+          "rows": 609
+        },
+        "impulse": {
+          "people": 12,
+          "rows": 916
+        },
+        "loaded_impulse": {
+          "people": 12,
+          "rows": 598
+        },
+        "movement": {
+          "people": 12,
+          "rows": 916
+        }
+      },
+      "left_loads": 0,
+      "mean_scores": {
+        "heel_velocity": {
+          "heel_backward_mm": 43.421187329911625,
+          "heel_displacement_mm": 60.69403255274742,
+          "heel_vertical_mm": 30.51856288624688
+        },
+        "last_force": {
+          "impulse_mae_ns": 10.319259907327616,
+          "loaded_interval_impulse_mae_ns": 15.697306486086783
+        },
+        "no_new_load": {
+          "load_probability_brier": 0.08455449637296569
+        },
+        "released_body_scratch": {
+          "heel_backward_mm": 66.10619973135171,
+          "heel_displacement_mm": 81.95054902675993,
+          "heel_vertical_mm": 35.63843343837518,
+          "impulse_mae_ns": 12.889087213401929,
+          "load_probability_brier": 0.20823271251310346,
+          "loaded_interval_impulse_mae_ns": 16.007778099662612
+        },
+        "released_room": {
+          "heel_backward_mm": 96.1617586069339,
+          "heel_displacement_mm": 112.82974061830897,
+          "heel_vertical_mm": 42.73368025083307,
+          "impulse_mae_ns": 13.898924684693425,
+          "load_probability_brier": 0.1887799883582828,
+          "loaded_interval_impulse_mae_ns": 17.361294457425906
+        },
+        "released_room_scratch": {
+          "heel_backward_mm": 90.4998050711742,
+          "heel_displacement_mm": 99.00389798621222,
+          "heel_vertical_mm": 24.674357659354925,
+          "impulse_mae_ns": 13.51901962998027,
+          "load_probability_brier": 0.12100940431478015,
+          "loaded_interval_impulse_mae_ns": 16.758087496032957
+        },
+        "train_body": {
+          "heel_backward_mm": 25.81035431517398,
+          "heel_displacement_mm": 36.335343844301796,
+          "heel_vertical_mm": 14.284206144461088,
+          "impulse_mae_ns": 7.6486433188193566,
+          "load_probability_brier": 0.05530742458653595,
+          "loaded_interval_impulse_mae_ns": 8.685355866057431
+        },
+        "train_body_motion": {
+          "heel_backward_mm": 21.058774116757217,
+          "heel_displacement_mm": 29.817869937864646,
+          "heel_vertical_mm": 11.488878000460709,
+          "impulse_mae_ns": 9.636943734917184,
+          "load_probability_brier": 0.09273937636922495,
+          "loaded_interval_impulse_mae_ns": 12.94703778617432
+        },
+        "train_room": {
+          "heel_backward_mm": 64.04640102187163,
+          "heel_displacement_mm": 74.55845876253251,
+          "heel_vertical_mm": 24.080763817428792,
+          "impulse_mae_ns": 9.261452399153827,
+          "load_probability_brier": 0.05423973183062141,
+          "loaded_interval_impulse_mae_ns": 11.141077068156447
+        }
+      },
+      "recorded_new_loads": 50,
+      "right_loads": 50
+    },
+    "25.0": {
+      "endpoints": {
+        "event": {
+          "people": 12,
+          "rows": 599
+        },
+        "impulse": {
+          "people": 12,
+          "rows": 882
+        },
+        "loaded_impulse": {
+          "people": 12,
+          "rows": 581
+        },
+        "movement": {
+          "people": 12,
+          "rows": 882
+        }
+      },
+      "left_loads": 0,
+      "mean_scores": {
+        "heel_velocity": {
+          "heel_backward_mm": 42.50083899066433,
+          "heel_displacement_mm": 60.67237551848814,
+          "heel_vertical_mm": 30.64251969949659
+        },
+        "last_force": {
+          "impulse_mae_ns": 10.317395666958104,
+          "loaded_interval_impulse_mae_ns": 15.56899406170344
+        },
+        "no_new_load": {
+          "load_probability_brier": 0.08284455211824072
+        },
+        "released_body_scratch": {
+          "heel_backward_mm": 71.0447355739669,
+          "heel_displacement_mm": 88.64051740830679,
+          "heel_vertical_mm": 36.043294974298156,
+          "impulse_mae_ns": 13.111373012067423,
+          "load_probability_brier": 0.2147428267218782,
+          "loaded_interval_impulse_mae_ns": 16.15369568735461
+        },
+        "released_room": {
+          "heel_backward_mm": 101.69682913167314,
+          "heel_displacement_mm": 120.66764181473606,
+          "heel_vertical_mm": 45.65790670121151,
+          "impulse_mae_ns": 14.264331334120582,
+          "load_probability_brier": 0.1928336202855744,
+          "loaded_interval_impulse_mae_ns": 17.675660778350384
+        },
+        "released_room_scratch": {
+          "heel_backward_mm": 100.50907175342535,
+          "heel_displacement_mm": 110.18048825019189,
+          "heel_vertical_mm": 25.097236833714945,
+          "impulse_mae_ns": 13.742742546077865,
+          "load_probability_brier": 0.1154961934115804,
+          "loaded_interval_impulse_mae_ns": 17.14723468438081
+        },
+        "train_body": {
+          "heel_backward_mm": 26.21277226459743,
+          "heel_displacement_mm": 40.986333684635795,
+          "heel_vertical_mm": 16.816080231987264,
+          "impulse_mae_ns": 7.393777087273018,
+          "load_probability_brier": 0.05939629308103898,
+          "loaded_interval_impulse_mae_ns": 8.568649124778231
+        },
+        "train_body_motion": {
+          "heel_backward_mm": 25.361279965674186,
+          "heel_displacement_mm": 37.21881688748363,
+          "heel_vertical_mm": 13.659998980908052,
+          "impulse_mae_ns": 10.467785955895348,
+          "load_probability_brier": 0.10669761347963423,
+          "loaded_interval_impulse_mae_ns": 13.67379687925856
+        },
+        "train_room": {
+          "heel_backward_mm": 68.88673056436873,
+          "heel_displacement_mm": 81.68530148648519,
+          "heel_vertical_mm": 24.182654678984097,
+          "impulse_mae_ns": 9.244293023503499,
+          "load_probability_brier": 0.05107347382657004,
+          "loaded_interval_impulse_mae_ns": 11.3244997232335
+        }
+      },
+      "recorded_new_loads": 49,
+      "right_loads": 49
+    },
+    "6.5": {
+      "endpoints": {
+        "event": {
+          "people": 12,
+          "rows": 598
+        },
+        "impulse": {
+          "people": 12,
+          "rows": 884
+        },
+        "loaded_impulse": {
+          "people": 12,
+          "rows": 582
+        },
+        "movement": {
+          "people": 12,
+          "rows": 884
+        }
+      },
+      "left_loads": 0,
+      "mean_scores": {
+        "heel_velocity": {
+          "heel_backward_mm": 43.8967245654535,
+          "heel_displacement_mm": 61.37142852259686,
+          "heel_vertical_mm": 31.16327168120849
+        },
+        "last_force": {
+          "impulse_mae_ns": 10.251986957239083,
+          "loaded_interval_impulse_mae_ns": 15.502209007371311
+        },
+        "no_new_load": {
+          "load_probability_brier": 0.08372754276296744
+        },
+        "released_body_scratch": {
+          "heel_backward_mm": 65.33575856474945,
+          "heel_displacement_mm": 80.56283898189297,
+          "heel_vertical_mm": 35.956537120603755,
+          "impulse_mae_ns": 12.368554523588399,
+          "load_probability_brier": 0.20728320330788155,
+          "loaded_interval_impulse_mae_ns": 15.44476082638194
+        },
+        "released_room": {
+          "heel_backward_mm": 95.71031713271596,
+          "heel_displacement_mm": 111.94416622450954,
+          "heel_vertical_mm": 42.76918738093686,
+          "impulse_mae_ns": 13.76198534366272,
+          "load_probability_brier": 0.18396531656388723,
+          "loaded_interval_impulse_mae_ns": 16.932238359733834
+        },
+        "released_room_scratch": {
+          "heel_backward_mm": 87.06197790059274,
+          "heel_displacement_mm": 95.30196707556753,
+          "heel_vertical_mm": 25.169093305502106,
+          "impulse_mae_ns": 12.797531527750039,
+          "load_probability_brier": 0.12167914400938186,
+          "loaded_interval_impulse_mae_ns": 15.95307132795809
+        },
+        "train_body": {
+          "heel_backward_mm": 25.758709310837357,
+          "heel_displacement_mm": 33.977833202909075,
+          "heel_vertical_mm": 12.974857296669859,
+          "impulse_mae_ns": 7.504704006703697,
+          "load_probability_brier": 0.05503186369459498,
+          "loaded_interval_impulse_mae_ns": 8.454649474726976
+        },
+        "train_body_motion": {
+          "heel_backward_mm": 19.531283379908405,
+          "heel_displacement_mm": 26.253531667081802,
+          "heel_vertical_mm": 10.25504213145489,
+          "impulse_mae_ns": 9.233906727836159,
+          "load_probability_brier": 0.10836165655336046,
+          "loaded_interval_impulse_mae_ns": 12.303528594079916
+        },
+        "train_room": {
+          "heel_backward_mm": 62.83464571205004,
+          "heel_displacement_mm": 72.76662625773663,
+          "heel_vertical_mm": 24.45410307295172,
+          "impulse_mae_ns": 8.969391133094382,
+          "load_probability_brier": 0.06204096125096883,
+          "loaded_interval_impulse_mae_ns": 10.697846716720546
+        }
+      },
+      "recorded_new_loads": 50,
+      "right_loads": 50
+    }
+  },
+  "support": {
+    "endpoints": {
+      "event": {
+        "people": 12,
+        "rows": 3246
+      },
+      "impulse": {
+        "people": 12,
+        "rows": 4820
+      },
+      "loaded_impulse": {
+        "people": 12,
+        "rows": 3147
+      },
+      "movement": {
+        "people": 12,
+        "rows": 4820
+      }
+    },
+    "left_loads": 0,
+    "recorded_new_loads": 265,
+    "right_loads": 265
+  },
+  "trained_parameters_per_model": 2869,
+  "uncertainty": "Equal weight for each person within an endpoint. Paired, 20,000 whole-person resamples. Width and loaded-window comparisons are descriptive. A new on-plate load can be assessed only when a prior plate state is known, and force is measured over the plate area."
+}

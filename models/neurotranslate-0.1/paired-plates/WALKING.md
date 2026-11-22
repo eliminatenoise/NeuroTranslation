@@ -2,6 +2,8 @@
 
 This NeuroTranslate model uses the recent positions of both heels and the force under each foot. For each side it estimates the chance of a new load on the floor, the total effect of vertical force over the next tenth of a second, and how far the heel will move in each direction.
 
+For shorter walking clips and a mode that uses camera positions without force readings, see the [overground preview](OVERGROUND.md).
+
 ## Open the example
 
 Download and extract the paired-plates preview. In a terminal, open the extracted folder and run the command for your computer. You need Python 3.9 or later. The folder contains the saved weights and an invented example. It runs offline.

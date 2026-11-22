@@ -6,6 +6,10 @@ This NeuroTranslate experiment estimates the chance that each plate will start c
 
 The [walking preview](WALKING.md) uses recent heel motion and vertical force under both feet. It reports the chance of each foot starting a new load, the force accumulated across the next 100 milliseconds, and how the heel moves during that time. Open the walking guide for its launcher commands and measured comparisons. The same download below includes both experiments.
 
+## Start a forecast after 200 milliseconds of walking
+
+The same ZIP includes a shorter-history model. It estimates heel movement and the load measured by a floor plate. Use the [overground guide](OVERGROUND.md) for its example and measured comparisons.
+
 ## Run the included example
 
 Extract the ZIP. Open a terminal in the extracted folder and run the command for your computer. You need Python 3. No extra packages or model downloads are needed.
