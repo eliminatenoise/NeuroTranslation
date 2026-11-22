@@ -14,13 +14,13 @@
   <header><div class="wrap top"><a href="../index.html">← NeuroTranslation</a><span>Utah walking study</span></div></header>
   <main class="wrap">
     <h1>Forecasting the next <span class="unit">100 ms</span> of a step</h1>
-    <p class="lead">Eight walkers from a separate Utah dataset each used an above-knee prosthesis on a treadmill at <strong>1.0 m/s</strong>. Each method used 200 ms of recorded movement and force history. How well could it predict heel movement, force underfoot and the start of loading over the next 100 ms?</p>
+    <p class="lead">Eight people walked on a treadmill at <strong>1.0 m/s</strong> using above-knee prostheses. Each forecast used 200 ms of recorded heel movement and floor force to predict the next 100 ms. The forecasts covered heel displacement, vertical force added up over that interval, and the start of loading.</p>
     <section aria-labelledby="findings">
-      <h2 id="findings">What happened across both feet?</h2>
+      <h2 id="findings">Results for both feet</h2>
       <p class="sub">The research blend combined a trained model with a reference based on recent heel velocity and force. These results use the original calibrated force recording.</p>
       <div class="findings">
-        <section><h3>Heel movement</h3><strong class="number">0.33 <small>mm</small></strong><p>Less error with the blend. Mean heel error fell from 54.27 to 53.94 mm. Seven of eight walkers had lower error.</p></section>
-        <section><h3>Vertical impulse</h3><strong class="number">−0.081 <small>N·s</small></strong><p>Difference in mean error. The paired 95% interval ran from −0.226 to +0.054 N·s, leaving room for either lower or higher error.</p></section>
+        <section><h3>Heel movement</h3><strong class="number">0.33 <small>mm</small></strong><p>The blend cut mean heel error from 54.27 to 53.94 mm. Seven of eight walkers had lower error.</p></section>
+        <section><h3>Vertical impulse</h3><strong class="number">−0.081 <small>N·s</small></strong><p>Mean impulse error fell by 0.081 N·s. The paired 95% interval of −0.226 to +0.054 N·s allows for either lower or higher error.</p></section>
         <section><h3>New load on a foot</h3><strong class="number">0.09960</strong><p>Squared probability error fell from 0.10840 for the reference to 0.09960 for both the research model and its blend. Seven walkers contributed 925 scored foot forecasts, including 104 distinct starts (63 prosthetic and 41 intact).</p></section>
       </div>
     </section>
@@ -50,15 +50,16 @@
     </section>
     <p class="sr-only" role="status" aria-live="polite" aria-atomic="true" id="announcement"></p>
     <section class="methods" aria-labelledby="method">
-      <h2 id="method">How the comparison worked</h2>
-      <h3>Who supplied the recordings?</h3>
+      <h2 id="method">Methods</h2>
+      <h3>Walkers and trials</h3>
       <p>Of 17 walkers reserved for this external test, eight had a recording at the specified speed. Each contributed one treadmill trial. For the other nine walkers, the archive had no matching 1.0 m/s trial available. A separate walker used to prepare the analysis was excluded from the test. The models and their blend weights were fixed before the outcomes were scored.</p>
-      <h3>What did each forecast use?</h3>
+      <h3>Forecast inputs and blends</h3>
       <p>The physical reference continued the heel marker’s recent velocity, held the latest force steady and used a fixed probability for a new load. The compact and research models each made their own forecast. Each blend moved the reference toward its model by a weight fixed for that outcome.</p>
-      <h3>Which 100 milliseconds?</h3>
+      <h3>Timing and measured outcomes</h3>
       <p>Heel displacement starts at the last camera reading. The force forecast starts 10 ms later. Force impulse adds up signed vertical force over the next 100 ms. Force scoring required separate foot placements and a measured force outcome throughout that interval. Load-start scoring also required a confirmed outcome. The timing comes from archived samples. Live sensor delays would need their own measurements.</p>
-      <h3>How much does each walker count?</h3>
+      <h3>Scoring and uncertainty</h3>
       <p>The models issued forecasts at 756 time points. Each foot can supply an outcome at a time point. For each outcome, we averaged errors within each walker, then gave each walker equal weight. The 95% intervals come from 20,000 resamples of the walkers’ paired differences. They cover one comparison at a time and are unadjusted for multiple comparisons. The results describe this cohort at this speed.</p>
+      <p><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/compact-walking#comparison-on-recorded-walks">Results from separate walking trials at 0.6 m/s</a></p>
     </section>
     <section class="sources" aria-labelledby="credits">
       <h2 id="credits">Study, data and reuse</h2>
