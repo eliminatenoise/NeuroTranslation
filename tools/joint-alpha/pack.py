@@ -10,8 +10,9 @@ import zipfile
 TOOLS = Path(__file__).resolve().parent
 MODELS = TOOLS.parents[1] / "models"
 PACKAGES = {
-    "0.0": ("package-files.json", (2026, 11, 21, 0, 0, 0)),
-    "0.1": ("package-files-0.1.json", (2026, 11, 22, 0, 0, 0)),
+    "0.0": ("neurotranslate-0.0", "package-files.json", (2026, 11, 21, 0, 0, 0)),
+    "0.1": ("neurotranslate-0.1", "package-files-0.1.json", (2026, 11, 22, 0, 0, 0)),
+    "force-baselines": ("force-baselines", "package-files-force-baselines.json", (2026, 11, 22, 0, 0, 0)),
 }
 
 
@@ -31,9 +32,9 @@ def contents(root, inventory):
 
 
 def run(check=False, edition="0.0"):
-    root = MODELS / f"neurotranslate-{edition}"
+    folder, inventory, timestamp = PACKAGES[edition]
+    root = MODELS / folder
     destination = root.with_name(root.name + ".zip")
-    inventory, timestamp = PACKAGES[edition]
     data = contents(root, inventory)
     output = io.BytesIO()
     with zipfile.ZipFile(output, "w") as archive:

@@ -1,31 +1,38 @@
-# Can a model tell when the floor will take your weight?
+# Forecast force on a plate with NeuroTranslate 0.0
 
-NeuroTranslate 0.0 reads the last 200 milliseconds of muscle voltages and vertical force on a plate built into a walkway. It estimates the chance that the plate **starts** to carry load in the next 100 milliseconds. It also estimates the signed force impulse. That target is the sum of the vertical force readings multiplied by the time between readings. Upward force is positive, and the result is in newton-seconds.
+A plate set into a walkway measures how hard a foot pushes against it. Give the model the last 200 milliseconds of muscle and force readings. It estimates whether that plate will start to carry load in the next 100 milliseconds. It also estimates the force accumulated over that interval.
 
-These three checkpoints are **fit only**. They learned from five walks by two of twelve assigned people. Thirty-one walks lacked the required names on their muscle recordings. The comparison uses 1,525 overlapping windows from plates 1 and 2. Forty-four positive windows cover nine loading events. Accuracy on new walks or people has yet to be measured. The loading probability applies to the named plate. The plates cover part of the walkway.
+## Try the example
 
-## Try the invented walk
+1. Extract the NeuroTranslate 0.0 ZIP and open `recorded-force/`. The seven-task demo is in the top-level folder.
+2. Install Python 3.10 or later. In the Python environment you will use for the demo, run `python -m pip install -r requirements.txt`.
+3. Open **Run on Windows.cmd**, **Run on macOS.command**, or **Run on Linux.sh**. If the launcher opens as text, open a terminal in `recorded-force/` and run `python forecast.py`. Use `py -3` or `python3` in place of `python` if that is how you start Python.
 
-Extract the ZIP and open `recorded-force/`. Use Python 3.10 or later with NumPy installed in the same environment. If you need NumPy, run `python -m pip install numpy` using the Python you will open the demo with. The demo runs offline after setup.
+The example uses invented readings from [`example.json`](example.json). It runs offline once NumPy is installed. To try one set of saved weights at a time, use these commands.
 
-Open **Run on Windows.cmd**, **Run on macOS.command**, or **Run on Linux.sh**. You can also run `python forecast.py` in the extracted folder. Use `py -3` or `python3` if that is how you start Python. Each model reads the same invented measurements in `example.json`.
-
-```text
+```sh
 python forecast.py --model released-core example.json
 python forecast.py --model random-core example.json
 python forecast.py --model scratch-attention example.json
 ```
 
-| Checkpoint | How it learned |
+| Saved weights | What was fitted |
 | --- | --- |
-| [Released core](checkpoints/released-core.npz) | The shared attention weights from NeuroTranslate 0.0 stayed fixed. The new input and output layers learned from the walks. |
-| [Random core](checkpoints/random-core.npz) | The same attention block stayed fixed at its random starting values. The new input and output layers learned from the same walks. |
-| [Scratch attention](checkpoints/scratch-attention.npz) | The whole model learned from the same walks, including the attention block. It started from the same random weights as the random-core check. |
+| [Released core](checkpoints/released-core.npz) | The original NeuroTranslate 0.0 attention weights stayed fixed. The new input and output layers learned from the walks. |
+| [Random core](checkpoints/random-core.npz) | The attention block stayed at its random starting values. The same new layers learned from the same walks. |
+| [Scratch attention](checkpoints/scratch-attention.npz) | The whole model learned from the walks. Its attention block started at the same random values as the random-core example. |
 
-The checkpoints include the learned weights and the means and scales used to put the readings on a common numerical scale. Those few summary numbers come from the fit set. The package contains no original recordings or individual predictions. The [seven-task joint demo](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/) is the default at the top level of the ZIP.
+## Read the forecast
 
-## Use the same input format
+- **Chance of a new load** describes the named plate. A plate can carry weight throughout the forecast window without a new loading event. The test checks whether force reaches +20 N after the plate has unloaded and stays at or above +20 N for 20 consecutive samples.
+- **Signed vertical impulse** adds the next 100 vertical force readings and multiplies the sum by the time between readings, one millisecond. The unit is the newton-second. Upward force is positive.
 
-Keep the task and domain names from `example.json`. Supply ten consecutive 20 ms bins on the original 1,000 samples-per-second clock. The last bin ends at the issue tick. Each row of `X` has fourteen muscle voltages in the order shown in `CHECKPOINTS.json`, followed by the mean signed upward force of the named plate in newtons. The muscle values are root-mean-square volts, a measure of the size of the voltage in that bin. Use `null` for an unavailable reading. The forecast is withheld when any required reading is missing.
+The example shows how to run the models. It does not establish their accuracy on a real walk. All three fitted the same five walks from two of twelve assigned people. The other 31 walks lacked at least one required muscle name. The eligible walks yielded 1,525 overlapping windows from plates 1 and 2. Forty-four positive windows represent nine loading events. Accuracy on other people or walks is still unmeasured. The plates cover part of the walkway.
 
-The training label dates each new load at the first rise to at least +20 N after the plate has unloaded. The reading must stay at or above +20 N for 20 consecutive samples, including the first one. A plate already carrying weight can therefore have a negative label for a *new* load. The force-impulse target starts one sample after issue and ends 100 samples after issue. [Recording study](https://pubmed.ncbi.nlm.nih.gov/38040770/) · [Credits and licence](NOTICE.md)
+## Use your recordings
+
+Start from [`example.json`](example.json) and keep its task and domain names. Supply ten consecutive groups of 20 samples on a common 1,000 Hz clock. End the last group at the issue tick, which is the last sample available when you ask for the forecast.
+
+In each row of `X`, put the 14 muscle readings in the order listed in [`CHECKPOINTS.json`](CHECKPOINTS.json). For each muscle, square the 20 voltages, average those squares, then take the square root. This gives the root-mean-square voltage in volts. Put the average signed vertical force of plate 1 or 2 in newtons in the last column. Use `null` for a missing value. The program withholds a forecast when a required reading is missing. Both outputs cover the samples one through 100 ticks after the issue tick.
+
+The files hold learned weights and the scaling values computed from the fitting walks. They carry the license and attribution given in the notice. [Recording study](https://pubmed.ncbi.nlm.nih.gov/38040770/) · [Credits and license](NOTICE.md)
