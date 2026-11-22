@@ -44,6 +44,17 @@ The short two-plate force model lowered average probability error versus the one
 
 We trained both longer-history options on the Belgian fitting archive and scored their saved weights on a separate set of comfortable-speed treadmill walks. Thirty-nine of the 41 assigned people provided scoreable windows, with 983 measured load starts. For two people the force readings never met the unloaded-state rule. The attention option had an average squared probability error of 0.03575, compared with 0.04121 for the short two-plate model. It improved this score for 31 of the 39 people. The longer linear option gave 0.03700 and had the lowest log loss, a score that penalizes confident wrong forecasts. These results cover one treadmill speed at each person's comfortable pace. [Treadmill study](https://peerj.com/articles/4640/) · [Dataset](https://doi.org/10.6084/m9.figshare.5722711.v2)
 
+## What changed with walking speed
+
+We tested the saved models on two further sets of treadmill walks from the same study. The percentages below refer to each person’s comfortable speed. Lower squared probability error means forecasts were closer to what was measured. [Walking protocol](https://pmc.ncbi.nlm.nih.gov/articles/PMC5922232/)
+
+| Speed | People with scores | Measured load starts | Short history | Longer attention | Longer linear |
+| --- | --- | --- | --- | --- | --- |
+| 40% | 34 of 41 | 511 | 0.02741 | 0.03089 | 0.03379 |
+| 130% | 33 of 39 | 857 | 0.03928 | 0.04451 | 0.03679 |
+
+Among the 29 people with scores at all three speeds, attention had lower error than the short-history model at comfortable speed and higher error at both other speeds. The short-history model had the lowest log loss at both additional speeds. At 130%, the linear model’s squared error was lower on average than the short-history model’s. The uncertainty across people still includes a possible increase in error.
+
 This is a recorded-data experiment. Performance with new equipment, in live use, and across a wider population is still open. The ZIP contains the checkpoint files, code and two invented input files. See the source studies for the recordings. [Belgian recording methods](https://pmc.ncbi.nlm.nih.gov/articles/PMC10692332/) · [Pisa recording methods](https://www.nature.com/articles/s41597-025-06209-9)
 
 The code and checkpoints are released under CC0 1.0. The Belgian source recordings use CC0 1.0. The Pisa and treadmill recordings use CC BY 4.0. [Belgian data record](https://doi.org/10.6084/m9.figshare.24192480.v1) · [Pisa data record](https://doi.org/10.6084/m9.figshare.29371769.v1)
