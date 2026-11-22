@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "edition": "NeuroTranslate 0.1 Research Edition experimental preview",
+  "channels": [
+    "LBF",
+    "LERS",
+    "LGAS",
+    "LRF",
+    "LST",
+    "RERS"
+  ],
+  "architecture": {
+    "physical_layers": 24,
+    "hidden_size": 2304,
+    "loop_start": 6,
+    "loop_end_exclusive": 18,
+    "default_passes": 3,
+    "message_rank": 4
+  },
+  "targets": {
+    "window_ms": 100,
+    "event": "new-load logit",
+    "force": "signed vertical impulse in N s"
+  },
+  "base": {
+    "repository": "thinkingmachines/TML-d24-varloop-research",
+    "revision": "657b53ba5da7baefe9ff15dca5cd25f5bd3dbaa2",
+    "declared_license": "Apache-2.0",
+    "files": {
+      "config.json": {
+        "bytes": 2698,
+        "sha256": "89650f69a824ff354a3d70476c6eb6e09162ed0f5515d9f6e5f5953a44e87ed7"
+      },
+      "hf_quant_config.json": {
+        "bytes": 67924,
+        "sha256": "7c656207d3ce37879c7be209a036b0dde43bf01f78159bff06880b868ed57143"
+      },
+      "model.safetensors.index.json": {
+        "bytes": 109300,
+        "sha256": "c1631065b7b00787993522dddc66a68b3abee869192977fb3dcb796e63bc5838"
+      },
+      "model-00001-of-00001.safetensors": {
+        "bytes": 19526019168,
+        "sha256": "79e60b65c4f2a2a5acdb8e3c7b6994bf00da5477f45d18027afbfad752a64595"
+      }
+    }
+  },
+  "local_assets": {
+    "LICENSE": {
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    "third-party/Apache-2.0.txt": {
+      "bytes": 11418,
+      "sha256": "77fd4710def9ec3c0f6225800e0235f15a425abd4a8b03559127fcd782612049"
+    },
+    "model.py": {
+      "bytes": 9147,
+      "sha256": "a7af6b33190dbb94379207a3111f9765ef7c7fa1bb707c36459a383f5f0d471e"
+    },
+    "forecast.py": {
+      "bytes": 2595,
+      "sha256": "9cfb9d81a6b339d5c412aad86c28c5c388b04a202d25e837d5e668027f5157c2"
+    },
+    "sensor_loop.py": {
+      "bytes": 6918,
+      "sha256": "56dbac58d010051fc4847530e18fdb67a9082b7900dc239ae8e39d127d063f88"
+    },
+    "weights/SENSOR-LOOP-JOINT.safetensors": {
+      "bytes": 481168,
+      "sha256": "3d9a5a2cbddc011b2677a3469ef41fc261b006b8d9535e8a151f766934b0b3db"
+    },
+    "weights/NATIVE-JOINT-DELTA.safetensors": {
+      "bytes": 2064944,
+      "sha256": "12480114324d03fcf6a90170eff0368149aef23797316c91374af699c6a1ffe1"
+    },
+    "launch-linux.sh": {
+      "bytes": 217,
+      "sha256": "b65ef4f349fa4b8f8c23f9712b52e75bc498dc41c48aee71184e326fa6ef7b70"
+    },
+    "launch-macos.command": {
+      "bytes": 217,
+      "sha256": "b65ef4f349fa4b8f8c23f9712b52e75bc498dc41c48aee71184e326fa6ef7b70"
+    },
+    "launch-windows.cmd": {
+      "bytes": 215,
+      "sha256": "ca604d216b3bf7766b00d1a862f8b66927673220ffea20fba22b05cf7afec8a7"
+    },
+    "example.json": {
+      "bytes": 15036,
+      "sha256": "dfea4d6a2b194014212ab4e7753a8fea0f0d890a24bdb3de7015bcb23a3b5b71"
+    },
+    "synthetic_fixture.py": {
+      "bytes": 3841,
+      "sha256": "8c979c599d36b3a6782cee2dd6a76a7d545c33f0732c316dfd910fe81e36760e"
+    }
+  },
+  "weights": {
+    "weights/SENSOR-LOOP-JOINT.safetensors": {
+      "bytes": 481168,
+      "sha256": "3d9a5a2cbddc011b2677a3469ef41fc261b006b8d9535e8a151f766934b0b3db",
+      "dtype": "F32",
+      "tensor_shapes": {
+        "adapters.emg.center": [
+          6
+        ],
+        "adapters.emg.project.bias": [
+          2304
+        ],
+        "adapters.emg.project.weight": [
+          2304,
+          18
+        ],
+        "adapters.emg.scale": [
+          6
+        ],
+        "adapters.force.center": [
+          1
+        ],
+        "adapters.force.project.bias": [
+          2304
+        ],
+        "adapters.force.project.weight": [
+          2304,
+          3
+        ],
+        "adapters.force.scale": [
+          1
+        ],
+        "backbone.sensor_messages.measurement_projection.weight": [
+          4,
+          2304
+        ],
+        "backbone.sensor_messages.message_projection.weight": [
+          9216,
+          4
+        ],
+        "backbone.sensor_messages.state_projection.weight": [
+          4,
+          2304
+        ],
+        "heads.impulse.bias": [
+          1
+        ],
+        "heads.impulse.weight": [
+          1,
+          2304
+        ],
+        "heads.new_load.bias": [
+          1
+        ],
+        "heads.new_load.weight": [
+          1,
+          2304
+        ],
+        "query": [
+          1,
+          1,
+          2304
+        ],
+        "time_projection.bias": [
+          2304
+        ],
+        "time_projection.weight": [
+          2304,
+          1
+        ]
+      },
+      "public_safe_embedded_metadata": {
+        "research_revision": "657b53ba5da7baefe9ff15dca5cd25f5bd3dbaa2",
+        "purpose": "joint fit only, common six, three passes",
+        "research_base_sha256": "79e60b65c4f2a2a5acdb8e3c7b6994bf00da5477f45d18027afbfad752a64595",
+        "message_rank": "4"
+      }
+    },
+    "weights/NATIVE-JOINT-DELTA.safetensors": {
+      "bytes": 2064944,
+      "sha256": "12480114324d03fcf6a90170eff0368149aef23797316c91374af699c6a1ffe1",
+      "dtype": "F64",
+      "tensor_shapes": {
+        "layers.17.q_message_gate.message_gate_proj.weight": [
+          2304,
+          64
+        ],
+        "message_input.query": [
+          12,
+          4,
+          2304
+        ]
+      },
+      "public_safe_embedded_metadata": {
+        "research_revision": "657b53ba5da7baefe9ff15dca5cd25f5bd3dbaa2",
+        "message_rank": "4",
+        "purpose": "joint fit only, common six, three passes",
+        "additive_rule": "Add in float64 to the exact original FP32 tensor, then cast once to original FP32",
+        "research_base_sha256": "79e60b65c4f2a2a5acdb8e3c7b6994bf00da5477f45d18027afbfad752a64595"
+      }
+    }
+  },
+  "tested_prior_runtime": {
+    "platform": "Linux x86-64",
+    "python": "3.13.15",
+    "torch": "2.14.1+cpu",
+    "transformers": "5.24.0",
+    "safetensors": "0.8.0",
+    "numpy": "2.5.3",
+    "transformers_code_sha256": {
+      "modeling_utils.py": "13cfe87b11350fd7f7397130ab72246513ed95615db04086dc2ae9807636e9e4",
+      "core_model_loading.py": "bc6889c76ac9826f8f509a4b896312e1fa1774876636cc6d2eba4aa87811f209",
+      "conversion_mapping.py": "6e4085f1c941c55b4d12cdddcbb6134a683fe3639af853988bcb1c026ac2d88c",
+      "models/inkling2_loop/modeling_inkling2_loop.py": "1c8e65b45a11c13ecad86c088105acd5e4567123ef6599844a95912d242e9f28"
+    }
+  },
+  "dataset": {
+    "description": "Healthy adults preferred-speed bare-foot walkway trials",
+    "version": "https://doi.org/10.6084/m9.figshare.24192480.v1",
+    "license": "CC0-1.0"
+  }
+}

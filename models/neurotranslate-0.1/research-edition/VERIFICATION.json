@@ -1,0 +1,72 @@
+{
+  "state": "package_dry_and_small_tensor_restore_verified",
+  "launcher_and_cli": {
+    "cli_help_without_third_party_import": true,
+    "linux_default_from_other_directory_and_spaces": true,
+    "macos_command_shell_syntax_on_linux": true,
+    "macos_command_shell_only_from_linux": true,
+    "windows_wrapper_quoting_static_only": true,
+    "linux_local_environment_precedes_path": true,
+    "missing_default_base_explained": true,
+    "missing_environment_base_explained": true,
+    "explicit_base_precedes_environment_and_rejects_bad_extent": true,
+    "forecast_requires_explicit_layout_before_base_checks": true,
+    "invalid_pass_count_fails_without_loading": true,
+    "mask_flag_without_run_fails": true,
+    "tampered_manifest_refused": true,
+    "tampered_tensor_asset_refused": true
+  },
+  "small_tensor_restore": {
+    "restored_local_f32_tensors": 18,
+    "reconstructed_native_f32_targets_from_f64_deltas_on_invented_base": 2,
+    "same_tensor_add_and_cast_exact": true,
+    "clock_and_masks_in_torch_verified": true,
+    "torch": "2.14.1+cpu",
+    "safetensors": "0.8.0",
+    "model_ran": false
+  },
+  "platform": "Linux x86-64; Windows and macOS native runs pending",
+  "full_checkpoint_inference_verified": true,
+  "full_base_weight_files_read": false,
+  "measured_input_records_or_outcomes_read": false,
+  "gpu_used": false,
+  "cpu": 9,
+  "threads": 1,
+  "package_files_sha256": {
+    "LICENSE": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+    "NOTICE.md": "c79da4637b80caf389b8a37d92cbf14cf4c26688895e364b6f681e9e2e2049ba",
+    "README.md": "00234af7eba0c7a6f91f71ad56eb21a7d4c345818176e481a031eaf0f8dff153",
+    "checkpoint.json": "41e75166a36e858818b1e2502eb0ed8ae7093b71183a74361af744efa7fb5b3d",
+    "demo.py": "9b74e71738ce21022a3ff55d26ef14c5e8f40342663aed4408623ef80f692a6e",
+    "example.json": "dfea4d6a2b194014212ab4e7753a8fea0f0d890a24bdb3de7015bcb23a3b5b71",
+    "forecast.py": "9cfb9d81a6b339d5c412aad86c28c5c388b04a202d25e837d5e668027f5157c2",
+    "launch-linux.sh": "b65ef4f349fa4b8f8c23f9712b52e75bc498dc41c48aee71184e326fa6ef7b70",
+    "launch-macos.command": "b65ef4f349fa4b8f8c23f9712b52e75bc498dc41c48aee71184e326fa6ef7b70",
+    "launch-windows.cmd": "ca604d216b3bf7766b00d1a862f8b66927673220ffea20fba22b05cf7afec8a7",
+    "launch.py": "b5a4e47de49f3265704647ce5e8dd530083346bf50903804718888284c9e5c04",
+    "model.py": "a7af6b33190dbb94379207a3111f9765ef7c7fa1bb707c36459a383f5f0d471e",
+    "requirements.txt": "79eb2a9b7925658775310e3024ac315fcf487653f168e97a6b7d7ed5bb3c5956",
+    "sensor_loop.py": "56dbac58d010051fc4847530e18fdb67a9082b7900dc239ae8e39d127d063f88",
+    "synthetic_fixture.py": "8c979c599d36b3a6782cee2dd6a76a7d545c33f0732c316dfd910fe81e36760e",
+    "third-party/Apache-2.0.txt": "77fd4710def9ec3c0f6225800e0235f15a425abd4a8b03559127fcd782612049",
+    "weights/NATIVE-JOINT-DELTA.safetensors": "12480114324d03fcf6a90170eff0368149aef23797316c91374af699c6a1ffe1",
+    "weights/SENSOR-LOOP-JOINT.safetensors": "3d9a5a2cbddc011b2677a3469ef41fc261b006b8d9535e8a151f766934b0b3db"
+  },
+  "elapsed_s": 1.7855973219266161,
+  "full_checkpoint_inference_ran_in_this_dry_check": false,
+  "retained_full_synthetic_run_exact_runtime_bytes": {
+    "scope": "Original extracted run with byte-identical model, launcher, inputs, and package assets used by the forecast. This was a preinstalled runtime.",
+    "platform": "Linux x86-64 CPU",
+    "python": "3.13.15",
+    "configured_pytorch_cpu_threads": 4,
+    "base_fetched_separately": true,
+    "actual_full_native_pass_counts": [
+      3
+    ],
+    "two_invented_rows": true,
+    "repeat_and_withheld_values_bit_exact": true,
+    "weight_verify_load_and_example_seconds": 76.108,
+    "peak_sampled_rss_GiB": 49.08,
+    "measured_recordings_outcomes_or_live_latency_evaluated": false
+  }
+}

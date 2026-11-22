@@ -8,10 +8,11 @@ A checkpoint is the set of weights a model saved after fitting. The downloads in
 | --- | --- |
 | [NeuroTranslate 0.0 walking force preview](neurotranslate-0.0/recorded-force/expanded.zip) | Give two small models past muscle and floor-force readings. Each estimates whether the plate will start carrying load in the next 100 milliseconds and how much force will accumulate. [Setup and model card](neurotranslate-0.0/recorded-force/expanded/) |
 | [NeuroTranslate 0.0](neurotranslate-0.0.zip) | Open the seven-task joint demo or try the new walking force experiment in the same download. [Walking force instructions](neurotranslate-0.0/recorded-force/) |
+| [NeuroTranslate 0.1 Research Edition](neurotranslate-0.1/research-edition.zip) | Try two invented walking inputs with the repeated decoder and see its 100 ms force forecasts. The full example runs on Linux CPU and uses a separate Inkling checkpoint. [Setup and validation results](neurotranslate-0.1/research-edition/) |
 | [NeuroTranslate 0.1](neurotranslate-0.1.zip) | Run the new walking force input and output layers with the separately downloaded Inkling 2 Mini model. [Setup and example](neurotranslate-0.1/) |
 | [Walking force comparisons](force-baselines/) | Try simpler fits that read recent force, muscle activity, or both. The files contain multiple candidate settings for later evaluation. |
 
-The walking force models estimate whether a named plate will start carrying load in the next 100 milliseconds. They also estimate the sum of the vertical force readings over that interval, multiplied by the time between readings. Their fitting runs established that they can learn from the recorded inputs. Accuracy on new people is still unmeasured for these releases.
+The walking force models use past muscle and force readings to look 100 milliseconds ahead. One output estimates the chance that a plate will start carrying load. The other estimates the signed vertical force added up over that time. The Research Edition guide reports a comparison on three people whose recordings were kept out of fitting. A separate group is reserved for the final test.
 
 ## NeuroTranslate 0.0 studies
 
