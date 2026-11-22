@@ -38,6 +38,24 @@ The default uses force readings. For the muscle experiment, add `--arm paired_re
 
 If you already have signed force impulse estimates from the full model, put them in an optional `signed_impulse_ns` list. This is the vertical force added up over the forecast window, measured in newton-seconds. The command copies the two estimates to its output in the same order.
 
+## Try the models trained at different walking speeds
+
+Run `./launch-linux.sh --arm three_pace_attention` for an example. On macOS or Windows, add the same option to your launcher command. For each plate, the new options print the chance of a new load and the predicted force impulse. Force impulse is vertical force added up over the forecast window, in newton-seconds.
+
+| Option | Recent force needed | Training |
+| --- | --- | --- |
+| `three_pace_attention` | 35 bins | 0.5, 0.75 and 1.0 m/s |
+| `single_pace_attention` | 35 bins | 0.75 m/s |
+| `three_pace_short` | 10 bins | 0.5, 0.75 and 1.0 m/s |
+
+Copy `example-timing.json` for the 35-bin options or `example.json` for the 10-bin option. Use the matching format described above, with all forces present. Run `python3 paired_plates.py --arm three_pace_attention --input your-recording.json`, using whichever option matches your file. On Windows use `py -3` in place of `python3` if needed.
+
+### How the new models scored
+
+Both attention models trained on 34,584 examples from the same 32 people. We kept the number of examples from each person fixed. On 12 other people with 3,148 measured load starts, training at three paces reduced squared probability error from 0.03482 to 0.02997 compared with training at one pace. The one-pace model predicted load starts better at 0.75 m/s, its training speed. The force files stored zero timestamps. This comparison counted the next 100 saved samples, a nominal 100 milliseconds at the study’s stated rate of 1,000 samples per second. [Force recording methods](https://physionet.org/content/multimodal-gait-dataset/1.0.0/Dataset/)
+
+The treadmill study described below supplied verified 100-millisecond force windows. We used the same walkers and speeds in earlier tests. These recordings stayed outside the model fit. Across 40 people and 2,351 load starts, training attention at three paces reduced average impulse error from 10.37 to 9.12 newton-seconds compared with training at one pace. The shorter model trained at three paces gave the best average load-start probabilities there. Its squared error was 0.02824, compared with 0.03357 for three-pace attention. [Treadmill study](https://pmc.ncbi.nlm.nih.gov/articles/PMC5922232/)
+
 ## What the tests covered
 
 The short two-plate force model lowered average probability error versus the one-plate model on the original Belgian fitting archive and on three other people from that archive. Error rose for one of those three additional people. Only three of the six assigned validation participants could be scored under the original rules. On the two previously inspected development walks from Pisa, the short model with muscle readings gave lower probability error than the short force-only model. Those walks had four measured load starts.
@@ -58,3 +76,5 @@ Among the 29 people with scores at all three speeds, attention had lower error t
 This is a recorded-data experiment. Performance with new equipment, in live use, and across a wider population is still open. The ZIP contains the checkpoint files, code and two invented input files. See the source studies for the recordings. [Belgian recording methods](https://pmc.ncbi.nlm.nih.gov/articles/PMC10692332/) · [Pisa recording methods](https://www.nature.com/articles/s41597-025-06209-9)
 
 The code and checkpoints are released under CC0 1.0. The Belgian source recordings use CC0 1.0. The Pisa and treadmill recordings use CC BY 4.0. [Belgian data record](https://doi.org/10.6084/m9.figshare.24192480.v1) · [Pisa data record](https://doi.org/10.6084/m9.figshare.29371769.v1)
+
+The additional trained weights use force readings from Katmah, AlShehhi, Kosaji, Al-Rahmani, Abdullah, Hulleck and Khalaf (2026), *A multimodal gait dataset of brain activity, muscle activity, kinematics and ground forces in young adults*, version 1.0.0. The source is licensed under CC BY 4.0. [PhysioNet dataset](https://doi.org/10.13026/r0ea-7161) · [PhysioNet reference](https://doi.org/10.1038/s44360-026-00096-z)
