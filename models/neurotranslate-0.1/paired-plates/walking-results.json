@@ -1,0 +1,532 @@
+{
+  "default": "force_motion",
+  "default_basis": "This fit had the lowest mean impulse error. A fit from new weights had lower mean heel and load probability errors.",
+  "description": "Forecasts 100 ms ahead on the native recording clock. Errors average over people, with equal weight per person.",
+  "fit": {
+    "adamw_lr": 0.01,
+    "objective": "Binary cross entropy, half squared standardized impulse error, and half mean squared standardized heel displacement error. All fitting people contribute equal total weight.",
+    "precision": "FP64",
+    "seed": 35183,
+    "updates": 120,
+    "weight_decay": 0.03
+  },
+  "fit_people": 6,
+  "fit_rows": 8193,
+  "mean_errors": {
+    "earlier_force_model": {
+      "impulse_mae_ns": 7.766380420164081,
+      "load_start_brier": 0.0387308592870137,
+      "load_start_log_loss": 0.114075943038029
+    },
+    "force": {
+      "heel_vector_mae_mm": 46.07610128446404,
+      "heel_vertical_mae_mm": 19.945111032378186,
+      "impulse_mae_ns": 4.638523705832829,
+      "load_start_brier": 0.016991691232029423,
+      "load_start_log_loss": 0.05776188295361304
+    },
+    "force_motion": {
+      "heel_vector_mae_mm": 30.57618975565265,
+      "heel_vertical_mae_mm": 11.712251243983733,
+      "impulse_mae_ns": 3.9343222586670223,
+      "load_start_brier": 0.011844744090029277,
+      "load_start_log_loss": 0.04011316709803812
+    },
+    "force_motion_cold": {
+      "heel_vector_mae_mm": 27.776969218037692,
+      "heel_vertical_mae_mm": 12.361586624198544,
+      "impulse_mae_ns": 4.601129511650792,
+      "load_start_brier": 0.009651212327097303,
+      "load_start_log_loss": 0.03699668926715442
+    },
+    "force_motion_earlier_muscle": {
+      "heel_vector_mae_mm": 34.627784367134645,
+      "heel_vertical_mae_mm": 14.426450656056682,
+      "impulse_mae_ns": 4.438691116593896,
+      "load_start_brier": 0.014244585965606127,
+      "load_start_log_loss": 0.052024700344765896
+    },
+    "force_motion_muscle": {
+      "heel_vector_mae_mm": 35.20791482370574,
+      "heel_vertical_mae_mm": 14.500067217026714,
+      "impulse_mae_ns": 4.359661067292238,
+      "load_start_brier": 0.01466299704793895,
+      "load_start_log_loss": 0.04850248894796527
+    },
+    "heel_velocity": {
+      "heel_vector_mae_mm": 63.284074728228916,
+      "heel_vertical_mae_mm": 34.24332611232355
+    },
+    "last_force": {
+      "impulse_mae_ns": 9.892315543008372
+    },
+    "motion": {
+      "heel_vector_mae_mm": 37.692204252069466,
+      "heel_vertical_mae_mm": 16.625573597938438,
+      "impulse_mae_ns": 8.541343590872811,
+      "load_start_brier": 0.011955832345502657,
+      "load_start_log_loss": 0.045558716514920196
+    },
+    "stationary_heel": {
+      "heel_vector_mae_mm": 139.9338391645822,
+      "heel_vertical_mae_mm": 48.14988205680273
+    }
+  },
+  "paired_differences": {
+    "current_muscle_added": {
+      "candidate": "force_motion_muscle",
+      "errors": {
+        "heel_vector_mae_mm": {
+          "mean_difference": 4.631725068053098,
+          "people": 5,
+          "people_lower": 0,
+          "person_bootstrap_95pct": [
+            2.497546417838744,
+            8.440688253604229
+          ]
+        },
+        "heel_vertical_mae_mm": {
+          "mean_difference": 2.7878159730429806,
+          "people": 5,
+          "people_lower": 0,
+          "person_bootstrap_95pct": [
+            1.5533420061827539,
+            4.2233052595503775
+          ]
+        },
+        "impulse_mae_ns": {
+          "mean_difference": 0.42533880862521467,
+          "people": 5,
+          "people_lower": 1,
+          "person_bootstrap_95pct": [
+            0.10676122633446958,
+            0.7439163909159598
+          ]
+        },
+        "load_start_brier": {
+          "mean_difference": 0.002818252957909673,
+          "people": 5,
+          "people_lower": 2,
+          "person_bootstrap_95pct": [
+            -4.735818929725785e-05,
+            0.006718484641772946
+          ]
+        },
+        "load_start_log_loss": {
+          "mean_difference": 0.00838932184992716,
+          "people": 5,
+          "people_lower": 2,
+          "person_bootstrap_95pct": [
+            0.0002510029111081113,
+            0.01652764078874621
+          ]
+        }
+      },
+      "reference": "force_motion"
+    },
+    "current_vs_earlier_muscle": {
+      "candidate": "force_motion_muscle",
+      "errors": {
+        "heel_vector_mae_mm": {
+          "mean_difference": 0.5801304565711021,
+          "people": 5,
+          "people_lower": 2,
+          "person_bootstrap_95pct": [
+            -1.7231212120052752,
+            2.8833821251474796
+          ]
+        },
+        "heel_vertical_mae_mm": {
+          "mean_difference": 0.07361656097003219,
+          "people": 5,
+          "people_lower": 3,
+          "person_bootstrap_95pct": [
+            -0.998682072184738,
+            1.228954249039593
+          ]
+        },
+        "impulse_mae_ns": {
+          "mean_difference": -0.07903004930165922,
+          "people": 5,
+          "people_lower": 2,
+          "person_bootstrap_95pct": [
+            -0.45211644527247297,
+            0.19310453953686935
+          ]
+        },
+        "load_start_brier": {
+          "mean_difference": 0.00041841108233282333,
+          "people": 5,
+          "people_lower": 2,
+          "person_bootstrap_95pct": [
+            -0.004920991416479434,
+            0.005315843917993371
+          ]
+        },
+        "load_start_log_loss": {
+          "mean_difference": -0.003522211396800623,
+          "people": 5,
+          "people_lower": 4,
+          "person_bootstrap_95pct": [
+            -0.018950660819935117,
+            0.012893603845721325
+          ]
+        }
+      },
+      "reference": "force_motion_earlier_muscle"
+    },
+    "earlier_muscle_added": {
+      "candidate": "force_motion_earlier_muscle",
+      "errors": {
+        "heel_vector_mae_mm": {
+          "mean_difference": 4.051594611481995,
+          "people": 5,
+          "people_lower": 1,
+          "person_bootstrap_95pct": [
+            1.273149508143024,
+            6.539309965086287
+          ]
+        },
+        "heel_vertical_mae_mm": {
+          "mean_difference": 2.714199412072948,
+          "people": 5,
+          "people_lower": 0,
+          "person_bootstrap_95pct": [
+            1.379333979871053,
+            3.9540535860714163
+          ]
+        },
+        "impulse_mae_ns": {
+          "mean_difference": 0.5043688579268739,
+          "people": 5,
+          "people_lower": 1,
+          "person_bootstrap_95pct": [
+            0.04816591067173341,
+            1.1125847481921127
+          ]
+        },
+        "load_start_brier": {
+          "mean_difference": 0.0023998418755768495,
+          "people": 5,
+          "people_lower": 2,
+          "person_bootstrap_95pct": [
+            -0.002457196250143866,
+            0.007098547785761115
+          ]
+        },
+        "load_start_log_loss": {
+          "mean_difference": 0.011911533246727782,
+          "people": 5,
+          "people_lower": 2,
+          "person_bootstrap_95pct": [
+            -0.0029554117033711302,
+            0.026060107021051125
+          ]
+        }
+      },
+      "reference": "force_motion"
+    },
+    "force_added_to_motion": {
+      "candidate": "force_motion",
+      "errors": {
+        "heel_vector_mae_mm": {
+          "mean_difference": -7.116014496416817,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -9.746151307658042,
+            -4.242661692675225
+          ]
+        },
+        "heel_vertical_mae_mm": {
+          "mean_difference": -4.9133223539547055,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -5.9685431187060844,
+            -4.073216742989135
+          ]
+        },
+        "impulse_mae_ns": {
+          "mean_difference": -4.607021332205789,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -7.116992502513623,
+            -2.5762658026139746
+          ]
+        },
+        "load_start_brier": {
+          "mean_difference": -0.00011108825547337942,
+          "people": 5,
+          "people_lower": 2,
+          "person_bootstrap_95pct": [
+            -0.002908258537396906,
+            0.002686082026450147
+          ]
+        },
+        "load_start_log_loss": {
+          "mean_difference": -0.005445549416882078,
+          "people": 5,
+          "people_lower": 4,
+          "person_bootstrap_95pct": [
+            -0.01175365251982646,
+            0.0008625536860623034
+          ]
+        }
+      },
+      "reference": "motion"
+    },
+    "joint_vs_heel_velocity": {
+      "candidate": "force_motion",
+      "errors": {
+        "heel_vector_mae_mm": {
+          "mean_difference": -32.707884972576274,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -42.8787651516622,
+            -22.537004793490343
+          ]
+        },
+        "heel_vertical_mae_mm": {
+          "mean_difference": -22.531074868339818,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -25.127190204488027,
+            -20.001844352201033
+          ]
+        }
+      },
+      "reference": "heel_velocity"
+    },
+    "joint_vs_previous_force_model": {
+      "candidate": "force_motion",
+      "errors": {
+        "impulse_mae_ns": {
+          "mean_difference": -3.8320581614970584,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -5.308582828656582,
+            -2.8089734617042312
+          ]
+        },
+        "load_start_brier": {
+          "mean_difference": -0.026886115196984424,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -0.03764784654319644,
+            -0.015037047255805713
+          ]
+        },
+        "load_start_log_loss": {
+          "mean_difference": -0.07396277593999089,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -0.09913732162565381,
+            -0.045341673378091356
+          ]
+        }
+      },
+      "reference": "earlier_force_model"
+    },
+    "joint_vs_stationary_heel": {
+      "candidate": "force_motion",
+      "errors": {
+        "heel_vector_mae_mm": {
+          "mean_difference": -109.35764940892955,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -123.25973535343228,
+            -95.54657662788895
+          ]
+        },
+        "heel_vertical_mae_mm": {
+          "mean_difference": -36.43763081281901,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -38.05488098611429,
+            -34.77234339470393
+          ]
+        }
+      },
+      "reference": "stationary_heel"
+    },
+    "motion_added_to_force": {
+      "candidate": "force_motion",
+      "errors": {
+        "heel_vector_mae_mm": {
+          "mean_difference": -15.49991152881139,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -17.834493304642947,
+            -13.20828102983324
+          ]
+        },
+        "heel_vertical_mae_mm": {
+          "mean_difference": -8.232859788394453,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -10.837554853720132,
+            -5.628164723068775
+          ]
+        },
+        "impulse_mae_ns": {
+          "mean_difference": -0.704201447165806,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -1.068437697214831,
+            -0.3606980912079443
+          ]
+        },
+        "load_start_brier": {
+          "mean_difference": -0.005146947142000146,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -0.007973639975811417,
+            -0.002320254308188875
+          ]
+        },
+        "load_start_log_loss": {
+          "mean_difference": -0.01764871585557492,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -0.0247096355540495,
+            -0.01128781637569569
+          ]
+        }
+      },
+      "reference": "force"
+    },
+    "motion_only_vs_last_force": {
+      "candidate": "motion",
+      "errors": {
+        "impulse_mae_ns": {
+          "mean_difference": -1.3509719521355614,
+          "people": 5,
+          "people_lower": 3,
+          "person_bootstrap_95pct": [
+            -3.0804156016721036,
+            0.3784716974009811
+          ]
+        }
+      },
+      "reference": "last_force"
+    },
+    "motion_only_vs_previous_force_model": {
+      "candidate": "motion",
+      "errors": {
+        "impulse_mae_ns": {
+          "mean_difference": 0.7749631707087301,
+          "people": 5,
+          "people_lower": 2,
+          "person_bootstrap_95pct": [
+            -1.6713512044827339,
+            3.529155311153274
+          ]
+        },
+        "load_start_brier": {
+          "mean_difference": -0.026775026941511036,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -0.03649378468319901,
+            -0.015887966376211364
+          ]
+        },
+        "load_start_log_loss": {
+          "mean_difference": -0.0685172265231088,
+          "people": 5,
+          "people_lower": 5,
+          "person_bootstrap_95pct": [
+            -0.09243253943363684,
+            -0.04117689481095366
+          ]
+        }
+      },
+      "reference": "earlier_force_model"
+    },
+    "transferred_vs_new_weights": {
+      "candidate": "force_motion",
+      "errors": {
+        "heel_vector_mae_mm": {
+          "mean_difference": 2.799220537614958,
+          "people": 5,
+          "people_lower": 2,
+          "person_bootstrap_95pct": [
+            -0.9295287319062624,
+            6.527969807136178
+          ]
+        },
+        "heel_vertical_mae_mm": {
+          "mean_difference": -0.6493353802148114,
+          "people": 5,
+          "people_lower": 3,
+          "person_bootstrap_95pct": [
+            -1.8397528635497225,
+            0.5410821031200996
+          ]
+        },
+        "impulse_mae_ns": {
+          "mean_difference": -0.6668072529837695,
+          "people": 5,
+          "people_lower": 4,
+          "person_bootstrap_95pct": [
+            -2.0605245609752663,
+            0.29121083330100755
+          ]
+        },
+        "load_start_brier": {
+          "mean_difference": 0.0021935317629319744,
+          "people": 5,
+          "people_lower": 2,
+          "person_bootstrap_95pct": [
+            8.52863523279332e-05,
+            0.004917755963612351
+          ]
+        },
+        "load_start_log_loss": {
+          "mean_difference": 0.003116477830883692,
+          "people": 5,
+          "people_lower": 3,
+          "person_bootstrap_95pct": [
+            -0.003288120281434581,
+            0.010692774226239746
+          ]
+        }
+      },
+      "reference": "force_motion_cold"
+    }
+  },
+  "scope": "Walking-labeled files are recorded for longer than the task's described steady walk. The recorded trigger interval establishes coverage, not an exact treadmill speed or a period of constant walking. Body labels and force-plate roles follow the source. No EMG-to-nerve inference.",
+  "scored_new_load_starts": 531,
+  "scored_people": 5,
+  "scored_rows": 5700,
+  "side_order": [
+    "left",
+    "right"
+  ],
+  "source": {
+    "analog_samples_per_second": 2400,
+    "camera_samples_per_second": 100,
+    "methods": "https://doi.org/10.1038/s41597-026-08550-z",
+    "recording_licence": "https://creativecommons.org/licenses/by/4.0/",
+    "recordings": "https://doi.org/10.5281/zenodo.24194741"
+  },
+  "starts_by_side": [
+    268,
+    263
+  ],
+  "uncertainty": "Paired percentile intervals resample whole people 20,000 times. They are descriptive for a small one-site comparison. All methods use the same physically complete rows and all included people count equally."
+}

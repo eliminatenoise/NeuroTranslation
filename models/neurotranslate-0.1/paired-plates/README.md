@@ -2,6 +2,10 @@
 
 This NeuroTranslate experiment estimates the chance that each plate will start carrying weight in the next 100 milliseconds. A force plate is a floor panel that measures how hard someone presses on it.
 
+## Forecast walking force and heel movement together
+
+The [walking preview](WALKING.md) uses recent heel motion and vertical force under both feet. It reports the chance of each foot starting a new load, the force accumulated across the next 100 milliseconds, and how the heel moves during that time. Open the walking guide for its launcher commands and measured comparisons. The same download below includes both experiments.
+
 ## Run the included example
 
 Extract the ZIP. Open a terminal in the extracted folder and run the command for your computer. You need Python 3. No extra packages or model downloads are needed.
