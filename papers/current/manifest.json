@@ -23,14 +23,14 @@
       "grip_page": 51,
       "development_page": null,
       "filename": "neurotranslation-technical.pdf",
-      "sha256": "e3d165ebe6eb98be1f1d4b4a48b2c09c3c3c4c211fe3663bb47650542dd9f9a7",
-      "bytes": 253396,
+      "sha256": "6d3993ccdbf54304e077d30aa7b56599a6b0edb07e1016f809779cf50860daa3",
+      "bytes": 255117,
       "pages": 54,
       "previous_pdf_sha256": "e3d165ebe6eb98be1f1d4b4a48b2c09c3c3c4c211fe3663bb47650542dd9f9a7",
       "previous_pages": 54,
       "hyser_end_page": 52,
       "reference_pages": [
-        36
+        37
       ],
       "rasterized_pages": [],
       "prescribed_task_page": 52,
@@ -89,14 +89,14 @@
       "grip_page": 61,
       "development_page": null,
       "filename": "neurotranslation-explained.pdf",
-      "sha256": "3b97e84f5460c606cf4fbea731bf9acd99af490ef531acc61ef395be7d85f58c",
-      "bytes": 275691,
+      "sha256": "1f5ff2b2ab2980aac68062cd8f86f52e0941ed6021a157585f7d1b29de2b2b45",
+      "bytes": 277212,
       "pages": 64,
       "previous_pdf_sha256": "3b97e84f5460c606cf4fbea731bf9acd99af490ef531acc61ef395be7d85f58c",
       "previous_pages": 64,
       "hyser_end_page": 61,
       "reference_pages": [
-        44
+        45
       ],
       "rasterized_pages": [],
       "prescribed_task_page": 61,
@@ -214,7 +214,7 @@
     }
   ],
   "named_destinations_note": "Each NeuroTranslation PDF has a named destination at every study's row in its appendix B (and appendix.A, the macaque study in full, and appendix.B, the table of every study), with the page it lands on; link to <file>.pdf#nameddest=<name>. The page keys above give the page of the same row. The Brain2Body editions have no study rows, so their page keys are null; development_page there is the page of section 6, on the marsupial.",
-  "source_manifest_sha256": "84383a2dad06f70ce071a5ab95dd32255681e9dfca387704d18a8a71fe4c10d8",
+  "source_manifest_sha256": "0673489f7e387b585cabb14511c7a1555ff5b4539b75d318d3cb83bc299f8d82",
   "evidence_revision_date": "2026-11-21",
   "build": "Four PDFs built offline with the Tectonic 0.17 TeX engine, SOURCE_DATE_EPOCH 1795219200 (21 November 2026, 00:00 UTC). The source ZIP holds everything but the engine and its package files; built from it, the four PDFs come out byte for byte the same.",
   "files_excluding_this_manifest": [
@@ -241,7 +241,7 @@
     {
       "path": "font-provenance.json",
       "bytes": 7812,
-      "sha256": "f0e5fa9662e732910a8fa61967512a501e3106e49ebbb75425b07055daf89b9c"
+      "sha256": "1904c02a3e330c68f43ea1f493778d054357eaec69af7b9cb52ed2b8c3af5bd4"
     },
     {
       "path": "index.html",
@@ -250,13 +250,13 @@
     },
     {
       "path": "neurotranslation-explained.pdf",
-      "bytes": 275691,
-      "sha256": "3b97e84f5460c606cf4fbea731bf9acd99af490ef531acc61ef395be7d85f58c"
+      "bytes": 277212,
+      "sha256": "1f5ff2b2ab2980aac68062cd8f86f52e0941ed6021a157585f7d1b29de2b2b45"
     },
     {
       "path": "neurotranslation-technical.pdf",
-      "bytes": 253396,
-      "sha256": "e3d165ebe6eb98be1f1d4b4a48b2c09c3c3c4c211fe3663bb47650542dd9f9a7"
+      "bytes": 255117,
+      "sha256": "6d3993ccdbf54304e077d30aa7b56599a6b0edb07e1016f809779cf50860daa3"
     },
     {
       "path": "results/earlier-decoding.json",
