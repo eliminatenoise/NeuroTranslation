@@ -1,0 +1,45 @@
+:root { color-scheme:light; color:#173232; background:#fcfbf7; font:16px/1.5 "Segoe UI",Arial,sans-serif; --teal:#086e65; --line:#afc4bb }
+* { box-sizing:border-box }
+body { margin:0 }
+main { width:min(59rem,calc(100% - 3.5rem)); margin:0 auto; padding:clamp(1.5rem,4vw,3.7rem) 0 3rem }
+h1,h2,h3,p { margin:0 }
+h1 { font-size:clamp(2.45rem,6vw,4.5rem); line-height:1.02; letter-spacing:-.05em; max-width:17ch }
+.lead { font-size:1.18rem; max-width:63ch; margin:1rem 0 2rem }
+h2 { font-size:clamp(1.5rem,3vw,2rem); line-height:1.2; letter-spacing:-.03em }
+.settings,.sliders,.feet { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem }
+.settings { margin:1rem 0 .4rem }
+label { font-weight:650 }
+select { display:block; width:100%; margin-top:.25rem; padding:.48rem; min-height:2.7rem; font:inherit; background:#fff; color:inherit; border:1px solid #748f84; border-radius:.3rem }
+input:focus-visible, select:focus-visible, summary:focus-visible { outline:3px solid #a64b11; outline-offset:3px }
+#mode-note,.ends,.measure,.endnote { color:#455e56 }
+.sliders { margin:1rem 0 }
+.sliders>div { display:grid; grid-template-columns:1fr auto; align-content:start; gap:.15rem .5rem; padding-top:.65rem; border-top:1px solid var(--line) }
+output { font-weight:700; color:var(--teal); font-variant-numeric:tabular-nums }
+input[type=range] { width:100%; min-height:2rem; margin:.05rem 0; accent-color:var(--teal); grid-column:1/-1 }
+.ends { grid-column:1/-1; display:flex; justify-content:space-between; font-size:.82rem }
+details { padding:.55rem 0; border-bottom:1px solid var(--line) }
+summary { cursor:pointer; font-weight:650; color:var(--teal) }
+details p,.forecast>p { max-width:78ch; margin:.45rem 0 .8rem }
+table { width:100%; border-collapse:collapse; margin:.75rem 0; font-variant-numeric:tabular-nums }
+caption { text-align:left; font-weight:650; margin-bottom:.25rem }
+th,td { text-align:left; vertical-align:top; padding:.35rem .5rem; border-bottom:1px solid var(--line) }
+th { background:#eef2eb }
+.forecast { margin-top:2.1rem }
+.feet { gap:0; background:#eaf1ea; border-block:1px solid var(--line); margin:1rem 0 .45rem }
+.feet section { padding:1.15rem 1.4rem }
+.feet section+section { border-left:1px solid var(--line) }
+h3 { font-size:1rem }
+.big { font-size:clamp(2.3rem,5vw,3.4rem); font-weight:700; line-height:1.15; letter-spacing:-.05em; color:var(--teal) }
+.big small { font-size: .4em; letter-spacing:0 }
+.measure { font-size:.95rem }
+dl { display:grid; grid-template-columns:1fr auto; margin:.65rem 0 0; gap:.17rem .4rem; font-size:.95rem }
+dd { margin:0; font-weight:650; font-variant-numeric:tabular-nums }
+.endnote { max-width:75ch; margin-top:1.65rem; font-size:.91rem }
+@media(max-width:600px) {
+  main { width:calc(100% - 2rem) }
+  .settings,.sliders { grid-template-columns:1fr; gap:.65rem }
+  .feet section { padding:.65rem }
+  dl { display:block }
+  dd+dt { margin-top:.4rem }
+  th,td { padding:.28rem; font-size:.77rem }
+}

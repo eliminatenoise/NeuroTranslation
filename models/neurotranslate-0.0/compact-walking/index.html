@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forecast heel movement and force</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="weights.js"></script><script defer src="predict.js"></script><script defer src="history.js"></script><script defer src="reader.js"></script>
+</head>
+<body><main>
+  <h1>Forecast heel movement and force</h1>
+  <p class="lead">Give a trained model 200 milliseconds of invented walking history. Change how the heels move or how the load shifts between feet, then see what it predicts for the next 100 milliseconds.</p>
+  <section aria-labelledby="history-title">
+    <h2 id="history-title">Change the invented step</h2>
+    <div class="settings">
+      <label>Model inputs<select id="model"><option value="both">Heel positions and vertical force</option><option value="heels">Heel positions only</option></select></label>
+      <label>Forecast<select id="seed"><option value="average" selected>Average of both runs</option><option value="2731">Training run 2731</option><option value="4119">Training run 4119</option></select></label>
+    </div>
+    <p id="mode-note"></p>
+    <div class="sliders">
+      <div><label for="travel">Right heel travel along X</label><output for="travel" id="travel-value"></output><input type="range" min="-100" max="100" step="5" value="60" id="travel"><span class="ends"><span>−100 mm</span><span>+100 mm</span></span></div>
+      <div><label for="load">Right-foot load in the last bin</label><output for="load" id="load-value"></output><input type="range" min="0" max="600" step="25" value="450" id="load"><span class="ends"><span>0 N</span><span>600 N</span></span></div>
+    </div>
+    <details><summary>Read the ten input bins</summary>
+      <p>Each row covers 20 ms. Heel coordinates are in millimetres from each heel’s own starting point. Force is the mean vertical load in newtons for that bin. In this example the two loads add to 600 N.</p>
+      <table><caption>Invented history, oldest first</caption><thead><tr><th scope="col">Bin (ms)</th><th scope="col">Left heel X, Y, Z (mm)</th><th scope="col">Right heel X, Y, Z (mm)</th><th scope="col">Left / right load (N)</th></tr></thead><tbody id="bins"></tbody></table>
+    </details>
+  </section>
+  <section class="forecast" aria-labelledby="forecast-title">
+    <h2 id="forecast-title">Both feet over the next 100 ms</h2>
+    <p>Heel movement is the length of the predicted change in position from the last input. Vertical impulse adds up force over time. Load-start probability is the model’s estimate that a new period of loading begins under that foot.</p>
+    <div class="feet">
+      <section aria-labelledby="left-title"><h3 id="left-title">Left foot</h3><p class="big"><span data-result="heel-0"></span> <small>mm</small></p><p class="measure">Heel movement</p><dl><dt>Vertical impulse</dt><dd data-result="impulse-0"></dd><dt>Load-start probability</dt><dd data-result="load-0"></dd></dl></section>
+      <section aria-labelledby="right-title"><h3 id="right-title">Right foot</h3><p class="big"><span data-result="heel-1"></span> <small>mm</small></p><p class="measure">Heel movement</p><dl><dt>Vertical impulse</dt><dd data-result="impulse-1"></dd><dt>Load-start probability</dt><dd data-result="load-1"></dd></dl></section>
+    </div>
+    <p class="combined">The two feet together have a predicted vertical impulse of <strong id="total-impulse"></strong> over this 100 ms window.</p>
+    <details><summary>Read the heel change along each axis</summary>
+      <table><caption>Predicted displacement (mm)</caption><thead><tr><th scope="col">Heel</th><th scope="col">X</th><th scope="col">Y</th><th scope="col">Z</th></tr></thead><tbody id="xyz"></tbody></table>
+    </details>
+  </section>
+  <p class="endnote">Each fit has 9,450 parameters. The default averages the two forecasts for the selected input. You can also choose one training run. All four fits run locally in this page. The inputs are invented, so this example has no observed next step to score.</p>
+  <noscript><p>Enable JavaScript to run the models.</p></noscript>
+</main></body></html>

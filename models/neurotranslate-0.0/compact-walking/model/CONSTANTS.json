@@ -1,0 +1,30 @@
+{
+  "configuration": {
+    "depth": 1,
+    "ff_width": 64,
+    "heads": 4,
+    "width": 32
+  },
+  "force_mask": "Camera-only predicts with two unavailable, zero-filled force channels.",
+  "layout": "two heel x/y/z sequences, two force values, eight visibility flags, ten 20 ms bins",
+  "output": "Left xyz and right xyz in mm, both impulses in N s, and two probabilities. Add the heel reference to the scaled output, use the constant impulse and event offsets, clip impulse at zero, and pass each logit through the sigmoid.",
+  "reference": [
+    35.14560239497851,
+    30.22221805020938,
+    -2.1038463284774624,
+    -2.3417958928726783
+  ],
+  "scale": [
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    50.0,
+    25.0,
+    25.0,
+    1.0,
+    1.0
+  ],
+  "source_model_code_sha256": "6313cfce4716c9eaf1ee4105e87d0f5e7a209827c8327b7dae89d38360a18666"
+}

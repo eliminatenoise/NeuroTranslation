@@ -4,6 +4,8 @@ This NeuroTranslate model uses the recent positions of both heels and the force 
 
 For shorter walking clips and a mode that uses camera positions without force readings, see the [overground preview](OVERGROUND.md).
 
+To try four small walking models on invented readings in a browser, see the [compact NeuroTranslate 0.0 walking download](../../neurotranslate-0.0/compact-walking/README.md).
+
 ## Open the example
 
 Download and extract the paired-plates preview. In a terminal, open the extracted folder and run the command for your computer. You need Python 3.9 or later. The folder contains the saved weights and an invented example. It runs offline.
