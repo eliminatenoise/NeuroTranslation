@@ -1,60 +1,64 @@
-# NeuroTranslate 0.0 force-plate preview
+# NeuroTranslate 0.0 walking force preview
 
-Run two versions of NeuroTranslate on the same invented sensor readings. Each estimates whether a force plate will start carrying load and how much vertical force will accumulate over the next 100 milliseconds. A force plate is a platform in the floor that measures the push on it.
+A force plate in the floor measures the push of a foot during a walk. Give NeuroTranslate the last 200 milliseconds of muscle voltage and vertical force measured during the walk. It predicts whether the plate will start carrying load and estimates how much force will accumulate over the next 100 milliseconds. This second output is called **impulse**. It adds up force over time and is measured in newton-seconds.
 
-## Set up and run the example
+To try both new checkpoints with invented readings, extract the ZIP and run `python predict.py --model past-load-gate --check-example` after the setup below.
 
-Extract the entire ZIP. Install [Python 3](https://www.python.org/downloads/) if needed, then open a terminal in the extracted folder. The setup below creates a Python environment in the folder and installs NumPy, the library the models use for calculations. Keep the same terminal open until the example runs.
+## Set up Python and run the example
+
+Install [Python 3](https://www.python.org/downloads/) if needed. Open a terminal in the extracted folder. These steps create a Python environment in the folder and install NumPy, the software that runs the calculations. Use the same terminal for all four lines.
 
 ### Linux and macOS
 
-In Bash or Zsh, run each line in order.
+Enter these four commands in Bash or Zsh.
 
 ```sh
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install numpy
-python predict.py --check-example
+python predict.py --model past-load-gate --check-example
 ```
 
 ### Windows
 
-In Command Prompt, run each line in order. If Windows does not recognize `py`, use `python -m venv .venv` for the first line.
+In Command Prompt, run the following. If `py` is unavailable, replace the first line with `python -m venv .venv`.
 
 ```bat
 py -3 -m venv .venv
 .venv\Scripts\activate.bat
 python -m pip install numpy
-python predict.py --check-example
+python predict.py --model past-load-gate --check-example
 ```
 
-When setup succeeds, the program prints **Example matches the reference for both checkpoints** and shows the forecasts. A small tolerance allows for numerical differences between computers. Setup may require internet access. After NumPy is installed, the forecasts run offline.
+The check prints **Example matches the reference for both checkpoints** when the outputs agree with the saved numbers. The small tolerance accounts for numerical differences across computers. The model runs offline after NumPy is installed.
 
-If creating the environment fails with a message about `venv` or `ensurepip`, install a Python distribution with support for virtual environments and pip. On Debian or Ubuntu, install the `python3-venv` package for the Python version you use. Then run the creation command again. If the environment was created and activated but `python -m pip` is missing, run `python -m ensurepip --upgrade` in the activated environment and repeat the NumPy installation.
+If the first command reports that `venv` or `ensurepip` is missing, install a version of Python that includes both. On Debian or Ubuntu, install the matching `python3-venv` package and repeat the first command. If the environment is active and `python -m pip` is unavailable, run `python -m ensurepip --upgrade` there before installing NumPy.
 
-## Run it again
+## What the example shows
 
-After setup, the launcher for your system uses the Python environment beside it. Run one of these commands from the extracted folder.
+Each checkpoint returns a probability from 0 to 1 and a signed impulse. The example includes three histories. One has little force, one has a higher force reading, and one has muscle readings with force missing. For that last history, the gated model reports a probability and leaves impulse as `null`.
 
-| System | Command |
+The `past-load-gate` option runs the two new checkpoints. One keeps its starting attention weights fixed during fitting. The other learns changes to them. To check the two earlier expanded checkpoints against their original example, run `python predict.py --check-example` or add `--model expanded` to that command.
+
+You can also run the new example through the launcher for your system. The launcher uses the Python environment in the extracted folder.
+
+| System | Example command |
 | --- | --- |
-| Linux | `sh "Run forecasts on Linux.sh"` |
-| macOS | `sh "Run forecasts on macOS.command"` |
-| Windows | `"Run forecasts on Windows.cmd"` in Command Prompt |
+| Linux | `sh "Run forecasts on Linux.sh" --model past-load-gate --check-example` |
+| macOS | `sh "Run forecasts on macOS.command" --model past-load-gate --check-example` |
+| Windows | `"Run forecasts on Windows.cmd" --model past-load-gate --check-example` in Command Prompt |
 
-You can also run `python predict.py` after activating the environment. The result lists two numbers for each of the two invented histories and each model. **New-load probability** is a number from 0 to 1. **Signed force impulse** adds up the estimated force over the next tenth of a second and is given in newton-seconds. The invented readings help you check that the program works.
+## Enter your own readings
 
-## Use the same input format
+Copy [the example file](past-load-gate-example.json). Each item in `histories` holds ten 20-millisecond rows from the same plate, oldest first. The last row ends at the last sample available when the forecast is requested.
 
-Copy `example.json` and replace the invented values. Each item in `histories` describes one plate and contains ten rows of synchronized measurements, oldest first. Each row spans 20 milliseconds.
+- **`emg_rms_v`** gives six muscle voltage magnitudes per row, in order `LBF`, `LERS`, `LGAS`, `LRF`, `LST`, `RERS`. For each channel, square the 20 voltages, average the squares, then take the square root. Enter the result in volts.
+- **`force_mean_n`** gives the mean vertical force on the plate for each row. Enter newtons, with upward force positive.
 
-- **`emg_rms_v`** contains six numbers per row, in the order `LBF`, `LERS`, `LGAS`, `LRF`, `LST`, `RERS`. These source labels refer to muscle recordings on the left and right sides. Each value is a root-mean-square magnitude in volts, calculated by squaring the 20 signed samples in that bin, averaging them, and taking the square root.
-- **`force_mean_n`** contains one number per row. Use the average signed upward force in newtons from the same plate you want to forecast.
+Write `null` for a missing measurement. Provide at least one observed value in each history. Run `python predict.py --model past-load-gate --input my-history.json` in the Python environment you set up.
 
-Use `null` where a measurement is missing. A history with no measurements is rejected. The original replay scored complete histories, so results for incomplete input should be treated as untested. In the activated environment, run `python predict.py --input my-history.json`.
+## How the model did on the fitting walks
 
-## What this release tells us
+The trainable-core gate had a mean impulse error of **3.042 N·s**. Extending the last force reading gave **3.422 N·s**. The largest improvement came when the plate already carried load. Error rose when the plate started unloaded and no new load was recorded.
 
-On a replay of people and walks used in training, both expanded models beat the earlier six-update model on both measurements. For the amount of vertical force, simply extending the most recent force reading was more accurate than either expanded model. Performance on new people or equipment remains untested in this release.
-
-See the [model card](MODEL-CARD.md) for the exact comparison, measurement rules, and sources. This standalone preview covers the force-plate task. Other NeuroTranslate 0.0 tasks have their own entry points.
+Both scores come from the same 12 people and 36 walks used to fit the models. Neighboring forecast windows overlap. The example with missing force is invented, and performance on new people remains unmeasured. [Full comparison and sources](MODEL-CARD.md)

@@ -6,7 +6,7 @@ A checkpoint is the set of weights a model saved after fitting. The downloads in
 
 | Download | What you can try |
 | --- | --- |
-| [NeuroTranslate 0.0 walking force preview](neurotranslate-0.0/recorded-force/expanded.zip) | Give two small models past muscle and floor-force readings. Each estimates whether the plate will start carrying load in the next 100 milliseconds and how much force will accumulate. [Setup and model card](neurotranslate-0.0/recorded-force/expanded/) |
+| [NeuroTranslate 0.0 walking force preview](neurotranslate-0.0/recorded-force/expanded.zip) | Use recent muscle and force readings from a walk to forecast new load and force accumulated over the next 100 milliseconds. Run `python predict.py --model past-load-gate --check-example` after setup. The comparison uses the fitting walks. [Setup and results](neurotranslate-0.0/recorded-force/expanded/) |
 | [NeuroTranslate 0.0](neurotranslate-0.0.zip) | Open the seven-task joint demo or try the new walking force experiment in the same download. [Walking force instructions](neurotranslate-0.0/recorded-force/) |
 | [NeuroTranslate 0.1 Research Edition](neurotranslate-0.1/research-edition.zip) | Try two invented walking inputs with the repeated decoder and see its 100 ms force forecasts. The full example runs on Linux CPU and uses a separate Inkling checkpoint. [Setup and validation results](neurotranslate-0.1/research-edition/) |
 | [NeuroTranslate 0.1](neurotranslate-0.1.zip) | Run the new walking force input and output layers with the separately downloaded Inkling 2 Mini model. [Setup and example](neurotranslate-0.1/) |

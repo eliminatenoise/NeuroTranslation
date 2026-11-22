@@ -1,4 +1,4 @@
-"""Run the two NeuroTranslate force-plate previews with saved sensor summaries."""
+"""Run the latest gated or earlier expanded force-plate models."""
 
 import argparse
 import hashlib
@@ -17,15 +17,21 @@ except ModuleNotFoundError as error:
     sys.exit('Install NumPy in this Python environment with python -m pip install numpy. See README.md for setup.')
 
 from inference import JointModel
+from past_load_gate import GateModel
 
 
 ROOT = Path(__file__).resolve().parent
 VERSION = '0.0.0-expanded-force-preview.1'
+GATE_VERSION = '0.0.0-past-load-gate-preview.1'
 TASK = 'recorded_plate_loading_common_six_100ms'
 CHANNELS = ('LBF', 'LERS', 'LGAS', 'LRF', 'LST', 'RERS', 'named_plate_upward_force_mean')
 CHECKPOINTS = {
     'frozen_core': ('models/frozen-core.npz', 'da97baca8e56cc3aac35b60d51b08683386a7bedf650963b3d66d1cee9aedbc1'),
     'trainable_core': ('models/trainable-core.npz', 'b371040dae65d580ae7d7786d22bbc0b2e09bcb8bfcce495d6e8205befbf568e'),
+}
+GATE_CHECKPOINTS = {
+    'frozen_core': ('models/past-load-gate-frozen-core.npz', '3197e25e98776f9c154fd2625c5a20f728eb2283977b490e50c812b7c7a6e068'),
+    'trainable_core': ('models/past-load-gate-trainable-core.npz', 'dd795a15a0651550261689f6710b6f929c35c0368932c88e937ea76e6fb93fb0'),
 }
 
 
@@ -65,23 +71,31 @@ def histories(document):
     return np.asarray(samples, dtype=np.float64)
 
 
-def forecasts(inputs):
-    output = {'version': VERSION, 'horizon_ms': 100, 'forecasts': {}}
-    for label, (filename, checksum) in CHECKPOINTS.items():
+def forecasts(inputs, model='expanded'):
+    if model not in ('expanded', 'past-load-gate'):
+        raise ValueError('Choose the expanded or past-load-gate checkpoint pair.')
+    gated = model == 'past-load-gate'
+    output = {'version': GATE_VERSION if gated else VERSION, 'horizon_ms': 100, 'forecasts': {}}
+    pairs = GATE_CHECKPOINTS if gated else CHECKPOINTS
+    for label, (filename, checksum) in pairs.items():
         path = ROOT / filename
         if hashlib.sha256(path.read_bytes()).hexdigest() != checksum:
             raise ValueError(f'{filename} differs from this preview. Extract a fresh copy.')
-        model = JointModel.load(path)
-        schema = model.tasks[TASK]
+        decoder = JointModel.load(path)
+        schema = decoder.tasks[TASK]
         if tuple(schema['channels']) != CHANNELS or schema['history_steps'] != 10 or schema['horizon_ticks'] != 100:
             raise ValueError(f'{filename} has an incompatible sensor layout.')
-        prediction = model.predict(TASK, inputs).astype(np.float64)
-        logit = prediction[:, 0]
-        small = np.exp(-np.abs(logit))
-        probability = np.where(logit >= 0, 1 / (1 + small), small / (1 + small))
+        if gated:
+            probability, impulse = GateModel(decoder).predict(inputs).T
+        else:
+            prediction = decoder.predict(TASK, inputs).astype(np.float64)
+            logit = prediction[:, 0]
+            small = np.exp(-np.abs(logit))
+            probability = np.where(logit >= 0, 1 / (1 + small), small / (1 + small))
+            impulse = prediction[:, 1]
         output['forecasts'][label] = [
-            {'new_load_probability': float(prob), 'signed_force_impulse_n_s': float(impulse)}
-            for prob, impulse in zip(probability, prediction[:, 1])
+            {'new_load_probability': float(prob), 'signed_force_impulse_n_s': None if np.isnan(force) else float(force)}
+            for prob, force in zip(probability, impulse)
         ]
     return output
 
@@ -92,10 +106,16 @@ def verify_example(actual, expected):
     if actual['forecasts'].keys() != expected['forecasts'].keys():
         raise ValueError('The example checkpoint names differ from the saved output.')
     keys = ('new_load_probability', 'signed_force_impulse_n_s')
+
+    def matches(value, target):
+        if value is None or target is None:
+            return value is None and target is None
+        return math.isclose(value, target, rel_tol=5e-5, abs_tol=1e-5)
+
     for label, estimates in actual['forecasts'].items():
         reference = expected['forecasts'][label]
         if len(estimates) != len(reference) or any(estimate.keys() != target.keys()
-               or any(not math.isclose(estimate[key], target[key], rel_tol=5e-5, abs_tol=1e-5) for key in keys)
+               or any(not matches(estimate[key], target[key]) for key in keys)
                for estimate, target in zip(estimates, reference)):
             raise ValueError(f'{label} output differs from the example reference.')
 
@@ -105,11 +125,14 @@ def main():
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument('--input', type=Path, help='run a JSON file in the example format')
     mode.add_argument('--check-example', action='store_true', help='check the bundled example against the reference')
+    parser.add_argument('--model', choices=('expanded', 'past-load-gate'), default='expanded',
+                        help='select the earlier expanded or latest past-load-gate pair')
     options = parser.parse_args()
+    prefix = 'past-load-gate-' if options.model == 'past-load-gate' else ''
     try:
-        output = forecasts(histories(read_json(options.input or ROOT / 'example.json')))
+        output = forecasts(histories(read_json(options.input or ROOT / f'{prefix}example.json')), options.model)
         if options.check_example:
-            verify_example(output, read_json(ROOT / 'expected.json'))
+            verify_example(output, read_json(ROOT / f'{prefix}expected.json'))
             print('Example matches the reference for both checkpoints.', file=sys.stderr)
     except (OSError, OverflowError, ValueError) as error:
         parser.exit(1, f'{error}\n')
