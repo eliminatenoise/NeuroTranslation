@@ -27,6 +27,35 @@ def coordinate_or_missing(value):
     return value is None or (isinstance(value, list) and len(value) == 3 and all(numeric(x) for x in value))
 
 
+def floor_axes(history, mode):
+    if "floor_normal_xyz" not in history:
+        return None
+    require(mode == "body-motion", "floor_normal_xyz is available only in body-motion mode.")
+    supplied = history["floor_normal_xyz"]
+    require(supplied is not None and coordinate_or_missing(supplied),
+            "Give floor_normal_xyz as three finite numbers.")
+    require(supplied[2] > 0, "The floor normal must point upward with a positive Z component.")
+    largest = max(map(abs, supplied))
+    scaled = [value / largest for value in supplied]
+    length = math.hypot(*scaled)
+    normal = tuple(value / length for value in scaled)
+    x, y, z = normal
+    require(z > 0, "The floor normal is too close to horizontal to normalize.")
+    # The source defines back by projecting room +Y onto the floor. Its
+    # cross product with the normal is the same as room +Y × normal.
+    # Computing that directly stays well-conditioned near a vertical plane.
+    left_length = math.hypot(z, x)
+    left = (z / left_length, 0., -x / left_length)
+    back = (y * left[2], z * left[0] - x * left[2], -y * left[0])
+    return left, back, normal
+
+
+def rotate(xyz, axes):
+    if xyz is None:
+        return None
+    return [math.fsum(value * component for value, component in zip(xyz, axis)) for axis in axes]
+
+
 def setup_history(history, mode):
     require(history["side_order"] == SIDES, "Give the histories in left, right order.")
     times = history["bin_end_ms"]
@@ -56,8 +85,11 @@ def setup_history(history, mode):
     return times,heel,pelvis,force,state
 
 
-def read_history(history, mode):
+def read_history(history, mode, *, axes=None):
     times,heel,pelvis,force,state = setup_history(history,mode)
+    if axes is not None:
+        heel = [[rotate(value, axes) for value in side] for side in heel]
+        pelvis = [rotate(value, axes) for value in pelvis]
     body_frame,use_force = MODES[mode]
     paired=[[],[]]
     admitted=[]
@@ -98,7 +130,9 @@ def read_history(history, mode):
 def predict(checkpoint, history, mode):
     require(mode in MODES and checkpoint["format"]=="overground_adaptive_v1" and checkpoint["lags_ms"]==DELAYS_MS,
             "The walking model or selected mode uses an unexpected format.")
-    issue,paired,admitted,drift=read_history(history,mode)
+    axes = floor_axes(history, mode)
+    room_axes = tuple(zip(*axes)) if axes is not None else None
+    issue,paired,admitted,drift=read_history(history,mode,axes=axes)
     use_force=MODES[mode][1]
     base=checkpoint["weights"][mode]
     weights=base | {"lag":[base["lag"][DELAYS_MS.index(lag)] for lag in admitted]}
@@ -108,9 +142,12 @@ def predict(checkpoint, history, mode):
     result=[]
     for side,raw in zip(SIDES,attention_readouts(paired,checkpoint["normalizers"],weights)):
         physical=[value*scale+center for value,scale,center in zip(raw[1:],checkpoint["target_scale"],checkpoint["target_center"])]
+        displacement = [axis + offset for axis, offset in zip(physical[1:], drift)]
+        if room_axes is not None:
+            displacement = rotate(displacement, room_axes)
         result.append({"side":side,"new_plate_load_probability":sigmoid(raw[0]),
             "signed_plate_impulse_newton_seconds":physical[0],
-            "heel_displacement_xyz_millimetres":[axis+offset for axis,offset in zip(physical[1:],drift)]})
+            "heel_displacement_xyz_millimetres":displacement})
     return {"mode":mode,"issue_time_ms":issue,"forecast_horizon_ms":100,
             "companion_window_end_delays_ms":admitted,"predictions":result}
 

@@ -36,6 +36,8 @@ Smaller errors mean closer forecasts. The load probability score averages square
 
 The tests use recordings with two plates in the floor. Each plate measures force within its own area. A heel elsewhere in the room can carry force outside the plates. The study used the authors’ saved marker positions, including gaps they had filled before release. These tests cover the recording clock and one sample of young men. [Source recordings and CC BY 4.0 terms](https://doi.org/10.17608/k6.auckland.27015301.v2)
 
+The camera-position mode also accepts a measured floor direction. See the [ramp guide](RAMP.md) for the test and an example.
+
 ## Give the model your own prepared history
 
 Copy `example-overground.json`. Keep left, right order wherever there are two sets of readings. Use shared `bin_end_ms` times exactly 20 milliseconds apart. The final time is when the forecast is made. Supply at least ten bins. Use `[x, y, z]` positions in millimetres, with X to the left, Y backward, and Z up.
