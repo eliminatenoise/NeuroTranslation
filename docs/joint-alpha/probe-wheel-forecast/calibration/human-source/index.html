@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A NeuroTranslation source check of wearable signals, measured foot loading, and timing in an open human walking dataset.">
+  <title>Can a wearable reading be matched to a foot load? · NeuroTranslation</title>
+  <style>
+    :root { color-scheme: light; font: 100%/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; color: #203538; background: #f5f6f2; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(50rem, calc(100% - 2rem)); margin: 1.7rem auto 3rem; }
+    nav { margin-bottom: 1rem; }
+    a { color: #075d52; text-underline-offset: .2em; }
+    a:focus-visible { outline: 3px solid #a43b12; outline-offset: 3px; }
+    header { border-top: .35rem solid #1b4647; padding-top: 1rem; }
+    h1, h2 { color: #173d40; line-height: 1.12; letter-spacing: -.03em; }
+    h1 { margin: 0 0 .6rem; font-size: clamp(2.1rem, 6vw, 4rem); max-width: 24ch; }
+    h2 { margin: 0 0 .75rem; font-size: clamp(1.5rem, 4.5vw, 2rem); }
+    p { margin: 0 0 .8rem; max-width: 70ch; }
+    .lead { font-size: clamp(1.04rem, 2.2vw, 1.19rem); }
+    section { margin-top: 1.35rem; padding-top: 1.15rem; border-top: 1px solid #b9c7c4; }
+    .result { padding: .75rem .9rem; border-left: .27rem solid #1b6960; background: #e6eee8; }
+    figure { margin: 1rem 0; }
+    .streams { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; margin: 0; }
+    .streams > div { padding: .65rem .75rem; border-top: .2rem solid #2a685e; background: #e6eee8; }
+    .streams > div:last-child { grid-column: 1 / -1; border-top-color: #925026; background: #f0e9df; }
+    dt { color: #173d40; font-weight: 700; }
+    dd { margin: 0; }
+    figcaption { margin: .5rem 0 0; }
+    table { width: 100%; border-collapse: collapse; font-size: clamp(.84rem, 2.5vw, 1rem); margin-bottom: 1rem; }
+    caption { text-align: left; font-weight: 650; margin-bottom: .35rem; }
+    th, td { border-bottom: 1px solid #b9c7c4; padding: .42rem .44rem; }
+    th { text-align: left; }
+    thead { background: #e5eae4; }
+    thead th:last-child, td { text-align: right; font-variant-numeric: tabular-nums; }
+    ul { margin: .6rem 0 1rem; padding-left: 1.1rem; }
+    li { margin: .32rem 0; }
+    .download { display: inline-block; padding: .5rem .72rem; border-radius: .2rem; background: #173d40; color: #fff; font-weight: 650; }
+    @media (max-width: 32rem) { .streams { grid-template-columns: minmax(0, 1fr); } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Parent page"><a href="../">Back to wheel forecast calibration</a></nav>
+    <header>
+      <h1>Can a wearable reading be matched to a foot load?</h1>
+      <p class="lead">A grid of electrodes on the right lower leg measures small voltage changes from active muscles. A separate platform in the walkway measures the force of a foot pressing down. To test a forecast, we need to know which wearable readings came before that load on the same walk.</p>
+      <p class="result">We could read both kinds of record from one person. The released files we checked leave the timing between them and the order of the walks unresolved. This source check stopped before fitting or testing a forecast.</p>
+    </header>
+
+    <section aria-labelledby="pair">
+      <h2 id="pair">Two measurements need a shared clock</h2>
+      <p>Dimitrov, Bull and Farina describe a wired signal that linked the wearable unit and the motion-capture system during recording. We looked for the information needed to recover that link from their open files for slow, preferred-speed and fast walking on level ground.</p>
+      <figure>
+        <dl class="streams">
+          <div><dt>On the lower leg</dt><dd>Muscle voltage and motion readings in one wearable table.</dd></div>
+          <div><dt>Under the walkway</dt><dd>Separate force tables show how much each platform was loaded over time.</dd></div>
+          <div><dt>The time match</dt><dd>We need the wearable row that lines up with the time in each force table.</dd></div>
+        </dl>
+        <figcaption>The records answer different questions. Pairing them requires a way to tell which rows belong to the same walk and the same moment.</figcaption>
+      </figure>
+      <p>The wearable table has broad activity labels. Its nominal rate is 2,000 samples a second. The table has no column for an explicit timestamp, trial ID or timing trigger.</p>
+      <p>Each force file came with a companion that identifies the file intended for analysis. Seven companions named the exact force file. Two pointed to a different file, so we set those force traces aside.</p>
+      <table>
+        <caption>Records checked for one person</caption>
+        <thead><tr><th scope="col">What we counted</th><th scope="col">Count</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Rows in the wearable table</th><td>227,847</td></tr>
+          <tr><th scope="row">Muscle signal channels</th><td>64</td></tr>
+          <tr><th scope="row">Motion sensor channels</th><td>6</td></tr>
+          <tr><th scope="row">Filtered force files</th><td>9</td></tr>
+          <tr><th scope="row">Force files with an exact companion match</th><td>7</td></tr>
+          <tr><th scope="row">Force files with a conflicting companion</th><td>2</td></tr>
+          <tr><th scope="row">Plate loading events in the matched files</th><td>14</td></tr>
+          <tr><th scope="row">Supported windows on the force clock</th><td>987</td></tr>
+          <tr><th scope="row">Force windows with a loading event</th><td>70</td></tr>
+        </tbody>
+      </table>
+      <p>We counted a new load when the force on a plate rose to at least 20 newtons and stayed at or above that level for at least 20 milliseconds. First it had to be at or below 10 newtons for at least 20 milliseconds. We used the force clock alone for these counts. Identifying which foot loaded the plate requires separate evidence.</p>
+      <p>9 of 18 saved segments of a step cycle matched wearable samples exactly. Those matches located pieces of a step in the wearable table. The match to a whole force recording and the order in which the walks were recorded remain unresolved.</p>
+    </section>
+
+    <section aria-labelledby="feedback">
+      <h2 id="feedback">Why feedback waits for the whole walk</h2>
+      <p>The authors smoothed the force traces using readings from both before and after each point. A later force reading can therefore change the smoothed value reported earlier in that walk. In a replay, the result of one walk can update a later forecast only after the whole walk has ended.</p>
+      <p>That rule keeps readings from later in a walk out of earlier forecasts. It still takes an independently verified time match and a record of when each walk was taken to test whether earlier walks help forecast a later one.</p>
+    </section>
+
+    <section aria-labelledby="sources">
+      <h2 id="sources">Data and methods</h2>
+      <ul>
+        <li><a href="https://doi.org/10.1038/s41597-023-02679-x">Dimitrov, Bull and Farina’s original study</a> and <a href="https://doi.org/10.6084/m9.figshare.22227337.v2">the versioned walking dataset (CC BY 4.0)</a></li>
+      </ul>
+      <p><a class="download" download="human-walking-source-check.json" href="results.json">Download the source-check figures (JSON)</a></p>
+    </section>
+  </main>
+</body>
+</html>
