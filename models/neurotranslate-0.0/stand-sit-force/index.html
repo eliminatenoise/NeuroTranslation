@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Standing and sitting force forecast · NeuroTranslation</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="weights.js"></script>
+  <script defer src="predict.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main>
+    <header class="intro">
+      <h1>Standing and sitting force forecast</h1>
+      <p>This experimental NeuroTranslation demo estimates vertical impulse over the next 100 ms from 200 ms of force on two floor plates. Impulse is force added up over time. Its unit is the newton-second (N·s).</p>
+    </header>
+
+    <div class="workspace">
+      <section class="panel history" aria-labelledby="history-title">
+        <div class="panel-heading">
+          <h2 id="history-title">Force history</h2>
+          <div class="example-control">
+            <label for="example">Invented example</label>
+            <select id="example">
+              <option value="steady">Steady load</option>
+              <option value="rising">Rising load</option>
+              <option value="falling">Falling load</option>
+              <option value="edited" hidden>Edited history</option>
+            </select>
+          </div>
+        </div>
+        <p>Choose an example or open <strong>Edit force readings</strong> to enter your own values.</p>
+        <figure>
+          <div class="plot-legend" aria-hidden="true">
+            <span class="plate-two">Plate 2</span>
+            <span class="plate-three">Plate 3</span>
+          </div>
+          <canvas id="history-chart" role="img" aria-label="Vertical force in newtons over the 200 milliseconds before the forecast" aria-describedby="chart-note"></canvas>
+          <figcaption id="chart-note">The chart places each 20 ms interval at its midpoint. Time zero is when the forecast begins. Each interval includes its start and excludes its end.</figcaption>
+        </figure>
+        <details class="force-editor">
+          <summary>Edit force readings</summary>
+          <table class="bins">
+            <caption>Force by 20 ms interval</caption>
+            <thead>
+              <tr>
+                <th id="bin-time" scope="col">Time before forecast (ms)</th>
+                <th id="bin-plate-two" scope="col">Plate 2 (N)</th>
+                <th id="bin-plate-three" scope="col">Plate 3 (N)</th>
+              </tr>
+            </thead>
+            <tbody id="force-bins"></tbody>
+          </table>
+        </details>
+        <noscript><p>Enable JavaScript to edit the force history and calculate a forecast.</p></noscript>
+      </section>
+
+      <div class="readouts">
+        <section class="panel forecast" aria-labelledby="forecast-title">
+          <h2 id="forecast-title">Impulse over the next 100 ms</h2>
+          <p>The combined value is the sum of the two plates. All forecasts are in N·s.</p>
+          <table class="forecast-values">
+            <thead>
+              <tr>
+                <th scope="col">Method</th>
+                <th scope="col">Plate 2</th>
+                <th scope="col">Plate 3</th>
+                <th scope="col">Combined</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="persistence"><th scope="row">Recent force</th><td>—</td><td>—</td><td>—</td></tr>
+              <tr id="dampedTrend"><th scope="row">Damped force trend</th><td>—</td><td>—</td><td>—</td></tr>
+              <tr id="attention"><th scope="row">Trend with attention correction</th><td>—</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+          <p class="correction-status" id="model-status" role="status" aria-atomic="true"></p>
+          <p class="note">The attention correction runs only when the average combined force in the last 40 ms is more than 50 N higher than in the first 40 ms.</p>
+        </section>
+
+        <section class="panel evaluation" aria-labelledby="evaluation-title">
+          <h2 id="evaluation-title">Results on reserved participants</h2>
+          <p>The check used 230 forecast windows from measured floor-plate recordings for two of the three reserved participants. In the first 30 seconds of the third recording, one plate had too few readings under load for calibration.</p>
+          <table class="score-values">
+            <caption>Mean absolute error for the two plates combined. Each participant counted equally.</caption>
+            <thead><tr><th scope="col">Method</th><th scope="col">Error (N·s)</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Recent force</th><td>2.86</td></tr>
+              <tr><th scope="row">Damped force trend</th><td>2.69</td></tr>
+              <tr><th scope="row">Trend with attention correction</th><td>2.36</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
