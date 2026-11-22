@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An experimental NeuroTranslation follow-up on whether keeping brain locations separate helps forecast wheel movement.">
+  <title>Did brain location help forecast the wheel? · NeuroTranslation</title>
+  <style>
+    :root { color-scheme: light; font: 100%/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; color: #203538; background: #f5f6f2; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(50rem, calc(100% - 2rem)); margin: 1.7rem auto 3rem; }
+    nav { margin-bottom: 1rem; }
+    a { color: #075d52; text-underline-offset: .2em; }
+    a:focus-visible { outline: 3px solid #a43b12; outline-offset: 3px; }
+    header { border-top: .35rem solid #1b4647; padding-top: 1rem; }
+    h1, h2 { color: #173d40; line-height: 1.12; letter-spacing: -.032em; }
+    h1 { margin: 0 0 .6rem; font-size: clamp(2.2rem, 6vw, 4rem); max-width: 21ch; }
+    h2 { margin: 0 0 .75rem; font-size: clamp(1.5rem, 4.5vw, 2rem); }
+    p { margin: 0 0 .8rem; max-width: 70ch; }
+    .lead { font-size: clamp(1.06rem, 2.2vw, 1.19rem); }
+    section { margin-top: 1.35rem; padding-top: 1.15rem; border-top: 1px solid #b9c7c4; }
+    .result { padding: .75rem .9rem; border-left: .27rem solid #1b6960; background: #e6eee8; }
+    table { width: 100%; border-collapse: collapse; font-size: clamp(.82rem, 2.5vw, 1rem); }
+    caption { text-align: left; font-weight: 650; margin-bottom: .35rem; }
+    th, td { border-bottom: 1px solid #b9c7c4; padding: .42rem .44rem; }
+    th { text-align: left; }
+    thead, .family { background: #e5eae4; }
+    thead th:not(:first-child), td { text-align: right; font-variant-numeric: tabular-nums; }
+    ul { margin: .6rem 0 1rem; padding-left: 1.1rem; }
+    li { margin: .32rem 0; }
+    .download { display: inline-block; padding: .5rem .72rem; border-radius: .2rem; background: #173d40; color: #fff; font-weight: 650; }
+    @media (max-width: 26rem) { th, td { padding-inline: .27rem; } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Parent page"><a href="../">Back to the wheel forecast</a></nav>
+    <header>
+      <h1>Did brain location help forecast the wheel?</h1>
+      <p class="lead">A mouse turns a wheel with its paws while a probe records brief electrical signals from the brain, called spikes. Add up the spikes and ten from the outer brain can look like ten from deeper inside it. We kept those counts separate to see whether their locations helped predict the next change in wheel angle.</p>
+      <p class="result">Across 715 test trials, both models made larger errors with separate counts from the same trial than with pooled counts that marked the same recording locations or with all the spike counts borrowed from another trial. For each model, zero of the three test mice did better with separate same-trial counts than with both comparisons.</p>
+    </header>
+
+    <section aria-labelledby="measure">
+      <h2 id="measure">How much did the wheel turn?</h2>
+      <p>Six mice supplied 1,402 trials for training. The separate validation group supplied 704 trials from three mice. The final test used 715 trials from three more. Each mouse had equal weight when fitting the models and when averaging error in its group. Two test mice had usable recordings from at least two of the six broad brain divisions.</p>
+      <p>We saved the validation and test forecasts before reading the later wheel angles used to score them.</p>
+      <table>
+        <caption>Average size of the angle error, in radians. Lower is better.</caption>
+        <thead><tr><th scope="col">What the model saw</th><th scope="col">Validation</th><th scope="col">Test</th></tr></thead>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Ridge</th></tr>
+          <tr data-method="ridge_wheel_cue"><th scope="row">Wheel and screen cue</th><td>0.057002</td><td>0.066870</td></tr>
+          <tr data-method="ridge_aligned_pool_coverage"><th scope="row">Pooled spikes and recorded regions</th><td>0.057227</td><td>0.070435</td></tr>
+          <tr data-method="ridge_aligned_regions"><th scope="row">Separate counts from the same trial</th><td>0.080396</td><td>0.073307</td></tr>
+          <tr data-method="ridge_donor_pool_and_regions"><th scope="row">All spike counts from another trial</th><td>0.078685</td><td>0.066348</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Attention</th></tr>
+          <tr data-method="attention_wheel_cue"><th scope="row">Wheel and screen cue</th><td>0.070159</td><td>0.084040</td></tr>
+          <tr data-method="attention_aligned_pool_coverage"><th scope="row">Pooled spikes and recorded regions</th><td>0.076366</td><td>0.090834</td></tr>
+          <tr data-method="attention_aligned_regions"><th scope="row">Separate counts from the same trial</th><td>0.093377</td><td>0.098200</td></tr>
+          <tr data-method="attention_donor_pool_and_regions"><th scope="row">All spike counts from another trial</th><td>0.093370</td><td>0.093309</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section aria-labelledby="comparison">
+      <h2 id="comparison">What changed between forecasts?</h2>
+      <p>Every fitted model saw recent wheel readings and the screen cue, which gives the side and visibility of the pattern. The pooled version added all spike counts together and marked where the probe had usable recordings. A region with a working recording and no spikes is different from a region the probe never sampled. The regional version kept those inputs and added separate counts for each recorded division. We could place 1,403 of the 1,459 qualified units into those divisions. The other 56 stayed in the pooled counts.</p>
+      <p>In the other-trial comparison, all spike counts came from one matched trial in the same recording. That kept the combined counts and their regional parts together. The forecast kept its own wheel history and screen cue. We also tried mixing the combined count from the forecast trial with separate counts from another trial. Those counts disagreed in 5,713 of 7,150 test time blocks, so that diagnostic stays outside the main comparison.</p>
+    </section>
+
+    <section aria-labelledby="clock">
+      <h2 id="clock">What time did the models know?</h2>
+      <p>The forecast started 250 milliseconds after the recorded sound cue and looked 100 milliseconds ahead. Wheel history ran up to the start. The spike history ran from 220 milliseconds before the start to 20 milliseconds before it. We scored the change between the last recorded wheel angle at or before each endpoint.</p>
+      <p>These gaps describe timestamps within archived recordings. The separate pulse check measured electronics timing in a different recording. This follow-up tests forecasts on stored trials from new mice in familiar labs. Live delivery time and what causes the wheel to turn are separate questions.</p>
+      <p><a href="../../probe-wheel-clock/">Read the separate probe and wheel clock check</a></p>
+    </section>
+
+    <section aria-labelledby="sources">
+      <h2 id="sources">Data and methods</h2>
+      <ul>
+        <li><a href="https://doi.org/10.1038/s41586-025-09235-0">International Brain Laboratory study</a> and <a href="https://registry.opendata.aws/ibl-brain-wide-map/">open Brain Wide Map data (CC BY 4.0)</a></li>
+        <li><a href="https://docs.internationalbrainlab.org/notebooks_external/atlas_mapping.html">IBL guide to locating brain recordings</a> and <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8152789/">the Allen mouse brain atlas</a></li>
+      </ul>
+      <p><a class="download" download="regional-wheel-results.json" href="results.json">Download all 18 forecast results per group (JSON)</a></p>
+    </section>
+  </main>
+</body>
+</html>
