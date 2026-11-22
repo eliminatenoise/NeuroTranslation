@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An experimental NeuroTranslation report on adjusting wheel-turn forecasts as completed trials become available.">
+  <title>Can a wheel forecast learn from its last guess? · NeuroTranslation</title>
+  <style>
+    :root { color-scheme: light; font: 100%/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; color: #203538; background: #f5f6f2; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(50rem, calc(100% - 2rem)); margin: 1.7rem auto 3rem; }
+    nav { margin-bottom: 1rem; }
+    a { color: #075d52; text-underline-offset: .2em; }
+    :is(a, summary):focus-visible { outline: 3px solid #a43b12; outline-offset: 3px; }
+    header { border-top: .35rem solid #1b4647; padding-top: 1rem; }
+    h1, h2, h3 { color: #173d40; line-height: 1.12; letter-spacing: -.03em; }
+    h1 { margin: 0 0 .6rem; font-size: clamp(2.1rem, 6vw, 4rem); max-width: 24ch; }
+    h2 { margin: 0 0 .75rem; font-size: clamp(1.5rem, 4.5vw, 2rem); }
+    h3 { margin: 1rem 0 .5rem; font-size: 1.22rem; }
+    p { margin: 0 0 .8rem; max-width: 70ch; }
+    .lead { font-size: clamp(1.04rem, 2.2vw, 1.19rem); }
+    section { margin-top: 1.35rem; padding-top: 1.15rem; border-top: 1px solid #b9c7c4; }
+    .result { padding: .75rem .9rem; border-left: .27rem solid #1b6960; background: #e6eee8; }
+    figure { max-width: 36rem; margin: 1rem 0; padding: .6rem .75rem .7rem; border: 1px solid #b9c7c4; }
+    figcaption { margin: .35rem 0 0; }
+    .timeline { width: 100%; display: block; }
+    .timeline text { font: 600 17px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #173d40; }
+    table { width: 100%; border-collapse: collapse; font-size: clamp(.83rem, 2.5vw, 1rem); margin-bottom: 1rem; }
+    caption { text-align: left; font-weight: 650; margin-bottom: .35rem; }
+    th, td { border-bottom: 1px solid #b9c7c4; padding: .42rem .44rem; }
+    th { text-align: left; }
+    thead, .family { background: #e5eae4; }
+    thead th:not(:first-child), td { text-align: right; font-variant-numeric: tabular-nums; }
+    details { padding: .65rem 0; border-bottom: 1px solid #b9c7c4; }
+    details p { margin-top: .55rem; }
+    summary { cursor: pointer; color: #075d52; font-weight: 660; }
+    ul { margin: .6rem 0 1rem; padding-left: 1.1rem; }
+    li { margin: .32rem 0; }
+    .download { display: inline-block; padding: .5rem .72rem; border-radius: .2rem; background: #173d40; color: #fff; font-weight: 650; }
+    @media (max-width: 26rem) { th, td { padding-inline: .27rem; } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Parent page"><a href="../">Back to the wheel forecast</a></nav>
+    <header>
+      <h1>Can a wheel forecast learn from its last guess?</h1>
+      <p class="lead">A mouse hears a beep and can turn a wheel. Fifty milliseconds later, we predict whether the wheel will turn at least 0.006 radians, about a third of a degree, in the next 100 milliseconds. As trials finish, can their results help the model give better chances for the next turn?</p>
+      <p class="result">Completed trials helped the model judge the next turn on quiet wheel histories. The lowest average error came from updating the linear model that used the wheel and cue.</p>
+    </header>
+
+    <section aria-labelledby="clock">
+      <h2 id="clock">A result has to arrive before it can help</h2>
+      <p>Imagine making a second forecast while the first is still waiting for its wheel reading. That reading belongs to the future. In this replay of archived recordings, a forecast could learn from an earlier trial only if that trial’s full 100-millisecond window had ended strictly before the new forecast. If the times were equal, the reading had to wait.</p>
+      <figure>
+        <svg class="timeline" viewBox="0 0 480 114" aria-hidden="true" focusable="false">
+          <path d="M24 58 H451" fill="none" stroke="#5c7473" stroke-width="2"/>
+          <path d="M24 58 H309" fill="none" stroke="#335e69" stroke-width="5"/>
+          <path d="M309 58 H424" fill="none" stroke="#176458" stroke-width="4" stroke-dasharray="5 4"/>
+          <circle cx="24" cy="58" r="6" fill="#335e69"/>
+          <circle cx="252" cy="58" r="6" fill="#925026"/>
+          <path d="M309 48 V68" fill="none" stroke="#173d40" stroke-width="3"/>
+          <circle cx="424" cy="58" r="6" fill="#176458"/>
+          <text x="24" y="36">0 ms</text>
+          <text x="252" y="36" text-anchor="end">80 ms</text>
+          <text x="309" y="87" text-anchor="middle">100 ms</text>
+          <text x="424" y="36" text-anchor="end">140 ms</text>
+          <text x="24" y="87">First forecast</text>
+          <text x="252" y="20" text-anchor="end">Too early</text>
+          <text x="309" y="106" text-anchor="middle">First window ends</text>
+          <text x="424" y="20" text-anchor="end">Can update</text>
+        </svg>
+        <figcaption>In this example, the forecast at 80 ms goes ahead without the first result. The forecast at 140 ms can use it.</figcaption>
+      </figure>
+      <p>We called a history quiet when all the wheel’s recorded angles in the preceding 200 milliseconds matched the starting angle. With no new reading, we carried forward the last angle. This describes the wheel at its sensor’s resolution. The mouse’s paws and body can still move.</p>
+    </section>
+
+    <section aria-labelledby="results">
+      <h2 id="results">Earlier results improved the wheel-and-cue forecast</h2>
+      <p>We tested six new mice across three labs that supplied no earlier forecast recordings. The main comparison used 396 quiet trials with a matching earlier spike record. The wheel crossed the mark in 104 of them.</p>
+      <p>We measured the squared error between the predicted chance and the observed outcome, where a crossing is 1 and no crossing is 0. The average is called the Brier score. We scored each mouse first and gave the six mice equal weight. A smaller score is better.</p>
+      <p>For the linear model using wheel and cue alone, that score fell from 0.200984 to 0.125558. The updated score was lower for all 6 mice. The simpler forecast based on the recent crossing rate scored 0.136152.</p>
+      <table>
+        <caption>Quiet trials with an earlier match. Brier score.</caption>
+        <thead><tr><th scope="col">Forecast</th><th scope="col">Fixed</th><th scope="col">Updated</th></tr></thead>
+        <tbody>
+          <tr data-method="event_rate"><th scope="row">Event rate only</th><td>0.209409</td><td>0.136152</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Linear</th></tr>
+          <tr data-method="linear_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.200984</td><td>0.125558</td></tr>
+          <tr data-method="linear_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.207698</td><td>0.135574</td></tr>
+          <tr data-method="linear_wheel_cue_and_other_trial_spikes"><th scope="row">With earlier-trial spikes</th><td>0.223389</td><td>0.155687</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Attention</th></tr>
+          <tr data-method="attention_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.211198</td><td>0.138713</td></tr>
+          <tr data-method="attention_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.214879</td><td>0.146256</td></tr>
+          <tr data-method="attention_wheel_cue_and_other_trial_spikes"><th scope="row">With earlier-trial spikes</th><td>0.215704</td><td>0.156469</td></tr>
+        </tbody>
+      </table>
+      <p>After updating, both models made larger errors with same-trial spikes than with wheel and cue alone on quiet trials. Both did better with same-trial spikes than with spikes borrowed from an earlier trial.</p>
+      <details>
+        <summary>See all matched trials</summary>
+        <p>Across quiet and other wheel histories, 517 of 1,188 matched trials crossed the mark.</p>
+        <table>
+        <caption>All matched trials. Brier score.</caption>
+        <thead><tr><th scope="col">Forecast</th><th scope="col">Fixed</th><th scope="col">Updated</th></tr></thead>
+        <tbody>
+          <tr data-method="event_rate"><th scope="row">Event rate only</th><td>0.234462</td><td>0.187181</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Linear</th></tr>
+          <tr data-method="linear_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.227166</td><td>0.177008</td></tr>
+          <tr data-method="linear_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.234111</td><td>0.184273</td></tr>
+          <tr data-method="linear_wheel_cue_and_other_trial_spikes"><th scope="row">With earlier-trial spikes</th><td>0.264643</td><td>0.194133</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Attention</th></tr>
+          <tr data-method="attention_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.195933</td><td>0.149096</td></tr>
+          <tr data-method="attention_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.203296</td><td>0.158695</td></tr>
+          <tr data-method="attention_wheel_cue_and_other_trial_spikes"><th scope="row">With earlier-trial spikes</th><td>0.197135</td><td>0.154810</td></tr>
+        </tbody>
+      </table>
+      </details>
+      <details>
+        <summary>See all scorable trials, including trials without an earlier match</summary>
+        <p>There were 1,438 scorable trials and 589 crossings in total. The 527 quiet trials included 132 crossings. All 527 quiet histories carried an earlier angle because the sensor logged no new reading in the history window.</p>
+        <p>Across all 527 quiet trials, the updated linear wheel-and-cue score was 0.129443, compared with 0.193434 for the fixed model and 0.139463 for the recent crossing rate.</p>
+        <table>
+        <caption>All scorable quiet trials. Brier score.</caption>
+        <thead><tr><th scope="col">Forecast</th><th scope="col">Fixed</th><th scope="col">Updated</th></tr></thead>
+        <tbody>
+          <tr data-method="event_rate"><th scope="row">Event rate only</th><td>0.201008</td><td>0.139463</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Linear</th></tr>
+          <tr data-method="linear_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.193434</td><td>0.129443</td></tr>
+          <tr data-method="linear_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.203085</td><td>0.141179</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Attention</th></tr>
+          <tr data-method="attention_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.204372</td><td>0.144032</td></tr>
+          <tr data-method="attention_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.213559</td><td>0.154940</td></tr>
+        </tbody>
+      </table>
+        <table>
+        <caption>All scorable trials. Brier score.</caption>
+        <thead><tr><th scope="col">Forecast</th><th scope="col">Fixed</th><th scope="col">Updated</th></tr></thead>
+        <tbody>
+          <tr data-method="event_rate"><th scope="row">Event rate only</th><td>0.229335</td><td>0.184353</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Linear</th></tr>
+          <tr data-method="linear_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.223929</td><td>0.176121</td></tr>
+          <tr data-method="linear_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.230639</td><td>0.183884</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Attention</th></tr>
+          <tr data-method="attention_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.196978</td><td>0.151926</td></tr>
+          <tr data-method="attention_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.204479</td><td>0.161617</td></tr>
+        </tbody>
+      </table>
+      </details>
+      <details>
+        <summary>See quiet trial counts for each mouse</summary>
+        <table>
+        <caption>Quiet matched trials per mouse</caption>
+        <thead><tr><th scope="col">Mouse and lab</th><th scope="col">Trials</th><th scope="col">Crossings</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Mouse 1 · Lab A</th><td>96</td><td>1</td></tr>
+          <tr><th scope="row">Mouse 2 · Lab A</th><td>47</td><td>1</td></tr>
+          <tr><th scope="row">Mouse 3 · Lab B</th><td>39</td><td>7</td></tr>
+          <tr><th scope="row">Mouse 4 · Lab B</th><td>72</td><td>12</td></tr>
+          <tr><th scope="row">Mouse 5 · Lab C</th><td>28</td><td>25</td></tr>
+          <tr><th scope="row">Mouse 6 · Lab C</th><td>114</td><td>58</td></tr>
+        </tbody>
+      </table>
+      </details>
+    </section>
+
+    <section aria-labelledby="warmup">
+      <h2 id="warmup">Most scored forecasts had time to learn</h2>
+      <p>The main score mostly reflects forecasts made after at least eight completed outcomes. Only 6 matched quiet trials had one to seven earlier outcomes, and none had zero. How well the adjustment works in the first few trials is still open.</p>
+      <table>
+        <caption>Quiet matched trials by earlier feedback</caption>
+        <thead><tr><th scope="col">Completed outcomes</th><th scope="col">Trials</th><th scope="col">Crossings</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">0</th><td>0</td><td>0</td></tr>
+          <tr><th scope="row">1 to 7</th><td>6</td><td>2</td></tr>
+          <tr><th scope="row">8 or more</th><td>390</td><td>102</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section aria-labelledby="methods">
+      <h2 id="methods">Keep the model. Update the chance.</h2>
+      <p>We kept the fitted models from the wheel onset study. The linear model weights inputs directly. The attention model can give different time blocks different weight. Both read recent wheel movement and the screen pattern, with optional bursts of brain activity called spikes.</p>
+      <p>One version used spikes from the trial being forecast. Another borrowed the whole spike history from the most recent eligible trial in the same session. It had to come earlier in the source rows and on the forecast clock, with the same screen-pattern side and visibility, quiet status and similar time since the last wheel reading. The wheel and screen inputs always came from the trial being predicted.</p>
+      <p>For each forecast, we used up to the latest 32 original predictions paired with completed outcomes from that same version of the model and kind of wheel history. One fitted number moved the model’s chances up or down on the log-odds scale, which keeps each chance between 0% and 100%. With no completed outcome, we used the original chance. All updates started afresh for each recording.</p>
+      <p>A simpler forecast used the recent fraction of completed trials with a crossing, without the model’s prediction. It started with the training frequency weighted as 20 trials and used up to the latest 32 completed outcomes of the same quiet status. The spike inputs ended 20 milliseconds before the forecast on the archived clocks. Live delivery time and the effect of brain activity on movement would need separate measurements.</p>
+    </section>
+
+    <section aria-labelledby="sources">
+      <h2 id="sources">Data and earlier work</h2>
+      <ul>
+        <li><a href="https://doi.org/10.1038/s41586-025-09235-0">International Brain Laboratory study</a> and <a href="https://registry.opendata.aws/ibl-brain-wide-map/">open Brain Wide Map data (CC BY 4.0)</a></li>
+        <li><a href="https://docs.internationalbrainlab.org/notebooks_external/docs_wheel_moves.html">How the wheel sensor recorded angle</a></li>
+        <li><a href="../onset/">Earlier wheel onset experiment</a></li>
+      </ul>
+      <p><a class="download" download="calibration-wheel-results.json" href="results.json">Download the forecast results (JSON)</a></p>
+    </section>
+  </main>
+</body>
+</html>

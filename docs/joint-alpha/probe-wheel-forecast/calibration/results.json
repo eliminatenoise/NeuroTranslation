@@ -1,0 +1,2610 @@
+{
+  "data": {
+    "publisher": "International Brain Laboratory",
+    "dataset": "Brain Wide Map",
+    "license": "CC BY 4.0",
+    "paper": "https://doi.org/10.1038/s41586-025-09235-0",
+    "release": "https://docs.internationalbrainlab.org/notebooks_external/2025_data_release_brainwidemap.html",
+    "wheel_recording": "https://docs.internationalbrainlab.org/notebooks_external/docs_wheel_moves.html"
+  },
+  "design": {
+    "issue_after_cue_ms": 50,
+    "target_horizon_ms": 100,
+    "historical_wheel_ms": 200,
+    "stored_neural_gap_ms": 20,
+    "threshold_rad": 0.006,
+    "maximum_completed_history": 32,
+    "recent_rate_starting_observations": 20,
+    "log_odds_offset_penalty": 4,
+    "primary": "quiet_matched",
+    "original_test_slots": 6,
+    "test_labs": 3,
+    "model_weights_refitted": false
+  },
+  "summary": {
+    "quiet_matched": {
+      "mice": 6,
+      "rows": 396,
+      "events": 104,
+      "equal_mouse_observed_rate": 0.29657936354114967,
+      "brier": {
+        "fixed_fitting_rate": 0.2094090727017405,
+        "recent_completed_rate": 0.13615178476846837,
+        "frozen_linear_wheel_and_cue": 0.20098410357924987,
+        "frozen_linear_wheel_cue_and_aligned_spikes": 0.20769818824688668,
+        "frozen_linear_wheel_cue_and_other_trial_spikes": 0.22338942490112224,
+        "frozen_attention_wheel_and_cue": 0.21119841337716497,
+        "frozen_attention_wheel_cue_and_aligned_spikes": 0.2148786437412261,
+        "frozen_attention_wheel_cue_and_other_trial_spikes": 0.21570364425055744,
+        "updated_linear_wheel_and_cue": 0.1255581632365291,
+        "updated_linear_wheel_cue_and_aligned_spikes": 0.13557381450618963,
+        "updated_linear_wheel_cue_and_other_trial_spikes": 0.1556865359683021,
+        "updated_attention_wheel_and_cue": 0.13871304475768806,
+        "updated_attention_wheel_cue_and_aligned_spikes": 0.14625596890483905,
+        "updated_attention_wheel_cue_and_other_trial_spikes": 0.15646938566836288
+      },
+      "mean_predicted": {
+        "fixed_fitting_rate": 0.26848972062664783,
+        "recent_completed_rate": 0.272012115252885,
+        "frozen_linear_wheel_and_cue": 0.24773973006933883,
+        "frozen_linear_wheel_cue_and_aligned_spikes": 0.2667952012551628,
+        "frozen_linear_wheel_cue_and_other_trial_spikes": 0.19476009675858874,
+        "frozen_attention_wheel_and_cue": 0.25410261211361296,
+        "frozen_attention_wheel_cue_and_aligned_spikes": 0.2583847195757641,
+        "frozen_attention_wheel_cue_and_other_trial_spikes": 0.25143784659231083,
+        "updated_linear_wheel_and_cue": 0.2745492214754661,
+        "updated_linear_wheel_cue_and_aligned_spikes": 0.28242202267795885,
+        "updated_linear_wheel_cue_and_other_trial_spikes": 0.23294169458097536,
+        "updated_attention_wheel_and_cue": 0.2779067551115246,
+        "updated_attention_wheel_cue_and_aligned_spikes": 0.2774677419704766,
+        "updated_attention_wheel_cue_and_other_trial_spikes": 0.2691854714159084
+      },
+      "signed_error_rad": {
+        "zero_change": 0.011294648669134795,
+        "repeat_recent_change": 0.011294648669134795,
+        "linear_wheel_and_cue": 0.013740477000078495,
+        "linear_wheel_cue_and_aligned_spikes": 0.01717531349224147,
+        "linear_wheel_cue_and_other_trial_spikes": 0.01799454727269674,
+        "attention_wheel_and_cue": 0.014562307734663145,
+        "attention_wheel_cue_and_aligned_spikes": 0.01599009183516006,
+        "attention_wheel_cue_and_other_trial_spikes": 0.01936413489957782
+      },
+      "contrasts": {
+        "linear_wheel_and_cue": {
+          "updated_minus_frozen_brier": -0.07542594034272077,
+          "updated_minus_recent_rate_brier": -0.010593621531939268,
+          "mice_improved": 6
+        },
+        "linear_wheel_cue_and_aligned_spikes": {
+          "updated_minus_frozen_brier": -0.07212437374069705,
+          "updated_minus_recent_rate_brier": -0.0005779702622787375,
+          "mice_improved": 6
+        },
+        "linear_wheel_cue_and_other_trial_spikes": {
+          "updated_minus_frozen_brier": -0.06770288893282014,
+          "updated_minus_recent_rate_brier": 0.019534751199833722,
+          "mice_improved": 5
+        },
+        "attention_wheel_and_cue": {
+          "updated_minus_frozen_brier": -0.07248536861947691,
+          "updated_minus_recent_rate_brier": 0.0025612599892196886,
+          "mice_improved": 6
+        },
+        "attention_wheel_cue_and_aligned_spikes": {
+          "updated_minus_frozen_brier": -0.06862267483638704,
+          "updated_minus_recent_rate_brier": 0.01010418413637068,
+          "mice_improved": 6
+        },
+        "attention_wheel_cue_and_other_trial_spikes": {
+          "updated_minus_frozen_brier": -0.059234258582194554,
+          "updated_minus_recent_rate_brier": 0.02031760089989451,
+          "mice_improved": 5
+        }
+      }
+    },
+    "all_matched": {
+      "mice": 6,
+      "rows": 1188,
+      "events": 517,
+      "equal_mouse_observed_rate": 0.43308044054065714,
+      "brier": {
+        "fixed_fitting_rate": 0.23446191187750973,
+        "recent_completed_rate": 0.1871811370565677,
+        "frozen_linear_wheel_and_cue": 0.22716645901728982,
+        "frozen_linear_wheel_cue_and_aligned_spikes": 0.2341114171087403,
+        "frozen_linear_wheel_cue_and_other_trial_spikes": 0.2646432163304264,
+        "frozen_attention_wheel_and_cue": 0.1959334844687275,
+        "frozen_attention_wheel_cue_and_aligned_spikes": 0.20329565805003647,
+        "frozen_attention_wheel_cue_and_other_trial_spikes": 0.19713456931174575,
+        "updated_linear_wheel_and_cue": 0.17700837676866635,
+        "updated_linear_wheel_cue_and_aligned_spikes": 0.1842726524379086,
+        "updated_linear_wheel_cue_and_other_trial_spikes": 0.19413300510965645,
+        "updated_attention_wheel_and_cue": 0.14909609230425233,
+        "updated_attention_wheel_cue_and_aligned_spikes": 0.1586951201522676,
+        "updated_attention_wheel_cue_and_other_trial_spikes": 0.15480986607534328
+      },
+      "mean_predicted": {
+        "fixed_fitting_rate": 0.3855424618855829,
+        "recent_completed_rate": 0.4067217300794235,
+        "frozen_linear_wheel_and_cue": 0.38215693566148906,
+        "frozen_linear_wheel_cue_and_aligned_spikes": 0.3939400641883725,
+        "frozen_linear_wheel_cue_and_other_trial_spikes": 0.31679107909753784,
+        "frozen_attention_wheel_and_cue": 0.47347920697654705,
+        "frozen_attention_wheel_cue_and_aligned_spikes": 0.43053664308749195,
+        "frozen_attention_wheel_cue_and_other_trial_spikes": 0.43375124162942275,
+        "updated_linear_wheel_and_cue": 0.41155280704369274,
+        "updated_linear_wheel_cue_and_aligned_spikes": 0.4149583575242661,
+        "updated_linear_wheel_cue_and_other_trial_spikes": 0.3867031108510787,
+        "updated_attention_wheel_and_cue": 0.44971871305879524,
+        "updated_attention_wheel_cue_and_aligned_spikes": 0.43062966640992223,
+        "updated_attention_wheel_cue_and_other_trial_spikes": 0.43644177884113505
+      },
+      "signed_error_rad": {
+        "zero_change": 0.03345901377190966,
+        "repeat_recent_change": 0.028076784415409912,
+        "linear_wheel_and_cue": 0.026353818556368914,
+        "linear_wheel_cue_and_aligned_spikes": 0.028719620326983764,
+        "linear_wheel_cue_and_other_trial_spikes": 0.029130134849106242,
+        "attention_wheel_and_cue": 0.03504775972894286,
+        "attention_wheel_cue_and_aligned_spikes": 0.035638478017350816,
+        "attention_wheel_cue_and_other_trial_spikes": 0.03737817333235539
+      },
+      "contrasts": {
+        "linear_wheel_and_cue": {
+          "updated_minus_frozen_brier": -0.050158082248623476,
+          "updated_minus_recent_rate_brier": -0.010172760287901345,
+          "mice_improved": 4
+        },
+        "linear_wheel_cue_and_aligned_spikes": {
+          "updated_minus_frozen_brier": -0.0498387646708317,
+          "updated_minus_recent_rate_brier": -0.002908484618659085,
+          "mice_improved": 5
+        },
+        "linear_wheel_cue_and_other_trial_spikes": {
+          "updated_minus_frozen_brier": -0.07051021122076997,
+          "updated_minus_recent_rate_brier": 0.0069518680530887556,
+          "mice_improved": 4
+        },
+        "attention_wheel_and_cue": {
+          "updated_minus_frozen_brier": -0.04683739216447516,
+          "updated_minus_recent_rate_brier": -0.03808504475231536,
+          "mice_improved": 6
+        },
+        "attention_wheel_cue_and_aligned_spikes": {
+          "updated_minus_frozen_brier": -0.044600537897768855,
+          "updated_minus_recent_rate_brier": -0.028486016904300082,
+          "mice_improved": 5
+        },
+        "attention_wheel_cue_and_other_trial_spikes": {
+          "updated_minus_frozen_brier": -0.04232470323640247,
+          "updated_minus_recent_rate_brier": -0.032371270981224415,
+          "mice_improved": 5
+        }
+      }
+    },
+    "quiet_issuable": {
+      "mice": 6,
+      "rows": 527,
+      "events": 132,
+      "equal_mouse_observed_rate": 0.278435757615628,
+      "brier": {
+        "fixed_fitting_rate": 0.2010082101484254,
+        "recent_completed_rate": 0.13946257850405427,
+        "frozen_linear_wheel_and_cue": 0.19343386431567758,
+        "frozen_linear_wheel_cue_and_aligned_spikes": 0.2030854319279383,
+        "frozen_attention_wheel_and_cue": 0.20437171173469393,
+        "frozen_attention_wheel_cue_and_aligned_spikes": 0.21355914257570766,
+        "updated_linear_wheel_and_cue": 0.12944297818834188,
+        "updated_linear_wheel_cue_and_aligned_spikes": 0.14117874478459239,
+        "updated_attention_wheel_and_cue": 0.14403193880580903,
+        "updated_attention_wheel_cue_and_aligned_spikes": 0.15493997292905998
+      },
+      "mean_predicted": {
+        "fixed_fitting_rate": 0.2684897206266479,
+        "recent_completed_rate": 0.26493193341488025,
+        "frozen_linear_wheel_and_cue": 0.24602977829302788,
+        "frozen_linear_wheel_cue_and_aligned_spikes": 0.2649015683534595,
+        "frozen_attention_wheel_and_cue": 0.25328262727638334,
+        "frozen_attention_wheel_cue_and_aligned_spikes": 0.259371736919129,
+        "updated_linear_wheel_and_cue": 0.2644161539512791,
+        "updated_linear_wheel_cue_and_aligned_spikes": 0.2735805756272533,
+        "updated_attention_wheel_and_cue": 0.2679983143573024,
+        "updated_attention_wheel_cue_and_aligned_spikes": 0.27029772275075586
+      },
+      "signed_error_rad": {
+        "zero_change": 0.010699825437473087,
+        "repeat_recent_change": 0.010699825437473087,
+        "linear_wheel_and_cue": 0.013218213873145694,
+        "linear_wheel_cue_and_aligned_spikes": 0.016828228702286854,
+        "attention_wheel_and_cue": 0.014074933522624298,
+        "attention_wheel_cue_and_aligned_spikes": 0.01565855852088188
+      },
+      "contrasts": {
+        "linear_wheel_and_cue": {
+          "updated_minus_frozen_brier": -0.0639908861273357,
+          "updated_minus_recent_rate_brier": -0.01001960031571239,
+          "mice_improved": 6
+        },
+        "linear_wheel_cue_and_aligned_spikes": {
+          "updated_minus_frozen_brier": -0.061906687143345906,
+          "updated_minus_recent_rate_brier": 0.0017161662805381117,
+          "mice_improved": 6
+        },
+        "attention_wheel_and_cue": {
+          "updated_minus_frozen_brier": -0.0603397729288849,
+          "updated_minus_recent_rate_brier": 0.004569360301754755,
+          "mice_improved": 6
+        },
+        "attention_wheel_cue_and_aligned_spikes": {
+          "updated_minus_frozen_brier": -0.05861916964664768,
+          "updated_minus_recent_rate_brier": 0.015477394425005703,
+          "mice_improved": 6
+        }
+      }
+    },
+    "all_issuable": {
+      "mice": 6,
+      "rows": 1438,
+      "events": 589,
+      "equal_mouse_observed_rate": 0.40953335657833567,
+      "brier": {
+        "fixed_fitting_rate": 0.22933527542302756,
+        "recent_completed_rate": 0.18435303074253204,
+        "frozen_linear_wheel_and_cue": 0.2239289876956375,
+        "frozen_linear_wheel_cue_and_aligned_spikes": 0.23063852043925026,
+        "frozen_attention_wheel_and_cue": 0.1969782947060936,
+        "frozen_attention_wheel_cue_and_aligned_spikes": 0.20447870824632622,
+        "updated_linear_wheel_and_cue": 0.17612050901144616,
+        "updated_linear_wheel_cue_and_aligned_spikes": 0.1838839629536907,
+        "updated_attention_wheel_and_cue": 0.1519262343717146,
+        "updated_attention_wheel_cue_and_aligned_spikes": 0.16161712566228734
+      },
+      "mean_predicted": {
+        "fixed_fitting_rate": 0.38013355544808075,
+        "recent_completed_rate": 0.39531061039334364,
+        "frozen_linear_wheel_and_cue": 0.37449525599623906,
+        "frozen_linear_wheel_cue_and_aligned_spikes": 0.3874970468649508,
+        "frozen_attention_wheel_and_cue": 0.45650584443351994,
+        "frozen_attention_wheel_cue_and_aligned_spikes": 0.41818471532460116,
+        "updated_linear_wheel_and_cue": 0.3977153579216312,
+        "updated_linear_wheel_cue_and_aligned_spikes": 0.402620378405754,
+        "updated_attention_wheel_and_cue": 0.4320739010246179,
+        "updated_attention_wheel_cue_and_aligned_spikes": 0.4147822757088311
+      },
+      "signed_error_rad": {
+        "zero_change": 0.02992808284102606,
+        "repeat_recent_change": 0.025582918235359978,
+        "linear_wheel_and_cue": 0.024501591649805213,
+        "linear_wheel_cue_and_aligned_spikes": 0.02690995561875452,
+        "attention_wheel_and_cue": 0.03212187261769512,
+        "attention_wheel_cue_and_aligned_spikes": 0.03284551617564708
+      },
+      "contrasts": {
+        "linear_wheel_and_cue": {
+          "updated_minus_frozen_brier": -0.04780847868419133,
+          "updated_minus_recent_rate_brier": -0.008232521731085879,
+          "mice_improved": 5
+        },
+        "linear_wheel_cue_and_aligned_spikes": {
+          "updated_minus_frozen_brier": -0.04675455748555957,
+          "updated_minus_recent_rate_brier": -0.00046906778884134304,
+          "mice_improved": 5
+        },
+        "attention_wheel_and_cue": {
+          "updated_minus_frozen_brier": -0.045052060334379,
+          "updated_minus_recent_rate_brier": -0.03242679637081744,
+          "mice_improved": 6
+        },
+        "attention_wheel_cue_and_aligned_spikes": {
+          "updated_minus_frozen_brier": -0.04286158258403888,
+          "updated_minus_recent_rate_brier": -0.0227359050802447,
+          "mice_improved": 6
+        }
+      }
+    },
+    "quiet_matched_no_feedback": {
+      "mice": 0,
+      "rows": 0,
+      "events": 0,
+      "equal_mouse_observed_rate": null,
+      "brier": null,
+      "mean_predicted": null,
+      "signed_error_rad": null,
+      "contrasts": {}
+    },
+    "quiet_matched_1_to_7_feedback": {
+      "mice": 5,
+      "rows": 6,
+      "events": 2,
+      "equal_mouse_observed_rate": 0.4,
+      "brier": {
+        "fixed_fitting_rate": 0.2572949535808572,
+        "recent_completed_rate": 0.22454196593536965,
+        "frozen_linear_wheel_and_cue": 0.17700702164371465,
+        "frozen_linear_wheel_cue_and_aligned_spikes": 0.11794689233312765,
+        "frozen_linear_wheel_cue_and_other_trial_spikes": 0.23718416441883913,
+        "frozen_attention_wheel_and_cue": 0.159679200430418,
+        "frozen_attention_wheel_cue_and_aligned_spikes": 0.09668427153275407,
+        "frozen_attention_wheel_cue_and_other_trial_spikes": 0.17414194832118918,
+        "updated_linear_wheel_and_cue": 0.1518976117300093,
+        "updated_linear_wheel_cue_and_aligned_spikes": 0.10002360121441148,
+        "updated_linear_wheel_cue_and_other_trial_spikes": 0.23708829374138798,
+        "updated_attention_wheel_and_cue": 0.12962112625279215,
+        "updated_attention_wheel_cue_and_aligned_spikes": 0.0757257786018495,
+        "updated_attention_wheel_cue_and_other_trial_spikes": 0.17356429085791406
+      },
+      "mean_predicted": {
+        "fixed_fitting_rate": 0.2684897206266479,
+        "recent_completed_rate": 0.2692308225204167,
+        "frozen_linear_wheel_and_cue": 0.26895165042419455,
+        "frozen_linear_wheel_cue_and_aligned_spikes": 0.32027688422362216,
+        "frozen_linear_wheel_cue_and_other_trial_spikes": 0.21003503569848894,
+        "frozen_attention_wheel_and_cue": 0.2879234296119577,
+        "frozen_attention_wheel_cue_and_aligned_spikes": 0.32050947864426615,
+        "frozen_attention_wheel_cue_and_other_trial_spikes": 0.25407779810858583,
+        "updated_linear_wheel_and_cue": 0.28025959281725515,
+        "updated_linear_wheel_cue_and_aligned_spikes": 0.32901894443307994,
+        "updated_linear_wheel_cue_and_other_trial_spikes": 0.2092843316585336,
+        "updated_attention_wheel_and_cue": 0.29887888136636775,
+        "updated_attention_wheel_cue_and_aligned_spikes": 0.3328809731177475,
+        "updated_attention_wheel_cue_and_other_trial_spikes": 0.2526500017196122
+      },
+      "signed_error_rad": {
+        "zero_change": 0.013192234775816814,
+        "repeat_recent_change": 0.013192234775816814,
+        "linear_wheel_and_cue": 0.014112670268569855,
+        "linear_wheel_cue_and_aligned_spikes": 0.01749017788445728,
+        "linear_wheel_cue_and_other_trial_spikes": 0.021437236312197242,
+        "attention_wheel_and_cue": 0.012231421500392742,
+        "attention_wheel_cue_and_aligned_spikes": 0.014604958816454777,
+        "attention_wheel_cue_and_other_trial_spikes": 0.019963815790450073
+      },
+      "contrasts": {
+        "linear_wheel_and_cue": {
+          "updated_minus_frozen_brier": -0.02510940991370536,
+          "updated_minus_recent_rate_brier": -0.07264435420536036,
+          "mice_improved": 4
+        },
+        "linear_wheel_cue_and_aligned_spikes": {
+          "updated_minus_frozen_brier": -0.01792329111871617,
+          "updated_minus_recent_rate_brier": -0.12451836472095817,
+          "mice_improved": 4
+        },
+        "linear_wheel_cue_and_other_trial_spikes": {
+          "updated_minus_frozen_brier": -9.587067745114863e-05,
+          "updated_minus_recent_rate_brier": 0.012546327806018331,
+          "mice_improved": 1
+        },
+        "attention_wheel_and_cue": {
+          "updated_minus_frozen_brier": -0.03005807417762585,
+          "updated_minus_recent_rate_brier": -0.0949208396825775,
+          "mice_improved": 4
+        },
+        "attention_wheel_cue_and_aligned_spikes": {
+          "updated_minus_frozen_brier": -0.02095849293090457,
+          "updated_minus_recent_rate_brier": -0.14881618733352014,
+          "mice_improved": 4
+        },
+        "attention_wheel_cue_and_other_trial_spikes": {
+          "updated_minus_frozen_brier": -0.0005776574632751219,
+          "updated_minus_recent_rate_brier": -0.0509776750774556,
+          "mice_improved": 1
+        }
+      }
+    },
+    "quiet_matched_at_least_8_feedback": {
+      "mice": 6,
+      "rows": 390,
+      "events": 102,
+      "equal_mouse_observed_rate": 0.29430177503277144,
+      "brier": {
+        "fixed_fitting_rate": 0.2083545023979961,
+        "recent_completed_rate": 0.1339496850997559,
+        "frozen_linear_wheel_and_cue": 0.20159322850651265,
+        "frozen_linear_wheel_cue_and_aligned_spikes": 0.2100543129994049,
+        "frozen_linear_wheel_cue_and_other_trial_spikes": 0.22318753933577548,
+        "frozen_attention_wheel_and_cue": 0.21240595513805463,
+        "frozen_attention_wheel_cue_and_aligned_spikes": 0.21785701847057357,
+        "frozen_attention_wheel_cue_and_other_trial_spikes": 0.21693043129818565,
+        "updated_linear_wheel_and_cue": 0.12481299121215735,
+        "updated_linear_wheel_cue_and_aligned_spikes": 0.13647676311088355,
+        "updated_linear_wheel_cue_and_other_trial_spikes": 0.15349946829073777,
+        "updated_attention_wheel_and_cue": 0.1387374915712035,
+        "updated_attention_wheel_cue_and_aligned_spikes": 0.14787618164962768,
+        "updated_attention_wheel_cue_and_other_trial_spikes": 0.15600686146464934
+      },
+      "mean_predicted": {
+        "fixed_fitting_rate": 0.26848972062664783,
+        "recent_completed_rate": 0.2730654841710146,
+        "frozen_linear_wheel_and_cue": 0.24709085879717596,
+        "frozen_linear_wheel_cue_and_aligned_spikes": 0.2652733015962764,
+        "frozen_linear_wheel_cue_and_other_trial_spikes": 0.19387628737025456,
+        "frozen_attention_wheel_and_cue": 0.25299813634321505,
+        "frozen_attention_wheel_cue_and_aligned_spikes": 0.25640557559106103,
+        "frozen_attention_wheel_cue_and_other_trial_spikes": 0.25065830534524447,
+        "updated_linear_wheel_and_cue": 0.2750578115095185,
+        "updated_linear_wheel_cue_and_aligned_spikes": 0.2818253622081162,
+        "updated_linear_wheel_cue_and_other_trial_spikes": 0.23389338918599104,
+        "updated_attention_wheel_and_cue": 0.2779777227126579,
+        "updated_attention_wheel_cue_and_aligned_spikes": 0.27642642710310333,
+        "updated_attention_wheel_cue_and_other_trial_spikes": 0.2698178081752881
+      },
+      "signed_error_rad": {
+        "zero_change": 0.011215757559296734,
+        "repeat_recent_change": 0.011215757559296734,
+        "linear_wheel_and_cue": 0.013700038067377693,
+        "linear_wheel_cue_and_aligned_spikes": 0.017111958129728155,
+        "linear_wheel_cue_and_other_trial_spikes": 0.01788214487323424,
+        "attention_wheel_and_cue": 0.014595047656785215,
+        "attention_wheel_cue_and_aligned_spikes": 0.01597965295030519,
+        "attention_wheel_cue_and_other_trial_spikes": 0.01932215280433582
+      },
+      "contrasts": {
+        "linear_wheel_and_cue": {
+          "updated_minus_frozen_brier": -0.0767802372943553,
+          "updated_minus_recent_rate_brier": -0.009136693887598565,
+          "mice_improved": 6
+        },
+        "linear_wheel_cue_and_aligned_spikes": {
+          "updated_minus_frozen_brier": -0.07357754988852136,
+          "updated_minus_recent_rate_brier": 0.0025270780111276425,
+          "mice_improved": 6
+        },
+        "linear_wheel_cue_and_other_trial_spikes": {
+          "updated_minus_frozen_brier": -0.06968807104503771,
+          "updated_minus_recent_rate_brier": 0.019549783190981856,
+          "mice_improved": 5
+        },
+        "attention_wheel_and_cue": {
+          "updated_minus_frozen_brier": -0.07366846356685114,
+          "updated_minus_recent_rate_brier": 0.004787806471447581,
+          "mice_improved": 6
+        },
+        "attention_wheel_cue_and_aligned_spikes": {
+          "updated_minus_frozen_brier": -0.06998083682094589,
+          "updated_minus_recent_rate_brier": 0.01392649654987177,
+          "mice_improved": 6
+        },
+        "attention_wheel_cue_and_other_trial_spikes": {
+          "updated_minus_frozen_brier": -0.060923569833536306,
+          "updated_minus_recent_rate_brier": 0.022057176364893433,
+          "mice_improved": 5
+        }
+      }
+    }
+  },
+  "labs": [
+    {
+      "label": "Lab A",
+      "quiet_matched": {
+        "mice": 2,
+        "rows": 143,
+        "events": 2,
+        "equal_mouse_observed_rate": 0.01584663120567376,
+        "brier": {
+          "fixed_fitting_rate": 0.07942404611727945,
+          "recent_completed_rate": 0.026973985027885828,
+          "frozen_linear_wheel_and_cue": 0.07023266584896207,
+          "frozen_linear_wheel_cue_and_aligned_spikes": 0.08159091052600098,
+          "frozen_linear_wheel_cue_and_other_trial_spikes": 0.06826529293797713,
+          "frozen_attention_wheel_and_cue": 0.08260658937384649,
+          "frozen_attention_wheel_cue_and_aligned_spikes": 0.08542715517446403,
+          "frozen_attention_wheel_cue_and_other_trial_spikes": 0.08379557890324153,
+          "updated_linear_wheel_and_cue": 0.031073901057057804,
+          "updated_linear_wheel_cue_and_aligned_spikes": 0.0369254281687141,
+          "updated_linear_wheel_cue_and_other_trial_spikes": 0.03495963070813836,
+          "updated_attention_wheel_and_cue": 0.0331876161050244,
+          "updated_attention_wheel_cue_and_aligned_spikes": 0.035033136219671544,
+          "updated_attention_wheel_cue_and_other_trial_spikes": 0.03954953637844496
+        },
+        "mean_predicted": {
+          "fixed_fitting_rate": 0.26848972062664783,
+          "recent_completed_rate": 0.12303538574389623,
+          "frozen_linear_wheel_and_cue": 0.2330445339674037,
+          "frozen_linear_wheel_cue_and_aligned_spikes": 0.23859783739998702,
+          "frozen_linear_wheel_cue_and_other_trial_spikes": 0.21264698621557665,
+          "frozen_attention_wheel_and_cue": 0.2573732969184195,
+          "frozen_attention_wheel_cue_and_aligned_spikes": 0.24914690972384335,
+          "frozen_attention_wheel_cue_and_other_trial_spikes": 0.25817804690643864,
+          "updated_linear_wheel_and_cue": 0.1280854916905231,
+          "updated_linear_wheel_cue_and_aligned_spikes": 0.1307117358542261,
+          "updated_linear_wheel_cue_and_other_trial_spikes": 0.1321681770291872,
+          "updated_attention_wheel_and_cue": 0.13600440434465083,
+          "updated_attention_wheel_cue_and_aligned_spikes": 0.13142409949703912,
+          "updated_attention_wheel_cue_and_other_trial_spikes": 0.15497090120904622
+        },
+        "signed_error_rad": {
+          "zero_change": 0.0006496979799753447,
+          "repeat_recent_change": 0.0006496979799753447,
+          "linear_wheel_and_cue": 0.004680195584028312,
+          "linear_wheel_cue_and_aligned_spikes": 0.007336893074709893,
+          "linear_wheel_cue_and_other_trial_spikes": 0.00848053187953405,
+          "attention_wheel_and_cue": 0.005976681751968771,
+          "attention_wheel_cue_and_aligned_spikes": 0.006723734294141105,
+          "attention_wheel_cue_and_other_trial_spikes": 0.009909124747938342
+        },
+        "contrasts": {
+          "linear_wheel_and_cue": {
+            "updated_minus_frozen_brier": -0.03915876479190426,
+            "updated_minus_recent_rate_brier": 0.004099916029171976,
+            "mice_improved": 2
+          },
+          "linear_wheel_cue_and_aligned_spikes": {
+            "updated_minus_frozen_brier": -0.04466548235728688,
+            "updated_minus_recent_rate_brier": 0.009951443140828273,
+            "mice_improved": 2
+          },
+          "linear_wheel_cue_and_other_trial_spikes": {
+            "updated_minus_frozen_brier": -0.03330566222983877,
+            "updated_minus_recent_rate_brier": 0.007985645680252531,
+            "mice_improved": 2
+          },
+          "attention_wheel_and_cue": {
+            "updated_minus_frozen_brier": -0.04941897326882209,
+            "updated_minus_recent_rate_brier": 0.006213631077138574,
+            "mice_improved": 2
+          },
+          "attention_wheel_cue_and_aligned_spikes": {
+            "updated_minus_frozen_brier": -0.05039401895479249,
+            "updated_minus_recent_rate_brier": 0.008059151191785716,
+            "mice_improved": 2
+          },
+          "attention_wheel_cue_and_other_trial_spikes": {
+            "updated_minus_frozen_brier": -0.044246042524796574,
+            "updated_minus_recent_rate_brier": 0.012575551350559131,
+            "mice_improved": 2
+          }
+        }
+      },
+      "all_matched": {
+        "mice": 2,
+        "rows": 391,
+        "events": 66,
+        "equal_mouse_observed_rate": 0.1683676139634689,
+        "brier": {
+          "fixed_fitting_rate": 0.17201094288047375,
+          "recent_completed_rate": 0.1369535388334608,
+          "frozen_linear_wheel_and_cue": 0.17682334102585895,
+          "frozen_linear_wheel_cue_and_aligned_spikes": 0.18730838552834217,
+          "frozen_linear_wheel_cue_and_other_trial_spikes": 0.18273262844557897,
+          "frozen_attention_wheel_and_cue": 0.1721545795382139,
+          "frozen_attention_wheel_cue_and_aligned_spikes": 0.1605722437322053,
+          "frozen_attention_wheel_cue_and_other_trial_spikes": 0.16078289766783266,
+          "updated_linear_wheel_and_cue": 0.1442023044571003,
+          "updated_linear_wheel_cue_and_aligned_spikes": 0.15091162700399505,
+          "updated_linear_wheel_cue_and_other_trial_spikes": 0.15314327197974076,
+          "updated_attention_wheel_and_cue": 0.10204565616281747,
+          "updated_attention_wheel_cue_and_aligned_spikes": 0.11002915868184651,
+          "updated_attention_wheel_cue_and_other_trial_spikes": 0.11168934419482465
+        },
+        "mean_predicted": {
+          "fixed_fitting_rate": 0.3799592387088242,
+          "recent_completed_rate": 0.25256308759796897,
+          "frozen_linear_wheel_and_cue": 0.3663572003265173,
+          "frozen_linear_wheel_cue_and_aligned_spikes": 0.3714543991413317,
+          "frozen_linear_wheel_cue_and_other_trial_spikes": 0.3386171454793345,
+          "frozen_attention_wheel_and_cue": 0.4449665984011245,
+          "frozen_attention_wheel_cue_and_aligned_spikes": 0.4010345828947806,
+          "frozen_attention_wheel_cue_and_other_trial_spikes": 0.411745735869661,
+          "updated_linear_wheel_and_cue": 0.2534281377189469,
+          "updated_linear_wheel_cue_and_aligned_spikes": 0.25774069251497866,
+          "updated_linear_wheel_cue_and_other_trial_spikes": 0.25536114003769017,
+          "updated_attention_wheel_and_cue": 0.28814077893673384,
+          "updated_attention_wheel_cue_and_aligned_spikes": 0.271619598781515,
+          "updated_attention_wheel_cue_and_other_trial_spikes": 0.28682465279286246
+        },
+        "signed_error_rad": {
+          "zero_change": 0.02289757555066133,
+          "repeat_recent_change": 0.016031893574254337,
+          "linear_wheel_and_cue": 0.016880174089450122,
+          "linear_wheel_cue_and_aligned_spikes": 0.018532087569946842,
+          "linear_wheel_cue_and_other_trial_spikes": 0.01869082475530842,
+          "attention_wheel_and_cue": 0.028764774052763918,
+          "attention_wheel_cue_and_aligned_spikes": 0.028040537727111493,
+          "attention_wheel_cue_and_other_trial_spikes": 0.029841132260604294
+        },
+        "contrasts": {
+          "linear_wheel_and_cue": {
+            "updated_minus_frozen_brier": -0.03262103656875864,
+            "updated_minus_recent_rate_brier": 0.007248765623639519,
+            "mice_improved": 2
+          },
+          "linear_wheel_cue_and_aligned_spikes": {
+            "updated_minus_frozen_brier": -0.03639675852434712,
+            "updated_minus_recent_rate_brier": 0.01395808817053426,
+            "mice_improved": 2
+          },
+          "linear_wheel_cue_and_other_trial_spikes": {
+            "updated_minus_frozen_brier": -0.029589356465838212,
+            "updated_minus_recent_rate_brier": 0.016189733146279972,
+            "mice_improved": 1
+          },
+          "attention_wheel_and_cue": {
+            "updated_minus_frozen_brier": -0.07010892337539643,
+            "updated_minus_recent_rate_brier": -0.03490788267064332,
+            "mice_improved": 2
+          },
+          "attention_wheel_cue_and_aligned_spikes": {
+            "updated_minus_frozen_brier": -0.05054308505035879,
+            "updated_minus_recent_rate_brier": -0.026924380151614274,
+            "mice_improved": 2
+          },
+          "attention_wheel_cue_and_other_trial_spikes": {
+            "updated_minus_frozen_brier": -0.049093553473008006,
+            "updated_minus_recent_rate_brier": -0.025264194638636134,
+            "mice_improved": 2
+          }
+        }
+      }
+    },
+    {
+      "label": "Lab B",
+      "quiet_matched": {
+        "mice": 2,
+        "rows": 111,
+        "events": 19,
+        "equal_mouse_observed_rate": 0.17307692307692307,
+        "brier": {
+          "fixed_fitting_rate": 0.15222490371141273,
+          "recent_completed_rate": 0.14732762445162273,
+          "frozen_linear_wheel_and_cue": 0.14644199722566262,
+          "frozen_linear_wheel_cue_and_aligned_spikes": 0.1654026191390351,
+          "frozen_linear_wheel_cue_and_other_trial_spikes": 0.14039200163928747,
+          "frozen_attention_wheel_and_cue": 0.15208960410670153,
+          "frozen_attention_wheel_cue_and_aligned_spikes": 0.15630743905521463,
+          "frozen_attention_wheel_cue_and_other_trial_spikes": 0.15079559541339838,
+          "updated_linear_wheel_and_cue": 0.14171965815527376,
+          "updated_linear_wheel_cue_and_aligned_spikes": 0.15266455697503178,
+          "updated_linear_wheel_cue_and_other_trial_spikes": 0.13923429118192837,
+          "updated_attention_wheel_and_cue": 0.15033236017803103,
+          "updated_attention_wheel_cue_and_aligned_spikes": 0.1523910921259991,
+          "updated_attention_wheel_cue_and_other_trial_spikes": 0.14959229472713192
+        },
+        "mean_predicted": {
+          "fixed_fitting_rate": 0.2684897206266478,
+          "recent_completed_rate": 0.20816397863572572,
+          "frozen_linear_wheel_and_cue": 0.26878344956258077,
+          "frozen_linear_wheel_cue_and_aligned_spikes": 0.30004332825416824,
+          "frozen_linear_wheel_cue_and_other_trial_spikes": 0.16466234478040698,
+          "frozen_attention_wheel_and_cue": 0.23432562379695113,
+          "frozen_attention_wheel_cue_and_aligned_spikes": 0.24608178008573514,
+          "frozen_attention_wheel_cue_and_other_trial_spikes": 0.22431714342632114,
+          "updated_linear_wheel_and_cue": 0.21311803348738098,
+          "updated_linear_wheel_cue_and_aligned_spikes": 0.22621788292837564,
+          "updated_linear_wheel_cue_and_other_trial_spikes": 0.1727579960466369,
+          "updated_attention_wheel_and_cue": 0.20076264355394605,
+          "updated_attention_wheel_cue_and_aligned_spikes": 0.20510378543470004,
+          "updated_attention_wheel_cue_and_other_trial_spikes": 0.2105391798323164
+        },
+        "signed_error_rad": {
+          "zero_change": 0.00638093397182998,
+          "repeat_recent_change": 0.00638093397182998,
+          "linear_wheel_and_cue": 0.009134139670425784,
+          "linear_wheel_cue_and_aligned_spikes": 0.012975989726394568,
+          "linear_wheel_cue_and_other_trial_spikes": 0.014107028461099432,
+          "attention_wheel_and_cue": 0.01050810473295741,
+          "attention_wheel_cue_and_aligned_spikes": 0.010924531968620307,
+          "attention_wheel_cue_and_other_trial_spikes": 0.014920457767742725
+        },
+        "contrasts": {
+          "linear_wheel_and_cue": {
+            "updated_minus_frozen_brier": -0.0047223390703888535,
+            "updated_minus_recent_rate_brier": -0.005607966296348965,
+            "mice_improved": 2
+          },
+          "linear_wheel_cue_and_aligned_spikes": {
+            "updated_minus_frozen_brier": -0.012738062164003305,
+            "updated_minus_recent_rate_brier": 0.005336932523409055,
+            "mice_improved": 2
+          },
+          "linear_wheel_cue_and_other_trial_spikes": {
+            "updated_minus_frozen_brier": -0.0011577104573591013,
+            "updated_minus_recent_rate_brier": -0.008093333269694358,
+            "mice_improved": 1
+          },
+          "attention_wheel_and_cue": {
+            "updated_minus_frozen_brier": -0.0017572439286704933,
+            "updated_minus_recent_rate_brier": 0.003004735726408303,
+            "mice_improved": 2
+          },
+          "attention_wheel_cue_and_aligned_spikes": {
+            "updated_minus_frozen_brier": -0.003916346929215525,
+            "updated_minus_recent_rate_brier": 0.005063467674376376,
+            "mice_improved": 2
+          },
+          "attention_wheel_cue_and_other_trial_spikes": {
+            "updated_minus_frozen_brier": -0.0012033006862664508,
+            "updated_minus_recent_rate_brier": 0.002264670275509195,
+            "mice_improved": 1
+          }
+        }
+      },
+      "all_matched": {
+        "mice": 2,
+        "rows": 401,
+        "events": 158,
+        "equal_mouse_observed_rate": 0.39409203980099505,
+        "brier": {
+          "fixed_fitting_rate": 0.2232709908454496,
+          "recent_completed_rate": 0.22535201083078552,
+          "frozen_linear_wheel_and_cue": 0.20046404499823217,
+          "frozen_linear_wheel_cue_and_aligned_spikes": 0.20392923671200636,
+          "frozen_linear_wheel_cue_and_other_trial_spikes": 0.23004561386169955,
+          "frozen_attention_wheel_and_cue": 0.16346993908778568,
+          "frozen_attention_wheel_cue_and_aligned_spikes": 0.16364070633394173,
+          "frozen_attention_wheel_cue_and_other_trial_spikes": 0.16398932359486307,
+          "updated_linear_wheel_and_cue": 0.2031535257252588,
+          "updated_linear_wheel_cue_and_aligned_spikes": 0.2027951691295527,
+          "updated_linear_wheel_cue_and_other_trial_spikes": 0.2183148430112143,
+          "updated_attention_wheel_and_cue": 0.15422681764984028,
+          "updated_attention_wheel_cue_and_aligned_spikes": 0.1595170483031148,
+          "updated_attention_wheel_cue_and_other_trial_spikes": 0.16034822873768245
+        },
+        "mean_predicted": {
+          "fixed_fitting_rate": 0.395956478233449,
+          "recent_completed_rate": 0.3881089541746059,
+          "frozen_linear_wheel_and_cue": 0.4141564599843606,
+          "frozen_linear_wheel_cue_and_aligned_spikes": 0.4397497980187972,
+          "frozen_linear_wheel_cue_and_other_trial_spikes": 0.291189142371989,
+          "frozen_attention_wheel_and_cue": 0.5020107479983519,
+          "frozen_attention_wheel_cue_and_aligned_spikes": 0.4615363851874388,
+          "frozen_attention_wheel_cue_and_other_trial_spikes": 0.4413012239013555,
+          "updated_linear_wheel_and_cue": 0.4014133877968117,
+          "updated_linear_wheel_cue_and_aligned_spikes": 0.4114459346358321,
+          "updated_linear_wheel_cue_and_other_trial_spikes": 0.3508105682422592,
+          "updated_attention_wheel_and_cue": 0.44274543096706115,
+          "updated_attention_wheel_cue_and_aligned_spikes": 0.4244131055042091,
+          "updated_attention_wheel_cue_and_other_trial_spikes": 0.4198224421044725
+        },
+        "signed_error_rad": {
+          "zero_change": 0.045724990906237974,
+          "repeat_recent_change": 0.03800611024190308,
+          "linear_wheel_and_cue": 0.02998739725828966,
+          "linear_wheel_cue_and_aligned_spikes": 0.03229556640099099,
+          "linear_wheel_cue_and_other_trial_spikes": 0.03303575341948757,
+          "attention_wheel_and_cue": 0.04214966822998378,
+          "attention_wheel_cue_and_aligned_spikes": 0.041696049377207986,
+          "attention_wheel_cue_and_other_trial_spikes": 0.04350747446883924
+        },
+        "contrasts": {
+          "linear_wheel_and_cue": {
+            "updated_minus_frozen_brier": 0.0026894807270266274,
+            "updated_minus_recent_rate_brier": -0.022198485105526716,
+            "mice_improved": 0
+          },
+          "linear_wheel_cue_and_aligned_spikes": {
+            "updated_minus_frozen_brier": -0.0011340675824536572,
+            "updated_minus_recent_rate_brier": -0.022556841701232816,
+            "mice_improved": 1
+          },
+          "linear_wheel_cue_and_other_trial_spikes": {
+            "updated_minus_frozen_brier": -0.011730770850485267,
+            "updated_minus_recent_rate_brier": -0.007037167819571227,
+            "mice_improved": 1
+          },
+          "attention_wheel_and_cue": {
+            "updated_minus_frozen_brier": -0.009243121437945395,
+            "updated_minus_recent_rate_brier": -0.07112519318094523,
+            "mice_improved": 2
+          },
+          "attention_wheel_cue_and_aligned_spikes": {
+            "updated_minus_frozen_brier": -0.004123658030826927,
+            "updated_minus_recent_rate_brier": -0.06583496252767071,
+            "mice_improved": 1
+          },
+          "attention_wheel_cue_and_other_trial_spikes": {
+            "updated_minus_frozen_brier": -0.0036410948571806157,
+            "updated_minus_recent_rate_brier": -0.06500378209310306,
+            "mice_improved": 1
+          }
+        }
+      }
+    },
+    {
+      "label": "Lab C",
+      "quiet_matched": {
+        "mice": 2,
+        "rows": 142,
+        "events": 83,
+        "equal_mouse_observed_rate": 0.7008145363408522,
+        "brier": {
+          "fixed_fitting_rate": 0.3965782682765293,
+          "recent_completed_rate": 0.23415374482589654,
+          "frozen_linear_wheel_and_cue": 0.3862776476631249,
+          "frozen_linear_wheel_cue_and_aligned_spikes": 0.376101035075624,
+          "frozen_linear_wheel_cue_and_other_trial_spikes": 0.46151098012610214,
+          "frozen_attention_wheel_and_cue": 0.3988990466509469,
+          "frozen_attention_wheel_cue_and_aligned_spikes": 0.4029013369939996,
+          "frozen_attention_wheel_cue_and_other_trial_spikes": 0.41251975843503236,
+          "updated_linear_wheel_and_cue": 0.2038809304972557,
+          "updated_linear_wheel_cue_and_aligned_spikes": 0.21713145837482295,
+          "updated_linear_wheel_cue_and_other_trial_spikes": 0.2928656860148396,
+          "updated_attention_wheel_and_cue": 0.2326191579900087,
+          "updated_attention_wheel_cue_and_aligned_spikes": 0.2513436783688465,
+          "updated_attention_wheel_cue_and_other_trial_spikes": 0.28026632589951184
+        },
+        "mean_predicted": {
+          "fixed_fitting_rate": 0.2684897206266479,
+          "recent_completed_rate": 0.48483698137903297,
+          "frozen_linear_wheel_and_cue": 0.24139120667803204,
+          "frozen_linear_wheel_cue_and_aligned_spikes": 0.2617444381113332,
+          "frozen_linear_wheel_cue_and_other_trial_spikes": 0.20697095927978254,
+          "frozen_attention_wheel_and_cue": 0.2706089156254683,
+          "frozen_attention_wheel_cue_and_aligned_spikes": 0.27992546891771386,
+          "frozen_attention_wheel_cue_and_other_trial_spikes": 0.2718183494441727,
+          "updated_linear_wheel_and_cue": 0.4824441392484943,
+          "updated_linear_wheel_cue_and_aligned_spikes": 0.49033644925127484,
+          "updated_linear_wheel_cue_and_other_trial_spikes": 0.3938989106671019,
+          "updated_attention_wheel_and_cue": 0.496953217435977,
+          "updated_attention_wheel_cue_and_aligned_spikes": 0.49587534097969066,
+          "updated_attention_wheel_cue_and_other_trial_spikes": 0.44204633320636255
+        },
+        "signed_error_rad": {
+          "zero_change": 0.026853314055599063,
+          "repeat_recent_change": 0.026853314055599063,
+          "linear_wheel_and_cue": 0.027407095745781394,
+          "linear_wheel_cue_and_aligned_spikes": 0.03121305767561995,
+          "linear_wheel_cue_and_other_trial_spikes": 0.03139608147745675,
+          "attention_wheel_and_cue": 0.027202136719063248,
+          "attention_wheel_cue_and_aligned_spikes": 0.030322009242718766,
+          "attention_wheel_cue_and_other_trial_spikes": 0.0332628221830524
+        },
+        "contrasts": {
+          "linear_wheel_and_cue": {
+            "updated_minus_frozen_brier": -0.1823967171658692,
+            "updated_minus_recent_rate_brier": -0.030272814328640846,
+            "mice_improved": 2
+          },
+          "linear_wheel_cue_and_aligned_spikes": {
+            "updated_minus_frozen_brier": -0.15896957670080103,
+            "updated_minus_recent_rate_brier": -0.017022286451073593,
+            "mice_improved": 2
+          },
+          "linear_wheel_cue_and_other_trial_spikes": {
+            "updated_minus_frozen_brier": -0.16864529411126256,
+            "updated_minus_recent_rate_brier": 0.058711941188943045,
+            "mice_improved": 2
+          },
+          "attention_wheel_and_cue": {
+            "updated_minus_frozen_brier": -0.16627988866093818,
+            "updated_minus_recent_rate_brier": -0.0015345868358878356,
+            "mice_improved": 2
+          },
+          "attention_wheel_cue_and_aligned_spikes": {
+            "updated_minus_frozen_brier": -0.15155765862515308,
+            "updated_minus_recent_rate_brier": 0.01718993354294998,
+            "mice_improved": 2
+          },
+          "attention_wheel_cue_and_other_trial_spikes": {
+            "updated_minus_frozen_brier": -0.13225343253552052,
+            "updated_minus_recent_rate_brier": 0.046112581073615294,
+            "mice_improved": 2
+          }
+        }
+      },
+      "all_matched": {
+        "mice": 2,
+        "rows": 396,
+        "events": 293,
+        "equal_mouse_observed_rate": 0.7367816678575074,
+        "brier": {
+          "fixed_fitting_rate": 0.3081038019066058,
+          "recent_completed_rate": 0.1992378615054569,
+          "frozen_linear_wheel_and_cue": 0.3042119910277784,
+          "frozen_linear_wheel_cue_and_aligned_spikes": 0.31109662908587243,
+          "frozen_linear_wheel_cue_and_other_trial_spikes": 0.3811514066840007,
+          "frozen_attention_wheel_and_cue": 0.25217593478018285,
+          "frozen_attention_wheel_cue_and_aligned_spikes": 0.28567402408396236,
+          "frozen_attention_wheel_cue_and_other_trial_spikes": 0.26663148667254155,
+          "updated_linear_wheel_and_cue": 0.18366930012363986,
+          "updated_linear_wheel_cue_and_aligned_spikes": 0.19911116118017808,
+          "updated_linear_wheel_cue_and_other_trial_spikes": 0.2109409003380143,
+          "updated_attention_wheel_and_cue": 0.1910158031000993,
+          "updated_attention_wheel_cue_and_aligned_spikes": 0.20653915347184154,
+          "updated_attention_wheel_cue_and_other_trial_spikes": 0.19239202529352276
+        },
+        "mean_predicted": {
+          "fixed_fitting_rate": 0.3807116687144753,
+          "recent_completed_rate": 0.5794931484656958,
+          "frozen_linear_wheel_and_cue": 0.36595714667358925,
+          "frozen_linear_wheel_cue_and_aligned_spikes": 0.3706159954049887,
+          "frozen_linear_wheel_cue_and_other_trial_spikes": 0.32056694944128983,
+          "frozen_attention_wheel_and_cue": 0.4734602745301649,
+          "frozen_attention_wheel_cue_and_aligned_spikes": 0.4290389611802564,
+          "frozen_attention_wheel_cue_and_other_trial_spikes": 0.4482067651172518,
+          "updated_linear_wheel_and_cue": 0.5798168956153198,
+          "updated_linear_wheel_cue_and_aligned_spikes": 0.5756884454219875,
+          "updated_linear_wheel_cue_and_other_trial_spikes": 0.5539376242732869,
+          "updated_attention_wheel_and_cue": 0.6182699292725911,
+          "updated_attention_wheel_cue_and_aligned_spikes": 0.5958562949440427,
+          "updated_attention_wheel_cue_and_other_trial_spikes": 0.6026782416260703
+        },
+        "signed_error_rad": {
+          "zero_change": 0.03175447485882966,
+          "repeat_recent_change": 0.030192349430072332,
+          "linear_wheel_and_cue": 0.03219388432136698,
+          "linear_wheel_cue_and_aligned_spikes": 0.035331207010013466,
+          "linear_wheel_cue_and_other_trial_spikes": 0.03566382637252273,
+          "attention_wheel_and_cue": 0.0342288369040809,
+          "attention_wheel_cue_and_aligned_spikes": 0.03717884694773298,
+          "attention_wheel_cue_and_other_trial_spikes": 0.03878591326762263
+        },
+        "contrasts": {
+          "linear_wheel_and_cue": {
+            "updated_minus_frozen_brier": -0.12054269090413855,
+            "updated_minus_recent_rate_brier": -0.015568561381817031,
+            "mice_improved": 2
+          },
+          "linear_wheel_cue_and_aligned_spikes": {
+            "updated_minus_frozen_brier": -0.11198546790569436,
+            "updated_minus_recent_rate_brier": -0.00012670032527881125,
+            "mice_improved": 2
+          },
+          "linear_wheel_cue_and_other_trial_spikes": {
+            "updated_minus_frozen_brier": -0.17021050634598642,
+            "updated_minus_recent_rate_brier": 0.01170303883255741,
+            "mice_improved": 2
+          },
+          "attention_wheel_and_cue": {
+            "updated_minus_frozen_brier": -0.06116013168008355,
+            "updated_minus_recent_rate_brier": -0.008222058405357585,
+            "mice_improved": 2
+          },
+          "attention_wheel_cue_and_aligned_spikes": {
+            "updated_minus_frozen_brier": -0.07913487061212082,
+            "updated_minus_recent_rate_brier": 0.007301291966384654,
+            "mice_improved": 2
+          },
+          "attention_wheel_cue_and_other_trial_spikes": {
+            "updated_minus_frozen_brier": -0.0742394613790188,
+            "updated_minus_recent_rate_brier": -0.006845836211934131,
+            "mice_improved": 2
+          }
+        }
+      }
+    }
+  ],
+  "mice": [
+    {
+      "label": "Mouse 1",
+      "lab": "Lab A",
+      "scores": {
+        "quiet_matched": {
+          "rows": 96,
+          "events": 1,
+          "event_rate": 0.010416666666666666,
+          "brier": {
+            "fixed_fitting_rate": 0.07690986090245361,
+            "recent_completed_rate": 0.023204488244054255,
+            "frozen_linear_wheel_and_cue": 0.060599541699372615,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.06326191517321046,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.09486219925575827,
+            "frozen_attention_wheel_and_cue": 0.08116421990124799,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.07194598602334489,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.08725268432345866,
+            "updated_linear_wheel_and_cue": 0.026005163984613822,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.027695912332575418,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.037450691789384864,
+            "updated_attention_wheel_and_cue": 0.03033734564182086,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.028728440601794514,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.032944802418456494
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.12127744779517445,
+            "frozen_linear_wheel_and_cue": 0.22008704675941762,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.21844404591764008,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.2803042964748741,
+            "frozen_attention_wheel_and_cue": 0.2576428529900318,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2328988666165767,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.2754122852297702,
+            "updated_linear_wheel_and_cue": 0.12291674729828099,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.1228163429435708,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.15279478463303767,
+            "updated_attention_wheel_and_cue": 0.13454318515036548,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.1254870580877148,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.1471034670641016
+          },
+          "signed_error_rad": {
+            "zero_change": 0.0002876213977283844,
+            "repeat_recent_change": 0.0002876213977283844,
+            "linear_wheel_and_cue": 0.004283664778885148,
+            "linear_wheel_cue_and_aligned_spikes": 0.00875126817599413,
+            "linear_wheel_cue_and_other_trial_spikes": 0.009463959168238062,
+            "attention_wheel_and_cue": 0.005203660080259895,
+            "attention_wheel_cue_and_aligned_spikes": 0.0066242142241103264,
+            "attention_wheel_cue_and_other_trial_spikes": 0.011533324560601762
+          }
+        },
+        "all_matched": {
+          "rows": 193,
+          "events": 26,
+          "event_rate": 0.13471502590673576,
+          "brier": {
+            "fixed_fitting_rate": 0.15197270717584063,
+            "recent_completed_rate": 0.11105543848001961,
+            "frozen_linear_wheel_and_cue": 0.14377509788482598,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.13918136973233014,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.18525437101466713,
+            "frozen_attention_wheel_and_cue": 0.14862244139156508,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.12199337165507035,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.15195798241724934,
+            "updated_linear_wheel_and_cue": 0.10735970140550154,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.10457732762165653,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.12603816349634273,
+            "updated_attention_wheel_and_cue": 0.08266238300875521,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.07872866650547143,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.09428558463794108
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.3570493005263884,
+            "recent_completed_rate": 0.22604740662550518,
+            "frozen_linear_wheel_and_cue": 0.3429152861333286,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.3331789017179828,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.4073283841225242,
+            "frozen_attention_wheel_and_cue": 0.40309824712572445,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.35141798014312947,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.4025718846349834,
+            "updated_linear_wheel_and_cue": 0.2305184573525244,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.2273813269889041,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.2675502497799208,
+            "updated_attention_wheel_and_cue": 0.25761292829655624,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.23681499356939373,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.26417041710618067
+          },
+          "signed_error_rad": {
+            "zero_change": 0.02302560799225269,
+            "repeat_recent_change": 0.01677046353595145,
+            "linear_wheel_and_cue": 0.0176549793456676,
+            "linear_wheel_cue_and_aligned_spikes": 0.021389480896698166,
+            "linear_wheel_cue_and_other_trial_spikes": 0.02192508801143135,
+            "attention_wheel_and_cue": 0.02745254936831896,
+            "attention_wheel_cue_and_aligned_spikes": 0.030250079487363888,
+            "attention_wheel_cue_and_other_trial_spikes": 0.03394633809961154
+          }
+        },
+        "quiet_issuable": {
+          "rows": 123,
+          "events": 2,
+          "event_rate": 0.016260162601626018,
+          "brier": {
+            "fixed_fitting_rate": 0.0796155196552926,
+            "recent_completed_rate": 0.030517856243424873,
+            "frozen_linear_wheel_and_cue": 0.06664683749121247,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.06765558058909725,
+            "frozen_attention_wheel_and_cue": 0.08514022240860204,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.07528937121539464,
+            "updated_linear_wheel_and_cue": 0.03384094560537512,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.03450979764535366,
+            "updated_attention_wheel_and_cue": 0.037927506152664305,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.035622677194531625
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.12879979380301,
+            "frozen_linear_wheel_and_cue": 0.2180108724267657,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.21607965451809577,
+            "frozen_attention_wheel_and_cue": 0.2593461133973322,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.23473483045715415,
+            "updated_linear_wheel_and_cue": 0.12667233616892865,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.12608137266448988,
+            "updated_attention_wheel_and_cue": 0.14196887046383813,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.13201795801894203
+          },
+          "signed_error_rad": {
+            "zero_change": 0.0012097246863813132,
+            "repeat_recent_change": 0.0012097246863813132,
+            "linear_wheel_and_cue": 0.005203780928882223,
+            "linear_wheel_cue_and_aligned_spikes": 0.009571027211816916,
+            "attention_wheel_and_cue": 0.0062084489220958815,
+            "attention_wheel_cue_and_aligned_spikes": 0.007592049684569018
+          }
+        },
+        "all_issuable": {
+          "rows": 240,
+          "events": 31,
+          "event_rate": 0.12916666666666668,
+          "brier": {
+            "fixed_fitting_rate": 0.15057340157145419,
+            "recent_completed_rate": 0.11193818809830836,
+            "frozen_linear_wheel_and_cue": 0.1437598523921208,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.13795857390112287,
+            "frozen_attention_wheel_and_cue": 0.14908582261646253,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.12083419912807304,
+            "updated_linear_wheel_and_cue": 0.10889685583605235,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.10532836144703145,
+            "updated_attention_wheel_and_cue": 0.08865686752870226,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.08119698639177907
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.3543902306659968,
+            "recent_completed_rate": 0.2291026685059009,
+            "frozen_linear_wheel_and_cue": 0.3381399638407687,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.3286305717249653,
+            "frozen_attention_wheel_and_cue": 0.39470105174359094,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.3454197527267316,
+            "updated_linear_wheel_and_cue": 0.23127613823575732,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.22785321862602925,
+            "updated_attention_wheel_and_cue": 0.25781738191636777,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.23646176991096976
+          },
+          "signed_error_rad": {
+            "zero_change": 0.02137346564454021,
+            "repeat_recent_change": 0.016247413178355093,
+            "linear_wheel_and_cue": 0.016863682965783198,
+            "linear_wheel_cue_and_aligned_spikes": 0.020438112810814733,
+            "attention_wheel_and_cue": 0.025776972801219687,
+            "attention_wheel_cue_and_aligned_spikes": 0.02856038601249149
+          }
+        },
+        "quiet_matched_no_feedback": {
+          "rows": 0,
+          "events": 0,
+          "event_rate": null,
+          "brier": null,
+          "mean_predicted": null,
+          "signed_error_rad": null
+        },
+        "quiet_matched_1_to_7_feedback": {
+          "rows": 0,
+          "events": 0,
+          "event_rate": null,
+          "brier": null,
+          "mean_predicted": null,
+          "signed_error_rad": null
+        },
+        "quiet_matched_at_least_8_feedback": {
+          "rows": 96,
+          "events": 1,
+          "event_rate": 0.010416666666666666,
+          "brier": {
+            "fixed_fitting_rate": 0.07690986090245361,
+            "recent_completed_rate": 0.023204488244054255,
+            "frozen_linear_wheel_and_cue": 0.060599541699372615,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.06326191517321046,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.09486219925575827,
+            "frozen_attention_wheel_and_cue": 0.08116421990124799,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.07194598602334489,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.08725268432345866,
+            "updated_linear_wheel_and_cue": 0.026005163984613822,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.027695912332575418,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.037450691789384864,
+            "updated_attention_wheel_and_cue": 0.03033734564182086,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.028728440601794514,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.032944802418456494
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.12127744779517445,
+            "frozen_linear_wheel_and_cue": 0.22008704675941762,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.21844404591764008,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.2803042964748741,
+            "frozen_attention_wheel_and_cue": 0.2576428529900318,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2328988666165767,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.2754122852297702,
+            "updated_linear_wheel_and_cue": 0.12291674729828099,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.1228163429435708,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.15279478463303767,
+            "updated_attention_wheel_and_cue": 0.13454318515036548,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.1254870580877148,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.1471034670641016
+          },
+          "signed_error_rad": {
+            "zero_change": 0.0002876213977283844,
+            "repeat_recent_change": 0.0002876213977283844,
+            "linear_wheel_and_cue": 0.004283664778885148,
+            "linear_wheel_cue_and_aligned_spikes": 0.00875126817599413,
+            "linear_wheel_cue_and_other_trial_spikes": 0.009463959168238062,
+            "attention_wheel_and_cue": 0.005203660080259895,
+            "attention_wheel_cue_and_aligned_spikes": 0.0066242142241103264,
+            "attention_wheel_cue_and_other_trial_spikes": 0.011533324560601762
+          }
+        }
+      }
+    },
+    {
+      "label": "Mouse 2",
+      "lab": "Lab A",
+      "scores": {
+        "quiet_matched": {
+          "rows": 47,
+          "events": 1,
+          "event_rate": 0.02127659574468085,
+          "brier": {
+            "fixed_fitting_rate": 0.08193823133210529,
+            "recent_completed_rate": 0.0307434818117174,
+            "frozen_linear_wheel_and_cue": 0.07986578999855153,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.09991990587879152,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.041668386620195993,
+            "frozen_attention_wheel_and_cue": 0.084048958846445,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.09890832432558316,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.0803384734830244,
+            "updated_linear_wheel_and_cue": 0.03614263812950179,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.04615494400485278,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.03246856962689186,
+            "updated_attention_wheel_and_cue": 0.03603788656822794,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.04133783183754857,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.046154270338433424
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266478,
+            "recent_completed_rate": 0.12479332369261802,
+            "frozen_linear_wheel_and_cue": 0.24600202117538983,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.25875162888233394,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.14498967595627923,
+            "frozen_attention_wheel_and_cue": 0.25710374084680715,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.26539495283111003,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.24094380858310716,
+            "updated_linear_wheel_and_cue": 0.1332542360827652,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.1386071287648814,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.11154156942533672,
+            "updated_attention_wheel_and_cue": 0.1374656235389362,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.13736114090636345,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.1628383353539908
+          },
+          "signed_error_rad": {
+            "zero_change": 0.001011774562222305,
+            "repeat_recent_change": 0.001011774562222305,
+            "linear_wheel_and_cue": 0.005076726389171476,
+            "linear_wheel_cue_and_aligned_spikes": 0.005922517973425657,
+            "linear_wheel_cue_and_other_trial_spikes": 0.007497104590830038,
+            "attention_wheel_and_cue": 0.006749703423677649,
+            "attention_wheel_cue_and_aligned_spikes": 0.006823254364171884,
+            "attention_wheel_cue_and_other_trial_spikes": 0.008284924935274919
+          }
+        },
+        "all_matched": {
+          "rows": 198,
+          "events": 40,
+          "event_rate": 0.20202020202020202,
+          "brier": {
+            "fixed_fitting_rate": 0.19204917858510684,
+            "recent_completed_rate": 0.16285163918690196,
+            "frozen_linear_wheel_and_cue": 0.2098715841668919,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.2354354013243542,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.1802108858764908,
+            "frozen_attention_wheel_and_cue": 0.19568671768486273,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.19915111580934028,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.169607812918416,
+            "updated_linear_wheel_and_cue": 0.18104490750869906,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.19724592638633356,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.1802483804631388,
+            "updated_attention_wheel_and_cue": 0.12142892931687974,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.14132965085822158,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.12909310375170824
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.40286917689125995,
+            "recent_completed_rate": 0.2790787685704328,
+            "frozen_linear_wheel_and_cue": 0.38979911451970595,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.4097298965646806,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.2699059068361448,
+            "frozen_attention_wheel_and_cue": 0.48683494967652463,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.45065118564643175,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.4209195871043386,
+            "updated_linear_wheel_and_cue": 0.2763378180853694,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.2881000580410532,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.24317203029545956,
+            "updated_attention_wheel_and_cue": 0.31866862957691144,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.3064242039936362,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.30947888847954425
+          },
+          "signed_error_rad": {
+            "zero_change": 0.022769543109069968,
+            "repeat_recent_change": 0.015293323612557226,
+            "linear_wheel_and_cue": 0.016105368833232644,
+            "linear_wheel_cue_and_aligned_spikes": 0.015674694243195515,
+            "linear_wheel_cue_and_other_trial_spikes": 0.01545656149918549,
+            "attention_wheel_and_cue": 0.030076998737208874,
+            "attention_wheel_cue_and_aligned_spikes": 0.025830995966859102,
+            "attention_wheel_cue_and_other_trial_spikes": 0.025735926421597045
+          }
+        },
+        "quiet_issuable": {
+          "rows": 69,
+          "events": 1,
+          "event_rate": 0.014492753623188406,
+          "brier": {
+            "fixed_fitting_rate": 0.07879717296256249,
+            "recent_completed_rate": 0.03146173704167686,
+            "frozen_linear_wheel_and_cue": 0.07570269530788423,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.09824758586498795,
+            "frozen_attention_wheel_and_cue": 0.08241610849662019,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.10505729712599472,
+            "updated_linear_wheel_and_cue": 0.03576442846462262,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.047261365153630094,
+            "updated_attention_wheel_and_cue": 0.03731029416032722,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.047499104861398994
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.26848972062664783,
+            "recent_completed_rate": 0.14108008934924268,
+            "frozen_linear_wheel_and_cue": 0.24477048765786402,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.2626775368584631,
+            "frozen_attention_wheel_and_cue": 0.2583945106055907,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.27838749945382113,
+            "updated_linear_wheel_and_cue": 0.14594636513839268,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.1554137183099207,
+            "updated_attention_wheel_and_cue": 0.15269043659656628,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.16275985422791733
+          },
+          "signed_error_rad": {
+            "zero_change": 0.0008892642248611288,
+            "repeat_recent_change": 0.0008892642248611288,
+            "linear_wheel_and_cue": 0.005003145355747397,
+            "linear_wheel_cue_and_aligned_spikes": 0.006064585470546983,
+            "attention_wheel_and_cue": 0.006559541753490984,
+            "attention_wheel_cue_and_aligned_spikes": 0.006248506963390201
+          }
+        },
+        "all_issuable": {
+          "rows": 240,
+          "events": 43,
+          "event_rate": 0.17916666666666667,
+          "brier": {
+            "fixed_fitting_rate": 0.18291066180432505,
+            "recent_completed_rate": 0.15198777366215227,
+            "frozen_linear_wheel_and_cue": 0.19517345771477998,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.21739778105052535,
+            "frozen_attention_wheel_and_cue": 0.18577859236898486,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.19208897691207608,
+            "updated_linear_wheel_and_cue": 0.16517674141089211,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.17861169692061965,
+            "updated_attention_wheel_and_cue": 0.11574261036134255,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.13480912395099057
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.394036619914927,
+            "recent_completed_rate": 0.27738804187288985,
+            "frozen_linear_wheel_and_cue": 0.38031587423070806,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.39823266981411365,
+            "frozen_attention_wheel_and_cue": 0.4664595422015156,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.43680374476516165,
+            "updated_linear_wheel_and_cue": 0.27381966053866863,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.2844659922524259,
+            "updated_attention_wheel_and_cue": 0.31173502287824284,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.302585293047091
+          },
+          "signed_error_rad": {
+            "zero_change": 0.019098060809176035,
+            "repeat_recent_change": 0.013288108575059887,
+            "linear_wheel_and_cue": 0.015061676266692359,
+            "linear_wheel_cue_and_aligned_spikes": 0.014740795447995059,
+            "attention_wheel_and_cue": 0.026879429919809,
+            "attention_wheel_cue_and_aligned_spikes": 0.022979105159195545
+          }
+        },
+        "quiet_matched_no_feedback": {
+          "rows": 0,
+          "events": 0,
+          "event_rate": null,
+          "brier": null,
+          "mean_predicted": null,
+          "signed_error_rad": null
+        },
+        "quiet_matched_1_to_7_feedback": {
+          "rows": 1,
+          "events": 0,
+          "event_rate": 0.0,
+          "brier": {
+            "fixed_fitting_rate": 0.07208673008217543,
+            "recent_completed_rate": 0.054507924447769696,
+            "frozen_linear_wheel_and_cue": 0.035890440312819114,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.02226882849838963,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.014083766188332153,
+            "frozen_attention_wheel_and_cue": 0.024690120123941724,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.013825806768451458,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.013258344164301656,
+            "updated_linear_wheel_and_cue": 0.02830553121576784,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.01568145836355009,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.014083766188332153,
+            "updated_attention_wheel_and_cue": 0.020205824481978364,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.010550091695383254,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.013258344164301656
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.23346932228404163,
+            "frozen_linear_wheel_and_cue": 0.18944772448572486,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.1492274388254038,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.11867504450528828,
+            "frozen_attention_wheel_and_cue": 0.1571309012382406,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.11758319084142707,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.11514488336136199,
+            "updated_linear_wheel_and_cue": 0.1682424774418394,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.1252256298189396,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.11867504450528828,
+            "updated_attention_wheel_and_cue": 0.1421471930147703,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.1027136392860425,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.11514488336136199
+          },
+          "signed_error_rad": {
+            "zero_change": 0.0,
+            "repeat_recent_change": 0.0,
+            "linear_wheel_and_cue": 0.008390599353004997,
+            "linear_wheel_cue_and_aligned_spikes": 0.008282454022678841,
+            "linear_wheel_cue_and_other_trial_spikes": 0.0034895641050536287,
+            "attention_wheel_and_cue": 0.002683667157519337,
+            "attention_wheel_cue_and_aligned_spikes": 0.008451392599275142,
+            "attention_wheel_cue_and_other_trial_spikes": 0.011013975175600613
+          }
+        },
+        "quiet_matched_at_least_8_feedback": {
+          "rows": 46,
+          "events": 1,
+          "event_rate": 0.021739130434782608,
+          "brier": {
+            "fixed_fitting_rate": 0.08215239440275593,
+            "recent_completed_rate": 0.03022686349354235,
+            "frozen_linear_wheel_and_cue": 0.08082177586128483,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.10160797277836546,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.042268052281758256,
+            "frozen_attention_wheel_and_cue": 0.08533936838389074,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.10075794427247735,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.0817967371638662,
+            "updated_linear_wheel_and_cue": 0.03631301001893079,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.04681741108401154,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.03286823926686055,
+            "updated_attention_wheel_and_cue": 0.0363820618309725,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.04200713053629129,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.04686939916830585
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266478,
+            "recent_completed_rate": 0.12243080198410879,
+            "frozen_linear_wheel_and_cue": 0.24723146240777388,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.2611325895357454,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.14556173316173557,
+            "frozen_attention_wheel_and_cue": 0.25927706344699336,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2686082520047987,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.2436785678270581,
+            "updated_linear_wheel_and_cue": 0.13249362214017665,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.13889803091588016,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.11138649388012035,
+            "updated_attention_wheel_and_cue": 0.1373638502894616,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.138114347463327,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.1638751495277436
+          },
+          "signed_error_rad": {
+            "zero_change": 0.0010337696614010506,
+            "repeat_recent_change": 0.0010337696614010506,
+            "linear_wheel_and_cue": 0.005004685672566399,
+            "linear_wheel_cue_and_aligned_spikes": 0.005871215015833197,
+            "linear_wheel_cue_and_other_trial_spikes": 0.007584225036173002,
+            "attention_wheel_and_cue": 0.0068380955164202215,
+            "attention_wheel_cue_and_aligned_spikes": 0.0067878600547131174,
+            "attention_wheel_cue_and_other_trial_spikes": 0.008225597756137406
+          }
+        }
+      }
+    },
+    {
+      "label": "Mouse 3",
+      "lab": "Lab B",
+      "scores": {
+        "quiet_matched": {
+          "rows": 39,
+          "events": 7,
+          "event_rate": 0.1794871794871795,
+          "brier": {
+            "fixed_fitting_rate": 0.15519298421619934,
+            "recent_completed_rate": 0.1530591388403239,
+            "frozen_linear_wheel_and_cue": 0.1466634553794454,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.17173310872730235,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.13988637044249227,
+            "frozen_attention_wheel_and_cue": 0.15343362215675319,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.16539838847134064,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.15966117208831607,
+            "updated_linear_wheel_and_cue": 0.14376146976221796,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.1627785818703925,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.14157987417329443,
+            "updated_attention_wheel_and_cue": 0.15317965325811017,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.16208426648826493,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.15679282366350447
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266477,
+            "recent_completed_rate": 0.22514462072713867,
+            "frozen_linear_wheel_and_cue": 0.2742247347565988,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.29692102441957774,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.2328655709332785,
+            "frozen_attention_wheel_and_cue": 0.24158231033426494,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2609724678523896,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.27280726129794136,
+            "updated_linear_wheel_and_cue": 0.22972052073372085,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.23789428742699611,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.22986197179083176,
+            "updated_attention_wheel_and_cue": 0.2181893891050352,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.22527689718604335,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.25493254831889856
+          },
+          "signed_error_rad": {
+            "zero_change": 0.008692557798018568,
+            "repeat_recent_change": 0.008692557798018568,
+            "linear_wheel_and_cue": 0.012433889335754855,
+            "linear_wheel_cue_and_aligned_spikes": 0.012998417144766742,
+            "linear_wheel_cue_and_other_trial_spikes": 0.012607494520679611,
+            "attention_wheel_and_cue": 0.014212342450100529,
+            "attention_wheel_cue_and_aligned_spikes": 0.013018917421265498,
+            "attention_wheel_cue_and_other_trial_spikes": 0.01393540404121647
+          }
+        },
+        "all_matched": {
+          "rows": 200,
+          "events": 85,
+          "event_rate": 0.425,
+          "brier": {
+            "fixed_fitting_rate": 0.23259215723694063,
+            "recent_completed_rate": 0.2366175669991874,
+            "frozen_linear_wheel_and_cue": 0.21273553289758065,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.21815653297380266,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.229949000573082,
+            "frozen_attention_wheel_and_cue": 0.16012283057219712,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.16225700014358246,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.16991064942377662,
+            "updated_linear_wheel_and_cue": 0.21753971533682864,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.22015395894833603,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.23263258237472725,
+            "updated_attention_wheel_and_cue": 0.14652597101861264,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.15258599031251385,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.16095743215714783
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.4103356910505983,
+            "recent_completed_rate": 0.41175442359077136,
+            "frozen_linear_wheel_and_cue": 0.4346361601363741,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.4437819632420332,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.3918642422927959,
+            "frozen_attention_wheel_and_cue": 0.5506796581763106,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.5337147183117533,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.5404502814952231,
+            "updated_linear_wheel_and_cue": 0.42639295857123394,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.4298239169755571,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.41833527991173086,
+            "updated_attention_wheel_and_cue": 0.4831523292943401,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.4736717176041635,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.48568392725265896
+          },
+          "signed_error_rad": {
+            "zero_change": 0.06571573695302117,
+            "repeat_recent_change": 0.053696997479937246,
+            "linear_wheel_and_cue": 0.036372880896365485,
+            "linear_wheel_cue_and_aligned_spikes": 0.037224619630608934,
+            "linear_wheel_cue_and_other_trial_spikes": 0.03667706907918618,
+            "attention_wheel_and_cue": 0.05661849201137633,
+            "attention_wheel_cue_and_aligned_spikes": 0.05707358340861395,
+            "attention_wheel_cue_and_other_trial_spikes": 0.057029257895499924
+          }
+        },
+        "quiet_issuable": {
+          "rows": 58,
+          "events": 10,
+          "event_rate": 0.1724137931034483,
+          "brier": {
+            "fixed_fitting_rate": 0.15191786090057272,
+            "recent_completed_rate": 0.149697278564578,
+            "frozen_linear_wheel_and_cue": 0.14869319678725929,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.17305243552795854,
+            "frozen_attention_wheel_and_cue": 0.14832832834057116,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.17270261879204257,
+            "updated_linear_wheel_and_cue": 0.1455133493179191,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.1639335646123833,
+            "updated_attention_wheel_and_cue": 0.1478994124293042,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.16838505471840493
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.26848972062664783,
+            "recent_completed_rate": 0.23415860374261357,
+            "frozen_linear_wheel_and_cue": 0.27163586159340747,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.2955480967620123,
+            "frozen_attention_wheel_and_cue": 0.23908930059461328,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2648052844821639,
+            "updated_linear_wheel_and_cue": 0.2344723637665775,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.2447612376757732,
+            "updated_attention_wheel_and_cue": 0.21932336977708594,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.23422019283905324
+          },
+          "signed_error_rad": {
+            "zero_change": 0.008860061447270388,
+            "repeat_recent_change": 0.008860061447270388,
+            "linear_wheel_and_cue": 0.012625412451093502,
+            "linear_wheel_cue_and_aligned_spikes": 0.013539762386580396,
+            "attention_wheel_and_cue": 0.014228804198095215,
+            "attention_wheel_cue_and_aligned_spikes": 0.013265272400712753
+          }
+        },
+        "all_issuable": {
+          "rows": 239,
+          "events": 93,
+          "event_rate": 0.3891213389121339,
+          "brier": {
+            "fixed_fitting_rate": 0.22504297416863278,
+            "recent_completed_rate": 0.2270124668357969,
+            "frozen_linear_wheel_and_cue": 0.21091960685944797,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.22118894892949553,
+            "frozen_attention_wheel_and_cue": 0.16385317517720108,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.16984505543149125,
+            "updated_linear_wheel_and_cue": 0.2134034635902177,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.22145530789767617,
+            "updated_attention_wheel_and_cue": 0.1493321025559092,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.1594247287482217
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.40193456403076455,
+            "recent_completed_rate": 0.3981950315737625,
+            "frozen_linear_wheel_and_cue": 0.42184654022010415,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.4307275042352035,
+            "frozen_attention_wheel_and_cue": 0.5186786133915703,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.5057322320672577,
+            "updated_linear_wheel_and_cue": 0.4082931235802456,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.41130648022952077,
+            "updated_attention_wheel_and_cue": 0.4529810277906143,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.4462418942496806
+          },
+          "signed_error_rad": {
+            "zero_change": 0.056070527878531465,
+            "repeat_recent_change": 0.04623122851523157,
+            "linear_wheel_and_cue": 0.03257035634656667,
+            "linear_wheel_cue_and_aligned_spikes": 0.03341075725513489,
+            "attention_wheel_and_cue": 0.04993262535442615,
+            "attention_wheel_cue_and_aligned_spikes": 0.0503529412996309
+          }
+        },
+        "quiet_matched_no_feedback": {
+          "rows": 0,
+          "events": 0,
+          "event_rate": null,
+          "brier": null,
+          "mean_predicted": null,
+          "signed_error_rad": null
+        },
+        "quiet_matched_1_to_7_feedback": {
+          "rows": 1,
+          "events": 1,
+          "event_rate": 1.0,
+          "brier": {
+            "fixed_fitting_rate": 0.5351072888288797,
+            "recent_completed_rate": 0.5714126815731818,
+            "frozen_linear_wheel_and_cue": 0.3465588395822902,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.21850271352534423,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.3576488605188816,
+            "frozen_attention_wheel_and_cue": 0.25154266153494526,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.15485075399563997,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.38986923496156095,
+            "updated_linear_wheel_and_cue": 0.39836668707998435,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.2690108923767551,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.3576488605188816,
+            "updated_attention_wheel_and_cue": 0.3014174129289148,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.1990433795873411,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.38986923496156095
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.24408156420604354,
+            "frozen_linear_wheel_and_cue": 0.4113075169646802,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.5325572617685197,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.40196249238122056,
+            "frozen_attention_wheel_and_cue": 0.49845971095539565,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.6064891945630464,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.37560490475856484,
+            "updated_linear_wheel_and_cue": 0.36883703603587104,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.4813374002525774,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.40196249238122056,
+            "updated_attention_wheel_and_cue": 0.45098505218080376,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.5538572206262427,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.37560490475856484
+          },
+          "signed_error_rad": {
+            "zero_change": 0.00613592315154321,
+            "repeat_recent_change": 0.00613592315154321,
+            "linear_wheel_and_cue": 0.00373836404097355,
+            "linear_wheel_cue_and_aligned_spikes": 0.006057624023376145,
+            "linear_wheel_cue_and_other_trial_spikes": 0.004950682069846436,
+            "attention_wheel_and_cue": 0.005700221442922738,
+            "attention_wheel_cue_and_aligned_spikes": 0.007742043189355284,
+            "attention_wheel_cue_and_other_trial_spikes": 0.007204169645958002
+          }
+        },
+        "quiet_matched_at_least_8_feedback": {
+          "rows": 38,
+          "events": 6,
+          "event_rate": 0.15789473684210525,
+          "brier": {
+            "fixed_fitting_rate": 0.14519523935797088,
+            "recent_completed_rate": 0.14204983508419602,
+            "frozen_linear_wheel_and_cue": 0.14140305053200208,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.17050232965366968,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.13415577859837677,
+            "frozen_attention_wheel_and_cue": 0.15085180533101128,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.16567595779964855,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.15360306517059913,
+            "updated_linear_wheel_and_cue": 0.13706133246438199,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.15998299475180403,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.1358938482168316,
+            "updated_attention_wheel_and_cue": 0.14927865958256273,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.16111165824881554,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.150659233892503
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266477,
+            "recent_completed_rate": 0.22464628010927276,
+            "frozen_linear_wheel_and_cue": 0.270617293119544,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.29072007080513196,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.22841565194780636,
+            "frozen_attention_wheel_and_cue": 0.234822378738972,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.25187992241263557,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.27010206015424076,
+            "updated_linear_wheel_and_cue": 0.22605955980471687,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.23148788972105974,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.2253330107226636,
+            "updated_attention_wheel_and_cue": 0.2120631874451466,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.216630046569196,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.2517569599915389
+          },
+          "signed_error_rad": {
+            "zero_change": 0.008759837657136341,
+            "repeat_recent_change": 0.008759837657136341,
+            "linear_wheel_and_cue": 0.012662718948775414,
+            "linear_wheel_cue_and_aligned_spikes": 0.013181069595329652,
+            "linear_wheel_cue_and_other_trial_spikes": 0.01280898958517522,
+            "attention_wheel_and_cue": 0.014436345634499944,
+            "attention_wheel_cue_and_aligned_spikes": 0.013157782532631558,
+            "attention_wheel_cue_and_other_trial_spikes": 0.014112541788460112
+          }
+        }
+      }
+    },
+    {
+      "label": "Mouse 4",
+      "lab": "Lab B",
+      "scores": {
+        "quiet_matched": {
+          "rows": 72,
+          "events": 12,
+          "event_rate": 0.16666666666666666,
+          "brier": {
+            "fixed_fitting_rate": 0.14925682320662614,
+            "recent_completed_rate": 0.14159611006292153,
+            "frozen_linear_wheel_and_cue": 0.14622053907187985,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.15907212955076785,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.14089763283608267,
+            "frozen_attention_wheel_and_cue": 0.15074558605664987,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.14721648963908862,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.14193001873848068,
+            "updated_linear_wheel_and_cue": 0.13967784654832954,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.14255053207967106,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.1368887081905623,
+            "updated_attention_wheel_and_cue": 0.1474850670979519,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.14269791776373328,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.14239176579075938
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.19118333654431274,
+            "frozen_linear_wheel_and_cue": 0.2633421643685627,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.3031656320887588,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.09645911862753542,
+            "frozen_attention_wheel_and_cue": 0.2270689372596373,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2311910923190807,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.17582702555470092,
+            "updated_linear_wheel_and_cue": 0.19651554624104112,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.21454147842975518,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.11565402030244207,
+            "updated_attention_wheel_and_cue": 0.1833358980028569,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.1849306736833567,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.16614581134573428
+          },
+          "signed_error_rad": {
+            "zero_change": 0.004069310145641393,
+            "repeat_recent_change": 0.004069310145641393,
+            "linear_wheel_and_cue": 0.005834390005096712,
+            "linear_wheel_cue_and_aligned_spikes": 0.012953562308022394,
+            "linear_wheel_cue_and_other_trial_spikes": 0.015606562401519253,
+            "attention_wheel_and_cue": 0.006803867015814291,
+            "attention_wheel_cue_and_aligned_spikes": 0.008830146515975117,
+            "attention_wheel_cue_and_other_trial_spikes": 0.01590551149426898
+          }
+        },
+        "all_matched": {
+          "rows": 201,
+          "events": 73,
+          "event_rate": 0.36318407960199006,
+          "brier": {
+            "fixed_fitting_rate": 0.2139498244539586,
+            "recent_completed_rate": 0.21408645466238363,
+            "frozen_linear_wheel_and_cue": 0.1881925570988837,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.18970194045021008,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.2301422271503171,
+            "frozen_attention_wheel_and_cue": 0.16681704760337424,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.16502441252430097,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.1580679977659495,
+            "updated_linear_wheel_and_cue": 0.18876733611368895,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.1854363793107694,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.20399710364770132,
+            "updated_attention_wheel_and_cue": 0.16192766428106792,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.1664481062937158,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.15973902531821707
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.38157726541629966,
+            "recent_completed_rate": 0.3644634847584405,
+            "frozen_linear_wheel_and_cue": 0.3936767598323472,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.4357176327955612,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.1905140424511821,
+            "frozen_attention_wheel_and_cue": 0.4533418378203931,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.38935805206312424,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.3421521663074879,
+            "updated_linear_wheel_and_cue": 0.3764338170223895,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.3930679522961072,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.2832858565727875,
+            "updated_attention_wheel_and_cue": 0.4023385326397822,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.3751544934042546,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.3539609569562861
+          },
+          "signed_error_rad": {
+            "zero_change": 0.02573424485945477,
+            "repeat_recent_change": 0.02231522300386891,
+            "linear_wheel_and_cue": 0.023601913620213834,
+            "linear_wheel_cue_and_aligned_spikes": 0.02736651317137304,
+            "linear_wheel_cue_and_other_trial_spikes": 0.029394437759788963,
+            "attention_wheel_and_cue": 0.02768084444859124,
+            "attention_wheel_cue_and_aligned_spikes": 0.026318515345802013,
+            "attention_wheel_cue_and_other_trial_spikes": 0.029985691042178558
+          }
+        },
+        "quiet_issuable": {
+          "rows": 90,
+          "events": 13,
+          "event_rate": 0.14444444444444443,
+          "brier": {
+            "fixed_fitting_rate": 0.13896747745669938,
+            "recent_completed_rate": 0.12667683569889604,
+            "frozen_linear_wheel_and_cue": 0.13815707310504766,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.14718380975267514,
+            "frozen_attention_wheel_and_cue": 0.13789162923371226,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.13565291023234063,
+            "updated_linear_wheel_and_cue": 0.127405478359337,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.1281647241183447,
+            "updated_attention_wheel_and_cue": 0.13078591528639893,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.12784368806182592
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.1907929090161227,
+            "frozen_linear_wheel_and_cue": 0.2596552613461109,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.29476758729533065,
+            "frozen_attention_wheel_and_cue": 0.22694586509450418,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2278814328358697,
+            "updated_linear_wheel_and_cue": 0.19324064292163107,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.2091949604567714,
+            "updated_attention_wheel_and_cue": 0.18154214447888006,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.1815004499295723
+          },
+          "signed_error_rad": {
+            "zero_change": 0.0037667750458082977,
+            "repeat_recent_change": 0.0037667750458082977,
+            "linear_wheel_and_cue": 0.005843192762993253,
+            "linear_wheel_cue_and_aligned_spikes": 0.012478636991379159,
+            "attention_wheel_and_cue": 0.0067845319950902505,
+            "attention_wheel_cue_and_aligned_spikes": 0.008723228918490021
+          }
+        },
+        "all_issuable": {
+          "rows": 239,
+          "events": 81,
+          "event_rate": 0.3389121338912134,
+          "brier": {
+            "fixed_fitting_rate": 0.20708720780886963,
+            "recent_completed_rate": 0.20516985410111338,
+            "frozen_linear_wheel_and_cue": 0.18966489011588666,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.1924646916026306,
+            "frozen_attention_wheel_and_cue": 0.164074827174582,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.1637156947934317,
+            "updated_linear_wheel_and_cue": 0.18821431271407044,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.18664660796148166,
+            "updated_attention_wheel_and_cue": 0.15656221022120417,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.16303512955496152
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.3783421055283793,
+            "recent_completed_rate": 0.35489659558864756,
+            "frozen_linear_wheel_and_cue": 0.3826065556509794,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.42441343694676387,
+            "frozen_attention_wheel_and_cue": 0.4418934416399938,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.3788189981563366,
+            "updated_linear_wheel_and_cue": 0.3602327789291376,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.37725446219244063,
+            "updated_attention_wheel_and_cue": 0.3873651292721181,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.35839728007645383
+          },
+          "signed_error_rad": {
+            "zero_change": 0.0229455285217205,
+            "repeat_recent_change": 0.02058358320815605,
+            "linear_wheel_and_cue": 0.02230017504737519,
+            "linear_wheel_cue_and_aligned_spikes": 0.025982186783936087,
+            "attention_wheel_and_cue": 0.02561148134175251,
+            "attention_wheel_cue_and_aligned_spikes": 0.024188577959035756
+          }
+        },
+        "quiet_matched_no_feedback": {
+          "rows": 0,
+          "events": 0,
+          "event_rate": null,
+          "brier": null,
+          "mean_predicted": null,
+          "signed_error_rad": null
+        },
+        "quiet_matched_1_to_7_feedback": {
+          "rows": 1,
+          "events": 0,
+          "event_rate": 0.0,
+          "brier": {
+            "fixed_fitting_rate": 0.07208673008217543,
+            "recent_completed_rate": 0.05957580998526896,
+            "frozen_linear_wheel_and_cue": 0.0449320885797906,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.11140485636784186,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.0020595467555293416,
+            "frozen_attention_wheel_and_cue": 0.04425132332389247,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.05931010247554609,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.008705773560137936,
+            "updated_linear_wheel_and_cue": 0.03848536749108886,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.09647067470247293,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.0020595467555293416,
+            "updated_attention_wheel_and_cue": 0.03743485809613577,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.05218252248085463,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.008705773560137936
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.24408156420604354,
+            "frozen_linear_wheel_and_cue": 0.21197190516620498,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.33377366038655876,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.04538222951254534,
+            "frozen_attention_wheel_and_cue": 0.21035998508245923,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.24353665530171448,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.09330473492882307,
+            "updated_linear_wheel_and_cue": 0.1961768780745806,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.3105972870172451,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.04538222951254534,
+            "updated_attention_wheel_and_cue": 0.19348089853041248,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.22843494146223478,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.09330473492882307
+          },
+          "signed_error_rad": {
+            "zero_change": 0.0,
+            "repeat_recent_change": 0.0,
+            "linear_wheel_and_cue": 0.0007736030050313908,
+            "linear_wheel_cue_and_aligned_spikes": 0.00997948452247589,
+            "linear_wheel_cue_and_other_trial_spikes": 0.021722780981169365,
+            "attention_wheel_and_cue": 0.005555500086359622,
+            "attention_wheel_cue_and_aligned_spikes": 0.004191830551436053,
+            "attention_wheel_cue_and_other_trial_spikes": 0.018090268932338737
+          }
+        },
+        "quiet_matched_at_least_8_feedback": {
+          "rows": 71,
+          "events": 12,
+          "event_rate": 0.16901408450704225,
+          "brier": {
+            "fixed_fitting_rate": 0.15034372592668876,
+            "recent_completed_rate": 0.142751325556973,
+            "frozen_linear_wheel_and_cue": 0.1476471369661346,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.15974349959559778,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.1428530988372172,
+            "frozen_attention_wheel_and_cue": 0.152245505250069,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.14845460776815264,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.14380641655789397,
+            "updated_linear_wheel_and_cue": 0.14110309273223431,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.1431995441554062,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.13878771046429517,
+            "updated_attention_wheel_and_cue": 0.14903507004163946,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.14397278248602735,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.14427466708978223
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266478,
+            "recent_completed_rate": 0.19043829108428842,
+            "frozen_linear_wheel_and_cue": 0.26406568914606077,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.30273453309864895,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.09717851143197191,
+            "frozen_attention_wheel_and_cue": 0.2273042746142454,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.23101721115031118,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.17698931133816398,
+            "updated_linear_wheel_and_cue": 0.19652031621521657,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.21318857971725536,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.11664376383469413,
+            "updated_attention_wheel_and_cue": 0.18319301067148291,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.18431793751745698,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.16717174199949358
+          },
+          "signed_error_rad": {
+            "zero_change": 0.004126624373044793,
+            "repeat_recent_change": 0.004126624373044793,
+            "linear_wheel_and_cue": 0.005905668695238476,
+            "linear_wheel_cue_and_aligned_spikes": 0.012995450727537132,
+            "linear_wheel_cue_and_other_trial_spikes": 0.015520418477862206,
+            "attention_wheel_and_cue": 0.006821449648623511,
+            "attention_wheel_cue_and_aligned_spikes": 0.008895474909841865,
+            "attention_wheel_cue_and_other_trial_spikes": 0.015874740262746875
+          }
+        }
+      }
+    },
+    {
+      "label": "Mouse 5",
+      "lab": "Lab C",
+      "scores": {
+        "quiet_matched": {
+          "rows": 28,
+          "events": 25,
+          "event_rate": 0.8928571428571429,
+          "brier": {
+            "fixed_fitting_rate": 0.4854979432488756,
+            "recent_completed_rate": 0.2022541295993216,
+            "frozen_linear_wheel_and_cue": 0.4664445866212818,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.43078620218384195,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.666287586402557,
+            "frozen_attention_wheel_and_cue": 0.4954951092110604,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.48345640961853537,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.5516654223704208,
+            "updated_linear_wheel_and_cue": 0.18444006572784916,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.17977336010204506,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.3698984393978796,
+            "updated_attention_wheel_and_cue": 0.19530031413123652,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.20266991884870644,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.3091201339175186
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.5802451933545274,
+            "frozen_linear_wheel_and_cue": 0.2817999191447798,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.32221328770715935,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.1367891214331803,
+            "frozen_attention_wheel_and_cue": 0.25854356965717656,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2768755603256041,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.22120726895200282,
+            "updated_linear_wheel_and_cue": 0.6060382475571363,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.6305431998366984,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.3873547716041261,
+            "updated_attention_wheel_and_cue": 0.5909193242365032,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.5949267950377742,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.4594204055986525
+          },
+          "signed_error_rad": {
+            "zero_change": 0.03166574626420931,
+            "repeat_recent_change": 0.03166574626420931,
+            "linear_wheel_and_cue": 0.029394683489055887,
+            "linear_wheel_cue_and_aligned_spikes": 0.030126410363801308,
+            "linear_wheel_cue_and_other_trial_spikes": 0.03053837157784195,
+            "attention_wheel_and_cue": 0.02866186652335314,
+            "attention_wheel_cue_and_aligned_spikes": 0.028599278018684397,
+            "attention_wheel_cue_and_other_trial_spikes": 0.030517855141809856
+          }
+        },
+        "all_matched": {
+          "rows": 202,
+          "events": 180,
+          "event_rate": 0.8910891089108911,
+          "brier": {
+            "fixed_fitting_rate": 0.3225123135735838,
+            "recent_completed_rate": 0.14780861336027268,
+            "frozen_linear_wheel_and_cue": 0.31193846375397394,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.3130160425564889,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.5054075483069195,
+            "frozen_attention_wheel_and_cue": 0.20629985930267233,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2571848351020722,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.27011114822302584,
+            "updated_linear_wheel_and_cue": 0.14046023499611537,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.1503394858869106,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.19961450789478963,
+            "updated_attention_wheel_and_cue": 0.12471195260385606,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.13614223100456782,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.14738003775681832
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.4202712768271729,
+            "recent_completed_rate": 0.6839835277083353,
+            "frozen_linear_wheel_and_cue": 0.4343935209023644,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.44690392735877454,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.25750825685480055,
+            "frozen_attention_wheel_and_cue": 0.6032448836514553,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.5188674884120718,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.503985915881889,
+            "updated_linear_wheel_and_cue": 0.7005649825324007,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.7039340719875726,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.6068026652312338,
+            "updated_attention_wheel_and_cue": 0.7554325811558048,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.7194868289577016,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.6989372592671228
+          },
+          "signed_error_rad": {
+            "zero_change": 0.03434750051290503,
+            "repeat_recent_change": 0.03283630161790926,
+            "linear_wheel_and_cue": 0.031496175875319624,
+            "linear_wheel_cue_and_aligned_spikes": 0.0316301456134977,
+            "linear_wheel_cue_and_other_trial_spikes": 0.031948644907742574,
+            "attention_wheel_and_cue": 0.033672592569758665,
+            "attention_wheel_cue_and_aligned_spikes": 0.030988398191594668,
+            "attention_wheel_cue_and_other_trial_spikes": 0.03184262306377637
+          }
+        },
+        "quiet_issuable": {
+          "rows": 46,
+          "events": 39,
+          "event_rate": 0.8478260869565217,
+          "brier": {
+            "fixed_fitting_rate": 0.464647638584816,
+            "recent_completed_rate": 0.23891485400699813,
+            "frozen_linear_wheel_and_cue": 0.4432534210587256,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.42217357097174635,
+            "frozen_attention_wheel_and_cue": 0.48119314738713587,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.4783627530453649,
+            "updated_linear_wheel_and_cue": 0.21585300865267817,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.21763320729068783,
+            "updated_attention_wheel_and_cue": 0.2440999867384191,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.2534267914302452
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266478,
+            "recent_completed_rate": 0.5228212584446399,
+            "frozen_linear_wheel_and_cue": 0.2795636515413763,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.30918147722738903,
+            "frozen_attention_wheel_and_cue": 0.25586811922312913,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2671110392040987,
+            "updated_linear_wheel_and_cue": 0.5440391666521814,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.5620420072044795,
+            "updated_attention_wheel_and_cue": 0.5280374149293385,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.5297193180052205
+          },
+          "signed_error_rad": {
+            "zero_change": 0.02937906682885203,
+            "repeat_recent_change": 0.02937906682885203,
+            "linear_wheel_and_cue": 0.027073939796848946,
+            "linear_wheel_cue_and_aligned_spikes": 0.028904858191065846,
+            "attention_wheel_and_cue": 0.026743090109144167,
+            "attention_wheel_cue_and_aligned_spikes": 0.027978452106642536
+          }
+        },
+        "all_issuable": {
+          "rows": 240,
+          "events": 208,
+          "event_rate": 0.8666666666666667,
+          "brier": {
+            "fixed_fitting_rate": 0.3267955834404855,
+            "recent_completed_rate": 0.16225059931965585,
+            "frozen_linear_wheel_and_cue": 0.32044424513754205,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.3191801439994206,
+            "frozen_attention_wheel_and_cue": 0.23264531868875313,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2778832189438757,
+            "updated_linear_wheel_and_cue": 0.15704204164640773,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.1661947156630715,
+            "updated_attention_wheel_and_cue": 0.14840337949219817,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.1585872072411518
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.4109230449653972,
+            "recent_completed_rate": 0.6565198586752303,
+            "frozen_linear_wheel_and_cue": 0.42369539788966565,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.4387176556903694,
+            "frozen_attention_wheel_and_cue": 0.5709474353448326,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.4970964556706901,
+            "updated_linear_wheel_and_cue": 0.6712410648009594,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.6766807616641467,
+            "updated_attention_wheel_and_cue": 0.7171374549249098,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.6860957408717006
+          },
+          "signed_error_rad": {
+            "zero_change": 0.03272492347489386,
+            "repeat_recent_change": 0.03133794917918094,
+            "linear_wheel_and_cue": 0.029897756644712913,
+            "linear_wheel_cue_and_aligned_spikes": 0.03029815112743251,
+            "attention_wheel_and_cue": 0.03187107125792632,
+            "attention_wheel_cue_and_aligned_spikes": 0.02975556853184851
+          }
+        },
+        "quiet_matched_no_feedback": {
+          "rows": 0,
+          "events": 0,
+          "event_rate": null,
+          "brier": null,
+          "mean_predicted": null,
+          "signed_error_rad": null
+        },
+        "quiet_matched_1_to_7_feedback": {
+          "rows": 1,
+          "events": 1,
+          "event_rate": 1.0,
+          "brier": {
+            "fixed_fitting_rate": 0.5351072888288797,
+            "recent_completed_rate": 0.3793741260376132,
+            "frozen_linear_wheel_and_cue": 0.41903407530518555,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.23172258602676885,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.6671265335846591,
+            "frozen_attention_wheel_and_cue": 0.4264391933950123,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.23961036475076014,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.3668082805555191,
+            "updated_linear_wheel_and_cue": 0.2570198939071089,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.1134903701834263,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.6671265335846591,
+            "updated_attention_wheel_and_cue": 0.24706116187292024,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.10570273837016295,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.3668082805555191
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.3840664597234429,
+            "frozen_linear_wheel_and_cue": 0.3526715862059,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.51862427769281,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.18322185779450537,
+            "frozen_attention_wheel_and_cue": 0.3469768814237797,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.5104998827877973,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.39435300664865913,
+            "updated_linear_wheel_and_cue": 0.4930287050462236,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.6631166816486362,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.18322185779450537,
+            "updated_attention_wheel_and_cue": 0.5029475260368175,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.6748804245048248,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.39435300664865913
+          },
+          "signed_error_rad": {
+            "zero_change": 0.058291269939655166,
+            "repeat_recent_change": 0.058291269939655166,
+            "linear_wheel_and_cue": 0.05128579263129003,
+            "linear_wheel_cue_and_aligned_spikes": 0.05832140559933577,
+            "linear_wheel_cue_and_other_trial_spikes": 0.06300784871853862,
+            "attention_wheel_and_cue": 0.04231521139145118,
+            "attention_wheel_cue_and_aligned_spikes": 0.048118146897339176,
+            "attention_wheel_cue_and_other_trial_spikes": 0.050996113158354714
+          }
+        },
+        "quiet_matched_at_least_8_feedback": {
+          "rows": 27,
+          "events": 24,
+          "event_rate": 0.8888888888888888,
+          "brier": {
+            "fixed_fitting_rate": 0.48366056007924585,
+            "recent_completed_rate": 0.1956941297312367,
+            "frozen_linear_wheel_and_cue": 0.468200531484841,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.43815892870817796,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.6662565142847013,
+            "frozen_attention_wheel_and_cue": 0.49805273572276587,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.49248774461363815,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.5585119831783801,
+            "updated_linear_wheel_and_cue": 0.18175192394343218,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.18222828565458649,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.3588899914650359,
+            "updated_attention_wheel_and_cue": 0.19338324569635934,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.20626129590346734,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.3069835358938889
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.5875110723779008,
+            "frozen_linear_wheel_and_cue": 0.2791750425869606,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.3149388065965797,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.13506939045683494,
+            "frozen_attention_wheel_and_cue": 0.255268261813969,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2682228076418192,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.2147944638521267,
+            "updated_linear_wheel_and_cue": 0.6102237861686517,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.6293367745844043,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.3949152498933713,
+            "updated_attention_wheel_and_cue": 0.5941775389846398,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.5919655495019575,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.46183030926346713
+          },
+          "signed_error_rad": {
+            "zero_change": 0.030679615757711314,
+            "repeat_recent_change": 0.030679615757711314,
+            "linear_wheel_and_cue": 0.02858390166897315,
+            "linear_wheel_cue_and_aligned_spikes": 0.029082151281003745,
+            "linear_wheel_cue_and_other_trial_spikes": 0.02933579835040874,
+            "attention_wheel_and_cue": 0.028156187083793954,
+            "attention_wheel_cue_and_aligned_spikes": 0.02787635694910459,
+            "attention_wheel_cue_and_other_trial_spikes": 0.029759401141197083
+          }
+        }
+      }
+    },
+    {
+      "label": "Mouse 6",
+      "lab": "Lab C",
+      "scores": {
+        "quiet_matched": {
+          "rows": 114,
+          "events": 58,
+          "event_rate": 0.5087719298245614,
+          "brier": {
+            "fixed_fitting_rate": 0.307658593304183,
+            "recent_completed_rate": 0.2660533600524715,
+            "frozen_linear_wheel_and_cue": 0.3061107087049679,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.32141586796740607,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.2567343738496473,
+            "frozen_attention_wheel_and_cue": 0.30230298409083334,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.32234626436946384,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.2733740944996439,
+            "updated_linear_wheel_and_cue": 0.22332179526666227,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.2544895566476008,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.21583293263179956,
+            "updated_attention_wheel_and_cue": 0.2699380018487809,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.30001743788898655,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.25141251788150504
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.38942876940353854,
+            "frozen_linear_wheel_and_cue": 0.2009824942112843,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.201275588515507,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.2771527971263848,
+            "frozen_attention_wheel_and_cue": 0.28267426159375997,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.28297537750982354,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.32242942993634255,
+            "updated_linear_wheel_and_cue": 0.3588500309398523,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.35012969866585125,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.40044304973007777,
+            "updated_attention_wheel_and_cue": 0.4029871106354508,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.396823886921607,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.4246722608140726
+          },
+          "signed_error_rad": {
+            "zero_change": 0.02204088184698882,
+            "repeat_recent_change": 0.02204088184698882,
+            "linear_wheel_and_cue": 0.0254195080025069,
+            "linear_wheel_cue_and_aligned_spikes": 0.032299704987438595,
+            "linear_wheel_cue_and_other_trial_spikes": 0.03225379137707154,
+            "attention_wheel_and_cue": 0.02574240691477336,
+            "attention_wheel_cue_and_aligned_spikes": 0.03204474046675313,
+            "attention_wheel_cue_and_other_trial_spikes": 0.036007789224294935
+          }
+        },
+        "all_matched": {
+          "rows": 194,
+          "events": 113,
+          "event_rate": 0.5824742268041238,
+          "brier": {
+            "fixed_fitting_rate": 0.29369529023962776,
+            "recent_completed_rate": 0.2506671096506411,
+            "frozen_linear_wheel_and_cue": 0.2964855183015828,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.3091772156152559,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.256895265061082,
+            "frozen_attention_wheel_and_cue": 0.29805201025769334,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.3141632130658525,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.26315182512205726,
+            "updated_linear_wheel_and_cue": 0.22687836525116437,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.24788283647344553,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.22226729278123897,
+            "updated_attention_wheel_and_cue": 0.25731965359634257,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.27693607593911523,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.2374040128302272
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.3411520606017777,
+            "recent_completed_rate": 0.47500276922305623,
+            "frozen_linear_wheel_and_cue": 0.2975207724448141,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.2943280634512028,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.38362564202777916,
+            "frozen_attention_wheel_and_cue": 0.34367566540887445,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.339210433948441,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.39242761435261464,
+            "updated_linear_wheel_and_cue": 0.45906880869823874,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.4474428188564023,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.5010725833153399,
+            "updated_attention_wheel_and_cue": 0.4811072773893772,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.4722257609303839,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.5064192239850178
+          },
+          "signed_error_rad": {
+            "zero_change": 0.029161449204754292,
+            "repeat_recent_change": 0.02754839724223541,
+            "linear_wheel_and_cue": 0.03289159276741433,
+            "linear_wheel_cue_and_aligned_spikes": 0.03903226840652922,
+            "linear_wheel_cue_and_other_trial_spikes": 0.03937900783730288,
+            "attention_wheel_and_cue": 0.03478508123840313,
+            "attention_wheel_cue_and_aligned_spikes": 0.04336929570387129,
+            "attention_wheel_cue_and_other_trial_spikes": 0.045729203471468895
+          }
+        },
+        "quiet_issuable": {
+          "rows": 141,
+          "events": 67,
+          "event_rate": 0.475177304964539,
+          "brier": {
+            "fixed_fitting_rate": 0.2921035913306094,
+            "recent_completed_rate": 0.25950690946875177,
+            "frozen_linear_wheel_and_cue": 0.2881499621439364,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.31019960886116454,
+            "frozen_attention_wheel_and_cue": 0.2912608345415219,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.31428990504310844,
+            "updated_linear_wheel_and_cue": 0.21828065873011923,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.2555698098871548,
+            "updated_attention_wheel_and_cue": 0.2661685180677405,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.2968625213079531
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.26848972062664783,
+            "recent_completed_rate": 0.3719389461336526,
+            "frozen_linear_wheel_and_cue": 0.202542535192643,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.21115505745946608,
+            "frozen_attention_wheel_and_cue": 0.28005185474313055,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2833103350816664,
+            "updated_linear_wheel_and_cue": 0.342126049059963,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.3439901574520852,
+            "updated_attention_wheel_and_cue": 0.3844276498981057,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.38156856348382956
+          },
+          "signed_error_rad": {
+            "zero_change": 0.020094060391665353,
+            "repeat_recent_change": 0.020094060391665353,
+            "linear_wheel_and_cue": 0.023559811943308844,
+            "linear_wheel_cue_and_aligned_spikes": 0.03041050196233184,
+            "attention_wheel_and_cue": 0.023925184157829293,
+            "attention_wheel_cue_and_aligned_spikes": 0.030143841051486743
+          }
+        },
+        "all_issuable": {
+          "rows": 240,
+          "events": 133,
+          "event_rate": 0.5541666666666667,
+          "brier": {
+            "fixed_fitting_rate": 0.28360182374439835,
+            "recent_completed_rate": 0.24775930243816552,
+            "frozen_linear_wheel_and_cue": 0.28361187395404747,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.29564098315230675,
+            "frozen_attention_wheel_and_cue": 0.28643203221057784,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.30250510426900956,
+            "updated_linear_wheel_and_cue": 0.22398963887103662,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.2450670878322637,
+            "updated_attention_wheel_and_cue": 0.2528602360709312,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.2726495780866195
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.34117476758302,
+            "recent_completed_rate": 0.45576146614363033,
+            "frozen_linear_wheel_and_cue": 0.30036720414520823,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.3042604427782888,
+            "frozen_attention_wheel_and_cue": 0.34635498227961675,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.3452371085614293,
+            "updated_linear_wheel_and_cue": 0.4414293814450185,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.43816135546996066,
+            "updated_attention_wheel_and_cue": 0.4654073893654546,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.458911676097091
+          },
+          "signed_error_rad": {
+            "zero_change": 0.027355990717294287,
+            "repeat_recent_change": 0.025809226756176338,
+            "linear_wheel_and_cue": 0.030315902627700956,
+            "linear_wheel_cue_and_aligned_spikes": 0.03658973028721382,
+            "attention_wheel_and_cue": 0.03265965503103706,
+            "attention_wheel_cue_and_aligned_spikes": 0.04123651809168024
+          }
+        },
+        "quiet_matched_no_feedback": {
+          "rows": 0,
+          "events": 0,
+          "event_rate": null,
+          "brier": null,
+          "mean_predicted": null,
+          "signed_error_rad": null
+        },
+        "quiet_matched_1_to_7_feedback": {
+          "rows": 2,
+          "events": 0,
+          "event_rate": 0.0,
+          "brier": {
+            "fixed_fitting_rate": 0.07208673008217543,
+            "recent_completed_rate": 0.05783928763301455,
+            "frozen_linear_wheel_and_cue": 0.038619664438487765,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.005835477247293708,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.14500211504679353,
+            "frozen_attention_wheel_and_cue": 0.051472703774298176,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.015824329673372682,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.09206810836442622,
+            "updated_linear_wheel_and_cue": 0.03731057895609645,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.005464610445852949,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.14452276165953776,
+            "updated_attention_wheel_and_cue": 0.04198637388401145,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.011150160875505535,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.08917982104805063
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.24045520218251193,
+            "frozen_linear_wheel_and_cue": 0.1793595192984627,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.06720178244481831,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.30093355429888513,
+            "frozen_attention_wheel_and_cue": 0.22668966935991336,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.1244384697273456,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.2919814608455201,
+            "updated_linear_wheel_and_cue": 0.17501286748776113,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.0648177234280014,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.29718003409910854,
+            "updated_attention_wheel_and_cue": 0.20483373706903446,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.10451863970939299,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.284842478900652
+          },
+          "signed_error_rad": {
+            "zero_change": 0.0015339807878856915,
+            "repeat_recent_change": 0.0015339807878856915,
+            "linear_wheel_and_cue": 0.006374992312549305,
+            "linear_wheel_cue_and_aligned_spikes": 0.004809921254419753,
+            "linear_wheel_cue_and_other_trial_spikes": 0.01401530568637815,
+            "attention_wheel_and_cue": 0.004902507423710828,
+            "attention_wheel_cue_and_aligned_spikes": 0.004521380844868238,
+            "attention_wheel_cue_and_other_trial_spikes": 0.012514552039998298
+          }
+        },
+        "quiet_matched_at_least_8_feedback": {
+          "rows": 112,
+          "events": 58,
+          "event_rate": 0.5178571428571429,
+          "brier": {
+            "fixed_fitting_rate": 0.3118652337188616,
+            "recent_completed_rate": 0.26977146848853323,
+            "frozen_linear_wheel_and_cue": 0.31088733449544076,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.3270512320874081,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.25872959275684115,
+            "frozen_attention_wheel_and_cue": 0.30678209623934294,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.3278198703461797,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.2766117013949156,
+            "updated_linear_wheel_and_cue": 0.22664342412935096,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.2589364306869177,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.21710632854201853,
+            "updated_attention_wheel_and_cue": 0.274008566633866,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.30517578212137014,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.25430953032495957
+          },
+          "mean_predicted": {
+            "fixed_fitting_rate": 0.2684897206266479,
+            "recent_completed_rate": 0.39208901167534255,
+            "frozen_linear_wheel_and_cue": 0.201368618763299,
+            "frozen_linear_wheel_cue_and_aligned_spikes": 0.20366976362391215,
+            "frozen_linear_wheel_cue_and_other_trial_spikes": 0.27672814074830443,
+            "frozen_attention_wheel_and_cue": 0.2836739864550787,
+            "frozen_attention_wheel_cue_and_aligned_spikes": 0.2858063937202249,
+            "frozen_attention_wheel_cue_and_other_trial_spikes": 0.3229731436701072,
+            "updated_linear_wheel_and_cue": 0.3621328374300682,
+            "updated_linear_wheel_cue_and_aligned_spikes": 0.35522455536652714,
+            "updated_linear_wheel_cue_and_other_trial_spikes": 0.40228703215205935,
+            "updated_attention_wheel_and_cue": 0.40652556373485105,
+            "updated_attention_wheel_cue_and_aligned_spikes": 0.40204362347896794,
+            "updated_attention_wheel_cue_and_other_trial_spikes": 0.42716922120538375
+          },
+          "signed_error_rad": {
+            "zero_change": 0.022407076508758523,
+            "repeat_recent_change": 0.022407076508758523,
+            "linear_wheel_and_cue": 0.025759588639827573,
+            "linear_wheel_cue_and_aligned_spikes": 0.03279059398267107,
+            "linear_wheel_cue_and_other_trial_spikes": 0.03257947862154821,
+            "attention_wheel_and_cue": 0.026114547977113763,
+            "attention_wheel_cue_and_aligned_spikes": 0.03253622903142966,
+            "attention_wheel_cue_and_other_trial_spikes": 0.03642731131687166
+          }
+        }
+      }
+    }
+  ],
+  "quiet_paired_neural_comparisons": {
+    "linear": {
+      "updated_aligned_minus_updated_wheel_cue": 0.010015651269660503,
+      "updated_aligned_minus_updated_other_trial": -0.020112721462112487,
+      "updated_aligned_minus_adaptive_rate": -0.0005779702622787375
+    },
+    "attention": {
+      "updated_aligned_minus_updated_wheel_cue": 0.007542924147150992,
+      "updated_aligned_minus_updated_other_trial": -0.010213416763523886,
+      "updated_aligned_minus_adaptive_rate": 0.01010418413637068
+    }
+  },
+  "support": {
+    "issued_rows": 1438,
+    "quiet_without_new_encoder_reading": 527,
+    "source_holds": 0,
+    "strictly_earlier_feedback_windows_checked": 1432
+  },
+  "verification": {
+    "recorded_outcomes_available_only_after_their_full_windows": true,
+    "independent_source_model_feedback_and_score_replay": true,
+    "state_reset_for_each_recording": true,
+    "verified_in_live_delivery": false
+  }
+}
