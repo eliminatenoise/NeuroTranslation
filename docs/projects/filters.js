@@ -1,5 +1,6 @@
 const filters = document.querySelector('.filters');
-const choices = [...filters.querySelectorAll('button')];
+const projectFilter = document.querySelector('.project-filter');
+const choices = [...projectFilter.querySelectorAll('button')];
 const typeChoice = document.querySelector('#resource-type');
 const search = document.querySelector('#resource-search');
 const projects = [...document.querySelectorAll('[data-project]')];
@@ -94,6 +95,7 @@ document.querySelector('[data-show-all]')?.addEventListener('click', () => {
 });
 addEventListener('popstate', readLocation);
 readLocation();
+projectFilter.hidden = false;
 filters.hidden = false;
 status.hidden = false;
 document.querySelector('[data-fallback-jumps]')?.setAttribute('hidden', '');
