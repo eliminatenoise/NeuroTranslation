@@ -1,6 +1,6 @@
 # NeuroTranslation
 
-**[Try NeuroTranslate 0.0 in your browser](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/) · [Set up 0.1 Research Edition](models/neurotranslate-0.1/research-edition/) · [Compare walking forecasts](https://eliminatenoise.github.io/NeuroTranslation/walking-blends/) · [Model downloads](models/#current-downloads) · [Papers](papers/)**
+**[Try NeuroTranslate 0.0 in your browser](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/) · [Download 0.0](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0.zip) · [Set up 0.1 Research Edition](models/neurotranslate-0.1/research-edition/) · [Compare walking forecasts](https://eliminatenoise.github.io/NeuroTranslation/walking-blends/) · [Model downloads](models/#current-downloads) · [Papers](papers/)**
 
 [Project browser](https://eliminatenoise.github.io/NeuroTranslation/projects/?project=neurotranslation) · [Technical index](https://eliminatenoise.github.io/NeuroTranslation/projects/technical.html#neurotranslation)
 
