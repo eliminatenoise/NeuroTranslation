@@ -55,19 +55,22 @@
       </details>
       <details class="measurement" id="camera-test" open>
         <summary>Forecast accuracy on recorded movement</summary>
-        <p>Constant velocity had the lowest mean endpoint error for each of three participants. Each participant performed a different movement, a walk, squat or shoulder press. The C1 and C3 views of each participant show the same recording. Person and movement are linked in this sample. The table averages each view, then both views per participant, then all three participants.</p>
+        <p>Holding the latest position had the lowest mean endpoint and displacement errors. Eight previously unused participants each did a walk, squat, shoulder press and jumping jacks. The C1 and C3 views of each trial show the same event. Average each view separately, then both views per action, the four actions per participant and the eight participants.</p>
         <table class="forecast-scores">
           <caption>Mean endpoint and displacement errors in pixels after longest-edge scaling to 640.</caption>
           <thead><tr><th scope="col">Method</th><th scope="col">Endpoint</th><th scope="col">Motion</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Hold last position</th><td>8.90</td><td>5.44</td></tr>
-            <tr><th scope="row">Constant velocity</th><td>8.17</td><td>4.22</td></tr>
-            <tr><th scope="row">NeuroTranslate 0.0</th><td>8.79</td><td>6.17</td></tr>
+            <tr><th scope="row">Hold last position</th><td>15.34</td><td>9.70</td></tr>
+            <tr><th scope="row">Constant velocity from two points</th><td>15.76</td><td>10.14</td></tr>
+            <tr><th scope="row">NeuroTranslate 0.0</th><td>15.71</td><td>10.98</td></tr>
+            <tr><th scope="row">Weighted straight line</th><td>16.01</td><td>10.14</td></tr>
+            <tr><th scope="row">Weighted curve with penalty</th><td>15.90</td><td>10.03</td></tr>
           </tbody>
         </table>
-        <p>The exact released still-image detector and weights used five input frames. Constant velocity extrapolated the last two available positions by 120 ms. Endpoint error is Euclidean distance to the interpolated Vicon projection. Displacement error is the distance between the forecast change from the detected starting point and the Vicon change from its own starting point. The app's live comparison uses its own detector's later positions.</p>
-        <p>The run decoded 810 images for 1,086 scheduled time slots and scored 2,321 of 4,849 forecasts. The publisher's dropped-frame indices supply a nominal 60 Hz clock. An adjacent pair of valid reference rows must bracket the requested time. Missing brackets explain 2,524 exclusions. The publisher aligned Vicon and RGB frames after capture. Physical exposure times remain unverified. Only the squat recording supplied 23 shared comparisons across both views for all five shifts. Constant velocity had the lowest mean endpoint error across shifts of −2, −1, 0, 1 and 2 camera slots, about ±33 ms.</p>
-        <p>A separate jumping-jack pilot gave mean endpoint errors of 23.09, 28.03 and 23.82 pixels for holding position, constant velocity and NeuroTranslate, respectively, on 225 scored forecasts.</p>
+        <p>The exact released still-image detector feeds five-row windows. The analytical forecasts use the selected joint's history. With lead <var>h</var> = 120 ms and issue time <var>t</var>, the two new fits fix the intercept at the last position and weight earlier times <var>tᵢ</var> by 2<sup>(tᵢ − t)/h</sup>. The curve adds a squared time term and penalizes its coefficient by that column's weighted sum of squares. The attention model also uses summaries of the other pose points. We froze all five predictions before reading the optical coordinates.</p>
+        <p>Endpoint error is Euclidean distance to the projected Vicon position interpolated at the target. Displacement error compares the change from the tracker’s issue position with the change from the Vicon issue position. Lowest mean endpoint errors by action were constant velocity for walking (12.61 px), the curve for squat (7.98 px) and shoulder press (7.68 px), and holding position for jumping jacks (30.18 px).</p>
+        <p>Holding reduced mean endpoint error by 0.411 px against constant velocity and had lower error for five participants. Its paired 95% percentile interval for the difference was −0.794 to +0.0008 px based on 10,000 resamples of participants. The interval includes zero. The comparison uses the same qualifying forecasts for all methods.</p>
+        <p>The run decoded 8,068 images for 10,718 time slots and scored 22,266 of 45,117 forecasts across the 64 views. Missing adjacent reference rows explain 22,652 exclusions and missing optical points the remaining 199. The publisher aligned RGB and Vicon after capture. The 60 Hz grid includes drop indices and physical exposure times remain unverified. On 1,457 common forecasts in 50 views, holding led in pooled endpoint error across shifts of −2, −1, 0, 1 and 2 slots (about ±33 ms). All eight participants contributed and one had all eight view and action combinations in this subset. The live comparison uses its own tracker’s later positions.</p>
         <p>SUMediPose v1.0 by Chris-Mari Schreuder, Oloff Bergh, Lizé Steyn and Rensu P. Theart. These are aggregate replay results. <a href="https://doi.org/10.7910/DVN/GRRROM">Original recordings</a> · <a href="https://doi.org/10.1016/j.dib.2025.111579">Study methods</a> · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Data licence</a></p>
       </details>
     </section>

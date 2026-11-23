@@ -53,7 +53,7 @@
         <summary>Forecasts, local play and credits</summary>
         <p>The point model learned from tracked animal movement. The browser runs the included weights. The separate fingertip touch study uses the optional local launcher.</p>
         <div class="resource-links">
-          <a href="#camera-test">See the first test on recordings of people</a>
+          <a href="#camera-test">See the forecast test on recordings of people</a>
           <a href="https://github.com/eliminatenoise/NeuroSurge/releases/tag/lite-browser-forecast-2026-11-24">Offline Lite download and setup</a>
           <a href="START.html#local-model">Local NeuroTranslate workbench and fingertip setup</a>
           <a href="scene/src/joint/model/NOTICE.html">Model, data and licence credits</a>
@@ -62,19 +62,24 @@
       </details>
       <details class="measurement" id="camera-test" open>
         <summary>Forecast accuracy on recorded movement</summary>
-        <p>Keeping the point moving at its last speed and direction gave the closest average forecast of where the point ended up for each person in this test. One person walked, one squatted and one pressed their arms overhead. Two cameras recorded each person. We averaged the two views for each person before giving all three people equal weight.</p>
+        <p>Holding the last detected position gave the smallest average error in this test. Eight people each walked, squatted, pressed their arms overhead and did jumping jacks. Two cameras filmed each of those 32 recordings. We averaged the two views for each movement and gave each movement and person equal weight.</p>
         <table class="forecast-scores">
           <caption>Average error in pixels. Smaller is better.</caption>
           <thead><tr><th scope="col">Method</th><th scope="col">Point error</th><th scope="col">Motion error</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Hold last position</th><td>8.90</td><td>5.44</td></tr>
-            <tr><th scope="row">Keep speed and direction</th><td>8.17</td><td>4.22</td></tr>
-            <tr><th scope="row">NeuroTranslate 0.0</th><td>8.79</td><td>6.17</td></tr>
+            <tr><th scope="row">Hold last position</th><td>15.34</td><td>9.70</td></tr>
+            <tr><th scope="row">Speed from the last two points</th><td>15.76</td><td>10.14</td></tr>
+            <tr><th scope="row">NeuroTranslate 0.0</th><td>15.71</td><td>10.98</td></tr>
+            <tr><th scope="row">Recent positions, straight line</th><td>16.01</td><td>10.14</td></tr>
+            <tr><th scope="row">Recent positions, gentle curve</th><td>15.90</td><td>10.03</td></tr>
           </tbody>
         </table>
-        <p>Each method saw the same tracked points and tried to place a point about 0.12 seconds later. A separate set of cameras tracked markers on the body. The researchers used those recordings to estimate the centres of joints and place them in the picture. Point error is the distance from the forecast to that later position. Motion error compares the two changes in position. The forecast starts from the position the game's tracker found. The reference starts from the separate marker measurement at the same moment. This helps account for an error that was already present when making the forecast. We scaled each picture to 640 pixels on its longer edge.</p>
-        <p>At the planned sample rate there were 1,086 time slots. The archive supplied pictures for 810 of them. We could check 2,321 of the 4,849 issued forecasts. For 2,524 of the omitted forecasts, the archive lacked pictures around the target time. The researchers aligned the pictures and marker recordings after collecting them. We used their approximate 60-pictures-per-second time grid. The exact capture time of each picture remains unverified. Only the squat recording had enough paired views to check all five time offsets on the same 23 forecasts. Keeping speed gave the smallest point error there at every offset, from about 0.033 seconds earlier to 0.033 seconds later.</p>
-        <p>In a separate jumping-jack check, holding the last position had the smallest point error. It averaged 23.09 pixels over 225 comparisons. The model averaged 23.82 and the speed rule 28.03. These experiments measure forecasts on the recorded pictures. The live display compares against the point that its own camera tracker finds later.</p>
+        <p>Each forecast tried to place a joint about 0.12 seconds after the last image it used. A separate camera system followed markers on the body. The researchers used those measurements to estimate each joint centre and place it in the image. Point error measures the distance from the forecast to that later position. Motion error measures how much the forecast missed the change in position. For this measure, the forecast starts at the game's tracked point and the reference starts at the separate marker estimate at the same time. Both errors use images scaled to 640 pixels on the longer edge.</p>
+        <p>The four simple rules use the selected joint's earlier positions. The two rules that look back up to five images fit a straight or curved path starting at the latest point. A position from 0.12 seconds earlier has half the weight of the latest one. The curved rule limits how sharply the fit can bend. The trained model also uses information about other points it sees in the same pictures. We saved all five forecasts before scoring them.</p>
+        <p>The smallest average point error for walking came from continuing the speed and direction of the last two points (12.61 pixels). The curved rule led on squats (7.98 pixels) and shoulder presses (7.68 pixels). Holding position led on jumping jacks (30.18 pixels).</p>
+        <p>Holding position averaged about 0.41 pixels less point error than the last-two rule. It had less error for five of the eight people. Resampling those eight people 10,000 times gave a middle 95% range for the difference from −0.794 to +0.0008 pixels. Zero would mean a tie. The upper end favours the last-two rule by a small fraction of a pixel.</p>
+        <p>We used 8,068 images out of 10,718 scheduled time slots. We could score 22,266 of 45,117 forecasts. For 22,652 of the omitted forecasts, the archive lacked two nearby measurements, one before and one after the target time. The other 199 lacked a usable measured point. The researchers aligned the pictures and marker recordings after capture. We used the approximate 60-pictures-per-second grid. Exact exposure times remain unverified.</p>
+        <p>We checked 1,457 of the same forecasts in 50 views at five target times, from roughly 0.033 seconds earlier to 0.033 seconds later. All eight people contributed, and one person had usable forecasts in both views of all four movements. Holding position gave the smallest average point error at every shift when we averaged those 1,457 forecasts. The live display compares the forecast with the point the game's tracker finds later.</p>
         <p>Recordings by Chris-Mari Schreuder, Oloff Bergh, Lizé Steyn and Rensu P. Theart. The test reports aggregate errors from SUMediPose version 1.0. <a href="https://doi.org/10.7910/DVN/GRRROM">Original recordings</a> · <a href="https://doi.org/10.1016/j.dib.2025.111579">Study methods</a> · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Data licence</a></p>
       </details>
     </section>
