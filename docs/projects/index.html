@@ -6,7 +6,7 @@
   <meta name="description" content="Play NeuroSurge, try NeuroTranslate movement forecasts, and explore the Interoceptomics atlas and experiment guide.">
   <meta name="color-scheme" content="dark">
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="browser.css?v=5">
+  <link rel="stylesheet" href="browser.css?v=6">
   <script type="module" src="filters.js?v=5"></script>
   <title>Brain2Body project browser</title>
 </head>
@@ -19,7 +19,12 @@
   <main class="frame" id="projects">
     <div class="intro">
       <h1>Project browser</h1>
-      <p>Play a game about movement, test a forecast, or explore a 3D brain atlas.</p>
+      <div class="project-filter project-switch" role="group" aria-label="Show project" hidden>
+        <button type="button" value="all" aria-pressed="true" aria-label="All projects"><span class="project-name">All projects</span><span class="short-name">All</span></button>
+        <button type="button" value="neurosurge" aria-pressed="false" aria-label="NeuroSurge game"><span class="project-name">NeuroSurge</span><span class="short-name">Game</span></button>
+        <button type="button" value="neurotranslation" aria-pressed="false" aria-label="NeuroTranslation models"><span class="project-name">NeuroTranslation</span><span class="short-name">Models</span></button>
+        <button type="button" value="interoceptomics" aria-pressed="false" aria-label="Interoceptomics atlas and experiments"><span class="project-name">Interoceptomics</span><span class="short-name">Atlas</span></button>
+      </div>
       <nav class="project-jumps" aria-label="Jump to a project" data-fallback-jumps>
         <a href="#neurosurge">NeuroSurge</a><a href="#neurotranslation">NeuroTranslation</a><a href="#interoceptomics">Interoceptomics</a>
       </nav>
@@ -68,12 +73,6 @@
 
     <h2 class="catalog-heading" id="catalog-heading">Browse resources</h2>
     <div class="filters" role="region" aria-labelledby="catalog-heading" hidden>
-      <div class="project-filter" role="group" aria-label="Show project" hidden>
-        <button type="button" value="all" aria-pressed="true">All projects</button>
-        <button type="button" value="neurosurge" aria-pressed="false">NeuroSurge</button>
-        <button type="button" value="neurotranslation" aria-pressed="false">NeuroTranslation</button>
-        <button type="button" value="interoceptomics" aria-pressed="false">Interoceptomics</button>
-      </div>
       <div class="search">
         <label for="resource-search">Search resources</label>
         <input id="resource-search" type="search" maxlength="120" autocomplete="off" placeholder="Atlas, camera, walking">
@@ -110,7 +109,11 @@
         </article>
         <article class="resource" data-kind="try">
           <h3><a href="../previews/neurosurge/">Play the Movement mirror preview</a></h3>
-          <p>Open Full or Lite in your browser. Press C to use a camera, video or timed pictures. The model forecasts a tracked point, and F replays a saved take.</p>
+          <p>Open Full or Lite and press C to track a point on your body in a camera feed, video or timed pictures. Choose a forecast method to estimate where the point will appear 0.12 seconds later. Use F to replay a saved take with the virtual body.</p>
+        </article>
+        <article class="resource" data-kind="read">
+          <h3><a href="../previews/neurosurge/#camera-test">Read the camera forecast results</a></h3>
+          <p>See how far the forecasts missed a measured point in recorded images from 11 people. The same pictures were used to score each method.</p>
         </article>
         <article class="resource" data-kind="get">
           <h3><a href="https://github.com/eliminatenoise/NeuroSurge/releases/download/lite-browser-forecast-2026-11-24/NeuroSurge-Lite.zip">Download Lite offline</a></h3>

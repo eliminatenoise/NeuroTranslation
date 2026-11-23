@@ -59,6 +59,8 @@ h1 { font-size: clamp(2.55rem, 5.6vw, 4.65rem); font-weight: 700; letter-spacing
 .no-results button { min-height: 2.75rem; border: 1px solid #797e8c; border-radius: .45rem; color: inherit; background: var(--surface); padding: .3rem .65rem; cursor: pointer; }
 .project-filter, .project-jumps, .type-filter { display: flex; flex-wrap: wrap; align-items: center; gap: .32rem; }
 .project-filter { flex: 0 0 100%; }
+.project-switch { margin-top: .8rem; }
+.project-switch .short-name { display: none; }
 .project-jumps { gap: .5rem 1rem; margin-top: .85rem; }
 .project-filter button, select { min-height: 2.65rem; border: 1px solid transparent; border-radius: .45rem; padding: .4rem .7rem; color: var(--secondary); background: transparent; cursor: pointer; }
 .project-filter button:hover, select:hover { border-color: #6e7686; }
@@ -115,6 +117,10 @@ h1 { font-size: clamp(2.55rem, 5.6vw, 4.65rem); font-weight: 700; letter-spacing
   .project-heading { align-items: start; }
   .project-filter { gap: .25rem; }
   .project-filter button { padding-inline: .5rem; font-size: .9rem; }
+  .project-filter.project-switch { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: .55rem; }
+  .project-switch button { min-height: 2.75rem; padding-inline: .25rem; }
+  .project-switch .project-name { display: none; }
+  .project-switch .short-name { display: inline; }
   .index > div { gap: .15rem; }
 }
 
