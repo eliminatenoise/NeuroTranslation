@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Tendon force forecast · Simple edition</title>
+<link rel="stylesheet" href="guides.css">
+</head>
+<body>
+<main>
+<nav aria-label="Reading editions">
+  <a href="index.html">Tendon force forecast</a>
+  <a href="technical.html">Technical edition</a>
+  <a href="simple.html" aria-current="page">Simple edition</a>
+</nav>
+<h1>Guinea-fowl tendon impulse forecasts — Simple edition</h1>
+<p>A running bird’s muscle produces a changing electrical signal. We used the signal recorded just before a chosen moment to estimate how much force a tendon would carry over the next tenth of a second. On the new bird tested for the shared Achilles tendon, keeping the size of the electrical signal gave the smallest average miss. On the other new bird, tested for the digital flexor IV tendon, the best forecast came from the pattern of the signal after its overall size had been removed. In both cases the lowest error on the new bird belonged to a different method from the one chosen before the test.</p>
+<h2>The two measurements</h2>
+<p>All the runs were labelled 1.8 metres per second. Some involved a level treadmill. Others had obstacles 5 or 7 centimetres high. These are labels for whole trials. Learning that a trial had 5 cm obstacles does not tell us that the bird was stepping on an obstacle at the moment of a particular forecast.</p>
+<p>The electrical recording is called EMG, short for electromyography. In the first comparison, the electrical reading came from the lateral head of the gastrocnemius. That means the outer part of the calf muscle at the back of the lower leg. Its tendon-force sensor measured the pull carried by the shared Achilles tendon. Other muscle tissue can contribute to that pull. In the second comparison, the electrical reading came from the digital flexor IV, a muscle acting on a toe, and a sensor measured the pull on its own tendon. The original researchers calibrated the force sensors, establishing how to convert each sensor’s reading into a pull measured in newtons. We kept these measurements separate. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3130446/">Original recording study</a></p>
+<h2>A tenth of a second of force</h2>
+<p>Imagine that a tendon pulls with a steady force of 5 newtons for a tenth of a second. Multiplying 5 N by 0.1 seconds gives 0.5 newton-seconds, written 0.5 N·s. This is an example of the quantity called impulse. In the recordings the force fluctuated. We multiplied each force value by the time it represented inside the next 100 milliseconds, kept its recorded sign and added the pieces. A strong, brief pull and a weaker, longer pull can give the same total. Predicting the total therefore does not specify the peak force or the force at the last instant.</p>
+<p>The electrical models received the 200 milliseconds before the forecast. We split that history into ten consecutive pieces of 20 milliseconds. Voltage can be positive or negative. To describe its strength in each piece we squared the voltage readings, averaged them according to how much time each one represented, and took the square root. This gives ten measures of strength in millivolts. The history stops just before the forecast time. The force at that time belongs to the interval being predicted. The force at the far end of that interval falls outside it. The first forecast was at least 300 milliseconds into the recorded trial, and successive forecasts were at least 300 milliseconds apart.</p>
+<h2>What the fitting birds showed</h2>
+<p>The first two birds, BL4 and Or3, supplied five trial files each. There were 290 usable forecast times in BL4 and 484 in Or3. Together these made 774 times for each tendon across the same ten files. We used these birds to set the models’ numbers and decide which forecasts to carry forward as the first choices.</p>
+<p>To set the forecasts’ numbers, each fitting bird got an equal share of the total weight. Its trials divided that share equally. The usable forecast times within one trial divided that trial’s share equally again. This is why a trial with many times did not outweigh a shorter trial. These weights were used to calculate the usual level and spread of each electrical input and to fit the model that combines the ten inputs. They also determined the two middle-value forecasts.</p>
+<p>The overall median gave the same prediction each time. It is a middle force total when the fitting observations count according to those weights. The terrain median has a middle value for each course. For each one, we first took only the records from that course and then divided the weight equally among birds, among each bird’s trials, and among times within each trial. It lets us see what that label alone can tell us. The electrical models received no terrain label.</p>
+<p>The other two forecasts learned how much weight to give each of the ten earlier electrical measurements. Their fitting rule, called ridge regression, discourages very large weights. One version kept the size of the original voltage readings. The other divided the ten numbers by the overall strength in those same ten pieces. A large signal and a smaller signal can then look alike if their strength rises and falls in the same proportions. If the earlier readings were all zero, the ten numbers stayed zero. Both versions used only the fitting data to set the usual level and scale for each input.</p>
+<p>For a first check, we fitted on BL4 and checked predictions on Or3. Then we fitted on Or3 and checked BL4. The error is the size of the difference between predicted and measured impulse. We averaged those misses within each trial, gave each trial the same weight within its bird, and gave the two birds equal weight. A smaller number means the predicted total was closer to the measured one.</p>
+<div class="table-view" role="region" aria-label="Forecast comparison table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Average miss on the fitting-bird comparisons (N·s)</th>
+<th align="right">Shared Achilles</th>
+<th align="right">Digital flexor IV</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Overall median</td>
+<td align="right">1.01951</td>
+<td align="right">0.42037</td>
+</tr>
+<tr>
+<td>Terrain median</td>
+<td align="right">1.01713</td>
+<td align="right">0.42673</td>
+</tr>
+<tr>
+<td>EMG keeping its original strength</td>
+<td align="right">0.73012</td>
+<td align="right">1.16237</td>
+</tr>
+<tr>
+<td>EMG scaled within each window</td>
+<td align="right">0.57148</td>
+<td align="right">0.47606</td>
+</tr>
+</tbody></table></div>
+<p>The fitting rule has a penalty setting. A larger penalty discourages the model from giving any one electrical measurement a large influence on the answer. For the version keeping signal strength, the original plan tested four settings (0.001, 0.01, 0.1 and 1). The fitting-bird comparison favoured 0.001 for the shared Achilles and 1 for the digital flexor. These settings stayed with that version for the new-bird test.</p>
+<p>A follow-up on the same two fitting birds tried 15 settings from 0.0000001 to 10,000, using both kinds of electrical input. With the strength removed from each window, the chosen settings were 0.1 for the shared Achilles and 3 for the digital flexor. Even when the strength was kept, a penalty of 10,000 lowered the digital-flexor development error to 0.51510 N·s. That was a separate check. The original version keeping signal strength still has the 1.16237 N·s error shown in the first table. It was the version carried into the next table. The two electrical models in the tables differ both in how they use strength and in which penalty settings were tried. The scores alone cannot tell us how much of the difference came from removing overall signal strength.</p>
+<p>The choice for each tendon was among the overall median and the two EMG models. The terrain median stayed in the comparison table. The first choices were scaled EMG for the Achilles tendon and the overall median for digital flexor IV. We then used both fitting birds to set the final model values. We kept all four forecasts and fixed their values and the assignment of birds before testing the new recordings.</p>
+<h2>What happened on the two new birds</h2>
+<p>The Achilles test used Pu1 on day 1. The digital-flexor test used Ye3 on day 2. Each bird supplied one level run, two with 5 cm obstacles and two with 7 cm obstacles, for five files per bird. All four methods made predictions before the later force readings in those files were scored. To count, a forecast needed usable earlier readings and a usable later force measurement for that same time and tendon. All 898 times passed these checks, 653 for Pu1 and 245 for Ye3. Every method faced exactly the same cases for each bird.</p>
+<p>We first calculated the average miss within each trial. We then averaged the five trial results for the bird. This matters because a file with many usable forecasts could otherwise contribute much more to the answer than a shorter file.</p>
+<div class="table-view" role="region" aria-label="Forecast comparison table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Average miss on the new bird (N·s)</th>
+<th align="right">Pu1, shared Achilles</th>
+<th align="right">Ye3, digital flexor IV</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Overall median</td>
+<td align="right">0.71525</td>
+<td align="right">0.32103</td>
+</tr>
+<tr>
+<td>Terrain median</td>
+<td align="right">0.71929</td>
+<td align="right">0.32171</td>
+</tr>
+<tr>
+<td>EMG keeping its original strength</td>
+<td align="right">0.46367</td>
+<td align="right">0.35644</td>
+</tr>
+<tr>
+<td>EMG scaled within each window</td>
+<td align="right">0.53773</td>
+<td align="right">0.28101</td>
+</tr>
+</tbody></table></div>
+<p>Read down the Achilles column. The scaled EMG model chosen earlier missed by 0.53773 N·s on average. Keeping the original signal strength reduced the miss by 0.07405 N·s. In the digital-flexor column, the median chosen earlier missed by 0.32103 N·s. Scaling the signals in each window reduced the miss by 0.04003 N·s. Looking at the trials separately gives another way to read those averages. Keeping the original strength gave the smallest miss in every one of the five Achilles trials. Scaling its strength gave the smallest miss in four of the five digital-flexor trials. The models were left as fitted and the choices made on the first birds still stand. An independent calculation reproduced every one of the 898 force totals exactly, with its sign. It also checked the error for each trial and the averages for each terrain and tendon. The ten files here represent just two new animals, one per tendon. A difference between the columns could reflect a difference between birds, between tendons or both.</p>
+<h2>What the clocks tell us</h2>
+<p>The original equipment recorded at a reported 5,000 readings per second, with analog conditioning of the signals. The exported files have their own stored times. A separate check found two successive readings 99 microseconds apart in one engineering recording. We used each file’s actual times to decide which readings came before the forecast and which force readings belonged in the answer.</p>
+<p>Later work on these recordings used digital filtering that looks both forwards and backwards in time, scaling based on peaks across a trial or across trials, and a shift of the signal in time. Those steps can use information unavailable at the moment of prediction. This analysis left them out of the EMG inputs. Exactly how the stored force was filtered and when both signals would reach a live computer are still unknown. We can check the order in the saved recording. That leaves open whether the forecast would work in real time or whether changing a muscle signal would bring about the predicted force. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3130446/">Original study</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12669831/">Subsequent analysis</a></p>
+<p>Monica A. Daley and Andrew A. Biewener collected the original recordings. Monica A. Daley, Anne Koelewijn and Maria Eleni Athanasiadou released the data used here in version 2 in 2025 under CC BY 4.0. This report describes a new analysis of those recordings. <a href="https://doi.org/10.5281/zenodo.15968637">Dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Licence</a></p>
+</main>
+</body>
+</html>

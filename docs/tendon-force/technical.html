@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Tendon force forecast · Technical edition</title>
+<link rel="stylesheet" href="guides.css">
+</head>
+<body>
+<main>
+<nav aria-label="Reading editions">
+  <a href="index.html">Tendon force forecast</a>
+  <a href="technical.html" aria-current="page">Technical edition</a>
+  <a href="simple.html">Simple edition</a>
+</nav>
+<h1>Guinea-fowl tendon impulse forecasts — Technical edition</h1>
+<p>On two guinea fowl excluded from fitting, the lowest error came from a different forecast for each tendon. Retaining the amplitude of the earlier muscle signal gave the lowest error for Pu1’s shared Achilles tendon. Removing the overall amplitude of each input window gave the lowest error for Ye3’s digital flexor IV tendon. Neither method ranked first for its respective tendon during development.</p>
+<h2>Measurements and forecast interval</h2>
+<p>All trials were labelled 1.8 m/s. The three treadmill conditions were level running and obstacles 5 cm or 7 cm high. The lateral gastrocnemius (LG) electrical recording describes one muscle head. Its assigned outcome is force carried by the shared Achilles tendon, which includes contributions beyond that head. The digital flexor IV (DF IV) electrical recording is paired with force in its own tendon. The tendon forces came from calibrated sensors in the original recordings. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3130446/">Acquisition study</a></p>
+<p>At forecast time <em>t</em>, the electrical models used only the muscle voltage (electromyography, EMG) stored in [<em>t</em> − 200 ms, <em>t</em>). Each of ten 20 ms bins contained the root of the time-weighted mean squared voltage, in millivolts. The target was the signed integral of tendon force from <em>t</em> up to but excluding <em>t</em> + 100 ms. Each stored force value was multiplied by the duration of its sample interval inside that window, and the contributions were summed. The unit is the newton-second (N·s). For example, a constant 5 N for 0.1 s gives 0.5 N·s. Different force curves can give that same impulse. The first forecast fell on the first eligible recorded tick at least 300 ms after the start of a trial. Successive forecast times were at least 300 ms apart.</p>
+<h2>Development on two fitting birds</h2>
+<p>BL4 and Or3 provided ten trial files, five per bird. Both tendon channels had 774 paired forecast times across those files, 290 from BL4 and 484 from Or3. We fitted four forecasts separately for each tendon. Each fitting bird had equal total weight. Its trials split that weight equally, and the usable windows in each trial split the trial’s share equally. These weights set the EMG feature centres and scales and entered the ridge fit. They also set the overall weighted median. For the terrain median, we reapplied the same weighting within each terrain condition, using only its fitting birds, trials and windows. The terrain label was available retrospectively and was excluded from the electrical models.</p>
+<p>The two electrical forecasts used ridge regression, a weighted sum of the ten earlier values plus a constant, with a penalty on large coefficients. One kept the recorded voltage amplitude. The other divided each bin by the root mean square of the ten bins in that same history. An all-zero history stayed zero. Feature centres and scales came from the fitting data. To assess development error, we fitted on one bird and predicted the other, then reversed the roles. Errors were averaged within trials, then across trials within birds, giving each bird equal weight. These same two birds informed model selection.</p>
+<div class="table-view" role="region" aria-label="Forecast comparison table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Development mean absolute error (N·s)</th>
+<th align="right">Shared Achilles</th>
+<th align="right">DF IV</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Overall median</td>
+<td align="right">1.01951</td>
+<td align="right">0.42037</td>
+</tr>
+<tr>
+<td>Terrain median</td>
+<td align="right">1.01713</td>
+<td align="right">0.42673</td>
+</tr>
+<tr>
+<td>EMG retaining amplitude</td>
+<td align="right">0.73012</td>
+<td align="right">1.16237</td>
+</tr>
+<tr>
+<td>EMG scaled within each window</td>
+<td align="right">0.57148</td>
+<td align="right">0.47606</td>
+</tr>
+</tbody></table></div>
+<p>The amplitude-preserving fit used four penalty settings fixed in advance (0.001, 0.01, 0.1 and 1). The setting with the lowest mean error across the two development birds was 0.001 for shared Achilles and 1 for DF IV. An exploratory follow-up tested both EMG representations over 15 settings from 0.0000001 to 10,000. For window-scaled EMG it chose 0.1 for Achilles and 3 for DF IV. The wider search also reduced amplitude-preserving DF IV development error to 0.51510 N·s at a penalty of 10,000. The amplitude-preserving arm in both tables still uses the original four-setting search, including its DF IV development error of 1.16237 N·s. The later check used the same fitting birds. Both the treatment of amplitude and the range of penalties differed between the frozen EMG arms, so their error difference cannot be assigned to amplitude scaling alone.</p>
+<p>The choice made before the held test was between the overall median and the two EMG models. It selected window-scaled EMG for Achilles and the overall median for DF IV. The terrain median remained a comparator. The final models used both fitting birds. All four methods, their parameters and the bird-to-tendon assignments were fixed before evaluation.</p>
+<h2>Held results on two new birds</h2>
+<p>Pu1 contributed the shared Achilles outcome on day 1 and Ye3 the DF IV outcome on day 2. Each bird supplied five trial files, one level, two at 5 cm and two at 7 cm. Across these ten files, predictions from all four methods were saved before the later force readings were scored. The identical input and outcome checks left all 898 forecast times eligible, 653 for Pu1 and 245 for Ye3. Each method was scored at precisely the same times within a tendon. The table averages absolute errors within a trial and then across its bird’s five trials with equal weight.</p>
+<div class="table-view" role="region" aria-label="Forecast comparison table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Held mean absolute error (N·s)</th>
+<th align="right">Pu1, shared Achilles</th>
+<th align="right">Ye3, DF IV</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Overall median</td>
+<td align="right">0.71525</td>
+<td align="right">0.32103</td>
+</tr>
+<tr>
+<td>Terrain median</td>
+<td align="right">0.71929</td>
+<td align="right">0.32171</td>
+</tr>
+<tr>
+<td>EMG retaining amplitude</td>
+<td align="right">0.46367</td>
+<td align="right">0.35644</td>
+</tr>
+<tr>
+<td>EMG scaled within each window</td>
+<td align="right">0.53773</td>
+<td align="right">0.28101</td>
+</tr>
+</tbody></table></div>
+<p>The preselected Achilles model scored 0.53773 N·s. On this bird, retaining amplitude reduced the error by 0.07405 N·s relative to that selection. The preselected DF IV median scored 0.32103 N·s. On its assigned bird, window scaling reduced the error by 0.04003 N·s relative to that selection. The amplitude-preserving method ranked first on all five Achilles trials. Window scaling ranked first on four of the five DF IV trials. These rankings describe the frozen forecasts. We did not refit or change the selections on the held birds. An independent calculation reproduced all 898 force integrals exactly, including their signs, and verified the paired scores by trial, terrain and tendon. Each tendon has only one held bird, so these data cannot separate bird effects from tendon effects or establish a population ranking.</p>
+<h2>Recorded-time limits and attribution</h2>
+<p>The acquisition paper reports 5 kHz recording and analog signal conditioning. We used the time values in each exported file to define history and outcome. A separate timing check found 99 microseconds between stored readings in one engineering recording, illustrating why the original rate alone cannot identify those boundaries. The calculation used the archived EMG before the later study’s forward–reverse digital filtering, whole-trial or cross-trial peak scaling and activation time shift. The force channel’s filtering history and the delivery delays of the sensors remain unresolved. The results establish a forecast on stored recordings. They do not establish when those signals would be available live, or that changing muscle activity would cause the predicted change in force. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3130446/">Original recording</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12669831/">Subsequent analysis</a></p>
+<p>Monica A. Daley and Andrew A. Biewener collected the original recordings. Monica A. Daley, Anne Koelewijn and Maria Eleni Athanasiadou released version 2 of the dataset in 2025 under CC BY 4.0. The windows, fitted regressions and held-bird scores are from the present analysis. <a href="https://doi.org/10.5281/zenodo.15968637">Dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Licence</a></p>
+</main>
+</body>
+</html>
