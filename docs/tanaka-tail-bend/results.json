@@ -1,0 +1,140 @@
+{
+  "title": "Tanaka signed tail-bend forecast",
+  "recording": "main01/20230825_f1_p0",
+  "phase": 1,
+  "sources": {
+    "dataset_title": "Dataset for \"Plastic landmark anchoring in zebrafish compass neurons\"",
+    "dataset_doi": "10.5281/zenodo.17233579",
+    "dataset_publisher": "Zenodo",
+    "creators": [
+      "Ryosuke Tanaka",
+      "Ruben Portugues"
+    ],
+    "dataset_licence": "CC BY 4.0",
+    "dataset_landing": "https://doi.org/10.5281/zenodo.17233579",
+    "dataset_licence_url": "https://creativecommons.org/licenses/by/4.0/legalcode",
+    "article_citation": "Tanaka, R. & Portugues, R. Plastic landmark anchoring in zebrafish compass neurons. Nature 650, 673–680 (2026).",
+    "article_landing": "https://www.nature.com/articles/s41586-025-09888-x"
+  },
+  "issued_windows": 1243,
+  "scored_windows": 1242,
+  "excluded_nonfinite_later_camera_values": 1,
+  "distinct_finite_earlier_command_values_at_each_of_five_sampled_lags_in_issued_histories": 1,
+  "target": "Signed cumulative tail bend estimated from the camera record at least 100 ms later on the shared software clock.",
+  "unit": "radians",
+  "metric": "Mean absolute error on exactly the same scored windows for all three methods.",
+  "method_order": [
+    "persistence",
+    "camera_ridge",
+    "camera_display_ridge"
+  ],
+  "mae_rad": {
+    "persistence": 0.01384094914428781,
+    "camera_ridge": 0.011660032096645337,
+    "camera_display_ridge": 0.011660032096645337
+  },
+  "paired_mean_error_difference_rad": -7.821619537415555e-20,
+  "paired_difference_definition": "Camera plus logged command absolute error minus camera-only absolute error, averaged over matched rows.",
+  "descriptive_blocks_on_60_second_grid": [
+    {
+      "phase": 1,
+      "software_time_half_open_s": [
+        868.020253,
+        928.020253
+      ],
+      "scored_windows": 123,
+      "mae_rad": {
+        "persistence": 0.012569835643791515,
+        "camera_ridge": 0.009862737612454462,
+        "camera_display_ridge": 0.009862737612454462
+      },
+      "paired_mean_error_difference_rad": 2.2565508630592615e-19
+    },
+    {
+      "phase": 1,
+      "software_time_half_open_s": [
+        928.020253,
+        988.020253
+      ],
+      "scored_windows": 186,
+      "mae_rad": {
+        "persistence": 0.012835491602795316,
+        "camera_ridge": 0.009682035034884849,
+        "camera_display_ridge": 0.009682035034884849
+      },
+      "paired_mean_error_difference_rad": 1.4922352481520922e-19
+    },
+    {
+      "phase": 1,
+      "software_time_half_open_s": [
+        988.020253,
+        1048.0202530000001
+      ],
+      "scored_windows": 187,
+      "mae_rad": {
+        "persistence": 0.022393592989917867,
+        "camera_ridge": 0.021394091613704827,
+        "camera_display_ridge": 0.021394091613704827
+      },
+      "paired_mean_error_difference_rad": -1.484255380514915e-19
+    },
+    {
+      "phase": 1,
+      "software_time_half_open_s": [
+        1048.0202530000001,
+        1108.0202530000001
+      ],
+      "scored_windows": 186,
+      "mae_rad": {
+        "persistence": 0.012186505007411204,
+        "camera_ridge": 0.011419355768958486,
+        "camera_display_ridge": 0.011419355768958486
+      },
+      "paired_mean_error_difference_rad": 0.0
+    },
+    {
+      "phase": 1,
+      "software_time_half_open_s": [
+        1108.0202530000001,
+        1168.0202530000001
+      ],
+      "scored_windows": 187,
+      "mae_rad": {
+        "persistence": 0.010926515005592576,
+        "camera_ridge": 0.008920533532486376,
+        "camera_display_ridge": 0.008920533532486376
+      },
+      "paired_mean_error_difference_rad": -2.96851076102983e-19
+    },
+    {
+      "phase": 1,
+      "software_time_half_open_s": [
+        1168.0202530000001,
+        1228.0202530000001
+      ],
+      "scored_windows": 186,
+      "mae_rad": {
+        "persistence": 0.01324065371277662,
+        "camera_ridge": 0.010456148732947876,
+        "camera_display_ridge": 0.010456148732947873
+      },
+      "paired_mean_error_difference_rad": -3.7305881203802304e-19
+    },
+    {
+      "phase": 1,
+      "software_time_half_open_s": [
+        1228.0202530000001,
+        1288.008899
+      ],
+      "scored_windows": 187,
+      "mae_rad": {
+        "persistence": 0.012281582341089663,
+        "camera_ridge": 0.009251903109736302,
+        "camera_display_ridge": 0.009251903109736302
+      },
+      "paired_mean_error_difference_rad": 0.0
+    }
+  ],
+  "inferential_interval_computed": false,
+  "scope": "Phase 1 of a single recording. The display command is a logged integer with no verified physical speed conversion or physical screen timing."
+}

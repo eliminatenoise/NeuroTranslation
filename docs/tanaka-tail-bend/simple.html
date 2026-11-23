@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Tanaka tail-bend forecast · Simple edition</title><link rel="stylesheet" href="guides.css"></head><body><main><nav aria-label="Reading editions"><a href="index.html">Tanaka study</a><a href="technical.html">Technical edition</a><a href="simple.html" aria-current="page">Simple edition</a><a href="results.json">Score data</a></nav>
+<article><h1>Earlier camera measurements improve a tail-bend forecast</h1>
+<p>A camera filmed how a zebrafish bent its tail in the Tanaka recording labelled <code>main01/20230825_f1_p0</code>. We used the earlier tail angles to forecast the angle about a tenth of a second later. A rule that looked at five earlier camera readings came closer than keeping the last angle. A second rule could also see numbers from the computer that controlled the display. It made effectively the same forecast. The command numbers stayed constant throughout fitting, so the rule never learned to use them. The sampled numbers in the later test were also constant.</p>
+<div class="table-view" role="region" tabindex="0" aria-label="Mean absolute angle error in radians"><table>
+<thead>
+<tr>
+<th>Forecast</th>
+<th align="right">Average size of the error (radians)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Keep the last angle from the camera</td>
+<td align="right">0.013841</td>
+</tr>
+<tr>
+<td>Use five earlier camera readings to adjust the last angle</td>
+<td align="right">0.011660</td>
+</tr>
+<tr>
+<td>Use the same camera readings and five logged command values</td>
+<td align="right">0.011660</td>
+</tr>
+</tbody></table></div>
+<h2>What the two logs measure</h2>
+<p>The camera assigned a line to each visible section of the tail. Adding the changes in angle along the tail gave one number for each camera reading. The saved field is called <code>tail_sum</code>. Its sign carries direction. Two angles of equal size can describe bends in opposite directions. The unit is the radian.</p>
+<p>The display also wrote a number called <code>cl2D_flow_vel</code> in its log. The archive stores it as a whole number. We converted the whole number to the type the model uses for its arithmetic. For each value, we converted it back to a whole number and checked that it exactly matched the log. The two logs share the program&#39;s time scale. The time when the picture physically changed on the screen remains unverified, as does the conversion from the logged number to display speed.</p>
+<h2>How we fit and tested the rules</h2>
+<p>For every forecast we chose five times, from 200 milliseconds earlier down to the time of the forecast, 50 milliseconds apart. At each time we used the most recent logged reading at or before it. We found the middle value among the gaps between successive readings in each log. A reading had to be within twice that usual gap of the time we asked for. A window also had to avoid gaps larger than twice the usual interval in either log. Forecasts were scheduled 320 milliseconds apart to give them separate parts of the recording.</p>
+<p>The first phase runs from 88.011128 up to 688.020253 seconds on the software clock. The second phase starts at 688.020253 and ends just before 1288.008899 seconds. We kept the first two-thirds of this shared logged time for fitting, ending at 888.003524 seconds. A fitting case had to finish before that time. A later case could start only once even the oldest reading in each log came from the later period.</p>
+<p>We dropped one of the 3,716 cases because it crossed the boundary between the phases. One more crossed the line between fitting and testing. Of the 2,471 possible fitting cases, 2,463 had complete histories and a usable answer. That gave us 1,844 examples from the first phase and 619 from the early part of the second phase.</p>
+<p>The first rule simply carried the latest angle forward. The two fitted rules learned how much to add to that angle. Each kind of input was shifted by its fitting average and divided by its fitting spread, measured with the population standard deviation. This puts columns measured on different scales on a common footing. An input that stayed constant during fitting was set to zero. The fit chose weights to make the average squared error small. It also added 0.1 times the sum of the squared weights to that cost, which discourages a large correction from a small change in one reading. The fixed offset paid no such cost.</p>
+<p>We saved the forecasts for all 1,243 later cases and had a separate reader reproduce them before extracting the later camera angles. The answer came from the first camera reading at least 100 milliseconds after each forecast. That reading had to fall within another two typical camera intervals. One answer was unusable, leaving 1,242 cases for all three methods. The measured time between forecast and answer ranged from 100.008 to 105.774 milliseconds on the saved clock. For each case, use the signed numbers on the recorded scale. Subtract them directly and keep the size of the difference. The subtraction follows the scale across a full turn. To measure what changed when we supplied the command, subtract the camera-only error from the error with the command. Average those changes across the 1,242 cases.</p>
+<h2>What the scores show</h2>
+<p>The five command weights were disabled because each command column had the same value throughout fitting. The command also held one value at each sampled position across all later histories. The paired error change was −7.82 × 10⁻²⁰ radians. The models agree to the precision the computer uses to round these numbers. This recording leaves open whether a changing display command could help.</p>
+<p>The camera fit had a smaller average miss than the carry-forward rule in all seven scored blocks on the one-minute grid. All these blocks came from the second phase of the same recording. They show how the forecast did there. A range for performance in a population would need more recordings. Three static angle snapshots were displayed while checking the file descriptions. The study left these snapshots and their related fields outside fitting and scoring.</p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12916487/">Original study and camera method</a> · <a href="https://doi.org/10.5281/zenodo.17233579">Versioned recording</a></p>
+</article><footer><p>Source data by Ryosuke Tanaka and Ruben Portugues. <a href="https://doi.org/10.5281/zenodo.17233579">Zenodo dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</a> · <a href="https://www.nature.com/articles/s41586-025-09888-x">Original Nature study</a></p></footer></main></body></html>
