@@ -10,7 +10,7 @@ The first method carries forward the force averaged over the last 20 millisecond
 
 ## Results on recorded stand-and-sit trials
 
-Four people supplied the fitting data. Three other people were assigned to the test. Two passed a fixed check on the first 30 seconds of their recordings. The third had too few loaded samples on one plate during that check.
+Four people supplied the Utah fitting data. Three other people were assigned to the Utah test. Two passed a fixed check on the first 30 seconds of their recordings. The third had too few loaded samples on one plate during that check.
 
 The methods used the same 230 cases, each with its own input and outcome samples. The table gives mean absolute error for the **combined upward impulse on the two floor plates**. Errors were averaged within each person first, so the two people count equally. Lower error is better.
 
@@ -21,6 +21,23 @@ The methods used the same 230 cases, each with its own input and outcome samples
 | Damped trend plus attention correction | 2.36 | 3.65 |
 
 The correction lowered the overall error relative to the damped trend for both people who were scored. The two methods give identical outputs in the 206 cases outside the rising-load group. These results describe the two eligible people in this dataset. The target covers upward force measured at the floor plates. Loads on the chair or rails require their own measurements.
+
+## Leeds replay on recorded chair trials
+
+The same saved model was run on 402 Leeds chair trials from 134 people. The replay kept the model weights fixed and used 6,739 forecast windows, including 892 with rising force. The results cover combined upward impulse on the two floor plates. The calculation averages each person’s absolute errors first so each person counts equally.
+
+Both plate orders were fixed before replay. The last two rows show the same correction with the two Leeds plates fed to the model in opposite orders.
+
+| Forecast | All 6,739 windows (N·s) | 892 rising-load windows (N·s) |
+| --- | ---: | ---: |
+| Recent force | 2.837 | 6.835 |
+| Damped trend | 2.099 | 4.567 |
+| Damped trend plus correction, plate 1 then 2 | 2.105 | 4.749 |
+| Damped trend plus correction, plate 2 then 1 | 2.117 | 4.853 |
+
+The damped trend had lower mean error than the correction in both plate orders, across all windows and in the rising-load group. In each order, the correction gave lower overall error for 60 people and higher error for 74 compared with the trend.
+
+The Leeds replay used exported force readings that had been low-pass filtered to reduce rapid changes. The filter’s time direction and the availability of the original readings on live hardware remain unverified. [Leeds study and methods](https://www.nature.com/articles/s41597-026-06925-w) · [University of Leeds dataset](https://doi.org/10.5518/1701)
 
 ## Run the predictor in Python
 

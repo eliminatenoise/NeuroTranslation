@@ -14,7 +14,7 @@ The outcome is force impulse over the next 100 ms. It is the sum of each later f
 
 ## Fitting and test recordings
 
-Four people supplied the fitting recordings. The predictor and comparison rules were fixed before the reserved readings were opened. A separate test assigned three people. Each recording had to pass a fixed force-calibration check using only the first 30 seconds on the shared recording clock. One person’s prefix had too few loaded samples on one plate. The two qualifying recordings supplied the scored forecasts.
+Four people supplied the Utah fitting recordings. The predictor and comparison rules were fixed before the reserved readings were opened. A separate test assigned three people. Each recording had to pass a fixed force-calibration check using only the first 30 seconds on the shared recording clock. One person’s prefix had too few loaded samples on one plate. The two qualifying recordings supplied the scored forecasts.
 
 The test used 300 ms steps after the calibration prefix. Each qualifying case used a 200 ms input history and the next 100 ms for the outcome. Input and outcome samples were disjoint across cases. The forecasts were saved and verified before their later outcomes were opened for scoring.
 
@@ -29,5 +29,24 @@ For each case, take the absolute difference between the predicted and measured *
 | Damped trend plus attention correction | 2.36 | 3.65 |
 
 The corrected forecast lowered combined impulse error relative to the damped trend for both people. The two methods produce the same estimates outside the rising-load group. The evaluation measures upward floor-plate impulse in two eligible recordings from one archive. Chair and rail loads require separate measurements. The offline browser uses invented histories. The original fitted weights and Python predictor are in the `model/` folder.
+
+## Leeds archival replay
+
+The replay applied the saved Utah forecaster to the calibrated force exports from 402 Leeds chair trials across 134 people. Each forecast used ten 20 ms averages per plate from the 200 ms before its forecast time. The next 100 ms of measured force gave the outcome. On the stored force clock, forecast times were 300 ms apart. Each case used its own history and outcome samples.
+
+The Utah model expects two plates in a fixed column order. The documentation leaves the correspondence between numbered Leeds plates and Utah input columns unresolved. The replay therefore tested plate 1 then 2 and the reverse order, using both mappings fixed in advance. It returned predictions to the original Leeds plate numbers to score impulse against the measurements. Both mappings appear in the results, and neither was selected. The model weights stayed fixed.
+
+The common set had 6,739 scored windows. Of these, 892 passed the same rising-load check used in Utah. Each case gives an absolute error for the sum of the two plates’ upward impulse. Errors are averaged within each person first, then people count equally within each column.
+
+| Forecast | All 6,739 windows (N·s) | 892 rising-load windows (N·s) |
+| --- | ---: | ---: |
+| Recent force | 2.837 | 6.835 |
+| Damped trend | 2.099 | 4.567 |
+| Damped trend plus correction, plate 1 then 2 | 2.105 | 4.749 |
+| Damped trend plus correction, plate 2 then 1 | 2.117 | 4.853 |
+
+Compared with the damped trend, the correction gave 60 people a lower overall error and 74 people a higher overall error in each plate order. For 53 people the correction lowered error under both orders. Another 14 had lower error in one order and higher error in the other. The damped trend had lower mean error than the correction overall and in the rising-load group for both orders.
+
+The archive authors low-pass filtered the exported force signals. The replay follows the stored time order. The filter’s time direction and the availability of original force samples at forecast time on live equipment remain unverified. These scores describe the Leeds archive. The Utah results above cover the separate Utah test. [Leeds acquisition and export methods](https://www.nature.com/articles/s41597-026-06925-w) · [University of Leeds dataset](https://doi.org/10.5518/1701)
 
 [Recording source and licence](DATASET-CREDITS.md)
