@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "model": "compact",
+  "source_forecaster": {
+    "walking_checkpoint_payload_sha256": "057c8541b14b2dc74abff896cf1ff45e804d7c71a3b876564f070525119726ac"
+  },
+  "learned_fraction": {
+    "heel_mm": 0.03,
+    "impulse_ns": 0.58,
+    "new_load_probability": 1.0
+  },
+  "formula": "physical + weight * (learned - physical)",
+  "foot_order": [
+    "left",
+    "right"
+  ],
+  "heel_positive_coordinates": [
+    "leftward",
+    "backward",
+    "upward"
+  ],
+  "units": [
+    "millimetres",
+    "newton-seconds",
+    "probability"
+  ],
+  "decision_sha256": "acac85829d7a2359db80a974bdbb73b36668172ed6c088d49cc69706f17c7fc2"
+}

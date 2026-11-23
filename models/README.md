@@ -2,6 +2,8 @@
 
 ## Current downloads
 
+[Walking forecast blends](https://eliminatenoise.github.io/NeuroTranslation/walking-blends/) · [Offline calculator](walking-blends/Walking-Forecast-Blends.zip). Combine matching physical and learned forecasts with the fixed Compact or Research Edition weights.
+
 A checkpoint is the set of weights a model saved after fitting. The downloads include those weights and a way to try them with invented readings.
 
 | Download | What you can try |

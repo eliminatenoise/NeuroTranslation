@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'"><title>Walking forecast blends · simple</title><link rel="stylesheet" href="style.css"></head><body><main><nav aria-label="Walking blends"><a href="index.html">Calculator</a><a href="technical.html">Technical edition</a><a href="simple.html">Simple edition</a><a href="aggregate-results.json">Score data</a></nav><article><h1>Combining two forecasts of the next step</h1>
+<p>Open the extracted folder and start <code>index.html</code>, or use the launcher for Windows, macOS or Linux. Choose a model and click <strong>Load invented example</strong>. The two sets of numbers on the page describe the same next tenth of a second. One set is a reference forecast made by continuing recent movement and force. The other is a forecast that a particular trained walking model has already made. Click <strong>Calculate blend</strong> to see what these two inputs give together. You can change a number and calculate again.</p>
+<p>There are two sets of weights. The Compact example uses the frozen NeuroTranslate 0.0 walking fit trained with the expanded histories. The Research Edition example uses the matching NeuroTranslate 0.1 walking continuation, which requires its matching dense weights, experts and parent model. The coefficient files identify those versions. This calculator starts at their forecast outputs. If you have raw heel or force readings, you would first need the original forecasting pipeline that turns those readings into the corresponding predictions. The calculator cannot determine where the numbers you enter came from.</p>
+<h2>Each number describes a foot, a direction or a chance</h2>
+<p>A foot can move in more than one direction at once. The first row of <code>heel_mm</code> is for the left heel and the second row for the right. Each row contains three changes in position, given in millimetres. Read them in order as movement towards the left, backwards and upwards. A negative value indicates the opposite direction. Keep all three numbers for each foot. Collapsing the row to a single distance would lose the direction of movement before the forecasts are combined.</p>
+<p>The two numbers in <code>impulse_ns</code> give the signed vertical force added up over time for the left and right feet. This quantity is called <em>impulse</em> and its unit is a newton-second (N·s). It differs from force at a single instant. The two numbers in <code>new_load_probability</code> give the chance of a new load starting on each foot in the forecast period. A probability of zero means the forecast assigns no chance and one means it assigns certainty. If a network reports an unrestricted number called a logit, convert it to its final probability before supplying it here.</p>
+<p>The physical reference carries recent heel velocity forward. For impulse, it assumes the latest mean force continues over the time being forecast. For a new load it uses a fixed probability calculated during fitting. The matching learned forecast describes the same feet, directions and period. In the input, <code>physical</code> and <code>learned</code> must each contain the same three named arrays. <code>learned_model</code> tells the calculator which model supplied the second forecast. Use <code>compact</code> or <code>research</code> exactly.</p>
+<h2>The weights say how far to move from the reference</h2>
+<p>Subtract the physical number from the learned number. Multiply that difference by the weight, then add it back to the physical number. The calculator uses this order of operations with 64-bit floating-point numbers (FP64).</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Walking forecast table"><table>
+<thead>
+<tr>
+<th>Correction</th>
+<th align="right">Heel</th>
+<th align="right">Impulse</th>
+<th align="right">New load</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Compact</td>
+<td align="right">0.03</td>
+<td align="right">0.58</td>
+<td align="right">1.00</td>
+</tr>
+<tr>
+<td>Research Edition</td>
+<td align="right">0.15</td>
+<td align="right">0.32</td>
+<td align="right">1.00</td>
+</tr>
+</tbody></table></div>
+<p>For example, suppose a physical forecast puts one heel’s leftward displacement at 10 mm and an invented learned forecast gives 20 mm. With the Compact weight of 0.03, the correction adds 0.3 mm, for an answer of 10.3 mm. With the Research weight of 0.15, the same illustrative difference would add 1.5 mm. The calculator does that arithmetic for each heel direction on its own. The Compact impulse correction moves 58% of the way towards its learned value. The Research impulse correction moves 32%. Both models use the whole learned difference for a new load, yielding the learned probability to floating-point precision.</p>
+<p>A missing value is different from zero. If a foot or coordinate is missing, the calculator cannot use the pair. It reports an error for extra fields, missing fields, the wrong number of entries, nonfinite numbers, an arithmetic overflow or a probability outside zero to one. After a successful calculation, the result uses the same names, foot order and units as the inputs. For readers using Node, <code>node forecast.cjs compact-example.json</code> prints the result for the invented Compact example. You can use <code>research-example.json</code>, another matching local file, or <code>-</code> to supply the input via standard input.</p>
+<h2>Six people supplied the earlier examples for choosing weights</h2>
+<p>Researchers considered 72 short walking histories from six people in the Kuopio archive. For each kind of forecast they tried weights from 0 to 1 in steps of 0.01. Each person contributed equally when choosing the weight. Heel forecasts were judged by the three-dimensional distance from the measured heel movement. Impulse forecasts were judged by the size of the miss. Probability forecasts were judged by the squared difference from the observed event, recorded as zero or one.</p>
+<p>An early check used eight different times from each of the six people, for 48 forecast times. For a given person, the blend weights used for that check were chosen from the other five people’s labels. The underlying walking models and the fixed event probability had already been fitted with data from all six. Both feet could contribute an observation. The check included 96 heel observations, 96 impulse observations and 94 known load outcomes. Only 14 load outcomes were positive.</p>
+<p>In these early checks the Research blend’s heel error was 0.450 mm smaller than the reference error. Its paired 95% interval went from −0.670 to −0.226 mm. Impulse error changed by −0.176 N·s, with an interval from −0.619 to +0.132 N·s. That range includes both smaller and larger errors. A version that changed its weights according to whether recent plate force reached 20 N gave no clear advantage. The published fixed weights in the calculator use all six people’s calibration examples. Later testing applied that one fixed set for each model to the Utah archive.</p>
+<h2>Eight people walked at the test speed in Utah</h2>
+<p>The separate Utah comparison reserved 17 walkers. Eight had a treadmill trial at the required 1.0 m/s. Each walked with an above-knee prosthesis. The other nine lacked a trial at this speed, and a separate walker used to prepare the analysis was kept out of the test. There were 756 times when a forecast could be made. The models used the preceding 200 milliseconds to predict the following 100 milliseconds. The heel prediction started with the last camera sample. The force prediction started 10 milliseconds later. The recorded instruments therefore give the two outcomes slightly different starting times.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Walking forecast table"><table>
+<thead>
+<tr>
+<th>Forecast</th>
+<th align="right">Heel error (mm)</th>
+<th align="right">Impulse error (N·s)</th>
+<th align="right">Load-start Brier score</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Physical reference</td>
+<td align="right">54.271868</td>
+<td align="right">13.322950</td>
+<td align="right">0.108400</td>
+</tr>
+<tr>
+<td>Compact, unadjusted</td>
+<td align="right">55.369061</td>
+<td align="right">13.232538</td>
+<td align="right">0.106115</td>
+</tr>
+<tr>
+<td>Compact blend</td>
+<td align="right">54.238998</td>
+<td align="right">13.255966</td>
+<td align="right">0.106115</td>
+</tr>
+<tr>
+<td>Research Edition, unadjusted</td>
+<td align="right">55.318941</td>
+<td align="right">13.384063</td>
+<td align="right">0.099603</td>
+</tr>
+<tr>
+<td>Research Edition blend</td>
+<td align="right">53.939177</td>
+<td align="right">13.242439</td>
+<td align="right">0.099603</td>
+</tr>
+</tbody></table></div>
+<p>These are the original, calibrated force results for both feet. Smaller numbers mean closer predictions. The heel column measures the distance between the predicted and actual movement in three dimensions. The impulse column measures the size of the difference between predicted and observed force added up over the interval. The probability column is called the <em>Brier score</em>. It squares the difference between the forecast chance and the observed zero or one. Each column was averaged within each walker first, so a walker with more eligible observations did not carry extra weight.</p>
+<p>Eight walkers contributed 1,498 heel forecasts and 1,200 impulse forecasts. The plate comparison required distinct foot placements and a measured force outcome throughout the period. For the probability calculation there also had to be a confirmed outcome. Seven walkers contributed 925 such forecasts. There were 104 distinct starts, 63 on the prosthetic side and 41 on the intact side.</p>
+<p>The Research blend’s average heel miss was 0.332691 mm smaller than the physical reference. Seven of eight walkers had a smaller error. The paired 95% interval was −0.449651 to −0.204934 mm. Its impulse miss fell by 0.080511 N·s, with five of eight walkers improving. Its interval, −0.226461 to +0.054358 N·s, still allows a larger error. For a new load, all seven contributing walkers improved and the Brier score fell by 0.008798 (interval −0.013057 to −0.005271). That probability came from the trained model. The Compact blend reduced the three mean errors by 0.032871 mm, 0.066984 N·s and 0.002285 respectively.</p>
+<p>The intervals were calculated by sampling the walkers’ paired differences 20,000 times with replacement. Each interval describes its own comparison without adjustment for multiple comparisons. The archive also provides a software export of the very same force plates. The accompanying <a href="aggregate-results.json">aggregate results</a> keep those numbers separate. They include the full-precision scores, counts, and intervals for both feet together and the prosthetic and intact sides separately. The test tells us about this speed and these walkers. It did not measure whether the difference matters in practice or whether live instruments could deliver inputs on these clocks.</p>
+<p>At a different speed, 0.6 m/s, the Research blend reduced mean heel error by about 0.161 mm, while mean impulse error increased and its interval included zero. Those are separate walking trials. <a href="https://eliminatenoise.github.io/NeuroTranslation/utah-walking/">Utah results reader</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/compact-walking#comparison-on-recorded-walks">0.6 m/s comparison</a></p>
+<p>Alexander Beattie, Matti Kortelainen, Paavo Vartiainen and Pasi Karjalainen published the Kuopio Full-Body Dataset. Sarah Hood and Tommaso Lenzi published the Utah walking recordings. The scores here are derived from these sources and the Utah force encodings refer to the same plates. The data and derived aggregates retain their CC BY 4.0 attribution. <a href="https://doi.org/10.5281/zenodo.24194741">Kuopio dataset</a> · <a href="https://doi.org/10.6084/m9.figshare.c.4962305.v1">Utah dataset</a> · <a href="https://doi.org/10.1038/s41597-020-0494-7">Utah methods, Hood et al.</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Data licence</a></p>
+</article></main></body></html>
