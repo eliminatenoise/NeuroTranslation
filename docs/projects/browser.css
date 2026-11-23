@@ -8,6 +8,8 @@
   --secondary: #c2c6d0;
   --focus: #ffe0a2;
   --game-accent: #f3c68f;
+  --model-accent: #a9c9ff;
+  --atlas-accent: #a5e0c7;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -26,7 +28,17 @@ button, select { font: inherit; }
 h1, h2, h3, p, figure { margin: 0; }
 h1, h2, h3 { line-height: 1.14; }
 h1 { font-size: clamp(2.55rem, 6vw, 5.4rem); font-weight: 700; letter-spacing: -.065em; }
-.intro p { color: var(--secondary); font-size: clamp(1rem, 2vw, 1.2rem); max-width: 45rem; margin-top: .85rem; }
+.intro > p { color: var(--secondary); font-size: clamp(1rem, 2vw, 1.2rem); max-width: 45rem; margin-top: .85rem; }
+.quick-access { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: .65rem; margin-top: 1.1rem; }
+.quick-group { --accent: var(--game-accent); min-width: 0; max-width: 38rem; padding: .65rem; border: 1px solid var(--edge); border-radius: .75rem; background: var(--surface); }
+.quick-group[data-for-project="neurotranslation"], .project.models { --accent: var(--model-accent); }
+.quick-group[data-for-project="interoceptomics"], .project.atlas { --accent: var(--atlas-accent); }
+.quick-group p { color: var(--accent); font-size: .95rem; font-weight: 700; margin-bottom: .4rem; }
+.quick-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .35rem; }
+/* Keep play links usable on pages cached before the shortcut panel was added. */
+.priority-actions { --accent: var(--game-accent); display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: 1.1rem; }
+.priority-actions > span { color: var(--secondary); margin-right: .3rem; }
+.priority-actions .button { min-width: 6.8rem; }
 .filters { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: .85rem; padding: .7rem; margin-bottom: 2rem; border: 1px solid var(--edge); border-radius: .8rem; background: #171a21; }
 .project-filter, .type-filter { display: flex; flex-wrap: wrap; align-items: center; gap: .32rem; }
 .project-filter button, select { min-height: 2.65rem; border: 1px solid transparent; border-radius: .45rem; padding: .4rem .7rem; color: var(--secondary); background: transparent; cursor: pointer; }
@@ -35,8 +47,6 @@ h1 { font-size: clamp(2.55rem, 6vw, 5.4rem); font-weight: 700; letter-spacing: -
 .type-filter { gap: .55rem; padding-left: .4rem; }
 .type-filter select { color: #f6f3ea; background: #262a34; border-color: var(--edge); }
 .project { --accent: var(--game-accent); margin: 0 0 3.3rem; }
-.project.models { --accent: #a9c9ff; }
-.project.atlas { --accent: #a5e0c7; }
 .project-heading { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: .55rem 1rem; margin-bottom: 1rem; padding-left: .8rem; border-left: .22rem solid var(--accent); }
 .project-heading h2 { font-size: clamp(1.55rem, 3vw, 2.1rem); letter-spacing: -.035em; overflow-wrap: anywhere; }
 .project-heading p, .project-heading > a { color: var(--secondary); }
@@ -46,14 +56,12 @@ h1 { font-size: clamp(2.55rem, 6vw, 5.4rem); font-weight: 700; letter-spacing: -
 .resource h3 { font-size: 1.2rem; }
 .resource h3 a, .text-links a { color: var(--accent); }
 .resource p { margin-top: .55rem; color: var(--secondary); }
-.text-links, .actions, .index-jumps { display: flex; flex-wrap: wrap; gap: .55rem 1rem; margin-top: .65rem; }
-.priority-actions { --accent: var(--game-accent); align-items: center; gap: .5rem; margin-top: 1.1rem; }
-.priority-actions > span { color: var(--secondary); margin-right: .3rem; }
+.text-links, .index-jumps { display: flex; flex-wrap: wrap; gap: .55rem 1rem; margin-top: .65rem; }
 .game-feature { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); overflow: hidden; padding: 0; background: #211e20; }
 .feature-copy { padding: clamp(1.15rem, 3vw, 2.35rem); align-self: center; }
 .feature-copy h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); letter-spacing: -.035em; }
 .feature-copy .note { font-size: .91rem; margin-top: 1rem; }
-.button { display: inline-flex; justify-content: center; align-items: center; min-height: 2.8rem; min-width: 6.8rem; border-radius: .45rem; border: 1px solid #ab9989; padding: .5rem .9rem; text-decoration: none; font-weight: 700; }
+.button { display: flex; justify-content: center; align-items: center; min-height: 2.75rem; border-radius: .45rem; border: 1px solid #797e8c; padding: .25rem .3rem; text-align: center; text-decoration: none; font-size: .9rem; font-weight: 650; line-height: 1.2; overflow-wrap: anywhere; }
 .button.primary { background: var(--accent); border-color: var(--accent); color: #201914; }
 .button:hover { text-decoration: underline; }
 .feature-image { position: relative; min-height: 13rem; background: #1b1a20; }
@@ -76,6 +84,12 @@ h1 { font-size: clamp(2.55rem, 6vw, 5.4rem); font-weight: 700; letter-spacing: -
 }
 
 @media (max-width: 34rem) {
+  .topbar { padding-block: .65rem; }
+  .intro { padding: 1.35rem 0 1.2rem; }
+  h1 { font-size: clamp(2rem, 9vw, 2.55rem); }
+  .intro > p { margin-top: .55rem; }
+  .quick-access { gap: .5rem; margin-top: .9rem; }
+  .quick-group { padding: .5rem; }
   .resources, .index > div { grid-template-columns: minmax(0, 1fr); }
   .project-heading { align-items: start; }
   .project-filter { gap: .25rem; }

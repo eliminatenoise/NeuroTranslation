@@ -3,7 +3,13 @@ const choices = [...filters.querySelectorAll('button')];
 const typeChoice = document.querySelector('#resource-type');
 const projects = [...document.querySelectorAll('[data-project]')];
 const status = document.querySelector('#filter-status');
+const shortcuts = document.querySelector('[data-shortcuts]');
+const shortcutGroups = [...document.querySelectorAll('[data-shortcuts] [data-for-project]')];
 const gameEntry = document.querySelector('[data-game-entry]');
+
+function matchesType(item, type) {
+  return type === 'all' || item.dataset.kind === type;
+}
 
 function applyFilters(project, type) {
   let count = 0;
@@ -11,7 +17,7 @@ function applyFilters(project, type) {
     const showProject = project === 'all' || section.id === project;
     let visible = 0;
     for (const card of section.querySelectorAll('[data-kind]')) {
-      card.hidden = !showProject || (type !== 'all' && card.dataset.kind !== type);
+      card.hidden = !showProject || !matchesType(card, type);
       if (!card.hidden) visible += 1;
     }
     section.hidden = visible === 0;
@@ -20,7 +26,13 @@ function applyFilters(project, type) {
   for (const button of choices) {
     button.setAttribute('aria-pressed', String(button.value === project));
   }
-  gameEntry.hidden = (project !== 'all' && project !== 'neurosurge') || (type !== 'all' && type !== 'try');
+  for (const group of shortcutGroups) {
+    const links = [...group.querySelectorAll('a[data-kind]')];
+    for (const link of links) link.hidden = !matchesType(link, type);
+    group.hidden = (project !== 'all' && group.dataset.forProject !== project) || links.every(link => link.hidden);
+  }
+  if (shortcuts) shortcuts.hidden = shortcutGroups.every(group => group.hidden);
+  if (gameEntry) gameEntry.hidden = (project !== 'all' && project !== 'neurosurge') || (type !== 'all' && type !== 'try');
   typeChoice.value = type;
   status.textContent = `${count} ${count === 1 ? 'resource' : 'resources'} shown`;
 }
