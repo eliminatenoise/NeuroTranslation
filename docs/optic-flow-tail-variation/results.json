@@ -1,0 +1,341 @@
+{
+  "title": "Optic-flow tail-variation forecast",
+  "recording": "fig4_01/230413_f1",
+  "sources": {
+    "dataset_title": "Algorithmic dissection of optic flow memory in larval zebrafish",
+    "dataset_doi": "10.5281/zenodo.16085585",
+    "dataset_publisher": "Zenodo",
+    "creators": [
+      "Ryosuke Tanaka",
+      "Ruben Portugues"
+    ],
+    "dataset_licence": "CC BY 4.0",
+    "dataset_landing": "https://doi.org/10.5281/zenodo.16085585",
+    "dataset_licence_url": "https://creativecommons.org/licenses/by/4.0/legalcode",
+    "article_citation": "Tanaka, R. & Portugues, R. Algorithmic dissection of optic flow memory in larval zebrafish. Current Biology 35, 4870–4881.e4 (2025).",
+    "article_landing": "https://doi.org/10.1016/j.cub.2025.08.047"
+  },
+  "target": "Population standard deviation of signed camera tail angles during the interval from the forecast time up to, but excluding, 100 milliseconds later.",
+  "unit": "radians",
+  "clock": "Stored software timestamps for the camera record and program log.",
+  "support": {
+    "fitting_windows_scheduled": 4454,
+    "fitting_windows_used": 4440,
+    "later_windows_scheduled": 2278,
+    "later_windows_excluded_for_nonfinite_history": 8,
+    "issued_windows": 2270,
+    "issued_windows_excluded_for_nonfinite_target": 2,
+    "scored_windows": 2268,
+    "same_scored_windows_for_all_methods": true,
+    "camera_samples_per_issued_target_window_min_max": [
+      19,
+      21
+    ],
+    "sampled_command_direction_codes": [
+      -1,
+      1
+    ],
+    "command_support": "Both direction codes occurred at each of the ten sampled lags in each command history, current and six seconds earlier."
+  },
+  "metric": "Mean absolute difference between forecast and measured angle variation.",
+  "method_order": [
+    "recent_variation",
+    "camera_only",
+    "camera_and_command",
+    "camera_and_earlier_command_control"
+  ],
+  "mae_rad": {
+    "recent_variation": 0.011265614484764307,
+    "camera_only": 0.013926203622173207,
+    "camera_and_command": 0.014498200094075863,
+    "camera_and_earlier_command_control": 0.014163772589902451
+  },
+  "paired_display_minus_camera_rad": 0.0005719964719026522,
+  "paired_difference_definition": "For each common window subtract the camera-only absolute error from the absolute error with the current logged command. Average over windows.",
+  "descriptive_60_second_block_count": 20,
+  "blocks_with_lower_error_after_adding_current_command": 6,
+  "blocks_with_higher_error_after_adding_current_command": 14,
+  "descriptive_blocks": [
+    {
+      "software_time_half_open_s": [
+        2400,
+        2460
+      ],
+      "windows": 101,
+      "mae_rad": {
+        "recent_variation": 0.0324505235091963,
+        "camera_only": 0.028912935455001298,
+        "camera_and_command": 0.02810143724657402,
+        "camera_and_earlier_command_control": 0.029530426918971845
+      },
+      "paired_display_minus_camera_rad": -0.0008114982084272756
+    },
+    {
+      "software_time_half_open_s": [
+        2460,
+        2520
+      ],
+      "windows": 130,
+      "mae_rad": {
+        "recent_variation": 0.018502518466381644,
+        "camera_only": 0.020214112753454253,
+        "camera_and_command": 0.02152337169877016,
+        "camera_and_earlier_command_control": 0.02030694119512263
+      },
+      "paired_display_minus_camera_rad": 0.0013092589453159171
+    },
+    {
+      "software_time_half_open_s": [
+        2520,
+        2580
+      ],
+      "windows": 128,
+      "mae_rad": {
+        "recent_variation": 0.0009754153717665293,
+        "camera_only": 0.0031523111690961087,
+        "camera_and_command": 0.0048698409548830505,
+        "camera_and_earlier_command_control": 0.0034043301660137714
+      },
+      "paired_display_minus_camera_rad": 0.0017175297857869416
+    },
+    {
+      "software_time_half_open_s": [
+        2580,
+        2640
+      ],
+      "windows": 112,
+      "mae_rad": {
+        "recent_variation": 0.001170402852405732,
+        "camera_only": 0.0060308980181420216,
+        "camera_and_command": 0.007457934825726523,
+        "camera_and_earlier_command_control": 0.005273022113959539
+      },
+      "paired_display_minus_camera_rad": 0.0014270368075845012
+    },
+    {
+      "software_time_half_open_s": [
+        2640,
+        2700
+      ],
+      "windows": 103,
+      "mae_rad": {
+        "recent_variation": 0.001250205688423314,
+        "camera_only": 0.0049584038527759975,
+        "camera_and_command": 0.007217013800475055,
+        "camera_and_earlier_command_control": 0.004538333052750171
+      },
+      "paired_display_minus_camera_rad": 0.00225860994769906
+    },
+    {
+      "software_time_half_open_s": [
+        2700,
+        2760
+      ],
+      "windows": 121,
+      "mae_rad": {
+        "recent_variation": 0.001134853241803632,
+        "camera_only": 0.00805846690577753,
+        "camera_and_command": 0.008082061193306999,
+        "camera_and_earlier_command_control": 0.008337633680557833
+      },
+      "paired_display_minus_camera_rad": 2.359428752946473e-05
+    },
+    {
+      "software_time_half_open_s": [
+        2760,
+        2820
+      ],
+      "windows": 69,
+      "mae_rad": {
+        "recent_variation": 0.0013565191579142655,
+        "camera_only": 0.00657318482207827,
+        "camera_and_command": 0.008879493027748046,
+        "camera_and_earlier_command_control": 0.005962789765367148
+      },
+      "paired_display_minus_camera_rad": 0.0023063082056697746
+    },
+    {
+      "software_time_half_open_s": [
+        2820,
+        2880
+      ],
+      "windows": 117,
+      "mae_rad": {
+        "recent_variation": 0.001255172890015091,
+        "camera_only": 0.006061632121641719,
+        "camera_and_command": 0.007364277132426392,
+        "camera_and_earlier_command_control": 0.006203550660566723
+      },
+      "paired_display_minus_camera_rad": 0.0013026450107846786
+    },
+    {
+      "software_time_half_open_s": [
+        2880,
+        2940
+      ],
+      "windows": 110,
+      "mae_rad": {
+        "recent_variation": 0.006846488184672734,
+        "camera_only": 0.010023724391263459,
+        "camera_and_command": 0.009841470018322203,
+        "camera_and_earlier_command_control": 0.010805459038063896
+      },
+      "paired_display_minus_camera_rad": -0.0001822543729412504
+    },
+    {
+      "software_time_half_open_s": [
+        2940,
+        3000
+      ],
+      "windows": 109,
+      "mae_rad": {
+        "recent_variation": 0.014933316211496843,
+        "camera_only": 0.017165363184827587,
+        "camera_and_command": 0.01805915787459001,
+        "camera_and_earlier_command_control": 0.016628080727266778
+      },
+      "paired_display_minus_camera_rad": 0.0008937946897624165
+    },
+    {
+      "software_time_half_open_s": [
+        3000,
+        3060
+      ],
+      "windows": 125,
+      "mae_rad": {
+        "recent_variation": 0.0077058637063742805,
+        "camera_only": 0.006808760188084457,
+        "camera_and_command": 0.00740467871154885,
+        "camera_and_earlier_command_control": 0.006870409635062271
+      },
+      "paired_display_minus_camera_rad": 0.0005959185234643953
+    },
+    {
+      "software_time_half_open_s": [
+        3060,
+        3120
+      ],
+      "windows": 110,
+      "mae_rad": {
+        "recent_variation": 0.01869058285163221,
+        "camera_only": 0.018464380484395585,
+        "camera_and_command": 0.019282854676164266,
+        "camera_and_earlier_command_control": 0.01922873141449371
+      },
+      "paired_display_minus_camera_rad": 0.0008184741917686794
+    },
+    {
+      "software_time_half_open_s": [
+        3120,
+        3180
+      ],
+      "windows": 108,
+      "mae_rad": {
+        "recent_variation": 0.03007655452329543,
+        "camera_only": 0.02551355011821061,
+        "camera_and_command": 0.02542688187664237,
+        "camera_and_earlier_command_control": 0.026001673367906583
+      },
+      "paired_display_minus_camera_rad": -8.666824156823794e-05
+    },
+    {
+      "software_time_half_open_s": [
+        3180,
+        3240
+      ],
+      "windows": 116,
+      "mae_rad": {
+        "recent_variation": 0.027055881040528276,
+        "camera_only": 0.0230694391485772,
+        "camera_and_command": 0.02285067171419072,
+        "camera_and_earlier_command_control": 0.02348747857604641
+      },
+      "paired_display_minus_camera_rad": -0.00021876743438647528
+    },
+    {
+      "software_time_half_open_s": [
+        3240,
+        3300
+      ],
+      "windows": 120,
+      "mae_rad": {
+        "recent_variation": 0.012361970452262434,
+        "camera_only": 0.01922915907554664,
+        "camera_and_command": 0.018820108914542572,
+        "camera_and_earlier_command_control": 0.019642302792584353
+      },
+      "paired_display_minus_camera_rad": -0.0004090501610040749
+    },
+    {
+      "software_time_half_open_s": [
+        3300,
+        3360
+      ],
+      "windows": 106,
+      "mae_rad": {
+        "recent_variation": 0.012773811216616188,
+        "camera_only": 0.013007581710229919,
+        "camera_and_command": 0.013109223985969842,
+        "camera_and_earlier_command_control": 0.012801480179788355
+      },
+      "paired_display_minus_camera_rad": 0.00010164227573992132
+    },
+    {
+      "software_time_half_open_s": [
+        3360,
+        3420
+      ],
+      "windows": 120,
+      "mae_rad": {
+        "recent_variation": 0.015870421195344837,
+        "camera_only": 0.021968862751438945,
+        "camera_and_command": 0.02313953671325497,
+        "camera_and_earlier_command_control": 0.02127138152188167
+      },
+      "paired_display_minus_camera_rad": 0.0011706739618160332
+    },
+    {
+      "software_time_half_open_s": [
+        3420,
+        3480
+      ],
+      "windows": 114,
+      "mae_rad": {
+        "recent_variation": 0.003422480318203249,
+        "camera_only": 0.011039008706130534,
+        "camera_and_command": 0.011419300175009042,
+        "camera_and_earlier_command_control": 0.011929448776669615
+      },
+      "paired_display_minus_camera_rad": 0.00038029146887851565
+    },
+    {
+      "software_time_half_open_s": [
+        3480,
+        3540
+      ],
+      "windows": 127,
+      "mae_rad": {
+        "recent_variation": 0.015843524960667398,
+        "camera_only": 0.01922971789948359,
+        "camera_and_command": 0.020271841124914283,
+        "camera_and_earlier_command_control": 0.019864541384908698
+      },
+      "paired_display_minus_camera_rad": 0.0010421232254306753
+    },
+    {
+      "software_time_half_open_s": [
+        3540,
+        3600
+      ],
+      "windows": 122,
+      "mae_rad": {
+        "recent_variation": 0.0014271136444508757,
+        "camera_only": 0.00818495506459857,
+        "camera_and_command": 0.006523520760748864,
+        "camera_and_earlier_command_control": 0.0098686393083385
+      },
+      "paired_display_minus_camera_rad": -0.0016614343038497074
+    }
+  ],
+  "scope": "Later software time in one recording. The program logged the direction it commanded. Physical screen timing, sensory exposure, a causal effect and transfer to other fish remain unverified."
+}

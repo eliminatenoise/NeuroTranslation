@@ -19,6 +19,8 @@ The walking force models use past muscle and force readings to look 100 millisec
 
 ## Study readers
 
+[Optic-flow tail-variation forecast](https://eliminatenoise.github.io/NeuroTranslation/optic-flow-tail-variation/) · [Offline reader](optic-flow-tail-variation/Optic-Flow-Tail-Variation.zip). Compare four forecasts of the spread of tail angles in the next 100 milliseconds using one zebrafish recording.
+
 [Tanaka tail-bend forecast](https://eliminatenoise.github.io/NeuroTranslation/tanaka-tail-bend/) · [Offline reader](tanaka-tail-bend/Tanaka-Tail-Bend.zip). Compare earlier camera readings with the logged display command over 1,242 scored observations in one recording.
 
 [Fish01 tail-angle forecast](https://eliminatenoise.github.io/NeuroTranslation/fish01-tail-forecast/) · [Offline reader](fish01-tail-forecast/Fish01-Tail-Forecast.zip). Compare ten forecasts on 635 later observations in one zebrafish.
