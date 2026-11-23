@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Fish01 tail-angle forecast · Simple edition</title><link rel="stylesheet" href="guides.css"></head><body><main><nav aria-label="Reading editions"><a href="index.html">Fish01 study</a><a href="technical.html">Technical edition</a><a href="simple.html" aria-current="page">Simple edition</a><a href="results.json">Score data</a></nav>
+<article><h1>Forecasting a later tail angle in one zebrafish — Simple edition</h1>
+<p>The most accurate forecast overall was to keep the last angle of the fish’s tail. Over 635 later observations it missed by 0.111033 radians on average. Radians are a unit of angle. A fitted model using the earlier tail movements and temperature missed by 0.127190 radians. Adding the newest brain-image readings allowed in the test gave a larger miss, 0.133527 radians. Using the oldest of the five image histories gave 0.124331 radians. The older images helped relative to the fitted model with tail and temperature, but carrying the last angle forward was still more accurate overall.</p>
+<h2>The three signals in the recording</h2>
+<p>The recording comes from one larval zebrafish identified as Fish01. We used one imaging depth, called Z0, in session 20210818T112556. The fixed source is version 0.230316.1600 of DANDI dataset 000235, <em>Thermoregulatory Responses Forebrain</em>. The source has three records relevant here. A camera tracked the tail. A second series records the temperature stimulus in degrees Celsius. A third contains changes in brightness measured in regions of a brain image. <a href="https://doi.org/10.48324/dandi.000235/0.230316.1600">Versioned Fish01 dataset</a> · <a href="https://doi.org/10.7554/eLife.83289">Costabile and colleagues’ original study</a></p>
+<p>We followed one column of tail angles, column 20 when counting from zero. Those angles have a numerical meaning even though we have not verified which anatomical point the column represents. For the images, the analysis used the first 32 regions in the exported file. A calcium-sensitive indicator changes how brightly it emits light as calcium changes. The archive gives processed changes in that brightness relative to a reference level, called ΔF/F. This gives one way to follow activity indirectly. A brightness value can span changes that took place between images, and the processing can affect its timing. It does not give a time when a particular neuron fired an electrical spike.</p>
+<p>Each series has its own clock in the recording. The nominal brain-image times are 0.4194304 seconds apart, about 2.3842 frames per second. The temperature series has 20 readings per second. The tail camera has recorded times for individual readings, typically about four milliseconds apart. The forecast times come from the nominal brain-image clock. We use the other two clocks to find observations with stored times at or before each forecast time.</p>
+<h2>What counts as an answer</h2>
+<p>Take a forecast time and find the latest tail angle the camera recorded at or before it. That is the starting angle. Move a quarter of a second forward on the stored clock, then find the first camera reading at or after that point. The answer is how far and in which direction the tail angle changed between the two camera readings. Because angles wrap around a circle, the shorter turn is used. The same rule is used when measuring the difference between a forecast and the actual change.</p>
+<p>The camera need not record at precisely the requested instant. The protocol allows the earlier tail readings to precede their requested times, and the endpoint to follow its requested time, by at most twice the camera’s median sampling interval. For the observations that could be scored, the later reading was 250.009530 to 253.997348 milliseconds after the forecast time. Those numbers describe times in the saved recording. They do not measure how quickly the original instruments could have delivered a reading to a live model.</p>
+<h2>How the ten forecasts were made</h2>
+<p>The simple “last angle” rule predicts no further turn. Another rule continues the recent speed of turning. It takes the current tail reading and the last camera reading with a stored time at or before the point requested 40 milliseconds earlier. It divides their signed angle difference by the actual time between them. It then extends that speed from the current camera reading to the time requested for the answer, a quarter of a second after the forecast time.</p>
+<p>Three models learn from different combinations of two sources. One sees tail history alone, another sees temperature history alone, and a third sees both. The tail readings are taken at the forecast time and at requested times 40, 80, 160 and 320 milliseconds earlier. The current orientation is described by two numbers, its sine and cosine, so it can be placed on a circle. The older readings tell the model how far the tail had turned relative to that orientation. Temperature is sampled at the forecast time and at requested times 50, 250, 500 and 1,000 milliseconds earlier. For each requested reading, we take the last value with a stored time at or before that point. There is no guess between two readings. The tail-and-temperature model provides a comparison for testing what the images add when both of these histories are already known.</p>
+<p>The remaining five models all receive the same tail and temperature histories. Each also receives 96 brightness values, three consecutive frames from the same 32 regions. What changes is how far back those frames come from. If the forecast falls at frame 100 on the nominal clock, the newest optical input allowed with zero extra delay is frame 99. This is an illustration of indexing, not a scored example. At one extra frame the newest input would be frame 98. With 12 extra frames it would be frame 87, thirteen frame intervals or about 5.45 seconds before the forecast. The five planned comparisons used 0, 1, 2, 4 and 12 extra frames. They do not give five estimates of a neuron’s physical response time.</p>
+<p>The earlier part of this recording supplied the examples for fitting, which sets the model’s numbers. Forecast times from 6 seconds to just before 118 seconds gave 267 possibilities with suitable clocks. Of those, 257 had usable inputs and an answer for fitting. Only those examples set the centre and scale of each changing input. To allow for models with different numbers of input features, the scaled inputs were divided by the square root of the number retained. A fixed ridge penalty of 0.01 limited the size of the fitted weights. The constant offset was left unpenalised. The comparison plan, including all five image delays, was fixed in advance of selecting the later target angles.</p>
+<h2>The later test</h2>
+<p>The later forecast times ran from 220 seconds to just before 490 seconds. We measured the gap using the stored times before checking which readings had usable numerical values. The earliest input indexed for the later test was 95.797313 seconds after the latest endpoint that qualified for fitting by its clock time. There were 644 possible later times. At five, an earlier value needed by at least one forecast could not be used. Four other times had an unusable later tail angle. This left 635 times. Every forecast in the table was scored on precisely those times, including the rules that would have needed fewer inputs on their own.</p>
+<p>The groups labelled “earlier moving” and “earlier quiet” refer to what the tail had already done. We measured the size of its change in angle over the preceding 320 milliseconds. The boundary came from the 80th percentile of those changes in the fitting examples, 0.0997331 radians. Changes above the boundary put 200 later forecasts in the earlier-moving group. The remaining 435 were in the earlier-quiet group. A row called quiet need not have no movement at all. Its earlier movement was at or below that cutoff.</p>
+<p>We calculated the size of each error in radians. The seven time blocks started at 220, 260, 300, 340, 380, 420 and 460 seconds. The first six lasted 40 seconds each and the last one ended at 490 seconds, after 30 seconds. They supplied 94, 96, 95, 91, 96, 91 and 72 usable forecasts in that order. We first averaged the misses inside each block, then gave the seven block averages equal weight. This prevents a longer block with more usable readings from deciding more of the score. We did this separately for all cases and for each earlier-motion group. Both groups occurred in all seven blocks. Smaller numbers mean a smaller average angular miss.</p>
+<div class="table-view" role="region" tabindex="0" aria-label="Mean absolute angle error in radians"><table>
+<thead>
+<tr>
+<th>Forecast</th>
+<th align="right">All 635</th>
+<th align="right">Earlier moving, 200</th>
+<th align="right">Earlier quiet, 435</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Last tail angle (persistence)</td>
+<td align="right">0.111033</td>
+<td align="right">0.157847</td>
+<td align="right">0.092149</td>
+</tr>
+<tr>
+<td>Extrapolate recent tail velocity</td>
+<td align="right">0.776324</td>
+<td align="right">1.092719</td>
+<td align="right">0.645190</td>
+</tr>
+<tr>
+<td>Tail history only</td>
+<td align="right">0.123241</td>
+<td align="right">0.158899</td>
+<td align="right">0.110110</td>
+</tr>
+<tr>
+<td>Temperature history only</td>
+<td align="right">0.115856</td>
+<td align="right">0.160179</td>
+<td align="right">0.097138</td>
+</tr>
+<tr>
+<td>Tail and temperature</td>
+<td align="right">0.127190</td>
+<td align="right">0.156794</td>
+<td align="right">0.115650</td>
+</tr>
+<tr>
+<td>Tail and temperature + fluorescence, 0 extra frames</td>
+<td align="right">0.133527</td>
+<td align="right">0.176744</td>
+<td align="right">0.123133</td>
+</tr>
+<tr>
+<td>Same, 1 extra frame</td>
+<td align="right">0.158185</td>
+<td align="right">0.250739</td>
+<td align="right">0.144163</td>
+</tr>
+<tr>
+<td>Same, 2 extra frames</td>
+<td align="right">0.163834</td>
+<td align="right">0.272546</td>
+<td align="right">0.148297</td>
+</tr>
+<tr>
+<td>Same, 4 extra frames</td>
+<td align="right">0.142032</td>
+<td align="right">0.166190</td>
+<td align="right">0.131401</td>
+</tr>
+<tr>
+<td>Same, 12 extra frames</td>
+<td align="right">0.124331</td>
+<td align="right">0.141326</td>
+<td align="right">0.117155</td>
+</tr>
+</tbody></table></div>
+<p>Within the 200 earlier-moving cases, the model with 12 extra frames of delay missed by 0.141326 radians. The model with tail and temperature missed by 0.156794 and the last-angle rule by 0.157847. In the 435 quieter cases, the last-angle rule had the smallest miss, 0.092149. The moving-group comparison is descriptive. It would take another test to tell whether that ordering repeats. Choosing the oldest images on the strength of this subgroup would reuse the same evidence to make the choice and judge it.</p>
+<h2>What was independently checked</h2>
+<p>The later forecasts were saved and independently checked before the analysis explicitly selected the future camera values to score them. A compressed archive stores many values in one piece. Reading one earlier value can fetch or unpack bytes for other times as well. Eighteen compressed pieces also contained unselected later values. The check established which indices the forecast used and when the answers were explicitly selected. It does not show that every byte of every future value was absent from memory. A separate check of the saved targets and calculations then reproduced the reported errors.</p>
+<p>Seven blocks tell us how these methods behaved at different times for Fish01. They are still seven parts of one recording from the same animal that supplied the fitting examples. The alignment of the physical instruments, their delays and the processing before the signals were deposited remain unverified. This work leaves open whether a live forecast would behave the same way, whether the result carries over to another fish and whether neural activity caused a particular movement.</p>
+<p>Martin Haesemeyer and Kaarthik Balakrishnan shared the dataset under CC BY 4.0. Jamie D. Costabile, Kaarthik A. Balakrishnan, Sina Schwinn and Martin Haesemeyer describe the original study. The ten forecasts and the later-time comparison here are a separate analysis of those measurements. <a href="https://doi.org/10.48324/dandi.000235/0.230316.1600">Dataset and citation</a> · <a href="https://doi.org/10.7554/eLife.83289">Original paper</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Licence</a></p>
+</article></main></body></html>

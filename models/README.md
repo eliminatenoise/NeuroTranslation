@@ -17,6 +17,10 @@ A checkpoint is the set of weights a model saved after fitting. The downloads in
 
 The walking force models use past muscle and force readings to look 100 milliseconds ahead. One output estimates the chance that a plate will start carrying load. The other estimates the signed vertical force added up over that time. The Research Edition guide reports a comparison on three people whose recordings were kept out of fitting. A separate group is reserved for the final test.
 
+## Study readers
+
+[Fish01 tail-angle forecast](https://eliminatenoise.github.io/NeuroTranslation/fish01-tail-forecast/) · [Offline reader](fish01-tail-forecast/Fish01-Tail-Forecast.zip). Compare ten forecasts on 635 later observations in one zebrafish.
+
 ## NeuroTranslate 0.0 studies
 
 **[NeuroTranslate 0.0 joint alpha](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/)** is the current joint model. [Download the model and local demo](neurotranslate-0.0.zip) or inspect [its source and results](neurotranslate-0.0/joint_alpha/). The earlier task-specific fits below retain the inputs from their own studies.
