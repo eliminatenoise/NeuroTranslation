@@ -2,6 +2,8 @@
 
 ## Current downloads
 
+[Overground walking results](neurotranslate-0.0/compact-walking/overground-simple.md) · [Technical methods](neurotranslate-0.0/compact-walking/overground-technical.md) · [Offline overground example](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0/compact-walking/overground-preview.zip). Run the Compact heel forecast with the person's steady travel accounted for.
+
 [Walking forecast blends](https://eliminatenoise.github.io/NeuroTranslation/walking-blends/) · [Offline calculator](walking-blends/Walking-Forecast-Blends.zip). Combine matching physical and learned forecasts with the fixed Compact or Research Edition weights.
 
 A checkpoint is the set of weights a model saved after fitting. The downloads include those weights and a way to try them with invented readings.

@@ -1,5 +1,7 @@
 # Try the compact walking model
 
+[Overground walking results](overground-simple.md) · [Technical methods](overground-technical.md) · [Download the overground example](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0/compact-walking/overground-preview.zip)
+
 1. [Download the ZIP](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0/compact-walking/Compact-walking-preview.zip) and extract the whole folder.
 2. Open **Open on Windows.cmd**, **Open on macOS.command** or **Open on Linux.sh**. You can also open **index.html** directly in a desktop browser with JavaScript enabled. Keep the files together. The demo runs offline.
 3. Choose **Heel positions only** or **Heel positions and vertical force**, then move the sliders. The default averages two training runs for that input. Choose a single run to see its forecast.
