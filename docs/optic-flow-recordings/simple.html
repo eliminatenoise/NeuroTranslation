@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Zebrafish tail-angle forecasts · Simple</title>
+  <link rel="stylesheet" href="study.css">
+<script defer src="model/weights.js"></script>
+<script defer src="model/runtime.js"></script>
+<script defer src="model/example-input.js"></script>
+<script defer src="interface.js"></script>
+</head>
+<body><main><nav aria-label="Study navigation">
+  <a href="index.html">Study home</a>
+  <a href="simple.html" aria-current="page">Simple edition</a>
+  <a href="technical.html">Technical edition</a>
+  <a href="results.json">Scores as JSON</a>
+</nav><header class="study-header"><h1>Forecasting how much a zebrafish’s tail will vary in the next tenth of a second</h1>
+<p>A camera recorded how far a zebrafish’s tail bent. A separate log recorded the direction a computer told a visual pattern to move. We used earlier readings to forecast how much the tail angle would vary over the next tenth of a second. On 12 recordings from the later date, a model called a Transformer made the smallest average miss when it could use both the camera and the command log. Its error was 0.020223 radians. The Transformer using the camera alone scored 0.020686, and repeating the amount of movement in the recent past scored 0.023516.</p>
+<p>The command added a modest improvement. It reduced the camera model’s average error by 0.000463 radians. The current-command Transformer beat that camera model in nine of the 12 recordings. It also beat repeating recent movement in nine of 12. The exceptions were different for the two comparisons. Earlier, when four other recordings were used to choose the settings, repeating recent movement had given the closest answers on average.</p>
+</header><section class="forecast" aria-labelledby="run-heading">
+  <h2 id="run-heading">Run the model</h2>
+  <div class="forecast-grid">
+    <div class="inputs">
+      <p class="source" id="input-source">Invented example</p>
+      <label for="movement">Earlier movement scale <output id="movement-value" for="movement">100%</output></label>
+      <input id="movement" type="range" min="0" max="200" step="5" value="100">
+      <label class="check"><input id="reverse-command" type="checkbox"> Reverse current command history</label>
+      <label class="check"><input id="reverse-earlier" type="checkbox"> Reverse six-second-earlier history</label>
+      <details class="editor">
+        <summary>Edit input JSON</summary>
+        <label class="sr-only" for="case-input">Complete input row in JSON</label>
+        <textarea id="case-input" rows="12" spellcheck="false" autocomplete="off"></textarea>
+      </details>
+      <div class="actions">
+        <button type="button" id="calculate">Calculate forecast</button>
+        <button type="button" id="restore" class="secondary">Restore example</button>
+      </div>
+    </div>
+    <div class="outputs">
+      <p id="forecast-status" role="status" aria-live="polite">Loading fitted models.</p>
+      <table class="output-table">
+        <caption>Predicted tail-angle spread over 100 ms</caption>
+        <thead><tr><th scope="col">Method</th><th scope="col">Radians</th><th scope="col" class="bar-heading" aria-label="Relative spread"></th></tr></thead>
+        <tbody><tr data-method="recent_variation"><th scope="row">Recent tail variation</th><td data-spread>—</td><td aria-hidden="true"><meter min="0" max="1" value="0"></meter></td></tr>
+<tr data-method="linear_camera"><th scope="row">Linear model · camera</th><td data-spread>—</td><td aria-hidden="true"><meter min="0" max="1" value="0"></meter></td></tr>
+<tr data-method="linear_command"><th scope="row">Linear model · camera and current command</th><td data-spread>—</td><td aria-hidden="true"><meter min="0" max="1" value="0"></meter></td></tr>
+<tr data-method="linear_earlier_command"><th scope="row">Linear model · camera and earlier command</th><td data-spread>—</td><td aria-hidden="true"><meter min="0" max="1" value="0"></meter></td></tr>
+<tr data-method="transformer_camera"><th scope="row">Transformer · camera</th><td data-spread>—</td><td aria-hidden="true"><meter min="0" max="1" value="0"></meter></td></tr>
+<tr data-method="transformer_command"><th scope="row">Transformer · camera and current command</th><td data-spread>—</td><td aria-hidden="true"><meter min="0" max="1" value="0"></meter></td></tr>
+<tr data-method="transformer_earlier_command"><th scope="row">Transformer · camera and earlier command</th><td data-spread>—</td><td aria-hidden="true"><meter min="0" max="1" value="0"></meter></td></tr></tbody>
+      </table>
+      <details id="copy-forecast" hidden>
+        <summary>Forecast values as JSON</summary>
+        <pre id="forecast-json"></pre>
+      </details>
+    </div>
+  </div>
+  <noscript><p>Enable JavaScript in this browser to calculate the forecast. Both reports and the score data are available below.</p></noscript>
+</section><section class="instructions"><h2>Running the model</h2>
+<p>Select <strong>Calculate forecast</strong> to try the fitted models with an invented set of earlier readings. The seven methods estimate the same quantity. It describes how much the zebrafish’s tail bend will vary during the next tenth of a second. The numbers are in radians, a unit for angles. The report below uses real camera measurements to show how far each method’s forecasts missed.</p>
+<p>Move <strong>Earlier movement scale</strong> to change all the example’s camera readings by the same proportion. At 100%, you get the given example. At 200%, you double the average bend and the spread in each of its four short camera intervals. You also double its recent spread. That last value is calculated across the latest two intervals together. The recent-movement method repeats it.</p>
+<p>Select <strong>Reverse current command history</strong> to swap the sign of each logged direction in the first list of earlier display commands. Select <strong>Reverse six-second-earlier history</strong> to make the same change to the second list. Those controls leave the example’s sample times and confirmation times in place. Choose <strong>Calculate forecast</strong> to apply the changes. <strong>Restore example</strong> brings back the original numbers and runs the forecast again.</p>
+<h3>Entering a complete row</h3>
+<p>Open <strong>Edit input JSON</strong> to see the number lists the model reads. The example uses JSON, a text format with a name for each value or list. Copy its structure when pasting your own row. <strong>Calculate forecast</strong> runs your edited row. Choose <strong>Restore example</strong> when you want the example&#39;s movement and direction controls back.</p>
+<div class="table-view" role="region" tabindex="0" aria-label="Study data or input fields"><table>
+<thead>
+<tr>
+<th>Names in the editor</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>valid</code></td>
+<td>Set to <code>true</code> for a row eligible for forecasting. A <code>false</code> row has no forecast.</td>
+</tr>
+<tr>
+<td><code>case_id</code>, <code>issue_s</code></td>
+<td>A whole-number counter of zero or more that JavaScript can represent exactly as a safe integer, and its forecast time in seconds. The times are 0.32 seconds apart from zero. Multiply the counter by 0.32 to get the exact time.</td>
+</tr>
+<tr>
+<td><code>camera_stats_rad</code>, <code>recent_spread_rad</code></td>
+<td>Give four pairs, from the earliest short camera interval to the latest. Each pair gives the average bend and the spread of the angles. Also give the spread across the latest two intervals together. All these numbers use radians.</td>
+</tr>
+<tr>
+<td><code>camera_first_s</code>, <code>camera_last_s</code>, <code>camera_closed_s</code></td>
+<td>For each of the four intervals, give the first and last camera sample times in seconds. Give the later saved time that confirms the group was complete.</td>
+</tr>
+<tr>
+<td><code>command_codes</code>, <code>command_sample_s</code>, <code>command_closed_s</code></td>
+<td>Give ten display directions, the time of each logged direction and the later time confirming it. Use −1 and +1 for the two directions, and use the ten offsets listed in the report.</td>
+</tr>
+<tr>
+<td><code>earlier_command_codes</code>, <code>earlier_command_sample_s</code>, <code>earlier_command_closed_s</code></td>
+<td>Give ten more directions and both time lists, moving each offset six seconds further back.</td>
+</tr>
+<tr>
+<td><code>command_max_age_s</code>, <code>clock_tolerance_s</code></td>
+<td>Give the maximum accepted age of a display reading and the small allowance for rounding the time. Both values use seconds. The age limit is positive. The rounding allowance runs from zero to one hundred-billionth of a second (0.00000000001).</td>
+</tr>
+</tbody></table></div>
+<p>The earlier samples and the readings that confirm them must be available by the forecast time. The browser checks the numbers and times you enter. It can check, for example, that a spread is zero or greater and that a display reading is recent enough. For a real input, first use the original camera and display logs. Apply the report’s checks for repeated times, gaps and enough samples. Work out the camera averages and spreads from the samples that pass. Paste the resulting numbers into the editor. If the input has missing numbers, a different list size or an invalid time, the model displays an explanation and waits for a corrected row.</p>
+<h3>Opening the offline package</h3>
+<p>Extract the ZIP on your computer and leave the files together. Open <code>index.html</code> in your browser. You can also open the script for your computer, <code>Linux.sh</code>, <code>macOS.command</code>, or <code>Windows.cmd</code>. Pick either edition to run the same model. Its fitted numbers retain all the original digits used in training. The browser does its calculation with double precision, a standard way of keeping those digits.</p>
+<p>If Node.js is already installed and you use a terminal, open the extracted folder in the terminal. Run <code>node model/cli.cjs model/example-input.json</code>. It uses the same model as the browser and prints seven named forecast values in radians in JSON.</p>
+</section><article class="report"><h2>Each date has a separate job</h2>
+<p>Ryosuke Tanaka and Ruben Portugues describe a Figure 4 experiment in which the fish’s head was held in place while a program changed the direction of a visual pattern. Each archive file contains a software setting called <code>embedded</code>. Its value cannot tell us whether the fish was physically held in place for that particular recording. We used all 29 Figure 4 recordings in the versioned archive. A whole recording stayed together. The 17 dated 13 April 2023 supplied the examples for learning, including the one used in our earlier single-recording study. The 12 dated 16 May 2023 supplied the test. A fish that moved less often could still contribute. Neither swimming frequency nor forecast error decided which records to use.</p>
+<p>The archive numbers its records within each date. The numbers 1 through 12 appear on both dates. A number alone cannot tell us whether entries from different days refer to the same physical fish. Two May entries, f7 and f8, have distinct files but share a session label. The label cannot tell us how independent their apparatus or conditions were. Age and sex for the individual records are uncertain. Date, animals, preparation and apparatus may all have changed together. A test on a new date answers a narrower question than a test on independently identified fish in another laboratory.</p>
+<h2>The answer is the spread of the angles</h2>
+<p>The camera field <code>tail_sum</code> is the signed cumulative bend of the tail, measured in radians. It describes the overall bend, and its sign tells the two directions apart. The program stored its command in a separate field, <code>LDPS_drift_direction</code>. The codes −1 and +1 distinguished the requested directions of the visual pattern. A steady bend can be far from straight while hardly changing at all. The forecast concerns how widely the measured angles vary around their own average during the next 100 milliseconds. To measure that spread, take the average angle in the interval. Square each angle’s distance from the average, take the average of those squares, then take the square root. This is called the <em>population standard deviation</em>. It has the same unit as the angle, radians. Bends to either side can contribute to it.</p>
+<p>Candidate forecast times were spaced 320 milliseconds apart, counting from zero on the software clock. For a forecast at a given time, the answer included readings starting at that time and ending just before the instant 100 milliseconds later. Keeping the end outside the interval makes clear which readings belong to it.</p>
+<p>The camera’s earlier history was divided into four adjoining intervals of 50 milliseconds each. Together they covered the preceding 200 milliseconds. We used entries in their original order. If several entries shared one time, we excluded the repeated group. Even a unique past entry was used only after a later timestamp in the same log had confirmed, by forecast time, that its time group had ended. This last check matters especially when asking for a command at the forecast time itself.</p>
+<p>We measured the middle positive gap between successive camera times within each recording. Every 50 ms input interval and the whole 100 ms answer interval needed at least two eligible camera readings. Gaps between readings, and gaps to the two edges of each interval, could be at most twice that middle gap. The four input intervals were checked individually. For a command, we looked for the latest eligible entry at or before the requested time. It could be at most twice the middle positive gap of its own log behind that time. None of the camera entries used to construct an input also supplied an answer in that recording. These rules use the stored clocks. They do not measure when the camera physically took a picture, when the screen changed, or when information could have reached a running device.</p>
+<h2>Seven forecasting rules use the same examples</h2>
+<p>The simplest rule uses no fitting. Pool the camera readings from the last two 50 ms intervals, measure their spread and repeat that number for the next 100 ms. Pooling the angles first preserves differences between the two intervals, even if each one on its own contains very little variation.</p>
+<p>The other six rules come in two families. Each family has three versions. All three receive the average bend and its spread in each of the four earlier camera intervals. The camera-only version stops there. A second version adds past readings of the direction the program logged. It looks back at ten times before the forecast, at 5, 4, 3, 2, 1, 0.5, 0.2, 0.1, 0.05 and 0 seconds. We call this the current-command version. Its name includes the most recent eligible command as well as the earlier ones.</p>
+<p>The third version uses the same ten spacings but moves the whole set another six seconds into the past. For example, the reading requested one second back now comes from seven seconds back, subject to the same timing checks. The older log still contains real commands and could still carry information. Comparing these versions helps show whether it matters which part of the log is used.</p>
+<p>The linear family starts with the simple forecast and learns how much to add or subtract. Each fitting recording gets an equal total share of the weight, divided equally among its usable windows. A longer recording can contribute more examples without having a larger overall say in the fit.</p>
+<p>First put the inputs on comparable scales. An input that never changes in the fitting recordings is given no influence. For each remaining input, calculate its weighted average using just the fitting examples. Subtract that average and divide by the input’s weighted population standard deviation. This is the same measure of spread described for the angles, now calculated with each recording’s share of the weight. The scales learned in fitting are also used when making a forecast.</p>
+<p>For each fitting window, subtract the recent spread from the measured future spread. The difference is the correction the rule would have needed. Compare the rule’s estimated correction with that difference and square the miss. The fit minimizes the recording-weighted average of those squared misses plus a charge of 0.1 times the sum of the squared input slopes. The basic offset carries no charge. This method is called ridge regression. To issue a forecast, add the fitted correction to the recent spread. If the sum is below zero, report zero.</p>
+<p>The Transformer family uses attention. It represents each part of the earlier history separately and learns how much its contribution depends on other parts. When given the command log, it can use the direction readings and their observed ages. Each Transformer learns a correction to the same recent spread. The correction can be positive or negative. Its output layer starts with zero weights and zero offset, so the first estimate is the recent spread itself. While learning, the model adds the correction to that spread and compares the sum with the measured answer. Even if the sum goes below zero, the full error is squared. This lets the fit distinguish a small overshoot below zero from a large one.</p>
+<p>The three Transformers use the same fitting method, called Adam, with separate learned weights for each version. Adam tracks how the fitting error changes as each weight changes. It uses running averages of those slopes and their squares to choose the updates. All three use Float64, a 64-bit floating-point number format. Examples are shuffled for each pass. Each small batch contributes its share of the squared errors under the same recording weights as the linear rules. For each update that weighted sum is multiplied by the number of batches in a full pass. Once fitting ends, the model issues a forecast by adding its learned correction to recent spread. This time a negative sum is set to zero. A positive sum is issued as calculated.</p>
+<h2>Four earlier recordings determined the Transformer size</h2>
+<p>We first fitted the models using 13 of the April recordings, containing 83,258 usable windows. We reserved the remaining four, the last in numerical label order (f14, f15, f17 and f18), for checking settings on 25,438 windows. The word “last” refers to these archive labels within April. May measurements played no part in the choice.</p>
+<p>We compared widths 24 and 32. Width is the number of values used in an internal representation. For each width, we scored the three versions of the Transformer on the four check recordings. We first gave equal importance to each recording and then took the average error of the three versions. The smaller width scored 0.037345 radians and the larger one scored 0.037672. The lower value selected width 24. The rule would also have selected 24 on an exact tie. The carry-forward baseline scored 0.023542 on the four earlier recordings, lower than any learned rule there in the combined comparison. The width decision chose settings for the Transformer. The simpler rules were kept for the May test.</p>
+<p>Both widths used two processing layers with four attention heads, which allow different weightings of the history. An internal feed-forward step used 48 units for width 24 and 64 for width 32. Each model made six passes over the fitting data, in batches of 128, with a learning rate of 0.001. The same starting random seed, 104729, helped make the comparison repeatable. We then fitted the chosen versions using all 17 April recordings. Of 191,233 original grid times, 109,005 passed the timing checks. Of those, 108,814 had usable input values. Another 118 lacked a finite answer, leaving 108,696 usable training windows. A nonfinite value, such as a missing value stored as “not a number,” cannot supply a numerical input or answer.</p>
+<h2>The May scores count each recording equally</h2>
+<p>There were 134,988 candidate grid times in May. Of these, 90,357 had suitable timing for every rule, and 130 lacked sufficient finite earlier inputs. All seven rules issued a forecast on each of the remaining 90,227 windows. Before reading the later camera values, an independent check reopened all 631,589 predictions. The check identified all 2,103,065 later camera entries requested to calculate the answers and compared their row positions with the earlier camera entries used as inputs. Zero rows appeared in both sets within any recording. This establishes which stored measurements went into each side of the comparison. When those answers were read, 78 windows lacked a finite spread. Each of these windows was dropped from every method. That left 90,149 windows on which a comparison could be made side by side.</p>
+<p>For each window, we took the size of the miss between the forecast and the measured spread. Too high and too low count equally for misses of the same size. We averaged the misses within each recording and then averaged those recording scores. Each May recording supplies one twelfth of the final score. The table also shows the four earlier check recordings, using the chosen width. Those scores describe the earlier fit on 13 recordings. The May column describes the final fit on all 17. All table entries are mean errors in radians, rounded to six decimal places.</p>
+<div class="table-view" role="region" tabindex="0" aria-label="Study data or input fields"><table>
+<thead>
+<tr>
+<th>Forecast</th>
+<th align="right">Four earlier check recordings (radians)</th>
+<th align="right">Twelve later test recordings (radians)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Repeat recent variation</td>
+<td align="right">0.023542</td>
+<td align="right">0.023516</td>
+</tr>
+<tr>
+<td>Linear, camera</td>
+<td align="right">0.026869</td>
+<td align="right">0.029264</td>
+</tr>
+<tr>
+<td>Linear, camera and current command</td>
+<td align="right">0.026924</td>
+<td align="right">0.029122</td>
+</tr>
+<tr>
+<td>Linear, camera and older command</td>
+<td align="right">0.026856</td>
+<td align="right">0.029247</td>
+</tr>
+<tr>
+<td>Transformer, camera</td>
+<td align="right">0.036179</td>
+<td align="right">0.020686</td>
+</tr>
+<tr>
+<td>Transformer, camera and current command</td>
+<td align="right">0.030703</td>
+<td align="right">0.020223</td>
+</tr>
+<tr>
+<td>Transformer, camera and older command</td>
+<td align="right">0.045153</td>
+<td align="right">0.025742</td>
+</tr>
+</tbody></table></div>
+<p>The current-command Transformer reduced error by 0.003293 radians compared with repeating the recent spread. Most of that advantage was already present when the Transformer used camera readings alone, which reduced error by 0.002830. To find the extra gain from the current commands, compare the two Transformers’ misses on each of the same windows. Average those differences within each recording and then across recordings. The additional reduction was 0.000463 radians.</p>
+<p>In May recordings f1, f4 and f8, repeating the recent spread beat the current-command Transformer. In f2, f4 and f11, the camera-only Transformer beat the current-command Transformer. There were no ties in either comparison. That is how both comparisons can show nine wins while the three losses refer to different recordings.</p>
+<p>Using current commands reduced the Transformer’s error by 0.005519 radians compared with giving it older commands. The current-command Transformer was also 0.008898 radians closer than the linear model that received current commands. Within the linear family, adding current commands to the camera reduced average error by 0.000142 radians. Using current instead of older commands in that family reduced it by 0.000125 radians. These comparisons concern what helped the forecast at the recorded times.</p>
+<h2>Errors within each later recording</h2>
+<p>The May archive labels identify recordings on the same date. Each error below is a mean absolute error in radians, rounded to six decimal places. The issued and scored counts apply to all seven methods.</p>
+<div class="table-view" role="region" tabindex="0" aria-label="Study data or input fields"><table>
+<thead>
+<tr>
+<th>May recording</th>
+<th align="right">Issued</th>
+<th align="right">Scored</th>
+<th align="right">Recent variation</th>
+<th align="right">Linear camera</th>
+<th align="right">Linear current command</th>
+<th align="right">Linear older command</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>f1</td>
+<td align="right">7,327</td>
+<td align="right">7,324</td>
+<td align="right">0.006307</td>
+<td align="right">0.015552</td>
+<td align="right">0.015456</td>
+<td align="right">0.015514</td>
+</tr>
+<tr>
+<td>f2</td>
+<td align="right">7,340</td>
+<td align="right">7,334</td>
+<td align="right">0.030532</td>
+<td align="right">0.033264</td>
+<td align="right">0.032877</td>
+<td align="right">0.033249</td>
+</tr>
+<tr>
+<td>f3</td>
+<td align="right">9,820</td>
+<td align="right">9,809</td>
+<td align="right">0.030196</td>
+<td align="right">0.033097</td>
+<td align="right">0.033143</td>
+<td align="right">0.033105</td>
+</tr>
+<tr>
+<td>f4</td>
+<td align="right">6,618</td>
+<td align="right">6,615</td>
+<td align="right">0.011829</td>
+<td align="right">0.018862</td>
+<td align="right">0.019065</td>
+<td align="right">0.018845</td>
+</tr>
+<tr>
+<td>f5</td>
+<td align="right">6,496</td>
+<td align="right">6,494</td>
+<td align="right">0.024127</td>
+<td align="right">0.028251</td>
+<td align="right">0.028371</td>
+<td align="right">0.028262</td>
+</tr>
+<tr>
+<td>f6</td>
+<td align="right">7,568</td>
+<td align="right">7,567</td>
+<td align="right">0.025578</td>
+<td align="right">0.030589</td>
+<td align="right">0.030815</td>
+<td align="right">0.030614</td>
+</tr>
+<tr>
+<td>f7</td>
+<td align="right">7,352</td>
+<td align="right">7,320</td>
+<td align="right">0.042368</td>
+<td align="right">0.046224</td>
+<td align="right">0.045168</td>
+<td align="right">0.046179</td>
+</tr>
+<tr>
+<td>f8</td>
+<td align="right">7,421</td>
+<td align="right">7,420</td>
+<td align="right">0.005711</td>
+<td align="right">0.015733</td>
+<td align="right">0.015911</td>
+<td align="right">0.015721</td>
+</tr>
+<tr>
+<td>f9</td>
+<td align="right">9,599</td>
+<td align="right">9,587</td>
+<td align="right">0.029981</td>
+<td align="right">0.032088</td>
+<td align="right">0.032312</td>
+<td align="right">0.032079</td>
+</tr>
+<tr>
+<td>f10</td>
+<td align="right">6,524</td>
+<td align="right">6,519</td>
+<td align="right">0.051436</td>
+<td align="right">0.053962</td>
+<td align="right">0.053153</td>
+<td align="right">0.053932</td>
+</tr>
+<tr>
+<td>f11</td>
+<td align="right">6,570</td>
+<td align="right">6,568</td>
+<td align="right">0.009557</td>
+<td align="right">0.019615</td>
+<td align="right">0.019703</td>
+<td align="right">0.019600</td>
+</tr>
+<tr>
+<td>f12</td>
+<td align="right">7,592</td>
+<td align="right">7,592</td>
+<td align="right">0.014575</td>
+<td align="right">0.023928</td>
+<td align="right">0.023486</td>
+<td align="right">0.023860</td>
+</tr>
+</tbody></table></div>
+<div class="table-view" role="region" tabindex="0" aria-label="Study data or input fields"><table>
+<thead>
+<tr>
+<th>May recording</th>
+<th align="right">Transformer camera</th>
+<th align="right">Transformer current command</th>
+<th align="right">Transformer older command</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>f1</td>
+<td align="right">0.008352</td>
+<td align="right">0.007648</td>
+<td align="right">0.012612</td>
+</tr>
+<tr>
+<td>f2</td>
+<td align="right">0.025041</td>
+<td align="right">0.025275</td>
+<td align="right">0.030911</td>
+</tr>
+<tr>
+<td>f3</td>
+<td align="right">0.026219</td>
+<td align="right">0.026120</td>
+<td align="right">0.031093</td>
+</tr>
+<tr>
+<td>f4</td>
+<td align="right">0.011836</td>
+<td align="right">0.011977</td>
+<td align="right">0.017810</td>
+</tr>
+<tr>
+<td>f5</td>
+<td align="right">0.019364</td>
+<td align="right">0.018386</td>
+<td align="right">0.023589</td>
+</tr>
+<tr>
+<td>f6</td>
+<td align="right">0.020872</td>
+<td align="right">0.020327</td>
+<td align="right">0.027251</td>
+</tr>
+<tr>
+<td>f7</td>
+<td align="right">0.035204</td>
+<td align="right">0.034594</td>
+<td align="right">0.039089</td>
+</tr>
+<tr>
+<td>f8</td>
+<td align="right">0.007328</td>
+<td align="right">0.006839</td>
+<td align="right">0.012358</td>
+</tr>
+<tr>
+<td>f9</td>
+<td align="right">0.025432</td>
+<td align="right">0.025064</td>
+<td align="right">0.029676</td>
+</tr>
+<tr>
+<td>f10</td>
+<td align="right">0.048113</td>
+<td align="right">0.046129</td>
+<td align="right">0.051805</td>
+</tr>
+<tr>
+<td>f11</td>
+<td align="right">0.008712</td>
+<td align="right">0.008788</td>
+<td align="right">0.014772</td>
+</tr>
+<tr>
+<td>f12</td>
+<td align="right">0.011764</td>
+<td align="right">0.011534</td>
+<td align="right">0.017944</td>
+</tr>
+</tbody></table></div>
+<p>Each May recording also has a separate summary for each populated minute. Across 720 such minutes, the current-command Transformer beat the camera-only Transformer in 470, repeating the recent movement in 424 and the older-command Transformer in 718. The minutes come from the same recordings. They help locate changes within a recording but do not add new animals to the study. Neither these counts nor the recording averages give a confidence interval for a wider population.</p>
+<p>A separate reader recalculated the results using the saved predictions and the spreads already calculated from camera angles. The reader checked 9,529 numerical fields, including which windows counted, errors within each recording and minute, and differences between methods. The largest numerical discrepancy was 3.33 × 10⁻¹⁶ radians. The original camera angles were not extracted again during that check. The program log identifies a requested direction. What reached the fish, what its neurons did and whether a screen change caused a particular movement were outside these measurements. Performance on other equipment and in another laboratory remains open.</p>
+<p>Ryosuke Tanaka and Ruben Portugues published <em>Algorithmic dissection of optic flow memory in larval zebrafish</em> and deposited the Figure 4 recordings on Zenodo under CC BY 4.0. <a href="https://doi.org/10.1016/j.cub.2025.08.047">Original study</a> · <a href="https://doi.org/10.5281/zenodo.16085585">Versioned data archive</a></p>
+</article><footer><p>Recordings by Ryosuke Tanaka and Ruben Portugues. <a href="https://doi.org/10.1016/j.cub.2025.08.047">Original study</a> · <a href="https://doi.org/10.5281/zenodo.16085585">Zenodo archive</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Data license CC BY 4.0</a></p></footer></main></body>
+</html>
