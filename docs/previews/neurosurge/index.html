@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Play the NeuroSurge movement preview with the NeuroTranslate forecast built into your browser.">
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="launch.css">
+  <link rel="stylesheet" href="launch.css?v=2">
   <title>NeuroSurge movement preview</title>
 </head>
 <body>
@@ -51,13 +51,31 @@
       </details>
       <details open id="local-model">
         <summary>Forecasts, local play and credits</summary>
-        <p>The point model learned from tracked animal movement. Its accuracy on human camera images remains unmeasured. The browser runs the included weights. The separate fingertip touch study uses the optional local launcher.</p>
+        <p>The point model learned from tracked animal movement. The browser runs the included weights. The separate fingertip touch study uses the optional local launcher.</p>
         <div class="resource-links">
+          <a href="#camera-test">See the first test on recordings of people</a>
           <a href="https://github.com/eliminatenoise/NeuroSurge/releases/tag/lite-browser-forecast-2026-11-24">Offline Lite download and setup</a>
           <a href="START.html#local-model">Local NeuroTranslate workbench and fingertip setup</a>
           <a href="scene/src/joint/model/NOTICE.html">Model, data and licence credits</a>
           <a href="CREDITS-AND-LICENCES.md">Game and anatomy credits</a>
         </div>
+      </details>
+      <details class="measurement" id="camera-test" open>
+        <summary>Forecast accuracy on recorded movement</summary>
+        <p>Keeping the point moving at its last speed and direction gave the closest average forecast of where the point ended up for each person in this test. One person walked, one squatted and one pressed their arms overhead. Two cameras recorded each person. We averaged the two views for each person before giving all three people equal weight.</p>
+        <table class="forecast-scores">
+          <caption>Average error in pixels. Smaller is better.</caption>
+          <thead><tr><th scope="col">Method</th><th scope="col">Point error</th><th scope="col">Motion error</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Hold last position</th><td>8.90</td><td>5.44</td></tr>
+            <tr><th scope="row">Keep speed and direction</th><td>8.17</td><td>4.22</td></tr>
+            <tr><th scope="row">NeuroTranslate 0.0</th><td>8.79</td><td>6.17</td></tr>
+          </tbody>
+        </table>
+        <p>Each method saw the same tracked points and tried to place a point about 0.12 seconds later. A separate set of cameras tracked markers on the body. The researchers used those recordings to estimate the centres of joints and place them in the picture. Point error is the distance from the forecast to that later position. Motion error compares the two changes in position. The forecast starts from the position the game's tracker found. The reference starts from the separate marker measurement at the same moment. This helps account for an error that was already present when making the forecast. We scaled each picture to 640 pixels on its longer edge.</p>
+        <p>At the planned sample rate there were 1,086 time slots. The archive supplied pictures for 810 of them. We could check 2,321 of the 4,849 issued forecasts. For 2,524 of the omitted forecasts, the archive lacked pictures around the target time. The researchers aligned the pictures and marker recordings after collecting them. We used their approximate 60-pictures-per-second time grid. The exact capture time of each picture remains unverified. Only the squat recording had enough paired views to check all five time offsets on the same 23 forecasts. Keeping speed gave the smallest point error there at every offset, from about 0.033 seconds earlier to 0.033 seconds later.</p>
+        <p>In a separate jumping-jack check, holding the last position had the smallest point error. It averaged 23.09 pixels over 225 comparisons. The model averaged 23.82 and the speed rule 28.03. These experiments measure forecasts on the recorded pictures. The live display compares against the point that its own camera tracker finds later.</p>
+        <p>Recordings by Chris-Mari Schreuder, Oloff Bergh, Lizé Steyn and Rensu P. Theart. The test reports aggregate errors from SUMediPose version 1.0. <a href="https://doi.org/10.7910/DVN/GRRROM">Original recordings</a> · <a href="https://doi.org/10.1016/j.dib.2025.111579">Study methods</a> · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Data licence</a></p>
       </details>
     </section>
   </main>
