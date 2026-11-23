@@ -1,5 +1,7 @@
 # Stand and sit force forecast
 
+[Technical edition](METHODS.md) · [Simple edition](SIMPLE.md) · [Data and licence credits](DATASET-CREDITS.md)
+
 1. Extract the ZIP and keep its files together.
 2. Open `Open on Linux.sh` on Linux, `Open on macOS.command` on macOS or `Open on Windows.cmd` on Windows. You can also open `index.html` directly in a desktop browser. The preview runs offline.
 3. Choose an invented force history. Compare the forecasts for the two floor plates.
@@ -66,5 +68,3 @@ python model/predict.py example-rising.json
 ```
 
 The input is a JSON array of ten `[plate 2, plate 3]` pairs in newtons, oldest first. The program loads the two saved 32-bit floating-point checkpoints. It returns a pair of impulse forecasts for each method, the rising-load flag, and the signed change in total load in newtons.
-
-[Methods](METHODS.md) · [Data and licence credits](DATASET-CREDITS.md)
