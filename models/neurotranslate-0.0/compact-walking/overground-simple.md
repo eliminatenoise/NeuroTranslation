@@ -2,6 +2,8 @@
 
 [Technical edition](overground-technical.md) · [Download the offline example](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0/compact-walking/overground-preview.zip)
 
+[Follow-up study across eight walking days](multiday-simple.md)
+
 The Compact model forecast the heels of 55 adults who walked barefoot through a lab. The simplest useful forecast carried the last bit of heel movement forward. It missed by **67.54 mm** on average. Accounting for the person's travel through the room brought the Compact model's error down to **25.33 mm**. This lowered the error for all 55 people.
 
 ## The movement the model sees

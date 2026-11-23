@@ -1,0 +1,205 @@
+{
+  "source": {
+    "recordings": "https://doi.org/10.17632/8kyv4jm759.1",
+    "methods": "https://doi.org/10.1016/j.gaitpost.2016.07.073",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "archive_sha256": "c52c482e35a0a4baf02db56c08af8076ee92b1bfb95e55f4359e9e2d0ff75486"
+  },
+  "model": {
+    "source_commit": "2e6e3e4ac3caf3bcc5adde13ca5a5f48a3a63f46",
+    "seeds": [
+      2731,
+      4119
+    ]
+  },
+  "time": {
+    "optical_hz": 250,
+    "past_readings": 10,
+    "reading_gap_ms": 20,
+    "full_history_ms": 200,
+    "target_after_last_reading_ms": 100,
+    "target_after_nominal_issue_ms": 90,
+    "issue_spacing_ms": 320
+  },
+  "coverage": {
+    "reserved_people": 7,
+    "reserved_walks": 829,
+    "walks_with_forecasts": 814,
+    "issued_forecasts": 2232,
+    "valid_heel_targets": 4464,
+    "matched_heel_targets": 4402
+  },
+  "mean_error_on_matched_heel_targets_mm": {
+    "stay": 173.96886907488198,
+    "linear": 72.09345655225106,
+    "compact": 95.49517136904687,
+    "pelvis": 165.75948897739903,
+    "centered": 27.11381516414767
+  },
+  "paired_differences_and_intervals": {
+    "people": 7,
+    "points": 4402,
+    "error_mm": {
+      "adjusted_compact": 27.113815164147674,
+      "heel_linear": 72.09345655225107,
+      "pelvis_only": 165.75948897739906
+    },
+    "paired_adjusted_minus_baseline_mm": {
+      "heel_linear": -44.979641388103396,
+      "pelvis_only": -138.6456738132514
+    },
+    "people_with_lower_error": {
+      "heel_linear": 7,
+      "pelvis_only": 7
+    },
+    "paired_person_bootstrap_95_mm": {
+      "heel_linear": [
+        -47.13557795953637,
+        -43.001375485309815
+      ],
+      "pelvis_only": [
+        -142.4069467585309,
+        -134.63192364787784
+      ]
+    }
+  },
+  "by_day": {
+    "1": {
+      "people": 5,
+      "points": 422,
+      "error_mm": {
+        "adjusted_compact": 27.312279305116192,
+        "heel_linear": 72.07079534523734,
+        "pelvis_only": 163.99293782792364
+      },
+      "paired_adjusted_minus_baseline_mm": {
+        "heel_linear": -44.75851604012115,
+        "pelvis_only": -136.68065852280745
+      },
+      "people_with_lower_error": {
+        "heel_linear": 5,
+        "pelvis_only": 5
+      }
+    },
+    "2": {
+      "people": 7,
+      "points": 574,
+      "error_mm": {
+        "adjusted_compact": 27.810811207275226,
+        "heel_linear": 70.92009425999655,
+        "pelvis_only": 162.25874185463167
+      },
+      "paired_adjusted_minus_baseline_mm": {
+        "heel_linear": -43.109283052721324,
+        "pelvis_only": -134.4479306473565
+      },
+      "people_with_lower_error": {
+        "heel_linear": 7,
+        "pelvis_only": 7
+      }
+    },
+    "3": {
+      "people": 7,
+      "points": 580,
+      "error_mm": {
+        "adjusted_compact": 27.854243782930133,
+        "heel_linear": 71.08951892642673,
+        "pelvis_only": 164.04004415565305
+      },
+      "paired_adjusted_minus_baseline_mm": {
+        "heel_linear": -43.23527514349659,
+        "pelvis_only": -136.18580037272292
+      },
+      "people_with_lower_error": {
+        "heel_linear": 7,
+        "pelvis_only": 7
+      }
+    },
+    "4": {
+      "people": 7,
+      "points": 566,
+      "error_mm": {
+        "adjusted_compact": 26.851083067086503,
+        "heel_linear": 71.67999206215674,
+        "pelvis_only": 167.4346417353141
+      },
+      "paired_adjusted_minus_baseline_mm": {
+        "heel_linear": -44.82890899507026,
+        "pelvis_only": -140.58355866822762
+      },
+      "people_with_lower_error": {
+        "heel_linear": 7,
+        "pelvis_only": 7
+      }
+    },
+    "5": {
+      "people": 7,
+      "points": 578,
+      "error_mm": {
+        "adjusted_compact": 27.204502180810156,
+        "heel_linear": 72.51414810537078,
+        "pelvis_only": 166.87607797643855
+      },
+      "paired_adjusted_minus_baseline_mm": {
+        "heel_linear": -45.30964592456062,
+        "pelvis_only": -139.67157579562837
+      },
+      "people_with_lower_error": {
+        "heel_linear": 7,
+        "pelvis_only": 7
+      }
+    },
+    "6": {
+      "people": 7,
+      "points": 570,
+      "error_mm": {
+        "adjusted_compact": 27.261228526637186,
+        "heel_linear": 74.71585841171564,
+        "pelvis_only": 165.6365009148626
+      },
+      "paired_adjusted_minus_baseline_mm": {
+        "heel_linear": -47.45462988507846,
+        "pelvis_only": -138.37527238822545
+      },
+      "people_with_lower_error": {
+        "heel_linear": 7,
+        "pelvis_only": 7
+      }
+    },
+    "7": {
+      "people": 7,
+      "points": 536,
+      "error_mm": {
+        "adjusted_compact": 26.565148187654497,
+        "heel_linear": 72.47628740903167,
+        "pelvis_only": 167.23386882713177
+      },
+      "paired_adjusted_minus_baseline_mm": {
+        "heel_linear": -45.91113922137716,
+        "pelvis_only": -140.66872063947727
+      },
+      "people_with_lower_error": {
+        "heel_linear": 7,
+        "pelvis_only": 7
+      }
+    },
+    "8": {
+      "people": 7,
+      "points": 576,
+      "error_mm": {
+        "adjusted_compact": 26.192368837345406,
+        "heel_linear": 71.30042805933127,
+        "pelvis_only": 167.82256469425806
+      },
+      "paired_adjusted_minus_baseline_mm": {
+        "heel_linear": -45.10805922198585,
+        "pelvis_only": -141.63019585691262
+      },
+      "people_with_lower_error": {
+        "heel_linear": 7,
+        "pelvis_only": 7
+      }
+    }
+  },
+  "scope": "Optical heel marker displacement from barefoot overground walks. Equal weight per participant. Days reuse people. Participant overlap with the earlier Mainz work is unverified. No force or live tracking accuracy result."
+}

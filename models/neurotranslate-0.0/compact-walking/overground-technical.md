@@ -2,6 +2,8 @@
 
 [Simple edition](overground-simple.md) · [Download the offline example](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0/compact-walking/overground-preview.zip)
 
+[Follow-up study across eight walking days](multiday-technical.md)
+
 The complete-case mean error was **25.33 mm** with a causal pelvis-velocity correction and **67.54 mm** for the last-change baseline. The paired difference was **42.21 mm lower**, with a 95% participant bootstrap interval of **40.56 to 43.76 mm lower**. All 55 participants had lower error.
 
 ## Recordings and forecast times
