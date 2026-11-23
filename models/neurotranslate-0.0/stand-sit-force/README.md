@@ -39,6 +39,24 @@ The damped trend had lower mean error than the correction in both plate orders, 
 
 The Leeds replay used exported force readings that had been low-pass filtered to reduce rapid changes. The filter’s time direction and the availability of the original readings on live hardware remain unverified. [Leeds study and methods](https://www.nature.com/articles/s41597-026-06925-w) · [University of Leeds dataset](https://doi.org/10.5518/1701)
 
+## Notre Dame chair-rise and descent replay
+
+Nine people each supplied three recordings of standing up from a chair and three of sitting down. A separate person supplied the engineering check. Each foot was on its own force plate, with 1,000 calibrated readings per second. The replay used the force exported before the study’s later software filter.
+
+All methods forecast the next 100 milliseconds from the same 200 milliseconds of earlier force. The compact model in this download adds a learned correction when earlier load rises. The separate Research Edition test compared a correction that applies when earlier load rises or falls with one that applies every time. For both models, the averages below give equal weight to the forecasts from the two input orders, left foot first and right foot first.
+
+| Forecast | All 146 windows (N·s) | 23 rising-load windows (N·s) | 38 falling-load windows (N·s) |
+| --- | ---: | ---: | ---: |
+| Recent force | 2.130 | 1.521 | 2.770 |
+| Damped trend | 1.731 | 1.282 | 2.260 |
+| Compact correction, average of both orders | 1.805 | 1.610 | 2.260 |
+| Research Edition, correction during changing loads | 1.679 | 1.501 | 1.938 |
+| Research Edition, correction at every forecast | 1.709 | 1.262 | 2.193 |
+
+The Research Edition correction during changing loads had the lowest overall mean error. Its advantage over the damped trend was 0.052 N·s across the nine people. Error fell for five people overall and eight during falling load. The same method had higher mean error during rising load. The compact correction also had higher overall mean error than the damped trend in either plate order.
+
+These results describe 54 short recordings from one archive. Live sensor timing remains unverified. [Notre Dame dataset](https://doi.org/10.7274/28689221.v1) · [Recording methods](https://pmc.ncbi.nlm.nih.gov/articles/PMC12717423/)
+
 ## Run the predictor in Python
 
 Use a Python environment with NumPy, PyTorch and safetensors. From the extracted folder, run the included example.

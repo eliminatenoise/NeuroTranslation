@@ -10,4 +10,8 @@ The Leeds replay uses the University of Leeds dataset by David Lunn, Enrico de P
 
 David E. Lunn, Enrico De Pieri, Graham J. Chapman, Morten E. Lund, Stephen J. Ferguson and Anthony C. Redmond describe the acquisition and processing in their 2026 methods article. The replay uses the released vertical force to calculate averages and reports aggregate forecast errors. [Scientific Data article](https://www.nature.com/articles/s41597-026-06925-w)
 
+## Notre Dame chair recordings
+
+Mohsen Alizadeh Noghani, Sebastian Green and Edgar Bolivar Nieto released the recordings through the University of Notre Dame’s data repository under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/). The replay uses the calibrated force exports, averages each foot’s earlier readings, and reports aggregate forecast errors. [Dataset version 1](https://doi.org/10.7274/28689221.v1) · [Recording and processing methods](https://pmc.ncbi.nlm.nih.gov/articles/PMC12717423/)
+
 The project’s contributions to the code, fitted weights and documentation are dedicated to the public domain under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).

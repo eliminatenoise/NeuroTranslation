@@ -49,4 +49,35 @@ Compared with the damped trend, the correction gave 60 people a lower overall er
 
 The archive authors low-pass filtered the exported force signals. The replay follows the stored time order. The filter’s time direction and the availability of original force samples at forecast time on live equipment remain unverified. These scores describe the Leeds archive. The Utah results above cover the separate Utah test. [Leeds acquisition and export methods](https://www.nature.com/articles/s41597-026-06925-w) · [University of Leeds dataset](https://doi.org/10.5518/1701)
 
+## Notre Dame replay method and results
+
+Both feet rested on separate Kistler force plates during the chair recordings. The model histories and outcomes use signed upward force in newtons from the calibrated 1 kHz exports. The paper describes later force filtering in the analysis software. The replay uses the force before that step and reads the stored sample clock. It leaves out the cameras and the chair plates. Part of the chair rested outside the instrumented area.
+
+We used three chair rises and three descents from each of nine people. A separate participant supplied the engineering check. The study began with every available record for those nine people. The replay issued a forecast every 300 milliseconds while enough samples remained, using the 200 prior samples and the 100 immediately following samples for separate input and outcome windows. The same 146 windows were scored for every method, including 70 during chair rises and 76 during descents. Rising and falling load refer to force changes in the earlier 200 milliseconds. Both phases can occur in either chair movement.
+
+The two orderings of the compact correction and both Research Edition corrections were fixed before scoring. The Research Edition used the fixed transformer from the full FP32 comparison and two linear corrections fitted on four Utah development participants. One used only earlier windows whose total load changed by more than 50 N in either direction. It used the damped trend on steady-load windows. The other learned from all earlier development windows and applied its correction to every forecast. Forecasts were returned to recorded foot order before averaging the two estimates. Both models’ forecasts were stored and reproduced from earlier samples before any of the outcomes were decoded.
+
+The error is the absolute difference between the predicted and measured sum of the two feet’s upward force impulses. Each person’s windows were averaged first, and each person counts equally in the result. The methods below use the same scoreable observations.
+
+| Forecast | All 146 windows (N·s) | 23 rising-load windows (N·s) | 38 falling-load windows (N·s) | 85 low-change windows (N·s) |
+| --- | ---: | ---: | ---: | ---: |
+| Recent force | 2.130 | 1.521 | 2.770 | 2.115 |
+| Damped trend | 1.731 | 1.282 | 2.260 | 1.761 |
+| Compact correction, average of both orders | 1.805 | 1.610 | 2.260 | 1.761 |
+| Research Edition, correction during changing loads | 1.679 | 1.501 | 1.938 | 1.761 |
+| Research Edition, correction at every forecast | 1.709 | 1.262 | 2.193 | 1.745 |
+
+Single-order forecasts
+
+| Forecast | All 146 windows (N·s) | 23 rising-load windows (N·s) | 38 falling-load windows (N·s) | 85 low-change windows (N·s) |
+| --- | ---: | ---: | ---: | ---: |
+| Compact correction, left first | 1.796 | 1.551 | 2.260 | 1.761 |
+| Compact correction, right first | 1.816 | 1.681 | 2.260 | 1.761 |
+| Research Edition during changing loads, left first | 1.703 | 1.337 | 2.169 | 1.761 |
+| Research Edition during changing loads, right first | 1.694 | 1.711 | 1.864 | 1.761 |
+| Research Edition at every forecast, left first | 1.700 | 1.232 | 2.219 | 1.735 |
+| Research Edition at every forecast, right first | 1.724 | 1.314 | 2.171 | 1.760 |
+
+For the Research Edition correction during changing loads, the average prediction from both orders reduced overall error by 0.052 N·s against the damped trend. A 95% interval from 20,000 paired resamples of the nine participants ran from 0.006 to 0.106 N·s of improvement. The same correction had mean errors of 1.496 N·s during chair rises and 1.858 N·s during descents, compared with 1.584 and 1.878 N·s for the trend. The interval reflects variation across the people in this archive. Device-level time and unloaded calibration remain unverified for these short clips. [Recording methods](https://pmc.ncbi.nlm.nih.gov/articles/PMC12717423/) · [Dataset version 1](https://doi.org/10.7274/28689221.v1)
+
 [Recording source and licence](DATASET-CREDITS.md)
