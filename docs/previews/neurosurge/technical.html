@@ -35,6 +35,7 @@
         <ol>
           <li>Press <kbd>C</kbd>. Choose <strong>Start camera</strong> to request video, or choose a local video or timestamped stills. Images stay on the device.</li>
           <li>Set <strong>Body follows</strong> for the arm or knee pose channels and <strong>Point to forecast</strong> for the marker. The ring shows its forecast position 120 ms after the last of five usable frames.</li>
+          <li>Use <strong>Forecast method</strong> to select the browser model, the blend based on past tracker feedback, or a named movement. The movement options use rules fixed on an earlier sample.</li>
           <li>Choose <strong>Save take</strong> and <strong>Open Command box</strong> to stop capture. Enter <strong>replay my take</strong>. <kbd>F</kbd> opens the Command box for supported moves such as “bend my right elbow”. In a browser with on-device dictation, choose <strong>Use voice</strong> and confirm the transcript.</li>
         </ol>
         <div class="resource-links">
@@ -55,22 +56,25 @@
       </details>
       <details class="measurement" id="camera-test" open>
         <summary>Forecast accuracy on recorded movement</summary>
-        <p>Holding the latest position had the lowest mean endpoint and displacement errors. Eight previously unused participants each did a walk, squat, shoulder press and jumping jacks. The C1 and C3 views of each trial show the same event. Average each view separately, then both views per action, the four actions per participant and the eight participants.</p>
+        <p>Supplying the action gave 13.42 px mean endpoint error. The camera-only blend gave 13.55 px and NeuroTranslate gave 14.60 px. The confirmation sample includes 11 reserved participants and 44 activity recordings with two camera views each, for 88 views. Means give equal weight to each view of an action, each action per person, and each person.</p>
         <table class="forecast-scores">
           <caption>Mean endpoint and displacement errors in pixels after longest-edge scaling to 640.</caption>
           <thead><tr><th scope="col">Method</th><th scope="col">Endpoint</th><th scope="col">Motion</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Hold last position</th><td>15.34</td><td>9.70</td></tr>
-            <tr><th scope="row">Constant velocity from two points</th><td>15.76</td><td>10.14</td></tr>
-            <tr><th scope="row">NeuroTranslate 0.0</th><td>15.71</td><td>10.98</td></tr>
-            <tr><th scope="row">Weighted straight line</th><td>16.01</td><td>10.14</td></tr>
-            <tr><th scope="row">Weighted curve with penalty</th><td>15.90</td><td>10.03</td></tr>
+            <tr><th scope="row">Hold last position</th><td>14.08</td><td>9.40</td></tr>
+            <tr><th scope="row">Constant velocity from two points</th><td>14.33</td><td>9.48</td></tr>
+            <tr><th scope="row">NeuroTranslate 0.0</th><td>14.60</td><td>10.69</td></tr>
+            <tr><th scope="row">Weighted straight line</th><td>14.96</td><td>10.00</td></tr>
+            <tr><th scope="row">Weighted curve with penalty</th><td>14.79</td><td>9.82</td></tr>
+            <tr><th scope="row">Known movement</th><td>13.42</td><td>8.44</td></tr>
+            <tr><th scope="row">Select from earlier tracker error</th><td>13.70</td><td>8.68</td></tr>
+            <tr><th scope="row">Blend from earlier tracker error</th><td>13.55</td><td>8.49</td></tr>
           </tbody>
         </table>
-        <p>The exact released still-image detector feeds five-row windows. The analytical forecasts use the selected joint's history. With lead <var>h</var> = 120 ms and issue time <var>t</var>, the two new fits fix the intercept at the last position and weight earlier times <var>tᵢ</var> by 2<sup>(tᵢ − t)/h</sup>. The curve adds a squared time term and penalizes its coefficient by that column's weighted sum of squares. The attention model also uses summaries of the other pose points. We froze all five predictions before reading the optical coordinates.</p>
-        <p>Endpoint error is Euclidean distance to the projected Vicon position interpolated at the target. Displacement error compares the change from the tracker’s issue position with the change from the Vicon issue position. Lowest mean endpoint errors by action were constant velocity for walking (12.61 px), the curve for squat (7.98 px) and shoulder press (7.68 px), and holding position for jumping jacks (30.18 px).</p>
-        <p>Holding reduced mean endpoint error by 0.411 px against constant velocity and had lower error for five participants. Its paired 95% percentile interval for the difference was −0.794 to +0.0008 px based on 10,000 resamples of participants. The interval includes zero. The comparison uses the same qualifying forecasts for all methods.</p>
-        <p>The run decoded 8,068 images for 10,718 time slots and scored 22,266 of 45,117 forecasts across the 64 views. Missing adjacent reference rows explain 22,652 exclusions and missing optical points the remaining 199. The publisher aligned RGB and Vicon after capture. The 60 Hz grid includes drop indices and physical exposure times remain unverified. On 1,457 common forecasts in 50 views, holding led in pooled endpoint error across shifts of −2, −1, 0, 1 and 2 slots (about ±33 ms). All eight participants contributed and one had all eight view and action combinations in this subset. The live comparison uses its own tracker’s later positions.</p>
+        <p>All methods forecast at the same times with a 120 ms lead. Each uses the last point, the last two points or up to five recent readings. Endpoint error is Euclidean distance to the interpolated Vicon joint position projected into the rescaled image. Displacement error compares forecast movement from the detector's issue point with measured movement from the optical issue point.</p>
+        <p>The action map was fixed using eight earlier participants. It uses two-point velocity for walking, a penalized curve for squat and shoulder press, and persistence for jumping jacks. Each camera-only estimator starts with persistence until feedback is available. It compares prior predictions against their resolved tracker points, divides the errors by body scale, and averages with a one-second half-life. A resolved point lies within 40 ms of the earlier target. The selected estimator takes the least historical loss. The blended estimator applies exponential weights with a scale of <code>max(0.01, hold loss / 4)</code>. The preview exposes the blend.</p>
+        <p>Both named and blended forecasts beat holding position on mean endpoint error for all 11 people. Mean paired differences were −0.653 px and −0.527 px. The 95% percentile intervals were −0.840 to −0.484 px and −0.682 to −0.367 px, based on 10,000 participant resamples.</p>
+        <p>Of 14,802 scheduled slots, 11,305 supplied an image. The matched sample includes 31,523 of 64,815 predictions, with 29,394 after camera feedback and 2,129 at startup or reset. Missing adjacent reference rows explain 33,200 exclusions and missing optical points 92. The 60 Hz grid uses alignment after capture. Physical exposure times remain unverified. On the pooled 1,709 common forecasts from 66 views, named movement and the blend beat NeuroTranslate at each of the five shifts from −2 to 2 camera slots (about ±33 ms). The live comparison uses its own tracker’s later points.</p>
         <p>SUMediPose v1.0 by Chris-Mari Schreuder, Oloff Bergh, Lizé Steyn and Rensu P. Theart. These are aggregate replay results. <a href="https://doi.org/10.7910/DVN/GRRROM">Original recordings</a> · <a href="https://doi.org/10.1016/j.dib.2025.111579">Study methods</a> · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Data licence</a></p>
       </details>
     </section>

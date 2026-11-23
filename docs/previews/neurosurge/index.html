@@ -42,6 +42,7 @@
         <ol>
           <li>Press <kbd>C</kbd> for the Movement mirror. Choose <strong>Start camera</strong> to let the browser ask for video access. You can choose a local video or timed pictures instead. The images stay on your device.</li>
           <li>Use <strong>Body follows</strong> to choose the arms or knees the virtual body will follow. Choose a separate marker under <strong>Point to forecast</strong>. After five usable images, the amber ring shows where that point may appear 0.12 seconds later.</li>
+          <li>Under <strong>Forecast method</strong>, choose <strong>Adapt to recent tracking</strong> to use earlier camera feedback. If you know the movement, you can choose walking, squat, shoulder press or jumping jacks.</li>
           <li>Choose <strong>Save take</strong> and <strong>Open Command box</strong>. Enter <strong>replay my take</strong> to move the virtual body from the saved poses. The camera stops when the Command box opens. You can also open it with <kbd>F</kbd> to enter a supported move such as “bend my right elbow”. If your browser offers dictation on the device, choose <strong>Use voice</strong> and check the words before submitting.</li>
         </ol>
         <div class="resource-links">
@@ -62,24 +63,29 @@
       </details>
       <details class="measurement" id="camera-test" open>
         <summary>Forecast accuracy on recorded movement</summary>
-        <p>Holding the last detected position gave the smallest average error in this test. Eight people each walked, squatted, pressed their arms overhead and did jumping jacks. Two cameras filmed each of those 32 recordings. We averaged the two views for each movement and gave each movement and person equal weight.</p>
+        <p>Knowing the movement brought the average point error down to 13.42 pixels. Using earlier camera feedback reached 13.55 pixels. NeuroTranslate 0.0 averaged 14.60 pixels in the same test.</p>
         <table class="forecast-scores">
           <caption>Average error in pixels. Smaller is better.</caption>
           <thead><tr><th scope="col">Method</th><th scope="col">Point error</th><th scope="col">Motion error</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Hold last position</th><td>15.34</td><td>9.70</td></tr>
-            <tr><th scope="row">Speed from the last two points</th><td>15.76</td><td>10.14</td></tr>
-            <tr><th scope="row">NeuroTranslate 0.0</th><td>15.71</td><td>10.98</td></tr>
-            <tr><th scope="row">Recent positions, straight line</th><td>16.01</td><td>10.14</td></tr>
-            <tr><th scope="row">Recent positions, gentle curve</th><td>15.90</td><td>10.03</td></tr>
+            <tr><th scope="row">Hold last position</th><td>14.08</td><td>9.40</td></tr>
+            <tr><th scope="row">Speed from the last two points</th><td>14.33</td><td>9.48</td></tr>
+            <tr><th scope="row">NeuroTranslate 0.0</th><td>14.60</td><td>10.69</td></tr>
+            <tr><th scope="row">Recent positions, straight line</th><td>14.96</td><td>10.00</td></tr>
+            <tr><th scope="row">Recent positions, gentle curve</th><td>14.79</td><td>9.82</td></tr>
+            <tr><th scope="row">Use the movement name</th><td>13.42</td><td>8.44</td></tr>
+            <tr><th scope="row">Choose using tracking feedback</th><td>13.70</td><td>8.68</td></tr>
+            <tr><th scope="row">Blend using tracking feedback</th><td>13.55</td><td>8.49</td></tr>
           </tbody>
         </table>
-        <p>Each forecast tried to place a joint about 0.12 seconds after the last image it used. A separate camera system followed markers on the body. The researchers used those measurements to estimate each joint centre and place it in the image. Point error measures the distance from the forecast to that later position. Motion error measures how much the forecast missed the change in position. For this measure, the forecast starts at the game's tracked point and the reference starts at the separate marker estimate at the same time. Both errors use images scaled to 640 pixels on the longer edge.</p>
-        <p>The four simple rules use the selected joint's earlier positions. The two rules that look back up to five images fit a straight or curved path starting at the latest point. A position from 0.12 seconds earlier has half the weight of the latest one. The curved rule limits how sharply the fit can bend. The trained model also uses information about other points it sees in the same pictures. We saved all five forecasts before scoring them.</p>
-        <p>The smallest average point error for walking came from continuing the speed and direction of the last two points (12.61 pixels). The curved rule led on squats (7.98 pixels) and shoulder presses (7.68 pixels). Holding position led on jumping jacks (30.18 pixels).</p>
-        <p>Holding position averaged about 0.41 pixels less point error than the last-two rule. It had less error for five of the eight people. Resampling those eight people 10,000 times gave a middle 95% range for the difference from −0.794 to +0.0008 pixels. Zero would mean a tie. The upper end favours the last-two rule by a small fraction of a pixel.</p>
-        <p>We used 8,068 images out of 10,718 scheduled time slots. We could score 22,266 of 45,117 forecasts. For 22,652 of the omitted forecasts, the archive lacked two nearby measurements, one before and one after the target time. The other 199 lacked a usable measured point. The researchers aligned the pictures and marker recordings after capture. We used the approximate 60-pictures-per-second grid. Exact exposure times remain unverified.</p>
-        <p>We checked 1,457 of the same forecasts in 50 views at five target times, from roughly 0.033 seconds earlier to 0.033 seconds later. All eight people contributed, and one person had usable forecasts in both views of all four movements. Holding position gave the smallest average point error at every shift when we averaged those 1,457 forecasts. The live display compares the forecast with the point the game's tracker finds later.</p>
+        <p>Eleven people took part in this confirmation test. Each walked, squatted, pressed their arms overhead and did jumping jacks. Two cameras filmed each of those 44 recordings. We averaged the views for each movement, then gave each movement and person equal weight.</p>
+        <p>Each forecast used up to five pictures to place a point about 0.12 seconds ahead. A separate set of cameras followed markers on the body. The researchers used those measurements to position the joint centres in the picture. Point error is the distance to that later position. Motion error compares how far and in what direction the point moved. For that comparison, the forecast and the marker measurement each use their own starting position. Both errors use pictures scaled to 640 pixels along their longer edge.</p>
+        <p>The named movement tells the forecast which rule to use. It continues the last speed for walking, fits a curve for squats and shoulder presses, and holds the last point for jumping jacks. We chose those rules using recordings from the earlier eight people.</p>
+        <p>Both feedback methods start by holding position. After an earlier forecast reaches its target time, we compare it with the closest tracker point within 0.04 seconds of that time. We divide the miss by the body's size in the picture, measured from the spread of the visible points. Each second halves the weight of older misses.</p>
+        <p>One method picks the rule with the lowest running error. The other combines the predictions, giving more weight to rules with lower errors. The blend's weighting scale is a quarter of the hold rule's running error, with a minimum of 0.01 after scaling for body size. Choose <strong>Adapt to recent tracking</strong> to use that blend.</p>
+        <p>The named and blended rules lowered the average point error for each of the 11 people, compared with holding position. Across people, the named rule missed by about 0.65 pixels less and the blend by 0.53 pixels less. We subtracted the hold rule's error from each method's error, so negative values mean smaller misses. When we resampled the people 10,000 times, the middle 95% of those differences ran from −0.840 to −0.484 pixels for the named rule and −0.682 to −0.367 pixels for the blend.</p>
+        <p>We used 11,305 images from 14,802 scheduled time slots and scored 31,523 of 64,815 forecasts. Of the 31,523, earlier tracking feedback was available for 29,394. The other 2,129 began or reset with the hold rule. Missing measurements around the target time accounted for 33,200 omissions. The other 92 lacked usable measured points.</p>
+        <p>The researchers aligned the cameras and marker measurements after recording. We used the archive's approximate 60-pictures-per-second grid. The exposure time of each picture remains unverified. A smaller timing check averaged the same 1,709 forecasts from 66 views together. The named rule and the blend had lower average point error than NeuroTranslate at five target times from about 0.033 seconds earlier to 0.033 seconds later. The in-game score compares forecasts with its own tracker’s later points.</p>
         <p>Recordings by Chris-Mari Schreuder, Oloff Bergh, Lizé Steyn and Rensu P. Theart. The test reports aggregate errors from SUMediPose version 1.0. <a href="https://doi.org/10.7910/DVN/GRRROM">Original recordings</a> · <a href="https://doi.org/10.1016/j.dib.2025.111579">Study methods</a> · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Data licence</a></p>
       </details>
     </section>
