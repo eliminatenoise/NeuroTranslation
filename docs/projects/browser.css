@@ -21,6 +21,7 @@ a:hover { text-decoration-thickness: .13em; }
 button, input, select { font: inherit; }
 .frame { width: min(76rem, calc(100% - 2.5rem)); margin: 0 auto; }
 .topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--edge); }
+.topbar nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .25rem .9rem; }
 .brand { display: inline-flex; align-items: center; gap: .65rem; text-decoration: none; font-weight: 750; }
 .brand span { width: .85rem; height: .85rem; background: #e9bd84; border-radius: 60% 20% 60% 20%; transform: rotate(-15deg); }
 .topbar nav a, .foot a { color: var(--secondary); }
@@ -36,7 +37,9 @@ h1 { font-size: clamp(2.55rem, 5.6vw, 4.65rem); font-weight: 700; letter-spacing
 .quick-preview { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .35rem .5rem; margin-bottom: .45rem; }
 .quick-preview h2 { color: var(--accent); font-size: 1.07rem; font-weight: 700; }
 .quick-extra { display: inline-flex; align-items: center; min-height: 2rem; color: var(--secondary); font-size: .875rem; }
-.quick-preview img { display: block; grid-column: 1 / -1; width: 100%; height: clamp(5rem, 8vw, 7.8rem); object-fit: cover; border-radius: .35rem; background: #101217; }
+.quick-image { display: block; grid-column: 1 / -1; border-radius: .35rem; }
+.quick-image img { display: block; width: 100%; height: clamp(5rem, 8vw, 7.8rem); object-fit: cover; border-radius: inherit; background: #101217; }
+.quick-image:hover img { filter: brightness(1.1); }
 .quick-group[data-for-project="neurosurge"] img { object-position: center 13%; }
 .quick-group[data-for-project="neurotranslation"] img { object-fit: contain; background: #171a20; }
 .quick-group[data-for-project="interoceptomics"] img { object-fit: contain; }
@@ -55,8 +58,8 @@ h1 { font-size: clamp(2.55rem, 5.6vw, 4.65rem); font-weight: 700; letter-spacing
 .no-results { margin: 0 0 2.3rem; }
 .no-results button { min-height: 2.75rem; border: 1px solid #797e8c; border-radius: .45rem; color: inherit; background: var(--surface); padding: .3rem .65rem; cursor: pointer; }
 .project-filter, .project-jumps, .type-filter { display: flex; flex-wrap: wrap; align-items: center; gap: .32rem; }
-.project-filter, .project-jumps { margin-top: .85rem; }
-.project-jumps { gap: .5rem 1rem; }
+.project-filter { flex: 0 0 100%; }
+.project-jumps { gap: .5rem 1rem; margin-top: .85rem; }
 .project-filter button, select { min-height: 2.65rem; border: 1px solid transparent; border-radius: .45rem; padding: .4rem .7rem; color: var(--secondary); background: transparent; cursor: pointer; }
 .project-filter button:hover, select:hover { border-color: #6e7686; }
 .project-filter button[aria-pressed="true"] { color: #161719; background: #f0e9db; }
@@ -107,7 +110,7 @@ h1 { font-size: clamp(2.55rem, 5.6vw, 4.65rem); font-weight: 700; letter-spacing
   .quick-group { padding: .5rem; }
   .quick-preview { margin-bottom: .3rem; }
   .quick-extra { min-height: 1.7rem; }
-  .quick-preview img { display: none; }
+  .quick-preview .quick-image { display: none; }
   .resources, .index > div { grid-template-columns: minmax(0, 1fr); }
   .project-heading { align-items: start; }
   .project-filter { gap: .25rem; }
