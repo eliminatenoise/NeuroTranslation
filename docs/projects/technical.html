@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="browser.css?v=2">
-  <script type="module" src="filters.js?v=3"></script>
+  <link rel="stylesheet" href="browser.css?v=3">
+  <script type="module" src="filters.js?v=4"></script>
   <title>Brain2Body technical index</title>
 </head>
 <body>
   <a class="skip" href="#projects">Skip to projects</a>
   <header class="topbar frame">
     <a class="brand" href="./" aria-label="Brain2Body project browser"><span aria-hidden="true"></span>Brain2Body</a>
-    <nav aria-label="Editions"><a href="./" data-edition-link>Simple project browser</a></nav>
+    <nav aria-label="Editions"><a href="./" data-edition-link>Simple browser</a></nav>
   </header>
   <main class="frame technical" id="projects">
     <div class="intro">
@@ -21,16 +21,24 @@
       <p>Current previews, setup and evidence by project.</p>
       <nav class="quick-access" aria-label="Main links" data-shortcuts>
         <div class="quick-group" data-for-project="neurosurge" role="group" aria-labelledby="quick-game">
-          <p id="quick-game">NeuroSurge</p>
+          <div class="quick-preview">
+            <h2 id="quick-game">NeuroSurge</h2>
+            <a class="quick-extra" data-kind="get" href="https://eliminatenoise.github.io/NeuroSurge/START.html">Desktop launchers</a>
+            <img src="https://eliminatenoise.github.io/NeuroSurge/media/game-view.webp" width="1200" height="750" alt="The motor strip above NeuroSurge’s player and mirror bodies">
+          </div>
           <div class="quick-links">
             <a class="button primary" data-kind="try" href="https://eliminatenoise.github.io/NeuroSurge/scene/example/preview.html">Full game</a>
             <a class="button" data-kind="try" href="https://eliminatenoise.github.io/NeuroSurge/scene/example/preview.html?edition=lite">Lite game</a>
-            <a class="button" data-kind="get" href="https://github.com/eliminatenoise/NeuroSurge/releases/download/lite-live-knees-2026-11-24/NeuroSurge-Lite.zip">Offline Lite ZIP</a>
+            <a class="button" data-kind="get" href="https://github.com/eliminatenoise/NeuroSurge/releases/download/lite-forecast-timing-2026-11-24/NeuroSurge-Lite.zip">Offline Lite ZIP</a>
             <a class="button" data-kind="read" href="https://github.com/eliminatenoise/NeuroSurge/blob/main/PLAYER-GUIDE.md">Simple player guide</a>
           </div>
         </div>
         <div class="quick-group" data-for-project="neurotranslation" role="group" aria-labelledby="quick-model">
-          <p id="quick-model">NeuroTranslation</p>
+          <div class="quick-preview">
+            <h2 id="quick-model">NeuroTranslation</h2>
+            <a class="quick-extra" data-kind="try" href="../walking-blends/">Walking comparison</a>
+            <img src="media/forecast.webp" width="643" height="163" alt="A model forecast plotted after an invented sequence of tracked body positions">
+          </div>
           <div class="quick-links">
             <a class="button primary" data-kind="try" href="../shared-motion/">0.0 browser demo</a>
             <a class="button" data-kind="get" href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0.zip">NeuroTranslate 0.0 ZIP</a>
@@ -39,7 +47,11 @@
           </div>
         </div>
         <div class="quick-group" data-for-project="interoceptomics" role="group" aria-labelledby="quick-atlas">
-          <p id="quick-atlas">Interoceptomics</p>
+          <div class="quick-preview">
+            <h2 id="quick-atlas">Interoceptomics</h2>
+            <a class="quick-extra" data-kind="read" href="https://eliminatenoise.github.io/Interoceptomics/atlas/backslash/atlas.pdf">Atlas PDF</a>
+            <img src="media/atlas.webp" width="660" height="440" alt="A side view of the anatomical regions on the left half of the reference brain">
+          </div>
           <div class="quick-links">
             <a class="button primary" data-kind="try" href="https://eliminatenoise.github.io/Interoceptomics/atlas/backslash/">3D atlas</a>
             <a class="button" data-kind="try" href="https://eliminatenoise.github.io/Interoceptomics/stages/">Experiment stages</a>
@@ -49,7 +61,12 @@
         </div>
       </nav>
     </div>
-    <div class="filters" hidden>
+    <h2 class="catalog-heading" id="catalog-heading">Resource index</h2>
+    <div class="filters" role="region" aria-labelledby="catalog-heading" hidden>
+      <div class="search">
+        <label for="resource-search">Search resources</label>
+        <input id="resource-search" type="search" maxlength="120" autocomplete="off" placeholder="Atlas, camera, walking">
+      </div>
       <div class="project-filter" role="group" aria-label="Show project">
         <button type="button" value="all" aria-pressed="true">All projects</button>
         <button type="button" value="neurosurge" aria-pressed="false">NeuroSurge</button>
@@ -66,7 +83,8 @@
         </select>
       </div>
     </div>
-    <p id="filter-status" class="visually-hidden" role="status"></p>
+    <p id="filter-status" class="filter-status" role="status" hidden></p>
+    <p class="no-results" hidden>No resources match. <button type="button" data-show-all>Show all resources</button></p>
     <nav class="index-jumps" aria-label="Projects" data-fallback-jumps>
       <a href="#neurosurge">NeuroSurge</a><a href="#neurotranslation">NeuroTranslation</a><a href="#interoceptomics">Interoceptomics</a>
     </nav>
@@ -74,7 +92,7 @@
       <header class="project-heading"><h2 id="game-title">NeuroSurge</h2><a href="https://github.com/eliminatenoise/NeuroSurge" aria-label="NeuroSurge source on GitHub">GitHub repository</a></header>
       <dl class="index">
         <div data-kind="try"><dt><a href="https://eliminatenoise.github.io/NeuroSurge/scene/example/preview.html">Full</a> · <a href="https://eliminatenoise.github.io/NeuroSurge/scene/example/preview.html?edition=lite">Lite</a></dt><dd>One simulated motor-strip and mirror-body game. Lite uses smaller anatomy assets. Desktop keyboard and pointer. <a href="https://github.com/eliminatenoise/NeuroSurge/blob/main/CREDITS-AND-LICENCES.md#lite-mesh-decoder-and-game-image">Image and anatomy credits</a></dd></div>
-        <div data-kind="get"><dt><a href="https://github.com/eliminatenoise/NeuroSurge/releases/download/lite-live-knees-2026-11-24/NeuroSurge-Lite.zip">Offline Lite ZIP</a></dt><dd>Extract and run the system launcher in <code>lite</code> with Node.js 18 or later. C accepts local video or timed pictures. Save up to eight seconds as a take. Press F and enter “replay my take”.</dd></div>
+        <div data-kind="get"><dt><a href="https://github.com/eliminatenoise/NeuroSurge/releases/download/lite-forecast-timing-2026-11-24/NeuroSurge-Lite.zip">Offline Lite ZIP</a></dt><dd>Extract and run the system launcher in <code>lite</code> with Node.js 18 or later. C accepts local video or timed pictures. Save up to eight seconds as a take. Press F and enter “replay my take”.</dd></div>
         <div data-kind="get"><dt><a href="https://eliminatenoise.github.io/NeuroSurge/START.html">Launchers</a></dt><dd>Hosted game shortcuts for Windows, macOS and Linux. Includes local source setup.</dd></div>
         <div data-kind="read"><dt>Controls</dt><dd><a href="https://github.com/eliminatenoise/NeuroSurge/blob/main/PLAYER-GUIDE.md">Simple</a> · <a href="https://github.com/eliminatenoise/NeuroSurge/blob/main/PLAYER-GUIDE-TECHNICAL.md">Technical</a></dd></div>
       </dl>
@@ -87,6 +105,7 @@
         <div data-kind="try"><dt><a href="../START.html">Experiments</a></dt><dd>Browser forecast comparisons by task and recorded input.</dd></div>
         <div data-kind="get"><dt><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0.zip">NeuroTranslate 0.0 ZIP</a></dt><dd>Model and local demo. Extract the archive and use the system launcher with Python 3.10 or newer and NumPy. <a href="../joint-alpha/">Setup and examples</a></dd></div>
         <div data-kind="get"><dt><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models#current-downloads">Checkpoints</a></dt><dd>Saved weights and setup for local runs.</dd></div>
+        <div data-kind="get"><dt><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/walking-blends/Walking-Forecast-Blends.zip">Walking forecast blends ZIP</a></dt><dd>Offline calculator, two fixed combinations of physical and learned forecasts, and paired guides.</dd></div>
         <div data-kind="get"><dt><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.1/research-edition">NeuroTranslate 0.1 Research Edition setup</a></dt><dd>Muscle and vertical-force inputs. Forecasting requires Linux x86-64 and a separate base-weight download. <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.1/research-edition.zip">Preview ZIP</a></dd></div>
         <div data-kind="read"><dt>Evaluation</dt><dd><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers">Papers</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks">Methods and scores</a></dd></div>
       </dl>
@@ -103,6 +122,9 @@
       </dl>
     </section>
   </main>
-  <footer class="foot frame"><a href="./" data-edition-link>Simple project browser</a></footer>
+  <footer class="foot frame">
+    <a href="./" data-edition-link>Simple project browser</a>
+    <a href="media/NOTICE.txt">Image credits</a>
+  </footer>
 </body>
 </html>

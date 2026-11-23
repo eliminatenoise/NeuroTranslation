@@ -6,8 +6,8 @@
   <meta name="description" content="Play NeuroSurge, try NeuroTranslate movement forecasts, and explore the Interoceptomics atlas and experiment guide.">
   <meta name="color-scheme" content="dark">
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="browser.css?v=2">
-  <script type="module" src="filters.js?v=3"></script>
+  <link rel="stylesheet" href="browser.css?v=3">
+  <script type="module" src="filters.js?v=4"></script>
   <title>Brain2Body project browser</title>
 </head>
 <body>
@@ -22,16 +22,24 @@
       <p>Play a game about movement, test a forecast, or explore a 3D brain atlas.</p>
       <nav class="quick-access" aria-label="Main links" data-shortcuts>
         <div class="quick-group" data-for-project="neurosurge" role="group" aria-labelledby="quick-game">
-          <p id="quick-game">NeuroSurge</p>
+          <div class="quick-preview">
+            <h2 id="quick-game">NeuroSurge</h2>
+            <a class="quick-extra" data-kind="get" href="https://eliminatenoise.github.io/NeuroSurge/START.html">Desktop launchers</a>
+            <img src="https://eliminatenoise.github.io/NeuroSurge/media/game-view.webp" width="1200" height="750" alt="The motor strip above NeuroSurge’s player and mirror bodies">
+          </div>
           <div class="quick-links">
             <a class="button primary" data-kind="try" href="https://eliminatenoise.github.io/NeuroSurge/scene/example/preview.html">Play Full</a>
             <a class="button" data-kind="try" href="https://eliminatenoise.github.io/NeuroSurge/scene/example/preview.html?edition=lite">Play Lite</a>
-            <a class="button" data-kind="get" href="https://github.com/eliminatenoise/NeuroSurge/releases/download/lite-live-knees-2026-11-24/NeuroSurge-Lite.zip">Download Lite offline</a>
+            <a class="button" data-kind="get" href="https://github.com/eliminatenoise/NeuroSurge/releases/download/lite-forecast-timing-2026-11-24/NeuroSurge-Lite.zip">Download Lite offline</a>
             <a class="button" data-kind="read" href="https://github.com/eliminatenoise/NeuroSurge/blob/main/PLAYER-GUIDE.md">Player guide</a>
           </div>
         </div>
         <div class="quick-group" data-for-project="neurotranslation" role="group" aria-labelledby="quick-model">
-          <p id="quick-model">NeuroTranslation</p>
+          <div class="quick-preview">
+            <h2 id="quick-model">NeuroTranslation</h2>
+            <a class="quick-extra" data-kind="try" href="../walking-blends/">Walking comparison</a>
+            <img src="media/forecast.webp" width="643" height="163" alt="A model forecast plotted after an invented sequence of tracked body positions">
+          </div>
           <div class="quick-links">
             <a class="button primary" data-kind="try" href="../shared-motion/">Try model 0.0</a>
             <a class="button" data-kind="get" href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0.zip">Download model 0.0</a>
@@ -40,7 +48,11 @@
           </div>
         </div>
         <div class="quick-group" data-for-project="interoceptomics" role="group" aria-labelledby="quick-atlas">
-          <p id="quick-atlas">Interoceptomics</p>
+          <div class="quick-preview">
+            <h2 id="quick-atlas">Interoceptomics</h2>
+            <a class="quick-extra" data-kind="read" href="https://eliminatenoise.github.io/Interoceptomics/atlas/backslash/atlas.pdf">Atlas PDF</a>
+            <img src="media/atlas.webp" width="660" height="440" alt="A side view of the anatomical regions on the left half of the reference brain">
+          </div>
           <div class="quick-links">
             <a class="button primary" data-kind="try" href="https://eliminatenoise.github.io/Interoceptomics/atlas/backslash/">Open 3D atlas</a>
             <a class="button" data-kind="try" href="https://eliminatenoise.github.io/Interoceptomics/stages/">Experiment guide</a>
@@ -51,7 +63,12 @@
       </nav>
     </div>
 
-    <div class="filters" hidden>
+    <h2 class="catalog-heading" id="catalog-heading">Browse resources</h2>
+    <div class="filters" role="region" aria-labelledby="catalog-heading" hidden>
+      <div class="search">
+        <label for="resource-search">Search resources</label>
+        <input id="resource-search" type="search" maxlength="120" autocomplete="off" placeholder="Atlas, camera, walking">
+      </div>
       <div class="project-filter" role="group" aria-label="Show project">
         <button type="button" value="all" aria-pressed="true">All projects</button>
         <button type="button" value="neurosurge" aria-pressed="false">NeuroSurge</button>
@@ -68,7 +85,8 @@
         </select>
       </div>
     </div>
-    <p id="filter-status" class="visually-hidden" role="status"></p>
+    <p id="filter-status" class="filter-status" role="status" hidden></p>
+    <p class="no-results" hidden>No resources match. <button type="button" data-show-all>Show all resources</button></p>
 
     <section class="project game" id="neurosurge" data-project aria-labelledby="game-title">
       <header class="project-heading">
@@ -88,7 +106,7 @@
           </figure>
         </article>
         <article class="resource" data-kind="get">
-          <h3><a href="https://github.com/eliminatenoise/NeuroSurge/releases/download/lite-live-knees-2026-11-24/NeuroSurge-Lite.zip">Download Lite offline</a></h3>
+          <h3><a href="https://github.com/eliminatenoise/NeuroSurge/releases/download/lite-forecast-timing-2026-11-24/NeuroSurge-Lite.zip">Download Lite offline</a></h3>
           <p>Extract the ZIP and open the launcher for your computer in <code>lite</code>. Node.js 18 or later serves the game to your browser from this device. Press C to use a local video or timed pictures. Save the movement as a take, then press F and enter “replay my take”.</p>
         </article>
         <article class="resource" data-kind="get">
@@ -131,6 +149,10 @@
         <article class="resource" data-kind="get">
           <h3><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models#current-downloads">Model downloads</a></h3>
           <p>Get the saved model files and follow the instructions to run them. A saved set of learned model values is called a checkpoint.</p>
+        </article>
+        <article class="resource" data-kind="get">
+          <h3><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/walking-blends/Walking-Forecast-Blends.zip">Download the walking forecast comparison</a></h3>
+          <p>Save the calculator and both blended forecasts for use offline. The included guides explain how each blend combines the physical forecast with part of a model's prediction.</p>
         </article>
         <article class="resource" data-kind="get">
           <h3><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.1/research-edition">NeuroTranslate 0.1 Research Edition setup</a></h3>
@@ -181,6 +203,9 @@
       </div>
     </section>
   </main>
-  <footer class="foot frame"><a href="technical.html" data-edition-link>Technical index</a></footer>
+  <footer class="foot frame">
+    <a href="technical.html" data-edition-link>Technical index</a>
+    <a href="media/NOTICE.txt">Image credits</a>
+  </footer>
 </body>
 </html>
