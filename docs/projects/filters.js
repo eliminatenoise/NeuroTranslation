@@ -6,6 +6,15 @@ const status = document.querySelector('#filter-status');
 const shortcuts = document.querySelector('[data-shortcuts]');
 const shortcutGroups = [...document.querySelectorAll('[data-shortcuts] [data-for-project]')];
 const gameEntry = document.querySelector('[data-game-entry]');
+const editionLinks = document.querySelectorAll('[data-edition-link]');
+
+function writeFilters(url, project, type) {
+  if (project === 'all') url.searchParams.delete('project');
+  else url.searchParams.set('project', project);
+  if (type === 'all') url.searchParams.delete('type');
+  else url.searchParams.set('type', type);
+  return url;
+}
 
 function matchesType(item, type) {
   return type === 'all' || item.dataset.kind === type;
@@ -35,11 +44,14 @@ function applyFilters(project, type) {
   if (gameEntry) gameEntry.hidden = (project !== 'all' && project !== 'neurosurge') || (type !== 'all' && type !== 'try');
   typeChoice.value = type;
   status.textContent = `${count} ${count === 1 ? 'resource' : 'resources'} shown`;
+  for (const link of editionLinks) {
+    link.href = writeFilters(new URL(link.href), project, type);
+  }
 }
 
 function readLocation() {
   const url = new URL(location.href);
-  const project = url.searchParams.get('project');
+  const project = url.searchParams.get('project') ?? url.hash.slice(1);
   const type = url.searchParams.get('type');
   applyFilters(
     choices.some(button => button.value === project) ? project : 'all',
@@ -48,11 +60,7 @@ function readLocation() {
 }
 
 function choose(project, type) {
-  const url = new URL(location.href);
-  if (project === 'all') url.searchParams.delete('project');
-  else url.searchParams.set('project', project);
-  if (type === 'all') url.searchParams.delete('type');
-  else url.searchParams.set('type', type);
+  const url = writeFilters(new URL(location.href), project, type);
   url.hash = '';
   if (url.href !== location.href) history.pushState(null, '', url);
   applyFilters(project, type);
@@ -68,3 +76,4 @@ typeChoice.addEventListener('change', () => {
 addEventListener('popstate', readLocation);
 readLocation();
 filters.hidden = false;
+document.querySelector('[data-fallback-jumps]')?.setAttribute('hidden', '');
