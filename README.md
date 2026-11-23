@@ -232,7 +232,7 @@ Each paper has a Technical edition and a Simple English edition, which explains 
 
 | | Technical | Simple English |
 | --- | --- | --- |
-| *NeuroTranslation: A New Paradigm In Brain-Body Mapping.* | [PDF, 54 pages](papers/current/neurotranslation-technical.pdf) | [PDF, 64 pages](papers/current/neurotranslation-explained.pdf) |
+| *NeuroTranslation: A New Paradigm In Brain-Body Mapping.* | [PDF, 60 pages](papers/current/neurotranslation-technical.pdf) | [PDF, 67 pages](papers/current/neurotranslation-explained.pdf) |
 | *Brain2Body: The Next Generation In Body-Brain Interfacing.* | [PDF, 29 pages](papers/current/brain2body-article.pdf) | [PDF, 33 pages](papers/current/brain2body-simple-english.pdf) |
 
 The first paper asks what a recording of brain or muscle adds once a model already knows how the body has been moving. It reports every row of the numbered table above, with the macaque study told in full, and [the papers page](papers/README.md) links each study to its place in it. The second asks what a person keeps when a machine guides their hand through a skill and then stops. It is a proposal: it reports no experiment of its own on that question. Brain2Body is also the name of the whole programme, of which NeuroTranslation is one part.
