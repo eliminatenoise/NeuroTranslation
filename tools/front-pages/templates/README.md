@@ -1,10 +1,14 @@
 # NeuroTranslation
 
+**[Try NeuroTranslate 0.0 in your browser](https://eliminatenoise.github.io/NeuroTranslation/shared-motion/) · [Compare walking forecasts](https://eliminatenoise.github.io/NeuroTranslation/walking-blends/) · [Model downloads](models/#current-downloads) · [Papers](papers/)**
+
+[Project browser](https://eliminatenoise.github.io/NeuroTranslation/projects/?project=neurotranslation) · [Technical index](https://eliminatenoise.github.io/NeuroTranslation/projects/technical.html#neurotranslation)
+
 NeuroTranslation tests whether brain and muscle recordings improve forecasts of movement. The studies compare forecasts based on earlier movement with forecasts that also use an electrical recording. They score both against later measurements such as wrist position.
 
 ## Choose how to start
 
-- [Run the NeuroTranslate 0.0 demo](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/). Choose a task, change a past reading and watch the forecast update. The supported tasks share one trained model. The study on that page shows where simpler forecasts beat it. [Download the model and offline demo](models/neurotranslate-0.0.zip) or [try the eight-task fingertip experiment](https://eliminatenoise.github.io/NeuroTranslation/touch-feedback/).
+- [Run NeuroTranslate 0.0 locally](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/). Choose a task, change a past reading and watch the forecast update. The supported tasks share one trained model. The study on that page shows where simpler forecasts beat it. [Download the model and offline demo](models/neurotranslate-0.0.zip) or [try the eight-task fingertip experiment](https://eliminatenoise.github.io/NeuroTranslation/touch-feedback/).
 - [Try one of {{ spell(try_rows('browser')) }} browser pages]({{ gh_anchor(TRY_HEADING()) }}) to compare forecasts or explore their inputs.
 - [Find the latest model downloads](models/#current-downloads) for the walking experiments. The recorded-force example uses recent muscle readings and force underfoot to forecast what a floor plate will measure a tenth of a second later. Its particular fitted models have yet to be scored on new people.
 - [Read the study results](benchmarks/README.md), [see how the shared model did]({{ gh_anchor(GENERAL_HEADING) }}), or [read the papers](papers/README.md).

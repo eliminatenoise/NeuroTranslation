@@ -1016,7 +1016,8 @@ def n_later():
 
 def _site_pages():
     return sorted(d.name for d in (REPO / 'docs').iterdir()
-                  if d.is_dir() and (d / 'index.html').exists() and d.name not in ('papers', 'launchers'))
+                  if d.is_dir() and (d / 'index.html').exists()
+                  and d.name not in ('papers', 'launchers', 'projects'))
 
 
 def n_readers():
@@ -1028,12 +1029,11 @@ def n_readers():
 
 
 def n_pages():
-    """Every page on the site that runs a study or replays recordings: each folder under docs/ with an index.html, papers and
-    launchers aside. The study readers must all be among them; a page published later is counted and named here, never fatal."""
+    """Count study and replay pages under docs, excluding papers, launchers and the project browser."""
     n_readers()
     names = _site_pages()
     readers = set(r.split('/')[0] for r in READER.values() if not r.startswith('index.html'))
-    log(str(len(names)), file='docs/', field='folders with an index.html, papers and launchers aside: ' + ', '.join(names), full=len(names),
+    log(str(len(names)), file='docs/', field='folders with an index.html excluding papers, launchers and projects: ' + ', '.join(names), full=len(names),
         note='not study readers of the numbered table: ' + ', '.join(n for n in names if n not in readers))
     return str(len(names))
 
