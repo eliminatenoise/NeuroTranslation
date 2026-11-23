@@ -1,0 +1,1021 @@
+/* NeuroSurge visual-clarity source candidate. Root owns integration and native qualification.
+ * U2b-scene (round 2): scene overlay (orbit arrow buttons, region group labels, far-right information panel, face-layer
+ * label and inset frame), HUD cards on the left edge. INFO_PANEL / ORBIT_ARROWS in ns-scene-three mirror the sizes.
+ * A2-render R1: cards get a light translucent backdrop (text contrast over the bright strip and hand, VD02) that
+ * never hides what is under it; compact layouts use a narrower column so the larger framed strip stays clear; the
+ * hover label sits next to the crosshair; the region note explains tints/spot/shimmer under the legend; the legend
+ * fallback gradient matches the ns-brain ramp (createHud sets the exact generated gradient at runtime).
+ * All text uses the explicit system sans-serif stack. Existing pointer-event rules are retained.
+ * Cards keep their font and contents; the source seeks clear edge positions from approximate arm-avoid
+ * shapes rather than fading cards under the hand. Transparent backgrounds avoid opaque hand-covering
+ * panels. Limited placements, actual font/glyph bounds and every pose/aspect still require visual review.
+ * The giant centered motor focus, canvas, camera, ray, rig and input geometry are unchanged. */
+
+:root {
+  --ns-info-col-px: 300px;   /* INFO_PANEL.colPx */
+  --ns-info-col-vw: 25vw;    /* INFO_PANEL.colVw */
+  --ns-info-portrait-vh: 36vh; /* INFO_PANEL.portraitVh */
+  --ns-portrait-legend-reserve: 172px; /* INFO_PANEL_PORTRAIT_LEGEND_PX: legend + toast row at the top of the band */
+  --ns-portrait-legend-reserve-body: 116px; /* R4-polish: the short body-view legend (about 100-105 px measured) + gap */
+  --ns-info-col-maxvh: 66vh;   /* INFO_PANEL.colMaxVh */
+  --ns-info-corner-vw: 18.75vw; /* INFO_PANEL.cornerVw */
+  --ns-info-short-maxvh: 48vh;  /* INFO_PANEL.cornerShortVh */
+  --ns-leftarm: #8cf2ff;     /* REGION_STYLE.leftArmOutline (sRGB of the linear [0.55, 0.95, 1.0]) */
+  /* Polish: one visual system for every overlay. */
+  --ns-other: #d4ccbc;       /* REGION_RENDER.groupLine = ns-colors KEY_COLORS.otherGroupLine (other body-part territories) */
+  --ns-activated: #ffc65c;   /* REGION_RENDER.activatedLine (activated-area edge) */
+  --ns-surface: rgba(9, 13, 20, 0.84);
+  --ns-surface-line: rgba(232, 238, 245, 0.12);
+  --ns-label: #9fb0c4;       /* small caps labels: 7.9:1 on the surface */
+  --ns-bg: #05070b;
+  --ns-fg: #e8eef5;
+  --ns-muted: #c7d2df;
+  --ns-panel: rgba(8, 12, 18, 0.7);
+  --ns-accent: #ffe066;
+  --ns-error-bg: rgba(120, 16, 16, 0.92);
+  --ns-banner-bg: rgba(150, 96, 0, 0.92);
+  --ns-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  /* HUD_LAYOUT mirror */
+  --ns-gap: 12px;
+  --ns-col-px: 300px;
+  --ns-col-vw: 26vw;
+  --ns-compact-col-px: 250px;
+  --ns-compact-col-vw: 30vw;
+  --ns-card-bg: rgba(5, 7, 11, 0.42);
+  --ns-portrait-notice-px: 320px;
+  --ns-portrait-notice-vw: 86vw;
+  --ns-essential-band: 3vh;
+}
+
+[hidden] { display: none !important; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--ns-bg);
+  color: var(--ns-fg);
+  font-family: var(--ns-font);
+  overflow: hidden;
+  /* 19 November 2026: a swipe or wheel turn past the page's edge must not take the browser back out of the game */
+  overscroll-behavior: none;
+}
+
+.ns-app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.ns-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+  touch-action: none;
+  outline: none;
+}
+
+.ns-hud-root,
+.ns-hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-family: var(--ns-font);
+  font-size: 12px;
+  line-height: 1.3;
+  text-shadow: -1px -1px 1px #05070b, 1px -1px 1px #05070b, -1px 1px 1px #05070b, 1px 1px 1px #05070b, 0 2px 4px #05070b;
+}
+
+.ns-slot:empty,
+.ns-drive:empty { display: none; }
+
+/* Cards initially occupy the right edges; createHud may move each to a clear left/right edge slot. */
+.ns-hud-col {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ns-panel {
+  position: absolute;
+  width: min(var(--ns-col-px), var(--ns-col-vw));
+  background: var(--ns-card-bg);
+  border-radius: 6px;
+  padding: 7px 9px;
+  box-sizing: border-box;
+}
+
+/* U2b-scene: the far-right column belongs to the information overlay, so the cards start on the LEFT edge. */
+.ns-panel-info {
+  top: calc(var(--ns-essential-band) + 8px);
+  left: var(--ns-gap);
+}
+
+.ns-panel-legend {
+  left: var(--ns-gap);
+  bottom: var(--ns-gap);
+  font-size: 12px;
+  color: var(--ns-muted);
+}
+
+/* Integration (round 2): compact in-game HUD. The left arm fills the left of the screen and the far-right column is
+ * the information overlay, so during play the cards show the essentials only: title, gaze, pulse, forearm, reach and
+ * Space lines, and the shared activity legend with its short region note. The muscle-drive list, frame time, long
+ * notices and the controls hint stay in the DOM (and in the details mirror) but are not drawn; the full controls and
+ * honesty limits are on the intro and Esc pages, the caveats in the information overlay, and the essential limits
+ * line stays visible at the top. */
+.ns-hud .ns-drives,
+.ns-hud .ns-slot-drivesTitle,
+.ns-hud .ns-slot-frame,
+.ns-hud .ns-notices,
+.ns-hud .ns-slot-hint { display: none; }
+
+/* Polish: the in-game status card is a compact, quiet card (brand line, what you look at, the live pulse and the hand
+ * state); the long reach/elbow text is in the details mirror only. */
+.ns-hud .ns-slot-reach { display: none; }
+.ns-panel-info {
+  background: rgba(9, 13, 20, 0.62);
+  border: 1px solid var(--ns-surface-line);
+  border-radius: 10px;
+  padding: 8px 11px 9px;
+}
+.ns-panel-info .ns-slot-title {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ns-label);
+  text-shadow: none;
+}
+/* R4-polish (R4-player 1.11): what to do and what you look at come first; the brand and model-name line (same words,
+   always shown) is a quiet footer of the card instead of three lines of small print before "Looking at". */
+.ns-panel-info { display: flex; flex-direction: column; }
+.ns-panel-info .ns-slot-title { order: 20; margin-top: 3px; padding-top: 3px; border-top: 1px solid var(--ns-surface-line); }
+/* R4-polish: on phones the card must stay as short as before (the brain's front end sits right under it). */
+@media (max-width: 600px) {
+  .ns-panel-info .ns-slot-title { margin-top: 1px; padding-top: 2px; }
+  .ns-panel-info .ns-slot-guide { padding-top: 2px; padding-bottom: 2px; }
+}
+/* R4-fix (review RP2): on narrow portrait screens (phones) the card must end above the left hand, which sits three
+   quarters up the screen (390x844: hand top about y 180). The "Looking at" line is dropped there (the bottom panel
+   names what you look at, and the crosshair caption names the area), and so are the brand words before the model-name
+   line; the model-name line itself (honesty) always shows. */
+@media (max-width: 600px) and (max-aspect-ratio: 999/1000) {
+  .ns-panel-info .ns-slot-gaze { display: none; }
+  .ns-panel-info .ns-title-brand { display: none; }
+}
+.ns-panel-info .ns-slot-title:empty { display: none; }
+.ns-panel-info .ns-slot-gaze { font-size: 13px; font-weight: 700; margin-top: 4px; color: var(--ns-fg); }
+/* R4-text (D7): the "Try this" guide line (status card; the card's planned box keeps it off the brain, arrows and panel). */
+.ns-panel-info .ns-slot-guide { margin: 0 0 1px; padding: 3px 7px; border-left: 3px solid var(--ns-accent); border-radius: 4px; background: rgba(255, 224, 102, 0.10); color: var(--ns-fg); font-size: 12.5px; font-weight: 600; line-height: 1.3; }
+/* R4-integrator (D7): while the brain covers the line's place in the card, the line is a small chip in a clear spot of
+   the usable view (ns-app + ns-scene-three guideFloatSpot); left / top / width come from the HUD. */
+.ns-panel-info .ns-slot-guide.ns-guide-float { position: fixed; margin: 0; z-index: 4; box-sizing: border-box;
+  background: linear-gradient(rgba(255, 224, 102, 0.10), rgba(255, 224, 102, 0.10)), rgba(9, 13, 20, 0.92);
+  border: 1px solid var(--ns-surface-line); border-left: 3px solid var(--ns-accent); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45); }
+.ns-panel-info .ns-slot-pulse { margin-top: 2px; color: var(--ns-accent); font-variant-numeric: tabular-nums; }
+.ns-panel-info .ns-slot-trigger { font-size: 11.5px; }
+.ns-panel-info .ns-slot-space,
+.ns-panel-info .ns-slot-note { margin-top: 2px; color: var(--ns-muted); font-size: 11.5px; }
+
+/* Cards and labels are never blanket-faded to hide a collision. */
+.ns-slot-title { font-weight: 600; color: var(--ns-fg); }
+.ns-slot-gaze { font-weight: 600; margin-top: 3px; }
+.ns-slot-note,
+.ns-slot-frame { font-size: 12px; color: var(--ns-muted); }
+.ns-slot-trigger { color: var(--ns-accent); }
+.ns-slot-status { color: var(--ns-accent); }
+.ns-slot-drivesTitle { margin-top: 4px; font-weight: 600; }
+.ns-slot-legendLabel { font-weight: 600; color: var(--ns-fg); }
+
+.ns-drives {
+  margin: 1px 0 0;
+  padding-left: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ns-legend-bar {
+  height: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  /* R558: glow strength (dark resting surface -> bright glow; ns-colors glowStrengthLegendStops); each area keeps its
+     own colour, explained by the family chips. The renderer writes the same stops inline. */
+  background: linear-gradient(to right, #242227, #363437, #8c8a88, #a7a5a2, #bdbab7, #d0cdca, #e1deda, #f1ede9, #fffcf7);
+}
+/* R558 (user Message 2): one chip per area colour family (blues left arm, oranges right arm, purples left leg, yellows
+   right leg, greens belly and back, pinks face and neck, grey moves nothing). The chip background (the family's shades)
+   is written inline from ns-colors areaFamilySwatchCss. Kept visible in body views too: the muscles glow in these
+   colours. */
+.ns-legend-families { list-style: none; margin: 6px 0 2px; padding: 0; display: flex; flex-wrap: wrap; gap: 3px 9px; }
+.ns-legend-family { display: inline-flex; align-items: center; gap: 4px; line-height: 1.2; font-size: 11px; color: var(--ns-fg); white-space: nowrap; }
+.ns-legend-chip { flex: none; width: 18px; height: 10px; border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22); }
+
+/* Polish: the legend is the colour key in the far-right column, under the information panel. */
+.ns-panel-legend {
+  background: var(--ns-surface);
+  border: 1px solid var(--ns-surface-line);
+  border-radius: 10px;
+  padding: 9px 11px 9px;
+  color: var(--ns-fg);
+  text-shadow: none;
+  font-size: 11.5px;
+}
+@media (min-aspect-ratio: 1/1) {
+  .ns-hud .ns-panel-legend { width: min(var(--ns-info-col-px), var(--ns-info-col-vw)); }
+  /* R558: fits the free bottom-left corner under the motor areas. R558 (user Message 31, symmetry): exactly as wide as
+     the information card in the bottom-right corner (.ns-infopanel, INFO_PANEL.colPx / cornerVw), so the two corner
+     cards mirror each other (same width, same 12 px side and bottom margins); was min(280px, 17.5vw). */
+  .ns-hud .ns-panel-info { width: min(var(--ns-info-col-px), var(--ns-info-corner-vw)); }
+}
+.ns-panel-legend .ns-slot-legendLabel {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ns-label);
+}
+.ns-legend-key { list-style: none; margin: 7px 0 4px; padding: 0; display: grid; gap: 3px; }
+.ns-legend-item { display: flex; align-items: center; gap: 7px; line-height: 1.25; }
+.ns-legend-swatch { flex: none; width: 13px; height: 13px; border-radius: 3px; box-sizing: border-box; }
+/* R3-polish: the swatches match the areas as they look on the glass (sampled from the default view: left-arm areas a
+   grey teal, the other areas a near-neutral grey), so "Other parts" no longer looks like the ramp's dark purple end. */
+/* R4-access: KEY_COLORS.legendSwatchLeftArm / legendSwatchOther (light-blue left-arm and warm-grey other areas stay
+   apart for red-green colour-blind players). */
+/* R558: the left-arm / other-parts rows are replaced by the family chips (.ns-legend-families); the rules stay for any
+   older key row. */
+.ns-legend-item-leftarm .ns-legend-swatch { background: rgba(64, 109, 133, 0.95); border: 2px solid var(--ns-leftarm); }
+.ns-legend-item-other .ns-legend-swatch { background: rgba(172, 122, 120, 0.95); border: 1px solid var(--ns-other); } /* R558: the tissue-pink areas (was grey 105, 103, 97) */
+/* R4-polish: the switched-on swatch shows the lighter, warmer fill of a switched-on area inside its gold edge. */
+/* 22 November 2026 (LOOK2, section 198): a used area has no gold edge any more, only its darker shade (ns-colors
+   VISITED): the swatch is a darker tone with a faint edge (was rgba(150, 138, 112, 0.95) in a 2 px gold edge). */
+.ns-legend-item-activated .ns-legend-swatch { background: rgba(92, 84, 70, 0.95); border: 2px solid rgba(255, 255, 255, 0.18); }
+.ns-legend-item-dot .ns-legend-swatch { width: 8px; height: 8px; margin: 0 2.5px; border-radius: 1px; transform: rotate(45deg); background: #a8eefc; }
+.ns-legend-item-leftarm .ns-legend-text,
+.ns-legend-item-leftarm .ns-legend-short { color: var(--ns-leftarm); font-weight: 600; }
+.ns-legend-short { display: none; }
+/* Polish: while the brain is out of view (looking at the body), the legend keeps only the ramp (the muscle colours);
+ * the brain-specific key returns when the brain is back in view. */
+.ns-app:has(> .ns-scene-overlay[data-ns-brain-in-view="false"]) .ns-legend-key,
+.ns-app:has(> .ns-scene-overlay[data-ns-brain-in-view="false"]) .ns-panel-legend .ns-slot-regionNote { display: none; }
+
+/* Region/legend note: always visible, same readable size, muted. */
+.ns-slot-regionNote { margin-top: 2px; color: var(--ns-muted); }
+.ns-panel-legend .ns-slot-regionNote { font-size: 11px; color: var(--ns-label); }
+
+/* Label of the control region under the crosshair (next to it, never over it). */
+.ns-hover {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(18px, 12px);
+  max-width: min(260px, 40vw);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ns-accent);
+  background: rgba(5, 7, 11, 0.55);
+  padding: 1px 6px;
+  border-radius: 4px;
+  /* R4-fix (review RP13): a long caption wraps onto a second line instead of losing its end ("· nothing moves o…"). */
+  white-space: normal;
+  overflow-wrap: break-word;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ns-legend-ends {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ns-muted);
+}
+.ns-legend-mid { font-size: 10.5px; color: var(--ns-label); text-align: center; }
+/* R3-polish: the ramp ends read "0 resting" and "strongest 1"; the shared-colours note gets its own centred line under
+   them, and the legend's spacing is a little tighter so the card keeps its fixed slot under the panel at 1280x720. */
+.ns-legend-ends { flex-wrap: wrap; row-gap: 0; }
+.ns-legend-lo { order: 1; }
+.ns-legend-hi { order: 2; }
+.ns-legend-mid { order: 3; flex: 1 0 100%; line-height: 1.25; }
+.ns-hud .ns-panel-legend { padding-top: 7px; padding-bottom: 7px; }
+.ns-hud .ns-legend-key { margin: 5px 0 3px; }
+.ns-hud .ns-rights { margin-top: 4px; padding-top: 4px; }
+
+/* Wide: the limits read as one compact paragraph; the two control/representation limits stay bold. */
+.ns-notices { margin-top: 3px; }
+.ns-notices > .ns-slot { display: inline; }
+.ns-notices > .ns-slot:not(:last-child)::after { content: " \00b7  "; color: var(--ns-muted); font-weight: 400; }
+.ns-notices > .ns-slot-qualifier,
+.ns-notices > .ns-slot-control { color: var(--ns-fg); font-weight: 600; }
+
+/* Essential scope text wraps at a fixed readable size; its actual height informs card/label placement. */
+.ns-essential {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 24px);
+  box-sizing: border-box;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+  font-size: 11.5px;
+  line-height: 1.3;
+  padding: 2px 10px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #d9e1ea;
+  background: rgba(5, 7, 11, 0.55);
+  border-radius: 0 0 8px 8px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Compatibility mirrors stay hidden; the primary full notices remain visible in every layout. */
+.ns-details-limits { display: none; }
+
+.ns-slot-hint { margin-top: 6px; color: var(--ns-fg); }
+
+.ns-rights {
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px solid var(--ns-surface-line);
+  font-size: 10.5px;
+  color: var(--ns-muted);
+}
+
+.ns-slot-rights { margin-right: 6px; }
+
+.ns-details {
+  display: inline;
+  pointer-events: auto;
+}
+
+.ns-details > summary {
+  display: inline;
+  cursor: pointer;
+  color: var(--ns-accent);
+  text-decoration: underline;
+}
+
+.ns-details[open] {
+  display: block;
+}
+
+.ns-details-body {
+  margin-top: 4px;
+  max-height: 45vh;
+  overflow: auto;
+  color: var(--ns-muted);
+  overflow-wrap: anywhere; /* fix round 2 (SCI-6): the licence URIs wrap instead of scrolling sideways */
+}
+
+.ns-details-body > .ns-slot,
+.ns-details-limits > .ns-mirror { margin-top: 4px; }
+
+.ns-banner {
+  position: absolute;
+  top: var(--ns-essential-band);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ns-banner-bg);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 6px 14px;
+  border-radius: 0 0 6px 6px;
+  z-index: 3;
+}
+
+.ns-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: min(640px, calc(100vw - 32px));
+  background: var(--ns-error-bg);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  z-index: 4;
+}
+
+.ns-fatal {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  margin: 0;
+  background: var(--ns-error-bg);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-family: var(--ns-font);
+}
+
+.ns-crosshair {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  transform: translate(-50%, -50%);
+}
+
+.ns-crosshair-h,
+.ns-crosshair-v {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
+}
+
+.ns-crosshair-h { left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; }
+.ns-crosshair-v { top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; }
+.ns-crosshair-active .ns-crosshair-h,
+.ns-crosshair-active .ns-crosshair-v { background: var(--ns-accent); }
+/* R558 (Message 48): the grip ring. It closes round the crosshair while Space grips: white on nothing, the accent
+   colour while something is held (ns-scene-three crosshairHold). */
+.ns-crosshair::before {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  transition: inset 90ms ease-out, border-color 90ms ease-out;
+  pointer-events: none;
+}
+.ns-crosshair-grip::before { inset: -3px; border-color: rgba(255, 255, 255, 0.8); box-shadow: 0 0 3px rgba(0, 0, 0, 0.9); }
+.ns-crosshair-holding::before { border-color: var(--ns-accent); }
+
+/* Orientation labels: each extends AWAY from the band from its anchor (ns-scene-three ORIENTATION_ALIGN). */
+.ns-orient {
+  position: absolute;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: #dbe3ee;
+  background: rgba(5, 7, 11, 0.5);
+  padding: 1px 7px;
+  border-radius: 999px;
+}
+/* (21 November 2026: the HUD sets each label's translate inline from ORIENTATION_ALIGN, which follows the brain's half
+   turn; these four are the unturned brain's, kept for pages without it.) */
+.ns-orient-right { transform: translate(0, -50%); }
+.ns-orient-left { transform: translate(-100%, -50%); }
+.ns-orient-anterior { transform: translate(-50%, -100%); }
+.ns-orient-posterior { transform: translate(-50%, 0); }
+
+/* Layout widths change without shrinking fonts or hiding required activity/limits/controls text.
+ * Tiny viewports may be space-limited: source placement records this, and actual review remains mandatory. */
+@media (max-aspect-ratio: 1449/1000) {
+  .ns-panel { width: min(var(--ns-compact-col-px), var(--ns-compact-col-vw)); }
+}
+
+@media (max-aspect-ratio: 999/1000) {
+  .ns-panel-info { width: calc(100% - 24px); }
+  .ns-panel-legend { width: min(var(--ns-portrait-notice-px), var(--ns-portrait-notice-vw)); }
+  .ns-hover { white-space: normal; }
+}
+
+/* ---------------------------------------------------------------- U2b-scene overlay */
+
+/* Above the canvas and HUD, below the game shell (z-index 10). Only the orbit buttons take pointer events. */
+.ns-scene-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  font-family: var(--ns-font);
+  color: var(--ns-fg);
+  overflow: hidden;
+}
+
+/* R5-integrate-core (D16, R20): the round-2..4 DOM orbit buttons (.ns-orbit*) are retired; the orbit arrows are 3D objects
+ * in the scene (ns-arrows3d), lit, at the compass points, bent toward the viewer and inward. Their plain hover caption is
+ * the scene's .ns-arrow-tip (styled here; ns-scene-three injects the same rule as a fallback). */
+.ns-arrow-tip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 2px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font: 600 11.5px/1.3 var(--ns-font);
+  color: #05070b;
+  background: #ffe066;
+  pointer-events: none;
+  z-index: 3;
+}
+.ns-arrow-tip.ns-arrow-tip-mirror { background: #e8eef5; }
+
+/* Region group labels on the brain: the LEFT ARM group is distinct (cyan border and text); the others are muted. */
+.ns-region-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  max-width: 190px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  white-space: nowrap;
+  /* R4-access proposal (wired by R4-integrator): a warm neutral that matches the warm-grey other areas (KEY_COLORS). */
+  /* R558 ("brain labels should be a little more transparent"): one step lower fill and edge (was 0.62 / 0.32); the
+     words keep full strength and their dark shadow so they stay readable over the glass. */
+  color: #e2ddd4;
+  background: rgba(8, 10, 18, 0.46);
+  border: 1px solid rgba(212, 204, 188, 0.26);
+  text-shadow: 0 1px 2px #05070b;
+}
+/* Polish: the arm labels are the strong labels (cyan pill, matching the cyan left-arm territory outline). R558 ("match
+   on both sides"): the right-arm label on the other half wears the same pill, and the pill is one step more see-through
+   (fill 0.92 -> 0.72, halo 0.18 -> 0.14). */
+.ns-region-label-arm {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 2px 10px;
+  color: #05161b;
+  border: 1.5px solid var(--ns-leftarm);
+  background: rgba(140, 242, 255, 0.72);
+  text-shadow: none;
+  box-shadow: 0 0 0 3px rgba(140, 242, 255, 0.14), 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.ns-region-label-hemi { font-size: 0.86em; font-weight: 500; opacity: 0.78; }
+.ns-region-label[data-hover="true"] { color: #fff3a0; border-color: #fff3a0; }
+.ns-region-label-arm[data-hover="true"] { color: #05161b; background: #fff3a0; border-color: #fff3a0; }
+
+/* Far-right information overlay (R14). Never takes pointer events; long content is clipped, not scrolled. */
+.ns-infopanel {
+  position: absolute;
+  right: var(--ns-gap);
+  top: 30px;
+  max-height: min(calc(100% - 30px - var(--ns-gap)), var(--ns-info-col-maxvh));
+  width: min(var(--ns-info-col-px), var(--ns-info-col-vw));
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 10px 12px 10px 13px;
+  border-radius: 10px;
+  border: 1px solid var(--ns-surface-line);
+  border-left: 4px solid var(--ns-other);
+  background: var(--ns-surface);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  color: #e8eef5;
+  font-size: 12px;
+  line-height: 1.4;
+  text-shadow: none;
+  pointer-events: none;
+  /* Clipped content fades out in the bottom padding instead of being cut mid-line. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 16px), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 16px), transparent);
+}
+.ns-infopanel[data-left-arm="true"] { border-left-color: var(--ns-leftarm); }
+.ns-infopanel[data-mode="idle"],
+.ns-infopanel[data-mode="glass"] { border-left-color: #59606b; }
+.ns-infopanel-heading { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ns-label); }
+.ns-infopanel-title { margin: 3px 0 1px; font-size: 17px; font-weight: 700; line-height: 1.2; letter-spacing: 0.005em; }
+.ns-infopanel-tag { color: var(--ns-other); font-size: 12px; font-weight: 600; }
+.ns-infopanel[data-left-arm="true"] { border-left-color: var(--ns-leftarm); }
+.ns-infopanel[data-left-arm="true"] .ns-infopanel-tag { color: var(--ns-leftarm); }
+.ns-infopanel-viewed { margin-top: 3px; color: #ffe066; font-size: 11px; }
+.ns-infopanel-activity { display: flex; align-items: center; gap: 7px; margin: 5px 0 2px; font-size: 11.5px; font-variant-numeric: tabular-nums; color: var(--ns-muted); }
+.ns-infopanel-swatch { flex: none; width: 13px; height: 13px; border-radius: 3px; border: 1px solid rgba(232, 238, 245, 0.5); }
+/* Polish: the activity value on a small bar. R558: the bar runs from the area's calm tint to its glow colour (written
+   inline per area), the same colour as the brain area and its muscles. */
+.ns-infopanel-meter { position: relative; height: 6px; margin: 2px 0 4px; border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14); }
+.ns-infopanel-meter-mark {
+  position: absolute;
+  top: -3px;
+  width: 3px;
+  height: 12px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 0 0 0 1.5px #05070b;
+}
+.ns-infopanel-activations { color: var(--ns-activated); font-size: 11px; }
+/* Rows read as "Label value" lines over the full panel width (no narrow value column, no mid-word truncation). */
+.ns-infopanel-rows { display: block; margin: 4px 0 2px; padding-top: 4px; border-top: 1px solid var(--ns-surface-line); font-size: 11.5px; line-height: 1.3; }
+.ns-infopanel-rows dt { display: inline; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ns-label); }
+.ns-infopanel-rows dt::after { content: "  "; white-space: pre; }
+.ns-infopanel-rows dd { display: inline; margin: 0; overflow-wrap: break-word; }
+.ns-infopanel-rows dd::after { content: ""; display: block; margin-bottom: 2px; }
+/* R558 (Messages 55 and 56: easier to play; a learning tool): the area's movements, each with the number key (1 to 9)
+   that does it. The movement shown now is marked (its muscles are the rows below); one already at its end says so. */
+.ns-infopanel-moves-heading { margin: 5px 0 3px; padding-top: 5px; border-top: 1px solid var(--ns-surface-line); font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ns-label); }
+.ns-infopanel-moves-heading[hidden],
+.ns-infopanel-moves[hidden] { display: none; }
+.ns-infopanel-moves { list-style: none; display: grid; gap: 2px; margin: 0 0 3px; padding: 0; }
+.ns-infopanel-move { display: grid; grid-template-columns: max-content minmax(0, 1fr); align-items: baseline; gap: 0 7px; padding: 1px 4px 2px 3px; border-radius: 5px; font-size: 12.5px; line-height: 1.35; color: #d6dee8; }
+.ns-infopanel-move-label { overflow-wrap: break-word; }
+/* The note is one box: when it does not fit beside the label it goes whole onto the next line, and the label is not
+   broken in two for it. */
+.ns-infopanel-move-note { display: inline-block; margin-left: 7px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.01em; color: var(--ns-muted); white-space: nowrap; }
+.ns-infopanel-move[data-current="true"] { background: rgba(232, 238, 245, 0.1); color: #ffffff; font-weight: 700; }
+.ns-infopanel-move[data-current="true"] .ns-infopanel-move-key { border-color: #ffe066; color: #ffe066; }
+.ns-infopanel-move[data-current="true"] .ns-infopanel-move-note { color: #ffe066; }
+.ns-infopanel-move[data-at-end="true"]:not([data-current="true"]) .ns-infopanel-move-label { color: var(--ns-muted); }
+/* Round-2 fixes V1 / SCI-4 / F6: plain lead, then short simulated / known / caveat lines, then the rows, then the long
+   explanation ("More detail", clamped last), so the required fields stay inside the column at 1280x720. */
+.ns-infopanel-plain,
+.ns-infopanel-explanation,
+.ns-infopanel-known,
+.ns-infopanel-simulated,
+.ns-infopanel-caveat {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* Round 3 (D3): slightly tighter spacing so the lead, 4 rows, the honesty lines and the More detail summary fit the
+   66vh column at 1280x720 on the longest card. */
+.ns-infopanel-plain { -webkit-line-clamp: 4; margin: 4px 0 3px; font-size: 12.5px; line-height: 1.35; color: #eef3f8; }
+.ns-infopanel-simulated,
+.ns-infopanel-known,
+.ns-infopanel-caveat { -webkit-line-clamp: 3; margin: 1px 0 2px; font-size: 11px; line-height: 1.3; }
+.ns-infopanel-explanation { -webkit-line-clamp: 4; margin: 5px 0 4px; font-size: 11.5px; line-height: 1.35; color: var(--ns-muted); }
+.ns-infopanel[data-mode="idle"] .ns-infopanel-explanation,
+.ns-infopanel[data-mode="glass"] .ns-infopanel-explanation { -webkit-line-clamp: 6; font-size: 12.5px; color: #eef3f8; }
+.ns-infopanel-meter[hidden] { display: none; }
+.ns-infopanel-plain[hidden],
+.ns-infopanel-explanation[hidden],
+.ns-infopanel-known[hidden],
+.ns-infopanel-simulated[hidden],
+.ns-infopanel-caveat[hidden] { display: none; }
+.ns-infopanel-simulated { color: #ffe9a8; }
+.ns-infopanel-known { color: #c9d4e2; }
+.ns-infopanel-caveat { color: #f2cfa0; }
+.ns-infopanel-caveats { margin: 4px 0; padding-left: 16px; font-size: 11px; color: var(--ns-label); }
+.ns-infopanel-caveats li + li { margin-top: 2px; }
+.ns-infopanel-more { list-style: none; margin-left: -16px; font-style: italic; }
+.ns-details-links { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 6px; }
+.ns-details-link { color: #ffe066; text-decoration: underline; pointer-events: auto; }
+.ns-infopanel-citations { margin-top: 4px; font-size: 11px; color: #aab5c4; }
+/* Round 3 (D3): everything technical sits in a collapsed "More detail". Its summary is the panel's one pointer target
+   (drag-to-look mode); while it is open the panel scrolls instead of clipping. */
+.ns-infopanel-detail { margin-top: 3px; padding-top: 3px; border-top: 1px solid var(--ns-surface-line); }
+.ns-infopanel-detail[hidden] { display: none; }
+.ns-infopanel-detail-summary { pointer-events: auto; cursor: pointer; font-size: 11.5px; font-weight: 700; color: var(--ns-label); }
+.ns-infopanel-detail-body { margin-top: 4px; font-size: 11px; line-height: 1.35; color: var(--ns-muted); }
+.ns-infopanel-detail-body p { margin: 0 0 4px; overflow-wrap: break-word; }
+.ns-infopanel-detail-key { font-weight: 700; color: var(--ns-label); }
+.ns-infopanel-detail-key::after { content: ":"; }
+.ns-infopanel-detail-caveats { margin: 2px 0 4px; padding-left: 16px; }
+.ns-infopanel-detail-sources { color: #aab5c4; }
+.ns-infopanel:has(.ns-infopanel-detail[open]) {
+  pointer-events: auto;
+  overflow-y: auto;
+  /* 22 November 2026 (WORDS2, second pass; a check of section 197: the open card's foot line was cut through its
+     letters at every size): the open card fades at its foot like every other capped card, and its bottom padding is
+     the fade's height and a little more, so at the end of the scroll the last line stands clear of the fade. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 16px), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 16px), transparent);
+  padding-bottom: 18px;
+}
+/* 22 November 2026 (WORDS2, hunt H12): while More detail is open the card scrolls, and the area's title stays at its
+   top, so a card scrolled to More detail (ns-app infoRevealScroll) or by the wheel still names its area. The title's
+   band reaches the card's inner edges (the negative margins equal the card's side padding) and is opaque, so no
+   scrolled line shows beside or through it. A sticky box stops at the card's padding, not its edge, so it stands
+   at -10 px (the card's top padding) to cover the scrolled lines there too; its top padding (6 px) less its top margin
+   (-3 px) is the 3 px margin it had, so at the card's top it stands where it did. */
+.ns-infopanel:has(.ns-infopanel-detail[open]) .ns-infopanel-title {
+  position: sticky;
+  top: -10px;
+  z-index: 1;
+  margin: -3px -12px 1px -13px;
+  padding: 6px 12px 3px 13px;
+  background: #0b1019;
+}
+/* R3-polish (body views, R3-player items 3/10, INTEGRATION 7.4): while the brain is out of view (looking down at the
+   torso and legs, far right at the right arm, up at the face) the panel shrinks to a short card: title, part, signal
+   meter, the one plain sentence and the short "Simulated" line. The rows, the "Known" / "Keep in mind" lines and More
+   detail come back as soon as the brain is in view again (an open More detail keeps the full card). The always-on
+   limits line at the top still says that everything is simulated. */
+.ns-scene-overlay[data-ns-brain-in-view="false"] .ns-infopanel:not(:has(.ns-infopanel-detail[open])) :is(.ns-infopanel-rows, .ns-infopanel-known, .ns-infopanel-caveat, .ns-infopanel-detail, .ns-infopanel-caveats, .ns-infopanel-citations, .ns-infopanel-activations) { display: none; }
+/* R3-fix (review F8 / m5): the short card shows its sentences in full (no clamp), so no sentence is ever cut mid-word. */
+.ns-scene-overlay[data-ns-brain-in-view="false"] .ns-infopanel:not(:has(.ns-infopanel-detail[open])) .ns-infopanel-plain { -webkit-line-clamp: unset; display: block; overflow: visible; }
+.ns-scene-overlay[data-ns-brain-in-view="false"] .ns-infopanel:not(:has(.ns-infopanel-detail[open])) .ns-infopanel-explanation { -webkit-line-clamp: unset; display: block; overflow: visible; }
+/* 22 November 2026 (UI3, ns-scene-three INFO_WHOLE; a check of update 67: at 800 x 600 every lead sentence was cut in the
+   middle of a word by its 3-line clamp, "tells your left thi..."): the card's lead sentence has no line clamp
+   (data-ns-lead="whole"), and the short card leaves it out whole when it does not fit (data-ns-lead="drop"). The
+   landscape short card's own rule below is stronger than the first line, so it is said again there. */
+.ns-infopanel[data-ns-lead="whole"] .ns-infopanel-plain { -webkit-line-clamp: unset; }
+.ns-app:not([data-ns-unfold="true"]) .ns-infopanel[data-ns-lead="drop"]:not(:has(.ns-infopanel-detail[open])) .ns-infopanel-plain { display: none; }
+.ns-scene-overlay[data-ns-brain-in-view="false"] .ns-infopanel { background: rgba(9, 13, 20, 0.72); }
+
+/* Face layer label (ghost) and inset frame. */
+.ns-face-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, 0);
+  max-width: min(360px, 44vw);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.3;
+  text-align: center;
+  color: #e8eef5;
+  background: rgba(8, 12, 18, 0.7);
+  border: 1px dashed rgba(232, 238, 245, 0.45);
+}
+.ns-face-inset {
+  position: absolute;
+  box-sizing: border-box;
+  border: 2px solid rgba(232, 238, 245, 0.6);
+  border-radius: 6px;
+}
+.ns-face-inset-caption {
+  position: absolute;
+  top: 100%;
+  left: -2px;
+  right: -2px;
+  margin-top: 4px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  line-height: 1.3;
+  text-align: center;
+  background: rgba(8, 12, 18, 0.78);
+}
+
+/* Narrow / portrait: the information overlay becomes a bottom band; less important text is dropped first. */
+@media (max-aspect-ratio: 999/1000) {
+  /* R3-integrator: the panel fills the band below its top row (legend right, drag-to-look toast left). */
+  /* R3-polish: the panel hangs from the top of its slot (directly under the legend row), so a short card no longer
+     leaves an empty black gap between the legend and the panel; it still never runs past the bottom of the band. */
+  .ns-infopanel { top: calc(100% - var(--ns-gap) - var(--ns-info-portrait-vh) + var(--ns-portrait-legend-reserve)); bottom: auto; left: var(--ns-gap); width: auto; max-height: calc(var(--ns-info-portrait-vh) - var(--ns-portrait-legend-reserve)); font-size: 11.5px; }
+  /* R4-polish (R4-player 1.9, m9): in body views the legend is short (no colour key, no map note), so the short card
+     starts higher and the empty band between the legend and the panel is used (390x844: 132 -> 188 px of card). */
+  .ns-scene-overlay[data-ns-brain-in-view="false"] .ns-infopanel { top: calc(100% - var(--ns-gap) - var(--ns-info-portrait-vh) + var(--ns-portrait-legend-reserve-body)); max-height: calc(var(--ns-info-portrait-vh) - var(--ns-portrait-legend-reserve-body)); }
+  .ns-infopanel-plain { -webkit-line-clamp: 2; }
+  /* Round 3 (D3): the explanation paragraph is only the idle / glass body now (region text is in More detail). */
+  .ns-infopanel-explanation { -webkit-line-clamp: 3; }
+  .ns-infopanel-simulated, .ns-infopanel-known, .ns-infopanel-caveat { -webkit-line-clamp: 2; }
+  /* Portrait is cramped: the colour key collapses to one row of short words. */
+  .ns-legend-key { grid-template-columns: repeat(4, max-content); column-gap: 6px; margin: 5px 0 2px; }
+  .ns-legend-text { display: none; }
+  .ns-legend-short { display: inline; }
+  .ns-legend-item { gap: 4px; }
+  .ns-legend-mid { display: none; }
+  /* R558: the colour-family chips take two short lines; tighter spacing keeps the legend inside the portrait band's
+     legend slot (INFO_PANEL_PORTRAIT_LEGEND_PX). */
+  .ns-legend-families { margin: 4px 0 0; gap: 2px 8px; }
+  .ns-legend-family { line-height: 1.15; font-size: 10.5px; }
+  .ns-hud .ns-legend-key { margin: 3px 0 1px; }
+  .ns-legend-bar { height: 7px; }
+  /* R3-fix (review SL-3): the map qualifier (verbatim pinned string) stays visible in portrait too. */
+  .ns-panel-legend .ns-slot-regionNote { display: block; font-size: 10.5px; }
+  .ns-infopanel-caveats, .ns-infopanel-citations { display: none; }
+  .ns-region-label { font-size: 10.5px; max-width: 140px; white-space: normal; }
+}
+/* Round-2 fix V1: landscape at heights <= 820 px: the taller information column leaves less room, so the legend's colour
+   key uses its short words in two columns (the long words return on taller screens). */
+@media (min-aspect-ratio: 1/1) and (max-height: 820px) {
+  .ns-legend-key { grid-template-columns: repeat(2, max-content); column-gap: 14px; row-gap: 3px; }
+  .ns-legend-text { display: none; }
+  .ns-legend-short { display: inline; }
+}
+@media (max-height: 520px) {
+  .ns-infopanel-caveats, .ns-infopanel-citations { display: none; }
+}
+
+/* R3-polish (R3-player item 14, INTEGRATION 7.6): on big screens (e.g. 2560x1080) the panel, status card and legend text
+   is one step larger. The column widths stay the same (INFO_PANEL / HUD_LAYOUT mirrors), so the brain framing and the
+   arrow / label keep-out areas do not change; the taller panel still has 66vh to grow into. */
+@media (min-width: 1900px) and (min-height: 1000px) {
+  .ns-infopanel { font-size: 13px; }
+  .ns-infopanel-heading { font-size: 11.5px; }
+  .ns-infopanel-title { font-size: 20px; }
+  .ns-infopanel-tag { font-size: 13px; }
+  .ns-infopanel-plain { font-size: 14px; }
+  .ns-infopanel-rows { font-size: 12.5px; }
+  .ns-infopanel-rows dt { font-size: 11px; }
+  .ns-infopanel-simulated, .ns-infopanel-known, .ns-infopanel-caveat, .ns-infopanel-viewed, .ns-infopanel-activations,
+  .ns-infopanel-activity, .ns-infopanel-caveats, .ns-infopanel-detail-summary { font-size: 12px; }
+  .ns-infopanel[data-mode="idle"] .ns-infopanel-explanation,
+  .ns-infopanel[data-mode="glass"] .ns-infopanel-explanation { font-size: 13.5px; }
+  .ns-panel-info .ns-slot-title { font-size: 11.5px; }
+  .ns-panel-info .ns-slot-gaze { font-size: 14.5px; }
+  .ns-panel-info, .ns-panel-info .ns-slot-space, .ns-panel-info .ns-slot-note, .ns-panel-info .ns-slot-trigger { font-size: 12.5px; }
+  .ns-hud .ns-panel-legend { font-size: 12.5px; }
+  .ns-panel-legend .ns-slot-legendLabel, .ns-legend-mid { font-size: 11.5px; }
+  .ns-legend-ends, .ns-panel-legend .ns-slot-regionNote { font-size: 12px; }
+  .ns-orient { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* R4-access step 5 (R4-integrator): pseudo-elements too (the orbit-arrow captions are ::after). */
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* R4-access (D9) step 5 (R4-integrator): an explicit keyboard focus ring on the HUD's own controls (More detail summary,
+   Sources and rights, links), the same 3 px #7cc4ff ring as the orbit arrows and the Esc page (10.4:1 on the panel). */
+.ns-hud summary:focus-visible, .ns-hud a:focus-visible,
+.ns-infopanel summary:focus-visible, .ns-infopanel a:focus-visible { outline: 3px solid #7cc4ff; outline-offset: 2px; }
+
+/* ==== R5-integrate-core: R5-access colour and text-contrast rules (round5/access/proposed-glow-text.css, accepted).
+   While a glow link is shown the scene sets data-ns-glow="on" on <html>: the translucent HUD boxes a link can pass behind
+   get a darker backdrop (ns-colors GLOW.textBackdropMinAlpha 0.78), so their text keeps 4.5:1 over a link core. With no
+   link shown nothing changes. */
+html[data-ns-glow="on"] .ns-panel,
+html[data-ns-glow="on"] .ns-panel-info,
+html[data-ns-glow="on"] .ns-hover,
+html[data-ns-glow="on"] .ns-essential,
+html[data-ns-glow="on"] .ns-orient,
+html[data-ns-glow="on"] .ns-region-label:not(.ns-region-label-arm),
+html[data-ns-glow="on"] .ns-face-label,
+html[data-ns-glow="on"] .ns-scene-overlay[data-ns-brain-in-view="false"] .ns-infopanel { background-color: rgba(5, 7, 11, 0.78); }
+@media (prefers-reduced-motion: no-preference) {
+  .ns-panel, .ns-panel-info, .ns-hover, .ns-essential, .ns-orient, .ns-face-label { transition: background-color 120ms ease-out; }
+}
+/* A light 3D compass arrow can sit behind an orientation label such as "Back (posterior)": 0.66 keeps 4.5:1 (R5-access). */
+.ns-orient { background: rgba(5, 7, 11, 0.66); }
+
+/* ==== R4-access (D9) round4/access/proposed-narrow-text.css, BLOCK 1 only (R4-integrator: recommended and tested at
+   390x844). BLOCK 2 (wider portrait screens) is not applied: on long cards it pushes More detail into the panel's
+   bottom fade at 720x1280. It must stay at the END of this file (it overrides the portrait rules above). */
+/* BLOCK 1 (recommended; tested at 390x844): no visible text below 12 px, main reading lines 13 px. */
+@media (max-width: 600px) {
+  .ns-panel-info .ns-slot-title,
+  .ns-panel-info .ns-slot-trigger,
+  .ns-panel-info .ns-slot-space,
+  .ns-panel-info .ns-slot-note,
+  .ns-essential,
+  .ns-hud .ns-panel-legend,
+  .ns-panel-legend .ns-slot-legendLabel,
+  .ns-panel-legend .ns-slot-regionNote,
+  .ns-legend-ends,
+  .ns-legend-mid,
+  .ns-rights,
+  .ns-region-label,
+  .ns-scene-overlay .ns-region-label.ns-r3 .ns-region-label-hemi,
+  .ns-arrow-tip,
+  .ns-face-inset-caption,
+  .ns-infopanel,
+  .ns-infopanel-heading,
+  .ns-infopanel-viewed,
+  .ns-infopanel-activity,
+  .ns-infopanel-activations,
+  .ns-infopanel-rows,
+  .ns-infopanel-rows dt,
+  .ns-infopanel-caveat,
+  .ns-infopanel-simulated,
+  .ns-infopanel-known,
+  .ns-infopanel-explanation,
+  .ns-infopanel-caveats,
+  .ns-infopanel-citations,
+  .ns-infopanel-detail-summary,
+  .ns-infopanel-detail-body,
+  .ns-shell-root .ns-shell-section-title { font-size: 12px; }
+  .ns-infopanel-plain,
+  .ns-infopanel[data-mode="idle"] .ns-infopanel-explanation,
+  .ns-infopanel[data-mode="glass"] .ns-infopanel-explanation { font-size: 13px; }
+  /* The bigger legend must still fit the portrait band's legend slot (INFO_PANEL_PORTRAIT_LEGEND_PX = 172 px, else
+     ns-scene-three docks it over the brain): 8 px less padding. */
+  .ns-hud .ns-panel-legend { padding-top: 4px; padding-bottom: 4px; }
+  .ns-rights { margin-top: 3px; padding-top: 3px; }
+  .ns-legend-key { column-gap: 3px; }   /* the one-row colour key still fits the 320 px legend at 12 px */
+  /* The information panel sits over the body here (bottom band): a more solid backdrop keeps its text >= 4.5:1 over
+     bright bone and muscle (body views were 0.72, which measured 4.43:1 for the heading over the spine). */
+  .ns-infopanel,
+  .ns-scene-overlay[data-ns-brain-in-view="false"] .ns-infopanel { background: rgba(9, 13, 20, 0.92); }
+  /* The look-around hint: one full-width line pair just above the bottom band (it was a 34 px column, one word per
+     line, over the information panel). */
+  .ns-shell-root .ns-shell-toast { left: 12px; right: 12px; max-width: none; top: auto; transform: none;
+    bottom: calc(var(--ns-gap, 12px) + var(--ns-info-portrait-vh, 36vh) + 6px); text-align: center; }
+}
+
+
+
+/* ---- R558 (genuine note R28): the keyboard picture on the start page and the Esc page --------------------------------
+   Lit keys are the keys the game uses; faint blank keys only show where those sit on a keyboard. System sans-serif
+   (inherited). The sizes follow the view width, so the picture stays readable from a phone-sized window to a wide one. */
+/* R558 (user Message 31, symmetry): the start / Esc page's action buttons (Resume, Reset body, Reset brain view) sit as
+   one row centred in the card, on the same centre line as the keyboard picture below (one class stronger than the
+   launcher sheets' .ns-shell-actions, which left-aligned them). */
+.ns-shell-root .ns-shell-actions { justify-content: center; }
+.ns-kbd { --k: clamp(26px, 3vw, 42px); display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 26px; align-items: start;
+  margin: 10px 0 12px; padding: 12px 16px 12px; border: 1px solid rgba(232, 238, 245, 0.16); border-radius: 12px; background: rgba(232, 238, 245, 0.04); }
+.ns-kbd-title { grid-column: 1 / -1; margin: 0 0 2px; }
+.ns-kbd-board { display: grid; gap: calc(var(--k) * 0.16); justify-items: start; }
+.ns-kbd-row { display: flex; gap: calc(var(--k) * 0.16); }
+/* R558 (Messages 55 and 56): the number row; the 1 key sits half a key left of Q, as on a real keyboard. Its words
+   are written once, beside Esc in the free space right above it (the row stays narrower than the Q row). */
+.ns-kbd-row-num { padding-left: 0; }
+.ns-kbd-row-esc { align-items: center; }
+.ns-kbd-rownote { margin-left: calc(var(--k) * 0.5); max-width: calc(var(--k) * 11); font-size: max(10px, calc(var(--k) * 0.28)); font-weight: 600; line-height: 1.2; color: #cfe9f5; }
+.ns-kbd-row-q { padding-left: calc(var(--k) * 0.7); }
+.ns-kbd-row-a { padding-left: calc(var(--k) * 1.05); }
+.ns-kbd-row-z { padding-left: 0; } /* R558 (Messages 33 and 34): the wide left Shift starts the row, as on a real keyboard */
+.ns-kbd-row-space { padding-left: calc(var(--k) * 3.1); }
+.ns-kbd-key { box-sizing: border-box; flex: 0 0 calc(var(--k) * 1.42); height: var(--k); border-radius: 7px;
+  border: 1px solid rgba(232, 238, 245, 0.13); border-bottom-width: 3px; background: rgba(232, 238, 245, 0.025); }
+.ns-kbd-key.ns-kbd-on { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+  border-color: #7fd6f2; background: rgba(110, 205, 240, 0.17); color: #ffffff; line-height: 1; }
+.ns-kbd-name { font-size: calc(var(--k) * 0.4); font-weight: 800; letter-spacing: 0.02em; }
+.ns-kbd-word { font-size: max(10px, calc(var(--k) * 0.26)); font-weight: 600; color: #cfe9f5; white-space: nowrap; }
+.ns-kbd-key.ns-kbd-key-space { flex-basis: calc(var(--k) * 7.6); }
+/* R558 (Messages 55 and 56): the two arrow keys right of the space bar, a little apart from it as on a keyboard. The
+   row stays inside the Q row's width (3.1 + 7.6 + 0.4 + 2 keys and gaps = 14.26 key heights against 14.76). */
+.ns-kbd-key.ns-kbd-key-arrowleft { margin-left: calc(var(--k) * 0.4); }
+.ns-kbd-key.ns-kbd-key-escape { flex-basis: calc(var(--k) * 1.6); }
+.ns-kbd-key.ns-kbd-key-shiftleft { flex-basis: calc(var(--k) * 2.6); }
+/* R558 (Message 55): one column (title, drawing, then the three lines at the pad's full width). Beside the drawing the
+   lines had about 80 px and broke after every word. */
+.ns-kbd-pad { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; justify-items: start; min-width: 0; }
+.ns-kbd-pad-title { font-weight: 700; font-size: 13px; color: #f2f6fa; }
+.ns-kbd-pad-drawing { position: relative; width: calc(var(--k) * 2.9); height: calc(var(--k) * 2.1); border-radius: 10px;
+  border: 1px solid #7fd6f2; border-bottom-width: 3px; background: rgba(110, 205, 240, 0.1); }
+.ns-kbd-pad-finger { position: absolute; left: 34%; top: 38%; width: calc(var(--k) * 0.42); height: calc(var(--k) * 0.42); border-radius: 50%;
+  background: #ffffff; box-shadow: calc(var(--k) * 0.5) calc(var(--k) * -0.22) 0 calc(var(--k) * -0.12) rgba(255, 255, 255, 0.5), calc(var(--k) * 0.95) calc(var(--k) * -0.4) 0 calc(var(--k) * -0.16) rgba(255, 255, 255, 0.28); }
+.ns-kbd-pad-lines { margin: 0; padding: 0 0 0 16px; font-size: 13px; line-height: 1.4; color: #d6dee8; }
+.ns-kbd-pad-lines li { margin: 0 0 2px; }
+.ns-kbd-notes { grid-column: 1 / -1; font-size: 13px; line-height: 1.45; color: #d6dee8; }
+.ns-kbd-notes p { margin: 2px 0 0; }
+@media (max-width: 900px) {
+  .ns-kbd { grid-template-columns: minmax(0, 1fr); }
+  .ns-kbd-board { justify-self: center; }
+}
+@media (min-width: 900px) and (max-height: 820px) {
+  .ns-shell[data-mode="intro"] .ns-kbd { --k: clamp(24px, 2.5vw, 34px); margin: 6px 0 8px; padding: 8px 14px; }
+  .ns-shell[data-mode="intro"] .ns-kbd-notes { display: none; } /* the same words are in the Controls list beside it */
+}
+
+/* R558 (motor strip fills the view). In landscape the motor areas reach every edge of the view at the start, so the
+   panels live in the two bottom corners the areas leave free. The information panel is a SHORT card in the bottom
+   right corner (title, body part, signal meter, a clamped sentence and the "More detail" line); key R opens the full
+   card upward. The colour key folds away with it and shows above the status card (bottom left) while More detail is
+   open. On a card without More detail (plain brain glass) key R unfolds the whole card and the colour key instead
+   (data-ns-unfold on the app root, ns-app toggleInfoDetail); in body views (brain out of view) the key keeps showing its ramp. The always-on limits line at the top keeps
+   saying "a rough map". Portrait keeps its bottom band. */
+@media (min-aspect-ratio: 1/1) {
+  .ns-infopanel { top: auto; bottom: var(--ns-gap); width: min(var(--ns-info-col-px), var(--ns-info-corner-vw)); }
+  .ns-app:not([data-ns-unfold="true"]) .ns-infopanel:not(:has(.ns-infopanel-detail[open])) { max-height: var(--ns-info-short-maxvh); overflow: hidden; display: flex; flex-direction: column; }
+  .ns-app:not([data-ns-unfold="true"]) .ns-infopanel:not(:has(.ns-infopanel-detail[open])) > * { flex: none; }
+  .ns-app:not([data-ns-unfold="true"]) .ns-infopanel:not(:has(.ns-infopanel-detail[open])) :is(.ns-infopanel-simulated, .ns-infopanel-known, .ns-infopanel-caveat, .ns-infopanel-caveats, .ns-infopanel-citations, .ns-infopanel-activations) { display: none; }
+  /* R558 (Messages 44, 50 and 56, a learning tool): the compact card KEEPS its teaching rows (key, strip part,
+     movement, muscles), each as a small label over one short line, so a player always reads which part of the strip
+     drives which movement through which muscles. The long honesty lines stay inside the opened card. */
+  .ns-infopanel-rows dt { display: block; margin-top: 5px; }
+  .ns-infopanel-rows dt::after { content: none; }
+  .ns-infopanel-rows dd { display: block; font-size: 12.5px; line-height: 1.35; color: #eef3f8; }
+  .ns-infopanel-rows dd::after { content: none; }
+  /* R558 (hunt 2): the compact card also says when it shows the LAST area you looked at (one short line). */
+  .ns-app:not([data-ns-unfold="true"]) .ns-infopanel:not(:has(.ns-infopanel-detail[open])) .ns-infopanel-viewed { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ns-app:not([data-ns-unfold="true"]) .ns-infopanel:not(:has(.ns-infopanel-detail[open])) :is(.ns-infopanel-plain, .ns-infopanel-explanation) { flex: 0 1 auto; min-height: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+  .ns-app:not([data-ns-unfold="true"]) .ns-infopanel[data-ns-lead="whole"]:not(:has(.ns-infopanel-detail[open])) .ns-infopanel-plain { -webkit-line-clamp: unset; } /* (UI3, INFO_WHOLE) */
+  .ns-app:not([data-ns-unfold="true"]):not(:has(> .ns-scene-overlay[data-ns-brain-in-view="false"])):not(:has(.ns-infopanel-detail[open])) .ns-hud .ns-panel-legend { visibility: hidden; }
+  /* R558 (Messages 44 and 48): the short card shows each part whole or leaves it out. ns-scene-three fitInfoCard tries
+     the card with everything and, while it runs over, marks one more part to leave out (data-ns-trim): 1 the lead
+     sentence, 2 the signal path, 3 the muscles that work the other way, 4 the muscles that pull. The opened card
+     always shows every part. */
+  .ns-app:not([data-ns-unfold="true"]) .ns-infopanel[data-ns-trim]:not(:has(.ns-infopanel-detail[open])) .ns-infopanel-plain { flex: none; }
+  .ns-app:not([data-ns-unfold="true"]) .ns-infopanel:is([data-ns-trim="1"], [data-ns-trim="2"], [data-ns-trim="3"], [data-ns-trim="4"]):not(:has(.ns-infopanel-detail[open])) .ns-infopanel-plain { display: none; }
+  .ns-app:not([data-ns-unfold="true"]) .ns-infopanel:is([data-ns-trim="2"], [data-ns-trim="3"], [data-ns-trim="4"]):not(:has(.ns-infopanel-detail[open])) :is(.ns-infopanel-key-pathway, .ns-infopanel-row-pathway) { display: none; }
+  .ns-app:not([data-ns-unfold="true"]) .ns-infopanel:is([data-ns-trim="3"], [data-ns-trim="4"]):not(:has(.ns-infopanel-detail[open])) :is(.ns-infopanel-key-easing, .ns-infopanel-row-easing) { display: none; }
+  .ns-app:not([data-ns-unfold="true"]) .ns-infopanel[data-ns-trim="4"]:not(:has(.ns-infopanel-detail[open])) .ns-infopanel-rows { display: none; }
+}
+
+/* R558 (user Message 48, the R key: "read information ... make sure the information isn't such an eyesore ... and
+   make sure that it starts off in that mode"). The app root carries the information state (ns-app setInfoRead):
+   no attribute or "read" = the tidy side cards (the start), "more" = More detail and the colour key open,
+   "off" = cards, colour key and guide hidden. The limits line at the top always stays. A small key prompt in the
+   card's corner says what R does next; while the information is hidden a chip in the same corner says how to bring
+   it back. */
+.ns-keycap { display: inline-block; min-width: 15px; padding: 0 4px; border: 1px solid rgba(232, 238, 245, 0.55); border-bottom-width: 2px; border-radius: 4px; background: rgba(232, 238, 245, 0.08); color: #f3f6fa; font-size: 10.5px; font-weight: 700; line-height: 15px; text-align: center; }
+.ns-infopanel-heading { padding-right: 66px; }
+.ns-infopanel-keyhint { position: absolute; top: 8px; right: 10px; display: flex; align-items: center; gap: 5px; color: var(--ns-label); font-size: 10.5px; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; }
+.ns-read-chip { display: none; position: absolute; right: var(--ns-gap); bottom: var(--ns-gap); align-items: center; gap: 6px; padding: 5px 9px; border-radius: 8px; border: 1px solid var(--ns-surface-line); background: var(--ns-surface); color: var(--ns-label); font-size: 11.5px; font-weight: 600; pointer-events: none; }
+.ns-app[data-ns-read="off"] .ns-read-chip { display: flex; }
+/* !important: the landscape short-card rule above is more specific and sets display: flex. */
+.ns-app[data-ns-read="off"] .ns-infopanel,
+.ns-app[data-ns-read="off"] .ns-hud .ns-panel-info,
+.ns-app[data-ns-read="off"] .ns-hud .ns-panel-legend { display: none !important; }
+
+/* ---- R558 (Messages 55 and 56): an easier Esc page -------------------------------------------------------------------
+   The Esc page opens with the short steps and controls; this row holds the button that swaps in the full words. */
+.ns-shell-detailrow { display: flex; justify-content: flex-start; margin: 2px 0 0; }
+.ns-shell-detailrow[hidden] { display: none; }
+.ns-shell-detail-toggle { padding: 5px 12px; font-size: 13px; }
+/* The "what this game is, and is not" list in two columns on a wide card: every line stays, the page is shorter. */
+@media (min-width: 900px) {
+  .ns-shell-limits ul { columns: 2; column-gap: 30px; }
+  .ns-shell-limits li { break-inside: avoid; }
+}
+@media (min-width: 1700px) and (min-aspect-ratio: 2/1) {
+  .ns-shell-limits ul { columns: auto; }
+}

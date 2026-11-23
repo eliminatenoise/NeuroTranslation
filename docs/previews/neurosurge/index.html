@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Play the NeuroSurge movement preview with the NeuroTranslate forecast built into your browser.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="launch.css">
+  <title>NeuroSurge movement preview</title>
+</head>
+<body>
+  <header class="masthead">
+    <a class="wordmark" href="./">NeuroSurge</a>
+    <nav aria-label="Preview and project links">
+      <a href="technical.html">Technical guide</a>
+      <a href="https://eliminatenoise.github.io/NeuroSurge/">Game menu</a>
+    </nav>
+  </header>
+  <main class="layout">
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title">Movement preview</h1>
+      <p class="description">Move a virtual body with the motor strip or let it follow movement from your camera, a video or timed pictures. NeuroTranslate shows where a tracked point may appear a moment later.</p>
+      <div class="play-options" aria-label="Choose an edition">
+        <div class="edition">
+          <a class="play play-full" href="scene/example/preview.html">Play Full preview</a>
+          <p>Standard anatomy files.</p>
+        </div>
+        <div class="edition">
+          <a class="play play-lite" href="scene/example/preview.html?edition=lite">Play Lite preview</a>
+          <p>The same game with smaller anatomy files.</p>
+        </div>
+      </div>
+      <p class="requirements">Use a desktop browser with 3D graphics, a keyboard and a mouse or trackpad. For the forecast on its own, <a href="movement-mirror.html">open the standalone Movement mirror</a>.</p>
+    </section>
+    <figure class="game-view">
+      <img src="media/game-view.webp" width="1200" height="750" alt="NeuroSurge shows the coloured motor strip over the player and mirror bodies.">
+      <figcaption>The game simulates the brain and muscle activity.</figcaption>
+    </figure>
+    <section class="help" aria-label="How to play and use the model">
+      <details open>
+        <summary>Follow a movement and replay it</summary>
+        <ol>
+          <li>Press <kbd>C</kbd> for the Movement mirror. Choose <strong>Start camera</strong> to let the browser ask for video access. You can choose a local video or timed pictures instead. The images stay on your device.</li>
+          <li>Use <strong>Body follows</strong> to choose the arms or knees the virtual body will follow. Choose a separate marker under <strong>Point to forecast</strong>. After five usable images, the amber ring shows where that point may appear 0.12 seconds later.</li>
+          <li>Choose <strong>Save take</strong> and <strong>Open Command box</strong>. Enter <strong>replay my take</strong> to move the virtual body from the saved poses. The camera stops when the Command box opens. You can also open it with <kbd>F</kbd> to enter a supported move such as “bend my right elbow”. If your browser offers dictation on the device, choose <strong>Use voice</strong> and check the words before submitting.</li>
+        </ol>
+        <div class="resource-links">
+          <a href="PLAYER-GUIDE.html">Simple player guide</a>
+          <a href="PLAYER-GUIDE-TECHNICAL.html">Technical player guide</a>
+        </div>
+      </details>
+      <details open id="local-model">
+        <summary>Forecasts, local play and credits</summary>
+        <p>The point model learned from tracked animal movement. Its accuracy on human camera images remains unmeasured. The browser runs the included weights. The separate fingertip touch study uses the optional local launcher.</p>
+        <div class="resource-links">
+          <a href="https://github.com/eliminatenoise/NeuroSurge/releases/tag/lite-browser-forecast-2026-11-24">Offline Lite download and setup</a>
+          <a href="START.html#local-model">Local NeuroTranslate workbench and fingertip setup</a>
+          <a href="scene/src/joint/model/NOTICE.html">Model, data and licence credits</a>
+          <a href="CREDITS-AND-LICENCES.md">Game and anatomy credits</a>
+        </div>
+      </details>
+    </section>
+  </main>
+</body>
+</html>

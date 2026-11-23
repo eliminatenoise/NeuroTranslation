@@ -1,0 +1,433 @@
+/** R266 source-derived engineering reference graph. R22 selects a110degree display FOV default; this is not a measured anatomical eye or physiological field of view. */
+import { DEG, multiply, translation, rotationY, lookRotation, rigidInverse, transformDirection, bpToWorldAxes } from './ns-math.mjs';
+const known = new WeakSet();
+const fail = m => { throw new Error('ns:reference_graph: ' + m); };
+const vec = (v, name) => { if (!(Array.isArray(v) || ArrayBuffer.isView(v)) || v.length !== 3 || !Array.from(v).every(Number.isFinite)) fail(name + ' must be three finite numbers'); return Array.from(v); };
+const angles = (v, limit, name) => {
+  if (v == null) return Object.freeze({ yaw: 0, pitch: 0 });
+  if (!v || typeof v !== 'object' || Object.keys(v).some(k => k !== 'yaw' && k !== 'pitch') || !Number.isFinite(v.yaw) || !Number.isFinite(v.pitch) || Math.abs(v.pitch) > limit) fail(name + ' needs finite yaw/pitch RADIANS within the source pitch limit');
+  return Object.freeze({ yaw: v.yaw, pitch: v.pitch });
+};
+function bounds(map) {
+  if (!(map instanceof Map)) fail('validated source mesh Map required');
+  const lo = [Infinity, Infinity, Infinity], hi = [-Infinity, -Infinity, -Infinity]; let n = 0;
+  for (const rec of map.values()) {
+    const p = rec && (rec.mesh ? rec.mesh.positions : rec.positions);
+    if (!p || !p.length || p.length % 3) fail('source positions required');
+    for (let i = 0; i < p.length; i++) { if (!Number.isFinite(p[i])) fail('nonfinite source position'); const k = i % 3; lo[k] = Math.min(lo[k], p[i]); hi[k] = Math.max(hi[k], p[i]); }
+    n++;
+  }
+  if (!n) fail('complete source reference records required');
+  return { lo, hi, n };
+}
+/** Pure option preflight; source selection is resolved only after the normal validated assets and body anchor exist. */
+export function referenceOptions(options, pitchLimitRad = 80 * DEG) {
+  if (!options || typeof options !== 'object' || Array.isArray(options) || Object.keys(options).some(k => !['reference', 'initialLook', 'initialBrainPlacement', 'fovYDeg'].includes(k))) fail('unknown viewGraph option or units');
+  if (!(Number.isFinite(pitchLimitRad) && pitchLimitRad >= 0)) fail('actual Controls pitch limit required');
+  const reference = options.reference === undefined ? 'eye' : options.reference;
+  if (!['eye', 'posterior-brain-bound'].includes(reference)) fail('unsupported source reference selector');
+  const fovYDeg = options.fovYDeg === undefined ? 110 : options.fovYDeg;
+  // 18 November 2026, late (package FLAT): the eye view is a longer lens from further back (ns-camera EYE_DOLLY; the
+  // launcher's 50 degrees), so the lower bound is 30 (was 70); the upper bound is unchanged.
+  if (!(Number.isFinite(fovYDeg) && fovYDeg >= 30 && fovYDeg <= 120)) fail('base FOV must remain inside 30..120 degrees');
+  return Object.freeze({ reference, fovYDeg, initialLook: angles(options.initialLook, Math.min(80 * DEG, pitchLimitRad), 'initialLook'), initialBrainPlacement: angles(options.initialBrainPlacement, 75 * DEG, 'initialBrainPlacement') });
+}
+/** Call only after normal Assets hash/schema/parser validation. Selectors derive coordinates, never accept a guessed BP point. */
+export function createReferenceGraph(options, { eye, brainMeshes, rootAnchor, pitchLimitRad = 80 * DEG } = {}) {
+  if (options == null) return null;
+  const selected = referenceOptions(options, pitchLimitRad);
+  if (!eye || eye.source !== 'skull_orbits') fail('normal validated lacrimal eye estimate required');
+  const originalEyeBp = vec(eye.eyeBp, 'original source display-eye estimate');
+  if (!(Number.isFinite(pitchLimitRad) && pitchLimitRad >= 0)) fail('actual Controls pitch limit required');
+  const reference = selected.reference;
+  const referenceBp = originalEyeBp.slice();
+  if (reference === 'posterior-brain-bound') {
+    const b = bounds(brainMeshes); if (b.n !== 59) fail('all59 normally validated brain meshes required');
+    referenceBp[1] = b.hi[1];
+  }
+  if (!rootAnchor || rootAnchor.kind !== 'ns-body-root-anchor-r266' || rootAnchor.anchor !== 'pelvis') fail('actual body producer pelvis anchor required');
+  const rootAnchorBp = Object.freeze(vec(rootAnchor.pointBp, 'rig-derived corrected pelvis anchor mm'));
+  const fovYDeg = selected.fovYDeg;
+  const graph = Object.freeze({ kind: 'ns-reference-graph-r266', reference, originalEyeBp: Object.freeze(originalEyeBp), referenceBp: Object.freeze(referenceBp),
+    rootAnchorBp, rootAnchorMeaning: rootAnchor.meaning, pitchLimitRad: Math.min(80 * DEG, pitchLimitRad), initialLook: selected.initialLook,
+    initialBrainPlacement: selected.initialBrainPlacement, fovYDeg,
+    meaning: 'Engineering source-derived display reference; not measured eye, cranial surface or normal biomechanics', source: 'normal Assets-validated source geometry; no raw coordinate option' });
+  known.add(graph); return graph;
+}
+export function requireReferenceGraph(graph, originalEyeBp) {
+  if (!known.has(graph)) fail('use createReferenceGraph on normally validated source inputs');
+  if (originalEyeBp && graph.originalEyeBp.some((v, i) => v !== originalEyeBp[i])) fail('original-eye source mismatch');
+  return graph;
+}
+/** General yaw: add q-Ry(b)q for actual baked pelvis point q, fixing that world root while retaining source bodyYaw. */
+export function frameForAttachment(graph, attachment, neckShiftBp) {
+  requireReferenceGraph(graph); const n = vec(neckShiftBp, 'source neck shift mm');
+  const delta = graph.referenceBp.map((v, i) => v - graph.originalEyeBp[i] + n[i]);
+  const ax = transformDirection(bpToWorldAxes(), delta).map(v => v * 0.001);
+  const bodyRotation = rotationY(attachment.bodyYaw);
+  const offset = transformDirection(bodyRotation, ax);
+  const root0 = transformDirection(bpToWorldAxes(), graph.rootAnchorBp.map((v, i) => v - graph.originalEyeBp[i])).map(v => v * 0.001);
+  const rotatedRoot = transformDirection(bodyRotation, root0);
+  const rootCorrection = root0.map((v, i) => v - rotatedRoot[i]);
+  const position = offset.map((v, i) => v + rootCorrection[i]);
+  const eyeToWorld = multiply(translation(position), attachment.cameraToWorld);
+  const bodyToWorld = multiply(translation(position), attachment.bodyToWorld);
+  return { position, rootCorrection, fixedPelvisWorldM: root0, pelvisAnchorBp: graph.rootAnchorBp.slice(), bodyToWorld, eyeToWorld, worldToEye: rigidInverse(eyeToWorld), eyeBp: graph.originalEyeBp.slice(), bodyYaw: attachment.bodyYaw };
+}
+export function applyAttachment(attachment, frame) {
+  return { ...attachment, bodyToWorld: frame.bodyToWorld, cameraToWorld: frame.eyeToWorld, worldToCamera: frame.worldToEye };
+}
+const carry = (view, actualTransform) => {
+  const a = actualTransform ? { yaw: actualTransform.grabYaw, pitch: actualTransform.grabPitch } : view.offset;
+  if (!a || !Number.isFinite(a.yaw) || !Number.isFinite(a.pitch)) fail('finite actual brain carry radians required');
+  return lookRotation(a.yaw, a.pitch);
+};
+export function initialBrainState(origin, initialPivotWorld = null) {
+  return { translation: vec(origin, 'initial brain origin m'), anchor: null,
+    pivotWorld: initialPivotWorld ? vec(initialPivotWorld, 'configured initial world pivot') : null,
+    initialPivotWorld: initialPivotWorld ? vec(initialPivotWorld, 'configured initial world pivot') : null };
+}
+/** Maintain a world pivot across release/resize. During held carry rotate about the actual grab camera, not world0. */
+export function advanceBrainState(state, view, origin, actualTransform) {
+  if (!state || !view || !view.grab || !actualTransform) fail('constructor-owned brain state/view and actual transform required');
+  const o = vec(origin, 'camera origin m'), k = carry(view, actualTransform), rawPivot = vec(actualTransform.pivotWorld, 'actual brain pivot');
+  const priorShift = vec(state.translation, 'persistent brain world translation');
+  let pivotWorld = state.pivotWorld ? vec(state.pivotWorld, 'persistent world pivot') : rawPivot.map((v, i) => v + priorShift[i]);
+  let anchor = state.anchor;
+  if (anchor) {
+    if (!anchor.carry || anchor.carry.length !== 16 || !Array.from(anchor.carry).every(Number.isFinite)) fail('finite retained carry matrix required');
+    const start = vec(anchor.origin, 'grab origin'), pivot = vec(anchor.pivotWorld, 'grab world pivot');
+    const d = multiply(k, rigidInverse(anchor.carry));
+    const q = transformDirection(d, pivot.map((v, i) => v - start[i]));
+    pivotWorld = o.map((v, i) => v + q[i]);
+  }
+  const shift = pivotWorld.map((v, i) => v - rawPivot[i]);
+  if (view.grab.active && !anchor) anchor = { origin: o.slice(), carry: Array.from(k), pivotWorld: pivotWorld.slice() };
+  if (!view.grab.active) anchor = null;
+  return { translation: shift, pivotWorld, anchor,
+    initialPivotWorld: state.initialPivotWorld ? vec(state.initialPivotWorld, 'configured initial world pivot') : pivotWorld.slice() };
+}
+/** R22: translate the already-carried brain without losing its next-frame mouse anchor. */
+export function offsetBrainState(state, view, actualTransform, movementWorld) {
+  const delta = vec(movementWorld, 'brain keyboard movement world m');
+  if (delta.every(v => v === 0)) return state;
+  let anchor = state.anchor;
+  if (anchor) {
+    const relative = multiply(carry(view, actualTransform), rigidInverse(anchor.carry));
+    const atStart = transformDirection(rigidInverse(relative), delta);
+    anchor = { ...anchor, pivotWorld: vec(anchor.pivotWorld, 'brain anchor').map((v, i) => v + atStart[i]) };
+  }
+  return { ...state, translation: vec(state.translation, 'brain translation').map((v, i) => v + delta[i]),
+    pivotWorld: vec(state.pivotWorld, 'brain pivot').map((v, i) => v + delta[i]), anchor };
+}
+/** R558 (display choice, hunt 2 look #9: a mirror body carried close and to the side was badly stretched by the wide
+ * view, Message 13 "not absurd ... optical perspective effects"): W/A/S/D keep a carried mirror body's centre within
+ * maxSideDeg of the straight-ahead direction (sideways in the level ground frame). A mirror body already farther out
+ * (released there, then the view turned) may come back in but not go farther out. Chosen over keeping its nearest point
+ * about 1 m from the eye, which would have stopped it short of your body (the start reflection already sits at that
+ * distance) against Message 12 ("moved to and around each other"); straight ahead it can still be brought up to your
+ * body, where the stop-at-contact rule holds it. */
+export const MIRROR_CARRY = Object.freeze({ maxSideDeg: 35 });
+/**
+ * 19 November 2026 (the owner: "XZ plane with grasp WASD should be consistent between the mirror body and the brain
+ * should move much faster."). How W / A / S / D move a held thing, the brain and the mirror body alike:
+ *  ratePerS  the speed is this share of the thing's own level distance from you per second, so both cross the
+ *            picture at the same pace whatever their distance: A / D swing it about 40 degrees of bearing a second,
+ *            W / S change its distance by that share a second (a held brain comes from its start place to your feet
+ *            in about a second and a half; the mirror body crosses its range in about one);
+ *  easeS     the speed eases in and out over about this long (no jerk at the press, no dead stop at the release);
+ *  minDistM  the distance the speed is counted from when the thing is nearer than this.
+ * Before, the brain moved 1 m a second at 7.5 m (it crawled) and the mirror body 1 m a second at 2 m. Display choices. */
+export const CARRY_KEYS = Object.freeze({ ratePerS: 0.7, easeS: 0.1, minDistM: 0.8 });
+/**
+ * 19 November 2026 (the owner: "let's also change it such that we can move both the mirror body and the brain into
+ * ourselves. And basically through ourselves and through anything."). true: a carried brain or mirror body is stopped
+ * by nothing. The brain's key range is twice its start distance (to you, through you and as far again behind); the
+ * mirror body's near limit is gone (its W / S range runs from farM in front to farM behind) and a press takes hold of
+ * it at any distance, also when it stands in you. The app's stop-at-contact guards are switched off with the same
+ * constant (ns-app guardMirror / guardBrain). false: the rules of before (Message 12: things stop where they touch).
+ */
+export const CARRY_THROUGH = true;
+/**
+ * 22 November 2026 (browser hunt of update 64, H9: a brain carried behind you with S and let go was in neither view, and
+ * nothing said how to get it back; the lost-brain line knew only the look's carry and sat on a card the default reading
+ * level hides). CARRY_THROUGH stays (the owner asked for carrying through yourself), so the game says it instead: the
+ * brain counts as BEHIND you when its centre lies behind the eye's start place along the start's straight-ahead
+ * direction (level, x and z only) by more than behindM, and the look is not turned toward it (the cosine between the
+ * look's level direction and the brain's is below facingCos: turned round, the brain is in view again and the line
+ * goes). Display choices.
+ */
+export const BRAIN_BEHIND = Object.freeze({ behindM: 0, facingCos: 0 });
+/** PURE: is the brain behind you (BRAIN_BEHIND)? centre: the brain's centre, eye: the eye's start place (world m);
+ * startYaw / lookYaw: the start look's and the look's turn (rad; yaw 0 looks along -z). False for missing input. */
+export function brainBehind({ centre, eye, startYaw = 0, lookYaw = 0, rules = BRAIN_BEHIND } = {}) {
+  if (!centre || !eye || centre.length !== 3 || eye.length !== 3) return false;
+  const vx = centre[0] - eye[0], vz = centre[2] - eye[2];
+  if (![vx, vz, startYaw, lookYaw].every(Number.isFinite)) return false;
+  const ahead = -vx * Math.sin(startYaw) - vz * Math.cos(startYaw);
+  if (!(ahead < -rules.behindM)) return false;
+  const n = Math.hypot(vx, vz);
+  const facing = n > 1e-6 ? (-vx * Math.sin(lookYaw) - vz * Math.cos(lookYaw)) / n : 1;
+  return facing < rules.facingCos;
+}
+/** PURE (22 November 2026, H9, second pass after a check): which lost-brain words the tip by the crosshair says, if any.
+ * behind: brainBehind; away: the old lost-brain line's case (the look carried the brain far from where you look);
+ * seenShare: the share of the brain's sample points in the picture (the scene's overlayObstacles brainSeenShare; null =
+ * not known). Words only while none of the brain is in the picture (seenShare exactly 0): 'behind', else 'away', else
+ * null. The first pass said "behind you" with the look turned 86 degrees and the strip filling a third of the picture,
+ * and "out of sight" (by the old line's 0.7 rad) while half the brain was on screen. */
+export function brainLostWords({ behind = false, away = false, seenShare = null } = {}) {
+  if (seenShare !== 0) return null;
+  return behind ? 'behind' : away ? 'away' : null;
+}
+/**
+ * 22 November 2026 (UI3, a check of update 67, finding 4: in the view from outside, E, "The brain is behind you" showed
+ * while large pink pieces of the brain filled both edges of the picture; the brain carried behind you lay round the
+ * camera, so none of its sample points was in the picture although its surface was). boundsToo true: the share the tips
+ * read counts as not known (no lost-brain words) while none of the brain's sample points is in the picture but the box
+ * round the points in front of the camera meets it (the scene's brainBoundsMeet). In the eye view after the same carry
+ * every point lies behind the camera, so the tip there is unchanged. false: the share alone, as in section 196. Display
+ * choice. */
+export const BRAIN_LOST = Object.freeze({ boundsToo: true });
+/** PURE (BRAIN_LOST): the share of the brain in the picture as the lost-brain words read it (brainLostWords, the HUD's
+ * brainAway): `share` itself, or null (not known) when it is 0 and `boundsMeet` is true. */
+export function brainSeenForTip({ share = null, boundsMeet = null, rules = BRAIN_LOST } = {}) {
+  if (!Number.isFinite(share)) return null;
+  return share === 0 && rules.boundsToo && boundsMeet === true ? null : share;
+}
+export function initialObjectCarry() {
+  return { held: false, target: null, lastPick: null, lastLook: null, lastOrigin: null, brainKeyOffset: [0, 0, 0], keyVel: [0, 0], mirror: null, diagnostic: null };
+}
+export function offsetMirrorCarry(state, movementWorld) {
+  const delta = vec(movementWorld, 'post-pose mirror placement delta');
+  if (delta.every(x => x === 0)) return state;
+  if (!state || !state.mirror || !state.held || state.target !== 'mirror') fail('only a held mirror can reconcile placement');
+  const m = state.mirror; let anchor = m.anchor;
+  if (anchor) {
+    // R17: the held mirror body follows the whole look (turn and up / down), as the brain does (see stepObjectCarry).
+    const relative = multiply(lookRotation(state.lastLook.yaw, state.lastLook.pitch), rigidInverse(lookRotation(anchor.startLook.yaw, anchor.startLook.pitch)));
+    const local = transformDirection(rigidInverse(relative), delta);
+    anchor = { ...anchor, pivotWorld: anchor.pivotWorld.map((x, i) => x + local[i]) };
+  }
+  return { ...state, mirror: { ...m, anchor, centreWorldM: m.centreWorldM.map((x, i) => x + delta[i]) } };
+}
+/** R558 (Message 12): move the mirror body's carried place by `movementWorld` whether it is held or not (the app folds a
+ * held-back share of a move into it, so the carry never runs on inside your body). While it is held, the look anchor is
+ * moved with it (as offsetMirrorCarry), so the look and keys carry on from the new place. */
+export function shiftMirrorCarry(state, movementWorld) {
+  const delta = vec(movementWorld, 'mirror placement shift');
+  if (delta.every(x => x === 0) || !state || !state.mirror) return state;
+  if (state.held && state.target === 'mirror' && state.mirror.anchor) return offsetMirrorCarry(state, delta);
+  return { ...state, mirror: { ...state.mirror, centreWorldM: vec(state.mirror.centreWorldM, 'persistent mirror centre').map((x, i) => x + delta[i]) } };
+}
+export function clearObjectCarry(state) {
+  const s = state || initialObjectCarry();
+  return { ...s, held: false, target: null, lastPick: null, keyVel: [0, 0],
+    mirror: s.mirror ? { ...s.mirror, anchor: null } : null,
+    diagnostic: { status: 'released-by-safety', target: null } };
+}
+/** Pure event/placement reducer only: no activity/FK/IK/clock/scene work.
+ * The pick event has the SAME ordering as the existing activity gaze event: first at equal timestamps.
+ * Keys use only their held-time coverage times the App's existing poseDt/wallDt ratio. */
+export function stepObjectCarry(previous, { pick = null, events = [], gazeAt = 0, axes = { x: 0, z: 0 }, wallDt = 0, poseDt = 0,
+  origin, look, brainView, brainTransform, brainCentre, brainTranslation, brainFrame, referenceOrigin, viewport, constrainBrainMovement = null } = {}) {
+  const prior = previous || initialObjectCarry(), o = vec(origin, 'active camera origin');
+  if (!look || !Number.isFinite(look.yaw) || !Number.isFinite(look.pitch)) fail('finite active carry look required');
+  if (!Array.isArray(events) || !Number.isFinite(wallDt) || wallDt < 0 || !Number.isFinite(poseDt) || poseDt < 0 || poseDt > wallDt || !Number.isFinite(gazeAt) || gazeAt < 0) fail('original carry event timing required');
+  const axis = [Number(axes.x), Number(axes.z)];
+  if (!axis.every(Number.isFinite)) fail('finite carry axes required');
+  const axisNorm = Math.hypot(...axis); if (axisNorm > 1) { axis[0] /= axisNorm; axis[1] /= axisNorm; }
+  const cameraRotation = lookRotation(look.yaw, look.pitch), k = carry(brainView, brainTransform), invK = rigidInverse(k);
+  let held = prior.held === true, target = held ? prior.target : null, lastPick = prior.lastPick;
+  let keys = vec(prior.brainKeyOffset, 'persistent brain key offset');
+  let mirror = prior.mirror ? { ...prior.mirror, centreWorldM: vec(prior.mirror.centreWorldM, 'persistent mirror centre'), anchor: prior.mirror.anchor ? { ...prior.mirror.anchor } : null } : null;
+  const brainMovementWorld = [0, 0, 0];
+  const clearance = brainFrame && brainFrame.clearanceM, minimum = brainFrame && brainFrame.minBrainDistanceM, reach = brainFrame && brainFrame.reachM;
+  const reference = vec(referenceOrigin, 'initial brain reference origin');
+  const previousKeysWorld = transformDirection(k, keys);
+  const baselineTranslation = vec(brainTranslation, 'actual brain translation').map((v, i) => v - previousKeysWorld[i]);
+  const cameraShift = Math.hypot(...o.map((v, i) => v - baselineTranslation[i]));
+  if (![clearance, minimum, reach].every(Number.isFinite) || !(clearance > 0 && reach > 0 && minimum >= reach)) fail('existing full brain clearance metadata unavailable');
+  // The old global minimum is diagnostic context only: equality with reach+clearance must NOT disable W-away or safe lateral movement.
+  // A brain sphere around its centre can enclose the eye in the intentional motor-focused view; it is NOT used to invent a near radius.
+  // R558 (user Message 12: the items "can be moved to and around each other but not through"): the W/A/S/D offset may
+  // reach as far as the brain's centre is from the camera now (so S can bring it all the way up to your body and W push
+  // it out as far again); the app's stop-at-contact rule (ns-collide, after the step) keeps it from touching your body
+  // or the mirror body and out of your left hand's reach. The earlier budget (the 1 m clearance) kept the brain out of
+  // reach by design, which Message 12 overturns.
+  // 19 November 2026: the budget is the distance of the brain's OWN place (without the key offset), not of where the
+  // keys have brought it. Counted from where it is now, the budget shrank as S pulled the brain in, and the brain
+  // stopped half way to you (offset = start distance - distance <= distance).
+  const ownPlace = Array.isArray(brainCentre) || ArrayBuffer.isView(brainCentre) ? Array.from(brainCentre).map((v, i) => v - previousKeysWorld[i] - o[i]) : null;
+  const centreNow = ownPlace ? Math.hypot(...ownPlace) : 0;
+  const keyBudgetM = (CARRY_THROUGH ? 2 : 1) * Math.max(clearance, Number.isFinite(centreNow) ? centreNow : 0); // finite workspace
+  const bounds = { brainKeyFarOffsetM: keyBudgetM, originalMinBrainDistanceM: minimum, originalReachM: reach, originalClearanceM: clearance, cameraReferenceShiftM: cameraShift, initialReferenceOriginM: reference, baselineClearanceLowerBoundM: minimum - cameraShift, unchangedRequiredMinimumM: reach + clearance, clearanceStatus: 'near bound checked against actual transformed source sample balls; global scalar is context only' };
+  let heldPoseS = 0, clamped = false, selected = null, brainClearance = null, refused = null;
+  let carryLook = prior.lastLook ? { ...prior.lastLook } : { ...look };
+  let carryOrigin = prior.lastOrigin ? vec(prior.lastOrigin, 'previous active camera origin') : o.slice();
+  // R17 (owner, 17 November: "When it comes to the mirror body, up and down, you need to be able to move up and down";
+  // this overturns the R558 rule that a carried mirror body never leaves the ground): a held mirror body follows the
+  // whole look about the eye (its turn AND its up / down), exactly as the held brain does. W/A/S/D still move it level
+  // (X and Z), whatever its height. (19 November 2026: the pointer's own shift of a held item is withdrawn; the pointer
+  // turns the look, and the look carries the item.)
+  const mirrorRotation = a => multiply(lookRotation(carryLook.yaw, carryLook.pitch), rigidInverse(lookRotation(a.startLook.yaw, a.startLook.pitch)));
+  const groundRotation = lookRotation(look.yaw, 0);
+  const followMirror = () => {
+    if (!held || target !== 'mirror' || !mirror || !mirror.anchor) return;
+    const d = mirrorRotation(mirror.anchor), q = transformDirection(d, mirror.anchor.pivotWorld.map((v, i) => v - mirror.anchor.origin[i]));
+    mirror.centreWorldM = [carryOrigin[0] + q[0], carryOrigin[1] + q[1], carryOrigin[2] + q[2]];
+  };
+  let keyVel = Array.isArray(prior.keyVel) && prior.keyVel.length === 2 && prior.keyVel.every(Number.isFinite) ? prior.keyVel.slice() : [0, 0];
+  const hold = seconds => {
+    if (!held || !target || !(seconds > 0)) return;
+    const dt = wallDt > 0 ? seconds * poseDt / wallDt : 0; heldPoseS += dt;
+    if (!(dt > 0)) return;
+    // CARRY_KEYS: one rule for the brain and the mirror body. The speed follows the held thing's level distance from
+    // you (the same pace across the picture for both) and eases toward the keys' direction.
+    const at = target === 'mirror' && mirror ? mirror.centreWorldM : Array.from(brainCentre).map((v, i) => v + brainMovementWorld[i]);
+    const dist = Math.max(CARRY_KEYS.minDistM, Math.hypot(at[0] - o[0], at[2] - o[2]));
+    const k = 1 - Math.exp(-dt / CARRY_KEYS.easeS), v0 = keyVel.slice();
+    keyVel = [keyVel[0] + (axis[0] - keyVel[0]) * k, keyVel[1] + (axis[1] - keyVel[1]) * k];
+    if (axisNorm === 0 && Math.hypot(keyVel[0], keyVel[1]) < 0.02) keyVel = [0, 0];
+    // the eased speed's mean over this step (exact for the exponential ease), so a long frame moves as far as short ones
+    const mean = i => axis[i] + (v0[i] - axis[i]) * (CARRY_KEYS.easeS / dt) * k;
+    const mx = mean(0), mz = mean(1);
+    if (mx === 0 && mz === 0) return;
+    const step = CARRY_KEYS.ratePerS * dist * dt;
+    // R558 (Message 2: W/S forward / back, A/D left / right, "not up and down as grasped cursor does that"): both held
+    // items move in the LEVEL ground frame (the look's turn only); looking up / down carries them up / down. (The brain
+    // used the camera frame, pitch included, so S on a brain seen from below moved it down onto your body.)
+    moveHeld(transformDirection(groundRotation, [mx * step, 0, -mz * step]), true);
+  };
+  /** Move the held item by a world delta (m). keyed: a W/A/S/D move (the mirror body's near / far / sideways key limits
+   * apply and its height stays). */
+  const moveHeld = (delta, keyed) => {
+    if (target === 'brain') {
+      // 19 November 2026 (a check: A or D carried a held brain 45 to 53 degrees to the side, out of the picture, while
+      // the mirror body stopped at 35): the keys' sideways limit is the mirror body's own (MIRROR_CARRY.maxSideDeg of
+      // straight ahead of the look, as an angle; a brain already farther out is not pulled in, it only goes no farther).
+      if (keyed && (Array.isArray(brainCentre) || ArrayBuffer.isView(brainCentre))) {
+        const gi = rigidInverse(groundRotation), now = Array.from(brainCentre).map((v, i) => v + brainMovementWorld[i] - o[i]);
+        const lb = transformDirection(gi, now), ln = transformDirection(gi, now.map((v, i) => v + delta[i]));
+        const depthB = Math.max(0.5, -lb[2]), depthN = Math.max(0.5, -ln[2]);
+        const maxX = depthN * Math.max(Math.tan(MIRROR_CARRY.maxSideDeg * DEG), Math.abs(lb[0]) / depthB);
+        const cx = Math.max(-maxX, Math.min(maxX, ln[0]));
+        if (cx !== ln[0]) { ln[0] = cx; clamped = true; const w = transformDirection(groundRotation, ln); delta = w.map((v, i) => v - now[i]); }
+      }
+      const localDelta = transformDirection(invK, delta), next = keys.map((v, i) => v + localDelta[i]);
+      const n = Math.hypot(...next); if (n > keyBudgetM) { next.forEach((v, i) => { next[i] = n > 0 ? v * keyBudgetM / n : 0; }); clamped = true; }
+      if (typeof constrainBrainMovement !== 'function') fail('current whole-brain source clearance constraint unavailable');
+      const requested = transformDirection(k, next.map((v, i) => v - keys[i]));
+      const checked = constrainBrainMovement(requested, brainMovementWorld);
+      const actual = vec(checked.movement, 'certified brain translation'); brainClearance = checked.diagnostic;
+      clamped = clamped || checked.diagnostic.acceptedFraction !== 1;
+      const acceptedLocal = transformDirection(invK, actual); keys = keys.map((v, i) => v + acceptedLocal[i]);
+      actual.forEach((v, i) => { brainMovementWorld[i] += v; });
+    } else if (target === 'mirror' && mirror && mirror.anchor) {
+      const before = mirror.centreWorldM, next = before.map((v, i) => v + delta[i]);
+      if (keyed) {
+        // R558: the near / far limits and the sideways limit in the horizontal (yaw-only) frame; the height stays.
+        const local = transformDirection(rigidInverse(groundRotation), next.map((v, i) => v - o[i]));
+        let depth = -local[2]; const b = mirror.bounds;
+        // R17: a lifted mirror body keeps its level depth (the far cap never pulls it in because of its height).
+        const depthNow = -transformDirection(rigidInverse(groundRotation), before.map((v, i) => v - o[i]))[2];
+        const far = Math.max(Math.sqrt(Math.max(0, b.farM * b.farM - local[1] * local[1])), depthNow);
+        const nearLimit = CARRY_THROUGH ? -Math.max(b.nearM, far) : b.nearM; // through you and as far again behind
+        const wantedDepth = depth; depth = Math.max(nearLimit, Math.min(Math.max(b.nearM, far), depth));
+        // Sideways: inside the view, and within MIRROR_CARRY.maxSideDeg of straight ahead (or no farther out than now).
+        // R558 (hunt 3): "no farther out" is an ANGLE (sideways over depth), not a sideways distance: kept as a distance,
+        // S (pulling it in) let the angle grow to the edge of the view. The depth before is floored at nearM.
+        const lb = transformDirection(rigidInverse(groundRotation), before.map((v, i) => v - o[i]));
+        const xBefore = lb[0], depthBefore = Math.max(b.nearM, -lb[2]);
+        const tan = Math.tan(viewport.fovYDeg * DEG / 2), side = Math.tan(MIRROR_CARRY.maxSideDeg * DEG);
+        // (CARRY_THROUGH: near you and behind you the sideways room is that of the near limit's distance, not nothing)
+        const depthX = CARRY_THROUGH ? Math.max(b.nearM, Math.abs(depth)) : depth;
+        const maxX = Math.min(depthX * tan * viewport.aspect, depthX * Math.max(side, Math.abs(xBefore) / depthBefore));
+        const wantedX = local[0]; local[0] = Math.max(-maxX, Math.min(maxX, local[0])); local[2] = -depth;
+        const world = transformDirection(groundRotation, local); next.splice(0, 3, ...world.map((v, i) => v + o[i]));
+        next[1] = before[1];
+        clamped = clamped || wantedDepth !== depth || wantedX !== local[0];
+      }
+      const actual = next.map((v, i) => v - before[i]), d = mirrorRotation(mirror.anchor), inAnchor = transformDirection(rigidInverse(d), actual);
+      mirror.anchor = { ...mirror.anchor, pivotWorld: mirror.anchor.pivotWorld.map((v, i) => v + inAnchor[i]) };
+      mirror.centreWorldM = next;
+    }
+  };
+  const timeline = [{ type: 'pick', at: Math.min(gazeAt, wallDt), order: 0, value: pick }];
+  // R558 (user Message 40): a Space hold or tap grasps ({ type: 'grasp', down, target? }; ns-controls SPACE_GESTURE; the
+  // F key is gone). A grasp of one of your own limbs (target 'limb') is the app's, not a carry of the brain or the mirror body.
+  events.forEach((ev, i) => {
+    if (!ev || ev.type !== 'grasp') return;
+    if (typeof ev.down !== 'boolean' || (ev.at !== undefined && !(Number.isFinite(ev.at) && ev.at >= 0))) fail('original grasp event required');
+    // R558 (hunt 2 code #4): a press labelled with what it was aimed at (ev.target: 'brain' | 'mirror' | 'limb' | null, and
+    // ev.pick, the pick at the press point) holds exactly that; null holds nothing. Only an unlabelled press falls back
+    // to this frame's crosshair pick.
+    const labelled = Object.prototype.hasOwnProperty.call(ev, 'target');
+    timeline.push({ type: 'grasp', at: Math.min(ev.at === undefined ? 0 : ev.at, wallDt), order: i + 1, down: ev.down, limb: ev.target === 'limb',
+      labelled, target: labelled ? ev.target : undefined, pick: ev.pick && typeof ev.pick === 'object' ? ev.pick : null });
+  });
+  timeline.sort((a, b) => a.at - b.at || a.order - b.order);
+  let cursor = 0;
+  for (const ev of timeline) {
+    hold(ev.at - cursor); cursor = ev.at;
+    if (ev.type === 'pick') {
+      carryLook = { ...look }; carryOrigin = o.slice(); followMirror();
+      if (mirror && ev.value && ev.value.mirrorEnvelope) {
+        const radius = ev.value.mirrorEnvelope.radiusM;
+        if (!(Number.isFinite(radius) && radius > 0)) fail('complete current mirror radius required');
+        mirror.radiusM = radius;
+        if (radius + viewport.nearM > mirror.bounds.farM) fail('current mirror geometry exceeds original finite far cap');
+        mirror.bounds = { ...mirror.bounds, nearM: radius + viewport.nearM };
+      }
+      lastPick = ev.value && ['brain', 'mirror'].includes(ev.value.target) ? { ...ev.value, look: { ...look }, origin: o.slice() } : null; continue;
+    }
+    if (ev.down && !held) {
+      if (ev.limb) continue;
+      const want = ev.labelled ? (ev.target === 'brain' || ev.target === 'mirror' ? ev.target : null) : lastPick ? lastPick.target : null;
+      if (!want) continue; // a press on nothing (or on your trunk, neck or head) holds nothing
+      const picked = ev.labelled ? (ev.pick && ev.pick.target === want ? ev.pick : lastPick && lastPick.target === want ? lastPick : null) : lastPick;
+      if (want === 'mirror') {
+        // R558 (hunt 2 code #1): the carry starts from the mirror body's DRAWN centre (the pick reads it from the scene,
+        // after any stop-at-contact correction), never from a stored carry place.
+        if (!picked || !picked.centreWorldM) { refused = 'no-mirror-pick'; continue; }
+        const point = vec(picked.centreWorldM, 'picked mirror centre'), radius = picked.radiusM;
+        if (!(Number.isFinite(radius) && radius > 0)) fail('normal mirror geometry radius unavailable');
+        const L = transformDirection(rigidInverse(cameraRotation), point.map((v, i) => v - o[i])), depth = -L[2];
+        const cameraNear = viewport && viewport.nearM;
+        if (!(Number.isFinite(cameraNear) && cameraNear > 0)) fail('actual camera near plane required for mirror carry');
+        const nearM = radius + cameraNear, farM = Math.max(depth + 2 * radius, nearM + 2 * radius);
+        // A carry never starts inside its geometry-derived near limit; such a press holds nothing (it used to stop the
+        // frame, and every following frame, until the display rescue reset the game).
+        if (!(Number.isFinite(depth) && (CARRY_THROUGH || depth >= nearM) && Number.isFinite(farM))) { refused = 'picked mirror is inside its geometry-derived near limit'; continue; }
+        mirror = { centreWorldM: point, radiusM: radius, bounds: mirror ? { ...mirror.bounds, nearM: Math.max(mirror.bounds.nearM, nearM), farM: Math.max(mirror.bounds.farM, farM) } : { nearM, farM, basis: 'source mirror bounding radius plus actual near plane; far extends one source object diameter' },
+          anchor: { origin: carryOrigin.slice(), pivotWorld: point.slice(), startLook: { ...carryLook } } };
+      }
+      held = true; target = want; selected = target;
+    } else if (!ev.down) { held = false; target = null; keyVel = [0, 0]; if (mirror) mirror.anchor = null; }
+  }
+  hold(wallDt - cursor);
+  if (keys.some(x => x !== 0) && !brainClearance) {
+    if (typeof constrainBrainMovement !== 'function') fail('retained brain offset needs current source clearance');
+    brainClearance = constrainBrainMovement([0, 0, 0], brainMovementWorld).diagnostic;
+  }
+  const base = vec(brainCentre, 'current brain centre').map((v, i) => v - transformDirection(k, vec(prior.brainKeyOffset, 'previous brain key offset'))[i]);
+  const baseDistance = Math.hypot(...base.map((v, i) => v - o[i]));
+  const diagnostic = { kind: 'bounded-object-carry-r22-r1', held, target, selectedThisFrame: selected, graspRefused: refused, normalizedAxes: axis.slice(), heldPoseS,
+    brainLimits: { ...bounds, centreNearM: Math.max(0, baseDistance - keyBudgetM), centreFarM: baseDistance + keyBudgetM },
+    mirrorLimits: mirror ? { ...mirror.bounds } : null, brainClearance, clamped,
+    timing: 'Original grasp (Space)/pick timestamps and held coverage; keys use the same current-camera frame snapshot as the arm, mirror mouse-anchor follows the gaze event; no second activity/time advance',
+    scope: 'Engineering limits/source clearance only; actual source/current-pose/native/wholebody/normalmechanics qualification remains open' };
+  if (!held) keyVel = [0, 0];
+  return { state: { held, target, lastPick, lastLook: { ...look }, lastOrigin: o.slice(), brainKeyOffset: keys, keyVel, mirror, diagnostic }, brainMovementWorld, mirrorWorldCentre: mirror ? mirror.centreWorldM.slice() : null, diagnostic };
+}
+
+export function translateBrainRecord(record, state, initialOrigin) {
+  if (!record.transform) fail('configured graph requires actual region-mode brain transform');
+  const t = vec(state.translation, 'brain world translation'), raw = record.transform;
+  if (![raw.matrix, raw.inverse].every(m => m && m.length === 16 && Array.from(m).every(Number.isFinite))) fail('actual finite brain matrix/inverse required');
+  // The un-turned placement (ns-brain restMatrix), when the record carries one, moves with the brain like its matrix.
+  const rest = raw.restMatrix && raw.restMatrix.length === 16 && Array.from(raw.restMatrix).every(Number.isFinite) ? multiply(translation(t), raw.restMatrix) : null;
+  const transform = { ...raw, matrix: multiply(translation(t), raw.matrix), ...(rest ? { restMatrix: rest } : { restMatrix: undefined }), inverse: multiply(raw.inverse, translation(t.map(v => -v))),
+    pivotWorld: raw.pivotWorld.map((v, i) => v + t[i]), referenceTranslation: t.slice(), referenceOrigin: initialOrigin.slice() };
+  return { ...record, transform };
+}

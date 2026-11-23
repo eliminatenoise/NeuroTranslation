@@ -1,0 +1,44 @@
+Facial atlas assets — attribution and licences
+
+54 OBJ asset records represent 27 paired structures or parts. These are selected Z-Anatomy derivatives, built on BodyParts3D, for anatomical illustration. This metadata revision leaves every mesh byte unchanged.
+
+Required supplied credits:
+"BodyParts3D - The Database Center for Life Science - CC-BY-SA 2.1 Japan"
+"Z-Anatomy - The open source atlas of anatomy - CC-BY-SA 4.0"
+
+Source contributors and roles:
+Kousaku Okubo / the Database Center for Life Science: original BodyParts3D model.
+Gauthier Kervyn: design, 3D and anatomy.
+Marcin Zielinski: Blender add-on.
+Lluís Vinent Juanico: Unity application and the distributed FBX export.
+
+Source:
+LluisV/Z-Anatomy
+Commit: 6c7f9016bd5899ac8edafd31b9900c151df42ed6
+File: Resources/Models/FBX/MuscularSystem100.fbx
+https://raw.githubusercontent.com/LluisV/Z-Anatomy/6c7f9016bd5899ac8edafd31b9900c151df42ed6/Resources/Models/FBX/MuscularSystem100.fbx
+SHA-256: 4c19df534d5d84aabbce08604306aa0485b43e8a2483c72a95b569e1dfea2279
+Git blob: 2477e1b6caf97d7174762b5eec6cf1c80db64eed
+
+Mesh licence:
+Creative Commons Attribution-ShareAlike 4.0 International
+https://creativecommons.org/licenses/by-sa/4.0/
+https://creativecommons.org/licenses/by-sa/4.0/legalcode.en
+
+Retain the supplied creator, copyright, source, licence and disclaimer information; indicate modifications and earlier changes; and share adapted mesh material under CC BY-SA 4.0 without extra downstream restrictions. Exact upstream notices and the full supplied licence are copied without alteration in LICENSES/. Those files retain the source's wording, attribution history and disclaimers.
+
+The official BodyParts3D notice now states CC BY 4.0:
+https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html
+The supplied historical CC BY-SA 2.1 Japan credit above is retained. This upstream update does not remove Z-Anatomy's separate BY-SA contributions.
+
+Recorded mesh changes, 9 November 2026:
+Selection of the listed structures/parts; FBX-to-OBJ conversion; fan triangulation; one shared similarity transform; source reflected-instance winding adjustment; coordinate rounding to 0.0001 mm; and retained source names with export IDs. No new mesh conversion or geometric change was made by this metadata revision.
+
+Public metadata changes:
+Revised the explanatory metadata, corrected the file/structure count explanation, and made the conversion and validation limits explicit. The original records and their hashes remain preserved; no mesh bytes or recorded transform parameters changed.
+
+The upstream atlas notices also identify separately licensed inner-ear, kidney, brain/white-matter and cranial-nerve material. The declared facial-only selection does not include those objects. This notice is specific to this packet and does not license a different atlas subset. No upstream author or institution endorses NeuroSurge.
+
+The project-owned game code has separate CC0 terms. Three.js is separately MIT-licensed; its complete notice remains in the game bundle's vendor/LICENSE. Those software terms do not relicense the meshes, and the mesh licence does not automatically relicense unrelated code.
+
+Registration accuracy, outward normals, anatomical attachments, deformation, physiological function and production readiness are not established by these credits or the fixed-conversion match.

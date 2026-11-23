@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="launch.css">
+  <title>NeuroSurge movement preview technical guide</title>
+</head>
+<body>
+  <header class="masthead">
+    <a class="wordmark" href="./">NeuroSurge</a>
+    <nav aria-label="Preview and project links">
+      <a href="./">Simple guide</a>
+      <a href="https://eliminatenoise.github.io/NeuroSurge/">Game menu</a>
+    </nav>
+  </header>
+  <main class="layout">
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title">Movement preview</h1>
+      <p class="description">NeuroSurge plays the same simulation in Full and Lite. Both run the released NeuroTranslate 0.0 movement forecast in the browser. Lite transfers smaller anatomy files.</p>
+      <div class="play-options" aria-label="Choose an edition">
+        <a class="play play-full" href="scene/example/preview.html">Play Full preview</a>
+        <a class="play play-lite" href="scene/example/preview.html?edition=lite">Play Lite preview</a>
+      </div>
+      <p class="requirements">Use a desktop browser with WebGL, a keyboard and a mouse or trackpad. <a href="movement-mirror.html">Open the standalone Movement mirror</a> to run the forecast on its own.</p>
+    </section>
+    <figure class="game-view">
+      <img src="media/game-view.webp" width="1200" height="750" alt="NeuroSurge shows the coloured motor strip over the player and mirror bodies.">
+      <figcaption>Simulated brain and muscle activity.</figcaption>
+    </figure>
+    <section class="help" aria-label="Capture, forecast and replay">
+      <details open>
+        <summary>Capture and command controls</summary>
+        <ol>
+          <li>Press <kbd>C</kbd>. Choose <strong>Start camera</strong> to request video, or choose a local video or timestamped stills. Images stay on the device.</li>
+          <li>Set <strong>Body follows</strong> for the arm or knee pose channels and <strong>Point to forecast</strong> for the marker. The ring shows its forecast position 120 ms after the last of five usable frames.</li>
+          <li>Choose <strong>Save take</strong> and <strong>Open Command box</strong> to stop capture. Enter <strong>replay my take</strong>. <kbd>F</kbd> opens the Command box for supported moves such as “bend my right elbow”. In a browser with on-device dictation, choose <strong>Use voice</strong> and confirm the transcript.</li>
+        </ol>
+        <div class="resource-links">
+          <a href="PLAYER-GUIDE.html">Simple player guide</a>
+          <a href="PLAYER-GUIDE-TECHNICAL.html">Technical player guide</a>
+        </div>
+      </details>
+      <details open id="local-model">
+        <summary>Model scope, releases and licences</summary>
+        <p>The 0.0 point model was fitted on optical animal tracks. Forecast accuracy on human video is unmeasured. Use the optional local launcher for the separate fingertip study.</p>
+        <div class="resource-links">
+          <a href="https://github.com/eliminatenoise/NeuroSurge/releases/tag/lite-browser-forecast-2026-11-24">Offline Lite download and setup</a>
+          <a href="START.html#local-model">Local NeuroTranslate workbench and fingertip setup</a>
+          <a href="scene/src/joint/model/NOTICE.html">Model, data and licence credits</a>
+          <a href="CREDITS-AND-LICENCES.md">Game and anatomy credits</a>
+        </div>
+      </details>
+    </section>
+  </main>
+</body>
+</html>

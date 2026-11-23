@@ -1,0 +1,166 @@
+/* NeuroSurge: the loading picture (parts coming together) and the five-second picture of the main controls.
+   17 November 2026: no start page and no loading page. */
+
+/* The loading picture covers the game canvas until the game has drawn its first frame, then fades out over it.
+   21 November 2026 (the owner, Message 208: "Background should still be more of an abyss."): before its own first
+   frame it shows the abyss as the page behind it does (.ns-app below: the black of ns-room ROOM.abyss.black, RGB 2, 2,
+   2, a few steps lighter in the middle; it was the old blue-black #05070b, flat), so the first paint, the canvas and
+   the loading picture's first frame follow each other without a step. */
+.ns-assembly {
+  position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh; display: block;
+  z-index: 8; background: #020202 radial-gradient(36% 54% at 51% 46%, #0b0c0d 0%, #060607 50%, #020202 100%); pointer-events: none; opacity: 1;
+}
+.ns-assembly.ns-assembly-out { opacity: 0; transition: opacity 0.8s ease; }
+.ns-assembly-static {
+  display: grid; place-content: center; justify-items: center; gap: 0.75rem;
+  box-sizing: border-box; padding: 1rem; text-align: center;
+  color: #eaf3fb; font: 600 1rem/1.4 system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+.ns-assembly-static p { margin: 0; }
+.ns-assembly-static progress { width: min(12rem, 85vw); accent-color: #7fe3ff; }
+
+/* 19 November 2026, late: no separate loading picture any more (eye-view-r558 LOADING_PICTURE). While the game loads,
+   the page shows the game's own dark backdrop (the tones of the room the game draws: nearly black, a little lighter
+   low in the middle) with the loading bar; the game's canvas is held back and then fades in over that same backdrop,
+   so loading and playing are one picture. (Under reduced motion neurosurge.css stops the fade: the game is there at
+   once.)
+   21 November 2026 (Message 208, the abyss): the page's very first paint, before the loading picture is there, was this
+   backdrop in the old room's greys (RGB 27, 33, 36 in the middle, 15, 19, 22 at the edges: a grey flash before a black
+   picture). It is now the abyss too: its black, a few steps lighter in the middle, where the loading picture then
+   shows the lit dark round its brain and bodies (about 11 there, 2 at the edges). */
+.ns-app { background: radial-gradient(36% 54% at 51% 46%, #0b0c0d 0%, #060607 50%, #020202 100%); }
+.ns-app[data-ns-phase="loading"] .ns-canvas { opacity: 0; }
+.ns-app[data-ns-phase="playing"] .ns-canvas { transition: opacity 0.45s ease-out; }
+
+/* 19 November 2026: the loading bar (ns-load-progress). One clear bar with its percentage, for the whole wait: the
+   download and every step of building the game. White on near-black; the fill and the number move as transitions of
+   `transform`, which the browser plays even while the page is busy building. */
+.ns-load {
+  position: fixed; left: 50%; bottom: clamp(28px, 9vh, 96px); transform: translateX(-50%); z-index: 10;
+  width: min(560px, 78vw); pointer-events: none; opacity: 1; box-sizing: border-box;
+  padding: 16px 20px 18px; border-radius: 14px; background: rgba(5, 7, 11, 0.86); border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #fff; font: 700 clamp(18px, 2.2vw, 26px)/1 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; letter-spacing: 0.02em;
+  text-shadow: 0 1px 6px #000, 0 0 2px #000;
+}
+.ns-load.ns-load-out { opacity: 0; transition: opacity 0.6s ease 0.15s; }
+.ns-load-text { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5em; }
+.ns-load-pct { display: inline-block; height: 1em; overflow: hidden; text-align: right; font-variant-numeric: tabular-nums; }
+.ns-load-pct-column { display: block; will-change: transform; }
+.ns-load-pct-line { display: block; height: 1em; line-height: 1em; white-space: nowrap; }
+.ns-load-track {
+  height: 16px; border-radius: 8px; overflow: hidden; background: #0b0f14; border: 2px solid #fff; box-sizing: border-box;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
+}
+.ns-load-fill { width: 100%; height: 100%; background: #fff; transform-origin: 0 50%; transform: scaleX(0.004); will-change: transform; }
+/* Before any script is in, the bar on the page itself creeps a little by a plain CSS animation (not under reduced
+   motion, where it waits at its start); the script then takes over from wherever it stands. */
+.ns-load-early .ns-load-fill { animation: ns-load-early 6s cubic-bezier(0.2, 0.6, 0.3, 1) forwards; }
+@keyframes ns-load-early { from { transform: scaleX(0.004); } to { transform: scaleX(0.05); } }
+/* The fill and the number are moved by Web Animations (ns-load-progress), which also run under reduced motion, where
+   neurosurge.css stops every CSS transition: a progress bar that grows is the information itself, not decoration. */
+.ns-load.ns-load-stopped .ns-load-fill { background: #ffb347; animation-play-state: paused; }
+/* The failure panel: loading failed or stopped; plain words and one button. */
+.ns-load-fail {
+  position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 12; box-sizing: border-box;
+  width: min(440px, 86vw); padding: 26px 28px 22px; border-radius: 16px; text-align: center;
+  background: #0b0f14; border: 2px solid #fff; box-shadow: 0 16px 60px rgba(0, 0, 0, 0.8);
+  color: #fff; font: 600 17px/1.4 system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+.ns-load-fail p { margin: 0 0 10px; }
+.ns-load-fail-title { font-size: 22px; font-weight: 800; }
+.ns-load-fail-hint { color: #d5dee8; font-weight: 500; }
+.ns-load-fail-again {
+  margin: 8px 0 6px; padding: 12px 30px; border-radius: 10px; border: 0; cursor: pointer;
+  background: #fff; color: #05070b; font: 800 18px/1 system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+.ns-load-fail-again:focus-visible { outline: 3px solid #7cc4ff; outline-offset: 3px; }
+.ns-load-fail-detail { margin: 10px 0 0 !important; color: #9fb0c0; font: 400 12px/1.35 ui-monospace, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
+/* While the failure panel is up the game's own error page stays behind it (one message, one button). */
+body:has(.ns-load-fail) .ns-shell[data-mode="error"], body:has(.ns-load-fail) .ns-keys { display: none; }
+body:has(.ns-load-fail) .ns-hud-root { visibility: hidden; }
+/* The stationary reduced-motion layer keeps its own small progress element for assistive technology; the bar above is
+   the one that is seen. */
+body:has(.ns-load) .ns-assembly-static p, body:has(.ns-load) .ns-assembly-static progress { visibility: hidden; }
+
+/* While files load: no start page, no HUD words; an error still shows its page. */
+.ns-app[data-ns-phase="loading"] .ns-shell[data-mode="loading"] { display: none; }
+.ns-app[data-ns-phase="loading"] .ns-hud-root,
+.ns-app[data-ns-phase="loading"] .ns-scene-overlay { visibility: hidden; }
+.ns-app[data-ns-phase="loading"] ~ .preview-note, body:has(.ns-app[data-ns-phase="loading"]) .preview-note { opacity: 0; }
+.preview-note { transition: opacity 0.6s ease; }
+
+/* The main controls: W A S D, E, R, Space, and the trackpad with its click, in two panels either side of the middle
+   of the picture. 19 November 2026 (the owner: "the controls switch off halfway through. And the controls should stay
+   visible the entire time while loading"): it stays for as long as the game loads. When the game is ready the
+   launcher adds ns-keys-leave, and the card fades --ns-keys-ms later (the launcher sets that so the card has been up
+   for at least five seconds in all). */
+.ns-keys {
+  --ns-keys-ms: 1500ms;
+  position: fixed; inset: 0; z-index: 9; pointer-events: none; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(16px, 7vw, 150px);
+  color: #eaf3fb; font: 600 14px/1.3 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; letter-spacing: 0.02em;
+  animation: ns-keys-in 0.35s ease-out both;
+}
+.ns-keys.ns-keys-leave { animation: ns-keys-out 0.7s ease-in var(--ns-keys-ms) forwards; }
+@keyframes ns-keys-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ns-keys-out { to { opacity: 0; visibility: hidden; } }
+.ns-keys-panel {
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  padding: 22px 26px 18px; border-radius: 18px;
+  background: rgba(6, 10, 15, 0.74); border: 1px solid rgba(160, 190, 215, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+}
+.ns-keys-board { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.ns-keys-row { display: flex; gap: 6px; }
+.ns-keys-row2 { margin-left: -24px; }
+.ns-keys-wasd { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; padding-left: 24px; }
+.ns-key {
+  display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;
+  width: 48px; height: 48px; border-radius: 9px;
+  background: linear-gradient(#27313c, #161d25); border: 1px solid #5d7286; border-bottom-width: 3px;
+  color: #fff; font: 800 19px/1 system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+.ns-key-alt { border-color: #4f8fb0; color: #bfe8ff; }
+.ns-key-space { width: 100%; min-width: 190px; height: 40px; font-size: 15px; letter-spacing: 0.06em; }
+.ns-keys-words { display: grid; grid-template-columns: auto auto; gap: 4px 14px; margin: 0; align-self: stretch; }
+.ns-keys-words dt { color: #fff; font-weight: 800; text-align: right; }
+.ns-keys-words dd { margin: 0; color: #b9c8d6; }
+.ns-pad-plate {
+  position: relative; width: 190px; height: 128px; border-radius: 14px;
+  background: linear-gradient(#222b35, #141a21); border: 1px solid #5d7286;
+}
+.ns-pad-finger {
+  position: absolute; left: 34px; top: 74px; width: 22px; height: 22px; border-radius: 50%;
+  background: #fff; box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.14);
+  animation: ns-pad-move 2.4s ease-in-out infinite;
+}
+.ns-pad-click {
+  position: absolute; right: 30px; top: 28px; width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid #7fe3ff; animation: ns-pad-tap 1.2s ease-out infinite;
+}
+@keyframes ns-pad-move { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(70px, -34px); } }
+@keyframes ns-pad-tap { 0% { transform: scale(0.5); opacity: 1; } 70%, 100% { transform: scale(1.8); opacity: 0; } }
+/* A narrow or upright window: both panels side by side along the bottom, smaller. */
+@media (max-width: 900px), (max-aspect-ratio: 1/1) {
+  .ns-keys { align-items: flex-end; justify-content: center; gap: 10px; padding: 0 8px 44px; font-size: 12px; }
+  .ns-keys-panel { padding: 12px 12px 10px; gap: 10px; }
+  .ns-key { width: 34px; height: 34px; font-size: 15px; }
+  .ns-key-space { min-width: 130px; height: 30px; }
+  .ns-keys-row2 { margin-left: -17px; } .ns-keys-wasd { padding-left: 17px; }
+  .ns-pad-plate { width: 120px; height: 84px; }
+  .ns-pad-finger { left: 18px; top: 46px; width: 16px; height: 16px; }
+  @keyframes ns-pad-move { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(44px, -22px); } }
+  /* the loading bar stands in the middle of the picture here, clear of the two panels along the bottom */
+  .ns-load { bottom: auto; top: 38%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ns-assembly.ns-assembly-out, .preview-note { transition: none; }
+  .ns-keys { animation: none; }
+  .ns-keys.ns-keys-leave { animation: ns-keys-out 0s step-end var(--ns-keys-ms) forwards; }
+  .ns-pad-finger, .ns-pad-click { animation: none; }
+  /* 18 November 2026: neurosurge.css stops every animation under reduced motion, so the card's fade never ran and the
+     card stayed over the game for good. Here it goes at once after --ns-keys-ms, without fading (its animationend
+     still removes it). */
+  @keyframes ns-keys-out { from, to { opacity: 0; visibility: hidden; } }
+  .ns-keys.ns-keys-leave { animation: ns-keys-out 1ms step-end var(--ns-keys-ms) forwards !important; }
+}
