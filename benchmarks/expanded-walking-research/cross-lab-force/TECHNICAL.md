@@ -1,6 +1,8 @@
 # Transfer to a treadmill force dataset
 
-Linear extrapolation from the last two force means had the lowest impulse error, **9.64445 N·s**. Three passes led the frozen NeuroTranslate settings at **10.69183 N·s** and beat the linear reference for two of eight people. One pass had the lowest new-load probability error at **0.06997673**, an absolute reduction of **0.00078077** against the fitted event rate. Its event error was lower for all eight people. [Exact scores](results.json) · [Simple edition](SIMPLE.md)
+The follow-up fits matched compact recurrent models with one or two training archives and keeps the treadmill comparison fixed. [Source-mix methods and scores](source-mix/TECHNICAL.md)
+
+In this earlier comparison, linear extrapolation from the last two force means had the lowest impulse error, **9.64445 N·s**. Three passes led the frozen NeuroTranslate settings at **10.69183 N·s** and beat the linear reference for two of eight people. One pass had the lowest new-load probability error at **0.06997673**, an absolute reduction of **0.00078077** against the fitted event rate. Its event error was lower for all eight people. [Exact scores](results.json) · [Simple edition](SIMPLE.md)
 
 ## Data and forecasts
 

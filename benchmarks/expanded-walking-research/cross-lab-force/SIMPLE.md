@@ -1,6 +1,8 @@
 # Predicting the force on a treadmill belt
 
-A simple rule that continues the recent rise or fall in force made the closest force predictions. Its average miss was **9.64 newton-seconds**. The best NeuroTranslate setting missed by **10.69 newton-seconds**. NeuroTranslate did slightly better on a different question, the chance that a belt would start taking a new load. One pass through the model had the lowest error for that prediction. [Exact scores](results.json) · [Technical edition](TECHNICAL.md)
+A follow-up tests whether training a small force forecast on recordings from a second lab helps. [One-lab and two-lab comparison](source-mix/SIMPLE.md)
+
+In this earlier comparison, a simple rule that continues the recent rise or fall in force made the closest force predictions. Its average miss was **9.64 newton-seconds**. The best NeuroTranslate setting missed by **10.69 newton-seconds**. NeuroTranslate did slightly better on a different question, the chance that a belt would start taking a new load. One pass through the model had the lowest error for that prediction. [Exact scores](results.json) · [Technical edition](TECHNICAL.md)
 
 ## What we measured
 
