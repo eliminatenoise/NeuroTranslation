@@ -197,6 +197,7 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
       fileInput = document.createElement('input');
       fileInput.type = 'file';
       fileInput.accept = 'video/*';
+      fileInput.style.display = 'block';
       fileInput.style.maxWidth = '100%';
       fileInput.addEventListener('change', () => {
         clearVideoTake();
@@ -210,6 +211,7 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
       pictureFiles.type = 'file';
       pictureFiles.accept = 'image/*';
       pictureFiles.multiple = true;
+      pictureFiles.style.display = 'block';
       pictureFiles.style.maxWidth = '100%';
       pictureLabel.append(pictureFiles);
       pictureNames = document.createElement('ol');
@@ -223,6 +225,7 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
       pictureTimes.type = 'text';
       pictureTimes.autocomplete = 'off';
       pictureTimes.placeholder = '0, 0.5, 1.25';
+      pictureTimes.style.display = 'block';
       pictureTimes.style.maxWidth = '100%';
       timeLabel.append(pictureTimes);
       const timeHelp = document.createElement('p');
@@ -248,6 +251,7 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
       });
       pictureTimes.addEventListener('input', recheckPictures);
       const label = document.createElement('label');
+      label.style.display = 'block';
       label.append('Follow ');
       select = document.createElement('select');
       for (const [value, choice] of Object.entries(choices)) select.add(new Option(choice.name, value));

@@ -61,9 +61,9 @@
 import { DEG, clamp, transformPoint, transformDirection, rotationTranspose } from './ns-math.mjs';
 import * as WholeArmDisplay from './ns-whole-arm-display.mjs';
 import { bindActionChat } from './ns-action-chat.mjs';
-import { movementMirrorBackend } from './joint/route.mjs';
 import { bindActivityMap } from './activity/map.mjs';
 import {bindJointView} from './joint/view.mjs';
+import {movementMirrorBackend} from './joint/route.mjs';
 import { createCameraCapture } from './camera.mjs';
 import { createControls, bindDom, CONTROL_CODES, MOVE_CODES, moveKeyNumber, AREA_CODES, areaKeyDir } from './ns-controls.mjs';
 import { walkQuietStep, walkUiEvent, AREA_WALK_QUIET, bindFocusRing } from './ns-look-calm.mjs'; // 22 November 2026 (LOOK2)
@@ -147,6 +147,82 @@ export const NUMBER_LISTS = false;
  * look (or the view leaves the eye), nothing under the crosshair is named: no body part, eyeball or nerve. A motor
  * area still is (the look acts there; the start look rests on none). on false: named from the start, as before. */
 export const QUIET_START = Object.freeze({ on: true, lookDeg: 1 });
+/** 24 November 2026 (FREE_AIM, DESIGN-DECISIONS section 206). Since GitHub main's drag-to-look start the pointer is free
+ * unless the player chooses "Capture mouse", but the crosshair at the middle of the picture stayed the game's only aim:
+ * pointing at a motor area named nothing and started nothing, a click on it did nothing (trigger never fired), and the
+ * tip beside the pointer said only "Space holds the brain". The first tutorial step ("Aim at a coloured area until its
+ * body part moves") could be done only by dragging the view until the middle of the picture lay on an area.
+ *
+ * With the pointer free and over the picture, the POINTER is now the aim: the look's own classifier is asked along the
+ * ray through the pointer (stepFrame's gazeRay and gazeLook, the inputs the outside view's camera already uses), so what
+ * the pointer rests on is named, switched on and clicked exactly as what the crosshair rests on is with the pointer
+ * captured (the owner, 19 November: "go back to activation simply by cursor highlight"). The last thing the player
+ * moved wins: a look turned by a drag on empty space, an arrow key's step to an area, or a carry with Space puts the aim
+ * at the crosshair until the pointer next moves (aimStep). While a button is down the pointer's aim records silently
+ * (a drag turns the brain or the view under it; the click at its release still presses what is under it), and when the
+ * aim falls back to the crosshair without the look having moved (the pointer left the picture, Space was pressed)
+ * what lies at the crosshair is recorded silently too: nothing switches on that the player did not point at.
+ *
+ * A pointer on its way somewhere crosses the strip all the time, and a look that switches an area on "at once" would
+ * fire every area on the way (a sweep across the strip in a third of a second started ten movements). So the pointer's
+ * aim switches an area on when the pointer comes to REST on it: while it travels what it crosses is named (the tip) but
+ * recorded silently, and the first frame it has stayed within restPx for restMs meets the area as an arrival (the
+ * activity's `arrivedFrom`, as after a carry, CARRY_ARRIVAL): the area it rests on switches on unless it never left
+ * the area it started from. A click needs no rest.
+ *  - on: false = the crosshair is the only aim, as before.
+ *  - restPx, restMs: the pointer rests once it has stayed within restPx (CSS px) of one place for restMs. */
+export const FREE_AIM = Object.freeze({ on: true, restPx: 3, restMs: 100 });
+/** FREE_AIM's step (pure). seen: the last record (null at first); pointer / lookMs / yaw / pitch: the controls' free
+ * pointer ({ x, y, timeMs } | null) and look now; free: the game plays with the pointer not captured; width / height:
+ * the picture (CSS px); busy: Space is down, keeps a hold, or something is carried or dragged by the look; down: a
+ * mouse button is down; nowMs: the frame's time; gazeArea: the area the activity has as looked at as the frame begins
+ * (a string or null); clicked: a click reaches the activity this frame; pressSeq: the count of presses made with the
+ * free pointer (the controls' button seq while its `via` is 'pointer'; null otherwise). A new press is the pointer's
+ * own act at its place, so it takes the aim like a move does (24 November 2026, section 208: after an arrow key had
+ * put the aim at the crosshair, a click made without moving the mouse pressed the area the KEY had aimed at, wherever
+ * the pointer was, while a click on a muscle acted at the pointer).
+ * Returns { seen (the next record), pointer (the pointer is the aim), x, y (the aim's place), silent (record what is
+ * under the aim without switching it on), arrivedFrom (undefined, or the area to tell this frame's gaze event: the
+ * pointer has just come to rest), ms (when the player last moved the aim: the look's own time, or the time of the
+ * pointer's last move as the aim; null before either) }. */
+export function aimStep(seen, { pointer = null, lookMs = null, yaw = 0, pitch = 0, free = false, width = 0, height = 0, busy = false, down = false, nowMs = 0, gazeArea = null, clicked = false, pressSeq = null, on = FREE_AIM.on, restPx = FREE_AIM.restPx, restMs = FREE_AIM.restMs } = {}) {
+  const s = seen && typeof seen === 'object' ? { ...seen } : { pointer: null, lookMs: null, yaw: null, pitch: null, pSeq: 0, lSeq: 0, seq: 0, ms: null, was: false, anchor: null, moving: false, from: null, left: false, press: undefined };
+  const pMoved = pointer !== s.pointer;
+  if (pMoved) { s.pointer = pointer; if (pointer) s.pSeq = ++s.seq; }
+  const lMoved = lookMs !== s.lookMs || yaw !== s.yaw || pitch !== s.pitch;
+  if (lMoved) { s.lookMs = lookMs; s.yaw = yaw; s.pitch = pitch; s.lSeq = ++s.seq; }
+  // (a new press with the free pointer: the pointer's own act at its place; after the look's change of this same frame,
+  // so a press that follows an arrow key's step takes the aim)
+  const pressed = Number.isSafeInteger(pressSeq) && s.press !== undefined && pressSeq !== s.press;
+  s.press = Number.isSafeInteger(pressSeq) ? pressSeq : s.press === undefined ? null : s.press;
+  if (pressed && pointer) s.pSeq = ++s.seq;
+  const inside = Boolean(pointer) && Number.isFinite(pointer.x) && Number.isFinite(pointer.y) && pointer.x >= 0 && pointer.y >= 0 && pointer.x <= width && pointer.y <= height;
+  const aims = on === true && free === true && inside && s.pSeq > s.lSeq && busy !== true;
+  if (aims && pMoved && Number.isFinite(pointer.timeMs)) s.ms = pointer.timeMs;
+  // the rest rule: travelling records silently; the first rested frame is an arrival
+  let travelling = false, arrivedFrom;
+  const area = typeof gazeArea === 'string' ? gazeArea : null;
+  if (aims) {
+    const t = Number.isFinite(nowMs) ? nowMs : 0;
+    if (!s.anchor || Math.hypot(pointer.x - s.anchor.x, pointer.y - s.anchor.y) > restPx) {
+      if (!s.moving) { s.moving = true; s.from = area; s.left = false; }
+      s.anchor = { x: pointer.x, y: pointer.y, t };
+    }
+    if (s.moving) {
+      if (area !== s.from) s.left = true;
+      if (clicked === true) s.moving = false; // the click took what is under the pointer: no arrival on top of it
+      else if (t - s.anchor.t >= restMs) { s.moving = false; arrivedFrom = s.left ? null : s.from; }
+      else travelling = true;
+    }
+  } else { s.anchor = null; s.moving = false; s.from = null; s.left = false; }
+  // (the crosshair takes the aim back without a look of the player's own: silent; while a button is down: silent)
+  const silent = (aims && (down === true || travelling)) || (s.was === true && !aims && !lMoved);
+  if (silent) arrivedFrom = undefined;
+  s.was = aims;
+  const look = Number.isFinite(lookMs) ? lookMs : null;
+  const ms = look === null ? (Number.isFinite(s.ms) ? s.ms : null) : Number.isFinite(s.ms) ? Math.max(look, s.ms) : look;
+  return { seen: s, pointer: aims, x: aims ? pointer.x : width / 2, y: aims ? pointer.y : height / 2, silent, arrivedFrom, ms };
+}
 /** 19 November 2026 (the owner: "You can now switch between which of the four limbs you want to control ... your left
  * arm using 1, your left leg using 2, your right leg using 3, your right arm using 4 ... double clicking will shift you
  * from left to right, and when you get all the way to right, then right to left ... there should be a number view
@@ -592,7 +668,6 @@ export function viewFramePoint(pose, place, fovYDeg, aspect) {
 }
 
 const LIMB_AIM_Y_NDC = 0.5;
-const AIM_PRACTICE_RESPONSE_S = 0.35;
 const LIMB_AIM_HALF_SWEEP_RAD = 18 * DEG;
 
 /** Map a small up/down look around the selection point onto the two remaining sides of a joint's range. */
@@ -1808,6 +1883,24 @@ export const PORTRAIT_CARD_RESERVE = Object.freeze({ gapAbovePx: 12, gapBelowPx:
  * arrow reaches into the bottom rowPx of the view; gapPx from the arrow (and from a card); at least minWidthPx wide
  * (else the other side, else above the arrow); bottomPx: the style sheet's own bottom offset. Display choices. */
 export const TOAST_BESIDE = Object.freeze({ rowPx: 64, gapPx: 10, minWidthPx: 200, bottomPx: 14 });
+/** 24 November 2026 (HINT_ROW, DESIGN-DECISIONS section 207). Since the drag-to-look start the hint under the picture
+ * ("Drag empty space to look around · M: electrical map · Esc: controls") shows all the time the pointer is free, at
+ * the bottom middle, where the limb buttons (1 to 4) are: its box lay 5 px into the buttons' bar at 1280x720 and
+ * 1024x768, and at 800x600, where it takes two lines, it covered the buttons' words. While the hint's box would reach
+ * into the bar's column, the bar stands gapPx above the hint (hintLift); with the pointer captured (no hint) it stands
+ * where it stood. */
+export const HINT_ROW = Object.freeze({ on: true, gapPx: 6 });
+/** HINT_ROW's rule (pure): how far the limb bar is raised, in CSS px, for the hint's box and the bar's box at its own
+ * place ({ left, right, top, bottom } each; null or an empty box: 0). 0 when they are not in the same column or the hint
+ * is not under the bar's bottom edge plus the gap. */
+export function hintLift(hint, bar, o = HINT_ROW) {
+  const ok = r => r && [r.left, r.right, r.top, r.bottom].every(Number.isFinite) && r.right > r.left && r.bottom > r.top;
+  if (!o || o.on !== true || !ok(hint) || !ok(bar)) return 0;
+  if (!(hint.left < bar.right && hint.right > bar.left)) return 0;
+  if (hint.bottom <= bar.top) return 0; // the hint is above the bar: nothing to clear
+  const lift = bar.bottom + o.gapPx - hint.top;
+  return lift > 0 ? Math.ceil(lift) : 0;
+}
 export function brainUsableNdc(size, brainModule = NsBrain) {
   if (!size || !(size.width > 0 && size.height > 0) || typeof brainModule.usableNdcFromLayout !== 'function') return null;
   const r = infoPanelRect(size);
@@ -4023,7 +4116,15 @@ export function createSimulation({ rig, boxes, strip, binding, armOptions = {}, 
     const pickReferenceBrain = previousReference && brainRaw.transform ? ReferenceGraph.advanceBrainState(previousReference, view, camRay ? camRay.origin : [0, 0, 0], brainRaw.transform) : null;
     const brain = pickReferenceBrain ? ReferenceGraph.translateBrainRecord(brainRaw, pickReferenceBrain, initialBrainOrigin || [0, 0, 0]) : brainRaw;
     // (20 Nov review: the circle's roll turns the brain under a still look, so the roll is part of the key.)
-    const viewKey = `${view.orbit.yaw}|${view.orbit.pitch}|${view.offset.yaw}|${view.offset.pitch}|roll:${brainRollDeg}${camKey}${pickReferenceBrain ? '|worldPivot:' + pickReferenceBrain.pivotWorld.join(',') : ''}`;
+    // 24 November 2026 (FREE_AIM, section 206): inputs.aimRay / aimLook: the ray and look angles of the AIM when that is not
+    // the camera's own look (the free pointer): the classifier is asked along it (and its angles are in the memory
+    // of the classifier's own record, state.rawGaze, so a pointer that moves is asked anew). Everything else keeps the
+    // camera's look (gl): the gaze record's angles, the brain's grab, the mirror body's carry, the activity's look.
+    // (Given to the carry, a hold begun with the pointer off the crosshair moved the held thing by that offset at once.)
+    const aimIn = inputs && inputs.aimRay && Array.isArray(inputs.aimRay.origin) && Array.isArray(inputs.aimRay.dir) && inputs.aimRay.origin.length === 3 && inputs.aimRay.dir.length === 3
+      && inputs.aimLook && Number.isFinite(inputs.aimLook.yaw) && Number.isFinite(inputs.aimLook.pitch) ? { ray: inputs.aimRay, look: inputs.aimLook } : null;
+    const cl = aimIn ? aimIn.look : gl;
+    const viewKey = `${view.orbit.yaw}|${view.orbit.pitch}|${view.offset.yaw}|${view.offset.pitch}|roll:${brainRollDeg}${camKey}${aimIn ? '|aim' : ''}${pickReferenceBrain ? '|worldPivot:' + pickReferenceBrain.pivotWorld.join(',') : ''}`;
 
     // Gaze: pure focus-strip / region test in source mm (camera at the world origin; the arm never occludes the ray).
     // Legacy mode only knows the arm band: a scene raycast hit on the brain (inputs.glassHit, ns-scene-three
@@ -4034,9 +4135,11 @@ export function createSimulation({ rig, boxes, strip, binding, armOptions = {}, 
     const prevRaw = state.rawGaze || null;
     // R558 (Messages 55 and 56): an area key placed this look (inputs.gazeFresh): classified anew, like a look that moved.
     const gazeFresh = Boolean(inputs && inputs.gazeFresh === true);
-    const rawCached = !gazeFresh && sameClassifyInput(prevRaw, gl.yaw, gl.pitch, reframed, viewKey);
-    const rawGaze = classify(prevRaw, gl.yaw, gl.pitch, placement, reframed, viewKey, brain, camRay, gazeFresh);
-    let gaze = rawGaze;
+    const rawCached = !gazeFresh && sameClassifyInput(prevRaw, cl.yaw, cl.pitch, reframed, viewKey);
+    const rawGaze = classify(prevRaw, cl.yaw, cl.pitch, placement, reframed, viewKey, brain, aimIn ? aimIn.ray : camRay, gazeFresh);
+    // (FREE_AIM: the classifier's own record keeps the aim's angles, for its memory of the last answer; the gaze record
+    // that everything else reads keeps the camera's look, as it always held)
+    let gaze = aimIn ? { ...rawGaze, yaw: gl.yaw, pitch: gl.pitch } : rawGaze;
     if (gaze.target === 'empty' && inputs && inputs.glassHit === true && !regionMode) gaze = { ...gaze, kind: 'glass', target: 'glass' };
     // R22 visible UI/mirror targets do not stimulate a brain area behind them. Actual glass remains graspable.
     const objectPick = inputs && inputs.objectPick ? inputs.objectPick : null;
@@ -4271,12 +4374,12 @@ export function createSimulation({ rig, boxes, strip, binding, armOptions = {}, 
       // forward, -x out to the left); the kept place itself (state.hand) is not turned, so the arm comes back to it as
       // the movement eases off. Without a shoulder movement nothing here changes (swing is null).
       const swing = shoulderSwing(pose.shoulderLiftDeg, pose.shoulderOutDeg);
-      // Camera bearings already use the body frame.
+      // Camera bearings already use the body frame. Keep manual shoulder rotation for game input.
       const handAsk0 = swing && !freeIn.cameraArm ? swing.turn(handWant) : handWant;
       // 23 November 2026, round r32 (LIMBS5, ns-limb-pace TRUNK_RIDE): a hand the view does not hold (inputs.hand.ride)
       // follows the place the trunk carries it to, at most 15 mm a frame or as fast as the trunk moves its shoulder (with
       // its own movement); the kept place (state.hand.rel) is not changed by it
-      const ride = !freeIn.cameraArm && freeIn.ride && typeof freeIn.ride === 'object' ? freeHandRide(state.hand && state.hand.ride, handAsk0, { carry: freeIn.ride.carry === true, att, shown: displayedAttachment, dt: h }) : null;
+      const ride = freeIn.ride && typeof freeIn.ride === 'object' ? freeHandRide(state.hand && state.hand.ride, handAsk0, { carry: freeIn.ride.carry === true, att, shown: displayedAttachment, dt: h }) : null;
       const handAsk = ride && ride.lagging ? ride.askBodyM : handAsk0;
       // The elbow's side: the place's own (ns-arm freeHandPole), across the shoulder -> hand line, swung toward at a
       // limited rate from the side it had, so the elbow never snaps round as the hand passes under the shoulder.
@@ -6056,7 +6159,7 @@ export function restMuscleDrive(binding) {
  *   setSettings(settings), setInfo(model), focusPrimary(), dispose(), element, infoElement }}
  */
 export function createShell({ doc, root, text = SHELL_TEXT, settings = SETTINGS_DEFAULTS, onPlay = null, onPlayUnlocked = null, onReload = null,
-  onMovementMirror = null, onSettings = null, onResetBody = null, onResetBrain = null, guideText = NT.GUIDE, onGuide = null, visualGuide = false, guideInputs = {}, onAmbient = null } = {}) {
+  onMovementMirror = null, onSettings = null, onResetBody = null, onResetBrain = null, guideText = NT.GUIDE, onGuide = null, visualGuide = false, onAmbient = null } = {}) {
   if (!doc || typeof doc.createElement !== 'function') fail('app_shell', 'createShell needs a document');
   if (!root || typeof root.appendChild !== 'function') fail('app_shell', 'createShell needs a root element');
   const added = [];
@@ -6184,7 +6287,7 @@ export function createShell({ doc, root, text = SHELL_TEXT, settings = SETTINGS_
   const guideToggle = button('ns-shell-secondary ns-shell-guide-toggle', guideRow, guideText.hide, 'guide-toggle');
   let guideActions = null;
   if (visualGuide) guideActions = mountGuideActions(grpGuide, { onShow: () => onGuide?.('show'), onRestart: () => onGuide?.('restart'),
-    features: { ...GUIDE_FEATURES, jointAim: guideInputs.jointAim === true }, installed: guideInputs });
+    features: { ...GUIDE_FEATURES, jointAim: true } });
   else button('ns-shell-secondary ns-shell-guide-restart', guideRow, guideText.restart, 'guide-restart');
   el('p', 'ns-shell-guidehelp', grpGuide, guideText.escHelp);
 
@@ -6254,6 +6357,7 @@ export function createShell({ doc, root, text = SHELL_TEXT, settings = SETTINGS_
   toast.setAttribute('role', 'status');
   toast.hidden = true;
   let toastSpotKey = ''; // R558: placeToast
+  let hintClearKey = '', hintClearPx = 0; // HINT_ROW: clearHint
   const live = el('div', 'ns-sr-only', root);
   live.setAttribute('role', 'status');
   live.setAttribute('aria-live', 'polite');
@@ -6494,6 +6598,29 @@ export function createShell({ doc, root, text = SHELL_TEXT, settings = SETTINGS_
       st.maxWidth = Number.isFinite(spot.maxWidth) ? px(spot.maxWidth) : '';
       st.textAlign = spot.align || '';
       st.setProperty('text-wrap', 'balance'); // two even lines rather than one long and one short
+    },
+    /** 24 November 2026 (HINT_ROW): keeps the limb buttons' bar clear of the hint: `bar` is raised by hintLift over its
+     * own place (the style sheet's) while the hint's box reaches into its column. Measured only when the hint's words,
+     * its place or `key` (the window's size) change. Returns the raise in px. */
+    clearHint: (bar, key = '') => {
+      const k = `${key}|${toast.hidden ? '' : toast.textContent}|${toastSpotKey}|${bar ? 1 : 0}`;
+      if (k === hintClearKey) return hintClearPx;
+      hintClearKey = k;
+      let lift = 0;
+      try {
+        if (bar && bar.style && typeof bar.getBoundingClientRect === 'function') {
+          bar.style.bottom = ''; // its own place first
+          if (!toast.hidden && typeof toast.getBoundingClientRect === 'function') {
+            lift = hintLift(toast.getBoundingClientRect(), bar.getBoundingClientRect());
+            if (lift > 0) {
+              const view = doc && doc.defaultView, base = view && typeof view.getComputedStyle === 'function' ? parseFloat(view.getComputedStyle(bar).bottom) : NaN;
+              if (Number.isFinite(base)) bar.style.bottom = `${Math.round(base + lift)}px`; else lift = 0;
+            }
+          }
+        }
+      } catch { lift = 0; }
+      hintClearPx = lift;
+      return lift;
     },
     get element() { return overlay; },
     get infoElement() { return info ? info.aside : null; }
@@ -6758,7 +6885,7 @@ export function start(params = {}) {
   } catch { /* unreadable storage: the in-memory settings are already normalised */ }
   // R4-text (D7): the "Try this" guide (pure state machine, ns-guide). Never pauses or blocks play.
   // R5-integrate-core (R5-text W2): only the round-5 goals whose feature is wired in this build (GUIDE_FEATURES).
-  let guideFeatures = { thirdPerson: false, glow: false, mirror: false, moveKeys: false, jointAim: false };
+  let guideFeatures = { thirdPerson: false, glow: false, mirror: false, moveKeys: false };
   let guide = NG.guideFromStorage((() => { try { return storage && typeof storage.getItem === 'function' ? storage.getItem(NG.GUIDE_STORAGE_KEY) : null; } catch { return null; } })(), 0, { features: guideFeatures, tutorial: true });
   // 19 November 2026 (EASE, the playable tutorial): steps done outside the frame loop (R pressed, Enter to skip a
   // step) wait here for the next frame's guideStep.
@@ -7431,7 +7558,6 @@ export function start(params = {}) {
   function refreshGuideFeatures() {
     const next = { thirdPerson: GUIDE_FEATURES.thirdPerson && Boolean(sceneFn('setCameraPose')),
       glow: GUIDE_FEATURES.glow && glowWired, mirror: GUIDE_FEATURES.mirror && mirrorWired && Boolean(bodyRig),
-      jointAim: Boolean(playerCamera && bodyRig),
       // R558 (Messages 55 and 56): the number-key goals need the numbered movement list on screen (only the scene's own
       // information card draws it) and the number keys wired in the controls (the controls arrive after the first
       // body install, so this is asked again on a later refresh).
@@ -7732,6 +7858,7 @@ export function start(params = {}) {
     if (shell) shell.render(after);
     if (chatOpen) chatOpen.disabled = !shellIsPlaying(after) || after.contextLost;
     if (cameraOpen) cameraOpen.disabled = !shellIsPlaying(after) || after.contextLost;
+    if (forecastOpen) forecastOpen.disabled = !mirrorBackend || !shellIsPlaying(after) || after.contextLost;
     if (activityOpen) activityOpen.disabled = !shellIsPlaying(after) || after.contextLost;
   }
 
@@ -7783,11 +7910,9 @@ export function start(params = {}) {
   function observePointerLock(atMs) {
     const locked = lockedNow(), wasLocked = shellState.locked;
     if (locked) captureRequest = null;
-    // A canvas request can arrive after focus has moved to an open control surface.
-    const lateDialogLock = !wasLocked && (chatDialog?.open || activityDialog?.open);
-    const lateFreeLock = !wasLocked && (shellState.unlockedPlay || !shellIsPlaying(shellState) || shellState.contextLost);
-    if (locked && (jointView?.visible || motionCamera?.visible || lateDialogLock || lateFreeLock) && exitLock()) return;
-    // An unchanged lock notification cannot end a pause while the browser still holds the pointer.
+    const lateLock = !wasLocked && (shellState.unlockedPlay || !shellIsPlaying(shellState) || shellState.contextLost);
+    const openControls = chatDialog?.open || activityDialog?.open || jointView?.visible || motionCamera?.visible;
+    if (locked && (lateLock || openControls) && exitLock()) return;
     if (locked && wasLocked && shellState.mode === 'paused') return;
     const openCamera = locked ? null : cameraOpenAfterUnlock;
     if (openCamera) cameraOpenAfterUnlock = null;
@@ -7839,7 +7964,8 @@ export function start(params = {}) {
     nativeEscape.releasedBeforeUnlock = false;
     nativeEscape.releasedUnlock = false;
     if (releasedUnlock) {
-      // The next deliberate Escape resumes with the pointer free. Leave the browser's Escape action available.
+      // An actual intervening keyup proves this is a subsequent press. Hide the overlay without requesting capture;
+      // Escape resumes free look. The capture button is the only pointer-lock request.
       dispatch({ type: 'playUnlocked' });
     } else onEscape(atMs);
   }
@@ -8067,16 +8193,11 @@ export function start(params = {}) {
       onReload: () => { try { view.location.reload(); } catch { /* nothing else to do */ } },
       onMovementMirror: mirrorBackend ? () => {
         // Stop camera tracks, pending model requests, the draw loop and owned asset streams.
-        try { stop(); } finally { view.location.replace('../../movement-mirror.html'); }
+        try { stop(); } finally { view.location.replace(new URL('../../movement-mirror.html', import.meta.url).href); }
       } : null,
       onResetBody: resetBody,
       onResetBrain: resetBrainView,
       visualGuide: Boolean(viewGraph),
-      guideInputs: {
-        jointAim: Boolean(viewGraph && !wholeArmOption),
-        directions: Boolean(doc.getElementById?.('ns-chat-open')),
-        camera: Boolean(doc.getElementById?.('ns-camera-open')),
-      },
       onAmbient: viewGraph ? enabled => { ambientEnabled = enabled; renderRequested = true; } : null,
       onGuide: what => {
         const t = simState && Number.isFinite(simState.t) ? simState.t : 0;
@@ -8117,47 +8238,55 @@ export function start(params = {}) {
     listen(canvas, 'webglcontextrestored', () => dispatch({ type: 'contextRestored' }));
   }
   const cameraOpen = doc.getElementById?.('ns-camera-open');
+  const forecastOpen = doc.getElementById?.('ns-forecast-open');
   const takeRecorder = doc.getElementById?.('ns-original-camera');
   const gameReady = () => phase === 'running' && !stopped && !failed && !shellState.contextLost;
-  if (cameraOpen) {
-    function openCameraControls(open) {
-      if (!gameReady() || !shellIsPlaying(shellState)) return;
-      if (!lockedNow()) { open(); return; }
-      cameraOpenAfterUnlock = open;
-      if (!exitLock()) cameraOpenAfterUnlock = null;
-    }
-    function applyTrackedPose(pose) {
-        // Replace a stale sample, including on tracking loss. Keep the last
-        // visible pose until another camera sample or game movement changes it.
-        pendingCameraPose = gameReady() && shellIsPlaying(shellState) ? pose : null;
-        trackedJoints = pendingCameraPose?.joints ?? null;
-        // Pose events for the joint controller are consumed once per camera
-        // sample. The left-arm solver needs its target on every render frame
-        // until a new sample, loss, stop or change of selected limb replaces it.
-        trackedLeftArm = pendingCameraPose?.leftArm ?? null;
-    }
+  function openCameraControls(open) {
+    if (!gameReady() || !shellIsPlaying(shellState)) return;
+    if (!lockedNow()) { open(); return; }
+    cameraOpenAfterUnlock = open;
+    if (!exitLock()) cameraOpenAfterUnlock = null;
+  }
+  function applyTrackedPose(pose) {
+    // Replace a stale sample, including on tracking loss. Keep the last
+    // visible pose until another camera sample or game movement changes it.
+    pendingCameraPose = gameReady() && shellIsPlaying(shellState) ? pose : null;
+    trackedJoints = pendingCameraPose?.joints ?? null;
+    // Pose events are consumed once, but the left arm needs its bearing on every frame.
+    trackedLeftArm = pendingCameraPose?.leftArm ?? null;
+  }
+  function movementMirror() {
+    jointView ??= bindJointView({
+      host: doc.body, onPose: applyTrackedPose, readRig: () => readJointRig?.(), embedded: true,
+      backend: mirrorBackend,
+      onSaveTake: motionCamera ? (take, source) => motionCamera.saveTake(take, source) : null,
+      onOpenCommand: chatOpen ? () => chatOpen.click() : null,
+      onClose() { canvas.focus({preventScroll:true}); }
+    });
+    return jointView;
+  }
+  const openMovementForecast = mirrorBackend ? () => openCameraControls(() => {
+    motionCamera?.close();
+    movementMirror().open();
+  }) : null;
+  if (forecastOpen && openMovementForecast) {
+    forecastOpen.hidden = false;
+    listen(forecastOpen, 'click', openMovementForecast);
+  }
 
+  if (cameraOpen) {
     motionCamera = createCameraCapture({host:doc.body,onPose:applyTrackedPose,
       returnFocus() {if (gameReady() && shellIsPlaying(shellState)) canvas.focus({preventScroll:true});}});
-    if (mirrorBackend) {
-      jointView = bindJointView({host:doc.body,onPose:applyTrackedPose,readRig:()=>readJointRig?.(),embedded:true,
-        backend:mirrorBackend,
-        onSaveTake:(take,source)=>motionCamera.saveTake(take,source),
-        onOpenCommand:chatOpen ? ()=>chatOpen.click() : null,
-        onClose(){canvas.focus({preventScroll:true});}});
-      if (takeRecorder) {
-        takeRecorder.hidden = false;
-        listen(takeRecorder, 'click', () => openCameraControls(() => {
-          jointView.close();
-          motionCamera.open();
-        }));
-      }
+    if (mirrorBackend === 'local-model' && takeRecorder) {
+      takeRecorder.hidden = false;
+      listen(takeRecorder, 'click', () => openCameraControls(() => {
+        jointView?.close();
+        motionCamera.open();
+      }));
     }
-    const toggleCamera = () => openCameraControls(() => {
-      if (jointView) {
-        motionCamera.close();
-        jointView.open();
-      } else if (motionCamera.visible) {
+    const toggleCamera = mirrorBackend === 'local-model' ? openMovementForecast : () => openCameraControls(() => {
+      jointView?.close();
+      if (motionCamera.visible) {
         motionCamera.close();
         canvas.focus({ preventScroll: true });
       } else motionCamera.open();
@@ -8177,7 +8306,8 @@ export function start(params = {}) {
   if (takeRecorder?.hidden === false) {
     const cameraHelp = doc.getElementById?.('ns-camera-key-help');
     const recorderHelp = doc.getElementById?.('ns-take-recorder-help');
-    if (cameraHelp) cameraHelp.textContent = 'Press C for the Movement mirror. Choose Save take to keep the recent tracked movement, then use F to replay it.';
+    if (cameraHelp) cameraHelp.textContent = 'Press C to follow your movement with the camera. ' +
+      'To record for replay, choose “Record a limb take” in the game toolbar.';
     if (recorderHelp) recorderHelp.textContent = takeRecorderInstruction;
   }
   const dialogControls = {
@@ -8207,8 +8337,9 @@ export function start(params = {}) {
   };
   const disposeChat = chatDialog && chatOpen ? bindActionChat({
     ...dialogControls, dialog: chatDialog, trigger: chatOpen,
-    askTouch: jointView?.askTouch,
-    runJointGoal: jointView ? (intent,words)=>jointView.run(intent,words) : null,
+    askTouch: mirrorBackend === 'local-model' ? words => movementMirror().askTouch(words) : null,
+    runJointGoal: mirrorBackend ? (intent, words) => movementMirror().run(intent, words) : null,
+    openMovementForecast,
     hasAvatarRig: () => Boolean(bodyRig),
     takeRecorderInstruction,
     getLatestTake: () => motionCamera?.latestTake,
@@ -9180,6 +9311,9 @@ export function start(params = {}) {
       let crossPick = null; // R558 (hunt 2): the muscle under the crosshair (what is seen there: controlTargets' front)
       let crossBrainPart = null; // 19 November 2026: 'eyeball' | 'nerve' when the crosshair is on one at the brain's front
       let quietStart = true; // 20 November 2026 (QUIET_START): nothing named at the crosshair until the look first moves
+      // 24 November 2026 (FREE_AIM, section 206): this frame's aim (the free pointer, or the crosshair at the middle of the
+      // picture), its ray when it is the pointer's, and aimStep's record
+      let aimSeen = null, aimNow = { pointer: false, x: NaN, y: NaN, silent: false, arrivedFrom: undefined, ms: null }, aimRay = null;
       // 18 November (MAP): that muscle's own record and the area that moves it (the reverse link: "what controls this?")
       let crossSeen = null, crossRoute = null, crossRouteKey = '';
       // ---- R558 (user Messages 33 and 34): what each control acts on (controlTargets) ---------------------------------
@@ -9194,7 +9328,9 @@ export function start(params = {}) {
         // the look's own classifier (state.rawGaze, before the overrides) whether a motor area is on this ray; elsewhere
         // (a free pointer off the centre) the scene's area meshes decide.
         const raw = simState && simState.rawGaze && typeof simState.rawGaze === 'object' ? simState.rawGaze : null;
-        const atCross = Boolean(appliedSize) && Math.abs(x - appliedSize.width / 2) < 0.5 && Math.abs(y - appliedSize.height / 2) < 0.5;
+        // (24 November 2026, FREE_AIM: the look's classifier answers for the frame's aim, the pointer's place when it aims)
+        const aimX = Boolean(appliedSize) && aimNow.pointer ? aimNow.x : appliedSize ? appliedSize.width / 2 : NaN, aimY = Boolean(appliedSize) && aimNow.pointer ? aimNow.y : appliedSize ? appliedSize.height / 2 : NaN;
+        const atCross = Boolean(appliedSize) && Math.abs(x - aimX) < 0.5 && Math.abs(y - aimY) < 0.5;
         // 18 November 2026 (SEE): the limbs the scene finds locked away (their ghosts are drawn filled).
         let locked = null; try { locked = sceneFn('ghostLocked') ? callScene('ghostLocked') : null; } catch { locked = null; }
         const t = controlTargets(L.layers, { ...(atCross && raw && typeof raw.target === 'string' ? { lookArea: raw.target === 'region' } : {}), ghost: locked });
@@ -9335,8 +9471,11 @@ export function start(params = {}) {
         return NT.HUD.controlTargets({ front: T.arrow ? 'arrow' : nameOf(T.front), behind: nameOf(be), ahead: nearer && be.item === 'brain', inFront: nearer && be.item !== 'brain',
           area: r ? NT.plainTitle(r) : '', reach: reach === true, limbsChosen: LIMB_KEYS.on && LIMB_KEYS.view.hold === true }); // (WORDS2, hunt H10: Space on a limb chooses it)
       }
+      // (24 November 2026, FREE_AIM, section 206: a press made with a KEY, Space, acts at the aim: the pointer while it is the
+      // aim, else the crosshair. Until now a free pointer always took it, also after an arrow key had put the look on an
+      // area and the pointer lay where the mouse was last left.)
       const pressPoint = () => {
-        const locked = lockedNow() || !cs || !cs.pointer;
+        const locked = lockedNow() || !cs || !cs.pointer || (FREE_AIM.on && Number.isFinite(aimNow.x) && aimNow.pointer !== true);
         return locked ? { x: appliedSize.width / 2, y: appliedSize.height / 2 } : { x: cs.pointer.x, y: cs.pointer.y };
       };
       /** Joint limits of the drawn body (the posture's caps inside BODY_JOINT_LIMITS, the activity's own limits). */
@@ -9644,7 +9783,6 @@ export function start(params = {}) {
       /* ---- 19 November 2026: the chosen limb held by the view (LIMB_KEYS.view.hold) --------------------------------- */
       const HOLD = LIMB_KEYS.view;
       const holdDbg = { refused: 0 }; // (holdMemo: kept with the hold's other records since LIMBS5 pass 4)
-      let aimPractice = null;
       let limbControlPicked = false;
       let holdLight = null, holdLightKeys = ''; // (22 November 2026, LIMBS2: ns-limb-pace holdLightStep's last result for the held limb, { acc, lit, limb }, and the keys it was made under)
       const chosenLimb = () => LIMB_KEYS.order[limbChoice - 1];
@@ -9703,11 +9841,6 @@ export function start(params = {}) {
         return Boolean(trackedJoints && NsGrasp.LIMB_CHAIN[limb]?.joints.some(id => Object.hasOwn(trackedJoints, id)));
       }
 
-      function relativeLimbEnd(limb, out) {
-        const points = limbEnds(limb, out);
-        return points ? points.frame.map((value, axis) => value - points.root[axis]) : null;
-      }
-
       function updateJointAim(axes) {
         const limb = chosenLimb();
         if (!playerCamera || !firstPersonNow() || axes.x || axes.z || holdBusy() || cameraControlsLimb(limb)) {
@@ -9751,7 +9884,6 @@ export function start(params = {}) {
             transformDirection(attachment.bodyToCamera, [x, -reach * Math.cos(target), -reach * Math.sin(target)]));
           jointAim.hand = handKeepOut(root.map((v, i) => v + offset[i]));
         }
-        return true;
       }
       /** The posed segments of the drawn body, made once for a pose (the hold asks for them several times a frame). */
       let segsMemo = { posed: null, head: null, segs: null };
@@ -12162,9 +12294,24 @@ export function start(params = {}) {
         if (LIMB_KEYS.on && live && limbView) stepLimbView(now, timing.dt);
         // 21 November 2026 (CARRIED_LOOK, hunt H1 and H7): while a neck or trunk movement from the brain carries the view
         // and the player leaves the look alone, the look stays on the area and spot that started it (see CARRIED_LOOK).
+        // 24 November 2026 (FREE_AIM): this frame's aim, and when the player last moved it (the look, or the pointer as aim)
+        {
+          const sp = cs.space, spBusy = Boolean(sp && (sp.role || sp.grasp === 'held' || sp.grasp === 'kept' || sp.holding === true || sp.turning === true));
+          const carried = Boolean(carriedLimb() || (simState && simState.objectCarry && simState.objectCarry.held) || (simState && simState.activity && simState.activity.brainGrab && simState.activity.brainGrab.active));
+          const a = aimStep(aimSeen, { pointer: cs.pointer || null, lookMs: cs.lookMs === undefined ? null : cs.lookMs, yaw: cs.yaw, pitch: cs.pitch, free: live && !lockedNow(),
+            width: size ? size.width : 0, height: size ? size.height : 0, busy: spBusy || carried, down: Boolean(cs.button && cs.button.down), nowMs: now,
+            gazeArea: simState && simState.activity && typeof simState.activity.gazeArea === 'string' ? simState.activity.gazeArea : null,
+            clicked: timing.events.some(e => e && e.type === 'click'),
+            pressSeq: cs.button && cs.button.via === 'pointer' && Number.isSafeInteger(cs.button.seq) ? cs.button.seq : null });
+          aimSeen = a.seen; aimNow = a; aimRay = null;
+          // (section 208: what the aiming pointer is on is what this frame's click presses: the look's event is placed at the
+          // start of the frame, as for a reach-behind click, so a click that comes in the same frame as the press that gave
+          // the pointer the aim does not find the crosshair's area of the frame before)
+          if (aimNow.pointer && timing.gazeAt !== 0 && timing.events.some(e => e && e.type === 'click')) timing = { ...timing, gazeAt: 0 };
+        }
         let lookByGame = false, lookMovedNow = false; // (lookMovedNow: the player's pointer moved the look this frame, CARRY_ARRIVAL)
         if (live) {
-          const act = simState ? simState.activity : null, lookMsNow = cs.lookMs === undefined ? null : cs.lookMs;
+          const act = simState ? simState.activity : null, lookMsNow = aimNow.ms;
           lookMovedNow = carriedLookMsBefore !== null && lookMsNow !== carriedLookMsBefore;
           const carrying = carriedLookMoving(act ? act.bodyJerk : null) || Boolean(neckView && neckView.active);
           carriedHold = carriedLookStep(carriedHold, { carrying, gaze: simState ? simState.gaze : null, lastMove: act ? act.lastMove : null, lookMs: lookMsNow, lookMsBefore: carriedLookMsBefore,
@@ -12368,7 +12515,7 @@ export function start(params = {}) {
         // next motor area along the strip, in the key's direction on the screen (sim.areaStep; the walk is ns-app
         // areaChain). A step shows the area and its number keys. Nothing is stepped while something is held; a step
         // waits while the view is still changing or a held neck / trunk movement is under way.
-        const walkMarks = { lookMs: cs.lookMs === undefined ? null : cs.lookMs, buttonSeq: cs.button && Number.isSafeInteger(cs.button.seq) ? cs.button.seq : null };
+        const walkMarks = { lookMs: aimNow.ms, buttonSeq: cs.button && Number.isSafeInteger(cs.button.seq) ? cs.button.seq : null };
         const lookIsDrawn = drawnWalkMarks?.lookMs === walkMarks.lookMs && drawnWalkMarks?.buttonSeq === walkMarks.buttonSeq;
         let steppedTo = null;
         if (live && areaRequests.length) {
@@ -12432,6 +12579,8 @@ export function start(params = {}) {
               infoStepped = { id: reached, t: actNow && Number.isFinite(actNow.t) ? actNow.t : 0, seen: false,
                 ...walkMarks, viewToggle: cam.toggles, inputEpoch: inputCancellation.count };
               steppedTo = reached;
+              // (24 November 2026, FREE_AIM: the key placed the look, so the crosshair is the aim from this frame on)
+              if (aimNow.pointer) { aimNow = { ...aimNow, pointer: false, x: size.width / 2, y: size.height / 2, silent: false, arrivedFrom: undefined }; aimSeen = { ...aimSeen, lSeq: aimSeen.seq + 1, seq: aimSeen.seq + 1, was: false, anchor: null, moving: false }; }
               if (carriedHold && !carriedHold.off) { carriedHold = { off: true, gaze: null, lookMs: carriedHold.lookMs, moveSeq: carriedHold.moveSeq }; holdingLook = false; } // (CARRIED_LOOK: a key's step is the player's look)
               areaFreshPending = true;
               areaNote = null;
@@ -12480,24 +12629,7 @@ export function start(params = {}) {
         // per frame, before the attempts)
         { const k = live && headOffs ? NsPace.trunkRideKey(headOffs.now) : trunkRideKeyLast; trunkRideCarry = k !== trunkRideKeyLast; trunkRideKeyLast = k; }
 
-        const aimInput = live && updateJointAim(controlsApi.axes(cs));
-        const practisingAim = live && jointAim && guideFeatures.jointAim && !guide.hidden && !guide.paused && NG.currentGoal(guide) === 'aimJoint';
-        const moveSeqBeforeAim = simState.activity?.moveSeq;
-        if (!practisingAim || (aimPractice && (aimPractice.limb !== jointAim.limb ||
-            aimPractice.moveSeq !== moveSeqBeforeAim || (!aimInput && aimPractice.lookMs !== cs.lookMs)))) {
-          aimPractice = null;
-        }
-        if (practisingAim && aimInput) {
-          // Use the pose before this up/down gesture. An earlier sideways look cannot complete the step.
-          if (!aimPractice || simState.t > aimPractice.until) {
-            const start = relativeLimbEnd(jointAim.limb);
-            aimPractice = start ? { limb: jointAim.limb, start, moveSeq: moveSeqBeforeAim } : null;
-          }
-          if (aimPractice) {
-            aimPractice.lookMs = cs.lookMs;
-            aimPractice.until = simState.t + AIM_PRACTICE_RESPONSE_S;
-          }
-        }
+        if (live) updateJointAim(controlsApi.axes(cs));
         const baseTiming = live && jointAim?.bodyEvent
           ? { ...timing, events: [...timing.events, jointAim.bodyEvent] } : timing;
         // R558: ONE attempt at this frame, from the camera choice to the simulation step. It commits nothing: the caller
@@ -12710,11 +12842,20 @@ export function start(params = {}) {
         const pickPicture = PICK_LAG.fresh && simState.gaze ? `${simState.gaze.yaw}|${simState.gaze.pitch}|${simState.gaze.viewKey}` : '';
         const pickQuiet = live && fixed !== true && pickHold.ctl !== null && pickHold.n - pickHold.frame <= PICK_LAG.reuse && pickHold.w === size.width && pickHold.h === size.height
           && pickHold.view === cam.view && cam.progress === (cam.view === 'third' ? 1 : 0) && !reachPick && !tapped && timing.events.length === 0 && cs.reach !== true
+          && pickHold.ax === aimNow.x && pickHold.ay === aimNow.y // (FREE_AIM: the answer is for one place of the picture)
           && !cs.drag?.binding?.limb && !dragTurns.some(drag => drag.target === 'limb') && !(PICK_LAG.fresh && pickHold.picture !== pickPicture);
         let ctl = null;
         if (pickQuiet) { ctl = pickHold.ctl; pickHold.reused++; } // the frame after a fresh answer: frame stays, so the next one asks
-        else if (live) { ctl = targetsAt(size.width / 2, size.height / 2); pickHold.ctl = ctl; pickHold.frame = ctl ? pickHold.n : -2; pickHold.w = size.width; pickHold.h = size.height; pickHold.view = cam.view; pickHold.picture = pickPicture; pickHold.asked++; }
+        else if (live) { ctl = targetsAt(aimNow.x, aimNow.y); pickHold.ctl = ctl; pickHold.frame = ctl ? pickHold.n : -2; pickHold.w = size.width; pickHold.h = size.height; pickHold.ax = aimNow.x; pickHold.ay = aimNow.y; pickHold.view = cam.view; pickHold.picture = pickPicture; pickHold.asked++; }
         ctlFrame = ctl;
+        // 24 November 2026 (FREE_AIM): the ray through the aiming pointer, as the scene's camera of this frame casts it,
+        // and its look angles (stepFrame's gazeRay and gazeLook below); without a scene ray the crosshair stays the aim
+        if (aimNow.pointer) {
+          let r = null; try { r = sceneFn('rayAt') ? callScene('rayAt', aimNow.x, aimNow.y) : null; } catch { r = null; }
+          const okRay = r && Array.isArray(r.origin) && Array.isArray(r.dir) && r.origin.length === 3 && r.dir.length === 3 && r.origin.every(Number.isFinite) && r.dir.every(Number.isFinite);
+          if (okRay) { const l = NC.lookOfDirection(r.dir); aimRay = { ray: Object.freeze({ origin: r.origin.slice(), dir: r.dir.slice() }), look: Object.freeze({ yaw: l.yaw, pitch: l.pitch }) }; }
+          else { aimRay = null; aimNow = { ...aimNow, pointer: false, x: size.width / 2, y: size.height / 2 }; ctl = live ? targetsAt(aimNow.x, aimNow.y) : null; ctlFrame = ctl; pickHold.ctl = ctl; pickHold.ax = aimNow.x; pickHold.ay = aimNow.y; }
+        }
         const objectPick = live && reachPick ? reachPick : frameObjectPick(ctl, live);
         const keyboardAimId = live && infoStepped && infoStepped.lookMs === walkMarks.lookMs && infoStepped.buttonSeq === walkMarks.buttonSeq
           && infoStepped.viewToggle === cam.toggles && infoStepped.inputEpoch === inputCancellation.count ? infoStepped.id : null;
@@ -12807,16 +12948,22 @@ export function start(params = {}) {
           // 20 November 2026 (NECK_VIEW): and while the view swings with a neck movement and glides back.
           // 21 November 2026 (hunt H2): and on a frame on which the game itself turned the view (lookByGame).
           silentGaze: seedNext === true || followTurned || objectPick === reachPick || camPose.silentGaze === true || Boolean(headOffs && headOffs.moving) || Boolean(neckView && neckView.active) || Boolean(carriedLimb() && limbGrasp.limb !== 'leftArm')
-            || Boolean(simState.objectCarry && simState.objectCarry.held && simState.objectCarry.target === 'mirror') || lookByGame || walkNow.silent,
+            || Boolean(simState.objectCarry && simState.objectCarry.held && simState.objectCarry.target === 'mirror') || lookByGame || walkNow.silent
+            || aimNow.silent === true, // (24 November 2026, FREE_AIM: a button down under the aiming pointer; the aim back at the crosshair by itself)
           // 21 November 2026, late (CARRY_ARRIVAL): the first frame after a carry during which the player moved the look
           // (22 November 2026, LOOK2: or the first frame after a held walk, AREA_WALK_QUIET)
-          ...(carryNow.arrivedFrom !== undefined ? { gazeArrivedFrom: carryNow.arrivedFrom } : walkNow.arrivedFrom !== undefined ? { gazeArrivedFrom: walkNow.arrivedFrom } : {}),
+          // (24 November 2026, FREE_AIM: or the frame on which the aiming pointer has come to rest)
+          ...(carryNow.arrivedFrom !== undefined ? { gazeArrivedFrom: carryNow.arrivedFrom } : walkNow.arrivedFrom !== undefined ? { gazeArrivedFrom: walkNow.arrivedFrom }
+            : aimNow.pointer && aimNow.arrivedFrom !== undefined ? { gazeArrivedFrom: aimNow.arrivedFrom } : {}),
           // 21 November 2026 (CARRIED_LOOK, hunt H1 and H7): the look held on the area and spot of the movement under way
           ...(holdingLook ? { heldGaze: carriedHold.gaze } : {}),
           ...(head ? { head } : {}),
           brainCentreNdc: brainCentreForPanel(size), viewportPx: { width: size.width, height: size.height },
           ...(wholeArmOption ? { wholeArmDisplayPlan, wholeArmActiveCamera: camPose } : {}),
           ...(!referenceGraph && camPose.firstPerson ? {} : { gazeRay: camPose.gazeRay, gazeLook: camPose.gazeLook }),
+          // (24 November 2026, FREE_AIM: with the pointer as the aim the look's CLASSIFIER is asked along the pointer's ray;
+          // the look itself, which carries a held brain or mirror body, stays the camera's)
+          ...(aimNow.pointer && aimRay ? { aimRay: aimRay.ray, aimLook: aimRay.look } : {}),
           ...(areaFreshPending ? { gazeFresh: true } : {}),
           ...(keyboardAimId ? { keyboardAimId } : {}),
           ...(danceRange ? { danceRange } : {}), // R558 (Space dance): the touch-free hip range of the current leg posture
@@ -13628,18 +13775,6 @@ export function start(params = {}) {
         if (emapOn || (emapView ? !emapView.built || emapView.amount > 0 : !EMAP_BUILD.onPress)) { if (!emapNote) emapFrame(now, out); }
         if (ambientEmap) ambientEmap.frame({ nowMs: now, enabled: ambientEnabled && !emapOn && !(emapView?.amount > 0), reduced: prefersReducedMotion() });
         frameTimer.mark('glow');
-        if (aimPractice && (simState.activity?.moveSeq !== aimPractice.moveSeq || simState.t > aimPractice.until)) aimPractice = null;
-        // The visible limb can keep moving for several frames after one mouse event.
-        if (aimPractice) {
-          const end = relativeLimbEnd(aimPractice.limb, out);
-          if (end) {
-            const m = Math.hypot(...end.map((value, axis) => value - aimPractice.start[axis]));
-            if (m >= NG.GUIDE_OPTIONS.jointAimMinM) {
-              guideAsyncEvents.push({ type: 'jointAim', m });
-              aimPractice = null;
-            }
-          }
-        }
         refreshGuideFeatures();
         // R558 (hunt 3 check): the sim re-applies the legacy glassHit override to its cached RAW gaze every frame, so in
         // legacy mode the hit is kept while the raw gaze is empty (the glass it made); clearing it there lost the glass
@@ -13683,7 +13818,7 @@ export function start(params = {}) {
         if (live && cameraDrawChanged && (stepInputs?.keyboardAimId || camAtFrameStart.progress !== cam.progress)) {
           // The earlier pick describes the preceding picture. Bind the target and the overlap hint to
           // the camera and geometry just applied, including the last frame of a view transition.
-          ctlFrame = targetsAt(size.width / 2, size.height / 2);
+          ctlFrame = targetsAt(aimNow.x, aimNow.y); // (FREE_AIM: at the frame's aim)
           pickHold.ctl = ctlFrame;
         }
         // R558 (hunt 3, kept): on ANY arrow tip, muted ones included, no muscle behind it is named (ctlFrame.arrow: the tip
@@ -13697,7 +13832,7 @@ export function start(params = {}) {
         // the crosshair is named (a motor area still is: the look acts there).
         if (quietStart && QUIET_START.on) {
           const home = referenceGraph && referenceGraph.initialLook ? referenceGraph.initialLook : null;
-          if (!home || !cs || !Number.isFinite(cs.yaw) || !Number.isFinite(cs.pitch) || Math.hypot(cs.yaw - home.yaw, cs.pitch - home.pitch) > QUIET_START.lookDeg * DEG || cam.view !== 'first') quietStart = false;
+          if (!home || !cs || !Number.isFinite(cs.yaw) || !Number.isFinite(cs.pitch) || Math.hypot(cs.yaw - home.yaw, cs.pitch - home.pitch) > QUIET_START.lookDeg * DEG || cam.view !== 'first' || aimNow.pointer) quietStart = false; // (FREE_AIM: or the pointer has taken the aim)
         } else quietStart = false;
         crossPick = !live || onArea || arrowTip || !seen || quietStart ? null : { source: seen.source, kind: seen.kind, name: seen.name, bodyPart: seen.bodyPart, holdable: false };
         // 19 November 2026: an eyeball or a nerve at the brain's front (scene controlLayersAt `part`) is named in the tip
@@ -13750,6 +13885,11 @@ export function start(params = {}) {
         else if (limbLatch && NT.HUD.controllingLimb) model.space = [NT.HUD.controllingLimb(limbLatch), model.space].filter(Boolean).join(' \u00b7 ');
         // (19 November: the ring round the crosshair also shows for as long as a click controls a limb)
         if ((spaceLimb && model.crosshairHold === 'empty') || (limbLatch && model.crosshairHold !== 'item')) model.crosshairHold = 'item';
+        // 24 November 2026 (FREE_AIM, section 206): while the pointer is the aim the mark at the middle of the picture is not:
+        // it is drawn faint and does not light up for what the pointer is on (it still shows where the look points, where
+        // an arrow key aims and where the chosen limb goes with the view).
+        model.crosshairAway = aimNow.pointer === true;
+        if (aimNow.pointer) model.crosshairActive = false;
         if (now < contact.untilMs && NT.HUD.contactStop) model.note = [NT.HUD.contactStop(contact.last), model.note].filter(Boolean).join(' \u00b7 ');
         // R558 (R31): what the last tapped muscle switched on, in plain words, for a few seconds.
         if (muscleTapNote && simState.t < muscleTapNote.untilT) model.note = [muscleTapNote.text, model.note].filter(Boolean).join(' \u00b7 ');
@@ -13759,8 +13899,10 @@ export function start(params = {}) {
         // (hold Shift as you press); while Shift is held, what the press will reach. Not while something is held.
         const holdingNow = Boolean(carriedLimb() || (simState.objectCarry && simState.objectCarry.held) || (simState.activity && simState.activity.brainGrab && simState.activity.brainGrab.active));
         // With a free mouse the presses act under the pointer, so the line describes what is under the pointer.
-        const freePointer = live && !lockedNow() && cs.pointer && Number.isFinite(cs.pointer.x) && Number.isFinite(cs.pointer.y);
-        const hudT = freePointer ? targetsAt(cs.pointer.x, cs.pointer.y) : ctlFrame;
+        // (24 November 2026, FREE_AIM, section 206: the line describes the AIM, the pointer only while it is the aim: after an
+        // arrow key or a look the crosshair is the aim although the pointer is free, and Space acts there, pressPoint)
+        const freePointer = FREE_AIM.on ? aimNow.pointer === true : live && !lockedNow() && cs.pointer && Number.isFinite(cs.pointer.x) && Number.isFinite(cs.pointer.y);
+        const hudT = FREE_AIM.on ? ctlFrame : freePointer ? targetsAt(cs.pointer.x, cs.pointer.y) : ctlFrame;
         const targetsNote = live && !holdingNow ? controlTargetsLine(hudT, cs.reach === true) : '';
         if (targetsNote) model.note = [targetsNote, model.note].filter(Boolean).join(' \u00b7 ');
         controlTargetsShown = live ? { line: targetsNote, at: freePointer ? 'pointer' : 'crosshair', front: hudT && hudT.front ? ctlKey(hudT.front) : null, behind: hudT && hudT.behind ? ctlKey(hudT.behind) : null, arrow: Boolean(hudT && hudT.arrow), reach: cs.reach === true } : null;
@@ -13899,7 +14041,13 @@ export function start(params = {}) {
             const aimLine = NT.TIP.spaceAim(aimed?.limb || aimed?.target, cs.reach === true, LIMB_KEYS.on && LIMB_KEYS.view.hold === true);
             if (held) tipModel = quietTipModel({ held });
             else if (!onArea && areaFeedback && areaNote?.key === 'areaUnreachable') tipModel = quietTipModel({ pick: { name: areaFeedback, kind: 'area-note' } });
-            else if (aimLine) tipModel = quietTipModel({ pick: { name: aimLine, kind: 'aim' } });
+            // 24 November 2026 (FREE_AIM, section 206): with the pointer as the aim a motor area keeps its own tip (its name
+            // and the movement a rest or a click starts: until now every area under a free pointer read "Space holds the
+            // brain"), and a named muscle or bone keeps its name with the Space line under it. The Space line alone is
+            // for a pointer on nothing that has a name (the brain's glass), and for a pointer that is not the aim.
+            else if (aimLine && aimNow.pointer && tipModel && tipModel.kind === 'area') { /* the area's own tip */ }
+            else if (aimLine && aimNow.pointer && tipModel && tipModel.kind !== 'arrow' && tipModel.kind !== 'hold' && !tipModel.hint) tipModel = { ...tipModel, hint: aimLine, key: `${tipModel.key}|${aimLine}` };
+            else if (aimLine && (aimNow.pointer || !tipModel)) tipModel = quietTipModel({ pick: { name: aimLine, kind: 'aim' } });
             // 19 November 2026 (limbLatch): while a click controls a limb the tip says which and what moves it, but only
             // where the crosshair is on that limb or on nothing: a motor area, an arrow and any other body part keep
             // their own tip (a check: the area's name and numbers were hidden for as long as a limb was controlled).
@@ -13918,6 +14066,7 @@ export function start(params = {}) {
           }
           if (sceneFn('setKeyboardAreaTip')) callScene('setKeyboardAreaTip', tipModel?.kind === 'area' && Boolean(tipModel.hint));
           const free = cs && cs.pointer && !lockedNow() ? cs.pointer : null;
+          const tipAtPointer = Boolean(free && Number.isFinite(free.x) && Number.isFinite(free.y) && (aimNow.pointer || !FREE_AIM.on || (tipModel && tipModel.kind === 'aim')));
           const tipArea = tipModel && tipModel.kind === 'area' && onArea && typeof out.gaze.regionId === 'string' ? regionById(bodyMap, out.gaze.regionId) : null;
           // 22 November 2026 (SEEMOVE, section 189): the tip keeps off your own left hand's box on the screen (the same box
           // the region labels keep off, armAvoidShapes), so it no longer covers the palm and thumb at the hand's areas
@@ -13925,7 +14074,8 @@ export function start(params = {}) {
           const handBox = handR ? { x0: handR.x0 * size.width, y0: handR.y0 * size.height, x1: handR.x1 * size.width, y1: handR.y1 * size.height } : null;
           quietUi.update({ avoid: handBox, show: quietOn, tip: tipModel, side: tipArea && tipArea.hemisphere === (BRAIN_FRONT_DOWN ? 'right' : 'left') ? 'left' : null, prompt: quietOn ? quietPromptText(guideNow, NT.GUIDE.short) : '',
             count: quietOn ? quietPromptCount(guideNow) : '', skip: quietOn && guideNow && guideNow.visible && !guideNow.finished && guide.tutorial === true ? NT.GUIDE.short.skip : '',
-            x: free && Number.isFinite(free.x) ? free.x : size.width / 2, y: free && Number.isFinite(free.y) ? free.y : size.height / 2,
+            // (24 November 2026, FREE_AIM: beside the aim; a free pointer that is not the aim has only the Space line there)
+            x: tipAtPointer ? free.x : size.width / 2, y: tipAtPointer ? free.y : size.height / 2,
             width: size.width, height: size.height });
         }
         if (guideCues) {
@@ -13937,16 +14087,23 @@ export function start(params = {}) {
               ? sim.guideMotorTarget(camPose, out.brainTransform, camPose.viewFovYDeg || holdFov(), aspect, out.gaze?.regionId) : null;
             const motor = targeted ? guidePoint(targeted.world, targeted.area.label || targeted.area.id,
               mods.colors?.areaColorCss?.(targeted.area.id)) : null;
-            const limbKeysStep = step === 'chooseLimb' || step === 'aimJoint' || step === 'moveHand' || step === 'dragLimb';
+            const limbKeysStep = step === 'chooseLimb' || step === 'moveHand' || step === 'dragLimb';
             const limb = limbKeysStep ? guidePoint(limbEnds(selectedLimb, out)?.frame, NT.GRASP_INFO.chosen[selectedLimb]) : null;
             const brain = step === 'dragBrain' || step === 'orbit' ? guidePoint(out.brainTransform?.pivotWorld, 'Brain') : null;
+            // (24 November 2026, UI5: the words of a shown cue keep clear of the mirror body's head and neck, the labels,
+            // the arrows and the cards: ns-scene-three guideCueKeepOut, ns-cue-place)
+            const showJointAim = Boolean(playerCamera && firstPersonNow() && limbHold && !holdBusy() &&
+                (limbControlPicked || step === 'chooseLimb' || step === 'moveHand'));
+            const cueKeep = (motor || limb || brain || showJointAim) && sceneFn('guideCueKeepOut') ? callScene('guideCueKeepOut') : null;
             guideCues.update({ guide: guideNow, tutorial: guide.tutorial, motor, limb, brain, selectedLimb,
-              showJointAim: Boolean(playerCamera && firstPersonNow() && limbHold && !holdBusy() &&
-                (limbControlPicked || step === 'chooseLimb' || step === 'aimJoint' || step === 'moveHand')),
+              keepOut: cueKeep, width: size.width, height: size.height,
+              showJointAim,
               jointAimY: (1 - LIMB_AIM_Y_NDC) / 2 });
           }
         }
         if (shell && typeof shell.placeToast === 'function') shell.placeToast(toastSpotFor(size));
+        // (24 November 2026, HINT_ROW: the limb buttons stand clear of the hint while it shows)
+        if (shell && typeof shell.clearHint === 'function' && limbHud && limbHud.box) shell.clearHint(limbHud.box, `${size.width}x${size.height}`);
         updateInfo(inputs.binding, out);
         frameTimer.mark('hud');
         if (shell) {

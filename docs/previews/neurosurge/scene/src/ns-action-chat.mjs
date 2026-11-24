@@ -130,7 +130,7 @@ export function findBodyRecordings(phrase, clips) {
 
 import {isTouchQuestion} from './joint/touch.mjs';
 
-export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume, getBodyMap, hasAvatarRig, getLatestTake, replayTake, replayTakes, runJointGoal, askTouch, takeRecorderInstruction = 'Press C to open the recorder.' }) {
+export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume, getBodyMap, hasAvatarRig, getLatestTake, replayTake, replayTakes, runJointGoal, askTouch, openMovementForecast, takeRecorderInstruction = 'Press C to open the recorder.' }) {
   const win = dialog.ownerDocument.defaultView;
   const field = dialog.querySelector('input');
   const message = dialog.querySelector('[role=status]');
@@ -142,7 +142,7 @@ export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume
   const localSpeech = Boolean(Recognition && 'processLocally' in Recognition.prototype);
   const unavailable = 'Voice is unavailable on this device. Type your movement.';
   const stoppedMessage = 'Dictation stopped. Type your movement or try again.';
-  const localGoalHelp = 'Open the game over HTTPS or use the local NeuroTranslate launcher for movement goals.';
+  const localGoalHelp = 'Open the NeuroTranslate launcher to check a movement goal.';
   const localTouchHelp = 'This forecast uses the local fingertip touch launcher. Open that launcher to run it.';
   for (const tip of dialog.querySelectorAll('[data-checkpoint-required]')) tip.hidden = !runJointGoal;
   const localModelLink = dialog.querySelector('[data-start-local-model]');
@@ -280,6 +280,10 @@ export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume
     }
     if (!event.submitter || event.submitter === form.querySelector('button[type=submit]')) {
       const words = field.value;
+      if (openMovementForecast && /^forecast (?:a )?tracked point$/u.test(normalize(words))) {
+        dismiss(openMovementForecast);
+        return;
+      }
       if (isTouchQuestion(words)) {
         if (askTouch) dismiss(() => askTouch(words));
         else { message.textContent = localTouchHelp; field.focus(); }

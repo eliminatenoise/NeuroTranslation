@@ -34,10 +34,10 @@
       <details open>
         <summary>Capture and command controls</summary>
         <ol>
-          <li>Press <kbd>C</kbd>. Choose <strong>Start camera</strong> to request video, or choose a local video or timestamped stills. Images stay on the device.</li>
-          <li>Set <strong>Body follows</strong> for the arms or knees and <strong>Point to forecast</strong> for the marker. Brackets identify the tracked selection and a prompt appears when tracking misses it. The ring shows its forecast position 120 ms after the last of five recent images.</li>
+          <li>Press <kbd>C</kbd> to open the motion recorder. Choose <strong>Start camera</strong> to request video access. Under <strong>Source</strong>, you can also choose a local video or timed pictures. The images stay on your device.</li>
+          <li>Choose <strong>Movement forecast</strong> in the game toolbar, or press <kbd>F</kbd> and enter “forecast a tracked point”. Set <strong>Body follows</strong> for the arms or knees and <strong>Point to forecast</strong> for the marker. Brackets identify the tracked selection and a prompt appears when tracking misses it. The ring shows its forecast position 120 ms after the last of five recent images. The forecast and the stay-put guess use the same later tracked position for scoring.</li>
           <li>Use <strong>Forecast method</strong> to select the browser model, the blend based on past tracker feedback, or a named movement. The movement options use rules fixed on an earlier sample.</li>
-          <li>Choose <strong>Save take</strong> and <strong>Open Command box</strong> to stop capture. Enter <strong>replay my take</strong>. <kbd>F</kbd> opens the Command box for supported moves such as “bend my right elbow”. In a browser with on-device dictation, choose <strong>Use voice</strong> and confirm the transcript.</li>
+          <li>In the forecast view, choose <strong>Save take</strong> and <strong>Open Command box</strong> to stop capture. Enter <strong>replay my take</strong>. <kbd>F</kbd> opens the Command box for supported moves such as “bend my right elbow”. In a browser with on-device dictation, choose <strong>Use voice</strong> and confirm the transcript.</li>
           <li>In <strong>Named takes</strong>, use <strong>Save last take</strong> and <strong>Download</strong> to export a version 1 JSON take file with the name, timestamps, tracked movement values and tracking gaps. In another tab, press <kbd>F</kbd> and use <strong>Open a take file</strong> under <strong>Named takes</strong>. Resolve a matching name with <strong>Keep existing take</strong> or <strong>Replace take</strong>. Start playback with <strong>replay take named warm up</strong>, using the saved name.</li>
           <li>Join two to four named replays with <strong>then</strong>, as in <strong>replay take named warm up then replay first 1 second of take named reach</strong>. A comma before <strong>then</strong> marks the end of an ambiguous name. The game checks every step before playback. Each take keeps its original sample clock. A requested interval includes its start and excludes its end. Between takes the game releases the previous movement controls for a render frame. <strong>Stop replay</strong> or <kbd>Esc</kbd> cancels the remaining steps.</li>
         </ol>
@@ -51,7 +51,7 @@
         <p>The 0.0 point model was fitted on optical animal tracks. Use the optional local launcher for the separate fingertip study.</p>
         <div class="resource-links">
           <a href="#camera-test">Recorded-image forecast test</a>
-          <a href="https://github.com/eliminatenoise/NeuroSurge/releases/tag/lite-dictation-2026-11-24">Offline Lite download and setup</a>
+          <a href="https://github.com/eliminatenoise/NeuroSurge/releases/tag/lite-dictation-2026-11-24">Earlier offline Lite download and setup</a>
           <a href="START.html#local-model">Local NeuroTranslate workbench and fingertip setup</a>
           <a href="scene/src/joint/model/NOTICE.html">Model, data and licence credits</a>
           <a href="CREDITS-AND-LICENCES.md">Game and anatomy credits</a>

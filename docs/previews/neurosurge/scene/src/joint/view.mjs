@@ -14,7 +14,7 @@ const markup=`
 <p class="joint-key"><span>● Observed or simulated</span><span class="joint-selection" hidden><span aria-hidden="true">⌜⌟</span> Selected point</span><span>◎ Forecast +120 ms</span></p>
 <p data-point-cue role="status"></p><p data-frame>Waiting for movement.</p><p data-camera-follow role="status" hidden></p><p data-forecast></p><p data-score></p><p data-goal role="status"></p>
 <p data-take-status role="status" hidden></p><button data-take-command type="button" hidden>Open Command box</button>
-</div><div class="joint-inputs"><fieldset><legend>C · Follow movement</legend>
+</div><div class="joint-inputs"><fieldset><legend>Forecast inputs</legend>
 <label>Source <select data-source><option value="camera">Live camera</option><option value="clip">Recorded video</option><option value="stills">Timestamped stills</option></select></label>
 <p data-hint>Face the camera with your shoulders, elbows and wrists in view.</p>
 <label data-clip-wrap hidden>Local video <input data-clip type="file" accept="video/*"></label>
@@ -29,13 +29,13 @@ const markup=`
 <p id="joint-take-help" hidden>Save up to eight seconds of tracked movement for the limbs the avatar follows. The movement readings stay in this tab.</p>
 <button data-start type="button">Start camera</button> <button data-save-take type="button" aria-describedby="joint-take-help" hidden disabled>Save take</button> <button data-stop type="button" disabled>Stop</button>
 <video muted playsinline hidden></video><p data-status role="status">Camera off. Images stay on this device.</p>
-</fieldset><form><label for="joint-outcome"><strong>F · Command box</strong></label>
+</fieldset><form><label for="joint-outcome"><strong>Virtual movement goal</strong></label>
 <input id="joint-outcome" maxlength="240" value="Raise my left hand above my shoulder">
 <button type="submit">Run virtual goal</button> <button data-voice type="button">Dictate locally</button>
 <p data-language role="status">Try “Raise my left hand above my shoulder.” The avatar attempts the goal. The ring forecasts its wrist.</p></form>
 ${touchPanel}
-<details><summary>Virtual brain</summary><p>Three invented unit histories. Which unit would the model rank first for the next single-spike bin?</p><button data-brain type="button">Score virtual units</button><output data-brain-output></output></details>
-<details><summary>Measurements and limits</summary><p>The tracker estimates 2D joint positions in each source image. The forecast uses the last five frames to place the selected point 120 ms ahead. The score uses the nearest tracked frame within 40 ms of the target time, even when the reply arrives later. Simulated movement is compared with a simulated frame.</p><p>The model learned from tracked animal movement. The <a href="${new URL('../../../index.html#camera-test',import.meta.url)}">recorded-image tests</a> compare the forecast with separate optical measurements. Live camera accuracy remains unverified. Sparse keyframes and tracking losses can leave gaps. Camera tracking measures positions in the image. The 3D game checks the drawn wrist and shoulder in world metres. The standalone arm checks its drawing in pixels.</p></details>
+<details><summary>Virtual brain</summary><p>The model ranks three units from invented spike histories. This example uses separate inputs.</p><button data-brain type="button">Score virtual units</button><output data-brain-output></output></details>
+<details><summary>Measurements and limits</summary><p>The tracker estimates joint positions in each image. The forecast uses five frames to predict where the selected point will be 120 ms later. Both scores use the same tracked frame within 40 ms of the target time. The stay-put forecast uses the last tracked position. A virtual goal uses a simulated frame for both scores.</p><p>Results are in image pixels. Sparse pictures and tracking losses can leave gaps. The model learned from animal movement recordings. Live human accuracy remains unverified. The game measures a virtual goal on the drawn body in metres.</p><p><a href="${new URL('./model/NOTICE.html',import.meta.url)}">Model and recording sources</a></p></details>
 <p data-model></p>
 </div></div>`;
 const finitePair=p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite);
@@ -312,9 +312,10 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
       return;
     }
     const error = Math.hypot(match.coordinates[0] - pred[0], match.coordinates[1] - pred[1]);
+    const stayPutError = Math.hypot(match.coordinates[0] - packet.origin[0], match.coordinates[1] - packet.origin[1]);
     const timing = match.time <= job.replyThrough ? ' · reply arrived after frame processing' : '';
     text('[data-score]', prefix + ' · ' + frameName + ' at ' + match.time.toFixed(3) +
-      ' s · error ' + error.toFixed(1) + ' px' + timing);
+      ' s · error ' + error.toFixed(1) + ' px · stay-put error ' + stayPutError.toFixed(1) + ' px' + timing);
   }
 
   function finishComparisons() {

@@ -1,6 +1,6 @@
 # NeuroSurge player guide (simple)
 
-[Open Full online](https://eliminatenoise.github.io/NeuroSurge/scene/example/preview.html) · [Play Lite](scene/example/preview.html?edition=lite) · [Technical guide](PLAYER-GUIDE-TECHNICAL.md)
+[Open Full online](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html) · [Play Lite](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/scene/example/preview.html?edition=lite) · [Technical guide](PLAYER-GUIDE-TECHNICAL.md)
 
 ## Move a body part from the brain
 
@@ -29,7 +29,7 @@ Press and drag on a limb to move the joint you pressed on. Press **Space** to gr
 
 ## Follow a movement or save a take
 
-1. Press **C** to open the **Movement mirror** in Full or Lite. The browser does the tracking and the forecasting. The camera is off until you choose **Start camera**. To use the separate recorder, choose **Record a limb take** in the game toolbar.
+1. Press **C** to open the motion recorder in Full or Lite. The camera starts after you choose **Start camera** and allow access. For a point forecast, choose **Movement forecast** in the game toolbar. You can also press **F** and enter “forecast a tracked point”.
 2. In the recorder, use **Follow** to choose an arm, a knee, a pair, or both arms and knees. Choose your own left or right. You can make this choice before or during capture. If you are recording, choose **Finish take** before switching limbs to keep the take. Use the arrow keys while **Follow** has focus. Press **Tab** to reach **Start camera** when you are ready.
 3. Select **Start camera** and allow video if the browser asks. Video stays on your device. The recorder shows your own image as a mirror. **Following** and a green line show which limbs the recorder can use to move the virtual body. An arm line joins the estimated shoulder, elbow and wrist. A leg line joins the estimated hip, knee and ankle. If you see **Show a bend**, turn partway sideways and bend that knee so the camera can see the angle. If you see **Bring into view**, make room for that arm or leg in the picture and check that its joints are visible.
 
@@ -46,7 +46,7 @@ Choose **Save take** once the mirror has tracked the limb you want. It keeps up 
 
 Choose **Open Command box** after saving, or return to the game and press **F**. The camera stops when the Command box opens. Type **replay my take** to play back the movement, or use **Named takes** to give it a name. Save before stopping the mirror. Changing the limbs, moving to a new time in a clip, or choosing a different source clears the movement waiting to be saved. A saved take stays available while you use the same tab. Changing the forecast point keeps the movement you can save.
 
-The Movement mirror uses the five most recent pictures to forecast where a point will be 0.12 seconds later. “Forecast from frame 5” means the fifth picture was the last one used for that prediction. The score uses the point found in the image closest to the target time, up to 0.04 seconds either side. It gives the difference in pixels, the small units that make up the picture.
+The Movement mirror uses the five most recent pictures to forecast where a point will be 0.12 seconds later. “Forecast from frame 5” means the fifth picture was the last one used for that prediction. The score uses the point found in the image closest to the target time, up to 0.04 seconds either side. It measures the difference in pixels, the small units that make up the picture. The second score uses the same later point and guesses that the tracked point stays at its most recent position.
 
 The score says when the tracker finished processing the matching image before the model replied. It still uses the same match. If the tracker finds no matching point, the score says it is unavailable. A virtual movement is scored against a simulated point. Switching points, seeking a clip, or losing track starts a fresh comparison.
 
@@ -58,7 +58,7 @@ The browser uses the saved NeuroTranslate 0.0 model for these point forecasts. T
 
 ## Follow a video file
 
-1. Choose **Record a limb take** in the game toolbar and select **Recorded video** under **Source**. Under **Follow**, select the visible arm or knee you want the virtual body to follow. You can also select both arms, both knees, or both pairs.
+1. Press **C** and select **Recorded video** under **Source**. Under **Follow**, select the visible arm or knee you want the virtual body to follow. You can also select both arms, both knees, or both pairs.
 2. Choose a file under **Local video**, then select **Play video**. Use a file up to about 537 MB. Your browser must be able to play it and tell the game when each new picture appears. The file stays on this device. The game shows the picture as it was saved, so a mirrored recording can reverse left and right.
 3. **Following** and a green line show which limbs the game can use. **Waiting for a bend** means the game can see the knee and needs a clearer starting bend. **No usable pose** means the joints in that picture could not be used. Try a part of the video where you can see more of the limb.
 4. Pause or move to another time with the video controls. The previous tracking clears. The game also clears a result that falls 1.2 seconds or more behind playback. Choose **Stop video** to stop early or press **F** to stop and open the Command box. You can play the selected file again after it ends or you choose Stop video.
@@ -69,13 +69,13 @@ When you seek, change limbs or open a new file, the game starts a fresh window f
 
 To save one limb, it needs to be tracked in at least two pictures. For **Both arms** or **Both knees**, each side needs two. For **Both arms and knees**, one limb appearing in two tracked pictures is enough. The take can include the other limbs when the tracker sees them.
 
-You can also press **C** and use **Save take** in the Movement mirror while following a saved video or after reading timed pictures.
+You can also choose **Movement forecast** and use **Save take** in the Movement mirror while following a saved video or after reading timed pictures.
 
 The tracker estimates joints in the picture. The virtual body moves from those estimates. The game simulates its electrical activity.
 
 ## Make a take from timed pictures
 
-1. Choose **Record a limb take** in the game toolbar and choose **Timed pictures** under **Source**. Choose the limb or pair you want the body to follow.
+1. Press **C** and choose **Timed pictures** under **Source**. Choose the limb or pair you want the body to follow.
 2. Add two to 256 local pictures. Use pictures up to 32 MiB each. Enter one time in seconds per picture in the displayed order. Use zero or positive times. For example, `0, 0.5, 1.25` gives a half-second first step and a longer second step. You can leave the times field blank and use filenames such as `0.jpg`, `0.5.jpg` and `1.25.jpg`. Use different times for each picture and keep the first and last within eight seconds of each other.
 3. Choose **Track pictures** and wait for the result. A take needs two tracked pictures for a single limb, two per side for a pair, or two from any one limb in **Both arms and knees**. For knees, start with two pictures that show a clear bend of at least 45 degrees and add another clear view so there are enough poses to save. Use **Save picture take** once it appears.
 4. Press **F** and type **replay my take**. Save a name under **Named takes** to call the movement back later in this tab. The virtual body moves between the poses from the pictures. If a timed picture loses a limb, the game releases that limb at that time. Comparisons and forecasts use the tracked pictures at their assigned times.
@@ -92,4 +92,4 @@ The game generates the brain and muscle activity shown in colour. With camera pe
 
 ## Choose a download
 
-Full and Lite have the same controls, body shapes and brain. Lite uses smaller files to deliver the same shapes. The five groups of anatomy files, their contents list and the body rig save 996,262 bytes, or about 1 MB. If your browser needs the 142,385-byte decoder to open them, the total saving is 853,877 bytes, or about 0.85 MB. For a local copy, follow the [launcher instructions](README.md).
+Full and Lite have the same controls, body shapes and brain. Lite uses smaller files to deliver the same shapes. The five groups of anatomy files, their contents list and the body rig save 996,262 bytes, or about 1 MB. If your browser needs the 142,385-byte decoder to open them, the total saving is 853,877 bytes, or about 0.85 MB. For a local copy, follow the [launcher instructions](https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/START.html).

@@ -240,8 +240,8 @@ const STEP_TABLE = [
   intro: [part('Drag on empty space to look around. Your body shows its bones and muscles.')] },
   // 19 November 2026 (the view holds the chosen limb, ns-app LIMB_KEYS.view; in the eye view only: holdCarries)
   { head: 'Your limbs.', parts: [part('One limb is always the chosen one: your left arm at the start. Press 1, 2, 3 or 4 to choose ' +
-    'your left arm, left leg, right leg or right arm. In the eye view, look a little up or down to move it at the shoulder or hip. ' +
-    'W, A, S and D move its hand or foot. Use the pointer to keep the limb in view.')],
+    'your left arm, left leg, right leg or right arm. In the eye view the chosen limb goes with your view, and W, A, S and D ' +
+    'move its hand or foot. Your view turns only when the hand or foot would leave the picture.')],
   intro: [part('Keys 1 to 4 choose a limb; in the eye view it goes with your view, and W, A, S and D move its hand or foot. Tap Space twice: all four limbs turn once. Tap twice and hold: they keep turning, slowly.')] },
   // R558 (Messages 2 and 56; 19 November 2026, the brain turned half a turn): what the band is, which way the brain faces
   // and that each half mainly moves the other side (HONESTY.crown and HONESTY.leftArmRightHalf say both in full).
@@ -266,10 +266,12 @@ const STEP_TABLE = [
     'Greens: belly and back. Pinks: face and neck.')] },
   // 20 November 2026 (the owner, Message 206: "no permanent movements ... it will contract, then return to its previous
   // place"); the look switches an area on, a click repeats it.
-  { head: 'Switch areas on.', parts: [part('Rest your look on a motor area to move its body part. Click to repeat the movement. ' +
+  // 24 November 2026 (ns-app FREE_AIM, section 206): the pointer is free at the start and is the aim: "point at", not
+  // "rest your look on" (with the mouse captured the mark at the middle of the picture does the pointing).
+  { head: 'Switch areas on.', parts: [part('Point at a motor area to move its body part. Click to repeat the movement. ' +
     'The part contracts, then goes back to where it was, unlit: a rule of this game, not something measured. Click a ' +
-    'muscle on either body to switch on its motor area.')],
-  intro: [part('Rest your look on a motor area and its movement happens at once: the part contracts, then returns to where it was. Click to do it again. The arrow keys step to the next area.')] },
+    'muscle on either body to switch on its motor area. With the mouse captured, the mark at the middle of the picture does the pointing.')],
+  intro: [part('Point at a motor area and its movement happens at once: the part contracts, then returns to where it was. Click to do it again. The arrow keys step to the next area.')] },
   // 20 November 2026 (Message 204): Space grips with all four limbs; 19 November (LIMB_KEYS.view.hold): Space on your own
   // limb chooses it; ns-app LIMB_PUSH and LIMB_BLOCK (sections 174, 185, 194, 195): the moved limb pushes the others and
   // stops against one that cannot give way (hunt H3); ns-reference-graph CARRY_THROUGH: a carried thing goes through anything.
@@ -314,7 +316,7 @@ const CONTROL_TABLE = [
   ['Double click', 'choose the next limb; keep the second click held to keep stepping'],
   ['W / S', 'W reaches the chosen limb\'s hand or foot straight out from its shoulder or hip; S draws it straight back in'],
   ['A / D', 'swing the chosen limb to your left or right without changing its bend'],
-  ['Look / Click', 'rest your look on a motor area: its part contracts, then returns. Click to do it again. A click never closes a hand.'],
+  ['Point / Click', 'point at a motor area: its part contracts, then returns. Click to do it again. A click never closes a hand. With the mouse captured, the mark at the middle of the picture does the pointing.'],
   ['Click a muscle', 'on your body or the mirror body: switches on the brain area that moves it'],
   ['← / →', 'step your look to the next motor area on that side (hold the key to keep stepping)'],
   ['Press and drag', 'on the brain or the mirror body: turn it. On a limb: sideways turns it, up bends and down straightens it (on your right hand it bends the wrist). That limb becomes the chosen one.'],
@@ -339,7 +341,7 @@ const INTRO_CONTROL_WORDS = {
   'W / S': 'W reaches out, S draws in; combine with A/D',
   // (21 November 2026, hunt H22: along the limb's line and a swing, as the full rows say)
   'A / D': 'swing the limb (or a held item) left or right',
-  'Look / Click': 'look at an area: the part moves. Click: again.',
+  'Point / Click': 'point at an area: the part moves. Click: again.',
   'Click a muscle': 'switch on its brain area',
   '← / →': 'arrow keys: step your look to the next motor area',
   'Press and drag': 'turn the brain or mirror body; turn or bend a limb',
@@ -456,7 +458,7 @@ export const SHELL = deepFreeze({
   // plays on with the pointer free, SHELL.pausedNote). Added: "Drag, arrow tips" here, the limb drag in the Move
   // group's note (its repeat of the W S and A D rows is gone), Esc twice in Views and reading; the held-drag row is gone.
   menu: [
-    { id: 'look', title: 'Look and press', picture: 'pad', rows: [['Drag empty space', 'look around'], ['Click', 'press a motor area'],
+    { id: 'look', title: 'Look and press', picture: 'pad', rows: [['Point', 'a motor area: its part moves'], ['Click', 'move it again'], ['Drag empty space', 'look around'], // (24 November 2026, FREE_AIM: the pointer is the aim)
       ['← →', 'aim at the next motor area'], ['Drag, arrow tips', 'turn the brain or mirror body']] }, // (second pass: one row)
     { id: 'move', title: 'Move', picture: 'wasd', rows: [
       ['1 / 2', 'choose left arm / left leg'],
@@ -1310,7 +1312,7 @@ export const VIEW = deepFreeze({
   firstPersonNotice: HUD.firstPerson,
   // R558 (ns-camera THIRD_PERSON.followHead): the mouse turns the head in both views; only the camera moves.
   armNote: 'Your head, neck and left hand follow the mouse just as they do in your own view. W, A, S, D and Space still work the same way.',
-  lookNote: 'Move the mouse or trackpad to turn your view around the body.'
+  lookNote: 'Move the mouse to turn your head: the camera follows behind it.'
 });
 
 /** The 3D compass arrows (D16, user R20): four arrows round the brain (top, bottom, left, right) and four smaller ones
@@ -1701,14 +1703,12 @@ export const GUIDE = deepFreeze({
     readInfo: "Press R to change how much information is shown."
   },
   tutorialGoals: {
-    aimJoint: "Look a little up or down to raise or lower the limb you selected. Watch its hand or foot.",
     moveHand: "Press W or S to reach, then A or D to swing the chosen limb sideways.",
     dragBrain: "Hold Space over the brain, move your view to carry it, then release Space.",
     orbit: "Drag the brain to turn it.",
     thirdPerson: "Press E to look at your body from behind, then press E again to return.",
   },
   partial: {
-    aimJointOutside: 'Press E to return to the eye view and practise raising or lowering the limb.',
     // (21 November 2026, hunt H22: W and S move along the limb, A and D swing it)
     moveHandNeedX: 'Good! Now try A or D to swing it left or right.',
     moveHandNeedZ: 'Good! Now try W or S to reach it out or draw it in.',
@@ -1716,11 +1716,11 @@ export const GUIDE = deepFreeze({
     numberKeyStill: 'That movement is already there. Press another number from the card.',
     // 21 November 2026 (hunt H18): shown while the tutorial's first step is current, after the look switched on an area
     // that moved nothing (the Tongue has no movement in this body yet; the black in-between areas move nothing).
-    lookStripStill: 'Nothing moved there. Look at another coloured area: a part moves.',
+    lookStripStill: 'Nothing moved there. Aim at another coloured area: a part moves.',
     // 22 November 2026 (WORDS2, hunt H26): shown while the tutorial's second step ("Click it: it moves again") is current
     // and the look last switched on an area that moves nothing (a black in-between area, the Tongue): a click there
     // moves nothing either, and the step does not count it (ns-guide pressStill).
-    pressAreaStill: 'Nothing moves there. Look at a coloured area that moves a part, then click it.',
+    pressAreaStill: 'Nothing moves there. Aim at a coloured area that moves a part, then click it.',
     // R558: shown while the watchBody goal is current, after a number moved a part with the look still on the brain.
     watchBodyLookDown: 'It moved! Now look down at the body and press another number. The card keeps the list.',
     // R5-text: shown while the thirdPerson goal is current and the view from behind is on.
@@ -1752,14 +1752,12 @@ export const GUIDE = deepFreeze({
     holdPart: 'Hold down 1 or 2. Let go to stop',
     dragLimb: "Drag a visible arm or leg to change its pose",
     chooseLimb: "Press 2, 3 or 4 to select another limb",
-    aimJoint: "Look a little up or down to move the limb",
     readInfo: "Press R to change the information shown",
     nice: 'Nice!',
     finished: 'All done. Esc shows the controls.',
     // 19 November (the tutorial): how to pass a step, shown small beside the line (the key ns-app listens for)
     skip: 'Enter: skip',
     byText: {
-      'Press E to return to the eye view and practise raising or lowering the limb.': 'Press E to return to the eye view',
       "Press W or S to reach, then A or D to swing the chosen limb sideways.": "Press W or S to reach, then A or D to swing",
       "Hold Space over the brain, move your view to carry it, then release Space.": "Hold Space on the brain, carry it, then release",
       "Drag the brain to turn it.": "Drag the brain to turn it",
@@ -1767,8 +1765,8 @@ export const GUIDE = deepFreeze({
       'Good! Now try A or D to swing it left or right.': 'Now A or D',
       'Good! Now try W or S to reach it out or draw it in.': 'Now W or S',
       'That movement is already there. Press another number from the card.': 'Already there: press another number',
-      'Nothing moved there. Look at another coloured area: a part moves.': 'Nothing moved: look at another colour',
-      'Nothing moves there. Look at a coloured area that moves a part, then click it.': 'Nothing moves there: look at a colour',
+      'Nothing moved there. Aim at another coloured area: a part moves.': 'Nothing moved: aim at another colour',
+      'Nothing moves there. Aim at a coloured area that moves a part, then click it.': 'Nothing moves there: aim at a colour',
       'It moved! Now look down at the body and press another number. The card keeps the list.': 'Now look down and press a number',
       'This is your back! Move the mouse to look around. Press E to go back.': 'Press E to go back',
       'The brain is in the way. Press and drag the mirror body to turn it (hold Shift as you press when a brain area is in front of it).': 'Hold Shift to reach past the brain',
@@ -1782,7 +1780,7 @@ export const GUIDE = deepFreeze({
     simpleHeading: "Simple instructions",
     technicalHeading: "Technical notes",
     progress: "Follow the current instruction as you play. Enter skips that step. Resume keeps your progress, and Restart takes you to step one.",
-    technical: "Progress uses game events. The shoulder or hip step measures from the pose just before you look up or down. It checks that the wrist or ankle moves at least 2.5 cm relative to that joint. The game follows that motion for up to 0.35 seconds of game time after the look. The movement step needs input on both axes. A limb drag must reach 12 degrees. A brain carry counts on release after a turn of at least 0.12 radians or a key-driven carry of at least 0.2 game metres. Completed steps are saved on this device when local storage is available. The visual cues do not activate the areas they mark.",
+    technical: "Progress uses game events. The movement step needs input on both axes. A limb drag must reach 12 degrees. A brain carry counts on release after a turn of at least 0.12 radians or a key-driven carry of at least 0.2 game metres. Completed steps are saved on this device when local storage is available. The visual cues do not activate the areas they mark.",
     motor: "Motor area",
     limb: "Body part",
     shoulder: "Shoulder aim",
@@ -1792,8 +1790,8 @@ export const GUIDE = deepFreeze({
     restart: "Restart tutorial",
     limits: "The colours link motor areas to movements in this game. On the simplified map, a ring marks a motor area and a small square marks its related body part when both are visible.",
     jointHelp: "The shoulder or hip guide marks a fixed height one quarter of the way down the view. It is a screen reference for the wrist or ankle.",
-    directions: "F opens the Command box for typed movements and on-device dictation where available.",
-    camera: "Press C, then select Start camera to let the body follow visible arms and knees.",
+    directions: "F opens the movement directions.",
+    camera: "C opens the camera controls.",
   },
   escTitle: 'Tutorial',
   escHelp: 'The tutorial asks for one action at a time, at the top of the screen. It never stops the game. Enter skips a step.',

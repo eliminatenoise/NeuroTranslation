@@ -51,14 +51,14 @@ export function endpoint(packet, prediction) {
 export function observeTarget(comparison, frame) {
   if (comparison.closed) return;
   const {packet, match} = comparison;
-  const target = packet.issue + packet.lead;
-  const offset = frame.t - target;
+  const elapsed = frame.t - packet.issue;
+  const offset = elapsed - packet.lead;
   const distance = Math.abs(offset);
   const coordinates = frame.xy[packet.point];
   const usable = visible(coordinates);
   const tolerance = .04;
-  // Absorb rounding from adding the lead and subtracting source times.
-  const precision = 2 * Number.EPSILON * Math.max(Math.abs(target), Math.abs(frame.t), tolerance);
+  // Keep arithmetic rounding below a tenth of a nanosecond even for absolute source clocks.
+  const precision = Math.min(1e-10, 2 * Number.EPSILON * Math.max(Math.abs(packet.issue), Math.abs(frame.t), tolerance));
   if (frame.t > packet.issue && distance <= tolerance + precision && usable &&
       (!match || distance < match.distance - precision)) {
     comparison.match = {time: frame.t, distance, coordinates: [...coordinates]};
