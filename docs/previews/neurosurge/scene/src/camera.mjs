@@ -682,11 +682,11 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
       return true;
     },
     replayTake(target, label, interval) {
-      if (disposed || document.hidden || !take || current) return;
-      if (sourceMode !== 'camera' || panel.hidden) {
+      if (disposed || document.hidden || current || (!take && !target)) return;
+      if (!take || sourceMode !== 'camera' || panel.hidden) {
         sourceMode = 'camera';
-        sourceSelect.value = sourceMode;
         show('Camera off.', false);
+        sourceSelect.value = sourceMode;
       }
       take.play(target, label, interval);
     },
