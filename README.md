@@ -7,6 +7,8 @@
 
 [Run the new walking checkpoints and read the cortical forecast results](benchmarks/walking-neural-scaling/)
 
+[Run the cortical model tested across two recording days](benchmarks/cortical-cross-day/)
+
 **[Open the NeuroTranslation dashboard](https://eliminatenoise.github.io/NeuroTranslation/projects/?project=neurotranslation)** · [Technical index](https://eliminatenoise.github.io/NeuroTranslation/projects/technical.html?project=neurotranslation) · [Compare walking forecasts](https://eliminatenoise.github.io/NeuroTranslation/walking-blends/)
 
 NeuroTranslation tests whether brain and muscle recordings improve forecasts of movement. The studies compare forecasts based on earlier movement with forecasts that also use an electrical recording. They score both against later measurements such as wrist position.

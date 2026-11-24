@@ -1,0 +1,137 @@
+{
+  "method": "100 ms planar hand forecast using the past 200 ms of recorded cortical spike activity",
+  "scope": "One rhesus macaque. Two archived days used for training and 20 untouched second-day trials used for confirmation.",
+  "confirmation_trials": 20,
+  "confirmation_forecasts": 1281,
+  "primary_model": "archive_rows-072-loop8",
+  "groups": {
+    "archive_rows-072-loop8": {
+      "models": 3,
+      "conditions_mm": {
+        "recorded_spike_clock": 27.33152473277886,
+        "generated_40ms_spike_delay": 30.29053062533352,
+        "generated_day2_electrode_permutation": 81.09956539887273
+      }
+    },
+    "archive_rows-000-loop8": {
+      "models": 3,
+      "conditions_mm": {
+        "recorded_spike_clock": 42.93870892443562,
+        "generated_40ms_spike_delay": 45.049735360635424,
+        "generated_day2_electrode_permutation": 81.44996116748241
+      }
+    },
+    "archive_rows-024-loop8": {
+      "models": 3,
+      "conditions_mm": {
+        "recorded_spike_clock": 30.073769501414198,
+        "generated_40ms_spike_delay": 32.526229511517826,
+        "generated_day2_electrode_permutation": 89.33845564730233
+      }
+    },
+    "archive_rows-188-loop8": {
+      "models": 3,
+      "conditions_mm": {
+        "recorded_spike_clock": 27.687190844503235,
+        "generated_40ms_spike_delay": 29.280247829859288,
+        "generated_day2_electrode_permutation": 72.61602885812263
+      }
+    },
+    "areas-072-loop5": {
+      "models": 3,
+      "conditions_mm": {
+        "recorded_spike_clock": 54.23536785202371,
+        "generated_40ms_spike_delay": 54.185914280388346,
+        "generated_day2_electrode_permutation": 54.23536785202371
+      }
+    },
+    "archive_rows-072-ridge100": {
+      "models": 1,
+      "conditions_mm": {
+        "recorded_spike_clock": 49.792098763410806,
+        "generated_40ms_spike_delay": 51.10498074090293,
+        "generated_day2_electrode_permutation": 66.4138507020551
+      }
+    },
+    "archive_rows-072-training_mean": {
+      "models": 1,
+      "conditions_mm": {
+        "recorded_spike_clock": 55.53121667887209,
+        "generated_40ms_spike_delay": 55.53121667887209,
+        "generated_day2_electrode_permutation": 55.53121667887209
+      }
+    },
+    "archive_rows-072-ridge10": {
+      "models": 1,
+      "conditions_mm": {
+        "recorded_spike_clock": 50.95898278256899,
+        "generated_40ms_spike_delay": 51.85761688292354,
+        "generated_day2_electrode_permutation": 75.59099479043154
+      }
+    }
+  },
+  "paired_improvements": {
+    "archive_rows-000-loop8": {
+      "mean_improvement_mm": 15.60718419165676,
+      "relative_error_reduction": 0.36347586088632955,
+      "trials_improved": 19,
+      "conditional_trial_bootstrap_95_mm": [
+        11.134739030611406,
+        20.340701367625535
+      ]
+    },
+    "archive_rows-072-ridge100": {
+      "mean_improvement_mm": 22.460574030631946,
+      "relative_error_reduction": 0.45108711198044255,
+      "trials_improved": 20,
+      "conditional_trial_bootstrap_95_mm": [
+        18.024081149119073,
+        26.83757585701723
+      ]
+    },
+    "archive_rows-072-training_mean": {
+      "mean_improvement_mm": 28.199691946093232,
+      "relative_error_reduction": 0.5078169295149325,
+      "trials_improved": 18,
+      "conditional_trial_bootstrap_95_mm": [
+        21.00093637239764,
+        34.82256957530888
+      ]
+    }
+  },
+  "conditional_trial_bootstrap_draws": 20000,
+  "preview_checkpoint": {
+    "seed": 20261124,
+    "confirmation_error_mm": {
+      "recorded_spike_clock": 28.309167528611248,
+      "generated_40ms_spike_delay": 31.91183605428295,
+      "generated_day2_electrode_permutation": 93.45877437205647
+    },
+    "parity_checks": {
+      "development": {
+        "rows": 3976,
+        "conditions": 3,
+        "max_abs_coord_difference_mm": 0.0002205371856689453,
+        "mean_abs_coord_difference_mm": 1.0494712432865165e-05
+      },
+      "confirmation": {
+        "rows": 1281,
+        "conditions": 3,
+        "max_abs_coord_difference_mm": 0.00022202730178833008,
+        "mean_abs_coord_difference_mm": 1.0458536828026436e-05
+      }
+    },
+    "model_seconds_excluding_input": {
+      "warm_single_median_onnx": 4.79050213471055e-05,
+      "warm_single_median_torch": 0.00017398851923644543,
+      "full_1281_rows_median_onnx": 0.017995515023358166,
+      "full_1281_rows_median_torch": 0.012140810955315828
+    }
+  },
+  "archives": [
+    "https://doi.org/10.48324/dandi.000140/0.220113.0408",
+    "https://doi.org/10.48324/dandi.000139/0.220113.0408"
+  ],
+  "first_day_confirmation_opened": false,
+  "official_testing_opened": false
+}
