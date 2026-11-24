@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive comparison of hand-position forecasts from recent motion and recorded brain activity.">
+  <title>Hand position forecast | NeuroTranslate</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="study-data.js"></script>
+  <script defer src="forecast.js"></script>
+</head>
+<body>
+<main>
+  <header>
+    <nav aria-label="Study editions">
+      <a href="index.html" aria-current="page">Simple edition</a>
+      <a href="technical.html">Technical edition</a>
+      <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cortical-movement-blend/position-history">Code and downloads</a>
+    </nav>
+    <h1>Hand position, 100 milliseconds ahead</h1>
+    <p>On three days of recorded reaching, taking the midpoint between two forecasts reduced the average miss. One forecast used the hand’s recent speed and direction. The other used recorded brain activity. The combined forecast missed the hand’s ending point by <strong>4.13, 5.75 and 3.16 mm</strong> on the three days.</p>
+    <p>These are recordings from one macaque. All three days had already been evaluated in earlier studies. The comparison uses saved forecasts and archived positions.</p>
+  </header>
+
+  <section aria-labelledby="recorded-title">
+    <h2 id="recorded-title">Recorded comparison</h2>
+    <p>Compare six forecasts on the same recorded movements. Each trial is a separate attempt to reach a target. A trial can supply several forecasts.</p>
+    <div class="filters">
+      <div>
+        <label for="day">Recording day</label>
+        <select id="day">
+          <option value="2010-08-12">12 August 2010</option>
+          <option value="2010-08-19">19 August 2010</option>
+          <option value="2010-09-10">10 September 2010</option>
+        </select>
+      </div>
+      <div>
+        <label for="metric">Error to compare</label>
+        <select id="metric">
+          <option value="0">Where the hand ended</option>
+          <option value="1">How far the hand moved</option>
+        </select>
+      </div>
+      <div>
+        <label for="group">Movements to show</label>
+        <select id="group">
+          <option value="overall">All recorded forecasts</option>
+          <optgroup label="Movement in the previous 40 ms">
+            <option value="past_under_1_mm">Under 1 mm before the forecast</option>
+            <option value="past_at_least_1_mm">At least 1 mm before the forecast</option>
+          </optgroup>
+          <optgroup label="Measured movement during the next 100 ms">
+            <option value="future_0_to_2_mm">Under 2 mm afterwards</option>
+            <option value="future_2_to_10_mm">2 to under 10 mm afterwards</option>
+            <option value="future_10_to_20_mm">10 to under 20 mm afterwards</option>
+            <option value="future_20_to_inf_mm">At least 20 mm afterwards</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+    <p id="support" class="support" aria-live="polite"></p>
+    <table id="recorded-table">
+      <caption>Average error in millimetres. Lower is better.</caption>
+      <thead><tr><th scope="col">Forecast</th><th scope="col">Error (mm)</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p id="effect"></p>
+    <noscript><p>Enable JavaScript to open the comparison controls and example. The technical edition contains the result tables.</p></noscript>
+  </section>
+
+  <section aria-labelledby="example-title">
+    <h2 id="example-title">Try the calculation with your own numbers</h2>
+    <p>These starting values are invented. Enter three past positions and an X and Y change to stand in for the neural forecast. You can copy those two changes from an earlier model output. All values are in millimetres. The solid line connects the three past positions. Dashed lines lead to the forecasts. The calculation updates as you type.</p>
+    <form id="example">
+      <div class="input-grid">
+        <fieldset><legend>80 ms ago</legend>
+          <label for="x80">X <input id="x80" type="number" step="any" min="-1000000" max="1000000" value="4" required></label>
+          <label for="y80">Y <input id="y80" type="number" step="any" min="-1000000" max="1000000" value="2" required></label>
+        </fieldset>
+        <fieldset><legend>40 ms ago</legend>
+          <label for="x40">X <input id="x40" type="number" step="any" min="-1000000" max="1000000" value="6" required></label>
+          <label for="y40">Y <input id="y40" type="number" step="any" min="-1000000" max="1000000" value="3" required></label>
+        </fieldset>
+        <fieldset><legend>At forecast time</legend>
+          <label for="x0">X <input id="x0" type="number" step="any" min="-1000000" max="1000000" value="8" required></label>
+          <label for="y0">Y <input id="y0" type="number" step="any" min="-1000000" max="1000000" value="5" required></label>
+        </fieldset>
+        <fieldset><legend>Example neural forecast change</legend>
+          <label for="nx">X <input id="nx" type="number" step="any" min="-1000000" max="1000000" value="4" required></label>
+          <label for="ny">Y <input id="ny" type="number" step="any" min="-1000000" max="1000000" value="2" required></label>
+        </fieldset>
+      </div>
+      <button type="button" id="example-reset">Reset example</button>
+    </form>
+    <p id="example-result" class="support" aria-live="polite"></p>
+    <div class="example-output">
+      <canvas id="path" width="720" height="360" aria-label="Past hand positions and predicted endpoints. Values are listed in the adjacent table."></canvas>
+      <table id="example-table">
+        <caption>Predicted ending points in the example</caption>
+        <thead><tr><th scope="col">Forecast</th><th scope="col">X (mm)</th><th scope="col">Y (mm)</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="method-title">
+    <h2 id="method-title">How the forecasts work</h2>
+    <ul class="methods">
+      <li><strong>Stay put.</strong> The predicted ending point is the last measured position. If the hand actually moves 4 mm, this forecast misses by 4 mm.</li>
+      <li><strong>Constant velocity.</strong> Find the change between 40 ms ago and forecast time. Multiply that change by 2.5 to extend the same speed and direction to 100 ms ahead.</li>
+      <li><strong>Constant acceleration.</strong> Use all three positions, including the one 80 ms ago. If the first and second 40 ms moves differ, carry their change in speed and direction forward. This fits a curve through the three past points.</li>
+      <li><strong>Original neural forecast.</strong> Three versions of NeuroTranslate read 200 ms of recorded activity from electrodes in the part of the brain involved in movement. Each predicts a change in X and Y and gives a separate prediction of distance moved.</li>
+      <li><strong>Published neural blend.</strong> The earlier method mixes each neural forecast with staying put. It sets the weights from past brain activity and agreement among its three models. The same three trained models and weights are used here.</li>
+      <li><strong>Equal blend.</strong> Take the midpoint of the landing point from constant velocity and the one from the published neural blend. Do this separately for each of the three neural forecasts. The midpoint is the new landing point.</li>
+    </ul>
+    <p>The earlier base models use 96 electrodes and ten groups of readings, each covering 20 ms. They were fitted on 23 September 2010. The earlier blend weights were set using positions from 20 and 22 September. The equal blend uses one half from each forecast on every row, with fixed weights. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cortical-movement-blend">Earlier model and weights</a></p>
+  </section>
+
+  <section aria-labelledby="measurement-title">
+    <h2 id="measurement-title">What the error measures</h2>
+    <p><strong>Ending position</strong> gives the straight-line distance from the forecasted point to the measured point. <strong>Distance moved</strong> gives the difference between the forecasted and measured lengths of the movement. For example, forecast 10 mm left when the hand goes 10 mm right and the distance error is zero. The ending-point error is 20 mm.</p>
+    <p>We used 130,723 forecasts from 9,075 trials, taken on 12 August, 19 August and 10 September 2010. Each trial contributes equally. For the neural methods, we average the errors from the three models. The 95% range in the comparison comes from resampling whole trials 4,000 times within each day. It describes the variation within that day.</p>
+    <p>After forecasting, we also grouped the scores by how far the hand actually moved. The group marked “afterwards” uses the later position. The group marked “before” uses the difference over the previous 40 ms. Both are ways to examine the same forecasts.</p>
+    <p>The equal blend reduced the ending-position miss by 1.07, 0.30 and 1.74 mm versus constant velocity. On 19 August it also raised the distance-moved error by 0.08 mm. On 10 September the published neural blend had the smallest distance error. Timing is based on the archived samples. A live sensor setup or a new animal would need its own check.</p>
+  </section>
+  <footer>
+    <p><a href="technical.html">Read the technical edition</a> · <a href="https://doi.org/10.48324/dandi.000070/0.261122.2046">Open the original recordings</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cortical-movement-blend/position-history">Get the replay code</a></p>
+  </footer>
+</main>
+</body>
+</html>

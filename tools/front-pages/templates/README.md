@@ -10,6 +10,8 @@
 
 [Compare the movement blend with the original forecast](benchmarks/cortical-movement-blend/) · [Download the blend](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/cortical-movement-blend/Cortical-Movement-Blend.zip)
 
+[Compare recent hand movement and brain forecasts](https://eliminatenoise.github.io/NeuroTranslation/hand-position-forecast/) · [Replay the recorded comparison](benchmarks/cortical-movement-blend/position-history/)
+
 [Run the hand forecast that keeps individual electrode readings](benchmarks/cortical-electrode-identity/) · [Download the model ZIP](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/cortical-electrode-identity/Cortical-Electrode-Identity.zip)
 
 [Run the cortical model tested across two recording days](benchmarks/cortical-cross-day/)

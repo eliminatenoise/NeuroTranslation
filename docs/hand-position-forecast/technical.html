@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Methods, results and replication for the NeuroTranslate hand-position forecast comparison.">
+  <title>Hand position forecast methods | NeuroTranslate</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <nav aria-label="Study editions">
+      <a href="index.html">Simple edition and interactive comparison</a>
+      <a href="technical.html" aria-current="page">Technical edition</a>
+      <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cortical-movement-blend/position-history">Code and downloads</a>
+    </nav>
+    <h1>Hand position forecast methods</h1>
+    <p>Retrospective comparison of 130,723 frozen forecasts in 9,075 trials on three reaching days from Nitschke, one macaque. The target is planar hand displacement at +100 ms, in millimetres, in the archive’s screen-centred coordinates.</p>
+  </header>
+  <section aria-labelledby="inputs">
+    <h2 id="inputs">Inputs and calculations</h2>
+    <p>The three original models read 200 ms of primary motor cortex spike counts from 96 ordered electrodes in ten 20 ms bins. They were fitted on 23 September 2010. The published blend scales each prediction toward zero displacement with a weight fitted on 20 and 22 September, using previous brain activity and agreement among the forecasts. This comparison reuses the frozen forecasts and coefficients. <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/cortical-movement-blend/TECHNICAL.md">Earlier model and blend specification</a></p>
+    <p>Define <var>p</var><sub>0</sub>, <var>p</var><sub>−40</sub> and <var>p</var><sub>−80</sub> as the Hand positions at issue and 40 and 80 ms before issue. Require exact native samples within 1 μs of those times and the target, inside the same trial. Let <var>d</var> = <var>p</var><sub>0</sub> − <var>p</var><sub>−40</sub>, <var>e</var> = <var>p</var><sub>−40</sub> − <var>p</var><sub>−80</sub> and <var>r</var> = 100/40. Stay put uses zero displacement. Constant velocity uses <var>r d</var>. Constant acceleration extrapolates the quadratic through the three positions and uses <var>r d</var> + <var>r</var>(<var>r</var>+1)(<var>d</var>−<var>e</var>)/2. The equal blend averages <var>r d</var> with each published neural vector using fixed weights of 0.5.</p>
+  </section>
+  <section aria-labelledby="scores">
+    <h2 id="scores">Mean recorded errors</h2>
+    <p>Ending-point error is Euclidean distance to the measured position. Distance error is absolute error of movement length. The original and published neural methods retain their separate scalar forecast. The other four methods use vector length. Average rows within a trial, then average trials and neural seeds equally.</p>
+    <div class="table-scroll"><table>
+      <caption>Ending-point error, millimetres</caption>
+      <thead><tr><th scope="col">Day</th><th scope="col">Stay put</th><th scope="col">Constant velocity</th><th scope="col">Constant acceleration</th><th scope="col">Original neural</th><th scope="col">Published neural blend</th><th scope="col">Equal blend</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">12 Aug</th><td>6.65</td><td>5.20</td><td>6.34</td><td>8.47</td><td>5.00</td><td>4.13</td></tr>
+        <tr><th scope="row">19 Aug</th><td>7.89</td><td>6.05</td><td>7.42</td><td>14.61</td><td>8.19</td><td>5.75</td></tr>
+        <tr><th scope="row">10 Sep</th><td>6.11</td><td>4.89</td><td>5.99</td><td>4.63</td><td>3.22</td><td>3.16</td></tr>
+      </tbody>
+    </table></div>
+    <div class="table-scroll"><table>
+      <caption>Distance-moved error, millimetres</caption>
+      <thead><tr><th scope="col">Day</th><th scope="col">Stay put</th><th scope="col">Constant velocity</th><th scope="col">Constant acceleration</th><th scope="col">Original neural</th><th scope="col">Published neural blend</th><th scope="col">Equal blend</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">12 Aug</th><td>6.65</td><td>3.69</td><td>4.73</td><td>7.72</td><td>3.60</td><td>2.99</td></tr>
+        <tr><th scope="row">19 Aug</th><td>7.89</td><td>4.28</td><td>5.62</td><td>13.24</td><td>6.20</td><td>4.37</td></tr>
+        <tr><th scope="row">10 Sep</th><td>6.11</td><td>3.52</td><td>4.51</td><td>3.54</td><td>2.11</td><td>2.24</td></tr>
+      </tbody>
+    </table></div>
+    <p>The days supplied 46,102, 39,297 and 45,324 forecasts from 3,038, 3,126 and 2,911 trials. The equal blend reduced endpoint error versus constant velocity by 1.07 mm (95% interval 1.03–1.12), 0.30 mm (0.24–0.36) and 1.74 mm (1.70–1.78). Its distance error rose by 0.08 mm on 19 August. Intervals use the 2.5th and 97.5th percentiles of 4,000 paired whole-trial draws within each day.</p>
+    <p>Descriptive strata use under 1 mm or at least 1 mm of past movement over 40 ms and four observed future-movement bands bounded at 0, 2, 10 and 20 mm. The future bands use outcomes. The fixed equal blend used no refitting or outcome-based selection. These days establish a retrospective result for one animal. Live latency, upstream time filtering and performance on untouched recordings remain unverified.</p>
+    <p><a href="index.html#recorded-title">Compare any day, measure or band</a> · <a href="index.html#example-title">Try the calculation with generated inputs</a></p>
+  </section>
+  <section aria-labelledby="replay">
+    <h2 id="replay">Recalculate from the archive</h2>
+    <p>The source folder includes the exact forecast rows and frozen neural predictions. Use its <code>replay.py</code> with Python 3.11 or later, NumPy and h5py. Supply the three pinned NWB files, which total 18.7 GB. The script checks each file and reproduces both scores and the paired intervals. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/cortical-movement-blend/position-history">Replay instructions and downloads</a></p>
+    <p>Source data are from Churchland and colleagues, <cite>Neural population dynamics during reaching</cite>, DANDI 000070 version 0.261122.2046, CC BY 4.0. <a href="https://doi.org/10.48324/dandi.000070/0.261122.2046">Dataset and citation</a></p>
+  </section>
+  <footer><p><a href="index.html">Open the simple edition</a></p></footer>
+</main>
+</body>
+</html>
