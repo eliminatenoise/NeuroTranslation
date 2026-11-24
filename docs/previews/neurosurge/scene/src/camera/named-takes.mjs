@@ -37,6 +37,48 @@ export function resolveTakeInterval(range, duration) {
   return start >= 0 && start < end && end <= duration ? {start, end} : null;
 }
 
+export function resolveTakeSequence(text, lookup) {
+  if (typeof text !== 'string' || !/\bthen\b/iu.test(text)) return null;
+  const clauses = text.split(/\bthen\b/iu);
+  function parse(step) {
+    const command = step.replace(/,$/u, '').trimEnd();
+    const name = namedReplayRequest(command);
+    return name === null ? namedIntervalRequest(command) : {name};
+  }
+  const requests = clauses.map((clause, index) => {
+    const clean = clause.trim();
+    // “And” can be the last word in a saved name or part of “and then”.
+    const connector = index < clauses.length - 1 && /\s+and$/iu.test(clean);
+    return {exact: parse(clean), joined: connector ? parse(clean.replace(/\s+and$/iu, '').trimEnd()) : null};
+  });
+  if (!requests.some(({exact, joined}) => exact || joined)) return null;
+  if (requests.length > 4 || text.length > 500) {
+    return {error: 'Use two to four short named take commands joined by “then”.'};
+  }
+  const steps = [];
+  for (const [index, {exact, joined}] of requests.entries()) {
+    const step = 'Step ' + (index + 1) + '. ';
+    if (!exact && !joined) return {error: step + 'Enter “replay take named” and a saved name, or specify part of a named take.'};
+    const exactEntry = exact && lookup(exact.name);
+    const joinedEntry = joined && lookup(joined.name);
+    if (exactEntry && joinedEntry) {
+      return {error: step + 'Two saved names match. Put a comma before “then” to show where the name ends.'};
+    }
+    const entry = exactEntry || joinedEntry;
+    const request = exactEntry ? exact : joined;
+    if (!entry) return {error: step + 'Choose an exact name from Named takes.'};
+    const interval = request.range === undefined ? undefined : resolveTakeInterval(request.range, entry.take.duration);
+    if (interval === null) {
+      return {error: step + 'Choose increasing times between 0 and ' + takeSeconds(entry.take.duration) + ' s for “' + entry.name + '”.'};
+    }
+    if (interval && !entry.take.frames.some(frame => interval.start <= frame.time && frame.time < interval.end && frame.pose)) {
+      return {error: step + 'Choose a part of “' + entry.name + '” with visible poses.'};
+    }
+    steps.push({take: entry.take, label: entry.name, interval});
+  }
+  return {steps};
+}
+
 // Truncate to a millisecond so the displayed upper limit can be typed back.
 export const takeSeconds = ms => (Math.floor(ms) / 1000).toString();
 
