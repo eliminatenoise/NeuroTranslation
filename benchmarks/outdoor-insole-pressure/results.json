@@ -1,0 +1,170 @@
+{
+  "dataset": "https://doi.org/10.6084/m9.figshare.19834324.v1",
+  "authors": [
+    "Viktor Losing",
+    "Martina Hasenj\u00e4ger"
+  ],
+  "paper": "https://doi.org/10.1038/s41597-022-01580-3",
+  "input": {
+    "hz": 60,
+    "frames": 13,
+    "history_ms": 200,
+    "horizon_ms": 100,
+    "unit": "mbar"
+  },
+  "fit": {
+    "people": 8,
+    "windows": 66909
+  },
+  "development": {
+    "people": 3,
+    "windows": 26138
+  },
+  "final_test": {
+    "people": 8,
+    "courses": 24,
+    "windows": 67355
+  },
+  "measure_columns": [
+    "all_channels",
+    "left",
+    "right"
+  ],
+  "mean_absolute_error_mbar": {
+    "last sample": [
+      60.374433549480614,
+      59.33604581682081,
+      61.41282128214041
+    ],
+    "extend recent trend": [
+      63.01204197138958,
+      61.77980467629461,
+      64.24427926648447
+    ],
+    "same-foot regularized linear": [
+      60.61645736783899,
+      59.85722375621101,
+      61.37569097946701
+    ],
+    "both-feet regularized linear": [
+      62.62705477726224,
+      60.448659835406055,
+      64.80544971911837
+    ],
+    "both-feet recurrent": [
+      50.269190393902484,
+      50.13592121278204,
+      50.40245957502286
+    ],
+    "same-foot recurrent": [
+      49.57630706790796,
+      49.194648547014815,
+      49.95796558880111
+    ]
+  },
+  "paired_differences_mbar": {
+    "primary": {
+      "method_minus_reference": [
+        "same-foot recurrent",
+        "same-foot regularized linear"
+      ],
+      "difference_mbar": [
+        -11.040150299931037,
+        -10.662575209196191,
+        -11.4177253906659
+      ],
+      "paired_95_percent_interval_mbar": [
+        [
+          -12.294966826617992,
+          -9.851025639943785
+        ],
+        [
+          -12.019479601533462,
+          -9.587182919523583
+        ],
+        [
+          -12.790498439603486,
+          -9.602022726560254
+        ]
+      ],
+      "people_with_lower_error": [
+        8,
+        8,
+        8
+      ]
+    },
+    "against_persistence": {
+      "method_minus_reference": [
+        "same-foot recurrent",
+        "last sample"
+      ],
+      "difference_mbar": [
+        -10.798126481572655,
+        -10.141397269805989,
+        -11.454855693339306
+      ],
+      "paired_95_percent_interval_mbar": [
+        [
+          -14.003405250810953,
+          -7.949088673521559
+        ],
+        [
+          -13.550095025549425,
+          -6.553206559509319
+        ],
+        [
+          -15.633654389862272,
+          -7.060296016510228
+        ]
+      ],
+      "people_with_lower_error": [
+        8,
+        8,
+        7
+      ]
+    },
+    "adding_other_foot": {
+      "method_minus_reference": [
+        "both-feet recurrent",
+        "same-foot recurrent"
+      ],
+      "difference_mbar": [
+        0.6928833259945266,
+        0.9412726657672215,
+        0.44449398622175007
+      ],
+      "paired_95_percent_interval_mbar": [
+        [
+          -0.4349827783249127,
+          1.7155121793730457
+        ],
+        [
+          0.02478605728342398,
+          1.9503003891588158
+        ],
+        [
+          -1.3185447863749669,
+          1.9099224149420897
+        ]
+      ],
+      "people_with_lower_error": [
+        2,
+        3,
+        2
+      ]
+    }
+  },
+  "resampling": {
+    "unit": "person",
+    "draws": 10000,
+    "seed": 224939
+  },
+  "standalone_parity": {
+    "windows": 72,
+    "max_difference_mbar": {
+      "sameFoot": 4.547473508864641e-13,
+      "bothFeet": 4.547473508864641e-13
+    }
+  },
+  "scope": "Offline forecast of interpolated archived pressure measurements from a single collection."
+}
