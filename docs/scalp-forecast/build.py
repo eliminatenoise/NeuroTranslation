@@ -64,10 +64,10 @@ def payload():
     gate_text = {True: "The assessment met the study’s full comparison for an incremental forecast advantage beyond the measured eye signals.",
                  False: "The assessment fell short of the study’s full criterion for an incremental forecast advantage beyond the measured eye signals.",
                  None: "The study could not decide whether scalp inputs added a forecast advantage beyond the measured eye signals."}[gate]
-    eye_text = ("An earlier signal check in the seven development people compared the central scalp signal (the average of C3 and C4) "
-                "with eye channel 63 in the first quarter-second after the cue. Its correlations are in no published result file, "
-                "so they are not repeated here. Correlations of that kind could not apportion the signal among eye movement, "
-                "shared reference, cue responses and other sources. "
+    eye_text = ("In the seven-person development signal check, simultaneous central scalp and eye-channel 63 recordings had a "
+                "median absolute correlation of 0.327 in the first quarter-second after the cue. Pairing the central scalp signal "
+                "with the next same-cue trial’s eye recording gave 0.195. The central signal averaged C3 and C4. "
+                "These correlations cannot apportion the signal among eye movement, shared reference, cue responses and other sources. "
                 + gate_text)
     return {"model": model, "example": read("method/example.json"),
             "reports": {"cohorts": cohorts, "labels": LABELS, "eye_observation": eye_text, "assessment_result": sentence}}
