@@ -37,6 +37,24 @@ const movementPhrases = [
   ['hand', ['open'], 'open_hand', 'lh_r_open', 'open'],
   ['hand', ['close'], 'grasp_close', 'lh_r_grasp', 'close'],
   ['fingers', ['spread'], 'spread_fingers', 'lh_r_spread'],
+  ['arm', ['raise', 'lift'], 'shoulder_flexion', 'lh_r_shoulder_flex'],
+  ['arm forward', ['raise', 'lift'], 'shoulder_flexion', 'lh_r_shoulder_flex'],
+  ['arm', ['lower'], 'shoulder_extension', 'lh_r_shoulder_extend'],
+  ['arm down and back', ['swing', 'move'], 'shoulder_extension', 'lh_r_shoulder_extend'],
+  ['arm out to the side', ['swing', 'move'], 'shoulder_abduction', 'lh_r_shoulder_abd'],
+  ['arm in', ['swing', 'bring'], 'shoulder_adduction', 'lh_r_shoulder_add'],
+  ['shoulder', ['flex'], 'shoulder_flexion', 'lh_r_shoulder_flex'],
+  ['shoulder', ['extend'], 'shoulder_extension', 'lh_r_shoulder_extend'],
+  ['thigh', ['lift', 'raise'], 'rh_hip_flex', 'lh_hip_flex'],
+  ['leg forward', ['raise', 'lift'], 'rh_hip_flex', 'lh_hip_flex'],
+  ['thigh', ['lower'], 'rh_hip_extend', 'lh_hip_extend'],
+  ['thigh down and back', ['swing', 'move'], 'rh_hip_extend', 'lh_hip_extend'],
+  ['thigh out', ['swing', 'move'], 'rh_hip_abduct', 'lh_hip_abduct'],
+  ['thigh in', ['swing', 'bring'], 'rh_hip_adduct', 'lh_hip_adduct'],
+  ['thigh outward', ['turn'], 'rh_hip_turn_out', 'lh_hip_turn_out'],
+  ['thigh inward', ['turn'], 'rh_hip_turn_in', 'lh_hip_turn_in'],
+  ['hip', ['flex'], 'rh_hip_flex', 'lh_hip_flex'],
+  ['hip', ['extend'], 'rh_hip_extend', 'lh_hip_extend'],
 ];
 const phrases = new Map();
 const phrasesMissingSide = new Map();
@@ -475,7 +493,9 @@ export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume
     }
     // Keep free catalogue searches such as “scooping then lifting”. A typed
     // limb or device instruction never falls through to a recording request.
-    const limbOrControl = /\b(?:elbows?|forearms?|palms?|pronat(?:e|ion)|supinat(?:e|ion)|wrists?|knees?|hands?|fingers?|camera|microphone|take|generate|recorded|record)\b/.test(command);
+    const armOrThighCommand = /\b(?:raise|lift|lower|swing|move|bring|turn|flex|extend)\s+(?:(?:my|your|the|left|right)\s+){0,2}(?:arms?|legs?|thighs?|hips?|shoulders?)\b/.test(command);
+    const limbOrControl = armOrThighCommand ||
+      /\b(?:elbows?|forearms?|palms?|pronat(?:e|ion)|supinat(?:e|ion)|wrists?|knees?|hands?|fingers?|camera|microphone|take|generate|recorded|record)\b/.test(command);
     if (sequence && (limbOrControl || !catalogueWords(command).some(word => movements.has(word)))) {
       clearSearch();
       message.textContent = sequence.error;
