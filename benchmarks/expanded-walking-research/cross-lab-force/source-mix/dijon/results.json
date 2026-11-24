@@ -1,0 +1,338 @@
+{
+  "source": {
+    "study": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11139954/",
+    "dataset": "https://doi.org/10.6084/m9.figshare.25592865.v1",
+    "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "selection": "Session 1 comfortable overground walking. First participant by file ID engineering only. Other 29 evaluation."
+  },
+  "models": {
+    "commit": "9b92d2133db2eb626e81b72215635e5c43e0082d",
+    "sha256": {
+      "forecast.py": "9d50427677cdebd566451bbf9280e27792270b08944173127fa31ae500d0fdad",
+      "weights.npz": "0485d6f550c7c2b30f164e776aa8cb87cb5c4dd452340d2f0bf3cccb77e2a0d8"
+    }
+  },
+  "clock": {
+    "rate_hz": 1000,
+    "history_ms": 200,
+    "history_bins": 10,
+    "issue_spacing_ms": 400,
+    "forecast_ms": 100
+  },
+  "exclusions": {
+    "participants": 0,
+    "nonfinite_targets": 0
+  },
+  "primary_subset": "Latest 20 ms input mean reached 20 N on the plate being forecast.",
+  "compared_methods": {
+    "all": {
+      "rows": 19846,
+      "people": 29,
+      "mean_absolute_error_ns": {
+        "persistence": 0.8668576269559106,
+        "recent_trend": 0.849960432463135,
+        "walking_ridge": 1.816305520847954,
+        "mixed_ridge": 1.9334348275603852,
+        "walking_gru_residual": 0.8014958112558307,
+        "mixed_gru_residual": 0.8085257634530578,
+        "mixed_gru_direct": 0.7644096283428181
+      },
+      "paired_gains_ns": {
+        "mixed_gru_residual_vs_walking_gru_residual": {
+          "mean_gain_ns": -0.007029952197227036,
+          "paired_middle_95_ns": [
+            -0.025291584533585723,
+            0.01357274765635611
+          ],
+          "people_improved": 12
+        },
+        "walking_ridge_vs_persistence": {
+          "mean_gain_ns": -0.9494478938920431,
+          "paired_middle_95_ns": [
+            -0.9861403901098691,
+            -0.9141217104382215
+          ],
+          "people_improved": 0
+        },
+        "walking_ridge_vs_recent_trend": {
+          "mean_gain_ns": -0.9663450883848186,
+          "paired_middle_95_ns": [
+            -1.0117120816364387,
+            -0.9117192694975281
+          ],
+          "people_improved": 0
+        },
+        "mixed_ridge_vs_persistence": {
+          "mean_gain_ns": -1.0665772006044747,
+          "paired_middle_95_ns": [
+            -1.0939359800228092,
+            -1.035971646895745
+          ],
+          "people_improved": 0
+        },
+        "mixed_ridge_vs_recent_trend": {
+          "mean_gain_ns": -1.0834743950972503,
+          "paired_middle_95_ns": [
+            -1.1361655465196234,
+            -1.0234316242670625
+          ],
+          "people_improved": 0
+        },
+        "walking_gru_residual_vs_persistence": {
+          "mean_gain_ns": 0.06536181570007987,
+          "paired_middle_95_ns": [
+            0.027767274280021754,
+            0.10326330927578878
+          ],
+          "people_improved": 21
+        },
+        "walking_gru_residual_vs_recent_trend": {
+          "mean_gain_ns": 0.04846462120730426,
+          "paired_middle_95_ns": [
+            0.0035680310030844734,
+            0.10324889718824692
+          ],
+          "people_improved": 17
+        },
+        "mixed_gru_residual_vs_persistence": {
+          "mean_gain_ns": 0.05833186350285284,
+          "paired_middle_95_ns": [
+            0.025762159780980714,
+            0.09437349010658924
+          ],
+          "people_improved": 21
+        },
+        "mixed_gru_residual_vs_recent_trend": {
+          "mean_gain_ns": 0.041434669010077224,
+          "paired_middle_95_ns": [
+            -0.00748927111474281,
+            0.09901188294156837
+          ],
+          "people_improved": 18
+        },
+        "mixed_gru_direct_vs_persistence": {
+          "mean_gain_ns": 0.1024479986130926,
+          "paired_middle_95_ns": [
+            0.0732339411277009,
+            0.1327792470571903
+          ],
+          "people_improved": 27
+        },
+        "mixed_gru_direct_vs_recent_trend": {
+          "mean_gain_ns": 0.08555080412031699,
+          "paired_middle_95_ns": [
+            0.03856524605254754,
+            0.14110874378875687
+          ],
+          "people_improved": 20
+        }
+      }
+    },
+    "past_mean_at_least_20_N": {
+      "rows": 855,
+      "people": 29,
+      "mean_absolute_error_ns": {
+        "persistence": 15.311015862142899,
+        "recent_trend": 14.030071161429452,
+        "walking_ridge": 11.69548997097069,
+        "mixed_ridge": 12.367687954117223,
+        "walking_gru_residual": 10.134894072560204,
+        "mixed_gru_residual": 10.035479006406504,
+        "mixed_gru_direct": 10.850225988513877
+      },
+      "paired_gains_ns": {
+        "mixed_gru_residual_vs_walking_gru_residual": {
+          "mean_gain_ns": 0.09941506615370074,
+          "paired_middle_95_ns": [
+            -0.26386452196633803,
+            0.48743603394470064
+          ],
+          "people_improved": 18
+        },
+        "walking_ridge_vs_persistence": {
+          "mean_gain_ns": 3.6155258911722052,
+          "paired_middle_95_ns": [
+            2.9229269531418205,
+            4.246553617320959
+          ],
+          "people_improved": 27
+        },
+        "walking_ridge_vs_recent_trend": {
+          "mean_gain_ns": 2.33458119045876,
+          "paired_middle_95_ns": [
+            1.567628755580584,
+            3.188218394589839
+          ],
+          "people_improved": 24
+        },
+        "mixed_ridge_vs_persistence": {
+          "mean_gain_ns": 2.9433279080256765,
+          "paired_middle_95_ns": [
+            2.404471253858973,
+            3.4888393954979704
+          ],
+          "people_improved": 28
+        },
+        "mixed_ridge_vs_recent_trend": {
+          "mean_gain_ns": 1.6623832073122313,
+          "paired_middle_95_ns": [
+            0.7323691877847278,
+            2.6345952889930158
+          ],
+          "people_improved": 23
+        },
+        "walking_gru_residual_vs_persistence": {
+          "mean_gain_ns": 5.176121789582694,
+          "paired_middle_95_ns": [
+            4.438296461850316,
+            5.8694051694348826
+          ],
+          "people_improved": 28
+        },
+        "walking_gru_residual_vs_recent_trend": {
+          "mean_gain_ns": 3.895177088869247,
+          "paired_middle_95_ns": [
+            3.1665035099880945,
+            4.704953668991455
+          ],
+          "people_improved": 29
+        },
+        "mixed_gru_residual_vs_persistence": {
+          "mean_gain_ns": 5.2755368557363935,
+          "paired_middle_95_ns": [
+            4.620198855314077,
+            5.967101655911033
+          ],
+          "people_improved": 29
+        },
+        "mixed_gru_residual_vs_recent_trend": {
+          "mean_gain_ns": 3.9945921550229477,
+          "paired_middle_95_ns": [
+            3.185601464190839,
+            4.864418940883192
+          ],
+          "people_improved": 28
+        },
+        "mixed_gru_direct_vs_persistence": {
+          "mean_gain_ns": 4.460789873629022,
+          "paired_middle_95_ns": [
+            3.924585333945178,
+            5.017643086150609
+          ],
+          "people_improved": 29
+        },
+        "mixed_gru_direct_vs_recent_trend": {
+          "mean_gain_ns": 3.1798451729155754,
+          "paired_middle_95_ns": [
+            2.381014511914057,
+            4.032841641320699
+          ],
+          "people_improved": 28
+        }
+      }
+    },
+    "past_mean_under_20_N": {
+      "rows": 18991,
+      "people": 29,
+      "mean_absolute_error_ns": {
+        "persistence": 0.16998293254554664,
+        "recent_trend": 0.21299750725864836,
+        "walking_ridge": 1.3373255991241964,
+        "mixed_ridge": 1.4301205561207844,
+        "walking_gru_residual": 0.34889568476115473,
+        "mixed_gru_residual": 0.3616334320492466,
+        "mixed_gru_direct": 0.27757656061949854
+      },
+      "paired_gains_ns": {
+        "mixed_gru_residual_vs_walking_gru_residual": {
+          "mean_gain_ns": -0.012737747288091834,
+          "paired_middle_95_ns": [
+            -0.015360894229660657,
+            -0.00908994734659869
+          ],
+          "people_improved": 1
+        },
+        "walking_ridge_vs_persistence": {
+          "mean_gain_ns": -1.1673426665786497,
+          "paired_middle_95_ns": [
+            -1.1743255463329454,
+            -1.1601645865541512
+          ],
+          "people_improved": 0
+        },
+        "walking_ridge_vs_recent_trend": {
+          "mean_gain_ns": -1.124328091865548,
+          "paired_middle_95_ns": [
+            -1.1448921276339903,
+            -1.0950567474436064
+          ],
+          "people_improved": 0
+        },
+        "mixed_ridge_vs_persistence": {
+          "mean_gain_ns": -1.260137623575238,
+          "paired_middle_95_ns": [
+            -1.2661620817536114,
+            -1.2537996113001724
+          ],
+          "people_improved": 0
+        },
+        "mixed_ridge_vs_recent_trend": {
+          "mean_gain_ns": -1.2171230488621363,
+          "paired_middle_95_ns": [
+            -1.2387071838738417,
+            -1.1886250863671886
+          ],
+          "people_improved": 0
+        },
+        "walking_gru_residual_vs_persistence": {
+          "mean_gain_ns": -0.1789127522156081,
+          "paired_middle_95_ns": [
+            -0.18340679108531943,
+            -0.17447753704890429
+          ],
+          "people_improved": 0
+        },
+        "walking_gru_residual_vs_recent_trend": {
+          "mean_gain_ns": -0.13589817750250635,
+          "paired_middle_95_ns": [
+            -0.15568842315279457,
+            -0.10749602818280544
+          ],
+          "people_improved": 2
+        },
+        "mixed_gru_residual_vs_persistence": {
+          "mean_gain_ns": -0.1916504995036999,
+          "paired_middle_95_ns": [
+            -0.19670400396454624,
+            -0.18517310222179523
+          ],
+          "people_improved": 0
+        },
+        "mixed_gru_residual_vs_recent_trend": {
+          "mean_gain_ns": -0.14863592479059817,
+          "paired_middle_95_ns": [
+            -0.17008940708222695,
+            -0.11694667797834084
+          ],
+          "people_improved": 2
+        },
+        "mixed_gru_direct_vs_persistence": {
+          "mean_gain_ns": -0.10759362807395191,
+          "paired_middle_95_ns": [
+            -0.11299882379413444,
+            -0.10198143641581789
+          ],
+          "people_improved": 0
+        },
+        "mixed_gru_direct_vs_recent_trend": {
+          "mean_gain_ns": -0.06457905336085017,
+          "paired_middle_95_ns": [
+            -0.08504972958457162,
+            -0.0350286915571836
+          ],
+          "people_improved": 2
+        }
+      }
+    }
+  }
+}

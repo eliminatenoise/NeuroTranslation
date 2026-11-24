@@ -1,5 +1,7 @@
 # Native force impulse across fitting sources
 
+A separate Dijon cohort tests the published methods and weights on native overground plate histories. [Dijon evaluation protocol and scores](dijon/TECHNICAL.md)
+
 Adding a mixed-activity archive to overground walking increased the recurrent correction’s error by **0.2033 N·s** on the separate treadmill archive and reduced it by **0.3296 N·s** on three held participants from the mixed-activity archive. The setting is retrospective. [Simple edition](SIMPLE.md) · [Aggregate scores](results.json)
 
 ## Inputs and split

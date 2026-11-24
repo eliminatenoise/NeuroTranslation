@@ -1,5 +1,7 @@
 # Short force forecasts from one lab or two
 
+The same models were also tested on 29 people walking at a separate lab in Dijon. [Dijon walking results](dijon/SIMPLE.md)
+
 Adding recordings from a second lab lowered error on three people measured by that lab. On a treadmill at a third lab, the same change raised the average error slightly. The best average there came from a small model trained only on overground walking. [Technical edition](TECHNICAL.md) · [Exact scores](results.json)
 
 ## What the models predict
