@@ -1,5 +1,7 @@
 # Area 2, handle force and 100 ms hand displacement
 
+The [separate-day technical report](separate-day/TECHNICAL.md) evaluates fixed and adaptive blends using a pooled Area 2 signal.
+
 We estimated the two-dimensional difference between the archived hand positions at issue and 100 ms later. The pinned Area2_Bump source is DANDI 000127 version 0.220113.0359, asset `ded26b6c-418d-43f5-8a37-dfd072c2dbd4`. The archive describes both hand position and handle measurements on a 1 kHz clock with the same recorded start time. We converted hand x and y from archival centimetres to millimetres and used the three measured force axes in newtons. The three moment columns were excluded. [Source archive](https://dandiarchive.org/dandiset/000127/0.220113.0359) · [Primary methods](https://doi.org/10.7554/eLife.48198)
 
 We sorted the source's 364 labelled trials by start time. The first 218 supplied fitting values, the next 72 selected the ridge penalty, and the remaining 74 supplied the held comparison. Each forecast used the previous ten 20 ms bins. We represented hand position at each bin start relative to its measured position at issue, sampled force at each bin start and counted half-open spike bins from 65 sorted Area 2 units with observation coverage. Candidate times were spaced 20 ms apart in development and 320 ms apart in the held trials. This kept the future hand positions used for scoring out of the held feature packet. All arms used the same eligible rows.

@@ -1,5 +1,7 @@
 # Hand movement from motion, force and sensory cortex
 
+The [separate-day test](separate-day/) compares fixed and adaptive blends of the motion and force forecast and the forecast that also uses Area 2.
+
 We tested how much these three measurements help forecast where the hand will move over the next tenth of a second. The forecast starts when we know the current hand position. It is scored against the position recorded a tenth of a second later.
 
 The recording comes from one macaque moving a handle. Some trials included a push from the handle. The archive includes position, the force between the hand and handle, and electrical activity from part of the brain that receives sensory signals from the arm. The archive lists a hand position and a set of handle-force readings every millisecond on the same recorded clock. All six forecasts below were scored on the same 624 times from 74 later trials. Each trial counted equally. [Recorded data](https://dandiarchive.org/dandiset/000127/0.220113.0359) · [Original experiment](https://doi.org/10.7554/eLife.48198)

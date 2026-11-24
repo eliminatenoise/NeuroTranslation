@@ -1,0 +1,1174 @@
+{
+  "study": "Hand movement forecasts on a separate recording day",
+  "development": {
+    "archive": "https://dandiarchive.org/dandiset/000127/0.220113.0359",
+    "licence": "CC BY 4.0",
+    "recording_day": "2017-12-07",
+    "animal": "Han",
+    "fit_trials": 218,
+    "configuration_trials": 72,
+    "earlier_held_trials_excluded": 74,
+    "sorted_units": 65
+  },
+  "test": {
+    "archive": "https://datadryad.org/dataset/doi:10.5061/dryad.nk98sf7q7",
+    "mirror": "https://zenodo.org/records/5010943",
+    "licence": "CC0 1.0",
+    "recording_day": "2017-12-04",
+    "animal": "Han",
+    "archive_member": "reaching_experiments/H_20171204_COactpas_TD.mat",
+    "member_sha256": "846ab7a77d62f022e90779b559a03e8cf483b756f10e7e33bb7eebf7e5be881c",
+    "author_converters": {
+      "named_both_date_batches": "https://github.com/raeedcho/preprocess-from-limblab/blob/d7b78757bdfdd82cbc99aeeec549c763cc76ad17/convertCOactpasfiles.m",
+      "encoder_xy_and_units": "https://github.com/limblab/ClassyDataAnalysis/blob/3d23730956b05aa19594cbfc6dcb2b4ab8833f34/%40commonDataStructure/kinematicsFromNEV.m",
+      "calibrated_xyz_and_moments": "https://github.com/limblab/ClassyDataAnalysis/blob/3d23730956b05aa19594cbfc6dcb2b4ab8833f34/%40commonDataStructure/handleForceFromNEVNSx.m",
+      "count_bins_and_units": "https://github.com/raeedcho/loadTDfromCDS/blob/079e6a9ff70ef5498894d32753a13d58997b5702/processCDSspikes.m"
+    },
+    "native_trial_support": {
+      "original_trials": 805,
+      "intervals_with_issues": 786,
+      "intervals_without_issues": 19
+    },
+    "positive_sort_units": 83,
+    "archive_bin_ms": 10,
+    "excluded_targets": 0
+  },
+  "method": {
+    "issue_window_ms": 200,
+    "predict_after_ms": 100,
+    "issue_step_ms": 320,
+    "inputs": "Ten positions relative to measured position at issue, ten xyz force samples at the same bin starts, and ten half-open 20 ms bins of sorted area 2 event counts. In the receiver sum the two complete archived 10 ms rows in each bin. Use only verified sorted neural rows. No receiver electrode identities are transferred.",
+    "neural_pooling": "For each time bin, summarize across reported sorted units using mean and population standard deviation of log1p(count) and fraction of units with a positive count. Missing units are not added as silent dimensions. Differences in sorting and observation coverage remain part of the archive shift.",
+    "two_fitted_forecasts": "Matched FP64 ridge heads use motion and force, and motion/force with pooled Area 2. Fit normalization on 218 trial heads only, select from 0.0001, 0.001, 0.01, 0.1, 1.0, 10.0 using mean endpoint error in the 72 config trials. Preserve both fixed heads.",
+    "blend_rule": "Fit a shared sigmoid weight for the two fixed heads on the 72 configuration trials. Four features available at issue are log1p of speed proxy (last 20 ms displacement in mm), log1p of the change of force magnitude proxy (distance between earliest and latest archived force), log1p of sensor-head forecast length, and log1p of the norm of disagreement between heads. Normalize from the configuration rows with equal trial weight, clip to [-5,5], ridge penalty 0.05 mm applied to gate slopes only and smooth Euclidean error with 0.01 mm floor. Try intercept initializations -1, 0, 1; take the smallest penalized objective. Fit when independent receiving fields are still held.",
+    "fixed_neural_weight": 0.3573845152401196,
+    "adaptive_neural_weight_percentiles_5_50_95": [
+      0.3441618640243105,
+      0.36807312488728344,
+      0.4368038935974539
+    ],
+    "resampling": "4000 paired whole-trial bootstrap draws. Group sizes count their contributing trials. Positive gains are reductions in error.",
+    "measures_in_order": [
+      "endpoint error in mm",
+      "displacement length error in mm"
+    ]
+  },
+  "score_groups": {
+    "all": {
+      "rows": 5921,
+      "trials": 786,
+      "arms": {
+        "stay_put": [
+          7.391155631453073,
+          7.391155631453073
+        ],
+        "constant_velocity": [
+          3.7880969781252936,
+          2.7577571994822994
+        ],
+        "motion_force": [
+          2.126081855281759,
+          1.527524017146887
+        ],
+        "pooled_area2": [
+          2.1411499306163395,
+          1.5383825182077133
+        ],
+        "constant_mix": [
+          2.12599629208835,
+          1.527951113212244
+        ],
+        "dynamic_mix": [
+          2.1260704300299254,
+          1.5279999154874415
+        ]
+      },
+      "paired_gains": {
+        "adaptive_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            1.1425251833928202e-05,
+            -0.000475898340554631
+          ],
+          "paired_95_mm": [
+            [
+              -0.002628707282361454,
+              0.002772842855349654
+            ],
+            [
+              -0.003270712265922036,
+              0.0023028713228130473
+            ]
+          ]
+        },
+        "adaptive_vs_constant": {
+          "reference": "constant_mix",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            -7.413794157512165e-05,
+            -4.880227519767699e-05
+          ],
+          "paired_95_mm": [
+            [
+              -0.00038386377478758746,
+              0.0002318869030452349
+            ],
+            [
+              -0.0003590469227132286,
+              0.0002592704835086815
+            ]
+          ]
+        },
+        "adaptive_vs_always_sensory": {
+          "reference": "pooled_area2",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            0.015079500586414378,
+            0.010382602720271243
+          ],
+          "paired_95_mm": [
+            [
+              0.010911776851996487,
+              0.019175593011691455
+            ],
+            [
+              0.006332478498462896,
+              0.014502346413360973
+            ]
+          ]
+        },
+        "sensory_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "pooled_area2",
+          "mean_gain_mm": [
+            -0.015068075334580449,
+            -0.010858501060825873
+          ],
+          "paired_95_mm": [
+            [
+              -0.021698203292203847,
+              -0.00808446359094458
+            ],
+            [
+              -0.01779280940581031,
+              -0.00415183189765192
+            ]
+          ]
+        },
+        "fixed_mix_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "constant_mix",
+          "mean_gain_mm": [
+            8.556319340904985e-05,
+            -0.000427096065356954
+          ],
+          "paired_95_mm": [
+            [
+              -0.0022950209443241706,
+              0.0025754383615850663
+            ],
+            [
+              -0.002971015537212789,
+              0.00211013446810664
+            ]
+          ]
+        },
+        "adaptive_vs_constant_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            1.6620265480953684,
+            1.229757283994857
+          ],
+          "paired_95_mm": [
+            [
+              1.5685111665548654,
+              1.7555523026006983
+            ],
+            [
+              1.148668019377459,
+              1.3117649609188142
+            ]
+          ]
+        },
+        "adaptive_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            5.2650852014231475,
+            5.863155715965631
+          ],
+          "paired_95_mm": [
+            [
+              5.0732819988378655,
+              5.458393915976316
+            ],
+            [
+              5.668500794327841,
+              6.059753823115936
+            ]
+          ]
+        }
+      },
+      "mean_dynamic_weight": 0.3771266756385359
+    },
+    "unbumped_trial": {
+      "rows": 2862,
+      "trials": 409,
+      "arms": {
+        "stay_put": [
+          6.541252827923255,
+          6.541252827923255
+        ],
+        "constant_velocity": [
+          3.21941430440771,
+          2.302960894376607
+        ],
+        "motion_force": [
+          1.9057645607857563,
+          1.3810407104653577
+        ],
+        "pooled_area2": [
+          1.9203491406064883,
+          1.392295095742611
+        ],
+        "constant_mix": [
+          1.905343881584449,
+          1.3813206080736142
+        ],
+        "dynamic_mix": [
+          1.9053211362198428,
+          1.3812711910679132
+        ]
+      },
+      "paired_gains": {
+        "adaptive_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            0.0004434245659136557,
+            -0.00023048060255563102
+          ],
+          "paired_95_mm": [
+            [
+              -0.0029283279994259657,
+              0.003910797890017977
+            ],
+            [
+              -0.003737725653552788,
+              0.0032269453664385676
+            ]
+          ]
+        },
+        "adaptive_vs_constant": {
+          "reference": "constant_mix",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            2.2745364606328477e-05,
+            4.941700570109185e-05
+          ],
+          "paired_95_mm": [
+            [
+              -0.0003153634650760101,
+              0.000349874721152851
+            ],
+            [
+              -0.00030520081243889577,
+              0.0004166525125117178
+            ]
+          ]
+        },
+        "adaptive_vs_always_sensory": {
+          "reference": "pooled_area2",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            0.015028004386645765,
+            0.011023904674697722
+          ],
+          "paired_95_mm": [
+            [
+              0.009516009300187112,
+              0.02024482612191559
+            ],
+            [
+              0.005417949405133351,
+              0.01642589485029001
+            ]
+          ]
+        },
+        "sensory_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "pooled_area2",
+          "mean_gain_mm": [
+            -0.01458457982073211,
+            -0.011254385277253354
+          ],
+          "paired_95_mm": [
+            [
+              -0.023118833241183995,
+              -0.005747287645031845
+            ],
+            [
+              -0.020092505704728248,
+              -0.002316238677249046
+            ]
+          ]
+        },
+        "fixed_mix_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "constant_mix",
+          "mean_gain_mm": [
+            0.00042067920130732723,
+            -0.00027989760825672286
+          ],
+          "paired_95_mm": [
+            [
+              -0.002717152962668777,
+              0.0036154663285293685
+            ],
+            [
+              -0.0035299131052434775,
+              0.0029359062966336316
+            ]
+          ]
+        },
+        "adaptive_vs_constant_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            1.3140931681878678,
+            0.9216897033086939
+          ],
+          "paired_95_mm": [
+            [
+              1.2052886057947547,
+              1.421454905325775
+            ],
+            [
+              0.8328221410969883,
+              1.0126651448519914
+            ]
+          ]
+        },
+        "adaptive_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            4.635931691703413,
+            5.159981636855342
+          ],
+          "paired_95_mm": [
+            [
+              4.406601635709147,
+              4.86361751554928
+            ],
+            [
+              4.919377899441929,
+              5.393210294275083
+            ]
+          ]
+        }
+      },
+      "mean_dynamic_weight": 0.37365235985988576
+    },
+    "bump_trial": {
+      "rows": 3059,
+      "trials": 377,
+      "arms": {
+        "stay_put": [
+          8.313198725998683,
+          8.313198725998683
+        ],
+        "constant_velocity": [
+          4.40504979921413,
+          3.2511569044908604
+        ],
+        "motion_force": [
+          2.365099821989624,
+          1.6864409201515171
+        ],
+        "pooled_area2": [
+          2.3806924322450636,
+          1.6968699340916036
+        ],
+        "constant_mix": [
+          2.3653778196641997,
+          1.6870277089727204
+        ],
+        "dynamic_mix": [
+          2.3655570644286614,
+          1.6871830674439066
+        ]
+      },
+      "paired_gains": {
+        "adaptive_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            -0.0004572424390377128,
+            -0.0007421472923890899
+          ],
+          "paired_95_mm": [
+            [
+              -0.004480032090985236,
+              0.0035987416192026205
+            ],
+            [
+              -0.0049905081553864245,
+              0.0034781134040033574
+            ]
+          ]
+        },
+        "adaptive_vs_constant": {
+          "reference": "constant_mix",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            -0.00017924476446162856,
+            -0.0001553584711859965
+          ],
+          "paired_95_mm": [
+            [
+              -0.0007164545669958323,
+              0.0003496374924607777
+            ],
+            [
+              -0.0006695180012956451,
+              0.0003489529613641368
+            ]
+          ]
+        },
+        "adaptive_vs_always_sensory": {
+          "reference": "pooled_area2",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            0.015135367816402076,
+            0.009686866647697153
+          ],
+          "paired_95_mm": [
+            [
+              0.009063558867305007,
+              0.021211588533199096
+            ],
+            [
+              0.0036645725983425813,
+              0.015935767066586937
+            ]
+          ]
+        },
+        "sensory_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "pooled_area2",
+          "mean_gain_mm": [
+            -0.015592610255439789,
+            -0.010429013940086244
+          ],
+          "paired_95_mm": [
+            [
+              -0.025596386513289465,
+              -0.005581336599286686
+            ],
+            [
+              -0.020720076169636482,
+              -0.00029972985165833456
+            ]
+          ]
+        },
+        "fixed_mix_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "constant_mix",
+          "mean_gain_mm": [
+            -0.00027799767457608427,
+            -0.0005867888212030934
+          ],
+          "paired_95_mm": [
+            [
+              -0.003832389343413885,
+              0.003311593527131372
+            ],
+            [
+              -0.004397372096022134,
+              0.0031977238162983366
+            ]
+          ]
+        },
+        "adaptive_vs_constant_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            2.039492734785469,
+            1.5639738370469543
+          ],
+          "paired_95_mm": [
+            [
+              1.896018453489604,
+              2.1764792510914885
+            ],
+            [
+              1.4383736160973124,
+              1.6904861943688458
+            ]
+          ]
+        },
+        "adaptive_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            5.947641661570021,
+            6.626015658554777
+          ],
+          "paired_95_mm": [
+            [
+              5.667644266121658,
+              6.253478991733977
+            ],
+            [
+              6.339920655405758,
+              6.930564821062462
+            ]
+          ]
+        }
+      },
+      "mean_dynamic_weight": 0.38037724502673353
+    },
+    "under_2mm": {
+      "rows": 2373,
+      "trials": 677,
+      "arms": {
+        "stay_put": [
+          0.786230958666367,
+          0.786230958666367
+        ],
+        "constant_velocity": [
+          0.9857411593049258,
+          0.6510209268582604
+        ],
+        "motion_force": [
+          0.8425436420196397,
+          0.5829210990841068
+        ],
+        "pooled_area2": [
+          0.8705130599323457,
+          0.603906680045763
+        ],
+        "constant_mix": [
+          0.8448489993372558,
+          0.5849392592749536
+        ],
+        "dynamic_mix": [
+          0.8448225086609835,
+          0.5849122606283392
+        ]
+      },
+      "paired_gains": {
+        "adaptive_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            -0.0022788666413436675,
+            -0.001991161544232399
+          ],
+          "paired_95_mm": [
+            [
+              -0.005601518846000732,
+              0.0007905100233472893
+            ],
+            [
+              -0.005242331341802563,
+              0.0010790896034070158
+            ]
+          ]
+        },
+        "adaptive_vs_constant": {
+          "reference": "constant_mix",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            2.6490676272365607e-05,
+            2.6998646614381472e-05
+          ],
+          "paired_95_mm": [
+            [
+              -5.2970889489515656e-05,
+              0.00010592061275110584
+            ],
+            [
+              -4.8917873409926285e-05,
+              0.0001025014963615475
+            ]
+          ]
+        },
+        "adaptive_vs_always_sensory": {
+          "reference": "pooled_area2",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            0.02569055127136232,
+            0.018994419417423816
+          ],
+          "paired_95_mm": [
+            [
+              0.020121443968273534,
+              0.031626917252471735
+            ],
+            [
+              0.013574698972838672,
+              0.024510259250337865
+            ]
+          ]
+        },
+        "sensory_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "pooled_area2",
+          "mean_gain_mm": [
+            -0.027969417912705984,
+            -0.020985580961656213
+          ],
+          "paired_95_mm": [
+            [
+              -0.037016087563725444,
+              -0.019604189917112873
+            ],
+            [
+              -0.02956802801306381,
+              -0.012881953481661983
+            ]
+          ]
+        },
+        "fixed_mix_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "constant_mix",
+          "mean_gain_mm": [
+            -0.002305357317616032,
+            -0.002018160190846781
+          ],
+          "paired_95_mm": [
+            [
+              -0.0055848947768743174,
+              0.0007591522868615553
+            ],
+            [
+              -0.005264101224578538,
+              0.0010390142676557097
+            ]
+          ]
+        },
+        "adaptive_vs_constant_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            0.14091865064394254,
+            0.06610866622992112
+          ],
+          "paired_95_mm": [
+            [
+              0.09149876062552732,
+              0.18960505356962934
+            ],
+            [
+              0.023794639771537836,
+              0.10812686084154277
+            ]
+          ]
+        },
+        "adaptive_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            -0.05859154999461647,
+            0.20131869803802768
+          ],
+          "paired_95_mm": [
+            [
+              -0.09370600453809314,
+              -0.02280681756160237
+            ],
+            [
+              0.16458655494123983,
+              0.23835674593190898
+            ]
+          ]
+        }
+      },
+      "mean_dynamic_weight": 0.35386845776203274
+    },
+    "2_to_under_10mm": {
+      "rows": 2149,
+      "trials": 735,
+      "arms": {
+        "stay_put": [
+          5.073815188853584,
+          5.073815188853584
+        ],
+        "constant_velocity": [
+          3.195345927891261,
+          2.251313449979433
+        ],
+        "motion_force": [
+          1.744864640078643,
+          1.205847374886849
+        ],
+        "pooled_area2": [
+          1.7611848409717423,
+          1.2168979816822294
+        ],
+        "constant_mix": [
+          1.7460847559690587,
+          1.2077404974136596
+        ],
+        "dynamic_mix": [
+          1.7463629359897823,
+          1.2080355638825893
+        ]
+      },
+      "paired_gains": {
+        "adaptive_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            -0.001498295911139292,
+            -0.0021881889957401403
+          ],
+          "paired_95_mm": [
+            [
+              -0.0050042650340949065,
+              0.0020310863499931235
+            ],
+            [
+              -0.0059004874214267375,
+              0.0015379817063221582
+            ]
+          ]
+        },
+        "adaptive_vs_constant": {
+          "reference": "constant_mix",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            -0.00027818002072357536,
+            -0.00029506646892962866
+          ],
+          "paired_95_mm": [
+            [
+              -0.0005869011196365883,
+              3.942104213427706e-05
+            ],
+            [
+              -0.0006336632733833654,
+              3.357386132053577e-05
+            ]
+          ]
+        },
+        "adaptive_vs_always_sensory": {
+          "reference": "pooled_area2",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            0.014821904981960307,
+            0.00886241779964033
+          ],
+          "paired_95_mm": [
+            [
+              0.009217927539951676,
+              0.020511108812046073
+            ],
+            [
+              0.0027368460581085716,
+              0.014931963261291375
+            ]
+          ]
+        },
+        "sensory_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "pooled_area2",
+          "mean_gain_mm": [
+            -0.016320200893099598,
+            -0.011050606795380473
+          ],
+          "paired_95_mm": [
+            [
+              -0.025410296282588386,
+              -0.007172624172658544
+            ],
+            [
+              -0.020774752810777213,
+              -0.0013262072244718873
+            ]
+          ]
+        },
+        "fixed_mix_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "constant_mix",
+          "mean_gain_mm": [
+            -0.0012201158904157163,
+            -0.0018931225268105116
+          ],
+          "paired_95_mm": [
+            [
+              -0.004463172045697024,
+              0.002101857019791323
+            ],
+            [
+              -0.005351586006119028,
+              0.0015667908401984802
+            ]
+          ]
+        },
+        "adaptive_vs_constant_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            1.4489829919014792,
+            1.0432778860968435
+          ],
+          "paired_95_mm": [
+            [
+              1.329370513374781,
+              1.5786951812617362
+            ],
+            [
+              0.942265481815917,
+              1.1458404062009735
+            ]
+          ]
+        },
+        "adaptive_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            3.3274522528638006,
+            3.865779624970994
+          ],
+          "paired_95_mm": [
+            [
+              3.2053771251947687,
+              3.449631819355691
+            ],
+            [
+              3.7494953843548586,
+              3.984528474346271
+            ]
+          ]
+        }
+      },
+      "mean_dynamic_weight": 0.37729536474125136
+    },
+    "10_to_under_20mm": {
+      "rows": 803,
+      "trials": 517,
+      "arms": {
+        "stay_put": [
+          13.808522741132917,
+          13.808522741132917
+        ],
+        "constant_velocity": [
+          7.253900821876828,
+          5.470479686875771
+        ],
+        "motion_force": [
+          3.869507485535609,
+          2.909899967235467
+        ],
+        "pooled_area2": [
+          3.875137777701497,
+          2.9106324737038705
+        ],
+        "constant_mix": [
+          3.867843740223151,
+          2.9076749616225044
+        ],
+        "dynamic_mix": [
+          3.867860024529559,
+          2.9077418617363207
+        ]
+      },
+      "paired_gains": {
+        "adaptive_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            0.0016474610060498538,
+            0.0021581054991462317
+          ],
+          "paired_95_mm": [
+            [
+              -0.005565680260804795,
+              0.008812554287964245
+            ],
+            [
+              -0.004886386737382685,
+              0.009103635906094826
+            ]
+          ]
+        },
+        "adaptive_vs_constant": {
+          "reference": "constant_mix",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            -1.6284306408227697e-05,
+            -6.690011381554497e-05
+          ],
+          "paired_95_mm": [
+            [
+              -0.0010777758945892048,
+              0.0010491971752660293
+            ],
+            [
+              -0.0010566520755675261,
+              0.0009285749947145267
+            ]
+          ]
+        },
+        "adaptive_vs_always_sensory": {
+          "reference": "pooled_area2",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            0.007277753171937823,
+            0.0028906119675503545
+          ],
+          "paired_95_mm": [
+            [
+              -0.0027302417240023112,
+              0.017195287319162776
+            ],
+            [
+              -0.007209607442606823,
+              0.012878530898740768
+            ]
+          ]
+        },
+        "sensory_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "pooled_area2",
+          "mean_gain_mm": [
+            -0.00563029216588797,
+            -0.0007325064684041234
+          ],
+          "paired_95_mm": [
+            [
+              -0.022746245196606864,
+              0.011418636428921164
+            ],
+            [
+              -0.017645510357961188,
+              0.015902891697333547
+            ]
+          ]
+        },
+        "fixed_mix_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "constant_mix",
+          "mean_gain_mm": [
+            0.0016637453124580817,
+            0.0022250056129617763
+          ],
+          "paired_95_mm": [
+            [
+              -0.004454561271356476,
+              0.00783075618666845
+            ],
+            [
+              -0.0039554915947654255,
+              0.00836538354760355
+            ]
+          ]
+        },
+        "adaptive_vs_constant_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            3.386040797347268,
+            2.56273782513945
+          ],
+          "paired_95_mm": [
+            [
+              3.0700475676190226,
+              3.706857681755502
+            ],
+            [
+              2.2798071653116843,
+              2.8586341311690977
+            ]
+          ]
+        },
+        "adaptive_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            9.940662716603358,
+            10.9007808793966
+          ],
+          "paired_95_mm": [
+            [
+              9.621263697812147,
+              10.24646496796764
+            ],
+            [
+              10.616127836437977,
+              11.184320224739665
+            ]
+          ]
+        }
+      },
+      "mean_dynamic_weight": 0.40446080239163024
+    },
+    "at_least_20mm": {
+      "rows": 596,
+      "trials": 472,
+      "arms": {
+        "stay_put": [
+          32.38974365526804,
+          32.38974365526804
+        ],
+        "constant_velocity": [
+          11.788907933017622,
+          8.904444152130196
+        ],
+        "motion_force": [
+          6.070474914017185,
+          4.556650827621024
+        ],
+        "pooled_area2": [
+          6.062081597920136,
+          4.540906473750493
+        ],
+        "constant_mix": [
+          6.065151334583542,
+          4.5499375741931205
+        ],
+        "dynamic_mix": [
+          6.064240300017266,
+          4.548385514489824
+        ]
+      },
+      "paired_gains": {
+        "adaptive_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            0.0062346139999192455,
+            0.008265313131200621
+          ],
+          "paired_95_mm": [
+            [
+              -0.0030201656163821237,
+              0.015301965870487393
+            ],
+            [
+              -0.0005501979516363193,
+              0.017113359105326617
+            ]
+          ]
+        },
+        "adaptive_vs_constant": {
+          "reference": "constant_mix",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            0.0009110345662762727,
+            0.001552059703296996
+          ],
+          "paired_95_mm": [
+            [
+              -0.0008708323890967375,
+              0.002702153767355512
+            ],
+            [
+              -0.00010274517847588547,
+              0.0032454957047186243
+            ]
+          ]
+        },
+        "adaptive_vs_always_sensory": {
+          "reference": "pooled_area2",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            -0.002158702097130514,
+            -0.0074790407393300375
+          ],
+          "paired_95_mm": [
+            [
+              -0.01382469063249023,
+              0.009582816011123735
+            ],
+            [
+              -0.018830719104477735,
+              0.004019341703119734
+            ]
+          ]
+        },
+        "sensory_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "pooled_area2",
+          "mean_gain_mm": [
+            0.008393316097049758,
+            0.01574435387053066
+          ],
+          "paired_95_mm": [
+            [
+              -0.012495574182498134,
+              0.02900485223435026
+            ],
+            [
+              -0.004400021193358115,
+              0.03563329989878497
+            ]
+          ]
+        },
+        "fixed_mix_vs_motion_force": {
+          "reference": "motion_force",
+          "candidate": "constant_mix",
+          "mean_gain_mm": [
+            0.005323579433642973,
+            0.0067132534279036255
+          ],
+          "paired_95_mm": [
+            [
+              -0.002170594616416832,
+              0.012734642784968416
+            ],
+            [
+              -0.0005266106757915095,
+              0.013955641306571172
+            ]
+          ]
+        },
+        "adaptive_vs_constant_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            5.724667633000356,
+            4.3560586376403725
+          ],
+          "paired_95_mm": [
+            [
+              5.288197982282364,
+              6.156650242799157
+            ],
+            [
+              3.905906902707018,
+              4.816154392427981
+            ]
+          ]
+        },
+        "adaptive_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "dynamic_mix",
+          "mean_gain_mm": [
+            26.325503355250778,
+            27.841358140778222
+          ],
+          "paired_95_mm": [
+            [
+              25.623103160297795,
+              27.03273806420645
+            ],
+            [
+              27.095891160514572,
+              28.564823187755664
+            ]
+          ]
+        }
+      },
+      "mean_dynamic_weight": 0.432294350733287
+    }
+  },
+  "decision": "Retain motion and force as the reference for this task. Both blends stayed within the uncertainty around zero change.",
+  "scope": "Same animal, different recording day and archive export. Inputs read recorded sample histories only. Original preparation filters may use later samples. No independent instrument-delay certificate.",
+  "release_contents": "Fitted numerical coefficients, NumPy inference, a synthetic input and aggregate results. No archived sensor rows or individual endpoints are included."
+}
