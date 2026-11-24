@@ -5,11 +5,12 @@ import { GUIDE } from './ns-text.mjs';
 import { CUE_WORDS, placeCueWords } from './ns-cue-place.mjs';
 
 const AREA_STEPS = new Set(['lookStrip', 'pressArea']);
-const LIMB_STEPS = new Set(['chooseLimb', 'moveHand', 'dragLimb']);
+const LIMB_STEPS = new Set(['chooseLimb', 'aimJoint', 'moveHand', 'dragLimb']);
 const ARM = new Set(['leftArm', 'rightArm']);
 const LEG = new Set(['leftLeg', 'rightLeg']);
 const KEYS = {
   chooseLimb: /\b[1-4]\b/g,
+  aimJoint: /\bE\b/g,
   moveHand: /\b[WASD]\b/g,
   dragBrain: /\bSpace\b/g,
   thirdPerson: /\bE\b/g,
