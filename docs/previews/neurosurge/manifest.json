@@ -33,9 +33,9 @@
     },
     {
       "path": "PLAYER-GUIDE-TECHNICAL.html",
-      "bytes": 14241,
-      "sha256": "644455a926ab845b145c701e92c4ff3bb904292cb363247f766922e0ff0eb793",
-      "source": "Shared player guides for Body updates 75 and 76"
+      "bytes": 14525,
+      "sha256": "e8978e4114455466d4db7f87f0ba05943f46270d3f7e898cc17b6633873bbceb",
+      "source": "Shared touch-input preview"
     },
     {
       "path": "PLAYER-GUIDE-TECHNICAL.md",
@@ -45,9 +45,9 @@
     },
     {
       "path": "PLAYER-GUIDE.html",
-      "bytes": 19567,
-      "sha256": "5d762d0b97d36b10a28ed020c51d86dabff1a700b1e12af5e1b70281d3f0ec88",
-      "source": "Shared player guides for Body updates 75 and 76"
+      "bytes": 19952,
+      "sha256": "78915d8106f78172879e2f963292ccd00a016f3d2988b2ddf36a56fc41af1c57",
+      "source": "Shared touch-input preview"
     },
     {
       "path": "PLAYER-GUIDE.md",
@@ -2097,9 +2097,9 @@
     },
     {
       "path": "scene/src/ns-app.mjs",
-      "bytes": 1230719,
-      "sha256": "3288268cc9a3b19607ac9ee6e28094b422ad8974342d8c53a0bc9802f656c854",
-      "source": "NeuroSurge Body updates 75 and 76"
+      "bytes": 1231023,
+      "sha256": "087c09bbb4b4721abd74c6e0335c750fb60538200078f838292391de8a646faa",
+      "source": "Shared touch-input preview"
     },
     {
       "path": "scene/src/ns-area-halo.mjs",
@@ -2253,9 +2253,9 @@
     },
     {
       "path": "scene/src/ns-controls.mjs",
-      "bytes": 103521,
-      "sha256": "146cb9d857a77c5932067978c2b647be93b78c17e6057dce081607c279ab17c9",
-      "source": "Shared game keyboard shortcut update"
+      "bytes": 106841,
+      "sha256": "66ed34e4e31cda545c5d5cea38660f07d73985b2d36897b9c7f224f55dd1eab0",
+      "source": "Shared touch-input preview"
     },
     {
       "path": "scene/src/ns-cue-place.mjs",
@@ -2626,5 +2626,9 @@
     "lead_revision": "f621fe0a21dbfb78539703980b0a33fd86209a2c",
     "previous_lead_revision": "879a6a296d096dc372d6e6475e659544e0f0d717",
     "scope": "Shared links, active motor labels, draggable limb cues and recovery hints in the hosted Full and Lite editions."
+  },
+  "touch_input_update": {
+    "base_commit": "14e3c351624e4d336e47b0d1cd36c00da22d5cb0",
+    "scope": "Shared Full and Lite touch look, tap on release and touch cancellation."
   }
 }

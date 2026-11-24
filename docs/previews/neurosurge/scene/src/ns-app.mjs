@@ -12504,7 +12504,11 @@ export function start(params = {}) {
             gazeArea: simState && simState.activity && typeof simState.activity.gazeArea === 'string' ? simState.activity.gazeArea : null,
             clicked: timing.events.some(e => e && e.type === 'click'),
             pressSeq: cs.button && cs.button.via === 'pointer' && Number.isSafeInteger(cs.button.seq) ? cs.button.seq : null });
-          aimSeen = a.seen; aimNow = a; aimRay = null;
+          aimSeen = a.seen;
+          // A touch supplies its aim and click together on release. Record the aim without starting a gaze pulse.
+          const touchClick = timing.events.some(event => event?.type === 'click' && event.touch === true);
+          aimNow = touchClick ? { ...a, silent: true, arrivedFrom: undefined } : a;
+          aimRay = null;
           // (section 208: what the aiming pointer is on is what this frame's click presses: the look's event is placed at the
           // start of the frame, as for a reach-behind click, so a click that comes in the same frame as the press that gave
           // the pointer the aim does not find the crosshair's area of the frame before)
