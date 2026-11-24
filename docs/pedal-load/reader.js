@@ -183,8 +183,10 @@
       clear(err.message);
     }
   }
+  let lastPreset = 'rise';
   function fillPreset(name) {
     original = pedalExample(name);
+    lastPreset = name;
     pending = false;
     for (const key of fields) {
       byId(key).value = original[key].join(', ');
@@ -206,7 +208,7 @@
     return cells.map(Number);
   }
   byId('preset').addEventListener('change', () => fillPreset(byId('preset').value));
-  byId('restore').addEventListener('click', () => fillPreset(byId('preset').value));
+  byId('restore').addEventListener('click', () => fillPreset(lastPreset));
   for (const key of fields)
     byId(key).addEventListener('input', () => {
       pending = true;
