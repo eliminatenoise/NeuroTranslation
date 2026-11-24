@@ -11,6 +11,8 @@
 
 The **Resume** button keeps the pointer free. To turn the view with every mouse movement, choose **Capture mouse** in the controls. Press **Escape** to release it and open the controls again. If capture is unavailable, drag on an empty part of the picture to keep playing.
 
+If you turn far enough that the brain and both bodies leave the picture, a message says you have turned away. Drag the empty space back toward the brain, press an arrow key to aim at a motor area, or press Escape and choose Reset brain view. While the brain is out of view, Reset brain view returns the camera to its starting direction. The tutorial and information cards receive your clicks, so you can read them without pressing a motor area behind them. When the tutorial shows a Brain ring, aim at it and press Space to pick up the brain.
+
 ## Move one limb yourself
 
 During play, press **1** for the left arm, **2** for the left leg, **3** for the right leg or **4** for the right arm. Use **W**, **A**, **S** and **D** to move the selected limb. Release the key when it reaches the position you want.

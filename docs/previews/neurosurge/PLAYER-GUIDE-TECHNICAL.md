@@ -14,6 +14,8 @@
 - Press Escape and open **View tutorial** to review its steps or resume or restart the sequence. Markers identify game regions or joints in view.
 - After limb selection, a vertical look in the eye view starts a measurement. Within 0.35 seconds of game time after that look, the virtual wrist or ankle must move at least 2.5 cm from its position relative to the shoulder or hip just before the look. Drag on empty space, or move the captured pointer. Press **E** to return from the outside view.
 
+When the scene is out of view, the recovery hint offers drag, arrow-key aiming and Escape → Reset brain view. With the brain out of view, the reset restores the initial look. Tutorial and information panels take pointer input, and the Brain ring marks a valid Space pickup.
+
 ## Command box and camera
 
 - **F** opens the Command box. Enter a supported movement or a sequence of up to four movements joined by `then`. Choose **Move** or press **Enter**. Where supported, **Use voice** fills the field through on-device dictation. A new command or a direct movement input ends the queued sequence.
