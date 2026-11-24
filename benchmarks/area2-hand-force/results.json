@@ -1,0 +1,1075 @@
+{
+  "measures": [
+    "Euclidean displacement vector error in mm",
+    "Absolute displacement length error in mm"
+  ],
+  "source": "sub-Han/sub-Han_desc-train_behavior+ecephys.nwb",
+  "nonfinite_targets_excluded": 0,
+  "groups": {
+    "all": {
+      "rows": 624,
+      "trials": 74,
+      "arms": {
+        "stay_put": {
+          "mean_mm": [
+            8.017655404195617,
+            8.017655404195617
+          ]
+        },
+        "constant_velocity": {
+          "mean_mm": [
+            4.159339483900828,
+            3.1853469093195876
+          ]
+        },
+        "motion": {
+          "mean_mm": [
+            2.3961855454737524,
+            1.8177832677695593
+          ]
+        },
+        "motion_force": {
+          "mean_mm": [
+            2.2756514605677265,
+            1.6954111737848525
+          ]
+        },
+        "motion_area2": {
+          "mean_mm": [
+            2.4529592061291665,
+            1.8237307638922224
+          ]
+        },
+        "motion_force_area2": {
+          "mean_mm": [
+            2.3277644469924312,
+            1.7163787219512023
+          ]
+        }
+      },
+      "paired_gains": {
+        "area2_given_motion_and_force": {
+          "reference": "motion_force",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            -0.052112986424705236,
+            -0.020967548166349964
+          ],
+          "interval95_mm": [
+            [
+              -0.10727504496949405,
+              0.002597097206763735
+            ],
+            [
+              -0.06618711707397236,
+              0.02688362857703396
+            ]
+          ]
+        },
+        "force_given_motion_and_area2": {
+          "reference": "motion_area2",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            0.12519475913673545,
+            0.10735204194101991
+          ],
+          "interval95_mm": [
+            [
+              0.06816609955603976,
+              0.1865219947081618
+            ],
+            [
+              0.04880377417434819,
+              0.17002635219312828
+            ]
+          ]
+        },
+        "force_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_force",
+          "mean_gain_mm": [
+            0.12053408490602628,
+            0.12237209398470648
+          ],
+          "interval95_mm": [
+            [
+              0.04092395810219696,
+              0.20316370683733664
+            ],
+            [
+              0.03759822264527284,
+              0.20788769653747805
+            ]
+          ]
+        },
+        "area2_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_area2",
+          "mean_gain_mm": [
+            -0.05677366065541441,
+            -0.005947496122663388
+          ],
+          "interval95_mm": [
+            [
+              -0.12751238542557233,
+              0.01236147167151702
+            ],
+            [
+              -0.0758516577588857,
+              0.06241215947165335
+            ]
+          ]
+        },
+        "all_inputs_vs_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            1.8315750369083965,
+            1.4689681873683855
+          ],
+          "interval95_mm": [
+            [
+              1.5597808121686092,
+              2.1167408550195974
+            ],
+            [
+              1.23258088546002,
+              1.7363576563563516
+            ]
+          ]
+        },
+        "all_inputs_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            5.689890957203185,
+            6.301276682244415
+          ],
+          "interval95_mm": [
+            [
+              5.183609929349253,
+              6.18901831094761
+            ],
+            [
+              5.766199759781484,
+              6.821035789985078
+            ]
+          ]
+        }
+      }
+    },
+    "active": {
+      "rows": 286,
+      "trials": 38,
+      "arms": {
+        "stay_put": {
+          "mean_mm": [
+            6.702102049711468,
+            6.702102049711468
+          ]
+        },
+        "constant_velocity": {
+          "mean_mm": [
+            3.1964490205402485,
+            2.535040172370726
+          ]
+        },
+        "motion": {
+          "mean_mm": [
+            1.9480378589816758,
+            1.451290333031338
+          ]
+        },
+        "motion_force": {
+          "mean_mm": [
+            1.906999848233977,
+            1.4236952262715825
+          ]
+        },
+        "motion_area2": {
+          "mean_mm": [
+            2.0416783825653715,
+            1.5178204738086256
+          ]
+        },
+        "motion_force_area2": {
+          "mean_mm": [
+            1.954323464572767,
+            1.4455681121663375
+          ]
+        }
+      },
+      "paired_gains": {
+        "area2_given_motion_and_force": {
+          "reference": "motion_force",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            -0.04732361633878987,
+            -0.021872885894754883
+          ],
+          "interval95_mm": [
+            [
+              -0.12442250988842082,
+              0.033454389951455034
+            ],
+            [
+              -0.08505574785814075,
+              0.04334115207625018
+            ]
+          ]
+        },
+        "force_given_motion_and_area2": {
+          "reference": "motion_area2",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            0.08735491799260442,
+            0.07225236164228814
+          ],
+          "interval95_mm": [
+            [
+              0.02630570816090901,
+              0.14926091599796304
+            ],
+            [
+              0.01309141306958153,
+              0.1347531341363309
+            ]
+          ]
+        },
+        "force_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_force",
+          "mean_gain_mm": [
+            0.04103801074769859,
+            0.027595106759755166
+          ],
+          "interval95_mm": [
+            [
+              -0.032516111556777395,
+              0.11474330473510842
+            ],
+            [
+              -0.059380655608093885,
+              0.11356074293617377
+            ]
+          ]
+        },
+        "area2_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_area2",
+          "mean_gain_mm": [
+            -0.0936405235836957,
+            -0.06653014077728787
+          ],
+          "interval95_mm": [
+            [
+              -0.18449238796138634,
+              -0.003960811267552258
+            ],
+            [
+              -0.15759760159395944,
+              0.023082910982697376
+            ]
+          ]
+        },
+        "all_inputs_vs_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            1.2421255559674815,
+            1.0894720602043881
+          ],
+          "interval95_mm": [
+            [
+              0.9338527717047348,
+              1.5445532195894713
+            ],
+            [
+              0.813943969938732,
+              1.3615851902510128
+            ]
+          ]
+        },
+        "all_inputs_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            4.747778585138701,
+            5.256533937545131
+          ],
+          "interval95_mm": [
+            [
+              4.069948042831635,
+              5.428157198467065
+            ],
+            [
+              4.551982175697731,
+              5.971429357744718
+            ]
+          ]
+        }
+      }
+    },
+    "with_bump": {
+      "rows": 338,
+      "trials": 36,
+      "arms": {
+        "stay_put": {
+          "mean_mm": [
+            9.40629505615111,
+            9.40629505615111
+          ]
+        },
+        "constant_velocity": {
+          "mean_mm": [
+            5.175723861892549,
+            3.871781798321164
+          ]
+        },
+        "motion": {
+          "mean_mm": [
+            2.8692303256598333,
+            2.2046369211043473
+          ]
+        },
+        "motion_force": {
+          "mean_mm": [
+            2.664783718031128,
+            1.982222451715526
+          ]
+        },
+        "motion_area2": {
+          "mean_mm": [
+            2.8870889643353954,
+            2.1466360700915743
+          ]
+        },
+        "motion_force_area2": {
+          "mean_mm": [
+            2.721952150657633,
+            2.0022343656130044
+          ]
+        }
+      },
+      "paired_gains": {
+        "area2_given_motion_and_force": {
+          "reference": "motion_force",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            -0.05716843262650478,
+            -0.020011913897478105
+          ],
+          "interval95_mm": [
+            [
+              -0.13721107941787442,
+              0.016013221921424785
+            ],
+            [
+              -0.09108667206736593,
+              0.04676059664688381
+            ]
+          ]
+        },
+        "force_given_motion_and_area2": {
+          "reference": "motion_area2",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            0.16513681367776262,
+            0.1444017044785701
+          ],
+          "interval95_mm": [
+            [
+              0.06471077379961226,
+              0.26462069381247616
+            ],
+            [
+              0.039579731255962175,
+              0.24663570918968813
+            ]
+          ]
+        },
+        "force_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_force",
+          "mean_gain_mm": [
+            0.20444660762870548,
+            0.22241446938882176
+          ],
+          "interval95_mm": [
+            [
+              0.06529852558382904,
+              0.3462858648793284
+            ],
+            [
+              0.07645147914995039,
+              0.36565533618538654
+            ]
+          ]
+        },
+        "area2_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_area2",
+          "mean_gain_mm": [
+            -0.017858638675561922,
+            0.05800085101277355
+          ],
+          "interval95_mm": [
+            [
+              -0.12652873881308507,
+              0.08646422524712509
+            ],
+            [
+              -0.047788025244530144,
+              0.15720106650800522
+            ]
+          ]
+        },
+        "all_inputs_vs_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            2.453771711234917,
+            1.8695474327081607
+          ],
+          "interval95_mm": [
+            [
+              2.051394871178636,
+              2.8718194904114114
+            ],
+            [
+              1.4793068311749085,
+              2.288464243153081
+            ]
+          ]
+        },
+        "all_inputs_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            6.684342905493477,
+            7.404060690538104
+          ],
+          "interval95_mm": [
+            [
+              6.105063453343444,
+              7.230975318080798
+            ],
+            [
+              6.797243605102846,
+              7.983270025810625
+            ]
+          ]
+        }
+      }
+    },
+    "under_2mm": {
+      "rows": 239,
+      "trials": 73,
+      "arms": {
+        "stay_put": {
+          "mean_mm": [
+            0.8957457864724326,
+            0.8957457864724326
+          ]
+        },
+        "constant_velocity": {
+          "mean_mm": [
+            1.2197401277137234,
+            0.8267478571935973
+          ]
+        },
+        "motion": {
+          "mean_mm": [
+            0.847161846113782,
+            0.5495228845120786
+          ]
+        },
+        "motion_force": {
+          "mean_mm": [
+            0.8809677637188209,
+            0.6040644041040818
+          ]
+        },
+        "motion_area2": {
+          "mean_mm": [
+            1.3596216133069248,
+            0.9643211502966031
+          ]
+        },
+        "motion_force_area2": {
+          "mean_mm": [
+            1.2213048513444906,
+            0.8912428079249568
+          ]
+        }
+      },
+      "paired_gains": {
+        "area2_given_motion_and_force": {
+          "reference": "motion_force",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            -0.3403370876256697,
+            -0.28717840382087506
+          ],
+          "interval95_mm": [
+            [
+              -0.41659600730529434,
+              -0.2645664562829035
+            ],
+            [
+              -0.3599796193059698,
+              -0.21460698652605462
+            ]
+          ]
+        },
+        "force_given_motion_and_area2": {
+          "reference": "motion_area2",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            0.13831676196243414,
+            0.07307834237164622
+          ],
+          "interval95_mm": [
+            [
+              0.0930134564864796,
+              0.1861137847997137
+            ],
+            [
+              0.03359989764419346,
+              0.1130982029649257
+            ]
+          ]
+        },
+        "force_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_force",
+          "mean_gain_mm": [
+            -0.03380591760503883,
+            -0.05454151959200306
+          ],
+          "interval95_mm": [
+            [
+              -0.07759507282799046,
+              0.011260129278854114
+            ],
+            [
+              -0.0986331055971215,
+              -0.01140879528455918
+            ]
+          ]
+        },
+        "area2_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_area2",
+          "mean_gain_mm": [
+            -0.5124597671931428,
+            -0.4147982657845244
+          ],
+          "interval95_mm": [
+            [
+              -0.6089522453587556,
+              -0.4212779167999883
+            ],
+            [
+              -0.5041219480230946,
+              -0.32521949153792623
+            ]
+          ]
+        },
+        "all_inputs_vs_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            -0.0015647236307671517,
+            -0.06449495073135961
+          ],
+          "interval95_mm": [
+            [
+              -0.265507295839072,
+              0.3306800213498387
+            ],
+            [
+              -0.31223609468599717,
+              0.26211566860241964
+            ]
+          ]
+        },
+        "all_inputs_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            -0.3255590648720579,
+            0.004502978547475916
+          ],
+          "interval95_mm": [
+            [
+              -0.4376504951929957,
+              -0.2170583790506482
+            ],
+            [
+              -0.12804410394921603,
+              0.134699248243723
+            ]
+          ]
+        }
+      }
+    },
+    "2_to_under_10mm": {
+      "rows": 225,
+      "trials": 73,
+      "arms": {
+        "stay_put": {
+          "mean_mm": [
+            4.763783568881271,
+            4.763783568881271
+          ]
+        },
+        "constant_velocity": {
+          "mean_mm": [
+            2.9953162846767434,
+            2.123346450162206
+          ]
+        },
+        "motion": {
+          "mean_mm": [
+            1.6210995031976922,
+            1.1307034819888533
+          ]
+        },
+        "motion_force": {
+          "mean_mm": [
+            1.6940534993685663,
+            1.1620572722062241
+          ]
+        },
+        "motion_area2": {
+          "mean_mm": [
+            1.7881352031225195,
+            1.2039353222299216
+          ]
+        },
+        "motion_force_area2": {
+          "mean_mm": [
+            1.7583917578631407,
+            1.170258442353385
+          ]
+        }
+      },
+      "paired_gains": {
+        "area2_given_motion_and_force": {
+          "reference": "motion_force",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            -0.06433825849457436,
+            -0.0082011701471607
+          ],
+          "interval95_mm": [
+            [
+              -0.1542646748818213,
+              0.021663464583835272
+            ],
+            [
+              -0.08514545491854508,
+              0.06932642836727329
+            ]
+          ]
+        },
+        "force_given_motion_and_area2": {
+          "reference": "motion_area2",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            0.02974344525937949,
+            0.03367687987653644
+          ],
+          "interval95_mm": [
+            [
+              -0.043902938740312036,
+              0.10058248563920398
+            ],
+            [
+              -0.03260035342391025,
+              0.09818314683985753
+            ]
+          ]
+        },
+        "force_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_force",
+          "mean_gain_mm": [
+            -0.07295399617087414,
+            -0.03135379021737081
+          ],
+          "interval95_mm": [
+            [
+              -0.1505085866298758,
+              0.0027589371837117038
+            ],
+            [
+              -0.10725753747174263,
+              0.045800954861492695
+            ]
+          ]
+        },
+        "area2_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_area2",
+          "mean_gain_mm": [
+            -0.167035699924828,
+            -0.07323184024106795
+          ],
+          "interval95_mm": [
+            [
+              -0.273710210649324,
+              -0.06106061440210233
+            ],
+            [
+              -0.17301024238581222,
+              0.024550223633242586
+            ]
+          ]
+        },
+        "all_inputs_vs_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            1.2369245268136027,
+            0.9530880078088211
+          ],
+          "interval95_mm": [
+            [
+              0.9278163636298516,
+              1.5718343873452354
+            ],
+            [
+              0.6854406422838403,
+              1.2248716950949985
+            ]
+          ]
+        },
+        "all_inputs_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            3.00539181101813,
+            3.5935251265278856
+          ],
+          "interval95_mm": [
+            [
+              2.6770893231891923,
+              3.3363535702391163
+            ],
+            [
+              3.26585245290711,
+              3.919418310540324
+            ]
+          ]
+        }
+      }
+    },
+    "10_to_under_20mm": {
+      "rows": 77,
+      "trials": 48,
+      "arms": {
+        "stay_put": {
+          "mean_mm": [
+            14.15811377470609,
+            14.15811377470609
+          ]
+        },
+        "constant_velocity": {
+          "mean_mm": [
+            7.4878961209915715,
+            5.395016865297337
+          ]
+        },
+        "motion": {
+          "mean_mm": [
+            4.157770269225864,
+            3.3761961146443986
+          ]
+        },
+        "motion_force": {
+          "mean_mm": [
+            3.6349420414904223,
+            2.998728534556912
+          ]
+        },
+        "motion_area2": {
+          "mean_mm": [
+            3.583016359522396,
+            2.7461933809270693
+          ]
+        },
+        "motion_force_area2": {
+          "mean_mm": [
+            3.3351720172303856,
+            2.577200948724339
+          ]
+        }
+      },
+      "paired_gains": {
+        "area2_given_motion_and_force": {
+          "reference": "motion_force",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            0.2997700242600378,
+            0.4215275858325727
+          ],
+          "interval95_mm": [
+            [
+              0.09258973146143736,
+              0.5185659266200676
+            ],
+            [
+              0.18923745008552462,
+              0.6540992809013183
+            ]
+          ]
+        },
+        "force_given_motion_and_area2": {
+          "reference": "motion_area2",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            0.2478443422920105,
+            0.16899243220273027
+          ],
+          "interval95_mm": [
+            [
+              -0.04810384668593751,
+              0.5893174647496218
+            ],
+            [
+              -0.10199742819807923,
+              0.46933449487440326
+            ]
+          ]
+        },
+        "force_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_force",
+          "mean_gain_mm": [
+            0.5228282277354409,
+            0.3774675800874871
+          ],
+          "interval95_mm": [
+            [
+              0.09792055561755109,
+              1.0011577124446833
+            ],
+            [
+              -0.050764672586551304,
+              0.8555662852010014
+            ]
+          ]
+        },
+        "area2_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_area2",
+          "mean_gain_mm": [
+            0.5747539097034682,
+            0.6300027337173296
+          ],
+          "interval95_mm": [
+            [
+              0.2880906651551969,
+              0.8754599008325804
+            ],
+            [
+              0.32092367732277804,
+              0.9413080757797997
+            ]
+          ]
+        },
+        "all_inputs_vs_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            4.152724103761187,
+            2.8178159165729983
+          ],
+          "interval95_mm": [
+            [
+              3.082656949189331,
+              5.363747196393358
+            ],
+            [
+              1.7580437679195478,
+              3.970860455869293
+            ]
+          ]
+        },
+        "all_inputs_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            10.822941757475704,
+            11.58091282598175
+          ],
+          "interval95_mm": [
+            [
+              9.788034113603501,
+              11.84020022498417
+            ],
+            [
+              10.615492009067317,
+              12.541411953619857
+            ]
+          ]
+        }
+      }
+    },
+    "at_least_20mm": {
+      "rows": 83,
+      "trials": 62,
+      "arms": {
+        "stay_put": {
+          "mean_mm": [
+            32.53880603160205,
+            32.53880603160205
+          ]
+        },
+        "constant_velocity": {
+          "mean_mm": [
+            12.833769941274493,
+            10.829074365801922
+          ]
+        },
+        "motion": {
+          "mean_mm": [
+            6.984100075180903,
+            5.560993897086079
+          ]
+        },
+        "motion_force": {
+          "mean_mm": [
+            6.237146503917163,
+            4.825594803011008
+          ]
+        },
+        "motion_area2": {
+          "mean_mm": [
+            5.954202042182718,
+            4.667614141753129
+          ]
+        },
+        "motion_force_area2": {
+          "mean_mm": [
+            5.6740677272423765,
+            4.344808436802847
+          ]
+        }
+      },
+      "paired_gains": {
+        "area2_given_motion_and_force": {
+          "reference": "motion_force",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            0.5630787766747855,
+            0.48078636620816234
+          ],
+          "interval95_mm": [
+            [
+              0.3242789892581643,
+              0.8040456695582323
+            ],
+            [
+              0.23870709111296154,
+              0.7329553156137496
+            ]
+          ]
+        },
+        "force_given_motion_and_area2": {
+          "reference": "motion_area2",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            0.2801343149403416,
+            0.3228057049502834
+          ],
+          "interval95_mm": [
+            [
+              -0.020585750471896768,
+              0.571028859386218
+            ],
+            [
+              0.021645101761239724,
+              0.618099389303719
+            ]
+          ]
+        },
+        "force_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_force",
+          "mean_gain_mm": [
+            0.7469535712637406,
+            0.7353990940750686
+          ],
+          "interval95_mm": [
+            [
+              0.3357224606531648,
+              1.1672639431319627
+            ],
+            [
+              0.3049938830175003,
+              1.1660724931490425
+            ]
+          ]
+        },
+        "area2_given_motion": {
+          "reference": "motion",
+          "candidate": "motion_area2",
+          "mean_gain_mm": [
+            1.0298980329981842,
+            0.8933797553329477
+          ],
+          "interval95_mm": [
+            [
+              0.6848490722213106,
+              1.3734711329053848
+            ],
+            [
+              0.5147059247649546,
+              1.2810811560188593
+            ]
+          ]
+        },
+        "all_inputs_vs_velocity": {
+          "reference": "constant_velocity",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            7.159702214032112,
+            6.484265928999077
+          ],
+          "interval95_mm": [
+            [
+              5.989099578878749,
+              8.48972636234922
+            ],
+            [
+              5.400453080412145,
+              7.58101394172604
+            ]
+          ]
+        },
+        "all_inputs_vs_stay_put": {
+          "reference": "stay_put",
+          "candidate": "motion_force_area2",
+          "mean_gain_mm": [
+            26.864738304359673,
+            28.1939975947992
+          ],
+          "interval95_mm": [
+            [
+              24.6228363717523,
+              29.25056977998922
+            ],
+            [
+              25.943255596998753,
+              30.51547583370221
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "scope": "Single archived recording. Bootstrap resamples full trials. Past handle position was exported after 100 Hz filtering; export has no filter phase or independent hardware offset proof."
+}
