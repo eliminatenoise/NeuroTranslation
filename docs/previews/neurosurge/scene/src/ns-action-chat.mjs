@@ -6,6 +6,7 @@ import {comparisonNames} from './camera/take-comparison.mjs';
 import {bindNamedTakes, namedReplayRequest, namedIntervalRequest, resolveTakeInterval, resolveTakeSequence, takeSeconds} from './camera/named-takes.mjs';
 import { actionFor } from './word-motion/inference.mjs';
 import { bindWordMotion } from './word-motion/player.mjs';
+import { isPanelShortcut } from './ns-controls.mjs';
 
 // Each phrase addresses one existing movement on the virtual body. Never discard
 // negative words, multiple actions or the arm/leg side to force a match.
@@ -261,8 +262,7 @@ export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume
       }
       return;
     }
-    if (event.code !== 'KeyF' || event.repeat || event.ctrlKey || event.altKey || event.metaKey ||
-        event.target?.isContentEditable || event.target?.closest?.('input, textarea, select, button, a[href]') || !canOpen()) return;
+    if (!isPanelShortcut(event, 'KeyF') || !canOpen()) return;
     event.preventDefault();
     open();
   }

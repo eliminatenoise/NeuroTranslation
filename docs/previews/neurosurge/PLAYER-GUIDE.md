@@ -25,6 +25,8 @@ Press and drag on a limb to move the joint you pressed on. Press **Space** to gr
 
 ## Give the body a movement to make
 
+If you use **Tab** to reach a button at the top of the game, you can press **F** to open the Command box or **C** to open the motion recorder from there. Press **Escape** to close either panel and return to the game view.
+
 1. While playing, press **F** to open the **Command box**. Type a direction such as **bend my right elbow**, then press **Move** or **Enter**.
 2. Join up to four supported movements with **then**. For example, enter **bend my left knee then bend my right knee**. The game shows which step it is doing. A movement key or a new command gives you control back.
 3. Where the browser offers on-device dictation, choose **Use voice**. Check the words that appear in the box before you move the body. You can always type instead.

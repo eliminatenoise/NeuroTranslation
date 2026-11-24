@@ -65,7 +65,7 @@ import { bindActivityMap } from './activity/map.mjs';
 import {bindJointView} from './joint/view.mjs';
 import {movementMirrorBackend} from './joint/route.mjs';
 import { createCameraCapture } from './camera.mjs';
-import { createControls, bindDom, CONTROL_CODES, MOVE_CODES, moveKeyNumber, AREA_CODES, areaKeyDir } from './ns-controls.mjs';
+import { createControls, bindDom, CONTROL_CODES, MOVE_CODES, moveKeyNumber, AREA_CODES, areaKeyDir, isPanelShortcut } from './ns-controls.mjs';
 import { walkQuietStep, walkUiEvent, AREA_WALK_QUIET, bindFocusRing } from './ns-look-calm.mjs'; // 22 November 2026 (LOOK2)
 import {
   loadAssets, validateManifest, boneInputs, compartmentDirections, SEGMENT_OF, MUSCLE_OF, BRAIN, ATTRIBUTION,
@@ -8351,9 +8351,7 @@ export function start(params = {}) {
     });
     listen(cameraOpen, 'click', toggleCamera);
     listen(view, 'keydown', e => {
-      if (e.code !== 'KeyC' || e.repeat || e.isComposing || e.ctrlKey || e.metaKey || e.altKey ||
-          e.target?.isContentEditable || e.target?.closest?.('input, textarea, select, button, a[href], dialog[open]') ||
-          !gameReady() || !shellIsPlaying(shellState)) return;
+      if (!isPanelShortcut(e, 'KeyC') || !gameReady() || !shellIsPlaying(shellState)) return;
       e.preventDefault();
       toggleCamera();
     }, true);

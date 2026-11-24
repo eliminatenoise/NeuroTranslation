@@ -1028,6 +1028,15 @@ function isPageControl(el) {
   return Boolean(el?.isContentEditable || el?.closest?.('button, input, select, textarea, summary, a[href]'));
 }
 
+/** Game toolbar buttons also accept the shortcuts that open the command and camera panels. */
+export function isPanelShortcut(event, code) {
+  if (event.code !== code || event.defaultPrevented || event.repeat || event.isComposing ||
+      event.ctrlKey || event.metaKey || event.altKey) return false;
+  const target = event.target;
+  if (target?.isContentEditable || target?.closest?.('dialog[open]')) return false;
+  return !isPageControl(target) || Boolean(target?.closest?.('[data-ns-panel-shortcuts] button:not(:disabled)'));
+}
+
 /** The UI_COMMANDS entry named by the nearest data-ns-ui attribute from `el` up to (and including) `root`, else null. */
 function uiCommandOf(el, root) {
   for (let node = el, depth = 0; node && depth < 16; node = node.parentNode, depth++) {
