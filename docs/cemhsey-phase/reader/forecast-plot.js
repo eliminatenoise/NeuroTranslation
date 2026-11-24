@@ -28,21 +28,19 @@
     const x = tick => margins.left + horizontal * tick / 6000;
     let min = Infinity;
     let max = -Infinity;
-    let lowestReading = Infinity;
     for (const entry of series) {
       min = Math.min(min, entry.point, entry.range?.lower ?? Infinity, entry.observed ?? Infinity);
       max = Math.max(max, entry.point, entry.range?.upper ?? -Infinity, entry.observed ?? -Infinity);
-      lowestReading = Math.min(lowestReading, entry.point, entry.observed ?? Infinity);
     }
-    // Force is a share of the hardest pinch: start the axis at zero unless a forecast or reading is itself negative,
-    // and use round tick steps. A band edge below zero is drawn at the axis floor.
-    const floor = lowestReading >= 0 ? 0 : min;
+    // Force is a share of the hardest pinch: start the axis at zero unless a forecast, a reading or the edge of a
+    // range is negative, so that the whole range is drawn, and use round tick steps.
+    const floor = min >= 0 ? 0 : min;
     const pad = Math.max((max - floor) * .08, 1e-6);
     const rawStep = (max + pad - floor) / 4;
     const power = 10 ** Math.floor(Math.log10(rawStep));
     const mantissa = rawStep / power;
     const tickStep = (mantissa <= 1 ? 1 : mantissa <= 2 ? 2 : mantissa <= 2.5 ? 2.5 : mantissa <= 5 ? 5 : 10) * power;
-    const axisLow = lowestReading >= 0 ? 0 : Math.floor((min - pad) / tickStep) * tickStep;
+    const axisLow = min >= 0 ? 0 : Math.floor((min - pad) / tickStep) * tickStep;
     const axisHigh = Math.ceil((max + pad) / tickStep) * tickStep;
     const y = value => bottom - (Math.min(axisHigh, Math.max(axisLow, value)) - axisLow) * vertical / (axisHigh - axisLow);
 
