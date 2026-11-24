@@ -6,6 +6,8 @@
 
 [Run the new walking checkpoints and read the cortical forecast results](benchmarks/walking-neural-scaling/)
 
+[Compare the movement blend with the original forecast](benchmarks/cortical-movement-blend/) · [Download the blend](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/cortical-movement-blend/Cortical-Movement-Blend.zip)
+
 [Run the hand forecast that keeps individual electrode readings](benchmarks/cortical-electrode-identity/) · [Download the model ZIP](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/cortical-electrode-identity/Cortical-Electrode-Identity.zip)
 
 [Run the cortical model tested across two recording days](benchmarks/cortical-cross-day/)

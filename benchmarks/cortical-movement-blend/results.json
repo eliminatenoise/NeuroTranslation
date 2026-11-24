@@ -1,0 +1,231 @@
+{
+  "title": "A movement blend for NeuroTranslate",
+  "dataset": "https://dandiarchive.org/dandiset/000070/0.261122.2046",
+  "forecast_ahead_ms": 100,
+  "history_ms": 200,
+  "electrodes": 96,
+  "scope": "Two separate archival test days from one previously calibrated macaque. Model used earlier neural event counts only.",
+  "calibration": {
+    "dates": [
+      "2010-09-20",
+      "2010-09-22 final quarter"
+    ],
+    "windows": 52468,
+    "precision": "FP64 blend, three unchanged FP32 base models",
+    "optimization": "Equal days then equal trials, Euclidean endpoint objective"
+  },
+  "metric_order": [
+    "hand ending-position error mm",
+    "movement distance error mm"
+  ],
+  "recordings": {
+    "2010-08-19": {
+      "trials": 3126,
+      "windows": 39297,
+      "mean_error_mm": {
+        "original": [
+          14.610959447336274,
+          13.244753310767699
+        ],
+        "blended": [
+          8.189283402619882,
+          6.196235117578943
+        ],
+        "stay_put": [
+          7.894748170793278,
+          7.894748170793278
+        ]
+      },
+      "measured_displacement_bands": {
+        "under_2mm": {
+          "rows": 25314,
+          "trials": 3126,
+          "mean_error_mm": {
+            "original": [
+              11.75722487503664,
+              12.61927733314861
+            ],
+            "blended": [
+              4.355089833895879,
+              4.433357513696462
+            ],
+            "stay_put": [
+              0.39733600903031424,
+              0.39733600903031424
+            ]
+          }
+        },
+        "2_to_10mm": {
+          "rows": 7931,
+          "trials": 2991,
+          "mean_error_mm": {
+            "original": [
+              16.464629592153624,
+              16.832227151898028
+            ],
+            "blended": [
+              8.457752372759025,
+              6.95510869348406
+            ],
+            "stay_put": [
+              3.71826323264307,
+              3.71826323264307
+            ]
+          }
+        },
+        "10_to_20mm": {
+          "rows": 1139,
+          "trials": 1055,
+          "mean_error_mm": {
+            "original": [
+              22.2538927537649,
+              15.679469463539242
+            ],
+            "blended": [
+              16.106950888446768,
+              9.191405118004
+            ],
+            "stay_put": [
+              14.338231190757078,
+              14.338231190757078
+            ]
+          }
+        },
+        "20mm_or_more": {
+          "rows": 4913,
+          "trials": 3123,
+          "mean_error_mm": {
+            "original": [
+              24.0113107438448,
+              9.87896153190644
+            ],
+            "blended": [
+              25.513634735410687,
+              13.74267318741361
+            ],
+            "stay_put": [
+              52.98063807099333,
+              52.98063807099333
+            ]
+          }
+        }
+      },
+      "paired_95_interval_stay_put_minus_blend_mm": [
+        [
+          -0.39650777387615616,
+          -0.19389630129346067
+        ],
+        [
+          1.5878896173658297,
+          1.8075220230474076
+        ]
+      ]
+    },
+    "2010-08-12": {
+      "trials": 3038,
+      "windows": 46102,
+      "mean_error_mm": {
+        "original": [
+          8.470406179414844,
+          7.721603524524614
+        ],
+        "blended": [
+          4.999422027477699,
+          3.6002864318045984
+        ],
+        "stay_put": [
+          6.651411974245969,
+          6.651411974245969
+        ]
+      },
+      "measured_displacement_bands": {
+        "0_to_2mm": {
+          "rows": 32913,
+          "trials": 3038,
+          "mean_error_mm": {
+            "original": [
+              4.501539277360104,
+              5.312360862600694
+            ],
+            "blended": [
+              1.2078073545229318,
+              1.174139376840148
+            ],
+            "stay_put": [
+              0.31702989885097177,
+              0.31702989885097177
+            ]
+          }
+        },
+        "2_to_10mm": {
+          "rows": 7167,
+          "trials": 2809,
+          "mean_error_mm": {
+            "original": [
+              15.527385930618253,
+              15.39436687821767
+            ],
+            "blended": [
+              8.272236741151447,
+              6.823091465150619
+            ],
+            "stay_put": [
+              3.683978093698297,
+              3.683978093698297
+            ]
+          }
+        },
+        "10_to_20mm": {
+          "rows": 1049,
+          "trials": 966,
+          "mean_error_mm": {
+            "original": [
+              17.954867607518203,
+              13.963847260588564
+            ],
+            "blended": [
+              12.893012334777538,
+              8.582737803535492
+            ],
+            "stay_put": [
+              14.476455921435662,
+              14.476455921435662
+            ]
+          }
+        },
+        "20_to_infmm": {
+          "rows": 4973,
+          "trials": 3037,
+          "mean_error_mm": {
+            "original": [
+              21.377772782396157,
+              10.24170594562392
+            ],
+            "blended": [
+              23.417192471760966,
+              13.930248092913143
+            ],
+            "stay_put": [
+              52.46675921316752,
+              52.46675921316752
+            ]
+          }
+        }
+      }
+    }
+  },
+  "portable": {
+    "2010-08-19": {
+      "rows": 39297,
+      "max_blended_delta_mm": 2.883242826889898e-05,
+      "max_base_delta_mm": 3.6597251892089844e-05,
+      "inference_seconds_all_three": 0.9170829179929569
+    },
+    "2010-08-12": {
+      "rows": 46102,
+      "max_blended_delta_mm": 2.456149817753328e-05,
+      "max_base_delta_mm": 3.129243850708008e-05,
+      "inference_seconds_all_three": 1.049687265069224
+    }
+  }
+}
