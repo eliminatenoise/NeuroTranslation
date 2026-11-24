@@ -22,7 +22,7 @@ if __name__=='__main__':
     full,other=test['groups']['complete']['scores']['balanced'],test['groups']['other_angle5']['scores']['balanced']
     assert full['shared_both']['mae']>full['shared_load']['mae'] and other['shared_both']['mae']>other['shared_load']['mae']
     finding=("The planned two-person test for the added muscle signal could not be completed. Each table selection describes one person’s available trials. "
-             f"The muscle signal helped neither person: with it, the shared encoder’s average miss went from {full['shared_load']['mae']:.4f} to {full['shared_both']['mae']:.4f} "
+             f"The muscle signal lowered neither person’s average miss: with it, the shared encoder went from {full['shared_load']['mae']:.4f} to {full['shared_both']['mae']:.4f} "
              f"for the person with every trial, and from {other['shared_load']['mae']:.4f} to {other['shared_both']['mae']:.4f} on the other person’s angle5 trials "
              "(raw load-sensor units).")
     payload=json.dumps(dict(model=model,dev=dev,test=test,shared=shared,random=random,labels=LABELS,scope=scope,finding=finding),ensure_ascii=False,allow_nan=False,separators=(',',':')).replace('<','\\u003c')
