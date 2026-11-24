@@ -39,12 +39,20 @@ const movementPhrases = [
   ['fingers', ['spread'], 'spread_fingers', 'lh_r_spread'],
 ];
 const phrases = new Map();
-for (const [part, verbs, left, right, cue] of movementPhrases) {
-  for (const [side, id] of [['left', left], ['right', right]]) {
-    if (cue) phrases.set(side + ' ' + part + ' ' + cue, id);
-    if (part === 'forearm') phrases.set('turn ' + side + ' palm ' + (cue === 'pronation' ? 'down' : 'up'), id);
-    for (const verb of verbs) phrases.set(verb + ' ' + side + ' ' + part, id);
+const phrasesMissingSide = new Map();
+function addSidedPhrase(prefix, suffix, left, right) {
+  const choices = [`${prefix}left ${suffix}`, `${prefix}right ${suffix}`];
+  phrases.set(choices[0], left);
+  phrases.set(choices[1], right);
+  for (const determiner of ['', 'my ', 'your ', 'the ']) {
+    phrasesMissingSide.set(prefix + determiner + suffix, choices);
   }
+}
+
+for (const [part, verbs, left, right, cue] of movementPhrases) {
+  if (cue) addSidedPhrase('', part + ' ' + cue, left, right);
+  if (part === 'forearm') addSidedPhrase('turn ', 'palm ' + (cue === 'pronation' ? 'down' : 'up'), left, right);
+  for (const verb of verbs) addSidedPhrase(verb + ' ', part, left, right);
 }
 
 export function resolveAction(phrase, bodyMap) {
@@ -59,6 +67,11 @@ export function resolveAction(phrase, bodyMap) {
     }
   }
   return null;
+}
+
+function sideCompletions(command, bodyMap) {
+  const choices = phrasesMissingSide.get(command);
+  return choices?.every(phrase => resolveAction(phrase, bodyMap)) ? choices : null;
 }
 
 // Resolve the whole instruction against the same side-specific map before resuming play.
@@ -136,6 +149,7 @@ export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume
   const field = dialog.querySelector('input');
   const message = dialog.querySelector('[role=status]');
   const form = dialog.querySelector('form');
+  const sidePicker = form.querySelector('[data-command-sides]');
   const results = dialog.querySelector('[data-body-results]');
   const speak = dialog.querySelector('[data-speak]');
   const close = dialog.querySelector('[data-close]');
@@ -163,6 +177,7 @@ export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume
 
   function clearSearch() {
     searchVersion++;
+    if (sidePicker) sidePicker.hidden = true;
     results.replaceChildren();
     results.hidden = true;
   }
@@ -526,6 +541,14 @@ export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume
     }
     const action = resolveAction(field.value, bodyMap);
     if (!action) {
+      if (sidePicker && sideCompletions(command, bodyMap)) {
+        stopVoice();
+        clearSearch();
+        sidePicker.hidden = false;
+        message.textContent = 'Choose Left or Right, then select Move.';
+        field.focus();
+        return;
+      }
       if (limbOrControl) {
         clearSearch();
         message.textContent = 'Try one movement with a side, such as “bend my right knee”. Join steps with “then”.';
@@ -544,6 +567,7 @@ export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume
 
   function dictate() {
     if (!dialog.open || recognition || !localSpeech) return;
+    clearSearch();
     try {
       const active = new Recognition();
       active.processLocally = true;
@@ -596,6 +620,17 @@ export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume
   on(trigger, 'click', open);
   on(close, 'click', () => dismiss());
   on(form, 'submit', submit);
+  if (sidePicker) on(sidePicker, 'click', event => {
+    const button = event.target.closest('button[data-command-side]');
+    if (!button || sidePicker.hidden) return;
+    const choices = sideCompletions(normalize(field.value), getBodyMap());
+    const phrase = choices?.[button.dataset.commandSide];
+    if (!phrase) return;
+    field.value = phrase;
+    clearSearch();
+    message.textContent = 'Press Enter or choose Move.';
+    field.focus();
+  });
   on(field, 'input', () => {
     // A typed edit owns the draft, even if the browser still has a voice result queued.
     stopVoice();
@@ -613,6 +648,7 @@ export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume
   for (const type of ['keydown', 'keyup']) on(dialog, type, e => e.stopPropagation());
   function forgetNames() {
     stopVoice();
+    clearSearch();
     field.value = '';
     message.textContent = '';
     if (dialog.open && (!gripPanel.hidden || !wristPanel.hidden || !dialog.querySelector('[data-reach-study]').hidden)) dismiss(null, false);

@@ -46,6 +46,10 @@
     <label for="ns-chat-input" id="ns-chat-label">Command box</label>
     <p id="ns-chat-help">Enter a movement, recording or forecast, then press Enter.</p>
     <input id="ns-chat-input" spellcheck="false" placeholder="Bend my right elbow" maxlength="500" autocomplete="off" autofocus>
+    <div data-command-sides role="group" aria-label="Side of the body" hidden>
+      <button type="button" data-command-side="0">Left</button>
+      <button type="button" data-command-side="1">Right</button>
+    </div>
     <menu>
       <button type="submit">Move</button>
       <button type="submit" data-find-body>Find body recording</button>

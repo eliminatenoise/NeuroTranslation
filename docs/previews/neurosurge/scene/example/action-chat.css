@@ -11,6 +11,7 @@
 .ns-action-chat :focus-visible, .ns-chat-open:focus-visible { outline:3px solid #4db8ff; outline-offset:2px }
 .ns-action-chat [role=status]:empty { display:none }
 .ns-action-chat [role=status] { margin:.65rem 0 0; font-size:.9rem }
+.ns-action-chat [data-command-sides]:not([hidden]),
 .ns-action-chat [data-body-results]:not([hidden]) { display:flex; flex-wrap:wrap; gap:.55rem; margin:.5rem 0 0 }
 .word-motion header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.3rem .7rem }
 .word-motion h2 { margin:0; font-size:1.2rem }
