@@ -1,0 +1,748 @@
+{
+  "dataset": "MoVi, capture round F",
+  "dataset_publication": "https://doi.org/10.1371/journal.pone.0253157",
+  "dataset_terms": "https://www.biomotionlab.ca/movi/",
+  "horizon_ms": 120,
+  "image_size_px": [
+    640,
+    480
+  ],
+  "summary": {
+    "people": 86,
+    "stationary_recordings": 172,
+    "camera_frames": 793381,
+    "prediction_rows": 1928340,
+    "optically_scorable_rows": 1397580,
+    "common_comparison_rows": 1294480,
+    "comparison_rows_by_view": {
+      "PG1": 702688,
+      "PG2": 591792
+    },
+    "common_activity_point_cells": 18087,
+    "possible_activity_point_cells": 21672,
+    "camera_tracker_issue_error_px": 8.062579191926657,
+    "exclusions": {
+      "missing_clock_support": 0,
+      "outside_named_segment": 503848,
+      "missing_optical_marker": 2611,
+      "optical_gap": 22609,
+      "outside_projected_view": 1692
+    }
+  },
+  "groups": [
+    {
+      "id": "overall",
+      "label": "All people and movements",
+      "group": "Overall",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 11.14323587446201,
+          "velocity": 13.685036777558924,
+          "attention": 10.700500393898228,
+          "camera_blend": 10.517774094307198
+        },
+        "movement_px": {
+          "persistence": 6.112623980845307,
+          "velocity": 9.38239797189797,
+          "attention": 6.192372514638895,
+          "camera_blend": 5.083560583065658
+        }
+      }
+    },
+    {
+      "id": "camera-1",
+      "label": "Camera 1 (PG1)",
+      "group": "Fixed cameras",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 9.377953115151403,
+          "velocity": 10.516381077191138,
+          "attention": 8.77296264852418,
+          "camera_blend": 8.44911919195268
+        },
+        "movement_px": {
+          "persistence": 6.10303944834134,
+          "velocity": 7.206820948276592,
+          "attention": 5.684848992918991,
+          "camera_blend": 4.491235326902539
+        }
+      }
+    },
+    {
+      "id": "camera-2",
+      "label": "Camera 2 (PG2)",
+      "group": "Fixed cameras",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 12.908518633772614,
+          "velocity": 16.85369247792671,
+          "attention": 12.628038139272274,
+          "camera_blend": 12.586428996661716
+        },
+        "movement_px": {
+          "persistence": 6.122208513349276,
+          "velocity": 11.557974995519347,
+          "attention": 6.699896036358799,
+          "camera_blend": 5.675885839228776
+        }
+      }
+    },
+    {
+      "id": "left-shoulder",
+      "label": "Left shoulder",
+      "group": "Body points",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 10.500391471340789,
+          "velocity": 12.165400607801358,
+          "attention": 9.886314944406706,
+          "camera_blend": 9.67448009272657
+        },
+        "movement_px": {
+          "persistence": 5.380536879290651,
+          "velocity": 7.819379737449808,
+          "attention": 4.819905952304621,
+          "camera_blend": 4.063750376270844
+        }
+      }
+    },
+    {
+      "id": "right-shoulder",
+      "label": "Right shoulder",
+      "group": "Body points",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 10.22800454194191,
+          "velocity": 10.7824617101988,
+          "attention": 9.387691867440267,
+          "camera_blend": 9.266264648389175
+        },
+        "movement_px": {
+          "persistence": 5.664567647913645,
+          "velocity": 6.465744058375497,
+          "attention": 4.72016351777582,
+          "camera_blend": 4.111152839595394
+        }
+      }
+    },
+    {
+      "id": "left-elbow",
+      "label": "Left elbow",
+      "group": "Body points",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 10.884106819225268,
+          "velocity": 13.500116092081097,
+          "attention": 9.385014344205333,
+          "camera_blend": 9.360112024846503
+        },
+        "movement_px": {
+          "persistence": 8.50768062808171,
+          "velocity": 10.805677521628537,
+          "attention": 6.967890062251267,
+          "camera_blend": 6.4010889578671755
+        }
+      }
+    },
+    {
+      "id": "right-elbow",
+      "label": "Right elbow",
+      "group": "Body points",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 10.075970560004704,
+          "velocity": 11.92200910945299,
+          "attention": 9.104514902074719,
+          "camera_blend": 8.728520992976721
+        },
+        "movement_px": {
+          "persistence": 7.960316051506926,
+          "velocity": 9.596514634540176,
+          "attention": 6.82897762959423,
+          "camera_blend": 5.995159538408507
+        }
+      }
+    },
+    {
+      "id": "left-wrist",
+      "label": "Left wrist",
+      "group": "Body points",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 12.196446797775085,
+          "velocity": 13.183817865419426,
+          "attention": 10.79304217792079,
+          "camera_blend": 10.590182473736116
+        },
+        "movement_px": {
+          "persistence": 10.782300293994746,
+          "velocity": 10.92526748203518,
+          "attention": 9.274344205547594,
+          "camera_blend": 8.464747864197088
+        }
+      }
+    },
+    {
+      "id": "right-wrist",
+      "label": "Right wrist",
+      "group": "Body points",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 14.257681897163023,
+          "velocity": 13.759718367026645,
+          "attention": 12.951767791921677,
+          "camera_blend": 12.554560482490848
+        },
+        "movement_px": {
+          "persistence": 12.951194997967155,
+          "velocity": 11.384259148099325,
+          "attention": 11.555115375113763,
+          "camera_blend": 10.560317507797762
+        }
+      }
+    },
+    {
+      "id": "left-hip",
+      "label": "Left hip",
+      "group": "Body points",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 15.825296474460039,
+          "velocity": 17.239973943383518,
+          "attention": 15.335187325308793,
+          "camera_blend": 15.636407899773348
+        },
+        "movement_px": {
+          "persistence": 4.564752035152675,
+          "velocity": 7.683572668824857,
+          "attention": 4.64479069702995,
+          "camera_blend": 3.7794523036387044
+        }
+      }
+    },
+    {
+      "id": "right-hip",
+      "label": "Right hip",
+      "group": "Body points",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 13.365496562518324,
+          "velocity": 14.635986638780405,
+          "attention": 12.846210058400233,
+          "camera_blend": 13.140645523725436
+        },
+        "movement_px": {
+          "persistence": 4.6479512102386815,
+          "velocity": 7.00382969911646,
+          "attention": 4.615671454383731,
+          "camera_blend": 3.775537706289629
+        }
+      }
+    },
+    {
+      "id": "left-knee",
+      "label": "Left knee",
+      "group": "Body points",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 10.55094872798553,
+          "velocity": 16.046827044855902,
+          "attention": 10.674334425670743,
+          "camera_blend": 10.239108103800238
+        },
+        "movement_px": {
+          "persistence": 6.014486476209689,
+          "velocity": 12.603305746612202,
+          "attention": 6.282674336514577,
+          "camera_blend": 5.352165537323617
+        }
+      }
+    },
+    {
+      "id": "right-knee",
+      "label": "Right knee",
+      "group": "Body points",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 9.420595836525557,
+          "velocity": 12.921874431235665,
+          "attention": 10.26313501658586,
+          "camera_blend": 9.260543955388044
+        },
+        "movement_px": {
+          "persistence": 4.582754279939059,
+          "velocity": 9.602191958913066,
+          "attention": 5.53368756648095,
+          "camera_blend": 4.205965679855923
+        }
+      }
+    },
+    {
+      "id": "left-ankle",
+      "label": "Left ankle",
+      "group": "Body points",
+      "people": 85,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 8.916619044714905,
+          "velocity": 15.758574584936516,
+          "attention": 8.76787194191521,
+          "camera_blend": 9.049061853468633
+        },
+        "movement_px": {
+          "persistence": 4.026124871418871,
+          "velocity": 12.381653643161767,
+          "attention": 6.352279677432762,
+          "camera_blend": 4.325431025219731
+        }
+      }
+    },
+    {
+      "id": "right-ankle",
+      "label": "Right ankle",
+      "group": "Body points",
+      "people": 85,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 8.317126375783435,
+          "velocity": 13.193220340071573,
+          "attention": 8.59802795235001,
+          "camera_blend": 8.276950568848777
+        },
+        "movement_px": {
+          "persistence": 4.094723253104109,
+          "velocity": 10.348412782696991,
+          "attention": 6.357478288526279,
+          "camera_blend": 4.211488751439297
+        }
+      }
+    },
+    {
+      "id": "checking-watch",
+      "label": "Checking a watch",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 7.756870646350712,
+          "velocity": 10.020163325607516,
+          "attention": 7.804699366602787,
+          "camera_blend": 7.761701548424967
+        },
+        "movement_px": {
+          "persistence": 1.2064375287451374,
+          "velocity": 5.488996651328269,
+          "attention": 2.5141329060457065,
+          "camera_blend": 1.4537564314753504
+        }
+      }
+    },
+    {
+      "id": "hand-clapping",
+      "label": "Clapping",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 7.926587648532925,
+          "velocity": 10.034560547986901,
+          "attention": 8.028913528531543,
+          "camera_blend": 7.926725607245341
+        },
+        "movement_px": {
+          "persistence": 1.5487775572036016,
+          "velocity": 5.563613884206965,
+          "attention": 2.9102273168913504,
+          "camera_blend": 1.7717844059971575
+        }
+      }
+    },
+    {
+      "id": "crawling",
+      "label": "Crawling",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 13.797940814548108,
+          "velocity": 20.27667025879137,
+          "attention": 13.149041651127428,
+          "camera_blend": 12.92134470873586
+        },
+        "movement_px": {
+          "persistence": 7.755746397399348,
+          "velocity": 14.917430809923456,
+          "attention": 7.0852151854533,
+          "camera_blend": 5.95033968012667
+        }
+      }
+    },
+    {
+      "id": "jogging",
+      "label": "Jogging",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 14.679287938822585,
+          "velocity": 15.83221055103675,
+          "attention": 13.033165679116133,
+          "camera_blend": 13.10744022924245
+        },
+        "movement_px": {
+          "persistence": 13.289111028298937,
+          "velocity": 12.721234828031989,
+          "attention": 11.0479688573693,
+          "camera_blend": 10.294330064494465
+        }
+      }
+    },
+    {
+      "id": "vertical-jumping",
+      "label": "Jumping vertically",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 14.808305212285719,
+          "velocity": 14.862585975080789,
+          "attention": 13.09972595804331,
+          "camera_blend": 13.339642439043024
+        },
+        "movement_px": {
+          "persistence": 11.822432409765417,
+          "velocity": 11.738455086038927,
+          "attention": 10.550516998077534,
+          "camera_blend": 10.146387996349546
+        }
+      }
+    },
+    {
+      "id": "kicking",
+      "label": "Kicking",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 11.883454312945206,
+          "velocity": 16.322409601306017,
+          "attention": 11.837182053207135,
+          "camera_blend": 11.672321414034514
+        },
+        "movement_px": {
+          "persistence": 6.434195792982042,
+          "velocity": 11.470200326865147,
+          "attention": 6.790629540831056,
+          "camera_blend": 5.743998725303428
+        }
+      }
+    },
+    {
+      "id": "sideways",
+      "label": "Moving sideways",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 12.612170020041749,
+          "velocity": 13.210687725065439,
+          "attention": 10.899348562883405,
+          "camera_blend": 10.629202594949
+        },
+        "movement_px": {
+          "persistence": 8.246694259494207,
+          "velocity": 8.57821805933497,
+          "attention": 6.282578564349571,
+          "camera_blend": 5.224307332648264
+        }
+      }
+    },
+    {
+      "id": "pointing",
+      "label": "Pointing",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 8.594162974221243,
+          "velocity": 10.552080367817107,
+          "attention": 8.681451345561243,
+          "camera_blend": 8.455672937008968
+        },
+        "movement_px": {
+          "persistence": 2.210954137694533,
+          "velocity": 6.015291070557824,
+          "attention": 3.596140168060128,
+          "camera_blend": 2.247831386297431
+        }
+      }
+    },
+    {
+      "id": "running-in-spot",
+      "label": "Running in place",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 11.513350794256063,
+          "velocity": 14.596250977743916,
+          "attention": 11.77363670455454,
+          "camera_blend": 11.617005369223147
+        },
+        "movement_px": {
+          "persistence": 8.419262913931474,
+          "velocity": 11.39487366385943,
+          "attention": 8.960594926073632,
+          "camera_blend": 8.389923250869968
+        }
+      }
+    },
+    {
+      "id": "scratching-head",
+      "label": "Scratching the head",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 8.815120294828409,
+          "velocity": 10.877708588357219,
+          "attention": 8.832861399754684,
+          "camera_blend": 8.721789681107078
+        },
+        "movement_px": {
+          "persistence": 2.3614216780024573,
+          "velocity": 6.425917831519352,
+          "attention": 3.802297163840461,
+          "camera_blend": 2.502726532839699
+        }
+      }
+    },
+    {
+      "id": "cross-legged-sitting",
+      "label": "Sitting cross-legged",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 13.329658630699539,
+          "velocity": 19.147647958230348,
+          "attention": 12.852759778900584,
+          "camera_blend": 12.777237639371894
+        },
+        "movement_px": {
+          "persistence": 5.51606312823079,
+          "velocity": 13.271345374348384,
+          "attention": 5.196053263675979,
+          "camera_blend": 4.337836780822299
+        }
+      }
+    },
+    {
+      "id": "sitting-down",
+      "label": "Sitting down",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 10.558635262017342,
+          "velocity": 13.708891963426085,
+          "attention": 9.969485396432454,
+          "camera_blend": 9.8607619579732
+        },
+        "movement_px": {
+          "persistence": 4.948022658447421,
+          "velocity": 9.002360754046746,
+          "attention": 4.4460993807378175,
+          "camera_blend": 3.6517467286533534
+        }
+      }
+    },
+    {
+      "id": "stretching",
+      "label": "Stretching",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 10.166099557621408,
+          "velocity": 13.246378374353515,
+          "attention": 10.105038386406816,
+          "camera_blend": 9.781670640686876
+        },
+        "movement_px": {
+          "persistence": 3.7725419373071682,
+          "velocity": 8.491924787866974,
+          "attention": 4.926709247608632,
+          "camera_blend": 3.26350073985272
+        }
+      }
+    },
+    {
+      "id": "taking-photo",
+      "label": "Taking a photo",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 8.537584208107528,
+          "velocity": 10.573134078868778,
+          "attention": 8.560205500873984,
+          "camera_blend": 8.348546539838425
+        },
+        "movement_px": {
+          "persistence": 2.4249931124312063,
+          "velocity": 6.142317219220726,
+          "attention": 3.691605658325037,
+          "camera_blend": 2.341898054862727
+        }
+      }
+    },
+    {
+      "id": "phone-talking",
+      "label": "Talking on the phone",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 8.862813412852663,
+          "velocity": 11.131946341129499,
+          "attention": 8.88328980960153,
+          "camera_blend": 8.704881749825727
+        },
+        "movement_px": {
+          "persistence": 2.6534385301408094,
+          "velocity": 6.484288822184943,
+          "attention": 3.5316748766115866,
+          "camera_blend": 2.4335502697019997
+        }
+      }
+    },
+    {
+      "id": "throw-catch",
+      "label": "Throwing and catching",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 10.289961303247772,
+          "velocity": 12.018073568887054,
+          "attention": 10.09771061881592,
+          "camera_blend": 9.588214644499635
+        },
+        "movement_px": {
+          "persistence": 6.1066668087792335,
+          "velocity": 8.250674466100431,
+          "attention": 6.594907142777231,
+          "camera_blend": 5.00890001997804
+        }
+      }
+    },
+    {
+      "id": "walking",
+      "label": "Walking",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 11.413642203227129,
+          "velocity": 13.290795158788923,
+          "attention": 10.134253617113531,
+          "camera_blend": 9.993198495598225
+        },
+        "movement_px": {
+          "persistence": 8.849823308925897,
+          "velocity": 9.4418109326493,
+          "attention": 6.755818467047803,
+          "camera_blend": 5.660669178069683
+        }
+      }
+    },
+    {
+      "id": "hand-waving",
+      "label": "Waving",
+      "group": "Recorded movements",
+      "people": 86,
+      "errors": {
+        "endpoint_px": {
+          "persistence": 8.409435020226915,
+          "velocity": 10.677107676902047,
+          "attention": 8.474574433290929,
+          "camera_blend": 8.331366424344248
+        },
+        "movement_px": {
+          "persistence": 2.0233215606544035,
+          "velocity": 6.222231882301098,
+          "attention": 3.48709171242504,
+          "camera_blend": 2.1290066612495893
+        }
+      }
+    }
+  ],
+  "paired_differences": {
+    "endpoint_px": {
+      "persistence": {
+        "mean_difference_px": -0.6254617801548115,
+        "interval_95_px": [
+          -0.6723069904218597,
+          -0.5812763501136674
+        ],
+        "people_lower_equal_higher": [
+          86,
+          0,
+          0
+        ]
+      },
+      "attention": {
+        "mean_difference_px": -0.1827262995910288,
+        "interval_95_px": [
+          -0.22117751779975695,
+          -0.1454260172585693
+        ],
+        "people_lower_equal_higher": [
+          73,
+          0,
+          13
+        ]
+      }
+    },
+    "movement_px": {
+      "persistence": {
+        "mean_difference_px": -1.0290633977796502,
+        "interval_95_px": [
+          -1.0854025243176229,
+          -0.972206303157584
+        ],
+        "people_lower_equal_higher": [
+          86,
+          0,
+          0
+        ]
+      },
+      "attention": {
+        "mean_difference_px": -1.1088119315732372,
+        "interval_95_px": [
+          -1.1415121184043784,
+          -1.0765127726091714
+        ],
+        "people_lower_equal_higher": [
+          86,
+          0,
+          0
+        ]
+      }
+    }
+  }
+}

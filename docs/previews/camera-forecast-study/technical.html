@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Methods, uncertainty and aggregate results for the MoVi 120 ms camera forecast study.">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="study.css">
+  <script src="study.js" type="module"></script>
+  <title>Camera forecast study · Technical edition</title>
+</head>
+<body>
+  <a class="skip" href="#results">Skip to results</a>
+  <header class="bar frame">
+    <nav aria-label="Project"><a href="../../projects/technical.html?project=neurosurge">Project browser</a><a href="../neurosurge/technical.html">Movement preview</a></nav>
+    <a data-edition href="./">Simple edition</a>
+  </header>
+  <main class="frame">
+    <h1>Camera forecast study</h1>
+    <p class="lead">A fixed 120 ms forecast horizon on MoVi's paired stationary views. The optical reference identifies joint centres in three dimensions.</p>
+    <section class="comparison" aria-labelledby="results">
+      <div class="comparison-intro">
+        <div>
+          <h2 id="results">Compare forecast errors</h2>
+          <p>Mean errors in image pixels. Smaller is better.</p>
+        </div>
+        <label class="view-control" hidden>Show results for
+          <select id="group"><option value="overall">All people and movements</option></select>
+        </label>
+      </div>
+      <table data-decimals="4">
+        <caption id="selected-group" aria-live="polite">All people and movements · 86 people</caption>
+        <thead><tr><th scope="col">Forecast</th><th scope="col">Final position error</th><th scope="col">Movement error</th></tr></thead>
+        <tbody>
+          <tr data-method="persistence"><th scope="row">Hold last position</th><td>11.1432</td><td>6.1126</td></tr>
+          <tr data-method="velocity"><th scope="row">Continue at last speed</th><td>13.6850</td><td>9.3824</td></tr>
+          <tr data-method="attention"><th scope="row">NeuroTranslate 0.0</th><td>10.7005</td><td>6.1924</td></tr>
+          <tr data-method="camera_blend"><th scope="row">Adapt to recent tracking</th><td>10.5178</td><td>5.0836</td></tr>
+        </tbody>
+      </table>
+      <div class="result-links">
+        <button id="download" type="button" hidden>Download scores as CSV</button>
+        <a href="../neurosurge/technical.html#camera-test">Earlier 11-person comparison</a>
+      </div>
+    </section>
+    <div class="reading">
+      <section aria-labelledby="protocol">
+        <h2 id="protocol">Protocol</h2>
+        <p>MoVi capture round F supplies the PG1 and PG2 stationary views, recorded at 30 Hz, and 120 Hz optical joint-centre estimates. Exclude the one qualification participant and three people missing a required view from the 90-person roster. Issue forecasts using five consecutive tracked frames for each of 12 left and right landmarks at the shoulder, elbow, wrist, hip, knee and ankle. The named activity is absent from the forecast inputs. Freeze the forecast files before joining the optical values.</p>
+        <p>For zero-based video frame <var>n</var>, use optical row 4<var>n</var> at issue and interpolate the 3D centre at 4<var>n</var> + 14.4 for the target. Project both with the stored calibration, including radial distortion, then scale from 800 × 600 to 640 × 480. Require the five input frames and both bracketing target samples to lie in the same labelled interval. Repeated activity labels contribute to one activity group and retain their original interval boundaries.</p>
+      </section>
+      <section aria-labelledby="methods">
+        <h2 id="methods">Forecasts and errors</h2>
+        <p>Compare persistence, velocity from the last two valid positions, frozen NeuroTranslate 0.0 attention trained on animal tracking, and a camera-feedback blend. The blend includes those three predictors plus local line and curve fits. It starts at persistence. Resolved earlier tracker positions within 40 ms of their targets update exponential averages of body-radius-normalized errors with a one-second half-life. Lower loss receives more weight. The optical data supplies only the scoring references.</p>
+        <p>Let <var>c</var> be the last tracked image point, <var>p</var> the forecast, and <var>r</var><sub>0</sub> and <var>r</var><sub>1</sub> the projected optical points at issue and target. Final position error is ‖<var>p</var> − <var>r</var><sub>1</sub>‖. Movement error is ‖(<var>p</var> − <var>c</var>) − (<var>r</var><sub>1</sub> − <var>r</var><sub>0</sub>)‖. The average tracker error ‖<var>c</var> − <var>r</var><sub>0</sub>‖ at issue was 8.0626 px. The movement calculation removes a fixed start-point offset from the score.</p>
+      </section>
+      <section aria-labelledby="assessment">
+        <h2 id="assessment">Assessment counts and weighting</h2>
+        <p>Across 172 recordings, the tracker processed 793,381 frames and issued 1,928,340 forecast rows. Exclusions were 503,848 outside an activity interval, 2,611 unavailable named markers, 22,609 optical gaps and 1,692 invalid or outside-image projections. There were 1,397,580 optically scorable rows. Restrict the analysis to the 18,087 of 21,672 possible person–activity–point cells scored in both views, leaving 1,294,480 rows (PG1 702,688, PG2 591,792).</p>
+        <p>Average rows within a view and activity–point cell, then weight cells within views, views within participants and participants equally. The comparison table applies the same support rule to selected subsets. The published movement summaries each include all 86 participants. The left and right ankle summaries each include 85 because of unavailable named optical references.</p>
+      </section>
+      <section aria-labelledby="uncertainty">
+        <h2 id="uncertainty">Paired differences</h2>
+        <p>Results are blend minus comparator in pixels, with 95% percentile intervals from 10,000 participant bootstrap draws (seed 2430). Negative values favour the blend.</p>
+        <dl>
+          <div><dt>Against persistence</dt><dd>Final position −0.6255 [−0.6723, −0.5813]. Movement −1.0291 [−1.0854, −0.9722]. Both errors decreased for all 86.</dd></div>
+          <div><dt>Against frozen attention</dt><dd>Final position −0.1827 [−0.2212, −0.1454], lower in 73 and higher in 13. Movement −1.1088 [−1.1415, −1.0765], lower in all 86.</dd></div>
+        </dl>
+        <p>The analysis covers usable recorded projections. Live tracking availability, latency and accuracy require separate testing.</p>
+      </section>
+      <section class="sources" aria-labelledby="sources">
+        <h2 id="sources">Recordings and source</h2>
+        <p>Only aggregate outcomes from the non-commercial analysis are distributed. The recordings follow MoVi's data licence.</p>
+        <ul>
+          <li><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0253157">Ghorbani et al., <cite>MoVi: A large multi-purpose human motion and video dataset</cite>, PLOS ONE, 2021</a></li>
+          <li><a href="https://www.biomotionlab.ca/movi/">BioMotionLab's MoVi access and terms</a></li>
+          <li><a href="https://github.com/eliminatenoise/NeuroTranslation/blob/21149ddc9d9d868227c6928a567936404fad4bad/docs/previews/neurosurge/scene/src/joint/adaptive-motion.mjs">Forecast code used in this test</a></li>
+          <li><a href="results.json">Aggregate scores and counts (JSON)</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
