@@ -1,5 +1,7 @@
 # Force forecasts on walking recordings from Dijon
 
+Try the same models on a generated example and switch between the loaded and lower-load results below it. [Open the browser exercise](https://eliminatenoise.github.io/NeuroTranslation/force-forecast/)
+
 A small model trained on walking had lower average error than a simple trend forecast for each of the 29 people when a plate was already carrying load. On those loaded windows, its average error was **10.13 newton-seconds**, compared with **14.03** for the trend. Training on recordings from a second lab lowered the model’s average error a little further, to **10.04**, with uncertainty that includes no gain. [Technical edition](TECHNICAL.md) · [Exact scores](results.json)
 
 ## What the test measured

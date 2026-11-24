@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Edit force readings and compare seven NeuroTranslate forecasts with their results on recorded data.">
+  <title>Force forecast · NeuroTranslate</title>
+  <link rel="icon" href="data:,">
+  <style>@@STYLE@@</style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to the forecast</a>
+  <header class="top">
+    <div class="width top-inner">
+      <a class="brand" href="https://github.com/eliminatenoise/NeuroTranslation">NeuroTranslate</a>
+      <nav aria-label="Study and downloads">
+        <a href="@@SIMPLE@@">Simple guide</a>
+        <a href="@@TECHNICAL@@">Technical guide</a>
+        <a id="download" href="index.html" download="NeuroTranslate-force-forecast.html">Download this page</a>
+      </nav>
+    </div>
+  </header>
+  <main class="width" id="main">
+    <h1>Force forecast</h1>
+    <p class="intro">Change the force on one floor plate and compare seven forecasts. Each uses the previous 200 milliseconds to estimate the push accumulated over the next 100 milliseconds, in newton-seconds.</p>
+    <noscript><p>Enable JavaScript to run the forecasts on this page.</p></noscript>
+    <div class="workspace">
+      <section class="card history" aria-labelledby="history-heading">
+        <div class="section-head">
+          <h2 id="history-heading">Force history</h2>
+          <label class="choice">Example
+            <select id="example">
+              <option value="rise">Loading plate</option>
+              <option value="fall">Unloading plate</option>
+              <option value="quiet">Quiet plate</option>
+            </select>
+          </label>
+        </div>
+        <p id="input-help">Edit any 20 ms average below. Positive values mean upward force. These examples are generated.</p>
+        <div class="plot">
+          <canvas id="plot" role="img" aria-label="Force history over the previous 200 milliseconds"></canvas>
+          <p class="axis-text">Time at the end of each 20 ms average</p>
+        </div>
+        <fieldset>
+          <legend>Force averages (N)</legend>
+          <div class="bins" id="bins" aria-describedby="input-help"></div>
+        </fieldset>
+        <div class="history-end">
+          <button id="reset" type="button">Restore example</button>
+          <p id="status" role="status"></p>
+        </div>
+      </section>
+
+      <section class="card predictions" aria-labelledby="predictions-heading">
+        <h2 id="predictions-heading">Forecasts</h2>
+        <p>The fitted methods use the published weights.</p>
+        <table id="forecasts">
+          <thead>
+            <tr><th scope="col">Method</th><th scope="col">Impulse (N·s)</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <details>
+          <summary>How the methods differ</summary>
+          <p>A correction starts with the hold-steady estimate and adds an amount learned from the earlier readings. A direct forecast estimates the result from those readings. A recurrent method carries information from one reading to the next. The mixed-activity versions learned from a second collection of force recordings as well as the walking data.</p>
+        </details>
+      </section>
+    </div>
+
+    <section class="card benchmark" aria-labelledby="benchmark-heading">
+      <div class="section-head">
+        <h2 id="benchmark-heading">Results on recorded force</h2>
+        <label class="choice">Test group
+          <select id="test-group">
+            <option value="dijon_loaded">Dijon · Plate at or above 20 N</option>
+            <option value="dijon_low">Dijon · Plate below 20 N</option>
+            <option value="dijon_all">Dijon · All windows</option>
+            <option value="treadmill">Treadmill · All windows</option>
+            <option value="mixed_lab">Mixed activities lab · All windows</option>
+          </select>
+        </label>
+      </div>
+      <p id="benchmark-scope"></p>
+      <table id="benchmark-results">
+        <thead><tr><th scope="col">Method</th><th scope="col">Average error (N·s)</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p class="links"><a href="@@DIJON@@">Dijon evaluation</a><a href="@@TECHNICAL@@">Earlier two-lab evaluation</a></p>
+    </section>
+  </main>
+  <script id="frozen-study" type="application/json">@@DATA@@</script>
+  <script type="module">
+@@ENGINE@@
+@@APP@@
+  </script>
+</body>
+</html>

@@ -1,5 +1,7 @@
 # Frozen force forecasts on the Dijon overground cohort
 
+The browser exercise runs the published weights and displays the three reported Dijon test groups. [Compare forecasts in the browser](https://eliminatenoise.github.io/NeuroTranslation/force-forecast/)
+
 On the prespecified subset with latest plate force mean at least 20 N, the mixed recurrent correction had mean absolute error **10.0355 N·s**, compared with **10.1349 N·s** for walking-only and **14.0301 N·s** for the recent-trend control. The paired mixture gain was 0.0994 N·s, with a 95% resampling interval of −0.2639 to 0.4874. The walking-only correction beat trend for all 29 participants. [Simple edition](SIMPLE.md) · [Aggregate results](results.json)
 
 ## Recording and forecast windows

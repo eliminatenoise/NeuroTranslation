@@ -24,6 +24,8 @@ These are new forecasts against two previously scored archives. The weighted cor
 
 ## Run an example
 
+The browser exercise puts the seven forecasts side by side. Choose a generated loading, unloading or quiet example, then edit any of the ten earlier readings. The recorded test table stays fixed when the example changes. We used Node.js to run the page’s forecast code outside the browser on 22,767 recorded inputs. Its forecasts differed from the original predictions by at most 0.000024 newton-seconds. Choose **Download this page** to save one HTML file. Open that file in your browser for offline use. [Open the browser exercise](https://eliminatenoise.github.io/NeuroTranslation/force-forecast/)
+
 Download and extract the bundle. The runner needs Python 3 and NumPy in the same Python environment. Open `run-macos.command` on macOS or `run-windows.cmd` on Windows, or run `./run-linux.sh` in the extracted folder on Linux. Each launcher runs the generated example. Install NumPy with `python3 -m pip install numpy` on Linux or macOS, or `py -3 -m pip install numpy` on Windows.
 
 To enter your own readings, pass ten consecutive 20-millisecond averages in newtons, oldest first. Use positive values for upward force. In a terminal in the extracted folder, use `python3` on Linux or macOS and `py -3` on Windows.
