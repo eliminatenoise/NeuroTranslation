@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Force and waist forecasts | NeuroTranslate</title>
+  <style>%%CSS%%</style>
+</head>
+<body>
+  <header class="top">
+    <div class="frame top-inner">
+      <a class="brand" href="https://github.com/eliminatenoise/NeuroTranslation">NeuroTranslate</a>
+      <nav aria-label="Instructions">
+        <a id="simple-link" href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/native-force-waist/SIMPLE.md">Simple guide</a>
+        <a id="technical-link" href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/native-force-waist/TECHNICAL.md">Technical guide</a>
+      </nav>
+    </div>
+  </header>
+  <main class="frame">
+    <div class="intro">
+      <h1>Force and waist forecasts</h1>
+      <p>Change the earlier readings to compare four forecasts for the next 100&nbsp;milliseconds.</p>
+    </div>
+    <div class="toolbar">
+      <div class="switch" role="group" aria-label="Measurement">
+        <button type="button" data-task="force" aria-pressed="true">Force plate</button>
+        <button type="button" data-task="waist" aria-pressed="false">Waist watch</button>
+      </div>
+      <button type="button" class="quiet" id="reset">Restore example</button>
+    </div>
+
+    <div class="layout">
+      <section class="panel history" aria-labelledby="history-heading">
+        <header class="section-head">
+          <div>
+            <h2 id="history-heading">Earlier readings</h2>
+            <p>Ten averages over the last 200&nbsp;ms</p>
+          </div>
+          <label id="channel-control" hidden>Input channel <select id="channel"></select></label>
+        </header>
+        <div class="chart-box">
+          <div id="chart-label" class="chart-label"></div>
+          <canvas id="plot" aria-hidden="true"></canvas>
+        </div>
+        <details id="editor">
+          <summary>Edit earlier readings</summary>
+          <div class="editor-values">
+            <table class="editor-table" id="inputs"></table>
+          </div>
+        </details>
+        <p class="note">The examples use generated readings.</p>
+      </section>
+
+      <section class="panel forecast" aria-labelledby="forecast-heading">
+        <header class="section-head">
+          <div>
+            <h2 id="forecast-heading">Next 100 ms</h2>
+            <p id="output-label"></p>
+          </div>
+        </header>
+        <table class="predictions" id="outputs"></table>
+        <p class="error" id="status" role="status" hidden></p>
+        <p class="definition" id="meaning"></p>
+      </section>
+    </div>
+
+    <details class="panel benchmark">
+      <summary>Results on recorded data</summary>
+      <div class="benchmark-body">
+        <label id="benchmark-filter">Force windows
+          <select id="benchmark-scope">
+            <option value="all">All matched windows</option>
+            <option value="latest_mean_at_least_20N">Latest average at least 20 N</option>
+            <option value="latest_mean_below_20N">Latest average below 20 N</option>
+          </select>
+        </label>
+        <p id="benchmark-detail"></p>
+        <table id="bench-results"></table>
+        <p>Each device was tested on its own clock. <a href="https://doi.org/10.1038/s41597-026-07183-6">Source study</a></p>
+      </div>
+    </details>
+    <footer>
+      <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/native-force-waist">Checkpoint and reports</a>
+      <a id="offline-link" href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/native-force-waist/Force-and-Waist-Browser.zip">Download browser package</a>
+    </footer>
+  </main>
+  <script type="application/json" id="payload">%%PAYLOAD%%</script>
+  <script>%%JS%%</script>
+</body>
+</html>

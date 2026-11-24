@@ -1,5 +1,7 @@
 # Walking force
 
+[Open the force and waist forecast comparison](force-and-waist/) to edit force-plate and watch histories and compare four predictions.
+
 Estimate the combined vertical load on two force plates in a walkway. For each prediction, a model sees six moving markers, eight muscle electrical signals from the right leg, or both. Its target is a plate reading 100 ms later on the stored recording clock. The interactive walk is invented. The accuracy panel uses real plate readings from people held out of training.
 
 Extract the entire package and open **index.html**, or use **Open on Windows.cmd**, **Open on macOS.command** or **Open on Linux.sh**. The HTML contains all six fitted models and works by itself offline. The launchers open it in the system browser.

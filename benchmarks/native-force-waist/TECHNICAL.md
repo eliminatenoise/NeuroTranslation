@@ -27,6 +27,10 @@ The 372 higher-recent-force windows and 2,165 lower-recent-force windows are def
 
 ## Run the checkpoint
 
-Extract the package. It requires Python 3.10 or later and NumPy. Use `python3 -m pip install numpy` on Linux and macOS, or `py -3 -m pip install numpy` on Windows. Run `Run-Forecasts.sh` on Linux, `Run-Forecasts.command` on macOS or `Run-Forecasts.cmd` on Windows. From a terminal in the extracted folder, use `python3 run_forecast.py` on Linux and macOS or `py -3 run_forecast.py` on Windows. Use `python` in place of `py -3` if Windows has only the `python` command.
+In the browser, select **Force plate** or **Waist watch**. Open **Edit earlier readings** or click the graph to focus an input. The page updates all four forecasts from the edited means. **Input channel** selects which waist measurements to plot and edit. The waist output table shows all three rotation axes. **Restore example** resets the selected history. Under **Results on recorded data**, filter force by its last observed mean. The table uses the original held results. [Browser preview](https://eliminatenoise.github.io/NeuroTranslation/walking-force/force-and-waist/)
+
+The browser package opens without a server. Extract it and open `index.html`, or use **Open on Linux.sh**, **Open on macOS.command** or **Open on Windows.cmd**. The page contains the same model weights as the Python checkpoint.
+
+For the command-line program, extract `Native-Force-and-Waist.zip`. It requires Python 3.10 or later and NumPy. Use `python3 -m pip install numpy` on Linux and macOS, or `py -3 -m pip install numpy` on Windows. Run `Run-Forecasts.sh` on Linux, `Run-Forecasts.command` on macOS or `Run-Forecasts.cmd` on Windows. From a terminal in the extracted folder, use `python3 run_forecast.py` on Linux and macOS or `py -3 run_forecast.py` on Windows. Use `python` in place of `py -3` if Windows has only the `python` command.
 
 The program prints all four methods on two generated inputs. To use your own averaged readings, add `--input history.json` to the terminal command. Provide a JSON object with `task` and `history` fields. Use `force` with ten rows of one force value, or `waist` with ten rows of six ordered values. Put the oldest row first. Each waist row uses acceleration X, Y, Z in g, then rotation X, Y, Z in rad/s.
