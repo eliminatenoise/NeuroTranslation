@@ -10,9 +10,9 @@ import {bindTouch, isTouchQuestion, touchPanel} from './touch.mjs';
 const markup=`
 <header class="joint-title"><div><h1>Movement mirror</h1></div><div><button data-size type="button">Compact</button> <button data-close type="button">Close</button></div></header>
 <div class="joint-layout"><div class="joint-stage">
-<canvas width="640" height="480" aria-label="Frontal field with the tracked skeleton and the forecast for the selected point"></canvas>
-<p class="joint-key"><span>● Observed or simulated</span><span>◎ Forecast +120 ms</span></p>
-<p data-frame>Waiting for movement.</p><p data-camera-follow role="status" hidden></p><p data-forecast></p><p data-score></p><p data-goal role="status"></p>
+<canvas width="640" height="480" aria-label="Skeleton, selected tracked point and its forecast"></canvas>
+<p class="joint-key"><span>● Observed or simulated</span><span class="joint-selection" hidden><span aria-hidden="true">⌜⌟</span> Selected point</span><span>◎ Forecast +120 ms</span></p>
+<p data-point-cue role="status"></p><p data-frame>Waiting for movement.</p><p data-camera-follow role="status" hidden></p><p data-forecast></p><p data-score></p><p data-goal role="status"></p>
 <p data-take-status role="status" hidden></p><button data-take-command type="button" hidden>Open Command box</button>
 </div><div class="joint-inputs"><fieldset><legend>C · Follow movement</legend>
 <label>Source <select data-source><option value="camera">Live camera</option><option value="clip">Recorded video</option><option value="stills">Timestamped stills</option></select></label>
@@ -53,6 +53,7 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
   const methodControl=el('[data-method]');
   if (!browserModel) methodControl.querySelector('option[value="adaptive"]').remove();
   const cameraFollow=el('[data-camera-follow]'), title=el('.joint-title h1');
+  const pointCue=el('[data-point-cue]'), selectionKey=el('.joint-selection');
   const startButton=el('[data-start]'), stopButton=el('[data-stop]'), sizeButton=el('[data-size]');
   const saveTake = el('[data-save-take]');
   const takeStatus = el('[data-take-status]');
@@ -145,6 +146,19 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
     if(!latest?.photo) {ctx.fillStyle='#abbdba';ctx.beginPath();ctx.arc(320,100,31,0,Math.PI*2);ctx.fill();}
     for(const [a,b] of BONES)line(xy[a],xy[b],latest?.photo?'#cbf7e5':'#97beb0',Math.max(2,w*.009));
     for(const p of xy) if(finitePair(p)){ctx.fillStyle='#c6ffe1';ctx.beginPath();ctx.arc(...p,Math.max(2,w*.007),0,Math.PI*2);ctx.fill();}
+    const selected=latest?.photo && activePoint!==null ? xy[activePoint] : null;
+    if (finitePair(selected)) {
+      const [x,y]=selected;
+      const radius=Math.max(7,w*.017);
+      ctx.beginPath();
+      for (const [side,vertical] of [[-1,-1],[1,-1],[1,1],[-1,1]]) {
+        ctx.moveTo(x+side*radius*.48,y+vertical*radius);
+        ctx.lineTo(x+side*radius,y+vertical*radius);
+        ctx.lineTo(x+side*radius,y+vertical*radius*.48);
+      }
+      ctx.strokeStyle='#102a32';ctx.lineWidth=5;ctx.stroke();
+      ctx.strokeStyle='#75f3f6';ctx.lineWidth=2;ctx.stroke();
+    }
     if(shown && latest && shown.point!==undefined && finitePair(xy[shown.point]) && latest.t<=shown.issue+.18) {
       line(shown.origin,shown.pred,'#ffba61',3);
       ctx.strokeStyle='#ffba61';ctx.lineWidth=3;ctx.beginPath();ctx.arc(...shown.pred,Math.max(6,w*.016),0,Math.PI*2);ctx.stroke();
@@ -154,6 +168,8 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
     epoch++;controller.abort();controller=new AbortController();pending=null;rows=[];shown=null;lastIssue=-Infinity;activePoint=null;
     adaptiveHistory=newCameraHistory();
     if (!keepImage) latest=null;
+    pointCue.textContent='';
+    selectionKey.hidden=true;
     comparisons.clear();lastComparisonIssue=-Infinity;
     text('[data-frame]',reason||'Waiting for movement.');text('[data-forecast]','');text('[data-score]','');paint();
   }
@@ -319,6 +335,15 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
     activePoint=present ? point.index : null;
     if(frame.bitmap){stageImage.width=frame.w;stageImage.height=frame.h;frameCtx.drawImage(frame.bitmap,0,0);}
     latest={xy:frame.xy,t:frame.t,id:frame.id,w:frame.w,h:frame.h,photo:!!frame.bitmap};
+    if (frame.bitmap) {
+      let label=point ? 'the '+point.label : 'the selected point';
+      if (chosen==='auto' && !present) label='either wrist';
+      const cue=present ? 'Brackets mark '+label+' in the image.' : source.value==='camera'
+        ? 'Keep '+label+' and nearby joints in view.'
+        : 'Choose another point or use images that show '+label+'.';
+      if (pointCue.textContent!==cue) pointCue.textContent=cue;
+      selectionKey.hidden=!present;
+    }
     if (!present) text('[data-forecast]',(point?.label || 'Selected point')+' obscured. Forecast withheld.');
     rows.push(latest);rows=rows.slice(-5);
     text('[data-frame]',kind+' · frame '+frame.id+' · '+frame.t.toFixed(3)+' s · '+frame.xy.filter(finitePair).length+(frame.bitmap?' tracked points':' simulated points'));
