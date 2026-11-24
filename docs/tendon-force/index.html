@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>NeuroTranslation tendon-force preview</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="weights.js"></script>
+  <script defer src="forecast.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="project">NeuroTranslation</p>
+      <h1>Tendon-force preview</h1>
+      <p>Enter a short history of a muscle’s electrical signal. The page predicts the corresponding tendon force added up over the next 100 milliseconds.</p>
+      <nav class="reading-editions" aria-label="Reading editions">
+        <a href="technical.html">Technical edition</a>
+        <a href="simple.html">Simple edition</a>
+      </nav>
+    </header>
+
+    <div class="workspace">
+      <form id="inputs" class="panel">
+        <h2>Muscle signal</h2>
+        <label class="route-label" for="tendon">Tendon to forecast</label>
+        <select id="tendon" name="tendon" aria-describedby="route-note">
+          <option value="LG">Shared Achilles tendon (LG)</option>
+          <option value="DF">Fourth-toe flexor tendon (DF)</option>
+        </select>
+        <p id="route-note" class="note">Uses the signal from the lateral gastrocnemius (LG), one of the muscles that pull on the Achilles tendon.</p>
+
+        <fieldset>
+          <legend>Electrical signal before the forecast</legend>
+          <p id="history-help" class="note">Use the root-mean-square (RMS) reading in millivolts for each 20-millisecond interval. RMS summarizes the size of a changing signal. Enter the oldest value first. The last interval ends when the forecast begins.</p>
+          <div id="bins" class="bins"></div>
+        </fieldset>
+        <div class="actions">
+          <button type="submit">Calculate</button>
+          <button type="button" class="secondary" id="example">Load invented example</button>
+        </div>
+        <p id="input-origin" class="note">The starting values are invented.</p>
+        <noscript><p>Enable JavaScript in your browser to calculate forecasts.</p></noscript>
+      </form>
+
+      <section class="panel results" aria-labelledby="results-title">
+        <h2 id="results-title">Next 100 milliseconds</h2>
+        <p class="note">The result is tendon impulse, which adds up force over time. For example, a steady force of 10 newtons for 100 milliseconds gives 1 newton-second (N·s).</p>
+        <dl>
+          <div>
+            <dt id="label-raw">Ridge using millivolts</dt>
+            <dd><output id="result-raw" aria-labelledby="label-raw" aria-live="off">—</output></dd>
+          </div>
+          <div>
+            <dt id="label-scaled">Ridge using relative size</dt>
+            <dd><output id="result-scaled" aria-labelledby="label-scaled" aria-live="off">—</output></dd>
+          </div>
+          <div>
+            <dt id="label-median">Simple training median</dt>
+            <dd><output id="result-median" aria-labelledby="label-median" aria-live="off">—</output></dd>
+          </div>
+        </dl>
+        <p id="status" class="note" role="status"></p>
+        <details>
+          <summary>How the estimates differ</summary>
+          <p>Both ridge models multiply each input by a learned weight and add the results. The first uses the values in millivolts. The second divides the whole history by its overall signal size first. The simple method uses the same training-set median each time for the selected tendon.</p>
+        </details>
+      </section>
+    </div>
+
+    <footer>
+      <p>These experimental predictors were fitted to published guinea fowl recordings. The results are model estimates from the ten values above.</p>
+      <p>Dataset by Monica A. Daley, Anne Koelewijn and Maria Eleni Athanasiadou. <a href="https://doi.org/10.5281/zenodo.15968637" rel="noreferrer">Zenodo dataset and attribution (CC BY 4.0)</a></p>
+    </footer>
+  </main>
+</body>
+</html>

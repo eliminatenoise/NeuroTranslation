@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Can floor force help predict a squat? · NeuroTranslation</title>
+<style>
+:root{font:17px/1.56 system-ui,sans-serif;color:#18362d;background:#f9faf4}
+body{margin:0}main{max-width:58rem;margin:auto;padding:2rem 1rem 4rem}
+a{color:#194b3d;text-underline-offset:.18em}
+h1{font-size:clamp(2.45rem,6vw,4rem);line-height:1.03;letter-spacing:-.04em;margin:1rem 0;max-width:15ch}
+h2{font-size:1.35rem;margin:1.55rem 0 .4rem}
+p{max-width:72ch;margin:.6rem 0 1rem}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:1rem;margin:1rem 0}
+label{font-weight:650}
+select{display:block;width:100%;font:inherit;color:inherit;background:#fff;border:1px solid #728b7f;border-radius:.24rem;padding:.43rem}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;margin:.5rem 0 1.25rem}
+caption{text-align:left;margin:.4rem 0 .5rem}th,td{border-bottom:1px solid #c3d0c6;padding:.47rem .5rem;text-align:left}
+thead th{border-bottom:2px solid #728b7f}td{text-align:right;white-space:nowrap}
+tbody th{font-weight:500}
+tbody tr:nth-child(even){background:#edf2e9}
+td.best{font-weight:750}
+[hidden]{display:none}
+:focus-visible{outline:3px solid #146451;outline-offset:3px}
+@media(max-width:31rem){main{padding:1.15rem .85rem 3rem}th,td{padding:.4rem .25rem}table{font-size:.89rem}}
+</style>
+</head>
+<body><main>
+<nav aria-label="Related studies"><a href="../">Pelvis marker studies</a></nav>
+<h1>Can floor force help predict a squat?</h1>
+<p>As you rise from a squat, the camera tracks how far your hips move. Plates under your feet record how hard you push into the floor. We asked whether that second measurement helps a model predict the next 100 milliseconds of a squat, including moments when an original camera reading goes missing.</p>
+<p>Adding floor force to a simple linear model reduced its error from <strong>9.60 to 6.60 mm</strong> for the two markers on the back of the pelvis when a reading was missing. For the four-marker average in those windows, continuing the recent speed did best at <strong>4.16 mm</strong>.</p>
+
+<p><a href="../squat-sensor-transfer/">See the floor-force comparison on a separate group</a> using deliberate gaps.</p>
+<h2>Compare the forecasts</h2>
+<p>Each number is the average distance between a forecast and the later camera measurement. Each person counts equally. Smaller errors are better.</p>
+<div id="controls" class="controls" hidden>
+  <div><label for="view">Earlier camera readings</label><select id="view">
+    <option value="native_camera_gap">Original camera gap</option>
+    <option value="complete_camera_history">All camera readings present</option>
+    <option value="all">All comparable windows</option>
+  </select></div>
+  <div><label for="target">Movement to predict</label><select id="target">
+    <option value="back_pair">Two back markers</option>
+    <option value="four_markers">All four pelvis markers</option>
+  </select></div>
+</div>
+<table data-view="native_camera_gap" data-target="back_pair"><caption>A reading missing in the original camera history · Two back markers · 8 people, 551 forecasts</caption><thead><tr><th scope='col'>Readings used</th><th scope='col'>Linear (mm)</th><th scope='col'>Attention (mm)</th></tr></thead><tbody><tr><th scope='row'>Camera</th><td>9.60</td><td>21.41</td></tr>
+<tr><th scope='row'>Camera and floor force</th><td class="best">6.60</td><td>20.81</td></tr>
+<tr><th scope='row'>Camera and thigh electrodes</th><td>9.80</td><td>22.97</td></tr>
+<tr><th scope='row'>Camera, floor force and thigh electrodes</th><td>7.20</td><td>19.61</td></tr>
+<tr><th scope='row'>Camera and both added signals delayed by one second</th><td>10.60</td><td>26.02</td></tr>
+<tr><th scope='row'>Continue recent camera speed</th><td colspan=2>14.97</td></tr>
+<tr><th scope='row'>Predict no movement</th><td colspan=2>58.91</td></tr></tbody></table>
+<table data-view="native_camera_gap" data-target="four_markers"><caption>A reading missing in the original camera history · All four pelvis markers · 8 people, 84 forecasts</caption><thead><tr><th scope='col'>Readings used</th><th scope='col'>Linear (mm)</th><th scope='col'>Attention (mm)</th></tr></thead><tbody><tr><th scope='row'>Camera</th><td>7.23</td><td>12.78</td></tr>
+<tr><th scope='row'>Camera and floor force</th><td>5.54</td><td>14.19</td></tr>
+<tr><th scope='row'>Camera and thigh electrodes</th><td>9.26</td><td>19.76</td></tr>
+<tr><th scope='row'>Camera, floor force and thigh electrodes</th><td>7.53</td><td>21.63</td></tr>
+<tr><th scope='row'>Camera and both added signals delayed by one second</th><td>8.62</td><td>18.08</td></tr>
+<tr><th scope='row'>Continue recent camera speed</th><td colspan=2 class="best">4.16</td></tr>
+<tr><th scope='row'>Predict no movement</th><td colspan=2>79.84</td></tr></tbody></table>
+<table data-view="complete_camera_history" data-target="back_pair"><caption>All readings in the camera history · Two back markers · 8 people, 1,108 forecasts</caption><thead><tr><th scope='col'>Readings used</th><th scope='col'>Linear (mm)</th><th scope='col'>Attention (mm)</th></tr></thead><tbody><tr><th scope='row'>Camera</th><td>4.10</td><td>8.33</td></tr>
+<tr><th scope='row'>Camera and floor force</th><td class="best">3.26</td><td>6.97</td></tr>
+<tr><th scope='row'>Camera and thigh electrodes</th><td>4.34</td><td>8.91</td></tr>
+<tr><th scope='row'>Camera, floor force and thigh electrodes</th><td>3.35</td><td>8.24</td></tr>
+<tr><th scope='row'>Camera and both added signals delayed by one second</th><td>4.78</td><td>8.95</td></tr>
+<tr><th scope='row'>Continue recent camera speed</th><td colspan=2>5.36</td></tr>
+<tr><th scope='row'>Predict no movement</th><td colspan=2>19.65</td></tr></tbody></table>
+<table data-view="complete_camera_history" data-target="four_markers"><caption>All readings in the camera history · All four pelvis markers · 8 people, 1,067 forecasts</caption><thead><tr><th scope='col'>Readings used</th><th scope='col'>Linear (mm)</th><th scope='col'>Attention (mm)</th></tr></thead><tbody><tr><th scope='row'>Camera</th><td>4.19</td><td>8.41</td></tr>
+<tr><th scope='row'>Camera and floor force</th><td class="best">3.19</td><td>6.53</td></tr>
+<tr><th scope='row'>Camera and thigh electrodes</th><td>4.12</td><td>8.65</td></tr>
+<tr><th scope='row'>Camera, floor force and thigh electrodes</th><td>3.40</td><td>7.42</td></tr>
+<tr><th scope='row'>Camera and both added signals delayed by one second</th><td>4.86</td><td>8.99</td></tr>
+<tr><th scope='row'>Continue recent camera speed</th><td colspan=2>5.18</td></tr>
+<tr><th scope='row'>Predict no movement</th><td colspan=2>17.89</td></tr></tbody></table>
+<table data-view="all" data-target="back_pair"><caption>All comparable windows · Two back markers · 8 people, 1,659 forecasts</caption><thead><tr><th scope='col'>Readings used</th><th scope='col'>Linear (mm)</th><th scope='col'>Attention (mm)</th></tr></thead><tbody><tr><th scope='row'>Camera</th><td>5.76</td><td>12.18</td></tr>
+<tr><th scope='row'>Camera and floor force</th><td class="best">4.22</td><td>11.17</td></tr>
+<tr><th scope='row'>Camera and thigh electrodes</th><td>6.15</td><td>12.90</td></tr>
+<tr><th scope='row'>Camera, floor force and thigh electrodes</th><td>4.55</td><td>11.42</td></tr>
+<tr><th scope='row'>Camera and both added signals delayed by one second</th><td>6.67</td><td>14.23</td></tr>
+<tr><th scope='row'>Continue recent camera speed</th><td colspan=2>7.93</td></tr>
+<tr><th scope='row'>Predict no movement</th><td colspan=2>31.19</td></tr></tbody></table>
+<table data-view="all" data-target="four_markers"><caption>All comparable windows · All four pelvis markers · 8 people, 1,151 forecasts</caption><thead><tr><th scope='col'>Readings used</th><th scope='col'>Linear (mm)</th><th scope='col'>Attention (mm)</th></tr></thead><tbody><tr><th scope='row'>Camera</th><td>4.52</td><td>8.72</td></tr>
+<tr><th scope='row'>Camera and floor force</th><td class="best">3.43</td><td>7.02</td></tr>
+<tr><th scope='row'>Camera and thigh electrodes</th><td>4.54</td><td>9.35</td></tr>
+<tr><th scope='row'>Camera, floor force and thigh electrodes</th><td>3.74</td><td>8.36</td></tr>
+<tr><th scope='row'>Camera and both added signals delayed by one second</th><td>5.25</td><td>9.65</td></tr>
+<tr><th scope='row'>Continue recent camera speed</th><td colspan=2>5.15</td></tr>
+<tr><th scope='row'>Predict no movement</th><td colspan=2>22.20</td></tr></tbody></table>
+
+<h2>What the sensors add</h2>
+<p>The linear model with camera and floor force had the smallest overall error on both targets. Adding the thigh signals to that model raised its overall error. The attention models, which learn how to weigh different points in the history, had higher error than the linear models under the same input conditions overall.</p>
+<p>The thigh electrodes record electrical activity at the skin. The plates record force at the floor. A muscle’s own force would need a different measurement or a model tested against one. Here the floor and electrode readings were used to predict movement, with the later camera readings as the test.</p>
+<p>Eight of twelve previously studied people provided comparable data. Three recordings had missing or unresolved electrode identities and one had no comparable window with a measured endpoint. The result describes one deep-squat task in one lab. The comparison had no scoreable cases where none of the visible markers repeated across the final two camera readings.</p>
+
+<details><summary>How the comparison worked</summary>
+<p>Five camera instants span the 200 milliseconds before the forecast through the issue time. Each floor or thigh reading summarizes the 50 milliseconds before its camera instant. We used upward force from two plates and the root mean square of the stored voltage over six front-thigh electrodes. A 10 millisecond block of exact zeros made the corresponding electrode history unavailable. The recorded clock fixes the order of the samples. Sensor hardware latency was unmeasured.</p>
+<p>Each model used the same evaluable windows. These required measured endpoints and available sensor histories both at issue and one second earlier. The delayed readings act as a comparison and can still carry information in a repeated squat. Of the eight people, six supplied the fitting data and two supplied the forecasts in each of four folds. Only fitting data set the scales or weights. No missing camera readings were manufactured for this comparison.</p>
+<p>The linear fit used a squared-weight penalty of 1. The attention model used one encoder layer with 32 features, four attention heads and 64 features in the feed-forward layer. It had 9,314 trainable parameters. Each fit ran for 96 updates with 64 windows per update using AdamW at a learning rate of 0.002. The three attention predictions were averaged. The data file records exact error and coverage for every result.</p>
+</details>
+<p><a href="results.json">Download aggregate results</a> · <a href="https://doi.org/10.1038/s41597-026-08550-z">Beattie and colleagues’ study</a> · <a href="https://doi.org/10.5281/zenodo.24194741">Kuopio Full-Body dataset</a></p>
+</main>
+<script>
+const view=document.querySelector('#view'), target=document.querySelector('#target');
+const tables=[...document.querySelectorAll('table[data-view]')];
+const refresh=()=>{
+  for(const table of tables) table.hidden=table.dataset.view!==view.value || table.dataset.target!==target.value;
+};
+view.addEventListener('change',refresh);
+target.addEventListener('change',refresh);
+refresh();
+document.querySelector('#controls').hidden=false;
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+{
+  "model": "NeuroTranslate 0.0 walking force",
+  "scope": "fit_only",
+  "glossary_revision": 41,
+  "glossary_sha256": "9e4ec98a663545e66052e63a4ca50bd54edf09c31dfb2bf96dadb3ebaf91a9cc",
+  "task": "recorded_plate_loading_100ms",
+  "domain": "joint_alpha_recorded_force_fit",
+  "input_columns": [
+    "LBF",
+    "LERS",
+    "LGAS",
+    "LRF",
+    "LST",
+    "LTA",
+    "LVL",
+    "RBF",
+    "RERS",
+    "RGAS",
+    "RRF",
+    "RST",
+    "RTA",
+    "RVL",
+    "named_plate_upward_force_mean"
+  ],
+  "input_units": [
+    "V RMS",
+    "V RMS",
+    "V RMS",
+    "V RMS",
+    "V RMS",
+    "V RMS",
+    "V RMS",
+    "V RMS",
+    "V RMS",
+    "V RMS",
+    "V RMS",
+    "V RMS",
+    "V RMS",
+    "V RMS",
+    "N"
+  ],
+  "native_sample_rate_hz": 1000,
+  "bin_samples": 20,
+  "output_horizon_ms": 100,
+  "fit_people": 2,
+  "fit_walks": 5,
+  "original_checkpoint_sha256": "f58dec8857015d84962aeb00259badf71b42d9bf7105cec35851a87826ed57d6",
+  "checkpoints": {
+    "released-core": {
+      "file": "checkpoints/released-core.npz",
+      "sha256": "f7372a2172a992846cbf371bdbe0cbbfaa796c6b400ec6a1a6b6433bdd6f2728",
+      "licence": "CC-BY-4.0",
+      "bytes": 43228,
+      "trainable_parameters_in_fit": 1058
+    },
+    "random-core": {
+      "file": "checkpoints/random-core.npz",
+      "sha256": "25ba26b759c4d4b8612e881bd2b5725e930be14bc80c9aafc7d34b01393df2f6",
+      "licence": "CC0-1.0",
+      "bytes": 42367,
+      "trainable_parameters_in_fit": 1058
+    },
+    "scratch-attention": {
+      "file": "checkpoints/scratch-attention.npz",
+      "sha256": "0ecb1f4b8619c674ad698a8cc1f642206b8f557fd745b0f74689e2bad26ba554",
+      "licence": "CC0-1.0",
+      "bytes": 43204,
+      "trainable_parameters_in_fit": 9634
+    }
+  }
+}

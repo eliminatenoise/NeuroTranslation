@@ -1,0 +1,1484 @@
+{
+  "equal_person_mean_nll_per_bin": {
+    "training_rate": 0.2367951908305403,
+    "phase_and_spikes": 0.20942652247598864,
+    "with_true_force": 0.2053708653713746,
+    "with_previous_repeat_force": 0.2053739801912035
+  },
+  "person_readout": {
+    "U105": {
+      "true_better_than_history": true,
+      "true_better_than_substitution": false,
+      "true_force_total_calibration": "overpredicted"
+    },
+    "U111": {
+      "true_better_than_history": true,
+      "true_better_than_substitution": true,
+      "true_force_total_calibration": "underpredicted"
+    }
+  },
+  "groups": {
+    "all": [
+      {
+        "group": {},
+        "bins": 41416,
+        "trials": 124,
+        "observed_spikes": 2333,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.2367951908305403,
+            "mae_spikes_per_bin": 0.15588506253775525,
+            "rmse_spikes_per_bin": 0.24726351918015937,
+            "predicted_total": 4622.483629057362,
+            "predicted_minus_observed_total": 2289.483629057362,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.20942652247598867,
+            "mae_spikes_per_bin": 0.1179062053937192,
+            "rmse_spikes_per_bin": 0.23766184647293004,
+            "predicted_total": 3045.2613555714015,
+            "predicted_minus_observed_total": 712.2613555714015,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.20537086537137456,
+            "mae_spikes_per_bin": 0.11642847743828195,
+            "rmse_spikes_per_bin": 0.23685304288904047,
+            "predicted_total": 3006.8060710095883,
+            "predicted_minus_observed_total": 673.8060710095883,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.20537398019120354,
+            "mae_spikes_per_bin": 0.1163986323252133,
+            "rmse_spikes_per_bin": 0.23683887091870495,
+            "predicted_total": 3005.6300952331217,
+            "predicted_minus_observed_total": 672.6300952331217,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.004055657104614113,
+        "true_minus_substitution_nll": -3.114819828980986e-06
+      }
+    ],
+    "person": [
+      {
+        "group": {
+          "person": "U105"
+        },
+        "bins": 20708,
+        "trials": 62,
+        "observed_spikes": 361,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.15243118026662364,
+            "mae_spikes_per_bin": 0.12595021569107742,
+            "rmse_spikes_per_bin": 0.1836436323205656,
+            "predicted_total": 2311.241814528681,
+            "predicted_minus_observed_total": 1950.241814528681,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.11251367129462359,
+            "mae_spikes_per_bin": 0.07856952048794032,
+            "rmse_spikes_per_bin": 0.16532579334060854,
+            "predicted_total": 1313.6341703675243,
+            "predicted_minus_observed_total": 952.6341703675243,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.10541905960842406,
+            "mae_spikes_per_bin": 0.0760156373892783,
+            "rmse_spikes_per_bin": 0.16320208462028116,
+            "predicted_total": 1282.0718381799306,
+            "predicted_minus_observed_total": 921.0718381799306,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.1054020983740974,
+            "mae_spikes_per_bin": 0.07596576385096629,
+            "rmse_spikes_per_bin": 0.16312340667787004,
+            "predicted_total": 1281.3583460238433,
+            "predicted_minus_observed_total": 920.3583460238433,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.007094611686199528,
+        "true_minus_substitution_nll": 1.6961234326651198e-05
+      },
+      {
+        "group": {
+          "person": "U111"
+        },
+        "bins": 20708,
+        "trials": 62,
+        "observed_spikes": 1972,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.3211592013944569,
+            "mae_spikes_per_bin": 0.1858199093844331,
+            "rmse_spikes_per_bin": 0.29757942157149075,
+            "predicted_total": 2311.241814528681,
+            "predicted_minus_observed_total": 339.24181452868106,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.3063393736573537,
+            "mae_spikes_per_bin": 0.1572428902994981,
+            "rmse_spikes_per_bin": 0.2926323437252682,
+            "predicted_total": 1731.627185203877,
+            "predicted_minus_observed_total": -240.37281479612307,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.30532267113432515,
+            "mae_spikes_per_bin": 0.15684131748728564,
+            "rmse_spikes_per_bin": 0.29251291839368376,
+            "predicted_total": 1724.7342328296577,
+            "predicted_minus_observed_total": -247.26576717034231,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.3053458620083096,
+            "mae_spikes_per_bin": 0.15683150079946034,
+            "rmse_spikes_per_bin": 0.29253385402359877,
+            "predicted_total": 1724.2717492092784,
+            "predicted_minus_observed_total": -247.72825079072163,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.0010167025230285454,
+        "true_minus_substitution_nll": -2.3190873984446636e-05
+      }
+    ],
+    "receptor_class": [
+      {
+        "group": {
+          "receptor_class": "FAI"
+        },
+        "bins": 20708,
+        "trials": 62,
+        "observed_spikes": 361,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.15243118026662364,
+            "mae_spikes_per_bin": 0.12595021569107742,
+            "rmse_spikes_per_bin": 0.1836436323205656,
+            "predicted_total": 2311.241814528681,
+            "predicted_minus_observed_total": 1950.241814528681,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.11251367129462359,
+            "mae_spikes_per_bin": 0.07856952048794032,
+            "rmse_spikes_per_bin": 0.16532579334060854,
+            "predicted_total": 1313.6341703675243,
+            "predicted_minus_observed_total": 952.6341703675243,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.10541905960842406,
+            "mae_spikes_per_bin": 0.0760156373892783,
+            "rmse_spikes_per_bin": 0.16320208462028116,
+            "predicted_total": 1282.0718381799306,
+            "predicted_minus_observed_total": 921.0718381799306,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.1054020983740974,
+            "mae_spikes_per_bin": 0.07596576385096629,
+            "rmse_spikes_per_bin": 0.16312340667787004,
+            "predicted_total": 1281.3583460238433,
+            "predicted_minus_observed_total": 920.3583460238433,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.007094611686199528,
+        "true_minus_substitution_nll": 1.6961234326651198e-05
+      },
+      {
+        "group": {
+          "receptor_class": "SAI"
+        },
+        "bins": 20708,
+        "trials": 62,
+        "observed_spikes": 1972,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.3211592013944569,
+            "mae_spikes_per_bin": 0.1858199093844331,
+            "rmse_spikes_per_bin": 0.29757942157149075,
+            "predicted_total": 2311.241814528681,
+            "predicted_minus_observed_total": 339.24181452868106,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.3063393736573537,
+            "mae_spikes_per_bin": 0.1572428902994981,
+            "rmse_spikes_per_bin": 0.2926323437252682,
+            "predicted_total": 1731.627185203877,
+            "predicted_minus_observed_total": -240.37281479612307,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.30532267113432515,
+            "mae_spikes_per_bin": 0.15684131748728564,
+            "rmse_spikes_per_bin": 0.29251291839368376,
+            "predicted_total": 1724.7342328296577,
+            "predicted_minus_observed_total": -247.26576717034231,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.3053458620083096,
+            "mae_spikes_per_bin": 0.15683150079946034,
+            "rmse_spikes_per_bin": 0.29253385402359877,
+            "predicted_total": 1724.2717492092784,
+            "predicted_minus_observed_total": -247.72825079072163,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.0010167025230285454,
+        "true_minus_substitution_nll": -2.3190873984446636e-05
+      }
+    ],
+    "material": [
+      {
+        "group": {
+          "material": "glass"
+        },
+        "bins": 21376,
+        "trials": 64,
+        "observed_spikes": 1415,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.2583337684593772,
+            "mae_spikes_per_bin": 0.16350036020793118,
+            "rmse_spikes_per_bin": 0.2620078563515621,
+            "predicted_total": 2385.7980020941222,
+            "predicted_minus_observed_total": 970.7980020941222,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.23161851727053515,
+            "mae_spikes_per_bin": 0.1275588949660127,
+            "rmse_spikes_per_bin": 0.2528607695834243,
+            "predicted_total": 1638.7523664742346,
+            "predicted_minus_observed_total": 223.75236647423458,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.22852232378131318,
+            "mae_spikes_per_bin": 0.12673713680688745,
+            "rmse_spikes_per_bin": 0.25197625159292913,
+            "predicted_total": 1628.9243926912864,
+            "predicted_minus_observed_total": 213.92439269128636,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.22856304948822767,
+            "mae_spikes_per_bin": 0.12670858207796046,
+            "rmse_spikes_per_bin": 0.25199884908283016,
+            "predicted_total": 1627.8464356755483,
+            "predicted_minus_observed_total": 212.84643567554826,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.0030961934892219656,
+        "true_minus_substitution_nll": -4.072570691449062e-05
+      },
+      {
+        "group": {
+          "material": "rainoff"
+        },
+        "bins": 20040,
+        "trials": 60,
+        "observed_spikes": 918,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.21382070802644743,
+            "mae_spikes_per_bin": 0.14776207835623428,
+            "rmse_spikes_per_bin": 0.23049899736571747,
+            "predicted_total": 2236.6856269632394,
+            "predicted_minus_observed_total": 1318.6856269632394,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.18575506136180575,
+            "mae_spikes_per_bin": 0.10761000318327281,
+            "rmse_spikes_per_bin": 0.2202968679800743,
+            "predicted_total": 1406.508989097167,
+            "predicted_minus_observed_total": 488.50898909716693,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.18067597640077346,
+            "mae_spikes_per_bin": 0.10543257411176946,
+            "rmse_spikes_per_bin": 0.21957652877460251,
+            "predicted_total": 1377.881678318302,
+            "predicted_minus_observed_total": 459.88167831830197,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.18063897294104442,
+            "mae_spikes_per_bin": 0.1054013525889497,
+            "rmse_spikes_per_bin": 0.21951726660930648,
+            "predicted_total": 1377.7836595575732,
+            "predicted_minus_observed_total": 459.7836595575732,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.005079084961032293,
+        "true_minus_substitution_nll": 3.700345972904029e-05
+      }
+    ],
+    "person_receptor_class": [
+      {
+        "group": {
+          "person": "U105",
+          "receptor_class": "FAI"
+        },
+        "bins": 20708,
+        "trials": 62,
+        "observed_spikes": 361,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.15243118026662364,
+            "mae_spikes_per_bin": 0.12595021569107742,
+            "rmse_spikes_per_bin": 0.1836436323205656,
+            "predicted_total": 2311.241814528681,
+            "predicted_minus_observed_total": 1950.241814528681,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.11251367129462359,
+            "mae_spikes_per_bin": 0.07856952048794032,
+            "rmse_spikes_per_bin": 0.16532579334060854,
+            "predicted_total": 1313.6341703675243,
+            "predicted_minus_observed_total": 952.6341703675243,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.10541905960842406,
+            "mae_spikes_per_bin": 0.0760156373892783,
+            "rmse_spikes_per_bin": 0.16320208462028116,
+            "predicted_total": 1282.0718381799306,
+            "predicted_minus_observed_total": 921.0718381799306,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.1054020983740974,
+            "mae_spikes_per_bin": 0.07596576385096629,
+            "rmse_spikes_per_bin": 0.16312340667787004,
+            "predicted_total": 1281.3583460238433,
+            "predicted_minus_observed_total": 920.3583460238433,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.007094611686199528,
+        "true_minus_substitution_nll": 1.6961234326651198e-05
+      },
+      {
+        "group": {
+          "person": "U111",
+          "receptor_class": "SAI"
+        },
+        "bins": 20708,
+        "trials": 62,
+        "observed_spikes": 1972,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.3211592013944569,
+            "mae_spikes_per_bin": 0.1858199093844331,
+            "rmse_spikes_per_bin": 0.29757942157149075,
+            "predicted_total": 2311.241814528681,
+            "predicted_minus_observed_total": 339.24181452868106,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.3063393736573537,
+            "mae_spikes_per_bin": 0.1572428902994981,
+            "rmse_spikes_per_bin": 0.2926323437252682,
+            "predicted_total": 1731.627185203877,
+            "predicted_minus_observed_total": -240.37281479612307,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.30532267113432515,
+            "mae_spikes_per_bin": 0.15684131748728564,
+            "rmse_spikes_per_bin": 0.29251291839368376,
+            "predicted_total": 1724.7342328296577,
+            "predicted_minus_observed_total": -247.26576717034231,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.3053458620083096,
+            "mae_spikes_per_bin": 0.15683150079946034,
+            "rmse_spikes_per_bin": 0.29253385402359877,
+            "predicted_total": 1724.2717492092784,
+            "predicted_minus_observed_total": -247.72825079072163,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.0010167025230285454,
+        "true_minus_substitution_nll": -2.3190873984446636e-05
+      }
+    ],
+    "person_unit_receptor_class_field_vs_contact": [
+      {
+        "group": {
+          "person": "U105",
+          "unit": "U105-03",
+          "receptor_class": "FAI",
+          "field_vs_contact": "in"
+        },
+        "bins": 20708,
+        "trials": 62,
+        "observed_spikes": 361,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.15243118026662364,
+            "mae_spikes_per_bin": 0.12595021569107742,
+            "rmse_spikes_per_bin": 0.1836436323205656,
+            "predicted_total": 2311.241814528681,
+            "predicted_minus_observed_total": 1950.241814528681,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.11251367129462359,
+            "mae_spikes_per_bin": 0.07856952048794032,
+            "rmse_spikes_per_bin": 0.16532579334060854,
+            "predicted_total": 1313.6341703675243,
+            "predicted_minus_observed_total": 952.6341703675243,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.10541905960842406,
+            "mae_spikes_per_bin": 0.0760156373892783,
+            "rmse_spikes_per_bin": 0.16320208462028116,
+            "predicted_total": 1282.0718381799306,
+            "predicted_minus_observed_total": 921.0718381799306,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.1054020983740974,
+            "mae_spikes_per_bin": 0.07596576385096629,
+            "rmse_spikes_per_bin": 0.16312340667787004,
+            "predicted_total": 1281.3583460238433,
+            "predicted_minus_observed_total": 920.3583460238433,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.007094611686199528,
+        "true_minus_substitution_nll": 1.6961234326651198e-05
+      },
+      {
+        "group": {
+          "person": "U111",
+          "unit": "U111-01",
+          "receptor_class": "SAI",
+          "field_vs_contact": "in"
+        },
+        "bins": 20708,
+        "trials": 62,
+        "observed_spikes": 1972,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.3211592013944569,
+            "mae_spikes_per_bin": 0.1858199093844331,
+            "rmse_spikes_per_bin": 0.29757942157149075,
+            "predicted_total": 2311.241814528681,
+            "predicted_minus_observed_total": 339.24181452868106,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.3063393736573537,
+            "mae_spikes_per_bin": 0.1572428902994981,
+            "rmse_spikes_per_bin": 0.2926323437252682,
+            "predicted_total": 1731.627185203877,
+            "predicted_minus_observed_total": -240.37281479612307,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.30532267113432515,
+            "mae_spikes_per_bin": 0.15684131748728564,
+            "rmse_spikes_per_bin": 0.29251291839368376,
+            "predicted_total": 1724.7342328296577,
+            "predicted_minus_observed_total": -247.26576717034231,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.3053458620083096,
+            "mae_spikes_per_bin": 0.15683150079946034,
+            "rmse_spikes_per_bin": 0.29253385402359877,
+            "predicted_total": 1724.2717492092784,
+            "predicted_minus_observed_total": -247.72825079072163,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.0010167025230285454,
+        "true_minus_substitution_nll": -2.3190873984446636e-05
+      }
+    ],
+    "person_unit_receptor_class_material": [
+      {
+        "group": {
+          "person": "U105",
+          "unit": "U105-03",
+          "receptor_class": "FAI",
+          "material": "glass"
+        },
+        "bins": 10688,
+        "trials": 32,
+        "observed_spikes": 192,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.15278559789621887,
+            "mae_spikes_per_bin": 0.12606640018206222,
+            "rmse_spikes_per_bin": 0.17895500741201953,
+            "predicted_total": 1192.8990010470611,
+            "predicted_minus_observed_total": 1000.8990010470611,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.11121345460444779,
+            "mae_spikes_per_bin": 0.07863722180914227,
+            "rmse_spikes_per_bin": 0.15908457263839196,
+            "predicted_total": 680.3680549834453,
+            "predicted_minus_observed_total": 488.3680549834453,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.10607833991387687,
+            "mae_spikes_per_bin": 0.07713770255362382,
+            "rmse_spikes_per_bin": 0.1565065897779853,
+            "predicted_total": 676.4957858294358,
+            "predicted_minus_observed_total": 484.4957858294358,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.10602255968396439,
+            "mae_spikes_per_bin": 0.07708825855033179,
+            "rmse_spikes_per_bin": 0.15644216922173068,
+            "predicted_total": 676.1943174977919,
+            "predicted_minus_observed_total": 484.19431749779187,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.005135114690570916,
+        "true_minus_substitution_nll": 5.5780229912483215e-05
+      },
+      {
+        "group": {
+          "person": "U105",
+          "unit": "U105-03",
+          "receptor_class": "FAI",
+          "material": "rainoff"
+        },
+        "bins": 10020,
+        "trials": 30,
+        "observed_spikes": 169,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.15205313479505542,
+            "mae_spikes_per_bin": 0.12582628556736036,
+            "rmse_spikes_per_bin": 0.18851634404886458,
+            "predicted_total": 1118.3428134816197,
+            "predicted_minus_observed_total": 949.3428134816197,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.11390056909747777,
+            "mae_spikes_per_bin": 0.07849730574532489,
+            "rmse_spikes_per_bin": 0.1717332691957915,
+            "predicted_total": 633.2661153840793,
+            "predicted_minus_observed_total": 464.2661153840793,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.10471582728260774,
+            "mae_spikes_per_bin": 0.07481876788064312,
+            "rmse_spikes_per_bin": 0.17005362504292867,
+            "predicted_total": 605.5760523504947,
+            "predicted_minus_observed_total": 436.5760523504947,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.10474027297690597,
+            "mae_spikes_per_bin": 0.0747684361716431,
+            "rmse_spikes_per_bin": 0.16996081568392893,
+            "predicted_total": 605.1640285260513,
+            "predicted_minus_observed_total": 436.1640285260513,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.009184741814870029,
+        "true_minus_substitution_nll": -2.444569429822796e-05
+      },
+      {
+        "group": {
+          "person": "U111",
+          "unit": "U111-01",
+          "receptor_class": "SAI",
+          "material": "glass"
+        },
+        "bins": 10688,
+        "trials": 32,
+        "observed_spikes": 1223,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.3638819390225357,
+            "mae_spikes_per_bin": 0.20093432023380012,
+            "rmse_spikes_per_bin": 0.32445544979557,
+            "predicted_total": 1192.8990010470611,
+            "predicted_minus_observed_total": -30.10099895293888,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.3520235799366225,
+            "mae_spikes_per_bin": 0.1764805681228831,
+            "rmse_spikes_per_bin": 0.3202643226104078,
+            "predicted_total": 958.3843114907893,
+            "predicted_minus_observed_total": -264.6156885092107,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.3509663076487495,
+            "mae_spikes_per_bin": 0.17633657106015108,
+            "rmse_spikes_per_bin": 0.32014020380094665,
+            "predicted_total": 952.4286068618507,
+            "predicted_minus_observed_total": -270.57139313814935,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.35110353929249094,
+            "mae_spikes_per_bin": 0.17632890560558911,
+            "rmse_spikes_per_bin": 0.320207257205925,
+            "predicted_total": 951.6521181777564,
+            "predicted_minus_observed_total": -271.3478818222436,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.0010572722878730012,
+        "true_minus_substitution_nll": -0.00013723164374146446
+      },
+      {
+        "group": {
+          "person": "U111",
+          "unit": "U111-01",
+          "receptor_class": "SAI",
+          "material": "rainoff"
+        },
+        "bins": 10020,
+        "trials": 30,
+        "observed_spikes": 749,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.27558828125783946,
+            "mae_spikes_per_bin": 0.16969787114510823,
+            "rmse_spikes_per_bin": 0.2659345099825372,
+            "predicted_total": 1118.3428134816197,
+            "predicted_minus_observed_total": 369.3428134816197,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.25760955362613375,
+            "mae_spikes_per_bin": 0.13672270062122074,
+            "rmse_spikes_per_bin": 0.2599405784693617,
+            "predicted_total": 773.2428737130876,
+            "predicted_minus_observed_total": 24.242873713087647,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.25663612551893916,
+            "mae_spikes_per_bin": 0.1360463803428958,
+            "rmse_spikes_per_bin": 0.25982584280083976,
+            "predicted_total": 772.3056259678071,
+            "predicted_minus_observed_total": 23.305625967807146,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.25653767290518287,
+            "mae_spikes_per_bin": 0.1360342690062563,
+            "rmse_spikes_per_bin": 0.25978641575589784,
+            "predicted_total": 772.6196310315219,
+            "predicted_minus_observed_total": 23.619631031521862,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.000973428107194585,
+        "true_minus_substitution_nll": 9.845261375629466e-05
+      }
+    ],
+    "person_unit_receptor_class_material_direction": [
+      {
+        "group": {
+          "person": "U105",
+          "unit": "U105-03",
+          "receptor_class": "FAI",
+          "material": "glass",
+          "direction": "D"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 53,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.15562350556841942,
+            "mae_spikes_per_bin": 0.12718578675910766,
+            "rmse_spikes_per_bin": 0.1713525011075375,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": 245.22475026176528,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.11314525848754646,
+            "mae_spikes_per_bin": 0.08031081386756504,
+            "rmse_spikes_per_bin": 0.1502002583606864,
+            "predicted_total": 171.63773362952594,
+            "predicted_minus_observed_total": 118.63773362952594,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.10767281096462564,
+            "mae_spikes_per_bin": 0.07842223144752658,
+            "rmse_spikes_per_bin": 0.14672098348890744,
+            "predicted_total": 170.47580618459122,
+            "predicted_minus_observed_total": 117.47580618459122,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.10767053035979657,
+            "mae_spikes_per_bin": 0.07834622627912119,
+            "rmse_spikes_per_bin": 0.14668657548521993,
+            "predicted_total": 170.26701719540972,
+            "predicted_minus_observed_total": 117.26701719540972,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.005472447522920823,
+        "true_minus_substitution_nll": 2.2806048290691106e-06
+      },
+      {
+        "group": {
+          "person": "U105",
+          "unit": "U105-03",
+          "receptor_class": "FAI",
+          "material": "glass",
+          "direction": "P"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 52,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.1553216939008354,
+            "mae_spikes_per_bin": 0.12706215889809647,
+            "rmse_spikes_per_bin": 0.1748369964819371,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": 246.22475026176528,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.11244583091467439,
+            "mae_spikes_per_bin": 0.07963514540993277,
+            "rmse_spikes_per_bin": 0.15310217064720075,
+            "predicted_total": 170.34705833075867,
+            "predicted_minus_observed_total": 118.34705833075867,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.10951945000523369,
+            "mae_spikes_per_bin": 0.07862418689245795,
+            "rmse_spikes_per_bin": 0.15251461605371905,
+            "predicted_total": 167.88098770281522,
+            "predicted_minus_observed_total": 115.88098770281522,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.10930177017798481,
+            "mae_spikes_per_bin": 0.07855391468755635,
+            "rmse_spikes_per_bin": 0.15229859863259626,
+            "predicted_total": 167.83550798521952,
+            "predicted_minus_observed_total": 115.83550798521952,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.0029263809094406956,
+        "true_minus_substitution_nll": 0.0002176798272488789
+      },
+      {
+        "group": {
+          "person": "U105",
+          "unit": "U105-03",
+          "receptor_class": "FAI",
+          "material": "glass",
+          "direction": "R"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 48,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.15658139099247864,
+            "mae_spikes_per_bin": 0.1270688947260416,
+            "rmse_spikes_per_bin": 0.21065420498777987,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": 250.22475026176528,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.11913091534775012,
+            "mae_spikes_per_bin": 0.07995460676426856,
+            "rmse_spikes_per_bin": 0.19647353501249745,
+            "predicted_total": 170.82890416243225,
+            "predicted_minus_observed_total": 122.82890416243225,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.11049643019904047,
+            "mae_spikes_per_bin": 0.07775257950511773,
+            "rmse_spikes_per_bin": 0.19318214675198453,
+            "predicted_total": 168.35230617078219,
+            "predicted_minus_observed_total": 120.35230617078219,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.11061417339725163,
+            "mae_spikes_per_bin": 0.07779483770970465,
+            "rmse_spikes_per_bin": 0.1932556950908206,
+            "predicted_total": 168.47371745761237,
+            "predicted_minus_observed_total": 120.47371745761237,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.008634485148709653,
+        "true_minus_substitution_nll": -0.0001177431982111593
+      },
+      {
+        "group": {
+          "person": "U105",
+          "unit": "U105-03",
+          "receptor_class": "FAI",
+          "material": "glass",
+          "direction": "U"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 39,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.14361580112314204,
+            "mae_spikes_per_bin": 0.12294876034500318,
+            "rmse_spikes_per_bin": 0.15425540398208673,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": 259.2247502617653,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.10013181366782009,
+            "mae_spikes_per_bin": 0.07464832119480272,
+            "rmse_spikes_per_bin": 0.12895488659740903,
+            "predicted_total": 167.55435886072837,
+            "predicted_minus_observed_total": 128.55435886072837,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.09662466848660764,
+            "mae_spikes_per_bin": 0.07375181236939295,
+            "rmse_spikes_per_bin": 0.1259767980465745,
+            "predicted_total": 169.78668577124728,
+            "predicted_minus_observed_total": 130.78668577124728,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.09650376480082448,
+            "mae_spikes_per_bin": 0.07365805552494499,
+            "rmse_spikes_per_bin": 0.12584526604180418,
+            "predicted_total": 169.61807485955023,
+            "predicted_minus_observed_total": 130.61807485955023,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.003507145181212451,
+        "true_minus_substitution_nll": 0.00012090368578315802
+      },
+      {
+        "group": {
+          "person": "U105",
+          "unit": "U105-03",
+          "receptor_class": "FAI",
+          "material": "rainoff",
+          "direction": "D"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 47,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.1543314583028554,
+            "mae_spikes_per_bin": 0.12661110201703732,
+            "rmse_spikes_per_bin": 0.19518314435916348,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": 251.22475026176528,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.11599522669036129,
+            "mae_spikes_per_bin": 0.07966593550045985,
+            "rmse_spikes_per_bin": 0.17954607353642368,
+            "predicted_total": 170.345857506219,
+            "predicted_minus_observed_total": 123.345857506219,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.10910902410189094,
+            "mae_spikes_per_bin": 0.0760958202043507,
+            "rmse_spikes_per_bin": 0.17935049916463452,
+            "predicted_total": 162.2058241682244,
+            "predicted_minus_observed_total": 115.20582416822441,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.10917732041251837,
+            "mae_spikes_per_bin": 0.07604249780372861,
+            "rmse_spikes_per_bin": 0.17926560694061,
+            "predicted_total": 162.0846234200984,
+            "predicted_minus_observed_total": 115.08462342009841,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.00688620258847035,
+        "true_minus_substitution_nll": -6.829631062743591e-05
+      },
+      {
+        "group": {
+          "person": "U105",
+          "unit": "U105-03",
+          "receptor_class": "FAI",
+          "material": "rainoff",
+          "direction": "P"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 45,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.14931784167819673,
+            "mae_spikes_per_bin": 0.12494364569104426,
+            "rmse_spikes_per_bin": 0.1666868331625475,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": 253.22475026176528,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.11037591158421257,
+            "mae_spikes_per_bin": 0.07734072077222298,
+            "rmse_spikes_per_bin": 0.1459499164450212,
+            "predicted_total": 166.95141579341893,
+            "predicted_minus_observed_total": 121.95141579341893,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.10122490633343206,
+            "mae_spikes_per_bin": 0.07359137755397722,
+            "rmse_spikes_per_bin": 0.14258239900328,
+            "predicted_total": 160.24934740092363,
+            "predicted_minus_observed_total": 115.24934740092363,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.10124351111561476,
+            "mae_spikes_per_bin": 0.0735810291329305,
+            "rmse_spikes_per_bin": 0.14245752948992876,
+            "predicted_total": 160.26377774621938,
+            "predicted_minus_observed_total": 115.26377774621938,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.009151005250780511,
+        "true_minus_substitution_nll": -1.860478218269901e-05
+      },
+      {
+        "group": {
+          "person": "U105",
+          "unit": "U105-03",
+          "receptor_class": "FAI",
+          "material": "rainoff",
+          "direction": "R"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 51,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.1583922300428619,
+            "mae_spikes_per_bin": 0.128024566793063,
+            "rmse_spikes_per_bin": 0.2037272931248948,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": 247.22475026176528,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.12367111522527008,
+            "mae_spikes_per_bin": 0.08169214675360703,
+            "rmse_spikes_per_bin": 0.1902018779198752,
+            "predicted_total": 171.37102860929207,
+            "predicted_minus_observed_total": 120.37102860929207,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.10985333530436335,
+            "mae_spikes_per_bin": 0.07737867848543363,
+            "rmse_spikes_per_bin": 0.18665368052431489,
+            "predicted_total": 163.605436332158,
+            "predicted_minus_observed_total": 112.605436332158,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.10975170768392857,
+            "mae_spikes_per_bin": 0.07734474225558692,
+            "rmse_spikes_per_bin": 0.1865558735744591,
+            "predicted_total": 163.5755230087964,
+            "predicted_minus_observed_total": 112.57552300879641,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.013817779920906728,
+        "true_minus_substitution_nll": 0.00010162762043477991
+      },
+      {
+        "group": {
+          "person": "U105",
+          "unit": "U105-03",
+          "receptor_class": "FAI",
+          "material": "rainoff",
+          "direction": "U"
+        },
+        "bins": 2004,
+        "trials": 6,
+        "observed_spikes": 26,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.14421030061005835,
+            "mae_spikes_per_bin": 0.12302567516860892,
+            "rmse_spikes_per_bin": 0.18577145365610306,
+            "predicted_total": 223.668562696324,
+            "predicted_minus_observed_total": 197.668562696324,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.10277984082093024,
+            "mae_spikes_per_bin": 0.07422145802490465,
+            "rmse_spikes_per_bin": 0.16685825945244895,
+            "predicted_total": 124.59781347514934,
+            "predicted_minus_observed_total": 98.59781347514934,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.09666278209345676,
+            "mae_spikes_per_bin": 0.07133933774486684,
+            "rmse_spikes_per_bin": 0.167759527117425,
+            "predicted_total": 119.51544444918864,
+            "predicted_minus_observed_total": 93.51544444918864,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.09680464593511431,
+            "mae_spikes_per_bin": 0.07121782193522073,
+            "rmse_spikes_per_bin": 0.16769673520777711,
+            "predicted_total": 119.24010435093712,
+            "predicted_minus_observed_total": 93.24010435093712,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.006117058727473479,
+        "true_minus_substitution_nll": -0.00014186384165755517
+      },
+      {
+        "group": {
+          "person": "U111",
+          "unit": "U111-01",
+          "receptor_class": "SAI",
+          "material": "glass",
+          "direction": "D"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 256,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.3232499357756898,
+            "mae_spikes_per_bin": 0.18653413946366543,
+            "rmse_spikes_per_bin": 0.30227451012022366,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": 42.22475026176528,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.3056484392467644,
+            "mae_spikes_per_bin": 0.15743501941857518,
+            "rmse_spikes_per_bin": 0.2956082080332595,
+            "predicted_total": 227.7809687021018,
+            "predicted_minus_observed_total": -28.219031297898198,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.30662567500624943,
+            "mae_spikes_per_bin": 0.1577205158211135,
+            "rmse_spikes_per_bin": 0.29616548646290697,
+            "predicted_total": 226.63655750827112,
+            "predicted_minus_observed_total": -29.363442491728875,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.3066177882280781,
+            "mae_spikes_per_bin": 0.1576118113549558,
+            "rmse_spikes_per_bin": 0.29619023249413207,
+            "predicted_total": 226.1072850715477,
+            "predicted_minus_observed_total": -29.892714928452307,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": 0.0009772357594850511,
+        "true_minus_substitution_nll": 7.886778171317665e-06
+      },
+      {
+        "group": {
+          "person": "U111",
+          "unit": "U111-01",
+          "receptor_class": "SAI",
+          "material": "glass",
+          "direction": "P"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 201,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.27655857514204457,
+            "mae_spikes_per_bin": 0.1700438265162518,
+            "rmse_spikes_per_bin": 0.2662513771399604,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": 97.22475026176528,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.2549649063745539,
+            "mae_spikes_per_bin": 0.13645859628134432,
+            "rmse_spikes_per_bin": 0.25818527350214227,
+            "predicted_total": 209.21050201798977,
+            "predicted_minus_observed_total": 8.210502017989768,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.2553491754373832,
+            "mae_spikes_per_bin": 0.13652054575076134,
+            "rmse_spikes_per_bin": 0.2587527519508747,
+            "predicted_total": 208.3394822352281,
+            "predicted_minus_observed_total": 7.339482235228104,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.25568593895853253,
+            "mae_spikes_per_bin": 0.13663372251838818,
+            "rmse_spikes_per_bin": 0.25894187245987466,
+            "predicted_total": 208.53113637769678,
+            "predicted_minus_observed_total": 7.531136377696782,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": 0.0003842690628293455,
+        "true_minus_substitution_nll": -0.0003367635211493081
+      },
+      {
+        "group": {
+          "person": "U111",
+          "unit": "U111-01",
+          "receptor_class": "SAI",
+          "material": "glass",
+          "direction": "R"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 396,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.4389169869389725,
+            "mae_spikes_per_bin": 0.2274842030007393,
+            "rmse_spikes_per_bin": 0.366489874828127,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": -97.77524973823472,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.43314454988124784,
+            "mae_spikes_per_bin": 0.20967502691568443,
+            "rmse_spikes_per_bin": 0.36351187650495836,
+            "predicted_total": 265.3709863454359,
+            "predicted_minus_observed_total": -130.62901365456412,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.4284240893467627,
+            "mae_spikes_per_bin": 0.2089639329006623,
+            "rmse_spikes_per_bin": 0.3625401225082969,
+            "predicted_total": 263.01641484741765,
+            "predicted_minus_observed_total": -132.98358515258235,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.4285957490931434,
+            "mae_spikes_per_bin": 0.20892641492274536,
+            "rmse_spikes_per_bin": 0.3626310708484023,
+            "predicted_total": 262.65695265058196,
+            "predicted_minus_observed_total": -133.34304734941804,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.00472046053448516,
+        "true_minus_substitution_nll": -0.00017165974638072568
+      },
+      {
+        "group": {
+          "person": "U111",
+          "unit": "U111-01",
+          "receptor_class": "SAI",
+          "material": "glass",
+          "direction": "U"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 370,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.416802258233436,
+            "mae_spikes_per_bin": 0.2196751119545441,
+            "rmse_spikes_per_bin": 0.3528609527268494,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": -71.77524973823472,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.4143364242439239,
+            "mae_spikes_per_bin": 0.20235362987592842,
+            "rmse_spikes_per_bin": 0.3522672463886567,
+            "predicted_total": 256.02185442526184,
+            "predicted_minus_observed_total": -113.97814557473816,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.4134662908046028,
+            "mae_spikes_per_bin": 0.20214128976806725,
+            "rmse_spikes_per_bin": 0.35193277471209516,
+            "predicted_total": 254.43615227093377,
+            "predicted_minus_observed_total": -115.56384772906623,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.41351468089020954,
+            "mae_spikes_per_bin": 0.2021436736262671,
+            "rmse_spikes_per_bin": 0.3519231586394291,
+            "predicted_total": 254.35674407792996,
+            "predicted_minus_observed_total": -115.64325592207004,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.0008701334393211302,
+        "true_minus_substitution_nll": -4.8390085606753175e-05
+      },
+      {
+        "group": {
+          "person": "U111",
+          "unit": "U111-01",
+          "receptor_class": "SAI",
+          "material": "rainoff",
+          "direction": "D"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 155,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.2388093923959365,
+            "mae_spikes_per_bin": 0.15667115340589724,
+            "rmse_spikes_per_bin": 0.23982727684433824,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": 143.22475026176528,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.21150169630394888,
+            "mae_spikes_per_bin": 0.11912971318656239,
+            "rmse_spikes_per_bin": 0.22961035946120026,
+            "predicted_total": 196.52531338371685,
+            "predicted_minus_observed_total": 41.52531338371685,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.21145332901802463,
+            "mae_spikes_per_bin": 0.1187195207019502,
+            "rmse_spikes_per_bin": 0.23017407485989194,
+            "predicted_total": 196.58717327435278,
+            "predicted_minus_observed_total": 41.58717327435278,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.21130835315377985,
+            "mae_spikes_per_bin": 0.11870401642353585,
+            "rmse_spikes_per_bin": 0.23011098699798757,
+            "predicted_total": 196.61291431193828,
+            "predicted_minus_observed_total": 41.61291431193828,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -4.83672859242501e-05,
+        "true_minus_substitution_nll": 0.00014497586424477849
+      },
+      {
+        "group": {
+          "person": "U111",
+          "unit": "U111-01",
+          "receptor_class": "SAI",
+          "material": "rainoff",
+          "direction": "P"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 168,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.24973705106371968,
+            "mae_spikes_per_bin": 0.16053392832299573,
+            "rmse_spikes_per_bin": 0.24908805555000632,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": 130.22475026176528,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.23139951254570323,
+            "mae_spikes_per_bin": 0.12478266172536599,
+            "rmse_spikes_per_bin": 0.24258103025791333,
+            "predicted_total": 195.91176439122006,
+            "predicted_minus_observed_total": 27.91176439122006,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.2300886121247468,
+            "mae_spikes_per_bin": 0.12422742437623688,
+            "rmse_spikes_per_bin": 0.2422988838275669,
+            "predicted_total": 195.7542676115012,
+            "predicted_minus_observed_total": 27.754267611501206,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.2300064078081627,
+            "mae_spikes_per_bin": 0.12423919961663951,
+            "rmse_spikes_per_bin": 0.24227640086828867,
+            "predicted_total": 195.9337663830823,
+            "predicted_minus_observed_total": 27.933766383082286,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.00131090042095644,
+        "true_minus_substitution_nll": 8.220431658409466e-05
+      },
+      {
+        "group": {
+          "person": "U111",
+          "unit": "U111-01",
+          "receptor_class": "SAI",
+          "material": "rainoff",
+          "direction": "R"
+        },
+        "bins": 2672,
+        "trials": 8,
+        "observed_spikes": 260,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.32497600518596587,
+            "mae_spikes_per_bin": 0.18719573333170655,
+            "rmse_spikes_per_bin": 0.2967182209510905,
+            "predicted_total": 298.2247502617653,
+            "predicted_minus_observed_total": 38.22475026176528,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.3148648193323292,
+            "mae_spikes_per_bin": 0.15982730886964677,
+            "rmse_spikes_per_bin": 0.29355478358354226,
+            "predicted_total": 221.53685790262728,
+            "predicted_minus_observed_total": -38.463142097372724,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.3132696818174098,
+            "mae_spikes_per_bin": 0.1589717005906069,
+            "rmse_spikes_per_bin": 0.2933232038298135,
+            "predicted_total": 220.85649226950255,
+            "predicted_minus_observed_total": -39.14350773049745,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.31312868362025725,
+            "mae_spikes_per_bin": 0.15893553661996493,
+            "rmse_spikes_per_bin": 0.29326892973863417,
+            "predicted_total": 220.91399144300772,
+            "predicted_minus_observed_total": -39.08600855699228,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.0015951375149194091,
+        "true_minus_substitution_nll": 0.00014099819715251982
+      },
+      {
+        "group": {
+          "person": "U111",
+          "unit": "U111-01",
+          "receptor_class": "SAI",
+          "material": "rainoff",
+          "direction": "U"
+        },
+        "bins": 2004,
+        "trials": 6,
+        "observed_spikes": 166,
+        "scores": {
+          "training_rate": {
+            "poisson_nll_per_bin": 0.29324480809503445,
+            "mae_spikes_per_bin": 0.17595493564474185,
+            "rmse_spikes_per_bin": 0.2771297619481088,
+            "predicted_total": 223.668562696324,
+            "predicted_minus_observed_total": 57.66856269632399,
+            "bins_predicted_above_20": 0
+          },
+          "phase_and_spikes": {
+            "poisson_nll_per_bin": 0.2776930638880269,
+            "mae_spikes_per_bin": 0.14529392473067018,
+            "rmse_spikes_per_bin": 0.27238026575243757,
+            "predicted_total": 159.26893803552346,
+            "predicted_minus_observed_total": -6.731061964476538,
+            "bins_predicted_above_20": 0
+          },
+          "with_true_force": {
+            "poisson_nll_per_bin": 0.27676513031445427,
+            "mae_spikes_per_bin": 0.14434037415608694,
+            "rmse_spikes_per_bin": 0.27186553405485087,
+            "predicted_total": 159.10769281245058,
+            "predicted_minus_observed_total": -6.89230718754942,
+            "bins_predicted_above_20": 0
+          },
+          "with_previous_repeat_force": {
+            "poisson_nll_per_bin": 0.27676377174964806,
+            "mae_spikes_per_bin": 0.14433300815109448,
+            "rmse_spikes_per_bin": 0.2718531365460332,
+            "predicted_total": 159.1589588934936,
+            "predicted_minus_observed_total": -6.841041106506395,
+            "bins_predicted_above_20": 0
+          }
+        },
+        "true_minus_history_nll": -0.0009279335735726257,
+        "true_minus_substitution_nll": 1.358564806208662e-06
+      }
+    ]
+  }
+}

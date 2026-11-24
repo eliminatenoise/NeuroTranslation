@@ -44,7 +44,7 @@
       "version": "Recording readers including first-use optical forecasts and next recorded spike prediction",
       "entry": "docs/index.html",
       "runtime_manifest": "docs/build-manifest.json",
-      "buildId": "7fc2776f09dcb8c3ec4a3c88ec3f948f31744385a1a3443f15ba2adde09c3f5e",
+      "buildId": "fd4a9716a01d1edf6dcc57d4e0bb253186a91bae15393d98d304c1880e41ff66",
       "meaning": "Import and inspect recordings locally. Replay the fit made on first recordings (R1), or compare the fixed and personally calibrated models on an imported second recording (R2). Complete R2 trials are checked against their archived sample clock and the four input streams the study used. Group results are shown separately.",
       "hosting": "Static files in docs/ on the main branch, served by GitHub Pages.",
       "study": "benchmarks/scalp-eeg-palm-history",
@@ -80,8 +80,8 @@
     "papers": {
       "latest_rendered": "papers/current",
       "manifest": "papers/current/manifest.json",
-      "manifest_sha256": "c3ad6f3766d1fe77da2b79861e5bef3c7dcbc489654cc61c62c70e8b2707e126",
-      "scope": "The current edition, 21 November 2026: NeuroTranslation (54 pages, Simple English Edition 64) and Brain2Body (29 pages, Simple English Edition 33), working drafts not reviewed outside the project. NeuroTranslation reports every study of the numbered table, 1 to 29, with a row for each in its appendix B.",
+      "manifest_sha256": "8d2de2d903a5b63ccb4029175a84c2bd608a431eb3e8874966e07ba89fa38964",
+      "scope": "The current edition, 21 November 2026: NeuroTranslation (60 pages, Simple English Edition 67) and Brain2Body (29 pages, Simple English Edition 33), working drafts not reviewed outside the project. NeuroTranslation reports every study of the numbered table, 1 to 29, with a row for each in its appendix B.",
       "build_provenance": "Four PDFs built offline with the Tectonic 0.17 TeX engine; a rebuild from the source ZIP gives the same bytes.",
       "historical_erratum": "",
       "historical_source": "",
@@ -89,8 +89,8 @@
       "publication_scope": "This block identifies the files of the current edition.",
       "download_bundle": {
         "path": "papers/downloads/NeuroTranslation-Brain2Body-Papers.zip",
-        "bytes": 848782,
-        "sha256": "c0f0f0afa8861f0c3217ec0195ef8b531e83d61cc258f94f5aa94557d6b83aff",
+        "bytes": 874335,
+        "sha256": "f62fcc18fb01c52fa0c9fcda8111ea657c349a05f4b11212020e6addf9426a30",
         "checksum": "downloads/NeuroTranslation-Brain2Body-Papers.zip.sha256",
         "members": 19,
         "extraction_folder": "NeuroTranslation-Brain2Body-Papers"
@@ -100,16 +100,16 @@
         "directory": "papers/current",
         "archive": {
           "path": "papers/downloads/NeuroTranslation-Brain2Body-Papers.zip",
-          "bytes": 848782,
-          "sha256": "c0f0f0afa8861f0c3217ec0195ef8b531e83d61cc258f94f5aa94557d6b83aff"
+          "bytes": 874335,
+          "sha256": "f62fcc18fb01c52fa0c9fcda8111ea657c349a05f4b11212020e6addf9426a30"
         },
         "reading_aid": null,
-        "pages_total": 180,
-        "scope": "The current edition, 21 November 2026: NeuroTranslation (54 pages, Simple English Edition 64) and Brain2Body (29 pages, Simple English Edition 33), working drafts not reviewed outside the project. NeuroTranslation reports every study of the numbered table, 1 to 29, with a row for each in its appendix B.",
+        "pages_total": 189,
+        "scope": "The current edition, 21 November 2026: NeuroTranslation (60 pages, Simple English Edition 67) and Brain2Body (29 pages, Simple English Edition 33), working drafts not reviewed outside the project. NeuroTranslation reports every study of the numbered table, 1 to 29, with a row for each in its appendix B.",
         "selected_manuscript_source": {
           "path": "papers/downloads/NeuroTranslation-Brain2Body-Papers-Source.zip",
-          "bytes": 2522556,
-          "sha256": "124717b8767ddb78ce41ad99f87cef26302230c88b3b8e31f19d6bd0829130c4",
+          "bytes": 2536430,
+          "sha256": "b8ae503bdb6680971c92cb3073b7865042919eaba98718bf1b251bcc8b1083fc",
           "members": 107,
           "scope": "The complete source of the four PDFs (91 files: TeX, bibliography, figure, fonts and tools), the build script, and the ledger and small result files its number check reads. The TeX engine and its package files are named in the ZIP, not included."
         }

@@ -97,6 +97,7 @@ function resetCase() {
   el("task-note").textContent=row().description.input;
   el("horizon").textContent=row().description.horizon;
   el("forecast-note").textContent=row().description.forecast;
+  el("missing-hint").textContent=task==="human_touch_afferent" ? "Provide all five readings in every 20 ms bin." : "A null channel value represents a missing reading.";
   initializeControls();forecast();
 }
 function dirty() {
@@ -175,6 +176,12 @@ el("proposal-form").addEventListener("submit",event=>{
   try{
     catalog=await api("/api/tasks");el("digest").textContent=catalog.checkpoint_sha256;
     for (const [key,spec] of Object.entries(catalog.tasks)) el("task").add(new Option(spec.description.title,key));
+    if (catalog.initial_task && catalog.tasks[catalog.initial_task]) {
+      el("task").value=catalog.initial_task;
+      document.title=catalog.model;
+      document.querySelector("h1 span").textContent="Touch study";
+      el("outcome-text").placeholder="How many spikes will the touch nerve send?";
+    }
     el("work").hidden=false;resetCase();
   }catch(error){tell(error.message,true);}
 })();

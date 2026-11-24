@@ -14,7 +14,23 @@
 <p>Once NumPy is installed, forecasts run offline on the CPU. You can save a changed input from the browser and replay it from the same folder.</p><pre>python predict.py
 python predict.py --list-joint
 python predict.py your-input.json</pre></section>
+<section><h2>Try the fingertip touch study</h2><p>The same download includes a <strong>Touch study</strong> launcher. It opens an eight-task model that can also forecast spikes from a human fingertip nerve. <a href="../touch-feedback/">Read the new-person comparison and see which forecasts improved</a>.</p></section>
 <section id="tasks"><h2>What did the shared weights learn?</h2>
+<p><a href="shared-tasks/">Compare six forecasts trained together</a>. The study compares compact and wider models on human balance, macaque reaching and macaque grasp.</p>
+<p><a href="handle-force/">See what handle force added to the reach forecast</a>. Compare force measured during the reach with force from an earlier reach and with the existing model.</p>
+<p><a href="kuopio-lift/">See where the wrist moves during a box lift</a>. Compare forecasts from wrist motion, floor forces and muscle activity.</p>
+<p><a href="kuopio-turning-lift/">See what changed when the lift involved a turn</a>. The models trained on different lifts with the same number of examples.</p>
+<p><a href="walking-perturbations/">Where does the heel go when the treadmill speeds up?</a> A 100 millisecond forecast for people and timings set aside before training.</p>
+<p><a href="overground-forefoot/">How far does the forefoot move in 100 milliseconds?</a> Compare forecasts on new people at familiar and reserved walking speeds.</p>
+<p><a href="sit-to-walk/">What helps predict the rise from a chair?</a> See what floor force and muscle activity add to earlier camera measurements.</p>
+<p><a href="sparse-chair-rise/">What can your muscles tell us when the camera sees less?</a> Compare full and sparse camera history with and without floor force and muscle readings.</p>
+<p><a href="chair-directions/">Can a model trained to stand predict a sit?</a> Compare one model trained on both directions with separate forecasts for standing and sitting.</p>
+<p><a href="cross-lab-chair/">Does a chair forecast travel from one lab to another?</a> Compare models trained on one or two archives and tested on a third.</p>
+<p><a href="chair-squat-lunge/">Can a chair forecast predict a squat or a lunge?</a> Test the same frozen models on three movements in the Leeds archive.</p>
+<p><a href="missing-pelvis-markers/">What happens when the camera loses a pelvis marker?</a> Keep the two forecast targets distinct while withholding some camera readings.</p>
+<p><a href="grasp-sensor/">Compare six sensor forecasts during a grasp</a>. See whether earlier spikes helped after the model already had the sensor readings and task cues.</p>
+<p><a href="probe-wheel-clock/">Can a brain probe and a wheel share a clock?</a> Check how closely two recorders agreed on the same electrical pulses.</p>
+<p><a href="probe-wheel-forecast/">Do spikes help forecast the wheel?</a> Compare 100-millisecond forecasts with and without the mouse’s recent brain signals.</p>
 <p>All 7 tasks update one temporal-attention encoder during training. Each uses its own input layer and readout. The paired human and macaque tasks see earlier values of the quantities they predict, alongside other sensors. Unrelated experiments supply separate training examples.</p><p><a href="model-card.html">See every task, the measured errors, model sizes and runtime</a>. The common encoder contains 8,576 of the 21,445 trainable parameters.</p><p>The joint fit had lower primary error than its matched single-task fit on 5 of 11 held comparisons. The two human outcomes favored single-task fits. The cortical count and fluorescence tasks improved over single-task training, yet a smoothed rate and repeating the last fluorescence reading respectively gave lower errors.</p></section>
 <section><h2>Where do the simpler models win?</h2><p>The earlier movement model, trained task adapters, and specialist forecasts still run with the input files from their studies. Their results refer to those fits. The comparisons below also test how much a model can learn from combining different signals or adding recordings.</p>
 <p>When the human balance study added both people and examples, many model rankings reversed. Keeping the example count fixed gave a different answer. In the spike study, the smallest fit picked the eventual winner in each held recording, but the rat and turtle favored different models. <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/training-scale">Read both training-size studies</a>.</p>

@@ -1,0 +1,360 @@
+{
+  "version": "0.0.0-past-load-gate-preview.1",
+  "scope": "Descriptive replay of the fitting participants, walks and overlapping histories.",
+  "support": {
+    "people": 12,
+    "walks": 36,
+    "event_rows": 1647,
+    "impulse_rows": 1728,
+    "joint_rows": 1647,
+    "positive_event_windows": 58,
+    "distinct_positive_crossings": 25
+  },
+  "observed_gate_support": {
+    "at_or_above_20n": 382,
+    "below_20n": 1346,
+    "no_force": 0
+  },
+  "metrics": {
+    "event": "Brier score",
+    "impulse": "mean absolute error in N s"
+  },
+  "weighting": "Average over plates within each issue, issues within each walk, walks within each person, and people equally.",
+  "trained_parameters": {
+    "frozen_attention_core": 546,
+    "trainable_full_attention_core": 9122
+  },
+  "optimizer_updates_per_arm": 48,
+  "endpoint_and_joint_scores": {
+    "force_persistence": {
+      "endpoint_specific": {
+        "event": {
+          "value": 0.034722222222222224,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 3.421995725475881,
+          "rows": 1728
+        }
+      },
+      "joint_support": {
+        "event": {
+          "value": 0.034722222222222224,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 3.4358790971205693,
+          "rows": 1647
+        }
+      }
+    },
+    "neurotranslate_0.0_six_updates": {
+      "endpoint_specific": {
+        "event": {
+          "value": 0.2531188701772681,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 11.296917054101925,
+          "rows": 1728
+        }
+      },
+      "joint_support": {
+        "event": {
+          "value": 0.2531188701772681,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 11.342892820574754,
+          "rows": 1647
+        }
+      }
+    },
+    "frozen_attention_core": {
+      "endpoint_specific": {
+        "event": {
+          "value": 0.033286600422737005,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 10.810239429208789,
+          "rows": 1728
+        }
+      },
+      "joint_support": {
+        "event": {
+          "value": 0.033286600422737005,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 10.826878849957582,
+          "rows": 1647
+        }
+      }
+    },
+    "trainable_full_attention_core": {
+      "endpoint_specific": {
+        "event": {
+          "value": 0.03296088027961986,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 10.20244969202502,
+          "rows": 1728
+        }
+      },
+      "joint_support": {
+        "event": {
+          "value": 0.03296088027961986,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 10.20495684120531,
+          "rows": 1647
+        }
+      }
+    },
+    "physical_reference_frozen_attention_core": {
+      "endpoint_specific": {
+        "event": {
+          "value": 0.03318212000279706,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 3.4710748548468278,
+          "rows": 1728
+        }
+      },
+      "joint_support": {
+        "event": {
+          "value": 0.03318212000279706,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 3.4872216789237203,
+          "rows": 1647
+        }
+      }
+    },
+    "physical_reference_trainable_full_attention_core": {
+      "endpoint_specific": {
+        "event": {
+          "value": 0.0328601272452221,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 3.4179323491736335,
+          "rows": 1728
+        }
+      },
+      "joint_support": {
+        "event": {
+          "value": 0.0328601272452221,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 3.433371480856751,
+          "rows": 1647
+        }
+      }
+    },
+    "past_load_gate_frozen_attention_core": {
+      "endpoint_specific": {
+        "event": {
+          "value": 0.032959034130000585,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 3.373020450058042,
+          "rows": 1728
+        }
+      },
+      "joint_support": {
+        "event": {
+          "value": 0.032959034130000585,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 3.3813370389645785,
+          "rows": 1647
+        }
+      }
+    },
+    "past_load_gate_trainable_full_attention_core": {
+      "endpoint_specific": {
+        "event": {
+          "value": 0.03301108956952055,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 3.041708700803171,
+          "rows": 1728
+        }
+      },
+      "joint_support": {
+        "event": {
+          "value": 0.03301108956952055,
+          "rows": 1647
+        },
+        "impulse": {
+          "value": 3.026072010100673,
+          "rows": 1647
+        }
+      }
+    }
+  },
+  "impulse_score_by_measured_event_group": {
+    "new_load_observed": {
+      "score_weight_fraction": 0.03356481481481482,
+      "rows": 58,
+      "impulse_scores": {
+        "force_persistence": {
+          "conditional_mae_ns": 13.21442853072594,
+          "aggregate_error_contribution_ns": 0.4435398465174216
+        },
+        "neurotranslate_0.0_six_updates": {
+          "conditional_mae_ns": 12.465484897793363,
+          "aggregate_error_contribution_ns": 0.4184016921713051
+        },
+        "frozen_attention_core": {
+          "conditional_mae_ns": 12.890714566340732,
+          "aggregate_error_contribution_ns": 0.43267444724986254
+        },
+        "trainable_full_attention_core": {
+          "conditional_mae_ns": 13.150081431477235,
+          "aggregate_error_contribution_ns": 0.4413800480472683
+        },
+        "physical_reference_frozen_attention_core": {
+          "conditional_mae_ns": 13.067757381035845,
+          "aggregate_error_contribution_ns": 0.43861685653939764
+        },
+        "physical_reference_trainable_full_attention_core": {
+          "conditional_mae_ns": 13.123129488424496,
+          "aggregate_error_contribution_ns": 0.4404754110698037
+        },
+        "past_load_gate_frozen_attention_core": {
+          "conditional_mae_ns": 13.110900094956454,
+          "aggregate_error_contribution_ns": 0.4400649337427514
+        },
+        "past_load_gate_trainable_full_attention_core": {
+          "conditional_mae_ns": 12.966822630265797,
+          "aggregate_error_contribution_ns": 0.4352290003214215
+        }
+      }
+    },
+    "negative_start_unloaded": {
+      "score_weight_fraction": 0.6961805555555556,
+      "rows": 1203,
+      "impulse_scores": {
+        "force_persistence": {
+          "conditional_mae_ns": 0.04537473254086617,
+          "aggregate_error_contribution_ns": 0.03158900650848496
+        },
+        "neurotranslate_0.0_six_updates": {
+          "conditional_mae_ns": 0.9568271114997184,
+          "aggregate_error_contribution_ns": 0.6661244300544915
+        },
+        "frozen_attention_core": {
+          "conditional_mae_ns": 0.3100436062002764,
+          "aggregate_error_contribution_ns": 0.2158463300109563
+        },
+        "trainable_full_attention_core": {
+          "conditional_mae_ns": 0.1712353418677076,
+          "aggregate_error_contribution_ns": 0.11921071543220617
+        },
+        "physical_reference_frozen_attention_core": {
+          "conditional_mae_ns": 0.13704223340837685,
+          "aggregate_error_contribution_ns": 0.09540613818881792
+        },
+        "physical_reference_trainable_full_attention_core": {
+          "conditional_mae_ns": 0.1330437333706398,
+          "aggregate_error_contribution_ns": 0.09262246021115722
+        },
+        "past_load_gate_frozen_attention_core": {
+          "conditional_mae_ns": 0.09762363322222657,
+          "aggregate_error_contribution_ns": 0.06796367521200149
+        },
+        "past_load_gate_trainable_full_attention_core": {
+          "conditional_mae_ns": 0.22944444921158144,
+          "aggregate_error_contribution_ns": 0.15973476412125723
+        }
+      }
+    },
+    "negative_start_loaded": {
+      "score_weight_fraction": 0.22337962962962962,
+      "rows": 386,
+      "impulse_scores": {
+        "force_persistence": {
+          "conditional_mae_ns": 12.217413255873042,
+          "aggregate_error_contribution_ns": 2.7291212481290477
+        },
+        "neurotranslate_0.0_six_updates": {
+          "conditional_mae_ns": 43.04886320289427,
+          "aggregate_error_contribution_ns": 9.616239118239113
+        },
+        "frozen_attention_core": {
+          "conditional_mae_ns": 42.80978922639714,
+          "aggregate_error_contribution_ns": 9.562834861915102
+        },
+        "trainable_full_attention_core": {
+          "conditional_mae_ns": 40.57695469541637,
+          "aggregate_error_contribution_ns": 9.06406511136037
+        },
+        "physical_reference_frozen_attention_core": {
+          "conditional_mae_ns": 12.17591581787053,
+          "aggregate_error_contribution_ns": 2.719851565797468
+        },
+        "physical_reference_trainable_full_attention_core": {
+          "conditional_mae_ns": 11.947479496142606,
+          "aggregate_error_contribution_ns": 2.668823544855929
+        },
+        "past_load_gate_frozen_attention_core": {
+          "conditional_mae_ns": 11.860161244523878,
+          "aggregate_error_contribution_ns": 2.649318426149431
+        },
+        "past_load_gate_trainable_full_attention_core": {
+          "conditional_mae_ns": 10.049170338401462,
+          "aggregate_error_contribution_ns": 2.2447799482771784
+        }
+      }
+    },
+    "event_label_unavailable": {
+      "score_weight_fraction": 0.046875,
+      "rows": 81,
+      "impulse_scores": {
+        "force_persistence": {
+          "conditional_mae_ns": 4.645239985513098,
+          "aggregate_error_contribution_ns": 0.21774562432092648
+        },
+        "neurotranslate_0.0_six_updates": {
+          "conditional_mae_ns": 12.717905357589693,
+          "aggregate_error_contribution_ns": 0.5961518136370169
+        },
+        "frozen_attention_core": {
+          "conditional_mae_ns": 12.776187520701207,
+          "aggregate_error_contribution_ns": 0.5988837900328691
+        },
+        "trainable_full_attention_core": {
+          "conditional_mae_ns": 12.326268099950418,
+          "aggregate_error_contribution_ns": 0.5777938171851759
+        },
+        "physical_reference_frozen_attention_core": {
+          "conditional_mae_ns": 4.633606278851076,
+          "aggregate_error_contribution_ns": 0.21720029432114418
+        },
+        "physical_reference_trainable_full_attention_core": {
+          "conditional_mae_ns": 4.608233238117195,
+          "aggregate_error_contribution_ns": 0.21601093303674349
+        },
+        "past_load_gate_frozen_attention_core": {
+          "conditional_mae_ns": 4.601032852348971,
+          "aggregate_error_contribution_ns": 0.215673414953858
+        },
+        "past_load_gate_trainable_full_attention_core": {
+          "conditional_mae_ns": 4.308586412444018,
+          "aggregate_error_contribution_ns": 0.20196498808331334
+        }
+      }
+    }
+  }
+}

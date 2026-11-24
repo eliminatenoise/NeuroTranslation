@@ -1,0 +1,293 @@
+{
+  "dataset": {
+    "title": "Kuopio Full-Body Dataset",
+    "version": "1.2.1",
+    "licence": "CC BY 4.0",
+    "data": "https://doi.org/10.5281/zenodo.24194741",
+    "methods": "https://doi.org/10.1038/s41597-026-08550-z"
+  },
+  "scope": "Full camera captures labeled jogging. Active jogging boundaries are unverified.",
+  "prior_use": "Marker availability checked before evaluation. Other tasks from the cohort were used in separate work. The jogging files were new to this fitted stride model.",
+  "camera_rate_limit": "The test does not isolate the effect of camera rate from people, lab, equipment or protocol.",
+  "people": 12,
+  "capture_seconds_range": [
+    85.2,
+    162.25
+  ],
+  "described_task_seconds": 60,
+  "native_camera_hz": 100,
+  "forecast_ahead_frames": 10,
+  "forecast_ahead_ms": 100,
+  "input_native_frames": 80,
+  "first_issue_offset_frames": 80,
+  "issue_spacing_frames": 10,
+  "subgroup_metrics_are_exploratory": true,
+  "minimum_people_for_error_summary": 6,
+  "paired_bootstrap": {
+    "unit": "participant",
+    "draws": 5000,
+    "seed": 20261122,
+    "confidence": 0.95,
+    "multiplicity_adjusted": false
+  },
+  "methods": {
+    "zero": "Predict zero movement",
+    "camera_speed": "Continue recent camera speed",
+    "stride": "Replay an earlier stride",
+    "learned_stride": "Replay plus learned correction"
+  },
+  "endpoints": {
+    "four_marker": {
+      "overall": {
+        "scheduled_windows": 13183,
+        "issued_windows": 13183,
+        "withheld_at_issue": 0,
+        "issued_missing_endpoint": 3485,
+        "scored_windows": 9698,
+        "scored_people": 12,
+        "people_with_scheduled_windows": 12,
+        "strict_complete_history_windows": 4325,
+        "camera_speed_zero_fallback_scored": 0,
+        "stride_zero_fallback_scored": 0,
+        "counts_only": false,
+        "person_equal_mae_mm": {
+          "zero": 26.777871877117764,
+          "camera_speed": 32.961193344025666,
+          "stride": 5.902317206622143,
+          "learned_stride": 5.953630285307908
+        },
+        "pooled_p90_abs_error_mm": {
+          "zero": 60.683779907226565,
+          "camera_speed": 74.83128051757812,
+          "stride": 14.225620524088546,
+          "learned_stride": 13.80216683080732
+        },
+        "paired_learned_minus_analytic": {
+          "mean_mm": 0.0513130786857654,
+          "bootstrap95_mm": [
+            -0.4150200315906534,
+            0.5279421592008076
+          ]
+        }
+      },
+      "by_original_gap": {
+        "complete": {
+          "scheduled_windows": 4365,
+          "issued_windows": 4365,
+          "withheld_at_issue": 0,
+          "issued_missing_endpoint": 40,
+          "scored_windows": 4325,
+          "scored_people": 12,
+          "people_with_scheduled_windows": 12,
+          "strict_complete_history_windows": 4325,
+          "camera_speed_zero_fallback_scored": 0,
+          "stride_zero_fallback_scored": 0,
+          "counts_only": false,
+          "person_equal_mae_mm": {
+            "zero": 12.43477870064931,
+            "camera_speed": 14.278983904176615,
+            "stride": 3.343837140270958,
+            "learned_stride": 4.6412853860704475
+          },
+          "pooled_p90_abs_error_mm": {
+            "zero": 58.62105102539062,
+            "camera_speed": 68.9088134765625,
+            "stride": 11.227197265625,
+            "learned_stride": 11.378743766435127
+          },
+          "paired_learned_minus_analytic": {
+            "mean_mm": 1.2974482457994891,
+            "bootstrap95_mm": [
+              0.72247707837035,
+              1.8153265457191372
+            ]
+          }
+        },
+        "front_only": {
+          "scheduled_windows": 8361,
+          "issued_windows": 8361,
+          "withheld_at_issue": 0,
+          "issued_missing_endpoint": 3072,
+          "scored_windows": 5289,
+          "scored_people": 12,
+          "people_with_scheduled_windows": 12,
+          "strict_complete_history_windows": 0,
+          "camera_speed_zero_fallback_scored": 0,
+          "stride_zero_fallback_scored": 0,
+          "counts_only": false,
+          "person_equal_mae_mm": {
+            "zero": 34.92564527319242,
+            "camera_speed": 42.8759684726212,
+            "stride": 8.016285888667309,
+            "learned_stride": 7.39799275842541
+          },
+          "pooled_p90_abs_error_mm": {
+            "zero": 61.549487304687496,
+            "camera_speed": 76.88154907226563,
+            "stride": 16.266168212890623,
+            "learned_stride": 15.55369650141766
+          },
+          "paired_learned_minus_analytic": {
+            "mean_mm": -0.6182931302418985,
+            "bootstrap95_mm": [
+              -1.1063532292277545,
+              -0.10404194208172761
+            ]
+          }
+        },
+        "rear_only": {
+          "scheduled_windows": 127,
+          "issued_windows": 127,
+          "withheld_at_issue": 0,
+          "issued_missing_endpoint": 127,
+          "scored_windows": 0,
+          "scored_people": 0,
+          "people_with_scheduled_windows": 1,
+          "strict_complete_history_windows": 0,
+          "camera_speed_zero_fallback_scored": 0,
+          "stride_zero_fallback_scored": 0,
+          "counts_only": true
+        },
+        "mixed": {
+          "scheduled_windows": 330,
+          "issued_windows": 330,
+          "withheld_at_issue": 0,
+          "issued_missing_endpoint": 246,
+          "scored_windows": 84,
+          "scored_people": 2,
+          "people_with_scheduled_windows": 2,
+          "strict_complete_history_windows": 0,
+          "camera_speed_zero_fallback_scored": 0,
+          "stride_zero_fallback_scored": 0,
+          "counts_only": true
+        }
+      }
+    },
+    "rear_pair": {
+      "overall": {
+        "scheduled_windows": 13183,
+        "issued_windows": 13183,
+        "withheld_at_issue": 0,
+        "issued_missing_endpoint": 294,
+        "scored_windows": 12889,
+        "scored_people": 12,
+        "people_with_scheduled_windows": 12,
+        "strict_complete_history_windows": 4325,
+        "camera_speed_zero_fallback_scored": 0,
+        "stride_zero_fallback_scored": 0,
+        "counts_only": false,
+        "person_equal_mae_mm": {
+          "zero": 34.956495499012995,
+          "camera_speed": 42.41867115111733,
+          "stride": 7.133869625639385,
+          "learned_stride": 6.7164888109114464
+        },
+        "pooled_p90_abs_error_mm": {
+          "zero": 70.22341308593751,
+          "camera_speed": 85.17121582031251,
+          "stride": 16.50057373046875,
+          "learned_stride": 15.416600769165148
+        },
+        "paired_learned_minus_analytic": {
+          "mean_mm": -0.4173808147279386,
+          "bootstrap95_mm": [
+            -0.8275542640920305,
+            0.043522287954446424
+          ]
+        }
+      },
+      "by_original_gap": {
+        "complete": {
+          "scheduled_windows": 4365,
+          "issued_windows": 4365,
+          "withheld_at_issue": 0,
+          "issued_missing_endpoint": 0,
+          "scored_windows": 4365,
+          "scored_people": 12,
+          "people_with_scheduled_windows": 12,
+          "strict_complete_history_windows": 4325,
+          "camera_speed_zero_fallback_scored": 0,
+          "stride_zero_fallback_scored": 0,
+          "counts_only": false,
+          "person_equal_mae_mm": {
+            "zero": 13.562251758528426,
+            "camera_speed": 15.603082895208411,
+            "stride": 3.7998001266979866,
+            "learned_stride": 5.005777879569138
+          },
+          "pooled_p90_abs_error_mm": {
+            "zero": 63.57242431640623,
+            "camera_speed": 74.3937255859375,
+            "stride": 12.328662109375,
+            "learned_stride": 12.298475004131843
+          },
+          "paired_learned_minus_analytic": {
+            "mean_mm": 1.2059777528711515,
+            "bootstrap95_mm": [
+              0.6024192430499209,
+              1.779030885952289
+            ]
+          }
+        },
+        "front_only": {
+          "scheduled_windows": 8361,
+          "issued_windows": 8361,
+          "withheld_at_issue": 0,
+          "issued_missing_endpoint": 4,
+          "scored_windows": 8357,
+          "scored_people": 12,
+          "people_with_scheduled_windows": 12,
+          "strict_complete_history_windows": 0,
+          "camera_speed_zero_fallback_scored": 0,
+          "stride_zero_fallback_scored": 0,
+          "counts_only": false,
+          "person_equal_mae_mm": {
+            "zero": 40.855896834606675,
+            "camera_speed": 49.41632838314545,
+            "stride": 8.373334663303018,
+            "learned_stride": 7.526956759852297
+          },
+          "pooled_p90_abs_error_mm": {
+            "zero": 72.78320312500001,
+            "camera_speed": 86.96573486328126,
+            "stride": 18.139868164062502,
+            "learned_stride": 16.85612688872568
+          },
+          "paired_learned_minus_analytic": {
+            "mean_mm": -0.8463779034507221,
+            "bootstrap95_mm": [
+              -1.3800477914360396,
+              -0.27007081781701897
+            ]
+          }
+        },
+        "rear_only": {
+          "scheduled_windows": 127,
+          "issued_windows": 127,
+          "withheld_at_issue": 0,
+          "issued_missing_endpoint": 127,
+          "scored_windows": 0,
+          "scored_people": 0,
+          "people_with_scheduled_windows": 1,
+          "strict_complete_history_windows": 0,
+          "camera_speed_zero_fallback_scored": 0,
+          "stride_zero_fallback_scored": 0,
+          "counts_only": true
+        },
+        "mixed": {
+          "scheduled_windows": 330,
+          "issued_windows": 330,
+          "withheld_at_issue": 0,
+          "issued_missing_endpoint": 163,
+          "scored_windows": 167,
+          "scored_people": 2,
+          "people_with_scheduled_windows": 2,
+          "strict_complete_history_windows": 0,
+          "camera_speed_zero_fallback_scored": 0,
+          "stride_zero_fallback_scored": 0,
+          "counts_only": true
+        }
+      }
+    }
+  }
+}

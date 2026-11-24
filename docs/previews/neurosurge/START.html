@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="launch.css">
+  <title>NeuroSurge local play and model setup</title>
+</head>
+<body>
+  <main class="layout">
+    <section>
+      <h1>Local play</h1>
+      <p><a href="./">Open the online movement preview</a> to run the point forecast in your browser.</p>
+      <p>For offline play, <a href="https://github.com/eliminatenoise/NeuroSurge/releases/tag/lite-take-sequences-2026-11-24">download and extract the Lite ZIP</a>. With Node.js 18 or later installed, open the launcher for your system in <code>lite</code>.</p>
+    </section>
+    <section id="local-model">
+      <h2>Local workbench and fingertip setup</h2>
+      <ol>
+        <li>Extract the Lite ZIP. <a href="https://github.com/eliminatenoise/NeuroTranslation/raw/refs/heads/main/models/neurotranslate-0.0.zip">Download and extract the NeuroTranslate 0.0 ZIP</a>. Put the extracted <code>neurotranslate-0.0</code> folder beside the extracted game folder.</li>
+        <li>Use Python 3.10 or later with NumPy installed. Open <strong>Play fingertip touch</strong> for your system in the game folder. Use <strong>Play movement mirror</strong> to start the game with the general local model.</li>
+        <li>Open the local address printed in the terminal if the browser stays closed. Choose <strong>Play Lite</strong>. For the fingertip study, press <kbd>F</kbd> and enter <strong>forecast fingertip spikes</strong>.</li>
+        <li>To open the checkpoint workbench directly, remove <code>/game/</code> from the printed address and open that shorter address.</li>
+      </ol>
+    </section>
+  </main>
+</body>
+</html>

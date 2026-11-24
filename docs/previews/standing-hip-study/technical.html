@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Recorded evaluation of camera estimates for sideways thigh movement in NeuroSurge.">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../camera-forecast-study/study.css">
+  <title>Sideways thigh tracking · NeuroSurge</title>
+</head>
+<body>
+  <a class="skip" href="#results">Skip to results</a>
+  <header class="bar frame">
+    <nav aria-label="Project"><a href="../camera-forecast-study/technical.html">Camera forecast study</a><a href="../../projects/technical.html?project=neurosurge">Project browser</a></nav>
+    <a data-edition href="./">Simple edition</a>
+  </header>
+  <main class="frame">
+    <h1>Sideways thigh tracking</h1>
+    <p class="lead">A recorded test of camera estimates against separate marker measurements during slow jumping jacks.</p>
+    <section class="comparison" aria-labelledby="results">
+      <h2 id="results">Accuracy of 3D pose estimates</h2>
+      <table>
+<caption>Mean angle error from estimated 3D joint positions, in degrees.</caption>
+<thead><tr><th scope="col">Pose model</th><th scope="col">Camera 1</th><th scope="col">Camera 3</th></tr></thead>
+<tbody>
+<tr><th scope="row">Lite</th><td>6.24</td><td>5.97</td></tr>
+<tr><th scope="row">Full</th><td>6.40</td><td>6.43</td></tr>
+<tr><th scope="row">Heavy</th><td>6.78</td><td>8.22</td></tr>
+</tbody>
+</table>
+    </section>
+    <div class="reading">
+      <section><h2>Reference and metrics</h2>
+<p>Score the 2,210 retained SUMediPose A9D3 photos across 11 people and cameras C1 and C3. The per-image reference uses the archive’s joined rows with <code>dup_num = factor</code>. Require finite positions for both shoulder and hip centres and the side-specific knee. Project the normalized hip-to-knee vector on the hip axis, apply the outward sign, take the inverse sine and clamp to [−30°, 45°].</p>
+<p>Mean absolute error and direction agreement are averaged within sides, then within people and across people. Active direction and coverage use |reference| ≥ 15°. Coverage includes unavailable estimates in its denominator. Compare methods against matched zero and 7° estimates in each view. Require a gain of ≥1°, direction agreement ≥85%, active coverage ≥10% per view and ≥25% pooled.</p>
+</section>
+<section><h2>Camera methods and model sizes</h2>
+<p>The wide single-image gate checks projected hip, shoulder and thigh geometry. The blend weights this estimate by the smaller squared horizontal facing ratio of the hips and shoulders from model depth. Conflicting signs above 5° are withheld. A gain ramps from zero at 5° to one at 15°.</p>
+<p>Pose Landmarker Lite, Full and Heavy used identical 640 px maximum image scaling, worker, visibility threshold, CPU delegate and image order. Changing the bundle changes both the 2D points and predicted spatial points. The primary table uses spatial points. The additional comparison uses shared active rows.</p>
+<p>The Heavy model reduced error from 8.61° to 5.22° on 439 larger-movement measurements it shared with Lite in Camera 3. It covered 88.3% of the larger movements in that view. Lite covered all of them. Across all supported movements, Lite gave the smallest average error of the three estimates that use 3D joint positions in both views.</p><details><summary>Matched active errors</summary><table>
+<caption>Mean angle error from estimated 3D positions on the same larger movements, in degrees.</caption>
+<thead><tr><th scope="col">Model and camera</th><th scope="col">Lite</th><th scope="col">Other model</th></tr></thead>
+<tbody>
+<tr><th scope="row">Full · Camera 1</th><td>7.69</td><td>6.28</td></tr>
+<tr><th scope="row">Full · Camera 3</th><td>8.48</td><td>7.17</td></tr>
+<tr><th scope="row">Heavy · Camera 1</th><td>7.70</td><td>6.04</td></tr>
+<tr><th scope="row">Heavy · Camera 3</th><td>8.61</td><td>5.22</td></tr>
+</tbody>
+</table></details>
+</section>
+<section><h2>Runtime comparison</h2>
+<p>All 22 recordings ran through four Chromium lanes with one renderer and one raster thread each. The measured interval starts with lane launch after local asset verification and preloading, and ends after browser closure. The matched Lite repeat reproduced every retained estimate.</p><table>
+<caption>Time to process the same 2,210 pictures across four browser lanes.</caption>
+<thead><tr><th scope="col">Pose model</th><th scope="col">Batch time</th></tr></thead>
+<tbody>
+<tr><th scope="row">Lite</th><td>25.9 s</td></tr>
+<tr><th scope="row">Full</th><td>29.5 s</td></tr>
+<tr><th scope="row">Heavy</th><td>58.7 s</td></tr>
+</tbody>
+</table>
+</section>
+<section><h2>Learned camera calibration</h2>
+<p>Compare weighted ridge and robust regression on camera geometry, projected support and model depth. Of the 18 MoVi development participants, each fold fits and scales camera-observable features on 17 and predicts the remaining one. The robust active configuration doubles the training weight for absolute angles ≥15° within the balanced view and side distribution.</p>
+<p>The fit that squares each error lowered the average angle error in the harder MoVi view from 7.73° to 4.33°. Direction agreement on larger movements rose from 61.3% to 91.4%. The fixed zero command gave 4.51° error on the same rows.</p>
+<p>The earlier SUMediPose results informed the calibration design. All fitting uses MoVi measurements. Fit on all 18 MoVi participants for a separately sealed diagnostic on the 11 SUMediPose participants. The robust active error is 6.65° against 5.97° for Lite in C3 on the same rows. No approach passes the fixed-command margin in both views. The 68-person reserve is unopened.</p>
+</section>
+<section><h2>Recordings and sources</h2>
+<ul><li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12088771/">Schreuder and colleagues, SUMediPose study</a></li><li><a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/GRRROM">SUMediPose archive and terms</a> · <a href="https://dataverse.harvard.edu/api/datasets/:persistentId/?persistentId=doi:10.7910/DVN/GRRROM">Public archive record (JSON)</a></li><li><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0253157">Ghorbani and colleagues, MoVi study</a></li><li><a href="https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker">MediaPipe pose model documentation</a></li><li><a href="results.json">Download aggregate results (JSON)</a></li></ul>
+</section>
+    </div>
+  </main>
+</body>
+</html>

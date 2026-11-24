@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How far does the forefoot move in 100 milliseconds? · NeuroTranslation</title>
+<style>
+  :root{font:17px/1.55 system-ui,sans-serif;color:#16362f;background:#f9faf4}
+  body{margin:0} main{max-width:58rem;margin:auto;padding:1.75rem 1rem 4rem}
+  h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.08;max-width:16em}
+  h2{font-size:1.35rem} p{max-width:72ch}
+  details{margin:1rem 0}
+  summary{cursor:pointer;color:inherit;font-weight:600}
+  table{border-collapse:collapse;width:100%;table-layout:fixed;margin:.9rem 0;font-variant-numeric:tabular-nums}
+  td,th{border-bottom:1px solid #c6d5cc;text-align:left;padding:.35rem .3rem;overflow-wrap:anywhere;font-weight:400}
+  th:first-child{width:77%} thead th{font-weight:700}
+  a{color:inherit;text-underline-offset:.16em} a:focus-visible,summary:focus-visible{outline:3px solid #2d6a56;outline-offset:3px}
+  @media(forced-colors:active){td,th{border-color:CanvasText}}
+</style>
+</head><body><main>
+<small>NeuroTranslation</small>
+<h1>How far does the forefoot move in 100 milliseconds?</h1>
+<p>Use 200 milliseconds of earlier recordings to predict the change in height at the front of the right foot.
+The cameras supply the earlier and later marker positions. The floor plates measure the vertical load.
+Electrodes on the legs measure muscle voltage. The four confirmation participants were kept outside model selection.</p>
+
+<section>
+  <h2>Familiar speeds · 1.5 to 3.5 km/h</h2>
+  <p><strong>5.96 mm</strong> for the strongest validation-selected model and
+  <strong>11.23 mm</strong> for Inkling.
+  Both used the same 2,186 forecasts from 3 people whose motion,
+  force and muscle recordings were available.</p>
+  <p>The attention model trained with movement alone averaged 5.44 mm on those forecasts.</p>
+  <p>Inkling's error minus the selected model's error for each person was
+  +5.06 mm, +7.97 mm, +2.79 mm. Positive values mean larger errors for Inkling.</p>
+  <details><summary>See every comparison on those forecasts</summary><table><thead><tr><th>Forecast</th><th>Error (mm)</th></tr></thead><tbody><tr><th scope='row'>Trained attention · movement</th><td>5.44</td></tr><tr><th scope='row'>Trained attention · all three signals</th><td>5.96</td></tr><tr><th scope='row'>Random features · all three signals</th><td>7.57</td></tr><tr><th scope='row'>Linear model · movement and force</th><td>9.23</td></tr><tr><th scope='row'>Linear model · movement</th><td>9.28</td></tr><tr><th scope='row'>Linear model · all three signals</th><td>9.52</td></tr><tr><th scope='row'>Frozen Inkling 2 Mini · all three signals</th><td>11.23</td></tr><tr><th scope='row'>Continue the recent vertical speed</th><td>12.22</td></tr><tr><th scope='row'>Hold the last height</th><td>15.41</td></tr></tbody></table></details>
+  <details><summary>See the movement and force forecasts on all available outcomes</summary>
+  <p>3,017 of 3,484 forecasts had two usable marker endpoints
+  from 4 people.</p><table><thead><tr><th>Forecast</th><th>Error (mm)</th></tr></thead><tbody><tr><th scope='row'>Linear model · movement and force</th><td>8.93</td></tr><tr><th scope='row'>Linear model · movement</th><td>8.95</td></tr></tbody></table></details>
+</section>
+<section>
+  <h2>Reserved speeds · 1 and 4 km/h</h2>
+  <p><strong>5.36 mm</strong> for the strongest validation-selected model and
+  <strong>10.06 mm</strong> for Inkling.
+  Both used the same 843 forecasts from 3 people whose motion,
+  force and muscle recordings were available.</p>
+  <p>The attention model trained with movement alone averaged 5.32 mm on those forecasts.</p>
+  <p>Inkling's error minus the selected model's error for each person was
+  +3.49 mm, +6.09 mm, +4.54 mm. Positive values mean larger errors for Inkling.</p>
+  <details><summary>See every comparison on those forecasts</summary><table><thead><tr><th>Forecast</th><th>Error (mm)</th></tr></thead><tbody><tr><th scope='row'>Trained attention · movement</th><td>5.32</td></tr><tr><th scope='row'>Trained attention · all three signals</th><td>5.36</td></tr><tr><th scope='row'>Random features · all three signals</th><td>8.87</td></tr><tr><th scope='row'>Frozen Inkling 2 Mini · all three signals</th><td>10.06</td></tr><tr><th scope='row'>Linear model · movement and force</th><td>11.04</td></tr><tr><th scope='row'>Linear model · movement</th><td>11.05</td></tr><tr><th scope='row'>Linear model · all three signals</th><td>11.08</td></tr><tr><th scope='row'>Continue the recent vertical speed</th><td>11.40</td></tr><tr><th scope='row'>Hold the last height</th><td>11.47</td></tr></tbody></table></details>
+  <details><summary>See the movement and force forecasts on all available outcomes</summary>
+  <p>1,209 of 1,405 forecasts had two usable marker endpoints
+  from 4 people.</p><table><thead><tr><th>Forecast</th><th>Error (mm)</th></tr></thead><tbody><tr><th scope='row'>Linear model · movement and force</th><td>11.34</td></tr><tr><th scope='row'>Linear model · movement</th><td>11.35</td></tr></tbody></table></details>
+</section>
+<h2>What went into the comparison?</h2>
+<p>The small attention model learned from the walking recordings. Inkling 2 Mini converted the same set of
+earlier measurements into numeric features using fixed weights. A fitted linear model used those features
+to estimate the later height change. The model choices were fixed using validation participants, and the
+confirmation forecasts were saved before the later marker positions were checked.</p>
+<p>The recordings come from steady overground walking at prescribed speeds. Each person has equal weight,
+with equal weight for the speeds and trials they contribute. The force plates were zeroed during a checked
+unloaded interval at the start of each trial. Target marker coordinates were compared across the two
+export formats. Missing outcomes remain visible in the counts above.</p>
+<p>These are archived recordings. The source includes gap filling, and the study addresses this task,
+this set of sensors and this population. It leaves live data arrival and other movement tasks untested.</p>
+<p><a href="results.json" download>Download the aggregate results</a></p>
+<p><small>Recordings by Luís Moreira, Joana Figueiredo, Pedro Fonseca, João P. Vilas-Boas and Cristina P. Santos.
+<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8041842/">Recording methods</a> ·
+<a href="https://doi.org/10.6084/m9.figshare.14241812.v1">C3D recordings</a> ·
+<a href="https://doi.org/10.6084/m9.figshare.13169240.v1">Text exports</a> ·
+<a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 data</a></small></p>
+</main></body></html>

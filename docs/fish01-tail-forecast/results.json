@@ -1,0 +1,453 @@
+{
+  "title": "Fish01 tail-angle forecast",
+  "recording": "Fish01, Z0, 20210818T112556",
+  "archive_version": "0.230316.1600",
+  "source_dataset_url": "https://doi.org/10.48324/dandi.000235/0.230316.1600",
+  "original_article_url": "https://doi.org/10.7554/eLife.83289",
+  "source_credit": "Martin Haesemeyer and Kaarthik Balakrishnan. Thermoregulatory Responses Forebrain. DANDI. Source recording licensed under CC BY 4.0.",
+  "source_licence_url": "https://creativecommons.org/licenses/by/4.0/",
+  "analysis": "Retrospective forecasting of the shorter signed change in one stored camera angle. Each nonempty time block has equal weight. Trends over time come from one fish previously used for fitting.",
+  "units": "radians",
+  "fit_time_seconds_start_inclusive_end_exclusive": [
+    6,
+    118
+  ],
+  "scored_block_edges_seconds": [
+    220.0,
+    260.0,
+    300.0,
+    340.0,
+    380.0,
+    420.0,
+    460.0,
+    490.0
+  ],
+  "clock_eligible_later_windows": 644,
+  "excluded_nonfinite_earlier_inputs": 5,
+  "excluded_nonfinite_endpoints_after_input_mask": 4,
+  "matched_windows": 635,
+  "requested_horizon_seconds": 0.25,
+  "recorded_scored_horizon_seconds_range": [
+    0.2500095299999998,
+    0.25399734800004126
+  ],
+  "methods": [
+    "persistence",
+    "backward_velocity",
+    "tail_only",
+    "temperature_only",
+    "tail_temperature",
+    "plus_optical_delay_0",
+    "plus_optical_delay_1",
+    "plus_optical_delay_2",
+    "plus_optical_delay_4",
+    "plus_optical_delay_12"
+  ],
+  "groups": {
+    "all": {
+      "scored_windows": 635,
+      "nonempty_time_blocks": 7,
+      "equal_block_mae_rad": {
+        "persistence": 0.11103338039189224,
+        "backward_velocity": 0.7763242508322269,
+        "tail_only": 0.12324060938473742,
+        "temperature_only": 0.11585644053316467,
+        "tail_temperature": 0.12719013503136326,
+        "plus_optical_delay_0": 0.1335265398477895,
+        "plus_optical_delay_1": 0.15818489435201633,
+        "plus_optical_delay_2": 0.16383377244596684,
+        "plus_optical_delay_4": 0.1420319758515873,
+        "plus_optical_delay_12": 0.12433088901264536
+      },
+      "equal_block_rmse_rad": {
+        "persistence": 0.16684235580419118,
+        "backward_velocity": 1.114026919397137,
+        "tail_only": 0.16826154351703268,
+        "temperature_only": 0.16825626125121632,
+        "tail_temperature": 0.17029130858038816,
+        "plus_optical_delay_0": 0.2070988187266584,
+        "plus_optical_delay_1": 0.2714152373621631,
+        "plus_optical_delay_2": 0.271093677924088,
+        "plus_optical_delay_4": 0.2406590491103627,
+        "plus_optical_delay_12": 0.1730302697761919
+      },
+      "by_time_block": {
+        "220–260": {
+          "scored_windows": 94,
+          "mae_rad": {
+            "persistence": 0.041378626643026634,
+            "backward_velocity": 0.26223981634621923,
+            "tail_only": 0.03843004228373043,
+            "temperature_only": 0.048168628647328744,
+            "tail_temperature": 0.042368905744928645,
+            "plus_optical_delay_0": 0.13485866524148057,
+            "plus_optical_delay_1": 0.2400912409310257,
+            "plus_optical_delay_2": 0.24557164253593233,
+            "plus_optical_delay_4": 0.13319881900314745,
+            "plus_optical_delay_12": 0.140356469694575
+          }
+        },
+        "260–300": {
+          "scored_windows": 96,
+          "mae_rad": {
+            "persistence": 0.05298320943554214,
+            "backward_velocity": 0.3696636732933289,
+            "tail_only": 0.04317053105560784,
+            "temperature_only": 0.06154112879305621,
+            "tail_temperature": 0.04867432265792047,
+            "plus_optical_delay_0": 0.13950214474280168,
+            "plus_optical_delay_1": 0.188916971934988,
+            "plus_optical_delay_2": 0.1933934028203257,
+            "plus_optical_delay_4": 0.11426788372763248,
+            "plus_optical_delay_12": 0.1041554272222893
+          }
+        },
+        "300–340": {
+          "scored_windows": 95,
+          "mae_rad": {
+            "persistence": 0.10813167696566367,
+            "backward_velocity": 0.7028837846549733,
+            "tail_only": 0.10044794661108494,
+            "temperature_only": 0.11001653004815783,
+            "tail_temperature": 0.09576718169230442,
+            "plus_optical_delay_0": 0.15529214860610102,
+            "plus_optical_delay_1": 0.1577615456481946,
+            "plus_optical_delay_2": 0.17476617090690294,
+            "plus_optical_delay_4": 0.2004415243776976,
+            "plus_optical_delay_12": 0.11292620754744932
+          }
+        },
+        "340–380": {
+          "scored_windows": 91,
+          "mae_rad": {
+            "persistence": 0.1468597298381414,
+            "backward_velocity": 0.8557292989923843,
+            "tail_only": 0.13579223059567647,
+            "temperature_only": 0.15120807628202126,
+            "tail_temperature": 0.14441582046995977,
+            "plus_optical_delay_0": 0.12203178122638926,
+            "plus_optical_delay_1": 0.1241023746222919,
+            "plus_optical_delay_2": 0.12706497053989213,
+            "plus_optical_delay_4": 0.13185402989377543,
+            "plus_optical_delay_12": 0.12323648140623888
+          }
+        },
+        "380–420": {
+          "scored_windows": 96,
+          "mae_rad": {
+            "persistence": 0.14024967203525848,
+            "backward_velocity": 1.264051318988859,
+            "tail_only": 0.18349675015241976,
+            "temperature_only": 0.14451090930753888,
+            "tail_temperature": 0.18642596006311155,
+            "plus_optical_delay_0": 0.13174407563778853,
+            "plus_optical_delay_1": 0.13698935096859602,
+            "plus_optical_delay_2": 0.13901791908548314,
+            "plus_optical_delay_4": 0.14446395696404127,
+            "plus_optical_delay_12": 0.13098574916203695
+          }
+        },
+        "420–460": {
+          "scored_windows": 91,
+          "mae_rad": {
+            "persistence": 0.14357182543877992,
+            "backward_velocity": 0.9152467114560294,
+            "tail_only": 0.15912893851342375,
+            "temperature_only": 0.15004375527986416,
+            "tail_temperature": 0.16576149059627662,
+            "plus_optical_delay_0": 0.11147325854619983,
+            "plus_optical_delay_1": 0.11895121138782472,
+            "plus_optical_delay_2": 0.12567058651511934,
+            "plus_optical_delay_4": 0.12648188640657027,
+            "plus_optical_delay_12": 0.11793750199756799
+          }
+        },
+        "460–490": {
+          "scored_windows": 72,
+          "mae_rad": {
+            "persistence": 0.14405892238683346,
+            "backward_velocity": 1.0644551520937948,
+            "tail_only": 0.20221782648121867,
+            "temperature_only": 0.14550605537418565,
+            "tail_temperature": 0.2069172639950413,
+            "plus_optical_delay_0": 0.13978370493376557,
+            "plus_optical_delay_1": 0.14048156497119332,
+            "plus_optical_delay_2": 0.14135171471811217,
+            "plus_optical_delay_4": 0.14351573058824674,
+            "plus_optical_delay_12": 0.14071838605836007
+          }
+        }
+      }
+    },
+    "earlier_moving": {
+      "scored_windows": 200,
+      "nonempty_time_blocks": 7,
+      "equal_block_mae_rad": {
+        "persistence": 0.1578469191613428,
+        "backward_velocity": 1.0927194624065395,
+        "tail_only": 0.1588987717751726,
+        "temperature_only": 0.16017908336584674,
+        "tail_temperature": 0.1567935985053616,
+        "plus_optical_delay_0": 0.17674395295728318,
+        "plus_optical_delay_1": 0.25073892424402505,
+        "plus_optical_delay_2": 0.27254613073311507,
+        "plus_optical_delay_4": 0.16618974659669813,
+        "plus_optical_delay_12": 0.14132597702752303
+      },
+      "equal_block_rmse_rad": {
+        "persistence": 0.20665145937209842,
+        "backward_velocity": 1.397253666380993,
+        "tail_only": 0.20001881614807782,
+        "temperature_only": 0.2083224673966286,
+        "tail_temperature": 0.19786750944840487,
+        "plus_optical_delay_0": 0.32087459030267923,
+        "plus_optical_delay_1": 0.4548545314660704,
+        "plus_optical_delay_2": 0.4907402213811102,
+        "plus_optical_delay_4": 0.277444702415473,
+        "plus_optical_delay_12": 0.1849150883796604
+      },
+      "by_time_block": {
+        "220–260": {
+          "scored_windows": 7,
+          "mae_rad": {
+            "persistence": 0.12822827157509362,
+            "backward_velocity": 0.611560229069721,
+            "tail_only": 0.11452268150182986,
+            "temperature_only": 0.1313223811902661,
+            "tail_temperature": 0.10221148120956391,
+            "plus_optical_delay_0": 0.07440611027256437,
+            "plus_optical_delay_1": 0.26002978314637276,
+            "plus_optical_delay_2": 0.3238211049966099,
+            "plus_optical_delay_4": 0.2067276226121666,
+            "plus_optical_delay_12": 0.17014482890619234
+          }
+        },
+        "260–300": {
+          "scored_windows": 6,
+          "mae_rad": {
+            "persistence": 0.09973310011396175,
+            "backward_velocity": 0.9065694236461935,
+            "tail_only": 0.09145595502891596,
+            "temperature_only": 0.09600728161946616,
+            "tail_temperature": 0.08517639157190228,
+            "plus_optical_delay_0": 0.37487972708095896,
+            "plus_optical_delay_1": 0.6812444594014768,
+            "plus_optical_delay_2": 0.7426134288762182,
+            "plus_optical_delay_4": 0.07798457517098605,
+            "plus_optical_delay_12": 0.11709215908040783
+          }
+        },
+        "300–340": {
+          "scored_windows": 28,
+          "mae_rad": {
+            "persistence": 0.19590430379528176,
+            "backward_velocity": 1.3410470767901728,
+            "tail_only": 0.15003411206979855,
+            "temperature_only": 0.19599155057758352,
+            "tail_temperature": 0.1391022139794894,
+            "plus_optical_delay_0": 0.2539268137964748,
+            "plus_optical_delay_1": 0.26866197083246157,
+            "plus_optical_delay_2": 0.2797704248162606,
+            "plus_optical_delay_4": 0.2936245236788861,
+            "plus_optical_delay_12": 0.14989226709577838
+          }
+        },
+        "340–380": {
+          "scored_windows": 39,
+          "mae_rad": {
+            "persistence": 0.18412264636423684,
+            "backward_velocity": 0.9980001898045117,
+            "tail_only": 0.16659306944401728,
+            "temperature_only": 0.19024295873638278,
+            "tail_temperature": 0.17342053257853288,
+            "plus_optical_delay_0": 0.14065859850558834,
+            "plus_optical_delay_1": 0.13894356713692246,
+            "plus_optical_delay_2": 0.14283514291856148,
+            "plus_optical_delay_4": 0.1478881097057874,
+            "plus_optical_delay_12": 0.14063096596456154
+          }
+        },
+        "380–420": {
+          "scored_windows": 43,
+          "mae_rad": {
+            "persistence": 0.1600368350665895,
+            "backward_velocity": 1.488219687379829,
+            "tail_only": 0.19606508242520493,
+            "temperature_only": 0.16234469081282663,
+            "tail_temperature": 0.1956459174718453,
+            "plus_optical_delay_0": 0.14719343769139184,
+            "plus_optical_delay_1": 0.15549194658501084,
+            "plus_optical_delay_2": 0.15286412317648204,
+            "plus_optical_delay_4": 0.15302610791331928,
+            "plus_optical_delay_12": 0.14224405578419094
+          }
+        },
+        "420–460": {
+          "scored_windows": 41,
+          "mae_rad": {
+            "persistence": 0.1873036270432937,
+            "backward_velocity": 1.0550877092474757,
+            "tail_only": 0.1798042347946261,
+            "temperature_only": 0.19131309313109524,
+            "tail_temperature": 0.18315212436144973,
+            "plus_optical_delay_0": 0.1152617976087631,
+            "plus_optical_delay_1": 0.11966089240890271,
+            "plus_optical_delay_2": 0.125621090010083,
+            "plus_optical_delay_4": 0.13245719538049638,
+            "plus_optical_delay_12": 0.12501936525383084
+          }
+        },
+        "460–490": {
+          "scored_windows": 36,
+          "mae_rad": {
+            "persistence": 0.14959965017094234,
+            "backward_velocity": 1.2485519209078726,
+            "tail_only": 0.21381626716181526,
+            "temperature_only": 0.15403162749330687,
+            "tail_temperature": 0.21884652836474758,
+            "plus_optical_delay_0": 0.13088118574524085,
+            "plus_optical_delay_1": 0.13113985019702828,
+            "plus_optical_delay_2": 0.14029760033759034,
+            "plus_optical_delay_4": 0.15162009171524496,
+            "plus_optical_delay_12": 0.14425819710769927
+          }
+        }
+      }
+    },
+    "earlier_quiet": {
+      "scored_windows": 435,
+      "nonempty_time_blocks": 7,
+      "equal_block_mae_rad": {
+        "persistence": 0.09214946779723916,
+        "backward_velocity": 0.6451903838473478,
+        "tail_only": 0.11011007185245823,
+        "temperature_only": 0.09713792014323323,
+        "tail_temperature": 0.11564984720069524,
+        "plus_optical_delay_0": 0.12313269968710805,
+        "plus_optical_delay_1": 0.14416272474411226,
+        "plus_optical_delay_2": 0.14829668423804618,
+        "plus_optical_delay_4": 0.13140116192664658,
+        "plus_optical_delay_12": 0.11715451530030872
+      },
+      "equal_block_rmse_rad": {
+        "persistence": 0.14214258736372393,
+        "backward_velocity": 0.9485959408653972,
+        "tail_only": 0.1487474034246702,
+        "temperature_only": 0.1429516990658787,
+        "tail_temperature": 0.15318380138469995,
+        "plus_optical_delay_0": 0.17650275486186645,
+        "plus_optical_delay_1": 0.2241197816445684,
+        "plus_optical_delay_2": 0.2264613200985543,
+        "plus_optical_delay_4": 0.2208099222042638,
+        "plus_optical_delay_12": 0.16664367192725807
+      },
+      "by_time_block": {
+        "220–260": {
+          "scored_windows": 87,
+          "mae_rad": {
+            "persistence": 0.034390724177228146,
+            "backward_velocity": 0.2341335762420295,
+            "tail_only": 0.03230764602480289,
+            "temperature_only": 0.041478096833529196,
+            "tail_temperature": 0.03755398587995799,
+            "plus_optical_delay_0": 0.1397226639171405,
+            "plus_optical_delay_1": 0.23848699040795177,
+            "plus_optical_delay_2": 0.23927570877472845,
+            "plus_optical_delay_4": 0.12728270836793903,
+            "plus_optical_delay_12": 0.13795970516030692
+          }
+        },
+        "260–300": {
+          "scored_windows": 90,
+          "mae_rad": {
+            "persistence": 0.049866550056980825,
+            "backward_velocity": 0.3338699566031379,
+            "tail_only": 0.03995150279072063,
+            "temperature_only": 0.05924338527129553,
+            "tail_temperature": 0.04624085139698836,
+            "plus_optical_delay_0": 0.12381030592025787,
+            "plus_optical_delay_1": 0.15609513943722197,
+            "plus_optical_delay_2": 0.1567787344165996,
+            "plus_optical_delay_4": 0.11668677096474225,
+            "plus_optical_delay_12": 0.1032929784317481
+          }
+        },
+        "300–340": {
+          "scored_windows": 67,
+          "mae_rad": {
+            "persistence": 0.07145057918612176,
+            "backward_velocity": 0.43618867749399487,
+            "tail_only": 0.07972537000147334,
+            "temperature_only": 0.0740866707224277,
+            "tail_temperature": 0.07765701894542112,
+            "plus_optical_delay_0": 0.1140716915116165,
+            "plus_optical_delay_1": 0.11141509930253074,
+            "plus_optical_delay_2": 0.13088379613881324,
+            "plus_optical_delay_4": 0.1614993754160069,
+            "plus_optical_delay_12": 0.09747770504964012
+          }
+        },
+        "340–380": {
+          "scored_windows": 52,
+          "mae_rad": {
+            "persistence": 0.11891254244356961,
+            "backward_velocity": 0.7490261308832886,
+            "tail_only": 0.11269160145942073,
+            "temperature_only": 0.12193191444125016,
+            "tail_temperature": 0.12266228638853,
+            "plus_optical_delay_0": 0.10806166826699003,
+            "plus_optical_delay_1": 0.11297148023631896,
+            "plus_optical_delay_2": 0.11523734125589004,
+            "plus_optical_delay_4": 0.11982847003476632,
+            "plus_optical_delay_12": 0.1101906179874969
+          }
+        },
+        "380–420": {
+          "scored_windows": 53,
+          "mae_rad": {
+            "persistence": 0.12419593599097103,
+            "backward_velocity": 1.0821788691622238,
+            "tail_only": 0.17329980132732997,
+            "temperature_only": 0.1300419922372111,
+            "tail_temperature": 0.17894561725979927,
+            "plus_optical_delay_0": 0.1192096875565632,
+            "plus_optical_delay_1": 0.12197781112886329,
+            "plus_optical_delay_2": 0.12778420633240864,
+            "plus_optical_delay_4": 0.1375173061938722,
+            "plus_optical_delay_12": 0.1218516513365157
+          }
+        },
+        "420–460": {
+          "scored_windows": 50,
+          "mae_rad": {
+            "persistence": 0.1077117481230785,
+            "backward_velocity": 0.8005770932670433,
+            "tail_only": 0.1421751955628379,
+            "temperature_only": 0.11620289824185472,
+            "tail_temperature": 0.15150117090883472,
+            "plus_optical_delay_0": 0.10836665651489794,
+            "plus_optical_delay_1": 0.11836927295054082,
+            "plus_optical_delay_2": 0.1257111736492492,
+            "plus_optical_delay_4": 0.12158213304795082,
+            "plus_optical_delay_12": 0.11213037412743247
+          }
+        },
+        "460–490": {
+          "scored_windows": 36,
+          "mae_rad": {
+            "persistence": 0.13851819460272433,
+            "backward_velocity": 0.8803583832797163,
+            "tail_only": 0.19061938580062215,
+            "temperature_only": 0.1369804832550643,
+            "tail_temperature": 0.19498799962533522,
+            "plus_optical_delay_0": 0.1486862241222902,
+            "plus_optical_delay_1": 0.14982327974535858,
+            "plus_optical_delay_2": 0.142405829098634,
+            "plus_optical_delay_4": 0.1354113694612486,
+            "plus_optical_delay_12": 0.1371785750090209
+          }
+        }
+      }
+    }
+  }
+}

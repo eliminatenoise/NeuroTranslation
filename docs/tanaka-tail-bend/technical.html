@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Tanaka tail-bend forecast · Technical edition</title><link rel="stylesheet" href="guides.css"></head><body><main><nav aria-label="Reading editions"><a href="index.html">Tanaka study</a><a href="technical.html" aria-current="page">Technical edition</a><a href="simple.html">Simple edition</a><a href="results.json">Score data</a></nav>
+<article><h1>Earlier camera measurements improve a tail-bend forecast</h1>
+<p>In phase 1 of the Tanaka zebrafish recording <code>main01/20230825_f1_p0</code>, five earlier camera measurements reduced mean absolute error over 1,242 later cases. Adding the logged display command gave the same result to numerical precision.</p>
+<div class="table-view" role="region" tabindex="0" aria-label="Mean absolute angle error in radians"><table>
+<thead>
+<tr>
+<th>Forecast</th>
+<th align="right">Mean absolute error (radians)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Carry forward the latest camera reading</td>
+<td align="right">0.013841</td>
+</tr>
+<tr>
+<td>Fit a correction from five earlier camera readings</td>
+<td align="right">0.011660</td>
+</tr>
+<tr>
+<td>Fit a correction from those readings and five logged command values</td>
+<td align="right">0.011660</td>
+</tr>
+</tbody></table></div>
+<h2>Measured inputs and target</h2>
+<p>The camera variable <code>tail_sum</code> is signed cumulative tail bend in radians. The display variable <code>cl2D_flow_vel</code> is a logged 64-bit integer. Conversion to 64-bit floating-point values was accepted only where conversion back returned the exact original integer. A conversion to physical display speed and the lag to on-screen changes remain unverified. For each forecast time, take the latest acceptable value at or before each of five cutoffs, 200, 150, 100, 50 and 0 ms earlier. Require the source value to be within twice its log’s median sample interval of that cutoff. The target is the first signed camera reading at least 100 ms later, within two median camera intervals of that point. Exclude windows that cross a gap above the respective log’s bound. The scored target times were 100.008–105.774 ms later on the shared software clock.</p>
+<h2>Fitting and comparison</h2>
+<p>Use the prespecified 320 ms schedule and half-open phase intervals [88.011128, 688.020253) s and [688.020253, 1288.008899) s. The two-thirds point of the shared logged interval is 888.003524 s. A fitting target must precede that split. Both oldest input times of a later case must be at or after it. Of 3,716 scheduled cases, one crossed the phase boundary and one crossed the split. Across both phases, 2,463 of 2,471 fitting candidates had complete histories and a finite target. Phase 0 supplied 1,844 of these and the early part of phase 1 supplied 619. For the two fits, estimate the later bend minus the latest angle. Centre and scale input columns using fitting means and population standard deviations. Set constant columns to zero. Minimize the mean squared residual plus 0.1 times the sum of the squared weights. Leave the intercept unpenalized.</p>
+<p>Issue and independently reopen all three forecasts on every one of the 1,243 later cases before extracting the later targets. Score all methods on the same cases after removing one with a nonfinite target. Use ordinary subtraction on the unwrapped signed angle scale, then take the absolute difference for each case. The primary contrast is the paired mean of those errors for camera plus command minus camera alone.</p>
+<h2>Scope of the comparison</h2>
+<p>All five command columns were constant during fitting, so their weights were disabled. Each lag also had one distinct command value across all 1,243 later cases. The paired difference of −7.82 × 10⁻²⁰ radians is within floating-point rounding precision. The predictive value of a varying display signal remains open. The camera fit had lower error than carrying the latest reading forward in all seven populated blocks on the 60-second grid. The block results describe phase 1 of one recording. Three static angle snapshots printed during metadata inspection, and their related columns, were excluded from fitting and scoring.</p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12916487/">Original study and camera method</a> · <a href="https://doi.org/10.5281/zenodo.17233579">Versioned recording</a></p>
+</article><footer><p>Source data by Ryosuke Tanaka and Ruben Portugues. <a href="https://doi.org/10.5281/zenodo.17233579">Zenodo dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</a> · <a href="https://www.nature.com/articles/s41586-025-09888-x">Original Nature study</a></p></footer></main></body></html>

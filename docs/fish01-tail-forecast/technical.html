@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Fish01 tail-angle forecast · Technical edition</title><link rel="stylesheet" href="guides.css"></head><body><main><nav aria-label="Reading editions"><a href="index.html">Fish01 study</a><a href="technical.html" aria-current="page">Technical edition</a><a href="simple.html">Simple edition</a><a href="results.json">Score data</a></nav>
+<article><h1>Forecasting a later tail angle in one zebrafish — Technical edition</h1>
+<p>In 635 later observations from Fish01, carrying forward the last tail angle gave the lowest overall mean absolute error, 0.111033 radians. A model fitted to earlier tail and temperature histories scored 0.127190. Adding the newest admissible fluorescence history raised the error to 0.133527. The oldest optical history scored 0.124331, improving on tail plus temperature while remaining less accurate than carrying the angle forward. All four values describe the same later observations, weighted equally by time block.</p>
+<h2>Recording and elapsed time</h2>
+<p>The recording is Fish01, plane Z0, session 20210818T112556 in <em>Thermoregulatory Responses Forebrain</em>, DANDI 000235, version 0.230316.1600. We used zero-based tail-angle column 20, the temperature-stimulus trace in °C and the first 32 exported optical regions in Z0. Their processed relative fluorescence (ΔF/F) reflects changes in the light emitted by a calcium-sensitive indicator. This is an indirect measure of activity. Neither a column’s anatomical identity nor the time of an individual neuronal spike follows from these data. <a href="https://doi.org/10.48324/dandi.000235/0.230316.1600">Versioned dataset</a> · <a href="https://doi.org/10.7554/eLife.83289">Costabile and colleagues’ recording and analysis methods</a></p>
+<p>The three time axes stay in elapsed seconds on the archive’s clocks. Optical frame <em>j</em> has nominal time <em>t</em> = <em>j</em> × 0.4194304 s (about 2.3842 Hz). The nominal temperature sampling interval is 0.05 s (20 Hz). Tail observations use the camera’s recorded timestamps, with a median interval of about 0.004 s. At each optical forecast time <em>t</em>, the reference angle is the last camera observation at or before <em>t</em>. The endpoint is the first camera observation at or after <em>t</em> + 0.250 s. Earlier tail samples and endpoint overshoot had to fall within two median camera intervals of their requested times. Across scored cases the elapsed time from <em>t</em> to the endpoint was 250.009530–253.997348 ms. The target and the prediction error both use the shorter signed angular difference around the circle.</p>
+<h2>Fixed forecasts and separation</h2>
+<p>The fits used issue times from 6 seconds up to, but excluding, 118 seconds. Of 267 clock-eligible fitting times, 257 had complete fitting inputs and a finite target. Later issue times were from 220 to just before 490 seconds. Before applying the finite-value masks, the earliest indexed later input was 95.797313 seconds after the latest clock-eligible fitting endpoint.</p>
+<p>Persistence predicts zero angular change. The velocity reference takes the wrapped difference between the latest tail angle and the angle sampled at or before 40 ms earlier, divides by their <strong>observed</strong> time difference and extrapolates to the requested time <em>t</em> + 0.250 s. Tail-only, temperature-only and combined fits separate the contributions of the two non-optical sources. The tail inputs use lags of 0, 40, 80, 160 and 320 ms, representing current orientation by its sine and cosine and earlier angles by their signed circular differences from it. Temperature inputs use lags of 0, 50, 250, 500 and 1,000 ms. Each lag takes the latest archived observation at or before the requested time, without interpolation.</p>
+<p>Five further fits add fluorescence to the same tail and temperature inputs. Each uses three consecutive frames from the same 32 regions (96 values). At zero extra delay their newest frame is <em>j</em> − 1. Extra delays of 1, 2, 4 or 12 frames move the entire three-frame history back by that many frames. Thus the oldest comparison ends at <em>j</em> − 13, about 5.45 seconds before issue on the nominal clock. For all fitted models, variable features were centred and standardised on the common fitting rows and divided by the square root of the number of retained features. Ridge regression used a fixed penalty of 0.01 and an unpenalised intercept. Lags and models were specified before the later angle endpoints were explicitly selected.</p>
+<h2>Matched scores and earlier movement</h2>
+<p>Of 644 later clock-eligible times, five had unusable earlier inputs, leaving 639. Four different times had nonfinite later tail angles. Every forecast below uses the same remaining 635 observations. The earlier-moving group comprises the 200 cases where the absolute wrapped tail change over the preceding 320 ms exceeded 0.0997331 radians, the 80th percentile from the fitting rows. The remaining 435 cases form the earlier-quiet group. Group membership uses no later movement.</p>
+<p>Mean absolute error is the mean magnitude of the wrapped angular miss, in radians. The seven elapsed-time blocks start at 220, 260, 300, 340, 380, 420 and 460 seconds and end at 490 seconds. There were 94, 96, 95, 91, 96, 91 and 72 scored observations, respectively. We averaged within blocks and then gave all seven block means equal weight, separately for the full set and each subgroup. Each group had observations in every block. The final block lasts 30 seconds. The first six last 40 seconds each.</p>
+<div class="table-view" role="region" tabindex="0" aria-label="Mean absolute angle error in radians"><table>
+<thead>
+<tr>
+<th>Forecast</th>
+<th align="right">All 635</th>
+<th align="right">Earlier moving, 200</th>
+<th align="right">Earlier quiet, 435</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Last tail angle (persistence)</td>
+<td align="right">0.111033</td>
+<td align="right">0.157847</td>
+<td align="right">0.092149</td>
+</tr>
+<tr>
+<td>Extrapolate recent tail velocity</td>
+<td align="right">0.776324</td>
+<td align="right">1.092719</td>
+<td align="right">0.645190</td>
+</tr>
+<tr>
+<td>Tail history only</td>
+<td align="right">0.123241</td>
+<td align="right">0.158899</td>
+<td align="right">0.110110</td>
+</tr>
+<tr>
+<td>Temperature history only</td>
+<td align="right">0.115856</td>
+<td align="right">0.160179</td>
+<td align="right">0.097138</td>
+</tr>
+<tr>
+<td>Tail and temperature</td>
+<td align="right">0.127190</td>
+<td align="right">0.156794</td>
+<td align="right">0.115650</td>
+</tr>
+<tr>
+<td>Tail and temperature + fluorescence, 0 extra frames</td>
+<td align="right">0.133527</td>
+<td align="right">0.176744</td>
+<td align="right">0.123133</td>
+</tr>
+<tr>
+<td>Same, 1 extra frame</td>
+<td align="right">0.158185</td>
+<td align="right">0.250739</td>
+<td align="right">0.144163</td>
+</tr>
+<tr>
+<td>Same, 2 extra frames</td>
+<td align="right">0.163834</td>
+<td align="right">0.272546</td>
+<td align="right">0.148297</td>
+</tr>
+<tr>
+<td>Same, 4 extra frames</td>
+<td align="right">0.142032</td>
+<td align="right">0.166190</td>
+<td align="right">0.131401</td>
+</tr>
+<tr>
+<td>Same, 12 extra frames</td>
+<td align="right">0.124331</td>
+<td align="right">0.141326</td>
+<td align="right">0.117155</td>
+</tr>
+</tbody></table></div>
+<p>On earlier-moving rows, the 12-extra-frame model had the smallest descriptive error, 0.141326 radians, compared with 0.156794 for tail plus temperature and 0.157847 for persistence. For earlier-quiet rows persistence was best at 0.092149. The subgroup ranking does not identify an optimal delay or justify choosing a model after scoring. The optical history that improved on the combined non-optical fit still lost to persistence overall.</p>
+<p>The later forecasts were frozen and independently checked before explicit numeric selection of their camera endpoints. Fetching or unpacking compressed chunks can bring neighbouring, unselected values into memory. Eighteen encoded chunks were shared with unselected later values, so the separation claim concerns the indexed inputs, targets and order of calculations. The subsequent independent check verified the later endpoints and reproduced the reported errors. Sensor alignment, hardware latency and the upstream processing of fluorescence, tail angle and temperature remain unverified. There was no new animal, prospective test or intervention. Repeated blocks from Fish01 cannot establish performance in other fish or a causal neural contribution.</p>
+<p>Martin Haesemeyer and Kaarthik Balakrishnan deposited the source dataset under CC BY 4.0. The original study is by Jamie D. Costabile, Kaarthik A. Balakrishnan, Sina Schwinn and Martin Haesemeyer. The forecasts and later-block scores reported here are a separate analysis of their archived recording. <a href="https://doi.org/10.48324/dandi.000235/0.230316.1600">Dataset and citation</a> · <a href="https://doi.org/10.7554/eLife.83289">Original study</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Licence</a></p>
+</article></main></body></html>

@@ -1,0 +1,63 @@
+<!doctype html><html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Does a chair forecast travel from one lab to another? · NeuroTranslation</title>
+<style>
+:root{font:17px/1.55 system-ui,sans-serif;color:#14342c;background:#f9faf4}
+body{margin:0}main{max-width:57rem;margin:auto;padding:1.8rem 1rem 4rem}h1{font-size:clamp(2rem,6vw,3.1rem);line-height:1.09;max-width:17em;margin-block:1.2rem}
+h2{font-size:1.36rem}p{max-width:74ch}a{color:inherit;text-underline-offset:.16em}
+[hidden]{display:none!important} details{margin-block:1.1rem}summary,label{font-weight:650}summary{cursor:pointer}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));gap:1rem;margin-block:1rem}
+select{display:block;width:100%;font:inherit;color:inherit;background:transparent;border:1px solid #7c9186;border-radius:.25rem;padding:.3rem}
+table{margin:.75rem 0 1.15rem;width:100%;border-collapse:collapse;table-layout:fixed;font-variant-numeric:tabular-nums}
+caption{text-align:left;padding:.25rem} th,td{border-bottom:1px solid #c1cec7;text-align:left;padding:.42rem .3rem;overflow-wrap:anywhere}
+th:first-child{width:50%}tbody th{font-weight:500}
+a:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #116454;outline-offset:3px}
+@media(forced-colors:active){th,td,select{border-color:CanvasText}}
+</style></head>
+<body><main>
+<a href="../">NeuroTranslation studies</a>
+<h1>Does a chair forecast travel from one lab to another?</h1>
+<p>A model can learn the way a movement looks in one recording room. Would it still predict how the hips rise and fall in a different room, with different instruments and people? We trained models on one or two public archives, then tested them on a third.</p>
+<p>On 1,746 forecasts from 7 people, the lowest error with full camera history was <strong>4.72 mm</strong> from a simple linear fit trained on the two archives. With camera readings alone, adding the second archive raised the attention model’s error from 5.55 to 6.96 mm.</p><p>With only two camera positions, adding floor force lowered the two-archive attention model’s error from 7.52 to <strong>6.65 mm</strong>. It helped in all 7 people. The 95% interval from resampling people ranged from 0.65 to 1.08 mm of improvement. Adding muscle activity alone left the change in error unresolved.</p>
+<section aria-labelledby="compare">
+<h2 id="compare">Compare the same forecasts</h2>
+<p>Choose a movement and the earlier camera readings each model could use. “Both directions” gives equal weight to rising and sitting down for each person. The table also shows the error from simply continuing the recent vertical speed.</p>
+<div class="controls" id="controls" hidden>
+<div><label for="movement">Movement</label><select id="movement"><option value="direction_balanced">Both directions</option><option value="rise">Rising</option><option value="sit">Sitting down</option></select></div>
+<div><label for="history">Camera history</label><select id="history"><option value="sparse">Two positions</option><option value="full">Full history</option></select></div>
+</div>
+<table data-view='direction_balanced-sparse'><caption>Both directions · two camera positions</caption><thead><tr><th scope='col'>Forecast model</th><th scope='col'>One lab (mm)</th><th scope='col'>Two labs (mm)</th></tr></thead><tbody><tr><th scope='row'>Attention · camera</th><td>7.34</td><td>7.52</td></tr><tr><th scope='row'>Attention · camera and floor force</th><td>7.06</td><td>6.65</td></tr><tr><th scope='row'>Attention · camera and muscle activity</th><td>7.39</td><td>7.62</td></tr><tr><th scope='row'>Attention · all three signals</th><td>7.17</td><td>6.76</td></tr><tr><th scope='row'>Linear fit · camera</th><td>10.66</td><td>9.77</td></tr><tr><th scope='row'>Continue the recent speed</th><td>12.21</td><td>12.21</td></tr></tbody></table><table data-view='direction_balanced-full'><caption>Both directions · full camera history</caption><thead><tr><th scope='col'>Forecast model</th><th scope='col'>One lab (mm)</th><th scope='col'>Two labs (mm)</th></tr></thead><tbody><tr><th scope='row'>Attention · camera</th><td>5.55</td><td>6.96</td></tr><tr><th scope='row'>Attention · camera and floor force</th><td>5.65</td><td>6.14</td></tr><tr><th scope='row'>Attention · camera and muscle activity</th><td>5.73</td><td>6.96</td></tr><tr><th scope='row'>Attention · all three signals</th><td>5.76</td><td>6.23</td></tr><tr><th scope='row'>Linear fit · camera</th><td>5.05</td><td>4.72</td></tr><tr><th scope='row'>Continue the recent speed</th><td>7.76</td><td>7.76</td></tr></tbody></table><table data-view='rise-sparse'><caption>Rising · two camera positions</caption><thead><tr><th scope='col'>Forecast model</th><th scope='col'>One lab (mm)</th><th scope='col'>Two labs (mm)</th></tr></thead><tbody><tr><th scope='row'>Attention · camera</th><td>7.50</td><td>7.53</td></tr><tr><th scope='row'>Attention · camera and floor force</th><td>7.02</td><td>7.15</td></tr><tr><th scope='row'>Attention · camera and muscle activity</th><td>7.51</td><td>7.47</td></tr><tr><th scope='row'>Attention · all three signals</th><td>7.17</td><td>7.18</td></tr><tr><th scope='row'>Linear fit · camera</th><td>10.84</td><td>10.42</td></tr><tr><th scope='row'>Continue the recent speed</th><td>15.35</td><td>15.35</td></tr></tbody></table><table data-view='rise-full'><caption>Rising · full camera history</caption><thead><tr><th scope='col'>Forecast model</th><th scope='col'>One lab (mm)</th><th scope='col'>Two labs (mm)</th></tr></thead><tbody><tr><th scope='row'>Attention · camera</th><td>5.52</td><td>6.00</td></tr><tr><th scope='row'>Attention · camera and floor force</th><td>5.60</td><td>5.80</td></tr><tr><th scope='row'>Attention · camera and muscle activity</th><td>5.64</td><td>6.13</td></tr><tr><th scope='row'>Attention · all three signals</th><td>5.62</td><td>5.85</td></tr><tr><th scope='row'>Linear fit · camera</th><td>4.83</td><td>4.23</td></tr><tr><th scope='row'>Continue the recent speed</th><td>9.44</td><td>9.44</td></tr></tbody></table><table data-view='sit-sparse'><caption>Sitting down · two camera positions</caption><thead><tr><th scope='col'>Forecast model</th><th scope='col'>One lab (mm)</th><th scope='col'>Two labs (mm)</th></tr></thead><tbody><tr><th scope='row'>Attention · camera</th><td>7.18</td><td>7.51</td></tr><tr><th scope='row'>Attention · camera and floor force</th><td>7.09</td><td>6.15</td></tr><tr><th scope='row'>Attention · camera and muscle activity</th><td>7.28</td><td>7.76</td></tr><tr><th scope='row'>Attention · all three signals</th><td>7.17</td><td>6.35</td></tr><tr><th scope='row'>Linear fit · camera</th><td>10.47</td><td>9.13</td></tr><tr><th scope='row'>Continue the recent speed</th><td>9.07</td><td>9.07</td></tr></tbody></table><table data-view='sit-full'><caption>Sitting down · full camera history</caption><thead><tr><th scope='col'>Forecast model</th><th scope='col'>One lab (mm)</th><th scope='col'>Two labs (mm)</th></tr></thead><tbody><tr><th scope='row'>Attention · camera</th><td>5.58</td><td>7.92</td></tr><tr><th scope='row'>Attention · camera and floor force</th><td>5.71</td><td>6.48</td></tr><tr><th scope='row'>Attention · camera and muscle activity</th><td>5.83</td><td>7.79</td></tr><tr><th scope='row'>Attention · all three signals</th><td>5.91</td><td>6.61</td></tr><tr><th scope='row'>Linear fit · camera</th><td>5.27</td><td>5.21</td></tr><tr><th scope='row'>Continue the recent speed</th><td>6.08</td><td>6.08</td></tr></tbody></table>
+<p id="state" role="status"></p>
+<p><a href="results.json" download>Download all aggregate results</a></p>
+</section>
+<section aria-labelledby="run">
+<h2 id="run">Run the forecasts offline</h2>
+<p>The download includes the linear and attention models from both training mixtures. Unzip it and open the launcher for your computer. The first example uses invented readings and needs Python and NumPy. The Linux launcher passed with networking disabled.</p>
+<p><a href="NeuroTranslate-cross-lab.zip" download>Download the offline models</a> · <a href="runtime.json">Package checks</a></p>
+</section>
+<details><summary>How the recordings were matched</summary>
+<p>We used vertical changes in the same four pelvis markers and made a 100 ms forecast. With sparse tracking, the model saw only the position at prediction time and the one from 150 milliseconds earlier. Full tracking provided four earlier positions and their recent changes. The floor plates measured force under the feet. Three shared electrode sites added muscle electrical readings with a 50 ms timing margin.</p>
+<p>Training used Gait120, with both standing and sitting, or a balanced mix of Gait120 and the Monash sit-to-walk archive. The attention models had 9,409 adjustable numbers each. Their forecasts average three training runs. The test lab contributed no recordings to fitting or model selection.</p>
+<p>Seven adults wore their usual above-knee prostheses during the external recordings. One other recording was used to check the file format. A timing mismatch in another muscle recording kept it outside this comparison. We used the archive coordinates and rejected the samples it marks as invalid. The files give no way to verify which remaining coordinates came directly from the cameras before any processing. The result applies to archived recordings. Live movements and the effects of the prostheses themselves remain outside the comparison.</p>
+</details>
+<p>Source recordings and methods. <a href="https://doi.org/10.6084/m9.figshare.27677016.v1">Gait120 by Koo and colleagues</a> · <a href="https://doi.org/10.26180/24515092.v4">Sit-to-walk by Perera and colleagues</a> · <a href="https://doi.org/10.6084/m9.figshare.26282872.v2">Stand and sit by Hunt and colleagues</a> · <a href="https://doi.org/10.1038/s41597-025-04695-5">Hunt recording methods</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+</main>
+<script>
+const movement=document.getElementById('movement');
+const history=document.getElementById('history');
+const tables=[...document.querySelectorAll('[data-view]')];
+const report=document.getElementById('state');
+function show(announce){
+  const key=movement.value+'-'+history.value;
+  for(const table of tables){
+    table.hidden=table.dataset.view!==key;
+    if(!table.hidden&&announce)report.textContent=table.caption.textContent;
+  }
+}
+document.getElementById('controls').hidden=false;
+movement.addEventListener('change',()=>show(true));
+history.addEventListener('change',()=>show(true));
+show(false);
+</script>
+</body></html>

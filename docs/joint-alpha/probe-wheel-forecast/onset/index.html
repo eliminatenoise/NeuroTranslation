@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An experimental NeuroTranslation report on whether brain activity helps predict the start of a measurable wheel turn.">
+  <title>Will the wheel start turning? · NeuroTranslation</title>
+  <style>
+    :root { color-scheme: light; font: 100%/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; color: #203538; background: #f5f6f2; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(50rem, calc(100% - 2rem)); margin: 1.7rem auto 3rem; }
+    nav { margin-bottom: 1rem; }
+    a { color: #075d52; text-underline-offset: .2em; }
+    :is(a, summary):focus-visible { outline: 3px solid #a43b12; outline-offset: 3px; }
+    header { border-top: .35rem solid #1b4647; padding-top: 1rem; }
+    h1, h2, h3 { color: #173d40; line-height: 1.12; letter-spacing: -.03em; }
+    h1 { margin: 0 0 .6rem; font-size: clamp(2.1rem, 6vw, 4rem); max-width: 23ch; }
+    h2 { margin: 0 0 .75rem; font-size: clamp(1.5rem, 4.5vw, 2rem); }
+    h3 { margin: 1rem 0 .5rem; font-size: 1.22rem; }
+    p { margin: 0 0 .8rem; max-width: 70ch; }
+    .lead { font-size: clamp(1.04rem, 2.2vw, 1.19rem); }
+    section { margin-top: 1.35rem; padding-top: 1.15rem; border-top: 1px solid #b9c7c4; }
+    .result { padding: .75rem .9rem; border-left: .27rem solid #1b6960; background: #e6eee8; }
+    figure { max-width: 34rem; margin: 1rem 0; padding: .55rem .75rem .65rem; border: 1px solid #b9c7c4; }
+    figcaption { margin: .4rem 0 0; }
+    .crossing { width: 100%; display: block; }
+    .crossing text { font: 600 17px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #173d40; }
+    table { width: 100%; border-collapse: collapse; font-size: clamp(.83rem, 2.5vw, 1rem); margin-bottom: 1rem; }
+    caption { text-align: left; font-weight: 650; margin-bottom: .35rem; }
+    th, td { border-bottom: 1px solid #b9c7c4; padding: .42rem .44rem; }
+    th { text-align: left; }
+    thead, .family { background: #e5eae4; }
+    thead th:not(:first-child), td { text-align: right; font-variant-numeric: tabular-nums; }
+    details { padding: .65rem 0; border-bottom: 1px solid #b9c7c4; }
+    details p { margin-top: .55rem; }
+    summary { cursor: pointer; color: #075d52; font-weight: 660; }
+    ul { margin: .6rem 0 1rem; padding-left: 1.1rem; }
+    li { margin: .32rem 0; }
+    .download { display: inline-block; padding: .5rem .72rem; border-radius: .2rem; background: #173d40; color: #fff; font-weight: 650; }
+    @media (max-width: 26rem) { th, td { padding-inline: .27rem; } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Parent page"><a href="../">Back to the wheel forecast</a></nav>
+    <header>
+      <h1>Will the wheel start turning?</h1>
+      <p class="lead">A mouse hears a beep and can turn a wheel with its paws to move a pattern on a screen. Fifty milliseconds after the beep, we predicted whether the wheel would turn by at least 0.006 radians, about a third of a degree, in the next 100 milliseconds. Could earlier bursts of brain activity, called spikes, help?</p>
+      <p class="result">The first test covered one mouse. We added a second test mouse after checking its archived spike times and ran the original fitted models on the new recording.</p>
+      <p><a href="#second-lab">Read the second-lab follow-up</a></p>
+    </header>
+
+    <section aria-labelledby="measurement">
+      <h2 id="measurement">A turn can count even if the wheel comes back</h2>
+      <p>At the forecast, we took the last angle on record as our starting point. Then we looked for the first new reading to reach 0.006 radians from that point in either direction. A crossing counted even if the wheel returned to its starting angle before the 100 milliseconds were up. We also measured how far and in which direction the wheel had moved at the end.</p>
+      <figure>
+        <svg class="crossing" viewBox="0 0 474 142" aria-hidden="true" focusable="false">
+          <path d="M27 104 H445" fill="none" stroke="#5c7473"/>
+          <path d="M27 56 H445" fill="none" stroke="#925026" stroke-width="2" stroke-dasharray="5 4"/>
+          <path d="M27 104 H98 L156 83 L216 42 L251 29 L311 70 L369 104 H445" fill="none" stroke="#176458" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="216" cy="42" r="6" fill="#176458" stroke="#f5f6f2" stroke-width="2"/>
+          <circle cx="445" cy="104" r="6" fill="#176458"/>
+          <text x="311" y="45">0.006 radians</text>
+          <text x="27" y="129">Forecast</text>
+          <text x="445" y="129" text-anchor="end">100 ms later</text>
+        </svg>
+        <figcaption>In this example, the wheel crosses the dashed line and returns. The crossing counts and the angle change at the end is zero.</figcaption>
+      </figure>
+      <p>Our main comparison used trials where the stored wheel angle stayed the same for the 200 milliseconds through the forecast. We checked every recorded reading, so a turn that went out and back within that window still broke the quiet history. This is quiet at the wheel sensor’s resolution. The mouse’s paws and body can still move.</p>
+      <p><a href="https://docs.internationalbrainlab.org/notebooks_external/docs_wheel_moves.html">How the International Brain Laboratory recorded wheel angles</a></p>
+    </section>
+
+    <section aria-labelledby="results">
+      <h2 id="results">Initial one-lab pilot</h2>
+      <p>There were three crossings in 116 quiet test trials. For this mouse, same-trial spikes raised the prediction error of both models on quiet trials.</p>
+      <p>We fit the models on 1,407 trials from six mice. Three other mice supplied 701 matched trials for a separate check, called validation. Their 120 quiet trials included 75 crossings. The test used 236 matched trials from one mouse in a lab outside training and validation. Across all its matched trials there were 25 crossings.</p>
+      <p>We squared the gap between the chance the model gave and what happened, using 1 for a crossing and 0 otherwise. The average is called a Brier score. Each mouse counted equally within its group. A smaller score is better.</p>
+      <table>
+        <caption>Quiet trials. Average probability error (Brier score).</caption>
+        <thead><tr><th scope="col">Forecast</th><th scope="col">Validation</th><th scope="col">Test</th></tr></thead>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Simple forecasts</th></tr>
+          <tr data-method="training_history_group_rate"><th scope="row">Training crossing rate</th><td>0.380327</td><td>0.084061</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Linear</th></tr>
+          <tr data-method="linear_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.375227</td><td>0.070526</td></tr>
+          <tr data-method="linear_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.309537</td><td>0.085158</td></tr>
+          <tr data-method="linear_wheel_cue_and_other_trial_spikes"><th scope="row">With other-trial spikes</th><td>0.410087</td><td>0.040461</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Attention</th></tr>
+          <tr data-method="attention_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.395746</td><td>0.089138</td></tr>
+          <tr data-method="attention_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.316713</td><td>0.099051</td></tr>
+          <tr data-method="attention_wheel_cue_and_other_trial_spikes"><th scope="row">With other-trial spikes</th><td>0.381113</td><td>0.074806</td></tr>
+        </tbody>
+      </table>
+      <p>Same-trial spikes lowered the average error against both comparisons for both models in the quiet validation trials. They raised it against both comparisons in the quiet test trials. Crossings were scarce in that test mouse’s quiet trials, at about 3%. The training-only chance for a quiet trial was 27%, with each training mouse given equal weight.</p>
+      <details>
+        <summary>See all matched crossing results</summary>
+        <table>
+        <caption>All matched trials. Average probability error (Brier score).</caption>
+        <thead><tr><th scope="col">Forecast</th><th scope="col">Validation</th><th scope="col">Test</th></tr></thead>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Simple forecasts</th></tr>
+          <tr data-method="training_history_group_rate"><th scope="row">Training crossing rate</th><td>0.299177</td><td>0.152182</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Linear</th></tr>
+          <tr data-method="linear_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.280145</td><td>0.140725</td></tr>
+          <tr data-method="linear_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.240568</td><td>0.158469</td></tr>
+          <tr data-method="linear_wheel_cue_and_other_trial_spikes"><th scope="row">With other-trial spikes</th><td>0.353480</td><td>0.111204</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Attention</th></tr>
+          <tr data-method="attention_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.222347</td><td>0.155048</td></tr>
+          <tr data-method="attention_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.218393</td><td>0.149750</td></tr>
+          <tr data-method="attention_wheel_cue_and_other_trial_spikes"><th scope="row">With other-trial spikes</th><td>0.282122</td><td>0.133300</td></tr>
+        </tbody>
+      </table>
+        <p>Across all matched test trials, both models had lower Brier scores with borrowed spikes than with same-trial spikes.</p>
+      </details>
+      <details>
+        <summary>See the test errors for angle change</summary>
+        <table>
+        <caption>Test trials. Average error in the final angle change, in radians.</caption>
+        <thead><tr><th scope="col">Forecast</th><th scope="col">Quiet</th><th scope="col">All matched</th></tr></thead>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Simple forecasts</th></tr>
+          <tr data-method="zero_change"><th scope="row">Zero change</th><td>0.001468</td><td>0.002899</td></tr>
+          <tr data-method="repeat_recent_change"><th scope="row">Repeat recent change</th><td>0.001468</td><td>0.003601</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Linear</th></tr>
+          <tr data-method="linear_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.004699</td><td>0.009990</td></tr>
+          <tr data-method="linear_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.006559</td><td>0.010490</td></tr>
+          <tr data-method="linear_wheel_cue_and_other_trial_spikes"><th scope="row">With other-trial spikes</th><td>0.006850</td><td>0.010368</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Attention</th></tr>
+          <tr data-method="attention_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.005631</td><td>0.010869</td></tr>
+          <tr data-method="attention_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.005732</td><td>0.008552</td></tr>
+          <tr data-method="attention_wheel_cue_and_other_trial_spikes"><th scope="row">With other-trial spikes</th><td>0.007094</td><td>0.009000</td></tr>
+        </tbody>
+      </table>
+        <p>Guessing zero change gave the smallest average angle error across all matched test trials and tied with repeating the recent change on quiet trials.</p>
+      </details>
+    </section>
+
+    <section aria-labelledby="second-lab">
+      <h2 id="second-lab">The second test lab</h2>
+      <p>The released clock files for the second mouse disagreed. We checked its spike times directly by dividing each original sample number by the recorded rate of 30,000 samples per second. All 3,169,567 retained timestamps matched exactly, including the rows just outside the selected window.</p>
+      <p>That verifies the time values in the archive. Measuring the physical timing between the probe and wheel would require a separate test.</p>
+      <p>We kept the original fitted models. The second mouse supplied 234 matched trials with 78 crossings, including 129 quiet trials with 11 crossings. All 129 quiet histories carried an earlier wheel angle because the sensor logged no new reading in that window.</p>
+
+      <h3>Two labs, with each mouse counted equally</h3>
+      <p>Together the two mice supplied 470 matched trials with 103 crossings. The main comparison uses 245 quiet trials with 14 crossings. We scored each mouse first, then averaged the two scores so that each mouse counted equally.</p>
+      <table>
+        <caption>Quiet trials. Brier score.</caption>
+        <thead><tr><th scope="col">Forecast</th><th scope="col">Second lab</th><th scope="col">Both labs</th></tr></thead>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Simple forecasts</th></tr>
+          <tr data-method="training_history_group_rate"><th scope="row">Training crossing rate</th><td>0.111569</td><td>0.097815</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Linear</th></tr>
+          <tr data-method="linear_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.107862</td><td>0.089194</td></tr>
+          <tr data-method="linear_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.110380</td><td>0.097769</td></tr>
+          <tr data-method="linear_wheel_cue_and_other_trial_spikes"><th scope="row">With other-trial spikes</th><td>0.119809</td><td>0.080135</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Attention</th></tr>
+          <tr data-method="attention_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.116671</td><td>0.102904</td></tr>
+          <tr data-method="attention_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.122552</td><td>0.110802</td></tr>
+          <tr data-method="attention_wheel_cue_and_other_trial_spikes"><th scope="row">With other-trial spikes</th><td>0.126673</td><td>0.100740</td></tr>
+        </tbody>
+      </table>
+      <p>On quiet trials, both models scored worse with same-trial spikes than with wheel and cue alone in each lab. Borrowed spikes scored lower than same-trial spikes on average. At the second lab alone, same-trial spikes scored lower than borrowed spikes in both models.</p>
+      <details>
+        <summary>See the two-lab scores for all matched trials</summary>
+        <table>
+        <caption>All matched trials. Brier score.</caption>
+        <thead><tr><th scope="col">Forecast</th><th scope="col">Second lab</th><th scope="col">Both labs</th></tr></thead>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Simple forecasts</th></tr>
+          <tr data-method="training_history_group_rate"><th scope="row">Training crossing rate</th><td>0.181912</td><td>0.167047</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Linear</th></tr>
+          <tr data-method="linear_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.156794</td><td>0.148760</td></tr>
+          <tr data-method="linear_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.162597</td><td>0.160533</td></tr>
+          <tr data-method="linear_wheel_cue_and_other_trial_spikes"><th scope="row">With other-trial spikes</th><td>0.174484</td><td>0.142844</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Attention</th></tr>
+          <tr data-method="attention_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.109736</td><td>0.132392</td></tr>
+          <tr data-method="attention_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.114131</td><td>0.131941</td></tr>
+          <tr data-method="attention_wheel_cue_and_other_trial_spikes"><th scope="row">With other-trial spikes</th><td>0.126616</td><td>0.129958</td></tr>
+        </tbody>
+      </table>
+        <p>Across all trials, adding same-trial spikes gave attention a slightly lower error than wheel and cue. Borrowed spikes gave a lower average error for both models.</p>
+      </details>
+      <details>
+        <summary>See the two-lab errors for angle change</summary>
+        <table>
+        <caption>Both labs. Average error in final angle change, in radians.</caption>
+        <thead><tr><th scope="col">Forecast</th><th scope="col">Quiet</th><th scope="col">All matched</th></tr></thead>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Simple forecasts</th></tr>
+          <tr data-method="zero_change"><th scope="row">Zero change</th><td>0.003986</td><td>0.034679</td></tr>
+          <tr data-method="repeat_recent_change"><th scope="row">Repeat recent change</th><td>0.003986</td><td>0.019772</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Linear</th></tr>
+          <tr data-method="linear_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.007589</td><td>0.018365</td></tr>
+          <tr data-method="linear_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.009435</td><td>0.019046</td></tr>
+          <tr data-method="linear_wheel_cue_and_other_trial_spikes"><th scope="row">With other-trial spikes</th><td>0.009528</td><td>0.019415</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="family"><th scope="rowgroup" colspan="3">Attention</th></tr>
+          <tr data-method="attention_wheel_and_cue"><th scope="row">Wheel and cue</th><td>0.008180</td><td>0.031378</td></tr>
+          <tr data-method="attention_wheel_cue_and_aligned_spikes"><th scope="row">With same-trial spikes</th><td>0.008049</td><td>0.030299</td></tr>
+          <tr data-method="attention_wheel_cue_and_other_trial_spikes"><th scope="row">With other-trial spikes</th><td>0.010338</td><td>0.031147</td></tr>
+        </tbody>
+      </table>
+        <p>On quiet trials, two simple forecasts tied for the smallest angle error. Across all matched trials, the linear model with wheel and cue had the smallest angle error.</p>
+      </details>
+    </section>
+
+    <section aria-labelledby="methods">
+      <h2 id="methods">Give the model the same wheel and a different spike history</h2>
+      <p>Every model saw the recent wheel readings and the pattern’s side and visibility. A linear model combines inputs with fixed weights. The attention model can give different time blocks different weight. Each model gave a chance of crossing and a guess for the change in angle at the end.</p>
+      <p>We ran each model with wheel and screen alone, with spikes from the same trial, and with spikes borrowed from another trial of the same mouse and session. The borrowed trial had the same kind of screen pattern, the same quiet or moving history, and a similar time since the last wheel reading. All forecasts kept the wheel and screen inputs from the trial being predicted. The spike history covered 200 milliseconds and stopped 20 milliseconds before the forecast on the stored clocks.</p>
+      <p>A simple chance estimate used only how often crossings occurred in the training mice. Two simple wheel-angle guesses assumed either zero change or a repeat of the previous 100 milliseconds of change.</p>
+      <p>All 116 quiet test forecasts used an earlier angle because the wheel sensor logged no new reading in their 200-millisecond history. One crossing in the full test set returned to its starting angle by the end.</p>
+      <p>We saved the validation and test forecasts before scoring them with the later wheel readings. Initially, only one of the three planned test labs could be scored.</p>
+      <ul>
+        <li>Revised wheel positions lacked a source-verified timestamp partner.</li>
+        <li>Published probe clock maps disagreed, leaving the exact spike clock unresolved.</li>
+      </ul>
+      <p>The follow-up resolved the probe clock hold for the second lab. The remaining lab still lacks verified timestamps for its revised wheel angles.</p>
+    </section>
+
+    <section aria-labelledby="sources">
+      <h2 id="sources">Data and earlier work</h2>
+      <ul>
+        <li><a href="https://doi.org/10.1038/s41586-025-09235-0">International Brain Laboratory study</a> and <a href="https://registry.opendata.aws/ibl-brain-wide-map/">open Brain Wide Map data (CC BY 4.0)</a></li>
+        <li><a href="../early/">Earlier experiment on predicting the angle of a quiet wheel</a></li>
+      </ul>
+      <p><a class="download" download="onset-wheel-results.json" href="results.json">Download the initial and follow-up results (JSON)</a></p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Twenty milliseconds of a grasp · NeuroTranslation</title>
+  <style>
+    :root { font: 100%/1.62 system-ui, sans-serif; color: #203538; background: #f5f6f2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(45rem, calc(100% - 2rem)); margin: 2rem auto 4rem; }
+    header { border-top: .35rem solid #1b4647; }
+    h1, h2 { line-height: 1.15; letter-spacing: -.035em; }
+    h1 { font-size: clamp(2.3rem, 7vw, 4rem); margin: .35em 0; }
+    a { color: #075d52; text-underline-offset: .2em; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #c44c14; outline-offset: 3px; }
+    section { margin-top: 2rem; border-top: 1px solid #b9c7c4; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    caption, th, td { text-align: left; }
+    caption { font-weight: 650; margin-bottom: .35rem; }
+    th, td { padding: .36rem .4rem; border-bottom: 1px solid #bdc9c6; vertical-align: top; }
+    details { border-bottom: 1px solid #bdc9c6; }
+    details table { margin-bottom: .8rem; }
+    summary { padding: .55em .2em; cursor: pointer; font-weight: 650; }
+    @media (forced-colors: active) {
+      a:focus-visible, summary:focus-visible { outline-color: Highlight; }
+      th, td, details { border-color: CanvasText; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p><a href="../">NeuroTranslate 0.0 joint alpha</a></p>
+    <h1>Twenty milliseconds of a grasp</h1>
+    <p>Picture a handle that slides as you pull it. One sensor follows the handle's travel. Five others respond to contact and load. In one macaque recording, electrodes also picked up short electrical pulses called spikes. Could those pulses tell the model what the sensors would read 20 milliseconds later?</p>
+  </header>
+  <section>
+    <h2>The moving object's sensor</h2>
+    <p>Adding spikes grouped across units reduced the error by 3.68 counts in the first comparison against sensors, time and task cues. It increased error by 0.16 counts in the second. A model without spikes had the lowest error in both fits. Swapping in an earlier trial’s spikes made both grouped-spike forecasts worse.</p>
+    <table data-channel="5"><caption>Object travel forecast error in sensor counts</caption>
+<thead><tr><th scope="col">Forecast</th><th scope="col">First fit</th><th scope="col">Second fit</th></tr></thead><tbody>
+<tr data-method="persist"><th scope="row">No change</th><td>158.74</td><td>158.74</td></tr>
+<tr data-method="velocity"><th scope="row">Continue at recent velocity</th><td>113.60</td><td>113.60</td></tr>
+<tr data-method="linear"><th scope="row">Linear model, sensor readings</th><td>120.32</td><td>120.32</td></tr>
+<tr data-method="sensor"><th scope="row">Attention model, sensor readings</th><td>109.04</td><td>112.41</td></tr>
+<tr data-method="clock"><th scope="row">Sensors, time and task cues</th><td>113.46</td><td>109.21</td></tr>
+<tr data-method="identified"><th scope="row">Also add spikes from each unit</th><td>130.14</td><td>127.54</td></tr>
+<tr data-method="identified_substituted"><th scope="row">Replace those spikes with an earlier trial&#x27;s</th><td>145.68</td><td>140.10</td></tr>
+<tr data-method="pooled"><th scope="row">Also add spikes grouped across units</th><td>109.78</td><td>109.37</td></tr>
+<tr data-method="pooled_substituted"><th scope="row">Replace the grouped spikes with an earlier trial&#x27;s</th><td>116.34</td><td>115.94</td></tr>
+</tbody></table>
+    <p>Each error is in counts. A count is one step in the recording device's digital reading. The archive does not establish how to convert this sensor's counts to millimetres of travel.</p>
+  </section>
+  <section>
+    <h2>Compare all six sensors</h2>
+    <p>Open any sensor to see its two fits. Lower error is better. The readings from the contact and pull sensors use their recorded scales, with no verified conversion to newtons.</p>
+    <details><summary>Top grip sensor</summary><table data-channel="0"><caption>Top grip forecast error in sensor counts</caption>
+<thead><tr><th scope="col">Forecast</th><th scope="col">First fit</th><th scope="col">Second fit</th></tr></thead><tbody>
+<tr data-method="persist"><th scope="row">No change</th><td>39.06</td><td>39.06</td></tr>
+<tr data-method="velocity"><th scope="row">Continue at recent velocity</th><td>46.11</td><td>46.11</td></tr>
+<tr data-method="linear"><th scope="row">Linear model, sensor readings</th><td>49.83</td><td>49.83</td></tr>
+<tr data-method="sensor"><th scope="row">Attention model, sensor readings</th><td>44.14</td><td>42.23</td></tr>
+<tr data-method="clock"><th scope="row">Sensors, time and task cues</th><td>43.55</td><td>43.02</td></tr>
+<tr data-method="identified"><th scope="row">Also add spikes from each unit</th><td>45.00</td><td>44.16</td></tr>
+<tr data-method="identified_substituted"><th scope="row">Replace those spikes with an earlier trial&#x27;s</th><td>50.05</td><td>49.19</td></tr>
+<tr data-method="pooled"><th scope="row">Also add spikes grouped across units</th><td>43.20</td><td>41.53</td></tr>
+<tr data-method="pooled_substituted"><th scope="row">Replace the grouped spikes with an earlier trial&#x27;s</th><td>43.66</td><td>42.74</td></tr>
+</tbody></table></details>
+<details><summary>Left grip sensor</summary><table data-channel="1"><caption>Left grip forecast error in sensor counts</caption>
+<thead><tr><th scope="col">Forecast</th><th scope="col">First fit</th><th scope="col">Second fit</th></tr></thead><tbody>
+<tr data-method="persist"><th scope="row">No change</th><td>19.33</td><td>19.33</td></tr>
+<tr data-method="velocity"><th scope="row">Continue at recent velocity</th><td>28.95</td><td>28.95</td></tr>
+<tr data-method="linear"><th scope="row">Linear model, sensor readings</th><td>24.47</td><td>24.47</td></tr>
+<tr data-method="sensor"><th scope="row">Attention model, sensor readings</th><td>20.90</td><td>19.75</td></tr>
+<tr data-method="clock"><th scope="row">Sensors, time and task cues</th><td>20.42</td><td>19.60</td></tr>
+<tr data-method="identified"><th scope="row">Also add spikes from each unit</th><td>19.48</td><td>19.29</td></tr>
+<tr data-method="identified_substituted"><th scope="row">Replace those spikes with an earlier trial&#x27;s</th><td>21.55</td><td>21.14</td></tr>
+<tr data-method="pooled"><th scope="row">Also add spikes grouped across units</th><td>20.04</td><td>19.56</td></tr>
+<tr data-method="pooled_substituted"><th scope="row">Replace the grouped spikes with an earlier trial&#x27;s</th><td>20.55</td><td>20.00</td></tr>
+</tbody></table></details>
+<details><summary>Bottom grip sensor</summary><table data-channel="2"><caption>Bottom grip forecast error in sensor counts</caption>
+<thead><tr><th scope="col">Forecast</th><th scope="col">First fit</th><th scope="col">Second fit</th></tr></thead><tbody>
+<tr data-method="persist"><th scope="row">No change</th><td>28.02</td><td>28.02</td></tr>
+<tr data-method="velocity"><th scope="row">Continue at recent velocity</th><td>34.80</td><td>34.80</td></tr>
+<tr data-method="linear"><th scope="row">Linear model, sensor readings</th><td>32.61</td><td>32.61</td></tr>
+<tr data-method="sensor"><th scope="row">Attention model, sensor readings</th><td>27.08</td><td>27.83</td></tr>
+<tr data-method="clock"><th scope="row">Sensors, time and task cues</th><td>27.46</td><td>28.97</td></tr>
+<tr data-method="identified"><th scope="row">Also add spikes from each unit</th><td>28.42</td><td>28.48</td></tr>
+<tr data-method="identified_substituted"><th scope="row">Replace those spikes with an earlier trial&#x27;s</th><td>30.51</td><td>30.39</td></tr>
+<tr data-method="pooled"><th scope="row">Also add spikes grouped across units</th><td>26.99</td><td>28.96</td></tr>
+<tr data-method="pooled_substituted"><th scope="row">Replace the grouped spikes with an earlier trial&#x27;s</th><td>27.08</td><td>29.35</td></tr>
+</tbody></table></details>
+<details><summary>Right grip sensor</summary><table data-channel="3"><caption>Right grip forecast error in sensor counts</caption>
+<thead><tr><th scope="col">Forecast</th><th scope="col">First fit</th><th scope="col">Second fit</th></tr></thead><tbody>
+<tr data-method="persist"><th scope="row">No change</th><td>23.86</td><td>23.86</td></tr>
+<tr data-method="velocity"><th scope="row">Continue at recent velocity</th><td>25.40</td><td>25.40</td></tr>
+<tr data-method="linear"><th scope="row">Linear model, sensor readings</th><td>28.30</td><td>28.30</td></tr>
+<tr data-method="sensor"><th scope="row">Attention model, sensor readings</th><td>28.12</td><td>26.19</td></tr>
+<tr data-method="clock"><th scope="row">Sensors, time and task cues</th><td>26.88</td><td>25.06</td></tr>
+<tr data-method="identified"><th scope="row">Also add spikes from each unit</th><td>28.46</td><td>27.38</td></tr>
+<tr data-method="identified_substituted"><th scope="row">Replace those spikes with an earlier trial&#x27;s</th><td>33.91</td><td>31.82</td></tr>
+<tr data-method="pooled"><th scope="row">Also add spikes grouped across units</th><td>27.63</td><td>26.21</td></tr>
+<tr data-method="pooled_substituted"><th scope="row">Replace the grouped spikes with an earlier trial&#x27;s</th><td>28.16</td><td>26.72</td></tr>
+</tbody></table></details>
+<details><summary>Pull sensor</summary><table data-channel="4"><caption>Pull forecast error in sensor counts</caption>
+<thead><tr><th scope="col">Forecast</th><th scope="col">First fit</th><th scope="col">Second fit</th></tr></thead><tbody>
+<tr data-method="persist"><th scope="row">No change</th><td>28.89</td><td>28.89</td></tr>
+<tr data-method="velocity"><th scope="row">Continue at recent velocity</th><td>45.71</td><td>45.71</td></tr>
+<tr data-method="linear"><th scope="row">Linear model, sensor readings</th><td>33.69</td><td>33.69</td></tr>
+<tr data-method="sensor"><th scope="row">Attention model, sensor readings</th><td>32.44</td><td>33.01</td></tr>
+<tr data-method="clock"><th scope="row">Sensors, time and task cues</th><td>30.56</td><td>31.57</td></tr>
+<tr data-method="identified"><th scope="row">Also add spikes from each unit</th><td>31.64</td><td>32.56</td></tr>
+<tr data-method="identified_substituted"><th scope="row">Replace those spikes with an earlier trial&#x27;s</th><td>33.81</td><td>34.19</td></tr>
+<tr data-method="pooled"><th scope="row">Also add spikes grouped across units</th><td>30.76</td><td>30.98</td></tr>
+<tr data-method="pooled_substituted"><th scope="row">Replace the grouped spikes with an earlier trial&#x27;s</th><td>31.08</td><td>31.38</td></tr>
+</tbody></table></details>
+<details><summary>Object travel sensor</summary><table data-channel="5"><caption>Object travel forecast error in sensor counts</caption>
+<thead><tr><th scope="col">Forecast</th><th scope="col">First fit</th><th scope="col">Second fit</th></tr></thead><tbody>
+<tr data-method="persist"><th scope="row">No change</th><td>158.74</td><td>158.74</td></tr>
+<tr data-method="velocity"><th scope="row">Continue at recent velocity</th><td>113.60</td><td>113.60</td></tr>
+<tr data-method="linear"><th scope="row">Linear model, sensor readings</th><td>120.32</td><td>120.32</td></tr>
+<tr data-method="sensor"><th scope="row">Attention model, sensor readings</th><td>109.04</td><td>112.41</td></tr>
+<tr data-method="clock"><th scope="row">Sensors, time and task cues</th><td>113.46</td><td>109.21</td></tr>
+<tr data-method="identified"><th scope="row">Also add spikes from each unit</th><td>130.14</td><td>127.54</td></tr>
+<tr data-method="identified_substituted"><th scope="row">Replace those spikes with an earlier trial&#x27;s</th><td>145.68</td><td>140.10</td></tr>
+<tr data-method="pooled"><th scope="row">Also add spikes grouped across units</th><td>109.78</td><td>109.37</td></tr>
+<tr data-method="pooled_substituted"><th scope="row">Replace the grouped spikes with an earlier trial&#x27;s</th><td>116.34</td><td>115.94</td></tr>
+</tbody></table></details>
+  </section>
+  <section>
+    <h2>How the comparison worked</h2>
+    <p>The input stops before the forecast. We gave each model the preceding 100 milliseconds and used the same time window for every comparison. The attention models share the existing NeuroTranslate Transformer weights. New input and output layers learn how to read this recording. One fit sees the sensor history. A second sees the same sensors, the time since the go signal and the two task cues that told the animal how to grip and how much resistance to expect.</p>
+    <p>In two more fits, we added spike counts. One version keeps the identified units separate. The other looks at the spike counts as a group. We then replaced those counts with the record from an earlier trial with the same cues and timing. That leaves the sensors and cues as they were.</p>
+    <p>The comparison scored 2,937 windows across 40 original trials. Each original trial carries the same weight. Both fits were checked on the same later trials in the same recording. The authors identified spike units offline, which leaves live decoding untested. A second animal was reserved from this experiment.</p>
+    <p><a href="results.json">Download the errors and trial-resampling intervals</a></p>
+    <p><a href="joint/">Compare training both forecasts together</a>. The next test uses earlier fit trials to compare one shared sensor-and-spike model with each task trained by itself.</p>
+    <p>Recording by Thomas Brochier and colleagues, at INT and INM-6. <a href="https://doi.gin.g-node.org/10.12751/g-node.f83565/">Recording and attribution</a> · <a href="https://doi.org/10.1038/sdata.2018.55">Study methods</a></p>
+  </section>
+</main>
+</body>
+</html>

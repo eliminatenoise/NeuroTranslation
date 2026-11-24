@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How training on different lifts and adding muscle readings changed a 100 ms wrist forecast.">
+  <title>Where does the wrist go in a turning lift? · NeuroTranslation</title>
+  <style>
+    :root { font: 100%/1.6 system-ui, sans-serif; color: #16372f; background: #f8faf6; }
+    main { max-width: 48rem; margin: 2.5rem auto 5rem; padding: 0 1rem; }
+    header { border-top: .35rem solid #23574a; }
+    h1, h2 { letter-spacing: -.025em; line-height: 1.16; }
+    h1 { font-size: clamp(2.2rem, 7vw, 4rem); margin: .35em 0; }
+    h2 { margin-top: .9em; }
+    section { margin-top: 2rem; border-top: 1px solid #b9cbc3; }
+    nav a, a { color: #07644d; text-underline-offset: .18em; overflow-wrap: anywhere; }
+    :focus-visible { outline: 3px solid #9c4b14; outline-offset: .2rem; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    caption { text-align: left; font-weight: 650; margin-bottom: .45rem; }
+    th, td { border-bottom: 1px solid #b9cbc3; padding: .55rem .38rem; text-align: left; vertical-align: top; }
+    th:first-child { width: 42%; }
+    td { white-space: nowrap; }
+    details { margin: .8rem 0; border: 1px solid #b9cbc3; border-radius: .3rem; }
+    details[open] { padding-bottom: .45rem; }
+    details table { width: calc(100% - 1.25rem); margin: 0 .625rem; }
+    summary { cursor: pointer; padding: .65rem; font-weight: 650; }
+    @media (max-width: 400px) {
+      table { font-size: .84rem; }
+      th, td { padding-inline: .25rem; }
+      th:first-child { width: 37%; }
+    }
+    @media (forced-colors: active) {
+      :focus-visible { outline-color: Highlight; }
+      table, th, td, details, section { border-color: CanvasText; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <nav aria-label="Studies"><p><a href="../">NeuroTranslation studies</a> · <a href="../kuopio-lift/">Straight-lift study</a></p></nav>
+    <h1>Where does the wrist go in a turning lift?</h1>
+    <p>Lift a box straight up. Then lift it while turning. Your right wrist has a different path to follow. We tested whether seeing some of each lift during training helped a model forecast that wrist’s next move.</p>
+  </header>
+  <section aria-labelledby="planned">
+    <h2 id="planned">Two changes, two higher errors</h2>
+    <p>Using both lifts raised the error of the wrist-only linear model. Adding current muscle readings raised the turning-lift attention model’s error when it already had wrist and floor-force readings. In each comparison, error rose for all six people.</p>
+    <table>
+      <caption>Mean distance from the recorded wrist position, in millimetres</caption>
+      <thead><tr><th scope="col">Change</th><th scope="col">Before</th><th scope="col">After</th><th scope="col">Error added</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Use both lifts instead of turning lifts alone</th><td>12.52</td><td>12.69</td><td>+0.17</td></tr>
+<tr><th scope="row">Add muscle readings to wrists and floor forces</th><td>14.07</td><td>16.82</td><td>+2.74</td></tr>
+      </tbody>
+    </table>
+    <p>We chose both comparisons before opening the turning recordings used to check the forecasts. A sign test counts how many people’s errors rose or fell. For each comparison, the exact two-sided test gave <em>p</em> = 0.03125, with no adjustment for the two tests. Each person carried the same weight. The error changes use the unrounded scores.</p>
+  </section>
+  <section aria-labelledby="recorded">
+    <h2 id="recorded">The same number of examples</h2>
+    <p>Cameras tracked two marks on each wrist as people lifted a 12 kg box. Plates underfoot measured external forces. Electrodes recorded small changes in voltage from six shoulder and upper-back channels. From 25 readings of both wrists over 240 ms, each model forecast where the right wrist would be 100 ms later. The current force and muscle histories use complete recording blocks two camera frames earlier than their matching wrist positions.</p>
+    <p>All three training groups used 1,986 examples from the same seven people. One group used straight lifts, one used turning lifts and the third took half from each. Each person contributed the same number of examples to each group. That lets the comparison ask what changes when the mix changes, with the total number held fixed.</p>
+    <p>The six people used to check the forecasts had also supplied the earlier straight-lift test. These are new recordings of a different movement, from the same held-out people. We fixed the fits and saved the predictions before reading later wrist positions. Of 3,278 planned windows, 469 lacked a usable input history and one lacked a later wrist position. Every forecast was scored on the same 2,808 windows.</p>
+  </section>
+  <section aria-labelledby="scores">
+    <h2 id="scores">Open all the forecasts</h2>
+    <p>A linear model adds up weighted readings. An attention model can weigh different moments in the history differently for each prediction. The smallest error across all combinations was <strong>12.13 mm</strong>, from the attention model trained on both lifts with wrist positions alone. That was a separate comparison from the planned wrist-only linear test.</p>
+    <p>Each column shows what the model trained on. Each row shows what it could see while forecasting the turning lift. Lower error is closer to the later wrist position.</p>
+    <details><summary>Linear model errors (mm)</summary><table aria-label="Linear model (ridge) results by training task"><thead><tr><th scope="col">Forecast inputs</th><th scope="col">Straight lifts</th><th scope="col">Turning lifts</th><th scope="col">Both lifts</th></tr></thead><tbody><tr><th scope="row">Wrists</th><td data-score="lift_only/ridge/motion">17.42</td><td data-score="rotation_only/ridge/motion">12.52</td><td data-score="mixed_tasks/ridge/motion">12.69</td></tr><tr><th scope="row">Wrists and muscle readings</th><td data-score="lift_only/ridge/motion_and_emg">18.21</td><td data-score="rotation_only/ridge/motion_and_emg">15.79</td><td data-score="mixed_tasks/ridge/motion_and_emg">14.85</td></tr><tr><th scope="row">Wrists and floor forces</th><td data-score="lift_only/ridge/motion_and_ground_force">18.23</td><td data-score="rotation_only/ridge/motion_and_ground_force">13.67</td><td data-score="mixed_tasks/ridge/motion_and_ground_force">13.67</td></tr><tr><th scope="row">Wrists, floor forces and muscle readings</th><td data-score="lift_only/ridge/all_current">19.04</td><td data-score="rotation_only/ridge/all_current">15.59</td><td data-score="mixed_tasks/ridge/all_current">15.04</td></tr><tr><th scope="row">Wrists and floor forces, with muscle readings from one second earlier</th><td data-score="lift_only/ridge/earlier_emg">19.32</td><td data-score="rotation_only/ridge/earlier_emg">16.37</td><td data-score="mixed_tasks/ridge/earlier_emg">15.41</td></tr><tr><th scope="row">Wrists, with floor forces and muscle readings from one second earlier</th><td data-score="lift_only/ridge/earlier_emg_and_ground_force">19.18</td><td data-score="rotation_only/ridge/earlier_emg_and_ground_force">16.27</td><td data-score="mixed_tasks/ridge/earlier_emg_and_ground_force">15.48</td></tr></tbody></table></details>
+    <details><summary>Attention model errors (mm)</summary><table aria-label="Attention model results by training task"><thead><tr><th scope="col">Forecast inputs</th><th scope="col">Straight lifts</th><th scope="col">Turning lifts</th><th scope="col">Both lifts</th></tr></thead><tbody><tr><th scope="row">Wrists</th><td data-score="lift_only/attention/motion">21.40</td><td data-score="rotation_only/attention/motion">12.80</td><td data-score="mixed_tasks/attention/motion">12.13</td></tr><tr><th scope="row">Wrists and muscle readings</th><td data-score="lift_only/attention/motion_and_emg">23.81</td><td data-score="rotation_only/attention/motion_and_emg">15.25</td><td data-score="mixed_tasks/attention/motion_and_emg">14.47</td></tr><tr><th scope="row">Wrists and floor forces</th><td data-score="lift_only/attention/motion_and_ground_force">23.50</td><td data-score="rotation_only/attention/motion_and_ground_force">14.07</td><td data-score="mixed_tasks/attention/motion_and_ground_force">15.14</td></tr><tr><th scope="row">Wrists, floor forces and muscle readings</th><td data-score="lift_only/attention/all_current">24.16</td><td data-score="rotation_only/attention/all_current">16.82</td><td data-score="mixed_tasks/attention/all_current">16.13</td></tr><tr><th scope="row">Wrists and floor forces, with muscle readings from one second earlier</th><td data-score="lift_only/attention/earlier_emg">25.41</td><td data-score="rotation_only/attention/earlier_emg">18.96</td><td data-score="mixed_tasks/attention/earlier_emg">17.16</td></tr><tr><th scope="row">Wrists, with floor forces and muscle readings from one second earlier</th><td data-score="lift_only/attention/earlier_emg_and_ground_force">24.66</td><td data-score="rotation_only/attention/earlier_emg_and_ground_force">18.79</td><td data-score="mixed_tasks/attention/earlier_emg_and_ground_force">17.61</td></tr></tbody></table></details>
+    <table>
+      <caption>Two simple forecasts using the same wrist history</caption>
+      <thead><tr><th scope="col">Rule</th><th scope="col">Mean error (mm)</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Continue the last 50 ms of motion at its measured speed and direction</th><td data-score="velocity">14.28</td></tr>
+        <tr><th scope="row">Keep the wrist at its last position</th><td data-score="persistence">50.64</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section aria-labelledby="run">
+    <h2 id="run">Run a forecast on your computer</h2>
+    <p><a href="turning-lift-forecast.zip" download>Download the fitted models and example</a>. Extract the ZIP. With Python and NumPy installed, run <code>python forecast.py</code> from that folder. It prints how far the right wrist is predicted to move in each direction over 100 ms.</p>
+    <p>The included example uses generated readings. To see all 38 forecasts, run <code>python forecast.py --arm all</code>. To check them against the bundled reference, run <code>python forecast.py --self-check</code>. The guide inside the ZIP shows how to supply a history of your own.</p>
+    <p>Forecasts run offline once the dependencies are installed. The package ran on Linux in an isolated network. Windows and macOS launchers are included and await testing on those systems.</p>
+  </section>
+  <section aria-labelledby="limits">
+    <h2 id="limits">What each sensor measured</h2>
+    <p>The wrist marks measure movement. The plates measure external force underfoot. The muscle channels measure electrical activity. The setup gives no direct measure of grip force or of the force produced by an individual muscle. It also cannot tell us why a particular wrist path occurred.</p>
+    <p>The muscle channels stayed in the archive’s recorded scale because the voltage units disagree across the source labels and device description. The plate readings retain their local directions and stated units. The comparison had no independent known-load calibration. The results cover these recorded turning lifts on this instrument clock.</p>
+    <p>Using muscle readings from one second earlier gave a mean error of 18.96 mm for the turning-lift attention model. Moving both the muscle and floor readings back a second gave 18.79 mm. Those shifts can also change which phase of the lift a recording shows.</p>
+    <p><a href="results.json" download>Download the full aggregate results and model settings (JSON)</a>.</p>
+  </section>
+  <section aria-labelledby="recordings">
+    <h2 id="recordings">The recordings</h2>
+    <p>Alexander K. Beattie, Matti J. Kortelainen, Paavo Vartiainen and Pasi A. Karjalainen released the Kuopio Full-Body Dataset. We used its original straight and turning crouch-lift recordings and calculated the forecast errors against the directly observed wrist positions. <a href="https://doi.org/10.5281/zenodo.24194741">Dataset v1.2.1</a> · <a href="https://doi.org/10.1038/s41597-026-08550-z">Recording methods</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Dataset licence</a></p>
+  </section>
+</main>
+</body>
+</html>

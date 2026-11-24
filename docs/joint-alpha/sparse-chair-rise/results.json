@@ -1,0 +1,497 @@
+{
+  "version": "bccb5bed6f7c",
+  "data": "https://doi.org/10.6084/m9.figshare.27677016.v1",
+  "recording_paper": "https://doi.org/10.1038/s41597-025-05391-0",
+  "data_license": "CC BY 4.0",
+  "task": "vertical displacement of four tracked pelvis markers, 100 milliseconds after issue",
+  "cohort": "Gait120 v1 chair rise, healthy adult men",
+  "unmeasured_rows": 103,
+  "network_parameters": 11809,
+  "train_people": 65,
+  "validation_people": 22,
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "analysis": {
+    "primary": {
+      "scope": "primary",
+      "rows": 1254,
+      "people": 22,
+      "trials": 103,
+      "mae_mm": {
+        "persistence": 30.356007273917058,
+        "velocity_full": 8.502318920800459,
+        "ridge_full": 2.367291155141726,
+        "velocity_sparse": 13.688437671692292,
+        "ridge_sparse": 4.605514849250758,
+        "attention_full_camera": 3.061724545015176,
+        "attention_full_force": 3.0286392852661805,
+        "attention_full_muscle": 3.2115761679414008,
+        "attention_full_both": 3.169035110700226,
+        "attention_sparse_camera": 3.920889757069872,
+        "attention_sparse_force": 3.819462045908644,
+        "attention_sparse_muscle": 3.9334988385028375,
+        "attention_sparse_both": 3.9379920561668276,
+        "shared_full_camera": 3.1821056422850487,
+        "shared_full_force": 3.191832906569638,
+        "shared_full_muscle": 3.271367850805676,
+        "shared_full_both": 3.2866302914057544,
+        "shared_sparse_camera": 3.6322107157906576,
+        "shared_sparse_force": 3.625353566521243,
+        "shared_sparse_muscle": 3.798106325183681,
+        "shared_sparse_both": 3.800801510723093
+      },
+      "paired": {
+        "attention_full_force_minus_camera": {
+          "difference_mm": -0.03308525974899585,
+          "people_with_smaller_first_quantity": 16,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.0970765217232078,
+            0.0372964058309243
+          ]
+        },
+        "attention_full_muscle_minus_camera": {
+          "difference_mm": 0.14985162292622556,
+          "people_with_smaller_first_quantity": 7,
+          "paired_person_bootstrap_95_percentile_mm": [
+            0.05202979098685498,
+            0.2581871413961459
+          ]
+        },
+        "attention_full_both_minus_camera": {
+          "difference_mm": 0.10731056568505028,
+          "people_with_smaller_first_quantity": 8,
+          "paired_person_bootstrap_95_percentile_mm": [
+            0.012998088110915846,
+            0.21668415281479642
+          ]
+        },
+        "attention_sparse_force_minus_camera": {
+          "difference_mm": -0.1014277111612281,
+          "people_with_smaller_first_quantity": 12,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.31449358505101116,
+            0.11727188164035902
+          ]
+        },
+        "attention_sparse_muscle_minus_camera": {
+          "difference_mm": 0.012609081432965392,
+          "people_with_smaller_first_quantity": 10,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.2335982877532859,
+            0.2518880143485217
+          ]
+        },
+        "attention_sparse_both_minus_camera": {
+          "difference_mm": 0.017102299096955497,
+          "people_with_smaller_first_quantity": 10,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.22958964808773566,
+            0.26069214391483203
+          ]
+        },
+        "attention_force_extra_effect_sparse_minus_full": {
+          "difference_mm": -0.06834245141223226,
+          "people_with_smaller_first_quantity": 11,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.2879653445249097,
+            0.15933139701338037
+          ]
+        },
+        "attention_muscle_extra_effect_sparse_minus_full": {
+          "difference_mm": -0.1372425414932602,
+          "people_with_smaller_first_quantity": 11,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.40270204246485247,
+            0.11588623153412876
+          ]
+        },
+        "attention_both_extra_effect_sparse_minus_full": {
+          "difference_mm": -0.09020826658809476,
+          "people_with_smaller_first_quantity": 12,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.3580054178218181,
+            0.17478400960974888
+          ]
+        },
+        "shared_full_force_minus_camera": {
+          "difference_mm": 0.009727264284590132,
+          "people_with_smaller_first_quantity": 8,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.007888419264449631,
+            0.026442214975733548
+          ]
+        },
+        "shared_full_muscle_minus_camera": {
+          "difference_mm": 0.0892622085206281,
+          "people_with_smaller_first_quantity": 7,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.006827628732061024,
+            0.18585437834083918
+          ]
+        },
+        "shared_full_both_minus_camera": {
+          "difference_mm": 0.10452464912070672,
+          "people_with_smaller_first_quantity": 7,
+          "paired_person_bootstrap_95_percentile_mm": [
+            0.008985038747390922,
+            0.2022058592495505
+          ]
+        },
+        "shared_sparse_force_minus_camera": {
+          "difference_mm": -0.0068571492694152044,
+          "people_with_smaller_first_quantity": 11,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.04427102729843304,
+            0.03150955595774846
+          ]
+        },
+        "shared_sparse_muscle_minus_camera": {
+          "difference_mm": 0.16589560939302264,
+          "people_with_smaller_first_quantity": 6,
+          "paired_person_bootstrap_95_percentile_mm": [
+            0.042253730221874355,
+            0.29452255506237224
+          ]
+        },
+        "shared_sparse_both_minus_camera": {
+          "difference_mm": 0.16859079493243534,
+          "people_with_smaller_first_quantity": 6,
+          "paired_person_bootstrap_95_percentile_mm": [
+            0.047537732362218026,
+            0.30067697616228334
+          ]
+        },
+        "shared_force_extra_effect_sparse_minus_full": {
+          "difference_mm": -0.016584413554005337,
+          "people_with_smaller_first_quantity": 12,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.05225487312604598,
+            0.020399252302286675
+          ]
+        },
+        "shared_muscle_extra_effect_sparse_minus_full": {
+          "difference_mm": 0.07663340087239452,
+          "people_with_smaller_first_quantity": 10,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.05775136879357799,
+            0.23830718333080206
+          ]
+        },
+        "shared_both_extra_effect_sparse_minus_full": {
+          "difference_mm": 0.06406614581172862,
+          "people_with_smaller_first_quantity": 10,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.0748737737833844,
+            0.23233943308370308
+          ]
+        },
+        "shared_minus_separate_full_camera": {
+          "difference_mm": 0.12038109726987273,
+          "people_with_smaller_first_quantity": 6,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.01295987835697704,
+            0.254548999296061
+          ]
+        },
+        "shared_minus_separate_full_force": {
+          "difference_mm": 0.1631936213034587,
+          "people_with_smaller_first_quantity": 6,
+          "paired_person_bootstrap_95_percentile_mm": [
+            0.05117375279149403,
+            0.2714001843969702
+          ]
+        },
+        "shared_minus_separate_full_muscle": {
+          "difference_mm": 0.059791682864275233,
+          "people_with_smaller_first_quantity": 7,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.09486176972171885,
+            0.20486667036074283
+          ]
+        },
+        "shared_minus_separate_full_both": {
+          "difference_mm": 0.11759518070552918,
+          "people_with_smaller_first_quantity": 7,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.039575526706790945,
+            0.25919915091768875
+          ]
+        },
+        "shared_minus_separate_sparse_camera": {
+          "difference_mm": -0.2886790412792141,
+          "people_with_smaller_first_quantity": 16,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.5305758239518884,
+            -0.055309012378853224
+          ]
+        },
+        "shared_minus_separate_sparse_force": {
+          "difference_mm": -0.19410847938740125,
+          "people_with_smaller_first_quantity": 13,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.3999770963338248,
+            -0.011840336546286481
+          ]
+        },
+        "shared_minus_separate_sparse_muscle": {
+          "difference_mm": -0.1353925133191569,
+          "people_with_smaller_first_quantity": 15,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.3101451417631824,
+            0.05183290857164829
+          ]
+        },
+        "shared_minus_separate_sparse_both": {
+          "difference_mm": -0.1371905454437343,
+          "people_with_smaller_first_quantity": 14,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.31615850917587246,
+            0.05359926294224033
+          ]
+        }
+      }
+    },
+    "rising": {
+      "scope": "rising",
+      "rows": 1062,
+      "people": 22,
+      "trials": 103,
+      "mae_mm": {
+        "persistence": 34.89889096862948,
+        "velocity_full": 9.632904913707002,
+        "ridge_full": 2.3985299683311014,
+        "velocity_sparse": 15.626862058547506,
+        "ridge_sparse": 4.6521484339146735,
+        "attention_full_camera": 3.2858053373143106,
+        "attention_full_force": 3.269010947325464,
+        "attention_full_muscle": 3.461302553630833,
+        "attention_full_both": 3.420120585401426,
+        "attention_sparse_camera": 4.199656101292025,
+        "attention_sparse_force": 4.127600388773676,
+        "attention_sparse_muscle": 4.2235756712519,
+        "attention_sparse_both": 4.219386228360523,
+        "shared_full_camera": 3.4306188125413826,
+        "shared_full_force": 3.4388406563272076,
+        "shared_full_muscle": 3.515777749237177,
+        "shared_full_both": 3.529135188181078,
+        "shared_sparse_camera": 3.9353839188426503,
+        "shared_sparse_force": 3.930568265129727,
+        "shared_sparse_muscle": 4.077441303151291,
+        "shared_sparse_both": 4.084072983950794
+      },
+      "paired": {
+        "attention_full_force_minus_camera": {
+          "difference_mm": -0.016794389988846102,
+          "people_with_smaller_first_quantity": 13,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.08718650034589621,
+            0.0572304854895481
+          ]
+        },
+        "attention_full_muscle_minus_camera": {
+          "difference_mm": 0.17549721631652304,
+          "people_with_smaller_first_quantity": 7,
+          "paired_person_bootstrap_95_percentile_mm": [
+            0.07247093298314279,
+            0.2915019392668622
+          ]
+        },
+        "attention_full_both_minus_camera": {
+          "difference_mm": 0.13431524808711573,
+          "people_with_smaller_first_quantity": 7,
+          "paired_person_bootstrap_95_percentile_mm": [
+            0.03345438521502701,
+            0.24680088563191588
+          ]
+        },
+        "attention_sparse_force_minus_camera": {
+          "difference_mm": -0.07205571251834905,
+          "people_with_smaller_first_quantity": 12,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.3196237830730392,
+            0.1807601293002935
+          ]
+        },
+        "attention_sparse_muscle_minus_camera": {
+          "difference_mm": 0.023919569959875483,
+          "people_with_smaller_first_quantity": 11,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.2384290996424645,
+            0.276422326394461
+          ]
+        },
+        "attention_sparse_both_minus_camera": {
+          "difference_mm": 0.01973012706849815,
+          "people_with_smaller_first_quantity": 10,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.2420478892627305,
+            0.2775308865571582
+          ]
+        },
+        "attention_force_extra_effect_sparse_minus_full": {
+          "difference_mm": -0.05526132252950293,
+          "people_with_smaller_first_quantity": 11,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.2962827192153716,
+            0.19216409254571445
+          ]
+        },
+        "attention_muscle_extra_effect_sparse_minus_full": {
+          "difference_mm": -0.15157764635664756,
+          "people_with_smaller_first_quantity": 11,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.4299098684425217,
+            0.11323078257587732
+          ]
+        },
+        "attention_both_extra_effect_sparse_minus_full": {
+          "difference_mm": -0.1145851210186176,
+          "people_with_smaller_first_quantity": 13,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.39626282225092785,
+            0.1629681029203102
+          ]
+        },
+        "shared_full_force_minus_camera": {
+          "difference_mm": 0.008221843785824528,
+          "people_with_smaller_first_quantity": 8,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.012002815769761416,
+            0.028330829014678083
+          ]
+        },
+        "shared_full_muscle_minus_camera": {
+          "difference_mm": 0.08515893669579457,
+          "people_with_smaller_first_quantity": 7,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.022621670709373015,
+            0.19035575904003277
+          ]
+        },
+        "shared_full_both_minus_camera": {
+          "difference_mm": 0.09851637563969523,
+          "people_with_smaller_first_quantity": 7,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.0077157461467686475,
+            0.20597833554899853
+          ]
+        },
+        "shared_sparse_force_minus_camera": {
+          "difference_mm": -0.004815653712923867,
+          "people_with_smaller_first_quantity": 11,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.04587785139838862,
+            0.03777989371024546
+          ]
+        },
+        "shared_sparse_muscle_minus_camera": {
+          "difference_mm": 0.14205738430864095,
+          "people_with_smaller_first_quantity": 9,
+          "paired_person_bootstrap_95_percentile_mm": [
+            0.0066129384095514575,
+            0.29030149924350196
+          ]
+        },
+        "shared_sparse_both_minus_camera": {
+          "difference_mm": 0.14868906510814434,
+          "people_with_smaller_first_quantity": 9,
+          "paired_person_bootstrap_95_percentile_mm": [
+            0.015969833420126794,
+            0.3024127492272137
+          ]
+        },
+        "shared_force_extra_effect_sparse_minus_full": {
+          "difference_mm": -0.013037497498748395,
+          "people_with_smaller_first_quantity": 11,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.05239849810925316,
+            0.02760736696344767
+          ]
+        },
+        "shared_muscle_extra_effect_sparse_minus_full": {
+          "difference_mm": 0.056898447612846376,
+          "people_with_smaller_first_quantity": 11,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.10166686405301137,
+            0.2500981970546834
+          ]
+        },
+        "shared_both_extra_effect_sparse_minus_full": {
+          "difference_mm": 0.05017268946844911,
+          "people_with_smaller_first_quantity": 11,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.11132356211876115,
+            0.25062766701675926
+          ]
+        },
+        "shared_minus_separate_full_camera": {
+          "difference_mm": 0.14481347522707247,
+          "people_with_smaller_first_quantity": 7,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.006582392550890681,
+            0.29521266032702687
+          ]
+        },
+        "shared_minus_separate_full_force": {
+          "difference_mm": 0.1698297090017431,
+          "people_with_smaller_first_quantity": 7,
+          "paired_person_bootstrap_95_percentile_mm": [
+            0.04003608575096771,
+            0.2991690819291152
+          ]
+        },
+        "shared_minus_separate_full_muscle": {
+          "difference_mm": 0.054475195606344014,
+          "people_with_smaller_first_quantity": 10,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.123745073677801,
+            0.21578998674294753
+          ]
+        },
+        "shared_minus_separate_full_both": {
+          "difference_mm": 0.10901460277965196,
+          "people_with_smaller_first_quantity": 7,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.07767167614111642,
+            0.27742752280382776
+          ]
+        },
+        "shared_minus_separate_sparse_camera": {
+          "difference_mm": -0.26427218244937406,
+          "people_with_smaller_first_quantity": 15,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.5303373082951631,
+            -0.006489376129751085
+          ]
+        },
+        "shared_minus_separate_sparse_force": {
+          "difference_mm": -0.19703212364394893,
+          "people_with_smaller_first_quantity": 14,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.4284644087310985,
+            0.004316110475722612
+          ]
+        },
+        "shared_minus_separate_sparse_muscle": {
+          "difference_mm": -0.14613436810060862,
+          "people_with_smaller_first_quantity": 15,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.34202287508277474,
+            0.06161726016188182
+          ]
+        },
+        "shared_minus_separate_sparse_both": {
+          "difference_mm": -0.1353132444097279,
+          "people_with_smaller_first_quantity": 14,
+          "paired_person_bootstrap_95_percentile_mm": [
+            -0.3365962113088853,
+            0.0785284834329943
+          ]
+        }
+      }
+    }
+  }
+}

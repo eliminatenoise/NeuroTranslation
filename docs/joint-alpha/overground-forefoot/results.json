@@ -1,0 +1,66 @@
+{
+  "dataset": "Moreira and colleagues, 2021",
+  "error_unit": "mm",
+  "forecast_horizon_ms": 100,
+  "history_ms": 200,
+  "reference": "attention_full",
+  "candidate": "inkling:1",
+  "bands": [
+    {
+      "title": "Familiar speeds \u00b7 1.5 to 3.5 km/h",
+      "issues": 3484,
+      "outcomes": 3017,
+      "matched": 2186,
+      "matched_people": 3,
+      "all_people": 4,
+      "paired_delta_mm": [
+        5.06399148124102,
+        7.973449435947396,
+        2.7866109059650057
+      ],
+      "primary": {
+        "zero": 15.408259776794866,
+        "velocity": 12.217646533448203,
+        "motion:0.01": 9.275872978953283,
+        "force:0.01": 9.233843860989788,
+        "full:0.01": 9.524173681188417,
+        "random:0.01": 7.567043860765115,
+        "attention_motion": 5.435857399826329,
+        "attention_full": 5.958754452433465,
+        "inkling:1": 11.233438393484603
+      },
+      "secondary": {
+        "all_motion:0.01": 8.952703408743503,
+        "all_force:0.01": 8.930156130581802
+      }
+    },
+    {
+      "title": "Reserved speeds \u00b7 1 and 4 km/h",
+      "issues": 1405,
+      "outcomes": 1209,
+      "matched": 843,
+      "matched_people": 3,
+      "all_people": 4,
+      "paired_delta_mm": [
+        3.4880354483994434,
+        6.088636331071122,
+        4.538049096326016
+      ],
+      "primary": {
+        "zero": 11.470770702748755,
+        "velocity": 11.402659300356415,
+        "motion:0.01": 11.048676587445339,
+        "force:0.01": 11.043897957625699,
+        "full:0.01": 11.082981939465865,
+        "random:0.01": 8.870226456395093,
+        "attention_motion": 5.321228256462051,
+        "attention_full": 5.356772166289586,
+        "inkling:1": 10.061679124888446
+      },
+      "secondary": {
+        "all_motion:0.01": 11.345895720474724,
+        "all_force:0.01": 11.33535096081649
+      }
+    }
+  ]
+}

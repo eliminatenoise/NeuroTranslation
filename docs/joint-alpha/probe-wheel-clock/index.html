@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An experimental NeuroTranslation check of the clocks used to record brain activity and wheel movement in one International Brain Laboratory recording.">
+  <title>One pulse, two clocks · NeuroTranslation</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font: 100%/1.62 system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: #203538;
+      background: #f5f6f2;
+      --link: #075d52;
+      --ink: #173d40;
+      --rule: #b9c7c4;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(50rem, calc(100% - 2rem)); margin: 2rem auto 3rem; }
+    a { color: var(--link); text-underline-offset: .2em; }
+    a:focus-visible { outline: 3px solid #a43b12; outline-offset: 3px; }
+    nav { margin-bottom: 1.1rem; }
+    header { border-top: .35rem solid #1b4647; padding: 1.1rem 0 .5rem; }
+    h1, h2 { color: var(--ink); line-height: 1.12; letter-spacing: -.035em; }
+    h1 { margin: 0 0 .65rem; font-size: clamp(2.35rem, 8vw, 4.3rem); }
+    h2 { margin: 0 0 .8rem; font-size: clamp(1.5rem, 4.5vw, 2rem); }
+    p { margin: 0 0 .9rem; max-width: 67ch; }
+    .lead { font-size: clamp(1.075rem, 2.2vw, 1.23rem); }
+    section { border-top: 1px solid var(--rule); padding-top: 1.35rem; margin-top: 1.4rem; }
+    table { border-collapse: collapse; width: 100%; font-size: clamp(.8125rem, 2vw, 1rem); }
+    caption { text-align: left; font-weight: 650; margin-bottom: .55rem; }
+    th, td { border-bottom: 1px solid var(--rule); padding: .55rem .4rem; }
+    th { text-align: left; }
+    thead { background: #e5eae4; }
+    td, thead th:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+    .quantile { margin-top: .65rem; }
+    .check { margin: 1rem 0; padding: .85rem 1rem; border-left: .28rem solid #1b6960; background: #e6eee8; }
+    .download { display: inline-block; padding: .55rem .8rem; border-radius: .2rem; background: var(--ink); color: #fff; font-weight: 650; }
+    ul { padding-left: 1.1rem; margin: .7rem 0 1.2rem; }
+    li { margin: .35rem 0; }
+    @media (max-width: 25rem) {
+      th, td { padding-right: .25rem; padding-left: .25rem; }
+      main { margin-top: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Parent page"><a href="../">Back to NeuroTranslate 0.0 joint alpha</a></nav>
+    <header>
+      <h1>One pulse, two clocks</h1>
+      <p class="lead">Send the same electrical pulse to two recorders and each gives it a time. One recorder listens to a probe in the brain. The other records the signals that tell it when a wheel turns. If the clocks drift, a brain signal can look earlier or later than it really was.</p>
+      <p>In one International Brain Laboratory mouse recording, the probe sampled <strong>30,000</strong> times per second and the wheel recorder sampled <strong>30,003.0003</strong> times per second. Those rates are in hertz (Hz). The shared pulse lets us check how well one clock can tell time on the other.</p>
+    </header>
+
+    <section aria-labelledby="test">
+      <h2 id="test">Hide a pulse and predict its time</h2>
+      <p>We used the lab’s published clock map to identify the same pulses in both recordings. Both the start and end of each pulse had to point to the same match. That gave <strong>3,635 matched pulses</strong>.</p>
+      <p>We took turns setting aside blocks of five pulses, then predicted their start times from the remaining pulses. One method draws a straight line between the two nearest retained pulses. The other fits one straight line across the recording, with one offset and one drift rate. We scored <strong>3,625 withheld pulses</strong>. Ten lay beyond the retained pulses in their round, so both methods were compared on the same 3,625.</p>
+      <table>
+        <caption>Absolute timing error on withheld pulses (milliseconds)</caption>
+        <thead><tr><th scope="col">Clock fit</th><th scope="col">Median</th><th scope="col">95th percentile</th><th scope="col">Largest</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Between nearby pulses</th><td>0.011110</td><td>0.033331</td><td>0.055552</td></tr>
+          <tr><th scope="row">One line across the recording</th><td>0.033310</td><td>0.068080</td><td>0.096827</td></tr>
+        </tbody>
+      </table>
+      <p class="quantile">The 95th percentile is the error that about 95 out of 100 checked pulses stayed at or below.</p>
+      <p class="check">The largest error between nearby pulses, plus one sample interval from each recorder, came to <strong>0.122216 ms</strong>. It fell below the <strong>0.25 ms</strong> check limit for this recording.</p>
+    </section>
+
+    <section aria-labelledby="pairing">
+      <h2 id="pairing">The right pulse still matters</h2>
+      <p>The pulse repeats once a second. Shift the pairing by one or two seconds in either direction and the fitted clocks give nearly the same small errors. The published map tells us which pulses to pair. The figures in the table depend on that pairing.</p>
+      <p>This is a check of electronics timing in one recording. The absolute start times in the raw and processed DANDI files differ by an hour and remain unresolved. Timing in eight trial windows examined separately, along with live delivery times, still needs its own check. Learning whether brain signals can predict movement is a separate experiment.</p>
+    </section>
+
+    <section aria-labelledby="sources">
+      <h2 id="sources">Data and methods</h2>
+      <ul>
+        <li><a href="https://doi.org/10.1038/s41586-025-09235-0">International Brain Laboratory study and methods</a></li>
+        <li><a href="https://docs.internationalbrainlab.org/_modules/ibllib/ephys/sync_probes.html#version3B">Clock alignment code</a> and <a href="https://docs.internationalbrainlab.org/_modules/ibllib/io/extractors/ephys_fpga.html#extract_wheel_sync">wheel signal code</a></li>
+        <li><a href="https://registry.opendata.aws/ibl-brain-wide-map/">Open Brain Wide Map data (CC BY 4.0)</a> and <a href="https://doi.org/10.48324/dandi.000409/0.260309.1324">DANDI edition</a></li>
+      </ul>
+      <p><a class="download" download="probe-wheel-clock-results.json" href="results.json">Download the summary data (JSON)</a></p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Predict the next part of a stride · NeuroTranslation</title>
+<style>
+:root{font:17px/1.57 system-ui,sans-serif;color:#18362d;background:#f9faf4}
+body{margin:0}main{max-width:56rem;margin:auto;padding:2rem 1rem 4rem}
+h1{font-size:clamp(2.3rem,7vw,3.85rem);line-height:1.04;letter-spacing:-.04em;margin:1rem 0;max-width:16ch}
+h2{font-size:1.35rem;margin-top:1.6rem}p{max-width:72ch}
+a{color:#194b3d;text-underline-offset:.18em}a:focus-visible,summary:focus-visible{outline:3px solid #146451;outline-offset:3px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+caption{text-align:left;margin-bottom:.6rem}th,td{padding:.5rem;border-bottom:1px solid #c3d0c6;text-align:left}
+td{text-align:right}thead th{border-bottom:2px solid #728b7f}tbody th{font-weight:500}
+tbody tr:first-child{background:#dceadd;font-weight:700}tbody tr:nth-child(even){background:#edf2e9}
+summary{cursor:pointer;font-weight:650}details{margin-top:1.4rem}
+@media(max-width:31rem){main{padding:1.15rem .85rem 3rem}th,td{padding:.4rem .26rem}table{font-size:.88rem}}
+</style>
+</head><body><main>
+<nav aria-label="Related studies"><a href="../">Pelvis marker studies</a></nav>
+<h1>Predict the next part of a stride</h1>
+<p>When you run, your hips rise and fall in a repeating pattern. The stride forecast looks for an earlier part of the run that resembles the latest camera readings. It estimates the next 100 milliseconds from what already happened at that point in the earlier stride. A small attention model then adjusts that estimate.</p>
+<p>The learned adjustment reduced average four-marker error from <strong>8.04 to 5.79 mm</strong> on recordings from 40 runners at the University of Bath. The model learned its adjustment from a separate Brazilian running dataset.</p>
+<p><a href="../stride-demo/">Try the stride forecast</a> with invented camera readings.</p>
+<p><a href="../stride-front-gap/">See how the model handles original front-marker gaps</a> in a separate group of runners.</p>
+<p><a href="../running-incline/">Compare the stride forecast on three Bath inclines</a> at each runner’s usual pace.</p>
+<h2>Compare the forecasts</h2>
+<p>Each forecast estimates how far the average height of the named markers will rise or fall. Each person counts equally. Smaller errors are better.</p>
+<table><caption>40 people. 3,636 four-marker and 3,640 rear-pair forecasts.</caption>
+<thead><tr><th scope="col">Forecast method</th><th scope="col">Four markers (mm)</th><th scope="col">Rear pair (mm)</th></tr></thead>
+<tbody><tr><th scope='row'>Stride forecast with learned correction</th><td>5.79</td><td>6.23</td></tr><tr><th scope='row'>Replay the earlier stride</th><td>8.04</td><td>8.67</td></tr><tr><th scope='row'>Predict zero displacement</th><td>47.68</td><td>51.62</td></tr><tr><th scope='row'>Chair-trained attention</th><td>55.71</td><td>58.55</td></tr><tr><th scope='row'>Chair-trained attention correcting recent speed</th><td>59.60</td><td>64.93</td></tr><tr><th scope='row'>Continue recent camera speed</th><td>62.57</td><td>67.50</td></tr></tbody></table>
+<h2>Where the result applies</h2>
+<p>The test used the first ten seconds of each fixed-speed treadmill trial. The Bath sample supplied no histories with original camera gaps. In development, only four of the six Brazilian validation runners contributed scoreable histories with those gaps. A wider test needs more running conditions and more people with original gaps.</p>
+<details><summary>How the test was run</summary>
+<p>The running condition was 12 km/h at a 1% incline. The archive lists 46 exact recordings for that condition. One was reserved to verify the file format and five lacked landmarks needed for an endpoint or to check which way was up. The other 40 supplied the comparison.</p>
+<p>The camera stored 250 readings per second. Both stride methods used 800 milliseconds of earlier readings. Each target was scored only when its markers had positive reconstruction quality at issue and outcome. The same issues and outcomes were used for all methods. The attention adjustment had 7,618 fitted parameters, frozen before the Bath recordings were scored.</p>
+</details>
+<p><a href="results.json">Download aggregate results</a> · <a href="https://doi.org/10.15125/BATH-01341">Bath running dataset</a> · <a href="https://doi.org/10.6084/m9.figshare.4543435.v1">Fukuchi running dataset</a> · <a href="../running-transfer/">Earlier transfer test</a></p>
+<p><a href="../../../papers/movement-forecast-evidence/">Read the research supplement on the running and squat tests</a>.</p>
+</main></body></html>

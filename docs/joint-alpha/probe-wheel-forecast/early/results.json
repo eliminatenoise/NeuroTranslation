@@ -1,0 +1,354 @@
+{
+  "data": {
+    "publisher": "International Brain Laboratory",
+    "dataset": "Brain Wide Map",
+    "license": "CC BY 4.0",
+    "paper": "https://doi.org/10.1038/s41586-025-09235-0",
+    "release": "https://docs.internationalbrainlab.org/notebooks_external/2025_data_release_brainwidemap.html"
+  },
+  "design": {
+    "issue_after_cue_ms": 50,
+    "forecast_horizon_ms": 100,
+    "wheel_history_ms": 200,
+    "neural_history_ms": 200,
+    "stored_neural_gap_ms": 20,
+    "block_ms": 20,
+    "trial_rows_per_mouse_considered_at_most": 240,
+    "held_population": "new mice in three acquisition groups",
+    "quiet_definition": "The last known angle at the start of the 200 ms wheel window and every recorded reading through issue were equal.",
+    "donor_rule": "Rotate complete spike histories within each session among trials with the same cue side, contrast, age category of the latest wheel reading and quiet status."
+  },
+  "fit": {
+    "mice": 6,
+    "rows": 1395,
+    "attention_parameters": 9121
+  },
+  "summary": {
+    "validation": {
+      "quiet": {
+        "mice": 3,
+        "rows": 75,
+        "mouse_equal_mae_rad": {
+          "still_wheel": 0.015669071431811798,
+          "repeat_recent_change": 0.015669071431811798,
+          "ridge_wheel_and_cue": 0.01762440578785851,
+          "ridge_wheel_cue_and_aligned_spikes": 0.019524063851453197,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.02038426112603704,
+          "attention_wheel_and_cue": 0.020502074027694172,
+          "attention_wheel_cue_and_aligned_spikes": 0.0220665076902386,
+          "attention_wheel_cue_and_other_trial_spikes": 0.022520147505004025
+        },
+        "contrasts": {
+          "ridge": {
+            "aligned_minus_wheel_and_cue_rad": 0.001899658063594687,
+            "aligned_minus_other_trial_rad": -0.0008601972745838418,
+            "mice_with_smaller_error_than_both": 0
+          },
+          "attention": {
+            "aligned_minus_wheel_and_cue_rad": 0.0015644336625444295,
+            "aligned_minus_other_trial_rad": -0.000453639814765424,
+            "mice_with_smaller_error_than_both": 1
+          }
+        }
+      },
+      "all": {
+        "mice": 3,
+        "rows": 685,
+        "mouse_equal_mae_rad": {
+          "still_wheel": 0.03129372593576966,
+          "repeat_recent_change": 0.028774531584507015,
+          "ridge_wheel_and_cue": 0.028263557687702973,
+          "ridge_wheel_cue_and_aligned_spikes": 0.029697212494907536,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.03003241932619126,
+          "attention_wheel_and_cue": 0.029577344739887615,
+          "attention_wheel_cue_and_aligned_spikes": 0.032504194831292944,
+          "attention_wheel_cue_and_other_trial_spikes": 0.03238918092427676
+        },
+        "contrasts": {
+          "ridge": {
+            "aligned_minus_wheel_and_cue_rad": 0.001433654807204563,
+            "aligned_minus_other_trial_rad": -0.0003352068312837235,
+            "mice_with_smaller_error_than_both": 1
+          },
+          "attention": {
+            "aligned_minus_wheel_and_cue_rad": 0.0029268500914053294,
+            "aligned_minus_other_trial_rad": 0.00011501390701618153,
+            "mice_with_smaller_error_than_both": 0
+          }
+        }
+      },
+      "contained_trial": {
+        "mice": 3,
+        "rows": 685,
+        "mouse_equal_mae_rad": {
+          "still_wheel": 0.03129372593576966,
+          "repeat_recent_change": 0.028774531584507015,
+          "ridge_wheel_and_cue": 0.028263557687702973,
+          "ridge_wheel_cue_and_aligned_spikes": 0.029697212494907536,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.03003241932619126,
+          "attention_wheel_and_cue": 0.029577344739887615,
+          "attention_wheel_cue_and_aligned_spikes": 0.032504194831292944,
+          "attention_wheel_cue_and_other_trial_spikes": 0.03238918092427676
+        },
+        "contrasts": {
+          "ridge": {
+            "aligned_minus_wheel_and_cue_rad": 0.001433654807204563,
+            "aligned_minus_other_trial_rad": -0.0003352068312837235,
+            "mice_with_smaller_error_than_both": 1
+          },
+          "attention": {
+            "aligned_minus_wheel_and_cue_rad": 0.0029268500914053294,
+            "aligned_minus_other_trial_rad": 0.00011501390701618153,
+            "mice_with_smaller_error_than_both": 0
+          }
+        }
+      },
+      "quiet_contained_trial": {
+        "mice": 3,
+        "rows": 75,
+        "mouse_equal_mae_rad": {
+          "still_wheel": 0.015669071431811798,
+          "repeat_recent_change": 0.015669071431811798,
+          "ridge_wheel_and_cue": 0.01762440578785851,
+          "ridge_wheel_cue_and_aligned_spikes": 0.019524063851453197,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.02038426112603704,
+          "attention_wheel_and_cue": 0.020502074027694172,
+          "attention_wheel_cue_and_aligned_spikes": 0.0220665076902386,
+          "attention_wheel_cue_and_other_trial_spikes": 0.022520147505004025
+        },
+        "contrasts": {
+          "ridge": {
+            "aligned_minus_wheel_and_cue_rad": 0.001899658063594687,
+            "aligned_minus_other_trial_rad": -0.0008601972745838418,
+            "mice_with_smaller_error_than_both": 0
+          },
+          "attention": {
+            "aligned_minus_wheel_and_cue_rad": 0.0015644336625444295,
+            "aligned_minus_other_trial_rad": -0.000453639814765424,
+            "mice_with_smaller_error_than_both": 1
+          }
+        }
+      }
+    },
+    "test": {
+      "quiet": {
+        "mice": 3,
+        "rows": 221,
+        "mouse_equal_mae_rad": {
+          "still_wheel": 0.004803234950285849,
+          "repeat_recent_change": 0.004803234950285849,
+          "ridge_wheel_and_cue": 0.006813841642433532,
+          "ridge_wheel_cue_and_aligned_spikes": 0.008199213831371767,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.008552965241061602,
+          "attention_wheel_and_cue": 0.009832659117711952,
+          "attention_wheel_cue_and_aligned_spikes": 0.0068292108412405335,
+          "attention_wheel_cue_and_other_trial_spikes": 0.0068916821724163526
+        },
+        "contrasts": {
+          "ridge": {
+            "aligned_minus_wheel_and_cue_rad": 0.001385372188938235,
+            "aligned_minus_other_trial_rad": -0.00035375140968983525,
+            "mice_with_smaller_error_than_both": 1
+          },
+          "attention": {
+            "aligned_minus_wheel_and_cue_rad": -0.0030034482764714184,
+            "aligned_minus_other_trial_rad": -6.247133117581911e-05,
+            "mice_with_smaller_error_than_both": 2
+          }
+        }
+      },
+      "all": {
+        "mice": 3,
+        "rows": 687,
+        "mouse_equal_mae_rad": {
+          "still_wheel": 0.0162344952928325,
+          "repeat_recent_change": 0.01477902533938684,
+          "ridge_wheel_and_cue": 0.015062281409622215,
+          "ridge_wheel_cue_and_aligned_spikes": 0.015870606673996927,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.01601633556846121,
+          "attention_wheel_and_cue": 0.016396763008804837,
+          "attention_wheel_cue_and_aligned_spikes": 0.014741602972959686,
+          "attention_wheel_cue_and_other_trial_spikes": 0.014530215176196576
+        },
+        "contrasts": {
+          "ridge": {
+            "aligned_minus_wheel_and_cue_rad": 0.0008083252643747117,
+            "aligned_minus_other_trial_rad": -0.0001457288944642851,
+            "mice_with_smaller_error_than_both": 1
+          },
+          "attention": {
+            "aligned_minus_wheel_and_cue_rad": -0.0016551600358451508,
+            "aligned_minus_other_trial_rad": 0.00021138779676311073,
+            "mice_with_smaller_error_than_both": 1
+          }
+        }
+      },
+      "contained_trial": {
+        "mice": 3,
+        "rows": 687,
+        "mouse_equal_mae_rad": {
+          "still_wheel": 0.0162344952928325,
+          "repeat_recent_change": 0.01477902533938684,
+          "ridge_wheel_and_cue": 0.015062281409622215,
+          "ridge_wheel_cue_and_aligned_spikes": 0.015870606673996927,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.01601633556846121,
+          "attention_wheel_and_cue": 0.016396763008804837,
+          "attention_wheel_cue_and_aligned_spikes": 0.014741602972959686,
+          "attention_wheel_cue_and_other_trial_spikes": 0.014530215176196576
+        },
+        "contrasts": {
+          "ridge": {
+            "aligned_minus_wheel_and_cue_rad": 0.0008083252643747117,
+            "aligned_minus_other_trial_rad": -0.0001457288944642851,
+            "mice_with_smaller_error_than_both": 1
+          },
+          "attention": {
+            "aligned_minus_wheel_and_cue_rad": -0.0016551600358451508,
+            "aligned_minus_other_trial_rad": 0.00021138779676311073,
+            "mice_with_smaller_error_than_both": 1
+          }
+        }
+      },
+      "quiet_contained_trial": {
+        "mice": 3,
+        "rows": 221,
+        "mouse_equal_mae_rad": {
+          "still_wheel": 0.004803234950285849,
+          "repeat_recent_change": 0.004803234950285849,
+          "ridge_wheel_and_cue": 0.006813841642433532,
+          "ridge_wheel_cue_and_aligned_spikes": 0.008199213831371767,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.008552965241061602,
+          "attention_wheel_and_cue": 0.009832659117711952,
+          "attention_wheel_cue_and_aligned_spikes": 0.0068292108412405335,
+          "attention_wheel_cue_and_other_trial_spikes": 0.0068916821724163526
+        },
+        "contrasts": {
+          "ridge": {
+            "aligned_minus_wheel_and_cue_rad": 0.001385372188938235,
+            "aligned_minus_other_trial_rad": -0.00035375140968983525,
+            "mice_with_smaller_error_than_both": 1
+          },
+          "attention": {
+            "aligned_minus_wheel_and_cue_rad": -0.0030034482764714184,
+            "aligned_minus_other_trial_rad": -6.247133117581911e-05,
+            "mice_with_smaller_error_than_both": 2
+          }
+        }
+      }
+    }
+  },
+  "test_mice": [
+    {
+      "label": "Test mouse 1",
+      "quiet": {
+        "scored": 123,
+        "zero_change": 71,
+        "mae_rad": {
+          "still_wheel": 0.0031552612954070286,
+          "repeat_recent_change": 0.0031552612954070286,
+          "ridge_wheel_and_cue": 0.005392237218668478,
+          "ridge_wheel_cue_and_aligned_spikes": 0.006431075731272457,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.00699421200757268,
+          "attention_wheel_and_cue": 0.008879043025461615,
+          "attention_wheel_cue_and_aligned_spikes": 0.005263395582927535,
+          "attention_wheel_cue_and_other_trial_spikes": 0.005323750960102548
+        }
+      },
+      "all": {
+        "scored": 235,
+        "zero_change": 133,
+        "mae_rad": {
+          "still_wheel": 0.008165999853808385,
+          "repeat_recent_change": 0.008740426702037974,
+          "ridge_wheel_and_cue": 0.009353405211364412,
+          "ridge_wheel_cue_and_aligned_spikes": 0.010756678510732696,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.011172041445876005,
+          "attention_wheel_and_cue": 0.012100997681639667,
+          "attention_wheel_cue_and_aligned_spikes": 0.009844179350231737,
+          "attention_wheel_cue_and_other_trial_spikes": 0.009790477188253429
+        }
+      }
+    },
+    {
+      "label": "Test mouse 2",
+      "quiet": {
+        "scored": 41,
+        "zero_change": 17,
+        "mae_rad": {
+          "still_wheel": 0.006921620628264351,
+          "repeat_recent_change": 0.006921620628264351,
+          "ridge_wheel_and_cue": 0.00793887138358292,
+          "ridge_wheel_cue_and_aligned_spikes": 0.007930127662424674,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.00800352848739802,
+          "attention_wheel_and_cue": 0.010093786792207434,
+          "attention_wheel_cue_and_aligned_spikes": 0.0073316927529137104,
+          "attention_wheel_cue_and_other_trial_spikes": 0.007490996853102084
+        }
+      },
+      "all": {
+        "scored": 220,
+        "zero_change": 46,
+        "mae_rad": {
+          "still_wheel": 0.022103268625442856,
+          "repeat_recent_change": 0.016573965149109738,
+          "ridge_wheel_and_cue": 0.017301541843883977,
+          "ridge_wheel_cue_and_aligned_spikes": 0.01710830296653045,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.017412880169593106,
+          "attention_wheel_and_cue": 0.016745348860068274,
+          "attention_wheel_cue_and_aligned_spikes": 0.015406486491380975,
+          "attention_wheel_cue_and_other_trial_spikes": 0.015537503084428387
+        }
+      }
+    },
+    {
+      "label": "Test mouse 3",
+      "quiet": {
+        "scored": 57,
+        "zero_change": 34,
+        "mae_rad": {
+          "still_wheel": 0.004332822927186167,
+          "repeat_recent_change": 0.004332822927186167,
+          "ridge_wheel_and_cue": 0.007110416325049196,
+          "ridge_wheel_cue_and_aligned_spikes": 0.010236438100418169,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.010661155228214104,
+          "attention_wheel_and_cue": 0.010525147535466808,
+          "attention_wheel_cue_and_aligned_spikes": 0.007892544187880357,
+          "attention_wheel_cue_and_other_trial_spikes": 0.007860298704044425
+        }
+      },
+      "all": {
+        "scored": 232,
+        "zero_change": 95,
+        "mae_rad": {
+          "still_wheel": 0.01843421739924626,
+          "repeat_recent_change": 0.019022684167012808,
+          "ridge_wheel_and_cue": 0.018531897173618257,
+          "ridge_wheel_cue_and_aligned_spikes": 0.019746838544727644,
+          "ridge_wheel_cue_and_other_trial_spikes": 0.01946408508991452,
+          "attention_wheel_and_cue": 0.020343942484706567,
+          "attention_wheel_cue_and_aligned_spikes": 0.018974143077266345,
+          "attention_wheel_cue_and_other_trial_spikes": 0.018262665255907914
+        }
+      }
+    }
+  ],
+  "test_boundary": {
+    "endpoint_outside_recording": 0,
+    "nonfinite_measured_pair": 0,
+    "recorded_trial_stop_at_or_before_issue": 0,
+    "recorded_trial_stop_during_forecast": 0,
+    "unknown_trial_stop": 0,
+    "same_encoder_reading": 252,
+    "same_angle_after_new_encoder_readings": 22,
+    "issued": 687,
+    "issued_quiet": 221,
+    "quiet_with_no_new_encoder_reading": 221,
+    "quiet_zero_change": 122
+  },
+  "verification": {
+    "held_forecasts_frozen_before_endpoint_extraction": true,
+    "models_selected_by_held_result": false,
+    "independent_source_feature_and_score_replay": true,
+    "independent_model_forward_replay": true
+  }
+}

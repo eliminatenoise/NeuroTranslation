@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Recorded evaluation of camera estimates for sideways thigh movement in NeuroSurge.">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../camera-forecast-study/study.css">
+  <title>Sideways thigh tracking · NeuroSurge</title>
+</head>
+<body>
+  <a class="skip" href="#results">Skip to results</a>
+  <header class="bar frame">
+    <nav aria-label="Project"><a href="../camera-forecast-study/">Camera forecast study</a><a href="../../projects/?project=neurosurge">Project browser</a></nav>
+    <a data-edition href="technical.html">Technical edition</a>
+  </header>
+  <main class="frame">
+    <h1>Sideways thigh tracking</h1>
+    <p class="lead">A recorded test of camera estimates against separate marker measurements during slow jumping jacks.</p>
+    <section class="comparison" aria-labelledby="results">
+      <h2 id="results">Accuracy of 3D pose estimates</h2>
+      <table>
+<caption>Mean angle error from estimated 3D joint positions, in degrees.</caption>
+<thead><tr><th scope="col">Pose model</th><th scope="col">Camera 1</th><th scope="col">Camera 3</th></tr></thead>
+<tbody>
+<tr><th scope="row">Lite</th><td>6.24</td><td>5.97</td></tr>
+<tr><th scope="row">Full</th><td>6.40</td><td>6.43</td></tr>
+<tr><th scope="row">Heavy</th><td>6.78</td><td>8.22</td></tr>
+</tbody>
+</table>
+    </section>
+    <div class="reading">
+      <section><h2>What we measured</h2>
+<p>A person can swing a thigh sideways, lift it forward or do both at once. The game needs a number that changes when the thigh swings sideways. We used the line joining the two hips to set the sideways direction, then measured how much of the whole thigh points along it. A positive number means the thigh points away from the centre of the body. This keeps a forward lift from counting as a sideways swing on its own.</p>
+<p>We used 2,210 retained pictures of 11 people doing slow jumping jacks, with two views of each person. The pictures come from a previously selected window in each recording. A separate system followed markers on the body to estimate the joint centres. The archive links each picture to its marker readings. We used those readings as the comparison and kept angles within the virtual hip’s range of 30° inward to 45° outward.</p>
+<p>The archive has repeat rows for some missing pictures. We used the row for each photograph that actually exists. We needed the centres of both shoulders and both hips, plus the knee on the side being measured.</p>
+</section>
+<section><h2>Comparing the estimates</h2>
+<p>The simplest camera method draws the thigh from points in the flat image. A second method uses the pose model’s estimate of where the joints sit in three dimensions. It estimates how far forward or back a joint is relative to the middle of the hips. A third combines the two when they agree and gives the picture more weight when the person faces the camera. All three could usually tell whether a larger movement went inwards or outwards.</p>
+<p>When the camera is off to one side, the thigh can look shorter because the movement goes towards or away from the lens. The model’s estimate of depth can help in that view. The combined method avoids sending a direction when the two estimates point firmly in opposite directions. It also moves small estimates towards zero.</p>
+<p>An image can contribute two measured angles, one for each side. Angle error tells us how far an estimate was from the separate marker reading. For direction and coverage, we counted movements at least 15° inward or outward. Coverage means the share of those movements for which a method could give an estimate. Each person counted equally when averaging errors.</p>
+<p>The Heavy model reduced error from 8.61° to 5.22° on 439 larger-movement measurements it shared with Lite in Camera 3. It covered 88.3% of the larger movements in that view. Lite covered all of them. Across all supported movements, Lite gave the smallest average error of the three estimates that use 3D joint positions in both views.</p><details><summary>Compare the larger movements</summary><table>
+<caption>Mean angle error from estimated 3D positions on the same larger movements, in degrees.</caption>
+<thead><tr><th scope="col">Model and camera</th><th scope="col">Lite</th><th scope="col">Other model</th></tr></thead>
+<tbody>
+<tr><th scope="row">Full · Camera 1</th><td>7.69</td><td>6.28</td></tr>
+<tr><th scope="row">Full · Camera 3</th><td>8.48</td><td>7.17</td></tr>
+<tr><th scope="row">Heavy · Camera 1</th><td>7.70</td><td>6.04</td></tr>
+<tr><th scope="row">Heavy · Camera 3</th><td>8.61</td><td>5.22</td></tr>
+</tbody>
+</table></details>
+</section>
+<section><h2>Processing time</h2>
+<p>Lite, Full and Heavy are three sizes of the MediaPipe pose model. Four browser workers processed the pictures together for each size. The timings start after the model files are ready and include starting the browser workers, opening the pictures and running the tracker. A live camera adds its own capture and display time.</p><table>
+<caption>Time to process the same 2,210 pictures across four browser lanes.</caption>
+<thead><tr><th scope="col">Pose model</th><th scope="col">Batch time</th></tr></thead>
+<tbody>
+<tr><th scope="row">Lite</th><td>25.9 s</td></tr>
+<tr><th scope="row">Full</th><td>29.5 s</td></tr>
+<tr><th scope="row">Heavy</th><td>58.7 s</td></tr>
+</tbody>
+</table>
+</section>
+<section><h2>Learning a correction</h2>
+<p>We fitted a correction on a separate archive of 18 people. It learns from the shape in the picture, the model’s depth estimate and how far the person is turned towards the camera. We tested one person at a time and used only the other 17 people to fit and scale the input numbers for that test.</p>
+<p>We tried three ways to fit the correction. Each person counted equally. One fit kept all errors in proportion. Another reduced the influence of unusually large errors. The third did the same and gave larger movements twice the weight during fitting.</p>
+<p>The fit that squares each error lowered the average angle error in the harder MoVi view from 7.73° to 4.33°. Direction agreement on larger movements rose from 61.3% to 91.4%. The fixed zero command gave 4.51° error on the same rows.</p>
+<p>The earlier jumping-jack results helped us choose the correction’s design. All measurements used to fit it came from MoVi. We trained on all 18 people and ran the correction on the jumping-jack pictures to see how it handled a different archive. It kept high direction agreement. The correction averaged 6.65° error in Camera 3 when we gave larger training movements extra weight. The raw Lite estimate averaged 5.97° on the same comparisons.</p>
+</section>
+<section><h2>Result for the game</h2>
+<p>For a camera to drive the hip, we look for reliable direction, enough usable pictures and a clear accuracy gain. The two fixed commands hold the virtual hip at zero or seven degrees. A moving estimate had to beat both by at least one degree in each camera view. It also had to get the direction right on at least 85% of its scored larger movements in each view. We required coverage of at least 10% per view and 25% across the two views. None of the tested methods met all of these requirements. Another 68 people from MoVi remain reserved for a candidate that meets the early checks.</p>
+</section>
+<section><h2>Recordings and sources</h2>
+<ul><li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12088771/">Schreuder and colleagues, SUMediPose study</a></li><li><a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/GRRROM">SUMediPose archive and terms</a> · <a href="https://dataverse.harvard.edu/api/datasets/:persistentId/?persistentId=doi:10.7910/DVN/GRRROM">Public archive record (JSON)</a></li><li><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0253157">Ghorbani and colleagues, MoVi study</a></li><li><a href="https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker">MediaPipe pose model documentation</a></li><li><a href="results.json">Download aggregate results (JSON)</a></li></ul>
+</section>
+    </div>
+  </main>
+</body>
+</html>

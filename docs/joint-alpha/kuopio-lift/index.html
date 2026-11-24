@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Where will the wrist go? · NeuroTranslation</title>
+  <style>
+    :root { font: 100%/1.58 system-ui, sans-serif; color: #193d36; background: #f8faf6; }
+    main { max-width: 48rem; margin: 2.5rem auto 5rem; padding: 0 1rem; }
+    header { border-top: .35rem solid #23574a; }
+    h1, h2 { line-height: 1.15; letter-spacing: -.03em; }
+    h1 { font-size: clamp(2.35rem, 7vw, 4rem); margin: .4em 0; }
+    section { margin-top: 2rem; border-top: 1px solid #b9cbc3; }
+    table { width: 100%; table-layout: fixed; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    caption { text-align: left; font-weight: 650; margin-bottom: .45rem; }
+    th, td { border-bottom: 1px solid #b9cbc3; padding: .5rem .35rem; text-align: left; vertical-align: top; }
+    th:first-child { width: 53%; }
+    a { color: #07644d; text-underline-offset: .18em; overflow-wrap: anywhere; }
+    a:focus-visible { outline: 3px solid #a64f13; outline-offset: .2rem; }
+    @media (max-width: 390px) { th, td { overflow-wrap: anywhere; font-size: .9rem; } }
+    @media (forced-colors: active) { a:focus-visible { outline-color: Highlight; } th, td { border-color: CanvasText; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p><a href="../">NeuroTranslation studies</a></p>
+    <h1>Where will the wrist go?</h1>
+    <p>When someone lifts a box, can the electrical activity in their muscles reveal where their wrist will move next? In these recordings, the closest forecasts came from watching how both wrists had already moved.</p>
+    <p><a href="compare/">Compare the wrist forecasts</a></p>
+    <p><a href="../kuopio-turning-lift/">See the turning-lift study</a></p>
+  </header>
+  <section>
+    <h2>Give every forecast the same lift</h2>
+    <p>Thirteen people each contributed one recording of a repeated 12 kg box lift. Cameras tracked small marks on both wrists. Plates underfoot measured forces. We used six recordings of muscle activity from the shoulders and upper back. <a href="https://doi.org/10.1038/s41597-026-08550-z">Recording methods</a></p>
+    <p>We gave each forecast 25 earlier wrist readings across 240 ms. Some forecasts also got earlier readings from the muscles or floor plates. The outcome was the right wrist’s change in position 100 ms later, in three directions. We fitted the forecasts on 2,316 windows from seven people and saved the predictions for six other people before reading their later wrist positions.</p>
+    <p>Of 2,402 scheduled windows in those six people, 17 were missing a usable input history. The remaining 2,385 had a later right-wrist position. Every forecast used the same windows, and each person counted equally.</p>
+  </section>
+  <section>
+    <h2>The wrist history gave the closest forecast</h2>
+    <p>With earlier wrist and floor readings, the attention model missed the wrist’s position by <strong>13.37 mm</strong> on average. Adding current muscle readings raised the error to <strong>14.16 mm</strong>. Error fell for two people and rose for four. The exact two-sided sign test gave <em>p</em> = 0.6875.</p>
+    <table>
+      <caption>Mean distance from the later wrist position, in millimetres</caption>
+      <thead><tr><th scope="col">Inputs</th><th scope="col">Linear model</th><th scope="col">Attention model</th></tr></thead>
+      <tbody><tr><th scope="row">Wrist positions</th><td>10.33</td><td>12.17</td></tr>
+<tr><th scope="row">Wrist positions and muscle readings</th><td>11.70</td><td>13.11</td></tr>
+<tr><th scope="row">Wrist positions and floor forces</th><td>12.14</td><td>13.37</td></tr>
+<tr><th scope="row">Wrist positions, floor forces and current muscle readings</th><td>13.50</td><td>14.16</td></tr>
+<tr><th scope="row">Wrist positions, floor forces and earlier muscle readings</th><td>13.16</td><td>15.39</td></tr>
+<tr><th scope="row">Wrist positions with earlier floor forces and muscle readings</th><td>11.81</td><td>15.54</td></tr></tbody>
+    </table>
+    <p>The lowest error was <strong>10.33 mm</strong> from a linear model that used wrist history alone. Continuing the last 50 ms of movement at the same speed and direction missed by 11.96 mm. Keeping the wrist at its last position missed by 43.61 mm.</p>
+  </section>
+  <section>
+    <h2>What the sensor controls tell us</h2>
+    <p>Substituting muscle readings from one second earlier pushed the full attention model’s error to 15.39 mm. The substitution can also change the phase of the lift. It checks timing within the recording. It cannot establish a causal muscle effect.</p>
+    <p>Leaving out windows with a whole block of zero muscle samples gave nearly the same primary difference. With 2,339 windows, the current muscle readings raised error by 0.79 mm.</p>
+    <p>The wrist positions come from two marks on the skin. The floor plates track ground reaction, and the muscle recordings track electrical activity. The native muscle-voltage labels and device descriptions use different units, so we kept the same recorded scale across files. Absolute plate calibration was outside the comparison. These results cover one lifting task on the source clock.</p>
+    <p><a href="results.json">Download the aggregate results and feature definitions</a>.</p>
+  </section>
+  <section>
+    <h2>Source</h2>
+    <p>Alexander K. Beattie, Matti J. Kortelainen, Paavo Vartiainen and Pasi A. Karjalainen released the Kuopio Full-Body Dataset. We selected its original crouch-lift recordings, formed earlier-only input windows and computed the forecast comparison from the directly observed marker positions. <a href="https://doi.org/10.5281/zenodo.24194741">Dataset v1.2.1</a> · <a href="https://doi.org/10.1038/s41597-026-08550-z">Study methods</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Dataset licence</a></p>
+  </section>
+</main>
+</body>
+</html>

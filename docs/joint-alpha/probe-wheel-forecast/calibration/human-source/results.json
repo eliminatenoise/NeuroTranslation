@@ -1,0 +1,55 @@
+{
+  "status": "engineering_verified_clock_join_held",
+  "data": {
+    "title": "High-density EMG, IMU, kinetic and kinematic data for locomotion",
+    "authors": [
+      "Hristo Dimitrov",
+      "Anthony M. J. Bull",
+      "Dario Farina"
+    ],
+    "dataset": "https://doi.org/10.6084/m9.figshare.22227337.v2",
+    "original_methods": "https://doi.org/10.1038/s41597-023-02679-x",
+    "license": "CC BY 4.0"
+  },
+  "scope": {
+    "engineering_participants": 1,
+    "other_people_recordings_opened": false,
+    "tested_conditions": [
+      "level-ground slow walking",
+      "level-ground preferred walking",
+      "level-ground fast walking"
+    ],
+    "trained_or_scored_a_paired_forecast": false
+  },
+  "wearable": {
+    "sample_rows": 227847,
+    "muscle_electrical_channels": 64,
+    "inertial_motion_channels": 6,
+    "nominal_sample_rate_hz": 2000,
+    "nominal_sample_index_history_examples": 49,
+    "explicit_timestamp_trial_or_trigger_columns": 0
+  },
+  "force": {
+    "released_exports": 9,
+    "exact_force_assignment_companions": 7,
+    "held_assignment_companions": 2,
+    "sample_rate_hz": 1000,
+    "identified_threshold_events": 14,
+    "force_clock_windows": 987,
+    "force_clock_windows_with_events": 70,
+    "confirmation_ms": 20,
+    "engineering_loading_threshold_newtons": 20,
+    "engineering_unloaded_threshold_newtons": 10,
+    "filter_description": "The study used a 20 Hz zero-lag low-pass filter on the released forces."
+  },
+  "archived_cycle_check": {
+    "cycle_segments_compared": 18,
+    "full_exact_wearable_overlaps": 9
+  },
+  "verification": {
+    "independent_source_readback": true,
+    "common_wearable_force_time_origin_verified": false,
+    "true_traversal_order_verified": false,
+    "release_force_feedback_only_after_completed_traversal": true
+  }
+}

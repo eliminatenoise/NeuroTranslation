@@ -1,0 +1,32 @@
+:root { font: 1.0625rem/1.62 system-ui, sans-serif; color-scheme: light; background: #f6f8f5; color: #162b27; }
+body { margin: 0; }
+main { max-width: 49rem; margin: 0 auto; padding: 1.2rem clamp(1rem,4vw,2rem) 4rem; }
+a { color: #18574e; overflow-wrap: anywhere; text-underline-offset: 0.16em; }
+a:focus-visible, .table-view:focus-visible { outline: 2px solid #18685e; outline-offset: 3px; }
+nav { display: flex; flex-wrap: wrap; gap: 0.55rem 1.4rem; border-bottom: 1px solid #becdc4; padding-bottom: 0.8rem; }
+nav [aria-current="page"] { font-weight: 750; }
+h1, h2, h3 { line-height: 1.2; margin-top: 1.55em; }
+h1 { font-size: clamp(1.8rem,5.3vw,2.7rem); }
+h2 { font-size: 1.48rem; }
+h3 { font-size: 1.2rem; }
+li + li { margin-top: 0.5rem; }
+.table-view, pre { overflow: auto; }
+table { border-collapse: collapse; margin-block: 0.8rem; width: 100%; }
+th, td { border-bottom: 1px solid #c3cec7; padding: 0.5rem 0.64rem; vertical-align: top; }
+th { text-align: left; background: #e1ebe3; }
+pre { padding: 0.6rem 0.8rem; background: #e8eee9; }
+code { font-family: ui-monospace, monospace; font-size: 0.91em; }
+@media print { :root { background: #fff; } main { max-width: none; padding: 0; } }
+
+footer {margin-top:1.5rem;border-top:1px solid #becdc4;font-size:.94rem}
+
+.start { max-width: 43rem; padding-block: .6rem 2rem; }
+.start h1 { margin-top: .65em; }
+.editions { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,15rem),1fr)); gap: 1rem; margin-block: 1.7rem; }
+.editions a { display: block; padding: 1rem; border: 1px solid #a6bbae; border-radius: .25rem; background: #fff; text-decoration: none; }
+.editions strong { display:block; font-size: 1.18rem; text-decoration: underline; }
+.editions span { color: #263d34; display:block; margin-top:.35rem; }
+.files { display:flex; flex-wrap:wrap; gap: .5rem 1.1rem; }
+.table-view table { font-variant-numeric:tabular-nums; }
+.table-view td:not(:first-child) { text-align:right; white-space:nowrap; }
+@media(max-width:560px){.table-view th,.table-view td{padding:.45rem .36rem}.table-view th:last-child{min-width:5.6rem}}

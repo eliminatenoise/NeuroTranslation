@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Run an experimental NeuroTranslation model from five prior pelvis marker readings.">
+  <title>Forecast pelvis movement · NeuroTranslation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header class="intro">
+      <a href="../">← Pelvis marker study</a>
+      <h1>Forecast pelvis movement</h1>
+      <p>See how a model predicts whether the pelvis will rise or fall over the next 100 milliseconds. Hide camera markers to see how the forecast changes.</p>
+    </header>
+    <div class="workspace">
+      <section class="settings" aria-labelledby="input-title">
+        <h2 id="input-title">Inputs</h2>
+        <p id="input-source">Invented example</p>
+        <form id="forecast-form">
+          <label for="markers">Markers to show</label>
+          <select id="markers">
+            <option value="all">Show all available markers</option>
+            <option value="back">Hide both front markers</option>
+            <option value="left">Hide the left front marker</option>
+            <option value="right">Hide the right front marker</option>
+            <option value="brief">Hide the left front marker briefly</option>
+          </select>
+          <label for="training">What the model trained on</label>
+          <select id="training">
+            <option value="mixed">Complete and missing marker readings</option>
+            <option value="complete">Complete marker readings</option>
+          </select>
+          <label class="check"><input id="floor-force" type="checkbox"> Include force plate readings from both feet</label>
+          <p id="floor-note" hidden>No force plate readings supplied.</p>
+          <button id="run" type="submit" disabled>Run forecast</button>
+        </form>
+        <details id="custom-input">
+          <summary>Use your own readings</summary>
+          <p>Paste five rows of marker heights in millimetres, at 50 millisecond intervals ending at 0. Each row gives left front, right front, left back and right back. Use <code>null</code> when a marker is missing.</p>
+          <form id="readings-form">
+            <label for="readings">Readings in JSON</label>
+            <textarea id="readings" rows="8" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+            <button id="apply" type="submit" disabled>Apply readings</button>
+            <button id="reset" type="button" class="quiet" disabled>Restore invented example</button>
+          </form>
+          <p id="input-error" role="alert"></p>
+          <p>Readings stay in this browser tab.</p>
+        </details>
+      </section>
+
+      <section class="results" aria-labelledby="forecast-title">
+        <div class="result-heading">
+          <h2 id="forecast-title">100 milliseconds ahead</h2>
+          <span id="forecast-announcement" class="assistive" aria-live="polite" aria-atomic="true"></span>
+          <p id="forecast-status" role="status">Loading model…</p>
+        </div>
+        <div class="outputs">
+          <div>
+            <h3>Four-marker centre</h3>
+            <p class="amount" id="four-forecast">—</p>
+            <p>Change in the average height of all four markers.</p>
+          </div>
+          <div>
+            <h3>Back-marker centre</h3>
+            <p class="amount" id="back-forecast">—</p>
+            <p>Change in the average height of the two back markers.</p>
+          </div>
+        </div>
+        <section class="history" aria-labelledby="history-title">
+          <h3 id="history-title">Earlier marker heights</h3>
+          <canvas id="history-plot" aria-hidden="true"></canvas>
+          <ul class="legend" aria-hidden="true">
+            <li><i class="marker marker-0"></i>Left front</li>
+            <li><i class="marker marker-1"></i>Right front</li>
+            <li><i class="marker marker-2"></i>Left back</li>
+            <li><i class="marker marker-3"></i>Right back</li>
+          </ul>
+          <details class="reading-table">
+            <summary>View the readings as a table</summary>
+            <table>
+              <caption>Heights in millimetres for each time before the forecast.</caption>
+              <thead><tr><th scope="col">Time</th><th scope="col">Left front</th><th scope="col">Right front</th><th scope="col">Left back</th><th scope="col">Right back</th></tr></thead>
+              <tbody id="history-rows"></tbody>
+            </table>
+          </details>
+        </section>
+      </section>
+    </div>
+    <footer>
+      <p>The study tested these models by hiding readings from recorded optical markers. It did not test real camera dropouts. A live webcam would need a way to measure the four marker heights in millimetres.</p>
+      <p><a href="../NeuroTranslate-marker-availability.zip">Download the offline model and launchers</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/docs/joint-alpha/missing-pelvis-markers/run#readme">Input format and source</a></p>
+    </footer>
+  </main>
+  <script type="module" src="interface.mjs"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Optic-flow tail-variation forecast · Technical edition</title><link rel="stylesheet" href="guides.css"></head><body><main><nav aria-label="Reading editions"><a href="index.html">Study start</a><a href="technical.html" aria-current="page">Technical edition</a><a href="simple.html">Simple edition</a><a href="results.json">Score data</a></nav>
+<article><h1>Recent movement gave the lowest tail-variation forecast error</h1>
+<p>In 2,268 later windows from the recording <code>fig4_01/230413_f1</code>, carrying forward recent camera variation gave the lowest mean absolute error. Adding the logged visual command to the fitted camera model increased paired error by 0.000572 radians. The model using the current command history also had higher error than the one using commands sampled six seconds earlier.</p>
+<div class="table-view" role="region" tabindex="0" aria-label="Mean absolute error of tail-angle variation in radians"><table>
+<thead>
+<tr>
+<th>Forecast</th>
+<th align="right">Mean absolute error (radians)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Carry forward the most recent 100 ms of angle variation</td>
+<td align="right">0.011266</td>
+</tr>
+<tr>
+<td>Fit a correction from measured camera history</td>
+<td align="right">0.013926</td>
+</tr>
+<tr>
+<td>Add the logged visual command to the camera history</td>
+<td align="right">0.014498</td>
+</tr>
+<tr>
+<td>Add a command history taken six seconds earlier</td>
+<td align="right">0.014164</td>
+</tr>
+</tbody></table></div>
+<h2>Measurements</h2>
+<p>Tanaka and Portugues recorded larval zebrafish with a visual pattern controlled by a program. Figure 4 used changes in externally programmed motion. The field <code>LDPS_drift_direction</code> contains direction codes −1 and +1, with 1,735 changes at strictly increasing software timestamps in this recording. The camera field <code>tail_sum</code> is a signed bend angle in radians. We forecast its population standard deviation over the half-open interval [t, t + 100 ms), where t is the issue time. The target windows contain 19 to 21 native samples. The spread retains sensitivity to bends of either sign. The source tells us when the program logged a command. The actual screen timing and sensory exposure remain unverified.</p>
+<h2>Timing and case selection</h2>
+<p>Use a 320 ms grid anchored at zero seconds on the software clock. Exclude both rows in any repeated timestamp group. The camera had 10 such pairs and the display had 2,175. Both command values agreed in every display pair. For a past feature, require a later timestamp from the same log to confirm that its time group has closed at or before issue. Require at least two eligible camera rows in each earlier bin and each target window. No camera gap may exceed 9.994 ms, including at both edges of each interval. The age limit for each command reading is 19.990 ms. Both limits are twice the median positive interval of their log. Fit on the first two-thirds of shared software time. The whole fitting target interval must end by the split at 2,400.006403 s. Require later histories to start on the later side, including the shifted command history extending 11 s before its issue. The roles share no native camera or display rows.</p>
+<p>The timing rules retained 6,732 of 11,249 grid times. Of 4,454 fitting cases, 4,440 had finite inputs and targets. Of 2,278 later cases, 2,270 had finite inputs. A separate review reopened all four forecasts for every issued case before the later targets were read. Two of the issued cases then had unusable targets. All method scores use the same 2,268 cases.</p>
+<h2>Forecasting rules and error</h2>
+<p>The carry-forward rule uses the standard deviation in the previous 100 ms. All learned rules fit a correction to that forecast. Their camera inputs are the mean and population standard deviation in each of four 50 ms bins ending at t. The command arms add one value at each of ten ages before issue, namely 5, 4, 3, 2, 1, 0.50, 0.20, 0.10, 0.05 and 0 s. The comparison arm uses each of those ages another six seconds earlier. Select the latest eligible value at or before each cutoff. This earlier command can still contain useful history.</p>
+<p>Compute predictor means and population standard deviations from the fitting rows. Give constant columns zero influence. Minimize the mean squared residual plus 0.1 times the sum of squared slopes, with an unpenalized intercept. Truncate the final variation forecasts at zero. For each scored case, take the absolute difference from the measured variation. Average the command model&#39;s error minus the camera model&#39;s error across the paired cases for the primary contrast. The command reduced error in six populated blocks on the 60-second grid and increased it in the other 14. The pooled paired difference was positive. These summaries describe one recording on its software clock. Held-animal transfer and physical synchrony remain open.</p>
+<p><a href="https://doi.org/10.1016/j.cub.2025.08.047">Original study</a> · <a href="https://doi.org/10.5281/zenodo.16085585">Versioned archive</a></p>
+</article><footer><p>Ryosuke Tanaka and Ruben Portugues deposited <cite>Algorithmic dissection of optic flow memory in larval zebrafish</cite>. <a href="https://doi.org/10.5281/zenodo.16085585">Zenodo dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</a> · <a href="https://doi.org/10.1016/j.cub.2025.08.047">Original Current Biology study</a></p></footer></main></body></html>

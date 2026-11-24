@@ -1,0 +1,481 @@
+{
+  "admitted_walking_clips": 682,
+  "data": "https://doi.org/10.6084/m9.figshare.29300888.v1",
+  "data_license": "https://creativecommons.org/licenses/by/4.0/",
+  "evaluation_scope": "A retrospective test on archived marker positions, including original marker processing. Movement rows cover complete visible heel endpoints. New-load probabilities cover a +/-200 ms neighborhood of a confirmed same-foot plate contact. Impulse uses the next 100 ms inside measured contact on one plate. Recorded force is projected to world-up for both model arms.",
+  "held_people": 12,
+  "methods": "https://doi.org/10.1038/s41597-025-06535-y",
+  "physical_comparison": "One fixed geometrical correction from the three static plate corners for each recording. Both arms use exactly the same frozen weights, source rows, thresholds and horizons. Scalar force outputs retain their original world-up units; only motion coordinates rotate.",
+  "same_model_frozen": true,
+  "world_vs_slope": {
+    "all": {
+      "distinct_measured_new_loads": 1267,
+      "scores": {
+        "no_new_load": {
+          "plate_load_brier": 0.23225292780823462
+        },
+        "recent_motion": {
+          "heel_distance_mm": 56.525955090753975
+        },
+        "recent_plate_force": {
+          "plate_impulse_abs_ns": 13.81100276945463
+        },
+        "slope": {
+          "heel_distance_mm": 26.356646571003306,
+          "plate_impulse_abs_ns": 13.383886836503157,
+          "plate_load_brier": 0.04325446206851421
+        },
+        "world": {
+          "heel_distance_mm": 38.88775202444868,
+          "plate_impulse_abs_ns": 13.250019620387874,
+          "plate_load_brier": 0.06354894373468349
+        }
+      },
+      "slope_minus_world_error": {
+        "heel_distance_mm": {
+          "mean_change": -12.531105453445377,
+          "paired_people": 12,
+          "people_improved": 12,
+          "whole_person_bootstrap_95pct": [
+            -13.841318511317974,
+            -11.086038786157115
+          ]
+        },
+        "plate_impulse_abs_ns": {
+          "mean_change": 0.1338672161152831,
+          "paired_people": 12,
+          "people_improved": 4,
+          "whole_person_bootstrap_95pct": [
+            -0.003076572306811435,
+            0.261282078399376
+          ]
+        },
+        "plate_load_brier": {
+          "mean_change": -0.02029448166616929,
+          "paired_people": 12,
+          "people_improved": 12,
+          "whole_person_bootstrap_95pct": [
+            -0.02362308839648704,
+            -0.01635147202422179
+          ]
+        }
+      },
+      "support": {
+        "impulse": {
+          "people": 12,
+          "rows": 9763
+        },
+        "movement": {
+          "people": 12,
+          "rows": 22304
+        },
+        "plate_load": {
+          "people": 12,
+          "rows": 5446
+        }
+      }
+    },
+    "level_down": {
+      "distinct_measured_new_loads": 132,
+      "scores": {
+        "no_new_load": {
+          "plate_load_brier": 0.2341856473096294
+        },
+        "recent_motion": {
+          "heel_distance_mm": 58.601521299373324
+        },
+        "recent_plate_force": {
+          "plate_impulse_abs_ns": 12.791928059492252
+        },
+        "slope": {
+          "heel_distance_mm": 23.735899089263,
+          "plate_impulse_abs_ns": 11.233718920334171,
+          "plate_load_brier": 0.02683725206871811
+        },
+        "world": {
+          "heel_distance_mm": 23.797686554909603,
+          "plate_impulse_abs_ns": 11.247855628410333,
+          "plate_load_brier": 0.026452918643990773
+        }
+      },
+      "slope_minus_world_error": {
+        "heel_distance_mm": {
+          "mean_change": -0.06178746564660761,
+          "paired_people": 12,
+          "people_improved": 7,
+          "whole_person_bootstrap_95pct": [
+            -0.23293623071616748,
+            0.10409975838571413
+          ]
+        },
+        "plate_impulse_abs_ns": {
+          "mean_change": -0.014136708076161039,
+          "paired_people": 12,
+          "people_improved": 7,
+          "whole_person_bootstrap_95pct": [
+            -0.04683218055853874,
+            0.01767947333882134
+          ]
+        },
+        "plate_load_brier": {
+          "mean_change": 0.00038433342472733614,
+          "paired_people": 12,
+          "people_improved": 5,
+          "whole_person_bootstrap_95pct": [
+            -0.00042502989502857323,
+            0.001193756952670233
+          ]
+        }
+      },
+      "support": {
+        "impulse": {
+          "people": 12,
+          "rows": 1049
+        },
+        "movement": {
+          "people": 12,
+          "rows": 2500
+        },
+        "plate_load": {
+          "people": 12,
+          "rows": 566
+        }
+      }
+    },
+    "level_up": {
+      "distinct_measured_new_loads": 112,
+      "scores": {
+        "no_new_load": {
+          "plate_load_brier": 0.2290594767010867
+        },
+        "recent_motion": {
+          "heel_distance_mm": 57.39188442318227
+        },
+        "recent_plate_force": {
+          "plate_impulse_abs_ns": 12.381136251885012
+        },
+        "slope": {
+          "heel_distance_mm": 23.168450573333384,
+          "plate_impulse_abs_ns": 11.268958807262374,
+          "plate_load_brier": 0.03269337684052138
+        },
+        "world": {
+          "heel_distance_mm": 23.261737874312363,
+          "plate_impulse_abs_ns": 11.253196991376603,
+          "plate_load_brier": 0.03293434528157204
+        }
+      },
+      "slope_minus_world_error": {
+        "heel_distance_mm": {
+          "mean_change": -0.09328730097898112,
+          "paired_people": 12,
+          "people_improved": 7,
+          "whole_person_bootstrap_95pct": [
+            -0.24970783427354062,
+            0.05777377574946137
+          ]
+        },
+        "plate_impulse_abs_ns": {
+          "mean_change": 0.015761815885773005,
+          "paired_people": 12,
+          "people_improved": 5,
+          "whole_person_bootstrap_95pct": [
+            -0.024299092774442803,
+            0.054729703068732864
+          ]
+        },
+        "plate_load_brier": {
+          "mean_change": -0.0002409684410506577,
+          "paired_people": 12,
+          "people_improved": 7,
+          "whole_person_bootstrap_95pct": [
+            -0.0011934105219879813,
+            0.0006456747712335401
+          ]
+        }
+      },
+      "support": {
+        "impulse": {
+          "people": 12,
+          "rows": 890
+        },
+        "movement": {
+          "people": 12,
+          "rows": 2094
+        },
+        "plate_load": {
+          "people": 12,
+          "rows": 484
+        }
+      }
+    },
+    "ramp_10_down": {
+      "distinct_measured_new_loads": 289,
+      "scores": {
+        "no_new_load": {
+          "plate_load_brier": 0.23428031044473085
+        },
+        "recent_motion": {
+          "heel_distance_mm": 61.983616416588156
+        },
+        "recent_plate_force": {
+          "plate_impulse_abs_ns": 15.893533252559125
+        },
+        "slope": {
+          "heel_distance_mm": 27.542685127062956,
+          "plate_impulse_abs_ns": 14.479201610144692,
+          "plate_load_brier": 0.05065280760380469
+        },
+        "world": {
+          "heel_distance_mm": 47.14921097514522,
+          "plate_impulse_abs_ns": 14.330630733631985,
+          "plate_load_brier": 0.07987253956638578
+        }
+      },
+      "slope_minus_world_error": {
+        "heel_distance_mm": {
+          "mean_change": -19.606525848082274,
+          "paired_people": 12,
+          "people_improved": 12,
+          "whole_person_bootstrap_95pct": [
+            -21.405892872916517,
+            -17.67863255783046
+          ]
+        },
+        "plate_impulse_abs_ns": {
+          "mean_change": 0.14857087651271086,
+          "paired_people": 12,
+          "people_improved": 4,
+          "whole_person_bootstrap_95pct": [
+            -0.2946230257895398,
+            0.5540221044186422
+          ]
+        },
+        "plate_load_brier": {
+          "mean_change": -0.0292197319625811,
+          "paired_people": 12,
+          "people_improved": 11,
+          "whole_person_bootstrap_95pct": [
+            -0.03950404470142337,
+            -0.018906035825322142
+          ]
+        }
+      },
+      "support": {
+        "impulse": {
+          "people": 12,
+          "rows": 2038
+        },
+        "movement": {
+          "people": 12,
+          "rows": 4380
+        },
+        "plate_load": {
+          "people": 12,
+          "rows": 1232
+        }
+      }
+    },
+    "ramp_10_up": {
+      "distinct_measured_new_loads": 245,
+      "scores": {
+        "no_new_load": {
+          "plate_load_brier": 0.22544911080520336
+        },
+        "recent_motion": {
+          "heel_distance_mm": 50.76971128153721
+        },
+        "recent_plate_force": {
+          "plate_impulse_abs_ns": 13.302758749808445
+        },
+        "slope": {
+          "heel_distance_mm": 28.296563199083497,
+          "plate_impulse_abs_ns": 14.948080504950331,
+          "plate_load_brier": 0.041756041348960764
+        },
+        "world": {
+          "heel_distance_mm": 44.45052269084246,
+          "plate_impulse_abs_ns": 14.664391669651758,
+          "plate_load_brier": 0.06562878617593601
+        }
+      },
+      "slope_minus_world_error": {
+        "heel_distance_mm": {
+          "mean_change": -16.153959491758965,
+          "paired_people": 12,
+          "people_improved": 12,
+          "whole_person_bootstrap_95pct": [
+            -19.25468461872853,
+            -13.04106199538378
+          ]
+        },
+        "plate_impulse_abs_ns": {
+          "mean_change": 0.2836888352985684,
+          "paired_people": 12,
+          "people_improved": 2,
+          "whole_person_bootstrap_95pct": [
+            0.04838542170467059,
+            0.507436571885118
+          ]
+        },
+        "plate_load_brier": {
+          "mean_change": -0.02387274482697525,
+          "paired_people": 12,
+          "people_improved": 10,
+          "whole_person_bootstrap_95pct": [
+            -0.03508532515739231,
+            -0.01127423837610895
+          ]
+        }
+      },
+      "support": {
+        "impulse": {
+          "people": 12,
+          "rows": 2058
+        },
+        "movement": {
+          "people": 12,
+          "rows": 4832
+        },
+        "plate_load": {
+          "people": 12,
+          "rows": 1083
+        }
+      }
+    },
+    "ramp_75_down": {
+      "distinct_measured_new_loads": 274,
+      "scores": {
+        "no_new_load": {
+          "plate_load_brier": 0.2358408858541109
+        },
+        "recent_motion": {
+          "heel_distance_mm": 60.4483809662218
+        },
+        "recent_plate_force": {
+          "plate_impulse_abs_ns": 14.516079219577238
+        },
+        "slope": {
+          "heel_distance_mm": 26.583639531782556,
+          "plate_impulse_abs_ns": 12.568714300222785,
+          "plate_load_brier": 0.04592312756022982
+        },
+        "world": {
+          "heel_distance_mm": 40.88181642578248,
+          "plate_impulse_abs_ns": 12.547992427059532,
+          "plate_load_brier": 0.07008744391638834
+        }
+      },
+      "slope_minus_world_error": {
+        "heel_distance_mm": {
+          "mean_change": -14.298176893999923,
+          "paired_people": 12,
+          "people_improved": 12,
+          "whole_person_bootstrap_95pct": [
+            -15.970791518162716,
+            -12.733874098320207
+          ]
+        },
+        "plate_impulse_abs_ns": {
+          "mean_change": 0.020721873163257982,
+          "paired_people": 12,
+          "people_improved": 6,
+          "whole_person_bootstrap_95pct": [
+            -0.3377310367355649,
+            0.3656368263148182
+          ]
+        },
+        "plate_load_brier": {
+          "mean_change": -0.024164316356158507,
+          "paired_people": 12,
+          "people_improved": 11,
+          "whole_person_bootstrap_95pct": [
+            -0.03646205253096752,
+            -0.01226921673886833
+          ]
+        }
+      },
+      "support": {
+        "impulse": {
+          "people": 12,
+          "rows": 1966
+        },
+        "movement": {
+          "people": 12,
+          "rows": 4226
+        },
+        "plate_load": {
+          "people": 12,
+          "rows": 1149
+        }
+      }
+    },
+    "ramp_75_up": {
+      "distinct_measured_new_loads": 215,
+      "scores": {
+        "no_new_load": {
+          "plate_load_brier": 0.22736570791811464
+        },
+        "recent_motion": {
+          "heel_distance_mm": 51.870040020503076
+        },
+        "recent_plate_force": {
+          "plate_impulse_abs_ns": 12.708565592244815
+        },
+        "slope": {
+          "heel_distance_mm": 25.73715705975442,
+          "plate_impulse_abs_ns": 14.185253730747327,
+          "plate_load_brier": 0.04151951306690816
+        },
+        "world": {
+          "heel_distance_mm": 38.40765885249055,
+          "plate_impulse_abs_ns": 13.88652887327396,
+          "plate_load_brier": 0.0645621728622674
+        }
+      },
+      "slope_minus_world_error": {
+        "heel_distance_mm": {
+          "mean_change": -12.670501792736134,
+          "paired_people": 11,
+          "people_improved": 11,
+          "whole_person_bootstrap_95pct": [
+            -14.611564314617265,
+            -10.524604954715565
+          ]
+        },
+        "plate_impulse_abs_ns": {
+          "mean_change": 0.29872485747336985,
+          "paired_people": 11,
+          "people_improved": 2,
+          "whole_person_bootstrap_95pct": [
+            0.07162193453489829,
+            0.4661285601597897
+          ]
+        },
+        "plate_load_brier": {
+          "mean_change": -0.02304265979535924,
+          "paired_people": 11,
+          "people_improved": 9,
+          "whole_person_bootstrap_95pct": [
+            -0.03522413330958314,
+            -0.009529595534146132
+          ]
+        }
+      },
+      "support": {
+        "impulse": {
+          "people": 11,
+          "rows": 1762
+        },
+        "movement": {
+          "people": 11,
+          "rows": 4272
+        },
+        "plate_load": {
+          "people": 11,
+          "rows": 932
+        }
+      }
+    }
+  }
+}

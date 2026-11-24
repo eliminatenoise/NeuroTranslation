@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Technical edition · Standing and sitting force forecast</title>
+<style>
+:root { color-scheme: light; font: 1rem/1.6 system-ui, sans-serif; color: #1d3440; background: #f5f8fa; }
+body { margin: 0; }
+main { margin: 0 auto; max-width: 51rem; padding: 1.25rem clamp(1rem, 4vw, 2.5rem) 4rem; }
+a { color: #155c71; text-underline-offset: 0.16em; overflow-wrap: anywhere; }
+a:focus-visible, .table-scroll:focus-visible { outline: 2px solid #1d5b78; outline-offset: 3px; }
+nav { display: flex; flex-wrap: wrap; column-gap: 1.4rem; row-gap: 0.35rem; padding-bottom: 0.8rem; border-bottom: 1px solid #bbcad1; }
+nav [aria-current] { font-weight: 700; }
+h1, h2, h3 { color: #142b38; line-height: 1.15; margin-top: 1.6em; }
+h1 { font-size: clamp(1.8rem, 5vw, 2.7rem); }
+h2 { font-size: 1.5rem; }
+pre, .table-scroll { overflow-x: auto; }
+pre { padding: 0.9rem; background: #e6eef2; border-radius: 0.3rem; }
+code { font-family: ui-monospace, monospace; font-size: 0.92em; }
+table { width: 100%; border-collapse: collapse; margin: 0.4rem 0 0.9rem; }
+th, td { padding: 0.5rem 0.7rem; border-bottom: 1px solid #c8d4db; vertical-align: top; }
+th { text-align: left; background: #e6eef2; }
+td:not(:first-child), th:not(:first-child) { font-variant-numeric: tabular-nums; }
+blockquote { border-inline-start: 3px solid #567988; padding-inline-start: 1rem; margin-inline: 0; }
+@media print { :root { background: #fff; } main { max-width: none; padding: 0; } }
+</style>
+</head>
+<body>
+<main>
+<nav aria-label="Reading editions">
+  <a href="index.html">Forecast demo</a>
+  <a href="technical.html" aria-current="page">Technical edition</a>
+  <a href="simple.html">Simple edition</a>
+</nav>
+<h1>Stand and sit force forecast — Technical edition</h1>
+<p>The offline preview uses the last 200 ms of upward force from two floor plates to forecast each plate’s impulse over the next 100 ms. Impulse is force integrated over time, in newton-seconds (N·s). The browser shows three methods, including a compact NeuroTranslate 0.0 attention model. The separate Research Edition appears in the recorded comparisons below.</p>
+<h2>Run the released predictor</h2>
+<ol>
+<li>Extract the ZIP and keep its files together. Open <code>Open on Linux.sh</code>, <code>Open on macOS.command</code> or <code>Open on Windows.cmd</code> on the matching operating system. You can also open <code>index.html</code> directly in a desktop browser. The browser runs offline.</li>
+<li>Choose <strong>Steady load</strong>, <strong>Rising load</strong> or <strong>Falling load</strong>. The presets use invented force histories. The chart plots earlier force at the 20 ms bin midpoints. The forecast table shows each plate’s impulse and their sum.</li>
+<li>Edit the ten force pairs to try a prepared history. Each box needs a finite number. Choose an example to restore all ten rows. If the scripts fail to load, keep <code>weights.js</code> and <code>predict.js</code> with <code>index.html</code> and reopen it.</li>
+</ol>
+<p>For the command line, use Python with NumPy, PyTorch and safetensors installed. From the extracted folder, run the included example.</p>
+<pre><code class="language-sh">python model/predict.py example-rising.json
+</code></pre>
+<p>To use your own data, replace the example filename in the command. Use a plain-text JSON file containing a list of ten <code>[plate 2, plate 3]</code> pairs. Put the oldest pair first and use calibrated vertical force in newtons (N), with upward positive. Keep the two saved weights files, called checkpoints, with the Python code in <code>model/</code>. The output lists <code>persistence</code>, <code>dampedTrend</code> and <code>attention</code> have one impulse per plate in the original column order, in N·s. <code>loadChangeN</code> is the signed change in average combined force, in N. <code>rising</code> is the correction flag. Add the two numbers in a forecast list to get its combined impulse.</p>
+<p>The file <code>example-rising.json</code> has a change of 260 N and activates the compact correction. Its latest pair is <code>[300, 375]</code> N. Carrying it forward gives 30.00 and 37.50 N·s, a combined 67.50 N·s. With the same file’s ten pairs entered in the browser, the damped trend gives 73.93 N·s combined and its corrected forecast gives 66.37 N·s combined, rounded to two decimals. These are forecasts for the invented input.</p>
+<h2>Signal windows and measured target</h2>
+<p>Define <code>t = 0</code> as the forecast time. Average each plate’s preceding force readings into ten consecutive 20 ms bins from −200 ms to 0 ms. Each bin includes its start and excludes its end. The first bin is <code>[−200, −180)</code> ms and the last is <code>[−20, 0)</code> ms. The outcome is the next interval <code>[0, 100)</code> ms. At 1,000 samples per second each bin holds 20 readings and the future interval holds 100.</p>
+<p>For a plate sampled at a uniform interval <code>Δt</code>, measured impulse is <code>Σ F[k] × Δt</code> over the samples in the future interval. At 1,000 samples per second, <code>Δt = 0.001 s</code>. The result depends on both the force and the duration. Add the two plate impulses for the combined target. The test measures upward force on the two floor plates. Chair and rail loads require separate measurements.</p>
+<h2>Reference forecasts</h2>
+<p><strong>Recent force.</strong> Carry the last 20 ms mean <code>F_last</code> through the next tenth of a second. The impulse forecast is <code>F_last × 0.1 s</code> for each plate.</p>
+<p><strong>Damped trend.</strong> Fit a straight line to the last five means, at −90, −70, −50, −30 and −10 ms. Least squares chooses the line that minimizes the sum of squared differences from the observed values. With times in seconds, centre those times by subtracting their mean. Calling the resulting times <code>c</code>, the slope is <code>b = Σ(c × F) / Σ(c²)</code>, in N/s. Anchor the forecast at <code>F_last</code> at the last bin midpoint <code>t_last = −0.01 s</code>. For each future time <code>t</code>, the predicted force is <code>F_last + b × τ × (1 − exp(−(t − t_last) / τ))</code>, where <code>τ = 0.05 s</code>. Sum the 100 forecasts at 1 ms midpoints <code>t = (k + 0.5) × 0.001 s</code> for <code>k = 0</code> through <code>99</code>, multiplying each by <code>0.001 s</code>. The slope decays with time while the predicted force approaches a level.</p>
+<h2>Compact attention correction</h2>
+<p>Add the two force channels and compare their average in the last two bins with their average in the first two. Define <code>Δ = last 40 ms mean − first 40 ms mean</code>. The compact model corrects the trend only when <code>Δ &gt; 50 N</code>. A value below −50 N is falling. A value from −50 to +50 N inclusive is low-change. The compact forecast is exactly the damped trend in both falling and low-change windows. These groups use the past force history and can occur during either chair movement.</p>
+<p>Both fits use the same input scaling. Subtract the checkpoints’ two per-plate centres and divide by their two per-plate scales. The centres are approximately <code>[297.91076, 159.76071]</code> N and the scales are <code>[230.35035, 131.79498]</code> N. A linear layer forms each of 32 values by multiplying the two scaled inputs by learned weights, summing those products and adding a learned offset. Sine and cosine values mark each bin’s position in time. The last bin helps set the weight given to each bin and to an extra learned list of values. This extra list is called the null vector. The attention calculation makes nonnegative weights that sum to one, then combines transformed values from the lists in a weighted sum. Four such calculations run in parallel, each with eight values.</p>
+<p>The block adds the attention result to its input. It next subtracts the mean of the resulting values, divides by the square root of their variance plus a small positive constant, and applies a learned multiplier and offset to each value. This is layer normalization. The block sends that result through a layer 64 values wide. ReLU sets negative intermediate values to zero. The block converts back to 32 values, adds the input of that step back in, and repeats the normalization. Its output layer gives two numbers, one per plate. Each full saved checkpoint has 11,618 parameters including the optional branch for six tracked markers. The marker inputs are all marked missing in this release, so that branch adds zero. The browser evaluates the force-only calculation using the same two saved fits.</p>
+<p>The correction estimates the measured impulse minus the damped-trend forecast. The two fits started from seeds 2731 and 4119. A seed sets the starting random choices in a training run. Average the two dimensionless outputs per plate, multiply by 25 N·s, and add to the trend. The saved weights use 32-bit floating point (FP32). The browser and Python use the same model and input rules, with different arithmetic implementations.</p>
+<h2>Separate Research Edition correction</h2>
+<p>A transformer uses attention to combine input values with different weights. The Notre Dame comparison used the fixed transformer from the full FP32 Research Edition. Three passes convert the same earlier force bins into a 2,304-value representation. The transformer stayed fixed. Two linear readouts, or fits from that representation to the two impulse residuals, used four earlier Utah development participants. Here the residual means the measured impulse minus the damped trend for the same plate.</p>
+<p>The readouts use ridge regression, which fits linear weights with a penalty of 0.25. Within each fit, each person contributes equal total weight. The input features are centred by their weighted mean and divided by their weighted population standard deviation. A scale at or below <code>1e-12</code> is replaced with 1 before division. The scaled features are divided by <code>√2304 = 48</code>. A fitted intercept, a constant added to the linear prediction, is exempt from the penalty.</p>
+<ul>
+<li><strong>Changing-load correction.</strong> Fit on 647 Utah development windows with <code>|Δ| &gt; 50 N</code>. Apply the correction only on windows passing that rule, including both rising and falling load. Return the damped trend at either exact boundary and throughout the low-change range.</li>
+<li><strong>Correction at every forecast.</strong> Fit on all 2,822 admitted Utah development windows. Add the result at every forecast, including low-change windows.</li>
+</ul>
+<p>The offline ZIP runs the compact predictor. The Research Edition scores describe a separate comparison with its two fixed readouts.</p>
+<h2>Error and comparison rules</h2>
+<p>Compute <code>|predicted combined impulse − measured combined impulse|</code> for each case. The combined impulse is the sum across plates before taking the absolute error. Average the errors within each person, then average the person means equally. This is the equal-person mean absolute error (MAE) in N·s. Compute it separately within each reported subset. All methods use the same eligible cases within a comparison. Lower error is better.</p>
+<h3>Utah reserved test</h3>
+<p>Four people supplied the fitting data. Three other people were assigned to the test. A fixed force-calibration check used only the first 30 s of each test recording on the shared clock. Two people qualified. One had too few loaded samples on one plate during that check. Forecasts were 300 ms apart after the prefix, leaving disjoint history and outcome samples across cases. Forecasts were saved and verified before opening the later outcomes for scoring.</p>
+<div class="table-scroll" role="region" aria-label="Results table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Forecast</th>
+<th align="right">All 230 cases (N·s)</th>
+<th align="right">24 rising-load cases (N·s)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Recent force</td>
+<td align="right">2.86</td>
+<td align="right">7.59</td>
+</tr>
+<tr>
+<td>Damped trend</td>
+<td align="right">2.69</td>
+<td align="right">6.82</td>
+</tr>
+<tr>
+<td>Damped trend plus attention correction</td>
+<td align="right">2.36</td>
+<td align="right">3.65</td>
+</tr>
+</tbody></table></div>
+<p>The compact correction reduced overall mean error for both scored people. It gives exactly the same impulses as the trend in the 206 non-rising cases. These scores cover the two qualifying people from this archive.</p>
+<h3>Leeds archived chair trials</h3>
+<p>The fixed compact model scored 6,739 windows from 402 chair trials of 134 people, including 892 rising windows. On the stored force clock, forecasts were 300 ms apart and used their own 200 ms history and 100 ms outcome. The documentation did not establish a match between the Leeds plate numbering and Utah input columns. Both orders were fixed in advance. Each forecast was returned to Leeds plate order for scoring. The replay reports both orders separately.</p>
+<div class="table-scroll" role="region" aria-label="Results table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Forecast</th>
+<th align="right">All 6,739 windows (N·s)</th>
+<th align="right">892 rising-load windows (N·s)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Recent force</td>
+<td align="right">2.837</td>
+<td align="right">6.835</td>
+</tr>
+<tr>
+<td>Damped trend</td>
+<td align="right">2.099</td>
+<td align="right">4.567</td>
+</tr>
+<tr>
+<td>Damped trend plus correction, plate 1 then 2</td>
+<td align="right">2.105</td>
+<td align="right">4.749</td>
+</tr>
+<tr>
+<td>Damped trend plus correction, plate 2 then 1</td>
+<td align="right">2.117</td>
+<td align="right">4.853</td>
+</tr>
+</tbody></table></div>
+<p>Damped trend gave lower mean error than either corrected order overall and during rising load. In each order, the correction lowered overall error for 60 people and raised it for 74 relative to the trend. It lowered error for 53 people in both orders. For 14 people, it lowered error in one order and raised it in the other. The replay used low-pass filtered force exports, in which fast changes had been reduced. The direction of the filter in time and availability of original readings at the time of a live forecast remain unverified. <a href="https://www.nature.com/articles/s41597-026-06925-w">Acquisition and export methods</a> · <a href="https://doi.org/10.5518/1701">University of Leeds dataset</a></p>
+<h3>Notre Dame archived chair rises and descents</h3>
+<p>The replay used all 54 available short recordings from nine people, three rises and three descents each. A separate person supplied the engineering check. Each foot was on its own Kistler force plate. The replay took calibrated, signed upward force in N from 1,000 samples per second on the stored clock. It used the force exported before the study’s later software filter, with cameras and chair plates excluded. Part of the chair sat outside the instrumented area.</p>
+<p>Forecasts were 300 ms apart while enough samples remained for 200 earlier and 100 later samples. The same 146 windows were scored for every method, including 70 during chair rises and 76 during descents. From the earlier load change, 23 were rising, 38 falling and 85 low-change. These force groups describe the earlier 200 ms, separately from the direction of the chair movement.</p>
+<p>The compact correction and both Research Edition readouts ran in two preselected input orders, left foot first and right foot first. Each forecast was returned to recorded foot order. For the primary comparison, average the two forecasts per foot before making the combined impulse and scoring it. The second table retains the individual orders. Both models’ forecasts were saved and reproduced using earlier samples before the later outcomes were decoded.</p>
+<div class="table-scroll" role="region" aria-label="Results table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Forecast</th>
+<th align="right">All 146 windows (N·s)</th>
+<th align="right">23 rising-load windows (N·s)</th>
+<th align="right">38 falling-load windows (N·s)</th>
+<th align="right">85 low-change windows (N·s)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Recent force</td>
+<td align="right">2.130</td>
+<td align="right">1.521</td>
+<td align="right">2.770</td>
+<td align="right">2.115</td>
+</tr>
+<tr>
+<td>Damped trend</td>
+<td align="right">1.731</td>
+<td align="right">1.282</td>
+<td align="right">2.260</td>
+<td align="right">1.761</td>
+</tr>
+<tr>
+<td>Compact correction, average of both orders</td>
+<td align="right">1.805</td>
+<td align="right">1.610</td>
+<td align="right">2.260</td>
+<td align="right">1.761</td>
+</tr>
+<tr>
+<td>Research Edition, correction during changing loads</td>
+<td align="right">1.679</td>
+<td align="right">1.501</td>
+<td align="right">1.938</td>
+<td align="right">1.761</td>
+</tr>
+<tr>
+<td>Research Edition, correction at every forecast</td>
+<td align="right">1.709</td>
+<td align="right">1.262</td>
+<td align="right">2.193</td>
+<td align="right">1.745</td>
+</tr>
+</tbody></table></div>
+<div class="table-scroll" role="region" aria-label="Results table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Forecast</th>
+<th align="right">All 146 windows (N·s)</th>
+<th align="right">23 rising-load windows (N·s)</th>
+<th align="right">38 falling-load windows (N·s)</th>
+<th align="right">85 low-change windows (N·s)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Compact correction, left first</td>
+<td align="right">1.796</td>
+<td align="right">1.551</td>
+<td align="right">2.260</td>
+<td align="right">1.761</td>
+</tr>
+<tr>
+<td>Compact correction, right first</td>
+<td align="right">1.816</td>
+<td align="right">1.681</td>
+<td align="right">2.260</td>
+<td align="right">1.761</td>
+</tr>
+<tr>
+<td>Research Edition during changing loads, left first</td>
+<td align="right">1.703</td>
+<td align="right">1.337</td>
+<td align="right">2.169</td>
+<td align="right">1.761</td>
+</tr>
+<tr>
+<td>Research Edition during changing loads, right first</td>
+<td align="right">1.694</td>
+<td align="right">1.711</td>
+<td align="right">1.864</td>
+<td align="right">1.761</td>
+</tr>
+<tr>
+<td>Research Edition at every forecast, left first</td>
+<td align="right">1.700</td>
+<td align="right">1.232</td>
+<td align="right">2.219</td>
+<td align="right">1.735</td>
+</tr>
+<tr>
+<td>Research Edition at every forecast, right first</td>
+<td align="right">1.724</td>
+<td align="right">1.314</td>
+<td align="right">2.171</td>
+<td align="right">1.760</td>
+</tr>
+</tbody></table></div>
+<p>The Research Edition correction during changing loads had the lowest overall mean error. It reduced error by 0.052 N·s against damped trend, with lower overall error in five of nine people and lower falling-load error in eight. Its mean rising-load error was higher than trend. The compact correction raised mean overall error in either plate order.</p>
+<p>Resampling pairs of scores from the same people 20,000 times gave a 95% interval from 0.006 to 0.106 N·s of improvement for the Research Edition changing-load correction. For chair rises and descents, the method scored 1.496 and 1.858 N·s, respectively, and the trend scored 1.584 and 1.878 N·s. The interval reflects variation across the nine people in this archive. Phase and order breakdowns reuse the same recordings. Device-level timing, unloaded calibration and live availability remain unverified on the short clips. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12717423/">Recording methods</a> · <a href="https://doi.org/10.7274/28689221.v1">Dataset version 1</a></p>
+<h2>Data sources and reuse</h2>
+<ul>
+<li><strong>Utah stand-up and sit-down recordings.</strong> Grace Hunt, K. Bo Foreman, Tommaso Lenzi, Lukas Gabert and Colby Hansen (2024). The comparison uses averaged upward force on two floor plates and reports aggregate errors. <a href="https://doi.org/10.6084/m9.figshare.26282872.v2">Figshare dataset, version 2</a></li>
+<li><strong>Leeds chair trials.</strong> Dataset by David Lunn, Enrico de Pieri, Graham Chapman, Stephen Ferguson and Anthony Redmond (2025). David E. Lunn, Enrico De Pieri, Graham J. Chapman, Morten E. Lund, Stephen J. Ferguson and Anthony C. Redmond describe acquisition and processing (2026). The replay averages the released vertical force and reports aggregate errors. <a href="https://doi.org/10.5518/1701">University of Leeds dataset</a> · <a href="https://www.nature.com/articles/s41597-026-06925-w">Scientific Data methods article</a></li>
+<li><strong>Notre Dame chair recordings.</strong> Mohsen Alizadeh Noghani, Sebastian Green and Edgar Bolivar Nieto. The replay uses calibrated force exports, averages the earlier readings for each foot, and reports aggregate errors. <a href="https://doi.org/10.7274/28689221.v1">Dataset version 1</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12717423/">Recording and processing methods</a></li>
+</ul>
+<p>The original data releases use Creative Commons Attribution 4.0 International. The project’s code, fitted weights and documentation are dedicated to the public domain under CC0 1.0. The preview examples use invented readings. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></p>
+</main>
+</body>
+</html>

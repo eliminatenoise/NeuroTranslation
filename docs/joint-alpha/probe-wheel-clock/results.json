@@ -1,0 +1,52 @@
+{
+  "title": "One pulse, two clocks",
+  "scope": "Experimental comparison of electronics timing in one International Brain Laboratory mouse recording.",
+  "sampling_rates_hz": {
+    "brain_probe": 30000.0,
+    "wheel_recorder": 30003.0003
+  },
+  "pulses": {
+    "matched": 3635,
+    "withheld_and_scored": 3625,
+    "withheld_without_a_retained_pair_on_both_sides": 10,
+    "fraction_scored": 0.9972489683631361
+  },
+  "withheld_absolute_error_ms": {
+    "straight_line_between_nearest_retained_pulses": {
+      "median": 0.011110493801425037,
+      "p95": 0.03333148140427511,
+      "max": 0.055552469348185696
+    },
+    "single_line_across_recording": {
+      "median": 0.03330984054628061,
+      "p95": 0.06807962226957896,
+      "max": 0.09682690233603353
+    }
+  },
+  "timing_check_ms": {
+    "sum_of_one_sample_interval_from_each_recorder": 0.06666333333336666,
+    "largest_observed_local_error_plus_sample_intervals": 0.12221580268155235,
+    "check_limit": 0.25,
+    "observed_check_passed": true
+  },
+  "pairing": {
+    "method": "The published clock map was used to identify matching starts and ends of pulses only. The new clock fits used retained pulses to estimate the start times of withheld pulses.",
+    "comparison": "The pulse repeats once a second. Shifts of one or two seconds in either direction gave nearly the same held timing errors. Exact matching depends on the published map.",
+    "alternative_pair_shift_in_approximate_seconds": [
+      -2,
+      -1,
+      1,
+      2
+    ]
+  },
+  "limits": "The result applies to stored relative electronics timing in one recording. The raw and processed DANDI files list absolute start times an hour apart. Live delivery, timing in the separate eight trial windows, and predicting movement from brain signals require separate tests.",
+  "data_source": {
+    "publisher": "International Brain Laboratory",
+    "dataset": "IBL Brain Wide Map",
+    "license": "CC BY 4.0",
+    "open_data": "https://registry.opendata.aws/ibl-brain-wide-map/",
+    "archive_edition": "https://doi.org/10.48324/dandi.000409/0.260309.1324",
+    "study": "https://doi.org/10.1038/s41586-025-09235-0",
+    "clock_code": "https://docs.internationalbrainlab.org/_modules/ibllib/ephys/sync_probes.html#version3B"
+  }
+}

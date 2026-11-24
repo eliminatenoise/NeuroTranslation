@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A reach on another day · NeuroTranslation</title>
+  <style>:root { font: 100%/1.62 system-ui, sans-serif; color: #203538; background: #f5f6f2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(45rem, calc(100% - 2rem)); margin: 2rem auto 4rem; }
+    header { border-top: .35rem solid #1b4647; }
+    h1, h2 { line-height: 1.15; letter-spacing: -.035em; }
+    h1 { font-size: clamp(2.3rem, 7vw, 4rem); margin: .35em 0; }
+    a { color: #075d52; text-underline-offset: .2em; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #c44c14; outline-offset: 3px; }
+    section { margin-top: 2rem; border-top: 1px solid #b9c7c4; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    caption, th, td { text-align: left; }
+    caption { font-weight: 650; margin-bottom: .35rem; }
+    th, td { padding: .36rem .4rem; border-bottom: 1px solid #bdc9c6; vertical-align: top; }
+    details { border-bottom: 1px solid #bdc9c6; }
+    details table { margin-bottom: .8rem; }
+    summary { padding: .55em .2em; cursor: pointer; font-weight: 650; }
+    @media (forced-colors: active) {
+      a:focus-visible, summary:focus-visible { outline-color: Highlight; }
+      th, td, details { border-color: CanvasText; }
+    }
+    table { table-layout: fixed; }
+    th:first-child { width: 39%; }
+    @media(max-width: 400px) {
+      th, td { padding: .32rem .2rem; overflow-wrap: anywhere; font-size: .87rem; }
+    }</style>
+</head><body><main>
+  <header>
+    <p><a href="../">What happens between the cues?</a></p>
+    <h1>A reach on another day</h1>
+    <p>Can a model learn from one day of reaching and forecast the same macaque’s hand and elbow on another day? We trained on September 7 and tested on September 15. The animal and task stayed the same.</p>
+    <p><a href="predict/">Compare the fitted models</a> · <a href="reach-forecast.zip" download>Download for offline use</a></p>
+  </header>
+  <section>
+    <h2>Move the test eight days forward</h2>
+    <p>Both fits learned from the same 72 September 7 trials. One saw 194 forecast windows tied to reach cues. The other also saw windows spaced every 100 milliseconds, for 1,533 in total. Both models received earlier readings of the hand, elbow and handle. We used those motion readings throughout because the identity of each brain signal across days was still uncertain.</p>
+    <p>On September 15, we made a forecast every 100 milliseconds wherever a trial had enough readings on either side. We saved all forecasts before reading the future marker positions. We scored all 11,169 windows from all 304 eligible trials. Each trial counted equally.</p>
+  </section>
+  <section>
+    <h2>The extra windows helped on the second day</h2>
+    <p>The autoregressive model’s path distribution error fell by 0.726 mm, with a paired 95% interval of 0.667 to 0.798 mm for the reduction. Diffusion’s error fell by 1.290 mm, with an interval of 1.225 to 1.364 mm. Autoregression improved on 304 trials and diffusion on 303.</p>
+    <table><caption>Path distribution error in millimetres. Lower is better.</caption>
+    <thead><tr><th scope="col">Forecast</th><th scope="col">Cue fit</th><th scope="col">Denser fit</th><th scope="col">Change</th></tr></thead>
+    <tbody>
+      <tr data-estimator="ar_ridge"><th scope="row">Autoregressive transformer</th><td>3.797</td><td>3.070</td><td>-0.726</td></tr>
+      <tr data-estimator="diff_ridge"><th scope="row">Diffusion transformer</th><td>4.422</td><td>3.132</td><td>-1.290</td></tr>
+      <tr data-estimator="ridge_residual"><th scope="row">Linear paths with sampled errors</th><td>3.536</td><td>3.196</td><td>-0.340</td></tr>
+      <tr data-estimator="ridge_point"><th scope="row">One linear path</th><td>4.834</td><td>4.339</td><td>-0.494</td></tr>
+      <tr data-estimator="velocity20"><th scope="row">Continue the last 20 ms of velocity</th><td>3.887</td><td>3.887</td><td>0.000</td></tr>
+      <tr data-estimator="velocity100"><th scope="row">Continue the last 100 ms of velocity</th><td>4.615</td><td>4.615</td><td>0.000</td></tr>
+    </tbody></table>
+    <p>The distribution score accounts for how close the models’ 32 possible paths come to the recorded path and how spread out they are. For one best-guess path, carrying forward the last 20 milliseconds of velocity did best. It missed by 2.889 mm on average and by 5.395 mm at the final point.</p>
+  </section>
+  <section>
+    <p>Each forecast looks 20, 50, 70 and 100 milliseconds ahead on the archive’s clock. The published camera and handle signals were smoothed using surrounding readings. The test measures transfer across two days of one animal’s processed recording, with further animals and live inputs requiring separate tests.</p>
+    <p><a href="different-animal/">What happens with a different animal?</a></p>
+    <p><a href="results.json">Download the aggregate scores and trial counts</a></p>
+    <p>Dataset by Chowdhury, Glaser and Miller. <a href="https://datadryad.org/dataset/doi:10.5061/dryad.nk98sf7q7">Recording archive</a> · <a href="https://elifesciences.org/articles/48198">Study methods</a></p>
+  </section>
+</main></body></html>

@@ -1,0 +1,32 @@
+{
+  "release": "NeuroTranslate 0.1",
+  "adapter": {
+    "file": "IO-ADAPTER.safetensors",
+    "bytes": 480824,
+    "sha256": "c62424be355add85a0dd35ad01fb55d1609fc037843717a2758ccb593e769151",
+    "tensor_count": 15
+  },
+  "base": {
+    "repository": "thinkingmachines/Inkling-2-Mini",
+    "revision": "ed40e7da625f594fc9c4990f5f66be24873c22d7",
+    "license": "Apache-2.0",
+    "files": {
+      "model.safetensors.index.json": {
+        "bytes": 109300,
+        "sha256": "c1631065b7b00787993522dddc66a68b3abee869192977fb3dcb796e63bc5838"
+      },
+      "config.json": {
+        "bytes": 2722,
+        "sha256": "a7a349601f0984c4abf999c480ef775d8567d21f5f84b4e8a3e035b44f288dc2"
+      },
+      "hf_quant_config.json": {
+        "bytes": 67924,
+        "sha256": "7c656207d3ce37879c7be209a036b0dde43bf01f78159bff06880b868ed57143"
+      },
+      "model-00001-of-00001.safetensors": {
+        "bytes": 19526019168,
+        "sha256": "65e60f51aa1284d4fb022584908c315270334d991828bb774af60584523539d1"
+      }
+    }
+  }
+}

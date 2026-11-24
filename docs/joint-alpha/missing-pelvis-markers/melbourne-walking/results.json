@@ -1,0 +1,591 @@
+{
+  "dataset": {
+    "title": "Biomechanics and energetics of neurotypical (un)constrained walking",
+    "credit": "Tomislav Baček and colleagues",
+    "version": "1",
+    "licence": "CC BY 4.0",
+    "data": "https://doi.org/10.26188/24288265.v1",
+    "methods": "https://doi.org/10.1038/s41597-024-03444-4",
+    "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+    "residual_format": "https://www.c3d.org/HTML/Documents/3dpointresiduals.htm"
+  },
+  "coverage": {
+    "released_walking_records": 21,
+    "reserved_for_engineering": 1,
+    "publisher_checksum_hold": 1,
+    "test_candidates": 19,
+    "unavailable_zero_declared_camera_markers": 1,
+    "decoded": 18,
+    "scored_people": 7,
+    "all_four_export_positions_present_every_frame": 18,
+    "all_optical_residuals_zero": 11
+  },
+  "conditions": {
+    "activity": "Unconstrained treadmill walking at the study setting of 1.1 m/s and preferred step rate",
+    "prefix_seconds": 15,
+    "camera_rate_hz": 100,
+    "stored_force_rate_hz": 2000,
+    "prefix_camera_frames": 1500,
+    "first_forecast_offset": 80,
+    "history_camera_frames": 80,
+    "forecast_spacing_camera_frames": 10,
+    "forecast_target_frames_ahead": 10,
+    "forecast_target_ms_ahead": 100
+  },
+  "force_window": {
+    "threshold_n": 50,
+    "min_duration_ms": 100,
+    "test_selection_only": true,
+    "description": "Both times inside a complete three-start alternating-plate window",
+    "scope": "Plate timing derived from the raw force signal; anatomical contact labels, gait phases and geometry unverified.",
+    "authors_offset_correction_applied": false,
+    "offset_reference": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41597-024-03444-4/MediaObjects/41597_2024_3444_MOESM1_ESM.pdf"
+  },
+  "camera_quality": {
+    "original_availability": "The released camera export marks a finite position present.",
+    "eligibility": "A present position must also have a positive reconstruction residual.",
+    "scope": "Earlier gap filling, the provenance of individual zero residuals and coordinate accuracy remain unresolved.",
+    "alternative_residual_rules_evaluated": false
+  },
+  "model": {
+    "input": "Camera marker heights through forecast time",
+    "training_data": "Fukuchi running recordings",
+    "weights": "Frozen before the Melbourne test",
+    "force_used_to_predict": false
+  },
+  "minimum_scored_people_for_metrics": 6,
+  "paired_bootstrap": {
+    "seed": 20261122,
+    "draws": 5000,
+    "confidence": 0.95,
+    "unit": "participant",
+    "interval": "percentile",
+    "multiplicity_adjusted": false
+  },
+  "methods": {
+    "zero": "Predict zero movement",
+    "camera_speed": "Continue recent camera speed",
+    "stride": "Replay an earlier stride",
+    "learned_stride": "Replay plus learned correction"
+  },
+  "comparisons": {
+    "force_bounded_primary": {
+      "label": "Force-plate windows",
+      "endpoints": {
+        "four_marker": {
+          "overall": {
+            "scheduled_windows": 2362,
+            "people_with_scheduled_windows": 18,
+            "issued_windows": 920,
+            "withheld_at_issue": 1442,
+            "issued_missing_endpoint": 0,
+            "scored_windows": 920,
+            "scored_people": 7,
+            "strict_complete_history_windows": 872,
+            "strict_complete_history_scored_windows": 872,
+            "strict_complete_history_scored_people": 7,
+            "camera_speed_zero_fallback_issued": 0,
+            "camera_speed_zero_fallback_scored": 0,
+            "stride_zero_fallback_issued": 0,
+            "stride_zero_fallback_scored": 0,
+            "counts_only": false,
+            "person_equal_mae_mm": {
+              "zero": 11.065161460541175,
+              "camera_speed": 8.607277421572759,
+              "stride": 3.378264226437873,
+              "learned_stride": 5.439918453532504
+            },
+            "pooled_p90_abs_error_mm": {
+              "zero": 18.408720397949217,
+              "camera_speed": 16.40443267822266,
+              "stride": 7.030305480957032,
+              "learned_stride": 11.615479176715802
+            },
+            "paired_learned_minus_analytic": {
+              "mean_mm": 2.0616542270946296,
+              "bootstrap95_mm": [
+                1.429184031968502,
+                2.778048436233145
+              ]
+            }
+          },
+          "by_original_export_gap": {
+            "complete": {
+              "scheduled_windows": 2362,
+              "people_with_scheduled_windows": 18,
+              "issued_windows": 920,
+              "withheld_at_issue": 1442,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 920,
+              "scored_people": 7,
+              "strict_complete_history_windows": 872,
+              "strict_complete_history_scored_windows": 872,
+              "strict_complete_history_scored_people": 7,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": false,
+              "person_equal_mae_mm": {
+                "zero": 11.065161460541175,
+                "camera_speed": 8.607277421572759,
+                "stride": 3.378264226437873,
+                "learned_stride": 5.439918453532504
+              },
+              "pooled_p90_abs_error_mm": {
+                "zero": 18.408720397949217,
+                "camera_speed": 16.40443267822266,
+                "stride": 7.030305480957032,
+                "learned_stride": 11.615479176715802
+              },
+              "paired_learned_minus_analytic": {
+                "mean_mm": 2.0616542270946296,
+                "bootstrap95_mm": [
+                  1.429184031968502,
+                  2.778048436233145
+                ]
+              }
+            },
+            "front_only": {
+              "scheduled_windows": 0,
+              "people_with_scheduled_windows": 0,
+              "issued_windows": 0,
+              "withheld_at_issue": 0,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 0,
+              "scored_people": 0,
+              "strict_complete_history_windows": 0,
+              "strict_complete_history_scored_windows": 0,
+              "strict_complete_history_scored_people": 0,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": true
+            },
+            "rear_only": {
+              "scheduled_windows": 0,
+              "people_with_scheduled_windows": 0,
+              "issued_windows": 0,
+              "withheld_at_issue": 0,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 0,
+              "scored_people": 0,
+              "strict_complete_history_windows": 0,
+              "strict_complete_history_scored_windows": 0,
+              "strict_complete_history_scored_people": 0,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": true
+            },
+            "mixed": {
+              "scheduled_windows": 0,
+              "people_with_scheduled_windows": 0,
+              "issued_windows": 0,
+              "withheld_at_issue": 0,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 0,
+              "scored_people": 0,
+              "strict_complete_history_windows": 0,
+              "strict_complete_history_scored_windows": 0,
+              "strict_complete_history_scored_people": 0,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": true
+            }
+          }
+        },
+        "rear_pair": {
+          "overall": {
+            "scheduled_windows": 2362,
+            "people_with_scheduled_windows": 18,
+            "issued_windows": 920,
+            "withheld_at_issue": 1442,
+            "issued_missing_endpoint": 0,
+            "scored_windows": 920,
+            "scored_people": 7,
+            "strict_complete_history_windows": 872,
+            "strict_complete_history_scored_windows": 872,
+            "strict_complete_history_scored_people": 7,
+            "camera_speed_zero_fallback_issued": 0,
+            "camera_speed_zero_fallback_scored": 0,
+            "stride_zero_fallback_issued": 0,
+            "stride_zero_fallback_scored": 0,
+            "counts_only": false,
+            "person_equal_mae_mm": {
+              "zero": 10.927642875395206,
+              "camera_speed": 8.774253495888434,
+              "stride": 3.6310401915826445,
+              "learned_stride": 6.17788758505313
+            },
+            "pooled_p90_abs_error_mm": {
+              "zero": 18.487149047851563,
+              "camera_speed": 16.331536865234376,
+              "stride": 7.53502197265625,
+              "learned_stride": 13.032002529795685
+            },
+            "paired_learned_minus_analytic": {
+              "mean_mm": 2.546847393470486,
+              "bootstrap95_mm": [
+                1.812735871565835,
+                3.383630321755855
+              ]
+            }
+          },
+          "by_original_export_gap": {
+            "complete": {
+              "scheduled_windows": 2362,
+              "people_with_scheduled_windows": 18,
+              "issued_windows": 920,
+              "withheld_at_issue": 1442,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 920,
+              "scored_people": 7,
+              "strict_complete_history_windows": 872,
+              "strict_complete_history_scored_windows": 872,
+              "strict_complete_history_scored_people": 7,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": false,
+              "person_equal_mae_mm": {
+                "zero": 10.927642875395206,
+                "camera_speed": 8.774253495888434,
+                "stride": 3.6310401915826445,
+                "learned_stride": 6.17788758505313
+              },
+              "pooled_p90_abs_error_mm": {
+                "zero": 18.487149047851563,
+                "camera_speed": 16.331536865234376,
+                "stride": 7.53502197265625,
+                "learned_stride": 13.032002529795685
+              },
+              "paired_learned_minus_analytic": {
+                "mean_mm": 2.546847393470486,
+                "bootstrap95_mm": [
+                  1.812735871565835,
+                  3.383630321755855
+                ]
+              }
+            },
+            "front_only": {
+              "scheduled_windows": 0,
+              "people_with_scheduled_windows": 0,
+              "issued_windows": 0,
+              "withheld_at_issue": 0,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 0,
+              "scored_people": 0,
+              "strict_complete_history_windows": 0,
+              "strict_complete_history_scored_windows": 0,
+              "strict_complete_history_scored_people": 0,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": true
+            },
+            "rear_only": {
+              "scheduled_windows": 0,
+              "people_with_scheduled_windows": 0,
+              "issued_windows": 0,
+              "withheld_at_issue": 0,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 0,
+              "scored_people": 0,
+              "strict_complete_history_windows": 0,
+              "strict_complete_history_scored_windows": 0,
+              "strict_complete_history_scored_people": 0,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": true
+            },
+            "mixed": {
+              "scheduled_windows": 0,
+              "people_with_scheduled_windows": 0,
+              "issued_windows": 0,
+              "withheld_at_issue": 0,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 0,
+              "scored_people": 0,
+              "strict_complete_history_windows": 0,
+              "strict_complete_history_scored_windows": 0,
+              "strict_complete_history_scored_people": 0,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": true
+            }
+          }
+        }
+      }
+    },
+    "full_prefix_sensitivity": {
+      "label": "First 15 seconds",
+      "endpoints": {
+        "four_marker": {
+          "overall": {
+            "scheduled_windows": 2538,
+            "people_with_scheduled_windows": 18,
+            "issued_windows": 987,
+            "withheld_at_issue": 1551,
+            "issued_missing_endpoint": 0,
+            "scored_windows": 987,
+            "scored_people": 7,
+            "strict_complete_history_windows": 933,
+            "strict_complete_history_scored_windows": 933,
+            "strict_complete_history_scored_people": 7,
+            "camera_speed_zero_fallback_issued": 0,
+            "camera_speed_zero_fallback_scored": 0,
+            "stride_zero_fallback_issued": 0,
+            "stride_zero_fallback_scored": 0,
+            "counts_only": false,
+            "person_equal_mae_mm": {
+              "zero": 11.069585813698195,
+              "camera_speed": 8.633254324653107,
+              "stride": 3.4034782030903705,
+              "learned_stride": 5.481540120918772
+            },
+            "pooled_p90_abs_error_mm": {
+              "zero": 18.31318359375,
+              "camera_speed": 16.42833251953125,
+              "stride": 7.159518432617188,
+              "learned_stride": 11.659771741418655
+            },
+            "paired_learned_minus_analytic": {
+              "mean_mm": 2.078061917828401,
+              "bootstrap95_mm": [
+                1.48303131598577,
+                2.7496321836215714
+              ]
+            }
+          },
+          "by_original_export_gap": {
+            "complete": {
+              "scheduled_windows": 2538,
+              "people_with_scheduled_windows": 18,
+              "issued_windows": 987,
+              "withheld_at_issue": 1551,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 987,
+              "scored_people": 7,
+              "strict_complete_history_windows": 933,
+              "strict_complete_history_scored_windows": 933,
+              "strict_complete_history_scored_people": 7,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": false,
+              "person_equal_mae_mm": {
+                "zero": 11.069585813698195,
+                "camera_speed": 8.633254324653107,
+                "stride": 3.4034782030903705,
+                "learned_stride": 5.481540120918772
+              },
+              "pooled_p90_abs_error_mm": {
+                "zero": 18.31318359375,
+                "camera_speed": 16.42833251953125,
+                "stride": 7.159518432617188,
+                "learned_stride": 11.659771741418655
+              },
+              "paired_learned_minus_analytic": {
+                "mean_mm": 2.078061917828401,
+                "bootstrap95_mm": [
+                  1.48303131598577,
+                  2.7496321836215714
+                ]
+              }
+            },
+            "front_only": {
+              "scheduled_windows": 0,
+              "people_with_scheduled_windows": 0,
+              "issued_windows": 0,
+              "withheld_at_issue": 0,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 0,
+              "scored_people": 0,
+              "strict_complete_history_windows": 0,
+              "strict_complete_history_scored_windows": 0,
+              "strict_complete_history_scored_people": 0,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": true
+            },
+            "rear_only": {
+              "scheduled_windows": 0,
+              "people_with_scheduled_windows": 0,
+              "issued_windows": 0,
+              "withheld_at_issue": 0,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 0,
+              "scored_people": 0,
+              "strict_complete_history_windows": 0,
+              "strict_complete_history_scored_windows": 0,
+              "strict_complete_history_scored_people": 0,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": true
+            },
+            "mixed": {
+              "scheduled_windows": 0,
+              "people_with_scheduled_windows": 0,
+              "issued_windows": 0,
+              "withheld_at_issue": 0,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 0,
+              "scored_people": 0,
+              "strict_complete_history_windows": 0,
+              "strict_complete_history_scored_windows": 0,
+              "strict_complete_history_scored_people": 0,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": true
+            }
+          }
+        },
+        "rear_pair": {
+          "overall": {
+            "scheduled_windows": 2538,
+            "people_with_scheduled_windows": 18,
+            "issued_windows": 987,
+            "withheld_at_issue": 1551,
+            "issued_missing_endpoint": 0,
+            "scored_windows": 987,
+            "scored_people": 7,
+            "strict_complete_history_windows": 933,
+            "strict_complete_history_scored_windows": 933,
+            "strict_complete_history_scored_people": 7,
+            "camera_speed_zero_fallback_issued": 0,
+            "camera_speed_zero_fallback_scored": 0,
+            "stride_zero_fallback_issued": 0,
+            "stride_zero_fallback_scored": 0,
+            "counts_only": false,
+            "person_equal_mae_mm": {
+              "zero": 10.929825432032436,
+              "camera_speed": 8.800503870878055,
+              "stride": 3.6544087109473944,
+              "learned_stride": 6.221928135176969
+            },
+            "pooled_p90_abs_error_mm": {
+              "zero": 18.437774658203125,
+              "camera_speed": 16.35184326171875,
+              "stride": 7.619909667968749,
+              "learned_stride": 13.02787202617436
+            },
+            "paired_learned_minus_analytic": {
+              "mean_mm": 2.5675194242295762,
+              "bootstrap95_mm": [
+                1.8907442815539144,
+                3.344121847458555
+              ]
+            }
+          },
+          "by_original_export_gap": {
+            "complete": {
+              "scheduled_windows": 2538,
+              "people_with_scheduled_windows": 18,
+              "issued_windows": 987,
+              "withheld_at_issue": 1551,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 987,
+              "scored_people": 7,
+              "strict_complete_history_windows": 933,
+              "strict_complete_history_scored_windows": 933,
+              "strict_complete_history_scored_people": 7,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": false,
+              "person_equal_mae_mm": {
+                "zero": 10.929825432032436,
+                "camera_speed": 8.800503870878055,
+                "stride": 3.6544087109473944,
+                "learned_stride": 6.221928135176969
+              },
+              "pooled_p90_abs_error_mm": {
+                "zero": 18.437774658203125,
+                "camera_speed": 16.35184326171875,
+                "stride": 7.619909667968749,
+                "learned_stride": 13.02787202617436
+              },
+              "paired_learned_minus_analytic": {
+                "mean_mm": 2.5675194242295762,
+                "bootstrap95_mm": [
+                  1.8907442815539144,
+                  3.344121847458555
+                ]
+              }
+            },
+            "front_only": {
+              "scheduled_windows": 0,
+              "people_with_scheduled_windows": 0,
+              "issued_windows": 0,
+              "withheld_at_issue": 0,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 0,
+              "scored_people": 0,
+              "strict_complete_history_windows": 0,
+              "strict_complete_history_scored_windows": 0,
+              "strict_complete_history_scored_people": 0,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": true
+            },
+            "rear_only": {
+              "scheduled_windows": 0,
+              "people_with_scheduled_windows": 0,
+              "issued_windows": 0,
+              "withheld_at_issue": 0,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 0,
+              "scored_people": 0,
+              "strict_complete_history_windows": 0,
+              "strict_complete_history_scored_windows": 0,
+              "strict_complete_history_scored_people": 0,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": true
+            },
+            "mixed": {
+              "scheduled_windows": 0,
+              "people_with_scheduled_windows": 0,
+              "issued_windows": 0,
+              "withheld_at_issue": 0,
+              "issued_missing_endpoint": 0,
+              "scored_windows": 0,
+              "scored_people": 0,
+              "strict_complete_history_windows": 0,
+              "strict_complete_history_scored_windows": 0,
+              "strict_complete_history_scored_people": 0,
+              "camera_speed_zero_fallback_issued": 0,
+              "camera_speed_zero_fallback_scored": 0,
+              "stride_zero_fallback_issued": 0,
+              "stride_zero_fallback_scored": 0,
+              "counts_only": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

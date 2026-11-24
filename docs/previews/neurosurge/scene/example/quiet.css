@@ -1,0 +1,446 @@
+/* NeuroSurge: the quiet screen (17 November 2026: far less text). The game starts with the information cards off
+   (data-ns-read="off" on the app root; R brings the cards back). What is left: the crosshair, the tip beside it, one
+   short prompt, the brain's part names, and one small line that says the activity is simulated. */
+
+/* The one small honest line, bottom left, in every mode. */
+.preview-note, .preview-note[class] {
+  position: fixed; left: 10px; bottom: 6px; top: auto; right: auto; max-width: none; z-index: 10000;
+  padding: 1px 6px; border: 0; border-radius: 6px; background: transparent;
+  color: #b9c6d2; opacity: 0.62; font: 11px/1.3 system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+.preview-note a { color: #b8e5ff; }
+.preview-note:hover, .preview-note:focus-within { opacity: 1; }
+/* 21 November 2026 (hunt H20): the line stands above every page, so the start and Esc pages' card ends above it in a
+   wide window too (preview.css already does so in an upright one, with more room). At 800 by 600 the card ran to 16 px
+   from the bottom and the line lay across its Space key. */
+@media (min-aspect-ratio: 1/1) { .ns-shell:not([hidden]) { padding-bottom: 28px; } }
+
+/* Cards off: also the long limits line, the left / right words and the second line of the brain's part names. */
+.ns-app[data-ns-read="off"] .ns-essential,
+.ns-app[data-ns-read="off"] .ns-orient,
+.ns-app[data-ns-read="off"] .ns-region-label-hemi { display: none !important; }
+.ns-app[data-ns-read="off"] .ns-read-chip {
+  right: 10px; bottom: 6px; padding: 2px 7px; border: 0; background: transparent; opacity: 0.62; font-size: 11px;
+}
+
+/* The quiet layer (ns-quiet.mjs). */
+.ns-quiet { position: absolute; inset: 0; pointer-events: none; z-index: 6; }
+.ns-quiet[hidden] { display: none; }
+
+/* The tip: what is under the crosshair. A motor area shows its name and its numbered movements, like a key's legend. */
+.ns-tip {
+  position: absolute; left: 50%; top: 50%; box-sizing: border-box; max-width: min(300px, 44vw);
+  padding: 7px 11px 8px; border-radius: 10px;
+  background: rgba(7, 11, 16, 0.86); border: 1px solid rgba(190, 215, 235, 0.42);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5);
+  color: #f2f7fb; font: 600 14px/1.3 system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+.ns-tip[hidden] { display: none; }
+.ns-tip-title { font-weight: 800; font-size: 15px; letter-spacing: 0.01em; }
+.ns-tip[data-kind="muscle"] .ns-tip-title, .ns-tip[data-kind="bone"] .ns-tip-title, .ns-tip[data-kind="part"] .ns-tip-title { font-weight: 700; font-size: 13.5px; }
+.ns-tip-rows { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 3px; }
+.ns-tip-rows[hidden] { display: none; }
+.ns-tip-hint { color: #cfdbe6; font-size: 12px; margin-top: 6px; }
+.ns-tip-row { display: flex; align-items: baseline; gap: 8px; color: #cfdbe6; font-weight: 600; font-size: 13px; }
+.ns-tip-key {
+  flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 19px; height: 19px;
+  border-radius: 5px; border: 1px solid #6c8194; border-bottom-width: 2px; background: #1b232c;
+  color: #fff; font: 800 11.5px/1 system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+.ns-tip-now { color: #fff; }
+.ns-tip-now .ns-tip-key { border-color: #7fe3ff; background: #12394a; }
+.ns-tip-dim { opacity: 0.5; }
+
+/* The prompt: the next thing to try, a few words, top centre. */
+.ns-prompt {
+  position: absolute; left: 50%; top: 12px; transform: translateX(-50%); max-width: min(560px, 86vw);
+  padding: 6px 14px; border-radius: 999px;
+  background: rgba(7, 11, 16, 0.78); border: 1px solid rgba(255, 214, 102, 0.55);
+  color: #ffe9a8; font: 700 14px/1.3 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; letter-spacing: 0.01em;
+  text-align: center;
+}
+.ns-prompt[hidden] { display: none; }
+
+/* The "click to look around" line: smaller and out of the way. */
+.ns-shell-root .ns-shell-toast { font-size: 13px; padding: 5px 12px; opacity: 0.9; }
+
+/* The Esc page in its short form (the default; "Show the full instructions" has the rest): the buttons, the settings,
+   the keyboard picture and the short list of controls. No paragraphs. */
+.ns-shell[data-mode="paused"][data-words="short"] .ns-shell-subtitle,
+.ns-shell[data-mode="paused"][data-words="short"] .ns-shell-modenote,
+.ns-shell[data-mode="paused"][data-words="short"] .ns-shell-resethelp,
+.ns-shell[data-mode="paused"][data-words="short"] .ns-shell-guidehelp,
+.ns-shell[data-mode="paused"][data-words="short"] .ns-shell-instructions,
+.ns-shell[data-mode="paused"][data-words="short"] .ns-shell-limits,
+.ns-shell[data-mode="paused"][data-words="short"] .ns-kbd-notes,
+.ns-shell[data-mode="paused"][data-words="short"] .ns-kbd-pad ul { display: none; }
+.ns-shell[data-mode="paused"][data-words="short"] .ns-shell-heading { margin-top: 6px; }
+/* 22 November 2026 (WORDS2, hunt H13): the "Reload the page for the sharpest edges" note is not help text: it shows
+   only after a quality change that needs a reload (ns-app applyQuality), so the short page shows it too. It wears the
+   help class for its look, and the rule above hid it with the help texts. Its hidden attribute still hides it. */
+.ns-shell[data-mode="paused"][data-words="short"] .ns-shell-qualityreload:not([hidden]) { display: block; }
+
+/* 18 November (MAP): the brain's group labels wear their CHUNK's colour (ns-scene-three regionLabelChunkCss sets
+   --ns-chunk), the same on both halves: a light see-through pill with a rim and a dot of the colour, and the words in a
+   pale tint of it, so "Right arm" is orange like its keys and "Left arm" blue like its keys. */
+.ns-region-label.ns-chunk-label, .ns-region-label.ns-region-label-arm.ns-chunk-label {
+  color: color-mix(in oklab, var(--ns-chunk) 45%, #ffffff);
+  background: rgba(6, 8, 12, 0.5);
+  border: 1.5px solid color-mix(in oklab, var(--ns-chunk) 80%, transparent);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 2px #05070b;
+}
+.ns-region-label.ns-chunk-label::before {
+  content: ""; display: inline-block; width: 0.62em; height: 0.62em; margin-right: 0.4em; border-radius: 50%;
+  background: var(--ns-chunk); box-shadow: 0 0 6px var(--ns-chunk); vertical-align: 0.02em;
+}
+.ns-region-label.ns-chunk-label[data-hover="true"], .ns-region-label.ns-region-label-arm.ns-chunk-label[data-hover="true"] {
+  color: #ffffff; border-color: var(--ns-chunk); background: color-mix(in oklab, var(--ns-chunk) 38%, rgba(6, 8, 12, 0.7));
+}
+
+/* 18 November (MAP): the tip as a key's legend. Opposite movements share one line ("1 Bend <-> 2 Straighten"), the
+   marked one and the ones already at their end as before; the title wears the area's colour (a dot and the rim). */
+.ns-tip-move { display: inline-flex; align-items: baseline; gap: 8px; }
+.ns-tip-pair { gap: 6px; flex-wrap: wrap; }
+.ns-tip-swap { flex: none; align-self: center; width: 16px; height: 8px; margin: 0 1px; opacity: 0.7;
+  background: no-repeat center / 16px 8px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 8'%3E%3Cpath d='M1 4h14M4 1 1 4l3 3M12 1l3 3-3 3' fill='none' stroke='%23cfdbe6' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.ns-tip-move.ns-tip-now { color: #fff; }
+.ns-tip-move.ns-tip-now .ns-tip-key { border-color: #7fe3ff; background: #12394a; }
+.ns-tip-move.ns-tip-dim { opacity: 0.5; }
+.ns-tip[data-colored="true"] { border-color: color-mix(in oklab, var(--ns-tip-color) 75%, transparent); }
+.ns-tip[data-colored="true"] .ns-tip-title::before {
+  content: ""; display: inline-block; width: 0.6em; height: 0.6em; margin-right: 0.45em; border-radius: 50%;
+  background: var(--ns-tip-color); box-shadow: 0 0 7px var(--ns-tip-color); vertical-align: 0.04em;
+}
+.ns-tip[data-colored="true"][data-kind="area"] .ns-tip-move.ns-tip-now .ns-tip-key { border-color: var(--ns-tip-color); background: color-mix(in oklab, var(--ns-tip-color) 30%, #10161d); }
+
+/* ==== 19 November 2026 (EASE): visual chunking. "Things should be chunked together and those chunks should be spaced
+   away from each other." One rule for every overlay: a chunk is a few things that belong together, close to each other
+   (--ns-in), in one frame, on one alignment; between chunks there is at least three times that room (--ns-out). */
+:root { --ns-in: 6px; --ns-out: 28px; --ns-chunk-bg: rgba(6, 10, 15, 0.86); --ns-chunk-rim: rgba(200, 222, 240, 0.5); }
+
+/* The five-second controls card (ns-controls-card.mjs): four chunks. Left, as on a keyboard: the W A S D pyramid, the
+   E R pair set apart from it, Space under them. Right: the trackpad with its three actions. The root keeps the fade of
+   assembly.css (.ns-keys). */
+.ns-keys.ns-ctl { --ns-k: 54px; --ns-out: 36px; padding: 0 clamp(16px, 5vw, 110px); font-size: 17px; }
+.ns-ctl-side { display: grid; gap: var(--ns-out); align-items: start; justify-items: start; }
+.ns-ctl-side-keys { grid-template-columns: auto auto; }
+.ns-ctl-chunk {
+  display: flex; flex-direction: column; align-items: center; gap: 10px; box-sizing: border-box;
+  padding: 14px 16px 10px; border-radius: 16px;
+  background: var(--ns-chunk-bg); border: 1.5px solid var(--ns-chunk-rim); box-shadow: 0 10px 34px rgba(0, 0, 0, 0.55);
+}
+.ns-ctl-row { display: flex; gap: var(--ns-in); justify-content: center; }
+.ns-ctl-wasd .ns-ctl-row + .ns-ctl-row { margin-top: calc(var(--ns-in) - 10px); }
+.ns-ctl-cell { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ns-ctl .ns-key { width: var(--ns-k); height: var(--ns-k); background: #1b2530; border: 1.5px solid #9fb6ca; border-bottom-width: 4px; color: #fff; font-size: 22px; }
+.ns-ctl .ns-key-space { width: 100%; min-width: 0; height: calc(var(--ns-k) - 6px); font-size: 15px; letter-spacing: 0.08em; }
+.ns-ctl-space { grid-column: 1 / -1; justify-self: stretch; align-items: stretch; text-align: center; }
+.ns-ctl-word { color: #ffe9a8; font: 800 15px/1.1 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; letter-spacing: 0.04em; text-transform: uppercase; }
+.ns-ctl-help { grid-column: 1 / -1; justify-self: center; margin: calc(var(--ns-in) - var(--ns-out)) 0 0; padding: 3px 8px; border-radius: 6px; background: var(--ns-chunk-bg); text-align: center; }
+.ns-ctl-pad { padding: 16px 16px 12px; gap: 12px; }
+.ns-ctl .ns-pad-plate { width: 196px; height: 122px; background: #1b2530; border: 1.5px solid #9fb6ca; }
+.ns-ctl-acts { display: grid; grid-template-columns: auto auto; gap: 4px 12px; margin: 0; align-self: stretch; justify-content: center; }
+.ns-ctl-acts dt { color: #fff; font-weight: 800; text-align: right; }
+.ns-ctl-acts dd { margin: 0; color: #ffe9a8; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; font-size: 15px; align-self: center; }
+@media (max-width: 1400px), (max-height: 760px) { .ns-keys.ns-ctl { --ns-k: 44px; --ns-out: 28px; font-size: 15px; } .ns-ctl .ns-key { font-size: 18px; } .ns-ctl .ns-pad-plate { width: 160px; height: 100px; } }
+@media (max-width: 900px), (max-aspect-ratio: 1/1) {
+  .ns-keys.ns-ctl { --ns-k: 32px; --ns-out: 18px; padding: 0 8px 100px; gap: 18px; font-size: 12px; }
+  .ns-ctl-chunk { padding: 9px 10px 7px; gap: 6px; border-radius: 12px; }
+  .ns-ctl .ns-key { font-size: 14px; } .ns-ctl-word, .ns-ctl-acts dd { font-size: 11px; }
+  .ns-ctl .ns-pad-plate { width: 104px; height: 66px; }
+  body:has(.ns-keys.ns-ctl) .ns-load { top: 8px; }
+}
+@media (max-width: 430px) {
+  .ns-keys.ns-ctl { --ns-k: 23px; --ns-in: 4px; --ns-out: 12px; gap: var(--ns-out); }
+  .ns-ctl-chunk { padding-inline: 6px; }
+  .ns-ctl .ns-key-space { height: var(--ns-k); }
+  .ns-ctl .ns-pad-plate { width: 64px; height: 52px; }
+  .ns-ctl .ns-pad-finger { left: 10px; top: 30px; width: 11px; height: 11px; animation-name: ns-ctl-pad-move; }
+  .ns-ctl .ns-pad-click { right: 12px; top: 14px; width: 11px; height: 11px; }
+  .ns-ctl-acts { column-gap: 6px; }
+}
+@keyframes ns-ctl-pad-move { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(31px, -12px); } }
+
+/* Let the startup card and the departing loading bar finish behind the pause menu. */
+body:has(.ns-shell[data-mode="paused"]) :is(.ns-keys.ns-ctl, .ns-load.ns-load-out) { visibility: hidden; }
+body:has(.ns-keys.ns-ctl) .ns-shell-root .ns-shell-toast { opacity: 0; }
+
+/* The tip beside the crosshair (ns-quiet.mjs), in chunks: the NAME; then the CHOICES, each a key cap with its movement
+   (opposite movements one under the other as a small group with one rule down its side; the groups apart); the row a
+   click does is filled and carries a pointer; a newcomer gets one line under them. */
+.ns-tip { max-width: min(280px, 44vw); padding: 10px 12px 11px; border-radius: 12px; background: rgba(5, 8, 12, 0.94); border: 1.5px solid var(--ns-chunk-rim); }
+.ns-tip-title { font-size: 16px; }
+.ns-tip-rows { margin: 9px 0 0; padding: 9px 0 0; gap: 9px; border-top: 1px solid rgba(200, 222, 240, 0.28); }
+.ns-tip-row { display: grid; gap: 2px; align-items: stretch; padding-left: 6px; border-left: 2px solid transparent; }
+.ns-tip-pair { border-left-color: rgba(200, 222, 240, 0.55); flex-wrap: nowrap; }
+.ns-tip-move { display: grid; grid-template-columns: 24px 1fr 14px; align-items: center; gap: 8px; padding: 2px 6px 2px 2px; border-radius: 8px; color: #dfe9f2; font-size: 14px; }
+.ns-tip-key { min-width: 0; width: 24px; height: 23px; box-sizing: border-box; border-radius: 6px; border: 1.5px solid #9fb6ca; border-bottom-width: 3px; background: #1b2530; font-size: 12.5px; }
+.ns-tip-move.ns-tip-now { color: #fff; background: rgba(255, 255, 255, 0.14); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.75); }
+.ns-tip[data-colored="true"] .ns-tip-move.ns-tip-now { background: color-mix(in oklab, var(--ns-tip-color) 34%, #0b1016); box-shadow: inset 0 0 0 1.5px var(--ns-tip-color); }
+.ns-tip-move.ns-tip-now .ns-tip-key, .ns-tip[data-colored="true"][data-kind="area"] .ns-tip-move.ns-tip-now .ns-tip-key { border-color: #fff; background: #26323f; }
+.ns-tip-click, .ns-tip-teach::before {
+  width: 14px; height: 16px;
+  background: no-repeat center / 14px 16px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 16'%3E%3Cpath d='M2 1v11.2l2.9-2.5 2 4.3 2-.9-2-4.2h4z' fill='%23fff' stroke='%23000' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.ns-tip-teach { display: flex; align-items: center; gap: 7px; margin-top: 9px; padding-top: 8px; border-top: 1px solid rgba(200, 222, 240, 0.28); color: #ffe9a8; font-weight: 700; font-size: 13px; }
+.ns-tip-teach[hidden] { display: none; }
+.ns-tip-teach::before { content: ""; flex: none; }
+.ns-tip-hint { margin-top: 9px; }
+
+/* ==== 19 November 2026 (EASE; the owner: "reader should be on by default"). The game starts at the SHORT reading level
+   (data-ns-read="read"): the tip, the prompt, and ONE small card for the motor area looked at. R goes on to the full
+   cards ("more"), then to none ("off"), then back. The short level shows none of the standing text of the full one:
+   no limits line, no left / right words, no "Looking at" card, no long guide line, no colour key, and no card at all
+   until a motor area has been looked at. */
+.ns-app[data-ns-read="read"] .ns-essential,
+.ns-app[data-ns-read="read"] .ns-orient,
+.ns-app[data-ns-read="read"] .ns-region-label-hemi,
+.ns-app[data-ns-read="read"] .ns-hud .ns-panel-info,
+.ns-app[data-ns-read="read"] .ns-hud .ns-panel-legend,
+.ns-app[data-ns-read="read"] .ns-slot-guide,
+.ns-app[data-ns-read="read"] .ns-infopanel:not([data-mode="region"]),
+.ns-app:not([data-ns-read="more"]) .ns-hover { display: none !important; }
+
+/* The short card, in chunks: the NAME (title and which strip it is), WHAT IT DOES (one sentence), the CHOICES (the
+   same key caps as the tip), the MUSCLES that pull. Close inside a chunk, a rule and room between chunks. Everything
+   else on the card waits for "more". */
+/* No list twice: while the look is ON the area the tip beside the crosshair has its choices, and the card leaves them
+   out; once the look has left it (the card then marks itself "last area shown") the card shows them, so a movement
+   can still be chosen while watching the body. */
+.ns-app[data-ns-read="read"] .ns-infopanel:has(.ns-infopanel-viewed[hidden]) .ns-infopanel-moves { display: none !important; }
+.ns-app[data-ns-read="read"] .ns-infopanel :is(.ns-infopanel-heading, .ns-infopanel-viewed, .ns-infopanel-tag, .ns-infopanel-activity, .ns-infopanel-meter,
+  .ns-infopanel-activations, .ns-infopanel-moves-heading, .ns-infopanel-move-note, .ns-infopanel-simulated, .ns-infopanel-known,
+  .ns-infopanel-caveat, .ns-infopanel-explanation, .ns-infopanel-caveats, .ns-infopanel-citations, .ns-infopanel-detail,
+  .ns-infopanel-key-easing, .ns-infopanel-row-easing, .ns-infopanel-key-pathway, .ns-infopanel-row-pathway,
+  .ns-infopanel-key-movement, .ns-infopanel-row-movement, .ns-infopanel-key-body, .ns-infopanel-row-body) { display: none !important; }
+.ns-app[data-ns-read="read"] .ns-infopanel { max-height: none !important; -webkit-mask-image: none; mask-image: none; bottom: 16px; padding: 14px 16px 14px; border-radius: 14px; background: rgba(5, 8, 12, 0.94); border: 1.5px solid var(--ns-chunk-rim); border-left-width: 5px; }
+.ns-app[data-ns-read="read"] .ns-infopanel-title { margin: 0 64px 2px 0; font-size: 19px; font-weight: 800; color: #fff; }
+.ns-app[data-ns-read="read"] .ns-infopanel :is(.ns-infopanel-plain, .ns-infopanel-moves, .ns-infopanel-rows) {
+  margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid rgba(200, 222, 240, 0.28);
+}
+.ns-app[data-ns-read="read"] .ns-infopanel-plain { font-size: 13.5px; line-height: 1.4; color: #f2f7fb; -webkit-line-clamp: 3; }
+.ns-app[data-ns-read="read"] .ns-infopanel-rows { font-size: 13px; line-height: 1.4; color: #f2f7fb; }
+.ns-app[data-ns-read="read"] .ns-infopanel-rows dt { display: block; margin-bottom: 2px; font-size: 11px; color: #ffe9a8; letter-spacing: 0.06em; }
+.ns-app[data-ns-read="read"] .ns-infopanel-rows dt::after, .ns-app[data-ns-read="read"] .ns-infopanel-rows dd::after { content: none; }
+.ns-app[data-ns-read="read"] .ns-infopanel-rows dd { display: block; }
+
+/* A list of movements has ONE form everywhere (the tip, the card at both levels): a key cap with the movement beside
+   it; the chosen row filled; rows already at their end dimmed. */
+.ns-infopanel-moves { gap: 3px; }
+.ns-infopanel-move { grid-template-columns: 24px minmax(0, 1fr); align-items: center; gap: 0 8px; padding: 2px 6px 2px 2px; border-radius: 8px; font-size: 13.5px; font-weight: 600; color: #dfe9f2; }
+.ns-infopanel-move .ns-infopanel-move-key { display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: 24px; height: 23px; min-width: 0; padding: 0;
+  border-radius: 6px; border: 1.5px solid #9fb6ca; border-bottom-width: 3px; background: #1b2530; color: #fff; font: 800 12.5px/1 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; }
+.ns-infopanel-move[data-current="true"] { background: rgba(255, 255, 255, 0.14); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.75); color: #fff; }
+.ns-infopanel-move[data-current="true"] .ns-infopanel-move-key { border-color: #fff; color: #fff; background: #26323f; }
+.ns-infopanel-move[data-at-end="true"]:not([data-current="true"]) { opacity: 0.5; }
+
+/* ==== 19 November 2026 (EASE): the Esc page as a FEW titled groups with wide gutters (ns-app buildShellMenu), not one
+   long list. Top: the name and the three buttons. Then four control groups side by side, each in its own frame: one
+   picture of its keys and a few short rows. Then Settings, one more frame. The old keyboard picture, the steps, the
+   long controls list and the limits wait behind "Show the full instructions". */
+.ns-shell[data-mode="paused"] .ns-shell-card { display: block; max-width: 1240px; padding: 22px 30px 20px; background: rgba(6, 9, 14, 0.97); }
+.ns-shell[data-mode="paused"] .ns-shell-title { display: inline-block; font-size: 26px; vertical-align: baseline; }
+.ns-shell[data-mode="paused"] .ns-shell-title::after { display: none; }
+.ns-shell[data-mode="paused"] .ns-shell-heading { display: inline-block; margin: 0 0 0 14px; font-size: 16px; vertical-align: baseline; }
+.ns-shell[data-mode="paused"] .ns-shell-actions { margin: 14px 0 0; justify-content: flex-start; }
+.ns-shell[data-mode="paused"] .ns-kbd, .ns-shell[data-mode="paused"][data-words="short"] .ns-shell-grid { display: none; }
+.ns-shell[data-mode="paused"] .ns-shell-resethelp { margin: 8px 0 0; }
+.ns-menu { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--ns-out); margin: var(--ns-out) 0 0; }
+.ns-menu[hidden] { display: none; }
+.ns-menu-group, .ns-shell[data-mode="paused"] .ns-shell-settings {
+  box-sizing: border-box; min-width: 0; margin: 0; padding: 14px 16px 14px; border-radius: 14px;
+  background: #0d141c; border: 1.5px solid var(--ns-chunk-rim);
+}
+.ns-menu-title, .ns-shell[data-mode="paused"] .ns-shell-settings > legend {
+  margin: 0; padding: 0; color: #ffe9a8; font: 800 13px/1.2 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.ns-menu-pic { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--ns-in); height: 96px; margin: 8px 0 10px; }
+.ns-menu-keyrow { display: flex; gap: var(--ns-in); }
+.ns-menu-key {
+  display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: 40px; height: 40px; border-radius: 8px;
+  background: #1b2530; border: 1.5px solid #9fb6ca; border-bottom-width: 4px; color: #fff; font: 800 17px/1 system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+.ns-menu-key.ns-menu-key-wide { width: 58px; font-size: 14px; margin-left: 18px; }
+.ns-menu-key.ns-menu-key-space { width: 100%; max-width: 220px; height: 36px; font-size: 14px; letter-spacing: 0.08em; }
+.ns-menu-plate { position: relative; width: 132px; height: 84px; border-radius: 12px; background: #1b2530; border: 1.5px solid #9fb6ca; }
+.ns-menu-finger { position: absolute; left: 30%; top: 46%; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.16); }
+.ns-menu-rows { display: grid; grid-template-columns: fit-content(44%) minmax(0, 1fr); gap: 5px 12px; margin: 0; font-size: 14.5px; line-height: 1.3; }
+.ns-menu-rows dt { color: #fff; font-weight: 800; }
+.ns-menu-rows dd { margin: 0; color: #dfe9f2; }
+.ns-menu-note { margin: 8px 0 0; color: #dfe9f2; font-size: 14.5px; line-height: 1.3; }
+/* Settings: the fifth frame, the same look; its three small groups side by side inside it. */
+.ns-shell[data-mode="paused"] .ns-shell-settings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px var(--ns-out); margin-top: var(--ns-out); border-top: 1.5px solid var(--ns-chunk-rim); }
+.ns-shell[data-mode="paused"] .ns-shell-settings[hidden] { display: none; }
+.ns-shell[data-mode="paused"] .ns-shell-settings > legend { float: left; width: 100%; grid-column: 1 / -1; margin-bottom: 6px; }
+.ns-shell[data-mode="paused"] .ns-shell-setting:has(> select) { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }
+.ns-shell[data-mode="paused"] .ns-shell-detailrow { margin-top: var(--ns-out); }
+@media (max-width: 1100px) { .ns-menu { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ns-menu-pic { height: 84px; } }
+@media (max-width: 640px) { .ns-menu, .ns-shell[data-mode="paused"] .ns-shell-settings { grid-template-columns: minmax(0, 1fr); } }
+@media (max-height: 760px) {
+  .ns-shell[data-mode="paused"] .ns-shell-card { padding: 14px 24px 14px; }
+  .ns-menu, .ns-shell[data-mode="paused"] .ns-shell-settings, .ns-shell[data-mode="paused"] .ns-shell-detailrow { --ns-out: 20px; }
+  .ns-menu-pic { height: 84px; margin: 6px 0 8px; } .ns-menu-key { width: 36px; height: 36px; }
+  .ns-menu-rows, .ns-menu-note { font-size: 13.5px; }
+}
+
+/* ==== 19 November 2026 (EASE, the playable tutorial): the prompt is one small card of three chunks in the TOP LEFT
+   corner: the step count ("2/8"), the one line to do, and under it how to skip the step. Top left, not top centre:
+   the brain, the mirror body's head and their upper arrows and captions live at the top centre, and a line there
+   covered them. The corner is the room's empty wall at every window size. */
+.ns-prompt { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: stretch; left: 16px; top: 14px; transform: none; padding: 0;
+  max-width: min(330px, 62vw); border-radius: 14px; text-align: left;
+  background: rgba(5, 8, 12, 0.94); border: 1.5px solid rgba(255, 214, 102, 0.8); box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5); color: #fff; font-size: 17px; font-weight: 800; line-height: 1.25; }
+.ns-prompt[hidden], .ns-prompt-count[hidden], .ns-prompt-skip[hidden] { display: none; }
+.ns-prompt-count { grid-row: 1 / span 2; display: flex; align-items: center; padding: 10px 13px; border-right: 1.5px solid rgba(255, 214, 102, 0.5); color: #ffe9a8; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+.ns-prompt-words { grid-column: 2; padding: 10px 15px 3px; }
+.ns-prompt-skip { grid-column: 2; padding: 0 15px 9px; color: #c9d6e2; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+.ns-prompt:has(.ns-prompt-skip[hidden]) .ns-prompt-words { padding-bottom: 10px; }
+.ns-prompt:has(.ns-prompt-count[hidden]) .ns-prompt-words { grid-column: 1 / -1; }
+@media (max-width: 1400px) { .ns-prompt { max-width: min(290px, 62vw); font-size: 16px; } }
+@media (max-width: 700px) { .ns-prompt { font-size: 14px; left: 8px; top: 8px; } }
+
+/* 19 November 2026 (EASE, audit S24): at the full reading level the bottom-left cards stood on the one-line
+   "Simulated activity" note. Both cards stand 20 px higher there; the note keeps its place.
+   20 November 2026 (package HUD): that lift is now the HUD's own placement (ns-scene-three cornerStackFit), not a CSS
+   transform. A transformed card is the containing block of the floating "Try this" chip inside it (position: fixed), so
+   the chip's window place was measured from the card's corner and it landed on the information panel or under the
+   window's bottom edge (hunt H2-4); and a key lifted after the HUD had clamped it under the limits line lay on that
+   line. Nothing that holds the chip may have a transform, filter or perspective (tests/hud-layout.test.mjs).
+   A card the stack cannot hold whole stands at its greatest height (inline max-height) and fades out at its foot. */
+.ns-hud .ns-panel[data-ns-capped="true"] { overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 18px), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 18px), transparent); }
+/* (a mask is painted over the card's whole group, the floating chip too, wherever the chip stands: no fade then) */
+.ns-hud .ns-panel[data-ns-capped="true"]:has(.ns-guide-float) { -webkit-mask-image: none; mask-image: none; }
+/* 22 November 2026 (WORDS2, hunt H11): the status card has the whole stack first (ns-scene-three CORNER_STACK
+   statusFirst), so at the supported window sizes it is not capped. In a window too small even for it, its brand and
+   model-name line (the honesty line, the card's foot: neurosurge.css order 20) stays at the foot, whole, over the lines
+   it covers: no fade there. The colour key drops whole parts to fit what is left (LEGEND_FIT, data-ns-fit): 1 its
+   credits line ("Sources and rights" stays; the credits are also behind "notes and credits"), 2 also the two key items
+   and the rough-map note, 3 the key is not shown. */
+.ns-hud .ns-panel-info[data-ns-capped="true"] { -webkit-mask-image: none; mask-image: none; }
+.ns-hud .ns-panel-info[data-ns-capped="true"] .ns-slot-title { position: sticky; bottom: 0; z-index: 1; background: #0b1019; }
+/* (second pass: the credits line is a block of its own, so the key's fit measures it; "Sources and rights" follows on
+   its own line) */
+.ns-hud .ns-slot-rights { display: block; }
+.ns-hud .ns-panel-legend[data-ns-fit] .ns-slot-rights,
+.ns-hud .ns-panel-legend[data-ns-fit="2"] :is(.ns-legend-key, .ns-slot-regionNote),
+.ns-hud .ns-panel-legend[data-ns-fit="3"] :is(.ns-legend-key, .ns-slot-regionNote) { display: none; }
+.ns-hud .ns-panel-legend[data-ns-fit="3"] { visibility: hidden; }
+
+/* 19 November 2026 (the owner: "The number overview is very confusing"): no numbered list of movements on the card;
+   the look does the movement and the card says what the area does. */
+.ns-app .ns-infopanel .ns-infopanel-moves, .ns-app .ns-infopanel .ns-infopanel-moves-heading { display: none !important; }
+
+/* Number shortcuts and limb buttons share one row. The chosen limb is the bright one. */
+.ns-limbs { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); display: flex; gap: 6px; padding: 6px 8px; border-radius: 12px; background: rgba(4, 7, 11, 0.82); border: 1px solid rgba(255, 255, 255, 0.16); pointer-events: none; z-index: 6; white-space: nowrap; }
+.ns-limbs-chip { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 3px 9px 3px 4px; border-radius: 8px; color: #9fb0c0; font: 600 12px/1.2 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; background: transparent; border: 1px solid transparent; pointer-events: auto; cursor: pointer; touch-action: manipulation; }
+.ns-limbs-chip:focus-visible { outline: 2px solid #7cc4ff; outline-offset: 2px; }
+.ns-limbs-key { display: inline-block; min-width: 20px; padding: 2px 0; text-align: center; border-radius: 5px; background: #1a2430; border: 1px solid #5a6a7a; color: #dfe9f3; font: inherit; font-weight: 700; }
+.ns-limbs-chip[data-on="true"] { color: #10161d; background: #ffd66b; border-color: #fff0b8; }
+.ns-limbs-chip[data-on="true"] .ns-limbs-key { background: #10161d; border-color: #10161d; color: #ffd66b; }
+@media (pointer: coarse) { .ns-limbs-chip { min-width: 44px; min-height: 44px; } }
+@media (max-width: 440px) {
+  .ns-limbs { gap: 4px; }
+  .ns-limbs-chip { flex-direction: column; gap: 2px; padding: 3px 5px; }
+}
+/* 20 November 2026 (package HUD): in a wide window under 960 px the short card in the corner is under 180 px wide, and its
+   key hint ("R more", top right) stood on the title ("Tongue" at 800 by 600 and 640 by 480). There the hint has its own
+   line at the top of the card and the title the card's whole width. */
+@media (min-aspect-ratio: 1/1) and (max-width: 960px) {
+  .ns-app[data-ns-read="read"] .ns-infopanel .ns-infopanel-keyhint { position: static; order: -1; justify-content: flex-end; margin: -4px -4px 6px 0; }
+  .ns-app[data-ns-read="read"] .ns-infopanel .ns-infopanel-title { margin-right: 0; }
+}
+/* 20 November 2026 (package HUD): a wide but small window (640 by 480) has no room for one-line buttons between the two
+   bottom corner cards (each 18.75 % of the width): the information card lay on "4 Right arm". There each button has two
+   lines, as in a phone-sized window, and the row is about 265 px wide instead of 406. */
+@media (min-aspect-ratio: 1/1) and (max-width: 680px) {
+  .ns-limbs { gap: 4px; }
+  .ns-limbs-chip { flex-direction: column; gap: 2px; padding: 3px 5px; }
+}
+/* 20 November 2026 (hunt 4): in an upright window the information card runs across the bottom of the window, and the
+   limb buttons and the "Simulated activity" line lay over its last lines (600 by 900: the KEY and STRIP PART lines).
+   There the card now stands above the limb buttons, moved up whole: they stand 34 px up and are 42 px tall, taller
+   with a coarse pointer or below 440 px, where each button has two lines. (Wide windows keep the card in the corner
+   beside the buttons.) A card too long for the band fades out at its foot, as the full card does, instead of ending
+   in half a line. */
+.ns-app { --ns-limbs-reserve: 84px; }
+@media (pointer: coarse), (max-width: 440px) { .ns-app { --ns-limbs-reserve: 102px; } }
+@media (max-aspect-ratio: 999/1000) {
+  .ns-app:has(.ns-limbs) .ns-infopanel { transform: translateY(calc(var(--ns-gap, 12px) - var(--ns-limbs-reserve)));
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 16px), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 16px), transparent); }
+  /* 20 November 2026 (hunt H2-6): the SHORT card is as tall as its words (title, sentence, muscles), standing on the
+     limb buttons, with at most the band above them. It used to span a fixed box from the band's legend row (no legend
+     at this level) down to the bottom, lifted whole: at 390 by 844 its muscle lines were cut off at the box's foot. */
+  .ns-app:has(.ns-limbs)[data-ns-read="read"] .ns-infopanel { top: auto; bottom: calc(var(--ns-limbs-reserve) + 4px); transform: none;
+    max-height: calc(var(--ns-info-portrait-vh) - var(--ns-limbs-reserve) + 8px) !important; }
+  /* 20 November 2026 (hunt H2-5): at the full level the colour key runs the width of the band like the card (shorter:
+     576 px wide it is 163 px tall, not 223) and docks at the band's top; the card starts under the key's measured height
+     (ns-scene-three portraitLegendDock writes --ns-portrait-legend-reserve), so the two never overlap. Where the band
+     is too short for both, the key is lifted just enough (--ns-legend-lift, at most as far as the card is lifted). */
+  .ns-hud .ns-panel-legend { width: calc(100% - 2 * var(--ns-gap, 12px)); }
+  .ns-hud .ns-panel-legend[data-ns-docked="band"] { margin-top: calc(-1 * var(--ns-legend-lift, 0px)); }
+}
+
+/* ==== 21 November 2026 (EMAP, section 192): the electrical map's legend (ns-emap-card.mjs). One small chunk at the top
+   right, away from the other cards, only while the map is on (the M key: data-ns-emap="on" on the app root). It follows
+   the reading levels of the R key: the short card at the start, More detail under it at "more", nothing at "off".
+   Its two marks say the same as the picture without needing colour: the command is one line with one large bead, the
+   report a paler line beside it with two small beads. */
+.ns-emap-card {
+  display: none; position: absolute; right: 16px; top: 108px; width: min(300px, calc(100vw - 32px)); box-sizing: border-box;
+  padding: 12px 14px 12px; border-radius: 14px; pointer-events: none;
+  background: var(--ns-chunk-bg, rgba(6, 10, 15, 0.86)); border: 1.5px solid var(--ns-chunk-rim, rgba(200, 222, 240, 0.5)); box-shadow: 0 10px 34px rgba(0, 0, 0, 0.55);
+  color: #f2f7fb; font: 13.5px/1.4 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; --ns-emap-color: #7fd8ff;
+}
+.ns-app[data-ns-emap="on"] .ns-emap-card { display: block; }
+.ns-app[data-ns-read="off"] .ns-emap-card, .ns-app[data-ns-phase="loading"] .ns-emap-card { display: none; }
+.ns-emap-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.ns-emap-title { font-size: 17px; font-weight: 800; color: #fff; }
+.ns-emap-key { color: #cfdbe6; font-size: 12px; font-weight: 700; letter-spacing: 0.02em; white-space: nowrap; }
+.ns-emap-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ns-emap-row { display: flex; align-items: center; gap: 10px; }
+.ns-emap-mark { flex: none; width: 46px; height: 12px; border-radius: 6px; }
+.ns-emap-down .ns-emap-mark {
+  background:
+    radial-gradient(circle at 70% 50%, #fff 0 2px, var(--ns-emap-color) 3px, transparent 6px),
+    linear-gradient(var(--ns-emap-color), var(--ns-emap-color)) center / 100% 2.5px no-repeat;
+}
+.ns-emap-up .ns-emap-mark {
+  background:
+    radial-gradient(circle at 26% 50%, #fff 0 1px, color-mix(in oklab, var(--ns-emap-color) 45%, #fff) 2px, transparent 4px),
+    radial-gradient(circle at 62% 50%, #fff 0 1px, color-mix(in oklab, var(--ns-emap-color) 45%, #fff) 2px, transparent 4px),
+    linear-gradient(color-mix(in oklab, var(--ns-emap-color) 40%, #fff), color-mix(in oklab, var(--ns-emap-color) 40%, #fff)) center / 100% 1.5px no-repeat;
+  opacity: 0.85;
+}
+.ns-emap-scan .ns-emap-mark { /* 22 November 2026 (part 3): the live scan's colour scale (ns-emap-storm SCAN_STOPS) */
+  height: 9px; border-radius: 5px; background: linear-gradient(90deg, rgb(41, 15, 107), rgb(20, 51, 217) 22%, rgb(0, 184, 230) 42%, rgb(46, 224, 92) 58%, rgb(245, 230, 46) 72%, rgb(255, 122, 20) 86%, rgb(255, 237, 209));
+}
+.ns-emap-honest { margin: 9px 0 0; padding-top: 8px; border-top: 1px solid rgba(200, 222, 240, 0.25); color: #ffe9a8; font-weight: 700; }
+.ns-emap-more { display: none; margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(200, 222, 240, 0.25); max-height: min(46vh, 430px); overflow: hidden; }
+.ns-app[data-ns-read="more"] .ns-emap-more { display: block; }
+.ns-emap-area { margin: 0 0 4px; font-weight: 800; color: #fff; }
+.ns-emap-route, .ns-emap-notes { margin: 0; padding: 0 0 0 16px; display: grid; gap: 4px; font-size: 12.5px; line-height: 1.38; }
+.ns-emap-notes { margin-top: 8px; color: #cfdbe6; }
+.ns-emap-notes:empty { display: none; }
+/* 21 November 2026 (EMAP), after a picture of the "more" level: More detail hung under the short card (590 px tall
+   with the card) and lay ON the game's own information panel, which at this level stands at the bottom right and is up
+   to 66 % of the window high (neurosurge.css --ns-info-col-maxvh): two panels of text on top of each other. At "more"
+   the legend is now one low, wide card above that panel: the short card keeps the right edge, More detail is a column
+   to its left, and the card is never taller than the room above the panel (what does not fit is cut at the foot; the
+   words are kept to nine short lines for it: ns-text EMAP.more). Not on narrow or upright windows (the rule below). */
+@media (min-width: 901px) and (min-aspect-ratio: 1001/1000) {
+  .ns-app[data-ns-emap="on"][data-ns-read="more"]:not([data-ns-phase="loading"]) .ns-emap-card {
+    display: grid; grid-template-columns: minmax(0, 1fr) 228px; grid-template-rows: auto auto 1fr; column-gap: 14px;
+    top: 26px; width: min(532px, calc(100vw - 32px)); max-height: calc(100vh - var(--ns-info-col-maxvh, 66vh) - 58px); overflow: hidden;
+  }
+  .ns-app[data-ns-read="more"] .ns-emap-card > :not(.ns-emap-more) { grid-column: 2; }
+  .ns-app[data-ns-read="more"] .ns-emap-more { grid-column: 1; grid-row: 1 / span 3; margin: 0; padding: 0 14px 0 0; border-top: 0; border-right: 1px solid rgba(200, 222, 240, 0.25); max-height: none; box-sizing: border-box; }
+  .ns-app[data-ns-read="more"] :is(.ns-emap-route, .ns-emap-notes) { list-style: none; padding: 0; font-size: 11.5px; line-height: 1.33; }
+  .ns-app[data-ns-read="more"] .ns-emap-area { font-size: 12.5px; }
+}
+@media (max-width: 900px), (max-aspect-ratio: 1/1) {
+  .ns-emap-card { top: 64px; right: 8px; width: min(230px, calc(100vw - 16px)); padding: 9px 10px; font-size: 12px; }
+  .ns-emap-title { font-size: 14px; }
+  .ns-app[data-ns-read="more"] .ns-emap-more { max-height: 30vh; }
+}

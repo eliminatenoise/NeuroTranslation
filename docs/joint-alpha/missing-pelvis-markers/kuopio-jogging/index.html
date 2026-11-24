@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Compare four ways to predict pelvis movement on original 100 Hz camera recordings from Kuopio.">
+<title>Can an earlier stride predict movement in a second lab? · NeuroTranslation</title>
+<style>
+:root{color-scheme:light;color:#18362d;background:#f8faf5;font:17px/1.6 system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0}[hidden]{display:none!important}
+main{max-width:58rem;margin:auto;padding:clamp(1.25rem,4vw,2.7rem) 1rem 4rem}
+nav{display:flex;align-items:baseline;flex-wrap:wrap;gap:.3rem 1.4rem;font-size:.85rem}
+nav a:first-child{font-weight:700}a{color:#1a4f42;text-underline-offset:.2em}
+:focus-visible{outline:3px solid #18614e;outline-offset:3px}p{max-width:72ch;margin:.55rem 0 .8rem}
+h1{font-size:clamp(2.05rem,5.7vw,4.15rem);line-height:1.03;letter-spacing:-.045em;margin:.45em 0 .35em;max-width:19ch}
+h2{font-size:1.38rem;line-height:1.2;margin:1.5em 0 .35em;letter-spacing:-.02em}
+.intro{font-size:1.08rem}.support{color:#3c5c50;font-size:.92rem}.result{margin:1rem 0 1.8rem}
+.result h2{margin-top:.8rem}.difference{border-left:3px solid #7fa692;padding:.35rem 0 .35rem .7rem}
+label{display:block;max-width:22rem;font-weight:660;margin:1.2rem 0 0}
+select{display:block;width:100%;min-height:2.7rem;padding:.3rem .5rem;margin-top:.25rem;border:1px solid #859c90;border-radius:.3rem;color:inherit;background:#fff;font:inherit}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;line-height:1.35;margin:.6rem 0 1rem}
+caption{text-align:left;font-weight:680;padding:.3rem 0}th,td{border-bottom:1px solid #c6d5ca;padding:.5rem .38rem;text-align:left;vertical-align:top}
+thead th{border-bottom:2px solid #829589;text-align:right}thead th:first-child{text-align:left}
+tbody th{font-weight:540}td{text-align:right}tbody tr:nth-child(even){background:#edf3ec}td.lowest{background:#dbeadd;color:#173b2e;font-weight:760}
+.gaps{font-size:.88rem}.interval{white-space:normal}details{margin:1rem 0}summary{font-weight:690;cursor:pointer}
+@media(max-width:31rem){main{padding:1.1rem .72rem 3rem}table{font-size:.86rem}.gaps{font-size:.71rem}th,td{padding:.43rem .17rem}.gaps th:last-child{max-width:5rem}.gaps td:last-child .interval{display:block}}
+</style>
+</head>
+<body><main>
+<nav aria-label="Related studies">
+  <a href="../../../">NeuroTranslation</a>
+  <a href="../running-pace/">Earlier Bath pace comparison</a>
+  <a href="../melbourne-walking/">Melbourne walking comparison</a>
+  <a href="../../../papers/movement-forecast-evidence/">Movement forecast paper supplement</a>
+</nav>
+<h1>Can an earlier stride predict movement in a second lab?</h1>
+<p class="intro">In Kuopio, the earlier-stride forecast came within about <strong>6 mm</strong> of the four-marker measurement on average. Extending the last bit of camera speed missed by about <strong>33 mm</strong>. The learned correction had an uncertain effect on average error.</p>
+<p>The cameras tracked two markers over the front of the pelvis and two at the back. We used the last 80 readings to forecast how far their average height would rise or fall 100 milliseconds later. Each method faced the same recorded movements.</p>
+<label id="pick" for="marker-target" hidden>Markers in the forecast
+  <select id="marker-target">
+    <option value="four_marker">All four pelvis markers</option>
+    <option value="rear_pair">The two rear markers</option>
+  </select>
+</label>
+
+<section class="result" id="four_marker" aria-labelledby="heading-four_marker">
+  <h2 id="heading-four_marker">All four pelvis markers</h2>
+  <p class="support">12 people · 9,698 scored forecasts out of 13,183 made</p>
+  <table class="forecast">
+    <caption>Forecast error in millimetres</caption>
+    <thead><tr><th scope="col">Method</th><th scope="col">Average</th><th scope="col">90th percentile</th></tr></thead>
+    <tbody><tr><th scope="row">Predict zero movement</th><td>26.78</td><td>60.68</td></tr><tr><th scope="row">Continue recent camera speed</th><td>32.96</td><td>74.83</td></tr><tr><th scope="row">Replay an earlier stride</th><td class="lowest">5.90</td><td>14.23</td></tr><tr><th scope="row">Replay plus learned correction</th><td>5.95</td><td>13.80</td></tr></tbody>
+  </table>
+  <p class="difference">Change in average error after adding the correction <strong>+0.05 mm <span class="interval">(−0.42 to +0.53 mm)</span></strong>. The 95% interval includes zero.</p>
+  <details>
+    <summary>See what the cameras missed</summary>
+    <p>These groups describe missing readings anywhere in the 80 input frames. A forecast still needs the required markers at the last and later frames to earn a score. A dash marks fewer than six people with a score.</p>
+    <table class="gaps">
+      <caption>Original gaps in the history</caption>
+      <thead><tr><th scope="col">What was missing</th><th scope="col">Made</th><th scope="col">Scored</th>
+      <th scope="col">People scored</th><th scope="col">Change in error</th></tr></thead><tbody><tr><th scope="row">All markers present</th><td>4,365</td><td>4,325</td><td>12</td><td>+1.30 mm <span class="interval">(+0.72 to +1.82 mm)</span></td></tr><tr><th scope="row">Gaps in front only</th><td>8,361</td><td>5,289</td><td>12</td><td>−0.62 mm <span class="interval">(−1.11 to −0.10 mm)</span></td></tr><tr><th scope="row">Gaps at the rear only</th><td>127</td><td>0</td><td>0</td><td>—</td></tr><tr><th scope="row">Gaps at the front and rear</th><td>330</td><td>84</td><td>2</td><td>—</td></tr></tbody>
+    </table>
+    <p>The last column gives the change after adding the correction, with its 95% interval. These smaller groups describe this set of recordings.</p>
+  </details>
+</section>
+
+<section class="result" id="rear_pair" aria-labelledby="heading-rear_pair">
+  <h2 id="heading-rear_pair">The two rear markers</h2>
+  <p class="support">12 people · 12,889 scored forecasts out of 13,183 made</p>
+  <table class="forecast">
+    <caption>Forecast error in millimetres</caption>
+    <thead><tr><th scope="col">Method</th><th scope="col">Average</th><th scope="col">90th percentile</th></tr></thead>
+    <tbody><tr><th scope="row">Predict zero movement</th><td>34.96</td><td>70.22</td></tr><tr><th scope="row">Continue recent camera speed</th><td>42.42</td><td>85.17</td></tr><tr><th scope="row">Replay an earlier stride</th><td>7.13</td><td>16.50</td></tr><tr><th scope="row">Replay plus learned correction</th><td class="lowest">6.72</td><td>15.42</td></tr></tbody>
+  </table>
+  <p class="difference">Change in average error after adding the correction <strong>−0.42 mm <span class="interval">(−0.83 to +0.04 mm)</span></strong>. The 95% interval includes zero.</p>
+  <details>
+    <summary>See what the cameras missed</summary>
+    <p>These groups describe missing readings anywhere in the 80 input frames. A forecast still needs the required markers at the last and later frames to earn a score. A dash marks fewer than six people with a score.</p>
+    <table class="gaps">
+      <caption>Original gaps in the history</caption>
+      <thead><tr><th scope="col">What was missing</th><th scope="col">Made</th><th scope="col">Scored</th>
+      <th scope="col">People scored</th><th scope="col">Change in error</th></tr></thead><tbody><tr><th scope="row">All markers present</th><td>4,365</td><td>4,365</td><td>12</td><td>+1.21 mm <span class="interval">(+0.60 to +1.78 mm)</span></td></tr><tr><th scope="row">Gaps in front only</th><td>8,361</td><td>8,357</td><td>12</td><td>−0.85 mm <span class="interval">(−1.38 to −0.27 mm)</span></td></tr><tr><th scope="row">Gaps at the rear only</th><td>127</td><td>0</td><td>0</td><td>—</td></tr><tr><th scope="row">Gaps at the front and rear</th><td>330</td><td>167</td><td>2</td><td>—</td></tr></tbody>
+    </table>
+    <p>The last column gives the change after adding the correction, with its 95% interval. These smaller groups describe this set of recordings.</p>
+  </details>
+</section>
+<h2>What the cameras could tell us</h2>
+<p>The archive labels the 12 camera files as jogging. The authors describe a 60-second task, and the full captures run from 85 to 162 seconds. We could verify the capture boundaries. The start and end of active jogging remained unknown, so the comparison uses the full files.</p>
+<p>We checked marker availability before this evaluation. The jogging recordings were new to this fitted stride model. Separate work used other tasks from the same people. The people, equipment and recording protocol also changed between Bath and Kuopio, so this test cannot isolate the effect of camera rate.</p>
+<p>When the cameras lose a rear marker, the loss can also take away the reading we need to check the forecast. The rear-only histories here yielded no usable comparisons. Histories with gaps at the front and rear supplied usable comparisons from two people.</p>
+<details>
+  <summary>How the forecasts and errors were calculated</summary>
+  <p>The cameras stored 100 frames a second. We made a forecast every ten frames from native frame offset 80, using 80 consecutive input frames and checking the recorded displacement ten frames later. The last input needed at least two usable markers. Each checked displacement needed all the selected markers at both endpoints, with finite coordinates and a positive reconstruction quality value. The original missing-reading flag defined a camera gap. A quality value of zero could also exclude a reading.</p>
+  <p>The replay method finds a similar part of an earlier stride and borrows the movement that followed it. When no earlier stride fits, it forecasts zero. The camera-speed method projects the previous 50 milliseconds forward using markers observed at both times. It estimates zero if it has no usable pair of readings. The attention model applies a correction learned from earlier Fukuchi recordings. We kept the fitted weights fixed and saved the Kuopio forecasts before calculating the later displacements.</p>
+  <p>We averaged absolute errors within each person and gave every person the same weight in the average column. The 90th percentile pools the scored forecasts and gives the error at the edge of the largest tenth. For each interval we resampled the people 5,000 times, keeping each person’s two errors together. We made no adjustment for multiple comparisons.</p>
+</details>
+<p>Camera recordings by Alexander K. Beattie, Matti J. Kortelainen, Paavo Vartiainen and Pasi A. Karjalainen. The Kuopio Full-Body Dataset v1.2.1 is released under CC BY 4.0.</p>
+<p><a href="results.json" download>Download aggregate results</a> · <a href="https://doi.org/10.5281/zenodo.24194741">Source dataset</a> · <a href="https://doi.org/10.1038/s41597-026-08550-z">Recording methods</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Source licence</a></p>
+</main>
+<script>
+const selector = document.querySelector('#marker-target');
+const groups = document.querySelectorAll('.result');
+function selectMarkers() {
+  for (const group of groups) group.hidden = group.id !== selector.value;
+}
+selectMarkers();
+selector.addEventListener('change', selectMarkers);
+document.querySelector('#pick').hidden = false;
+</script>
+</body>
+</html>

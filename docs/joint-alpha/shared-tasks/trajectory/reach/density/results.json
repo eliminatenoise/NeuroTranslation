@@ -1,0 +1,183 @@
+{
+  "scope": "Exploratory comparison within a previously used processed macaque reaching recording.",
+  "clock_ms": 10,
+  "forecast_ms": [
+    20,
+    50,
+    70,
+    100
+  ],
+  "grid_step_ms": 100,
+  "seeds": [
+    1117,
+    2971
+  ],
+  "draws": 32,
+  "coverage": {
+    "fit_originals": 72,
+    "cue_fit_windows": 194,
+    "union_fit_windows": 1533,
+    "development_originals": 18,
+    "development_grid_windows": 331,
+    "development_cue_windows": 47,
+    "shared_cue_grid_windows": 7,
+    "distinct_windows": 371,
+    "per_stratum": {
+      "grid": {
+        "missing_optical_history_windows": 0,
+        "missing_optical_target_values": 0,
+        "planned_optical_coverage_fraction": 0.9516430670585092
+      },
+      "cue": {
+        "missing_optical_history_windows": 0,
+        "missing_optical_target_values": 0,
+        "planned_optical_coverage_fraction": 0.3013625434143735
+      }
+    }
+  },
+  "units": "millimetres",
+  "estimator_names": {
+    "ar_ridge": "Autoregressive transformer",
+    "diff_ridge": "Diffusion transformer",
+    "ridge_residual": "Linear forecast with sampled errors",
+    "ridge_point": "One linear path",
+    "velocity20": "Continue the last 20 ms of velocity",
+    "velocity100": "Continue the last 100 ms of velocity"
+  },
+  "primary_grid_energy": {
+    "diff_ridge": {
+      "cue_fit": 4.73740981203636,
+      "union_fit": 3.1083682568912425,
+      "union_minus_cue": -1.6290415551451183,
+      "paired_lower95": -1.8078153547977944,
+      "paired_upper95": -1.4437229592801903,
+      "percent_reduction_vs_cue": 34.386756049818715,
+      "originals_lower": 18,
+      "originals_tied": 0,
+      "originals_higher": 0
+    },
+    "ar_ridge": {
+      "cue_fit": 4.281340507300957,
+      "union_fit": 3.0488338365609917,
+      "union_minus_cue": -1.2325066707399643,
+      "paired_lower95": -1.3635728921160455,
+      "paired_upper95": -1.0829715074029007,
+      "percent_reduction_vs_cue": 28.787868393980215,
+      "originals_lower": 18,
+      "originals_tied": 0,
+      "originals_higher": 0
+    },
+    "ridge_residual": {
+      "cue_fit": 3.519965810400711,
+      "union_fit": 3.1015532835857726,
+      "union_minus_cue": -0.41841252681493746,
+      "paired_lower95": -0.49951969289612885,
+      "paired_upper95": -0.33695617059618377,
+      "percent_reduction_vs_cue": 11.886834968073329,
+      "originals_lower": 18,
+      "originals_tied": 0,
+      "originals_higher": 0
+    },
+    "ridge_point": {
+      "cue_fit": 4.627270214885561,
+      "union_fit": 4.1502566880601535,
+      "union_minus_cue": -0.47701352682540804,
+      "paired_lower95": -0.5755868979503294,
+      "paired_upper95": -0.3724195507802993,
+      "percent_reduction_vs_cue": 10.308745862536693,
+      "originals_lower": 18,
+      "originals_tied": 0,
+      "originals_higher": 0
+    },
+    "velocity20": {
+      "cue_fit": 5.683574302913461,
+      "union_fit": 5.683574302913461,
+      "union_minus_cue": 0.0,
+      "paired_lower95": 0.0,
+      "paired_upper95": 0.0,
+      "percent_reduction_vs_cue": -0.0,
+      "originals_lower": 0,
+      "originals_tied": 18,
+      "originals_higher": 0
+    },
+    "velocity100": {
+      "cue_fit": 7.48498060811004,
+      "union_fit": 7.48498060811004,
+      "union_minus_cue": 0.0,
+      "paired_lower95": 0.0,
+      "paired_upper95": 0.0,
+      "percent_reduction_vs_cue": -0.0,
+      "originals_lower": 0,
+      "originals_tied": 18,
+      "originals_higher": 0
+    }
+  },
+  "secondary_cue_energy": {
+    "diff_ridge": {
+      "cue_fit": 4.632742291126477,
+      "union_fit": 3.122064428355282,
+      "union_minus_cue": -1.5106778627711945,
+      "paired_lower95": -1.9392805247855553,
+      "paired_upper95": -1.1695750985692122,
+      "percent_reduction_vs_cue": 32.60871785734201,
+      "originals_lower": 18,
+      "originals_tied": 0,
+      "originals_higher": 0
+    },
+    "ar_ridge": {
+      "cue_fit": 4.0990541785036285,
+      "union_fit": 2.9920315011540546,
+      "union_minus_cue": -1.1070226773495722,
+      "paired_lower95": -1.4535660445264857,
+      "paired_upper95": -0.7902451620507771,
+      "percent_reduction_vs_cue": 27.00678325148886,
+      "originals_lower": 17,
+      "originals_tied": 0,
+      "originals_higher": 1
+    },
+    "ridge_residual": {
+      "cue_fit": 3.1608635535453766,
+      "union_fit": 3.018939749435425,
+      "union_minus_cue": -0.14192380410995176,
+      "paired_lower95": -0.3907403701492355,
+      "paired_upper95": 0.0787202302073395,
+      "percent_reduction_vs_cue": 4.490032603614389,
+      "originals_lower": 11,
+      "originals_tied": 0,
+      "originals_higher": 7
+    },
+    "ridge_point": {
+      "cue_fit": 4.373999655158792,
+      "union_fit": 4.2167049472064795,
+      "union_minus_cue": -0.15729470795231304,
+      "paired_lower95": -0.454719771359089,
+      "paired_upper95": 0.12694024015145255,
+      "percent_reduction_vs_cue": 3.596129866329463,
+      "originals_lower": 10,
+      "originals_tied": 0,
+      "originals_higher": 8
+    },
+    "velocity20": {
+      "cue_fit": 6.380382842064438,
+      "union_fit": 6.380382842064438,
+      "union_minus_cue": 0.0,
+      "paired_lower95": 0.0,
+      "paired_upper95": 0.0,
+      "percent_reduction_vs_cue": -0.0,
+      "originals_lower": 0,
+      "originals_tied": 18,
+      "originals_higher": 0
+    },
+    "velocity100": {
+      "cue_fit": 8.390177765127142,
+      "union_fit": 8.390177765127142,
+      "union_minus_cue": 0.0,
+      "paired_lower95": 0.0,
+      "paired_upper95": 0.0,
+      "percent_reduction_vs_cue": -0.0,
+      "originals_lower": 0,
+      "originals_tied": 18,
+      "originals_higher": 0
+    }
+  }
+}

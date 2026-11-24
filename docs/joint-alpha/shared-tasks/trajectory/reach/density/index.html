@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What happens between the cues? · NeuroTranslation</title>
+  <style>:root { font: 100%/1.62 system-ui, sans-serif; color: #203538; background: #f5f6f2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(45rem, calc(100% - 2rem)); margin: 2rem auto 4rem; }
+    header { border-top: .35rem solid #1b4647; }
+    h1, h2 { line-height: 1.15; letter-spacing: -.035em; }
+    h1 { font-size: clamp(2.3rem, 7vw, 4rem); margin: .35em 0; }
+    a { color: #075d52; text-underline-offset: .2em; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #c44c14; outline-offset: 3px; }
+    section { margin-top: 2rem; border-top: 1px solid #b9c7c4; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    caption, th, td { text-align: left; }
+    caption { font-weight: 650; margin-bottom: .35rem; }
+    th, td { padding: .36rem .4rem; border-bottom: 1px solid #bdc9c6; vertical-align: top; }
+    details { border-bottom: 1px solid #bdc9c6; }
+    details table { margin-bottom: .8rem; }
+    summary { padding: .55em .2em; cursor: pointer; font-weight: 650; }
+    @media (forced-colors: active) {
+      a:focus-visible, summary:focus-visible { outline-color: Highlight; }
+      th, td, details { border-color: CanvasText; }
+    }
+    table { table-layout: fixed; }
+    th:first-child { width: 39%; }
+    @media(max-width: 400px) {
+      th, td { padding: .32rem .2rem; overflow-wrap: anywhere; font-size: .87rem; }
+    }</style>
+</head><body><main>
+  <header>
+    <p><a href="../">Two moving points in a reach</a></p>
+    <h1>What happens between the cues?</h1>
+    <p>A macaque moved a handle while cameras followed a mark on its hand and another near its elbow. We asked whether a model could forecast those paths better if it saw more moments from the same training trials.</p>
+  </header>
+  <section>
+    <h2>Give each model more of the same trial</h2>
+    <p>The first fit used 194 moments tied to reach cues. The second added a starting point every 100 milliseconds wherever the trial had enough history and future readings. It used 1,533 distinct moments from the same 72 trials. Each forecast used the last 200 milliseconds of marker, handle and brain spike-count readings to place both markers at four times over the next 100 milliseconds.</p>
+    <p>One transformer builds each possible path step by step. The other, called diffusion, revises the whole path. Each model had the same number of updates and drew 32 paths per forecast under both training schedules.</p>
+  </section>
+  <section>
+    <h2>Both transformers improved at regular intervals</h2>
+    <p>On the 18 later trials, diffusion’s error fell by 1.629 mm. The paired 95% interval for the reduction was 1.444 to 1.808 mm. Autoregression’s error fell by 1.233 mm, with an interval of 1.083 to 1.364 mm. Both improved on all 18 trials.</p>
+    <table><caption>Path distribution error in millimetres. Lower is better.</caption>
+      <thead><tr><th scope="col">Forecast</th><th scope="col">Cue fit</th><th scope="col">Denser fit</th><th scope="col">Change</th></tr></thead>
+      <tbody>
+      <tr data-estimator="ar_ridge"><th scope="row">Autoregressive transformer</th><td>4.281</td><td>3.049</td><td>-1.233</td></tr>
+      <tr data-estimator="diff_ridge"><th scope="row">Diffusion transformer</th><td>4.737</td><td>3.108</td><td>-1.629</td></tr>
+      <tr data-estimator="ridge_residual"><th scope="row">Linear forecast with sampled errors</th><td>3.520</td><td>3.102</td><td>-0.418</td></tr>
+      <tr data-estimator="ridge_point"><th scope="row">One linear path</th><td>4.627</td><td>4.150</td><td>-0.477</td></tr>
+      <tr data-estimator="velocity20"><th scope="row">Continue the last 20 ms of velocity</th><td>5.684</td><td>5.684</td><td>0.000</td></tr>
+      <tr data-estimator="velocity100"><th scope="row">Continue the last 100 ms of velocity</th><td>7.485</td><td>7.485</td><td>0.000</td></tr>
+      </tbody>
+    </table>
+    <p>The score asks how close the set of possible paths comes to the recorded path while accounting for their spread. Autoregression had the lowest error on that measure after denser training. When we scored only the average path, the single linear forecast had the smallest error.</p>
+    <p>We averaged windows within trials and gave each trial the same weight. The table covers 331 regularly spaced forecast windows. The models also improved on 47 cue-timed windows from the same trials. Seven windows belonged to both sets.</p>
+  </section>
+  <section>
+    <p>Both fits and the later trials came from one previously used recording. The archive smooths and aligns the camera and handle readings. Its clock gives us an offline comparison. Results for a new recording, a new animal and a live camera still need their own tests.</p>
+    <p><a href="second-day/">What happens on another day?</a></p>
+    <p><a href="results.json">Download the scores, paired ranges and window counts</a></p>
+    <p>Recording by Chowdhury, Glaser and Miller. <a href="https://datadryad.org/dataset/doi:10.5061/dryad.nk98sf7q7">Recording archive</a> · <a href="https://elifesciences.org/articles/48198">Study methods</a></p>
+  </section>
+</main></body></html>

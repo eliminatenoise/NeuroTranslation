@@ -1,0 +1,74 @@
+{
+  "title": "Do spikes help forecast the wheel?",
+  "study_scope": "Exploratory comparison using stored mouse recordings from laboratories represented during training.",
+  "partitions": {
+    "training": {
+      "mice": 6,
+      "trials": 1395
+    },
+    "validation": {
+      "mice": 2,
+      "trials": 458
+    },
+    "test": {
+      "mice": 3,
+      "trials": 697
+    }
+  },
+  "omitted_validation_sessions": {
+    "count": 1,
+    "reason": "Conflicting wheel angles at identical recorded times."
+  },
+  "test_recorded_wheel_change": {
+    "unchanged": 26,
+    "changed": 671
+  },
+  "weighting": "Mice had equal total weight within training and equal weight when averaging error within each scored group.",
+  "forecast_timing_ms": {
+    "start_after_recorded_go_cue": 250,
+    "wheel_history_relative_to_start": [
+      -200,
+      0
+    ],
+    "spike_history_relative_to_start": [
+      -220,
+      -20
+    ],
+    "history_block_duration": 20,
+    "wheel_target_relative_to_start": [
+      0,
+      100
+    ]
+  },
+  "target": "Ending minus starting wheel angle, using the last recorded angle at or before each endpoint.",
+  "mean_absolute_error_rad": {
+    "validation": {
+      "still_wheel": 0.09701641241252251,
+      "repeat_recent_change": 0.10330264320536862,
+      "ridge_wheel_and_cue": 0.06897068858134095,
+      "ridge_wheel_cue_and_aligned_spikes": 0.0692456146523397,
+      "ridge_wheel_cue_and_other_trial_spikes": 0.07059210256539906,
+      "attention_wheel_and_cue": 0.086393857282903,
+      "attention_wheel_cue_and_aligned_spikes": 0.0807761293636434,
+      "attention_wheel_cue_and_other_trial_spikes": 0.08601327823623775
+    },
+    "test": {
+      "still_wheel": 0.15855563483369853,
+      "repeat_recent_change": 0.10031224048712355,
+      "ridge_wheel_and_cue": 0.05751624578321687,
+      "ridge_wheel_cue_and_aligned_spikes": 0.05781703921760298,
+      "ridge_wheel_cue_and_other_trial_spikes": 0.05733752810272702,
+      "attention_wheel_and_cue": 0.07333671653095945,
+      "attention_wheel_cue_and_aligned_spikes": 0.07625820717620291,
+      "attention_wheel_cue_and_other_trial_spikes": 0.07516854776935156
+    }
+  },
+  "finding": "Using spikes from the forecast trial slightly increased test error for both fitted models compared with wheel and cue alone and with other-trial spikes. Attention improved in the validation group.",
+  "data": {
+    "publisher": "International Brain Laboratory",
+    "release": "Brain Wide Map",
+    "license": "CC BY 4.0",
+    "study": "https://doi.org/10.1038/s41586-025-09235-0",
+    "archive": "https://registry.opendata.aws/ibl-brain-wide-map/"
+  }
+}

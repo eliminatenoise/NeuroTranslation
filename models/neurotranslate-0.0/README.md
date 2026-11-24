@@ -8,6 +8,16 @@ In the **Command box**, ask “Where will the tracked wrist move?” to select a
 
 For a terminal forecast run `python predict.py` or choose a task with `python predict.py --example TASK`. Run `python predict.py --list-joint` for the channel order and units. The demo can save an input to run again with `python predict.py your-input.json`. Each forecast prints the checkpoint fingerprint. [Measured results, comparison fits and training recipe](joint_alpha/README.md) · [First-use guide](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/).
 
+## Walking force
+
+Give the model a fifth of a second of readings from named muscles and a plate in the floor. It estimates whether that plate will start carrying load in the next tenth of a second. It also estimates the sum of the vertical force readings over that interval, multiplied by the time between readings. These two new outputs are available alongside the joint model’s existing tasks. Try them with the invented readings before bringing your own. [Run the walking force experiment](recorded-force/README.md)
+
+## Fingertip touch
+
+Open **Touch study** for your operating system. A plate slides under a fingertip. Give the model earlier plate forces and spike counts from one sensory nerve fibre to forecast the number of spikes 20–40 ms ahead. The example in the demo is invented. All eight tasks use one checkpoint in this edition. The original seven-task demo opens with the **Demo** launcher.
+
+Run `python predict.py --touch --example human_touch_afferent` in a terminal to try the same forecast. [Study results](https://eliminatenoise.github.io/NeuroTranslation/touch-feedback/) · [Source data and model](joint_alpha/touch/README.md)
+
 ## Earlier movement and spike forecasts
 
 A camera can follow a paw, a wing or a line of points along a worm. Where will those points go next? Run `python predict.py first_use_body/example.json` with the saved mixed-species fit. One frame holds a visible point still. Five frames can forecast movement. [Use your own points](first_use_body/README.md)

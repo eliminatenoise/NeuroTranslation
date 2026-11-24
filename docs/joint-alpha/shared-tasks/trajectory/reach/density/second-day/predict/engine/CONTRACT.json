@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "model": "Twenty readings of the hand, elbow and handle go in. Each model forecasts how far the hand and elbow markers will move over the next 100 ms.",
+  "method": "A fitted linear model estimates six marker coordinates at four future times. A transformer samples a correction at each time. Each correction conditions the next one. Their running sum is added to the linear estimate.",
+  "representations": {
+    "absolute": "The model reads the recorded marker and handle positions.",
+    "relative": "The model subtracts each channel’s last position from all twenty readings in that channel. Both its linear estimate and its transformer use those differences. This model has its own fitted weights and scales."
+  },
+  "scripts_in_order": ["reach-model.js", "reach-relative-model.js", "reach-engine.js"],
+  "runtime": "Load the local classic scripts in order. Include the weight file for each model you want to use. The engine runs synchronously offline.",
+  "call": "globalThis.ReachForecasts.relative.predict(historyMm, {seed: 1117, draws: 32})",
+  "absolute_call": "globalThis.ReachForecasts.absolute.predict(historyMm, options)",
+  "original_api": "globalThis.ReachForecast.predict(historyMm, options) runs the absolute-position model when its weights are loaded.",
+  "historyMm": {
+    "shape": [20, 8],
+    "columns": ["hand_x", "hand_y", "hand_z", "elbow_x", "elbow_y", "elbow_z", "handle_x", "handle_y"],
+    "units": "Give both models absolute positions in millimetres on the processed recording’s axes.",
+    "timing": "Oldest to newest at 10 ms intervals, from −190 ms through 0 ms inclusive.",
+    "precision": "Supply finite numbers representable in float32. For the relative model, the engine subtracts the supplied readings in binary64, then rounds each difference to float32. Both models compute the velocity comparison from the original positions at recording precision (float32).",
+    "observations": "Six optical marker coordinates and two handle coordinates are present. The engine masks all 37 spike-count channels."
+  },
+  "options": {
+    "seed": "Unsigned 32-bit draw seed. Defaults to 1117. Both sets of weights were trained with seed 1117.",
+    "draws": "Integer from 1 through 128. Defaults to 32.",
+    "noise": "Optional [draws][4][6] array of finite standard-normal samples to use in place of the browser’s generator. Its length sets the path count when draws is omitted. Supply the same samples to compare with the original Python study."
+  },
+  "returns": {
+    "timesMs": [20, 50, 70, 100],
+    "pathsMm": "[draw][4][6] sampled marker displacements from the last observed hand and elbow positions",
+    "meanMm": "[4][6] arithmetic mean across the sampled paths",
+    "ridgeMm": "[4][6] fitted linear estimate",
+    "velocity20Mm": "[4][6] displacement if each marker keeps its velocity from the last 20 ms"
+  },
+  "output_columns": ["hand_x", "hand_y", "hand_z", "elbow_x", "elbow_y", "elbow_z"],
+  "display": "To draw positions, add each marker’s final recorded XYZ coordinates to its predicted displacement. Label the spread as model draws.",
+  "source": {
+    "recording": "Chowdhury, Glaser and Miller recorded optical arm markers and handle position during macaque reaching. The models used 1,533 windows from 72 trials in macaque C on 7 September 2017 for fitting.",
+    "dataset": "https://doi.org/10.5061/dryad.nk98sf7q7",
+    "methods": "https://doi.org/10.7554/eLife.48198",
+    "data_and_engine_license": "CC0-1.0"
+  },
+  "scope": "The comparison tested the two history representations on 14,025 windows from 266 trials in a separate recording from macaque H on 6 November 2017. That study evaluated two training seeds. This engine runs the first fit. Some recording filters use observations on either side of each time point. The forecast times refer to those processed records."
+}

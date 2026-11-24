@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The next 125 milliseconds of balance · NeuroTranslation</title>
+  <style>:root { font: 100%/1.62 system-ui, sans-serif; color: #203538; background: #f5f6f2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(45rem, calc(100% - 2rem)); margin: 2rem auto 4rem; }
+    header { border-top: .35rem solid #1b4647; }
+    h1, h2 { line-height: 1.15; letter-spacing: -.035em; }
+    h1 { font-size: clamp(2.3rem, 7vw, 4rem); margin: .35em 0; }
+    a { color: #075d52; text-underline-offset: .2em; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #c44c14; outline-offset: 3px; }
+    section { margin-top: 2rem; border-top: 1px solid #b9c7c4; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    caption, th, td { text-align: left; }
+    caption { font-weight: 650; margin-bottom: .35rem; }
+    th, td { padding: .36rem .4rem; border-bottom: 1px solid #bdc9c6; vertical-align: top; }
+    details { border-bottom: 1px solid #bdc9c6; }
+    details table { margin-bottom: .8rem; }
+    summary { padding: .55em .2em; cursor: pointer; font-weight: 650; }
+    @media (forced-colors: active) {
+      a:focus-visible, summary:focus-visible { outline-color: Highlight; }
+      th, td, details { border-color: CanvasText; }
+    }
+    table { table-layout: fixed; }
+    th:first-child { width: 39%; }
+    @media(max-width: 400px) {
+      th, td { padding: .32rem .2rem; overflow-wrap: anywhere; font-size: .87rem; }
+    }
+  </style>
+</head><body><main>
+  <header>
+    <p><a href="../">Can six forecasts share a model?</a></p>
+    <h1>The next 125 milliseconds of balance</h1>
+    <p>A marker near the base of the spine records where a person moves during a balance task. We gave each model the same history and asked for a path through four measured times over the next 125 milliseconds.</p>
+  </header>
+  <section>
+    <h2>The linear model scored best</h2>
+    <p>Diffusion gave a better set of possible paths than autoregression on the distribution score for all five people. A linear model built for the recorded posture gave a better score than both. Its range of paths came from errors measured on fitting participants left out of their individual linear fits.</p>
+    <table><caption>Scores in millimetres. Lower is better.</caption>
+      <thead><tr><th scope="col">Forecast</th><th scope="col">Path distribution</th><th scope="col">Average path</th><th scope="col">Last point</th></tr></thead>
+      <tbody><tr data-method="velocity32"><th scope="row">Continue the 125 ms velocity</th><td>4.062</td><td>3.600</td><td>6.149</td></tr><tr data-method="velocity8"><th scope="row">Continue the most recent 31 ms velocity</th><td>3.245</td><td>2.810</td><td>5.024</td></tr><tr data-method="ridge_point"><th scope="row">Posture-specific linear path</th><td>2.801</td><td>2.443</td><td>4.280</td></tr><tr data-method="ridge_residual"><th scope="row">Linear path with sampled fitting errors</th><td>2.113</td><td>2.536</td><td>4.439</td></tr><tr data-method="ar"><th scope="row">Autoregressive Transformer</th><td>2.809</td><td>3.457</td><td>5.812</td></tr><tr data-method="diffusion"><th scope="row">Diffusion Transformer</th><td>2.709</td><td>3.381</td><td>5.665</td></tr></tbody>
+    </table>
+    <p>The path-distribution score rewards paths close to the measurement while accounting for the spread of the samples. Average path and last-point errors compare the mean forecast path with what was measured. The linear model's direct prediction had the smallest average path error.</p>
+  </section>
+  <section>
+    <h2>One step at a time or the whole path</h2>
+    <p>Autoregression builds a path in order. It generates one position change and uses that result to generate the next. Diffusion starts from random paths and revises all four times together over 16 passes. Both models learned from the same past observations and received the same number of training updates.</p>
+    <p>At 32 sampled paths per event, the measured CPU run handled about 3,166 events per second with autoregression and 759 with diffusion. The models had similar sizes, 28,201 and 28,003 parameters. The run measures this choice of sample count and number of passes.</p>
+    <p>We scored 1,462 events from five people held apart inside the existing training archive. Each person's average had equal weight. The two training repetitions use those same people. This test covers one short movement task. Performance across activities and on new recordings remains open.</p>
+    <p><a href="results.json">Download the average scores and run measurements</a></p>
+    <p><a href="reach/">Compare the same decoder families on a reaching task</a>. This test follows recorded hand and elbow markers and gives both neural fits the same linear path to correct.</p>
+    <p>Recorded balance study. <a href="https://openneuro.org/datasets/ds003739/versions/1.0.3">OpenNeuro recording archive</a></p>
+  </section>
+</main></body></html>

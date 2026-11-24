@@ -1,0 +1,137 @@
+{
+  "title": "Did brain location help forecast the wheel?",
+  "scope": "Offline forecast evaluation on stored wheel and brain recordings from new mice in familiar labs.",
+  "splits": {
+    "training": {
+      "mice": 6,
+      "trials": 1402
+    },
+    "validation": {
+      "mice": 3,
+      "trials": 704,
+      "mice_with_multiple_recorded_divisions": 3,
+      "mean_absolute_error_rad": {
+        "still_wheel": 0.15918838785125156,
+        "repeat_recent_change": 0.11622655289536032,
+        "ridge_wheel_cue": 0.05700168769165561,
+        "ridge_aligned_pool": 0.0565544558178317,
+        "ridge_donor_pool": 0.05776532391391088,
+        "ridge_coverage_only": 0.05689829176732394,
+        "ridge_aligned_pool_coverage": 0.05722659611919545,
+        "ridge_aligned_regions": 0.08039646512612647,
+        "ridge_donor_regions_aligned_pool": 0.0803110313761394,
+        "ridge_donor_pool_and_regions": 0.07868454200341456,
+        "attention_wheel_cue": 0.07015941201032756,
+        "attention_aligned_pool": 0.07332564499716494,
+        "attention_donor_pool": 0.07389838695284316,
+        "attention_coverage_only": 0.06825046387741228,
+        "attention_aligned_pool_coverage": 0.07636631741811829,
+        "attention_aligned_regions": 0.09337728084284282,
+        "attention_donor_regions_aligned_pool": 0.0938055000516197,
+        "attention_donor_pool_and_regions": 0.09337012429064225
+      },
+      "primary_contrasts": {
+        "ridge": {
+          "aligned_minus_pool_with_coverage_rad": 0.02316986900693102,
+          "aligned_minus_whole_trial_donor_rad": 0.0017119231227119142,
+          "mice_where_aligned_beats_both": 1
+        },
+        "attention": {
+          "aligned_minus_pool_with_coverage_rad": 0.017010963424724523,
+          "aligned_minus_whole_trial_donor_rad": 7.156552200571209e-06,
+          "mice_where_aligned_beats_both": 2
+        }
+      }
+    },
+    "test": {
+      "mice": 3,
+      "trials": 715,
+      "mice_with_multiple_recorded_divisions": 2,
+      "mean_absolute_error_rad": {
+        "still_wheel": 0.1532657984950333,
+        "repeat_recent_change": 0.14224652473069582,
+        "ridge_wheel_cue": 0.06687010813530371,
+        "ridge_aligned_pool": 0.06865122850567551,
+        "ridge_donor_pool": 0.06842690048414857,
+        "ridge_coverage_only": 0.06878748981458578,
+        "ridge_aligned_pool_coverage": 0.0704352300094486,
+        "ridge_aligned_regions": 0.07330694239778358,
+        "ridge_donor_regions_aligned_pool": 0.06748467423530626,
+        "ridge_donor_pool_and_regions": 0.06634823151672758,
+        "attention_wheel_cue": 0.08404019690457006,
+        "attention_aligned_pool": 0.08933823019243724,
+        "attention_donor_pool": 0.08816151082108033,
+        "attention_coverage_only": 0.08776778793427488,
+        "attention_aligned_pool_coverage": 0.09083398727731833,
+        "attention_aligned_regions": 0.09819952021613072,
+        "attention_donor_regions_aligned_pool": 0.09491941306274669,
+        "attention_donor_pool_and_regions": 0.09330879407740555
+      },
+      "primary_contrasts": {
+        "ridge": {
+          "aligned_minus_pool_with_coverage_rad": 0.0028717123883349877,
+          "aligned_minus_whole_trial_donor_rad": 0.006958710881055999,
+          "mice_where_aligned_beats_both": 0
+        },
+        "attention": {
+          "aligned_minus_pool_with_coverage_rad": 0.007365532938812397,
+          "aligned_minus_whole_trial_donor_rad": 0.004890726138725168,
+          "mice_where_aligned_beats_both": 0
+        }
+      }
+    }
+  },
+  "score_order": "Validation and test forecasts were saved before reading the later wheel angles used to score them.",
+  "region_coverage": {
+    "qualified_units": 1459,
+    "allocated_to_six_divisions": 1403,
+    "unassigned_but_kept_in_pooled_counts": 56,
+    "divisions": [
+      "cerebral cortex",
+      "cerebral nuclei",
+      "interbrain",
+      "midbrain",
+      "hindbrain",
+      "cerebellum"
+    ]
+  },
+  "forecast_clock_ms": {
+    "start_from_recorded_sound_cue": 250,
+    "wheel_history_from_start": [
+      -200,
+      0
+    ],
+    "spike_history_from_start": [
+      -220,
+      -20
+    ],
+    "wheel_target_from_start": [
+      0,
+      100
+    ]
+  },
+  "model_sizes": {
+    "equal_input_width_across_conditions": 24,
+    "learned_parameters_per_ridge_condition": 241,
+    "learned_parameters_per_attention_condition": 9697
+  },
+  "main_comparison": "Compare separate same-trial counts with pooled same-trial counts and the same coverage inputs, and with all counts borrowed together from one matched trial. The model retains the forecast trial's wheel history and cue.",
+  "mixed_trial_diagnostic": {
+    "included_in_primary_comparison": false,
+    "mean_keys": [
+      "ridge_donor_regions_aligned_pool",
+      "attention_donor_regions_aligned_pool"
+    ],
+    "incompatible_test_bins": 5713,
+    "total_test_bins": 7150,
+    "description": "Separate counts from one trial can conflict with pooled counts from another."
+  },
+  "data": {
+    "publisher": "International Brain Laboratory",
+    "dataset": "Brain Wide Map",
+    "license": "CC BY 4.0",
+    "study": "https://doi.org/10.1038/s41586-025-09235-0",
+    "archive": "https://registry.opendata.aws/ibl-brain-wide-map/",
+    "atlas": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8152789/"
+  }
+}

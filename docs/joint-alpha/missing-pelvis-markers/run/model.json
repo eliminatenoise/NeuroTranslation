@@ -1,0 +1,1131 @@
+{
+  "format": "pelvis-f32-le-1",
+  "source_revision": "79e7bf900b257537327357c0a9127c35e6dd48cb",
+  "source_weights_sha256": "612adc707e25f4bc8ab3f55268bef6ada7ede7a22e8a703c601e0c973ce639a1",
+  "weights_sha256": "0319e2abc442287d2af190b67b982e9a16758a3e527d4e5f5e806880759e180e",
+  "weights_bytes": 228144,
+  "arrays": [
+    {
+      "name": "complete/11/attention.in_proj_bias",
+      "bytes": 384,
+      "start": 0,
+      "shape": [
+        96
+      ]
+    },
+    {
+      "name": "complete/11/attention.in_proj_weight",
+      "bytes": 12288,
+      "start": 384,
+      "shape": [
+        96,
+        32
+      ]
+    },
+    {
+      "name": "complete/11/attention.out_proj.bias",
+      "bytes": 128,
+      "start": 12672,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/11/attention.out_proj.weight",
+      "bytes": 4096,
+      "start": 12800,
+      "shape": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "complete/11/features.0.bias",
+      "bytes": 256,
+      "start": 16896,
+      "shape": [
+        64
+      ]
+    },
+    {
+      "name": "complete/11/features.0.weight",
+      "bytes": 8192,
+      "start": 17152,
+      "shape": [
+        64,
+        32
+      ]
+    },
+    {
+      "name": "complete/11/features.2.bias",
+      "bytes": 128,
+      "start": 25344,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/11/features.2.weight",
+      "bytes": 8192,
+      "start": 25472,
+      "shape": [
+        32,
+        64
+      ]
+    },
+    {
+      "name": "complete/11/finish.bias",
+      "bytes": 128,
+      "start": 33664,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/11/finish.weight",
+      "bytes": 128,
+      "start": 33792,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/11/forecast.bias",
+      "bytes": 8,
+      "start": 33920,
+      "shape": [
+        2
+      ]
+    },
+    {
+      "name": "complete/11/forecast.weight",
+      "bytes": 256,
+      "start": 33928,
+      "shape": [
+        2,
+        32
+      ]
+    },
+    {
+      "name": "complete/11/input.bias",
+      "bytes": 128,
+      "start": 34184,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/11/input.weight",
+      "bytes": 2432,
+      "start": 34312,
+      "shape": [
+        32,
+        19
+      ]
+    },
+    {
+      "name": "complete/11/norm_attention.bias",
+      "bytes": 128,
+      "start": 36744,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/11/norm_attention.weight",
+      "bytes": 128,
+      "start": 36872,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/11/norm_features.bias",
+      "bytes": 128,
+      "start": 37000,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/11/norm_features.weight",
+      "bytes": 128,
+      "start": 37128,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/11/position",
+      "bytes": 640,
+      "start": 37256,
+      "shape": [
+        5,
+        32
+      ]
+    },
+    {
+      "name": "complete/11/readout",
+      "bytes": 128,
+      "start": 37896,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/23/attention.in_proj_bias",
+      "bytes": 384,
+      "start": 38024,
+      "shape": [
+        96
+      ]
+    },
+    {
+      "name": "complete/23/attention.in_proj_weight",
+      "bytes": 12288,
+      "start": 38408,
+      "shape": [
+        96,
+        32
+      ]
+    },
+    {
+      "name": "complete/23/attention.out_proj.bias",
+      "bytes": 128,
+      "start": 50696,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/23/attention.out_proj.weight",
+      "bytes": 4096,
+      "start": 50824,
+      "shape": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "complete/23/features.0.bias",
+      "bytes": 256,
+      "start": 54920,
+      "shape": [
+        64
+      ]
+    },
+    {
+      "name": "complete/23/features.0.weight",
+      "bytes": 8192,
+      "start": 55176,
+      "shape": [
+        64,
+        32
+      ]
+    },
+    {
+      "name": "complete/23/features.2.bias",
+      "bytes": 128,
+      "start": 63368,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/23/features.2.weight",
+      "bytes": 8192,
+      "start": 63496,
+      "shape": [
+        32,
+        64
+      ]
+    },
+    {
+      "name": "complete/23/finish.bias",
+      "bytes": 128,
+      "start": 71688,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/23/finish.weight",
+      "bytes": 128,
+      "start": 71816,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/23/forecast.bias",
+      "bytes": 8,
+      "start": 71944,
+      "shape": [
+        2
+      ]
+    },
+    {
+      "name": "complete/23/forecast.weight",
+      "bytes": 256,
+      "start": 71952,
+      "shape": [
+        2,
+        32
+      ]
+    },
+    {
+      "name": "complete/23/input.bias",
+      "bytes": 128,
+      "start": 72208,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/23/input.weight",
+      "bytes": 2432,
+      "start": 72336,
+      "shape": [
+        32,
+        19
+      ]
+    },
+    {
+      "name": "complete/23/norm_attention.bias",
+      "bytes": 128,
+      "start": 74768,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/23/norm_attention.weight",
+      "bytes": 128,
+      "start": 74896,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/23/norm_features.bias",
+      "bytes": 128,
+      "start": 75024,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/23/norm_features.weight",
+      "bytes": 128,
+      "start": 75152,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/23/position",
+      "bytes": 640,
+      "start": 75280,
+      "shape": [
+        5,
+        32
+      ]
+    },
+    {
+      "name": "complete/23/readout",
+      "bytes": 128,
+      "start": 75920,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/37/attention.in_proj_bias",
+      "bytes": 384,
+      "start": 76048,
+      "shape": [
+        96
+      ]
+    },
+    {
+      "name": "complete/37/attention.in_proj_weight",
+      "bytes": 12288,
+      "start": 76432,
+      "shape": [
+        96,
+        32
+      ]
+    },
+    {
+      "name": "complete/37/attention.out_proj.bias",
+      "bytes": 128,
+      "start": 88720,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/37/attention.out_proj.weight",
+      "bytes": 4096,
+      "start": 88848,
+      "shape": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "complete/37/features.0.bias",
+      "bytes": 256,
+      "start": 92944,
+      "shape": [
+        64
+      ]
+    },
+    {
+      "name": "complete/37/features.0.weight",
+      "bytes": 8192,
+      "start": 93200,
+      "shape": [
+        64,
+        32
+      ]
+    },
+    {
+      "name": "complete/37/features.2.bias",
+      "bytes": 128,
+      "start": 101392,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/37/features.2.weight",
+      "bytes": 8192,
+      "start": 101520,
+      "shape": [
+        32,
+        64
+      ]
+    },
+    {
+      "name": "complete/37/finish.bias",
+      "bytes": 128,
+      "start": 109712,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/37/finish.weight",
+      "bytes": 128,
+      "start": 109840,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/37/forecast.bias",
+      "bytes": 8,
+      "start": 109968,
+      "shape": [
+        2
+      ]
+    },
+    {
+      "name": "complete/37/forecast.weight",
+      "bytes": 256,
+      "start": 109976,
+      "shape": [
+        2,
+        32
+      ]
+    },
+    {
+      "name": "complete/37/input.bias",
+      "bytes": 128,
+      "start": 110232,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/37/input.weight",
+      "bytes": 2432,
+      "start": 110360,
+      "shape": [
+        32,
+        19
+      ]
+    },
+    {
+      "name": "complete/37/norm_attention.bias",
+      "bytes": 128,
+      "start": 112792,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/37/norm_attention.weight",
+      "bytes": 128,
+      "start": 112920,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/37/norm_features.bias",
+      "bytes": 128,
+      "start": 113048,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/37/norm_features.weight",
+      "bytes": 128,
+      "start": 113176,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "complete/37/position",
+      "bytes": 640,
+      "start": 113304,
+      "shape": [
+        5,
+        32
+      ]
+    },
+    {
+      "name": "complete/37/readout",
+      "bytes": 128,
+      "start": 113944,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/attention.in_proj_bias",
+      "bytes": 384,
+      "start": 114072,
+      "shape": [
+        96
+      ]
+    },
+    {
+      "name": "mixed/11/attention.in_proj_weight",
+      "bytes": 12288,
+      "start": 114456,
+      "shape": [
+        96,
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/attention.out_proj.bias",
+      "bytes": 128,
+      "start": 126744,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/attention.out_proj.weight",
+      "bytes": 4096,
+      "start": 126872,
+      "shape": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/features.0.bias",
+      "bytes": 256,
+      "start": 130968,
+      "shape": [
+        64
+      ]
+    },
+    {
+      "name": "mixed/11/features.0.weight",
+      "bytes": 8192,
+      "start": 131224,
+      "shape": [
+        64,
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/features.2.bias",
+      "bytes": 128,
+      "start": 139416,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/features.2.weight",
+      "bytes": 8192,
+      "start": 139544,
+      "shape": [
+        32,
+        64
+      ]
+    },
+    {
+      "name": "mixed/11/finish.bias",
+      "bytes": 128,
+      "start": 147736,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/finish.weight",
+      "bytes": 128,
+      "start": 147864,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/forecast.bias",
+      "bytes": 8,
+      "start": 147992,
+      "shape": [
+        2
+      ]
+    },
+    {
+      "name": "mixed/11/forecast.weight",
+      "bytes": 256,
+      "start": 148000,
+      "shape": [
+        2,
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/input.bias",
+      "bytes": 128,
+      "start": 148256,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/input.weight",
+      "bytes": 2432,
+      "start": 148384,
+      "shape": [
+        32,
+        19
+      ]
+    },
+    {
+      "name": "mixed/11/norm_attention.bias",
+      "bytes": 128,
+      "start": 150816,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/norm_attention.weight",
+      "bytes": 128,
+      "start": 150944,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/norm_features.bias",
+      "bytes": 128,
+      "start": 151072,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/norm_features.weight",
+      "bytes": 128,
+      "start": 151200,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/position",
+      "bytes": 640,
+      "start": 151328,
+      "shape": [
+        5,
+        32
+      ]
+    },
+    {
+      "name": "mixed/11/readout",
+      "bytes": 128,
+      "start": 151968,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/attention.in_proj_bias",
+      "bytes": 384,
+      "start": 152096,
+      "shape": [
+        96
+      ]
+    },
+    {
+      "name": "mixed/23/attention.in_proj_weight",
+      "bytes": 12288,
+      "start": 152480,
+      "shape": [
+        96,
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/attention.out_proj.bias",
+      "bytes": 128,
+      "start": 164768,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/attention.out_proj.weight",
+      "bytes": 4096,
+      "start": 164896,
+      "shape": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/features.0.bias",
+      "bytes": 256,
+      "start": 168992,
+      "shape": [
+        64
+      ]
+    },
+    {
+      "name": "mixed/23/features.0.weight",
+      "bytes": 8192,
+      "start": 169248,
+      "shape": [
+        64,
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/features.2.bias",
+      "bytes": 128,
+      "start": 177440,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/features.2.weight",
+      "bytes": 8192,
+      "start": 177568,
+      "shape": [
+        32,
+        64
+      ]
+    },
+    {
+      "name": "mixed/23/finish.bias",
+      "bytes": 128,
+      "start": 185760,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/finish.weight",
+      "bytes": 128,
+      "start": 185888,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/forecast.bias",
+      "bytes": 8,
+      "start": 186016,
+      "shape": [
+        2
+      ]
+    },
+    {
+      "name": "mixed/23/forecast.weight",
+      "bytes": 256,
+      "start": 186024,
+      "shape": [
+        2,
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/input.bias",
+      "bytes": 128,
+      "start": 186280,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/input.weight",
+      "bytes": 2432,
+      "start": 186408,
+      "shape": [
+        32,
+        19
+      ]
+    },
+    {
+      "name": "mixed/23/norm_attention.bias",
+      "bytes": 128,
+      "start": 188840,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/norm_attention.weight",
+      "bytes": 128,
+      "start": 188968,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/norm_features.bias",
+      "bytes": 128,
+      "start": 189096,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/norm_features.weight",
+      "bytes": 128,
+      "start": 189224,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/position",
+      "bytes": 640,
+      "start": 189352,
+      "shape": [
+        5,
+        32
+      ]
+    },
+    {
+      "name": "mixed/23/readout",
+      "bytes": 128,
+      "start": 189992,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/attention.in_proj_bias",
+      "bytes": 384,
+      "start": 190120,
+      "shape": [
+        96
+      ]
+    },
+    {
+      "name": "mixed/37/attention.in_proj_weight",
+      "bytes": 12288,
+      "start": 190504,
+      "shape": [
+        96,
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/attention.out_proj.bias",
+      "bytes": 128,
+      "start": 202792,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/attention.out_proj.weight",
+      "bytes": 4096,
+      "start": 202920,
+      "shape": [
+        32,
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/features.0.bias",
+      "bytes": 256,
+      "start": 207016,
+      "shape": [
+        64
+      ]
+    },
+    {
+      "name": "mixed/37/features.0.weight",
+      "bytes": 8192,
+      "start": 207272,
+      "shape": [
+        64,
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/features.2.bias",
+      "bytes": 128,
+      "start": 215464,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/features.2.weight",
+      "bytes": 8192,
+      "start": 215592,
+      "shape": [
+        32,
+        64
+      ]
+    },
+    {
+      "name": "mixed/37/finish.bias",
+      "bytes": 128,
+      "start": 223784,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/finish.weight",
+      "bytes": 128,
+      "start": 223912,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/forecast.bias",
+      "bytes": 8,
+      "start": 224040,
+      "shape": [
+        2
+      ]
+    },
+    {
+      "name": "mixed/37/forecast.weight",
+      "bytes": 256,
+      "start": 224048,
+      "shape": [
+        2,
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/input.bias",
+      "bytes": 128,
+      "start": 224304,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/input.weight",
+      "bytes": 2432,
+      "start": 224432,
+      "shape": [
+        32,
+        19
+      ]
+    },
+    {
+      "name": "mixed/37/norm_attention.bias",
+      "bytes": 128,
+      "start": 226864,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/norm_attention.weight",
+      "bytes": 128,
+      "start": 226992,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/norm_features.bias",
+      "bytes": 128,
+      "start": 227120,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/norm_features.weight",
+      "bytes": 128,
+      "start": 227248,
+      "shape": [
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/position",
+      "bytes": 640,
+      "start": 227376,
+      "shape": [
+        5,
+        32
+      ]
+    },
+    {
+      "name": "mixed/37/readout",
+      "bytes": 128,
+      "start": 228016,
+      "shape": [
+        32
+      ]
+    }
+  ],
+  "scaling": {
+    "center": [
+      [
+        -23.3749932688909,
+        -15.942332058827429,
+        5.623018028502537,
+        6.715127948491891,
+        1.9698335576092396,
+        1.9479638222717117,
+        2.4477672903895713,
+        2.4360872999499255,
+        768.7572937743972,
+        0.0
+      ],
+      [
+        -21.30823095053944,
+        -13.901084310303117,
+        8.053460938720251,
+        9.135354984981445,
+        2.066762318351397,
+        2.0412477485245772,
+        2.430442910217707,
+        2.420227036489551,
+        768.7572937743972,
+        0.007307465812593362
+      ],
+      [
+        -19.177600642012194,
+        -11.796497446868697,
+        10.437863163570904,
+        11.50894837266737,
+        2.1306303085273277,
+        2.104586863434175,
+        2.384402224850656,
+        2.3735933876858986,
+        768.7572937743972,
+        0.011317826928635923
+      ],
+      [
+        -16.975389715353753,
+        -9.62086760016749,
+        12.766500506890221,
+        13.829756808630924,
+        2.2022109266585423,
+        2.1756298467012614,
+        2.3286373433193073,
+        2.3208084359635506,
+        768.7572937743972,
+        0.01226885634500979
+      ]
+    ],
+    "scale": [
+      [
+        46.20046577022198,
+        46.52138188398283,
+        43.745189341272344,
+        43.8036058482393,
+        13.617633598501747,
+        13.454561703216218,
+        13.887960467388718,
+        13.865663921036957,
+        136.82095261462007,
+        1.0
+      ],
+      [
+        35.251881743077426,
+        35.59685147653922,
+        32.67218308162424,
+        32.69593517525486,
+        13.637138646565907,
+        13.496696882538142,
+        13.92330186113795,
+        13.901935216135655,
+        136.82095261462007,
+        0.2309730833733463
+      ],
+      [
+        25.973649595258383,
+        26.267383093646412,
+        23.792931371147017,
+        23.73687641953725,
+        13.665634701168837,
+        13.500810455659074,
+        13.943485307106801,
+        13.92148693577151,
+        136.82095261462007,
+        0.4450665927119683
+      ],
+      [
+        21.33221636703512,
+        21.379872221898765,
+        20.732827688277833,
+        20.561387101690322,
+        13.646655765357565,
+        13.508179597527283,
+        13.954791557983485,
+        13.934096986155767,
+        136.82095261462007,
+        0.6355128611904213
+      ]
+    ],
+    "target_average": [
+      4.548685831197882,
+      4.48111103257053
+    ],
+    "target_spread": [
+      26.746492452084084,
+      27.714434258543744
+    ],
+    "seeds": [
+      11,
+      23,
+      37
+    ]
+  },
+  "targets": [
+    "four_marker_centre",
+    "back_pair_centre"
+  ],
+  "horizon_ms": 100
+}

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Play the NeuroSurge movement preview with the NeuroTranslate forecast built into your browser.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="launch.css?v=2">
+  <title>NeuroSurge movement preview</title>
+</head>
+<body>
+  <header class="masthead">
+    <a class="wordmark" href="./">NeuroSurge</a>
+    <nav aria-label="Preview and project links">
+      <a href="technical.html">Technical guide</a>
+      <a href="https://eliminatenoise.github.io/NeuroSurge/">Game menu</a>
+    </nav>
+  </header>
+  <main class="layout">
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title">Movement preview</h1>
+      <p class="description">Move a virtual body with the motor strip or let it follow movement from your camera, a video or timed pictures. NeuroTranslate shows where a tracked point may appear a moment later.</p>
+      <div class="play-options" aria-label="Choose an edition">
+        <div class="edition">
+          <a class="play play-full" href="scene/example/preview.html">Play Full preview</a>
+          <p>Standard anatomy files.</p>
+        </div>
+        <div class="edition">
+          <a class="play play-lite" href="scene/example/preview.html?edition=lite">Play Lite preview</a>
+          <p>The same game with smaller anatomy files.</p>
+        </div>
+      </div>
+      <p class="requirements">Use a desktop browser with 3D graphics, a keyboard and a mouse or trackpad. For the forecast on its own, <a href="movement-mirror.html">open the standalone Movement mirror</a>.</p>
+      <p class="requirements"><a href="../camera-forecast-study/">Camera forecast study on 86 people</a></p>
+    </section>
+    <figure class="game-view">
+      <img src="media/game-view.webp" width="1200" height="750" alt="NeuroSurge shows the coloured motor strip over the player and mirror bodies.">
+      <figcaption>The game simulates the brain and muscle activity.</figcaption>
+    </figure>
+    <section class="help" aria-label="How to play and use the model">
+      <details open>
+        <summary>Follow a movement and replay it</summary>
+        <ol>
+          <li>Press <kbd>C</kbd> for the Movement mirror. Choose <strong>Start camera</strong> to let the browser ask for video access. You can choose a local video or timed pictures instead. The images stay on your device.</li>
+          <li>Use <strong>Body follows</strong> to choose the arms or knees the virtual body will follow. Pick a point under <strong>Point to forecast</strong>. Brackets mark it when it is tracked. If the brackets disappear, read the prompt below the picture. The model uses five recent images. The amber ring shows where the point may appear 0.12 seconds later.</li>
+          <li>Under <strong>Forecast method</strong>, choose <strong>Adapt to recent tracking</strong> to use earlier camera feedback. If you know the movement, you can choose walking, squat, shoulder press or jumping jacks.</li>
+          <li>Choose <strong>Save take</strong> and <strong>Open Command box</strong>. Enter <strong>replay my take</strong> to move the virtual body from the saved poses. The camera stops when the Command box opens. You can also open it with <kbd>F</kbd> to enter a supported move such as “bend my right elbow”. If your browser offers dictation on the device, choose <strong>Use voice</strong> and check the words before submitting.</li>
+          <li>To keep a take for another visit, open <strong>Named takes</strong> in the Command box. Enter a name such as <strong>warm up</strong> and choose <strong>Save last take</strong>. Choose <strong>Download</strong> beside the name. The file keeps the movement values and their times. In a new tab, press <kbd>F</kbd>, open <strong>Named takes</strong> and use <strong>Open a take file</strong>. If that name is already in use, choose whether to keep the existing take or replace it. To play the movement, type <strong>replay take named warm up</strong> with the saved name.</li>
+          <li>To play saved movements in order, press <kbd>F</kbd> and type <strong>replay take named warm up then replay take named reach</strong>. Use the names shown under <strong>Named takes</strong>. You can join up to four recordings. For a take at least two seconds long, try <strong>replay 1 to 2 seconds of take named warm up</strong>. That part uses the movements saved from the 1-second mark until just before the 2-second mark. The game checks every step before it starts. If two names fit, add a comma after the name you want. The camera stays off and each take plays at its saved pace. The game releases the previous movement before the next one starts. Choose <strong>Stop replay</strong> or press <kbd>Esc</kbd> to finish early.</li>
+        </ol>
+        <div class="resource-links">
+          <a href="PLAYER-GUIDE.html">Simple player guide</a>
+          <a href="PLAYER-GUIDE-TECHNICAL.html">Technical player guide</a>
+        </div>
+      </details>
+      <details open id="local-model">
+        <summary>Forecasts, local play and credits</summary>
+        <p>The point model learned from tracked animal movement. The browser runs the included weights. The separate fingertip touch study uses the optional local launcher.</p>
+        <div class="resource-links">
+          <a href="#camera-test">See the forecast test on recordings of people</a>
+          <a href="https://github.com/eliminatenoise/NeuroSurge/releases/tag/lite-take-sequences-2026-11-24">Offline Lite download and setup</a>
+          <a href="START.html#local-model">Local NeuroTranslate workbench and fingertip setup</a>
+          <a href="scene/src/joint/model/NOTICE.html">Model, data and licence credits</a>
+          <a href="CREDITS-AND-LICENCES.md">Game and anatomy credits</a>
+        </div>
+      </details>
+      <details class="measurement" id="camera-test" open>
+        <summary>Earlier camera forecast test on 11 people</summary>
+        <p><a href="../camera-forecast-study/">Open the 86-person camera forecast study</a>.</p>
+        <p>Knowing the movement brought the average point error down to 13.42 pixels. Using earlier camera feedback reached 13.55 pixels. NeuroTranslate 0.0 averaged 14.60 pixels in the same test.</p>
+        <table class="forecast-scores">
+          <caption>Average error in pixels. Smaller is better.</caption>
+          <thead><tr><th scope="col">Method</th><th scope="col">Point error</th><th scope="col">Motion error</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Hold last position</th><td>14.08</td><td>9.40</td></tr>
+            <tr><th scope="row">Speed from the last two points</th><td>14.33</td><td>9.48</td></tr>
+            <tr><th scope="row">NeuroTranslate 0.0</th><td>14.60</td><td>10.69</td></tr>
+            <tr><th scope="row">Recent positions, straight line</th><td>14.96</td><td>10.00</td></tr>
+            <tr><th scope="row">Recent positions, gentle curve</th><td>14.79</td><td>9.82</td></tr>
+            <tr><th scope="row">Use the movement name</th><td>13.42</td><td>8.44</td></tr>
+            <tr><th scope="row">Choose using tracking feedback</th><td>13.70</td><td>8.68</td></tr>
+            <tr><th scope="row">Blend using tracking feedback</th><td>13.55</td><td>8.49</td></tr>
+          </tbody>
+        </table>
+        <p>Eleven people took part in this confirmation test. Each walked, squatted, pressed their arms overhead and did jumping jacks. Two cameras filmed each of those 44 recordings. We averaged the views for each movement, then gave each movement and person equal weight.</p>
+        <p>Each forecast used up to five pictures to place a point about 0.12 seconds ahead. A separate set of cameras followed markers on the body. The researchers used those measurements to position the joint centres in the picture. Point error is the distance to that later position. Motion error compares how far and in what direction the point moved. For that comparison, the forecast and the marker measurement each use their own starting position. Both errors use pictures scaled to 640 pixels along their longer edge.</p>
+        <p>The named movement tells the forecast which rule to use. It continues the last speed for walking, fits a curve for squats and shoulder presses, and holds the last point for jumping jacks. We chose those rules using recordings from the earlier eight people.</p>
+        <p>Both feedback methods start by holding position. After an earlier forecast reaches its target time, we compare it with the closest tracker point within 0.04 seconds of that time. We divide the miss by the body's size in the picture, measured from the spread of the visible points. Each second halves the weight of older misses.</p>
+        <p>One method picks the rule with the lowest running error. The other combines the predictions, giving more weight to rules with lower errors. The blend's weighting scale is a quarter of the hold rule's running error, with a minimum of 0.01 after scaling for body size. Choose <strong>Adapt to recent tracking</strong> to use that blend.</p>
+        <p>The named and blended rules lowered the average point error for each of the 11 people, compared with holding position. Across people, the named rule missed by about 0.65 pixels less and the blend by 0.53 pixels less. We subtracted the hold rule's error from each method's error, so negative values mean smaller misses. When we resampled the people 10,000 times, the middle 95% of those differences ran from −0.840 to −0.484 pixels for the named rule and −0.682 to −0.367 pixels for the blend.</p>
+        <p>We used 11,305 images from 14,802 scheduled time slots and scored 31,523 of 64,815 forecasts. Of the 31,523, earlier tracking feedback was available for 29,394. The other 2,129 began or reset with the hold rule. Missing measurements around the target time accounted for 33,200 omissions. The other 92 lacked usable measured points.</p>
+        <p>The researchers aligned the cameras and marker measurements after recording. We used the archive's approximate 60-pictures-per-second grid. The exposure time of each picture remains unverified. A smaller timing check averaged the same 1,709 forecasts from 66 views together. The named rule and the blend had lower average point error than NeuroTranslate at five target times from about 0.033 seconds earlier to 0.033 seconds later. The in-game score compares forecasts with its own tracker’s later points.</p>
+        <p>The preview asks the browser to use the computer’s main processor to prepare each picture for tracking. We checked 1,003 pictures of one person doing the four movements. The pictures came from two cameras. On Linux, both tested Chromium graphics settings gave exactly the same tracked points as the original analysis for every picture.</p>
+        <p>Recordings by Chris-Mari Schreuder, Oloff Bergh, Lizé Steyn and Rensu P. Theart. The test reports aggregate errors from SUMediPose version 1.0. <a href="https://doi.org/10.7910/DVN/GRRROM">Original recordings</a> · <a href="https://doi.org/10.1016/j.dib.2025.111579">Study methods</a> · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Data licence</a></p>
+      </details>
+    </section>
+  </main>
+</body>
+</html>

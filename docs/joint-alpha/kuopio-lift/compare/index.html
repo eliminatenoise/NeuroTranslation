@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare the forecast errors for a right wrist during a box lift, using the same six people and the same recorded movements.">
+  <meta name="results-sha256" content="db5dcef12aab2d437305115bb2e866748cc803c0db8c444cd68a796b85963746">
+  <meta name="glossary-revision" content="41">
+  <meta name="glossary-sha256" content="9e4ec98a663545e66052e63a4ca50bd54edf09c31dfb2bf96dadb3ebaf91a9cc">
+  <link rel="icon" href="data:,">
+  <title>How close was the wrist forecast? · NeuroTranslation</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font: 100%/1.55 system-ui, sans-serif;
+      color: #182e2a;
+      background: #f9faf6;
+      --muted: #465d54;
+      --line: #bdcbc2;
+      --accent: #185d49;
+      --paper: #fff;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; }
+    main { max-width: 66rem; margin: 0 auto; padding: clamp(.85rem, 3.4vw, 2rem) clamp(.85rem, 3.4vw, 2.3rem) 2.4rem; }
+    [hidden] { display: none !important; }
+    header { border-top: .32rem solid var(--accent); padding-top: clamp(.9rem, 2.8vw, 1.7rem); }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { line-height: 1.16; text-wrap: balance; }
+    h1 { font-size: clamp(2.05rem, 5.2vw, 3.6rem); font-weight: 720; letter-spacing: -.055em; }
+    h2 { font-size: clamp(1.24rem, 2.7vw, 1.55rem); letter-spacing: -.035em; }
+    header p { max-width: 65ch; margin-top: .7rem; font-size: clamp(1rem, 1.9vw, 1.12rem); }
+    a { color: var(--accent); text-underline-offset: .19em; }
+    :where(a, input, select, summary):focus-visible { outline: 3px solid #a33d11; outline-offset: 3px; }
+    .controls { display: grid; grid-template-columns: max-content minmax(10rem, 1fr); gap: .8rem 2rem; align-items: end; padding: 1rem 0 1.2rem; margin-top: 1rem; border-block: 1px solid var(--line); }
+    fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+    legend, .choice-title { display: block; padding: 0; margin-bottom: .36rem; font-weight: 660; font-size: .94rem; }
+    .radio-pair { display: flex; gap: .45rem; flex-wrap: wrap; }
+    .radio-pair label { display: inline-flex; align-items: center; gap: .38rem; min-height: 2.65rem; padding: .36rem .7rem; border: 1px solid #82988b; border-radius: .25rem; background: var(--paper); cursor: pointer; }
+    .radio-pair label:has(:checked) { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); background: #e4eee8; }
+    .radio-pair label:has(:focus-visible) { outline: 3px solid #a33d11; outline-offset: 3px; }
+    .radio-pair input { margin: 0; width: 1rem; height: 1rem; accent-color: var(--accent); }
+    @supports selector(label:has(:focus-visible)) {
+      .radio-pair input:focus-visible { outline: none; }
+    }
+    .pair-choice { min-width: 0; max-width: 26rem; }
+    select { width: 100%; min-width: 0; min-height: 2.65rem; border: 1px solid #82988b; border-radius: .25rem; padding: .36rem .45rem; background: var(--paper); color: inherit; font: inherit; }
+    .results { display: grid; grid-template-columns: minmax(0, 1.53fr) minmax(0, .98fr); gap: 1.2rem clamp(1.3rem, 3.6vw, 2.6rem); align-items: start; margin: clamp(1.15rem, 3vw, 1.8rem) 0; }
+    figure { margin: 0; min-width: 0; }
+    figcaption p { color: var(--muted); margin-top: .25rem; }
+    .group-title { margin: 1.05rem 0 .45rem; color: var(--accent); font-size: .95rem; font-weight: 720; }
+    .bar-list { list-style: none; margin: 0; padding: 0; }
+    .bar-list li + li { margin-top: .55rem; }
+    .bar-label { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .65rem; align-items: baseline; font-size: .95rem; }
+    .bar-number { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 670; }
+    .track { height: .57rem; width: 100%; margin-top: .2rem; background: #e3e9e2; }
+    .bar { height: 100%; width: 0; background: #496c60; }
+    #second-list .bar { background: #176045; }
+    .rules .bar { background: #6b7778; }
+    .axis { position: relative; display: flex; justify-content: space-between; border-top: 1px solid #839589; margin-top: .65rem; padding-top: .17rem; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .axis span::before { content: ""; display: block; position: absolute; top: -.2rem; width: 1px; height: .35rem; background: #839589; }
+    .axis span:last-child::before { right: 0; }
+    .axis span:nth-child(2) { position: absolute; left: 50%; top: .17rem; transform: translateX(-50%); }
+    .axis span:nth-child(2)::before { top: -.37rem; left: 50%; }
+    .reading { background: #edf2eb; border-top: .23rem solid var(--accent); padding: 1rem clamp(.9rem, 2vw, 1.35rem) 1.13rem; }
+    .reading h2 { font-size: 1.03rem; letter-spacing: -.015em; }
+    .change { display: flex; gap: .45rem; flex-wrap: wrap; align-items: baseline; margin: .3rem 0 .6rem; line-height: 1.05; color: #174f3d; }
+    .change strong { font-variant-numeric: tabular-nums; font-weight: 690; font-size: clamp(2.2rem, 5vw, 3.25rem); letter-spacing: -.05em; }
+    .change span { font-size: 1.08rem; font-weight: 640; }
+    .reading p + p { margin-top: .75rem; }
+    .scope { border-top: 1px solid #b1c5b6; padding-top: .7rem; }
+    details { border-top: 1px solid var(--line); }
+    summary { padding-block: .83rem; font-weight: 670; font-size: 1.06rem; cursor: pointer; }
+    details > p { max-width: 74ch; margin: .15rem 0 .9rem; }
+    .scores { width: 100%; max-width: 51rem; border-collapse: collapse; margin-bottom: 1.4rem; table-layout: fixed; font-size: .93rem; }
+    .scores caption { text-align: left; font-weight: 720; margin: .5rem 0 .32rem; }
+    .scores th, .scores td { border-bottom: 1px solid var(--line); padding: .38rem .24rem; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+    .scores th:last-child, .scores td:last-child { width: 12.5rem; text-align: right; }
+    .scores th[scope="row"] { font-weight: 450; }
+    .scores td { font-variant-numeric: tabular-nums; }
+    footer { border-top: 1px solid var(--line); padding-top: .9rem; color: var(--muted); font-size: .9rem; }
+    footer p { max-width: 80ch; }
+    footer p + p { margin-top: .4rem; }
+    footer a { display: inline-block; }
+    .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    @media (max-width: 44rem) {
+      .results { grid-template-columns: minmax(0, 1fr); }
+      .reading { padding: .85rem 1rem; }
+    }
+    @media (max-width: 36rem) {
+      .controls { grid-template-columns: minmax(0, 1fr); margin-top: .9rem; }
+      .pair-choice { max-width: none; }
+      .scores th:last-child, .scores td:last-child { width: 48%; }
+      .scores { font-size: .875rem; }
+    }
+    @media (forced-colors: active) {
+      header, .controls, .reading, .scope, details, footer, .scores th, .scores td { border-color: CanvasText; }
+      .track { background: Canvas; border: 1px solid CanvasText; forced-color-adjust: none; }
+      .bar, #second-list .bar, .rules .bar { background: CanvasText; forced-color-adjust: none; }
+      .axis { border-color: CanvasText; }
+      .axis span::before { background: CanvasText; forced-color-adjust: none; }
+      .radio-pair label:has(:checked) { border: 2px solid Highlight; }
+      :where(a, select, summary):focus-visible, .radio-pair label:has(:focus-visible) { outline-color: Highlight; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>How close was the wrist forecast?</h1>
+    <p>As people lifted a 12 kg box, cameras tracked both wrists. Each fitted model saw 240 milliseconds of wrist motion and forecast where the right wrist would be 100 milliseconds later.</p>
+  </header>
+
+  <section id="interactive" aria-label="Compare recorded forecast errors" hidden>
+    <div class="controls">
+      <fieldset>
+        <legend>Forecast method</legend>
+        <div class="radio-pair">
+          <label><input type="radio" name="method" value="ridge"> Linear (ridge)</label>
+          <label><input type="radio" name="method" value="attention" checked> Attention</label>
+        </div>
+      </fieldset>
+      <div class="pair-choice">
+        <label class="choice-title" for="comparison">Compare two sets of readings</label>
+        <select id="comparison">
+          <option value="muscle-with-floor">Wrists + floor, add muscle readings</option>
+          <option value="muscle-with-wrists">Wrists, add muscle readings</option>
+          <option value="floor-with-wrists">Wrists, add floor readings</option>
+          <option value="floor-with-muscle">Wrists + muscle, add floor readings</option>
+          <option value="earlier-muscle">Use earlier muscle readings</option>
+          <option value="earlier-both">Use earlier muscle and floor readings</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="results">
+      <figure aria-labelledby="chart-title" aria-describedby="chart-help">
+        <figcaption>
+          <h2 id="chart-title">Distance from the recorded wrist</h2>
+          <p id="chart-help">Mean error across six people, in millimetres. Shorter bars mean closer forecasts.</p>
+        </figcaption>
+        <h3 class="group-title" id="method-heading">Attention model</h3>
+        <ul class="bar-list" id="fitted-bars" aria-labelledby="method-heading">
+          <li id="first-list"><div class="bar-label"><span class="name"></span><span class="bar-number"></span></div><div class="track" aria-hidden="true"><div class="bar"></div></div></li>
+          <li id="second-list"><div class="bar-label"><span class="name"></span><span class="bar-number"></span></div><div class="track" aria-hidden="true"><div class="bar"></div></div></li>
+        </ul>
+        <h3 class="group-title" id="rules-heading">Two simple motion rules</h3>
+        <ul class="bar-list rules" aria-labelledby="rules-heading">
+          <li id="velocity-row"><div class="bar-label"><span class="name"></span><span class="bar-number"></span></div><div class="track" aria-hidden="true"><div class="bar"></div></div></li>
+          <li id="persistence-row"><div class="bar-label"><span class="name"></span><span class="bar-number"></span></div><div class="track" aria-hidden="true"><div class="bar"></div></div></li>
+        </ul>
+        <div class="axis" aria-hidden="true"><span>0</span><span>25</span><span>50 mm</span></div>
+      </figure>
+      <section class="reading" aria-labelledby="change-title">
+        <h2 id="change-title">Change in mean error</h2>
+        <div class="change"><strong id="change-number"></strong><span id="change-direction"></span></div>
+        <p id="comparison-reading"></p>
+        <p id="comparison-scope" class="scope"></p>
+      </section>
+    </div>
+    <p id="spoken" class="sr-only" role="status" aria-atomic="true"></p>
+  </section>
+
+  <details id="all-errors" open>
+    <summary>All 14 forecast errors</summary>
+    <p>The closest of the 14 forecasts used wrist positions alone. Its linear model missed by 10.33 mm on average. The tables give the published distances at full precision.</p>
+    <table class="scores"><caption>Linear model (ridge)</caption>
+<thead><tr><th scope="col">Recorded inputs</th><th scope="col">Mean error (mm)</th></tr></thead><tbody>
+<tr data-score="ridge/motion"><th scope="row">Wrist positions</th><td>10.329639813376618</td></tr>
+<tr data-score="ridge/motion_and_emg"><th scope="row">Wrist positions and muscle readings</th><td>11.697857024936255</td></tr>
+<tr data-score="ridge/motion_and_ground_force"><th scope="row">Wrist positions and floor forces</th><td>12.136850082779157</td></tr>
+<tr data-score="ridge/all_current"><th scope="row">Wrist positions, floor forces and current muscle readings</th><td>13.502781171594586</td></tr>
+<tr data-score="ridge/earlier_emg"><th scope="row">Wrist positions, floor forces and earlier muscle readings</th><td>13.158708946251336</td></tr>
+<tr data-score="ridge/earlier_emg_and_ground_force"><th scope="row">Wrist positions with earlier floor forces and muscle readings</th><td>11.810743680292717</td></tr>
+</tbody></table>
+<table class="scores"><caption>Attention model</caption>
+<thead><tr><th scope="col">Recorded inputs</th><th scope="col">Mean error (mm)</th></tr></thead><tbody>
+<tr data-score="attention/motion"><th scope="row">Wrist positions</th><td>12.170561722082946</td></tr>
+<tr data-score="attention/motion_and_emg"><th scope="row">Wrist positions and muscle readings</th><td>13.112788002956869</td></tr>
+<tr data-score="attention/motion_and_ground_force"><th scope="row">Wrist positions and floor forces</th><td>13.37386029260171</td></tr>
+<tr data-score="attention/all_current"><th scope="row">Wrist positions, floor forces and current muscle readings</th><td>14.16069770041402</td></tr>
+<tr data-score="attention/earlier_emg"><th scope="row">Wrist positions, floor forces and earlier muscle readings</th><td>15.392062657092785</td></tr>
+<tr data-score="attention/earlier_emg_and_ground_force"><th scope="row">Wrist positions with earlier floor forces and muscle readings</th><td>15.542081898414787</td></tr>
+</tbody></table>
+<table class="scores"><caption>Two simple motion rules</caption>
+<thead><tr><th scope="col">Forecast rule</th><th scope="col">Mean error (mm)</th></tr></thead><tbody>
+<tr data-score="velocity"><th scope="row">Continue the last 50 ms of motion at the same speed and direction</th><td>11.95626317511388</td></tr>
+<tr data-score="persistence"><th scope="row">Keep the last wrist position</th><td>43.61003708679798</td></tr>
+</tbody></table>
+  </details>
+  <details id="study">
+    <summary>How the forecasts were measured</summary>
+    <p>Each person contributed one recording of repeated crouch lifts. Cameras followed marks on the skin of both wrists, plates underfoot measured floor forces, and six muscle recordings picked up electrical activity from the shoulders and upper back.</p>
+    <p>Both methods learned from 2,316 windows of movement from seven people. The linear model (ridge) learned fixed weights for the readings. The attention model learned how to give different readings different weight. In each window, the positions of both wrists were recorded 25 times over 240 milliseconds.</p>
+    <p>The test used six other people. Of 2,402 scheduled windows, 17 lacked a usable history. In the remaining 2,385, every forecast could be compared with the right wrist’s measured position 100 milliseconds later. The study measured the straight-line distance in three dimensions, averaged the misses for each person, then gave all six people equal weight.</p>
+    <p>The study tested whether adding current muscle readings to wrist positions and floor forces consistently helped the attention model. Error fell for two people, rose for four and tied for none. The exact two-sided sign test gave <i>p</i> = 0.6875. The other comparisons describe the same recorded task.</p>
+    <p>Using muscle readings from one second earlier also changes which part of a lift they can come from. This checks timing. The comparisons alone cannot say whether muscle activity caused a change in the wrist’s path.</p>
+  </details>
+  <footer>
+    <p>Alexander K. Beattie, Matti J. Kortelainen, Paavo Vartiainen and Pasi A. Karjalainen recorded the Kuopio Full-Body Dataset (v1.2.1, CC BY 4.0). The NeuroTranslation study computed these errors from its crouch lifts.</p>
+    <p><a id="download" href="https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/kuopio-lift/results.json">Download the aggregate results (JSON)</a></p>
+    <p><a href="https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/kuopio-lift/" target="_blank" rel="noopener noreferrer">Study report</a> · <a href="https://doi.org/10.5281/zenodo.24194741" target="_blank" rel="noopener noreferrer">Dataset</a> · <a href="https://doi.org/10.1038/s41597-026-08550-z" target="_blank" rel="noopener noreferrer">Recording methods</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">Dataset licence</a></p>
+  </footer>
+</main>
+<script id="published-results" type="application/json">{
+  "title": "Where will the wrist go?",
+  "source": {
+    "dataset": "https://doi.org/10.5281/zenodo.24194741",
+    "methods": "https://doi.org/10.1038/s41597-026-08550-z",
+    "version": "1.2.1",
+    "licence": "CC-BY-4.0",
+    "credit": "Alexander K. Beattie, Matti J. Kortelainen, Paavo Vartiainen and Pasi A. Karjalainen"
+  },
+  "scope": "One crouch-lift recording per person, with no confirmation people included in fitting.",
+  "fit": {
+    "people": 7,
+    "windows": 2316,
+    "seeds": [
+      17,
+      29,
+      41
+    ],
+    "attention_parameters": 9859,
+    "ridge_l2_penalty": 0.1,
+    "attention_epochs": 40,
+    "learning_rate": 0.001
+  },
+  "confirmation": {
+    "people": 6,
+    "complete_truth": 2385,
+    "invalid_history": 17,
+    "missing_later_observation": 0,
+    "qualified_history": 2385,
+    "scheduled": 2402,
+    "horizon_ms": 100,
+    "point_hz": 100,
+    "stored_analog_hz": 2400
+  },
+  "meaning": {
+    "endpoint_error": "Mean Euclidean error in mm within each person, then the arithmetic mean across people.",
+    "primary_improvement": "The motion-and-ground-force attention error minus the all-current attention error."
+  },
+  "feature_labels": {
+    "motion": "Wrist positions",
+    "motion_and_emg": "Wrist positions and muscle readings",
+    "motion_and_ground_force": "Wrist positions and floor forces",
+    "all_current": "Wrist positions, floor forces and current muscle readings",
+    "earlier_emg": "Wrist positions, floor forces and earlier muscle readings",
+    "earlier_emg_and_ground_force": "Wrist positions with earlier floor forces and muscle readings"
+  },
+  "person_macro_endpoint_errors_mm": {
+    "attention/all_current": 14.16069770041402,
+    "attention/earlier_emg": 15.392062657092785,
+    "attention/earlier_emg_and_ground_force": 15.542081898414787,
+    "attention/motion": 12.170561722082946,
+    "attention/motion_and_emg": 13.112788002956869,
+    "attention/motion_and_ground_force": 13.37386029260171,
+    "persistence": 43.61003708679798,
+    "ridge/all_current": 13.502781171594586,
+    "ridge/earlier_emg": 13.158708946251336,
+    "ridge/earlier_emg_and_ground_force": 11.810743680292717,
+    "ridge/motion": 10.329639813376618,
+    "ridge/motion_and_emg": 11.697857024936255,
+    "ridge/motion_and_ground_force": 12.136850082779157,
+    "velocity": 11.95626317511388
+  },
+  "person_macro_axis_mean_absolute_errors_mm": {
+    "attention/all_current": [
+      2.476174926780131,
+      6.4520588672682955,
+      10.620842131172969
+    ],
+    "attention/earlier_emg": [
+      2.6631967112586907,
+      6.892296296824558,
+      11.539037007036818
+    ],
+    "attention/earlier_emg_and_ground_force": [
+      2.7482464310115193,
+      7.9004227496542,
+      11.264131584538765
+    ],
+    "attention/motion": [
+      2.100211736982964,
+      6.292833833691543,
+      8.583998823541481
+    ],
+    "attention/motion_and_emg": [
+      2.1907519049369837,
+      6.7149593831531265,
+      9.160689013052826
+    ],
+    "attention/motion_and_ground_force": [
+      2.394537239724037,
+      6.149915852107932,
+      9.85902898474143
+    ],
+    "persistence": [
+      3.7995199439750653,
+      22.07920342491391,
+      33.93763666339286
+    ],
+    "ridge/all_current": [
+      2.4932735940761312,
+      5.69082514770659,
+      10.32124318195295
+    ],
+    "ridge/earlier_emg": [
+      2.579194950664537,
+      5.595999947060359,
+      9.97699738894489
+    ],
+    "ridge/earlier_emg_and_ground_force": [
+      2.4998873622764415,
+      5.996444820437712,
+      8.128719468359952
+    ],
+    "ridge/motion": [
+      2.1757701492855985,
+      5.148372250420711,
+      7.135254599865025
+    ],
+    "ridge/motion_and_emg": [
+      2.419787289817917,
+      5.81089799481341,
+      8.266556516279232
+    ],
+    "ridge/motion_and_ground_force": [
+      2.3016564791492717,
+      5.13670650517309,
+      9.253416696010225
+    ],
+    "velocity": [
+      2.2675580853166406,
+      5.871815722104593,
+      8.53293346108647
+    ]
+  },
+  "attention_primary": {
+    "mean_improvement_mm": -0.7868374078123109,
+    "median_improvement_mm": -1.1209628911905876,
+    "positive_negative_ties_and_p": {
+      "negative": 4,
+      "positive": 2,
+      "ties": 0,
+      "two_sided_exact_p": 0.6875
+    }
+  },
+  "zero_rms_sensitivity": {
+    "windows": 2339,
+    "mean_attention_improvement_mm": -0.7875809186044606,
+    "definition": "Descriptive rerun of the summary after excluding issues with any whole zero-RMS EMG block in either history."
+  }
+}
+</script>
+<script>
+  "use strict";
+  const byId = (id) => document.getElementById(id);
+  const rawResults = byId("published-results").textContent;
+  const study = JSON.parse(rawResults);
+  const scores = study.person_macro_endpoint_errors_mm;
+  const labels = study.feature_labels;
+  const methods = {ridge: "Linear model (ridge)", attention: "Attention model"};
+  const pairs = {
+    "muscle-with-floor": ["motion_and_ground_force", "all_current", "Both forecasts used wrist positions and forces underfoot. The second also used electrical activity from muscles in the shoulders and upper back."],
+    "muscle-with-wrists": ["motion", "motion_and_emg", "The first forecast used the positions of both wrists. The second added electrical activity from the shoulders and upper back to those same wrist readings."],
+    "floor-with-wrists": ["motion", "motion_and_ground_force", "The first forecast used the positions of both wrists. The second also used the forces the plates recorded under the person’s feet."],
+    "floor-with-muscle": ["motion_and_emg", "all_current", "Both forecasts used wrist positions and muscle readings. The second also used the forces the plates recorded underfoot."],
+    "earlier-muscle": ["all_current", "earlier_emg", "Both forecasts used the same wrist and floor readings. For the second, the muscle readings came from one second earlier, which can also put them in a different part of the lift."],
+    "earlier-both": ["all_current", "earlier_emg_and_ground_force", "Both forecasts used the same wrist positions. For the second, the floor forces and muscle readings came from earlier in the recording. The shift can change which part of the lift those readings describe."]
+  };
+  const scaleMaxMm = 50;
+
+  function drawRow(id, key, label) {
+    const row = byId(id);
+    const mm = scores[key];
+    row.dataset.score = key;
+    row.querySelector(".name").textContent = label;
+    row.querySelector(".bar-number").textContent = mm.toFixed(2) + " mm";
+    row.querySelector(".bar").style.width = (100 * mm / scaleMaxMm) + "%";
+  }
+
+  function updateComparison() {
+    const method = document.querySelector('input[name="method"]:checked').value;
+    const pair = byId("comparison").value;
+    const [first, second, reading] = pairs[pair];
+    const firstKey = method + "/" + first;
+    const secondKey = method + "/" + second;
+    const change = scores[secondKey] - scores[firstKey];
+    const magnitude = Math.abs(change).toFixed(2);
+    const direction = change < 0 ? "lower" : "higher";
+    byId("method-heading").textContent = methods[method];
+    drawRow("first-list", firstKey, labels[first]);
+    drawRow("second-list", secondKey, labels[second]);
+    byId("change-number").textContent = magnitude;
+    byId("change-direction").textContent = "mm " + direction;
+    byId("comparison-reading").textContent = reading;
+    const signs = study.attention_primary.positive_negative_ties_and_p;
+    const primary = method === "attention" && pair === "muscle-with-floor";
+    const scope = primary
+      ? "Error fell for " + signs.positive + " people and rose for " + signs.negative
+        + ", with no ties. That split gives little evidence of a consistent change (exact two-sided sign test, p = " + signs.two_sided_exact_p + ")."
+      : "These two means describe the six people tested on this lifting task.";
+    byId("comparison-scope").textContent = scope;
+    byId("spoken").textContent = methods[method] + ". " + labels[first] + ", "
+      + scores[firstKey].toFixed(2) + " mm. " + labels[second] + ", "
+      + scores[secondKey].toFixed(2) + " mm. Mean error was " + magnitude + " mm " + direction
+      + " with the second set of readings. " + scope;
+  }
+
+  drawRow("velocity-row", "velocity", "Continue the last 50 ms of motion at the same speed and direction");
+  drawRow("persistence-row", "persistence", "Keep the last wrist position");
+  updateComparison();
+  for (const control of document.querySelectorAll(".controls input, .controls select")) {
+    control.addEventListener("change", updateComparison);
+  }
+  byId("all-errors").open = false;
+  byId("interactive").hidden = false;
+  const download = byId("download");
+  download.href = URL.createObjectURL(new Blob([rawResults], {type: "application/json"}));
+  download.download = "kuopio-lift-results.json";
+</script>
+</body>
+</html>

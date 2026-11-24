@@ -1,0 +1,5 @@
+# Recording credits
+
+Benoit P. Delhaye, Ewa Jarocka, Allan Barrea, Jean-Louis Thonnard, Benoni B. Edin and Philippe Lefèvre used a moving plate to load a supported fingertip while they recorded force and the impulses travelling along a single sensory nerve fibre. This experiment averages plate force in 20 ms bins and counts the recorded impulses. A second comparison replaces force with the corresponding force history from the preceding trial. The authors released the source recordings under CC BY 4.0. [Study](https://doi.org/10.7554/eLife.64679) · [Data deposit](https://zenodo.org/records/4818439) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+The other seven tasks use macaque reaching recordings, human balance measurements, rat single-unit activity, worm and fish fluorescence, and camera tracks from multiple species. Their original credits, recording-specific licences and transformations travel with the seven-task model. [Seven-task recording credits](../../NOTICE.md) · [Preparation and source notices](../../inputs/NOTICE.md)

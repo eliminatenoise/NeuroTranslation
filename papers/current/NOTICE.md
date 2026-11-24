@@ -177,3 +177,12 @@ licence texts.
 ## The papers' own text
 
 The text of these papers is dedicated to the public domain under CC0 1.0, to the extent the project holds the rights. Material made by others, which is everything listed above and every publication cited, keeps its own licence and its own requirement of credit.
+
+## Recordings in the later NeuroTranslation comparisons
+
+These studies selected recorded samples and report combined scores. The four releases below are under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
+
+- **Rat spikes.** Justin Shin and Shantanu Jadhav recorded rats learning a W-shaped track. The manuscript's one-session comparison uses spike times to check predicted counts and the source of the first recorded spike. Earlier camera readings qualify the forecast times and supply one model input. [Single Day W-Track Learning, version 0.240511.0307](https://doi.org/10.48324/dandi.000978/0.240511.0307)
+- **Melbourne treadmill walking.** Tomislav Baček deposited the raw motion and force recordings. The engineering comparison uses heel positions from cameras and vertical readings from the treadmill force plates to score one recording. [Recordings, version 1](https://doi.org/10.26188/24288265.v1) · [Acquisition methods](https://doi.org/10.1038/s41597-024-03444-4)
+- **Kuopio walking.** Alexander Beattie, Matti Kortelainen, Paavo Vartiainen and Pasi Karjalainen published the Kuopio Full-Body Dataset. The walking comparison pairs tracked heel positions with measured force to prepare forecast inputs and score movement and force outcomes. [Dataset, version 1.2.1](https://doi.org/10.5281/zenodo.24194741) · [Acquisition methods](https://doi.org/10.1038/s41597-026-08550-z)
+- **Utah treadmill walking.** Sarah Hood and Tommaso Lenzi deposited walking recordings from people with above-knee prostheses. Sarah Hood, Marshall K. Ishmael, Andrew Gunnell, K. B. Foreman and Tommaso Lenzi describe the study. The manuscript uses the original camera and force recordings to score separately at 1.0 and 0.6 metres per second. [Recording collection, version 1](https://doi.org/10.6084/m9.figshare.c.4962305.v1) · [Acquisition methods](https://doi.org/10.1038/s41597-020-0494-7)

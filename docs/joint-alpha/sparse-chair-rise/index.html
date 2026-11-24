@@ -1,0 +1,77 @@
+<!doctype html><html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What can your muscles tell us when the camera sees less? · NeuroTranslation</title>
+<style>
+:root{font:17px/1.55 system-ui,sans-serif;color:#13332d;background:#f9faf4}
+body{margin:0} main{max-width:54rem;margin:auto;padding:2rem 1rem 4rem} h1{font-size:clamp(2rem,5.5vw,3.1rem);line-height:1.08;max-width:16em;margin-block:1.2rem}
+h2{font-size:1.34rem} p{max-width:71ch} a{color:inherit;text-underline-offset:.14em}
+small{font-size:.9rem;color:#324943}
+label{display:block;font-weight:650} select{display:block;width:100%;padding:.4rem;background:transparent;color:inherit;font:inherit;border:1px solid #6f887c;border-radius:.22rem}
+option{color:#13332d;background:#f9faf4}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));gap:1rem;margin-block:1rem}
+section{margin-block:1.4rem} details{margin-top:1rem} summary{cursor:pointer;font-weight:650}
+[hidden]{display:none!important}
+table{table-layout:fixed;width:100%;border-collapse:collapse;margin:0 0 1rem;font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid #bfcec5;text-align:left;padding:.45rem .3rem;overflow-wrap:anywhere}
+th:first-child{width:42%} tbody th{font-weight:500}
+a:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #116454;outline-offset:3px}
+@media(forced-colors:active){th,td,select{border-color:CanvasText}small{color:CanvasText}}
+</style>
+</head>
+<body><main>
+<a href="../">NeuroTranslation studies</a>
+<h1>What can your muscles tell us when the camera sees less?</h1>
+<p>Stand up from a stool and three things change together. Your hips rise, your feet press against the floor, and the electrical readings over your leg muscles change. We asked how much those last two signals help predict where the hips will be a tenth of a second later.</p>
+<p>At every forecast the models saw the same latest camera position. With full tracking they also saw three earlier positions and recent changes. With sparse tracking they saw only the latest frame and the one from 150 milliseconds earlier. Both tests used 1,254 forecasts across 22 people kept out of training and model selection.</p>
+
+<section aria-labelledby="comparison">
+<h2 id="comparison">Compare the same forecasts</h2>
+<p>Choose how much movement the model could see. The separate models each learned to use one set of inputs. The shared model learned to handle all eight sets with the same weights within a training run.</p>
+<div class="controls" id="controls" hidden>
+<div><label for="camera">Camera history</label>
+<select id="camera"><option value="full">Full · four positions</option><option value="sparse">Sparse · two positions</option></select></div>
+<div><label for="architecture">How the model was trained</label>
+<select id="architecture"><option value="attention">Separately for each set of readings</option><option value="shared">Shared across all sets of readings</option></select></div>
+</div>
+<div id="results"><table data-condition='full-attention'><caption>Full camera history · separate models</caption><thead><tr><th scope='col'>Readings supplied</th><th scope='col'>Error (mm)</th><th scope='col'>Change (mm)</th></tr></thead><tbody><tr><th scope='row'>Camera alone</th><td>3.06</td><td>—</td></tr><tr><th scope='row'>Add floor force</th><td>3.03</td><td>-0.03</td></tr><tr><th scope='row'>Add muscle readings</th><td>3.21</td><td>+0.15</td></tr><tr><th scope='row'>Add both signals</th><td>3.17</td><td>+0.11</td></tr></tbody></table><table data-condition='full-shared'><caption>Full camera history · one shared model</caption><thead><tr><th scope='col'>Readings supplied</th><th scope='col'>Error (mm)</th><th scope='col'>Change (mm)</th></tr></thead><tbody><tr><th scope='row'>Camera alone</th><td>3.18</td><td>—</td></tr><tr><th scope='row'>Add floor force</th><td>3.19</td><td>+0.01</td></tr><tr><th scope='row'>Add muscle readings</th><td>3.27</td><td>+0.09</td></tr><tr><th scope='row'>Add both signals</th><td>3.29</td><td>+0.10</td></tr></tbody></table><table data-condition='sparse-attention'><caption>Sparse camera history · separate models</caption><thead><tr><th scope='col'>Readings supplied</th><th scope='col'>Error (mm)</th><th scope='col'>Change (mm)</th></tr></thead><tbody><tr><th scope='row'>Camera alone</th><td>3.92</td><td>—</td></tr><tr><th scope='row'>Add floor force</th><td>3.82</td><td>-0.10</td></tr><tr><th scope='row'>Add muscle readings</th><td>3.93</td><td>+0.01</td></tr><tr><th scope='row'>Add both signals</th><td>3.94</td><td>+0.02</td></tr></tbody></table><table data-condition='sparse-shared'><caption>Sparse camera history · one shared model</caption><thead><tr><th scope='col'>Readings supplied</th><th scope='col'>Error (mm)</th><th scope='col'>Change (mm)</th></tr></thead><tbody><tr><th scope='row'>Camera alone</th><td>3.63</td><td>—</td></tr><tr><th scope='row'>Add floor force</th><td>3.63</td><td>-0.01</td></tr><tr><th scope='row'>Add muscle readings</th><td>3.80</td><td>+0.17</td></tr><tr><th scope='row'>Add both signals</th><td>3.80</td><td>+0.17</td></tr></tbody></table></div>
+<p id="change" role="status"></p>
+<p><small>The last column shows the average error with a signal added minus the error using camera alone. Negative values mean the signal helped in that comparison.</small></p>
+</section>
+
+<h2>What changed when the camera saw less?</h2>
+<p><strong>Full camera history.</strong> The separate model using cameras alone averaged 3.06 mm error. Floor force reduced average error by 0.03 mm. Muscle readings increased average error by 0.15 mm. Together the two signals increased average error by 0.11 mm.</p>
+<p><strong>Sparse camera history.</strong> The separate model using cameras alone averaged 3.92 mm error. Floor force reduced average error by 0.10 mm. Muscle readings increased average error by 0.01 mm. Together the two signals increased average error by 0.02 mm.</p>
+<ul><li>For floor force, the data left open whether adding the signal helped more with sparse camera history (estimate -0.07 mm, interval -0.29 to +0.16 mm).</li><li>For muscle readings, the data left open whether adding the signal helped more with sparse camera history (estimate -0.14 mm, interval -0.40 to +0.12 mm).</li><li>For both signals, the data left open whether adding the signal helped more with sparse camera history (estimate -0.09 mm, interval -0.36 to +0.17 mm).</li></ul>
+<p>With sparse camera history, the shared model using cameras alone averaged <strong>3.63 mm</strong> error. The model trained only for that input averaged 3.92 mm. The shared model had lower error for 16 of 22 people. The interval for the change was -0.53 to -0.06 mm.</p>
+<p>With full camera history, a simpler linear fit to the same movement inputs had the lowest average error in the comparison, at <strong>2.37 mm</strong>. The intervals come from resampling people and describe this test group.</p>
+
+<details><summary>Open the recording and model details</summary>
+<p>We used the average height of four camera markers on the pelvis and predicted its change in 100 milliseconds. Each model had 11,809 settings that training could adjust. We trained each model from three starting points and averaged their forecasts. Each person and, within a person, each usable trial had equal weight.</p>
+<p>The raw muscle files and the camera clips carry matching frame numbers. The plate exports use a 2,000 Hz time grid from a 1,000 Hz recording. The study authors filled gaps and smoothed the camera tracks before publication, using information from across each recording. This experiment tests those archives. It leaves performance on live, unsmoothed recordings open.</p>
+<p>Participants were healthy adult men. We used 65 people for training, 22 for model selection, and 22 for the held-out score. Force plates were unavailable from the first ten archive participants. 103 forecasts lacked a later camera endpoint. The aggregate download includes person-resampled uncertainty, the simple movement controls, and a separate score for times when the person was already rising.</p>
+<p>Muscle sensors measure electrical signals at the skin. Floor plates measure external force against the floor. Neither reading by itself identifies the force produced by a single muscle.</p>
+</details>
+<section aria-labelledby="offline"><h2 id="offline">Run the shared model on your computer</h2>
+<p>Try a forecast with the included invented readings. Unzip the package and open the launcher for your operating system. It needs Python and NumPy. The Linux launcher passed a test with the network disabled. The package also includes launchers for macOS and Windows.</p>
+<p><a href="NeuroTranslate-chair-rise.zip" download>Download the offline chair-rise model</a> · <a href="runtime.json">Package checks</a></p></section>
+<p><a href="results.json" download>Download the aggregate results</a></p>
+<p>Recordings by Seungbum Koo, Junyo Boo, Dongwook Seo and Minseung Kim. <a href="https://doi.org/10.1038/s41597-025-05391-0">Recording methods</a> · <a href="https://doi.org/10.6084/m9.figshare.27677016.v1">Source archive</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+</main>
+<script>
+const group = document.getElementById('controls');
+const camera = document.getElementById('camera');
+const architecture = document.getElementById('architecture');
+const tables = [...document.querySelectorAll('[data-condition]')];
+const change = document.getElementById('change');
+function show(announce) {
+  const selected = camera.value + '-' + architecture.value;
+  for (const table of tables) table.hidden = table.dataset.condition !== selected;
+  if (announce) change.textContent = 'Showing ' + document.querySelector('[data-condition="' + selected + '"] caption').textContent + '.';
+}
+group.hidden = false;
+camera.addEventListener('change', () => show(true));
+architecture.addEventListener('change', () => show(true));
+show(false);
+</script>
+</body></html>

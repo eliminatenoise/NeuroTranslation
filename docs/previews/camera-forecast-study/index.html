@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare four movement forecasts against separate motion measurements for 86 people in the MoVi recordings.">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="study.css">
+  <script src="study.js" type="module"></script>
+  <title>Camera forecast study · NeuroSurge</title>
+</head>
+<body>
+  <a class="skip" href="#results">Skip to results</a>
+  <header class="bar frame">
+    <nav aria-label="Project"><a href="../../projects/?project=neurosurge">Project browser</a><a href="../neurosurge/">Movement preview</a></nav>
+    <a data-edition href="technical.html">Technical edition</a>
+  </header>
+  <main class="frame">
+    <h1>Camera forecast study</h1>
+    <p class="lead">Four ways to predict where a body point will appear 0.12 seconds later, tested on recordings of 86 people.</p>
+    <section class="comparison" aria-labelledby="results">
+      <div class="comparison-intro">
+        <div>
+          <h2 id="results">Compare forecast errors</h2>
+          <p>Smaller errors are better. Both scores use pixels in the picture.</p>
+        </div>
+        <label class="view-control" hidden>Show results for
+          <select id="group"><option value="overall">All people and movements</option></select>
+        </label>
+      </div>
+      <table>
+        <caption id="selected-group" aria-live="polite">All people and movements · 86 people</caption>
+        <thead><tr><th scope="col">Forecast</th><th scope="col">Final position error</th><th scope="col">Movement error</th></tr></thead>
+        <tbody>
+          <tr data-method="persistence"><th scope="row">Hold last position</th><td>11.14</td><td>6.11</td></tr>
+          <tr data-method="velocity"><th scope="row">Continue at last speed</th><td>13.69</td><td>9.38</td></tr>
+          <tr data-method="attention"><th scope="row">NeuroTranslate 0.0</th><td>10.70</td><td>6.19</td></tr>
+          <tr data-method="camera_blend"><th scope="row">Adapt to recent tracking</th><td>10.52</td><td>5.08</td></tr>
+        </tbody>
+      </table>
+      <div class="result-links">
+        <button id="download" type="button" hidden>Download scores as CSV</button>
+        <a href="../neurosurge/#camera-test">Earlier test on 11 people</a>
+        <a href="../standing-hip-study/">Sideways thigh tracking study</a>
+      </div>
+    </section>
+    <div class="reading">
+      <section aria-labelledby="how">
+        <h2 id="how">How the test worked</h2>
+        <p>The forecast starts with a point in a camera image, such as the right wrist. The tracker estimates its position in successive pictures. After five pictures, the program predicts where the point will appear in about a tenth of a second. We compared wrists, elbows, shoulders, hips, knees and ankles on both sides.</p>
+        <p>The MoVi recordings pair video with a separate system that follows markers on the body. We used footage from two cameras that stayed in place. The cameras took 30 pictures a second. The marker system took 120 readings a second. Those readings give an estimate of the centre of a joint in three dimensions. The forecast target falls 14.4 marker readings after the starting position. We found the 3D position two fifths of the way from reading 14 to reading 15. Then we used the original camera settings, including how the lens bends the image, to find where that centre would appear in the picture.</p>
+        <p>We kept the forecasts fixed before bringing in the separate marker measurements. The study used 86 of the 90 available people. One person was used to check the timing and camera geometry before this test. Three others lacked one of the required videos.</p>
+      </section>
+      <section aria-labelledby="methods">
+        <h2 id="methods">What each forecast uses</h2>
+        <dl>
+          <div><dt>Hold last position</dt><dd>Use the last point the camera tracker saw. The predicted movement is zero.</dd></div>
+          <div><dt>Continue at last speed</dt><dd>Use the last two points to estimate speed and direction. Extend that movement through the next 0.12 seconds.</dd></div>
+          <div><dt>NeuroTranslate 0.0</dt><dd>Use five pictures' worth of tracked positions to predict where the point will go. The point model learned from earlier animal recordings. Its learned values stayed fixed for the test.</dd></div>
+          <div><dt>Adapt to recent tracking</dt><dd>Combine the three forecasts above with a line and a curve fitted to recent positions. Once a prediction reaches its target time, compare it with a camera reading within 0.04 seconds of that time. Judge the error relative to the size of the tracked body in the picture. An error from one second earlier keeps half as much weight as it had when measured. Give more influence to methods that have missed by less recently. Hold the last position at start-up. The game uses this name in the Movement mirror's forecast menu.</dd></div>
+        </dl>
+        <p>All four methods draw from the same earlier camera readings. The study uses the action labels and the separate marker measurements later, to group and score the forecasts.</p>
+      </section>
+      <section aria-labelledby="reading-scores">
+        <h2 id="reading-scores">How to read the scores</h2>
+        <p><strong>Final position error</strong> is the distance between the predicted location and the measured location at the target time. A pixel is one step on the grid of the resized picture. Here the grid is 640 pixels wide and 480 pixels high. Pixel errors depend on how the camera sees the person.</p>
+        <p><strong>Movement error</strong> compares two changes in position. One change starts at the point the tracker saw and ends at the forecast. The other starts and ends at the separate marker measurements. If the tracker starts three pixels off to the right and the forecast keeps that offset while moving in the correct direction by the correct amount, the movement error can be zero and the final position error can still be three pixels.</p>
+        <p>The table can show results for a fixed camera, a body point or a movement. The 18 movement choices cover activities with usable comparisons for all 86 people. Each ankle row represents 85 people because one recording set lacked the required reference for that side. The camera and body point results use the same matched samples as the overall test.</p>
+        <p>Compared with holding the point still, adapting to recent tracking reduced final position error by 0.63 pixels and movement error by 1.03 pixels on average. Both errors fell for each of the 86 people. The blend also reduced movement error for all 86 people compared with NeuroTranslate 0.0 alone. Its final position error fell for 73 and rose for 13.</p>
+        <p>To estimate how much the result varies across people, we repeated the average 10,000 times, drawing 86 people at random from this group each time and allowing repeats. The middle 95% of the resulting estimates placed the average final position improvement over holding still between 0.58 and 0.67 pixels. The movement improvement was between 0.97 and 1.09 pixels. Compared with NeuroTranslate 0.0, the ranges were 0.15 to 0.22 pixels for final position and 1.08 to 1.14 pixels for movement. These ranges describe the changes in average error across the study group.</p>
+      </section>
+      <section aria-labelledby="coverage">
+        <h2 id="coverage">Which comparisons counted</h2>
+        <p>We processed 793,381 pictures in 172 videos. The four methods made forecasts at 1,928,340 combinations of time, tracked body point and camera view. The earlier pictures and the later measurement had to fall within the same recorded movement. When the archive used the same movement name twice, we grouped the results under that name and kept the time limits of each interval.</p>
+        <p>We excluded 503,848 forecasts because their readings fell outside a single movement. A missing joint reference accounted for 2,611 forecasts, missing marker readings for 22,609 and a point outside the image or otherwise impossible to project for 1,692. The remaining 1,397,580 rows could be compared with the marker system.</p>
+        <p>We counted a body point and movement for a person only when both views had usable comparisons for that combination. Of 21,672 possible person, movement and point combinations, 18,087 met that rule. This left 1,294,480 forecast rows, 702,688 in the first view and 591,792 in the second. We averaged each point and movement separately, then combined their results across the two views. Each person contributed equally to the final average.</p>
+        <p>The current tracker point missed the independent reference by 8.06 pixels on average before any prediction was made. When a camera loses the point or no reference is available, we cannot score that part of the recording. These results measure forecasts from recorded pictures in two fixed views. A live-camera test would need to measure tracking failures, latency and accuracy on the device in use.</p>
+      </section>
+      <section class="sources" aria-labelledby="sources">
+        <h2 id="sources">Recordings and source</h2>
+        <p>This non-commercial study reports grouped scores. BioMotionLab provides the MoVi recordings under separate terms.</p>
+        <ul>
+          <li><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0253157">Ghorbani and colleagues, <cite>MoVi: A large multi-purpose human motion and video dataset</cite>, PLOS ONE, 2021</a></li>
+          <li><a href="https://www.biomotionlab.ca/movi/">BioMotionLab's MoVi access and terms</a></li>
+          <li><a href="https://github.com/eliminatenoise/NeuroTranslation/blob/21149ddc9d9d868227c6928a567936404fad4bad/docs/previews/neurosurge/scene/src/joint/adaptive-motion.mjs">Forecast code used in this test</a></li>
+          <li><a href="results.json">Aggregate scores and counts (JSON)</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

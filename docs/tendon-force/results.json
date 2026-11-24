@@ -1,0 +1,124 @@
+{
+  "forecast_target_ms": 100,
+  "earlier_history_ms": 200,
+  "earlier_bins": 10,
+  "error_unit": "newton-seconds",
+  "treadmill_speed_m_s": 1.8,
+  "fitting_birds": 2,
+  "fitting_trials": 10,
+  "fitting_windows_per_tendon": 774,
+  "methods": [
+    "global_median",
+    "archival_terrain_median",
+    "raw_emg_ridge",
+    "window_scaled_emg_ridge"
+  ],
+  "metric": "Mean absolute error. In a reserved bird, average the window errors within each trial, then give every trial equal weight.",
+  "scope": "Separate archived results for different birds and tendons. Timing of an actual live signal requires a separate test.",
+  "tendons": {
+    "LG": {
+      "force_at": "shared Achilles tendon",
+      "development_mae": {
+        "global_median": 1.0195115164618684,
+        "archival_terrain_median": 1.0171291676110454,
+        "raw_emg_ridge": 0.7301248020229,
+        "window_scaled_emg_ridge": 0.5714806656635338
+      },
+      "selected_before_reserve_test": "window_scaled_emg_ridge",
+      "reserve_birds": 1,
+      "reserve_trials": 5,
+      "reserve_common_valid_windows": 653,
+      "reserve_mae": {
+        "global_median": 0.7152515793677463,
+        "archival_terrain_median": 0.7192904668488327,
+        "raw_emg_ridge": 0.4636740074098905,
+        "window_scaled_emg_ridge": 0.5377260811374882
+      },
+      "reserve_mae_by_terrain_cm": {
+        "0": {
+          "trials": 1,
+          "windows": 161,
+          "mae": {
+            "global_median": 0.7338489600437547,
+            "archival_terrain_median": 0.7519530202169025,
+            "raw_emg_ridge": 0.49157562759484763,
+            "window_scaled_emg_ridge": 0.5385425150578806
+          }
+        },
+        "5": {
+          "trials": 2,
+          "windows": 200,
+          "mae": {
+            "global_median": 0.6903130010687318,
+            "archival_terrain_median": 0.6912143023888415,
+            "raw_emg_ridge": 0.4455467867565249,
+            "window_scaled_emg_ridge": 0.5458701788719948
+          }
+        },
+        "7": {
+          "trials": 2,
+          "windows": 292,
+          "mae": {
+            "global_median": 0.7308914673287565,
+            "archival_terrain_median": 0.7310353546247887,
+            "raw_emg_ridge": 0.4678504179707777,
+            "window_scaled_emg_ridge": 0.5291737664427852
+          }
+        }
+      }
+    },
+    "DF": {
+      "force_at": "digital flexor IV tendon",
+      "development_mae": {
+        "global_median": 0.42037387005342225,
+        "archival_terrain_median": 0.4267314183546414,
+        "raw_emg_ridge": 1.162369107570369,
+        "window_scaled_emg_ridge": 0.4760622841827232
+      },
+      "selected_before_reserve_test": "global_median",
+      "reserve_birds": 1,
+      "reserve_trials": 5,
+      "reserve_common_valid_windows": 245,
+      "reserve_mae": {
+        "global_median": 0.32103285101278967,
+        "archival_terrain_median": 0.3217107268277618,
+        "raw_emg_ridge": 0.35644253534346154,
+        "window_scaled_emg_ridge": 0.2810059120584363
+      },
+      "reserve_mae_by_terrain_cm": {
+        "0": {
+          "trials": 1,
+          "windows": 49,
+          "mae": {
+            "global_median": 0.28579256040685386,
+            "archival_terrain_median": 0.28563214109570345,
+            "raw_emg_ridge": 0.33433952514207954,
+            "window_scaled_emg_ridge": 0.23711470581743715
+          }
+        },
+        "5": {
+          "trials": 2,
+          "windows": 98,
+          "mae": {
+            "global_median": 0.35858332199766674,
+            "archival_terrain_median": 0.35841098022317536,
+            "raw_emg_ridge": 0.3827987025693046,
+            "window_scaled_emg_ridge": 0.31218549332319045
+          }
+        },
+        "7": {
+          "trials": 2,
+          "windows": 98,
+          "mae": {
+            "global_median": 0.3011025253308805,
+            "archival_terrain_median": 0.30304976629837754,
+            "raw_emg_ridge": 0.34113787321830946,
+            "window_scaled_emg_ridge": 0.27177193391418164
+          }
+        }
+      }
+    }
+  },
+  "source_dataset": "https://doi.org/10.5281/zenodo.15968637",
+  "source_dataset_license": "CC BY 4.0"
+}

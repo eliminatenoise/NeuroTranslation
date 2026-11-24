@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Optic-flow tail-variation forecast · Simple edition</title><link rel="stylesheet" href="guides.css"></head><body><main><nav aria-label="Reading editions"><a href="index.html">Study start</a><a href="technical.html">Technical edition</a><a href="simple.html" aria-current="page">Simple edition</a><a href="results.json">Score data</a></nav>
+<article><h1>Recent movement gave the lowest tail-variation forecast error</h1>
+<p>A camera filmed the bends of a zebrafish&#39;s tail. We used its earlier readings to forecast how much the angle would vary over the next tenth of a second. Keeping the same amount of variation as the recent past gave the smallest average miss. The fitted camera rule came next. In this comparison, adding the recorded visual command to that rule raised the average error by 0.000572 radians across the same 2,268 cases.</p>
+<div class="table-view" role="region" tabindex="0" aria-label="Mean absolute error of tail-angle variation in radians"><table>
+<thead>
+<tr>
+<th>Forecast</th>
+<th align="right">Average size of the miss (radians)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Keep the amount of variation from the last tenth of a second</td>
+<td align="right">0.011266</td>
+</tr>
+<tr>
+<td>Use measured camera history to adjust that amount</td>
+<td align="right">0.013926</td>
+</tr>
+<tr>
+<td>Use the camera history and the logged visual command</td>
+<td align="right">0.014498</td>
+</tr>
+<tr>
+<td>Use the camera history and the same command readings six seconds further back</td>
+<td align="right">0.014164</td>
+</tr>
+</tbody></table></div>
+<h2>The angle and the command</h2>
+<p>The source is the recording labelled <code>fig4_01/230413_f1</code> in Ryosuke Tanaka and Ruben Portugues&#39;s study. A program decided when to move a visual pattern forward or backward. The log records the direction in a field called <code>LDPS_drift_direction</code>, as −1 or +1. We found 1,735 changes at distinct, increasing times. These times come from the computer&#39;s log. When the pattern physically changed on the screen, or when the fish saw the change, remains unverified.</p>
+<p>The camera&#39;s angle measurement is called <code>tail_sum</code>. The sign records which way the tail bends. Its size records how far it bends, measured in radians. We used the spread of the signed angles. This is called the population standard deviation. To calculate it, find the average angle, square the distance of every angle from that average, average those squares, and take the square root. A tail can stay bent in one direction and still have a small spread. The stored target uses 19 to 21 camera readings from the tenth of a second that starts at each forecast time and ends just before the next tenth of a second.</p>
+<h2>How we chose the examples</h2>
+<p>We considered forecast times 320 milliseconds apart, counted from zero on the software clock. Some neighbouring entries shared a timestamp. There were 10 such pairs in the camera log and 2,175 in the display log. The two command readings in every display pair agreed. We omitted both entries in pairs in either stream. For an earlier input, we used a timestamp only after a later entry in the same log confirmed that the first time had closed. That confirmation had to be recorded by the forecast time.</p>
+<p>We found the middle value of the positive time gaps between samples in each log. Each camera bin and each target interval had to contain at least two eligible readings. The gap between readings, and from a reading to either interval edge, could be at most 9.994 milliseconds. That is twice the middle interval in the camera log. For a command sample, we looked back from the requested time and used the most recent eligible entry. It could be at most 19.990 milliseconds old, twice the middle interval in the display log.</p>
+<p>We used the first two-thirds of the software time shared by the camera and display for fitting. The whole interval used to measure a fitting answer had to finish by the split at 2,400.006403 seconds. Every earlier reading for a later forecast, including the control reading eleven seconds back, came from the later period. No camera or display row was reused across the two periods. The timing rules left 6,732 of the 11,249 possible forecast times. Fitting had 4,440 complete examples out of 4,454. Of 2,278 later examples, 2,270 gave enough earlier information to issue all four forecasts. A separate reader checked all the saved forecasts before we read the later camera values. Two later measurements were unusable. This left 2,268 forecasts for each rule to score.</p>
+<h2>What the four rules learn</h2>
+<p>The first rule carries forward the spread of the most recent 100 milliseconds. The other three learn how much to add to that starting number. They use four earlier camera bins that each cover 50 milliseconds. For each bin, they use the average bend and how widely the bend varies.</p>
+<p>The first fitted rule uses just those camera readings. The next fitted rule also takes ten command readings at 5, 4, 3, 2, 1, 0.50, 0.20, 0.10, 0.05 and 0 seconds before issue. The last rule takes commands at the same spacing, with each time moved another six seconds back. This makes a comparison with older command history. The older history can still carry information.</p>
+<p>When fitting each rule, we subtract the fitting average for each kind of input and divide by its population standard deviation in the fitting cases. A kind of input that stayed constant was given no influence. We asked the fit to make its average squared misses small and also charged it 0.1 times the sum of the squared input weights. This discourages large adjustments for small changes in the measurements. The fixed offset carries no charge. A predicted spread below zero is set to zero.</p>
+<h2>Interpreting the scores</h2>
+<p>On each later case, we subtract the measured spread from each forecast and take the size of the difference. To see what the visual command added, we subtract the camera-only error from the error with the command, then average those differences. The command lowered the camera model&#39;s error in six of the 20 populated blocks on the one-minute grid and raised it in the other 14. Across all scored cases it raised the average error. Reusing the recent camera spread still gave the closest forecasts overall. These outcomes describe one recording. Testing the rule on other fish and checking the physical timing of both instruments remain separate steps.</p>
+<p><a href="https://doi.org/10.1016/j.cub.2025.08.047">Original study</a> · <a href="https://doi.org/10.5281/zenodo.16085585">Versioned archive</a></p>
+</article><footer><p>Ryosuke Tanaka and Ruben Portugues deposited <cite>Algorithmic dissection of optic flow memory in larval zebrafish</cite>. <a href="https://doi.org/10.5281/zenodo.16085585">Zenodo dataset</a> · <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</a> · <a href="https://doi.org/10.1016/j.cub.2025.08.047">Original Current Biology study</a></p></footer></main></body></html>

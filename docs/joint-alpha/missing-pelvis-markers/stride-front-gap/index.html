@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forecast with a front marker missing · NeuroTranslation</title>
+<style>
+:root{font:17px/1.56 system-ui,sans-serif;color:#18362d;background:#f9faf4}
+body{margin:0}main{max-width:57rem;margin:auto;padding:2rem 1rem 4rem}
+h1{font-size:clamp(2.3rem,7vw,3.8rem);line-height:1.04;letter-spacing:-.04em;margin:1rem 0;max-width:19ch}
+h2{font-size:1.35rem;margin-top:1.6rem}p{max-width:72ch}
+a{color:#194b3d;text-underline-offset:.18em}a:focus-visible,summary:focus-visible{outline:3px solid #146451;outline-offset:3px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+caption{text-align:left;margin-bottom:.6rem}th,td{padding:.45rem .5rem;border-bottom:1px solid #c3d0c6;text-align:left}
+td{text-align:right}thead th{border-bottom:2px solid #728b7f}tbody th{font-weight:500}
+tbody tr:first-child{background:#dceadd}tbody tr:nth-child(even){background:#edf2e9}
+summary{cursor:pointer;font-weight:650}details{margin-top:1.35rem}
+@media(max-width:31rem){main{padding:1.15rem .85rem 3rem}th,td{padding:.4rem .25rem}table{font-size:.88rem}}
+</style></head>
+<body><main>
+<nav aria-label="Related studies"><a href="../running-stride/">Stride forecast study</a></nav>
+<h1>Forecast with a front marker missing</h1>
+<p>When a camera loses a marker, an earlier part of the run may still help. We tested a model that reuses movement from a similar part of the previous stride and adds a learned correction.</p>
+<p>In <strong>11 held-out runners</strong>, the correction reduced average error from <strong>8.62 to 6.29 mm</strong> for all four pelvis markers. The rear-pair error fell from <strong>9.11 to 6.66 mm</strong>. The correction helped ten people on the first target and all eleven on the second.</p>
+<p><a href="../stride-demo/">Try the stride forecast with invented readings</a></p>
+<h2>Compare the forecasts</h2>
+<p>Each forecast estimates how far the average marker height will rise or fall in the next 100 milliseconds. Each person counts equally. Smaller errors are better.</p>
+<table><caption>Front-marker gaps at 3.5 m/s. 1,570 four-marker and 2,200 rear-pair forecasts.</caption>
+<thead><tr><th scope="col">Forecast method</th><th scope="col">Four markers (mm)</th><th scope="col">Rear pair (mm)</th></tr></thead>
+<tbody><tr><th scope='row'>Earlier stride with learned correction</th><td>6.29</td><td>6.66</td></tr><tr><th scope='row'>Replay the earlier stride</th><td>8.62</td><td>9.11</td></tr><tr><th scope='row'>Predict zero displacement</th><td>43.94</td><td>49.29</td></tr><tr><th scope='row'>Chair-trained attention</th><td>53.12</td><td>57.24</td></tr><tr><th scope='row'>Chair-trained attention correcting recent speed</th><td>56.34</td><td>64.02</td></tr><tr><th scope='row'>Continue recent camera speed</th><td>59.51</td><td>65.22</td></tr></tbody></table>
+<h2>What the gaps allow us to test</h2>
+<p>The camera lost at least one front marker during the previous 800 milliseconds. Both rear markers remained available over that history. To score either target, its markers had to be available in both the last input reading and the reading 100 milliseconds later. This left some windows with a usable rear target and no four-marker target.</p>
+<p>These runners appear in a later release from the lab that supplied the training data. Their records were excluded from fitting. Rear-marker gaps and the two other running speeds had too few participants for the same comparison.</p>
+<details><summary>How the test was run</summary>
+<p>We used the authors’ unfilled camera coordinates at 150 frames per second. The source flags show which readings are missing. The available readings lack per-point reconstruction quality and camera counts. Each model used the same outcome reference for each scored window. All forecasts were fixed before numerical outcomes were read.</p>
+</details>
+<p><a href="results.json">Download aggregate results</a> · <a href="https://doi.org/10.6084/m9.figshare.4543435.v5">Fukuchi running dataset</a> · <a href="https://doi.org/10.7717/peerj.3298">Study methods</a></p>
+</main></body></html>

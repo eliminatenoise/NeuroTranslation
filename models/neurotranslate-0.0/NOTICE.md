@@ -65,3 +65,5 @@ The cross-limb control models use the WAY-EEG-GAL dataset of Luciw, Jarocka and 
 The first-use landmark readout ships the Brain2Body mixed geometry parameters with attribution under CC BY 4.0. The package adds a JSON reader around the CC0 forecaster and an invented seven-point example. Keep the SLEAP and recording credits with the fit. [Landmark source credits and licenses](first_use_body/SOURCES.md)
 
 The next-unit readout uses the five coefficients fitted to Shin and Jadhav’s JS14 recording and the CC0 benchmark’s trial-history and normalization code. This package adds JSON input, raw scores and worked prefixes. [Spike source credits and licenses](next_neuron_prediction/NOTICE.md)
+
+The fingertip study uses derived population weights and statistics from the human tactile data of Delhaye and colleagues. The original data are available under CC BY 4.0. [Source, citation and reproduction](joint_alpha/touch/README.md).

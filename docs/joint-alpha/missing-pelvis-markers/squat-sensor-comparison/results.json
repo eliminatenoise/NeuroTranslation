@@ -1,0 +1,383 @@
+{
+  "dataset": "https://doi.org/10.5281/zenodo.24194741",
+  "paper": "https://doi.org/10.1038/s41597-026-08550-z",
+  "study_scope": "Exploratory deep-squat study at one lab using previously studied people.",
+  "candidate_people": 12,
+  "eligible_people": 8,
+  "omissions": {
+    "missing_or_unresolved_electrode": 3,
+    "no_matched_measured_endpoint": 1
+  },
+  "forecast_ms": 100,
+  "delayed_analog_control_ms": 1000,
+  "attention_parameters": 9314,
+  "attention_steps_per_fit": 96,
+  "batch_size": 64,
+  "seeds": [
+    11,
+    23,
+    37
+  ],
+  "fold_test_people": [
+    2,
+    2,
+    2,
+    2
+  ],
+  "results": {
+    "all": {
+      "four_markers": {
+        "people": 8,
+        "windows": 1151,
+        "metrics": {
+          "zero_displacement": {
+            "person_weighted_mean_absolute_error_mm": 22.202166918845652,
+            "pooled_p90_absolute_error_mm": 75.00987243652344
+          },
+          "continued_camera_speed": {
+            "person_weighted_mean_absolute_error_mm": 5.146578471637907,
+            "pooled_p90_absolute_error_mm": 14.49273681640625
+          },
+          "ridge_camera": {
+            "person_weighted_mean_absolute_error_mm": 4.524776857301061,
+            "pooled_p90_absolute_error_mm": 9.4675382289923
+          },
+          "attention_camera": {
+            "person_weighted_mean_absolute_error_mm": 8.720196848765628,
+            "pooled_p90_absolute_error_mm": 18.958518030756593
+          },
+          "ridge_camera_force": {
+            "person_weighted_mean_absolute_error_mm": 3.426506235781983,
+            "pooled_p90_absolute_error_mm": 6.546496065030006
+          },
+          "attention_camera_force": {
+            "person_weighted_mean_absolute_error_mm": 7.023490233233364,
+            "pooled_p90_absolute_error_mm": 18.05722855560606
+          },
+          "ridge_camera_emg": {
+            "person_weighted_mean_absolute_error_mm": 4.537022406286839,
+            "pooled_p90_absolute_error_mm": 10.063583025608622
+          },
+          "attention_camera_emg": {
+            "person_weighted_mean_absolute_error_mm": 9.348266496440676,
+            "pooled_p90_absolute_error_mm": 24.053703041715792
+          },
+          "ridge_camera_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 3.7387133060384072,
+            "pooled_p90_absolute_error_mm": 7.817570339823078
+          },
+          "attention_camera_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 8.359474418974369,
+            "pooled_p90_absolute_error_mm": 21.988903505344084
+          },
+          "ridge_camera_delayed_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 5.247900494909412,
+            "pooled_p90_absolute_error_mm": 10.752396723103569
+          },
+          "attention_camera_delayed_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 9.647814439825922,
+            "pooled_p90_absolute_error_mm": 22.06571124131338
+          }
+        }
+      },
+      "back_pair": {
+        "people": 8,
+        "windows": 1659,
+        "metrics": {
+          "zero_displacement": {
+            "person_weighted_mean_absolute_error_mm": 31.185511636677397,
+            "pooled_p90_absolute_error_mm": 83.5152801513672
+          },
+          "continued_camera_speed": {
+            "person_weighted_mean_absolute_error_mm": 7.927595879491137,
+            "pooled_p90_absolute_error_mm": 20.9023681640625
+          },
+          "ridge_camera": {
+            "person_weighted_mean_absolute_error_mm": 5.763151646829158,
+            "pooled_p90_absolute_error_mm": 13.113084086972808
+          },
+          "attention_camera": {
+            "person_weighted_mean_absolute_error_mm": 12.18132235577169,
+            "pooled_p90_absolute_error_mm": 29.46623699791017
+          },
+          "ridge_camera_force": {
+            "person_weighted_mean_absolute_error_mm": 4.217031411984532,
+            "pooled_p90_absolute_error_mm": 9.298905814677868
+          },
+          "attention_camera_force": {
+            "person_weighted_mean_absolute_error_mm": 11.165875652094748,
+            "pooled_p90_absolute_error_mm": 31.268992956662277
+          },
+          "ridge_camera_emg": {
+            "person_weighted_mean_absolute_error_mm": 6.153595507967857,
+            "pooled_p90_absolute_error_mm": 15.61891158297286
+          },
+          "attention_camera_emg": {
+            "person_weighted_mean_absolute_error_mm": 12.896341068068061,
+            "pooled_p90_absolute_error_mm": 31.792059572925524
+          },
+          "ridge_camera_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 4.547803329988188,
+            "pooled_p90_absolute_error_mm": 10.814416597511093
+          },
+          "attention_camera_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 11.416406571737529,
+            "pooled_p90_absolute_error_mm": 29.585790452528865
+          },
+          "ridge_camera_delayed_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 6.673130554032747,
+            "pooled_p90_absolute_error_mm": 15.265605054700002
+          },
+          "attention_camera_delayed_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 14.225908550694648,
+            "pooled_p90_absolute_error_mm": 37.33682384165525
+          }
+        }
+      }
+    },
+    "native_camera_gap": {
+      "four_markers": {
+        "people": 8,
+        "windows": 84,
+        "metrics": {
+          "zero_displacement": {
+            "person_weighted_mean_absolute_error_mm": 79.84177935464041,
+            "pooled_p90_absolute_error_mm": 128.51585388183594
+          },
+          "continued_camera_speed": {
+            "person_weighted_mean_absolute_error_mm": 4.159415908086867,
+            "pooled_p90_absolute_error_mm": 10.56637420654297
+          },
+          "ridge_camera": {
+            "person_weighted_mean_absolute_error_mm": 7.233533236215427,
+            "pooled_p90_absolute_error_mm": 15.416026787619954
+          },
+          "attention_camera": {
+            "person_weighted_mean_absolute_error_mm": 12.783014901200481,
+            "pooled_p90_absolute_error_mm": 35.3386718621222
+          },
+          "ridge_camera_force": {
+            "person_weighted_mean_absolute_error_mm": 5.536244066183661,
+            "pooled_p90_absolute_error_mm": 11.221626858989977
+          },
+          "attention_camera_force": {
+            "person_weighted_mean_absolute_error_mm": 14.186716082792623,
+            "pooled_p90_absolute_error_mm": 30.713879625641287
+          },
+          "ridge_camera_emg": {
+            "person_weighted_mean_absolute_error_mm": 9.258267258777735,
+            "pooled_p90_absolute_error_mm": 18.20497145310133
+          },
+          "attention_camera_emg": {
+            "person_weighted_mean_absolute_error_mm": 19.764972659125053,
+            "pooled_p90_absolute_error_mm": 40.49593835201488
+          },
+          "ridge_camera_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 7.530017972852451,
+            "pooled_p90_absolute_error_mm": 14.291405674173529
+          },
+          "attention_camera_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 21.63478963627925,
+            "pooled_p90_absolute_error_mm": 35.60643466855949
+          },
+          "ridge_camera_delayed_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 8.615823178322337,
+            "pooled_p90_absolute_error_mm": 16.592262368261817
+          },
+          "attention_camera_delayed_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 18.083354075167495,
+            "pooled_p90_absolute_error_mm": 40.24845936516861
+          }
+        }
+      },
+      "back_pair": {
+        "people": 8,
+        "windows": 551,
+        "metrics": {
+          "zero_displacement": {
+            "person_weighted_mean_absolute_error_mm": 58.90575801737982,
+            "pooled_p90_absolute_error_mm": 96.17062377929688
+          },
+          "continued_camera_speed": {
+            "person_weighted_mean_absolute_error_mm": 14.966807796047265,
+            "pooled_p90_absolute_error_mm": 32.652191162109375
+          },
+          "ridge_camera": {
+            "person_weighted_mean_absolute_error_mm": 9.595209846823362,
+            "pooled_p90_absolute_error_mm": 19.002563273352784
+          },
+          "attention_camera": {
+            "person_weighted_mean_absolute_error_mm": 21.410260388947098,
+            "pooled_p90_absolute_error_mm": 41.110393251587155
+          },
+          "ridge_camera_force": {
+            "person_weighted_mean_absolute_error_mm": 6.5958833670645935,
+            "pooled_p90_absolute_error_mm": 15.714518948772088
+          },
+          "attention_camera_force": {
+            "person_weighted_mean_absolute_error_mm": 20.81264032670946,
+            "pooled_p90_absolute_error_mm": 44.4571272559739
+          },
+          "ridge_camera_emg": {
+            "person_weighted_mean_absolute_error_mm": 9.796173785701281,
+            "pooled_p90_absolute_error_mm": 22.20998586934032
+          },
+          "attention_camera_emg": {
+            "person_weighted_mean_absolute_error_mm": 22.9651743083204,
+            "pooled_p90_absolute_error_mm": 42.14169940267732
+          },
+          "ridge_camera_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 7.202712619932164,
+            "pooled_p90_absolute_error_mm": 18.346486099144457
+          },
+          "attention_camera_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 19.60813926815201,
+            "pooled_p90_absolute_error_mm": 38.935012155101845
+          },
+          "ridge_camera_delayed_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 10.600877901709385,
+            "pooled_p90_absolute_error_mm": 21.34340842832163
+          },
+          "attention_camera_delayed_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 26.019052909075867,
+            "pooled_p90_absolute_error_mm": 47.98361637494813
+          }
+        }
+      }
+    },
+    "complete_camera_history": {
+      "four_markers": {
+        "people": 8,
+        "windows": 1067,
+        "metrics": {
+          "zero_displacement": {
+            "person_weighted_mean_absolute_error_mm": 17.893568939891082,
+            "pooled_p90_absolute_error_mm": 66.2314697265625
+          },
+          "continued_camera_speed": {
+            "person_weighted_mean_absolute_error_mm": 5.18437687891777,
+            "pooled_p90_absolute_error_mm": 14.672518920898437
+          },
+          "ridge_camera": {
+            "person_weighted_mean_absolute_error_mm": 4.1863305976402145,
+            "pooled_p90_absolute_error_mm": 8.616320843984038
+          },
+          "attention_camera": {
+            "person_weighted_mean_absolute_error_mm": 8.409464958300571,
+            "pooled_p90_absolute_error_mm": 17.85637322341234
+          },
+          "ridge_camera_force": {
+            "person_weighted_mean_absolute_error_mm": 3.1897102291711192,
+            "pooled_p90_absolute_error_mm": 5.999232880283231
+          },
+          "attention_camera_force": {
+            "person_weighted_mean_absolute_error_mm": 6.52863890996558,
+            "pooled_p90_absolute_error_mm": 16.16588877409619
+          },
+          "ridge_camera_emg": {
+            "person_weighted_mean_absolute_error_mm": 4.118503395146423,
+            "pooled_p90_absolute_error_mm": 9.185606802692401
+          },
+          "attention_camera_emg": {
+            "person_weighted_mean_absolute_error_mm": 8.650225906796406,
+            "pooled_p90_absolute_error_mm": 22.441064075921595
+          },
+          "ridge_camera_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 3.396911264471427,
+            "pooled_p90_absolute_error_mm": 6.736492139833777
+          },
+          "attention_camera_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 7.4204489124247175,
+            "pooled_p90_absolute_error_mm": 19.138314335488367
+          },
+          "ridge_camera_delayed_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 4.859133150939382,
+            "pooled_p90_absolute_error_mm": 10.33841029553658
+          },
+          "attention_camera_delayed_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 8.992090963491219,
+            "pooled_p90_absolute_error_mm": 20.793323934117947
+          }
+        }
+      },
+      "back_pair": {
+        "people": 8,
+        "windows": 1108,
+        "metrics": {
+          "zero_displacement": {
+            "person_weighted_mean_absolute_error_mm": 19.647292868556825,
+            "pooled_p90_absolute_error_mm": 67.9110595703125
+          },
+          "continued_camera_speed": {
+            "person_weighted_mean_absolute_error_mm": 5.361056361903914,
+            "pooled_p90_absolute_error_mm": 14.641552734375
+          },
+          "ridge_camera": {
+            "person_weighted_mean_absolute_error_mm": 4.103570560293525,
+            "pooled_p90_absolute_error_mm": 8.545769128475285
+          },
+          "attention_camera": {
+            "person_weighted_mean_absolute_error_mm": 8.331207084503951,
+            "pooled_p90_absolute_error_mm": 18.14244111332333
+          },
+          "ridge_camera_force": {
+            "person_weighted_mean_absolute_error_mm": 3.257426888570752,
+            "pooled_p90_absolute_error_mm": 6.40831995335765
+          },
+          "attention_camera_force": {
+            "person_weighted_mean_absolute_error_mm": 6.971251264849465,
+            "pooled_p90_absolute_error_mm": 17.55802866487115
+          },
+          "ridge_camera_emg": {
+            "person_weighted_mean_absolute_error_mm": 4.339317712060863,
+            "pooled_p90_absolute_error_mm": 9.453957544434843
+          },
+          "attention_camera_emg": {
+            "person_weighted_mean_absolute_error_mm": 8.909618128768528,
+            "pooled_p90_absolute_error_mm": 23.286106052577487
+          },
+          "ridge_camera_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 3.3507327628274926,
+            "pooled_p90_absolute_error_mm": 6.3141659861028865
+          },
+          "attention_camera_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 8.241551496958174,
+            "pooled_p90_absolute_error_mm": 20.051628362795327
+          },
+          "ridge_camera_delayed_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 4.7841516405233815,
+            "pooled_p90_absolute_error_mm": 10.070407385044081
+          },
+          "attention_camera_delayed_force_emg": {
+            "person_weighted_mean_absolute_error_mm": 8.953855300540189,
+            "pooled_p90_absolute_error_mm": 20.299653962224962
+          }
+        }
+      }
+    },
+    "unresolved_camera_history": {
+      "four_markers": {
+        "people": 0,
+        "windows": 0,
+        "metrics": {}
+      },
+      "back_pair": {
+        "people": 0,
+        "windows": 0,
+        "metrics": {}
+      }
+    },
+    "no_shared_marker": {
+      "four_markers": {
+        "people": 0,
+        "windows": 0,
+        "metrics": {}
+      },
+      "back_pair": {
+        "people": 0,
+        "windows": 0,
+        "metrics": {}
+      }
+    }
+  }
+}

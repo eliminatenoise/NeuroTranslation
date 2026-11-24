@@ -6,7 +6,7 @@ import json
 import webbrowser
 
 from joint_alpha.game_mount import GameMount
-from joint_alpha.product import HERE, TITLE, Product, examples
+from joint_alpha.product import HERE, TOUCH_TASK, TOUCH_WEIGHTS, WEIGHTS, Product, examples
 
 ASSETS = {
     "/": ("demo.html", "text/html; charset=utf-8"),
@@ -90,17 +90,20 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--no-browser", action="store_true", help="print the address without opening a browser")
     parser.add_argument("--game", metavar="DIR", help="open a locally supplied game directory with a joint-game.json inventory")
+    parser.add_argument("--touch", action="store_true", help="run all eight tasks with the experimental touch checkpoint")
     args = parser.parse_args()
     try:
         game = GameMount(args.game) if args.game else None
     except (ValueError, OSError) as exc:
         parser.error(str(exc))
-    product = Product()
-    cases = examples()
+    product = Product(TOUCH_WEIGHTS if args.touch else WEIGHTS)
+    cases = examples(with_touch=product.with_touch)
     descriptions = json.loads((HERE / "tasks.json").read_text(encoding="utf-8"))
+    if product.with_touch:
+        descriptions[TOUCH_TASK] = json.loads((HERE / "touch" / "display.json").read_text(encoding="utf-8"))
     if set(descriptions) != set(cases) or set(cases) != set(product.model.tasks):
         raise ValueError("The model, examples and display labels must describe the same tasks.")
-    catalog = {"game_mounted": bool(game), "model": TITLE, "checkpoint_sha256": product.digest,
+    catalog = {"game_mounted": bool(game), "initial_task": TOUCH_TASK if product.with_touch else None, "model": product.title, "checkpoint_sha256": product.digest,
                "tasks": {k: {"schema": v, "description": descriptions[k], "example": cases[k]}
                          for k, v in product.catalog().items()}}
     handler = partial(Demo, product=product, catalog=catalog, game=game)
@@ -108,7 +111,7 @@ def main():
         url = "http://127.0.0.1:" + str(server.server_port)
         if game:
             url += "/game/"
-        print(f"{TITLE}\n{url}\nKeep this window open. Press Ctrl+C to stop.", flush=True)
+        print(f"{product.title}\n{url}\nKeep this window open. Press Ctrl+C to stop.", flush=True)
         if not args.no_browser:
             webbrowser.open(url)
         try:

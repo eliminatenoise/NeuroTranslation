@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Compare four camera-only forecasts of pelvis movement on Melbourne treadmill walking and see how the scoring window affects the result.">
+<title>Can a running forecast carry over to walking? · NeuroTranslation</title>
+<style>
+:root{color-scheme:light;color:#18362d;background:#f8faf5;font:17px/1.6 system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0}[hidden]{display:none!important}
+main{max-width:58rem;margin:auto;padding:clamp(1.25rem,4vw,2.7rem) 1rem 4rem}
+nav{display:flex;align-items:baseline;flex-wrap:wrap;gap:.3rem 1.4rem;font-size:.85rem}
+nav a:first-child{font-weight:700}a{color:#1a4f42;text-underline-offset:.2em}
+:focus-visible{outline:3px solid #18614e;outline-offset:3px}p{max-width:72ch;margin:.55rem 0 .8rem}
+h1{font-size:clamp(2.05rem,5.7vw,4.15rem);line-height:1.03;letter-spacing:-.045em;margin:.45em 0 .35em;max-width:19ch}
+h2{font-size:1.38rem;line-height:1.2;margin:1.5em 0 .35em;letter-spacing:-.02em}
+.intro{font-size:1.08rem}.support{color:#3c5c50;font-size:.92rem}.result{margin:1rem 0 1.8rem}
+.result h2{margin-top:.8rem}.difference{border-left:3px solid #7fa692;padding:.35rem 0 .35rem .7rem}
+label{display:block;max-width:22rem;font-weight:660;margin:1.2rem 0 0}
+select{display:block;width:100%;min-height:2.7rem;padding:.3rem .5rem;margin-top:.25rem;border:1px solid #859c90;border-radius:.3rem;color:inherit;background:#fff;font:inherit}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;line-height:1.35;margin:.6rem 0 1rem}
+caption{text-align:left;font-weight:680;padding:.3rem 0}th,td{border-bottom:1px solid #c6d5ca;padding:.5rem .38rem;text-align:left;vertical-align:top}
+thead th{border-bottom:2px solid #829589;text-align:right}thead th:first-child{text-align:left}
+tbody th{font-weight:540}td{text-align:right}tbody tr:nth-child(even){background:#edf3ec}td.lowest{background:#dbeadd;color:#173b2e;font-weight:760}
+.gaps{font-size:.88rem}.interval{white-space:normal}details{margin:1rem 0}summary{font-weight:690;cursor:pointer}
+@media(max-width:31rem){main{padding:1.1rem .72rem 3rem}table{font-size:.86rem}.gaps{font-size:.71rem}th,td{padding:.43rem .17rem}.gaps th:last-child{max-width:5rem}.gaps td:last-child .interval{display:block}}
+.pick{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;max-width:44rem;margin:1.25rem 0}
+.pick label{margin:0;min-width:0}
+@media(max-width:31rem){.pick{grid-template-columns:1fr;gap:.65rem}.gaps th:last-child{width:30%}}
+</style>
+</head>
+<body><main>
+<nav aria-label="Related studies">
+  <a href="../../../">NeuroTranslation</a>
+  <a href="../kuopio-jogging/">Kuopio jogging comparison</a>
+  <a href="../melbourne-force/">Melbourne treadmill force follow-up</a>
+  <a href="../stride-demo/">Try the stride forecast</a>
+</nav>
+<h1>Can a running forecast carry over to walking?</h1>
+<p class="intro">We used the last 80 camera readings to forecast how far four markers around the pelvis would rise or fall 100 milliseconds later. Replaying an earlier stride missed the measured change by <strong>3.38 mm on average</strong>. Adding the correction learned from running raised the error to <strong>5.44 mm</strong> across the seven Melbourne walkers whose readings met the scoring rule.</p>
+<p>The cameras supplied the inputs and the later marker heights used to check each forecast. Force readings from the treadmill plates set the windows for the main comparison. Switch to the first 15 seconds to include forecasts outside those windows. Both comparisons scored the same seven people.</p>
+<div class="pick" id="pick" hidden>
+  <label for="marker-target">Markers in the forecast
+    <select id="marker-target">
+      <option value="four_marker">All four pelvis markers</option>
+      <option value="rear_pair">The two rear markers</option>
+    </select>
+  </label>
+  <label for="comparison">Which forecasts count?
+    <select id="comparison">
+      <option value="force_bounded_primary">Force-plate windows</option>
+      <option value="full_prefix_sensitivity">First 15 seconds</option>
+    </select>
+  </label>
+</div>
+
+<section class="result" data-comparison="force_bounded_primary" data-target="four_marker" aria-labelledby="force_bounded_primary-four_marker">
+  <h2 id="force_bounded_primary-four_marker">Force-plate windows · All four pelvis markers</h2>
+  <p class="support">7 people · 920 scored forecasts out of 2,362 scheduled</p>
+  <table class="forecast">
+    <caption>Forecast error in millimetres</caption>
+    <thead><tr><th scope="col">Method</th><th scope="col">Average</th><th scope="col">90th percentile</th></tr></thead>
+    <tbody><tr><th scope="row">Predict zero movement</th><td>11.07</td><td>18.41</td></tr><tr><th scope="row">Continue recent camera speed</th><td>8.61</td><td>16.40</td></tr><tr><th scope="row">Replay an earlier stride</th><td class="lowest">3.38</td><td>7.03</td></tr><tr><th scope="row">Replay plus learned correction</th><td>5.44</td><td>11.62</td></tr></tbody>
+  </table>
+  <p class="difference">Change in average error after adding the correction <strong>+2.06 mm <span class="interval">(+1.43 to +2.78 mm)</span></strong>. The whole 95% interval is above zero.</p>
+  <details>
+    <summary>See which readings qualified</summary>
+    <p>1,442 forecasts were withheld at the last reading. All 920 forecasts made had a later reading that qualified. For 872 scored forecasts, all four markers passed the residual rule throughout the 80-frame history.</p>
+    <table class="gaps">
+      <caption>Marker availability in the released export</caption>
+      <thead><tr><th scope="col">History</th><th scope="col">Scheduled</th><th scope="col">Scored</th>
+      <th scope="col">People</th><th scope="col">Change in error</th></tr></thead><tbody><tr><th scope="row">All markers present</th><td>2,362</td><td>920</td><td>7</td><td>+2.06 mm <span class="interval">(+1.43 to +2.78 mm)</span></td></tr><tr><th scope="row">Front gaps only</th><td>0</td><td>0</td><td>0</td><td>—</td></tr><tr><th scope="row">Rear gaps only</th><td>0</td><td>0</td><td>0</td><td>—</td></tr><tr><th scope="row">Front and rear gaps</th><td>0</td><td>0</td><td>0</td><td>—</td></tr></tbody>
+    </table>
+    <p>A dash marks fewer than six scored people. “All markers present” describes recorded positions. The residual rule is checked separately.</p>
+  </details>
+</section>
+
+<section class="result" data-comparison="force_bounded_primary" data-target="rear_pair" aria-labelledby="force_bounded_primary-rear_pair">
+  <h2 id="force_bounded_primary-rear_pair">Force-plate windows · The two rear markers</h2>
+  <p class="support">7 people · 920 scored forecasts out of 2,362 scheduled</p>
+  <table class="forecast">
+    <caption>Forecast error in millimetres</caption>
+    <thead><tr><th scope="col">Method</th><th scope="col">Average</th><th scope="col">90th percentile</th></tr></thead>
+    <tbody><tr><th scope="row">Predict zero movement</th><td>10.93</td><td>18.49</td></tr><tr><th scope="row">Continue recent camera speed</th><td>8.77</td><td>16.33</td></tr><tr><th scope="row">Replay an earlier stride</th><td class="lowest">3.63</td><td>7.54</td></tr><tr><th scope="row">Replay plus learned correction</th><td>6.18</td><td>13.03</td></tr></tbody>
+  </table>
+  <p class="difference">Change in average error after adding the correction <strong>+2.55 mm <span class="interval">(+1.81 to +3.38 mm)</span></strong>. The whole 95% interval is above zero.</p>
+  <details>
+    <summary>See which readings qualified</summary>
+    <p>1,442 forecasts were withheld at the last reading. All 920 forecasts made had a later reading that qualified. For 872 scored forecasts, all four markers passed the residual rule throughout the 80-frame history.</p>
+    <table class="gaps">
+      <caption>Marker availability in the released export</caption>
+      <thead><tr><th scope="col">History</th><th scope="col">Scheduled</th><th scope="col">Scored</th>
+      <th scope="col">People</th><th scope="col">Change in error</th></tr></thead><tbody><tr><th scope="row">All markers present</th><td>2,362</td><td>920</td><td>7</td><td>+2.55 mm <span class="interval">(+1.81 to +3.38 mm)</span></td></tr><tr><th scope="row">Front gaps only</th><td>0</td><td>0</td><td>0</td><td>—</td></tr><tr><th scope="row">Rear gaps only</th><td>0</td><td>0</td><td>0</td><td>—</td></tr><tr><th scope="row">Front and rear gaps</th><td>0</td><td>0</td><td>0</td><td>—</td></tr></tbody>
+    </table>
+    <p>A dash marks fewer than six scored people. “All markers present” describes recorded positions. The residual rule is checked separately.</p>
+  </details>
+</section>
+
+<section class="result" data-comparison="full_prefix_sensitivity" data-target="four_marker" aria-labelledby="full_prefix_sensitivity-four_marker">
+  <h2 id="full_prefix_sensitivity-four_marker">First 15 seconds · All four pelvis markers</h2>
+  <p class="support">7 people · 987 scored forecasts out of 2,538 scheduled</p>
+  <table class="forecast">
+    <caption>Forecast error in millimetres</caption>
+    <thead><tr><th scope="col">Method</th><th scope="col">Average</th><th scope="col">90th percentile</th></tr></thead>
+    <tbody><tr><th scope="row">Predict zero movement</th><td>11.07</td><td>18.31</td></tr><tr><th scope="row">Continue recent camera speed</th><td>8.63</td><td>16.43</td></tr><tr><th scope="row">Replay an earlier stride</th><td class="lowest">3.40</td><td>7.16</td></tr><tr><th scope="row">Replay plus learned correction</th><td>5.48</td><td>11.66</td></tr></tbody>
+  </table>
+  <p class="difference">Change in average error after adding the correction <strong>+2.08 mm <span class="interval">(+1.48 to +2.75 mm)</span></strong>. The whole 95% interval is above zero.</p>
+  <details>
+    <summary>See which readings qualified</summary>
+    <p>1,551 forecasts were withheld at the last reading. All 987 forecasts made had a later reading that qualified. For 933 scored forecasts, all four markers passed the residual rule throughout the 80-frame history.</p>
+    <table class="gaps">
+      <caption>Marker availability in the released export</caption>
+      <thead><tr><th scope="col">History</th><th scope="col">Scheduled</th><th scope="col">Scored</th>
+      <th scope="col">People</th><th scope="col">Change in error</th></tr></thead><tbody><tr><th scope="row">All markers present</th><td>2,538</td><td>987</td><td>7</td><td>+2.08 mm <span class="interval">(+1.48 to +2.75 mm)</span></td></tr><tr><th scope="row">Front gaps only</th><td>0</td><td>0</td><td>0</td><td>—</td></tr><tr><th scope="row">Rear gaps only</th><td>0</td><td>0</td><td>0</td><td>—</td></tr><tr><th scope="row">Front and rear gaps</th><td>0</td><td>0</td><td>0</td><td>—</td></tr></tbody>
+    </table>
+    <p>A dash marks fewer than six scored people. “All markers present” describes recorded positions. The residual rule is checked separately.</p>
+  </details>
+</section>
+
+<section class="result" data-comparison="full_prefix_sensitivity" data-target="rear_pair" aria-labelledby="full_prefix_sensitivity-rear_pair">
+  <h2 id="full_prefix_sensitivity-rear_pair">First 15 seconds · The two rear markers</h2>
+  <p class="support">7 people · 987 scored forecasts out of 2,538 scheduled</p>
+  <table class="forecast">
+    <caption>Forecast error in millimetres</caption>
+    <thead><tr><th scope="col">Method</th><th scope="col">Average</th><th scope="col">90th percentile</th></tr></thead>
+    <tbody><tr><th scope="row">Predict zero movement</th><td>10.93</td><td>18.44</td></tr><tr><th scope="row">Continue recent camera speed</th><td>8.80</td><td>16.35</td></tr><tr><th scope="row">Replay an earlier stride</th><td class="lowest">3.65</td><td>7.62</td></tr><tr><th scope="row">Replay plus learned correction</th><td>6.22</td><td>13.03</td></tr></tbody>
+  </table>
+  <p class="difference">Change in average error after adding the correction <strong>+2.57 mm <span class="interval">(+1.89 to +3.34 mm)</span></strong>. The whole 95% interval is above zero.</p>
+  <details>
+    <summary>See which readings qualified</summary>
+    <p>1,551 forecasts were withheld at the last reading. All 987 forecasts made had a later reading that qualified. For 933 scored forecasts, all four markers passed the residual rule throughout the 80-frame history.</p>
+    <table class="gaps">
+      <caption>Marker availability in the released export</caption>
+      <thead><tr><th scope="col">History</th><th scope="col">Scheduled</th><th scope="col">Scored</th>
+      <th scope="col">People</th><th scope="col">Change in error</th></tr></thead><tbody><tr><th scope="row">All markers present</th><td>2,538</td><td>987</td><td>7</td><td>+2.57 mm <span class="interval">(+1.89 to +3.34 mm)</span></td></tr><tr><th scope="row">Front gaps only</th><td>0</td><td>0</td><td>0</td><td>—</td></tr><tr><th scope="row">Rear gaps only</th><td>0</td><td>0</td><td>0</td><td>—</td></tr><tr><th scope="row">Front and rear gaps</th><td>0</td><td>0</td><td>0</td><td>—</td></tr></tbody>
+    </table>
+    <p>A dash marks fewer than six scored people. “All markers present” describes recorded positions. The residual rule is checked separately.</p>
+  </details>
+</section>
+<p>We applied the contact rule to the force values stored in the C3D files. The authors corrected documented vertical force offsets in derived files, including for one recording scored here. <a href="https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41597-024-03444-4/MediaObjects/41597_2024_3444_MOESM1_ESM.pdf">Study supplement, Table S3</a>.</p>
+<h2>Why seven of the 18 recordings could be scored</h2>
+<p>The study archive had 21 walking recordings for this task. We set aside one for checking the camera and force file setup and held one because its published archive checksums disagreed. Of the 19 test candidates, one file’s header declared zero camera marker points. We decoded the first 15 seconds from the other 18 recordings. The recorded task was unconstrained treadmill walking at the study setting of 1.1 m/s and each walker’s preferred step rate.</p>
+<p>All 18 exports reported positions for all four markers in every frame. In 11 files, the separate reconstruction field, called a residual, was zero for all 6,000 marker readings. C3D uses zero when a position comes from processing such as filtering, interpolation or modelling. The zeros leave the original camera reconstruction evidence unavailable. The export leaves both the specific processing step and the accuracy of those positions unresolved. <a href="https://www.c3d.org/HTML/Documents/3dpointresiduals.htm">How C3D records residuals</a>.</p>
+<p>Our rule required a positive residual for any marker reading used in a forecast or its score. That left seven people for both marker targets. We used that rule throughout. The gap table describes which positions the released export marked as present. It cannot tell us whether gaps were filled before export.</p>
+<details>
+  <summary>How the plate windows and forecasts were made</summary>
+  <p>The camera stored 100 frames per second. The original force channels stored 2,000 readings per second on the same file clock. We matched each camera frame to the first force sample in its group of 20. The authors’ 1,000 Hz gait index comes from a separate analysis.</p>
+  <p>We marked a contact where the magnitude of vertical force stayed at or above 50 newtons for at least 100 milliseconds. Contacts cut off by either end of the 15-second recording window were left out. In the main comparison, three consecutive, distinctly timed contacts had to alternate between the two plates. A forecast and its later measurement both had to fall between the first contact’s start and the third contact’s start, with the third start outside the interval. These rules identify plate-timing windows. The authors’ gait phase labels, the foot identity of each contact and physical plate geometry remain unverified here.</p>
+  <p>Every ten camera frames the methods used 80 consecutive readings ending at the forecast time. The target was the change in average height ten frames later. A forecast needed at least two available markers at its last reading. Scoring needed every marker in the selected average to pass the quality rule at both times.</p>
+  <p>The zero method predicts unchanged height. The camera-speed method extends the last 50 milliseconds of measured change. The replay method finds a similar stretch in the earlier camera readings from the same trial and borrows the change that followed it. The fourth method applies the same correction previously fitted on Fukuchi running recordings. We kept those weights fixed and saved every forecast before calculating the later displacements. When there was no usable camera-speed estimate or earlier stride, the corresponding method assumed zero change.</p>
+</details>
+<details>
+  <summary>How to read the errors and intervals</summary>
+  <p>The average uses absolute errors. We take each person’s average first and give every person equal weight. The 90th percentile marks the start of the largest tenth of errors across the scored forecasts.</p>
+  <p>To estimate the change after adding the correction, we compared the two methods on the same forecasts. We resampled people 5,000 times and kept each pair together. The 95% intervals are percentile intervals without adjustment for multiple comparisons. The gap groups describe these recordings. Groups with fewer than six scored people show counts alone.</p>
+  <p>This test changes the site, equipment and activity together. Measuring the effect of camera rate alone would require holding those conditions steady. The estimates here describe the seven people that the rule admitted for scoring.</p>
+</details>
+<p>Walking recordings by Tomislav Baček and colleagues. The Melbourne source dataset, version 1, is released under CC BY 4.0.</p>
+<p><a href="results.json" download>Download aggregate results</a> · <a href="https://doi.org/10.26188/24288265.v1">Source dataset</a> · <a href="https://doi.org/10.1038/s41597-024-03444-4">Recording methods</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Source licence</a></p>
+</main>
+<script>
+const markers = document.querySelector('#marker-target');
+const comparison = document.querySelector('#comparison');
+const panels = document.querySelectorAll('.result');
+function showSelection() {
+  for (const panel of panels) {
+    panel.hidden = panel.dataset.target !== markers.value || panel.dataset.comparison !== comparison.value;
+  }
+}
+showSelection();
+markers.addEventListener('change', showSelection);
+comparison.addEventListener('change', showSelection);
+document.querySelector('#pick').hidden = false;
+</script>
+</body>
+</html>

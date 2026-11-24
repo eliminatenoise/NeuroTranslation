@@ -11,7 +11,7 @@
   <header class="topbar">
     <a class="brand" href="#"><span class="brandmark" aria-hidden="true">N↔</span>NeuroTranslator</a>
     <div class="topmeta">
-      <span class="local-status"><span class="statusdot" aria-hidden="true"></span>Browser-local processing</span>
+      <span class="local-status"><span class="statusdot" aria-hidden="true"></span>Files stay in this browser</span>
       <nav class="section-links" aria-label="On this page">
         <a href="./joint-alpha/" data-pages-href="./joint-alpha/">Joint alpha demo</a>
         <a href="#palm-replay">Palm replay</a>
@@ -23,11 +23,11 @@
   <main>
     <section class="intro">
       <div>
-        <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Bring the recordings together.</h1><p class="introtext">Follow the signals on a shared clock. Inspect each signal alongside its units and how its values were obtained.</p>
+        <p class="eyebrow">NEURAL · MUSCLE · MOVEMENT · MECHANICS</p><h1>Movement forecasts and recordings</h1><p class="introtext">Open a study below to compare a forecast with measurements. To inspect signals directly, load the example or import your own recording.</p>
         <nav class="section-links wrist-links" aria-label="Study recordings">
           <a href="./first-use-body/index.html" data-pages-href="./first-use-body/index.html">Forecast a moving body</a>
 
-          <a href="./next-neuron-prediction/index.html" data-pages-href="./next-neuron-prediction/index.html">Predict the next unit</a>
+          <a href="./next-neuron-prediction/index.html" data-pages-href="./next-neuron-prediction/index.html">Try Next Neuron Prediction</a>
 
           <a href="./cross-person-wrist/index.html" data-pages-href="./cross-person-wrist/index.html">Try the forecast on a different body</a>
           <a href="./human-wrist/index.html" data-pages-href="./human-wrist/index.html">Forecast both wrists on a second day</a>
@@ -55,11 +55,11 @@
           <a href="./START.html" data-pages-href="./START.html">Start page: examples, recordings and downloads</a>
         </nav>
       </div>
-      <div class="introactions"><button class="button secondary" id="load-example">Load example</button><button class="button primary" id="import-open">＋ Import recordings</button></div>
+      <div class="introactions"><button class="button secondary" id="load-example">Load invented example</button><button class="button primary" id="import-open">＋ Import recordings</button></div>
     </section>
-    <div class="notice" id="example-notice"><span class="notice-icon">i</span><p><strong>Constructed example.</strong> These invented signals test the software. They are not biological recordings or model predictions.</p><button id="clear-all" class="textbutton">Clear example</button></div>
+    <div class="notice" id="example-notice"><span class="notice-icon">i</span><p><strong>Constructed example.</strong> This example shows invented signals supplied to test the interface.</p><button id="clear-all" class="textbutton">Clear example</button></div>
     <section class="study-readers" id="study-readers" aria-labelledby="study-readers-title">
-      <div class="study-choice-head"><h2 id="study-readers-title">Open a study recording</h2>
+      <div class="study-choice-head"><h2 id="study-readers-title">Study forecasts and recordings</h2>
         <label for="study-choice" id="study-choice-label" hidden>Recording source
           <select id="study-choice"></select>
         </label>
@@ -105,7 +105,7 @@
       </article>
       <article class="study-choice-card" data-study-key="lift" aria-labelledby="reader-lift">
         <h3 id="reader-lift">Grip during a lift · WAY-EEG-GAL</h3>
-        <p>Open a compatible lift or window in JSON. The grip reader forecasts force in newtons. The contact comparison asks what changes once a squeeze registers.</p>
+        <p>Open a compatible lift or window in JSON. The grip reader forecasts force in newtons. The contact comparison starts when a squeeze registers.</p>
         <nav class="section-links" aria-label="Grip during a lift · WAY-EEG-GAL actions">
           <a href="./grip-force/index.html" data-pages-href="./grip-force/index.html">Forecast grip force during a lift</a>
           <a href="./contact-force/index.html" data-pages-href="./contact-force/index.html">Compare forecasts after grip contact</a>
@@ -113,61 +113,61 @@
       </article>
       <article class="study-choice-card" data-study-key="grip-voltage" aria-labelledby="reader-grip-voltage">
         <h3 id="reader-grip-voltage">Cued grip · HYGRIP</h3>
-        <p>Open a prepared HYGRIP window or trial in JSON. Recent grip-sensor voltage and cue time give one forecast. Adding scalp EEG gives another. Readings are in volts and the study reports forecast error in millivolts.</p>
+        <p>Open a prepared HYGRIP window or trial in JSON. Recent grip-sensor voltage and cue time give one forecast. Adding scalp EEG gives another. The reader takes voltage in volts and reports study errors in millivolts.</p>
         <nav class="section-links" aria-label="Cued grip · HYGRIP actions">
           <a href="./hygrip-force/index.html" data-pages-href="./hygrip-force/index.html">Open the grip-voltage reader</a>
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="finger-transfer" aria-labelledby="cohort-choice"><h3 id="cohort-choice">A different person’s finger movement</h3><p>Learn from four people, calibrate on a fifth, then compare the cue with the recorded brain signal.</p><a href="finger-transfer/index.html">Run the five-person comparison</a></article>
       <article class="study-choice-card" data-study-key="first-use-body" aria-labelledby="reader-first-use-body">
-        <h3 id="reader-first-use-body">Where will a point on an unfamiliar body go?</h3><p>Watch the model follow the points already visible. Change the shape of the figure, hide its future and compare the forecast with where the points actually land.</p>
+        <h3 id="reader-first-use-body">Tracked points on an unfamiliar body</h3><p>Change the shape of an invented figure. The model forecasts the points from their visible positions. Reveal the later positions to compare them with the forecast.</p>
         <nav class="section-links" aria-label="Animal tracking and first-use forecasts"><a href="./first-use-body/index.html" data-pages-href="./first-use-body/index.html">Forecast a moving body</a> <a href="./papers/first-use-body/index.html" data-pages-href="./papers/first-use-body/index.html">Read the study</a></nav>
       </article>
 
       <article class="study-choice-card" data-study-key="next-neuron-prediction" aria-labelledby="reader-next-neuron-prediction">
-        <h3 id="reader-next-neuron-prediction">Which recorded neuron will fire next?</h3><p>Add a spike to a fictional recording and see what happens to the forecast for every unit. The benchmark compares these probabilities with the next recorded spike.</p>
-        <nav class="section-links" aria-label="Next Neuron Prediction"><a href="./next-neuron-prediction/index.html" data-pages-href="./next-neuron-prediction/index.html">Predict the next unit</a> <a href="./papers/next-neuron-prediction/index.html" data-pages-href="./papers/next-neuron-prediction/index.html">Read the study</a></nav>
+        <h3 id="reader-next-neuron-prediction">Next Neuron Prediction</h3><p>Add a spike to an invented recording to update the forecast for each unit, a source of spikes identified in a recording. The benchmark scores probabilities against the next recorded spike.</p>
+        <nav class="section-links" aria-label="Next Neuron Prediction"><a href="./next-neuron-prediction/index.html" data-pages-href="./next-neuron-prediction/index.html">Try Next Neuron Prediction</a> <a href="./papers/next-neuron-prediction/index.html" data-pages-href="./papers/next-neuron-prediction/index.html">Read the study</a></nav>
       </article>
 
       <article class="study-choice-card" data-study-key="cross-person-wrist" aria-labelledby="reader-cross-person-wrist">
-        <h3 id="reader-cross-person-wrist">What changes when a different person reaches?</h3>
-        <p>Train on one person’s right-wrist reaches. Test on another person’s left-wrist reaches. Try a fictional example and see how tracking the shoulders gives the forecast a reference point.</p>
+        <h3 id="reader-cross-person-wrist">Wrist forecasts for a different person</h3>
+        <p>The study fits one person’s right-wrist reaches and tests another person’s left-wrist reaches. Use the invented example to see the forecast relative to the shoulders.</p>
         <nav class="section-links" aria-label="Cross-person wrist study"><a href="./cross-person-wrist/index.html" data-pages-href="./cross-person-wrist/index.html">Open the model</a><a href="./papers/cross-person-wrist/index.html" data-pages-href="./papers/cross-person-wrist/index.html">Read the results</a><a href="https://eliminatenoise.github.io/Interoceptomics/cross-person-wrist/">Explore the shoulder frame</a></nav>
       </article>
       <article class="study-choice-card" data-study-key="human-wrist" aria-labelledby="reader-human-wrist">
-        <h3 id="reader-human-wrist">Can an arm forecast carry over to tomorrow?</h3>
-        <p>A camera tracks both wrists while electrodes record earlier electrical signals. Try a simulated reach and see what happened when the same forecasting methods faced a separate day of human recordings.</p>
+        <h3 id="reader-human-wrist">Wrist forecasts across recording days</h3>
+        <p>The study tests the same forecasting methods on a separate day of human recordings from wrist cameras and electrodes. The demo uses a simulated reach.</p>
         <nav class="section-links" aria-label="Human wrist forecasts"><a href="./human-wrist/index.html" data-pages-href="./human-wrist/index.html">Try the wrist model</a>
         <a href="./papers/human-wrist/index.html" data-pages-href="./papers/human-wrist/index.html">Read the study</a><a href="https://eliminatenoise.github.io/Interoceptomics/human-wrist/">Turn the electrode map</a></nav>
       </article>
       <article class="study-choice-card" data-study-key="reach-feedback-week" aria-labelledby="reader-one-week">
-        <h3 id="reader-one-week">Does the forecast work a week later?</h3>
-        <p>The macaque returns to the same task. Run the fitted movement and spike-count models on a later day, then follow the change in length of a muscle–tendon path.</p>
+        <h3 id="reader-one-week">Macaque reach forecasts one week later</h3>
+        <p>Run the fitted movement and spike-count models on a later recording of the same macaque task. The arm model shows how a muscle–tendon path changes length.</p>
         <nav class="section-links" aria-label="Week-later reaching study"><a href="./reach-feedback/one-week/index.html" data-pages-href="./reach-feedback/one-week/index.html">Run a later reach</a>
         <a href="./reach-feedback/one-week/muscle-paths/index.html" data-pages-href="./reach-feedback/one-week/muscle-paths/index.html">Inside the arm model</a>
         <a href="./papers/reach-feedback/one-week/index.html" data-pages-href="./papers/reach-feedback/one-week/index.html">Read the study</a><a href="https://eliminatenoise.github.io/Interoceptomics/reach-feedback/one-week/">Replay the arm in 3D</a></nav>
       </article>
       <article class="study-choice-card" data-study-key="reach-feedback" aria-labelledby="reader-reach-feedback">
-        <h3 id="reader-reach-feedback">After a reach, what will the sensory cortex do?</h3>
-        <p>A macaque reached for one target after another. See how well earlier movement and electrical activity predict where its hand goes, then compare the forecast with spikes recorded a tenth of a second later.</p>
+        <h3 id="reader-reach-feedback">Reach and sensory-cortex forecasts</h3>
+        <p>Compare forecasts of macaque hand movement and later spikes in the sensory cortex. The earlier movement and electrical activity are the inputs, and the spikes were recorded a tenth of a second later.</p>
         <nav class="section-links" aria-label="Reaching and sensory cortex"><a href="./reach-feedback/index.html" data-pages-href="./reach-feedback/index.html">Try a recorded reach</a>
         <a href="./papers/reach-feedback/index.html" data-pages-href="./papers/reach-feedback/index.html">Read the study</a><a href="https://eliminatenoise.github.io/Interoceptomics/reach-feedback/">Turn the arm paths in 3D</a></nav>
       </article>
       <article class="study-choice-card" data-study-key="cylinder-rotation" aria-labelledby="reader-cylinder-rotation">
-        <h3 id="reader-cylinder-rotation">How fast will the cylinder turn?</h3>
-        <p>The instrument on the lid of a cylinder records six numbers at each instant. Use the last twenty readings to estimate its next tenth of a second, or edit a reading and run the forecast again.</p>
+        <h3 id="reader-cylinder-rotation">Cylinder rotation from sensor readings</h3>
+        <p>Use the last twenty readings from a cylinder’s lid sensor to forecast its motion a tenth of a second ahead. Each instant has six values. Edit a value to run the forecast again.</p>
         <nav class="section-links" aria-label="Inertial forecast"><a href="./cylinder-rotation/index.html" data-pages-href="./cylinder-rotation/index.html">Compare sensor forecasts</a>
         <a href="./papers/cylinder-rotation/index.html" data-pages-href="./papers/cylinder-rotation/index.html">Read the study</a><a href="https://eliminatenoise.github.io/Interoceptomics/cylinder-rotation/">Replay the sensor in 3D</a></nav>
       </article>
       <article class="study-choice-card" data-study-key="target-reach" aria-labelledby="reader-target-reach">
-        <h3 id="reader-target-reach">Choose a destination</h3>
+        <h3 id="reader-target-reach">Cylinder forecasts after a target change</h3>
         <p>A volunteer moves a cylinder toward a circle. Give a model 200 milliseconds of the recorded path, change the requested target, and see where it predicts the object will go.</p>
         <nav class="section-links" aria-label="Object transport study"><a href="./target-reach/index.html" data-pages-href="./target-reach/index.html">Try a new target</a>
         <a href="./papers/target-reach/index.html" data-pages-href="./papers/target-reach/index.html">Read the study</a><a href="https://eliminatenoise.github.io/Interoceptomics/target-reach/">Rotate the measured paths</a></nav>
       </article>
       <article class="study-choice-card" data-study-key="contact-forecast" aria-labelledby="reader-next-day">
-        <h3 id="reader-next-day">The same electrodes, one day later</h3>
-        <p>What can a push on a macaque’s hand tell us about the brain activity that follows? Compare a model trained the previous day with the next 100 milliseconds of recorded activity.</p>
+        <h3 id="reader-next-day">Next-day forecasts from the same electrodes</h3>
+        <p>Compare a forecast of the brain activity after a push on a macaque’s hand with the next 100 milliseconds of recorded activity. The model was fitted on the previous day.</p>
         <nav class="section-links" aria-label="Next-day study">
           <a href="./contact-forecast/index.html" data-pages-href="./contact-forecast/index.html">Compare the electrode counts</a>
           <a href="./papers/contact-forecast/index.html" data-pages-href="./papers/contact-forecast/index.html">Read the paper</a>
@@ -175,8 +175,8 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="cortical-reach" aria-labelledby="reader-cortical-reach">
-        <h3 id="reader-cortical-reach">When the arm is moved</h3>
-        <p>A robot pushes a handle; later a macaque reaches for a visual target. Compare predictions of the next 100 ms with and without earlier spikes from the sensory cortex.</p>
+        <h3 id="reader-cortical-reach">Forecasts after a push or reach</h3>
+        <p>Compare forecasts of the next 100 ms after a robot pushes a handle or a macaque reaches for a visual target. Run the comparison with and without earlier spikes from the sensory cortex.</p>
         <nav class="section-links" aria-label="Cortical reach study">
           <a href="./cortical-reach/index.html" data-pages-href="./cortical-reach/index.html">Follow the handle</a>
           <a href="./papers/cortical-reach/index.html" data-pages-href="./papers/cortical-reach/index.html">Read the study</a>
@@ -184,8 +184,8 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="muscle-spindle" aria-labelledby="reader-muscle-spindle">
-        <h3 id="reader-muscle-spindle">From stretch to spikes</h3>
-        <p>As a rat muscle stretches, how many impulses will a sensory fiber send next? Replay the recorded spikes and compare forecasts from the nerve’s history, tendon force and apparatus motion. The three eligible fibers share one filename group.</p>
+        <h3 id="reader-muscle-spindle">Sensory spikes during muscle stretch</h3>
+        <p>Replay recorded spikes during a rat muscle stretch. Compare forecasts based on past spikes, tendon force and the motion of the equipment. The three eligible sensory fibers share one filename group.</p>
         <nav class="section-links" aria-label="Muscle spindle study">
           <a href="./muscle-spindle/index.html" data-pages-href="./muscle-spindle/index.html">Replay the stretch</a>
           <a href="./papers/muscle-spindle/index.html" data-pages-href="./papers/muscle-spindle/index.html">Read the study</a>
@@ -193,7 +193,7 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="cross-limb-movement" aria-labelledby="reader-cross-limb-movement">
-        <h3 id="reader-cross-limb-movement">Can the same model follow a wrist and the base of the spine?</h3>
+        <h3 id="reader-cross-limb-movement">Shared forecasts for the wrist and base of the spine</h3>
         <p>Choose a reaching hand or a balancing body. Change a muscle signal and follow the next 125 milliseconds of the wrist or sacrum. Compare a model trained on both studies with one trained on the selected task.</p>
         <nav class="section-links" aria-label="Wrist and sacrum forecasts">
           <a href="./cross-limb-movement/index.html" data-pages-href="./cross-limb-movement/index.html">Try the cross-limb forecast</a>
@@ -203,8 +203,8 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="muscle-and-motion" aria-labelledby="reader-muscle-and-motion">
-        <h3 id="reader-muscle-and-motion">Can one model forecast the muscle and the movement?</h3>
-        <p>Stand still or walk as the scene tilts. Change an invented leg-muscle signal and the path of the pelvis. Compare one model trained to predict both with two models that each learned one job.</p>
+        <h3 id="reader-muscle-and-motion">Leg muscle and pelvic movement forecasts</h3>
+        <p>Compare a model fitted to both leg-muscle activity and pelvic movement with models fitted to one each. The recordings cover standing and walking as the scene tilts. The demo lets you change an invented muscle signal and pelvis path.</p>
         <nav class="section-links" aria-label="Leg-muscle activity and sacrum motion">
           <a href="./muscle-and-motion/index.html" data-pages-href="./muscle-and-motion/index.html">Try the trained Transformer</a>
           <a href="./muscle-motion-controls/index.html" data-pages-href="./muscle-motion-controls/index.html">Compare the linear forecasts</a>
@@ -213,8 +213,8 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="visual-balance" aria-labelledby="reader-visual-balance">
-        <h3 id="reader-visual-balance">Does scalp voltage help forecast a walker’s balance?</h3>
-        <p>Turn the scene in a walker’s headset. Change the scalp input in an invented example and forecast where the head and the base of the spine will move over the next 125 milliseconds.</p>
+        <h3 id="reader-visual-balance">Balance forecasts with scalp recordings</h3>
+        <p>Change the scalp input in an invented walking example. The model forecasts head movement and movement at the base of the spine over the next 125 milliseconds after the view in the walker’s headset turns.</p>
         <nav class="section-links" aria-label="Balance after a visual rotation">
           <a href="./visual-balance/index.html" data-pages-href="./visual-balance/index.html">Try the trained Transformer</a>
           <a href="./visual-balance-controls/index.html" data-pages-href="./visual-balance-controls/index.html">Compare the general model, NeuroTranslate 0.0</a>
@@ -223,8 +223,8 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="walking-instructions" aria-labelledby="reader-walking-instructions">
-        <h3 id="reader-walking-instructions">Does the walking instruction help?</h3>
-        <p>“As usual” or “fast but not running”. Keep the previous 200 milliseconds of a step fixed and change the cue. Watch what happens to the forecast for the pelvis and the right heel.</p>
+        <h3 id="reader-walking-instructions">Walking forecasts with a task instruction</h3>
+        <p>Keep the previous 200 milliseconds of a step fixed. Change the cue between “As usual” and “fast but not running” to compare forecasts for the pelvis and right heel.</p>
         <nav class="section-links" aria-label="Walking instructions and movement">
           <a href="./walking-instructions/index.html" data-pages-href="./walking-instructions/index.html">Try the trained Transformer</a>
           <a href="./walking-instruction-controls/index.html" data-pages-href="./walking-instruction-controls/index.html">Compare the general model, NeuroTranslate 0.0</a>
@@ -233,18 +233,19 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="heel-and-force" aria-labelledby="reader-heel-and-force">
-        <h3 id="reader-heel-and-force">Where will the heel move, and what will the floor measure?</h3>
-        <p>After a bare foot meets a force plate, a camera follows the heel and the plate measures the load. Change an invented step and compare what a joint model and two specialists expect to happen a tenth of a second later.</p>
+        <h3 id="reader-heel-and-force">Heel movement and force underfoot</h3>
+        <p>Change an invented barefoot step to compare a joint model and two specialists. The forecasts cover heel motion and force underfoot a tenth of a second ahead. A camera and force plate supplied those measurements in the study.</p>
         <nav class="section-links" aria-label="Heel movement and upward plate force">
           <a href="./heel-and-force/index.html" data-pages-href="./heel-and-force/index.html">Try the task-trained Transformer</a>
           <a href="./shared-heel-and-force/index.html" data-pages-href="./shared-heel-and-force/index.html">Try the general model, NeuroTranslate 0.0</a>
           <a href="./papers/heel-and-force/index.html" data-pages-href="./papers/heel-and-force/index.html">Read the study</a>
           <a href="https://eliminatenoise.github.io/Interoceptomics/heel-and-force/">Replay a recorded step</a>
+          <a href="./utah-walking/index.html" data-pages-href="./utah-walking/index.html">Compare forecasts for eight walkers with an above-knee prosthesis</a>
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="pedal-load" aria-labelledby="reader-pedal-load">
-        <h3 id="reader-pedal-load">Can the shin signal predict the next pedal reading?</h3>
-        <p>Pull the front of your foot upward against a pedal that stays put. A skin electrode can pick up the shin muscle’s electrical activity while a sensor in the pedal records the changing load. How far will the pedal signal move in the next 100 samples? One ambiguous recording left the planned two-person assessment incomplete.</p>
+        <h3 id="reader-pedal-load">Pedal-load forecasts from shin activity</h3>
+        <p>The study forecasts 100 samples of pedal load from electrical activity recorded over the shin. The participants pulled the front of the foot upward against a fixed pedal. One ambiguous recording left the planned two-person assessment incomplete.</p>
         <nav class="section-links" aria-label="Fixed-pedal forecasts">
           <a href="./pedal-load/index.html" data-pages-href="./pedal-load/index.html">Try the task-trained Transformer</a>
           <a href="./shared-pedal-load/index.html" data-pages-href="./shared-pedal-load/index.html">Try the general model, NeuroTranslate 0.0</a>
@@ -253,8 +254,8 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="muscle-tracking" aria-labelledby="reader-muscle-tracking">
-        <h3 id="reader-muscle-tracking">Will this bundle of shin muscle fibres shorten?</h3>
-        <p>Pull your toes toward your shin. In seated volunteers, ultrasound followed a bundle of muscle fibres during that movement. Give a forecast the bundle’s recent lengths, then add its earlier angles. How close does each method come to its length ten tracking steps later?</p>
+        <h3 id="reader-muscle-tracking">Shin muscle fibre length from ultrasound</h3>
+        <p>Ultrasound tracked a bundle of shin muscle fibres as seated volunteers pulled their toes toward their shins. Compare forecasts of its length ten tracking steps ahead from recent lengths, with and without earlier angles.</p>
         <nav class="section-links" aria-label="Muscle length forecasts">
           <a href="./muscle-tracking/index.html" data-pages-href="./muscle-tracking/index.html">Try the task-trained Transformer</a>
           <a href="./shared-muscle-tracking/index.html" data-pages-href="./shared-muscle-tracking/index.html">Try the shared movement model</a>
@@ -263,8 +264,8 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="back-rotation" aria-labelledby="reader-back-rotation">
-        <h3 id="reader-back-rotation">How far will a sensor on the back turn in the next tenth of a second?</h3>
-        <p>Stand still, then walk. A sensor on the back measures how far it turns during each task. Try an invented movement, then compare forecasts for the three new people whose orientation channels could be verified.</p>
+        <h3 id="reader-back-rotation">Back sensor rotation over a tenth of a second</h3>
+        <p>A sensor on the back measures rotation during standing and walking. Try an invented movement, then compare forecasts for three people outside fitting whose rotation channels could be verified.</p>
         <nav class="section-links" aria-label="Back sensor rotation forecasts">
           <a href="./back-rotation/index.html" data-pages-href="./back-rotation/index.html">Try the task-trained Transformer</a>
           <a href="./shared-back-rotation/index.html" data-pages-href="./shared-back-rotation/index.html">Try the shared movement model</a>
@@ -273,7 +274,7 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="cervical-forecast" aria-labelledby="reader-cervical-forecast">
-        <h3 id="reader-cervical-forecast">What will the neck electrode read four milliseconds later?</h3>
+        <h3 id="reader-cervical-forecast">Neck voltage four milliseconds ahead</h3>
         <p>A pulse at the wrist appears in recordings from the upper arm and neck. Change an invented early voltage, then compare the two forecasts with errors from six people outside the fitting group.</p>
         <nav class="section-links" aria-label="Neck electrode forecasts">
           <a href="./cervical-forecast/index.html" data-pages-href="./cervical-forecast/index.html">Try the Transformer</a>
@@ -283,7 +284,7 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="scalp-forecast" aria-labelledby="reader-scalp-forecast">
-        <h3 id="reader-scalp-forecast">Do scalp electrodes help predict the next arm movement?</h3>
+        <h3 id="reader-scalp-forecast">Arm movement forecasts with scalp recordings</h3>
         <p>The model knows the cue and the first arm readings. Adding six scalp electrodes barely changed the average error on five other people. Try the same forecast with the eye readings.</p>
         <nav class="section-links" aria-label="Scalp and eye readings in arm forecasts">
           <a href="./scalp-forecast/index.html" data-pages-href="./scalp-forecast/index.html">Try the scalp and eye forecasts</a>
@@ -293,7 +294,7 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="arm-transfer" aria-labelledby="reader-arm-transfer">
-        <h3 id="reader-arm-transfer">Will the arm forecast work for someone new?</h3>
+        <h3 id="reader-arm-transfer">Arm forecasts for people outside training</h3>
         <p>Seven people supplied the training examples. Compare forecasts on five other people who saw the same cues to bend an elbow, turn the forearm, open or close the hand, or rest.</p>
         <nav class="section-links" aria-label="Arm forecasts across people">
           <a href="./arm-transfer/index.html" data-pages-href="./arm-transfer/index.html">Try the trained Transformer and cue-only forecast</a>
@@ -303,8 +304,8 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="cued-arm" aria-labelledby="reader-cued-arm">
-        <h3 id="reader-cued-arm">A cue to move the right arm</h3>
-        <p>Give the model an instruction from a seven-choice experiment. See how it expects the elbow, forearm and index finger sensors to change. A separate forecast lets you add a scalp electrode while keeping the elbow history fixed.</p>
+        <h3 id="reader-cued-arm">Right-arm forecasts from a movement cue</h3>
+        <p>Choose one of seven instructions to forecast the elbow, forearm and index-finger sensor readings. A separate forecast adds a scalp reading to the same recent elbow measurements.</p>
         <nav class="section-links" aria-label="Right-arm cue experiments">
           <a href="./shared-motion/index.html#cued-arm" data-pages-href="./shared-motion/index.html#cued-arm">Type an instruction for the three-sensor forecast</a>
           <a href="./elbow-cue/index.html" data-pages-href="./elbow-cue/index.html">Compare the elbow forecast with and without scalp input</a>
@@ -313,8 +314,8 @@
         </nav>
       </article>
       <article class="study-choice-card" data-study-key="walking-landmarks" aria-labelledby="reader-walking-landmarks">
-        <h3 id="reader-walking-landmarks">Where will the ankles, knees and wrists go next?</h3>
-        <p>Watch six points on an invented walker. Each arrow shows where a model expects that point to move in the next fifth of a second. Turn the walker to see how far each forecast lands from its target.</p>
+        <h3 id="reader-walking-landmarks">Walking forecasts for ankles, knees and wrists</h3>
+        <p>Rotate an invented walker to compare forecasts at six points with their later positions. The arrows show the movement expected over the next fifth of a second.</p>
         <nav class="section-links" aria-label="Walking landmarks">
           <a href="./walking-landmarks/index.html" data-pages-href="./walking-landmarks/index.html">Forecast all six points in 3D</a>
           <a href="./shared-motion/index.html#point-motion" data-pages-href="./shared-motion/index.html#point-motion">Forecast one point from its past positions</a>
@@ -437,8 +438,8 @@
     <section class="personal-calibration" id="personal-calibration" aria-labelledby="calibration-title" tabindex="-1">
       <div class="replay-intro">
         <div>
-          <h2 id="calibration-title">Can the palm model learn from one recording?</h2>
-          <p>Start with a model trained on three other people. Adjust its slopes and time-offset intercepts on each new person's first recording (R1), then measure the error on their second (R2).</p>
+          <h2 id="calibration-title">Palm forecasts after one calibration recording</h2>
+          <p>The starting model was fitted on three other people. The study adjusted its slopes and time-offset intercepts using each new person’s first recording (R1), then measured the error on their second (R2).</p>
         </div>
         <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/scalp-eeg-personal-calibration/">Study, results and code ↗</a>
       </div>
@@ -470,16 +471,16 @@
       <noscript><p>JavaScript is needed to compare the archived results here. The linked study includes the results table.</p></noscript>
     </section>
     <section class="lower-grid" id="how-it-works" tabindex="-1">
-      <article class="explanation"><p class="eyebrow">ONE CLOCK. DISTINCT OBSERVATIONS.</p><h2>A shared timeline has to be earned.</h2><p>Two files can describe the same movement without describing the same event. Alignment requires a declared shared subject, recording and clock. Unpaired datasets stay separate.</p><p>Each trace keeps its units and origin. Interpolation fills only the permitted gaps between samples. It does not turn a simulation into a measurement, or muscle electrical activity into a nerve recording.</p><button class="textbutton" id="download-template">Download the JSON example ↓</button></article>
-      <article class="format-card"><div class="panel-heading"><h2>Bring your own data</h2><span class="smalltag">JSON / CSV</span></div><p>Files are processed in this browser. The application does not upload recording contents to a server.</p><dl><div><dt>JSON</dt><dd>One dataset with named streams, timestamps in seconds, units and provenance.</dd></div><div><dt>CSV</dt><dd><code>time,value</code> columns; time is in seconds. Declare the organism, recording, signal type, units and origin at import.</dd></div><div><dt>Limits</dt><dd>5 MiB per file and combined packets. Up to 64 selected streams, 50,000 input samples, 5,000 aligned time points and 500,000 aligned values.</dd></div></dl><p class="quiet">Use only data you have permission to process. Import checks validate structure; they do not verify your source or licence.</p></article>
+      <article class="explanation"><p class="eyebrow">RECORDING ALIGNMENT</p><h2>Requirements for aligning recordings</h2><p>The viewer aligns files that declare the same subject, recording and clock. It displays unpaired recordings separately.</p><p>Each trace keeps its units and the label for how it was obtained. Interpolation estimates values only across allowed gaps between samples.</p><button class="textbutton" id="download-template">Download the JSON example ↓</button></article>
+      <article class="format-card"><div class="panel-heading"><h2>Recording file formats</h2><span class="smalltag">JSON / CSV</span></div><p>Files are processed in this browser. The application does not upload recording contents to a server.</p><dl><div><dt>JSON</dt><dd>One dataset with named streams, timestamps in seconds, units and provenance.</dd></div><div><dt>CSV</dt><dd><code>time,value</code> columns; time is in seconds. Declare the organism, recording, signal type, units and origin at import.</dd></div><div><dt>Limits</dt><dd>5 MiB per file and combined packets. Up to 64 selected streams, 50,000 input samples, 5,000 aligned time points and 500,000 aligned values.</dd></div></dl><p class="quiet">Use only data you have permission to process. Import checks validate structure; they do not verify your source or licence.</p></article>
     </section>
-    <section class="catalogue" hidden id="catalogue-section"><div class="catalogue-title"><div><p class="eyebrow">DATASET REFERENCES</p><h2>Different pieces of the same problem.</h2></div><p>Reference entries do not load recordings or establish compatibility.</p></div><div class="catalogue-grid" id="catalogue-list"></div></section>
+    <section class="catalogue" hidden id="catalogue-section"><div class="catalogue-title"><div><p class="eyebrow">DATASET REFERENCES</p><h2>Dataset catalogue</h2></div><p>Reference entries do not load recordings or establish compatibility.</p></div><div class="catalogue-grid" id="catalogue-list"></div></section>
   </main>
   <footer><span>NeuroTranslator · NeuroTranslation / Brain2Body</span><span>Experimental data interface · no clinical or biological validation implied</span></footer>
   <dialog id="import-dialog" aria-labelledby="import-dialog-title">
     <form id="import-form"><div class="dialog-heading"><div><p class="eyebrow">LOCAL FILE IMPORT</p><h2 id="import-dialog-title">Add a recording</h2></div><button type="button" id="import-close" class="closebutton" aria-label="Close import">×</button></div>
       <p class="quiet">JSON carries its metadata. For CSV, fill in the fields below. Leave unknown identity fields empty; those files cannot be synchronized across datasets.</p>
-      <p class="study-import-hint">Working with an original CEMHSEY two-finger pinch <code>.mat</code>? <a href="./cemhsey-arrays/index.html" data-pages-href="./cemhsey-arrays/index.html">Open it in the pinch reader</a>.</p>
+      <p class="study-import-hint">For an original CEMHSEY two-finger pinch <code>.mat</code> file, <a href="./cemhsey-arrays/index.html" data-pages-href="./cemhsey-arrays/index.html">open the pinch reader</a>.</p>
       <label class="filedrop">Choose JSON or CSV<input id="file" type="file" accept=".json,.csv,application/json,text/csv" required></label>
       <div id="csv-fields" class="form-grid" hidden>
         <label>Dataset ID<input name="datasetId" placeholder="recording-01"></label><label>Name<input name="name" placeholder="Hand reach"></label>

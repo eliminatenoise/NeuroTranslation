@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Can the pelvis model predict running? · NeuroTranslation</title>
+<style>
+:root{font:17px/1.57 system-ui,sans-serif;color:#18362d;background:#f9faf4}
+body{margin:0}main{max-width:56rem;margin:auto;padding:2rem 1rem 4rem}
+h1{font-size:clamp(2.3rem,7vw,3.85rem);line-height:1.04;letter-spacing:-.04em;margin:1rem 0;max-width:15ch}
+h2{font-size:1.35rem;margin-top:1.6rem}p{max-width:72ch}
+a{color:#194b3d;text-underline-offset:.18em}a:focus-visible,summary:focus-visible{outline:3px solid #146451;outline-offset:3px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+caption{text-align:left;margin-bottom:.6rem}th,td{padding:.5rem;border-bottom:1px solid #c3d0c6;text-align:left}
+td{text-align:right}thead th{border-bottom:2px solid #728b7f}tbody th{font-weight:500}
+tbody tr:nth-child(even){background:#edf2e9}summary{cursor:pointer;font-weight:650}details{margin-top:1.4rem}
+@media(max-width:31rem){main{padding:1.15rem .85rem 3rem}th,td{padding:.4rem .26rem}table{font-size:.88rem}}
+</style></head>
+<body><main>
+<nav aria-label="Related studies"><a href="../">Pelvis marker studies</a></nav>
+<h1>Can the pelvis model predict running?</h1>
+<p>During a run the hips rise and fall with each step. We gave a model trained on standing up, sitting down and starting to walk five camera readings and asked how far the pelvis would rise or fall in the next 100 milliseconds.</p>
+<p>Predicting <strong>zero displacement</strong> had lower error than either attention model. When a front marker was missing, predicting zero averaged <strong>42.82 mm</strong> of error for the four-marker target. The best attention model averaged <strong>52.59 mm</strong>. Zero also gave the lowest error when all earlier camera readings were present.</p>
+<p>The two targets average the heights of either all four markers or just the two at the back of the pelvis. Smaller errors are better. Each person counts equally.</p>
+<h2>An earlier front-marker reading is missing</h2>
+<table>
+<caption>13 people. 647 four-marker and 924 rear-marker forecasts.</caption>
+<thead><tr><th scope="col">Forecast method</th><th scope="col">Four markers (mm)</th><th scope="col">Rear pair (mm)</th></tr></thead>
+<tbody><tr><th scope='row'>Predict zero displacement</th><td><strong>42.82</strong></td><td><strong>48.66</strong></td></tr><tr><th scope='row'>Direct attention</th><td>54.72</td><td>62.64</td></tr><tr><th scope='row'>Attention corrects recent speed</th><td>52.59</td><td>66.75</td></tr><tr><th scope='row'>Continue recent speed (nominal intervals)</th><td>61.20</td><td>73.59</td></tr><tr><th scope='row'>Continue recent speed (actual camera intervals)</th><td>58.93</td><td>71.13</td></tr></tbody></table><h2>All earlier readings are present</h2>
+<table>
+<caption>27 people. 22,807 four-marker and 22,975 rear-marker forecasts.</caption>
+<thead><tr><th scope="col">Forecast method</th><th scope="col">Four markers (mm)</th><th scope="col">Rear pair (mm)</th></tr></thead>
+<tbody><tr><th scope='row'>Predict zero displacement</th><td><strong>43.43</strong></td><td><strong>47.88</strong></td></tr><tr><th scope='row'>Direct attention</th><td>53.45</td><td>56.54</td></tr><tr><th scope='row'>Attention corrects recent speed</th><td>57.38</td><td>63.54</td></tr><tr><th scope='row'>Continue recent speed (nominal intervals)</th><td>60.92</td><td>66.76</td></tr><tr><th scope='row'>Continue recent speed (actual camera intervals)</th><td>58.71</td><td>64.35</td></tr></tbody></table>
+<h2>What the recordings could test</h2>
+<p>We checked 81 recordings from 27 runners at three speeds. Thirteen runners had enough measurements to score forecasts with an original front-marker gap. A gap can occur earlier in a history and be resolved by the forecast time. To score a target we required its own markers both at issue and 100 milliseconds later.</p>
+<p>Only one person contributed scoreable rear-only gaps. Only one person contributed scoreable histories with gaps at both ends. Those counts are in the data file. A wider test needs more people with those gaps and a model trained to recognize the rhythm of a run.</p>
+<details><summary>How the test was run</summary>
+<p>We used the authors’ unfilled camera export. Its point flags distinguish the missing coordinates in these files. The available coordinates carry no positive reconstruction residual or camera count. The forecasts were compared with those published coordinates.</p>
+<p>The models used five slots from 200 milliseconds before the forecast through the issue time. The camera captured 150 frames per second, so two slots were 3⅓ milliseconds early. Using the actual camera interval helped the speed reference. It still had higher error than predicting zero. The same archived windows and later measurements were used for every method, with no fitting on the running set.</p>
+</details>
+<p><a href="results.json">Download aggregate results</a> · <a href="https://doi.org/10.7717/peerj.3298">Fukuchi and colleagues’ study</a> · <a href="https://doi.org/10.6084/m9.figshare.4543435.v1">Running data release</a></p>
+</main></body></html>

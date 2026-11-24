@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Play NeuroSurge, try NeuroTranslate movement forecasts, and explore the Interoceptomics atlas and experiment guide.">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="browser.css?v=6">
+  <script type="module" src="filters.js?v=5"></script>
+  <title>Brain2Body project browser</title>
+</head>
+<body>
+  <a class="skip" href="#projects">Skip to projects</a>
+  <header class="topbar frame">
+    <a class="brand" href="./" aria-label="Brain2Body project browser"><span aria-hidden="true"></span>Brain2Body</a>
+    <nav aria-label="Dashboard"><a href="#catalog-heading">Browse</a><a href="technical.html" data-edition-link aria-label="Technical index">Technical</a></nav>
+  </header>
+  <main class="frame" id="projects">
+    <div class="intro">
+      <h1>Project browser</h1>
+      <div class="project-filter project-switch" role="group" aria-label="Show project" hidden>
+        <button type="button" value="all" aria-pressed="true" aria-label="All projects"><span class="project-name">All projects</span><span class="short-name">All</span></button>
+        <button type="button" value="neurosurge" aria-pressed="false" aria-label="NeuroSurge game"><span class="project-name">NeuroSurge</span><span class="short-name">Game</span></button>
+        <button type="button" value="neurotranslation" aria-pressed="false" aria-label="NeuroTranslation models"><span class="project-name">NeuroTranslation</span><span class="short-name">Models</span></button>
+        <button type="button" value="interoceptomics" aria-pressed="false" aria-label="Interoceptomics atlas and experiments"><span class="project-name">Interoceptomics</span><span class="short-name">Atlas</span></button>
+      </div>
+      <nav class="project-jumps" aria-label="Jump to a project" data-fallback-jumps>
+        <a href="#neurosurge">NeuroSurge</a><a href="#neurotranslation">NeuroTranslation</a><a href="#interoceptomics">Interoceptomics</a>
+      </nav>
+      <nav class="quick-access" aria-label="Main links" data-shortcuts>
+        <div class="quick-group" data-for-project="neurosurge" role="group" aria-labelledby="quick-game">
+          <div class="quick-preview">
+            <h2 id="quick-game">NeuroSurge</h2>
+            <a class="quick-extra" data-kind="read" href="../previews/camera-forecast-study/">Camera forecast study</a>
+            <a class="quick-image" data-kind="try" href="https://eliminatenoise.github.io/NeuroSurge/scene/example/preview.html"><img src="https://eliminatenoise.github.io/NeuroSurge/media/game-view.webp" width="1200" height="750" alt="Play Full. The motor strip sits above the player and mirror bodies."></a>
+          </div>
+          <div class="quick-links">
+            <a class="button primary" data-kind="try" href="https://eliminatenoise.github.io/NeuroSurge/scene/example/preview.html">Play Full</a>
+            <a class="button" data-kind="try" href="https://eliminatenoise.github.io/NeuroSurge/scene/example/preview.html?edition=lite">Play Lite</a>
+            <a class="button" data-kind="get" href="https://github.com/eliminatenoise/NeuroSurge/releases/download/lite-take-sequences-2026-11-24/NeuroSurge-Lite.zip">Download Lite offline</a>
+            <a class="button" data-kind="try" href="../previews/neurosurge/">Play movement preview</a>
+          </div>
+        </div>
+        <div class="quick-group" data-for-project="neurotranslation" role="group" aria-labelledby="quick-model">
+          <div class="quick-preview">
+            <h2 id="quick-model">NeuroTranslation</h2>
+            <a class="quick-extra" data-kind="try" href="../walking-blends/">Walking comparison</a>
+            <a class="quick-image" data-kind="try" href="../shared-motion/"><img src="media/forecast.webp" width="643" height="163" alt="Try model 0.0. The chart shows a forecast from invented movements."></a>
+          </div>
+          <div class="quick-links">
+            <a class="button primary" data-kind="try" href="../shared-motion/">Try model 0.0</a>
+            <a class="button" data-kind="get" href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0.zip">Download model 0.0</a>
+            <a class="button" data-kind="get" href="https://github.com/eliminatenoise/NeuroTranslation/releases/download/expanded-walking-2026-11-24/NeuroTranslate-0.1-Expanded-Walking.zip">Download 0.1 walking checkpoint</a>
+            <a class="button" data-kind="read" href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers">Papers</a>
+          </div>
+        </div>
+        <div class="quick-group" data-for-project="interoceptomics" role="group" aria-labelledby="quick-atlas">
+          <div class="quick-preview">
+            <h2 id="quick-atlas">Interoceptomics</h2>
+            <a class="quick-extra" data-kind="read" href="https://eliminatenoise.github.io/Interoceptomics/atlas/backslash/atlas.pdf">Atlas PDF</a>
+            <a class="quick-image" data-kind="try" href="https://eliminatenoise.github.io/Interoceptomics/atlas/backslash/"><img src="media/atlas.webp" width="660" height="440" alt="Open the 3D atlas. The image shows the inside of the left half of the reference brain."></a>
+          </div>
+          <div class="quick-links">
+            <a class="button primary" data-kind="try" href="https://eliminatenoise.github.io/Interoceptomics/atlas/backslash/">Open 3D atlas</a>
+            <a class="button" data-kind="try" href="https://eliminatenoise.github.io/Interoceptomics/stages/">Experiment guide</a>
+            <a class="button" data-kind="get" href="https://github.com/eliminatenoise/Interoceptomics/raw/main/downloads/backslash/Backslash-Atlas.zip">Atlas download</a>
+            <a class="button" data-kind="get" href="https://raw.githubusercontent.com/eliminatenoise/Interoceptomics/main/downloads/stage-guide/Interoceptomics-Stage-Guide.zip">Guide download</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <h2 class="catalog-heading" id="catalog-heading">Browse resources</h2>
+    <div class="filters" role="region" aria-labelledby="catalog-heading" hidden>
+      <div class="search">
+        <label for="resource-search">Search resources</label>
+        <input id="resource-search" type="search" maxlength="120" autocomplete="off" placeholder="Atlas, camera, walking">
+      </div>
+      <div class="type-filter">
+        <label for="resource-type">Show</label>
+        <select id="resource-type">
+          <option value="all">Everything</option>
+          <option value="try">Play or explore</option>
+          <option value="get">Run or download</option>
+          <option value="read">Read</option>
+        </select>
+      </div>
+    </div>
+    <p id="filter-status" class="filter-status" role="status" hidden></p>
+    <p class="no-results" hidden>No resources match. <button type="button" data-show-all>Show all resources</button></p>
+
+    <section class="project game" id="neurosurge" data-project aria-labelledby="game-title">
+      <header class="project-heading">
+        <div><h2 id="game-title">NeuroSurge</h2><p>Move a virtual body and see a second body mirror your movements.</p></div>
+        <a href="https://github.com/eliminatenoise/NeuroSurge" aria-label="NeuroSurge source on GitHub">GitHub repository</a>
+      </header>
+      <div class="resources">
+        <article class="resource game-feature" data-kind="try">
+          <div class="feature-copy">
+            <h3>Move from the motor strip</h3>
+            <p>Aim at the motor strip, a part of the brain that helps control movement. Watch which part of the virtual body moves. The electrical activity and movements are simulated.</p>
+            <p class="note">Both editions play the same. Lite downloads smaller anatomy files. Use a desktop browser with a keyboard and mouse or trackpad.</p>
+          </div>
+          <figure class="feature-image">
+            <img src="https://eliminatenoise.github.io/NeuroSurge/media/game-view.webp" width="1200" height="750" alt="NeuroSurge's coloured motor strip above the player and mirror bodies.">
+            <figcaption><a href="https://github.com/eliminatenoise/NeuroSurge/blob/main/CREDITS-AND-LICENCES.md#lite-mesh-decoder-and-game-image">Game image and anatomy credits</a></figcaption>
+          </figure>
+        </article>
+        <article class="resource" data-kind="try">
+          <h3><a href="../previews/neurosurge/">Play the Movement mirror preview</a></h3>
+          <p>Open Full or Lite and press C to track a point on your body in a camera feed, video or timed pictures. Choose a forecast method to estimate where the point will appear 0.12 seconds later. Use F to replay a saved take with the virtual body.</p>
+        </article>
+        <article class="resource" data-kind="read">
+          <h3><a href="../previews/camera-forecast-study/">Read the camera forecast study</a></h3>
+          <p>Compare four ways to predict where a body point will move. The test used recordings of 86 people and separate measurements of their movements.</p>
+          <div class="text-links"><a href="../previews/neurosurge/#camera-test">Earlier test on 11 people</a></div>
+        </article>
+        <article class="resource" data-kind="get">
+          <h3><a href="https://github.com/eliminatenoise/NeuroSurge/releases/download/lite-take-sequences-2026-11-24/NeuroSurge-Lite.zip">Download Lite offline</a></h3>
+          <p>Extract the ZIP and open the launcher for your computer in <code>lite</code>. Node.js 18 or later serves the game to your browser from this device. Press C to use a local video or timed pictures. The included NeuroTranslate model forecasts a tracked point in your browser. Save the movement as a take, then press F and enter “replay my take”.</p>
+        </article>
+        <article class="resource" data-kind="get">
+          <h3><a href="https://eliminatenoise.github.io/NeuroSurge/START.html">Desktop launchers</a></h3>
+          <p>Get shortcuts to the online game for Windows, macOS or Linux, or follow the steps to run a local copy of the source.</p>
+        </article>
+        <article class="resource" data-kind="read">
+          <h3>Player guides</h3>
+          <p>Learn how to look around, choose a limb and move it.</p>
+          <div class="text-links">
+            <a href="https://github.com/eliminatenoise/NeuroSurge/blob/main/PLAYER-GUIDE.md">Simple guide</a>
+            <a href="https://github.com/eliminatenoise/NeuroSurge/blob/main/PLAYER-GUIDE-TECHNICAL.md">Technical guide</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="project models" id="neurotranslation" data-project aria-labelledby="models-title">
+      <header class="project-heading">
+        <div><h2 id="models-title">NeuroTranslation</h2><p>Test how much brain, muscle and motion recordings tell us about the movement that comes next.</p></div>
+        <a href="https://github.com/eliminatenoise/NeuroTranslation" aria-label="NeuroTranslation source on GitHub">GitHub repository</a>
+      </header>
+      <div class="resources">
+        <article class="resource" data-kind="try">
+          <h3><a href="../shared-motion/">Try NeuroTranslate 0.0 in your browser</a></h3>
+          <p>Choose a measurement, such as a wrist angle or the load under a foot. Start with a built-in example and compare the forecast with a later reading where one is available.</p>
+        </article>
+        <article class="resource" data-kind="try">
+          <h3><a href="../walking-blends/">Compare walking forecasts</a></h3>
+          <p>See how a forecast based on movement and forces compares with forecasts that also use a trained model. The demo shows the Compact and Research Edition blends separately.</p>
+        </article>
+        <article class="resource" data-kind="try">
+          <h3><a href="../next-neuron-prediction/">Try Next Neuron Prediction</a></h3>
+          <p>Add a spike, a brief electrical impulse, to a made-up history. See how the forecast changes for each source of spikes tracked in the history.</p>
+          <div class="text-links"><a href="../papers/next-neuron-prediction/">Read the spike prediction study</a></div>
+        </article>
+        <article class="resource" data-kind="read">
+          <h3><a href="../papers/next-neuron-prediction/">Next Neuron Prediction study</a></h3>
+          <p>Read how forecasts from the model and from a rule that counts earlier spikes compared on recordings from two rats.</p>
+        </article>
+        <article class="resource" data-kind="read">
+          <h3><a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/models/neurotranslate-0.0/compact-walking/multiday-simple.md">Heel forecasts across eight walking days</a></h3>
+          <p>See how using recent pelvis movement changed forecasts of where each heel would be a tenth of a second later.</p>
+        </article>
+        <article class="resource" data-kind="try">
+          <h3><a href="../START.html">Browse movement experiments</a></h3>
+          <p>Run more examples in the browser, including forecasts for a wrist and for walking. Separate studies show where recordings help and where they add little.</p>
+        </article>
+        <article class="resource" data-kind="get">
+          <h3><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0.zip">Download NeuroTranslate 0.0 and its local demo</a></h3>
+          <p>Extract the ZIP. Follow the <a href="../joint-alpha/">setup instructions</a> to install Python 3.10 or newer and NumPy, then open the demo launcher for your computer. Choose a task or change an input to see how the forecast changes.</p>
+        </article>
+        <article class="resource" data-kind="get">
+          <h3><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models#current-downloads">Model downloads</a></h3>
+          <p>Get the saved model files and follow the instructions to run them. A saved set of learned model values is called a checkpoint.</p>
+        </article>
+        <article class="resource" data-kind="get">
+          <h3><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/walking-blends/Walking-Forecast-Blends.zip">Download the walking forecast comparison</a></h3>
+          <p>Save the calculator and both blended forecasts for use offline. The included guides explain how each blend combines the physical forecast with part of a model's prediction.</p>
+        </article>
+        <article class="resource" data-kind="get">
+          <h3><a href="https://github.com/eliminatenoise/NeuroTranslation/releases/download/expanded-walking-2026-11-24/NeuroTranslate-0.1-Expanded-Walking.zip">Download the 0.1 walking checkpoint</a></h3>
+          <p>The ZIP contains the saved changes from training and a runnable example with made-up readings for two force plates. Use the last 200 milliseconds of muscle and force readings to forecast whether a floor plate will start carrying load and how much vertical force will add up over the next 100 milliseconds. To run the example, use Linux on an Intel or AMD computer with Python 3.13 and at least 64 GiB of available memory. Get the separate 19.53 GB base model during setup.</p>
+          <div class="text-links"><a href="https://github.com/eliminatenoise/NeuroTranslation/releases/tag/expanded-walking-2026-11-24">Setup and system requirements</a></div>
+        </article>
+        <article class="resource" data-kind="get">
+          <h3><a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.1/research-edition">Earlier NeuroTranslate 0.1 Research Edition example</a></h3>
+          <p>Run a force forecast from an example of muscle activity and force underfoot. To run the forecast, use Linux on an Intel or AMD computer and download the original model separately.</p>
+          <div class="text-links"><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.1/research-edition.zip">Download the research preview ZIP</a></div>
+        </article>
+        <article class="resource" data-kind="read">
+          <h3><a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/expanded-walking-research/SIMPLE.md">Expanded walking fit</a></h3>
+          <p>Compare the Research Edition’s force forecasts with a simple rule. See what changes when its middle layers run three or five times.</p>
+        </article>
+        <article class="resource" data-kind="read">
+          <h3>Papers and results</h3>
+          <p>Read how the models were tested, how they scored and how much the results varied.</p>
+          <div class="text-links">
+            <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/papers">Papers</a>
+            <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks">Study results</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="project atlas" id="interoceptomics" data-project aria-labelledby="atlas-title">
+      <header class="project-heading">
+        <div><h2 id="atlas-title">Interoceptomics</h2><p>Explore how the nervous system carries signals about movement and the state of the body.</p></div>
+        <a href="https://github.com/eliminatenoise/Interoceptomics" aria-label="Interoceptomics source on GitHub">GitHub repository</a>
+      </header>
+      <div class="resources">
+        <article class="resource" data-kind="try">
+          <h3><a href="https://eliminatenoise.github.io/Interoceptomics/atlas/backslash/">Open the 3D atlas</a></h3>
+          <p>Turn the brain model and follow illustrated routes between the brain, spinal cord and body. The atlas shows anatomy and describes proposed links between structures.</p>
+        </article>
+        <article class="resource" data-kind="try">
+          <h3><a href="https://eliminatenoise.github.io/Interoceptomics/stages/">Explore the experiment guide</a></h3>
+          <p>Choose human movement or animal learning. The guide labels the recorded examples and shows the steps of the proposed work.</p>
+        </article>
+        <article class="resource" data-kind="try">
+          <h3><a href="https://eliminatenoise.github.io/Interoceptomics/inside/">See heart and breathing recordings</a></h3>
+          <p>Move through recordings that show electrical activity from the heart, chest vibration and breathing measured together.</p>
+        </article>
+        <article class="resource" data-kind="get">
+          <h3><a href="https://github.com/eliminatenoise/Interoceptomics/raw/main/downloads/backslash/Backslash-Atlas.zip">Download the atlas for offline use</a></h3>
+          <p>Extract the ZIP and use the launcher for Windows, macOS or Linux with Python 3.10 or newer. The bundle includes the illustrated guide.</p>
+        </article>
+        <article class="resource" data-kind="get">
+          <h3><a href="https://raw.githubusercontent.com/eliminatenoise/Interoceptomics/main/downloads/stage-guide/Interoceptomics-Stage-Guide.zip">Download the experiment guide for offline use</a></h3>
+          <p>Extract the ZIP and run the launcher for your computer with Python 3.10 or newer installed. It prints the address you can open in your browser. The <a href="https://eliminatenoise.github.io/Interoceptomics/stages/">online guide</a> opens straight in your browser.</p>
+        </article>
+        <article class="resource" data-kind="read">
+          <h3><a href="https://eliminatenoise.github.io/Interoceptomics/atlas/backslash/atlas.pdf">Read Backslash of the Brain (PDF)</a></h3>
+          <p>See the anatomy plates and read where each illustrated route starts, passes through and ends.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="foot frame">
+    <a href="technical.html" data-edition-link>Technical index</a>
+    <a href="media/NOTICE.txt">Image credits</a>
+  </footer>
+</body>
+</html>

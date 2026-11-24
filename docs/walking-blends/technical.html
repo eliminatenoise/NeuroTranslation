@@ -1,0 +1,79 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'"><title>Walking forecast blends · technical</title><link rel="stylesheet" href="style.css"></head><body><main><nav aria-label="Walking blends"><a href="index.html">Calculator</a><a href="technical.html">Technical edition</a><a href="simple.html">Simple edition</a><a href="aggregate-results.json">Score data</a></nav><article><h1>Two fixed walking forecast blends</h1>
+<p>The Compact and Research Edition components take an existing physical forecast and the corresponding frozen walking model’s forecast. Each returns a heel displacement vector, vertical force impulse and probability of a new load for each foot. Select <strong>Compact</strong> for the frozen NeuroTranslate 0.0 expanded-history walking fit, or <strong>Research Edition</strong> for the corresponding NeuroTranslate 0.1 walking continuation with its matched dense, expert and parent components. The coefficient files identify the required source checkpoints. This package supplies the final blend. Obtaining those two input forecasts from sensors requires their original forecasting pipeline.</p>
+<h2>Inputs and calculation</h2>
+<p>For each scalar apply <code>physical + weight * (learned - physical)</code> in binary64 (FP64). Both operands refer to the same issue, side, units and coordinate basis. The two fixed sets of learned fractions are:</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Walking forecast table"><table>
+<thead>
+<tr>
+<th>Correction</th>
+<th align="right">Heel</th>
+<th align="right">Impulse</th>
+<th align="right">New load</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Compact</td>
+<td align="right">0.03</td>
+<td align="right">0.58</td>
+<td align="right">1.00</td>
+</tr>
+<tr>
+<td>Research Edition</td>
+<td align="right">0.15</td>
+<td align="right">0.32</td>
+<td align="right">1.00</td>
+</tr>
+</tbody></table></div>
+<p>Supply one JSON object with <code>learned_model</code> set to <code>compact</code> or <code>research</code>, and <code>physical</code> and <code>learned</code> objects. Each forecast uses exactly three arrays. <code>heel_mm</code> has shape [2, 3]. The feet are ordered left, right. Each displacement is ordered leftward, backward, upward in millimetres, as in the Utah walking adapter. <code>impulse_ns</code> has two signed vertical force integrals in N·s, ordered left, right. <code>new_load_probability</code> has two final probabilities in [0, 1] in that order. Convert model logits to probabilities upstream if needed. The heel coefficient applies separately to all six coordinates before calculating any displacement error. Summed force, distance magnitudes and raw sensor histories have different meanings from these inputs.</p>
+<p>The reference carries recent heel velocity forward, holds the latest mean force steady over the forecast interval and uses its fixed fitting-derived event probability. Both event weights are one, so the learned forecast supplies each event probability, subject to floating-point arithmetic. The operator rejects missing or extra fields, invalid shapes, nonfinite values, out-of-range probabilities and numerical overflow. Successful output uses the same three arrays. The model tag states which learned forecast the caller supplies. It cannot verify the provenance of numbers.</p>
+<p>Open <code>index.html</code> after extraction or use the Windows, macOS or Linux launcher. Click <strong>Load invented example</strong>, edit the input and click <strong>Calculate blend</strong>. The optional command <code>node forecast.cjs compact-example.json</code> prints the same output. Substitute <code>research-example.json</code>, a local file, or <code>-</code> for standard input. The examples contain invented values.</p>
+<h2>The earlier six-person checks selected the correction</h2>
+<p>In 72 calibration histories from six Kuopio walkers, the fit chose one coefficient per model and endpoint on a grid from 0 to 1 in steps of 0.01. It gave each contributing person equal weight and minimized Euclidean heel displacement error, absolute impulse error or squared probability error. Eight separate check histories per person gave 48 check times. The correction for each check came from the other five people’s calibration labels. The networks and event prior already had fitting exposure to all six. There were 96 observed heel and impulse outcomes per endpoint and 94 load outcomes, including 14 positives.</p>
+<p>In that five-person-per-check comparison, the Research blend reduced heel error by 0.450 mm against the physical reference (paired 95% interval −0.670 to −0.226 mm). The change in impulse error was −0.176 N·s (−0.619 to +0.132). Allowing different coefficients below and above a past plate-force threshold of 20 N gave no clear improvement. The coefficients shipped here were fitted using all six people before the separate Utah test. The earlier check scores use their own five-person fits.</p>
+<h2>Utah walking at 1.0 m/s</h2>
+<p>Of 17 people reserved for external testing, eight had a matching treadmill trial at 1.0 m/s. All walked with an above-knee prosthesis. A separate preparation walker was excluded. At 756 issue times the predictors used the past 200 ms to forecast the next 100 ms. Heel displacement was relative to the last camera sample. The force forecast began 10 ms later. Force scoring required separate foot placement and complete measured force over the target interval. Event scoring also required a confirmed outcome.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Walking forecast table"><table>
+<thead>
+<tr>
+<th>Forecast</th>
+<th align="right">Heel error (mm)</th>
+<th align="right">Impulse error (N·s)</th>
+<th align="right">Load-start Brier score</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Physical reference</td>
+<td align="right">54.271868</td>
+<td align="right">13.322950</td>
+<td align="right">0.108400</td>
+</tr>
+<tr>
+<td>Compact, unadjusted</td>
+<td align="right">55.369061</td>
+<td align="right">13.232538</td>
+<td align="right">0.106115</td>
+</tr>
+<tr>
+<td>Compact blend</td>
+<td align="right">54.238998</td>
+<td align="right">13.255966</td>
+<td align="right">0.106115</td>
+</tr>
+<tr>
+<td>Research Edition, unadjusted</td>
+<td align="right">55.318941</td>
+<td align="right">13.384063</td>
+<td align="right">0.099603</td>
+</tr>
+<tr>
+<td>Research Edition blend</td>
+<td align="right">53.939177</td>
+<td align="right">13.242439</td>
+<td align="right">0.099603</td>
+</tr>
+</tbody></table></div>
+<p>The table uses both feet and the original calibrated force. First average the errors within each walker, then across walkers with an available outcome. For heel movement, score the Euclidean distance between forecast and measured displacement. For impulse use absolute error. For new loading use the squared difference between probability and the 0-or-1 observation, the Brier score. There were 1,498 foot forecasts for heel motion and 1,200 for impulse across eight walkers. Seven contributed 925 event forecasts, with 104 distinct confirmed starts (63 prosthetic and 41 intact).</p>
+<p>For the Research blend minus physical, heel error changed by −0.332691 mm (95% interval −0.449651 to −0.204934, seven of eight lower). The impulse change was −0.080511 N·s (−0.226461 to +0.054358, five of eight lower). The Brier change was −0.008798 (−0.013057 to −0.005271, seven of seven lower). Its probability score comes from the frozen model. For the Compact blend the corresponding changes were −0.032871 mm, −0.066984 N·s and −0.002285. The intervals used 20,000 whole-walker paired resamples per comparison, without multiple-comparison adjustment. Practical importance and live latency remain unmeasured.</p>
+<p>The accompanying <a href="aggregate-results.json">aggregate results</a> give full-precision errors, counts and paired intervals for original and exported force, both feet and each prosthetic/intact subset. The export represents the same plates. A separate 0.6 m/s comparison found about 0.161 mm lower heel error for the Research blend and a higher impulse-error estimate with an interval spanning zero. Its results are reported separately from the 1.0 m/s trial. <a href="https://eliminatenoise.github.io/NeuroTranslation/utah-walking/">Utah results reader</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/neurotranslate-0.0/compact-walking#comparison-on-recorded-walks">0.6 m/s comparison</a></p>
+<p>Alexander Beattie, Matti Kortelainen, Paavo Vartiainen and Pasi Karjalainen published the Kuopio Full-Body Dataset. Sarah Hood and Tommaso Lenzi published the Utah walking recordings. The scores here are derived from these sources and the Utah force encodings refer to the same plates. The data and derived aggregates retain their CC BY 4.0 attribution. <a href="https://doi.org/10.5281/zenodo.24194741">Kuopio dataset</a> · <a href="https://doi.org/10.6084/m9.figshare.c.4962305.v1">Utah dataset</a> · <a href="https://doi.org/10.1038/s41597-020-0494-7">Utah methods, Hood et al.</a> · <a href="https://creativecommons.org/licenses/by/4.0/">Data licence</a></p>
+</article></main></body></html>

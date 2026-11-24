@@ -1,4 +1,39 @@
-# NeuroTranslate 0.0
+# NeuroTranslate models
+
+## Current downloads
+
+[NeuroTranslate 0.1 walking checkpoint](https://github.com/eliminatenoise/NeuroTranslation/releases/download/expanded-walking-2026-11-24/NeuroTranslate-0.1-Expanded-Walking.zip). The ZIP contains the saved training changes and a runnable example with invented readings for two force plates. Run the forecast on Linux with a separately downloaded 19.53 GB base model. [Setup](https://github.com/eliminatenoise/NeuroTranslation/releases/tag/expanded-walking-2026-11-24) · [Simple results](../benchmarks/expanded-walking-research/SIMPLE.md) · [Technical results](../benchmarks/expanded-walking-research/TECHNICAL.md)
+
+[Overground walking results](neurotranslate-0.0/compact-walking/overground-simple.md) · [Technical methods](neurotranslate-0.0/compact-walking/overground-technical.md) · [Offline overground example](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/neurotranslate-0.0/compact-walking/overground-preview.zip). Run the Compact heel forecast with the person's steady travel accounted for.
+
+[Walking forecast blends](https://eliminatenoise.github.io/NeuroTranslation/walking-blends/) · [Offline calculator](walking-blends/Walking-Forecast-Blends.zip). Combine matching physical and learned forecasts with the fixed Compact or Research Edition weights.
+
+A checkpoint is the set of weights a model saved after fitting. The downloads include those weights and a way to try them with invented readings.
+
+| Download | What you can try |
+| --- | --- |
+| [Tendon force forecast](tendon-force-forecast/Tendon-Force-Forecast.zip) | Try earlier muscle signals to forecast tendon impulse over the next 100 milliseconds. [Open in your browser](https://eliminatenoise.github.io/NeuroTranslation/tendon-force/) |
+| [Standing and sitting force forecast](neurotranslate-0.0/stand-sit-force/Stand-and-sit-force-preview.zip) | Edit 200 milliseconds of force readings from two floor plates. Compare forecasts of the force accumulated over the next 100 milliseconds. [Open the browser demo](https://eliminatenoise.github.io/NeuroTranslation/utah-stand-sit/) · [Setup and results](neurotranslate-0.0/stand-sit-force/) |
+| [NeuroTranslate 0.1 walking force and heels](neurotranslate-0.1/paired-plates/neurotranslate-paired-plates-preview.zip) | Use recent heel positions and vertical force under both feet to forecast the next 100 milliseconds. Extract the ZIP and use its walking launcher with Python 3.9 or later. [Treadmill setup and results](neurotranslate-0.1/paired-plates/WALKING.md) · [Shorter histories for overground walking](neurotranslate-0.1/paired-plates/OVERGROUND.md) · [Ramp results](neurotranslate-0.1/paired-plates/RAMP.md) |
+| [NeuroTranslate 0.0 walking force preview](neurotranslate-0.0/recorded-force/expanded.zip) | Use recent muscle and force readings from a walk to forecast new load and force accumulated over the next 100 milliseconds. Run `python predict.py --model past-load-gate --check-example` after setup. The comparison uses the fitting walks. [Setup and results](neurotranslate-0.0/recorded-force/expanded/) |
+| [NeuroTranslate 0.0](neurotranslate-0.0.zip) | Open the seven-task joint demo or try the new walking force experiment in the same download. [Walking force instructions](neurotranslate-0.0/recorded-force/) |
+| [Earlier NeuroTranslate 0.1 Research Edition](neurotranslate-0.1/research-edition.zip) | Try two invented walking inputs with the repeated decoder and see its 100 ms force forecasts. The full example runs on Linux CPU and uses a separate Inkling checkpoint. [Setup and validation results](neurotranslate-0.1/research-edition/) |
+| [NeuroTranslate 0.1](neurotranslate-0.1.zip) | Run the new walking force input and output layers with the separately downloaded Inkling 2 Mini model. [Setup and example](neurotranslate-0.1/) |
+| [Walking force comparisons](force-baselines/) | Try simpler fits that read recent force, muscle activity, or both. The files contain multiple candidate settings for later evaluation. |
+
+The walking force models use past muscle and force readings to look 100 milliseconds ahead. One output estimates the chance that a plate will start carrying load. The other estimates the signed vertical force added up over that time. The Research Edition guide reports a comparison on three people whose recordings were kept out of fitting. A separate group is reserved for the final test.
+
+## Study readers
+
+[Zebrafish tail-angle forecasts across 12 recordings](https://eliminatenoise.github.io/NeuroTranslation/optic-flow-recordings/) · [Model and reports (ZIP)](optic-flow-recordings/Optic-Flow-Recordings.zip). Run seven forecasts with the fitted models and read both editions.
+
+[Optic-flow tail-variation forecast](https://eliminatenoise.github.io/NeuroTranslation/optic-flow-tail-variation/) · [Offline reader](optic-flow-tail-variation/Optic-Flow-Tail-Variation.zip). Compare four forecasts of the spread of tail angles in the next 100 milliseconds using one zebrafish recording.
+
+[Tanaka tail-bend forecast](https://eliminatenoise.github.io/NeuroTranslation/tanaka-tail-bend/) · [Offline reader](tanaka-tail-bend/Tanaka-Tail-Bend.zip). Compare earlier camera readings with the logged display command over 1,242 scored observations in one recording.
+
+[Fish01 tail-angle forecast](https://eliminatenoise.github.io/NeuroTranslation/fish01-tail-forecast/) · [Offline reader](fish01-tail-forecast/Fish01-Tail-Forecast.zip). Compare ten forecasts on 635 later observations in one zebrafish.
+
+## NeuroTranslate 0.0 studies
 
 **[NeuroTranslate 0.0 joint alpha](https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/)** is the current joint model. [Download the model and local demo](neurotranslate-0.0.zip) or inspect [its source and results](neurotranslate-0.0/joint_alpha/). The earlier task-specific fits below retain the inputs from their own studies.
 

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A NeuroTranslation study of learned corrections to short-term pelvis forecasts on walking from a separate lab.">
+<title>Can a model learn when to correct speed? · NeuroTranslation</title>
+<style>
+:root {color-scheme:light;font-family:system-ui,sans-serif;line-height:1.55;background:#f3f6f1;color:#173429;--muted:#476055;--edge:#bdcfc2;--ink:#143c2d}
+* {box-sizing:border-box} body {margin:0} main {max-width:950px;margin:0 auto;padding:35px 24px 45px}
+a {color:#205b43;text-underline-offset:.2em} a:focus-visible,summary:focus-visible {outline:3px solid #205b43;outline-offset:4px}
+nav,footer,caption {font-size:.9rem;color:var(--muted)} h1,h2 {line-height:1.11;letter-spacing:-.038em}
+h1 {font-size:clamp(2.15rem,6vw,3.4rem);margin:18px 0 13px;max-width:21ch} h2 {font-size:1.5rem;margin:0 0 10px}
+p {max-width:78ch;margin:0 0 13px} .lead {font-size:1.11rem;margin-bottom:22px}
+section {background:#fff;border:1px solid var(--edge);border-radius:11px;padding:22px;margin-bottom:14px}
+table {width:100%;border-collapse:collapse;table-layout:fixed;margin:10px 0 17px;font-size:.96rem;font-variant-numeric:tabular-nums}
+caption {text-align:left;margin-bottom:7px} th,td {text-align:right;vertical-align:top;padding:7px 8px;border-bottom:1px solid var(--edge);overflow-wrap:anywhere}
+th:first-child {text-align:left;width:54%;padding-left:0} tbody th {font-weight:545} .best {background:#e6f3e9;font-weight:750}
+summary {cursor:pointer;font-weight:660;margin-bottom:9px} footer {margin-top:19px} .note {font-size:.91rem;color:var(--muted);margin-bottom:0}
+@media(max-width:480px){main{padding:24px 12px 38px}section{padding:13px}th,td{padding:6px 4px}table{font-size:.825rem}}
+@media(forced-colors:active){.best{outline:1px solid CanvasText;outline-offset:-1px}section,th,td{border-color:CanvasText}}
+</style>
+</head>
+<body><main>
+<nav><a href="../">Pelvis marker study</a> · <a href="../real-camera-gaps/">Deep-squat recording gaps</a></nav>
+<header>
+<h1>Can a model learn when to correct speed?</h1>
+<p class="lead">A recent change in height gives you a starting point for predicting pelvis movement. We trained one model to correct that estimate and another to predict the full change directly. Then we took both to a treadmill archive from a different lab.</p>
+</header>
+<section aria-labelledby="walk">
+<h2 id="walk">Direct prediction did better on walking</h2>
+<p>We tested both models on sixteen people, eight from each of the archive’s younger and older groups, and deliberately hid some earlier readings. The correction reduced both errors by about 1.11 mm compared with the speed forecast. The direct attention model had lower average error than the correction on both targets.</p>
+<table><caption>Independent treadmill archive · Mean absolute error in mm</caption><thead><tr><th scope="col">Method</th><th scope="col">All four markers</th><th scope="col">Back pair</th></tr></thead><tbody><tr><th scope="row">Speed-based forecast</th><td>8.85</td><td>8.60</td></tr>
+<tr><th scope="row">Linear fit that predicts the change</th><td>8.35</td><td>8.02</td></tr>
+<tr><th scope="row">Linear fit that corrects speed</th><td>8.36</td><td>8.02</td></tr>
+<tr><th scope="row">Attention that predicts the change</th><td class="best">7.37</td><td class="best">6.80</td></tr>
+<tr><th scope="row">Attention that corrects speed</th><td>7.74</td><td>7.49</td></tr></tbody></table>
+<p class="note">Both targets cover the next 100 milliseconds. One averages the height of four markers on the pelvis. The other averages its two back markers. The treadmill comparison gives equal weight to each of the two participant groups and each of the five reading conditions.</p>
+</section>
+<section aria-labelledby="failure">
+<h2 id="failure">A marker must appear twice to show movement</h2>
+<p>When the latest pair of frames shared a marker, the speed forecast could use its change in height. When those frames shared none, it looked farther back for two readings from the same marker. When no marker appeared twice anywhere in the history, the reference forecast zero movement. Both learned forecasts had larger errors in that last situation.</p>
+<table><caption>No repeated marker in the five frames · Mean absolute error in mm</caption><thead><tr><th scope="col">Method</th><th scope="col">All four markers</th><th scope="col">Back pair</th></tr></thead><tbody><tr><th scope="row">Speed-based forecast</th><td class="best">9.28</td><td class="best">8.98</td></tr>
+<tr><th scope="row">Attention that predicts the change</th><td>10.15</td><td>9.91</td></tr>
+<tr><th scope="row">Attention that corrects speed</th><td>10.38</td><td>10.30</td></tr></tbody></table>
+<p>The correction missed the rule for advancing to the next lab. Its worst increase was 1.32 mm, above the allowed 0.50 mm across targets and gap patterns.</p>
+</section>
+<section aria-labelledby="protocol">
+<h2 id="protocol">What each model saw</h2>
+<p>Each forecast used five frames spaced 50 milliseconds apart. The two attention models received the same readings, the same speed estimate and the same information about which frames supported it. The earlier lab split gave the correction the lower error. The scores below come from the people used to choose the candidate, with gaps added to the recordings.</p>
+<details><summary>Show the earlier selection scores</summary>
+<table><caption>Earlier model selection · Mean absolute error in mm</caption><thead><tr><th scope="col">Method</th><th scope="col">All four markers</th><th scope="col">Back pair</th></tr></thead><tbody><tr><th scope="row">Speed-based forecast</th><td>7.94</td><td>8.56</td></tr>
+<tr><th scope="row">Linear fit that predicts the change</th><td>7.54</td><td>8.23</td></tr>
+<tr><th scope="row">Linear fit that corrects speed</th><td>7.54</td><td>8.20</td></tr>
+<tr><th scope="row">Attention that predicts the change</th><td>5.88</td><td>6.68</td></tr>
+<tr><th scope="row">Attention that corrects speed</th><td class="best">5.80</td><td class="best">6.47</td></tr></tbody></table>
+<p>The two attention models had the same 9,698 parameters per fitted copy. We averaged three copies trained with different initial values for each method.</p>
+</details>
+<p>The treadmill comparison used 4,994 source windows and five kinds of input, from complete readings to one-time sightings. The gaps were inserted in the earlier inputs only. The archive preserves coordinates at 100 frames per second and carries no positive residual or camera-contribution evidence for these pelvis tracks. Its processing history limits what this trial can establish about original camera dropouts. Live webcam tests remain open.</p>
+</section>
+<footer><p><a href="results.json" download>Download aggregate results</a> · <a href="https://doi.org/10.1016/j.dib.2026.112943">Recording methods</a> · <a href="https://doi.org/10.17632/3dmymnb65h.1">Nice treadmill archive, CC BY 4.0</a></p></footer>
+</main></body></html>

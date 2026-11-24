@@ -1,0 +1,32 @@
+{
+  "download": "NeuroTranslate-chair-rise.zip",
+  "zip_sha256": "b09503ea5ca7be9632b767b765a3e11c794e63d6728689c413a2ef0d4db6a0a4",
+  "bytes": 156327,
+  "forecast_horizon_ms": 100,
+  "runtime_requirements": [
+    "Python",
+    "NumPy"
+  ],
+  "native_run_verified": [
+    "Linux with network disabled"
+  ],
+  "native_platform_verification_pending": [
+    "Windows",
+    "macOS"
+  ],
+  "distribution_files": [
+    "NeuroTranslate-chair-rise/LICENSE.txt",
+    "NeuroTranslate-chair-rise/README.md",
+    "NeuroTranslate-chair-rise/SHA256SUMS.txt",
+    "NeuroTranslate-chair-rise/chair-rise-model.npz",
+    "NeuroTranslate-chair-rise/chair_rise.py",
+    "NeuroTranslate-chair-rise/example-reference.json",
+    "NeuroTranslate-chair-rise/run-linux.sh",
+    "NeuroTranslate-chair-rise/run-macos.command",
+    "NeuroTranslate-chair-rise/run-windows.cmd",
+    "NeuroTranslate-chair-rise/synthetic-history.json"
+  ],
+  "matched_forecast_rows": 1357,
+  "matched_input_combinations": 8,
+  "maximum_runtime_difference_mm": 1.0606319762018757e-05
+}

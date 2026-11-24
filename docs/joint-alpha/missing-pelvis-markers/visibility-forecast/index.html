@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hide pelvis marker readings and see what the model can forecast from the remaining heights.">
+  <title>Forecast pelvis movement · NeuroTranslation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header class="intro">
+      <p class="project">NeuroTranslation</p>
+      <h1>Forecast pelvis movement</h1>
+      <p>How far will the pelvis rise or fall in the next 100 milliseconds? Hide readings from the four markers to see what the model can work out.</p>
+    </header>
+
+    <div class="workspace">
+      <section class="panel" aria-labelledby="input-title">
+        <h2 id="input-title">Marker readings</h2>
+        <label class="example" for="example">Invented example</label>
+        <select id="example" disabled>
+          <option value="complete">All four visible</option>
+          <option value="noRepeat">No marker appears twice</option>
+          <option value="frontProxy">Use front speed for the back</option>
+          <option value="insufficient">Too few markers at 0 ms</option>
+        </select>
+        <table aria-describedby="marker-help">
+          <caption>Heights in millimetres, 50 ms apart</caption>
+          <thead>
+            <tr>
+              <th class="time-column" scope="col">Time<br>(ms)</th>
+              <th scope="col">Left<br>front</th>
+              <th scope="col">Right<br>front</th>
+              <th scope="col">Left<br>back</th>
+              <th scope="col">Right<br>back</th>
+            </tr>
+          </thead>
+          <tbody id="markers"></tbody>
+        </table>
+        <p id="marker-help" class="small">Select a reading to hide or restore it. The last row, 0 ms, is when the forecast starts.</p>
+      </section>
+
+      <section class="panel forecast" aria-labelledby="forecast-title">
+        <h2 id="forecast-title">Forecast at +100 ms</h2>
+        <fieldset id="methods" disabled>
+          <legend>How to forecast</legend>
+          <label><input type="radio" name="method" value="direct" checked> Direct attention</label>
+          <label><input type="radio" name="method" value="correction"> Speed correction</label>
+        </fieldset>
+        <p id="method-description" class="small">The model estimates the change in height from the five rows and recent marker speed.</p>
+
+        <div class="results">
+          <article class="result">
+            <h3>Four-marker centre</h3>
+            <p class="small">Average height of all four markers</p>
+            <p class="amount" id="four-value">—</p>
+            <p class="evidence" id="four-evidence"></p>
+          </article>
+          <article class="result">
+            <h3>Back-pair centre</h3>
+            <p class="small">Average height of the two back markers</p>
+            <p class="amount" id="back-value">—</p>
+            <p class="evidence" id="back-evidence"></p>
+          </article>
+        </div>
+
+        <div class="interval">
+          <h3>Reading pair used for speed</h3>
+          <p id="pair">Loading model…</p>
+          <p id="repeated" class="small"></p>
+        </div>
+        <p class="small" id="calibration">Error band unavailable.</p>
+        <p class="assistive" id="announcement" role="status" aria-atomic="true"></p>
+        <noscript><p>Turn on JavaScript to run the forecast in this browser.</p></noscript>
+      </section>
+    </div>
+
+    <footer>
+      <p>Experimental preview. <a href="../running-transfer/">In the independent running test</a>, predicting zero displacement gave the lowest error.</p>
+      <p>The weights were fitted on laboratory recordings of standing up, sitting down and standing to walk. <a href="https://doi.org/10.6084/m9.figshare.27677016.v1">Gait120 recordings</a> · <a href="https://doi.org/10.26180/24515092.v4">Monash sit-to-walk recordings</a></p>
+      <p><a href="https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/missing-pelvis-markers/visibility-forecast/NeuroTranslate-visibility-forecast.zip">Download the offline preview</a> · <a href="https://eliminatenoise.github.io/NeuroTranslation/joint-alpha/missing-pelvis-markers/speed-correction/">Earlier Nice treadmill comparison</a></p>
+    </footer>
+  </main>
+  <script type="module" src="interface.mjs"></script>
+</body>
+</html>

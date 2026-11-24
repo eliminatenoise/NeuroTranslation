@@ -1,0 +1,1131 @@
+{
+  "format": "pelvis-visibility-f32-le-1",
+  "source_revision": "e8f1ed7b9809d4658800077947f064c80fe971d2",
+  "source_fit_result_sha256": "1f89f27599fcacd40a4b81d26f57d1084f0f1bcb6fbe708f4d350dfc83e3c145",
+  "horizon_ms": 100,
+  "targets": [
+    "four_marker_centre",
+    "back_pair_centre"
+  ],
+  "weights_bytes": 232752,
+  "weights_sha256": "ecb04ea6b0ced88839df8d9f6b16c1a09f5517ef923a7ec770884824cb29df61",
+  "scaling": {
+    "center": [
+      [
+        -23.3749932688909,
+        -15.942332058827429,
+        5.623018028502537,
+        6.715127948491891,
+        1.9698335576092396,
+        1.9479638222717117,
+        2.4477672903895713,
+        2.4360872999499255,
+        768.7572937743972,
+        0.0
+      ],
+      [
+        -21.30823095053944,
+        -13.901084310303117,
+        8.053460938720251,
+        9.135354984981445,
+        2.066762318351397,
+        2.0412477485245772,
+        2.430442910217707,
+        2.420227036489551,
+        768.7572937743972,
+        0.007307465812593362
+      ],
+      [
+        -19.177600642012194,
+        -11.796497446868697,
+        10.437863163570904,
+        11.50894837266737,
+        2.1306303085273277,
+        2.104586863434175,
+        2.384402224850656,
+        2.3735933876858986,
+        768.7572937743972,
+        0.011317826928635923
+      ],
+      [
+        -16.975389715353753,
+        -9.62086760016749,
+        12.766500506890221,
+        13.829756808630924,
+        2.2022109266585423,
+        2.1756298467012614,
+        2.3286373433193073,
+        2.3208084359635506,
+        768.7572937743972,
+        0.01226885634500979
+      ]
+    ],
+    "scale": [
+      [
+        46.20046577022198,
+        46.52138188398283,
+        43.745189341272344,
+        43.8036058482393,
+        13.617633598501747,
+        13.454561703216218,
+        13.887960467388718,
+        13.865663921036957,
+        136.82095261462007,
+        1.0
+      ],
+      [
+        35.251881743077426,
+        35.59685147653922,
+        32.67218308162424,
+        32.69593517525486,
+        13.637138646565907,
+        13.496696882538142,
+        13.92330186113795,
+        13.901935216135655,
+        136.82095261462007,
+        0.2309730833733463
+      ],
+      [
+        25.973649595258383,
+        26.267383093646412,
+        23.792931371147017,
+        23.73687641953725,
+        13.665634701168837,
+        13.500810455659074,
+        13.943485307106801,
+        13.92148693577151,
+        136.82095261462007,
+        0.4450665927119683
+      ],
+      [
+        21.33221636703512,
+        21.379872221898765,
+        20.732827688277833,
+        20.561387101690322,
+        13.646655765357565,
+        13.508179597527283,
+        13.954791557983485,
+        13.934096986155767,
+        136.82095261462007,
+        0.6355128611904213
+      ]
+    ],
+    "target_average": [
+      4.548685831197882,
+      4.48111103257053
+    ],
+    "target_spread": [
+      26.746492452084084,
+      27.714434258543744
+    ],
+    "seeds": [
+      11,
+      23,
+      37
+    ]
+  },
+  "arrays": [
+    {
+      "name": "direct/11/attention.in_proj_bias",
+      "shape": [
+        96
+      ],
+      "start": 0,
+      "bytes": 384
+    },
+    {
+      "name": "direct/11/attention.in_proj_weight",
+      "shape": [
+        96,
+        32
+      ],
+      "start": 384,
+      "bytes": 12288
+    },
+    {
+      "name": "direct/11/attention.out_proj.bias",
+      "shape": [
+        32
+      ],
+      "start": 12672,
+      "bytes": 128
+    },
+    {
+      "name": "direct/11/attention.out_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 12800,
+      "bytes": 4096
+    },
+    {
+      "name": "direct/11/features.0.bias",
+      "shape": [
+        64
+      ],
+      "start": 16896,
+      "bytes": 256
+    },
+    {
+      "name": "direct/11/features.0.weight",
+      "shape": [
+        64,
+        32
+      ],
+      "start": 17152,
+      "bytes": 8192
+    },
+    {
+      "name": "direct/11/features.2.bias",
+      "shape": [
+        32
+      ],
+      "start": 25344,
+      "bytes": 128
+    },
+    {
+      "name": "direct/11/features.2.weight",
+      "shape": [
+        32,
+        64
+      ],
+      "start": 25472,
+      "bytes": 8192
+    },
+    {
+      "name": "direct/11/finish.bias",
+      "shape": [
+        32
+      ],
+      "start": 33664,
+      "bytes": 128
+    },
+    {
+      "name": "direct/11/finish.weight",
+      "shape": [
+        32
+      ],
+      "start": 33792,
+      "bytes": 128
+    },
+    {
+      "name": "direct/11/forecast.bias",
+      "shape": [
+        2
+      ],
+      "start": 33920,
+      "bytes": 8
+    },
+    {
+      "name": "direct/11/forecast.weight",
+      "shape": [
+        2,
+        32
+      ],
+      "start": 33928,
+      "bytes": 256
+    },
+    {
+      "name": "direct/11/input.bias",
+      "shape": [
+        32
+      ],
+      "start": 34184,
+      "bytes": 128
+    },
+    {
+      "name": "direct/11/input.weight",
+      "shape": [
+        32,
+        25
+      ],
+      "start": 34312,
+      "bytes": 3200
+    },
+    {
+      "name": "direct/11/norm_attention.bias",
+      "shape": [
+        32
+      ],
+      "start": 37512,
+      "bytes": 128
+    },
+    {
+      "name": "direct/11/norm_attention.weight",
+      "shape": [
+        32
+      ],
+      "start": 37640,
+      "bytes": 128
+    },
+    {
+      "name": "direct/11/norm_features.bias",
+      "shape": [
+        32
+      ],
+      "start": 37768,
+      "bytes": 128
+    },
+    {
+      "name": "direct/11/norm_features.weight",
+      "shape": [
+        32
+      ],
+      "start": 37896,
+      "bytes": 128
+    },
+    {
+      "name": "direct/11/position",
+      "shape": [
+        5,
+        32
+      ],
+      "start": 38024,
+      "bytes": 640
+    },
+    {
+      "name": "direct/11/readout",
+      "shape": [
+        32
+      ],
+      "start": 38664,
+      "bytes": 128
+    },
+    {
+      "name": "direct/23/attention.in_proj_bias",
+      "shape": [
+        96
+      ],
+      "start": 38792,
+      "bytes": 384
+    },
+    {
+      "name": "direct/23/attention.in_proj_weight",
+      "shape": [
+        96,
+        32
+      ],
+      "start": 39176,
+      "bytes": 12288
+    },
+    {
+      "name": "direct/23/attention.out_proj.bias",
+      "shape": [
+        32
+      ],
+      "start": 51464,
+      "bytes": 128
+    },
+    {
+      "name": "direct/23/attention.out_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 51592,
+      "bytes": 4096
+    },
+    {
+      "name": "direct/23/features.0.bias",
+      "shape": [
+        64
+      ],
+      "start": 55688,
+      "bytes": 256
+    },
+    {
+      "name": "direct/23/features.0.weight",
+      "shape": [
+        64,
+        32
+      ],
+      "start": 55944,
+      "bytes": 8192
+    },
+    {
+      "name": "direct/23/features.2.bias",
+      "shape": [
+        32
+      ],
+      "start": 64136,
+      "bytes": 128
+    },
+    {
+      "name": "direct/23/features.2.weight",
+      "shape": [
+        32,
+        64
+      ],
+      "start": 64264,
+      "bytes": 8192
+    },
+    {
+      "name": "direct/23/finish.bias",
+      "shape": [
+        32
+      ],
+      "start": 72456,
+      "bytes": 128
+    },
+    {
+      "name": "direct/23/finish.weight",
+      "shape": [
+        32
+      ],
+      "start": 72584,
+      "bytes": 128
+    },
+    {
+      "name": "direct/23/forecast.bias",
+      "shape": [
+        2
+      ],
+      "start": 72712,
+      "bytes": 8
+    },
+    {
+      "name": "direct/23/forecast.weight",
+      "shape": [
+        2,
+        32
+      ],
+      "start": 72720,
+      "bytes": 256
+    },
+    {
+      "name": "direct/23/input.bias",
+      "shape": [
+        32
+      ],
+      "start": 72976,
+      "bytes": 128
+    },
+    {
+      "name": "direct/23/input.weight",
+      "shape": [
+        32,
+        25
+      ],
+      "start": 73104,
+      "bytes": 3200
+    },
+    {
+      "name": "direct/23/norm_attention.bias",
+      "shape": [
+        32
+      ],
+      "start": 76304,
+      "bytes": 128
+    },
+    {
+      "name": "direct/23/norm_attention.weight",
+      "shape": [
+        32
+      ],
+      "start": 76432,
+      "bytes": 128
+    },
+    {
+      "name": "direct/23/norm_features.bias",
+      "shape": [
+        32
+      ],
+      "start": 76560,
+      "bytes": 128
+    },
+    {
+      "name": "direct/23/norm_features.weight",
+      "shape": [
+        32
+      ],
+      "start": 76688,
+      "bytes": 128
+    },
+    {
+      "name": "direct/23/position",
+      "shape": [
+        5,
+        32
+      ],
+      "start": 76816,
+      "bytes": 640
+    },
+    {
+      "name": "direct/23/readout",
+      "shape": [
+        32
+      ],
+      "start": 77456,
+      "bytes": 128
+    },
+    {
+      "name": "direct/37/attention.in_proj_bias",
+      "shape": [
+        96
+      ],
+      "start": 77584,
+      "bytes": 384
+    },
+    {
+      "name": "direct/37/attention.in_proj_weight",
+      "shape": [
+        96,
+        32
+      ],
+      "start": 77968,
+      "bytes": 12288
+    },
+    {
+      "name": "direct/37/attention.out_proj.bias",
+      "shape": [
+        32
+      ],
+      "start": 90256,
+      "bytes": 128
+    },
+    {
+      "name": "direct/37/attention.out_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 90384,
+      "bytes": 4096
+    },
+    {
+      "name": "direct/37/features.0.bias",
+      "shape": [
+        64
+      ],
+      "start": 94480,
+      "bytes": 256
+    },
+    {
+      "name": "direct/37/features.0.weight",
+      "shape": [
+        64,
+        32
+      ],
+      "start": 94736,
+      "bytes": 8192
+    },
+    {
+      "name": "direct/37/features.2.bias",
+      "shape": [
+        32
+      ],
+      "start": 102928,
+      "bytes": 128
+    },
+    {
+      "name": "direct/37/features.2.weight",
+      "shape": [
+        32,
+        64
+      ],
+      "start": 103056,
+      "bytes": 8192
+    },
+    {
+      "name": "direct/37/finish.bias",
+      "shape": [
+        32
+      ],
+      "start": 111248,
+      "bytes": 128
+    },
+    {
+      "name": "direct/37/finish.weight",
+      "shape": [
+        32
+      ],
+      "start": 111376,
+      "bytes": 128
+    },
+    {
+      "name": "direct/37/forecast.bias",
+      "shape": [
+        2
+      ],
+      "start": 111504,
+      "bytes": 8
+    },
+    {
+      "name": "direct/37/forecast.weight",
+      "shape": [
+        2,
+        32
+      ],
+      "start": 111512,
+      "bytes": 256
+    },
+    {
+      "name": "direct/37/input.bias",
+      "shape": [
+        32
+      ],
+      "start": 111768,
+      "bytes": 128
+    },
+    {
+      "name": "direct/37/input.weight",
+      "shape": [
+        32,
+        25
+      ],
+      "start": 111896,
+      "bytes": 3200
+    },
+    {
+      "name": "direct/37/norm_attention.bias",
+      "shape": [
+        32
+      ],
+      "start": 115096,
+      "bytes": 128
+    },
+    {
+      "name": "direct/37/norm_attention.weight",
+      "shape": [
+        32
+      ],
+      "start": 115224,
+      "bytes": 128
+    },
+    {
+      "name": "direct/37/norm_features.bias",
+      "shape": [
+        32
+      ],
+      "start": 115352,
+      "bytes": 128
+    },
+    {
+      "name": "direct/37/norm_features.weight",
+      "shape": [
+        32
+      ],
+      "start": 115480,
+      "bytes": 128
+    },
+    {
+      "name": "direct/37/position",
+      "shape": [
+        5,
+        32
+      ],
+      "start": 115608,
+      "bytes": 640
+    },
+    {
+      "name": "direct/37/readout",
+      "shape": [
+        32
+      ],
+      "start": 116248,
+      "bytes": 128
+    },
+    {
+      "name": "correction/11/attention.in_proj_bias",
+      "shape": [
+        96
+      ],
+      "start": 116376,
+      "bytes": 384
+    },
+    {
+      "name": "correction/11/attention.in_proj_weight",
+      "shape": [
+        96,
+        32
+      ],
+      "start": 116760,
+      "bytes": 12288
+    },
+    {
+      "name": "correction/11/attention.out_proj.bias",
+      "shape": [
+        32
+      ],
+      "start": 129048,
+      "bytes": 128
+    },
+    {
+      "name": "correction/11/attention.out_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 129176,
+      "bytes": 4096
+    },
+    {
+      "name": "correction/11/features.0.bias",
+      "shape": [
+        64
+      ],
+      "start": 133272,
+      "bytes": 256
+    },
+    {
+      "name": "correction/11/features.0.weight",
+      "shape": [
+        64,
+        32
+      ],
+      "start": 133528,
+      "bytes": 8192
+    },
+    {
+      "name": "correction/11/features.2.bias",
+      "shape": [
+        32
+      ],
+      "start": 141720,
+      "bytes": 128
+    },
+    {
+      "name": "correction/11/features.2.weight",
+      "shape": [
+        32,
+        64
+      ],
+      "start": 141848,
+      "bytes": 8192
+    },
+    {
+      "name": "correction/11/finish.bias",
+      "shape": [
+        32
+      ],
+      "start": 150040,
+      "bytes": 128
+    },
+    {
+      "name": "correction/11/finish.weight",
+      "shape": [
+        32
+      ],
+      "start": 150168,
+      "bytes": 128
+    },
+    {
+      "name": "correction/11/forecast.bias",
+      "shape": [
+        2
+      ],
+      "start": 150296,
+      "bytes": 8
+    },
+    {
+      "name": "correction/11/forecast.weight",
+      "shape": [
+        2,
+        32
+      ],
+      "start": 150304,
+      "bytes": 256
+    },
+    {
+      "name": "correction/11/input.bias",
+      "shape": [
+        32
+      ],
+      "start": 150560,
+      "bytes": 128
+    },
+    {
+      "name": "correction/11/input.weight",
+      "shape": [
+        32,
+        25
+      ],
+      "start": 150688,
+      "bytes": 3200
+    },
+    {
+      "name": "correction/11/norm_attention.bias",
+      "shape": [
+        32
+      ],
+      "start": 153888,
+      "bytes": 128
+    },
+    {
+      "name": "correction/11/norm_attention.weight",
+      "shape": [
+        32
+      ],
+      "start": 154016,
+      "bytes": 128
+    },
+    {
+      "name": "correction/11/norm_features.bias",
+      "shape": [
+        32
+      ],
+      "start": 154144,
+      "bytes": 128
+    },
+    {
+      "name": "correction/11/norm_features.weight",
+      "shape": [
+        32
+      ],
+      "start": 154272,
+      "bytes": 128
+    },
+    {
+      "name": "correction/11/position",
+      "shape": [
+        5,
+        32
+      ],
+      "start": 154400,
+      "bytes": 640
+    },
+    {
+      "name": "correction/11/readout",
+      "shape": [
+        32
+      ],
+      "start": 155040,
+      "bytes": 128
+    },
+    {
+      "name": "correction/23/attention.in_proj_bias",
+      "shape": [
+        96
+      ],
+      "start": 155168,
+      "bytes": 384
+    },
+    {
+      "name": "correction/23/attention.in_proj_weight",
+      "shape": [
+        96,
+        32
+      ],
+      "start": 155552,
+      "bytes": 12288
+    },
+    {
+      "name": "correction/23/attention.out_proj.bias",
+      "shape": [
+        32
+      ],
+      "start": 167840,
+      "bytes": 128
+    },
+    {
+      "name": "correction/23/attention.out_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 167968,
+      "bytes": 4096
+    },
+    {
+      "name": "correction/23/features.0.bias",
+      "shape": [
+        64
+      ],
+      "start": 172064,
+      "bytes": 256
+    },
+    {
+      "name": "correction/23/features.0.weight",
+      "shape": [
+        64,
+        32
+      ],
+      "start": 172320,
+      "bytes": 8192
+    },
+    {
+      "name": "correction/23/features.2.bias",
+      "shape": [
+        32
+      ],
+      "start": 180512,
+      "bytes": 128
+    },
+    {
+      "name": "correction/23/features.2.weight",
+      "shape": [
+        32,
+        64
+      ],
+      "start": 180640,
+      "bytes": 8192
+    },
+    {
+      "name": "correction/23/finish.bias",
+      "shape": [
+        32
+      ],
+      "start": 188832,
+      "bytes": 128
+    },
+    {
+      "name": "correction/23/finish.weight",
+      "shape": [
+        32
+      ],
+      "start": 188960,
+      "bytes": 128
+    },
+    {
+      "name": "correction/23/forecast.bias",
+      "shape": [
+        2
+      ],
+      "start": 189088,
+      "bytes": 8
+    },
+    {
+      "name": "correction/23/forecast.weight",
+      "shape": [
+        2,
+        32
+      ],
+      "start": 189096,
+      "bytes": 256
+    },
+    {
+      "name": "correction/23/input.bias",
+      "shape": [
+        32
+      ],
+      "start": 189352,
+      "bytes": 128
+    },
+    {
+      "name": "correction/23/input.weight",
+      "shape": [
+        32,
+        25
+      ],
+      "start": 189480,
+      "bytes": 3200
+    },
+    {
+      "name": "correction/23/norm_attention.bias",
+      "shape": [
+        32
+      ],
+      "start": 192680,
+      "bytes": 128
+    },
+    {
+      "name": "correction/23/norm_attention.weight",
+      "shape": [
+        32
+      ],
+      "start": 192808,
+      "bytes": 128
+    },
+    {
+      "name": "correction/23/norm_features.bias",
+      "shape": [
+        32
+      ],
+      "start": 192936,
+      "bytes": 128
+    },
+    {
+      "name": "correction/23/norm_features.weight",
+      "shape": [
+        32
+      ],
+      "start": 193064,
+      "bytes": 128
+    },
+    {
+      "name": "correction/23/position",
+      "shape": [
+        5,
+        32
+      ],
+      "start": 193192,
+      "bytes": 640
+    },
+    {
+      "name": "correction/23/readout",
+      "shape": [
+        32
+      ],
+      "start": 193832,
+      "bytes": 128
+    },
+    {
+      "name": "correction/37/attention.in_proj_bias",
+      "shape": [
+        96
+      ],
+      "start": 193960,
+      "bytes": 384
+    },
+    {
+      "name": "correction/37/attention.in_proj_weight",
+      "shape": [
+        96,
+        32
+      ],
+      "start": 194344,
+      "bytes": 12288
+    },
+    {
+      "name": "correction/37/attention.out_proj.bias",
+      "shape": [
+        32
+      ],
+      "start": 206632,
+      "bytes": 128
+    },
+    {
+      "name": "correction/37/attention.out_proj.weight",
+      "shape": [
+        32,
+        32
+      ],
+      "start": 206760,
+      "bytes": 4096
+    },
+    {
+      "name": "correction/37/features.0.bias",
+      "shape": [
+        64
+      ],
+      "start": 210856,
+      "bytes": 256
+    },
+    {
+      "name": "correction/37/features.0.weight",
+      "shape": [
+        64,
+        32
+      ],
+      "start": 211112,
+      "bytes": 8192
+    },
+    {
+      "name": "correction/37/features.2.bias",
+      "shape": [
+        32
+      ],
+      "start": 219304,
+      "bytes": 128
+    },
+    {
+      "name": "correction/37/features.2.weight",
+      "shape": [
+        32,
+        64
+      ],
+      "start": 219432,
+      "bytes": 8192
+    },
+    {
+      "name": "correction/37/finish.bias",
+      "shape": [
+        32
+      ],
+      "start": 227624,
+      "bytes": 128
+    },
+    {
+      "name": "correction/37/finish.weight",
+      "shape": [
+        32
+      ],
+      "start": 227752,
+      "bytes": 128
+    },
+    {
+      "name": "correction/37/forecast.bias",
+      "shape": [
+        2
+      ],
+      "start": 227880,
+      "bytes": 8
+    },
+    {
+      "name": "correction/37/forecast.weight",
+      "shape": [
+        2,
+        32
+      ],
+      "start": 227888,
+      "bytes": 256
+    },
+    {
+      "name": "correction/37/input.bias",
+      "shape": [
+        32
+      ],
+      "start": 228144,
+      "bytes": 128
+    },
+    {
+      "name": "correction/37/input.weight",
+      "shape": [
+        32,
+        25
+      ],
+      "start": 228272,
+      "bytes": 3200
+    },
+    {
+      "name": "correction/37/norm_attention.bias",
+      "shape": [
+        32
+      ],
+      "start": 231472,
+      "bytes": 128
+    },
+    {
+      "name": "correction/37/norm_attention.weight",
+      "shape": [
+        32
+      ],
+      "start": 231600,
+      "bytes": 128
+    },
+    {
+      "name": "correction/37/norm_features.bias",
+      "shape": [
+        32
+      ],
+      "start": 231728,
+      "bytes": 128
+    },
+    {
+      "name": "correction/37/norm_features.weight",
+      "shape": [
+        32
+      ],
+      "start": 231856,
+      "bytes": 128
+    },
+    {
+      "name": "correction/37/position",
+      "shape": [
+        5,
+        32
+      ],
+      "start": 231984,
+      "bytes": 640
+    },
+    {
+      "name": "correction/37/readout",
+      "shape": [
+        32
+      ],
+      "start": 232624,
+      "bytes": 128
+    }
+  ]
+}

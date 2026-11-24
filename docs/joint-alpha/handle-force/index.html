@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Handle force in a reach forecast · NeuroTranslation</title>
+  <style>
+    :root { font: 100%/1.6 system-ui, sans-serif; color: #203538; background: #f5f6f2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(45rem, calc(100% - 2rem)); margin: 2rem auto 4rem; }
+    header { border-top: .35rem solid #1b4647; }
+    h1, h2 { line-height: 1.15; letter-spacing: -.03em; }
+    h1 { font-size: clamp(2.3rem, 7vw, 3.8rem); margin: .35em 0; }
+    a { color: #075d52; text-underline-offset: .2em; }
+    a:focus-visible { outline: 3px solid #c44c14; outline-offset: 3px; }
+    section { margin-top: 2rem; border-top: 1px solid #b9c7c4; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    caption, th, td { text-align: left; }
+    caption { font-weight: 650; margin-bottom: .35rem; }
+    th, td { padding: .36rem .4rem; border-bottom: 1px solid #bdc9c6; vertical-align: top; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p><a href="../">NeuroTranslate 0.0 joint alpha</a></p>
+    <h1>Handle force in a reach forecast</h1>
+    <p>Put your hand on a handle and push. A camera picks up where your arm goes. A force sensor under the handle picks up the push. In this macaque study, electrodes also recorded spikes, the brief electrical pulses from nearby brain cells. We asked whether knowing the push helps a model forecast the next tenth of a second.</p>
+  </header>
+  <section>
+    <h2>Force helped the movement correction</h2>
+    <p>We gave the model the last 200 milliseconds of movement and spike counts. One version also received the force measured along three axes. Another version learned with those inputs blank. Then we took the force-trained version and put in force from an earlier reach at the same point in the task. All other readings stayed in place.</p>
+    <table>
+      <caption>Movement error in millimetres. Lower is better.</caption>
+      <thead><tr><th scope="col">Forecast</th><th scope="col">First fit</th><th scope="col">Second fit</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Existing model</th><td>4.116</td><td>4.161</td></tr>
+        <tr><th scope="row">Correction with current force</th><td>4.114</td><td>4.194</td></tr>
+        <tr><th scope="row">Correction trained without force</th><td>4.160</td><td>4.219</td></tr>
+        <tr><th scope="row">Earlier reach’s force substituted</th><td>4.189</td><td>4.281</td></tr>
+        <tr><th scope="row">Simple linear correction with current force</th><td>4.281</td><td>4.245</td></tr>
+        <tr><th scope="row">Continue at recent velocity</th><td>4.319</td><td>4.319</td></tr>
+      </tbody>
+    </table>
+    <p>The current force beat the blank input and the earlier reach’s force in both fits and both trial groups. Against training without force, the improvement was 0.047 and 0.025 mm. Both uncertainty ranges include zero. The existing model had lower movement error in the second fit. It also forecast spike counts better in both fits. We’re keeping the existing model in the download.</p>
+  </section>
+  <section>
+    <h2>What the test measured</h2>
+    <p>The existing model supplied the first prediction. We trained a small Transformer, which learns which earlier readings to pay attention to, to correct two outputs at once. One output estimates displacement across eight hand, elbow and handle coordinates. The other estimates the number of spikes over the next 100 milliseconds on 37 recording contacts. The simpler correction used four averages of 50 milliseconds each.</p>
+    <p>The comparison used 196 windows from 77 original trials in one macaque recording. Repeated windows from the same trial counted together. Those trials had already helped choose the size of the earlier model. Recording preparation included filtering that looked forward and backward in time, filling gaps between camera samples and sorting spikes offline. This is a development result from stored recordings. A live system would need the same comparison with readings available at the instant of the forecast.</p>
+    <p>Force at the handle describes the push at one point of contact. The study leaves open how much each muscle produced and how the comparison changes in another recording.</p>
+    <p><a href="results.json">Download the full comparison and uncertainty intervals</a></p>
+    <p>Data from Chowdhury, Glaser and Miller. <a href="https://doi.org/10.5061/dryad.nk98sf7q7">Open recording archive</a> · <a href="https://doi.org/10.7554/eLife.48198">Original methods</a></p>
+  </section>
+</main>
+</body>
+</html>

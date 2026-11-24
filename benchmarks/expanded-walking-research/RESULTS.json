@@ -1,0 +1,458 @@
+{
+  "checkpoint": {
+    "training_state_sha256": "80544ad1416ded54ba9d781882efeb97e8395eec051919166fb5fb4435b8bf28",
+    "fit_updates": 547,
+    "fit_plate_rows": 9586,
+    "fitted_parameters": 28670978
+  },
+  "fitting_replay": {
+    "people": 12,
+    "walks": 36,
+    "same_time_plate_pairs": 864,
+    "scores": {
+      "fit_prior_and_physical_persistence": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03352302210505582,
+            "rows": 1647
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 3.421995700717885,
+            "rows": 1728
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03352302210505582,
+            "rows": 1647
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 3.435879072906674,
+            "rows": 1647
+          }
+        }
+      },
+      "no_new_load_and_physical_persistence": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.034722222222222224,
+            "rows": 1647
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 3.421995700717885,
+            "rows": 1728
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.034722222222222224,
+            "rows": 1647
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 3.435879072906674,
+            "rows": 1647
+          }
+        }
+      },
+      "portable_00_frozen_core": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03328660042501517,
+            "rows": 1647
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 10.810239430903279,
+            "rows": 1728
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03328660042501517,
+            "rows": 1647
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 10.826878851212282,
+            "rows": 1647
+          }
+        }
+      },
+      "portable_00_trainable_core": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03296088009778245,
+            "rows": 1647
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 10.202449691421386,
+            "rows": 1728
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03296088009778245,
+            "rows": 1647
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 10.204956842856687,
+            "rows": 1647
+          }
+        }
+      },
+      "research_native_recurrence_one_epoch": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03264333182350858,
+            "rows": 1647
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 2.871642529231183,
+            "rows": 1728
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03264333182350858,
+            "rows": 1647
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 2.84275891426993,
+            "rows": 1647
+          }
+        }
+      },
+      "three_pass_with_fit_only_blend": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03264333182350858,
+            "rows": 1647
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 2.871642529231183,
+            "rows": 1728
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03264333182350858,
+            "rows": 1647
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 2.84275891426993,
+            "rows": 1647
+          }
+        }
+      }
+    }
+  },
+  "validation_replay": {
+    "assigned_people": 6,
+    "qualified_people": 3,
+    "qualified_walks": 9,
+    "forecast_rows": 432,
+    "positive_event_rows": 18,
+    "distinct_positive_onsets": 8,
+    "scores": {
+      "fit_prior_and_physical_persistence": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.039949987673295065,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 3.2365033831981105,
+            "rows": 432
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.039949987673295065,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 3.076398637689767,
+            "rows": 427
+          }
+        }
+      },
+      "native_recurrence_3_passes": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03862549620857257,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 2.894901226270915,
+            "rows": 432
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03862549620857257,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 2.7100979618043524,
+            "rows": 427
+          }
+        }
+      },
+      "native_recurrence_5_passes": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03859347838359098,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 3.1175536851761123,
+            "rows": 432
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03859347838359098,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 2.9391852133865073,
+            "rows": 427
+          }
+        }
+      },
+      "no_new_load_and_physical_persistence": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.041666666666666664,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 3.2365033831981105,
+            "rows": 432
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.041666666666666664,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 3.076398637689767,
+            "rows": 427
+          }
+        }
+      },
+      "portable_00_frozen_core": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.039394358646119246,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 11.470366801336269,
+            "rows": 432
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.039394358646119246,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 11.244808818277248,
+            "rows": 427
+          }
+        }
+      },
+      "portable_00_trainable_core": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03831117610081711,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 10.867265449402508,
+            "rows": 432
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03831117610081711,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 10.639773535395111,
+            "rows": 427
+          }
+        }
+      },
+      "research_frozen_core_io": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.5498188364923932,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 11.36173081914556,
+            "rows": 432
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.5498188364923932,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 11.151426449823987,
+            "rows": 427
+          }
+        }
+      },
+      "research_joint_sensor_recurrence_io": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.4623221524785711,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 11.472169913283928,
+            "rows": 432
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.4623221524785711,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 11.274823070540196,
+            "rows": 427
+          }
+        }
+      },
+      "research_selective_internal_io": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.530438603792751,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 11.404847899791283,
+            "rows": 432
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.530438603792751,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 11.205562973390037,
+            "rows": 427
+          }
+        }
+      },
+      "three_pass_with_fit_only_blend": {
+        "endpoint_specific": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03862549620857257,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 2.894901226270915,
+            "rows": 432
+          }
+        },
+        "joint_support": {
+          "event": {
+            "metric": "Brier",
+            "aggregate": 0.03862549620857257,
+            "rows": 427
+          },
+          "impulse": {
+            "metric": "MAE in N s",
+            "aggregate": 2.7100979618043524,
+            "rows": 427
+          }
+        }
+      }
+    }
+  },
+  "fit_only_blend": {
+    "new_load_probability": 1.0,
+    "signed_impulse_ns": 1.0
+  },
+  "warm_cpu_seconds_per_plate_pair": {
+    "median": {
+      "3": 0.6869906120700762,
+      "5": 1.0456326049752533
+    },
+    "p95": {
+      "3": 0.7960691289394163,
+      "5": 1.2022799310158006
+    },
+    "threads": 4
+  },
+  "recordings": "https://doi.org/10.6084/m9.figshare.24192480.v1",
+  "scope": "Descriptive assessment on a previously used validation subset. The separate test group stayed closed."
+}

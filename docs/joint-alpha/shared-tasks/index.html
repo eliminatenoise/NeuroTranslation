@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Can six forecasts share a model? · NeuroTranslation</title>
+  <style>
+    :root { font: 100%/1.62 system-ui, sans-serif; color: #203538; background: #f5f6f2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(45rem, calc(100% - 2rem)); margin: 2rem auto 4rem; }
+    header { border-top: .35rem solid #1b4647; }
+    h1, h2 { line-height: 1.15; letter-spacing: -.035em; }
+    h1 { font-size: clamp(2.3rem, 7vw, 4rem); margin: .35em 0; }
+    a { color: #075d52; text-underline-offset: .2em; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #c44c14; outline-offset: 3px; }
+    section { margin-top: 2rem; border-top: 1px solid #b9c7c4; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    caption, th, td { text-align: left; }
+    caption { font-weight: 650; margin-bottom: .35rem; }
+    th, td { padding: .36rem .4rem; border-bottom: 1px solid #bdc9c6; vertical-align: top; }
+    details { border-bottom: 1px solid #bdc9c6; }
+    details table { margin-bottom: .8rem; }
+    summary { padding: .55em .2em; cursor: pointer; font-weight: 650; }
+    @media (forced-colors: active) {
+      a:focus-visible, summary:focus-visible { outline-color: Highlight; }
+      th, td, details { border-color: CanvasText; }
+    }
+  </style>
+</head><body><main>
+  <header>
+    <p><a href="../">NeuroTranslate 0.0 joint alpha</a></p>
+    <h1>Can six forecasts share a model?</h1>
+    <p>One set of recordings follows people balancing. Another follows a macaque reaching. A third follows a macaque grasping and pulling a sliding object. Each supplies two things to predict. We asked whether fitting their six forecasts with one shared set of Transformer layers helps.</p>
+  </header>
+  <section>
+    <h2>Sharing helped on reaching</h2>
+    <p>The compact shared model reduced arm and handle movement error by 0.034 fitted standard deviations against the compact model trained on that task alone. The wider shared model lowered the spike-count penalty by 0.201 nats against its own separate model. The compact shared model had the smaller count penalty overall.</p>
+    <p>Both shared models had higher average errors on the two human balance forecasts and both grasp forecasts than their own same-width controls. Lower values are better. Compare the two scores within a row.</p>
+    <table data-width="compact"><caption>Compact model · 36,580 parameters across six tasks</caption>
+<thead><tr><th scope="col">Forecast</th><th scope="col">Trained alone</th><th scope="col">Shared training</th></tr></thead>
+<tbody><tr data-task="human_leg_emg"><th scope="row">Human balance · Leg muscle signals (fit-scaled)</th><td>0.3769</td><td>0.3829</td></tr><tr data-task="human_sacrum_path"><th scope="row">Human balance · Pelvis movement (fit-scaled)</th><td>0.4109</td><td>0.4221</td></tr><tr data-task="macaque_cortex_to_motion"><th scope="row">Macaque reaching · Arm and handle movement (fit-scaled)</th><td>0.5560</td><td>0.5217</td></tr><tr data-task="macaque_motion_to_cortex"><th scope="row">Macaque reaching · Cortical spike counts (nats)</th><td>2.1034</td><td>2.1014</td></tr><tr data-task="brochier_grasp_sensors"><th scope="row">Macaque grasp · Six sensor readings (fit-scaled)</th><td>0.3665</td><td>0.3723</td></tr><tr data-task="brochier_grasp_counts"><th scope="row">Macaque grasp · Cortical spike counts (nats)</th><td>0.6935</td><td>0.7016</td></tr></tbody></table>
+    <table data-width="wider"><caption>Wider model · 376,740 parameters across six tasks</caption>
+<thead><tr><th scope="col">Forecast</th><th scope="col">Trained alone</th><th scope="col">Shared training</th></tr></thead>
+<tbody><tr data-task="human_leg_emg"><th scope="row">Human balance · Leg muscle signals (fit-scaled)</th><td>0.3770</td><td>0.3796</td></tr><tr data-task="human_sacrum_path"><th scope="row">Human balance · Pelvis movement (fit-scaled)</th><td>0.3923</td><td>0.3972</td></tr><tr data-task="macaque_cortex_to_motion"><th scope="row">Macaque reaching · Arm and handle movement (fit-scaled)</th><td>0.5474</td><td>0.5606</td></tr><tr data-task="macaque_motion_to_cortex"><th scope="row">Macaque reaching · Cortical spike counts (nats)</th><td>2.5640</td><td>2.3632</td></tr><tr data-task="brochier_grasp_sensors"><th scope="row">Macaque grasp · Six sensor readings (fit-scaled)</th><td>0.3210</td><td>0.3611</td></tr><tr data-task="brochier_grasp_counts"><th scope="row">Macaque grasp · Cortical spike counts (nats)</th><td>0.6866</td><td>0.6919</td></tr></tbody></table>
+    <p>For movement and muscle readings, the table expresses errors relative to how much the measured values varied during training. For spikes, the penalty falls when recorded counts receive higher probability. The download includes the physical units for each output and the paired uncertainty intervals.</p>
+  </section>
+  <section>
+    <h2>What each comparison used</h2>
+    <p>Each task has its own input layer and readout. The common layers read the past sequence and supply the information for the next forecast. At each width, the shared fit and its separate controls started from the same weights. Each fit used 480 updates. We tested one training seed.</p>
+    <p>The human comparison used 761 windows from three people. The reaching comparison used 199 windows from 78 original trials, and the grasp comparison used 733 windows from ten trials. Windows from the same person or original trial count together. These groups came from previously used archives. The external recordings remain reserved.</p>
+    <p><a href="results.json">Download per-output errors and paired intervals</a></p>
+    <p><a href="warm-start/">Compare fresh and previously trained weights</a>. The same six forecasts get equal new training from different starting points.</p>
+    <p><a href="trajectory/">Compare autoregression, diffusion and linear forecasts</a>. This study tests the next 125 milliseconds of recorded human balance.</p>
+    <p>Source recordings. <a href="https://openneuro.org/datasets/ds003739/versions/1.0.3">Human balance</a> · <a href="https://doi.org/10.5061/dryad.nk98sf7q7">Macaque reaching</a> · <a href="https://doi.gin.g-node.org/10.12751/g-node.f83565/">Macaque grasp</a></p>
+  </section>
+  <section>
+    <h2>What held up in the second fit?</h2>
+    <p>The two fits agreed on which model had the smaller error in 11 of 12 comparisons. Averaged across the two fits, the compact shared model reduced reaching movement error by 0.023 fitted standard deviations. The wider shared model reduced reaching spike-count loss by 0.174 nats. Each comparison uses a separately trained control of the same size.</p>
+    <p>Both grasp forecasts still scored better in their own models at both widths. The wider human pelvis forecast changed direction. Its paired range across people included zero. Both fits used the same previously studied groups.</p>
+    <p><a href="seed-repeat.json">Download the paired results for both fits</a></p>
+  </section>
+  <section>
+    <h2>Try both model sizes offline</h2>
+    <p>Choose one of the six tasks and compare both models on its two invented histories. The browser shows saved results from the fitted models. The included Python code runs a new forecast when you change an input.</p>
+    <p><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/models/six-task-forecasts/neurotranslate-six-task-preview.zip">Download the six-task preview</a> · <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/models/six-task-forecasts">Open the launcher instructions</a></p>
+  </section>
+</main></body></html>
