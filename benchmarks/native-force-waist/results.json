@@ -1,0 +1,143 @@
+{
+  "checkpoint_parameters": 9220,
+  "fit_examples": {
+    "force": 5763,
+    "waist": 5058
+  },
+  "fitting_people": 6,
+  "force_mask": "Latest mean of 20 N or more separates the loaded-input subset.",
+  "force_records_scored": 128,
+  "forecast_strata": "400 ms nominal grid within each trial",
+  "held_people": 3,
+  "history_ms": 200,
+  "horizon_ms": 100,
+  "model_sha256": "d285453548c7e7254116bec4f9b39bf35865d98e2e8123beac2e47f66eaacc86",
+  "paper": "https://doi.org/10.1038/s41597-026-07183-6",
+  "results": {
+    "force": {
+      "matched_rows": 2537,
+      "metric": "N s absolute impulse error",
+      "rows_issued": 2537,
+      "scores": {
+        "fit_ridge": {
+          "all": {
+            "mean": 4.239630388010159,
+            "people": 3,
+            "windows": 2537
+          },
+          "latest_mean_at_least_20N": {
+            "mean": 18.202189995404666,
+            "people": 3,
+            "windows": 372
+          },
+          "latest_mean_below_20N": {
+            "mean": 1.7833134791841918,
+            "people": 3,
+            "windows": 2165
+          }
+        },
+        "joint_attention": {
+          "all": {
+            "mean": 3.900747106892616,
+            "people": 3,
+            "windows": 2537
+          },
+          "latest_mean_at_least_20N": {
+            "mean": 19.607337646195298,
+            "people": 3,
+            "windows": 372
+          },
+          "latest_mean_below_20N": {
+            "mean": 1.4318960816236306,
+            "people": 3,
+            "windows": 2165
+          }
+        },
+        "latest_mean": {
+          "all": {
+            "mean": 2.9797006166253794,
+            "people": 3,
+            "windows": 2537
+          },
+          "latest_mean_at_least_20N": {
+            "mean": 20.106670929500666,
+            "people": 3,
+            "windows": 372
+          },
+          "latest_mean_below_20N": {
+            "mean": 0.6353772927396084,
+            "people": 3,
+            "windows": 2165
+          }
+        },
+        "linear_trend": {
+          "all": {
+            "mean": 4.081066735260323,
+            "people": 3,
+            "windows": 2537
+          },
+          "latest_mean_at_least_20N": {
+            "mean": 25.460167186808345,
+            "people": 3,
+            "windows": 372
+          },
+          "latest_mean_below_20N": {
+            "mean": 0.7443249304238196,
+            "people": 3,
+            "windows": 2165
+          }
+        }
+      }
+    },
+    "waist": {
+      "matched_rows": 1561,
+      "metric": "rad/s three-axis RMS error per window",
+      "rows_issued": 1573,
+      "scores": {
+        "fit_ridge": {
+          "all": {
+            "mean": 0.30685278229608565,
+            "people": 3,
+            "windows": 1561
+          }
+        },
+        "joint_attention": {
+          "all": {
+            "mean": 0.30771619229785035,
+            "people": 3,
+            "windows": 1561
+          }
+        },
+        "latest_mean": {
+          "all": {
+            "mean": 0.5169382419844083,
+            "people": 3,
+            "windows": 1561
+          }
+        },
+        "linear_trend": {
+          "all": {
+            "mean": 1.3092798409323643,
+            "people": 3,
+            "windows": 1561
+          }
+        }
+      }
+    }
+  },
+  "source_data": "https://doi.org/10.5281/zenodo.17376717",
+  "supported_activities": [
+    "step drop",
+    "heel drop",
+    "jogging",
+    "running",
+    "walking"
+  ],
+  "timing_scope": "Archived forecasts on each sensor clock separately. No independent watch-to-plate hardware clock in the source study.",
+  "updates": 240,
+  "waist_issue_time": "First recorded sample at or after each grid point, at most 25 ms later, with the issue sample withheld from every input bin.",
+  "waist_later_missing": 12,
+  "waist_records_represented": 102,
+  "waist_records_with_ineligible_clock": 1,
+  "weighted_scoring": "Mean error inside each trial, equal trial means per person, then equal person means."
+}
