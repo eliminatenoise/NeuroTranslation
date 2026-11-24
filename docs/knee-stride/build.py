@@ -42,11 +42,14 @@ def assembled(model):
     vs_copy = external["comparisons"]["transformer_residual_minus_prior_stride"]
     vs_linear = external["comparisons"]["transformer_residual_minus_ridge_residual"]
     n_external = external["participants_scored"]
+    ext_mean = external["mean_person_mae_deg"]
     normalized["outcome"]=("The knee-trained Transformer gave smaller mean errors than both alternatives for every one of these 12 walkers. "
         "They are not a fresh test: an earlier study had already examined them. "
-        f"The unchanged model was then scored on ten other walkers, recorded in a second laboratory at a nominal 0.8 m/s with angles from cameras. There it beat the plain stride copy for only {vs_copy['wins']} of {n_external}, "
-        f"and that comparison {'passed' if vs_copy['passed'] else 'failed'} its rule. It beat the linear correction for {vs_linear['wins']} of {n_external}.")
-    if n_external != 10 or vs_copy["wins"] != 6:
+        "The unchanged model was then scored on ten other walkers, recorded in a second laboratory at a nominal 0.8 m/s with angles from cameras. "
+        f"There its average miss was {ext_mean['transformer_residual']['bilateral']:.2f}° against {ext_mean['prior_stride']['bilateral']:.2f}° for the plain stride copy, "
+        f"but it was closer for only {vs_copy['wins']} of the {n_external} walkers and that comparison failed its rule. It beat the linear correction for {vs_linear['wins']} of {n_external}.")
+    if (n_external != 10 or vs_copy["wins"] != 6 or vs_copy["passed"]
+            or not ext_mean["transformer_residual"]["bilateral"] < ext_mean["prior_stride"]["bilateral"]):
         raise ValueError("Review the external-walker sentence and the page title")
 
     shared = json.loads((SRC/"shared-knee.json").read_text())
