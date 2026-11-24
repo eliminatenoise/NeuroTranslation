@@ -23,6 +23,7 @@
         <a class="play play-full" href="scene/example/preview.html">Play Full preview</a>
         <a class="play play-lite" href="scene/example/preview.html?edition=lite">Play Lite preview</a>
       </div>
+      <p class="requirements"><a href="https://github.com/eliminatenoise/NeuroTranslation/releases/download/neurosurge-lite-movement-2026-11-25/NeuroSurge-Lite.zip">Download Lite for offline play (ZIP)</a> · <a href="START.html">Setup</a></p>
       <p class="requirements">Use a desktop browser with WebGL, a keyboard and a mouse or trackpad. <a href="movement-mirror.html">Open the standalone Movement mirror</a> to run the forecast on its own.</p>
       <p class="requirements"><a href="../camera-forecast-study/technical.html">Camera forecast study on 86 people</a></p>
     </section>
@@ -35,7 +36,7 @@
         <summary>Capture and command controls</summary>
         <ol>
           <li>Press <kbd>C</kbd> to open the motion recorder. Choose <strong>Start camera</strong> to request video access. Under <strong>Source</strong>, you can also choose a local video or timed pictures. The images stay on your device.</li>
-          <li>Choose <strong>Movement forecast</strong> in the game toolbar, or press <kbd>F</kbd> and enter “forecast a tracked point”. Set <strong>Body follows</strong> for the arms or knees and <strong>Point to forecast</strong> for the marker. Brackets identify the tracked selection and a prompt appears when tracking misses it. The ring shows its forecast position 120 ms after the last of five recent images. The forecast and the stay-put guess use the same later tracked position for scoring.</li>
+          <li>Choose <strong>Movement forecast</strong> in the game toolbar, or press <kbd>F</kbd> and enter “forecast a tracked point”. Set <strong>Body follows</strong> for the arms or knees and <strong>Point to forecast</strong> for the marker. Brackets identify the tracked selection and a prompt appears when tracking misses it. The ring shows its forecast position 120 ms after the last of five recent images. The stay-put prediction uses the last tracked position. Both predictions use the same later tracked position for scoring.</li>
           <li>Use <strong>Forecast method</strong> to select the browser model, the blend based on past tracker feedback, or a named movement. The movement options use rules fixed on an earlier sample.</li>
           <li>In the forecast view, choose <strong>Save take</strong> and <strong>Open Command box</strong> to stop capture. Enter <strong>replay my take</strong>. <kbd>F</kbd> opens the Command box for supported moves such as “bend my right elbow”. In a browser with on-device dictation, choose <strong>Use voice</strong> and confirm the transcript.</li>
           <li>In <strong>Named takes</strong>, use <strong>Save last take</strong> and <strong>Download</strong> to export a version 1 JSON take file with the name, timestamps, tracked movement values and tracking gaps. In another tab, press <kbd>F</kbd> and use <strong>Open a take file</strong> under <strong>Named takes</strong>. Resolve a matching name with <strong>Keep existing take</strong> or <strong>Replace take</strong>. Start playback with <strong>replay take named warm up</strong>, using the saved name.</li>
@@ -51,7 +52,7 @@
         <p>The 0.0 point model was fitted on optical animal tracks. Use the optional local launcher for the separate fingertip study.</p>
         <div class="resource-links">
           <a href="#camera-test">Recorded-image forecast test</a>
-          <a href="https://github.com/eliminatenoise/NeuroSurge/releases/tag/lite-dictation-2026-11-24">Earlier offline Lite download and setup</a>
+          <a href="https://github.com/eliminatenoise/NeuroSurge/releases/tag/lite-dictation-2026-11-24">Earlier Lite release with the fingertip workbench</a>
           <a href="START.html#local-model">Local NeuroTranslate workbench and fingertip setup</a>
           <a href="scene/src/joint/model/NOTICE.html">Model, data and licence credits</a>
           <a href="CREDITS-AND-LICENCES.md">Game and anatomy credits</a>
