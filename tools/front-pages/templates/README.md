@@ -4,6 +4,8 @@
 
 [Download the 0.1 walking checkpoint](https://github.com/eliminatenoise/NeuroTranslation/releases/download/expanded-walking-2026-11-24/NeuroTranslate-0.1-Expanded-Walking.zip) · [0.1 setup and requirements](https://github.com/eliminatenoise/NeuroTranslation/releases/tag/expanded-walking-2026-11-24) · [All model downloads](models/#current-downloads)
 
+[Run the new walking checkpoints and read the cortical forecast results](benchmarks/walking-neural-scaling/)
+
 **[Open the NeuroTranslation dashboard](https://eliminatenoise.github.io/NeuroTranslation/projects/?project=neurotranslation)** · [Technical index](https://eliminatenoise.github.io/NeuroTranslation/projects/technical.html?project=neurotranslation) · [Compare walking forecasts](https://eliminatenoise.github.io/NeuroTranslation/walking-blends/)
 
 NeuroTranslation tests whether brain and muscle recordings improve forecasts of movement. The studies compare forecasts based on earlier movement with forecasts that also use an electrical recording. They score both against later measurements such as wrist position.

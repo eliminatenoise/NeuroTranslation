@@ -1,0 +1,1112 @@
+{
+  "belgian_walking": {
+    "fit_people": 12,
+    "fit_walks": 36,
+    "development_people": 3,
+    "development_walks": 9,
+    "rows_by_outcome": {
+      "event": 427,
+      "impulse": 432,
+      "joint": 427
+    },
+    "selected_methods": {
+      "fit_prior_and_physical_persistence": {
+        "force_impulse_mae_ns": 3.2365033831981105,
+        "load_brier": 0.039949987673295065
+      },
+      "native_recurrence_3_passes": {
+        "force_impulse_mae_ns": 2.894901226270915,
+        "load_brier": 0.03862549620857257
+      },
+      "causal_convolution_lstm": {
+        "force_impulse_mae_ns": 1.9333918870503632,
+        "load_brier": 0.035116735527228354
+      },
+      "histogram_gradient_boosting": {
+        "force_impulse_mae_ns": 1.608545038889574,
+        "load_brier": 0.029405315161151344
+      }
+    }
+  },
+  "two_laboratory_walks": {
+    "scope": "development only; six previously unused Izmir people and the same three prior Belgian validation people",
+    "coverage": {
+      "belgium": {
+        "people": 3,
+        "walks": 9,
+        "impulse_rows": 432,
+        "event_rows": 427,
+        "positive_events": 18
+      },
+      "izmir": {
+        "people": 6,
+        "walks": 18,
+        "impulse_rows": 847,
+        "event_rows": 829,
+        "positive_events": 0
+      }
+    },
+    "curve": [
+      {
+        "izmir_fit_people": 0,
+        "method": "histogram_gradient_boosting",
+        "replicates": 1,
+        "equal_lab_impulse": 3.3848867328562267,
+        "seed_min_max_impulse": [
+          3.3848867328562267,
+          3.3848867328562267
+        ],
+        "belgium_impulse": 1.6289517399271265,
+        "izmir_impulse": 5.140821725785327,
+        "belgium_brier": 0.039098760216730644,
+        "difference_to_0_added_people": 0.0,
+        "person_bootstrap_95_interval_difference": [
+          0.0,
+          0.0
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 3.4364737256699533,
+          "missing_recent_muscle": 3.600163204868868
+        }
+      },
+      {
+        "izmir_fit_people": 0,
+        "method": "loop1",
+        "replicates": 3,
+        "equal_lab_impulse": 3.475283794402436,
+        "seed_min_max_impulse": [
+          3.4335330197297065,
+          3.528022765436037
+        ],
+        "belgium_impulse": 2.1471769740407205,
+        "izmir_impulse": 4.803390614764151,
+        "belgium_brier": 0.0398493852053492,
+        "difference_to_0_added_people": 0.0,
+        "person_bootstrap_95_interval_difference": [
+          0.0,
+          0.0
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 4.103099837523502,
+          "missing_recent_muscle": 4.798144785827628
+        }
+      },
+      {
+        "izmir_fit_people": 0,
+        "method": "loop3",
+        "replicates": 3,
+        "equal_lab_impulse": 3.1956494104249296,
+        "seed_min_max_impulse": [
+          3.1671909000123923,
+          3.2453292115759558
+        ],
+        "belgium_impulse": 2.0266974586247017,
+        "izmir_impulse": 4.364601362225158,
+        "belgium_brier": 0.03973551534340009,
+        "difference_to_0_added_people": 0.0,
+        "person_bootstrap_95_interval_difference": [
+          0.0,
+          0.0
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 3.4385868580320227,
+          "missing_recent_muscle": 4.697320330548443
+        }
+      },
+      {
+        "izmir_fit_people": 0,
+        "method": "loop5",
+        "replicates": 3,
+        "equal_lab_impulse": 3.2887015287637738,
+        "seed_min_max_impulse": [
+          3.2586913231634096,
+          3.339269001685685
+        ],
+        "belgium_impulse": 2.035179893047537,
+        "izmir_impulse": 4.54222316448001,
+        "belgium_brier": 0.03966042535552732,
+        "difference_to_0_added_people": 0.0,
+        "person_bootstrap_95_interval_difference": [
+          0.0,
+          0.0
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 3.425185343354945,
+          "missing_recent_muscle": 4.429532073934609
+        }
+      },
+      {
+        "izmir_fit_people": 0,
+        "method": "loop8",
+        "replicates": 3,
+        "equal_lab_impulse": 3.4951106033173964,
+        "seed_min_max_impulse": [
+          3.1674323137653895,
+          3.8332230727701737
+        ],
+        "belgium_impulse": 2.1897910514526804,
+        "izmir_impulse": 4.800430155182112,
+        "belgium_brier": 0.03961596108186543,
+        "difference_to_0_added_people": 0.0,
+        "person_bootstrap_95_interval_difference": [
+          0.0,
+          0.0
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 3.6260070492951386,
+          "missing_recent_muscle": 4.866693428574411
+        }
+      },
+      {
+        "izmir_fit_people": 0,
+        "method": "lstm",
+        "replicates": 3,
+        "equal_lab_impulse": 4.224368614937235,
+        "seed_min_max_impulse": [
+          4.11174934943602,
+          4.4251285083036525
+        ],
+        "belgium_impulse": 2.5640650418176327,
+        "izmir_impulse": 5.884672188056837,
+        "belgium_brier": 0.039432791268501105,
+        "difference_to_0_added_people": 0.0,
+        "person_bootstrap_95_interval_difference": [
+          0.0,
+          0.0
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 4.431977806543913,
+          "missing_recent_muscle": 5.67617078892136
+        }
+      },
+      {
+        "izmir_fit_people": 0,
+        "method": "physical_persistence",
+        "replicates": 1,
+        "equal_lab_impulse": 4.99990004020319,
+        "seed_min_max_impulse": [
+          4.99990004020319,
+          4.99990004020319
+        ],
+        "belgium_impulse": 3.236503354943185,
+        "izmir_impulse": 6.763296725463195,
+        "belgium_brier": 0.039949987673295086,
+        "difference_to_0_added_people": 0.0,
+        "person_bootstrap_95_interval_difference": [
+          0.0,
+          0.0
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 4.99990004020319,
+          "missing_recent_muscle": 4.99990004020319
+        }
+      },
+      {
+        "izmir_fit_people": 0,
+        "method": "ridge_and_logistic",
+        "replicates": 1,
+        "equal_lab_impulse": 4.777373582421265,
+        "seed_min_max_impulse": [
+          4.777373582421265,
+          4.777373582421265
+        ],
+        "belgium_impulse": 3.3146238975912046,
+        "izmir_impulse": 6.240123267251325,
+        "belgium_brier": 0.03977363615016548,
+        "difference_to_0_added_people": 0.0,
+        "person_bootstrap_95_interval_difference": [
+          0.0,
+          0.0
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 5.0783898956379145,
+          "missing_recent_muscle": 5.025727804434169
+        }
+      },
+      {
+        "izmir_fit_people": 4,
+        "method": "histogram_gradient_boosting",
+        "replicates": 1,
+        "equal_lab_impulse": 3.145296658267599,
+        "seed_min_max_impulse": [
+          3.145296658267599,
+          3.145296658267599
+        ],
+        "belgium_impulse": 2.2232886539599033,
+        "izmir_impulse": 4.067304662575295,
+        "belgium_brier": 0.039098760216730644,
+        "difference_to_0_added_people": -0.23959007458862724,
+        "person_bootstrap_95_interval_difference": [
+          -0.7108302022492927,
+          0.2316348428066424
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 3.269022223264316,
+          "missing_recent_muscle": 3.5480308177022106
+        }
+      },
+      {
+        "izmir_fit_people": 4,
+        "method": "loop1",
+        "replicates": 3,
+        "equal_lab_impulse": 2.6680116305818267,
+        "seed_min_max_impulse": [
+          2.420376464959595,
+          3.1196701480990443
+        ],
+        "belgium_impulse": 2.082298000850519,
+        "izmir_impulse": 3.2537252603131344,
+        "belgium_brier": 0.03955057298853232,
+        "difference_to_0_added_people": -0.8072721638206088,
+        "person_bootstrap_95_interval_difference": [
+          -1.085979969429572,
+          -0.5068485311235036
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 3.241699402417369,
+          "missing_recent_muscle": 5.939939371854176
+        }
+      },
+      {
+        "izmir_fit_people": 4,
+        "method": "loop3",
+        "replicates": 3,
+        "equal_lab_impulse": 2.441728121314828,
+        "seed_min_max_impulse": [
+          2.2404627231085454,
+          2.5508490203239154
+        ],
+        "belgium_impulse": 1.9725411301929459,
+        "izmir_impulse": 2.91091511243671,
+        "belgium_brier": 0.039591752390063406,
+        "difference_to_0_added_people": -0.7539212891101016,
+        "person_bootstrap_95_interval_difference": [
+          -1.026344887569161,
+          -0.4735750120740819
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 3.219007346886046,
+          "missing_recent_muscle": 7.227250909915113
+        }
+      },
+      {
+        "izmir_fit_people": 4,
+        "method": "loop5",
+        "replicates": 3,
+        "equal_lab_impulse": 2.5923878179117303,
+        "seed_min_max_impulse": [
+          2.5048140202525904,
+          2.722689632468972
+        ],
+        "belgium_impulse": 1.9684733888767199,
+        "izmir_impulse": 3.2163022469467406,
+        "belgium_brier": 0.0395906021027719,
+        "difference_to_0_added_people": -0.6963137108520434,
+        "person_bootstrap_95_interval_difference": [
+          -0.935384526091975,
+          -0.40784041647383745
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 3.0860527000860594,
+          "missing_recent_muscle": 7.545219597445434
+        }
+      },
+      {
+        "izmir_fit_people": 4,
+        "method": "loop8",
+        "replicates": 3,
+        "equal_lab_impulse": 2.478029712602321,
+        "seed_min_max_impulse": [
+          2.332738318242174,
+          2.5681176343493792
+        ],
+        "belgium_impulse": 2.001355050642457,
+        "izmir_impulse": 2.954704374562185,
+        "belgium_brier": 0.039669815366141864,
+        "difference_to_0_added_people": -1.0170808907150755,
+        "person_bootstrap_95_interval_difference": [
+          -1.3538755970628966,
+          -0.6441826445494861
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 2.9875342558188467,
+          "missing_recent_muscle": 8.52645012630623
+        }
+      },
+      {
+        "izmir_fit_people": 4,
+        "method": "lstm",
+        "replicates": 3,
+        "equal_lab_impulse": 3.8180231330221894,
+        "seed_min_max_impulse": [
+          3.7008370545542792,
+          4.009610343896126
+        ],
+        "belgium_impulse": 2.71238236732866,
+        "izmir_impulse": 4.923663898715719,
+        "belgium_brier": 0.039478909167703934,
+        "difference_to_0_added_people": -0.4063454819150457,
+        "person_bootstrap_95_interval_difference": [
+          -0.7171162755485733,
+          -0.09880384434499746
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 4.266219924581509,
+          "missing_recent_muscle": 4.885517602283611
+        }
+      },
+      {
+        "izmir_fit_people": 4,
+        "method": "physical_persistence",
+        "replicates": 1,
+        "equal_lab_impulse": 4.99990004020319,
+        "seed_min_max_impulse": [
+          4.99990004020319,
+          4.99990004020319
+        ],
+        "belgium_impulse": 3.236503354943185,
+        "izmir_impulse": 6.763296725463195,
+        "belgium_brier": 0.039949987673295086,
+        "difference_to_0_added_people": 0.0,
+        "person_bootstrap_95_interval_difference": [
+          0.0,
+          0.0
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 4.99990004020319,
+          "missing_recent_muscle": 4.99990004020319
+        }
+      },
+      {
+        "izmir_fit_people": 4,
+        "method": "ridge_and_logistic",
+        "replicates": 1,
+        "equal_lab_impulse": 4.274100128898781,
+        "seed_min_max_impulse": [
+          4.274100128898781,
+          4.274100128898781
+        ],
+        "belgium_impulse": 3.1215434180486548,
+        "izmir_impulse": 5.426656839748907,
+        "belgium_brier": 0.03977363615016548,
+        "difference_to_0_added_people": -0.503273453522484,
+        "person_bootstrap_95_interval_difference": [
+          -0.5513847820976907,
+          -0.4459281986932093
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 4.753984759223838,
+          "missing_recent_muscle": 4.506379845382956
+        }
+      },
+      {
+        "izmir_fit_people": 8,
+        "method": "histogram_gradient_boosting",
+        "replicates": 1,
+        "equal_lab_impulse": 2.652810132526838,
+        "seed_min_max_impulse": [
+          2.652810132526838,
+          2.652810132526838
+        ],
+        "belgium_impulse": 1.7093162542963771,
+        "izmir_impulse": 3.5963040107572994,
+        "belgium_brier": 0.039098760216730644,
+        "difference_to_0_added_people": -0.7320766003293886,
+        "person_bootstrap_95_interval_difference": [
+          -1.4042336756990286,
+          -0.12473060894667955
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 2.7835697857812134,
+          "missing_recent_muscle": 3.2192449617706407
+        }
+      },
+      {
+        "izmir_fit_people": 8,
+        "method": "loop1",
+        "replicates": 3,
+        "equal_lab_impulse": 2.8879402588248007,
+        "seed_min_max_impulse": [
+          2.6805906088777047,
+          3.155677222805177
+        ],
+        "belgium_impulse": 2.1397325096100013,
+        "izmir_impulse": 3.636148008039599,
+        "belgium_brier": 0.03958566308729702,
+        "difference_to_0_added_people": -0.5873435355776354,
+        "person_bootstrap_95_interval_difference": [
+          -0.7738109309004292,
+          -0.3604299640130084
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 3.184197203647629,
+          "missing_recent_muscle": 6.061110027777569
+        }
+      },
+      {
+        "izmir_fit_people": 8,
+        "method": "loop3",
+        "replicates": 3,
+        "equal_lab_impulse": 2.3064057437745067,
+        "seed_min_max_impulse": [
+          2.192322681042526,
+          2.4261087827406467
+        ],
+        "belgium_impulse": 1.8756297245086344,
+        "izmir_impulse": 2.7371817630403785,
+        "belgium_brier": 0.03959235236933131,
+        "difference_to_0_added_people": -0.8892436666504229,
+        "person_bootstrap_95_interval_difference": [
+          -1.0852461558430324,
+          -0.6766779929579358
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 2.8855271890364214,
+          "missing_recent_muscle": 8.191983824011972
+        }
+      },
+      {
+        "izmir_fit_people": 8,
+        "method": "loop5",
+        "replicates": 3,
+        "equal_lab_impulse": 2.347447143424677,
+        "seed_min_max_impulse": [
+          2.278635861628058,
+          2.42534986449941
+        ],
+        "belgium_impulse": 1.8768479084570282,
+        "izmir_impulse": 2.8180463783923257,
+        "belgium_brier": 0.039616084231169406,
+        "difference_to_0_added_people": -0.941254385339097,
+        "person_bootstrap_95_interval_difference": [
+          -1.1849295580666912,
+          -0.6709993889341671
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 2.728662806501807,
+          "missing_recent_muscle": 7.202400326787537
+        }
+      },
+      {
+        "izmir_fit_people": 8,
+        "method": "loop8",
+        "replicates": 3,
+        "equal_lab_impulse": 2.5217615650462513,
+        "seed_min_max_impulse": [
+          2.3825403021087728,
+          2.7198714507488173
+        ],
+        "belgium_impulse": 1.9649544389434617,
+        "izmir_impulse": 3.078568691149041,
+        "belgium_brier": 0.03956990711114317,
+        "difference_to_0_added_people": -0.9733490382711448,
+        "person_bootstrap_95_interval_difference": [
+          -1.2314731056093342,
+          -0.6999701335091165
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 2.8679563284386282,
+          "missing_recent_muscle": 6.984924545930312
+        }
+      },
+      {
+        "izmir_fit_people": 8,
+        "method": "lstm",
+        "replicates": 3,
+        "equal_lab_impulse": 3.5242314195679434,
+        "seed_min_max_impulse": [
+          3.3663055112727704,
+          3.6182535876611914
+        ],
+        "belgium_impulse": 2.515185415142963,
+        "izmir_impulse": 4.533277423992924,
+        "belgium_brier": 0.03956305505803007,
+        "difference_to_0_added_people": -0.7001371953692915,
+        "person_bootstrap_95_interval_difference": [
+          -0.890031341567102,
+          -0.4825243768922875
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 4.156246591959554,
+          "missing_recent_muscle": 4.720767801820798
+        }
+      },
+      {
+        "izmir_fit_people": 8,
+        "method": "physical_persistence",
+        "replicates": 1,
+        "equal_lab_impulse": 4.99990004020319,
+        "seed_min_max_impulse": [
+          4.99990004020319,
+          4.99990004020319
+        ],
+        "belgium_impulse": 3.236503354943185,
+        "izmir_impulse": 6.763296725463195,
+        "belgium_brier": 0.039949987673295086,
+        "difference_to_0_added_people": 0.0,
+        "person_bootstrap_95_interval_difference": [
+          0.0,
+          0.0
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 4.99990004020319,
+          "missing_recent_muscle": 4.99990004020319
+        }
+      },
+      {
+        "izmir_fit_people": 8,
+        "method": "ridge_and_logistic",
+        "replicates": 1,
+        "equal_lab_impulse": 4.337428585785977,
+        "seed_min_max_impulse": [
+          4.337428585785977,
+          4.337428585785977
+        ],
+        "belgium_impulse": 3.2015205530585824,
+        "izmir_impulse": 5.473336618513373,
+        "belgium_brier": 0.03977363615016548,
+        "difference_to_0_added_people": -0.43994499663528674,
+        "person_bootstrap_95_interval_difference": [
+          -0.48105303372713637,
+          -0.38849825001418264
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 4.900545973397033,
+          "missing_recent_muscle": 4.582509112890455
+        }
+      },
+      {
+        "izmir_fit_people": 16,
+        "method": "histogram_gradient_boosting",
+        "replicates": 1,
+        "equal_lab_impulse": 2.521556645500554,
+        "seed_min_max_impulse": [
+          2.521556645500554,
+          2.521556645500554
+        ],
+        "belgium_impulse": 1.5877687805768748,
+        "izmir_impulse": 3.455344510424233,
+        "belgium_brier": 0.039098760216730644,
+        "difference_to_0_added_people": -0.863330087355673,
+        "person_bootstrap_95_interval_difference": [
+          -1.3943815345743054,
+          -0.31293915101275877
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 2.6462886197256745,
+          "missing_recent_muscle": 3.36797255353742
+        }
+      },
+      {
+        "izmir_fit_people": 16,
+        "method": "loop1",
+        "replicates": 3,
+        "equal_lab_impulse": 2.90615144303567,
+        "seed_min_max_impulse": [
+          2.8127715119326324,
+          2.966990635625267
+        ],
+        "belgium_impulse": 2.142073892791054,
+        "izmir_impulse": 3.670228993280285,
+        "belgium_brier": 0.03953216131220929,
+        "difference_to_0_added_people": -0.5691323513667661,
+        "person_bootstrap_95_interval_difference": [
+          -0.7995595959621333,
+          -0.32168700654512183
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 3.1434912298872018,
+          "missing_recent_muscle": 3.6843718326292554
+        }
+      },
+      {
+        "izmir_fit_people": 16,
+        "method": "loop3",
+        "replicates": 3,
+        "equal_lab_impulse": 2.4641115482712785,
+        "seed_min_max_impulse": [
+          2.211625601524055,
+          2.7266404428346043
+        ],
+        "belgium_impulse": 1.9088738185129601,
+        "izmir_impulse": 3.0193492780295976,
+        "belgium_brier": 0.03957632862023528,
+        "difference_to_0_added_people": -0.7315378621536506,
+        "person_bootstrap_95_interval_difference": [
+          -0.9157636152365701,
+          -0.5362885171995964
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 2.8626163897175716,
+          "missing_recent_muscle": 7.588167786314178
+        }
+      },
+      {
+        "izmir_fit_people": 16,
+        "method": "loop5",
+        "replicates": 3,
+        "equal_lab_impulse": 2.4910037746349283,
+        "seed_min_max_impulse": [
+          2.421036117605948,
+          2.6303631819569775
+        ],
+        "belgium_impulse": 1.9671471811728896,
+        "izmir_impulse": 3.0148603680969672,
+        "belgium_brier": 0.039737371474550205,
+        "difference_to_0_added_people": -0.7976977541288451,
+        "person_bootstrap_95_interval_difference": [
+          -1.0127152193605269,
+          -0.5620993157040562
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 2.6643164021413503,
+          "missing_recent_muscle": 7.644179697904179
+        }
+      },
+      {
+        "izmir_fit_people": 16,
+        "method": "loop8",
+        "replicates": 3,
+        "equal_lab_impulse": 2.5262693917638157,
+        "seed_min_max_impulse": [
+          2.2722060633210095,
+          2.6662418603238596
+        ],
+        "belgium_impulse": 2.052457401909854,
+        "izmir_impulse": 3.0000813816177785,
+        "belgium_brier": 0.03961603977761751,
+        "difference_to_0_added_people": -0.9688412115535802,
+        "person_bootstrap_95_interval_difference": [
+          -1.1808750800417345,
+          -0.7152328668265145
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 3.1197648715333304,
+          "missing_recent_muscle": 8.171047777601181
+        }
+      },
+      {
+        "izmir_fit_people": 16,
+        "method": "lstm",
+        "replicates": 3,
+        "equal_lab_impulse": 3.764831895157542,
+        "seed_min_max_impulse": [
+          3.690669262419758,
+          3.83204366356306
+        ],
+        "belgium_impulse": 2.4570602126640297,
+        "izmir_impulse": 5.072603577651052,
+        "belgium_brier": 0.03950697632881824,
+        "difference_to_0_added_people": -0.4595367197796936,
+        "person_bootstrap_95_interval_difference": [
+          -0.8239739282289249,
+          -0.09084472022462015
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 3.7972388046451555,
+          "missing_recent_muscle": 4.7931230176292425
+        }
+      },
+      {
+        "izmir_fit_people": 16,
+        "method": "physical_persistence",
+        "replicates": 1,
+        "equal_lab_impulse": 4.99990004020319,
+        "seed_min_max_impulse": [
+          4.99990004020319,
+          4.99990004020319
+        ],
+        "belgium_impulse": 3.236503354943185,
+        "izmir_impulse": 6.763296725463195,
+        "belgium_brier": 0.039949987673295086,
+        "difference_to_0_added_people": 0.0,
+        "person_bootstrap_95_interval_difference": [
+          0.0,
+          0.0
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 4.99990004020319,
+          "missing_recent_muscle": 4.99990004020319
+        }
+      },
+      {
+        "izmir_fit_people": 16,
+        "method": "ridge_and_logistic",
+        "replicates": 1,
+        "equal_lab_impulse": 4.244998158778615,
+        "seed_min_max_impulse": [
+          4.244998158778615,
+          4.244998158778615
+        ],
+        "belgium_impulse": 3.109072611925336,
+        "izmir_impulse": 5.380923705631894,
+        "belgium_brier": 0.03977363615016548,
+        "difference_to_0_added_people": -0.5323754236426494,
+        "person_bootstrap_95_interval_difference": [
+          -0.5894423212332658,
+          -0.4678883463183158
+        ],
+        "generated_sensor_shift_impulse_error": {
+          "delayed_muscle_history": 4.783418393248225,
+          "missing_recent_muscle": 4.221229483732973
+        }
+      }
+    ]
+  },
+  "generated_sensor_disruptions": {
+    "8": {
+      "base": {
+        "impulse": {
+          "clean": 2.3064057437745067,
+          "delayed_muscle_history": 2.8855271890364214,
+          "missing_recent_muscle": 8.191983824011972
+        },
+        "belgium_brier": {
+          "clean": 0.03959235236933131,
+          "delayed_muscle_history": 0.03952618214451883,
+          "missing_recent_muscle": 0.039947184882786445
+        }
+      },
+      "clean": {
+        "impulse": {
+          "clean": 1.9244901231936584,
+          "delayed_muscle_history": 2.799566359442377,
+          "missing_recent_muscle": 7.7898259065908455
+        },
+        "belgium_brier": {
+          "clean": 0.03950199971551058,
+          "delayed_muscle_history": 0.039358542749003175,
+          "missing_recent_muscle": 0.039999459163016386
+        }
+      },
+      "augmented": {
+        "impulse": {
+          "clean": 1.8164410352065514,
+          "delayed_muscle_history": 1.8397624174394693,
+          "missing_recent_muscle": 1.8083156357144847
+        },
+        "belgium_brier": {
+          "clean": 0.03945869832268796,
+          "delayed_muscle_history": 0.0393870229410064,
+          "missing_recent_muscle": 0.03958843162636085
+        }
+      }
+    },
+    "16": {
+      "base": {
+        "impulse": {
+          "clean": 2.4641115482712785,
+          "delayed_muscle_history": 2.8626163897175716,
+          "missing_recent_muscle": 7.588167786314178
+        },
+        "belgium_brier": {
+          "clean": 0.03957632862023528,
+          "delayed_muscle_history": 0.039539216287026085,
+          "missing_recent_muscle": 0.04004670365187274
+        }
+      },
+      "clean": {
+        "impulse": {
+          "clean": 1.9532878507338711,
+          "delayed_muscle_history": 3.01068510888268,
+          "missing_recent_muscle": 8.2721038549388
+        },
+        "belgium_brier": {
+          "clean": 0.03952556415625721,
+          "delayed_muscle_history": 0.03938859558232888,
+          "missing_recent_muscle": 0.04013568909860579
+        }
+      },
+      "augmented": {
+        "impulse": {
+          "clean": 1.9065758921668567,
+          "delayed_muscle_history": 1.91053455965211,
+          "missing_recent_muscle": 1.9734079418647692
+        },
+        "belgium_brier": {
+          "clean": 0.039478964002674054,
+          "delayed_muscle_history": 0.03941256807140914,
+          "missing_recent_muscle": 0.03953527690775382
+        }
+      }
+    }
+  },
+  "cortical_hand_position": {
+    "scope": "stored hand coordinates, trial-held development within one animal and recording session",
+    "rows": 991,
+    "trials": 15,
+    "models": [
+      {
+        "fit_trials": 25,
+        "variant": "loop1",
+        "replicates": 3,
+        "mean_mm": 28.893418213575412,
+        "seed_min_max_mm": [
+          26.340263554581828,
+          31.11140894240232
+        ],
+        "generated_40ms_delay_mean_mm": 31.794563340826254
+      },
+      {
+        "fit_trials": 25,
+        "variant": "loop3",
+        "replicates": 3,
+        "mean_mm": 24.96032965014949,
+        "seed_min_max_mm": [
+          24.423422060685294,
+          25.330157936421838
+        ],
+        "generated_40ms_delay_mean_mm": 28.50505818418283
+      },
+      {
+        "fit_trials": 25,
+        "variant": "loop5",
+        "replicates": 3,
+        "mean_mm": 27.14462210447508,
+        "seed_min_max_mm": [
+          25.875423498643713,
+          28.44677673529401
+        ],
+        "generated_40ms_delay_mean_mm": 31.457135100706022
+      },
+      {
+        "fit_trials": 25,
+        "variant": "loop8",
+        "replicates": 3,
+        "mean_mm": 28.92216165443018,
+        "seed_min_max_mm": [
+          26.494260545086476,
+          33.634315222196626
+        ],
+        "generated_40ms_delay_mean_mm": 33.940310864239784
+      },
+      {
+        "fit_trials": 25,
+        "variant": "lstm",
+        "replicates": 3,
+        "mean_mm": 27.286935639322753,
+        "seed_min_max_mm": [
+          26.766596633981006,
+          27.951139366585984
+        ],
+        "generated_40ms_delay_mean_mm": 30.732143662486198
+      },
+      {
+        "fit_trials": 25,
+        "variant": "ridge10",
+        "replicates": 1,
+        "mean_mm": 55.52407480750083,
+        "seed_min_max_mm": [
+          55.52407480750083,
+          55.52407480750083
+        ],
+        "generated_40ms_delay_mean_mm": 55.97499092762077
+      },
+      {
+        "fit_trials": 25,
+        "variant": "ridge100",
+        "replicates": 1,
+        "mean_mm": 46.30886447189467,
+        "seed_min_max_mm": [
+          46.30886447189467,
+          46.30886447189467
+        ],
+        "generated_40ms_delay_mean_mm": 48.199925198946644
+      },
+      {
+        "fit_trials": 25,
+        "variant": "training_mean",
+        "replicates": 1,
+        "mean_mm": 55.01388430629672,
+        "seed_min_max_mm": [
+          55.01388430629672,
+          55.01388430629672
+        ],
+        "generated_40ms_delay_mean_mm": 55.01388430629672
+      },
+      {
+        "fit_trials": 50,
+        "variant": "loop1",
+        "replicates": 3,
+        "mean_mm": 23.640239153576772,
+        "seed_min_max_mm": [
+          23.16890893281664,
+          24.180599327324106
+        ],
+        "generated_40ms_delay_mean_mm": 25.94867896820484
+      },
+      {
+        "fit_trials": 50,
+        "variant": "loop3",
+        "replicates": 3,
+        "mean_mm": 24.853706740932353,
+        "seed_min_max_mm": [
+          21.414582430320248,
+          29.21629451287259
+        ],
+        "generated_40ms_delay_mean_mm": 27.49635479793405
+      },
+      {
+        "fit_trials": 50,
+        "variant": "loop5",
+        "replicates": 3,
+        "mean_mm": 24.181980095838526,
+        "seed_min_max_mm": [
+          22.04616244017681,
+          25.607896485320403
+        ],
+        "generated_40ms_delay_mean_mm": 27.105430074528226
+      },
+      {
+        "fit_trials": 50,
+        "variant": "loop8",
+        "replicates": 3,
+        "mean_mm": 23.105127855419003,
+        "seed_min_max_mm": [
+          23.014814362351178,
+          23.16865393029058
+        ],
+        "generated_40ms_delay_mean_mm": 26.258047563238208
+      },
+      {
+        "fit_trials": 50,
+        "variant": "lstm",
+        "replicates": 3,
+        "mean_mm": 26.913365000158176,
+        "seed_min_max_mm": [
+          23.624961041668477,
+          31.034727350169412
+        ],
+        "generated_40ms_delay_mean_mm": 31.085723987480566
+      },
+      {
+        "fit_trials": 50,
+        "variant": "ridge10",
+        "replicates": 1,
+        "mean_mm": 47.5092376409895,
+        "seed_min_max_mm": [
+          47.5092376409895,
+          47.5092376409895
+        ],
+        "generated_40ms_delay_mean_mm": 48.58153810976423
+      },
+      {
+        "fit_trials": 50,
+        "variant": "ridge100",
+        "replicates": 1,
+        "mean_mm": 42.855055051448865,
+        "seed_min_max_mm": [
+          42.855055051448865,
+          42.855055051448865
+        ],
+        "generated_40ms_delay_mean_mm": 45.01278898688648
+      },
+      {
+        "fit_trials": 50,
+        "variant": "training_mean",
+        "replicates": 1,
+        "mean_mm": 51.95091354624785,
+        "seed_min_max_mm": [
+          51.95091354624785,
+          51.95091354624785
+        ],
+        "generated_40ms_delay_mean_mm": 51.95091354624785
+      },
+      {
+        "fit_trials": 75,
+        "variant": "loop1",
+        "replicates": 3,
+        "mean_mm": 24.171778729268706,
+        "seed_min_max_mm": [
+          23.1275940811098,
+          26.129469312141477
+        ],
+        "generated_40ms_delay_mean_mm": 27.02317297937346
+      },
+      {
+        "fit_trials": 75,
+        "variant": "loop3",
+        "replicates": 3,
+        "mean_mm": 22.480768044008826,
+        "seed_min_max_mm": [
+          22.149865188162007,
+          22.741608279972002
+        ],
+        "generated_40ms_delay_mean_mm": 26.293880859998765
+      },
+      {
+        "fit_trials": 75,
+        "variant": "loop5",
+        "replicates": 3,
+        "mean_mm": 23.11833320587448,
+        "seed_min_max_mm": [
+          21.2286150920423,
+          24.345269585216133
+        ],
+        "generated_40ms_delay_mean_mm": 27.722169317930366
+      },
+      {
+        "fit_trials": 75,
+        "variant": "loop8",
+        "replicates": 3,
+        "mean_mm": 21.12120823300585,
+        "seed_min_max_mm": [
+          20.137642960614937,
+          21.86662284638586
+        ],
+        "generated_40ms_delay_mean_mm": 25.0465173416324
+      },
+      {
+        "fit_trials": 75,
+        "variant": "lstm",
+        "replicates": 3,
+        "mean_mm": 25.31933209119308,
+        "seed_min_max_mm": [
+          23.332003121745284,
+          28.321681318557317
+        ],
+        "generated_40ms_delay_mean_mm": 28.88361457850048
+      },
+      {
+        "fit_trials": 75,
+        "variant": "ridge10",
+        "replicates": 1,
+        "mean_mm": 45.18826279081828,
+        "seed_min_max_mm": [
+          45.18826279081828,
+          45.18826279081828
+        ],
+        "generated_40ms_delay_mean_mm": 46.210896336280044
+      },
+      {
+        "fit_trials": 75,
+        "variant": "ridge100",
+        "replicates": 1,
+        "mean_mm": 42.706827699438946,
+        "seed_min_max_mm": [
+          42.706827699438946,
+          42.706827699438946
+        ],
+        "generated_40ms_delay_mean_mm": 44.66623072939693
+      },
+      {
+        "fit_trials": 75,
+        "variant": "training_mean",
+        "replicates": 1,
+        "mean_mm": 51.5746326717043,
+        "seed_min_max_mm": [
+          51.5746326717043,
+          51.5746326717043
+        ],
+        "generated_40ms_delay_mean_mm": 51.5746326717043
+      }
+    ],
+    "recorded_units": 142
+  },
+  "resources": {
+    "belgium": "https://doi.org/10.6084/m9.figshare.24192480.v1",
+    "izmir": "https://doi.org/10.48623/aperta.286865",
+    "cortex": "https://doi.org/10.48324/dandi.000140/0.220113.0408"
+  },
+  "held_final_outcomes_accessed": false
+}
