@@ -16,6 +16,8 @@
 
 When the scene is out of view, the recovery hint offers drag, arrow-key aiming and Escape → Reset brain view. With the brain out of view, the reset restores the initial look. Tutorial and information panels take pointer input, and the Brain ring marks a valid Space pickup.
 
+Extra sharing parameters leave the selected edition intact. The address error panel opens the default game address through **Start the game**. Camera drag suppresses motor-area activation by the aiming mark. With the information visible, the ring in the limb drag step appears when a press at its centre can select the chosen limb. The view recovery message is available at every information level.
+
 ## Command box and camera
 
 During play, **F** and **C** work on the game canvas and toolbar buttons. Text fields, selectors, links and other dialogs keep their keyboard controls. **Escape** dismisses the Command box or recorder and returns focus to the canvas.

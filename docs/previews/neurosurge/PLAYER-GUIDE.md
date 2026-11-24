@@ -13,6 +13,10 @@ The **Resume** button keeps the pointer free. To turn the view with every mouse 
 
 If you turn far enough that the brain and both bodies leave the picture, a message says you have turned away. Drag the empty space back toward the brain, press an arrow key to aim at a motor area, or press Escape and choose Reset brain view. While the brain is out of view, Reset brain view returns the camera to its starting direction. The tutorial and information cards receive your clicks, so you can read them without pressing a motor area behind them. When the tutorial shows a Brain ring, aim at it and press Space to pick up the brain.
 
+A game link can still open when the app that shared it adds tracking information to the address. If the game shows an address error, select **Start the game** to open the usual address.
+
+Drag on an empty part of the picture to turn your view. Finish the drag before aiming at a coloured area to start a movement. When the tutorial asks you to drag a limb, start at the centre of the ring and move the pointer while holding the button. If you hid the information cards, press R to show them again. If the ring stays hidden, turn the view until the limb is clear. If you turn away from the whole scene, the game shows how to look back, even with the information cards hidden.
+
 ## Move one limb yourself
 
 During play, press **1** for the left arm, **2** for the left leg, **3** for the right leg or **4** for the right arm. Use **W**, **A**, **S** and **D** to move the selected limb. Release the key when it reaches the position you want.

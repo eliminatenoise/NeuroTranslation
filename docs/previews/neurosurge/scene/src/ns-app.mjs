@@ -172,6 +172,44 @@ export const QUIET_START = Object.freeze({ on: true, lookDeg: 1 });
  * the area it started from. A click needs no rest.
  *  - on: false = the crosshair is the only aim, as before.
  *  - restPx, restMs: the pointer rests once it has stayed within restPx (CSS px) of one place for restMs. */
+/**
+ * 25 November 2026 (section 211): the tutorial's W A S D step counts a leg or the right arm as moved by a key only once
+ * its end is `minM` metres from where it was when that key went down. (The left arm has its own rule: out.reachMoved.)
+ */
+export const GUIDE_KEY_MOVE = Object.freeze({ on: true, minM: 0.03 });
+
+/**
+ * 25 November 2026 (DESIGN-DECISIONS section 213; a tester's play-through of update 74, finding 1): where the tutorial's
+ * ring for the chosen limb stands. It stood at the limb's wrist or ankle as projected, whatever was drawn in front
+ * there: with the left leg chosen it lay on your left arm ("Your left leg" over the biceps), and at 800x600 on an
+ * arrow's tip, so the step "Drag a visible arm or leg" asked for a drag that took the arm or turned the brain. The
+ * ring goes to a place on the limb where the game's own pick says a press takes THAT limb.
+ *   along      places tried along the limb: 1 = the wrist or ankle, 0.5 = the elbow or knee, 0 = the shoulder or hip
+ *   offPx      and beside each, in CSS px
+ *   checkFrames  a place found is asked again this often; while none is found one place is tried each frame
+ *   ringPx     the ring's own reach: on the first pass a place counts only if the limb is also taken this far to each side
+ * limbCueRecipes() lists them in the order tried: the hand or foot itself first.
+ */
+export const LIMB_CUE = Object.freeze({ on: true, along: Object.freeze([1, 0.88, 0.76, 0.64, 0.5, 0.38, 0.26]),
+  offPx: Object.freeze([[0, 0], [12, 0], [-12, 0], [0, 12], [0, -12]].map(v => Object.freeze(v))), checkFrames: 12, ringPx: 6 });
+export function limbCueRecipes(o = LIMB_CUE) {
+  const out = [{ end: true, s: 1, dx: 0, dy: 0 }];
+  for (const s of o.along) for (const [dx, dy] of o.offPx) out.push({ end: false, s, dx, dy });
+  return out;
+}
+/** The point of a limb for a recipe (pure): `path` = { root, bend, frame, end } world points (bend may be null: a
+ * straight line then). Returns [x, y, z] or null. */
+export function limbCuePoint(path, r) {
+  if (!path || !r) return null;
+  const ok = v => Array.isArray(v) && v.length === 3 && v.every(Number.isFinite);
+  if (r.end === true) return ok(path.end) ? path.end.slice() : ok(path.frame) ? path.frame.slice() : null;
+  if (!ok(path.root) || !ok(path.frame)) return null;
+  const s = Math.min(1, Math.max(0, Number(r.s)));
+  const mix = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+  if (!ok(path.bend)) return mix(path.root, path.frame, s);
+  return s >= 0.5 ? mix(path.bend, path.frame, (s - 0.5) / 0.5) : mix(path.root, path.bend, s / 0.5);
+}
+
 export const FREE_AIM = Object.freeze({ on: true, restPx: 3, restMs: 100 });
 /** FREE_AIM's step (pure). seen: the last record (null at first); pointer / lookMs / yaw / pitch: the controls' free
  * pointer ({ x, y, timeMs } | null) and look now; free: the game plays with the pointer not captured; width / height:
@@ -217,12 +255,19 @@ export function aimStep(seen, { pointer = null, lookMs = null, yaw = 0, pitch = 
     }
   } else { s.anchor = null; s.moving = false; s.from = null; s.left = false; }
   // (the crosshair takes the aim back without a look of the player's own: silent; while a button is down: silent)
-  const silent = (aims && (down === true || travelling)) || (s.was === true && !aims && !lMoved);
+  // (25 November 2026, section 213: and while the free pointer drags the view. The look's own movement gives the mark in
+  // the middle the aim during the drag, and it switched on every area the drag carried it across: 5 movements in
+  // twelve drags on empty space. The mark names what it crosses and starts nothing until the button is up.)
+  const silent = (aims && (down === true || travelling)) || (s.was === true && !aims && !lMoved) || (on === true && free === true && down === true && !aims);
   if (silent) arrivedFrom = undefined;
   s.was = aims;
   const look = Number.isFinite(lookMs) ? lookMs : null;
   const ms = look === null ? (Number.isFinite(s.ms) ? s.ms : null) : Number.isFinite(s.ms) ? Math.max(look, s.ms) : look;
-  return { seen: s, pointer: aims, x: aims ? pointer.x : width / 2, y: aims ? pointer.y : height / 2, silent, travelling: aims && travelling, arrivedFrom, ms };
+  // (25 November 2026, section 211) `away`: the pointer was the last thing moved and is not on the picture now (on a card,
+  // or out of the window). The mark in the middle has the aim back, silently, but the player is not aiming with it: the
+  // app shows no tip there until an arrow key or a drag of the view makes the mark the aim again.
+  const away = on === true && free === true && !aims && busy !== true && s.pSeq > s.lSeq;
+  return { seen: s, pointer: aims, x: aims ? pointer.x : width / 2, y: aims ? pointer.y : height / 2, silent, travelling: aims && travelling, arrivedFrom, ms, away };
 }
 /** 19 November 2026 (the owner: "You can now switch between which of the four limbs you want to control ... your left
  * arm using 1, your left leg using 2, your right leg using 3, your right arm using 4 ... double clicking will shift you
@@ -3168,8 +3213,12 @@ export function infoTookId(seenN, activity) {
  * Returns { regionId, since, settled, crossed }: `settled` is true when the card may follow the look (always false with
  * no area under it); `crossed` = { areaId: untilT } are the areas the look only crossed (the area under an unsettled
  * look included).
+ * 25 November 2026 (FREE_AIM, section 211): `moving` is true while the free pointer is the aim and has not come to rest
+ * (ns-app aimStep `travelling`). A pointer on its way starts no movement, so it takes no card either: the rest does not
+ * count from a frame the pointer moved in, and "no card yet" is no reason to take the first area it crosses. The kept
+ * card's own area, an area already taken and an area that was clicked or chosen stay as they were.
  */
-export function infoSettleStep(prev, { regionId = null, t = 0, keptId = null, chosenId = null, clickedId = null, levels = null, pulseId = null } = {}) {
+export function infoSettleStep(prev, { regionId = null, t = 0, keptId = null, chosenId = null, clickedId = null, levels = null, pulseId = null, moving = false } = {}) {
   const p = prev && typeof prev === 'object' ? prev : null;
   const now = Number.isFinite(t) ? t : 0;
   const on = typeof regionId === 'string' && regionId !== '' ? regionId : null;
@@ -3177,8 +3226,9 @@ export function infoSettleStep(prev, { regionId = null, t = 0, keptId = null, ch
   let since = null, settled = false;
   if (on) {
     const same = Boolean(p && p.regionId === on && Number.isFinite(p.since) && p.since <= now);
-    since = same ? p.since : now;
-    settled = (same && p.settled === true) || typeof keptId !== 'string' || keptId === on || meant(on) || now - since >= INFO_SETTLE.restS - 1e-9;
+    const kept = (same && p.settled === true) || keptId === on || meant(on);
+    since = same && !(moving === true && !kept) ? p.since : now;
+    settled = kept || (moving !== true && (typeof keptId !== 'string' || now - since >= INFO_SETTLE.restS - 1e-9));
   }
   const crossed = {};
   if (p && p.crossed && typeof p.crossed === 'object') {
@@ -6938,6 +6988,8 @@ export function start(params = {}) {
   // 19 November 2026 (EASE, the playable tutorial): steps done outside the frame loop (R pressed, Enter to skip a
   // step) wait here for the next frame's guideStep.
   const guideAsyncEvents = [];
+  let guideKeyFrom = { limb: null, frame: -2, x: null, z: null }; // (GUIDE_KEY_MOVE: where the limb's end was when each axis' key went down)
+  const guideHandFrom = { x: null, z: null }; // (the same for the left hand: its place beside the shoulder, state.hand.rel)
   // 19 November 2026 (EASE): how many times a motor area has been pressed, for the tip's newcomer line ("Click, or
   // press a number": ns-quiet tipTeachNow). Kept across visits; counted in the frame loop from the frame's own events.
   const TIP_PRESSES_KEY = 'neurosurge.presses.v1';
@@ -8552,7 +8604,7 @@ export function start(params = {}) {
 
   /** Info overlay (R14): build the model for the current gaze and hand it to the scene's panel, the HUD's, or the
    * shell fallback panel, only when its subject or displayed activity changes. */
-  function updateInfo(binding, out) {
+  function updateInfo(binding, out, { travelling = false } = {}) {
     const pulseNow = out.pulse && out.pulse.regionId ? { regionId: out.pulse.regionId, actionId: out.pulse.regionActionId } : null;
     // R558 (Messages 55 and 56): the movement a number key chose stays the card's movement while the look stays put.
     if (infoChosen) infoChosen = infoChosenStep(infoChosen, { gaze: out.gaze, pulse: pulseNow });
@@ -8576,7 +8628,7 @@ export function start(params = {}) {
       keptId: infoLastRegion && typeof infoLastRegion.regionId === 'string' ? infoLastRegion.regionId : null,
       chosenId: infoChosen ? infoChosen.regionId : null,
       clickedId: steppedId || tookId || (act && act.pulseClick === true && pulseNow ? pulseNow.regionId : null),
-      levels: out.regionActivity, pulseId: pulseNow ? pulseNow.regionId : null });
+      levels: out.regionActivity, pulseId: pulseNow ? pulseNow.regionId : null, moving: travelling === true });
     // 22 November 2026 (H5, ns-actions GRIP_RELEASE): the grip's light fading out after Space is let go switches no area
     // on for the card (its own card has ended; the 0.6 s opening that used to hold that card is gone), so the card that
     // was there before the grip comes back, as before, and no "Left hand" card is left behind
@@ -9416,15 +9468,23 @@ export function start(params = {}) {
       /** The press point: the crosshair while the mouse is captured, else the free pointer. */
       /** 25 November 2026 (section 209, hunt of update 73, finding 5): the boxes of the cards the pointer's tip keeps off
        * besides the tutorial's own: the information card, the limb buttons and the map's card, in the canvas's CSS px,
-       * read at most every 250 ms. */
+       * read at most every 120 ms. */
       let tipCardsAt = -Infinity, tipCardsNow = [];
       function tipCards(nowMs) {
-        if (nowMs - tipCardsAt < 250) return tipCardsNow;
+        if (nowMs - tipCardsAt < 120) return tipCardsNow; // (section 211: 120 ms, it was 250: the marks' words move with their ring)
         tipCardsAt = nowMs; tipCardsNow = [];
         try {
           const o = canvas.getBoundingClientRect();
           for (const sel of ['.ns-infopanel', '.ns-limbs', '.ns-emap-card']) {
             const e = doc.querySelector(sel);
+            if (!e || e.hidden || typeof e.getBoundingClientRect !== 'function') continue;
+            const r = e.getBoundingClientRect();
+            if (r.width > 0 && r.height > 0) tipCardsNow.push({ x0: r.left - o.left, y0: r.top - o.top, x1: r.right - o.left, y1: r.bottom - o.top, weight: 4 }); // (weight: ns-quiet tipSides, a card drawn over the tip)
+          }
+          // (25 November 2026, section 211: and the words of the tutorial's marks, "Hip aim", "Your left leg", "Brain":
+          // in the 800x600 tutorial 38 of 214 pointer tips lay on "Hip aim". The words do not give way to the tip, which
+          // moves with the pointer; the tip gives way to them.)
+          if (typeof doc.querySelectorAll === 'function') for (const e of doc.querySelectorAll('.ns-guide-cues .ns-guide-mark-name')) {
             if (!e || e.hidden || typeof e.getBoundingClientRect !== 'function') continue;
             const r = e.getBoundingClientRect();
             if (r.width > 0 && r.height > 0) tipCardsNow.push({ x0: r.left - o.left, y0: r.top - o.top, x1: r.right - o.left, y1: r.bottom - o.top });
@@ -9926,6 +9986,48 @@ export function start(params = {}) {
       function relativeLimbEnd(limb, out) {
         const points = limbEnds(limb, out);
         return points ? points.frame.map((value, axis) => value - points.root[axis]) : null;
+      }
+
+      // 25 November 2026 (section 213, LIMB_CUE): the place of the tutorial's ring for the chosen limb: a point of the
+      // limb where a press takes that limb (this frame's own pick), found one try a frame and asked again every
+      // checkFrames; nothing is picked while something is held, a button is down or the camera is on its way.
+      const LIMB_CUE_RECIPES = limbCueRecipes();
+      let limbCueSt = { limb: null, idx: 0, found: null, checkedAt: -Infinity, tries: 0 };
+      function limbCuePath(limb, ends, o) {
+        let bend = null;
+        try {
+          if (limb === 'leftArm') { const sol = o && o.fit && o.fit.solution, C = o && o.attachment && o.attachment.cameraToWorld; if (sol && C && Array.isArray(sol.elbowCam)) bend = NsCollide.apply(C, sol.elbowCam[0], sol.elbowCam[1], sol.elbowCam[2]); }
+          else if (canSolveLimbs()) bend = worldOf(camBodyToWorld, NsGrasp.limbPoint(bodyRig, segsNow(), limb, 'bend'));
+        } catch { bend = null; }
+        return { root: ends.root, bend, frame: ends.frame, end: ends.end };
+      }
+      /** { x, y } of the ring as shares of the picture. A drag cue needs a current press target. */
+      function limbCuePlace(limb, ends, o, width, height, busy, needsPressTarget) {
+        if (!LIMB_CUE.on || !ends || !sceneFn('projectWorld') || !sceneFn('controlLayersAt')) return null;
+        if (limbCueSt.limb !== limb) limbCueSt = { limb, idx: 0, found: null, checkedAt: -Infinity, tries: 0 };
+        const st = limbCueSt, path = limbCuePath(limb, ends, o);
+        const screenOf = r => {
+          const w = limbCuePoint(path, r), q = w ? callScene('projectWorld', { cue: w })?.cue : null;
+          if (!q || !q.visible) return null;
+          const x = q.x * width + r.dx, y = q.y * height + r.dy;
+          return x >= 10 && y >= 10 && x <= width - 10 && y <= height - 10 ? { x, y } : null;
+        };
+        const takesAt = (x, y) => { const it = itemFromTargets(targetsAt(x, y)); return Boolean(it && it.target === 'limb' && it.limb === limb); };
+        const takes = r => { const at = screenOf(r); return Boolean(at) && takesAt(at.x, at.y); };
+        // (the whole ring on the limb: its middle and four places LIMB_CUE.ringPx from it; asked only where the middle
+        // already takes the limb, and no longer asked for once every place has been tried without one)
+        const whole = r => { const at = screenOf(r), d = LIMB_CUE.ringPx; return Boolean(at) && takesAt(at.x, at.y) && takesAt(at.x + d, at.y) && takesAt(at.x - d, at.y) && takesAt(at.x, at.y + d) && takesAt(at.x, at.y - d); };
+        if (!busy) {
+          if (st.found) { if (frames - st.checkedAt >= LIMB_CUE.checkFrames) { st.checkedAt = frames; if (!takes(st.found)) { st.found = null; st.idx = 0; } } }
+          if (!st.found) {
+            const n = LIMB_CUE_RECIPES.length, r = LIMB_CUE_RECIPES[st.idx % n], strict = st.idx < n;
+            st.idx++; st.tries++;
+            if (strict ? whole(r) : takes(r)) { st.found = r; st.checkedAt = frames; }
+          }
+        }
+        const at = st.found ? screenOf(st.found) : null;
+        if (needsPressTarget && (busy || !at || !takesAt(at.x, at.y))) return null;
+        return at ? { x: at.x / width, y: at.y / height } : null;
       }
 
       function updateJointAim(axes) {
@@ -10647,7 +10749,18 @@ export function start(params = {}) {
             h.waitFrames = changed ? 0 : (h.waitFrames || 0) + 1; // (frames in a row on which the limb could not follow)
             if (changed) { holdMoved = limb; if (limb !== 'rightArm') holdLegUntilMs = clockMs() + 250; }
             // (the tutorial's W A S D step counts a leg or the right arm moved by the keys as it counts the left hand)
-            if (changed && keyed) { if (ax !== 0) guideAsyncEvents.push({ type: 'move', axis: 'x' }); if (az !== 0) guideAsyncEvents.push({ type: 'move', axis: 'z' }); }
+            // (25 November 2026, section 211, GUIDE_KEY_MOVE: only once the end is minM from where it was when the key
+            // of that axis went down. Every limb starts reached out, and a second of W there moved the foot 0 to 6 mm in
+            // steps that each counted, so the step "Press S to draw it in" was ticked by a key that moved nothing)
+            if (guideKeyFrom.limb !== limb || guideKeyFrom.frame !== frames - 1) guideKeyFrom = { limb, frame: frames, x: null, z: null };
+            guideKeyFrom.frame = frames;
+            if (!keyed || ax === 0) guideKeyFrom.x = null; else if (!guideKeyFrom.x) guideKeyFrom.x = pts.end.slice();
+            if (!keyed || az === 0) guideKeyFrom.z = null; else if (!guideKeyFrom.z) guideKeyFrom.z = pts.end.slice();
+            if (changed && keyed) {
+              const ne = worldOf(camBodyToWorld, r.endMm), far = f => !GUIDE_KEY_MOVE.on || (f && Math.hypot(ne[0] - f[0], ne[1] - f[1], ne[2] - f[2]) >= GUIDE_KEY_MOVE.minM);
+              if (ax !== 0 && far(guideKeyFrom.x)) guideAsyncEvents.push({ type: 'move', axis: 'x' });
+              if (az !== 0 && far(guideKeyFrom.z)) guideAsyncEvents.push({ type: 'move', axis: 'z' });
+            }
             // (a place the limb cannot reach is remembered, so a still view does not ask the solve again every frame)
             h.stuck = changed ? null : T.slice(); h.stuckHead = holdHeadNow; // (LIMBS5 pass 2: and the trunk it could not be reached with)
             // (LIMBS5 pass 3, HOLD_BODY pinSkipMm: held as near as its joints allow, more than waitMm short, while the trunk carries it)
@@ -13351,6 +13464,18 @@ export function start(params = {}) {
         // R4-text (D7): the "Try this" guide follows real events of this frame (one pure call; never blocks play).
         // R5-integrate-core (R5-text W2): the E goal hears the view changes (third when the switch starts, first when it ends).
         const guideEvs = NG.guideEventsFromFrame({ prev: prevSim, next: simState, out, inputs: stepInputs, bodyMap });
+        // (25 November 2026, section 211, GUIDE_KEY_MOVE: the left arm's W A S D count for the tutorial like the other
+        // limbs': once the hand is minM from where it was when the key of that axis went down. Its own report,
+        // out.reachMoved, adds up the path, so 1.5 s of W with the arm already reached out, a few millimetres, counted.)
+        if (GUIDE_KEY_MOVE.on) {
+          const relOf = S => (S && S.hand && Array.isArray(S.hand.rel) && S.hand.rel.length === 3 && S.hand.rel.every(Number.isFinite) ? S.hand.rel : null);
+          const relNow = relOf(simState), relWas = relOf(prevSim) || relNow;
+          const kx = stepInputs && stepInputs.axes ? Math.sign(Number(stepInputs.axes.x) || 0) : 0, kz = stepInputs && stepInputs.axes ? Math.sign(Number(stepInputs.axes.z) || 0) : 0;
+          if (kx === 0 || !relNow) guideHandFrom.x = null; else if (!guideHandFrom.x) guideHandFrom.x = relWas.slice();
+          if (kz === 0 || !relNow) guideHandFrom.z = null; else if (!guideHandFrom.z) guideHandFrom.z = relWas.slice();
+          const far = f => !relNow || (f && Math.hypot(relNow[0] - f[0], relNow[1] - f[1], relNow[2] - f[2]) >= GUIDE_KEY_MOVE.minM);
+          for (let i = guideEvs.length - 1; i >= 0; i--) { const e = guideEvs[i]; if (e && e.type === 'move' && !far(e.axis === 'x' ? guideHandFrom.x : guideHandFrom.z)) guideEvs.splice(i, 1); }
+        }
         guideEvs.push(...mirrorGuideEvents.map(e => ({ ...e, t: simState.t })));
         guideEvs.push(...moveGuideEvents.map(e => ({ ...e, t: simState.t })));
         // 19 November (the tutorial): R and Enter, pressed since the last frame. (20 November 2026: the crosshair on a
@@ -14016,7 +14141,7 @@ export function start(params = {}) {
         // 24 November 2026 (FREE_AIM, section 206): while the pointer is the aim the mark at the middle of the picture is not:
         // it is drawn faint and does not light up for what the pointer is on (it still shows where the look points, where
         // an arrow key aims and where the chosen limb goes with the view).
-        model.crosshairAway = aimNow.pointer === true;
+        model.crosshairAway = aimNow.pointer === true || aimNow.away === true;
         if (aimNow.pointer) model.crosshairActive = false;
         if (now < contact.untilMs && NT.HUD.contactStop) model.note = [NT.HUD.contactStop(contact.last), model.note].filter(Boolean).join(' \u00b7 ');
         // R558 (R31): what the last tapped muscle switched on, in plain words, for a few seconds.
@@ -14127,7 +14252,7 @@ export function start(params = {}) {
           // level ('read': one small card for the area looked at), and the tip and the prompt stay with it; only the
           // full cards ('more': the "Looking at" card, the long guide line, the colour key) take their place.
           const quietOn = shellIsPlaying(shellState) && Boolean(quietRoot) && quietRoot.getAttribute('data-ns-read') !== 'more';
-          let tipModel = null, tipCentre = false;
+          let tipModel = null, tipCentre = false, tipLost = false;
           // 25 November 2026 (LOOK_LOST): is the picture empty? (the brain's sample points all out of it, then a coarse grid
           // of the game's own picks, asked at most every probeMs)
           if (LOOK_LOST.on && live && brainSeen === 0 && !holdingNow) {
@@ -14193,7 +14318,9 @@ export function start(params = {}) {
             // their own tip (a check: the area's name and numbers were hidden for as long as a limb was controlled).
             // (25 November 2026, section 209, finding 5: with the pointer as the aim the line shows only on that limb; "on
             // nothing" is most of the picture for a pointer, and the line followed it everywhere, also over the cards)
-            else if (limbLatch && NT.TIP.limbTaken && !arrowTip && ((!tipModel && !aimNow.pointer) || (tipModel && tipModel.kind !== 'area' && tipModel.kind !== 'arrow' && crossLimb === limbLatch)))
+            // (25 November 2026, section 213: not in a picture with nothing in it, LOOK_LOST: with a limb chosen this line
+            // stood in the middle of the empty picture in place of "You have turned away from the brain")
+            else if (!lostView && limbLatch && NT.TIP.limbTaken && !arrowTip && ((!tipModel && !aimNow.pointer) || (tipModel && tipModel.kind !== 'area' && tipModel.kind !== 'arrow' && crossLimb === limbLatch)))
               tipModel = quietTipModel({ held: NT.TIP.limbTaken(limbLatch) });
             // 22 November 2026 (browser hunt of update 64, H9): the brain carried behind you and let go is in neither view;
             // with nothing else under the crosshair (no arrow either) the tip says where it is and how to get it back (the
@@ -14206,8 +14333,19 @@ export function start(params = {}) {
               if (lost) tipModel = quietTipModel({ held: lost === 'behind' ? NT.TIP.brainBehind : NT.TIP.brainAway });
               // (25 November 2026, LOOK_LOST: the view itself turned away from everything: said in the middle of the picture)
               else if (lostView && NT.TIP.viewLost) { tipModel = quietTipModel({ held: NT.TIP.viewLost }); tipCentre = true; }
+              if (tipModel) tipLost = true;
             }
+            // (25 November 2026, section 211: the pointer was moved last and now lies on a card or outside the window. The
+            // mark in the middle is not what the player aims with, so nothing is named there: an area's tip stood in the
+            // middle of the picture while the pointer was on the limb buttons. What Space holds and a lost brain or view
+            // are still said.)
+            if (aimNow.away === true && tipModel && !held && !tipLost) tipModel = null;
           }
+          // (25 November 2026, section 213, LOOK_LOST at the full reading level: the tip layer is off there, and the
+          // empty picture had only the status card's "Looking at: empty space". The lost view's words show in the middle
+          // at every level; nothing else of the layer does.)
+          let lostOnly = false;
+          if (!quietOn && live && lostView && NT.TIP.viewLost && shellIsPlaying(shellState)) { tipModel = quietTipModel({ held: NT.TIP.viewLost }); tipCentre = true; lostOnly = true; }
           if (sceneFn('setKeyboardAreaTip')) callScene('setKeyboardAreaTip', tipModel?.kind === 'area' && Boolean(tipModel.hint));
           const free = cs && cs.pointer && !lockedNow() ? cs.pointer : null;
           const tipAtPointer = Boolean(!tipCentre && free && Number.isFinite(free.x) && Number.isFinite(free.y) && (aimNow.pointer || !FREE_AIM.on || (tipModel && tipModel.kind === 'aim')));
@@ -14216,7 +14354,7 @@ export function start(params = {}) {
           // the region labels keep off, armAvoidShapes), so it no longer covers the palm and thumb at the hand's areas
           const handR = armAvoid ? armAvoid.rects[0] : null;
           const handBox = handR ? { x0: handR.x0 * size.width, y0: handR.y0 * size.height, x1: handR.x1 * size.width, y1: handR.y1 * size.height } : null;
-          quietUi.update({ avoid: handBox, cards: tipCards(now), show: quietOn, tip: tipModel, side: tipArea && tipArea.hemisphere === (BRAIN_FRONT_DOWN ? 'right' : 'left') ? 'left' : null, prompt: quietOn ? quietPromptText(guideNow, NT.GUIDE.short) : '',
+          quietUi.update({ avoid: handBox, cards: tipCards(now), show: quietOn || lostOnly, tip: tipModel, side: tipArea && tipArea.hemisphere === (BRAIN_FRONT_DOWN ? 'right' : 'left') ? 'left' : null, prompt: quietOn ? quietPromptText(guideNow, NT.GUIDE.short) : '',
             count: quietOn ? quietPromptCount(guideNow) : '', skip: quietOn && guideNow && guideNow.visible && !guideNow.finished && guide.tutorial === true ? NT.GUIDE.short.skip : '',
             // (24 November 2026, FREE_AIM: beside the aim; a free pointer that is not the aim has only the Space line there)
             x: tipAtPointer ? free.x : size.width / 2, y: tipAtPointer ? free.y : size.height / 2,
@@ -14232,7 +14370,17 @@ export function start(params = {}) {
             const motor = targeted ? guidePoint(targeted.world, targeted.area.label || targeted.area.id,
               mods.colors?.areaColorCss?.(targeted.area.id)) : null;
             const limbKeysStep = step === 'chooseLimb' || step === 'aimJoint' || step === 'moveHand' || step === 'dragLimb';
-            const limb = limbKeysStep ? guidePoint(limbEnds(selectedLimb, out)?.frame, NT.GRASP_INFO.chosen[selectedLimb]) : null;
+            // (section 213, LIMB_CUE: on the limb where a press takes it; the wrist or ankle as projected until such a
+            // place is found, and when none is)
+            let limb = null;
+            if (limbKeysStep) {
+              const ends = limbEnds(selectedLimb, out);
+              const needsPressTarget = step === 'dragLimb';
+              if (!needsPressTarget) limb = guidePoint(ends?.frame, NT.GRASP_INFO.chosen[selectedLimb]);
+              const busy = holdBusy() || Boolean(cs.button && cs.button.down) || camPose.moving === true;
+              const at = limbCuePlace(selectedLimb, ends, out, size.width, size.height, busy, needsPressTarget);
+              if (at) limb = { ...(limb || {}), x: at.x, y: at.y, visible: true, label: NT.GRASP_INFO.chosen[selectedLimb] };
+            } else if (limbCueSt.limb !== null) limbCueSt = { limb: null, idx: 0, found: null, checkedAt: -Infinity, tries: 0 };
             // (24 November 2026, UI5: the words of a shown cue keep clear of the mirror body's head and neck, the labels,
             // the arrows and the cards: ns-scene-three guideCueKeepOut, ns-cue-place)
             const showJointAim = Boolean(playerCamera && firstPersonNow() && limbHold && !holdBusy() &&
@@ -14280,7 +14428,9 @@ export function start(params = {}) {
         if (shell && typeof shell.placeToast === 'function') shell.placeToast(toastSpotFor(size), `${size.width}x${size.height}`, size.width >= size.height); // (FOOT_LINE: above the page's foot line)
         // (24 November 2026, HINT_ROW: the limb buttons stand clear of the hint while it shows)
         if (shell && typeof shell.clearHint === 'function' && limbHud && limbHud.box) shell.clearHint(limbHud.box, `${size.width}x${size.height}`);
-        updateInfo(inputs.binding, out);
+        // (section 211: nor while the pointer is parked on a card or outside the window, aimStep `away`: the card keeps the
+        // area that moved last, not the one that happens to lie under the mark in the middle)
+        updateInfo(inputs.binding, out, { travelling: (aimNow.pointer === true && aimNow.travelling === true) || aimNow.away === true });
         frameTimer.mark('hud');
         if (shell) {
           const say = announcer.update(model.gaze, now);
