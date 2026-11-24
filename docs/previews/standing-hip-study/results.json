@@ -1,0 +1,1242 @@
+{
+  "dataset": "SUMediPose A9D3, retained windows",
+  "participants": 11,
+  "retained_photographs": 2210,
+  "views": [
+    "C1",
+    "C3"
+  ],
+  "view_results": {
+    "wide_image": {
+      "views": {
+        "C1": {
+          "all": {
+            "people": 11,
+            "samples": 2055,
+            "reference": 2104,
+            "coverage": 0.9767110266159695,
+            "mae_deg": 4.414154309267809,
+            "zero_mae_deg": 9.68835261703623,
+            "rest_mae_deg": 6.940051070153547,
+            "direction_fraction": 0.7921005460613125
+          },
+          "active": {
+            "people": 11,
+            "samples": 494,
+            "reference": 507,
+            "coverage": 0.9743589743589743,
+            "mae_deg": 5.048552108873949,
+            "zero_mae_deg": 20.0321066671223,
+            "rest_mae_deg": 13.0321066671223,
+            "direction_fraction": 0.9983164983164983
+          }
+        },
+        "C3": {
+          "all": {
+            "people": 11,
+            "samples": 2052,
+            "reference": 2156,
+            "coverage": 0.9517625231910947,
+            "mae_deg": 7.405575095104595,
+            "zero_mae_deg": 9.753537117882349,
+            "rest_mae_deg": 6.863268222395822,
+            "direction_fraction": 0.7317554300303094
+          },
+          "active": {
+            "people": 11,
+            "samples": 479,
+            "reference": 497,
+            "coverage": 0.9637826961770624,
+            "mae_deg": 8.881626607437749,
+            "zero_mae_deg": 19.736679533081126,
+            "rest_mae_deg": 12.736679533081126,
+            "direction_fraction": 0.9810391652372784
+          }
+        }
+      },
+      "decision": {
+        "pooled_active_coverage": 0.9691235059760956,
+        "mean_error_pass": false,
+        "direction_pass": true,
+        "view_coverage_pass": true,
+        "pooled_coverage_pass": true
+      },
+      "qualified": false
+    },
+    "estimated_depth": {
+      "views": {
+        "C1": {
+          "all": {
+            "people": 11,
+            "samples": 2104,
+            "reference": 2104,
+            "coverage": 1.0,
+            "mae_deg": 6.235632061102485,
+            "zero_mae_deg": 9.696692675197779,
+            "rest_mae_deg": 6.903332952372684,
+            "direction_fraction": 0.7034113364173608
+          },
+          "active": {
+            "people": 11,
+            "samples": 507,
+            "reference": 507,
+            "coverage": 1.0,
+            "mae_deg": 7.691186093570956,
+            "zero_mae_deg": 19.992043439374214,
+            "rest_mae_deg": 12.992043439374214,
+            "direction_fraction": 0.9794175123122492
+          }
+        },
+        "C3": {
+          "all": {
+            "people": 11,
+            "samples": 2156,
+            "reference": 2156,
+            "coverage": 1.0,
+            "mae_deg": 5.970435759137905,
+            "zero_mae_deg": 9.511923708582131,
+            "rest_mae_deg": 6.772652917628463,
+            "direction_fraction": 0.7591236421900736
+          },
+          "active": {
+            "people": 11,
+            "samples": 497,
+            "reference": 497,
+            "coverage": 1.0,
+            "mae_deg": 8.481377160510872,
+            "zero_mae_deg": 19.81737149325558,
+            "rest_mae_deg": 12.817371493255578,
+            "direction_fraction": 0.9992548435171386
+          }
+        }
+      },
+      "decision": {
+        "pooled_active_coverage": 1.0,
+        "mean_error_pass": false,
+        "direction_pass": true,
+        "view_coverage_pass": true,
+        "pooled_coverage_pass": true
+      },
+      "qualified": false
+    },
+    "blended": {
+      "views": {
+        "C1": {
+          "all": {
+            "people": 11,
+            "samples": 2103,
+            "reference": 2104,
+            "coverage": 0.9995247148288974,
+            "mae_deg": 5.611067905243427,
+            "zero_mae_deg": 9.699077025628982,
+            "rest_mae_deg": 6.905801798754885,
+            "direction_fraction": 0.4588024009140468
+          },
+          "active": {
+            "people": 11,
+            "samples": 507,
+            "reference": 507,
+            "coverage": 1.0,
+            "mae_deg": 6.090792394313436,
+            "zero_mae_deg": 19.992043439374214,
+            "rest_mae_deg": 12.992043439374214,
+            "direction_fraction": 0.9655695182010972
+          }
+        },
+        "C3": {
+          "all": {
+            "people": 11,
+            "samples": 2146,
+            "reference": 2156,
+            "coverage": 0.9953617810760668,
+            "mae_deg": 7.395353924992196,
+            "zero_mae_deg": 9.538285929503534,
+            "rest_mae_deg": 6.78844901161882,
+            "direction_fraction": 0.47309060045692836
+          },
+          "active": {
+            "people": 11,
+            "samples": 497,
+            "reference": 497,
+            "coverage": 1.0,
+            "mae_deg": 10.936720558199733,
+            "zero_mae_deg": 19.81737149325558,
+            "rest_mae_deg": 12.817371493255578,
+            "direction_fraction": 0.9294770313715566
+          }
+        }
+      },
+      "decision": {
+        "pooled_active_coverage": 1.0,
+        "mean_error_pass": false,
+        "direction_pass": true,
+        "view_coverage_pass": true,
+        "pooled_coverage_pass": true
+      },
+      "qualified": false
+    },
+    "full_image": {
+      "views": {
+        "C1": {
+          "all": {
+            "people": 11,
+            "samples": 2061,
+            "reference": 2104,
+            "coverage": 0.9795627376425855,
+            "mae_deg": 4.6718665561186175,
+            "zero_mae_deg": 9.69339347677518,
+            "rest_mae_deg": 6.944949769894813,
+            "direction_fraction": 0.7707946940527789
+          },
+          "active": {
+            "people": 11,
+            "samples": 497,
+            "reference": 507,
+            "coverage": 0.980276134122288,
+            "mae_deg": 5.045753039694973,
+            "zero_mae_deg": 20.03021200794263,
+            "rest_mae_deg": 13.03021200794263,
+            "direction_fraction": 0.9970484061393152
+          }
+        },
+        "C3": {
+          "all": {
+            "people": 11,
+            "samples": 2070,
+            "reference": 2156,
+            "coverage": 0.9601113172541744,
+            "mae_deg": 7.487031660451688,
+            "zero_mae_deg": 9.37968213480126,
+            "rest_mae_deg": 6.667790931206701,
+            "direction_fraction": 0.7072656344493738
+          },
+          "active": {
+            "people": 11,
+            "samples": 467,
+            "reference": 497,
+            "coverage": 0.9396378269617707,
+            "mae_deg": 8.833394717177866,
+            "zero_mae_deg": 19.519325320961386,
+            "rest_mae_deg": 12.519325320961386,
+            "direction_fraction": 0.9715617715617716
+          }
+        }
+      },
+      "decision": {
+        "pooled_active_coverage": 0.9601593625498008,
+        "mean_error_pass": false,
+        "direction_pass": true,
+        "view_coverage_pass": true,
+        "pooled_coverage_pass": true
+      },
+      "qualified": false
+    },
+    "full_depth": {
+      "views": {
+        "C1": {
+          "all": {
+            "people": 11,
+            "samples": 2104,
+            "reference": 2104,
+            "coverage": 1.0,
+            "mae_deg": 6.39592859142228,
+            "zero_mae_deg": 9.696692675197779,
+            "rest_mae_deg": 6.903332952372684,
+            "direction_fraction": 0.6545923002919932
+          },
+          "active": {
+            "people": 11,
+            "samples": 507,
+            "reference": 507,
+            "coverage": 1.0,
+            "mae_deg": 6.280975483179857,
+            "zero_mae_deg": 19.992043439374214,
+            "rest_mae_deg": 12.992043439374214,
+            "direction_fraction": 0.9821143768512189
+          }
+        },
+        "C3": {
+          "all": {
+            "people": 11,
+            "samples": 2156,
+            "reference": 2156,
+            "coverage": 1.0,
+            "mae_deg": 6.425847775769989,
+            "zero_mae_deg": 9.511923708582131,
+            "rest_mae_deg": 6.772652917628463,
+            "direction_fraction": 0.6820560935137536
+          },
+          "active": {
+            "people": 11,
+            "samples": 497,
+            "reference": 497,
+            "coverage": 1.0,
+            "mae_deg": 7.167068354944727,
+            "zero_mae_deg": 19.81737149325558,
+            "rest_mae_deg": 12.817371493255578,
+            "direction_fraction": 0.9927613370236321
+          }
+        }
+      },
+      "decision": {
+        "pooled_active_coverage": 1.0,
+        "mean_error_pass": false,
+        "direction_pass": true,
+        "view_coverage_pass": true,
+        "pooled_coverage_pass": true
+      },
+      "qualified": false
+    },
+    "heavy_image": {
+      "views": {
+        "C1": {
+          "all": {
+            "people": 11,
+            "samples": 2036,
+            "reference": 2104,
+            "coverage": 0.967680608365019,
+            "mae_deg": 3.983040519472027,
+            "zero_mae_deg": 9.677959651293968,
+            "rest_mae_deg": 6.948264560646329,
+            "direction_fraction": 0.8019767309771172
+          },
+          "active": {
+            "people": 11,
+            "samples": 491,
+            "reference": 507,
+            "coverage": 0.9684418145956607,
+            "mae_deg": 3.925646226516308,
+            "zero_mae_deg": 20.055255226040988,
+            "rest_mae_deg": 13.05525522604099,
+            "direction_fraction": 0.9991735537190083
+          }
+        },
+        "C3": {
+          "all": {
+            "people": 11,
+            "samples": 1944,
+            "reference": 2156,
+            "coverage": 0.9016697588126159,
+            "mae_deg": 7.476800225876351,
+            "zero_mae_deg": 9.219236927784305,
+            "rest_mae_deg": 6.700768395145123,
+            "direction_fraction": 0.7115276612530412
+          },
+          "active": {
+            "people": 11,
+            "samples": 416,
+            "reference": 497,
+            "coverage": 0.8370221327967807,
+            "mae_deg": 8.268662798431963,
+            "zero_mae_deg": 19.844667005051708,
+            "rest_mae_deg": 12.84466700505171,
+            "direction_fraction": 0.983285687059272
+          }
+        }
+      },
+      "decision": {
+        "pooled_active_coverage": 0.9033864541832669,
+        "mean_error_pass": false,
+        "direction_pass": true,
+        "view_coverage_pass": true,
+        "pooled_coverage_pass": true
+      },
+      "qualified": false
+    },
+    "heavy_depth": {
+      "views": {
+        "C1": {
+          "all": {
+            "people": 11,
+            "samples": 2085,
+            "reference": 2104,
+            "coverage": 0.9909695817490495,
+            "mae_deg": 6.7831092522314185,
+            "zero_mae_deg": 9.707434906510162,
+            "rest_mae_deg": 6.916398122157613,
+            "direction_fraction": 0.677683436330978
+          },
+          "active": {
+            "people": 11,
+            "samples": 506,
+            "reference": 507,
+            "coverage": 0.9980276134122288,
+            "mae_deg": 6.0399112518426,
+            "zero_mae_deg": 20.004419604995075,
+            "rest_mae_deg": 13.004419604995073,
+            "direction_fraction": 0.9840510366826156
+          }
+        },
+        "C3": {
+          "all": {
+            "people": 11,
+            "samples": 1992,
+            "reference": 2156,
+            "coverage": 0.9239332096474954,
+            "mae_deg": 8.220917835157227,
+            "zero_mae_deg": 9.343140057615074,
+            "rest_mae_deg": 6.776133755867275,
+            "direction_fraction": 0.6816592542915992
+          },
+          "active": {
+            "people": 11,
+            "samples": 439,
+            "reference": 497,
+            "coverage": 0.8832997987927566,
+            "mae_deg": 5.217232451115322,
+            "zero_mae_deg": 19.88334142849476,
+            "rest_mae_deg": 12.883341428494761,
+            "direction_fraction": 0.9912909417626399
+          }
+        }
+      },
+      "decision": {
+        "pooled_active_coverage": 0.9412350597609562,
+        "mean_error_pass": false,
+        "direction_pass": true,
+        "view_coverage_pass": true,
+        "pooled_coverage_pass": true
+      },
+      "qualified": false
+    }
+  },
+  "shared_row_results": {
+    "full_image": {
+      "C1": {
+        "all": {
+          "people": 11,
+          "samples": 2054,
+          "fitted_mae_deg": 4.642406330061454,
+          "original_mae_deg": 4.404226765785351,
+          "fitted_direction": 0.7698108578136504,
+          "original_direction": 0.7920314823526976
+        },
+        "active": {
+          "people": 11,
+          "samples": 493,
+          "fitted_mae_deg": 4.983527661294477,
+          "original_mae_deg": 5.020915406740719,
+          "fitted_direction": 0.997017797017797,
+          "original_direction": 0.9983164983164983
+        }
+      },
+      "C3": {
+        "all": {
+          "people": 11,
+          "samples": 2020,
+          "fitted_mae_deg": 7.55936237127581,
+          "original_mae_deg": 7.433358154714768,
+          "fitted_direction": 0.7225172404709799,
+          "original_direction": 0.7306070730862417
+        },
+        "active": {
+          "people": 11,
+          "samples": 461,
+          "fitted_mae_deg": 8.807718911833781,
+          "original_mae_deg": 8.861396478461543,
+          "fitted_direction": 0.9715617715617716,
+          "original_direction": 0.9799028016009148
+        }
+      }
+    },
+    "full_depth": {
+      "C1": {
+        "all": {
+          "people": 11,
+          "samples": 2104,
+          "fitted_mae_deg": 6.39592859142228,
+          "original_mae_deg": 6.235632061102485,
+          "fitted_direction": 0.6545923002919932,
+          "original_direction": 0.7034113364173608
+        },
+        "active": {
+          "people": 11,
+          "samples": 507,
+          "fitted_mae_deg": 6.280975483179857,
+          "original_mae_deg": 7.691186093570956,
+          "fitted_direction": 0.9821143768512189,
+          "original_direction": 0.9794175123122492
+        }
+      },
+      "C3": {
+        "all": {
+          "people": 11,
+          "samples": 2156,
+          "fitted_mae_deg": 6.425847775769989,
+          "original_mae_deg": 5.970435759137905,
+          "fitted_direction": 0.6820560935137536,
+          "original_direction": 0.7591236421900736
+        },
+        "active": {
+          "people": 11,
+          "samples": 497,
+          "fitted_mae_deg": 7.167068354944727,
+          "original_mae_deg": 8.481377160510872,
+          "fitted_direction": 0.9927613370236321,
+          "original_direction": 0.9992548435171386
+        }
+      }
+    },
+    "heavy_image": {
+      "C1": {
+        "all": {
+          "people": 11,
+          "samples": 2031,
+          "fitted_mae_deg": 3.9581082081969003,
+          "original_mae_deg": 4.370057638615366,
+          "fitted_direction": 0.8014441804745379,
+          "original_direction": 0.7905184374560341
+        },
+        "active": {
+          "people": 11,
+          "samples": 488,
+          "fitted_mae_deg": 3.8570020643772445,
+          "original_mae_deg": 4.887701250335623,
+          "fitted_direction": 0.9991582491582491,
+          "original_direction": 0.9983164983164983
+        }
+      },
+      "C3": {
+        "all": {
+          "people": 11,
+          "samples": 1872,
+          "fitted_mae_deg": 7.616334028929902,
+          "original_mae_deg": 7.619775548328181,
+          "fitted_direction": 0.73362931667573,
+          "original_direction": 0.7289468252657448
+        },
+        "active": {
+          "people": 11,
+          "samples": 408,
+          "fitted_mae_deg": 8.269412132401001,
+          "original_mae_deg": 8.918297154811537,
+          "fitted_direction": 0.9829885985268894,
+          "original_direction": 0.980259307839774
+        }
+      }
+    },
+    "heavy_depth": {
+      "C1": {
+        "all": {
+          "people": 11,
+          "samples": 2085,
+          "fitted_mae_deg": 6.7831092522314185,
+          "original_mae_deg": 6.249120636375241,
+          "fitted_direction": 0.677683436330978,
+          "original_direction": 0.7029874803103557
+        },
+        "active": {
+          "people": 11,
+          "samples": 506,
+          "fitted_mae_deg": 6.0399112518426,
+          "original_mae_deg": 7.696620669715243,
+          "fitted_direction": 0.9840510366826156,
+          "original_direction": 0.9794175123122492
+        }
+      },
+      "C3": {
+        "all": {
+          "people": 11,
+          "samples": 1992,
+          "fitted_mae_deg": 8.220917835157227,
+          "original_mae_deg": 6.023179089196555,
+          "fitted_direction": 0.6816592542915992,
+          "original_direction": 0.7508021840243434
+        },
+        "active": {
+          "people": 11,
+          "samples": 439,
+          "fitted_mae_deg": 5.217232451115322,
+          "original_mae_deg": 8.6143715676832,
+          "fitted_direction": 0.9912909417626399,
+          "original_direction": 0.9991423670668954
+        }
+      }
+    }
+  },
+  "batch_seconds_by_model": {
+    "lite": 25.941069557,
+    "full": 29.479551885,
+    "heavy": 58.748731624
+  },
+  "calibration": {
+    "training_dataset": "MoVi F",
+    "development_people": 18,
+    "cross_validated_calibration": {
+      "wide_image": {
+        "views": {
+          "PG1": {
+            "all": {
+              "people": 18,
+              "count": 12656,
+              "reference_count": 15565,
+              "coverage": 0.8131063283006746,
+              "direction_matches": 8637,
+              "direction_agreement": 0.6801520899857655,
+              "error_3d_deg": 4.9979867814612176,
+              "baseline_zero_deg": 4.195565456831457,
+              "baseline_rest_deg": 6.529104491583833,
+              "error_projected_deg": 3.794792686130615,
+              "projection_error_3d_deg": 2.759444425137007
+            },
+            "active": {
+              "people": 18,
+              "count": 349,
+              "reference_count": 485,
+              "coverage": 0.7195876288659794,
+              "direction_matches": 340,
+              "direction_agreement": 0.9474829384249674,
+              "error_3d_deg": 7.9340686343146825,
+              "baseline_zero_deg": 18.803388510831255,
+              "baseline_rest_deg": 12.246289745399155,
+              "error_projected_deg": 4.458149080927165,
+              "projection_error_3d_deg": 5.410949222486732
+            }
+          },
+          "PG2": {
+            "all": {
+              "people": 18,
+              "count": 1968,
+              "reference_count": 15554,
+              "coverage": 0.12652693840812654,
+              "direction_matches": 1256,
+              "direction_agreement": 0.6488397625302398,
+              "error_3d_deg": 8.528809203530805,
+              "baseline_zero_deg": 4.686753425925791,
+              "baseline_rest_deg": 7.29861453655062,
+              "error_projected_deg": 6.372930575136929,
+              "projection_error_3d_deg": 6.3968251159879514
+            },
+            "active": {
+              "people": 12,
+              "count": 39,
+              "reference_count": 481,
+              "coverage": 0.08108108108108109,
+              "direction_matches": 31,
+              "direction_agreement": 0.7777777777777777,
+              "error_3d_deg": 18.684053692219983,
+              "baseline_zero_deg": 18.059268665179157,
+              "baseline_rest_deg": 11.642601998512491,
+              "error_projected_deg": 13.515539865089067,
+              "projection_error_3d_deg": 7.177225372418558
+            }
+          }
+        },
+        "pooled_active_coverage": 0.40165631469979296,
+        "decision_checks": {
+          "improves_both_baselines_each_view": false,
+          "active_direction_each_view": false,
+          "active_coverage_each_view": false,
+          "active_pooled_coverage": true
+        }
+      },
+      "estimated_depth": {
+        "views": {
+          "PG1": {
+            "all": {
+              "people": 18,
+              "count": 14892,
+              "reference_count": 15565,
+              "coverage": 0.9567619659492451,
+              "direction_matches": 10259,
+              "direction_agreement": 0.6912534387958089,
+              "error_3d_deg": 4.158914485914787,
+              "baseline_zero_deg": 4.379590773272352,
+              "baseline_rest_deg": 6.693808052496771,
+              "error_projected_deg": 7.261719390634501,
+              "projection_error_3d_deg": 5.746677467010698
+            },
+            "active": {
+              "people": 18,
+              "count": 466,
+              "reference_count": 485,
+              "coverage": 0.9608247422680413,
+              "direction_matches": 452,
+              "direction_agreement": 0.9533300264550265,
+              "error_3d_deg": 6.3270316023082405,
+              "baseline_zero_deg": 18.887241212572945,
+              "baseline_rest_deg": 12.369131051129449,
+              "error_projected_deg": 10.841461289275394,
+              "projection_error_3d_deg": 9.196811284648977
+            }
+          },
+          "PG2": {
+            "all": {
+              "people": 18,
+              "count": 10048,
+              "reference_count": 15554,
+              "coverage": 0.646007457888646,
+              "direction_matches": 5776,
+              "direction_agreement": 0.6025182506118522,
+              "error_3d_deg": 7.728539761801351,
+              "baseline_zero_deg": 4.510385107355249,
+              "baseline_rest_deg": 6.947683630475324,
+              "error_projected_deg": 22.943761080970123,
+              "projection_error_3d_deg": 19.62028917218414
+            },
+            "active": {
+              "people": 17,
+              "count": 269,
+              "reference_count": 481,
+              "coverage": 0.5592515592515592,
+              "direction_matches": 141,
+              "direction_agreement": 0.6132157222221757,
+              "error_3d_deg": 15.193975250685465,
+              "baseline_zero_deg": 18.89716503974738,
+              "baseline_rest_deg": 12.616609484191827,
+              "error_projected_deg": 27.80867329732672,
+              "projection_error_3d_deg": 22.39650322883984
+            }
+          }
+        },
+        "pooled_active_coverage": 0.7608695652173914,
+        "decision_checks": {
+          "improves_both_baselines_each_view": false,
+          "active_direction_each_view": false,
+          "active_coverage_each_view": true,
+          "active_pooled_coverage": true
+        }
+      },
+      "ridge_balanced": {
+        "views": {
+          "PG1": {
+            "all": {
+              "people": 18,
+              "count": 14892,
+              "reference_count": 15565,
+              "coverage": 0.9567619659492451,
+              "direction_matches": 10165,
+              "direction_agreement": 0.6831908887498286,
+              "error_3d_deg": 3.393606881411475,
+              "baseline_zero_deg": 4.379590773272352,
+              "baseline_rest_deg": 6.693808052496771,
+              "error_projected_deg": 7.345140348422395,
+              "projection_error_3d_deg": 5.746677467010698
+            },
+            "active": {
+              "people": 18,
+              "count": 466,
+              "reference_count": 485,
+              "coverage": 0.9608247422680413,
+              "direction_matches": 460,
+              "direction_agreement": 0.9734126984126985,
+              "error_3d_deg": 9.914508273786378,
+              "baseline_zero_deg": 18.887241212572945,
+              "baseline_rest_deg": 12.369131051129449,
+              "error_projected_deg": 16.61432498227587,
+              "projection_error_3d_deg": 9.196811284648977
+            }
+          },
+          "PG2": {
+            "all": {
+              "people": 18,
+              "count": 10048,
+              "reference_count": 15554,
+              "coverage": 0.646007457888646,
+              "direction_matches": 5462,
+              "direction_agreement": 0.582150022813138,
+              "error_3d_deg": 4.329036193774633,
+              "baseline_zero_deg": 4.510385107355249,
+              "baseline_rest_deg": 6.947683630475324,
+              "error_projected_deg": 20.01750929875017,
+              "projection_error_3d_deg": 19.62028917218414
+            },
+            "active": {
+              "people": 17,
+              "count": 269,
+              "reference_count": 481,
+              "coverage": 0.5592515592515592,
+              "direction_matches": 235,
+              "direction_agreement": 0.9143919848641212,
+              "error_3d_deg": 16.19717964171329,
+              "baseline_zero_deg": 18.89716503974738,
+              "baseline_rest_deg": 12.616609484191827,
+              "error_projected_deg": 24.7935740577595,
+              "projection_error_3d_deg": 22.39650322883984
+            }
+          }
+        },
+        "pooled_active_coverage": 0.7608695652173914,
+        "decision_checks": {
+          "improves_both_baselines_each_view": false,
+          "active_direction_each_view": true,
+          "active_coverage_each_view": true,
+          "active_pooled_coverage": true
+        }
+      },
+      "robust_balanced": {
+        "views": {
+          "PG1": {
+            "all": {
+              "people": 18,
+              "count": 14892,
+              "reference_count": 15565,
+              "coverage": 0.9567619659492451,
+              "direction_matches": 10200,
+              "direction_agreement": 0.6857452502837348,
+              "error_3d_deg": 3.3780889977784074,
+              "baseline_zero_deg": 4.379590773272352,
+              "baseline_rest_deg": 6.693808052496771,
+              "error_projected_deg": 7.365947995061735,
+              "projection_error_3d_deg": 5.746677467010698
+            },
+            "active": {
+              "people": 18,
+              "count": 466,
+              "reference_count": 485,
+              "coverage": 0.9608247422680413,
+              "direction_matches": 457,
+              "direction_agreement": 0.9712698412698413,
+              "error_3d_deg": 10.1155167089462,
+              "baseline_zero_deg": 18.887241212572945,
+              "baseline_rest_deg": 12.369131051129449,
+              "error_projected_deg": 16.794596731566415,
+              "projection_error_3d_deg": 9.196811284648977
+            }
+          },
+          "PG2": {
+            "all": {
+              "people": 18,
+              "count": 10048,
+              "reference_count": 15554,
+              "coverage": 0.646007457888646,
+              "direction_matches": 5397,
+              "direction_agreement": 0.5754042750548746,
+              "error_3d_deg": 4.304484398531234,
+              "baseline_zero_deg": 4.510385107355249,
+              "baseline_rest_deg": 6.947683630475324,
+              "error_projected_deg": 20.10403033717151,
+              "projection_error_3d_deg": 19.62028917218414
+            },
+            "active": {
+              "people": 17,
+              "count": 269,
+              "reference_count": 481,
+              "coverage": 0.5592515592515592,
+              "direction_matches": 211,
+              "direction_agreement": 0.8534556628670311,
+              "error_3d_deg": 16.593513229062903,
+              "baseline_zero_deg": 18.89716503974738,
+              "baseline_rest_deg": 12.616609484191827,
+              "error_projected_deg": 24.77370803379479,
+              "projection_error_3d_deg": 22.39650322883984
+            }
+          }
+        },
+        "pooled_active_coverage": 0.7608695652173914,
+        "decision_checks": {
+          "improves_both_baselines_each_view": false,
+          "active_direction_each_view": true,
+          "active_coverage_each_view": true,
+          "active_pooled_coverage": true
+        }
+      },
+      "robust_active": {
+        "views": {
+          "PG1": {
+            "all": {
+              "people": 18,
+              "count": 14892,
+              "reference_count": 15565,
+              "coverage": 0.9567619659492451,
+              "direction_matches": 10203,
+              "direction_agreement": 0.6860143985846883,
+              "error_3d_deg": 3.3616143709217146,
+              "baseline_zero_deg": 4.379590773272352,
+              "baseline_rest_deg": 6.693808052496771,
+              "error_projected_deg": 7.270091495939058,
+              "projection_error_3d_deg": 5.746677467010698
+            },
+            "active": {
+              "people": 18,
+              "count": 466,
+              "reference_count": 485,
+              "coverage": 0.9608247422680413,
+              "direction_matches": 457,
+              "direction_agreement": 0.9712698412698413,
+              "error_3d_deg": 8.81112415789431,
+              "baseline_zero_deg": 18.887241212572945,
+              "baseline_rest_deg": 12.369131051129449,
+              "error_projected_deg": 15.545521760748102,
+              "projection_error_3d_deg": 9.196811284648977
+            }
+          },
+          "PG2": {
+            "all": {
+              "people": 18,
+              "count": 10048,
+              "reference_count": 15554,
+              "coverage": 0.646007457888646,
+              "direction_matches": 5417,
+              "direction_agreement": 0.5760155159543043,
+              "error_3d_deg": 4.363612176068146,
+              "baseline_zero_deg": 4.510385107355249,
+              "baseline_rest_deg": 6.947683630475324,
+              "error_projected_deg": 20.057231283530445,
+              "projection_error_3d_deg": 19.62028917218414
+            },
+            "active": {
+              "people": 17,
+              "count": 269,
+              "reference_count": 481,
+              "coverage": 0.5592515592515592,
+              "direction_matches": 222,
+              "direction_agreement": 0.877212964649224,
+              "error_3d_deg": 16.204906631507782,
+              "baseline_zero_deg": 18.89716503974738,
+              "baseline_rest_deg": 12.616609484191827,
+              "error_projected_deg": 24.73501937893664,
+              "projection_error_3d_deg": 22.39650322883984
+            }
+          }
+        },
+        "pooled_active_coverage": 0.7608695652173914,
+        "decision_checks": {
+          "improves_both_baselines_each_view": false,
+          "active_direction_each_view": true,
+          "active_coverage_each_view": true,
+          "active_pooled_coverage": true
+        }
+      }
+    },
+    "standing_transfer": {
+      "wide_image": {
+        "views": {
+          "C1": {
+            "all": {
+              "people": 11,
+              "samples": 2055,
+              "reference": 2104,
+              "coverage": 0.9767110266159695,
+              "mae_deg": 4.414154309267809,
+              "zero_mae_deg": 9.68835261703623,
+              "rest_mae_deg": 6.940051070153547,
+              "direction_fraction": 0.7921005460613125
+            },
+            "active": {
+              "people": 11,
+              "samples": 494,
+              "reference": 507,
+              "coverage": 0.9743589743589743,
+              "mae_deg": 5.048552108873949,
+              "zero_mae_deg": 20.0321066671223,
+              "rest_mae_deg": 13.0321066671223,
+              "direction_fraction": 0.9983164983164983
+            }
+          },
+          "C3": {
+            "all": {
+              "people": 11,
+              "samples": 2052,
+              "reference": 2156,
+              "coverage": 0.9517625231910947,
+              "mae_deg": 7.405575095104595,
+              "zero_mae_deg": 9.753537117882349,
+              "rest_mae_deg": 6.863268222395822,
+              "direction_fraction": 0.7317554300303094
+            },
+            "active": {
+              "people": 11,
+              "samples": 479,
+              "reference": 497,
+              "coverage": 0.9637826961770624,
+              "mae_deg": 8.881626607437749,
+              "zero_mae_deg": 19.736679533081126,
+              "rest_mae_deg": 12.736679533081126,
+              "direction_fraction": 0.9810391652372784
+            }
+          }
+        },
+        "decision": {
+          "pooled_active_coverage": 0.9691235059760956,
+          "mean_error_pass": false,
+          "direction_pass": true,
+          "view_coverage_pass": true,
+          "pooled_coverage_pass": true
+        },
+        "qualified_on_this_task": false
+      },
+      "estimated_depth": {
+        "views": {
+          "C1": {
+            "all": {
+              "people": 11,
+              "samples": 2104,
+              "reference": 2104,
+              "coverage": 1.0,
+              "mae_deg": 6.235632061102485,
+              "zero_mae_deg": 9.696692675197779,
+              "rest_mae_deg": 6.903332952372684,
+              "direction_fraction": 0.7034113364173608
+            },
+            "active": {
+              "people": 11,
+              "samples": 507,
+              "reference": 507,
+              "coverage": 1.0,
+              "mae_deg": 7.691186093570956,
+              "zero_mae_deg": 19.992043439374214,
+              "rest_mae_deg": 12.992043439374214,
+              "direction_fraction": 0.9794175123122492
+            }
+          },
+          "C3": {
+            "all": {
+              "people": 11,
+              "samples": 2156,
+              "reference": 2156,
+              "coverage": 1.0,
+              "mae_deg": 5.970435759137905,
+              "zero_mae_deg": 9.511923708582131,
+              "rest_mae_deg": 6.772652917628463,
+              "direction_fraction": 0.7591236421900736
+            },
+            "active": {
+              "people": 11,
+              "samples": 497,
+              "reference": 497,
+              "coverage": 1.0,
+              "mae_deg": 8.481377160510872,
+              "zero_mae_deg": 19.81737149325558,
+              "rest_mae_deg": 12.817371493255578,
+              "direction_fraction": 0.9992548435171386
+            }
+          }
+        },
+        "decision": {
+          "pooled_active_coverage": 1.0,
+          "mean_error_pass": false,
+          "direction_pass": true,
+          "view_coverage_pass": true,
+          "pooled_coverage_pass": true
+        },
+        "qualified_on_this_task": false
+      },
+      "blended": {
+        "views": {
+          "C1": {
+            "all": {
+              "people": 11,
+              "samples": 2103,
+              "reference": 2104,
+              "coverage": 0.9995247148288974,
+              "mae_deg": 5.611067905243427,
+              "zero_mae_deg": 9.699077025628982,
+              "rest_mae_deg": 6.905801798754885,
+              "direction_fraction": 0.4588024009140468
+            },
+            "active": {
+              "people": 11,
+              "samples": 507,
+              "reference": 507,
+              "coverage": 1.0,
+              "mae_deg": 6.090792394313436,
+              "zero_mae_deg": 19.992043439374214,
+              "rest_mae_deg": 12.992043439374214,
+              "direction_fraction": 0.9655695182010972
+            }
+          },
+          "C3": {
+            "all": {
+              "people": 11,
+              "samples": 2146,
+              "reference": 2156,
+              "coverage": 0.9953617810760668,
+              "mae_deg": 7.395353924992196,
+              "zero_mae_deg": 9.538285929503534,
+              "rest_mae_deg": 6.78844901161882,
+              "direction_fraction": 0.47309060045692836
+            },
+            "active": {
+              "people": 11,
+              "samples": 497,
+              "reference": 497,
+              "coverage": 1.0,
+              "mae_deg": 10.936720558199733,
+              "zero_mae_deg": 19.81737149325558,
+              "rest_mae_deg": 12.817371493255578,
+              "direction_fraction": 0.9294770313715566
+            }
+          }
+        },
+        "decision": {
+          "pooled_active_coverage": 1.0,
+          "mean_error_pass": false,
+          "direction_pass": true,
+          "view_coverage_pass": true,
+          "pooled_coverage_pass": true
+        },
+        "qualified_on_this_task": false
+      },
+      "ridge_balanced": {
+        "views": {
+          "C1": {
+            "all": {
+              "people": 11,
+              "samples": 2104,
+              "reference": 2104,
+              "coverage": 1.0,
+              "mae_deg": 6.479509640583541,
+              "zero_mae_deg": 9.696692675197779,
+              "rest_mae_deg": 6.903332952372684,
+              "direction_fraction": 0.7542284932689906
+            },
+            "active": {
+              "people": 11,
+              "samples": 507,
+              "reference": 507,
+              "coverage": 1.0,
+              "mae_deg": 10.615416021140446,
+              "zero_mae_deg": 19.992043439374214,
+              "rest_mae_deg": 12.992043439374214,
+              "direction_fraction": 0.9904306220095693
+            }
+          },
+          "C3": {
+            "all": {
+              "people": 11,
+              "samples": 2156,
+              "reference": 2156,
+              "coverage": 1.0,
+              "mae_deg": 6.747402284714109,
+              "zero_mae_deg": 9.511923708582131,
+              "rest_mae_deg": 6.772652917628463,
+              "direction_fraction": 0.8136509106035688
+            },
+            "active": {
+              "people": 11,
+              "samples": 497,
+              "reference": 497,
+              "coverage": 1.0,
+              "mae_deg": 13.285954764678264,
+              "zero_mae_deg": 19.81737149325558,
+              "rest_mae_deg": 12.817371493255578,
+              "direction_fraction": 1.0
+            }
+          }
+        },
+        "decision": {
+          "pooled_active_coverage": 1.0,
+          "mean_error_pass": false,
+          "direction_pass": true,
+          "view_coverage_pass": true,
+          "pooled_coverage_pass": true
+        },
+        "qualified_on_this_task": false
+      },
+      "robust_balanced": {
+        "views": {
+          "C1": {
+            "all": {
+              "people": 11,
+              "samples": 2104,
+              "reference": 2104,
+              "coverage": 1.0,
+              "mae_deg": 6.509267208300239,
+              "zero_mae_deg": 9.696692675197779,
+              "rest_mae_deg": 6.903332952372684,
+              "direction_fraction": 0.7523276776376208
+            },
+            "active": {
+              "people": 11,
+              "samples": 507,
+              "reference": 507,
+              "coverage": 1.0,
+              "mae_deg": 10.60623148048082,
+              "zero_mae_deg": 19.992043439374214,
+              "rest_mae_deg": 12.992043439374214,
+              "direction_fraction": 0.9904306220095693
+            }
+          },
+          "C3": {
+            "all": {
+              "people": 11,
+              "samples": 2156,
+              "reference": 2156,
+              "coverage": 1.0,
+              "mae_deg": 6.8460052319290075,
+              "zero_mae_deg": 9.511923708582131,
+              "rest_mae_deg": 6.772652917628463,
+              "direction_fraction": 0.7960136194325694
+            },
+            "active": {
+              "people": 11,
+              "samples": 497,
+              "reference": 497,
+              "coverage": 1.0,
+              "mae_deg": 13.415337700150522,
+              "zero_mae_deg": 19.81737149325558,
+              "rest_mae_deg": 12.817371493255578,
+              "direction_fraction": 1.0
+            }
+          }
+        },
+        "decision": {
+          "pooled_active_coverage": 1.0,
+          "mean_error_pass": false,
+          "direction_pass": true,
+          "view_coverage_pass": true,
+          "pooled_coverage_pass": true
+        },
+        "qualified_on_this_task": false
+      },
+      "robust_active": {
+        "views": {
+          "C1": {
+            "all": {
+              "people": 11,
+              "samples": 2104,
+              "reference": 2104,
+              "coverage": 1.0,
+              "mae_deg": 6.217186175241046,
+              "zero_mae_deg": 9.696692675197779,
+              "rest_mae_deg": 6.903332952372684,
+              "direction_fraction": 0.7524867795954587
+            },
+            "active": {
+              "people": 11,
+              "samples": 507,
+              "reference": 507,
+              "coverage": 1.0,
+              "mae_deg": 9.546395142330073,
+              "zero_mae_deg": 19.992043439374214,
+              "rest_mae_deg": 12.992043439374214,
+              "direction_fraction": 0.9904306220095693
+            }
+          },
+          "C3": {
+            "all": {
+              "people": 11,
+              "samples": 2156,
+              "reference": 2156,
+              "coverage": 1.0,
+              "mae_deg": 6.6465828839328776,
+              "zero_mae_deg": 9.511923708582131,
+              "rest_mae_deg": 6.772652917628463,
+              "direction_fraction": 0.7964021198210698
+            },
+            "active": {
+              "people": 11,
+              "samples": 497,
+              "reference": 497,
+              "coverage": 1.0,
+              "mae_deg": 12.802716544520747,
+              "zero_mae_deg": 19.81737149325558,
+              "rest_mae_deg": 12.817371493255578,
+              "direction_fraction": 1.0
+            }
+          }
+        },
+        "decision": {
+          "pooled_active_coverage": 1.0,
+          "mean_error_pass": false,
+          "direction_pass": true,
+          "view_coverage_pass": true,
+          "pooled_coverage_pass": true
+        },
+        "qualified_on_this_task": false
+      }
+    },
+    "reserve_people": 68
+  }
+}
