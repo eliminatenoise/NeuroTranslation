@@ -87,14 +87,20 @@
       'wrong-repeat-emg':'the same Transformer given that person’s muscle signals from another walk'};
     const carry=a.metrics['current-plate-persistence'].MAE_N;
     const bestModel=Math.min(...Object.entries(a.metrics).filter(([k])=>k!=='current-plate-persistence').map(([,r])=>r.MAE_N));
+    const vsKin=cmp['transformer-markers'],ci=vsKin.paired_95pct_bootstrap_N,signed=v=>(v<0?'−':'+')+Math.abs(v).toFixed(2);
+    const carryRmse=a.metrics['current-plate-persistence'].RMSE_N,kinRmse=a.metrics['transformer-markers'].RMSE_N;
     el('result-summary').textContent='With both signals, the Transformer missed the recorded load by '+both.toFixed(1)+
-      ' N on average. With movement alone, it missed by '+kin.toFixed(1)+' N'+(both>kin?': the muscle signals made it worse. ':'. ')+
+      ' N on average. With movement alone, it missed by '+kin.toFixed(1)+' N. '+
+      (both>kin?'Adding the muscle signals raised the average miss by '+vsKin.difference_N.toFixed(1)+' N, '+
+        (ci[0]<0&&ci[1]>0?'but the 95% interval for that change ('+signed(ci[0])+' to '+signed(ci[1])+' N) includes zero. ':
+        'with a 95% interval for that change of '+signed(ci[0])+' to '+signed(ci[1])+' N. '):'')+
       (a.incremental_EMG_gate_passed?'Adding muscle signals met the improvement rule set in advance against all '+word(keys.length)+' comparisons.':
       'The improvement rule set in advance asked the combined model to beat all '+word(keys.length)+' comparisons. It beat '+
       (won.length?won.map(k=>plain[k]+' ('+cmp[k].comparator_MAE_N.toFixed(1)+' N)').join(' and '):'none of them')+
       ' and failed against the other '+word(lost.length)+': '+lost.map(k=>plain[k]).join(', and ')+
       '. These walks do not show that adding muscle signals improves the forecast.')+
-      (carry<bestModel?' Carrying the plates’ earlier reading forward missed by '+carry.toFixed(1)+' N, less than any model.':'');
+      (carry<bestModel?' Carrying the plates’ earlier reading forward had a lower average miss ('+carry.toFixed(1)+' N) than any model'+
+        (carryRmse>kinRmse?', but a higher root-mean-square error than the Transformer given movement alone ('+carryRmse.toFixed(1)+' against '+kinRmse.toFixed(1)+' N).':'.'):'');
     const c=a.incremental_EMG_comparisons['wrong-repeat-emg'];
     el('strong-control').textContent= c.people ? 'Keeping each marker history and substituting the same person’s muscle signals from another walk gave '+c.comparator_MAE_N.toFixed(1)+' N error. Correctly paired signals gave '+c.combined_MAE_N.toFixed(1)+' N on those same '+c.anchors.toLocaleString('en-US')+' windows from '+c.people+' walkers.' : 'No eligible wrong-repeat pairs were available.';
     const s=el('stats');
