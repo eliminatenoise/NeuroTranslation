@@ -44,10 +44,10 @@ def assembled(model):
     n_external = external["participants_scored"]
     normalized["outcome"]=("The knee-trained Transformer gave smaller mean errors than both alternatives for every one of these 12 walkers. "
         "They are not a fresh test: an earlier study had already examined them. "
-        f"Ten new walkers were then recorded in a second laboratory, at a nominal 0.8 m/s, with angles from cameras. There the unchanged model beat the plain stride copy for only {vs_copy['wins']} of {n_external}, "
+        f"The unchanged model was then scored on ten other walkers, recorded in a second laboratory at a nominal 0.8 m/s with angles from cameras. There it beat the plain stride copy for only {vs_copy['wins']} of {n_external}, "
         f"and that comparison {'passed' if vs_copy['passed'] else 'failed'} its rule. It beat the linear correction for {vs_linear['wins']} of {n_external}.")
-    if n_external != 10:
-        raise ValueError("Review the external-walker sentence")
+    if n_external != 10 or vs_copy["wins"] != 6:
+        raise ValueError("Review the external-walker sentence and the page title")
 
     shared = json.loads((SRC/"shared-knee.json").read_text())
     scores = shared["scores"]
