@@ -1,0 +1,309 @@
+{
+  "title": "Hand movement from identified electrodes",
+  "status": "offline experimental comparison",
+  "source": "https://dandiarchive.org/dandiset/000070/0.261122.2046",
+  "context": "Same rhesus macaque on separate dates. Hand x/y change in the next 100 ms. Labelled fitting on 23 Sep 2010, development final quarter 22 Sep, earlier held day 20 Sep. All cases use 200 ms of observed M1 counts ordered by archive electrode IDs 96 through 191.",
+  "training": {
+    "archive_trials": 3694,
+    "forecast_windows": 55878,
+    "seeds": [
+      20261124,
+      20261125,
+      20261126
+    ],
+    "ordered_and_shuffled_parameters": 10251,
+    "pooled_parameters": 8907,
+    "precision": "FP32",
+    "updates_per_seed": 2400,
+    "batch": 128
+  },
+  "portable": {
+    "output_units": "mm",
+    "forecast_ahead_ms": 100,
+    "native_platform_run": "Linux",
+    "fitted_models_included": 3,
+    "largest_absolute_difference_mm": 3.0994415283203125e-05
+  },
+  "limits": [
+    "Same animal and numbered recording channels. Transfer to a new animal and use for live control remain untested.",
+    "Movement bands use the measured outcome. Band design followed development and preceded held outcomes."
+  ],
+  "development": {
+    "whole_trials": 586,
+    "rows": 7767,
+    "metric_order": [
+      "planar vector error",
+      "distance error"
+    ],
+    "errors_mm": {
+      "pooled": [
+        9.842767632229414,
+        7.962749741578024
+      ],
+      "identity": [
+        8.590966278746942,
+        7.3065344518856
+      ],
+      "shuffled": [
+        10.05524523846904,
+        7.83642355892054
+      ],
+      "identity_permuted": [
+        25.674711254030036,
+        19.606412270403876
+      ],
+      "zero": [
+        8.333326150369858,
+        8.333326150369858
+      ]
+    },
+    "gain_from_ordered_model_mm": {
+      "pooled": {
+        "mean_mm": [
+          1.2518013534824717,
+          0.6562152896924239
+        ],
+        "positive_trials": [
+          407,
+          319
+        ],
+        "paired_95_mm": [
+          [
+            1.0416365843013657,
+            1.4626863847759153
+          ],
+          [
+            0.3831785001784391,
+            0.9283569331877455
+          ]
+        ]
+      },
+      "shuffled": {
+        "mean_mm": [
+          1.464278959722098,
+          0.5298891070349412
+        ],
+        "positive_trials": [
+          424,
+          312
+        ],
+        "paired_95_mm": [
+          [
+            1.2566047340654884,
+            1.668555449832502
+          ],
+          [
+            0.276812402967791,
+            0.7846969528658888
+          ]
+        ]
+      },
+      "identity_permuted": {
+        "mean_mm": [
+          17.083744975283096,
+          12.299877818518276
+        ],
+        "positive_trials": [
+          586,
+          586
+        ],
+        "paired_95_mm": [
+          [
+            16.825246224263367,
+            17.34289161342057
+          ],
+          [
+            12.049961105971388,
+            12.549998712615347
+          ]
+        ]
+      },
+      "zero": {
+        "mean_mm": [
+          -0.25764012837708344,
+          1.0267916984842578
+        ],
+        "positive_trials": [
+          283,
+          396
+        ],
+        "paired_95_mm": [
+          [
+            -0.480582401371019,
+            -0.02800854184200963
+          ],
+          [
+            0.7828307363045899,
+            1.275712344823635
+          ]
+        ]
+      }
+    }
+  },
+  "held": {
+    "whole_trials": 3404,
+    "rows": 44701,
+    "metric_order": [
+      "planar vector error",
+      "distance error"
+    ],
+    "errors_mm": {
+      "pooled": [
+        9.056478224892567,
+        5.507343671731803
+      ],
+      "identity": [
+        4.649606034364281,
+        3.1068009131746117
+      ],
+      "shuffled": [
+        9.448060183988986,
+        5.584197171785894
+      ],
+      "identity_permuted": [
+        17.13251419315519,
+        11.835354519849954
+      ],
+      "zero": [
+        9.22711384822444,
+        9.22711384822444
+      ]
+    },
+    "gain_from_ordered_model_mm": {
+      "pooled": {
+        "mean_mm": [
+          4.4068721905282855,
+          2.4005427585571923
+        ],
+        "positive_trials": [
+          3395,
+          3213
+        ],
+        "paired_95_mm": [
+          [
+            4.345092490656097,
+            4.467196521249936
+          ],
+          [
+            2.3393880346292137,
+            2.4603410226935507
+          ]
+        ]
+      },
+      "shuffled": {
+        "mean_mm": [
+          4.798454149624706,
+          2.4773962586112823
+        ],
+        "positive_trials": [
+          3400,
+          3243
+        ],
+        "paired_95_mm": [
+          [
+            4.738770359636817,
+            4.856682423501124
+          ],
+          [
+            2.418694448293517,
+            2.536329901542253
+          ]
+        ]
+      },
+      "identity_permuted": {
+        "mean_mm": [
+          12.482908158790906,
+          8.72855360667534
+        ],
+        "positive_trials": [
+          3404,
+          3404
+        ],
+        "paired_95_mm": [
+          [
+            12.406350369945468,
+            12.557970227068985
+          ],
+          [
+            8.668333928835102,
+            8.788854128265319
+          ]
+        ]
+      },
+      "zero": {
+        "mean_mm": [
+          4.577507813860159,
+          6.120312935049828
+        ],
+        "positive_trials": [
+          3398,
+          3401
+        ],
+        "paired_95_mm": [
+          [
+            4.518347388953913,
+            4.635973726882085
+          ],
+          [
+            6.058468049551828,
+            6.179473585455234
+          ]
+        ]
+      }
+    }
+  },
+  "held_movement_bands": [
+    {
+      "lower_mm": 0,
+      "upper_mm": 2,
+      "cases": 29297,
+      "trials": 3404,
+      "equal_trial_ending_position_error_mm": {
+        "zero": 0.33933732173916714,
+        "pooled": 1.3235657241219645,
+        "ordered": 1.0606230892158364,
+        "shuffled": 1.6348148453292797,
+        "ordered_permuted": 8.838542695793148
+      }
+    },
+    {
+      "lower_mm": 2,
+      "upper_mm": 10,
+      "cases": 6699,
+      "trials": 3003,
+      "equal_trial_ending_position_error_mm": {
+        "zero": 3.9656679624532662,
+        "pooled": 3.6874024017346563,
+        "ordered": 3.4956494567734384,
+        "shuffled": 3.867499856849796,
+        "ordered_permuted": 10.752624291535193
+      }
+    },
+    {
+      "lower_mm": 10,
+      "upper_mm": 20,
+      "cases": 1546,
+      "trials": 1290,
+      "equal_trial_ending_position_error_mm": {
+        "zero": 14.725153016724787,
+        "pooled": 12.942813038577809,
+        "ordered": 9.57916841356485,
+        "shuffled": 13.395577567058426,
+        "ordered_permuted": 22.38233141724773
+      }
+    },
+    {
+      "lower_mm": 20,
+      "upper_mm": null,
+      "cases": 7159,
+      "trials": 3403,
+      "equal_trial_ending_position_error_mm": {
+        "zero": 49.47302248694979,
+        "pooled": 45.06916551522801,
+        "ordered": 18.628602322908513,
+        "shuffled": 46.10216869791979,
+        "ordered_permuted": 57.226968935917114
+      }
+    }
+  ]
+}

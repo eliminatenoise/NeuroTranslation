@@ -7,6 +7,8 @@
 
 [Run the new walking checkpoints and read the cortical forecast results](benchmarks/walking-neural-scaling/)
 
+[Run the hand forecast that keeps individual electrode readings](benchmarks/cortical-electrode-identity/) · [Download the model ZIP](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/cortical-electrode-identity/Cortical-Electrode-Identity.zip)
+
 [Run the cortical model tested across two recording days](benchmarks/cortical-cross-day/)
 
 **[Open the NeuroTranslation dashboard](https://eliminatenoise.github.io/NeuroTranslation/projects/?project=neurotranslation)** · [Technical index](https://eliminatenoise.github.io/NeuroTranslation/projects/technical.html?project=neurotranslation) · [Compare walking forecasts](https://eliminatenoise.github.io/NeuroTranslation/walking-blends/)
