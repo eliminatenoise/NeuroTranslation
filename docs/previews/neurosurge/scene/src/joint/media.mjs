@@ -19,7 +19,9 @@ export function captureSource({kind,video,clip,stills,followKnees=false,getLimb,
   waitForFinalFrame=false,getBodyRevision,getForecastRevision,onFrame,onReset,onStatus,onError,onEnd}) {
   let closed=false, epoch=0, id=0, busy=false, clock=0, callback, stream, objectURL, worker, timer, silence, finish;
   let endPending=false;
-  const buffer=document.createElement('canvas'), ctx=buffer.getContext('2d',{alpha:false});
+  const buffer=document.createElement('canvas');
+  // Request a CPU canvas for the frames passed to the pose tracker.
+  const ctx=buffer.getContext('2d',{alpha:false,willReadFrequently:true});
   const cancel=()=>new DOMException('Stopped','AbortError');
   function reset(reason) { if (!closed) { epoch++; onReset(reason); } }
   function stop() {
