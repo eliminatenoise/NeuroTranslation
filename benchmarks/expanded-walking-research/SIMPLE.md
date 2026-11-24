@@ -1,5 +1,7 @@
 # Forecasting force underfoot
 
+The [five-pass-count comparison](pass-count/SIMPLE.md) adds tests at one, seven and nine passes on the same recordings.
+
 Three passes through the Research Edition’s middle layers gave the lowest impulse error among the tested settings. Average error fell from **3.24 to 2.89 newton-seconds** compared with extending the last measured force. Five passes raised that error to **3.12 newton-seconds** and took **52% longer** to calculate. This comparison used nine walks from three people already used for validation. [Technical report](TECHNICAL.md) · [Download the checkpoint](https://github.com/eliminatenoise/NeuroTranslation/releases/tag/expanded-walking-2026-11-24)
 
 ## What the model reads
