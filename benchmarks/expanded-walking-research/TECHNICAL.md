@@ -1,5 +1,7 @@
 # Research Edition walking force evaluation
 
+The treadmill test compares all five pass counts on new people using force readings alone. [Treadmill test](cross-lab-force/TECHNICAL.md)
+
 The [inference depth comparison](pass-count/TECHNICAL.md) reports five pass counts and timing for their shared computation.
 
 The expanded fit reduced validation impulse error from **3.23650 to 2.89490 N·s** at three passes. At five it rose to **3.11755 N·s**. Five passes lowered Brier error by 0.00003202 relative to three and increased median CPU time per simultaneous plate pair from 0.68699 to 1.04563 seconds. [Simple report](SIMPLE.md) · [Checkpoint](https://github.com/eliminatenoise/NeuroTranslation/releases/tag/expanded-walking-2026-11-24)

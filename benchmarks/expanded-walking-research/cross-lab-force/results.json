@@ -1,0 +1,316 @@
+{
+  "belt_rows": 384,
+  "cohort_people": 8,
+  "distinct_new_load_onsets": 22,
+  "earlier_reserved_final_test_opened": false,
+  "event_confirmation_horizon_ms": 119,
+  "force_samples_per_second": 1000,
+  "forecast_horizon_ms": 100,
+  "forecast_times": 192,
+  "input_history_ms": 200,
+  "methods": {
+    "fit_prior_and_physical_persistence": {
+      "endpoint_specific": {
+        "event": {
+          "aggregate": 0.07075750740800747,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 11.188235405185289,
+          "metric": "MAE in N s",
+          "rows": 384
+        }
+      },
+      "joint_support": {
+        "event": {
+          "aggregate": 0.07075750740800747,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 11.065670980942805,
+          "metric": "MAE in N s",
+          "rows": 303
+        }
+      }
+    },
+    "fit_prior_and_previous_slope": {
+      "endpoint_specific": {
+        "event": {
+          "aggregate": 0.07075750740800747,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 9.644449839664485,
+          "metric": "MAE in N s",
+          "rows": 384
+        }
+      },
+      "joint_support": {
+        "event": {
+          "aggregate": 0.07075750740800747,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 9.31073880379456,
+          "metric": "MAE in N s",
+          "rows": 303
+        }
+      }
+    },
+    "native_recurrence_1_passes": {
+      "endpoint_specific": {
+        "event": {
+          "aggregate": 0.06997673499572707,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 11.008710551388905,
+          "metric": "MAE in N s",
+          "rows": 384
+        }
+      },
+      "joint_support": {
+        "event": {
+          "aggregate": 0.06997673499572707,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 10.777787900020416,
+          "metric": "MAE in N s",
+          "rows": 303
+        }
+      }
+    },
+    "native_recurrence_3_passes": {
+      "endpoint_specific": {
+        "event": {
+          "aggregate": 0.07072176210971294,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 10.691827620192676,
+          "metric": "MAE in N s",
+          "rows": 384
+        }
+      },
+      "joint_support": {
+        "event": {
+          "aggregate": 0.07072176210971294,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 10.396672767470175,
+          "metric": "MAE in N s",
+          "rows": 303
+        }
+      }
+    },
+    "native_recurrence_5_passes": {
+      "endpoint_specific": {
+        "event": {
+          "aggregate": 0.0717758062728664,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 10.858097017112645,
+          "metric": "MAE in N s",
+          "rows": 384
+        }
+      },
+      "joint_support": {
+        "event": {
+          "aggregate": 0.0717758062728664,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 10.51733554614006,
+          "metric": "MAE in N s",
+          "rows": 303
+        }
+      }
+    },
+    "native_recurrence_7_passes": {
+      "endpoint_specific": {
+        "event": {
+          "aggregate": 0.07165146111907529,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 10.759554980938331,
+          "metric": "MAE in N s",
+          "rows": 384
+        }
+      },
+      "joint_support": {
+        "event": {
+          "aggregate": 0.07165146111907529,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 10.35070061089149,
+          "metric": "MAE in N s",
+          "rows": 303
+        }
+      }
+    },
+    "native_recurrence_9_passes": {
+      "endpoint_specific": {
+        "event": {
+          "aggregate": 0.07155923880158396,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 10.720450431844736,
+          "metric": "MAE in N s",
+          "rows": 384
+        }
+      },
+      "joint_support": {
+        "event": {
+          "aggregate": 0.07155923880158396,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 10.282499958596537,
+          "metric": "MAE in N s",
+          "rows": 303
+        }
+      }
+    },
+    "no_new_load_and_physical_persistence": {
+      "endpoint_specific": {
+        "event": {
+          "aggregate": 0.07495471014492752,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 11.188235405185289,
+          "metric": "MAE in N s",
+          "rows": 384
+        }
+      },
+      "joint_support": {
+        "event": {
+          "aggregate": 0.07495471014492752,
+          "metric": "Brier",
+          "rows": 303
+        },
+        "impulse": {
+          "aggregate": 11.065670980942805,
+          "metric": "MAE in N s",
+          "rows": 303
+        }
+      }
+    }
+  },
+  "model_weights_changed": false,
+  "muscle_voltages_available": false,
+  "negative_event_rows": 281,
+  "new_load_rows": 22,
+  "paired_comparisons": [
+    {
+      "difference": 1.0473777805281905,
+      "endpoint": "impulse",
+      "method": "native_recurrence_3_passes",
+      "people_higher": 6,
+      "people_lower": 2,
+      "people_tied": 0,
+      "reference": "fit_prior_and_previous_slope",
+      "relative_percent": 10.85990178745777
+    },
+    {
+      "difference": -0.49640778499261273,
+      "endpoint": "impulse",
+      "method": "native_recurrence_3_passes",
+      "people_higher": 2,
+      "people_lower": 6,
+      "people_tied": 0,
+      "reference": "fit_prior_and_physical_persistence",
+      "relative_percent": -4.436872902786337
+    },
+    {
+      "difference": -0.0007807724122804033,
+      "endpoint": "event",
+      "method": "native_recurrence_1_passes",
+      "people_higher": 0,
+      "people_lower": 8,
+      "people_tied": 0,
+      "reference": "fit_prior_and_previous_slope",
+      "relative_percent": -1.103448158197906
+    }
+  ],
+  "recurrent_passes": [
+    1,
+    3,
+    5,
+    7,
+    9
+  ],
+  "schedule": {
+    "archive_participant_labels": [
+      "G02",
+      "G03",
+      "G04",
+      "G05",
+      "G06",
+      "G07",
+      "G08",
+      "G09"
+    ],
+    "archive_trial": "run01, Walk A in Krumm Table 1",
+    "first_slot_offset": 50,
+    "fixed_walk_range_zero_based_force_ticks_half_open": [
+      180000,
+      360000
+    ],
+    "force_state_past_relative_ticks_inclusive": [
+      -999,
+      0
+    ],
+    "forecast_tick_formula": "185000 + 7000 * stratum + 20 * (slot + 1) - 1",
+    "origin_first_stratum_tick": 185000,
+    "outcome_impulse_relative_ticks_inclusive": [
+      1,
+      100
+    ],
+    "outcome_loading_confirmation_relative_ticks_inclusive": [
+      1,
+      119
+    ],
+    "past_force_input_relative_ticks_inclusive": [
+      -199,
+      0
+    ],
+    "possible_slots": 293,
+    "slot_formula": "50 + big-endian unsigned value of first eight SHA-256 bytes of UTF-8 krumm-walk-a-v1/<archive participant label>/<zero-based stratum> modulo 293",
+    "slot_spacing_force_ticks": 20,
+    "strata_per_person": 24,
+    "stratum_duration_force_ticks": 7000,
+    "time_reference": "One force tick per millisecond since the first archived camera frame"
+  },
+  "source_archive": "https://doi.org/10.17605/OSF.IO/KCQTF",
+  "source_paper": "https://doi.org/10.1038/s41597-026-07445-3",
+  "supports": {
+    "event": 303,
+    "impulse": 384,
+    "joint": 303
+  },
+  "walking_speed_reported_kmh": 4,
+  "walks": 8,
+  "weight_updates_at_checkpoint": 547
+}
