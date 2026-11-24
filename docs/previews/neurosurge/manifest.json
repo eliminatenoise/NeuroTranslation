@@ -33,9 +33,9 @@
     },
     {
       "path": "PLAYER-GUIDE-TECHNICAL.html",
-      "bytes": 14525,
-      "sha256": "e8978e4114455466d4db7f87f0ba05943f46270d3f7e898cc17b6633873bbceb",
-      "source": "Shared touch-input preview"
+      "bytes": 14863,
+      "sha256": "ba1ff2932e802fd62b98801fadadfe51abd4d628fbb40ec240fcc700b2174500",
+      "source": "Camera choice in the motion recorder"
     },
     {
       "path": "PLAYER-GUIDE-TECHNICAL.md",
@@ -45,9 +45,9 @@
     },
     {
       "path": "PLAYER-GUIDE.html",
-      "bytes": 19952,
-      "sha256": "78915d8106f78172879e2f963292ccd00a016f3d2988b2ddf36a56fc41af1c57",
-      "source": "Shared touch-input preview"
+      "bytes": 20272,
+      "sha256": "67663091a8db5608c6d248db88f42119b26ca18674f19db8c803eedb82367913",
+      "source": "Camera choice in the motion recorder"
     },
     {
       "path": "PLAYER-GUIDE.md",
@@ -1923,9 +1923,9 @@
     },
     {
       "path": "scene/src/camera.mjs",
-      "bytes": 32433,
-      "sha256": "2f69d88a19b837c49464d785adb7bff0ff9a34d6c0759a5bf31214dab16ac079",
-      "source": "hosted game runtime"
+      "bytes": 35053,
+      "sha256": "bd7cd936cc138e9594ae274340fabaf1b67f1b9c6fbbcb9060bd07c5607eb3e3",
+      "source": "Camera choice in the motion recorder"
     },
     {
       "path": "scene/src/grip-preview/forecast.mjs",
@@ -2630,5 +2630,9 @@
   "touch_input_update": {
     "base_commit": "14e3c351624e4d336e47b0d1cd36c00da22d5cb0",
     "scope": "Shared Full and Lite touch look, tap on release and touch cancellation."
+  },
+  "camera_choice_update": {
+    "base_commit": "4b64551defe2b5ae38c9d936f614e5ce8ab17441",
+    "scope": "Shared Full and Lite motion recorder. A named camera opens only on Start camera."
   }
 }

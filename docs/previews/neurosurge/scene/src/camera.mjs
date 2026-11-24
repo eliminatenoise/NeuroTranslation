@@ -8,6 +8,7 @@ const FRAME_TIMEOUT_MS = 15000;
 const POLL_INTERVAL_MS = 90;
 const MIN_FRAME_INTERVAL_MS = 50;
 const WAITING_FOR_VIDEO = 'Camera on. Waiting for video.';
+const WAITING_FOR_PERMISSION = 'Allow video to move the avatar. Video stays on this device.';
 const WAITING_FOR_CLIP_FRAME = 'Waiting for a current video frame.';
 function createTrackingFeedback(document) {
   const list = document.createElement('ul');
@@ -57,6 +58,7 @@ function createTrackingFeedback(document) {
 
 export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {}, host = document.body }) {
   let current = null, panel, video, preview, feedback, status, startButton, button, select, disposed = false;
+  let cameraWrap, cameraSelect, cameraListRequest = 0;
   let sourceMode = 'camera', sourceSelect, fileWrap, fileInput, videoSave, videoSaveStatus, videoTake;
   let pictureWrap, pictureFiles, pictureTimes, pictureNames, pictureSave, pictureTake;
   let limb = 'rightArm', selection = 0;
@@ -87,6 +89,32 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
     if (sourceMode === 'stills') return 'Choose two or more pictures and set their times, then select Track pictures.';
     if (sourceMode === 'clip') return 'Choose a video file, then select Play video. The file stays on this device.';
     return framing() + ' Select Start camera when ready. Video stays on this device.';
+  }
+  function updateCameraChooser() {
+    cameraWrap.hidden = sourceMode !== 'camera' || (cameraSelect.options.length < 3 && !cameraSelect.value);
+    cameraSelect.disabled = current !== null;
+  }
+  async function refreshCameras() {
+    if (disposed || document.hidden || !panel || panel.hidden || sourceMode !== 'camera' ||
+        typeof navigator.mediaDevices?.enumerateDevices !== 'function') return;
+    const request = ++cameraListRequest;
+    let devices;
+    try { devices = await navigator.mediaDevices.enumerateDevices(); }
+    catch { return; }
+    if (disposed || document.hidden || panel.hidden || sourceMode !== 'camera' || request !== cameraListRequest) return;
+    const cameras = devices.filter(device => device.kind === 'videoinput' && device.deviceId);
+    // Some browsers hide the list after the stream stops. Keep choices learned while it was open.
+    if (!cameras.length) return;
+    const selected = cameraSelect.value;
+    cameraSelect.replaceChildren(new Option('Browser default', ''));
+    for (const [index, camera] of cameras.entries()) {
+      cameraSelect.add(new Option(camera.label || 'Camera ' + (index + 1), camera.deviceId));
+    }
+    if (selected && !cameras.some(camera => camera.deviceId === selected)) {
+      cameraSelect.add(new Option('Previously selected camera (unavailable)', selected));
+    }
+    cameraSelect.value = selected;
+    updateCameraChooser();
   }
   function trackingMessage(result) {
     if (!result) return framing();
@@ -135,6 +163,10 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
         return;
       }
       resetTracking(current);
+      if (!current.stream) {
+        show(WAITING_FOR_PERMISSION, true);
+        return;
+      }
       const waiting = current.stream?.getVideoTracks()[0]?.muted ||
         performance.now() - current.lastFrameAt >= MAX_FRAME_AGE_MS;
       show(waiting ? WAITING_FOR_VIDEO : framing(), true);
@@ -190,8 +222,18 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
         clearPictureTake();
         sourceMode = sourceSelect.value;
         show(beforeStart(), false);
+        refreshCameras();
       });
       sourceLabel.append(sourceSelect);
+      cameraWrap = document.createElement('div');
+      const cameraLabel = document.createElement('label');
+      cameraLabel.append('Camera ');
+      cameraSelect = document.createElement('select');
+      cameraSelect.style.maxWidth = '100%';
+      cameraSelect.add(new Option('Browser default', ''));
+      cameraLabel.append(cameraSelect);
+      cameraWrap.append(cameraLabel);
+      navigator.mediaDevices?.addEventListener?.('devicechange', refreshCameras);
       fileWrap = document.createElement('label');
       fileWrap.append('Local video ');
       fileInput = document.createElement('input');
@@ -295,8 +337,8 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
         show('Picture take saved. Press F and type “replay my take”.', false);
         returnFocus();
       });
-      panel.append(sourceLabel, label, fileWrap, pictureWrap, preview.element, status, feedback.element, startButton, button,
-        videoTakeControls, pictureSave);
+      panel.append(sourceLabel, label, cameraWrap, fileWrap, pictureWrap, preview.element, status, feedback.element,
+        startButton, button, videoTakeControls, pictureSave);
       take = createLimbTake({
         panel, emit, returnFocus,
         onFinish: () => stop(),
@@ -307,6 +349,7 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
     panel.hidden = false;
     const recorded = sourceMode === 'clip';
     const pictures = sourceMode === 'stills';
+    updateCameraChooser();
     preview.element.hidden = !video.srcObject && !video.getAttribute('src');
     fileWrap.hidden = !recorded;
     fileInput.disabled = active;
@@ -453,6 +496,7 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
       show('Camera unavailable. This browser lacks the local pose tracker’s video or worker support.', false);
       return;
     }
+    const deviceId = cameraSelect.value;
     const session = {kind: 'camera', lastPolledFrame: -1, knees: {},
       usesPresentedFrames: typeof video.requestVideoFrameCallback === 'function' &&
         typeof video.cancelVideoFrameCallback === 'function'};
@@ -461,10 +505,11 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
     video.setAttribute('aria-label', 'Mirrored camera preview');
     preview.setMirrored(true);
     current = session;
-    show('Allow video to move the avatar. Video stays on this device.', true);
+    show(WAITING_FOR_PERMISSION, true);
     try {
       const stream = await navigator.mediaDevices.getUserMedia({video: {
-        width: {ideal: 640}, height: {ideal: 480}, frameRate: {ideal: 15, max: 30}, facingMode: {ideal: 'user'}
+        width: {ideal: 640}, height: {ideal: 480}, frameRate: {ideal: 15, max: 30},
+        ...(deviceId ? {deviceId: {exact: deviceId}} : {facingMode: {ideal: 'user'}})
       }, audio: false});
       if (current !== session) {
         stream.getTracks().forEach(track => track.stop());
@@ -473,6 +518,7 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
       session.stream = stream;
       const track = stream.getVideoTracks()[0];
       if (!track || track.readyState === 'ended') throw new DOMException('No camera track', 'NotFoundError');
+      refreshCameras();
       track.addEventListener('ended', () => failed(session, 'Camera off. The camera was disconnected.'), {once: true});
       stream.addEventListener('inactive', () => failed(session, 'Camera off. The video stream ended.'), {once: true});
       track.addEventListener('mute', () => {
@@ -534,7 +580,10 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
         NotFoundError: 'Camera off. No video camera was found.',
         NotReadableError: 'Camera off. The device is busy or unavailable.'
       }[error.name];
-      failed(session, reason || 'Camera off. The browser could not start the camera or local tracker.');
+      const missing = deviceId && (error.name === 'NotFoundError' ||
+        (error.name === 'OverconstrainedError' && error.constraint === 'deviceId'));
+      failed(session, missing ? 'Camera off. The selected camera is unavailable. Choose another camera.' :
+        reason || 'Camera off. The browser could not start the camera or local tracker.');
     }
   }
 
@@ -676,6 +725,7 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
       if (disposed) return;
       if (current) return;
       show(beforeStart(), false);
+      refreshCameras();
       select.focus({ preventScroll: true });
     },
     close() { if (fileInput) clearFiles(); leave(); if (panel) panel.hidden = true; },
@@ -704,6 +754,7 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
     dispose() {
       disposed = true;
       forget();
+      navigator.mediaDevices?.removeEventListener?.('devicechange', refreshCameras);
       window.removeEventListener('pagehide', forget);
       document.removeEventListener('visibilitychange', hide);
       panel?.remove();
