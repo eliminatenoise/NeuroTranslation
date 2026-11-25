@@ -18,7 +18,7 @@ export function readKeyframes(files, times, {minimum=1} = {}) {
 export function captureSource({kind,video,clip,stills,followKnees=false,getLimb,jointPoints=!getLimb,captureWrists=false,
   waitForFinalFrame=false,getBodyRevision,getForecastRevision,onFrame,onReset,onStatus,onError,onEnd}) {
   const limbPaths = Boolean(getLimb) && !jointPoints;
-  let closed=false, epoch=0, id=0, busy=false, clock=0, callback, stream, objectURL, worker, timer, silence, finish;
+  let closed=false, epoch=0, id=0, busy=false, callback, stream, objectURL, worker, timer, silence, finish;
   let endPending=false;
   const buffer=document.createElement('canvas');
   // Request a CPU canvas for the frames passed to the pose tracker.
@@ -65,7 +65,8 @@ export function captureSource({kind,video,clip,stills,followKnees=false,getLimb,
     });
   }
   async function track(source,w,h,t,sequence) {
-    if (!w || !h || !Number.isFinite(t) || busy || closed) return;
+    const timestamp = t * 1000;
+    if (!w || !h || !Number.isFinite(timestamp) || busy || closed) return;
     const gen=epoch, grabbed=performance.now(), scale=Math.min(1,640/Math.max(w,h));
     const limb = getLimb ? getLimb() : followKnees ? 'armsAndKnees' : 'bothArms';
     const bodyRevision = getBodyRevision?.();
@@ -76,7 +77,8 @@ export function captureSource({kind,video,clip,stills,followKnees=false,getLimb,
       ctx.drawImage(source,0,0,buffer.width,buffer.height);
       const frame=await createImageBitmap(buffer);
       if(closed || gen!==epoch) {frame.close();return;}
-      const result=await callWorker({type:'frame',frame,timestamp:++clock,limb,selection:gen,
+      // Hand recovery expires on elapsed media time even when the browser skips frames.
+      const result=await callWorker({type:'frame',frame,timestamp,limb,selection:gen,
         jointPoints,limbPaths,independent:true,waitForHand:kind==='stills',...(captureWrists ? {captureWrists:true} : {})},[frame]);
       if (closed || gen!==epoch) return;
       if (kind==='camera' && performance.now()-grabbed>350) {
