@@ -1,0 +1,55 @@
+{
+  "source": {
+    "archive": "https://doi.org/10.35090/gatech/70296",
+    "methods": "https://doi.org/10.1038/s41597-023-02840-6",
+    "license": "CC BY 4.0"
+  },
+  "decline_degrees": 5,
+  "people": 6,
+  "windows": 1060,
+  "scope": "Earlier archived marker and wearable measurements for the same 1,060 five-degree fitting cases. Person-disjoint evaluation folds within the admitted development cohort. No 10\u00b0 outcomes were used.",
+  "methods": [
+    {
+      "label": "Static body weight on the slope",
+      "total_mae_ns": 16.20449752385984
+    },
+    {
+      "label": "Mechanical estimate from projected pelvis acceleration",
+      "total_mae_ns": 25.81611422179168
+    },
+    {
+      "label": "Muscle readings",
+      "total_mae_ns": 10.362018413256505
+    },
+    {
+      "label": "Wearable acceleration",
+      "total_mae_ns": 6.55849689081738
+    },
+    {
+      "label": "Camera-tracked pelvis trajectory",
+      "total_mae_ns": 3.7267259598409868
+    },
+    {
+      "label": "Muscle plus wearable acceleration",
+      "total_mae_ns": 6.2176252330925195
+    },
+    {
+      "label": "Muscle plus camera-tracked pelvis",
+      "total_mae_ns": 3.9297862331743456
+    },
+    {
+      "label": "Wearable acceleration plus camera-tracked pelvis",
+      "total_mae_ns": 4.05703957214507
+    },
+    {
+      "label": "Muscle, wearable and camera readings",
+      "total_mae_ns": 4.276215155630376
+    }
+  ],
+  "motion_inputs": {
+    "wearable_units": "m/s\u00b2, verified against the authors\u2019 matching time and values",
+    "wearable_devices": 8,
+    "optical_geometry": "Same two anterior pelvis markers for every person. One fitting trial had no posterior marker coordinates. Optical points are a geometrical proxy, with physical availability and possible preprocessing unresolved."
+  },
+  "independent_review_sha256": "d71551eb73610a69aba8de36ce79077c68002e74b54bccb319d75a493d0f93bc"
+}

@@ -1,0 +1,253 @@
+{
+  "source": {
+    "archive": "https://doi.org/10.35090/gatech/70296",
+    "methods": "https://doi.org/10.1038/s41597-023-02840-6",
+    "license": "CC BY 4.0"
+  },
+  "fit": {
+    "decline_degrees": 5,
+    "people": 6,
+    "windows": 1060
+  },
+  "evaluation": {
+    "decline_degrees": 10,
+    "belt_speed_m_s": 1.2,
+    "total": {
+      "people": 4,
+      "windows": 708
+    },
+    "separate_plates": {
+      "people": 3,
+      "windows": 534
+    }
+  },
+  "scope": "These four people were outside the fitting group for this model. Earlier programme studies used some of their other recordings. Generalization to different labs, species, body parts, or live control remains unverified.",
+  "conditions": {
+    "muscle_only": [
+      {
+        "id": "fixed",
+        "label": "Typical total from fitting",
+        "total_mae_ns": 23.062865906226353,
+        "plate_mae_ns": null,
+        "people_better_than_reference": 0
+      },
+      {
+        "id": "linear",
+        "label": "Linear fit",
+        "total_mae_ns": 21.875091375386134,
+        "plate_mae_ns": [
+          19.2100723702665,
+          21.6454870696606
+        ],
+        "people_better_than_reference": 2
+      },
+      {
+        "id": "attention_p1",
+        "label": "Compact attention, 1 pass",
+        "total_mae_ns": 24.653519487796718,
+        "plate_mae_ns": [
+          21.62397284294128,
+          21.759887154645725
+        ],
+        "people_better_than_reference": 1
+      },
+      {
+        "id": "attention_p3",
+        "label": "Compact attention, 3 passes",
+        "total_mae_ns": 24.452439650355213,
+        "plate_mae_ns": [
+          21.473023698897077,
+          22.284404453325834
+        ],
+        "people_better_than_reference": 1
+      },
+      {
+        "id": "attention_p5",
+        "label": "Compact attention, 5 passes",
+        "total_mae_ns": 23.774588559499332,
+        "plate_mae_ns": [
+          21.115127857624444,
+          22.588406894359224
+        ],
+        "people_better_than_reference": 1
+      },
+      {
+        "id": "attention_p7",
+        "label": "Compact attention, 7 passes",
+        "total_mae_ns": 24.38708489580379,
+        "plate_mae_ns": [
+          21.186572710630728,
+          21.98992589348231
+        ],
+        "people_better_than_reference": 1
+      },
+      {
+        "id": "attention_p9",
+        "label": "Compact attention, 9 passes",
+        "total_mae_ns": 25.520879883344385,
+        "plate_mae_ns": [
+          21.153308374604737,
+          22.99744588676045
+        ],
+        "people_better_than_reference": 1
+      },
+      {
+        "id": "head_relative_muscle",
+        "label": "Relative muscle readout",
+        "total_mae_ns": 21.877459723567238,
+        "plate_mae_ns": [
+          19.67888553445574,
+          21.623705428667368
+        ],
+        "people_better_than_reference": 2
+      },
+      {
+        "id": "head_research_edition",
+        "label": "Full Research Edition readout",
+        "total_mae_ns": 22.934655602336697,
+        "plate_mae_ns": [
+          23.53497334147212,
+          25.145959644062255
+        ],
+        "people_better_than_reference": 1
+      },
+      {
+        "id": "head_research_and_relative",
+        "label": "Joint Research Edition and muscle readout",
+        "total_mae_ns": 22.168262173997466,
+        "plate_mae_ns": [
+          19.378266637517346,
+          21.63188874805026
+        ],
+        "people_better_than_reference": 2
+      },
+      {
+        "id": "head_late_blend",
+        "label": "Weighted average of Research Edition and muscle forecasts",
+        "total_mae_ns": 21.877459723567238,
+        "plate_mae_ns": [
+          19.67888553445574,
+          21.623705428667368
+        ],
+        "people_better_than_reference": 2
+      }
+    ],
+    "supplied_mass": [
+      {
+        "id": "static_reference",
+        "label": "Static body weight on the slope",
+        "total_mae_ns": 16.32506855946624,
+        "plate_mae_ns": null,
+        "people_better_than_reference": 0
+      },
+      {
+        "id": "linear",
+        "label": "Linear fit",
+        "total_mae_ns": 11.009308159988509,
+        "plate_mae_ns": [
+          16.232932950422903,
+          18.636641708879818
+        ],
+        "people_better_than_reference": 4
+      },
+      {
+        "id": "attention_p1",
+        "label": "Compact attention, 1 pass",
+        "total_mae_ns": 9.756892263939086,
+        "plate_mae_ns": [
+          14.72824410477002,
+          16.37036210048988
+        ],
+        "people_better_than_reference": 4
+      },
+      {
+        "id": "attention_p3",
+        "label": "Compact attention, 3 passes",
+        "total_mae_ns": 9.90657626864187,
+        "plate_mae_ns": [
+          14.79087678553799,
+          16.527020858458243
+        ],
+        "people_better_than_reference": 4
+      },
+      {
+        "id": "attention_p5",
+        "label": "Compact attention, 5 passes",
+        "total_mae_ns": 9.71489052591863,
+        "plate_mae_ns": [
+          14.975777106128504,
+          17.021680726662385
+        ],
+        "people_better_than_reference": 4
+      },
+      {
+        "id": "attention_p7",
+        "label": "Compact attention, 7 passes",
+        "total_mae_ns": 9.632600079642653,
+        "plate_mae_ns": [
+          15.051114367784185,
+          16.17084384300142
+        ],
+        "people_better_than_reference": 4
+      },
+      {
+        "id": "attention_p9",
+        "label": "Compact attention, 9 passes",
+        "total_mae_ns": 9.579211248077355,
+        "plate_mae_ns": [
+          14.93505255193677,
+          16.14214928542368
+        ],
+        "people_better_than_reference": 4
+      },
+      {
+        "id": "head_relative_muscle",
+        "label": "Relative muscle readout",
+        "total_mae_ns": 11.322289225340336,
+        "plate_mae_ns": [
+          16.217201752195972,
+          18.584565136506367
+        ],
+        "people_better_than_reference": 4
+      },
+      {
+        "id": "head_research_edition",
+        "label": "Full Research Edition readout",
+        "total_mae_ns": 14.768634363220091,
+        "plate_mae_ns": [
+          21.551886131911818,
+          22.40473970073363
+        ],
+        "people_better_than_reference": 4
+      },
+      {
+        "id": "head_research_and_relative",
+        "label": "Joint Research Edition and muscle readout",
+        "total_mae_ns": 10.968793290825511,
+        "plate_mae_ns": [
+          16.202797255420034,
+          18.659969079057117
+        ],
+        "people_better_than_reference": 4
+      },
+      {
+        "id": "head_late_blend",
+        "label": "Weighted average of Research Edition and muscle forecasts",
+        "total_mae_ns": 11.322289225340336,
+        "plate_mae_ns": [
+          16.217201752195972,
+          18.584565136506367
+        ],
+        "people_better_than_reference": 4
+      }
+    ]
+  },
+  "warm_cpu_seconds_for_708_windows": {
+    "5": 0.021913350909017026,
+    "7": 0.029187881969846785,
+    "9": 0.03502103709615767
+  },
+  "numeric_source_values_independently_reproduced": 283200,
+  "aggregate_source_sha256": "bbaa329808d13702593aaaf54e846464aefa7b265c09424e58bbf9370ed0af40",
+  "independent_review_sha256": "b197c9218a312e054a23e71082c2aadb628074fc28c224dbd16cf3022fe884b6"
+}

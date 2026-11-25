@@ -1,6 +1,6 @@
 # Muscle-only floor-plate impulse forecast
 
-A separate decline-treadmill experiment compares 200 ms and 1 s of EMG with one, three and five attention passes. [Treadmill protocol and results](decline-treadmill/TECHNICAL.md)
+The decline treadmill benchmark evaluates forecasts fitted on the 5° decline on four other people at 10°. It compares muscle-only and mass-and-slope conditions. The package retains the earlier 5° comparison and its saved forecasts. [Treadmill protocol and results](decline-treadmill/TECHNICAL.md)
 
 A follow-up compares whole-participant folds and a fixed four-participant transfer test. [Follow-up methods and results](participant-transfer/TECHNICAL.md)
 

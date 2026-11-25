@@ -1,6 +1,6 @@
 # Floor load from leg muscle signals
 
-A separate treadmill study forecasts the measured load on each plate from earlier muscle readings. [Decline treadmill results and saved models](decline-treadmill/)
+The decline treadmill study tests muscle-based forecasts on four people who walked at a steeper slope than the fitting group. It compares what the models learn from muscle readings alone and what changes when body mass and slope are supplied. The download includes both sets of compact forecasts and the earlier 5° test. [Decline treadmill results and saved models](decline-treadmill/)
 
 A follow-up fitted the models on five people, then checked predictions on four further people from the same recording collection. [Follow-up results and downloads](participant-transfer/)
 
