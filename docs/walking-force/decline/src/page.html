@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+  <title>Downhill treadmill forecast | NeuroTranslate 0.1</title>
+  <style>__STYLE__</style>
+</head>
+<body>
+  <div class="frame">
+    <header class="top">
+      <a class="brand" href="https://github.com/eliminatenoise/NeuroTranslation">NeuroTranslate 0.1</a>
+      <nav aria-label="Study reports">
+        <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/emg-floor-load/decline-treadmill">Simple results</a>
+        <a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/emg-floor-load/decline-treadmill/TECHNICAL.md">Technical results</a>
+      </nav>
+    </header>
+    <main>
+      <h1>Downhill treadmill forecast</h1>
+      <p class="intro">Use earlier voltage readings from six muscles to estimate the load on two treadmill plates over the next tenth of a second.</p>
+      <div class="panels">
+        <section class="panel" aria-labelledby="input-title">
+          <h2 id="input-title">Muscle signals</h2>
+          <div class="source">
+            <label for="file">Open a voltage CSV</label>
+            <input id="file" type="file" accept=".csv,text/csv" aria-describedby="file-info">
+            <button id="reset" type="button">Reset example</button>
+          </div>
+          <p class="help" id="file-info">Use 400 rows of readings in volts at 2,000 samples per second. The 200 ms history ends 10 ms before the forecast starts. Use the header LBF,LTA,LRF,RBF,RTA,RRF. The file stays in this browser.</p>
+          <p class="source-name" id="active-source" role="status">Invented example</p>
+          <p id="file-error" role="alert" class="error" hidden></p>
+
+          <label for="channel">Muscle to display and adjust</label>
+          <select id="channel">
+            <option value="0">Left back of thigh · LBF</option>
+            <option value="1">Left front of shin · LTA</option>
+            <option value="2">Left front of thigh · LRF</option>
+            <option value="3">Right back of thigh · RBF</option>
+            <option value="4">Right front of shin · RTA</option>
+            <option value="5">Right front of thigh · RRF</option>
+          </select>
+          <figure>
+            <canvas id="trace" aria-label="Voltage history" role="img"></canvas>
+            <figcaption id="trace-note">Voltage in microvolts. The shaded area marks the most recent 140 milliseconds of the input.</figcaption>
+          </figure>
+          <div class="range-row">
+            <label for="gain">Voltage in the shaded interval</label>
+            <output id="gain-value" for="gain">1.00×</output>
+          </div>
+          <input id="gain" type="range" min="0.5" max="1.8" step="0.05" value="1">
+        </section>
+
+        <section class="panel" aria-labelledby="output-title">
+          <h2 id="output-title">Forecast</h2>
+          <label for="passes">Compact model passes</label>
+          <select id="passes">
+            <option value="1">1 pass</option>
+            <option value="3">3 passes</option>
+            <option value="5">5 passes</option>
+            <option value="7">7 passes</option>
+            <option value="9" selected>9 passes</option>
+          </select>
+
+          <label class="toggle"><input id="using-mass" type="checkbox" checked> Scale using body mass and slope</label>
+          <div id="mass-inputs" class="scale-inputs">
+            <label for="mass">Body mass (kg)<input id="mass" type="number" min="0.01" step="any" value="72"></label>
+            <label for="slope">Slope (°)<input id="slope" type="number" min="-89.99" max="89.99" step="any" value="-10"></label>
+          </div>
+          <p class="help" id="context-note">The invented example uses 72 kg and −10°. Use a negative angle for a downhill slope.</p>
+          <p class="error" id="forecast-error" role="alert" hidden></p>
+          <div class="table-wrap" role="region" tabindex="0" aria-label="Forecast values in newton-seconds">
+            <table id="forecasts">
+              <caption>Next 100 ms · newton-seconds (N·s)</caption>
+              <thead><tr><th scope="col">Method</th><th scope="col">Plate 1</th><th scope="col">Plate 2</th><th scope="col">Total</th></tr></thead>
+              <tbody id="forecast-rows"></tbody>
+            </table>
+          </div>
+          <p class="help">The weighted forecast equals the relative-muscle fit here. The fitted blend assigned the full Research Edition zero weight.</p>
+          <p class="sr-only" id="announce" role="status"></p>
+        </section>
+      </div>
+
+      <section class="recorded" aria-labelledby="recorded-title">
+        <h2 id="recorded-title">Recorded 10° benchmark</h2>
+        <p>On 708 forecasts from four walkers held out of fitting, the nine-pass compact model averaged 9.58 N·s of total error. The static reference averaged 16.33 N·s. This comparison scaled the model using measured body mass and slope.</p>
+        <p>The example uses invented voltages. Benchmark errors compare forecasts against treadmill plate measurements recorded at one lab.</p>
+        <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/emg-floor-load/decline-treadmill">Recorded results and downloads</a>
+      </section>
+    </main>
+    <footer><p>NeuroTranslation fitted the models using recordings from Scherpereel and colleagues, licensed CC BY 4.0.</p>
+      <nav aria-label="Sources"><a href="https://repository.gatech.edu/entities/publication/20860ffb-71fd-4049-a033-cd0ff308339e">Dataset and licence</a><a href="https://doi.org/10.1038/s41597-023-02840-6">Recording methods</a></nav>
+    </footer>
+  </div>
+  <noscript><p>Enable JavaScript to run the offline model.</p></noscript>
+  <script type="application/json" id="checkpoint">__PAYLOAD__</script>
+  <script type="application/json" id="example">__EXAMPLE__</script>
+  <script>__MODEL__</script>
+  <script>__CONTROLS__</script>
+</body>
+</html>
