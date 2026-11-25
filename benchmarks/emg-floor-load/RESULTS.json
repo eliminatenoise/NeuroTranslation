@@ -67,5 +67,111 @@
     "numpy": "2.5.3",
     "torch": "2.14.1+cpu"
   },
-  "limit": "One person and recording with the source’s zero-delay filtered ground-force reference. Repetitions assigned within activities."
+  "limit": "The first comparison at the top of this file uses one person. Both comparisons use the authors’ filtered offline force export.",
+  "four_new_participants": {
+    "scope": "Subjects 2 through 5 in Baetens v2, Session 1, Recording 1. Repetitions 4 and 5 of seven activities attempted. Same data collection and instrumentation.",
+    "recorded_participants": 4,
+    "nominated_repetitions": 56,
+    "admitted_repetitions": 55,
+    "excluded_repetitions": [
+      {
+        "subject": 3,
+        "activity": "Slow level walking",
+        "repetition": 5,
+        "reason": "A unique raw button gap did not fit all waveform anchors."
+      }
+    ],
+    "scored_windows": 4245,
+    "nonfinite_target_exclusions": 0,
+    "refitted": false,
+    "metric": "Mean absolute error in newton-seconds. Equal weight per participant, then per included repetition.",
+    "errors_ns": {
+      "fitted_median": 10.06328437660688,
+      "ridge": 15.890140298821091,
+      "attention_1": 12.140362478315122,
+      "attention_3": 12.120468716620312,
+      "attention_3_reversed": 11.967636529537682
+    },
+    "windows_with_absolute_impulse_at_most_1_ns": 3407,
+    "strata": {
+      "order": [
+        "absolute impulse at most 1 N·s",
+        "absolute impulse above 1 N·s"
+      ],
+      "weighting": "The contributions for each method sum to its overall error and preserve the primary weights.",
+      "weighted_error_contributions_ns": {
+        "fitted_median": [
+          0.004000379131672936,
+          10.059283997475207
+        ],
+        "ridge": [
+          7.312195101073339,
+          8.577945197747752
+        ],
+        "attention_1": [
+          3.068025696692536,
+          9.072336781622587
+        ],
+        "attention_3": [
+          2.945821564472965,
+          9.174647152147347
+        ],
+        "attention_3_reversed": [
+          2.699992841911896,
+          9.267643687625785
+        ]
+      }
+    },
+    "participants": {
+      "2": {
+        "windows": 958,
+        "repetitions": 14,
+        "windows_with_absolute_impulse_at_most_1_ns": 776,
+        "errors_ns": {
+          "fitted_median": 12.95761080490689,
+          "ridge": 18.70320517203335,
+          "attention_1": 14.812834499547838,
+          "attention_3": 14.869490148389826,
+          "attention_3_reversed": 14.709392641256924
+        }
+      },
+      "3": {
+        "windows": 967,
+        "repetitions": 13,
+        "windows_with_absolute_impulse_at_most_1_ns": 779,
+        "errors_ns": {
+          "fitted_median": 8.98236901926149,
+          "ridge": 14.897826696429785,
+          "attention_1": 11.023769986315859,
+          "attention_3": 11.069134221168365,
+          "attention_3_reversed": 10.90428945789806
+        }
+      },
+      "4": {
+        "windows": 1117,
+        "repetitions": 14,
+        "windows_with_absolute_impulse_at_most_1_ns": 853,
+        "errors_ns": {
+          "fitted_median": 11.11926441946997,
+          "ridge": 16.495868512899904,
+          "attention_1": 13.400297096535905,
+          "attention_3": 13.196856124198037,
+          "attention_3_reversed": 13.029580202811836
+        }
+      },
+      "5": {
+        "windows": 1203,
+        "repetitions": 14,
+        "windows_with_absolute_impulse_at_most_1_ns": 999,
+        "errors_ns": {
+          "fitted_median": 7.19389326278917,
+          "ridge": 13.463660813921328,
+          "attention_1": 9.32454833086089,
+          "attention_3": 9.346394372725026,
+          "attention_3_reversed": 9.227283816183904
+        }
+      }
+    },
+    "scientific_limit": "Retrospective trial selection by catalogue, processed waveform identity and original hardware buttons. Earlier raw EMG alone supplies each forecast. Predictions were frozen before selecting numerical force cells."
+  }
 }
