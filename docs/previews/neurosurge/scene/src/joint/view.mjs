@@ -27,6 +27,7 @@ const markup=`
 <p id="joint-forecast-help" hidden>The forecast can use a different point, including a hip or ankle. It shows where that point may appear in the image 0.12 seconds later.</p>
 <label>Forecast method <select data-method aria-describedby="joint-method-help"><option value="model">NeuroTranslate 0.0</option><option value="adaptive">Adapt to recent tracking</option><optgroup label="Known movement"><option value="A1D1">Walking</option><option value="A3D1">Squat</option><option value="A6D1">Shoulder press</option><option value="A9D3">Jumping jacks</option></optgroup></select></label>
 <p id="joint-method-help">Choose a named movement when you know the action. Recent tracking combines forecasts using earlier points found by your camera tracker.</p>
+<p><a href="https://eliminatenoise.github.io/NeuroTranslation/reaching-ultrasound-300ms/" target="_blank" rel="noopener">300 ms reaching forecast from recorded readings</a></p>
 <p id="joint-take-help" hidden>Save up to eight seconds of tracked movement for the limbs the avatar follows. The movement readings stay in this tab.</p>
 <button data-start type="button">Start camera</button> <button data-save-take type="button" aria-describedby="joint-take-help" hidden disabled>Save take</button> <button data-stop type="button" disabled>Stop</button>
 <video muted playsinline hidden></video><p data-status role="status">Camera off. Images stay on this device.</p>
