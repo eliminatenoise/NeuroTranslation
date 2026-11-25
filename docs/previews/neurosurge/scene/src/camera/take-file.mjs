@@ -1,4 +1,4 @@
-import {trackingChoices} from './limb-pose.mjs';
+import {hipJoints, hipLimits, trackingChoices} from './limb-pose.mjs';
 import {TAKE_LIMIT_MS} from './limb-take.mjs';
 
 export const MAX_TAKE_FILE_BYTES = 2 * 1024 * 1024;
@@ -10,7 +10,9 @@ const armSides = ['leftArm', 'rightArm'];
 const jointRanges = {
   rightArm: {r_shoulder_abd: [0, 180], r_shoulder_flex: [0, 0], r_elbow_flex: [0, 145]},
   leftLeg: {knee_ext_L: [-135, 0]},
-  rightLeg: {knee_ext_R: [-135, 0]}
+  rightLeg: {knee_ext_R: [-135, 0]},
+  leftHip: {[hipJoints.leftHip]: hipLimits},
+  rightHip: {[hipJoints.rightHip]: hipLimits}
 };
 // Both capture paths resize their tracking bitmap to at most 640 pixels per side.
 const maxBitmapSide = 640;

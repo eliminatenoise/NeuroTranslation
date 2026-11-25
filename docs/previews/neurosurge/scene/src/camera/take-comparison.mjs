@@ -1,3 +1,5 @@
+import {hipJoints} from './limb-pose.mjs';
+
 // Capture selections share a comparable bend target only on the same joint and side.
 const joints = [
   {label: 'Left elbow', limbs: ['leftArm', 'bothArms', 'armsAndKnees'], read: pose => pose?.leftArm?.elbowDeg},
@@ -23,7 +25,11 @@ const lifts = [
   {label: 'Left upper-arm lift', limbs: ['leftArm', 'bothArms', 'armsAndKnees'], read: leftLift,
     description: 'Angle of the saved left upper-arm direction in the camera picture. The shoulder line sets the horizontal. Down is 0°, level is 90° and overhead is 180°. Inward and outward lifts of the same size share an angle.'},
   {label: 'Right shoulder lift', limbs: ['rightArm', 'bothArms', 'armsAndKnees'], read: pose => pose?.joints?.r_shoulder_abd,
-    description: 'Sideways lift requested at the avatar’s right shoulder. The shoulder line in the picture sets the horizontal. Down is 0°, out to the side is 90° and overhead is 180°. The game limits the target to this range.'}
+    description: 'Sideways lift requested at the avatar’s right shoulder. The shoulder line in the picture sets the horizontal. Down is 0°, out to the side is 90° and overhead is 180°. The game limits the target to this range.'},
+  {label: 'Left hip lift', limbs: ['leftHip'], read: pose => pose?.joints?.[hipJoints.leftHip],
+    description: 'Left thigh angle in the side view. A thigh pointing down along the torso is 0°. Positive angles move it towards the front of the body.'},
+  {label: 'Right hip lift', limbs: ['rightHip'], read: pose => pose?.joints?.[hipJoints.rightHip],
+    description: 'Right thigh angle in the side view. A thigh pointing down along the torso is 0°. Positive angles move it towards the front of the body.'}
 ];
 
 export function commonAngles(first, second) {

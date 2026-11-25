@@ -1,6 +1,6 @@
 // Each take lives in this page's memory. The camera passes only its selected
 // rig pose, frame time and projected arm points after side and tracking checks.
-import {trackingChoices} from './limb-pose.mjs';
+import {hipJoints, trackingChoices} from './limb-pose.mjs';
 
 export const TAKE_LIMIT_MS = 8000;
 
@@ -20,7 +20,9 @@ const groupedLimbs = {
 const jointKeys = {
   rightArm: ['r_shoulder_abd', 'r_shoulder_flex', 'r_elbow_flex'],
   rightLeg: ['knee_ext_R'],
-  leftLeg: ['knee_ext_L']
+  leftLeg: ['knee_ext_L'],
+  rightHip: [hipJoints.rightHip],
+  leftHip: [hipJoints.leftHip]
 };
 
 function canUseLimb(result, limb) {

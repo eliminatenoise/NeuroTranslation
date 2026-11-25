@@ -8,10 +8,12 @@ export function createLimbEvidence() {
   const ctx = canvas.getContext('2d', {willReadFrequently: true});
   return function limbVisible(frame, points, limb, checkFoot = false) {
     if (!ctx) return false;
+    const hip = limb === 'leftHip' || limb === 'rightHip';
     const leg = limb === 'leftLeg' || limb === 'rightLeg';
-    const offset = limb === 'leftLeg' || limb === 'leftArm' ? 0 : 1;
-    const middle = points[(leg ? 25 : 13) + offset];
-    const end = points[(leg ? 27 : 15) + offset];
+    const lowerBody = hip || leg;
+    const offset = limb === 'leftHip' || limb === 'leftLeg' || limb === 'leftArm' ? 0 : 1;
+    const middle = points[(hip ? 23 : leg ? 25 : 13) + offset];
+    const end = points[(hip ? 25 : leg ? 27 : 15) + offset];
     const span = Math.max(tile, Math.round(Math.min(frame.width, frame.height) * 0.025));
     const patches = [middle, {x: (middle.x + end.x) / 2, y: (middle.y + end.y) / 2}, end];
     // With two legs in view the tracker can land one ankle on the other leg or
@@ -30,8 +32,8 @@ export function createLimbEvidence() {
     // Also inspect a thumbnail. When the lower frame is covered the detector
     // sometimes places a plausible-looking ankle immediately ABOVE the cover.
     const width = patches.length * tile;
-    if (leg) ctx.drawImage(frame, 0, tile, width, rows);
-    const {data} = ctx.getImageData(0, 0, width, leg ? canvas.height : tile);
+    if (lowerBody) ctx.drawImage(frame, 0, tile, width, rows);
+    const {data} = ctx.getImageData(0, 0, width, lowerBody ? canvas.height : tile);
     const luminance = k => (data[k] + 2 * data[k + 1] + data[k + 2]) / 4;
     for (let i = 0; i < patches.length; i++) {
       let min = 255, max = 0;
@@ -45,10 +47,10 @@ export function createLimbEvidence() {
       }
       if (max - min < 8) return false;
     }
-    if (!leg) return true;
+    if (!lowerBody) return true;
     // Reject a contiguous flat lower band at least a quarter of the image
-    // tall when the estimated ankle is in or near that band. A distant
-    // letterbox below a fully visible leg can remain.
+    // tall when the estimated ankle or knee is in or near that band. A distant
+    // letterbox below the tracked segment can remain.
     let min = 255, max = 0, flatRows = 0;
     for (let y = canvas.height - 1; y >= tile; y--) {
       for (let x = 0; x < width; x++) {

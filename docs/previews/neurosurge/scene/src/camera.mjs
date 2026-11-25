@@ -1,7 +1,7 @@
 // Opt-in control. No camera, worker, or model asset is opened during construction.
 import {createLimbTake, createTakeTimeline, createVideoTakeWindow, pictureOffsetMs, TAKE_LIMIT_MS} from './camera/limb-take.mjs';
 import {createCameraPreview} from './camera/preview.mjs';
-import {calibratedPose, kneeJoints, trackedLimbs, trackingChoices as choices} from './camera/limb-pose.mjs';
+import {calibratedPose, hipJoints, kneeJoints, trackedLimbs, trackingChoices as choices} from './camera/limb-pose.mjs';
 import {captureSource, readKeyframes, MAX_LOCAL_VIDEO_BYTES} from './joint/media.mjs';
 const MAX_FRAME_AGE_MS = 1200;
 const FRAME_TIMEOUT_MS = 15000;
@@ -16,7 +16,7 @@ function createTrackingFeedback(document) {
   list.setAttribute('aria-label', 'Tracking by limb');
   list.style.cssText = 'margin:6px 0;padding:0;list-style:none';
   const items = new Map();
-  for (const limb of choices.armsAndKnees.parts) {
+  for (const limb of [...choices.armsAndKnees.parts, ...Object.keys(hipJoints)]) {
     const row = document.createElement('li');
     const name = document.createElement('span');
     const state = document.createElement('strong');

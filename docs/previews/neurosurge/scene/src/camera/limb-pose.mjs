@@ -4,8 +4,13 @@ const chains = {
   rightArm: [11, 12, 14, 16],
   leftArm: [12, 11, 13, 15],
   rightLeg: [23, 24, 26, 28],
-  leftLeg: [24, 23, 25, 27]
+  leftLeg: [24, 23, 25, 27],
+  rightHip: [11, 12, 24, 26],
+  leftHip: [12, 11, 23, 25]
 };
+
+export const hipJoints = Object.freeze({leftHip: 'hip_flex_L', rightHip: 'hip_flex_R'});
+export const hipLimits = Object.freeze([-30, 120]);
 
 export const trackingChoices = {
   rightArm: {name: 'Right arm', frame: 'Face the lens. Show both shoulders, your right elbow and wrist.', motion: 'Right shoulder and elbow', parts: ['rightArm']},
@@ -13,6 +18,8 @@ export const trackingChoices = {
   bothArms: {name: 'Both arms', frame: 'Face the lens with both shoulders, elbows and wrists in view.', motion: 'Both arms', parts: ['leftArm', 'rightArm']},
   leftLeg: {name: 'Left knee', frame: 'Turn partway sideways. Show shoulders, hips, your left knee and ankle.', motion: 'Left knee', parts: ['leftLeg']},
   rightLeg: {name: 'Right knee', frame: 'Turn partway sideways. Show shoulders, hips, your right knee and ankle.', motion: 'Right knee', parts: ['rightLeg']},
+  leftHip: {name: 'Left hip lift', frame: 'Turn sideways. Keep your face, shoulders and left thigh in view.', motion: 'Left hip lift', parts: ['leftHip']},
+  rightHip: {name: 'Right hip lift', frame: 'Turn sideways. Keep your face, shoulders and right thigh in view.', motion: 'Right hip lift', parts: ['rightHip']},
   armsAndKnees: {name: 'Both arms and knees', frame: 'Keep shoulders, elbows, wrists, hips and feet in view. Bend each knee where the lens can see it.', motion: 'Both arms and knees', parts: ['leftArm', 'rightArm', 'leftLeg', 'rightLeg']},
   bothKnees: {name: 'Both knees', frame: 'Turn partway sideways. Keep your shoulders, hips, knees and feet in view. Show a clear bend on each side.', motion: 'Both knees', parts: ['leftLeg', 'rightLeg']}
 };
@@ -24,7 +31,9 @@ export function trackedLimbs(pose) {
     pose.leftArm && 'leftArm',
     Number.isFinite(joints?.r_elbow_flex) && 'rightArm',
     Number.isFinite(joints?.knee_ext_L) && 'leftLeg',
-    Number.isFinite(joints?.knee_ext_R) && 'rightLeg'
+    Number.isFinite(joints?.knee_ext_R) && 'rightLeg',
+    Number.isFinite(joints?.[hipJoints.leftHip]) && 'leftHip',
+    Number.isFinite(joints?.[hipJoints.rightHip]) && 'rightHip'
   ].filter(Boolean);
 }
 
@@ -82,10 +91,41 @@ function visible(p) {
     Number.isFinite(p.visibility) && p.visibility >= 0.65;
 }
 
+function projectedHip(points, width, height, limb) {
+  const [otherShoulder, shoulder, hip, knee] = chains[limb];
+  const otherHip = limb === 'leftHip' ? 24 : 23;
+  const indices = [0, 7, 8, otherShoulder, shoulder, otherHip, hip, knee];
+  if (!indices.every(index => visible(points[index]))) return null;
+  const xy = index => [points[index].x * width, points[index].y * height];
+  const down = between(xy(shoulder), xy(hip));
+  const torsoLength = Math.hypot(...down);
+  const thigh = between(xy(hip), xy(knee));
+  if (torsoLength < Math.min(width, height) * 0.08 || down[1] < 0.7 * torsoLength ||
+      Math.hypot(...thigh) < 0.5 * torsoLength) return null;
+
+  // Work in the plane of the picture. The nose must project beyond both ears
+  // and the torso must also appear narrow, so turning only the head is insufficient.
+  const across = [down[1] / torsoLength, -down[0] / torsoLength];
+  const noseFromLeftEar = dot(between(xy(7), xy(0)), across);
+  const noseFromRightEar = dot(between(xy(8), xy(0)), across);
+  const direction = Math.sign(noseFromLeftEar);
+  const breadth = Math.max(Math.abs(dot(between(xy(otherShoulder), xy(shoulder)), across)),
+    Math.abs(dot(between(xy(otherHip), xy(hip)), across)));
+  if (noseFromRightEar * direction < 0.04 * torsoLength || Math.abs(noseFromLeftEar) < 0.04 * torsoLength ||
+      Math.max(Math.abs(noseFromLeftEar), Math.abs(noseFromRightEar)) < 0.10 * torsoLength ||
+      breadth > 0.62 * torsoLength) return null;
+
+  const along = dot(thigh, down) / torsoLength;
+  const lift = Math.atan2(direction * dot(thigh, across), along) * 180 / Math.PI;
+  const [lower, upper] = hipLimits;
+  return {joints: {[hipJoints[limb]]: Math.max(lower, Math.min(upper, lift)) || 0}};
+}
+
 export function poseForLimb(points, width, height, limb) {
   const chain = chains[limb];
   if (!points || !Array.isArray(chain) || !Number.isFinite(width) || !Number.isFinite(height) ||
       width <= 0 || height <= 0) return null;
+  if (Object.hasOwn(hipJoints, limb)) return projectedHip(points, width, height, limb);
   const markers = chain.map(index => points[index]);
   if (!markers.every(visible)) return null;
   const [opposite, root, middle, end] = markers.map(p => [p.x * width, p.y * height]);
