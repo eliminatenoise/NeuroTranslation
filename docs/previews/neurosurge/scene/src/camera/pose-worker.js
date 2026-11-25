@@ -3,7 +3,7 @@ let detector;
 let poseForSelection, observedWrists, observedArmGeometry, observedLimbPaths, limbVisible;
 let handDetector, loadHandDetector, followHands, handSelections;
 let startingHandDetector, handUnavailable = false;
-let handRecovery, loadHandAnchors, startingHandAnchors, handAnchors;
+let handRecovery, handHistory, loadHandAnchors, startingHandAnchors, handAnchors;
 let anchorsUnavailable = false;
 let runningMode = 'VIDEO';
 
@@ -21,17 +21,31 @@ self.onmessage = async ({ data }) => {
       ({ poseForSelection, observedWrists, observedArmGeometry, observedLimbPaths } = await import('./limb-pose.mjs'));
       ({ followHands, handSelections } = await import('./hand-pose.mjs'));
       const {createHandRecovery} = await import('./hand-recovery.mjs');
+      const {createHandHistory} = await import('./hand-history.mjs');
       const {createLimbEvidence} = await import('./limb-evidence.mjs');
       limbVisible = createLimbEvidence();
       const asset = path => new URL(path, self.location.href).href;
       const fileset = await FilesetResolver.forVisionTasks(asset('vendor/wasm'));
       const handOptions = delegate => ({
-        baseOptions: { modelAssetPath: asset('vendor/hand_landmarker.task'), delegate },
+        baseOptions: {delegate},
         runningMode: 'IMAGE', numHands: 2,
         minHandDetectionConfidence: .6, minHandPresenceConfidence: .6, minTrackingConfidence: .6
       });
-      loadHandDetector = () => HandLandmarker.createFromOptions(fileset, handOptions('CPU'));
-      handRecovery = createHandRecovery(canvas => HandLandmarker.createFromOptions(fileset, {...handOptions('GPU'), canvas}));
+      let handBytes;
+      const loadHandWeights = () => handBytes ??= fetch(asset('vendor/hand_landmarker.task')).then(async response => {
+        if (!response.ok) throw new Error('Hand model could not be opened.');
+        return new Uint8Array(await response.arrayBuffer());
+      });
+      const loadHand = async (delegate, canvas) => {
+        const options = handOptions(delegate);
+        options.baseOptions.modelAssetBuffer = (await loadHandWeights()).slice();
+        if (canvas) options.canvas = canvas;
+        return HandLandmarker.createFromOptions(fileset, options);
+      };
+      loadHandDetector = () => loadHand('CPU');
+      const loadOptionalHandDetector = canvas => loadHand('GPU', canvas);
+      handRecovery = createHandRecovery(loadOptionalHandDetector);
+      handHistory = createHandHistory(loadOptionalHandDetector);
       const loadPose = (mode, delegate = 'CPU', canvas) => PoseLandmarker.createFromOptions(fileset, {
         baseOptions: { modelAssetPath: asset('vendor/pose_landmarker_lite.task'), delegate }, canvas,
         runningMode: mode, numPoses: 1, outputSegmentationMasks: false,
@@ -91,6 +105,9 @@ self.onmessage = async ({ data }) => {
                 }
               }
             }
+            if (hands) {
+              hands = handHistory.keep(hands, frame, limb, selection, timestamp);
+            }
             self.postMessage({type: 'pose', result: hands?.pose ?? null, selection, timestamp,
               limbPaths: hands?.paths, handStatus});
             return;
@@ -113,6 +130,9 @@ self.onmessage = async ({ data }) => {
         if (missingHands && points) {
           arms = selectedPose('bothArms');
           hands = handRecovery.recover(frame, points, arms, limb, hands);
+        }
+        if (wantsHands && hands) {
+          hands = handHistory.keep(hands, frame, limb, selection, timestamp);
         }
         const result = wantsHands ? hands?.pose ?? null : selectedPose(limb);
         const message = {type: 'pose', result, selection, timestamp};
