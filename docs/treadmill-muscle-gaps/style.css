@@ -1,0 +1,98 @@
+:root {
+  color-scheme: light;
+  --ink: #182925;
+  --muted: #475d55;
+  --accent: #17634d;
+  --line: #d2ded6;
+  --paper: #f6f8f4;
+  --panel: #fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; line-height: 1.58; }
+a { color: var(--accent); text-underline-offset: 0.18em; }
+:focus-visible { outline: 3px solid #187560; outline-offset: 3px; }
+.skip {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #fff;
+  transform: translateY(-180%);
+}
+.skip:focus { transform: none; }
+.frame { width: min(66rem, calc(100% - 2rem)); margin-inline: auto; }
+
+.top { border-bottom: 1px solid var(--line); padding: 0.8rem 0; background: #fff; }
+.top nav { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.4rem 1.25rem; }
+.top a { font-size: 0.91rem; }
+.top a:first-child { font-weight: 700; color: var(--ink); }
+.top a[aria-current] { font-weight: 700; }
+.top .models { margin-inline-start: auto; }
+
+main { padding-block: 2.1rem 3.5rem; }
+h1, h2, h3 { line-height: 1.15; letter-spacing: -0.025em; }
+h1 { max-width: 25ch; font-size: clamp(2rem, 5vw, 3.4rem); margin: 0 0 1rem; }
+h2 { font-size: clamp(1.27rem, 2.6vw, 1.7rem); margin-block: 1.9rem 0.5rem; }
+h3 { font-size: 1.13rem; margin-block: 1.5rem 0.5rem; }
+p { margin-block: 0.55rem 0.95rem; }
+.intro { max-width: 73ch; font-size: 1.09rem; }
+
+.comparison {
+  margin: 1.75rem 0 2.2rem;
+  padding: clamp(0.8rem, 3vw, 1.65rem);
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  background: var(--panel);
+}
+.comparison h2 { margin: 0 0 0.45rem; }
+.comparison p { color: var(--muted); }
+.filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+.filters label { display: grid; gap: 0.22rem; min-width: 0; font-weight: 650; font-size: 0.91rem; }
+select {
+  width: 100%;
+  min-height: 2.7rem;
+  padding: 0.45rem 0.5rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid #91a49a;
+  border-radius: 0.35rem;
+  font: inherit;
+}
+.selection { font-size: 0.92rem; margin-top: 1rem; }
+.table-scroll { max-width: 100%; overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; line-height: 1.35; font-size: 0.92rem; }
+caption { text-align: start; color: var(--muted); margin-bottom: 0.25rem; }
+th, td { text-align: start; border-bottom: 1px solid var(--line); padding: 0.5rem 0.45rem; }
+thead th { font-size: 0.82rem; color: var(--muted); }
+tbody th { font-weight: 520; }
+td { font-variant-numeric: tabular-nums; }
+.errors td { white-space: nowrap; text-align: end; }
+.errors th:last-child { text-align: end; }
+meter { width: clamp(1.75rem, 16vw, 10rem); height: 0.7rem; margin-inline-end: 0.6rem; }
+meter::-webkit-meter-bar { background: #e9eeeb; border-width: 0; }
+meter::-webkit-meter-optimum-value { background: #91aaa0; }
+.highlight { background: #e9f5ec; color: #174a3b; }
+.highlight th, .highlight td { font-weight: 700; }
+.highlight meter::-webkit-meter-optimum-value { background: var(--accent); }
+details { margin-top: 0.9rem; }
+summary { color: var(--accent); cursor: pointer; font-weight: 650; }
+.changes table { min-width: 31rem; }
+.changes td { white-space: nowrap; }
+
+article { max-width: 75ch; }
+article ol, article ul { padding-inline-start: 1.45rem; }
+article li { margin-block: 0.48rem; }
+article code { font-family: inherit; font-size: 0.91em; font-weight: 650; overflow-wrap: anywhere; }
+.source-links { border-top: 1px solid var(--line); margin-top: 1.25rem; padding-top: 0.7rem; }
+
+@media (max-width: 36rem) {
+  main { padding-top: 1.25rem; }
+  .top .models { margin-inline-start: 0; }
+  .filters { grid-template-columns: 1fr; }
+  .errors td { width: 5.7rem; }
+  meter { margin-inline-end: 0.35rem; width: 1.8rem; }
+}

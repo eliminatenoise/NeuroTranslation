@@ -1,0 +1,429 @@
+{
+  "version": 1,
+  "model": "NeuroTranslate 0.1 compact recurrent model",
+  "measurement": "Mean absolute signed vertical force impulse error",
+  "units": "N·s",
+  "history_ms": 200,
+  "forecast_ms": 100,
+  "nominated_people": 10,
+  "reported_groups": 9,
+  "methods": [
+    {
+      "id": "base_00",
+      "label": "Three-pass model trained in Belgium"
+    },
+    {
+      "id": "clean_08",
+      "label": "Three-pass model trained with complete readings"
+    },
+    {
+      "id": "augmented_08",
+      "label": "Three-pass model trained with simulated interruptions"
+    },
+    {
+      "id": "last_force",
+      "label": "Carry the latest force forward"
+    },
+    {
+      "id": "damped_trend",
+      "label": "Continue the recent force trend with damping"
+    },
+    {
+      "id": "linear",
+      "label": "Ridge linear fit"
+    },
+    {
+      "id": "trees",
+      "label": "Boosted decision trees"
+    }
+  ],
+  "conditions": [
+    {
+      "id": "clean",
+      "label": "Complete readings"
+    },
+    {
+      "id": "delayed_muscle_history",
+      "label": "20 ms delay"
+    },
+    {
+      "id": "missing_recent_muscle",
+      "label": "Latest 60 ms hidden"
+    }
+  ],
+  "scopes": {
+    "whole_recording": {
+      "label": "Whole recording",
+      "issues": 7268,
+      "people": 9,
+      "mean_error_ns": {
+        "base_00": {
+          "clean": 12.844476837460299,
+          "delayed_muscle_history": 12.978156906787767,
+          "missing_recent_muscle": 14.534971884132286
+        },
+        "clean_08": {
+          "clean": 12.044537463272649,
+          "delayed_muscle_history": 12.600563623303486,
+          "missing_recent_muscle": 16.17630330303736
+        },
+        "augmented_08": {
+          "clean": 11.963688882932363,
+          "delayed_muscle_history": 11.984310696911482,
+          "missing_recent_muscle": 12.029085545969705
+        },
+        "last_force": {
+          "clean": 17.551087062859764,
+          "delayed_muscle_history": 17.551087062859764,
+          "missing_recent_muscle": 17.551087062859764
+        },
+        "damped_trend": {
+          "clean": 17.47837324067391,
+          "delayed_muscle_history": 17.47837324067391,
+          "missing_recent_muscle": 17.47837324067391
+        },
+        "linear": {
+          "clean": 12.212591512688446,
+          "delayed_muscle_history": 12.409766854436253,
+          "missing_recent_muscle": 12.809866933084045
+        },
+        "trees": {
+          "clean": 13.592040114125796,
+          "delayed_muscle_history": 13.828628712840011,
+          "missing_recent_muscle": 14.404655551035635
+        }
+      },
+      "paired_comparisons": {
+        "clean_08": {
+          "average_model_minus_control_ns": {
+            "clean": -0.08084858034028455,
+            "delayed_muscle_history": -0.616252926392005,
+            "missing_recent_muscle": -4.147217757067658
+          },
+          "participant_bootstrap_95_ns": {
+            "clean": [
+              -0.17869996893701126,
+              0.05438276433002284
+            ],
+            "delayed_muscle_history": [
+              -0.81267932084113,
+              -0.34880632549198537
+            ],
+            "missing_recent_muscle": [
+              -4.69527469329329,
+              -3.5210007434311468
+            ]
+          },
+          "people_with_lower_error": {
+            "clean": 7,
+            "delayed_muscle_history": 8,
+            "missing_recent_muscle": 9
+          }
+        },
+        "last_force": {
+          "average_model_minus_control_ns": {
+            "clean": -5.587398179927401,
+            "delayed_muscle_history": -5.566776365948284,
+            "missing_recent_muscle": -5.522001516890061
+          },
+          "participant_bootstrap_95_ns": {
+            "clean": [
+              -6.4957341977163585,
+              -4.558628724490898
+            ],
+            "delayed_muscle_history": [
+              -6.473177711254453,
+              -4.544655833381903
+            ],
+            "missing_recent_muscle": [
+              -6.460433283471079,
+              -4.470338168215446
+            ]
+          },
+          "people_with_lower_error": {
+            "clean": 9,
+            "delayed_muscle_history": 9,
+            "missing_recent_muscle": 9
+          }
+        },
+        "damped_trend": {
+          "average_model_minus_control_ns": {
+            "clean": -5.514684357741547,
+            "delayed_muscle_history": -5.49406254376243,
+            "missing_recent_muscle": -5.449287694704206
+          },
+          "participant_bootstrap_95_ns": {
+            "clean": [
+              -6.56131390541279,
+              -4.326650101051867
+            ],
+            "delayed_muscle_history": [
+              -6.5364050650272265,
+              -4.304319119290546
+            ],
+            "missing_recent_muscle": [
+              -6.461156914290102,
+              -4.24873322503319
+            ]
+          },
+          "people_with_lower_error": {
+            "clean": 9,
+            "delayed_muscle_history": 9,
+            "missing_recent_muscle": 9
+          }
+        },
+        "linear": {
+          "average_model_minus_control_ns": {
+            "clean": -0.24890262975608282,
+            "delayed_muscle_history": -0.4254561575247729,
+            "missing_recent_muscle": -0.7807813871143392
+          },
+          "participant_bootstrap_95_ns": {
+            "clean": [
+              -0.7785536149826962,
+              0.30627599924099336
+            ],
+            "delayed_muscle_history": [
+              -1.0225038789394538,
+              0.1915742901009357
+            ],
+            "missing_recent_muscle": [
+              -1.2351683051099582,
+              -0.285964798543487
+            ]
+          },
+          "people_with_lower_error": {
+            "clean": 5,
+            "delayed_muscle_history": 5,
+            "missing_recent_muscle": 8
+          }
+        },
+        "trees": {
+          "average_model_minus_control_ns": {
+            "clean": -1.6283512311934318,
+            "delayed_muscle_history": -1.8443180159285275,
+            "missing_recent_muscle": -2.3755700050659296
+          },
+          "participant_bootstrap_95_ns": {
+            "clean": [
+              -2.331093579528974,
+              -1.1411089184775676
+            ],
+            "delayed_muscle_history": [
+              -2.6154635405601065,
+              -1.295800274106934
+            ],
+            "missing_recent_muscle": [
+              -3.1696184283454945,
+              -1.7415818425295007
+            ]
+          },
+          "people_with_lower_error": {
+            "clean": 9,
+            "delayed_muscle_history": 9,
+            "missing_recent_muscle": 9
+          }
+        }
+      }
+    },
+    "author_tagged_bout": {
+      "label": "Marked 1.2 m/s walk",
+      "issues": 440,
+      "people": 9,
+      "mean_error_ns": {
+        "base_00": {
+          "clean": 6.736694763010101,
+          "delayed_muscle_history": 6.873803124974265,
+          "missing_recent_muscle": 9.124598097744245
+        },
+        "clean_08": {
+          "clean": 5.155959625331062,
+          "delayed_muscle_history": 5.892582112109541,
+          "missing_recent_muscle": 11.771050265679504
+        },
+        "augmented_08": {
+          "clean": 5.20991577920568,
+          "delayed_muscle_history": 5.218890233858838,
+          "missing_recent_muscle": 5.393891671206695
+        },
+        "last_force": {
+          "clean": 11.63305926941325,
+          "delayed_muscle_history": 11.63305926941325,
+          "missing_recent_muscle": 11.63305926941325
+        },
+        "damped_trend": {
+          "clean": 11.4277774166178,
+          "delayed_muscle_history": 11.4277774166178,
+          "missing_recent_muscle": 11.4277774166178
+        },
+        "linear": {
+          "clean": 7.922937834103006,
+          "delayed_muscle_history": 7.800609524132316,
+          "missing_recent_muscle": 8.895617318605005
+        },
+        "trees": {
+          "clean": 7.327567443771476,
+          "delayed_muscle_history": 7.742714575294897,
+          "missing_recent_muscle": 8.438756569506255
+        }
+      },
+      "paired_comparisons": {
+        "clean_08": {
+          "average_model_minus_control_ns": {
+            "clean": 0.05395615387461946,
+            "delayed_muscle_history": -0.673691878250704,
+            "missing_recent_muscle": -6.37715859447281
+          },
+          "participant_bootstrap_95_ns": {
+            "clean": [
+              -0.11467281439328818,
+              0.24186028078429836
+            ],
+            "delayed_muscle_history": [
+              -1.2003585626902988,
+              -0.17659540165276258
+            ],
+            "missing_recent_muscle": [
+              -7.489760026690472,
+              -5.379697430445919
+            ]
+          },
+          "people_with_lower_error": {
+            "clean": 5,
+            "delayed_muscle_history": 7,
+            "missing_recent_muscle": 9
+          }
+        },
+        "last_force": {
+          "average_model_minus_control_ns": {
+            "clean": -6.423143490207571,
+            "delayed_muscle_history": -6.414169035554414,
+            "missing_recent_muscle": -6.239167598206558
+          },
+          "participant_bootstrap_95_ns": {
+            "clean": [
+              -6.856955510184656,
+              -5.991624547295176
+            ],
+            "delayed_muscle_history": [
+              -6.861021428489692,
+              -5.964153396510031
+            ],
+            "missing_recent_muscle": [
+              -6.689050525047972,
+              -5.799436400542993
+            ]
+          },
+          "people_with_lower_error": {
+            "clean": 9,
+            "delayed_muscle_history": 9,
+            "missing_recent_muscle": 9
+          }
+        },
+        "damped_trend": {
+          "average_model_minus_control_ns": {
+            "clean": -6.217861637412122,
+            "delayed_muscle_history": -6.208887182758963,
+            "missing_recent_muscle": -6.033885745411106
+          },
+          "participant_bootstrap_95_ns": {
+            "clean": [
+              -6.776189672747046,
+              -5.624737528046937
+            ],
+            "delayed_muscle_history": [
+              -6.759396123102621,
+              -5.611675563115805
+            ],
+            "missing_recent_muscle": [
+              -6.587881684826662,
+              -5.473340230018169
+            ]
+          },
+          "people_with_lower_error": {
+            "clean": 9,
+            "delayed_muscle_history": 9,
+            "missing_recent_muscle": 9
+          }
+        },
+        "linear": {
+          "average_model_minus_control_ns": {
+            "clean": -2.713022054897327,
+            "delayed_muscle_history": -2.5817192902734787,
+            "missing_recent_muscle": -3.50172564739831
+          },
+          "participant_bootstrap_95_ns": {
+            "clean": [
+              -3.133668328945622,
+              -2.308316864174946
+            ],
+            "delayed_muscle_history": [
+              -3.002398455222904,
+              -2.1610426240602942
+            ],
+            "missing_recent_muscle": [
+              -3.8626600183359097,
+              -3.167532181065665
+            ]
+          },
+          "people_with_lower_error": {
+            "clean": 9,
+            "delayed_muscle_history": 9,
+            "missing_recent_muscle": 9
+          }
+        },
+        "trees": {
+          "average_model_minus_control_ns": {
+            "clean": -2.1176516645657957,
+            "delayed_muscle_history": -2.52382434143606,
+            "missing_recent_muscle": -3.0448648982995605
+          },
+          "participant_bootstrap_95_ns": {
+            "clean": [
+              -2.9398314818428615,
+              -1.4598960029649906
+            ],
+            "delayed_muscle_history": [
+              -3.297358378857088,
+              -1.8460627077421294
+            ],
+            "missing_recent_muscle": [
+              -4.056408794199417,
+              -2.2870905945899174
+            ]
+          },
+          "people_with_lower_error": {
+            "clean": 9,
+            "delayed_muscle_history": 9,
+            "missing_recent_muscle": 9
+          }
+        }
+      }
+    }
+  },
+  "aggregation": "Mean absolute errors within each person, then equal weight for each person",
+  "paired_interval": {
+    "draws": 20000,
+    "seed": 20261126,
+    "central_probability": 0.95,
+    "resampling_unit": "person"
+  },
+  "source": {
+    "title": "A human lower-limb biomechanics and wearable sensors dataset during cyclic and non-cyclic activities",
+    "creators": [
+      "Keaton Scherpereel",
+      "Dean Molinaro",
+      "Omer Inan",
+      "Max Shepherd",
+      "Aaron Young"
+    ],
+    "dataset": "https://doi.org/10.35090/gatech/70296",
+    "methods": "https://doi.org/10.1038/s41597-023-02840-6",
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "tested_checkpoint_bundle": {
+    "url": "https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/803c645d63055245b084efb10f34b13d83a10d29/benchmarks/walking-neural-scaling/held-walks/Held-Walking-Forecasts.zip",
+    "sha256": "300d9b5bd415019cc73cb8f0067456992340833842ea77c3efc430233bf790d7"
+  },
+  "independent_readback": "All means, differences, participant wins and intervals reproduced from the exact scoring rows"
+}

@@ -1,5 +1,7 @@
 # NeuroTranslate 0.1 walking and cortical benchmarks
 
+[Compare seven methods on the Georgia Tech treadmill recordings](treadmill-transfer/) · [Open the interactive comparison](https://eliminatenoise.github.io/NeuroTranslation/treadmill-muscle-gaps/)
+
 [Read the reserved-walker results and download all eleven recurrent checkpoints](held-walks/)
 
 [Download the two walking checkpoints](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/walking-neural-scaling/Walking-Forecasts.zip) · [Simple edition](SIMPLE.md) · [Technical edition](TECHNICAL.md)
