@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Treadmill force from pelvis motion</title>
+<style>
+:root { color-scheme: light; font: 17px/1.5 system-ui, sans-serif; color: #122938; background: #f4f8f9 }
+body { margin: 0 }
+main { box-sizing: border-box; width: min(100%, 900px); margin: auto; padding: 42px clamp(18px, 5vw, 46px) }
+header { margin-bottom: 26px }
+h1 { margin: 0 0 8px; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.17; letter-spacing: -.035em }
+h2 { margin: 0 0 8px; font-size: 1.07rem }
+p { margin: 0 0 12px }
+a { color: #115a68; text-underline-offset: .22em }
+.chart { padding: clamp(16px, 4vw, 28px); background: white; border: 1px solid #c4d4d7; border-radius: 14px }
+.filters { display: flex; align-items: center; flex-wrap: wrap; gap: 7px 12px; margin-bottom: 19px }
+select { font: inherit; color: inherit; background: #f4f8f9; border: 1px solid #789099; border-radius: 7px; padding: 5px 9px }
+.result { font-variant-numeric: tabular-nums }
+.row { display: grid; grid-template-columns: minmax(130px, 1.1fr) minmax(100px, 1.4fr) 4ch; align-items: center; gap: 10px; margin: 10px 0 }
+.bar { width: 100%; height: 10px; border-radius: 5px; background: #e7eef0; overflow: hidden }
+.fill { height: 100%; border-radius: inherit; background: #667c85 }
+.row:first-child .fill { background: #008073 }
+.value { text-align: right }
+.axis { display: grid; grid-template-columns: minmax(130px, 1.1fr) minmax(100px, 1.4fr) 4ch; gap: 10px; color: #415a65 }
+.ticks { grid-column: 2; display: flex; justify-content: space-between; font-size: .78rem }
+footer { margin-top: 24px; font-size: .91rem }
+@media (max-width: 520px) {
+  main { padding-top: 22px }
+  .row { grid-template-columns: 1fr 4ch; gap: 2px 8px }
+  .value { grid-column: 2; grid-row: 1 }
+  .bar { grid-column: 1 / -1; grid-row: 2 }
+  .axis { display: block }
+}
+</style>
+<main>
+  <header>
+    <h1>Treadmill force from pelvis motion</h1>
+    <p>A model fitted on downhill walking predicts how much load two treadmill belts carry over the next tenth of a second. This test uses uphill walking from a different lab.</p>
+  </header>
+  <section class="chart" aria-labelledby="chart-title">
+    <h2 id="chart-title">Average forecast error in newton-seconds</h2>
+    <p>Lower error means the forecast was closer to the measurement.</p>
+    <div class="filters">
+      <label for="group">Show results for</label>
+      <select id="group">
+        <option value="both">Both grades</option>
+        <option value="5">Near 5% grade</option>
+        <option value="10">Near 10% grade</option>
+      </select>
+    </div>
+    <div id="results" class="result" aria-live="polite">
+      <p id="summary"></p>
+      <div id="rows" role="list"></div>
+      <div class="axis" aria-hidden="true"><div class="ticks"><span>0</span><span>10</span><span>20 N·s</span></div></div>
+    </div>
+  </section>
+  <footer>
+    <p>The recordings can contain filled-in camera positions. This comparison measures combined belt load in stored walking recordings.</p>
+    <p><a href="README.md">Simple edition and launch instructions</a> · <a href="TECHNICAL.md">Technical edition</a> · <a href="RESULTS.json">Exact scores and uncertainty</a></p>
+  </footer>
+</main>
+<noscript><p>Enable JavaScript to change the grade, or open the simple edition for the full results table.</p></noscript>
+<script type="application/json" id="study">{"primary_both_grades":{"people":11,"windows":3014,"mae_ns":{"static":9.169822327317044,"camera":5.116042417296344,"camera_one_second_earlier":15.963787810062326,"camera_acceleration":12.608493226023603},"paired_camera_error_differences_ns":{"static":{"paired_mean_difference":-4.053779910020701,"interval_95_percent":[-5.17835825299983,-3.0379661788317636],"people_with_lower_camera_error":11},"camera_one_second_earlier":{"paired_mean_difference":-10.847745392765985,"interval_95_percent":[-13.380222478793259,-8.225649034969626],"people_with_lower_camera_error":11}}},"by_grade":{"5":{"people":11,"windows":1507,"mae_ns":{"static":8.565681163356384,"camera":4.8996618716219755,"camera_one_second_earlier":14.752888577186104,"camera_acceleration":12.309494409225563},"paired_camera_error_differences_ns":{"static":{"paired_mean_difference":-3.666019291734408,"interval_95_percent":[-4.824117761623903,-2.636044956810926],"people_with_lower_camera_error":11},"camera_one_second_earlier":{"paired_mean_difference":-9.853226705564127,"interval_95_percent":[-12.003010407107277,-7.624586122907496],"people_with_lower_camera_error":11}}},"10":{"people":11,"windows":1507,"mae_ns":{"static":9.773963491277705,"camera":5.332422962970712,"camera_one_second_earlier":17.174687042938555,"camera_acceleration":12.907492042821646},"paired_camera_error_differences_ns":{"static":{"paired_mean_difference":-4.4415405283069935,"interval_95_percent":[-5.690802147079421,-3.2833535747688827],"people_with_lower_camera_error":11},"camera_one_second_earlier":{"paired_mean_difference":-11.84226407996784,"interval_95_percent":[-14.885676268749622,-8.747531388386927],"people_with_lower_camera_error":11}}}},"criteria":{"minimum_windows_per_grade":100,"minimum_paired_people":8,"bootstrap_repetitions":10000,"bootstrap_seed":20261125,"weighting":"Equal grade within participant, then equal participant."},"declared_carryover_criterion_met":true}</script>
+<script>
+const study = JSON.parse(document.getElementById('study').textContent);
+const names = [
+  ['camera', 'Recent pelvis motion'], ['static', 'Body weight alone'],
+  ['camera_one_second_earlier', 'Pelvis motion from one second earlier'],
+  ['camera_acceleration', 'Mechanical estimate from pelvis acceleration']
+];
+const group = document.getElementById('group');
+const rows = document.getElementById('rows');
+function update() {
+  const result = group.value === 'both' ? study.primary_both_grades : study.by_grade[group.value];
+  const improvement = 100 * (1 - result.mae_ns.camera / result.mae_ns.static);
+  document.getElementById('summary').textContent = `${result.people} people · ${result.windows.toLocaleString('en')} forecasts · ${improvement.toFixed(1)}% less error than body weight alone`;
+  rows.replaceChildren(...names.map(([key, label]) => {
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.setAttribute('role', 'listitem');
+    const name = document.createElement('div');
+    name.textContent = label;
+    const bar = document.createElement('div');
+    bar.className = 'bar';
+    bar.setAttribute('aria-hidden', 'true');
+    const fill = document.createElement('div');
+    fill.className = 'fill';
+    fill.style.width = `${result.mae_ns[key] * 5}%`;
+    bar.append(fill);
+    const value = document.createElement('div');
+    value.className = 'value';
+    value.textContent = result.mae_ns[key].toFixed(2);
+    row.append(name, bar, value);
+    return row;
+  }));
+}
+group.addEventListener('change', update);
+update();
+</script>
+</html>

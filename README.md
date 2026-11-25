@@ -7,6 +7,8 @@
 
 [Run the new walking checkpoints and read the cortical forecast results](benchmarks/walking-neural-scaling/)
 
+[Compare treadmill force forecasts from pelvis motion and download the model](benchmarks/emg-floor-load/decline-treadmill/camera-transfer/)
+
 [Try the outdoor insole pressure forecast](https://eliminatenoise.github.io/NeuroTranslation/outdoor-insole-pressure/) · [Read the results and download the model](benchmarks/outdoor-insole-pressure/)
 
 [Compare the movement blend with the original forecast](benchmarks/cortical-movement-blend/) · [Download the blend](https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/cortical-movement-blend/Cortical-Movement-Blend.zip)

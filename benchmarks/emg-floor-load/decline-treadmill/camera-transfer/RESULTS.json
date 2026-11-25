@@ -1,0 +1,117 @@
+{
+  "study": "Frozen Georgia Tech pelvis motion forecast on Lee and Lee incline walking",
+  "methods": [
+    "https://doi.org/10.1038/s41597-023-02840-6",
+    "https://doi.org/10.1038/s41597-026-07595-4"
+  ],
+  "data": [
+    "https://doi.org/10.35090/gatech/70296",
+    "https://doi.org/10.5281/zenodo.19632046"
+  ],
+  "test_archive": {
+    "filename": "C3D.zip",
+    "bytes": 4197658932,
+    "publisher_md5": "183663c225033b502b1feb85b846542b",
+    "task": "Treadmill walking uphill at 4 km/h",
+    "selected_recordings": 22
+  },
+  "measure": "Average absolute error for combined belt-normal impulse over 100 ms in newton-seconds.",
+  "independent_scalar_replay": {
+    "force_values_reproduced": 602800,
+    "max_abs_result_difference_ns": 1.4210854715202004e-14
+  },
+  "primary_both_grades": {
+    "people": 11,
+    "windows": 3014,
+    "mae_ns": {
+      "static": 9.169822327317044,
+      "camera": 5.116042417296344,
+      "camera_one_second_earlier": 15.963787810062326,
+      "camera_acceleration": 12.608493226023603
+    },
+    "paired_camera_error_differences_ns": {
+      "static": {
+        "paired_mean_difference": -4.053779910020701,
+        "interval_95_percent": [
+          -5.17835825299983,
+          -3.0379661788317636
+        ],
+        "people_with_lower_camera_error": 11
+      },
+      "camera_one_second_earlier": {
+        "paired_mean_difference": -10.847745392765985,
+        "interval_95_percent": [
+          -13.380222478793259,
+          -8.225649034969626
+        ],
+        "people_with_lower_camera_error": 11
+      }
+    }
+  },
+  "by_grade": {
+    "5": {
+      "people": 11,
+      "windows": 1507,
+      "mae_ns": {
+        "static": 8.565681163356384,
+        "camera": 4.8996618716219755,
+        "camera_one_second_earlier": 14.752888577186104,
+        "camera_acceleration": 12.309494409225563
+      },
+      "paired_camera_error_differences_ns": {
+        "static": {
+          "paired_mean_difference": -3.666019291734408,
+          "interval_95_percent": [
+            -4.824117761623903,
+            -2.636044956810926
+          ],
+          "people_with_lower_camera_error": 11
+        },
+        "camera_one_second_earlier": {
+          "paired_mean_difference": -9.853226705564127,
+          "interval_95_percent": [
+            -12.003010407107277,
+            -7.624586122907496
+          ],
+          "people_with_lower_camera_error": 11
+        }
+      }
+    },
+    "10": {
+      "people": 11,
+      "windows": 1507,
+      "mae_ns": {
+        "static": 9.773963491277705,
+        "camera": 5.332422962970712,
+        "camera_one_second_earlier": 17.174687042938555,
+        "camera_acceleration": 12.907492042821646
+      },
+      "paired_camera_error_differences_ns": {
+        "static": {
+          "paired_mean_difference": -4.4415405283069935,
+          "interval_95_percent": [
+            -5.690802147079421,
+            -3.2833535747688827
+          ],
+          "people_with_lower_camera_error": 11
+        },
+        "camera_one_second_earlier": {
+          "paired_mean_difference": -11.84226407996784,
+          "interval_95_percent": [
+            -14.885676268749622,
+            -8.747531388386927
+          ],
+          "people_with_lower_camera_error": 11
+        }
+      }
+    }
+  },
+  "criteria": {
+    "minimum_windows_per_grade": 100,
+    "minimum_paired_people": 8,
+    "bootstrap_repetitions": 10000,
+    "bootstrap_seed": 20261125,
+    "weighting": "Equal grade within participant, then equal participant."
+  },
+  "declared_carryover_criterion_met": true
+}
