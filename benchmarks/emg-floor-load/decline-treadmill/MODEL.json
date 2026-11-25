@@ -1,0 +1,49 @@
+{
+  "name": "NeuroTranslate decline treadmill comparison",
+  "methods": [
+    "zero",
+    "fit_median",
+    "affine_200",
+    "affine_1000",
+    "attention_200_p1",
+    "attention_200_p3",
+    "attention_200_p5",
+    "attention_1000_p1",
+    "attention_1000_p3",
+    "attention_1000_p5"
+  ],
+  "seeds": [
+    20261125,
+    20261126
+  ],
+  "samples_per_history": 20,
+  "muscles": [
+    "LTA",
+    "RTA",
+    "LRF",
+    "RRF",
+    "LBF",
+    "RBF",
+    "LGMED",
+    "RGMED",
+    "LMGAS",
+    "RMGAS",
+    "LVL",
+    "RVL",
+    "LGRAC",
+    "RGRAC",
+    "LGMAX",
+    "RGMAX"
+  ],
+  "bin_ms": 50,
+  "hold_back_ms": 10,
+  "forecast_ms": 100,
+  "plate_order": [
+    1,
+    2
+  ],
+  "event": "strictly over 1 N s",
+  "weights_sha256": "584882b4ff4d233917c4596f92a17e623e23e5ff829f2a71db6974ebdd2b3a7f",
+  "source_doi": "10.35090/gatech/70296",
+  "source_licence": "CC BY 4.0"
+}

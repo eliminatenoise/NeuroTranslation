@@ -1,5 +1,7 @@
 # Muscle-only floor-plate impulse forecast
 
+A separate decline-treadmill experiment compares 200 ms and 1 s of EMG with one, three and five attention passes. [Treadmill protocol and results](decline-treadmill/TECHNICAL.md)
+
 A follow-up compares whole-participant folds and a fixed four-participant transfer test. [Follow-up methods and results](participant-transfer/TECHNICAL.md)
 
 Use eight named right-leg surface EMG channels at 1 kHz and the filtered 200 Hz vertical force export from plates C and D. Each forecast uses the 200 ms ending at its issue time. For the 100 ms target, sum 20 strictly later samples from each plate, reverse the exported signs and multiply by 0.005 s. The result is signed impulse through the two named plates in N·s. [Baetens v2 data and licence](https://doi.org/10.25452/figshare.plus.30294658.v2) · [Acquisition](https://doi.org/10.1038/s41597-026-08739-2)

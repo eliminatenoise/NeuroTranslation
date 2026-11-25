@@ -1,0 +1,979 @@
+{
+  "study": "Muscle-only force forecasts during a recorded treadmill decline",
+  "source": {
+    "data": "https://doi.org/10.35090/gatech/70296",
+    "methods": "https://doi.org/10.1038/s41597-023-02840-6",
+    "license": "CC BY 4.0"
+  },
+  "fit_windows": 1060,
+  "fit_people": 6,
+  "issued_windows": 712,
+  "scored_windows": 539,
+  "nominated_people": 4,
+  "scored_people": 3,
+  "excluded_no_exclusive_belt_support": 173,
+  "scope": "Physical plate-normal load on two plates during a fixed author-labelled decline. People appeared in a separate earlier squat analysis. Weights were fit on other participants for this task.",
+  "labels": {
+    "zero": "Always predict zero force",
+    "fit_median": "Typical load from fitting",
+    "affine_200": "Linear fit, 200 ms",
+    "affine_1000": "Linear fit, 1 s",
+    "attention_200_p1": "Attention, 200 ms, 1 pass",
+    "attention_200_p3": "Attention, 200 ms, 3 passes",
+    "attention_200_p5": "Attention, 200 ms, 5 passes",
+    "attention_1000_p1": "Attention, 1 s, 1 pass",
+    "attention_1000_p3": "Attention, 1 s, 3 passes",
+    "attention_1000_p5": "Attention, 1 s, 5 passes"
+  },
+  "methods": [
+    "zero",
+    "fit_median",
+    "affine_200",
+    "affine_1000",
+    "attention_200_p1",
+    "attention_200_p3",
+    "attention_200_p5",
+    "attention_1000_p1",
+    "attention_1000_p3",
+    "attention_1000_p5"
+  ],
+  "results": {
+    "zero": {
+      "impulse_mae_per_plate_ns": [
+        31.368385556156454,
+        32.37094489813859
+      ],
+      "average_plate_mae_ns": 31.86966522714751,
+      "combined_impulse_mae_ns": 63.733255487711936,
+      "event_brier_per_plate": [
+        0.21848872096971683,
+        0.21990089982197128
+      ],
+      "average_plate_event_brier": 0.21919481039584357,
+      "mean_absolute_error_loaded_ns": 46.84034577590369,
+      "mean_absolute_error_unloaded_ns": 0.29692688633335845
+    },
+    "fit_median": {
+      "impulse_mae_per_plate_ns": [
+        26.586764495852787,
+        26.99769353455521
+      ],
+      "average_plate_mae_ns": 26.79222901520401,
+      "combined_impulse_mae_ns": 30.324201354246398,
+      "event_brier_per_plate": [
+        0.21848872096971683,
+        0.21990089982197128
+      ],
+      "average_plate_event_brier": 0.21919481039584357,
+      "mean_absolute_error_loaded_ns": 17.45688864527796,
+      "mean_absolute_error_unloaded_ns": 46.58797222836248
+    },
+    "affine_200": {
+      "impulse_mae_per_plate_ns": [
+        29.287159297324184,
+        27.1308185259475
+      ],
+      "average_plate_mae_ns": 28.208988911635842,
+      "combined_impulse_mae_ns": 21.147736017099923,
+      "event_brier_per_plate": [
+        0.19821914298123788,
+        0.23156035868396505
+      ],
+      "average_plate_event_brier": 0.21488975083260164,
+      "mean_absolute_error_loaded_ns": 28.624135983284557,
+      "mean_absolute_error_unloaded_ns": 27.4628277095389
+    },
+    "affine_1000": {
+      "impulse_mae_per_plate_ns": [
+        24.41348012414507,
+        28.880892068084837
+      ],
+      "average_plate_mae_ns": 26.647186096114954,
+      "combined_impulse_mae_ns": 43.37205102552849,
+      "event_brier_per_plate": [
+        0.11209118833458205,
+        0.15310093987663534
+      ],
+      "average_plate_event_brier": 0.13259606410560879,
+      "mean_absolute_error_loaded_ns": 29.21916645491844,
+      "mean_absolute_error_unloaded_ns": 21.422183803911825
+    },
+    "attention_200_p1": {
+      "impulse_mae_per_plate_ns": [
+        33.42058492532225,
+        17.49943551231323
+      ],
+      "average_plate_mae_ns": 25.460010218817747,
+      "combined_impulse_mae_ns": 22.99120375317807,
+      "event_brier_per_plate": [
+        0.28803065361030783,
+        0.16396331918672102
+      ],
+      "average_plate_event_brier": 0.2259969863985147,
+      "mean_absolute_error_loaded_ns": 24.34524371186697,
+      "mean_absolute_error_unloaded_ns": 28.157247055707156
+    },
+    "attention_200_p3": {
+      "impulse_mae_per_plate_ns": [
+        29.235283584863144,
+        14.696990868978693
+      ],
+      "average_plate_mae_ns": 21.966137226920917,
+      "combined_impulse_mae_ns": 22.44564014403139,
+      "event_brier_per_plate": [
+        0.2641237818260113,
+        0.1503352684975239
+      ],
+      "average_plate_event_brier": 0.20722952516176793,
+      "mean_absolute_error_loaded_ns": 21.973361657187407,
+      "mean_absolute_error_unloaded_ns": 22.11399765945937
+    },
+    "attention_200_p5": {
+      "impulse_mae_per_plate_ns": [
+        30.89068498283788,
+        13.917363199406504
+      ],
+      "average_plate_mae_ns": 22.404024091122185,
+      "combined_impulse_mae_ns": 26.913086131166214,
+      "event_brier_per_plate": [
+        0.2543402719132036,
+        0.14620342529349017
+      ],
+      "average_plate_event_brier": 0.20027184860334715,
+      "mean_absolute_error_loaded_ns": 21.51837912106404,
+      "mean_absolute_error_unloaded_ns": 24.289400747396712
+    },
+    "attention_1000_p1": {
+      "impulse_mae_per_plate_ns": [
+        21.050269812379355,
+        23.8940382521816
+      ],
+      "average_plate_mae_ns": 22.47215403228047,
+      "combined_impulse_mae_ns": 20.64802020830413,
+      "event_brier_per_plate": [
+        0.2040673608127236,
+        0.22994067980132812
+      ],
+      "average_plate_event_brier": 0.217004020307026,
+      "mean_absolute_error_loaded_ns": 24.307180605050565,
+      "mean_absolute_error_unloaded_ns": 19.0159063375345
+    },
+    "attention_1000_p3": {
+      "impulse_mae_per_plate_ns": [
+        19.710418515434053,
+        25.150231099097056
+      ],
+      "average_plate_mae_ns": 22.430324807265553,
+      "combined_impulse_mae_ns": 20.908515458784063,
+      "event_brier_per_plate": [
+        0.21196693297188843,
+        0.24622138218515324
+      ],
+      "average_plate_event_brier": 0.2290941575785211,
+      "mean_absolute_error_loaded_ns": 23.759810985176017,
+      "mean_absolute_error_unloaded_ns": 20.026663818730928
+    },
+    "attention_1000_p5": {
+      "impulse_mae_per_plate_ns": [
+        20.243466430733736,
+        23.925513327909055
+      ],
+      "average_plate_mae_ns": 22.084489879321396,
+      "combined_impulse_mae_ns": 19.300121385952462,
+      "event_brier_per_plate": [
+        0.1898728360508666,
+        0.2469319051645472
+      ],
+      "average_plate_event_brier": 0.2184023706077071,
+      "mean_absolute_error_loaded_ns": 23.283750364597054,
+      "mean_absolute_error_unloaded_ns": 19.91435571238497
+    }
+  },
+  "paired_contrasts": [
+    {
+      "candidate": "zero",
+      "reference": "fit_median",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": 5.077436211943502,
+          "participant_range95": [
+            3.861732390637915,
+            5.697673044141286
+          ],
+          "lower_error_people": 0
+        },
+        "combined_impulse_mae_ns": {
+          "difference": 33.40905413346554,
+          "participant_range95": [
+            30.246049171558216,
+            36.6844814573751
+          ],
+          "lower_error_people": 0
+        },
+        "average_plate_event_brier": {
+          "difference": 0.0,
+          "participant_range95": [
+            0.0,
+            0.0
+          ],
+          "lower_error_people": 0
+        }
+      }
+    },
+    {
+      "candidate": "affine_200",
+      "reference": "fit_median",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": 1.4167598964318333,
+          "participant_range95": [
+            -2.2497964218280337,
+            6.077960739104661
+          ],
+          "lower_error_people": 1
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -9.176465337146473,
+          "participant_range95": [
+            -21.52367766312766,
+            7.363504522501582
+          ],
+          "lower_error_people": 2
+        },
+        "average_plate_event_brier": {
+          "difference": -0.004305059563241911,
+          "participant_range95": [
+            -0.09584075799237786,
+            0.05657337850539079
+          ],
+          "lower_error_people": 1
+        }
+      }
+    },
+    {
+      "candidate": "affine_1000",
+      "reference": "fit_median",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -0.14504291908905742,
+          "participant_range95": [
+            -9.238121014204797,
+            10.800784093771304
+          ],
+          "lower_error_people": 2
+        },
+        "combined_impulse_mae_ns": {
+          "difference": 13.047849671282094,
+          "participant_range95": [
+            -16.54967134138567,
+            43.81911167282212
+          ],
+          "lower_error_people": 1
+        },
+        "average_plate_event_brier": {
+          "difference": -0.08659874629023478,
+          "participant_range95": [
+            -0.16440940874312093,
+            -0.0006792164530656231
+          ],
+          "lower_error_people": 3
+        }
+      }
+    },
+    {
+      "candidate": "attention_200_p1",
+      "reference": "fit_median",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -1.332218796386261,
+          "participant_range95": [
+            -10.5983122297414,
+            7.436792779200026
+          ],
+          "lower_error_people": 2
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -7.332997601068327,
+          "participant_range95": [
+            -18.657095631459633,
+            1.6178001701603542
+          ],
+          "lower_error_people": 2
+        },
+        "average_plate_event_brier": {
+          "difference": 0.006802176002671144,
+          "participant_range95": [
+            -0.021097388916681697,
+            0.03161971632633995
+          ],
+          "lower_error_people": 1
+        }
+      }
+    },
+    {
+      "candidate": "attention_200_p3",
+      "reference": "fit_median",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -4.8260917882830965,
+          "participant_range95": [
+            -13.500667650935112,
+            1.477625901606359
+          ],
+          "lower_error_people": 2
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -7.878561210215004,
+          "participant_range95": [
+            -19.52172548191065,
+            2.0651181976356803
+          ],
+          "lower_error_people": 2
+        },
+        "average_plate_event_brier": {
+          "difference": -0.011965285234075631,
+          "participant_range95": [
+            -0.04878638791072437,
+            0.012646657078714124
+          ],
+          "lower_error_people": 1
+        }
+      }
+    },
+    {
+      "candidate": "attention_200_p5",
+      "reference": "fit_median",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -4.3882049240818235,
+          "participant_range95": [
+            -13.302553858675559,
+            2.2644124029578414
+          ],
+          "lower_error_people": 2
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -3.4111152230801776,
+          "participant_range95": [
+            -13.589681666597874,
+            4.418148206128269
+          ],
+          "lower_error_people": 2
+        },
+        "average_plate_event_brier": {
+          "difference": -0.01892296179249639,
+          "participant_range95": [
+            -0.06336555752527781,
+            0.00966462910312546
+          ],
+          "lower_error_people": 2
+        }
+      }
+    },
+    {
+      "candidate": "attention_1000_p1",
+      "reference": "fit_median",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -4.32007498292354,
+          "participant_range95": [
+            -8.539100017563229,
+            -1.5527018876328995
+          ],
+          "lower_error_people": 3
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -9.676181145942268,
+          "participant_range95": [
+            -17.760913717178607,
+            -3.6245152114668215
+          ],
+          "lower_error_people": 3
+        },
+        "average_plate_event_brier": {
+          "difference": -0.0021907900888175533,
+          "participant_range95": [
+            -0.14245228789514375,
+            0.12270506670308605
+          ],
+          "lower_error_people": 1
+        }
+      }
+    },
+    {
+      "candidate": "attention_1000_p3",
+      "reference": "fit_median",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -4.361904207938456,
+          "participant_range95": [
+            -9.261294719218718,
+            -0.42293410098299944
+          ],
+          "lower_error_people": 3
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -9.415685895462333,
+          "participant_range95": [
+            -11.17119444514781,
+            -7.576610321364242
+          ],
+          "lower_error_people": 3
+        },
+        "average_plate_event_brier": {
+          "difference": 0.009899347182677551,
+          "participant_range95": [
+            -0.12597105333913344,
+            0.11511526385222588
+          ],
+          "lower_error_people": 1
+        }
+      }
+    },
+    {
+      "candidate": "attention_1000_p5",
+      "reference": "fit_median",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -4.707739135882615,
+          "participant_range95": [
+            -8.585005798137043,
+            -1.5298702097543995
+          ],
+          "lower_error_people": 3
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -11.024079968293933,
+          "participant_range95": [
+            -13.94205485547358,
+            -5.852518807449005
+          ],
+          "lower_error_people": 3
+        },
+        "average_plate_event_brier": {
+          "difference": -0.0007924397881364601,
+          "participant_range95": [
+            -0.1396647476539014,
+            0.1094251549917699
+          ],
+          "lower_error_people": 1
+        }
+      }
+    },
+    {
+      "candidate": "attention_1000_p1",
+      "reference": "attention_200_p1",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -2.987856186537279,
+          "participant_range95": [
+            -10.305215822774517,
+            9.0456103421085
+          ],
+          "lower_error_people": 2
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -2.343183544873941,
+          "participant_range95": [
+            -12.801216375272906,
+            11.013981122278258
+          ],
+          "lower_error_people": 2
+        },
+        "average_plate_event_brier": {
+          "difference": -0.008992966091488697,
+          "participant_range95": [
+            -0.12135489897846204,
+            0.11282086610473085
+          ],
+          "lower_error_people": 2
+        }
+      }
+    },
+    {
+      "candidate": "attention_1000_p3",
+      "reference": "attention_200_p3",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": 0.4641875803446407,
+          "participant_range95": [
+            -6.80606110369818,
+            10.099183847321461
+          ],
+          "lower_error_people": 2
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -1.5371246852473301,
+          "participant_range95": [
+            -9.641728518999923,
+            10.022472562035698
+          ],
+          "lower_error_people": 2
+        },
+        "average_plate_event_brier": {
+          "difference": 0.021864632416753182,
+          "participant_range95": [
+            -0.07718466542840907,
+            0.11487138872244256
+          ],
+          "lower_error_people": 1
+        }
+      }
+    },
+    {
+      "candidate": "attention_1000_p5",
+      "reference": "attention_200_p5",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -0.3195342118007905,
+          "participant_range95": [
+            -6.458532481609289,
+            9.294212458919159
+          ],
+          "lower_error_people": 2
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -7.612964745213756,
+          "participant_range95": [
+            -12.215854033188286,
+            -0.352373188875708
+          ],
+          "lower_error_people": 3
+        },
+        "average_plate_event_brier": {
+          "difference": 0.018130522004359936,
+          "participant_range95": [
+            -0.07629919012862359,
+            0.1124931119471067
+          ],
+          "lower_error_people": 1
+        }
+      }
+    },
+    {
+      "candidate": "attention_200_p3",
+      "reference": "attention_200_p1",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -3.493872991896836,
+          "participant_range95": [
+            -5.959166877593667,
+            -1.6200966769031275
+          ],
+          "lower_error_people": 3
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -0.5455636091466776,
+          "participant_range95": [
+            -1.21937900446434,
+            0.4473180274753261
+          ],
+          "lower_error_people": 2
+        },
+        "average_plate_event_brier": {
+          "difference": -0.018767461236746774,
+          "participant_range95": [
+            -0.027688998994042674,
+            -0.009640325468571825
+          ],
+          "lower_error_people": 3
+        }
+      }
+    },
+    {
+      "candidate": "attention_200_p5",
+      "reference": "attention_200_p1",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -3.055986127695563,
+          "participant_range95": [
+            -5.1723803762421845,
+            -1.2913363779103442
+          ],
+          "lower_error_people": 3
+        },
+        "combined_impulse_mae_ns": {
+          "difference": 3.921882377988149,
+          "participant_range95": [
+            2.8003480359679145,
+            5.067413964861757
+          ],
+          "lower_error_people": 0
+        },
+        "average_plate_event_brier": {
+          "difference": -0.025725137795167535,
+          "participant_range95": [
+            -0.04226816860859611,
+            -0.012952157553692
+          ],
+          "lower_error_people": 3
+        }
+      }
+    },
+    {
+      "candidate": "attention_1000_p3",
+      "reference": "attention_1000_p1",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -0.041829225014916226,
+          "participant_range95": [
+            -1.8487819159807515,
+            2.445488942591492
+          ],
+          "lower_error_people": 2
+        },
+        "combined_impulse_mae_ns": {
+          "difference": 0.2604952504799331,
+          "participant_range95": [
+            -3.952095109897421,
+            6.589719272030798
+          ],
+          "lower_error_people": 2
+        },
+        "average_plate_event_brier": {
+          "difference": 0.012090137271495105,
+          "participant_range95": [
+            -0.007589802850860139,
+            0.02737898010933515
+          ],
+          "lower_error_people": 1
+        }
+      }
+    },
+    {
+      "candidate": "attention_1000_p5",
+      "reference": "attention_1000_p1",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -0.38766415295907447,
+          "participant_range95": [
+            -2.4556395121235006,
+            1.338552833820092
+          ],
+          "lower_error_people": 2
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -1.3478988223516666,
+          "participant_range95": [
+            -6.298940346292209,
+            4.483247475219393
+          ],
+          "lower_error_people": 2
+        },
+        "average_plate_event_brier": {
+          "difference": 0.0013983503006810977,
+          "participant_range95": [
+            -0.01327991171131615,
+            0.014687422372117093
+          ],
+          "lower_error_people": 1
+        }
+      }
+    },
+    {
+      "candidate": "attention_200_p5",
+      "reference": "attention_200_p3",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": 0.437886864201273,
+          "participant_range95": [
+            0.19811379225955328,
+            0.7867865013514823
+          ],
+          "lower_error_people": 0
+        },
+        "combined_impulse_mae_ns": {
+          "difference": 4.467445987134826,
+          "participant_range95": [
+            2.3530300084925884,
+            5.932043815312777
+          ],
+          "lower_error_people": 0
+        },
+        "average_plate_event_brier": {
+          "difference": -0.00695767655842076,
+          "participant_range95": [
+            -0.014579169614553439,
+            -0.0029820279755886636
+          ],
+          "lower_error_people": 3
+        }
+      }
+    },
+    {
+      "candidate": "attention_1000_p5",
+      "reference": "attention_1000_p3",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -0.3458349279441582,
+          "participant_range95": [
+            -1.1069361087714,
+            0.6762889210816745
+          ],
+          "lower_error_people": 2
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -1.6083940728315997,
+          "participant_range95": [
+            -4.442801935598631,
+            1.724091513915237
+          ],
+          "lower_error_people": 2
+        },
+        "average_plate_event_brier": {
+          "difference": -0.010691786970814007,
+          "participant_range95": [
+            -0.013693694314767954,
+            -0.005690108860456011
+          ],
+          "lower_error_people": 3
+        }
+      }
+    },
+    {
+      "candidate": "attention_200_p1",
+      "reference": "affine_200",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -2.748978692818094,
+          "participant_range95": [
+            -11.02042760176027,
+            1.4146594832106238
+          ],
+          "lower_error_people": 1
+        },
+        "combined_impulse_mae_ns": {
+          "difference": 1.8434677360781475,
+          "participant_range95": [
+            -26.02060015396121,
+            23.14147783328802
+          ],
+          "lower_error_people": 1
+        },
+        "average_plate_event_brier": {
+          "difference": 0.011107235565913054,
+          "participant_range95": [
+            -0.024953662179050845,
+            0.07474336907569616
+          ],
+          "lower_error_people": 2
+        }
+      }
+    },
+    {
+      "candidate": "attention_200_p3",
+      "reference": "affine_200",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -6.242851684714931,
+          "participant_range95": [
+            -13.922783022953984,
+            -0.20543719369250368
+          ],
+          "lower_error_people": 3
+        },
+        "combined_impulse_mae_ns": {
+          "difference": 1.2979041269314695,
+          "participant_range95": [
+            -26.885230004412232,
+            23.588795860763344
+          ],
+          "lower_error_people": 1
+        },
+        "average_plate_event_brier": {
+          "difference": -0.007660225670833719,
+          "participant_range95": [
+            -0.04392672142667667,
+            0.047054370081653495
+          ],
+          "lower_error_people": 2
+        }
+      }
+    },
+    {
+      "candidate": "attention_200_p5",
+      "reference": "affine_200",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -5.804964820513657,
+          "participant_range95": [
+            -13.724669230694431,
+            0.12332310530027968
+          ],
+          "lower_error_people": 2
+        },
+        "combined_impulse_mae_ns": {
+          "difference": 5.765350114066297,
+          "participant_range95": [
+            -20.953186189099455,
+            25.941825869255936
+          ],
+          "lower_error_people": 1
+        },
+        "average_plate_event_brier": {
+          "difference": -0.014617902229254479,
+          "participant_range95": [
+            -0.04690874940226533,
+            0.03247520046710005
+          ],
+          "lower_error_people": 2
+        }
+      }
+    },
+    {
+      "candidate": "attention_1000_p1",
+      "reference": "affine_1000",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -4.175032063834482,
+          "participant_range95": [
+            -12.3534859814042,
+            0.6990209966415684
+          ],
+          "lower_error_people": 2
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -22.72403081722436,
+          "participant_range95": [
+            -51.46222618200349,
+            12.925156129918852
+          ],
+          "lower_error_people": 2
+        },
+        "average_plate_event_brier": {
+          "difference": 0.08440795620141724,
+          "participant_range95": [
+            0.02195712084797717,
+            0.12338428315615164
+          ],
+          "lower_error_people": 0
+        }
+      }
+    },
+    {
+      "candidate": "attention_1000_p3",
+      "reference": "affine_1000",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -4.216861288849398,
+          "participant_range95": [
+            -14.202267897384951,
+            1.574857735850678
+          ],
+          "lower_error_people": 2
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -22.46353556674443,
+          "participant_range95": [
+            -53.31836459269707,
+            8.97306102002143
+          ],
+          "lower_error_people": 2
+        },
+        "average_plate_event_brier": {
+          "difference": 0.09649809347291234,
+          "participant_range95": [
+            0.038438355403987476,
+            0.135261444709458
+          ],
+          "lower_error_people": 0
+        }
+      }
+    },
+    {
+      "candidate": "attention_1000_p5",
+      "reference": "affine_1000",
+      "scores": {
+        "average_plate_mae_ns": {
+          "difference": -4.562696216793557,
+          "participant_range95": [
+            -14.809125493527702,
+            0.6531152160677536
+          ],
+          "lower_error_people": 1
+        },
+        "combined_impulse_mae_ns": {
+          "difference": -24.07192963957603,
+          "participant_range95": [
+            -57.76116652829571,
+            10.697152533936666
+          ],
+          "lower_error_people": 2
+        },
+        "average_plate_event_brier": {
+          "difference": 0.08580630650209835,
+          "participant_range95": [
+            0.024744661089219522,
+            0.12256988697223996
+          ],
+          "lower_error_people": 0
+        }
+      }
+    }
+  ],
+  "bootstrap": {
+    "seed": 202611251,
+    "draws": 20000,
+    "unit": "participant"
+  },
+  "score_sha256": "d0efd4545a3fb0c45dea816c0d6a03ec7bd1a3b0b80888492035aa07b0278b80",
+  "weights_sha256": "584882b4ff4d233917c4596f92a17e623e23e5ff829f2a71db6974ebdd2b3a7f",
+  "independent_score_sha256": "6a00a0985a608914211602f49e14fd3b6c797763c4635401a526bf3f273b435c",
+  "sensitivity": {
+    "scope": "Retrospective check with all four people and the original finite paired outcomes.",
+    "scored_people": 4,
+    "scored_windows": 712,
+    "results": {
+      "zero": {
+        "average_plate_mae_ns": 32.09228436226401,
+        "combined_impulse_mae_ns": 64.14966216656417,
+        "average_plate_event_brier": 0.1969206961593653
+      },
+      "fit_median": {
+        "average_plate_mae_ns": 26.475772845096124,
+        "combined_impulse_mae_ns": 29.831167839001694,
+        "average_plate_event_brier": 0.1969206961593653
+      },
+      "affine_200": {
+        "average_plate_mae_ns": 23.80827486398594,
+        "combined_impulse_mae_ns": 18.178707986295002,
+        "average_plate_event_brier": 0.20484594934289915
+      },
+      "affine_1000": {
+        "average_plate_mae_ns": 24.555454205045574,
+        "combined_impulse_mae_ns": 39.23621114669332,
+        "average_plate_event_brier": 0.1482287623979615
+      },
+      "attention_200_p1": {
+        "average_plate_mae_ns": 22.541157006614196,
+        "combined_impulse_mae_ns": 23.544116950272137,
+        "average_plate_event_brier": 0.19787485136129138
+      },
+      "attention_200_p3": {
+        "average_plate_mae_ns": 20.090791879972286,
+        "combined_impulse_mae_ns": 23.315136630116932,
+        "average_plate_event_brier": 0.18329789799086604
+      },
+      "attention_200_p5": {
+        "average_plate_mae_ns": 20.322093193522242,
+        "combined_impulse_mae_ns": 26.507331862902344,
+        "average_plate_event_brier": 0.18090280661034497
+      },
+      "attention_1000_p1": {
+        "average_plate_mae_ns": 19.581018440763813,
+        "combined_impulse_mae_ns": 19.450818219495524,
+        "average_plate_event_brier": 0.2040058959425733
+      },
+      "attention_1000_p3": {
+        "average_plate_mae_ns": 19.8815727602838,
+        "combined_impulse_mae_ns": 20.25674347510398,
+        "average_plate_event_brier": 0.20825907809849487
+      },
+      "attention_1000_p5": {
+        "average_plate_mae_ns": 19.57192243018364,
+        "combined_impulse_mae_ns": 19.11883285670742,
+        "average_plate_event_brier": 0.1978662455680101
+      }
+    }
+  }
+}
