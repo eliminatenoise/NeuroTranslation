@@ -3,6 +3,7 @@ import {createLimbTake, createTakeTimeline, createVideoTakeWindow, pictureOffset
 import {createCameraPreview} from './camera/preview.mjs';
 import {ankleNames, calibratedPose, hipJoints, kneeJoints, sideLegs, trackedLimbs, trackingChoices as choices} from './camera/limb-pose.mjs';
 import {captureSource, readKeyframes, MAX_LOCAL_VIDEO_BYTES} from './joint/media.mjs';
+import {handSelections, handTrackingMessages} from './camera/hand-pose.mjs';
 const MAX_FRAME_AGE_MS = 1200;
 const FRAME_TIMEOUT_MS = 15000;
 const POLL_INTERVAL_MS = 90;
@@ -17,7 +18,7 @@ function createTrackingFeedback(document) {
   list.setAttribute('aria-label', 'Tracking by limb');
   list.style.cssText = 'margin:6px 0;padding:0;list-style:none';
   const items = new Map();
-  for (const limb of [...choices.armsAndKnees.parts, ...Object.keys(hipJoints), ...Object.keys(ankleNames)]) {
+  for (const limb of [...choices.armsAndKnees.parts, ...Object.keys(hipJoints), ...Object.keys(ankleNames), ...handSelections.bothHands]) {
     const row = document.createElement('li');
     const name = document.createElement('span');
     const state = document.createElement('strong');
@@ -119,7 +120,7 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
   }
   function trackingMessage(result) {
     if (!result) return framing();
-    if (limb === 'armsAndKnees' || Object.hasOwn(sideLegs, limb)) {
+    if (limb === 'armsAndKnees' || limb === 'bothHands' || Object.hasOwn(sideLegs, limb)) {
       const visible = trackedLimbs(result).map(side => partName(side).toLowerCase());
       if (visible.length < choices[limb].parts.length) return 'Following ' + visible.join(', ') + '. ' + framing();
     }
@@ -566,7 +567,7 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
             else feedback.clear();
             if (take.recording && data.wrists) take.observe(result, capturedAt, false, data.wrists, data.armGeometry);
             else take.observe(result, capturedAt);
-            show(fresh ? trackingMessage(result) : WAITING_FOR_VIDEO, true);
+            show(fresh ? handTrackingMessages[data.handStatus] ?? trackingMessage(result) : WAITING_FOR_VIDEO, true);
             if (fresh) watchFrame(session, capturedAt);
             else clearTimeout(session.watchdog);
           }
@@ -644,7 +645,8 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
         emit(result, limb);
         preview.draw(frame.limbPaths, result, frame.w, frame.h);
         feedback.show(choices[limb].parts, frame.pose, result, true);
-        show(result ? 'Following the selected limb in the video.' : 'No usable pose in this frame.', true);
+        show(handTrackingMessages[frame.handStatus] ??
+          (result ? 'Following the selected limb in the video.' : 'No usable pose in this frame.'), true);
         session.lastFrameAt = performance.now();
         watchFrame(session, session.lastFrameAt);
       },
@@ -685,6 +687,7 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
         if (current !== session) return;
         const time = pictureOffsetMs(frame.t, startTime);
         const pose = calibratedPose(session.knees, session.limb, frame.pose, time);
+        session.handStatus = frame.handStatus;
         timeline.observe(pose, time, false, frame.wrists, frame.armGeometry);
         show('Read ' + frame.id + ' of ' + stills.length + ' pictures.', true);
       },
@@ -692,7 +695,7 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
         if (current !== session) return;
         pictureTake = timeline.finish(duration);
         stop(pictureTake ? pictureTake.count + ' of ' + stills.length + ' pictures had a usable pose. Choose Save picture take.' :
-          'Too few pictures showed the selected limbs. Choose clearer pictures or one limb.');
+          handTrackingMessages[session.handStatus] ?? 'Too few pictures showed the selected limbs. Choose clearer pictures or one limb.');
       },
       onError(message) { failed(session, 'Picture tracking stopped. ' + message); },
     });

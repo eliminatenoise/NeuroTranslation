@@ -541,6 +541,24 @@ function lookJointActionsOf(targets) {
   return m;
 }
 let lookJointActions = null;
+function claimedHandShare(actions, joint, drives) {
+  let share = 0;
+  for (const id of actions.get(joint)) { const value = drives[id]; if (value > 0) share += value; }
+  return share;
+}
+
+// Use observed finger angles as the rest pose beneath the game's ordinary
+// finger commands. The held grip and other active drives keep their authority.
+export function observedFingerRest(joints, drives, observed) {
+  const actions = lookJointActions ??= lookJointActionsOf(ACTION_TARGETS);
+  const result = {};
+  for (const [joint, position] of Object.entries(observed)) {
+    const share = Math.min(1, claimedHandShare(actions, joint, drives));
+    const [minimum, maximum] = JOINT_LIMITS[joint];
+    result[joint] = clamp(joints[joint] + (position - REST_POSE[joint]) * (1 - share), minimum, maximum) + 0;
+  }
+  return result;
+}
 const lookPoseMemo = { c: -1, op: -1, P: null };
 export function lookHandPose(joints, drives, look, { rule = LOOK_HAND.rule, targets = ACTION_TARGETS, rest: restPose = REST_POSE } = {}) {
   const c = look && look.close > 0 ? Math.min(1, look.close) : 0, op = look && look.open > 0 ? Math.min(1, look.open) : 0;
@@ -566,8 +584,7 @@ export function lookHandPose(joints, drives, look, { rule = LOOK_HAND.rule, targ
     const off = P[k] - restPose[k];
     // (closing: the bends and the thumb's turn, toward the fist; opening: the bends toward straight, the spread outward)
     if (!(c > 0 ? kind !== 'abd' && off > 0 : kind === 'abd' ? off > 0 : kind === 'flex' && off < 0)) continue;
-    let share = 0;
-    for (const id of acts.get(k)) { const v = d[id]; if (v > 0) share += v; }
+    let share = claimedHandShare(acts, k, d);
     // (a fist does not spread: the grip, which names no sideways joint, takes the look's spread with it)
     if (!(c > 0) && kind === 'abd' && d.grasp_close > 0) share += d.grasp_close;
     const lim = JOINT_LIMITS[k];

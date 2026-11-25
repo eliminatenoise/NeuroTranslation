@@ -2,6 +2,7 @@ import {BONES,WRIST,TRACKED_POINTS,trackedPoint,observation,endpoint,observeTarg
 import {captureSource,readKeyframes} from './media.mjs';
 import {ankleNames, calibratedPose, hipJoints, poseForSelection, sideArmParts, sideLegs, trackedLimbs, trackingChoices} from '../camera/limb-pose.mjs';
 import {createVideoTakeWindow, pictureOffsetMs, poseForFollow} from '../camera/limb-take.mjs';
+import {handSelections, handTrackingMessages} from '../camera/hand-pose.mjs';
 import {localMotion} from './forecast-controls.mjs';
 import {advanceCameraHistory,cameraForecasts,movementForecast,newCameraHistory,queueCameraForecast} from './adaptive-motion.mjs';
 
@@ -39,7 +40,7 @@ ${touchPanel}
 <p data-model></p>
 </div></div>`;
 const finitePair=p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite);
-const dedicatedChoices=new Set([...Object.keys(sideArmParts),...Object.keys(hipJoints),...Object.keys(sideLegs)]);
+const dedicatedChoices=new Set([...Object.keys(sideArmParts),...Object.keys(hipJoints),...Object.keys(sideLegs),...Object.keys(handSelections)]);
 export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,onClose=()=>{},onSaveTake=null,onOpenCommand=null,backend='local-model'}) {
   const node=document.createElement('section');
   node.className='joint-view'+(embedded?' joint-overlay':'');
@@ -426,7 +427,8 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
             }
             const selected = embedded ? poseForFollow(pose, followControl.value) : pose;
             applyCapturePose(selected);
-            showCameraFollow(selected,f.pose,kind);
+            if (f.handStatus) cameraMessage(handTrackingMessages[f.handStatus] + ' The point forecast can still use visible body positions.');
+            else showCameraFollow(selected,f.pose,kind);
             updateTake(f, selected, stills?.[0].t);
           }
           if (f.forecastRevision===epoch) {

@@ -65,6 +65,7 @@ import { bindActivityMap } from './activity/map.mjs';
 import {bindJointView} from './joint/view.mjs';
 import {movementMirrorBackend} from './joint/route.mjs';
 import { createCameraCapture } from './camera.mjs';
+import { rightHandTargets } from './camera/hand-pose.mjs';
 import { createControls, bindDom, CONTROL_CODES, MOVE_CODES, moveKeyNumber, AREA_CODES, areaKeyDir, isPanelShortcut } from './ns-controls.mjs';
 import { walkQuietStep, walkUiEvent, AREA_WALK_QUIET, bindFocusRing } from './ns-look-calm.mjs'; // 22 November 2026 (LOOK2)
 import {
@@ -79,7 +80,7 @@ import {
   handViewLimitsNdc, fitHandAt, FREE_HAND, freeHandPole, freeHandInRange
 } from './ns-arm.mjs';
 import { PLACEHOLDER_LABEL, buildPlaceholderArm } from './ns-placeholder.mjs';
-import { bindMovementMap, composePose, lookHandPose, muscleDrives, createActivity, eventOffset, ACTION_IDS, reachMuscleShow, REACH_MUSCLES } from './ns-actions.mjs';
+import { bindMovementMap, composePose, lookHandPose, observedFingerRest, muscleDrives, createActivity, eventOffset, ACTION_IDS, reachMuscleShow, REACH_MUSCLES } from './ns-actions.mjs';
 import { MOVE_GLOW, createMoveChannels } from './ns-move-glow.mjs';
 import {
   ARM_BAND, BAND_FRAME, stripParam, splitBand, placeMarkers, placementForBand, orientationAnchorsForBand,
@@ -4439,6 +4440,9 @@ export function createSimulation({ rig, boxes, strip, binding, armOptions = {}, 
       const wl = WRIST_LIMITS_DEG, deg = leftHandTiltDeg(handTilt, a.rotation && Number.isFinite(a.rotation.value) ? a.rotation.value : rotationState === 'pronated' ? 0 : 1);
       if (deg !== 0) pose = { ...pose, joints: { ...pose.joints, wrist_flex: clamp(pose.joints.wrist_flex + deg, wl[0], wl[1]) + 0 } };
     }
+    if (freeIn?.cameraHand) {
+      pose = { ...pose, joints: { ...pose.joints, ...observedFingerRest(pose0.joints, drives, freeIn.cameraHand) } };
+    }
     // 19 November 2026 (HAND_REST): for looks above the start look the hand rests low instead of rising over the strip
     const handAt = referenceGraph && !wholeArmOption ? handRestNdc(pitch, referenceGraph.initialLook.pitch, Math.tan(fov * DEG / 2), handYNdc) : null;
     const handY = handAt ? handAt.yNdc : handYNdc, handXAdd = handAt ? handAt.xAddNdc : 0;
@@ -7004,7 +7008,7 @@ export function start(params = {}) {
     if (sequenceStatus && sequenceStatus.textContent !== message) sequenceStatus.textContent = message;
   }
   let readJointRig = null, lastDrawSeconds = 0;
-  let jointView = null, motionCamera = null, pendingCameraPose = null, trackedJoints = null, trackedLeftArm = null;
+  let jointView = null, motionCamera = null, pendingCameraPose = null, trackedJoints = null, trackedLeftArm = null, trackedLeftHand = null;
   let cameraOpenAfterUnlock = null;
   let dialogResumeAfterUnlock = null;
   let tick = null, controlsApi = null, cs = null, sim = null, simState = null;
@@ -8368,6 +8372,7 @@ export function start(params = {}) {
     trackedJoints = pendingCameraPose?.joints ?? null;
     // Pose events are consumed once, but the left arm needs its bearing on every frame.
     trackedLeftArm = pendingCameraPose?.leftArm ?? null;
+    trackedLeftHand = pendingCameraPose?.leftHand ?? null;
   }
   function movementMirror() {
     jointView ??= bindJointView({
@@ -12616,19 +12621,27 @@ export function start(params = {}) {
         const manualLimb = (pressedAxes.x || pressedAxes.z) ? chosenLimb() : null;
         let cameraJoints = live ? pendingCameraPose?.joints : null;
         const manualJoints = NsGrasp.LIMB_CHAIN[manualLimb]?.joints;
-        if (cameraJoints && manualJoints) {
+        const followsRightHand = cameraJoints && Object.hasOwn(cameraJoints, 'r_index_flex');
+        const manualRightHand = followsRightHand && (manualLimb === 'rightArm' ||
+          Object.keys(rightHandTargets).some(id => Object.hasOwn(simState.activity.bodyJerk ?? {}, id)));
+        if (cameraJoints && (manualJoints || manualRightHand)) {
           cameraJoints = {...cameraJoints};
-          for (const id of manualJoints) delete cameraJoints[id];
+          for (const id of manualJoints ?? []) delete cameraJoints[id];
+          if (manualRightHand) for (const id of Object.keys(rightHandTargets)) delete cameraJoints[id];
           if (manualLimb === 'leftLeg') delete cameraJoints.ankle_dorsi_L;
           if (manualLimb === 'rightLeg') delete cameraJoints.ankle_dorsi_R;
           if (!Object.keys(cameraJoints).length) cameraJoints = null;
         }
         const cameraArm = live && manualLimb !== 'leftArm' ? trackedLeftArm : null;
+        const cameraHand = live && manualLimb !== 'leftArm' ? trackedLeftHand : null;
         pendingCameraPose = null;
         if (cameraJoints || cameraArm) {
-          const placement = { type: 'limbPose', joints: cameraJoints || {}, at: timing.dt,
+          const placement = { type: 'limbPose', joints: cameraJoints || {}, at: followsRightHand ? 0 : timing.dt,
             trackedLeftUpperArm: Boolean(cameraArm) };
-          timing = { ...timing, events: [...timing.events, placement] };
+          // An explicit movement started in this frame takes priority over
+          // the observed right hand. Existing arm and leg placement stays as before.
+          const events = followsRightHand ? [placement, ...timing.events] : [...timing.events, placement];
+          timing = { ...timing, events };
         }
         // 18 Nov (M3): a number key came up: a short press completes its movement, a longer one leaves the part there.
         if (live && upsThisFrame.length) {
@@ -13207,7 +13220,7 @@ export function start(params = {}) {
           // the chosen limb the hold gives its place (carried by the look, moved by the keys)
           // (23 November 2026, round r32, LIMBS5, ns-limb-pace TRUNK_RIDE: a left hand the view does not hold follows the
           // place the trunk carries it to: ride)
-          ...(LIMB_KEYS.on && HOLD.hold && !wholeArmOption ? { hand: { free: true, cameraArm, ...(holdHand ? { targetWorld: holdHand } : limbPush.handMove ? { moveWorld: limbPush.handMove } : {}),
+          ...(LIMB_KEYS.on && HOLD.hold && !wholeArmOption ? { hand: { free: true, cameraArm, cameraHand, ...(holdHand ? { targetWorld: holdHand } : limbPush.handMove ? { moveWorld: limbPush.handMove } : {}),
             // (LIMBS5 pass 2: also on a frame drawn while paused, which has no time: the hand stays where it was drawn)
             ...(NsPace.TRUNK_RIDE.on && !cameraArm && !holdHand && !holdBusy() && !(cs.drag && cs.drag.binding && cs.drag.binding.limb === 'leftArm') ? { ride: { carry: trunkRideCarry } } : {}) } } : {}),
           // 19 November 2026: the left hand's fingers close as the look goes down and open as it goes up (GRIP_FEET.look,

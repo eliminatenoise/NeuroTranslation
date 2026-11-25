@@ -37,10 +37,15 @@ export function createCameraPreview(video) {
     const thickness = Math.max(2, Math.min(width, height) * .012);
     ctx.lineJoin = ctx.lineCap = 'round';
     for (const limb of limbs) {
-      const points = paths[limb].map(([x, y]) => [x * width, y * height]);
+      // A hand has one path per digit. Other limbs use one path.
+      const source = paths[limb];
+      const pathsForLimb = Array.isArray(source[0][0]) ? source : [source];
+      const lines = pathsForLimb.map(line => line.map(([x, y]) => [x * width, y * height]));
       ctx.beginPath();
-      ctx.moveTo(...points[0]);
-      for (const point of points.slice(1)) ctx.lineTo(...point);
+      for (const line of lines) {
+        ctx.moveTo(...line[0]);
+        for (const point of line.slice(1)) ctx.lineTo(...point);
+      }
       ctx.strokeStyle = '#132b35';
       ctx.lineWidth = thickness + 4;
       ctx.stroke();
@@ -48,7 +53,7 @@ export function createCameraPreview(video) {
       ctx.lineWidth = thickness;
       ctx.stroke();
 
-      for (const [x, y] of points) {
+      for (const [x, y] of lines.flat()) {
         ctx.beginPath();
         ctx.arc(x, y, thickness * .75, 0, 2 * Math.PI);
         ctx.fillStyle = '#a5f3db';

@@ -1,3 +1,5 @@
+import {handSelections} from './hand-pose.mjs';
+
 // Coordinates come from the raw video bitmap. Only the on-screen preview is mirrored.
 // A frontal person's anatomical right lies to the left of the image.
 const chains = {
@@ -54,7 +56,10 @@ export const trackingChoices = {
   leftArmLegSide: {name: 'Left arm and leg from the side', frame: 'Turn your left side toward the lens. Step back until your face, elbow, wrist, knee and foot fit in the picture.', motion: 'Left arm, hip, knee and ankle', parts: ['leftArm', ...leftSideLeg]},
   rightArmLegSide: {name: 'Right arm and leg from the side', frame: 'Turn your right side toward the lens. Step back until your face, elbow, wrist, knee and foot fit in the picture.', motion: 'Right arm, hip, knee and ankle', parts: ['rightArm', ...rightSideLeg]},
   armsAndKnees: {name: 'Both arms and knees', frame: 'Keep shoulders, elbows, wrists, hips and feet in view. Bend each knee where the lens can see it.', motion: 'Both arms and knees', parts: ['leftArm', 'rightArm', 'leftLeg', 'rightLeg']},
-  bothKnees: {name: 'Both knees', frame: 'Turn partway sideways. Keep your shoulders, hips, knees and feet in view. Show a clear bend on each side.', motion: 'Both knees', parts: ['leftLeg', 'rightLeg']}
+  bothKnees: {name: 'Both knees', frame: 'Turn partway sideways. Keep your shoulders, hips, knees and feet in view. Show a clear bend on each side.', motion: 'Both knees', parts: ['leftLeg', 'rightLeg']},
+  leftHand: {name: 'Left fingers', frame: 'Hold your left hand near the lens with your wrist and all five fingertips in view.', motion: 'Left fingers', parts: handSelections.leftHand},
+  rightHand: {name: 'Right fingers', frame: 'Hold your right hand near the lens with your wrist and all five fingertips in view.', motion: 'Right fingers', parts: handSelections.rightHand},
+  bothHands: {name: 'Fingers on both hands', frame: 'Show both wrists and all ten fingertips. Keep the hands apart so they do not cover each other.', motion: 'Fingers on both hands', parts: handSelections.bothHands}
 };
 
 export function trackedLimbs(pose) {
@@ -63,6 +68,8 @@ export function trackedLimbs(pose) {
   return [
     pose.leftArm && 'leftArm',
     Number.isFinite(joints?.r_elbow_flex) && 'rightArm',
+    pose.leftHand && 'leftHand',
+    Number.isFinite(joints?.r_index_flex) && 'rightHand',
     Number.isFinite(joints?.knee_ext_L) && 'leftLeg',
     Number.isFinite(joints?.knee_ext_R) && 'rightLeg',
     Number.isFinite(joints?.[hipJoints.leftHip]) && 'leftHip',
@@ -81,7 +88,7 @@ export const kneeJoints = {
 };
 
 export function supportsPartialTake(selection) {
-  return selection === 'armsAndKnees' || Object.hasOwn(sideLegs, selection);
+  return selection === 'armsAndKnees' || selection === 'bothHands' || Object.hasOwn(sideLegs, selection);
 }
 
 // Each knee must show two consecutive bends in the picture before its straight

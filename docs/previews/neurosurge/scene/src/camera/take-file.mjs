@@ -1,5 +1,6 @@
 import {ankleJoints, ankleLimits, hipJoints, hipLimits, sideArmParts, sideArmFlexLimits, supportsPartialTake, trackingChoices} from './limb-pose.mjs';
 import {TAKE_LIMIT_MS} from './limb-take.mjs';
+import {leftHandTargets, rightHandTargets} from './hand-pose.mjs';
 
 export const MAX_TAKE_FILE_BYTES = 2 * 1024 * 1024;
 
@@ -9,6 +10,7 @@ const sources = ['camera', 'video', 'pictures'];
 const armSides = ['leftArm', 'rightArm'];
 const jointRanges = {
   rightArm: {r_shoulder_abd: [0, 180], r_shoulder_flex: [0, 0], r_elbow_flex: [0, 145]},
+  rightHand: rightHandTargets,
   leftLeg: {knee_ext_L: [-135, 0]},
   rightLeg: {knee_ext_R: [-135, 0]},
   leftHip: {[hipJoints.leftHip]: hipLimits},
@@ -56,8 +58,18 @@ function direction(value, fromSide) {
 }
 
 function readPose(value, parts, counts, fromSide) {
-  fields(value, [], ['leftArm', 'joints'], 'pose');
+  fields(value, [], ['leftArm', 'leftHand', 'joints'], 'pose');
   const pose = {};
+  if (Object.hasOwn(value, 'leftHand')) {
+    requireValue(parts.includes('leftHand'), 'left fingers selection');
+    fields(value.leftHand, Object.keys(leftHandTargets), [], 'left finger angles');
+    pose.leftHand = {};
+    for (const [joint, [min, max]] of Object.entries(leftHandTargets)) {
+      requireValue(inRange(value.leftHand[joint], min, max), 'left finger angle');
+      pose.leftHand[joint] = value.leftHand[joint];
+    }
+    counts[parts.indexOf('leftHand')]++;
+  }
   if (Object.hasOwn(value, 'leftArm')) {
     requireValue(parts.includes('leftArm'), 'left arm selection');
     const arm = value.leftArm;
@@ -82,7 +94,7 @@ function readPose(value, parts, counts, fromSide) {
     }
     requireValue(Object.keys(pose.joints).length > 0, 'pose joints');
   }
-  requireValue(pose.leftArm || pose.joints, 'empty pose');
+  requireValue(pose.leftArm || pose.leftHand || pose.joints, 'empty pose');
   return pose;
 }
 

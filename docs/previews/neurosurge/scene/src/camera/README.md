@@ -92,3 +92,7 @@ ffmpeg -nostdin -threads 2 -ss TIME -i SOURCE.mp4 -an -vf 'crop=576:576:X:0,scal
 | Butt-Kickers | 16.0 | 288 | kick-1600.jpg |
 
 To try these frames in the preview, open **C**, choose **Timed pictures** under **Source**, and assign each frame a time before choosing **Track pictures**. Watch the selected limb and the other side as you replay the take. The published footage shows which part moves in the picture. Independent three-dimensional joint angles require additional measurements.
+
+## Finger tracking
+
+The recorder and Movement mirror load the pinned MediaPipe hand model after a finger choice receives its first input frame. The CPU worker estimates hand-relative 3D landmarks from the image and uses them for finger bend targets. The point forecast uses the independent body tracker in Movement mirror. A missing optional hand model leaves the current video and body tracker usable. The file `vendor/hand_landmarker.task` is distributed under Apache 2.0. [MediaPipe Hand Landmarker documentation](https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker) · [Model card and licence](https://huggingface.co/litert-community/MediaPipe-HandLandmarker-Full).

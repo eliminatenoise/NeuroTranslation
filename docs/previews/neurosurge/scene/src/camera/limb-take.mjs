@@ -1,6 +1,7 @@
 // Each take lives in this page's memory. The camera passes only its selected
 // rig pose, frame time and projected arm points after side and tracking checks.
 import {ankleJoints, hipJoints, sideArmParts, sideLegs, supportsPartialTake, trackingChoices} from './limb-pose.mjs';
+import {leftHandTargets, rightHandTargets} from './hand-pose.mjs';
 
 export const TAKE_LIMIT_MS = 8000;
 
@@ -14,6 +15,7 @@ export function pictureOffsetMs(time, startTime) {
 
 const jointKeys = {
   rightArm: ['r_shoulder_abd', 'r_shoulder_flex', 'r_elbow_flex'],
+  rightHand: Object.keys(rightHandTargets),
   rightLeg: ['knee_ext_R'],
   leftLeg: ['knee_ext_L'],
   rightHip: [hipJoints.rightHip],
@@ -21,9 +23,11 @@ const jointKeys = {
   leftAnkle: [ankleJoints.leftAnkle],
   rightAnkle: [ankleJoints.rightAnkle]
 };
+const leftFingerKeys = Object.keys(leftHandTargets);
 
 function canUseLimb(result, limb) {
   if (!result) return false;
+  if (limb === 'leftHand') return leftFingerKeys.every(key => Number.isFinite(result.leftHand?.[key]));
   if (limb === 'leftArm') {
     const arm = result.leftArm;
     const direction = v => Array.isArray(v) && v.length === 3 && v.every(Number.isFinite);
@@ -40,6 +44,10 @@ function hasEnoughSamples(limb, counts) {
 // Keep only the game channels named here if the worker gains new outputs.
 function copyLimb(result, limb, pose) {
   if (!canUseLimb(result, limb)) return false;
+  if (limb === 'leftHand') {
+    pose.leftHand = Object.fromEntries(leftFingerKeys.map(key => [key, result.leftHand[key]]));
+    return true;
+  }
   if (limb === 'leftArm') {
     const arm = result.leftArm;
     pose.leftArm = {bearing: [...arm.bearing], upper: [...arm.upper], elbowDeg: arm.elbowDeg};
@@ -55,7 +63,7 @@ export function poseForFollow(result, selection) {
   if (!result || !choice) return null;
   const pose = {};
   for (const limb of choice.parts) copyLimb(result, limb, pose);
-  return pose.leftArm || pose.joints ? pose : null;
+  return pose.leftArm || pose.leftHand || pose.joints ? pose : null;
 }
 
 // One timestamp covers both sides of a camera frame. A missing side contributes
@@ -100,7 +108,7 @@ export function createTakeTimeline(limb, start, {includeEnd = false} = {}) {
         if (copy.leftArm || copy.rightArm) frame.armGeometry = copy;
       }
     }
-    if (pose.leftArm || pose.joints) {
+    if (pose.leftArm || pose.leftHand || pose.joints) {
       frames.push(frame);
       count++;
     } else if (frames.at(-1)?.pose) {
@@ -178,6 +186,12 @@ export function betweenPictures(from, to, fraction, limb) {
       const next = to.joints?.[key];
       result.joints[key] = Number.isFinite(next) ? blend(value, next) : value;
     }
+  }
+  if (from.leftHand) {
+    result.leftHand = Object.fromEntries(Object.entries(from.leftHand).map(([key, value]) => {
+      const next = to.leftHand?.[key];
+      return [key, Number.isFinite(next) ? blend(value, next) : value];
+    }));
   }
   if (from.leftArm) {
     const a = from.leftArm, b = to.leftArm;

@@ -77,7 +77,7 @@ export function captureSource({kind,video,clip,stills,followKnees=false,getLimb,
       const frame=await createImageBitmap(buffer);
       if(closed || gen!==epoch) {frame.close();return;}
       const result=await callWorker({type:'frame',frame,timestamp:++clock,limb,selection:gen,
-        jointPoints,limbPaths,independent:true,...(captureWrists ? {captureWrists:true} : {})},[frame]);
+        jointPoints,limbPaths,independent:true,waitForHand:kind==='stills',...(captureWrists ? {captureWrists:true} : {})},[frame]);
       if (closed || gen!==epoch) return;
       if (kind==='camera' && performance.now()-grabbed>350) {
         reset('Camera processing lag. Waiting for a current frame.');return;
@@ -87,6 +87,7 @@ export function captureSource({kind,video,clip,stills,followKnees=false,getLimb,
         silence=setTimeout(()=>{if(!closed)reset('Camera frame gap. Waiting for fresh observations.');},400);
       }
       onFrame({id:sequence,t,xy:result.xy,pose:result.result,w:buffer.width,h:buffer.height,bitmap:buffer,
+        ...(result.handStatus ? {handStatus:result.handStatus} : {}),
         ...(getBodyRevision ? {bodyRevision} : {}),
         ...(getForecastRevision ? {forecastRevision} : {}),
         ...(limbPaths ? {limbPaths:result.limbPaths} : {}),
