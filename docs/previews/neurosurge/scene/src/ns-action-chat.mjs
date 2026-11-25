@@ -2,7 +2,7 @@ import {parseGoal} from './joint/landmark.mjs';
 import {bindGripPreview, gripCommand} from './grip-preview/panel.mjs';
 import {bindWristForecast} from './camera/wrist-forecast/panel.mjs';
 import {bindReachStudy} from './camera/reach-study/panel.mjs';
-import {sideArmParts, trackingChoices} from './camera/limb-pose.mjs';
+import {sideArmParts, sideLegs, trackingChoices} from './camera/limb-pose.mjs';
 import {comparisonNames} from './camera/take-comparison.mjs';
 import {bindNamedTakes, namedReplayRequest, namedIntervalRequest, resolveTakeInterval, resolveTakeSequence, takeSeconds} from './camera/named-takes.mjs';
 import { actionFor } from './word-motion/inference.mjs';
@@ -531,8 +531,9 @@ export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume
       }
       const requested = take[1] || take[2];
       const selection = /^whole[ -]body$/.test(requested) ? 'both arms and knees' : requested;
-      const arm = Object.hasOwn(sideArmParts, latest.limb) ? trackingChoices[sideArmParts[latest.limb]].name.toLowerCase() : null;
-      if (selection && selection !== name.toLowerCase() && selection !== arm) {
+      const sideArm = Object.hasOwn(sideArmParts, latest.limb) ? trackingChoices[sideArmParts[latest.limb]].name.toLowerCase() : null;
+      const sideLeg = Object.hasOwn(sideLegs, latest.limb) ? name.toLowerCase().replace(/ from the side$/, '') : null;
+      if (selection && selection !== name.toLowerCase() && selection !== sideArm && selection !== sideLeg) {
         message.textContent = 'The finished take in this tab is “' + name + '”. Choose that take or return to the game. ' +
           takeRecorderInstruction;
         field.focus();

@@ -1,11 +1,11 @@
-import {hipJoints} from './limb-pose.mjs';
+import {ankleJoints, hipJoints} from './limb-pose.mjs';
 
 // Capture selections share a comparable bend target only on the same joint and side.
 const joints = [
   {label: 'Left elbow', limbs: ['leftArm', 'leftArmSide', 'bothArms', 'armsAndKnees'], read: pose => pose?.leftArm?.elbowDeg},
   {label: 'Right elbow', limbs: ['rightArm', 'rightArmSide', 'bothArms', 'armsAndKnees'], read: pose => pose?.joints?.r_elbow_flex},
-  {label: 'Left knee', limbs: ['leftLeg', 'bothKnees', 'armsAndKnees'], read: pose => pose?.joints?.knee_ext_L, sign: -1},
-  {label: 'Right knee', limbs: ['rightLeg', 'bothKnees', 'armsAndKnees'], read: pose => pose?.joints?.knee_ext_R, sign: -1}
+  {label: 'Left knee', limbs: ['leftLeg', 'leftLegSide', 'bothKnees', 'armsAndKnees'], read: pose => pose?.joints?.knee_ext_L, sign: -1},
+  {label: 'Right knee', limbs: ['rightLeg', 'rightLegSide', 'bothKnees', 'armsAndKnees'], read: pose => pose?.joints?.knee_ext_R, sign: -1}
 ];
 export function commonBends(first, second) {
   return joints.filter(joint => joint.limbs.includes(first.limb) && joint.limbs.includes(second.limb));
@@ -36,10 +36,14 @@ const lifts = [
     description: 'Left upper-arm angle in the side view. Down is 0°. Positive angles point towards the front. Overhead is both −180° and 180°. Speed follows the shorter turn across that point.'},
   {label: 'Right shoulder forward lift', limbs: ['rightArmSide'], read: pose => pose?.joints?.r_shoulder_flex,
     description: 'Right shoulder target from the side view. Down is 0°. Positive angles point towards the front.'},
-  {label: 'Left hip lift', limbs: ['leftHip'], read: pose => pose?.joints?.[hipJoints.leftHip],
+  {label: 'Left hip lift', limbs: ['leftHip', 'leftLegSide'], read: pose => pose?.joints?.[hipJoints.leftHip],
     description: 'Left thigh angle in the side view. A thigh pointing down along the torso is 0°. Positive angles move it towards the front of the body.'},
-  {label: 'Right hip lift', limbs: ['rightHip'], read: pose => pose?.joints?.[hipJoints.rightHip],
-    description: 'Right thigh angle in the side view. A thigh pointing down along the torso is 0°. Positive angles move it towards the front of the body.'}
+  {label: 'Right hip lift', limbs: ['rightHip', 'rightLegSide'], read: pose => pose?.joints?.[hipJoints.rightHip],
+    description: 'Right thigh angle in the side view. A thigh pointing down along the torso is 0°. Positive angles move it towards the front of the body.'},
+  {label: 'Left ankle bend', limbs: ['leftLegSide'], read: pose => pose?.joints?.[ankleJoints.leftAnkle],
+    description: 'Left ankle target from the side view. Positive values raise the toes towards the shin.'},
+  {label: 'Right ankle bend', limbs: ['rightLegSide'], read: pose => pose?.joints?.[ankleJoints.rightAnkle],
+    description: 'Right ankle target from the side view. Positive values raise the toes towards the shin.'}
 ];
 
 export function commonAngles(first, second) {

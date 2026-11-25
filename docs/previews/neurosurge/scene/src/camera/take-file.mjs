@@ -1,4 +1,4 @@
-import {hipJoints, hipLimits, sideArmParts, sideArmFlexLimits, trackingChoices} from './limb-pose.mjs';
+import {ankleJoints, ankleLimits, hipJoints, hipLimits, sideArmParts, sideArmFlexLimits, supportsPartialTake, trackingChoices} from './limb-pose.mjs';
 import {TAKE_LIMIT_MS} from './limb-take.mjs';
 
 export const MAX_TAKE_FILE_BYTES = 2 * 1024 * 1024;
@@ -12,7 +12,9 @@ const jointRanges = {
   leftLeg: {knee_ext_L: [-135, 0]},
   rightLeg: {knee_ext_R: [-135, 0]},
   leftHip: {[hipJoints.leftHip]: hipLimits},
-  rightHip: {[hipJoints.rightHip]: hipLimits}
+  rightHip: {[hipJoints.rightHip]: hipLimits},
+  leftAnkle: {[ankleJoints.leftAnkle]: ankleLimits},
+  rightAnkle: {[ankleJoints.rightAnkle]: ankleLimits}
 };
 const sideArmRanges = {r_shoulder_abd: [0, 0], r_shoulder_flex: sideArmFlexLimits, r_elbow_flex: [0, 145]};
 // Both capture paths resize their tracking bitmap to at most 640 pixels per side.
@@ -156,7 +158,7 @@ function readTake(value) {
     }
   }
   const enough = count => count >= 2;
-  requireValue(limb === 'armsAndKnees' ? counts.some(enough) : counts.every(enough), 'sample support');
+  requireValue(supportsPartialTake(limb) ? counts.some(enough) : counts.every(enough), 'sample support');
   requireValue(value.count === count && Array.isArray(value.counts) && value.counts.length === counts.length &&
     counts.every((n, i) => value.counts[i] === n), 'sample counts');
   const take = {limb, frames, count, counts, duration, name};

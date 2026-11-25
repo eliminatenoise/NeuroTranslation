@@ -1,6 +1,6 @@
 // Each take lives in this page's memory. The camera passes only its selected
 // rig pose, frame time and projected arm points after side and tracking checks.
-import {hipJoints, sideArmParts, trackingChoices} from './limb-pose.mjs';
+import {ankleJoints, hipJoints, sideArmParts, sideLegs, supportsPartialTake, trackingChoices} from './limb-pose.mjs';
 
 export const TAKE_LIMIT_MS = 8000;
 
@@ -17,7 +17,9 @@ const jointKeys = {
   rightLeg: ['knee_ext_R'],
   leftLeg: ['knee_ext_L'],
   rightHip: [hipJoints.rightHip],
-  leftHip: [hipJoints.leftHip]
+  leftHip: [hipJoints.leftHip],
+  leftAnkle: [ankleJoints.leftAnkle],
+  rightAnkle: [ankleJoints.rightAnkle]
 };
 
 function canUseLimb(result, limb) {
@@ -32,7 +34,7 @@ function canUseLimb(result, limb) {
 
 function hasEnoughSamples(limb, counts) {
   const enough = count => count >= 2;
-  return limb === 'armsAndKnees' ? counts.some(enough) : counts.every(enough);
+  return supportsPartialTake(limb) ? counts.some(enough) : counts.every(enough);
 }
 
 // Keep only the game channels named here if the worker gains new outputs.
@@ -244,7 +246,7 @@ export function createLimbTake({panel, emit, onFinish, onReplay, returnFocus}) {
       saved = {...take, name};
       info.textContent = summary();
     } else {
-      const reason = limb === 'armsAndKnees' ? 'Show at least one limb for two frames to keep a take.' : trackingChoices[limb].parts.length > 1 ? 'A paired take needs two visible samples from each side.' : 'Too few visible samples for a take.';
+      const reason = supportsPartialTake(limb) ? 'Show one tracked part for two frames to keep a take.' : trackingChoices[limb].parts.length > 1 ? 'A paired take needs two visible samples from each side.' : 'Too few visible samples for a take.';
       info.textContent = reason + (saved ? ' Previous take available.' : '');
     }
     refresh();
@@ -255,6 +257,10 @@ export function createLimbTake({panel, emit, onFinish, onReplay, returnFocus}) {
       saved.source === 'video' ? 'Video take · ' + saved.name : saved.name;
     if (saved.limb === 'armsAndKnees') {
       const counts = ['left arm', 'right arm', 'left knee', 'right knee'].map((side, i) => saved.counts[i] + ' ' + side);
+      return title + ' · ' + seconds(saved.duration) + ' · ' + saved.count + ' pose samples (' + counts.join(', ') + ').';
+    }
+    if (Object.hasOwn(sideLegs, saved.limb)) {
+      const counts = ['hip', 'knee', 'ankle'].map((joint, i) => saved.counts[i] + ' ' + joint);
       return title + ' · ' + seconds(saved.duration) + ' · ' + saved.count + ' pose samples (' + counts.join(', ') + ').';
     }
     const sides = saved.counts.length === 2 ? ' (' + saved.counts[0] + ' left, ' + saved.counts[1] + ' right)' : '';
@@ -369,7 +375,7 @@ export function createLimbTake({panel, emit, onFinish, onReplay, returnFocus}) {
       live = active;
       limb = side;
       name = displayName;
-      hint.textContent = recordHint + (limb === 'armsAndKnees' ? ' Only visible movements enter the take.' : trackingChoices[limb].parts.length > 1 ? ' Show each side at least twice.' : '');
+      hint.textContent = recordHint + (supportsPartialTake(limb) ? ' Only visible movements enter the take.' : trackingChoices[limb].parts.length > 1 ? ' Show each side at least twice.' : '');
       refresh();
     },
     clear() {

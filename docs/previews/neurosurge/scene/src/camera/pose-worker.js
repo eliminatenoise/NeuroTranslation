@@ -31,7 +31,8 @@ self.onmessage = async ({ data }) => {
         const pose = runningMode === 'IMAGE' ? detector.detect(frame) : detector.detectForVideo(frame, timestamp);
         const points = pose.landmarks[0];
         const result = poseForSelection(points, frame.width, frame.height, limb,
-          side => limbVisible(frame, points, side, checkBothFeet && (side === 'leftLeg' || side === 'rightLeg')));
+          (side, allowPlainThigh) => limbVisible(frame, points, side,
+            checkBothFeet && (side === 'leftLeg' || side === 'rightLeg'), allowPlainThigh));
         const message = {type: 'pose', result, selection, timestamp};
         if (data.limbPaths === true && result) message.limbPaths = observedLimbPaths(points, result);
         if (data.jointPoints === true) {

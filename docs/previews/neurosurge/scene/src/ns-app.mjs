@@ -12619,6 +12619,8 @@ export function start(params = {}) {
         if (cameraJoints && manualJoints) {
           cameraJoints = {...cameraJoints};
           for (const id of manualJoints) delete cameraJoints[id];
+          if (manualLimb === 'leftLeg') delete cameraJoints.ankle_dorsi_L;
+          if (manualLimb === 'rightLeg') delete cameraJoints.ankle_dorsi_R;
           if (!Object.keys(cameraJoints).length) cameraJoints = null;
         }
         const cameraArm = live && manualLimb !== 'leftArm' ? trackedLeftArm : null;

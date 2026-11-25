@@ -1,7 +1,7 @@
 // Opt-in control. No camera, worker, or model asset is opened during construction.
 import {createLimbTake, createTakeTimeline, createVideoTakeWindow, pictureOffsetMs, TAKE_LIMIT_MS} from './camera/limb-take.mjs';
 import {createCameraPreview} from './camera/preview.mjs';
-import {calibratedPose, hipJoints, kneeJoints, trackedLimbs, trackingChoices as choices} from './camera/limb-pose.mjs';
+import {ankleNames, calibratedPose, hipJoints, kneeJoints, sideLegs, trackedLimbs, trackingChoices as choices} from './camera/limb-pose.mjs';
 import {captureSource, readKeyframes, MAX_LOCAL_VIDEO_BYTES} from './joint/media.mjs';
 const MAX_FRAME_AGE_MS = 1200;
 const FRAME_TIMEOUT_MS = 15000;
@@ -10,17 +10,18 @@ const MIN_FRAME_INTERVAL_MS = 50;
 const WAITING_FOR_VIDEO = 'Camera on. Waiting for video.';
 const WAITING_FOR_PERMISSION = 'Allow video to move the avatar. Video stays on this device.';
 const WAITING_FOR_CLIP_FRAME = 'Waiting for a current video frame.';
+const partName = limb => ankleNames[limb] ?? choices[limb].name;
 function createTrackingFeedback(document) {
   const list = document.createElement('ul');
   list.setAttribute('role', 'list');
   list.setAttribute('aria-label', 'Tracking by limb');
   list.style.cssText = 'margin:6px 0;padding:0;list-style:none';
   const items = new Map();
-  for (const limb of [...choices.armsAndKnees.parts, ...Object.keys(hipJoints)]) {
+  for (const limb of [...choices.armsAndKnees.parts, ...Object.keys(hipJoints), ...Object.keys(ankleNames)]) {
     const row = document.createElement('li');
     const name = document.createElement('span');
     const state = document.createElement('strong');
-    name.textContent = choices[limb].name;
+    name.textContent = partName(limb);
     state.style.textAlign = 'right';
     row.style.cssText = 'display:none;justify-content:space-between;gap:5px;padding:2px 0;border-bottom:1px solid #40586a';
     row.append(name, state);
@@ -118,9 +119,9 @@ export function createCameraCapture({ onPose, onArmPose, returnFocus = () => {},
   }
   function trackingMessage(result) {
     if (!result) return framing();
-    if (limb === 'armsAndKnees') {
-      const visible = trackedLimbs(result).map(side => choices[side].name.toLowerCase());
-      if (visible.length < 4) return 'Following ' + visible.join(', ') + '. ' + framing();
+    if (limb === 'armsAndKnees' || Object.hasOwn(sideLegs, limb)) {
+      const visible = trackedLimbs(result).map(side => partName(side).toLowerCase());
+      if (visible.length < choices[limb].parts.length) return 'Following ' + visible.join(', ') + '. ' + framing();
     }
     if (limb === 'bothArms' && !result.leftArm) return 'Right arm tracking. Bring your left elbow and wrist into view.';
     if (limb === 'bothArms' && !result.joints) return 'Left arm tracking. Bring your right elbow and wrist into view.';

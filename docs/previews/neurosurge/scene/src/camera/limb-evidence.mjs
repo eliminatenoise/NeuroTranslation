@@ -6,28 +6,39 @@ export function createLimbEvidence() {
   const rows = 24;
   const canvas = new OffscreenCanvas(4 * tile, tile + rows);
   const ctx = canvas.getContext('2d', {willReadFrequently: true});
-  return function limbVisible(frame, points, limb, checkFoot = false) {
+  return function limbVisible(frame, points, limb, checkFoot = false, allowPlainThigh = false) {
     if (!ctx) return false;
     const hip = limb === 'leftHip' || limb === 'rightHip';
     const leg = limb === 'leftLeg' || limb === 'rightLeg';
-    const lowerBody = hip || leg;
-    const offset = limb === 'leftHip' || limb === 'leftLeg' || limb === 'leftArm' ? 0 : 1;
-    const middle = points[(hip ? 23 : leg ? 25 : 13) + offset];
-    const end = points[(hip ? 25 : leg ? 27 : 15) + offset];
+    const ankle = limb === 'leftAnkle' || limb === 'rightAnkle';
+    const lowerBody = hip || leg || ankle;
+    const offset = limb.startsWith('left') ? 0 : 1;
+    const middle = points[(ankle ? 29 : hip ? 23 : leg ? 25 : 13) + offset];
+    const end = points[(ankle ? 31 : hip ? 25 : leg ? 27 : 15) + offset];
     const span = Math.max(tile, Math.round(Math.min(frame.width, frame.height) * 0.025));
     const patches = [middle, {x: (middle.x + end.x) / 2, y: (middle.y + end.y) / 2}, end];
     // With two legs in view the tracker can land one ankle on the other leg or
     // just above a cover. Require visible detail at the foot it associates with that shin.
-    if (checkFoot) {
+    if (ankle) {
+      patches.push(points[27 + offset]);
+    } else if (checkFoot) {
       const foot = points[31 + offset];
       if (!foot || !Number.isFinite(foot.x) || !Number.isFinite(foot.y) || !(foot.visibility >= 0.65)) return false;
       patches.push(foot);
     }
     for (const [i, point] of patches.entries()) {
       const x = point.x * frame.width, y = point.y * frame.height;
-      const sx = Math.round(x - span / 2), sy = Math.round(y - span / 2);
-      if (sx < 0 || sy < 0 || sx + span > frame.width || sy + span > frame.height) return false;
-      ctx.drawImage(frame, sx, sy, span, span, i * tile, 0, tile, tile);
+      let size = span;
+      if (hip && allowPlainThigh && i === 0) {
+        // Textureless clothing can still show a visible hip outline. Use
+        // the thigh's image length to size the patch, rather than zoom.
+        const thigh = Math.hypot((end.x-middle.x)*frame.width, (end.y-middle.y)*frame.height);
+        const inFrame = 2 * Math.min(x, y, frame.width - x, frame.height - y) - 2;
+        size = Math.max(span, Math.floor(Math.min(0.4 * thigh, inFrame)));
+      }
+      const sx = Math.round(x - size / 2), sy = Math.round(y - size / 2);
+      if (sx < 0 || sy < 0 || sx + size > frame.width || sy + size > frame.height) return false;
+      ctx.drawImage(frame, sx, sy, size, size, i * tile, 0, tile, tile);
     }
     // Also inspect a thumbnail. When the lower frame is covered the detector
     // sometimes places a plausible-looking ankle immediately ABOVE the cover.
@@ -45,7 +56,7 @@ export function createLimbEvidence() {
           max = Math.max(max, luma);
         }
       }
-      if (max - min < 8) return false;
+      if (max - min < 8 && !(hip && allowPlainThigh && i === 1)) return false;
     }
     if (!lowerBody) return true;
     // Reject a contiguous flat lower band at least a quarter of the image

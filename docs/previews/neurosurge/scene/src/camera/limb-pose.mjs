@@ -6,11 +6,20 @@ const chains = {
   rightLeg: [23, 24, 26, 28],
   leftLeg: [24, 23, 25, 27],
   rightHip: [11, 12, 24, 26],
-  leftHip: [12, 11, 23, 25]
+  leftHip: [12, 11, 23, 25],
+  leftAnkle: [25, 27, 29, 31],
+  rightAnkle: [26, 28, 30, 32]
 };
 
 export const hipJoints = Object.freeze({leftHip: 'hip_flex_L', rightHip: 'hip_flex_R'});
 export const hipLimits = Object.freeze([-30, 120]);
+export const ankleJoints = Object.freeze({leftAnkle: 'ankle_dorsi_L', rightAnkle: 'ankle_dorsi_R'});
+export const ankleLimits = Object.freeze([-50, 20]);
+export const ankleNames = Object.freeze({leftAnkle: 'Left ankle', rightAnkle: 'Right ankle'});
+export const sideLegs = Object.freeze({
+  leftLegSide: Object.freeze(['leftHip', 'leftLeg', 'leftAnkle']),
+  rightLegSide: Object.freeze(['rightHip', 'rightLeg', 'rightAnkle'])
+});
 export const sideArmParts = Object.freeze({leftArmSide: 'leftArm', rightArmSide: 'rightArm'});
 export const sideArmFlexLimits = Object.freeze([-60, 180]);
 
@@ -31,6 +40,8 @@ export const trackingChoices = {
   rightLeg: {name: 'Right knee', frame: 'Turn partway sideways. Show shoulders, hips, your right knee and ankle.', motion: 'Right knee', parts: ['rightLeg']},
   leftHip: {name: 'Left hip lift', frame: 'Turn sideways. Keep your face, shoulders and left thigh in view.', motion: 'Left hip lift', parts: ['leftHip']},
   rightHip: {name: 'Right hip lift', frame: 'Turn sideways. Keep your face, shoulders and right thigh in view.', motion: 'Right hip lift', parts: ['rightHip']},
+  leftLegSide: {name: 'Left leg from the side', frame: 'Turn sideways with your left leg nearer the lens. Keep your face, hips, knee, heel and toes in view.', motion: 'Left hip, knee and ankle', parts: sideLegs.leftLegSide},
+  rightLegSide: {name: 'Right leg from the side', frame: 'Turn sideways with your right leg nearer the lens. Keep your face, hips, knee, heel and toes in view.', motion: 'Right hip, knee and ankle', parts: sideLegs.rightLegSide},
   armsAndKnees: {name: 'Both arms and knees', frame: 'Keep shoulders, elbows, wrists, hips and feet in view. Bend each knee where the lens can see it.', motion: 'Both arms and knees', parts: ['leftArm', 'rightArm', 'leftLeg', 'rightLeg']},
   bothKnees: {name: 'Both knees', frame: 'Turn partway sideways. Keep your shoulders, hips, knees and feet in view. Show a clear bend on each side.', motion: 'Both knees', parts: ['leftLeg', 'rightLeg']}
 };
@@ -44,13 +55,22 @@ export function trackedLimbs(pose) {
     Number.isFinite(joints?.knee_ext_L) && 'leftLeg',
     Number.isFinite(joints?.knee_ext_R) && 'rightLeg',
     Number.isFinite(joints?.[hipJoints.leftHip]) && 'leftHip',
-    Number.isFinite(joints?.[hipJoints.rightHip]) && 'rightHip'
+    Number.isFinite(joints?.[hipJoints.rightHip]) && 'rightHip',
+    Number.isFinite(joints?.[ankleJoints.leftAnkle]) && 'leftAnkle',
+    Number.isFinite(joints?.[ankleJoints.rightAnkle]) && 'rightAnkle'
   ].filter(Boolean);
 }
 
 // A short loss releases the knee while retaining its starting calibration.
 const BRIEF_KNEE_GAP_MS = 600;
-export const kneeJoints = {leftLeg: ['knee_ext_L'], rightLeg: ['knee_ext_R'], bothKnees: ['knee_ext_L', 'knee_ext_R'], armsAndKnees: ['knee_ext_L', 'knee_ext_R']};
+export const kneeJoints = {
+  leftLeg: ['knee_ext_L'], rightLeg: ['knee_ext_R'], leftLegSide: ['knee_ext_L'], rightLegSide: ['knee_ext_R'],
+  bothKnees: ['knee_ext_L', 'knee_ext_R'], armsAndKnees: ['knee_ext_L', 'knee_ext_R']
+};
+
+export function supportsPartialTake(selection) {
+  return selection === 'armsAndKnees' || Object.hasOwn(sideLegs, selection);
+}
 
 // Each knee must show two consecutive bends in the picture before its straight
 // projection can drive the game. A missing frame withholds only that knee.
@@ -65,6 +85,12 @@ export function calibratedPose(stored, selection, result, now) {
     const rightArm = ['r_shoulder_abd', 'r_shoulder_flex', 'r_elbow_flex'];
     if (rightArm.every(key => Number.isFinite(result?.joints?.[key]))) {
       for (const key of rightArm) joints[key] = result.joints[key];
+    }
+  }
+  if (Object.hasOwn(sideLegs, selection)) {
+    const [hip, , ankle] = sideLegs[selection];
+    for (const key of [hipJoints[hip], ankleJoints[ankle]]) {
+      if (Number.isFinite(result?.joints?.[key])) joints[key] = result.joints[key];
     }
   }
   for (const key of keys) {
@@ -96,6 +122,12 @@ export function observedLimbPaths(points, pose) {
 
 function between(a, b) { return [b[0] - a[0], b[1] - a[1]]; }
 function dot(a, b) { return a[0] * b[0] + a[1] * b[1]; }
+function signedTurn(a, b, forward) {
+  return Math.atan2(forward * (a[1] * b[0] - a[0] * b[1]), dot(a, b)) * 180 / Math.PI;
+}
+function boundedAngle(angle, [lower, upper]) {
+  return Math.max(lower, Math.min(upper, angle)) || 0;
+}
 function visible(p) {
   return p && Number.isFinite(p.x) && p.x >= 0 && p.x <= 1 &&
     Number.isFinite(p.y) && p.y >= 0 && p.y <= 1 &&
@@ -134,8 +166,46 @@ function projectedHip(points, width, height, limb) {
   if (Math.hypot(...thigh) < 0.5 * torsoLength) return null;
   const along = dot(thigh, down) / torsoLength;
   const lift = Math.atan2(direction * dot(thigh, across), along) * 180 / Math.PI;
-  const [lower, upper] = hipLimits;
-  return {joints: {[hipJoints[limb]]: Math.max(lower, Math.min(upper, lift)) || 0}};
+  return {joints: {[hipJoints[limb]]: boundedAngle(lift, hipLimits)}};
+}
+
+function projectedSideLeg(points, width, height, selection, hasDetail) {
+  if (!points || !Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) return null;
+  const [hipPart, kneePart, footPart] = sideLegs[selection];
+  const [otherShoulder, shoulder, hip, knee] = chains[hipPart];
+  const [, ankle, heel, toe] = chains[footPart];
+  const view = sideView(points, width, height, otherShoulder, shoulder, hip === 23 ? 24 : 23, hip);
+  if (!view || !visible(points[knee])) return null;
+  const {xy, down, torsoLength, direction} = view;
+  const thigh = between(xy(hip), xy(knee));
+  if (Math.hypot(...thigh) < 0.5 * torsoLength) return null;
+  let kneeBend, ankleBend;
+  if (visible(points[ankle])) {
+    const shin = between(xy(knee), xy(ankle));
+    if (Math.hypot(...shin) >= 0.5 * torsoLength) {
+      const kneeTurn = signedTurn(thigh, shin, direction);
+      if (kneeTurn <= 15 && hasDetail(kneePart)) {
+        kneeBend = boundedAngle(kneeTurn, [-135, 0]);
+      }
+      if (visible(points[heel]) && visible(points[toe])) {
+        const foot = between(xy(heel), xy(toe));
+        if (Math.hypot(...foot) >= 0.18 * torsoLength && hasDetail(footPart)) {
+          // When the shin is vertical, a forward-pointing foot is 90 degrees from it.
+          const turn = signedTurn(shin, foot, direction);
+          ankleBend = boundedAngle((turn + 450) % 360 - 180, ankleLimits);
+        }
+      }
+    }
+  }
+  const joints = {};
+  // A visible shin supports the knee identity even when the middle of the
+  // thigh has no texture. The hip and knee patches must still show detail.
+  if (hasDetail(hipPart, kneeBend !== undefined)) {
+    joints[hipJoints[hipPart]] = boundedAngle(signedTurn(down, thigh, direction), hipLimits);
+  }
+  if (kneeBend !== undefined) joints[kneeJoints[kneePart][0]] = kneeBend;
+  if (ankleBend !== undefined) joints[ankleJoints[footPart]] = ankleBend;
+  return Object.keys(joints).length ? {joints} : null;
 }
 
 function projectedSideArm(points, width, height, limb) {
@@ -228,6 +298,7 @@ function shinsOverlap(points, width, height) {
 
 // Build a fresh packet from just the limbs visible in this frame.
 export function poseForSelection(points, width, height, selection, hasDetail) {
+  if (Object.hasOwn(sideLegs, selection)) return projectedSideLeg(points, width, height, selection, hasDetail);
   function read(limb) {
     const result = poseForLimb(points, width, height, limb);
     return result && hasDetail(Object.hasOwn(sideArmParts, limb) ? sideArmParts[limb] : limb) ? result : null;
