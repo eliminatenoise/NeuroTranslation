@@ -7,3 +7,5 @@ Start with the invented example or open a compatible local JSON history. For the
 The study forecasts how far points on each muscle will be spread around their centre in an ultrasound image 300 milliseconds later. It compares complete ultrasound history, a recent gap and all ultrasound withheld. With the recent history available, a simple linear forecast led the comparison on five validation participants.
 
 [Simple study](SIMPLE.md) · [Technical study](TECHNICAL.md) · [Python launch instructions](START.md) · [Input format](INPUT.md)
+
+[Study of changes in point spread over 300 ms](change-forecast/).

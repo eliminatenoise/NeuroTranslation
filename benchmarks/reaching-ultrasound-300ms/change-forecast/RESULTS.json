@@ -1,0 +1,689 @@
+{
+  "study": "Reaching change forecasts",
+  "source_doi": "10.6084/m9.figshare.31030252.v1",
+  "target": "Change in projected point spread between the newest pre-issue ultrasound sample and the measured target about 300 ms after issue.",
+  "units": "millimetres",
+  "people": 24,
+  "people_per_tissue": [
+    23,
+    23
+  ],
+  "tissue_order": [
+    "triceps",
+    "brachialis"
+  ],
+  "forecast_times": 29664,
+  "scored_observations": [
+    28334,
+    28461
+  ],
+  "folds": 6,
+  "fit_people_per_fold": 20,
+  "methods": {
+    "zero_change": {
+      "per_tissue_mae": [
+        0.14885049693726798,
+        0.1290130037744024
+      ],
+      "mean_mae": 0.1389317503558352
+    },
+    "absolute_motion_ridge": {
+      "per_tissue_mae": [
+        0.14789193725481545,
+        0.127438091875303
+      ],
+      "mean_mae": 0.13766501456505922
+    },
+    "absolute_motion_emg_ridge": {
+      "per_tissue_mae": [
+        0.14935213355256188,
+        0.1279359765799447
+      ],
+      "mean_mae": 0.1386440550662533
+    },
+    "relative_motion_ridge": {
+      "per_tissue_mae": [
+        0.1553948440034282,
+        0.125642442659211
+      ],
+      "mean_mae": 0.1405186433313196
+    },
+    "relative_motion_emg_ridge": {
+      "per_tissue_mae": [
+        0.15615009978558958,
+        0.12592241233815576
+      ],
+      "mean_mae": 0.14103625606187267
+    },
+    "absolute_motion_emg_u800_p1": {
+      "per_tissue_mae": [
+        0.15823312057247438,
+        0.13126256580003776
+      ],
+      "mean_mae": 0.14474784318625605
+    },
+    "absolute_motion_emg_u800_p3": {
+      "per_tissue_mae": [
+        0.1639928265615617,
+        0.13613003440374447
+      ],
+      "mean_mae": 0.15006143048265308
+    },
+    "absolute_motion_emg_u800_p5": {
+      "per_tissue_mae": [
+        0.16979248680220216,
+        0.14121101837461172
+      ],
+      "mean_mae": 0.15550175258840693
+    },
+    "absolute_motion_emg_u800_p8": {
+      "per_tissue_mae": [
+        0.17608367642111833,
+        0.14567297944175409
+      ],
+      "mean_mae": 0.1608783279314362
+    },
+    "absolute_motion_emg_u1600_p1": {
+      "per_tissue_mae": [
+        0.1737730943262506,
+        0.1378043359692457
+      ],
+      "mean_mae": 0.15578871514774817
+    },
+    "absolute_motion_emg_u1600_p3": {
+      "per_tissue_mae": [
+        0.17679560738112207,
+        0.14367532025577293
+      ],
+      "mean_mae": 0.1602354638184475
+    },
+    "absolute_motion_emg_u1600_p5": {
+      "per_tissue_mae": [
+        0.18433230701352835,
+        0.14867781865537652
+      ],
+      "mean_mae": 0.16650506283445243
+    },
+    "absolute_motion_emg_u1600_p8": {
+      "per_tissue_mae": [
+        0.1915800099428783,
+        0.1533143766111335
+      ],
+      "mean_mae": 0.17244719327700592
+    },
+    "absolute_motion_emg_u3200_p1": {
+      "per_tissue_mae": [
+        0.1841946046582466,
+        0.1439855527002012
+      ],
+      "mean_mae": 0.1640900786792239
+    },
+    "absolute_motion_emg_u3200_p3": {
+      "per_tissue_mae": [
+        0.1824973458812019,
+        0.14757681652589383
+      ],
+      "mean_mae": 0.16503708120354788
+    },
+    "absolute_motion_emg_u3200_p5": {
+      "per_tissue_mae": [
+        0.18791119795583022,
+        0.15276801430568773
+      ],
+      "mean_mae": 0.170339606130759
+    },
+    "absolute_motion_emg_u3200_p8": {
+      "per_tissue_mae": [
+        0.19395444414163737,
+        0.15739021937034944
+      ],
+      "mean_mae": 0.1756723317559934
+    },
+    "relative_motion_u800_p1": {
+      "per_tissue_mae": [
+        0.15176614219193024,
+        0.1318715770658617
+      ],
+      "mean_mae": 0.14181885962889595
+    },
+    "relative_motion_u800_p3": {
+      "per_tissue_mae": [
+        0.15972307795836654,
+        0.13560344579559852
+      ],
+      "mean_mae": 0.14766326187698253
+    },
+    "relative_motion_u800_p5": {
+      "per_tissue_mae": [
+        0.16522944079679575,
+        0.13607759733296332
+      ],
+      "mean_mae": 0.15065351906487953
+    },
+    "relative_motion_u800_p8": {
+      "per_tissue_mae": [
+        0.17019691175612076,
+        0.13670728559352904
+      ],
+      "mean_mae": 0.1534520986748249
+    },
+    "relative_motion_u1600_p1": {
+      "per_tissue_mae": [
+        0.1571829923897334,
+        0.13429687986269348
+      ],
+      "mean_mae": 0.14573993612621344
+    },
+    "relative_motion_u1600_p3": {
+      "per_tissue_mae": [
+        0.16426030696097887,
+        0.13629842936566178
+      ],
+      "mean_mae": 0.15027936816332033
+    },
+    "relative_motion_u1600_p5": {
+      "per_tissue_mae": [
+        0.1691653197717167,
+        0.13743625522448816
+      ],
+      "mean_mae": 0.15330078749810244
+    },
+    "relative_motion_u1600_p8": {
+      "per_tissue_mae": [
+        0.17357060255110607,
+        0.13884545967061288
+      ],
+      "mean_mae": 0.15620803111085946
+    },
+    "relative_motion_u3200_p1": {
+      "per_tissue_mae": [
+        0.16019968831083292,
+        0.1387567866009487
+      ],
+      "mean_mae": 0.1494782374558908
+    },
+    "relative_motion_u3200_p3": {
+      "per_tissue_mae": [
+        0.1639855223771216,
+        0.13886653346046196
+      ],
+      "mean_mae": 0.15142602791879178
+    },
+    "relative_motion_u3200_p5": {
+      "per_tissue_mae": [
+        0.16737880559684498,
+        0.14024450604245384
+      ],
+      "mean_mae": 0.1538116558196494
+    },
+    "relative_motion_u3200_p8": {
+      "per_tissue_mae": [
+        0.17124369673774,
+        0.1419126583026448
+      ],
+      "mean_mae": 0.1565781775201924
+    },
+    "relative_motion_emg_u800_p1": {
+      "per_tissue_mae": [
+        0.15155581326478426,
+        0.13319940796175037
+      ],
+      "mean_mae": 0.1423776106132673
+    },
+    "relative_motion_emg_u800_p3": {
+      "per_tissue_mae": [
+        0.15727989162261352,
+        0.13649122577681147
+      ],
+      "mean_mae": 0.14688555869971248
+    },
+    "relative_motion_emg_u800_p5": {
+      "per_tissue_mae": [
+        0.1630699766863176,
+        0.13860797071779576
+      ],
+      "mean_mae": 0.15083897370205668
+    },
+    "relative_motion_emg_u800_p8": {
+      "per_tissue_mae": [
+        0.16925589316332437,
+        0.14133492089014998
+      ],
+      "mean_mae": 0.15529540702673716
+    },
+    "relative_motion_emg_u1600_p1": {
+      "per_tissue_mae": [
+        0.1567643164004655,
+        0.13112800077480127
+      ],
+      "mean_mae": 0.14394615858763338
+    },
+    "relative_motion_emg_u1600_p3": {
+      "per_tissue_mae": [
+        0.16027061433073114,
+        0.13259814016148047
+      ],
+      "mean_mae": 0.1464343772461058
+    },
+    "relative_motion_emg_u1600_p5": {
+      "per_tissue_mae": [
+        0.16676186809377344,
+        0.13589357250705322
+      ],
+      "mean_mae": 0.15132772030041333
+    },
+    "relative_motion_emg_u1600_p8": {
+      "per_tissue_mae": [
+        0.17455359398412115,
+        0.14047148600719758
+      ],
+      "mean_mae": 0.15751253999565937
+    },
+    "relative_motion_emg_u3200_p1": {
+      "per_tissue_mae": [
+        0.16477057206832577,
+        0.13836476385505336
+      ],
+      "mean_mae": 0.15156766796168958
+    },
+    "relative_motion_emg_u3200_p3": {
+      "per_tissue_mae": [
+        0.1627153852069795,
+        0.13311271604600333
+      ],
+      "mean_mae": 0.14791405062649143
+    },
+    "relative_motion_emg_u3200_p5": {
+      "per_tissue_mae": [
+        0.1672692766183041,
+        0.13402007169647315
+      ],
+      "mean_mae": 0.15064467415738864
+    },
+    "relative_motion_emg_u3200_p8": {
+      "per_tissue_mae": [
+        0.17349758560981957,
+        0.13668869622795887
+      ],
+      "mean_mae": 0.1550931409188892
+    },
+    "relative_shared_motion_u800_p1": {
+      "per_tissue_mae": [
+        0.15294019168091164,
+        0.13269485833165634
+      ],
+      "mean_mae": 0.14281752500628397
+    },
+    "relative_shared_motion_u800_p3": {
+      "per_tissue_mae": [
+        0.15835690501144328,
+        0.13608693727116306
+      ],
+      "mean_mae": 0.14722192114130317
+    },
+    "relative_shared_motion_u800_p5": {
+      "per_tissue_mae": [
+        0.16402275581487133,
+        0.1367440029759004
+      ],
+      "mean_mae": 0.15038337939538587
+    },
+    "relative_shared_motion_u800_p8": {
+      "per_tissue_mae": [
+        0.17000184212328565,
+        0.13789865164915643
+      ],
+      "mean_mae": 0.15395024688622105
+    },
+    "relative_shared_motion_u1600_p1": {
+      "per_tissue_mae": [
+        0.15829511807093066,
+        0.13490209891338772
+      ],
+      "mean_mae": 0.1465986084921592
+    },
+    "relative_shared_motion_u1600_p3": {
+      "per_tissue_mae": [
+        0.1627356569498186,
+        0.13701628625595327
+      ],
+      "mean_mae": 0.14987597160288593
+    },
+    "relative_shared_motion_u1600_p5": {
+      "per_tissue_mae": [
+        0.16986680435359272,
+        0.13748082436299608
+      ],
+      "mean_mae": 0.1536738143582944
+    },
+    "relative_shared_motion_u1600_p8": {
+      "per_tissue_mae": [
+        0.17760944938042975,
+        0.13825746889572302
+      ],
+      "mean_mae": 0.15793345913807638
+    },
+    "relative_shared_motion_u3200_p1": {
+      "per_tissue_mae": [
+        0.16017724227524707,
+        0.1400217648262921
+      ],
+      "mean_mae": 0.1500995035507696
+    },
+    "relative_shared_motion_u3200_p3": {
+      "per_tissue_mae": [
+        0.16274560262040447,
+        0.1406457350868878
+      ],
+      "mean_mae": 0.15169566885364613
+    },
+    "relative_shared_motion_u3200_p5": {
+      "per_tissue_mae": [
+        0.16758053694321698,
+        0.14112323574149613
+      ],
+      "mean_mae": 0.15435188634235655
+    },
+    "relative_shared_motion_u3200_p8": {
+      "per_tissue_mae": [
+        0.17361801448567388,
+        0.1421916899493086
+      ],
+      "mean_mae": 0.15790485221749123
+    },
+    "relative_shared_motion_emg_u800_p1": {
+      "per_tissue_mae": [
+        0.15223781287184943,
+        0.13344396677847795
+      ],
+      "mean_mae": 0.14284088982516369
+    },
+    "relative_shared_motion_emg_u800_p3": {
+      "per_tissue_mae": [
+        0.1570821165280459,
+        0.13693639255841109
+      ],
+      "mean_mae": 0.1470092545432285
+    },
+    "relative_shared_motion_emg_u800_p5": {
+      "per_tissue_mae": [
+        0.16203879072231644,
+        0.13759207727099262
+      ],
+      "mean_mae": 0.14981543399665453
+    },
+    "relative_shared_motion_emg_u800_p8": {
+      "per_tissue_mae": [
+        0.16727548920635057,
+        0.13850331378965874
+      ],
+      "mean_mae": 0.15288940149800467
+    },
+    "relative_shared_motion_emg_u1600_p1": {
+      "per_tissue_mae": [
+        0.15688609085728872,
+        0.13297214907359778
+      ],
+      "mean_mae": 0.14492911996544325
+    },
+    "relative_shared_motion_emg_u1600_p3": {
+      "per_tissue_mae": [
+        0.16112845840468487,
+        0.13487613354995878
+      ],
+      "mean_mae": 0.14800229597732184
+    },
+    "relative_shared_motion_emg_u1600_p5": {
+      "per_tissue_mae": [
+        0.16740013148605282,
+        0.13527201384329182
+      ],
+      "mean_mae": 0.1513360726646723
+    },
+    "relative_shared_motion_emg_u1600_p8": {
+      "per_tissue_mae": [
+        0.17420673719970953,
+        0.1361596726182049
+      ],
+      "mean_mae": 0.1551832049089572
+    },
+    "relative_shared_motion_emg_u3200_p1": {
+      "per_tissue_mae": [
+        0.1581605138771651,
+        0.1373382201606637
+      ],
+      "mean_mae": 0.1477493670189144
+    },
+    "relative_shared_motion_emg_u3200_p3": {
+      "per_tissue_mae": [
+        0.16206921593040352,
+        0.13773549085698122
+      ],
+      "mean_mae": 0.14990235339369237
+    },
+    "relative_shared_motion_emg_u3200_p5": {
+      "per_tissue_mae": [
+        0.1674372955314416,
+        0.13848623727655093
+      ],
+      "mean_mae": 0.15296176640399628
+    },
+    "relative_shared_motion_emg_u3200_p8": {
+      "per_tissue_mae": [
+        0.17403593430806624,
+        0.13965801890535381
+      ],
+      "mean_mae": 0.15684697660671004
+    },
+    "assisted_ultrasound_trend": {
+      "per_tissue_mae": [
+        0.15707621507043262,
+        0.13006165654593202
+      ],
+      "mean_mae": 0.1435689358081823
+    }
+  },
+  "paired_comparisons": {
+    "relative_motion_emg_u1600_p3_minus_relative_motion_u1600_p3": [
+      {
+        "people": 23,
+        "people_better": 15,
+        "mean_candidate_minus_control_mm": -0.003989692630247693,
+        "paired_person_interval_mm": [
+          -0.009696507337738866,
+          0.0018579938607544066
+        ]
+      },
+      {
+        "people": 23,
+        "people_better": 13,
+        "mean_candidate_minus_control_mm": -0.003700289204181252,
+        "paired_person_interval_mm": [
+          -0.01237817835326856,
+          0.005922347622901724
+        ]
+      }
+    ],
+    "relative_motion_emg_u1600_p3_minus_absolute_motion_emg_u1600_p3": [
+      {
+        "people": 23,
+        "people_better": 16,
+        "mean_candidate_minus_control_mm": -0.016524993050390922,
+        "paired_person_interval_mm": [
+          -0.026310019700028997,
+          -0.006518013729688032
+        ]
+      },
+      {
+        "people": 23,
+        "people_better": 18,
+        "mean_candidate_minus_control_mm": -0.011077180094292396,
+        "paired_person_interval_mm": [
+          -0.018425745196234626,
+          -0.003204011892542525
+        ]
+      }
+    ],
+    "relative_shared_motion_emg_u1600_p3_minus_relative_motion_emg_u1600_p3": [
+      {
+        "people": 23,
+        "people_better": 12,
+        "mean_candidate_minus_control_mm": 0.0008578440739537135,
+        "paired_person_interval_mm": [
+          -0.0031155392690778677,
+          0.004830243515159447
+        ]
+      },
+      {
+        "people": 23,
+        "people_better": 9,
+        "mean_candidate_minus_control_mm": 0.002277993388478238,
+        "paired_person_interval_mm": [
+          -0.006342537462064655,
+          0.009681601937545595
+        ]
+      }
+    ],
+    "relative_shared_motion_u1600_p3_minus_relative_motion_u1600_p3": [
+      {
+        "people": 23,
+        "people_better": 15,
+        "mean_candidate_minus_control_mm": -0.0015246500111602659,
+        "paired_person_interval_mm": [
+          -0.0036798611095250535,
+          0.0007595746877264367
+        ]
+      },
+      {
+        "people": 23,
+        "people_better": 11,
+        "mean_candidate_minus_control_mm": 0.0007178568902914985,
+        "paired_person_interval_mm": [
+          -0.0009141477585711408,
+          0.0024780608110996187
+        ]
+      }
+    ],
+    "relative_motion_emg_u1600_p3_minus_relative_motion_emg_ridge": [
+      {
+        "people": 23,
+        "people_better": 10,
+        "mean_candidate_minus_control_mm": 0.0041205145451415496,
+        "paired_person_interval_mm": [
+          -0.005894845284655001,
+          0.014072798162258232
+        ]
+      },
+      {
+        "people": 23,
+        "people_better": 9,
+        "mean_candidate_minus_control_mm": 0.00667572782332471,
+        "paired_person_interval_mm": [
+          -0.0009833609326543554,
+          0.0160159663630708
+        ]
+      }
+    ],
+    "relative_motion_emg_ridge_minus_zero_change": [
+      {
+        "people": 23,
+        "people_better": 10,
+        "mean_candidate_minus_control_mm": 0.00729960284832162,
+        "paired_person_interval_mm": [
+          -0.002423799896933803,
+          0.018294685999278786
+        ]
+      },
+      {
+        "people": 23,
+        "people_better": 12,
+        "mean_candidate_minus_control_mm": -0.00309059143624659,
+        "paired_person_interval_mm": [
+          -0.013331232383141935,
+          0.006582123151244987
+        ]
+      }
+    ],
+    "relative_motion_u800_p1_minus_absolute_motion_ridge": [
+      {
+        "people": 23,
+        "people_better": 8,
+        "mean_candidate_minus_control_mm": 0.003874204937114803,
+        "paired_person_interval_mm": [
+          -0.002161821991933488,
+          0.009582623332389734
+        ]
+      },
+      {
+        "people": 23,
+        "people_better": 7,
+        "mean_candidate_minus_control_mm": 0.004433485190558668,
+        "paired_person_interval_mm": [
+          -0.0019804471871298465,
+          0.012023832157064332
+        ]
+      }
+    ],
+    "relative_motion_u800_p1_minus_zero_change": [
+      {
+        "people": 23,
+        "people_better": 11,
+        "mean_candidate_minus_control_mm": 0.0029156452546622545,
+        "paired_person_interval_mm": [
+          -0.004582874638114717,
+          0.010581873164577893
+        ]
+      },
+      {
+        "people": 23,
+        "people_better": 10,
+        "mean_candidate_minus_control_mm": 0.0028585732914593043,
+        "paired_person_interval_mm": [
+          -0.007561081432161562,
+          0.013992465133252197
+        ]
+      }
+    ],
+    "absolute_motion_ridge_minus_zero_change": [
+      {
+        "people": 23,
+        "people_better": 13,
+        "mean_candidate_minus_control_mm": -0.0009585596824525487,
+        "paired_person_interval_mm": [
+          -0.00570968358104229,
+          0.003936267910247499
+        ]
+      },
+      {
+        "people": 23,
+        "people_better": 13,
+        "mean_candidate_minus_control_mm": -0.001574911899099364,
+        "paired_person_interval_mm": [
+          -0.008905647232894196,
+          0.005880203755487647
+        ]
+      }
+    ]
+  },
+  "learned_schedule": {
+    "u800": {
+      "p1": 0.14181885962889595,
+      "p3": 0.14766326187698253,
+      "p5": 0.15065351906487953,
+      "p8": 0.1534520986748249
+    },
+    "u1600": {
+      "p1": 0.14573993612621344,
+      "p3": 0.15027936816332033,
+      "p5": 0.15330078749810244,
+      "p8": 0.15620803111085946
+    },
+    "u3200": {
+      "p1": 0.1494782374558908,
+      "p3": 0.15142602791879178,
+      "p5": 0.1538116558196494,
+      "p8": 0.1565781775201924
+    }
+  },
+  "limits": "Comparisons selected within the original fitting group. Reserved final participants remain unopened."
+}
