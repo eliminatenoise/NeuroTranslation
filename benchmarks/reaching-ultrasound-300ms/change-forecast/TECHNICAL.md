@@ -16,4 +16,4 @@ The ridge fit uses a squared-weight penalty of 0.01. The learned comparison uses
 
 At 1,600 updates and three passes with motion and EMG, relative coordinates reduce mean error from 0.1602 to 0.1464 mm. The mean relative-minus-original errors are −0.0165 mm for triceps and −0.0111 mm for brachialis. The corresponding EMG-versus-motion comparisons within relative coordinates have intervals spanning zero.
 
-The nominations use the same internal folds being reported. The methods are locked for the six reserved participants, with results from those recordings still unavailable. Dataset by Pallarès-López et al., licensed CC BY 4.0. [Data descriptor](https://doi.org/10.1038/s41597-026-07019-3) · [Recordings](https://doi.org/10.6084/m9.figshare.31030252.v1)
+The nominations use the same internal folds being reported. The methods were locked before the six reserved recordings were retrieved. The [reserved comparison](reserved/) reports that test. Dataset by Pallarès-López et al., licensed CC BY 4.0. [Data descriptor](https://doi.org/10.1038/s41597-026-07019-3) · [Recordings](https://doi.org/10.6084/m9.figshare.31030252.v1)

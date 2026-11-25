@@ -1,0 +1,133 @@
+{
+  "study": "Reserved reaching-change comparison",
+  "source_doi": "10.6084/m9.figshare.31030252.v1",
+  "data_license": "CC BY 4.0",
+  "target": "Signed change in projected point spread, newest pre-issue ultrasound in the last 20 ms to the measured target near 300 ms after issue.",
+  "units": "millimetres",
+  "people": 6,
+  "people_by_tissue": [
+    6,
+    6
+  ],
+  "forecast_times": 7503,
+  "observations_by_tissue": [
+    7503,
+    7503
+  ],
+  "tissue_order": [
+    "triceps",
+    "brachialis"
+  ],
+  "mean_absolute_error": {
+    "zero_change": [
+      0.17659188472694462,
+      0.14185056463801535
+    ],
+    "absolute_motion_ridge": [
+      0.17377973521371137,
+      0.13179383067972886
+    ],
+    "relative_motion_u800_p1": [
+      0.17866015561373527,
+      0.1358077319570195
+    ],
+    "absolute_motion_emg_u1600_p3": [
+      0.2061906217455202,
+      0.15354095466476197
+    ],
+    "relative_motion_emg_u1600_p3": [
+      0.1997679445928369,
+      0.1652781833208988
+    ]
+  },
+  "equal_tissue_mean": {
+    "zero_change": 0.15922122468247998,
+    "absolute_motion_ridge": 0.1527867829467201,
+    "relative_motion_u800_p1": 0.1572339437853774,
+    "absolute_motion_emg_u1600_p3": 0.1798657882051411,
+    "relative_motion_emg_u1600_p3": 0.18252306395686785
+  },
+  "paired_comparisons": {
+    "relative_motion_u800_p1_minus_zero_change": [
+      {
+        "people": 6,
+        "with_lower_error": 4,
+        "candidate_minus_control_mm": 0.0020682708867907004,
+        "paired_interval_mm": [
+          -0.009976974422173497,
+          0.01874686856029997
+        ]
+      },
+      {
+        "people": 6,
+        "with_lower_error": 4,
+        "candidate_minus_control_mm": -0.006042832680995873,
+        "paired_interval_mm": [
+          -0.0170588016731472,
+          0.006584576317318816
+        ]
+      }
+    ],
+    "relative_motion_u800_p1_minus_absolute_motion_ridge": [
+      {
+        "people": 6,
+        "with_lower_error": 3,
+        "candidate_minus_control_mm": 0.004880420400023938,
+        "paired_interval_mm": [
+          -0.008346162538700403,
+          0.020413318347429526
+        ]
+      },
+      {
+        "people": 6,
+        "with_lower_error": 1,
+        "candidate_minus_control_mm": 0.004013901277290628,
+        "paired_interval_mm": [
+          -0.004489474556992714,
+          0.011143771328007451
+        ]
+      }
+    ],
+    "absolute_motion_ridge_minus_zero_change": [
+      {
+        "people": 6,
+        "with_lower_error": 4,
+        "candidate_minus_control_mm": -0.0028121495132332384,
+        "paired_interval_mm": [
+          -0.008355370070698481,
+          0.0019529731951966334
+        ]
+      },
+      {
+        "people": 6,
+        "with_lower_error": 4,
+        "candidate_minus_control_mm": -0.010056733958286502,
+        "paired_interval_mm": [
+          -0.023682327583437194,
+          0.0035749481874387096
+        ]
+      }
+    ],
+    "relative_motion_emg_u1600_p3_minus_absolute_motion_emg_u1600_p3": [
+      {
+        "people": 6,
+        "with_lower_error": 4,
+        "candidate_minus_control_mm": -0.006422677152683275,
+        "paired_interval_mm": [
+          -0.018299795161053987,
+          0.008114971456597897
+        ]
+      },
+      {
+        "people": 6,
+        "with_lower_error": 2,
+        "candidate_minus_control_mm": 0.011737228656136847,
+        "paired_interval_mm": [
+          0.0008881958047729487,
+          0.021981189296945595
+        ]
+      }
+    ]
+  },
+  "scope": "The fixed comparison on six people reserved before training. Same study and reaching task."
+}

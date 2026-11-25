@@ -26,6 +26,6 @@ The linear forecast had a small lead over predicting no change. For each muscle,
 
 For the recurrent models that used motion and EMG, we also compared original shoulder-relative positions with positions measured from where each marker started within its recent history. Measuring from each marker's starting position lowered the average error from 0.1602 to 0.1464 mm in the matched comparison. Adding EMG to that relative motion helped on average at the matched settings, with enough variation across people that the uncertainty intervals included zero.
 
-These same internal groups supplied the model choices. A separate test on the six reserved people is still needed. Their recordings remain unopened. The target is a change in tracked point spread in a two-dimensional image. The recordings are by Pallarès-López and colleagues and carry a CC BY 4.0 licence. [Original study](https://doi.org/10.1038/s41597-026-07019-3) · [Recordings](https://doi.org/10.6084/m9.figshare.31030252.v1)
+These same internal groups supplied the model choices. The [reserved comparison](reserved/) reports the test on the six people set aside before training. The target is a change in tracked point spread in a two-dimensional image. The recordings are by Pallarès-López and colleagues and carry a CC BY 4.0 licence. [Original study](https://doi.org/10.1038/s41597-026-07019-3) · [Recordings](https://doi.org/10.6084/m9.figshare.31030252.v1)
 
 [Download the aggregate scores](RESULTS.json)
