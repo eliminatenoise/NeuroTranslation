@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="description" content="Compare five NeuroTranslate methods for predicting how the spacing of tracked points inside two arm muscles will change.">
+  <title>Muscle change forecast | NeuroTranslate</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <script src="model-data.js" defer></script>
+  <script src="forecast.js" defer></script>
+  <script src="example-data.js" defer></script>
+  <script src="page.js" defer></script>
+</head>
+<body>
+  <header>
+    <nav class="frame" aria-label="Project links">
+      <a class="project" href="https://github.com/eliminatenoise/NeuroTranslation">NeuroTranslation</a>
+      <div class="nav-links">
+        <a href="https://eliminatenoise.github.io/NeuroTranslation/reaching-ultrasound-300ms/">Reaching spread forecast</a>
+        <a href="https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/movement-mirror.html">Movement mirror</a>
+        <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/docs/reaching-ultrasound-300ms/reaching-change-browser-offline.zip">Offline download</a>
+      </div>
+    </nav>
+  </header>
+  <main class="frame">
+    <h1>Muscle change forecast</h1>
+    <p class="intro">Compare five ways to predict how the spacing of tracked points inside two arm muscles changes over the next 300 milliseconds.</p>
+    <noscript><p>Turn on JavaScript to run the forecasts here.</p></noscript>
+    <div class="workspace">
+      <section class="card inputs" aria-labelledby="inputs-heading">
+        <h2 id="inputs-heading">Inputs</h2>
+        <p id="source" class="source">Invented example</p>
+        <label for="file">Open a local JSON file</label>
+        <input id="file" type="file" accept=".json,application/json" aria-describedby="file-help">
+        <p id="file-help" class="hint">Use ten rows covering the 200 milliseconds before the forecast starts. Files stay on your device.</p>
+        <label for="example-number" id="example-number-label" hidden>History to show</label>
+        <select id="example-number" hidden></select>
+        <div class="actions">
+          <button id="reset" type="button">Restore example</button>
+          <a href="example.json" download>Example file</a>
+        </div>
+        <p id="status" class="hint" role="status"></p>
+      </section>
+      <section class="card forecast" aria-labelledby="forecast-heading">
+        <h2 id="forecast-heading">Predicted change in 300 ms</h2>
+        <p>A negative value means the points are predicted to move closer together. A positive value means they move farther apart.</p>
+        <table class="forecast-table">
+          <thead>
+            <tr><th scope="col">Method</th><th scope="col">Triceps<br><span>mm</span></th><th scope="col">Brachialis<br><span>mm</span></th></tr>
+          </thead>
+          <tbody id="forecast-values"></tbody>
+        </table>
+        <p id="scale" class="hint" hidden></p>
+      </section>
+    </div>
+    <section class="card evidence" aria-labelledby="results-heading">
+      <h2 id="results-heading">Error on reserved recordings</h2>
+      <p>We set aside six people from the reaching study before training. Every method made 7,503 forecasts for each muscle. The table gives the average size of each error in millimetres, giving each person equal weight. The example above has no measured outcome.</p>
+      <div class="results-layout">
+        <table>
+          <thead>
+            <tr><th scope="col">Method</th><th scope="col">Triceps<br><span>mm</span></th><th scope="col">Brachialis<br><span>mm</span></th></tr>
+          </thead>
+          <tbody id="scored-values"></tbody>
+        </table>
+        <div>
+          <p>The linear motion forecast had the lowest average error. The uncertainty range for its advantage over predicting no change includes a tie for each muscle. The recordings cover one reaching task. Live sensor timing and accuracy on another task still need separate tests.</p>
+          <ul class="links">
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/reaching-ultrasound-300ms/change-forecast/reserved/SIMPLE.md">Simple report</a></li>
+            <li><a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/reaching-ultrasound-300ms/change-forecast/reserved/TECHNICAL.md">Technical report</a></li>
+            <li><a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/benchmarks/reaching-ultrasound-300ms/change-forecast/reserved/NeuroTranslate-Reaching-Change.zip">Download the Python model</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="directions" aria-labelledby="directions-heading">
+      <h2 id="directions-heading">Readings for your own forecast</h2>
+      <p>Use arm positions and voltage readings from the same 20 ms window. The model reads four positions relative to the shoulder and voltages measured at the triceps, biceps and palm. It can also open a 26-column history from the spread forecast. It uses the first 22 values in each row.</p>
+      <details>
+        <summary>Input fields and methods</summary>
+        <p>Put ten rows under <code>history</code>, oldest first. A row covers 20 milliseconds. Use the same number of values in every row. Values 1–12 are the latest x, y and z positions for the hand, forearm, elbow and upper arm, in millimetres. Values 13–16 indicate whether each of those positions was measured.</p>
+        <p>Values 17–19 give the root mean square voltage, in millivolts, from the triceps, biceps and palm. Values 20–22 indicate whether each voltage was measured. An availability value of 1 means measured. Use 0 in both the availability and reading fields when a reading is missing.</p>
+        <p>The linear forecast fits a weighted sum of recent positions. The three learned forecasts repeat an internal update once or three times for each of two saved fits, then average their results. The rows marked “motion from start” subtract the first available position for each marker before calculating the forecast.</p>
+      </details>
+      <p>The forecast uses stored or invented histories. It leaves your camera off.</p>
+    </section>
+  </main>
+</body>
+</html>
