@@ -163,7 +163,7 @@ export function createVideoTakeWindow(limb, maxGapMs, {pictureTimes = false} = {
 export function betweenPictures(from, to, fraction, limb) {
   const blend = (a, b) => a + (b - a) * fraction;
   // Front-view takes have lateral directions. Side-view takes use depth.
-  const horizontal = limb === 'leftArmSide' ? 2 : 0;
+  const horizontal = sideArmParts[limb] === 'leftArm' ? 2 : 0;
   function direction(a, b) {
     const start = Math.atan2(a[1], a[horizontal]);
     const delta = Math.atan2(a[horizontal] * b[1] - a[1] * b[horizontal],
@@ -260,7 +260,8 @@ export function createLimbTake({panel, emit, onFinish, onReplay, returnFocus}) {
       return title + ' · ' + seconds(saved.duration) + ' · ' + saved.count + ' pose samples (' + counts.join(', ') + ').';
     }
     if (Object.hasOwn(sideLegs, saved.limb)) {
-      const counts = ['hip', 'knee', 'ankle'].map((joint, i) => saved.counts[i] + ' ' + joint);
+      const parts = Object.hasOwn(sideArmParts, saved.limb) ? ['arm', 'hip', 'knee', 'ankle'] : ['hip', 'knee', 'ankle'];
+      const counts = parts.map((part, i) => saved.counts[i] + ' ' + part);
       return title + ' · ' + seconds(saved.duration) + ' · ' + saved.count + ' pose samples (' + counts.join(', ') + ').';
     }
     const sides = saved.counts.length === 2 ? ' (' + saved.counts[0] + ' left, ' + saved.counts[1] + ' right)' : '';

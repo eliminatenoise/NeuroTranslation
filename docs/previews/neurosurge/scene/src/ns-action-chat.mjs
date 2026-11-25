@@ -531,7 +531,8 @@ export function bindActionChat({ dialog, trigger, canvas, canOpen, pause, resume
       }
       const requested = take[1] || take[2];
       const selection = /^whole[ -]body$/.test(requested) ? 'both arms and knees' : requested;
-      const sideArm = Object.hasOwn(sideArmParts, latest.limb) ? trackingChoices[sideArmParts[latest.limb]].name.toLowerCase() : null;
+      const armOnly = Object.hasOwn(sideArmParts, latest.limb) && !Object.hasOwn(sideLegs, latest.limb);
+      const sideArm = armOnly ? trackingChoices[sideArmParts[latest.limb]].name.toLowerCase() : null;
       const sideLeg = Object.hasOwn(sideLegs, latest.limb) ? name.toLowerCase().replace(/ from the side$/, '') : null;
       if (selection && selection !== name.toLowerCase() && selection !== sideArm && selection !== sideLeg) {
         message.textContent = 'The finished take in this tab is “' + name + '”. Choose that take or return to the game. ' +

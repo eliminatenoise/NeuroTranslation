@@ -88,6 +88,18 @@ The game keeps each estimate within the virtual joint’s range. The hip target 
 
 The recorder estimates how the leg bends in the picture. We checked 630 individual side-view pictures of six people walking. This check estimated angles one picture at a time, before the game’s two-picture check to start following the knee. The tracker found all three angles in 150 pictures and an ankle angle in 203. In those 203 pictures, the average ankle error was 7.04° with the tracker and 15.69° with the ankle held at 0°, where the foot and shin form a right angle. Each person counted equally. The comparison used markers measured by separate equipment and placed over the same picture. We kept the reference angles within the same limits as the game. The foot marker was at the ball of the foot behind the second toe. These measurements cover the near left leg. We checked that the right leg moved in Full and Lite using other recordings. [Walking recordings and marker setup](https://doi.org/10.7910/DVN/GRRROM)
 
+### Follow an arm and leg together
+
+Press **C** to open the motion recorder. Under **Follow**, choose **Left arm and leg from the side** or **Right arm and leg from the side**. Turn the side you chose toward the lens. Step back until your face, shoulder, elbow, wrist, hips, knee and whole foot fit in the picture. For a live view, choose **Start camera** and allow access when the browser asks. Use a similar view for a recorded video or timed pictures.
+
+Try lifting the arm forward as you bend the knee. The game looks for your shoulder and elbow, hip, knee and ankle. To start following the knee, hold it bent at least 45°, about half a right angle, until that bend appears in two usable pictures in a row. An arm or another joint can keep moving while the knee waits. If a part gets hidden, the game releases that part. If the knee stays hidden for about six tenths of a second, show it bent in two pictures again. The game estimates the angles it can see in the flat picture.
+
+You can also choose the same side under **Body follows** in **Movement forecast**. The game can follow your left arm and leg while it forecasts where a different visible point will appear 0.12 seconds later. Choose **Forecast only** to take back manual control of the body and keep watching that forecast.
+
+To keep a take, show the same part clearly in at least two pictures. In the live recorder, select **Record take**, then **Finish take**. Use **Save video take** for a video or **Track pictures**, then **Save picture take** for timed pictures. In **Movement forecast**, select **Save take** for any of the three sources. A take can include just the arm or some of the joints. Counts show which parts contributed. Press **F** and enter **replay my take**. You can also name the selection, as in **replay my left arm and leg take**. The body replays with the camera off. When you compare two takes, the game can compare whichever angles both takes include.
+
+We tested both side choices on the same 37 recorded pictures. The combined mode could use the arm and at least one joint of the leg in 34 left-side cases and four right-side cases. The estimates exactly matched the separate arm and leg modes. The point forecast received the same coordinates as before across all 74 side selections. These checks used recorded images and compare how the game uses its tracker.
+
 ## Follow a video file
 
 1. Press **C** and select **Recorded video** under **Source**. Under **Follow**, select the arm, knee, hip or side-view leg you want the virtual body to follow. You can also select both arms, both knees, or both pairs.

@@ -16,11 +16,20 @@ export const hipLimits = Object.freeze([-30, 120]);
 export const ankleJoints = Object.freeze({leftAnkle: 'ankle_dorsi_L', rightAnkle: 'ankle_dorsi_R'});
 export const ankleLimits = Object.freeze([-50, 20]);
 export const ankleNames = Object.freeze({leftAnkle: 'Left ankle', rightAnkle: 'Right ankle'});
+const leftSideLeg = Object.freeze(['leftHip', 'leftLeg', 'leftAnkle']);
+const rightSideLeg = Object.freeze(['rightHip', 'rightLeg', 'rightAnkle']);
 export const sideLegs = Object.freeze({
-  leftLegSide: Object.freeze(['leftHip', 'leftLeg', 'leftAnkle']),
-  rightLegSide: Object.freeze(['rightHip', 'rightLeg', 'rightAnkle'])
+  leftLegSide: leftSideLeg,
+  rightLegSide: rightSideLeg,
+  leftArmLegSide: leftSideLeg,
+  rightArmLegSide: rightSideLeg
 });
-export const sideArmParts = Object.freeze({leftArmSide: 'leftArm', rightArmSide: 'rightArm'});
+export const sideArmParts = Object.freeze({
+  leftArmSide: 'leftArm',
+  rightArmSide: 'rightArm',
+  leftArmLegSide: 'leftArm',
+  rightArmLegSide: 'rightArm'
+});
 export const sideArmFlexLimits = Object.freeze([-60, 180]);
 
 export function sideArmAngle(forward, down) {
@@ -42,6 +51,8 @@ export const trackingChoices = {
   rightHip: {name: 'Right hip lift', frame: 'Turn sideways. Keep your face, shoulders and right thigh in view.', motion: 'Right hip lift', parts: ['rightHip']},
   leftLegSide: {name: 'Left leg from the side', frame: 'Turn sideways with your left leg nearer the lens. Keep your face, hips, knee, heel and toes in view.', motion: 'Left hip, knee and ankle', parts: sideLegs.leftLegSide},
   rightLegSide: {name: 'Right leg from the side', frame: 'Turn sideways with your right leg nearer the lens. Keep your face, hips, knee, heel and toes in view.', motion: 'Right hip, knee and ankle', parts: sideLegs.rightLegSide},
+  leftArmLegSide: {name: 'Left arm and leg from the side', frame: 'Turn your left side toward the lens. Step back until your face, elbow, wrist, knee and foot fit in the picture.', motion: 'Left arm, hip, knee and ankle', parts: ['leftArm', ...leftSideLeg]},
+  rightArmLegSide: {name: 'Right arm and leg from the side', frame: 'Turn your right side toward the lens. Step back until your face, elbow, wrist, knee and foot fit in the picture.', motion: 'Right arm, hip, knee and ankle', parts: ['rightArm', ...rightSideLeg]},
   armsAndKnees: {name: 'Both arms and knees', frame: 'Keep shoulders, elbows, wrists, hips and feet in view. Bend each knee where the lens can see it.', motion: 'Both arms and knees', parts: ['leftArm', 'rightArm', 'leftLeg', 'rightLeg']},
   bothKnees: {name: 'Both knees', frame: 'Turn partway sideways. Keep your shoulders, hips, knees and feet in view. Show a clear bend on each side.', motion: 'Both knees', parts: ['leftLeg', 'rightLeg']}
 };
@@ -65,6 +76,7 @@ export function trackedLimbs(pose) {
 const BRIEF_KNEE_GAP_MS = 600;
 export const kneeJoints = {
   leftLeg: ['knee_ext_L'], rightLeg: ['knee_ext_R'], leftLegSide: ['knee_ext_L'], rightLegSide: ['knee_ext_R'],
+  leftArmLegSide: ['knee_ext_L'], rightArmLegSide: ['knee_ext_R'],
   bothKnees: ['knee_ext_L', 'knee_ext_R'], armsAndKnees: ['knee_ext_L', 'knee_ext_R']
 };
 
@@ -77,14 +89,15 @@ export function supportsPartialTake(selection) {
 export function calibratedPose(stored, selection, result, now) {
   const keys = kneeJoints[selection];
   if (!keys) return result;
-  // In the mixed mode a knee can wait for its second clear bend while the
-  // same frame already drives either arm. Copy only the surviving channels.
+  // A visible arm can move while the knee waits for its second clear bend.
   const pose = {}, joints = {};
-  if (selection === 'armsAndKnees') {
-    if (result?.leftArm) pose.leftArm = result.leftArm;
-    const rightArm = ['r_shoulder_abd', 'r_shoulder_flex', 'r_elbow_flex'];
-    if (rightArm.every(key => Number.isFinite(result?.joints?.[key]))) {
-      for (const key of rightArm) joints[key] = result.joints[key];
+  const frontArms = selection === 'armsAndKnees';
+  const sideArm = sideArmParts[selection];
+  if ((frontArms || sideArm === 'leftArm') && result?.leftArm) pose.leftArm = result.leftArm;
+  if (frontArms || sideArm === 'rightArm') {
+    const keys = ['r_shoulder_abd', 'r_shoulder_flex', 'r_elbow_flex'];
+    if (keys.every(key => Number.isFinite(result?.joints?.[key]))) {
+      for (const key of keys) joints[key] = result.joints[key];
     }
   }
   if (Object.hasOwn(sideLegs, selection)) {
@@ -298,10 +311,16 @@ function shinsOverlap(points, width, height) {
 
 // Build a fresh packet from just the limbs visible in this frame.
 export function poseForSelection(points, width, height, selection, hasDetail) {
-  if (Object.hasOwn(sideLegs, selection)) return projectedSideLeg(points, width, height, selection, hasDetail);
   function read(limb) {
     const result = poseForLimb(points, width, height, limb);
     return result && hasDetail(Object.hasOwn(sideArmParts, limb) ? sideArmParts[limb] : limb) ? result : null;
+  }
+  if (Object.hasOwn(sideLegs, selection)) {
+    const leg = projectedSideLeg(points, width, height, selection, hasDetail);
+    if (!Object.hasOwn(sideArmParts, selection)) return leg;
+    const arm = read(selection);
+    if (arm && leg) return {...arm, joints: {...arm.joints, ...leg.joints}};
+    return arm ?? leg;
   }
   const arms = selection === 'bothArms' || selection === 'armsAndKnees';
   const knees = selection === 'bothKnees' || selection === 'armsAndKnees';

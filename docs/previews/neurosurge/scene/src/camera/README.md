@@ -43,6 +43,8 @@ With a finished take in this tab, press **F**, type **replay my take** and press
 
 Frames pass one at a time to a worker in the browser. The worker returns the selected avatar movements. During an arm take it also returns both tracked shoulders and the selected visible elbow and wrist positions in the unmirrored image. Each accepted arm needs a visible shoulder line, elbow and wrist, and visible detail along the forearm. Nothing records or uploads the video. The model, JavaScript and WebAssembly are bundled locally and load after opt-in. Use the localhost launcher or a secure HTTPS origin that permits camera access. The tracker needs video capture, Web Workers, OffscreenCanvas, ImageBitmap, WebAssembly and WebGL.
 
+Choose **Left arm and leg from the side** or **Right arm and leg from the side** to follow the near arm, hip, knee and ankle together. Each part follows only while the tracker can use it. Two accepted views of any one part are enough to keep a take. The same choices are available under **Body follows** in the Movement mirror.
+
 For forward shoulder motion, select **Left arm from the side** or **Right arm from the side** in the recorder. The side-view input uses the visible arm, the shoulder-to-hip direction and which way the face points. The selected pose is an image-plane estimate. Save it from live capture, local video or timed pictures and replay it through **F**. The file stores the selected side and pose times. Use a front-view arm choice for wrist-path forecasts and the reach study.
 
 ## Side-view leg tracking
