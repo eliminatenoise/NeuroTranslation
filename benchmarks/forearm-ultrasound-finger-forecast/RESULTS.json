@@ -1,0 +1,121 @@
+{
+  "dataset": "Forearm ultrasound and finger joint angles",
+  "dataset_doi": "10.5281/zenodo.21825018",
+  "data_license": "CC BY 4.0",
+  "condition": "Medium-speed isolated index-finger flexion",
+  "horizon_ms": 320,
+  "fitting_people": 4,
+  "windows_per_finger": 5532,
+  "reserved_people": 2,
+  "fingers": [
+    "Index",
+    "Middle",
+    "Ring",
+    "Pinky"
+  ],
+  "units": "degrees",
+  "equal_person_mae_degrees": {
+    "absolute": {
+      "zero_change": [
+        55.624917968062505,
+        32.403321971603695,
+        11.104570345976002,
+        2.7284152754303
+      ],
+      "past_angle_trend": [
+        119.12213842637802,
+        69.6030353634579,
+        25.954646268846854,
+        6.098615763037429
+      ],
+      "angle_ridge": [
+        20.778298775020748,
+        12.44331216782118,
+        9.824070459764366,
+        2.8738647068350556
+      ],
+      "ultrasound_ridge": [
+        101.50951624377497,
+        70.0724411131489,
+        15.125405631297207,
+        8.505019189862608
+      ],
+      "joint_ridge": [
+        44.37578222127061,
+        28.710281328435332,
+        21.444645596647238,
+        8.42537014864741
+      ],
+      "angle_recurrent": [
+        24.086817667329253,
+        16.661138256369394,
+        8.963152077638599,
+        3.3196861412482006
+      ],
+      "ultrasound_recurrent": [
+        70.30200499928806,
+        42.62363306637955,
+        14.15618849517049,
+        3.2420247416319925
+      ],
+      "joint_recurrent": [
+        34.98909641821634,
+        24.745520714145076,
+        10.639061978836313,
+        3.1194965145114097
+      ]
+    },
+    "relative": {
+      "zero_change": [
+        55.624917968062505,
+        32.403321971603695,
+        11.104570345976002,
+        2.7284152754303
+      ],
+      "past_angle_trend": [
+        119.12213842637802,
+        69.6030353634579,
+        25.954646268846854,
+        6.098615763037429
+      ],
+      "angle_ridge": [
+        20.778298775020748,
+        12.44331216782118,
+        9.824070459764366,
+        2.8738647068350556
+      ],
+      "ultrasound_ridge": [
+        50.62043006474342,
+        26.173335557890294,
+        11.579816120251047,
+        3.235487878820859
+      ],
+      "joint_ridge": [
+        23.449954455846413,
+        13.99975830795557,
+        10.24307957013644,
+        2.981909780974795
+      ],
+      "angle_recurrent": [
+        24.086817667329253,
+        16.661138256369394,
+        8.963152077638599,
+        3.3196861412482006
+      ],
+      "ultrasound_recurrent": [
+        40.489268114797454,
+        23.603681558467372,
+        10.842775832680838,
+        2.809075544426254
+      ],
+      "joint_recurrent": [
+        26.63316903161315,
+        17.705073017396025,
+        9.16550636422883,
+        3.3175733525692666
+      ]
+    }
+  },
+  "evaluation": "Each person was excluded from the fitting used to forecast their recording. The relative-ultrasound experiment reuses the same recorded development outcomes.",
+  "preview": "The downloadable model was fitted on all four development recordings. The example is invented. The published scores come from separate person-by-person runs."
+}

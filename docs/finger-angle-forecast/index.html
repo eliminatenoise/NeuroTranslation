@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="description" content="Run an experimental forecast of four finger angles and compare the earlier study errors.">
+  <title>Finger-angle forecast | NeuroTranslate</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <script src="model-data.js" defer></script>
+  <script src="forecast.js" defer></script>
+  <script src="study-data.js" defer></script>
+  <script src="page.js" defer></script>
+</head>
+<body>
+  <header>
+    <nav aria-label="Project links" class="frame">
+      <a class="project" href="https://github.com/eliminatenoise/NeuroTranslation">NeuroTranslation</a>
+      <div class="links">
+        <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/forearm-ultrasound-finger-forecast">Study</a>
+        <a href="https://eliminatenoise.github.io/NeuroTranslation/reaching-ultrasound-300ms/change/">Arm muscle forecast</a>
+        <a href="https://raw.githubusercontent.com/eliminatenoise/NeuroTranslation/main/docs/finger-angle-forecast-offline.zip">Offline download</a>
+      </div>
+    </nav>
+  </header>
+  <main class="frame">
+    <h1>Finger-angle forecast</h1>
+    <p class="intro">Estimate how much each finger bends at its base 320 milliseconds after the last reading.</p>
+    <noscript><p>Enable JavaScript to run the models in this browser.</p></noscript>
+    <div class="workbench">
+      <section class="card" aria-labelledby="inputs-title">
+        <h2 id="inputs-title">Inputs</h2>
+        <p id="source" class="source">Invented example</p>
+        <label for="finger">Finger</label>
+        <select id="finger">
+          <option value="0">Index</option><option value="1">Middle</option>
+          <option value="2">Ring</option><option value="3">Pinky</option>
+        </select>
+        <div id="example-editor">
+          <label for="angle">Change the last angle <output id="angle-value" for="angle"></output></label>
+          <input id="angle" type="range" min="0" max="110" step="1" value="45">
+        </div>
+        <label class="check"><input id="ultrasound" type="checkbox"> Include ultrasound forecasts</label>
+        <p class="hint" id="ultrasound-help">The example includes invented ultrasound measurements. Turn them on to compare how each model uses them.</p>
+        <label for="history-file">Open a local JSON file</label>
+        <input id="history-file" type="file" accept=".json,application/json">
+        <div class="links actions">
+          <button id="reset" type="button">Restore example</button>
+          <a href="example.json" download>Example file</a>
+        </div>
+        <p id="input-status" class="hint" role="status"></p>
+      </section>
+      <section class="card forecast" aria-labelledby="forecast-title">
+        <h2 id="forecast-title">Forecast 320 ms ahead</h2>
+        <div class="chart-controls">
+          <label for="chart-method">Forecast to plot</label>
+          <select id="chart-method"></select>
+        </div>
+        <canvas id="chart" role="img" aria-label="Earlier finger angles and the selected forecast"></canvas>
+        <p id="chart-caption" class="hint"></p>
+        <table>
+          <thead><tr><th scope="col">Method</th><th scope="col">Change</th><th scope="col">Later angle</th></tr></thead>
+          <tbody id="predictions"></tbody>
+        </table>
+      </section>
+    </div>
+    <section class="card results" aria-labelledby="errors-title">
+      <h2 id="errors-title">Study errors on recorded movements</h2>
+      <p>Four people repeated a medium-speed index-finger bend. For each person, the study fitted models on the other three people’s recordings. Each method made 5,532 forecasts per finger across the four people. The table gives the average size of the error in degrees, with each person counting equally.</p>
+      <table>
+        <caption id="recorded-finger">Error for the selected finger</caption>
+        <thead><tr><th scope="col">Method</th><th scope="col">Angles only</th><th scope="col">Angles + ultrasound</th><th scope="col">Angles + ultrasound change</th></tr></thead>
+        <tbody id="recorded-errors"></tbody>
+      </table>
+      <p>The forecasts above use a model fitted on all four people. The table comes from the separate person-by-person tests. The ultrasound-change comparison reused those same scored recordings. Two additional people are reserved for final evaluation.</p>
+    </section>
+    <section class="directions" aria-labelledby="directions-title">
+      <h2 id="directions-title">Readings for your own forecast</h2>
+      <p>Use ten rows in <code>history</code>, starting with the oldest. The recordings had one reading every 40 milliseconds. Give four angles in degrees in the order index, middle, ring and pinky. To include ultrasound, give four angles followed by sixteen values from the ultrasound image in each row.</p>
+      <details>
+        <summary>Prepare the ultrasound values</summary>
+        <p>Use the same measurement setup as the study. Restore the archive’s amplitude scale and divide each image into four rows and four columns of equal tiles. For each tile, average its pixel amplitudes and take the natural logarithm of one plus that average. List the tiles left to right, starting at the top. The browser subtracts the first value for each tile when it runs the ultrasound-change method.</p>
+      </details>
+      <p>Files stay on your device. The page uses stored readings and keeps the camera off. The archive provides paired frames for the study and leaves live sensor delivery time unmeasured.</p>
+    </section>
+  </main>
+</body>
+</html>
