@@ -1,0 +1,50 @@
+{
+  "quantity": "100 ms belt-normal impulse in N s",
+  "belt_order": [
+    "left",
+    "right"
+  ],
+  "decoder_checkpoint_sha256": "0f584f4cc05ddf6f43d8a1b3790e203a99b1c1e61a1e0d2138c1f413b3bc4687",
+  "original_force_heads_sha256": "1b3ec0aa9867c654c07f555178fe78dd947725bdf66b6949ddbe67927763f1b9",
+  "fit_groups": {
+    "one_lab": {
+      "research_force_active_only": {
+        "total_weight": 1.0,
+        "split_weight": 1.0
+      },
+      "research_force_ridge": {
+        "total_weight": 1.0,
+        "split_weight": 1.0
+      }
+    },
+    "two_labs_equal_size": {
+      "research_force_active_only": {
+        "total_weight": 1.0,
+        "split_weight": 0.7283242065405041
+      },
+      "research_force_ridge": {
+        "total_weight": 1.0,
+        "split_weight": 0.6956503965075174
+      }
+    },
+    "two_labs_all_windows": {
+      "research_force_active_only": {
+        "total_weight": 1.0,
+        "split_weight": 0.8039317745856445
+      },
+      "research_force_ridge": {
+        "total_weight": 1.0,
+        "split_weight": 0.795152327773885
+      }
+    }
+  },
+  "training_windows": {
+    "one_lab": 150,
+    "two_labs_equal_size": 150,
+    "two_labs_all_windows": 222
+  },
+  "fit_source_doi": [
+    "https://doi.org/10.5281/zenodo.16970717",
+    "https://doi.org/10.6084/m9.figshare.19718500.v1"
+  ]
+}

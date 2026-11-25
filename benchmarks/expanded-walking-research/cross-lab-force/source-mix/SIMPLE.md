@@ -1,5 +1,7 @@
 # Short force forecasts from one lab or two
 
+The two-belt study fits two output weights using the same number of examples from one or two labs, then adds the remaining examples for a third fit. Nine people were kept out of fitting. [Two-belt study and download](paired-belts/)
+
 The same models were also tested on 29 people walking at a separate lab in Dijon. [Dijon walking results](dijon/SIMPLE.md)
 
 Adding recordings from a second lab lowered error on three people measured by that lab. On a treadmill at a third lab, the same change raised the average error slightly. The best average there came from a small model trained only on overground walking. [Technical edition](TECHNICAL.md) · [Exact scores](results.json)
