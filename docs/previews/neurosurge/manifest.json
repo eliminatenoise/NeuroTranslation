@@ -33,9 +33,9 @@
     },
     {
       "path": "PLAYER-GUIDE-TECHNICAL.html",
-      "bytes": 25299,
-      "sha256": "b58422f787072a4393d0371ce1529e91f8ef96d87095c6e4ec951e599c51013b",
-      "source": "Camera wrist recovery update"
+      "bytes": 25463,
+      "sha256": "11f45996eaed4bc2faae79b087ef9220fd65b69d65cf79b91d1a5fbd09af9aa4",
+      "source": "Brief hand tracking recovery"
     },
     {
       "path": "PLAYER-GUIDE-TECHNICAL.md",
@@ -45,9 +45,9 @@
     },
     {
       "path": "PLAYER-GUIDE.html",
-      "bytes": 33503,
-      "sha256": "cfd0643b9b0f448dc29f7804a054f8279614ff20fc7c8f6e847fc46418243cd4",
-      "source": "Camera wrist recovery update"
+      "bytes": 33694,
+      "sha256": "e83768f986ec3eab001fe8e51f98961f67deeddb59c115b2f70465ad7bc3ef83",
+      "source": "Brief hand tracking recovery"
     },
     {
       "path": "PLAYER-GUIDE.md",
@@ -1797,9 +1797,9 @@
     },
     {
       "path": "scene/src/camera/pose-worker.js",
-      "bytes": 7804,
-      "sha256": "48563442a3ab1733805c8596d556044ebf58b945cca417f8358bf1864a1f851f",
-      "source": "Camera wrist recovery update"
+      "bytes": 8700,
+      "sha256": "04305ef8c2db9c1e5e7823af942bb6fced7a8943e1bb48c3956dccb5f203163a",
+      "source": "Brief hand tracking recovery"
     },
     {
       "path": "scene/src/camera/preview.mjs",
@@ -2610,6 +2610,12 @@
       "bytes": 3830,
       "sha256": "04febc71ff8a7a97aca1b9714b7841b6260751282235d040ee9e62cd0069ca02",
       "source": "Camera wrist recovery update"
+    },
+    {
+      "path": "scene/src/camera/hand-history.mjs",
+      "bytes": 5128,
+      "sha256": "93f5876a1a587413e2af88c00e4b97c06c03c1bce7d04008aee4936f1b8b9087",
+      "source": "Brief hand tracking recovery"
     }
   ],
   "archive_source_commit": "bad0888e0ab3e0bb7dac523e3cc59a102e935055",
@@ -2686,6 +2692,17 @@
     "runtime": [
       "scene/src/camera/pose-worker.js",
       "scene/src/camera/hand-recovery.mjs"
+    ],
+    "guides": [
+      "PLAYER-GUIDE.html",
+      "PLAYER-GUIDE-TECHNICAL.html"
+    ]
+  },
+  "recent_hand_recovery": {
+    "scope": "Use recent wrist positions to search a current picture for a missing selected hand",
+    "runtime": [
+      "scene/src/camera/pose-worker.js",
+      "scene/src/camera/hand-history.mjs"
     ],
     "guides": [
       "PLAYER-GUIDE.html",
