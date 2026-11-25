@@ -33,9 +33,9 @@
     },
     {
       "path": "PLAYER-GUIDE-TECHNICAL.html",
-      "bytes": 24905,
-      "sha256": "5f0232bb23df3c5d647904812927fa8c7c02373d8762d7e969b116ac389888ff",
-      "source": "NeuroSurge same-side camera tracking"
+      "bytes": 25299,
+      "sha256": "b58422f787072a4393d0371ce1529e91f8ef96d87095c6e4ec951e599c51013b",
+      "source": "Camera wrist recovery update"
     },
     {
       "path": "PLAYER-GUIDE-TECHNICAL.md",
@@ -45,9 +45,9 @@
     },
     {
       "path": "PLAYER-GUIDE.html",
-      "bytes": 32932,
-      "sha256": "1d2f9931bbafd0f5821425914bcb634b7d340ca8c41d0fb89d8502970ab1029d",
-      "source": "NeuroSurge same-side camera tracking"
+      "bytes": 33503,
+      "sha256": "cfd0643b9b0f448dc29f7804a054f8279614ff20fc7c8f6e847fc46418243cd4",
+      "source": "Camera wrist recovery update"
     },
     {
       "path": "PLAYER-GUIDE.md",
@@ -1797,9 +1797,9 @@
     },
     {
       "path": "scene/src/camera/pose-worker.js",
-      "bytes": 5385,
-      "sha256": "2b338e02e35b4d7c1a1556ea0381991192aaf095cd3ffdda9666efe7fd0494da",
-      "source": "reviewed Lite archive"
+      "bytes": 7804,
+      "sha256": "48563442a3ab1733805c8596d556044ebf58b945cca417f8358bf1864a1f851f",
+      "source": "Camera wrist recovery update"
     },
     {
       "path": "scene/src/camera/preview.mjs",
@@ -2604,6 +2604,12 @@
       "source": "Finger camera integration",
       "bytes": 7819105,
       "sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1"
+    },
+    {
+      "path": "scene/src/camera/hand-recovery.mjs",
+      "bytes": 3830,
+      "sha256": "04febc71ff8a7a97aca1b9714b7841b6260751282235d040ee9e62cd0069ca02",
+      "source": "Camera wrist recovery update"
     }
   ],
   "archive_source_commit": "bad0888e0ab3e0bb7dac523e3cc59a102e935055",
@@ -2674,5 +2680,16 @@
       "load": "After a finger selection receives a frame"
     },
     "scope": "Player and mirror digit bend targets. Physical-device timing and accuracy need separate validation."
+  },
+  "wrist_recovery_update": {
+    "scope": "Optional same-frame recovery for missing fingers in Recorder and Movement forecast",
+    "runtime": [
+      "scene/src/camera/pose-worker.js",
+      "scene/src/camera/hand-recovery.mjs"
+    ],
+    "guides": [
+      "PLAYER-GUIDE.html",
+      "PLAYER-GUIDE-TECHNICAL.html"
+    ]
   }
 }
