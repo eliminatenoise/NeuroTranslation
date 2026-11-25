@@ -30,9 +30,10 @@ self.onmessage = async ({ data }) => {
         }
         const pose = runningMode === 'IMAGE' ? detector.detect(frame) : detector.detectForVideo(frame, timestamp);
         const points = pose.landmarks[0];
-        const result = poseForSelection(points, frame.width, frame.height, limb,
-          (side, allowPlainThigh) => limbVisible(frame, points, side,
-            checkBothFeet && (side === 'leftLeg' || side === 'rightLeg'), allowPlainThigh));
+        const hasDetail = (side, allowPlainThigh) => limbVisible(frame, points, side,
+          checkBothFeet && (side === 'leftLeg' || side === 'rightLeg'), allowPlainThigh);
+        const selectedPose = choice => poseForSelection(points, frame.width, frame.height, choice, hasDetail);
+        const result = selectedPose(limb);
         const message = {type: 'pose', result, selection, timestamp};
         if (data.limbPaths === true && result) message.limbPaths = observedLimbPaths(points, result);
         if (data.jointPoints === true) {
@@ -43,9 +44,10 @@ self.onmessage = async ({ data }) => {
               xy[i] = [p.x * frame.width, p.y * frame.height];
             }
           }
-          // Reject wrists that fail the existing side-specific geometry and local image evidence.
-          if (!result?.leftArm) xy[15] = null;
-          if (!Number.isFinite(result?.joints?.r_elbow_flex)) xy[16] = null;
+          // The forecast uses the same wrist evidence even when a different body part follows.
+          const wrists = limb === 'bothArms' || limb === 'armsAndKnees' ? result : selectedPose('bothArms');
+          if (!wrists?.leftArm) xy[15] = null;
+          if (!Number.isFinite(wrists?.joints?.r_elbow_flex)) xy[16] = null;
           message.xy = xy;
         }
         if (data.captureWrists === true && (result?.leftArm || Number.isFinite(result?.joints?.r_elbow_flex))) {

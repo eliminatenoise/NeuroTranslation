@@ -15,8 +15,9 @@ export function readKeyframes(files, times, {minimum=1} = {}) {
   if (rows.some((r,i)=>i && r.t<=rows[i-1].t)) throw Error('Each still needs a distinct capture time.');
   return rows;
 }
-export function captureSource({kind,video,clip,stills,followKnees=false,getLimb,captureWrists=false,
+export function captureSource({kind,video,clip,stills,followKnees=false,getLimb,jointPoints=!getLimb,captureWrists=false,
   waitForFinalFrame=false,getBodyRevision,getForecastRevision,onFrame,onReset,onStatus,onError,onEnd}) {
+  const limbPaths = Boolean(getLimb) && !jointPoints;
   let closed=false, epoch=0, id=0, busy=false, clock=0, callback, stream, objectURL, worker, timer, silence, finish;
   let endPending=false;
   const buffer=document.createElement('canvas');
@@ -76,7 +77,7 @@ export function captureSource({kind,video,clip,stills,followKnees=false,getLimb,
       const frame=await createImageBitmap(buffer);
       if(closed || gen!==epoch) {frame.close();return;}
       const result=await callWorker({type:'frame',frame,timestamp:++clock,limb,selection:gen,
-        jointPoints:!getLimb,limbPaths:!!getLimb,independent:true,...(captureWrists ? {captureWrists:true} : {})},[frame]);
+        jointPoints,limbPaths,independent:true,...(captureWrists ? {captureWrists:true} : {})},[frame]);
       if (closed || gen!==epoch) return;
       if (kind==='camera' && performance.now()-grabbed>350) {
         reset('Camera processing lag. Waiting for a current frame.');return;
@@ -88,7 +89,7 @@ export function captureSource({kind,video,clip,stills,followKnees=false,getLimb,
       onFrame({id:sequence,t,xy:result.xy,pose:result.result,w:buffer.width,h:buffer.height,bitmap:buffer,
         ...(getBodyRevision ? {bodyRevision} : {}),
         ...(getForecastRevision ? {forecastRevision} : {}),
-        ...(getLimb ? {limbPaths:result.limbPaths} : {}),
+        ...(limbPaths ? {limbPaths:result.limbPaths} : {}),
         ...(captureWrists ? {wrists:result.wrists,armGeometry:result.armGeometry} : {})});
     } catch (error) {
       endPending=false;
@@ -103,7 +104,7 @@ export function captureSource({kind,video,clip,stills,followKnees=false,getLimb,
     callback=video.requestVideoFrameCallback((now,meta)=>{
       if(closed) return;
       schedule();
-      if (!busy && !video.seeking && !(getLimb && video.paused) && !stream?.getVideoTracks()[0]?.muted) {
+      if (!busy && !video.seeking && !(limbPaths && video.paused) && !stream?.getVideoTracks()[0]?.muted) {
         // mediaTime is the presentation timestamp of this decoded image.
         track(video,video.videoWidth,video.videoHeight,meta.mediaTime,meta.presentedFrames).catch(fail);
       }
@@ -148,7 +149,7 @@ export function captureSource({kind,video,clip,stills,followKnees=false,getLimb,
     clearTimeout(timer);
     if(!closed) {
       onStatus(followKnees && kind==='camera'
-        ? 'Tracking the camera image. Keep your arms and feet in view.'
+        ? 'Tracking the camera image.'
         : 'Following decoded frames. Keep your shoulders, elbows and wrists visible.');
       schedule();
     }

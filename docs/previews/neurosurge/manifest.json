@@ -33,32 +33,32 @@
     },
     {
       "path": "PLAYER-GUIDE-TECHNICAL.html",
-      "bytes": 20590,
-      "sha256": "474c4ee8af7984b694179784384261869bda09f8dd311c033c6f3c91de1672e7",
+      "bytes": 21603,
+      "sha256": "a48dad00bbdc1acc3d9749a8f1f9353b32590f28a775e1b0d2d7d6e098f64036",
       "source": "Shared side-view arm tracking preview"
     },
     {
       "path": "PLAYER-GUIDE-TECHNICAL.md",
-      "bytes": 15883,
-      "sha256": "6eda3a05602a6b367ae5c210748b01d6f41b1eea109758b54dc1374c1c945fd1",
+      "bytes": 16808,
+      "sha256": "588268c4cb541ec35397ada66f424c0a17478ccebf836cc55fb8e7555ded4e07",
       "source": "Shared side-view arm tracking preview"
     },
     {
       "path": "PLAYER-GUIDE.html",
-      "bytes": 27356,
-      "sha256": "042e139daedd95c079580fee907fbf3f791813172262a7c0ddd7f3097b1255e8",
+      "bytes": 28389,
+      "sha256": "43668d8aa17f7cb01da27b04a3e24f1939470e90d196172ea628b620c3ff4da5",
       "source": "Shared side-view arm tracking preview"
     },
     {
       "path": "PLAYER-GUIDE.md",
-      "bytes": 21766,
-      "sha256": "5165abdaa80619bed4bd08f3329ac7a0c622b5ec990eaf201d48feb4f329f6ee",
+      "bytes": 22711,
+      "sha256": "16e8c7f1ce8f9cdefcd67dd91bdaa5fb146dab3ca5fe074798d5097ac98c0ff4",
       "source": "Shared side-view arm tracking preview"
     },
     {
       "path": "PREVIEW-NOTES.html",
-      "bytes": 7666,
-      "sha256": "8fc00d348164820a89046da1653c005c37ec67a6a02d50fa022ba46bc0de67ba",
+      "bytes": 7490,
+      "sha256": "cfc8c0f7954e3693216eedd8967537065bdfcd5eb17d826ee482585d9447872e",
       "source": "Shared side-view arm tracking preview"
     },
     {
@@ -177,8 +177,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 12470,
-      "sha256": "6e750726bf553e28a62f0401fb51cd0e9b3f8bd61b69b35b5035e9d1a999a857",
+      "bytes": 12596,
+      "sha256": "7696ba16075e32c54859e6d8756ee44a2ae12b7b062ad26ea97d757353dea0d9",
       "source": "Shared side-view arm tracking preview"
     },
     {
@@ -1797,8 +1797,8 @@
     },
     {
       "path": "scene/src/camera/pose-worker.js",
-      "bytes": 3380,
-      "sha256": "5d6884cce2b60f4346705dcf3558f3c518b723787ce2011afb04d2f5facb3988",
+      "bytes": 3572,
+      "sha256": "ed83502a9c2fcc7ed217dcdc27662f76c113839246a18ba5d4876473371a81e6",
       "source": "reviewed Lite archive"
     },
     {
@@ -2031,8 +2031,8 @@
     },
     {
       "path": "scene/src/joint/media.mjs",
-      "bytes": 8297,
-      "sha256": "3acb981ab9f5d8eec5cf2cf3c64eae440eb24dafb24548ae4b1bf4ac517027ea",
+      "bytes": 8324,
+      "sha256": "298c078cd7c4596e4b989c5efbb5588174b537b3a87d70e85165ac838f1129a5",
       "source": "hosted preview update"
     },
     {
@@ -2079,8 +2079,8 @@
     },
     {
       "path": "scene/src/joint/view.mjs",
-      "bytes": 36175,
-      "sha256": "726a88afca162ada49e86b5748c48cad55cb8afd4b19011306f0177b7f3205bf",
+      "bytes": 37343,
+      "sha256": "827d1e22e8e55abd63e04db861c7aec7800ea87837af7e5d6b19d708fac9f7c7",
       "source": "hosted game runtime"
     },
     {
@@ -2642,5 +2642,9 @@
   "side_leg_camera_update": {
     "base": "2124e05f1e87798a493a1de08977ed596cefefd9",
     "scope": "Side-view targets for the selected virtual hip, knee and ankle in Full and Lite. Supports live camera, local video and timed pictures. Only accepted joints supply movement. Save and replay through the Command box with the camera off."
+  },
+  "movement_mirror_side_view_update": {
+    "base": "0ee3931274cd35fe1ec5fdac9abdd3bcd329f9e6",
+    "scope": "Side-view body choices in the Movement mirror from the same images as NeuroTranslate 0.0 point forecasts. The current forecast uses independent coordinate evidence, and its history survives body selection changes."
   }
 }

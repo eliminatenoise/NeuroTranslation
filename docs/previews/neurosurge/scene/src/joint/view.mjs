@@ -1,6 +1,6 @@
 import {BONES,WRIST,TRACKED_POINTS,trackedPoint,observation,endpoint,observeTarget,parseGoal,virtualFrame,checkGoal,virtualUnits} from './landmark.mjs';
 import {captureSource,readKeyframes} from './media.mjs';
-import {calibratedPose, poseForSelection, trackedLimbs, trackingChoices} from '../camera/limb-pose.mjs';
+import {ankleNames, calibratedPose, hipJoints, poseForSelection, sideArmParts, sideLegs, trackedLimbs, trackingChoices} from '../camera/limb-pose.mjs';
 import {createVideoTakeWindow, pictureOffsetMs, poseForFollow} from '../camera/limb-take.mjs';
 import {localMotion} from './forecast-controls.mjs';
 import {advanceCameraHistory,cameraForecasts,movementForecast,newCameraHistory,queueCameraForecast} from './adaptive-motion.mjs';
@@ -21,7 +21,7 @@ const markup=`
 <div data-stills-wrap hidden><label>Still images <input data-stills type="file" multiple accept="image/*"></label>
 <p data-names></p><label>Times in seconds, in file order <input data-times placeholder="0, .1, .2, .3, .4"></label></div>
 <label data-follow-wrap hidden>Body follows <select data-follow aria-describedby="joint-follow-help"></select></label>
-<p id="joint-follow-help" hidden>Choose what moves the avatar. Choose Forecast only to keep manual control. For live camera, show a clear bend in each knee you want the body to follow.</p>
+<p id="joint-follow-help" hidden>Choose what moves the avatar. Choose Forecast only to keep manual control. Show a clear knee bend to start following a knee in live or side-view leg tracking.</p>
 <label>Point to forecast <select data-side><option value="auto">Either visible wrist</option></select></label>
 <p id="joint-forecast-help" hidden>The forecast can use a different point, including a hip or ankle. It shows where that point may appear in the image 0.12 seconds later.</p>
 <label>Forecast method <select data-method aria-describedby="joint-method-help"><option value="model">NeuroTranslate 0.0</option><option value="adaptive">Adapt to recent tracking</option><optgroup label="Known movement"><option value="A1D1">Walking</option><option value="A3D1">Squat</option><option value="A6D1">Shoulder press</option><option value="A9D3">Jumping jacks</option></optgroup></select></label>
@@ -39,6 +39,7 @@ ${touchPanel}
 <p data-model></p>
 </div></div>`;
 const finitePair=p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite);
+const dedicatedChoices=new Set([...Object.keys(sideArmParts),...Object.keys(hipJoints),...Object.keys(sideLegs)]);
 export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,onClose=()=>{},onSaveTake=null,onOpenCommand=null,backend='local-model'}) {
   const node=document.createElement('section');
   node.className='joint-view'+(embedded?' joint-overlay':'');
@@ -71,7 +72,7 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
     el('#joint-follow-help').hidden=false;
     el('#joint-forecast-help').hidden=false;
     pointControl.setAttribute('aria-describedby','joint-forecast-help');
-    for (const choice of ['armsAndKnees','leftArm','rightArm','bothArms','leftLeg','rightLeg','bothKnees']) {
+    for (const choice of ['armsAndKnees','leftArm','rightArm','bothArms','leftLeg','rightLeg','bothKnees',...dedicatedChoices]) {
       followControl.add(new Option(trackingChoices[choice].name, choice));
     }
     followControl.add(new Option('Forecast only', 'none'));
@@ -85,6 +86,12 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
   let adaptiveHistory=newCameraHistory(), browserPredictor=null;
   let lastComparisonIssue=-Infinity;
   let lastBodyPose = null, bodyRevision = 0;
+  let captureChoice = null, kneeState = {}, lastKneeTime = null;
+  const poseChoice = () => dedicatedChoices.has(followControl.value) ? followControl.value : 'armsAndKnees';
+  function resetKnees() {
+    kneeState={};
+    lastKneeTime=null;
+  }
   if (!embedded) {el('[data-close]').hidden=true;el('[data-size]').hidden=true;}
   function compact(value) {
     const collapsed=embedded && value;
@@ -193,10 +200,11 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
       cameraMessage('Manual body controls. Forecasts use the source images.');
       return;
     }
-    const accepted = trackedLimbs(pose), seen = trackedLimbs(observed);
-    const names = limbs => partList.format(limbs.map(limb => trackingChoices[limb].name.toLowerCase()));
-    const missing = choice.parts.filter(limb => !accepted.includes(limb));
-    const waitingForBend = kind==='camera'
+    const followed = trackedLimbs(pose), seen = trackedLimbs(observed);
+    const accepted = choice.parts.filter(limb => followed.includes(limb));
+    const names = limbs => partList.format(limbs.map(limb => (ankleNames[limb] ?? trackingChoices[limb].name).toLowerCase()));
+    const missing = choice.parts.filter(limb => !followed.includes(limb));
+    const waitingForBend = kind==='camera' || Object.hasOwn(sideLegs,followControl.value)
       ? missing.filter(limb => limb.endsWith('Leg') && seen.includes(limb)) : [];
     const statements = [];
     if (accepted.length) statements.push('Following '+names(accepted)+'.');
@@ -215,6 +223,7 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
     media?.stop();media=null;clearTimeout(schedule);schedule=null;active=false;simSide=null;
     stopDictation();
     clearTake();
+    resetKnees();
     video.hidden=true;el('[data-stop]').disabled=true;
     cameraFollow.hidden=true;cameraFollow.textContent='';
     if(!keep){clearHistory();text('[data-goal]','');}
@@ -376,11 +385,18 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
     }
     paint();
   }
+  function showSourceHint() {
+    const kind=source.value;
+    const follow=embedded ? trackingChoices[followControl.value] : null;
+    const cameraHint=follow ? follow.frame+' Keep the point you want to forecast in view.'
+      : 'Keep your selected point and enough of your body in view to track it.';
+    text('[data-hint]',{camera:cameraHint,clip:'Play, pause or seek using the video controls. The frame clock comes from the clip.',stills:'The tracker reads each image at its stated capture time. At least five closely spaced stills are needed for a forecast.'}[kind]);
+  }
   function changeSource() {
     stop();const kind=source.value;
     el('[data-clip-wrap]').hidden=kind!=='clip';el('[data-stills-wrap]').hidden=kind!=='stills';
     text('[data-start]',{camera:'Start camera',clip:'Play selected clip',stills:'Track keyframes'}[kind]);
-    text('[data-hint]',{camera:'Keep your selected point and enough of your body in view to track it.',clip:'Play, pause or seek using the video controls. The frame clock comes from the clip.',stills:'The tracker reads each image at its stated capture time. At least five closely spaced stills are needed for a forecast.'}[kind]);
+    showSourceHint();
     text('[data-status]','Images stay on this device. Only numeric movement features reach the local checkpoint.');
   }
   function start() {
@@ -395,19 +411,19 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
         text('[data-status]',message);
         cameraMessage(message);
       }
-      const cameraKnees=kind==='camera' && embedded ? {} : null;
-      let lastCameraPoseAt=null;
-      media=captureSource({kind,video,clip,stills,followKnees:embedded,captureWrists:canSaveTake,waitForFinalFrame:true,
+      captureChoice=embedded ? poseChoice() : 'bothArms';
+      media=captureSource({kind,video,clip,stills,followKnees:embedded,jointPoints:true,
+        getLimb:embedded ? () => captureChoice : undefined,captureWrists:canSaveTake,waitForFinalFrame:true,
         getBodyRevision:()=>kind==='clip' && video.paused ? null : bodyRevision,
         getForecastRevision:()=>epoch,
         onFrame:f=>{
-          let pose=f.pose;
-          if (cameraKnees) {
-            lastCameraPoseAt=performance.now();
-            pose=calibratedPose(cameraKnees,'armsAndKnees',pose,lastCameraPoseAt);
-          }
           // Forecast and avatar controls track their own source revisions.
           if (f.bodyRevision===bodyRevision && (kind!=='clip' || !video.paused)) {
+            let pose=f.pose;
+            if (embedded && (kind==='camera' || Object.hasOwn(sideLegs,captureChoice))) {
+              lastKneeTime=kind==='camera' ? performance.now() : f.t*1000;
+              pose=calibratedPose(kneeState,captureChoice,pose,lastKneeTime);
+            }
             const selected = embedded ? poseForFollow(pose, followControl.value) : pose;
             applyCapturePose(selected);
             showCameraFollow(selected,f.pose,kind);
@@ -418,9 +434,8 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
           }
         },
         onReset:reason=>{
-          if (cameraKnees && lastCameraPoseAt!==null) {
-            calibratedPose(cameraKnees,'armsAndKnees',null,lastCameraPoseAt);
-          }
+          if (kind==='camera' && lastKneeTime!==null) calibratedPose(kneeState,captureChoice,null,lastKneeTime);
+          else resetKnees();
           releaseCapturePose();
           clearTake();
           clearHistory(reason);
@@ -518,11 +533,15 @@ export function bindJointView({host,onPose=()=>{},embedded=false,readRig=null,on
   methodControl.addEventListener('change',changeForecastMethod);
   followControl.addEventListener('change',()=>{
     clearTake();
+    showSourceHint();
     if (!media || simSide) return;
     bodyRevision++;
+    const next=poseChoice();
     // Keep any active channels that are still selected. Newly selected limbs
-    // wait for the next source image.
-    const selected = poseForFollow(lastBodyPose, followControl.value);
+    // wait for the next source image. A new geometry needs a fresh pose.
+    const selected = next===captureChoice ? poseForFollow(lastBodyPose,followControl.value) : null;
+    if (next!==captureChoice) resetKnees();
+    captureChoice=next;
     applyCapturePose(selected);
     if (source.value==='clip' && video.paused) {
       cameraMessage((video.ended ? 'Source ended' : 'Video paused')+'. Manual body controls are available.');
