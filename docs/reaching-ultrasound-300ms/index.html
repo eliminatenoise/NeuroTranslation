@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="description" content="Run the NeuroTranslate 0.1 reaching forecast with different amounts of ultrasound history.">
+  <title>Reaching forecast | NeuroTranslate 0.1</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <script src="forecast.js" defer></script>
+  <script src="model-data.js" defer></script>
+  <script src="page.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <nav class="frame" aria-label="Project links">
+      <a class="project" href="https://github.com/eliminatenoise/NeuroTranslation">NeuroTranslation</a>
+      <div class="nav-links">
+        <a href="https://eliminatenoise.github.io/NeuroTranslation/previews/neurosurge/movement-mirror.html">Movement mirror</a>
+        <a href="https://github.com/eliminatenoise/NeuroTranslation/tree/main/benchmarks/reaching-ultrasound-300ms">Study and downloads</a>
+      </div>
+    </nav>
+  </header>
+  <main class="frame">
+    <h1>Reaching forecast</h1>
+    <p class="intro">Compare how far tracked points on two arm muscles are predicted to spread in an ultrasound image 300 milliseconds later.</p>
+    <noscript><p>Turn on JavaScript to run the forecast in this browser.</p></noscript>
+
+    <div class="workbench">
+      <section class="card" aria-labelledby="input-heading">
+        <h2 id="input-heading">Inputs</h2>
+        <p class="source" id="source">Invented example</p>
+        <label for="mode">Ultrasound history</label>
+        <select id="mode">
+          <option value="full">Complete</option>
+          <option value="gap">Latest 100 ms hidden</option>
+          <option value="blind">All hidden</option>
+        </select>
+        <div class="file-controls">
+          <label for="file">Open a local JSON file</label>
+          <input type="file" id="file" accept=".json,application/json" aria-describedby="format">
+          <p class="hint" id="format">Use ten time slots from the 200 ms before the forecast. Files stay on your device.</p>
+          <div class="actions">
+            <button id="reset" type="button">Restore example</button>
+            <a href="example.json" download>Example JSON</a>
+          </div>
+        </div>
+        <p id="status" class="status" role="status"></p>
+      </section>
+
+      <section class="card" aria-labelledby="forecast-heading">
+        <h2 id="forecast-heading">Forecast 300 ms later</h2>
+        <p class="hint">Spread of tracked points, in millimetres</p>
+        <table>
+          <thead>
+            <tr><th scope="col">Method</th><th scope="col">Triceps</th><th scope="col">Brachialis</th></tr>
+          </thead>
+          <tbody id="estimates">
+            <tr><th scope="row">Simple reference</th><td data-value></td><td data-value></td></tr>
+            <tr><th scope="row">Linear forecast</th><td data-value></td><td data-value></td></tr>
+            <tr class="learned"><th scope="row">NeuroTranslate 0.1</th><td data-value></td><td data-value></td></tr>
+          </tbody>
+        </table>
+        <details>
+          <summary>Model settings</summary>
+          <div class="settings">
+            <div><label for="passes">Refinement passes</label>
+            <select id="passes"><option>1</option><option selected>3</option><option>5</option><option>8</option></select></div>
+            <div><label for="checkpoint">Saved fit</label>
+            <select id="checkpoint">
+              <option value="20261126">First fit</option>
+              <option value="20261127">Second fit</option>
+              <option value="both">Average of both</option>
+            </select></div>
+          </div>
+          <p class="hint">Each pass repeats one calculation using the same saved weights.</p>
+        </details>
+      </section>
+    </div>
+
+    <section class="card history" aria-labelledby="history-heading">
+      <h2 id="history-heading">Which ultrasound readings are available</h2>
+      <div class="history-legend" aria-label="History key">
+        <span><i class="used"></i> Available</span>
+        <span><i class="withheld"></i> Hidden</span>
+        <span><i class="missing"></i> Missing</span>
+      </div>
+      <div class="timeline">
+        <div class="time-axis"><span>200 ms earlier</span><span>100 ms earlier</span><span>Forecast starts</span></div>
+        <div class="timeline-row"><span id="triceps-label">Triceps</span><ol id="triceps-track" aria-labelledby="triceps-label"></ol></div>
+        <div class="timeline-row"><span id="brachialis-label">Brachialis</span><ol id="brachialis-track" aria-labelledby="brachialis-label"></ol></div>
+      </div>
+      <p class="hint" id="history-explanation">The recorded history occupies the 200 ms before the forecast starts.</p>
+    </section>
+
+    <section class="notes" aria-labelledby="methods">
+      <h2 id="methods">Forecast methods</h2>
+      <p>The simple reference follows the ultrasound trend if all five required readings are available for that muscle. It uses the latest five slots in the Complete setting and the oldest five after a gap. With a required reading missing, it uses the typical value from training.</p>
+      <p>The linear forecast uses ultrasound alone in Complete, the older ultrasound with motion and muscle readings after a gap, and only motion when ultrasound is hidden. The learned forecast uses the readings available in the chosen setting.</p>
+      <p>Use compatible, synchronized JSON histories for this model. The camera stays off on this page. Movement mirror tracks a point in the camera image and forecasts its position 120 ms later.</p>
+      <ul class="links">
+        <li><a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/reaching-ultrasound-300ms/SIMPLE.md">Simple study</a></li>
+        <li><a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/reaching-ultrasound-300ms/TECHNICAL.md">Technical study</a></li>
+        <li><a href="https://github.com/eliminatenoise/NeuroTranslation/blob/main/benchmarks/reaching-ultrasound-300ms/INPUT.md">JSON field order and units</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
