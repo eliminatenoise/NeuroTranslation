@@ -1,0 +1,57 @@
+{
+  "model": "NeuroTranslate 0.1 compact reaching forecast preview",
+  "horizon_ms": 300,
+  "checkpoint_scope": "Research validation of a compact model for a recorded reaching task.",
+  "plan_sha256": "083a4e62e99a38fbf7734e10b66a9238bfda0a3a9c2f5328775d6ce3580b9167",
+  "archives": [
+    {
+      "seed": 20261126,
+      "path": "shared-20261126.npz",
+      "npz_sha256": "7b1f3526a93d33b33c70db80603b9458131430fd293737629830a7f795c18037",
+      "original_sha256": "a6b492c7d96224602c29c117d224c610e45a6ec2f061eee5dd875e1d2099b5f7"
+    },
+    {
+      "seed": 20261127,
+      "path": "shared-20261127.npz",
+      "npz_sha256": "e22cf1fd4ade46a55faf5bc4394bb70585c1b45f3407a2916ccfcc19aa1b12f2",
+      "original_sha256": "ac34271e6448de61d31bb18b7cd281058263a821e40cd23a148f5d7f173e2a43"
+    }
+  ],
+  "feature_order": [
+    "hand_x_relative_to_shoulder_mm",
+    "hand_y_relative_to_shoulder_mm",
+    "hand_z_relative_to_shoulder_mm",
+    "forearm_x_relative_to_shoulder_mm",
+    "forearm_y_relative_to_shoulder_mm",
+    "forearm_z_relative_to_shoulder_mm",
+    "elbow_x_relative_to_shoulder_mm",
+    "elbow_y_relative_to_shoulder_mm",
+    "elbow_z_relative_to_shoulder_mm",
+    "upperarm_x_relative_to_shoulder_mm",
+    "upperarm_y_relative_to_shoulder_mm",
+    "upperarm_z_relative_to_shoulder_mm",
+    "hand_position_available",
+    "forearm_position_available",
+    "elbow_position_available",
+    "upperarm_position_available",
+    "triceps_rms_mV",
+    "biceps_rms_mV",
+    "palm_rms_mV",
+    "triceps_voltage_available",
+    "biceps_voltage_available",
+    "palm_voltage_available",
+    "triceps_point_spread_mm",
+    "brachialis_point_spread_mm",
+    "triceps_spread_available",
+    "brachialis_spread_available"
+  ],
+  "source_article": "https://doi.org/10.1038/s41597-026-07019-3",
+  "source_dataset": "https://doi.org/10.6084/m9.figshare.31030252.v1",
+  "dataset_license": "CC BY 4.0",
+  "modes": {
+    "full": "All observed ultrasound history.",
+    "gap": "Withhold the last five ultrasound bins, with any older readings retained.",
+    "blind": "Withhold all ultrasound values and availability flags."
+  },
+  "accepts_user_data_locally": true
+}
