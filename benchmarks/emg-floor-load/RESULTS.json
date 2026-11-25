@@ -1,0 +1,71 @@
+{
+  "source": {
+    "release_doi": "10.25452/figshare.plus.30294658.v2",
+    "paper_doi": "10.1038/s41597-026-08739-2",
+    "processing_code_doi": "10.5281/zenodo.17122076",
+    "data_license": "CC0-1.0",
+    "credit": [
+      "Robben Baetens",
+      "Tom Turcksin",
+      "Tom Verstraten",
+      "Amélie Chevalier",
+      "Mia Loccufier"
+    ],
+    "scope": "Subject1, Session4, Recording1, raw remote intervals, eight named right-leg EMG channels and processed Plate C and Plate D Fz."
+  },
+  "fit_repetitions": 21,
+  "evaluation_repetitions": 14,
+  "fitting_windows": 1683,
+  "scored_evaluation_windows": 1096,
+  "metric": "Equally weighted mean across repetition-specific mean absolute error in N·s",
+  "predictions": {
+    "fitted_median": 9.087109581453445,
+    "ridge": 14.834569892750922,
+    "attention_1": 10.627218494283952,
+    "attention_3": 10.75229523372305,
+    "attention_3_reversed": 10.6499133999675
+  },
+  "descriptive_accounting": {
+    "definition": "For this descriptive split, near zero means an absolute measured impulse of at most 1 N·s. The two contributions add to each original equal-repetition MAE. The split uses the measured outcome.",
+    "near_zero_windows": 901,
+    "total_windows": 1096,
+    "near_zero_score_weight": 0.8120602900592163,
+    "fitted_median_ns": -0.0,
+    "contributions": {
+      "fitted_median": {
+        "near_zero_contribution_ns": 0.002979304412374789,
+        "larger_load_contribution_ns": 9.08413027704107
+      },
+      "ridge": {
+        "near_zero_contribution_ns": 7.3356887821740395,
+        "larger_load_contribution_ns": 7.498881110576882
+      },
+      "attention_1": {
+        "near_zero_contribution_ns": 2.5666637841510376,
+        "larger_load_contribution_ns": 8.060554710132912
+      },
+      "attention_3": {
+        "near_zero_contribution_ns": 2.600769436845534,
+        "larger_load_contribution_ns": 8.151525796877518
+      },
+      "attention_3_reversed": {
+        "near_zero_contribution_ns": 2.3148023869926155,
+        "larger_load_contribution_ns": 8.335111012974886
+      }
+    }
+  },
+  "example": "The example input arrays are generated. Aggregate scores are computed from recorded force.",
+  "native_replay": {
+    "matching_forecasts": 1096,
+    "maximum_deviation_ns": {
+      "fitted_median": 0.0,
+      "ridge": 0.0,
+      "attention_1": 0.0,
+      "attention_3": 0.0,
+      "attention_3_reversed": 0.0
+    },
+    "numpy": "2.5.3",
+    "torch": "2.14.1+cpu"
+  },
+  "limit": "One person and recording with the source’s zero-delay filtered ground-force reference. Repetitions assigned within activities."
+}
