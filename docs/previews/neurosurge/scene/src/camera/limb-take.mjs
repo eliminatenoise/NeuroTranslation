@@ -1,6 +1,6 @@
 // Each take lives in this page's memory. The camera passes only its selected
 // rig pose, frame time and projected arm points after side and tracking checks.
-import {hipJoints, trackingChoices} from './limb-pose.mjs';
+import {hipJoints, sideArmParts, trackingChoices} from './limb-pose.mjs';
 
 export const TAKE_LIMIT_MS = 8000;
 
@@ -12,11 +12,6 @@ export function pictureOffsetMs(time, startTime) {
   return wholeMs > 0 && Math.abs(offset - wholeMs) <= roundoff ? wholeMs : offset;
 }
 
-const groupedLimbs = {
-  bothArms: ['leftArm', 'rightArm'],
-  bothKnees: ['leftLeg', 'rightLeg'],
-  armsAndKnees: ['leftArm', 'rightArm', 'leftLeg', 'rightLeg']
-};
 const jointKeys = {
   rightArm: ['r_shoulder_abd', 'r_shoulder_flex', 'r_elbow_flex'],
   rightLeg: ['knee_ext_R'],
@@ -64,7 +59,8 @@ export function poseForFollow(result, selection) {
 // One timestamp covers both sides of a camera frame. A missing side contributes
 // no channels. On playback the ordinary camera controller releases that side.
 export function createTakeTimeline(limb, start, {includeEnd = false} = {}) {
-  const sides = groupedLimbs[limb] || [limb];
+  const sides = trackingChoices[limb].parts;
+  const fromSide = Object.hasOwn(sideArmParts, limb);
   const counts = sides.map(() => 0);
   const frames = [];
   let count = 0, lastObservation = -Infinity;
@@ -85,7 +81,7 @@ export function createTakeTimeline(limb, start, {includeEnd = false} = {}) {
       if (!copyLimb(result, side, pose)) continue;
       counts[i]++;
       const point = wrists?.[side];
-      if ((side === 'leftArm' || side === 'rightArm') && Array.isArray(point) &&
+      if (!fromSide && (side === 'leftArm' || side === 'rightArm') && Array.isArray(point) &&
           point.length === 2 && point.every(Number.isFinite)) {
         (frame.wrists ??= {})[side] = [...point];
       }
@@ -117,7 +113,7 @@ export function createTakeTimeline(limb, start, {includeEnd = false} = {}) {
 }
 
 export function createVideoTakeWindow(limb, maxGapMs, {pictureTimes = false} = {}) {
-  const sides = groupedLimbs[limb] || [limb];
+  const sides = trackingChoices[limb].parts;
   const counts = sides.map(() => 0);
   const samples = [];
   let end = -1, first = null;
@@ -162,14 +158,16 @@ export function createVideoTakeWindow(limb, maxGapMs, {pictureTimes = false} = {
   };
 }
 
-function betweenPictures(from, to, fraction) {
+export function betweenPictures(from, to, fraction, limb) {
   const blend = (a, b) => a + (b - a) * fraction;
-  // The left-arm tracker returns directions in the avatar's chest plane.
+  // Front-view takes have lateral directions. Side-view takes use depth.
+  const horizontal = limb === 'leftArmSide' ? 2 : 0;
   function direction(a, b) {
-    const start = Math.atan2(a[1], a[0]);
-    const delta = Math.atan2(a[0] * b[1] - a[1] * b[0], a[0] * b[0] + a[1] * b[1]);
+    const start = Math.atan2(a[1], a[horizontal]);
+    const delta = Math.atan2(a[horizontal] * b[1] - a[1] * b[horizontal],
+      a[horizontal] * b[horizontal] + a[1] * b[1]);
     const angle = start + delta * fraction;
-    return [Math.cos(angle), Math.sin(angle), 0];
+    return horizontal === 2 ? [0, Math.sin(angle), Math.cos(angle)] : [Math.cos(angle), Math.sin(angle), 0];
   }
   const result = {};
   if (from.joints) {
@@ -190,7 +188,7 @@ function betweenPictures(from, to, fraction) {
 export function createLimbTake({panel, emit, onFinish, onReplay, returnFocus}) {
   const box = document.createElement('div');
   const hint = document.createElement('div');
-  const recordHint = 'Record up to 8 s in this tab. Arm takes keep projected shoulder, elbow and wrist positions. Press F to name a take or match a reach. No images or audio are saved.';
+  const recordHint = 'Record up to 8 s in this tab. Front-view arm takes also keep wrist paths for comparing reaches. Press F to name a take. No images or audio are saved.';
   const info = document.createElement('div');
   info.setAttribute('role', 'status');
   const clock = document.createElement('span');
@@ -246,7 +244,7 @@ export function createLimbTake({panel, emit, onFinish, onReplay, returnFocus}) {
       saved = {...take, name};
       info.textContent = summary();
     } else {
-      const reason = limb === 'armsAndKnees' ? 'Show at least one limb for two frames to keep a take.' : groupedLimbs[limb] ? 'A paired take needs two visible samples from each side.' : 'Too few visible samples for a take.';
+      const reason = limb === 'armsAndKnees' ? 'Show at least one limb for two frames to keep a take.' : trackingChoices[limb].parts.length > 1 ? 'A paired take needs two visible samples from each side.' : 'Too few visible samples for a take.';
       info.textContent = reason + (saved ? ' Previous take available.' : '');
     }
     refresh();
@@ -329,7 +327,7 @@ export function createLimbTake({panel, emit, onFinish, onReplay, returnFocus}) {
       const before = frames[next - 1], after = frames[next];
       if (take.source === 'pictures' && before?.pose && after?.pose && before.time >= start &&
           elapsed > before.time && after.time <= end) {
-        emit(betweenPictures(before.pose, after.pose, (elapsed - before.time) / (after.time - before.time)), take.limb);
+        emit(betweenPictures(before.pose, after.pose, (elapsed - before.time) / (after.time - before.time), take.limb), take.limb);
       } else if (last) emit(last.pose, take.limb);
       if (elapsed >= take.duration && !last) advanceStep(sequence);
       else animation = requestAnimationFrame(tick);
@@ -371,7 +369,7 @@ export function createLimbTake({panel, emit, onFinish, onReplay, returnFocus}) {
       live = active;
       limb = side;
       name = displayName;
-      hint.textContent = recordHint + (limb === 'armsAndKnees' ? ' Only visible movements enter the take.' : groupedLimbs[limb] ? ' Show each side at least twice.' : '');
+      hint.textContent = recordHint + (limb === 'armsAndKnees' ? ' Only visible movements enter the take.' : trackingChoices[limb].parts.length > 1 ? ' Show each side at least twice.' : '');
       refresh();
     },
     clear() {

@@ -23,7 +23,7 @@ export function studyShape(record) {
 export function takeShape(take, side) {
   if (!take) return {issue: 'Finish an arm take with C, or try the recorded example below.'};
   if (!['leftArm', 'rightArm', 'bothArms', 'armsAndKnees'].includes(take.limb))
-    return {issue: 'This take follows knees. Use C to record an arm.'};
+    return {issue: 'Record a front-view arm take with C to compare its wrist path here.'};
   if (!['leftArm', 'rightArm'].includes(side)) return {issue: 'Choose one arm to compare.'};
   if ((take.limb === 'leftArm' || take.limb === 'rightArm') && take.limb !== side)
     return {issue: 'The other arm was recorded. Choose its side.'};

@@ -4397,7 +4397,7 @@ export function createSimulation({ rig, boxes, strip, binding, armOptions = {}, 
       const restCam = att.shoulderCam.map((v, i) => v - transformDirection(att.bodyToCamera, att.girdleShiftM)[i]);
       const tw = freeIn.targetWorld;
       if (freeIn.cameraArm) {
-        // The observed wrist gives a bearing in the avatar's lateral plane.
+        // The observed wrist gives a bearing in the avatar's chest axes.
         // The native elbow fit sets reach from the avatar's own arm lengths.
         handWant = freeIn.cameraArm.bearing.map(unit => unit * (rig.upperLength + rig.foreLength) / 1000);
       } else if (Array.isArray(tw) && tw.length === 3 && tw.every(Number.isFinite)) {

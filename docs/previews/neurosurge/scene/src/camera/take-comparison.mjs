@@ -2,8 +2,8 @@ import {hipJoints} from './limb-pose.mjs';
 
 // Capture selections share a comparable bend target only on the same joint and side.
 const joints = [
-  {label: 'Left elbow', limbs: ['leftArm', 'bothArms', 'armsAndKnees'], read: pose => pose?.leftArm?.elbowDeg},
-  {label: 'Right elbow', limbs: ['rightArm', 'bothArms', 'armsAndKnees'], read: pose => pose?.joints?.r_elbow_flex},
+  {label: 'Left elbow', limbs: ['leftArm', 'leftArmSide', 'bothArms', 'armsAndKnees'], read: pose => pose?.leftArm?.elbowDeg},
+  {label: 'Right elbow', limbs: ['rightArm', 'rightArmSide', 'bothArms', 'armsAndKnees'], read: pose => pose?.joints?.r_elbow_flex},
   {label: 'Left knee', limbs: ['leftLeg', 'bothKnees', 'armsAndKnees'], read: pose => pose?.joints?.knee_ext_L, sign: -1},
   {label: 'Right knee', limbs: ['rightLeg', 'bothKnees', 'armsAndKnees'], read: pose => pose?.joints?.knee_ext_R, sign: -1}
 ];
@@ -21,11 +21,21 @@ function leftLift(pose) {
   return Math.atan2(Math.abs(upper[0]), -upper[1]) * 180 / Math.PI;
 }
 
+function leftSideLift(pose) {
+  const upper = pose?.leftArm?.upper;
+  return Array.isArray(upper) && upper.length === 3 && upper.every(Number.isFinite)
+    ? Math.atan2(-upper[2], -upper[1]) * 180 / Math.PI : null;
+}
+
 const lifts = [
   {label: 'Left upper-arm lift', limbs: ['leftArm', 'bothArms', 'armsAndKnees'], read: leftLift,
     description: 'Angle of the saved left upper-arm direction in the camera picture. The shoulder line sets the horizontal. Down is 0°, level is 90° and overhead is 180°. Inward and outward lifts of the same size share an angle.'},
   {label: 'Right shoulder lift', limbs: ['rightArm', 'bothArms', 'armsAndKnees'], read: pose => pose?.joints?.r_shoulder_abd,
     description: 'Sideways lift requested at the avatar’s right shoulder. The shoulder line in the picture sets the horizontal. Down is 0°, out to the side is 90° and overhead is 180°. The game limits the target to this range.'},
+  {label: 'Left shoulder forward lift', limbs: ['leftArmSide'], read: leftSideLift, wrapAngle: true,
+    description: 'Left upper-arm angle in the side view. Down is 0°. Positive angles point towards the front. Overhead is both −180° and 180°. Speed follows the shorter turn across that point.'},
+  {label: 'Right shoulder forward lift', limbs: ['rightArmSide'], read: pose => pose?.joints?.r_shoulder_flex,
+    description: 'Right shoulder target from the side view. Down is 0°. Positive angles point towards the front.'},
   {label: 'Left hip lift', limbs: ['leftHip'], read: pose => pose?.joints?.[hipJoints.leftHip],
     description: 'Left thigh angle in the side view. A thigh pointing down along the torso is 0°. Positive angles move it towards the front of the body.'},
   {label: 'Right hip lift', limbs: ['rightHip'], read: pose => pose?.joints?.[hipJoints.rightHip],
@@ -71,7 +81,9 @@ export function angleRates(take, joint) {
     // The camera waits 90 ms between worker responses and the next frame.
     // Ignore tiny intervals and gaps longer than a quarter second.
     if (angle !== null && previousAngle !== null && elapsed >= 50 && elapsed <= 250) {
-      intervals.push({start: lastTime, end: time, rate: (angle - previousAngle) * 1000 / elapsed});
+      const delta = angle - previousAngle;
+      const turn = joint.wrapAngle ? (delta + 540) % 360 - 180 : delta;
+      intervals.push({start: lastTime, end: time, rate: turn * 1000 / elapsed});
       coveredMs += elapsed;
     }
     previousAngle = angle;

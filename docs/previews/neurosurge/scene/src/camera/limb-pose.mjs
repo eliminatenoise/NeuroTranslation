@@ -11,11 +11,22 @@ const chains = {
 
 export const hipJoints = Object.freeze({leftHip: 'hip_flex_L', rightHip: 'hip_flex_R'});
 export const hipLimits = Object.freeze([-30, 120]);
+export const sideArmParts = Object.freeze({leftArmSide: 'leftArm', rightArmSide: 'rightArm'});
+export const sideArmFlexLimits = Object.freeze([-60, 180]);
+
+export function sideArmAngle(forward, down) {
+  const degrees = Math.atan2(forward, down) * 180 / Math.PI;
+  const [lower, upper] = sideArmFlexLimits;
+  // An upper arm close to vertical can cross the angle's wrap point.
+  return degrees < -135 ? upper : Math.max(lower, Math.min(upper, degrees)) || 0;
+}
 
 export const trackingChoices = {
   rightArm: {name: 'Right arm', frame: 'Face the lens. Show both shoulders, your right elbow and wrist.', motion: 'Right shoulder and elbow', parts: ['rightArm']},
   leftArm: {name: 'Left arm', frame: 'Face the lens. Show both shoulders, your left elbow and wrist.', motion: 'Left arm reach and elbow', parts: ['leftArm']},
   bothArms: {name: 'Both arms', frame: 'Face the lens with both shoulders, elbows and wrists in view.', motion: 'Both arms', parts: ['leftArm', 'rightArm']},
+  leftArmSide: {name: 'Left arm from the side', frame: 'Turn sideways with your left arm toward the lens. Keep your face, hips, shoulder, elbow and wrist in view.', motion: 'Left arm forward and back', parts: ['leftArm']},
+  rightArmSide: {name: 'Right arm from the side', frame: 'Turn sideways with your right arm toward the lens. Keep your face, hips, shoulder, elbow and wrist in view.', motion: 'Right arm forward and back', parts: ['rightArm']},
   leftLeg: {name: 'Left knee', frame: 'Turn partway sideways. Show shoulders, hips, your left knee and ankle.', motion: 'Left knee', parts: ['leftLeg']},
   rightLeg: {name: 'Right knee', frame: 'Turn partway sideways. Show shoulders, hips, your right knee and ankle.', motion: 'Right knee', parts: ['rightLeg']},
   leftHip: {name: 'Left hip lift', frame: 'Turn sideways. Keep your face, shoulders and left thigh in view.', motion: 'Left hip lift', parts: ['leftHip']},
@@ -91,17 +102,13 @@ function visible(p) {
     Number.isFinite(p.visibility) && p.visibility >= 0.65;
 }
 
-function projectedHip(points, width, height, limb) {
-  const [otherShoulder, shoulder, hip, knee] = chains[limb];
-  const otherHip = limb === 'leftHip' ? 24 : 23;
-  const indices = [0, 7, 8, otherShoulder, shoulder, otherHip, hip, knee];
+function sideView(points, width, height, otherShoulder, shoulder, otherHip, hip) {
+  const indices = [0, 7, 8, otherShoulder, shoulder, otherHip, hip];
   if (!indices.every(index => visible(points[index]))) return null;
   const xy = index => [points[index].x * width, points[index].y * height];
   const down = between(xy(shoulder), xy(hip));
   const torsoLength = Math.hypot(...down);
-  const thigh = between(xy(hip), xy(knee));
-  if (torsoLength < Math.min(width, height) * 0.08 || down[1] < 0.7 * torsoLength ||
-      Math.hypot(...thigh) < 0.5 * torsoLength) return null;
+  if (torsoLength < Math.min(width, height) * 0.08 || down[1] < 0.7 * torsoLength) return null;
 
   // Work in the plane of the picture. The nose must project beyond both ears
   // and the torso must also appear narrow, so turning only the head is insufficient.
@@ -114,18 +121,57 @@ function projectedHip(points, width, height, limb) {
   if (noseFromRightEar * direction < 0.04 * torsoLength || Math.abs(noseFromLeftEar) < 0.04 * torsoLength ||
       Math.max(Math.abs(noseFromLeftEar), Math.abs(noseFromRightEar)) < 0.10 * torsoLength ||
       breadth > 0.62 * torsoLength) return null;
+  return {xy, down, across, torsoLength, direction};
+}
 
+function projectedHip(points, width, height, limb) {
+  const [otherShoulder, shoulder, hip, knee] = chains[limb];
+  if (!visible(points[knee])) return null;
+  const view = sideView(points, width, height, otherShoulder, shoulder, limb === 'leftHip' ? 24 : 23, hip);
+  if (!view) return null;
+  const {xy, down, across, torsoLength, direction} = view;
+  const thigh = between(xy(hip), xy(knee));
+  if (Math.hypot(...thigh) < 0.5 * torsoLength) return null;
   const along = dot(thigh, down) / torsoLength;
   const lift = Math.atan2(direction * dot(thigh, across), along) * 180 / Math.PI;
   const [lower, upper] = hipLimits;
   return {joints: {[hipJoints[limb]]: Math.max(lower, Math.min(upper, lift)) || 0}};
 }
 
+function projectedSideArm(points, width, height, limb) {
+  const left = limb === 'leftArm';
+  const [otherShoulder, shoulder, elbow, wrist] = chains[limb];
+  if (![elbow, wrist].every(index => visible(points[index]))) return null;
+  const view = sideView(points, width, height, otherShoulder, shoulder, left ? 24 : 23, left ? 23 : 24);
+  if (!view) return null;
+  const {xy, down, across, torsoLength, direction} = view;
+  const upper = between(xy(shoulder), xy(elbow));
+  const fore = between(xy(elbow), xy(wrist));
+  const upperLength = Math.hypot(...upper), foreLength = Math.hypot(...fore);
+  if (Math.min(upperLength, foreLength) < 0.25 * torsoLength) return null;
+  const cosine = dot(upper, fore) / (upperLength * foreLength);
+  const elbowDeg = Math.min(145, Math.acos(Math.min(1, Math.max(-1, cosine))) * 180 / Math.PI);
+  if (!left) {
+    const forward = sideArmAngle(direction * dot(upper, across), dot(upper, down) / torsoLength);
+    return {joints: {r_shoulder_abd: 0, r_shoulder_flex: forward,
+      r_elbow_flex: elbowDeg}};
+  }
+  const reach = between(xy(shoulder), xy(wrist));
+  if (Math.hypot(...reach) < 0.025 * Math.min(width, height)) return null;
+  const bearing = vector => {
+    const length = Math.hypot(...vector);
+    return [0, -dot(vector, down) / (length * torsoLength), -direction * dot(vector, across) / length];
+  };
+  return {leftArm: {bearing: bearing(reach), upper: bearing(upper), elbowDeg}};
+}
+
 export function poseForLimb(points, width, height, limb) {
-  const chain = chains[limb];
+  const sideArm = Object.hasOwn(sideArmParts, limb) ? sideArmParts[limb] : null;
+  const chain = chains[sideArm ?? limb];
   if (!points || !Array.isArray(chain) || !Number.isFinite(width) || !Number.isFinite(height) ||
       width <= 0 || height <= 0) return null;
   if (Object.hasOwn(hipJoints, limb)) return projectedHip(points, width, height, limb);
+  if (sideArm) return projectedSideArm(points, width, height, sideArm);
   const markers = chain.map(index => points[index]);
   if (!markers.every(visible)) return null;
   const [opposite, root, middle, end] = markers.map(p => [p.x * width, p.y * height]);
@@ -184,7 +230,7 @@ function shinsOverlap(points, width, height) {
 export function poseForSelection(points, width, height, selection, hasDetail) {
   function read(limb) {
     const result = poseForLimb(points, width, height, limb);
-    return result && hasDetail(limb) ? result : null;
+    return result && hasDetail(Object.hasOwn(sideArmParts, limb) ? sideArmParts[limb] : limb) ? result : null;
   }
   const arms = selection === 'bothArms' || selection === 'armsAndKnees';
   const knees = selection === 'bothKnees' || selection === 'armsAndKnees';

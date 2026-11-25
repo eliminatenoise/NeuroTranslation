@@ -1,4 +1,4 @@
-import {hipJoints, hipLimits, trackingChoices} from './limb-pose.mjs';
+import {hipJoints, hipLimits, sideArmParts, sideArmFlexLimits, trackingChoices} from './limb-pose.mjs';
 import {TAKE_LIMIT_MS} from './limb-take.mjs';
 
 export const MAX_TAKE_FILE_BYTES = 2 * 1024 * 1024;
@@ -14,6 +14,7 @@ const jointRanges = {
   leftHip: {[hipJoints.leftHip]: hipLimits},
   rightHip: {[hipJoints.rightHip]: hipLimits}
 };
+const sideArmRanges = {r_shoulder_abd: [0, 0], r_shoulder_flex: sideArmFlexLimits, r_elbow_flex: [0, 145]};
 // Both capture paths resize their tracking bitmap to at most 640 pixels per side.
 const maxBitmapSide = 640;
 
@@ -46,14 +47,13 @@ function pair(value, minX, maxX, minY, maxY) {
   return [value[0], value[1]];
 }
 
-function direction(value) {
-  requireValue(Array.isArray(value) && value.length === 3 && value[2] === 0 &&
-    Number.isFinite(value[0]) && Number.isFinite(value[1]) &&
-    Math.abs(Math.hypot(value[0], value[1]) - 1) <= 1e-12, 'arm direction');
+function direction(value, fromSide) {
+  requireValue(Array.isArray(value) && value.length === 3 && value[fromSide ? 0 : 2] === 0 &&
+    value.every(Number.isFinite) && Math.abs(Math.hypot(...value) - 1) <= 1e-12, 'arm direction');
   return [value[0], value[1], value[2]];
 }
 
-function readPose(value, parts, counts) {
+function readPose(value, parts, counts, fromSide) {
   fields(value, [], ['leftArm', 'joints'], 'pose');
   const pose = {};
   if (Object.hasOwn(value, 'leftArm')) {
@@ -61,7 +61,7 @@ function readPose(value, parts, counts) {
     const arm = value.leftArm;
     fields(arm, ['bearing', 'upper', 'elbowDeg'], [], 'left arm');
     requireValue(inRange(arm.elbowDeg, 0, 145), 'left elbow angle');
-    pose.leftArm = {bearing: direction(arm.bearing), upper: direction(arm.upper), elbowDeg: arm.elbowDeg};
+    pose.leftArm = {bearing: direction(arm.bearing, fromSide), upper: direction(arm.upper, fromSide), elbowDeg: arm.elbowDeg};
     counts[parts.indexOf('leftArm')]++;
   }
   if (Object.hasOwn(value, 'joints')) {
@@ -70,7 +70,7 @@ function readPose(value, parts, counts) {
     fields(joints, [], allowed, 'pose joints');
     pose.joints = {};
     for (const [index, part] of parts.entries()) {
-      const ranges = Object.entries(jointRanges[part] ?? {});
+      const ranges = Object.entries((fromSide && part === 'rightArm' ? sideArmRanges : jointRanges[part]) ?? {});
       if (!ranges.some(([key]) => Object.hasOwn(joints, key))) continue;
       for (const [key, [min, max]] of ranges) {
         requireValue(Object.hasOwn(joints, key) && inRange(joints[key], min, max), 'joint angle');
@@ -125,6 +125,7 @@ function readTake(value) {
   const {limb, duration, name} = value;
   requireValue(typeof limb === 'string' && Object.hasOwn(trackingChoices, limb), 'limb selection');
   const choice = trackingChoices[limb];
+  const fromSide = Object.hasOwn(sideArmParts, limb);
   requireValue(name === choice.name, 'limb name');
   requireValue(inRange(duration, 0, TAKE_LIMIT_MS) && duration > 0, 'duration');
   const hasSource = Object.hasOwn(value, 'source');
@@ -146,7 +147,8 @@ function readTake(value) {
       frames.push({time, pose: null, expiry: frame.expiry});
     } else {
       requireValue(!Object.hasOwn(frame, 'expiry'), 'tracked frame expiry');
-      const copied = {time, pose: readPose(frame.pose, choice.parts, counts)};
+      const copied = {time, pose: readPose(frame.pose, choice.parts, counts, fromSide)};
+      requireValue(!fromSide || (!Object.hasOwn(frame, 'wrists') && !Object.hasOwn(frame, 'armGeometry')), 'side-view wrist comparison data');
       if (Object.hasOwn(frame, 'wrists')) copied.wrists = readWrists(frame.wrists, copied.pose);
       if (Object.hasOwn(frame, 'armGeometry')) copied.armGeometry = readGeometry(frame.armGeometry, copied.wrists);
       frames.push(copied);
