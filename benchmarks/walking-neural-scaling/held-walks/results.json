@@ -1,0 +1,341 @@
+{
+  "source": "https://aperta.ulakbim.gov.tr/records/286866",
+  "dataset_licence": "CC-BY-4.0",
+  "scope": "Six reserved people and three overground walks per person in İzmir. All weights frozen. 100 ms impulse.",
+  "measurement": "Calibrated vertical force recorded at 2 kHz. Synthetic delay and missing input conditions change muscle summaries only.",
+  "common_cases": 863,
+  "walks": 18,
+  "condition_order": [
+    "clean",
+    "delayed_muscle_history",
+    "missing_recent_muscle"
+  ],
+  "people": 6,
+  "bootstrap_draws": 46656,
+  "mean_impulse_error_ns": {
+    "base_00": {
+      "clean": 4.602113476744493,
+      "delayed_muscle_history": 4.7441903085060195,
+      "missing_recent_muscle": 5.77342350692841
+    },
+    "base_04": {
+      "clean": 3.0639977257887363,
+      "delayed_muscle_history": 4.763763142479651,
+      "missing_recent_muscle": 13.634931364297024
+    },
+    "base_08": {
+      "clean": 2.6756712361528376,
+      "delayed_muscle_history": 4.36438552422794,
+      "missing_recent_muscle": 13.768624552217737
+    },
+    "base_16": {
+      "clean": 3.004264381323591,
+      "delayed_muscle_history": 3.5375534641372917,
+      "missing_recent_muscle": 11.473789100491821
+    },
+    "clean_08": {
+      "clean": 2.1628178706561,
+      "delayed_muscle_history": 3.750132710552233,
+      "missing_recent_muscle": 8.79269298369392
+    },
+    "augmented_08": {
+      "clean": 1.6931234665648063,
+      "delayed_muscle_history": 1.7428212764993374,
+      "missing_recent_muscle": 1.8128614434268
+    },
+    "clean_16": {
+      "clean": 2.0019860426855685,
+      "delayed_muscle_history": 2.505894265934512,
+      "missing_recent_muscle": 11.285046519763645
+    },
+    "augmented_16": {
+      "clean": 1.903392325441633,
+      "delayed_muscle_history": 1.8446047617323214,
+      "missing_recent_muscle": 2.146891335386819
+    },
+    "base_08_pass_1": {
+      "clean": 3.825658899695142,
+      "delayed_muscle_history": 4.474980139176195,
+      "missing_recent_muscle": 8.897215899410789
+    },
+    "base_08_pass_5": {
+      "clean": 3.07358612491184,
+      "delayed_muscle_history": 3.275148408708681,
+      "missing_recent_muscle": 12.342584382401862
+    },
+    "base_08_pass_8": {
+      "clean": 3.2869297216525832,
+      "delayed_muscle_history": 4.489774846493407,
+      "missing_recent_muscle": 12.48973618792553
+    },
+    "last_force": {
+      "clean": 7.011611405358514,
+      "delayed_muscle_history": 7.011611405358514,
+      "missing_recent_muscle": 7.011611405358514
+    },
+    "linear": {
+      "clean": 5.482538234537182,
+      "delayed_muscle_history": 5.702107729026824,
+      "missing_recent_muscle": 6.335260463745609
+    },
+    "trees": {
+      "clean": 3.3256751381953795,
+      "delayed_muscle_history": 3.6761770826702613,
+      "missing_recent_muscle": 4.581877326117003
+    }
+  },
+  "paired_comparisons": [
+    {
+      "candidate": "augmented_08",
+      "reference": "clean_08",
+      "condition": "clean",
+      "difference_ns": -0.46969440409129387,
+      "interval_95_ns": [
+        -0.6700126847984462,
+        -0.30217816015997817
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_08",
+      "reference": "clean_08",
+      "condition": "delayed_muscle_history",
+      "difference_ns": -2.007311434052896,
+      "interval_95_ns": [
+        -2.5935546548304145,
+        -1.479008112114485
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_08",
+      "reference": "clean_08",
+      "condition": "missing_recent_muscle",
+      "difference_ns": -6.979831540267118,
+      "interval_95_ns": [
+        -7.791974132143916,
+        -6.0544049961672
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_08",
+      "reference": "last_force",
+      "condition": "clean",
+      "difference_ns": -5.318487938793708,
+      "interval_95_ns": [
+        -5.935554145643707,
+        -4.754240467528104
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_08",
+      "reference": "trees",
+      "condition": "clean",
+      "difference_ns": -1.632551671630573,
+      "interval_95_ns": [
+        -1.8919317681290295,
+        -1.3679058885752708
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_08",
+      "reference": "linear",
+      "condition": "clean",
+      "difference_ns": -3.789414767972375,
+      "interval_95_ns": [
+        -4.138173523881324,
+        -3.427272923696185
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_16",
+      "reference": "clean_16",
+      "condition": "clean",
+      "difference_ns": -0.09859371724393523,
+      "interval_95_ns": [
+        -0.2266691071149806,
+        0.020237486043698166
+      ],
+      "people_lower_error": 5,
+      "people": 6
+    },
+    {
+      "candidate": "base_08",
+      "reference": "base_00",
+      "condition": "clean",
+      "difference_ns": -1.926442240591656,
+      "interval_95_ns": [
+        -2.3150671401280603,
+        -1.5968947053525406
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "base_16",
+      "reference": "base_08",
+      "condition": "clean",
+      "difference_ns": 0.32859314517075316,
+      "interval_95_ns": [
+        -0.030064165693911942,
+        0.6635025550896281
+      ],
+      "people_lower_error": 1,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_08",
+      "reference": "last_force",
+      "condition": "delayed_muscle_history",
+      "difference_ns": -5.268790128859176,
+      "interval_95_ns": [
+        -5.907594042733103,
+        -4.661794160459771
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_08",
+      "reference": "trees",
+      "condition": "delayed_muscle_history",
+      "difference_ns": -1.9333558061709237,
+      "interval_95_ns": [
+        -2.3402264553748053,
+        -1.4669168745783818
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_08",
+      "reference": "linear",
+      "condition": "delayed_muscle_history",
+      "difference_ns": -3.9592864525274876,
+      "interval_95_ns": [
+        -4.279230478145449,
+        -3.6457924756979065
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_16",
+      "reference": "clean_16",
+      "condition": "delayed_muscle_history",
+      "difference_ns": -0.6612895042021901,
+      "interval_95_ns": [
+        -1.0533807582629582,
+        -0.22053781593406974
+      ],
+      "people_lower_error": 5,
+      "people": 6
+    },
+    {
+      "candidate": "base_08",
+      "reference": "base_00",
+      "condition": "delayed_muscle_history",
+      "difference_ns": -0.3798047842780798,
+      "interval_95_ns": [
+        -1.1247366711959221,
+        0.23124051060787032
+      ],
+      "people_lower_error": 4,
+      "people": 6
+    },
+    {
+      "candidate": "base_16",
+      "reference": "base_08",
+      "condition": "delayed_muscle_history",
+      "difference_ns": -0.8268320600906476,
+      "interval_95_ns": [
+        -1.491087565994823,
+        -0.12759238132328568
+      ],
+      "people_lower_error": 4,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_08",
+      "reference": "last_force",
+      "condition": "missing_recent_muscle",
+      "difference_ns": -5.198749961931714,
+      "interval_95_ns": [
+        -5.75832766673022,
+        -4.725930337196725
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_08",
+      "reference": "trees",
+      "condition": "missing_recent_muscle",
+      "difference_ns": -2.7690158826902036,
+      "interval_95_ns": [
+        -3.5928314069412064,
+        -2.0236789111567575
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_08",
+      "reference": "linear",
+      "condition": "missing_recent_muscle",
+      "difference_ns": -4.522399020318809,
+      "interval_95_ns": [
+        -4.80994143231789,
+        -4.192811384761666
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "augmented_16",
+      "reference": "clean_16",
+      "condition": "missing_recent_muscle",
+      "difference_ns": -9.138155184376824,
+      "interval_95_ns": [
+        -9.997239760382575,
+        -8.167501330188847
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    },
+    {
+      "candidate": "base_08",
+      "reference": "base_00",
+      "condition": "missing_recent_muscle",
+      "difference_ns": 7.995201045289328,
+      "interval_95_ns": [
+        7.281928906161511,
+        8.668430679897014
+      ],
+      "people_lower_error": 0,
+      "people": 6
+    },
+    {
+      "candidate": "base_16",
+      "reference": "base_08",
+      "condition": "missing_recent_muscle",
+      "difference_ns": -2.2948354517259166,
+      "interval_95_ns": [
+        -2.4938579552280595,
+        -2.097544775559547
+      ],
+      "people_lower_error": 6,
+      "people": 6
+    }
+  ]
+}
