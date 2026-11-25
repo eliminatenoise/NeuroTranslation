@@ -1,5 +1,7 @@
 # Floor load from leg muscle signals
 
+A follow-up fitted the models on five people, then checked predictions on four further people from the same recording collection. [Follow-up results and downloads](participant-transfer/)
+
 A forecast of zero was closer to the measurements than any of the learned forecasts for each of four new participants. The same forecast also had the lowest error in an earlier check on the person who supplied the training data. The models estimated force through two plates in a walkway. Most recorded windows had very little load on those plates.
 
 ## What was recorded
