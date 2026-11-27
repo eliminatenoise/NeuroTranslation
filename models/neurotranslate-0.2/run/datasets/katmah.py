@@ -42,8 +42,9 @@ META = {
               "positions, free acceleration) are not used, so all people carry the same IMU channels.",
               "Identifier 24 has no IMU folder and identifiers 8 and 24 have no EMG file at 0.5 m/s; each gives the "
               "acquisitions it has.",
-              "Identifier 24 has no role in the knee study's roster (it was left out there only for lacking IMU data); "
-              "the committed pooled-encoder allocation assigns identifiers 1-40 to training."],
+              "Identifier 24 is a training person by the knee study's own split rule: its REPRODUCE.md assigns IDs 1-40 "
+              "to training and lists the S24 recording as missing (it has no IMU file), so it is absent from the "
+              "study's member list but holds no evaluation role."],
 }
 
 
@@ -58,16 +59,22 @@ def roster(paths):
     for m in s["members"]:
         unit_roles["S%d" % m["subject"]] = m["split"]
     units = ["S%d" % i for i in IDS]
-    unlisted = "unlisted in the knee roster (no IMU file); training by the committed pooled-encoder allocation"
+    rep = f.parent / "REPRODUCE.md"
+    text = rep.read_text()
+    assert "The split uses IDs 1\u201340 for training" in text and "The source lists the S24 recording as missing" in text
+    unlisted = "train (knee study ID range 1-40, REPRODUCE.md; recording listed as missing there, no IMU file)"
     for u in units:
         if u not in unit_roles:
-            unit_roles[u] = unlisted  # identifier 24: never assigned to any evaluation group
+            unit_roles[u] = unlisted  # identifier 24: inside the training ID range, never in an evaluation group
     excluded = {"knee_test_41_52": sorted(u for u, r in unit_roles.items() if r == "test"),
                 "reserved_53_59": ["S%d" % i for i in range(53, 60)]}
     return {"units": units, "unit_roles": unit_roles, "training_roles": ["train", unlisted],
-            "rule": "knee-motion roster: train S1-40 (S24 unlisted: no IMU file), test S41-52, S53-59 excluded",
+            "rule": "knee-motion split (REPRODUCE.md): train IDs 1-40 (S24 listed as missing, no IMU file), test 41-52, "
+                    "53-59 reserved",
             "excluded": excluded,
-            "roster_files": [{"file": "models/knee-motion/sources.json (published knee study)", "sha256": common.sha256_file(f)}]}
+            "roster_files": [{"file": "models/knee-motion/sources.json (published knee study)", "sha256": common.sha256_file(f)},
+                             {"file": "models/knee-motion/REPRODUCE.md (published knee study, split rule)",
+                              "sha256": common.sha256_file(rep)}]}
 
 
 def _imu_header(paths):
