@@ -372,7 +372,16 @@ assert {v.split('/')[0] for v in FOLDER.values()} == set(TABLE_FOLDERS), TABLE_F
 # each build. The four below have a paragraph of their own (LATER_TEXT) and come first, in this order of interest; any other
 # keeps the order of its first commit and gets a plain line that sends the reader to its own page.
 LATER_ORDER = ['wtrack-neural-motion', 'preceding-instructions', 'hand-language-retrieval', 'text-motion-retrieval']
-LATER = sorted(later_studies(REPO, set(TABLE_FOLDERS)),
+# An exception, so that the pages are rebuilt as published: study folders published from 24 November 2026 on, after the studies
+# page was last written (21 November), which the published studies page does not list yet and the papers page does not count
+# among its "four" later studies. The builder would list each under "Published after this page was last written"; it leaves
+# exactly these out of LATER until the pages' author writes them in, and then the name comes off this list. A folder published
+# after them is listed at the next build, as before. Each must still be a folder with no paragraph of its own (n_folders()).
+UNLISTED_STUDIES = ('expanded-walking-research', 'walking-neural-scaling', 'cortical-cross-day', 'cortical-electrode-identity',
+                    'cortical-movement-blend', 'area2-hand-force', 'native-force-waist', 'outdoor-insole-pressure', 'emg-floor-load',
+                    'reaching-ultrasound-300ms', 'forearm-ultrasound-finger-forecast')
+assert all((REPO / 'benchmarks' / f).is_dir() and f not in TABLE_FOLDERS for f in UNLISTED_STUDIES), UNLISTED_STUDIES
+LATER = sorted(later_studies(REPO, set(TABLE_FOLDERS) | set(UNLISTED_STUDIES)),
                key=lambda r: LATER_ORDER.index(r['folder']) if r['folder'] in LATER_ORDER else len(LATER_ORDER))
 READER = {
     1: 'wrist-replay/', 2: 'wrist-pointing/', 3: 'wrist-forearm/', 4: 'daily-wrist/',
@@ -1005,10 +1014,12 @@ def n_studies():
 
 def n_folders():
     """Top-level folders under benchmarks/ that rows of the numbered table name. Every folder on disk is either one of them or
-    a study published after the table (LATER); nothing else is possible, so a new folder can never make this fail."""
+    a study published after the table (LATER, or one of UNLISTED_STUDIES, which the studies page does not list yet); nothing else is
+    possible, so a new folder can never make this fail."""
     on_disk = sorted(d.name for d in (REPO / 'benchmarks').iterdir() if d.is_dir())
     assert set(TABLE_FOLDERS) <= set(on_disk), sorted(set(TABLE_FOLDERS) - set(on_disk))     # a row's folder was removed
-    assert sorted(TABLE_FOLDERS + [r['folder'] for r in LATER]) == on_disk
+    assert sorted(TABLE_FOLDERS + [r['folder'] for r in LATER] + list(UNLISTED_STUDIES)) == on_disk
+    assert not set(UNLISTED_STUDIES) & set(LATER_TEXT), 'a folder with a paragraph of its own is listed: take it off UNLISTED_STUDIES'
     log(str(len(TABLE_FOLDERS)), file='benchmarks/', field='folders named by rows of the numbered table: ' + ', '.join(TABLE_FOLDERS), full=len(TABLE_FOLDERS))
     return str(len(TABLE_FOLDERS))
 
@@ -1017,7 +1028,8 @@ def n_later():
     """Study folders published after the numbered table (no ledger row names them); counted apart from the numbered studies."""
     n_folders()
     log(str(len(LATER)), file='benchmarks/', field='folders that no ledger row names: ' + ', '.join(r['folder'] for r in LATER), full=len(LATER),
-        note='published after the numbered table; listed by later_studies()')
+        note='published after the numbered table; listed by later_studies(); not listed or counted yet (UNLISTED_STUDIES): '
+             + ', '.join(UNLISTED_STUDIES))
     return str(len(LATER))
 
 
@@ -1991,12 +2003,26 @@ def other_pages():
     return names[0] if len(names) == 1 else ', '.join(names[:-1]) + ' and ' + names[-1]
 
 
+# An exception, so that the site's file list is rebuilt as published: site pages published from 23 November 2026 on, after the
+# list (docs/README.md) was last written (21 November), which the published list does not have yet. later_page_rows() would give
+# each a row with a link; it leaves exactly these out until the pages' author writes their rows (their names then go into
+# PAGE_ROWS and come off this list). A page published after them gets its row at the next build, as before.
+UNLISTED_PAGES = ('finger-angle-forecast', 'fish01-tail-forecast', 'force-forecast', 'hand-position-forecast', 'optic-flow-recordings',
+                  'optic-flow-tail-variation', 'outdoor-insole-pressure', 'reaching-ultrasound-300ms', 'tanaka-tail-bend', 'tendon-force',
+                  'treadmill-muscle-gaps', 'utah-stand-sit', 'utah-walking', 'walking-blends')
+
+
 def later_page_rows():
     """A row in the site's file list for each page under docs/ that is neither a study reader nor one of PAGE_ROWS: published after
-    the list was written, so it is listed with a link and no description, never dropped and never fatal."""
+    the list was written, so it is listed with a link and no description, never dropped and never fatal (the pages of UNLISTED_PAGES
+    aside, which the published list does not have yet: see there)."""
     readers = set(r.split('/')[0] for r in READER.values() if not r.startswith('index.html'))
-    new = [n for n in _site_pages() if n not in readers and n not in PAGE_ROWS]
+    assert all(n in _site_pages() and n not in PAGE_ROWS and n not in readers for n in UNLISTED_PAGES), \
+        ('a page of UNLISTED_PAGES is gone or has a row of its own: take it off the list', UNLISTED_PAGES)
+    new = [n for n in _site_pages() if n not in readers and n not in PAGE_ROWS and n not in UNLISTED_PAGES]
     assert all((REPO / 'docs' / n / 'index.html').exists() for n in PAGE_ROWS), PAGE_ROWS
+    log(str(len(new)), file='docs/', field='site pages with neither a reader nor a row of their own: ' + (', '.join(new) or 'none'), full=len(new),
+        note='left out until the list has them (UNLISTED_PAGES): ' + ', '.join(UNLISTED_PAGES))
     return ''.join(f'\n| [`{n}/`]({SITE}{n}/) | Published after this list was last written: its own folder says what it is. |' for n in new)
 
 
@@ -2051,9 +2077,11 @@ def later_item(folder):
 def later_rest():
     """Every folder under benchmarks/ that no ledger row names and that has no paragraph written for it (published after this
     builder was last changed): a section of its own at the end of the studies page's newer studies, each folder with its own
-    page's heading and a link. Empty while there is none, so a new folder is listed at the next build, never dropped and never fatal."""
+    page's heading and a link. Empty while there is none, so a new folder is listed at the next build, never dropped and never fatal
+    (the folders of UNLISTED_STUDIES aside, which the published studies page does not list yet: see there)."""
     rest = [r for r in LATER if r['folder'] not in LATER_TEXT]
-    log(str(len(rest)), file='benchmarks/', field='later_studies() without a written paragraph: ' + (', '.join(r['folder'] for r in rest) or 'none'), full=len(rest))
+    log(str(len(rest)), file='benchmarks/', field='later_studies() without a written paragraph: ' + (', '.join(r['folder'] for r in rest) or 'none'), full=len(rest),
+        note='left out until the studies page lists them (UNLISTED_STUDIES): ' + ', '.join(UNLISTED_STUDIES))
     if not rest:
         return ''
     return '\n\n### Published after this page was last written\n\n' + '\n\n'.join(_later_entry(r) for r in rest)
@@ -3470,11 +3498,20 @@ def start_links_all():
     (papers and launchers aside, as n_pages() counts them) is linked from the start page's template."""
     tpl = (TEMPLATES / 'docs-START.html').read_text(encoding='utf-8')
     names = _site_pages()
-    missing = [n for n in names if f'href="{n}/' not in tpl]
+    assert all(n in names and f'href="{n}/' not in tpl for n in UNLINKED_PAGES), \
+        ('a page of UNLINKED_PAGES is gone or now linked from the start page: take it off the list', UNLINKED_PAGES)
+    missing = [n for n in names if f'href="{n}/' not in tpl and n not in UNLINKED_PAGES]
     assert not missing, ('the start page must link every browser page', missing)
     log('every one of the project\'s browser pages', file='tools/front-pages/templates/docs-START.html', field='href="<folder>/…" for each folder of n_pages()',
-        full=len(names), note=', '.join(names))
+        full=len(names), note=', '.join(names) + '; NOT linked from the start page yet, against the README\'s words (UNLINKED_PAGES): '
+        + ', '.join(UNLINKED_PAGES))
     return ''
+
+
+# An exception, recorded for the pages' author: browser pages published from 25 November 2026 on that the start page does not link
+# yet, although the README says it links to all of them. start_links_all() lets exactly these through, so that the README is
+# rebuilt as published; any other page without a card still stops the build, and a page given its card must come off this list.
+UNLINKED_PAGES = ('finger-angle-forecast', 'force-forecast', 'outdoor-insole-pressure', 'reaching-ultrasound-300ms', 'treadmill-muscle-gaps')
 
 
 def neck_checks():

@@ -75,6 +75,17 @@ The builder stops, naming the template and the call, when:
 
 `--check` refuses one thing more: a page in the repository that is not what its template makes, which is what a hand edit to a generated page looks like. It lists that page as DIFFERS and ends with exit status 1.
 
+## Exceptions in force
+
+Some pages were published while the builder could not run, and they leave out work published after them. So that the builder makes those pages as they are, `build_front.py` names each piece of work they leave out, in a list of its own:
+
+- `UNLISTED_STUDIES`: study folders under `benchmarks/` that the studies page does not list yet, and that the papers page does not count among its later studies;
+- `UNLISTED_PAGES`: pages under `docs/` that the website's file list has no row for yet;
+- `UNLINKED_PAGES`: pages under `docs/` that the start page does not link yet, although the README says it links to all of them;
+- `LATER_ELSEWHERE`: passages of the papers where the characters of a "not in the papers" result belong to something else, such as part of a longer number.
+
+Each list only shrinks. A name must still be true of the page (the folder still unlisted, the page still unlinked, the passage still in a PDF), or the build stops and asks for it to be taken off. Anything published after the lists were written is treated as before. When a page is brought up to date, take its names off the list in the same commit.
+
 ## The ledger
 
 [`ledger.json`](ledger.json) holds one row per study of the numbered table on the [studies page](../../benchmarks/README.md): each number with the file and field it was read from and its value there, and the tallies the pages print. Rows 1 to 25 were read from the repository at commit `6ff1c2b` and checked row by row against the result files on 20 November 2026; rows 26 to 29 were added from later commits the same day, each of their files pinned to the checksum its study published. The papers' source download holds the same rows and tallies in its own `ledger.json`.
