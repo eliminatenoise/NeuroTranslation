@@ -376,6 +376,8 @@ def d_arm_orders(manifest, alloc, ident):
                      "ALLOCATION.json_sha256": ident["ALLOCATION.json"],
                      "PROTOCOL.json_sha256": ident["PROTOCOL.json"]},
         "rule": pub["d_arms"]["rule"],
+        "rule_status": "quoted unchanged from ALLOCATION.json d_arms.rule; its last part (an arm uses the first k "
+                       "eligible sources) is replaced from protocol revision 3 by arm_rule below",
         "candidate_note": pub["d_candidate_note"],
         "arm_rule": q["D_arm_rule"],
         "arm_rule_note": "ALLOCATION.json is not edited. The last part of its rule (an arm uses the first k eligible "
