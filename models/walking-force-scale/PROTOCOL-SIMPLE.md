@@ -2,29 +2,30 @@
 
 [Technical edition](PROTOCOL.md) · [Machine-readable protocol](PROTOCOL.json) · [Allocation script](allocate.py) · [Candidate pool](POOL.json) · [Hash orders](ORDER.json)
 
-This is the Simple edition of protocol version 1, fixed on 27 November 2026. It explains the same rules as the Technical edition, in more words and with examples. It was written after the protocol was fixed and changes none of its rules: those are set in `PROTOCOL.json` and `PROTOCOL.md`, and if a sentence here reads differently, those two files govern. The results will get their own Technical and Simple editions when the work is finished (stage C6, section 14). Sections 1 to 20 below have the same numbers and subjects as the sections of the Technical edition, so a reader can move between the two.
+This is the Simple edition of protocol version 1, fixed on 27 November 2026. It explains the same rules as the Technical edition, in more words and with examples. It was written after the protocol was fixed and changes none of its rules: those are set in `PROTOCOL.json` and `PROTOCOL.md`, and if a sentence here reads differently, those two files govern. The Technical edition's opening line says that the Simple edition is written with the results. This Simple edition of the protocol was added earlier, before any data were opened, and the two fixed files could not be changed to mention it. The results will still get their own Technical and Simple editions when the work is finished (stage C6, section 14). Sections 1 to 20 below have the same numbers and subjects as the sections of the Technical edition, so a reader can move between the two.
 
 ## The plan in brief
 
-**What is tested.** The project has published small computer models that watch the last fifth of a second of a person's walk and forecast what a force plate in the floor will measure over the next tenth of a second. All of them learned from the same 12 people (one of them also from 8 people of a second laboratory). This experiment fits the same models on more people from the same laboratory, in steps from 12 people up to the whole training pool, and measures whether their forecasts become more accurate for people they have never seen.
+**What is tested.** The project has published computer models that read the last fifth of a second of force-plate and muscle-voltage measurements from a person's walk and forecast what one force plate in the floor will measure over the next tenth of a second. All of them learned from the same 12 people (one of them also from 8 people of a second laboratory). This experiment fits the same models on more people from the same laboratory, in steps from 12 people up to the whole training pool, and measures whether their forecasts become more accurate for people they have never seen.
 
-**Why.** The project works from the presumption that more data, and more varied data, make a model that carries further to new people. That presumption needs fair tests. The published walking-force models learned from the same 12 people, and the same laboratory's release holds about 80 more healthy people who have never been used for anything. That makes a fair test possible within one laboratory: only the number of training people changes.
+**Why.** The repository's README states the project's working presumption that more data, and more varied data, make a model that carries further. The published walking-force models learned from the same 12 people, and the same laboratory's release holds about 80 more healthy people who have never been used for anything. That makes a fair test possible within one laboratory: only the number of training people changes.
 
 **Which data, and whose.** Every recording this experiment reads comes from one public dataset: the healthy-adult walking recordings of Van Criekinge and colleagues, released on figshare under CC0 1.0 (a public-domain dedication). Each recording holds force-plate measurements and muscle voltages measured on the skin. The stroke recordings in the same release are not used.
 
 **What counts as success.** The main measure is the change in average forecast error, in newton-seconds, between models fitted on 12 people and models fitted on the largest available number of people, measured on a separate group of new people. For each of three model families the result gets one of four labels fixed in advance: helped, harmed, practically no change, or inconclusive. "Helped" needs a statistically clear fall in error (after a correction for running three tests) with an estimated size of at least 3%. The planning study expects the project's own compact model to gain about 3%, right at that line, so it may well end as "practically no change" or "inconclusive". That is stated here, before any result exists.
 
-**What will be published whatever the result.** Every number the plan names in advance, wins and losses alike, with its uncertainty and its counts; each new person's error by their archive code; the code; the fitted models from the largest training group under CC0; and a series of fingerprint files committed at fixed points, most of them pushed to the public repository before the next stage starts, so that anyone can check that sealed files were not changed later (section 18).
+**What will be published whatever the result.** Every number the plan names in advance, wins and losses alike, with its uncertainty and its counts; each new person's error by their archive code; the code; one fitted model of each main family from the largest training group (for M1, the fit with seed 20261124), under CC0; and a series of fingerprint files saved as commits at fixed points, most of them pushed to the public repository before the next stage starts, so that anyone can check that sealed files were not changed later (section 18; the word list below explains commits and pushes).
 
-**What is measured, derived, predicted or simulated.** The force and muscle-voltage samples are measured in the laboratory. The model inputs, the force targets and the "new load" labels are derived from those samples by fixed rules (section 6). The forecasts are model predictions. The planning figures and the trend predictions are predictions made before the outcome is scored. No simulated data are used for fitting or scoring; the only generated values are the noise used in one engineering check (G3, section 13).
+**What is measured, derived, predicted or simulated.** The force and muscle-voltage samples are measured in the laboratory. The model inputs, the force targets and the "new load" labels are derived from those samples by fixed rules (section 6). The forecasts are model predictions. The planning figures and the trend predictions are predictions made before the outcome is scored. No simulated data are used for fitting or scoring. The only artificial signal is the noise that replaces future samples in one engineering check (G3, section 13). Random numbers with fixed seeds are also used to start and sample training and to resample people for the intervals.
 
 **The main limits.** One laboratory, one walking task, healthy adults, two force plates, and only sessions whose files name six particular muscle channels. Muscle voltage on the skin is not a recording from nerves. A trend seen across a few training sizes from one laboratory is not a general law (section 1 lists the limits in full).
 
-**Where things stand.** When this was written, no test data had been opened and this part of the project had downloaded nothing. The work waits for the owner's decisions listed in section 20.
+**Where things stand.** When this was written, no test data had been opened and this part of the project had downloaded nothing. The plan is next pushed to the public repository (stage C1, section 14); the downloads then wait for the owner's decisions listed in section 20.
 
 ## Words used in this plan
 
 - **Force plate**: a flat measuring plate set into the floor. It records how hard a foot pushes on it, 1,000 times per second. This laboratory has four; plates 1 and 2 are used.
+- **Hz (hertz)**: times per second. A signal recorded at 1,000 Hz has 1,000 samples per second, one every millisecond.
 - **Newton (N) and newton-second (N·s)**: the newton is the unit of force; for example, a person of 80 kg standing still presses down with about 785 N. A newton-second is force added up over time: 500 N held for 0.1 s gives 50 N·s.
 - **Impulse**: force added up over a stretch of time, in N·s. The models forecast the impulse on one plate over the next 100 ms.
 - **EMG (surface electromyography)**: the small voltage that working muscles produce, measured with sensors on the skin. It is not a recording from nerves.
@@ -36,8 +37,11 @@ This is the Simple edition of protocol version 1, fixed on 27 November 2026. It 
 - **Checkpoint**: a saved file of a model's learned numbers (its weights).
 - **Frozen checkpoint**: a model file that has already been published. It is scored exactly as it is and never refitted.
 - **Hash (SHA-256)**: a fingerprint of a file or a piece of text, written as 64 letters and digits. The same input always gives the same fingerprint; any change, even of one character, gives a completely different one.
-- **Sealed**: a file's fingerprint has been recorded in a commit, so any later change to the file would be noticed.
+- **Repository, commit and push**: the project's files are kept in a public repository that stores every saved version. A commit is one saved version of the files, identified by its own fingerprint (for example `03e76d4`). Changing anything in a commit afterwards would change that fingerprint. Commits are first made on the project's own computer. Pushing copies them to the public repository, where anyone can see them and when they arrived, so a pushed step gets a public time.
+- **Sealed**: a file, or its fingerprint, has been recorded in a commit, so any later change would be noticed.
+- **Admission**: formal acceptance of a plan, or of a step in it, by a separate reviewer or by the project owner. Where this plan names an admission, the step it covers may not start before it.
 - **Evaluation group**: the new people on whom the final scores are measured. Their recordings are downloaded only after every model has been fitted.
+- **95% interval**: a range that shows how much a figure could vary by chance, for example with a different sample of people. Section 10 explains how the intervals of the results are computed.
 
 ## 1. The question and the main measure
 
@@ -68,7 +72,7 @@ In words:
 4. Subtract: the error at N_max minus the error at 12. A negative number means the error fell for this person.
 5. Average that difference over all evaluation people who can be scored.
 
-Each family is fitted many times at each size, with different seeds and, at the in-between sizes, different draws of people. For each person, the error is first averaged over all those repeat fits of the same size, and only then are people averaged. The measure therefore describes the recipe, not one lucky fit.
+M1 is fitted many times at each size: with 50 seeds at 12 people and at N_max, and with 10 draws of people × 5 seeds at each in-between size. M2 and M3 always give the same result on the same data, so each is fitted once at 12 people, once at N_max, and once per draw (10 fits) at each in-between size (section 7). For each person, the error is first averaged over all the fits of the same size, and only then are people averaged. For M1 the measure therefore describes the recipe, not one lucky fit; M2 and M3 need no repeats at a fixed set of people, because a refit gives the same result.
 
 The **relative change** is Delta_f divided by the average of MAE_i,f(12) over the same people. Example with made-up numbers: if the 12-person error averaged 2.0 N·s and Delta were −0.08 N·s, the relative change would be −4%, a 4% smaller error.
 
@@ -80,7 +84,7 @@ The 12-person rung is our own new fit of the earlier 12 people with the identica
 
 These limits are written down now, before any result exists, so that the results cannot be described more broadly than the experiment allows:
 
-- **One laboratory and one task.** Healthy adults walking barefoot along the floor at their own preferred speed. Nothing here says how the models behave for other laboratories, other people, shoes, running, stairs or illness.
+- **One laboratory and one task.** Healthy adults walking barefoot along the floor at their own preferred speed. Nothing here says how the models behave in other laboratories, for other groups of people (for example children, or people with an illness), with shoes, or for running or stairs.
 - **Two plates.** Plates 1 and 2 cover part of a 12 m walkway. The forecast describes those two plates only.
 - **A possible hidden selection.** The results cover only sessions whose files carry six exact muscle-channel names. If the way files were named depended on when they were recorded, keeping only correctly named files would also keep only certain recording periods. The results would then describe those periods, and this is reported with them.
 - **EMG is muscle voltage, not nerve activity.** Surface EMG measures muscle voltage on the skin. It is not a nerve recording.
@@ -94,7 +98,7 @@ No evaluation, reserved or test data had been opened, and this part of the proje
 
 - **The archive's table of contents.** A zip archive ends with a table of contents, called the central directory, that lists every file in it with its size, position and checksum. This one is 87,971 bytes long (SHA-256 beginning `96a6b5d9`) and lists 1,016 entries. Reading it says who is in the archive without opening any recording. It was compared with the earlier roster (section 3.3). Of 138 healthy person codes:
   - 26 are listed by the dataset's authors as lacking analog data (force and muscle signals);
-  - 1, SUBJ001, is an engineering person;
+  - 1, SUBJ001, is labelled "engineering person" in the record; the record gives only that label, and SUBJ001 is not a candidate;
   - 30 are on the earlier roster;
   - 81 were never assigned to anything.
 
@@ -103,7 +107,7 @@ No evaluation, reserved or test data had been opened, and this part of the proje
 - **The published model files.** The fingerprints of the frozen published model files were confirmed at repository commit `03e76d4` (section 8).
 - **Re-training reproduces the sealed files.** We re-trained the six sealed 12-person compact model files, using our own reader for the recording files and our own copy of the feature calculations. Every number in every weight array came out identical to the sealed files. The files' fingerprints still differ, only because the file format (safetensors) writes its descriptive metadata keys in a varying order. Saved without metadata, three separate runs produced identical files, byte for byte.
 - **Re-fitting reproduces the tree models.** The published 12-person tree models, refitted from the same rows, give predictions identical to the sealed tree file down to the last bit.
-- **What else the recording files contain.** One already-used fit walk shows that each recording file's description section also holds processed foot events (`EVENT:TIMES`, `EVENT:LABELS`), gait measurements (`ANALYSIS:VALUES`), information about the person (`SUBJECTS`) and about the equipment maker (`MANUFACTURER`). The probe in section 4 never decodes them.
+- **What else the recording files contain.** One already-used fit walk shows that a recording file's parameter section (the part of the file that describes the recording, section 4.1) can also hold processed foot events (`EVENT:TIMES`, `EVENT:LABELS`), gait measurements (`ANALYSIS:VALUES`), information about the person (`SUBJECTS`) and about the equipment maker (`MANUFACTURER`). The probe in section 4 never decodes them.
 - **Planning used old data only.** Planning studies used only the 12 fit people who had already been used (with 3, 6 or 9 of them for training and 3 held out). They helped set the plan, but they are not evidence about new people.
 
 ## 3. The data
@@ -117,13 +121,13 @@ The dataset and its article:
 
 The exact archive, identified so that anyone can check they have the same bytes:
 
-- File `138_HealthyPiG.zip`, figshare file number 42450060, 463,159,769 bytes, md5 `85235c73455d4df8434810d61517efbb`, storage version `c9jtqYlgGUVrgEUy1JMXkChG6zGtCpvu`.
+- File `138_HealthyPiG.zip`, figshare file number 42450060, 463,159,769 bytes, md5 `85235c73455d4df8434810d61517efbb` (md5 is an older, shorter file fingerprint), storage version `c9jtqYlgGUVrgEUy1JMXkChG6zGtCpvu`.
 - Its table of contents runs from byte 463,071,776 to byte 463,159,746 of the archive, SHA-256 `96a6b5d97ab542eef90a773dfeabb1ad4ac025d768a559d1491deec0d99f4b2b`.
 
 How the recordings are timed:
 
-- Body markers (reflective dots tracked by cameras) are recorded 100 times per second.
-- Plate forces and EMG are recorded 1,000 times per second, so there are ten force and EMG samples for each marker frame.
+- Body markers (reflective dots tracked by cameras) are recorded 100 times per second (100 Hz). Each of these camera samples is called a frame.
+- Plate forces and EMG are recorded 1,000 times per second (1,000 Hz), so there are ten force and EMG samples for each marker frame.
 - There are four force plates. Plates 1 and 2 are used.
 
 The stroke group in the same release has never been opened by this work and is not part of this plan.
@@ -155,17 +159,19 @@ The published comparison of tree, linear and NeuroTranslate 0.0 models needs six
 
 ### 4.1 What is read
 
+Each recording file (format C3D) has three parts in order: a 512-byte header, a parameter section that describes the recording (for example its settings and channel names), and then the recorded data. The probe needs only the first two parts.
+
 The probe runs only after three things have happened: this plan has been pushed to the public repository, the code commit (C1b, section 14) has been reviewed, and the owner has given permission to download.
 
 Then, for each of the first three walks of the 80 candidates (240 files), one request downloads only the beginning of that file inside the archive. In detail:
 
 1. Each file in a zip archive starts with a short local header. Call its position in the archive o. The request asks for bytes o up to (but not including) o + 8,704.
 2. The local header (its signature, the file name, compression method 8, flags 0, the CRC-32 and the sizes) must match the archive's table of contents exactly.
-3. The file's compressed bytes are then unpacked step by step (below). If unpacking has not yet reached the end of the recording's description section, the next 8,192 bytes are requested, and so on, until 65,536 compressed bytes have been read. If the description section still has not been reached, the walk fails with the reason "header not reached".
+3. The file's compressed bytes are then unpacked step by step (below). If unpacking has not yet reached the end of the parameter section, the next 8,192 bytes are requested, and so on, until 65,536 compressed bytes have been read. If the end of the parameter section still has not been reached, the walk fails with the reason "header not reached".
 
-On the fit walks, the description section took 3,272 to 3,704 compressed bytes. So about 2.1 MB in total is expected for all 240 walks, and never more than about 16.4 MB.
+On the fit walks, reaching the end of the parameter section took 3,272 to 3,704 compressed bytes. So about 2.1 MB in total is expected for all 240 walks, and never more than about 16.4 MB.
 
-Each recording file (format C3D) has three parts in order: a 512-byte header, a parameter section that describes the recording, and then the recorded data. The probe unpacks the compressed file with a hard limit on how much it produces, and stops at the end of the parameter section, so no recorded sample is ever produced:
+The probe unpacks the compressed file with a hard limit on how much it produces, and stops at the end of the parameter section, so no recorded sample is ever produced:
 
 1. Unpack the first 512 bytes. Read where the parameter section starts (block p) and where the data start (DATA_START, header word 9).
 2. Unpack up to (p − 1) × 512 + 4 bytes. Read the number of parameter blocks, c.
@@ -212,7 +218,7 @@ Any other walk is **X** (unusable).
 
 Because 15 of 18 earlier people passed, about 67 of the 80 candidates are expected to be Q6, with a 95% interval of roughly 47 to 77. This is a planning figure only; the real number comes from the probe.
 
-**Why the probe may read these headers before groups are set.** The probe touches bytes from people who will later become evaluation or physics-source people, before the groups are applied. This is allowed for two reasons. First, the probe reads only recording settings and channel names, never the recorded signals. Second, the hash order that places people into groups (section 5) was fixed and published before the probe, in `ORDER.json`, which is committed together with this plan. So the verdicts cannot be used to steer who goes where. The separate reviewer accepts this safeguard explicitly when admitting the plan. The probe's receipt, `QUALIFICATION.json`, gives each candidate's class, their three walk numbers and the verdict for each walk. It is committed together with `ALLOCATION.json` at stage C2.
+**Why the probe may read these headers before groups are set.** The probe touches bytes from people who will later become evaluation people or physics-source people, before the groups are applied. (Physics-source people form the measured test group of the physics-source track, a separate part of the project with its own protocol; see sections 5.2 and 5.4.) This is allowed for two reasons. First, the probe reads only recording settings and channel names, never the recorded signals. Second, the hash order that places people into groups (section 5) was fixed and published before the probe, in `ORDER.json`, which is committed together with this plan. So the verdicts cannot be used to steer who goes where. The separate reviewer accepts this safeguard explicitly when admitting the plan. The probe's receipt, `QUALIFICATION.json`, gives each candidate's class, their three walk numbers and the verdict for each walk. It is committed together with `ALLOCATION.json` at stage C2.
 
 ## 5. The single allocation
 
@@ -228,7 +234,7 @@ TAG = `10.6084/m9.figshare.24192480.v1|walking-scale|` + the SHA-256 of the comm
 
 The **primary order** sorts the 80 candidates by the SHA-256 fingerprint (written in hexadecimal) of TAG + `|SUBJnnn`, smallest first, where SUBJnnn is the person's three-digit code.
 
-Because the tag contains the fingerprint of the finished plan file, the order could not be known until the plan was final. Any change to the plan, however small, would have produced a completely different order. So nobody could have looked at a preview of the order and adjusted the plan to get a convenient one.
+Because the tag contains the fingerprint of the finished plan file, the order could not be known until the plan was final. Any change to `PROTOCOL.json`, however small, would have produced a completely different order. So nobody could have looked at a preview of the order and adjusted the plan to get a convenient one.
 
 The command `allocate.py order` writes the primary order to `ORDER.json`, together with the draw orders, the inner-fold order and the variety-walk positions described below. The command `allocate.py check` recomputes both output files (`POOL.json` and `ORDER.json`) and confirms they match byte for byte.
 
@@ -271,7 +277,7 @@ Example from the table: with T = 28, adding 24 people would give 36, but the lar
 
 **Draws.** For the in-between rungs, the plan has to choose which training-pool people are added. It does this in 10 different ways, called draws, numbered d = 0 to 9. Draw d puts the training pool in its own hash order, sorting by SHA-256 of TAG + `|rung-draw-d|SUBJnnn`. Rung a of draw d takes the first a people of that order. So within one draw the rungs are nested: the 12-added rung contains the 6-added rung's people, and so on. The 12-person rung and the largest rung are the same in every draw, because they are single fixed sets: no one added, or everyone added.
 
-**Inner folds.** These are used only by the tuned secondary arm G9 (section 9), which picks model settings using the training people alone. Within one fit's training people, each person is ranked by SHA-256 of TAG + `|inner-fold|SUBJnnn`, and their fold is the rank modulo 4. That splits the training people into four fixed parts.
+**Inner folds.** These are used only by the tuned secondary arm G9 (section 9), which picks model settings using the training people alone. Within one fit's training people, each person is ranked by SHA-256 of TAG + `|inner-fold|SUBJnnn`, and their fold is the rank modulo 4, that is, the remainder after dividing the rank by 4 (0, 1, 2 or 3). That splits the training people into four fixed parts.
 
 ### 5.4 The physics-source group
 
@@ -337,7 +343,7 @@ No model choice is made anywhere in the main analysis. Each family uses the same
 
 **M1, the compact three-pass recurrent model.** This is the project's own small forecasting model. In order:
 
-1. a causal convolution (it looks for short patterns across neighbouring bins, using only past bins; kernel 3, width 24) with the SiLU activation;
+1. a causal convolution, which looks for short patterns across neighbouring bins using only past bins. Its kernel of 3 means it looks at 3 neighbouring bins at a time, and its width of 24 means it produces 24 output channels. It is followed by SiLU, a standard smooth switch-like function;
 2. a GRU, a recurrent layer that carries a memory along the window;
 3. one shared GRU cell applied three times in a row (the "three passes");
 4. a linear output that gives a score for the chance of a new load and a correction that is added to the persistence impulse.
@@ -361,9 +367,9 @@ Model files are saved in the safetensors format without metadata, so the same fi
 
 ### Simple comparison methods
 
-These need no training (or only a single number from the 12 fit people) and are scored once, on the same rows:
+C1 to C3 need no training: they use only fixed numbers taken from the 12 earlier fit people (a probability, and for C2 also a median impulse), and each is scored once. C4 trains only its final layer, as described below. All four are scored on the same rows as every model:
 
-- **C1, persistence.** The latest bin's mean force held for the next 100 ms. The new-load probability is the share of positive rows among the 12 earlier fit people, 0.03725847908677051 (about 3.7%).
+- **C1, persistence.** The latest bin's mean force held for the next 100 ms. The new-load probability is the share of positive rows among the 12 earlier fit people, counted with the published person weights of section 6 (people counted equally): 0.03725847908677051, about 3.7%.
 - **C2, unconditional.** The same probability, and for impulse the person-weighted median impulse of the 12 earlier fit people, whatever the history shows.
 - **C3, linear trend.** A least-squares straight line through the last three bin means, placed at the bin centres (t − 49.5, t − 29.5 and t − 9.5 samples), continued over t + 1 to t + 100 and added up without any clipping: 0.1 s × (intercept + 50.5 × slope per sample). Probability as C1.
 - **C4, random recurrent readout** (secondary). M1 with its convolution and recurrent layers frozen at their random starting values, so that only the final output layer is trained. It is fitted at N = 12 and N_max, with 50 seeds each. It shows how much of M1's result needs trained recurrent layers rather than random ones.
@@ -382,10 +388,10 @@ These published model files, from repository commit `03e76d4`, are scored once, 
 
 "Belgian people" are the Van Criekinge people; "İzmir people" are from the second laboratory. How each one is run and what it is for:
 
-- **F1 and F2** are given their inputs through the published preprocessing files. F1 also learned from the İzmir people, in an augmented continuation of training, and its comparison with our rungs is descriptive only.
+- **F1 and F2** are given their inputs through the published preprocessing files. F1 also learned from the İzmir people, in an augmented continuation of training, and its comparison with our rungs is descriptive only. "Augmented continuation" means that training was continued from earlier weights while generated disruptions were applied to the muscle input: a 20 ms delay, with probability 0.15, and removal of its latest 60 ms, with probability 0.20. That benchmark's own Technical edition (`benchmarks/walking-neural-scaling/TECHNICAL.md`) describes it.
 - **F2 and M3 at N = 12 are the same model in two formats** (ONNX and scikit-learn). Their agreement is reported on the fit rows (at stage S0) and on the evaluation rows (at stage S-c): the largest difference, and the number of rows that differ by more than the published tolerance of 0.000017 N·s and 0.00000026 probability. This checks the export and does not stop the work, because the ONNX graphs compare inputs with the tree thresholds in 32-bit precision, and a row lying very close to a threshold can fall on the other side of it. F2 is scored from the ONNX graphs as published.
-- **F3** is run through its published code, given the six EMG values and the plate's force for each bin. This is the first test of the NeuroTranslate 0.0 walking-force preview on people outside its fitting group. Its named comparison is the trainable-core past-load gate against persistence (section 10).
-- **F4** holds 40 candidate settings. For each target, input group and arm, the penalty with the lowest person-equal error on the training-pool people is chosen (impulse MAE for impulse, Brier score for new load); a tie goes to the larger penalty. The choice is sealed at stage C3, before the evaluation group is downloaded. This is the separate check that its own README asks for.
+- **F3** is run through its published code, given the six EMG values and the plate's force for each bin. Its model card (`models/neurotranslate-0.0/recorded-force/expanded/MODEL-CARD.md`) describes the terms in the table. All four checkpoints contain an "attention core", a block of weights taken over from an earlier NeuroTranslate 0.0 release. In a "frozen core" checkpoint those core weights were kept fixed during fitting; in a "trainable core" checkpoint they were trained further on the walking task. The "past-load gate" applies the model's impulse correction in full when the last available 20 ms mean force is at least +20 N, and multiplies the correction by the forecast new-load probability when that force is lower. This is the first test of the NeuroTranslate 0.0 walking-force preview on people outside its fitting group. Its named comparison is the trainable-core past-load gate against persistence (section 10).
+- **F4** holds 40 candidate settings. For each target, input group and arm, the penalty with the lowest person-equal error on the training-pool people is chosen (impulse MAE for impulse, and for new load the Brier score, a probability error explained in section 10); a tie goes to the larger penalty. The choice is sealed at stage C3, before the evaluation group is downloaded. This is the separate check that its own README asks for.
 - **F5** runs only if the owner allows it. It needs about 50 to 55 GB of memory and 3 to 6 hours, running alone, and reads its base model files without changing them, checked by SHA-256. It is run on the 24-position grid, one forecast time (both plates) per call, because its outputs depend on how many rows are processed together. If it is not run, the report says it was not issued.
 - **Not scored:** the 0.1 Inkling adapter, `strict-fourteen.npz` and the three top-level 0.0 recorded-force files. They need all 14 muscle names and were fitted on only 2 people.
 
@@ -402,7 +408,7 @@ Secondary arms are extra comparisons that help explain the main result. Each is 
 - **S8, subgroups** (descriptive): the plate loaded or unloaded at the forecast time (the state worked out from samples up to t only), plate 1 or plate 2, ten bins of forecast probability to check how well probabilities match outcomes, and separate onsets.
 - **S9, ranking** (descriptive) of all families, comparison methods and frozen models at each rung.
 - **G8, variety.** At N_max, for M1 (50 seeds), M2 and M3, two training sets with nearly the same number of rows are compared:
-  - the 12 earlier people plus every training-pool person with one walk each (the walk picked by SHA-256 of TAG + `|variety-walk|SUBJnnn`, modulo 3);
+  - the 12 earlier people plus every training-pool person with one walk each. The walk is picked by SHA-256 of TAG + `|variety-walk|SUBJnnn`, modulo 3: the fingerprint is read as one large whole number, and the remainder after dividing it by 3 (0, 1 or 2) picks one of the person's three walks;
   - the 12 earlier people plus the first floor(T / 3) people of draw order 0, with all three walks each.
 
   This tests more different people against more walks per person.
@@ -429,7 +435,7 @@ The evaluation group is a small sample of people, so each result comes with a 95
 
 The random draws come from `numpy.random.default_rng(20261127)`. They are made once for the people scoreable for impulse, and once more, with a fresh generator and the same seed, for the people scoreable for new load. Each set of 10,000 resamples is then shared by every comparison and by the trend test on that set of people, so all of them are judged on the same resamples.
 
-The two-sided p-value is
+Each result also gets a p-value. The p-value shows how often the resamples land on the other side of zero: a small p means that the change kept the same sign in almost every resampled group of people. "Two-sided" means that a rise and a fall in error are treated alike. The two-sided p-value is
 
 p = min(1, 2 × min(1 + #(Delta* ≥ 0), 1 + #(Delta* ≤ 0)) / 10,001)
 
@@ -439,11 +445,11 @@ As a sensitivity check, a second bootstrap, which resamples people and then the 
 
 ### The smallest effect the test can detect
 
-The **minimum detectable effect** is the smallest relative change the test would detect 80% of the time, at a two-sided level of 0.05:
+The **minimum detectable effect** is the smallest relative change the test would detect 80% of the time, at a two-sided level of 0.05. The level is the p-value below which a result counts as clear; here it is 0.05. The formula is:
 
 (1.960 + 0.842) × SD of the per-person differences / √E_s / mean MAE(12)
 
-Here E_s is the number of scoreable evaluation people, and SD is the standard deviation. The same is also given with 2.394 in place of 1.960, which corresponds to the strictest corrected level used below.
+Here E_s is the number of scoreable evaluation people, and SD is the standard deviation, the typical distance of the values from their average. The same is also given with 2.394 in place of 1.960, which corresponds to the strictest corrected level used below.
 
 ### The success rule
 
@@ -458,13 +464,13 @@ Each family then gets the first of these labels that applies, checked in this or
 3. **Practically no change**: the 95% interval of the relative change lies entirely inside −3% to +3%.
 4. **Inconclusive**: none of the above. It is reported with the minimum detectable effect, so the reader can see how large an effect the test could have found.
 
-Why 3%: it is about twice the seed-to-seed spread of the published three-pass curve, so a smaller change would be hard to tell apart from the variation that the random start of training causes on its own.
+Why 3%: the protocol sets it at about twice the seed-to-seed spread of the published three-pass curve.
 
 What may and may not be claimed: a statement that the NeuroTranslate compact model gains from more people requires M1 to be labelled **helped**. The planning study projects a gain of about 3% for M1, right at the threshold, so M1 may well end as practically no change or inconclusive. This is stated in advance.
 
 The three Brier-score comparisons (new load) form a second, secondary Holm family with the same labels. Three further numbers are descriptive only: the slope of the rung means against log2 N (the change per doubling of people), the gain per doubling in the upper half of the ladder against the lower half, and the share of people whose error fell.
 
-**Minimum numbers of people.** Main impulse labels need at least 12 scoreable evaluation people. Brier labels need at least 10, among whom both outcomes (new load and no new load) occur. Below these floors every result is descriptive only. People who were assigned to the evaluation group but turn out to have no scoreable rows are reported as such and count against the floors, and the error averages use only the scoreable people.
+**Minimum numbers of people.** Main impulse labels need at least 12 scoreable evaluation people. Brier labels need at least 10, among whom both outcomes (new load and no new load) occur. Below these floors every result is descriptive only. People who were assigned to the evaluation group but turn out to have no scoreable rows are reported as "assigned-unscoreable". The minimums count scoreable people only, so such a person does not help reach them, and the error averages use only the scoreable people.
 
 ### The first held test of the NeuroTranslate 0.0 preview
 
@@ -478,7 +484,7 @@ Every frozen model and comparison method is also reported against our N = 12 and
 
 Besides measuring the gain, the plan tests whether the gain can be predicted. Predictions are written down and sealed before the numbers they predict are scored.
 
-- **P0, the planning prior.** From the planning study on the 12 already-used fit people (288 three-pass fits, with matching linear and tree fits), the curve L + a / √N was fitted to the mean errors with 3, 6 and 9 training people. Carried forward, it projects a relative gain from 12 to 49 people of −2.9% for M1, −2.8% for M2 and −9.7% for boosted trees. The planning trees used the compact input, not the published tree input, so the M3 figure is approximate. P0 is a prior expectation only, not evidence.
+- **P0, the planning prior.** From the planning study on the 12 already-used fit people (288 three-pass fits, with matching linear and tree fits), the curve L + a / √N was fitted to the mean errors with 3, 6 and 9 training people. (L is the level the error settles at; here a is a fitted constant, not the number of added people of section 5.3.) Carried forward, it projects a relative gain from 12 to 49 people of −2.9% for M1, −2.8% for M2 and −9.7% for boosted trees. The planning trees used the compact input, not the published tree input, so the M3 figure is approximate. P0 is a prior expectation only, not evidence.
 - **P1, the pool-tail curve.** Made only if T ≥ 32, and sealed at stage C3, before any evaluation byte is downloaded. In each draw, the training-pool people who come after the largest in-between rung have not been seen by that draw's in-between fits or by the 12-person fits. Those fits are scored on these unseen people, the trend forms below are fitted to the curve averaged over draws, and the gain at N_max is predicted.
 - **P2, the trend prediction.** After all forecasts are sealed (C4), stage S-b scores only the rungs below N_max on the evaluation people. The trend forms are fitted to those rung means. The point predictions, and the predicted N_max value in every bootstrap resample, are written to `P2-TREND-PREDICTION.json` and committed (C5). Only after that does stage S-c score N_max, the frozen models and the comparison methods. The S-c scoring program refuses to run unless it is given the SHA-256 of the committed P2 file.
 
@@ -486,8 +492,8 @@ Besides measuring the gain, the plan tests whether the gain can be predicted. Pr
 
 For M1, M2 and M3, trend forms are fitted only when at least three rungs lie below N_max. (With the sizes in section 5.2, Q = 40, 52, 67 or 80 gives three or four such rungs; Q = 26 gives only one, so no trend would be fitted.)
 
-- **Main form:** MAE(N) = L + a / √N, fitted by least squares to the rung means, with L not allowed below zero. This is the form used by the repository's training-scale study. It says the error falls with more people and levels off at L.
-- **Competing forms:** MAE(N) = c + b log2 N, a steady change per doubling of people; and carry-forward, which simply predicts that N_max will score the same as the second-largest rung.
+- **Main form:** MAE(N) = L + a / √N, fitted by least squares to the rung means, with L not allowed below zero. This is the form used by the repository's training-scale study. It says the error falls with more people and levels off at L; a is a fitted constant.
+- **Competing forms:** MAE(N) = c + b log2 N, a steady change of b per doubling of people (c is a fitted constant); and carry-forward, which simply predicts that N_max will score the same as the second-largest rung.
 
 ### How the trend is tested
 
@@ -538,9 +544,9 @@ A failed check stops the work before the next download.
 
 - **No changes after a number is seen.** The plan may not change after P1 or after any interim number. A change needs a new protocol version, a separate admission and new evaluation people.
 - **No substitution.** Training walks with no scoreable rows are dropped and counted. Nothing is substituted after qualification.
-- **Unscoreable people stay counted.** Evaluation people who turn out to be unscoreable stay in the count as "assigned-unscoreable".
+- **Unscoreable people stay counted.** Evaluation people who turn out to be unscoreable are not dropped: they stay in the reported count of assigned evaluation people, listed as "assigned-unscoreable".
 - **Failed fits stay visible.**
-- **A failed download check halts the stage.** If the ETag, version, size or CRC-32 of a download does not match, that stage stops.
+- **A failed download check halts the stage.** If the ETag (the server's version tag for the file, section 15), version, size or CRC-32 of a download does not match, that stage stops.
 
 ## 14. Stages, commits and custody
 
