@@ -2,23 +2,23 @@
 
 Simple edition of protocol version 1, revision 2, 27 November 2026 · [Technical edition](PROTOCOL.md) · [Machine-readable protocol](PROTOCOL.json) · [Allocation script](allocate.py) · [Allocation output](ALLOCATION.json)
 
-This is the Simple edition of the NeuroTranslate 0.2 protocol. It explains the same plan as the Technical edition, [PROTOCOL.md](PROTOCOL.md), in more words and with examples. It changes none of the rules. The rules are set in PROTOCOL.md and PROTOCOL.json; if a sentence here reads differently, those two files govern. The Technical edition's opening line and PROTOCOL.json say that the Simple edition is written with the results. This Simple edition of the protocol was added after revision 2 was committed and before any test data were opened, and the two fixed files were not changed to mention it. The results will still get their own Technical and Simple editions after scoring (section 15). Sections 1 to 16 below have the same numbers and subjects as the sections of the Technical edition, so a reader can move between the two. Examples are labelled as examples; where an example uses made-up numbers, it says so.
+This is the Simple edition of the NeuroTranslate 0.2 protocol. It explains the same plan as the Technical edition, [PROTOCOL.md](PROTOCOL.md), in more words and with examples, and changes none of the rules; if a sentence here reads differently, PROTOCOL.md and PROTOCOL.json govern. Sections 1 to 16 have the same numbers and subjects as the Technical edition, so a reader can move between the two. Examples are labelled, and made-up numbers are labelled as made up.
 
 ## The plan in brief
 
-**What is built.** NeuroTranslate 0.2 is one computer model, a neural network, that reads the recent past of recordings from the body and the nervous system and forecasts movement from 20 milliseconds up to half a second ahead. The recordings include electrical pulses of single nerve cells in animals, voltages measured on the scalp or on the surface of the brain, the electrical activity of muscles (EMG), the positions of body markers, joints or hands, and forces. The model is trained once, on the training parts of 13 openly licensed datasets at the same time. Two more datasets (area2 and FALCON M1) join if an audit in step P2, before the freeze, confirms that their units have training roles, and further "wave 2" datasets join only if they pass the same checks. A model trained on many sources together is called pooled. The part of the network that turns recordings into an internal summary is called the encoder, and 0.2 has one encoder shared by every dataset.
+**What is built.** NeuroTranslate 0.2 is one computer model, a neural network, that reads the recent past of recordings from the body and the nervous system and forecasts movement from 20 milliseconds up to half a second ahead. The recordings include electrical pulses of single nerve cells in animals, voltages measured on the scalp or on the surface of the brain, the electrical activity of muscles (EMG), the positions of body markers, joints or hands, and forces. The model is trained on the training parts of 13 openly licensed datasets together, in one combined training rather than one dataset after another. The final model is trained with three seeds (section 6). Two more datasets (area2 and FALCON M1) join if an audit in step P2, before the freeze, confirms that their units have training roles, and further "wave 2" datasets join only if they pass the same checks. A model trained on many sources together is called pooled. The part of the network that turns recordings into an internal summary is called the encoder, and 0.2 has one encoder shared by every dataset.
 
 **How it is tested.** After training, the encoder is frozen: its learned numbers no longer change. For each test set it receives only small add-on parts, called adapters, fitted on separate data from that set. It is then scored once on people and sessions that no NeuroTranslation model has used, in three test sets:
 
 - **E1:** 10 people (S001 to S010) of the Gait120 walking dataset. No earlier study downloaded their recordings. The model trains on other people of the same dataset, but never on these 10.
-- **E2:** 5 people (participants 03 to 07) of AJILE12, a dataset of hospital recordings from electrodes on the surface of the brain, with upper-body poses estimated from video. Earlier NeuroTranslation studies used other AJILE12 participants, but 0.2 trains on no part of this dataset.
+- **E2:** 5 people (participants 03 to 07) of AJILE12, a dataset of hospital recordings from electrodes on the surface of the brain, with upper-body poses estimated from video. Earlier NeuroTranslation studies used other AJILE12 participants, but the 0.2 that is scored for the pass rules is never trained on any part of this dataset (section 7.5 describes an optional separate copy that is).
 - **E3:** two recording sessions (25 September and 6 October 2009) of one monkey reaching through a maze. This set is secondary: it has one animal, so it cannot speak for monkeys in general.
 
-**Compared with what.** In each set, 0.2 must beat a list of comparison methods, called controls. They get the same adapters and are scored on the same forecasts. They include a forecast of no change, a straight-line extension of the recent movement, a standard linear method (ridge regression), the frozen earlier NeuroTranslate 0.0 encoder, an untrained network of the same shape, and networks of the same size trained on one source only.
+**Compared with what.** In each set, 0.2 is compared with other methods, called controls. They get the same adapters and are scored on the same forecasts. Seven of them decide whether a set is passed: a forecast of no change, a straight-line extension of the recent movement, a standard linear method (ridge regression), the frozen earlier NeuroTranslate 0.0 encoder, an untrained network of the same shape, and two networks of the same size trained on one source only (the source that scores best in model choice, and the source nearest to the test set). The other controls are reported beside them but do not decide a pass (section 8.2).
 
-**Why.** The project owner asked for one combined movement model trained on as much varied, openly licensed neural, EMG and motion data as possible: the best model that can be engineered regardless of size, with time estimates. A common idea is that more data, and more varied data, give a model that carries over better to new people. This protocol treats that idea as a hypothesis to test, not as a fact. A secondary study asks whether, at the same amount of training data, more sources help more than more data from one source.
+**Why.** The project owner asked for one combined movement model trained on as much varied, openly licensed neural, EMG and motion data as possible: the best model that can be engineered regardless of size, with time estimates. A common idea is that more data, and more varied data, give a model that carries over better to new people. This protocol treats that idea as a hypothesis to test, not as a fact. A secondary study asks whether a fixed number of training windows drawn from many sources gives better forecasts than the same number of windows drawn from one source (section 11).
 
-**What counts as success.** The main claim, called H1, is that the pooled encoder helps on new people. H1 holds only if 0.2 passes both E1 and E2. A set is passed only if, against every control, 0.2's average error is lower, the whole 95% uncertainty range of the difference lies below zero, and at least 7 of the 10 E1 people, or 4 of the 5 E2 people, have a lower error with 0.2 than with that control.
+**What counts as success.** The main claim, called H1, is that the pooled encoder helps on new people. H1 holds only if 0.2 passes both E1 and E2. A set is passed only if, against each of these seven controls (listed again in section 10), 0.2's average error is lower, the whole 95% uncertainty range of the difference lies below zero, and at least 7 of the 10 E1 people, or 4 of the 5 E2 people, have a lower error with 0.2 than with that control.
 
 **What is expected.** The earlier shared encoder, NeuroTranslate 0.0, was matched or beaten by a simpler forecast in all five of its tests on new people. A null result, meaning no evidence that 0.2 improves forecasts for new people over the listed controls, is the expected outcome. It will be reported as such.
 
@@ -28,7 +28,7 @@ This is the Simple edition of the NeuroTranslate 0.2 protocol. It explains the s
 
 **What is published.** Now: this protocol and its machine-readable files. Before the freeze, and so before any test data are downloaded: the counts of the training data and the fingerprint of a sealed prediction. At the freeze: the fingerprints of every weight file, adapter and scoring script. After scoring: the model weights, every planned result (wins and losses alike) and reports in a Technical and a Simple edition (section 15).
 
-**Where things stand.** When this edition was written, no test value had been decoded and this protocol had downloaded no test data. Revision 1 of the protocol (commit 17f956b) was read by a separate reviewer, who admitted it with a list of minor corrections. Revision 2 applies those corrections and records the lead's decisions on seven questions that revision 1 left to the owner (section 14). One clean-up step, P0, was done on 27 November (section 3). Training and downloads start only after a separate reviewer admits this protocol and the lead commits it.
+**Where things stand.** When this edition was written, no test value had been decoded and this protocol had downloaded no test data. The one exception was incidental. Two reads of the end of the E1 archive, made while the designs were drafted, also caught compressed bytes of 23 marker files of participant S010. They were never decompressed. In the clean-up step P0, done on 27 November, the two files that held them were replaced by copies without them and the originals were deleted, and a sensitivity row repeats E1 without those 23 files (section 3). Revision 1 of the protocol (commit 17f956b) was read by a separate reviewer, who admitted it with a list of minor corrections. Revision 2 applies those corrections and records the lead's decisions on seven questions that revision 1 left to the owner (section 14). Training and downloads start only after a separate reviewer admits this protocol and the lead commits it.
 
 ## Words used in this plan
 
@@ -39,8 +39,8 @@ The Technical edition defines some of these terms in its section 2. They are col
 - **Step:** 20 milliseconds (ms) of a recording, the basic time unit of the model. Step k covers the time from 20k ms up to 20k + 20 ms, and it becomes available at its end. Example: step 0 covers 0 to 20 ms and can be used from 20 ms on; step 50 covers 1,000 to 1,020 ms.
 - **Issue time:** the moment a forecast is made. Only samples recorded up to that moment may enter the inputs.
 - **Horizon:** how far ahead a forecast looks, for example 100 ms.
-- **Window:** a stretch of 1.2 seconds (60 steps) of a recording. Windows do not overlap. They are the unit used to count how much data there is. The pieces of recording used as training examples, called crops, may overlap.
-- **Individual:** a person or an animal. Individuals are the independent units: each one counts equally, and uncertainty is worked out by resampling individuals.
+- **Window:** a stretch of 1.2 seconds (60 steps) of a recording. Windows do not overlap. They are used to count how much data there is, for example in section 11. The pieces of recording used as training examples, called crops, may overlap. In sections 3, 5.5 and 13, as in the Technical edition, the windows that are issued, scored, checked or used for adaptation or calibration, and "windows per second", mean the input history of one forecast at one issue time. There is one such window per forecast, and these windows overlap.
+- **Individual:** a person or an animal. Individuals are treated as independent of each other: each one counts equally, and uncertainty is worked out by resampling individuals.
 - **Hz (hertz):** samples or cycles per second. A signal recorded at 100 Hz has a sample every 10 ms.
 
 ### Signals
@@ -55,6 +55,7 @@ The Technical edition defines some of these terms in its section 2. They are col
 
 ### Data roles and rights
 
+- **Unit (of data):** what an earlier study or this protocol gives a role, a fold or a test set to: a person, an animal, a recording or a session, depending on the dataset. Training units, inner-validation units, adaptation units and fresh units are units of data. This is not the same as a sorted unit (spikes, above) or a measurement unit such as the millimetre.
 - **Roles:** earlier studies gave each person, animal or recording a role. Roles called fit, train, development or engineering are training roles. Roles called validation, assessment, confirmation, final, test, held or reserve are set aside for testing.
 - **Consumed:** already used as a test group by an earlier study, and so no longer new.
 - **Reserved:** set aside, unopened, for a later test.
@@ -68,12 +69,13 @@ The Technical edition defines some of these terms in its section 2. They are col
 
 - **Neural network:** a computer model with many adjustable numbers, called parameters or weights, that are tuned during training. **Core parameters** is the protocol's count of these numbers for each model size, for example 7.27 million at size M.
 - **Encoder:** the part of the network that turns input recordings into features, an internal list of numbers per step. **Readout:** the part that turns features into a forecast.
+- **Token:** a list of numbers that the network holds for one item, with as many numbers as the model's width (section 5.2). In 0.2, each group of signals in a step becomes a group token, the group tokens of a step are combined into a step token, and the context token carries the dataset, species, task, body plan and the measured / derived / simulated flag (section 5.1). The hybrid core also carries a memory token (section 5.2), and the adapter of the frozen 0.0 encoder turns the last 16 steps into 4 inputs, one for each token of that encoder (section 8.2). A **step-token** is one 20 ms step of one training example processed by the network. It is the unit used for speed (step-tokens per second) and for training budgets: the token budget of a run is the number of step-tokens it processes. Tokenisation (step P2) turns recordings into these inputs, and the tokenised data stored on disk are also called tokens (section 13).
 - **Causal:** using only the past.
 - **Transformer:** a type of network that combines information across time steps through a mechanism called attention. **GRU:** a type of network that carries a memory from one step to the next.
 - **Adapter:** the small set of parameters fitted for a test set while the encoder stays frozen.
 - **Identity row:** a list of 32 learned numbers that describes one channel to the model (section 5.1).
 - **Ridge regression:** a standard method that fits a weighted sum of many inputs to a target, with a penalty that keeps the weights small so that the fit does not follow noise. The penalty's strength is chosen by folds (below).
-- **Update:** one adjustment of the parameters during training. **Batch:** the number of examples used together for one update. **Pass:** here, as many step-tokens as there are unique steps in the training data in use. **Step-token:** one 20 ms step of one training example processed by the network; it is the unit used to measure speed.
+- **Update:** one adjustment of the parameters during training. **Batch:** the number of examples used together for one update. **Pass:** here, as many step-tokens (see Token) as there are unique steps in the training data in use.
 - **Seed:** the starting number of a random number generator. A run repeated with the same seed gives the same result.
 - **Inner folds:** five groups of each dataset's training individuals (section 6). Fold 0 is the **inner-validation** fold, and all model choices are made with it. The other four folds are the **inner-training** units.
 - **Selection score:** the number used to compare models during model choice (section 6). Lower is better.
@@ -81,6 +83,7 @@ The Technical edition defines some of these terms in its section 2. They are col
 ### Comparisons and statistics
 
 - **Control:** a comparison method scored on exactly the same forecasts as 0.2.
+- **Arm:** one of several predeclared variants of a training or scoring run that differ in a stated way. Examples: a different core (sections 5.2 and 6), a different context length (section 6), the LoRA adapter (section 8.1), the matched-history comparison (section 8.2) and the data mixes of the quantity-versus-diversity study (section 11). Arms are fixed in this protocol before any test, and every predeclared result, arms included, is reported whatever it is (section 10). The word has nothing to do with the body's arms, which also appear in this plan (arm movements, arm sensors).
 - **Persistence:** the forecast that nothing changes from the last value. **Linear trend:** a straight line through the recent past, extended forward.
 - **Relative error R:** an individual's error divided by that individual's persistence error. Example with made-up numbers: if persistence misses by 20 mm on average for one person and 0.2 misses by 15 mm, R = 15 / 20 = 0.75. An R below 1 means the forecast beat persistence for that person.
 - **Paired bootstrap, 95% interval, upper bound:** the method used to say how much a result could change with a different sample of people (section 9).
@@ -96,7 +99,7 @@ The Technical edition defines some of these terms in its section 2. They are col
 
 A protocol is a plan written and published before a test, so that the way the test is judged cannot be adjusted after the answer is known.
 
-NeuroTranslate 0.2 is one causal network, trained at once on the training splits of many openly licensed recordings of neural activity, muscle activity (EMG), body motion and force. It is then frozen. Each test set gets only small adapters: identity rows for channels the model has not met, and a ridge readout that turns the encoder's features into the forecast. The network is scored once on people, animals and sessions that no NeuroTranslation fit has used, against matched controls with the same adapter budget.
+NeuroTranslate 0.2 is one causal network, trained on the training splits of many openly licensed recordings of neural activity, muscle activity (EMG), body motion and force, all together. It is then frozen. Each test set gets only small adapters: identity rows for channels the model has not met, and a ridge readout that turns the encoder's features into the forecast. The network is scored once on people and recording sessions that no NeuroTranslation fit has used, against matched controls with the same adapter budget. E3's monkey, Jenkins, was used by earlier NeuroTranslation fits in other sessions, so E3 tests new sessions of a known animal, not a new animal (section 7.3).
 
 The protocol is fixed before any evaluation byte, meaning any byte of test data, is opened. It fixes:
 
@@ -201,8 +204,8 @@ A dataset, or part of one, enters the training mixture only if all six checks be
 - **Q1 Licence.** The licence must be CC0, CC BY, ODC-By, MIT, CDLA-Permissive or PDDL. It is checked on the deposit page, and the sha256 fingerprint of the licence text is recorded. Share-alike data are not used in public weights. Non-commercial data may give scores only. Two sources are never used: the worm imaging deposit (Zenodo 10.5281/zenodo.19388374) and the SLEAP sample recordings, whose licences are unclear.
 - **Q2 Role.** Only units with a frozen training role in an existing protocol (fit, train, development or engineering), or units never given a role that a published hash rule sends to training. Every validation, assessment, confirmation, final, test, held or reserved unit stays out. So does every consumed test group and every unit of a line of work that is in progress or on hold.
 - **Q3 Access.** The data must be on the project's computer, or reachable by reading single files or byte ranges in a way that never decompresses a reserved member.
-- **Q4 Clock.** Two signals count as recorded together (paired) only if they share one file with one clock, or if a documented synchronisation passes a check on training units. Otherwise they enter as separate recordings and are never put side by side in one window.
-- **Q5 Labels.** The units and the kind of signal are known for each channel, and every value is labelled measured, derived or simulated. EMG is never labelled as a nerve recording.
+- **Q4 Clock.** Two signals count as recorded together (paired) only if they share one file with one clock, or if a documented synchronisation passes a check on training units. Otherwise they enter as separate recordings and are never put side by side in one training example.
+- **Q5 Labels.** The measurement units (for example mm or volts) and the kind of signal are known for each channel, and every value is labelled measured, derived or simulated. EMG is never labelled as a nerve recording.
 - **Q6 Causality.** Filtering by the data's authors is recorded, for example filters that run forwards and backwards in time, gap filling, or high-pass filters with no time shift (zero-phase). Features computed in this project use only samples at or before the end of each step.
 
 ### 4.2 Training mixture, wave 1
@@ -220,15 +223,17 @@ Wave 1 is the set of datasets admitted now. Every role below was read from a ros
 9. **Hyser 2.0.0** (PhysioNet, ODC-By 1.0). Finger tasks recorded with high-density EMG. **Training:** 12 TRAIN people, 120 recordings of about 25 seconds. **Signals:** 256-channel HD-EMG at 2,048 Hz, and finger force at 100 Hz. **Left out:** 4 DEV people (consumed; never read) and 4 final people (never fetched).
 10. **HYGRIP** (figshare 12383639 v1, MIT). A hand-grip task. **Training:** 7 eligible TRAIN groups. **Signals:** 24 EEG channels at 1 kHz; 4 EMG channels at 1 kHz whose electrode positions are not mapped, so they enter as unnamed channels; and grip-transducer voltage at 50 Hz, which is not calibrated to newtons. **Left out:** group /N, held back by its timing check, and 3 development and 3 final groups.
 11. **CEMHSEY GRASP** (Zenodo 15077957, CC BY 4.0). Hand grasp recordings. **Training:** S1 to S3, 12 pinch recordings. **Signals:** 320-channel HD-EMG at 2,048 Hz, and pinch force at 200 Hz expressed as a fraction of each person's maximum voluntary contraction (MVC, their strongest pinch). The offset in samples between the EMG and the force has not been verified, and this is flagged. **Left out:** DEV people S10 to S13 and every other group.
-12. **O'Doherty/Sabes** (Zenodo 3854034 v2, CC BY 4.0). Monkeys reaching to targets while spikes were recorded from the sensorimotor cortex. **Training:** the recordings indy_20170131_02 and loco_20170215_02. **Signals:** spike events per electrode, and finger position. **Left out:** indy_20161212_02 (reserved) and the August held days.
-13. **W-track** (DANDI 000978, CC BY 4.0). Rats learning a W-shaped track. **Training:** the rats ER1, JS15 and JS17, and the data of rat JS14 recorded before the start of trip 79. **Signals:** sorted units in hippocampal area CA1 and in the prefrontal cortex, and position in centimetres. **Left out:** JS14 from trip 79 on; the rats JS21, JS34 and KL8 (consumed); and both ZT2 files (closed).
+12. **O'Doherty/Sabes** (Zenodo 3854034 v2, CC BY 4.0). Monkeys reaching to targets while spikes were recorded from the sensorimotor cortex. **Training:** the recordings indy_20170131_02 and loco_20170215_02. **Signals:** spike events per electrode, and finger position. **Left out:** indy_20161212_02 (reserved) and the August held days (recording days with a held role, which is a test role).
+13. **W-track** (DANDI 000978, CC BY 4.0). Rats learning a W-shaped track. **Training:** the rats ER1, JS15 and JS17, and the data of rat JS14 recorded before the start of trip 79. The dataset's trips are numbered in time order, so this is a cut in time. **Signals:** sorted units in hippocampal area CA1 and in the prefrontal cortex, and position in centimetres. **Left out:** JS14 from trip 79 on (trips 79 and 90 are under embargo, 80 to 89 are consumed and 91 to 95 are reserved); the rats JS21, JS34 and KL8 (consumed); and both ZT2 files (closed to use).
+
+Labels such as trip, ZT2 and the August held days, and "held-in-calib" below, are the names that the datasets or earlier studies use for their recording blocks, files and splits. PROTOCOL.json (`data_sources`) gives each one with its role.
 
 Two special rules apply. HYGRIP left-hand trials enter only after they pass the same inter-Go clock screen (threshold 40 ms) that was used for the right hand. The screen compares the intervals between the "Go" trial markers as recorded by each device, and requires them to agree to within 40 ms. W-track files are read by HDF5 byte ranges, taking only spike times and position.
 
 Two more datasets are conditional members of wave 1. An audit in step P2, before the freeze, decides whether they enter:
 
 - **Area2_Bump** (DANDI 000127, CC BY 4.0). Only the 290 trials of the monkey Han on 7 December 2017 that an earlier area2 study used for fitting (218 trials) and configuration (72 trials). The 74 trials assessed in that study's original comparison stay out. So does the laboratory's Dryad deposit, because several of its sessions are consumed and it repeats this laboratory's recordings.
-- **FALCON M1** (DANDI 000941, CC BY 4.0). Only the "held-in-calib" days that no earlier evaluation scored.
+- **FALCON M1** (DANDI 000941, CC BY 4.0). Only the "held-in-calib" days (the benchmark's own name for one of its data splits) that no earlier evaluation scored.
 
 The IBL Brain-Wide Map stays with the earlier maintainer. No IBL subject, lab or session enters training or testing (section 14).
 
@@ -246,15 +251,15 @@ Wave 2 datasets enter only if they pass Q1 to Q6 before the freeze. The candidat
 - MC_RTT, after a role audit;
 - Katmah EEG, after a clock check.
 
-Simulated windows from the project's physics-source track, which produces movement from physics simulations of the body, may enter only as a separately flagged add-on arm, never as part of the primary mixture.
+Simulated windows from the project's physics-source track, which produces movement from physics simulations of the body, may enter only in a separately flagged, predeclared add-on arm (see "Arm" in the word list), never as part of the primary mixture.
 
 The following are left out, with the reason for each:
 
 - **All of AJILE12**, so that E2 is a dataset the model has never seen. Participants 08 to 12 are also kept back for the earlier maintainer's AJILE12 line of work and are never downloaded by this track.
 - **Every Jenkins recording**, held out for E3.
-- **Nitschke and the pedal recordings**, held by the earlier maintainer.
+- **The Nitschke recordings and the Churchland pedal recordings**, which are held by the earlier maintainer and have no training role.
 - **The IBL Brain-Wide Map**, which stays with the earlier maintainer.
-- **LINK**, which is sealed.
+- **LINK**, an earlier project test: its LINK720 epochs and its results stay sealed.
 - **FingerFlex**, whose share-alike licence would bind the weights.
 - **MoVi, SUMediPose and AMASS**, which are non-commercial.
 - **The worm and SLEAP recordings**, whose licences are unclear.
@@ -287,13 +292,13 @@ The model's inputs are built in seven steps.
 
 **2. Turn each group into numbers for the step.**
 
-- **Spikes:** the number of spikes of each unit in the step, kept as raw counts.
+- **Spikes:** the number of spikes of each sorted unit in the step, kept as raw counts.
 - **Field signals:** for each channel, the log band power, a measure on a log scale of how strong the rhythm in a frequency band is. It is computed over the trailing 100 ms or 200 ms (the inner folds choose which) in four bands: 4-8, 8-13, 13-30 and 70-150 Hz. A recording must be sampled fast enough to contain a band; the 70-150 Hz band is masked (left out) for recordings sampled below 400 Hz. Example: the ds003739 EEG, sampled at 256 Hz, has no 70-150 Hz band. A slow component, the value after a causal 10 Hz low-pass filter, is added.
 - **EMG:** the log RMS of the signal within the step after a causal 20 Hz high-pass filter. RMS (root mean square) measures the size of a varying signal; the high-pass filter removes slow drifts. "Causal" filters use only past samples. Katmah ships an envelope instead of the raw EMG; it is used as given and labelled derived.
 - **Kinematics:** the last sample in the step and its change from the previous step. Positions are measured from an anchor taken at the last input step: the mean of the pelvis markers for body marker sets, the mean of the shoulders for upper-body keypoints, and the point itself for a single tracker. The model therefore sees body shape and movement, not where in the room the body is.
 - **Force:** the last sample in the step and the mean over the step.
 
-**3. Tell the model which channel each number comes from.** For a group with channels c, the numbers are read in through a matrix W[c] = E(c)·P. Here E(c) is the identity row of channel c, 32 learned numbers, and P is a matrix shared by all channels, so the read-in matrix has rank 32. The read-in is applied both to the value x and to a bent version of it, gelu(x). A term that says whether the channel is present is added, and the result is normalised (LayerNorm). Channels with shared names use the same identity row in every dataset. The shared name lists cover muscles with their side, anatomical markers and keypoints, joints with their axis, the 10-10 EEG sites (a standard system of scalp positions), force axes, and IMU segments and axes. Spike units, ECoG electrodes, HD-EMG electrodes and unmapped EMG channels have no shared names, so they get learned rows per recording, with a small coordinate network where electrode positions exist. A new person whose channels have shared names needs no new parameters.
+**3. Tell the model which channel each number comes from.** For a group with channels c, the numbers are read in through a matrix W[c] = E(c)·P. Here E(c) is the identity row of channel c, 32 learned numbers, and P is a matrix shared by all channels, so the read-in matrix has rank 32. The read-in is applied both to the value x and to a bent version of it, gelu(x). A term that says whether the channel is present is added, and the result is normalised (LayerNorm). Channels with shared names use the same identity row in every dataset. The shared name lists cover muscles with their side, anatomical markers and keypoints, joints with their axis, the 10-10 EEG sites (a standard system of scalp positions), force axes, and IMU segments and axes. Sorted units, ECoG electrodes, HD-EMG electrodes and unmapped EMG channels have no shared names, so they get learned rows per recording, with a small coordinate network where electrode positions exist. A new person whose channels have shared names needs no new parameters.
 
 **4. Put channels on a common scale.** Each channel is converted to a z-score (its value minus its mean, divided by its standard deviation). The mean and standard deviation come from training units only. Test sets use their own adaptation data for this.
 
@@ -301,13 +306,13 @@ The model's inputs are built in seven steps.
 
 **6. Mask what is missing.** Missing groups and channels are masked, so the model ignores them.
 
-**7. Add flat views of 3D markers.** With probability 0.2, a window of 3D markers is replaced by a flat 2D picture of its landmarks, as a camera far away would see it (an orthographic projection). The viewing direction is random: any angle around the body (azimuth 0-360°) and from 20° below to 40° above (elevation −20° to +40°). These windows are flagged derived. They show the encoder 2D inputs similar to video keypoints without using any AJILE12 data.
+**7. Add flat views of 3D markers.** With probability 0.2, a training example of 3D markers is replaced by a flat 2D picture of its landmarks, as a camera far away would see it (an orthographic projection). The viewing direction is random: any angle around the body (azimuth 0-360°) and from 20° below to 40° above (elevation −20° to +40°). These examples are flagged derived. They show the encoder 2D inputs similar to video keypoints without using any AJILE12 data.
 
 ### 5.2 Architecture
 
-The network works in two stages. First, one transformer layer combines the group tokens within each step (absent groups are masked), and the step token is the mean of the present group tokens. Second, a causal transformer runs over the step tokens. It uses pre-LayerNorm and rotary position embedding, a way of telling the network how far apart two steps are. Two other cores are tried as arms: a GRU, and a hybrid (a transformer plus a GRU memory token carried from one window to the next). The output heads map each group and horizon to 32 numbers and combine them (by a dot product) with an output identity row for each channel. Any set of channels can therefore be forecast.
+The network works in two stages. First, one transformer layer combines the group tokens within each step (absent groups are masked), and the step token is the mean of the present group tokens. Second, a causal transformer runs over the step tokens. It uses pre-LayerNorm and rotary position embedding, a way of telling the network how far apart two steps are. Two other cores are tried as arms: a GRU, and a hybrid (a transformer plus a GRU memory token carried from one stretch of input to the next). The output heads map each group and horizon to 32 numbers and combine them (by a dot product) with an output identity row for each channel. Any set of channels can therefore be forecast.
 
-The network comes in six sizes. Width is the number of values per token; layers are stacked processing stages; heads are parallel attention units.
+The network comes in six sizes. Width is the number of values per token; layers are stacked processing stages; heads are attention parts that work side by side within a layer.
 
 | Size | Width | Layers | Heads | Core parameters |
 | --- | ---: | ---: | ---: | ---: |
@@ -329,7 +334,7 @@ The context length T is how many past steps the network sees: 64, 128, 256 or 51
 - **Loss for other signals.** For the other signals the loss is the Huber loss (δ = 1) on the change from the latest value, in normalised units. The Huber loss grows like a squared error for small errors and like an absolute error for large ones.
 - **Hide whole groups.** Each present group is hidden from the input with probability 0.25, keeping at least one measured group, but it stays a target. Hidden groups are also reconstructed at h = 0, the present step. This trains the translations between kinds of signal that the test readouts need, for example from EMG to kinematics and from spikes to kinematics.
 - **Hide single channels.** Single channels are hidden with probability 0.15.
-- **Balance the losses.** Each group's loss is divided by its baseline loss on the training mixture: the persistence loss, or for spikes the loss of each unit's mean rate. Groups and horizons then have equal weight.
+- **Balance the losses.** Each group's loss is divided by its baseline loss on the training mixture: the persistence loss, or for spikes the loss of each sorted unit's mean rate. Groups and horizons then have equal weight.
 - **Draw datasets.** Datasets are drawn with probability proportional to N_d^τ, where N_d is the number of individuals in dataset d. τ (tau) is 0, 0.5 or 1, chosen on leave-one-dataset-out folds (section 6), and no dataset may supply more than 25% of the examples. Within a dataset, individuals are drawn uniformly, recordings in proportion to their duration, and crop starts uniformly.
 
 An example of the dataset draw, with the real numbers of individuals of two datasets: Gait120 has 66 training people and Ofner 7. With τ = 1, Gait120 is drawn about 9.4 times as often as Ofner (66 / 7). With τ = 0.5, about 3.1 times as often (the square root of 66 divided by the square root of 7). With τ = 0, both are equally likely. The 25% cap applies in every case.
@@ -338,7 +343,7 @@ An example of the dataset draw, with the real numbers of individuals of two data
 
 - **Optimiser and schedule.** AdamW is the method that adjusts the parameters (β 0.9/0.95, weight decay 0.05 on matrices). The learning rate rises linearly over the first 2% of training (warm-up), then falls along a cosine curve to 10% of its peak.
 - **Peak learning rates.** 6e-4 (XS), 5e-4 (S), 3e-4 (M), 2e-4 (L), 1.5e-4 (XL and XXL).
-- **Batches.** 128 windows of T steps per batch.
+- **Batches.** 128 training examples (crops) of T steps each per batch.
 - **Safeguards.** The gradient is clipped at 1.0, which limits the size of any single adjustment. Dropout is 0.1, which hides random parts of the network during training. Stochastic depth is 0.1 for XL and XXL, which skips random layers during training.
 - **Passes.** One pass is a number of step-tokens equal to the unique steps of the mixture in use.
 - **Data order.** The order of the data is fixed by salted sha256 hashes per dataset. The sampler draws from counters keyed by the sha256 of the seed, the update number and the slot, and its state is saved in every checkpoint, so a run can be resumed exactly.
@@ -383,7 +388,7 @@ The inner folds are computed by `allocate.py`.
 3. Each unit's fold is its rank modulo 5, counting ranks from 0. So the 1st, 6th, 11th and later units in the ranking go to fold 0, the 2nd, 7th and so on to fold 1, and similarly for folds 2 to 4.
 4. Fold 0 is inner validation.
 
-Datasets with fewer than three independent units (O'Doherty/Sabes and area2) are split by time instead: each recording is cut into five equal time blocks, and the latest block is inner validation.
+Datasets with fewer than three independent individuals or recordings (O'Doherty/Sabes and area2) are split by time instead: each recording is cut into five equal time blocks, and the latest block is inner validation.
 
 Examples from `ALLOCATION.json`: the Gait120 inner-validation people are S108, S033, S036, S115, S050, S011, S092, S046, S098, S104, S066, S020, S119 and S053 (14 of the 66), and the W-track inner-validation rat is JS14.
 
@@ -402,7 +407,7 @@ Lower is better. Example with made-up numbers: a ratio of 0.8 for a group means 
 1. **τ (the dataset draw):** chosen by leaving one dataset out at a time, at size M with a transformer core, T = 256, seed 20261127 and a budget of 2 passes. Each wave-1 dataset is left out of training in turn, adapted on its inner-training units and scored on its inner-validation units.
 2. **Size and number of passes:** a ladder of runs from XS to XL, each up to 40 passes, with a checkpoint every 2 passes. The size and checkpoint with the lowest selection score win.
 3. **Core:** transformer, GRU and hybrid at sizes M and L. Another core replaces the transformer only if it is better by at least 1% relative at both sizes.
-4. **Context:** T of 64, 128, 256 or 512 steps, and a field-signal window of 100 or 200 ms, at size M.
+4. **Context:** T of 64, 128, 256 or 512 steps, and a field-signal span of 100 or 200 ms (the trailing time over which band power is computed, section 5.1), at size M.
 5. **XXL:** only under the rule in section 5.2.
 6. **The ridge control's history T_r:** chosen from the same candidates (64, 128, 256 or 512 steps) by the same inner folds (section 8.2). This choice uses no encoder and is made before the freeze.
 
@@ -439,9 +444,9 @@ No test set below uses a reserve owned by an earlier protocol. Using a set makes
 
 ### 7.2 E2, AJILE12 participants 03-07 (primary; an unseen dataset, unseen people)
 
-**The dataset.** AJILE12 holds long recordings of people with electrodes on the surface of the brain (ECoG) during a hospital stay, with video from which a separate DeepLabCut model for each person estimated the positions of body points. The protocol uses DANDI 000055, version 0.220127.0436, participants 03, 04, 05, 06 and 07. 0.2 never trains on any AJILE12 data, so E2 tests new people from a dataset the model has never seen. Earlier NeuroTranslation studies used other AJILE12 participants; no NeuroTranslation fit has used participants 03 to 07.
+**The dataset.** AJILE12 holds long recordings of people with electrodes on the surface of the brain (ECoG) during a hospital stay, with video from which a separate DeepLabCut model for each person estimated the positions of body points. The protocol uses DANDI 000055, version 0.220127.0436, participants 03, 04, 05, 06 and 07. The encoder of 0.2 is never trained on any AJILE12 data; only its adapters and readout are fitted, on the calibration sessions described below. So E2 tests new people from a dataset the model has never been trained on. The optional seen-dataset arm in section 7.5 is a separate copy and does not change this. Earlier NeuroTranslation studies used other AJILE12 participants; no NeuroTranslation fit has used participants 03 to 07.
 
-**Sessions.** For every participant, session 3 is the calibration session and session 4 the scoring session. Their file ids, sizes and sha256 fingerprints are in `ALLOCATION.json`. No other session is ever opened. The pose series, and for the secondary input the ECoG of the needed windows only, are read by HDF5 byte ranges.
+**Sessions.** For every participant, session 3 is the calibration session and session 4 the scoring session. Their file ids, sizes and sha256 fingerprints are in `ALLOCATION.json`. No other session is ever opened. The pose series and, for the secondary input, only the ECoG needed for the chosen forecasts are read by HDF5 byte ranges.
 
 **Participants kept back.** Participants 08 to 12 are kept back for the earlier maintainer's AJILE12 line of work. This track never downloads or opens any of their files, and `ALLOCATION.json` lists none of them.
 
@@ -453,14 +458,14 @@ No test set below uses a reserve owned by an earlier protocol. Using a set makes
 
 - it is at least 10.24 s after the start of the session (512 steps, the longest context);
 - in the 15 prior frames (j − 15 to j − 1), both shoulders are present, and the wrist, elbow and shoulder of both arms are present;
-- the shoulders pass three checks taken from an earlier study's rule, which make sure they define a usable frame: the shoulder width w is at least 1 pixel; the length of the mean shoulder-to-shoulder vector is at least 0.5 w; and the vertical component of the direction perpendicular to the shoulders has a size of at least 0.10;
+- the shoulders pass three checks taken from an earlier study's rule, which make sure they define usable axes: the shoulder width w is at least 1 pixel; the length of the mean shoulder-to-shoulder vector is at least 0.5 w; and the vertical component of the direction perpendicular to the shoulders has a size of at least 0.10;
 - both wrists are present at frames j + 7 and j + 14, which are 8 and 15 frames after the last prior frame.
 
-Secondary windows start at the reach onsets recorded in the session's own ReachEvents table, selected under the earlier study's rule.
+Secondary forecast times are the reach onsets recorded in the session's own ReachEvents table, selected under the earlier study's rule.
 
 **Inputs.**
 
-- *Primary:* the past pose (wrists, elbows, shoulders, ears and nose), resampled to 20 ms steps by taking the last video sample in each step. Positions are expressed in a frame built from the shoulders in the 15 prior frames only, and divided by the shoulder width.
+- *Primary:* the past pose (wrists, elbows, shoulders, ears and nose), resampled to 20 ms steps by taking the last video sample in each step. Positions are expressed in shoulder axes (a coordinate frame built from the shoulder positions in the 15 prior frames only) and divided by the shoulder width.
 - *Secondary:* pose plus ECoG band power, compared with ECoG taken from 60 s earlier.
 
 **Targets.** How far each wrist moves from the last prior frame to 8 frames (0.267 s) and 15 frames (0.500 s) later, in shoulder widths. Both the wrist on the opposite side to the brain implant (contralateral) and the wrist on the same side (ipsilateral) are forecast; each side of the brain mainly controls the opposite side of the body. The contralateral side is taken from the session's own ReachEvents description and the published implant hemisphere.
@@ -476,13 +481,13 @@ Secondary windows start at the reach onsets recorded in the session's own ReachE
 
 **Why these sessions are new.** Neither date matches the Jenkins sessions of DANDI 000070 (12, 16, 18 and 23 September), MC_Maze Small (28 September) or MC_Maze Medium (29 September, consumed). The benchmark's test files ("desc-test") are never opened. 0.2 never trains on any Jenkins recording; earlier NeuroTranslation fits used other Jenkins sessions.
 
-**Adaptation.** For each session, identity rows for the units and the ridge readout are fitted on the NLB "train" trials, with penalties chosen by 5 folds of those trials.
+**Adaptation.** For each session, identity rows for the sorted units and the ridge readout are fitted on the NLB "train" trials, with penalties chosen by 5 folds of those trials.
 
 **Scoring.** Scoring uses the NLB "val" trials. A forecast is issued every 50 ms from 250 ms after the trial start, while the target lies inside the trial.
 
 **Inputs.** Primary: past spikes (at least 200 ms, up to the chosen context) and past hand position. Secondary: spikes only.
 
-**Target and measures.** How far the hand moves in 2D in the next 100 ms, in mm. A secondary measure is the next-step spike log-likelihood in bits per spike, which says how well the spike counts of the next step are predicted compared with each unit's mean rate.
+**Target and measures.** How far the hand moves in 2D in the next 100 ms, in mm. A secondary measure is the next-step spike log-likelihood in bits per spike, which says how well the spike counts of the next step are predicted compared with each sorted unit's mean rate.
 
 **Uncertainty.** With one animal, uncertainty comes from resampling trials, stratified by session (each resample keeps the trials of the two sessions separate). E3 is always secondary and never enters H1.
 
@@ -494,7 +499,7 @@ E4, a test on held-out laboratories of the IBL Brain-Wide Map, is not run. The I
 
 - **B1** is not run. The unopened tasks of the 44 Gait120 validation and confirmation people stay unopened (section 14).
 - **A4** would use the Camargo et al. lower-limb biomechanics dataset as a whole held-out dataset. It needs a later protocol version, written after a check that none of its people overlap with the consumed Georgia Tech record 10.35090/gatech/70296, and after a licence check.
-- **Seen-dataset arm** (optional, if GPU time allows): 0.2 is trained further on AJILE12 participant sub-01, session 3 only, and scored on E2 only. This measures what seeing the dataset adds. It is reported whatever the result.
+- **Seen-dataset arm** (optional, if GPU time allows): a separate copy of 0.2 is trained further on AJILE12 participant sub-01, session 3 only, and scored on E2 only. The 0.2 that is scored for the pass rules is not this copy. No encoder that enters a pass rule, whether 0.2 or a control, is trained on AJILE12 data; their adapters and readouts are fitted on the E2 calibration sessions only. This copy measures what seeing the dataset adds, and it is reported whatever the result.
 - **Published tasks:** the task readouts of 0.0 are refitted on 0.2. They are reported only as a development comparison on people used before, not as a test on new people.
 
 Two candidates are not used: a Van Criekinge group, because the walking-scale allocation offers none to this track, and W-track ZT2, which is closed.
@@ -536,7 +541,7 @@ The same adapter budget, seeds, data order and scored rows apply to every method
 - **Random encoder:** the 0.2 network at the final size, started with seed 20261127 and never trained. It shows how much of a result comes from the network's shape and the adapters alone, without any learning.
 - **Scrambled 0.2:** every weight tensor of 0.2 with its entries shuffled by a fixed permutation (seed 20261128). It keeps the same numbers but destroys their learned arrangement.
 - **Single-source encoders:** encoders trained on one source only. They show whether pooling many sources beats training on one. They are made in two stages:
-  1. A size-M encoder is trained for each wave-1 source at the arm budget, as a screen.
+  1. A size-M encoder is trained for each wave-1 source, with the same training budget for every source, as a screen. PROTOCOL.md and PROTOCOL.json call this the arm budget and do not give it as a number; step P7 (section 13) estimates the whole screen at about 2 hours.
   2. Two kinds are then retrained at the final 0.2 size and token budget on all their training units (seed 20261127): the best by selection score, and the nearest source of each set (E1: Gait120; E2: Ofner; E3: O'Doherty/Sabes). Each keeps the checkpoint with the best score on its own source's inner validation.
 
   Both the best single-source encoder and the set's nearest single-source encoder are required controls in that set's pass rule (section 10). When they are the same source, it counts once.
@@ -620,7 +625,7 @@ Everything else is secondary and is reported whatever the result. If H1 fails, t
 
 ## 11. Quantity versus diversity
 
-This study asks whether, with the same number of training windows, data from more sources help more than more data from one source.
+This study asks whether a fixed number of training windows drawn from many sources gives better forecasts than the same number of windows drawn from one source. That comparison is H2 (section 10). The study also measures how the score changes with more windows from one source (the Q arms below) and with more people within one source at the same number of windows (the P arms).
 
 ### Common settings
 
@@ -724,7 +729,7 @@ Kept out of the public weights:
 
 ### What is published, and when
 
-- **Now:** this protocol (PROTOCOL.md), PROTOCOL.json, `allocate.py` and `ALLOCATION.json`. This Simple edition is added beside them.
+- **Now:** this protocol (PROTOCOL.md), PROTOCOL.json, `allocate.py` and `ALLOCATION.json`, with this Simple edition beside them. PROTOCOL.md and PROTOCOL.json say that the Simple edition comes with the results. This edition of the protocol was added early, before any test data were opened, and those files were not changed. The results will get their own Technical and Simple editions.
 - **Before the freeze:** `MIXTURE-MANIFEST.json` (counts, flags, licences and file fingerprints, with no recording values) and the fingerprint of the sealed scaling prediction (section 11).
 - **At the freeze:** `FREEZE.json`.
 - **After scoring:**
