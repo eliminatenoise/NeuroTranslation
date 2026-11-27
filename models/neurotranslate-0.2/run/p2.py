@@ -25,6 +25,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common  # noqa: E402
+import licences  # noqa: E402
 
 
 class ChannelSet:
@@ -206,10 +207,7 @@ def main():
     file_audit = mod.file_audit(paths, results) if hasattr(mod, "file_audit") else None
     lic = json.loads((Path(paths["licences"]) / (ds + ".json")).read_text())
     gates = mod.gates(paths, results, summary)
-    gates["Q1_licence"] = {"pass": bool(lic["allowed_by_Q1"]), "declared": lic["declared_licence"],
-                           "deposit_endpoint": lic["deposit_endpoint"], "response_sha256": lic["response_sha256"],
-                           "licence_object_sha256": lic.get("licence_object_sha256"),
-                           "licence_text": lic.get("licence_text"), "checked_at": lic["checked_at"]}
+    gates["Q1_licence"] = licences.q1_gate(lic)
     gates["Q2_role"] = {"pass": audit["all_units_pass"] and (file_audit is None or file_audit["pass"]),
                         "units_checked": len(unit_rows), "roster_files": ros["roster_files"],
                         "file_audit": file_audit}
@@ -232,7 +230,8 @@ def main():
     inner_val = alloc_ds["inner_validation"]
     part = {
         "dataset": ds, "part": "motion-and-emg", "wave": 1, "name": mod.META["name"], "doi": mod.META["doi"],
-        "licence": lic["declared_licence"], "species": mod.META["species"], "sites": mod.META["sites"],
+        "licence": lic.get("spdx") or lic["declared_licence"],
+        "licence_as_declared": lic["declared_licence"], "species": mod.META["species"], "sites": mod.META["sites"],
         "protocol_head": head, "built_at": common.now_iso(), "qualified": qualified,
         "counts": {
             "individuals": len({r["unit"] for r in results if r["recordings"]}),

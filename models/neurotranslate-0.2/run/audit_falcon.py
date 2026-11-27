@@ -21,6 +21,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common  # noqa: E402
+import licences  # noqa: E402
 
 ASSETS = "https://api.dandiarchive.org/api/dandisets/000941/versions/0.241029.1405/assets/?page_size=100"
 
@@ -77,8 +78,8 @@ def main():
     not_assessed = {"pass": False, "how": "not assessed: the role audit admitted no day, so no file was downloaded or opened"}
     part = {
         "dataset": "falcon_m1", "part": "neural", "wave": "1 (conditional; not admitted by the P2 role audit)",
-        "name": "FALCON Benchmark M1-A", "doi": "10.48324/dandi.000941/0.241029.1405", "licence": lic["declared_licence"],
-        "species": "macaque", "sites": 1, "protocol_head": head, "built_at": common.now_iso(), "qualified": False,
+        "name": "FALCON Benchmark M1-A", "doi": "10.48324/dandi.000941/0.241029.1405", "licence": lic.get("spdx") or lic["declared_licence"],
+        "licence_as_declared": lic["declared_licence"], "species": "macaque", "sites": 1, "protocol_head": head, "built_at": common.now_iso(), "qualified": False,
         "not_qualified_because": "Q2 role: no held-in-calib day is free. 20120928 was scored by earlier project work; "
                                  "20120924, 20120926 and 20120927 are the primary candidate pool of an author-frozen "
                                  "cross-session contract of a line on hold.",
@@ -88,9 +89,7 @@ def main():
                    "windows_inner_validation": 0, "channel_seconds": {}, "spikes": 0,
                    "events": {"count": 0, "definition": "none (not admitted)"}, "sources_read_without_a_full_step": 0},
         "qualification": {
-            "Q1_licence": {"pass": bool(lic["allowed_by_Q1"]), "declared": lic["declared_licence"],
-                           "deposit_endpoint": lic["deposit_endpoint"], "response_sha256": lic["response_sha256"],
-                           "licence_text": lic.get("licence_text"), "checked_at": lic["checked_at"]},
+            "Q1_licence": licences.q1_gate(lic),
             "Q2_role": {"pass": False, "days": days, "evidence_sha256": digests},
             "Q3_access": not_assessed, "Q4_clock": not_assessed, "Q5_labels": not_assessed, "Q6_causality": not_assessed},
         "role_audit": {"pass": False, "units": len(days), "admitted": [], "excluded": [x["unit"] for x in days]},
