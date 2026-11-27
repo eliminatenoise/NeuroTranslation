@@ -8,13 +8,13 @@ This document is a test plan. It was fixed before any test data were opened, so 
 
 **What is tested.** A small computer model watches the force that a walker puts on a panel in the floor and forecasts the next tenth of a second (100 ms). It forecasts two things: the panel's force added up over that time (the impulse), and whether a foot is about to land on a panel that is empty. The test asks whether this model makes smaller errors for people it has never seen when part of its training uses walking produced by physics simulations of the human skeleton and muscles, in many simulated body sizes and shapes. It is compared with the same model trained on measured walking only, given the same number of training steps and the same number of tuned settings.
 
-**Why it is tested.** On 23 November 2026 the project owner asked for training grounded in physics, from the first training stage (pre-training) through to later stages, for trying two simulation packages, MuscleMimic and MyoGen, and for a model that generalises to any body. Measured recordings only cover the people who were recorded. A simulator can produce walking for as many bodies as needed. It is not known whether that extra simulated walking helps with real people. An earlier small project test found that it made the forecasts worse.
+**Why it is tested.** On 23 November 2026 the project owner asked for training grounded in physics, from the first training stage (pre-training) through to later stages, for trying two simulation packages, MuscleMimic and MyoGen, and for a model that generalises to any body. Measured recordings only cover the people who were recorded. A simulator can produce walking for as many bodies as needed. It is not known whether that extra simulated walking helps with real people. In an earlier small project test, a model trained partly on simulated walking scored worse than the same model trained on measured walking only (section 2.2).
 
 **Which data, and whose.** The measured walking comes from the healthy adults in an openly published collection of walking recordings by Van Criekinge and colleagues (Scientific Data, 2023). The data are released under CC0 1.0, which places no conditions on their use. Training uses 18 named people who were already used in earlier project work, plus the training people of a related plan, the walking-scale protocol. The test uses a separate group of 8 to 12 people from the same collection (the number set aside in the walking-scale draft), whose recordings have never been opened. The simulated walking is produced by the project in the MuJoCo physics engine with the MyoSuite and MuscleMimic body models, on a planned table of 1,024 simulated bodies.
 
 **What is measured and what is simulated.** The plate forces, marker positions and muscle signals in the Van Criekinge recordings are measured. Every walk produced by a simulator is a computed movement of a model, not a measurement of a person. Measured walks that have been stretched or scaled to a new body size are labelled derived. Every file, model input and report keeps these three kinds apart.
 
-**What counts as success.** The simulation-trained model "helped" only if all three of these hold: its impulse error for the test people is lower than the measured-only model's, with the whole 95% uncertainty range below zero; its landing forecasts are not worse by more than a small fixed margin; and it beats two simple reference forecasts. A further test then checks whether the gain needs physics at all, or whether simply scaling measured walks to new sizes would give the same gain. The outcomes "hurt" and "inconclusive" are defined just as exactly.
+**What counts as success.** The simulation-trained model "helped" only if all three of these hold: its impulse error for the test people is lower than the measured-only model's, with the whole 95% uncertainty range of the difference (simulation-trained minus measured-only) below zero (section 12.1); its landing forecasts are not worse by more than a small fixed margin; and it beats two simple reference forecasts. A further test then checks whether the gain needs physics at all, or whether simply scaling measured walks to new sizes would give the same gain. The outcomes "hurt" and "inconclusive" are defined just as exactly.
 
 **What is published whatever the result.** This protocol and its binding file; the openly licensed code; the realism thresholds and the feasibility report, even if no simulator turns out to be realistic enough; the scores of every planned comparison, wins and losses alike, including those that must stay private; per-person results; the openly licensed trained models; a NOTICE that credits every source; and a Technical and a Simple edition of the report.
 
@@ -53,7 +53,7 @@ The Technical edition states that the Simple edition would be written with the r
 
 ### 1.1 What the laboratory records
 
-The Van Criekinge laboratory has four force plates set into the floor. A force plate is a stiff panel with sensors underneath that measure how hard anything on it pushes. As a person walks across the room, each foot lands on one or more of the plates. The plates are sampled 1,000 times a second. Cameras track small reflective markers stuck on the skin 100 times a second. Sensors on the skin record the electrical activity of muscles (surface EMG) 1,000 times a second. So there are ten force samples for every camera frame.
+The Van Criekinge laboratory has four force plates set into the floor. A force plate is a stiff panel with sensors underneath that measure how hard anything on it pushes. As a person walks across the room, their feet land on some of the plates. The plates are sampled 1,000 times a second. Cameras track small reflective markers stuck on the skin 100 times a second. Sensors on the skin record the electrical activity of muscles (surface EMG) 1,000 times a second. So there are ten force samples for every camera frame.
 
 ### 1.2 What the forecasting model does
 
@@ -93,7 +93,7 @@ The facts in sections 2.2 and 2.3 were gathered before this plan was written. Th
 
 ### 2.2 What the earlier project test found
 
-Before this plan, an unpublished project test tried simulation with a small forecasting model. It replaced half (50%) of the model's training windows with five simulated walks of one simulated body. The walks came from a published learned walking controller for the MyoLeg leg model (the myoLegWalk-v0 baseline checkpoint for MyoSuite 3.0.0), not from a reflex controller. The model was scored on six treadmill walkers from another public collection, who had already been used during development.
+Before this plan, an unpublished project test tried simulation with a small forecasting model. It replaced half (50%) of the model's training windows with five simulated walks of one simulated body. The walks came from a published learned walking controller for the MyoLeg leg model (the myoLegWalk-v0 baseline checkpoint for MyoSuite 3.0.0; a checkpoint is a saved trained model), not from a reflex controller. The model was scored on six treadmill walkers from another public collection, who had already been used during development.
 
 Training on measured walking only did better on all three measures:
 
@@ -103,11 +103,11 @@ Training on measured walking only did better on all three measures:
 | Impulse error | 7.89 N·s | 9.73 N·s |
 | New-load Brier score | 0.0492 | 0.0613 |
 
-No simulated version of the Van Criekinge laboratory existed then, so these numbers are not a starting point for this task. They are a warning.
+No simulated version of the Van Criekinge laboratory existed then, so these numbers are not a starting point for this task.
 
-The same test showed why the simulated walking did not help. The simulated forces did not look like measured forces:
+The same test also showed that the simulated forces did not look like measured forces:
 
-- The median of the largest 20 ms force value was 1,717 N in simulation and 763 N in the measurements.
+- The median (the middle value when all values are sorted) of the largest 20 ms force value was 1,717 N in simulation and 763 N in the measurements.
 - Both simulated feet were off the ground in 2.9% of samples. In the measurements this happened in 0.004% of samples.
 - In each fold, only 0 or 1 simulated input windows lay inside the central range of the measured windows on all input features at once. In other words, almost none of the simulated inputs resembled real ones.
 
@@ -115,17 +115,17 @@ The same test showed why the simulated walking did not help. The simulated force
 
 The same learned controller was run again, sampled 100 times a second:
 
-- Its peak foot forces were 2.4 to 5.0 body weights. Among the two Van Criekinge training people with a recorded mass, the largest peak on a loaded plate was 1.154 body weights. The simulated peaks were therefore about two to four times the largest measured one.
+- Its peak foot forces were 2.4 to 5.0 body weights. Among the two people of the earlier fit role whose files record a mass (section 4.2 lists that role), the largest peak on a loaded plate was 1.154 body weights. The simulated peaks were therefore about two to four times the largest measured one.
 - It fell when body mass was multiplied by 0.8, 1.2 or 1.25, and when muscle strength was multiplied by 0.7, 0.75, 0.85 or 1.3. It walked for 10 s when mass was multiplied by 0.9 or 1.1. So it cannot walk across the range of body sizes the test needs.
 - Its published notes report no successful walks under MyoSuite version 3.1, so it is run only under version 3.0.0.
 
 The reflex controller supplied with MyoSuite was also tried. A reflex controller produces walking from simple rules that link body sensations to muscle commands, much as spinal reflexes do; this one is the Song-Geyer controller, with 46 adjustable settings (gains) and a new command every 10 ms. With its shipped gains it fell after 0.37 s. A search of 181 trial runs, an evolution strategy that keeps the best gain sets and tries small changes to them, raised the time before falling to 2.54 s. Stable walking in three dimensions was not reached.
 
-Speeds were measured on one processor thread. The MyoLeg model ran 26.4 times faster than real time on its own and 19.7 times inside its simulation environment. The reflex controller ran 12 times faster than real time. The 416-muscle MuscleMimic full-body model ran 3.06 times faster than real time when passive (with no muscle commands). A 10 s walk with the learned controller took 0.56 s of computer time. One training update of a small forecaster with a batch of 256 rows took 11.3 ms at width 64 and 21.0 ms at width 128.
+Speeds were measured on one processor thread. The MyoLeg model ran 26.4 times faster than real time on its own and 19.7 times inside its simulation environment. The reflex controller ran 12 times faster than real time. The 416-muscle MuscleMimic full-body model ran 3.06 times faster than real time when passive (with no muscle commands). A 10 s walk with the learned controller took 0.56 s of computer time. One training update of a small forecaster with a batch of 256 rows took 11.3 ms at width 64 and 21.0 ms at width 128 (width is the size of the model's internal layers; section 9.1).
 
 ### 2.4 What follows from these findings
 
-Simulated walking is cheap to produce, but the walking available on 27 November was not realistic. So the test is built in two stages. First, a simulator must pass a realism gate that is built only from training people and published walking ranges (section 7.7). Only if a simulator passes is the reserved test group opened. If none passes, the test group stays closed and that negative result is published.
+Simulated walking is cheap to produce, but the simulated walking available on 27 November had peak forces far above the measured ones and could not walk across the needed range of body sizes. So the test is built in two stages. First, a simulator must pass a realism gate that is built only from training people and published walking ranges (section 7.7). Only if a simulator passes is the reserved test group opened. If none passes, the test group stays closed and that negative result is published.
 
 ## 3. What a result can and cannot show
 
@@ -140,9 +140,9 @@ Simulated walking is cheap to produce, but the walking available on 27 November 
 ### 4.1 The collection
 
 - **Source.** The healthy group of the Van Criekinge collection, published on figshare with the identifier 10.6084/m9.figshare.24192480.v1. The data are CC0 1.0. The accompanying article is Van Criekinge T. et al., Scientific Data 10, 852 (2023), identifier 10.1038/s41597-023-02767-y, published under CC BY 4.0.
-- **Archive.** The recordings sit in one archive file, 138_HealthyPiG.zip (figshare file 42450060, 463,159,769 bytes, 1,016 entries). Its md5 checksum and the fingerprint of its table of contents are in the appendix.
+- **Archive.** The recordings sit in one archive file, 138_HealthyPiG.zip (figshare file 42450060, 463,159,769 bytes, 1,016 entries). Its md5 checksum (an older, shorter kind of file fingerprint) and the fingerprint of its table of contents are in the appendix.
 - **Clocks.** Markers are recorded 100 times a second. The analog channels, which are the plate forces and the EMG, are recorded 1,000 times a second, ten analog samples per marker frame.
-- **Plates.** There are four plates of one type. Their corners are the same in all 12 fit files (the walks of the earlier fit role, section 4.2). Plates 1, 2 and 4 lie in a row along one floor axis; plate 3 lies beside plates 1 and 2 along the other axis, centred on the line where they meet. Their exact corners in millimetres are in the appendix.
+- **Plates.** There are four plates of the same type (type 2 in the recording files). Their corners are the same in all 12 fit files that were checked (one walk file for each of the 12 people of the earlier fit role, section 4.2). Plates 1, 2 and 4 lie in a row along one floor axis; plate 3 lies beside plates 1 and 2 along the other axis, centred on the line where they meet. Their exact corners in millimetres are in the appendix.
 - **Force direction.** Plate force signs differ between files: in some files upward force is positive, in others negative. The walking-scale adapter (section 5) converts them all to upward-positive vertical force.
 - **Smoothed markers.** The published marker paths have had gaps filled and have been smoothed. Smoothing mixes each value with its neighbours, including later ones, so a marker value can carry information from slightly later moments. The markers are therefore not causal at the 10 ms scale, which is why marker inputs are only used with a delay (section 6.3).
 
@@ -152,7 +152,7 @@ Every comparison trains on the same measured people:
 
 - the 12 people of the earlier fit role: SUBJ112, 110, 096, 024, 082, 062, 061, 040, 044, 043, 039 and 038, with 36 walks;
 - the 6 people of the earlier "validation" role: SUBJ047, 011, 115, 075, 066 and 116, with 18 walks. Earlier fits used them for checking, so they have already been seen. Here they are training people only and are never described as new;
-- the training people of the walking-scale protocol, from all of its training stages ("rungs"). Their walks are reused read-only from that track's stored copies, identified by fingerprint, with no second download.
+- the training people of the walking-scale protocol, from every rung of its ladder of training-set sizes (a rung is one training-set size, counted in people; each higher rung adds more training people). Their walks are reused read-only from that track's stored copies, identified by fingerprint, with no second download.
 
 On 27 November, the 54 local walk files of the first 18 people were checked against their recorded fingerprints. All 54 matched. The fingerprints are listed in PROTOCOL.json.
 
@@ -163,7 +163,7 @@ These people are not used in any comparison or step:
 - the 12-person Van Criekinge test group of the earlier project roster: SUBJ016, 084, 092, 008, 053, 014, 077, 074, 057, 056, 020 and 089;
 - the walking-scale evaluation group, and every walking-scale group other than its training people and the physics-source group;
 - SUBJ099, whom the walking-scale protocol leaves untouched;
-- the 50-person stroke group of the Van Criekinge collection, which has never been accessed (section 14.4 explains a pending decision about it);
+- the 50-person stroke group of the Van Criekinge collection, which has never been accessed (section 14.5 explains a pending decision about it);
 - every other reserved group of the project.
 
 ### 4.4 The test group and when it is opened
@@ -196,7 +196,7 @@ When the standing trials are read:
 - The standing trials of walking-scale training people are downloaded in step S2 if that track has not stored them already.
 - The standing trials of test people are read only after the conditions of section 4.4, and they are used as an input that is available at forecast time. A person's height and mass are known before they walk, so using them does not reveal the future.
 
-It is not yet known whether these files contain Bodymass, Height and leg length. Only 2 of the 12 walk files of the earlier fit role contain them.
+It is not yet known whether these files contain Bodymass, Height and leg length. In the check of one walk file for each of the 12 people of the earlier fit role (section 4.1), only 2 of the 12 files contain them.
 
 ### 4.6 The inner folds and the training subsets
 
@@ -222,9 +222,9 @@ The test group and several shared parts come from a related plan, the walking-sc
 Before any reserved byte is opened, the lead commits a file called BINDING.json in this folder. It may contain only the seven items below, each with the fingerprint of the file it comes from:
 
 1. The walking-scale commit, the fingerprint of its PROTOCOL.json, and the fingerprint of its allocation output.
-2. The subject codes of the group that the walking-scale allocation sets aside for physics-source, copied exactly as listed there, with the archive files that allocation names (archive member, CRC-32 checksum, byte counts). This is the test group.
-3. The subject codes of the walking-scale training people (all training rungs), and the fingerprint of each stored walk file reused from that track.
-4. The walking-scale input adapter file and its fingerprint, with any differences from the task described in section 6; the code of the forecaster family and its fingerprint; whether walking-scale admits marker inputs, and under which causality guard; and its rule for qualifying EMG channels, if it has one.
+2. The subject codes of the group that the walking-scale allocation sets aside for physics-source, copied exactly as listed there, with the archive files that allocation names (archive member, CRC-32 checksum, which is the short check code the archive stores for each member, and byte counts). This is the test group.
+3. The subject codes of the walking-scale training people (from every rung, section 4.2), and the fingerprint of each stored walk file reused from that track.
+4. The walking-scale input adapter file and its fingerprint, with any differences from the task described in section 6; the code of the forecaster family and its fingerprint; whether walking-scale admits marker inputs, and under which causality guard (its rule that keeps later samples out of the inputs); and its rule for qualifying EMG channels, if it has one.
 5. The source of the inner folds. The walking-scale folds are used only if its committed protocol places every physics-source training person (section 4.2) in exactly one of exactly four folds. Otherwise the rule of section 4.6 is used. Nothing else decides this.
 6. The outputs of step S0, by fingerprint: GATE-THRESHOLDS.json, FEASIBILITY.json, the register of which bodies passed, and the list of generators that passed.
 7. Lists computed by rules fixed in this plan: the inner folds of the full training pool, the narrow training pool used in the body-shift analysis (section 10.6), and the reference walks assigned to generator G4 (section 7.5).
@@ -287,7 +287,7 @@ So that simulated walks produce the same kind of data as the real ones, the plan
 - **Plate force.** The vertical force on each plate is the sum of the pushing (normal) forces of the foot-floor contacts whose contact point lies inside that plate, recorded 1,000 times a second. The simulation step is 1 ms, the same as the laboratory clock. A foot that stands across two plates shares its load between them.
 - **Plate noise.** Each simulated plate gets noise and a small offset, drawn from the noise and offsets measured on unloaded stretches of training-people walks in step S0.
 - **Traversals.** Each simulated walk lasts 12 s. The first 2 s are thrown away so that the walk has settled. Each crossing of a plate layout gives one traversal: a cut of 2.1 to 4.2 s, centred on the layout, like the measured walks. Each traversal goes to the walking-scale adapter as one walk.
-- **Checks on every recorded walk.** (1) Vertical impulse closure within 0.5%: over the walk, the total floor force must balance body weight and the change in vertical momentum, counting any help from the tracker; this follows from Newton's second law, so a failure points to an error in the simulation. (2) No floor contact by any body part except the feet. (3) No outside force other than the logged tracking help. (4) A future-replacement test: replacing every sample after t with something else must leave every input issued at t unchanged, which shows that no future information leaks into the inputs.
+- **Checks on every recorded walk.** (1) Vertical impulse closure within 0.5%: over the walk, the total floor force must balance body weight and the change in vertical momentum, counting any help from the tracker; this follows from Newton's second law, so a failure points to an error in the simulation. (2) No floor contact by any body part except the feet. (3) No outside force other than the logged tracking help. (4) A one-tick future-replacement test (a tick is one 1 ms sample): replacing every sample after t with something else must leave every input issued at t unchanged, which shows that no future information leaks into the inputs.
 - **Simulated markers.** Heel and toe markers are placed where the standard Plug-in Gait marker set puts them, on the scaled heel bone (calcaneus) and toe segments. They are sampled 100 times a second, given 1 to 2 mm of noise to imitate skin movement, and smoothed with the filter cutoff measured in step S0, so that they match the processing of the published markers.
 
 ### 7.3 The body-scaling engine
@@ -364,7 +364,7 @@ The recordings include surface EMG, so the plan also simulates EMG for the secon
 
 **CR-EMG: a clean-room generator that can be published.** It is written from published equations by a person who has not read the MyoGen source code and who records that fact, so that the generator carries none of MyoGen's licence terms. Its parts:
 
-- Fuglevand recruitment, a standard model of how motor units switch on as effort rises, with a recruitment range of 30 to 60;
+- Fuglevand recruitment, a standard model of how motor units switch on as effort rises, with a recruitment range of 30 to 60 (the ratio between the effort levels at which the last and the first motor units switch on);
 - rate coding: each motor unit fires 8 to 35 times a second, faster with more effort;
 - variable firing intervals, with a coefficient of variation (spread divided by average) of 0.15 to 0.25;
 - Hermite-Rodriguez motor-unit action potentials, a standard mathematical shape for the electrical signal of one motor unit;
@@ -372,7 +372,7 @@ The recordings include surface EMG, so the plan also simulates EMG for the secon
 - conduction velocity (the speed of the signal along the muscle fibres) of 3.5 to 5 m/s;
 - two electrodes 20 mm apart (a bipolar recording).
 
-The signal is simulated 10,000 times a second, filtered to keep 20 to 450 Hz, reduced to 1,000 samples a second, given a signal-to-noise ratio of 10 to 30 dB, and multiplied by a random log-normal gain for each body and channel. Finally, each channel's amplitude is mapped so that its spread of RMS (root-mean-square) values matches that of the training people. Because of this last step, which uses measured data, CR-EMG is labelled calibrated.
+The signal is simulated 10,000 times a second, filtered to keep 20 to 450 Hz, reduced to 1,000 samples a second, given a signal-to-noise ratio of 10 to 30 dB (decibels; 10 dB means the signal power is 10 times the noise power, 30 dB means 1,000 times), and multiplied by a random log-normal gain for each body and channel. Finally, each channel's amplitude is mapped so that its spread of RMS (root-mean-square) values matches that of the training people. Because of this last step, which uses measured data, CR-EMG is labelled calibrated.
 
 **MyoGen EMG (private).** The same muscle excitations also drive MyoGen 0.11.0 surface EMG, in environment D, in a separate process and outside the public folder. MyoGen is licensed AGPL-3.0-or-later, so its output and every model trained on it stay private, with scores only.
 
@@ -380,7 +380,7 @@ The signal is simulated 10,000 times a second, filtered to keep 20 to 450 Hz, re
 
 ### 7.7 The realism gate
 
-The realism gate decides whether a simulator is good enough to be used. It is frozen in GATE-THRESHOLDS.json during step S0, before any simulated corpus is generated. Thresholds that come from data use only the 18 training people of section 4.2 (with body weight from their standing trials), widened by 10%. The fixed thresholds come from the range of the training people and from the published walking literature.
+The realism gate decides whether a simulator is good enough to be used. It is frozen in GATE-THRESHOLDS.json during step S0, before any simulated corpus (the collection of simulated walks used for training) is generated. Thresholds that come from data use only the 18 training people of section 4.2 (with body weight from their standing trials), widened by 10%. The fixed thresholds come from the range of the earlier fit pool (the 12 people of the earlier fit role, section 4.2) and from the published walking literature.
 
 **Checks on each walk**, over its steady part:
 
@@ -396,13 +396,13 @@ The realism gate decides whether a simulator is good enough to be used. It is fr
 | Momentum closure | within 0.5% |
 | Tracking help (G4, G3c and G3f only) | RMS of the pelvis helping force at most 5% of body weight |
 
-Several of these checks target the failures found earlier (section 2): feet striking at 2.4 to 5.0 body weights would fail the peak-force check, and the earlier 2.9% of samples with both feet off the ground would fail the flight check.
+The problems found earlier (section 2) would fail two of these checks: feet striking at 2.4 to 5.0 body weights would fail the peak-force check, and the earlier 2.9% of samples with both feet off the ground would fail the flight check.
 
 A body passes if at least 2 of its walks pass. Only walks that pass enter the corpus.
 
 **Checks on each generator as a whole:**
 
-- Among simulated rows whose last 200 ms average at least 20 N (rows where the plate is carrying load), at least 50% must lie inside the central 90% (5th to 95th percentile) of training-people values on all of these features at once: average 200 ms force / body weight, largest 20 ms value / body weight, 100 ms impulse / body weight, and, if markers are admitted, heel movement over 180 ms. This check is aimed at the earlier problem, where almost no simulated inputs looked like real ones.
+- Among simulated rows whose last 200 ms average at least 20 N (rows where the plate is carrying load), at least 50% must lie inside the central 90% (5th to 95th percentile) of training-people values on all of these features at once: average 200 ms force / body weight, largest 20 ms value / body weight, 100 ms impulse / body weight, and, if markers are admitted, heel movement over 180 ms. This check concerns the problem seen in the earlier test, where almost no simulated inputs resembled real ones (section 2.2).
 - The number of new-load starts per plate per traversal must lie within the training people's minimum and maximum.
 - Reported but not used to decide: how well a classifier can tell simulated rows from measured ones on these features (the area under its curve, where 0.5 means it cannot tell them apart), and distances between the simulated and measured distributions of each feature.
 
@@ -419,7 +419,7 @@ Every simulated walk records: its generator; its environment and package version
 | Measured | Van Criekinge plate forces, markers and surface EMG; body measurements stored in the standing trials | measured |
 | Derived from measured values | body weight computed from mass or from quiet-standing force; leg length and height computed from markers; augmented copies of measured traversals scaled to new sizes (section 10.2); standardisation constants | derived, augmented (for augmented rows) |
 | Simulated by tracking measured motion | G4, G3c and G3f walks, their plate forces and markers | simulated, reference-tracking |
-| Simulated without measured motion | G1, G1-cal (calibrated towards measured ranges), G2 and the unscreened control | simulated, generated |
+| Simulated by a walking controller (not by tracking a recorded walk) | G1, G1-cal (calibrated towards measured ranges), G2 and the unscreened control | simulated, generated |
 | Simulated with a reduced model | SLIP | simulated, reduced-order |
 | Simulated EMG | CR-EMG (calibrated to measured RMS values) and private MyoGen EMG | the tag of the simulated walk it belongs to; CR-EMG is also labelled calibrated |
 
@@ -445,8 +445,8 @@ Physics-source adds an 8-number source-tag embedding, a learned list of 8 number
 ### 9.2 Training settings, the same for every comparison
 
 - **Arithmetic.** 32-bit floating-point numbers on the CPU, with PyTorch's repeatable-algorithm setting switched on (`torch.use_deterministic_algorithms(True)`), so the same inputs and seed always give the same model.
-- **Threads.** One thread per fit, and at most 16 threads in total, fixed to processor cores 16 to 31.
-- **Optimiser.** AdamW, a standard training method, with learning rate 0.002 and weight decay 0.001 (a small pull that keeps weights from growing large), batch 256 rows, and a cosine schedule with 5% warm-up: the learning rate rises over the first 5% of updates, then falls smoothly along a cosine curve. The loss is the walking-scale family's.
+- **Threads.** One thread per fit, and at most 16 threads in total, fixed to logical processors (CPUs) 16 to 31.
+- **Optimiser.** AdamW, a standard training method, with learning rate 0.002 (the size of each training step) and weight decay 0.001 (a small pull that keeps weights from growing large), batch 256 rows, and a cosine schedule with 5% warm-up: the learning rate rises over the first 5% of updates, then falls smoothly along a cosine curve. The loss is the walking-scale family's.
 - **Update budget.** U = 4,000 updates for every comparison, which draws 4,000 × 256 = 1,024,000 rows, unless a comparison is labelled compute-unmatched.
 - **How rows are drawn.** Measured rows are drawn by person, then walk, then issue time, which matches how scores are weighted (each person counts equally). Simulated rows are drawn by generator, then body, then traversal, then issue time.
 - **Mixture share s.** The fraction of each batch drawn from simulated (or augmented) rows.
@@ -506,7 +506,7 @@ Each measured traversal gets twenty augmented copies, with fixed seeds. The tag 
 
 Gradient-boosted trees are a different kind of model: many small decision trees, each one correcting the errors of the ones before. In the walking-scale protocol's planning on training people only, boosted trees beat the three-pass model (2.41 against 2.64 N·s with nine people), so a tree family is included.
 
-**H-M: histogram gradient-boosted trees, measured only.** Its 8 configurations are every combination of maximum iterations 200 or 400, learning rate 0.05 or 0.1, and maximum leaf nodes 15 or 31. It has a classifier for new load and a regressor for the impulse residual over persistence, both with sample weights that give each person equal weight. The features are those that walking-scale commits for its trees; otherwise they are the flattened standardised 20 ms averages, the availability flags, the last average, the mean, the last minus the first, and the persistence impulse.
+**H-M: histogram gradient-boosted trees, measured only.** "Histogram" means that each input is first sorted into a limited number of value bins, which makes the trees fast to train. Its 8 configurations are every combination of maximum iterations 200 or 400, learning rate 0.05 or 0.1, and maximum leaf nodes 15 or 31. It has a classifier for new load and a regressor for the impulse residual over persistence, both with sample weights that give each person equal weight. The features are those that walking-scale commits for its trees; otherwise they are the flattened standardised 20 ms averages, the availability flags, the last average, the mean, the last minus the first, and the persistence impulse.
 
 **H-S: trees with simulated rows.** Its 8 configurations are every combination of simulated weight share 0.10 or 0.25, learning rate 0.05 or 0.1, and maximum leaf nodes 15 or 31, at 400 iterations, with a feature that flags the source (always "measured" at forecast time).
 
@@ -515,9 +515,9 @@ Gradient-boosted trees are a different kind of model: many small decision trees,
 These are trained in the final fits, using the configuration chosen for S\*.
 
 - **P-shuffle.** The simulated targets are shuffled between bodies, within groups that share the same plate state at issue time and the same generator, but never within one body. The simulated inputs stay exactly as they were, but the physical link between the past force and the future force is broken. If P-shuffle were to help as much as S\*, the gain could not be credited to that physical link.
-- **Frozen encoders with a trained readout.** An encoder is the part of the model that turns the inputs into an internal summary. Three encoders are frozen (not trained further): (i) the S\* encoder after pre-training only, which is 0.75U = 3,000 simulated updates; (ii) a randomly initialised encoder; (iii) the frozen shared temporal encoder of the published NeuroTranslate 0.0 model, with a new linear input layer. In (i) and (ii), the shared cell and the output heads are trained; in (iii), the new input layer and the readout. Each gets U/4 = 1,000 measured updates. If the NeuroTranslate 0.0 encoder cannot accept these inputs, (iii) is recorded as not run, with the reason.
+- **Frozen encoders with a trained readout.** An encoder is the part of the model that turns the inputs into an internal summary; the readout is the output part that turns that summary into forecasts. Three encoders are frozen (not trained further): (i) the S\* encoder after pre-training only, which is 0.75U = 3,000 simulated updates; (ii) a randomly initialised encoder; (iii) the frozen shared temporal encoder of the published NeuroTranslate 0.0 model, with a new linear input layer. In (i) and (ii), the shared cell and the output heads are trained; in (iii), the new input layer and the readout. Each gets U/4 = 1,000 measured updates. If the NeuroTranslate 0.0 encoder cannot accept these inputs, (iii) is recorded as not run, with the reason.
 - **Simulation only, zero-shot.** U simulated updates and no measured training rows, with the measured standardisation, issued unchanged on the measured test walks.
-- **Unscreened simulation like the earlier test.** The published learned controller's walks on the nominal body (nominal; mass 0.9 and 1.1; traction 1.2; mass 1.1 with traction 1.2), with no realism gate and a mixture share of 0.5. Private, scores only.
+- **Unscreened simulation like the earlier test.** The published learned controller's walks on the nominal body (nominal; mass 0.9 and 1.1; traction 1.2, meaning foot-floor grip (friction) multiplied by 1.2; mass 1.1 with traction 1.2), with no realism gate and a mixture share of 0.5. Private, scores only.
 - **SLIP corpus** in the S\* recipe, if SLIP was run.
 
 ### 10.5 Secondary comparisons
@@ -539,7 +539,7 @@ The EMG features follow the walking-scale family's rule; otherwise they follow t
 
 These are reported in full but have no success rule. They help explain the main result.
 
-- **Dose.** How much simulation to use: mixture shares 0.05, 0.1, 0.25, 0.5, 0.75 and 0.9, and pre-training fractions 0.25, 0.5, 0.75 and 0.9, each followed by measured fine-tuning.
+- **Dose.** How much simulation to use: mixture shares 0.05, 0.1, 0.25, 0.5, 0.75 and 0.9, used throughout training with no pre-training; and pre-training fractions 0.25, 0.5, 0.75 and 0.9, each followed by measured fine-tuning.
 - **Diversity.** Whether many different bodies matter more than many walks: the S\* recipe on the preferred passing generator with 1, 8, 32 or 128 bodies (the first entries of the table), always with 384 simulated walks in total, and with the whole corpus. Extra walks vary the reference walk for G4, or the starting state and target speed for G1. With 1 body, all 384 walks come from that body; with 128 bodies, each gives 3.
 - **Generator ablation.** Each passing generator alone, including G3f and G2 privately.
 - **Data efficiency.** M and S\* trained on the subsets of section 4.6 (3, 6 and 12 people with five subsets each, all 18, and the full pool). A curve a + b·n^(−c) is fitted to M's error against the number of people n. It estimates how many measured people M would need to match S\*, which expresses the value of the simulation in measured people.
@@ -551,7 +551,7 @@ These are reported in full but have no success rule. They help explain the main 
 ### 10.7 Reference forecasts on exactly the same rows
 
 - **Persistence with prevalence.** The new-load forecast is the training people's rate of new loads (each person weighted equally); the impulse forecast is persistence, the latest 20 ms average × 0.1 s.
-- **Linear trend.** A straight line fitted by least squares through the last five 20 ms averages and extended over the next 100 ms to give the impulse; the training rate for new load.
+- **Linear trend.** A straight line fitted by least squares (the line that makes the summed squared misses smallest) through the last five 20 ms averages and extended over the next 100 ms to give the impulse; the training rate for new load.
 - **Ridge and logistic regression.** Simple linear models on the same inputs as the neural arms (ridge for impulse, logistic for new load), with the penalty that keeps weights small chosen on the inner folds from 0.001, 0.01, 0.1, 1 and 10.
 - **Heel at constant velocity, and stationary heel** (only with the heel target).
 - **The published Van Criekinge force specialist** (`models/force-baselines/common-six.npz`), using its force-only calculation, with its penalty chosen on the 6 people of the earlier "validation" role, who were not in its fit.
@@ -577,8 +577,8 @@ The contrast between an arm and the measured-only model is Δ = the average over
 ### 11.4 Uncertainty
 
 - **Paired bootstrap over test people.** Both arms are scored on the same people, and the difference is taken person by person. The bootstrap then draws test people at random with replacement 10,000 times (seed 20261127), recomputes the average difference each time, and reports the middle 95% of those values as the 95% interval (a percentile interval). This shows how much the result could change with a different set of people of the same kind.
-- **p-values.** Two-sided bootstrap p-values are computed for the key secondary comparisons, which are then corrected by the Holm procedure (section 12.5).
-- **Planning.** In the walking-scale protocol's study on training people, the improvement of one model over another varied between people with a standard deviation of 8.9% of the error, and repeating a fit with different seeds varied a person's error by 0.15 N·s (standard deviation). With 12 test people, the minimum detectable relative effect at 80% power and two-sided 0.05 is about 5% to 7%: a true improvement smaller than that would usually be missed. The projected gain from adding measured people (from 12 to 46) is about 2.8%. A simulation gain of that size would not be detectable in this test.
+- **p-values.** A p-value is the probability of seeing a difference at least as large as the one observed if the two arms were in fact equally good; a small p-value is evidence against "no difference". Two-sided means that differences in either direction count. Two-sided bootstrap p-values are computed for the key secondary comparisons, which are then corrected by the Holm procedure (section 12.5).
+- **Planning.** In the walking-scale protocol's study on training people, the improvement of one model over another varied between people with a standard deviation (a measure of typical spread around the average) of 8.9% of the error, and repeating a fit with different seeds varied a person's error by 0.15 N·s (standard deviation). With 12 test people, the minimum detectable relative effect at 80% power and two-sided 0.05 is about 5% to 7%: a true improvement smaller than that would usually be missed. Here 80% power means that a true improvement of that size would be detected in about 80 of 100 repeats of such a test, and two-sided 0.05 means a 5% chance of declaring a difference, in either direction, when none exists. The projected gain from adding measured people (from 12 to 46) is about 2.8%. A simulation gain of that size would not be detectable in this test.
 
 ## 12. The success rule
 
@@ -590,7 +590,7 @@ S\* helped if all three of these hold:
 
 1. the upper end of the 95% interval of Δ impulse (S\* − M) is below 0, which means the whole interval lies on the side where S\*'s impulse errors are smaller;
 2. the upper end of the 95% interval of Δ Brier (S\* − M) is below +0.002, which means the landing forecasts are at most slightly worse;
-3. S\*'s impulse MAE (the point estimate) is below that of force persistence and below that of ridge regression.
+3. S\*'s impulse MAE (the point estimate: the single measured value, not its interval) is below that of force persistence and below that of ridge regression.
 
 ### 12.2 PHYSICS-SPECIFIC
 
@@ -603,7 +603,7 @@ Descriptive only at this group size, using the body-shift contrast and the dista
 ### 12.4 HURT and INCONCLUSIVE
 
 - **HURT** if the lower end of the 95% interval of Δ impulse (S\* − M) is above 0, which means the whole interval lies on the side where S\*'s errors are larger.
-- **INCONCLUSIVE** otherwise. The report then gives the actual interval and the minimum detectable effect computed from the actual spread between people: 2.80 × standard deviation / √n, where n is the number of test people.
+- **INCONCLUSIVE** otherwise. The report then gives the actual interval and the minimum detectable effect computed from the actual spread between people: 2.80 × standard deviation / √n, where n is the number of test people. The factor 2.80 is 1.96 + 0.84, the standard values for a two-sided 0.05 test and 80% power (section 11.4).
 
 ### 12.5 Key secondary comparisons
 
@@ -612,7 +612,7 @@ Two secondary comparisons are tested together, with the Holm correction at 0.05,
 - S\*_E-CR − M_E on impulse MAE, in the EMG-qualified test people;
 - S\* − M on heel movement MAE, only if the heel target exists.
 
-With two secondaries, Holm tests the smaller p-value at 0.025 and, if that one passes, the other at 0.05. With one secondary, it is tested at 0.05.
+With two secondaries, Holm tests the smaller p-value (section 11.4) at 0.025 and, if that one passes, the other at 0.05. Passing means the p-value is small enough to meet the level it is tested at. With one secondary, it is tested at 0.05.
 
 ### 12.6 Minimum group sizes
 
@@ -673,15 +673,15 @@ Project code and clean weights use the repository's licence, CC0 1.0. Files deri
 1. Models trained on MyoGen EMG stay private, with scores only, unless the owner chooses a separate AGPL-3.0 release.
 2. Confirmation that arms built on the non-commercial arm and hand part, and on the published learned controller, publish scores only; or else retraining G2 from scratch.
 3. Whether the never-accessed Van Criekinge stroke group (50 people) may be spent on an exploratory test of very different bodies. Using it would use it up for any later test.
-4. If the test group has 8 to 12 people, acceptance that only effects of about 5% to 7% or more can be detected; or else a larger physics reserve, at the cost of training people in the walking-scale protocol's stages.
+4. If the test group has 8 to 12 people, acceptance that only effects of about 5% to 7% or more can be detected; or else a larger physics reserve, at the cost of training people on the walking-scale protocol's rungs.
 
 ## 15. Steps, times and computer use
 
-All machine work uses at most 16 threads, on processor cores 16 to 31. Generating simulated walks runs 12 single-thread lanes side by side. A core-hour is one processor core busy for one hour.
+All machine work uses at most 16 threads, on logical processors (CPUs) 16 to 31. Generating simulated walks runs 12 single-thread lanes side by side. A core-hour is one processor core busy for one hour.
 
 | Step | Work | Estimate |
 | --- | --- | --- |
-| S0 feasibility | Set up environments A to D (0.5 h). Download the 18 standing trials and build the training-people ranges (2 to 3 h). Build the virtual laboratory, check units, and run one learned-controller walk through the walking-scale adapter, which settles whether simulated forces and markers fit the inputs and targets with the right units (0.5 day). Build the body-scaling engine (0.5 day). Run G4 (2-day time box) with G1 in parallel (1.5 days). Assemble G3c (0.5 day). Build CR-EMG (0.5 day). Run the MyoGen action-potential timing check (1 h). Write the gate report and FEASIBILITY.json (2 h). Uses training people and simulation only. | 3 to 4 working days, under 10 core-hours |
+| S0 feasibility | Set up environments A to D (0.5 h). Download the 18 standing trials and build the training-people ranges (2 to 3 h). Build the virtual laboratory, check units, and run one learned-controller walk through the walking-scale adapter, which settles whether simulated forces and markers fit the inputs and targets with the right units (0.5 day). Build the body-scaling engine (0.5 day). Run G4 (2-day time box) with G1 in parallel (1.5 days). Assemble G3c (0.5 day). Build CR-EMG (0.5 day). MyoGen action-potential timing (1 h); an action potential is the electrical pulse of a motor unit (section 7.6), and the protocol names this item only in these words. Write the gate report and FEASIBILITY.json (2 h). Uses training people and simulation only. | 3 to 4 working days, under 10 core-hours |
 | S1 binding and admission | BINDING.json, the Simple edition of the protocol, admission by a separate reviewer, the lead's commit. Needs the walking-scale commit. | 1 day |
 | S2 corpus | G4 1 to 5 core-hours (under 1 h on 12 lanes); G1 about 40 core-hours (about 4 h on 12 lanes); G3c 3 to 4 h; cutting windows and running checks 2 to 3 h; standing trials of walking-scale training people if not already stored. | one night |
 | S3 inner folds | 3 neural families × 8 configurations × 4 folds × 5 seeds = 480 fits of 25 to 90 s each, plus 320 tree fits (2 tree families × 8 × 4 × 5); reference forecasts and checks. | about 0.5 day, 10 to 15 core-hours |
@@ -709,7 +709,7 @@ An earlier design of this test was reviewed before the protocol was written. The
 
 ### Plate corners
 
-The four plates in the laboratory frame, in millimetres. They are the same in all 12 fit files.
+The four plates in the laboratory frame, in millimetres. They are the same in all 12 fit files that were checked (one walk file for each person of the earlier fit role).
 
 | Plate | x range | y range |
 | --- | --- | --- |
