@@ -3979,8 +3979,22 @@ GENERAL_FITS = {
     'cross_person_wrist': 'not the general model',   # dedicated optical fits; see the task's README and synthetic-fit.json
     'bilateral_wrist': 'not the general model',   # a transformer per wrist with weights of its own; the movement checkpoint has no role (hw_checks())
     'cross_limb': 'not the general model',      # straight-line fits with coefficients of their own, no parent_sha256 (xl_checks())
+    'compact-walking': 'not the general model',   # four compact attention fits of 9,450 parameters each (model/PROVENANCE.json), weights of their own; the movement checkpoint has no role (OWN_WEIGHTS)
+    'stand-sit-force': 'not the general model',   # a damped force trend plus a correction from two attention fits of its own (model/force-residual-*.safetensors); the movement checkpoint has no role (OWN_WEIGHTS)
     'wrist-source': 'not a task',          # the source recordings of the wrist-angle task
 }
+OWN_WEIGHTS = ('compact-walking', 'stand-sit-force')     # classified "not the general model" because no file of theirs names the shared part
+
+
+def _own_weights_check():
+    """The task folders in OWN_WEIGHTS load no part of the general model: none of their text files names its shared part
+    (movement-weights.npz) or a parent_sha256, as the tasks that load it do. If one starts to, it has to be classified again."""
+    for folder in OWN_WEIGHTS:
+        assert GENERAL_FITS[folder] == 'not the general model', folder
+        for p in sorted((REPO / 'models' / 'neurotranslate-0.0' / folder).rglob('*')):
+            if p.is_file() and p.suffix in ('.json', '.md', '.py', '.js', '.mjs', '.html', '.txt'):
+                txt = p.read_text(encoding='utf-8', errors='replace')
+                assert 'movement-weights' not in txt and 'parent_sha256' not in txt, ('loads the shared part: classify it again', str(p.relative_to(REPO)))
 
 
 def _beaten_right_plate():
@@ -4022,6 +4036,7 @@ def _unseen():
         folders = {p.name for p in (REPO / 'models' / 'neurotranslate-0.0').iterdir() if p.is_dir() and p.name != '__pycache__'}
         assert folders == set(GENERAL_FITS), ('classify every task folder of the general model in GENERAL_FITS, after reading its files',
                                               sorted(folders ^ set(GENERAL_FITS)))
+        _own_weights_check()
         unseen = sorted(k for k, v in GENERAL_FITS.items() if v == 'unseen')
         assert unseen == sorted(UNSEEN), ('every test on unseen people needs its result asserted in UNSEEN', unseen, sorted(UNSEEN))
         wins = [k for k in unseen if UNSEEN[k]()]
