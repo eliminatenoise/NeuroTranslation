@@ -1,108 +1,358 @@
-# Walking-force quantity ladder: run code (commit C1b)
+# Walking-force quantity ladder: run code
 
-Technical edition, first draft for the C1b review. The Simple edition is written with the results, as section 18 of [PROTOCOL.md](PROTOCOL.md) states. If this file and [PROTOCOL.json](PROTOCOL.json) disagree, PROTOCOL.json governs.
+Technical edition · [Simple edition](README-CODE-SIMPLE.md) · [Protocol](PROTOCOL.md) · [Protocol, Simple edition](PROTOCOL-SIMPLE.md) · [Machine-readable protocol](PROTOCOL.json) · [Choices left to the code](DECISIONS.md)
 
-This folder holds the code that carries out protocol version 1 from the header probe (D1) to the scored results (S-c), and the receipt of the engineering gates of stage S0 ([S0-GATES.json](S0-GATES.json)). Every part was tested on the 12 earlier fit people (36 walks, already used for fitting before) or on synthetic inputs. No byte of the 80-person pool was downloaded or opened.
+This folder holds the code that carries out protocol version 1 of the walking-force quantity ladder, from the header probe (stage D1) to the scored results (stage S-c), and the records of the stages run so far. For every stage this file gives the exact command, the software runtime, what the stage reads and writes, how long it took or is expected to take, and what stays private. It also lists the checks a reader can repeat from the public files. Where this file and [PROTOCOL.json](PROTOCOL.json) disagree, PROTOCOL.json governs.
 
-## Files
+## State on 27 November 2026
+
+| Stage | State | Record in this folder |
+| --- | --- | --- |
+| C1, protocol | Published at NeuroTranslation commit `3f2bae7` | `PROTOCOL.md`, `PROTOCOL-SIMPLE.md`, `PROTOCOL.json`, `allocate.py`, `POOL.json`, `ORDER.json` |
+| S0, engineering gates | Done, on the 12 earlier fit people only: 15 of 15 gates and 4 of 4 tests pass | `S0-GATES.json` |
+| C1b, run code | Reviewed against the protocol: no blocker, no major, 8 minor findings ([Review findings](#review-findings)) | the `.py` files, `tests/` |
+| D1, header probe | Run on 27 November 2026 from 11:55:07 to 12:03:58 UTC | `QUALIFICATION.json`, `receipts/D1-requests.jsonl`, `receipts/D1-walks.jsonl` |
+| C2, allocation | Computed; its separate review is pending | `ALLOCATION.json` |
+| D2 to C6 | Not run | none yet |
+
+**D1.** 241 walks were probed: the three lowest-numbered walks of each of the 80 candidates (240) and the 4th walk of SUBJ060, whose 2nd walk failed the six-name rule. Each walk took one ranged read of 8,704 bytes from its local header: 482 requests in all (one redirect and one ranged read per walk) and 2,097,664 compressed bytes. Every ranged read answered 206 with the pinned ETag and storage version; no read was retried and none needed a continuation read. Inflation stopped at the end of the C3D parameter section on all 241 walks, so no sample byte was produced. Walk verdicts: 205 Q6, 30 QP, 6 X. People: 65 Q6, 11 QP, 4 X. A Q6 person uses their three lowest-numbered Q6 walks, so SUBJ060 uses walks 1, 3 and 4.
+
+**C2.** With Q = 65 qualified people, the size rule gives an evaluation group E of 20 people, a physics-source group P of 10 and a training pool T of 35. The rungs are N = 12, 18, 24, 36 and 47 people (6, 12, 24 and 35 people added to the 12 earlier fit people), with 10 nested draws at each intermediate rung. Because T is at least 32, the pool-tail prediction P1 applies, with 11 people per draw. The 11 QP people form the physics supplement and the 4 X people are unusable, each with its reasons. SUBJ099 stays out of every role, unopened. The group lists are in `ALLOCATION.json`.
+
+**Downloads still to come** (from `ALLOCATION.json`): D2, the training pool, 35 people, 105 walks, 98,793,925 compressed bytes; D3, the evaluation group, 20 people, 60 walks, 55,828,652 compressed bytes. This track never downloads group P (30 walks, 25,425,332 bytes) or the supplement (33 walks, 34,449,181 bytes).
+
+## Files in this folder
+
+### Stage records
+
+| File | Written by | Stage | Content |
+| --- | --- | --- | --- |
+| `PROTOCOL.json`, `PROTOCOL.md`, `PROTOCOL-SIMPLE.md` | hand | C1 | The fixed protocol and its two editions |
+| `POOL.json` | `allocate.py pool` | C1 | All 138 healthy codes with the reason each is or is not a candidate; archive members of the 80 candidates |
+| `ORDER.json` | `allocate.py order` | C1 | The hash orders: primary order, 10 nesting draws, inner folds, variety walks |
+| `S0-GATES.json` | `gates.py report` | S0 | Gate results, test reports, one-thread timings, sha256 of every code file; no local paths |
+| `DECISIONS.md` | hand | C1b | The 18 choices the protocol leaves to the code |
+| `QUALIFICATION.json` | `fetch.py probe` | D1 | Per candidate: class, the three walks used, and per walk the byte range, sha256 of the compressed bytes received, verdict and reasons |
+| `receipts/D1-requests.jsonl` | `fetch.py probe` | D1 | One line per read: stable address, storage host and path, version, ETag, status, byte range, bytes, sha256; no signed query |
+| `receipts/D1-walks.jsonl` | `fetch.py probe` | D1 | First line: the lease note and start time. Then one line per walk: range, bytes inflated and the inflation limit, verdict, reasons, channel counts |
+| `ALLOCATION.json` | `assign.py` | C2 | Groups, sizes, rungs and draws, inner folds, P1 pool tails, variety sets, download lists |
+| `FIT-COMPLETE.json` | `fit.py seal` | C3 | Every checkpoint and tree file by sha256, failed fits, F4 penalties, P1 (not yet written) |
+| `FORECASTS-SEAL.json` | `issue.py seal` | C4 | sha256 of every private forecast file (not yet written) |
+| `P2-TREND-PREDICTION.json` | `score.py below` | C5 | Trend predictions for N_max from the rungs below it (not yet written) |
+
+The two receipt files are byte copies of the private D1 logs. `RESULTS.json` (written by `score.py final` into the private output folder) is published with the results editions at C6.
+
+### Code
 
 | File | Role | Runtime |
 | --- | --- | --- |
-| `common.py` | Constants, hashing, JSON writing, the private configuration | any |
-| `c3dread.py` | Whitelist C3D reader and the walk gates Q6, QP and X (protocol 4.2, 4.3) | any |
-| `qualify.py` | Header probe with bounded inflation, the person rule, the qualification receipt and its checker | any |
-| `fetch.py` | Downloader for D1, D2 and D3: fresh redirect per request, ranged reads, pacing, retries, receipts | any |
-| `assign.py` | Checked front end for `allocate.py assign` | any |
-| `allocate.py` | Unchanged from C1 (pinned in PROTOCOL.json) | any |
-| `walks.py` | Member and participant indices; checked reads of walk files | any |
-| `extract.py` | Input adapter: walk to history-only issue rows, and targets in a separate array set | B |
-| `compact.py` | Compact input, published person weights, per-person errors | A, B |
-| `threepass.py` | M1 and its arms C4, S1, S2, S3, S4, S6 | A |
-| `trees.py` | M3, S5 and tuned trees (G9) | B |
-| `linear.py` | M2, tuned ridge (G9), the F4 refit and the F4 penalty choice | B |
-| `frozen.py` | F1 to F4 through the published code, controls C1 to C3, the list of checkpoints not scored | A (F1), B |
-| `plan.py` | Every fit of the ladder, derived from ALLOCATION.json | any |
-| `prepare.py` | Extraction stage after D2 and after D3 | B |
-| `fit.py` | Fit lanes, record chain, F4 choice, P1, the seal FIT-COMPLETE.json | A, B |
-| `issue.py` | Forecasts on history-only inputs; FORECASTS-SEAL.json | A, B |
-| `trend.py` | Trend forms, P1 and P2 predictions, the trend test | B |
-| `score.py` | Stage S-b (writes P2-TREND-PREDICTION.json) and stage S-c (writes RESULTS.json) | B |
-| `replay.py` | Independent replay of every primary aggregate and of sample rows of each plate | B |
-| `lanes.py` | CPU slots shared by every training track | any |
-| `gates.py` | Stage S0 gates; writes S0-GATES.json | A, B |
-| `tests/` | Downloader and probe test, allocation test, numeric tests, end-to-end smoke run | A, B |
+| `common.py` | Constants (seeds, prevalence, muscle names, the 36 earlier fit walks), hashing, canonical JSON writing, the private configuration and folder layout, the `Halt` stop signal | standard library |
+| `c3dread.py` | Whitelist C3D reader (protocol 4.2) and the walk gates Q6, QP and X (4.3); `read_columns` reads sample columns | standard library; NumPy for `read_columns` |
+| `qualify.py` | Header probe of one walk with bounded inflation, the person rule, the qualification receipt and its checker | standard library |
+| `fetch.py` | Downloader: `probe` (D1) and `download` (D2, D3). Fresh redirect per read, ranged reads, pacing, one retry, receipts | standard library |
+| `allocate.py` | The single allocation, unchanged since C1 and pinned by sha256 in PROTOCOL.json: `pool`, `order`, `assign`, `sizes`, `check` | standard library |
+| `assign.py` | Checked front end for `allocate.py assign` (C2) | standard library |
+| `walks.py` | Archive members, member and participant indices, checked reads of walk files and of the 36 earlier fit walks | standard library |
+| `extract.py` | Input adapter: decoded walk to history-only issue rows, with targets in separate arrays (protocol 6) | A, B |
+| `compact.py` | Compact input of M1, M2, S5 and their arms; published person weights; per-person errors | A, B |
+| `threepass.py` | M1, the compact three-pass recurrent model, and its arms C4, S1, S2, S3, S4, S6 | A |
+| `trees.py` | M3 (boosted trees on the published tree input), S5 (trees on the compact input), tuned trees (G9) | B |
+| `linear.py` | M2 (ridge and logistic regression on the compact input), tuned M2 (G9), the F4 refit and the F4 penalty choice | B |
+| `frozen.py` | Frozen published checkpoints F1 to F4 issued through the published code, controls C1 to C3, and `NOT_SCORED`, the checkpoints left unscored | A for F1, B otherwise |
+| `plan.py` | Every fit of the ladder, derived from `ALLOCATION.json` | standard library |
+| `prepare.py` | Extraction after D2 (`--group training`) and after D3 (`--group evaluation`) | B |
+| `fit.py` | `run` (fit lanes), `f4` (F4 penalty choice), `p1` (pool-tail prediction), `seal` (writes FIT-COMPLETE.json) | A, B |
+| `issue.py` | `run` (forecasts on history-only inputs), `seal` (writes FORECASTS-SEAL.json) | A, B |
+| `trend.py` | Trend forms, the P1 and P2 predictions, the trend test | B |
+| `score.py` | `below` (stage S-b, writes P2-TREND-PREDICTION.json), `final` (stage S-c, writes RESULTS.json) | B |
+| `replay.py` | Independent replay of every primary aggregate and of sample rows of each plate (S-c) | B |
+| `lanes.py` | CPU slots shared by every training track: CPUs 16 to 31, fit lanes on 20 to 31 | standard library |
+| `gates.py` | Stage S0 gates: `part-b`, `part-a`, `report` | B, A, either |
 
-Runtime A: CPython 3.13.15, torch 2.14.1+cpu, numpy 2.5.3, safetensors 0.8.0. Runtime B: CPython 3.12.14, numpy 2.5.5, scikit-learn 1.9.1, joblib 1.6.0, onnxruntime 1.32.0. One thread per fit.
+### Tests
+
+| File | Checks | Runtime |
+| --- | --- | --- |
+| `tests/synthetic.py` | Helpers: a local archive built from the 36 earlier fit walks and patched copies of them, and a local HTTP emulator of the redirect and the storage | none (imported) |
+| `tests/test_fetch_probe.py` | Fresh redirect per read; pacing; one retry after a 429 and a halt after two 5xx, on the redirect and on the ranged read, where the retry takes a fresh redirect (the emulator refuses a used signed address); ETag, version, range, size and CRC-32 checks; a local-header mismatch halts D1 without writing QUALIFICATION.json; no signed query in receipts; bounded inflation; Q6, QP and X verdicts; the person rule; tampered receipts caught | B |
+| `tests/test_assign.py` | Checked allocation on synthetic verdicts for the real pool (all 80 Q6, mixed, low, cancelled ladder); tampered receipts refused; allocate.py unchanged | standard library |
+| `tests/test_trend_score.py` | Trend forms, vectorised bootstrap against a loop, Holm adjustment, labels, the p-value formula, on synthetic numbers | B |
+| `tests/smoke_pipeline.py` | Every stage end to end on the 12 earlier fit people with reduced seed counts, with custody checks | B (calls A and B) |
+
+The tests use reduced pacing (0.05 s between requests) and a 0.2 s retry wait against the local emulator. No test touches the network.
+
+## Software runtimes
+
+| Runtime | Python | Packages | Used for |
+| --- | --- | --- | --- |
+| A | CPython 3.13.15 | torch 2.14.1+cpu, numpy 2.5.3, safetensors 0.8.0 | M1 and every M1-type arm (C4, S1, S2-M1, S3, S4-M1, S6-M1, the G8 M1 sets), F1 |
+| B | CPython 3.12.14 | numpy 2.5.5, scikit-learn 1.9.1, joblib 1.6.0, onnxruntime 1.32.0 | M2, M3, S5, G9, F2, F3, F4, extraction, scoring, replay, three of the tests |
+
+The standard-library scripts run in either runtime; the tests run them in runtime B. The runtimes for S0 were built with uv from installed CPython 3.13.15 and 3.12.14 interpreters. Equivalent commands:
+
+```
+uv venv --python 3.13.15 venv-A
+uv pip install --python venv-A/bin/python --index-url https://download.pytorch.org/whl/cpu "torch==2.14.1+cpu"
+uv pip install --python venv-A/bin/python numpy==2.5.3 safetensors==0.8.0
+uv venv --python 3.12.14 venv-B
+uv pip install --python venv-B/bin/python numpy==2.5.5 scikit-learn==1.9.1 joblib==1.6.0 onnxruntime==1.32.0
+```
+
+Resolved packages at S0 (`uv pip freeze`):
+
+- A: filelock 4.2.4, fsspec 2026.9.0, jinja2 3.1.6, markupsafe 3.0.3, mpmath 1.3.0, networkx 3.7, numpy 2.5.3, safetensors 0.8.0, setuptools 78.1.0, sympy 1.14.0, torch 2.14.1+cpu, typing-extensions 4.16.0.
+- B: cloudpickle 3.1.3, flatbuffers 25.12.19, joblib 1.6.0, narwhals 2.29.0, numpy 2.5.5, onnxruntime 1.32.0, packaging 26.4, protobuf 7.36.2, scikit-learn 1.9.1, scipy 1.18.1, threadpoolctl 3.8.0.
+
+Every numeric step runs on one thread: `common.single_thread_env()` sets `OMP_NUM_THREADS`, `OPENBLAS_NUM_THREADS`, `MKL_NUM_THREADS`, `BLIS_NUM_THREADS`, `NUMEXPR_NUM_THREADS` and `VECLIB_MAXIMUM_THREADS` to 1 before NumPy, torch or scikit-learn is imported. Protocol section 16 gives the reason: two threads change the fitted weights.
 
 ## Configuration
 
-Local paths are never written into committed files. Each script takes `--config CFG`, a private JSON object with these keys: `earlier_root` (the earlier maintainer's workspace, read only), `fit_cache_dir`, `fit_readback_file`, `central_directory_file`, `roster_file`, `features_ref_dir`, `baselines_candidates_file`, `generalization_dir`, `matched_dir` (read-only sources of the earlier fits), `repo_root` (this repository, for the published checkpoints), `private_dir` (walk files, arrays, fits, forecasts; never committed), `scratch_dir`, `out_dir`. The variable `NS_CPU_SLOTS` names the shared CPU-slot folder.
+Every script except `allocate.py` and `assign.py` takes `--config CFG`, a private JSON object of local paths. It is never committed. The code reads these keys and ignores any other:
 
-Inside `private_dir`, each group has its own folders (`common.PRIVATE_FOLDERS`):
-
-| Folder | Holds | Physics-source access |
+| Key | Read by | Holds |
 | --- | --- | --- |
-| `walks/`, `arrays/` | Training-pool walks (D2), TRAIN-* arrays | read only, after D2 |
-| `receipts/` | D1 and D2 request logs and receipts | none |
-| `eval-walks/`, `eval-walks/receipts/` | Evaluation walks (D3) and their receipts | never |
-| `eval-arrays/` | EVAL-* inputs, targets and walk list | never |
-| `fits/`, `forecasts/` | Checkpoints, tree files, forecasts | never |
+| `central_directory_file` | `walks.py` (training extraction, gates, tests), `tests/test_assign.py` | The archive's central directory: 87,971 bytes, archive bytes 463,071,776 to 463,159,746, sha256 `96a6b5d9…`; checked on every read |
+| `fit_cache_dir` | `walks.py` | Decoded C3D files of the 36 walks of the 12 earlier fit people, named as in the archive (for example `SUBJ24 (1).c3d`) |
+| `fit_readback_file` | `walks.py` | That cache's readback receipt: a JSON object whose `records` give, per walk, `subject_code`, `author_trial_index`, `archive_member`, `member_crc32` and `decoded_sha256` |
+| `features_ref_dir` | `gates.py` | Earlier 12-person issue rows (`FEATURES.npz`, `TARGETS.npz`, `SUPPORT.npz`) for gate G1 |
+| `generalization_dir` | `gates.py` | Earlier encoded 12-person cache (`private/prepared/belgium.npz`, sha256 `d81af885…`), the sealed 12-person checkpoints and controls (`private/fit/`) |
+| `matched_dir` | `gates.py` | Earlier tree-input rows (`private/FIT.npz`, `dfe83f82…`) and the sealed 12-person tree file (`private/trees/MODELS.joblib`, `2c3f642e…`) |
+| `repo_root` | `fit.py`, `issue.py`, `score.py`, `gates.py`, `frozen.py` | A checkout of this repository: the published checkpoints, the F4 grid, and git HEAD for the S-c check |
+| `private_dir` | most stages | Walk files, arrays, fits, forecasts ([Private files](#private-files)) |
+| `out_dir` | `gates.py`, `score.py`, `replay.py`, tests | Gate parts, test reports, score locks, `RESULTS.json`, `REPLAY.json` |
+| `scratch_dir` | `gates.py`, tests | Temporary files; the tests delete and recreate `test-assign/` and `smoke/` inside it |
+| `publish_dir`, `publish_repo` | optional | Folder and repository for the committed stage files. Default: this folder and `repo_root`. Only the synthetic tests set them. |
 
-So the access rule of protocol section 5.4 can be granted folder by folder.
+The files behind `central_directory_file`, `fit_cache_dir`, `fit_readback_file`, `features_ref_dir`, `generalization_dir` and `matched_dir` are earlier work, read in place and never written. Fit walks are checked for size, CRC-32 and readback sha256; the encoded cache, the tree-input rows, the tree file and the reference checkpoints are checked against sha256 pins in `gates.py` and PROTOCOL.json.
 
-## Order of work
+The fit stage and the smoke run also need the environment variable `NS_CPU_SLOTS`, the path of the CPU-slot folder shared by every training track (`lanes.py`).
 
-Each command runs only after the commit or lease named beside it.
+Example, with placeholder paths:
 
-| Stage | Command | Needs |
+```json
+{
+ "central_directory_file": "/data/van-criekinge/central-directory.bin",
+ "fit_cache_dir": "/data/van-criekinge/fit-walks",
+ "fit_readback_file": "/data/van-criekinge/fit-walks-readback.json",
+ "features_ref_dir": "/data/earlier/features",
+ "generalization_dir": "/data/earlier/generalization",
+ "matched_dir": "/data/earlier/matched-baselines",
+ "repo_root": "/work/NeuroTranslation",
+ "private_dir": "/work/walking-scale/private",
+ "out_dir": "/work/walking-scale/run/out",
+ "scratch_dir": "/tmp/walking-scale"
+}
+```
+
+S0 used its own configuration, with `private_dir`, `out_dir` and `scratch_dir` separate from those of the run, because the gates write files about the 12 earlier people into `private_dir`.
+
+## Private files
+
+Nothing below is committed. Recordings, arrays, targets, fits and forecasts stay private under protocol section 17, and local paths stay out of committed files.
+
+| Location | Holds | Physics-source access |
 | --- | --- | --- |
-| D1 | `fetch.py probe --lease-note TEXT` | C1 pushed, this C1b reviewed, the owner's download lease |
-| C2 | `assign.py --qualification QUALIFICATION.json --directory CD` | D1 |
-| D2 | `fetch.py download --group training_pool` | C2 reviewed and pushed |
-| extract | `prepare.py --group training` | D2 |
-| fits | `fit.py run --runtime torch` (runtime A); `fit.py run --runtime sk` (runtime B) | extraction |
-| F4, P1 | `fit.py f4`; `fit.py p1 --runtime torch` and `--runtime sk` (only when T is 32 or more) | fits |
-| C3 | `fit.py seal` writes FIT-COMPLETE.json | F4, P1 |
-| D3 | `fetch.py download --group evaluation --fit-complete FIT-COMPLETE.json` | C3 pushed |
-| extract | `prepare.py --group evaluation` | D3 |
-| issue | `issue.py run --runtime torch`; `issue.py run --runtime sk` | extraction |
-| C4 | `issue.py seal` writes FORECASTS-SEAL.json | issue |
-| S-b, C5 | `score.py below` writes P2-TREND-PREDICTION.json | C4 |
-| S-c | `score.py final --p2-sha SHA`; `replay.py` | C5 committed and pushed |
+| `private_dir/receipts/` | D1 logs (`D1-requests.jsonl`, `D1-walks.jsonl`; their copies are committed in `receipts/`), D2 logs and `D2-RECEIPT.json` | none |
+| `private_dir/walks/` | Decoded training-pool walks, `SUBJnnn-t.c3d` (D2) | read only, after D2 |
+| `private_dir/arrays/` | `TRAIN-INPUTS.npz`, `TRAIN-TARGETS.npz`, `TRAIN-WALKS.json` | read only, after D2 |
+| `private_dir/eval-walks/`, `eval-walks/receipts/` | Decoded evaluation walks (D3), their logs and `D3-RECEIPT.json` | never |
+| `private_dir/eval-arrays/` | `EVAL-INPUTS.npz`, `EVAL-TARGETS.npz`, `EVAL-WALKS.json` | never |
+| `private_dir/fits/` | Per arm: checkpoints (`.safetensors` for runtime A, `.joblib` for runtime B) with a JSON sidecar each; `LOCK-*.json`, `ATTEMPT-*.jsonl`, `RESULT-*.json`, `F4-CHOICE.json`, `P1-*.json`, `READBACK.json` | never |
+| `private_dir/forecasts/` | `FORECASTS-PRIMARY-BELOW-NMAX-*`, `FORECASTS-NMAX-*`, `FORECASTS-OTHER-*` (`.npz`, one set per runtime), `ISSUED-*.json` | never |
+| `out_dir/` | `S0-PART-A.json`, `S0-PART-B.json`, `tests/*.json`, `SCORE-LOCK-SB.json`, `SCORE-LOCK-SC.json`, `RESULTS.json`, `REPLAY.json` | never |
+| the configuration file, `scratch_dir`, the `NS_CPU_SLOTS` folder, the runtimes | local paths and temporary files | none |
 
-## What each stage enforces
+Inputs (keys, histories, input masks) and targets (labels, impulses, target masks) are written to separate files. The issuing process opens only `EVAL-INPUTS.npz`.
 
-- **D1.** For each of the first three walks of the 80 candidates, one ranged read of 8,704 bytes from the local header, then 8,192 more bytes at a time up to 65,536 bytes. The local header must equal the central directory. Inflation stops at the end of the C3D parameter section, so no sample byte is produced. Fourth and fifth walks are probed only for a person whose first three include a walk that is not Q6. Only the reasons, counts and sha256 of the compressed bytes are kept; no header byte is written. Requests to reserved, boundary or out-of-pool people are refused.
-- **Downloads.** Each request takes a fresh redirect from the stable address, then one ranged read. Status 206, ETag, storage version, content range and length must equal the pins. Requests start at least 1.1 s apart, so that network jitter cannot bring two requests closer than 1 s at the server. A 429 or 5xx answer, to the redirect or to the ranged read, gets one retry after 60 s; the retry starts again at the stable address with a fresh redirect, because the signed address lives about 10 s. A second such answer halts the stage. A local header that differs from the central directory halts D1, D2 and D3 alike; in D1 no QUALIFICATION.json is written. Whole members are checked for size and CRC-32. Receipts keep the storage host and path but drop the signed query. D3 refuses to run without a FIT-COMPLETE.json made for the same allocation, and writes into `eval-walks/`. The physics-source and physics-supplement groups are never downloaded.
-- **Allocation.** `assign.py` checks that allocate.py, POOL.json and ORDER.json equal their committed versions, that QUALIFICATION.json carries the protocol and pool sha256 values, that each person's probed walks follow the rule, and that the listed walks are the lowest-numbered qualified ones. It then calls allocate.py unchanged and checks the groups, sizes and rungs.
-- **Indices.** The 36 earlier fit walks keep member indices 0 to 35 in the earlier cache order, so the 12-person rung reproduces the sealed fits row for row. Other walks follow in ascending code and walk number.
-- **Fits.** Replicates follow PROTOCOL.json: 50 seeds (20261124 + j) at N = 12, at N_max and for both G8 sets; 10 draws × 5 seeds (20261124 + 5d + s) at intermediate rungs; one deterministic fit per training set for M2, M3 and their arms. The secondary M1 arms use the same scheme, which gives 1,450 M1-type fits and 292 tree and linear fits at Q = 80. Checkpoints are safetensors without metadata. Every checkpoint is reloaded and its forecasts recomputed on every row of its training table before its record is written. A failed fit keeps its record and is never replaced.
-- **Record chain.** LOCK (job list, code and input hashes), ATTEMPT, checkpoint, reload equality, RESULT, READBACK at the seal, SCORE-LOCK before each scoring stage.
-- **Custody.** The issuer opens only the evaluation inputs, in `eval-arrays/`. Forecasts sit in three files per runtime: the primary families below N_max (the only file S-b opens), everything at N_max, and the rest. S-c refuses to run unless the P2 file has the given sha256 and the same bytes are committed at the repository HEAD.
+## Rerunning each stage
 
-## Admission-review items handled in this code
+Commands run from this folder. Set these first (placeholders):
 
-Items 5, 6, 7 and 9 of the admission review could be handled without changing PROTOCOL.json:
+```
+PY_A=/path/to/venv-A/bin/python          # runtime A
+PY_B=/path/to/venv-B/bin/python          # runtime B
+CFG=/path/to/config.json                 # private configuration
+export NS_CPU_SLOTS=/path/to/cpu-slots   # shared CPU-slot folder (fit stage and smoke run)
+```
 
-- Item 5. Gate `Q6_on_36_fit_walks`: all 36 fit walks are Q6, through the same bounded-inflation probe code that D1 uses (each walk re-deflated, since the archive bytes of the fit walks are not cached).
-- Item 6. allocate.py is unchanged, because PROTOCOL.json pins its sha256. `assign.py` adds the checks on the pool sha256, the probe order and the lowest-numbered-walk rule. `tests/test_assign.py` shows that tampered receipts are refused.
-- Item 7. The NeuroTranslate 0.1 paired-plates checkpoints are listed as not scored in `frozen.NOT_SCORED`, together with the other unscored checkpoints and F5.
-- Item 9. `lanes.py`: each single-thread worker holds an exclusive lock on one CPU-slot file for CPUs 16 to 31 and pins itself to that CPU. If every training track takes its CPUs through the same slot folder, all tracks together stay within 16 threads on CPUs 16 to 31. This track uses at most 12 lanes on CPUs 20 to 31. The physics-source track must take its CPUs through the same folder for this to hold.
+Each stage starts only after the commit, review or lease named for it. `fetch.py`, `prepare.py` and `issue.py` refuse to overwrite their outputs, and `fetch.py probe` refuses to run when `QUALIFICATION.json` exists. `fit.py run` resumes only missing fits and refuses to run when its `LOCK` file no longer matches the job list, code or inputs.
 
-Item 3 (replicate counts of the secondary arms) is written out in `plan.py`. Items 1, 2, 4, 8 and 10 concern protocol text, the Simple edition or claim limits, and are left to the lead.
+### S0, engineering gates and tests (done)
 
-## C1b review items handled in this code
+```
+$PY_B -B tests/test_fetch_probe.py --config "$CFG"
+$PY_B -B tests/test_assign.py --config "$CFG"
+$PY_B -B tests/test_trend_score.py --config "$CFG"
+$PY_B -B gates.py part-b --config "$CFG"
+$PY_A -B gates.py part-a --config "$CFG"
+$PY_B -B tests/smoke_pipeline.py --config "$CFG" --python-a "$PY_A" --python-b "$PY_B"
+$PY_B -B gates.py report --config "$CFG"
+```
 
-- A retry after a 429 or 5xx on the ranged read takes a fresh redirect (`fetch.Client.read`); the test serves signed addresses that expire, so a retry on an old address would fail.
-- A local-header mismatch in D1 halts the stage (`qualify.probe_walk` raises `Halt`), as the stop rule on failed download checks says.
-- Gates G0 and G2 check each sealed three-pass reference checkpoint against its sha256 pin in PROTOCOL.json before comparing tensors. The LSTM references have no protocol pin; their sha256 is recorded.
-- Reload equality covers every row: in `gates.py` the whole 12-person table, in `fit.py` every row of the fit's training table.
-- D3 walks and their receipts go to `eval-walks/`, EVAL-* arrays to `eval-arrays/` (table above).
-- The configuration key for the earlier maintainer's workspace is `earlier_root`.
+- Order: `part-a` reads files that `part-b` writes into `private_dir`. `report` merges `out_dir/S0-PART-A.json`, `out_dir/S0-PART-B.json` and `out_dir/tests/*.json` into `S0-GATES.json` in this folder, replacing the committed file; the timings change from run to run, so compare the `gates` and `tests` entries, not the bytes.
+- Reads: the 36 earlier fit walks and the earlier sealed files (configuration keys above), and the published checkpoints under `repo_root`. Nothing is downloaded.
+- Time in the S0 rerun of 27 November: `part-b` 17 s, `part-a` 35 s, `test_fetch_probe` about 40 s, `test_assign` and `test_trend_score` under 1 s each, the smoke run about 6 minutes (68 runtime-A fits in 168 s and 58 runtime-B fits in 146 s, on 3 lanes).
+- Gates: `G0_training_replay`, `G1_feature_port`, `G2_end_to_end`, `trees_R0`, `M2_S5_R0`, `G3_past_only`, `one_row_vs_batch_and_fixed_order`, `F4_refit`, `Q6_on_36_fit_walks`, `whitelist_reader`, `tree_input_cache`, `C1_C2_reference`, `reload_equality`, `reference_checkpoints_match_protocol_pins`, `C4_readout_smoke` (protocol section 13 defines G0 to G3, the tree gates and the F4 refit).
+- Result: all 15 gates and all 4 tests pass; the smoke run did 126 of 126 fits, and its replay differed from the scorer by at most 5.3e-14 on 36 aggregates and by 0 on 12 row targets.
 
-The open choices the protocol leaves to the code are listed in [DECISIONS.md](DECISIONS.md).
+### D1, header probe (done; runs once)
 
-## Not covered here
+```
+$PY_B -B fetch.py probe --config "$CFG" --lease-note "TEXT"
+```
 
-- F5 (Research Edition) is optional and is not run in this stage.
-- Stage D1 and every later stage have not been run on the real pool. They run only after the C1b review and the owner's lease.
+- Needs: C1 pushed, C1b reviewed, the owner's download lease. The lease note is recorded verbatim in `QUALIFICATION.json` and in the first line of `D1-walks.jsonl`.
+- Reads, per walk: bytes [o, o + 8,704) of the archive, where o is the local header offset, then 8,192 more bytes at a time up to 65,536 bytes if the parameter section has not been reached. Inflation has a hard output limit at the end of the parameter section, and only the whitelisted header words and parameters of protocol 4.2 are decoded. 4th and 5th walks are probed only for a person whose first three walks include one that is not Q6. The probe refuses a pool that contains a reserved or boundary person.
+- Writes: `QUALIFICATION.json` (this folder); `private_dir/receipts/D1-requests.jsonl` and `D1-walks.jsonl`. No header byte is written; only verdicts, counts and sha256 values are kept.
+- Stops: a failed range check (status, ETag, version, content range, length), a local header that differs from the central directory, or a second 429 or 5xx answer in one read halts the stage, and then no `QUALIFICATION.json` is written.
+- Time: 8 min 51 s for 482 requests; the pacing of at least 1.1 s between request starts sets it.
+
+### C2, allocation (done; review pending)
+
+```
+$PY_B -B assign.py --qualification QUALIFICATION.json --directory CD.bin
+```
+
+- `CD.bin` is the central directory (`central_directory_file`). With `--directory`, `assign.py` first recomputes `POOL.json` and `ORDER.json` byte for byte.
+- Checks: `allocate.py`, `POOL.json` and `ORDER.json` equal their pins; `QUALIFICATION.json` carries the protocol and pool sha256; each person's probed walks follow the probe rule, the class follows from the verdicts, and the listed walks are the three lowest-numbered qualified ones. It then calls `allocate.py`'s allocation unchanged and checks that the groups partition the 80 candidates, follow the primary order and have the sizes of the rule.
+- Writes: `ALLOCATION.json` (this folder); refuses if it exists. `--out PATH` writes elsewhere.
+- Time: under 1 s.
+
+### D2, training-pool walks (not run)
+
+```
+$PY_B -B fetch.py download --config "$CFG" --group training_pool --lease-note "TEXT"
+```
+
+- Needs: C2 reviewed and pushed.
+- Reads: for each of the 105 walks, one ranged read from its local header to the next local header, after a fresh redirect. Checks status 206, ETag, version, content range and length, the local header against the central directory, and the decoded size and CRC-32. Refuses any person of P, the supplement, the earlier validation and test groups and SUBJ099.
+- Writes: `private_dir/walks/SUBJnnn-t.c3d`; `private_dir/receipts/D-training_pool-requests.jsonl` and `D2-RECEIPT.json` (per walk: range, compressed and decoded bytes and sha256, CRC-32).
+- Time: at least 3 min 51 s of pacing (210 requests at 1.1 s) plus the transfer of 98,793,925 bytes. The protocol estimates about 10 minutes of transfer for all downloads together.
+
+### Extraction of the training group (not run)
+
+```
+$PY_B -B prepare.py --config "$CFG" --allocation ALLOCATION.json --group training
+```
+
+- Reads: the 36 earlier fit walks in place and the 105 training-pool walks, each checked against size, CRC-32 and recorded sha256.
+- Writes: `private_dir/arrays/TRAIN-INPUTS.npz`, `TRAIN-TARGETS.npz`, `TRAIN-WALKS.json`. Training walks with no supported rows stay listed and are counted.
+
+### Fits, F4 choice, P1 and the C3 seal (not run)
+
+```
+$PY_A -B fit.py run --config "$CFG" --runtime torch --lanes 12
+$PY_B -B fit.py run --config "$CFG" --runtime sk --lanes 12
+$PY_B -B fit.py f4 --config "$CFG"
+$PY_A -B fit.py p1 --config "$CFG" --runtime torch
+$PY_B -B fit.py p1 --config "$CFG" --runtime sk
+$PY_B -B fit.py seal --config "$CFG"
+```
+
+- Needs: extraction done, and the lane plan settled ([Open items](#open-items)).
+- Jobs: `plan.py` gives 1,742 fits for this allocation: 1,450 in runtime A (250 primary M1; S2-M1 250; S3 250; S1 200; S4-M1 200; C4 100; S6-M1 100; G8 50 + 50) and 292 in runtime B (32 each of M2, M3, S2-M2, S2-M3, S5, G9-M2, G9-M3; 31 each of S4-M2 and S4-M3; 2 of S6-M2; 4 of G8). Seeds: 20261124 + j, j = 0 to 49, for the fixed sets (N = 12, N_max, the two G8 sets); 20261124 + 5d + s for draw d and s = 0 to 4 at intermediate rungs; one deterministic fit per set for M2, M3 and their arms.
+- Lanes: each worker holds an exclusive lock on one CPU-slot file and pins itself to that CPU; lanes use CPUs 20 to 31, at most 12.
+- Record chain: `LOCK-*.json` (job list, code and input sha256), `ATTEMPT-*.jsonl`, then per fit the checkpoint and a sidecar that records reload equality on every row of the fit's training table (status `done` only when the reloaded forecasts are identical, otherwise `failed-reload`), `RESULT-*.json` for the run, and at the seal `READBACK.json` of every file. A failed fit keeps its sidecar and is never replaced.
+- `f4` chooses the F4 penalties on the training-pool people; `p1` scores the 12-person and intermediate fits on each draw's pool tail (11 people); `seal` reads every file back, fits the trend forms to the P1 curve and writes `FIT-COMPLETE.json` (this folder) for commit C3.
+- Time, measured on one thread in S0: M1 at 900 updates 2.0 s; S3 (width 96) at 900 updates 8.1 s; C4 0.77 s; a tree pair at 9,586 rows 4.1 s. S1 and S3 get more updates at larger rungs (epoch-matched). The protocol estimates 4 to 8 core-hours and 30 to 60 minutes of wall time.
+
+### D3, evaluation walks, and their extraction (not run)
+
+```
+$PY_B -B fetch.py download --config "$CFG" --group evaluation --fit-complete FIT-COMPLETE.json --lease-note "TEXT"
+$PY_B -B prepare.py --config "$CFG" --allocation ALLOCATION.json --group evaluation
+```
+
+- Needs: C3 committed and pushed. The downloader refuses unless `FIT-COMPLETE.json` names the sha256 of this `ALLOCATION.json`; it does not check that the file is committed ([Open items](#open-items)).
+- Writes: `private_dir/eval-walks/`, `eval-walks/receipts/` (with `D3-RECEIPT.json`), then `private_dir/eval-arrays/EVAL-INPUTS.npz`, `EVAL-TARGETS.npz`, `EVAL-WALKS.json`.
+- Time: at least 2 min 12 s of pacing (120 requests) plus the transfer of 55,828,652 bytes.
+
+### Issue and the C4 seal (not run)
+
+```
+$PY_A -B issue.py run --config "$CFG" --runtime torch
+$PY_B -B issue.py run --config "$CFG" --runtime sk
+$PY_B -B issue.py seal --config "$CFG"
+```
+
+- Reads: `EVAL-INPUTS.npz` only, and the fits listed in `FIT-COMPLETE.json`; never the targets.
+- Writes, per runtime: `FORECASTS-PRIMARY-BELOW-NMAX-*` (M1, M2, M3 below N_max), `FORECASTS-NMAX-*` (every fit at N_max, with the G8 sets), `FORECASTS-OTHER-*` (secondary arms below N_max, frozen checkpoints, controls), and `ISSUED-*.json`, in `private_dir/forecasts/`. Forecasts go out in one fixed order and fixed batches, as 64-bit floats. `seal` writes `FORECASTS-SEAL.json` (this folder) for commit C4.
+
+### S-b and the C5 seal (not run)
+
+```
+$PY_B -B score.py below --config "$CFG"
+```
+
+- Opens only the `PRIMARY-BELOW-NMAX` forecast files and scores M1, M2 and M3 at the rungs below N_max. Fits the trend forms to the rung means and predicts N_max, as a point prediction and in each of the 10,000 bootstrap resamples of people. Writes `out_dir/SCORE-LOCK-SB.json` (sha256 of the files it reads) and `P2-TREND-PREDICTION.json` (this folder), which is committed and pushed as C5.
+
+### S-c and the replay (not run)
+
+```
+$PY_B -B score.py final --config "$CFG" --p2-sha "$(git show HEAD:models/walking-force-scale/P2-TREND-PREDICTION.json | sha256sum | cut -d' ' -f1)"
+$PY_B -B replay.py --config "$CFG"
+```
+
+- `final` refuses unless `P2-TREND-PREDICTION.json` has the given sha256 and the same bytes are committed at HEAD of `repo_root`, and unless P2 names the same scoreable people and forecast seal. It then scores N_max, the frozen checkpoints, the controls and every secondary arm, and writes `out_dir/SCORE-LOCK-SC.json` and `out_dir/RESULTS.json`.
+- `replay.py` recomputes every primary aggregate with plain loops and 20 rows per plate from the decoded evaluation walks (`--rows-per-plate`), and writes `out_dir/REPLAY.json`; it passes when every difference is at most 1e-9.
+- Time for D3 to S-c, protocol estimate: minutes of download and under 1 hour of computing.
+
+### C6, results
+
+Results in a Technical and a Simple edition, `RESULTS.json`, the published N_max checkpoints under CC0 with a NOTICE, and the download receipts without signed addresses (protocol section 18). Not written yet.
+
+## Checks a reader can repeat
+
+These use the public files only, unless stated.
+
+1. **Fixed files.** `sha256sum PROTOCOL.json allocate.py POOL.json ORDER.json` gives `1768c4df…`, `f40c66f8…`, `c5b5041d…` and `c3c202d4…`. The first is the salt of every hash order; the next two are pinned in PROTOCOL.json.
+2. **Code identity.** `S0-GATES.json` lists the sha256 of all 27 code files (22 scripts and 5 test files) as they were when the gates ran; they equal the files in this folder:
+
+   ```
+   python3 -c "import json,hashlib,pathlib; d=json.load(open('S0-GATES.json'))['code_sha256']; print([k for k,v in d.items() if hashlib.sha256(pathlib.Path(k).read_bytes()).hexdigest()!=v] or 'all equal')"
+   ```
+
+3. **Pool and orders.** Get the central directory with one ranged read of archive bytes 463,071,776 to 463,159,746 from `https://ndownloader.figshare.com/files/42450060`, for example `curl -L -r 463071776-463159746 -o CD.bin https://ndownloader.figshare.com/files/42450060`, and check that its sha256 is `96a6b5d97ab542eef90a773dfeabb1ad4ac025d768a559d1491deec0d99f4b2b`. Then `python3 -B allocate.py check --directory CD.bin --protocol PROTOCOL.json` prints `{"POOL.json": true, "ORDER.json": true}`.
+4. **Allocation from the probe receipt.** `python3 -B assign.py --qualification QUALIFICATION.json --directory CD.bin --out /tmp/ALLOCATION.json` followed by `cmp /tmp/ALLOCATION.json ALLOCATION.json` gives no output: the file is byte-identical (sha256 `d1f28610…`). Without `--directory` it skips step 3's recomputation. This was checked with CPython 3.14.8.
+5. **Probe receipts.** Every line of `receipts/D1-requests.jsonl` has status 206, attempt 0, ETag `"85235c73455d4df8434810d61517efbb"`, version `c9jtqYlgGUVrgEUy1JMXkChG6zGtCpvu` and 8,704 bytes, and carries no signed query. In `QUALIFICATION.json` each walk gives its byte range and the sha256 of the bytes received, so any range can be requested again and compared. Repeating the whole probe takes a configuration whose `private_dir` and `publish_dir` point to new empty folders (482 requests, about 9 minutes); compare the `counts` and `people` entries, since times and the lease note differ.
+6. **Tests that need only the public files and the central directory.** `test_trend_score.py` (runtime B) and `test_assign.py` (any Python) run with a configuration holding `central_directory_file`, `out_dir` and `scratch_dir`; they wrote `"passed": true` in 0.3 s and 0.1 s.
+7. **Gates and the two other tests.** `gates.py`, `test_fetch_probe.py` and `smoke_pipeline.py` read the 36 earlier fit walks and, for the gates, the earlier issue rows, encoded cache, tree-input rows, sealed checkpoints, comparator file and tree file. Those files are not in this repository. The 36 walks (31,290,834 compressed bytes, members listed by `walks.fit12_members`) can be downloaded from the same archive and checked against the central directory; a readback file with the fields in the configuration table can be written from that download. The encoded cache, the tree-input rows, the tree file and the three-pass reference checkpoints are pinned by sha256 in PROTOCOL.json and `gates.py`; the earlier issue rows and the comparator file are not.
+8. **Later seals.** `FIT-COMPLETE.json` must be committed before any evaluation walk is downloaded, `FORECASTS-SEAL.json` before scoring, and `P2-TREND-PREDICTION.json` before S-c; the commit times on the public repository show the order. `RESULTS.json` will carry the per-person errors by archive code, and `REPLAY.json` the independent recomputation.
+
+## Review findings
+
+The admission review of the protocol named 10 items; items 3, 5, 6, 7 and 9 are handled in this code without changing PROTOCOL.json:
+
+- Item 3: the replicate scheme of the secondary arms is written out in `plan.py`.
+- Item 5: gate `Q6_on_36_fit_walks` shows all 36 fit walks Q6 through the same bounded-inflation probe code D1 uses.
+- Item 6: `allocate.py` stays byte for byte as pinned; `assign.py` adds the pool sha256, probe-order and lowest-numbered-walk checks, and `tests/test_assign.py` shows tampered receipts refused.
+- Item 7: the NeuroTranslate 0.1 paired-plates checkpoints, the other unscored checkpoints and F5 are listed in `frozen.NOT_SCORED`.
+- Item 9: `lanes.py` holds one lock file per CPU; see the lane plan below.
+
+Items 1, 2, 4, 8 and 10 concern the protocol text, its Simple edition or claim limits and are outside the code.
+
+The C1b review found 8 minor problems:
+
+| Finding | State |
+| --- | --- |
+| The 16-thread limit across tracks holds only if every training track takes its CPUs through the same slot folder; the physics-source track pins its own CPUs, and control steps of this track are not pinned | Open; must be settled before `fit.py run` |
+| A retry after a 429 or 5xx on the ranged read reused the expired signed address | Fixed: the whole read restarts at the stable address; tested |
+| In D1, a local-header mismatch gave verdict X instead of halting | Fixed: it halts and no QUALIFICATION.json is written; tested |
+| The code requires a known plate state for positive new-load labels; the protocol text states it for negatives only | Kept, as in the published adapter; recorded as DECISIONS.md item 2 |
+| Choices the protocol leaves open were only partly recorded | Recorded in DECISIONS.md, items 1 to 18 |
+| Evaluation files shared folders with files physics-source may read; D3 does not check that FIT-COMPLETE.json is committed | Folders fixed (`eval-walks/`, `eval-arrays/`); the commit check is open |
+| Reference checkpoints were not checked against their protocol pins; reload equality covered only 2,048 rows | Fixed: pins checked (all three match); every row checked |
+| Publication housekeeping: rewrite and Simple edition of this file, a neutral configuration key name, joining the protocol branch, float64 forecast storage | Rewrite and Simple edition done, separate reader pending; key renamed; branch based on the main branch that holds the published protocol; storage recorded as DECISIONS.md item 18 |
+
+## Open items
+
+1. **C2 review.** The protocol requires a separate review of `QUALIFICATION.json` and `ALLOCATION.json` before D2, and the lead pushes C2 before D2 starts.
+2. **Lane plan.** Before `fit.py run`, either every training track takes its CPUs through the `NS_CPU_SLOTS` folder or the tracks run one after the other.
+3. **D3 commit check.** D3 checks only that `FIT-COMPLETE.json` names the same allocation. The lead pushes C3 before D3, which gives the seal its public time.
+4. **Lease note date.** The note recorded in D1 says "C1b reviewed 28 Nov". The C1b review was finished, and D1 run, on 27 November 2026; the receipts carry the UTC times.
+5. **Separate reader.** This file, its Simple edition and DECISIONS.md need a separate reader before publication.
+6. **F5.** The optional Research Edition is not admitted and is not run in this stage.
+
+## Choices left to the code
+
+[DECISIONS.md](DECISIONS.md) lists the 18 details the protocol leaves open (indices, labels, training tables, the S4 size, scaling in the force-only tree arm, the earlier-EMG rows, the Brier floor, the standard deviation of the detectable effect, the sensitivity seed, what S-b opens, extra walks, pacing, the retry, local-header mismatches, reference pins, reload equality, custody folders, forecast storage), with the code that applies each. They were fixed in the code before any byte of the pool was read, and none was chosen by looking at a result.
