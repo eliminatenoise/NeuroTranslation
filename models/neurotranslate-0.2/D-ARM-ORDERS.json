@@ -1,13 +1,16 @@
 {
  "schema": "neurotranslate-0.2-d-arm-orders",
- "what": "Source orders of the D arms (source diversity at a fixed window budget), recomputed at P2 over the 13 wave-1 sources and the conditional source(s) admitted before the freeze, as ALLOCATION.json d_candidate_note requires. ALLOCATION.json itself is unchanged and lists the wave-1 sources only; restricted to those sources, every order here equals the published one.",
+ "what": "Source orders of the D arms (source diversity at a fixed window budget), recomputed at P2 over the 13 wave-1 sources and the conditional source(s) admitted before the freeze, as ALLOCATION.json d_candidate_note requires, and the arms those orders give under the arm rule of protocol revision 3. ALLOCATION.json itself is unchanged and lists the wave-1 sources only; restricted to those sources, every order here equals the published one.",
  "protocol": {
-  "head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+  "revision": 3,
+  "head": "0e97fcd208403d6b8707d44e669545fcc20583fd",
   "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
-  "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4"
+  "PROTOCOL.json_sha256": "d5f9e5744ed9c0da10e839c1e9f0ffd4995edb2faf1bd567acdd530c55ebf752"
  },
  "rule": "for k in {2,4,8} and draw in {0,1,2}: order candidate sources by ascending sha256('pooled-encoder-0.2|D|k' + k + '|draw' + draw + '|' + dataset); the arm uses the first k sources in that order that are eligible (at least W_max/8 inner-training windows, counted at P2)",
  "candidate_note": "conditional sources (area2, falcon_m1) join the candidate list only if admitted before the freeze; the orders are then recomputed with the same rule and recorded in MIXTURE-MANIFEST.json",
+ "arm_rule": "A source is eligible for the D arms if it has at least W_max/8 unique inner-training windows. A source enters a k-source arm (k in {2, 4, 8}) only if it has at least W_max/k unique inner-training windows. For each k and each draw, the order of that draw in D-ARM-ORDERS.json is walked from the top: a source that is not eligible, or that has fewer than W_max/k windows (short for this k), is skipped, and the first k sources that remain form the arm. Each source of the arm gives W_max/k unique windows: the first W_max/k of its inner-training windows in the fixed hash order (the window order of ALLOCATION.json q_window_rule, applied to that source). A skipped source stays available to the arms with a larger k and to D_all. D_all takes floor(W_max / n) unique windows from each of the n eligible sources, in the same window order.",
+ "arm_rule_note": "ALLOCATION.json is not edited. The last part of its rule (an arm uses the first k eligible sources of its order) is replaced from protocol revision 3 by the arm rule above; the ordering part of the rule and the nine orders are unchanged.",
  "key": "sha256 of the UTF-8 text 'pooled-encoder-0.2|D|k<k>|draw<draw>|<dataset>', ascending by its hex digest (equal digests, which do not occur, would be ordered by name)",
  "candidates": [
   "area2",
@@ -193,7 +196,7 @@
  },
  "eligibility": {
   "W_max": 2048,
-  "threshold_inner_training_windows": 256.0,
+  "threshold_inner_training_windows": 256,
   "inner_training_windows_by_source": {
    "area2": 458,
    "cemhsey": 200,
@@ -227,6 +230,49 @@
    "cemhsey": 200,
    "izmir": 31,
    "van_criekinge": 52
+  },
+  "windows_per_source_by_k": {
+   "2": 1024,
+   "4": 512,
+   "8": 256
+  },
+  "sources_with_a_whole_share_by_k": {
+   "2": [
+    "ds003739",
+    "gait120",
+    "hygrip",
+    "hyser",
+    "katmah",
+    "moreira",
+    "ofner",
+    "sabes",
+    "wtrack"
+   ],
+   "4": [
+    "ds003739",
+    "gait120",
+    "hygrip",
+    "hyser",
+    "katmah",
+    "moreira",
+    "ofner",
+    "sabes",
+    "schreiber_moissenet",
+    "wtrack"
+   ],
+   "8": [
+    "area2",
+    "ds003739",
+    "gait120",
+    "hygrip",
+    "hyser",
+    "katmah",
+    "moreira",
+    "ofner",
+    "sabes",
+    "schreiber_moissenet",
+    "wtrack"
+   ]
   }
  },
  "arms": {
@@ -236,39 +282,68 @@
     "katmah"
    ],
    "windows_per_source": 1024,
+   "unique_windows": 2048,
+   "complete": true,
+   "skipped_in_the_order": [],
    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
   },
   "k2|draw1": {
    "sources": [
-    "area2",
-    "sabes"
+    "sabes",
+    "ofner"
    ],
    "windows_per_source": 1024,
-   "sources_with_fewer_unique_inner_training_windows_than_their_share": {
-    "area2": 458
-   }
+   "unique_windows": 2048,
+   "complete": true,
+   "skipped_in_the_order": [
+    {
+     "source": "area2",
+     "inner_training_windows": 458,
+     "why": "short for this k: fewer than W_max/2"
+    }
+   ],
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
   },
   "k2|draw2": {
    "sources": [
-    "area2",
-    "hygrip"
+    "hygrip",
+    "katmah"
    ],
    "windows_per_source": 1024,
-   "sources_with_fewer_unique_inner_training_windows_than_their_share": {
-    "area2": 458
-   }
+   "unique_windows": 2048,
+   "complete": true,
+   "skipped_in_the_order": [
+    {
+     "source": "area2",
+     "inner_training_windows": 458,
+     "why": "short for this k: fewer than W_max/2"
+    }
+   ],
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
   },
   "k4|draw0": {
    "sources": [
     "ds003739",
     "katmah",
     "gait120",
-    "area2"
+    "schreiber_moissenet"
    ],
    "windows_per_source": 512,
-   "sources_with_fewer_unique_inner_training_windows_than_their_share": {
-    "area2": 458
-   }
+   "unique_windows": 2048,
+   "complete": true,
+   "skipped_in_the_order": [
+    {
+     "source": "izmir",
+     "inner_training_windows": 31,
+     "why": "not eligible: fewer than W_max/8"
+    },
+    {
+     "source": "area2",
+     "inner_training_windows": 458,
+     "why": "short for this k: fewer than W_max/4"
+    }
+   ],
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
   },
   "k4|draw1": {
    "sources": [
@@ -278,6 +353,15 @@
     "hygrip"
    ],
    "windows_per_source": 512,
+   "unique_windows": 2048,
+   "complete": true,
+   "skipped_in_the_order": [
+    {
+     "source": "cemhsey",
+     "inner_training_windows": 200,
+     "why": "not eligible: fewer than W_max/8"
+    }
+   ],
    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
   },
   "k4|draw2": {
@@ -288,6 +372,15 @@
     "sabes"
    ],
    "windows_per_source": 512,
+   "unique_windows": 2048,
+   "complete": true,
+   "skipped_in_the_order": [
+    {
+     "source": "van_criekinge",
+     "inner_training_windows": 52,
+     "why": "not eligible: fewer than W_max/8"
+    }
+   ],
    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
   },
   "k8|draw0": {
@@ -302,6 +395,20 @@
     "wtrack"
    ],
    "windows_per_source": 256,
+   "unique_windows": 2048,
+   "complete": true,
+   "skipped_in_the_order": [
+    {
+     "source": "izmir",
+     "inner_training_windows": 31,
+     "why": "not eligible: fewer than W_max/8"
+    },
+    {
+     "source": "cemhsey",
+     "inner_training_windows": 200,
+     "why": "not eligible: fewer than W_max/8"
+    }
+   ],
    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
   },
   "k8|draw1": {
@@ -316,6 +423,20 @@
     "gait120"
    ],
    "windows_per_source": 256,
+   "unique_windows": 2048,
+   "complete": true,
+   "skipped_in_the_order": [
+    {
+     "source": "van_criekinge",
+     "inner_training_windows": 52,
+     "why": "not eligible: fewer than W_max/8"
+    },
+    {
+     "source": "cemhsey",
+     "inner_training_windows": 200,
+     "why": "not eligible: fewer than W_max/8"
+    }
+   ],
    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
   },
   "k8|draw2": {
@@ -330,7 +451,52 @@
     "hyser"
    ],
    "windows_per_source": 256,
+   "unique_windows": 2048,
+   "complete": true,
+   "skipped_in_the_order": [
+    {
+     "source": "van_criekinge",
+     "inner_training_windows": 52,
+     "why": "not eligible: fewer than W_max/8"
+    }
+   ],
    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+  }
+ },
+ "arms_changed_from_the_revision_2_rule": {
+  "k2|draw1": {
+   "revision_2_rule": [
+    "area2",
+    "sabes"
+   ],
+   "revision_3_rule": [
+    "sabes",
+    "ofner"
+   ]
+  },
+  "k2|draw2": {
+   "revision_2_rule": [
+    "area2",
+    "hygrip"
+   ],
+   "revision_3_rule": [
+    "hygrip",
+    "katmah"
+   ]
+  },
+  "k4|draw0": {
+   "revision_2_rule": [
+    "ds003739",
+    "katmah",
+    "gait120",
+    "area2"
+   ],
+   "revision_3_rule": [
+    "ds003739",
+    "katmah",
+    "gait120",
+    "schreiber_moissenet"
+   ]
   }
  },
  "D_all": {
@@ -348,19 +514,12 @@
    "wtrack"
   ],
   "windows_per_source": 186,
+  "unique_windows": 2046,
+  "windows_short_of_W_max": 2,
+  "note": "floor(W_max / number of eligible sources) windows from each; the arm is short of W_max by the remainder",
   "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
  },
- "arms_with_a_source_below_its_share": {
-  "k2|draw1": {
-   "area2": 458
-  },
-  "k2|draw2": {
-   "area2": 458
-  },
-  "k4|draw0": {
-   "area2": 458
-  }
- },
- "counts_from": "MIXTURE-MANIFEST.json of 2026-11-28T08:55:50+1100",
+ "arms_with_a_source_below_its_share": {},
+ "counts_from": "MIXTURE-MANIFEST.json of 2026-11-28T10:18:59+1100",
  "no_recording_values": true
 }
