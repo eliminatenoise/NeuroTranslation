@@ -1,0 +1,36 @@
+{
+ "schema": "walking-force-scale-forecasts-seal-v1",
+ "protocol_sha256": "1768c4df8553095b2cd2a49c8f5297cd507fe90008d240bb3b189e526a447b33",
+ "fit_complete_sha256": "7280ea43b4b4ac084e51cc709e7ce6ff059d9fcf49740c6681c852d887bf8b57",
+ "eval_inputs_sha256": "4b470a810804b39a365ea04cfc5587b9077a7aa118bea35e708da836629e63bd",
+ "rows": 17888,
+ "files": {
+  "FORECASTS-PRIMARY-BELOW-NMAX-torch.npz": {
+   "sha256": "a79b2f0748b850c7644822fc5ecb3b4460f1b54127614ad7eeaaa5602c4dc4e8",
+   "methods": 200
+  },
+  "FORECASTS-NMAX-torch.npz": {
+   "sha256": "b08a0cc3512db9153859f03c79f74fca2e29e0b93cd6c085aa549dbf2eef7c4e",
+   "methods": 450
+  },
+  "FORECASTS-OTHER-torch.npz": {
+   "sha256": "a9c4fee394cdbcf244e696374f2f6a1d6cf145af886a270bd83d9cf752eb598c",
+   "methods": 801
+  },
+  "FORECASTS-PRIMARY-BELOW-NMAX-sk.npz": {
+   "sha256": "25a812974224fbefc6fcf03512a3503251683a83e5ae60550fab8e77e1523650",
+   "methods": 62
+  },
+  "FORECASTS-NMAX-sk.npz": {
+   "sha256": "6a5491cfd034932522a9ebcd88f2d6eb4fef5acc8a814bc4a721a131acd592c4",
+   "methods": 14
+  },
+  "FORECASTS-OTHER-sk.npz": {
+   "sha256": "8e46a1fe21e2965ac2ba0d564e424bd1a0fe2f6da3ede53d605e95471ef32234",
+   "methods": 229
+  }
+ },
+ "not_issued_failed_fits": [],
+ "custody": "The issuing processes read evaluation inputs only; targets were never opened before this seal.",
+ "utc": "2026-11-27T14:54:10.491369+00:00"
+}
