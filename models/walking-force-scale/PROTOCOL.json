@@ -1,0 +1,987 @@
+{
+ "schema": "walking-force-scale-protocol-v1",
+ "protocol_version": 1,
+ "date": "2026-11-27",
+ "title": "Walking-force quantity ladder on never-used Van Criekinge people",
+ "folder": "models/walking-force-scale/",
+ "editions": {
+  "technical": "PROTOCOL.md",
+  "simple": "Written with the results, in this folder, with its own first draft, rewrite and separate reader."
+ },
+ "companion_files": {
+  "allocate.py": {
+   "sha256": "f40c66f88c6e91a0137e3712088578d256d75d3ff02da288ffe7f23349d8f63b",
+   "bytes": 17426,
+   "role": "Single allocation writer for the 80-person pool. Standard library only."
+  },
+  "POOL.json": {
+   "sha256": "c5b5041d3c926e1591df5a0dc9797e030d875c6c59a8012547229dbdbbde9e56",
+   "bytes": 86504,
+   "role": "Output of `allocate.py pool`: all 138 healthy codes, the reason each is or is not a candidate, and the archive members (path, CRC-32, byte extent) of the 80 candidates."
+  },
+  "ORDER.json": {
+   "role": "Output of `allocate.py order`. It depends on the sha256 of this file, so it is computed after this file is final and is not hashed here. `allocate.py check` recomputes it."
+  }
+ },
+ "question": "If the same compact walking-force recipes are fitted on more people from the same laboratory, do they forecast the next 100 ms of plate force better for people who were never used before?",
+ "estimand": {
+  "per_family": "Delta_f = mean over scoreable evaluation people i of [MAE_i,f(N_max) - MAE_i,f(12)], where MAE_i,f(N) is person i's signed-impulse mean absolute error (N s) for family f fitted on N training people, averaged over that rung's replicate fits before the people are averaged.",
+  "relative": "Delta_f divided by the mean over the same people of MAE_i,f(12).",
+  "quantity_unit": "Training people, with three walks per person. Walks, issue rows, distinct new-load onsets, optimizer updates and examples drawn are reported for every rung.",
+  "rung_12": "Our own refit of the earlier 12 fit people with the identical recipe; not a published checkpoint.",
+  "interpretation": "Recipe performance (averaged over seeds and draws of people), not the luck of one fit."
+ },
+ "claim_limits": [
+  "One laboratory, one protocol: healthy adults walking barefoot overground at their preferred speed.",
+  "Force plates 1 and 2 cover part of a 12 m walkway; the target describes those plates only.",
+  "Results cover sessions whose files carry the six literal EMG channel names. If naming follows recording period, this is a hidden selection; it is stated with the results.",
+  "Surface EMG is muscle voltage at the skin, not a nerve recording.",
+  "Overlapping issue windows mean the person is the unit of analysis; new-load events are rare (about two distinct onsets per walk).",
+  "A trend fitted to three or four rungs is a short-range extrapolation, not a scaling law, and says nothing about other laboratories, bodies, tasks or species.",
+  "Matched update budgets favour small data sets; the epoch-matched and wider secondary arms exist to separate budget or capacity limits from data limits."
+ ],
+ "state_at_writing": {
+  "evaluation_or_reserved_bytes_opened": 0,
+  "bytes_downloaded_by_this_track": 0,
+  "read_only_checks_done": [
+   "Central directory (87,971 B, sha256 96a6b5d9...) parsed against the earlier roster: 138 codes = 26 author-listed without analog data + SUBJ001 (engineering) + 30 earlier-roster people + 81 never assigned (80 after SUBJ099).",
+   "The earlier selector pairs each archive entry with the next one, so the archive's last member, SUBJ99 (3).c3d, was dropped (110 candidates instead of 111). The earlier roster is reproduced exactly only with that drop.",
+   "Earlier validation metadata: 3 of 6 people failed the six literal EMG names (generic labels such as Voltage.12 in place of LBF or LRF); all 36 fit walks passed. 15 of 18 people pass so far; failures are per person or session.",
+   "Frozen checkpoint hashes confirmed at commit 03e76d4 (see frozen_checkpoints).",
+   "Recipe settings confirmed from the earlier design and comparator files (see models).",
+   "A faithful re-train of the six sealed 12-person compact checkpoints (three-pass and LSTM, seeds 20261124-26) from our own C3D reader and feature port is tensor-identical to the sealed files; file hashes differ only by safetensors metadata order. Saved without metadata, three processes gave the same file bytes.",
+   "The published 12-person tree pair refitted from the same rows gives predictions bit-identical to the sealed tree file.",
+   "One consumed fit walk shows that the C3D parameter section also holds EVENT (TIMES, LABELS), ANALYSIS (VALUES), SUBJECTS and MANUFACTURER groups; the header probe is fenced accordingly (qualification.never_decoded).",
+   "Planning studies used the 12 consumed fit people only (3, 6 or 9 training people, 3 held out). They are not evidence about new people."
+  ]
+ },
+ "data_sources": {
+  "van_criekinge_healthy": {
+   "dataset_doi": "10.6084/m9.figshare.24192480.v1",
+   "article_doi": "10.1038/s41597-023-02767-y",
+   "article": "Van Criekinge T., Saeys W., Truijen S., Vereeck L., Sloot L. H., Hallemans A. Scientific Data 10, 852 (2023).",
+   "licences": {
+    "data": "CC0 1.0",
+    "article": "CC BY 4.0"
+   },
+   "archive": {
+    "name": "138_HealthyPiG.zip",
+    "figshare_file_id": 42450060,
+    "bytes": 463159769,
+    "md5": "85235c73455d4df8434810d61517efbb",
+    "stable_url": "https://ndownloader.figshare.com/files/42450060"
+   },
+   "archive_object": {
+    "s3_version_id": "c9jtqYlgGUVrgEUy1JMXkChG6zGtCpvu",
+    "etag": "\"85235c73455d4df8434810d61517efbb\""
+   },
+   "central_directory": {
+    "bytes": 87971,
+    "entries": 1016,
+    "sha256": "96a6b5d97ab542eef90a773dfeabb1ad4ac025d768a559d1491deec0d99f4b2b",
+    "archive_bytes_inclusive": [
+     463071776,
+     463159746
+    ]
+   },
+   "recording": "100 Hz marker frames, 1,000 Hz analog samples (ten per frame), four type-2 force plates, 16-channel wireless surface EMG; 14 named muscle channels in the author examples.",
+   "stroke_cohort": "Never accessed; not part of this protocol."
+  },
+  "earlier_roster": {
+   "sha256": "34bf97f35e434357c5f9ff7fb945a0743dbbd0c5558fc99b64fe8248485b8f2c",
+   "tag": "10.6084/m9.figshare.24192480.v1|plate-load-history|20261122",
+   "state": "metadata-only proposal awaiting the project owner's admission; owned by the other maintainer",
+   "roles": {
+    "fit": [
+     "SUBJ024",
+     "SUBJ038",
+     "SUBJ039",
+     "SUBJ040",
+     "SUBJ043",
+     "SUBJ044",
+     "SUBJ061",
+     "SUBJ062",
+     "SUBJ082",
+     "SUBJ096",
+     "SUBJ110",
+     "SUBJ112"
+    ],
+    "validation": [
+     "SUBJ011",
+     "SUBJ047",
+     "SUBJ066",
+     "SUBJ075",
+     "SUBJ115",
+     "SUBJ116"
+    ],
+    "test": [
+     "SUBJ008",
+     "SUBJ014",
+     "SUBJ016",
+     "SUBJ020",
+     "SUBJ053",
+     "SUBJ056",
+     "SUBJ057",
+     "SUBJ074",
+     "SUBJ077",
+     "SUBJ084",
+     "SUBJ089",
+     "SUBJ092"
+    ]
+   },
+   "rule_here": "Not reallocated or edited. The 12 fit people are reused read-only as the 12-person rung. The 6 validation and 12 test people are never opened by this track."
+  },
+  "original_fit_walks": {
+   "people": 12,
+   "walks": 36,
+   "compressed_bytes": 31290834,
+   "access": "Read in place, read-only, from the other maintainer's fit transport cache. Never copied, never re-fetched unless a check fails.",
+   "checks": "CRC-32 and size against the pinned central directory; decoded sha256 against that cache's readback file (sha256 f488ddca037c3ad7e75ab5d4f7be3d76a27836e9cb9e44d4132e61fe3e355931); our own sha256 recorded."
+  },
+  "recipe_sources_read_only": {
+   "compact_learned_py": "76f039290f50381d2ee18bb9d61a34bd1f0d5b748a9047b24eabf7f51a53b973",
+   "compact_inputs_py": "7080ad84728f3eced57bfb4d951365f06cb3b5bcc6e55a5428f7563ffcc1bb96",
+   "compact_comparators_py": "4a8fdcd95b8c5b7429771680e91f7d44439780c25181743c13a221733be1fd78",
+   "compact_design_json": "f0eff2a719fc6232e9fbee5606e3be2466dee223f65bdde8673a8e1b89aad1fe",
+   "compact_encoded_12_person_cache": "d81af88596189aeacf7b7f4ff03c30d7087d3f7a8fc1da3539d6de393803a5db",
+   "sealed_12_person_three_pass": {
+    "20261124": "d3b889be32716428ccb3f3d0db98890be3eb7d06c94ae6624bdefb31e31cfcb4",
+    "20261125": "54a39211d7809636d1b1622ca71409c1ef6e0884e55d6a7d3165b8d9309b477f",
+    "20261126": "0b1903c3a42bb90e2945ad8202577fa87bc750a9aeb5ede014a3ed3324a01377"
+   },
+   "same_three_pass_saved_without_metadata": {
+    "20261124": "fdcc0481ac7d77d54a37b04c5e33af87b35d180465f00bfdc509c88f689993c5",
+    "20261125": "9fd8a2f44aeca0061ffa423e27658550fd71bc6690a6c715ebc704f93a367d9b",
+    "20261126": "5a0dda5022acc6dbe6a6a115f6a1569c31fdc7de7d16baf1a24681dbf886d76c"
+   },
+   "tree_common_py": "e4bf2dd15bc37d59fa1875e026317d49dedfd7df4d6e3dcb13df1bb1414c8853",
+   "tree_trees_py": "0c03bd88d4d49c70daedf21a07792d1560975975b65b38be10b29f47287ba683",
+   "tree_design_json": "1cccabffd6242927f9097ab3009033eb05faa4de5fe0f0416a04615da78f5abb",
+   "sealed_12_person_tree_models": "2c3f642ecf571cf0e391895bf3e393985faf43a0d002c46835b0f16b7a8b15dd",
+   "person_weights_rolling_py": "1065c837a77c91b5f87b89af147c34463824c2ca91c1d33789ad18a484cb6a55",
+   "twenty_four_position_walk_py": "aade0c7ac67b1efbb46106b31bfaedfb0e45bfa20f2665930c519fcdd201706d",
+   "six_name_layout_selected_py": "5a97aa2fbdcda74ad682f0f3ddb8666b76137ee58b5caaf8ad7d4a9fa28dee20",
+   "adapter_py": "1666536bb49fd597f3b1edf343169eb43e0d0f105fb0bd0ddb3f50757bbe3b14",
+   "force_baselines_fit_py": "bbea84c65119c1997b93d48e0655e4a11836a543201129401aeb00166ecea4ce",
+   "force_baselines_model_py": "c7d07217b0910f582b92f7fa3fd23ee449f1847689c5c4c163242df5f4f1b30f",
+   "note": "Files of the other maintainer, read only. Our port is new code committed in this folder (stage C1b) and must pass the engineering gates against these files before any new byte is read."
+  }
+ },
+ "frozen_checkpoints": {
+  "repository_commit": "03e76d4826e2c1d47d63990f38001075247423dc",
+  "F1_compact_three_pass": {
+   "files": {
+    "benchmarks/walking-neural-scaling/checkpoints/three-pass.safetensors": {
+     "sha256": "9feb39a826d30751fad99e1adc8513a5a87191574df6954d51c93a3c7d4576cf",
+     "bytes": 31480
+    },
+    "benchmarks/walking-neural-scaling/checkpoints/recurrent-preprocessing.json": {
+     "sha256": "016920f25017b2ab3883a350230f95b48258a999fe4efc69f77adbb90a501dca",
+     "bytes": 108
+    },
+    "benchmarks/walking-neural-scaling/predict.py": {
+     "sha256": "10d8fb8dc7cbcc7fc26e4c87f982148ea57a8c3adba6d47e92f86be3e3224da7",
+     "bytes": 6470
+    }
+   },
+   "fitted_on": "12 Belgian fit people plus 8 Izmir people (CC BY 4.0), augmented continuation, first seed. Scored only; its comparison with our rungs is descriptive.",
+   "inputs": "Six voltage streams (any order) and the target plate, compact representation."
+  },
+  "F2_published_trees": {
+   "files": {
+    "benchmarks/walking-neural-scaling/checkpoints/load.onnx": {
+     "sha256": "d08f2d79d4de68b76302e8b973d5ee29a604d725c49a6a04456af96dd868cb1e",
+     "bytes": 62115
+    },
+    "benchmarks/walking-neural-scaling/checkpoints/impulse-residual.onnx": {
+     "sha256": "b6cbe5c08a2d7080dc407069660d90fce17f02ea8a55628a6673d4d7ef00291c",
+     "bytes": 287837
+    },
+    "benchmarks/walking-neural-scaling/checkpoints/preprocessing.json": {
+     "sha256": "2bfe181e09cd3cdd88634762a3fb4c4777c857ed04bcde61d4da0a248ed29d21",
+     "bytes": 686
+    }
+   },
+   "fitted_on": "12 Belgian fit people only.",
+   "inputs": "Six named EMG channels, own plate and other plate, with availability masks, encoded by preprocessing.json.",
+   "check": "Its agreement with M3 at the 12-person rung is reported on fit rows (S0) and evaluation rows (S-c): the largest difference and the number of rows beyond the published tolerance (0.000017 N s, 0.00000026 probability). This checks the export; it is not a stop rule, because float32 thresholds can split rows near a tree threshold differently. F2 is scored from the ONNX graphs as published."
+  },
+  "F3_neurotranslate_0_0_expanded": {
+   "files": {
+    "models/neurotranslate-0.0/recorded-force/expanded/models/past-load-gate-trainable-core.npz": {
+     "sha256": "dd795a15a0651550261689f6710b6f929c35c0368932c88e937ea76e6fb93fb0",
+     "bytes": 41687
+    },
+    "models/neurotranslate-0.0/recorded-force/expanded/models/past-load-gate-frozen-core.npz": {
+     "sha256": "3197e25e98776f9c154fd2625c5a20f728eb2283977b490e50c812b7c7a6e068",
+     "bytes": 41710
+    },
+    "models/neurotranslate-0.0/recorded-force/expanded/models/frozen-core.npz": {
+     "sha256": "da97baca8e56cc3aac35b60d51b08683386a7bedf650963b3d66d1cee9aedbc1",
+     "bytes": 41118
+    },
+    "models/neurotranslate-0.0/recorded-force/expanded/models/trainable-core.npz": {
+     "sha256": "b371040dae65d580ae7d7786d22bbc0b2e09bcb8bfcce495d6e8205befbf568e",
+     "bytes": 41132
+    },
+    "models/neurotranslate-0.0/recorded-force/expanded/predict.py": {
+     "sha256": "096c87b286fa4eda6980963978269a3df5081af793ce943cc10b8badbe444a18",
+     "bytes": 6744
+    },
+    "models/neurotranslate-0.0/recorded-force/expanded/inference.py": {
+     "sha256": "f29848baa787581a979a5d9f3d5eca3f1fd894bfb2e40125a9b6a11abf88b1d8",
+     "bytes": 5824
+    },
+    "models/neurotranslate-0.0/recorded-force/expanded/past_load_gate.py": {
+     "sha256": "058b0aba646009e7d6d14c5d1a07cfa592b7482ac760fd5f5d3a9302a3e7f2f6",
+     "bytes": 1461
+    }
+   },
+   "fitted_on": "12 Belgian fit people; scored so far only on its own fitting walks.",
+   "inputs": "Six named EMG RMS values and the target plate's mean force per bin.",
+   "first_held_test": "This is the first test of the 0.0 walking-force preview on people outside its fitting group.",
+   "lineage": "Its attention core inherits training on worm imaging (Zenodo 10.5281/zenodo.19388374) and SLEAP sample tracks. Scoring is not training on those data; the results say so."
+  },
+  "F4_force_baselines_common_six": {
+   "files": {
+    "models/force-baselines/common-six.npz": {
+     "sha256": "aa499793a7d84488befd94bc2a628df490896700291af58d2befa0bd1d6bb3bf",
+     "bytes": 32394
+    },
+    "models/force-baselines/predict.py": {
+     "sha256": "65241c31c75cd59524031410d1f660254c2f2d4bc682857da540bb3ee27ad364",
+     "bytes": 5621
+    }
+   },
+   "fitted_on": "12 Belgian fit people; 40 candidates (2 endpoints x 5 arms x 4 penalties).",
+   "penalty_choice": "Per endpoint, group and arm, the penalty with the lowest person-equal error on the training-pool people (impulse MAE, event Brier); ties go to the larger penalty. Chosen and sealed in C3, before the evaluation group is downloaded. This is the separate validation its README asks for."
+  },
+  "F5_research_edition_optional": {
+   "files": {
+    "models/neurotranslate-0.1/research-edition/checkpoint.json": {
+     "sha256": "41e75166a36e858818b1e2502eb0ed8ae7093b71183a74361af744efa7fb5b3d"
+    },
+    "weights/SENSOR-LOOP-JOINT.safetensors (inside research-edition.zip)": {
+     "sha256": "3d9a5a2cbddc011b2677a3469ef41fc261b006b8d9535e8a151f766934b0b3db",
+     "bytes": 481168
+    }
+   },
+   "base": "thinkingmachines/TML-d24-varloop-research revision 657b53ba5da7baefe9ff15dca5cd25f5bd3dbaa2, Apache-2.0 plus its acceptable-use policy; base files read read-only by sha256 as listed in checkpoint.json.",
+   "run_only_if": "The owner admits it. About 50-55 GB RAM and 3-6 h, run alone. Issued on the 24-position grid, one issue tick (both plates) per call, because its outputs depend on batch shape. If not run, it is reported as not issued."
+  },
+  "not_scored": {
+   "models/neurotranslate-0.1/IO-ADAPTER.safetensors": "Needs all 14 names; fitted on 2 people.",
+   "models/force-baselines/strict-fourteen.npz": "Needs all 14 names; fitted on 2 people.",
+   "models/neurotranslate-0.0/recorded-force/checkpoints/*.npz": "Need all 14 names; fitted on 5 walks of 2 people."
+  }
+ },
+ "people": {
+  "counts": {
+   "healthy_codes": 138,
+   "author_listed_without_analog": 26,
+   "engineering_person": 1,
+   "earlier_roster": 30,
+   "excluded_boundary": 1,
+   "candidates": 80
+  },
+  "author_listed_without_analog": [
+   "SUBJ023",
+   "SUBJ048",
+   "SUBJ054",
+   "SUBJ072",
+   "SUBJ085",
+   "SUBJ118",
+   "SUBJ119",
+   "SUBJ120",
+   "SUBJ121",
+   "SUBJ122",
+   "SUBJ123",
+   "SUBJ124",
+   "SUBJ125",
+   "SUBJ126",
+   "SUBJ127",
+   "SUBJ128",
+   "SUBJ129",
+   "SUBJ130",
+   "SUBJ131",
+   "SUBJ132",
+   "SUBJ133",
+   "SUBJ134",
+   "SUBJ135",
+   "SUBJ136",
+   "SUBJ137",
+   "SUBJ138"
+  ],
+  "engineering_person": [
+   "SUBJ001"
+  ],
+  "excluded_boundary_never_opened": {
+   "subjects": [
+    "SUBJ099"
+   ],
+   "why": "The earlier selector dropped its last walk through an entry-pairing step; under the intended rule it would sit in the earlier test block (second position) and SUBJ089 would drop out. The sealed earlier roster still governs, so SUBJ089 stays reserved, and SUBJ099 is left out of every role and never opened (owner decision pending)."
+  },
+  "candidates": [
+   "SUBJ002",
+   "SUBJ003",
+   "SUBJ004",
+   "SUBJ005",
+   "SUBJ006",
+   "SUBJ007",
+   "SUBJ009",
+   "SUBJ010",
+   "SUBJ012",
+   "SUBJ013",
+   "SUBJ015",
+   "SUBJ017",
+   "SUBJ018",
+   "SUBJ019",
+   "SUBJ021",
+   "SUBJ022",
+   "SUBJ025",
+   "SUBJ026",
+   "SUBJ027",
+   "SUBJ028",
+   "SUBJ029",
+   "SUBJ030",
+   "SUBJ031",
+   "SUBJ032",
+   "SUBJ033",
+   "SUBJ034",
+   "SUBJ035",
+   "SUBJ036",
+   "SUBJ037",
+   "SUBJ041",
+   "SUBJ042",
+   "SUBJ045",
+   "SUBJ046",
+   "SUBJ049",
+   "SUBJ050",
+   "SUBJ051",
+   "SUBJ052",
+   "SUBJ055",
+   "SUBJ058",
+   "SUBJ059",
+   "SUBJ060",
+   "SUBJ063",
+   "SUBJ064",
+   "SUBJ065",
+   "SUBJ067",
+   "SUBJ068",
+   "SUBJ069",
+   "SUBJ070",
+   "SUBJ071",
+   "SUBJ073",
+   "SUBJ076",
+   "SUBJ078",
+   "SUBJ079",
+   "SUBJ080",
+   "SUBJ081",
+   "SUBJ083",
+   "SUBJ086",
+   "SUBJ087",
+   "SUBJ088",
+   "SUBJ090",
+   "SUBJ091",
+   "SUBJ093",
+   "SUBJ094",
+   "SUBJ095",
+   "SUBJ097",
+   "SUBJ098",
+   "SUBJ100",
+   "SUBJ101",
+   "SUBJ102",
+   "SUBJ103",
+   "SUBJ104",
+   "SUBJ105",
+   "SUBJ106",
+   "SUBJ107",
+   "SUBJ108",
+   "SUBJ109",
+   "SUBJ111",
+   "SUBJ113",
+   "SUBJ114",
+   "SUBJ117"
+  ],
+  "walks": {
+   "per_person": 3,
+   "rule": "The three lowest-numbered dynamic walks that pass qualification; walk numbers carry no other role.",
+   "first_three_of_80": {
+    "walks": 240,
+    "compressed_bytes": 228181413,
+    "median_walk_bytes": 945890,
+    "largest_walk_bytes": 1839822
+   },
+   "fourth_and_fifth_walks_for_substitution": 8,
+   "distribution": {
+    "3_walks": 73,
+    "4_walks": 6,
+    "5_walks": 1
+   }
+  },
+  "ignored_members": [
+   "138_HealthyPiG_10.05/SUBJ101/SUBJ101.c3d (unnumbered; same size as that person's static trial)"
+  ]
+ },
+ "qualification": {
+  "stage": "D1, after C1 is pushed, the code commit C1b is reviewed, and the owner's download lease is given.",
+  "what_is_read": "For each of the first three walks of the 80 candidates (240 members): one ranged GET of bytes [o, o + 8,704) where o is the member's local header offset. If the bounded inflation has not reached the C3D header end, the next 8,192 bytes are requested, until 65,536 compressed bytes have been read; then the walk fails with \"header not reached\". Expected total about 2.1 MB (measured need 3,272-3,704 compressed bytes on fit walks); at most about 66 KB per walk and 16.4 MB in all.",
+  "inflation_bound": "Raw deflate. Inflate 512 bytes to read the parameter start block p and DATA_START (header word 9); inflate to (p - 1) x 512 + 4 to read the parameter block count c; then inflate with max_length so that output stops at H = (p - 1 + c) x 512. Fail unless H <= (DATA_START - 1) x 512. No sample byte is ever produced.",
+  "local_header_check": "Signature, name, method 8, flags 0, CRC-32 and sizes must equal the central directory.",
+  "decoded_header_words": "Words 1-12 of the 512-byte C3D file header only (parameter block, point count, analog words per frame, first and last frame, scale, DATA_START, analog samples per frame, frame rate). The header event table (words 150-234) is not decoded.",
+  "parameter_walk": "Records are walked by their offset fields. Group names are read to map group ids. Parameter names are read only inside whitelisted groups; elsewhere the name bytes are stepped over without decoding.",
+  "decoded_values_whitelist": {
+   "ANALOG": [
+    "USED",
+    "LABELS",
+    "UNITS",
+    "SCALE",
+    "OFFSET",
+    "GEN_SCALE",
+    "RATE"
+   ],
+   "ANALOG_names_only": "All ANALOG parameter names are read to apply the unknown-field rule; DESCRIPTIONS and GAIN are allowed names whose values are not decoded.",
+   "FORCE_PLATFORM": "all parameters (USED, TYPE, ZERO, CORNERS, ORIGIN, CHANNEL; presence of CAL_MATRIX)",
+   "POINT": [
+    "RATE",
+    "DATA_START",
+    "UNITS",
+    "FRAMES",
+    "USED",
+    "SCALE"
+   ],
+   "TRIAL": [
+    "Z_DIRECTION"
+   ]
+  },
+  "never_decoded": [
+   "EVENT",
+   "EVENT_CONTEXT",
+   "ANALYSIS",
+   "SUBJECTS",
+   "MANUFACTURER",
+   "PROCESSING",
+   "every other group and every non-whitelisted parameter",
+   "marker (POINT) sample values"
+  ],
+  "stored_per_walk": [
+   "archive path",
+   "byte ranges requested and received",
+   "sha256 of the compressed bytes received",
+   "verdict (Q6, QP or X) and reason codes",
+   "number of analog channels",
+   "number of channels named Voltage.* with unit V",
+   "presence of each of the 14 literal muscle names (descriptive)"
+  ],
+  "discarded": "Compressed and inflated buffers are held in memory only and discarded after the verdict. No header byte is written to disk.",
+  "walk_gates_Q6": [
+   "Native clocks: 100 Hz frames, 1,000 Hz analog, 10 analog samples per frame, float storage (negative scale), Intel processor byte.",
+   "Header and parameters agree on point count, frame extent, DATA_START and analog words per frame; stored extent (DATA_START, frames, frame bytes) matches the expanded size in the central directory to within one 512-byte block.",
+   "ANALOG labels unique; Voltage.LBF, Voltage.LERS, Voltage.LGAS, Voltage.LRF, Voltage.LST and Voltage.RERS each present exactly once with unit V; no ANALOG parameter outside USED, LABELS, DESCRIPTIONS, GEN_SCALE, SCALE, OFFSET, UNITS, RATE, GAIN.",
+   "FORCE_PLATFORM: USED 4, TYPE [2, 2, 2, 2], ZERO [1, 0], no CAL_MATRIX; TRIAL:Z_DIRECTION 5; POINT:UNITS mm.",
+   "CHANNEL is 4 x 6 with 24 unique valid columns disjoint from the six EMG columns; per plate the labels are Force.Fx/Fy/Fz and Moment.Mx/My/Mz with the plate number, units N and Nmm.",
+   "Four horizontal plates (corner z = 0), finite corners and origins with origin z > 0, plate normal z = -1.",
+   "Finite, non-zero SCALE for every channel and finite, non-zero GEN_SCALE."
+  ],
+  "walk_class_QP": "Every Q6 gate except the six-name rule, with at least 4 channels named Voltage.* in unit V.",
+  "walk_class_X": "Fails a clock, extent, plate or calibration gate, or the header was not reached.",
+  "person_rule": "Probe the first three walks. If any of them is not Q6 and the person has a 4th or 5th walk, probe those too (lowest number first). Q6 person: at least three Q6 walks; the three lowest-numbered Q6 walks are used. QP person: not Q6, but at least three walks that are Q6 or QP; the three lowest-numbered of those are listed. X person: neither.",
+  "expected": "From 15 of 18 earlier people passing, about 67 Q6 people (95% interval roughly 47-77). Planning only.",
+  "fence_acceptance": "The probe touches member bytes of people who will become evaluation or physics people before the allocation is applied. The hash order is fixed before the probe (ORDER.json, committed with this file), so verdicts cannot steer roles. The separate reviewer accepts this fence explicitly at admission.",
+  "receipt": "QUALIFICATION.json (schema walking-force-scale-qualification-v1): protocol_sha256, pool_sha256, and per candidate class, the three walk numbers and per-walk verdicts. Committed with ALLOCATION.json in C2."
+ },
+ "allocation": {
+  "single_writer": "This track is the only allocation writer for the 80 candidates. physics-source copies its group from ALLOCATION.json into its own binding file and writes no second allocation.",
+  "tag": "DOI + '|walking-scale|' + sha256(PROTOCOL.json), with DOI = 10.6084/m9.figshare.24192480.v1",
+  "why_this_salt": "The order cannot be known before this file is final, so no previewed order could be chosen.",
+  "primary_order": "Ascending sha256 hex of TAG + '|SUBJnnn' (three-digit code), over all 80 candidates (ORDER.json).",
+  "groups": {
+   "Q": "Number of Q6 people.",
+   "E_evaluation": "clamp(floor(0.30 Q + 0.5), 12, 24) people, computed in integers as floor((3 Q + 5) / 10): the first Q6 people in the primary order.",
+   "P_physics_source": "clamp(floor(0.15 Q + 0.5), 8, 12) people, computed in integers as floor((3 Q + 10) / 20): the next Q6 people in the primary order. Six-name people, so the group is exchangeable with E and every baseline can run on it. Its measured test belongs to physics-source; this track never downloads its walks.",
+   "T_training_pool": "The remaining Q6 people.",
+   "physics_supplement": "Every QP person. Never opened by this track; available to physics-source under its own protocol.",
+   "unusable": "Every X person, with the reason.",
+   "cancellation": "If T < 6, the ladder is cancelled: no evaluation group is formed, P = min(clamp(floor(0.15 Q + 0.5), 8, 12), Q) people are taken from the start of the primary order, and the other Q6 people stay unallocated and unopened."
+  },
+  "rungs": {
+   "added_people": "a in {6, 12, 24}, kept when a < T and (12 + T) / (12 + a) >= 1.25, plus a = T. The 12 earlier fit people are in every rung, so N = 12 + a.",
+   "nesting": "10 draw orders over T: ascending sha256 of TAG + '|rung-draw-' + d + '|SUBJnnn', d = 0..9. Rung a of draw d takes the first a people of draw order d, so rungs are nested within a draw. N = 12 and N_max = 12 + T are single fixed sets."
+  },
+  "examples": [
+   {
+    "Q": 80,
+    "E": 24,
+    "P": 12,
+    "T": 44,
+    "N": [
+     12,
+     18,
+     24,
+     36,
+     56
+    ]
+   },
+   {
+    "Q": 67,
+    "E": 20,
+    "P": 10,
+    "T": 37,
+    "N": [
+     12,
+     18,
+     24,
+     36,
+     49
+    ]
+   },
+   {
+    "Q": 65,
+    "E": 20,
+    "P": 10,
+    "T": 35,
+    "N": [
+     12,
+     18,
+     24,
+     36,
+     47
+    ]
+   },
+   {
+    "Q": 52,
+    "E": 16,
+    "P": 8,
+    "T": 28,
+    "N": [
+     12,
+     18,
+     24,
+     40
+    ]
+   },
+   {
+    "Q": 47,
+    "E": 14,
+    "P": 8,
+    "T": 25,
+    "N": [
+     12,
+     18,
+     24,
+     37
+    ]
+   },
+   {
+    "Q": 40,
+    "E": 12,
+    "P": 8,
+    "T": 20,
+    "N": [
+     12,
+     18,
+     24,
+     32
+    ]
+   },
+   {
+    "Q": 26,
+    "E": 12,
+    "P": 8,
+    "T": 6,
+    "N": [
+     12,
+     18
+    ]
+   },
+   {
+    "Q": 25,
+    "E": 0,
+    "P": 8,
+    "T": 0,
+    "N": [],
+    "ladder": "cancelled"
+   }
+  ],
+  "inner_folds": "For a fit's training people (the 12 plus that rung's added people): rank by sha256 of TAG + '|inner-fold|SUBJnnn'; fold = rank mod 4. Used only by the secondary tuned arm G9.",
+  "variety_walk": "For training-pool person s: walk position int(sha256(TAG + '|variety-walk|' + s), 16) mod 3 among the three selected walks.",
+  "pool_tail_P1": "If T >= 32: for draw d, the training-pool people after position max(intermediate a) of draw order d. They are unseen by every intermediate rung of that draw and by the 12-person rung.",
+  "ids_known_now": "The 80 candidates (people.candidates) and, once this file is committed, the full hash orders (ORDER.json). Group membership needs the header probe and is written to ALLOCATION.json in C2.",
+  "script": "allocate.py (steps pool, order, assign, sizes, check)."
+ },
+ "physics_source_interface": {
+  "protocol": "models/physics-source/ (branch physics-source-protocol, version 1). It reserves 8 to 12 people from this allocation as its measured test.",
+  "provides": [
+   "ALLOCATION.json: the physics-source group's codes and walk members (path, CRC-32, local header offset, byte extent), the training-pool codes, and the physics-supplement codes with their plate-qualified walks.",
+   "The input adapter (extract.py) and the compact family code (threepass.py) with their sha256 values from C1b.",
+   "Marker inputs: none admitted here (physics-source then runs its own lag-guarded variant K).",
+   "EMG qualification rule: the six-name gate Q6 above; every physics-source person passes it.",
+   "Inner folds: ours cover the 12 plus each rung's added people, not the 6 earlier validation people, so physics-source uses its own fold rule.",
+   "Plates: 1 and 2 only, as in the published fits."
+  ],
+  "access_rule": "After D2, physics-source may read the training-pool walk files and arrays read-only from this track's private folder (no second download). It never reads evaluation-group files or forecasts. This track never downloads physics-source or physics-supplement members, and does not fetch static trials.",
+  "stratum_agreement": "Six-name people for the physics-source group, sized by the P rule, agreed with the physics-source lead before C1 is pushed."
+ },
+ "task": {
+  "issue_ticks": "t = 199 + 20 k on each walk's stored 1,000 Hz analog index, for every t that leaves a full history (full grid). An issue is taken immediately after sample t is read.",
+  "plates": "Rows for plates 1 and 2. Plates 3 and 4 are unavailable, as in the published fits.",
+  "history": "Samples t - 199 to t in ten consecutive 20 ms bins, oldest first. A bin is valid only if all 20 of its samples are finite.",
+  "emg_input": "Root-mean-square volts per bin of Voltage.LBF, LERS, LGAS, LRF, LST and RERS, after (raw - OFFSET) x SCALE x GEN_SCALE. Original voltages; no envelope, filter or amplitude normalisation.",
+  "force_input": "Mean signed vertical force per bin of the target plate: (raw - OFFSET) x SCALE x GEN_SCALE of the plate's Fz channel (FORCE_PLATFORM:CHANNEL, third column) times the plate normal z (-1), so upward force is positive, in N.",
+  "impulse_target": "Sum of the plate's upward force over samples t+1 to t+100 times 0.001 s, in N s. Needs all 100 samples valid.",
+  "plate_state": "UNKNOWN at the start and after any invalid sample; UNLOADED after 20 consecutive samples within -10 to +10 N; PENDING at the first sample >= +20 N while UNLOADED; LOADED when the 19 samples after the crossing all stay >= +20 N (the onset is dated at the crossing); a drop below +20 N while PENDING returns to UNLOADED.",
+  "new_load_label": "Positive if an onset (crossing) falls in t+1 to t+100 and every sample from t+1 to its confirmation is valid. Negative if the state at t is UNLOADED or LOADED, samples t+1 to t+119 are valid, and no onset falls in t+1 to t+100. Otherwise undefined.",
+  "support": {
+   "impulse": "All six EMG channels valid in all ten bins, the target plate valid in all ten bins, and the impulse target defined.",
+   "event": "The same input validity and a defined new-load label.",
+   "common": "Every method is scored on the same rows; there is no method-specific support."
+  },
+  "weights": "People equal; within a person, walks equal; within a walk, issue ticks equal; within a tick, represented plates equal (published participant_weights).",
+  "compact_input": "Per bin: target-plate force / 800 N; from bin 4 on, the median and 80th percentile across available channels of log(1 + RMS / RMS over the earlier bins of the same window); a force mask and an EMG-summary mask (published history_features). Channel names do not enter.",
+  "tree_input": "Per bin: the six EMG RMS values, own-plate force and other-plate force, standardised with the rung's training mean and SD over observed values, plus eight availability masks; flattened, with last-bin values, window means, last-minus-first, and the persistence impulse (published tree features, 185 columns).",
+  "persistence": "Latest bin mean x 0.1 s (N s).",
+  "grids": {
+   "full": "Every issue tick above (primary for all scoring).",
+   "twenty_four_position": "Per walk, eligible ticks t = 199 + 20 k with t < n - 119; 8 start ranks floor(j (m - 3) / 7), j = 0..7, each with the next two ranks (24 ticks, 48 plate rows); walks with fewer than 24 eligible ticks are left out of this grid. The published replay schedule; a secondary table for every method and the only grid for F5."
+  },
+  "excluded_inputs": "Markers, processed gait events, analysis values, modelled forces, subject parameters, person, walk or laboratory identity and absolute time. EMG is not a nerve recording.",
+  "causality_check": "Gate G3: replacing every sample after t with noise leaves every input and forecast unchanged."
+ },
+ "models": {
+  "selection": "No model choice anywhere in the primary analysis: every family uses the same published recipe at every rung.",
+  "M1_compact_three_pass": {
+   "architecture": "Causal convolution (5 inputs, width 24, kernel 3) with SiLU, a GRU, then one shared GRU cell applied three times, then a linear head for the new-load logit and the impulse residual over persistence; 7,634 parameters.",
+   "recipe": "AdamW, learning rate 0.002, weight decay 0.001; 900 updates of 128 rows drawn with replacement in proportion to person-equal impulse weight (torch.multinomial, generator seed + 300); loss 0.5 x (smooth L1 on impulse residual + mean of event BCE with the rung's fit-prior logit offset, weighted by event / impulse weight); FP32 on CPU, deterministic algorithms, 1 thread.",
+   "source": "Ported from the published compact training code (learned.py, inputs.py; sha256 in data_sources)."
+  },
+  "M2_ridge_logistic_compact": {
+   "recipe": "Compact input flattened plus last bin, window mean and last-minus-first force (61 columns); scikit-learn Ridge alpha 1 on impulse minus persistence; LogisticRegression C 1 (max_iter 1000) on event-supported rows; person-equal weights.",
+   "source": "Published comparator code (comparators.py)."
+  },
+  "M3_boosted_trees_published_inputs": {
+   "recipe": "HistGradientBoosting: 128 iterations, learning rate 0.065, min_samples_leaf 24, l2 0.3, 95 bins, no early stopping, random_state 20261124; classifier with 7 leaves (log loss) for new load; regressor with 31 leaves (absolute error) for impulse minus persistence; person-equal weights; scaling, fallback median and prior from the rung's training people.",
+   "rung_12_identity": "At N = 12 this is the published tree model (F2); its predictions must be bit-identical to the sealed tree file.",
+   "source": "Published tree code (trees.py, common.py)."
+  },
+  "replicates": {
+   "M1_fixed_sets": "N = 12 and N_max: 50 seeds, 20261124 + j (j = 0..49). Seeds 20261124-26 at N = 12 must reproduce the sealed checkpoints tensor for tensor.",
+   "M1_intermediate": "Each intermediate rung: 10 draws x 5 seeds; draw d uses seeds 20261124 + 5 d + s (s = 0..4).",
+   "M2_M3": "Deterministic: 1 fit at N = 12 and N_max, 1 fit per draw (10) at each intermediate rung.",
+   "failed_fits": "A failed fit stays visible as failed and is never replaced; the rung mean uses the completed fits and the count is reported."
+  },
+  "checkpoint_format": "safetensors without metadata (file bytes repeat exactly); metadata in a sidecar JSON. Earlier files are compared by tensor bytes."
+ },
+ "controls": {
+  "C1_persistence": "Latest bin mean x 0.1 s; new-load probability = the fit prevalence of the 12 earlier fit people (0.03725847908677051).",
+  "C2_unconditional": "The same prevalence and the person-weighted median impulse of the 12 earlier fit people.",
+  "C3_linear_trend": "Ordinary least squares line through the last three bin means placed at bin centres (t - 49.5, t - 29.5, t - 9.5 samples), integrated over t+1 to t+100 without clipping: 0.1 s x (intercept + slope x 50.5 samples); prevalence as C1.",
+  "C4_random_recurrent_readout": "Secondary. M1 with the convolution, GRU and shared cell frozen at their seeded initial values and only the output layer trained with the same recipe; N = 12 and N_max, 50 seeds each."
+ },
+ "secondary_arms": {
+  "S1_epoch_matched": "M1 with round(900 x rows_N / rows_12) updates at every rung (rows = impulse-supported training rows).",
+  "S2_force_only": "M1, M2 and M3 without EMG (EMG columns and masks set to absent; trees on own and other plate only) at every rung; reports the EMG gain per rung and the difference in differences between N_max and N = 12.",
+  "S3_capacity": "M1 at width 96, epoch-matched as S1, at every rung.",
+  "S4_fixed_example_budget": "M1, M2 and M3 at every rung above 12 on a hash subsample of training rows equal to rows_12: rank rows by sha256 of TAG + '|example-budget|' + N + '|' + d + '|' + subject + '|' + walk + '|' + tick + '|' + plate, keep the lowest.",
+  "S5_trees_compact_input": "Boosted trees on the compact columns of M2 (published comparator settings: 7 / 31 leaves, as M3) at every rung.",
+  "S6_earlier_emg_timing": "M1 and M2 at N = 12 and N_max with the EMG window ending 500 ms before issue in the same walk, force history unchanged; compared with contemporaneous inputs on the same rows (those with the earlier history valid).",
+  "S8_subgroups": "Descriptive: plate loaded or unloaded at issue (state built from samples through t), plate 1 or 2, ten probability reliability bins, distinct onsets.",
+  "S9_ranking": "Descriptive: ranking of all families, controls and frozen checkpoints by impulse MAE at each rung.",
+  "G8_variety": "At N_max, for M1 (50 seeds), M2 and M3: the 12 earlier people (3 walks each) plus all T people with one walk each (variety walk), against the 12 plus the first floor(T / 3) people of draw order 0 with three walks each (near-equal rows).",
+  "G9_tuned": "M3 leaves chosen from {7, 15, 31} per endpoint, and M2 penalty from {0.001, 0.01, 0.1, 1} (Ridge alpha; logistic C = 1 / penalty) per endpoint, by the 4 inner person folds of each fit's training people (lowest mean held-person error; ties: fewer leaves, larger penalty). Every rung and draw.",
+  "status": "Secondary arms are reported with intervals but are outside the Holm families and never change a primary label."
+ },
+ "budgets": {
+  "M1_updates": 900,
+  "M1_batch_rows": 128,
+  "M3_iterations": 128,
+  "S1_S3_updates": "round(900 x rows_N / rows_12)",
+  "fit_counts_at_Q_80": {
+   "M1_primary": 250,
+   "M1_all_arms_including_C4_S1_S2_S3_S4_S6_G8": 1450,
+   "trees_all_arms_including_G9": "about 550",
+   "ridge_logistic_all_arms": "about 650"
+  },
+  "measured_times": "M1 900 updates: 1.5-4 s on 1 thread. Trees: 4.6 s at 9,586 rows, about 52 s for 3 leaf settings x 2 endpoints at 48,000 rows.",
+  "compute": "About 4-8 core-hours in all; about 30-60 min wall on 12 single-thread lanes."
+ },
+ "seeds": {
+  "M1": "20261124 + j, j = 0..49 (see models.replicates); torch.manual_seed(seed); sampling generator seed + 300.",
+  "trees": "random_state 20261124.",
+  "bootstrap": "numpy.random.default_rng(20261127).integers(0, E_s, size=(10000, E_s)), drawn once for the impulse-scoreable people and once (fresh generator, same seed) for the event-scoreable people, with people in ascending archive-code order; each matrix is shared by every contrast and the trend test on that set.",
+  "hash_salts": "TAG-based, see allocation."
+ },
+ "metrics": {
+  "impulse": "Person-equal mean absolute error of signed impulse (N s) on the common impulse support.",
+  "event": "Person-equal Brier score of new-load probability on the common event support.",
+  "per_person": "For each person, the error of each replicate fit is computed with the published weights, then averaged over that rung's replicates (and draws) before people are averaged or resampled.",
+  "counts_reported": "People, walks, issue rows per plate, impulse and event support rows, positive rows, distinct onsets, sites (1), tasks (1)."
+ },
+ "uncertainty": {
+  "interval": "Paired bootstrap over scoreable evaluation people, 10,000 draws, percentile 95% intervals, for Delta and for the relative change (ratio computed within each draw).",
+  "p_value": "Two-sided: min(1, 2 x min(1 + #(Delta* >= 0), 1 + #(Delta* <= 0)) / 10,001).",
+  "sensitivity": "Hierarchical bootstrap over people and then replicates, reported beside the primary interval.",
+  "minimum_detectable_effect": "(1.95996 + 0.84162) x SD_i(d_i) / sqrt(E_s) / mean_i MAE_i(12), and the same with 2.39398 (Holm first step)."
+ },
+ "success_rule": {
+  "primary_family": "Three co-primary tests, impulse MAE on the full grid: M1, M2 and M3, Delta = MAE(N_max) - MAE(12). Holm adjustment at familywise 0.05.",
+  "labels_in_order": [
+   "HARMED: Holm-adjusted p < 0.05 and Delta > 0.",
+   "HELPED: Holm-adjusted p < 0.05, Delta < 0 and relative change <= -3%.",
+   "PRACTICALLY NO CHANGE: the 95% interval of the relative change lies inside (-3%, +3%).",
+   "INCONCLUSIVE: otherwise; reported with the minimum detectable effect."
+  ],
+  "threshold_reason": "3% is about twice the seed-to-seed spread of the published three-pass curve.",
+  "compact_model_claim": "A statement that the NeuroTranslate compact model gains from more people requires M1 to be HELPED.",
+  "brier_family": "The three Brier contrasts form a second Holm family (secondary) with the same labels.",
+  "descriptive_only": "Slope of rung means on log2 N, gain per doubling in the upper against the lower half, share of people improved.",
+  "floors": "Confirmatory impulse labels need at least 12 scoreable evaluation people; Brier labels need at least 10 with both event classes. Below a floor every result is descriptive. Assigned but unscoreable people are reported as assigned-unscoreable and count against the floors; MAE uses the scoreable people.",
+  "stated_in_advance": "M1's projected gain (about 3%) sits at the threshold; M1 may well end PRACTICALLY NO CHANGE or INCONCLUSIVE.",
+  "past_load_gate_first_test": "Outside the Holm family: F3 trainable-core past-load gate minus C1 persistence, impulse MAE, 95% interval, on the full grid and on the 24-position grid of its model card. Lower or higher error than persistence if the interval excludes 0; otherwise no detectable difference.",
+  "frozen_and_controls": "Every frozen checkpoint and control is reported against N = 12 and N_max with paired intervals (descriptive).",
+  "report_everything": "Every predeclared result is reported, wins and losses alike."
+ },
+ "sealed_predictions": {
+  "P0_planning_prior": {
+   "source": "Fit-people planning study (12 consumed fit people; 3, 6 or 9 training, 3 held out; 288 three-pass fits).",
+   "projected_relative_gain_12_to_49": {
+    "M1": -0.029,
+    "M2": -0.028,
+    "M3": -0.097
+   },
+   "form": "L + a / sqrt(N) fitted to the 3, 6 and 9 person means.",
+   "caveat": "The planning trees used the compact input, not the published tree input, so the M3 prior is approximate.",
+   "role": "Prior expectation only."
+  },
+  "P1_pool_tail_curve": "Only if T >= 32. Sealed with C3, before any evaluation byte. The 12-person and intermediate-rung fits of each draw are scored on that draw's pool tail; the trend forms below are fitted to the draw-averaged curve and predict the relative gain at N_max.",
+  "P2_trend_prediction": "After all forecasts are sealed (C4): stage S-b scores the rungs below N_max only; the trend forms are fitted to those rung means; the point predictions and the predicted N_max value in every bootstrap draw are written to P2-TREND-PREDICTION.json and committed (C5). Only then does stage S-c score N_max, the frozen checkpoints and the controls. The S-c scorer refuses to run unless the committed P2 file's sha256 is present."
+ },
+ "trend_test": {
+  "needs": "At least three rungs below N_max; otherwise no trend test and the curve is descriptive.",
+  "primary_form": "MAE(N) = L + a / sqrt(N), least squares on rung means, L >= 0 (if the free fit gives L < 0, L = 0 and a is refitted).",
+  "competitors": [
+   "MAE(N) = c + b log2 N (least squares)",
+   "carry-forward: MAE(N_max) = MAE at the second-largest rung"
+  ],
+  "families": [
+   "M1",
+   "M2",
+   "M3"
+  ],
+  "interval": "Joint person bootstrap with the shared index matrix: in each draw, refit the form on the resampled rung means and take actual minus predicted at N_max on the same resample; 95% percentile interval.",
+  "labels": {
+   "held": "interval contains 0",
+   "faster": "entirely below 0 (lower error than predicted)",
+   "slower": "entirely above 0"
+  },
+  "also_reported": "Each form's absolute miss and whether the primary form beat carry-forward.",
+  "code": "trend.py, deterministic, committed in C1b."
+ },
+ "power": {
+  "planning": {
+   "M1_seed_SD_per_person_Ns": 0.146,
+   "M1_person_SD_of_paired_change_after_seed_noise_Ns": 0.19,
+   "M1_projected_gain_12_to_N_max": "about 3%"
+  },
+  "minimum_detectable_relative_effect_80pct_two_sided_005_at_person_SD_6pct": {
+   "E=12": 0.049,
+   "E=16": 0.042,
+   "E=20": 0.038,
+   "E=24": 0.034
+  },
+  "reading": "M3 (projected about 10%) is well powered; M1 (about 3%) sits at the decision threshold."
+ },
+ "engineering_gates": {
+  "when": "Stage S0, in our own runtimes, on the 12 earlier fit people only, before any new byte is read. Gates G0-G2 and the tree check already passed in design scratch; all are re-run.",
+  "G0_training_replay": "Our training code on the encoded 12-person cache reproduces the sealed three-pass checkpoints for seeds 20261124-26 tensor for tensor, with the same last-batch loss.",
+  "G1_feature_port": "Our C3D reader and feature port reproduce the 9,946 issue rows of the 36 fit walks bit for bit (9,586 impulse, 9,150 event and 324 positive rows).",
+  "G2_end_to_end": "C3D to encoded cache (bit-identical to the 12-person cache on every key) to checkpoint: tensor-identical.",
+  "trees_R0": "M3 at N = 12 gives predictions bit-identical to the sealed tree file; M2 and S5 at N = 12 equal the sealed 12-person comparator file's ridge, logistic and tree predictions.",
+  "G3_past_only": "Every sample after t replaced with noise on fit walks: every input and forecast unchanged for every method. One-row and batched issue agree within 1e-4 N s and 1e-6 probability (float32 rounding); forecasts are always issued in one fixed batch order, so they repeat bit for bit (F5: one tick per call by design).",
+  "F4_refit": "Refitting the 40 common-six candidates with the earlier baseline method (ridge in closed form, logistic by Newton steps) reproduces common-six.npz array for array.",
+  "F2_onnx": "Agreement of F2 with M3 at N = 12 is reported (see frozen_checkpoints.F2_published_trees.check); not a stop rule.",
+  "reload": "Every saved checkpoint is reloaded and its forecasts recomputed before sealing.",
+  "whitelist_reader": "The reader decodes only the whitelisted parameters (qualification) for every person, including training people.",
+  "on_failure": "Stop before D1 (or before D2 for checks that need it) and report."
+ },
+ "stop_rules": [
+  "No protocol change after P1 or after any interim number; a change needs a new version, a separate admission and new evaluation people.",
+  "Training walks with no supported rows are dropped and counted; nothing is substituted after qualification.",
+  "Evaluation people who turn out unscoreable stay in the denominator as assigned-unscoreable.",
+  "Failed replicate fits stay visible and are never replaced.",
+  "A failed download check (ETag, version, size or CRC-32) halts the stage."
+ ],
+ "stages": [
+  {
+   "id": "S0",
+   "data": "none new",
+   "work": "Build runtimes, write and test code on the 12 fit people, re-run the gates."
+  },
+  {
+   "id": "C1",
+   "commit": "This protocol, POOL.json, ORDER.json, allocate.py. Separate reviewer's admission; the lead pushes before any download."
+  },
+  {
+   "id": "C1b",
+   "commit": "Code (fetch, qualify, extract, threepass, trees, linear, fit, issue, score, trend) with gate receipts; reviewed against this protocol before D1."
+  },
+  {
+   "id": "D1",
+   "data": "Header probe, about 240-248 ranged reads."
+  },
+  {
+   "id": "C2",
+   "commit": "QUALIFICATION.json and ALLOCATION.json; reviewed before any sample byte."
+  },
+  {
+   "id": "D2",
+   "data": "Training-pool walks."
+  },
+  {
+   "id": "fit",
+   "work": "All fits, F4 penalty choice, P1."
+  },
+  {
+   "id": "C3",
+   "commit": "FIT-COMPLETE.json: every checkpoint and tree file sha256 (tensor hashes), F4 penalties, P1."
+  },
+  {
+   "id": "D3",
+   "data": "Evaluation-group walks."
+  },
+  {
+   "id": "issue",
+   "work": "History-only packets; forecasts for every method; the N_max forecasts in a separate file."
+  },
+  {
+   "id": "C4",
+   "commit": "FORECASTS-SEAL.json: sha256 of every private forecast file."
+  },
+  {
+   "id": "S-b",
+   "work": "Score rungs below N_max; fit trends."
+  },
+  {
+   "id": "C5",
+   "commit": "P2-TREND-PREDICTION.json."
+  },
+  {
+   "id": "S-c",
+   "work": "Score N_max, frozen checkpoints and controls; independent replay of every aggregate and a sample of rows per plate."
+  },
+  {
+   "id": "C6",
+   "commit": "Results in a Technical and a Simple edition (draft, rewrite, separate reader)."
+  }
+ ],
+ "custody": {
+  "issue_packets": "The extractor writes inputs (keys, histories, input masks) and targets (labels, impulses, target masks) to separate private files. The issuer reads inputs only. A separate scorer process joins targets.",
+  "largest_rung": "N_max forecasts sit in their own file, which the S-b scorer cannot read.",
+  "record_chain": [
+   "LOCK",
+   "ATTEMPT",
+   "checkpoint",
+   "reload equality",
+   "RESULT",
+   "READBACK",
+   "SCORE-LOCK"
+  ],
+  "pushes": "The lead pushes C1, C2, C3 and C5 before the next stage starts, so each seal has a public time."
+ },
+ "downloads": {
+  "D1_header_probe": {
+   "requests": "240 (up to 248 with substitution walks), plus continuation requests if needed",
+   "bytes": "about 2.1 MB, at most 16.4 MB"
+  },
+  "D2_training_pool": {
+   "walks": "3 x T",
+   "bytes": "about 100-130 MB (about 0.95 MB per walk; about 106 MB at T = 37)"
+  },
+  "D3_evaluation_group": {
+   "walks": "3 x E",
+   "bytes": "about 34-68 MB (about 57 MB at E = 20)"
+  },
+  "never": "Physics-source and physics-supplement members, static trials, SUBJ099, the earlier validation and test people, the stroke cohort.",
+  "method": "Each request starts at the stable file URL (https://ndownloader.figshare.com/files/42450060), takes a fresh redirect (the signed storage URL lives about 10 s) and makes one ranged GET from the member's local header to the next local header. ETag and storage version must equal the pins; whole members are checked for size and CRC-32 against the central directory and their sha256 is recorded.",
+  "politeness": "At most 1 request per second, paced by monotonic scheduling inside the downloader; on 429 or 5xx, one retry after 60 s, then halt.",
+  "receipts": "Private receipts record the stable URL, storage host and path, version, ETag, range, bytes, CRC-32 and sha256; signed query parameters are redacted.",
+  "time": "About 10 minutes in total."
+ },
+ "runtimes": {
+  "venv_A": "CPython 3.13.15, torch 2.14.1+cpu, numpy 2.5.3, safetensors 0.8.0 (M1, C4, S1, S3, F1).",
+  "venv_B": "CPython 3.12.14, numpy 2.5.5, scikit-learn 1.9.1, joblib 1.6.0, onnxruntime 1.32.0 (M2, M3, S5, G9, F2, F3, F4, scoring).",
+  "threads": "Exactly 1 thread per fit (2 threads change the weights; another torch build differs by up to 0.22 per weight).",
+  "cpus": "At most 12 single-thread lanes on CPUs 20-31, control on CPUs 16-19; at most 16 threads in total.",
+  "fallback": "The other maintainer's interpreters only read-only with -I -B, if a pinned build cannot be installed.",
+  "disk": "Under 0.7 GB in the private folder."
+ },
+ "rights": {
+  "data": "Van Criekinge recordings CC0 1.0; article CC BY 4.0; both credited.",
+  "ladder_weights": "Derived only from Van Criekinge CC0 recordings; released under CC0 1.0 with a NOTICE crediting the dataset and the article and describing our processing.",
+  "scored_only": {
+   "F1": "inherits Izmir data (CC BY 4.0, 10.48623/aperta.286865)",
+   "F3": "inherits worm (Zenodo 19388374) and SLEAP lineage",
+   "F5": "Apache-2.0 base plus its acceptable-use policy"
+  },
+  "never_in_ladder_weights": "Izmir, MoVi, the worm data, SLEAP, MuscleMimic and MyoGen material.",
+  "private": "C3D files, arrays, forecasts and targets stay in this track's private folder and are never committed."
+ },
+ "publication": {
+  "now": [
+   "PROTOCOL.md",
+   "PROTOCOL.json",
+   "allocate.py",
+   "POOL.json",
+   "ORDER.json"
+  ],
+  "C1b": "Code and gate receipts.",
+  "C2": [
+   "QUALIFICATION.json",
+   "ALLOCATION.json"
+  ],
+  "C3": [
+   "FIT-COMPLETE.json"
+  ],
+  "C4": [
+   "FORECASTS-SEAL.json"
+  ],
+  "C5": [
+   "P2-TREND-PREDICTION.json"
+  ],
+  "C6": [
+   "RESULTS.json (every predeclared number, intervals, counts, per-person errors by archive code)",
+   "Technical and Simple editions of the results",
+   "M1 N_max checkpoint (seed 20261124) without metadata plus sidecar, M3 N_max trees as ONNX checked against scikit-learn, M2 N_max coefficients as .npz, under CC0 with NOTICE",
+   "Redacted download receipts (no signed URLs)"
+  ]
+ },
+ "etas": {
+  "assumption": "The owner gives the download lease and admission on 28 November 2026.",
+  "S0_and_C1b": "28 November (about 0.5 day).",
+  "D1_C2": "28-29 November (minutes of download, a few hours of review).",
+  "D2_fits_C3": "29 November (about 10 min download, 30-60 min compute).",
+  "D3_issue_C4_Sb_C5_Sc": "29-30 November (minutes of download, under 1 h compute).",
+  "results_editions_and_reader": "30 November - 1 December 2026.",
+  "F5_if_admitted": "Add 3-6 h, run alone.",
+  "wall_time": "About 2 days after admission, set by the review gates."
+ },
+ "owner_decisions_pending": [
+  "A task lease and scientific admission for the downloads from this CC0 source after C1: header probe about 2-16 MB, training pool about 100-130 MB, evaluation group about 34-68 MB.",
+  "Agreement to spend the last fresh healthy Van Criekinge pool (80 people) on this ladder, the physics-source group and the physics supplement. Afterwards only the earlier 12-person test and the stroke cohort remain unopened.",
+  "SUBJ099: keep it unopened (recommended, default here) or include it.",
+  "Optional scoring of the Research Edition (F5): about 50-55 GB RAM and 3-6 h, alone.",
+  "Courtesy confirmation that this track is the sole allocation writer for the 80 never-assigned people; the earlier roster's owner has the source line and its roster awaits admission."
+ ],
+ "departures_from_reviewed_designs": [
+  "Allocation salt from the sha256 of this file; the earlier previewed literal-tag order is void.",
+  "Header probe fenced by a parameter whitelist; about 2 MB instead of 16-25 MB.",
+  "Reproduction gates compare tensor bytes, not file hashes.",
+  "The 12 earlier fit walks are read in place, not re-downloaded.",
+  "Physics-source group drawn from six-name people; incomplete-name people go to a physics-supplement role.",
+  "Per-rung tuning of trees and ridge is secondary (G9); the primary analysis uses fixed published settings.",
+  "50 replicate fits per rung; E up to 24; three walks per person.",
+  "Trees on the published tree inputs are a primary family (M3); trees on the compact input are secondary (S5).",
+  "All four 0.0 expanded checkpoints are scored; the trainable past-load gate against persistence is its named first test.",
+  "Trend interval by joint person bootstrap.",
+  "The replicate-ensemble arm (S7) is not run."
+ ]
+}

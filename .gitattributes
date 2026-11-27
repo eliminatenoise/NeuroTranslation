@@ -1,6 +1,8 @@
 # Keep downloaded launcher bytes/checksums stable across operating systems.
 docs/launchers/** -text
 docs/START.html -text
+# Keep the walking-force-scale protocol files byte-for-byte: the allocation salt is the sha256 of PROTOCOL.json.
+models/walking-force-scale/** -text
 # Keep the grip-force browser source and offline package inputs byte-for-byte.
 docs/grip-force/** -text
 benchmarks/way-grip-force/browser-release/** -text
