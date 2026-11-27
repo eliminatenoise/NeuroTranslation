@@ -1,8 +1,8 @@
 # NeuroTranslation and Brain2Body: the four papers
 
-*NeuroTranslation: A New Paradigm In Brain-Body Mapping.* asks what a recording of the brain or of a muscle adds to a forecast of a movement that already knows how the body has just been moving, and reports every study of the repository's numbered table.
+NeuroTranslation tests how much brain and muscle recordings add to forecasts that already use recent movement. It reports all {{ n_in_papers() }} studies in the numbered table. Chapter 7 adds walking forecasts and a separate Next Neuron Prediction test on one rat recording.
 
-*Brain2Body: The Next Generation In Body-Brain Interfacing.* asks what a person keeps when a machine guides their hand through a skill and then stops. It is a proposal: it reports no experiment on that question.
+*Brain2Body: The Next Generation In Body-Brain Interfacing.* proposes testing what a person retains after a machine stops guiding their hand through a skill. The paper reports no experiment on skill retention.
 
 Each is written twice: a Technical edition, and a Simple English edition that explains the same things in ordinary words. Start with a Simple English edition.
 
@@ -11,7 +11,7 @@ Each is written twice: a Technical edition, and a Simple English edition that ex
 | NeuroTranslation | [PDF, {{ pages(0) }} pages](neurotranslation-technical.pdf) | [PDF, {{ pages(1) }} pages](neurotranslation-explained.pdf) |
 | Brain2Body | [PDF, {{ pages(2) }} pages](brain2body-article.pdf) | [PDF, {{ pages(3) }} pages](brain2body-simple-english.pdf) |
 
-These are working drafts, built on {{ built_date() }}. Inside the project they have been read by checkers who had not written them, one for every number and statement against its source, the other for the writing: the whole of two editions, then every change made after that, the licences included. Every fix in this edition has been checked; the last few were made in the words the last check gave. Nobody outside the project has reviewed them.
+These papers are working drafts. Project reviewers checked the results against their sources and read the current text for clarity. They have not been peer reviewed.
 
 ## Where each study is
 
