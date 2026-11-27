@@ -1,16 +1,17 @@
 {
  "schema": "neurotranslate-0.2-pooled-encoder-protocol",
  "protocol_version": 1,
- "revision": 2,
- "revision_note": "Revision 2 records the lead's decisions on the seven items revision 1 left to the owner and applies the minor points of the separate admission review of revision 1 (commit 17f956b17b23bcc27d30a16d417d2ade23310da0). No evaluation value had been decoded when either revision was written.",
+ "revision": 3,
+ "revision_note": "Revision 3 records the lead's decisions of 28 November 2026, made after the second review of the training data: the rule that a source enters a D arm only with its whole share of windows, the values computed at step P2 and their limits, the departures of the counted data from what revision 2 expected, the record corrections and the process incidents of steps P1 and P2 (revision_3_changes). Revision 2 is commit 554c59c219e113e8d8746f7120b5a5699a98188e. No training run had started and no evaluation byte had been read when revision 3 was written; the only evaluation bytes ever transferred are the compressed bytes of the two design-stage range reads in state_at_writing, which were never inflated.",
  "revision_1_commit": "17f956b17b23bcc27d30a16d417d2ade23310da0",
- "date": "2026-11-27",
+ "revision_2_commit": "554c59c219e113e8d8746f7120b5a5699a98188e",
+ "date": "2026-11-28",
  "editions": {
   "technical": "PROTOCOL.md",
-  "simple": "written with the results"
+  "simple": "PROTOCOL-SIMPLE.md"
  },
  "companion_files": {
-  "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+  "PROTOCOL.md": "78de1316935ad0c15fae98f9542838b00074046edc11e4aa00b5d9b8386c9aea",
   "allocate.py": "0049bcc2ecd56314056afc361cafceb5b92348d96229af29c3fe01c5f9a105d0",
   "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a"
  },
@@ -1141,7 +1142,9 @@
   "budget": "U = 40 x W_max / 128 updates for every arm (same steps x batch); effective passes reported",
   "W_max": "the smallest number of unique inner-training windows in any Q anchor, rounded down to a power of 2 (computed at P2)",
   "Q_arms": "anchors Gait120, ds003739, Ofner and W-track; levels W_max/16, W_max/4, W_max",
-  "D_arms": "k in {2, 4, 8} sources, 3 hash-ordered draws each, from sources with at least W_max/8 inner-training windows; each source gives W_max/k windows; D_all uses every eligible source",
+  "D_arms": "k in {2, 4, 8} sources, 3 hash-ordered draws each; a source enters a k-source arm only if it has at least W_max/k unique inner-training windows, and each source of the arm gives W_max/k unique windows, so every D arm holds exactly W_max unique windows (D_arm_rule); D_all takes floor(W_max / n) unique windows from each of the n sources with at least W_max/8",
+  "D_arm_rule": "A source is eligible for the D arms if it has at least W_max/8 unique inner-training windows. A source enters a k-source arm (k in {2, 4, 8}) only if it has at least W_max/k unique inner-training windows. For each k and each draw, the order of that draw in D-ARM-ORDERS.json is walked from the top: a source that is not eligible, or that has fewer than W_max/k windows (short for this k), is skipped, and the first k sources that remain form the arm. Each source of the arm gives W_max/k unique windows: the first W_max/k of its inner-training windows in the fixed hash order (the window order of ALLOCATION.json q_window_rule, applied to that source). A skipped source stays available to the arms with a larger k and to D_all. D_all takes floor(W_max / n) unique windows from each of the n eligible sources, in the same window order.",
+  "D_arm_rule_reason": "Every D arm then holds exactly W_max unique windows, as each Q arm at W_max does. Under the revision 2 wording a source was eligible at W_max/8 windows but owed W_max/k, so a source between the two (area2, 458 windows) was drawn into arms whose share it could not fill. Repeating its windows, or running the arm short, would mix quantity with diversity, which the study separates.",
   "P_arms": "Gait120 with 3, 13 or 52 inner-training people and ds003739 with 2, 4 or 14, at W_P windows",
   "seeds": [
    20261127,
@@ -1150,7 +1153,270 @@
   ],
   "runs": "Q 36 + D 27 + D_all 3 + P 18 = 84 runs",
   "sealed_prediction": "before any W_max run, a power law through the inner-validation selection scores of the W_max/16 and W_max/4 levels of each Q anchor predicts its W_max score; the prediction file is hashed and its sha256 recorded before the W_max runs start",
-  "scoring": "every arm is scored on the inner-validation units (in distribution) before the freeze and on E1 and E2 after it, with the standard adapters"
+  "scoring": "every arm is scored on the inner-validation units (in distribution) before the freeze and on E1 and E2 after it, with the standard adapters",
+  "computed_at_P2": {
+   "source": "MIXTURE-MANIFEST.json (quantity_diversity) and D-ARM-ORDERS.json, counted at step P2 from the training tokens (227 shards). check_d_arm_orders.py recomputes the arms from the published orders and the counts and compares them with this block.",
+   "inner_training_windows_of_the_Q_anchors": {
+    "gait120": 2072,
+    "ds003739": 29004,
+    "ofner": 13532,
+    "wtrack": 51772
+   },
+   "W_max": 2048,
+   "W_max_set_by": "gait120",
+   "W_max_basis": {
+    "gait120_inner_training_windows": 2072,
+    "from_step_segments": 1923,
+    "from_static_trials": 149,
+    "static_trial_windows_hold": "markers only (no EMG, no force)",
+    "why_static_trials_count": "static trials are training-role recordings of the 52 inner-training people and were counted in the first count as well, so the rule is applied as written",
+    "W_max_from_step_segments_alone": 1024,
+    "margin_over_W_max_windows": 24,
+    "Q_arm_at_W_max": "uses 2,048 of the 2,072 windows",
+    "report_rule": "every Q-arm report gives the number of static-trial windows drawn at each level"
+   },
+   "Q_levels_windows": [
+    128,
+    512,
+    2048
+   ],
+   "updates_per_arm_U": 640,
+   "inner_training_windows_by_source": {
+    "area2": 458,
+    "cemhsey": 200,
+    "ds003739": 29004,
+    "gait120": 2072,
+    "hygrip": 4527,
+    "hyser": 1800,
+    "izmir": 31,
+    "katmah": 4664,
+    "moreira": 1982,
+    "ofner": 13532,
+    "sabes": 1281,
+    "schreiber_moissenet": 897,
+    "van_criekinge": 52,
+    "wtrack": 51772
+   },
+   "D_arm_eligibility_threshold_windows": 256,
+   "D_arm_eligible_sources": [
+    "area2",
+    "ds003739",
+    "gait120",
+    "hygrip",
+    "hyser",
+    "katmah",
+    "moreira",
+    "ofner",
+    "sabes",
+    "schreiber_moissenet",
+    "wtrack"
+   ],
+   "D_arm_sources_not_eligible": {
+    "cemhsey": 200,
+    "van_criekinge": 52,
+    "izmir": 31
+   },
+   "D_arm_windows_per_source": {
+    "2": 1024,
+    "4": 512,
+    "8": 256
+   },
+   "D_arm_sources_with_a_whole_share": {
+    "2": [
+     "ds003739",
+     "gait120",
+     "hygrip",
+     "hyser",
+     "katmah",
+     "moreira",
+     "ofner",
+     "sabes",
+     "wtrack"
+    ],
+    "4": [
+     "ds003739",
+     "gait120",
+     "hygrip",
+     "hyser",
+     "katmah",
+     "moreira",
+     "ofner",
+     "sabes",
+     "schreiber_moissenet",
+     "wtrack"
+    ],
+    "8": [
+     "area2",
+     "ds003739",
+     "gait120",
+     "hygrip",
+     "hyser",
+     "katmah",
+     "moreira",
+     "ofner",
+     "sabes",
+     "schreiber_moissenet",
+     "wtrack"
+    ]
+   },
+   "D_arms": {
+    "k2|draw0": [
+     "ofner",
+     "katmah"
+    ],
+    "k2|draw1": [
+     "sabes",
+     "ofner"
+    ],
+    "k2|draw2": [
+     "hygrip",
+     "katmah"
+    ],
+    "k4|draw0": [
+     "ds003739",
+     "katmah",
+     "gait120",
+     "schreiber_moissenet"
+    ],
+    "k4|draw1": [
+     "ofner",
+     "gait120",
+     "ds003739",
+     "hygrip"
+    ],
+    "k4|draw2": [
+     "ds003739",
+     "ofner",
+     "hyser",
+     "sabes"
+    ],
+    "k8|draw0": [
+     "sabes",
+     "area2",
+     "gait120",
+     "hyser",
+     "moreira",
+     "ofner",
+     "ds003739",
+     "wtrack"
+    ],
+    "k8|draw1": [
+     "ofner",
+     "wtrack",
+     "moreira",
+     "schreiber_moissenet",
+     "hyser",
+     "sabes",
+     "ds003739",
+     "gait120"
+    ],
+    "k8|draw2": [
+     "sabes",
+     "ofner",
+     "katmah",
+     "schreiber_moissenet",
+     "wtrack",
+     "area2",
+     "ds003739",
+     "hyser"
+    ]
+   },
+   "D_arms_changed_from_the_revision_2_rule": {
+    "k2|draw1": {
+     "revision_2_rule": [
+      "area2",
+      "sabes"
+     ],
+     "revision_3_rule": [
+      "sabes",
+      "ofner"
+     ]
+    },
+    "k2|draw2": {
+     "revision_2_rule": [
+      "area2",
+      "hygrip"
+     ],
+     "revision_3_rule": [
+      "hygrip",
+      "katmah"
+     ]
+    },
+    "k4|draw0": {
+     "revision_2_rule": [
+      "ds003739",
+      "katmah",
+      "gait120",
+      "area2"
+     ],
+     "revision_3_rule": [
+      "ds003739",
+      "katmah",
+      "gait120",
+      "schreiber_moissenet"
+     ]
+    }
+   },
+   "D_all": {
+    "sources": [
+     "area2",
+     "ds003739",
+     "gait120",
+     "hygrip",
+     "hyser",
+     "katmah",
+     "moreira",
+     "ofner",
+     "sabes",
+     "schreiber_moissenet",
+     "wtrack"
+    ],
+    "windows_per_source": 186,
+    "unique_windows": 2046,
+    "windows_short_of_W_max": 2
+   },
+   "W_P": {
+    "gait120": 64,
+    "ds003739": 512
+   },
+   "W_P_basis": {
+    "rule": "the largest power of 2 not above W_max/4 and the windows of the smallest level",
+    "gait120": {
+     "levels_people": [
+      3,
+      13,
+      52
+     ],
+     "windows_per_level": {
+      "3": 105,
+      "13": 488,
+      "52": 2072
+     },
+     "set_by": "the smallest level: 3 people have 105 windows, and the largest power of 2 not above 105 is 64"
+    },
+    "ds003739": {
+     "levels_people": [
+      2,
+      4,
+      14
+     ],
+     "windows_per_level": {
+      "2": 4188,
+      "4": 8284,
+      "14": 29004
+     },
+     "set_by": "W_max/4 = 512; the smallest level has 4,188 windows"
+    }
+   }
+  },
+  "limits": [
+   "W_max = 2,048 rests on Gait120 by a margin of 24 windows. 149 of its 2,072 inner-training windows come from static trials, which hold markers only (no EMG, no force); its step segments alone give 1,923 windows, which would round down to 1,024. The Gait120 Q arm at W_max uses 2,048 of the 2,072 windows, and every Q-arm report gives the number of static-trial windows drawn at each level.",
+   "The pool of sources differs with k. The k = 2 arms draw only from the 9 sources with at least 1,024 inner-training windows, the k = 4 arms from 10 (Schreiber-Moissenet added) and the k = 8 arms from all 11 eligible sources (area2 added). Small sources therefore appear only in the wider arms, so a difference between k levels can also reflect which sources were available.",
+   "D_all has 186 unique windows from each of the 11 eligible sources, 2,046 in total, 2 fewer than W_max, with the same U = 640 updates. H2 compares this arm with the Q arms at W_max (2,048 unique windows).",
+   "W_P is 64 windows for the Gait120 P arms, because the 3-person level has only 105 windows. That small budget is a limit of the Gait120 P arms; the rule is not changed. W_P is 512 for ds003739.",
+   "Cemhsey (200 inner-training windows), Van Criekinge (52) and Izmir (31) have fewer than W_max/8 = 256. They enter no D arm and not D_all, and stay in the main training mixture.",
+   "1,383 of the 3,761 Gait120 step segments are shorter than one 1.2 s window (the median segment lasts 1.26 s). They give training steps but no counted window, so the Gait120 window count understates its training steps."
+  ]
  },
  "leak_checks": [
   "subject-identifier disjointness between every training list and every evaluation list",
@@ -1317,6 +1583,20 @@
    "7. The owner's 27 November instruction is the task lease; the separate reviewer's admission and the lead's commit of this protocol are the scientific admission."
   ]
  },
+ "revision_3_changes": [
+  "D-arm rule (lead decision C): a source enters a k-source D arm only if it has at least W_max/k unique inner-training windows. The draw's order in D-ARM-ORDERS.json is walked from the top, sources below W_max/8 (not eligible) and below W_max/k (short for this k) are skipped, and the first k that remain form the arm (quantity_diversity.D_arm_rule). Revision 2 took the first k sources with at least W_max/8 windows, which drew area2 (458 windows) into two k = 2 arms (share 1,024) and one k = 4 arm (share 512). The nine orders do not change. Three arms change: k2|draw1 is sabes, ofner (was area2, sabes); k2|draw2 is hygrip, katmah (was area2, hygrip); k4|draw0 is ds003739, katmah, gait120, schreiber_moissenet (was ds003739, katmah, gait120, area2). ALLOCATION.json is not edited: the last part of its d_arms rule, and allocation.d_arm_rule in this file, are replaced by quantity_diversity.D_arm_rule.",
+  "D_all (decision C): the 11 eligible sources give floor(2,048 / 11) = 186 unique windows each, 2,046 in total, 2 fewer than W_max; the 2 missing windows are stated as a limit.",
+  "Computed values (decisions B and D) are recorded in quantity_diversity.computed_at_P2: W_max 2,048 from Gait120's 2,072 inner-training windows (1,923 from step segments, 149 from static trials); Q levels 128, 512 and 2,048 windows; U = 640 updates; W_P 64 for Gait120 and 512 for ds003739. W_max and W_P are applied as the rules give them; their limits are in quantity_diversity.limits.",
+  "Departures of the counted data from what revision 2 expected (decision B): the median Gait120 step segment lasts 1.26 s (0.86 to 3.27 s, 43 to 163 steps), not 1.5-1.65 s; 1,383 of the 3,761 segments are shorter than one 1.2 s window, so they give training steps but no counted window; Gait120 has 2,072 inner-training windows, not about 3,000. 10 segments hold more than 128 steps, where revision 2 expected at most 83; the E1 pass-length rule is not changed. The Gait120 unit is one recording per author step segment (3,761) plus one static trial per person (66). architecture.short_segments, precision, the padding entry of time_estimates and the eta of step P5 keep their revision 2 wording, which this entry supersedes.",
+  "The mixture as counted at step P2 (MIXTURE-MANIFEST.json): 14 qualified sources, 227 individuals, 6,057 recordings, 8,312,952 unique steps and 135,840 windows, of which 112,272 are inner-training windows. The time estimates assumed 16 million steps inside a design range of 8 to 30 million; they are not recomputed in this revision. The padded share of rows at each context length is in MIXTURE-MANIFEST.json (padded_share): 2.1%, 4.3%, 10.6% and 22.5% over all qualified sources at T = 64, 128, 256 and 512, and 28.7%, 48.5%, 73.7% and 86.9% for Gait120. Area2 is admitted with its 290 fitting and configuration trials. FALCON M1 is not admitted (Q2 role: no held-in-calib day is free). The Ofner arm and glove tokens are delayed by one 20 ms step, because the acquisition time of each 64 Hz reading inside its 8 ticks of the 512 Hz clock is not documented. Katmah enters as three separate acquisitions that are never paired within a window: EMG envelope (derived), IMU joint angles (derived by the Xsens MVN model) and treadmill force plates (measured). The wave lists of data_sources keep their revision 2 wording.",
+  "Process incidents acknowledged (decision A). Gait120 was downloaded a third time (262 ranges, 427,525,976 B) although a re-cut from the stored shards was possible, and the reason was logged afterwards; the download holds only the 66 development people, and the Gait120 training tokens are built from it. Ofner runs 4-10 were requested again (30 whole files, 2,720,902,568 B, and 23,068,672 B of a 31st) although the decision said without a new download; the fetch was stopped and no token comes from it. Both cover training units only and cannot be undone. They are stated in the results in both editions. From revision 3 no step downloads anything until the freeze (step P8), and a repeated download needs its reason logged first.",
+  "Process incidents of steps P1 and P2 recorded earlier, restated here. A metadata probe of the W-track JS14 file transferred 59,424 B that hold the last 2,476 stored position rows of the file, which lie after the JS14 cut (the start of trip 79); they were never decoded, never written to disk and discarded, and no token comes from them. Which trips those rows belong to is not established, because their timestamps were not read. The area2 boundary search read 408 single spike times at or after the cut at 1,809.676 s; each was compared with the cut and discarded, no token comes from them, and the reader now stops at the first value at or after the cut. Two processes sent 6 requests to the figshare API in about 5 s without a refusal; requests are now paced per host across all processes. None of the three touched an evaluation set of this protocol.",
+  "Record corrections (decision E): four manifest parts (area2, ds003739, sabes, wtrack) use the current field_storage wording. The Gait120 Q4 field steps_inside_emg_span is renamed segment_frames_inside_trial_frames, for what it checks. 16 of 244,423 Gait120 step-segment steps have no EMG token (S063_StandToSit_T02_S01, the last 15 of 90 steps; S107_SlopeDescent_T04_S01, the first step). 1,505 consecutive Gait120 segment pairs share one boundary frame, and 748 of those frames are tokenised in both recordings; both recordings belong to the same person, so nothing crosses a fold.",
+  "Which revision governed which step (decision E): revision 1 for the Katmah force-plate download and the first Gait120 pass; revision 2 for the rest of step P1 and all of step P2; revision 3 from step P3. Revision 1 is commit c0e522fcb45183ed98cf54a86af6dc9e8b0fb9ac on the published branch; 17f956b17b23bcc27d30a16d417d2ade23310da0, as revision_1_commit and the download records name it, is the same commit before that branch was rebased. Revision 2 is commit 554c59c219e113e8d8746f7120b5a5699a98188e (7d09f33101f78e79bd42dbda84722a4203f7c1df before the rebase).",
+  "Training data (decision F): training reads the 227 shards whose digests are in the TOKENS.json files that the second data review checked; MIXTURE-MANIFEST.json records the sha256 of each source's shard list. The training code is moved onto the data branch by the lead before any run. The copy of the Ofner shards from before the delay is deleted once revision 3 is admitted.",
+  "Editions: the Simple edition of this protocol is PROTOCOL-SIMPLE.md (editions.simple), written on 27 November 2026 after revision 2.",
+  "State: no training run had started and no evaluation byte had been read when revision 3 was written. Any further change needs a new revision and a separate admission."
+ ],
  "revision_2_changes": [
   "E2 scores AJILE12 participants 03-07 only (pass 4 of 5; floor 4 of 5 with at least 50 eligible windows); ALLOCATION.json lists no asset of participants 08-12.",
   "E4 and every IBL use are dropped; H1 = E1 AND E2; the composite, the quantity-versus-diversity scoring and the Q anchors no longer mention E4 or IBL; allocate.py no longer computes an IBL lab order.",
