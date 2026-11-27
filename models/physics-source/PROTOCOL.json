@@ -1,0 +1,1913 @@
+{
+ "schema": "physics-source-protocol",
+ "protocol_version": 1,
+ "date": "2026-11-27",
+ "editions": {
+  "technical": "PROTOCOL.md",
+  "simple": "written with the results"
+ },
+ "companion_files": {
+  "PROTOCOL.md": "a8a575d3a97a199967a653617e647f34aa4cf60c87d65c2ac87501a46fc499ef",
+  "allocate.py": "1182dd769145d2ab7f7e41528721e8eb608ecdcc96a6c874833639edefd8b558",
+  "ALLOCATION.json": "295b01b51bf3dcad7eafe0dbf52dc11814e5bcc90499597994aa14d2c7594d21"
+ },
+ "question": "Does simulated musculoskeletal walking from many simulated bodies, used as pre-training or mixed into training, lower the per-plate impulse forecast error for measured people never used before, compared with the same model trained on measured walks only, with the same update and tuning budgets?",
+ "claim_limits": [
+  "Healthy adults of one public cohort walking overground in one laboratory; 100 ms ahead; four force plates.",
+  "No claim of generalisation to every body, clinical gait or other tasks.",
+  "Simulated, measured and derived values are labelled apart in files, model inputs and reports.",
+  "Surface EMG is not a nerve recording.",
+  "People, walks, traversals, issues, plate rows and onset events are counted separately; simulated bodies, walks and traversals separately from measured ones."
+ ],
+ "state_at_writing": {
+  "evaluation_bytes_opened": 0,
+  "reserved_people_downloaded": 0,
+  "walking_scale_protocol_committed": false,
+  "sealed_until": [
+   "this protocol committed",
+   "BINDING.json committed",
+   "separate reviewer admission",
+   "FIT-COMPLETE.json sealed"
+  ]
+ },
+ "prior_facts": {
+  "earlier_unpublished_test": {
+   "design": "50% of fitting windows replaced by 5 simulated walks of one anatomy from the published learned MyoLeg policy",
+   "policy_checkpoint": {
+    "name": "myoLegWalk-v0 baseline, MyoSuite 3.0.0",
+    "sha256": "4e7697f296278f9c8c0b4028353eb83db2dcebc6688e1d6c35f4edb68be79d05",
+    "licence": "not stated"
+   },
+   "scored_on": "6 treadmill walkers of another public cohort, already used in development",
+   "measured_only": {
+    "heel_mm": 42.31,
+    "impulse_Ns": 7.89,
+    "brier": 0.0492
+   },
+   "mixed_50pct": {
+    "heel_mm": 52.56,
+    "impulse_Ns": 9.73,
+    "brier": 0.0613
+   },
+   "input_overlap": {
+    "largest_20ms_bin_median_N": {
+     "simulated": 1717,
+     "measured": 763
+    },
+    "both_feet_unloaded_fraction": {
+     "simulated": 0.029,
+     "measured": 4e-05
+    },
+    "joint_central_support_windows_per_fold": "0 to 1"
+   },
+   "van_criekinge_baseline": false
+  },
+  "probes_2026_11_27": {
+   "policy_peak_foot_force_bw_100Hz": [
+    2.4,
+    5.0
+   ],
+   "measured_max_loaded_plate_peak_bw": {
+    "value": 1.154,
+    "contacts": 18,
+    "people_with_mass": 2
+   },
+   "policy_falls_at": {
+    "mass_factor": [
+     0.8,
+     1.2,
+     1.25
+    ],
+    "strength_factor": [
+     0.7,
+     0.75,
+     0.85,
+     1.3
+    ]
+   },
+   "policy_walks_10s_at_mass_factor": [
+    0.9,
+    1.1
+   ],
+   "policy_runs_only_under": "MyoSuite 3.0.0",
+   "reflex_controller": {
+    "gains": 46,
+    "control_step_s": 0.01,
+    "fall_s_shipped_gains": 0.37,
+    "evolution_strategy_probe": {
+     "rollouts": 181,
+     "best_survival_s": 2.54
+    }
+   },
+   "speed_single_thread_x_realtime": {
+    "myoleg_raw": 26.4,
+    "myoleg_env": 19.7,
+    "reflex": 12.0,
+    "myofullbody_passive": 3.06
+   },
+   "policy_10s_walk_wall_s": 0.56,
+   "forecaster_ms_per_update_batch256_1thread": {
+    "width64": 11.3,
+    "width128": 21.0
+   }
+  }
+ },
+ "dependency": {
+  "protocol": "walking-scale",
+  "folder": "models/walking-force-scale/",
+  "branch": "walking-scale-protocol",
+  "second_allocation_written": false,
+  "binding_file": "BINDING.json",
+  "binding_items": [
+   "walking-scale commit, sha256 of its PROTOCOL.json and of its allocation output",
+   "subject codes and files of the group reserved for physics-source (the test group)",
+   "subject codes of the walking-scale training people and sha256 of each cached walk reused",
+   "adapter file and sha256; forecaster family code and sha256; marker admission and causality guard; EMG qualification rule",
+   "inner-fold source by the coverage test only",
+   "S0 outputs by sha256: GATE-THRESHOLDS.json, FEASIBILITY.json, body pass register, generators passed",
+   "lists computed by fixed rules: inner folds of the full pool, narrow pool, G4 reference-walk assignment"
+  ],
+  "inner_fold_coverage_test": "walking-scale folds are used only if its committed protocol places every physics-source training person in exactly one of exactly four folds; otherwise the physics-source rule",
+  "other_changes": "protocol version 2, separate admission and commit before any reserved byte is opened",
+  "if_not_committed": "S5 does not run; S0-S4 reported as development results on training people only"
+ },
+ "data_sources": [
+  {
+   "name": "Van Criekinge healthy cohort",
+   "role": "measured training and test data",
+   "doi": "10.6084/m9.figshare.24192480.v1",
+   "licence": "CC0-1.0",
+   "article": {
+    "citation": "Van Criekinge T. et al. Scientific Data 10, 852 (2023)",
+    "doi": "10.1038/s41597-023-02767-y",
+    "licence": "CC-BY-4.0"
+   },
+   "archive": {
+    "name": "138_HealthyPiG.zip",
+    "figshare_file_id": 42450060,
+    "bytes": 463159769,
+    "md5": "85235c73455d4df8434810d61517efbb",
+    "central_directory_sha256": "96a6b5d97ab542eef90a773dfeabb1ad4ac025d768a559d1491deec0d99f4b2b",
+    "central_directory_entries": 1016
+   },
+   "clocks_hz": {
+    "markers": 100,
+    "analog": 1000
+   },
+   "plates_mm": {
+    "1": {
+     "x": [
+      -508,
+      0
+     ],
+     "y": [
+      0,
+      463.6
+     ]
+    },
+    "2": {
+     "x": [
+      0,
+      508
+     ],
+     "y": [
+      0,
+      463.6
+     ]
+    },
+    "3": {
+     "x": [
+      -254,
+      254
+     ],
+     "y": [
+      -463.6,
+      0
+     ]
+    },
+    "4": {
+     "x": [
+      508,
+      1005.8
+     ],
+     "y": [
+      -17.1,
+      480.7
+     ]
+    }
+   },
+   "notes": [
+    "plate force signs differ between files; the adapter normalises to upward positive",
+    "published markers are gap-filled and smoothed (not causal at 10 ms)"
+   ],
+   "local_consumed_walks_verified_2026_11_27": {
+    "count": 54,
+    "all_sha256_matched": true,
+    "members": [
+     {
+      "subject_code": "SUBJ011",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ11/SUBJ11 (1).c3d",
+      "zip_crc32": "7d5cacfa",
+      "compressed_bytes": 1353922,
+      "decoded_bytes": 2142592,
+      "decoded_sha256": "93db2927f1f31abc3ac6963cf52a33ffa3e421d7f7684ff2f3db8263e7e66fcf"
+     },
+     {
+      "subject_code": "SUBJ011",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ11/SUBJ11 (2).c3d",
+      "zip_crc32": "d6499d7a",
+      "compressed_bytes": 1484843,
+      "decoded_bytes": 2309888,
+      "decoded_sha256": "624c59a7b5077ec97e037dc98e1aa8098555f4de5e21ef56214e15d85e2271cd"
+     },
+     {
+      "subject_code": "SUBJ011",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ11/SUBJ11 (3).c3d",
+      "zip_crc32": "5ee8d78f",
+      "compressed_bytes": 1342094,
+      "decoded_bytes": 2089984,
+      "decoded_sha256": "9ad24b2081470e3b8aa519e95ea0b64b878dbeafc56093d06f79e4b5be2e2ef6"
+     },
+     {
+      "subject_code": "SUBJ024",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ24/SUBJ24 (1).c3d",
+      "zip_crc32": "0cbda7ad",
+      "compressed_bytes": 1040039,
+      "decoded_bytes": 1630592,
+      "decoded_sha256": "0113d6f0e4b5b5ffabc156f8de9396d28ce40e3ed1e51876f54fddfbc163d64a"
+     },
+     {
+      "subject_code": "SUBJ024",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ24/SUBJ24 (2).c3d",
+      "zip_crc32": "d309856d",
+      "compressed_bytes": 1206725,
+      "decoded_bytes": 1933696,
+      "decoded_sha256": "a49bd3cb2b4c4c12e6bc2dac68cafe64c1e5c0ad28f578d7f0a739a130a7d8aa"
+     },
+     {
+      "subject_code": "SUBJ024",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ24/SUBJ24 (3).c3d",
+      "zip_crc32": "a428dfba",
+      "compressed_bytes": 1236683,
+      "decoded_bytes": 1966848,
+      "decoded_sha256": "937054c317475f9de6d591c434bdab73181ced9676ab544e84f5daeb03de5937"
+     },
+     {
+      "subject_code": "SUBJ038",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ38/SUBJ38 (1).c3d",
+      "zip_crc32": "a9cdc001",
+      "compressed_bytes": 847455,
+      "decoded_bytes": 1378560,
+      "decoded_sha256": "62e1ad1b0b52ccbd54468ece1bc999024086bbeb6b7cda70583ff00654c00b79"
+     },
+     {
+      "subject_code": "SUBJ038",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ38/SUBJ38 (2).c3d",
+      "zip_crc32": "50c00e35",
+      "compressed_bytes": 712748,
+      "decoded_bytes": 1179136,
+      "decoded_sha256": "07d7953aac3df660501485b0e7c5b3801a174461a8bb83d23f3bebcf67b8a2f8"
+     },
+     {
+      "subject_code": "SUBJ038",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ38/SUBJ38 (3).c3d",
+      "zip_crc32": "521f7094",
+      "compressed_bytes": 847589,
+      "decoded_bytes": 1396992,
+      "decoded_sha256": "0fbad30e48816c00b3df6ea7a2bc7008247b9f69885aacff880fa409a5ec8c12"
+     },
+     {
+      "subject_code": "SUBJ039",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ39/SUBJ39 (1).c3d",
+      "zip_crc32": "c820f439",
+      "compressed_bytes": 1170059,
+      "decoded_bytes": 1966336,
+      "decoded_sha256": "e501fbe1f8b154a9b502f9aacd4a1b8d12d52c07c3a6a06812382ef2689e9e0b"
+     },
+     {
+      "subject_code": "SUBJ039",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ39/SUBJ39 (2).c3d",
+      "zip_crc32": "a42e2d78",
+      "compressed_bytes": 981175,
+      "decoded_bytes": 1691136,
+      "decoded_sha256": "0524eabd319362f7a69a037454d474cd71cf7193293cba8698516c817df66ff6"
+     },
+     {
+      "subject_code": "SUBJ039",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ39/SUBJ39 (3).c3d",
+      "zip_crc32": "f738f97f",
+      "compressed_bytes": 1250387,
+      "decoded_bytes": 2051584,
+      "decoded_sha256": "a1abed6f18b02a47c002117f6d734eb58bdea63a50e931da39d76823916570b6"
+     },
+     {
+      "subject_code": "SUBJ040",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ40/SUBJ40 (1).c3d",
+      "zip_crc32": "8b127c34",
+      "compressed_bytes": 811200,
+      "decoded_bytes": 1316992,
+      "decoded_sha256": "7674ee8b0e3766d9fc88690832d79627fc971fc375e906721cbd2248b58e7467"
+     },
+     {
+      "subject_code": "SUBJ040",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ40/SUBJ40 (2).c3d",
+      "zip_crc32": "73007769",
+      "compressed_bytes": 784795,
+      "decoded_bytes": 1283328,
+      "decoded_sha256": "4730674f2753d38cdc1fbcd51bd8518f8d7f2efe1fb2e913a265b77fb9558ee0"
+     },
+     {
+      "subject_code": "SUBJ040",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ40/SUBJ40 (3).c3d",
+      "zip_crc32": "2bc2d352",
+      "compressed_bytes": 791097,
+      "decoded_bytes": 1297536,
+      "decoded_sha256": "26adaad94cec9a337ac22011e38663be85a9fcc277ff52fdf7f033fbe236223c"
+     },
+     {
+      "subject_code": "SUBJ043",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ43/SUBJ43 (1).c3d",
+      "zip_crc32": "bed5407a",
+      "compressed_bytes": 725359,
+      "decoded_bytes": 1127552,
+      "decoded_sha256": "3285f371730e314ad626560f2fcafcb92be1c8e75f235c507af27b483c3296a5"
+     },
+     {
+      "subject_code": "SUBJ043",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ43/SUBJ43 (2).c3d",
+      "zip_crc32": "80bbf647",
+      "compressed_bytes": 670818,
+      "decoded_bytes": 1047040,
+      "decoded_sha256": "3eb14572e0c92df206b92e158f3d50f8a3168e0d8e8e50ce5bee22a1dee0231a"
+     },
+     {
+      "subject_code": "SUBJ043",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ43/SUBJ43 (3).c3d",
+      "zip_crc32": "10ef6186",
+      "compressed_bytes": 751645,
+      "decoded_bytes": 1141760,
+      "decoded_sha256": "cd747c4d1a3d8ffcc8bf74269ea412098c5f8edb9c65f53b9f477dd5922820fc"
+     },
+     {
+      "subject_code": "SUBJ044",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ44/SUBJ44 (1).c3d",
+      "zip_crc32": "d38bed32",
+      "compressed_bytes": 907002,
+      "decoded_bytes": 1430144,
+      "decoded_sha256": "5682f3842d8b0b311d88901e40cbc3e26b6ca4990550a1c527c933eb40dc30bb"
+     },
+     {
+      "subject_code": "SUBJ044",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ44/SUBJ44 (2).c3d",
+      "zip_crc32": "a9bcb1e1",
+      "compressed_bytes": 925536,
+      "decoded_bytes": 1453824,
+      "decoded_sha256": "27bba6986c716850d6adf5085032646e7228884786cd7744c1376ce2ecf44564"
+     },
+     {
+      "subject_code": "SUBJ044",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ44/SUBJ44 (3).c3d",
+      "zip_crc32": "a95ddcca",
+      "compressed_bytes": 919186,
+      "decoded_bytes": 1453824,
+      "decoded_sha256": "ec26f53d25fadc318de5bff4ac7ba8fe34f7f3f9436dc82579cc076b317ca50a"
+     },
+     {
+      "subject_code": "SUBJ047",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ47/SUBJ47 (1).c3d",
+      "zip_crc32": "4a0d4c73",
+      "compressed_bytes": 920017,
+      "decoded_bytes": 1526400,
+      "decoded_sha256": "575cfa4e7fe7d5bc26fd023844e4b3671816beef8dc31e555f9b37eb57ffff51"
+     },
+     {
+      "subject_code": "SUBJ047",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ47/SUBJ47 (2).c3d",
+      "zip_crc32": "a88cb82a",
+      "compressed_bytes": 957132,
+      "decoded_bytes": 1586944,
+      "decoded_sha256": "c1479ccb8c5753fb6ac204a925cbe94cb1c5a7336db55d2248490722ca9567fc"
+     },
+     {
+      "subject_code": "SUBJ047",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ47/SUBJ47 (3).c3d",
+      "zip_crc32": "1bd07bd2",
+      "compressed_bytes": 955536,
+      "decoded_bytes": 1586432,
+      "decoded_sha256": "3dea0261b44991bcf10bc0edf78f5ecd84cf74099837f1337e733845faf9f910"
+     },
+     {
+      "subject_code": "SUBJ061",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ61/SUBJ61 (1).c3d",
+      "zip_crc32": "7e751194",
+      "compressed_bytes": 908198,
+      "decoded_bytes": 1515904,
+      "decoded_sha256": "2feedf835728727f5be037b73544fd22382a01d8bd4fe84555326a84df3e4d35"
+     },
+     {
+      "subject_code": "SUBJ061",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ61/SUBJ61 (2).c3d",
+      "zip_crc32": "c0b91980",
+      "compressed_bytes": 861905,
+      "decoded_bytes": 1435392,
+      "decoded_sha256": "f7559d33a60aca540744a5c4c1f2d2f851f446b2d9ef4a54823b24932da3d77e"
+     },
+     {
+      "subject_code": "SUBJ061",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ61/SUBJ61 (3).c3d",
+      "zip_crc32": "91241840",
+      "compressed_bytes": 708917,
+      "decoded_bytes": 1169152,
+      "decoded_sha256": "116613c5867cf23d56b3064b68958a7c26e4c6929d8a1585fb6ee19df986c903"
+     },
+     {
+      "subject_code": "SUBJ062",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ62/SUBJ62 (1).c3d",
+      "zip_crc32": "714ffce2",
+      "compressed_bytes": 926714,
+      "decoded_bytes": 1534848,
+      "decoded_sha256": "74542c7fe9df988df0c75b4afad707d972fd6a83c69eddf250dfa0d88ba1d1d5"
+     },
+     {
+      "subject_code": "SUBJ062",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ62/SUBJ62 (2).c3d",
+      "zip_crc32": "455a7d8a",
+      "compressed_bytes": 899678,
+      "decoded_bytes": 1492224,
+      "decoded_sha256": "9f1e1f82ebac42b46b776e5466971e0c4f1eaac8af318748130a6dc252507353"
+     },
+     {
+      "subject_code": "SUBJ062",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ62/SUBJ62 (3).c3d",
+      "zip_crc32": "1e5da2df",
+      "compressed_bytes": 930062,
+      "decoded_bytes": 1539584,
+      "decoded_sha256": "fa047bbfcf16870ae55160351e04790874ae7f7891c142e03c08ee102111265c"
+     },
+     {
+      "subject_code": "SUBJ066",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ66/SUBJ66 (1).c3d",
+      "zip_crc32": "47f8b9d1",
+      "compressed_bytes": 811828,
+      "decoded_bytes": 1435392,
+      "decoded_sha256": "a4edf6cbeae896914ffff6c7908f47f9ec0b4f69ac68f095bcccbbfe82796e86"
+     },
+     {
+      "subject_code": "SUBJ066",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ66/SUBJ66 (2).c3d",
+      "zip_crc32": "50d5d1b7",
+      "compressed_bytes": 950308,
+      "decoded_bytes": 1681664,
+      "decoded_sha256": "e12659aa64a77920f312225cd1fb3212ef0b4da37f705d323f792ad564e43b78"
+     },
+     {
+      "subject_code": "SUBJ066",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ66/SUBJ66 (3).c3d",
+      "zip_crc32": "fde26f6e",
+      "compressed_bytes": 474217,
+      "decoded_bytes": 910480,
+      "decoded_sha256": "485ce4411cec9bcbc31ac709f3324103040a8a72421ea3749e5827f6d742c17b"
+     },
+     {
+      "subject_code": "SUBJ075",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ75/SUBJ75 (1).c3d",
+      "zip_crc32": "f35cac1b",
+      "compressed_bytes": 998794,
+      "decoded_bytes": 1648512,
+      "decoded_sha256": "7548310e560e04e794bde1200afa91c91d8721dc1308d5562cefca0110eb3b50"
+     },
+     {
+      "subject_code": "SUBJ075",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ75/SUBJ75 (2).c3d",
+      "zip_crc32": "c0d33f7f",
+      "compressed_bytes": 920337,
+      "decoded_bytes": 1515392,
+      "decoded_sha256": "81ea73a8c1a4af0329b1a57418c3880c612236c394d429b8bee867f567e084db"
+     },
+     {
+      "subject_code": "SUBJ075",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ75/SUBJ75 (3).c3d",
+      "zip_crc32": "17ee5ce0",
+      "compressed_bytes": 928642,
+      "decoded_bytes": 1529600,
+      "decoded_sha256": "6370f8236686947c2289845e0be3de5d8ce6a46052464e05bc70b98d17ec082c"
+     },
+     {
+      "subject_code": "SUBJ082",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ82/SUBJ82 (1).c3d",
+      "zip_crc32": "f5e95032",
+      "compressed_bytes": 678013,
+      "decoded_bytes": 1112832,
+      "decoded_sha256": "2c3cdc257282075160082d5a9babd5820ae9620668e97c277639eb12988ba3ff"
+     },
+     {
+      "subject_code": "SUBJ082",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ82/SUBJ82 (3).c3d",
+      "zip_crc32": "0686d04e",
+      "compressed_bytes": 671032,
+      "decoded_bytes": 1107584,
+      "decoded_sha256": "c9bdc58e28d0a142754b1d4f8ab51335ae9daf6ff05e2c11ba5a51d3393c223d"
+     },
+     {
+      "subject_code": "SUBJ082",
+      "author_trial_index": 4,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ82/SUBJ82 (4).c3d",
+      "zip_crc32": "ff6d17cf",
+      "compressed_bytes": 717831,
+      "decoded_bytes": 1188608,
+      "decoded_sha256": "796a9c81baf10f0fd839725ec0aac108fdf2c58ee9a8028d39ebb39cadf0c675"
+     },
+     {
+      "subject_code": "SUBJ096",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ96/SUBJ96 (1).c3d",
+      "zip_crc32": "a3b1dd69",
+      "compressed_bytes": 797094,
+      "decoded_bytes": 1330176,
+      "decoded_sha256": "a6c8a966fc67ee695a012f363371bf2309a37e6b28b9971dd6112cd9cca6533a"
+     },
+     {
+      "subject_code": "SUBJ096",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ96/SUBJ96 (2).c3d",
+      "zip_crc32": "af680ee0",
+      "compressed_bytes": 914400,
+      "decoded_bytes": 1529600,
+      "decoded_sha256": "3bffc4aeed728915111d7e74c967140692506fd4155826b81a418035c2fd3f11"
+     },
+     {
+      "subject_code": "SUBJ096",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ96/SUBJ96 (3).c3d",
+      "zip_crc32": "fc5af42d",
+      "compressed_bytes": 765700,
+      "decoded_bytes": 1283328,
+      "decoded_sha256": "e8a4d512aa6611b64e2d0ef942743821cffa18ce8cea16225938f48913391468"
+     },
+     {
+      "subject_code": "SUBJ110",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ110/SUBJ110 (1).c3d",
+      "zip_crc32": "1d10e8e2",
+      "compressed_bytes": 760615,
+      "decoded_bytes": 1350144,
+      "decoded_sha256": "e8418052f22d4fcfd4d331dec3cea4d85a0e550a779d6264ab9bdb19181bce14"
+     },
+     {
+      "subject_code": "SUBJ110",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ110/SUBJ110 (2).c3d",
+      "zip_crc32": "e6404f83",
+      "compressed_bytes": 867928,
+      "decoded_bytes": 1544320,
+      "decoded_sha256": "4968eb7776b060280cae4f4f506d92c90220355a8a0ae4be228e7b57cd349f2a"
+     },
+     {
+      "subject_code": "SUBJ110",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ110/SUBJ110 (3).c3d",
+      "zip_crc32": "019cf382",
+      "compressed_bytes": 889629,
+      "decoded_bytes": 1591680,
+      "decoded_sha256": "8942c7f8e1a767cb3fd05d4c0d443a4a757dd12efa1749bb208656dc750eb878"
+     },
+     {
+      "subject_code": "SUBJ112",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ112/SUBJ112 (1).c3d",
+      "zip_crc32": "cbbd61ef",
+      "compressed_bytes": 906873,
+      "decoded_bytes": 1615360,
+      "decoded_sha256": "a6a87c9d3549c0d5b32885d10f87386fd2357e87c841d908cef855ff8ebf4cdc"
+     },
+     {
+      "subject_code": "SUBJ112",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ112/SUBJ112 (2).c3d",
+      "zip_crc32": "2d541acb",
+      "compressed_bytes": 808765,
+      "decoded_bytes": 1425408,
+      "decoded_sha256": "e71ddd8b14db1e68598c053c0604f2c3ddad5e8e3cd4a11908fe55fbeb0697a0"
+     },
+     {
+      "subject_code": "SUBJ112",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ112/SUBJ112 (3).c3d",
+      "zip_crc32": "993eebc2",
+      "compressed_bytes": 697982,
+      "decoded_bytes": 1241600,
+      "decoded_sha256": "8527ee5b33143ba078d2c38986684558e85471a924adcc236fc762f3f4c9a6b7"
+     },
+     {
+      "subject_code": "SUBJ115",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ115/SUBJ115 (1).c3d",
+      "zip_crc32": "f6283c4e",
+      "compressed_bytes": 1016596,
+      "decoded_bytes": 1685888,
+      "decoded_sha256": "fab8f6be6b19175fb4b8ed48360c3b6ce336621d1f1d2b2a16a93b8217312dfc"
+     },
+     {
+      "subject_code": "SUBJ115",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ115/SUBJ115 (2).c3d",
+      "zip_crc32": "a757d743",
+      "compressed_bytes": 894991,
+      "decoded_bytes": 1477504,
+      "decoded_sha256": "fb6c8536213a7acef795cba72b7b89c43a3fd869b0f382011025007e4c52d716"
+     },
+     {
+      "subject_code": "SUBJ115",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ115/SUBJ115 (3).c3d",
+      "zip_crc32": "f947869e",
+      "compressed_bytes": 1048341,
+      "decoded_bytes": 1728512,
+      "decoded_sha256": "67f907ba5d67eb2215de63378e98a1be46125c36d92b9516701b93caac9dcdaa"
+     },
+     {
+      "subject_code": "SUBJ116",
+      "author_trial_index": 1,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ116/SUBJ116 (1).c3d",
+      "zip_crc32": "6e346e90",
+      "compressed_bytes": 689554,
+      "decoded_bytes": 1374720,
+      "decoded_sha256": "8be44e2502284fde9edb43826b327e876d2e5c46b602607010f7014a488986a7"
+     },
+     {
+      "subject_code": "SUBJ116",
+      "author_trial_index": 2,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ116/SUBJ116 (2).c3d",
+      "zip_crc32": "ac64dd3b",
+      "compressed_bytes": 925050,
+      "decoded_bytes": 2367072,
+      "decoded_sha256": "52dfc404b06fc4041d758343ae9ef769ef899c7cded52552d810f715f4286652"
+     },
+     {
+      "subject_code": "SUBJ116",
+      "author_trial_index": 3,
+      "archive_member": "138_HealthyPiG_10.05/SUBJ116/SUBJ116 (3).c3d",
+      "zip_crc32": "0954dff5",
+      "compressed_bytes": 660381,
+      "decoded_bytes": 1259520,
+      "decoded_sha256": "5974e52478ec59b8170341ed91534435f86b420bbf966734f089b6f2af13d754"
+     }
+    ]
+   },
+   "static_trials_planned_S0": {
+    "count": 18,
+    "compressed_bytes_total": 5881322,
+    "sha256_known": false,
+    "members": [
+     {
+      "subject_code": "SUBJ011",
+      "path": "138_HealthyPiG_10.05/SUBJ11/SUBJ11 (0).c3d",
+      "zip_crc32": "03fe5c8a",
+      "compressed_bytes": 341193,
+      "expanded_bytes": 511488,
+      "local_header_offset": 67720120
+     },
+     {
+      "subject_code": "SUBJ024",
+      "path": "138_HealthyPiG_10.05/SUBJ24/SUBJ24 (0).c3d",
+      "zip_crc32": "bd31df77",
+      "compressed_bytes": 248598,
+      "expanded_bytes": 371712,
+      "local_header_offset": 223538905
+     },
+     {
+      "subject_code": "SUBJ038",
+      "path": "138_HealthyPiG_10.05/SUBJ38/SUBJ38 (0).c3d",
+      "zip_crc32": "ce8300b8",
+      "compressed_bytes": 256348,
+      "expanded_bytes": 413952,
+      "local_header_offset": 270238670
+     },
+     {
+      "subject_code": "SUBJ039",
+      "path": "138_HealthyPiG_10.05/SUBJ39/SUBJ39 (0).c3d",
+      "zip_crc32": "a6cd98e1",
+      "compressed_bytes": 424390,
+      "expanded_bytes": 677808,
+      "local_header_offset": 272903283
+     },
+     {
+      "subject_code": "SUBJ040",
+      "path": "138_HealthyPiG_10.05/SUBJ40/SUBJ40 (0).c3d",
+      "zip_crc32": "cb9dd9d9",
+      "compressed_bytes": 216369,
+      "expanded_bytes": 352512,
+      "local_header_offset": 276729773
+     },
+     {
+      "subject_code": "SUBJ043",
+      "path": "138_HealthyPiG_10.05/SUBJ43/SUBJ43 (0).c3d",
+      "zip_crc32": "8c17b1b3",
+      "compressed_bytes": 147316,
+      "expanded_bytes": 228864,
+      "local_header_offset": 286060937
+     },
+     {
+      "subject_code": "SUBJ044",
+      "path": "138_HealthyPiG_10.05/SUBJ44/SUBJ44 (0).c3d",
+      "zip_crc32": "a21b2b66",
+      "compressed_bytes": 298791,
+      "expanded_bytes": 436992,
+      "local_header_offset": 288356560
+     },
+     {
+      "subject_code": "SUBJ047",
+      "path": "138_HealthyPiG_10.05/SUBJ47/SUBJ47 (0).c3d",
+      "zip_crc32": "9cd3f2fd",
+      "compressed_bytes": 273484,
+      "expanded_bytes": 444864,
+      "local_header_offset": 297690763
+     },
+     {
+      "subject_code": "SUBJ061",
+      "path": "138_HealthyPiG_10.05/SUBJ61/SUBJ61 (0).c3d",
+      "zip_crc32": "16e3f470",
+      "compressed_bytes": 222321,
+      "expanded_bytes": 364032,
+      "local_header_offset": 339820947
+     },
+     {
+      "subject_code": "SUBJ062",
+      "path": "138_HealthyPiG_10.05/SUBJ62/SUBJ62 (0).c3d",
+      "zip_crc32": "96afd515",
+      "compressed_bytes": 211492,
+      "expanded_bytes": 346192,
+      "local_header_offset": 342522761
+     },
+     {
+      "subject_code": "SUBJ066",
+      "path": "138_HealthyPiG_10.05/SUBJ66/SUBJ66 (0).c3d",
+      "zip_crc32": "175ee924",
+      "compressed_bytes": 460579,
+      "expanded_bytes": 682752,
+      "local_header_offset": 353690666
+     },
+     {
+      "subject_code": "SUBJ075",
+      "path": "138_HealthyPiG_10.05/SUBJ75/SUBJ75 (0).c3d",
+      "zip_crc32": "50b524d2",
+      "compressed_bytes": 214545,
+      "expanded_bytes": 350048,
+      "local_header_offset": 382662864
+     },
+     {
+      "subject_code": "SUBJ082",
+      "path": "138_HealthyPiG_10.05/SUBJ82/SUBJ82 (0).c3d",
+      "zip_crc32": "51ff4bed",
+      "compressed_bytes": 204864,
+      "expanded_bytes": 334624,
+      "local_header_offset": 403783276
+     },
+     {
+      "subject_code": "SUBJ096",
+      "path": "138_HealthyPiG_10.05/SUBJ96/SUBJ96 (0).c3d",
+      "zip_crc32": "aab5b63e",
+      "compressed_bytes": 285240,
+      "expanded_bytes": 464224,
+      "local_header_offset": 450610448
+     },
+     {
+      "subject_code": "SUBJ110",
+      "path": "138_HealthyPiG_10.05/SUBJ110/SUBJ110 (0).c3d",
+      "zip_crc32": "f47f0ecd",
+      "compressed_bytes": 1094915,
+      "expanded_bytes": 1930752,
+      "local_header_offset": 72242648
+     },
+     {
+      "subject_code": "SUBJ112",
+      "path": "138_HealthyPiG_10.05/SUBJ112/SUBJ112 (0).c3d",
+      "zip_crc32": "3cabe407",
+      "compressed_bytes": 418282,
+      "expanded_bytes": 728832,
+      "local_header_offset": 78474774
+     },
+     {
+      "subject_code": "SUBJ115",
+      "path": "138_HealthyPiG_10.05/SUBJ115/SUBJ115 (0).c3d",
+      "zip_crc32": "543dcecb",
+      "compressed_bytes": 215124,
+      "expanded_bytes": 352512,
+      "local_header_offset": 86407029
+     },
+     {
+      "subject_code": "SUBJ116",
+      "path": "138_HealthyPiG_10.05/SUBJ116/SUBJ116 (0).c3d",
+      "zip_crc32": "cfe16f30",
+      "compressed_bytes": 347471,
+      "expanded_bytes": 630720,
+      "local_header_offset": 89582565
+     }
+    ]
+   }
+  },
+  {
+   "name": "MuJoCo",
+   "versions": [
+    "3.17.0",
+    "4.0.1"
+   ],
+   "licence": "Apache-2.0",
+   "licence_class": "clean"
+  },
+  {
+   "name": "MyoSuite",
+   "versions": [
+    "3.0.0",
+    "3.1.0"
+   ],
+   "licence": "Apache-2.0",
+   "licence_class": "clean"
+  },
+  {
+   "name": "myo_sim (MyoLeg)",
+   "versions": [
+    "0.2.3",
+    "0.2.5"
+   ],
+   "licence": "Apache-2.0",
+   "licence_class": "clean",
+   "upstream": "Rajagopal et al. 2016 full-body gait model, MIT, doi 10.1109/TBME.2016.2586891",
+   "files_sha256": {
+    "models/leg/assets/myolegs_muscle.xml": "b998653f78e5ec8e932a7ff6a769a9d4a727cf68918da547c7e7ec4b155e1ef4",
+    "models/leg/assets/myolegs_chain.xml": "da7c4a13eec2abfedc683210972ea423d630461a56909bee2884e181e1bf1d97"
+   },
+   "note": "MyoLeg muscle and chain files identical in 0.2.3 and 0.2.5"
+  },
+  {
+   "name": "musclemimic-models",
+   "version": "1.0.6",
+   "licence": "Apache-2.0 with NOTICE",
+   "components": {
+    "legs": "Rajagopal, MIT",
+    "torso": "Bruno et al. 2015 lumbar spine, MIT",
+    "arm_and_hand": "MoBL-ARMS, BSD-3 with non-commercial restriction",
+    "fingers": "McFarland et al. 2019, MIT",
+    "meshes": "myo_sim, Apache-2.0"
+   },
+   "files_sha256": {
+    "model/body/myofullbody.xml": "2701f343ff8407b03ada728426f0e4b8135bc63aa8857a31bad97aeebb68b914"
+   },
+   "licence_class": {
+    "G3c (arms removed)": "clean",
+    "G3f (full body)": "non-commercial"
+   }
+  },
+  {
+   "name": "MyoGen",
+   "version": "0.11.0",
+   "licence": "AGPL-3.0-or-later",
+   "licence_class": "agpl",
+   "record": "zenodo.org/records/21392909",
+   "dependency": {
+    "NEURON": "8.2.7, BSD-compatible"
+   }
+  },
+  {
+   "name": "published MyoLeg walking policy",
+   "sha256": "4e7697f296278f9c8c0b4028353eb83db2dcebc6688e1d6c35f4edb68be79d05",
+   "licence": "not stated",
+   "licence_class": "unknown",
+   "use": "unscreened control and optional G2, private, scores only"
+  }
+ ],
+ "repository_references": {
+  "neurotranslate_0.0_shared_encoder": {
+   "path": "models/neurotranslate-0.0/movement-weights.npz",
+   "sha256": "6a05e06ecbf0eadb4524369d9089847813763d0d2a3c1a49bdd1e4bf295e4864"
+  },
+  "force_specialist": {
+   "path": "models/force-baselines/common-six.npz",
+   "sha256": "aa499793a7d84488befd94bc2a628df490896700291af58d2befa0bd1d6bb3bf"
+  },
+  "compact_three_pass_checkpoint": {
+   "path": "benchmarks/walking-neural-scaling/checkpoints/three-pass.safetensors",
+   "sha256": "9feb39a826d30751fad99e1adc8513a5a87191574df6954d51c93a3c7d4576cf"
+  },
+  "compact_three_pass_preprocessing": {
+   "path": "benchmarks/walking-neural-scaling/checkpoints/recurrent-preprocessing.json",
+   "sha256": "016920f25017b2ab3883a350230f95b48258a999fe4efc69f77adbb90a501dca"
+  },
+  "compact_three_pass_runtime": {
+   "path": "benchmarks/walking-neural-scaling/predict.py",
+   "sha256": "10d8fb8dc7cbcc7fc26e4c87f982148ea57a8c3adba6d47e92f86be3e3224da7"
+  },
+  "repository_base_commit": "03e76d4826e2c1d47d63990f38001075247423dc"
+ },
+ "people": {
+  "training_known": {
+   "earlier_fit_role": [
+    "SUBJ112",
+    "SUBJ110",
+    "SUBJ096",
+    "SUBJ024",
+    "SUBJ082",
+    "SUBJ062",
+    "SUBJ061",
+    "SUBJ040",
+    "SUBJ044",
+    "SUBJ043",
+    "SUBJ039",
+    "SUBJ038"
+   ],
+   "earlier_validation_role": [
+    "SUBJ047",
+    "SUBJ011",
+    "SUBJ115",
+    "SUBJ075",
+    "SUBJ066",
+    "SUBJ116"
+   ]
+  },
+  "training_bound_later": "walking-scale training people (all rungs), reused read-only by sha256",
+  "test": "physics-source group of the walking-scale allocation, copied into BINDING.json",
+  "test_size_expected": "8 to 12 (walking-scale draft)",
+  "never_used": {
+   "earlier_roster_test_group": [
+    "SUBJ016",
+    "SUBJ084",
+    "SUBJ092",
+    "SUBJ008",
+    "SUBJ053",
+    "SUBJ014",
+    "SUBJ077",
+    "SUBJ074",
+    "SUBJ057",
+    "SUBJ056",
+    "SUBJ020",
+    "SUBJ089"
+   ],
+   "other": [
+    "walking-scale evaluation group and every walking-scale group other than its training people and the physics-source group",
+    "SUBJ099",
+    "stroke cohort (owner decision)",
+    "every other reserved group of the project"
+   ]
+  },
+  "body_descriptors": {
+   "vector": [
+    "mass_kg",
+    "height_mm",
+    "leg_length_mm",
+    "missing flags"
+   ],
+   "source_order": [
+    "static trial (code 0) PROCESSING Bodymass, Height, LLegLength/RLegLength",
+    "static-trial markers: leg length ASIS-knee-ankle averaged over sides; height = highest head marker + 50 mm; mass missing",
+    "missing"
+   ],
+   "body_weight_for_envelope": "Bodymass x 9.81, else mean total plate force over >= 2 s quiet standing in the static trial, else excluded from BW features",
+   "test_people": "static trial read after the sealing conditions, as a declared issue-time input"
+  }
+ },
+ "allocation": {
+  "test_group": {
+   "rule": "not allocated here; copied from the walking-scale allocation",
+   "ids": null
+  },
+  "inner_folds": {
+   "rule": "Rank training people by ascending sha256('physics-source-inner-v1|' + subject code); fold = rank mod 4. People added at binding (walking-scale training rungs) are ranked together with these 18 by the same rule, unless the coverage test in PROTOCOL.md section 4 selects the walking-scale folds.",
+   "n_folds": 4,
+   "fold_of_18": {
+    "SUBJ040": 0,
+    "SUBJ116": 1,
+    "SUBJ112": 2,
+    "SUBJ096": 3,
+    "SUBJ061": 0,
+    "SUBJ044": 1,
+    "SUBJ082": 2,
+    "SUBJ115": 3,
+    "SUBJ011": 0,
+    "SUBJ038": 1,
+    "SUBJ047": 2,
+    "SUBJ043": 3,
+    "SUBJ039": 0,
+    "SUBJ024": 1,
+    "SUBJ110": 2,
+    "SUBJ075": 3,
+    "SUBJ066": 0,
+    "SUBJ062": 1
+   }
+  },
+  "data_efficiency_subsets": {
+   "rule": "For n in (3, 6, 12) and subset s in 0..4, rank the 18 people by ascending sha256('physics-source-subset-v1|' + s + '|' + subject code) and take the first n. n = 18 is the single set of all 18. The full pool (18 plus walking-scale training rungs) is the last point of the curve.",
+   "subsets": {
+    "3": [
+     [
+      "SUBJ066",
+      "SUBJ075",
+      "SUBJ082"
+     ],
+     [
+      "SUBJ061",
+      "SUBJ115",
+      "SUBJ116"
+     ],
+     [
+      "SUBJ038",
+      "SUBJ043",
+      "SUBJ112"
+     ],
+     [
+      "SUBJ011",
+      "SUBJ039",
+      "SUBJ044"
+     ],
+     [
+      "SUBJ039",
+      "SUBJ110",
+      "SUBJ116"
+     ]
+    ],
+    "6": [
+     [
+      "SUBJ044",
+      "SUBJ047",
+      "SUBJ066",
+      "SUBJ075",
+      "SUBJ082",
+      "SUBJ096"
+     ],
+     [
+      "SUBJ040",
+      "SUBJ043",
+      "SUBJ061",
+      "SUBJ062",
+      "SUBJ115",
+      "SUBJ116"
+     ],
+     [
+      "SUBJ038",
+      "SUBJ043",
+      "SUBJ044",
+      "SUBJ061",
+      "SUBJ096",
+      "SUBJ112"
+     ],
+     [
+      "SUBJ011",
+      "SUBJ039",
+      "SUBJ044",
+      "SUBJ047",
+      "SUBJ112",
+      "SUBJ116"
+     ],
+     [
+      "SUBJ038",
+      "SUBJ039",
+      "SUBJ043",
+      "SUBJ066",
+      "SUBJ110",
+      "SUBJ116"
+     ]
+    ],
+    "12": [
+     [
+      "SUBJ024",
+      "SUBJ039",
+      "SUBJ040",
+      "SUBJ044",
+      "SUBJ047",
+      "SUBJ061",
+      "SUBJ062",
+      "SUBJ066",
+      "SUBJ075",
+      "SUBJ082",
+      "SUBJ096",
+      "SUBJ112"
+     ],
+     [
+      "SUBJ011",
+      "SUBJ040",
+      "SUBJ043",
+      "SUBJ047",
+      "SUBJ061",
+      "SUBJ062",
+      "SUBJ066",
+      "SUBJ075",
+      "SUBJ096",
+      "SUBJ110",
+      "SUBJ115",
+      "SUBJ116"
+     ],
+     [
+      "SUBJ011",
+      "SUBJ024",
+      "SUBJ038",
+      "SUBJ043",
+      "SUBJ044",
+      "SUBJ047",
+      "SUBJ061",
+      "SUBJ062",
+      "SUBJ096",
+      "SUBJ110",
+      "SUBJ112",
+      "SUBJ116"
+     ],
+     [
+      "SUBJ011",
+      "SUBJ024",
+      "SUBJ039",
+      "SUBJ040",
+      "SUBJ044",
+      "SUBJ047",
+      "SUBJ061",
+      "SUBJ062",
+      "SUBJ066",
+      "SUBJ096",
+      "SUBJ112",
+      "SUBJ116"
+     ],
+     [
+      "SUBJ024",
+      "SUBJ038",
+      "SUBJ039",
+      "SUBJ040",
+      "SUBJ043",
+      "SUBJ061",
+      "SUBJ066",
+      "SUBJ082",
+      "SUBJ110",
+      "SUBJ112",
+      "SUBJ115",
+      "SUBJ116"
+     ]
+    ],
+    "18": [
+     [
+      "SUBJ011",
+      "SUBJ024",
+      "SUBJ038",
+      "SUBJ039",
+      "SUBJ040",
+      "SUBJ043",
+      "SUBJ044",
+      "SUBJ047",
+      "SUBJ061",
+      "SUBJ062",
+      "SUBJ066",
+      "SUBJ075",
+      "SUBJ082",
+      "SUBJ096",
+      "SUBJ110",
+      "SUBJ112",
+      "SUBJ115",
+      "SUBJ116"
+     ]
+    ]
+   }
+  },
+  "g4_reference_walks": {
+   "rule": "walk w of body B takes the training walk with the smallest sha256('physics-source-g4-ref-v1|' + body id + '|' + w + '|' + subject code + '|' + author trial index); in each inner fold, walks whose reference person is held out are left out",
+   "computed_at": "binding (needs the full training pool)"
+  },
+  "narrow_pool": {
+   "rule": "training people with leg length at or below the full-pool median",
+   "computed_at": "binding"
+  },
+  "bodies": {
+   "rule": "Scrambled Sobol sequence in natural index order, 10 dimensions, Joe-Kuo direction numbers, linear matrix scramble plus digital shift with bits from sha256('physics-source-allocation-v1|sobol-scramble|seed20261127|dim' + d + '|block' + b). u = (integer + 0.5) / 2^32. Generators use prefixes: G1 B0000-B0127, G4 B0000-B0599, G3c B0000-B0031, G3f B0000-B0015; diversity series 1, 8, 32 and 128 bodies.",
+   "count": 1024,
+   "factors": [
+    "stature",
+    "bmi",
+    "thigh_shank_ratio",
+    "foot_length",
+    "pelvis_width",
+    "strength_base",
+    "vmax",
+    "contact_time_constant",
+    "friction",
+    "speed_factor"
+   ],
+   "mapping": {
+    "stature_m": "1.50 + 0.45 u0; segment_scale = stature / 1.70",
+    "mass_kg": "BMI = 18 + 16 u1; mass = BMI * stature^2, clipped to 45..115 kg (mass_clipped records it)",
+    "thigh_shank_ratio_factor": "1 + 0.12 (u2 - 0.5): thigh length times sqrt(f), shank length divided by sqrt(f)",
+    "foot_length_factor": "1 + 0.16 (u3 - 0.5)",
+    "pelvis_width_factor": "1 + 0.16 (u4 - 0.5)",
+    "strength_factor": "(0.6 + 0.7 u5) * (mass / 75 kg)^(2/3), multiplies every muscle peak isometric force",
+    "vmax_l0_per_s": "8 + 4 u6, muscle maximum shortening velocity in optimal fibre lengths per second",
+    "contact_time_constant_s": "0.02 + 0.02 u7, MuJoCo solref time constant of foot-floor contacts",
+    "friction": "0.6 + 0.6 u8, sliding friction of foot-floor contacts",
+    "speed_factor": "0.8 + 0.45 u9; G1 target speeds = speed_factor * (0.9, 1.0, 1.1) * 1.25 m/s * sqrt(stature / 1.70), clipped to 0.95..1.70 m/s; G4 target speed = speed_factor * reference speed * sqrt(stature / reference stature), clipped to 0.95..1.70 m/s"
+   },
+   "table_in": "ALLOCATION.json",
+   "mass_clipped_count": 43
+  },
+  "script": {
+   "file": "allocate.py",
+   "needs": "Python standard library 3.10+",
+   "reads_data": false
+  }
+ },
+ "task": {
+  "source_of_definitions": "walking-scale adapter, imported by sha256; the committed adapter governs",
+  "issue_grid": "t = 199 + 20k on the native 1 kHz analog grid of each walk or traversal",
+  "row": "one (issue, plate) pair, plates 1-4",
+  "inputs": {
+   "force": {
+    "what": "ten non-overlapping 20 ms means of target-plate upward vertical force, samples t-199..t",
+    "unit": "N"
+   },
+   "plate_state": "from samples through t only",
+   "markers": "only if walking-scale admits them, under its causality guard (plate-centred heel and toe)",
+   "source_tag": "8-dimensional learned embedding; measured at issue",
+   "body_vector": "optional (tuned): mass kg, height mm, leg length mm, missing flags",
+   "emg_secondary": "walking-scale EMG feature rule, else within-channel relative change, median and 80th percentile across channels",
+   "variant_K": "only if markers are not admitted: LHEE, RHEE, LTOE, RTOE in mm, plate-centred frame, walking direction from past sacrum progression, ten frames 20 ms apart ending at or before t - 100 ms"
+  },
+  "targets": {
+   "new_load": {
+    "definition": "unloaded plate (20 consecutive samples within -10..+10 N) then a rising +20 N crossing held for the next 19 samples, with onset in t+1..t+100; negative needs known state at t and coverage through t+119",
+    "unit": "probability",
+    "score": "Brier"
+   },
+   "impulse": {
+    "definition": "sum of upward vertical force over samples t+1..t+100 times 0.001 s",
+    "unit": "N*s",
+    "score": "MAE"
+   },
+   "heel_secondary": {
+    "definition": "heel displacement t to t+100 ms, both heels, Euclidean, once per issue",
+    "unit": "mm",
+    "condition": "only if walking-scale admits markers"
+   }
+  },
+  "eligibility": "inputs and target-validity masks only, equal for every arm"
+ },
+ "simulation": {
+  "environments": {
+   "A": "MuJoCo 3.17.0, MyoSuite 3.0.0, myo_sim 0.2.3: published policy (unscreened control, optional G2)",
+   "B": "MuJoCo 3.17.0, MyoSuite 3.1.0, myo_sim 0.2.5: G1, G4, virtual laboratory, body scaling",
+   "C": "MuJoCo 4.0.1, musclemimic-models 1.0.6: G3c, G3f",
+   "D": "MyoGen 0.11.0, NEURON 8.2.7, separate process: private MyoGen EMG",
+   "T": "PyTorch CPU FP32, scikit-learn, NumPy: training, issuing, scoring"
+  },
+  "virtual_lab": {
+   "plates": "Van Criekinge corners; layout repeats about every 3.5 m with offsets up to +-0.4 m along and +-0.1 m across",
+   "plate_force": "sum of foot-floor contact normal forces with contact point inside the plate, 1 kHz (= 1 ms step)",
+   "noise": "per-plate SD and offset from training-people unloaded stretches",
+   "walk_s": 12,
+   "discarded_warmup_s": 2,
+   "traversal_crop_s": [
+    2.1,
+    4.2
+   ],
+   "checks": [
+    "vertical impulse closure < 0.5% incl. tracking residual",
+    "no non-foot floor contact",
+    "no external force except logged residual",
+    "one-tick future-replacement test"
+   ],
+   "markers": "Plug-in Gait heel and toe sites, 100 Hz, 1-2 mm noise, low-pass at the S0-measured cutoff"
+  },
+  "scaling_engine": "MjSpec; lengths, sites, contacts, masses, inertias, peak forces; length ranges recomputed; unit factors reproduce the unmodified compiled sha256",
+  "generators": {
+   "G4": {
+    "preferred": true,
+    "kind": "simulated, reference-tracking",
+    "licence_class": "clean",
+    "method": "IK of training-people markers, retarget, PD joint targets -> static optimisation over 80 muscles every 10 ms; pelvis residual capped at 10% BW and logged",
+    "bodies": "B0000-B0599",
+    "walks_per_body": 3,
+    "time_box_days": 2
+   },
+   "G1": {
+    "kind": "simulated, generated",
+    "licence_class": "clean",
+    "method": "Song-Geyer reflex controller, CMA-ES population 24, <= 6000 rollouts nominal, <= 1200 per warm-started body; objective survival to 12 s - speed error - integral of activation cubed; no measured-data term",
+    "bodies": "B0000-B0127",
+    "walks_per_body": 3,
+    "time_box_days": 1.5
+   },
+   "G1-cal": {
+    "kind": "simulated, generated, calibrated",
+    "licence_class": "clean",
+    "condition": "only if neither G4 nor G1 passes",
+    "time_box_days": 1
+   },
+   "G3c": {
+    "kind": "simulated, reference-tracking",
+    "licence_class": "clean",
+    "method": "myofullbody without arm subtree plus rigid arm masses (de Leva: 2.71%, 1.62%, 0.61% per side), G4 tracker",
+    "bodies": "B0000-B0031",
+    "condition": "only if G4 passes",
+    "time_box_days": 0.5
+   },
+   "G3f": {
+    "kind": "simulated, reference-tracking",
+    "licence_class": "non-commercial",
+    "private": true,
+    "bodies": "B0000-B0015"
+   },
+   "G2": {
+    "optional": true,
+    "kind": "simulated, generated",
+    "licence_class": "unknown",
+    "private": true,
+    "counts_for_go_no_go": false
+   },
+   "SLIP": {
+    "optional": true,
+    "kind": "simulated, reduced-order",
+    "licence_class": "clean"
+   }
+  },
+  "emg": {
+   "mapping": {
+    "BF": "bflh+bfsh",
+    "GAS": "gaslat+gasmed",
+    "RF": "recfem",
+    "ST": "semiten",
+    "TA": "tibant",
+    "VL": "vaslat",
+    "ERS": "torso muscles in G3c/G3f, masked elsewhere"
+   },
+   "CR-EMG": {
+    "licence_class": "clean",
+    "calibrated": true,
+    "parameters": {
+     "recruitment_range": [
+      30,
+      60
+     ],
+     "rate_hz": [
+      8,
+      35
+     ],
+     "isi_cv": [
+      0.15,
+      0.25
+     ],
+     "muap": "Hermite-Rodriguez",
+     "fat_mm": [
+      2,
+      15
+     ],
+     "conduction_m_s": [
+      3.5,
+      5.0
+     ],
+     "electrode_spacing_mm": 20,
+     "sim_rate_hz": 10000,
+     "band_hz": [
+      20,
+      450
+     ],
+     "output_rate_hz": 1000,
+     "snr_db": [
+      10,
+      30
+     ]
+    },
+    "amplitude": "quantile-mapped per channel to training-people RMS",
+    "clean_room": "author records not having read MyoGen source"
+   },
+   "MyoGen": {
+    "licence_class": "agpl",
+    "private": true
+   }
+  },
+  "realism_gate": {
+   "frozen_in": "GATE-THRESHOLDS.json (S0, before any corpus)",
+   "data_derived_from": "18 known training people only, widened by 10%",
+   "per_walk": {
+    "no_fall": "pelvis > 0.6 x standing pelvis height and no non-foot floor contact for >= 8 s",
+    "speed_m_s": [
+     0.9,
+     1.75
+    ],
+    "cadence_steps_min": [
+     90,
+     140
+    ],
+    "peak_foot_force_bw": {
+     "median": [
+      1.0,
+      1.3
+     ],
+     "p99_max": 1.5
+    },
+    "stance_time": "median and >= 90% of stances within [0.9 x P1, 1.1 x P99] of training-people plate stance times",
+    "double_support_fraction_of_stride": [
+     0.15,
+     0.3
+    ],
+    "both_feet_below_20N_fraction_max": 0.005,
+    "momentum_closure_max": 0.005,
+    "tracking_residual_rms_max_bw": 0.05
+   },
+   "body_passes": "at least 2 of its walks pass; only passing walks enter the corpus",
+   "per_generator": {
+    "joint_box": ">= 50% of simulated rows with 200 ms history mean >= 20 N inside the training-people P5-P95 box of mean force/BW, largest 20 ms bin/BW, impulse/BW (+ heel 180 ms displacement if markers admitted)",
+    "onset_rate": "per-plate onsets per traversal within training-people min-max",
+    "reported_not_gated": [
+     "simulated-vs-measured classifier AUC",
+     "per-feature distribution distances"
+    ]
+   },
+   "go_no_go": ">= 128 distinct passing bodies from one clean generator (G4, G1 or G1-cal) meeting the corpus criteria and covering >= 80% of every factor range; G3c/G3f need >= 75% of their bodies passing; else G1-cal once; else stop, keep the test group sealed, publish the negative feasibility result"
+  }
+ },
+ "model": {
+  "family": "walking-scale committed forecaster family, imported by sha256 (draft: compact three-pass recurrent: causal conv k=3, GRU, shared GRU cell x3; heads new-load logit and impulse residual over persistence)",
+  "additions": [
+   "source-tag embedding (8)",
+   "optional body vector",
+   "plate-centred markers if admitted"
+  ],
+  "standardisation": "measured training people of each fit, equal person weight, applied unchanged to simulated and augmented rows",
+  "runtime": {
+   "precision": "FP32",
+   "device": "CPU",
+   "deterministic": true,
+   "threads_per_fit": 1,
+   "max_threads_total": 16,
+   "cpus": "16-31"
+  },
+  "optimiser": {
+   "name": "AdamW",
+   "lr": 0.002,
+   "weight_decay": 0.001,
+   "batch": 256,
+   "schedule": "cosine with 5% warm-up; reset with a new warm-up at fine-tuning"
+  },
+  "update_budget_U": 4000,
+  "rows_drawn_per_arm": 1024000,
+  "sampling": {
+   "measured": "person -> walk -> issue",
+   "simulated": "generator -> body -> traversal -> issue"
+  },
+  "pretraining_shared_between_fits": false
+ },
+ "seeds": {
+  "fits": [
+   431,
+   20261127,
+   20261128,
+   20261129,
+   20261130
+  ],
+  "issued_forecast": "mean of the five seed forecasts",
+  "bootstrap": 20261127,
+  "sobol_scramble": 20261127
+ },
+ "tuning": {
+  "configs_per_family": 8,
+  "stages": {
+   "A": "5 family recipes at width 64, body vector off",
+   "B": "A winner at width 24, at width 128, and at width 64 with body vector on"
+  },
+  "selection_score": "impulse MAE pooled over held people of the 4 inner folds, people equal, five-seed mean forecast",
+  "brier_guard": "ineligible if pooled Brier > family best + 0.002",
+  "ties": "within 0.1% relative: fewer simulated/augmented updates, fewer total updates, smaller width, body vector off"
+ },
+ "families": {
+  "M": {
+   "stage_A_measured_updates": [
+    500,
+    1000,
+    2000,
+    3000,
+    4000
+   ]
+  },
+  "S*": {
+   "corpus": "pooled clean generators that passed (generator -> body)",
+   "stage_A": [
+    {
+     "mixture_share": 0.25
+    },
+    {
+     "mixture_share": 0.5
+    },
+    {
+     "pretrain_updates": 2000,
+     "finetune_share": 0.0
+    },
+    {
+     "pretrain_updates": 3600,
+     "finetune_share": 0.0
+    },
+    {
+     "pretrain_updates": 3000,
+     "finetune_share": 0.1
+    }
+   ]
+  },
+  "AUG*": {
+   "method": "mass factor k_m and leg factor k_l uniform in [1-r, 1+r]; force x k_m, time x sqrt(k_l), markers x k_l, body vector scaled; labels recomputed by the adapter; 20 copies per traversal",
+   "stage_A": [
+    {
+     "mixture_share": 0.25,
+     "r": 0.25
+    },
+    {
+     "mixture_share": 0.5,
+     "r": 0.25
+    },
+    {
+     "pretrain_updates": 2000,
+     "finetune_share": 0.0,
+     "r": 0.25
+    },
+    {
+     "pretrain_updates": 3000,
+     "finetune_share": 0.1,
+     "r": 0.25
+    },
+    {
+     "mixture_share": 0.25,
+     "r": 0.1
+    }
+   ]
+  },
+  "H-M": {
+   "kind": "histogram gradient-boosted trees, measured only",
+   "configs": [
+    {
+     "max_iter": 200,
+     "learning_rate": 0.05,
+     "max_leaf_nodes": 15
+    },
+    {
+     "max_iter": 200,
+     "learning_rate": 0.05,
+     "max_leaf_nodes": 31
+    },
+    {
+     "max_iter": 200,
+     "learning_rate": 0.1,
+     "max_leaf_nodes": 15
+    },
+    {
+     "max_iter": 200,
+     "learning_rate": 0.1,
+     "max_leaf_nodes": 31
+    },
+    {
+     "max_iter": 400,
+     "learning_rate": 0.05,
+     "max_leaf_nodes": 15
+    },
+    {
+     "max_iter": 400,
+     "learning_rate": 0.05,
+     "max_leaf_nodes": 31
+    },
+    {
+     "max_iter": 400,
+     "learning_rate": 0.1,
+     "max_leaf_nodes": 15
+    },
+    {
+     "max_iter": 400,
+     "learning_rate": 0.1,
+     "max_leaf_nodes": 31
+    }
+   ]
+  },
+  "H-S": {
+   "kind": "trees with simulated rows and a source flag",
+   "configs": [
+    {
+     "sim_weight_share": 0.1,
+     "learning_rate": 0.05,
+     "max_leaf_nodes": 15,
+     "max_iter": 400
+    },
+    {
+     "sim_weight_share": 0.1,
+     "learning_rate": 0.05,
+     "max_leaf_nodes": 31,
+     "max_iter": 400
+    },
+    {
+     "sim_weight_share": 0.1,
+     "learning_rate": 0.1,
+     "max_leaf_nodes": 15,
+     "max_iter": 400
+    },
+    {
+     "sim_weight_share": 0.1,
+     "learning_rate": 0.1,
+     "max_leaf_nodes": 31,
+     "max_iter": 400
+    },
+    {
+     "sim_weight_share": 0.25,
+     "learning_rate": 0.05,
+     "max_leaf_nodes": 15,
+     "max_iter": 400
+    },
+    {
+     "sim_weight_share": 0.25,
+     "learning_rate": 0.05,
+     "max_leaf_nodes": 31,
+     "max_iter": 400
+    },
+    {
+     "sim_weight_share": 0.25,
+     "learning_rate": 0.1,
+     "max_leaf_nodes": 15,
+     "max_iter": 400
+    },
+    {
+     "sim_weight_share": 0.25,
+     "learning_rate": 0.1,
+     "max_leaf_nodes": 31,
+     "max_iter": 400
+    }
+   ]
+  }
+ },
+ "specificity_controls": {
+  "P-shuffle": "simulated targets permuted across bodies within strata of plate state at issue and generator",
+  "frozen_encoders": {
+   "readout_updates": 1000,
+   "arms": [
+    "S* encoder after 0.75U simulated pre-training",
+    "random frozen encoder",
+    "frozen NeuroTranslate 0.0 shared encoder with a new linear input layer (recorded as not run if incompatible)"
+   ]
+  },
+  "simulation_only_zero_shot": {
+   "simulated_updates": 4000
+  },
+  "unscreened_earlier_style": {
+   "corpus": "published policy, nominal body: (mass, traction) = (1,1), (0.9,1), (1.1,1), (1,1.2), (1.1,1.2); no gate",
+   "mixture_share": 0.5,
+   "private": true
+  },
+  "SLIP": "if run"
+ },
+ "secondary_arms": {
+  "EMG": {
+   "qualification": "walking-scale rule, else named left and right BF, GAS, RF, ST, TA, VL present, unique, finite",
+   "arms": [
+    "M_E",
+    "S*_E-CR",
+    "S*_E-masked",
+    "S*_E-MyoGen (private)"
+   ],
+   "extra_tuning": false
+  },
+  "heel": "only if markers admitted: added head in every neural arm",
+  "variant_K": "only if markers not admitted: M_K, S*_K"
+ },
+ "descriptive": {
+  "dose": {
+   "mixture_shares": [
+    0.05,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+   ],
+   "pretrain_fractions": [
+    0.25,
+    0.5,
+    0.75,
+    0.9
+   ]
+  },
+  "diversity": {
+   "bodies": [
+    1,
+    8,
+    32,
+    128
+   ],
+   "fixed_simulated_walks": 384,
+   "plus": "whole corpus"
+  },
+  "generator_ablation": "each passing generator alone (G3f, G2 private)",
+  "data_efficiency": {
+   "n": [
+    3,
+    6,
+    12,
+    18,
+    "full"
+   ],
+   "subsets": "5 for n = 3, 6, 12",
+   "curve": "a + b * n^-c fitted to M"
+  },
+  "compute_unmatched": {
+   "S": "U simulated pre-training + U measured",
+   "M": "2U measured"
+  },
+  "body_shift": "narrow pool training; out-of-range test people (leg length above narrow max) vs others",
+  "distance": "per-person gain vs Mahalanobis distance of height, mass, leg length, walking speed",
+  "trees": "H-S minus H-M"
+ },
+ "baselines": [
+  "fit prevalence of new load with force persistence (latest 20 ms mean x 0.1 s)",
+  "linear trend through the last five 20 ms means, integrated over 100 ms; prevalence for new load",
+  "ridge and logistic on the neural inputs, penalty from {0.001, 0.01, 0.1, 1, 10} by inner folds",
+  "heel constant velocity and stationary heel (heel target only)",
+  "published force specialist common-six.npz, force-only calculation, penalty chosen on the 6 earlier validation people",
+  "published compact three-pass checkpoint, unchanged, where its EMG streams are available (reported with EMG arms)"
+ ],
+ "metrics": {
+  "primary": {
+   "name": "per-plate impulse MAE",
+   "unit": "N*s",
+   "weighting": "issues within walk, walks within person, people equal; plates pooled within walk"
+  },
+  "brier": "new load, same weighting, rows with a known label",
+  "reported": [
+   "reliability bins",
+   "per-person differences",
+   "share of people improved",
+   "seed-by-seed",
+   "worst third of people",
+   "counts of people, walks, traversals, issues, plate rows, verified onsets"
+  ],
+  "contrast": "delta = mean over test people of error(arm) - error(M); r = delta / mean error(M)"
+ },
+ "uncertainty": {
+  "method": "paired bootstrap over test people",
+  "draws": 10000,
+  "seed": 20261127,
+  "interval": "95% percentile",
+  "secondary_p_values": "two-sided bootstrap, Holm"
+ },
+ "planning": {
+  "between_person_sd_relative_paired_difference": 0.089,
+  "seed_sd_Ns_per_person": 0.146,
+  "mde_relative_at_12_people": [
+   0.05,
+   0.07
+  ],
+  "projected_gain_12_to_46_measured_people": 0.028
+ },
+ "success_rule": {
+  "applied_once_to": "inner-fold-selected configurations",
+  "HELPED": [
+   "upper 95% bound of delta_impulse(S* - M) < 0",
+   "upper 95% bound of delta_Brier(S* - M) < +0.002",
+   "S* impulse MAE point estimate below force persistence and ridge"
+  ],
+  "PHYSICS-SPECIFIC": "only after HELPED: upper 95% bound of delta_impulse(S* - AUG*) < 0; otherwise not separable from body-scaling augmentation",
+  "NEW-BODIES": "descriptive only",
+  "HURT": "lower 95% bound of delta_impulse(S* - M) > 0",
+  "INCONCLUSIVE": "otherwise; report realised interval and MDE = 2.80 x SD / sqrt(n)",
+  "key_secondaries_holm_0.05": [
+   "S*_E-CR - M_E impulse MAE (EMG-qualified people)",
+   "S* - M heel displacement MAE (if heel target exists)"
+  ],
+  "floors": {
+   "primary": ">= 10 test people scoreable for impulse, >= 8 with both label classes; else descriptive",
+   "emg": ">= 8 scoreable EMG-qualified people",
+   "heel": ">= 10"
+  },
+  "reporting": "every predeclared result, wins and losses; nothing changed after any test label is read"
+ },
+ "steps": [
+  {
+   "id": "S0",
+   "work": "feasibility on training people and simulation only: environments, static trials and envelope, virtual lab and one policy walk through the adapter (units), scaling engine, G4 and G1, G3c, CR-EMG, MyoGen timing, gate report",
+   "eta": "3-4 working days",
+   "core_hours": "< 10"
+  },
+  {
+   "id": "S1",
+   "work": "BINDING.json, Simple edition, separate reviewer admission, lead commit (needs the walking-scale commit)",
+   "eta": "1 day"
+  },
+  {
+   "id": "S2",
+   "work": "corpus: G4 1-5 core-h, G1 about 40 core-h, G3c 3-4 h, windows and checks 2-3 h",
+   "eta": "one night"
+  },
+  {
+   "id": "S3",
+   "work": "inner folds: 480 neural fits + 320 tree fits, baselines, checks",
+   "eta": "about 0.5 day",
+   "core_hours": "10-15"
+  },
+  {
+   "id": "S4",
+   "work": "about 375 final fits, reload checks, hashes, FIT-COMPLETE.json",
+   "eta": "about 0.5 day",
+   "core_hours": "8-10"
+  },
+  {
+   "id": "S5",
+   "work": "ranged download of the test group (about 30-40 MB, recorded), history-only packing, input-only issuer, separate scorer, independent replay",
+   "eta": "0.5 day"
+  },
+  {
+   "id": "S6",
+   "work": "Technical and Simple editions, draft, distinct rewrite, separate reader, NOTICE",
+   "eta": "1 day"
+  }
+ ],
+ "totals": {
+  "working_days": [
+   7,
+   9
+  ],
+  "core_hours": [
+   60,
+   90
+  ],
+  "home_disk_gb_max": 5,
+  "calendar_estimate": "about 8-10 December 2026 if S0 starts 28 November and walking-scale commits by the end of S0",
+  "critical_path": "generator realism in S0"
+ },
+ "records": [
+  "per fit: LOCK.json, checkpoint, reload equality, RESULT.json, READBACK.json",
+  "FIT-COMPLETE.json with every final checkpoint sha256 before any reserved byte is downloaded",
+  "history-only packet for the issuer; targets sealed by sha256 for the scorer; scorer in a separate process; independent replay",
+  "every download recorded: URL, byte range, bytes, sha256"
+ ],
+ "rights": {
+  "clean_sources": [
+   "MuJoCo, MyoSuite, myo_sim (Apache-2.0)",
+   "Rajagopal legs (MIT)",
+   "Bruno lumbar torso (MIT)",
+   "musclemimic-models leg and torso assets (Apache-2.0, NOTICE)",
+   "Van Criekinge data (CC0)",
+   "CR-EMG and project code"
+  ],
+  "restricted_scores_only": [
+   "MoBL-ARMS arm and hand (non-commercial), incl. G3f",
+   "MyoGen output (AGPL-3.0-or-later)",
+   "published policy checkpoint and derivatives (G2, unscreened control) until licence confirmed"
+  ],
+  "enforcement": "licence class and components on every array; licence closure in every checkpoint NOTICE; release script refuses non-clean closure; restricted outputs private",
+  "licences_of_releases": "project code and clean weights CC0-1.0 (repository licence); files derived from Apache-2.0 model assets keep Apache-2.0 and NOTICE; CC BY 3.0 elements keep attribution"
+ },
+ "publication": [
+  "this protocol and BINDING.json",
+  "clean code",
+  "GATE-THRESHOLDS.json and FEASIBILITY.json (also if negative)",
+  "scores of every predeclared arm incl. private arms",
+  "per-person results by archive subject code",
+  "clean weights",
+  "optionally clean simulated windows",
+  "NOTICE",
+  "Technical and Simple editions after draft, rewrite and separate reader"
+ ],
+ "owner_decisions_pending": [
+  "MyoGen-trained weights: private scores only (default) or a separate AGPL-3.0 release",
+  "confirm scores-only for arms on the non-commercial arm/hand part and on the published policy, or retrain G2 from scratch",
+  "whether the never-accessed Van Criekinge stroke cohort (50 people) may be spent on an exploratory test",
+  "with 8-12 test people only effects of about 5-7% are detectable: accept, or enlarge the physics reserve at the cost of walking-scale rungs"
+ ],
+ "later_protocol": "reinforcement learning with verifiable rewards on a generator; own allocation through walking-scale and own admission",
+ "departures_from_reviewed_design": [
+  "8 configurations per family as 5 recipes + 3 width/body options; S* uses 5 of 7 listed recipes; passing clean generators pooled",
+  "pre-training not shared across folds or seeds",
+  "EMG arms reuse force-only configurations without extra tuning",
+  "G3c/G3f judged with 75% of bodies passing; G2 cannot satisfy go/no-go while its licence is unknown",
+  "diversity series fixed at 384 simulated walks"
+ ]
+}
