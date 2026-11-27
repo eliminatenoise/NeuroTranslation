@@ -3484,9 +3484,9 @@
  "protocol": {
   "file": "PROTOCOL.json",
   "revision": 3,
-  "head": "0e97fcd208403d6b8707d44e669545fcc20583fd",
+  "head": "bf2ecd662e6073e0ef342671213f100a7fe431d6",
   "head_is": "the last commit that changed PROTOCOL.json, PROTOCOL.md, PROTOCOL-SIMPLE.md or ALLOCATION.json when this file was built",
-  "PROTOCOL.json_sha256": "d5f9e5744ed9c0da10e839c1e9f0ffd4995edb2faf1bd567acdd530c55ebf752",
+  "PROTOCOL.json_sha256": "02599a45dc8fce0dbc2283e26bef55449351da73b22d035554e812fc21370cd3",
   "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a"
  },
  "counting_rules": {
@@ -4109,7 +4109,7 @@
   },
   "rule": "W_max = smallest anchor inner-training window count rounded down to a power of 2; D-arm orders by ascending sha256('pooled-encoder-0.2|D|k' + k + '|draw' + draw + '|' + dataset) over the wave-1 sources and the admitted conditional sources; a source needs at least W_max/8 inner-training windows to be eligible and at least W_max/k to enter a k-source arm, and each arm takes the first k sources of its order that have W_max/k; D_all takes floor(W_max / n) windows from each of the n eligible sources; W_P = the largest power of 2 not above min(W_max/4, windows of the smallest P level)"
  },
- "updated_at": "2026-11-28T10:18:59+1100",
+ "updated_at": "2026-11-28T10:43:48+1100",
  "no_recording_values": true,
  "padded_share": {
   "rule": "each recording tiled into ceil(L/T) rows of T steps; share = padded positions / all positions",
