@@ -393,7 +393,7 @@ def gates(paths, results, summary):
                      "boundary_frames_in_two_recordings": shared,
                      "trc_frames_equal_target": [a1, n1], "trc_time_equals_frame_clock": [a2, n2],
                      "joint_angle_time_equals_trc": [a3, n3], "plate_starts_at_trc_time": [a4, n4],
-                     "plate_on_2khz_grid": [a5, n5], "steps_inside_emg_span": [a6, n6],
+                     "plate_on_2khz_grid": [a5, n5], "segment_frames_inside_trial_frames": [a6, n6],
                      "emg_length_equals_frames_x_20": [e_ok, len(trials)], "step_files_missing": missing,
                      "vertical_axis_rechecks_disagreeing": sum(1 for v in vert if not v)},
         "Q5_labels": {"pass": not neg, "how": "markers mm (measured), OpenSim coordinates degrees or m (derived), EMG measured "
