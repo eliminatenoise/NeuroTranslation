@@ -114,6 +114,25 @@ def log_download(paths, entry):
                   lambda: {"schema": "neurotranslate-0.2-pooled-encoder-downloads", "downloads": []})
 
 
+def log_downloads(paths, entries):
+    """Append several records to DOWNLOADS.json in one locked write (used for many small range reads)."""
+    entries = [dict(e) for e in entries]
+    if not entries:
+        return
+    for e in entries:
+        e.setdefault("when", now_iso())
+
+    def upd(obj):
+        if isinstance(obj, list):
+            obj.extend(entries)
+            return obj
+        obj.setdefault("downloads", []).extend(entries)
+        return obj
+
+    locked_update(paths["downloads_json"], upd,
+                  lambda: {"schema": "neurotranslate-0.2-pooled-encoder-downloads", "downloads": []})
+
+
 def protocol_head(paths):
     """The commit and file hashes of the protocol branch at the moment a dataset is started."""
     import subprocess
@@ -164,9 +183,10 @@ _opener = urllib.request.build_opener(_NoRedirect)
 USER_AGENT = "neurotranslate-0.2-pooled-encoder-data-step (polite, 1 request/s per host)"
 
 
-def http_get(url, pacer, headers=None, out_path=None, timeout=120, max_redirects=5):
+def http_get(url, pacer, headers=None, out_path=None, timeout=120, max_redirects=5, md5=False):
     """GET with manual redirects so that every host is paced. Returns (status, headers, body or None,
-    final_url_without_query, hosts). A 429 from any host raises Stop429 and nothing is retried."""
+    final_url_without_query, hosts). A 429 from any host raises Stop429 and nothing is retried.
+    With md5=True the result also holds the MD5 of the body (publisher checksums of some deposits)."""
     hdrs = {"User-Agent": USER_AGENT, "Accept-Encoding": "identity"}
     hdrs.update(headers or {})
     hosts = []
@@ -187,6 +207,7 @@ def http_get(url, pacer, headers=None, out_path=None, timeout=120, max_redirects
             raise
         status = resp.status
         rh = dict(resp.headers.items())
+        hm = hashlib.md5() if md5 else None
         if out_path is not None:
             h = hashlib.sha256()
             n = 0
@@ -197,6 +218,8 @@ def http_get(url, pacer, headers=None, out_path=None, timeout=120, max_redirects
                         break
                     f.write(b)
                     h.update(b)
+                    if hm is not None:
+                        hm.update(b)
                     n += len(b)
             resp.close()
             body = None
@@ -205,9 +228,14 @@ def http_get(url, pacer, headers=None, out_path=None, timeout=120, max_redirects
             body = resp.read()
             resp.close()
             digest, nbytes = sha256_bytes(body), len(body)
+            if hm is not None:
+                hm.update(body)
         final = urllib.parse.urlsplit(cur)
-        return {"status": status, "headers": rh, "body": body, "sha256": digest, "bytes": nbytes,
-                "final_url": "%s://%s%s" % (final.scheme, final.netloc, final.path), "hosts": hosts}
+        out = {"status": status, "headers": rh, "body": body, "sha256": digest, "bytes": nbytes,
+               "final_url": "%s://%s%s" % (final.scheme, final.netloc, final.path), "hosts": hosts}
+        if hm is not None:
+            out["md5"] = hm.hexdigest()
+        return out
     raise RuntimeError("too many redirects for %s" % url)
 
 

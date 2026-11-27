@@ -25,7 +25,18 @@ DEPOSITS = {
     "katmah": {"kind": "physionet", "url": "https://physionet.org/files/multimodal-gait-dataset/1.0.0/LICENSE.txt"},
     "hyser": {"kind": "physionet", "url": "https://physionet.org/files/hd-semg/2.0.0/LICENSE.txt"},
     "cemhsey": {"kind": "zenodo", "url": "https://zenodo.org/api/records/15077957"},
+    # neural part
+    "ds003739": {"kind": "openneuro",
+                 "url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds003739/1.0.3/dataset_description.json"},
+    "ofner": {"kind": "zenodo", "url": "https://zenodo.org/api/records/834976"},
+    "hygrip": {"kind": "figshare", "url": "https://api.figshare.com/v2/articles/12383639/versions/1"},
+    "sabes": {"kind": "zenodo", "url": "https://zenodo.org/api/records/3854034"},
+    "wtrack": {"kind": "dandi", "url": "https://api.dandiarchive.org/api/dandisets/000978/versions/0.240511.0307/"},
+    "area2": {"kind": "dandi", "url": "https://api.dandiarchive.org/api/dandisets/000127/versions/0.220113.0359/"},
+    "falcon_m1": {"kind": "dandi", "url": "https://api.dandiarchive.org/api/dandisets/000941/versions/0.241029.1405/"},
 }
+LICENCE_URLS = {"spdx:CC-BY-4.0": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+                "CC0": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt"}
 
 
 def extract(kind, body):
@@ -45,6 +56,17 @@ def extract(kind, body):
         return {"declared": lic.get("id") if isinstance(lic, dict) else str(lic), "licence_url": None,
                 "licence_object": lic, "licence_object_sha256": common.sha256_text(json.dumps(lic, sort_keys=True)),
                 "doi": d.get("doi") or md.get("doi"), "version": md.get("version"), "title": md.get("title")}
+    if kind == "dandi":
+        lic = d.get("license") or []
+        name = lic[0] if lic else None
+        return {"declared": name, "licence_url": LICENCE_URLS.get(name), "licence_object": lic,
+                "licence_object_sha256": common.sha256_text(json.dumps(lic, sort_keys=True)),
+                "doi": d.get("doi"), "version": d.get("version"), "title": d.get("name")}
+    if kind == "openneuro":
+        name = d.get("License")
+        return {"declared": name, "licence_url": LICENCE_URLS.get(name), "licence_object": {"License": name},
+                "licence_object_sha256": common.sha256_text(json.dumps({"License": name}, sort_keys=True)),
+                "doi": d.get("DatasetDOI"), "version": "1.0.3", "title": d.get("Name")}
     if kind == "invenio":
         md = d.get("metadata", {})
         lic = md.get("license") or md.get("rights") or md.get("access_right_category") or {}

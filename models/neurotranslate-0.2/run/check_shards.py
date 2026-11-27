@@ -3,7 +3,8 @@
 For every shard listed in shards/<dataset>/TOKENS.json: the file exists and its sha256 matches; the step
 offsets agree with the recordings listed for that unit; every group array has the dataset's channel
 count and feature count; every value is finite; masked entries are zero; each recording has at least
-one present value. Writes audits/<dataset>-SHARD-CHECK.json and exits non-zero on any failure.
+one present value. Groups whose channels differ per unit (spike units in the neural part) take their channel
+list from TOKENS.json unit_channels. Writes audits/<dataset>-SHARD-CHECK.json and exits non-zero on any failure.
 """
 import argparse
 import json
@@ -43,7 +44,11 @@ def main():
         if list(np.diff(offs)) != [r["steps"] for r in recs]:
             problems.append("offsets " + s["file"])
         any_present = np.zeros(int(offs[-1]), bool)
-        for g, chans in tok["channels"].items():
+        groups = dict(tok["channels"])
+        groups.update(tok.get("unit_channels", {}).get(s["unit"], {}))  # per-unit channel lists (neural part)
+        for g, chans in groups.items():
+            if not chans:
+                continue
             F = len(tok["features"][g])
             v, m = z[g + "_val"], z[g + "_msk"]
             if v.shape != (offs[-1], len(chans), F) or m.shape != v.shape:

@@ -17,13 +17,21 @@ FORBIDDEN = tuple("/%s/" % d for d in ("home", "tmp", "Users", "mnt"))  # absolu
 
 
 def totals(datasets):
-    t = {"datasets": 0, "qualified_datasets": 0, "individuals": 0, "people": 0, "animals": 0, "recordings": 0,
-         "unique_steps_20ms": 0, "windows_1200ms": 0, "windows_inner_training": 0, "windows_inner_validation": 0,
-         "spikes": 0, "events": 0, "channel_seconds_by_group": {}}
-    for d in datasets.values():
+    t = {"datasets": 0, "qualified_datasets": 0, "individuals": 0, "people": 0, "animals": 0, "sites": 0,
+         "recordings": 0, "tasks": 0, "unique_steps_20ms": 0, "windows_1200ms": 0, "windows_inner_training": 0,
+         "windows_inner_validation": 0, "spikes": 0, "events": 0, "channel_seconds_by_group": {},
+         "species": {}, "not_qualified": {}}
+    for name, d in datasets.items():
         c = d.get("counts", {})
         t["datasets"] += 1
         t["qualified_datasets"] += 1 if d.get("qualified") else 0
+        if not d.get("qualified"):
+            t["not_qualified"][name] = d.get("not_qualified_because", "see its qualification record")
+            continue
+        t["sites"] += int(c.get("sites", 0) or 0)
+        t["tasks"] += len(c.get("tasks") or {})
+        sp = d.get("species")
+        t["species"][sp] = t["species"].get(sp, 0) + int(c.get("individuals", 0) or 0)
         for k in ("individuals", "people", "animals", "recordings", "unique_steps_20ms", "windows_1200ms",
                   "windows_inner_training", "windows_inner_validation", "spikes"):
             v = c.get(k, 0)
@@ -34,6 +42,33 @@ def totals(datasets):
             g = k.split(":")[0]
             t["channel_seconds_by_group"][g] = round(t["channel_seconds_by_group"].get(g, 0.0) + v, 2)
     return t
+
+
+CONTEXTS = (64, 128, 256, 512)
+
+
+def padded_share(paths, datasets):
+    """Padded share at each context length T (PROTOCOL.json time_estimates): every recording is tiled into
+    ceil(L / T) rows of T steps; the share is padded positions over all positions. Counted from the step counts
+    in each qualified dataset's private TOKENS.json (no recording value is read)."""
+    per, tot = {}, {T: [0, 0] for T in CONTEXTS}
+    for name, d in sorted(datasets.items()):
+        if not d.get("qualified"):
+            continue
+        tf = Path(paths["shards"]) / name / "TOKENS.json"
+        if not tf.exists():
+            continue
+        steps = [r["steps"] for r in json.loads(tf.read_text())["recordings"]]
+        per[name] = {}
+        for T in CONTEXTS:
+            rows = sum(-(-L // T) for L in steps)
+            pad = rows * T - sum(steps)
+            per[name][str(T)] = round(pad / (rows * T), 4) if rows else None
+            tot[T][0] += pad
+            tot[T][1] += rows * T
+    return {"rule": "each recording tiled into ceil(L/T) rows of T steps; share = padded positions / all positions",
+            "all_qualified_datasets": {str(T): round(a / b, 4) if b else None for T, (a, b) in tot.items()},
+            "per_dataset": per}
 
 
 def qd(datasets, proto):
@@ -83,8 +118,20 @@ def main():
             "window": "non-overlapping 1.2 s (60 steps) from the start of each recording; a final partial window is not counted",
             "individuals": "people or animals with at least one tokenised recording",
             "channel_seconds": "per group and kind: channels with a present value x 0.02 s",
-            "events": "dataset-specific, defined in each entry"}
+            "events": "dataset-specific, defined in each entry",
+            "sites": "laboratories per dataset (1 each); no two datasets are known to share a laboratory, so the total "
+                     "is the sum",
+            "tasks": "distinct task labels per dataset, summed",
+            "totals": "qualified datasets only; a dataset that is not qualified is listed with its reason",
+            "time_block_datasets": "sabes and area2 (fewer than three individuals) count windows in folds 0-3 as inner "
+                                   "training and in fold 4 (the latest block) as inner validation"}
         obj["totals"] = totals(ds)
+        obj["padded_share"] = padded_share(paths, ds)
+        obj["re_estimate"] = {
+            "unique_steps_20ms": obj["totals"]["unique_steps_20ms"],
+            "design_range_steps": "8-30 million (PROTOCOL.json time_estimates)",
+            "not_part_of_this_step": "the 512-step GPU throughput and 16-thread CPU issuing measurements and the "
+                                     "recomputed P3-P9 times are made before model choice, not in the data step"}
         obj["quantity_diversity"] = qd(ds, proto)
         obj["updated_at"] = common.now_iso()
         obj["no_recording_values"] = True
