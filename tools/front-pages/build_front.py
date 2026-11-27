@@ -2917,7 +2917,7 @@ def try_rows(kind):
     'programmers' (no page to open; they come last). Counted from the README template itself, so a row added or moved changes the
     numbers the page prints, or stops the build if the browser rows stop coming first."""
     t = (TEMPLATES / 'README.md').read_text(encoding='utf-8')
-    start = t.index('| What it asks | What you do, and what was found |')
+    start = t.index('| Experiment | Inputs, controls and findings |')     # the table's heading since the entry pages were reworded
     rows = [ln for ln in t[start:].split('\n\n', 1)[0].splitlines()[2:] if ln.startswith('| ')]
     web = ['eliminatenoise.github.io' in ln for ln in rows]
     n_web = sum(web)
