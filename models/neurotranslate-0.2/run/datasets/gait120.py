@@ -3,14 +3,22 @@
 Per person: the local raw.mat (12 right-leg EMG channels at 2 kHz per trial, MATLAB table objects read
 with mat-io), the local SitToStand marker and plate files, and the members fetched at P1 (marker TRC
 for the other tasks and the static trial, OpenSim joint-angle MOT except SitToStand, plate MOT for
-LevelWalking and StandToSit). One recording per trial on the trial's frame clock: frame f is at
-(f - 1) / 100 s; the trial's EMG covers frames TotalFrame[0]..TotalFrame[1] (20 samples per frame) and
-is the recording origin; the author step segments (TargetFrame, consecutive and sharing one boundary
-frame) are placed on that clock, so overlapping step files are never counted twice. Plate MOT samples
-lie on the EMG's 2 kHz grid. The static trial is a markers-only recording.
-Pairing check on every training trial (the chair-rise study's rule): TRC frame numbers equal the step's
+LevelWalking and StandToSit).
+
+Recordings: one per author step segment, the contiguous unit of the protocol (sections 5.2 and 13 and
+step P5). A step segment is the TargetFrame range [a, b] of one step file in raw.mat; its recording runs
+on the segment's own clock, frame f at (f - a) / 100 s, holds N = b - a + 1 frames and so
+floor(N / 2) steps of 20 ms. Markers, joint angles and plates come from that step's own files; EMG is the
+trial's EMG over the same frames (20 samples per frame from TotalFrame[0]). The 20 Hz high-pass runs forward
+over the trial's whole EMG from its first sample, so it uses only samples before each step end and leaves no
+filter start-up inside a segment. EMG outside every step segment of a trial is not tokenised.
+Consecutive segments of a trial share one boundary frame (the authors' segmentation); where a segment has an
+even number of frames, its last step holds that frame, which the next segment's first step also holds. These
+boundaries are counted in the audit. The static trial is a markers-only recording.
+Pairing check on every training step (the chair-rise study's rule): TRC frame numbers equal the step's
 TargetFrame range and times equal (f - 1) / 100; joint-angle times equal the TRC times; plate times start
 at the step's first TRC time on a 2 kHz grid; EMG length equals (TotalFrame[1] - TotalFrame[0] + 1) x 20.
+Plate sign: loaded vertical force is checked to be positive; no data-dependent sign change is made.
 S001-S010 (evaluation set E1) and the validation and confirmation people are never opened.
 """
 import json
@@ -36,7 +44,7 @@ AXIS_NOTE = {"rotation": R_MAP.tolist(), "note": "TRC and plate MOT use +Y verti
 META = {
     "name": "Comprehensive Human Locomotion and Electromyography Dataset: Gait120", "doi": "10.6084/m9.figshare.27677016.v1",
     "species": "human", "sites": 1, "derived": True, "paired": True,
-    "events_definition": "author step segments (TargetFrame ranges in raw.mat), one per marker step file",
+    "events_definition": "author step segments (TargetFrame ranges in raw.mat): one per recording; the static trials have none",
     "context": {"dataset": DATASET, "species": "human", "task": "7 daily locomotion tasks and a static trial",
                 "body_plan": "human biped", "value_flag": "measured (markers, EMG, plates) and derived (joint angles)"},
     "streams": [
@@ -51,8 +59,14 @@ META = {
     ],
     "notes": ["Joint angles of SitToStand were not part of the P1 member list, so SitToStand trials carry markers, "
               "EMG and plates only.",
-              "EMG spans each trial's TotalFrame range, which starts before and ends after the marker steps; steps "
-              "with EMG only are kept (marker and plate channels masked there)."],
+              "One recording per author step segment (the TargetFrame range of one step file), the unit that "
+              "protocol sections 5.2 and 13 and step P5 use for Gait120; the static trial is one recording. EMG "
+              "outside every step segment of a trial is not tokenised.",
+              "The 20 Hz EMG high-pass runs forward over the whole trial from its first sample, so a segment's "
+              "EMG features use only samples before each step end, including samples before the segment start.",
+              "Consecutive step segments share one boundary frame (the authors' segmentation). Where a segment has "
+              "an even number of frames, its last 20 ms step holds that frame, which the next segment's first step "
+              "also holds; the number of such boundaries is in the Q4 record."],
 }
 
 
@@ -137,7 +151,6 @@ def process_unit(paths, unit, _, chans):
     pl_idx = [chans.idx("force", "plate%d_%s" % (p, a)) for p in (1, 2) for a in "xyz"]
     recs, metas, checks = [], [], {}
     files_read = {"raw.mat": raw_digest}
-    n_steps_total = 0
 
     def put_markers(rec, names, xyz_frames, lo, hi):
         for j, n in enumerate(names):
@@ -162,16 +175,15 @@ def process_unit(paths, unit, _, chans):
             nF = end - start + 1
             ck = {"total_frames": [start, end], "emg_samples": int(emg.shape[0]),
                   "emg_length_equals_frames_x_20": emg.shape[0] == nF * 20}
-            steps = [(s, [int(v) for v in np.ravel(tr[s].flat[0]["TargetFrame"])]) for s in tr.dtype.names if s.startswith("Step")]
-            S = common.n_steps_for(nF / 100.0)
-            rid = "%s_%s_T%02d" % (unit, task, k)
-            rec = common.Recording(rid, unit, S, {})
-            xyz = np.full((nF, len(MARKERS), 3), np.nan)
-            ja = None
-            frc = np.full((nF * 20, 6), np.nan)
+            steps = sorted((int(s[4:]), [int(v) for v in np.ravel(tr[s].flat[0]["TargetFrame"])])
+                           for s in tr.dtype.names if s.startswith("Step"))
+            # forward-only 20 Hz high-pass over the trial's whole EMG from its first sample; each segment's
+            # log RMS then uses only samples before its step ends (no filter start-up inside a segment)
+            emg_hp = common.causal_highpass(emg, 2000.0)
+            tid = "%s_%s_T%02d" % (unit, task, k)
             step_rows, vert = [], []
-            for sname, (a, b) in steps:
-                si = int(sname[4:])
+            prev = None  # (last target frame, marker array at that frame) of the previous segment
+            for si, (a, b) in steps:
                 row = {"step": si, "target_frames": [a, b]}
                 if task == "SitToStand":
                     key = "trial%02d" % k
@@ -201,9 +213,17 @@ def process_unit(paths, unit, _, chans):
                     row["trc"] = "missing"
                     step_rows.append(row)
                     continue
+                # one recording per author step segment: frames a..b on the segment's own clock,
+                # frame f at (f - a) / 100 s; markers, joint angles and plates from this step's own files
+                N = b - a + 1
+                S = common.n_steps_for(N / 100.0)
+                rid = "%s_S%02d" % (tid, si)
+                rec = common.Recording(rid, unit, S, {})
+                lo, hi = common.step_bounds(N, 100.0, 0.0, S)
                 names, arr = _read_trc(trc_p)
                 fr = arr[:, 0].astype(int)
                 tt = arr[:, 1]
+                row["recording"] = rid
                 row["trc_frames_equal_target"] = bool(fr[0] == a and fr[-1] == b and np.array_equal(fr, np.arange(a, b + 1)))
                 row["trc_time_equals_frame_clock"] = bool(np.allclose(tt, (fr - 1) / 100.0, atol=1e-6))
                 row["trc_inside_total_frames"] = bool(a >= start and b <= end)
@@ -212,29 +232,34 @@ def process_unit(paths, unit, _, chans):
                 if am is not None:
                     vert.append(bool(np.allclose(am[0], R_MAP)))
                 pts = pts @ R_MAP.T
-                ii = fr - start
-                ok = (ii >= 0) & (ii < nF)
-                order = [MARKERS.index(n) if n in MARKERS else -1 for n in names]
-                for j, o in enumerate(order):
-                    if o >= 0:
-                        prev = xyz[ii[ok], o, :]
-                        new = pts[ok, j, :]
-                        both = np.isfinite(prev).all(axis=1) & np.isfinite(new).all(axis=1)
-                        if both.any():
-                            row.setdefault("shared_frame_max_diff_mm", 0.0)
-                            row["shared_frame_max_diff_mm"] = max(row["shared_frame_max_diff_mm"],
-                                                                  float(np.abs(prev[both] - new[both]).max()))
-                        xyz[ii[ok], o, :] = np.where(np.isfinite(prev), prev, new)
+                xyz = np.full((N, len(MARKERS), 3), np.nan)
+                ii = fr - a
+                ok = (ii >= 0) & (ii < N)
+                for j, n in enumerate(names):
+                    if n in MARKERS:
+                        xyz[ii[ok], MARKERS.index(n), :] = pts[ok, j, :]
+                if prev is not None and prev[0] == a:
+                    both = np.isfinite(prev[1]).all(axis=1) & np.isfinite(xyz[0]).all(axis=1)
+                    if both.any():
+                        row["shared_frame_max_diff_mm"] = float(np.abs(prev[1][both] - xyz[0][both]).max())
+                prev = (b, xyz[-1].copy())
+                put_markers(rec, MARKERS, xyz, lo, hi)
                 if ja_p is not None:
                     head, ja_a = _read_mot(ja_p)
                     row["ja_time_equals_trc_time"] = bool(ja_a.shape[0] == len(tt) and np.allclose(ja_a[:, 0], tt, atol=1e-6))
-                    if ja is None:
-                        ja = np.full((nF, len(head) - 1), np.nan)
-                        ja_head = head
-                    assert head == ja_head
-                    jf = np.rint(ja_a[:, 0] * 100).astype(int) + 1 - start
-                    okj = (jf >= 0) & (jf < nF)
-                    ja[jf[okj]] = np.where(np.isfinite(ja[jf[okj]]), ja[jf[okj]], ja_a[okj, 1:])
+                    ja = np.full((N, len(head) - 1), np.nan)
+                    jf = np.rint(ja_a[:, 0] * 100).astype(int) + 1 - a
+                    okj = (jf >= 0) & (jf < N)
+                    ja[jf[okj]] = ja_a[okj, 1:]
+                    idx = [chans.idx("kin", "ja:" + c) for c in head[1:]]
+                    v, m = common.kin_features(ja, lo, hi)
+                    rec.put("kin", idx, v, m, nK)
+                elo, ehi = common.step_bounds(N * 20, 2000.0, 0.0, S)
+                e0, e1 = (a - start) * 20, (b - start + 1) * 20
+                row["emg_samples_inside_trial"] = bool(e0 >= 0 and e1 <= emg.shape[0])
+                v, m = common.emg_features(emg_hp[max(e0, 0):e1], 2000.0, elo, ehi, already_filtered=True)
+                rec.put("emg", emg_idx, v, m, chans.n("emg"))
+                plates = False
                 if mot_p is not None:
                     head, fa = _read_mot(mot_p)
                     plates_here = [p for p in (1, 2) if "ground_force%d_vx" % p in head]
@@ -242,8 +267,9 @@ def process_unit(paths, unit, _, chans):
                     ft = fa[:, 0]
                     row["plate_starts_at_trc_time"] = bool(abs(ft[0] - tt[0]) < 1e-6)
                     row["plate_on_2khz_grid"] = bool(np.allclose(np.diff(ft), 0.0005, atol=1e-6))
-                    kk = np.rint((ft - (start - 1) / 100.0) * 2000).astype(int)
-                    okf = (kk >= 0) & (kk < nF * 20)
+                    kk = np.rint((ft - (a - 1) / 100.0) * 2000).astype(int)
+                    okf = (kk >= 0) & (kk < N * 20)
+                    frc = np.full((N * 20, 6), np.nan)
                     for p in plates_here:
                         cols = [head.index("ground_force%d_v%s" % (p, ax)) for ax in "xyz"]
                         F, nbad = common.mask_implausible_force(fa[:, cols] @ R_MAP.T)
@@ -252,37 +278,31 @@ def process_unit(paths, unit, _, chans):
                             # values up to 1e36 in the published files): the whole plate of that file is masked
                             row.setdefault("plate_samples_above_10kN_masked", {})[str(p)] = nbad
                             F[:] = np.nan
-                        sl = slice((p - 1) * 3, p * 3)
-                        cur = frc[kk[okf], sl]
-                        frc[kk[okf], sl] = np.where(np.isfinite(cur), cur, F[okf])
+                        frc[kk[okf], (p - 1) * 3:p * 3] = F[okf]
+                        # sign convention check only (no data-dependent flip): loaded vertical force must be positive
+                        z = F[okf, 2]
+                        loaded = np.isfinite(z) & (np.abs(z) > 50)
+                        if loaded.sum() > 10 and np.median(z[loaded]) < 0:
+                            row.setdefault("plate_vertical_median_negative", []).append(p)
+                    if np.isfinite(frc).any():
+                        plates = True
+                        v, m = common.force_features(frc, elo, ehi)
+                        rec.put("force", pl_idx, v, m, chans.n("force"))
+                row["last_step_holds_last_frame"] = bool(2 * S == N)
+                recs.append(rec)
+                metas.append({"task": task, "trial": k, "step": si, "condition": None, "session": 1, "events": 1,
+                              "duration_s": round(N / 100.0, 3), "target_frames": [a, b],
+                              "joint_angles": ja_p is not None, "plates": plates})
                 step_rows.append(row)
-            n_steps_total += len(steps)
-            # tokens
-            lo, hi = common.step_bounds(nF, 100.0, 0.0, S)
-            put_markers(rec, MARKERS, xyz, lo, hi)
-            if ja is not None:
-                idx = [chans.idx("kin", "ja:" + c) for c in ja_head[1:]]
-                v, m = common.kin_features(ja, lo, hi)
-                rec.put("kin", idx, v, m, nK)
-            elo, ehi = common.step_bounds(emg.shape[0], 2000.0, 0.0, S)
-            v, m = common.emg_features(emg, 2000.0, elo, ehi)
-            rec.put("emg", emg_idx, v, m, chans.n("emg"))
-            if np.isfinite(frc).any():
-                for p in range(2):
-                    z = frc[:, p * 3 + 2]
-                    loaded = np.abs(z) > 50
-                    if loaded.sum() > 10 and np.nanmedian(z[loaded]) < 0:
-                        frc[:, p * 3:(p + 1) * 3] *= -1
-                        ck.setdefault("plate_sign_flipped", []).append(p + 1)
-                v, m = common.force_features(frc, elo, ehi)
-                rec.put("force", pl_idx, v, m, chans.n("force"))
+            # consecutive author segments share one boundary frame; count where both recordings hold it
+            shared = 0
+            for r0, r1 in zip(step_rows, step_rows[1:]):
+                if r0["target_frames"][1] == r1["target_frames"][0] and r0.get("last_step_holds_last_frame"):
+                    shared += 1
             ck["steps"] = step_rows
+            ck["boundary_frames_in_two_recordings"] = shared
             ck["vertical_axis_rechecks"] = vert
-            recs.append(rec)
-            metas.append({"task": task, "trial": k, "condition": None, "session": 1, "events": len(steps),
-                          "duration_s": round(nF / 100.0, 3), "total_frames": [start, end],
-                          "joint_angles": ja is not None, "plates": bool(np.isfinite(frc).any())})
-            checks[rid] = ck
+            checks[tid] = ck
     # static trial (markers only)
     st = [p for p in (mroot / "MotionCapture" / "Static" / "TRC").glob("*.trc")] if (mroot / "MotionCapture" / "Static" / "TRC").is_dir() else []
     assert len(st) <= 1, st  # the archive names it Trial01.trc or trial01.trc
@@ -341,7 +361,18 @@ def gates(paths, results, summary):
     a4, n4 = allok("plate_starts_at_trc_time")
     a5, n5 = allok("plate_on_2khz_grid")
     a6, n6 = allok("trc_inside_total_frames")
+    a7, n7 = allok("emg_samples_inside_trial")
     e_ok = all(c["emg_length_equals_frames_x_20"] for c in trials)
+    neg = sorted("%s step %d plate %s" % (r, s["step"], p) for res in results for r, c in res["checks"].items()
+                 for s in c.get("steps", []) for p in s.get("plate_vertical_median_negative", []))
+    shared = sum(c.get("boundary_frames_in_two_recordings", 0) for c in trials)
+    seg_rec = sum(1 for s in steps if "recording" in s)
+    frames = sorted(s["target_frames"][1] - s["target_frames"][0] + 1 for s in steps if "recording" in s)
+    durations = {"segments": len(frames), "min_s": frames[0] / 100.0 if frames else None,
+                 "median_s": float(np.median(frames)) / 100.0 if frames else None,
+                 "max_s": frames[-1] / 100.0 if frames else None,
+                 "shorter_than_one_1200ms_window": sum(1 for n in frames if n // 2 < common.WINDOW_STEPS),
+                 "note": "N frames give floor(N / 2) steps; a segment of fewer than 120 frames holds no counted window"}
     vert = [v for c in trials for v in c.get("vertical_axis_rechecks", [])]
     missing = sum(1 for s in steps if s.get("trc") == "missing")
     implaus = {}
@@ -354,15 +385,21 @@ def gates(paths, results, summary):
         "Q3_access": {"pass": True, "how": "raw.mat and SitToStand members local (sha256 checked against their transfer "
                       "records); other members fetched at P1 by ranged reads covering only development people's wanted "
                       "members, each CRC-32 checked"},
-        "Q4_clock": {"pass": a1 and a2 and a3 and a4 and a5 and a6 and e_ok,
-                     "how": "trial timestamp and frame-identifier match of the chair-rise study, on every training trial",
+        "Q4_clock": {"pass": a1 and a2 and a3 and a4 and a5 and a6 and a7 and e_ok,
+                     "how": "trial timestamp and frame-identifier match of the chair-rise study, on every training step "
+                            "segment; one recording per author step segment",
+                     "step_segment_recordings": seg_rec, "segment_emg_inside_trial_emg": [a7, n7],
+                     "step_segment_durations": durations,
+                     "boundary_frames_in_two_recordings": shared,
                      "trc_frames_equal_target": [a1, n1], "trc_time_equals_frame_clock": [a2, n2],
                      "joint_angle_time_equals_trc": [a3, n3], "plate_starts_at_trc_time": [a4, n4],
                      "plate_on_2khz_grid": [a5, n5], "steps_inside_emg_span": [a6, n6],
                      "emg_length_equals_frames_x_20": [e_ok, len(trials)], "step_files_missing": missing,
                      "vertical_axis_rechecks_disagreeing": sum(1 for v in vert if not v)},
-        "Q5_labels": {"pass": True, "how": "markers mm (measured), OpenSim coordinates degrees or m (derived), EMG measured "
-                      "surface EMG of right-leg muscles (not a nerve recording), plate forces N (measured)",
+        "Q5_labels": {"pass": not neg, "how": "markers mm (measured), OpenSim coordinates degrees or m (derived), EMG measured "
+                      "surface EMG of right-leg muscles (not a nerve recording), plate forces N (measured; loaded vertical "
+                      "force positive in every plate file, checked; no sign change made)",
+                      "plate_files_with_negative_loaded_vertical_median": neg,
                       "plate_files_masked_whole_for_samples_above_10kN": implaus},
         "Q6_causality": {"pass": True, "author_filtering": "marker files are the authors' filtered TRC exports; joint angles "
                          "come from the authors' inverse kinematics on them; filter phase not documented in the deposit",
