@@ -203,6 +203,16 @@ def main():
         print(json.dumps(summary, indent=1))
         return
 
+    finish(mod, paths, results, audit, ros, inner_val, shared, head, t0)
+
+
+def finish(mod, paths, results, audit, ros, inner_val, shared, head, t0, float16=None, correction=None):
+    """The six-check gate, TOKENS.json, the audit file and the manifest part of one dataset from its per-unit
+    results. `float16` replaces the storage-error summary and `correction` is recorded in TOKENS.json and in the
+    part when the tokens were corrected in the stored shards instead of being read again from the source files."""
+    ds = mod.DATASET
+    units = ros["units"]
+    summary = summarise(results, set(inner_val), mod.KIND)
     file_audit = mod.file_audit(paths, results) if hasattr(mod, "file_audit") else None
     lic = json.loads((Path(paths["licences"]) / (ds + ".json")).read_text())
     gates = mod.gates(paths, results, summary)
@@ -224,7 +234,8 @@ def main():
                                    "warmup_s": nc.WARMUP_S, "high_band_min_fs": nc.HIGH_BAND_MIN_FS},
               "channels": shared, "unit_channels": {r["unit"]: r["unit_channels"] for r in results if r["unit_channels"]},
               "axis_map": getattr(mod, "AXIS_NOTE", None), "anchor": getattr(mod, "ANCHOR", None),
-              "context": mod.META.get("context"), "kind": mod.KIND, "shards": shard_list,
+              "context": mod.META.get("context"), "kind": mod.KIND,
+              "stream_delays": getattr(mod, "STREAM_DELAYS", None), "correction": correction, "shards": shard_list,
               "recordings": [dict(m, unit=r["unit"]) for r in results for m in r["recordings"]]}
     common.atomic_write_json(Path(paths["shards"]) / ds / "TOKENS.json", nc.json_safe(tokens))
     audit["unit_checks"] = {r["unit"]: r["checks"] for r in results}
@@ -278,7 +289,8 @@ def main():
                    "channels": chan_counts,
                    "shared_vocabulary_channels": {g: sum(1 for c in cs if c.get("vocab")) for g, cs in shared.items()},
                    "field_storage": np.dtype((getattr(mod, "GROUP_DTYPES", None) or nc.GROUP_DTYPES).get("field", np.float32)).name,
-                   "float16_rms_error_over_channel_sd_max": float16_summary(results)},
+                   "float16_rms_error_over_channel_sd_max": float16 if float16 is not None else float16_summary(results),
+                   "stream_delays": getattr(mod, "STREAM_DELAYS", None), "correction": correction},
         "source_files": mod.source_file_summary(results) if hasattr(mod, "source_file_summary") else None,
         "notes": mod.META.get("notes", []),
         "seconds": round(time.time() - t0, 1),
@@ -289,6 +301,7 @@ def main():
     print(json.dumps({"dataset": ds, "qualified": qualified, "counts": {k: part["counts"][k] for k in (
         "individuals", "recordings", "unique_steps_20ms", "windows_1200ms", "windows_inner_training", "spikes")},
         "gates": {k: v["pass"] for k, v in gates.items()}, "seconds": part["seconds"]}))
+    return part
 
 
 if __name__ == "__main__":

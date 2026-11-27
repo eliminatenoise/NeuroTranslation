@@ -329,6 +329,19 @@ def kin_features(x, lo, hi):
     return val, msk
 
 
+def delay_steps(val, msk, n):
+    """Delay the tokens of one recording by n whole steps: step k takes the tokens of step k - n, the first n
+    steps hold nothing and the last n steps of the input are dropped. Used where a stream's samples may have been
+    acquired later than the times its file gives them, by less than n steps."""
+    out_v, out_m = np.zeros_like(val), np.zeros_like(msk)
+    S = len(val)
+    if 0 < n < S:
+        out_v[n:], out_m[n:] = val[:S - n], msk[:S - n]
+    elif n == 0:
+        out_v[:], out_m[:] = val, msk
+    return out_v, out_m
+
+
 def force_features(x, lo, hi):
     """force group: [last, mean within the step]."""
     last, m = feat_last(x, lo, hi)

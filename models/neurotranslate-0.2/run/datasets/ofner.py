@@ -12,6 +12,16 @@ table (cue codes 0x600-0x606). Header layout checks follow the earlier reviewed 
 with a meaning in the authors' table (15 glove sensors, hand and elbow positions, 6 arm angles), in their native
 uncalibrated units. The five channels the table marks '-' (wrist_bend, roll, pitch, gesture, GripPressure) are
 not tokenised.
+
+Clock: each 1 s record holds 512 samples of the fast channels and 64 of the slow ones, so every 64 Hz reading
+spans 8 ticks of the 512 Hz clock, and where inside those ticks it was acquired is not documented: reading j of
+a run lies between j / 64 s and (8j + 7) / 512 s, up to 13.7 ms after the time the file gives it. The arm and
+glove stream is therefore tokenised on the file's times (reading j at j / 64 s) and then delayed by one whole
+20 ms step (KIN_DELAY_STEPS): the token of step k holds the last reading whose file time lies in step k - 1, so
+that reading was acquired before step k ends even in the latest case. The first step of a run holds no arm or
+glove value. A whole step was used because the tokens of the first tokenisation could be corrected from the
+stored shards this way without a second download (delay_ofner_kin.py); a fresh run of this reader gives the
+same tokens.
 """
 import hashlib
 import json
@@ -44,6 +54,10 @@ MECH_MEANING = ("thumb near", "thumb far", "thumb index", "index near", "index f
                 "shoulder adduction", "shoulder flexion/extension", "shoulder rotation", "elbow", "pro/supination",
                 "wrist flexion/extension", "-")
 RATES = (512,) * 64 + (64,) * 32
+KIN_DELAY_STEPS = 1  # whole 20 ms steps by which the 64 Hz arm and glove tokens are delayed (see the module text)
+STREAM_DELAYS = {"kin": {"steps": KIN_DELAY_STEPS, "seconds": KIN_DELAY_STEPS * common.STEP_S,
+                         "why": "a 64 Hz reading may have been acquired up to 7 ticks of the 512 Hz clock (13.7 ms) "
+                                "after the time its file position gives it"}}
 HEADER_BYTES = 256 * 97
 CUES = range(0x600, 0x607)
 ANCHOR = {"kind": "single tracker", "note": "hand and elbow positions are anchored to themselves; glove and angle "
@@ -183,6 +197,14 @@ def read_gdf(path):
     return fast, slow, pos, codes, eog_order, records
 
 
+def kin_tokens(xk, n_steps):
+    """Arm and glove tokens of one run: [last reading in the step, change from the previous step's last] on the
+    file's times (reading j at j / 64 s), delayed by KIN_DELAY_STEPS whole steps (see the module text)."""
+    lo, hi = common.step_bounds(len(xk), 64.0, 0.0, n_steps)
+    v, m = common.kin_features(xk, lo, hi)
+    return common.delay_steps(v, m, KIN_DELAY_STEPS)
+
+
 def process_unit(paths, unit, items, shared):
     recs, metas, checks = [], [], {}
     keep_mech = [i for i, m in enumerate(MECH_MEANING) if m != "-"]
@@ -210,9 +232,7 @@ def process_unit(paths, unit, items, shared):
         rec = nc.Rec(rid, unit, S)
         v, m = nc.field_features(xf, 512.0, 0.0, S)
         rec.put("field", v, m)
-        xk = slow[:, keep_mech].astype(np.float64)
-        lo, hi = common.step_bounds(len(xk), 64.0, 0.0, S)
-        v, m = common.kin_features(xk, lo, hi)
+        v, m = kin_tokens(slow[:, keep_mech].astype(np.float64), S)
         rec.put("kin", v, m)
         cue = np.isin(codes, list(CUES)) & (pos >= 0) & (pos < records * 512)
         recs.append(rec)
@@ -245,8 +265,13 @@ def gates(paths, results, summary):
     return {
         "Q3_access": {"pass": True, "how": "runs 1-3 local (sha256 against the earlier receipt); runs 4-10 downloaded whole "
                       "at P1 (publisher MD5 and size)"},
-        "Q4_clock": {"pass": True, "how": "one GDF file per run; the 512 Hz and 64 Hz channels share its 1 s records "
-                     "(the 64 Hz arm reading precedes the matching 512 Hz sample by up to 7 ticks)", "recordings_checked": len(ck)},
+        "Q4_clock": {"pass": True, "how": "one GDF file per run; the 512 Hz and 64 Hz channels share its 1 s records. "
+                     "Each 64 Hz reading spans 8 ticks of the 512 Hz clock with an undocumented acquisition time inside "
+                     "them (up to 13.7 ms after the time its file position gives), so the arm and glove tokens are "
+                     "delayed by one whole 20 ms step: the token of step k holds the last reading whose file time lies "
+                     "in step k - 1, which was acquired before step k ends in every case",
+                     "kin_delay_steps": KIN_DELAY_STEPS, "kin_delay_s": KIN_DELAY_STEPS * common.STEP_S,
+                     "recordings_checked": len(ck)},
         "Q5_labels": {"pass": True, "how": "EEG and EOG as stored (identity scaling, blank unit field), arm channels in "
                       "native uncalibrated units; all measured; site names from the authors' table",
                       "nonfinite_samples": sum(c["nonfinite_fast"] + c["nonfinite_slow"] for c in ck)},
