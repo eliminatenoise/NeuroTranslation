@@ -4,6 +4,11 @@ present, W_max and the sources eligible for the D arms (PROTOCOL.json quantity_d
 
 Entries of datasets that have no part in the parts folder (for example datasets written by the neural
 part of P2 directly) are kept as they are. The write happens under a lock and re-reads the file first.
+
+Once W_max is computed, the D-arm source orders (recomputed over the wave-1 sources and every conditional
+source admitted before the freeze, as ALLOCATION.json d_candidate_note requires) are also written to
+D-ARM-ORDERS.json beside the manifest; ALLOCATION.json is never edited. check_d_arm_orders.py recomputes that
+file from the published rule without using this module.
 """
 import argparse
 import json
@@ -199,7 +204,59 @@ def main():
     res = common.locked_update(out, upd, dict, lock_path=Path(paths["private"]) / "MIXTURE-MANIFEST.json.lock")
     s = json.dumps(res)
     assert not any(x in s for x in FORBIDDEN)
-    print(json.dumps({"datasets": sorted(res["datasets"]), "totals": res["totals"], "qd": res["quantity_diversity"]["status"]}))
+    orders = d_arm_orders(res, alloc, common.protocol_head(paths))
+    if orders:
+        assert not any(x in json.dumps(orders) for x in FORBIDDEN)
+        common.atomic_write_json(out.with_name(D_ARM_FILE), orders)
+    print(json.dumps({"datasets": sorted(res["datasets"]), "totals": res["totals"], "qd": res["quantity_diversity"]["status"],
+                      "d_arm_orders_file": D_ARM_FILE if orders else None}))
+
+
+D_ARM_FILE = "D-ARM-ORDERS.json"
+
+
+def d_arm_orders(manifest, alloc, head):
+    """The D-arm orders as their own file beside the manifest. ALLOCATION.json publishes the orders of the wave-1
+    sources and says (d_candidate_note) that they are recomputed, by the same rule, once a conditional source is
+    admitted; the published file is not edited. Returns None until the anchors are counted."""
+    q = manifest["quantity_diversity"]
+    if q.get("status") != "computed":
+        return None
+    pub = alloc["quantity_diversity"]
+    wit = q["inner_training_windows_by_source"]
+    thr = q["D_arm_eligibility_threshold_windows"]
+    cands = sorted(next(iter(q["D_arm_orders"].values())))
+    added = q["D_arm_candidates"]["conditional_admitted"]
+    return {
+        "schema": "neurotranslate-0.2-d-arm-orders",
+        "what": "Source orders of the D arms (source diversity at a fixed window budget), recomputed at P2 over the "
+                "13 wave-1 sources and the conditional source(s) admitted before the freeze, as ALLOCATION.json "
+                "d_candidate_note requires. ALLOCATION.json itself is unchanged and lists the wave-1 sources only; "
+                "restricted to those sources, every order here equals the published one.",
+        "protocol": {"head": head["branch_head"], "ALLOCATION.json_sha256": head["ALLOCATION.json"],
+                     "PROTOCOL.json_sha256": head["PROTOCOL.json"]},
+        "rule": pub["d_arms"]["rule"],
+        "candidate_note": pub["d_candidate_note"],
+        "key": "sha256 of the UTF-8 text '" + common.SALT + "|D|k<k>|draw<draw>|<dataset>', ascending by its hex "
+               "digest (equal digests, which do not occur, would be ordered by name)",
+        "candidates": cands,
+        "conditional_sources_admitted": added,
+        "conditional_sources_not_admitted": q["D_arm_candidates"]["conditional_not_admitted"],
+        "orders": q["D_arm_orders"],
+        "orders_restricted_to_wave_1_equal_ALLOCATION_json": q["D_arm_orders_restricted_to_wave_1_equal_ALLOCATION_json"],
+        "position_of_admitted_conditional_sources": {c: {key: order.index(c) + 1 for key, order in q["D_arm_orders"].items()}
+                                                     for c in added},
+        "eligibility": {"W_max": q["W_max"], "threshold_inner_training_windows": thr,
+                        "inner_training_windows_by_source": {c: wit.get(c, 0) for c in cands},
+                        "eligible": [c for c in cands if wit.get(c, 0) >= thr],
+                        "not_eligible": {c: wit.get(c, 0) for c in cands if wit.get(c, 0) < thr}},
+        "arms": q["D_arms"],
+        "D_all": q["D_all"],
+        "arms_with_a_source_below_its_share": {
+            key: arm["sources_with_fewer_unique_inner_training_windows_than_their_share"]
+            for key, arm in q["D_arms"].items() if arm["sources_with_fewer_unique_inner_training_windows_than_their_share"]},
+        "counts_from": "MIXTURE-MANIFEST.json of " + manifest["updated_at"],
+        "no_recording_values": True}
 
 
 if __name__ == "__main__":

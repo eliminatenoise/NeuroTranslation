@@ -2698,6 +2698,7 @@
    "name": "Upper limb movements can be decoded from the time-domain of low-frequency EEG",
    "doi": "10.5281/zenodo.834976",
    "licence": "CC-BY-4.0",
+   "licence_as_declared": "cc-by-4.0",
    "species": "human",
    "sites": 1,
    "protocol_head": {
@@ -2706,9 +2707,9 @@
     "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
     "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
     "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
-    "read_at": "2026-11-28T00:34:00+1100"
+    "read_at": "2026-11-28T08:47:24+1100"
    },
-   "built_at": "2026-11-28T00:35:13+1100",
+   "built_at": "2026-11-28T08:48:11+1100",
    "qualified": true,
    "counts": {
     "individuals": 7,
@@ -2723,17 +2724,17 @@
     },
     "conditions": {},
     "unique_steps_20ms": 1137600,
-    "steps_with_any_channel": 1135658,
+    "steps_with_any_channel": 1135652,
     "windows_1200ms": 18944,
-    "windows_1200ms_every_step_with_data": 18888,
+    "windows_1200ms_every_step_with_data": 18818,
     "windows_inner_training": 13532,
     "windows_inner_validation": 5412,
     "channel_seconds": {
      "field:eeg": 1383333.6,
      "field:eog": 68032.8,
-     "kin:arm_angle": 136278.96,
-     "kin:exoskeleton_position": 136278.96,
-     "kin:glove_sensor": 340697.4
+     "kin:arm_angle": 136278.24,
+     "kin:exoskeleton_position": 136278.24,
+     "kin:glove_sensor": 340695.6
     },
     "spikes": 0,
     "events": {
@@ -2856,7 +2857,9 @@
     },
     "Q4_clock": {
      "pass": true,
-     "how": "one GDF file per run; the 512 Hz and 64 Hz channels share its 1 s records (the 64 Hz arm reading precedes the matching 512 Hz sample by up to 7 ticks)",
+     "how": "one GDF file per run; the 512 Hz and 64 Hz channels share its 1 s records. Each 64 Hz reading spans 8 ticks of the 512 Hz clock with an undocumented acquisition time inside them (up to 13.7 ms after the time its file position gives), so the arm and glove tokens are delayed by one whole 20 ms step: the token of step k holds the last reading whose file time lies in step k - 1, which was acquired before step k ends in every case",
+     "kin_delay_steps": 1,
+     "kin_delay_s": 0.02,
      "recordings_checked": 70
     },
     "Q5_labels": {
@@ -2894,8 +2897,8 @@
    },
    "tokens": {
     "shards": 7,
-    "bytes": 1183464283,
-    "shard_list_sha256": "762f875e9fac08f45f956491e69acd1dd126f88779d9b34f3afb68f8e3791425",
+    "bytes": 1183464138,
+    "shard_list_sha256": "0492f3599355dd76a01b9ea73d98693cb44cab069f86155d3f38524b84321c88",
     "channels": {
      "field": 64,
      "kin": 27
@@ -2904,7 +2907,7 @@
      "field": 61,
      "kin": 0
     },
-    "field_storage": "float16 (see TOKENS.json field_definition)",
+    "field_storage": "float16",
     "float16_rms_error_over_channel_sd_max": {
      "field": {
       "bp100_theta": 0.000687,
@@ -2917,6 +2920,71 @@
       "bp200_high": 0.0321,
       "lp10_last": 0.0108
      }
+    },
+    "stream_delays": {
+     "kin": {
+      "steps": 1,
+      "seconds": 0.02,
+      "why": "a 64 Hz reading may have been acquired up to 7 ticks of the 512 Hz clock (13.7 ms) after the time its file position gives it"
+     }
+    },
+    "correction": {
+     "what": "the kin tokens of every recording were delayed by 1 whole 20 ms step(s) in the stored shards; no source file was read; every other array was written back unchanged",
+     "script": "delay_ofner_kin.py",
+     "done_at": "2026-11-28T08:48:11+1100",
+     "tokenised_first_at_protocol_head": {
+      "worktree_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+      "branch_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+      "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+      "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+      "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+      "read_at": "2026-11-28T00:34:00+1100"
+     },
+     "shards_before": [
+      {
+       "unit": "S1",
+       "file": "S1.npz",
+       "sha256": "414db5898aa6f8dea0fa686f98467affd15ff3a1622a19487d3c3377099c1c85",
+       "bytes": 164597352
+      },
+      {
+       "unit": "S2",
+       "file": "S2.npz",
+       "sha256": "80ee086573c5480a4614836c049964fb0fc4532db9c7d2c2beba4d5b2e4c29c5",
+       "bytes": 167261210
+      },
+      {
+       "unit": "S3",
+       "file": "S3.npz",
+       "sha256": "decbb6cad82b5f8a59b9053f5ac6fdeccadeb79d1e94ee021dc82fcc48ee2dad",
+       "bytes": 170911295
+      },
+      {
+       "unit": "S4",
+       "file": "S4.npz",
+       "sha256": "7ae3eff9574cb020403aaf84fe6ac445f2fa2b06ad3c101ae836b128e8bfb7d9",
+       "bytes": 171828138
+      },
+      {
+       "unit": "S5",
+       "file": "S5.npz",
+       "sha256": "fab56b1a78b410432825f1414ca5df7ef9c88a888405c7bbb4bb829da1af2e04",
+       "bytes": 171217130
+      },
+      {
+       "unit": "S6",
+       "file": "S6.npz",
+       "sha256": "a2f9a71b1a659bf484fa8cf3b59dfbe8775069221be999ba0934d71bba678bd9",
+       "bytes": 169807566
+      },
+      {
+       "unit": "S7",
+       "file": "S7.npz",
+       "sha256": "16630ed110d7927279392a86be3d90949d96a2e07e87c7937f879acae827329f",
+       "bytes": 167841592
+      }
+     ],
+     "storage_error_summary": "carried over from the first tokenisation (the field arrays are unchanged)"
     }
    },
    "source_files": {
@@ -2928,8 +2996,7 @@
     "Five mechanical channels marked '-' in the authors' table are not tokenised.",
     "Some mechanical channels are constant within a run (for example thumb_palm, elbowPosX and shoulder adduction in S2 run 5); they are kept and carry no variation there."
    ],
-   "seconds": 72.9,
-   "licence_as_declared": "cc-by-4.0"
+   "seconds": 46.6
   },
   "sabes": {
    "dataset": "sabes",
@@ -3402,7 +3469,7 @@
   "channel_seconds_by_group": {
    "emg": 1470747.3,
    "force": 120781.5,
-   "kin": 2418354.96,
+   "kin": 2418351.72,
    "spikes": 6511856.98,
    "field": 7432509.92
   },
@@ -3789,7 +3856,7 @@
   },
   "rule": "W_max = smallest anchor inner-training window count rounded down to a power of 2; D-arm sources need at least W_max/8 inner-training windows; D-arm orders by ascending sha256('pooled-encoder-0.2|D|k' + k + '|draw' + draw + '|' + dataset) over the wave-1 sources and the admitted conditional sources, each arm taking the first k eligible sources; W_P = the largest power of 2 not above min(W_max/4, windows of the smallest P level)"
  },
- "updated_at": "2026-11-28T01:25:38+1100",
+ "updated_at": "2026-11-28T08:55:50+1100",
  "no_recording_values": true,
  "padded_share": {
   "rule": "each recording tiled into ceil(L/T) rows of T steps; share = padded positions / all positions",
@@ -3947,6 +4014,17 @@
     "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
     "revision": 2,
     "read_at": "2026-11-28T00:33:47+1100"
+   },
+   {
+    "dataset": "ofner",
+    "what": "second fetch (data review round 2), stopped after 30 whole files and part of a 31st; not used for any token",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": null,
+    "note": "The head was not written down when this fetch started (first request 01:06:01 on 28 Nov). The protocol branch's own log shows its head unchanged from 22:47:06 on 27 Nov to 08:47 on 28 Nov, so the fetch ran at this commit.",
+    "recorded_at": "2026-11-28T08:51:33+1100"
    },
    {
     "dataset": "wtrack",

@@ -1,0 +1,366 @@
+{
+ "schema": "neurotranslate-0.2-d-arm-orders",
+ "what": "Source orders of the D arms (source diversity at a fixed window budget), recomputed at P2 over the 13 wave-1 sources and the conditional source(s) admitted before the freeze, as ALLOCATION.json d_candidate_note requires. ALLOCATION.json itself is unchanged and lists the wave-1 sources only; restricted to those sources, every order here equals the published one.",
+ "protocol": {
+  "head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+  "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+  "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4"
+ },
+ "rule": "for k in {2,4,8} and draw in {0,1,2}: order candidate sources by ascending sha256('pooled-encoder-0.2|D|k' + k + '|draw' + draw + '|' + dataset); the arm uses the first k sources in that order that are eligible (at least W_max/8 inner-training windows, counted at P2)",
+ "candidate_note": "conditional sources (area2, falcon_m1) join the candidate list only if admitted before the freeze; the orders are then recomputed with the same rule and recorded in MIXTURE-MANIFEST.json",
+ "key": "sha256 of the UTF-8 text 'pooled-encoder-0.2|D|k<k>|draw<draw>|<dataset>', ascending by its hex digest (equal digests, which do not occur, would be ordered by name)",
+ "candidates": [
+  "area2",
+  "cemhsey",
+  "ds003739",
+  "gait120",
+  "hygrip",
+  "hyser",
+  "izmir",
+  "katmah",
+  "moreira",
+  "ofner",
+  "sabes",
+  "schreiber_moissenet",
+  "van_criekinge",
+  "wtrack"
+ ],
+ "conditional_sources_admitted": [
+  "area2"
+ ],
+ "conditional_sources_not_admitted": {
+  "falcon_m1": "Q2 role: no held-in-calib day is free. 20120928 was scored by earlier project work; 20120924, 20120926 and 20120927 are the primary candidate pool of an author-frozen cross-session contract of a line on hold."
+ },
+ "orders": {
+  "k2|draw0": [
+   "ofner",
+   "katmah",
+   "hyser",
+   "schreiber_moissenet",
+   "cemhsey",
+   "area2",
+   "sabes",
+   "moreira",
+   "ds003739",
+   "wtrack",
+   "van_criekinge",
+   "izmir",
+   "hygrip",
+   "gait120"
+  ],
+  "k2|draw1": [
+   "area2",
+   "sabes",
+   "ofner",
+   "van_criekinge",
+   "moreira",
+   "hygrip",
+   "katmah",
+   "ds003739",
+   "wtrack",
+   "gait120",
+   "izmir",
+   "schreiber_moissenet",
+   "hyser",
+   "cemhsey"
+  ],
+  "k2|draw2": [
+   "area2",
+   "hygrip",
+   "katmah",
+   "hyser",
+   "schreiber_moissenet",
+   "gait120",
+   "cemhsey",
+   "sabes",
+   "van_criekinge",
+   "ds003739",
+   "izmir",
+   "wtrack",
+   "moreira",
+   "ofner"
+  ],
+  "k4|draw0": [
+   "ds003739",
+   "izmir",
+   "katmah",
+   "gait120",
+   "area2",
+   "schreiber_moissenet",
+   "hygrip",
+   "sabes",
+   "hyser",
+   "cemhsey",
+   "van_criekinge",
+   "moreira",
+   "wtrack",
+   "ofner"
+  ],
+  "k4|draw1": [
+   "ofner",
+   "gait120",
+   "cemhsey",
+   "ds003739",
+   "hygrip",
+   "hyser",
+   "sabes",
+   "schreiber_moissenet",
+   "van_criekinge",
+   "wtrack",
+   "izmir",
+   "area2",
+   "katmah",
+   "moreira"
+  ],
+  "k4|draw2": [
+   "ds003739",
+   "van_criekinge",
+   "ofner",
+   "hyser",
+   "sabes",
+   "gait120",
+   "cemhsey",
+   "moreira",
+   "schreiber_moissenet",
+   "hygrip",
+   "area2",
+   "katmah",
+   "izmir",
+   "wtrack"
+  ],
+  "k8|draw0": [
+   "sabes",
+   "area2",
+   "gait120",
+   "hyser",
+   "izmir",
+   "moreira",
+   "ofner",
+   "ds003739",
+   "cemhsey",
+   "wtrack",
+   "katmah",
+   "hygrip",
+   "schreiber_moissenet",
+   "van_criekinge"
+  ],
+  "k8|draw1": [
+   "ofner",
+   "wtrack",
+   "moreira",
+   "schreiber_moissenet",
+   "hyser",
+   "sabes",
+   "van_criekinge",
+   "ds003739",
+   "cemhsey",
+   "gait120",
+   "hygrip",
+   "area2",
+   "katmah",
+   "izmir"
+  ],
+  "k8|draw2": [
+   "sabes",
+   "ofner",
+   "katmah",
+   "van_criekinge",
+   "schreiber_moissenet",
+   "wtrack",
+   "area2",
+   "ds003739",
+   "hyser",
+   "hygrip",
+   "cemhsey",
+   "gait120",
+   "izmir",
+   "moreira"
+  ]
+ },
+ "orders_restricted_to_wave_1_equal_ALLOCATION_json": true,
+ "position_of_admitted_conditional_sources": {
+  "area2": {
+   "k2|draw0": 6,
+   "k2|draw1": 1,
+   "k2|draw2": 1,
+   "k4|draw0": 5,
+   "k4|draw1": 12,
+   "k4|draw2": 11,
+   "k8|draw0": 2,
+   "k8|draw1": 12,
+   "k8|draw2": 7
+  }
+ },
+ "eligibility": {
+  "W_max": 2048,
+  "threshold_inner_training_windows": 256.0,
+  "inner_training_windows_by_source": {
+   "area2": 458,
+   "cemhsey": 200,
+   "ds003739": 29004,
+   "gait120": 2072,
+   "hygrip": 4527,
+   "hyser": 1800,
+   "izmir": 31,
+   "katmah": 4664,
+   "moreira": 1982,
+   "ofner": 13532,
+   "sabes": 1281,
+   "schreiber_moissenet": 897,
+   "van_criekinge": 52,
+   "wtrack": 51772
+  },
+  "eligible": [
+   "area2",
+   "ds003739",
+   "gait120",
+   "hygrip",
+   "hyser",
+   "katmah",
+   "moreira",
+   "ofner",
+   "sabes",
+   "schreiber_moissenet",
+   "wtrack"
+  ],
+  "not_eligible": {
+   "cemhsey": 200,
+   "izmir": 31,
+   "van_criekinge": 52
+  }
+ },
+ "arms": {
+  "k2|draw0": {
+   "sources": [
+    "ofner",
+    "katmah"
+   ],
+   "windows_per_source": 1024,
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+  },
+  "k2|draw1": {
+   "sources": [
+    "area2",
+    "sabes"
+   ],
+   "windows_per_source": 1024,
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {
+    "area2": 458
+   }
+  },
+  "k2|draw2": {
+   "sources": [
+    "area2",
+    "hygrip"
+   ],
+   "windows_per_source": 1024,
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {
+    "area2": 458
+   }
+  },
+  "k4|draw0": {
+   "sources": [
+    "ds003739",
+    "katmah",
+    "gait120",
+    "area2"
+   ],
+   "windows_per_source": 512,
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {
+    "area2": 458
+   }
+  },
+  "k4|draw1": {
+   "sources": [
+    "ofner",
+    "gait120",
+    "ds003739",
+    "hygrip"
+   ],
+   "windows_per_source": 512,
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+  },
+  "k4|draw2": {
+   "sources": [
+    "ds003739",
+    "ofner",
+    "hyser",
+    "sabes"
+   ],
+   "windows_per_source": 512,
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+  },
+  "k8|draw0": {
+   "sources": [
+    "sabes",
+    "area2",
+    "gait120",
+    "hyser",
+    "moreira",
+    "ofner",
+    "ds003739",
+    "wtrack"
+   ],
+   "windows_per_source": 256,
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+  },
+  "k8|draw1": {
+   "sources": [
+    "ofner",
+    "wtrack",
+    "moreira",
+    "schreiber_moissenet",
+    "hyser",
+    "sabes",
+    "ds003739",
+    "gait120"
+   ],
+   "windows_per_source": 256,
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+  },
+  "k8|draw2": {
+   "sources": [
+    "sabes",
+    "ofner",
+    "katmah",
+    "schreiber_moissenet",
+    "wtrack",
+    "area2",
+    "ds003739",
+    "hyser"
+   ],
+   "windows_per_source": 256,
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+  }
+ },
+ "D_all": {
+  "sources": [
+   "area2",
+   "ds003739",
+   "gait120",
+   "hygrip",
+   "hyser",
+   "katmah",
+   "moreira",
+   "ofner",
+   "sabes",
+   "schreiber_moissenet",
+   "wtrack"
+  ],
+  "windows_per_source": 186,
+  "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+ },
+ "arms_with_a_source_below_its_share": {
+  "k2|draw1": {
+   "area2": 458
+  },
+  "k2|draw2": {
+   "area2": 458
+  },
+  "k4|draw0": {
+   "area2": 458
+  }
+ },
+ "counts_from": "MIXTURE-MANIFEST.json of 2026-11-28T08:55:50+1100",
+ "no_recording_values": true
+}
