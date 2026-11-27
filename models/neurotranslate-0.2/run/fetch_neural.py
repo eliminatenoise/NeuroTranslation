@@ -156,7 +156,7 @@ def ofner_plan(record):
     return sorted(plan, key=lambda p: (int(p["person"][1:]), p["run"]))
 
 
-def fetch_ofner(paths, pacer):
+def fetch_ofner(paths, pacer, purpose=None):
     out = Path(paths["raw"]) / "ofner"
     out.mkdir(parents=True, exist_ok=True)
     try:
@@ -165,7 +165,8 @@ def fetch_ofner(paths, pacer):
         sys.exit(str(e))
     common.log_download(paths, {"dataset": "ofner", "url": OFNER_RECORD, "final_url": rec["final_url"],
                                 "hosts": rec["hosts"], "range": None, "status": rec["status"], "bytes": rec["bytes"],
-                                "sha256": rec["sha256"], "purpose": "record file list and checksums (metadata)"})
+                                "sha256": rec["sha256"], "purpose": "record file list and checksums (metadata)"
+                                + ("; " + purpose if purpose else "")})
     (out / "record.json").write_bytes(rec["body"])
     record = json.loads(rec["body"])
     plan = ofner_plan(record)
@@ -199,7 +200,8 @@ def fetch_ofner(paths, pacer):
                                     "bytes": res["bytes"], "sha256": res["sha256"], "md5": res["md5"],
                                     "publisher_md5_and_size_match": ok, "person": p["person"], "run": p["run"],
                                     "role": "arm-transfer fitting person",
-                                    "raw_location": "RAM-backed temporary folder; deleted after tokenising and the shard check"})
+                                    "raw_location": "RAM-backed temporary folder; deleted after tokenising and the shard check",
+                                    **({"purpose": purpose} if purpose else {})})
         if not ok:
             dst.unlink(missing_ok=True)
             sys.exit("size or MD5 mismatch for " + p["key"])
@@ -215,6 +217,7 @@ def main():
     ap.add_argument("--paths")
     ap.add_argument("dataset", choices=["ds003739", "ofner"])
     ap.add_argument("--plan-only", action="store_true")
+    ap.add_argument("--purpose", help="reason recorded with every request of this run (Ofner only)")
     a = ap.parse_args()
     paths = common.load_paths(a.paths)
     pacer = common.Pacer(1.05)
@@ -223,7 +226,10 @@ def main():
             plan, ros = ds_plan(paths)
             print(json.dumps({"files": len(plan), "bytes": sum(p["bytes"] for p in plan), "roster": ros}))
         return
-    {"ds003739": fetch_ds003739, "ofner": fetch_ofner}[a.dataset](paths, pacer)
+    if a.dataset == "ofner":
+        fetch_ofner(paths, pacer, a.purpose)
+    else:
+        fetch_ds003739(paths, pacer)
 
 
 if __name__ == "__main__":

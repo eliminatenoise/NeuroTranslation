@@ -164,6 +164,7 @@ def main():
     ap.add_argument("--plan-only", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--member-regex", help="re-fetch only the wanted members whose name matches, one range per member")
+    ap.add_argument("--purpose", help="reason recorded with every request of this run (for example a re-fetch)")
     a = ap.parse_args()
     paths = common.load_paths(a.paths)
     head = common.protocol_head(paths)
@@ -230,7 +231,8 @@ def main():
             "range": rng, "status": res["status"], "content_range": cr, "bytes": res["bytes"],
             "sha256": res["sha256"], "archive": r["archive"], "figshare_file_id": r["file_id"],
             "person": r["person"], "members": len(got), "member_crc32_checked": True,
-            "raw_location": "RAM-backed temporary folder; range blob deleted after members were checked"})
+            "raw_location": "RAM-backed temporary folder; range blob deleted after members were checked",
+            **({"purpose": a.purpose} if a.purpose else {})})
         tmp.unlink()
         common.atomic_write_json(sidecar, {"range": rng, "sha256": res["sha256"], "bytes": res["bytes"],
                                            "members": got})

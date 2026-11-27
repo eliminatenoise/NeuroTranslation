@@ -20,6 +20,7 @@ import hashlib
 import json
 import math
 import os
+import tempfile
 import time
 import urllib.error
 import urllib.parse
@@ -160,18 +161,39 @@ class Stop429(Exception):
     pass
 
 
+PACING_DIR = os.environ.get("NT02_PACING_DIR") or os.path.join(tempfile.gettempdir(), "nt02-host-pacing")
+
+
 class Pacer:
-    def __init__(self, min_interval=1.05):
+    """At most one request per min_interval per host, across every process of the data step.
+
+    The time of the last request to each host is kept in one small file per host under PACING_DIR and is
+    read and rewritten under an exclusive lock, so two processes that fetch from the same host at the same
+    time (for example a range fetch and a licence check) still keep the spacing. A process that has to wait
+    holds the lock for the pause, so the other processes queue behind it."""
+
+    def __init__(self, min_interval=1.05, directory=None):
         self.min_interval = min_interval
-        self.last = {}
+        self.dir = Path(directory or PACING_DIR)
+        self.dir.mkdir(parents=True, exist_ok=True)
 
     def wait(self, host):
-        t = self.last.get(host)
-        if t is not None:
-            dt = time.monotonic() - t
-            if dt < self.min_interval:
-                time.sleep(self.min_interval - dt)  # single in-request pause, not a wait loop
-        self.last[host] = time.monotonic()
+        name = "".join(ch if ch.isalnum() or ch in "._-" else "_" for ch in host) or "_"
+        with open(self.dir / name, "a+") as f:
+            fcntl.flock(f, fcntl.LOCK_EX)
+            try:
+                f.seek(0)
+                s = f.read().strip()
+                last = float(s) if s else None
+                now = time.time()
+                if last is not None and 0 <= now - last < self.min_interval:
+                    time.sleep(self.min_interval - (now - last))  # single in-request pause, not a wait loop
+                f.seek(0)
+                f.truncate()
+                f.write("%.6f" % time.time())
+                f.flush()
+            finally:
+                fcntl.flock(f, fcntl.LOCK_UN)
 
 
 class _NoRedirect(urllib.request.HTTPRedirectHandler):
