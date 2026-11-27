@@ -4,21 +4,28 @@
 
 Protocol version 1 ([PROTOCOL.json](PROTOCOL.json)) fixes the data, the split of people into groups, the models and the scoring. It leaves 18 smaller details to the code. This file lists each one: what the code does, why, and which function does it. The results will cite these items by their numbers. If this file and PROTOCOL.json disagree, PROTOCOL.json governs.
 
-## When these choices were fixed
-
-All 18 choices were written into the code before any byte of the 80 new people's recordings was read, and none was made by looking at a result. They were reviewed with the code at stage C1b.
-
-The first wording of this file was committed before the header probe (stage D1) began: the commit's author time is 11:54:47 UTC on 27 November 2026, and D1 started at 11:55:07 UTC. That commit was not pushed before D1, so this order rests on the local commit record, not on a public time. After D1 and the allocation (stage C2), the file was rewritten in plainer words. No choice changed. The first wording has sha256 `55f8f68d9a3ffa56cd262c92e5b1a1358f51212921d1d65c13ce85fde6ae2e95` (git blob `9bc409b59bd61907a078711668a195911539fb05`) and stays in this folder's history. D1 read only the file headers of the candidates' walks, and no forecast or score exists yet.
-
 ## Words used here
 
+- **Stages**: the steps of the protocol, in order (protocol section 14). S0: engineering gates on the 12 earlier fit people. C1b: the separate review of the run code against the protocol. D1: the header probe, which reads only the file headers of the candidates' walks. C2: the qualification receipt and the allocation of people to groups, with their separate review. D2 and D3: the downloads of the training pool and of the evaluation group. S-b: scoring of the rungs below N_max, before any N_max forecast is opened. S-c: the final scoring of everything else. A stage whose name starts with C ends in a commit.
+- **Gates G0, G1, G2**: checks in S0 that our code repeats the earlier work exactly (protocol section 13). G0 re-trains the sealed 12-person three-pass checkpoints from the earlier encoded data. G1 rebuilds the 9,946 issue rows of the 36 fit walks from the C3D files. G2 runs the whole path from the C3D files to the checkpoints.
+- **Q6, QP, X**: the classes a walk or a person gets in the header probe (protocol section 4.3). Q6 passes every check, including the six-name rule: the six EMG channels `Voltage.LBF`, `LERS`, `LGAS`, `LRF`, `LST` and `RERS` are each present once, in volts. QP passes every check except the six-name rule and has at least four EMG voltage channels. X fails some other check. A person is Q6 with at least three Q6 walks.
+- **TAG** and **hash order**: TAG is the fixed text `10.6084/m9.figshare.24192480.v1|walking-scale|` followed by the sha256 of PROTOCOL.json (protocol section 5.1). A hash order sorts items by the sha256 of TAG plus a label and the item, so nobody could choose or foresee the order before the protocol was final.
 - **Walk**: one recorded pass along the walkway, stored as one file in the dataset's archive.
 - **Issue time** and **row**: a forecast is made every 20 ms of a walk (at sample t). Each issue time gives one row per force plate (plates 1 and 2).
 - **Impulse**: the force on a plate added up over the next 100 ms, in newton-seconds (N·s). **New load**: the moment a plate starts carrying a foot.
 - **Support**: a row has impulse support when its impulse target can be scored, and new-load support when its new-load label can be scored (protocol section 6).
 - **Rung**: one training-set size, counted in people. **Draw**: one fixed way of picking which extra people join a rung. **N_max**: the largest rung, all training people.
-- **M1, M2, M3**: the three model families (the compact three-pass recurrent model, ridge and logistic regression, boosted trees). An **arm** is a variant of a family, such as S2 (force only) or S4 (fixed number of rows).
+- **M1, M2, M3**: the three model families (the compact three-pass recurrent model, ridge and logistic regression, boosted trees). An **arm** is a variant of a family, such as S2 (force only), S4 (fixed number of rows) or S6 (EMG window ending 500 ms before the issue); protocol section 9 lists them all.
+- **F4**: the published force baselines (`common-six.npz`), straight-line models stored with four penalty settings each; one setting is chosen on the training-pool people (protocol section 8). Its two earlier-EMG arms, one for impulse and one for new load, use an EMG window that ends 500 ms before the issue.
 - **EMG**: muscle voltage measured on the skin. It is not a nerve recording.
+
+## When these choices were fixed
+
+All 18 choices were written into the code before any byte of the 80 new people's recordings was read, and none was made by looking at a result. Items 1 to 12 and 18 were in the code reviewed at stage C1b. Items 13 to 17 are the fixes for that review's findings. They were committed after the review and before D1, and they were first reviewed with the allocation at stage C2, which found them correct.
+
+D1 therefore ran on the code reviewed at C1b plus these fixes. Of the fixes, only items 13 and 14 change code that D1 uses, and they change only its retry and halt paths. Neither path was taken in D1: all 241 reads were first attempts, every ranged read was answered with status 206, and no local header differed from the central directory.
+
+The first wording of this file was committed together with those fixes, before D1 began: the commit's author time is 11:54:47 UTC on 27 November 2026, and D1 started at 11:55:07 UTC. That commit was not pushed before D1, so this order rests on the local commit record, not on a public time. The first wording said that the choices were written into the code reviewed at C1b; that was wrong for items 13 to 17, as stated above. After D1 and the allocation, the file was reworded in plainer language; after the C2 review, the review history above was corrected and the word list was extended. No choice changed. The first wording has sha256 `55f8f68d9a3ffa56cd262c92e5b1a1358f51212921d1d65c13ce85fde6ae2e95` (git blob `9bc409b59bd61907a078711668a195911539fb05`) and stays in this folder's history. D1 read only the file headers of the candidates' walks, and no forecast or score exists yet.
 
 ## Data and indices
 
@@ -62,6 +69,6 @@ The first wording of this file was committed before the header probe (stage D1) 
 
 16. **Reload equality.** Each saved checkpoint is reloaded and its forecasts are recomputed on every row of its training table (in the gates, the whole 12-person table) before its record is written. (`fit._fit_job`, `gates.part_a`)
 
-17. **Custody folders.** Evaluation walks (D3) and their receipts go to `eval-walks/`, and the EVAL-* arrays to `eval-arrays/`, inside the private folder. The physics-source track may be given read access to `walks/` and `arrays/` (training pool only) and is never given the evaluation folders, fits or forecasts. (`common.PRIVATE_FOLDERS`)
+17. **Custody folders.** Evaluation walks (D3) and their receipts go to `eval-walks/`, and the EVAL-* arrays to `eval-arrays/`, inside the private folder. The physics-source track may be given read access to `walks/` (the training pool's decoded walks) and `arrays/` (the TRAIN-* arrays, which hold the rows of the 12 earlier fit people and of the training pool), and is never given the evaluation folders, fits or forecasts. (`common.PRIVATE_FOLDERS`)
 
-18. **Forecast precision and disk.** Forecasts are stored as 64-bit floats. At Q = 80 they take roughly 0.5 GB uncompressed, so the private folder may exceed the protocol's estimate of under 0.7 GB. This changes storage only, not any number. (`issue.py`)
+18. **Forecast precision and disk.** Forecasts are stored as 64-bit floats. Before D1, for the largest case of Q = 80 qualified people (24 evaluation people), they were estimated at roughly 0.5 GB uncompressed. The actual Q is 65, with 20 evaluation people, and the same estimate gives roughly 0.45 GB. The decoded walks of the training pool and the evaluation group add 258,302,336 bytes (from ALLOCATION.json), so the private folder may exceed the protocol's estimate of under 0.7 GB. This changes storage only, not any number. (`issue.py`)
