@@ -401,8 +401,10 @@ def _link_page_check(n):
     page = pdf_dests(rel)[name]
     out = subprocess.run(['pdftotext', '-f', str(page), '-l', str(page), '-layout', str(REPO / rel), '-'],
                          check=True, capture_output=True, text=True).stdout
-    needles = {24: ('The Macaque Study In Full', 'Monkey N', 'Four more are reserved and have not been opened'),
-               25: ('One long training run', 'A two-stream network against repeating the last value')}[n]
+    # in the words of the 23 November edition: appendix A's heading, the animal, and its four sessions still unopened; study 25's row
+    needles = {24: ('Macaque Study Methods and Scoring', 'Monkey N', 'Four other sessions remain unopened'),
+               25: ('A check during one long training run', 'Predict each signal’s later values from its own history',
+                    'with repeating its last value')}[n]
     for needle in needles:
         assert needle in re.sub(r'\s+', ' ', out), ('not on page %d of the technical paper' % page, needle)
 
@@ -907,8 +909,13 @@ def study_anchors():
             assert n not in out
             out[n] = place
         assert sorted(out) == list(range(1, len(LEDGER['studies']) + 1)), sorted(out)
-        long_run = [t for t in tex.values() if r'\StudyAnchor{sec:self-forecast}' in t]
-        assert len(long_run) == 2 and all('two-stream network' in t.split(r'\StudyAnchor{sec:self-forecast}')[1].split('\n')[0] for t in long_run)
+        # study 25's row, in each appendix's own words since the 23 November edition (the two signals forecast from their own history)
+        long_run_said = {'/appendix-studies.tex': "Predict each signal's later values from its own history",
+                         '/appendix-studies-simple.tex': 'Forecast the later muscle readings from earlier muscle readings, and later glove angles'}
+        long_run = {m: t for m, t in tex.items() if r'\StudyAnchor{sec:self-forecast}' in t}
+        assert len(long_run) == 2 and all(said in long_run[m].split(r'\StudyAnchor{sec:self-forecast}')[1].split('\n')[0]
+                                          for m in long_run for end, said in long_run_said.items() if m.endswith(end))
+        assert sorted(end for m in long_run for end in long_run_said if m.endswith(end)) == sorted(long_run_said)
         _anchors['study'] = out
     return _anchors['study']
 
@@ -1092,7 +1099,7 @@ def held_table():
         log(str(n), file=rel, field=field, full=None, note=f'field holds: {want!r}')
         out.append(f'| {label} | {rows} | {n} {what} |')
     txt = re.sub(r'\s+', ' ', pdf_text(NEW_EDITION + 'neurotranslation-technical.pdf'))
-    said = 'Four more are reserved and have not been opened: 22 and 24 February 2020, and 21 and 22 June 2023'
+    said = 'Four other sessions remain unopened, on 22 and 24 February 2020 and 21 and 22 June 2023'     # the 23 November edition's words
     assert said in txt, said
     log('4', file=NEW_EDITION + 'neurotranslation-technical.pdf', field=f'appendix A, page {dest(0, "appendix.A")}: "{said}"', full=None)
     out.append('| Macaque fingers (LINK) | 24 | 4 recordings |')
@@ -1183,20 +1190,46 @@ IN_PAPERS = {      # study -> digits of its main scores as the NeuroTranslation 
     8: ('1.849', '1.700'), 10: ('0.6770', '0.6955'), 13: ('0.3741',), 23: ('0.69509',), 26: ('0.855', '1.182'),
     27: ('1.837', '1.929'), 28: ('5.432', '5.866'), 29: ('3.665', '3.549'),
 }
-SHARED_FIT_SAID = 'Later fits are outside this paper'     # both editions, end of section 7.4: the later fits are on the front page
+LATER_ELSEWHERE = {   # a needle of LATER_ABSENT -> the passages of the 23 November edition where the same characters belong to something else
+    'W-Track': ('Single Day W-Track Learning dataset',),   # the recording's name, for section 7's Next Neuron Prediction test: not the W-track study's forecast
+    '4.503': ('34.5038',),            # part of another number: a heel error in section 7's table of walking forecasts
+    '0.289': ('10.2896',),            # part of another number: an impulse error in the same table
+    '9.65': ('49.65 GiB',),           # part of another number: the memory of an earlier run of the separate 0.1 design
+    '0.226': ('-0.226 to +0.054',),   # the lower end of a 95% interval of a force-impulse difference in section 7, not the shin-muscle score
+    '6.13': ('56.13',),               # part of another number: a heel error in a second table of walking forecasts
+    '3.878': ('23.8788',),            # part of another number: a heel error in the first table
+    '1.539': ('31.5399',),            # part of another number: a heel error in the first table
+}
+SHARED_FIT_SAID = {   # each NeuroTranslation edition, section 7.4, in the 23 November edition's words: the later fits are reported elsewhere
+    'neurotranslation-technical.pdf': 'Later fits have separate records',
+    'neurotranslation-explained.pdf': 'The front page of the public project repository lists later fits and their results',
+}
+
+
+def _absent(t, needle):
+    """True while the needle is nowhere in the text t outside the passages LATER_ELSEWHERE allows for it."""
+    for passage in LATER_ELSEWHERE.get(needle, ()):
+        t = re.sub(r'\s+'.join(map(re.escape, passage.split())), ' ', t)
+    return needle not in t
 
 
 def not_in_papers():
-    """What the pages say about the contents of the papers, checked against the PDFs: the work published after them (the
-    four later studies, the shared fit and its wrist-angle path, the walk/run generator) is in none of the four; the eight
-    numbered rows that the previous edition lacked are in both NeuroTranslation editions; every numbered study has its place
-    there (study_anchors(), each destination on its recorded page); and the papers say in one sentence that the shared fit
-    came after them."""
+    """What the pages say about the contents of the papers, checked against the PDFs: the results of the work published after them
+    (the four later studies, the shared fit and its wrist-angle path, the walk/run generator) are in none of the four (no needle of
+    LATER_ABSENT outside the passages LATER_ELSEWHERE names, each of which must still be there); the eight numbered rows that the
+    previous edition lacked are in both NeuroTranslation editions; every numbered study has its place there (study_anchors(), each
+    destination on its recorded page); and the papers say in one sentence that the later fits are reported elsewhere."""
+    seen = set()
     for _, pdf, _ in EDITIONS:
         t = pdf_text(NEW_EDITION + pdf)
+        seen |= {p for v in LATER_ELSEWHERE.values() for p in v if re.search(r'\s+'.join(map(re.escape, p.split())), t)}
         for k, needles in LATER_ABSENT.items():
             for needle in needles:
-                assert needle not in t, (pdf, k, needle)
+                assert _absent(t, needle), (pdf, k, needle)
+    assert seen == {p for v in LATER_ELSEWHERE.values() for p in v}, ('a passage of LATER_ELSEWHERE is in no PDF: drop it',
+                                                                     sorted({p for v in LATER_ELSEWHERE.values() for p in v} - seen))
+    assert set(LATER_ELSEWHERE) <= {n for v in LATER_ABSENT.values() for n in v}, sorted(LATER_ELSEWHERE)
+    assert sorted(SHARED_FIT_SAID) == sorted(pdf for _, pdf, _ in NT)
     for i, pdf, _ in NT:
         t = re.sub(r'\s+', ' ', pdf_text(NEW_EDITION + pdf))
         for n, needles in IN_PAPERS.items():
@@ -1204,9 +1237,10 @@ def not_in_papers():
                 assert needle in t, (pdf, n, needle)
         for n, name in study_anchors().items():
             dest(i, name)
-        assert SHARED_FIT_SAID in t, pdf
+        assert SHARED_FIT_SAID[pdf] in t, pdf
     log(', '.join(LATER_ABSENT), file=NEW_EDITION + '*.pdf', field='text of all four PDFs', full=None,
-        note='published after the papers, none in them: ' + '; '.join(f'{k}: {", ".join(v)}' for k, v in LATER_ABSENT.items()))
+        note='published after the papers, none in them: ' + '; '.join(f'{k}: {", ".join(v)}' for k, v in LATER_ABSENT.items())
+        + '; the same characters as something else, allowed only in: ' + '; '.join(f'{k}: {" / ".join(v)}' for k, v in LATER_ELSEWHERE.items()))
     log(', '.join(map(str, sorted(IN_PAPERS))), file=NEW_EDITION + 'neurotranslation-technical.pdf and neurotranslation-explained.pdf', field='text', full=None,
         note='rows the previous edition lacked, now printed in both: ' + '; '.join(f'{k}: {", ".join(v)}' for k, v in IN_PAPERS.items()))
     return ''
@@ -2067,8 +2101,10 @@ def both_networks_24():
     t = re.sub(r'\s+', ' ', re.sub(r'-\n\s*', '', pdf_text(NEW_EDITION + 'neurotranslation-technical.pdf')))
     ref, a, b = (value(x[1]) for x in (S(24).s['baselines'][1], S(24).s['models'][0], S(24).s['models'][1]))
     assert a < ref and b < ref and b < a, (ref, a, b)
-    for needle in ('error was above the ridge', 'by 0.0052472 for the index finger', 'was above it by 0.0043575 for the index finger',
-                   'All five failed', 'Across 18 runs and 720 saved passes through the fitting data, no model passed'):
+    # in the words of the 23 November edition (appendix A; differences there are a network minus the current-frame ridge)
+    for needle in ('error exceeded the current-frame ridge’s by 0.0052472 for the index finger',
+                   'the difference from the ridge was 0.0043575 for the index finger',
+                   'All five failed', 'Across the 18 fitting runs and 720 saved passes through the fitting data, no model passed'):
         assert needle in t, needle
     log('both networks; 18 runs and 720 saved passes', file=NEW_EDITION + 'neurotranslation-technical.pdf',
         field=f'section 4.6 and appendix A (from page {dest(0, "appendix.A")})', full=None,
