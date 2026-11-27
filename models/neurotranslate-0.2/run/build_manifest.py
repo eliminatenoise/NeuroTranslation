@@ -71,23 +71,79 @@ def padded_share(paths, datasets):
             "per_dataset": per}
 
 
-def qd(datasets, proto):
-    anchors = proto["quantity_diversity"].get("Q_anchors") if isinstance(proto["quantity_diversity"], dict) else None
-    anchors = ["gait120", "ds003739", "ofner", "wtrack"]
+CONDITIONAL_SOURCES = ("area2", "falcon_m1")  # ALLOCATION.json d_candidate_note
+
+
+def _pow2_floor(x):
+    w = 1
+    while w * 2 <= x:
+        w *= 2
+    return w if x >= 1 else 0
+
+
+def _unit_windows(paths, dataset, units):
+    tf = Path(paths["shards"]) / dataset / "TOKENS.json"
+    rows = json.loads(tf.read_text())["recordings"]
+    return sum(r["windows"] for r in rows if r["unit"] in set(units))
+
+
+def qd(paths, datasets, alloc):
+    """PROTOCOL.json quantity_diversity, counted at P2: W_max, the Q levels and budget, the D-arm orders
+    recomputed with every admitted conditional source (ALLOCATION.json d_candidate_note), D-arm eligibility
+    (at least W_max/8 inner-training windows), the sources of each D arm and D_all, and W_P of the P arms."""
+    q = alloc["quantity_diversity"]
+    anchors = q["q_anchors"]
     have = {a: datasets[a]["counts"]["windows_inner_training"] for a in anchors
             if a in datasets and datasets[a].get("qualified") and "windows_inner_training" in datasets[a].get("counts", {})}
     if len(have) < len(anchors):
         return {"status": "pending: anchors not yet counted", "anchors_counted": have,
                 "anchors_missing": [a for a in anchors if a not in have]}
-    m = min(have.values())
-    w = 1
-    while w * 2 <= m:
-        w *= 2
-    elig = sorted(k for k, d in datasets.items() if d.get("qualified") and
-                  d.get("counts", {}).get("windows_inner_training", 0) >= w / 8)
+    w = _pow2_floor(min(have.values()))
+    wit = {k: d.get("counts", {}).get("windows_inner_training", 0) for k, d in datasets.items() if d.get("qualified")}
+    elig = sorted(k for k, n in wit.items() if n >= w / 8)
+    published = q["d_arms"]["orders"]
+    base = sorted(next(iter(published.values())))
+    admitted = [c for c in CONDITIONAL_SOURCES if datasets.get(c, {}).get("qualified")]
+    not_admitted = {c: datasets.get(c, {}).get("not_qualified_because", "not qualified")
+                    for c in CONDITIONAL_SOURCES if c not in admitted}
+    cands = sorted(set(base) | set(admitted))
+    orders, arms, published_equal = {}, {}, True
+    for k in (2, 4, 8):
+        for draw in (0, 1, 2):
+            key = "k%d|draw%d" % (k, draw)
+            order = sorted(cands, key=lambda d: (common.sha256_text("%s|D|%s|%s" % (common.SALT, key, d)), d))
+            published_equal &= [d for d in order if d in base] == published[key]
+            orders[key] = order
+            chosen = [d for d in order if d in elig][:k]
+            arms[key] = {"sources": chosen, "windows_per_source": w // k,
+                         "sources_with_fewer_unique_inner_training_windows_than_their_share":
+                             {d: wit[d] for d in chosen if wit[d] < w // k}}
+    d_all = {"sources": elig, "windows_per_source": w // len(elig) if elig else 0,
+             "sources_with_fewer_unique_inner_training_windows_than_their_share":
+                 {d: wit[d] for d in elig if wit[d] < (w // len(elig) if elig else 0)}}
+    p_arms = {}
+    for ds, spec in q["p_arms"].items():
+        lv = spec["levels"]
+        smallest = min(lv, key=int)
+        n_small = _unit_windows(paths, ds, lv[smallest])
+        p_arms[ds] = {"levels_people": sorted((int(x) for x in lv)),
+                      "windows_of_smallest_level": {"people": int(smallest), "windows": n_small},
+                      "W_P": _pow2_floor(min(w // 4, n_small)),
+                      "windows_per_level": {x: _unit_windows(paths, ds, lv[x]) for x in sorted(lv, key=int)}}
     return {"status": "computed", "anchors_inner_training_windows": have, "W_max": w,
-            "D_arm_eligible_sources": elig, "rule": "W_max = smallest anchor inner-training window count rounded down "
-            "to a power of 2; D-arm sources need at least W_max/8 inner-training windows"}
+            "q_levels": [w // 16, w // 4, w], "updates_per_arm_U": 40 * w // 128,
+            "D_arm_eligible_sources": elig, "D_arm_eligibility_threshold_windows": w / 8,
+            "inner_training_windows_by_source": dict(sorted(wit.items())),
+            "D_arm_candidates": {"wave_1": base, "conditional_admitted": admitted,
+                                 "conditional_not_admitted": not_admitted},
+            "D_arm_orders": orders,
+            "D_arm_orders_restricted_to_wave_1_equal_ALLOCATION_json": bool(published_equal),
+            "D_arms": arms, "D_all": d_all, "P_arms": p_arms,
+            "rule": "W_max = smallest anchor inner-training window count rounded down to a power of 2; D-arm sources "
+                    "need at least W_max/8 inner-training windows; D-arm orders by ascending sha256('" + common.SALT +
+                    "|D|k' + k + '|draw' + draw + '|' + dataset) over the wave-1 sources and the admitted conditional "
+                    "sources, each arm taking the first k eligible sources; W_P = the largest power of 2 not above "
+                    "min(W_max/4, windows of the smallest P level)"}
 
 
 def main():
@@ -97,7 +153,7 @@ def main():
     a = ap.parse_args()
     paths = common.load_paths(a.paths)
     out = Path(a.out) if a.out else Path(paths["run_worktree"]) / "models" / "neurotranslate-0.2" / "MIXTURE-MANIFEST.json"
-    proto, _ = common.protocol_files(paths)
+    proto, alloc = common.protocol_files(paths)
     parts = {}
     for f in sorted(Path(paths["manifest_parts"]).glob("*.json")):
         p = json.loads(f.read_text())
@@ -132,7 +188,10 @@ def main():
             "design_range_steps": "8-30 million (PROTOCOL.json time_estimates)",
             "not_part_of_this_step": "the 512-step GPU throughput and 16-thread CPU issuing measurements and the "
                                      "recomputed P3-P9 times are made before model choice, not in the data step"}
-        obj["quantity_diversity"] = qd(ds, proto)
+        obj["quantity_diversity"] = qd(paths, ds, alloc)
+        prov = Path(paths["private"]) / "P1-PROTOCOL-HEADS.json"
+        if prov.exists():
+            obj["protocol_heads_at_p1"] = json.loads(prov.read_text())
         obj["updated_at"] = common.now_iso()
         obj["no_recording_values"] = True
         return obj

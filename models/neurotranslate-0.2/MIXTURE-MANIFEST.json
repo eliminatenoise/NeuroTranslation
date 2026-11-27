@@ -6,7 +6,7 @@
    "wave": 1,
    "name": "CEMHSEY GRASP, version 2, part I",
    "doi": "10.5281/zenodo.15077957",
-   "licence": "cc-by-4.0",
+   "licence": "CC-BY-4.0",
    "species": "human",
    "sites": 1,
    "protocol_head": {
@@ -79,11 +79,47 @@
     "Q1_licence": {
      "pass": true,
      "declared": "cc-by-4.0",
+     "spdx": "CC-BY-4.0",
      "deposit_endpoint": "https://zenodo.org/api/records/15077957",
-     "response_sha256": "72d1329e71738c839b4ae51d04bdd970b2563e4c572c4051f09ff3255f08cc0b",
+     "response_sha256": "29f81c81a8b9ca04cad89df84c4e970263ef2b1ab48a060153ff8917c9fa9b5e",
      "licence_object_sha256": "01c5aef2ac9ec208e5f644288c27fb700952446c530ec4977a99f88500e47f63",
-     "licence_text": null,
-     "checked_at": "2026-11-27T21:52:49+1100"
+     "licence_text": {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "status": 200,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
+     },
+     "attribution": {
+      "doi": "10.5281/zenodo.15077957",
+      "url": "https://doi.org/10.5281/zenodo.15077957",
+      "title": "Dataset: CEMHSEY (ConsecutivE Multi-day High-density Surface ElectromyographY), Part I",
+      "creators": [
+       "Yang, Shutian",
+       "Li, Dongxuan",
+       "Chen, Chen",
+       "Zhu, Xiangyang"
+      ],
+      "publisher": "Zenodo",
+      "year": 2025,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Attribution 4.0 International",
+        "uri": "https://creativecommons.org/licenses/by/4.0/legalcode",
+        "spdx": "cc-by-4.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.5281/zenodo.15077957",
+      "response_sha256": "91bb3626df858b00a6967b952ae17f35ab9a5456586a281f2757094e7d2cda67",
+      "read_at": "2026-11-28T01:12:48+1100"
+     },
+     "notice": {
+      "citation": "Yang, Shutian; Li, Dongxuan; Chen, Chen; Zhu, Xiangyang (2025). Dataset: CEMHSEY (ConsecutivE Multi-day High-density Surface ElectromyographY), Part I. Zenodo. https://doi.org/10.5281/zenodo.15077957",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:12:48+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -168,7 +204,8 @@
    "notes": [
     "Force and EMG sample counts imply different durations; tokens use the shorter span and the nominal clocks."
    ],
-   "seconds": 4.6
+   "seconds": 4.6,
+   "licence_as_declared": "cc-by-4.0"
   },
   "gait120": {
    "dataset": "gait120",
@@ -176,18 +213,19 @@
    "wave": 1,
    "name": "Comprehensive Human Locomotion and Electromyography Dataset: Gait120",
    "doi": "10.6084/m9.figshare.27677016.v1",
-   "licence": "CC BY",
+   "licence": "CC-BY-4.0",
+   "licence_as_declared": "CC BY",
    "species": "human",
    "sites": 1,
    "protocol_head": {
-    "worktree_head": "a246e2bbef287d25f240638a292bfea09fad26a8",
-    "branch_head": "a246e2bbef287d25f240638a292bfea09fad26a8",
+    "worktree_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "branch_head": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
     "PROTOCOL.json": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
     "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
     "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
-    "read_at": "2026-11-27T22:30:11+1100"
+    "read_at": "2026-11-28T01:24:08+1100"
    },
-   "built_at": "2026-11-27T22:30:18+1100",
+   "built_at": "2026-11-28T01:24:14+1100",
    "qualified": true,
    "counts": {
     "individuals": 66,
@@ -196,34 +234,34 @@
     "people": 66,
     "sites": 1,
     "sessions": 66,
-    "recordings": 2322,
+    "recordings": 3827,
     "tasks": {
-     "LevelWalking": 330,
+     "LevelWalking": 585,
      "SitToStand": 301,
-     "SlopeAscent": 330,
-     "SlopeDescent": 330,
-     "StairAscent": 329,
-     "StairDescent": 330,
+     "SlopeAscent": 637,
+     "SlopeDescent": 631,
+     "StairAscent": 652,
+     "StairDescent": 649,
      "StandToSit": 306,
      "Static": 66
     },
     "conditions": {},
-    "unique_steps_20ms": 393485,
-    "steps_with_any_channel": 393475,
-    "windows_1200ms": 5398,
-    "windows_1200ms_every_step_with_data": 5397,
-    "windows_inner_training": 4290,
-    "windows_inner_validation": 1108,
+    "unique_steps_20ms": 257346,
+    "steps_with_any_channel": 257346,
+    "windows_1200ms": 2581,
+    "windows_1200ms_every_step_with_data": 2581,
+    "windows_inner_training": 2072,
+    "windows_inner_validation": 509,
     "channel_seconds": {
-     "emg:surface_emg": 91328.16,
-     "force:plate_force": 6638.04,
-     "kin:joint_angle": 173753.58,
-     "kin:marker": 602433.0
+     "emg:surface_emg": 58657.38,
+     "force:plate_force": 6616.32,
+     "kin:joint_angle": 173693.52,
+     "kin:marker": 602189.64
     },
     "spikes": 0,
     "events": {
      "count": 3761,
-     "definition": "author step segments (TargetFrame ranges in raw.mat), one per marker step file"
+     "definition": "author step segments (TargetFrame ranges in raw.mat): one per recording; the static trials have none"
     },
     "sources_read_without_a_full_step": 0
    },
@@ -289,17 +327,47 @@
     "Q1_licence": {
      "pass": true,
      "declared": "CC BY",
+     "spdx": "CC-BY-4.0",
      "deposit_endpoint": "https://api.figshare.com/v2/articles/27677016/versions/1",
      "response_sha256": "7fa0249cf176ccbf682e9a82984cb96c936c94d76b4d5537c6c2afddd366c38e",
      "licence_object_sha256": "271d9ed3ed83d5d49269642703b6c37f18a619347935d6b8b623ccf7b636d952",
      "licence_text": {
-      "url": "https://creativecommons.org/licenses/by/4.0/",
-      "final_url": "https://creativecommons.org/licenses/by/4.0/",
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
       "status": 200,
-      "bytes": 32767,
-      "sha256": "5b0b7a3b78c8696d653d519da73f1ac1eed684a434c3e81f4ac6279f750abb50"
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
      },
-     "checked_at": "2026-11-27T21:52:39+1100"
+     "attribution": {
+      "doi": "10.6084/m9.figshare.27677016.v1",
+      "url": "https://doi.org/10.6084/m9.figshare.27677016.v1",
+      "title": "Comprehensive Human Locomotion and Electromyography Dataset: Gait120",
+      "creators": [
+       "Koo, Seungbum",
+       "Boo, Junyo",
+       "Seo, Dongwook",
+       "Kim, Minseung"
+      ],
+      "publisher": "figshare",
+      "year": 2025,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Attribution 4.0 International",
+        "uri": "https://creativecommons.org/licenses/by/4.0/legalcode",
+        "spdx": "cc-by-4.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.6084/m9.figshare.27677016.v1",
+      "response_sha256": "ec1f1808a914d5d7829f131170b525bd53d972a92e94c40e43fa3028af734807",
+      "read_at": "2026-11-28T01:12:29+1100"
+     },
+     "notice": {
+      "citation": "Koo, Seungbum; Boo, Junyo; Seo, Dongwook; Kim, Minseung (2025). Comprehensive Human Locomotion and Electromyography Dataset: Gait120. figshare. https://doi.org/10.6084/m9.figshare.27677016.v1",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:12:29+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -323,7 +391,21 @@
     },
     "Q4_clock": {
      "pass": true,
-     "how": "trial timestamp and frame-identifier match of the chair-rise study, on every training trial",
+     "how": "trial timestamp and frame-identifier match of the chair-rise study, on every training step segment; one recording per author step segment",
+     "step_segment_recordings": 3761,
+     "segment_emg_inside_trial_emg": [
+      true,
+      3761
+     ],
+     "step_segment_durations": {
+      "segments": 3761,
+      "min_s": 0.86,
+      "median_s": 1.26,
+      "max_s": 3.27,
+      "shorter_than_one_1200ms_window": 1383,
+      "note": "N frames give floor(N / 2) steps; a segment of fewer than 120 frames holds no counted window"
+     },
+     "boundary_frames_in_two_recordings": 748,
      "trc_frames_equal_target": [
       true,
       3761
@@ -357,7 +439,8 @@
     },
     "Q5_labels": {
      "pass": true,
-     "how": "markers mm (measured), OpenSim coordinates degrees or m (derived), EMG measured surface EMG of right-leg muscles (not a nerve recording), plate forces N (measured)",
+     "how": "markers mm (measured), OpenSim coordinates degrees or m (derived), EMG measured surface EMG of right-leg muscles (not a nerve recording), plate forces N (measured; loaded vertical force positive in every plate file, checked; no sign change made)",
+     "plate_files_with_negative_loaded_vertical_median": [],
      "plate_files_masked_whole_for_samples_above_10kN": {
       "S014_SitToStand_T02 step 1 plate 1": 600,
       "S014_SitToStand_T04 step 1 plate 1": 592,
@@ -391,8 +474,8 @@
    },
    "tokens": {
     "shards": 66,
-    "bytes": 661418244,
-    "shard_list_sha256": "8f4a79d257da7d52ec83a293d59df7cb12c0584d638649fc2d6d319d946fdd4e",
+    "bytes": 432904416,
+    "shard_list_sha256": "d6825950a2d20692349411e9485054aec4a0e9877eeee48e4e326af934e704bc",
     "channels": {
      "emg": 12,
      "kin": 156,
@@ -410,9 +493,11 @@
    },
    "notes": [
     "Joint angles of SitToStand were not part of the P1 member list, so SitToStand trials carry markers, EMG and plates only.",
-    "EMG spans each trial's TotalFrame range, which starts before and ends after the marker steps; steps with EMG only are kept (marker and plate channels masked there)."
+    "One recording per author step segment (the TargetFrame range of one step file), the unit that protocol sections 5.2 and 13 and step P5 use for Gait120; the static trial is one recording. EMG outside every step segment of a trial is not tokenised.",
+    "The 20 Hz EMG high-pass runs forward over the whole trial from its first sample, so a segment's EMG features use only samples before each step end, including samples before the segment start.",
+    "Consecutive step segments share one boundary frame (the authors' segmentation). Where a segment has an even number of frames, its last 20 ms step holds that frame, which the next segment's first step also holds; the number of such boundaries is in the Q4 record."
    ],
-   "seconds": 7.2
+   "seconds": 6.4
   },
   "hyser": {
    "dataset": "hyser",
@@ -420,7 +505,7 @@
    "wave": 1,
    "name": "Hyser high-density surface EMG, random finger task, version 2.0.0",
    "doi": "10.13026/hxan-pe94",
-   "licence": "# ODC Attribution License (ODC-By)",
+   "licence": "ODC-By-1.0",
    "species": "human",
    "sites": 1,
    "protocol_head": {
@@ -495,11 +580,42 @@
     "Q1_licence": {
      "pass": true,
      "declared": "# ODC Attribution License (ODC-By)",
+     "spdx": "ODC-By-1.0",
      "deposit_endpoint": "https://physionet.org/files/hd-semg/2.0.0/LICENSE.txt",
      "response_sha256": "86c0ad300f6d380591298bc03652e30b81f65954bbf22435812bcfd46812ab06",
      "licence_object_sha256": "86c0ad300f6d380591298bc03652e30b81f65954bbf22435812bcfd46812ab06",
-     "licence_text": null,
-     "checked_at": "2026-11-27T21:52:48+1100"
+     "licence_text": {
+      "url": "https://physionet.org/files/hd-semg/2.0.0/LICENSE.txt",
+      "final_url": "https://physionet-open.s3.amazonaws.com/hd-semg/2.0.0/LICENSE.txt",
+      "status": 200,
+      "bytes": 20402,
+      "sha256": "86c0ad300f6d380591298bc03652e30b81f65954bbf22435812bcfd46812ab06",
+      "what": "the deposit's own LICENSE.txt (the licence text)"
+     },
+     "attribution": {
+      "doi": "10.13026/hxan-pe94",
+      "url": "https://doi.org/10.13026/hxan-pe94",
+      "title": "Open Access Dataset and Toolbox of High-Density Surface Electromyogram Recordings",
+      "creators": [
+       "Jiang, Xinyu",
+       "Dai, Chenyun",
+       "Liu, Xiangyu",
+       "Fan, Jiahao"
+      ],
+      "publisher": "PhysioNet",
+      "year": 2023,
+      "version": "2.0.0",
+      "rights": [],
+      "source": "https://api.datacite.org/dois/10.13026/hxan-pe94",
+      "response_sha256": "439c24689720ea725eb676848a810efe289c8195e359a4822eb1656ce060c2ae",
+      "read_at": "2026-11-28T01:12:46+1100"
+     },
+     "notice": {
+      "citation": "Jiang, Xinyu; Dai, Chenyun; Liu, Xiangyu; Fan, Jiahao (2023). Open Access Dataset and Toolbox of High-Density Surface Electromyogram Recordings. PhysioNet. https://doi.org/10.13026/hxan-pe94",
+      "rule": "keep the licence notice and attribute the database as its makers ask (ODC-By 1.0 section 4.3), for example: 'Contains information from TITLE (DOI), which is made available under the Open Data Commons Attribution License v1.0'",
+      "attribution_statement": "Contains information from Open Access Dataset and Toolbox of High-Density Surface Electromyogram Recordings (https://doi.org/10.13026/hxan-pe94), which is made available under the Open Data Commons Attribution License v1.0."
+     },
+     "checked_at": "2026-11-28T01:12:46+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -578,7 +694,8 @@
    "notes": [
     "Finger force is uncalibrated transducer voltage; its filtering history in the release is unresolved."
    ],
-   "seconds": 23.8
+   "seconds": 23.8,
+   "licence_as_declared": "# ODC Attribution License (ODC-By)"
   },
   "izmir": {
    "dataset": "izmir",
@@ -586,7 +703,7 @@
    "wave": 1,
    "name": "Izmir walking motion capture (Aperta)",
    "doi": "10.48623/aperta.286865 (record 286866)",
-   "licence": "cc-by-4.0",
+   "licence": "CC-BY-4.0",
    "species": "human",
    "sites": 1,
    "protocol_head": {
@@ -653,11 +770,47 @@
     "Q1_licence": {
      "pass": true,
      "declared": "cc-by-4.0",
+     "spdx": "CC-BY-4.0",
      "deposit_endpoint": "https://aperta.ulakbim.gov.tr/api/records/286866",
      "response_sha256": "77104d3bd02d6888884730883d55744358aff764d8599b119e3141e2ccbffc20",
      "licence_object_sha256": "01c5aef2ac9ec208e5f644288c27fb700952446c530ec4977a99f88500e47f63",
-     "licence_text": null,
-     "checked_at": "2026-11-27T21:52:45+1100"
+     "licence_text": {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "status": 200,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
+     },
+     "attribution": {
+      "doi": "10.48623/aperta.286865",
+      "url": "https://doi.org/10.48623/aperta.286865",
+      "title": "A multimodal dataset of lower-limb kinematics, kinetics, electromyography, and musculoskeletal simulations from healthy adults during overground walking",
+      "creators": [
+       "Mihcin, \u015eenay",
+       "Y\u0131lmaz, Mehmet",
+       "\u015eahin, Ahmet Mert",
+       "Akdeniz, Sevin\u00e7"
+      ],
+      "publisher": "Nature Scientific Data",
+      "year": 2026,
+      "version": "1.0",
+      "rights": [
+       {
+        "rights": "Creative Commons Attribution 4.0 International",
+        "uri": "https://creativecommons.org/licenses/by/4.0/legalcode",
+        "spdx": "cc-by-4.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.48623/aperta.286865",
+      "response_sha256": "314ea83bf8fb7357e878f98870cbc3efb02223c22504488dda391ebc3d4a0e31",
+      "read_at": "2026-11-28T01:13:21+1100"
+     },
+     "notice": {
+      "citation": "Mihcin, \u015eenay; Y\u0131lmaz, Mehmet; \u015eahin, Ahmet Mert; Akdeniz, Sevin\u00e7 (2026). A multimodal dataset of lower-limb kinematics, kinetics, electromyography, and musculoskeletal simulations from healthy adults during overground walking. Nature Scientific Data. https://doi.org/10.48623/aperta.286865",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:13:21+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -740,7 +893,8 @@
     "Each file holds one gait cycle of about 1.1-1.6 s, so most files give one counted 1.2 s window.",
     "The C3D files also hold a force plate and four unlabelled EMG sensors; the protocol admits markers only."
    ],
-   "seconds": 0.1
+   "seconds": 0.1,
+   "licence_as_declared": "cc-by-4.0"
   },
   "katmah": {
    "dataset": "katmah",
@@ -748,7 +902,7 @@
    "wave": 1,
    "name": "Katmah et al. multimodal treadmill gait",
    "doi": "10.13026/r0ea-7161",
-   "licence": "Creative Commons Attribution 4.0 International Public License",
+   "licence": "CC-BY-4.0",
    "species": "human",
    "sites": 1,
    "protocol_head": {
@@ -840,11 +994,44 @@
     "Q1_licence": {
      "pass": true,
      "declared": "Creative Commons Attribution 4.0 International Public License",
+     "spdx": "CC-BY-4.0",
      "deposit_endpoint": "https://physionet.org/files/multimodal-gait-dataset/1.0.0/LICENSE.txt",
      "response_sha256": "9a78e7f22742dde9f66ae235ec793ba2212019dc4d0ced75c4da09ced0b35fb2",
      "licence_object_sha256": "9a78e7f22742dde9f66ae235ec793ba2212019dc4d0ced75c4da09ced0b35fb2",
-     "licence_text": null,
-     "checked_at": "2026-11-27T21:52:46+1100"
+     "licence_text": {
+      "url": "https://physionet.org/files/multimodal-gait-dataset/1.0.0/LICENSE.txt",
+      "final_url": "https://physionet-open.s3.amazonaws.com/multimodal-gait-dataset/1.0.0/LICENSE.txt",
+      "status": 200,
+      "bytes": 14842,
+      "sha256": "9a78e7f22742dde9f66ae235ec793ba2212019dc4d0ced75c4da09ced0b35fb2",
+      "what": "the deposit's own LICENSE.txt (the licence text)"
+     },
+     "attribution": {
+      "doi": "10.13026/r0ea-7161",
+      "url": "https://doi.org/10.13026/r0ea-7161",
+      "title": "A multimodal gait dataset of brain activity, muscle activity, kinematics and ground forces in young adults",
+      "creators": [
+       "Katmah, Rateb",
+       "AlShehhi, Aamna",
+       "Kosaji, Doua",
+       "Al-Rahmani, Nour",
+       "Abdullah, Muhammad",
+       "Hulleck, Abdul Aziz Vaqar",
+       "Khalaf, Kinda"
+      ],
+      "publisher": "PhysioNet",
+      "year": 2026,
+      "version": "1.0.0",
+      "rights": [],
+      "source": "https://api.datacite.org/dois/10.13026/r0ea-7161",
+      "response_sha256": "b7d9565227f0d95673ae8a6857b507a5cfac84ddbc955a8d00687948b3994f3b",
+      "read_at": "2026-11-28T01:12:43+1100"
+     },
+     "notice": {
+      "citation": "Katmah, Rateb; AlShehhi, Aamna; Kosaji, Doua; Al-Rahmani, Nour; Abdullah, Muhammad; Hulleck, Abdul Aziz Vaqar; Khalaf, Kinda (2026). A multimodal gait dataset of brain activity, muscle activity, kinematics and ground forces in young adults. PhysioNet. https://doi.org/10.13026/r0ea-7161",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:12:43+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -853,6 +1040,10 @@
       {
        "file": "models/knee-motion/sources.json (published knee study)",
        "sha256": "695d0ff23daba2093e04467aeb3900de2a4735843baec54bf3ca4bab51e731c1"
+      },
+      {
+       "file": "models/knee-motion/REPRODUCE.md (published knee study, split rule)",
+       "sha256": "303f43be570849b3bf3e80ea3ecec3b931f08a99a3249f39b98ab12365731eae"
       }
      ],
      "file_audit": {
@@ -895,6 +1086,10 @@
      {
       "file": "models/knee-motion/sources.json (published knee study)",
       "sha256": "695d0ff23daba2093e04467aeb3900de2a4735843baec54bf3ca4bab51e731c1"
+     },
+     {
+      "file": "models/knee-motion/REPRODUCE.md (published knee study, split rule)",
+      "sha256": "303f43be570849b3bf3e80ea3ecec3b931f08a99a3249f39b98ab12365731eae"
      }
     ],
     "excluded_groups_checked": {
@@ -902,10 +1097,10 @@
      "reserved_53_59": 7
     },
     "inner_fold_rule_recomputed_equal": true,
-    "redone_at": "2026-11-27T22:15:00+1100",
+    "redone_at": "2026-11-28T01:15:25+1100",
     "roles_seen": [
      "train",
-     "unlisted in the knee roster (no IMU file); training by the committed pooled-encoder allocation"
+     "train (knee study ID range 1-40, REPRODUCE.md; recording listed as missing there, no IMU file)"
     ]
    },
    "tokens": {
@@ -930,9 +1125,10 @@
    "notes": [
     "Only Joint_Angles_ZXY is extracted for every person; identifier 1's extra extracted members (segment positions, free acceleration) are not used, so all people carry the same IMU channels.",
     "Identifier 24 has no IMU folder and identifiers 8 and 24 have no EMG file at 0.5 m/s; each gives the acquisitions it has.",
-    "Identifier 24 has no role in the knee study's roster (it was left out there only for lacking IMU data); the committed pooled-encoder allocation assigns identifiers 1-40 to training."
+    "Identifier 24 is a training person by the knee study's own split rule: its REPRODUCE.md assigns IDs 1-40 to training and lists the S24 recording as missing (it has no IMU file), so it is absent from the study's member list but holds no evaluation role."
    ],
-   "seconds": 3.3
+   "seconds": 3.3,
+   "licence_as_declared": "Creative Commons Attribution 4.0 International Public License"
   },
   "moreira": {
    "dataset": "moreira",
@@ -940,7 +1136,7 @@
    "wave": 1,
    "name": "Lower limb kinematic, kinetic and EMG data from young healthy humans during walking at controlled speeds (C3D files)",
    "doi": "10.6084/m9.figshare.14241812.v1",
-   "licence": "CC0",
+   "licence": "CC0-1.0",
    "species": "human",
    "sites": 1,
    "protocol_head": {
@@ -1033,17 +1229,48 @@
     "Q1_licence": {
      "pass": true,
      "declared": "CC0",
+     "spdx": "CC0-1.0",
      "deposit_endpoint": "https://api.figshare.com/v2/articles/14241812/versions/1",
      "response_sha256": "670413fa71afeddff65018aaef632a130da7bcac9bd6b809898f63e8b48ea3cd",
      "licence_object_sha256": "4ed7337b16345f53968e02757805595395ede4da489e8847632854e3832fc4fe",
      "licence_text": {
-      "url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "final_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
       "status": 200,
-      "bytes": 31065,
-      "sha256": "b7b54600914107f3eb5601b61168a827e21fda05a369eee41b85fb95346df318"
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "what": "plain-text legal code of CC0-1.0"
      },
-     "checked_at": "2026-11-27T21:52:42+1100"
+     "attribution": {
+      "doi": "10.6084/m9.figshare.14241812.v1",
+      "url": "https://doi.org/10.6084/m9.figshare.14241812.v1",
+      "title": "C3D files",
+      "creators": [
+       "Santos, Cristina",
+       "Joao Paulo Vilas-Boas",
+       "Moreira, Lu\u00eds Carlos",
+       "Figueiredo, Joana",
+       "Fonseca, Pedro"
+      ],
+      "publisher": "figshare",
+      "year": 2021,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Zero v1.0 Universal",
+        "uri": "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+        "spdx": "cc0-1.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.6084/m9.figshare.14241812.v1",
+      "response_sha256": "dfca424f3669f6adbf0903f9649ef4f54288e85e44da37c6bca30168c04eb649",
+      "read_at": "2026-11-28T01:12:34+1100"
+     },
+     "notice": {
+      "citation": "Santos, Cristina; Joao Paulo Vilas-Boas; Moreira, Lu\u00eds Carlos; Figueiredo, Joana; Fonseca, Pedro (2021). C3D files. figshare. https://doi.org/10.6084/m9.figshare.14241812.v1",
+      "rule": "no attribution is required; the source is credited as good practice"
+     },
+     "checked_at": "2026-11-28T01:12:34+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -1132,7 +1359,8 @@
     "No FORCE_PLATFORM:ZERO range is stored; unloaded plates keep offsets of up to about 20 N.",
     "Force calibration follows the C3D type 4 and type 3 definitions; one development trial's vertical force was compared with the authors' ASCII export (Q5 evidence)."
    ],
-   "seconds": 7.4
+   "seconds": 7.4,
+   "licence_as_declared": "CC0"
   },
   "schreiber_moissenet": {
    "dataset": "schreiber_moissenet",
@@ -1140,7 +1368,7 @@
    "wave": 1,
    "name": "A multimodal dataset of human gait at different walking speeds (Rehazenter), version 8",
    "doi": "10.6084/m9.figshare.7734767.v8",
-   "licence": "CC BY 4.0",
+   "licence": "CC-BY-4.0",
    "species": "human",
    "sites": 1,
    "protocol_head": {
@@ -1235,17 +1463,45 @@
     "Q1_licence": {
      "pass": true,
      "declared": "CC BY 4.0",
+     "spdx": "CC-BY-4.0",
      "deposit_endpoint": "https://api.figshare.com/v2/articles/7734767/versions/8",
      "response_sha256": "af2f54dd03a007043e09c0c4855ab9eeaa761942cb7e21b801a265ed8fe620a8",
      "licence_object_sha256": "3b0929191e59f10fd279fe2ce7fe73e486ec86f73a16c578dcce33f6884943c4",
      "licence_text": {
-      "url": "https://creativecommons.org/licenses/by/4.0/",
-      "final_url": "https://creativecommons.org/licenses/by/4.0/",
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
       "status": 200,
-      "bytes": 32767,
-      "sha256": "5b0b7a3b78c8696d653d519da73f1ac1eed684a434c3e81f4ac6279f750abb50"
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
      },
-     "checked_at": "2026-11-27T21:52:40+1100"
+     "attribution": {
+      "doi": "10.6084/m9.figshare.7734767.v8",
+      "url": "https://doi.org/10.6084/m9.figshare.7734767.v8",
+      "title": "A multimodal dataset of human gait at different walking speeds established on injury-free adult participants",
+      "creators": [
+       "Moissenet, Florent",
+       "Schreiber, C\u00e9line"
+      ],
+      "publisher": "figshare",
+      "year": 2020,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Attribution 4.0 International",
+        "uri": "https://creativecommons.org/licenses/by/4.0/legalcode",
+        "spdx": "cc-by-4.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.6084/m9.figshare.7734767.v8",
+      "response_sha256": "74c03473ecb55c297c3eefc725f6bcfb76707f9d081dc6a508675b5522454920",
+      "read_at": "2026-11-28T01:12:31+1100"
+     },
+     "notice": {
+      "citation": "Moissenet, Florent; Schreiber, C\u00e9line (2020). A multimodal dataset of human gait at different walking speeds established on injury-free adult participants. figshare. https://doi.org/10.6084/m9.figshare.7734767.v8",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:12:31+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -1333,7 +1589,8 @@
     "Plate moments are not tokenised (the force group holds the three force axes per plate).",
     "Each static trial holds one 100 Hz frame, shorter than one 20 ms step, so the 30 static trials are read and audited but give no token."
    ],
-   "seconds": 3.0
+   "seconds": 3.0,
+   "licence_as_declared": "CC BY 4.0"
   },
   "van_criekinge": {
    "dataset": "van_criekinge",
@@ -1341,7 +1598,7 @@
    "wave": 1,
    "name": "Van Criekinge et al. healthy adult gait (138_HealthyPiG)",
    "doi": "10.6084/m9.figshare.24192480.v1",
-   "licence": "CC0",
+   "licence": "CC0-1.0",
    "species": "human",
    "sites": 1,
    "protocol_head": {
@@ -1426,17 +1683,49 @@
     "Q1_licence": {
      "pass": true,
      "declared": "CC0",
+     "spdx": "CC0-1.0",
      "deposit_endpoint": "https://api.figshare.com/v2/articles/24192480/versions/1",
      "response_sha256": "1bc1a86a0937e317ffb95b8355ab5184b0a1fdbb46f4fdd0b0704cb40a9ccc6a",
      "licence_object_sha256": "4ed7337b16345f53968e02757805595395ede4da489e8847632854e3832fc4fe",
      "licence_text": {
-      "url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "final_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
       "status": 200,
-      "bytes": 31065,
-      "sha256": "b7b54600914107f3eb5601b61168a827e21fda05a369eee41b85fb95346df318"
+      "bytes": 7048,
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "what": "plain-text legal code of CC0-1.0"
      },
-     "checked_at": "2026-11-27T21:52:43+1100"
+     "attribution": {
+      "doi": "10.6084/m9.figshare.24192480.v1",
+      "url": "https://doi.org/10.6084/m9.figshare.24192480.v1",
+      "title": "c3d files of 3D full-body gait kinematics, kinetics and EMG of 138 able-bodied adults",
+      "creators": [
+       "Van Criekinge, Tamaya",
+       "Saeys, Wim",
+       "Truijen, Steven",
+       "Vereeck, Luc",
+       "Sloot, Lizeth",
+       "Hallemans, Ann"
+      ],
+      "publisher": "figshare",
+      "year": 2023,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Zero v1.0 Universal",
+        "uri": "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+        "spdx": "cc0-1.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.6084/m9.figshare.24192480.v1",
+      "response_sha256": "3b0477de5555a4a15897e3e5a79b6cf85f792ef01d00e095be1d311a921aeb3c",
+      "read_at": "2026-11-28T01:12:37+1100"
+     },
+     "notice": {
+      "citation": "Van Criekinge, Tamaya; Saeys, Wim; Truijen, Steven; Vereeck, Luc; Sloot, Lizeth; Hallemans, Ann (2023). c3d files of 3D full-body gait kinematics, kinetics and EMG of 138 able-bodied adults. figshare. https://doi.org/10.6084/m9.figshare.24192480.v1",
+      "rule": "no attribution is required; the source is credited as good practice"
+     },
+     "checked_at": "2026-11-28T01:12:37+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -1517,7 +1806,8 @@
     "Gastrocnemius channels (GAS) do not name the head, so they get dataset rows.",
     "Plug-in-Gait model outputs stored in the C3D point section are not used."
    ],
-   "seconds": 0.8
+   "seconds": 0.8,
+   "licence_as_declared": "CC0"
   },
   "area2": {
    "dataset": "area2",
@@ -1525,7 +1815,7 @@
    "wave": "1 (conditional, admitted by the P2 role audit)",
    "name": "Area2_Bump (Neural Latents Benchmark)",
    "doi": "10.48324/dandi.000127/0.220113.0359",
-   "licence": "spdx:CC-BY-4.0",
+   "licence": "CC-BY-4.0",
    "species": "macaque",
    "sites": 1,
    "protocol_head": {
@@ -1609,6 +1899,7 @@
     "Q1_licence": {
      "pass": true,
      "declared": "spdx:CC-BY-4.0",
+     "spdx": "CC-BY-4.0",
      "deposit_endpoint": "https://api.dandiarchive.org/api/dandisets/000127/versions/0.220113.0359/",
      "response_sha256": "aa708afb3c348ac3a476040047f0499433391f345d1b3b47253bce7c88e5ef07",
      "licence_object_sha256": "d8c53d09969cbcddfcb565964291f0aa5084ddb03bf8cd82e3586ca33b84bc1e",
@@ -1617,9 +1908,35 @@
       "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
       "status": 200,
       "bytes": 18657,
-      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
      },
-     "checked_at": "2026-11-27T22:50:35+1100"
+     "attribution": {
+      "doi": "10.48324/dandi.000127/0.220113.0359",
+      "url": "https://doi.org/10.48324/dandi.000127/0.220113.0359",
+      "title": "Area2_Bump: macaque somatosensory area 2 spiking activity during reaching with perturbations",
+      "creators": [
+       "Miller, Lee"
+      ],
+      "publisher": "DANDI Archive",
+      "year": 2022,
+      "version": null,
+      "rights": [
+       {
+        "rights": null,
+        "uri": null,
+        "spdx": "cc_by_40"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.48324/dandi.000127/0.220113.0359",
+      "response_sha256": "47d94161310b0459c6e32023000e5c5df9c8e8f5fe3f2d308cb14a1c28691007",
+      "read_at": "2026-11-28T01:13:03+1100"
+     },
+     "notice": {
+      "citation": "Miller, Lee (2022). Area2_Bump: macaque somatosensory area 2 spiking activity during reaching with perturbations. DANDI Archive. https://doi.org/10.48324/dandi.000127/0.220113.0359",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:13:03+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -1640,7 +1957,8 @@
       "held_trials_tokenised": 0,
       "read_until_s": 1809.676,
       "first_held_trial_s": 1815.644,
-      "binary_search_probes_at_or_after_cut": 408
+      "spike_values_read_at_or_after_cut": 408,
+      "how_read": "binary search over each unit's spike times (27 November 2026); the reader now scans forward (see notes)"
      }
     },
     "Q3_access": {
@@ -1710,9 +2028,11 @@
    },
    "notes": [
     "Only the 290 fitting and configuration trials are tokenised; inter-trial time and other trials are not.",
-    "Hand position was low-pass filtered at 100 Hz by the authors (phase not documented)."
+    "Hand position was low-pass filtered at 100 Hz by the authors (phase not documented).",
+    "The tokens of 27 November 2026 were built with a binary search that read 408 spike times at or after the 1809.676 s cut (each compared with the cut and discarded; no token was built from them). The reader now scans forward and stops at the first value at or after the cut (at most one per unit in check_area2_scan.py); it returns the same boundary, so the tokens are unchanged, and it was not re-run on the file so that no value past the cut is read again."
    ],
-   "seconds": 2.1
+   "seconds": 2.1,
+   "licence_as_declared": "spdx:CC-BY-4.0"
   },
   "ds003739": {
    "dataset": "ds003739",
@@ -1720,7 +2040,7 @@
    "wave": 1,
    "name": "Perturbed beam-walking task (OpenNeuro ds003739)",
    "doi": "10.18112/openneuro.ds003739.v1.0.3",
-   "licence": "CC0",
+   "licence": "CC0-1.0",
    "species": "human",
    "sites": 1,
    "protocol_head": {
@@ -1823,6 +2143,7 @@
     "Q1_licence": {
      "pass": true,
      "declared": "CC0",
+     "spdx": "CC0-1.0",
      "deposit_endpoint": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds003739/1.0.3/dataset_description.json",
      "response_sha256": "68cc24287f1378fc0372a1638acc3296435f32799c63e4b4b0d86b887153fd27",
      "licence_object_sha256": "6d062db88d494c5fcf50f621bdf233b5665d3f1adcfac7a824e99a29d2977011",
@@ -1831,9 +2152,30 @@
       "final_url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
       "status": 200,
       "bytes": 7048,
-      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "what": "plain-text legal code of CC0-1.0"
      },
-     "checked_at": "2026-11-27T22:50:30+1100"
+     "attribution": {
+      "doi": "10.18112/openneuro.ds003739.v1.0.3",
+      "url": "https://doi.org/10.18112/openneuro.ds003739.v1.0.3",
+      "title": "Perturbed beam-walking task",
+      "creators": [
+       "Steven Peterson",
+       "Daniel Ferris"
+      ],
+      "publisher": "OpenNeuro",
+      "year": 2021,
+      "version": null,
+      "rights": [],
+      "source": "https://api.datacite.org/dois/10.18112/openneuro.ds003739.v1.0.3",
+      "response_sha256": "7f1b31ab7d6cd41024b5b53fe4423522fdc90f49b146c50b7e88a36c86d470b6",
+      "read_at": "2026-11-28T01:12:49+1100"
+     },
+     "notice": {
+      "citation": "Steven Peterson; Daniel Ferris (2021). Perturbed beam-walking task. OpenNeuro. https://doi.org/10.18112/openneuro.ds003739.v1.0.3",
+      "rule": "no attribution is required; the source is credited as good practice"
+     },
+     "checked_at": "2026-11-28T01:12:49+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -1949,7 +2291,8 @@
     "The 70-150 Hz band is masked (sampling below 400 Hz).",
     "Motion-capture coordinates have session means within a few mm of zero; they may be high-pass filtered by the authors (not documented), so they carry movement about a moving mean, not absolute position."
    ],
-   "seconds": 133.9
+   "seconds": 133.9,
+   "licence_as_declared": "CC0"
   },
   "falcon_m1": {
    "dataset": "falcon_m1",
@@ -1957,7 +2300,7 @@
    "wave": "1 (conditional; not admitted by the P2 role audit)",
    "name": "FALCON Benchmark M1-A",
    "doi": "10.48324/dandi.000941/0.241029.1405",
-   "licence": "spdx:CC-BY-4.0",
+   "licence": "CC-BY-4.0",
    "species": "macaque",
    "sites": 1,
    "protocol_head": {
@@ -1999,16 +2342,45 @@
     "Q1_licence": {
      "pass": true,
      "declared": "spdx:CC-BY-4.0",
+     "spdx": "CC-BY-4.0",
      "deposit_endpoint": "https://api.dandiarchive.org/api/dandisets/000941/versions/0.241029.1405/",
      "response_sha256": "8c7d1b1ec08714ebe69ade9147c170dc155e2c1d950eec34b861adf60cf461f9",
+     "licence_object_sha256": "d8c53d09969cbcddfcb565964291f0aa5084ddb03bf8cd82e3586ca33b84bc1e",
      "licence_text": {
       "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
       "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
       "status": 200,
       "bytes": 18657,
-      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
      },
-     "checked_at": "2026-11-27T22:50:36+1100"
+     "attribution": {
+      "doi": "10.48324/dandi.000941/0.241029.1405",
+      "url": "https://doi.org/10.48324/dandi.000941/0.241029.1405",
+      "title": "FALCON Benchmark M1-A: primary motor cortex recordings in primate during reach-to-grasp task",
+      "creators": [
+       "Rouse, Adam G",
+       "Schieber, Marc H"
+      ],
+      "publisher": "DANDI Archive",
+      "year": 2024,
+      "version": null,
+      "rights": [
+       {
+        "rights": null,
+        "uri": null,
+        "spdx": "cc_by_40"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.48324/dandi.000941/0.241029.1405",
+      "response_sha256": "dd76b85845e89674721a56b5c8d8ff331f8e40c6ad4626e6e8057b9c5325eacd",
+      "read_at": "2026-11-28T01:13:04+1100"
+     },
+     "notice": {
+      "citation": "Rouse, Adam G; Schieber, Marc H (2024). FALCON Benchmark M1-A: primary motor cortex recordings in primate during reach-to-grasp task. DANDI Archive. https://doi.org/10.48324/dandi.000941/0.241029.1405",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:13:04+1100"
     },
     "Q2_role": {
      "pass": false,
@@ -2075,7 +2447,8 @@
    },
    "notes": [
     "Held-in-minival files are subsets of held-in-calib files; held-out-calib days are not held-in-calib and are also in the contract's candidate pool. None is used."
-   ]
+   ],
+   "licence_as_declared": "spdx:CC-BY-4.0"
   },
   "hygrip": {
    "dataset": "hygrip",
@@ -2172,17 +2545,47 @@
     "Q1_licence": {
      "pass": true,
      "declared": "MIT",
+     "spdx": "MIT",
      "deposit_endpoint": "https://api.figshare.com/v2/articles/12383639/versions/1",
      "response_sha256": "e85848f56b6818aa53d5b68dfd01400550faa9c5bfdb9ecb364f1e218df50d46",
      "licence_object_sha256": "3e105a9d00190f9bd8e24c8498c3c47422996f5be40a2df470b62f50baffe661",
      "licence_text": {
-      "url": "https://opensource.org/licenses/MIT",
-      "final_url": "https://opensource.org/license/MIT",
+      "url": "https://raw.githubusercontent.com/spdx/license-list-data/main/text/MIT.txt",
+      "final_url": "https://raw.githubusercontent.com/spdx/license-list-data/main/text/MIT.txt",
       "status": 200,
-      "bytes": 200562,
-      "sha256": "e2e3f02aa62317f5a345635f229f02ba5e8a1ad2f80f8f13eec4f8bd14432f36"
+      "bytes": 1078,
+      "sha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+      "what": "plain-text legal code of MIT"
      },
-     "checked_at": "2026-11-27T22:50:33+1100"
+     "attribution": {
+      "doi": "10.6084/m9.figshare.12383639.v1",
+      "url": "https://doi.org/10.6084/m9.figshare.12383639.v1",
+      "title": "hygrip.h5",
+      "creators": [
+       "Faisal, Aldo A",
+       "Ortega, Pablo"
+      ],
+      "publisher": "figshare",
+      "year": 2020,
+      "version": null,
+      "rights": [
+       {
+        "rights": "MIT License",
+        "uri": "https://opensource.org/licenses/MIT",
+        "spdx": "mit"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.6084/m9.figshare.12383639.v1",
+      "response_sha256": "a63af12f6a1ecc8c56ba6427cec9f9818129b306871c7ecc87776fd20c081bb7",
+      "read_at": "2026-11-28T01:12:55+1100"
+     },
+     "notice": {
+      "citation": "Faisal, Aldo A; Ortega, Pablo (2020). hygrip.h5. figshare. https://doi.org/10.6084/m9.figshare.12383639.v1",
+      "rule": "include the copyright notice and the MIT permission notice in all copies or substantial portions",
+      "copyright_line": "Copyright (c) 2020 Faisal, Aldo A; Ortega, Pablo",
+      "copyright_line_source": "formed from the deposit's creators and publication year (the deposit states no separate copyright line)"
+     },
+     "checked_at": "2026-11-28T01:12:55+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -2285,7 +2688,8 @@
     "Each device's samples are placed relative to its own Go time; the EEG/EMG and force clocks are not otherwise resampled.",
     "The first 0.5 s of each trial has no field value (filter warm-up)."
    ],
-   "seconds": 8.9
+   "seconds": 8.9,
+   "licence_as_declared": "MIT"
   },
   "ofner": {
    "dataset": "ofner",
@@ -2293,7 +2697,7 @@
    "wave": 1,
    "name": "Upper limb movements can be decoded from the time-domain of low-frequency EEG",
    "doi": "10.5281/zenodo.834976",
-   "licence": "cc-by-4.0",
+   "licence": "CC-BY-4.0",
    "species": "human",
    "sites": 1,
    "protocol_head": {
@@ -2379,11 +2783,52 @@
     "Q1_licence": {
      "pass": true,
      "declared": "cc-by-4.0",
+     "spdx": "CC-BY-4.0",
      "deposit_endpoint": "https://zenodo.org/api/records/834976",
-     "response_sha256": "8172033791285afed3a3944a995bc9a61fb4b8c637492fc819a8c5adfb734706",
+     "response_sha256": "d8b59e9d27879ea39aec9e5ca9028302d7b699cf98dc716f5687573f93c9f86b",
      "licence_object_sha256": "01c5aef2ac9ec208e5f644288c27fb700952446c530ec4977a99f88500e47f63",
-     "licence_text": null,
-     "checked_at": "2026-11-27T23:07:31+1100"
+     "licence_text": {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "status": 200,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
+     },
+     "attribution": {
+      "doi": "10.5281/zenodo.834976",
+      "url": "https://doi.org/10.5281/zenodo.834976",
+      "title": "Upper Limb Movements Can Be Decoded From The Time-Domain Of Low-Frequency Eeg",
+      "creators": [
+       "Ofner, Patrick",
+       "Schwarz, Andreas",
+       "Pereira, Joana",
+       "M\u00fcller-Putz, Gernot R."
+      ],
+      "publisher": "Zenodo",
+      "year": 2017,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Attribution 4.0",
+        "uri": "https://creativecommons.org/licenses/by/4.0",
+        "spdx": null
+       },
+       {
+        "rights": "Open Access",
+        "uri": "info:eu-repo/semantics/openAccess",
+        "spdx": null
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.5281/zenodo.834976",
+      "response_sha256": "a40fadd4e5405bfb4771668d6ce46607ec0a4220431c195ff2334e56c60e2e48",
+      "read_at": "2026-11-28T01:12:53+1100"
+     },
+     "notice": {
+      "citation": "Ofner, Patrick; Schwarz, Andreas; Pereira, Joana; M\u00fcller-Putz, Gernot R. (2017). Upper Limb Movements Can Be Decoded From The Time-Domain Of Low-Frequency Eeg. Zenodo. https://doi.org/10.5281/zenodo.834976",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:12:53+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -2483,7 +2928,8 @@
     "Five mechanical channels marked '-' in the authors' table are not tokenised.",
     "Some mechanical channels are constant within a run (for example thumb_palm, elbowPosX and shoulder adduction in S2 run 5); they are kept and carry no variation there."
    ],
-   "seconds": 72.9
+   "seconds": 72.9,
+   "licence_as_declared": "cc-by-4.0"
   },
   "sabes": {
    "dataset": "sabes",
@@ -2491,7 +2937,7 @@
    "wave": 1,
    "name": "Nonhuman primate reaching with multichannel sensorimotor cortex electrophysiology",
    "doi": "10.5281/zenodo.3854034",
-   "licence": "cc-by-4.0",
+   "licence": "CC-BY-4.0",
    "species": "macaque",
    "sites": 1,
    "protocol_head": {
@@ -2562,11 +3008,47 @@
     "Q1_licence": {
      "pass": true,
      "declared": "cc-by-4.0",
+     "spdx": "CC-BY-4.0",
      "deposit_endpoint": "https://zenodo.org/api/records/3854034",
-     "response_sha256": "474dd557c09b9fc12212bcbc722e81ba48e6325a079d9496b51e445e4c585419",
+     "response_sha256": "5b33e9579bc64c746b49813f351e5d6a5ace083d4b0358ebcae617163f85aed4",
      "licence_object_sha256": "01c5aef2ac9ec208e5f644288c27fb700952446c530ec4977a99f88500e47f63",
-     "licence_text": null,
-     "checked_at": "2026-11-27T23:07:33+1100"
+     "licence_text": {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "status": 200,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
+     },
+     "attribution": {
+      "doi": "10.5281/zenodo.3854034",
+      "url": "https://doi.org/10.5281/zenodo.3854034",
+      "title": "Nonhuman Primate Reaching with Multichannel Sensorimotor Cortex Electrophysiology",
+      "creators": [
+       "O'Doherty, Joseph E.",
+       "Cardoso, Mariana M. B.",
+       "Makin, Joseph G.",
+       "Sabes, Philip N."
+      ],
+      "publisher": "Zenodo",
+      "year": 2020,
+      "version": null,
+      "rights": [
+       {
+        "rights": "Creative Commons Attribution 4.0 International",
+        "uri": "https://creativecommons.org/licenses/by/4.0/legalcode",
+        "spdx": "cc-by-4.0"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.5281/zenodo.3854034",
+      "response_sha256": "a34a4c25ea2c68ebc1438c1794ed509be85de6fb99caecc9616981fe35ac1098",
+      "read_at": "2026-11-28T01:12:59+1100"
+     },
+     "notice": {
+      "citation": "O'Doherty, Joseph E.; Cardoso, Mariana M. B.; Makin, Joseph G.; Sabes, Philip N. (2020). Nonhuman Primate Reaching with Multichannel Sensorimotor Cortex Electrophysiology. Zenodo. https://doi.org/10.5281/zenodo.3854034",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:12:59+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -2647,7 +3129,8 @@
     "Per-electrode observation intervals are not documented, so a zero count means no exported event, not verified silence.",
     "The 1 s around each internal block boundary is not tokenised (fold rule)."
    ],
-   "seconds": 2.3
+   "seconds": 2.3,
+   "licence_as_declared": "cc-by-4.0"
   },
   "wtrack": {
    "dataset": "wtrack",
@@ -2655,7 +3138,7 @@
    "wave": 1,
    "name": "Single Day W-Track Learning",
    "doi": "10.48324/dandi.000978/0.240511.0307",
-   "licence": "spdx:CC-BY-4.0",
+   "licence": "CC-BY-4.0",
    "species": "rat",
    "sites": 1,
    "protocol_head": {
@@ -2733,6 +3216,7 @@
     "Q1_licence": {
      "pass": true,
      "declared": "spdx:CC-BY-4.0",
+     "spdx": "CC-BY-4.0",
      "deposit_endpoint": "https://api.dandiarchive.org/api/dandisets/000978/versions/0.240511.0307/",
      "response_sha256": "175ce694635a6803ea76f28700e13e21ca03291ba92f3e2f2b60b966b19c46a5",
      "licence_object_sha256": "d8c53d09969cbcddfcb565964291f0aa5084ddb03bf8cd82e3586ca33b84bc1e",
@@ -2741,9 +3225,35 @@
       "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
       "status": 200,
       "bytes": 18657,
-      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "what": "plain-text legal code of CC-BY-4.0"
      },
-     "checked_at": "2026-11-27T22:50:34+1100"
+     "attribution": {
+      "doi": "10.48324/dandi.000978/0.240511.0307",
+      "url": "https://doi.org/10.48324/dandi.000978/0.240511.0307",
+      "title": "Single Day W-Track Learning",
+      "creators": [
+       "Jadhav, Shantanu"
+      ],
+      "publisher": "DANDI Archive",
+      "year": 2024,
+      "version": null,
+      "rights": [
+       {
+        "rights": null,
+        "uri": null,
+        "spdx": "cc_by_40"
+       }
+      ],
+      "source": "https://api.datacite.org/dois/10.48324/dandi.000978/0.240511.0307",
+      "response_sha256": "31ad9d601e17cc73fcdaf9365b338ea6645a8ff9c913d380efd0a5703ea36810",
+      "read_at": "2026-11-28T01:13:01+1100"
+     },
+     "notice": {
+      "citation": "Jadhav, Shantanu (2024). Single Day W-Track Learning. DANDI Archive. https://doi.org/10.48324/dandi.000978/0.240511.0307",
+      "rule": "credit the creators, the title and the DOI, name CC BY 4.0 with a link to its legal code, and state the changes made (CC BY 4.0 section 3(a))"
+     },
+     "checked_at": "2026-11-28T01:13:01+1100"
     },
     "Q2_role": {
      "pass": true,
@@ -2853,7 +3363,8 @@
     "The stored speed column is not tokenised.",
     "JS14 contributes its epochs before trip 79, and epoch 5 only up to the start of trip 79."
    ],
-   "seconds": 2.7
+   "seconds": 2.7,
+   "licence_as_declared": "spdx:CC-BY-4.0"
   }
  },
  "schema": "neurotranslate-0.2-mixture-manifest",
@@ -2880,18 +3391,18 @@
   "people": 220,
   "animals": 7,
   "sites": 14,
-  "recordings": 4552,
+  "recordings": 6057,
   "tasks": 26,
-  "unique_steps_20ms": 8449091,
-  "windows_1200ms": 138657,
-  "windows_inner_training": 114490,
-  "windows_inner_validation": 24167,
+  "unique_steps_20ms": 8312952,
+  "windows_1200ms": 135840,
+  "windows_inner_training": 112272,
+  "windows_inner_validation": 23568,
   "spikes": 14278499,
   "events": 25185,
   "channel_seconds_by_group": {
-   "emg": 1503418.08,
-   "force": 120803.22,
-   "kin": 2418658.38,
+   "emg": 1470747.3,
+   "force": 120781.5,
+   "kin": 2418354.96,
    "spikes": 6511856.98,
    "field": 7432509.92
   },
@@ -2907,13 +3418,20 @@
  "quantity_diversity": {
   "status": "computed",
   "anchors_inner_training_windows": {
-   "gait120": 4290,
+   "gait120": 2072,
    "ds003739": 29004,
    "ofner": 13532,
    "wtrack": 51772
   },
-  "W_max": 4096,
+  "W_max": 2048,
+  "q_levels": [
+   128,
+   512,
+   2048
+  ],
+  "updates_per_arm_U": 640,
   "D_arm_eligible_sources": [
+   "area2",
    "ds003739",
    "gait120",
    "hygrip",
@@ -2925,17 +3443,361 @@
    "schreiber_moissenet",
    "wtrack"
   ],
-  "rule": "W_max = smallest anchor inner-training window count rounded down to a power of 2; D-arm sources need at least W_max/8 inner-training windows"
+  "D_arm_eligibility_threshold_windows": 256.0,
+  "inner_training_windows_by_source": {
+   "area2": 458,
+   "cemhsey": 200,
+   "ds003739": 29004,
+   "gait120": 2072,
+   "hygrip": 4527,
+   "hyser": 1800,
+   "izmir": 31,
+   "katmah": 4664,
+   "moreira": 1982,
+   "ofner": 13532,
+   "sabes": 1281,
+   "schreiber_moissenet": 897,
+   "van_criekinge": 52,
+   "wtrack": 51772
+  },
+  "D_arm_candidates": {
+   "wave_1": [
+    "cemhsey",
+    "ds003739",
+    "gait120",
+    "hygrip",
+    "hyser",
+    "izmir",
+    "katmah",
+    "moreira",
+    "ofner",
+    "sabes",
+    "schreiber_moissenet",
+    "van_criekinge",
+    "wtrack"
+   ],
+   "conditional_admitted": [
+    "area2"
+   ],
+   "conditional_not_admitted": {
+    "falcon_m1": "Q2 role: no held-in-calib day is free. 20120928 was scored by earlier project work; 20120924, 20120926 and 20120927 are the primary candidate pool of an author-frozen cross-session contract of a line on hold."
+   }
+  },
+  "D_arm_orders": {
+   "k2|draw0": [
+    "ofner",
+    "katmah",
+    "hyser",
+    "schreiber_moissenet",
+    "cemhsey",
+    "area2",
+    "sabes",
+    "moreira",
+    "ds003739",
+    "wtrack",
+    "van_criekinge",
+    "izmir",
+    "hygrip",
+    "gait120"
+   ],
+   "k2|draw1": [
+    "area2",
+    "sabes",
+    "ofner",
+    "van_criekinge",
+    "moreira",
+    "hygrip",
+    "katmah",
+    "ds003739",
+    "wtrack",
+    "gait120",
+    "izmir",
+    "schreiber_moissenet",
+    "hyser",
+    "cemhsey"
+   ],
+   "k2|draw2": [
+    "area2",
+    "hygrip",
+    "katmah",
+    "hyser",
+    "schreiber_moissenet",
+    "gait120",
+    "cemhsey",
+    "sabes",
+    "van_criekinge",
+    "ds003739",
+    "izmir",
+    "wtrack",
+    "moreira",
+    "ofner"
+   ],
+   "k4|draw0": [
+    "ds003739",
+    "izmir",
+    "katmah",
+    "gait120",
+    "area2",
+    "schreiber_moissenet",
+    "hygrip",
+    "sabes",
+    "hyser",
+    "cemhsey",
+    "van_criekinge",
+    "moreira",
+    "wtrack",
+    "ofner"
+   ],
+   "k4|draw1": [
+    "ofner",
+    "gait120",
+    "cemhsey",
+    "ds003739",
+    "hygrip",
+    "hyser",
+    "sabes",
+    "schreiber_moissenet",
+    "van_criekinge",
+    "wtrack",
+    "izmir",
+    "area2",
+    "katmah",
+    "moreira"
+   ],
+   "k4|draw2": [
+    "ds003739",
+    "van_criekinge",
+    "ofner",
+    "hyser",
+    "sabes",
+    "gait120",
+    "cemhsey",
+    "moreira",
+    "schreiber_moissenet",
+    "hygrip",
+    "area2",
+    "katmah",
+    "izmir",
+    "wtrack"
+   ],
+   "k8|draw0": [
+    "sabes",
+    "area2",
+    "gait120",
+    "hyser",
+    "izmir",
+    "moreira",
+    "ofner",
+    "ds003739",
+    "cemhsey",
+    "wtrack",
+    "katmah",
+    "hygrip",
+    "schreiber_moissenet",
+    "van_criekinge"
+   ],
+   "k8|draw1": [
+    "ofner",
+    "wtrack",
+    "moreira",
+    "schreiber_moissenet",
+    "hyser",
+    "sabes",
+    "van_criekinge",
+    "ds003739",
+    "cemhsey",
+    "gait120",
+    "hygrip",
+    "area2",
+    "katmah",
+    "izmir"
+   ],
+   "k8|draw2": [
+    "sabes",
+    "ofner",
+    "katmah",
+    "van_criekinge",
+    "schreiber_moissenet",
+    "wtrack",
+    "area2",
+    "ds003739",
+    "hyser",
+    "hygrip",
+    "cemhsey",
+    "gait120",
+    "izmir",
+    "moreira"
+   ]
+  },
+  "D_arm_orders_restricted_to_wave_1_equal_ALLOCATION_json": true,
+  "D_arms": {
+   "k2|draw0": {
+    "sources": [
+     "ofner",
+     "katmah"
+    ],
+    "windows_per_source": 1024,
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   },
+   "k2|draw1": {
+    "sources": [
+     "area2",
+     "sabes"
+    ],
+    "windows_per_source": 1024,
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {
+     "area2": 458
+    }
+   },
+   "k2|draw2": {
+    "sources": [
+     "area2",
+     "hygrip"
+    ],
+    "windows_per_source": 1024,
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {
+     "area2": 458
+    }
+   },
+   "k4|draw0": {
+    "sources": [
+     "ds003739",
+     "katmah",
+     "gait120",
+     "area2"
+    ],
+    "windows_per_source": 512,
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {
+     "area2": 458
+    }
+   },
+   "k4|draw1": {
+    "sources": [
+     "ofner",
+     "gait120",
+     "ds003739",
+     "hygrip"
+    ],
+    "windows_per_source": 512,
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   },
+   "k4|draw2": {
+    "sources": [
+     "ds003739",
+     "ofner",
+     "hyser",
+     "sabes"
+    ],
+    "windows_per_source": 512,
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   },
+   "k8|draw0": {
+    "sources": [
+     "sabes",
+     "area2",
+     "gait120",
+     "hyser",
+     "moreira",
+     "ofner",
+     "ds003739",
+     "wtrack"
+    ],
+    "windows_per_source": 256,
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   },
+   "k8|draw1": {
+    "sources": [
+     "ofner",
+     "wtrack",
+     "moreira",
+     "schreiber_moissenet",
+     "hyser",
+     "sabes",
+     "ds003739",
+     "gait120"
+    ],
+    "windows_per_source": 256,
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   },
+   "k8|draw2": {
+    "sources": [
+     "sabes",
+     "ofner",
+     "katmah",
+     "schreiber_moissenet",
+     "wtrack",
+     "area2",
+     "ds003739",
+     "hyser"
+    ],
+    "windows_per_source": 256,
+    "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+   }
+  },
+  "D_all": {
+   "sources": [
+    "area2",
+    "ds003739",
+    "gait120",
+    "hygrip",
+    "hyser",
+    "katmah",
+    "moreira",
+    "ofner",
+    "sabes",
+    "schreiber_moissenet",
+    "wtrack"
+   ],
+   "windows_per_source": 186,
+   "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
+  },
+  "P_arms": {
+   "ds003739": {
+    "levels_people": [
+     2,
+     4,
+     14
+    ],
+    "windows_of_smallest_level": {
+     "people": 2,
+     "windows": 4188
+    },
+    "W_P": 512,
+    "windows_per_level": {
+     "2": 4188,
+     "4": 8284,
+     "14": 29004
+    }
+   },
+   "gait120": {
+    "levels_people": [
+     3,
+     13,
+     52
+    ],
+    "windows_of_smallest_level": {
+     "people": 3,
+     "windows": 105
+    },
+    "W_P": 64,
+    "windows_per_level": {
+     "3": 105,
+     "13": 488,
+     "52": 2072
+    }
+   }
+  },
+  "rule": "W_max = smallest anchor inner-training window count rounded down to a power of 2; D-arm sources need at least W_max/8 inner-training windows; D-arm orders by ascending sha256('pooled-encoder-0.2|D|k' + k + '|draw' + draw + '|' + dataset) over the wave-1 sources and the admitted conditional sources, each arm taking the first k eligible sources; W_P = the largest power of 2 not above min(W_max/4, windows of the smallest P level)"
  },
- "updated_at": "2026-11-28T00:38:09+1100",
+ "updated_at": "2026-11-28T01:25:38+1100",
  "no_recording_values": true,
  "padded_share": {
   "rule": "each recording tiled into ceil(L/T) rows of T steps; share = padded positions / all positions",
   "all_qualified_datasets": {
-   "64": 0.0174,
-   "128": 0.0318,
-   "256": 0.0549,
-   "512": 0.1511
+   "64": 0.0208,
+   "128": 0.0434,
+   "256": 0.1059,
+   "512": 0.2248
   },
   "per_dataset": {
    "area2": {
@@ -2957,10 +3819,10 @@
     "512": 0.0088
    },
    "gait120": {
-    "64": 0.1633,
-    "128": 0.267,
-    "256": 0.3675,
-    "512": 0.669
+    "64": 0.2874,
+    "128": 0.4851,
+    "256": 0.7375,
+    "512": 0.8687
    },
    "hygrip": {
     "64": 0.0131,
@@ -3025,8 +3887,103 @@
   }
  },
  "re_estimate": {
-  "unique_steps_20ms": 8449091,
+  "unique_steps_20ms": 8312952,
   "design_range_steps": "8-30 million (PROTOCOL.json time_estimates)",
   "not_part_of_this_step": "the 512-step GPU throughput and 16-thread CPU issuing measurements and the recomputed P3-P9 times are made before model choice, not in the data step"
+ },
+ "protocol_heads_at_p1": {
+  "note": "Protocol commit and file hashes recorded when each P1 download started. Revision 1 is commit 17f956b (PROTOCOL.json fec43882...). Revision 2 is PROTOCOL.json 9475bad0...: commit 7d09f33 is the revision-2 commit before the protocol branch was rebased (it is 554c59c on the branch; likewise a246e2b is 57c04e8, used by the first Gait120 tokenisation), and cc2cbda is the branch head, whose PROTOCOL.json is the same file. The Katmah force-plate download and Gait120 pass 1 ran under revision 1; their P1 entries are identical in revision 2, which only drops IBL from the conditional line. Every P2 tokenisation ran under revision 2.",
+  "downloads": [
+   {
+    "dataset": "katmah",
+    "what": "force-plate files of identifiers 1-40 at 0.5 m/s",
+    "commit": "17f956b17b23bcc27d30a16d417d2ade23310da0",
+    "PROTOCOL.json_sha256": "fec43882b8972fc0709e967ec4a914a6715ec00201c3a2215bdbdd79568eb6fa",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 1,
+    "read_at": "2026-11-27T21:44:56+1100"
+   },
+   {
+    "dataset": "gait120",
+    "what": "pass 1: 262 member ranges of the 66 development people",
+    "commit": "17f956b17b23bcc27d30a16d417d2ade23310da0",
+    "PROTOCOL.json_sha256": "fec43882b8972fc0709e967ec4a914a6715ec00201c3a2215bdbdd79568eb6fa",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 1,
+    "read_at": "2026-11-27T21:44:31+1100"
+   },
+   {
+    "dataset": "gait120",
+    "what": "pass 2: the same 262 ranges",
+    "commit": "7d09f33101f78e79bd42dbda84722a4203f7c1df",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-27T22:12:04+1100"
+   },
+   {
+    "dataset": "gait120",
+    "what": "pass 3 (data review round 2): the same 262 ranges, byte-identical to pass 2",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-28T01:05:54+1100"
+   },
+   {
+    "dataset": "ds003739",
+    "what": "sessions 1-3 of the 18 development people",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-27T22:50:29+1100"
+   },
+   {
+    "dataset": "ofner",
+    "what": "first fetch: S1-S7 motor-execution runs 4-10",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-28T00:33:47+1100"
+   },
+   {
+    "dataset": "wtrack",
+    "what": "ER1 spike times and position (ranged reads)",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-27T22:51:58+1100"
+   },
+   {
+    "dataset": "wtrack",
+    "what": "JS14 spike times and position (ranged reads)",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-27T23:05:11+1100"
+   },
+   {
+    "dataset": "wtrack",
+    "what": "JS15 spike times and position (ranged reads)",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-27T22:55:56+1100"
+   },
+   {
+    "dataset": "wtrack",
+    "what": "JS17 spike times and position (ranged reads)",
+    "commit": "cc2cbda25ec4243b132cb8badffe4c7d081719fe",
+    "PROTOCOL.json_sha256": "9475bad00ba93ac2078b75476bf9898307e583967e700f7684d74e0bf2008ec4",
+    "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
+    "revision": 2,
+    "read_at": "2026-11-27T23:03:01+1100"
+   }
+  ]
  }
 }
