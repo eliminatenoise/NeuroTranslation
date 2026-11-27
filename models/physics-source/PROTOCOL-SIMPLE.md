@@ -125,7 +125,7 @@ Speeds were measured on one processor thread. The MyoLeg model ran 26.4 times fa
 
 ### 2.4 What follows from these findings
 
-Simulated walking is cheap to produce, but the simulated walking available on 27 November had peak forces far above the measured ones and could not walk across the needed range of body sizes. So the test is built in two stages. First, a simulator must pass a realism gate that is built only from training people and published walking ranges (section 7.7). Only if a simulator passes is the reserved test group opened. If none passes, the test group stays closed and that negative result is published.
+Simulated walking is cheap to produce. But on 27 November the learned controller produced peak forces far above the measured ones and fell at several of the body masses and muscle strengths that the test needs, and the reflex controller did not reach stable walking (section 2.3). So the test is built in two stages. First, a simulator must pass a realism gate that is built only from training people and published walking ranges (section 7.7). Only if a simulator passes is the reserved test group opened. If none passes, the test group stays closed and that negative result is published.
 
 ## 3. What a result can and cannot show
 
@@ -142,7 +142,7 @@ Simulated walking is cheap to produce, but the simulated walking available on 27
 - **Source.** The healthy group of the Van Criekinge collection, published on figshare with the identifier 10.6084/m9.figshare.24192480.v1. The data are CC0 1.0. The accompanying article is Van Criekinge T. et al., Scientific Data 10, 852 (2023), identifier 10.1038/s41597-023-02767-y, published under CC BY 4.0.
 - **Archive.** The recordings sit in one archive file, 138_HealthyPiG.zip (figshare file 42450060, 463,159,769 bytes, 1,016 entries). Its md5 checksum (an older, shorter kind of file fingerprint) and the fingerprint of its table of contents are in the appendix.
 - **Clocks.** Markers are recorded 100 times a second. The analog channels, which are the plate forces and the EMG, are recorded 1,000 times a second, ten analog samples per marker frame.
-- **Plates.** There are four plates of the same type (type 2 in the recording files). Their corners are the same in all 12 fit files that were checked (one walk file for each of the 12 people of the earlier fit role, section 4.2). Plates 1, 2 and 4 lie in a row along one floor axis; plate 3 lies beside plates 1 and 2 along the other axis, centred on the line where they meet. Their exact corners in millimetres are in the appendix.
+- **Plates.** There are four plates of the same type (type 2 in the recording files). Their corners are the same in all 12 fit walk files that were checked, which come from the people of the earlier fit role (section 4.2). Plates 1, 2 and 4 lie in a row along one floor axis; plate 3 lies beside plates 1 and 2 along the other axis, centred on the line where they meet. Their exact corners in millimetres are in the appendix.
 - **Force direction.** Plate force signs differ between files: in some files upward force is positive, in others negative. The walking-scale adapter (section 5) converts them all to upward-positive vertical force.
 - **Smoothed markers.** The published marker paths have had gaps filled and have been smoothed. Smoothing mixes each value with its neighbours, including later ones, so a marker value can carry information from slightly later moments. The markers are therefore not causal at the 10 ms scale, which is why marker inputs are only used with a delay (section 6.3).
 
@@ -196,7 +196,7 @@ When the standing trials are read:
 - The standing trials of walking-scale training people are downloaded in step S2 if that track has not stored them already.
 - The standing trials of test people are read only after the conditions of section 4.4, and they are used as an input that is available at forecast time. A person's height and mass are known before they walk, so using them does not reveal the future.
 
-It is not yet known whether these files contain Bodymass, Height and leg length. In the check of one walk file for each of the 12 people of the earlier fit role (section 4.1), only 2 of the 12 files contain them.
+It is not yet known whether these files contain Bodymass, Height and leg length. In the earlier check of the fit walk files (section 4.1), only the files of 2 of the 12 people of the earlier fit role contain them.
 
 ### 4.6 The inner folds and the training subsets
 
@@ -364,7 +364,7 @@ The recordings include surface EMG, so the plan also simulates EMG for the secon
 
 **CR-EMG: a clean-room generator that can be published.** It is written from published equations by a person who has not read the MyoGen source code and who records that fact, so that the generator carries none of MyoGen's licence terms. Its parts:
 
-- Fuglevand recruitment, a standard model of how motor units switch on as effort rises, with a recruitment range of 30 to 60 (the ratio between the effort levels at which the last and the first motor units switch on);
+- Fuglevand recruitment, a standard model of how motor units (a motor unit is one motor nerve cell together with the muscle fibres it controls) switch on as effort rises, with a recruitment range of 30 to 60 (the ratio between the effort levels at which the last and the first motor units switch on);
 - rate coding: each motor unit fires 8 to 35 times a second, faster with more effort;
 - variable firing intervals, with a coefficient of variation (spread divided by average) of 0.15 to 0.25;
 - Hermite-Rodriguez motor-unit action potentials, a standard mathematical shape for the electrical signal of one motor unit;
@@ -372,7 +372,7 @@ The recordings include surface EMG, so the plan also simulates EMG for the secon
 - conduction velocity (the speed of the signal along the muscle fibres) of 3.5 to 5 m/s;
 - two electrodes 20 mm apart (a bipolar recording).
 
-The signal is simulated 10,000 times a second, filtered to keep 20 to 450 Hz, reduced to 1,000 samples a second, given a signal-to-noise ratio of 10 to 30 dB (decibels; 10 dB means the signal power is 10 times the noise power, 30 dB means 1,000 times), and multiplied by a random log-normal gain for each body and channel. Finally, each channel's amplitude is mapped so that its spread of RMS (root-mean-square) values matches that of the training people. Because of this last step, which uses measured data, CR-EMG is labelled calibrated.
+The signal is simulated 10,000 times a second, filtered to keep 20 to 450 Hz, reduced to 1,000 samples a second, given a signal-to-noise ratio of 10 to 30 dB (decibels; 10 dB means the signal power is 10 times the noise power, 30 dB means 1,000 times), and multiplied by a random gain for each body and channel. The gain is log-normal: a random multiplier whose logarithm follows the bell-shaped normal distribution, so it is always positive. Finally, each channel's amplitude is mapped so that its spread of RMS (root-mean-square) values matches that of the training people. Because of this last step, which uses measured data, CR-EMG is labelled calibrated.
 
 **MyoGen EMG (private).** The same muscle excitations also drive MyoGen 0.11.0 surface EMG, in environment D, in a separate process and outside the public folder. MyoGen is licensed AGPL-3.0-or-later, so its output and every model trained on it stay private, with scores only.
 
@@ -381,6 +381,8 @@ The signal is simulated 10,000 times a second, filtered to keep 20 to 450 Hz, re
 ### 7.7 The realism gate
 
 The realism gate decides whether a simulator is good enough to be used. It is frozen in GATE-THRESHOLDS.json during step S0, before any simulated corpus (the collection of simulated walks used for training) is generated. Thresholds that come from data use only the 18 training people of section 4.2 (with body weight from their standing trials), widened by 10%. The fixed thresholds come from the range of the earlier fit pool (the 12 people of the earlier fit role, section 4.2) and from the published walking literature.
+
+A percentile is the value below which a given share of the values falls: 99% of values lie below the 99th percentile, and 1% below the 1st percentile.
 
 **Checks on each walk**, over its steady part:
 
@@ -504,7 +506,7 @@ Each measured traversal gets twenty augmented copies, with fixed seeds. The tag 
 
 ### 10.3 The tree families
 
-Gradient-boosted trees are a different kind of model: many small decision trees, each one correcting the errors of the ones before. In the walking-scale protocol's planning on training people only, boosted trees beat the three-pass model (2.41 against 2.64 N·s with nine people), so a tree family is included.
+Gradient-boosted trees are a different kind of model: many small decision trees, each one correcting the errors of the ones before. In the walking-scale protocol's planning on the 12 people of the earlier fit role only, boosted trees beat the three-pass model (2.41 against 2.64 N·s with nine people), so a tree family is included.
 
 **H-M: histogram gradient-boosted trees, measured only.** "Histogram" means that each input is first sorted into a limited number of value bins, which makes the trees fast to train. Its 8 configurations are every combination of maximum iterations 200 or 400, learning rate 0.05 or 0.1, and maximum leaf nodes 15 or 31. It has a classifier for new load and a regressor for the impulse residual over persistence, both with sample weights that give each person equal weight. The features are those that walking-scale commits for its trees; otherwise they are the flattened standardised 20 ms averages, the availability flags, the last average, the mean, the last minus the first, and the persistence impulse.
 
@@ -578,7 +580,7 @@ The contrast between an arm and the measured-only model is Δ = the average over
 
 - **Paired bootstrap over test people.** Both arms are scored on the same people, and the difference is taken person by person. The bootstrap then draws test people at random with replacement 10,000 times (seed 20261127), recomputes the average difference each time, and reports the middle 95% of those values as the 95% interval (a percentile interval). This shows how much the result could change with a different set of people of the same kind.
 - **p-values.** A p-value is the probability of seeing a difference at least as large as the one observed if the two arms were in fact equally good; a small p-value is evidence against "no difference". Two-sided means that differences in either direction count. Two-sided bootstrap p-values are computed for the key secondary comparisons, which are then corrected by the Holm procedure (section 12.5).
-- **Planning.** In the walking-scale protocol's study on training people, the improvement of one model over another varied between people with a standard deviation (a measure of typical spread around the average) of 8.9% of the error, and repeating a fit with different seeds varied a person's error by 0.15 N·s (standard deviation). With 12 test people, the minimum detectable relative effect at 80% power and two-sided 0.05 is about 5% to 7%: a true improvement smaller than that would usually be missed. Here 80% power means that a true improvement of that size would be detected in about 80 of 100 repeats of such a test, and two-sided 0.05 means a 5% chance of declaring a difference, in either direction, when none exists. The projected gain from adding measured people (from 12 to 46) is about 2.8%. A simulation gain of that size would not be detectable in this test.
+- **Planning.** In the walking-scale protocol's study on the 12 people of the earlier fit role only, the improvement of one model over another varied between people with a standard deviation (a measure of typical spread around the average) of 8.9% of the error, and repeating a fit with different seeds varied a person's error by 0.15 N·s (standard deviation). With 12 test people, the minimum detectable relative effect at 80% power and two-sided 0.05 is about 5% to 7%: a true improvement smaller than that would usually be missed. Here 80% power means that a true improvement of that size would be detected in about 80 of 100 repeats of such a test, and two-sided 0.05 means a 5% chance of declaring a difference, in either direction, when none exists. The projected gain from adding measured people (from 12 to 46) is about 2.8%. A simulation gain of that size would not be detectable in this test.
 
 ## 12. The success rule
 
@@ -681,7 +683,7 @@ All machine work uses at most 16 threads, on logical processors (CPUs) 16 to 31.
 
 | Step | Work | Estimate |
 | --- | --- | --- |
-| S0 feasibility | Set up environments A to D (0.5 h). Download the 18 standing trials and build the training-people ranges (2 to 3 h). Build the virtual laboratory, check units, and run one learned-controller walk through the walking-scale adapter, which settles whether simulated forces and markers fit the inputs and targets with the right units (0.5 day). Build the body-scaling engine (0.5 day). Run G4 (2-day time box) with G1 in parallel (1.5 days). Assemble G3c (0.5 day). Build CR-EMG (0.5 day). MyoGen action-potential timing (1 h); an action potential is the electrical pulse of a motor unit (section 7.6), and the protocol names this item only in these words. Write the gate report and FEASIBILITY.json (2 h). Uses training people and simulation only. | 3 to 4 working days, under 10 core-hours |
+| S0 feasibility | Set up environments A to D (0.5 h). Download the 18 standing trials and build the training-people ranges (2 to 3 h). Build the virtual laboratory, check units, and run one learned-controller walk through the walking-scale adapter, which settles whether simulated forces and markers fit the inputs and targets with the right units (0.5 day). Build the body-scaling engine (0.5 day). Run G4 (2-day time box) with G1 in parallel (1.5 days). Assemble G3c (0.5 day). Build CR-EMG (0.5 day). MyoGen action-potential timing (1 h). An action potential is the electrical pulse of a motor unit (section 7.6); this protocol gives no further detail of this item. Write the gate report and FEASIBILITY.json (2 h). Uses training people and simulation only. | 3 to 4 working days, under 10 core-hours |
 | S1 binding and admission | BINDING.json, the Simple edition of the protocol, admission by a separate reviewer, the lead's commit. Needs the walking-scale commit. | 1 day |
 | S2 corpus | G4 1 to 5 core-hours (under 1 h on 12 lanes); G1 about 40 core-hours (about 4 h on 12 lanes); G3c 3 to 4 h; cutting windows and running checks 2 to 3 h; standing trials of walking-scale training people if not already stored. | one night |
 | S3 inner folds | 3 neural families × 8 configurations × 4 folds × 5 seeds = 480 fits of 25 to 90 s each, plus 320 tree fits (2 tree families × 8 × 4 × 5); reference forecasts and checks. | about 0.5 day, 10 to 15 core-hours |
@@ -709,7 +711,7 @@ An earlier design of this test was reviewed before the protocol was written. The
 
 ### Plate corners
 
-The four plates in the laboratory frame, in millimetres. They are the same in all 12 fit files that were checked (one walk file for each person of the earlier fit role).
+The four plates in the laboratory frame, in millimetres. They are the same in all 12 fit walk files that were checked (section 4.1).
 
 | Plate | x range | y range |
 | --- | --- | --- |
