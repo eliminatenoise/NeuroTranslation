@@ -16,7 +16,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from common import HERE, load_config, need, publish_dir, read_json, sha_file, single_thread_env, write_json
+from common import HERE, load_config, need, private_folder, publish_dir, read_json, sha_file, single_thread_env, write_json
 
 GROUPS = ('PRIMARY-BELOW-NMAX', 'NMAX', 'OTHER')
 
@@ -39,7 +39,7 @@ def forecast_dir(cfg):
 
 def load_eval_inputs(cfg):
     import extract
-    folder = Path(cfg['private_dir']) / 'arrays'
+    folder = private_folder(cfg, 'evaluation', 'arrays')
     meta = read_json(folder / 'EVAL-WALKS.json')
     need(sha_file(folder / 'EVAL-INPUTS.npz') == meta['inputs_sha256'], 'evaluation inputs changed')
     return extract.load_npz(folder / 'EVAL-INPUTS.npz', extract.INPUT_FIELDS), meta

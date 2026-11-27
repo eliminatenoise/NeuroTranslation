@@ -1,8 +1,10 @@
 """Downloader, header probe and qualification on a synthetic local archive (consumed fit walks only).
 
-Checks: fresh redirect per request; pacing; one retry after a 429 and a halt after two 5xx; ETag,
-version, range and size checks; signed query parameters never written to receipts; local-header and
-CRC-32 checks; bounded inflation that stops at the parameter end; Q6 / QP / X verdicts; the person
+Checks: fresh redirect per request; pacing; one retry after a 429 and a halt after two 5xx, on the
+redirect and on the ranged GET, where the retry takes a fresh redirect (the emulator refuses a stale
+signed address); ETag, version, range and size checks; signed query parameters never written to
+receipts; local-header and CRC-32 checks, where a local-header mismatch halts D1 without writing
+QUALIFICATION.json; bounded inflation that stops at the parameter end; Q6 / QP / X verdicts; the person
 rule (extra walks only when one of the first three is not Q6; three lowest-numbered qualified walks);
 the receipt checker catching tampered receipts; whole-member download equal to the source bytes.
 
@@ -20,7 +22,7 @@ import synthetic  # noqa: E402  (puts the code folder on sys.path)
 import c3dread  # noqa: E402
 import fetch  # noqa: E402
 import qualify  # noqa: E402
-from common import load_config, write_json  # noqa: E402
+from common import HERE, load_config, write_json  # noqa: E402
 
 
 def main():
@@ -106,6 +108,33 @@ def main():
             report['halt_after_two_5xx'] = False
         except fetch.Halt:
             report['halt_after_two_5xx'] = True
+        # 429 on the ranged GET: the retry starts again at the stable address with a fresh redirect
+        emu.faults = [None, 429]
+        before, log_at = client.requests, len(emu.log)
+        data = client.read(0, 100, 'GET retry test')
+        seq = emu.log[log_at:]
+        gets = [e[1] for e in seq if e[0] == 'GET']
+        report['get_retry_takes_fresh_redirect'] = (len(data) == 100 and client.requests - before == 4
+                                                    and [e[0] for e in seq] == ['HEAD', 'GET', 'HEAD', 'GET']
+                                                    and gets[0] != gets[1])
+        # two 5xx on the ranged GET: halt after the one retry
+        emu.faults = [None, 503, None, 503]
+        try:
+            client.read(0, 100, 'GET halt test')
+            report['get_halt_after_two_5xx'] = False
+        except fetch.Halt:
+            report['get_halt_after_two_5xx'] = True
+        # D1: a local header that differs from the central directory halts the stage; no receipt is written
+        bad_member = {**members['synthetic/SUBJ044/SUBJ044 (1).c3d'], 'trial': 1, 'crc32': '00000000'}
+        bad_pool = scratch / 'bad-pool.json'
+        write_json(bad_pool, {'candidates': [{'subject': 'SUBJ905', 'probe_first': [bad_member], 'probe_if_needed': []}]})
+        bad_out = scratch / 'QUALIFICATION-bad.json'
+        try:
+            fetch.run_probe({**cfg, 'private_dir': str(scratch / 'private')}, bad_pool, HERE / 'PROTOCOL.json',
+                            'test', client=client, out=bad_out)
+            report['local_header_mismatch_halts_D1'] = False
+        except fetch.Halt:
+            report['local_header_mismatch_halts_D1'] = not bad_out.exists()
         # wrong ETag halts
         ident = dict(emu.identity, etag='"other"')
         strict = fetch.Client(ident, scratch / 'r2.jsonl', min_interval=0.05, retry_wait=0.2, allow_plain_http=True)

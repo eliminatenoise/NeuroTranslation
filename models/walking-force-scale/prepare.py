@@ -3,15 +3,15 @@
   prepare.py --config CFG --group training     (after D2: the 12 earlier fit people + the training pool)
   prepare.py --config CFG --group evaluation   (after D3)
 
-Writes into <private>/arrays/: <GROUP>-INPUTS.npz, <GROUP>-TARGETS.npz and <GROUP>-WALKS.json. The
-issuing process reads only the INPUTS file. Training walks with no supported rows stay in the table
-(they add no rows) and are counted. Runtime B.
+Writes <GROUP>-INPUTS.npz, <GROUP>-TARGETS.npz and <GROUP>-WALKS.json: the training files into
+<private>/arrays/, the evaluation files into <private>/eval-arrays/ (read from <private>/eval-walks/),
+folders the physics-source track is never given. The issuing process reads only the INPUTS file.
+Training walks with no supported rows stay in the table (they add no rows) and are counted. Runtime B.
 """
 import argparse
 import json
-from pathlib import Path
 
-from common import load_config, need, read_json, sha_file, single_thread_env, write_json
+from common import load_config, need, private_folder, read_json, sha_file, single_thread_env, write_json
 
 
 def allocation_walks(allocation):
@@ -32,11 +32,11 @@ def run(cfg, allocation_path, group):
 
     allocation = read_json(allocation_path)
     table = build_table(allocation)
-    private = Path(cfg['private_dir'])
-    folder = private / 'arrays'
+    folder = private_folder(cfg, group, 'arrays')
+    walk_dir = private_folder(cfg, group, 'walks')
     folder.mkdir(parents=True, exist_ok=True)
     stage = 'D2' if group == 'training' else 'D3'
-    receipt = read_json(private / 'receipts' / f'{stage}-RECEIPT.json')
+    receipt = read_json(private_folder(cfg, group, 'receipts') / f'{stage}-RECEIPT.json')
     need(receipt['allocation_sha256'] == sha_file(allocation_path), 'download receipt made for another allocation')
     got = {(r['subject'], r['trial']): r for r in receipt['members']}
     people = {p['subject'] for p in allocation['groups']['training_pool' if group == 'training' else 'evaluation']}
@@ -49,7 +49,7 @@ def run(cfg, allocation_path, group):
     for r in table:
         if r['subject'] in people:
             rec = got[(r['subject'], r['trial'])]
-            data, digest = walks.read_checked(private / 'walks' / rec['file'], r['member'], rec['decoded_sha256'])
+            data, digest = walks.read_checked(walk_dir / rec['file'], r['member'], rec['decoded_sha256'])
             sources.append((r, r['member'], data, digest))
     for r, member, data, digest in sources:
         inp, tgt, n = extract.walk_arrays(data, r['member_index'], member['expanded_bytes'])

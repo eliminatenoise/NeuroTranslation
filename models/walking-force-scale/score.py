@@ -22,7 +22,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from common import (BOOTSTRAP_DRAWS, BOOTSTRAP_SEED, HERE, base_people, code_hashes, load_config, n_max as top_rung, need,
-                    publish_dir, read_json, rung_sizes, sha_file, single_thread_env, write_json)
+                    private_folder, publish_dir, read_json, rung_sizes, sha_file, single_thread_env, write_json)
 
 Z_ALPHA, Z_POWER, Z_HOLM1 = 1.95996, 0.84162, 2.39398
 THRESHOLD = 0.03
@@ -40,7 +40,7 @@ class Scorer:
         self.seal = read_json(seal_path)
         need(self.fit_complete['allocation_sha256'] == sha_file(allocation_path), 'FIT-COMPLETE.json allocation')
         need(self.seal['fit_complete_sha256'] == sha_file(fit_complete_path), 'FORECASTS-SEAL.json fit seal')
-        folder = Path(cfg['private_dir']) / 'arrays'
+        folder = private_folder(cfg, 'evaluation', 'arrays')
         meta = read_json(folder / 'EVAL-WALKS.json')
         need(sha_file(folder / 'EVAL-INPUTS.npz') == meta['inputs_sha256'] == self.seal['eval_inputs_sha256'], 'inputs')
         need(sha_file(folder / 'EVAL-TARGETS.npz') == meta['targets_sha256'], 'targets')
@@ -200,7 +200,7 @@ def rung_person_means(scorer, allocation, arm, endpoint, mask_key=None, rungs=No
 def score_lock(cfg, stage, scorer, extra):
     body = {'stage': stage, 'utc': datetime.now(timezone.utc).isoformat(), 'code_sha256': code_hashes(),
             'forecast_files': {n: sha_file(Path(cfg['private_dir']) / 'forecasts' / n) for n in scorer.forecasts},
-            'eval_targets_sha256': sha_file(Path(cfg['private_dir']) / 'arrays' / 'EVAL-TARGETS.npz'), **extra}
+            'eval_targets_sha256': sha_file(private_folder(cfg, 'evaluation', 'arrays') / 'EVAL-TARGETS.npz'), **extra}
     write_json(Path(cfg['out_dir']) / f'SCORE-LOCK-{stage}.json', body, exclusive=True)
 
 

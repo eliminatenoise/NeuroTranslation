@@ -12,7 +12,7 @@ import zlib
 from collections import defaultdict
 from pathlib import Path
 
-from common import load_config, need, publish_dir, read_json, sha_file, single_thread_env, write_json
+from common import load_config, need, private_folder, publish_dir, read_json, sha_file, single_thread_env, write_json
 
 
 def loop_person_errors(code, member, tick, mask, error):
@@ -42,9 +42,10 @@ def run(cfg, rows_per_plate):
     results = read_json(Path(cfg['out_dir']) / 'RESULTS.json')
     seal = read_json(publish_dir(cfg) / 'FORECASTS-SEAL.json')
     folder = Path(cfg['private_dir'])
-    meta = read_json(folder / 'arrays' / 'EVAL-WALKS.json')
-    inputs = extract.load_npz(folder / 'arrays' / 'EVAL-INPUTS.npz', extract.INPUT_FIELDS)
-    targets = extract.load_npz(folder / 'arrays' / 'EVAL-TARGETS.npz', extract.TARGET_FIELDS)
+    arrays, eval_walks = private_folder(cfg, 'evaluation', 'arrays'), private_folder(cfg, 'evaluation', 'walks')
+    meta = read_json(arrays / 'EVAL-WALKS.json')
+    inputs = extract.load_npz(arrays / 'EVAL-INPUTS.npz', extract.INPUT_FIELDS)
+    targets = extract.load_npz(arrays / 'EVAL-TARGETS.npz', extract.TARGET_FIELDS)
     com = {w['member_index']: w['subject'] for w in meta['walks']}
     files = {}
     for name, entry in seal['files'].items():
@@ -82,7 +83,7 @@ def run(cfg, rows_per_plate):
         for r in rng.choice(candidates, size=min(rows_per_plate, len(candidates)), replace=False):
             m, t = int(member[r]), int(tick[r])
             w = by_member[m]
-            data = (folder / 'walks' / f'{w["subject"]}-{w["trial"]}.c3d').read_bytes()
+            data = (eval_walks / f'{w["subject"]}-{w["trial"]}.c3d').read_bytes()
             need(f'{zlib.crc32(data):08x}' == w.get('crc32', f'{zlib.crc32(data):08x}'), 'walk file changed')
             parsed = c3dread.parse(data[:262144])
             _v, _r, lay, _d = c3dread.layout(parsed, len(data))

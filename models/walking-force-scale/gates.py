@@ -344,10 +344,18 @@ def part_a(cfg):
             for seed in (20261124, 20261125, 20261126):
                 model, loss, seconds = threepass.train(batch, seed, passes=passes)
                 name = f'00-{method}-{seed}'
-                ref = load_file(str(gen / 'private/fit' / f'{name}.safetensors'))
+                ref_path = gen / 'private/fit' / f'{name}.safetensors'
+                # The sealed three-pass references are pinned in PROTOCOL.json; check the file before it is used.
+                # The LSTM references have no protocol pin (they are not a protocol model); their sha256 is recorded.
+                ref_sha = sha_file(ref_path)
+                ref_pin = SEALED_THREE_PASS['sealed_12_person_three_pass'].get(str(seed)) if method == 'loop3' else None
+                need(ref_pin is None or ref_sha == ref_pin, f'reference checkpoint {name} differs from its PROTOCOL.json pin')
+                ref = load_file(str(ref_path))
                 mine = threepass.state_tensors(model)
                 receipt = read_json(gen / 'private/fit' / f'{name}.json')
-                row = {'name': name, 'tensors_identical': set(ref) == set(mine) and all(torch.equal(ref[k], mine[k]) for k in ref),
+                row = {'name': name, 'reference_sha256': ref_sha, 'reference_protocol_pin': ref_pin,
+                       'reference_equals_protocol_pin': None if ref_pin is None else ref_sha == ref_pin,
+                       'tensors_identical': set(ref) == set(mine) and all(torch.equal(ref[k], mine[k]) for k in ref),
                        'last_batch_loss': loss, 'sealed_last_batch_loss': receipt['last_batch_loss'],
                        'loss_identical': loss == receipt['last_batch_loss'], 'seconds_900_updates': seconds}
                 if save_dir is not None:
@@ -360,12 +368,14 @@ def part_a(cfg):
                     if pin:
                         row['file_equals_protocol_pin'] = row['file_sha256_no_metadata'] == pin
                     reloaded = threepass.load(path, passes=passes)
-                    x = torch.from_numpy(table['x'][:2048])
+                    x = torch.from_numpy(table['x'])  # every row of the table, as protocol section 13 asks
                     with torch.inference_mode():
                         row['reload_forecasts_identical'] = bool(torch.equal(reloaded(x), model.eval()(x)))
+                    row['reload_rows_checked'] = int(x.shape[0])
                 runs.append(row)
         return {'label': label, 'fit_rows': batch.rows, 'prior': batch.prior, 'runs': runs,
                 'passed': all(r['tensors_identical'] and r['loss_identical'] and r.get('file_equals_protocol_pin', True)
+                              and r['reference_equals_protocol_pin'] is not False
                               and r.get('reload_forecasts_identical', True) for r in runs)}
 
     out['G0_training_replay'] = replay(belgium, 'earlier encoded 12-person cache')
@@ -448,6 +458,9 @@ def report(cfg):
         'whitelist_reader': b['Q6_fit_walks']['decodes_outside_whitelist'] == 0,
         'tree_input_cache': b['tree_input_cache']['passed'], 'C1_C2_reference': b['C1_C2_reference']['passed'],
         'reload_equality': all(r.get('reload_forecasts_identical', False) for r in a['G2_end_to_end']['runs']),
+        'reference_checkpoints_match_protocol_pins': all(
+            r['reference_equals_protocol_pin'] for part in ('G0_training_replay', 'G2_end_to_end')
+            for r in a[part]['runs'] if r['reference_protocol_pin'] is not None),
         'C4_readout_smoke': a['C4_readout_smoke']['passed'],
     }
     tests = {}

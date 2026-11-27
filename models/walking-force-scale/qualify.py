@@ -4,13 +4,15 @@ probe_walk() reads one archive member through a byte-range reader (HTTP in fetch
 tests), checks the local header against the central directory, inflates the raw deflate stream with
 a hard output limit that stops at the end of the C3D parameter section, and returns a verdict. No
 sample byte is ever produced and no header byte is written anywhere: the buffers are discarded.
+A local header that differs from the central directory is a failed download check, so it raises Halt
+and stops stage D1 (protocol stop rules), as it stops D2 and D3; it is never turned into a verdict.
 """
 import hashlib
 import struct
 import zlib
 
 import c3dread
-from common import need
+from common import Halt, need
 
 FIRST_READ = 8704
 STEP = 8192
@@ -74,44 +76,43 @@ def probe_walk(member, read_range):
     record = {'path': member['path'], 'trial': member['trial']}
     blob = take(o, o + FIRST_READ)
     problem, data_at = check_local_header(blob, member)
+    if problem:
+        raise Halt(f'{problem} for {member["path"]}; the stage halts')
     inflater = BoundedInflater()
     verdict, reasons, description, produced = 'X', [], None, 0
-    if problem:
-        reasons = [problem]
-    else:
-        inflater.feed(blob[data_at:])
-        received = len(blob)
-        stage, h_end = 0, None
-        while True:
-            try:
-                if stage == 0 and inflater.fill(512):
-                    stage = 1
-                if stage == 1 and inflater.fill((c3dread.needed_bytes(inflater.out)[0] - 1) * 512 + 4):
-                    h_end = c3dread.parameter_end(inflater.out)
-                    _, data_start = c3dread.needed_bytes(inflater.out)
-                    if h_end > (data_start - 1) * 512:
-                        reasons = ['parameters-overlap-data']
-                        break
-                    stage = 2
-                if stage == 2 and inflater.fill(h_end):
-                    stage = 3
+    inflater.feed(blob[data_at:])
+    received = len(blob)
+    stage, h_end = 0, None
+    while True:
+        try:
+            if stage == 0 and inflater.fill(512):
+                stage = 1
+            if stage == 1 and inflater.fill((c3dread.needed_bytes(inflater.out)[0] - 1) * 512 + 4):
+                h_end = c3dread.parameter_end(inflater.out)
+                _, data_start = c3dread.needed_bytes(inflater.out)
+                if h_end > (data_start - 1) * 512:
+                    reasons = ['parameters-overlap-data']
                     break
-            except c3dread.ReadError as error:
-                reasons = [str(error)]
+                stage = 2
+            if stage == 2 and inflater.fill(h_end):
+                stage = 3
                 break
-            if received >= LIMIT or o + received >= end:
-                reasons = ['header-not-reached']
-                break
-            more = take(o + received, o + received + STEP)
-            inflater.feed(more)
-            received += len(more)
-        if stage == 3:
-            try:
-                parsed = c3dread.parse(bytes(inflater.out[:h_end]))
-                verdict, reasons, _lay, description = c3dread.layout(parsed, member['expanded_bytes'])
-            except c3dread.ReadError as error:
-                verdict, reasons = 'X', [str(error)]
-        produced = len(inflater.out)
+        except c3dread.ReadError as error:
+            reasons = [str(error)]
+            break
+        if received >= LIMIT or o + received >= end:
+            reasons = ['header-not-reached']
+            break
+        more = take(o + received, o + received + STEP)
+        inflater.feed(more)
+        received += len(more)
+    if stage == 3:
+        try:
+            parsed = c3dread.parse(bytes(inflater.out[:h_end]))
+            verdict, reasons, _lay, description = c3dread.layout(parsed, member['expanded_bytes'])
+        except c3dread.ReadError as error:
+            verdict, reasons = 'X', [str(error)]
+    produced = len(inflater.out)
     record.update({'ranges': ranges, 'compressed_bytes_received': sum(b - a for a, b in ranges),
                    'compressed_sha256': digest.hexdigest(), 'verdict': verdict, 'reasons': reasons,
                    'inflated_bytes': produced, 'inflation_limit': inflater.most_requested})

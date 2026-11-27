@@ -36,7 +36,19 @@ Runtime A: CPython 3.13.15, torch 2.14.1+cpu, numpy 2.5.3, safetensors 0.8.0. Ru
 
 ## Configuration
 
-Local paths are never written into committed files. Each script takes `--config CFG`, a private JSON object with these keys: `codex_root`, `fit_cache_dir`, `fit_readback_file`, `central_directory_file`, `roster_file`, `features_ref_dir`, `baselines_candidates_file`, `generalization_dir`, `matched_dir` (read-only sources of the earlier fits), `repo_root` (this repository, for the published checkpoints), `private_dir` (walk files, arrays, fits, forecasts; never committed), `scratch_dir`, `out_dir`. The variable `NS_CPU_SLOTS` names the shared CPU-slot folder.
+Local paths are never written into committed files. Each script takes `--config CFG`, a private JSON object with these keys: `earlier_root` (the earlier maintainer's workspace, read only), `fit_cache_dir`, `fit_readback_file`, `central_directory_file`, `roster_file`, `features_ref_dir`, `baselines_candidates_file`, `generalization_dir`, `matched_dir` (read-only sources of the earlier fits), `repo_root` (this repository, for the published checkpoints), `private_dir` (walk files, arrays, fits, forecasts; never committed), `scratch_dir`, `out_dir`. The variable `NS_CPU_SLOTS` names the shared CPU-slot folder.
+
+Inside `private_dir`, each group has its own folders (`common.PRIVATE_FOLDERS`):
+
+| Folder | Holds | Physics-source access |
+| --- | --- | --- |
+| `walks/`, `arrays/` | Training-pool walks (D2), TRAIN-* arrays | read only, after D2 |
+| `receipts/` | D1 and D2 request logs and receipts | none |
+| `eval-walks/`, `eval-walks/receipts/` | Evaluation walks (D3) and their receipts | never |
+| `eval-arrays/` | EVAL-* inputs, targets and walk list | never |
+| `fits/`, `forecasts/` | Checkpoints, tree files, forecasts | never |
+
+So the access rule of protocol section 5.4 can be granted folder by folder.
 
 ## Order of work
 
@@ -61,12 +73,12 @@ Each command runs only after the commit or lease named beside it.
 ## What each stage enforces
 
 - **D1.** For each of the first three walks of the 80 candidates, one ranged read of 8,704 bytes from the local header, then 8,192 more bytes at a time up to 65,536 bytes. The local header must equal the central directory. Inflation stops at the end of the C3D parameter section, so no sample byte is produced. Fourth and fifth walks are probed only for a person whose first three include a walk that is not Q6. Only the reasons, counts and sha256 of the compressed bytes are kept; no header byte is written. Requests to reserved, boundary or out-of-pool people are refused.
-- **Downloads.** Each request takes a fresh redirect from the stable address, then one ranged read. Status 206, ETag, storage version, content range and length must equal the pins. Requests start at least 1.1 s apart, so that network jitter cannot bring two requests closer than 1 s at the server. A 429 or 5xx answer gets one retry after 60 s, then the stage halts. Whole members are checked for size and CRC-32. Receipts keep the storage host and path but drop the signed query. D3 refuses to run without a FIT-COMPLETE.json made for the same allocation. The physics-source and physics-supplement groups are never downloaded.
+- **Downloads.** Each request takes a fresh redirect from the stable address, then one ranged read. Status 206, ETag, storage version, content range and length must equal the pins. Requests start at least 1.1 s apart, so that network jitter cannot bring two requests closer than 1 s at the server. A 429 or 5xx answer, to the redirect or to the ranged read, gets one retry after 60 s; the retry starts again at the stable address with a fresh redirect, because the signed address lives about 10 s. A second such answer halts the stage. A local header that differs from the central directory halts D1, D2 and D3 alike; in D1 no QUALIFICATION.json is written. Whole members are checked for size and CRC-32. Receipts keep the storage host and path but drop the signed query. D3 refuses to run without a FIT-COMPLETE.json made for the same allocation, and writes into `eval-walks/`. The physics-source and physics-supplement groups are never downloaded.
 - **Allocation.** `assign.py` checks that allocate.py, POOL.json and ORDER.json equal their committed versions, that QUALIFICATION.json carries the protocol and pool sha256 values, that each person's probed walks follow the rule, and that the listed walks are the lowest-numbered qualified ones. It then calls allocate.py unchanged and checks the groups, sizes and rungs.
 - **Indices.** The 36 earlier fit walks keep member indices 0 to 35 in the earlier cache order, so the 12-person rung reproduces the sealed fits row for row. Other walks follow in ascending code and walk number.
-- **Fits.** Replicates follow PROTOCOL.json: 50 seeds (20261124 + j) at N = 12, at N_max and for both G8 sets; 10 draws × 5 seeds (20261124 + 5d + s) at intermediate rungs; one deterministic fit per training set for M2, M3 and their arms. The secondary M1 arms use the same scheme, which gives 1,450 M1-type fits and 292 tree and linear fits at Q = 80. Checkpoints are safetensors without metadata. Every checkpoint is reloaded and its forecasts recomputed before its record is written. A failed fit keeps its record and is never replaced.
+- **Fits.** Replicates follow PROTOCOL.json: 50 seeds (20261124 + j) at N = 12, at N_max and for both G8 sets; 10 draws × 5 seeds (20261124 + 5d + s) at intermediate rungs; one deterministic fit per training set for M2, M3 and their arms. The secondary M1 arms use the same scheme, which gives 1,450 M1-type fits and 292 tree and linear fits at Q = 80. Checkpoints are safetensors without metadata. Every checkpoint is reloaded and its forecasts recomputed on every row of its training table before its record is written. A failed fit keeps its record and is never replaced.
 - **Record chain.** LOCK (job list, code and input hashes), ATTEMPT, checkpoint, reload equality, RESULT, READBACK at the seal, SCORE-LOCK before each scoring stage.
-- **Custody.** The issuer opens only the evaluation inputs. Forecasts sit in three files per runtime: the primary families below N_max (the only file S-b opens), everything at N_max, and the rest. S-c refuses to run unless the P2 file has the given sha256 and the same bytes are committed at the repository HEAD.
+- **Custody.** The issuer opens only the evaluation inputs, in `eval-arrays/`. Forecasts sit in three files per runtime: the primary families below N_max (the only file S-b opens), everything at N_max, and the rest. S-c refuses to run unless the P2 file has the given sha256 and the same bytes are committed at the repository HEAD.
 
 ## Admission-review items handled in this code
 
@@ -78,6 +90,17 @@ Items 5, 6, 7 and 9 of the admission review could be handled without changing PR
 - Item 9. `lanes.py`: each single-thread worker holds an exclusive lock on one CPU-slot file for CPUs 16 to 31 and pins itself to that CPU. If every training track takes its CPUs through the same slot folder, all tracks together stay within 16 threads on CPUs 16 to 31. This track uses at most 12 lanes on CPUs 20 to 31. The physics-source track must take its CPUs through the same folder for this to hold.
 
 Item 3 (replicate counts of the secondary arms) is written out in `plan.py`. Items 1, 2, 4, 8 and 10 concern protocol text, the Simple edition or claim limits, and are left to the lead.
+
+## C1b review items handled in this code
+
+- A retry after a 429 or 5xx on the ranged read takes a fresh redirect (`fetch.Client.read`); the test serves signed addresses that expire, so a retry on an old address would fail.
+- A local-header mismatch in D1 halts the stage (`qualify.probe_walk` raises `Halt`), as the stop rule on failed download checks says.
+- Gates G0 and G2 check each sealed three-pass reference checkpoint against its sha256 pin in PROTOCOL.json before comparing tensors. The LSTM references have no protocol pin; their sha256 is recorded.
+- Reload equality covers every row: in `gates.py` the whole 12-person table, in `fit.py` every row of the fit's training table.
+- D3 walks and their receipts go to `eval-walks/`, EVAL-* arrays to `eval-arrays/` (table above).
+- The configuration key for the earlier maintainer's workspace is `earlier_root`.
+
+The open choices the protocol leaves to the code are listed in [DECISIONS.md](DECISIONS.md).
 
 ## Not covered here
 

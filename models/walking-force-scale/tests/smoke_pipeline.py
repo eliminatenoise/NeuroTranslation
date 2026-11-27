@@ -6,8 +6,9 @@ served by a local emulator; nothing leaves the machine and no evaluation, reserv
 supplement byte of the real pool is involved. Stages: D1 probe -> allocation -> D2 -> extraction ->
 fits (both runtimes, lanes with CPU slots) -> F4 choice -> P1 -> FIT-COMPLETE -> D3 -> issue (both
 runtimes) -> FORECASTS-SEAL -> S-b and P2 -> commit of P2 in a scratch repository -> S-c -> replay.
-Custody checks: D3 refuses before the fit seal; S-b opens only the below-N_max file; S-c refuses an
-uncommitted P2.
+Custody checks: D3 refuses before the fit seal; the evaluation walks, receipts and EVAL-* arrays land
+only in eval-walks/ and eval-arrays/, never in the walks/ and arrays/ folders physics-source may read;
+S-b opens only the below-N_max file; S-c refuses an uncommitted P2.
 
   python -B tests/smoke_pipeline.py --config CFG --python-a PY_A --python-b PY_B     (run with runtime B)
 """
@@ -28,7 +29,8 @@ import issue  # noqa: E402
 import prepare  # noqa: E402
 import replay  # noqa: E402
 import score  # noqa: E402
-from common import HERE, hash_text, load_config, read_json, sha_file, write_json  # noqa: E402
+from common import (HERE, PHYSICS_SOURCE_READABLE, hash_text, load_config, private_folder, read_json,  # noqa: E402
+                    write_json)
 
 BASE = ['SUBJ024', 'SUBJ038', 'SUBJ039', 'SUBJ040']
 OTHERS = ['SUBJ043', 'SUBJ044', 'SUBJ061', 'SUBJ062', 'SUBJ082', 'SUBJ096', 'SUBJ110', 'SUBJ112']
@@ -146,6 +148,15 @@ def main():
         prepare.run(cfg, alloc_path, 'evaluation')
     finally:
         emu.close()
+    eval_people = {p['subject'] for p in allocation['groups']['evaluation']}
+    shared = [root / 'private' / f for f in PHYSICS_SOURCE_READABLE]
+    in_shared = sorted(str(f.relative_to(root)) for d in shared for f in d.rglob('*')
+                       if f.name.startswith('EVAL-') or f.name.split('-')[0] in eval_people)
+    report['custody_eval_files_outside_shared_folders'] = {
+        'eval_files_in_physics_readable_folders': in_shared,
+        'eval_walks': len(list(private_folder(cfg, 'evaluation', 'walks').glob('*.c3d'))),
+        'eval_arrays': sorted(f.name for f in private_folder(cfg, 'evaluation', 'arrays').glob('EVAL-*')),
+        'passed': not in_shared and len(list(private_folder(cfg, 'evaluation', 'walks').glob('*.c3d'))) == 3 * len(eval_people)}
     fitc = publish / 'FIT-COMPLETE.json'
     for runtime, python in (('torch', args.python_a), ('sk', args.python_b)):
         cli(python, 'issue.py', 'run', '--allocation', str(alloc_path), '--fit-complete', str(fitc), '--runtime', runtime)
@@ -176,7 +187,7 @@ def main():
                         and report['fit_complete']['readback'] and report['fit_complete']['P1_present']
                         and report['S_b_reads_only_below_nmax'] and report['S_c_refuses_uncommitted_P2']
                         and report['P2']['trend_test'] and report['P2']['bootstrap_lengths'] == [10000]
-                        and report['replay']['passed'])
+                        and report['replay']['passed'] and report['custody_eval_files_outside_shared_folders']['passed'])
     write_json(Path(base_cfg['out_dir']) / 'tests' / 'smoke_pipeline.json', report)
     print(json.dumps(report, indent=1))
     if not args.keep:

@@ -19,8 +19,8 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from common import (HERE, base_people, canonical, code_hashes, hash_text, load_config, n_max, need, protocol_tag,
-                    publish_dir, read_json, sha_bytes, sha_file, single_thread_env, write_json)
+from common import (HERE, base_people, canonical, code_hashes, hash_text, load_config, n_max, need, private_folder,
+                    protocol_tag, publish_dir, read_json, sha_bytes, sha_file, single_thread_env, write_json)
 
 _W = {}
 
@@ -38,7 +38,7 @@ def job_paths(cfg, job):
 
 def load_training(cfg):
     import extract
-    folder = Path(cfg['private_dir']) / 'arrays'
+    folder = private_folder(cfg, 'training', 'arrays')
     meta = read_json(folder / 'TRAIN-WALKS.json')
     need(sha_file(folder / 'TRAIN-INPUTS.npz') == meta['inputs_sha256'] and
          sha_file(folder / 'TRAIN-TARGETS.npz') == meta['targets_sha256'], 'training arrays changed')
@@ -139,10 +139,11 @@ def _fit_job(job):
                           last_batch_loss=loss, train_seconds=seconds, readout_only=arm == 'C4')
             record['tensor_sha256'] = threepass.save(model, ck)
             reloaded = threepass.load(ck, width=width)
-            x = table['x'][:2048]
-            p0, i0 = threepass.forecast(model, x, table['persistence'][:2048], batch.prior)
-            p1, i1 = threepass.forecast(reloaded, x, table['persistence'][:2048], batch.prior)
+            # Reload equality on every row of the fit's training table (protocol section 13).
+            p0, i0 = threepass.forecast(model, table['x'], table['persistence'], batch.prior)
+            p1, i1 = threepass.forecast(reloaded, table['x'], table['persistence'], batch.prior)
             record['reload_identical'] = bool(np.array_equal(p0, p1) and np.array_equal(i0, i1))
+            record['reload_rows_checked'] = int(len(p0))
         else:
             import joblib
             import linear
@@ -182,6 +183,7 @@ def _fit_job(job):
             again = _probe(joblib.load(ck), table, fam, arm)
             record['prediction_sha256'] = sha_bytes(probe[0].tobytes() + probe[1].tobytes())
             record['reload_identical'] = bool(np.array_equal(probe[0], again[0]) and np.array_equal(probe[1], again[1]))
+            record['reload_rows_checked'] = int(len(probe[0]))
         record['file_sha256'] = sha_file(ck)
         record['status'] = 'done' if record['reload_identical'] else 'failed-reload'
     except Exception as error:  # a failed fit stays visible and is never replaced
@@ -193,14 +195,14 @@ def _fit_job(job):
 
 
 def _probe(fitted, table, fam, arm):
+    """Predictions on every row of the fit's training table (reload equality, protocol section 13)."""
     import trees
     import linear
-    n = min(2048, len(table['code']))
     if fam == 'M3':
-        return trees.predict_m3(fitted, table['history'][:n], table['available'][:n])
+        return trees.predict_m3(fitted, table['history'], table['available'])
     if arm == 'S5':
-        return trees.predict_compact(fitted, table['x'][:n], table['persistence'][:n])
-    return linear.predict_m2(fitted, table['x'][:n], table['persistence'][:n])
+        return trees.predict_compact(fitted, table['x'], table['persistence'])
+    return linear.predict_m2(fitted, table['x'], table['persistence'])
 
 
 def cost(job):
@@ -219,7 +221,7 @@ def run(cfg_path, allocation_path, runtime, lanes_n, smoke=None, use_slots=True)
     need(1 <= lanes_n <= 12, 'between 1 and 12 lanes')
     folder = fits_dir(cfg)
     folder.mkdir(parents=True, exist_ok=True)
-    meta = read_json(Path(cfg['private_dir']) / 'arrays' / 'TRAIN-WALKS.json')
+    meta = read_json(private_folder(cfg, 'training', 'arrays') / 'TRAIN-WALKS.json')
     lock = {'stage': 'fit', 'runtime': runtime, 'protocol_sha256': sha_file(HERE / 'PROTOCOL.json'),
             'allocation_sha256': sha_file(allocation_path), 'jobs_sha256': sha_bytes(canonical(job_list)), 'jobs': len(job_list),
             'arms': plan.counts(job_list), 'training_inputs_sha256': meta['inputs_sha256'],

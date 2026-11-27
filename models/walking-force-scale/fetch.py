@@ -4,8 +4,11 @@ Protocol section 15. Every request starts at the stable file address, takes a fr
 signed storage address lives about 10 s) and then makes one ranged read. ETag and storage version
 must equal the pins; whole members are checked for size and CRC-32 against the central directory
 and their sha256 is recorded. At most one request per second (monotonic pacing inside the client, 1.1 s
-between request starts so that network jitter cannot bring two requests closer than 1 s at the server);
-on a 429 or 5xx reply, one retry after 60 s, then halt. Receipts drop the signed query parameters.
+between request starts so that network jitter cannot bring two requests closer than 1 s at the server).
+On a 429 or 5xx reply to either the redirect or the ranged read, the read is retried once after 60 s,
+starting again from the stable address with a fresh redirect; a second such reply halts the stage.
+A local header that differs from the central directory halts the stage in D1 as in D2 and D3.
+Receipts drop the signed query parameters.
 
 Usage (each stage needs its lease and the preceding commit; see README-CODE.md):
   fetch.py probe    --config CFG --lease-note TEXT                     -> private probe log, QUALIFICATION.json
@@ -15,6 +18,7 @@ Usage (each stage needs its lease and the preceding commit; see README-CODE.md):
 import argparse
 import http.client
 import json
+import sys
 import time
 import zlib
 from datetime import datetime, timezone
@@ -23,17 +27,14 @@ from urllib.parse import urlsplit
 
 import allocate
 import qualify
-from common import HERE, load_config, need, publish_dir, read_json, sha_bytes, sha_file, write_json
+from common import (HERE, Halt, load_config, need, private_folder, publish_dir, read_json, sha_bytes, sha_file,
+                    write_json)
 
 SOURCE = read_json(HERE / 'PROTOCOL.json')['data_sources']['van_criekinge_healthy']
 IDENTITY = {'stable_url': SOURCE['archive']['stable_url'], 'size': SOURCE['archive']['bytes'],
             'etag': SOURCE['archive_object']['etag'], 'version': SOURCE['archive_object']['s3_version_id']}
 NEVER = set(allocate.code(c) for role in ('validation', 'test') for c in allocate.EARLIER_ROSTER[role]) | {
     allocate.code(c) for c in allocate.BOUNDARY}
-
-
-class Halt(Exception):
-    pass
 
 
 class Client:
@@ -73,14 +74,9 @@ class Client:
         finally:
             conn.close()
 
-    def _request(self, method, url, headers):
-        status, head, body = self._once(method, url, headers)
-        if status == 429 or 500 <= status <= 599:
-            time.sleep(self.retry_wait)
-            status, head, body = self._once(method, url, headers)
-            if status == 429 or 500 <= status <= 599:
-                raise Halt(f'{method} answered {status} twice; halting')
-        return status, head, body
+    @staticmethod
+    def _throttled(status):
+        return status == 429 or 500 <= status <= 599
 
     def _log(self, row):
         self.receipts.parent.mkdir(parents=True, exist_ok=True)
@@ -88,22 +84,44 @@ class Client:
             stream.write(json.dumps(row, sort_keys=True) + '\n')
 
     def signed(self):
-        status, head, _ = self._request('HEAD', self.identity['stable_url'], {})
+        """One HEAD to the stable address. Returns (status, signed location, receipt fields); the location
+        is used for one GET only and never written anywhere."""
+        status, head, _ = self._once('HEAD', self.identity['stable_url'], {})
+        if self._throttled(status):
+            return status, None, None
         location = head.get('location', '')
         parts = urlsplit(location)
         if status != 302 or not parts.hostname or (parts.scheme != 'https' and not self.allow_plain_http):
             raise Halt(f'unexpected redirect answer {status}')
-        return location, {'storage_host': parts.hostname, 'storage_path': parts.path}
+        return status, location, {'storage_host': parts.hostname, 'storage_path': parts.path}
+
+    def _attempt(self, start, stop, purpose, attempt):
+        """A fresh redirect and one ranged GET. Returns (throttled status or None, status, head, body)."""
+        status, url, where = self.signed()
+        if url is None:
+            self._log({'utc': datetime.now(timezone.utc).isoformat(), 'purpose': purpose, 'attempt': attempt,
+                       'stable_url': self.identity['stable_url'], 'redirect_status': status, 'range_half_open': [start, stop]})
+            return status, status, {}, b''
+        status, head, body = self._once('GET', url, {'Range': f'bytes={start}-{stop - 1}', 'Accept-Encoding': 'identity'})
+        row = {'utc': datetime.now(timezone.utc).isoformat(), 'purpose': purpose, 'attempt': attempt,
+               'stable_url': self.identity['stable_url'], **where, 'version': head.get('x-amz-version-id'),
+               'etag': head.get('etag'), 'status': status, 'range_half_open': [start, stop], 'bytes': len(body),
+               'sha256': sha_bytes(body)}
+        self._log(row)
+        return (status if self._throttled(status) else None), status, head, body
 
     def read(self, start, stop, purpose):
-        """Bytes [start, stop) of the archive through a fresh redirect and one ranged GET."""
+        """Bytes [start, stop) of the archive through a fresh redirect and one ranged GET.
+
+        A 429 or 5xx answer to the redirect or to the GET: wait retry_wait, then one more attempt that
+        starts again at the stable address (the signed address lives about 10 s); a second such answer halts."""
         need(0 <= start < stop <= self.identity['size'], 'range outside the archive')
-        url, where = self.signed()
-        status, head, body = self._request('GET', url, {'Range': f'bytes={start}-{stop - 1}', 'Accept-Encoding': 'identity'})
-        row = {'utc': datetime.now(timezone.utc).isoformat(), 'purpose': purpose, 'stable_url': self.identity['stable_url'],
-               **where, 'version': head.get('x-amz-version-id'), 'etag': head.get('etag'), 'status': status,
-               'range_half_open': [start, stop], 'bytes': len(body), 'sha256': sha_bytes(body)}
-        self._log(row)
+        throttled, status, head, body = self._attempt(start, stop, purpose, 0)
+        if throttled is not None:
+            time.sleep(self.retry_wait)
+            throttled, status, head, body = self._attempt(start, stop, purpose, 1)
+            if throttled is not None:
+                raise Halt(f'answered {throttled} twice for {purpose}; halting')
         ok = (status == 206 and head.get('etag') == self.identity['etag'] and head.get('x-amz-version-id') == self.identity['version']
               and head.get('content-range') == f'bytes {start}-{stop - 1}/{self.identity["size"]}' and len(body) == stop - start
               and head.get('content-encoding', 'identity') == 'identity')
@@ -132,13 +150,15 @@ def whole_member(client, member, purpose):
 
 
 def run_probe(cfg, pool_path, protocol_path, lease_note, client=None, out=None):
+    """Stage D1. A Halt (failed range or local-header check, or a second 429/5xx) stops the stage: no
+    QUALIFICATION.json is written and the private logs keep every request made."""
     pool_raw = Path(pool_path).read_bytes()
     pool = json.loads(pool_raw)
-    private = Path(cfg['private_dir'])
+    receipts = private_folder(cfg, 'training', 'receipts')
     out = Path(out or publish_dir(cfg) / 'QUALIFICATION.json')
     need(not out.exists(), 'QUALIFICATION.json already exists; the probe runs once')
-    client = client or Client(IDENTITY, private / 'receipts' / 'D1-requests.jsonl')
-    log_path = private / 'receipts' / 'D1-walks.jsonl'
+    client = client or Client(IDENTITY, receipts / 'D1-requests.jsonl')
+    log_path = receipts / 'D1-walks.jsonl'
     candidates = sorted(pool['candidates'], key=lambda c: c['subject'])
     need(not ({c['subject'] for c in candidates} & NEVER), 'the pool contains a reserved or boundary person')
 
@@ -147,13 +167,16 @@ def run_probe(cfg, pool_path, protocol_path, lease_note, client=None, out=None):
             stream.write(json.dumps({'subject': subject, **walk}, sort_keys=True) + '\n')
 
     log_path.parent.mkdir(parents=True, exist_ok=True)
+    started = datetime.now(timezone.utc).isoformat()
     with open(log_path, 'a') as stream:
-        stream.write(json.dumps({'lease_note': lease_note, 'utc': datetime.now(timezone.utc).isoformat()}) + '\n')
+        stream.write(json.dumps({'lease_note': lease_note, 'utc': started}) + '\n')
     people = {}
     for c in candidates:
         people[c['subject']] = qualify.probe_person(
             c, lambda a, b, s=c['subject']: client.read(a, b, f'D1 header probe {s}'), log)
     receipt = qualify.receipt(sha_file(protocol_path), sha_bytes(pool_raw), people)
+    receipt['lease_note'] = lease_note
+    receipt['utc_started'], receipt['utc_finished'] = started, datetime.now(timezone.utc).isoformat()
     receipt['requests'] = client.requests
     receipt['compressed_bytes_received'] = client.bytes
     digest = write_json(out, receipt, exclusive=True)
@@ -163,7 +186,6 @@ def run_probe(cfg, pool_path, protocol_path, lease_note, client=None, out=None):
 def run_download(cfg, allocation_path, group, lease_note, client=None, fit_complete=None):
     need(group in ('training_pool', 'evaluation'), 'this track downloads only the training pool and the evaluation group')
     allocation = read_json(allocation_path)
-    private = Path(cfg['private_dir'])
     if group == 'evaluation':
         need(fit_complete is not None and Path(fit_complete).is_file(), 'D3 needs the sealed FIT-COMPLETE.json (C3)')
         sealed = read_json(fit_complete)
@@ -171,9 +193,10 @@ def run_download(cfg, allocation_path, group, lease_note, client=None, fit_compl
     people = allocation['groups'][group]
     forbidden = {p['subject'] for g in ('physics_source', 'physics_supplement') for p in allocation['groups'][g]}
     need(not ({p['subject'] for p in people} & (forbidden | NEVER)), 'group overlaps a group this track never downloads')
-    folder = private / 'walks'
+    folder = private_folder(cfg, group, 'walks')  # D3 goes to eval-walks, which physics-source is never given
+    receipts = private_folder(cfg, group, 'receipts')
     folder.mkdir(parents=True, exist_ok=True)
-    client = client or Client(IDENTITY, private / 'receipts' / f'D-{group}-requests.jsonl')
+    client = client or Client(IDENTITY, receipts / f'D-{group}-requests.jsonl')
     stage = 'D2' if group == 'training_pool' else 'D3'
     rows = []
     for person in sorted(people, key=lambda p: p['subject']):
@@ -187,7 +210,7 @@ def run_download(cfg, allocation_path, group, lease_note, client=None, fit_compl
     receipt = {'schema': 'walking-force-scale-download-v1', 'stage': stage, 'group': group, 'lease_note': lease_note,
                'allocation_sha256': sha_file(allocation_path), 'utc': datetime.now(timezone.utc).isoformat(),
                'requests': client.requests, 'bytes_received': client.bytes, 'members': rows}
-    write_json(private / 'receipts' / f'{stage}-RECEIPT.json', receipt, exclusive=True)
+    write_json(receipts / f'{stage}-RECEIPT.json', receipt, exclusive=True)
     return receipt
 
 
@@ -203,12 +226,16 @@ def main():
     ap.add_argument('--fit-complete')
     args = ap.parse_args()
     cfg = load_config(args.config)
-    if args.step == 'probe':
-        receipt, digest = run_probe(cfg, args.pool, args.protocol, args.lease_note)
-        print(json.dumps({'counts': receipt['counts'], 'requests': receipt['requests'], 'sha256': digest}))
-    else:
-        receipt = run_download(cfg, args.allocation, args.group, args.lease_note, fit_complete=args.fit_complete)
-        print(json.dumps({k: receipt[k] for k in ('stage', 'requests', 'bytes_received')}))
+    try:
+        if args.step == 'probe':
+            receipt, digest = run_probe(cfg, args.pool, args.protocol, args.lease_note)
+            print(json.dumps({'counts': receipt['counts'], 'requests': receipt['requests'], 'sha256': digest}))
+        else:
+            receipt = run_download(cfg, args.allocation, args.group, args.lease_note, fit_complete=args.fit_complete)
+            print(json.dumps({k: receipt[k] for k in ('stage', 'requests', 'bytes_received')}))
+    except Halt as error:
+        print(json.dumps({'halted': str(error)}))
+        sys.exit(2)
 
 
 if __name__ == '__main__':

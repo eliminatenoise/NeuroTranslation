@@ -92,12 +92,18 @@ def build_archive(entries):
 
 
 class Emulator:
-    """Local stand-in for the stable address (302 with a signed query) and the ranged storage reads."""
+    """Local stand-in for the stable address (302 with a signed query) and the ranged storage reads.
+
+    Each redirect carries a new signature, and each signed address is honoured for one GET only (a reused
+    or stale signature gets 403). This stands in for the real expiry of about 10 s, which the 60 s retry
+    wait always exceeds, so a GET retried on an old address fails here as it would at the server."""
 
     def __init__(self, blob):
         self.blob = blob
-        self.faults = []  # statuses to answer instead of the next requests (e.g. [429])
+        self.faults = []  # statuses to answer instead of the next requests (e.g. [429]); None lets one pass
         self.log = []
+        self.signatures = 0
+        self.used = set()
         emulator = self
 
         class Handler(http.server.BaseHTTPRequestHandler):
@@ -107,6 +113,8 @@ class Emulator:
             def _fault(self):
                 if emulator.faults:
                     status = emulator.faults.pop(0)
+                    if status is None:
+                        return False
                     self.send_response(status)
                     self.send_header('Content-Length', '0')
                     self.end_headers()
@@ -119,8 +127,10 @@ class Emulator:
                     return
                 if self.path == '/files/42450060':
                     host, port = self.server.server_address
+                    emulator.signatures += 1
                     self.send_response(302)
-                    self.send_header('Location', f'http://{host}:{port}{STORAGE_PATH}?X-Amz-Expires=10&X-Amz-Signature=secret')
+                    self.send_header('Location', f'http://{host}:{port}{STORAGE_PATH}?X-Amz-Expires=10'
+                                                 f'&X-Amz-Signature=secret-{emulator.signatures}')
                     self.end_headers()
                 else:
                     self.send_response(404)
@@ -128,10 +138,18 @@ class Emulator:
 
             def do_GET(self):
                 emulator.log.append(('GET', self.path, self.headers.get('Range'), time.monotonic()))
+                signature = self.path.rsplit('X-Amz-Signature=', 1)[-1]
+                fresh = signature == f'secret-{emulator.signatures}' and signature not in emulator.used
+                emulator.used.add(signature)
                 if self._fault():
                     return
                 if not self.path.startswith(STORAGE_PATH):
                     self.send_response(404)
+                    self.end_headers()
+                    return
+                if not fresh:
+                    self.send_response(403)  # reused or stale signed address
+                    self.send_header('Content-Length', '0')
                     self.end_headers()
                     return
                 a, b = (int(x) for x in self.headers['Range'].split('=')[1].split('-'))

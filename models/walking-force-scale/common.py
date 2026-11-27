@@ -30,6 +30,25 @@ THREAD_ENV = ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS', 'BLI
               'NUMEXPR_NUM_THREADS', 'VECLIB_MAXIMUM_THREADS')
 
 
+class Halt(Exception):
+    """A stop rule fired: the stage halts and nothing is substituted (protocol section 13)."""
+
+
+# Private folder layout (protocol sections 5.4 and 14). The physics-source track may be given read access
+# to the training folders only ('walks' and 'arrays'). The evaluation walks (D3), their receipts and the
+# EVAL-* arrays sit in folders of their own, so that access can be granted or refused by folder.
+PRIVATE_FOLDERS = {'training': {'walks': 'walks', 'arrays': 'arrays', 'receipts': 'receipts'},
+                   'evaluation': {'walks': 'eval-walks', 'arrays': 'eval-arrays', 'receipts': 'eval-walks/receipts'}}
+PHYSICS_SOURCE_READABLE = ('walks', 'arrays')
+
+
+def private_folder(cfg, group, kind):
+    """group: 'training' (also 'training_pool') or 'evaluation'; kind: 'walks', 'arrays' or 'receipts'."""
+    group = 'training' if group == 'training_pool' else group
+    need(group in PRIVATE_FOLDERS, f'unknown group {group}')
+    return Path(cfg['private_dir']) / PRIVATE_FOLDERS[group][kind]
+
+
 def single_thread_env():
     """Call before numpy, torch or scikit-learn are imported."""
     for key in THREAD_ENV:
