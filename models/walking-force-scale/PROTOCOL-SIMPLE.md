@@ -2,7 +2,7 @@
 
 [Technical edition](PROTOCOL.md) · [Machine-readable protocol](PROTOCOL.json) · [Allocation script](allocate.py) · [Candidate pool](POOL.json) · [Hash orders](ORDER.json)
 
-This is the Simple edition of protocol version 1, fixed on 27 November 2026. It explains the same rules as the Technical edition, in more words and with examples. It was written after the protocol was fixed and changes none of its rules: those are set in `PROTOCOL.json` and `PROTOCOL.md`, and if a sentence here reads differently, those two files govern. The Technical edition's opening line says that the Simple edition is written with the results. This Simple edition of the protocol was added earlier, before any data were opened, and the two fixed files could not be changed to mention it. The results will still get their own Technical and Simple editions when the work is finished (stage C6, section 14). Sections 1 to 20 below have the same numbers and subjects as the sections of the Technical edition, so a reader can move between the two.
+This is the Simple edition of protocol version 1, fixed on 27 November 2026. It explains the same rules as the Technical edition, in more words and with examples. It was written after the protocol was fixed and changes none of its rules: those are set in `PROTOCOL.json` and `PROTOCOL.md`, and if a sentence here reads differently, those two files govern. The Technical edition's opening line says that the Simple edition is written with the results. This Simple edition of the protocol was added earlier, before any new person's recording was downloaded or opened, and the two fixed files could not be changed to mention it. The results will still get their own Technical and Simple editions when the work is finished (stage C6, section 14). Sections 1 to 20 below have the same numbers and subjects as the sections of the Technical edition, so a reader can move between the two.
 
 ## The plan in brief
 
@@ -37,7 +37,7 @@ This is the Simple edition of protocol version 1, fixed on 27 November 2026. It 
 - **Checkpoint**: a saved file of a model's learned numbers (its weights).
 - **Frozen checkpoint**: a model file that has already been published. It is scored exactly as it is and never refitted.
 - **Hash (SHA-256)**: a fingerprint of a file or a piece of text, written as 64 letters and digits. The same input always gives the same fingerprint; any change, even of one character, gives a completely different one.
-- **Repository, commit and push**: the project's files are kept in a public repository that stores every saved version. A commit is one saved version of the files, identified by its own fingerprint (for example `03e76d4`). Changing anything in a commit afterwards would change that fingerprint. Commits are first made on the project's own computer. Pushing copies them to the public repository, where anyone can see them and when they arrived, so a pushed step gets a public time.
+- **Repository, commit and push**: the project's files are kept in a public repository that stores every saved version. A commit is one saved version of the files, identified by its own fingerprint, usually written in short form by its first 7 characters (for example `03e76d4`). Changing anything in a commit afterwards would change that fingerprint. Commits are first made on the project's own computer. Pushing copies them to the public repository, where anyone can see them and when they arrived, so a pushed step gets a public time.
 - **Sealed**: a file, or its fingerprint, has been recorded in a commit, so any later change would be noticed.
 - **Admission**: formal acceptance of a plan, or of a step in it, by a separate reviewer or by the project owner. Where this plan names an admission, the step it covers may not start before it.
 - **Evaluation group**: the new people on whom the final scores are measured. Their recordings are downloaded only after every model has been fitted.
@@ -98,7 +98,7 @@ No evaluation, reserved or test data had been opened, and this part of the proje
 
 - **The archive's table of contents.** A zip archive ends with a table of contents, called the central directory, that lists every file in it with its size, position and checksum. This one is 87,971 bytes long (SHA-256 beginning `96a6b5d9`) and lists 1,016 entries. Reading it says who is in the archive without opening any recording. It was compared with the earlier roster (section 3.3). Of 138 healthy person codes:
   - 26 are listed by the dataset's authors as lacking analog data (force and muscle signals);
-  - 1, SUBJ001, is labelled "engineering person" in the record; the record gives only that label, and SUBJ001 is not a candidate;
+  - 1, SUBJ001, is excluded as an "engineering person"; the pool file `POOL.json` gives only that reason, and SUBJ001 is not a candidate;
   - 30 are on the earlier roster;
   - 81 were never assigned to anything.
 
@@ -333,7 +333,7 @@ The task is exactly the published walking-force task, with nothing changed. This
 
 The same measurements are arranged in slightly different ways for different models:
 
-- **Compact input** (used by M1, M2, S5 and C4): for each bin, the plate's force divided by 800 N. From bin 4 onwards, it also holds two summaries of the muscle channels: the median and the 80th percentile, across the available channels, of log(1 + RMS / RMS of the earlier bins of the same window). This compares each channel with its own recent past, so the channel names do not matter. A force mask and an EMG-summary mask mark which values are present.
+- **Compact input** (used by M1, M2, S5 and C4): for each bin, the plate's force divided by 800 N. From bin 4 onwards, it also holds two summaries of the muscle channels: the median and the 80th percentile (a value that about 80% of the channel values lie below), across the available channels, of log(1 + RMS / RMS of the earlier bins of the same window). This compares each channel with its own recent past, so the channel names do not matter. A force mask and an EMG-summary mask mark which values are present.
 - **Tree input** (used by M3): for each bin, the six EMG values, the forecast plate's force and the other plate's force, each standardised with the mean and standard deviation of that rung's training data, plus eight masks that mark which values are present. These are laid out in one row, together with the last bin, the window means, the change from first to last bin and the persistence impulse: 185 columns in all.
 - **Persistence**: the latest bin's mean force times 0.1 s. Example: if the last 20 ms averaged 500 N, the persistence forecast is 50 N·s.
 
@@ -371,7 +371,7 @@ C1 to C3 need no training: they use only fixed numbers taken from the 12 earlier
 
 - **C1, persistence.** The latest bin's mean force held for the next 100 ms. The new-load probability is the share of positive rows among the 12 earlier fit people, counted with the published person weights of section 6 (people counted equally): 0.03725847908677051, about 3.7%.
 - **C2, unconditional.** The same probability, and for impulse the person-weighted median impulse of the 12 earlier fit people, whatever the history shows.
-- **C3, linear trend.** A least-squares straight line through the last three bin means, placed at the bin centres (t − 49.5, t − 29.5 and t − 9.5 samples), continued over t + 1 to t + 100 and added up without any clipping: 0.1 s × (intercept + 50.5 × slope per sample). Probability as C1.
+- **C3, linear trend.** A least-squares straight line (the straight line that fits the three values best, with the smallest sum of squared misses) through the last three bin means, placed at the bin centres (t − 49.5, t − 29.5 and t − 9.5 samples), continued over t + 1 to t + 100 and added up without any clipping: 0.1 s × (intercept + 50.5 × slope per sample). Probability as C1.
 - **C4, random recurrent readout** (secondary). M1 with its convolution and recurrent layers frozen at their random starting values, so that only the final output layer is trained. It is fitted at N = 12 and N_max, with 50 seeds each. It shows how much of M1's result needs trained recurrent layers rather than random ones.
 
 ### Frozen published models
