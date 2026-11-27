@@ -16,6 +16,7 @@ import argparse
 import json
 import re
 import sys
+import urllib.error
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -88,8 +89,22 @@ def spdx_of(kind, info, body):
     return None
 
 
-def datacite(doi, pacer):
-    res = common.http_get(DATACITE + doi, pacer, headers={"Accept": "application/vnd.api+json"})
+def _log(paths, ds, url, res, purpose, **extra):
+    common.log_download(paths, dict({"dataset": ds, "url": url, "final_url": res.get("final_url"),
+                                     "hosts": res.get("hosts"), "range": None, "status": res.get("status"),
+                                     "bytes": res.get("bytes"), "sha256": res.get("sha256"), "purpose": purpose}, **extra))
+
+
+def datacite(doi, pacer, paths=None, ds=None):
+    url = DATACITE + doi
+    try:
+        res = common.http_get(url, pacer, headers={"Accept": "application/vnd.api+json"})
+    except urllib.error.HTTPError as e:
+        if paths:
+            _log(paths, ds, url, {"status": e.code, "bytes": 0}, "attribution: DataCite record of the deposit DOI")
+        raise
+    if paths:
+        _log(paths, ds, url, res, "attribution: DataCite record of the deposit DOI")
     a = json.loads(res["body"])["data"]["attributes"]
     return {"doi": a.get("doi"), "url": "https://doi.org/" + a.get("doi", doi),
             "title": (a.get("titles") or [{}])[0].get("title"),
@@ -98,7 +113,8 @@ def datacite(doi, pacer):
             "year": a.get("publicationYear"), "version": a.get("version"),
             "rights": [{"rights": r.get("rights"), "uri": r.get("rightsUri"), "spdx": r.get("rightsIdentifier")}
                        for r in a.get("rightsList") or []],
-            "source": DATACITE + doi, "response_sha256": res["sha256"], "read_at": common.now_iso()}
+            "source": DATACITE + doi, "response_sha256": res["sha256"], "response_bytes": res["bytes"],
+            "read_at": common.now_iso()}
 
 
 def notice(spdx, att):
@@ -206,6 +222,7 @@ def main():
             res = common.http_get(dep["url"], pacer, headers={"Accept": "application/json"})
         except common.Stop429 as e:
             sys.exit(str(e))
+        _log(paths, ds, dep["url"], res, "Q1 licence check: deposit metadata or licence file (no recording bytes)")
         info = extract(dep["kind"], res["body"])
         spdx = spdx_of(dep["kind"], info, res["body"])
         lic_text = None
@@ -217,6 +234,7 @@ def main():
             if lurl not in texts:
                 try:
                     t = common.http_get(lurl, pacer)
+                    _log(paths, "licence-text", lurl, t, "Q1 plain-text legal code of the normalised licence")
                     texts[lurl] = {"url": lurl, "final_url": t["final_url"], "status": t["status"],
                                    "bytes": t["bytes"], "sha256": t["sha256"]}
                 except common.Stop429 as e:
@@ -225,7 +243,7 @@ def main():
                     texts[lurl] = {"url": lurl, "error": str(e)}
             lic_text = dict(texts[lurl], what="plain-text legal code of " + spdx)
         try:
-            att = datacite(DOIS[ds], pacer) if ds in DOIS else None
+            att = datacite(DOIS[ds], pacer, paths, ds) if ds in DOIS else None
         except common.Stop429 as e:
             sys.exit(str(e))
         except Exception as e:  # record, do not retry
