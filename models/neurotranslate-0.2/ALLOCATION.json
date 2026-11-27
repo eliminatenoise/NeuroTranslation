@@ -1,0 +1,4466 @@
+{
+ "adapter_folds": {
+  "E1": {
+   "folds": {
+    "0": [
+     "S080",
+     "S052",
+     "S018",
+     "S098",
+     "S066",
+     "S089",
+     "S033",
+     "S038",
+     "S057",
+     "S090",
+     "S113",
+     "S022",
+     "S104",
+     "S096"
+    ],
+    "1": [
+     "S119",
+     "S063",
+     "S112",
+     "S016",
+     "S107",
+     "S020",
+     "S031",
+     "S045",
+     "S088",
+     "S042",
+     "S064",
+     "S059",
+     "S050"
+    ],
+    "2": [
+     "S108",
+     "S041",
+     "S062",
+     "S095",
+     "S115",
+     "S030",
+     "S092",
+     "S076",
+     "S035",
+     "S043",
+     "S091",
+     "S106",
+     "S027"
+    ],
+    "3": [
+     "S110",
+     "S077",
+     "S111",
+     "S053",
+     "S023",
+     "S054",
+     "S093",
+     "S014",
+     "S085",
+     "S011",
+     "S019",
+     "S070",
+     "S036"
+    ],
+    "4": [
+     "S061",
+     "S071",
+     "S087",
+     "S074",
+     "S026",
+     "S055",
+     "S028",
+     "S102",
+     "S046",
+     "S039",
+     "S086",
+     "S073",
+     "S116"
+    ]
+   },
+   "rule": "E1 adapter penalty folds: rank the 66 Gait120 development people by ascending sha256('pooled-encoder-0.2|adapter-fold|gait120|' + unit); fold = rank mod 5"
+  }
+ },
+ "conditional_training": {
+  "area2": {
+   "condition": "role audit at step P2: only the 290 Han 2017-12-07 trials with fitting or configuration roles in the area2 separate-day study; the 74 assessed trials and every Dryad session stay out",
+   "kind": "time_block",
+   "units": [
+    "Han_20171207"
+   ]
+  },
+  "falcon_m1": {
+   "condition": "role audit at step P2: only FALCON M1 'held-in-calib' days that no earlier evaluation used; folds by day computed at P2 with the same rule",
+   "kind": "recording",
+   "units": []
+  },
+  "ibl_train": {
+   "condition": "IBL audit and owner confirmation before the freeze: never-referenced mice of labs not drawn for E4; folds computed at P2 with the same rule",
+   "kind": "animal",
+   "units": []
+  }
+ },
+ "evaluation": {
+  "E1": {
+   "archive": {
+    "bytes": 1452137138,
+    "figshare_file_id": 53167640,
+    "md5": "9f73435302c9cc2c1b9bcef875085985",
+    "name": "Gait120_001_to_010.zip"
+   },
+   "central_directory": {
+    "bytes": 153791,
+    "entries": 1208,
+    "offset": 1451983325
+   },
+   "dataset": "gait120",
+   "emg_scaling_trial": "LevelWalking Trial01 of each person (used only to scale that person's EMG; never scored)",
+   "members": {
+    "central_directory": {
+     "bytes": 153791,
+     "offset": 1451983325
+    },
+    "compressed_bytes_used": 759080170,
+    "member_columns": [
+     "name",
+     "crc32",
+     "compressed_bytes",
+     "bytes",
+     "local_header_offset"
+    ],
+    "member_list_format": "one line per member, sorted by name: name crc32 compressed_bytes bytes, joined by newlines",
+    "member_list_sha256": "c80220bc1ddca0e08f6912409afc61060f5841c5136b0034e003f626d5663ecb",
+    "members": [
+     "S001/EMG/RawData.mat ab460ce3 77910370 77886955 67775324",
+     "S001/JointAngle/LevelWalking/Trial01/step01.mot 073989a0 21640 68885 1388043387",
+     "S001/JointAngle/LevelWalking/Trial01/step02.mot affbecfa 21890 69566 1388065152",
+     "S001/JointAngle/LevelWalking/Trial02/step01.mot 775fe83f 21913 69566 1388087167",
+     "S001/JointAngle/LevelWalking/Trial02/step02.mot 7bd6c556 21886 69566 1388109205",
+     "S001/JointAngle/LevelWalking/Trial03/step01.mot e35f8f94 21871 69566 1388131216",
+     "S001/JointAngle/LevelWalking/Trial03/step02.mot da7ae724 25570 81824 1388153212",
+     "S001/JointAngle/LevelWalking/Trial04/step01.mot 03846b2b 22216 70928 1388178907",
+     "S001/JointAngle/LevelWalking/Trial04/step02.mot 1f53456a 21290 67522 1388201248",
+     "S001/JointAngle/LevelWalking/Trial05/step01.mot 0c54647a 22095 70247 1388222663",
+     "S001/JointAngle/LevelWalking/Trial05/step02.mot 1242b957 21690 68885 1388244883",
+     "S001/JointAngle/SitToStand/Trial01/step01.mot f1296e51 31628 103616 1388266698",
+     "S001/JointAngle/SitToStand/Trial02/step01.mot 7a04e36f 33264 108383 1388298449",
+     "S001/JointAngle/SitToStand/Trial03/step01.mot 6972e7de 35942 117917 1388331836",
+     "S001/JointAngle/SitToStand/Trial04/step01.mot 9bdc10e8 36902 121322 1388367901",
+     "S001/JointAngle/SitToStand/Trial05/step01.mot d0376d72 33516 109745 1388404926",
+     "S001/JointAngle/SlopeAscent/Trial01/step01.mot 48d597e3 24394 77738 1388438565",
+     "S001/JointAngle/SlopeAscent/Trial01/step02.mot ff96caac 24479 77738 1388463083",
+     "S001/JointAngle/SlopeAscent/Trial02/step01.mot d9a08d11 26198 83867 1388487686",
+     "S001/JointAngle/SlopeAscent/Trial02/step02.mot 118c34a1 24582 77738 1388514008",
+     "S001/JointAngle/SlopeAscent/Trial03/step01.mot 5f97bd3b 26168 83186 1388538714",
+     "S001/JointAngle/SlopeAscent/Trial03/step02.mot 02416a49 23845 75695 1388565006",
+     "S001/JointAngle/SlopeAscent/Trial04/step01.mot 988379fc 24828 79100 1388588975",
+     "S001/JointAngle/SlopeAscent/Trial04/step02.mot 55d5fb50 23902 75695 1388613927",
+     "S001/JointAngle/SlopeAscent/Trial05/step01.mot 39829f16 24887 79100 1388637953",
+     "S001/JointAngle/SlopeAscent/Trial05/step02.mot e00a21c6 22875 72290 1388662964",
+     "S001/JointAngle/SlopeDescent/Trial01/step01.mot 7c1c6cdd 23326 73652 1388685963",
+     "S001/JointAngle/SlopeDescent/Trial01/step02.mot faac215d 22996 72290 1388709414",
+     "S001/JointAngle/SlopeDescent/Trial02/step01.mot 960724d8 24778 78419 1388732535",
+     "S001/JointAngle/SlopeDescent/Trial02/step02.mot 95d0d85a 23999 76376 1388757438",
+     "S001/JointAngle/SlopeDescent/Trial03/step01.mot 92b088b7 24581 77738 1388781562",
+     "S001/JointAngle/SlopeDescent/Trial03/step02.mot 352abe26 22919 72290 1388806268",
+     "S001/JointAngle/SlopeDescent/Trial04/step01.mot c5321289 23550 74333 1388829312",
+     "S001/JointAngle/SlopeDescent/Trial04/step02.mot dadba461 22877 72290 1388852987",
+     "S001/JointAngle/SlopeDescent/Trial05/step01.mot 6bfd3d49 23276 73652 1388875989",
+     "S001/JointAngle/SlopeDescent/Trial05/step02.mot baae4e75 23109 72971 1388899390",
+     "S001/JointAngle/StairAscent/Trial01/step01.mot 2b3d7531 27569 87953 1388922624",
+     "S001/JointAngle/StairAscent/Trial01/step02.mot 8ef21d93 25964 82505 1388950317",
+     "S001/JointAngle/StairAscent/Trial02/step01.mot e0d7d9bb 28015 89315 1388976405",
+     "S001/JointAngle/StairAscent/Trial02/step02.mot a32a7b0c 26241 83186 1389004544",
+     "S001/JointAngle/StairAscent/Trial03/step01.mot 52bbafc5 28220 89996 1389030909",
+     "S001/JointAngle/StairAscent/Trial03/step02.mot d2295ab0 25938 82505 1389059253",
+     "S001/JointAngle/StairAscent/Trial04/step01.mot 95df00f6 28027 89315 1389085315",
+     "S001/JointAngle/StairAscent/Trial04/step02.mot 35cadb78 25756 81824 1389113466",
+     "S001/JointAngle/StairAscent/Trial05/step01.mot 68ee0e3a 27531 87272 1389139346",
+     "S001/JointAngle/StairAscent/Trial05/step02.mot 64a88480 26843 85229 1389167001",
+     "S001/JointAngle/StairDescent/Trial01/step01.mot 9ba181af 28348 89996 1389193968",
+     "S001/JointAngle/StairDescent/Trial01/step02.mot 7164d038 25780 81824 1389222441",
+     "S001/JointAngle/StairDescent/Trial02/step01.mot d6e5840e 26930 85229 1389248346",
+     "S001/JointAngle/StairDescent/Trial02/step02.mot 1c65ddcf 25227 79781 1389275401",
+     "S001/JointAngle/StairDescent/Trial03/step01.mot 4c86f332 26936 85229 1389300753",
+     "S001/JointAngle/StairDescent/Trial03/step02.mot 71651f22 25623 81143 1389327814",
+     "S001/JointAngle/StairDescent/Trial04/step01.mot 31c0926a 27136 85910 1389353562",
+     "S001/JointAngle/StairDescent/Trial04/step02.mot b7bfba9c 26453 83867 1389380823",
+     "S001/JointAngle/StairDescent/Trial05/step01.mot ac23633d 26423 83867 1389407401",
+     "S001/JointAngle/StairDescent/Trial05/step02.mot d7b40d82 25657 81143 1389433949",
+     "S001/JointAngle/StandToSit/Trial01/step01.mot d239095a 34647 113150 1389459731",
+     "S001/JointAngle/StandToSit/Trial02/step01.mot 014bd6d7 40661 133580 1389494501",
+     "S001/JointAngle/StandToSit/Trial03/step01.mot 314ffdac 32303 104978 1389535285",
+     "S001/JointAngle/StandToSit/Trial04/step01.mot 66ba965e 37110 122003 1389567711",
+     "S001/JointAngle/StandToSit/Trial05/step01.mot e0a18325 36045 118598 1389604944",
+     "S001/MotionCapture/LevelWalking/TRC/Trial01/Step01.trc 41f05e09 57626 130695 1407111852",
+     "S001/MotionCapture/LevelWalking/TRC/Trial01/Step02.trc 7ee3ec10 58734 133137 1407169610",
+     "S001/MotionCapture/LevelWalking/TRC/Trial02/Step01.trc 916c3f48 57652 131992 1407228476",
+     "S001/MotionCapture/LevelWalking/TRC/Trial02/Step02.trc 34c25f7a 58543 132324 1407286260",
+     "S001/MotionCapture/LevelWalking/TRC/Trial03/Step01.trc 184592aa 57742 131992 1407344935",
+     "S001/MotionCapture/LevelWalking/TRC/Trial03/Step02.trc 24a65719 68448 156626 1407402809",
+     "S001/MotionCapture/LevelWalking/TRC/Trial04/Step01.trc d6e56d2d 58820 134586 1407471389",
+     "S001/MotionCapture/LevelWalking/TRC/Trial04/Step02.trc 06865dd4 56681 128585 1407530341",
+     "S001/MotionCapture/LevelWalking/TRC/Trial05/Step01.trc 121b8c05 58495 133289 1407587154",
+     "S001/MotionCapture/LevelWalking/TRC/Trial05/Step02.trc d12ba512 57777 131708 1407645781",
+     "S001/MotionCapture/SitToStand/TRC/Trial01/Step01.trc 31a15a75 84953 196811 1407703690",
+     "S001/MotionCapture/SitToStand/TRC/Trial02/Step01.trc 92ff74de 88704 205904 1407788773",
+     "S001/MotionCapture/SitToStand/TRC/Trial03/Step01.trc 2426b418 99672 224077 1407877607",
+     "S001/MotionCapture/SitToStand/TRC/Trial04/Step01.trc a7e503e5 99127 230543 1407977409",
+     "S001/MotionCapture/SitToStand/TRC/Trial05/Step01.trc 05e73eaf 89689 208495 1408076666",
+     "S001/MotionCapture/SlopeAscent/TRC/Trial01/Step01.trc ce4718b9 67562 147555 1408166485",
+     "S001/MotionCapture/SlopeAscent/TRC/Trial01/Step02.trc 074af82f 67905 147823 1408234178",
+     "S001/MotionCapture/SlopeAscent/TRC/Trial02/Step01.trc 1f363394 69726 159228 1408302214",
+     "S001/MotionCapture/SlopeAscent/TRC/Trial02/Step02.trc e2a81cb8 65114 147710 1408372071",
+     "S001/MotionCapture/SlopeAscent/TRC/Trial03/Step01.trc 0ada05d9 69333 157931 1408437316",
+     "S001/MotionCapture/SlopeAscent/TRC/Trial03/Step02.trc d47bf43d 63175 143781 1408506780",
+     "S001/MotionCapture/SlopeAscent/TRC/Trial04/Step01.trc 4f460516 65839 150149 1408570086",
+     "S001/MotionCapture/SlopeAscent/TRC/Trial04/Step02.trc 0353a0f3 63120 143935 1408636056",
+     "S001/MotionCapture/SlopeAscent/TRC/Trial05/Step01.trc 5e51cdd8 66029 150149 1408699307",
+     "S001/MotionCapture/SlopeAscent/TRC/Trial05/Step02.trc 025d084f 60759 137233 1408765467",
+     "S001/MotionCapture/SlopeDescent/TRC/Trial01/Step01.trc 99beb3c4 62071 141763 1408826357",
+     "S001/MotionCapture/SlopeDescent/TRC/Trial01/Step02.trc 78970670 60845 137180 1408888560",
+     "S001/MotionCapture/SlopeDescent/TRC/Trial02/Step01.trc 91787a2b 66025 151071 1408949537",
+     "S001/MotionCapture/SlopeDescent/TRC/Trial02/Step02.trc 7c78b120 64302 144962 1409015694",
+     "S001/MotionCapture/SlopeDescent/TRC/Trial03/Step01.trc 4fe8e1e7 65663 149885 1409080128",
+     "S001/MotionCapture/SlopeDescent/TRC/Trial03/Step02.trc 35e71a56 60526 137180 1409145923",
+     "S001/MotionCapture/SlopeDescent/TRC/Trial04/Step01.trc d88b8443 62453 143334 1409206581",
+     "S001/MotionCapture/SlopeDescent/TRC/Trial04/Step02.trc 024638b8 61003 137180 1409269166",
+     "S001/MotionCapture/SlopeDescent/TRC/Trial05/Step01.trc 97599b3d 62112 141808 1409330301",
+     "S001/MotionCapture/SlopeDescent/TRC/Trial05/Step02.trc c0b885d8 61829 138477 1409392545",
+     "S001/MotionCapture/StairAscent/TRC/Trial01/Step01.trc d29378d2 73788 167010 1409454506",
+     "S001/MotionCapture/StairAscent/TRC/Trial01/Step02.trc 8da38f62 69243 158692 1409528425",
+     "S001/MotionCapture/StairAscent/TRC/Trial02/Step01.trc 17f805a5 74868 169604 1409597799",
+     "S001/MotionCapture/StairAscent/TRC/Trial02/Step02.trc 5bfdc007 69994 159794 1409672798",
+     "S001/MotionCapture/StairAscent/TRC/Trial03/Step01.trc 9e9b71a1 75073 170901 1409742923",
+     "S001/MotionCapture/StairAscent/TRC/Trial03/Step02.trc 78ec7911 69333 158682 1409818127",
+     "S001/MotionCapture/StairAscent/TRC/Trial04/Step01.trc 2b567911 75238 169604 1409887591",
+     "S001/MotionCapture/StairAscent/TRC/Trial04/Step02.trc 7f7e458e 68455 157176 1409962960",
+     "S001/MotionCapture/StairAscent/TRC/Trial05/Step01.trc 56ecc44c 72991 165713 1410031546",
+     "S001/MotionCapture/StairAscent/TRC/Trial05/Step02.trc 74306ae2 71382 163326 1410104668",
+     "S001/MotionCapture/StairDescent/TRC/Trial01/Step01.trc 88f31238 75453 172985 1410176181",
+     "S001/MotionCapture/StairDescent/TRC/Trial01/Step02.trc 83f48f76 68156 155338 1410251766",
+     "S001/MotionCapture/StairDescent/TRC/Trial02/Step01.trc 18997085 71323 163653 1410320054",
+     "S001/MotionCapture/StairDescent/TRC/Trial02/Step02.trc 43e0334a 66578 151447 1410391509",
+     "S001/MotionCapture/StairDescent/TRC/Trial03/Step01.trc 51bab230 71487 163771 1410458219",
+     "S001/MotionCapture/StairDescent/TRC/Trial03/Step02.trc 4108ea7e 67845 154041 1410529838",
+     "S001/MotionCapture/StairDescent/TRC/Trial04/Step01.trc b9eedcd6 71552 164810 1410597815",
+     "S001/MotionCapture/StairDescent/TRC/Trial04/Step02.trc 067e7e12 70054 159229 1410669499",
+     "S001/MotionCapture/StairDescent/TRC/Trial05/Step01.trc aa26acda 70282 160715 1410739685",
+     "S001/MotionCapture/StairDescent/TRC/Trial05/Step02.trc 3b8d0917 67747 154041 1410810099",
+     "S001/MotionCapture/StandToSit/TRC/Trial01/Step01.trc 4b1c5a6a 91253 214983 1410877978",
+     "S001/MotionCapture/StandToSit/TRC/Trial02/Step01.trc ed6f063d 108393 253887 1410969361",
+     "S001/MotionCapture/StandToSit/TRC/Trial03/Step01.trc 60807699 85578 199434 1411077884",
+     "S001/MotionCapture/StandToSit/TRC/Trial04/Step01.trc c9c6cc9b 102974 231857 1411163592",
+     "S001/MotionCapture/StandToSit/TRC/Trial05/Step01.trc c8b79b18 100058 225374 1411266696",
+     "S001/MotionCapture/Static/TRC/Trial01.trc f0ef2e95 238280 573992 1389641112",
+     "S002/EMG/RawData.mat a5dde817 71809195 71787723 217144642",
+     "S002/JointAngle/LevelWalking/Trial01/step01.mot 7b404cff 23515 74333 1389879511",
+     "S002/JointAngle/LevelWalking/Trial01/step02.mot ba881eac 22839 72290 1389903151",
+     "S002/JointAngle/LevelWalking/Trial02/step01.mot a36d4c29 24287 77057 1389926115",
+     "S002/JointAngle/LevelWalking/Trial02/step02.mot 0decb917 24549 77738 1389950527",
+     "S002/JointAngle/LevelWalking/Trial03/step01.mot fc59fc0b 22834 72290 1389975201",
+     "S002/JointAngle/LevelWalking/Trial03/step02.mot 38d69cc8 23614 75014 1389998160",
+     "S002/JointAngle/LevelWalking/Trial04/step01.mot f37a2dfa 24516 77738 1390021899",
+     "S002/JointAngle/LevelWalking/Trial04/step02.mot 2fc8a6ef 24704 78419 1390046540",
+     "S002/JointAngle/LevelWalking/Trial05/step01.mot 78ab08fc 25495 81143 1390071369",
+     "S002/JointAngle/LevelWalking/Trial05/step02.mot ad4e931f 23252 73652 1390096989",
+     "S002/JointAngle/SitToStand/Trial01/step01.mot 0f2e6b3a 28426 92039 1390120366",
+     "S002/JointAngle/SitToStand/Trial02/step01.mot 540aa6a2 58360 195551 1390148915",
+     "S002/JointAngle/SitToStand/Trial03/step01.mot 1c31574b 32279 104978 1390207398",
+     "S002/JointAngle/SitToStand/Trial04/step01.mot 3ef516a5 36751 120641 1390239800",
+     "S002/JointAngle/SitToStand/Trial05/step01.mot 31226ce3 31734 103616 1390276674",
+     "S002/JointAngle/SlopeAscent/Trial01/step01.mot dbc308ba 29245 94082 1390308531",
+     "S002/JointAngle/SlopeAscent/Trial01/step02.mot e656dc95 27952 89996 1390337900",
+     "S002/JointAngle/SlopeAscent/Trial02/step01.mot 8e5ccca6 29759 96125 1390365976",
+     "S002/JointAngle/SlopeAscent/Trial02/step02.mot 4a614b7d 29692 95444 1390395859",
+     "S002/JointAngle/SlopeAscent/Trial03/step01.mot 3137e590 29382 94763 1390425675",
+     "S002/JointAngle/SlopeAscent/Trial03/step02.mot a5792a02 28659 92039 1390455181",
+     "S002/JointAngle/SlopeAscent/Trial04/step01.mot 2b386da1 29880 96125 1390483964",
+     "S002/JointAngle/SlopeAscent/Trial04/step02.mot d5fb04f3 28564 91358 1390513968",
+     "S002/JointAngle/SlopeAscent/Trial05/step01.mot fbfa5c91 29883 96125 1390542656",
+     "S002/JointAngle/SlopeAscent/Trial05/step02.mot b2f537bf 28893 92720 1390572663",
+     "S002/JointAngle/SlopeDescent/Trial01/step01.mot 6d739e57 25826 82505 1390601680",
+     "S002/JointAngle/SlopeDescent/Trial01/step02.mot 07185bfe 24888 79100 1390627631",
+     "S002/JointAngle/SlopeDescent/Trial02/step01.mot 47ce495f 25421 81143 1390652644",
+     "S002/JointAngle/SlopeDescent/Trial02/step02.mot 786cb241 24288 77057 1390678190",
+     "S002/JointAngle/SlopeDescent/Trial03/step01.mot bafef037 26968 85910 1390702603",
+     "S002/JointAngle/SlopeDescent/Trial03/step02.mot c375067f 22835 72290 1390729696",
+     "S002/JointAngle/SlopeDescent/Trial04/step01.mot 412cfb14 27463 87953 1390752656",
+     "S002/JointAngle/SlopeDescent/Trial04/step02.mot 2ff4bae7 23851 75695 1390780244",
+     "S002/JointAngle/SlopeDescent/Trial05/step01.mot e07e589d 27226 87272 1390804220",
+     "S002/JointAngle/SlopeDescent/Trial05/step02.mot 615c9929 25343 80462 1390831571",
+     "S002/JointAngle/StairAscent/Trial01/step01.mot 266d055e 32720 105659 1390857039",
+     "S002/JointAngle/StairAscent/Trial01/step02.mot db40a959 30236 96806 1390889883",
+     "S002/JointAngle/StairAscent/Trial02/step01.mot 4f5562b5 31698 102254 1390920243",
+     "S002/JointAngle/StairAscent/Trial02/step02.mot 917e009e 28514 91358 1390952065",
+     "S002/JointAngle/StairAscent/Trial03/step01.mot 46dd3553 32161 103616 1390980703",
+     "S002/JointAngle/StairAscent/Trial03/step02.mot 1e009ff8 28398 90677 1391012988",
+     "S002/JointAngle/StairAscent/Trial04/step01.mot 5a147167 30875 99530 1391041510",
+     "S002/JointAngle/StairAscent/Trial04/step02.mot cc23a17b 30266 96806 1391072509",
+     "S002/JointAngle/StairAscent/Trial05/step01.mot 7fb3e103 31941 102935 1391102899",
+     "S002/JointAngle/StairAscent/Trial05/step02.mot 3d4ef06f 28877 92039 1391134964",
+     "S002/JointAngle/StairDescent/Trial01/step01.mot ef85b0ce 30718 98168 1391163965",
+     "S002/JointAngle/StairDescent/Trial01/step02.mot a43ebee2 29724 94763 1391194808",
+     "S002/JointAngle/StairDescent/Trial02/step01.mot d52b20ec 28994 92720 1391224657",
+     "S002/JointAngle/StairDescent/Trial02/step02.mot e7fff6b4 27589 87953 1391253776",
+     "S002/JointAngle/StairDescent/Trial03/step01.mot 3ccc5482 30019 96125 1391281490",
+     "S002/JointAngle/StairDescent/Trial03/step02.mot c064badc 29036 92720 1391311634",
+     "S002/JointAngle/StairDescent/Trial04/step01.mot db8a170a 29554 94082 1391340795",
+     "S002/JointAngle/StairDescent/Trial04/step02.mot e4d7b971 28882 92039 1391370474",
+     "S002/JointAngle/StairDescent/Trial05/step01.mot 1f240389 29629 94763 1391399481",
+     "S002/JointAngle/StairDescent/Trial05/step02.mot da059a2a 28042 89315 1391429235",
+     "S002/JointAngle/StandToSit/Trial01/step01.mot 98894a93 33054 107021 1391457402",
+     "S002/JointAngle/StandToSit/Trial02/step01.mot b57b7a6f 27565 88634 1391490579",
+     "S002/JointAngle/StandToSit/Trial03/step01.mot 35987efe 32465 104978 1391518267",
+     "S002/JointAngle/StandToSit/Trial04/step01.mot 9671529e 36739 119960 1391550855",
+     "S002/JointAngle/StandToSit/Trial05/step01.mot 03e66110 33927 110426 1391587717",
+     "S002/MotionCapture/LevelWalking/TRC/Trial01/Step01.trc b10372f5 61934 141071 1411366884",
+     "S002/MotionCapture/LevelWalking/TRC/Trial01/Step02.trc 79be5b6d 61303 137959 1411428950",
+     "S002/MotionCapture/LevelWalking/TRC/Trial02/Step01.trc f07c3392 64449 146259 1411490385",
+     "S002/MotionCapture/LevelWalking/TRC/Trial02/Step02.trc fcf239b3 65942 147987 1411554966",
+     "S002/MotionCapture/LevelWalking/TRC/Trial03/Step01.trc 9944fdce 59993 137180 1411621040",
+     "S002/MotionCapture/LevelWalking/TRC/Trial03/Step02.trc 21239278 63291 142481 1411681165",
+     "S002/MotionCapture/LevelWalking/TRC/Trial04/Step01.trc 35640092 65032 147556 1411744588",
+     "S002/MotionCapture/LevelWalking/TRC/Trial04/Step02.trc de07f107 66372 149268 1411809752",
+     "S002/MotionCapture/LevelWalking/TRC/Trial05/Step01.trc 3d6ac5e2 66985 154041 1411876256",
+     "S002/MotionCapture/LevelWalking/TRC/Trial05/Step02.trc 7e32f2ae 62197 139955 1411943373",
+     "S002/MotionCapture/SitToStand/TRC/Trial01/Step01.trc 0616474e 74276 174748 1412005702",
+     "S002/MotionCapture/SitToStand/TRC/Trial02/Step01.trc 6ca814ba 151433 371935 1412080108",
+     "S002/MotionCapture/SitToStand/TRC/Trial03/Step01.trc 103486e5 85593 199431 1412231671",
+     "S002/MotionCapture/SitToStand/TRC/Trial04/Step01.trc 0c621764 98058 229233 1412317394",
+     "S002/MotionCapture/SitToStand/TRC/Trial05/Step01.trc 619536fb 84418 196840 1412415582",
+     "S002/MotionCapture/SlopeAscent/TRC/Trial01/Step01.trc d5039774 78623 178683 1412500130",
+     "S002/MotionCapture/SlopeAscent/TRC/Trial01/Step02.trc 93063fde 76255 170913 1412578884",
+     "S002/MotionCapture/SlopeAscent/TRC/Trial02/Step01.trc 61e1ca84 79967 182574 1412655270",
+     "S002/MotionCapture/SlopeAscent/TRC/Trial02/Step02.trc e1a414bd 80198 181291 1412735368",
+     "S002/MotionCapture/SlopeAscent/TRC/Trial03/Step01.trc 28a5db85 78991 179980 1412815697",
+     "S002/MotionCapture/SlopeAscent/TRC/Trial03/Step02.trc f7ab9710 77431 174820 1412894819",
+     "S002/MotionCapture/SlopeAscent/TRC/Trial04/Step01.trc dfc662bc 80097 182574 1412972381",
+     "S002/MotionCapture/SlopeAscent/TRC/Trial04/Step02.trc d36422bb 76878 173509 1413052609",
+     "S002/MotionCapture/SlopeAscent/TRC/Trial05/Step01.trc 4b1204bc 79899 182574 1413129618",
+     "S002/MotionCapture/SlopeAscent/TRC/Trial05/Step02.trc 7108c947 77997 176101 1413209648",
+     "S002/MotionCapture/SlopeDescent/TRC/Trial01/Step01.trc 744651c8 69645 159163 1413287776",
+     "S002/MotionCapture/SlopeDescent/TRC/Trial01/Step02.trc d7325ff2 67095 150150 1413357553",
+     "S002/MotionCapture/SlopeDescent/TRC/Trial02/Step01.trc c929185e 67993 156775 1413424780",
+     "S002/MotionCapture/SlopeDescent/TRC/Trial02/Step02.trc d4925f60 64828 146259 1413492905",
+     "S002/MotionCapture/SlopeDescent/TRC/Trial03/Step01.trc c1512315 72528 165377 1413557865",
+     "S002/MotionCapture/SlopeDescent/TRC/Trial03/Step02.trc 532d5794 61003 137180 1413630525",
+     "S002/MotionCapture/SlopeDescent/TRC/Trial04/Step01.trc e682ee02 74158 169594 1413691660",
+     "S002/MotionCapture/SlopeDescent/TRC/Trial04/Step02.trc e57d5656 64010 143665 1413765950",
+     "S002/MotionCapture/SlopeDescent/TRC/Trial05/Step01.trc ff0d63df 73569 168362 1413830092",
+     "S002/MotionCapture/SlopeDescent/TRC/Trial05/Step02.trc 072183b9 68072 152744 1413903793",
+     "S002/MotionCapture/StairAscent/TRC/Trial01/Step01.trc fdf8e11e 88763 200732 1413971997",
+     "S002/MotionCapture/StairAscent/TRC/Trial01/Step02.trc e7e7f29d 82333 185224 1414060891",
+     "S002/MotionCapture/StairAscent/TRC/Trial02/Step01.trc 84588ff1 86125 194247 1414143355",
+     "S002/MotionCapture/StairAscent/TRC/Trial02/Step02.trc 1655c219 77610 174817 1414229611",
+     "S002/MotionCapture/StairAscent/TRC/Trial03/Step01.trc cbaf2d36 87055 196841 1414307352",
+     "S002/MotionCapture/StairAscent/TRC/Trial03/Step02.trc 5166f480 76949 173325 1414394538",
+     "S002/MotionCapture/StairAscent/TRC/Trial04/Step01.trc 2e3a11fc 83687 189059 1414471618",
+     "S002/MotionCapture/StairAscent/TRC/Trial04/Step02.trc 680c00b3 82060 184808 1414555436",
+     "S002/MotionCapture/StairAscent/TRC/Trial05/Step01.trc 86674471 86773 195544 1414637627",
+     "S002/MotionCapture/StairAscent/TRC/Trial05/Step02.trc 7a167704 77777 176390 1414724531",
+     "S002/MotionCapture/StairDescent/TRC/Trial01/Step01.trc 71c65d87 83181 188115 1414802439",
+     "S002/MotionCapture/StairDescent/TRC/Trial01/Step02.trc 0f3e1d1c 79684 179981 1414885752",
+     "S002/MotionCapture/StairDescent/TRC/Trial02/Step01.trc 5c9cf92c 78608 177676 1414965568",
+     "S002/MotionCapture/StairDescent/TRC/Trial02/Step02.trc 36fffd42 73995 167011 1415044308",
+     "S002/MotionCapture/StairDescent/TRC/Trial03/Step01.trc bfea284e 81150 184129 1415118435",
+     "S002/MotionCapture/StairDescent/TRC/Trial03/Step02.trc 5aa8184a 77811 176090 1415199717",
+     "S002/MotionCapture/StairDescent/TRC/Trial04/Step01.trc 590a70aa 79926 180006 1415277660",
+     "S002/MotionCapture/StairDescent/TRC/Trial04/Step02.trc 4475e56d 77746 174793 1415357718",
+     "S002/MotionCapture/StairDescent/TRC/Trial05/Step01.trc f753de97 80850 181427 1415435596",
+     "S002/MotionCapture/StairDescent/TRC/Trial05/Step02.trc 68f330ad 74941 169605 1415516578",
+     "S002/MotionCapture/StandToSit/TRC/Trial01/Step01.trc 96a3242b 87730 203310 1415591651",
+     "S002/MotionCapture/StandToSit/TRC/Trial02/Step01.trc b384ce63 71939 168260 1415679511",
+     "S002/MotionCapture/StandToSit/TRC/Trial03/Step01.trc 0bec9638 84809 199394 1415751580",
+     "S002/MotionCapture/StandToSit/TRC/Trial04/Step01.trc 27d5c7f7 96958 227946 1415836519",
+     "S002/MotionCapture/StandToSit/TRC/Trial05/Step01.trc 53223d18 89889 209810 1415933607",
+     "S002/MotionCapture/Static/TRC/Trial01.trc 97d6be23 231498 546047 1391621767",
+     "S003/EMG/RawData.mat 51a38841 54181741 54165299 351850310",
+     "S003/JointAngle/LevelWalking/Trial01/step01.mot 7db8717d 21880 69566 1391853384",
+     "S003/JointAngle/LevelWalking/Trial02/step01.mot 1f95ddae 21851 69566 1391875389",
+     "S003/JointAngle/LevelWalking/Trial03/step01.mot 63f20bc2 22011 70247 1391897365",
+     "S003/JointAngle/LevelWalking/Trial04/step01.mot a2491ea8 22558 71609 1391919501",
+     "S003/JointAngle/LevelWalking/Trial05/step01.mot 5f1d668d 23122 73652 1391942184",
+     "S003/JointAngle/SitToStand/Trial01/step01.mot 77fa7c73 37448 120641 1391965431",
+     "S003/JointAngle/SitToStand/Trial02/step01.mot 19c50892 34226 110426 1392003002",
+     "S003/JointAngle/SitToStand/Trial03/step01.mot 72f8dfb3 35801 115193 1392037351",
+     "S003/JointAngle/SitToStand/Trial04/step01.mot 88f4ea2b 36645 118598 1392073275",
+     "S003/JointAngle/SitToStand/Trial05/step01.mot e3f49e8e 34644 111788 1392110043",
+     "S003/JointAngle/SlopeAscent/Trial01/step01.mot 83e26c1e 28095 89996 1392144810",
+     "S003/JointAngle/SlopeAscent/Trial01/step02.mot 64ca62b7 30318 97487 1392173029",
+     "S003/JointAngle/SlopeAscent/Trial02/step01.mot 44266f8f 28931 92720 1392203471",
+     "S003/JointAngle/SlopeAscent/Trial02/step02.mot 55122990 29904 96125 1392232526",
+     "S003/JointAngle/SlopeAscent/Trial03/step01.mot 52d83fd3 27025 86591 1392262554",
+     "S003/JointAngle/SlopeAscent/Trial03/step02.mot 2549c581 28105 89996 1392289703",
+     "S003/JointAngle/SlopeAscent/Trial04/step01.mot e8a64d6c 27663 88634 1392317932",
+     "S003/JointAngle/SlopeAscent/Trial04/step02.mot b2bc955b 28602 91358 1392345719",
+     "S003/JointAngle/SlopeAscent/Trial05/step01.mot 816292a7 27511 87953 1392374445",
+     "S003/JointAngle/SlopeAscent/Trial05/step02.mot 6d887197 27854 89315 1392402080",
+     "S003/JointAngle/SlopeDescent/Trial01/step01.mot 8a5285b0 26272 83867 1392430058",
+     "S003/JointAngle/SlopeDescent/Trial01/step02.mot 7c323efd 24360 77738 1392456455",
+     "S003/JointAngle/SlopeDescent/Trial02/step01.mot 465fee85 26686 85229 1392480940",
+     "S003/JointAngle/SlopeDescent/Trial02/step02.mot 858ffed7 23597 75014 1392507751",
+     "S003/JointAngle/SlopeDescent/Trial03/step01.mot 63984713 25775 82505 1392531473",
+     "S003/JointAngle/SlopeDescent/Trial03/step02.mot 7fd347e1 24124 76376 1392557373",
+     "S003/JointAngle/SlopeDescent/Trial04/step01.mot e705f1cc 26047 83186 1392581622",
+     "S003/JointAngle/SlopeDescent/Trial04/step02.mot 528f9a51 23812 75695 1392607794",
+     "S003/JointAngle/SlopeDescent/Trial05/step01.mot 8dbf8d81 25204 80462 1392631731",
+     "S003/JointAngle/SlopeDescent/Trial05/step02.mot 5da1b429 23353 74333 1392657060",
+     "S003/JointAngle/StairAscent/Trial01/step01.mot e0dc3cc5 27829 89315 1392680538",
+     "S003/JointAngle/StairAscent/Trial01/step02.mot 8d6a4352 29238 94082 1392708491",
+     "S003/JointAngle/StairAscent/Trial02/step01.mot 9bd56ddc 27798 89315 1392737853",
+     "S003/JointAngle/StairAscent/Trial02/step02.mot a5467c3f 27414 87953 1392765775",
+     "S003/JointAngle/StairAscent/Trial03/step01.mot 5355c4b6 27648 88634 1392793313",
+     "S003/JointAngle/StairAscent/Trial03/step02.mot dbe3ac6d 28899 92720 1392821085",
+     "S003/JointAngle/StairAscent/Trial04/step01.mot 9905f59a 28662 92039 1392850108",
+     "S003/JointAngle/StairAscent/Trial04/step02.mot c6cbd474 29110 93401 1392878894",
+     "S003/JointAngle/StairAscent/Trial05/step01.mot 87b201ec 29223 93401 1392908128",
+     "S003/JointAngle/StairAscent/Trial05/step02.mot 0d26e2fd 29185 93401 1392937475",
+     "S003/JointAngle/StairDescent/Trial01/step01.mot a004fe6f 27354 87272 1392966784",
+     "S003/JointAngle/StairDescent/Trial01/step02.mot 320d1392 26523 84548 1392994263",
+     "S003/JointAngle/StairDescent/Trial02/step01.mot aa48fb7f 28977 92720 1393020911",
+     "S003/JointAngle/StairDescent/Trial02/step02.mot dffea4e1 27145 86591 1393050013",
+     "S003/JointAngle/StairDescent/Trial03/step01.mot 222b5b7c 27493 87953 1393077283",
+     "S003/JointAngle/StairDescent/Trial03/step02.mot 590856cf 27750 88634 1393104901",
+     "S003/JointAngle/StairDescent/Trial04/step01.mot 64717a88 29390 94082 1393132776",
+     "S003/JointAngle/StairDescent/Trial04/step02.mot 65e51cb4 26959 85910 1393162291",
+     "S003/JointAngle/StairDescent/Trial05/step01.mot 92476bc8 28238 89996 1393189375",
+     "S003/JointAngle/StairDescent/Trial05/step02.mot d5522ddf 25733 81824 1393217738",
+     "S003/JointAngle/StandToSit/Trial01/step01.mot 67805cab 55118 180569 1393243596",
+     "S003/JointAngle/StandToSit/Trial02/step01.mot 1314b1d6 46154 150605 1393298837",
+     "S003/JointAngle/StandToSit/Trial03/step01.mot 08c84777 44163 143795 1393345114",
+     "S003/JointAngle/StandToSit/Trial04/step01.mot ca3d3318 39426 128132 1393389400",
+     "S003/JointAngle/StandToSit/Trial05/step01.mot 671f6fbd 43605 141752 1393428949",
+     "S003/MotionCapture/LevelWalking/TRC/Trial01/Step01.trc 778cc5ec 58671 132188 1416023626",
+     "S003/MotionCapture/LevelWalking/TRC/Trial02/Step01.trc 3ae8e0f7 58508 131992 1416082429",
+     "S003/MotionCapture/LevelWalking/TRC/Trial03/Step01.trc 96f2ca3b 58983 133429 1416141069",
+     "S003/MotionCapture/LevelWalking/TRC/Trial04/Step01.trc 04e83a94 60371 136086 1416200184",
+     "S003/MotionCapture/LevelWalking/TRC/Trial05/Step01.trc 3e5861d0 62277 139841 1416260687",
+     "S003/MotionCapture/SitToStand/TRC/Trial01/Step01.trc aa95eeb8 97989 229197 1416323096",
+     "S003/MotionCapture/SitToStand/TRC/Trial02/Step01.trc 88a2c861 90717 209756 1416421215",
+     "S003/MotionCapture/SitToStand/TRC/Trial03/Step01.trc 51de51e2 94292 218840 1416512062",
+     "S003/MotionCapture/SitToStand/TRC/Trial04/Step01.trc 2c096643 96094 225338 1416606484",
+     "S003/MotionCapture/SitToStand/TRC/Trial05/Step01.trc eb22ab2a 90369 212365 1416702708",
+     "S003/MotionCapture/SlopeAscent/TRC/Trial01/Step01.trc 9ea61baa 75465 170901 1416793207",
+     "S003/MotionCapture/SlopeAscent/TRC/Trial01/Step02.trc 97d19f56 81206 188017 1416868803",
+     "S003/MotionCapture/SlopeAscent/TRC/Trial02/Step01.trc 11a1be78 77705 176087 1416950140",
+     "S003/MotionCapture/SlopeAscent/TRC/Trial02/Step02.trc 9f2d9646 79949 185504 1417027976",
+     "S003/MotionCapture/SlopeAscent/TRC/Trial03/Step01.trc d4c85a9d 72070 164416 1417108056",
+     "S003/MotionCapture/SlopeAscent/TRC/Trial03/Step02.trc 2bb3f06f 75592 173547 1417180257",
+     "S003/MotionCapture/SlopeAscent/TRC/Trial04/Step01.trc 9ca77dd8 74564 168287 1417255980",
+     "S003/MotionCapture/SlopeAscent/TRC/Trial04/Step02.trc 240ae2f4 75721 176221 1417330675",
+     "S003/MotionCapture/SlopeAscent/TRC/Trial05/Step01.trc 44b40fcf 73251 167010 1417406527",
+     "S003/MotionCapture/SlopeAscent/TRC/Trial05/Step02.trc c5dfa4bd 74544 172129 1417479909",
+     "S003/MotionCapture/SlopeDescent/TRC/Trial01/Step01.trc 5cedec12 69681 162640 1417554584",
+     "S003/MotionCapture/SlopeDescent/TRC/Trial01/Step02.trc 9c3cc61b 65292 147556 1417624397",
+     "S003/MotionCapture/SlopeDescent/TRC/Trial02/Step01.trc c9031011 71035 165335 1417689821",
+     "S003/MotionCapture/SlopeDescent/TRC/Trial02/Step02.trc 68243a77 63198 142376 1417760988",
+     "S003/MotionCapture/SlopeDescent/TRC/Trial03/Step01.trc ec7ea1c5 68105 160193 1417824318",
+     "S003/MotionCapture/SlopeDescent/TRC/Trial03/Step02.trc b5e380ab 64049 144971 1417892555",
+     "S003/MotionCapture/SlopeDescent/TRC/Trial04/Step01.trc 6d0eead6 69317 161395 1417956736",
+     "S003/MotionCapture/SlopeDescent/TRC/Trial04/Step02.trc 4e628ed5 63957 143669 1418026185",
+     "S003/MotionCapture/SlopeDescent/TRC/Trial05/Step01.trc 2bfc9893 66532 155961 1418090274",
+     "S003/MotionCapture/SlopeDescent/TRC/Trial05/Step02.trc 024fbd3a 62070 141071 1418156938",
+     "S003/MotionCapture/StairAscent/TRC/Trial01/Step01.trc 07d833fb 74853 169604 1418219140",
+     "S003/MotionCapture/StairAscent/TRC/Trial01/Step02.trc 878bf3d8 78706 181776 1418294124",
+     "S003/MotionCapture/StairAscent/TRC/Trial02/Step01.trc 44eaefe0 74748 169604 1418372961",
+     "S003/MotionCapture/StairAscent/TRC/Trial02/Step02.trc a9bc4980 73144 170038 1418447840",
+     "S003/MotionCapture/StairAscent/TRC/Trial03/Step01.trc 586ea9a4 74567 168307 1418521115",
+     "S003/MotionCapture/StairAscent/TRC/Trial03/Step02.trc 36a6cc0b 77239 179183 1418595813",
+     "S003/MotionCapture/StairAscent/TRC/Trial04/Step01.trc 23357ab5 77226 174792 1418673183",
+     "S003/MotionCapture/StairAscent/TRC/Trial04/Step02.trc 1ffd0a68 77883 180468 1418750540",
+     "S003/MotionCapture/StairAscent/TRC/Trial05/Step01.trc 8fef59b4 78822 177386 1418828554",
+     "S003/MotionCapture/StairAscent/TRC/Trial05/Step02.trc f68f9149 78212 180479 1418907507",
+     "S003/MotionCapture/StairDescent/TRC/Trial01/Step01.trc 2cfb284b 72347 168380 1418985850",
+     "S003/MotionCapture/StairDescent/TRC/Trial01/Step02.trc 60fb8fec 70135 160526 1419058329",
+     "S003/MotionCapture/StairDescent/TRC/Trial02/Step01.trc 16181fcd 77154 179284 1419128596",
+     "S003/MotionCapture/StairDescent/TRC/Trial02/Step02.trc 6212bae4 71763 164417 1419205882",
+     "S003/MotionCapture/StairDescent/TRC/Trial03/Step01.trc dca34a35 73284 169845 1419277777",
+     "S003/MotionCapture/StairDescent/TRC/Trial03/Step02.trc 9762d116 73859 168308 1419351193",
+     "S003/MotionCapture/StairDescent/TRC/Trial04/Step01.trc 4d433c24 78376 181676 1419425184",
+     "S003/MotionCapture/StairDescent/TRC/Trial04/Step02.trc 5440c3bc 71094 163120 1419503692",
+     "S003/MotionCapture/StairDescent/TRC/Trial05/Step01.trc 6be7566c 75194 173999 1419574918",
+     "S003/MotionCapture/StairDescent/TRC/Trial05/Step02.trc 5e6b8b22 68028 155338 1419650244",
+     "S003/MotionCapture/StandToSit/TRC/Trial01/Step01.trc 3099fe3e 147575 343352 1419718404",
+     "S003/MotionCapture/StandToSit/TRC/Trial02/Step01.trc cc351ac8 120939 286277 1419866109",
+     "S003/MotionCapture/StandToSit/TRC/Trial03/Step01.trc 85c8c748 115669 273315 1419987178",
+     "S003/MotionCapture/StandToSit/TRC/Trial04/Step01.trc 7913c299 103996 243487 1420102977",
+     "S003/MotionCapture/StandToSit/TRC/Trial05/Step01.trc 7cdc47f1 114268 269427 1420207103",
+     "S003/MotionCapture/Static/TRC/Trial01.trc a4197dce 214996 512058 1393472677",
+     "S004/EMG/RawData.mat f7f3a705 65470627 65451110 474081347",
+     "S004/JointAngle/LevelWalking/Trial01/step01.mot e8e0b2f8 21836 68885 1393687792",
+     "S004/JointAngle/LevelWalking/Trial01/step02.mot 21288e96 21795 68885 1393709753",
+     "S004/JointAngle/LevelWalking/Trial02/step01.mot 79583070 22427 70928 1393731673",
+     "S004/JointAngle/LevelWalking/Trial02/step02.mot e079e100 22171 70247 1393754225",
+     "S004/JointAngle/LevelWalking/Trial03/step01.mot c7b856b2 22219 70247 1393776521",
+     "S004/JointAngle/LevelWalking/Trial03/step02.mot 1adaebea 21807 68885 1393798865",
+     "S004/JointAngle/LevelWalking/Trial04/step01.mot 785c2f5f 21386 67522 1393820797",
+     "S004/JointAngle/LevelWalking/Trial04/step02.mot f4a4a59b 22231 70247 1393842308",
+     "S004/JointAngle/LevelWalking/Trial05/step01.mot c2e87b16 21971 69566 1393864664",
+     "S004/JointAngle/LevelWalking/Trial05/step02.mot 599486e2 22422 70928 1393886760",
+     "S004/JointAngle/SitToStand/Trial01/step01.mot 55728619 29267 94082 1393909307",
+     "S004/JointAngle/SitToStand/Trial02/step01.mot 77e0e02d 32373 104297 1393938697",
+     "S004/JointAngle/SitToStand/Trial03/step01.mot 31f0bf1e 30219 96806 1393971193",
+     "S004/JointAngle/SitToStand/Trial04/step01.mot 6d6a34fa 31402 100892 1394001535",
+     "S004/JointAngle/SitToStand/Trial05/step01.mot b94ea5de 32836 105659 1394033060",
+     "S004/JointAngle/SlopeAscent/Trial01/step01.mot 3bac6d3a 26715 85229 1394066019",
+     "S004/JointAngle/SlopeAscent/Trial01/step02.mot 048f51f9 27199 87272 1394092858",
+     "S004/JointAngle/SlopeAscent/Trial02/step01.mot 11eac46d 29441 94082 1394120181",
+     "S004/JointAngle/SlopeAscent/Trial02/step02.mot 657fe0a4 27602 87953 1394149746",
+     "S004/JointAngle/SlopeAscent/Trial03/step01.mot 5f7d2a50 27082 86591 1394177472",
+     "S004/JointAngle/SlopeAscent/Trial03/step02.mot 4fb31210 25595 81824 1394204678",
+     "S004/JointAngle/SlopeAscent/Trial04/step01.mot 6d9500ba 27213 86591 1394230397",
+     "S004/JointAngle/SlopeAscent/Trial04/step02.mot fd12dc10 25850 82505 1394257734",
+     "S004/JointAngle/SlopeAscent/Trial05/step01.mot 62eb83c1 27945 89315 1394283708",
+     "S004/JointAngle/SlopeAscent/Trial05/step02.mot 7f828240 25824 82505 1394311777",
+     "S004/JointAngle/SlopeDescent/Trial01/step01.mot 3f166d70 23792 75695 1394337725",
+     "S004/JointAngle/SlopeDescent/Trial01/step02.mot ddb4a146 25305 80462 1394361642",
+     "S004/JointAngle/SlopeDescent/Trial02/step01.mot 4e0910aa 25582 81824 1394387072",
+     "S004/JointAngle/SlopeDescent/Trial02/step02.mot 852776b3 25795 81824 1394412779",
+     "S004/JointAngle/SlopeDescent/Trial03/step01.mot b4ae3da8 24581 78419 1394438699",
+     "S004/JointAngle/SlopeDescent/Trial03/step02.mot 5e81e2b0 24230 77057 1394463405",
+     "S004/JointAngle/SlopeDescent/Trial04/step01.mot fbb4748b 24439 77738 1394487760",
+     "S004/JointAngle/SlopeDescent/Trial04/step02.mot 971491c9 25097 79781 1394512324",
+     "S004/JointAngle/SlopeDescent/Trial05/step01.mot 83148903 23919 76376 1394537546",
+     "S004/JointAngle/SlopeDescent/Trial05/step02.mot 02dce1ec 23673 75014 1394561590",
+     "S004/JointAngle/StairAscent/Trial01/step01.mot 27a6a493 25060 79781 1394585388",
+     "S004/JointAngle/StairAscent/Trial01/step02.mot 93e9b6bc 26260 83867 1394610572",
+     "S004/JointAngle/StairAscent/Trial02/step01.mot fc6c454d 25969 83186 1394636956",
+     "S004/JointAngle/StairAscent/Trial02/step02.mot e0d80289 25885 83186 1394663049",
+     "S004/JointAngle/StairAscent/Trial03/step01.mot 479a3ee5 25368 81143 1394689058",
+     "S004/JointAngle/StairAscent/Trial03/step02.mot d89cf6ff 25678 82505 1394714550",
+     "S004/JointAngle/StairAscent/Trial04/step01.mot 072cd421 25959 83186 1394740352",
+     "S004/JointAngle/StairAscent/Trial04/step02.mot b9729b63 26253 83867 1394766435",
+     "S004/JointAngle/StairAscent/Trial05/step01.mot ec2a815e 25539 81824 1394792812",
+     "S004/JointAngle/StairAscent/Trial05/step02.mot 51ac88d8 26319 84548 1394818475",
+     "S004/JointAngle/StairDescent/Trial01/step01.mot d73c34b7 25037 79781 1394844918",
+     "S004/JointAngle/StairDescent/Trial01/step02.mot 190fee36 23058 72971 1394870080",
+     "S004/JointAngle/StairDescent/Trial02/step01.mot 81083643 25870 82505 1394893263",
+     "S004/JointAngle/StairDescent/Trial02/step02.mot 29297ae0 24652 78419 1394919258",
+     "S004/JointAngle/StairDescent/Trial03/step01.mot 41932d1c 25007 79781 1394944035",
+     "S004/JointAngle/StairDescent/Trial03/step02.mot bd305af7 24200 77057 1394969167",
+     "S004/JointAngle/StairDescent/Trial04/step01.mot 9a8d22bf 25621 81824 1394993492",
+     "S004/JointAngle/StairDescent/Trial04/step02.mot 94a7d059 24659 78419 1395019238",
+     "S004/JointAngle/StairDescent/Trial05/step01.mot 7f72f709 25265 80462 1395044022",
+     "S004/JointAngle/StairDescent/Trial05/step02.mot 202b49d7 24006 76376 1395069412",
+     "S004/JointAngle/StandToSit/Trial01/step01.mot 1b17ecb8 45980 150605 1395093543",
+     "S004/JointAngle/StandToSit/Trial02/step01.mot d1aea5b8 38065 124046 1395139646",
+     "S004/JointAngle/StandToSit/Trial03/step01.mot 875b80cb 39465 128813 1395177834",
+     "S004/JointAngle/StandToSit/Trial04/step01.mot ef50b1bc 37349 122003 1395217422",
+     "S004/JointAngle/StandToSit/Trial05/step01.mot 4844e906 40466 132899 1395254894",
+     "S004/MotionCapture/LevelWalking/TRC/Trial01/Step01.trc 8f01cc8e 57474 130695 1420321501",
+     "S004/MotionCapture/LevelWalking/TRC/Trial01/Step02.trc 7889fda0 57960 132533 1420379107",
+     "S004/MotionCapture/LevelWalking/TRC/Trial02/Step01.trc 91a292b1 59164 134586 1420437199",
+     "S004/MotionCapture/LevelWalking/TRC/Trial02/Step02.trc c41e5380 58911 135045 1420496495",
+     "S004/MotionCapture/LevelWalking/TRC/Trial03/Step01.trc 58b964c8 58277 133289 1420555538",
+     "S004/MotionCapture/LevelWalking/TRC/Trial03/Step02.trc 68195285 57806 131908 1420613947",
+     "S004/MotionCapture/LevelWalking/TRC/Trial04/Step01.trc c7332679 56146 128099 1420671885",
+     "S004/MotionCapture/LevelWalking/TRC/Trial04/Step02.trc 2f2c350a 59101 135205 1420728163",
+     "S004/MotionCapture/LevelWalking/TRC/Trial05/Step01.trc 0c34c0b0 57279 131992 1420787396",
+     "S004/MotionCapture/LevelWalking/TRC/Trial05/Step02.trc 6950e3ae 59670 136181 1420844807",
+     "S004/MotionCapture/SitToStand/TRC/Trial01/Step01.trc f900f85f 76456 178641 1420904609",
+     "S004/MotionCapture/SitToStand/TRC/Trial02/Step01.trc 4ff33738 84023 198090 1420981195",
+     "S004/MotionCapture/SitToStand/TRC/Trial03/Step01.trc 2565f6aa 77936 183862 1421065348",
+     "S004/MotionCapture/SitToStand/TRC/Trial04/Step01.trc fb735db8 81913 191628 1421143414",
+     "S004/MotionCapture/SitToStand/TRC/Trial05/Step01.trc 13c32ce1 85724 200705 1421225457",
+     "S004/MotionCapture/SlopeAscent/TRC/Trial01/Step01.trc 7512d8da 71057 161822 1421311311",
+     "S004/MotionCapture/SlopeAscent/TRC/Trial01/Step02.trc af762d88 73526 167870 1421382499",
+     "S004/MotionCapture/SlopeAscent/TRC/Trial02/Step01.trc 39c1b7dc 78793 178683 1421456156",
+     "S004/MotionCapture/SlopeAscent/TRC/Trial02/Step02.trc c6f8455b 74756 169315 1421535080",
+     "S004/MotionCapture/SlopeAscent/TRC/Trial03/Step01.trc 4cc207c9 72401 164416 1421609967",
+     "S004/MotionCapture/SlopeAscent/TRC/Trial03/Step02.trc 1b640812 69380 157295 1421682499",
+     "S004/MotionCapture/SlopeAscent/TRC/Trial04/Step01.trc cfabce77 72893 164416 1421752010",
+     "S004/MotionCapture/SlopeAscent/TRC/Trial04/Step02.trc 03582e60 70307 158428 1421825034",
+     "S004/MotionCapture/SlopeAscent/TRC/Trial05/Step01.trc 4e07f34f 74385 169604 1421895472",
+     "S004/MotionCapture/SlopeAscent/TRC/Trial05/Step02.trc 43d2ad62 69484 158356 1421969988",
+     "S004/MotionCapture/SlopeDescent/TRC/Trial01/Step01.trc 0d5fc84d 63707 145048 1422039603",
+     "S004/MotionCapture/SlopeDescent/TRC/Trial01/Step02.trc c33b21fa 68157 152744 1422103442",
+     "S004/MotionCapture/SlopeDescent/TRC/Trial02/Step01.trc a4550676 69041 157352 1422171731",
+     "S004/MotionCapture/SlopeDescent/TRC/Trial02/Step02.trc 0e6ef4aa 68884 155338 1422240904",
+     "S004/MotionCapture/SlopeDescent/TRC/Trial03/Step01.trc 7a5d7096 66429 150131 1422309920",
+     "S004/MotionCapture/SlopeDescent/TRC/Trial03/Step02.trc 3e671e33 64951 146259 1422376481",
+     "S004/MotionCapture/SlopeDescent/TRC/Trial04/Step01.trc 0089b01e 65660 148814 1422441564",
+     "S004/MotionCapture/SlopeDescent/TRC/Trial04/Step02.trc dca93677 67192 151447 1422507356",
+     "S004/MotionCapture/SlopeDescent/TRC/Trial05/Step01.trc 97013617 64509 146169 1422574680",
+     "S004/MotionCapture/SlopeDescent/TRC/Trial05/Step02.trc f47e7ff4 62974 142368 1422639321",
+     "S004/MotionCapture/StairAscent/TRC/Trial01/Step01.trc 6eed99c6 66932 151446 1422702427",
+     "S004/MotionCapture/StairAscent/TRC/Trial01/Step02.trc 24c82da1 70952 160898 1422769490",
+     "S004/MotionCapture/StairAscent/TRC/Trial02/Step01.trc 90ae0944 69617 157931 1422840573",
+     "S004/MotionCapture/StairAscent/TRC/Trial02/Step02.trc 289b19ee 69708 159675 1422910321",
+     "S004/MotionCapture/StairAscent/TRC/Trial03/Step01.trc 6bb3a60f 68538 154040 1422980160",
+     "S004/MotionCapture/StairAscent/TRC/Trial03/Step02.trc 33bee829 69425 158294 1423048829",
+     "S004/MotionCapture/StairAscent/TRC/Trial04/Step01.trc e2347a1b 69462 157931 1423118385",
+     "S004/MotionCapture/StairAscent/TRC/Trial04/Step02.trc 81e5ec5a 70600 160841 1423187978",
+     "S004/MotionCapture/StairAscent/TRC/Trial05/Step01.trc 0a367e22 68633 155337 1423258709",
+     "S004/MotionCapture/StairAscent/TRC/Trial05/Step02.trc 1d2a5577 70956 162212 1423327473",
+     "S004/MotionCapture/StairDescent/TRC/Trial01/Step01.trc 0294e873 67198 153102 1423398560",
+     "S004/MotionCapture/StairDescent/TRC/Trial01/Step02.trc a0aa4764 60971 138477 1423465890",
+     "S004/MotionCapture/StairDescent/TRC/Trial02/Step01.trc 4339c75a 69216 158158 1423526993",
+     "S004/MotionCapture/StairDescent/TRC/Trial02/Step02.trc b1272d98 65275 148853 1423596341",
+     "S004/MotionCapture/StairDescent/TRC/Trial03/Step01.trc 613527d4 66969 152727 1423661748",
+     "S004/MotionCapture/StairDescent/TRC/Trial03/Step02.trc 1a33f4fe 64567 146259 1423728849",
+     "S004/MotionCapture/StairDescent/TRC/Trial04/Step01.trc fe16564a 68382 156699 1423793548",
+     "S004/MotionCapture/StairDescent/TRC/Trial04/Step02.trc f843c5bb 65415 148853 1423862062",
+     "S004/MotionCapture/StairDescent/TRC/Trial05/Step01.trc 81df436c 67028 154347 1423927609",
+     "S004/MotionCapture/StairDescent/TRC/Trial05/Step02.trc c46d91fc 63796 144962 1423994769",
+     "S004/MotionCapture/StandToSit/TRC/Trial01/Step01.trc 85c10272 121881 286235 1424058697",
+     "S004/MotionCapture/StandToSit/TRC/Trial02/Step01.trc f845836b 99774 235723 1424180708",
+     "S004/MotionCapture/StandToSit/TRC/Trial03/Step01.trc 920b1528 103844 244811 1424280612",
+     "S004/MotionCapture/StandToSit/TRC/Trial04/Step01.trc d767ef93 98399 231859 1424384586",
+     "S004/MotionCapture/StandToSit/TRC/Trial05/Step01.trc 1c905288 107376 252611 1424483115",
+     "S004/MotionCapture/Static/TRC/Trial01.trc 492358f4 231542 540749 1395295483",
+     "S005/EMG/RawData.mat a4e6cd48 69616299 69595193 608610190",
+     "S005/JointAngle/LevelWalking/Trial01/step01.mot 031f1aa8 22903 72971 1395527144",
+     "S005/JointAngle/LevelWalking/Trial01/step02.mot ba0152c8 21951 69566 1395550172",
+     "S005/JointAngle/LevelWalking/Trial02/step01.mot 651ea40d 22274 70928 1395572248",
+     "S005/JointAngle/LevelWalking/Trial02/step02.mot eac25fe9 22333 70928 1395594647",
+     "S005/JointAngle/LevelWalking/Trial03/step01.mot 071aafed 22559 71609 1395617105",
+     "S005/JointAngle/LevelWalking/Trial03/step02.mot ecc97bf8 22556 71609 1395639789",
+     "S005/JointAngle/LevelWalking/Trial04/step01.mot dc444de8 21863 69566 1395662470",
+     "S005/JointAngle/LevelWalking/Trial04/step02.mot 6e6236d3 22087 70247 1395684458",
+     "S005/JointAngle/LevelWalking/Trial05/step01.mot 7d074cfc 21702 68885 1395706670",
+     "S005/JointAngle/LevelWalking/Trial05/step02.mot 231d8951 22969 72971 1395728497",
+     "S005/JointAngle/SitToStand/Trial01/step01.mot cc533ba9 29791 96125 1395751591",
+     "S005/JointAngle/SitToStand/Trial02/step01.mot 90536b0f 30533 98168 1395781505",
+     "S005/JointAngle/SitToStand/Trial03/step01.mot 6d69510c 31215 100892 1395812161",
+     "S005/JointAngle/SitToStand/Trial04/step01.mot 24668ade 30619 98849 1395843499",
+     "S005/JointAngle/SitToStand/Trial05/step01.mot b506fdab 30148 96806 1395874241",
+     "S005/JointAngle/SlopeAscent/Trial01/step01.mot 715d6411 28683 91358 1395904512",
+     "S005/JointAngle/SlopeAscent/Trial01/step02.mot ec59babf 28846 91358 1395933319",
+     "S005/JointAngle/SlopeAscent/Trial02/step01.mot 87274b6b 29178 93401 1395962289",
+     "S005/JointAngle/SlopeAscent/Trial02/step02.mot 9e85adb5 26759 85229 1395991591",
+     "S005/JointAngle/SlopeAscent/Trial03/step01.mot a71cdeff 27306 87272 1396018474",
+     "S005/JointAngle/SlopeAscent/Trial03/step02.mot 924a2c34 26167 83186 1396045904",
+     "S005/JointAngle/SlopeAscent/Trial04/step01.mot 6121d91c 27719 88634 1396072195",
+     "S005/JointAngle/SlopeAscent/Trial04/step02.mot f34b0914 25572 81143 1396100038",
+     "S005/JointAngle/SlopeAscent/Trial05/step01.mot 77b1a49f 26281 83867 1396125734",
+     "S005/JointAngle/SlopeAscent/Trial05/step02.mot d6978020 26037 82505 1396152139",
+     "S005/JointAngle/SlopeDescent/Trial01/step01.mot 79d727e1 24804 79100 1396178300",
+     "S005/JointAngle/SlopeDescent/Trial01/step02.mot fdfa1477 23931 76376 1396203229",
+     "S005/JointAngle/SlopeDescent/Trial02/step01.mot 9736a596 24545 78419 1396227285",
+     "S005/JointAngle/SlopeDescent/Trial02/step02.mot 33e59b5a 21948 69566 1396251955",
+     "S005/JointAngle/SlopeDescent/Trial03/step01.mot ef471464 25214 80462 1396274028",
+     "S005/JointAngle/SlopeDescent/Trial03/step02.mot bf872d53 22817 72290 1396299367",
+     "S005/JointAngle/SlopeDescent/Trial04/step01.mot 09685c85 24353 77738 1396322309",
+     "S005/JointAngle/SlopeDescent/Trial04/step02.mot 60d3b793 22895 72971 1396346787",
+     "S005/JointAngle/SlopeDescent/Trial05/step01.mot 3df49e32 25356 81143 1396369807",
+     "S005/JointAngle/SlopeDescent/Trial05/step02.mot 6ebad18f 22314 70928 1396395288",
+     "S005/JointAngle/StairAscent/Trial01/step01.mot c730b6df 29902 95444 1396417727",
+     "S005/JointAngle/StairAscent/Trial01/step02.mot 7c625586 28772 91358 1396447753",
+     "S005/JointAngle/StairAscent/Trial02/step01.mot c6cce48d 29417 93401 1396476649",
+     "S005/JointAngle/StairAscent/Trial02/step02.mot d84c07ef 28556 90677 1396506190",
+     "S005/JointAngle/StairAscent/Trial03/step01.mot 868902da 29964 95444 1396534870",
+     "S005/JointAngle/StairAscent/Trial03/step02.mot 3778b177 27303 86591 1396564958",
+     "S005/JointAngle/StairAscent/Trial04/step01.mot c9ef0192 28561 90677 1396592385",
+     "S005/JointAngle/StairAscent/Trial04/step02.mot eec18309 28577 90677 1396621070",
+     "S005/JointAngle/StairAscent/Trial05/step01.mot cbcd881d 29679 94763 1396649771",
+     "S005/JointAngle/StairAscent/Trial05/step02.mot a7e43f21 27473 87272 1396679574",
+     "S005/JointAngle/StairDescent/Trial01/step01.mot 0ff5e7ab 26527 83867 1396707171",
+     "S005/JointAngle/StairDescent/Trial01/step02.mot 0a871483 23649 74333 1396733823",
+     "S005/JointAngle/StairDescent/Trial02/step01.mot 0a85cf54 28237 89315 1396757597",
+     "S005/JointAngle/StairDescent/Trial02/step02.mot 9a3aab58 26255 83186 1396785959",
+     "S005/JointAngle/StairDescent/Trial03/step01.mot 4b279cdf 28033 88634 1396812339",
+     "S005/JointAngle/StairDescent/Trial03/step02.mot fcb0a23f 25024 79100 1396840497",
+     "S005/JointAngle/StairDescent/Trial04/step01.mot a8d0adcc 27573 87272 1396865646",
+     "S005/JointAngle/StairDescent/Trial04/step02.mot 33704ead 24855 78419 1396893344",
+     "S005/JointAngle/StairDescent/Trial05/step01.mot 5c76bc0e 26738 84548 1396918324",
+     "S005/JointAngle/StairDescent/Trial05/step02.mot f7213f4a 24897 78419 1396945187",
+     "S005/JointAngle/StandToSit/Trial01/step01.mot 041e69b8 46408 151967 1396970209",
+     "S005/JointAngle/StandToSit/Trial02/step01.mot 74790b1f 42460 139028 1397016740",
+     "S005/JointAngle/StandToSit/Trial03/step01.mot bbb18a47 44979 147200 1397059323",
+     "S005/JointAngle/StandToSit/Trial04/step01.mot 2ae8d139 42864 139709 1397104425",
+     "S005/JointAngle/StandToSit/Trial05/step01.mot 9538431f 40828 132899 1397147412",
+     "S005/MotionCapture/LevelWalking/TRC/Trial01/Step01.trc 4d219013 60959 138477 1424590621",
+     "S005/MotionCapture/LevelWalking/TRC/Trial01/Step02.trc 838c8571 59295 132347 1424651712",
+     "S005/MotionCapture/LevelWalking/TRC/Trial02/Step01.trc bbcb3713 59510 134586 1424711139",
+     "S005/MotionCapture/LevelWalking/TRC/Trial02/Step02.trc 2d2260ca 59948 134803 1424770781",
+     "S005/MotionCapture/LevelWalking/TRC/Trial03/Step01.trc 3044048e 60145 135883 1424830861",
+     "S005/MotionCapture/LevelWalking/TRC/Trial03/Step02.trc 51cad9c3 60485 136048 1424891138",
+     "S005/MotionCapture/LevelWalking/TRC/Trial04/Step01.trc b80b8798 58230 131992 1424951755",
+     "S005/MotionCapture/LevelWalking/TRC/Trial04/Step02.trc 02564063 59652 133462 1425010117",
+     "S005/MotionCapture/LevelWalking/TRC/Trial05/Step01.trc c1aa8cc2 57721 130695 1425069901",
+     "S005/MotionCapture/LevelWalking/TRC/Trial05/Step02.trc 28945c5c 61903 138741 1425127754",
+     "S005/MotionCapture/SitToStand/TRC/Trial01/Step01.trc 65cd2b5d 78444 182537 1425189789",
+     "S005/MotionCapture/SitToStand/TRC/Trial02/Step01.trc 715917b7 80546 186424 1425268363",
+     "S005/MotionCapture/SitToStand/TRC/Trial03/Step01.trc d734d75b 81237 191617 1425349039",
+     "S005/MotionCapture/SitToStand/TRC/Trial04/Step01.trc 6095ddb3 81079 187735 1425430406",
+     "S005/MotionCapture/SitToStand/TRC/Trial05/Step01.trc 0913b724 79332 183870 1425511615",
+     "S005/MotionCapture/SlopeAscent/TRC/Trial01/Step01.trc 06fb9b12 76685 173495 1425591077",
+     "S005/MotionCapture/SlopeAscent/TRC/Trial01/Step02.trc c2da3a0f 77160 173926 1425667893",
+     "S005/MotionCapture/SlopeAscent/TRC/Trial02/Step01.trc 0f6fd8bc 78007 177386 1425745184",
+     "S005/MotionCapture/SlopeAscent/TRC/Trial02/Step02.trc 6007abbe 72309 162223 1425823322",
+     "S005/MotionCapture/SlopeAscent/TRC/Trial03/Step01.trc 4aca44d9 73006 165713 1425895762",
+     "S005/MotionCapture/SlopeAscent/TRC/Trial03/Step02.trc d3e810b4 70134 158084 1425968899",
+     "S005/MotionCapture/SlopeAscent/TRC/Trial04/Step01.trc 57e68b75 74308 168307 1426039164",
+     "S005/MotionCapture/SlopeAscent/TRC/Trial04/Step02.trc 84c6798e 68645 154176 1426113603",
+     "S005/MotionCapture/SlopeAscent/TRC/Trial05/Step01.trc 7715969c 70334 159228 1426182379",
+     "S005/MotionCapture/SlopeAscent/TRC/Trial05/Step02.trc 87e6f620 70239 156893 1426252844",
+     "S005/MotionCapture/SlopeDescent/TRC/Trial01/Step01.trc cca2e918 67006 152335 1426323214",
+     "S005/MotionCapture/SlopeDescent/TRC/Trial01/Step02.trc f4bed26b 64737 144962 1426390352",
+     "S005/MotionCapture/SlopeDescent/TRC/Trial02/Step01.trc 8ed88241 66737 150788 1426455221",
+     "S005/MotionCapture/SlopeDescent/TRC/Trial02/Step02.trc dbffde89 58929 131992 1426522090",
+     "S005/MotionCapture/SlopeDescent/TRC/Trial03/Step01.trc 80550908 67985 154981 1426581151",
+     "S005/MotionCapture/SlopeDescent/TRC/Trial03/Step02.trc dbb794fb 61081 137180 1426649268",
+     "S005/MotionCapture/SlopeDescent/TRC/Trial04/Step01.trc 5fcddd5b 65844 149894 1426710481",
+     "S005/MotionCapture/SlopeDescent/TRC/Trial04/Step02.trc 9f970cb5 61858 138477 1426776457",
+     "S005/MotionCapture/SlopeDescent/TRC/Trial05/Step01.trc 2588610f 68557 156402 1426838447",
+     "S005/MotionCapture/SlopeDescent/TRC/Trial05/Step02.trc 081cf10b 60117 134586 1426907136",
+     "S005/MotionCapture/StairAscent/TRC/Trial01/Step01.trc 5abbf86c 80428 181277 1426967385",
+     "S005/MotionCapture/StairAscent/TRC/Trial01/Step02.trc 5b60cbbe 77511 175449 1427047944",
+     "S005/MotionCapture/StairAscent/TRC/Trial02/Step01.trc a20453c6 78899 177386 1427125586",
+     "S005/MotionCapture/StairAscent/TRC/Trial02/Step02.trc 0a6de402 76238 174254 1427204616",
+     "S005/MotionCapture/StairAscent/TRC/Trial03/Step01.trc 2ca728ae 80446 181277 1427280985",
+     "S005/MotionCapture/StairAscent/TRC/Trial03/Step02.trc 51e44801 73622 166574 1427361562",
+     "S005/MotionCapture/StairAscent/TRC/Trial04/Step01.trc 05feb09e 76499 172198 1427435315",
+     "S005/MotionCapture/StairAscent/TRC/Trial04/Step02.trc 5e67d082 76998 174407 1427511945",
+     "S005/MotionCapture/StairAscent/TRC/Trial05/Step01.trc 0ebc9458 80027 179980 1427589074",
+     "S005/MotionCapture/StairAscent/TRC/Trial05/Step02.trc f12cbe19 73906 167746 1427669232",
+     "S005/MotionCapture/StairDescent/TRC/Trial01/Step01.trc 8c304857 70998 160605 1427743269",
+     "S005/MotionCapture/StairDescent/TRC/Trial01/Step02.trc c2724216 62627 141071 1427814399",
+     "S005/MotionCapture/StairDescent/TRC/Trial02/Step01.trc 9eaecd43 75825 171259 1427877158",
+     "S005/MotionCapture/StairDescent/TRC/Trial02/Step02.trc d0c94add 69723 157932 1427953115",
+     "S005/MotionCapture/StairDescent/TRC/Trial03/Step01.trc 8e0a6642 74946 170168 1428022970",
+     "S005/MotionCapture/StairDescent/TRC/Trial03/Step02.trc 5d018d32 66431 150150 1428098048",
+     "S005/MotionCapture/StairDescent/TRC/Trial04/Step01.trc ae7a4d8d 73671 167480 1428164611",
+     "S005/MotionCapture/StairDescent/TRC/Trial04/Step02.trc 1f56ea80 66043 148853 1428238414",
+     "S005/MotionCapture/StairDescent/TRC/Trial05/Step01.trc b630c5e2 71673 162183 1428304589",
+     "S005/MotionCapture/StairDescent/TRC/Trial05/Step02.trc 2db10a8c 65881 148853 1428376394",
+     "S005/MotionCapture/StandToSit/TRC/Trial01/Step01.trc c794f870 124047 288887 1428442407",
+     "S005/MotionCapture/StandToSit/TRC/Trial02/Step01.trc 7999a805 113182 264253 1428566584",
+     "S005/MotionCapture/StandToSit/TRC/Trial03/Step01.trc 505cf092 119717 279823 1428679896",
+     "S005/MotionCapture/StandToSit/TRC/Trial04/Step01.trc 00938407 114659 265558 1428799743",
+     "S005/MotionCapture/StandToSit/TRC/Trial05/Step01.trc 7b8430f5 108195 252587 1428914532",
+     "S005/MotionCapture/Static/TRC/Trial01.trc 2a95cade 233113 563170 1397188363",
+     "S006/EMG/RawData.mat ce18daeb 77644645 77621090 750084353",
+     "S006/JointAngle/LevelWalking/Trial01/step01.mot 55949741 21627 68203 1397421595",
+     "S006/JointAngle/LevelWalking/Trial02/step01.mot 077f4793 21392 67522 1397443347",
+     "S006/JointAngle/LevelWalking/Trial03/step01.mot 338abfc1 22073 69566 1397464864",
+     "S006/JointAngle/LevelWalking/Trial03/step02.mot 780fde59 22499 70928 1397487062",
+     "S006/JointAngle/LevelWalking/Trial04/step01.mot e53ff703 21406 67522 1397509686",
+     "S006/JointAngle/LevelWalking/Trial05/step01.mot 46aad4c7 21451 67522 1397531217",
+     "S006/JointAngle/SitToStand/Trial01/step01.mot da6717d8 31939 102935 1397552793",
+     "S006/JointAngle/SitToStand/Trial02/step01.mot 38d1030a 35157 114512 1397584855",
+     "S006/JointAngle/SitToStand/Trial03/step01.mot a45f8df2 35176 114512 1397620135",
+     "S006/JointAngle/SitToStand/Trial04/step01.mot 4194fea2 35099 114512 1397655434",
+     "S006/JointAngle/SitToStand/Trial05/step01.mot d72ce213 33729 109745 1397690656",
+     "S006/JointAngle/SlopeAscent/Trial01/step01.mot f534c2f3 30001 96125 1397724508",
+     "S006/JointAngle/SlopeAscent/Trial01/step02.mot 3bc92a78 26076 83186 1397754633",
+     "S006/JointAngle/SlopeAscent/Trial02/step01.mot 14e25c98 33670 109064 1397780833",
+     "S006/JointAngle/SlopeAscent/Trial02/step02.mot abb0db7a 32624 104978 1397814627",
+     "S006/JointAngle/SlopeAscent/Trial03/step01.mot 9fa97c90 31569 101573 1397847375",
+     "S006/JointAngle/SlopeAscent/Trial03/step02.mot fe89268d 29019 92720 1397879068",
+     "S006/JointAngle/SlopeAscent/Trial04/step01.mot 54759daa 32006 102935 1397908211",
+     "S006/JointAngle/SlopeAscent/Trial04/step02.mot f4aa41c9 29300 93401 1397940341",
+     "S006/JointAngle/SlopeAscent/Trial05/step01.mot 4e6dca78 29230 93401 1397969765",
+     "S006/JointAngle/SlopeAscent/Trial05/step02.mot 2e034227 30984 98849 1397999119",
+     "S006/JointAngle/SlopeDescent/Trial01/step01.mot e76b3477 27188 87272 1398030227",
+     "S006/JointAngle/SlopeDescent/Trial01/step02.mot 737bc406 24828 79100 1398057540",
+     "S006/JointAngle/SlopeDescent/Trial02/step01.mot 57a7d68c 26983 86591 1398082493",
+     "S006/JointAngle/SlopeDescent/Trial02/step02.mot 84cd04e1 23966 76376 1398109601",
+     "S006/JointAngle/SlopeDescent/Trial03/step01.mot 15353344 25944 83186 1398133692",
+     "S006/JointAngle/SlopeDescent/Trial03/step02.mot 388136d9 26237 83867 1398159761",
+     "S006/JointAngle/SlopeDescent/Trial04/step01.mot 1aa13cbe 28683 92039 1398186123",
+     "S006/JointAngle/SlopeDescent/Trial04/step02.mot a0dea5c7 25807 82505 1398214931",
+     "S006/JointAngle/SlopeDescent/Trial05/step01.mot 5569ee16 24575 78419 1398240863",
+     "S006/JointAngle/SlopeDescent/Trial05/step02.mot 3b3fcb75 23393 74333 1398265563",
+     "S006/JointAngle/StairAscent/Trial01/step01.mot 833e90b1 29928 95444 1398289081",
+     "S006/JointAngle/StairAscent/Trial01/step02.mot d4922d7a 29721 94763 1398319133",
+     "S006/JointAngle/StairAscent/Trial02/step01.mot 5c4eb7c5 30897 98849 1398348978",
+     "S006/JointAngle/StairAscent/Trial02/step02.mot ef03eda9 32792 104978 1398379999",
+     "S006/JointAngle/StairAscent/Trial03/step01.mot 3a30cc79 33938 109064 1398412915",
+     "S006/JointAngle/StairAscent/Trial03/step02.mot 76a7553e 33538 107702 1398446977",
+     "S006/JointAngle/StairAscent/Trial04/step01.mot 8473c970 32846 104978 1398480639",
+     "S006/JointAngle/StairAscent/Trial04/step02.mot 5d1346c8 32307 102935 1398513609",
+     "S006/JointAngle/StairAscent/Trial05/step01.mot 3cfc8028 35337 113831 1398546040",
+     "S006/JointAngle/StairAscent/Trial05/step02.mot e38f6671 32789 105659 1398581501",
+     "S006/JointAngle/StairDescent/Trial01/step01.mot d6a17491 29593 94082 1398614414",
+     "S006/JointAngle/StairDescent/Trial01/step02.mot 7eacbf5c 27922 88634 1398644132",
+     "S006/JointAngle/StairDescent/Trial02/step01.mot 35a456ae 34783 111107 1398672179",
+     "S006/JointAngle/StairDescent/Trial02/step02.mot d05b894a 27506 87272 1398707087",
+     "S006/JointAngle/StairDescent/Trial03/step01.mot 19d247bb 31792 100892 1398734718",
+     "S006/JointAngle/StairDescent/Trial03/step02.mot 550b94f7 28457 89996 1398766635",
+     "S006/JointAngle/StairDescent/Trial04/step01.mot 59bb3e5f 31654 100892 1398795217",
+     "S006/JointAngle/StairDescent/Trial04/step02.mot 75ef8cc7 28055 88634 1398826996",
+     "S006/JointAngle/StairDescent/Trial05/step01.mot eac526bd 34166 109745 1398855176",
+     "S006/JointAngle/StairDescent/Trial05/step02.mot 9a6fca69 31244 100211 1398889467",
+     "S006/JointAngle/StandToSit/Trial01/step01.mot 87e7990a 59054 194189 1398920836",
+     "S006/JointAngle/StandToSit/Trial02/step01.mot 85f6de0a 54657 180569 1398980013",
+     "S006/JointAngle/StandToSit/Trial03/step01.mot 4ce6e7bb 46600 153329 1399034793",
+     "S006/JointAngle/StandToSit/Trial04/step01.mot 57b37737 51140 168992 1399081516",
+     "S006/JointAngle/StandToSit/Trial05/step01.mot d8aaa575 47688 155372 1399132779",
+     "S006/MotionCapture/LevelWalking/TRC/Trial01/Step01.trc 48af9b4d 57711 130103 1429022857",
+     "S006/MotionCapture/LevelWalking/TRC/Trial02/Step01.trc 3405878f 56806 128748 1429080700",
+     "S006/MotionCapture/LevelWalking/TRC/Trial03/Step01.trc 6277673d 58020 131992 1429137638",
+     "S006/MotionCapture/LevelWalking/TRC/Trial03/Step02.trc 20744e8b 59955 136102 1429195790",
+     "S006/MotionCapture/LevelWalking/TRC/Trial04/Step01.trc 4427fd75 56913 128539 1429255877",
+     "S006/MotionCapture/LevelWalking/TRC/Trial05/Step01.trc 99d5dd66 57008 129143 1429312922",
+     "S006/MotionCapture/SitToStand/TRC/Trial01/Step01.trc 8bbf61df 82742 195514 1429370062",
+     "S006/MotionCapture/SitToStand/TRC/Trial02/Step01.trc 0b4d8000 93407 217563 1429452934",
+     "S006/MotionCapture/SitToStand/TRC/Trial03/Step01.trc feedc8cb 93163 217592 1429546471",
+     "S006/MotionCapture/SitToStand/TRC/Trial04/Step01.trc fad6f808 93170 217570 1429639764",
+     "S006/MotionCapture/SitToStand/TRC/Trial05/Step01.trc ef50302a 89275 208485 1429733064",
+     "S006/MotionCapture/SlopeAscent/TRC/Trial01/Step01.trc b1f822b8 80336 182574 1429822469",
+     "S006/MotionCapture/SlopeAscent/TRC/Trial01/Step02.trc cd0485fe 70144 158150 1429902936",
+     "S006/MotionCapture/SlopeAscent/TRC/Trial02/Step01.trc 0cde12e6 91291 207217 1429973211",
+     "S006/MotionCapture/SlopeAscent/TRC/Trial02/Step02.trc 35bad8ec 88864 199896 1430064633",
+     "S006/MotionCapture/SlopeAscent/TRC/Trial03/Step01.trc 08431571 85175 192950 1430153628",
+     "S006/MotionCapture/SlopeAscent/TRC/Trial03/Step02.trc 7baedc42 78161 176207 1430238934",
+     "S006/MotionCapture/SlopeAscent/TRC/Trial04/Step01.trc 0f7fe2c5 86014 195544 1430317226",
+     "S006/MotionCapture/SlopeAscent/TRC/Trial04/Step02.trc cb33fdf3 78858 177674 1430403371",
+     "S006/MotionCapture/SlopeAscent/TRC/Trial05/Step01.trc ef00b233 78323 177386 1430482360",
+     "S006/MotionCapture/SlopeAscent/TRC/Trial05/Step02.trc 51f3cb01 83953 188710 1430560814",
+     "S006/MotionCapture/SlopeDescent/TRC/Trial01/Step01.trc 511fc182 73699 168473 1430644898",
+     "S006/MotionCapture/SlopeDescent/TRC/Trial01/Step02.trc 2c69c107 67152 150150 1430718729",
+     "S006/MotionCapture/SlopeDescent/TRC/Trial02/Step01.trc 0df6a47b 72375 166722 1430786013",
+     "S006/MotionCapture/SlopeDescent/TRC/Trial02/Step02.trc 4e81fd57 64971 144962 1430858520",
+     "S006/MotionCapture/SlopeDescent/TRC/Trial03/Step01.trc 8e1f862f 71000 158138 1430923623",
+     "S006/MotionCapture/SlopeDescent/TRC/Trial03/Step02.trc fd4ea7b7 71589 159229 1430994755",
+     "S006/MotionCapture/SlopeDescent/TRC/Trial04/Step01.trc 4584368b 77505 177376 1431066476",
+     "S006/MotionCapture/SlopeDescent/TRC/Trial04/Step02.trc 56da294b 69854 156635 1431144113",
+     "S006/MotionCapture/SlopeDescent/TRC/Trial05/Step01.trc 6faf1a23 66116 150830 1431214099",
+     "S006/MotionCapture/SlopeDescent/TRC/Trial05/Step02.trc ea453c10 63172 141071 1431280347",
+     "S006/MotionCapture/StairAscent/TRC/Trial01/Step01.trc 1cc29736 80159 181277 1431343651",
+     "S006/MotionCapture/StairAscent/TRC/Trial01/Step02.trc 9afd2e7a 79783 181725 1431423941",
+     "S006/MotionCapture/StairAscent/TRC/Trial02/Step01.trc 1b34816a 83169 187762 1431503855",
+     "S006/MotionCapture/StairAscent/TRC/Trial02/Step02.trc 018202db 88229 201829 1431587155",
+     "S006/MotionCapture/StairAscent/TRC/Trial03/Step01.trc d0a32838 91835 207217 1431675515",
+     "S006/MotionCapture/StairAscent/TRC/Trial03/Step02.trc ab655e1a 91330 206643 1431767481",
+     "S006/MotionCapture/StairAscent/TRC/Trial04/Step01.trc c122db8f 88438 199435 1431858942",
+     "S006/MotionCapture/StairAscent/TRC/Trial04/Step02.trc 28aac0ec 86583 197684 1431947511",
+     "S006/MotionCapture/StairAscent/TRC/Trial05/Step01.trc 725e3324 95492 216296 1432034225",
+     "S006/MotionCapture/StairAscent/TRC/Trial05/Step02.trc c5a3a11b 89332 202703 1432129848",
+     "S006/MotionCapture/StairDescent/TRC/Trial01/Step01.trc 72c9a0c3 79388 180645 1432219311",
+     "S006/MotionCapture/StairDescent/TRC/Trial01/Step02.trc 5d237d72 74319 168308 1432298831",
+     "S006/MotionCapture/StairDescent/TRC/Trial02/Step01.trc 4121975a 94069 213910 1432373282",
+     "S006/MotionCapture/StairDescent/TRC/Trial02/Step02.trc 9c373a5b 73052 165714 1432467483",
+     "S006/MotionCapture/StairDescent/TRC/Trial03/Step01.trc 8d070287 85370 194092 1432540667",
+     "S006/MotionCapture/StairDescent/TRC/Trial03/Step02.trc be18daaa 75535 170902 1432626169",
+     "S006/MotionCapture/StairDescent/TRC/Trial04/Step01.trc 9d64c0d6 85385 194010 1432701836",
+     "S006/MotionCapture/StairDescent/TRC/Trial04/Step02.trc 9e4e4767 74624 168308 1432787353",
+     "S006/MotionCapture/StairDescent/TRC/Trial05/Step01.trc d54a01e8 92571 211313 1432862109",
+     "S006/MotionCapture/StairDescent/TRC/Trial05/Step02.trc 552a6c6b 84323 190357 1432954812",
+     "S006/MotionCapture/StandToSit/TRC/Trial01/Step01.trc 7c6b45be 156823 369336 1433039267",
+     "S006/MotionCapture/StandToSit/TRC/Trial02/Step01.trc 646a3e61 145502 343383 1433196220",
+     "S006/MotionCapture/StandToSit/TRC/Trial03/Step01.trc 885a4028 122799 291494 1433341852",
+     "S006/MotionCapture/StandToSit/TRC/Trial04/Step01.trc 64b1c378 135785 321320 1433464781",
+     "S006/MotionCapture/StandToSit/TRC/Trial05/Step01.trc 22d828a5 125478 295386 1433600696",
+     "S006/MotionCapture/Static/TRC/Trial01.trc 1dde3c7c 219241 514478 1399180590",
+     "S007/EMG/RawData.mat 9c0a59b1 74050458 74029308 900525738",
+     "S007/JointAngle/LevelWalking/Trial01/step01.mot 6c4f7071 22924 72971 1399399950",
+     "S007/JointAngle/LevelWalking/Trial01/step02.mot d953a8ac 22695 72290 1399422999",
+     "S007/JointAngle/LevelWalking/Trial02/step01.mot f3bf064a 22665 72290 1399445819",
+     "S007/JointAngle/LevelWalking/Trial02/step02.mot 7822dc1d 23130 73652 1399468609",
+     "S007/JointAngle/LevelWalking/Trial03/step01.mot d49fa34f 22926 72971 1399491864",
+     "S007/JointAngle/LevelWalking/Trial03/step02.mot 2944520d 22443 71609 1399514915",
+     "S007/JointAngle/LevelWalking/Trial04/step01.mot 2d5bfeff 22485 71609 1399537483",
+     "S007/JointAngle/LevelWalking/Trial04/step02.mot ccd47714 22142 70247 1399560093",
+     "S007/JointAngle/LevelWalking/Trial05/step01.mot d20413e5 22295 70928 1399582360",
+     "S007/JointAngle/LevelWalking/Trial05/step02.mot dc365481 22247 70928 1399604780",
+     "S007/JointAngle/SitToStand/Trial01/step01.mot 5289909b 32908 106340 1399627152",
+     "S007/JointAngle/SitToStand/Trial02/step01.mot 95bd3f84 36347 117917 1399660183",
+     "S007/JointAngle/SitToStand/Trial03/step01.mot 7f04f1f6 32026 103616 1399696653",
+     "S007/JointAngle/SitToStand/Trial04/step01.mot 175f2b2f 32005 103616 1399728802",
+     "S007/JointAngle/SitToStand/Trial05/step01.mot cd09f71e 28584 92039 1399760930",
+     "S007/JointAngle/SlopeAscent/Trial01/step01.mot ea9cafc0 27269 87953 1399789637",
+     "S007/JointAngle/SlopeAscent/Trial01/step02.mot 9946b592 29451 94763 1399817030",
+     "S007/JointAngle/SlopeAscent/Trial02/step01.mot d092f637 28792 92720 1399846605",
+     "S007/JointAngle/SlopeAscent/Trial02/step02.mot fa2fcb5b 28229 90677 1399875521",
+     "S007/JointAngle/SlopeAscent/Trial03/step01.mot d9ab47a5 29135 94082 1399903874",
+     "S007/JointAngle/SlopeAscent/Trial03/step02.mot aad8e84e 29314 94082 1399933133",
+     "S007/JointAngle/SlopeAscent/Trial04/step01.mot 34d336d8 29192 94082 1399962571",
+     "S007/JointAngle/SlopeAscent/Trial04/step02.mot f7377262 28657 92039 1399991887",
+     "S007/JointAngle/SlopeAscent/Trial05/step01.mot 86fd052d 28053 89996 1400020668",
+     "S007/JointAngle/SlopeAscent/Trial05/step02.mot 82825b12 27781 89315 1400048845",
+     "S007/JointAngle/SlopeDescent/Trial01/step01.mot 981f016f 28783 92039 1400076750",
+     "S007/JointAngle/SlopeDescent/Trial01/step02.mot d31ad946 26296 83867 1400105658",
+     "S007/JointAngle/SlopeDescent/Trial02/step01.mot 653401f3 31329 100211 1400132079",
+     "S007/JointAngle/SlopeDescent/Trial02/step02.mot f1aed53f 30233 96806 1400163533",
+     "S007/JointAngle/SlopeDescent/Trial03/step01.mot c30de06b 28091 89996 1400193891",
+     "S007/JointAngle/SlopeDescent/Trial03/step02.mot 20d41ba0 25953 82505 1400222107",
+     "S007/JointAngle/SlopeDescent/Trial04/step01.mot edc11f67 27678 88634 1400248185",
+     "S007/JointAngle/SlopeDescent/Trial04/step02.mot f36750d3 25625 81824 1400275988",
+     "S007/JointAngle/SlopeDescent/Trial05/step01.mot a6b658ad 28053 89996 1400301738",
+     "S007/JointAngle/SlopeDescent/Trial05/step02.mot ff26d5b9 25840 82505 1400329916",
+     "S007/JointAngle/StairAscent/Trial01/step01.mot a7ed64cf 30184 96806 1400355881",
+     "S007/JointAngle/StairAscent/Trial01/step02.mot 775eccdf 28469 91358 1400386189",
+     "S007/JointAngle/StairAscent/Trial02/step01.mot c46060bc 30224 97487 1400414782",
+     "S007/JointAngle/StairAscent/Trial02/step02.mot 9094216a 31438 101573 1400445130",
+     "S007/JointAngle/StairAscent/Trial03/step01.mot 3d811921 29081 93401 1400476692",
+     "S007/JointAngle/StairAscent/Trial03/step02.mot 848e1fbc 31122 100211 1400505897",
+     "S007/JointAngle/StairAscent/Trial04/step01.mot 1d81f55c 30577 98849 1400537143",
+     "S007/JointAngle/StairAscent/Trial04/step02.mot aad94951 30741 98849 1400567844",
+     "S007/JointAngle/StairAscent/Trial05/step01.mot 2aaa9a1f 30017 96806 1400598709",
+     "S007/JointAngle/StairAscent/Trial05/step02.mot 661de414 30700 98849 1400628850",
+     "S007/JointAngle/StairDescent/Trial01/step01.mot 28cbc806 31388 100211 1400659674",
+     "S007/JointAngle/StairDescent/Trial01/step02.mot 02bb1ad0 31583 100892 1400691187",
+     "S007/JointAngle/StairDescent/Trial02/step01.mot 3e643aa7 30129 96125 1400722895",
+     "S007/JointAngle/StairDescent/Trial02/step02.mot d77cca5e 29331 93401 1400753149",
+     "S007/JointAngle/StairDescent/Trial03/step01.mot c4ba7aba 29752 94763 1400782605",
+     "S007/JointAngle/StairDescent/Trial03/step02.mot b2a67f41 29353 93401 1400812482",
+     "S007/JointAngle/StairDescent/Trial04/step01.mot da3ae123 29754 94763 1400841960",
+     "S007/JointAngle/StairDescent/Trial04/step02.mot d52b8082 29512 94082 1400871839",
+     "S007/JointAngle/StairDescent/Trial05/step01.mot 93647a95 30400 96806 1400901476",
+     "S007/JointAngle/StairDescent/Trial05/step02.mot 666ff78a 30700 98168 1400932001",
+     "S007/JointAngle/StandToSit/Trial01/step01.mot e3211667 52592 172397 1400962826",
+     "S007/JointAngle/StandToSit/Trial02/step01.mot 2969d14b 45679 149243 1401015541",
+     "S007/JointAngle/StandToSit/Trial03/step01.mot 2750d7f1 49606 162182 1401061343",
+     "S007/JointAngle/StandToSit/Trial04/step01.mot a3e3fc7d 47541 156053 1401111072",
+     "S007/JointAngle/StandToSit/Trial05/step01.mot 3e4e9f7a 41488 135623 1401158736",
+     "S007/MotionCapture/LevelWalking/TRC/Trial01/Step01.trc 69c9bb2d 61231 138477 1433726304",
+     "S007/MotionCapture/LevelWalking/TRC/Trial01/Step02.trc ab42334c 61053 137538 1433787667",
+     "S007/MotionCapture/LevelWalking/TRC/Trial02/Step01.trc ea169902 60595 137180 1433848852",
+     "S007/MotionCapture/LevelWalking/TRC/Trial02/Step02.trc 573965ae 62146 141257 1433909579",
+     "S007/MotionCapture/LevelWalking/TRC/Trial03/Step01.trc 2af91525 61341 138477 1433971857",
+     "S007/MotionCapture/LevelWalking/TRC/Trial03/Step02.trc 79001438 60596 137482 1434033330",
+     "S007/MotionCapture/LevelWalking/TRC/Trial04/Step01.trc 3fd48d35 59989 135883 1434094058",
+     "S007/MotionCapture/LevelWalking/TRC/Trial04/Step02.trc cc810f38 59410 134801 1434154179",
+     "S007/MotionCapture/LevelWalking/TRC/Trial05/Step01.trc d2b20bcd 59261 134586 1434213721",
+     "S007/MotionCapture/LevelWalking/TRC/Trial05/Step02.trc 7ceff5eb 59940 135458 1434273114",
+     "S007/MotionCapture/SitToStand/TRC/Trial01/Step01.trc df93bcfe 86633 202028 1434333186",
+     "S007/MotionCapture/SitToStand/TRC/Trial02/Step01.trc 1ae98bf6 95864 224041 1434419949",
+     "S007/MotionCapture/SitToStand/TRC/Trial03/Step01.trc ae1b7dac 83886 196817 1434515943",
+     "S007/MotionCapture/SitToStand/TRC/Trial04/Step01.trc bd70655a 83216 196817 1434599959",
+     "S007/MotionCapture/SitToStand/TRC/Trial05/Step01.trc 5c259aa7 74361 174779 1434683305",
+     "S007/MotionCapture/SlopeAscent/TRC/Trial01/Step01.trc 8f920ba4 73523 167010 1434757796",
+     "S007/MotionCapture/SlopeAscent/TRC/Trial01/Step02.trc 90bcda28 79648 179991 1434831450",
+     "S007/MotionCapture/SlopeAscent/TRC/Trial02/Step01.trc e06b1b0c 77494 176089 1434911229",
+     "S007/MotionCapture/SlopeAscent/TRC/Trial02/Step02.trc caf5e342 76479 172206 1434988854",
+     "S007/MotionCapture/SlopeAscent/TRC/Trial03/Step01.trc 3e98dd96 78649 178683 1435065464",
+     "S007/MotionCapture/SlopeAscent/TRC/Trial03/Step02.trc 39592cf8 79052 178743 1435144244",
+     "S007/MotionCapture/SlopeAscent/TRC/Trial04/Step01.trc 86190594 78481 178683 1435223427",
+     "S007/MotionCapture/SlopeAscent/TRC/Trial04/Step02.trc 87840eed 77429 174953 1435302039",
+     "S007/MotionCapture/SlopeAscent/TRC/Trial05/Step01.trc ae053c83 75304 170901 1435379599",
+     "S007/MotionCapture/SlopeAscent/TRC/Trial05/Step02.trc 03512951 75151 169710 1435455034",
+     "S007/MotionCapture/SlopeDescent/TRC/Trial01/Step01.trc ecfe45be 77602 177976 1435530316",
+     "S007/MotionCapture/SlopeDescent/TRC/Trial01/Step02.trc d230b595 70196 159229 1435608050",
+     "S007/MotionCapture/SlopeDescent/TRC/Trial02/Step01.trc 01900742 84316 193478 1435678378",
+     "S007/MotionCapture/SlopeDescent/TRC/Trial02/Step02.trc b30ab846 81621 183872 1435762826",
+     "S007/MotionCapture/SlopeDescent/TRC/Trial03/Step01.trc 3e85d43f 75580 174058 1435844579",
+     "S007/MotionCapture/SlopeDescent/TRC/Trial03/Step02.trc 0ba8bbec 69123 156635 1435920291",
+     "S007/MotionCapture/SlopeDescent/TRC/Trial04/Step01.trc a29cf04a 74498 171214 1435989546",
+     "S007/MotionCapture/SlopeDescent/TRC/Trial04/Step02.trc 482454c8 68552 155338 1436064176",
+     "S007/MotionCapture/SlopeDescent/TRC/Trial05/Step01.trc d5a03868 75995 174056 1436132860",
+     "S007/MotionCapture/SlopeDescent/TRC/Trial05/Step02.trc 238daf76 69160 156635 1436208987",
+     "S007/MotionCapture/StairAscent/TRC/Trial01/Step01.trc d52b78d7 81259 183871 1436278279",
+     "S007/MotionCapture/StairAscent/TRC/Trial01/Step02.trc dc974f40 77179 174312 1436359669",
+     "S007/MotionCapture/StairAscent/TRC/Trial02/Step01.trc 8ffab4b5 81609 185168 1436436979",
+     "S007/MotionCapture/StairAscent/TRC/Trial02/Step02.trc ee2589d2 85925 194076 1436518719",
+     "S007/MotionCapture/StairAscent/TRC/Trial03/Step01.trc 805278a5 78409 177386 1436604775",
+     "S007/MotionCapture/StairAscent/TRC/Trial03/Step02.trc 6d052d66 84901 191894 1436683315",
+     "S007/MotionCapture/StairAscent/TRC/Trial04/Step01.trc e8ae29e3 82735 187762 1436768347",
+     "S007/MotionCapture/StairAscent/TRC/Trial04/Step02.trc 8f3b9d10 83708 189139 1436851213",
+     "S007/MotionCapture/StairAscent/TRC/Trial05/Step01.trc 3fb1bd6a 81353 183871 1436935052",
+     "S007/MotionCapture/StairAscent/TRC/Trial05/Step02.trc d7ace4cb 83633 189086 1437016536",
+     "S007/MotionCapture/StairDescent/TRC/Trial01/Step01.trc 50e1be42 84659 192924 1437100300",
+     "S007/MotionCapture/StairDescent/TRC/Trial01/Step02.trc 2dbb9eb9 85070 191654 1437185091",
+     "S007/MotionCapture/StairDescent/TRC/Trial02/Step01.trc 5cd94c41 80888 184824 1437270293",
+     "S007/MotionCapture/StairDescent/TRC/Trial02/Step02.trc 717dc8d0 78535 177387 1437351313",
+     "S007/MotionCapture/StairDescent/TRC/Trial03/Step01.trc 033228fa 79819 182342 1437429980",
+     "S007/MotionCapture/StairDescent/TRC/Trial03/Step02.trc a063bfef 78476 177387 1437509931",
+     "S007/MotionCapture/StairDescent/TRC/Trial04/Step01.trc df11c37d 79812 182361 1437588539",
+     "S007/MotionCapture/StairDescent/TRC/Trial04/Step02.trc bd1d31c9 79119 178684 1437668483",
+     "S007/MotionCapture/StairDescent/TRC/Trial05/Step01.trc 7d1c2c43 81881 186333 1437747734",
+     "S007/MotionCapture/StairDescent/TRC/Trial05/Step02.trc 73333b4b 82752 186466 1437829747",
+     "S007/MotionCapture/StandToSit/TRC/Trial01/Step01.trc f8d18032 140567 327826 1437912631",
+     "S007/MotionCapture/StandToSit/TRC/Trial02/Step01.trc 23dd346a 121047 283705 1438053328",
+     "S007/MotionCapture/StandToSit/TRC/Trial03/Step01.trc 2d9277c3 132074 308343 1438174505",
+     "S007/MotionCapture/StandToSit/TRC/Trial04/Step01.trc 45e1d9df 126613 296703 1438306709",
+     "S007/MotionCapture/StandToSit/TRC/Trial05/Step01.trc 6921e4e9 109766 257799 1438433452",
+     "S007/MotionCapture/Static/TRC/Trial01.trc 6e791292 226198 537812 1401200347",
+     "S008/EMG/RawData.mat 4a4016de 68171274 68151229 1042594064",
+     "S008/JointAngle/LevelWalking/Trial01/step01.mot 6cffea7f 20818 66160 1401426664",
+     "S008/JointAngle/LevelWalking/Trial01/step02.mot d74ce228 21637 68885 1401447607",
+     "S008/JointAngle/LevelWalking/Trial02/step01.mot bcda2d13 22262 70928 1401469369",
+     "S008/JointAngle/LevelWalking/Trial02/step02.mot 2093fd7c 21643 68885 1401491756",
+     "S008/JointAngle/LevelWalking/Trial03/step01.mot 0a8980f4 21623 68885 1401513524",
+     "S008/JointAngle/LevelWalking/Trial03/step02.mot 52d2af0c 21837 69566 1401535272",
+     "S008/JointAngle/LevelWalking/Trial04/step01.mot 59d349cd 21789 69566 1401557234",
+     "S008/JointAngle/LevelWalking/Trial04/step02.mot cd583066 21550 68885 1401579148",
+     "S008/JointAngle/LevelWalking/Trial05/step01.mot b7081e00 22220 70928 1401600823",
+     "S008/JointAngle/LevelWalking/Trial05/step02.mot 80ec0eea 21402 68203 1401623168",
+     "S008/JointAngle/SitToStand/Trial01/step01.mot efa0a844 39721 130175 1401644695",
+     "S008/JointAngle/SitToStand/Trial02/step01.mot 54e2b1a9 33126 108383 1401684539",
+     "S008/JointAngle/SitToStand/Trial03/step01.mot a56a3f2a 32924 107702 1401717788",
+     "S008/JointAngle/SitToStand/Trial04/step01.mot a9f8de9b 34323 112469 1401750835",
+     "S008/JointAngle/SitToStand/Trial05/step01.mot c1c985e1 32720 107021 1401785281",
+     "S008/JointAngle/SlopeAscent/Trial01/step01.mot e7604027 26687 85910 1401818124",
+     "S008/JointAngle/SlopeAscent/Trial01/step02.mot 37a97f04 24708 79100 1401844935",
+     "S008/JointAngle/SlopeAscent/Trial02/step01.mot 42ccd6f5 26968 86591 1401869767",
+     "S008/JointAngle/SlopeAscent/Trial02/step02.mot efae9d54 24789 79100 1401896859",
+     "S008/JointAngle/SlopeAscent/Trial03/step01.mot 7bebab69 26379 84548 1401921772",
+     "S008/JointAngle/SlopeAscent/Trial03/step02.mot 1c4026cb 25387 81143 1401948275",
+     "S008/JointAngle/SlopeAscent/Trial04/step01.mot 445b5e50 27166 87272 1401973786",
+     "S008/JointAngle/SlopeAscent/Trial04/step02.mot 4cf72051 25602 81824 1402001076",
+     "S008/JointAngle/SlopeAscent/Trial05/step01.mot 6f566615 28485 91358 1402026802",
+     "S008/JointAngle/SlopeAscent/Trial05/step02.mot aadda93d 26972 86591 1402055411",
+     "S008/JointAngle/SlopeDescent/Trial01/step01.mot 1ff4d388 25615 82505 1402082507",
+     "S008/JointAngle/SlopeDescent/Trial01/step02.mot 14d4223b 23038 73652 1402108247",
+     "S008/JointAngle/SlopeDescent/Trial02/step01.mot 2ec5b179 25729 83186 1402131410",
+     "S008/JointAngle/SlopeDescent/Trial02/step02.mot 508e1531 21792 69566 1402157264",
+     "S008/JointAngle/SlopeDescent/Trial03/step01.mot c16767cf 25146 81143 1402179181",
+     "S008/JointAngle/SlopeDescent/Trial03/step02.mot 80dfb90b 21923 70247 1402204452",
+     "S008/JointAngle/SlopeDescent/Trial04/step01.mot 937219d6 25152 81143 1402226500",
+     "S008/JointAngle/SlopeDescent/Trial04/step02.mot c7400e9b 22188 70928 1402251777",
+     "S008/JointAngle/SlopeDescent/Trial05/step01.mot ec2b7060 27212 87953 1402274090",
+     "S008/JointAngle/SlopeDescent/Trial05/step02.mot 19a323f0 21982 70247 1402301427",
+     "S008/JointAngle/StairAscent/Trial01/step01.mot 7c7eade2 27171 87272 1402323534",
+     "S008/JointAngle/StairAscent/Trial01/step02.mot 3d5bfb3e 26748 85910 1402350829",
+     "S008/JointAngle/StairAscent/Trial02/step01.mot fa26d3ca 27601 88634 1402377701",
+     "S008/JointAngle/StairAscent/Trial02/step02.mot 2c393009 24734 79100 1402405426",
+     "S008/JointAngle/StairAscent/Trial03/step01.mot c961de29 28317 90677 1402430284",
+     "S008/JointAngle/StairAscent/Trial03/step02.mot 7f52403a 25944 83186 1402458725",
+     "S008/JointAngle/StairAscent/Trial04/step01.mot 9b7208bd 28695 92039 1402484793",
+     "S008/JointAngle/StairAscent/Trial04/step02.mot dad06d01 16099 50497 1402513612",
+     "S008/JointAngle/StairAscent/Trial05/step01.mot 4cf7fede 28873 92720 1402529835",
+     "S008/JointAngle/StairAscent/Trial05/step02.mot 0e2c71bc 25371 81143 1402558832",
+     "S008/JointAngle/StairDescent/Trial01/step01.mot 7dcfcd77 26162 83186 1402584327",
+     "S008/JointAngle/StairDescent/Trial01/step02.mot e81ffe10 23164 72971 1402610614",
+     "S008/JointAngle/StairDescent/Trial02/step01.mot 238fc46e 25701 81824 1402633903",
+     "S008/JointAngle/StairDescent/Trial02/step02.mot 7acd98f3 23619 74333 1402659729",
+     "S008/JointAngle/StairDescent/Trial03/step01.mot 6e6a300c 26560 84548 1402683473",
+     "S008/JointAngle/StairDescent/Trial03/step02.mot 980dc9a8 24908 79100 1402710158",
+     "S008/JointAngle/StairDescent/Trial04/step01.mot ac77ced7 26417 84548 1402735191",
+     "S008/JointAngle/StairDescent/Trial04/step02.mot 7450f922 25909 82505 1402761733",
+     "S008/JointAngle/StairDescent/Trial05/step01.mot 4f762e56 27270 87272 1402787767",
+     "S008/JointAngle/StairDescent/Trial05/step02.mot 7d05e1e1 25510 81143 1402815162",
+     "S008/JointAngle/StandToSit/Trial01/step01.mot 68a42f1a 45317 148562 1402840797",
+     "S008/JointAngle/StandToSit/Trial02/step01.mot 66051e0a 38164 124046 1402886237",
+     "S008/JointAngle/StandToSit/Trial03/step01.mot 4d35f7ed 39824 130175 1402924524",
+     "S008/JointAngle/StandToSit/Trial04/step01.mot 7d4a6fe5 41582 136304 1402964471",
+     "S008/JointAngle/StandToSit/Trial05/step01.mot 71f3c6dc 39566 129494 1403006176",
+     "S008/MotionCapture/LevelWalking/TRC/Trial01/Step01.trc 599241e5 55185 125505 1438543348",
+     "S008/MotionCapture/LevelWalking/TRC/Trial01/Step02.trc 4b90809d 57998 130842 1438598665",
+     "S008/MotionCapture/LevelWalking/TRC/Trial02/Step01.trc ba0f78c8 59057 134586 1438656795",
+     "S008/MotionCapture/LevelWalking/TRC/Trial02/Step02.trc b9aa2658 58031 130877 1438715984",
+     "S008/MotionCapture/LevelWalking/TRC/Trial03/Step01.trc 87baecf9 57285 130695 1438774147",
+     "S008/MotionCapture/LevelWalking/TRC/Trial03/Step02.trc 085c081e 58517 132103 1438831564",
+     "S008/MotionCapture/LevelWalking/TRC/Trial04/Step01.trc 93aea512 58071 131992 1438890213",
+     "S008/MotionCapture/LevelWalking/TRC/Trial04/Step02.trc c4cfd5fe 58021 130791 1438948416",
+     "S008/MotionCapture/LevelWalking/TRC/Trial05/Step01.trc 09413a6b 59218 134586 1439006569",
+     "S008/MotionCapture/LevelWalking/TRC/Trial05/Step02.trc 41607fc7 57509 129513 1439065919",
+     "S008/MotionCapture/SitToStand/TRC/Trial01/Step01.trc ac6bc907 105876 247423 1439123560",
+     "S008/MotionCapture/SitToStand/TRC/Trial02/Step01.trc 3954882a 91748 205919 1439229566",
+     "S008/MotionCapture/SitToStand/TRC/Trial03/Step01.trc 7a357429 87888 204578 1439321444",
+     "S008/MotionCapture/SitToStand/TRC/Trial04/Step01.trc 0f5dac05 91491 213641 1439409462",
+     "S008/MotionCapture/SitToStand/TRC/Trial05/Step01.trc 980fc996 90376 203303 1439501083",
+     "S008/MotionCapture/SlopeAscent/TRC/Trial01/Step01.trc df4a1dac 72016 163119 1439591589",
+     "S008/MotionCapture/SlopeAscent/TRC/Trial01/Step02.trc da480952 67282 150289 1439663736",
+     "S008/MotionCapture/SlopeAscent/TRC/Trial02/Step01.trc 32dc5dd7 72951 164416 1439731149",
+     "S008/MotionCapture/SlopeAscent/TRC/Trial02/Step02.trc ed8d026b 66930 150205 1439804231",
+     "S008/MotionCapture/SlopeAscent/TRC/Trial03/Step01.trc a03a803e 71336 160525 1439871292",
+     "S008/MotionCapture/SlopeAscent/TRC/Trial03/Step02.trc aba37c5e 68325 154126 1439942759",
+     "S008/MotionCapture/SlopeAscent/TRC/Trial04/Step01.trc 78c56dc5 73386 165713 1440011215",
+     "S008/MotionCapture/SlopeAscent/TRC/Trial04/Step02.trc 1bc75981 69084 155517 1440084732",
+     "S008/MotionCapture/SlopeAscent/TRC/Trial05/Step01.trc bb04ce05 76483 173495 1440153947",
+     "S008/MotionCapture/SlopeAscent/TRC/Trial05/Step02.trc 1cabb9b6 73134 164825 1440230561",
+     "S008/MotionCapture/SlopeDescent/TRC/Trial01/Step01.trc 26dd18e9 69345 159240 1440303826",
+     "S008/MotionCapture/SlopeDescent/TRC/Trial01/Step02.trc 9e47d3b7 61481 139774 1440373303",
+     "S008/MotionCapture/SlopeDescent/TRC/Trial02/Step01.trc eb2f566d 69312 160513 1440434916",
+     "S008/MotionCapture/SlopeDescent/TRC/Trial02/Step02.trc 0f79c259 58131 131992 1440504360",
+     "S008/MotionCapture/SlopeDescent/TRC/Trial03/Step01.trc 26d549d2 67220 156334 1440562623",
+     "S008/MotionCapture/SlopeDescent/TRC/Trial03/Step02.trc 550a8a66 58773 133289 1440629975",
+     "S008/MotionCapture/SlopeDescent/TRC/Trial04/Step01.trc 306549d8 68032 156397 1440688880",
+     "S008/MotionCapture/SlopeDescent/TRC/Trial04/Step02.trc 6d2b91df 59626 134586 1440757044",
+     "S008/MotionCapture/SlopeDescent/TRC/Trial05/Step01.trc c3c86fa1 73403 169770 1440816802",
+     "S008/MotionCapture/SlopeDescent/TRC/Trial05/Step02.trc 59e10e95 58637 133289 1440890337",
+     "S008/MotionCapture/StairAscent/TRC/Trial01/Step01.trc a53f0cdf 73604 165713 1440949106",
+     "S008/MotionCapture/StairAscent/TRC/Trial01/Step02.trc 022c9588 72291 164581 1441022841",
+     "S008/MotionCapture/StairAscent/TRC/Trial02/Step01.trc feeb443d 74549 168307 1441095263",
+     "S008/MotionCapture/StairAscent/TRC/Trial02/Step02.trc 58369fe7 66684 151488 1441169943",
+     "S008/MotionCapture/StairAscent/TRC/Trial03/Step01.trc 06f544dc 76067 172198 1441236758",
+     "S008/MotionCapture/StairAscent/TRC/Trial03/Step02.trc aaba8d25 70167 159422 1441312956",
+     "S008/MotionCapture/StairAscent/TRC/Trial04/Step01.trc 53a95f47 77536 174792 1441383254",
+     "S008/MotionCapture/StairAscent/TRC/Trial04/Step02.trc f69d42cb 43319 95744 1441460921",
+     "S008/MotionCapture/StairAscent/TRC/Trial05/Step01.trc 9b6ae8df 77690 176089 1441504371",
+     "S008/MotionCapture/StairAscent/TRC/Trial05/Step02.trc fc1c60a1 68191 155253 1441582192",
+     "S008/MotionCapture/StairDescent/TRC/Trial01/Step01.trc 059599c9 69909 159718 1441650514",
+     "S008/MotionCapture/StairDescent/TRC/Trial01/Step02.trc d3c36350 60845 138477 1441720555",
+     "S008/MotionCapture/StairDescent/TRC/Trial02/Step01.trc c726c0f9 68321 157284 1441781532",
+     "S008/MotionCapture/StairDescent/TRC/Trial02/Step02.trc b6c1c0c1 61835 141071 1441849985",
+     "S008/MotionCapture/StairDescent/TRC/Trial03/Step01.trc 31aaf8bd 70836 162476 1441911952",
+     "S008/MotionCapture/StairDescent/TRC/Trial03/Step02.trc 393724ec 65807 150150 1441982920",
+     "S008/MotionCapture/StairDescent/TRC/Trial04/Step01.trc 4cedae32 70700 162290 1442048859",
+     "S008/MotionCapture/StairDescent/TRC/Trial04/Step02.trc d9a07e39 68783 156635 1442119691",
+     "S008/MotionCapture/StairDescent/TRC/Trial05/Step01.trc bbe65700 73279 167299 1442188606",
+     "S008/MotionCapture/StairDescent/TRC/Trial05/Step02.trc 29b818a9 67894 154041 1442262017",
+     "S008/MotionCapture/StandToSit/TRC/Trial01/Step01.trc d3c0377a 120972 282439 1442330043",
+     "S008/MotionCapture/StandToSit/TRC/Trial02/Step01.trc 076475d5 104365 235748 1442451145",
+     "S008/MotionCapture/StandToSit/TRC/Trial03/Step01.trc 269af568 110314 247399 1442555640",
+     "S008/MotionCapture/StandToSit/TRC/Trial04/Step01.trc 9013ed74 114892 259059 1442666084",
+     "S008/MotionCapture/StandToSit/TRC/Trial05/Step01.trc 5ef7aafa 109469 246126 1442781106",
+     "S008/MotionCapture/Static/TRC/Trial01.trc 51a6d45d 239040 565069 1403045865",
+     "S009/EMG/RawData.mat dcfef073 68986819 68966200 1179708017",
+     "S009/JointAngle/LevelWalking/Trial01/step01.mot 9e337b64 25028 80462 1403285024",
+     "S009/JointAngle/LevelWalking/Trial01/step02.mot 5fce8a6f 24202 77738 1403310177",
+     "S009/JointAngle/LevelWalking/Trial02/step01.mot 0f785e5d 24654 79100 1403334504",
+     "S009/JointAngle/LevelWalking/Trial02/step02.mot 58cf3607 24649 79100 1403359283",
+     "S009/JointAngle/LevelWalking/Trial03/step01.mot 4369906b 24438 78419 1403384057",
+     "S009/JointAngle/LevelWalking/Trial03/step02.mot e88d0d5a 23443 75014 1403408620",
+     "S009/JointAngle/LevelWalking/Trial04/step01.mot 065bd069 23520 75695 1403432188",
+     "S009/JointAngle/LevelWalking/Trial04/step02.mot c267966c 23850 76376 1403455833",
+     "S009/JointAngle/LevelWalking/Trial05/step01.mot c86ba8aa 23784 76376 1403479808",
+     "S009/JointAngle/LevelWalking/Trial05/step02.mot b430e1eb 24047 77057 1403503717",
+     "S009/JointAngle/SitToStand/Trial01/step01.mot 6ba55513 33092 106340 1403527889",
+     "S009/JointAngle/SitToStand/Trial02/step01.mot 852f547a 26643 85910 1403561104",
+     "S009/JointAngle/SitToStand/Trial03/step01.mot 50fd0c65 31436 100892 1403587870",
+     "S009/JointAngle/SitToStand/Trial04/step01.mot 34fe3628 34686 112469 1403619429",
+     "S009/JointAngle/SlopeAscent/Trial01/step01.mot 970b6c3e 28672 92720 1403654238",
+     "S009/JointAngle/SlopeAscent/Trial01/step02.mot e514392e 27765 89315 1403683034",
+     "S009/JointAngle/SlopeAscent/Trial02/step01.mot 135e4002 28854 93401 1403710923",
+     "S009/JointAngle/SlopeAscent/Trial02/step02.mot 84fe4a18 27794 89315 1403739901",
+     "S009/JointAngle/SlopeAscent/Trial03/step01.mot b6a60806 27907 89996 1403767819",
+     "S009/JointAngle/SlopeAscent/Trial03/step02.mot d3f9a13d 26260 83867 1403795850",
+     "S009/JointAngle/SlopeAscent/Trial04/step01.mot 618f5c9f 28969 93401 1403822234",
+     "S009/JointAngle/SlopeAscent/Trial04/step02.mot 8e027cdf 26152 83867 1403851327",
+     "S009/JointAngle/SlopeAscent/Trial05/step01.mot 6efcf51e 28046 90677 1403877603",
+     "S009/JointAngle/SlopeAscent/Trial05/step02.mot 14a1807f 27033 86591 1403905773",
+     "S009/JointAngle/SlopeDescent/Trial01/step01.mot a515fa69 25520 81824 1403932930",
+     "S009/JointAngle/SlopeDescent/Trial01/step02.mot d5c7d3e1 24246 77057 1403958575",
+     "S009/JointAngle/SlopeDescent/Trial02/step01.mot d341d921 24983 79781 1403982946",
+     "S009/JointAngle/SlopeDescent/Trial02/step02.mot cd4d2280 23714 75695 1404008054",
+     "S009/JointAngle/SlopeDescent/Trial03/step01.mot 19977a16 24945 79781 1404031893",
+     "S009/JointAngle/SlopeDescent/Trial03/step02.mot 76dddaa2 25095 80462 1404056963",
+     "S009/JointAngle/SlopeDescent/Trial04/step01.mot 9bd660ac 25158 80462 1404082183",
+     "S009/JointAngle/SlopeDescent/Trial04/step02.mot 987ce6cf 24345 77738 1404107466",
+     "S009/JointAngle/SlopeDescent/Trial05/step01.mot 4edfd7a4 27444 87953 1404131936",
+     "S009/JointAngle/SlopeDescent/Trial05/step02.mot f6b97eb1 25754 82505 1404159505",
+     "S009/JointAngle/StairAscent/Trial01/step01.mot c2324c3a 29231 94082 1404185384",
+     "S009/JointAngle/StairAscent/Trial01/step02.mot f2a0a57e 29766 95444 1404214739",
+     "S009/JointAngle/StairAscent/Trial02/step01.mot e8f58e21 29140 94082 1404244629",
+     "S009/JointAngle/StairAscent/Trial02/step02.mot 7abb2b5c 30601 98168 1404273893",
+     "S009/JointAngle/StairAscent/Trial03/step01.mot 08448f30 29651 95444 1404304618",
+     "S009/JointAngle/StairAscent/Trial03/step02.mot f1c20c13 30394 97487 1404334393",
+     "S009/JointAngle/StairAscent/Trial04/step01.mot d7be0bca 31282 100892 1404364911",
+     "S009/JointAngle/StairAscent/Trial04/step02.mot 3ee9aa95 30177 96806 1404396317",
+     "S009/JointAngle/StairAscent/Trial05/step01.mot a7976a57 29839 96125 1404426618",
+     "S009/JointAngle/StairAscent/Trial05/step02.mot 45777857 29580 94763 1404456581",
+     "S009/JointAngle/StairDescent/Trial01/step01.mot 2355d325 29520 94082 1404486285",
+     "S009/JointAngle/StairDescent/Trial01/step02.mot 381d4564 27234 86591 1404515930",
+     "S009/JointAngle/StairDescent/Trial02/step01.mot 6bd72dc4 28713 91358 1404543289",
+     "S009/JointAngle/StairDescent/Trial02/step02.mot 39f2027c 27622 87953 1404572127",
+     "S009/JointAngle/StairDescent/Trial03/step01.mot 4bd557d1 28251 89996 1404599874",
+     "S009/JointAngle/StairDescent/Trial03/step02.mot 12205f1d 29968 95444 1404628250",
+     "S009/JointAngle/StairDescent/Trial04/step01.mot e5a4f874 30888 98849 1404658343",
+     "S009/JointAngle/StairDescent/Trial04/step02.mot e013318e 27418 87272 1404689356",
+     "S009/JointAngle/StairDescent/Trial05/step01.mot ec117d11 28526 90677 1404716899",
+     "S009/JointAngle/StairDescent/Trial05/step02.mot 1c2e1490 29761 94763 1404745550",
+     "S009/JointAngle/StandToSit/Trial01/step01.mot d2fab3e0 38908 126089 1404775436",
+     "S009/JointAngle/StandToSit/Trial02/step01.mot 40e1bfd3 35991 117236 1404814467",
+     "S009/JointAngle/StandToSit/Trial03/step01.mot 961a643e 32194 104297 1404850581",
+     "S009/JointAngle/StandToSit/Trial04/step01.mot 3bc16d94 41390 134942 1404882898",
+     "S009/MotionCapture/LevelWalking/TRC/Trial01/Step01.trc 276408e8 67354 152744 1442890705",
+     "S009/MotionCapture/LevelWalking/TRC/Trial01/Step02.trc 652948b4 65910 148292 1442958191",
+     "S009/MotionCapture/LevelWalking/TRC/Trial02/Step01.trc 1bf688f2 66354 150150 1443024233",
+     "S009/MotionCapture/LevelWalking/TRC/Trial02/Step02.trc ac91d791 66928 150903 1443090719",
+     "S009/MotionCapture/LevelWalking/TRC/Trial03/Step01.trc af1875eb 65659 148853 1443157779",
+     "S009/MotionCapture/LevelWalking/TRC/Trial03/Step02.trc 9a698f8e 62977 143280 1443223570",
+     "S009/MotionCapture/LevelWalking/TRC/Trial04/Step01.trc 251409d0 63435 143665 1443286679",
+     "S009/MotionCapture/LevelWalking/TRC/Trial04/Step02.trc 5f424c3e 64520 145591 1443350246",
+     "S009/MotionCapture/LevelWalking/TRC/Trial05/Step01.trc c14c81cc 63886 144962 1443414898",
+     "S009/MotionCapture/LevelWalking/TRC/Trial05/Step02.trc 5498325c 65103 146977 1443478916",
+     "S009/MotionCapture/SitToStand/TRC/Trial01/Step01.trc 76d49cc3 87483 202008 1443544151",
+     "S009/MotionCapture/SitToStand/TRC/Trial02/Step01.trc f74d44ca 70113 163101 1443631764",
+     "S009/MotionCapture/SitToStand/TRC/Trial03/Step01.trc e481e84b 82445 191646 1443702007",
+     "S009/MotionCapture/SitToStand/TRC/Trial04/Step01.trc e4e33568 91491 213661 1443784582",
+     "S009/MotionCapture/SlopeAscent/TRC/Trial01/Step01.trc f180fc1c 77346 176089 1443876203",
+     "S009/MotionCapture/SlopeAscent/TRC/Trial01/Step02.trc 98f354b9 75035 169613 1443953680",
+     "S009/MotionCapture/SlopeAscent/TRC/Trial02/Step01.trc 1134ab16 77743 177386 1444028846",
+     "S009/MotionCapture/SlopeAscent/TRC/Trial02/Step02.trc 3e89cfbe 75149 169617 1444106720",
+     "S009/MotionCapture/SlopeAscent/TRC/Trial03/Step01.trc b64f615f 75158 170901 1444182000",
+     "S009/MotionCapture/SlopeAscent/TRC/Trial03/Step02.trc 2cdeca5a 70660 159301 1444257289",
+     "S009/MotionCapture/SlopeAscent/TRC/Trial04/Step01.trc 5d9714d5 78019 177386 1444328080",
+     "S009/MotionCapture/SlopeAscent/TRC/Trial04/Step02.trc 09a83acb 70502 159263 1444406230",
+     "S009/MotionCapture/SlopeAscent/TRC/Trial05/Step01.trc 0eb6346f 75437 172198 1444476863",
+     "S009/MotionCapture/SlopeAscent/TRC/Trial05/Step02.trc d6c4566a 72203 164601 1444552431",
+     "S009/MotionCapture/SlopeDescent/TRC/Trial01/Step01.trc ce0529ba 68308 157572 1444624765",
+     "S009/MotionCapture/SlopeDescent/TRC/Trial01/Step02.trc 3b04ec40 64420 146259 1444693205",
+     "S009/MotionCapture/SlopeDescent/TRC/Trial02/Step01.trc 10f4be0e 67005 153953 1444757757",
+     "S009/MotionCapture/SlopeDescent/TRC/Trial02/Step02.trc 7fcdd7d3 63207 143665 1444824894",
+     "S009/MotionCapture/SlopeDescent/TRC/Trial03/Step01.trc 6033b04c 66896 153923 1444888233",
+     "S009/MotionCapture/SlopeDescent/TRC/Trial03/Step02.trc f4c9ba26 67571 152744 1444955261",
+     "S009/MotionCapture/SlopeDescent/TRC/Trial04/Step01.trc 5f2e04aa 67445 155009 1445022964",
+     "S009/MotionCapture/SlopeDescent/TRC/Trial04/Step02.trc 6d5d2623 65344 147556 1445090541",
+     "S009/MotionCapture/SlopeDescent/TRC/Trial05/Step01.trc 4fc0cd83 73797 169937 1445156017",
+     "S009/MotionCapture/SlopeDescent/TRC/Trial05/Step02.trc 9ff27fab 69821 156635 1445229946",
+     "S009/MotionCapture/StairAscent/TRC/Trial01/Step01.trc a7bc74ff 79159 178683 1445299899",
+     "S009/MotionCapture/StairAscent/TRC/Trial01/Step02.trc a0d2f2f5 80648 182469 1445379189",
+     "S009/MotionCapture/StairAscent/TRC/Trial02/Step01.trc df4025ed 79145 178683 1445459968",
+     "S009/MotionCapture/StairAscent/TRC/Trial02/Step02.trc 687f5801 82911 187960 1445539244",
+     "S009/MotionCapture/StairAscent/TRC/Trial03/Step01.trc ffc2615d 80467 181277 1445622286",
+     "S009/MotionCapture/StairAscent/TRC/Trial03/Step02.trc b2cfe651 82210 186465 1445702884",
+     "S009/MotionCapture/StairAscent/TRC/Trial04/Step01.trc 11bc1262 84922 191653 1445785225",
+     "S009/MotionCapture/StairAscent/TRC/Trial04/Step02.trc b9c5b34b 81635 185587 1445870278",
+     "S009/MotionCapture/StairAscent/TRC/Trial05/Step01.trc eaa5745f 80608 182574 1445952044",
+     "S009/MotionCapture/StairAscent/TRC/Trial05/Step02.trc 658524e6 79927 181540 1446032783",
+     "S009/MotionCapture/StairDescent/TRC/Trial01/Step01.trc e8c29f69 79461 181048 1446112841",
+     "S009/MotionCapture/StairDescent/TRC/Trial01/Step02.trc 855cd10b 72652 164417 1446192434",
+     "S009/MotionCapture/StairDescent/TRC/Trial02/Step01.trc bef9fdde 76961 175633 1446265218",
+     "S009/MotionCapture/StairDescent/TRC/Trial02/Step02.trc 1fcc61f5 73760 167011 1446342311",
+     "S009/MotionCapture/StairDescent/TRC/Trial03/Step01.trc d3880dbd 75648 172952 1446416203",
+     "S009/MotionCapture/StairDescent/TRC/Trial03/Step02.trc f5ac1a09 80497 181278 1446491983",
+     "S009/MotionCapture/StairDescent/TRC/Trial04/Step01.trc 32d6182d 83422 190115 1446572612",
+     "S009/MotionCapture/StairDescent/TRC/Trial04/Step02.trc caee3dd4 73291 165714 1446656166",
+     "S009/MotionCapture/StairDescent/TRC/Trial05/Step01.trc 275ef791 76765 174000 1446729589",
+     "S009/MotionCapture/StairDescent/TRC/Trial05/Step02.trc 4b5eebf7 79666 179981 1446806486",
+     "S009/MotionCapture/StandToSit/TRC/Trial01/Step01.trc 0e699d5b 101991 239636 1446886284",
+     "S009/MotionCapture/StandToSit/TRC/Trial02/Step01.trc 77bdcd73 94283 222770 1446988405",
+     "S009/MotionCapture/StandToSit/TRC/Trial03/Step01.trc 91425abf 83872 198119 1447082818",
+     "S009/MotionCapture/StandToSit/TRC/Trial04/Step01.trc c3be167b 109071 256491 1447166820",
+     "S009/MotionCapture/Static/TRC/Trial01.trc 9dd9b0bc 199681 470061 1404924411",
+     "S010/EMG/RawData.mat d9177d71 67450575 67430107 1320592714",
+     "S010/JointAngle/LevelWalking/Trial01/step01.mot d024d937 22494 71609 1405124211",
+     "S010/JointAngle/LevelWalking/Trial01/step02.mot 725bc7d0 22476 71609 1405146830",
+     "S010/JointAngle/LevelWalking/Trial02/step01.mot 27caab01 22521 71609 1405169431",
+     "S010/JointAngle/LevelWalking/Trial02/step02.mot 0481cbbe 22479 71609 1405192077",
+     "S010/JointAngle/LevelWalking/Trial03/step01.mot f0e4015e 21826 69566 1405214681",
+     "S010/JointAngle/LevelWalking/Trial03/step02.mot 96a2f0d6 22132 70247 1405236632",
+     "S010/JointAngle/LevelWalking/Trial04/step01.mot e420e551 22642 72290 1405258889",
+     "S010/JointAngle/LevelWalking/Trial04/step02.mot 6b5a2ee6 21661 68885 1405281656",
+     "S010/JointAngle/LevelWalking/Trial05/step01.mot aff24dbd 23127 73652 1405303442",
+     "S010/JointAngle/LevelWalking/Trial05/step02.mot def07b12 22472 71609 1405326694",
+     "S010/JointAngle/SitToStand/Trial01/step01.mot ad6fbd8d 34378 110426 1405349291",
+     "S010/JointAngle/SitToStand/Trial02/step01.mot b5e8ea67 35038 112469 1405383792",
+     "S010/JointAngle/SitToStand/Trial03/step01.mot c669b3d0 44050 143114 1405418953",
+     "S010/JointAngle/SitToStand/Trial04/step01.mot 2559f196 41909 136304 1405463126",
+     "S010/JointAngle/SitToStand/Trial05/step01.mot 5b6fbb6e 37648 121322 1405505158",
+     "S010/JointAngle/SlopeAscent/Trial01/step01.mot 03f1ac02 27532 87953 1405542929",
+     "S010/JointAngle/SlopeAscent/Trial01/step02.mot e86b4956 27041 85910 1405570585",
+     "S010/JointAngle/SlopeAscent/Trial02/step01.mot b8cf00ac 28439 90677 1405597750",
+     "S010/JointAngle/SlopeAscent/Trial02/step02.mot f1accdd2 28167 89996 1405626313",
+     "S010/JointAngle/SlopeAscent/Trial03/step01.mot 53261a5d 29176 93401 1405654604",
+     "S010/JointAngle/SlopeAscent/Trial03/step02.mot 8fc517e1 28034 89315 1405683904",
+     "S010/JointAngle/SlopeAscent/Trial04/step01.mot 5fd01d1d 28991 92720 1405712062",
+     "S010/JointAngle/SlopeAscent/Trial04/step02.mot c8f9cd8c 28233 89996 1405741177",
+     "S010/JointAngle/SlopeAscent/Trial05/step01.mot c0c4e508 28730 92039 1405769534",
+     "S010/JointAngle/SlopeAscent/Trial05/step02.mot cd2f639a 27354 87272 1405798388",
+     "S010/JointAngle/SlopeDescent/Trial01/step01.mot 6e6d3269 25765 82505 1405825866",
+     "S010/JointAngle/SlopeDescent/Trial01/step02.mot 0adcef27 25070 79781 1405851756",
+     "S010/JointAngle/SlopeDescent/Trial02/step01.mot 433a34b0 26741 85910 1405876951",
+     "S010/JointAngle/SlopeDescent/Trial02/step02.mot b3ca8b63 24504 77738 1405903817",
+     "S010/JointAngle/SlopeDescent/Trial03/step01.mot 94e0b91f 27225 87272 1405928446",
+     "S010/JointAngle/SlopeDescent/Trial03/step02.mot 99baa06e 24591 78419 1405955796",
+     "S010/JointAngle/SlopeDescent/Trial04/step01.mot dd0924f1 27417 87953 1405980512",
+     "S010/JointAngle/SlopeDescent/Trial04/step02.mot 93f03873 23402 74333 1406008054",
+     "S010/JointAngle/SlopeDescent/Trial05/step01.mot 82982b4d 23791 75695 1406031581",
+     "S010/JointAngle/SlopeDescent/Trial05/step02.mot a0b4be94 22603 71609 1406055497",
+     "S010/JointAngle/StairAscent/Trial01/step01.mot f8706f5d 28209 89996 1406078225",
+     "S010/JointAngle/StairAscent/Trial01/step02.mot f4d0fbbe 27102 85910 1406106558",
+     "S010/JointAngle/StairAscent/Trial02/step01.mot d3b16b0f 27089 86591 1406133784",
+     "S010/JointAngle/StairAscent/Trial02/step02.mot 8b4d3ec1 25574 81143 1406160997",
+     "S010/JointAngle/StairAscent/Trial03/step01.mot ac85d2f0 29965 96125 1406186695",
+     "S010/JointAngle/StairAscent/Trial03/step02.mot 8bedb4ea 27016 85910 1406216784",
+     "S010/JointAngle/StairAscent/Trial04/step01.mot a3c6ab92 29885 96125 1406243924",
+     "S010/JointAngle/StairAscent/Trial04/step02.mot 4bf4befc 27507 87953 1406273933",
+     "S010/JointAngle/StairAscent/Trial05/step01.mot 5cabf360 27812 88634 1406301564",
+     "S010/JointAngle/StairAscent/Trial05/step02.mot fe6ccb77 26561 84548 1406329500",
+     "S010/JointAngle/StairDescent/Trial01/step01.mot 17d1856a 27257 86591 1406356185",
+     "S010/JointAngle/StairDescent/Trial01/step02.mot f090ba80 25789 81824 1406383567",
+     "S010/JointAngle/StairDescent/Trial02/step01.mot 6b4c112d 26639 84548 1406409481",
+     "S010/JointAngle/StairDescent/Trial02/step02.mot 6c952f4c 25828 81824 1406436245",
+     "S010/JointAngle/StairDescent/Trial03/step01.mot 297e62cd 29284 93401 1406462198",
+     "S010/JointAngle/StairDescent/Trial03/step02.mot fdf29f0a 26476 83867 1406491607",
+     "S010/JointAngle/StairDescent/Trial04/step01.mot f5aa3b90 26833 85229 1406518208",
+     "S010/JointAngle/StairDescent/Trial04/step02.mot 6986bc52 25083 79100 1406545166",
+     "S010/JointAngle/StairDescent/Trial05/step01.mot 741b200b 27307 86591 1406570374",
+     "S010/JointAngle/StairDescent/Trial05/step02.mot f8f0fddb 25331 80462 1406597806",
+     "S010/JointAngle/StandToSit/Trial01/step01.mot 8fbf0989 46037 148562 1406623262",
+     "S010/JointAngle/StandToSit/Trial02/step01.mot 62568392 55653 181931 1406669422",
+     "S010/JointAngle/StandToSit/Trial03/step01.mot 2ff899bf 61152 200318 1406725198",
+     "S010/JointAngle/StandToSit/Trial04/step01.mot 82beac00 46783 151286 1406786473",
+     "S010/JointAngle/StandToSit/Trial05/step01.mot e08c9f2f 56723 184655 1406833379",
+     "S010/MotionCapture/LevelWalking/TRC/Trial01/Step01.trc a16bbcd0 60050 135883 1447276021",
+     "S010/MotionCapture/LevelWalking/TRC/Trial01/Step02.trc 7ebafdc6 60527 136623 1447336203",
+     "S010/MotionCapture/LevelWalking/TRC/Trial02/Step01.trc cfc5294d 59812 135883 1447396862",
+     "S010/MotionCapture/LevelWalking/TRC/Trial02/Step02.trc 94d40099 60597 136112 1447456806",
+     "S010/MotionCapture/LevelWalking/TRC/Trial03/Step01.trc 85639c57 58017 131992 1447517535",
+     "S010/MotionCapture/LevelWalking/TRC/Trial03/Step02.trc c18aeac1 59426 133503 1447575684",
+     "S010/MotionCapture/LevelWalking/TRC/Trial04/Step01.trc 4bc19d1e 61171 137180 1447635242",
+     "S010/MotionCapture/LevelWalking/TRC/Trial04/Step02.trc 2e327ffa 58383 132870 1447696545",
+     "S010/MotionCapture/LevelWalking/TRC/Trial05/Step01.trc 841ca72b 62102 139774 1447755060",
+     "S010/MotionCapture/LevelWalking/TRC/Trial05/Step02.trc ca16ba20 60599 137755 1447817294",
+     "S010/MotionCapture/SitToStand/TRC/Trial01/Step01.trc 91a422b6 90146 209810 1447878025",
+     "S010/MotionCapture/SitToStand/TRC/Trial02/Step01.trc 1f048b6e 91463 213674 1447968301",
+     "S010/MotionCapture/SitToStand/TRC/Trial03/Step01.trc 8aa09393 115776 272020 1448059894",
+     "S010/MotionCapture/SitToStand/TRC/Trial04/Step01.trc 74345c22 111775 259056 1448175800",
+     "S010/MotionCapture/SitToStand/TRC/Trial05/Step01.trc 59909af1 99970 230546 1448287705",
+     "S010/MotionCapture/SlopeAscent/TRC/Trial01/Step01.trc 47218e8c 74178 167010 1448387805",
+     "S010/MotionCapture/SlopeAscent/TRC/Trial01/Step02.trc 66b1ab15 73028 164216 1448462114",
+     "S010/MotionCapture/SlopeAscent/TRC/Trial02/Step01.trc bd7aa226 76329 172198 1448535273",
+     "S010/MotionCapture/SlopeAscent/TRC/Trial02/Step02.trc fd01285f 75995 172749 1448611733",
+     "S010/MotionCapture/SlopeAscent/TRC/Trial03/Step01.trc 939385f2 78306 177386 1448687859",
+     "S010/MotionCapture/SlopeAscent/TRC/Trial03/Step02.trc c72499e0 75400 170521 1448766296",
+     "S010/MotionCapture/SlopeAscent/TRC/Trial04/Step01.trc 985b14bb 77654 176089 1448841827",
+     "S010/MotionCapture/SlopeAscent/TRC/Trial04/Step02.trc eda6fe95 75869 172184 1448919612",
+     "S010/MotionCapture/SlopeAscent/TRC/Trial05/Step01.trc 6812e4b7 76797 174792 1448995612",
+     "S010/MotionCapture/SlopeAscent/TRC/Trial05/Step02.trc dc5d408d 73830 166159 1449072540",
+     "S010/MotionCapture/SlopeDescent/TRC/Trial01/Step01.trc 310c30bc 68946 159107 1449146501",
+     "S010/MotionCapture/SlopeDescent/TRC/Trial01/Step02.trc 618c1bef 66675 151447 1449215579",
+     "S010/MotionCapture/SlopeDescent/TRC/Trial02/Step01.trc df69a850 72512 165726 1449282386",
+     "S010/MotionCapture/SlopeDescent/TRC/Trial02/Step02.trc 0d13325a 65418 147556 1449355030",
+     "S010/MotionCapture/SlopeDescent/TRC/Trial03/Step01.trc 1e73cc1c 73714 168050 1449420580",
+     "S010/MotionCapture/SlopeDescent/TRC/Trial03/Step02.trc 05bee320 66091 148853 1449494426",
+     "S010/MotionCapture/SlopeDescent/TRC/Trial04/Step01.trc 1baf97da 73871 169460 1449560649",
+     "S010/MotionCapture/SlopeDescent/TRC/Trial04/Step02.trc 9d7374dd 62377 141071 1449634652",
+     "S010/MotionCapture/SlopeDescent/TRC/Trial05/Step01.trc 2fc3b277 63704 145618 1449697161",
+     "S010/MotionCapture/SlopeDescent/TRC/Trial05/Step02.trc 214605c3 60165 135883 1449760997",
+     "S010/MotionCapture/StairAscent/TRC/Trial01/Step01.trc 53ed715c 75958 170901 1449821294",
+     "S010/MotionCapture/StairAscent/TRC/Trial01/Step02.trc 5cd6183a 73059 164989 1449897383",
+     "S010/MotionCapture/StairAscent/TRC/Trial02/Step01.trc 6389c2b1 73094 164416 1449970573",
+     "S010/MotionCapture/StairAscent/TRC/Trial02/Step02.trc 74788f89 69098 155499 1450043798",
+     "S010/MotionCapture/StairAscent/TRC/Trial03/Step01.trc abf04913 81094 182574 1450113027",
+     "S010/MotionCapture/StairAscent/TRC/Trial03/Step02.trc 6cc4feea 73103 164859 1450194252",
+     "S010/MotionCapture/StairAscent/TRC/Trial04/Step01.trc 2ed334d3 80568 182574 1450267486",
+     "S010/MotionCapture/StairAscent/TRC/Trial04/Step02.trc 2821faaa 74455 168809 1450348185",
+     "S010/MotionCapture/StairAscent/TRC/Trial05/Step01.trc c21cb623 74828 168307 1450422771",
+     "S010/MotionCapture/StairAscent/TRC/Trial05/Step02.trc 5e802777 71285 162260 1450497730",
+     "S010/MotionCapture/StairDescent/TRC/Trial01/Step01.trc e9558621 72820 166296 1450569146",
+     "S010/MotionCapture/StairDescent/TRC/Trial01/Step02.trc 28d9dfd4 68492 155338 1450642098",
+     "S010/MotionCapture/StairDescent/TRC/Trial02/Step01.trc e5698558 71480 162376 1450710722",
+     "S010/MotionCapture/StairDescent/TRC/Trial02/Step02.trc 943535af 68441 155338 1450782334",
+     "S010/MotionCapture/StairDescent/TRC/Trial03/Step01.trc d21c64f5 78718 179498 1450850907",
+     "S010/MotionCapture/StairDescent/TRC/Trial03/Step02.trc 0675dcfb 70126 159229 1450929757",
+     "S010/MotionCapture/StairDescent/TRC/Trial04/Step01.trc cb680255 71917 163644 1451000015",
+     "S010/MotionCapture/StairDescent/TRC/Trial04/Step02.trc d7ef6711 65945 150150 1451072064",
+     "S010/MotionCapture/StairDescent/TRC/Trial05/Step01.trc a4ea048d 72761 166042 1451138141",
+     "S010/MotionCapture/StairDescent/TRC/Trial05/Step02.trc f8d1bfb4 67395 152744 1451211034",
+     "S010/MotionCapture/StandToSit/TRC/Trial01/Step01.trc 3f6c7333 120985 282395 1451278561",
+     "S010/MotionCapture/StandToSit/TRC/Trial02/Step01.trc ab5fb3e1 147395 345969 1451399676",
+     "S010/MotionCapture/StandToSit/TRC/Trial03/Step01.trc 3ef37a5f 162952 380992 1451547201",
+     "S010/MotionCapture/StandToSit/TRC/Trial04/Step01.trc e9b37cde 123278 287607 1451710283",
+     "S010/MotionCapture/StandToSit/TRC/Trial05/Step01.trc c7f8effe 149504 351156 1451833691",
+     "S010/MotionCapture/Static/TRC/Trial01.trc 9dd528cf 221508 522672 1406890225"
+    ],
+    "members_used": 1198,
+    "per_person_kind_task": {
+     "S001|EMG|-": {
+      "compressed_bytes": 77910370,
+      "members": 1
+     },
+     "S001|JointAngle|LevelWalking": {
+      "compressed_bytes": 222061,
+      "members": 10
+     },
+     "S001|JointAngle|SitToStand": {
+      "compressed_bytes": 171252,
+      "members": 5
+     },
+     "S001|JointAngle|SlopeAscent": {
+      "compressed_bytes": 246158,
+      "members": 10
+     },
+     "S001|JointAngle|SlopeDescent": {
+      "compressed_bytes": 235411,
+      "members": 10
+     },
+     "S001|JointAngle|StairAscent": {
+      "compressed_bytes": 270104,
+      "members": 10
+     },
+     "S001|JointAngle|StairDescent": {
+      "compressed_bytes": 264513,
+      "members": 10
+     },
+     "S001|JointAngle|StandToSit": {
+      "compressed_bytes": 180766,
+      "members": 5
+     },
+     "S001|MotionCapture|LevelWalking": {
+      "compressed_bytes": 590518,
+      "members": 10
+     },
+     "S001|MotionCapture|SitToStand": {
+      "compressed_bytes": 462145,
+      "members": 5
+     },
+     "S001|MotionCapture|SlopeAscent": {
+      "compressed_bytes": 658562,
+      "members": 10
+     },
+     "S001|MotionCapture|SlopeDescent": {
+      "compressed_bytes": 626829,
+      "members": 10
+     },
+     "S001|MotionCapture|StairAscent": {
+      "compressed_bytes": 720365,
+      "members": 10
+     },
+     "S001|MotionCapture|StairDescent": {
+      "compressed_bytes": 700477,
+      "members": 10
+     },
+     "S001|MotionCapture|StandToSit": {
+      "compressed_bytes": 488256,
+      "members": 5
+     },
+     "S001|MotionCapture|Static": {
+      "compressed_bytes": 238280,
+      "members": 1
+     },
+     "S002|EMG|-": {
+      "compressed_bytes": 71809195,
+      "members": 1
+     },
+     "S002|JointAngle|LevelWalking": {
+      "compressed_bytes": 239605,
+      "members": 10
+     },
+     "S002|JointAngle|SitToStand": {
+      "compressed_bytes": 187550,
+      "members": 5
+     },
+     "S002|JointAngle|SlopeAscent": {
+      "compressed_bytes": 291909,
+      "members": 10
+     },
+     "S002|JointAngle|SlopeDescent": {
+      "compressed_bytes": 254109,
+      "members": 10
+     },
+     "S002|JointAngle|StairAscent": {
+      "compressed_bytes": 305686,
+      "members": 10
+     },
+     "S002|JointAngle|StairDescent": {
+      "compressed_bytes": 292187,
+      "members": 10
+     },
+     "S002|JointAngle|StandToSit": {
+      "compressed_bytes": 163750,
+      "members": 5
+     },
+     "S002|MotionCapture|LevelWalking": {
+      "compressed_bytes": 637498,
+      "members": 10
+     },
+     "S002|MotionCapture|SitToStand": {
+      "compressed_bytes": 493778,
+      "members": 5
+     },
+     "S002|MotionCapture|SlopeAscent": {
+      "compressed_bytes": 786336,
+      "members": 10
+     },
+     "S002|MotionCapture|SlopeDescent": {
+      "compressed_bytes": 682901,
+      "members": 10
+     },
+     "S002|MotionCapture|StairAscent": {
+      "compressed_bytes": 829132,
+      "members": 10
+     },
+     "S002|MotionCapture|StairDescent": {
+      "compressed_bytes": 787892,
+      "members": 10
+     },
+     "S002|MotionCapture|StandToSit": {
+      "compressed_bytes": 431325,
+      "members": 5
+     },
+     "S002|MotionCapture|Static": {
+      "compressed_bytes": 231498,
+      "members": 1
+     },
+     "S003|EMG|-": {
+      "compressed_bytes": 54181741,
+      "members": 1
+     },
+     "S003|JointAngle|LevelWalking": {
+      "compressed_bytes": 111422,
+      "members": 5
+     },
+     "S003|JointAngle|SitToStand": {
+      "compressed_bytes": 178764,
+      "members": 5
+     },
+     "S003|JointAngle|SlopeAscent": {
+      "compressed_bytes": 284008,
+      "members": 10
+     },
+     "S003|JointAngle|SlopeDescent": {
+      "compressed_bytes": 249230,
+      "members": 10
+     },
+     "S003|JointAngle|StairAscent": {
+      "compressed_bytes": 285006,
+      "members": 10
+     },
+     "S003|JointAngle|StairDescent": {
+      "compressed_bytes": 275562,
+      "members": 10
+     },
+     "S003|JointAngle|StandToSit": {
+      "compressed_bytes": 228466,
+      "members": 5
+     },
+     "S003|MotionCapture|LevelWalking": {
+      "compressed_bytes": 298810,
+      "members": 5
+     },
+     "S003|MotionCapture|SitToStand": {
+      "compressed_bytes": 469461,
+      "members": 5
+     },
+     "S003|MotionCapture|SlopeAscent": {
+      "compressed_bytes": 760067,
+      "members": 10
+     },
+     "S003|MotionCapture|SlopeDescent": {
+      "compressed_bytes": 663236,
+      "members": 10
+     },
+     "S003|MotionCapture|StairAscent": {
+      "compressed_bytes": 765400,
+      "members": 10
+     },
+     "S003|MotionCapture|StairDescent": {
+      "compressed_bytes": 731234,
+      "members": 10
+     },
+     "S003|MotionCapture|StandToSit": {
+      "compressed_bytes": 602447,
+      "members": 5
+     },
+     "S003|MotionCapture|Static": {
+      "compressed_bytes": 214996,
+      "members": 1
+     },
+     "S004|EMG|-": {
+      "compressed_bytes": 65470627,
+      "members": 1
+     },
+     "S004|JointAngle|LevelWalking": {
+      "compressed_bytes": 220265,
+      "members": 10
+     },
+     "S004|JointAngle|SitToStand": {
+      "compressed_bytes": 156097,
+      "members": 5
+     },
+     "S004|JointAngle|SlopeAscent": {
+      "compressed_bytes": 270466,
+      "members": 10
+     },
+     "S004|JointAngle|SlopeDescent": {
+      "compressed_bytes": 246413,
+      "members": 10
+     },
+     "S004|JointAngle|StairAscent": {
+      "compressed_bytes": 258290,
+      "members": 10
+     },
+     "S004|JointAngle|StairDescent": {
+      "compressed_bytes": 247375,
+      "members": 10
+     },
+     "S004|JointAngle|StandToSit": {
+      "compressed_bytes": 201325,
+      "members": 5
+     },
+     "S004|MotionCapture|LevelWalking": {
+      "compressed_bytes": 581788,
+      "members": 10
+     },
+     "S004|MotionCapture|SitToStand": {
+      "compressed_bytes": 406052,
+      "members": 5
+     },
+     "S004|MotionCapture|SlopeAscent": {
+      "compressed_bytes": 726982,
+      "members": 10
+     },
+     "S004|MotionCapture|SlopeDescent": {
+      "compressed_bytes": 661504,
+      "members": 10
+     },
+     "S004|MotionCapture|StairAscent": {
+      "compressed_bytes": 694823,
+      "members": 10
+     },
+     "S004|MotionCapture|StairDescent": {
+      "compressed_bytes": 658817,
+      "members": 10
+     },
+     "S004|MotionCapture|StandToSit": {
+      "compressed_bytes": 531274,
+      "members": 5
+     },
+     "S004|MotionCapture|Static": {
+      "compressed_bytes": 231542,
+      "members": 1
+     },
+     "S005|EMG|-": {
+      "compressed_bytes": 69616299,
+      "members": 1
+     },
+     "S005|JointAngle|LevelWalking": {
+      "compressed_bytes": 223197,
+      "members": 10
+     },
+     "S005|JointAngle|SitToStand": {
+      "compressed_bytes": 152306,
+      "members": 5
+     },
+     "S005|JointAngle|SlopeAscent": {
+      "compressed_bytes": 272548,
+      "members": 10
+     },
+     "S005|JointAngle|SlopeDescent": {
+      "compressed_bytes": 238177,
+      "members": 10
+     },
+     "S005|JointAngle|StairAscent": {
+      "compressed_bytes": 288204,
+      "members": 10
+     },
+     "S005|JointAngle|StairDescent": {
+      "compressed_bytes": 261788,
+      "members": 10
+     },
+     "S005|JointAngle|StandToSit": {
+      "compressed_bytes": 217539,
+      "members": 5
+     },
+     "S005|MotionCapture|LevelWalking": {
+      "compressed_bytes": 597848,
+      "members": 10
+     },
+     "S005|MotionCapture|SitToStand": {
+      "compressed_bytes": 400638,
+      "members": 5
+     },
+     "S005|MotionCapture|SlopeAscent": {
+      "compressed_bytes": 730827,
+      "members": 10
+     },
+     "S005|MotionCapture|SlopeDescent": {
+      "compressed_bytes": 642851,
+      "members": 10
+     },
+     "S005|MotionCapture|StairAscent": {
+      "compressed_bytes": 774574,
+      "members": 10
+     },
+     "S005|MotionCapture|StairDescent": {
+      "compressed_bytes": 697818,
+      "members": 10
+     },
+     "S005|MotionCapture|StandToSit": {
+      "compressed_bytes": 579800,
+      "members": 5
+     },
+     "S005|MotionCapture|Static": {
+      "compressed_bytes": 233113,
+      "members": 1
+     },
+     "S006|EMG|-": {
+      "compressed_bytes": 77644645,
+      "members": 1
+     },
+     "S006|JointAngle|LevelWalking": {
+      "compressed_bytes": 130448,
+      "members": 6
+     },
+     "S006|JointAngle|SitToStand": {
+      "compressed_bytes": 171100,
+      "members": 5
+     },
+     "S006|JointAngle|SlopeAscent": {
+      "compressed_bytes": 304479,
+      "members": 10
+     },
+     "S006|JointAngle|SlopeDescent": {
+      "compressed_bytes": 257604,
+      "members": 10
+     },
+     "S006|JointAngle|StairAscent": {
+      "compressed_bytes": 324093,
+      "members": 10
+     },
+     "S006|JointAngle|StairDescent": {
+      "compressed_bytes": 305172,
+      "members": 10
+     },
+     "S006|JointAngle|StandToSit": {
+      "compressed_bytes": 259139,
+      "members": 5
+     },
+     "S006|MotionCapture|LevelWalking": {
+      "compressed_bytes": 346413,
+      "members": 6
+     },
+     "S006|MotionCapture|SitToStand": {
+      "compressed_bytes": 451757,
+      "members": 5
+     },
+     "S006|MotionCapture|SlopeAscent": {
+      "compressed_bytes": 821119,
+      "members": 10
+     },
+     "S006|MotionCapture|SlopeDescent": {
+      "compressed_bytes": 697433,
+      "members": 10
+     },
+     "S006|MotionCapture|StairAscent": {
+      "compressed_bytes": 874350,
+      "members": 10
+     },
+     "S006|MotionCapture|StairDescent": {
+      "compressed_bytes": 818636,
+      "members": 10
+     },
+     "S006|MotionCapture|StandToSit": {
+      "compressed_bytes": 686387,
+      "members": 5
+     },
+     "S006|MotionCapture|Static": {
+      "compressed_bytes": 219241,
+      "members": 1
+     },
+     "S007|EMG|-": {
+      "compressed_bytes": 74050458,
+      "members": 1
+     },
+     "S007|JointAngle|LevelWalking": {
+      "compressed_bytes": 225952,
+      "members": 10
+     },
+     "S007|JointAngle|SitToStand": {
+      "compressed_bytes": 161870,
+      "members": 5
+     },
+     "S007|JointAngle|SlopeAscent": {
+      "compressed_bytes": 285873,
+      "members": 10
+     },
+     "S007|JointAngle|SlopeDescent": {
+      "compressed_bytes": 277881,
+      "members": 10
+     },
+     "S007|JointAngle|StairAscent": {
+      "compressed_bytes": 302553,
+      "members": 10
+     },
+     "S007|JointAngle|StairDescent": {
+      "compressed_bytes": 301902,
+      "members": 10
+     },
+     "S007|JointAngle|StandToSit": {
+      "compressed_bytes": 236906,
+      "members": 5
+     },
+     "S007|MotionCapture|LevelWalking": {
+      "compressed_bytes": 605562,
+      "members": 10
+     },
+     "S007|MotionCapture|SitToStand": {
+      "compressed_bytes": 423960,
+      "members": 5
+     },
+     "S007|MotionCapture|SlopeAscent": {
+      "compressed_bytes": 771210,
+      "members": 10
+     },
+     "S007|MotionCapture|SlopeDescent": {
+      "compressed_bytes": 746643,
+      "members": 10
+     },
+     "S007|MotionCapture|StairAscent": {
+      "compressed_bytes": 820711,
+      "members": 10
+     },
+     "S007|MotionCapture|StairDescent": {
+      "compressed_bytes": 811011,
+      "members": 10
+     },
+     "S007|MotionCapture|StandToSit": {
+      "compressed_bytes": 630067,
+      "members": 5
+     },
+     "S007|MotionCapture|Static": {
+      "compressed_bytes": 226198,
+      "members": 1
+     },
+     "S008|EMG|-": {
+      "compressed_bytes": 68171274,
+      "members": 1
+     },
+     "S008|JointAngle|LevelWalking": {
+      "compressed_bytes": 216781,
+      "members": 10
+     },
+     "S008|JointAngle|SitToStand": {
+      "compressed_bytes": 172814,
+      "members": 5
+     },
+     "S008|JointAngle|SlopeAscent": {
+      "compressed_bytes": 263143,
+      "members": 10
+     },
+     "S008|JointAngle|SlopeDescent": {
+      "compressed_bytes": 239777,
+      "members": 10
+     },
+     "S008|JointAngle|StairAscent": {
+      "compressed_bytes": 259553,
+      "members": 10
+     },
+     "S008|JointAngle|StairDescent": {
+      "compressed_bytes": 255220,
+      "members": 10
+     },
+     "S008|JointAngle|StandToSit": {
+      "compressed_bytes": 204453,
+      "members": 5
+     },
+     "S008|MotionCapture|LevelWalking": {
+      "compressed_bytes": 578892,
+      "members": 10
+     },
+     "S008|MotionCapture|SitToStand": {
+      "compressed_bytes": 467379,
+      "members": 5
+     },
+     "S008|MotionCapture|SlopeAscent": {
+      "compressed_bytes": 710927,
+      "members": 10
+     },
+     "S008|MotionCapture|SlopeDescent": {
+      "compressed_bytes": 643960,
+      "members": 10
+     },
+     "S008|MotionCapture|StairAscent": {
+      "compressed_bytes": 700098,
+      "members": 10
+     },
+     "S008|MotionCapture|StairDescent": {
+      "compressed_bytes": 678209,
+      "members": 10
+     },
+     "S008|MotionCapture|StandToSit": {
+      "compressed_bytes": 560012,
+      "members": 5
+     },
+     "S008|MotionCapture|Static": {
+      "compressed_bytes": 239040,
+      "members": 1
+     },
+     "S009|EMG|-": {
+      "compressed_bytes": 68986819,
+      "members": 1
+     },
+     "S009|JointAngle|LevelWalking": {
+      "compressed_bytes": 241615,
+      "members": 10
+     },
+     "S009|JointAngle|SitToStand": {
+      "compressed_bytes": 125857,
+      "members": 4
+     },
+     "S009|JointAngle|SlopeAscent": {
+      "compressed_bytes": 277452,
+      "members": 10
+     },
+     "S009|JointAngle|SlopeDescent": {
+      "compressed_bytes": 251204,
+      "members": 10
+     },
+     "S009|JointAngle|StairAscent": {
+      "compressed_bytes": 299661,
+      "members": 10
+     },
+     "S009|JointAngle|StairDescent": {
+      "compressed_bytes": 287901,
+      "members": 10
+     },
+     "S009|JointAngle|StandToSit": {
+      "compressed_bytes": 148483,
+      "members": 4
+     },
+     "S009|MotionCapture|LevelWalking": {
+      "compressed_bytes": 652126,
+      "members": 10
+     },
+     "S009|MotionCapture|SitToStand": {
+      "compressed_bytes": 331532,
+      "members": 4
+     },
+     "S009|MotionCapture|SlopeAscent": {
+      "compressed_bytes": 747252,
+      "members": 10
+     },
+     "S009|MotionCapture|SlopeDescent": {
+      "compressed_bytes": 673814,
+      "members": 10
+     },
+     "S009|MotionCapture|StairAscent": {
+      "compressed_bytes": 811632,
+      "members": 10
+     },
+     "S009|MotionCapture|StairDescent": {
+      "compressed_bytes": 772123,
+      "members": 10
+     },
+     "S009|MotionCapture|StandToSit": {
+      "compressed_bytes": 389217,
+      "members": 4
+     },
+     "S009|MotionCapture|Static": {
+      "compressed_bytes": 199681,
+      "members": 1
+     },
+     "S010|EMG|-": {
+      "compressed_bytes": 67450575,
+      "members": 1
+     },
+     "S010|JointAngle|LevelWalking": {
+      "compressed_bytes": 223830,
+      "members": 10
+     },
+     "S010|JointAngle|SitToStand": {
+      "compressed_bytes": 193023,
+      "members": 5
+     },
+     "S010|JointAngle|SlopeAscent": {
+      "compressed_bytes": 281697,
+      "members": 10
+     },
+     "S010|JointAngle|SlopeDescent": {
+      "compressed_bytes": 251109,
+      "members": 10
+     },
+     "S010|JointAngle|StairAscent": {
+      "compressed_bytes": 276720,
+      "members": 10
+     },
+     "S010|JointAngle|StairDescent": {
+      "compressed_bytes": 265827,
+      "members": 10
+     },
+     "S010|JointAngle|StandToSit": {
+      "compressed_bytes": 266348,
+      "members": 5
+     },
+     "S010|MotionCapture|LevelWalking": {
+      "compressed_bytes": 600684,
+      "members": 10
+     },
+     "S010|MotionCapture|SitToStand": {
+      "compressed_bytes": 509130,
+      "members": 5
+     },
+     "S010|MotionCapture|SlopeAscent": {
+      "compressed_bytes": 757386,
+      "members": 10
+     },
+     "S010|MotionCapture|SlopeDescent": {
+      "compressed_bytes": 673473,
+      "members": 10
+     },
+     "S010|MotionCapture|StairAscent": {
+      "compressed_bytes": 746542,
+      "members": 10
+     },
+     "S010|MotionCapture|StairDescent": {
+      "compressed_bytes": 708095,
+      "members": 10
+     },
+     "S010|MotionCapture|StandToSit": {
+      "compressed_bytes": 704114,
+      "members": 5
+     },
+     "S010|MotionCapture|Static": {
+      "compressed_bytes": 221508,
+      "members": 1
+     }
+    }
+   },
+   "people": [
+    "S001",
+    "S002",
+    "S003",
+    "S004",
+    "S005",
+    "S006",
+    "S007",
+    "S008",
+    "S009",
+    "S010"
+   ]
+  },
+  "E2": {
+   "dataset": "AJILE12, DANDI 000055 version 0.220127.0436",
+   "owner_option": {
+    "keep_back": [
+     "sub-08",
+     "sub-09",
+     "sub-10",
+     "sub-11",
+     "sub-12"
+    ],
+    "then_scored": [
+     "sub-03",
+     "sub-04",
+     "sub-05",
+     "sub-06",
+     "sub-07"
+    ]
+   },
+   "rows": [
+    {
+     "calibration": {
+      "asset_id": "5122cc42-981c-4fa3-92f4-5f9ccfb8c092",
+      "bytes": 12993721651,
+      "path": "sub-03/sub-03_ses-3_behavior+ecephys.nwb",
+      "session": 3,
+      "sha256": "cb47e04883272a5d8152530bdf3655d2a79119ab032d4cf8d437a3d569c6fcd2"
+     },
+     "other_sessions_never_opened": [
+      5,
+      6
+     ],
+     "participant": "sub-03",
+     "scoring": {
+      "asset_id": "263d8a0a-167b-4a35-83b6-f924a455178f",
+      "bytes": 13013447892,
+      "path": "sub-03/sub-03_ses-4_behavior+ecephys.nwb",
+      "session": 4,
+      "sha256": "e7f8fee54bb5368d3718e622513c3792670d11bc4eaee0fc5bfc175dd58d4d46"
+     }
+    },
+    {
+     "calibration": {
+      "asset_id": "554a74cc-824b-4a02-8b23-63aa51ac2369",
+      "bytes": 8423945777,
+      "path": "sub-04/sub-04_ses-3_behavior+ecephys.nwb",
+      "session": 3,
+      "sha256": "a982a9ce4718c1d86aff4943306c6a4e936a64b44bcc899ac10d9c8c71da646e"
+     },
+     "other_sessions_never_opened": [
+      5,
+      6,
+      7
+     ],
+     "participant": "sub-04",
+     "scoring": {
+      "asset_id": "d914679e-dd71-4c7e-86be-92eaebfff0cd",
+      "bytes": 13233736922,
+      "path": "sub-04/sub-04_ses-4_behavior+ecephys.nwb",
+      "session": 4,
+      "sha256": "f7c997d11f687c7f3634dd62f1bab03ecaba25d95f9cda1e4c4fab5f10353ade"
+     }
+    },
+    {
+     "calibration": {
+      "asset_id": "c4674f3f-fd0d-471c-a9a4-a0d0eeaed105",
+      "bytes": 17155594911,
+      "path": "sub-05/sub-05_ses-3_behavior+ecephys.nwb",
+      "session": 3,
+      "sha256": "056ee3ce118a30b1db7f9486d7fe1d7bb15107c0d974d94524b3cea8e47196c6"
+     },
+     "other_sessions_never_opened": [
+      7
+     ],
+     "participant": "sub-05",
+     "scoring": {
+      "asset_id": "9c88256e-3088-4bbb-b6c5-b4f0e25e4129",
+      "bytes": 17170906865,
+      "path": "sub-05/sub-05_ses-4_behavior+ecephys.nwb",
+      "session": 4,
+      "sha256": "d2a1c4708dbc29a1db21afcd959583bbacc1898e168ea67fef993b9db3a30f61"
+     }
+    },
+    {
+     "calibration": {
+      "asset_id": "87c2f790-8f6c-4e73-a54f-f275af6a2680",
+      "bytes": 8620317009,
+      "path": "sub-06/sub-06_ses-3_behavior+ecephys.nwb",
+      "session": 3,
+      "sha256": "8940fed2ac6239b7f5667547b5ace7828d662fe687dc1a1a2f05e75826bf17e4"
+     },
+     "other_sessions_never_opened": [
+      5,
+      6,
+      7
+     ],
+     "participant": "sub-06",
+     "scoring": {
+      "asset_id": "eea59c28-3e69-4fb6-a6c0-fbd57dd303cc",
+      "bytes": 12885238804,
+      "path": "sub-06/sub-06_ses-4_behavior+ecephys.nwb",
+      "session": 4,
+      "sha256": "2f688c4850e5cc633cce2b4847e8cf5d5d6d910b0219739817f7524a6198fd0b"
+     }
+    },
+    {
+     "calibration": {
+      "asset_id": "5791a9f3-5c0c-484b-b690-b5ce9fea589e",
+      "bytes": 10021863235,
+      "path": "sub-07/sub-07_ses-3_behavior+ecephys.nwb",
+      "session": 3,
+      "sha256": "a80285a4fd829aaba58c8b36fd670c6594d3d98708aa32282e962f5a07d6728c"
+     },
+     "other_sessions_never_opened": [
+      5,
+      6,
+      7
+     ],
+     "participant": "sub-07",
+     "scoring": {
+      "asset_id": "dbf11bb5-e73c-43aa-8f9e-d87807e09971",
+      "bytes": 10395219939,
+      "path": "sub-07/sub-07_ses-4_behavior+ecephys.nwb",
+      "session": 4,
+      "sha256": "2e6bc139cf5cfe913283a17d451474ea3b2563cc0beda41edbd19b0cd4fc0be3"
+     }
+    },
+    {
+     "calibration": {
+      "asset_id": "7de9b149-2994-455e-a8c6-5e5893245baf",
+      "bytes": 14919492016,
+      "path": "sub-08/sub-08_ses-3_behavior+ecephys.nwb",
+      "session": 3,
+      "sha256": "95ab8bb566dc23f7153946f0a67fd2c6641bc70662ee6e7fd2ba0b9483e41de6"
+     },
+     "other_sessions_never_opened": [
+      5,
+      6,
+      7
+     ],
+     "participant": "sub-08",
+     "scoring": {
+      "asset_id": "07fe6ecc-1a51-4655-a925-dcc3ecb6183f",
+      "bytes": 14898053963,
+      "path": "sub-08/sub-08_ses-4_behavior+ecephys.nwb",
+      "session": 4,
+      "sha256": "04029121342ab4f56dc5b8b487e166bfd49ff752012ccf4fd535e083b8e611cc"
+     }
+    },
+    {
+     "calibration": {
+      "asset_id": "b5b123ea-557f-4b69-ad11-8b3ff6bc9bd5",
+      "bytes": 19794037714,
+      "path": "sub-09/sub-09_ses-3_behavior+ecephys.nwb",
+      "session": 3,
+      "sha256": "2635ebb93567752019ed69e1d2951e53c2d137a1e038edaf7df2c127f3ba4778"
+     },
+     "other_sessions_never_opened": [
+      5,
+      6,
+      7
+     ],
+     "participant": "sub-09",
+     "scoring": {
+      "asset_id": "4d960b31-6a46-4578-a620-2dfdad46bf55",
+      "bytes": 19741644394,
+      "path": "sub-09/sub-09_ses-4_behavior+ecephys.nwb",
+      "session": 4,
+      "sha256": "0d220f2c055dc20f28620f9510433de67c343abebad5d24185db818de8d332d4"
+     }
+    },
+    {
+     "calibration": {
+      "asset_id": "e22abf61-170a-4d52-89f5-27e394e04afa",
+      "bytes": 19715930499,
+      "path": "sub-10/sub-10_ses-3_behavior+ecephys.nwb",
+      "session": 3,
+      "sha256": "6ae08347daed71deebe677798cab7db69e04be728b18ba07a645c6add2942486"
+     },
+     "other_sessions_never_opened": [
+      5,
+      6,
+      7
+     ],
+     "participant": "sub-10",
+     "scoring": {
+      "asset_id": "0d4e2bea-fd00-405f-923c-86141269c39a",
+      "bytes": 19723279309,
+      "path": "sub-10/sub-10_ses-4_behavior+ecephys.nwb",
+      "session": 4,
+      "sha256": "6ae359fd31373e825b456605426135040859c566b04030bbd25ba40501b0f308"
+     }
+    },
+    {
+     "calibration": {
+      "asset_id": "0b4aac2b-e080-4854-b792-4ea4359e2044",
+      "bytes": 17160159566,
+      "path": "sub-11/sub-11_ses-3_behavior+ecephys.nwb",
+      "session": 3,
+      "sha256": "42ce126cdf84ae9224235dffc4442fd9793f07b94526c7f88ce80f5971424a22"
+     },
+     "other_sessions_never_opened": [
+      5,
+      6,
+      7
+     ],
+     "participant": "sub-11",
+     "scoring": {
+      "asset_id": "1fc40baf-4007-4d96-9d6a-61213b14aecd",
+      "bytes": 16985717017,
+      "path": "sub-11/sub-11_ses-4_behavior+ecephys.nwb",
+      "session": 4,
+      "sha256": "f3f145c11adeae27ca7e3110f94dffca073b9737954a9de4d93441f2aafe0ec4"
+     }
+    },
+    {
+     "calibration": {
+      "asset_id": "3db4e507-c2de-4ab3-a052-88d9800f36d0",
+      "bytes": 19928317351,
+      "path": "sub-12/sub-12_ses-3_behavior+ecephys.nwb",
+      "session": 3,
+      "sha256": "e0f2fe25556c77867793c1bdf95c232b33b338b4d5c4bfcc320803e04f087616"
+     },
+     "other_sessions_never_opened": [
+      5,
+      6,
+      7
+     ],
+     "participant": "sub-12",
+     "scoring": {
+      "asset_id": "257cec4c-84ba-4047-815c-a790d4f51d7e",
+      "bytes": 19946639193,
+      "path": "sub-12/sub-12_ses-4_behavior+ecephys.nwb",
+      "session": 4,
+      "sha256": "7f1767df98a99a78022f8c5c3b988102356af81232ffbc5d81fb971e0906bb52"
+     }
+    }
+   ],
+   "rule": "participants 03-12; calibration = lowest-numbered session; scoring = next-numbered session",
+   "window_rule": "for k = 0, 1, 2, ...: candidate issue frame = int(sha256('pooled-encoder-0.2|ajile12|' + participant + '|ses-' + session + '|' + k), 16) mod n_frames; accept if eligible (protocol section 7.2) and at least 2 s from every accepted issue time; stop at 600 accepted or k = 200000"
+  },
+  "E3": {
+   "dataset": "MC_Maze (Neural Latents Benchmark), Jenkins",
+   "files": [
+    {
+     "asset_id": "26e85f09-39b7-480f-b337-278a8f034007",
+     "bytes": 690612247,
+     "dandiset": "000128",
+     "path": "sub-Jenkins/sub-Jenkins_ses-full_desc-train_behavior+ecephys.nwb",
+     "recorded": "2009-09-25",
+     "session": "full",
+     "sha256": "a27f84f9c31f077011062fd99a6ced199fdf19e656151f056c3c6244a408a3c4",
+     "version": "0.220113.0400"
+    },
+    {
+     "asset_id": "e67b57b2-e9ad-4d95-b9e3-1262997360dc",
+     "bytes": 148590536,
+     "dandiset": "000138",
+     "path": "sub-Jenkins/sub-Jenkins_ses-large_desc-train_behavior+ecephys.nwb",
+     "recorded": "2009-10-06",
+     "session": "large",
+     "sha256": "1188ddf5b822dd9ac49afb8916f4b42a85867613cf7f169d0b04a1d1aeecd700",
+     "version": "0.220113.0407"
+    }
+   ],
+   "rule": "adapt on the NLB 'train' trials and score on the NLB 'val' trials of each training file; the desc-test files are never opened"
+  },
+  "E4_conditional": {
+   "order": [
+    {
+     "lab": "wittenlab",
+     "sha256": "0e69c440d40819472bd7bbf17b104431a99b7bbe764c9114db8d1faa33939749"
+    },
+    {
+     "lab": "angelakilab",
+     "sha256": "0ffb300ee89b62c761df87224fcf6d091987607573bed22ceba31ea6726d5a99"
+    },
+    {
+     "lab": "zadorlab",
+     "sha256": "243c5d9cfe4a256489e37568e0660ef134e588704c99e06c28a7a6e078494a5a"
+    },
+    {
+     "lab": "hausserlab",
+     "sha256": "363a713d471d5babf7c3986716b722a9c98706b7527c2593fda3f30a692efd10"
+    },
+    {
+     "lab": "hoferlab",
+     "sha256": "426d4413cfe233674e41a6d2eceb8d048561fb3a90268090390c8b89d1fcce6d"
+    },
+    {
+     "lab": "churchlandlab_ucla",
+     "sha256": "513a3d4ea0f6bf8acce8d86438c33f8cdb769f75cb8b117357d35847bfc72e15"
+    },
+    {
+     "lab": "mainenlab",
+     "sha256": "5a09f27a3d7e18832ae64dcf1e72558b30c3a8ab25b602904d6403f7b2d232f1"
+    },
+    {
+     "lab": "churchlandlab",
+     "sha256": "5aa1ee1d27508dfb60760625caf6239723972cfd893aabb01fd82ae4b4f912d7"
+    },
+    {
+     "lab": "mrsicflogellab",
+     "sha256": "5c576633de84d355cf30c41d104fcc9fb5b92957155995ff3f761e55b4e41aa9"
+    },
+    {
+     "lab": "cortexlab",
+     "sha256": "8cc95c1f9037d29448584eb63a0ce899762072e3be6f33166bdbc9e5ce16ba93"
+    },
+    {
+     "lab": "danlab",
+     "sha256": "956ec2d0a71d6611554dc21b440f6f21c8a6a7a46eac0b35d32e8a2d905a59f7"
+    },
+    {
+     "lab": "steinmetzlab",
+     "sha256": "d05c95edd189feb7a20915d3162c6c20175236e190fcd4616ad4af8d633cd021"
+    }
+   ],
+   "roster": "2023_12_bwm_release.csv at int-brain-lab/paper-brain-wide-map commit 118fc36cb3602934466ad2c6087c2b3b441f9f1f, sha256 db9edfc6f5d92a4df81d488bfb1068f43526a13717bb8fc7da2aecdd28876ac4",
+   "rule": "rank labs by ascending sha256('pooled-encoder-0.2|ibl-bwm-2023_12|lab|' + lab); after the IBL audit, the first 3 labs in this order with at least 4 never-referenced mice are evaluation labs; never-referenced mice of every other lab may enter training"
+  }
+ },
+ "inner_folds": {
+  "cemhsey": {
+   "inner_training": [
+    "S2",
+    "S3"
+   ],
+   "inner_validation": [
+    "S1"
+   ],
+   "kind": "person",
+   "n_units": 3,
+   "rows": [
+    {
+     "fold": 0,
+     "rank": 0,
+     "sha256": "224f186c2f4087605d612ada33802ce97e6513404a83c1b35d3c5441b2e6bdcc",
+     "unit": "S1"
+    },
+    {
+     "fold": 1,
+     "rank": 1,
+     "sha256": "b72f9d09498ec5f4479b05e52f62e614016ef069c6188a05a531dc24a7aefb8c",
+     "unit": "S3"
+    },
+    {
+     "fold": 2,
+     "rank": 2,
+     "sha256": "ee0ebd787d2e9ef4c7a730aa93b1ce857847759e22fec439b2eb221da177d4d2",
+     "unit": "S2"
+    }
+   ],
+   "rule": "rank units by ascending sha256('pooled-encoder-0.2|fold|' + dataset + '|' + unit); fold = rank mod 5; fold 0 is the inner-validation fold"
+  },
+  "ds003739": {
+   "inner_training": [
+    "sub-001",
+    "sub-003",
+    "sub-009",
+    "sub-011",
+    "sub-012",
+    "sub-013",
+    "sub-016",
+    "sub-017",
+    "sub-018",
+    "sub-020",
+    "sub-022",
+    "sub-026",
+    "sub-027",
+    "sub-029"
+   ],
+   "inner_validation": [
+    "sub-028",
+    "sub-006",
+    "sub-023",
+    "sub-010"
+   ],
+   "kind": "person",
+   "n_units": 18,
+   "rows": [
+    {
+     "fold": 0,
+     "rank": 0,
+     "sha256": "063f379548bfece0bd263db62ba20e725a42a01b7b69c37237cf59ad265c4f7b",
+     "unit": "sub-028"
+    },
+    {
+     "fold": 1,
+     "rank": 1,
+     "sha256": "388602c861d63a4461b1a3e280534c0070cfd17357baeb8cd360837ca5dbb036",
+     "unit": "sub-009"
+    },
+    {
+     "fold": 2,
+     "rank": 2,
+     "sha256": "5f8cd9d8033cd05eabe44b2dc6ff4f240cbf7c6ee3bc33ba168742eabadbd228",
+     "unit": "sub-026"
+    },
+    {
+     "fold": 3,
+     "rank": 3,
+     "sha256": "6c0d3b2c53ffb99e131c5b599afdd8b2cf15d8915d8a0929610a0cc0b5c61ba4",
+     "unit": "sub-016"
+    },
+    {
+     "fold": 4,
+     "rank": 4,
+     "sha256": "6cc59e629c4b9e74053b02c9ca353db589cecb19051d9985b496286345b65e28",
+     "unit": "sub-012"
+    },
+    {
+     "fold": 0,
+     "rank": 5,
+     "sha256": "735cb36a5f3f599da5a857742f15279f90ce625287d773ac80478a014d188f8c",
+     "unit": "sub-006"
+    },
+    {
+     "fold": 1,
+     "rank": 6,
+     "sha256": "90d76b885144c2224fb66e794f46e716a5cd5bb0cf00e236b9bcbf5b15d78bcb",
+     "unit": "sub-022"
+    },
+    {
+     "fold": 2,
+     "rank": 7,
+     "sha256": "aad02ce58452e97c2e3c63d8d240d80fa23360301fcc525799520bdf0218266d",
+     "unit": "sub-001"
+    },
+    {
+     "fold": 3,
+     "rank": 8,
+     "sha256": "b383893310e11c194dbd068c8dfff28ccb285c75345205cdd2640b4a310ab07c",
+     "unit": "sub-011"
+    },
+    {
+     "fold": 4,
+     "rank": 9,
+     "sha256": "b4c035d5854618aa396ce5553db152f429caa5e681a1876a4e24b660b878f0da",
+     "unit": "sub-020"
+    },
+    {
+     "fold": 0,
+     "rank": 10,
+     "sha256": "cb57d189356e7bc4ce810724085642f4677248645a2426b3cade988e6fdbaf33",
+     "unit": "sub-023"
+    },
+    {
+     "fold": 1,
+     "rank": 11,
+     "sha256": "d09162247e379faa3520bd4541284891363a085ab81443c9f3c3d562d1fba19a",
+     "unit": "sub-017"
+    },
+    {
+     "fold": 2,
+     "rank": 12,
+     "sha256": "d9c25e0d2bd79e18038c03c23303b7551884cc70e6a55c4a0888a2e1f7430c77",
+     "unit": "sub-027"
+    },
+    {
+     "fold": 3,
+     "rank": 13,
+     "sha256": "e42dfd7b7d6ecbecfecb73326b6051e5c82240839218fa4a208c83a4ae278050",
+     "unit": "sub-029"
+    },
+    {
+     "fold": 4,
+     "rank": 14,
+     "sha256": "ed14b8316820ba91fa00612870c899479d2ddacb755c433ef814e270f5509bdb",
+     "unit": "sub-018"
+    },
+    {
+     "fold": 0,
+     "rank": 15,
+     "sha256": "f468e7e22d11abda4333001acbcff6d0cd4a7a6b9f8f300c9327c2e4c9d047dd",
+     "unit": "sub-010"
+    },
+    {
+     "fold": 1,
+     "rank": 16,
+     "sha256": "f7b344e8a44b6b6269fca3e9ae0f56f0ad08b1833c5d387e12547b9ced7dbb41",
+     "unit": "sub-013"
+    },
+    {
+     "fold": 2,
+     "rank": 17,
+     "sha256": "fd4515e8c93942abceefa6ae1a4de25e5cedc6bf847fe226bd5bf5e1e6059746",
+     "unit": "sub-003"
+    }
+   ],
+   "rule": "rank units by ascending sha256('pooled-encoder-0.2|fold|' + dataset + '|' + unit); fold = rank mod 5; fold 0 is the inner-validation fold"
+  },
+  "gait120": {
+   "inner_training": [
+    "S014",
+    "S016",
+    "S018",
+    "S019",
+    "S022",
+    "S023",
+    "S026",
+    "S027",
+    "S028",
+    "S030",
+    "S031",
+    "S035",
+    "S038",
+    "S039",
+    "S041",
+    "S042",
+    "S043",
+    "S045",
+    "S052",
+    "S054",
+    "S055",
+    "S057",
+    "S059",
+    "S061",
+    "S062",
+    "S063",
+    "S064",
+    "S070",
+    "S071",
+    "S073",
+    "S074",
+    "S076",
+    "S077",
+    "S080",
+    "S085",
+    "S086",
+    "S087",
+    "S088",
+    "S089",
+    "S090",
+    "S091",
+    "S093",
+    "S095",
+    "S096",
+    "S102",
+    "S106",
+    "S107",
+    "S110",
+    "S111",
+    "S112",
+    "S113",
+    "S116"
+   ],
+   "inner_validation": [
+    "S108",
+    "S033",
+    "S036",
+    "S115",
+    "S050",
+    "S011",
+    "S092",
+    "S046",
+    "S098",
+    "S104",
+    "S066",
+    "S020",
+    "S119",
+    "S053"
+   ],
+   "kind": "person",
+   "n_units": 66,
+   "rows": [
+    {
+     "fold": 0,
+     "rank": 0,
+     "sha256": "00b1855cd9c2349e7b7684636d7540c002c5812975c4707613890a35113ec74b",
+     "unit": "S108"
+    },
+    {
+     "fold": 1,
+     "rank": 1,
+     "sha256": "058efccbbcfaaecf7125f64143b41532a1750a7b67c47e65d6caea1173d65bcc",
+     "unit": "S096"
+    },
+    {
+     "fold": 2,
+     "rank": 2,
+     "sha256": "18dc878adf22721842b685cd1f28789e8d1ae025f00ac471b33256efe9bab88d",
+     "unit": "S091"
+    },
+    {
+     "fold": 3,
+     "rank": 3,
+     "sha256": "197b877a6f05a20b707119f04519fb2b9184c9d14f2fcb65bd357e1da36d1cbd",
+     "unit": "S018"
+    },
+    {
+     "fold": 4,
+     "rank": 4,
+     "sha256": "20756e819df2de7040c466439c7ba3cbeb271c737e6840d6d3a1cb843dbf5471",
+     "unit": "S111"
+    },
+    {
+     "fold": 0,
+     "rank": 5,
+     "sha256": "2543aff760a55dd2bb91a8668d28191d2285467c58072e9a538cb388819d809a",
+     "unit": "S033"
+    },
+    {
+     "fold": 1,
+     "rank": 6,
+     "sha256": "279710a858cd96cb0a83e41124d1a5209be7b63c9cdd92ab7b79305bd214412a",
+     "unit": "S014"
+    },
+    {
+     "fold": 2,
+     "rank": 7,
+     "sha256": "27e463ee2029b79ebdcb21f6f0dcc58f81617411acbb21e13d02e632a04be313",
+     "unit": "S088"
+    },
+    {
+     "fold": 3,
+     "rank": 8,
+     "sha256": "2c8b19293e7440e568d5e89895074e64625105272577a5f524efc3740427a00f",
+     "unit": "S019"
+    },
+    {
+     "fold": 4,
+     "rank": 9,
+     "sha256": "38300d0b1f44be7ba7f54c931e9e900e3fe176cb8108afbb1fa9e541a540ca78",
+     "unit": "S076"
+    },
+    {
+     "fold": 0,
+     "rank": 10,
+     "sha256": "38e9e0863cab8775dfd58004c74838a1ad781dad02a0239cd4b47a66feb43bb3",
+     "unit": "S036"
+    },
+    {
+     "fold": 1,
+     "rank": 11,
+     "sha256": "3a9c5e01853a28a6074e447fedb11d2f07f0730de6a5bb0b6c3ddc1c459776cd",
+     "unit": "S016"
+    },
+    {
+     "fold": 2,
+     "rank": 12,
+     "sha256": "3bf8bf6d6c6216647e4a9b2cde77685990ac6167335d4cd4d2a3c442475374b5",
+     "unit": "S106"
+    },
+    {
+     "fold": 3,
+     "rank": 13,
+     "sha256": "3eee6976f48a3af0097b9a9cb49cc9562791a5803b2e4a17693bf0bb0d7f2734",
+     "unit": "S073"
+    },
+    {
+     "fold": 4,
+     "rank": 14,
+     "sha256": "43828ad50ac3b7d3a5c010b313305d83c8286dec9d3836fa8f1da033c651fb02",
+     "unit": "S042"
+    },
+    {
+     "fold": 0,
+     "rank": 15,
+     "sha256": "49d799a33bd32892b8657bba67e2f058c9561dbd86798ed3fa7ae2ebdcd9baa8",
+     "unit": "S115"
+    },
+    {
+     "fold": 1,
+     "rank": 16,
+     "sha256": "4ba4c7f85ebefb53a07178081d0afa5aecf00f482c2cb1996c6b9cf66f52e22e",
+     "unit": "S038"
+    },
+    {
+     "fold": 2,
+     "rank": 17,
+     "sha256": "4ce2c9ae86b9b210c6933495a51cb99cd07558d5969de333d00c45c3e0733908",
+     "unit": "S080"
+    },
+    {
+     "fold": 3,
+     "rank": 18,
+     "sha256": "541add1601558ffecd3ea999d375f53ac822a0b4c0b3a537f7c46fae4d2ad572",
+     "unit": "S043"
+    },
+    {
+     "fold": 4,
+     "rank": 19,
+     "sha256": "591cabffbb8e5f0544eacfd7e8bb3de83531f4e21bef5af217801ff7c354ed87",
+     "unit": "S071"
+    },
+    {
+     "fold": 0,
+     "rank": 20,
+     "sha256": "5a7bfbb5342097dc3f9c97208ba899910d98ce6bc79a8c0e5f486a5c517e7eec",
+     "unit": "S050"
+    },
+    {
+     "fold": 1,
+     "rank": 21,
+     "sha256": "60e535f94017b752d08d2b514d048a412947b3da1d8bbe478dab262a87955851",
+     "unit": "S110"
+    },
+    {
+     "fold": 2,
+     "rank": 22,
+     "sha256": "63ba7b20cbd54e36ec11d7c459ad4cfa12c560e5cf6e14735233324908052ccb",
+     "unit": "S095"
+    },
+    {
+     "fold": 3,
+     "rank": 23,
+     "sha256": "6aa6c56bf53b9b26b81180b32b05f9f58a1be48fafa0577cad872f53581e5b3c",
+     "unit": "S059"
+    },
+    {
+     "fold": 4,
+     "rank": 24,
+     "sha256": "6cef6b541026d09cb5626e6fcb5ee34e007822d84506589b3ae538e5758b88eb",
+     "unit": "S055"
+    },
+    {
+     "fold": 0,
+     "rank": 25,
+     "sha256": "6d8db5fa659203fb3e86338ec2a730659c40510b00410ea6ddc87bd60d88a4f0",
+     "unit": "S011"
+    },
+    {
+     "fold": 1,
+     "rank": 26,
+     "sha256": "6e16705429c6d589be859eb9aa1bdaaba8b4d7c786137b4ac3faa13696cb3a66",
+     "unit": "S022"
+    },
+    {
+     "fold": 2,
+     "rank": 27,
+     "sha256": "70261a3a11be7ce167f7d4ceef446d3a2a1169a028611de6f72dff1f03f418d9",
+     "unit": "S087"
+    },
+    {
+     "fold": 3,
+     "rank": 28,
+     "sha256": "74db53f040df09e321e0d89b21418ed64462968c3596b13f530756e1c9d3fbc2",
+     "unit": "S089"
+    },
+    {
+     "fold": 4,
+     "rank": 29,
+     "sha256": "77f2c92d16cb446743536adc4559cfca3da31c6025b11700bd38d25bd3e77d1f",
+     "unit": "S031"
+    },
+    {
+     "fold": 0,
+     "rank": 30,
+     "sha256": "79afc890ec47b3cd53de883b2d4b7f719e22a7ffad02459a1b88652ad4e1a870",
+     "unit": "S092"
+    },
+    {
+     "fold": 1,
+     "rank": 31,
+     "sha256": "8cc5feed78c80c146055480df64ca2979eeb1dcf849fc2065c4c56522645d22e",
+     "unit": "S063"
+    },
+    {
+     "fold": 2,
+     "rank": 32,
+     "sha256": "95387a497e74d576964a4fcca2a844502efaf79e78bbe05a26335cfac51fd1b0",
+     "unit": "S107"
+    },
+    {
+     "fold": 3,
+     "rank": 33,
+     "sha256": "95a7d08df42b508e6ae5ad20857c05a3649fd4d9419f20077d721a8ab3e0b082",
+     "unit": "S035"
+    },
+    {
+     "fold": 4,
+     "rank": 34,
+     "sha256": "97462dc29294995cef17b791afe9492c89f951cf72a13dca8de2a2d404268e51",
+     "unit": "S116"
+    },
+    {
+     "fold": 0,
+     "rank": 35,
+     "sha256": "a0567b62902b71d4a768d668a12a39df3f9ba796cf8562b7b79db84898bdfb1a",
+     "unit": "S046"
+    },
+    {
+     "fold": 1,
+     "rank": 36,
+     "sha256": "a1fa04752b325414b7f5f589becd8e3134b871bd2a74af29523e71c238603139",
+     "unit": "S086"
+    },
+    {
+     "fold": 2,
+     "rank": 37,
+     "sha256": "a434c88c0150a0a2021afc040063df241ee216abb1d29ce9779b3e37fd638f3b",
+     "unit": "S030"
+    },
+    {
+     "fold": 3,
+     "rank": 38,
+     "sha256": "a5568690a1ea7f19ce5a8ad4cddb421c52027cb3a5c9673c79893103cbe2bd2e",
+     "unit": "S023"
+    },
+    {
+     "fold": 4,
+     "rank": 39,
+     "sha256": "acf5384a150b34a13f60f1861eef9333658a4d7482e7242bdc5c3f57cc05aac1",
+     "unit": "S064"
+    },
+    {
+     "fold": 0,
+     "rank": 40,
+     "sha256": "acfcb742e92a3574954fa9df80ac37fb7293fd7ba6028a6edd118c49994a80b0",
+     "unit": "S098"
+    },
+    {
+     "fold": 1,
+     "rank": 41,
+     "sha256": "ad06fd9b21387130074ebc7c3d75aeaa1cc8cd5c9b6a3de1a2c52aa8f320f342",
+     "unit": "S026"
+    },
+    {
+     "fold": 2,
+     "rank": 42,
+     "sha256": "b0f790df39b95b32d8fb5514cbba8ee12fa84fcbe60b4329b7b4f0822ab76cde",
+     "unit": "S112"
+    },
+    {
+     "fold": 3,
+     "rank": 43,
+     "sha256": "b191e1fbafabac9c33ff103a83181779308fd5da29dee8dab57f28f52d8b1d9e",
+     "unit": "S070"
+    },
+    {
+     "fold": 4,
+     "rank": 44,
+     "sha256": "b40e92afc1b0e4c51bf94d383918d6e43d4488d0fde0503771ef09d59b8a0ab5",
+     "unit": "S028"
+    },
+    {
+     "fold": 0,
+     "rank": 45,
+     "sha256": "b56275afaa047d6d321481126547501811cc75c880b5f9a19a0e07f0fb297f8f",
+     "unit": "S104"
+    },
+    {
+     "fold": 1,
+     "rank": 46,
+     "sha256": "c8249f1d7d13d00227380c0e290e9705d61d78c10b25059455542aaed5b17565",
+     "unit": "S041"
+    },
+    {
+     "fold": 2,
+     "rank": 47,
+     "sha256": "ca38a0edd8004eb7fd8b735cc212a9105913cdb394aedbef04a1ed63430a49e9",
+     "unit": "S102"
+    },
+    {
+     "fold": 3,
+     "rank": 48,
+     "sha256": "ccc1638680437a0bc47155f1e13385a2e3a07c30672c819edbf3f9fa7506297a",
+     "unit": "S062"
+    },
+    {
+     "fold": 4,
+     "rank": 49,
+     "sha256": "d301b0b63fba328a535cfaed651e1093f1c64798a6a2328fded3234e0d5d4213",
+     "unit": "S061"
+    },
+    {
+     "fold": 0,
+     "rank": 50,
+     "sha256": "d439e904e9b47c5d698ebcf2949d10e8498017778e9d2cfd56297f2ae598ca34",
+     "unit": "S066"
+    },
+    {
+     "fold": 1,
+     "rank": 51,
+     "sha256": "db6f29b616c7582ad44e0376ffed36091cfe520043d1a0cb7e509d26a97210a2",
+     "unit": "S039"
+    },
+    {
+     "fold": 2,
+     "rank": 52,
+     "sha256": "dbdfcd32953a44872102d64abd02689477efa76b5cbf62cf59e9bc920671dc1e",
+     "unit": "S074"
+    },
+    {
+     "fold": 3,
+     "rank": 53,
+     "sha256": "e1059767d398d255c945b8a9fb5889ccf7103aaa36684cd20606570a1e9116e5",
+     "unit": "S052"
+    },
+    {
+     "fold": 4,
+     "rank": 54,
+     "sha256": "e2a5f5a313961f029edbc413bf7f904da4e3c486f9ff03862d213774f81e0dcb",
+     "unit": "S077"
+    },
+    {
+     "fold": 0,
+     "rank": 55,
+     "sha256": "e41e6d26329794c41f5ed88d3929e843501a5b8b754859fb99266c72603dedc9",
+     "unit": "S020"
+    },
+    {
+     "fold": 1,
+     "rank": 56,
+     "sha256": "e6245f7820d05d331da1937c35e8c2c28cc29cfda9e525a877b2bbb55349a070",
+     "unit": "S090"
+    },
+    {
+     "fold": 2,
+     "rank": 57,
+     "sha256": "e7b42fc54760184e2fcff2927f32bf1c0f2b5f0a2aad44037b1950365d2f3220",
+     "unit": "S093"
+    },
+    {
+     "fold": 3,
+     "rank": 58,
+     "sha256": "e996b7484cce1b712f188f78e88b83b428d0258a5c3100da4f5b521b59c7af59",
+     "unit": "S054"
+    },
+    {
+     "fold": 4,
+     "rank": 59,
+     "sha256": "ee0dfc22056d3b99076f4d9ccde57094260adcd7d98aa854389a9ee22b5c2793",
+     "unit": "S045"
+    },
+    {
+     "fold": 0,
+     "rank": 60,
+     "sha256": "ef0f0c0b91c212431287ddb2ea2a025455b9136591342d8edc7b021a2a6181d5",
+     "unit": "S119"
+    },
+    {
+     "fold": 1,
+     "rank": 61,
+     "sha256": "f20005e5a15f735d37bf47eb2cc2001351860d41091909476692d1833240f0e2",
+     "unit": "S027"
+    },
+    {
+     "fold": 2,
+     "rank": 62,
+     "sha256": "f2f161f2266dc0db5871ebe3e528b0a60869fb3b7891dac2e19936a67fba72a5",
+     "unit": "S057"
+    },
+    {
+     "fold": 3,
+     "rank": 63,
+     "sha256": "f428e2bd13fecee13a92737bc5aeb5b78a3a7dc50f3c9879edfe092823c9fbde",
+     "unit": "S113"
+    },
+    {
+     "fold": 4,
+     "rank": 64,
+     "sha256": "f62dc4b984549ccdb360490b1b001713544cc108687ec41589c8f036a6452b86",
+     "unit": "S085"
+    },
+    {
+     "fold": 0,
+     "rank": 65,
+     "sha256": "fc0559c75cc5a9f6463977fe414375199d955f1faa5a66d64bb409edb6a79133",
+     "unit": "S053"
+    }
+   ],
+   "rule": "rank units by ascending sha256('pooled-encoder-0.2|fold|' + dataset + '|' + unit); fold = rank mod 5; fold 0 is the inner-validation fold"
+  },
+  "hygrip": {
+   "inner_training": [
+    "/C",
+    "/D",
+    "/E",
+    "/I",
+    "/K"
+   ],
+   "inner_validation": [
+    "/B",
+    "/H"
+   ],
+   "kind": "person",
+   "n_units": 7,
+   "rows": [
+    {
+     "fold": 0,
+     "rank": 0,
+     "sha256": "371435c5faa5a87e97b7322e7c9fee687aa6c735eb6a36c9695dc40921e21a3b",
+     "unit": "/B"
+    },
+    {
+     "fold": 1,
+     "rank": 1,
+     "sha256": "56af4892613fab0da7c24839bd7c6794b563480d4e281c6b4f6336ee6f712ce1",
+     "unit": "/I"
+    },
+    {
+     "fold": 2,
+     "rank": 2,
+     "sha256": "8d67e441291d2d18db890d346781ec180018954fc75239a9886961fcfc5310cb",
+     "unit": "/E"
+    },
+    {
+     "fold": 3,
+     "rank": 3,
+     "sha256": "98c5a6158aebeecd76fe673f4ca541bc744b0d208086a1245dc4a4c416a2c2e5",
+     "unit": "/K"
+    },
+    {
+     "fold": 4,
+     "rank": 4,
+     "sha256": "a1ea7a8a7f681b163c77166cbe2ed180449791fcbee54f2ecbe9f288330699bc",
+     "unit": "/D"
+    },
+    {
+     "fold": 0,
+     "rank": 5,
+     "sha256": "e6a3c87ff3617c09eaff195e36537f119283ad39d25a0e2b3d785cfe6a7a9a26",
+     "unit": "/H"
+    },
+    {
+     "fold": 1,
+     "rank": 6,
+     "sha256": "fb0c769790e59a3cc17c5e1b75c23d699810c7b093c5dc863486bed8d5e4d406",
+     "unit": "/C"
+    }
+   ],
+   "rule": "rank units by ascending sha256('pooled-encoder-0.2|fold|' + dataset + '|' + unit); fold = rank mod 5; fold 0 is the inner-validation fold"
+  },
+  "hyser": {
+   "inner_training": [
+    "S01",
+    "S06",
+    "S10",
+    "S11",
+    "S13",
+    "S15",
+    "S16",
+    "S19",
+    "S20"
+   ],
+   "inner_validation": [
+    "S09",
+    "S05",
+    "S17"
+   ],
+   "kind": "person",
+   "n_units": 12,
+   "rows": [
+    {
+     "fold": 0,
+     "rank": 0,
+     "sha256": "04fa8ade3f98c0af87df1d1e1168cae8565d355f21979e4153620595f1f4d1da",
+     "unit": "S09"
+    },
+    {
+     "fold": 1,
+     "rank": 1,
+     "sha256": "1f88e6e2994f4d07c6daaab0bf11aff2d16f6494f403e072608e7c67c0c9d522",
+     "unit": "S15"
+    },
+    {
+     "fold": 2,
+     "rank": 2,
+     "sha256": "3b7f099ba6d91575ffbf05e5ed254c6bb5e47e9e63873164c288d7e647de3d31",
+     "unit": "S10"
+    },
+    {
+     "fold": 3,
+     "rank": 3,
+     "sha256": "58d0440859cfa9f7dafdfd69b4574af4d6480933d1c79726ab845da5f6e287ea",
+     "unit": "S11"
+    },
+    {
+     "fold": 4,
+     "rank": 4,
+     "sha256": "5e076536ebec59292a6823ecefc6c2ad947ccbfbc9487f79ef8309cb387d0597",
+     "unit": "S16"
+    },
+    {
+     "fold": 0,
+     "rank": 5,
+     "sha256": "6ae736dff7a4a21be7e41bbd958d0540ae754b018fe176cee83c532de979e369",
+     "unit": "S05"
+    },
+    {
+     "fold": 1,
+     "rank": 6,
+     "sha256": "6d5f6272ff2201f460db14d99b19ac1a3b57f6664f807fda5f0b834f6b659652",
+     "unit": "S20"
+    },
+    {
+     "fold": 2,
+     "rank": 7,
+     "sha256": "70ad2abb0b88f70bde2c95ca6c189bc147eb0efbb26063fa20bc247c4063fb75",
+     "unit": "S19"
+    },
+    {
+     "fold": 3,
+     "rank": 8,
+     "sha256": "909e525eef9a771091fb4f50d99aaefcd05bcd6dca75eb4618580fae0fe45a53",
+     "unit": "S01"
+    },
+    {
+     "fold": 4,
+     "rank": 9,
+     "sha256": "ac681d9fe20a9cd15cd650030861dd0a6669b416988654dd063821c8e443ea10",
+     "unit": "S06"
+    },
+    {
+     "fold": 0,
+     "rank": 10,
+     "sha256": "b34f8d84fe636639f92fbe671c8b074e7fb5181f49ea625d23ea69af4ae2870d",
+     "unit": "S17"
+    },
+    {
+     "fold": 1,
+     "rank": 11,
+     "sha256": "c0c41cd164b7e3a2d0b66676f924991e1728277f2e38d4eec3ee10317e661acc",
+     "unit": "S13"
+    }
+   ],
+   "rule": "rank units by ascending sha256('pooled-encoder-0.2|fold|' + dataset + '|' + unit); fold = rank mod 5; fold 0 is the inner-validation fold"
+  },
+  "izmir": {
+   "inner_training": [
+    "S01",
+    "S04",
+    "S07",
+    "S12",
+    "S17",
+    "S19",
+    "S20",
+    "S21",
+    "S22",
+    "S23",
+    "S24",
+    "S26",
+    "S30"
+   ],
+   "inner_validation": [
+    "S08",
+    "S28",
+    "S29",
+    "S15"
+   ],
+   "kind": "person",
+   "n_units": 17,
+   "rows": [
+    {
+     "fold": 0,
+     "rank": 0,
+     "sha256": "0390771704fa36e52d8b47eb73dba6b288be282fc9ce2fe7a4c60129ab0d9950",
+     "unit": "S08"
+    },
+    {
+     "fold": 1,
+     "rank": 1,
+     "sha256": "03b18a69bafebef5696b1e70d207a7c5bd1ffeb72228cf51a386d97155df724c",
+     "unit": "S23"
+    },
+    {
+     "fold": 2,
+     "rank": 2,
+     "sha256": "08dcc01cfb730dd171c616bf24b3400d460d0a42ea3bb8e064b6adbad1967ef5",
+     "unit": "S01"
+    },
+    {
+     "fold": 3,
+     "rank": 3,
+     "sha256": "312ca712f6ec3c8b65351dd46ad3a28bcb2d754f78a3e29c95a24b8128866662",
+     "unit": "S24"
+    },
+    {
+     "fold": 4,
+     "rank": 4,
+     "sha256": "404be5cd86bf7778734a6e1b5e3e7225b055474b1666750e9d327c1a7bcc805f",
+     "unit": "S20"
+    },
+    {
+     "fold": 0,
+     "rank": 5,
+     "sha256": "48fac9aba59a9edf0afe255520e7138a351a512386d884a72c75aaafdf2e5a9c",
+     "unit": "S28"
+    },
+    {
+     "fold": 1,
+     "rank": 6,
+     "sha256": "7d86fe8b5cc6dc8a25b05a42b17314a107de336a3d3cabfd890584110baf65c3",
+     "unit": "S19"
+    },
+    {
+     "fold": 2,
+     "rank": 7,
+     "sha256": "819bce5af15e267eea55eb755b78588dd3cbaeebb5efe02e57120b088bb69dfb",
+     "unit": "S30"
+    },
+    {
+     "fold": 3,
+     "rank": 8,
+     "sha256": "87941ae6efd226e1a480b799ffe1da40233c8f4d2be95ff17a0b80561066a605",
+     "unit": "S17"
+    },
+    {
+     "fold": 4,
+     "rank": 9,
+     "sha256": "97b592b29cfd56d55c908f5c2062198a3b16a415bed31749c94c2835ea7d07bc",
+     "unit": "S04"
+    },
+    {
+     "fold": 0,
+     "rank": 10,
+     "sha256": "97d22759b234890dfc2a1c6e51869100b4f2d6de2ca8179550ddf1121d394ffb",
+     "unit": "S29"
+    },
+    {
+     "fold": 1,
+     "rank": 11,
+     "sha256": "a9ab2e4f3d1868139439ec3efb676d51d80e4c212e9b6d9a25f0fbf07da3497d",
+     "unit": "S26"
+    },
+    {
+     "fold": 2,
+     "rank": 12,
+     "sha256": "afc74c1e3fb8ff3fdfe495f6a78b0715f73afdc4b84b095d8066e1fa7fd9025c",
+     "unit": "S21"
+    },
+    {
+     "fold": 3,
+     "rank": 13,
+     "sha256": "b45906ec19071806458b38c99ef8a6017139f436555fe40fc203870e601c31c7",
+     "unit": "S12"
+    },
+    {
+     "fold": 4,
+     "rank": 14,
+     "sha256": "b498347209d2f37b0f73b3078ed97c7de0c74b07d99b344ccfcae1c705851185",
+     "unit": "S07"
+    },
+    {
+     "fold": 0,
+     "rank": 15,
+     "sha256": "cc21cc50083c8fb7d5ba5032aee73c340edb081ce04077e49e10601e704f53fc",
+     "unit": "S15"
+    },
+    {
+     "fold": 1,
+     "rank": 16,
+     "sha256": "ef7fc7f92aa1a1cc0cf4edceac592046a954edd2a49cb748f511bc8d04ed97db",
+     "unit": "S22"
+    }
+   ],
+   "rule": "rank units by ascending sha256('pooled-encoder-0.2|fold|' + dataset + '|' + unit); fold = rank mod 5; fold 0 is the inner-validation fold"
+  },
+  "katmah": {
+   "inner_training": [
+    "S1",
+    "S10",
+    "S11",
+    "S14",
+    "S15",
+    "S16",
+    "S17",
+    "S18",
+    "S19",
+    "S2",
+    "S21",
+    "S23",
+    "S24",
+    "S26",
+    "S27",
+    "S28",
+    "S29",
+    "S3",
+    "S31",
+    "S32",
+    "S34",
+    "S35",
+    "S36",
+    "S37",
+    "S38",
+    "S39",
+    "S40",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9"
+   ],
+   "inner_validation": [
+    "S12",
+    "S20",
+    "S4",
+    "S25",
+    "S30",
+    "S13",
+    "S22",
+    "S33"
+   ],
+   "kind": "person",
+   "n_units": 40,
+   "rows": [
+    {
+     "fold": 0,
+     "rank": 0,
+     "sha256": "0b971571f0d3a5265262beead37fc862f589f9963cd2f81fd1f0c3b5985df1e3",
+     "unit": "S12"
+    },
+    {
+     "fold": 1,
+     "rank": 1,
+     "sha256": "0cf8fd9236bd60e1a8ca646ff2032c1f5bdade3fca1f2c855cdebebeeda0ea39",
+     "unit": "S8"
+    },
+    {
+     "fold": 2,
+     "rank": 2,
+     "sha256": "0e247e468c906f3a3943495d84c6cb893e33393ae1d6895cec708e0ef231979d",
+     "unit": "S38"
+    },
+    {
+     "fold": 3,
+     "rank": 3,
+     "sha256": "110396f7db13d5fd25b3816768db170986a2aa529c15f8118d89b2d457a09881",
+     "unit": "S16"
+    },
+    {
+     "fold": 4,
+     "rank": 4,
+     "sha256": "11a055a10c2f7940537def21050833f8ba5d60291dc271d4bd0955fc758ca3cb",
+     "unit": "S1"
+    },
+    {
+     "fold": 0,
+     "rank": 5,
+     "sha256": "1b1a86db2b75d12cc5d2f82b59fcd76b91825a1f8d119b15ee7510913a351b5d",
+     "unit": "S20"
+    },
+    {
+     "fold": 1,
+     "rank": 6,
+     "sha256": "24a17cd37c516a00d61aa52bbe02741e84f81dfb45b243fffba454e9fd74c3e4",
+     "unit": "S6"
+    },
+    {
+     "fold": 2,
+     "rank": 7,
+     "sha256": "2cf8e9b1d2f1070b667d4ead99023771500e1c919ceb1dfd1bdf1ac5c843ef4e",
+     "unit": "S37"
+    },
+    {
+     "fold": 3,
+     "rank": 8,
+     "sha256": "33ef15046b8d3daba0d5b9e288aaa7fd372cfe09f2b103aaa7b7e75cc0954405",
+     "unit": "S39"
+    },
+    {
+     "fold": 4,
+     "rank": 9,
+     "sha256": "3664a881cb28604b7b219328aa641ec6698a238af93615d70b4691fa2faf50f8",
+     "unit": "S2"
+    },
+    {
+     "fold": 0,
+     "rank": 10,
+     "sha256": "3f07a81fb4322017faca3a3acf3249aae7d4a0cb0229056d593a8e14ac84ae59",
+     "unit": "S4"
+    },
+    {
+     "fold": 1,
+     "rank": 11,
+     "sha256": "4454b81c3678dd50fd99184ca18fe7586d6c671301edf0fb1996620f7945cbf9",
+     "unit": "S19"
+    },
+    {
+     "fold": 2,
+     "rank": 12,
+     "sha256": "4b51b69809bdd93fe88bcac75a0115deff46f4f819ca5b8cec8c469e4fabace1",
+     "unit": "S15"
+    },
+    {
+     "fold": 3,
+     "rank": 13,
+     "sha256": "4b7660c13a8740cff266fd00d4659eca0ce8ffa54fa005ab467ca53be3b400fb",
+     "unit": "S21"
+    },
+    {
+     "fold": 4,
+     "rank": 14,
+     "sha256": "5223de0657ae51218c2af9f313250600d276ba8c0c36614ab92892376cb56dfb",
+     "unit": "S34"
+    },
+    {
+     "fold": 0,
+     "rank": 15,
+     "sha256": "57a084ec848cbe53278555a87697516202c8a096cbe5e4b634819c6afd118cd9",
+     "unit": "S25"
+    },
+    {
+     "fold": 1,
+     "rank": 16,
+     "sha256": "5d9b2bb75237b9e09812118fc1af58f7c3dc95f0a60bd602536da41e217d49b7",
+     "unit": "S40"
+    },
+    {
+     "fold": 2,
+     "rank": 17,
+     "sha256": "5fe396defc167f7d02984b0467fdc039630c30eb1a8d66aa2074fec4f67fee58",
+     "unit": "S5"
+    },
+    {
+     "fold": 3,
+     "rank": 18,
+     "sha256": "6796fa6c4432a83681f8f96e3f114e7c5729059f61b79dd64b7f4fd78a7e1aa6",
+     "unit": "S17"
+    },
+    {
+     "fold": 4,
+     "rank": 19,
+     "sha256": "6c0635327d7a669c0d1c4110fb8b3985b4061ab89d9e326a470a093437c3b862",
+     "unit": "S9"
+    },
+    {
+     "fold": 0,
+     "rank": 20,
+     "sha256": "6e371c91b47fe9407dc19514efa24cfbc71550f134bc08b3028a7e07207a07ec",
+     "unit": "S30"
+    },
+    {
+     "fold": 1,
+     "rank": 21,
+     "sha256": "82053797ca1e295e506d6027fc51886f1f85f2fcac8273848e9dd80e9a6bdfb9",
+     "unit": "S14"
+    },
+    {
+     "fold": 2,
+     "rank": 22,
+     "sha256": "84d450cf8c824c597e100616e69d2ed9faee411a96ba060b0a379d2f17ccc94e",
+     "unit": "S27"
+    },
+    {
+     "fold": 3,
+     "rank": 23,
+     "sha256": "8f36c3a05cedb32570a3df75f445269e720805c4bda9bb3d58f223e42b3fee58",
+     "unit": "S24"
+    },
+    {
+     "fold": 4,
+     "rank": 24,
+     "sha256": "94ecf1c2cb2544429931167b38edcdb947817b41e7cbafbeb916623c547c5708",
+     "unit": "S7"
+    },
+    {
+     "fold": 0,
+     "rank": 25,
+     "sha256": "a0172469bf2bffc75388e8dc548f10297a8c994f521e02d66711a98d61c571d2",
+     "unit": "S13"
+    },
+    {
+     "fold": 1,
+     "rank": 26,
+     "sha256": "b1630d58a45e63bc417483b69574bbfd9d3519723d449128dc7566f47526a37f",
+     "unit": "S26"
+    },
+    {
+     "fold": 2,
+     "rank": 27,
+     "sha256": "bbeba5093b8551df0d07c5610bb74f2a6f46eddc0641162456505206acc7a8a6",
+     "unit": "S10"
+    },
+    {
+     "fold": 3,
+     "rank": 28,
+     "sha256": "bc29d2215a1d9fbdaa8b19bed1dda9a5a120eb52677527ed04943f3158a64d8f",
+     "unit": "S29"
+    },
+    {
+     "fold": 4,
+     "rank": 29,
+     "sha256": "bde9b6bd3875bd5aecd55ed82f21179e920e747892749f9137d2183d222ae7c6",
+     "unit": "S23"
+    },
+    {
+     "fold": 0,
+     "rank": 30,
+     "sha256": "be6f4734889888eae0dd098211cf34a60b375524a5c8845c98d8d6bc9e0ade48",
+     "unit": "S22"
+    },
+    {
+     "fold": 1,
+     "rank": 31,
+     "sha256": "c4ca00fc11dcbb34bab49e9723edf8e62d43407e4326c1c73a5e2a7981e20d8a",
+     "unit": "S3"
+    },
+    {
+     "fold": 2,
+     "rank": 32,
+     "sha256": "c6c917411b14be08eee7389c78a1bf2b7855784e16b52fbfc3165401eea39422",
+     "unit": "S11"
+    },
+    {
+     "fold": 3,
+     "rank": 33,
+     "sha256": "caebebb9a7685052ae7cf4c420c693fc9ad5ceca8daf6b6ff70fef8a0266d190",
+     "unit": "S31"
+    },
+    {
+     "fold": 4,
+     "rank": 34,
+     "sha256": "d8a2ba4b3d2377bbe4392a056116e4d0344c349b07754c68891cfc0659ca4685",
+     "unit": "S36"
+    },
+    {
+     "fold": 0,
+     "rank": 35,
+     "sha256": "db31e34172ed1a0017747773df331810c9a15b94b645ef5be661de400ae90939",
+     "unit": "S33"
+    },
+    {
+     "fold": 1,
+     "rank": 36,
+     "sha256": "e06953c1c56d2ff6f08e8f3ffa45dcc5d9101442e4d2a2e78f4812c34dbcc36d",
+     "unit": "S35"
+    },
+    {
+     "fold": 2,
+     "rank": 37,
+     "sha256": "e344c0c34f792bc0f26b53c603da916491425b6607c6155fa46d43e138048610",
+     "unit": "S32"
+    },
+    {
+     "fold": 3,
+     "rank": 38,
+     "sha256": "eaa4f5a058c04da284d00176c2cd8dfb6e6e3b4cd25021c6d33806670737d30f",
+     "unit": "S18"
+    },
+    {
+     "fold": 4,
+     "rank": 39,
+     "sha256": "f3e117aaaa421ae6ea96382c9e9ad62ec1f44c1f6ac91a946d6effcc80a8954b",
+     "unit": "S28"
+    }
+   ],
+   "rule": "rank units by ascending sha256('pooled-encoder-0.2|fold|' + dataset + '|' + unit); fold = rank mod 5; fold 0 is the inner-validation fold"
+  },
+  "moreira": {
+   "inner_training": [
+    "1",
+    "11",
+    "12",
+    "13",
+    "14",
+    "6"
+   ],
+   "inner_validation": [
+    "8",
+    "10"
+   ],
+   "kind": "person",
+   "n_units": 8,
+   "rows": [
+    {
+     "fold": 0,
+     "rank": 0,
+     "sha256": "1f28360f9c4592acc4bc478d03efe9b329eff83336a32449e831ca8cc7e4e398",
+     "unit": "8"
+    },
+    {
+     "fold": 1,
+     "rank": 1,
+     "sha256": "259435d96e191ab2ca078a90c183d86f5d4a185eedb2f16ca2c453ba6498b301",
+     "unit": "14"
+    },
+    {
+     "fold": 2,
+     "rank": 2,
+     "sha256": "315ab134a4f51b1e6b2aa6827a79f923434505f6dbaf5f559523186186bdae87",
+     "unit": "11"
+    },
+    {
+     "fold": 3,
+     "rank": 3,
+     "sha256": "575facedaf84dbd306e00b88c698547b1ae7f259ebf9df2a435eb88862610987",
+     "unit": "12"
+    },
+    {
+     "fold": 4,
+     "rank": 4,
+     "sha256": "8158b79ae2f7935446852d2f4ea352a8a55cc4e343724ed9f7717062db81dc32",
+     "unit": "6"
+    },
+    {
+     "fold": 0,
+     "rank": 5,
+     "sha256": "9d7ad04926428e575c9653a3a7d310e8d2eead4dbb7656183fe906d571acf832",
+     "unit": "10"
+    },
+    {
+     "fold": 1,
+     "rank": 6,
+     "sha256": "a11988461691e5fe9de7a7ab99d8a485ba71e0318b12bb75dcd0564babb72369",
+     "unit": "13"
+    },
+    {
+     "fold": 2,
+     "rank": 7,
+     "sha256": "f58e2cd501f4a3f39ac2c3d570bf9f11ec9cd64c94bfdce79c9992f9fe4e9832",
+     "unit": "1"
+    }
+   ],
+   "rule": "rank units by ascending sha256('pooled-encoder-0.2|fold|' + dataset + '|' + unit); fold = rank mod 5; fold 0 is the inner-validation fold"
+  },
+  "ofner": {
+   "inner_training": [
+    "S1",
+    "S2",
+    "S3",
+    "S5",
+    "S6"
+   ],
+   "inner_validation": [
+    "S4",
+    "S7"
+   ],
+   "kind": "person",
+   "n_units": 7,
+   "rows": [
+    {
+     "fold": 0,
+     "rank": 0,
+     "sha256": "07abedd943c254056b6ebede8463279df6da150f0ecd25bf77f57d1d850bdec1",
+     "unit": "S4"
+    },
+    {
+     "fold": 1,
+     "rank": 1,
+     "sha256": "08c1e45a8c57637a4d9f14d6fd5706b07873f480f8d0a081b08914f013cafd18",
+     "unit": "S5"
+    },
+    {
+     "fold": 2,
+     "rank": 2,
+     "sha256": "1cdfa0f16451c76fb7291ee56bff419f04bff6771e5c3d0a32c40d46769289fa",
+     "unit": "S2"
+    },
+    {
+     "fold": 3,
+     "rank": 3,
+     "sha256": "3368ed5b83815a5f0f0b0aa130a9ab1ee9402263bb334f6fc6c0f5276130c5d5",
+     "unit": "S1"
+    },
+    {
+     "fold": 4,
+     "rank": 4,
+     "sha256": "747e81fefcd727fa0af564ac5a9949e50686b2f930e18d414e2a3083c3723dc2",
+     "unit": "S6"
+    },
+    {
+     "fold": 0,
+     "rank": 5,
+     "sha256": "ade7b380ffe2fb810925a7c8a5e5ce25cecfe7ded6120e2e202b25edc3bd2487",
+     "unit": "S7"
+    },
+    {
+     "fold": 1,
+     "rank": 6,
+     "sha256": "dac3759b6745e228d9c32db6ac97918d94dd8d53a681cbe8de5d09ba79e4da29",
+     "unit": "S3"
+    }
+   ],
+   "rule": "rank units by ascending sha256('pooled-encoder-0.2|fold|' + dataset + '|' + unit); fold = rank mod 5; fold 0 is the inner-validation fold"
+  },
+  "sabes": {
+   "kind": "time_block",
+   "n_units": 2,
+   "recordings": [
+    "indy_20170131_02",
+    "loco_20170215_02"
+   ],
+   "rule": "fewer than 3 independent individuals or recordings: each recording is cut into 5 blocks of equal duration in time order; block b is fold b; fold 4 (the latest block) is the inner-validation fold; a 1 s gap is dropped at each block boundary"
+  },
+  "schreiber_moissenet": {
+   "inner_training": [
+    "2014001",
+    "2014002",
+    "2014003",
+    "2014004",
+    "2014006",
+    "2014007",
+    "2014008",
+    "2014009",
+    "2014011",
+    "2014014",
+    "2014015",
+    "2014016",
+    "2014019",
+    "2014022",
+    "2014025",
+    "2014029",
+    "2014030",
+    "2014031",
+    "2014033",
+    "2014040",
+    "2014046",
+    "2014050",
+    "2014051",
+    "2014052"
+   ],
+   "inner_validation": [
+    "2014005",
+    "2014049",
+    "2014024",
+    "2014034",
+    "2014048",
+    "2014013"
+   ],
+   "kind": "person",
+   "n_units": 30,
+   "rows": [
+    {
+     "fold": 0,
+     "rank": 0,
+     "sha256": "23a58ead5acdc2fee9d0831a3dcbef8f883fb684e39b2672d2132e1754254705",
+     "unit": "2014005"
+    },
+    {
+     "fold": 1,
+     "rank": 1,
+     "sha256": "25a80014295da64a8f5b9b40780accd4a6546984eb6df24805c47b3ca4051a24",
+     "unit": "2014019"
+    },
+    {
+     "fold": 2,
+     "rank": 2,
+     "sha256": "35a4bcf2e8003db9f3af737e01ad96fc2aee00b565359aaf473bb28c45140001",
+     "unit": "2014001"
+    },
+    {
+     "fold": 3,
+     "rank": 3,
+     "sha256": "3606d19a6b290edcb27be91b51f170bc69e88bddfcc1a1f39ec68f3d950b0149",
+     "unit": "2014011"
+    },
+    {
+     "fold": 4,
+     "rank": 4,
+     "sha256": "37ebc8dffca560bb06636db496680dfedc21664500730da229e4a3bc7edc2a01",
+     "unit": "2014022"
+    },
+    {
+     "fold": 0,
+     "rank": 5,
+     "sha256": "621dc69f5345bdb9acd53334d2ab859530a233b823dca2ec70438f0d609625f9",
+     "unit": "2014049"
+    },
+    {
+     "fold": 1,
+     "rank": 6,
+     "sha256": "6c48831da3c294d41f4e120f8d802c8c302ed817c9f499d7aeb6155e5e84debb",
+     "unit": "2014003"
+    },
+    {
+     "fold": 2,
+     "rank": 7,
+     "sha256": "72a3c8fe850a9ba52613c9e22609e7f635b1bf97157ac91297866eedc21fabcd",
+     "unit": "2014015"
+    },
+    {
+     "fold": 3,
+     "rank": 8,
+     "sha256": "794b7bbf30184adcd3ee230846e9fba261b4183240718ae80bcb9ea3df7316be",
+     "unit": "2014014"
+    },
+    {
+     "fold": 4,
+     "rank": 9,
+     "sha256": "7b282f3223a3aa9c2472baddf1884269a25da51b48a0cbd633994e2c97908a84",
+     "unit": "2014040"
+    },
+    {
+     "fold": 0,
+     "rank": 10,
+     "sha256": "7fbc8c858cf607d36846ac3a2be70abe51c49c019f270d61457e471fb91c3875",
+     "unit": "2014024"
+    },
+    {
+     "fold": 1,
+     "rank": 11,
+     "sha256": "877428ac03a46ff13d6e00c52b3c82b3207e5bc0458fcae01326b254a8520067",
+     "unit": "2014051"
+    },
+    {
+     "fold": 2,
+     "rank": 12,
+     "sha256": "91a2906f65ce43544519943859978338ddb4e66e70f26f536ab2e90e3645a672",
+     "unit": "2014009"
+    },
+    {
+     "fold": 3,
+     "rank": 13,
+     "sha256": "93043b71e0114140c338ab49b5786b384384438cfc9fdc4a5c42cfc662c011ea",
+     "unit": "2014008"
+    },
+    {
+     "fold": 4,
+     "rank": 14,
+     "sha256": "950650d6169eb53fb0c68e40eec812f48714ec5e26e573fcfb71918dca3ad7fd",
+     "unit": "2014007"
+    },
+    {
+     "fold": 0,
+     "rank": 15,
+     "sha256": "95fb6848a1c2996a896b27327e0c4748ced7d9b310b9966b5ed41b4b744b496a",
+     "unit": "2014034"
+    },
+    {
+     "fold": 1,
+     "rank": 16,
+     "sha256": "984026bdc77a9975dbe94a5fc199f4a3a96ef9ba953ea9e2735f9185ddcc5dc7",
+     "unit": "2014006"
+    },
+    {
+     "fold": 2,
+     "rank": 17,
+     "sha256": "aaec9082d3f7c0cd6813c2a6064328a6abe1a167717a87ce6851d604b88c8fc8",
+     "unit": "2014052"
+    },
+    {
+     "fold": 3,
+     "rank": 18,
+     "sha256": "aaee170be7c346c53de0c46d474529f9b8bcd5603d7d1da34f053c4c77704b18",
+     "unit": "2014025"
+    },
+    {
+     "fold": 4,
+     "rank": 19,
+     "sha256": "b08f22705cba4e881d88f842c622d49e5dc46b6433be9b4c6b0d75652097c0d6",
+     "unit": "2014002"
+    },
+    {
+     "fold": 0,
+     "rank": 20,
+     "sha256": "b1887dfa95d66ff2c741d8ce4fb672a2b3f5a31438af10da2a216ef4def3ddab",
+     "unit": "2014048"
+    },
+    {
+     "fold": 1,
+     "rank": 21,
+     "sha256": "bcd993416c2ae9897894fd74c4237ca1c7bef2daf0af82579f8dc3e5fa0014d6",
+     "unit": "2014016"
+    },
+    {
+     "fold": 2,
+     "rank": 22,
+     "sha256": "cacf77523a6abb84ec81ef704846764fa832d2c1bae024c31f586ba5620ec35f",
+     "unit": "2014033"
+    },
+    {
+     "fold": 3,
+     "rank": 23,
+     "sha256": "cf2d7da840d0862f37ef9944cfa27ef86e0e46db8a9106ba60095eb1da0d32ad",
+     "unit": "2014029"
+    },
+    {
+     "fold": 4,
+     "rank": 24,
+     "sha256": "d0ac492fc6a672206ebe61c387634a21105e6b7cf1506d543cc8e3fe6f960b1f",
+     "unit": "2014030"
+    },
+    {
+     "fold": 0,
+     "rank": 25,
+     "sha256": "d8b37e3b6852bd2aded3a78e042acce1dbbc3d0b24aabee38e04d5fbbdc74d67",
+     "unit": "2014013"
+    },
+    {
+     "fold": 1,
+     "rank": 26,
+     "sha256": "db1813222913292e451c9a71ad20ac0ec6172c150b60da9327ef6b4fa12464a8",
+     "unit": "2014050"
+    },
+    {
+     "fold": 2,
+     "rank": 27,
+     "sha256": "f1d65cf835679cd993a289d83dd7ec3ee76754148a6f5dfffa2784bd24ed6dc1",
+     "unit": "2014031"
+    },
+    {
+     "fold": 3,
+     "rank": 28,
+     "sha256": "f69a06f2fb23a44c6b61e78d95a219cd243228da966b2a65247cb9be8b67a261",
+     "unit": "2014004"
+    },
+    {
+     "fold": 4,
+     "rank": 29,
+     "sha256": "f8a1916203243c30a13bc67dbe89e7eb65d566ea00fc329a1c9849a7ea57698f",
+     "unit": "2014046"
+    }
+   ],
+   "rule": "rank units by ascending sha256('pooled-encoder-0.2|fold|' + dataset + '|' + unit); fold = rank mod 5; fold 0 is the inner-validation fold"
+  },
+  "van_criekinge": {
+   "inner_training": [
+    "SUBJ024",
+    "SUBJ038",
+    "SUBJ040",
+    "SUBJ043",
+    "SUBJ044",
+    "SUBJ061",
+    "SUBJ062",
+    "SUBJ110",
+    "SUBJ112"
+   ],
+   "inner_validation": [
+    "SUBJ096",
+    "SUBJ082",
+    "SUBJ039"
+   ],
+   "kind": "person",
+   "n_units": 12,
+   "rows": [
+    {
+     "fold": 0,
+     "rank": 0,
+     "sha256": "00a0d465884cf29a99ad5885ce4ea889fa32b3aa6b7690f97471c3e3782f6e67",
+     "unit": "SUBJ096"
+    },
+    {
+     "fold": 1,
+     "rank": 1,
+     "sha256": "024850c3a0e8093ebd972a780b8b8de8beac560bb367188f7c106c841a254eae",
+     "unit": "SUBJ061"
+    },
+    {
+     "fold": 2,
+     "rank": 2,
+     "sha256": "03da00d556ba16f3ec2ed6ce1863ae52457878240d0cd67d68e2e2485696c0f2",
+     "unit": "SUBJ062"
+    },
+    {
+     "fold": 3,
+     "rank": 3,
+     "sha256": "2a60bf270932150c455c92d25f251b72d9cde9932a347706b86e2e2e6a9d9a00",
+     "unit": "SUBJ110"
+    },
+    {
+     "fold": 4,
+     "rank": 4,
+     "sha256": "566e8e938ca5aecb7502c95729e102391ea32fa2968d7b8185972dece9220f9d",
+     "unit": "SUBJ043"
+    },
+    {
+     "fold": 0,
+     "rank": 5,
+     "sha256": "593044ec0014ff962cb53751746c4f2c60b3408c9dd6112380ae11766f980cea",
+     "unit": "SUBJ082"
+    },
+    {
+     "fold": 1,
+     "rank": 6,
+     "sha256": "86dc7421bed08c549b55565800677a8c2458928858f81adec0ef7d86e1fed718",
+     "unit": "SUBJ024"
+    },
+    {
+     "fold": 2,
+     "rank": 7,
+     "sha256": "9cdfa7790aa0db4a12f95c13cb058888bbbe3a5a3df98f0c8d15ae325a3b3287",
+     "unit": "SUBJ038"
+    },
+    {
+     "fold": 3,
+     "rank": 8,
+     "sha256": "bf3d682617cde70b4e541b1fd055de823a49e31dd055d5687f4cddd29131dad2",
+     "unit": "SUBJ044"
+    },
+    {
+     "fold": 4,
+     "rank": 9,
+     "sha256": "c842ab09b54f5a9b45bd791d9d5eda249fec472d72129f9e5f586d2a8c7f2d4c",
+     "unit": "SUBJ112"
+    },
+    {
+     "fold": 0,
+     "rank": 10,
+     "sha256": "e4170b6c78c3ce4547f080cc68d2d87f274de647949451f24343afe109fc30c0",
+     "unit": "SUBJ039"
+    },
+    {
+     "fold": 1,
+     "rank": 11,
+     "sha256": "f658a85726f384751b990bdd2f41a84f8c7452149f7be7456cf966c0d39a274f",
+     "unit": "SUBJ040"
+    }
+   ],
+   "rule": "rank units by ascending sha256('pooled-encoder-0.2|fold|' + dataset + '|' + unit); fold = rank mod 5; fold 0 is the inner-validation fold"
+  },
+  "wtrack": {
+   "inner_training": [
+    "ER1",
+    "JS15",
+    "JS17"
+   ],
+   "inner_validation": [
+    "JS14"
+   ],
+   "kind": "animal",
+   "n_units": 4,
+   "rows": [
+    {
+     "fold": 0,
+     "rank": 0,
+     "sha256": "3ba917d7c50e5387b72866d182801b7ab552d0b919cb9a70c6f596ebf46ee6ba",
+     "unit": "JS14"
+    },
+    {
+     "fold": 1,
+     "rank": 1,
+     "sha256": "8bcdd91c7fe4ec1aa72f571e3e8a9b7db598c007341b0de55ea2aa4352a1cb9a",
+     "unit": "JS17"
+    },
+    {
+     "fold": 2,
+     "rank": 2,
+     "sha256": "92b0d4cdb1a4e01e14a2cde9f4408b99cb2bced48c0c821679373500cc17c8fc",
+     "unit": "ER1"
+    },
+    {
+     "fold": 3,
+     "rank": 3,
+     "sha256": "e4748a12c0bbcf10d6ad811a1125f74a37c4e77db633df8a3db7a8892ce024a9",
+     "unit": "JS15"
+    }
+   ],
+   "rule": "rank units by ascending sha256('pooled-encoder-0.2|fold|' + dataset + '|' + unit); fold = rank mod 5; fold 0 is the inner-validation fold"
+  }
+ },
+ "leave_one_dataset_out": {
+  "datasets": [
+   "cemhsey",
+   "ds003739",
+   "gait120",
+   "hygrip",
+   "hyser",
+   "izmir",
+   "katmah",
+   "moreira",
+   "ofner",
+   "sabes",
+   "schreiber_moissenet",
+   "van_criekinge",
+   "wtrack"
+  ],
+  "rule": "each wave-1 dataset in turn is left out of training; its adapter is fitted on its inner-training units and scored on its inner-validation units"
+ },
+ "quantity_diversity": {
+  "d_arms": {
+   "orders": {
+    "k2|draw0": [
+     "ofner",
+     "katmah",
+     "hyser",
+     "schreiber_moissenet",
+     "cemhsey",
+     "sabes",
+     "moreira",
+     "ds003739",
+     "wtrack",
+     "van_criekinge",
+     "izmir",
+     "hygrip",
+     "gait120"
+    ],
+    "k2|draw1": [
+     "sabes",
+     "ofner",
+     "van_criekinge",
+     "moreira",
+     "hygrip",
+     "katmah",
+     "ds003739",
+     "wtrack",
+     "gait120",
+     "izmir",
+     "schreiber_moissenet",
+     "hyser",
+     "cemhsey"
+    ],
+    "k2|draw2": [
+     "hygrip",
+     "katmah",
+     "hyser",
+     "schreiber_moissenet",
+     "gait120",
+     "cemhsey",
+     "sabes",
+     "van_criekinge",
+     "ds003739",
+     "izmir",
+     "wtrack",
+     "moreira",
+     "ofner"
+    ],
+    "k4|draw0": [
+     "ds003739",
+     "izmir",
+     "katmah",
+     "gait120",
+     "schreiber_moissenet",
+     "hygrip",
+     "sabes",
+     "hyser",
+     "cemhsey",
+     "van_criekinge",
+     "moreira",
+     "wtrack",
+     "ofner"
+    ],
+    "k4|draw1": [
+     "ofner",
+     "gait120",
+     "cemhsey",
+     "ds003739",
+     "hygrip",
+     "hyser",
+     "sabes",
+     "schreiber_moissenet",
+     "van_criekinge",
+     "wtrack",
+     "izmir",
+     "katmah",
+     "moreira"
+    ],
+    "k4|draw2": [
+     "ds003739",
+     "van_criekinge",
+     "ofner",
+     "hyser",
+     "sabes",
+     "gait120",
+     "cemhsey",
+     "moreira",
+     "schreiber_moissenet",
+     "hygrip",
+     "katmah",
+     "izmir",
+     "wtrack"
+    ],
+    "k8|draw0": [
+     "sabes",
+     "gait120",
+     "hyser",
+     "izmir",
+     "moreira",
+     "ofner",
+     "ds003739",
+     "cemhsey",
+     "wtrack",
+     "katmah",
+     "hygrip",
+     "schreiber_moissenet",
+     "van_criekinge"
+    ],
+    "k8|draw1": [
+     "ofner",
+     "wtrack",
+     "moreira",
+     "schreiber_moissenet",
+     "hyser",
+     "sabes",
+     "van_criekinge",
+     "ds003739",
+     "cemhsey",
+     "gait120",
+     "hygrip",
+     "katmah",
+     "izmir"
+    ],
+    "k8|draw2": [
+     "sabes",
+     "ofner",
+     "katmah",
+     "van_criekinge",
+     "schreiber_moissenet",
+     "wtrack",
+     "ds003739",
+     "hyser",
+     "hygrip",
+     "cemhsey",
+     "gait120",
+     "izmir",
+     "moreira"
+    ]
+   },
+   "rule": "for k in {2,4,8} and draw in {0,1,2}: order candidate sources by ascending sha256('pooled-encoder-0.2|D|k' + k + '|draw' + draw + '|' + dataset); the arm uses the first k sources in that order that are eligible (at least W_max/8 inner-training windows, counted at P2)"
+  },
+  "d_candidate_note": "conditional sources (area2, falcon_m1, ibl_train) join the candidate list only if admitted before the freeze; the orders are then recomputed with the same rule and recorded in MIXTURE-MANIFEST.json",
+  "p_arms": {
+   "ds003739": {
+    "levels": {
+     "14": [
+      "sub-001",
+      "sub-017",
+      "sub-026",
+      "sub-016",
+      "sub-020",
+      "sub-003",
+      "sub-013",
+      "sub-018",
+      "sub-012",
+      "sub-009",
+      "sub-011",
+      "sub-027",
+      "sub-022",
+      "sub-029"
+     ],
+     "2": [
+      "sub-001",
+      "sub-017"
+     ],
+     "4": [
+      "sub-001",
+      "sub-017",
+      "sub-026",
+      "sub-016"
+     ]
+    },
+    "order": [
+     "sub-001",
+     "sub-017",
+     "sub-026",
+     "sub-016",
+     "sub-020",
+     "sub-003",
+     "sub-013",
+     "sub-018",
+     "sub-012",
+     "sub-009",
+     "sub-011",
+     "sub-027",
+     "sub-022",
+     "sub-029"
+    ],
+    "rule": "rank inner-training people by ascending sha256('pooled-encoder-0.2|P|' + dataset + '|' + unit); level L takes the first L (nested); levels = max(2, round(n/16)), round(n/4) and n, rounding halves up"
+   },
+   "gait120": {
+    "levels": {
+     "13": [
+      "S042",
+      "S110",
+      "S016",
+      "S071",
+      "S023",
+      "S089",
+      "S055",
+      "S077",
+      "S062",
+      "S038",
+      "S090",
+      "S116",
+      "S030"
+     ],
+     "3": [
+      "S042",
+      "S110",
+      "S016"
+     ],
+     "52": [
+      "S042",
+      "S110",
+      "S016",
+      "S071",
+      "S023",
+      "S089",
+      "S055",
+      "S077",
+      "S062",
+      "S038",
+      "S090",
+      "S116",
+      "S030",
+      "S095",
+      "S080",
+      "S026",
+      "S085",
+      "S087",
+      "S063",
+      "S096",
+      "S052",
+      "S093",
+      "S035",
+      "S076",
+      "S019",
+      "S043",
+      "S057",
+      "S070",
+      "S106",
+      "S014",
+      "S031",
+      "S027",
+      "S061",
+      "S028",
+      "S107",
+      "S111",
+      "S088",
+      "S045",
+      "S039",
+      "S018",
+      "S113",
+      "S054",
+      "S041",
+      "S073",
+      "S091",
+      "S074",
+      "S102",
+      "S059",
+      "S064",
+      "S022",
+      "S086",
+      "S112"
+     ]
+    },
+    "order": [
+     "S042",
+     "S110",
+     "S016",
+     "S071",
+     "S023",
+     "S089",
+     "S055",
+     "S077",
+     "S062",
+     "S038",
+     "S090",
+     "S116",
+     "S030",
+     "S095",
+     "S080",
+     "S026",
+     "S085",
+     "S087",
+     "S063",
+     "S096",
+     "S052",
+     "S093",
+     "S035",
+     "S076",
+     "S019",
+     "S043",
+     "S057",
+     "S070",
+     "S106",
+     "S014",
+     "S031",
+     "S027",
+     "S061",
+     "S028",
+     "S107",
+     "S111",
+     "S088",
+     "S045",
+     "S039",
+     "S018",
+     "S113",
+     "S054",
+     "S041",
+     "S073",
+     "S091",
+     "S074",
+     "S102",
+     "S059",
+     "S064",
+     "S022",
+     "S086",
+     "S112"
+    ],
+    "rule": "rank inner-training people by ascending sha256('pooled-encoder-0.2|P|' + dataset + '|' + unit); level L takes the first L (nested); levels = max(2, round(n/16)), round(n/4) and n, rounding halves up"
+   }
+  },
+  "p_window_rule": "W_P = the largest power of 2 not above min(W_max/4, windows of the smallest P level of that dataset); each P arm draws W_P windows, equal shares per person as far as available, in the q_window_rule order",
+  "q_anchor_substitution": "if IBL training mice are admitted before the freeze, ibl_train replaces wtrack as the fourth anchor",
+  "q_anchors": [
+   "gait120",
+   "ds003739",
+   "ofner",
+   "wtrack"
+  ],
+  "q_window_rule": "within an anchor's inner-training units, order its non-overlapping 1.2 s windows by ascending sha256('pooled-encoder-0.2|Q|' + dataset + '|' + window_id) and take the first W (nested levels W_max/16, W_max/4, W_max)",
+  "w_max_rule": "W_max = the smallest number of unique inner-training windows in any Q anchor, rounded down to a power of 2 (computed at P2 from MIXTURE-MANIFEST.json)"
+ },
+ "reads_data_values": false,
+ "roster_rules": {
+  "cemhsey": "pinch source stage 'TRAIN' (S1-S3)",
+  "ds003739": "visual-balance stage 'development'",
+  "gait120": "Gait120 chair-rise roster, role 'development' (salt neurotranslation-gait120-frozen-chair-rise-20261122)",
+  "hygrip": "train manifest, frozen role TRAIN and eligible (group /N withheld by its timing gate)",
+  "hyser": "source manifest role 'TRAIN' (split hyser-random-index-20261119-v1)",
+  "izmir": "roster roles 'fit' and 'engineering'",
+  "katmah": "knee-motion fit identifiers 1-40, 0.5 m/s only",
+  "moreira": "source split, role 'development'",
+  "ofner": "arm-transfer fitting people S1-S7",
+  "sabes": "cortical-source-mix training files indy_20170131_02 and loco_20170215_02",
+  "schreiber_moissenet": "split-three rule, partition 'train' (ordinals 1-30)",
+  "van_criekinge": "prospective roster, role 'fit'",
+  "wtrack": "population protocol 'Train' rats plus JS14 data recorded before the start of trip 79"
+ },
+ "salt": "pooled-encoder-0.2",
+ "schema": "neurotranslate-0.2-pooled-encoder-allocation",
+ "secondary": {
+  "A4": {
+   "dataset": "Camargo et al. lower-limb biomechanics",
+   "status": "needs protocol version 2 after a person-overlap check against 10.35090/gatech/70296 and a licence check"
+  },
+  "B1": {
+   "dataset": "gait120",
+   "label": "people already used in another study's evaluation, new tasks",
+   "people_confirmation": [
+    "S012",
+    "S013",
+    "S024",
+    "S025",
+    "S032",
+    "S040",
+    "S047",
+    "S049",
+    "S051",
+    "S058",
+    "S068",
+    "S069",
+    "S072",
+    "S078",
+    "S081",
+    "S083",
+    "S099",
+    "S100",
+    "S101",
+    "S109",
+    "S117",
+    "S120"
+   ],
+   "people_validation": [
+    "S015",
+    "S017",
+    "S021",
+    "S029",
+    "S034",
+    "S037",
+    "S044",
+    "S048",
+    "S056",
+    "S060",
+    "S065",
+    "S067",
+    "S075",
+    "S079",
+    "S082",
+    "S084",
+    "S094",
+    "S097",
+    "S103",
+    "S105",
+    "S114",
+    "S118"
+   ],
+   "tasks": [
+    "LevelWalking",
+    "SlopeAscent",
+    "SlopeDescent",
+    "StairAscent",
+    "StairDescent"
+   ]
+  },
+  "seen_dataset_arm": {
+   "dataset": "AJILE12",
+   "participant": "sub-01",
+   "scored_on": "E2 only",
+   "session": 3
+  }
+ },
+ "version": 1
+}
