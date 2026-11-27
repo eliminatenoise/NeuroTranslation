@@ -972,9 +972,10 @@ def page_table_md(prefix=''):
 
 
 def page_table_html(query=''):
+    """query: text added to every PDF link, or a function of the PDF's index in EDITIONS (edition_query) that gives each its own."""
     out = ['<table>', '<thead><tr><th scope="col">Study</th>' + ''.join(f'<th scope="col">{lab}</th>' for _, _, lab in NT) + '</tr></thead>', '<tbody>']
     for label, name in _page_rows():
-        cells = [f'<td><a href="{pdf}{query}#nameddest={name}">p.&nbsp;{dest(i, name)}</a></td>' for i, pdf, _ in NT]
+        cells = [f'<td><a href="{pdf}{query(i) if callable(query) else query}#nameddest={name}">p.&nbsp;{dest(i, name)}</a></td>' for i, pdf, _ in NT]
         out.append(f'<tr><th scope="row">{label}</th>' + ''.join(cells) + '</tr>')
     out += ['</tbody>', '</table>']
     return '\n'.join(out)
@@ -2176,9 +2177,16 @@ def zero_check(txt):
     return ''
 
 
-def edition_query():
-    """The site copy adds ?edition=<version> to each PDF link so that a browser fetches a new edition afresh."""
-    return '?edition=' + walk(load(MANIFEST), 'version')
+def edition_query(i):
+    """The site copy adds ?edition=<version>-<the first 12 hex digits of the PDF's SHA-256> to the link of PDF i (its index in
+    EDITIONS), so that a browser fetches a new edition, or a PDF rebuilt within one, afresh. The checksum is the manifest's, which
+    must be the file's own."""
+    import hashlib
+    sha = walk(load(MANIFEST), f'PDFs/{i}/sha256')
+    assert walk(load(MANIFEST), f'PDFs/{i}/filename') == EDITIONS[i][1], (i, EDITIONS[i])
+    for folder in (NEW_EDITION, 'docs/papers/current/'):     # the papers' folder, and the site's copy that the link opens
+        assert hashlib.sha256((REPO / folder / EDITIONS[i][1]).read_bytes()).hexdigest() == sha, ('manifest checksum differs from the PDF', folder, EDITIONS[i][1])
+    return '?edition=' + walk(load(MANIFEST), 'version') + '-' + sha[:12]
 
 
 def source_files():
