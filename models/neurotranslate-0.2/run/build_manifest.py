@@ -13,7 +13,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common  # noqa: E402
 
-FORBIDDEN = ("/home/", "/tmp/", "/Users/", "/mnt/")
+FORBIDDEN = tuple("/%s/" % d for d in ("home", "tmp", "Users", "mnt"))  # absolute local paths
 
 
 def totals(datasets):

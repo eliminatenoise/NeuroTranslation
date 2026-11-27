@@ -58,12 +58,13 @@ def roster(paths):
     for m in s["members"]:
         unit_roles["S%d" % m["subject"]] = m["split"]
     units = ["S%d" % i for i in IDS]
+    unlisted = "unlisted in the knee roster (no IMU file); training by the committed pooled-encoder allocation"
     for u in units:
         if u not in unit_roles:
-            unit_roles[u] = "train"  # see META notes: identifier 24, no IMU file in the knee roster
+            unit_roles[u] = unlisted  # identifier 24: never assigned to any evaluation group
     excluded = {"knee_test_41_52": sorted(u for u, r in unit_roles.items() if r == "test"),
                 "reserved_53_59": ["S%d" % i for i in range(53, 60)]}
-    return {"units": units, "unit_roles": unit_roles, "training_roles": ["train"],
+    return {"units": units, "unit_roles": unit_roles, "training_roles": ["train", unlisted],
             "rule": "knee-motion roster: train S1-40 (S24 unlisted: no IMU file), test S41-52, S53-59 excluded",
             "excluded": excluded,
             "roster_files": [{"file": "models/knee-motion/sources.json (published knee study)", "sha256": common.sha256_file(f)}]}

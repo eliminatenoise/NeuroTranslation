@@ -129,6 +129,8 @@ def main():
     ap.add_argument("dataset")
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--units", nargs="*", help="debug: restrict to these units (no manifest part written)")
+    ap.add_argument("--audit-only", action="store_true",
+                    help="redo only the role audit and rewrite it into the existing AUDIT and manifest part (tokens unchanged)")
     a = ap.parse_args()
     paths = common.load_paths(a.paths)
     mod = importlib.import_module("datasets." + a.dataset)
@@ -159,6 +161,23 @@ def main():
     if not audit["all_units_pass"]:
         common.atomic_write_json(Path(paths["audits"]) / (ds + "-AUDIT.json"), audit)
         sys.exit("role audit failed for %s" % ds)
+    if a.audit_only:
+        old_audit = json.loads((Path(paths["audits"]) / (ds + "-AUDIT.json")).read_text())
+        audit["unit_checks"] = old_audit.get("unit_checks")
+        audit["tokens_from_run_with_protocol_head"] = old_audit.get("protocol_head")
+        common.atomic_write_json(Path(paths["audits"]) / (ds + "-AUDIT.json"), audit)
+        pf = Path(paths["manifest_parts"]) / (ds + ".json")
+        part = json.loads(pf.read_text())
+        part["role_audit"] = {"pass": audit["all_units_pass"], "units": len(unit_rows),
+                              "roster_files": ros["roster_files"], "excluded_groups_checked": audit["excluded_groups_checked"],
+                              "inner_fold_rule_recomputed_equal": fold_ok, "redone_at": common.now_iso(),
+                              "roles_seen": sorted({r["roster_role"] for r in unit_rows})}
+        part["qualification"]["Q2_role"]["roster_files"] = ros["roster_files"]
+        part["qualification"]["Q2_role"]["pass"] = audit["all_units_pass"] and part["qualification"]["Q2_role"]["file_audit"]["pass"]
+        part["qualified"] = all(g["pass"] for g in part["qualification"].values())
+        common.atomic_write_json(pf, part)
+        print(json.dumps({"dataset": ds, "role_audit": part["role_audit"]["pass"], "roles": part["role_audit"]["roles_seen"]}))
+        return
 
     # --- tokens ------------------------------------------------------------------------------
     chans = mod.channels(paths)
@@ -241,7 +260,8 @@ def main():
         "qualification": gates,
         "role_audit": {"pass": audit["all_units_pass"], "units": len(unit_rows),
                        "roster_files": ros["roster_files"], "excluded_groups_checked": audit["excluded_groups_checked"],
-                       "inner_fold_rule_recomputed_equal": fold_ok},
+                       "inner_fold_rule_recomputed_equal": fold_ok,
+                       "roles_seen": sorted({r["roster_role"] for r in unit_rows})},
         "tokens": {"shards": len(shard_list), "bytes": sum(s["bytes"] for s in shard_list),
                    "shard_list_sha256": common.sha256_text(json.dumps(shard_list, sort_keys=True)),
                    "channels": {g: len(c) for g, c in chans.groups.items()},
