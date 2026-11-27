@@ -10,8 +10,11 @@ splits, the Dryad deposit and the NLB test file stay out.
 
 Reading: only data up to the end of the last configuration trial (1809.676 s; the first held trial starts at
 1815.644 s) are read: rows of the 1 kHz behaviour arrays before that time, and per unit the spike times before it.
-Each unit's boundary is located by a binary search reading single values; values the search touches at or after
-the cut are compared with it and discarded (their number is recorded).
+Each unit's boundary is found by a forward scan from the unit's first spike time that stops at the first value at
+or after the cut (normally exactly one such value per unit, compared with the cut and discarded; their number is
+recorded). The tokens of 27 November 2026 were built with an earlier binary search, which touched 408 values at or
+after the cut across the whole recording (compared and discarded, no token built from them); the scan returns the
+same index by construction and was not re-run on the file, so that no value past the cut is read again.
 
 Tokens: spikes = events of the 65 sorted area 2 units per step, masked outside each unit's observation intervals;
 kin = hand position x, y (cm in the file, converted to mm); force = handle forces x, y, z (N). The moments,
@@ -50,7 +53,8 @@ META = {
         {"group": "force", "kind": "handle_force", "channels": 3, "rate_hz": 1000, "units": "N", "value_type": "measured"},
     ],
     "notes": ["Only the 290 fitting and configuration trials are tokenised; inter-trial time and other trials are not.",
-              "Hand position was low-pass filtered at 100 Hz by the authors (phase not documented)."],
+              "Hand position was low-pass filtered at 100 Hz by the authors (phase not documented).",
+              "The tokens of 27 November 2026 were built with a binary search that read 408 spike times at or after the 1809.676 s cut (each compared with the cut and discarded; no token was built from them). The reader now scans forward and stops at the first value at or after the cut (at most one per unit in check_area2_scan.py); it returns the same boundary, so the tokens are unchanged, and it was not re-run on the file so that no value past the cut is read again."],
 }
 
 
@@ -112,18 +116,34 @@ def jobs(paths, units):
     return [(UNIT, None)]
 
 
+SINGLE_BELOW = 64  # read single values once fewer than this many are expected before the cut
+
+
 def _count_before(ds, lo, hi, cut, probes):
-    """First index in [lo, hi) of a sorted dataset with value >= cut, reading single values (binary search)."""
-    a, b = lo, hi
-    while a < b:
-        m = (a + b) // 2
-        v = float(ds[m])
-        if v >= cut:
-            probes[0] += 1
-            b = m
+    """First index in [lo, hi) of a sorted dataset with value >= cut, scanning forward from lo.
+
+    A chunk is at most as long as the part already read (so chunks at most double) and at most a quarter of the
+    count expected before the cut from the rate seen so far; single values are read once fewer than SINGLE_BELOW
+    are expected. The scan therefore normally reads exactly one value at or after the cut (the one that stops it).
+    probes[0] counts every value read at or after the cut."""
+    i, t_first, last = lo, None, None
+    while i < hi:
+        if last is None or last <= t_first:
+            c = 1
         else:
-            a = m + 1
-    return a
+            remaining = (i - lo - 1) / (last - t_first) * (cut - last)
+            c = 1 if remaining < SINGLE_BELOW else int(min(remaining / 4.0, i - lo, 65536))
+        c = max(1, min(c, hi - i))
+        v = np.asarray(ds[i:i + c], np.float64)
+        k = int(np.searchsorted(v, cut, side="left"))
+        if k < len(v):
+            probes[0] += len(v) - k
+            return i + k
+        if t_first is None:
+            t_first = float(v[0])
+        last = float(v[-1])
+        i += c
+    return hi
 
 
 def process_unit(paths, unit, payload, shared):
@@ -197,7 +217,7 @@ def process_unit(paths, unit, payload, shared):
                           "inner_fold": fold, "trial": int(tid), "role": "fit" if tid in rf else "configuration",
                           "events": 1 if a == a0 else 0, "duration_s": round(S * common.STEP_S, 4)})
     checks = {"trials_tokenised": len(keep), "trial_pieces": len(recs), "read_until_s": t_hi, "first_held_trial_s": first_held,
-              "behaviour_rows_read": r1, "binary_search_probes_at_or_after_cut": probes[0],
+              "behaviour_rows_read": r1, "spike_values_read_at_or_after_cut": probes[0],
               "spikes_read": int(sum(len(x) for x in per_unit)), "units": len(per_unit),
               "nonfinite_rows": {"hand": int((~np.isfinite(hand_cm)).any(axis=1).sum()),
                                  "force": int((~np.isfinite(force)).any(axis=1).sum())}}
@@ -211,7 +231,8 @@ def file_audit(paths, results):
     return {"pass": trials == sorted(rf + rc) and not set(trials) & set(rh) and r["checks"]["read_until_s"] < r["checks"]["first_held_trial_s"],
             "trials": len(trials), "held_trials_tokenised": len(set(trials) & set(rh)),
             "read_until_s": r["checks"]["read_until_s"], "first_held_trial_s": r["checks"]["first_held_trial_s"],
-            "binary_search_probes_at_or_after_cut": r["checks"]["binary_search_probes_at_or_after_cut"]}
+            "spike_values_read_at_or_after_cut": r["checks"].get("spike_values_read_at_or_after_cut",
+                                                                 r["checks"].get("binary_search_probes_at_or_after_cut"))}
 
 
 def source_file_summary(results):
