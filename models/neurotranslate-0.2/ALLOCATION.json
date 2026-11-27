@@ -94,11 +94,6 @@
    "condition": "role audit at step P2: only FALCON M1 'held-in-calib' days that no earlier evaluation used; folds by day computed at P2 with the same rule",
    "kind": "recording",
    "units": []
-  },
-  "ibl_train": {
-   "condition": "IBL audit and owner confirmation before the freeze: never-referenced mice of labs not drawn for E4; folds computed at P2 with the same rule",
-   "kind": "animal",
-   "units": []
   }
  },
  "evaluation": {
@@ -112,7 +107,8 @@
    "central_directory": {
     "bytes": 153791,
     "entries": 1208,
-    "offset": 1451983325
+    "offset": 1451983325,
+    "reproduction_read": "HTTP range bytes=1451983325-1452137137 (153,813 bytes: central directory and ZIP64 end records; no member byte)"
    },
    "dataset": "gait120",
    "emg_scaling_trial": "LevelWalking Trial01 of each person (used only to scale that person's EMG; never scored)",
@@ -1990,22 +1986,18 @@
   },
   "E2": {
    "dataset": "AJILE12, DANDI 000055 version 0.220127.0436",
-   "owner_option": {
-    "keep_back": [
+   "individuals_improved_needed": "ceil(0.7 x 5) = 4 of 5",
+   "kept_back": {
+    "participants": [
      "sub-08",
      "sub-09",
      "sub-10",
      "sub-11",
      "sub-12"
     ],
-    "then_scored": [
-     "sub-03",
-     "sub-04",
-     "sub-05",
-     "sub-06",
-     "sub-07"
-    ]
+    "rule": "kept back for the earlier maintainer's AJILE12 line (lead decision of 27 November 2026); never downloaded or opened by this track"
    },
+   "n_scored": 5,
    "rows": [
     {
      "calibration": {
@@ -2113,119 +2105,9 @@
       "session": 4,
       "sha256": "2e6bc139cf5cfe913283a17d451474ea3b2563cc0beda41edbd19b0cd4fc0be3"
      }
-    },
-    {
-     "calibration": {
-      "asset_id": "7de9b149-2994-455e-a8c6-5e5893245baf",
-      "bytes": 14919492016,
-      "path": "sub-08/sub-08_ses-3_behavior+ecephys.nwb",
-      "session": 3,
-      "sha256": "95ab8bb566dc23f7153946f0a67fd2c6641bc70662ee6e7fd2ba0b9483e41de6"
-     },
-     "other_sessions_never_opened": [
-      5,
-      6,
-      7
-     ],
-     "participant": "sub-08",
-     "scoring": {
-      "asset_id": "07fe6ecc-1a51-4655-a925-dcc3ecb6183f",
-      "bytes": 14898053963,
-      "path": "sub-08/sub-08_ses-4_behavior+ecephys.nwb",
-      "session": 4,
-      "sha256": "04029121342ab4f56dc5b8b487e166bfd49ff752012ccf4fd535e083b8e611cc"
-     }
-    },
-    {
-     "calibration": {
-      "asset_id": "b5b123ea-557f-4b69-ad11-8b3ff6bc9bd5",
-      "bytes": 19794037714,
-      "path": "sub-09/sub-09_ses-3_behavior+ecephys.nwb",
-      "session": 3,
-      "sha256": "2635ebb93567752019ed69e1d2951e53c2d137a1e038edaf7df2c127f3ba4778"
-     },
-     "other_sessions_never_opened": [
-      5,
-      6,
-      7
-     ],
-     "participant": "sub-09",
-     "scoring": {
-      "asset_id": "4d960b31-6a46-4578-a620-2dfdad46bf55",
-      "bytes": 19741644394,
-      "path": "sub-09/sub-09_ses-4_behavior+ecephys.nwb",
-      "session": 4,
-      "sha256": "0d220f2c055dc20f28620f9510433de67c343abebad5d24185db818de8d332d4"
-     }
-    },
-    {
-     "calibration": {
-      "asset_id": "e22abf61-170a-4d52-89f5-27e394e04afa",
-      "bytes": 19715930499,
-      "path": "sub-10/sub-10_ses-3_behavior+ecephys.nwb",
-      "session": 3,
-      "sha256": "6ae08347daed71deebe677798cab7db69e04be728b18ba07a645c6add2942486"
-     },
-     "other_sessions_never_opened": [
-      5,
-      6,
-      7
-     ],
-     "participant": "sub-10",
-     "scoring": {
-      "asset_id": "0d4e2bea-fd00-405f-923c-86141269c39a",
-      "bytes": 19723279309,
-      "path": "sub-10/sub-10_ses-4_behavior+ecephys.nwb",
-      "session": 4,
-      "sha256": "6ae359fd31373e825b456605426135040859c566b04030bbd25ba40501b0f308"
-     }
-    },
-    {
-     "calibration": {
-      "asset_id": "0b4aac2b-e080-4854-b792-4ea4359e2044",
-      "bytes": 17160159566,
-      "path": "sub-11/sub-11_ses-3_behavior+ecephys.nwb",
-      "session": 3,
-      "sha256": "42ce126cdf84ae9224235dffc4442fd9793f07b94526c7f88ce80f5971424a22"
-     },
-     "other_sessions_never_opened": [
-      5,
-      6,
-      7
-     ],
-     "participant": "sub-11",
-     "scoring": {
-      "asset_id": "1fc40baf-4007-4d96-9d6a-61213b14aecd",
-      "bytes": 16985717017,
-      "path": "sub-11/sub-11_ses-4_behavior+ecephys.nwb",
-      "session": 4,
-      "sha256": "f3f145c11adeae27ca7e3110f94dffca073b9737954a9de4d93441f2aafe0ec4"
-     }
-    },
-    {
-     "calibration": {
-      "asset_id": "3db4e507-c2de-4ab3-a052-88d9800f36d0",
-      "bytes": 19928317351,
-      "path": "sub-12/sub-12_ses-3_behavior+ecephys.nwb",
-      "session": 3,
-      "sha256": "e0f2fe25556c77867793c1bdf95c232b33b338b4d5c4bfcc320803e04f087616"
-     },
-     "other_sessions_never_opened": [
-      5,
-      6,
-      7
-     ],
-     "participant": "sub-12",
-     "scoring": {
-      "asset_id": "257cec4c-84ba-4047-815c-a790d4f51d7e",
-      "bytes": 19946639193,
-      "path": "sub-12/sub-12_ses-4_behavior+ecephys.nwb",
-      "session": 4,
-      "sha256": "7f1767df98a99a78022f8c5c3b988102356af81232ffbc5d81fb971e0906bb52"
-     }
     }
    ],
-   "rule": "participants 03-12; calibration = lowest-numbered session; scoring = next-numbered session",
+   "rule": "participants 03-07; calibration = lowest-numbered session; scoring = next-numbered session",
    "window_rule": "for k = 0, 1, 2, ...: candidate issue frame = int(sha256('pooled-encoder-0.2|ajile12|' + participant + '|ses-' + session + '|' + k), 16) mod n_frames; accept if eligible (protocol section 7.2) and at least 2 s from every accepted issue time; stop at 600 accepted or k = 200000"
   },
   "E3": {
@@ -2253,60 +2135,6 @@
     }
    ],
    "rule": "adapt on the NLB 'train' trials and score on the NLB 'val' trials of each training file; the desc-test files are never opened"
-  },
-  "E4_conditional": {
-   "order": [
-    {
-     "lab": "wittenlab",
-     "sha256": "0e69c440d40819472bd7bbf17b104431a99b7bbe764c9114db8d1faa33939749"
-    },
-    {
-     "lab": "angelakilab",
-     "sha256": "0ffb300ee89b62c761df87224fcf6d091987607573bed22ceba31ea6726d5a99"
-    },
-    {
-     "lab": "zadorlab",
-     "sha256": "243c5d9cfe4a256489e37568e0660ef134e588704c99e06c28a7a6e078494a5a"
-    },
-    {
-     "lab": "hausserlab",
-     "sha256": "363a713d471d5babf7c3986716b722a9c98706b7527c2593fda3f30a692efd10"
-    },
-    {
-     "lab": "hoferlab",
-     "sha256": "426d4413cfe233674e41a6d2eceb8d048561fb3a90268090390c8b89d1fcce6d"
-    },
-    {
-     "lab": "churchlandlab_ucla",
-     "sha256": "513a3d4ea0f6bf8acce8d86438c33f8cdb769f75cb8b117357d35847bfc72e15"
-    },
-    {
-     "lab": "mainenlab",
-     "sha256": "5a09f27a3d7e18832ae64dcf1e72558b30c3a8ab25b602904d6403f7b2d232f1"
-    },
-    {
-     "lab": "churchlandlab",
-     "sha256": "5aa1ee1d27508dfb60760625caf6239723972cfd893aabb01fd82ae4b4f912d7"
-    },
-    {
-     "lab": "mrsicflogellab",
-     "sha256": "5c576633de84d355cf30c41d104fcc9fb5b92957155995ff3f761e55b4e41aa9"
-    },
-    {
-     "lab": "cortexlab",
-     "sha256": "8cc95c1f9037d29448584eb63a0ce899762072e3be6f33166bdbc9e5ce16ba93"
-    },
-    {
-     "lab": "danlab",
-     "sha256": "956ec2d0a71d6611554dc21b440f6f21c8a6a7a46eac0b35d32e8a2d905a59f7"
-    },
-    {
-     "lab": "steinmetzlab",
-     "sha256": "d05c95edd189feb7a20915d3162c6c20175236e190fcd4616ad4af8d633cd021"
-    }
-   ],
-   "roster": "2023_12_bwm_release.csv at int-brain-lab/paper-brain-wide-map commit 118fc36cb3602934466ad2c6087c2b3b441f9f1f, sha256 db9edfc6f5d92a4df81d488bfb1068f43526a13717bb8fc7da2aecdd28876ac4",
-   "rule": "rank labs by ascending sha256('pooled-encoder-0.2|ibl-bwm-2023_12|lab|' + lab); after the IBL audit, the first 3 labs in this order with at least 4 never-referenced mice are evaluation labs; never-referenced mice of every other lab may enter training"
   }
  },
  "inner_folds": {
@@ -4038,6 +3866,17 @@
   ],
   "rule": "each wave-1 dataset in turn is left out of training; its adapter is fitted on its inner-training units and scored on its inner-validation units"
  },
+ "not_used": {
+  "ajile12_kept_back": [
+   "sub-08",
+   "sub-09",
+   "sub-10",
+   "sub-11",
+   "sub-12"
+  ],
+  "b1": "the Gait120 validation and confirmation people's unopened tasks stay unopened (lead decision of 27 November 2026)",
+  "ibl": "IBL Brain-Wide Map stays with the earlier maintainer: no IBL subject, lab or session is used for training or testing (lead decision of 27 November 2026); there is no E4"
+ },
  "quantity_diversity": {
   "d_arms": {
    "orders": {
@@ -4179,7 +4018,7 @@
    },
    "rule": "for k in {2,4,8} and draw in {0,1,2}: order candidate sources by ascending sha256('pooled-encoder-0.2|D|k' + k + '|draw' + draw + '|' + dataset); the arm uses the first k sources in that order that are eligible (at least W_max/8 inner-training windows, counted at P2)"
   },
-  "d_candidate_note": "conditional sources (area2, falcon_m1, ibl_train) join the candidate list only if admitted before the freeze; the orders are then recomputed with the same rule and recorded in MIXTURE-MANIFEST.json",
+  "d_candidate_note": "conditional sources (area2, falcon_m1) join the candidate list only if admitted before the freeze; the orders are then recomputed with the same rule and recorded in MIXTURE-MANIFEST.json",
   "p_arms": {
    "ds003739": {
     "levels": {
@@ -4363,7 +4202,6 @@
    }
   },
   "p_window_rule": "W_P = the largest power of 2 not above min(W_max/4, windows of the smallest P level of that dataset); each P arm draws W_P windows, equal shares per person as far as available, in the q_window_rule order",
-  "q_anchor_substitution": "if IBL training mice are admitted before the freeze, ibl_train replaces wtrack as the fourth anchor",
   "q_anchors": [
    "gait120",
    "ds003739",
@@ -4396,65 +4234,6 @@
    "dataset": "Camargo et al. lower-limb biomechanics",
    "status": "needs protocol version 2 after a person-overlap check against 10.35090/gatech/70296 and a licence check"
   },
-  "B1": {
-   "dataset": "gait120",
-   "label": "people already used in another study's evaluation, new tasks",
-   "people_confirmation": [
-    "S012",
-    "S013",
-    "S024",
-    "S025",
-    "S032",
-    "S040",
-    "S047",
-    "S049",
-    "S051",
-    "S058",
-    "S068",
-    "S069",
-    "S072",
-    "S078",
-    "S081",
-    "S083",
-    "S099",
-    "S100",
-    "S101",
-    "S109",
-    "S117",
-    "S120"
-   ],
-   "people_validation": [
-    "S015",
-    "S017",
-    "S021",
-    "S029",
-    "S034",
-    "S037",
-    "S044",
-    "S048",
-    "S056",
-    "S060",
-    "S065",
-    "S067",
-    "S075",
-    "S079",
-    "S082",
-    "S084",
-    "S094",
-    "S097",
-    "S103",
-    "S105",
-    "S114",
-    "S118"
-   ],
-   "tasks": [
-    "LevelWalking",
-    "SlopeAscent",
-    "SlopeDescent",
-    "StairAscent",
-    "StairDescent"
-   ]
-  },
   "seen_dataset_arm": {
    "dataset": "AJILE12",
    "participant": "sub-01",
@@ -4462,5 +4241,5 @@
    "session": 3
   }
  },
- "version": 1
+ "version": 2
 }

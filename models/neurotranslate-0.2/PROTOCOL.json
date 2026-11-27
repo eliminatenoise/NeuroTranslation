@@ -1,20 +1,23 @@
 {
  "schema": "neurotranslate-0.2-pooled-encoder-protocol",
  "protocol_version": 1,
+ "revision": 2,
+ "revision_note": "Revision 2 records the lead's decisions on the seven items revision 1 left to the owner and applies the minor points of the separate admission review of revision 1 (commit 17f956b17b23bcc27d30a16d417d2ade23310da0). No evaluation value had been decoded when either revision was written.",
+ "revision_1_commit": "17f956b17b23bcc27d30a16d417d2ade23310da0",
  "date": "2026-11-27",
  "editions": {
   "technical": "PROTOCOL.md",
   "simple": "written with the results"
  },
  "companion_files": {
-  "PROTOCOL.md": "8d504785ecbb63e01d726edd43a9880716d4081b2e5996718264695e5fe5c506",
-  "allocate.py": "821c1dcd21cecd7b8801351607d90ca479d4e248feb36700f089583627931606",
-  "ALLOCATION.json": "a90123c97a0a1dbfaf7ab958a16975685295a5515ed6a7f8f3be9f31251b5beb"
+  "PROTOCOL.md": "b60821c031ceac7e3a20efb79d13bc0a0f06ce2243d2e36a02d8e058110fac71",
+  "allocate.py": "0049bcc2ecd56314056afc361cafceb5b92348d96229af29c3fe01c5f9a105d0",
+  "ALLOCATION.json": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a"
  },
  "repository_base_commit": "03e76d4826e2c1d47d63990f38001075247423dc",
- "question": "Does one shared causal encoder, trained on the training splits of many openly licensed neural, EMG, motion and force datasets at once, forecast movement for people, animals and sessions that no NeuroTranslation fit has used better than matched controls (persistence, linear trend, ridge, the frozen NeuroTranslate 0.0 encoder, a random encoder of the same architecture and the best single-source encoder), with the same adapter budget? Secondary: at a matched number of unique training windows, do more sources help more than more data from one source?",
+ "question": "Does one shared causal encoder, trained on the training splits of many openly licensed neural, EMG, motion and force datasets at once, forecast movement for people, animals and sessions that no NeuroTranslation fit has used better than matched controls (persistence, linear trend, ridge, the frozen NeuroTranslate 0.0 encoder, a random encoder of the same architecture, the best single-source encoder and the nearest single-source encoder of each set), with the same adapter budget? Secondary: at a matched number of unique training windows, do more sources help more than more data from one source?",
  "claim_limits": [
-  "Results cover the listed datasets, tasks, inputs and horizons only. Each primary human set has 10 people; E3 has one animal and carries no population claim.",
+  "Results cover the listed datasets, tasks, inputs and horizons only. The primary human sets have 10 people (E1) and 5 people (E2); E3 has one animal and carries no population claim.",
   "Forecasts are made on archived recordings. Published marker trajectories were filtered or gap-filled by their authors and AJILE12 pose is an offline estimate, so no statement about live latency follows.",
   "Surface and intramuscular EMG record muscle electrical activity; they are not nerve recordings. EEG and ECoG are field potentials. Spike counts come from sorted units in public archives.",
   "Measured, derived (for example DeepLabCut pose, OpenSim joint angles, mean-absolute-value EMG envelopes, author-filtered EEG) and simulated values are labelled apart in every file, token and report. No simulated data enter the primary mixture.",
@@ -25,7 +28,7 @@
   "evaluation_values_decoded": 0,
   "evaluation_data_bytes_downloaded_by_this_protocol": 0,
   "metadata_reads": [
-   "DANDI API: asset lists of 000055 (version 0.220127.0436), 000128, 000138 and 000978; asset metadata (sha2-256, session date) of the 26 assets listed in data_sources and evaluation; licence, DOI and version strings of 000055, 000127, 000128, 000138, 000941, 000978 and 000235.",
+   "DANDI API: asset lists of 000055 (version 0.220127.0436), 000128, 000138 and 000978; asset metadata (sha2-256, session date) of the 26 assets listed in data_sources and evaluation; licence, DOI and version strings of 000055, 000127, 000128, 000138, 000941, 000978 and 000235. Ten of those assets belong to AJILE12 participants 08-12, who are now kept back; revision 2 no longer lists them.",
    "ZIP central directories (member names, sizes, CRC-32) of the local Schreiber-Moissenet and Moreira archives, listed without opening any member.",
    "The central directory of Gait120 archive 53167640 (S001-S010), parsed from two range reads made while the designs were written.",
    "Roster, manifest and catalogue files of earlier studies."
@@ -70,7 +73,18 @@
      "S010/MotionCapture/StandToSit/TRC/Trial05/Step01.trc"
     ]
    },
-   "handling": "Step P0 replaces both private files by their central-directory bytes only (from offset 1451983325) and records the sha256 of the originals and the replacements. E1 is scored on all members; a predeclared sensitivity row repeats E1 without the steps of these 23 members."
+   "handling": "Step P0 replaced both private files by their central-directory bytes only (archive bytes 1451983325-1452137137) and deleted the originals. E1 is scored on all members; a predeclared sensitivity row repeats E1 without the steps of these 23 members.",
+   "p0_done": {
+    "date": "2026-11-27",
+    "replacements": "both files replaced by copies of archive bytes 1451983325-1452137137 (153,813 B: the central directory of 1,208 records and the ZIP64 end records; no member byte), sha256 499068f777e756f14588e4eec6f5a34720170e7637a56d5e3d3933806939554a for both copies",
+    "originals_deleted": [
+     "read_1, 262,144 B, sha256 4c36aec1d921b53556cb6b66dfd28123e2e32eb1e4fdbc40284e2f6c9fe1640d",
+     "read_2, 2,137,138 B, sha256 1eff1b261eb5b4eab9f073da3091a8fa78ceddb8490dfae5c3f0f79fcd8652fa"
+    ],
+    "never_inflated": "no member byte of either original was inflated, decoded or copied elsewhere",
+    "member_list_after_replacement": "recomputed from the copies: 1,198 members, 759,080,170 compressed bytes, member-list sha256 c80220bc1ddca0e08f6912409afc61060f5841c5136b0034e003f626d5663ecb (unchanged)",
+    "why_the_range_holds_no_member_byte": "in a ZIP archive the central directory follows every member; the last member by local-header offset (S010/MotionCapture/StandToSit/TRC/Trial05/Step01.trc, local header at 1451833691) ends, with its data descriptor, before the central directory begins at 1451983325"
+   }
   },
   "licence_checks_2026_11_27": {
    "figshare API": {
@@ -147,8 +161,28 @@
      "XS": 1670,
      "S": 1125,
      "M": 1081
+    },
+    "gpu_bf16_batch32_T256": {
+     "M": 94597,
+     "L": 53019
+    },
+    "gpu_fp32_batch32_T256": {
+     "M": 33151
+    },
+    "gpu_fp32_batch128_T128": {
+     "L": 12392
     }
    },
+   "cpu_fp32_forward_only_4_shared_threads_batch32_T256_windows_per_s": {
+    "M": 6.9,
+    "L": 2.35
+   },
+   "not_measured": [
+    "this architecture at T = 512",
+    "CPU passes at size XL or larger",
+    "CPU passes on 16 threads",
+    "any run without other load"
+   ],
    "peak_gpu_memory_GB_max": 11,
    "one_pass_of_16M_steps_minutes": {
     "M_bf16": 2.3,
@@ -173,7 +207,7 @@
     "repeatability": "CPU FP32, GPU FP32 and GPU BF16 runs were each bitwise equal to a repeat of themselves",
     "batch_shape": "CPU FP32 outputs identical between a batch of 32 and a sub-batch of 8; GPU outputs varied by 3.6e-6 to 4.0e-6 with batch shape"
    },
-   "conclusion": "The data, not compute, limit the model: one 16M-step pass at size L in BF16 takes about 6 minutes."
+   "conclusion": "For training, the data, not compute, limit the model: one 16M-step pass at size L in BF16 takes about 6 minutes. Issuing forecasts one issue time at a time is the slow step (time_estimates)."
   },
   "counts_checked_2026_11_27": {
    "gait120_development": "66 people; 3,761 marker trial-steps over 7 tasks (LevelWalking 585, SitToStand 301, SlopeAscent 637, SlopeDescent 631, StairAscent 652, StairDescent 649, StandToSit 306) plus 66 static trials; 426.5 MB of non-SitToStand TRC/MOT members; one local raw.mat per person",
@@ -183,7 +217,7 @@
    "ds003739_development_18": "4 sessions each (pull-stand, pull-walk, rotate-stand, rotate-walk), about 620 s each; session 4 local (1.782 GB); sessions 1-3 not local (5.239 GB)",
    "ofner_S1_S7": "runs 1-3 local (21 files, 1.895 GB); run 4 (7 files, 0.631 GB) and runs 5-10 (42 files, 3.813 GB) not local",
    "hygrip_train": "8 TRAIN groups; /N withheld by the earlier timing gate (inter-Go discrepancy 249.5 ms against a 40 ms threshold); 7 eligible with 79 right-hand Go trials",
-   "ajile12_participants_03_12": "47 session files; every participant has sessions 3 and 4"
+   "ajile12_participants_03_07": "22 session files; every participant has sessions 3 and 4 (participants 08-12 are kept back and not listed)"
   }
  },
  "qualification_gate": {
@@ -486,24 +520,6 @@
    ],
    "clock": "one NWB file per day",
    "access": "one local day; others by download (whole dandiset 311,792,278 B)"
-  },
-  {
-   "id": "ibl_train",
-   "wave": "1, conditional on the IBL audit and owner confirmation",
-   "name": "IBL Brain-Wide Map, 2023_12 release",
-   "doi": "IBL 2023_12 BWM release (roster sha256 db9edfc6f5d92a4df81d488bfb1068f43526a13717bb8fc7da2aecdd28876ac4)",
-   "licence": "CC BY 4.0",
-   "species": "mouse",
-   "sites": "up to 12 labs",
-   "training_units": "never-referenced mice of labs not drawn for E4, earliest Probe00 session each",
-   "excluded": "every subject referenced in any project workspace (the design scan found 55, including NYU-39), the E4 labs",
-   "streams": [
-    "sorted unit spikes",
-    "wheel position, rad",
-    "task events"
-   ],
-   "clock": "IBL alignment per session",
-   "access": "per-object downloads; size measured on one session before any batch"
   }
  ],
  "evaluation_sources": [
@@ -519,7 +535,8 @@
    "name": "AJILE12: long-term naturalistic human intracranial neural recordings and pose",
    "doi": "10.48324/dandi.000055/0.220127.0436",
    "licence": "CC BY 4.0",
-   "note": "a later version 0.261123.1703 exists; this protocol pins 0.220127.0436 and checks at download that each asset digest is unchanged"
+   "note": "a later version 0.261123.1703 exists; this protocol pins 0.220127.0436 and checks at download that each asset digest is unchanged",
+   "participants": "03-07 only; 08-12 kept back for the earlier maintainer's AJILE12 line and never downloaded by this track"
   },
   {
    "set": "E3",
@@ -532,18 +549,12 @@
    "name": "MC_Maze_Large",
    "doi": "10.48324/dandi.000138/0.220113.0407",
    "licence": "CC BY 4.0"
-  },
-  {
-   "set": "E4",
-   "name": "IBL Brain-Wide Map 2023_12 (conditional)",
-   "doi": "roster 2023_12_bwm_release.csv, sha256 db9edfc6f5d92a4df81d488bfb1068f43526a13717bb8fc7da2aecdd28876ac4",
-   "licence": "CC BY 4.0"
   }
  ],
  "allocation": {
   "script": "allocate.py (Python standard library only; reads no recording)",
   "output": "ALLOCATION.json",
-  "check": "python3 allocate.py --check ALLOCATION.json (add --gait120-tail TAIL to recompute the E1 member list from the public last 262,144 bytes of figshare file 53167640)",
+  "check": "python3 allocate.py --check ALLOCATION.json (add --gait120-tail CD to recompute the E1 member list from bytes 1451983325-1452137137 of figshare file 53167640: one HTTP range request returning the central directory and the ZIP64 end records, 153,813 bytes, which begin after the last byte of every member's data; allocate.py refuses a file holding any byte before the central directory)",
   "salt": "pooled-encoder-0.2",
   "inner_fold_rule": "rank the training units of a dataset by ascending sha256('pooled-encoder-0.2|fold|' + dataset + '|' + unit); fold = rank mod 5; fold 0 is inner validation. Datasets with fewer than 3 independent units use 5 equal time blocks per recording, the latest block being inner validation.",
   "inner_validation_units": {
@@ -747,40 +758,32 @@
    "sub-04",
    "sub-05",
    "sub-06",
-   "sub-07",
-   "sub-08",
-   "sub-09",
-   "sub-10",
-   "sub-11",
-   "sub-12"
+   "sub-07"
   ],
+  "E2_kept_back": {
+   "participants": [
+    "sub-08",
+    "sub-09",
+    "sub-10",
+    "sub-11",
+    "sub-12"
+   ],
+   "rule": "kept back for the earlier maintainer's AJILE12 line (lead decision 1); never downloaded or opened by this track; no asset listed"
+  },
   "E2_sessions": "calibration session 3, scoring session 4 for every participant",
   "E2_window_rule": "for k = 0, 1, 2, ...: candidate issue frame = int(sha256('pooled-encoder-0.2|ajile12|' + participant + '|ses-' + session + '|' + k), 16) mod n_frames; accept if eligible (protocol section 7.2) and at least 2 s from every accepted issue time; stop at 600 accepted or k = 200000",
   "E3_files": [
    "000128 sub-Jenkins/sub-Jenkins_ses-full_desc-train_behavior+ecephys.nwb",
    "000138 sub-Jenkins/sub-Jenkins_ses-large_desc-train_behavior+ecephys.nwb"
   ],
-  "E4_lab_order": [
-   "wittenlab",
-   "angelakilab",
-   "zadorlab",
-   "hausserlab",
-   "hoferlab",
-   "churchlandlab_ucla",
-   "mainenlab",
-   "churchlandlab",
-   "mrsicflogellab",
-   "cortexlab",
-   "danlab",
-   "steinmetzlab"
-  ],
-  "E4_rule": "rank labs by ascending sha256('pooled-encoder-0.2|ibl-bwm-2023_12|lab|' + lab); after the IBL audit, the first 3 labs in this order with at least 4 never-referenced mice are evaluation labs; never-referenced mice of every other lab may enter training",
   "adapter_folds_E1": "E1 adapter penalty folds: rank the 66 Gait120 development people by ascending sha256('pooled-encoder-0.2|adapter-fold|gait120|' + unit); fold = rank mod 5",
   "computed_later_by_fixed_rules": [
    "W_max and the eligible D-arm sources (P2, from MIXTURE-MANIFEST.json)",
-   "folds of FALCON M1 days and IBL training mice if admitted",
+   "folds of FALCON M1 days if admitted",
+   "the ridge control history T_r (inner folds, before the freeze)",
    "E2 issue frames (after the freeze, from the session files)"
-  ]
+  ],
+  "cpu_check_rule": "for each encoder, the 1,000 GPU-computed windows repeated on the CPU are those with the lowest sha256('pooled-encoder-0.2|cpu-check|' + encoder + '|' + set + '|' + window_id) within each set, in equal shares over the sets"
  },
  "wave_2": {
   "rule": "Enters only if it passes Q1-Q6 and is recorded in MIXTURE-MANIFEST.json before the freeze; otherwise left for a later version.",
@@ -798,9 +801,10 @@
   "simulated": "Simulated windows from the physics-source track may enter only as a separately flagged, predeclared add-on arm, never the primary mixture."
  },
  "excluded_sources": {
-  "AJILE12, every participant including sub-01": "held out so that E2 is a dataset the model has never seen",
+  "AJILE12, every participant including sub-01": "held out so that E2 is a dataset the model has never seen; participants 08-12 are also kept back for the earlier maintainer's AJILE12 line and never downloaded by this track",
   "Churchland DANDI 000070 Jenkins sessions and MC_Maze Small and Medium": "the Jenkins animal is held out for E3; Small and Medium are consumed",
   "Nitschke and Churchland pedal recordings": "held by the earlier maintainer; no training role",
+  "IBL Brain-Wide Map, every subject, lab and session": "stays with the earlier maintainer (lead decision 2); admitted to neither training nor testing",
   "LINK": "LINK720 epochs and all-five-fail results stay sealed",
   "FingerFlex": "CC BY-SA would make the weights share-alike",
   "MoVi, SUMediPose, AMASS": "non-commercial; scores only",
@@ -983,17 +987,20 @@
    "size and passes: ladder XS, S, M, L, XL with the chosen tau, up to 40 passes, checkpoint every 2 passes; the (size, pass) with the lowest selection score",
    "core: transformer, GRU and hybrid at M and L; a non-transformer core is used only if it beats the transformer by at least 1% relative at both sizes",
    "context: T in {64, 128, 256, 512} and field window in {100, 200} ms at size M",
-   "XXL: run only if XL beats L by at least 1% relative; chosen only if it then has the lowest selection score"
+   "XXL: run only if XL beats L by at least 1% relative; chosen only if it then has the lowest selection score",
+   "ridge control history T_r in {64, 128, 256, 512} steps by the same inner folds (controls.ridge); uses no encoder; made before the freeze"
   ],
   "ties": "within 0.5% relative, the smaller or simpler option",
   "final_runs": "chosen configuration trained on all training units for the chosen number of passes, 3 seeds"
  },
  "precision": {
-  "tier_1": "CPU FP32 deterministic: reference for all issuing and scoring",
+  "tier_1": "CPU FP32 deterministic: the reference route; every forecast that enters a set-pass rule is issued with it",
   "tier_2": "GPU FP32 with math attention: reference training route up to M (L if time allows)",
   "tier_3": "GPU BF16 autocast with FP32 master weights and optimiser: ladder, arms and XL and above",
   "bf16_acceptance": "matched full runs of S and M, BF16 with 3 seeds and GPU FP32 with seed 20261127, same data order: BF16 is accepted if the selection score and the inner-validation readout metrics differ by at most max(1% relative, the spread across the 3 BF16 seeds); otherwise the final runs use GPU FP32",
-  "issuing": "every reported forecast is issued in FP32 on the CPU from an FP32 export with a fixed batch shape of 32; arms of the quantity-versus-diversity study may be issued on the GPU in FP32 with fixed padded shapes and a CPU spot check of 1,000 windows (maximum absolute difference reported)",
+  "issuing": "every forecast that enters a set-pass rule (E1 and E2 scoring windows with primary inputs, for 0.2 and every set-pass control) is issued in FP32 on the CPU from an FP32 export with a fixed batch shape of 32",
+  "other_passes": "all other encoder passes run on the GPU in FP32 with the math attention kernel and fixed padded shapes: adaptation windows from which adapters and readouts are fitted, E3, secondary inputs, wrong-pairing rows, secondary arms and quantity-versus-diversity arms. For each encoder, 1,000 of these windows (allocation.cpu_check_rule) are repeated in FP32 on the CPU and the largest absolute and relative differences are reported; if the largest relative difference (largest absolute feature difference divided by the largest absolute CPU feature value over the same windows) exceeds 1e-4, all of that encoder's passes are repeated on the CPU. Revision 1 issued everything on the CPU, which would take weeks at T = 512 (time_estimates).",
+  "e1_primary_pass_length": "E1 primary inputs lie inside one step segment (Gait120 step segments hold at most 83 steps), so E1 primary passes use a fixed length of min(T, 128) steps, left-padded and masked as in training; an E1 issue with more than 128 input steps uses T. With masked padding and a relative position embedding this is the same function as padding to T in exact arithmetic; a CPU check on 1,000 Gait120 inner-validation windows reports the largest difference before the freeze.",
   "run_to_run": "one quantity arm is repeated with identical settings and the parameter and metric differences are reported"
  },
  "adapters": {
@@ -1035,12 +1042,13 @@
   "E2": {
    "role": "primary",
    "label": "unseen dataset, unseen people",
-   "units": "AJILE12 participants 03-12 (DANDI 000055, version 0.220127.0436); owner option: keep 08-12 back and score 03-07",
+   "units": "AJILE12 participants 03-07 (DANDI 000055, version 0.220127.0436), 5 people; participants 08-12 are kept back for the earlier maintainer's AJILE12 line and are never downloaded by this track",
+   "individuals_improved_needed": "ceil(0.7 x 5) = 4 of 5, fixed in revision 2 before any AJILE12 byte is read",
    "files": "calibration = session 3, scoring = session 4 for every participant (asset ids, bytes and sha256 in ALLOCATION.json); other sessions never opened; access by ranged HDF5 reads of the pose series and, for the secondary input, the ECoG of the needed windows only",
-   "adaptation": "adapters and ridge fitted on the pooled calibration sessions; penalties by leave-one-participant-out over calibration sessions; ECoG identity rows per participant from that participant's calibration session",
+   "adaptation": "adapters and ridge fitted on the pooled calibration sessions; penalties by leave-one-participant-out over the 5 calibration sessions; ECoG identity rows per participant from that participant's calibration session",
    "windows_primary": "hash-drawn issue frames (ALLOCATION.json E2 window_rule), 600 per session",
    "windows_secondary": "native ReachEvents onsets of the scoring session under the earlier next-person selection rule",
-   "eligibility": "issue at least 512 steps (10.24 s) after the session start; the 15 prior frames have finite shoulders and finite wrist, elbow and shoulder of both arms; shoulder frame passes w >= 1 pixel, |mean(d)| >= 0.5 w and |vertical component of the perpendicular| >= 0.10; both wrists finite at frames j+7 and j+14",
+   "eligibility": "j is the first frame after the last prior frame (the first unseen frame). Eligible: issue at least 512 steps (10.24 s) after the session start; the 15 prior frames j-15 to j-1 have finite shoulders and finite wrist, elbow and shoulder of both arms; shoulder frame passes w >= 1 pixel, |mean(d)| >= 0.5 w and |vertical component of the perpendicular| >= 0.10; both wrists finite at frames j+7 and j+14, which are 8 and 15 frames after the last prior frame",
    "inputs_primary": "past pose (wrists, elbows, shoulders, ears, nose), 30 Hz resampled to 20 ms steps by the last sample in each step, expressed in the shoulder frame built from the 15 prior frames only and divided by the shoulder width",
    "inputs_secondary": "pose plus ECoG band power, compared with ECoG taken 60 s earlier",
    "targets": "contralateral and ipsilateral wrist displacement from the last prior frame to 8 and 15 frames later (0.267 s and 0.500 s), shoulder-normalised units; contralateral side from the session's native ReachEvents description and the published implant hemisphere",
@@ -1060,20 +1068,15 @@
    "targets": "2D hand displacement at +100 ms, mm",
    "primary_metric": "Euclidean error, mm, windows -> trial -> session, sessions equally weighted",
    "secondary_metric": "next-step spike log-likelihood in bits per spike against a per-unit mean rate",
-   "uncertainty": "trial bootstrap stratified by session; no population claim"
+   "uncertainty": "trial bootstrap stratified by session; no population claim; never enters H1"
   },
   "E4": {
-   "role": "primary only if IBL is admitted before the freeze; otherwise not run",
-   "label": "new labs and mice; a seen dataset if IBL training mice enter the mixture",
-   "units": "the first 3 eligible labs in the ALLOCATION.json E4 lab order, earliest Probe00 session of each never-referenced mouse",
-   "adaptation": "per session, adapters on the first 60% of trials in time order",
-   "scoring": "the last 40% of trials",
-   "targets": "wheel angle change at +100 ms, rad, from past wheel, task events and spikes",
-   "primary_metric": "absolute error, rad, windows -> trial -> mouse"
+   "role": "not run",
+   "reason": "the IBL Brain-Wide Map stays with the earlier maintainer (lead decision 2); no IBL subject, lab or session is used for training or testing"
   },
   "secondary_sets": {
-   "B1": "Gait120 validation 22 and confirmation 22 people, never-opened tasks LevelWalking, SlopeAscent, SlopeDescent, StairAscent and StairDescent, E1 targets; labelled 'people already used in another study's evaluation, new tasks'; runs only with owner approval",
-   "A4": "Camargo et al. lower-limb biomechanics as a whole held-out dataset; needs protocol version 2 after a person-overlap check against 10.35090/gatech/70296 and a licence check; nothing is fixed here",
+   "B1": "not run (lead decision 1): the unopened tasks of the 44 Gait120 validation and confirmation people stay unopened",
+   "A4": "Camargo et al. lower-limb biomechanics as a whole held-out dataset; needs a later protocol version after a person-overlap check against 10.35090/gatech/70296 and a licence check; nothing is fixed here",
    "seen_dataset_arm": "optional: 0.2 continued on AJILE12 sub-01 session 3 only and scored on E2 only, to measure what seeing the dataset adds; run if GPU time allows and reported whatever the result",
    "published_task_refits": "the published 0.0 tasks refitted on 0.2 with the same adapters, reported only as a development comparison on previously used people"
   },
@@ -1084,21 +1087,19 @@
   "linear_trend": {
    "E1": "least-squares line over the last 100 ms (10 frames) of each target marker",
    "E2": "endpoint velocity of the 15 prior frames (last minus first, scaled by 8/14 or 15/14)",
-   "E3": "least-squares line over the last 100 ms of hand position",
-   "E4": "least-squares line over the last 100 ms of wheel angle"
+   "E3": "least-squares line over the last 100 ms of hand position"
   },
-  "ridge": "ridge on the per-step input features of the last 16 steps (320 ms), target = change from the last value, penalty grid and folds as the adapters",
+  "ridge": "ridge on the per-step input features of the last T_r steps, target = change from the last value. T_r is chosen from the same candidates as 0.2's context, {64, 128, 256, 512} steps, by the same inner folds: on each wave-1 training dataset a ridge fitted on its inner-training units forecasts the change of every present continuous channel at the objective horizons (spike counts are inputs, not targets), with the penalty chosen from the adapter grid by folds of the inner-training units; its selection score is taken on the inner-validation units; the T_r with the lowest mean over datasets is used on every set; ties within 0.5% go to the shorter history. Steps before the start of the available input are zero-filled and marked by a presence flag per step. Penalties for each set as the adapters.",
   "frozen_0.0": "movement-weights.npz encoder frozen; a 4-token adapter maps each 80 ms chunk of the last 16 steps to the 6 encoder inputs and is trained with a linear head for 500 AdamW updates at 3e-3; the head is then replaced by the ridge readout on the final-token features; joint_alpha is not used",
   "random_encoder": "0.2 architecture at the final size, initialised with seed 20261127, never trained; same adapters",
   "scrambled_0.2": "every weight tensor of 0.2 (seed 20261127) with its entries permuted by a fixed permutation (seed 20261128); same adapters",
-  "single_source": "size-M encoders for every wave-1 source with the arm budget (screen); the best by selection score and the nearest source per set (E1 Gait120, E2 Ofner, E3 Sabes, E4 IBL training mice) are retrained at the final 0.2 size and token budget on all their training units, seed 20261127, keeping the checkpoint with the best score on their own source's inner validation",
+  "single_source": "size-M encoders for every wave-1 source with the arm budget (screen); the best by selection score and the nearest source of each set (E1 Gait120, E2 Ofner, E3 Sabes) are retrained at the final 0.2 size and token budget on all their training units, seed 20261127, keeping the checkpoint with the best score on their own source's inner validation. Both the best and the set's nearest single-source encoder are required controls in that set's pass rule; when they are the same source it counts once.",
   "scratch_size_S": "a size-S model trained from random initialisation on the set's adaptation data only, 2,000 AdamW updates at 5e-4, batch 32 windows, then the ridge readout",
   "matched_history": "frozen 0.0 with its 4-token adapter over the last 16 steps (320 ms), and 0.2 scored on the same 320 ms history",
   "task_specialists_H3": {
    "E1": "chair-rise attention recipe refitted on the 66 development people with E1 targets",
    "E2": "next-person pose ridge recipe, penalty 1, fitted on the calibration sessions",
-   "E3": "NeuroTranslate 0.1 eight-pass neural-maze model refitted on the session's train trials",
-   "E4": "probe-wheel ridge and attention recipes"
+   "E3": "NeuroTranslate 0.1 eight-pass neural-maze model refitted on the session's train trials"
   },
   "wrong_pairing": "for every neural or EMG input: the same model with that input taken from another time (E1 EMG from the previous step of the same trial; E2 ECoG 60 s earlier; E3 spikes from the next val trial, wrapping)"
  },
@@ -1106,16 +1107,15 @@
   "physical_units": {
    "E1": "mm",
    "E2": "shoulder widths",
-   "E3": "mm",
-   "E4": "rad"
+   "E3": "mm"
   },
   "weighting": "within an individual, windows are averaged, then trials (or segments), then tasks; each person or animal then has equal weight",
   "relative_error": "R_i = error_i(model) / error_i(persistence) per individual; set mean of R_i reported with the physical error",
-  "composite": "mean over the scored primary sets (E1, E2 and E4 if run) of the set mean R; E3 is reported separately",
+  "composite": "mean over the two primary sets (E1 and E2) of the set mean R; E3 is reported separately",
   "seeds": "0.2 and every 3-seed control are scored per seed and each individual's error is averaged over seeds; no ensembling"
  },
  "uncertainty": {
-  "method": "paired bootstrap over individuals (people or mice)",
+  "method": "paired bootstrap over individuals (people)",
   "draws": 10000,
   "seed": 20261127,
   "interval": "95% percentile",
@@ -1128,18 +1128,19 @@
  },
  "success_rules": {
   "fixed_before": "any evaluation byte is read",
-  "set_pass": "0.2 passes a set if, for every control in {persistence, linear trend, ridge, frozen 0.0, random encoder, fold-chosen best single source}, the mean paired difference (0.2 minus control) is below 0 with the bootstrap 95% upper bound below 0, and at least ceil(0.7 n) of the n individuals have a lower 0.2 error than that control (7 of 10; 4 of 5 under the owner option)",
-  "H1": "E2 passes, and E1 passes or (if IBL is admitted) E4 passes. An intersection-union test, so no multiplicity adjustment. Each set is reported separately.",
+  "set_pass": "E1 and E2: 0.2 passes a set if, for every control in {persistence, linear trend, ridge, frozen 0.0, random encoder, fold-chosen best single-source encoder, the set's nearest single-source encoder (Gait120-only for E1, Ofner-only for E2)}, the mean paired difference (0.2 minus control) is below 0 with the bootstrap 95% upper bound below 0, and at least ceil(0.7 n) of the n individuals have a lower 0.2 error than that control (E1: 7 of 10; E2: 4 of 5)",
+  "E3_rule": "secondary: the same controls with the Sabes-only encoder as the nearest single source; the upper bound from the trial bootstrap stratified by session; with one animal, the individual count is replaced by a lower 0.2 error than the control in both sessions; never enters H1",
+  "H1": "E1 passes and E2 passes. H1 needs both sets to pass (an intersection-union test), so no multiplicity adjustment is needed. Each set is reported separately.",
   "H2": "composite R of the D_all arm at W_max minus the mean composite R of the Q arms at W_max is below 0 with the bootstrap 95% upper bound below 0",
-  "H3": "per set, 0.2 against the task specialist with the set_pass criteria; reported per set, no overall claim",
-  "floors": "a human set is scored only if at least 8 of 10 people (4 of 5) have at least 50 eligible windows; otherwise it is reported as insufficient and counts as not passed",
+  "H3": "per set (E1, E2, E3), 0.2 against the task specialist with that set's criteria; reported per set, no overall claim",
+  "floors": "E1 is scored only if at least 8 of its 10 people, and E2 only if at least 4 of its 5 people, have at least 50 eligible windows; otherwise the set is reported as insufficient and counts as not passed",
   "reporting": "every predeclared result is published, wins and losses alike; if H1 fails the result is stated as no evidence that the pooled encoder improves forecasts for new people over the listed controls"
  },
  "quantity_diversity": {
   "model": "size M transformer, chosen tau and context, crops of 60 steps aligned to the counted windows, batch 128",
   "budget": "U = 40 x W_max / 128 updates for every arm (same steps x batch); effective passes reported",
   "W_max": "the smallest number of unique inner-training windows in any Q anchor, rounded down to a power of 2 (computed at P2)",
-  "Q_arms": "anchors Gait120, ds003739, Ofner and W-track (IBL training mice replace W-track if admitted); levels W_max/16, W_max/4, W_max",
+  "Q_arms": "anchors Gait120, ds003739, Ofner and W-track; levels W_max/16, W_max/4, W_max",
   "D_arms": "k in {2, 4, 8} sources, 3 hash-ordered draws each, from sources with at least W_max/8 inner-training windows; each source gives W_max/k windows; D_all uses every eligible source",
   "P_arms": "Gait120 with 3, 13 or 52 inner-training people and ds003739 with 2, 4 or 14, at W_P windows",
   "seeds": [
@@ -1149,18 +1150,19 @@
   ],
   "runs": "Q 36 + D 27 + D_all 3 + P 18 = 84 runs",
   "sealed_prediction": "before any W_max run, a power law through the inner-validation selection scores of the W_max/16 and W_max/4 levels of each Q anchor predicts its W_max score; the prediction file is hashed and its sha256 recorded before the W_max runs start",
-  "scoring": "every arm is scored on the inner-validation units (in distribution) before the freeze and on E1, E2 (and E4 if run) after it, with the standard adapters"
+  "scoring": "every arm is scored on the inner-validation units (in distribution) before the freeze and on E1 and E2 after it, with the standard adapters"
  },
  "leak_checks": [
   "subject-identifier disjointness between every training list and every evaluation list",
   "file-hash disjointness and content-hash de-duplication across derived caches and original files (for example area2 against Dryad)",
   "download timestamps of every evaluation file after the freeze commit",
-  "no evaluation file path appears in any LOCK file before the freeze"
+  "no evaluation file path appears in any LOCK file before the freeze",
+  "the download records contain no file of AJILE12 participants 08-12 and no IBL file (checked at the freeze and again after scoring)"
  ],
  "steps": [
   {
    "id": "P0",
-   "what": "protocol, separate review, lead commit; replace the two metadata tail files by central-directory-only copies",
+   "what": "protocol, separate review, lead commit; replace the two metadata tail files by central-directory-only copies (done 2026-11-27)",
    "eta": "0.5-1 day"
   },
   {
@@ -1170,51 +1172,63 @@
   },
   {
    "id": "P2",
-   "what": "readers (MCOS, NWB, C3D, GDF, WFDB, EEGLAB, HDF5) in an own environment, tokenisation, role audits for area2, FALCON M1 and IBL, Q1-Q6 records, MIXTURE-MANIFEST.json with unique steps and windows per dataset",
+   "what": "readers (MCOS, NWB, C3D, GDF, WFDB, EEGLAB, HDF5) in an own environment, tokenisation, role audits for area2 and FALCON M1, Q1-Q6 records, MIXTURE-MANIFEST.json with unique steps and windows per dataset and the re-estimate in time_estimates",
    "eta": "1.5-2.5 days CPU"
   },
   {
    "id": "P3",
-   "what": "real-mixture parity and repeat checks 1-2 h; tau by leave-one-dataset-out 4-6 h; ladder XS-XL about 14 h; core arms about 4 h; context arms about 2 h; XXL +10.5 h only if earned",
-   "eta": "about 25-39 GPU-hours"
+   "what": "real-mixture parity and repeat checks 1-2 h; tau by leave-one-dataset-out 4-6 h; ladder XS-XL about 14 h; core arms about 4 h; context arms 2-4 h; XXL +10.5 h only if earned",
+   "eta": "about 25-41 GPU-hours at 16 million steps"
   },
   {
    "id": "P4",
    "what": "matched BF16 and FP32 runs at S and M",
-   "eta": "about 10 GPU-hours"
+   "eta": "about 10 GPU-hours at 16 million steps"
   },
   {
    "id": "P5",
    "what": "quantity and diversity arms with the sealed prediction, plus in-distribution scoring",
-   "eta": "about 5-17 GPU-hours"
+   "eta": "1-3 GPU-hours if W_max = 2,048 windows (expected from about 3,000 Gait120 inner-training windows); in proportion to W_max otherwise (8-14 h at 16,384)"
   },
   {
    "id": "P6",
    "what": "final 0.2, 3 seeds",
-   "eta": "L about 11 h, XL about 21 h (L about 42 h if GPU FP32 is forced)"
+   "eta": "T <= 256: L about 11 h, XL about 21 h, L in GPU FP32 about 42 h; T = 512: up to about 22 h (L), 42 h (XL) and 84 h (L in GPU FP32)"
   },
   {
    "id": "P7",
-   "what": "single-source screen (about 2 h) and full-size single-source retrains (11-21 h); random and scrambled encoders; specialists under 1 h",
-   "eta": "13-23 GPU-hours"
+   "what": "single-source screen (about 2 h) and full-size retrains of up to 4 sources (the best and the three nearest); random and scrambled encoders; specialists under 1 h",
+   "eta": "14-31 GPU-hours at T <= 256 (L or XL); up to about 60 at T = 512"
   },
   {
    "id": "P8",
    "what": "freeze: the lead commits FREEZE.json with the sha256 of every weight file, adapter and scoring script; then evaluation downloads",
-   "eta": "3-6 h"
+   "eta": "2-5 h"
   },
   {
    "id": "P9",
-   "what": "adapters, CPU FP32 issuing, scoring, bootstrap, reports; separate reader before publication",
-   "eta": "0.5-1 day"
+   "what": "adapters; CPU FP32 issuing of the scored E1 and E2 primary windows; GPU FP32 passes for everything else with the CPU check; scoring, bootstrap, reports; separate reader before publication",
+   "eta": "CPU issuing at T <= 256: 2-8 h (L), 6-19 h (XL); at T = 512: 4-15 h (L), 9-34 h (XL), up to about 77 h (XXL). GPU passes at T <= 256: 1.5-10 h (L), 3.5-24 h (XL); at T = 512: 5-38 h (L), 11-91 h (XL). Then about 1 day for scoring, reports and the reader"
   }
  ],
  "totals": {
-  "gpu_hours": "about 70-110",
-  "calendar_days": "7-10 including reviews",
+  "gpu_hours": "about 60-130 at the central assumptions (16 million unique steps, T <= 256, final size L or XL); about 35 at the low end (8 million steps, size L); up to about 370 at the high end (30 million steps, T = 512, size XL)",
+  "calendar_days": "7-11 including reviews at the central assumptions; up to about 4 weeks at the high end",
   "home_disk_gb_max": 26,
   "temporary": "raw downloads transient in RAM-backed temporary space; tokens 3-6 GB and checkpoints under 5 GB in the private track folder",
   "gpu_sharing": "the GPU is shared with the NeuroSurge browser tests (priority one), so P3-P7 are scheduled around them"
+ },
+ "time_estimates": {
+  "measured": "prior_facts.measured_compute_2026_11_27: GPU training at T = 128 for every size and at T = 256 for M and L; CPU forward passes at T = 256 for M and L on 4 shared threads; all under load",
+  "gpu_training": "measured BF16 rates at T = 128 and batch 128 x 40 passes of 16 million steps (one L seed = 40 x 5.6 min); the T = 256 batch-32 runs were faster per step-token than T = 128, so the T = 128 rates are used for T <= 256",
+  "context_512": "not measured; taken as 1 to 2 times the per-step-token cost at T <= 256 (attention share of the arithmetic about 14-18% at T = 512 against 4-5% at T = 128 for widths 384-512; the math kernel's score tensors grow with T squared)",
+  "mixture_and_passes": "every training figure scales linearly with the unique steps (design range 8-30 million: 0.5 to 1.9 times) and with the passes the folds choose (at most 40)",
+  "padding": "segments shorter than T are padded; padded positions cost compute without adding steps (Gait120 step segments hold about 80 steps); the padded share at each T is counted at P2 and is not included in the figures",
+  "load": "rates measured with the GPU about two-thirds busy and a load average of about 18; quieter or busier periods can change every time by about +-50%",
+  "cpu_issuing": "measured forward rates (M 6.9, L 2.35 windows/s at T = 256 on 4 shared threads) scaled by core parameters to XL (about 1.0) and XXL (about 0.45), by 1 to 3 times for 16 threads (not measured) and by 1/1.3 to 1/1.1 for the attention share at T = 512; one encoder pass per issue time because the kinematic anchor moves with each issue time",
+  "counts_per_final_size_encoder": "E1 about 9,700-11,400 scored windows (about 570 step segments x 17-20 issue times) and about 64,000-75,000 adaptation windows per input variant; E2 3,000 scored and 3,000 calibration windows per input variant; E3 about 24-54 issue times per trial (trials of 1.5-3 s; lengths unknown until the freeze) over 2,795 train and val trials; 7 final-size encoders per set (0.2 x 3 seeds, random, scrambled, best and nearest single source)",
+  "all_cpu_route_of_revision_1": "about 45-450 h at size L with T <= 256 and about 200-1,200 h at T = 512, mostly E3 and the adaptation windows; hence the issuing route in precision",
+  "re_estimate": "before any model choice, MIXTURE-MANIFEST.json records the counted unique steps and padded share at each T, a T = 512 GPU throughput measurement and a 16-thread CPU issuing measurement at M and L on training data, and P3-P9 recomputed from them"
  },
  "downloads_planned": {
   "start_condition": "after this protocol is admitted by a separate reviewer and committed by the lead",
@@ -1247,9 +1261,9 @@
     "source": "PhysioNet r0ea-7161"
    },
    {
-    "what": "conditional: FALCON M1 held-in-calib days, IBL training sessions, wave-2 sources",
+    "what": "conditional: FALCON M1 held-in-calib days, wave-2 sources",
     "bytes": "measured before any batch",
-    "source": "DANDI 000941; IBL; others"
+    "source": "DANDI 000941; others"
    }
   ],
   "P8_evaluation": [
@@ -1266,14 +1280,9 @@
     "source": "DANDI 000128 and 000138"
    },
    {
-    "what": "AJILE12 sessions 3 and 4 of participants 03-12: pose series, and ECoG of scored windows only",
-    "bytes": "about 8-12 GB of ranged reads (measured on the first session)",
+    "what": "AJILE12 sessions 3 and 4 of participants 03-07 only: pose series, and ECoG of scored windows only",
+    "bytes": "about 4-6 GB of ranged reads (measured on the first session)",
     "source": "DANDI 000055 0.220127.0436"
-   },
-   {
-    "what": "optional B1 and conditional E4",
-    "bytes": "measured first",
-    "source": "figshare 27677016; IBL"
    }
   ]
  },
@@ -1295,14 +1304,30 @@
    "the two datasets without a clear licence"
   ]
  },
- "owner_decisions_pending": [
-  "One-time consumption of fresh units: Gait120 S001-S010, AJILE12 participants 03-12 (or 03-07 if 08-12 are kept back; the earlier next-person rule would otherwise pick 03 next), MC_Maze full and Large, the IBL evaluation labs if IBL is admitted, and optionally the B1 tasks.",
-  "Whether the AJILE12, IBL and Churchland/Nitschke lines stay with the earlier maintainer; this plan avoids Nitschke and every IBL subject referenced in any workspace.",
-  "Consumed evaluation groups (Ofner S8-S12 runs 5-10, Hyser DEV, HYGRIP development, Gait120 validation and confirmation) stay out of training unless released.",
-  "CMU motion capture and FingerFlex stay out by default.",
-  "Licence of the public weights: CC BY 4.0 with the NOTICE; code CC0.",
-  "About 70-110 GPU-hours over 4-5 days on the shared GPU; BF16 as the primary training route with the FP32 check reported.",
-  "Whether the owner's 27 November instruction counts as the task lease for training and downloads, with the reviewer's admission and the GitHub commit of this protocol as the scientific admission."
+ "lead_decisions_on_owner_items": {
+  "lease": "The project owner's instruction of 27 November 2026 to continue training the models, given with the owner's standing pre-approval to add any openly licensed dataset at the maintainers' discretion, is the task lease for this protocol's downloads and training. Under it the lead decided the seven items revision 1 left to the owner.",
+  "date": "2026-11-27",
+  "decisions": [
+   "1. Fresh units are spent once, as tests: Gait120 S001-S010 (E1); AJILE12 participants 03-07 only (E2); MC_Maze full (DANDI 000128) and Large (DANDI 000138) (E3). AJILE12 participants 08-12 are kept back for the earlier maintainer's AJILE12 line and are never downloaded by this track. E2's pass threshold is fixed now at ceil(0.7 x 5) = 4 of 5. The optional B1 set stays out.",
+   "2. The IBL Brain-Wide Map stays with the earlier maintainer: admitted to neither training nor testing, so E4 is dropped and H1 = E1 AND E2 (an intersection, no multiplicity adjustment needed). AJILE12 participants 08-12, the Churchland/Nitschke recordings and IBL are not touched.",
+   "3. Consumed evaluation groups (Ofner S8-S12 runs 5-10, Hyser DEV, HYGRIP development, Gait120 validation and confirmation) stay out of training.",
+   "4. CMU motion capture and FingerFlex stay out.",
+   "5. Public weights CC BY 4.0 with a NOTICE crediting every source and its licence; code CC0 1.0.",
+   "6. The GPU plan is accepted; BF16 is the primary training route and the FP32 check is reported.",
+   "7. The owner's 27 November instruction is the task lease; the separate reviewer's admission and the lead's commit of this protocol are the scientific admission."
+  ]
+ },
+ "revision_2_changes": [
+  "E2 scores AJILE12 participants 03-07 only (pass 4 of 5; floor 4 of 5 with at least 50 eligible windows); ALLOCATION.json lists no asset of participants 08-12.",
+  "E4 and every IBL use are dropped; H1 = E1 AND E2; the composite, the quantity-versus-diversity scoring and the Q anchors no longer mention E4 or IBL; allocate.py no longer computes an IBL lab order.",
+  "B1 is not run.",
+  "Each set's pass rule names the nearest single-source encoder as a required control (Gait120-only for E1, Ofner-only for E2, Sabes-only for E3) next to the fold-chosen best; E3 gets a defined secondary rule.",
+  "The ridge control's history T_r is chosen from the same candidates as 0.2's context by the same inner folds instead of being fixed at 16 steps; the 16-step history stays in the matched-history arm.",
+  "j in E2's eligibility rule is defined as the first frame after the last prior frame.",
+  "The E1 member-list check reads bytes 1451983325-1452137137 (central directory and ZIP64 end records) instead of bytes=-262144, which held 108,331 compressed bytes of an E1 member; allocate.py refuses a file with any byte before the central directory.",
+  "Step P0 done: both design-stage tail files replaced by central-directory-only copies and deleted (state_at_writing.incidental_compressed_member_bytes.p0_done).",
+  "Time estimates state what was measured and how they extend it (time_estimates). Only forecasts that enter a set-pass rule are issued on the CPU; other passes run in GPU FP32 with a CPU check; E1 primary passes use min(T, 128) steps (precision).",
+  "Leak check added: no file of AJILE12 participants 08-12 and no IBL file in the download records."
  ],
  "departures_from_reviewed_design": [
   "ds003739 sessions 1-3 of the development people are not local and are added to the P1 downloads (5.239 GB).",

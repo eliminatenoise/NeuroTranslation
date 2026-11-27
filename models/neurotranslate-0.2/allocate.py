@@ -8,9 +8,12 @@ fixed before any data value is read:
   - the nested people subsets of the quantity-versus-diversity "P" arms;
   - the hash order used to draw the sources of the "D" arms;
   - the fresh evaluation groups E1 (Gait120 S001-S010), E2 (AJILE12
-    participants 03-12, calibration and scoring sessions), E3 (MC_Maze full
-    and Large training files) and the lab order used for E4 (IBL, conditional);
-  - the optional secondary groups B1 and the seen-dataset arm.
+    participants 03-07, calibration and scoring sessions) and E3 (MC_Maze full
+    and Large training files);
+  - the optional seen-dataset arm.
+
+AJILE12 participants 08-12 are kept back for the earlier maintainer's AJILE12
+line and are never downloaded by this track. IBL is not used (no E4).
 
 Only the Python standard library is used. No recording is opened.
 
@@ -18,11 +21,14 @@ Usage:
   python3 allocate.py                         # print ALLOCATION.json to stdout
   python3 allocate.py --out ALLOCATION.json
   python3 allocate.py --check ALLOCATION.json  # exit 1 unless byte-identical
-  python3 allocate.py --gait120-tail TAIL --gait120-tail-offset 1451874994 ...
+  python3 allocate.py --gait120-tail CD ...
       adds the E1 member list parsed from the ZIP central directory of
-      figshare file 53167640. TAIL is the last 262,144 bytes of that archive
-      (one public HTTP range request: bytes=-262144). Only central-directory
-      records are parsed; any member bytes in the tail are never inflated.
+      figshare file 53167640. CD holds bytes 1451983325-1452137137 of that
+      archive (one public HTTP range request: Range: bytes=1451983325-1452137137,
+      153,813 bytes): the central directory and the ZIP64 end records. That
+      range begins after the last byte of every member's data, so it holds no
+      member byte. A file holding any byte before the central directory is
+      refused, so the check cannot be run on a read that contains member data.
 
 Without --gait120-tail, --check takes the E1 member list from the file being
 checked and compares everything else; with it, the member list is compared too.
@@ -142,14 +148,9 @@ CONDITIONAL_TRAINING = {
         "condition": "role audit at step P2: only FALCON M1 'held-in-calib' days that no earlier evaluation used; folds by day computed at P2 with the same rule",
         "units": [],
     },
-    "ibl_train": {
-        "kind": "animal",
-        "condition": "IBL audit and owner confirmation before the freeze: never-referenced mice of labs not drawn for E4; folds computed at P2 with the same rule",
-        "units": [],
-    },
 }
 
-Q_ANCHORS = ["gait120", "ds003739", "ofner", "wtrack"]  # wtrack is replaced by ibl_train if IBL is admitted
+Q_ANCHORS = ["gait120", "ds003739", "ofner", "wtrack"]
 P_ARM_DATASETS = ["gait120", "ds003739"]
 
 # ---------------------------------------------------------------------------
@@ -160,15 +161,16 @@ E1 = {
     "people": ["S%03d" % i for i in range(1, 11)],
     "archive": {"figshare_file_id": 53167640, "name": "Gait120_001_to_010.zip", "bytes": 1452137138,
                 "md5": "9f73435302c9cc2c1b9bcef875085985"},
-    "central_directory": {"offset": 1451983325, "bytes": 153791, "entries": 1208},
+    "central_directory": {"offset": 1451983325, "bytes": 153791, "entries": 1208,
+                          "reproduction_read": "HTTP range bytes=1451983325-1452137137 (153,813 bytes: central directory and ZIP64 end records; no member byte)"},
     "emg_scaling_trial": "LevelWalking Trial01 of each person (used only to scale that person's EMG; never scored)",
 }
 
-# AJILE12 (DANDI 000055, version 0.220127.0436): every session of participants 03-12.
+# AJILE12 (DANDI 000055, version 0.220127.0436): every session of participants 03-07.
+# Participants 08-12 are kept back for the earlier maintainer's AJILE12 line; no asset of theirs is listed here.
 AJILE12_SESSIONS = {
     "sub-03": [3, 4, 5, 6], "sub-04": [3, 4, 5, 6, 7], "sub-05": [3, 4, 7], "sub-06": [3, 4, 5, 6, 7],
-    "sub-07": [3, 4, 5, 6, 7], "sub-08": [3, 4, 5, 6, 7], "sub-09": [3, 4, 5, 6, 7], "sub-10": [3, 4, 5, 6, 7],
-    "sub-11": [3, 4, 5, 6, 7], "sub-12": [3, 4, 5, 6, 7],
+    "sub-07": [3, 4, 5, 6, 7],
 }
 AJILE12_ASSETS = {
     ("sub-03", 3): ("5122cc42-981c-4fa3-92f4-5f9ccfb8c092", 12993721651, "cb47e04883272a5d8152530bdf3655d2a79119ab032d4cf8d437a3d569c6fcd2"),
@@ -181,18 +183,8 @@ AJILE12_ASSETS = {
     ("sub-06", 4): ("eea59c28-3e69-4fb6-a6c0-fbd57dd303cc", 12885238804, "2f688c4850e5cc633cce2b4847e8cf5d5d6d910b0219739817f7524a6198fd0b"),
     ("sub-07", 3): ("5791a9f3-5c0c-484b-b690-b5ce9fea589e", 10021863235, "a80285a4fd829aaba58c8b36fd670c6594d3d98708aa32282e962f5a07d6728c"),
     ("sub-07", 4): ("dbf11bb5-e73c-43aa-8f9e-d87807e09971", 10395219939, "2e6bc139cf5cfe913283a17d451474ea3b2563cc0beda41edbd19b0cd4fc0be3"),
-    ("sub-08", 3): ("7de9b149-2994-455e-a8c6-5e5893245baf", 14919492016, "95ab8bb566dc23f7153946f0a67fd2c6641bc70662ee6e7fd2ba0b9483e41de6"),
-    ("sub-08", 4): ("07fe6ecc-1a51-4655-a925-dcc3ecb6183f", 14898053963, "04029121342ab4f56dc5b8b487e166bfd49ff752012ccf4fd535e083b8e611cc"),
-    ("sub-09", 3): ("b5b123ea-557f-4b69-ad11-8b3ff6bc9bd5", 19794037714, "2635ebb93567752019ed69e1d2951e53c2d137a1e038edaf7df2c127f3ba4778"),
-    ("sub-09", 4): ("4d960b31-6a46-4578-a620-2dfdad46bf55", 19741644394, "0d220f2c055dc20f28620f9510433de67c343abebad5d24185db818de8d332d4"),
-    ("sub-10", 3): ("e22abf61-170a-4d52-89f5-27e394e04afa", 19715930499, "6ae08347daed71deebe677798cab7db69e04be728b18ba07a645c6add2942486"),
-    ("sub-10", 4): ("0d4e2bea-fd00-405f-923c-86141269c39a", 19723279309, "6ae359fd31373e825b456605426135040859c566b04030bbd25ba40501b0f308"),
-    ("sub-11", 3): ("0b4aac2b-e080-4854-b792-4ea4359e2044", 17160159566, "42ce126cdf84ae9224235dffc4442fd9793f07b94526c7f88ce80f5971424a22"),
-    ("sub-11", 4): ("1fc40baf-4007-4d96-9d6a-61213b14aecd", 16985717017, "f3f145c11adeae27ca7e3110f94dffca073b9737954a9de4d93441f2aafe0ec4"),
-    ("sub-12", 3): ("3db4e507-c2de-4ab3-a052-88d9800f36d0", 19928317351, "e0f2fe25556c77867793c1bdf95c232b33b338b4d5c4bfcc320803e04f087616"),
-    ("sub-12", 4): ("257cec4c-84ba-4047-815c-a790d4f51d7e", 19946639193, "7f1767df98a99a78022f8c5c3b988102356af81232ffbc5d81fb971e0906bb52"),
 }
-AJILE12_OWNER_OPTION_KEEP_BACK = ["sub-08", "sub-09", "sub-10", "sub-11", "sub-12"]
+AJILE12_KEPT_BACK = ["sub-08", "sub-09", "sub-10", "sub-11", "sub-12"]
 
 E3_FILES = [
     {"dandiset": "000128", "version": "0.220113.0400", "session": "full", "recorded": "2009-09-25",
@@ -205,13 +197,18 @@ E3_FILES = [
      "sha256": "1188ddf5b822dd9ac49afb8916f4b42a85867613cf7f169d0b04a1d1aeecd700"},
 ]
 
-IBL_LABS = ["angelakilab", "churchlandlab", "churchlandlab_ucla", "cortexlab", "danlab", "hausserlab",
-            "hoferlab", "mainenlab", "mrsicflogellab", "steinmetzlab", "wittenlab", "zadorlab"]
-
 GAIT120_VALIDATION = ["S015", "S017", "S021", "S029", "S034", "S037", "S044", "S048", "S056", "S060", "S065",
                       "S067", "S075", "S079", "S082", "S084", "S094", "S097", "S103", "S105", "S114", "S118"]
 GAIT120_CONFIRMATION = ["S012", "S013", "S024", "S025", "S032", "S040", "S047", "S049", "S051", "S058", "S068",
                         "S069", "S072", "S078", "S081", "S083", "S099", "S100", "S101", "S109", "S117", "S120"]
+
+
+def check_disjoint():
+    """Training people are disjoint from the consumed Gait120 groups and from every evaluation group."""
+    g = set(TRAINING_UNITS["gait120"]["units"])
+    assert not g & set(GAIT120_VALIDATION + GAIT120_CONFIRMATION + E1["people"])
+    assert len(g | set(GAIT120_VALIDATION) | set(GAIT120_CONFIRMATION) | set(E1["people"])) == 120
+    assert not set(AJILE12_SESSIONS) & set(AJILE12_KEPT_BACK)
 
 
 
@@ -269,18 +266,13 @@ def e2():
                                  "path": "%s/%s_ses-%d_behavior+ecephys.nwb" % (s, s, score)},
                      "other_sessions_never_opened": ses[2:]})
     return {"dataset": "AJILE12, DANDI 000055 version 0.220127.0436",
-            "rule": "participants 03-12; calibration = lowest-numbered session; scoring = next-numbered session",
+            "rule": "participants 03-07; calibration = lowest-numbered session; scoring = next-numbered session",
             "rows": rows,
-            "owner_option": {"keep_back": AJILE12_OWNER_OPTION_KEEP_BACK,
-                             "then_scored": [r["participant"] for r in rows if r["participant"] not in AJILE12_OWNER_OPTION_KEEP_BACK]},
+            "n_scored": len(rows),
+            "individuals_improved_needed": "ceil(0.7 x 5) = 4 of 5",
+            "kept_back": {"participants": AJILE12_KEPT_BACK,
+                          "rule": "kept back for the earlier maintainer's AJILE12 line (lead decision of 27 November 2026); never downloaded or opened by this track"},
             "window_rule": "for k = 0, 1, 2, ...: candidate issue frame = int(sha256('%s|ajile12|' + participant + '|ses-' + session + '|' + k), 16) mod n_frames; accept if eligible (protocol section 7.2) and at least 2 s from every accepted issue time; stop at 600 accepted or k = 200000" % SALT}
-
-
-def e4_lab_order():
-    ordered = rank(IBL_LABS, lambda l: "%s|ibl-bwm-2023_12|lab|%s" % (SALT, l))
-    return {"rule": "rank labs by ascending sha256('%s|ibl-bwm-2023_12|lab|' + lab); after the IBL audit, the first 3 labs in this order with at least 4 never-referenced mice are evaluation labs; never-referenced mice of every other lab may enter training" % SALT,
-            "roster": "2023_12_bwm_release.csv at int-brain-lab/paper-brain-wide-map commit 118fc36cb3602934466ad2c6087c2b3b441f9f1f, sha256 db9edfc6f5d92a4df81d488bfb1068f43526a13717bb8fc7da2aecdd28876ac4",
-            "order": [{"lab": l, "sha256": h("%s|ibl-bwm-2023_12|lab|%s" % (SALT, l))} for l in ordered]}
 
 
 def adapter_folds_gait120():
@@ -300,6 +292,9 @@ def parse_tail(path, offset):
         cd_size, = struct.unpack("<Q", b[j + 40:j + 48])
         cd_off, = struct.unpack("<Q", b[j + 48:j + 56])
     p = cd_off - offset
+    if p != 0 or b[:4] != b"PK\x01\x02":
+        sys.exit("refused: %s must start at the central directory (archive offset %d); it holds %d other bytes first"
+                 % (path, cd_off, cd_off - offset))
     ents = []
     while b[p:p + 4] == b"PK\x01\x02":
         fields = struct.unpack("<IHHHHHHIIIHHHHHII", b[p:p + 46])
@@ -355,13 +350,17 @@ def e1_members(path, offset):
 
 
 def build(args):
+    check_disjoint()
     alloc = {
         "schema": "neurotranslate-0.2-pooled-encoder-allocation",
-        "version": 1,
+        "version": 2,
         "salt": SALT,
         "reads_data_values": False,
         "inner_folds": {name: inner_folds(name, spec) for name, spec in TRAINING_UNITS.items()},
         "conditional_training": CONDITIONAL_TRAINING,
+        "not_used": {"ibl": "IBL Brain-Wide Map stays with the earlier maintainer: no IBL subject, lab or session is used for training or testing (lead decision of 27 November 2026); there is no E4",
+                     "ajile12_kept_back": AJILE12_KEPT_BACK,
+                     "b1": "the Gait120 validation and confirmation people's unopened tasks stay unopened (lead decision of 27 November 2026)"},
         "leave_one_dataset_out": {"rule": "each wave-1 dataset in turn is left out of training; its adapter is fitted on its inner-training units and scored on its inner-validation units",
                                   "datasets": sorted(TRAINING_UNITS)},
     }
@@ -371,13 +370,12 @@ def build(args):
         p[name] = p_subsets(name, alloc["inner_folds"][name]["inner_training"])
     alloc["quantity_diversity"] = {
         "q_anchors": Q_ANCHORS,
-        "q_anchor_substitution": "if IBL training mice are admitted before the freeze, ibl_train replaces wtrack as the fourth anchor",
         "q_window_rule": "within an anchor's inner-training units, order its non-overlapping 1.2 s windows by ascending sha256('%s|Q|' + dataset + '|' + window_id) and take the first W (nested levels W_max/16, W_max/4, W_max)" % SALT,
         "w_max_rule": "W_max = the smallest number of unique inner-training windows in any Q anchor, rounded down to a power of 2 (computed at P2 from MIXTURE-MANIFEST.json)",
         "p_arms": p,
         "p_window_rule": "W_P = the largest power of 2 not above min(W_max/4, windows of the smallest P level of that dataset); each P arm draws W_P windows, equal shares per person as far as available, in the q_window_rule order",
         "d_arms": d_orders(sorted(TRAINING_UNITS)),
-        "d_candidate_note": "conditional sources (area2, falcon_m1, ibl_train) join the candidate list only if admitted before the freeze; the orders are then recomputed with the same rule and recorded in MIXTURE-MANIFEST.json",
+        "d_candidate_note": "conditional sources (area2, falcon_m1) join the candidate list only if admitted before the freeze; the orders are then recomputed with the same rule and recorded in MIXTURE-MANIFEST.json",
     }
     e1 = dict(E1)
     if args.gait120_tail:
@@ -387,12 +385,8 @@ def build(args):
         "E2": e2(),
         "E3": {"dataset": "MC_Maze (Neural Latents Benchmark), Jenkins", "files": E3_FILES,
                "rule": "adapt on the NLB 'train' trials and score on the NLB 'val' trials of each training file; the desc-test files are never opened"},
-        "E4_conditional": e4_lab_order(),
     }
     alloc["secondary"] = {
-        "B1": {"dataset": "gait120", "people_validation": GAIT120_VALIDATION, "people_confirmation": GAIT120_CONFIRMATION,
-               "tasks": ["LevelWalking", "SlopeAscent", "SlopeDescent", "StairAscent", "StairDescent"],
-               "label": "people already used in another study's evaluation, new tasks"},
         "seen_dataset_arm": {"dataset": "AJILE12", "participant": "sub-01", "session": 3,
                              "scored_on": "E2 only"},
         "A4": {"dataset": "Camargo et al. lower-limb biomechanics", "status": "needs protocol version 2 after a person-overlap check against 10.35090/gatech/70296 and a licence check"},
@@ -410,7 +404,7 @@ def main():
     ap.add_argument("--out")
     ap.add_argument("--check")
     ap.add_argument("--gait120-tail")
-    ap.add_argument("--gait120-tail-offset", type=int, default=1451874994)
+    ap.add_argument("--gait120-tail-offset", type=int, default=1451983325)
     args = ap.parse_args()
     alloc = build(args)
     if args.check:
