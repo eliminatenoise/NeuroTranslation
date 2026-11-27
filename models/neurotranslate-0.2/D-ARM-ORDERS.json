@@ -3,9 +3,9 @@
  "what": "Source orders of the D arms (source diversity at a fixed window budget), recomputed at P2 over the 13 wave-1 sources and the conditional source(s) admitted before the freeze, as ALLOCATION.json d_candidate_note requires, and the arms those orders give under the arm rule of protocol revision 3. ALLOCATION.json itself is unchanged and lists the wave-1 sources only; restricted to those sources, every order here equals the published one.",
  "protocol": {
   "revision": 3,
-  "head": "bf2ecd662e6073e0ef342671213f100a7fe431d6",
+  "head": "72fd43a69924e4bfe92c8bd65924b624246feeca",
   "ALLOCATION.json_sha256": "8e428a63f574e7413daa002dcb3ecb5527b63ea9c2f02a952d63a07f80acd71a",
-  "PROTOCOL.json_sha256": "02599a45dc8fce0dbc2283e26bef55449351da73b22d035554e812fc21370cd3"
+  "PROTOCOL.json_sha256": "1510ba17c20a9a8d50ba2ddd6ab8e1c08ffb793667d3873017400fcd7234d67c"
  },
  "rule": "for k in {2,4,8} and draw in {0,1,2}: order candidate sources by ascending sha256('pooled-encoder-0.2|D|k' + k + '|draw' + draw + '|' + dataset); the arm uses the first k sources in that order that are eligible (at least W_max/8 inner-training windows, counted at P2)",
  "rule_status": "quoted unchanged from ALLOCATION.json d_arms.rule; its last part (an arm uses the first k eligible sources) is replaced from protocol revision 3 by arm_rule below",
@@ -521,6 +521,6 @@
   "sources_with_fewer_unique_inner_training_windows_than_their_share": {}
  },
  "arms_with_a_source_below_its_share": {},
- "counts_from": "MIXTURE-MANIFEST.json of 2026-11-28T10:43:48+1100",
+ "counts_from": "MIXTURE-MANIFEST.json of 2026-11-28T10:57:03+1100",
  "no_recording_values": true
 }
